@@ -69,6 +69,25 @@ same specificity to every rule of a stylesheet, so Sang's own cascade is unchang
 `visual-diff --source` proves it. The cost is that nearly every rule is `ambient` rather than a
 class rule, so the Styles panel is less useful. That is the right trade for a phase-1 review.
 
+**`overlay/` replaces a package page without touching the package.** `overlay/<path>` wins over
+`package-v2/<path>` in `prepare-source.mjs`, and on the `--source` side of `visual-diff`. Its first
+use (2026-09-11) is `overlay/survey/index.html`: Sang's live Netlify assessment
+(<https://bk21question.netlify.app/>, a React app) rebuilt as a plain page in the site's style.
+The copy, the 21 yes/no questions, the validation and the contact step are verbatim, and so are the
+**SheetDB endpoint, the payload** (`fullName, email, phone, question_1…21, submittedAt`, which are
+exactly the sheet's columns) and the Calendly link. It replaces the package's Netlify-form survey at
+`/survey`, whose POST 404'd on Instatic (trap 42). The page has no Zapier call. If a Zap fires,
+it fires from the sheet.
+
+**The browser POSTs to `https://sheetdb.io`, so the CSP has to allow it.** Instatic's CSP has no
+`connect-src`, so it falls back to `default-src 'self'` and the fetch is blocked. The
+`brandklout.embed-origins` plugin (`deliver/process/18-instatic-embeds`) is installed on this
+instance with **`connectOrigins: https://sheetdb.io` and nothing else**. Its `publish.html` filter
+adds that one origin to `connect-src` on every page when the site is republished. `verify-live`
+fails `/survey` if the published CSP lacks it. Verify submissions with `form-probe.mjs`, which
+aborts the SheetDB request. **Never send a real test row**: it lands in Sang's sheet and whatever
+watches it.
+
 **One script asset, seven pages.** Each page's inline `<script>` is wrapped in
 `if (document.body.classList.contains('pg-x')) { … }`. Sang's home script calls
 `document.getElementById('leadForm').addEventListener` and would throw on every other page.

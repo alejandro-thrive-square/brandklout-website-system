@@ -57,68 +57,79 @@ const after = await page.evaluate(() => ({
 
 console.log(JSON.stringify({ faq, tried, urlBefore, urlAfter: page.url(), ...after, errors }, null, 1))
 
-/* --- the survey (v2, 2026-09-11) --------------------------------------------------------------
-   Walks all four steps the way a visitor would — fills the active step, presses Continue — then
-   presses Submit. Every non-GET request is aborted, so no answer ever reaches a server; what is
-   recorded is where the page TRIES to send them. Also records the things the importer is known
-   to drop from form controls and site.js puts back (prepare-source.mjs): the slider's type, the
-   numbered labels, the submit button's id. */
+/* --- /survey: the rebuilt 21-point assessment (overlay/survey/index.html, 2026-09-11) ----------
+   Walks it the way a visitor would: presses Get My Results with nothing answered (every question
+   should flag and the page should scroll to #1), answers all 21, opens the contact step, fills it
+   and submits. The SheetDB POST is ABORTED, so nothing reaches Sang's sheet; what is recorded is
+   the request itself (URL, method, headers, JSON body) and whether the browser's CSP let it leave:
+   a CSP block never reaches request interception and shows up as a console error instead.
+   The aborted fetch makes the page raise its own error alert, which is accepted and recorded. */
 const sp = await browser.newPage()
 const sTried = []
 const sErrors = []
+const dialogs = []
 sp.on('pageerror', (e) => sErrors.push(e.message))
 sp.on('console', (m) => ['error', 'warning'].includes(m.type()) && sErrors.push(`${m.type()}: ${m.text()}`))
+sp.on('dialog', async (d) => { dialogs.push(d.message()); await d.dismiss() })
 await sp.setRequestInterception(true)
 sp.on('request', (r) => {
-  if (r.method() !== 'GET') {
-    sTried.push(`${r.method()} ${r.url()} ${(r.postData() ?? '').slice(0, 200)}`)
+  // A JSON POST is cross-origin "non-simple", so Chrome sends a CORS preflight first. The
+  // preflight carries no body and writes nothing; abort IT and the real POST is never formed, so
+  // there is nothing to inspect. Let only SheetDB's preflight through; the POST is still aborted.
+  if (r.method() === 'OPTIONS' && /^https:\/\/sheetdb\.io\//.test(r.url())) return r.continue()
+  if (r.method() !== 'GET' && r.method() !== 'HEAD' && !/\/[A-Za-z0-9_-]{40,}$/.test(r.url())) {
+    sTried.push({ method: r.method(), url: r.url(), contentType: r.headers()['content-type'], body: r.postData() ?? '' })
     return r.abort()
   }
+  if (r.method() !== 'GET') return r.abort()
   r.continue()
 })
 await sp.goto(BASE + '/survey', { waitUntil: 'networkidle0' })
-const boot = await sp.evaluate(() => {
-  const form = document.getElementById('growthSurvey')
-  return {
-    stepText: document.getElementById('stepText')?.textContent,
-    activeStep: [...document.querySelectorAll('.step')].findIndex((s) => s.classList.contains('active')) + 1,
-    rangeType: document.getElementById('marketing_satisfaction')?.type,
-    numberedLabels: `${document.querySelectorAll('.question-label[data-number]').length}/${document.querySelectorAll('.question-label').length}`,
-    submitButton: !!document.getElementById('submitButton'),
-    form: form && Object.fromEntries([...form.attributes].map((a) => [a.name, a.value])),
-  }
-})
-const fillStep = () =>
-  sp.evaluate(() => {
-    const step = document.querySelector('.step.active')
-    for (const el of step.querySelectorAll('input, select, textarea')) {
-      if (el.type === 'checkbox' || el.type === 'radio') continue
-      if (el.tagName === 'SELECT') el.selectedIndex = 1
-      else if (el.type === 'email') el.value = 'probe@example.com'
-      else if (el.type === 'url') el.value = 'https://example.com'
-      else if (el.type === 'tel') el.value = '5555555555'
-      else if (el.type === 'range') el.value = '7'
-      else el.value = 'form probe - aborted, never sent'
-      el.dispatchEvent(new Event('input', { bubbles: true }))
-      el.dispatchEvent(new Event('change', { bubbles: true }))
-    }
-    for (const g of step.querySelectorAll('.choice-group')) g.querySelector('input').click()
-    return document.getElementById('stepText')?.textContent
-  })
-const steps = []
-for (let i = 0; i < 3; i++) {
-  steps.push(await fillStep())
-  await sp.click('#nextButton')
-  await new Promise((r) => setTimeout(r, 400))
-}
-steps.push(await fillStep())
-const beforeSubmit = await sp.evaluate(() => ({
-  stepText: document.getElementById('stepText')?.textContent,
-  submitVisible: !document.getElementById('submitButton')?.hidden,
-  satisfaction: document.getElementById('satisfactionValue')?.textContent,
+await sp.evaluate(() => (document.documentElement.style.scrollBehavior = 'auto'))
+const boot = await sp.evaluate(() => ({
+  questions: document.querySelectorAll('.q').length,
+  radios: document.querySelectorAll('.q input[type="radio"]').length,
+  progress: document.querySelector('.progress-text')?.textContent,
+  modalHidden: document.getElementById('resultsModal')?.hidden,
+  csp: document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? '',
 }))
-await sp.click('#submitButton').catch((e) => sErrors.push('click submit: ' + e.message))
-await new Promise((r) => setTimeout(r, 3000))
-const survey = { boot, steps, beforeSubmit, tried: sTried, urlAfter: sp.url(), errors: sErrors }
+await sp.click('#getResults')
+await new Promise((r) => setTimeout(r, 900))
+const emptyTry = await sp.evaluate(() => ({
+  flagged: document.querySelectorAll('.q.invalid').length,
+  firstFlaggedTop: Math.round(document.querySelector('.q.invalid')?.getBoundingClientRect().top ?? -1),
+  modalHidden: document.getElementById('resultsModal').hidden,
+}))
+await sp.evaluate(() => {
+  document.querySelectorAll('.q').forEach((q, i) => q.querySelectorAll('input')[i % 2].click())
+})
+const answered = await sp.evaluate(() => ({
+  flagged: document.querySelectorAll('.q.invalid').length,
+  progress: document.querySelector('.progress-text')?.textContent,
+  bar: document.getElementById('progressBar').style.width,
+}))
+await sp.click('#getResults')
+await new Promise((r) => setTimeout(r, 300))
+const modalOpen = await sp.evaluate(() => !document.getElementById('resultsModal').hidden)
+await sp.type('#fullName', 'Form Probe (aborted, never sent)')
+await sp.type('#email', 'probe@example.com')
+await sp.type('#phone', '5555555555')
+await sp.click('#contactForm button[type="submit"]')
+await new Promise((r) => setTimeout(r, 2500))
+const sAfter = await sp.evaluate(() => ({
+  askHidden: document.getElementById('askContact').hidden,
+  doneHidden: document.getElementById('assessmentDone').hidden,
+  button: document.querySelector('#contactForm button[type="submit"]').textContent,
+}))
+const sent = sTried.find((t) => /sheetdb\.io/.test(t.url) && t.method === 'POST')
+let payloadKeys = null
+try { payloadKeys = sent ? Object.keys(JSON.parse(sent.body)) : null } catch { payloadKeys = 'not JSON' }
+const survey = {
+  boot: { ...boot, cspAllowsSheetdb: /connect-src[^;]*https:\/\/sheetdb\.io/.test(boot.csp), csp: undefined },
+  emptyTry, answered, modalOpen, after: sAfter,
+  sheetdb: sent ? { method: sent.method, url: sent.url, contentType: sent.contentType, payloadKeys } : 'NO REQUEST — blocked by CSP or never sent',
+  otherRequests: sTried.filter((t) => t !== sent).map((t) => `${t.method} ${t.url}`),
+  dialogs, errors: sErrors,
+}
 console.log('\n=== survey\n' + JSON.stringify(survey, null, 1))
 await browser.close()

@@ -85,7 +85,15 @@ for (const route of ROUTES) {
   if (route.startsWith('/customer-stories-') && !/<iframe[^>]+src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\//.test(html)) {
     fails.push(`${route} -> no YouTube player`)
   }
-  if (route === '/survey' && !/<form[^>]+id="growthSurvey"/.test(html)) fails.push('/survey -> no #growthSurvey form')
+  // /survey is the rebuilt 21-point assessment (overlay/survey/index.html) since 2026-09-11.
+  if (route === '/survey') {
+    if (!/<form[^>]+id="contactForm"/.test(html)) fails.push('/survey -> no #contactForm')
+    const radios = (html.match(/<input[^>]+type="radio"[^>]+name="question_\d+"/g) ?? []).length
+    if (radios !== 42) fails.push(`/survey -> ${radios} yes/no radios, expected 42`)
+    // The page POSTs to SheetDB from the browser, so the published CSP must allow it (embed-origins).
+    const csp = (html.match(/Content-Security-Policy" content="([^"]*)"/) ?? [])[1] ?? ''
+    if (!/connect-src[^;]*https:\/\/sheetdb\.io/.test(csp)) fails.push('/survey -> CSP connect-src does not allow https://sheetdb.io; submissions would be blocked')
+  }
 
   const title = (html.match(/<title>([^<]*)<\/title>/) ?? [])[1] ?? ''
   if (!title) fails.push(`${route} -> no <title>`)
@@ -142,11 +150,9 @@ for (const route of ROUTES) {
       }
       if (!js.includes('.faq-q')) fails.push('site.js does not contain the FAQ toggle')
       if (!js.includes('leadForm')) fails.push('site.js does not contain the form handler')
-      if (!js.includes('growthSurvey')) fails.push('site.js does not contain the survey script')
-      // Look for CODE, not the banner comment: the published bundle strips comments, and the
-      // first version of this check failed a site whose repairs were working.
-      if (!js.includes('data-number') || !js.includes('submitButton')) {
-        fails.push('site.js does not carry the attribute repairs — the survey will throw at boot')
+      // Look for CODE, not comments: the published bundle strips comments.
+      if (!js.includes('sheetdb.io/api/v1/w8136dpdrs4st') || !js.includes('getResults')) {
+        fails.push('site.js does not contain the 21-point assessment script')
       }
     }
   }

@@ -13,7 +13,8 @@
  */
 import { api } from './lib/insta-api.mjs'
 
-const ID = 'webzite.embed-origins'
+// The plugin id was renamed webzite.* -> brandklout.* (5b5e6137); plugin.json is the source of truth.
+const ID = 'brandklout.embed-origins'
 const argOf = (flag) => {
   const i = process.argv.indexOf(flag)
   return i === -1 ? null : process.argv[i + 1] ?? ''

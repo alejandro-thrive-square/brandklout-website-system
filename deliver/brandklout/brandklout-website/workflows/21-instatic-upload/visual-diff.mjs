@@ -93,18 +93,25 @@ const SOURCE_ROOT = path.resolve(HERE, '../00-client-delivery-initialization/.tm
 const THRESHOLD = 24
 
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
-const serve = (root) =>
+// A list of roots, first hit wins: the --source side is `overlay/` over Sang's package, the same
+// precedence prepare-source.mjs uses, so an overlaid page is compared with ITS source.
+const serve = (...roots) =>
   http.createServer((req, res) => {
-    let f = path.join(root, decodeURIComponent(req.url.split('?')[0]))
-    if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html')
-    if (!fs.existsSync(f)) return res.writeHead(404).end()
+    const rel = decodeURIComponent(req.url.split('?')[0])
+    const hit = (root) => {
+      let f = path.join(root, rel)
+      if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html')
+      return fs.existsSync(f) ? f : null
+    }
+    const f = roots.map(hit).find(Boolean)
+    if (!f) return res.writeHead(404).end()
     res.writeHead(200, { 'content-type': MIME[path.extname(f)] ?? 'application/octet-stream' })
     fs.createReadStream(f).pipe(res)
   })
 const server = serve(LOCAL_ROOT)
 await new Promise((r) => server.listen(0, r))
 const port = server.address().port
-const sourceServer = serve(SOURCE_ROOT)
+const sourceServer = serve(path.join(HERE, 'overlay'), SOURCE_ROOT)
 await new Promise((r) => sourceServer.listen(0, r))
 const sourcePort = sourceServer.address().port
 

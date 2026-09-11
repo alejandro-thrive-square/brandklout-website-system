@@ -1,91 +1,99 @@
 <!doctype html>
+<!--
+  Brandklout 21-Point Assessment, rebuilt 2026-09-11 from https://bk21question.netlify.app/ (a React
+  app) in the BrandKlout site's style. Replaces the package's own survey/index.html at /survey via
+  21-instatic-upload/overlay (see prepare-source.mjs). Copy, questions, validation, the contact
+  step, the SheetDB endpoint and payload and the Calendly link are Sang's, verbatim; only the look
+  is the site's. Not a client handoff file: the Netlify app is the source of truth for the words.
+-->
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>BrandKlout Growth Readiness Survey | 21 Questions</title>
-  <meta name="description" content="Answer 21 strategic questions so BrandKlout can evaluate your dental practice, market, growth priorities and current marketing system.">
-  <meta name="theme-color" content="#071019">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23071019'/%3E%3Ctext x='12' y='42' font-size='28' font-family='Arial' font-weight='700' fill='white'%3EBK%3C/text%3E%3Ccircle cx='57' cy='57' r='13' fill='%234ee1d2'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/assets/site.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Brandklout 21-Point Assessment</title>
+  <meta name="description" content="Answer these yes or no questions to see how you can rank higher, grow faster, and consistently book more patients.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body class="pg-survey">
-  <div class="page">
-    <header class="topbar"><a class="brand" href="../preview%20(1).html"><span class="mark">BK</span><span>BrandKlout</span></a><a class="back" href="../preview%20(1).html">Back to BrandKlout ↗</a></header>
-    <main class="survey-shell">
-      <aside class="aside">
-        <div class="aside-content">
-          <div class="eyebrow">BrandKlout · 21 Questions</div>
-          <h1>Your growth plan should start with the <span style="color:#78eadf">right questions.</span></h1>
-          <p class="intro">Give us a clear picture of your practice, market and priorities. We will use your answers to make the first strategy conversation specific to your business.</p>
-          <div class="promise-list">
-            <div class="promise"><span class="promise-icon">1</span><div><strong>Practice context</strong><span>Who you serve, where you compete and what you want to grow.</span></div></div>
-            <div class="promise"><span class="promise-icon">2</span><div><strong>Current performance</strong><span>What is already working, where demand leaks and how results are tracked.</span></div></div>
-            <div class="promise"><span class="promise-icon">3</span><div><strong>Growth readiness</strong><span>Timeline, team capacity and who needs to be part of the decision.</span></div></div>
-          </div>
+  <header class="nav"><div class="container nav-inner"><a class="brand" href="../index.html" aria-label="BrandKlout home"><span class="mark">BK</span><span>BrandKlout</span></a><a class="btn btn-dark btn-sm" href="#assessmentForm">Start Survey</a></div></header>
+
+  <div class="progress" aria-live="polite"><div class="progress-track"><div class="progress-bar" id="progressBar"></div></div><p class="progress-text"><span id="progressCount">0</span>/21 Completed</p></div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1>Be Found <span class="gradient">Everywhere</span><br>Your Patients Search</h1>
+        <p class="lede">Before we connect, we gather <span class="gradient">valuable insight</span> to create a strategy tailored specifically for your success.</p>
+        <a class="btn btn-dark" href="#assessmentForm">Start Survey</a>
+      </div>
+    </section>
+
+    <section class="founder">
+      <div class="narrow founder-card">
+        <div>
+          <blockquote>"Let's get the form in so we can learn more. So on that call, we want to make sure we're ready for you and not waste your time."</blockquote>
+          <p class="founder-name">— Sang Huynh</p>
+          <p class="founder-role">Founder &amp; CEO</p>
         </div>
-        <div class="aside-foot"><strong>About 6 minutes</strong>Your answers are used to prepare your BrandKlout growth conversation.</div>
-      </aside>
+        <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/qxXc1GruLLY?rel=0" title="Sang Huynh, BrandKlout founder" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+      </div>
+    </section>
 
-      <section class="form-side" id="formSide">
-        <div class="progress-meta"><span id="stepText">Step 1 of 4</span><span id="progressText">25% complete</span></div>
-        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
-
-        <form id="growthSurvey" name="bk21-growth-survey" method="POST" action="?submitted=true" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
-          <input type="hidden" name="form-name" value="bk21-growth-survey">
-          <p class="bot-field"><label>Leave this field empty <input name="bot-field"></label></p>
-
-          <div class="step active" data-step="1">
-            <div class="step-head"><div class="kicker">Step 1 · Your practice</div><h2>Let’s start with who you are.</h2><p>Basic information so we can research the correct practice and market.</p></div>
-            <div class="questions">
-              <div class="question" data-question="1"><label class="question-label" data-number="01" for="full_name">Your full name</label><input id="full_name" name="full_name" type="text" autocomplete="name" placeholder="First and last name" required></div>
-              <div class="question" data-question="2"><label class="question-label" data-number="02" for="work_email">Work email</label><input id="work_email" name="work_email" type="email" autocomplete="email" placeholder="you@practice.com" required></div>
-              <div class="question" data-question="3"><label class="question-label" data-number="03" for="phone">Best phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555" required></div>
-              <div class="question" data-question="4"><label class="question-label" data-number="04" for="practice_name">Practice or group name</label><input id="practice_name" name="practice_name" type="text" autocomplete="organization" placeholder="Practice name" required></div>
-              <div class="question" data-question="5"><label class="question-label" data-number="05" for="website">Practice website</label><input id="website" name="website" type="url" placeholder="https://yourpractice.com" required></div>
-            </div>
-          </div>
-
-          <div class="step" data-step="2">
-            <div class="step-head"><div class="kicker">Step 2 · Your market</div><h2>What are you trying to grow?</h2><p>We will use this to frame the competitive set and the patient journey that matters most.</p></div>
-            <div class="questions">
-              <div class="question" data-question="6"><label class="question-label" data-number="06" for="market">Primary city and state</label><input id="market" name="market" type="text" placeholder="e.g. Austin, TX" required></div>
-              <div class="question" data-question="7"><label class="question-label" data-number="07" for="locations">How many practice locations do you operate?</label><select id="locations" name="locations" required><option value="">Select one</option><option>1 location</option><option>2 locations</option><option>3–5 locations</option><option>6–10 locations</option><option>11+ locations</option></select></div>
-              <div class="question" data-question="8"><label class="question-label" data-number="08" for="role">What is your role?</label><select id="role" name="role" required><option value="">Select one</option><option>Owner dentist / specialist</option><option>Associate dentist / specialist</option><option>Practice administrator / manager</option><option>Marketing or growth leader</option><option>DSO / group executive</option><option>Other</option></select></div>
-              <div class="question choice-group" data-question="9" data-required="true"><div class="question-label" data-number="09">Which services are the highest growth priority?</div><p class="hint">Choose all that apply.</p><div class="choice-grid"><label class="choice"><input type="checkbox" name="priority_services" value="Dental implants / All-on-X"><span>Implants / All-on-X</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Cosmetic dentistry / veneers"><span>Cosmetic / veneers</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Invisalign / orthodontics"><span>Invisalign / ortho</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Oral surgery"><span>Oral surgery</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Periodontics"><span>Periodontics</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Prosthodontics / full-mouth rehab"><span>Prosthodontics / rehab</span></label><label class="choice"><input type="checkbox" name="priority_services" value="General dentistry"><span>General dentistry</span></label><label class="choice"><input type="checkbox" name="priority_services" value="Multi-location growth"><span>Multi-location growth</span></label></div><div class="group-error">Choose at least one priority.</div></div>
-              <div class="question" data-question="10"><label class="question-label" data-number="10" for="growth_goal">What would meaningful growth look like over the next 12 months?</label><textarea id="growth_goal" name="growth_goal" placeholder="Describe the patient, production, treatment or location outcome you want." required></textarea></div>
-            </div>
-          </div>
-
-          <div class="step" data-step="3">
-            <div class="step-head"><div class="kicker">Step 3 · Current performance</div><h2>What is happening today?</h2><p>Ranges are enough. We are looking for operating context, not perfect accounting.</p></div>
-            <div class="questions">
-              <div class="question" data-question="11"><label class="question-label" data-number="11" for="new_patients">Average new patients per month</label><select id="new_patients" name="new_patients" required><option value="">Select a range</option><option>Under 25</option><option>25–49</option><option>50–99</option><option>100–199</option><option>200+</option><option>Not sure</option></select></div>
-              <div class="question" data-question="12"><label class="question-label" data-number="12" for="monthly_collections">Average monthly collections</label><select id="monthly_collections" name="monthly_collections" required><option value="">Select a range</option><option>Under $100K</option><option>$100K–$199K</option><option>$200K–$399K</option><option>$400K–$749K</option><option>$750K+</option><option>Prefer not to say</option></select></div>
-              <div class="question" data-question="13"><label class="question-label" data-number="13" for="marketing_investment">Current monthly marketing investment</label><select id="marketing_investment" name="marketing_investment" required><option value="">Select a range</option><option>Under $2,500</option><option>$2,500–$4,999</option><option>$5,000–$9,999</option><option>$10,000–$24,999</option><option>$25,000+</option><option>Not sure</option></select></div>
-              <div class="question choice-group" data-question="14" data-required="true"><div class="question-label" data-number="14">Which growth channels are active today?</div><p class="hint">Choose all that apply.</p><div class="choice-grid"><label class="choice"><input type="checkbox" name="active_channels" value="Google Ads"><span>Google Ads</span></label><label class="choice"><input type="checkbox" name="active_channels" value="Local Services Ads"><span>Local Services Ads</span></label><label class="choice"><input type="checkbox" name="active_channels" value="Meta Ads"><span>Meta Ads</span></label><label class="choice"><input type="checkbox" name="active_channels" value="Yelp"><span>Yelp</span></label><label class="choice"><input type="checkbox" name="active_channels" value="SEO / content"><span>SEO / content</span></label><label class="choice"><input type="checkbox" name="active_channels" value="Review automation"><span>Review automation</span></label><label class="choice"><input type="checkbox" name="active_channels" value="CRM / nurture"><span>CRM / nurture</span></label><label class="choice"><input type="checkbox" name="active_channels" value="None"><span>None right now</span></label></div><div class="group-error">Choose at least one answer.</div></div>
-              <div class="question" data-question="15"><label class="question-label" data-number="15" for="marketing_satisfaction">How satisfied are you with current marketing results?</label><div class="range-wrap"><output class="range-value" id="satisfactionValue">5</output><input id="marketing_satisfaction" name="marketing_satisfaction" type="range" min="1" max="10" value="5" aria-describedby="satisfactionScale"><div class="range-line" id="satisfactionScale"><span>1 · Very dissatisfied</span><span>10 · Very satisfied</span></div></div></div>
-              <div class="question" data-question="16"><label class="question-label" data-number="16" for="attribution_confidence">How confident are you that you know which marketing creates patients and production?</label><select id="attribution_confidence" name="attribution_confidence" required><option value="">Select one</option><option>Very confident · tracked through revenue</option><option>Somewhat confident · we track leads and patients</option><option>Limited confidence · mostly channel reports</option><option>Low confidence · mostly guesswork</option><option>We do not track it today</option></select></div>
-            </div>
-          </div>
-
-          <div class="step" data-step="4">
-            <div class="step-head"><div class="kicker">Step 4 · Readiness</div><h2>What could determine success?</h2><p>This helps us understand urgency, execution capacity and who should join the strategy conversation.</p></div>
-            <div class="questions">
-              <div class="question" data-question="17"><label class="question-label" data-number="17" for="bottleneck">What is the biggest growth bottleneck right now?</label><textarea id="bottleneck" name="bottleneck" placeholder="Visibility, lead quality, follow-up, case acceptance, team capacity, tracking or something else?" required></textarea></div>
-              <div class="question" data-question="18"><label class="question-label" data-number="18" for="timeline">How quickly do you want to improve the growth system?</label><select id="timeline" name="timeline" required><option value="">Select one</option><option>Immediately · within 30 days</option><option>Within 1–3 months</option><option>Within 3–6 months</option><option>Later this year</option><option>Researching options only</option></select></div>
-              <div class="question" data-question="19"><label class="question-label" data-number="19" for="follow_up_speed">How quickly does your team normally respond to a new lead?</label><select id="follow_up_speed" name="follow_up_speed" required><option value="">Select one</option><option>Under 5 minutes</option><option>5–30 minutes</option><option>30–60 minutes</option><option>Same business day</option><option>Next business day or later</option><option>Not sure</option></select></div>
-              <div class="question choice-group" data-question="20" data-required="true"><div class="question-label" data-number="20">Who should be involved in a marketing decision?</div><div class="choice-grid"><label class="choice"><input type="radio" name="decision_team" value="I make the decision"><span>I make the decision</span></label><label class="choice"><input type="radio" name="decision_team" value="Business partner / spouse"><span>Business partner / spouse</span></label><label class="choice"><input type="radio" name="decision_team" value="Leadership team"><span>Leadership team</span></label><label class="choice"><input type="radio" name="decision_team" value="Corporate / DSO approval"><span>Corporate / DSO approval</span></label></div><div class="group-error">Choose one answer.</div></div>
-              <div class="question" data-question="21"><label class="question-label" data-number="21" for="final_context">Anything else we should know before we review your market?</label><textarea id="final_context" name="final_context" placeholder="Share any upcoming changes, prior marketing experiences or important context."></textarea></div>
-            </div>
-          </div>
-
-          <div class="form-nav"><button class="btn btn-light" id="prevButton" type="button" hidden>← Previous</button><button class="btn btn-dark" id="nextButton" type="button">Continue →</button><button class="btn btn-dark" id="submitButton" type="submit" hidden>Submit My Survey ↗</button></div>
-          <p class="fineprint">By submitting, you agree that BrandKlout may contact you about your survey and market evaluation. Do not include protected health information.</p>
+    <section class="assessment" id="assessmentForm">
+      <div class="narrow assess-card">
+        <div class="assess-head"><h2>21 Question Assessment</h2><p>Answer these yes or no questions to see how you can rank higher, grow faster, and consistently book more patients.</p></div>
+        <form id="assessmentAnswers">
+          <h3 class="group-title">Online Reputation</h3>
+          <div class="q" data-q="1"><p class="q-text"><span class="q-num">1</span>Do you consistently receive 5-10 new reviews every week on Google, Yelp, Facebook, and NextDoor?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_1" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_1" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="2"><p class="q-text"><span class="q-num">2</span>Do you have active and high-rated listings for healthcare providers on platforms like Healthgrades, WebMD, Vitals, and RealSelf?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_2" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_2" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="3"><p class="q-text"><span class="q-num">3</span>Do you capture negative feedback privately before it becomes public?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_3" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_3" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="4"><p class="q-text"><span class="q-num">4</span>Are you currently responding to 100% of your online reviews - both positive and negative - within the same day?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_4" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_4" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="5"><p class="q-text"><span class="q-num">5</span>Are your patients writing detailed reviews highlighting your expertise for potential new patients and AI search?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_5" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_5" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="6"><p class="q-text"><span class="q-num">6</span>If a patient has already left a review, does your system keep asking them to write another one on a different platform?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_6" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_6" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="7"><p class="q-text"><span class="q-num">7</span>Are you tracking your review growth month-over-month across all platforms in one easy-to-read dashboard?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_7" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_7" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <h3 class="group-title">SEO &amp; AI Search</h3>
+          <div class="q" data-q="8"><p class="q-text"><span class="q-num">8</span>Is your contact information is actively monitored and updated across the web for accuracy and SEO impact?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_8" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_8" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="9"><p class="q-text"><span class="q-num">9</span>Do you appear in the top 3 Google and Map search results when someone searches for a dentist in your city?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_9" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_9" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="10"><p class="q-text"><span class="q-num">10</span>Is your practice the top AI-recommended option when someone asks ChatGPT, Siri, or Gemini for the best implant or cosmetic dentist in your area?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_10" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_10" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="11"><p class="q-text"><span class="q-num">11</span>When patients search "Best Dentist in [City]," do you consistently show up?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_11" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_11" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="12"><p class="q-text"><span class="q-num">12</span>Do you rank in the top 3 Google results and AI summaries for high-converting keywords like "All on 4 near me," "dental implants," or "full mouth reconstruction"?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_12" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_12" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="13"><p class="q-text"><span class="q-num">13</span>Are patients saying they found you through Siri, ChatGPT, or other AI-powered search assistants?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_13" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_13" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="14"><p class="q-text"><span class="q-num">14</span>Are you seeing organic SEO growth every month?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_14" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_14" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <h3 class="group-title">Marketing Performance</h3>
+          <div class="q" data-q="15"><p class="q-text"><span class="q-num">15</span>When patients search "Best Dentist" in your nearby cities within 15 minute-drive, do you show up as top 3?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_15" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_15" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="16"><p class="q-text"><span class="q-num">16</span>Are you attracting implant, veneer, or full-arch cases organically without high ad spend?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_16" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_16" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="17"><p class="q-text"><span class="q-num">17</span>Can you track how many new patients came from your website last month?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_17" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_17" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="18"><p class="q-text"><span class="q-num">18</span>Do you know which reviews and keywords drive the highest-value patients?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_18" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_18" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="19"><p class="q-text"><span class="q-num">19</span>Do you have a plan to grow sales without needing to spend more on ads?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_19" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_19" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="20"><p class="q-text"><span class="q-num">20</span>Do you have a clear, written marketing strategy to dominate AI search, local maps, and review platforms?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_20" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_20" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="q" data-q="21"><p class="q-text"><span class="q-num">21</span>Is your marketing fully automated so you can focus on patient care?</p><div class="yn"><label class="yn-opt"><input type="radio" name="question_21" value="yes"><span>Yes</span></label><label class="yn-opt"><input type="radio" name="question_21" value="no"><span>No</span></label></div><div class="q-error">⚠️ This question is required</div></div>
+          <div class="submit-row"><button class="btn btn-dark btn-block" id="getResults" type="button">Get My Results</button></div>
         </form>
+      </div>
+    </section>
+  </main>
 
-        <div class="success" id="successPanel" role="status"><div class="success-mark">✓</div><h2>Thank you. We have your context.</h2><p>Your answers will help BrandKlout prepare a more specific conversation about your market, priority services and current growth system.</p><a class="btn btn-dark" href="../preview%20(1).html">Return to BrandKlout ↗</a></div>
-      </section>
-    </main>
+  <div class="modal" id="resultsModal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div id="askContact">
+        <h3 id="modalTitle">Almost There!</h3>
+        <p class="modal-lede">We'll send your detailed assessment results and next steps to your email</p>
+        <form id="contactForm">
+          <div class="field"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="fullName" autocomplete="name"></div>
+          <div class="field"><label for="email">Email Address *</label><input type="email" id="email" name="email" autocomplete="email"></div>
+          <div class="field"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+          <button class="btn btn-dark btn-block" type="submit">Submit Assessment</button>
+        </form>
+      </div>
+      <div class="done" id="assessmentDone" hidden>
+        <div class="done-mark">✓</div>
+        <h3>Thank You!</h3>
+        <p>We've received your assessment and will get back to you soon.</p>
+        <p class="done-cta"><strong>We encourage you to schedule a meeting with us.</strong></p>
+        <a class="btn btn-dark" href="https://calendly.com/mrhuynher/30min?month=2025-10" target="_blank" rel="noopener noreferrer">Schedule a Meeting</a>
+      </div>
+    </div>
   </div>
 
   

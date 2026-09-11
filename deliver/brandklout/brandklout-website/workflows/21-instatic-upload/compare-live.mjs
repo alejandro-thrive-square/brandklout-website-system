@@ -263,7 +263,7 @@ const PROBE = (props) => {
    property, keyed the same way the style probe keys elements. Tokens are read from <body>, where
    prepare-source.mjs declares them (each stylesheet's `:root` becomes `body.pg-x`). */
 const RUNTIME_PROBE = () => {
-  const STATE = /^(open|active|show|invalid)$/
+  const STATE = /^(open|invalid)$/
   const clean = {}
   const seen = new Map()
   for (const el of document.querySelectorAll('body *')) {
@@ -286,14 +286,12 @@ const RUNTIME_PROBE = () => {
       faqItems: document.querySelectorAll('.faq-item').length,
       storyCards: document.querySelectorAll('.story-card').length,
       videoFrames: document.querySelectorAll('iframe').length,
-      surveySteps: document.querySelectorAll('.step').length,
-      activeStep: [...document.querySelectorAll('.step')].findIndex((s) => s.classList.contains('active')),
-      numberedLabels: document.querySelectorAll('.question-label[data-number]').length,
-      rangeInputs: document.querySelectorAll('input[type="range"]').length,
-      submitButtonId: !!document.getElementById('submitButton'),
-      stepText: text('stepText'),
-      progressText: text('progressText'),
-      satisfactionValue: text('satisfactionValue'),
+      // /survey: the rebuilt 21-point assessment (overlay/survey/index.html)
+      questions: document.querySelectorAll('.q').length,
+      yesNoRadios: document.querySelectorAll('.q input[type="radio"]').length,
+      progressCount: text('progressCount'),
+      modalHidden: document.getElementById('resultsModal')?.hidden ?? null,
+      contactFields: document.querySelectorAll('#contactForm input').length,
     },
   }
 }

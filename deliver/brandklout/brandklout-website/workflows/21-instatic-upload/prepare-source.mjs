@@ -53,13 +53,21 @@ const refuse = (msg) => {
 }
 if (!fs.existsSync(PKG)) refuse(`no package at ${PKG}. Unzip Sang's zip into a sibling folder (never over it).`)
 
-const walk = (rel = '') =>
-  fs.readdirSync(path.join(PKG, rel), { withFileTypes: true }).flatMap((d) => {
-    const r = rel ? `${rel}/${d.name}` : d.name
-    return d.isDirectory() ? walk(r) : [r]
-  })
-const read = (rel) => fs.readFileSync(path.join(PKG, rel), 'utf8')
-const all = walk()
+/* OVERLAY. `21-instatic-upload/overlay/<path>` replaces (or adds) the package file at the same
+   path, so a page we authored can ship without editing Sang's package, which stays as received.
+   First use, 2026-09-11: `overlay/survey/index.html`, the rebuild of his Netlify 21-point
+   assessment (https://bk21question.netlify.app/), in place of the package's own survey. */
+const OVERLAY = path.join(HERE, 'overlay')
+const walkDir = (root, rel = '') =>
+  !fs.existsSync(path.join(root, rel))
+    ? []
+    : fs.readdirSync(path.join(root, rel), { withFileTypes: true }).flatMap((d) => {
+        const r = rel ? `${rel}/${d.name}` : d.name
+        return d.isDirectory() ? walkDir(root, r) : [r]
+      })
+const overlaid = new Set(walkDir(OVERLAY))
+const read = (rel) => fs.readFileSync(path.join(overlaid.has(rel) ? OVERLAY : PKG, rel), 'utf8')
+const all = [...new Set([...walkDir(PKG), ...overlaid])]
 const htmlFiles = all.filter((f) => /\.html?$/i.test(f)).sort()
 if (!htmlFiles.includes('index.html')) refuse('the package has no top-level index.html')
 
@@ -416,10 +424,15 @@ fs.writeFileSync(path.join(FINAL, 'assets', 'site.js'), jsParts.join('\n\n') + '
 fs.writeFileSync(path.join(SITE, 'site-src', 'seo.json'), JSON.stringify(seo, null, 2) + '\n')
 fs.writeFileSync(
   path.join(SITE, 'site-src', 'pages.json'),
-  JSON.stringify({ package: path.basename(PKG), aliases, pages: pages.map(({ slug, file, scope }) => ({ slug, file, scope })) }, null, 2) + '\n',
+  JSON.stringify(
+    { package: path.basename(PKG), overlay: [...overlaid], aliases, pages: pages.map(({ slug, file, scope }) => ({ slug, file, scope })) },
+    null,
+    2,
+  ) + '\n',
 )
 
 console.log(`package  ${path.basename(PKG)}: ${htmlFiles.length} html, ${pages.length} page(s), aliases ${JSON.stringify(aliases)}`)
+if (overlaid.size) console.log(`overlay  ${[...overlaid].join(', ')} (replaces the package's copy)`)
 for (const p of pages) console.log(`  ${p.slug.padEnd(42)} ${p.file.padEnd(52)} ${p.scope}`)
 console.log(`css      ${[...cssByScope].map(([s, v]) => `${s} ${(v.css.length / 1024).toFixed(1)}KB`).join(' · ')}`)
 console.log(`js       ${[...jsByScope].map(([s, v]) => `${s} ${v.js.length}B`).join(' · ')}`)

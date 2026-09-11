@@ -19,9 +19,12 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   390. `compare-live` shows 23 findings, all benign. Details:
   [`runbook/2026-09-11-sangs-v2-package-published.md`](./runbook/2026-09-11-sangs-v2-package-published.md).
 - **Not on any Brandklout domain.** The cutover waits for Sang's approval.
+- **`/survey` is Sang's Netlify 21-point assessment, rebuilt** in the site's style
+  (`21-instatic-upload/overlay/survey/`), posting to his SheetDB sheet exactly as before. The
+  `brandklout.embed-origins` plugin is installed with `connectOrigins: https://sheetdb.io` only.
+  See [`runbook/2026-09-11-netlify-survey-rebuilt.md`](./runbook/2026-09-11-netlify-survey-rebuilt.md).
 - **The site is not launch-ready, by its own text.** The home form captures nothing and tells
-  visitors it is a prototype. **The new survey POSTs into a 404** (a Netlify form on Instatic), so
-  its answers are lost. Privacy, Terms and HIPAA link to `#`. The prototype lines are still there.
+  visitors it is a prototype. Privacy, Terms and HIPAA link to `#`. The prototype lines are still there.
   The claims have grown: a 60-day money-back guarantee on every page, 10-mile exclusivity, and
   story metrics. The full table is in the run file above.
 - Worktree `bk-brandklout-website`. Railway project `Brandklout`
@@ -30,8 +33,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Next
 
-1. Sang reviews the link and answers the flagged list: where the lead form **and the survey**
-   should send their data, the real Privacy/Terms/HIPAA pages, the prototype lines, the claims,
+1. Sang reviews the link and answers the flagged list: where the home lead form should send its
+   data (the survey is settled: SheetDB), the real Privacy/Terms/HIPAA pages, the prototype lines, the claims,
    and the white-on-white story CTA button.
 2. Apply his corrections to the source (a new package, unzipped beside itself), then rerun the
    chain in `21-instatic-upload.md` → "Brandklout: the package run".
@@ -53,7 +56,9 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 6. **Several stylesheets become one registry.** `prepare-source.mjs` scopes each to a `<body>`
    class and orders `@media` widest first (trap 40). Run `visual-diff --source` after any change
    to it: it must stay at 0.000%.
-7. The toolkit's comments still describe Stone in many places. The Brandklout box and section at
+7. **Never send a real survey submission to test.** It writes a row into Sang's live sheet and
+   whatever watches it. `form-probe.mjs` aborts the SheetDB POST and still checks its payload.
+8. The toolkit's comments still describe Stone in many places. The Brandklout box and section at
    the top of `21-instatic-upload.md` are what is true here.
 
 ## Version Control
