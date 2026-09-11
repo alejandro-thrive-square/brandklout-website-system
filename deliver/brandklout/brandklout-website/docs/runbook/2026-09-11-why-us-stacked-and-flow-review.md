@@ -34,6 +34,44 @@ https://brandklout.com/ to see if we have the right flow for the user to take ac
   YouTube `<iframe>`, so nothing overlays it. The cards are stacked: operator card at y 5221,
   territory card at y 5727, both 1180px wide; on a phone both are 364px wide, one above the other.
 
+### Done (later the same evening): the legal pop-up, cloned from brandklout.com
+
+Asked: "we need to have the privacy policy, terms, and HIPAA inside of the current site. They are on
+a pop-up… clone it exactly as it is." On the home footer, Privacy / Terms / HIPAA (previously `#`)
+now open brandklout.com's modal on the matching tab. The stories and the survey have no legal links.
+
+- **Text**: captured from the live modal (`.modal-body` innerHTML per tab) into
+  `patches/assets/brandklout-com-legal.json`, verbatim: Privacy Policy, Terms of Service, HIPAA
+  Compliance, "Effective Date: December 2025".
+- **Look and behaviour**: brandklout.com's own `.modal-*`/`.glass` rules with its CSS variables
+  resolved, and its system font. The footer link opens the right tab; the tabs switch title and
+  body; ×, a backdrop click and Escape close it; the page is scroll-locked while it is open.
+  Five more edits in `patches/index.html.mjs` (16 in all).
+- **Checked against the original** by diffing computed styles: 55 of 57 values match, and the 2
+  others are the reference being read in different tab states. Two findings on the way:
+  - Its open/close animations and tab transitions are written `var(--transition-*) ease`, which is
+    invalid (two timing functions), so none run on brandklout.com. The clone leaves them out.
+  - Its odd `.modal-tabs{height:10rem}` is load-bearing: the strip is a shrinking flex item and
+    that is its basis. Without it the tabs were clipped (27px instead of 56px). It's kept.
+  - **Published, the legal lists had no bullets** (trap 43): Instatic's reset sets
+    `list-style: none`, which the local page doesn't have. Found only by running the same diff
+    against the live page. The modal now declares `disc`/`decimal` itself.
+  - **At 390 the title was 20px instead of 16px.** brandklout.com redefines `--text-xl: 1rem`
+    inside `@media (max-width:480px) :root`. A CSS variable resolved once, at desktop width, misses
+    that. The ≤480 block now sets the title to 16px. Run the computed-style diff at each width,
+    not only the widest.
+- **Final, published at seq 11:** the live clone against brandklout.com, by computed styles:
+  **0 of 31 differ at 390**, and **2 of 57 at 1440**. Those 2 are my reference, not the page: the
+  old tab colour and height were read with a different tab open. `verify-live` and `css-parity`
+  are FAIL none. `form-probe`: each of Privacy / Terms / HIPAA opens its tab with the right title
+  and one body, the page is scroll-locked, and Escape closes it. `visual-diff` home was 0.015% /
+  0.031% at seq 10, and `compare-live` home had 9 findings, all the known benign ones. The pop-up
+  is closed in those captures, and seq 11 changed only a rule inside its ≤480 block.
+- **For Sang**: the HIPAA tab's contact line is `Phone: (555) 123-4567`, a placeholder number, and
+  the footer company address is "555 Anton Blvd, Costa Mesa". Both are verbatim from brandklout.com.
+  The forms: Sang is deciding; GoHighLevel embeds are the likely route (for the home form and the
+  survey). A GHL embed will need its origins in the embed-origins plugin.
+
 ### Review: how brandklout.com gets a visitor to act (read 2026-09-11, headless Chrome + its bundle)
 
 brandklout.com is a React single-page app on Netlify: one 10,800px page, no forms of its own.

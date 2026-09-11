@@ -90,6 +90,12 @@ First use (2026-09-11): `patches/index.html.mjs`. It stacks the "Why us" cards a
 thumbnail link for an embedded YouTube player (`base.video`, which also lifts the home page's
 `frame-src 'none'`). It also removes the thumbnail's `::after` gradient, which covered the whole
 media column and would have swallowed every click on the player.
+Second use (same evening): brandklout.com's Privacy / Terms / HIPAA pop-up, cloned onto the home
+footer. A patch module may read data from `patches/assets/`. The legal text is captured there
+verbatim (`brandklout-com-legal.json`), and the patch builds the markup from it. **When you clone
+something, diff computed styles against the original rather than eyeballing it.** That diff is
+what showed that the original's `.modal-tabs{height:10rem}`, which looks like a mistake, is the
+basis the strip shrinks from inside the flex column. Without it the tab labels were cut off.
 
 **The browser POSTs to `https://sheetdb.io`, so the CSP has to allow it.** Instatic's CSP has no
 `connect-src`, so it falls back to `default-src 'self'` and the fetch is blocked. The
@@ -203,6 +209,16 @@ lands on a raw JSON error, and the answers go nowhere. The lead form on the home
 opposite case: Sang's own script cancels the submit and shows the prototype message. Neither
 captures anything. Where leads should go is Sang's decision: an Instatic `cms` form bound to a
 data table, or his CRM.
+
+### 43. Instatic's reset stylesheet removes list bullets, and only the live page shows it
+
+The published page loads `reset-*.css` before the registry, and it sets lists to `list-style: none`.
+The local build has no reset, so a `<ul>` that relies on the browser's default `disc` has bullets
+locally and none once published. Found 2026-09-11 on the cloned legal pop-up, by diffing the
+**live** page's computed styles against brandklout.com: the same diff against the local page was
+clean. **Fix:** declare `list-style-type` wherever bullets matter. This is trap 36 again (the
+published page lacks browser defaults the source relied on). The difference is that
+`ua-defaults.css` restores margins only, so lists have to be handled where they are written.
 
 Takes the static build in
 [`04-design/.tmp/med-spa/final-site`](../04-design/.tmp/med-spa/final-site) and puts it

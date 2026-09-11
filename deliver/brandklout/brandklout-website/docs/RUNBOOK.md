@@ -24,7 +24,12 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   `brandklout.embed-origins` plugin is installed with `connectOrigins: https://sheetdb.io` only.
   See [`runbook/2026-09-11-netlify-survey-rebuilt.md`](./runbook/2026-09-11-netlify-survey-rebuilt.md).
 - **Agency edits on Sang's home page live in `21-instatic-upload/patches/index.html.mjs`**: the
-  "Why us" cards are stacked, and his video plays in place. His file is untouched.
+  "Why us" cards are stacked, his video plays in place, and the footer's Privacy / Terms / HIPAA
+  open brandklout.com's legal pop-up, cloned with its text verbatim
+  (`patches/assets/brandklout-com-legal.json`). His file is untouched.
+- **Forms (home + survey): Sang is deciding**, probably GoHighLevel embeds. There is no lead
+  email on the old site; its `privacy@`/`legal@`/`hipaa@brandklout.com` are the legal pop-up's
+  contact lines. A GHL embed needs its origins added to the embed-origins plugin.
 - **The main CTA is a dead end.** Every "Check My Market" / "See If My Market Is Available" goes
   to the home `#apply` form, which captures nothing. The working capture (`/survey`) is linked only
   from the footer, and there is no "Book a Demo" or "Login" as on brandklout.com. Options are in

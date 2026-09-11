@@ -356,7 +356,9 @@ function harvestLossy(files) {
   //   gradient headlines readable (`color: transparent` on top of it), and `backdrop-filter`
   //   frosts the navbar. Both are uncommon enough to be dropped the same way; carrying them in
   //   the asset costs nothing if they are not. css-parity.mjs is still the check.
-  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$)|-webkit-background-clip|background-clip|-webkit-backdrop-filter|backdrop-filter)/
+  //   2026-09-11, same reasoning: `-webkit-text-fill-color: transparent` is the other half of the
+  //   legal pop-up's gradient title (cloned from brandklout.com).
+  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$)|-webkit-background-clip|background-clip|-webkit-backdrop-filter|backdrop-filter|-webkit-text-fill-color)/
 
   const isLossy = (prop, value) =>
     (MATH.test(value) && !SAFE.test(value)) ||

@@ -39,6 +39,30 @@ const faq = await page.evaluate(async () => {
   return { before, after: item.classList.contains('open'), height: item.querySelector('.faq-a').getBoundingClientRect().height }
 })
 
+// The legal pop-up (patches/index.html.mjs, cloned from brandklout.com): each footer link opens
+// its tab, a tab switches the title and body, Escape closes, and the page is scroll-locked meanwhile.
+const legal = []
+for (const [id, want] of [['terms', 'Terms of Service'], ['privacy', 'Privacy Policy'], ['hipaa', 'HIPAA Compliance']]) {
+  await page.click(`a[data-legal="${id}"]`)
+  await new Promise((r) => setTimeout(r, 300))
+  legal.push(await page.evaluate((want) => {
+    const m = document.getElementById('legalModal')
+    const shown = [...m.querySelectorAll('.modal-body')].filter((p) => !p.hidden)
+    return {
+      open: !m.hidden && getComputedStyle(m).display !== 'none',
+      title: document.getElementById('legalTitle').textContent === want,
+      oneBody: shown.length === 1,
+      activeTab: m.querySelector('.modal-tab.active')?.textContent === want,
+      bodyChars: shown[0]?.innerText.length ?? 0,
+      locked: document.body.style.overflow === 'hidden',
+    }
+  }, want))
+  await page.keyboard.press('Escape')
+  await new Promise((r) => setTimeout(r, 200))
+}
+const legalClosed = await page.evaluate(() => document.getElementById('legalModal').hidden)
+console.log(JSON.stringify({ legal, legalClosedByEscape: legalClosed }))
+
 await page.type('input[name="name"]', 'Probe Test')
 await page.type('input[name="email"]', 'probe@example.com')
 await page.type('input[name="practice"]', 'Probe Practice')

@@ -3,6 +3,7 @@
 if (document.body.classList.contains('pg-home')) {
     document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open')));
     document.getElementById('leadForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('success').style.display='block';});
+    (()=>{const m=document.getElementById('legalModal');if(!m)return;const title=document.getElementById('legalTitle');const tabs=[...m.querySelectorAll('.modal-tab')];const panels=[...m.querySelectorAll('.modal-body')];const show=id=>{tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));panels.forEach(p=>{p.hidden=p.dataset.panel!==id;if(!p.hidden)title.textContent=p.dataset.title})};const open=id=>{show(id);m.hidden=false;document.body.style.overflow='hidden'};const close=()=>{m.hidden=true;document.body.style.overflow='unset'};document.querySelectorAll('[data-legal]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();open(a.dataset.legal)}));tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.tab)));m.addEventListener('click',e=>{if(e.target===m)close()});m.querySelector('.modal-close').addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!m.hidden)close()});})();
 }
 
 /* ---- the inline <script> of survey/index.html, verbatim. Guarded by the body class: Instatic has
