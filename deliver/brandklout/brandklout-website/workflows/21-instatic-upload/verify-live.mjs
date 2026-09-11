@@ -85,6 +85,11 @@ for (const route of ROUTES) {
   if (route.startsWith('/customer-stories-') && !/<iframe[^>]+src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\//.test(html)) {
     fails.push(`${route} -> no YouTube player`)
   }
+  // The home lead form POSTs to FormSubmit (patches/index.html.mjs #12): its CSP must allow it.
+  if (route === '/') {
+    const csp = (html.match(/Content-Security-Policy" content="([^"]*)"/) ?? [])[1] ?? ''
+    if (!/connect-src[^;]*https:\/\/formsubmit\.co/.test(csp)) fails.push('/ -> CSP connect-src does not allow https://formsubmit.co; the lead form would be blocked')
+  }
   // /survey is the rebuilt 21-point assessment (overlay/survey/index.html) since 2026-09-11.
   if (route === '/survey') {
     if (!/<form[^>]+id="contactForm"/.test(html)) fails.push('/survey -> no #contactForm')

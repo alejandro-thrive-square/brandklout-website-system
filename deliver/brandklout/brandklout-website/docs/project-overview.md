@@ -37,7 +37,7 @@ because it is an emergency fix of Sang's own page.
 | :--- | :--- | :--- |
 | `00` Client delivery initialization | this folder's layout | setup only, not an execution phase |
 | `21` Instatic upload | [`workflows/21-instatic-upload/`](../workflows/21-instatic-upload/21-instatic-upload.md) | HTML → import → publish → gates. Copied from `bk-stone-med-spa` (`05-instatic-upload`), which is itself Stone Surgical Arts' `21` |
-| `18` Instatic embeds | canonical, `deliver/process/18-instatic-embeds/` | **installed 2026-09-11**: `brandklout.embed-origins` v1.5.1 from `5b5e6137`, settings `connectOrigins: https://sheetdb.io` only, so `/survey` can POST to Sang's SheetDB sheet |
+| `18` Instatic embeds | canonical, `deliver/process/18-instatic-embeds/` | **installed 2026-09-11**: `brandklout.embed-origins` v1.5.1 from `5b5e6137`, settings `connectOrigins: https://sheetdb.io https://formsubmit.co`: `/survey` POSTs to Sang's SheetDB sheet, and the home lead form to FormSubmit → sales@brandklout.com |
 | `20` Instatic domain & admin origins | canonical, `deliver/process/20-instatic-domain-origins/` | at the domain cutover |
 | `22` Instatic API sync | canonical, `deliver/process/22-instatic-api-sync/` | `insta-api.mjs`, which the `21` scripts import |
 
@@ -54,8 +54,9 @@ Phase 2 routes `02-wireframe` → `04-design` → `06-content-seo` → `08-qa` �
    has a prototype handler that shows "Prototype form submitted…". Instatic's own form storage
    (`base.form`), a CRM webhook, or an embed via `18-instatic-embeds` are the options. He picks.
    **The survey is settled (2026-09-11):** `/survey` is his Netlify 21-point assessment rebuilt,
-   posting to the same SheetDB sheet as before (Alejandro's call). The home "Check my market"
-   form is still open.
+   posting to the same SheetDB sheet as before (Alejandro's call). **The home "Check my market"
+   form is settled too (2026-09-11):** it emails sales@brandklout.com through FormSubmit, which
+   needs a one-time activation click at that inbox before anything is delivered.
 5. **Legal pages.** Privacy, Terms and HIPAA link to `#` in Sang's page. They have to exist
    before the domain moves.
 6. **Claims.** "60-day guarantee", "5.0★ reputation", "Henry Schein One API vendor listing", and

@@ -100,7 +100,8 @@ basis the strip shrinks from inside the flex column. Without it the tab labels w
 **The browser POSTs to `https://sheetdb.io`, so the CSP has to allow it.** Instatic's CSP has no
 `connect-src`, so it falls back to `default-src 'self'` and the fetch is blocked. The
 `brandklout.embed-origins` plugin (`deliver/process/18-instatic-embeds`) is installed on this
-instance with **`connectOrigins: https://sheetdb.io` and nothing else**. Its `publish.html` filter
+instance with **`connectOrigins: https://sheetdb.io https://formsubmit.co` and nothing else**. The
+second host was added 2026-09-11 for the home lead form (see trap 42). Its `publish.html` filter
 adds that one origin to `connect-src` on every page when the site is republished. `verify-live`
 fails `/survey` if the published CSP lacks it. Verify submissions with `form-probe.mjs`, which
 aborts the SheetDB request. **Never send a real test row**: it lands in Sang's sheet and whatever
@@ -209,6 +210,13 @@ lands on a raw JSON error, and the answers go nowhere. The lead form on the home
 opposite case: Sang's own script cancels the submit and shows the prototype message. Neither
 captures anything. Where leads should go is Sang's decision: an Instatic `cms` form bound to a
 data table, or his CRM.
+
+**Resolved 2026-09-11.** The survey was rebuilt to post to SheetDB (`overlay/survey/`). The home
+lead form now emails **sales@brandklout.com** through FormSubmit (`patches/index.html.mjs` #12). It
+does a JSON POST to `https://formsubmit.co/ajax/sales@brandklout.com` from the browser, which is why
+that host is in the plugin's `connectOrigins`. FormSubmit sends a **one-time activation email** to
+the address on the first submission, and nothing is delivered until someone there clicks it.
+`form-probe.mjs` captures that POST and aborts it, so the probe never emails sales@.
 
 ### 43. Instatic's reset stylesheet removes list bullets, and only the live page shows it
 

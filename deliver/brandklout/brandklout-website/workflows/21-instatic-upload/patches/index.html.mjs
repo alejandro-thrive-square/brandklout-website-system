@@ -191,8 +191,34 @@ export default [
     replace: legalMedia + '  </style>',
   },
   {
+    // Anchored on Sang's FAQ line, not the lead-form line: patch 12 replaces that one.
     why: WHY_LEGAL + ' — behaviour',
-    find: "document.getElementById('success').style.display='block';});",
-    replace: "document.getElementById('success').style.display='block';});" + legalJs,
+    find: "document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open')));",
+    replace: "document.querySelectorAll('.faq-q').forEach(btn=>btn.addEventListener('click',()=>btn.parentElement.classList.toggle('open')));" + legalJs,
+  },
+
+  /* 12. The lead form works (2026-09-11, Alejandro: "sales@brandklout.com — this is the email for the
+         homepage form"). Instatic sends no email and its form runtime only serves `cms` forms (trap 42),
+         so the submission is relayed by FormSubmit (https://formsubmit.co), which emails every POST to
+         the address in its URL. `https://formsubmit.co` is in the embed-origins plugin's
+         connectOrigins beside sheetdb.io. FormSubmit sends a ONE-TIME activation email to the address
+         on the first submission; nothing is delivered until someone at sales@ clicks it.
+         Sang's own behaviour is kept: the browser's `required` checks run first (the form is not
+         novalidate), and on success his #success message shows. Added: the button is disabled while
+         sending, the form resets on success, and a failure says so instead of pretending. */
+  {
+    why: 'Lead form (2026-09-11, Alejandro): send to sales@brandklout.com via FormSubmit',
+    find: "document.getElementById('leadForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('success').style.display='block';});",
+    replace:
+      "document.getElementById('leadForm').addEventListener('submit',async function(e){e.preventDefault();" +
+      "const form=this,btn=form.querySelector('[type=\"submit\"]'),label=btn.textContent;" +
+      "const data=Object.fromEntries(new FormData(form).entries());" +
+      "data._subject='New \"Check my market\" lead from brandklout.com';data._template='table';" +
+      "btn.disabled=true;btn.textContent='Sending...';" +
+      "try{const res=await fetch('https://formsubmit.co/ajax/sales@brandklout.com',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(data)});" +
+      "const out=await res.json().catch(()=>({}));if(!res.ok||String(out.success)!=='true')throw new Error(out.message||'Submission failed');" +
+      "form.reset();document.getElementById('success').style.display='block';}" +
+      "catch(err){console.error('Lead form:',err);alert('Sorry, your request could not be sent. Please try again, or email sales@brandklout.com.');}" +
+      "finally{btn.disabled=false;btn.textContent=label;}});",
   },
 ]

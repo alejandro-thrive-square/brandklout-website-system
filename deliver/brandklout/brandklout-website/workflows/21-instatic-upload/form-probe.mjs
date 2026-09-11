@@ -15,10 +15,21 @@ const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new'
 const page = await browser.newPage()
 const tried = []
 const errors = []
+const homeDialogs = []
+let leadPost = null
 page.on('pageerror', (e) => errors.push(e.message))
 page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
+page.on('dialog', async (d) => { homeDialogs.push(d.message()); await d.dismiss() })
 await page.setRequestInterception(true)
 page.on('request', (r) => {
+  // The lead form POSTs JSON to FormSubmit (patches/index.html.mjs #12). Let its CORS preflight
+  // through (no body, sends nothing) so the real POST is formed; then capture and ABORT the POST,
+  // so no email is ever sent to sales@brandklout.com by this probe.
+  if (r.method() === 'OPTIONS' && /^https:\/\/formsubmit\.co\//.test(r.url())) return r.continue()
+  if (r.method() === 'POST' && /^https:\/\/formsubmit\.co\//.test(r.url())) {
+    leadPost = { url: r.url(), contentType: r.headers()['content-type'], body: r.postData() ?? '' }
+    return r.abort()
+  }
   if (r.method() !== 'GET') {
     tried.push(`${r.method()} ${r.url()} ${(r.postData() ?? '').slice(0, 160)}`)
     return r.abort()
@@ -79,7 +90,12 @@ const after = await page.evaluate(() => ({
   attrs: Object.fromEntries([...document.getElementById('leadForm').attributes].map((a) => [a.name, a.value])),
 }))
 
-console.log(JSON.stringify({ faq, tried, urlBefore, urlAfter: page.url(), ...after, errors }, null, 1))
+let leadPayload = null
+try { leadPayload = leadPost ? JSON.parse(leadPost.body) : null } catch { leadPayload = 'not JSON' }
+const lead = leadPost
+  ? { url: leadPost.url, contentType: leadPost.contentType, keys: leadPayload && typeof leadPayload === 'object' ? Object.keys(leadPayload) : leadPayload, subject: leadPayload?._subject }
+  : 'NO REQUEST to formsubmit.co: blocked by CSP, or the handler never sent'
+console.log(JSON.stringify({ faq, lead, homeDialogs, tried, urlBefore, urlAfter: page.url(), ...after, errors }, null, 1))
 
 /* --- /survey: the rebuilt 21-point assessment (overlay/survey/index.html, 2026-09-11) ----------
    Walks it the way a visitor would: presses Get My Results with nothing answered (every question

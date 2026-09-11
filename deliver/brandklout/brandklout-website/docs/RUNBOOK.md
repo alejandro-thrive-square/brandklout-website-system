@@ -21,15 +21,18 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 - **Not on any Brandklout domain.** The cutover waits for Sang's approval.
 - **`/survey` is Sang's Netlify 21-point assessment, rebuilt** in the site's style
   (`21-instatic-upload/overlay/survey/`), posting to his SheetDB sheet exactly as before. The
-  `brandklout.embed-origins` plugin is installed with `connectOrigins: https://sheetdb.io` only.
+  `brandklout.embed-origins` plugin is installed with `connectOrigins: https://sheetdb.io
+  https://formsubmit.co` (the second for the home lead form).
   See [`runbook/2026-09-11-netlify-survey-rebuilt.md`](./runbook/2026-09-11-netlify-survey-rebuilt.md).
 - **Agency edits on Sang's home page live in `21-instatic-upload/patches/index.html.mjs`**: the
   "Why us" cards are stacked, his video plays in place, and the footer's Privacy / Terms / HIPAA
   open brandklout.com's legal pop-up, cloned with its text verbatim
   (`patches/assets/brandklout-com-legal.json`). His file is untouched.
-- **Forms (home + survey): Sang is deciding**, probably GoHighLevel embeds. There is no lead
-  email on the old site; its `privacy@`/`legal@`/`hipaa@brandklout.com` are the legal pop-up's
-  contact lines. A GHL embed needs its origins added to the embed-origins plugin.
+- **The home lead form emails sales@brandklout.com** (FormSubmit, `patches/index.html.mjs` #12).
+  **Nothing arrives until someone at sales@ clicks FormSubmit's one-time activation email**, which
+  the first submission triggers. The survey still posts to SheetDB. Sang may still move both to
+  GoHighLevel embeds; a GHL embed needs its origins in the embed-origins plugin, and a non-YouTube
+  iframe must go through the plugin's Embed block, not the importer.
 - **The main CTA is a dead end.** Every "Check My Market" / "See If My Market Is Available" goes
   to the home `#apply` form, which captures nothing. The working capture (`/survey`) is linked only
   from the footer, and there is no "Book a Demo" or "Login" as on brandklout.com. Options are in
