@@ -30,50 +30,29 @@ import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const SITE = path.resolve(HERE, '../04-design/.tmp/med-spa')
-const FINAL = path.join(SITE, 'final-site')
+const SITE = path.resolve(HERE, '../04-design/.tmp/site-src')
+const FINAL = path.join(SITE, 'dist')
 const TMP = path.join(HERE, '.tmp')
 
 const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
-const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 'utf8'))
+const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'seo.json'), 'utf8'))
 
-/* ELEVEN PAGES — the second build, one per subtask on Asana task
-   1218112701145002. Written out by hand rather than derived from the
-   filesystem, and that is deliberate: see the warning.
+/* ONE PAGE. West LA Implants is a single scrolling document — eight chapters
+   in one `index.html`, with every link on it an in-page `#anchor`, a `tel:` or
+   an off-site URL. There is nothing to rewrite from a filename to a slug and
+   nothing else to import.
 
    > [!WARNING]
    > This list IS the site, and trap 8 is the reason that matters. In replace
    > mode any stored page absent from `changedPages` is DELETED server-side.
-   > Removing a line here deletes a live page. On the sibling instance a cut
-   > from eighteen pages to two happened exactly that way and was not
-   > reversible from this side.
+   > Removing a line here deletes a live page.
    >
-   > **Adding a line is safe.** Every line below is an addition on this
-   > instance: it was provisioned on 2026-09-04 and had never been published
-   > to, so the first apply creates all eleven.
+   > `index` must be the first slug because setup already created a page at
+   > that slug and this overwrites it rather than duplicating it.
 
-   Slug order still matters: `index` must exist first, because setup already
-   created a page at that slug and it is the one we overwrite rather than
-   duplicate.
-
-   `title` is the CMS page label the editor shows in its page list, not the
-   browser title — the <title> comes from seo.json via `seoTitle` below.
-
-   The six remaining treatment dossiers get a line each the day they are built.
-   `botox` is the only one so far and it is the template for the rest. */
-const PAGES = [
-  { file: 'index.html', slug: 'index', title: 'Home' },
-  { file: 'treatments.html', slug: 'treatments', title: 'Treatments' },
-  { file: 'botox.html', slug: 'botox', title: 'Botox & Xeomin' },
-  { file: 'results.html', slug: 'results', title: 'Results & Reviews' },
-  { file: 'membership.html', slug: 'membership', title: 'Membership' },
-  { file: 'financing.html', slug: 'financing', title: 'Financing' },
-  { file: 'meet-the-doctor.html', slug: 'meet-the-doctor', title: 'Meet the Doctor' },
-  { file: 'team.html', slug: 'team', title: 'Meet the Team' },
-  { file: 'about.html', slug: 'about', title: 'About' },
-  { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
-  { file: 'thank-you.html', slug: 'thank-you', title: 'Thank You' },
-]
+   `title` is the CMS page label in the admin list; the browser <title> comes
+   from seo.json via `seoTitle` below (trap 6). */
+const PAGES = [{ file: 'index.html', slug: 'index', title: 'Home' }]
 
 const problems = []
 
@@ -90,33 +69,29 @@ function rewrite(html, file) {
   //    broken reference.
   out = out.replace(/<!--[\s\S]*?-->/g, '')
 
-  // 0b. Drop the two <head> references that have no Instatic equivalent, before
-  //     step 1 goes looking for them in the media map.
+  // 0b. The six vendored GSAP tags. This build loads gsap, ScrollTrigger,
+  //     ScrollToPlugin, ScrollSmoother, SplitText and Observer out of
+  //     `assets/gsap/` in <head>, deliberately — Instatic publishes with
+  //     `script-src 'self'`, so a CDN is not an option and there is no
+  //     custom-head field to put one in. An Instatic site has exactly ONE
+  //     script asset, so push-site.mjs concatenates all six ahead of
+  //     `assets/site.js` into it, IN THAT ORDER. `importHtml` would strip these
+  //     tags anyway; removing them here stops step 1 looking for them in the
+  //     media map.
+  out = out.replace(/[ \t]*<script[^>]+src="assets\/gsap\/[^"]+"[^>]*><\/script>\s*\n?/g, '')
+
+  // 1. Media sources -> media library paths.
   //
-  //     vendor.js. The static build emits GSAP as a SEPARATE bundle that only
-  //     pages with `motion: true` request, so the neck lift page never
-  //     downloads 122KB it does not use. Instatic has ONE script asset for the
-  //     whole site, so that split cannot survive the import: push-site.mjs
-  //     concatenates the vendor bundle ahead of site.js into the single asset
-  //     and both published pages carry it. The split still earns its keep in
-  //     the static build and on any host that serves the files as they are.
-  out = out.replace(/[ \t]*<script[^>]+src="assets\/vendor\.js"[^>]*><\/script>\s*\n?/g, '')
-
-  //     The font preloads. The static build self-hosts both typefaces out of
-  //     `assets/fonts/` and preloads the two cuts that set the headline and the
-  //     body copy. There is no `assets/` on Instatic to preload FROM: the fonts
-  //     are installed into Instatic's own library by install-fonts.mjs, served
-  //     from `/uploads/fonts/`, and the publisher emits the @font-face rules
-  //     itself. A preload pointing at a path that does not exist is a console
-  //     error and a wasted round trip.
-  out = out.replace(/[ \t]*<link[^>]+rel="preload"[^>]+href="assets\/fonts\/[^"]+"[^>]*>\s*\n?/g, '')
-
-  // 1. Image sources -> media library paths.
-  out = out.replace(/(src|href)="assets\/([^"]+)"/g, (whole, attr, name) => {
-    if (name === 'site.css' || name === 'site.js') return whole // handled below
+  //    NOT just `src`. This build's two <video> elements carry `poster`,
+  //    `data-src` and `data-src-mobile` — the boot script copies data-src into
+  //    src at runtime, because an importer keeps ATTRIBUTES but not <source>
+  //    children — and any of the three left pointing at `media/…` 404s on the
+  //    published page exactly as an unrewritten <img> would, except that a
+  //    video that never loads looks like a poster frame by design.
+  out = out.replace(/(src|href|poster|data-src|data-src-mobile)="(media\/[^"]+)"/g, (whole, attr, name) => {
     const hit = mediaMap[name]
     if (!hit) {
-      problems.push(`${file}: no media-map entry for assets/${name}`)
+      problems.push(`${file}: no media-map entry for ${name}`)
       return whole
     }
     return `${attr}="${hit.url}"`
@@ -140,9 +115,9 @@ function rewrite(html, file) {
   out = out.replace(/[ \t]*<link[^>]+href="assets\/site\.css"[^>]*>\s*\n?/g, '')
   out = out.replace(/[ \t]*<script[^>]+src="assets\/site\.js"[^>]*><\/script>\s*\n?/g, '')
 
-  // Anything still pointing into assets/ would 404 once published.
-  for (const m of out.matchAll(/"assets\/([^"]+)"/g)) {
-    problems.push(`${file}: unrewritten reference to assets/${m[1]}`)
+  // Anything still pointing into assets/ or media/ would 404 once published.
+  for (const m of out.matchAll(/"(assets|media|fonts)\/([^"]+)"/g)) {
+    problems.push(`${file}: unrewritten reference to ${m[1]}/${m[2]}`)
   }
   return out
 }
@@ -159,37 +134,43 @@ const pages = PAGES.map((p) => {
   }
 })
 
-/* The stylesheet, MINUS the self-hosted @font-face block.
+/* The stylesheet, MINUS the three @font-face rules — WHICH ARE NOT DISCARDED.
+   THIS IS WHERE WEST LA IMPLANTS DIVERGES FROM THE MED SPA.
 
-   `css/03-fonts.css` declares seven cuts with `url("fonts/<file>.woff2")`,
-   relative to `assets/` where site.css is served from in the static build.
-   There is no `assets/` on Instatic and nowhere to make one. The fonts live in
-   Instatic's own library instead (see install-fonts.mjs) and the publisher
-   emits its own @font-face rules from there.
+   The sibling excised its @font-face block and asserted none survived, because
+   its typefaces went into Instatic's OWN font library (`install-fonts.mjs`) and
+   the publisher emitted the rules itself. That is not available here: Instatic's
+   installer downloads Google's STATIC instances and silently ignores
+   `font-variation-settings`, and all three faces on this build are VARIABLE
+   woff2 — `font-weight: 400 900` on Bodoni Moda, `200 800` on Manrope, and an
+   `opsz` axis that `.display` and `.h2` set by hand. Installed statically the
+   headline loses its optical size and every weight between the named cuts.
 
-   Shipping this block as well would put seven dead `url()`s into the style
-   registry, and A DEAD @font-face IS NOT A VISIBLE ERROR: the family name still
-   resolves, the browser falls back to Georgia, and the page looks plausible and
-   wrong. That is the same trap install-fonts.mjs warns about.
+   So the woff2 files are uploaded as ORDINARY MEDIA (`font/woff2` is an
+   accepted mime — see upload-media.mjs) and the three @font-face blocks travel
+   in the TOKEN CODE ASSET instead, with `url('../fonts/x.woff2')` rewritten to
+   the uploaded `/uploads/…` path. push-site.mjs does that; this file only has to
+   keep them OUT of the registry payload, because happy-dom's `cssToStyleRules`
+   has no representation for an at-rule that is not a class and would drop them
+   without a word — and A DEAD @font-face IS NOT A VISIBLE ERROR: the family
+   name still resolves and the browser falls back to Georgia.
 
-   The bundle carries one banner per source file, so the block is delimited by
-   its own banner and the next one. Both edges are asserted rather than assumed:
-   a bundler that stops emitting banners would otherwise make this excision
-   silently do nothing, or take the whole rest of the file. */
+   Cut by the rules themselves rather than by a source-file banner: this
+   bundler's banner is `/* ==== 01-tokens.css ==== *​/` and the faces share that
+   file with the tokens, so there is no block to slice. The count is asserted
+   both ways — three found, none left — so a change in either direction is a
+   refusal rather than a silent no-op. */
 const cssBundle = fs.readFileSync(path.join(FINAL, 'assets', 'site.css'), 'utf8')
-const FONT_BANNER = '/* ===== css/03-fonts.css ===== */'
-const BANNER_NEXT = '/* ===== css/'
-const fontStart = cssBundle.indexOf(FONT_BANNER)
-const fontEnd = fontStart < 0 ? -1 : cssBundle.indexOf(BANNER_NEXT, fontStart + FONT_BANNER.length)
-if (fontStart < 0) {
-  problems.push('site.css: no css/03-fonts.css banner. The bundler changed shape and the @font-face excision is doing nothing')
-} else if (fontEnd < 0) {
-  problems.push('site.css: css/03-fonts.css is the last block, so the excision would take the rest of the file')
-}
-let css =
-  fontStart >= 0 && fontEnd > fontStart ? cssBundle.slice(0, fontStart) + cssBundle.slice(fontEnd) : cssBundle
+const EXPECT_FONT_FACES = 3
+let css = cssBundle.replace(/@font-face\s*\{[^}]*\}/g, '')
 const fontFaces = (cssBundle.match(/@font-face/g) ?? []).length
 const fontFacesLeft = (css.match(/@font-face/g) ?? []).length
+if (fontFaces !== EXPECT_FONT_FACES) {
+  problems.push(
+    `site.css: ${fontFaces} @font-face rule(s), expected ${EXPECT_FONT_FACES}. ` +
+      `push-site.mjs carries exactly the ones it finds in 01-tokens.css into the token asset — check they match.`,
+  )
+}
 if (fontFacesLeft) {
   problems.push(`site.css: ${fontFacesLeft} @font-face rule(s) survived the excision`)
 }
@@ -248,6 +229,6 @@ console.log(`pages: ${pages.length}`)
 for (const p of pages) console.log(`  ${p.slug.padEnd(18)} ${(p.html.length / 1024).toFixed(1)}KB  "${p.seoTitle.slice(0, 54)}"`)
 console.log(
   `css:   ${(css.length / 1024).toFixed(1)}KB  (${(cssBundle.length / 1024).toFixed(1)}KB bundle, less ` +
-    `${fontFaces} @font-face rule(s); Instatic emits its own, see install-fonts.mjs)`,
+    `${fontFaces} @font-face rule(s), which push-site.mjs carries into the token code asset instead)`,
 )
 console.log(`payload ${(payload.length / 1024).toFixed(1)}KB -> gz ${(gz.length / 1024).toFixed(1)}KB -> b64 ${(gz.toString('base64').length / 1024).toFixed(1)}KB`)

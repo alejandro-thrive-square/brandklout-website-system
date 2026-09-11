@@ -143,7 +143,15 @@
 }
 @media (max-width:1023px){
   .tr-grid{grid-template-columns:1fr;gap:2rem}
-  .tr-media{aspect-ratio:16/10;max-height:44svh}
+  /* .tr-media TWICE, on purpose. The reduced-motion block above sets
+     aspect-ratio:auto on the same single class, so locally this wins only
+     because it is written later — and SOURCE ORDER IS NOT A CONTRACT ACROSS
+     THE INSTATIC IMPORT: the cascade is rebuilt out of the style registry and
+     two rules of equal specificity can swap places. Published, the
+     reduced-motion rule won, and a phone with "reduce motion" on rendered the
+     transformation pin 149px taller than the build. (0,2,0) settles it in any
+     order. See trap 20. */
+  .tr-media.tr-media{aspect-ratio:16/10;max-height:44svh}
   .tr-pin{padding-top:calc(var(--nav-h) + 1rem)}
 }
 @media (max-width:767px){.tr-stories{min-height:22rem}.tr-ba img{width:6.5rem}}

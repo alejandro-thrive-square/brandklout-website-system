@@ -57,7 +57,18 @@ ul{margin:0;padding:0;list-style:none}
 .textlink:hover .arrow{transform:translateX(.35rem)}
 
 /* media frames */
-.frame{position:relative;overflow:hidden;background:var(--ground-3)}
+/* min-width:0 so a photograph cannot set the floor of the grid track it sits
+   in. A grid item's automatic minimum is its MIN-CONTENT width, and Instatic
+   publishes every <img> with `width`/`height` attributes, a responsive
+   `srcset` and `sizes="auto"` — so on a published `fr` grid the tracks can be
+   floored at the loaded variants' intrinsic widths rather than at the space
+   available. `.su-strip` is `1.2fr 1fr .8fr` and its three variants plus gaps
+   land within a pixel of the wrap they sit in. Nothing visible has been traced
+   to it (the residual compare-live margin finding turned out to be a
+   getComputedStyle artifact, not a layout difference — see the directive), and
+   it changes nothing locally; it is here because trap 24 is real and this is
+   the cheap side of it. */
+.frame{position:relative;overflow:hidden;background:var(--ground-3);min-width:0}
 .frame img,.frame video{width:100%;height:100%;object-fit:cover}
 .frame--tall{aspect-ratio:4/5}
 .frame--wide{aspect-ratio:16/9}

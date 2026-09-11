@@ -17,23 +17,45 @@
  *
  * Usage: node verify-live.mjs
  */
-/* The railway host was detached when westlaketxmedspa.com was connected (2026-09-10) and now 404s. */
-const BASE = (process.env.INSTATIC_BASE_URL || 'https://westlaketxmedspa.com').replace(/\/$/, '')
+/* This file used to carry the target host as a literal default and read no
+   `.env` at all, which is fine right up until the toolkit is copied — the
+   sibling's copy would then have crawled the sibling's domain and reported it
+   green. Resolve it the way every other script here does, and refuse without
+   it: a gate pointed at the wrong site is worse than no gate. */
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+{
+  let dir = path.dirname(fileURLToPath(import.meta.url))
+  for (let i = 0; i < 12; i++) {
+    const c = path.join(dir, '.env')
+    if (fs.existsSync(c)) {
+      for (const line of fs.readFileSync(c, 'utf8').split(/\r?\n/)) {
+        const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)$/)
+        if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '')
+      }
+      break
+    }
+    const up = path.dirname(dir)
+    if (up === dir) break
+    dir = up
+  }
+}
+const BASE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
+if (!BASE) throw new Error('INSTATIC_BASE_URL is not set')
 
-/* ELEVEN ROUTES — the eleven core pages of the second build, one per subtask on
-   Asana task 1218112701145002. Every slug is the static build's filename minus
-   `.html`, except `index.html`, which Instatic serves at `/`.
+/* ONE ROUTE. West LA Implants is a single scrolling document: eight chapters in
+   one `index.html`, which Instatic serves at `/`. There is no second slug.
 
    Note what this gate can and cannot tell you. It verifies the routes below are
    healthy. It CANNOT tell you an unlisted route is gone, because a route absent
    from this list is simply not checked — GONE exists for that half.
 
-   Add the six remaining treatment dossiers here the day they are published;
-   `botox` is the only one built so far and it is the template for the rest. */
-const ROUTES = ['/', '/treatments', '/botox', '/results', '/membership', '/financing', '/meet-the-doctor', '/team', '/about', '/book', '/thank-you']
+   Add a line here the day a second page is built. */
+const ROUTES = ['/']
 
 /* Nothing has ever been retired here. This instance was provisioned on
-   2026-09-04 and its first publish was this site, so there is no earlier slug
+   2026-09-10 and its first publish was this site, so there is no earlier slug
    to have gone stale. Fill this in the first time a page is deleted rather than
    overwritten — an empty list is a true statement, not an unfinished one. */
 const GONE = []
@@ -92,27 +114,79 @@ for (const route of ROUTES) {
     const userHref = (html.match(/\/_instatic\/css\/userStyles-[a-f0-9]+\.css/) ?? [])[0]
     if (!styleHref) fails.push('no style registry stylesheet on the homepage')
     if (!userHref) fails.push('no userStyles stylesheet — the token layer is missing')
+    /* THE TREE SHAKE, asked about THIS site's runtime classes rather than the
+       sibling's navbar. `styleRuleTreeShake.ts` drops any class-kind rule whose
+       id no node carries, and every ambient rule that so much as mentions it —
+       which is why `push-site.mjs` demotes the unassigned ones to ambient. The
+       classes this page's own script adds at runtime are the ones at risk, and
+       each is here because a rule in `site-src/css/` styles it. */
     if (styleHref) {
       const css = await (await fetch(BASE + styleHref)).text()
-      const navRules = (css.match(/navbar_component:not/g) ?? []).length
-      if (navRules < 6) {
-        fails.push(`only ${navRules}/6 navbar state rules survived the tree shake`)
+      for (const cls of ['is-solid', 'is-open', 'is-locked', 'is-link', 'wz-smooth', 'wz-line', 'reveal-mask']) {
+        if (!css.includes(cls)) fails.push(`runtime class .${cls} was tree-shaken out of the published registry`)
       }
     }
+    /* THE TOKEN LAYER, derived from the build rather than typed here. The
+       sibling listed four token names by hand and every one of them belongs to
+       a different site; copied unchanged, this gate failed a perfectly good
+       publish four times over. Every custom property the build declares must
+       be in the asset — that is the actual invariant push-site.mjs enforces
+       before it writes, and this is the same question asked of the live CSS. */
     if (userHref) {
       const css = await (await fetch(BASE + userHref)).text()
-      for (const token of ['--ivory', '--space-large', '--font-display', '--green-ink']) {
-        if (!css.includes(token)) fails.push(`token ${token} missing from userStyles`)
+      const cssDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../04-design/.tmp/site-src/css')
+      const declared = [
+        ...new Set(
+          fs
+            .readdirSync(cssDir)
+            .filter((n) => n.endsWith('.css'))
+            .flatMap((n) => [
+              ...fs.readFileSync(path.join(cssDir, n), 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ').matchAll(/(^|[;{])\s*(--[a-zA-Z0-9-]+)\s*:/g),
+            ].map((m) => m[2]),
+          ),
+        ),
+      ]
+      const missing = declared.filter((t) => !css.includes(t + ':'))
+      if (missing.length) fails.push(`${missing.length} token(s) missing from userStyles: ${missing.join(', ')}`)
+
+      /* The three VARIABLE faces. They are media uploads here, not Instatic
+         font-library entries (see push-site.mjs), so nothing but this asset
+         declares them — and a dead @font-face is invisible: the family name
+         still resolves and the browser falls back to Georgia. */
+      const faces = (css.match(/@font-face/g) ?? []).length
+      if (faces < 3) fails.push(`only ${faces}/3 @font-face rules in userStyles — the variable fonts are not declared`)
+      for (const m of css.matchAll(/@font-face[\s\S]*?src:\s*url\(["']?([^"')]+)/g)) {
+        const status = await head(m[1].startsWith('http') ? m[1] : BASE + m[1])
+        assetsChecked++
+        if (status >= 400) fails.push(`@font-face src ${m[1]} is ${status}`)
       }
     }
     const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
     if (!script) fails.push('no runtime script on the homepage')
     else {
       const js = await (await fetch(BASE + script)).text()
-      if (!/classList\.add\(["']js["']\)/.test(js)) {
-        fails.push('site.js is missing the `js` class bootstrap — scroll reveals will not arm')
+      /* ONE script asset carries GSAP AND the site bundle, in that order
+         (trap 17 / push-site.mjs `VENDOR`). Order is load-bearing and fails
+         SILENTLY when reversed — `00-runtime.js` guards on `window.gsap`, so a
+         reversed bundle produces a page with no smoother and no pins that looks
+         like a design decision. Assert the positions, not just the presence.
+
+         Keyed on CODE, not on the banner comments push-site.mjs writes: the
+         publisher runs the code asset through its own bundler and every comment
+         is gone by the time it is served — the first version of this check
+         looked for `/* ---- site.js ---- *​/` and failed a perfectly good
+         bundle. `window.WZ` is the first thing `js/00-runtime.js` does and is
+         the earliest identifier that belongs to the site bundle, not to GSAP. */
+      const iGsap = js.indexOf('ScrollSmoother')
+      const iSite = js.indexOf('window.WZ')
+      if (iGsap < 0) fails.push('the script asset does not carry GSAP — no smoother, no pins, no splits')
+      if (iSite < 0) fails.push('the script asset does not carry site.js')
+      if (iGsap >= 0 && iSite >= 0 && iGsap > iSite) {
+        fails.push('GSAP is concatenated AFTER site.js — the motion layer will silently not arm')
       }
+      if (!js.includes('wz-ready')) fails.push('site.js is missing the wz-ready bootstrap — reveal masks will not open')
       if (!js.includes('is-open')) fails.push('site.js does not contain the drawer logic')
+      if (!js.includes('data-src')) fails.push('site.js is missing the video data-src hydration — both films will be posters')
     }
   }
 }

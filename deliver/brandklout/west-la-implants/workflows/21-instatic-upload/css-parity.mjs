@@ -38,7 +38,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_CSS = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site/assets/site.css')
+const LOCAL_CSS = path.resolve(HERE, '../04-design/.tmp/site-src/dist/assets/site.css')
 
 function loadEnv() {
   let dir = HERE
@@ -137,6 +137,29 @@ function props(body) {
 
 const norm = (sel) => sel.replace(/\s+/g, ' ').replace(/\s*([>+~,])\s*/g, '$1').trim()
 
+/* A CONDITION NEEDS ITS OWN NORMALISER, and without one this gate was much
+   weaker than it looked.
+
+   `import-run.ts` rewrites every at-rule prelude before conversion — it puts a
+   space after every colon, among other things — so the build's
+   `@media (max-width:1023px)` is published as `@media (max-width: 1023px)`.
+   `norm()` cannot be used here because it is also the SELECTOR normaliser and
+   would turn `a:hover` into `a: hover`.
+
+   The consequence was invisible: every local @media key failed to find its live
+   twin, fell through to the `RbySel` fallback — which asks only whether the
+   selector declares the property ANYWHERE, at any breakpoint — and passed. A
+   responsive override dropped by the conversion would have been reported as
+   present because the unconditional rule declares the same property. Matching
+   the platform's own normalisation is what makes the condition half real. */
+const normCond = (sel) =>
+  sel
+    .replace(/\s+/g, ' ')
+    .replace(/:\s*/g, ': ')
+    .replace(/\(\s+/g, '(')
+    .replace(/\s+\)/g, ')')
+    .trim()
+
 // key = "<media condition or ''>||<one selector>", value = Set(property)
 function index(css) {
   const map = new Map()
@@ -150,7 +173,7 @@ function index(css) {
   }
   const walk = (text, cond) => {
     for (const r of rules(text)) {
-      if (/^@(media|supports|container)\b/.test(r.sel)) walk(r.body, norm(r.sel))
+      if (/^@(media|supports|container)\b/.test(r.sel)) walk(r.body, normCond(r.sel))
       else if (r.sel.startsWith('@')) continue
       else add(cond, r.sel, r.body)
     }

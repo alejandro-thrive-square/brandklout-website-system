@@ -20,7 +20,16 @@ TMP="$HERE/.tmp"
 # parse rather than the variable failing to expand.
 LINK="${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the Railway project for THIS site — check-link.mjs verifies which}"
 
-rs() { ( cd "$LINK" && railway ssh "$@" ); }
+# MSYS_NO_PATHCONV is set HERE and nowhere else.
+#
+# Git Bash rewrites any argument that looks like a POSIX path into a Windows one
+# before a native .exe sees it, so `railway ssh "rm -f /app/x"` arrives on the
+# container as `rm -f C:/Program Files/Git/app/x`. Setting the variable stops
+# that — but setting it for the WHOLE script breaks everything else, because
+# `$HERE` is `/c/Users/…` and `node "$HERE/check-link.mjs"` then hands node a
+# path Windows cannot resolve (`C:\c\Users\…`, MODULE_NOT_FOUND). Scope it to
+# the one call that crosses into the container.
+rs() { ( cd "$LINK" && MSYS_NO_PATHCONV=1 railway ssh "$@" ); }
 
 say() { printf '\n=== %s\n' "$1"; }
 

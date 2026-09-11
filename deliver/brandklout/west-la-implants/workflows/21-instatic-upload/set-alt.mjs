@@ -40,7 +40,7 @@ import { fileURLToPath } from 'node:url'
 import { api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const FINAL = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const FINAL = path.resolve(HERE, '../04-design/.tmp/site-src/dist')
 const TMP = path.join(HERE, '.tmp')
 const apply = process.argv.includes('--apply')
 
@@ -55,7 +55,9 @@ for (const file of fs.readdirSync(FINAL).filter((f) => f.endsWith('.html'))) {
   const html = fs.readFileSync(path.join(FINAL, file), 'utf8')
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     const tag = m[0]
-    const src = (tag.match(/\bsrc="assets\/([^"]+)"/) ?? [])[1]
+    // WEST LA IMPLANTS: this build references `media/img/x.jpg`, not `assets/x`,
+    // and `media-map.json` is keyed by that same dist-relative path.
+    const src = (tag.match(/\bsrc="(media\/[^"]+)"/) ?? [])[1]
     const alt = (tag.match(/\balt="([^"]*)"/) ?? [])[1]
     if (!src || !alt) continue // a deliberately decorative image keeps alt=""
     if (!alts.has(src)) alts.set(src, new Set())

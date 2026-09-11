@@ -26,7 +26,7 @@ import { getSite, getPages, api } from '../../../../process/22-instatic-api-sync
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(HERE, '.tmp')
-const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/site-src/dist')
 
 const apply = process.argv.includes('--apply')
 const force = process.argv.includes('--force')
@@ -39,46 +39,157 @@ const input = JSON.parse(
 const nid = () => crypto.randomBytes(16).toString('base64url').slice(0, 21)
 
 /* --- site.js -------------------------------------------------------------
-   The static build sets `class="js"` on <html> from an inline <head> script,
-   and 39-motion.css hides every [data-reveal] behind that class. Instatic has
-   no custom-head field, and importHtml strips inline scripts anyway, so the
-   class has to come from the bundle instead.
+   NO BOOTSTRAP ON THIS SITE, AND THAT IS THE POINT.
 
-   It is prepended HERE rather than left to the bundle so the failure mode
-   stays the one the design chose: if site.js does not load, `.js` is never
-   set, the reveal rules never match, and every section is simply visible.
-   The alternative — putting `js` on the body node statically — would hide the
-   whole site behind a script that might not arrive.
+   The sibling prepended `document.documentElement.classList.add('js')` here,
+   because its build set that class from an inline `<head>` script that the
+   importer strips and `39-motion.css` hid every `[data-reveal]` behind it.
+   West LA Implants has no `.js` scope at all: the reveal masks key on
+   `html.wz-ready`, which `js/90-boot.js` sets itself as its first statement —
+   so the class arrives from the bundle on BOTH sides with nothing added here.
 
-   The cost is a possible flash on first paint, since the asset runs after
-   parse. That is strictly better than a blank page. */
-const BOOTSTRAP = `/* Added by push-site.mjs — see the comment there before removing.
-   Replaces the static build's inline <head> script, which Instatic strips. */
-document.documentElement.classList.add('js');
-`
-/* THE VENDOR BUNDLE GOES IN FRONT OF IT, added 2026-09-01.
+   Carrying the line over anyway was not free. `compare-live.mjs` compares the
+   runtime scope and reported `the .js scope — local false, live true`: a class
+   on the published document that the build never sets, matching no rule in
+   this stylesheet, and a real (if harmless) divergence between the two copies.
+   A bootstrap that no rule consumes is dead code with a false positive
+   attached, so it is empty rather than deleted, with this note in its place. */
+const BOOTSTRAP = ''
 
-   The static build keeps GSAP + ScrollTrigger + SplitText in a separate
-   `vendor.js` that only pages with `motion: true` request, so the neck lift
-   page never downloads 122KB it has no use for. **Instatic has one script asset
-   for the whole site**, so the split cannot survive the import and both
-   published pages carry the vendor bundle. That is a real regression against
-   the static build and it is recorded here rather than quietly absorbed; the
-   split still pays on any host that serves the files as they are.
+/* GSAP GOES IN FRONT OF site.js, ALL SIX FILES, IN THIS ORDER.
 
-   ORDER IS LOAD-BEARING. `js/10-journey.js` reads `window.gsap` at call time
-   and guards on it, so a reversed order does not throw — it silently produces a
-   home page with no pinned chapter and no split headlines, which looks like a
-   design decision. Vendor first, always.
+   West LA Implants vendors GSAP 3.15 into `dist/assets/gsap/` and loads the six
+   files with six <head> tags, deliberately: a published Instatic page carries
+   `default-src 'self'; script-src 'self'`, so a CDN is blocked outright and
+   there is no custom-head field to declare one in anyway.
 
-   `build-import-input.mjs` strips the page-level `<script src="assets/vendor.js">`
-   for the same reason it strips site.js. */
-const vendorJs = fs.readFileSync(path.join(SITE_SRC, 'assets', 'vendor.js'), 'utf8')
+   **Instatic has ONE script asset for the whole site**, `src/scripts/site.js`,
+   so the six tags cannot survive the import — `build-import-input.mjs` strips
+   them and they are concatenated here instead.
+
+   ORDER IS LOAD-BEARING AND FAILS QUIETLY WHEN IT IS WRONG. gsap first, then
+   ScrollTrigger, then the plugins that depend on it; ScrollSmoother in
+   particular reads ScrollTrigger at definition time. `js/00-runtime.js` reads
+   `window.gsap && window.ScrollTrigger` at call time and GUARDS on it, so a
+   reversed order does not throw — it produces a page with no smoother, no pins
+   and no split headlines, which reads as a design decision.
+
+   Draggable and InertiaPlugin are vendored but NOT loaded by the build's own
+   <head>, so they are not here either: the list mirrors index.html exactly.
+
+   The runtime registers the plugins ITSELF at the end of `js/90-boot.js`
+   (`gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)` …) — deliberately,
+   because registering ScrollTrigger before `document.body` exists leaves
+   ScrollSmoother dead on getScrollFunc. Do NOT add a registration bootstrap. */
+const VENDOR = [
+  'gsap.min.js',
+  'ScrollTrigger.min.js',
+  'ScrollToPlugin.min.js',
+  'ScrollSmoother.min.js',
+  'SplitText.min.js',
+  'Observer.min.js',
+]
+{
+  // The one thing that would silently halve this bundle is a filename that
+  // moved. Assert, rather than let `readFileSync` throw a bare ENOENT.
+  const have = new Set(fs.readdirSync(path.join(SITE_SRC, 'assets', 'gsap')))
+  const gone = VENDOR.filter((f) => !have.has(f))
+  if (gone.length) {
+    console.error(`REFUSING: dist/assets/gsap is missing ${gone.join(', ')}`)
+    process.exit(1)
+  }
+  // And a tag in index.html that this list does not carry would publish a page
+  // whose motion layer is missing exactly one plugin.
+  const inHtml = [
+    ...fs
+      .readFileSync(path.join(SITE_SRC, 'index.html'), 'utf8')
+      .matchAll(/<script[^>]+src="assets\/gsap\/([^"]+)"/g),
+  ].map((m) => m[1])
+  const missed = inHtml.filter((f) => !VENDOR.includes(f))
+  if (missed.length) {
+    console.error(`REFUSING: index.html loads ${missed.join(', ')} and VENDOR does not carry it.`)
+    process.exit(1)
+  }
+}
+/* --- TRAP 36: THE PUBLISHER BUNDLES THE SCRIPT ASSET AS CommonJS, AND EVERY
+       UMD THEN EXPORTS TO `exports` INSTEAD OF TO `window`.
+
+   FOUND 2026-09-10 by `verify-motion-live.mjs`, which is the only gate that
+   runs the page. `window.SplitText` and `window.Observer` were **undefined on
+   the published site** while `window.gsap`, `ScrollTrigger`, `ScrollToPlugin`
+   and `ScrollSmoother` were all present — so the page pinned and scrubbed
+   correctly and the split headlines simply never split. The reality chapter's
+   nineteen words, which light one at a time as its pin scrubs, published as one
+   static paragraph at full opacity. Nothing failed: `WZ.splitWords` catches and
+   returns null, and the timeline then tweens the paragraph itself.
+
+   The mechanism is visible in the published bundle. Instatic runs the code
+   asset through esbuild as a CommonJS module, and esbuild REWRITES a top-level
+   `this` to `exports`. Every GSAP file is a UMD that begins
+
+       typeof exports == "object" && typeof module != "undefined" ? A(exports)
+         : … : (k = globalThis, A(k.window = k.window || {}))
+
+   and is invoked as `})(this, function (k) {…})`. Published, every one of the
+   six reads `})(exports, function (k) {…})` and takes the FIRST branch: the
+   library attaches itself to the module's exports object, which nothing ever
+   reads, and never touches `window`.
+
+   Four of the six survived by accident and that is why this was so quiet:
+   gsap's core puts itself on `window` from the inside, and ScrollTrigger,
+   ScrollToPlugin and ScrollSmoother each call `gsap.registerPlugin`, which
+   re-exposes them globally. SplitText is not a gsap plugin and registers
+   nothing; the standalone Observer is shadowed by ScrollTrigger's own internal
+   copy (it appears in `gsap.core.globals()` as `Observer2`, which reads like
+   success). So the two files with no self-registration are exactly the two that
+   vanished — and ONLY a gate that scrolls the live page can see it.
+
+   **Fix: give each file a scope where `exports`, `module` and `define` are all
+   undefined, and where `this` is `window`.** The UMD's own browser branch then
+   runs unchanged. Shadowing by parameter is deliberate — it cannot be defeated
+   by whatever the outer bundle declares, and `.call(window, …)` restores the
+   `this` esbuild rewrote. Nothing about the libraries is patched.
+
+   AND THE GLOBAL IT IS HANDED CANNOT BE `window` ITSELF. The first version of
+   this wrapper passed `window` as `this` and the whole bundle died on the first
+   line of gsap with
+
+       Cannot set property window of #<Window> which has only a getter
+
+   because the UMD's browser branch is `t((t = t || self).window = t.window ||
+   {})` — it writes `window.window`, which is an accessor with no setter. In a
+   classic `<script>` that assignment fails SILENTLY, sloppy-mode style, and the
+   expression still evaluates to `window`. **Instatic serves the script asset as
+   `<script type="module">`, and a module is always strict**, so the same line
+   throws and takes every library with it. So the shim is a plain object whose
+   `window` property is writable and already IS window: the UMD writes to the
+   shim, reads `window` back out, and hands the real global to the factory.
+
+   `globalThis` and `self` are shadowed by the same object for the same reason —
+   SplitText's UMD prefers `globalThis` and ignores `this` entirely, and it
+   would walk straight back into `window.window`. Both names appear in these
+   files ONLY in that UMD line (checked: `globalThis` twice in SplitText, `self`
+   once per file, all in the prelude), so shadowing them reaches nothing else.
+
+   `verify-motion-live.mjs` asserts all six globals now. Do not remove the
+   wrapper without re-running it. */
+const VENDOR_SHIM = '__wzUmdGlobal'
+const vendorJs =
+  `/* The UMD shim — see the note in push-site.mjs. NOT window itself: a module\n` +
+  `   is strict, and \`window.window = …\` throws there. */\n` +
+  `var ${VENDOR_SHIM} = { window: window };\n` +
+  VENDOR.map(
+    (f) =>
+      `/* ---- ${f} ---- */\n` +
+      `;(function (exports, module, define, globalThis, self) {\n` +
+      fs.readFileSync(path.join(SITE_SRC, 'assets', 'gsap', f), 'utf8') +
+      `\n}).call(${VENDOR_SHIM}, void 0, void 0, void 0, ${VENDOR_SHIM}, ${VENDOR_SHIM});\n`,
+  ).join('\n')
 const siteJs =
   BOOTSTRAP +
-  '/* ---- vendor.js, concatenated by push-site.mjs: Instatic has one script asset. ---- */\n' +
+  '/* ---- GSAP, concatenated by push-site.mjs: Instatic has one script asset. ---- */\n' +
   vendorJs +
-  '\n/* ---- site.js ---- */\n' +
+  '\n;\n/* ---- site.js ---- */\n' +
   fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8')
 
 /* --- the token layer -----------------------------------------------------
@@ -107,7 +218,7 @@ const siteJs =
 
    Source files, verbatim and in order — keep them in step with site-src/css/. */
 const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
-const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/site-src/css')
+const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/site-src/css')
 
 /* --- AND EVERY OTHER :root BLOCK, harvested ------------------------------
    FOUND ON THE PUBLISHED SITE, 2026-09-01. The two files above were the whole
@@ -322,7 +433,14 @@ function harvestLossy(files) {
     }
     return n
   }
-  const LAYERABLE = /^(?:background|background-image|mask|mask-image|-webkit-mask-image)$/
+  /* The comma-layered background LONGHANDS go in too, added 2026-09-10 for West
+     LA Implants after `css-parity.mjs` reported `.in-fields select
+     {background-position}` missing. The select's dropdown arrow is drawn as two
+     gradient triangles, so `background-image`, `background-position` and
+     `background-size` are each two comma-separated layers; only the image half
+     was covered, and half a layered background is not a smaller bug than none
+     of it — the two triangles land on top of each other in the wrong corner. */
+  const LAYERABLE = /^(?:background|background-image|background-position(?:-x|-y)?|background-size|background-repeat|mask|mask-image|mask-position|mask-size|-webkit-mask-image)$/
 
   /* AND PROPERTIES THE CONVERSION DOES NOT KNOW AT ALL, which it drops without
      a word. FOUND 2026-09-04 by css-parity.mjs — the only one of the three
@@ -338,11 +456,42 @@ function harvestLossy(files) {
      This list is not a guess and it is not exhaustive. It is what
      `css-parity.mjs` reported missing on a real publish; run that after any
      change to the stylesheets and add whatever it names. */
-  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$))/
+  /* `font-variation-settings` is added for West LA Implants, PRE-EMPTIVELY. All
+     three faces here are variable woff2 and `.display` / `.h2` set `opsz` by
+     hand; if the converter does not know the property, the headline publishes
+     at the default optical size and looks like a slightly different typeface
+     rather than like a dropped declaration. It costs one line in the asset and
+     `css-parity.mjs` confirms it either way. */
+  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$)|font-variation-settings$)/
+
+  /* TWO MORE VALUE SHAPES, both found by `css-parity.mjs` on West LA Implants'
+     first publish. The pattern is trap 21's: the engine that decides what
+     survives is happy-dom's, not a browser's, and what it rejects is a matter
+     of fact rather than of reasoning — so the gate names them and they are
+     added here.
+
+     `!important`. `02-base.css` kills every animation under
+     `prefers-reduced-motion` with
+     `*,*::before,*::after{animation-duration:.001ms!important; …}`. All three
+     declarations were dropped; `scroll-behavior:auto!important` in the same
+     rule survived only because `DROPPED` had already claimed the property.
+     A site whose reduced-motion escape hatch is silently gone still passes
+     every other gate, because no gate has ever run with the preference set.
+
+     VIEWPORT-RELATIVE UNITS OF THE svh/lvh/dvh FAMILY. `.pr-pin{height:100svh}`
+     published without a height, which on a PINNED section is not a cosmetic
+     loss — it is the pin's own measurement. `.an-pin{min-height:100svh}` in the
+     same stylesheet survived, exactly as trap 21 says: `min-height` keeps what
+     `height` rejects, and there is no rule to infer. Cover the unit wherever it
+     appears rather than the one property that happened to be caught. */
+  const IMPORTANT = /!\s*important/i
+  const NEWVIEWPORT = /\b\d*\.?\d+(?:s|l|d)v(?:h|w|b|i|min|max)\b/i
 
   const isLossy = (prop, value) =>
     (MATH.test(value) && !SAFE.test(value)) ||
     (LAYERABLE.test(prop) && layers(value) > 1) ||
+    IMPORTANT.test(value) ||
+    NEWVIEWPORT.test(value) ||
     DROPPED.test(prop)
   const rules = (text) => {
     const found = []
@@ -423,10 +572,75 @@ for (const f of fs.readdirSync(CSS_SRC).filter((n) => n.endsWith('.css')).sort()
   if (blocks.length) harvested.push({ file: f, blocks })
 }
 
+/* --- AND THE THREE @font-face RULES ---------------------------------------
+   WEST LA IMPLANTS ONLY. The sibling put its typefaces into Instatic's own font
+   library with `install-fonts.mjs` and let the publisher emit the @font-face
+   rules; `build-import-input.mjs` excised them from the payload and asserted
+   none survived.
+
+   That road is closed here. Instatic's installer downloads Google's STATIC
+   instances and silently ignores `font-variation-settings`, and all three faces
+   in this build are VARIABLE woff2: Bodoni Moda at `font-weight: 400 900`
+   upright and italic, Manrope at `200 800`, with `.display` and `.h2` setting
+   an `opsz` axis by hand. Installed statically the headline loses its optical
+   size and every weight between the named cuts, and NOTHING FAILS — the family
+   name still resolves and the page renders in a nearby weight.
+
+   So the woff2 files are uploaded as ordinary media (`font/woff2` is an
+   accepted mime; see upload-media.mjs) and the rules travel here, in the code
+   asset, verbatim and never parsed by happy-dom — the same road the tokens
+   take, for the same reason. `url('../fonts/x.woff2')` is rewritten to the
+   uploaded `/uploads/…` path, because a RELATIVE url() in published CSS
+   resolves against `/_instatic/css/` and 404s invisibly (trap 14).
+
+   Read from the SOURCE file rather than the bundle, so the block that lands
+   here is the block a human wrote. */
+const fontFaces = (() => {
+  const src = fs.readFileSync(path.join(CSS_SRC, '01-tokens.css'), 'utf8')
+  const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
+  const blocks = [...src.matchAll(/@font-face\s*\{[^}]*\}/g)].map((m) => m[0])
+  if (!blocks.length) {
+    console.error('REFUSING: no @font-face rules in 01-tokens.css. The three variable faces would fall back to Georgia.')
+    process.exit(1)
+  }
+  const out = blocks.map((b) =>
+    b.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, (whole, _q, ref) => {
+      if (/^(data:|https?:|\/)/.test(ref)) return whole
+      // `../fonts/manrope-var.woff2` from site-src/css/ -> the media-map key.
+      const key = ref.replace(/^\.\.\//, '')
+      const hit = mediaMap[key] ?? mediaMap[path.basename(ref)]
+      if (!hit) {
+        console.error(`REFUSING: @font-face url(${ref}) has no media-map entry. Upload the woff2 with upload-media.mjs first.`)
+        process.exit(1)
+      }
+      return `url("${hit.url}")`
+    }),
+  )
+  /* Extract each url() and test its TARGET. Written as a lookahead first —
+     `/url\(\s*['"]?(?!\/|https?:|data:)/` — which is wrong in a way worth
+     recording: `['"]?` is optional, so on `url("/uploads/…")` the engine
+     backtracks it to empty, finds `"` in front of the lookahead, sees that a
+     quote is not a slash, and reports a perfectly rewritten rule as relative.
+     An optional group in front of a negative lookahead always has that escape. */
+  for (const b of out) {
+    for (const m of b.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)) {
+      if (!/^(data:|https?:|\/)/.test(m[2])) {
+        console.error(`REFUSING: a relative url(${m[2]}) survived the @font-face rewrite:\n${b}`)
+        process.exit(1)
+      }
+    }
+  }
+  console.log(`fonts      ${out.length} @font-face rule(s) into the token asset, pointing at /uploads (variable woff2, not Instatic's static instances)`)
+  return out.join('\n')
+})()
+
 const tokensCss =
   `/* Token primitives, pushed as a code asset by push-site.mjs.\n` +
   `   These CANNOT live in the style registry: happy-dom drops --custom-property\n` +
   `   declarations during conversion, silently. Edit site-src/css/ and re-push. */\n\n` +
+  `/* ===== @font-face, rewritten to the uploaded variable woff2 ===== */\n` +
+  fontFaces +
+  '\n\n' +
   // THE TOKEN FILES GO THROUGH THE SAME FILTER, not in verbatim. They used to
   // be pasted whole, which is how `[data-theme="dark"] { background-color }`
   // reached the end of the cascade — see the note in harvestRoots.
@@ -496,6 +710,12 @@ const tokensCss =
   console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of the pairs the conversion is lossy on (math values, multi-layer backgrounds, properties it drops outright), from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
 }
 
+/* The token asset is the one payload here nobody can read back without
+   publishing, and three of this workflow's worst defects were in it. Write it
+   to `.tmp/tokens.css` on every run, dry or not, so it can be diffed and read
+   BEFORE it is live. */
+fs.writeFileSync(path.join(TMP, 'tokens.css'), tokensCss)
+
 /* --- read current state --------------------------------------------------- */
 const { site, seq } = await getSite()
 const existingPages = (await getPages()).rows ?? []
@@ -559,6 +779,99 @@ const now = Date.now()
   )
 }
 
+/* --- TRAP 35: `base.video` KEEPS NINE PROPS AND THROWS THE REST OF THE TAG AWAY
+   FOUND 2026-09-10, on this build's first publish, by reading the published
+   HTML. Two `<video>` elements went in and this came out:
+
+       <video class="ar-film">        <video>
+
+   No `id`, no `poster`, no `src`, no `data-src`, no `aria-label`, no `muted`,
+   no `loop`, no `playsinline`. Both films were a blank black box, and nothing
+   failed: `verify-live.mjs` checks the assets the markup references and the
+   markup referenced none.
+
+   THIS IS TRAP 22 (`<input type=range>` publishes as `type=text`) IN ITS
+   GENERAL FORM, and it is worth stating that way. `importHtml` maps a tag onto
+   a MODULE, and a typed module has a FIXED PROP SCHEMA: `base.video` is
+   `{videoUrl, poster, autoplay, loop, muted, controls, playsinline, preload,
+   title, noRelatedVideos}` and there is nowhere for anything else to go — the
+   importer does not even park the leftovers in `htmlAttributes`. A plain
+   `<div>` or `<section>` keeps every attribute it arrived with (this page's 8
+   `data-chapter`s, 9 `data-anim`s and 50 ids all published untouched), because
+   those map to `base.container`, whose whole schema is `{tag, customTag,
+   htmlAttributes}`.
+
+   **So the escape hatch is base.container, and the platform itself uses it.**
+   `rules.ts` maps a non-YouTube `<iframe>` to
+   `{ moduleId: 'base.container', props: { tag: 'custom', customTag: 'iframe' } }`
+   with the comment "so their src/attributes are preserved via htmlAttributes".
+   A `<video>` driven by a script rather than by the Properties panel wants
+   exactly that treatment, so it is given it here: the node is re-pointed at
+   `base.container` and the ORIGINAL tag's attributes are restored verbatim from
+   the payload `build-import-input.mjs` shipped — which is the post-rewrite
+   markup, so every path is already a `/uploads/…` URL.
+
+   Doing it here rather than in the markup is deliberate. The alternative was to
+   ship a `<div data-video>` and have the boot script build the element, the way
+   `12-elevate.js` builds the med spa's range input — but that puts an
+   Instatic-shaped compromise into a static build that renders perfectly without
+   one, and it costs the `<video>` its poster on first paint. Restoring the tag
+   at import time keeps `site-src/` honest and keeps LOCAL AND PUBLISHED
+   IDENTICAL, which is what every gate downstream assumes.
+
+   Paired in DOCUMENT ORDER, walked from the root rather than read off
+   `Object.keys(nodes)`, because the insertion order of a node map is an
+   implementation detail of the importer and pairing the wrong film with the
+   wrong poster would look like nothing at all. */
+{
+  const VIDEO_TAG_RE = /<video\b[^>]*>/g
+  const ATTR_RE = /([a-zA-Z_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+)))?/g
+  // class and style are the module's own business (classIds carries the class,
+  // and the registry carries the style); the platform refuses them by name.
+  const RESERVED = new Set(['class', 'style'])
+  let revived = 0
+  for (const p of converted.pages) {
+    const html = input.pages.find((x) => x.slug === p.slug)?.html ?? ''
+    const tags = html.match(VIDEO_TAG_RE) ?? []
+
+    // Document order, from the root down.
+    const order = []
+    const walk = (id) => {
+      const n = p.nodes[id]
+      if (!n) return
+      if (n.moduleId === 'base.video') order.push(n)
+      for (const c of n.children ?? []) walk(c)
+    }
+    walk(p.rootNodeId)
+
+    if (order.length !== tags.length) {
+      console.error(
+        `REFUSING: ${p.slug} has ${order.length} base.video node(s) but ${tags.length} <video> tag(s) in the payload. ` +
+          `Pairing by position would put the wrong film in the wrong place.`,
+      )
+      process.exit(1)
+    }
+    for (let i = 0; i < order.length; i++) {
+      const node = order[i]
+      const attrs = {}
+      for (const m of tags[i].slice('<video'.length, -1).matchAll(ATTR_RE)) {
+        const name = m[1].toLowerCase()
+        if (RESERVED.has(name)) continue
+        // A boolean attribute (`muted`, `loop`, `playsinline`) has no value and
+        // renders as `muted=""`, which is true in HTML.
+        attrs[name] = m[2] ?? m[3] ?? m[4] ?? ''
+      }
+      node.moduleId = 'base.container'
+      node.props = { tag: 'custom', customTag: 'video', htmlAttributes: attrs }
+      revived++
+    }
+  }
+  console.log(
+    `video      ${revived} <video> restored as base.container[customTag=video] with every attribute ` +
+      `(base.video keeps nine props and drops id, data-src and the rest — see the note above)`,
+  )
+}
+
 const shell = {
   ...site,
   styleRules: converted.styleRules,
@@ -618,6 +931,22 @@ const shell = {
         throw new Error('no seoDescription for the index page — seo.json is missing pages.index.description')
       })(),
     language: 'en',
+    /* THE FAVICON, which is the only console error a clean publish otherwise
+       has. `buildDocumentMetaTags` emits `<link rel=icon>` from this SITE-level
+       field and from nothing else (trap 31), so without it every page answers
+       404 for `/favicon.ico` and the tab shows a generic mark.
+       The med spa left it empty on purpose — that brand had no logo and an
+       invented favicon would have read as a proposed mark. This one does: the
+       practice's own icon ships in the build as `media/img/logo-icon-dark.png`
+       and is already in the media library, so this is the client's mark, not a
+       new one. Read from the media map rather than pasted, so a re-upload that
+       changes the id cannot leave a dead link here. */
+    faviconUrl: (() => {
+      const m = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
+      const hit = m['media/img/logo-icon-dark.png']
+      if (!hit) throw new Error('logo-icon-dark.png is not in media-map.json — run upload-media.mjs')
+      return hit.url
+    })(),
   },
 }
 
@@ -663,7 +992,7 @@ const body = {
 
 const bytes = Buffer.byteLength(JSON.stringify(body))
 console.log(`shell      styleRules ${Object.keys(shell.styleRules).length}, conditions ${(shell.conditions ?? []).length}, files ${shell.files.length}`)
-console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (bootstrap + vendor ${(vendorJs.length / 1024).toFixed(1)}KB + bundle)`)
+console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (GSAP ${(vendorJs.length / 1024).toFixed(1)}KB + site bundle)`)
 console.log(`pages      ${pages.length} written, ${deletedPageIds.length} deleted`)
 for (const p of pages) console.log(`   ${p.slug.padEnd(18)} ${Object.keys(p.nodes).length} nodes  id=${p.id}`)
 console.log(`payload    ${(bytes / 1024 / 1024).toFixed(2)}MB`)

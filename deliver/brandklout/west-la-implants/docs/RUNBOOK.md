@@ -14,20 +14,26 @@ client's own Instatic instance so Brandklout can send a link.
 
 Start at [`project-overview.md`](./project-overview.md).
 
-## Status: HOMEPAGE BUILT, INSTANCE LIVE — the push is the current run
+## Status: PUBLISHED — the homepage is live on the client's Instatic instance
 
-**2026-09-10.** The homepage exists at `workflows/04-design/.tmp/site-src/` (`node build.mjs` →
-`dist/`), passes every gate in `DESIGN-STANDARD.md` (journey audit, fluid root, scrub proof on four
-pins, six breakpoints with zero overflow, no console errors). The Instatic instance is
-`https://west-la-implants-production.up.railway.app` (Railway project `a55b5cac…`, service
-"West LA Implants", provisioned name-first with `22-instatic-api-sync/provision-instance.mjs`;
-admin bootstrapped; registered in `sites.json` and the master credential file). The upload
-toolkit is copied into `workflows/21-instatic-upload/` and the push is in progress — see the
-newest runbook entry for the live-verification numbers.
+**2026-09-10.** <https://west-la-implants-production.up.railway.app/> serves the eight-chapter
+homepage. `{"publishedPages":1}`, 560 nodes, 272 style rules, 52 media assets (44 images, 5 mp4
+films, 3 variable woff2), alt text on 19 photographs, favicon set.
 
-Research is complete: the client scrape (91 pages, 102 MB of assets, local again), three
-competitors scraped in full (Wilshire Oral Surgery, Santa Monica OMS, Implant Center LA), and
-`01-content-intake/.tmp/gap-analysis/HOMEPAGE-GAP-ANALYSIS.md` is the blueprint the build follows.
+All five live gates pass: `verify-live.mjs` clean, `css-parity.mjs` **FAIL none**,
+`compare-live.mjs` down to the trap-37 artifact only, `visual-diff.mjs` bands all video frames or
+image re-encoding, and **`verify-motion-live.mjs` — the new fifth gate, the only one that drives the
+published page — FAIL none**: ScrollSmoother, four pins, the reality scrub, the precision iris, the
+story swap, both variable typefaces loaded, the hero film playing, zero console errors, no overflow
+at 390.
+
+The homepage source is still the source of truth at `workflows/04-design/.tmp/site-src/`
+(`node build.mjs` → `dist/`); the Instatic admin is NOT. Any re-import runs with `--force` and
+overwrites anything edited in the CMS.
+
+Research is complete: the client scrape (91 pages, 102 MB of assets), three competitors scraped in
+full, and `01-content-intake/.tmp/gap-analysis/HOMEPAGE-GAP-ANALYSIS.md` is the blueprint the build
+follows.
 
 ## Where things are
 
@@ -38,7 +44,8 @@ competitors scraped in full (Wilshire Oral Surgery, Santa Monica OMS, Implant Ce
 | Media for the build | `site-src/media/` (video encodes + stills, gitignored), `site-src/fonts/` (variable woff2, gitignored) |
 | Asset mirror | `workflows/03-graphic-resources/.tmp/downloads/` (gitignored; catalogue in `ASSETS.md`) |
 | Research | `workflows/01-content-intake/.tmp/` — `current-site-scrape/`, `competitor-scrape/<domain>/`, `gap-analysis/`, `homepage-screenshots/` |
-| Upload toolkit | `workflows/21-instatic-upload/` (Stone Med Spa lineage; link dir in `.tmp/railway-link`) |
+| Upload toolkit | `workflows/21-instatic-upload/` (Stone Med Spa lineage, retargeted; directive `21-instatic-upload.md`; link dir in `.tmp/railway-link`) |
+| SEO source | `workflows/04-design/.tmp/site-src/seo.json` — origin, `<title>`, meta description |
 | QA captures | `workflows/08-qa/.tmp/screenshots/home/` (local build), `…/live/` (published) |
 | Instatic admin | `https://west-la-implants-production.up.railway.app/admin` — owner account, shared password (`INSTATIC_PASSWORD_MASON_PARK` in the master file) |
 
@@ -53,10 +60,19 @@ competitors scraped in full (Wilshire Oral Surgery, Santa Monica OMS, Implant Ce
 
 ## Traps
 
-Read the **Gotchas** in the newest runbook entry. The ones that will bite again: pipe nothing out
-of a Node 24 script that talks to Railway (libuv assertion); capture full pages only under
-reduced motion; the B-roll has blank frames that the encodes trim; journey-audit caps chapters at
-eight.
+Read the **Gotchas** in the newest runbook entry, and
+[`workflows/21-instatic-upload/21-instatic-upload.md`](../workflows/21-instatic-upload/21-instatic-upload.md)
+before touching the upload — it carries forty of them, all found the hard way, and every single one
+answered 200 while doing the wrong thing.
+
+The ones that will bite again here: a typed Instatic module keeps only its own props and silently
+discards the rest of the tag (`<video>`, `<input>`, `alt`); the published script asset is bundled as
+CommonJS and served as a module, so a UMD that is not wrapped never reaches `window`; `!important`,
+`svh`, bare `clamp()/min()/max()`, multi-layer backgrounds and custom properties are all dropped by
+the CSS conversion; source order is not a contract across the import; `MSYS_NO_PATHCONV=1` belongs
+on the `railway ssh` call and nowhere else; pipe nothing out of a Node 24 script that talks to
+Railway (libuv assertion); capture full pages only under reduced motion; the B-roll has blank frames
+that the encodes trim; journey-audit caps chapters at eight.
 
 ## Version Control
 

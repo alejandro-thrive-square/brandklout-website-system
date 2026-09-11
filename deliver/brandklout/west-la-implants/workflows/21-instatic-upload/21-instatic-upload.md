@@ -1,40 +1,52 @@
-# Workflow: 05 - Instatic Upload (Stone Med Spa)
+# Workflow: 21 - Instatic Upload (West LA Implants)
 
 Takes the static build in
-[`04-design/.tmp/med-spa/final-site`](../04-design/.tmp/med-spa/final-site) and puts it
-into the client's own Instatic instance as an editable site — pages as node trees, CSS as style
-registry rules, images in the media library.
+[`04-design/.tmp/site-src/dist`](../04-design/.tmp/site-src) and puts it into the client's own
+Instatic instance as an editable site — the page as a node tree, CSS as style registry rules,
+photographs, films and typefaces in the media library.
 
 > [!NOTE]
-> **This file arrived as a verbatim copy of Stone Surgical Arts'
-> [`21-instatic-upload.md`](../../../stone-surgical-arts/workflows/21-instatic-upload/21-instatic-upload.md)
-> and its traps 1–25 are that build's, found on that build.** They were all still true here, which
-> is the point of copying them; traps 23 and 24 in particular predicted two of this build's four
-> real defects before anyone looked. Traps 26 onward are this build's own. Where a trap names a
-> page or a stylesheet that does not exist here, it is the sibling's — read the mechanism, not the
-> filename.
+> **This file arrived as a verbatim copy of Stone Med Spa's
+> [`05-instatic-upload.md`](../../../stone-med-spa/workflows/05-instatic-upload/05-instatic-upload.md),
+> which was itself a copy of Stone Surgical Arts'. TRAPS 1–34 ARE THEIRS AND ARE KEPT VERBATIM** —
+> that is the point of copying them, and eight of the thirty-four bit again here before anybody
+> looked. Traps 35 onward are this build's own. Where a trap names a page, a class or a stylesheet
+> that does not exist here, it is a sibling's: **read the mechanism, not the filename.**
+
+## What is different about West LA Implants
+
+Read this before the Execution Steps; five things in this toolkit diverge from the med spa's copy
+and each one is a thing that failed first.
+
+| | Stone Med Spa | **West LA Implants** |
+| :--- | :--- | :--- |
+| **Pages** | eleven | **ONE.** `index.html` — eight chapters in a single scrolling document. Every link on it is an in-page `#anchor`, a `tel:` or off-site, so trap 4's filename→slug rewrite has nothing to do |
+| **Build layout** | `final-site/` with a flat `assets/` | `site-src/dist/` with `assets/`, `media/img/`, `media/video/` and `fonts/`. Every script here is keyed on that shape, and `media-map.json` is keyed by the **dist-relative path** (`media/img/x.jpg`) as well as by basename |
+| **Fonts** | `install-fonts.mjs`, Instatic's own font library | **media uploads.** All three faces are VARIABLE woff2 (`400 900`, `200 800`, plus an `opsz` axis `.display`/`.h2` set by hand) and Instatic's installer creates STATIC instances and ignores `font-variation-settings`. `font/woff2` is an accepted media mime, so the files upload as ordinary media and the three `@font-face` blocks travel in the token code asset with their `url()` rewritten. `install-fonts.mjs` IS NOT RUN — trap 16 is inverted here |
+| **Video** | none | **five mp4s, all uploaded.** `video/mp4` is an accepted mime and `MAX_MEDIA_BYTES` is 50 MB (`server/handlers/cms/mediaUpload.ts`); the largest file is 7.4 MB. Both `<video>` elements needed trap 35 to survive at all |
+| **Motion** | reveal-on-scroll | **the whole page.** GSAP 3.15 vendored (six files), ScrollSmoother, four pinned chapters, SplitText. None of it is visible to the four original gates — see trap 36 and `verify-motion-live.mjs` |
+
+There is no `.js` scope on this site: the reveal masks key on `html.wz-ready`, which
+`js/90-boot.js` sets itself, so `push-site.mjs`'s `BOOTSTRAP` is deliberately EMPTY (trap 10 does
+not apply, and carrying the line over gave `compare-live.mjs` a real finding).
 
 > [!WARNING]
-> **ELEVEN PAGES, PUBLISHED 2026-09-04, `{"publishedPages":11}`, `11 written, 0 deleted`, on a
-> brand-new instance provisioned the same day.** Gates: `verify-live.mjs` clean (11 routes, 81 URLs,
-> 166 asset references, 11/11 distinct titles) · `css-parity.mjs` FAIL none · `visual-diff.mjs`
-> ≤1.6% at 1440 and ≤4.4% at 390, all of it text antialiasing and image re-encoding ·
-> `compare-live.mjs` **36 → 12 → 10 → 2**, and those two are comparison noise whose direction flips
-> between runs (trap 30).
+> **ONE PAGE, PUBLISHED 2026-09-10, `{"publishedPages":1}`, `1 written, 0 deleted`, on an instance
+> provisioned the same day.** 52 media assets (44 images, 5 videos, 3 variable woff2), 560 nodes,
+> 272 style rules, 9 conditions, alt text on 19 photographs.
 >
-> **EIGHT real defects, every one silent, every one behind a 200.** Four found by `compare-live.mjs`
-> and by reading the published `<head>`: the whole site's dark band published in the wrong charcoal
-> (trap 26), two custom properties declared on classes vanished (trap 27), **every image published
-> with `alt=""`** (trap 28), and every page published the SIBLING's meta description (trap 31). One
-> was trap 23 arriving again — a breadcrumb's `&nbsp;` spacing (trap 29).
+> Gates: `verify-live.mjs` clean (1 route, 33 URLs, 36 asset references) · `css-parity.mjs`
+> **FAIL none** · `compare-live.mjs` **7 → 2–4**, all residual findings the `margin-inline`
+> artifact of trap 37 · `visual-diff.mjs` 2.3% at 390 and 4–6% at 1440, every band either an
+> autoplaying video frame or JPEG→WebP re-encoding (trap 38) · `verify-motion-live.mjs`
+> **FAIL none — the published page moves.**
 >
-> **And three that nothing in the workflow could see, which is why it gained two gates.**
-> `visual-diff.mjs` — a plain pixel subtraction — found that a multi-layer `background` loses every
-> layer but the last, so **the scrim over every interior header was gone and `/thank-you` was 56%
-> different** (trap 32). `css-parity.mjs` — which asks whether each declared property arrived at all
-> — found `scroll-padding-top` dropped, meaning every in-page anchor landed under the fixed navbar
-> (trap 34). And two "missing photographs" turned out to be `fullPage: true` screenshots lying
-> (trap 33).
+> **Four real defects, every one silent, every one behind a 200.** Both `<video>` elements
+> published as `<video>` with NO src, poster, id or data-* (trap 35). **SplitText and Observer were
+> never on `window`**, so every split headline published unsplit while the pins scrubbed perfectly
+> (trap 36). Eleven declarations dropped that the med spa's harvest did not cover — `!important`
+> and `svh` (trap 39). And `.tr-media`'s breakpoint lost a cascade race to its own reduced-motion
+> rule, publishing the transformation pin 149px too tall on a phone (trap 20, again).
 
 > [!IMPORTANT]
 > **A THIRD-PARTY SCRIPT TAG CANNOT BE ADDED TO A PAGE. IT GOES IN THE BUNDLE.**
@@ -47,15 +59,19 @@ registry rules, images in the media library.
 > failures because the local build proves it works.
 >
 > There is exactly ONE script asset for the whole site, `src/scripts/site.js`,
-> assembled by `push-site.mjs` as `bootstrap + vendor.js + site.js`. Anything
-> third-party has to be a JS module in `site-src/js/` that injects the tag at
-> runtime. `js/90-bugherd.js` is the worked example: `build-site.mjs`
-> concatenates `js/*.js` in filename order into `assets/site.js`,
-> `push-site.mjs` reads that file, and **no part of this workflow needs
-> changing.** `90-` sorts last and marks it as not-core.
+> assembled by `push-site.mjs` as `the six vendored GSAP files + assets/site.js`,
+> in that order. Anything third-party has to be a JS module in `site-src/js/`
+> that injects the tag at runtime; `build.mjs` concatenates `js/00-*.js`, then
+> `sections/*.js`, then `js/90-*.js` into `dist/assets/site.js`, `push-site.mjs`
+> reads that one file, and **no part of this workflow needs changing.** `90-`
+> sorts last and marks a module as not-core.
 >
 > Anything of that kind should also be HOST-GATED rather than remembered about
-> at launch. See the header of `js/90-bugherd.js`.
+> at launch.
+>
+> And read trap 36 before adding a library: the published asset is served as
+> `<script type="module">` and bundled as CommonJS, so a UMD that has not been
+> wrapped exports into a module scope nothing reads and never reaches `window`.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be
@@ -65,89 +81,79 @@ registry rules, images in the media library.
 
 | | |
 | :--- | :--- |
-| **URL** | `https://stone-med-spa-production.up.railway.app` |
-| **Admin** | `https://stone-med-spa-production.up.railway.app/admin` — verified by `check-origins.mjs`, registered in [`20-instatic-domain-origins/sites.json`](../../../../process/20-instatic-domain-origins/sites.json) |
-| **Railway** | workspace `Brandklout` → project **`Stone Med Spa`** `ad4db12e-eb77-42b8-9021-4e84083fc99d` → service `Stone Med Spa` `001e714b-6bba-4cb4-b4e6-b60117e2ef1d`, env `production` `70523c39-dd75-4438-93bb-2c76f93b4c1a` |
+| **URL** | `https://west-la-implants-production.up.railway.app` |
+| **Admin** | `https://west-la-implants-production.up.railway.app/admin` |
+| **Railway** | workspace `Brandklout` -> project **`West LA Implants`** `a55b5cac-b92d-4653-a9ff-6da522a5c89c` -> service `West LA Implants` `f54653f7-fc7a-41db-8eea-6bfb6bf386c5`, env `production` `5872429f-9ed2-4c15-9597-3479c097eae7` |
 | **Image** | `ghcr.io/corebunch/instatic:latest`, volume `/app/storage`, DB `/app/storage/data/cms.db`, healthcheck `/health`, port 8080 |
-| **Owner** | `alejandro@thrivesquare.com` — the same credentials as Mason Park, created 2026-09-04 |
-| **Credentials** | `INSTATIC_BASE_URL` / `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the repo-root `.env`, generated from `~/.webzite/.env` `[stone-med-spa]` |
+| **Owner** | `alejandro@thrivesquare.com` |
+| **Credentials** | `INSTATIC_BASE_URL` / `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the worktree `.env`, generated from `~/.webzite/.env` `[west-la-implants]`. Never hand-edit a worktree `.env` |
+| **Link dir** | `21-instatic-upload/.tmp/railway-link`, already linked. `export RAILWAY_LINK_DIR` to its ABSOLUTE path before `ship.sh` |
 
-### Provisioning it, in the order that matters
-
-The sibling was created from the Railway dashboard and then **renamed**, which is what taught us the
-ordering: a generated domain is derived from the service name **at creation**, so the sibling's first
-domain was named after the Docker image and `PUBLIC_ORIGIN` had to be moved with it afterwards. This
-instance was created name-first instead, in one script, and was correct from its first boot.
-
-The Railway CLI cannot create a project or name a service, so this goes through
-`backboard.railway.com/graphql/v2` with the token in `~/.railway/config.json`:
-
-1. `projectCreate` `{name: "Stone Med Spa", workspaceId, defaultEnvironmentName: "production"}`
-2. `serviceCreate` `{projectId, environmentId, name: "Stone Med Spa", source: {image: "ghcr.io/corebunch/instatic:latest"}}`
-3. `volumeCreate` `{projectId, environmentId, serviceId, mountPath: "/app/storage"}`
-4. `serviceDomainCreate` `{environmentId, serviceId, targetPort: 8080}` — **only now**, so the
-   generated host is `stone-med-spa-production.up.railway.app` and not the image's name
-5. `variableCollectionUpsert` — `DATABASE_URL=sqlite:/app/storage/data/cms.db`,
-   `PUBLIC_ORIGIN=https://<the domain from step 4>`, `PORT=8080`, `STATIC_DIR=/app/dist`,
-   `UPLOADS_DIR=/app/storage/uploads`, `RAILWAY_RUN_UID=0`, and a **fresh**
-   `INSTATIC_SECRET_KEY` (`randomBytes(32).toString('base64')` — never reuse another client's)
-6. `serviceInstanceUpdate` `{healthcheckPath: "/health"}`, then `serviceInstanceDeploy`
-
-A new instance is provisioned but **not set up** — `users`, `site` and `sessions` are empty and
-`GET /admin/api/cms/setup/status` answers `needsSetup: true`. `POST /admin/api/cms/setup`
-(`{siteName, email, password, displayName}`, password ≥ 12 chars) is a one-shot bootstrap that
-409s afterwards, so it is safe to leave public. Then add the `[<client>]` section to
-`~/.webzite/.env` and re-run `node scripts/env-sync.mjs` in the worktree.
+The provisioning order is unchanged from the sibling — name the project and the service FIRST,
+because the generated domain is derived from the service name at creation and that domain is what
+goes into `seo.json`, into every canonical, and into the link the team reviews from. This instance
+was created name-first and was correct from its first boot. A new instance is provisioned but
+**not set up**: `POST /admin/api/cms/setup` is a one-shot bootstrap that 409s afterwards.
 
 > [!IMPORTANT]
-> **The business name has to be decided BEFORE step 1, because it is baked into the URL** and the
-> URL is what goes into `seo.json` as the origin, into every canonical and `og:url`, and into the
-> link the team reviews from. Here that name is *Stone Med Spa*, from Asana and from every string
-> in the build — but the live Instagram trades as *Westlake Medical Aesthetics* and the client has
-> not confirmed which is the trading name. If they pick the second, the project, the service and
-> the domain are all renamed, `PUBLIC_ORIGIN` moves with them, and `seo.json` is rebuilt.
+> **`MSYS_NO_PATHCONV=1` GOES ON THE `railway ssh` CALL AND NOWHERE ELSE.** Git Bash rewrites any
+> argument that looks like a POSIX path before a native `.exe` sees it, so
+> `railway ssh "rm -f /app/x"` arrives on the container as `rm -f C:/Program Files/Git/app/x`.
+> Exporting the variable for the whole of `ship.sh` breaks the script the other way: `$HERE` is a
+> `/c/Users/...` path and `node "$HERE/check-link.mjs"` then gets something Windows cannot resolve,
+> which surfaces as MODULE_NOT_FOUND on a file that is plainly there. It is scoped to `rs()`.
 
 ## Execution Steps
 
 ```bash
-export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/project
-                               # railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d \
-                               #              -s "Stone Med Spa" -e production
-                               # Link by project ID, never by the name "Stone": there are THREE
-                               # Stone projects. ship.sh runs check-link.mjs first and refuses a
-                               # link dir that does not serve INSTATIC_BASE_URL
+export RAILWAY_LINK_DIR="$PWD/.tmp/railway-link"   # ABSOLUTE.
+                               # railway link -p a55b5cac-b92d-4653-a9ff-6da522a5c89c \
+                               #              -s "West LA Implants" -e production
+                               # ship.sh runs check-link.mjs first and refuses a link dir
+                               # that does not serve INSTATIC_BASE_URL
 
-node install-fonts.mjs --apply  # 0. ONCE per instance: the two typefaces into Instatic's
-                               #    own library. See trap 16
-node upload-media.mjs           # 1. images -> media library, writes .tmp/media-map.json
-node set-alt.mjs --apply        # 1b. alt text -> the media library, which is the ONLY place
-                               #    Instatic reads it from. Skip this and every image on the
-                               #    published site has alt="". See trap 28
-node build-import-input.mjs     # 2. assemble css + the page body, rewriting srcs, links AND
-                               #    css url(), excising @font-face. See traps 14 and 16
-bash ship.sh                    # 3. ship to the container, run Instatic's own converters, retrieve
-node push-site.mjs              # 4. dry run
-node push-site.mjs --apply --force   # write shell + pages + code assets in ONE atomic PUT
-                               #    --force is REQUIRED on any re-import: see trap 11
-node -e "import('.../insta-api.mjs').then(m=>m.publish())"   # 5. publish
-node verify-live.mjs            # 6. GATE — crawls every route, link and asset
-node compare-live.mjs           # 7. GATE — diffs the published pages against the
-                               #    local build: structure, computed style, geometry,
-                               #    text and runtime state. See traps 19 and 20
-node css-parity.mjs             # 7b. GATE — did every declaration the build wrote reach
-                               #    the published CSS at all? Asks directly, in seconds.
-                               #    See trap 34
-node visual-diff.mjs            # 8. GATE — subtracts the two renders, pixel for pixel,
-node visual-diff.mjs 390        #    at both widths. No pairing, no property list, no
-                               #    suppressions. See traps 32 and 33
+cd ../04-design/.tmp/site-src && node build.mjs && cd -
+                               # 0. dist/ is the source of truth for every step below.
+                               #    REBUILD IT after any site-src change, or the payload and
+                               #    the gates disagree about which build is live
+
+# NOTE: install-fonts.mjs IS NOT RUN on this client. See "What is different".
+node upload-media.mjs          # 1. images + videos + the three variable woff2 -> media
+                               #    library; writes .tmp/media-map.json (52 files)
+node set-alt.mjs --apply       # 1b. alt text -> the media library, the ONLY place Instatic
+                               #    reads it from. Skip it and every image is alt="" (trap 28)
+node build-import-input.mjs    # 2. css + the page body, rewriting src/href/poster/data-src/
+                               #    data-src-mobile and excising @font-face (traps 14, 16)
+bash ship.sh                   # 3. ship to the container, run Instatic's own converters
+node push-site.mjs             # 4. dry run. Read .tmp/tokens.css afterwards to see exactly
+                               #    what the code asset will carry BEFORE it is live
+node push-site.mjs --apply --force   # shell + page + code assets in ONE atomic PUT.
+                               #    --force is REQUIRED on any re-import (trap 11)
+node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+
+node verify-live.mjs           # 5. GATE - routes, links, assets, tree shake, token layer,
+                               #    the @font-face srcs, and the ORDER of the script bundle
+node css-parity.mjs            # 6. GATE - did every declared property reach the live CSS?
+                               #    Cheapest of the five; reach for it first after any CSS change
+node compare-live.mjs          # 7. GATE - structure, computed style, geometry, text
+node visual-diff.mjs           # 8. GATE - pixels, at both widths. Read the BANDS, not the
+node visual-diff.mjs 390       #    percentage (trap 38)
+node verify-motion-live.mjs    # 9. GATE - DRIVES the published page: smoother, the four pins,
+                               #    the scrubs, the fonts, the hero film, 390 overflow.
+                               #    THE ONLY GATE THAT CAN SEE THE MOTION LAYER (trap 36)
 ```
 
-`verify-live.mjs` is not optional. Every failure on this build reported success somewhere first.
+`verify-motion-live.mjs` is not optional and is not a nicety. The other four capture with
+`prefers-reduced-motion: reduce`, deliberately, so **a published page with no ScrollSmoother, no
+pins and no SplitText passes every one of them** — a chapter that never animates looks exactly like
+a chapter that has finished animating. It is the gate that found trap 36, and trap 36 had already
+survived four clean publishes of the other four.
 
-**Neither is `compare-live.mjs`, and it is the stronger of the two.** `verify-live.mjs` asks whether
-the routes and assets resolve; `compare-live.mjs` asks whether the page still LOOKS like the build.
-Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
-`width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
+`puppeteer-core` is not a dependency of this repo. The three browser gates resolve it out of
+`bk-stone/node_modules` — `compare-live.mjs` and `visual-diff.mjs` through a `node_modules`
+directory junction at this worktree's root, `verify-motion-live.mjs` through an explicit
+`createRequire` path that `PUPPETEER_DIR` overrides. If that worktree is gone, `npm i
+puppeteer-core` here instead.
 
 ### The link guard, and the three ways the Railway target gets crossed
 
@@ -195,8 +201,9 @@ no styling at all.
 
 ## The traps
 
-Ten of them, all found the hard way on 2026-08-31. Every one of these answered 200, or printed
-"ok", while doing the wrong thing.
+Forty of them now. **1-34 are the siblings', kept verbatim**, and eight of those bit again on this
+build. 35-40 are this one's. Every single one answered 200, or printed "ok", while doing the wrong
+thing — that is the only thing they all have in common, and it is why the gates exist.
 
 ### 1. Custom properties do not survive the registry conversion
 
@@ -816,6 +823,202 @@ layered backgrounds. It covers `scroll-behavior`, `scroll-padding*`, `scroll-mar
 **That list is not a guess and it is not exhaustive** — it is exactly what `css-parity.mjs`
 reported missing on a real publish. Which is the point of the new gate:
 
+### 35. A TYPED MODULE KEEPS ITS OWN PROPS AND THROWS THE REST OF THE TAG AWAY — `<video>` published EMPTY
+
+FOUND 2026-09-10 on this build's first publish, by reading the published HTML. Two `<video>`
+elements went in and this came out:
+
+```html
+<video class="ar-film">        <video>
+```
+
+No `id`, no `poster`, no `src`, no `data-src`, no `aria-label`, no `muted`, no `loop`, no
+`playsinline`. Both films were a blank black box where the page's two most expensive assets should
+be, and **nothing failed**: `verify-live.mjs` checks the assets the MARKUP references, and the
+markup referenced none.
+
+**This is trap 22 in its general form, and that is the part to carry forward.** `importHtml` maps a
+tag onto a MODULE, and a typed module has a FIXED PROP SCHEMA. `base.video` is
+`{videoUrl, poster, autoplay, loop, muted, controls, playsinline, preload, title, noRelatedVideos}`
+and there is nowhere for anything else to go — the importer does not even park the leftovers in
+`htmlAttributes`, exactly as `base.image` does not park `alt` (trap 28). A plain `<div>` or
+`<section>` keeps everything it arrived with: this page published 8 `data-chapter`s, 9 `data-anim`s
+and 50 `id`s untouched, because those map to `base.container`, whose entire schema is
+`{tag, customTag, htmlAttributes}`.
+
+**The escape hatch is `base.container`, and the platform uses it itself.** `core/htmlImport/rules.ts`
+maps a non-YouTube `<iframe>` to
+`{ moduleId: 'base.container', props: { tag: 'custom', customTag: 'iframe' } }`, with the comment
+*"so their src/attributes are preserved via htmlAttributes"*. `sanitizeRenderableHtmlAttribute`
+accepts any attribute name except `class`, `style`, event handlers and the reserved
+`data-instatic-*`, so a restored tag can carry the lot.
+
+**Fix:** `push-site.mjs` re-points every `base.video` node at `base.container` with
+`customTag: 'video'` and restores the attributes verbatim from the payload `build-import-input.mjs`
+shipped — which is the post-rewrite markup, so every path is already a `/uploads/...` URL. Nodes are
+paired with `<video>` tags in DOCUMENT ORDER, walked from the root rather than read off
+`Object.keys(nodes)`, and the counts are asserted: putting the wrong film behind the wrong poster
+would look like nothing at all.
+
+The alternative was to ship a `<div data-video>` and build the element in `90-boot.js`, the way the
+med spa builds its range input. It was rejected: it puts an Instatic-shaped compromise into a static
+build that renders perfectly without one, it costs the `<video>` its poster on first paint, and it
+makes local and published different, which is what every gate downstream assumes they are not.
+
+> **The general rule: after any import that introduces a new KIND of element, read
+> `import-out.json` for what its node actually carries.** Ten seconds of `node -e` printing `props`
+> per `moduleId` is the whole check, and it is the same ten seconds that would have caught trap 15's
+> empty burger and trap 22's dead slider.
+
+### 36. THE SCRIPT ASSET IS BUNDLED AS CommonJS AND SERVED AS A MODULE, SO A UMD NEVER REACHES `window`
+
+The worst thing this build published, and **the four gates the med spa left behind could not see any
+part of it.**
+
+`window.SplitText` and `window.Observer` were undefined on the published site while `window.gsap`,
+`ScrollTrigger`, `ScrollToPlugin` and `ScrollSmoother` were all present. So the page pinned, scrubbed
+and smooth-scrolled correctly, and every split headline simply never split: the reality chapter's
+nineteen words, which light one at a time as its pin scrubs, published as one static paragraph at
+full opacity. `WZ.splitWords` catches and returns null, and the timeline then tweens the paragraph
+itself — there is no error anywhere.
+
+**The mechanism is visible in the published bundle.** Instatic runs the code asset through esbuild,
+and esbuild REWRITES a top-level `this` to `exports`. Every GSAP file is a UMD that opens
+
+```js
+typeof exports == "object" && typeof module != "undefined" ? A(exports)
+  : typeof define == "function" && define.amd ? define(["exports"], A)
+  : (k = globalThis, A(k.window = k.window || {}))
+```
+
+and is invoked as `})(this, function (k) {…})`. Published, all six read `})(exports, function (k)
+{…})` and take the FIRST branch: the library attaches itself to a module exports object that nothing
+ever reads, and never touches `window`.
+
+**Four of the six survived by accident, which is why it was so quiet.** gsap's core puts itself on
+`window` from the inside, and ScrollTrigger, ScrollToPlugin and ScrollSmoother each call
+`gsap.registerPlugin`, which re-exposes them globally. SplitText is not a gsap plugin and registers
+nothing. The standalone Observer is shadowed by ScrollTrigger's own internal copy, which appears in
+`gsap.core.globals()` as **`Observer2`** — a name that reads like success. So the two files with no
+self-registration are exactly the two that vanished.
+
+**Fix:** wrap each vendored file in a scope where `exports`, `module` and `define` are all
+undefined, and hand it a global to write to:
+
+```js
+var __wzUmdGlobal = { window: window };
+;(function (exports, module, define, globalThis, self) {
+  /* the vendor file, byte for byte */
+}).call(__wzUmdGlobal, void 0, void 0, void 0, __wzUmdGlobal, __wzUmdGlobal);
+```
+
+Shadowing by PARAMETER is deliberate: it cannot be defeated by whatever the outer bundle declares.
+Nothing about the libraries is patched.
+
+> [!WARNING]
+> **AND THE GLOBAL CANNOT BE `window` ITSELF.** The first version of this wrapper passed `window`
+> as `this` and the whole bundle died on gsap's first line with
+> `Cannot set property window of #<Window> which has only a getter` — because the UMD's browser
+> branch writes `window.window`, an accessor with no setter. In a classic `<script>` that
+> assignment fails silently, sloppy-mode style, and the expression still evaluates to `window`.
+> **Instatic serves the script asset as `<script type="module">`, and a module is always strict**,
+> so the same line throws and takes every library with it. The shim is a plain object whose
+> `window` property is writable and already IS window: the UMD writes to the shim, reads `window`
+> back out, and hands the real global to the factory. `globalThis` and `self` are shadowed by the
+> same object because SplitText's UMD prefers `globalThis` and ignores `this` entirely; both names
+> appear in these six files ONLY in that prelude line, so shadowing them reaches nothing else.
+
+`verify-motion-live.mjs` asserts all six globals by name now, and **`gsap.core.globals()` is not
+the check** — `Observer2` is in there whether or not the standalone file loaded.
+
+### 37. `compare-live.mjs`'s `margin-inline: auto` finding is an artifact, and the geometry proves it
+
+The residual on this publish, and the second time this workflow has spent a morning on an auto
+margin (trap 30 was the first). Between two and six findings per run, always the same shape:
+
+```
+div.pr-body.wrap#0         local "64px"        live "0px"
+div.su-grid.wrap#0         local "64px"        live "0px"
+div.su-strip.wrap--wide#0  local "57.5938px"   live "0px"
+```
+
+`.wrap` and `.wrap--wide` centre with `margin-inline: auto`. The CSS is byte-identical on both
+sides, `css-parity.mjs` is clean, and **`compare-live.mjs`'s own geometry pass never flags these
+elements** — which is the tell, because a margin that had really collapsed would move the box.
+
+Probing both pages under the gate's exact conditions (JS disabled, `networkidle0`, reduced motion)
+settles it: when `getComputedStyle(el).marginLeft` reads `0px` live,
+`el.getBoundingClientRect().x` still reads **58** and **64** — the used margins are there and the
+element is centred. Chrome is returning the computed value rather than the used value for a margin
+specified through the logical `margin-inline` shorthand, non-deterministically, and slightly more
+often on the live page, which has more style-recalc work to do because Instatic's images carry
+`srcset` and `sizes="auto"`.
+
+**Do not suppress it** — that is trap 30's rule and it still holds; a collapsed auto margin could
+one day be real. Check `x` instead: if the geometry pass is silent, the box has not moved.
+
+`.frame` gained a `min-width: 0` while this was being chased. It did NOT cause the finding and it
+fixes nothing that was broken. It is kept because trap 24 is real: a grid item's automatic minimum
+is its min-content width, and Instatic's `<img width height srcset>` can floor an `fr` track at the
+loaded variant's intrinsic width. It is locally neutral.
+
+### 38. `visual-diff.mjs`'s PERCENTAGE is meaningless on a page with autoplaying video — read the bands
+
+This page reports between 2.3% and 6.2% different, and the number changes on every run of an
+unchanged publish. Two `<video>` elements are playing on two origins and there is no frame they can
+be expected to agree on; 900px of hero and 900px of the precision chapter are film, and a moment's
+difference in either one moves the total by two points.
+
+Every band on this build has been read and each is one of three things:
+
+- **a video frame** — `y 0-776` (hero) and `y 2809-3709` (precision) at 1440. The TYPE over them is
+  pixel-identical, which is what the band is actually good for;
+- **the review marquee** — `y ~9200`, an infinite scroll caught at a different phase;
+- **JPEG to WebP re-encoding** — `y 2160-2668`, `y 4333-4740` and friends: edge pixels only, the
+  layout underneath identical.
+
+So the gate still earns its place — it is what would catch a missing scrim (trap 32) or a shifted
+block — but the headline number is not a regression signal here. Compare BANDS between runs, and
+crop any new one with `.tmp/crop.mjs` before believing it.
+
+### 39. `!important` and the `svh` unit are dropped too, and the reduced-motion escape hatch went with them
+
+`css-parity.mjs` reported eleven declarations missing on the first publish, in two shapes the med
+spa's `harvestLossy()` did not cover:
+
+- **`!important`.** `02-base.css` kills every animation under `prefers-reduced-motion` with
+  `*,*::before,*::after{animation-duration:.001ms!important; …}`. All three declarations were
+  dropped. `scroll-behavior:auto!important` in the same rule survived ONLY because `DROPPED` had
+  already claimed that property by name. A site whose reduced-motion escape hatch is silently gone
+  passes every other gate, because no gate runs with the preference set except the two that force
+  it — and they force it on both sides.
+- **`svh` / `lvh` / `dvh`.** `.pr-pin{height:100svh}` published with no height, which on a PINNED
+  section is not cosmetic: it is the pin's own measurement. `.an-pin{min-height:100svh}` in the same
+  stylesheet survived, exactly as trap 21 warns — `min-height` keeps what `height` rejects and there
+  is no rule to infer.
+
+Both are now in `isLossy()`, by VALUE rather than by property, so they are covered wherever they are
+written. `background-position` and `background-size` joined `LAYERABLE` in the same pass, for
+`.in-fields select`'s two-triangle arrow: half a layered background is not a smaller bug than none
+of it.
+
+`font-variation-settings` was added to `DROPPED` pre-emptively rather than after a failure — all
+three faces here are variable and `.display`/`.h2` set `opsz` by hand, and a headline at the wrong
+optical size reads as a different typeface rather than as a dropped declaration.
+
+### 40. `css-parity.mjs` was not really checking conditions, and the fix is one normaliser
+
+Found while chasing trap 39. `import-run.ts` rewrites every at-rule prelude before conversion — a
+space after each colon, among other things — so the build's `@media (max-width:1023px)` is published
+as `@media (max-width: 1023px)`. The gate keyed local rules on the raw text, so **every local
+`@media` key failed to find its live twin**, fell through to the `RbySel` fallback — which asks only
+whether the selector declares the property ANYWHERE, at any breakpoint — and passed.
+
+A responsive override the conversion dropped would therefore have been reported as present, because
+the unconditional rule declares the same property. `normCond()` now matches the platform's own
+normalisation. It cannot reuse `norm()`: that is the SELECTOR normaliser and would turn `a:hover`
+into `a: hover`.
+
 ### The check: `css-parity.mjs`
 
 ```bash
@@ -868,51 +1071,51 @@ first publish by exactly this check.
 
 ## Output Artifacts
 
-- `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
+- `.tmp/media-map.json` — reference path AND basename → media library path, id, dimensions
+  (52 files: 44 images, 5 videos, 3 variable woff2)
 - `.tmp/import-input.json.gz` — the payload shipped to the container
-- `.tmp/import-out.json` — 985 style rules, 11 conditions, 11 page node trees
-- `.tmp/live-shots/` — full-page captures of the PUBLISHED site (reduced motion, so they show the
-  static state; use a real browser for the pins and scrubs)
-- `.tmp/probe-key.mjs` — looks one `compare-live.mjs` finding up on both sides, with the CSS rules
-  that set the property. Keys elements exactly as `compare-live.mjs` does, so a finding's key can
-  be pasted straight in. This is the tool for turning "some element differs" into "this rule does"
-- `.tmp/probe-sel.mjs` — the same, addressed by an ordinary CSS selector rather than by a
-  comparison key. Reaches the things `compare-live.mjs` cannot: a bare `<img>`, a pseudo-element's
-  host, anything with no class
-- `.tmp/viewshot.mjs` — one section, local above live, captured in a REAL viewport scrolled to it.
-  The arbiter when a full-page diff and a probe disagree; see trap 33
-- `.tmp/crop.mjs` — cuts a y-band out of the diff images so a band can be looked at rather than
-  guessed at
-- `.tmp/visual/` — the full-page renders and their diffs (gitignored: `*.png`)
+- `.tmp/import-out.json` — 272 style rules, 9 conditions, one 560-node page tree
+- `.tmp/tokens.css` — **the token code asset exactly as it will be written**, dumped on every run
+  of `push-site.mjs` including the dry run. It is the one payload nobody can read back without
+  publishing, and three of this workflow's worst defects lived in it; read it before applying
+- `.tmp/ship.log` — the full conversion report. Read the WHOLE file, not its tail (trap 12)
+- `.tmp/visual/` — the stitched renders and their diffs (gitignored: `*.png`)
+- `.tmp/crop.mjs` — cuts a y-band out of the three diff images, local | live | diff side by side,
+  so a band can be LOOKED at rather than guessed at. Chrome is the image tool (there is no `sharp`
+  here): a data-URI `<img>` in `setContent`, then a clipped screenshot. Takes `y0 y1 [width]`
+- `.tmp/probe-*.mjs` — one-off probes kept from this run: `probe-wrap.mjs` and `probe-strip.mjs`
+  (the trap 37 auto-margin, on both sides under the gate's exact conditions), `probe-split.mjs`
+  (SplitText, which is how trap 36 was isolated), `probe-globals.mjs` (the six GSAP globals),
+  `probe-err.mjs` (page errors and 4xx responses with their URLs). Cheap to write, and the reason
+  every residual on this publish has an answer rather than a suppression
+- `08-qa/.tmp/screenshots/live/` — 36 captures of the PUBLISHED page written by
+  `verify-motion-live.mjs`: every pin at four scrub positions plus four viewport shots, at 1440 and
+  390 (gitignored: `*.png`)
 
 ## What is NOT done
 
-- **Nav and footer are inlined into the page rather than being a Visual Component.** Eleven pages
-  means editing the nav is eleven edits. This is now the strongest item on the list —
-  `changedComponents` / `changedLayouts` are already in the `PUT /site-document` contract.
-- **Per-page meta descriptions** — see trap 6. All eleven share the home page's.
-- **Canonical, Open Graph and JSON-LD are not on the published site at all** — see trap 31. Fine
-  for review, not fine for launch. The route is a runtime module in `site-src/js/` that injects
-  them, the way `js/90-bugherd.js` injects its tag.
-- **No favicon**, so every published page answers 404 for `/favicon.ico` and the browser tab shows
-  a generic mark. This is one field — `settings.faviconUrl` in the site shell, pointing at an
-  uploaded asset — and it is deliberately still empty because **this brand has no logo or identity
-  yet** and a favicon invented here would be read as a proposed mark. Set it the day one exists.
-  It is the only console error on the whole site.
-- **The domain, and before it the trading name.** The site is on its Railway URL, and `seo.json`'s
-  origin is that URL — a real, resolvable origin, unlike the `stonemedspa.example` placeholder it
-  replaced. When a domain is bought: change `site.origin`, rebuild, republish, and run
+- **Canonical, Open Graph and JSON-LD are not on the published site at all** — see trap 31. The
+  published `<head>` is four tags. Fine for a review link; not fine for launch. The route is a
+  runtime module in `site-src/js/` that injects them, or an upstream change.
+- **Nav and footer are inlined rather than being a Visual Component.** Costless today at one page,
+  and the reason to do it arrives with the second.
+- **The consultation form posts nowhere.** `.in-fields` is markup only.
+- **The domain.** The site is on its Railway URL and `seo.json`'s origin is that URL — real and
+  resolvable. When a domain is bought: change the origin, rebuild, republish, and run
   [`20-instatic-domain-origins`](../../../../process/20-instatic-domain-origins) before sending
   anyone the admin link. Keep the railway host in `PUBLIC_ORIGIN` — `INSTATIC_BASE_URL` points at
-  it and every script here would start answering 403 without it.
-- **No brand identity, logo or favicon**, and no per-case photo consent — see `HANDOFF.md`.
-- **The booking form still posts nowhere.**
-- **The six remaining treatment dossiers.** `botox` is the built template; each of the others is a
-  body file, a line in `PAGES` here and a line in `ROUTES` in `verify-live.mjs` and `PAGES` in
-  `compare-live.mjs`. All three lists are written by hand on purpose — see the warning on `PAGES`.
+  it and every script here would start answering 403 without it. This instance is **not** yet in
+  that process's `sites.json`.
+- **`aria-label` on both `<video>` elements survives only because of trap 35's rewrite.** If anyone
+  removes the `base.container` restoration, the films lose their accessible names along with
+  everything else.
+- **No per-case photo consent recorded** for the before/after cases.
+- **Nothing has been retired.** `GONE` in `verify-live.mjs` is empty, which is a true statement on
+  an instance whose first publish was this site — fill it the first time a page is deleted rather
+  than overwritten.
 
 ## Version Control
 
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
 Scripts and this directive are committed; `.tmp/` artifacts are lightweight JSON and may be
-committed, but `.tmp/converted/` holds images and must not be.
+committed, but the PNGs under `.tmp/visual/` and `08-qa/.tmp/screenshots/` must not be.
