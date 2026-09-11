@@ -1,6 +1,6 @@
 # Institute for Advanced Dentistry — current site inventory
 
-Scraped 2026-09-10 from https://www.ifadentistry.com (the outgoing agency's WordPress build). Everything in this folder was produced by the scripts in `scrapers/`; nothing was hand-edited.
+Scraped 2026-09-11 from https://www.ifadentistry.com (the outgoing agency's WordPress build). Everything in this folder was produced by the scripts in `scrapers/`; nothing was hand-edited.
 
 ## What is in this folder
 
@@ -25,7 +25,7 @@ Scraped 2026-09-10 from https://www.ifadentistry.com (the outgoing agency's Word
 - The Yoast sitemap URLs return 200 with the 404 page, so the crawl came from the WP REST API (pages, posts, categories) plus every same-origin link found in the pages. `robots.txt` blocks AI crawlers by name but allows everything else.
 - Phone on every page: (602) 242-2256. Address on the home page: 13360 N 94th Dr, Suite B, Peoria, AZ.
 
-## Pages: 55 URLs captured, 44,115 words of body copy
+## Pages: 59 URLs captured, 44,115 words of body copy
 
 ### Top-level pages (9)
 
@@ -73,10 +73,11 @@ Scraped 2026-09-10 from https://www.ifadentistry.com (the outgoing agency's Word
 | /about-our-practice/what-is-a-prosthodontist/ | page | What is a Prosthodontist? | 292 | no |
 | /about-our-practice/meet-dr-bensoussan/ | page | Meet Dr. Bensoussan | 580 | no |
 
-### Blog posts (root-level slugs) (19)
+### Blog posts (root-level slugs) (20)
 
 | URL | Kind | H1 | Words | Meta description |
 | :--- | :--- | :--- | ---: | :--- |
+| /what-to-look-for-in-an-implant-specialist/ | post |  |  | no |
 | /peoria-prosthodontics-institute-for-advanced-dentistry/ | post | Peoria Prosthodontics – Institute For Advanced Dentistry | 1501 | no |
 | /expert-implants-dentist-peoria/ | post | Expert Implants Dentist in Peoria – Advanced Dentistry | 1499 | no |
 | /implant-crown-peoria-az/ | post | What Is an Implant Crown? A Prosthodontist’s Guide for Peoria Patients | 1230 | no |
@@ -97,7 +98,7 @@ Scraped 2026-09-10 from https://www.ifadentistry.com (the outgoing agency's Word
 | /understanding-dental-implant-success-rates-and-longevity/ | post | Understanding Dental Implant Success Rates and Longevity | 1474 | no |
 | /the-role-of-dental-implants-in-addressing-speech-disorders-and-cleft-palate-conditions/ | post | The Role of Dental Implants in Addressing Speech Disorders and Cleft Palate Conditions | 727 | no |
 
-### Archives (category / pagination) (5)
+### Archives (category / pagination) (8)
 
 | URL | Kind | H1 | Words | Meta description |
 | :--- | :--- | :--- | ---: | :--- |
@@ -106,21 +107,24 @@ Scraped 2026-09-10 from https://www.ifadentistry.com (the outgoing agency's Word
 | /category/general-and-preventive-care/ | archive | General & Preventive Care | 138 | no |
 | /category/implants-and-full-arch-solutions/ | archive | Implants & Full-Arch Solutions | 297 | no |
 | /category/uncategorized/ | archive | Uncategorized | 391 | no |
+| /about-our-practice/articles/page/2/ | archive |  |  | no |
+| /category/implants-and-full-arch-solutions/page/2/ | archive |  |  | no |
+| /category/uncategorized/page/2/ | archive | Uncategorized | 137 | no |
 
 Redirects seen while crawling: `/contact/` → `/contact-us/`, `/about/` → `/about-our-practice/`.
 
-## Assets referenced by the pages (777 files, 54.3 MB)
+## Assets referenced by the pages (792 files, 55.6 MB)
 
 | Type | Files | Size |
 | :--- | ---: | ---: |
-| jpg | 487 | 34.9 MB |
+| jpg | 499 | 36.2 MB |
 | mp4 | 2 | 9.0 MB |
-| png | 78 | 4.3 MB |
+| png | 79 | 4.3 MB |
 | woff2 | 130 | 2.4 MB |
 | webp | 33 | 1.5 MB |
 | js | 19 | 0.9 MB |
 | ttf | 4 | 0.8 MB |
-| css | 19 | 0.4 MB |
+| css | 21 | 0.4 MB |
 | woff | 1 | 0.1 MB |
 | svg | 4 | 0.0 MB |
 

@@ -25,6 +25,13 @@
       "alternates": ["https://mason-park.up.railway.app"],
       "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
       "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+    },
+    {
+      "client": "institute-for-advanced-dentistry",
+      "adminUrl": "https://institute-for-advanced-dentistry-production.up.railway.app",
+      "alternates": [],
+      "railway": { "project": "3449a121-3580-485b-97f5-8c8903f8e409", "service": "Institute for Advanced Dentistry" },
+      "note": "Provisioned 2026-09-11 name-first by provision-instance.mjs, so PUBLIC_ORIGIN is the generated host from first boot. The clone of the WordPress site at www.ifadentistry.com; the domain is not moved yet (see the client's docs/dns/DNS-CUTOVER.md). Add www.ifadentistry.com to PUBLIC_ORIGIN and here at cutover, and keep this host."
     }
   ]
 }

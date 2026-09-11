@@ -70,6 +70,7 @@ node css-parity.mjs diff before after      # must report 0
   source. `.env` is per-worktree and gitignored, so a fresh worktree needs the lines copied across.
 - **Endpoints**: `GET /admin/api/cms/site` (shell + seq), `GET /pages`, `PUT /site-document` (atomic, `incremental` or `replace`, 409 on seq conflict), `POST /publish`, `GET /publish/status`.
 - **Deployment**: Railway workspace/project `Brandklout` -> service `Dr Nahlah`, `ghcr.io/corebunch/instatic:latest`, volume `/app/storage`, DB `/app/storage/data/cms.db`.
+- **New instances**: `provision-instance.mjs --name "<Business Name>"` creates project, service, volume, domain (only after naming, so the host carries the name), variables with a fresh `INSTATIC_SECRET_KEY`, healthcheck and deploy, through Railway GraphQL with `~/.railway/config.json` `user.accessToken`; then `--setup` with `INSTATIC_PROVISION_URL`, `INSTATIC_EMAIL`, `INSTATIC_SETUP_PASSWORD` for the one-shot admin bootstrap. Written for West LA Implants (2026-09-10), committed here from the IFA run (2026-09-11). Refuses a duplicate project name.
 
 ## Also proven on a second client
 
