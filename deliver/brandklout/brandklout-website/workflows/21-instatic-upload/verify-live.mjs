@@ -30,7 +30,23 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up
 
    Add the six remaining treatment dossiers here the day they are published;
    `botox` is the only one built so far and it is the template for the rest. */
-const ROUTES = ['/']
+/* Brandklout v2 (2026-09-11): seven routes. Checked against the build's page list below, so a
+   page added to the package and not here fails this gate instead of going unchecked. */
+const ROUTES = [
+  '/',
+  '/survey',
+  '/customer-stories-legacy-dental-pasadena',
+  '/customer-stories-oceanic-ai-search-growth',
+  '/customer-stories-oceanic-future-ready',
+  '/customer-stories-ocpao-ai-authority',
+  '/customer-stories-omnia-ai-search-growth',
+]
+{
+  const { readFileSync } = await import('node:fs')
+  const manifest = JSON.parse(readFileSync(new URL('./.tmp/site/site-src/pages.json', import.meta.url), 'utf8'))
+  const built = manifest.pages.map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`)).sort().join()
+  if (built !== [...ROUTES].sort().join()) throw new Error(`verify-live's routes do not match the build: ${built}`)
+}
 
 /* Nothing has ever been retired here. This instance was provisioned on
    2026-09-04 and its first publish was this site, so there is no earlier slug
@@ -59,7 +75,17 @@ for (const route of ROUTES) {
     fails.push(`${route} -> HTTP ${res.status}`)
     continue
   }
-  if (html.length < 8000) fails.push(`${route} -> only ${html.length} bytes; page is probably empty`)
+  // The stories are ~8KB of source each, so the floor is lower than Stone's.
+  if (html.length < 5000) fails.push(`${route} -> only ${html.length} bytes; page is probably empty`)
+
+  // Every rule of Sang's is scoped to a class on <body> (prepare-source.mjs). Without it the page
+  // publishes with none of its own styling, and nothing else here would say why.
+  const bodyClass = (html.match(/<body[^>]*\bclass="([^"]*)"/) ?? [])[1] ?? ''
+  if (!/\bpg-[a-z-]+\b/.test(bodyClass)) fails.push(`${route} -> <body> has no pg-* scope class ("${bodyClass}")`)
+  if (route.startsWith('/customer-stories-') && !/<iframe[^>]+src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\//.test(html)) {
+    fails.push(`${route} -> no YouTube player`)
+  }
+  if (route === '/survey' && !/<form[^>]+id="growthSurvey"/.test(html)) fails.push('/survey -> no #growthSurvey form')
 
   const title = (html.match(/<title>([^<]*)<\/title>/) ?? [])[1] ?? ''
   if (!title) fails.push(`${route} -> no <title>`)
@@ -116,6 +142,12 @@ for (const route of ROUTES) {
       }
       if (!js.includes('.faq-q')) fails.push('site.js does not contain the FAQ toggle')
       if (!js.includes('leadForm')) fails.push('site.js does not contain the form handler')
+      if (!js.includes('growthSurvey')) fails.push('site.js does not contain the survey script')
+      // Look for CODE, not the banner comment: the published bundle strips comments, and the
+      // first version of this check failed a site whose repairs were working.
+      if (!js.includes('data-number') || !js.includes('submitButton')) {
+        fails.push('site.js does not carry the attribute repairs — the survey will throw at boot')
+      }
     }
   }
 }

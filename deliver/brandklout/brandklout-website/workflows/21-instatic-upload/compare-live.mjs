@@ -81,7 +81,29 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index']
+/* Brandklout v2: seven pages, written out and checked against the build's page list. */
+const ALL = [
+  'index',
+  'survey',
+  'customer-stories-legacy-dental-pasadena',
+  'customer-stories-oceanic-ai-search-growth',
+  'customer-stories-oceanic-future-ready',
+  'customer-stories-ocpao-ai-authority',
+  'customer-stories-omnia-ai-search-growth',
+]
+const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
+const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
+if ([...FILE.keys()].sort().join() !== [...ALL].sort().join()) {
+  throw new Error(`compare-live's page list does not match the build: build ${[...FILE.keys()].sort().join(', ')}`)
+}
+const slugArg = args.find((a) => /^(?!\d+$)[a-z0-9/-]+$/.test(a))
+const PAGES = slugArg ? [slugArg] : ALL
+
+/* The style and geometry passes run WITH scripts on for Brandklout. They ran with scripts off on
+   Stone so GSAP's inline transforms could not pollute the cascade; these pages have no animation
+   code, and the published survey is only correct AFTER site.js has put back the attributes the
+   importer drops (prepare-source.mjs). Scripts off, it would compare a page nobody sees. */
+const STATIC_PASS_JS = true
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists
@@ -193,8 +215,9 @@ const MIME = {
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split('?')[0])
   if (p === '/') p = '/index.html'
-  const f = path.join(LOCAL_ROOT, p)
-  if (!fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); return res.end('nf') }
+  let f = path.join(LOCAL_ROOT, p)
+  if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html')
+  if (!fs.existsSync(f)) { res.writeHead(404); return res.end('nf') }
   res.writeHead(200, { 'Content-Type': MIME[path.extname(f).toLowerCase()] || 'application/octet-stream' })
   fs.createReadStream(f).pipe(res)
 })
@@ -235,39 +258,47 @@ const PROBE = (props) => {
   return { styles: out, geo, text: document.body.innerText.replace(/\s+/g, ' ').trim() }
 }
 
+/* Brandklout's runtime state: the classes Sang's scripts toggle (`open` on the FAQ, `active` on the
+   survey step, `show` on its success panel, `invalid` on a choice group) and the `hidden`
+   property, keyed the same way the style probe keys elements. Tokens are read from <body>, where
+   prepare-source.mjs declares them (each stylesheet's `:root` becomes `body.pg-x`). */
 const RUNTIME_PROBE = () => {
-  const state = {}
-  const add = (sel, fn) => {
-    document.querySelectorAll(sel).forEach((el, i) => { state[sel + '#' + i] = fn(el) })
-  }
-  add('[class]', (el) => {
-    const runtime = (el.className.toString().match(/\bis-[\w-]+/g) || []).sort().join(' ')
-    return runtime || null
-  })
+  const STATE = /^(open|active|show|invalid)$/
   const clean = {}
-  for (const [k, v] of Object.entries(state)) if (v) clean[k.replace('[class]', '')] = v
-  const rs = getComputedStyle(document.documentElement)
+  const seen = new Map()
+  for (const el of document.querySelectorAll('body *')) {
+    const cls = [...el.classList]
+    const on = cls.filter((c) => STATE.test(c)).sort()
+    const base = el.tagName.toLowerCase() + '.' + cls.filter((c) => !STATE.test(c)).sort().join('.')
+    const n = seen.get(base) ?? 0
+    seen.set(base, n + 1)
+    if (on.length || el.hidden) clean[base + '#' + n] = on.join(' ') + (el.hidden ? ' [hidden]' : '')
+  }
+  const bs = getComputedStyle(document.body)
+  const text = (id) => document.getElementById(id)?.textContent ?? null
   return {
     runtimeClasses: clean,
     jsScope: document.documentElement.classList.contains('js'),
-    hiddenPanels: [...document.querySelectorAll('.layers_panel')].map((p) => p.hidden),
-    tokens: Object.fromEntries(
-      ['--gutter', '--section', '--size-display', '--size-h3-j', '--spec-w', '--ivory', '--fg', '--accent']
-        .map((t) => [t, rs.getPropertyValue(t).trim()]),
-    ),
+    hiddenPanels: [],
+    tokens: Object.fromEntries(['--ink', '--paper', '--muted', '--line', '--cyan', '--max', '--shadow'].map((t) => [t, bs.getPropertyValue(t).trim()])),
     tallies: {
-      tabs: document.querySelectorAll('.layers_tab').length,
-      checks: document.querySelectorAll('.check_input').length,
-      tlStops: document.querySelectorAll('.tl_stop').length,
-      tocLinks: document.querySelectorAll('.toc_link').length,
-      navLinks: document.querySelectorAll('.navbar_link').length,
-      drawerLinks: document.querySelectorAll('.drawer_link').length,
-      burgerKids: (document.querySelector('.navbar_burger') || { children: [] }).children.length,
+      bodyClass: document.body.className,
+      faqItems: document.querySelectorAll('.faq-item').length,
+      storyCards: document.querySelectorAll('.story-card').length,
+      videoFrames: document.querySelectorAll('iframe').length,
+      surveySteps: document.querySelectorAll('.step').length,
+      activeStep: [...document.querySelectorAll('.step')].findIndex((s) => s.classList.contains('active')),
+      numberedLabels: document.querySelectorAll('.question-label[data-number]').length,
+      rangeInputs: document.querySelectorAll('input[type="range"]').length,
+      submitButtonId: !!document.getElementById('submitButton'),
+      stepText: text('stepText'),
+      progressText: text('progressText'),
+      satisfactionValue: text('satisfactionValue'),
     },
   }
 }
 
-async function capture(browser, url, width, height, withJs) {
+async function capture(browser, url, width, height, withJs, runtime = withJs) {
   const pg = await browser.newPage()
   await pg.setJavaScriptEnabled(withJs)
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
@@ -325,7 +356,7 @@ async function capture(browser, url, width, height, withJs) {
   } else {
     await wait(500)
   }
-  const data = await pg.evaluate(withJs ? RUNTIME_PROBE : PROBE, withJs ? undefined : PROPS)
+  const data = await pg.evaluate(runtime ? RUNTIME_PROBE : PROBE, runtime ? undefined : PROPS)
   return { pg, data }
 }
 
@@ -337,13 +368,13 @@ const browser = await puppeteer.launch({
 })
 
 for (const slug of PAGES) {
-  const localUrl = `http://127.0.0.1:${PORT}/${slug}.html`
+  const localUrl = `http://127.0.0.1:${PORT}/${FILE.get(slug)}`
   const liveUrl = REMOTE + (slug === 'index' ? '/' : `/${slug}`)
 
   for (const width of WIDTHS) {
     const height = width < 700 ? 844 : 900
-    const a = await capture(browser, localUrl, width, height, false)
-    const b = await capture(browser, liveUrl, width, height, false)
+    const a = await capture(browser, localUrl, width, height, STATIC_PASS_JS, false)
+    const b = await capture(browser, liveUrl, width, height, STATIC_PASS_JS, false)
 
     // --- structure
     const keysA = Object.keys(a.data.styles)
@@ -408,8 +439,9 @@ for (const slug of PAGES) {
 
     if (wantShots) {
       fs.mkdirSync(SHOTS, { recursive: true })
-      await a.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-local.png`), fullPage: false })
-      await b.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-live.png`), fullPage: false })
+      const name = slug.replace(/\//g, '__')
+      await a.pg.screenshot({ path: path.join(SHOTS, `${name}-${width}-local.png`), fullPage: false })
+      await b.pg.screenshot({ path: path.join(SHOTS, `${name}-${width}-live.png`), fullPage: false })
     }
     await a.pg.close(); await b.pg.close()
   }

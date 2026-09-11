@@ -18,28 +18,70 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
-## Brandklout: the one-page run (2026-09-11)
+## Brandklout: the package run (v2, 2026-09-11)
 
-Published to `https://brandklout-production.up.railway.app`, `{"publishedPages":1}`. Gates:
-`verify-live` FAIL none · `css-parity` FAIL none · `visual-diff` **0.013%** at 1440, **0.028%** at 390 ·
-`compare-live` 9 findings, all benign (see trap 38 and the `.js` scope from trap 10).
+v1 (the same morning) was one HTML file, `preview (1).html`, published as one page. **v2 is a
+package**, a zip Sang sent, unpacked beside itself into `client-handoff/package-v2/`: a home
+page, a 21-question survey and five customer stories, **seven pages with three different
+stylesheets** (the home page's inline `<style>`, `survey/styles.css`,
+`customer-stories/story.css`). `preview (1).html` inside the zip is byte-identical to its
+`index.html` and is what the stories link back to; it is an alias of `/`, not a page.
+
+Published 2026-09-11, `{"publishedPages":7}`. Gates: `verify-live` FAIL none (7 routes, 7/7
+titles) · `css-parity` FAIL none · `visual-diff` home 0.030% / survey 0.000% / stories ≤0.006% at
+1440, ≤0.015% at 390 · `visual-diff --source` 0.000% everywhere · `compare-live` 23 findings, all
+benign (trap 38's flattened arrow, trap 30's auto-margin reading, the off-screen honeypot, the `.js`
+bootstrap). Details and the benign reasons: `docs/runbook/2026-09-11-sangs-v2-package-published.md`.
+Four real defects were found and fixed on the way: traps 39–41, plus a gate that read a comment.
 
 ```bash
-node prepare-source.mjs          # 0. Sang's HTML -> .tmp/site/{final-site,site-src}. The original is never edited
-node install-fonts.mjs --apply   # 0b. once per instance: DM Sans + Manrope into Instatic's library
-                                 #    (no upload-media / set-alt: the page has no images)
-node build-import-input.mjs      # 1. payload; media map optional, font excision optional
-RAILWAY_LINK_DIR=<dir linked by project id> bash ship.sh   # 2. convert on the container
+# the zip is never touched: unzip it into a sibling folder, e.g. client-handoff/package-v2/
+node prepare-source.mjs [package-v2]  # 0. package -> .tmp/site/{final-site,site-src}: pages at their package
+                                 #    paths, stylesheets SCOPED and joined, scripts guarded and joined,
+                                 #    form-control attributes recorded for repair, remote images downloaded,
+                                 #    site-src/pages.json = slug/file/scope for every later step
+node visual-diff.mjs --source && node visual-diff.mjs --source 390   # 0a. Sang's files vs the prepared
+                                 #    pages, both local: proves step 0 is lossless (0.000% expected)
+node install-fonts.mjs --apply   # 0b. once per instance (DM Sans + Manrope are installed)
+node upload-media.mjs            # 0c. images into the media library -> .tmp/media-map.json (trap 5)
+node set-alt.mjs --apply         # 0d. alt text lives only on the library asset (trap 28)
+node build-import-input.mjs      # 1. payload; PAGES is hand-written and must equal pages.json
+RAILWAY_LINK_DIR=<dir linked by project id> env -u RAILWAY_TOKEN -u RAILWAY_PROJECT_ID bash ship.sh
 node inspect-import.mjs          # 2b. buttons, form fields, ids — read it before pushing
-node push-site.mjs               # 3. dry run
-node push-site.mjs --apply [--force]   # --force from the second push on (trap 11)
+node push-site.mjs --force       # 3. dry run (it refuses without --force once a page has content)
+node push-site.mjs --apply --force     # trap 11: first check nobody edited a page in the admin
 node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
-node verify-live.mjs && node css-parity.mjs && node visual-diff.mjs && node visual-diff.mjs 390 && node compare-live.mjs
-node form-probe.mjs              # what the form does on submit; aborts every non-GET request
+node verify-live.mjs; node css-parity.mjs; node visual-diff.mjs; node visual-diff.mjs 390; node compare-live.mjs
+node form-probe.mjs              # the lead form AND the survey, end to end; aborts every non-GET request
 ```
 
-The Chrome gates need `puppeteer-core`, which is not a dependency of the repo: in a fresh worktree
-run `npm install --no-save puppeteer-core` at the worktree root (that is how `bk-stone` has it).
+Redirect every Node run to a file (`> .tmp/x.log 2>&1`), never a pipe. The Chrome gates need
+`puppeteer-core` at the worktree root (`npm install --no-save puppeteer-core` in a fresh worktree).
+
+**Why the stylesheets are scoped.** Instatic has one style registry for the whole site, and
+Sang's three stylesheets disagree about the same selectors: `body` background, `h1`, `section`
+padding, `.btn`, `.nav` (fixed on the home page, static on a story), `.promise`, `.success`,
+`--max`. Merged as written, every page gets a blend of all three. `prepare-source.mjs` puts a
+class on `<body>` per stylesheet (`pg-home`, `pg-survey`, `pg-story`) and prefixes every
+selector with `body.pg-x`. `:root` and `body` become `body.pg-x` itself, and `html {}` rules stay
+global (they must agree). Instatic renders body-node classes onto `<body>`. The prefix adds the
+same specificity to every rule of a stylesheet, so Sang's own cascade is unchanged, and
+`visual-diff --source` proves it. The cost is that nearly every rule is `ambient` rather than a
+class rule, so the Styles panel is less useful. That is the right trade for a phase-1 review.
+
+**One script asset, seven pages.** Each page's inline `<script>` is wrapped in
+`if (document.body.classList.contains('pg-x')) { … }`. Sang's home script calls
+`document.getElementById('leadForm').addEventListener` and would throw on every other page.
+
+Images: the page hotlinks YouTube thumbnails (`i.ytimg.com`). `prepare-source.mjs` downloads
+them to `assets/yt-<id>-<file>` and points the local pages at the copies, so both sides render
+the same bytes and the published page serves them from the media library with their alt text.
+
+Stories' `<iframe src="https://www.youtube-nocookie.com/embed/…">` import as `base.video`, which
+is what lifts the page's CSP `frame-src 'none'` for YouTube (a plain iframe would be blocked). The
+module re-renders the embed as `https://www.youtube.com/embed/<id>?rel=0`: the privacy-enhanced
+host and `modestbranding` are not kept. That is the module's behaviour, and the only way to keep
+the player allowed by the CSP.
 
 ### 35. A lossy value can take its NEIGHBOURS with it
 
@@ -72,6 +114,64 @@ form import as `base.container` with `customTag: button` and **keep** their chil
 Also true here, and good news: `<form>` imports as `base.form` with its `id`; inputs, selects and the
 textarea keep `name`, `type`, `placeholder` and `required`; section ids survive, so in-page anchors
 work.
+
+### 39. A slug with `/` saves, and publishes somewhere else
+
+`core/page-tree/slugs.ts` accepts `customer-stories/omnia-ai-search-growth`, and the save stores
+it in `cells.slug`. But the pages **table** derives its routing slug with `slugForTable` →
+`slugFromTitle`, which turns every non-alphanumeric run into `-`. The public router serves that
+one. v2's first publish put all five stories at `/customer-stories-<name>`, and every link to
+`/customer-stories/<name>` 404'd. The save, the SEO pass and `{"publishedPages":7}` all said ok.
+`verify-live.mjs` found it.
+
+A second symptom: `push-site.mjs` reuses row ids by slug, and the stored row slug never matched
+the pushed one, so the stories got new ids on every push (the dry-run ids differed from the
+applied ones). **Fix:** `prepare-source.mjs` flattens the folder path once
+(`customer-stories/x/index.html` → `customer-stories-x`), and every later step uses that string.
+Nested URLs need Instatic's own parent/child pages, which is a phase-2 decision.
+
+### 40. Media conditions are ordered site-wide, by first appearance
+
+Instatic registers each `@media` condition once, in the order the conversion first meets it, and
+emits every rule's conditional styles in that order. Joined story-first, v2's stylesheets gave
+`900, 620, 980`, so the home page's `≤980px` rules came **after** its `≤620px` rules and won. On a
+phone the operator card, the boundary grid and the footer stayed two columns. One stylesheet never
+shows this; two with different breakpoints can. `compare-live.mjs` at 390 found it.
+**Fix:** the joined `site.css` is every stylesheet's unconditioned rules, then every `@media` block,
+widest `max-width` first. Anything other than a single `max-width` query is refused.
+
+### 41. Form controls lose every attribute outside their prop list
+
+`walkAndMap.ts` carries arbitrary attributes only for containers, text, links, buttons, images and
+the form itself (`HTML_ATTRIBUTE_MODULES`). The form-control modules render from a fixed prop list:
+
+| module | keeps |
+| :--- | :--- |
+| `base.input` | name id value required disabled placeholder readonly autocomplete min max minlength maxlength pattern; `type` only if it is a text type (trap 22) |
+| `base.checkbox` / `base.radio` | name id value required disabled checked |
+| `base.select` / `base.textarea` | name id required disabled (+ placeholder rows minlength maxlength readonly) |
+| `base.label` (text only) | `for` |
+| `base.submit` | disabled, `form` |
+
+On the survey that loses the 21 numbered badges (`content: attr(data-number)` on
+`.question-label`), the 1–10 slider (`type="range"` → text), and **`id="submitButton"`, which
+Sang's script dereferences at boot**: without it `updateView` throws and the survey never draws
+step 1. It was found by reading the importer before the first import.
+**Fix:** `prepare-source.mjs` records every such attribute per page, keyed by a locator that
+survives (`#id`, `[name=…]`, `label[for=…]`, `#form button[type=submit]`), and site.js puts them
+back before any page script runs. It is a no-op on the local build. `form-probe.mjs` asserts the
+result (`rangeType: range`, `numberedLabels: 21/21`, `submitButton: true`).
+
+### 42. A `custom`-mode form is plain HTML, and nothing on Instatic receives its POST
+
+Instatic's form runtime only handles `data-instatic-form-mode="cms"` forms. An imported form is
+`custom` unless it says otherwise, and renders its own `action` and `method` with no JS. Sang's
+survey was written for Netlify Forms (`data-netlify`, `method="POST" action="?submitted=true"`).
+On Instatic that POST gets **`404 {"error":"Not found"}`**: a visitor who answers 21 questions
+lands on a raw JSON error, and the answers go nowhere. The lead form on the home page is the
+opposite case: Sang's own script cancels the submit and shows the prototype message. Neither
+captures anything. Where leads should go is Sang's decision: an Instatic `cms` form bound to a
+data table, or his CRM.
 
 Takes the static build in
 [`04-design/.tmp/med-spa/final-site`](../04-design/.tmp/med-spa/final-site) and puts it

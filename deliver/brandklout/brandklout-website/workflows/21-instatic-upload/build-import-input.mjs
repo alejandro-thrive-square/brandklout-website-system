@@ -35,11 +35,13 @@ const SITE = path.resolve(HERE, '.tmp/site')
 const FINAL = path.join(SITE, 'final-site')
 const TMP = path.join(HERE, '.tmp')
 
-// Brandklout's page has no images, so upload-media.mjs has nothing to do and there may be no
-// map. Any `assets/` reference that does appear is still refused below.
+// v2 has six images (YouTube thumbnails, downloaded into assets/ by prepare-source.mjs), so run
+// upload-media.mjs first. An `/assets/` reference with no map entry is refused below.
 const mediaMapFile = path.join(TMP, 'media-map.json')
 const mediaMap = fs.existsSync(mediaMapFile) ? JSON.parse(fs.readFileSync(mediaMapFile, 'utf8')).map : {}
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 'utf8'))
+// slug -> file -> scope, and the alias files (v2's `preview (1).html` is index.html again).
+const manifest = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'pages.json'), 'utf8'))
 
 /* ELEVEN PAGES — the second build, one per subtask on Asana task
    1218112701145002. Written out by hand rather than derived from the
@@ -65,13 +67,34 @@ const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 
 
    The six remaining treatment dossiers get a line each the day they are built.
    `botox` is the only one so far and it is the template for the rest. */
-// Brandklout phase 1: Sang's one page. (The comment above is the sibling's; the warning in it
-// still holds — in replace mode a slug missing from this list is deleted.)
+// Brandklout phase 1: Sang's package. v1 was one page; v2 (2026-09-11) is seven. (The comment
+// above is the sibling's; the warning in it still holds — in replace mode a slug missing from
+// this list is deleted.) Slugs are FLAT: Sang's `customer-stories/<name>/index.html` publishes at
+// `/customer-stories-<name>`, because the pages table routes on a slug with `-` for `/` whatever
+// the save accepted (trap 39). `title` is only the admin label; push-site.mjs publishes the page's
+// own <title> from seo.json.
 const PAGES = [
-  { file: 'index.html', slug: 'index', title: 'Home' },
+  { slug: 'index', title: 'Home' },
+  { slug: 'survey', title: 'Growth Survey' },
+  { slug: 'customer-stories-legacy-dental-pasadena', title: 'Story: Legacy Dental Pasadena' },
+  { slug: 'customer-stories-oceanic-ai-search-growth', title: 'Story: Oceanic Dental (AI search)' },
+  { slug: 'customer-stories-oceanic-future-ready', title: 'Story: Oceanic Dental (future-ready)' },
+  { slug: 'customer-stories-ocpao-ai-authority', title: 'Story: OCPAO Implant Courses' },
+  { slug: 'customer-stories-omnia-ai-search-growth', title: 'Story: Omnia Dental' },
 ]
 
 const problems = []
+
+// The list is hand-written on purpose (trap 8), so prove it matches what prepare-source found.
+// A package page with no line here would silently not be published; a line with no page would
+// fail to read. Both are refused.
+const fileBySlug = new Map(manifest.pages.map((p) => [p.slug, p.file]))
+for (const p of PAGES) if (!fileBySlug.has(p.slug)) problems.push(`PAGES lists ${p.slug}, which the package does not have`)
+for (const slug of fileBySlug.keys()) {
+  if (!PAGES.some((p) => p.slug === slug)) problems.push(`the package has ${slug} and PAGES does not — add a line (adding is safe; removing one deletes a live page, trap 8)`)
+}
+if (PAGES[0]?.slug !== 'index') problems.push('PAGES must start with index')
+const slugByFile = new Map(manifest.pages.map((p) => [p.file, p.slug]))
 
 function rewrite(html, file) {
   let out = html
@@ -107,18 +130,19 @@ function rewrite(html, file) {
   //     error and a wasted round trip.
   out = out.replace(/[ \t]*<link[^>]+rel="preload"[^>]+href="assets\/fonts\/[^"]+"[^>]*>\s*\n?/g, '')
 
-  // 1. Image sources -> media library paths.
-  out = out.replace(/(src|href)="assets\/([^"]+)"/g, (whole, attr, name) => {
+  // 1. Image sources -> media library paths. prepare-source.mjs writes every asset reference
+  //    root-relative (`/assets/x`), because the pages sit at different depths.
+  out = out.replace(/(src|href)="\/assets\/([^"]+)"/g, (whole, attr, name) => {
     if (name === 'site.css' || name === 'site.js') return whole // handled below
     const hit = mediaMap[name]
     if (!hit) {
-      problems.push(`${file}: no media-map entry for assets/${name}`)
+      problems.push(`${file}: no media-map entry for /assets/${name}`)
       return whole
     }
     return `${attr}="${hit.url}"`
   })
 
-  // 1b. Internal links: `treatments.html#face` -> `/treatments#face`.
+  // 1b. Internal links: a relative file path -> the target page's route (trap 4).
   //
   //     The static build links page-to-page by filename because it is opened
   //     from disk. Instatic routes by slug and serves nothing at `.html`:
@@ -127,31 +151,45 @@ function rewrite(html, file) {
   //     footer ribbon, category cards, every CTA — while each page in
   //     isolation looks perfect, which is exactly how it got missed the first
   //     time. `index.html` maps to `/`, not `/index`.
-  out = out.replace(/href="([a-z0-9-]+)\.html(#[^"]*)?"/g, (_whole, page, frag) => {
-    const target = page === 'index' ? '/' : `/${page}`
-    return `href="${target}${frag ?? ''}"`
+  //
+  //     v2's links are paths, not bare names: `customer-stories/omnia-ai-search-growth/index.html`,
+  //     `../oceanic-future-ready/index.html`, and `../../preview%20(1).html#apply` — the home page
+  //     under its alias, URL-encoded. So each href is resolved against the linking page's own
+  //     path, decoded, de-aliased, and looked up in the manifest. A relative link to anything that
+  //     is not a page in the package is refused rather than published as a 404.
+  out = out.replace(/href="([^"#?]*)(#[^"]*)?"/g, (whole, target, frag) => {
+    if (!target) return whole // an in-page anchor, or `#`
+    if (/^(?:[a-z][a-z0-9+.-]*:|\/)/i.test(target)) return whole // a scheme, or already a route
+    const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(file), decodeURIComponent(target)))
+    const slug = slugByFile.get(manifest.aliases[resolved] ?? resolved)
+    if (!slug) {
+      problems.push(`${file}: link "${target}" resolves to ${resolved}, which is not a page in the package`)
+      return whole
+    }
+    return `href="${slug === 'index' ? '/' : `/${slug}`}${frag ?? ''}"`
   })
 
   // 2. Drop the bundle links; both become site-level assets instead.
-  out = out.replace(/[ \t]*<link[^>]+href="assets\/site\.css"[^>]*>\s*\n?/g, '')
-  out = out.replace(/[ \t]*<script[^>]+src="assets\/site\.js"[^>]*><\/script>\s*\n?/g, '')
+  out = out.replace(/[ \t]*<link[^>]+href="\/assets\/site\.css"[^>]*>\s*\n?/g, '')
+  out = out.replace(/[ \t]*<script[^>]+src="\/assets\/site\.js"[^>]*><\/script>\s*\n?/g, '')
 
   // Anything still pointing into assets/ would 404 once published.
-  for (const m of out.matchAll(/"assets\/([^"]+)"/g)) {
+  for (const m of out.matchAll(/"\/?assets\/([^"]+)"/g)) {
     problems.push(`${file}: unrewritten reference to assets/${m[1]}`)
   }
   return out
 }
 
-const pages = PAGES.map((p) => {
-  const raw = fs.readFileSync(path.join(FINAL, p.file), 'utf8')
+const pages = PAGES.filter((p) => fileBySlug.has(p.slug)).map((p) => {
+  const file = fileBySlug.get(p.slug)
+  const raw = fs.readFileSync(path.join(FINAL, file), 'utf8')
   const d = seo.pages[p.slug] ?? {}
   return {
     slug: p.slug,
     title: p.title,
     seoTitle: d.title ?? '',
     seoDescription: d.description ?? '',
-    html: rewrite(raw, p.file),
+    html: rewrite(raw, file),
   }
 })
 

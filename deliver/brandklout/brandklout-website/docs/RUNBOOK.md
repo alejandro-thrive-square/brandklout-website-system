@@ -10,27 +10,31 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: PUBLISHED on the review link, waiting on Sang (2026-09-11)
+## Status: v2 PUBLISHED on the review link, waiting on Sang (2026-09-11)
 
-- **Live at <https://brandklout-production.up.railway.app>**: Sang's page as he wrote it, one
-  editable Instatic page. Admin at `/admin`, with the same login as Mason Park.
-- Gates: `verify-live` and `css-parity` FAIL none. `visual-diff` 0.013% at 1440 and 0.028% at 390.
-  `compare-live` shows 9 benign findings.
+- **Live at <https://brandklout-production.up.railway.app>**: Sang's v2 package as he wrote it,
+  **seven** editable Instatic pages: `/`, `/survey` and five stories at `/customer-stories-<name>`.
+  Admin at `/admin`, with the same login as Mason Park. Source: `client-handoff/package-v2/`.
+- Gates: `verify-live` and `css-parity` FAIL none. `visual-diff` ≤0.030% on every page at 1440 and
+  390. `compare-live` shows 23 findings, all benign. Details:
+  [`runbook/2026-09-11-sangs-v2-package-published.md`](./runbook/2026-09-11-sangs-v2-package-published.md).
 - **Not on any Brandklout domain.** The cutover waits for Sang's approval.
-- **The page itself is not launch-ready, by its own text.** The lead form captures nothing and
-  tells visitors it is a prototype. Privacy, Terms and HIPAA link to `#`. Two lines say "replace
-  before production". The full list is in
-  [`runbook/2026-09-11-sangs-page-published.md`](./runbook/2026-09-11-sangs-page-published.md).
+- **The site is not launch-ready, by its own text.** The home form captures nothing and tells
+  visitors it is a prototype. **The new survey POSTs into a 404** (a Netlify form on Instatic), so
+  its answers are lost. Privacy, Terms and HIPAA link to `#`. The prototype lines are still there.
+  The claims have grown: a 60-day money-back guarantee on every page, 10-mile exclusivity, and
+  story metrics. The full table is in the run file above.
 - Worktree `bk-brandklout-website`. Railway project `Brandklout`
   `550ebd58-0e74-444e-96d5-2b836a2db98a`, service `742221a0-b1f1-45f1-bf42-fc7bab85adca`, env
   `production` `ebac465d-468b-4cd3-afc6-78da721e0eb0`.
 
 ## Next
 
-1. Sang reviews the link and answers the flagged list: where the form should send leads, the real
-   Privacy/Terms/HIPAA pages, the prototype lines, and the claims.
-2. Apply his corrections to the source (a new handoff file, or edits on a working copy), then
-   rerun the chain in `21-instatic-upload.md` → "Brandklout: the one-page run".
+1. Sang reviews the link and answers the flagged list: where the lead form **and the survey**
+   should send their data, the real Privacy/Terms/HIPAA pages, the prototype lines, the claims,
+   and the white-on-white story CTA button.
+2. Apply his corrections to the source (a new package, unzipped beside itself), then rerun the
+   chain in `21-instatic-upload.md` → "Brandklout: the package run".
 3. Domain cutover via `20-instatic-domain-origins`, then add the domain to `sites.json`.
 4. Phase 2: redesign and expand (see the project overview).
 
@@ -44,7 +48,12 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
    worktree root before the Chrome gates.
 4. **`push-site.mjs --apply --force` replaces the whole site.** If anyone edits the page in the
    admin, those edits are lost on the next push. Pull their changes into the source first.
-5. The toolkit's comments still describe Stone in many places. The Brandklout box and section at
+5. **Routes are flat.** A package path `customer-stories/x/index.html` publishes at
+   `/customer-stories-x` (trap 39). Take routes from `.tmp/site/site-src/pages.json`.
+6. **Several stylesheets become one registry.** `prepare-source.mjs` scopes each to a `<body>`
+   class and orders `@media` widest first (trap 40). Run `visual-diff --source` after any change
+   to it: it must stay at 0.000%.
+7. The toolkit's comments still describe Stone in many places. The Brandklout box and section at
    the top of `21-instatic-upload.md` are what is true here.
 
 ## Version Control

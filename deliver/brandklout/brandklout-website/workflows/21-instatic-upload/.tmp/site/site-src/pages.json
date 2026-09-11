@@ -1,0 +1,43 @@
+{
+  "package": "package-v2",
+  "aliases": {
+    "preview (1).html": "index.html"
+  },
+  "pages": [
+    {
+      "slug": "customer-stories-legacy-dental-pasadena",
+      "file": "customer-stories/legacy-dental-pasadena/index.html",
+      "scope": "pg-story"
+    },
+    {
+      "slug": "customer-stories-oceanic-ai-search-growth",
+      "file": "customer-stories/oceanic-ai-search-growth/index.html",
+      "scope": "pg-story"
+    },
+    {
+      "slug": "customer-stories-oceanic-future-ready",
+      "file": "customer-stories/oceanic-future-ready/index.html",
+      "scope": "pg-story"
+    },
+    {
+      "slug": "customer-stories-ocpao-ai-authority",
+      "file": "customer-stories/ocpao-ai-authority/index.html",
+      "scope": "pg-story"
+    },
+    {
+      "slug": "customer-stories-omnia-ai-search-growth",
+      "file": "customer-stories/omnia-ai-search-growth/index.html",
+      "scope": "pg-story"
+    },
+    {
+      "slug": "index",
+      "file": "index.html",
+      "scope": "pg-home"
+    },
+    {
+      "slug": "survey",
+      "file": "survey/index.html",
+      "scope": "pg-survey"
+    }
+  ]
+}

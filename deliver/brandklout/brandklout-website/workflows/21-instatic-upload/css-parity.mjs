@@ -160,8 +160,16 @@ function index(css) {
 }
 
 const localCss = fs.readFileSync(LOCAL_CSS, 'utf8')
-const home = await (await fetch(REMOTE + '/')).text()
-const hrefs = [...home.matchAll(/href="(\/_instatic\/css\/[^"]+\.css)"/g)].map((m) => m[1])
+/* Every route's stylesheets, not just the home page's. Brandklout v2 has seven pages whose rules
+   are scoped to different body classes, and the publisher may tree-shake per page, so a rule for
+   `body.pg-survey` is only guaranteed to appear on /survey. */
+const manifest = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
+const hrefSet = new Set()
+for (const p of manifest.pages) {
+  const html = await (await fetch(REMOTE + (p.slug === 'index' ? '/' : `/${p.slug}`))).text()
+  for (const m of html.matchAll(/href="(\/_instatic\/css\/[^"]+\.css)"/g)) hrefSet.add(m[1])
+}
+const hrefs = [...hrefSet]
 let liveCss = ''
 for (const h of hrefs) liveCss += '\n' + (await (await fetch(REMOTE + h)).text())
 console.log(`live stylesheets: ${hrefs.map((h) => h.split('/').pop()).join(', ')}`)

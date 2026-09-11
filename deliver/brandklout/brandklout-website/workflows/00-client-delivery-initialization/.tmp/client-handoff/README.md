@@ -6,6 +6,10 @@ Drop the source material here, once, exactly as received.
   as-is, including any stylesheets, scripts or images that came with it. Do not edit this copy.
   Any cleanup happens on a working copy under `../../../21-instatic-upload/.tmp/`, so this file
   always shows what Sang actually sent.
+- **`BrandKlout-Preview1-Website-Package (1).zip`** (2026-09-11, v2): seven pages, three
+  stylesheets. The zip is kept as received (gitignored). It is unpacked, never over itself, into
+  **`package-v2/`**, which is the source `21-instatic-upload/prepare-source.mjs` reads. Its
+  `preview (1).html` is byte-identical to its `index.html`. The v1 file above stays as it was.
 - Anything else Sang sends that belongs to the first handoff (logo files, brand notes, the
   compliance request itself) goes here too. Later material goes in the `.tmp/` of the workflow
   that uses it.

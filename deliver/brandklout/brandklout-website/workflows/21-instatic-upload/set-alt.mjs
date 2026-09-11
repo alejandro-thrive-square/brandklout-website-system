@@ -51,11 +51,14 @@ const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'u
    already fails on an <img> without one. */
 const alts = new Map()
 const conflicts = []
-for (const file of fs.readdirSync(FINAL).filter((f) => f.endsWith('.html'))) {
+// Every page at every depth: Brandklout v2 nests its pages (`customer-stories/<name>/index.html`)
+// and writes image srcs root-relative (`/assets/x`). A top-level-only walk would see one page.
+const htmlFiles = fs.readdirSync(FINAL, { recursive: true }).map(String).filter((f) => f.endsWith('.html'))
+for (const file of htmlFiles) {
   const html = fs.readFileSync(path.join(FINAL, file), 'utf8')
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     const tag = m[0]
-    const src = (tag.match(/\bsrc="assets\/([^"]+)"/) ?? [])[1]
+    const src = (tag.match(/\bsrc="\/?assets\/([^"]+)"/) ?? [])[1]
     const alt = (tag.match(/\balt="([^"]*)"/) ?? [])[1]
     if (!src || !alt) continue // a deliberately decorative image keeps alt=""
     if (!alts.has(src)) alts.set(src, new Set())

@@ -60,10 +60,31 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-const ALL = ['index']
+/* Brandklout v2: seven pages. Written out, and checked against the build's own page list
+   (prepare-source.mjs -> site-src/pages.json) so this gate cannot quietly watch a subset. */
+const ALL = [
+  'index',
+  'survey',
+  'customer-stories-legacy-dental-pasadena',
+  'customer-stories-oceanic-ai-search-growth',
+  'customer-stories-oceanic-future-ready',
+  'customer-stories-ocpao-ai-authority',
+  'customer-stories-omnia-ai-search-growth',
+]
+const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
+const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
+if ([...FILE.keys()].sort().join() !== [...ALL].sort().join()) {
+  throw new Error(`visual-diff's page list does not match the build: build ${[...FILE.keys()].sort().join(', ')}`)
+}
 const args = process.argv.slice(2)
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ALL
+const slugArg = args.find((a) => !a.startsWith('--') && /^(?!\d+$)[a-z0-9/-]+$/.test(a))
+const PAGES = slugArg ? [slugArg] : ALL
 const WIDTH = Number(args.find((a) => /^\d+$/.test(a)) ?? 1440)
+/* --source: compare Sang's ORIGINAL package page against the prepared local page instead of
+   local against live. It proves the prepare step (CSS scoping, bundling, downloaded images) is
+   lossless before anything is imported, so a difference found later is the import's. */
+const SOURCE = args.includes('--source')
+const SOURCE_ROOT = path.resolve(HERE, '../00-client-delivery-initialization/.tmp/client-handoff', MANIFEST.package)
 
 /* A pixel counts as different only past this per-channel distance. Text
    antialiasing and a font served from a different origin move single channels
@@ -72,14 +93,20 @@ const WIDTH = Number(args.find((a) => /^\d+$/.test(a)) ?? 1440)
 const THRESHOLD = 24
 
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
-const server = http.createServer((req, res) => {
-  const f = path.join(LOCAL_ROOT, decodeURIComponent(req.url.split('?')[0]))
-  if (!fs.existsSync(f) || fs.statSync(f).isDirectory()) return res.writeHead(404).end()
-  res.writeHead(200, { 'content-type': MIME[path.extname(f)] ?? 'application/octet-stream' })
-  fs.createReadStream(f).pipe(res)
-})
+const serve = (root) =>
+  http.createServer((req, res) => {
+    let f = path.join(root, decodeURIComponent(req.url.split('?')[0]))
+    if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html')
+    if (!fs.existsSync(f)) return res.writeHead(404).end()
+    res.writeHead(200, { 'content-type': MIME[path.extname(f)] ?? 'application/octet-stream' })
+    fs.createReadStream(f).pipe(res)
+  })
+const server = serve(LOCAL_ROOT)
 await new Promise((r) => server.listen(0, r))
 const port = server.address().port
+const sourceServer = serve(SOURCE_ROOT)
+await new Promise((r) => sourceServer.listen(0, r))
+const sourcePort = sourceServer.address().port
 
 fs.mkdirSync(OUT, { recursive: true })
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 300000, args: ['--no-sandbox', '--hide-scrollbars'] })
@@ -285,16 +312,21 @@ async function diff(localFile, liveFile, diffFile) {
 const summary = []
 for (const slug of PAGES) {
   const route = slug === 'index' ? '' : slug
-  const localFile = path.join(OUT, `${slug}-${WIDTH}-local.png`)
-  const liveFile = path.join(OUT, `${slug}-${WIDTH}-live.png`)
-  const diffFile = path.join(OUT, `${slug}-${WIDTH}-diff.png`)
+  const name = slug.replace(/\//g, '__')
+  const localUrl = `http://127.0.0.1:${port}/${FILE.get(slug)}`
+  const [aUrl, bUrl, aTag, bTag, dTag] = SOURCE
+    ? [`http://127.0.0.1:${sourcePort}/${encodeURI(FILE.get(slug))}`, localUrl, 'source', 'local', 'srcdiff']
+    : [localUrl, `${REMOTE}/${route}`, 'local', 'live', 'diff']
+  const localFile = path.join(OUT, `${name}-${WIDTH}-${aTag}.png`)
+  const liveFile = path.join(OUT, `${name}-${WIDTH}-${bTag}.png`)
+  const diffFile = path.join(OUT, `${name}-${WIDTH}-${dTag}.png`)
 
-  await shoot(`http://127.0.0.1:${port}/${slug}.html`, localFile)
-  await shoot(`${REMOTE}/${route}`, liveFile)
+  await shoot(aUrl, localFile)
+  await shoot(bUrl, liveFile)
   const r = await diff(localFile, liveFile, diffFile)
 
-  const heightNote = r.aH === r.bH ? '' : `  HEIGHT local ${r.aH} vs live ${r.bH} (${r.bH - r.aH >= 0 ? '+' : ''}${r.bH - r.aH})`
-  console.log(`${slug.padEnd(18)} ${r.pct.toFixed(3).padStart(7)}% differ${heightNote}`)
+  const heightNote = r.aH === r.bH ? '' : `  HEIGHT ${aTag} ${r.aH} vs ${bTag} ${r.bH} (${r.bH - r.aH >= 0 ? '+' : ''}${r.bH - r.aH})`
+  console.log(`${slug.padEnd(42)} ${r.pct.toFixed(3).padStart(7)}% differ${heightNote}`)
   for (const [y0, y1, peak] of r.bands) {
     console.log(`    y ${String(y0).padStart(5)}-${String(y1).padStart(5)}  (${y1 - y0}px tall, peak ${((peak / r.w) * 100).toFixed(0)}% of the width)`)
   }
@@ -309,3 +341,4 @@ console.log(`\nimages in ${OUT}`)
 
 await browser.close()
 server.close()
+sourceServer.close()
