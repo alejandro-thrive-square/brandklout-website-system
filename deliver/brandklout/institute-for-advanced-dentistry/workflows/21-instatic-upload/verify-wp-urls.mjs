@@ -19,12 +19,12 @@ const CSV = path.join(HERE, '..', '01-content-intake', '.tmp', 'current-site-scr
 const BASE = (process.argv[2] || 'https://institute-for-advanced-dentistry-production.up.railway.app').replace(/\/$/, '')
 const viaCloudflare = !/\.up\.railway\.app$/.test(new URL(BASE).host)
 
-// Mirror of docs/dns/URL-RULES.md. Keep the two in step.
-const REDIRECTS = [
-  [/^\/about\/?$/, '/about-our-practice/'],
-  [/^\/contact\/?$/, '/contact-us/'],
-]
+// Mirror of docs/dns/set-url-rules.mjs. Keep the two in step. /about and /contact are rewrites,
+// not WordPress's 301s: the shared Cloudflare token cannot write redirect rules.
+const REDIRECTS = []
 const REWRITES = [
+  [/^\/about\/?$/, () => '/about-our-practice/'],
+  [/^\/contact\/?$/, () => '/contact-us/'],
   [/^\/about-our-practice\/articles\/page\/(.+)$/, (m) => `/about-our-practice-articles-page-${m[1]}`],
   [/^\/category\/([^/]+)\/page\/(.+)$/, (m) => `/category-${m[1]}-page-${m[2]}`],
   [/^\/(dental-services|about-our-practice|contact-us|category)\/(.+)$/, (m) => `/${m[1]}-${m[2]}`],

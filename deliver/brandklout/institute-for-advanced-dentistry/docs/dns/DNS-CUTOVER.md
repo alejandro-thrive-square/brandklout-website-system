@@ -7,9 +7,9 @@ State as of **2026-09-11**, read from public DNS over HTTPS and from the Cloudfl
 | Item | Value |
 | :--- | :--- |
 | Registrar | Squarespace Domains. Nameserver changes are made there. Brandklout has access (confirmed 2026-09-11), so the agency is not needed |
-| Live nameservers | `cullen.ns.cloudflare.com`, `gracie.ns.cloudflare.com`. That is a **different Cloudflare account**, the outgoing agency's |
-| New zone | Brandklout's account (`Agency@brandklout.com's Account`), zone `223386e4eda469fb038a4c716bd3f0fe`, status `initializing`, assigned `ajay.ns.cloudflare.com` / `ruth.ns.cloudflare.com` |
-| Web host | WordPress on WordKeeper (LiteSpeed), proxied through the agency's Cloudflare. Origin IP is hidden |
+| Nameservers | **Switched 2026-09-11 ~21:40Z** to `ajay.ns.cloudflare.com` / `ruth.ns.cloudflare.com` (Brandklout's account, zone `223386e4eda469fb038a4c716bd3f0fe`, active 21:44Z). They were `cullen`/`gracie` on the agency's Cloudflare account. The Squarespace DNS records are inactive now; leave them |
+| Web host | **Instatic on Railway**. `www` is a CNAME to `wshw0478.up.railway.app` (proxied); the apex is a CNAME to `133e393p.up.railway.app` and 301s to `www`. Each has a `_railway-verify` TXT record. It was WordPress on WordKeeper (LiteSpeed) |
+| Zone fixes after the import | The imported `www` A/AAAA records (agency edge IPs, Error 1000) were replaced. Always Use HTTPS is on. `_domainconnect` is DNS-only. The Google Workspace verification CNAME `52sz77enrdng` was restored from the Squarespace DNS. See `../runbook/2026-09-11-cloudflare-conflicts.md` |
 | Subdomains | Only `www`. Certificate transparency and a probe of about 100 common names found nothing else, and there is no wildcard record |
 
 ## Email is not on the web host

@@ -10,8 +10,16 @@ These Cloudflare rules make every WordPress URL answer on the domain, **unchange
 bar**. They are rewrites, not redirects. Checked 2026-09-11: 61 WordPress URLs, 29 need a rewrite,
 2 are WordPress's own 301s, and **0 fail** (`workflows/21-instatic-upload/verify-wp-urls.mjs`).
 
-Set them up in the new zone before the nameserver switch. Rules can be added while the zone is
-pending.
+> [!NOTE]
+> **Live since 2026-09-11 ~21:57Z, created through the API** by
+> [`set-url-rules.mjs`](./set-url-rules.mjs) (`--apply`; ruleset `925d309d730e494891daab6c640d7ad7`).
+> The shared `CLOUDFLAREAPI` token can write the URL-rewrite phase but gets a 403 on redirect
+> rules, DNS and zone settings. So `/about` and `/contact` are **rewrites** to their target pages
+> (their canonical tags still point at the target), not WordPress's 301s. The apex → www
+> redirect is live too (22:21Z, [`set-redirect-rules.mjs`](./set-redirect-rules.mjs), through a
+> temporary zone token), and so is Always Use HTTPS. Of the redirect table below, only row 1
+> exists; rows 2–3 are the rewrites instead. `set-url-rules.mjs` is the
+> source of truth. The tables are the same rules, for a person doing it by hand.
 
 ## URL rewrites
 

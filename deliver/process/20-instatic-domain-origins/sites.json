@@ -28,10 +28,10 @@
     },
     {
       "client": "institute-for-advanced-dentistry",
-      "adminUrl": "https://institute-for-advanced-dentistry-production.up.railway.app",
-      "alternates": [],
+      "adminUrl": "https://www.ifadentistry.com",
+      "alternates": ["https://institute-for-advanced-dentistry-production.up.railway.app"],
       "railway": { "project": "3449a121-3580-485b-97f5-8c8903f8e409", "service": "Institute for Advanced Dentistry" },
-      "note": "Provisioned 2026-09-11 name-first by provision-instance.mjs, so PUBLIC_ORIGIN is the generated host from first boot. The clone of the WordPress site at www.ifadentistry.com; the domain is not moved yet (see the client's docs/dns/DNS-CUTOVER.md). Add www.ifadentistry.com to PUBLIC_ORIGIN and here at cutover, and keep this host."
+      "note": "Cut over 2026-09-11 ~21:40Z. PUBLIC_ORIGIN set 21:57Z to www, apex, railway host (in that order) and redeployed; www fixed 22:20Z (CNAME wshw0478.up.railway.app, proxied) and the apex now 301s to www. check-origins --all clean: www and the railway host OK, zero TRAP."
     }
   ]
 }
