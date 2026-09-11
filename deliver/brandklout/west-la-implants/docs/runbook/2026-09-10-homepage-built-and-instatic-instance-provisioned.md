@@ -1,7 +1,7 @@
 # 2026-09-10 — Homepage built as an eight-chapter journey, two more competitors, Instatic instance provisioned
 
-**Commits:** `a1c4da87` (build + research), `56a7ab3b` (instance + provisioning script), push commit in
-the follow-up run once the upload agent lands it.
+**Commits:** `a1c4da87` (build + research), `56a7ab3b` (instance + provisioning script), `9ee0a7ca`
+(docs), `b8ff5487` (the push — its own entry follows this one in the index).
 
 ## Done
 
