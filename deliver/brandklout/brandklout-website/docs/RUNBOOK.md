@@ -14,7 +14,10 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 - **Live at <https://brandklout-production.up.railway.app>**: Sang's v2 package as he wrote it,
   **seven** editable Instatic pages: `/`, `/survey` and five stories at `/customer-stories-<name>`.
-  Admin at `/admin`, with the same login as Mason Park. Source: `client-handoff/package-v2/`.
+  Admin at `/admin`, with the same logins as Mason Park: the owner, and since 2026-09-12 Sang
+  (`sang@thrivesquare.com`, admin, see
+  [`runbook/2026-09-12-sang-admin-account.md`](./runbook/2026-09-12-sang-admin-account.md)).
+  Source: `client-handoff/package-v2/`.
 - Gates: `verify-live` and `css-parity` FAIL none. `visual-diff` ≤0.030% on every page at 1440 and
   390. `compare-live` shows 23 findings, all benign. Details:
   [`runbook/2026-09-11-sangs-v2-package-published.md`](./runbook/2026-09-11-sangs-v2-package-published.md).
