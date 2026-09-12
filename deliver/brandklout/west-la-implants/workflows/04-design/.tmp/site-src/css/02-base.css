@@ -21,11 +21,16 @@ ul{margin:0;padding:0;list-style:none}
 .wrap--wide{width:min(96rem,calc(100% - var(--gutter)*2));margin-inline:auto}
 
 /* type */
-.serif{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;line-height:1}
-.display{font-family:var(--serif);font-weight:400;font-size:var(--t-display);line-height:.96;letter-spacing:-.035em;font-variation-settings:'opsz' 96}
-.h2{font-family:var(--serif);font-weight:400;font-size:var(--t-h2);line-height:1.02;letter-spacing:-.03em;font-variation-settings:'opsz' 72}
-.h3{font-family:var(--serif);font-weight:400;font-size:var(--t-h3);line-height:1.08;letter-spacing:-.02em}
-.h2 em,.display em,.h3 em{font-style:italic;font-weight:400;color:var(--gold)}
+/* Bodoni Moda's optical-size axis is the readability dial: at opsz 96 the
+   hairlines vanish on a 1440 screen and Brandklout flagged the copy as hard to
+   read (BugHerd #1, #6). Weight 500 and a lower opsz keep the editorial look
+   with strokes that survive antialiasing. Line-heights carry the descenders —
+   the SplitText line masks clip anything below the box (BugHerd #5, #11). */
+.serif{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;line-height:1.1;font-variation-settings:'opsz' 36}
+.display{font-family:var(--serif);font-weight:500;font-size:var(--t-display);line-height:1.04;letter-spacing:-.025em;font-variation-settings:'opsz' 48}
+.h2{font-family:var(--serif);font-weight:500;font-size:var(--t-h2);line-height:1.12;letter-spacing:-.02em;font-variation-settings:'opsz' 42}
+.h3{font-family:var(--serif);font-weight:500;font-size:var(--t-h3);line-height:1.14;letter-spacing:-.015em;font-variation-settings:'opsz' 36}
+.h2 em,.display em,.h3 em{font-style:italic;font-weight:500;color:var(--gold)}
 .lead{font-size:var(--t-lead);line-height:1.55;color:var(--ink-muted);max-width:36rem}
 .small{font-size:var(--t-small)}
 .kicker{display:inline-flex;align-items:center;gap:.7rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
@@ -49,10 +54,13 @@ ul{margin:0;padding:0;list-style:none}
 .btn-ghost:hover{color:var(--ground)}
 .btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ground)}
 .btn-gold::before{background:var(--ink)}
-.textlink{display:inline-flex;align-items:center;gap:.6rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding-bottom:.35rem;position:relative}
-.textlink::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:currentColor;transform-origin:right;transition:transform .5s var(--ease-out)}
-.textlink:hover::after{transform:scaleX(0);transform-origin:left;animation:tl-return .5s var(--ease-out) .5s forwards}
-@keyframes tl-return{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
+/* The underline is a background gradient on the element itself, not a
+   positioned pseudo-element: BugHerd's capturer drew the ::after of the
+   stacked, hidden story links as a strike through the visible one (#8, #9). */
+.textlink{display:inline-flex;align-items:center;gap:.6rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding-bottom:.35rem;
+  background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position-x:left;background-position-y:bottom;background-size:100% 1px;transition:background-size .5s var(--ease-out)}
+.textlink:hover{background-size:0% 1px;background-position-x:right;background-position-y:bottom;animation:tl-return .5s var(--ease-out) .5s forwards}
+@keyframes tl-return{from{background-size:0% 1px;background-position-x:left;background-position-y:bottom}to{background-size:100% 1px;background-position-x:left;background-position-y:bottom}}
 .textlink .arrow{display:inline-block;transition:transform .4s var(--ease-out)}
 .textlink:hover .arrow{transform:translateX(.35rem)}
 
@@ -78,6 +86,8 @@ ul{margin:0;padding:0;list-style:none}
 /* animation hooks */
 [data-anim="hide"]{visibility:hidden}
 .wz-line{overflow:hidden}
+/* SplitText masks clip at the line box; give descenders room (BugHerd #5, #11) */
+.wz-line-mask{padding-bottom:.18em;margin-bottom:-.18em}
 html.wz-ready .reveal-mask{overflow:hidden;display:block}
 
 /* horizontal rule */

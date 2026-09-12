@@ -16,6 +16,12 @@ Start at [`project-overview.md`](./project-overview.md).
 
 ## Status: PUBLISHED — the homepage is live on the client's Instatic instance
 
+**2026-09-11.** Brandklout's first BugHerd pass (13 tasks on project 541030) is fixed, republished
+(seq 11) and every task is answered and closed — [run](./runbook/2026-09-11-bugherd-round-one-thirteen-fixes-republished.md).
+Type is heavier and larger-leaded, the treatment rail is shorter, the story stage is sized in JS,
+Leslie has a new frame. `08-qa/.tmp/bugherd/pull-bugherd.mjs` and `reply-bugherd.mjs` handle the
+next round.
+
 **2026-09-10.** <https://west-la-implants-production.up.railway.app/> serves the eight-chapter
 homepage. `{"publishedPages":1}`, 560 nodes, 272 style rules, 52 media assets (44 images, 5 mp4
 films, 3 variable woff2), alt text on 19 photographs, favicon set.

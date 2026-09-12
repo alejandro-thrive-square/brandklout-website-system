@@ -1019,6 +1019,15 @@ the unconditional rule declares the same property. `normCond()` now matches the 
 normalisation. It cannot reuse `norm()`: that is the SELECTOR normaliser and would turn `a:hover`
 into `a: hover`.
 
+### 41. `background-position` is split into `-x` / `-y` longhands, and css-parity reports the shorthand missing
+
+Found 2026-09-11. `.textlink { background-position: left bottom }` published as
+`background-position-x: left; background-position-y: bottom` — the page renders correctly, the
+computed value is `0% 100%`, and `css-parity.mjs` still lists `.textlink {background-position}`
+as a declaration published without its property, because it pairs on property names. Author the
+two longhands in the source and the gate is clean. (The comma-layered case is trap 26 territory
+and is harvested into the code asset instead.)
+
 ### The check: `css-parity.mjs`
 
 ```bash

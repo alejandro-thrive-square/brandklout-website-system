@@ -209,8 +209,9 @@ WZ.section('ch-surgeon', function(W){
   if (W.reduced) return;
   gsap.fromTo(portrait, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut',
     scrollTrigger: { trigger: portrait, start: 'top 80%', once: true } });
-  var pimg = portrait.querySelector('.par');
-  gsap.fromTo(pimg, { yPercent: -7, scale: 1.08 }, { yPercent: 7, scale: 1.02, ease: 'none',
+  /* a gentle settle only — the head stays in frame (BugHerd #3) */
+  var pimg = portrait.querySelector('img');
+  gsap.fromTo(pimg, { scale: 1.06 }, { scale: 1.01, ease: 'none',
     scrollTrigger: { trigger: portrait, start: 'top bottom', end: 'bottom top', scrub: true } });
   gsap.from(sec.querySelectorAll('.su-creds li'), { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .09,
     scrollTrigger: { trigger: sec.querySelector('.su-creds'), start: 'top 85%', once: true } });
@@ -230,6 +231,27 @@ WZ.section('ch-transformation', function(W){
   wzLinesIn(sec.querySelector('.tr-copy .h2'));
   if (W.reduced) return;
 
+  /* The stories are stacked absolutely, so the container has no height of its
+     own; when a story outgrew the CSS min-height the progress dots below it
+     landed across the "Watch … story" link and read as a strike-through
+     (BugHerd #8, #9). Size the container from the tallest story instead. */
+  var stage = document.getElementById('transStories');
+  function sizeStage(){
+    var max = 0;
+    stories.forEach(function(s){
+      /* inset:0 stretches an absolute story to the container, so measure it
+         in flow, not in place */
+      var prev = s.style.display, prevOp = s.style.opacity, prevPos = s.style.position;
+      s.style.display = 'block'; s.style.opacity = '0'; s.style.position = 'static';
+      max = Math.max(max, s.offsetHeight);
+      s.style.display = prev; s.style.opacity = prevOp; s.style.position = prevPos;
+    });
+    stage.style.minHeight = (max + 8) + 'px';
+  }
+  sizeStage();
+  window.addEventListener('resize', function(){ sizeStage(); ScrollTrigger.refresh(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeStage);
+
   var n = stories.length;
   var tl = gsap.timeline({
     scrollTrigger: { trigger: pin, start: 'top top', end: '+=' + (n * 100) + '%', pin: true, scrub: .3, anticipatePin: 1,
@@ -244,16 +266,12 @@ WZ.section('ch-transformation', function(W){
     tl.to({}, { duration: .55 })
       .fromTo(shots[i], { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: .45, ease: 'power3.inOut' })
       .fromTo(shots[i].querySelector('img'), { scale: 1.12 }, { scale: 1.04, duration: .6, ease: 'none' }, '<')
-      .to(stories[i - 1], { opacity: 0, y: -14, duration: .14, ease: 'power2.in', onComplete: (function(el){ return function(){ el.style.visibility = 'hidden'; }; })(stories[i - 1]) }, '<')
-      .set(stories[i], { visibility: 'visible' }, '<+.14')
+      .to(stories[i - 1], { opacity: 0, y: -14, duration: .14, ease: 'power2.in' }, '<')
+      .set(stories[i - 1], { display: 'none' })
+      .set(stories[i], { display: 'block' })
       .to(stories[i], { opacity: 1, y: 0, duration: .26, ease: 'power2.out' }, '<');
   }
   tl.to({}, { duration: .55 });
-  /* on reverse the hidden story must come back */
-  stories.forEach(function(s){ s.addEventListener('transitionend', function(){}); });
-  tl.eventCallback('onUpdate', function(){
-    stories.forEach(function(s){ if (parseFloat(getComputedStyle(s).opacity) > 0) s.style.visibility = 'visible'; });
-  });
   wzDepart(sec, sec.querySelector('.tr-grid'));
 });
 
@@ -284,13 +302,18 @@ WZ.section('ch-proof', function(W){
 
   var set = row.querySelector('.pf-set');
   var loop = gsap.to(row, { xPercent: -50, ease: 'none', duration: 42, repeat: -1 });
+  /* hover holds the strip still so a quote can be read (BugHerd #12) */
+  var marquee = sec.querySelector('.pf-marquee'), held = false;
+  marquee.addEventListener('pointerenter', function(){ held = true; gsap.to(loop, { timeScale: 0, duration: .5, ease: 'power2.out', overwrite: true }); });
+  marquee.addEventListener('pointerleave', function(){ held = false; gsap.to(loop, { timeScale: 1, duration: .8, ease: 'power2.out', overwrite: true }); });
   /* scroll velocity bends the marquee: faster scroll = faster (and reversing) drift */
   var speed = { v: 1 };
   ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top',
     onUpdate: function(self){
+      if (held) return;
       var v = gsap.utils.clamp(-6, 6, self.getVelocity() / 200);
       gsap.to(speed, { v: 1 + v, duration: .6, ease: 'power2.out', overwrite: true,
-        onUpdate: function(){ loop.timeScale(speed.v); } });
+        onUpdate: function(){ if (!held) loop.timeScale(speed.v); } });
     } });
   /* the row lifts in */
   gsap.from(sec.querySelector('.pf-marquee'), { opacity: 0, y: 20, duration: 1, ease: 'power3.out',

@@ -35,8 +35,8 @@
 .re-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:grayscale(1) contrast(1.15)}
 .re-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,rgba(17,17,15,.15),rgba(17,17,15,.92))}
 .re-stage{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:8rem 0}
-.re-big{font-size:var(--t-h2);line-height:1.08;letter-spacing:-.03em;max-width:22ch}
-.re-big .wz-word{display:inline-block;opacity:.14;will-change:opacity}
+.re-big{font-size:var(--t-h2);line-height:1.14;letter-spacing:-.02em;max-width:22ch}
+.re-big .wz-word{display:inline-block;opacity:.32;will-change:opacity}
 .re-after{max-width:34rem;margin-top:2.5rem;color:var(--ink-muted);font-size:var(--t-lead);line-height:1.55;opacity:0;transform:translateY(1.2rem)}
 @media (prefers-reduced-motion:reduce){.re-big .wz-word{opacity:1}.re-after{opacity:1;transform:none}}
 
@@ -49,14 +49,17 @@
 .an-progress i{display:block;width:12rem;height:1px;background:var(--line);position:relative;overflow:hidden}
 .an-progress b{position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left}
 .an-track{display:flex;gap:1.25rem;padding-left:max(var(--gutter),calc((100% - 96rem)/2));will-change:transform}
-.an-card{flex:0 0 auto;width:min(26rem,78vw);display:flex;flex-direction:column;gap:1.2rem}
+/* narrower cards so four and a half are on screen at 1440 and the rail's
+   travel is short — Brandklout could not see the last treatments without
+   scrolling the whole pin through (BugHerd #2) */
+.an-card{flex:0 0 auto;width:min(19rem,72vw);display:flex;flex-direction:column;gap:1.2rem}
 .an-card .frame{aspect-ratio:4/5;border:1px solid var(--line-soft)}
 .an-card .frame img{transform:scale(1.06);transition:transform 1.2s var(--ease-out)}
 .an-card:hover .frame img{transform:scale(1.01)}
 .an-card-copy{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;align-items:baseline}
 .an-card-copy .num{color:var(--gold);font-size:var(--t-micro);font-weight:700;letter-spacing:.14em}
 .an-card-copy p{grid-column:2;color:var(--ink-muted);font-size:var(--t-small);max-width:24rem}
-.an-end{flex:0 0 auto;width:min(28rem,80vw);display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding:2rem;border:1px solid var(--line);margin-right:var(--gutter)}
+.an-end{flex:0 0 auto;width:min(22rem,72vw);display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding:2rem;border:1px solid var(--line);margin-right:var(--gutter)}
 @media (hover:none) and (pointer:coarse), (max-width:767px){
   /* touch: no horizontal pin — a swipeable rail instead, same content */
   .an-pin{min-height:0}
@@ -98,6 +101,8 @@
 .ch-surgeon{background:var(--ground-2);color:var(--ink);padding:8rem 0 6rem;border-top:1px solid var(--line-soft)}
 .su-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5rem;align-items:center}
 .su-portrait{aspect-ratio:4/5;border:1px solid var(--line-soft)}
+/* the portrait keeps the head: no parallax overscan, anchored to the top (BugHerd #3) */
+.su-portrait img{position:static;height:100%;object-position:center 8%}
 .su-portrait figcaption{position:absolute;left:1.4rem;bottom:1.4rem;background:rgba(8,8,8,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:.9rem 1.1rem;border-left:2px solid var(--gold)}
 .su-portrait figcaption b{display:block;font-family:var(--serif);font-weight:400;font-size:1.3rem;letter-spacing:-.01em}
 .su-portrait figcaption span{display:block;font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-top:.2rem}
@@ -107,10 +112,10 @@
 .su-creds li{border-top:1px solid var(--line);padding-top:.9rem}
 .su-creds b{display:block;font-family:var(--serif);font-weight:400;font-size:1.4rem;letter-spacing:-.02em}
 .su-creds span{display:block;font-size:var(--t-small);color:var(--ink-muted);margin-top:.2rem}
+/* three frames, one shared height, so the strip reads as one flush band (BugHerd #4) */
 .su-strip{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:1.25rem;margin-top:5rem}
-.su-shot{aspect-ratio:3/2}
-.su-strip .su-shot:last-child{aspect-ratio:auto}
-@media (max-width:1023px){.su-grid{grid-template-columns:1fr;gap:3rem}.su-strip{grid-template-columns:1fr 1fr}.su-strip .su-shot:last-child{grid-column:1/-1;aspect-ratio:2/1}}
+.su-shot{aspect-ratio:auto;height:24rem}
+@media (max-width:1023px){.su-grid{grid-template-columns:1fr;gap:3rem}.su-strip{grid-template-columns:1fr 1fr}.su-shot{height:18rem}.su-strip .su-shot:last-child{grid-column:1/-1}}
 @media (max-width:600px){.su-strip{grid-template-columns:1fr}.su-creds{grid-template-columns:1fr}}
 
 /* ---------- 05 THE TRANSFORMATION (light) ---------- */
@@ -124,11 +129,14 @@
 .tr-shot{position:absolute;inset:0;clip-path:inset(0 0 100% 0)}
 .tr-shot.is-first{clip-path:inset(0)}
 .tr-shot img{transform:scale(1.05)}
+.tr-shot.tr-shot--michael img{object-position:28% 45%}
 .tr-copy .h2{margin-bottom:2rem;max-width:14ch}
 .tr-stories{position:relative;min-height:19rem}
-.tr-story{position:absolute;inset:0;opacity:0;visibility:hidden;transform:translateY(1rem)}
-.tr-story.is-first{opacity:1;visibility:visible;transform:none}
-.tr-story blockquote{font-size:var(--t-quote);line-height:1.15;letter-spacing:-.02em;max-width:20ch;margin-bottom:1.2rem}
+/* inactive stories are display:none, not merely transparent — a transparent
+   stacked story still hands its underline to screenshot tools (BugHerd #8, #9) */
+.tr-story{position:absolute;inset:0;opacity:0;display:none;transform:translateY(1rem)}
+.tr-story.is-first{opacity:1;display:block;transform:none}
+.tr-story blockquote{font-size:var(--t-quote);font-weight:500;line-height:1.22;letter-spacing:-.01em;max-width:20ch;margin-bottom:1.2rem;font-variation-settings:'opsz' 28}
 .tr-who{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.2rem}
 .tr-who b{font-weight:700;letter-spacing:.02em}
 .tr-who span{font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--paper-muted)}
@@ -139,7 +147,7 @@
 .tr-dots i.is-on{background:var(--gold-deep)}
 @media (prefers-reduced-motion:reduce){
   .tr-shot{position:relative;clip-path:none;margin-bottom:1rem}.tr-media{aspect-ratio:auto;max-height:none}
-  .tr-story{position:relative;opacity:1;visibility:visible;transform:none;margin-bottom:2.5rem}
+  .tr-story{position:relative;opacity:1;display:block;transform:none;margin-bottom:2.5rem}
 }
 @media (max-width:1023px){
   .tr-grid{grid-template-columns:1fr;gap:2rem}
