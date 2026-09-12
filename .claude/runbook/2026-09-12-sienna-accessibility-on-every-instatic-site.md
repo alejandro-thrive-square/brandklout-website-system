@@ -21,12 +21,9 @@
 
 ### Next
 
-- **Dr. Nahlah and Stone Med Spa are NOT published.** Both have the setting, but their drafts
-  differ from what is live. Dr. Nahlah has unpublished edits across its 38 pages; Stone Med Spa
-  has an 11th page that has never gone live. When those are ready (or once someone decides they
-  can ship), run
-  `node rollout-site-scripts.mjs publish --apply --only dr-nahlah,stone-med-spa --allow-drift`,
-  then `verify --url <sienna> --only …`.
+- ~~Dr. Nahlah and Stone Med Spa held back.~~ **Published later the same day, on the user's
+  go-ahead, drafts included** (`--allow-drift`). Dr. Nahlah's pending edits are now live, and so
+  is Stone Med Spa's 11th page. All eight sites now carry the widget.
 - New instances (Arvada, Grand Mission, Legacy, Livewell and Marvel have no `INSTATIC_BASE_URL`
   yet): once one is provisioned, run `apply` then `publish` against it.
 
