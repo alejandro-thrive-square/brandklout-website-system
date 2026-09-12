@@ -314,5 +314,43 @@ check('compatible mode is idempotent across republishes',
     return run({}, first) === first
   })())
 
+// Site scripts: a tag on every page and its host granted, in the same pass.
+console.log('\nSite scripts\n')
+const SIENNA = 'https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js'
+const TAG = `<script src="${SIENNA}" async data-wz-site-script></script>`
+const directive = (csp, name) =>
+  csp.split(';').map((s) => s.trim()).find((s) => s.split(' ')[0] === name) ?? ''
+const sited = run({ siteScripts: SIENNA })
+const sitedCsp = cspOf(sited)
+check('a site script is added once, just before </head>',
+  sited.split(TAG).length === 2 && sited.includes(TAG + '</head>'), sited)
+check('its host may load scripts, fetch, styles and fonts',
+  ['script-src', 'connect-src', 'style-src', 'font-src']
+    .every((d) => directive(sitedCsp, d).includes('https://cdn.jsdelivr.net')), sitedCsp)
+check("the importmap hash survives and 'unsafe-inline' is not introduced",
+  directive(sitedCsp, 'script-src').includes("'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='") &&
+    !directive(sitedCsp, 'script-src').includes("'unsafe-inline'"), sitedCsp)
+check("a created font-src keeps 'self', so the site's own fonts still load",
+  directive(sitedCsp, 'font-src').includes("'self'"), sitedCsp)
+check('republishing a published page does not double the tag',
+  run({ siteScripts: SIENNA }, sited) === sited)
+check('strict mode with autoTrust off still adds and grants it',
+  (() => {
+    const h = run({ siteScripts: SIENNA, embedPolicy: 'strict', autoTrust: false })
+    return h.includes(TAG) && directive(cspOf(h), 'script-src').includes('https://cdn.jsdelivr.net')
+  })())
+check('a page with an embed gets the tag and keeps the compatible policy',
+  (() => {
+    const h = run({ siteScripts: SIENNA }, pageWith(EMBEDDED))
+    return h.includes(TAG) && directive(cspOf(h), 'script-src').includes("'unsafe-inline'")
+  })())
+check('a page with no CSP meta still gets the tag',
+  run({ siteScripts: SIENNA }, bare).includes(TAG))
+check('non-https, relative, host-only and quote-breaking URLs are refused',
+  run({ siteScripts: 'http://x.com/a.js\njavascript:alert(1)\n//x.com/a.js\nhttps://x.com\n' +
+    'https://x.com/a.js"><script>alert(1)</script>' }) === src)
+check('& in a URL is written as an entity',
+  run({ siteScripts: 'https://x.com/a.js?a=1&b=2' }).includes('src="https://x.com/a.js?a=1&amp;b=2"'))
+
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)
