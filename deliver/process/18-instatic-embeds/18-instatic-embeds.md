@@ -154,6 +154,7 @@ Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin tha
 
 ## Gotchas
 
+- **A site script can duplicate a widget the site already runs.** On IFA, Sienna appeared next to a UserWay button the WordPress clone was injecting from its `site.js` registry. The page HTML shows neither, because both are added at runtime. Before rolling out a site-wide widget, grep each site's `src/scripts/site.js` shell asset or published `site-*.js` bundle for the same kind of vendor.
 - **Check `draftMatchesPublished` before any fleet-wide publish.** `GET /admin/api/cms/publish/status` returns it, and `rollout-site-scripts.mjs publish` re-reads it right before publishing and skips a drifted site. On 2026-09-12 it held back Dr. Nahlah (unpublished edits on 38 pages) and Stone Med Spa (an 11th draft page that has never gone live).
 - **A created directive must be deduped.** `widen()` used to build an absent directive as `default-src + origins` without deduping. A site script that auto-trust also found on the page came out as `connect-src 'self' https://x https://x`, and a second publish rewrote it, so the filter was no longer idempotent. Fixed in `1.6.0`.
 - **A publish bakes EVERY page.** Unrelated drift ships with whatever you were publishing. On Dr. Nahlah this cost the home page its six review-card fallbacks — present in the published HTML, absent from the draft, gone the moment anything was published. Audit before and after:

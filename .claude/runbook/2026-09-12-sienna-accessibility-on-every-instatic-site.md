@@ -27,7 +27,17 @@
 - New instances (Arvada, Grand Mission, Legacy, Livewell and Marvel have no `INSTATIC_BASE_URL`
   yet): once one is provisioned, run `apply` then `publish` against it.
 
+- **IFA showed two widgets.** Its WordPress clone replays UserWay from the `site.js` registry,
+  which the page HTML never shows. UserWay was removed there (blanked in `site.js`, the statement
+  sentence reworded, `prepare-wp.mjs` skips it). Details in IFA's
+  `docs/runbook/2026-09-12-userway-replaced-by-sienna.md` on `bk-ifa-dentistry`.
+
 ### Gotchas
+
+- **Look for an existing widget before a site-wide script goes out.** A runtime-injected widget is
+  invisible to a curl of the page. Grep each site's `src/scripts/site.js` shell asset, or its
+  published `site-*.js` bundle, for the vendor type (UserWay, accessiBe, EqualWeb). The other
+  seven sites carry none.
 
 - The script URL is **unpinned**, as given. jsdelivr serves the latest `sienna-accessibility`,
   so a vendor release reaches every site without a publish. Pin `@2.2.333` in `siteScripts` if
