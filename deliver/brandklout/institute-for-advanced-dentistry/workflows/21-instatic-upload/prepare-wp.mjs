@@ -875,7 +875,9 @@ for (const r of results) {
         ? 'speculationrules (prefetches WordPress URLs)'
         : s.src?.local?.startsWith('/cdn-cgi/')
           ? 'Cloudflare edge script (emails are decoded statically above)'
-          : null
+          : /cdn\.userway\.org/i.test(`${s.src?.remote || ''} ${s.text || ''}`)
+            ? 'UserWay (Sienna is site-wide via brandklout.embed-origins since 2026-09-12; both showed two widgets)'
+            : null
     if (why) {
       skipped[why] = (skipped[why] || 0) + 1
       if (!s.inHead) bodyIds[s.n] = null
