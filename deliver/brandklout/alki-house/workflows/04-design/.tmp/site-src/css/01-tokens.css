@@ -1,0 +1,69 @@
+/* ==========================================================================
+   TOKENS — Alki House
+   Palette is the client's four swatches (Brand/Color Palette.png), extended
+   only by tints and shades of those four so nothing off-brand can creep in.
+     Dark Coffee   #432818   the ground
+     Autumn Ember  #A65E2A   fills, rules, glows — NOT text on coffee (2.5:1)
+     Light Apricot #FFEBB7   text on coffee, the light ground
+     White         #FFFFFF
+   The site is dark-first, like the logo (apricot monogram on coffee), and
+   chapters opt into the light ground with data-theme="light".
+   ========================================================================== */
+:root{
+  --coffee:#432818; --coffee-950:#1E100A; --coffee-900:#2A1810; --coffee-800:#361F13;
+  --coffee-700:#5A3822; --coffee-600:#6E4A31;
+  --ember:#A65E2A; --ember-bright:#C97A3C; --ember-deep:#7E4620; --ember-ink:#6B3A16;
+  --apricot:#FFEBB7; --apricot-deep:#E9CD8F; --apricot-soft:#FFF3D6; --cream:#FBF4E4;
+  --white:#FFFFFF;
+
+  /* ----- theme layer (dark) --------------------------------------------
+     Every chapter paints from these names only. A chapter on the light
+     ground is [data-theme="light"] and gets the second block. */
+  --bg:var(--coffee-950); --bg-2:var(--coffee-900); --bg-3:var(--coffee); --card:var(--coffee-800);
+  --fg:var(--apricot-soft); --fg-body:#E7D6BC; --fg-soft:#C9B394; --fg-faint:#9E8A6E;
+  --line:rgba(255,235,183,.14); --line-2:rgba(255,235,183,.07); --line-strong:rgba(255,235,183,.32);
+  --accent:var(--apricot); --accent-fill:var(--ember); --accent-fill-hi:var(--ember-bright); --rule:var(--ember);
+  --glow:rgba(166,94,42,.55); --scrim:rgba(30,16,10,.62); --focus:var(--apricot);
+  --on-accent:var(--coffee-950);
+
+  --f-display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --f-body:'Manrope','Helvetica Neue',Arial,sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  /* ----- type steps ------------------------------------------------------
+     Plain rem off the fluid root. The root is flat at 16px from 479 to
+     1440, so display sizes step down through these multipliers at px
+     breakpoints instead of clamp(). --t-text rises below 479 so body copy
+     never follows the root down past 16px on a phone. */
+  --t-disp:1; --t-lg:1; --t-mid:1; --t-text:1;
+  --d1:calc(7.2rem * var(--t-disp));    /* hero */
+  --d2:calc(5rem * var(--t-disp));      /* chapter headlines */
+  --h2:calc(3.1rem * var(--t-lg));
+  --h3:calc(1.75rem * var(--t-mid));
+  --h4:calc(1.2rem * var(--t-mid));
+  --body-lg:calc(1.2rem * var(--t-text));
+  --body:calc(1.02rem * var(--t-text));
+  --small:calc(.86rem * var(--t-text));
+  --label:calc(.72rem * var(--t-text));
+
+  --gutter:clamp(1.25rem,4.2vw,5rem);
+  --section:clamp(5rem,10vw,10rem);
+  --maxw:100rem;
+  --radius:1.1rem; --radius-sm:.6rem; --radius-pill:999px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+@media screen and (max-width:1279px){ :root{ --t-disp:.82; --t-lg:.86 } }
+@media screen and (max-width:991px) { :root{ --t-disp:.66; --t-lg:.74; --t-mid:.9 } }
+@media screen and (max-width:767px) { :root{ --t-disp:.5;  --t-lg:.62; --t-mid:.84 } }
+@media screen and (max-width:478px) { :root{ --t-text:1.19; --t-mid:.9 } }
+
+[data-theme="light"]{
+  --bg:var(--apricot); --bg-2:var(--cream); --bg-3:var(--apricot-soft); --card:var(--white);
+  --fg:var(--coffee-950); --fg-body:#4A3324; --fg-soft:#6E4A31; --fg-faint:#8A6A50;
+  --line:rgba(67,40,24,.16); --line-2:rgba(67,40,24,.08); --line-strong:rgba(67,40,24,.4);
+  --accent:var(--ember-ink); --accent-fill:var(--ember); --accent-fill-hi:var(--ember-bright); --rule:var(--ember);
+  --glow:rgba(201,122,60,.35); --scrim:rgba(67,40,24,.55); --focus:var(--coffee);
+  --on-accent:var(--apricot-soft);
+  color:var(--fg-body);
+}
+[data-theme="dark"]{ color:var(--fg-body) }

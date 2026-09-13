@@ -1,0 +1,383 @@
+{
+  "client": "alki-house",
+  "generated_at": "2026-09-13T03:56:32.861Z",
+  "palette": {
+    "dark_coffee": "#432818",
+    "autumn_ember": "#A65E2A",
+    "light_apricot": "#FFEBB7",
+    "white": "#FFFFFF"
+  },
+  "files": [
+    {
+      "name": "hero-gimbal",
+      "path": "scenes/ai/hero-gimbal.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "widescreen_16_9",
+      "prompt": "A filmmaker's hands holding a mirrorless camera mounted on a 3-axis motorised gimbal in a dark studio, seen from the side, hands in focus with natural anatomy, warm amber rim light from a softbox off to one side, deep coffee-brown shadows, apricot highlights glinting on the brushed metal of the gimbal arms, shallow depth of field, cinematic.Every piece of gear is a completely unbranded generic design: plain matte-black bodies with no lettering, no engraving, no labels, no logos, no model names, no symbols, no markings of any kind on any surface. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "eb392a85-9ca5-41ae-8034-620035c52f64",
+      "review": "accepted round 2; hands natural, warm; a faint sub-1% pseudo-mark remains on the camera body",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 404186
+    },
+    {
+      "name": "hero-gimbal-portrait",
+      "path": "scenes/ai/hero-gimbal-portrait.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "social_story_9_16",
+      "prompt": "Vertical composition for a phone screen: a filmmaker's hands holding a mirrorless camera mounted on a 3-axis motorised gimbal in a dark studio, gimbal filling the middle of the frame with dark empty space above, warm amber rim light from a softbox, deep coffee-brown shadows, apricot highlights on the brushed metal, shallow depth of field, cinematic.Every piece of gear is a completely unbranded generic design: plain matte-black bodies with no lettering, no engraving, no labels, no logos, no model names, no symbols, no markings of any kind on any surface. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "f5ecedbf-7406-4fe5-bb4b-b05cba7435e1",
+      "review": "accepted round 2; a faint sub-1% mark on the camera body",
+      "width": 1536,
+      "height": 2752,
+      "bytes": 384451
+    },
+    {
+      "name": "studio-lighting",
+      "path": "scenes/ai/studio-lighting.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "widescreen_16_9",
+      "prompt": "A moody photography studio: an RGB LED panel light and a large octagonal softbox on light stands, both switched on and glowing warm apricot, warm ember glow falling across a dark brown seamless paper backdrop, thin haze in the air catching the light beams, no people, cinematic wide shot. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "894888c8-88ee-4afb-b454-23da060989b7",
+      "review": "accepted round 1; two softboxes (the RGB panel did not render), no haze beams",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 438577
+    },
+    {
+      "name": "audio-desk",
+      "path": "scenes/ai/audio-desk.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "classic_4_3",
+      "prompt": "Two small wireless lavalier microphone transmitters with clip-on lav mics and a matching dual-channel receiver laid on a dark walnut wood desk beside a mirrorless camera, one warm desk lamp lighting the scene from the side, the rest of the room in dark coffee-brown shadow, product still life, top-down three-quarter angle. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "21e3db70-59fa-4da6-8ab2-28ba125b737b",
+      "review": "accepted round 1; a faint mark on one transmitter, no readable text",
+      "width": 2368,
+      "height": 1792,
+      "bytes": 591033
+    },
+    {
+      "name": "rig-build",
+      "path": "scenes/ai/rig-build.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "traditional_3_4",
+      "prompt": "A cinema camera built into a black aluminium camera cage with a top handle, a 7-inch field monitor mounted on top showing a soft warm amber blurred image, the monitor is a smooth featureless black slab with no buttons and no markings, a matte box on the lens, all on a fluid-head tripod, side lit by warm ember light with apricot edge highlights, dark studio background fading to coffee-brown black, vertical composition, no people.Every piece of gear is a completely unbranded generic design: plain matte-black bodies with no lettering, no engraving, no labels, no logos, no model names, no symbols, no markings of any kind on any surface. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": null,
+      "review": "accepted round 3; monitor bezel now clean, small mark on the camera nameplate",
+      "width": 1792,
+      "height": 2368,
+      "bytes": 484660
+    },
+    {
+      "name": "adapter-macro",
+      "path": "scenes/ai/adapter-macro.jpg",
+      "source": "seedream",
+      "model": "seedream-v4",
+      "aspect_ratio": "square_1_1",
+      "prompt": "Extreme macro photograph of a brass-and-black lens mount adapter ring standing upright on its edge on a dark walnut wood surface, the ring alone in sharp focus filling the frame, behind it only a vintage chrome manual-focus lens as a soft blurred shape, no camera body anywhere in the frame, smooth plain unengraved brass surface with fine knurling only, warm ember light raking across the brass threads with apricot highlights, dark coffee-brown ground, very shallow depth of field.Every piece of gear is a completely unbranded generic design: plain matte-black bodies with no lettering, no engraving, no labels, no logos, no model names, no symbols, no markings of any kind on any surface. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": null,
+      "review": "accepted round 5 (seedream-v4); Mystic lettered the subject four times running",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 1014948
+    },
+    {
+      "name": "creator-room",
+      "path": "scenes/ai/creator-room.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "widescreen_16_9",
+      "prompt": "A small cosy modern home content-creator studio seen from behind a creator (back of head and shoulders only, out of focus), a smartphone mounted on a handheld gimbal on the desk in front of them, a ring of warm LED tube bar lights glowing apricot on the wall, warm apricot-toned painted wall, plants and a wooden shelf, dark warm shadows in the corners. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "2184e6df-de74-4057-b0e6-8d212b3106d4",
+      "review": "accepted round 1; ring light instead of a ring of bar lights, reads well",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 574155
+    },
+    {
+      "name": "softbox-glow",
+      "path": "scenes/ai/softbox-glow.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "square_1_1",
+      "prompt": "Abstract minimal close-up of a lit softbox diffusion fabric panel glowing soft apricot light with a warm ember gradient toward the edges, against pure dark coffee-brown darkness, soft fabric texture, gentle falloff, no other objects. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "9d3719bf-74ac-4175-8a51-9f944971e879",
+      "review": "accepted round 1; abstract glowing panel with a faint hot spot",
+      "width": 2048,
+      "height": 2048,
+      "bytes": 353629
+    },
+    {
+      "name": "product-stage",
+      "path": "scenes/ai/product-stage.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "widescreen_16_9",
+      "prompt": "An empty round dark-walnut wooden product display stage under a single warm spotlight from above, a smooth coffee-brown seamless backdrop behind it, subtle haze in the beam of light, soft apricot highlight on the rim of the stage, wide composition with empty space, backdrop plate for product photography, nothing on the stage. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "f9699118-8e52-4291-b777-c9bdf52df175",
+      "review": "accepted round 1; clean plate",
+      "width": 2752,
+      "height": 1536,
+      "bytes": 401197
+    },
+    {
+      "name": "monitor-glow",
+      "path": "scenes/ai/monitor-glow.jpg",
+      "source": "mystic",
+      "model": "realism",
+      "resolution": "2k",
+      "aspect_ratio": "classic_4_3",
+      "prompt": "A 5-inch on-camera field monitor mounted on top of a mirrorless camera via an articulating arm, the monitor screen showing a warm amber-toned blurry cinematic image (no text, no menus), in a dark studio, ember rim light outlining the camera body, apricot glow from the screen spilling onto the camera, shallow depth of field, plain black monitor bezel.Every piece of gear is a completely unbranded generic design: plain matte-black bodies with no lettering, no engraving, no labels, no logos, no model names, no symbols, no markings of any kind on any surface. Colour palette strictly: dark coffee brown #432818 grounds and shadows, autumn ember orange #A65E2A warm practical and rim light, light apricot #FFEBB7 highlights and softbox glow, touches of white. Dark, warm, cinematic, premium moody product-shoot mood. No blue or teal light anywhere, no cold tones. Photoreal, shot on a full-frame cinema camera, 35mm lens, shallow depth of field, fine film grain, no text, no logos, no watermarks, no brand names, no readable labels.",
+      "task_id": "44a0e28f-9ef8-4bbd-ba86-2c44445ee60a",
+      "review": "accepted round 2; small Rams-like mark on the camera body, screen image clean",
+      "width": 2368,
+      "height": 1792,
+      "bytes": 371373
+    },
+    {
+      "name": "hero-gimbal",
+      "path": "scenes/video/hero-gimbal.mp4",
+      "source": "kling",
+      "model": "kling-v2-5-pro",
+      "from": "ai\\hero-gimbal.jpg",
+      "prompt": "Slow cinematic dolly, the camera barely moves, the warm rim light flickers very subtly and thin haze drifts through the beam, the hands hold still, no cuts, seamless loop, photoreal, warm amber tones.",
+      "task_id": "c787a163-62e2-4674-8288-1d4d56149a5b",
+      "width": 1928,
+      "height": 1072,
+      "duration": 5.041667,
+      "bytes": 5695748
+    },
+    {
+      "name": "studio-lighting",
+      "path": "scenes/video/studio-lighting.mp4",
+      "source": "kling",
+      "model": "kling-v2-5-pro",
+      "from": "ai\\studio-lighting.jpg",
+      "prompt": "Slow cinematic dolly, the camera barely moves, the softbox and LED panel glow flickers very subtly, haze drifts slowly through the light beams, no cuts, seamless loop, photoreal, warm amber tones.",
+      "task_id": "c5743018-4552-4111-b25c-b4ce57e1ac0c",
+      "width": 1928,
+      "height": 1072,
+      "duration": 5.041667,
+      "bytes": 3815009
+    },
+    {
+      "name": "hero-gimbal-portrait",
+      "path": "scenes/video/hero-gimbal-portrait.mp4",
+      "source": "kling",
+      "model": "kling-v2-5-pro",
+      "from": "ai\\hero-gimbal-portrait.jpg",
+      "prompt": "Slow cinematic dolly, the camera barely moves, the warm rim light flickers very subtly and thin haze drifts through the beam, the hands hold still, no cuts, seamless loop, photoreal, warm amber tones.",
+      "task_id": "0c0e98ed-8ea7-425e-95af-a0786a1205eb",
+      "width": 1072,
+      "height": 1928,
+      "duration": 5.041667,
+      "bytes": 5500269
+    },
+    {
+      "name": "13640035-led-panel-hand",
+      "path": "scenes/stock/13640035-led-panel-hand.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 13640035,
+      "title": "Studio assistant fix professional video light on adjustable light stand",
+      "license": "premium",
+      "author": "olganosova",
+      "resource_url": "https://www.magnific.com/premium-photo/studio-assistant-fix-professional-video-light-adjustable-light-stand_13640035.htm",
+      "width": 4495,
+      "height": 3000,
+      "bytes": 6180594
+    },
+    {
+      "name": "105739688-lens-adapter-wood",
+      "path": "scenes/stock/105739688-lens-adapter-wood.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 105739688,
+      "title": "High angle view of camera on table",
+      "license": "premium",
+      "author": "dachux21",
+      "resource_url": "https://www.magnific.com/premium-photo/high-angle-view-camera-table_105739688.htm",
+      "width": 5472,
+      "height": 3648,
+      "bytes": 19719604
+    },
+    {
+      "name": "167437276-creator-desk-warm",
+      "path": "scenes/stock/167437276-creator-desk-warm.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 167437276,
+      "title": "Photo asian influencer setting camera at home",
+      "license": "premium",
+      "author": "ndesoart27",
+      "resource_url": "https://www.magnific.com/premium-photo/photo-asian-influencer-setting-camera-home_167437276.htm",
+      "width": 3072,
+      "height": 2048,
+      "bytes": 2453595
+    },
+    {
+      "name": "314391307-dark-backdrop-warm",
+      "path": "scenes/stock/314391307-dark-backdrop-warm.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 314391307,
+      "title": "Minimalist Dark Empty Space with Soft Lighting for Product Presentation",
+      "license": "premium",
+      "author": "Azur",
+      "resource_url": "https://www.magnific.com/premium-photo/minimalist-dark-empty-space-with-soft-lighting-product-presentation_314391307.htm",
+      "width": 5376,
+      "height": 3584,
+      "bytes": 12930761
+    },
+    {
+      "name": "335669118-filmmaker-gimbal-golden",
+      "path": "scenes/stock/335669118-filmmaker-gimbal-golden.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 335669118,
+      "title": "Videographer filmmaker cinematographer dop with gimbal and DSLR camera",
+      "license": "premium",
+      "author": "marinaghanis98",
+      "resource_url": "https://www.magnific.com/premium-photo/videographer-filmmaker-cinematographer-dop-with-gimbal-dslr-camera_335669118.htm",
+      "width": 6048,
+      "height": 4032,
+      "bytes": 1307237
+    },
+    {
+      "name": "351935514-film-set-warm-lights",
+      "path": "scenes/stock/351935514-film-set-warm-lights.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 351935514,
+      "title": "Backstage Film Set in Dramatic Lighting",
+      "license": "premium",
+      "author": "user17316117",
+      "resource_url": "https://www.magnific.com/premium-photo/backstage-film-set-dramatic-lighting_351935514.htm",
+      "width": 5824,
+      "height": 3264,
+      "bytes": 6267906
+    },
+    {
+      "name": "403902498-cinema-rig-monitor",
+      "path": "scenes/stock/403902498-cinema-rig-monitor.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 403902498,
+      "title": "Professional Cinema Camera Setup on Tripod Ready for Filming",
+      "license": "premium",
+      "author": "certificateart70",
+      "resource_url": "https://www.magnific.com/premium-photo/professional-cinema-camera-setup-tripod-ready-filming_403902498.htm",
+      "width": 5824,
+      "height": 3264,
+      "bytes": 9112970
+    },
+    {
+      "name": "425645627-studio-softbox-dark",
+      "path": "scenes/stock/425645627-studio-softbox-dark.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 425645627,
+      "title": "Professional Photography Studio Setup with Softbox Lighting in Dark",
+      "license": "premium",
+      "author": "KimSunHo",
+      "resource_url": "https://www.magnific.com/premium-photo/professional-photography-studio-setup-with-softbox-lighting-dark_425645627.htm",
+      "width": 4608,
+      "height": 3584,
+      "bytes": 844034
+    },
+    {
+      "name": "429240150-lav-mic-collar",
+      "path": "scenes/stock/429240150-lav-mic-collar.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 429240150,
+      "title": "Lavalier Microphone Clipped to Shirt Collar",
+      "license": "premium",
+      "author": "Frame Studios",
+      "resource_url": "https://www.magnific.com/premium-photo/lavalier-microphone-clipped-shirt-collar_429240150.htm",
+      "width": 7040,
+      "height": 3840,
+      "bytes": 7008238
+    },
+    {
+      "name": "430768486-gimbal-dark-studio",
+      "path": "scenes/stock/430768486-gimbal-dark-studio.jpg",
+      "source": "freepik-stock",
+      "freepik_id": 430768486,
+      "title": "Black Camera Gimbal Stabilizer on Tripod Isolated",
+      "license": "premium",
+      "author": "offpage91",
+      "resource_url": "https://www.magnific.com/premium-photo/black-camera-gimbal-stabilizer-tripod-isolated_430768486.htm",
+      "width": 5504,
+      "height": 3072,
+      "bytes": 3671848
+    }
+  ],
+  "regenerated": [
+    {
+      "name": "hero-gimbal",
+      "why": "garbled pseudo-brand lettering on the gear (IIINOX / AUREND / CIYSHIN-EXT-ECO / cage labels / engraved adapter ring)",
+      "rejected_file": "ai/hero-gimbal.rejected-1.jpg",
+      "at": "2026-09-13T03:48:56.392Z"
+    },
+    {
+      "name": "hero-gimbal-portrait",
+      "why": "garbled pseudo-brand lettering on the gear (IIINOX / AUREND / CIYSHIN-EXT-ECO / cage labels / engraved adapter ring)",
+      "rejected_file": "ai/hero-gimbal-portrait.rejected-1.jpg",
+      "at": "2026-09-13T03:48:56.393Z"
+    },
+    {
+      "name": "rig-build",
+      "why": "garbled pseudo-brand lettering on the gear (IIINOX / AUREND / CIYSHIN-EXT-ECO / cage labels / engraved adapter ring)",
+      "rejected_file": "ai/rig-build.rejected-1.jpg",
+      "at": "2026-09-13T03:48:56.394Z"
+    },
+    {
+      "name": "adapter-macro",
+      "why": "garbled pseudo-brand lettering on the gear (IIINOX / AUREND / CIYSHIN-EXT-ECO / cage labels / engraved adapter ring)",
+      "rejected_file": "ai/adapter-macro.rejected-1.jpg",
+      "at": "2026-09-13T03:48:56.395Z"
+    },
+    {
+      "name": "monitor-glow",
+      "why": "garbled pseudo-brand lettering on the gear (IIINOX / AUREND / CIYSHIN-EXT-ECO / cage labels / engraved adapter ring)",
+      "rejected_file": "ai/monitor-glow.rejected-1.jpg",
+      "at": "2026-09-13T03:48:56.396Z"
+    },
+    {
+      "name": "rig-build",
+      "why": "round 2 still lettered: monitor bezel covered in glyphs (rig-build); camera nameplate fragment OX at frame edge (adapter-macro)",
+      "rejected_file": "ai/rig-build.rejected-2.jpg",
+      "at": "2026-09-13T03:51:04.263Z"
+    },
+    {
+      "name": "adapter-macro",
+      "why": "round 2 still lettered: monitor bezel covered in glyphs (rig-build); camera nameplate fragment OX at frame edge (adapter-macro)",
+      "rejected_file": "ai/adapter-macro.rejected-2.jpg",
+      "at": "2026-09-13T03:51:04.264Z"
+    },
+    {
+      "name": "adapter-macro",
+      "why": "round 3 grew a large fake nameplate SMACTH 7 on the camera body; composition changed to drop the body entirely",
+      "rejected_file": "ai/adapter-macro.rejected-3.jpg",
+      "at": "2026-09-13T03:52:14.755Z"
+    },
+    {
+      "name": "adapter-macro",
+      "why": "round 4 (Mystic) ring came out black with a C250 engraving; switching engine to seedream-v4",
+      "rejected_file": "ai/adapter-macro.rejected-4.jpg",
+      "at": "2026-09-13T03:53:24.583Z"
+    }
+  ],
+  "review_rule": "prominent or readable pseudo-brand lettering = regenerate; sub-1% body marks accepted and noted; rejected renders kept as ai/<name>.rejected-N.jpg",
+  "api_calls_this_run": {
+    "calls": 0,
+    "polls": 0,
+    "downloads": 0,
+    "byEndpoint": {}
+  }
+}

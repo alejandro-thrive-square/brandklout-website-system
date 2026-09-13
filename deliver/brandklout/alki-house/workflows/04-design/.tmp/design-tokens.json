@@ -1,0 +1,34 @@
+{
+  "client": "Alki House",
+  "generated": "2026-09-13",
+  "source": "site-src/css/01-tokens.css is the executable copy; this file is the readable one.",
+  "palette": {
+    "coffee": { "hex": "#432818", "from": "Brand/Color Palette.png — Dark Coffee", "role": "ground" },
+    "coffee-950": { "hex": "#1E100A", "role": "page ground (deeper shade of coffee)" },
+    "coffee-900": { "hex": "#2A1810", "role": "alternate dark ground" },
+    "coffee-800": { "hex": "#361F13", "role": "raised panels, inputs" },
+    "coffee-700": { "hex": "#5A3822", "role": "hairlines on dark, toggles" },
+    "ember": { "hex": "#A65E2A", "from": "Brand/Color Palette.png — Autumn Ember", "role": "fills, rules, glows. Never text on coffee (2.5:1)" },
+    "ember-bright": { "hex": "#C97A3C", "role": "hover fill, live dot" },
+    "ember-ink": { "hex": "#6B3A16", "role": "accent text on the light ground (5.6:1 on apricot)" },
+    "apricot": { "hex": "#FFEBB7", "from": "Brand/Color Palette.png — Light Apricot", "role": "text on coffee, the light ground" },
+    "apricot-deep": { "hex": "#E9CD8F", "role": "labels and meta on coffee" },
+    "apricot-soft": { "hex": "#FFF3D6", "role": "headings on coffee" },
+    "cream": { "hex": "#FBF4E4", "role": "alternate light ground" },
+    "white": { "hex": "#FFFFFF", "from": "Brand/Color Palette.png — White", "role": "cards on the light ground" }
+  },
+  "themes": {
+    "dark": "default: coffee-950 ground, apricot-soft headings, #E7D6BC body",
+    "light": "[data-theme=light]: apricot ground, coffee-950 headings, #4A3324 body"
+  },
+  "type": {
+    "display": "Bricolage Grotesque 600–800 (Google Fonts, static weights)",
+    "body": "Manrope 400–800",
+    "mono": "JetBrains Mono 400–500 — labels, specs, chapter tags",
+    "steps_rem_at_1440": { "d1": 7.2, "d2": 5.0, "h2": 3.1, "h3": 1.75, "h4": 1.2, "body-lg": 1.2, "body": 1.02, "small": 0.86, "label": 0.72 },
+    "multipliers": { "1279": { "disp": 0.82, "lg": 0.86 }, "991": { "disp": 0.66, "lg": 0.74, "mid": 0.9 }, "767": { "disp": 0.5, "lg": 0.62, "mid": 0.84 }, "478": { "text": 1.19, "mid": 0.9 } },
+    "root": "webzite-house-v1 fluid root (scripts/fluid-root.mjs)"
+  },
+  "space": { "gutter": "clamp(1.25rem, 4.2vw, 5rem)", "section": "clamp(5rem, 10vw, 10rem)", "maxw": "100rem", "radius": "1.1rem", "radius-sm": "0.6rem" },
+  "motion": { "ease": "cubic-bezier(.22,1,.36,1)", "smoother": 1.15, "pin_scrub": 0.3, "entrance": "power4.out, 1.1s, line stagger .09" }
+}

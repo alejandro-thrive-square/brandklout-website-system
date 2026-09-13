@@ -1,0 +1,165 @@
+<!-- ======================================================================
+     HOME — eight named chapters, in an order that cannot be shuffled.
+     00 Arrival · 01 The Rail · 02 The Stage · 03 The Promise · 04 The Set
+     05 The Floor · 06 The Way · 07 Invitation
+     ====================================================================== -->
+<main>
+
+<!-- 00 ARRIVAL -->
+<section class="ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="dark">
+  <div class="ar-film" aria-hidden="true">
+    <video class="ar-video" muted playsinline loop preload="metadata" poster="{{HERO_POSTER}}" data-src="{{HERO_VIDEO}}"></video>
+    <picture class="ar-poster"><source media="(max-width:767px)" srcset="{{HERO_POSTER_PORTRAIT}}"><img src="{{HERO_POSTER}}" alt=""></picture>
+    <div class="ar-veil"></div>
+  </div>
+  <div class="wrap ar-in">
+    <div class="ar-copy">
+      <p class="chapter-tag" data-anim="hide"><b>00</b><i></i>Arrival</p>
+      <h1 id="heroTitle" data-split data-anim="hide">Gear for the shot you're chasing.</h1>
+      <p class="lead" data-arrive data-anim="hide">Gimbals, studio light, wireless audio and rigging for creators. New and pre-owned, every piece tested before it leaves the house.</p>
+      <div class="ar-actions" data-arrive data-anim="hide">
+        <a class="btn btn-primary magnetic" href="products.html"><span>Browse the catalogue</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-ghost magnetic" href="products.html?stock=1"><span>{{STAT_INSTOCK}} lines in stock</span></a>
+      </div>
+    </div>
+    <figure class="ar-stage" data-anim="hide">
+      <div class="ar-plate" aria-hidden="true"><span></span></div>
+      <a class="ar-product" href="products/{{HERO_PRODUCT_SLUG}}.html" aria-label="{{HERO_PRODUCT_NAME}}">
+        <img src="{{HERO_PRODUCT}}" alt="{{HERO_PRODUCT_NAME}}" width="1200" height="1200">
+      </a>
+      <figcaption class="ar-cap mono"><span>On the stage</span><b>{{HERO_PRODUCT_NAME}}</b></figcaption>
+    </figure>
+  </div>
+  <div class="ar-ticker" aria-hidden="true">
+    <div class="marquee"><div class="marquee-track ar-track">
+      <span>{{STAT_PRODUCTS}} products <i></i></span><span class="o">{{STAT_BRANDS}} brands <i></i></span><span>{{STAT_INSTOCK}} in stock today <i></i></span><span class="o">Tested before it ships <i></i></span>
+    </div></div>
+  </div>
+  <div class="ar-cue" aria-hidden="true"><i></i><span class="mono">Scroll</span></div>
+</section>
+
+<!-- 01 THE RAIL — pinned horizontal journey through the eleven categories -->
+<section class="ch-rail" id="rail" data-chapter="1" data-chapter-name="The Rail" data-theme="dark">
+  <div class="rail-pin">
+    <div class="wrap rail-head">
+      <p class="chapter-tag"><b>01</b><i></i>The Rail</p>
+      <h2 data-split>Eleven aisles. <em>Walk them.</em></h2>
+      <div class="rail-progress" aria-hidden="true"><i id="railBar"></i><span class="mono" id="railCount">01 / 11</span></div>
+    </div>
+    <div class="rail-track" id="railTrack">
+      {{RAIL_PANELS}}
+      <a class="rail-panel rail-end" href="products.html"><div class="rail-body"><h3>Everything, on one page.</h3><p class="mono">{{STAT_PRODUCTS}} products · filter by stock, brand, price</p><span class="btn btn-light btn-sm"><span>Open the catalogue</span></span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THE STAGE — the signature: one spotlight, five pieces, scroll turns the stage -->
+<section class="ch-stage" id="stage" data-chapter="2" data-chapter-name="The Stage" data-theme="dark" data-count="{{STAGE_COUNT}}">
+  <div class="stage-pin">
+    <div class="stage-plate" aria-hidden="true"><img src="{{STAGE_PLATE}}" alt=""><span class="stage-spot"></span></div>
+    <div class="wrap stage-in">
+      <div class="stage-side">
+        <p class="chapter-tag"><b>02</b><i></i>The Stage</p>
+        <p class="stage-dial mono"><b id="stageNum">01</b><span>/ {{STAGE_COUNT}}</span></p>
+        <ol class="stage-dots" id="stageDots" aria-hidden="true"></ol>
+      </div>
+      <div class="stage-deck" id="stageDeck">
+        {{STAGE_SLIDES}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 THE PROMISE — light ground; why buy from a workshop, not a warehouse -->
+<section class="ch-promise" id="promise" data-chapter="3" data-chapter-name="The Promise" data-theme="light">
+  <div class="marquee pr-marquee" aria-hidden="true"><div class="marquee-track pr-track">
+    <span>Tested <i></i></span><span class="o">Cleaned <i></i></span><span>Firmware updated <i></i></span><span class="o">Boxed <i></i></span><span>Ready to shoot <i></i></span><span class="o">Tested <i></i></span>
+  </div></div>
+  <div class="wrap pr-in">
+    <div class="pr-copy">
+      <p class="chapter-tag"><b>03</b><i></i>The Promise</p>
+      <h2 data-split>Bought from a workshop, not a warehouse.</h2>
+      <p class="lead" data-arrive>Every gimbal is balanced and run through its modes. Every light is metered. Every mic pair is paired. If it ships from the house, someone here has used it.</p>
+      <div class="pr-stats" data-arrive>
+        <div class="pr-stat"><b data-count="{{STAT_PRODUCTS}}">0</b><span>products catalogued</span></div>
+        <div class="pr-stat"><b data-count="{{STAT_SOLD}}">0</b><span>units sold to creators</span></div>
+        <div class="pr-stat"><b data-count="{{STAT_BRANDS}}">0</b><span>brands on the shelves</span></div>
+      </div>
+    </div>
+    <div class="pr-media">
+      <figure class="pr-fig"><img src="{{PROMISE_SCENE}}" alt="A studio light and softbox on stands in a dark studio" loading="lazy"></figure>
+      <ul class="pr-list">
+        <li data-arrive><b>01</b><div><h4>New and pre-owned, told apart.</h4><p>Sealed stock is marked new. Everything else is graded and photographed as the unit you get.</p></div></li>
+        <li data-arrive><b>02</b><div><h4>Priced from the sheet.</h4><p>What you see is the live inventory. No phantom listings, no "call for stock".</p></div></li>
+        <li data-arrive><b>03</b><div><h4>Advice from people who shoot.</h4><p>Tell us the camera and the job. We'll tell you which of the three gimbals actually fits.</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 04 THE SET — build a kit; three tall cards wipe open as you scroll -->
+<section class="ch-set" id="set" data-chapter="4" data-chapter-name="The Set" data-theme="light">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="chapter-tag"><b>04</b><i></i>The Set</p><h2 data-split>Build the set, not the wishlist.</h2></div>
+      <p class="lead" data-arrive>Three starting points, priced from the pieces on the floor today. Swap anything.</p>
+    </div>
+    <div class="set-grid" id="setGrid">
+      {{KIT_CARDS}}
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE FLOOR — live inventory, straight from the sheet -->
+<section class="ch-floor" id="floor" data-chapter="5" data-chapter-name="The Floor" data-theme="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="chapter-tag"><b>05</b><i></i>The Floor</p><h2 data-split>On the floor right now.</h2></div>
+      <p class="mono fl-stamp" data-arrive><i></i>Live from the inventory sheet · {{STAT_DATE}}</p>
+    </div>
+    <div class="pgrid fl-grid" id="floorGrid">
+      {{FLOOR_CARDS}}
+    </div>
+    <div class="fl-more"><a class="btn btn-light magnetic" href="products.html?stock=1"><span>All {{STAT_INSTOCK}} lines in stock</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+  </div>
+</section>
+
+<!-- 06 THE WAY — pinned; a line draws itself through three steps -->
+<section class="ch-way" id="way" data-chapter="6" data-chapter-name="The Way" data-theme="dark">
+  <div class="way-pin">
+    <div class="wrap way-in">
+      <div class="way-copy">
+        <p class="chapter-tag"><b>06</b><i></i>The Way</p>
+        <h2 data-split>Three steps from browsing to shooting.</h2>
+      </div>
+      <div class="way-steps" id="waySteps">
+        <svg class="way-line" viewBox="0 0 2 600" preserveAspectRatio="none" aria-hidden="true"><path id="wayPath" d="M1 0V600"/></svg>
+        <div class="way-step" data-i="0"><b class="mono">01</b><div><h4>Browse the floor.</h4><p>The catalogue is the sheet. If it says in stock, it is on the shelf behind us.</p></div></div>
+        <div class="way-step" data-i="1"><b class="mono">02</b><div><h4>Ask about the piece.</h4><p>Name it, or tell us the camera and the job. We answer with the unit's condition and what it comes with.</p></div></div>
+        <div class="way-step" data-i="2"><b class="mono">03</b><div><h4>Collect or ship.</h4><p>Pick it up from the house, or we box it and send it the same week.</p></div></div>
+      </div>
+    </div>
+    <figure class="way-fig" aria-hidden="true"><img src="{{WAY_SCENE}}" alt=""></figure>
+  </div>
+</section>
+
+<!-- 07 INVITATION -->
+<section class="ch-invite" id="invite" data-chapter="7" data-chapter-name="Invitation" data-theme="dark">
+  <div class="in-glow" aria-hidden="true"></div>
+  <div class="wrap in-in">
+    <div class="in-copy">
+      <p class="chapter-tag"><b>07</b><i></i>Invitation</p>
+      <h2 data-split>Ask about a piece.</h2>
+      <p class="lead" data-arrive>Tell us what you're after and what you shoot on. We reply with what's on the floor, its condition, and what we'd pair it with.</p>
+    </div>
+    <form class="in-form" data-arrive action="#" method="post" onsubmit="return false">
+      <label><span class="label">Your name</span><input type="text" name="name" autocomplete="name" required></label>
+      <label><span class="label">Email or phone</span><input type="text" name="contact" autocomplete="email" required></label>
+      <label class="in-wide"><span class="label">What are you after?</span><textarea name="about" rows="3" placeholder="A gimbal for a Sony a6700 and a 24mm, mostly run-and-gun…"></textarea></label>
+      <button class="btn btn-primary magnetic in-wide" type="submit"><span>Send the question</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+      <p class="mono muted in-note">Form endpoint to be wired at launch. Reply lands within a working day.</p>
+    </form>
+  </div>
+</section>
+
+</main>

@@ -87,6 +87,23 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 20. Record the selected design path and move approved corrections into `05-design-revisions`.
 21. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`
 
+## Alki House adaptation (2026-09-13)
+
+This client is built for Instatic, not Webflow, and its content is a client-maintained Google
+Sheet, so Phase 2A runs as **a local static build with the CMS as JSON**:
+
+- `.tmp/site-src/data/products.json` is the sheet stand-in (columns in `docs/cms-schema.md`),
+  generated from the client's ledger by `data/build-catalogue.mjs` and layered with hand-written
+  merchandising from `data/catalogue-overrides.json`.
+- `build-site.mjs` renders every CMS row through one product template, so `final-site/` already
+  has the shape the Instatic collection template will have.
+- Verification is `shoot.mjs` (console, overflow, root size, scrub proof at 25/50/75 % of every
+  pin, six-breakpoint captures) and `peek.mjs` (viewport captures at a chapter and a progress),
+  both on the installed Chrome via playwright-core. Figma conversion and Vercel preview are skipped;
+  the review link will be the Instatic staging URL.
+- Outputs produced: `style-direction.md`, `design-tokens.json`, `reference-inventory.md`,
+  `canary-review.md`, `final-site/`, `08-qa/.tmp/screenshots/`.
+
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required after approved wireframes and graphic resources. Produces the first draft, Figma output, and required Vercel review URL before `05-design-revisions`.
 - **Figma to Webflow**: Skipped unless the signed scope includes design changes, missing breakpoints, or unresolved component states that Deliver is responsible for designing.

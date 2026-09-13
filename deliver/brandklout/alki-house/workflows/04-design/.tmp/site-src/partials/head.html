@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{HEAD_SEO}}
+<link rel="icon" href="{{ROOT}}assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Display: Bricolage Grotesque. Body/UI: Manrope. Specs and labels: JetBrains Mono.
+     Static weights only — Instatic installs static instances, so variable axes would be lost live. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- One stylesheet for the whole site, assembled by build-site.mjs from
+     site-src/css/*.css in filename order (00 root, 01 tokens, 02 base,
+     10-12 chrome, 20 kit, 30-37 home chapters, 40-42 catalogue, 50-53 product). -->
+<link rel="stylesheet" href="{{ROOT}}assets/site.css">
+<!-- GSAP 3.13+, vendored. Plugins are registered in site.js at the end of <body>:
+     ScrollTrigger must init after document.body exists or ScrollSmoother dies silently. -->
+<script src="{{ROOT}}assets/gsap/gsap.min.js"></script>
+<script src="{{ROOT}}assets/gsap/ScrollTrigger.min.js"></script>
+<script src="{{ROOT}}assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="{{ROOT}}assets/gsap/ScrollSmoother.min.js"></script>
+<script src="{{ROOT}}assets/gsap/SplitText.min.js"></script>
+<script src="{{ROOT}}assets/gsap/Observer.min.js"></script>
+<script src="{{ROOT}}assets/gsap/Draggable.min.js"></script>
+<script src="{{ROOT}}assets/gsap/InertiaPlugin.min.js"></script>
+</head>
+<body data-page="{{PAGE}}">
+<div class="grain" aria-hidden="true"></div>

@@ -9,6 +9,9 @@
 | **Hosting** | not yet provisioned — the house target is Instatic on Railway |
 | **Asana task** | not yet recorded — find it in the Brandklout workspace and put the GID here |
 | **Started** | 2026-09-12 |
+| **Language** | English (assumed: the brief was in English and Brandklout's market is US; the ledger is Spanish) |
+| **Sells** | Camera gimbals, studio lighting, softboxes, wireless audio, monitors, cages and rigs, lens adapters, batteries, camera care — new and pre-owned |
+| **CMS** | A Google Sheet the client maintains; columns in [`cms-schema.md`](./cms-schema.md). Local stand-in: `workflows/04-design/.tmp/site-src/data/products.json` |
 | **Worktree** | `bk-alki-house` at `~/orca/workspaces/Brandklout Website System/bk-alki-house` (sparse) |
 | **process_baseline_commit** | `da1612b1` (local `main` when the worktree was cut) |
 
@@ -52,12 +55,20 @@ starts, copy the Instatic modules it needs (`22-instatic-api-sync`, `18-instatic
 > screenshot pasted into a `.tmp/` stays on this machine until `scripts/mirror-assets.sh` syncs
 > it; only text files (`.md`, `.txt`, `.json`, URL lists) travel with a commit.
 
+## Brand assets (received 2026-09-12)
+
+- Logo and four-swatch palette in `workflows/00-client-delivery-initialization/.tmp/client-handoff/Brand/`.
+- No fonts supplied; Bricolage Grotesque / Manrope / JetBrains Mono chosen, changeable.
+- No photography supplied; product shots harvested per model, scenes generated — see `workflows/03-graphic-resources/.tmp/asset-direction.md`.
+
 ## Open questions
 
 - The domain, and whether an existing site or DNS zone is live on it.
 - The Asana task GID for this build.
-- Brand assets: logo, palette, fonts, photography.
 - Which Instatic instance (new Railway service) the site will publish to.
+- Contact channel for the "Ask about a piece" form (email? WhatsApp?) and the shop's location, neither of which is in the handoff.
+- Whether the client's own unit photographs will replace the harvested manufacturer shots before launch (they should).
+- Confirmation of the draft specs in `catalogue-overrides.json` for the sixteen featured products.
 
 ## Version Control
 

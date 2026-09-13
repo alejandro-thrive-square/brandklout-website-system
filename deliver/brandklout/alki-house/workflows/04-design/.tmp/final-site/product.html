@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zhiyun Weebill 3 — Alki House</title>
+<meta name="description" content="The mirrorless workhorse, with light and sound built in.">
+<meta property="og:title" content="Zhiyun Weebill 3 — Alki House">
+<meta property="og:description" content="The mirrorless workhorse, with light and sound built in.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Display: Bricolage Grotesque. Body/UI: Manrope. Specs and labels: JetBrains Mono.
+     Static weights only — Instatic installs static instances, so variable axes would be lost live. -->
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<!-- One stylesheet for the whole site, assembled by build-site.mjs from
+     site-src/css/*.css in filename order (00 root, 01 tokens, 02 base,
+     10-12 chrome, 20 kit, 30-37 home chapters, 40-42 catalogue, 50-53 product). -->
+<link rel="stylesheet" href="assets/site.css">
+<!-- GSAP 3.13+, vendored. Plugins are registered in site.js at the end of <body>:
+     ScrollTrigger must init after document.body exists or ScrollSmoother dies silently. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+<script src="assets/gsap/Draggable.min.js"></script>
+<script src="assets/gsap/InertiaPlugin.min.js"></script>
+</head>
+<body data-page="product">
+<div class="grain" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Alki House home">
+      <img src="assets/logo-mark.png" alt="" width="40" height="40">
+      <span>Alki<b>House</b></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="products.html" aria-current="page">Catalogue</a>
+      <a href="products.html?cat=gimbals">Gimbals</a>
+      <a href="products.html?cat=lighting">Lighting</a>
+      <a href="products.html?cat=audio">Audio</a>
+      <a href="products.html?stock=1">In stock</a>
+    </nav>
+    <div class="nav-chapter" aria-hidden="true">
+      <span id="navCh">00</span><i id="navBar"></i><em id="navName">Arrival</em>
+    </div>
+    <div class="nav-right">
+      <a class="nav-cta btn btn-light btn-sm magnetic" href="index.html#invite"><span>Ask about a piece</span></a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-in">
+    <p class="label">Alki House</p>
+    <nav class="drawer-links" aria-label="Menu">
+      <a href="index.html"><b>01</b>Home</a>
+      <a href="products.html"><b>02</b>Catalogue</a>
+      <a href="products.html?cat=gimbals"><b>03</b>Gimbals</a>
+      <a href="products.html?cat=lighting"><b>04</b>Lighting</a>
+      <a href="products.html?cat=audio"><b>05</b>Audio</a>
+      <a href="products.html?cat=rigs"><b>06</b>Rigs &amp; support</a>
+      <a href="products.html?stock=1"><b>07</b>In stock now</a>
+      <a href="index.html#invite"><b>08</b>Ask about a piece</a>
+    </nav>
+    <div class="drawer-foot">
+      <p class="muted">Camera, lighting and audio gear. New and pre-owned, tested before it ships.</p>
+    </div>
+  </div>
+</div>
+<div id="smooth-wrapper"><div id="smooth-content">
+<!-- ======================================================================
+     THE PRODUCT page — the CMS template. Four chapters: 00 Arrival (the
+     piece on its stage, angles) · 01 The Detail (specs) · 02 The Fit (what
+     sits beside it on the floor) · 03 Invitation.
+     Every {{P_*}} token is a CMS field.
+     ====================================================================== -->
+<main class="pd" data-slug="zhiyun-weebill-3">
+
+<section class="pd-arrival" id="pdArrival" data-chapter="0" data-chapter-name="Arrival" data-theme="dark">
+  <div class="wrap pd-crumbs" data-anim="hide"><a href="index.html">Alki House</a><span>/</span><a href="products.html">Catalogue</a><span>/</span><a href="products.html?cat=gimbals">Gimbals &amp; Stabilizers</a></div>
+  <div class="wrap pd-in">
+    <div class="pd-gallery" id="pdGallery" data-count="5">
+      <div class="pd-plate" aria-hidden="true"><span></span></div>
+      <div class="pd-shots" id="pdShots"><figure class="pd-shot is-on" data-i="0"><img src="assets/products/zhiyun-weebill-3/1.webp" alt="Zhiyun Weebill 3" width="1400" height="1400"></figure><figure class="pd-shot" data-i="1"><img src="assets/products/zhiyun-weebill-3/2.webp" alt="Zhiyun Weebill 3, view 2" width="1400" height="1400" loading="lazy"></figure><figure class="pd-shot" data-i="2"><img src="assets/products/zhiyun-weebill-3/3.webp" alt="Zhiyun Weebill 3, view 3" width="1400" height="1400" loading="lazy"></figure><figure class="pd-shot" data-i="3"><img src="assets/products/zhiyun-weebill-3/4.webp" alt="Zhiyun Weebill 3, view 4" width="1400" height="1400" loading="lazy"></figure><figure class="pd-shot" data-i="4"><img src="assets/products/zhiyun-weebill-3/5.webp" alt="Zhiyun Weebill 3, view 5" width="1400" height="1400" loading="lazy"></figure></div>
+      <div class="pd-thumbs" id="pdThumbs"><button class="pd-thumb is-on" data-i="0" aria-label="View 1"><img src="assets/products/zhiyun-weebill-3/1.webp" alt="" loading="lazy"></button><button class="pd-thumb" data-i="1" aria-label="View 2"><img src="assets/products/zhiyun-weebill-3/2.webp" alt="" loading="lazy"></button><button class="pd-thumb" data-i="2" aria-label="View 3"><img src="assets/products/zhiyun-weebill-3/3.webp" alt="" loading="lazy"></button><button class="pd-thumb" data-i="3" aria-label="View 4"><img src="assets/products/zhiyun-weebill-3/4.webp" alt="" loading="lazy"></button><button class="pd-thumb" data-i="4" aria-label="View 5"><img src="assets/products/zhiyun-weebill-3/5.webp" alt="" loading="lazy"></button></div>
+    </div>
+    <div class="pd-copy">
+      <p class="chapter-tag" data-anim="hide"><b>00</b><i></i>Zhiyun</p>
+      <h1 data-split data-anim="hide">Zhiyun Weebill 3</h1>
+      <p class="lead pd-tag" data-arrive data-anim="hide">The mirrorless workhorse, with light and sound built in.</p>
+      <div class="pd-buy" data-arrive data-anim="hide">
+        <div class="pd-price"><span class="price">$400</span><span class="pd-badges"><span class="badge badge-stock">In stock</span><span class="badge badge-new">New</span></span></div>
+        <p class="mono pd-stock">1 on hand · New, sealed</p>
+        <div class="pd-actions">
+          <a class="btn btn-primary magnetic" href="index.html#invite"><span>Ask about this piece</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          <a class="btn btn-ghost magnetic" href="#pdDetail"><span>The detail</span></a>
+        </div>
+      </div>
+      <ul class="pd-marks" data-arrive data-anim="hide">
+        <li><b>01</b>Tested before it ships</li><li><b>02</b>Collect or ship same week</li><li><b>03</b>Ask us what to pair it with</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="pd-detail" id="pdDetail" data-chapter="1" data-chapter-name="The Detail" data-theme="light">
+  <div class="wrap pd-detail-in">
+    <div class="pd-detail-copy">
+      <p class="chapter-tag"><b>01</b><i></i>The Detail</p>
+      <h2 data-split>What it is, and what it does on set.</h2>
+      <p class="lead" data-arrive>Weebill 3 carries a full mirrorless rig all day on one hand. The sling grip and wrist rest take the weight off your forearm, the built-in fill light and microphone mean fewer things to bolt on, and the app handles balancing, tracking and timelapse.</p>
+    </div>
+    <div class="pd-specs" data-arrive>
+      <p class="label">Specifications</p>
+      <dl class="specs"><div><dt>Payload</dt><dd>up to 3.5 kg</dd></div><div><dt>Runtime</dt><dd>up to 21 h</dd></div><div><dt>Fill light</dt><dd>1,000 lumens, built in</dd></div><div><dt>Mic</dt><dd>Built-in, with wind cover</dd></div><div><dt>Weight</dt><dd>1.13 kg</dd></div></dl>
+      <p class="mono muted pd-specnote">Specs from the maker's sheet; the condition line above describes this unit.</p>
+    </div>
+  </div>
+</section>
+
+<section class="pd-fit" id="pdFit" data-chapter="2" data-chapter-name="The Fit" data-theme="dark">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><p class="chapter-tag"><b>02</b><i></i>The Fit</p><h2 data-split>Beside it on the floor.</h2></div>
+      <p class="lead" data-arrive>More from Gimbals &amp; Stabilizers. Drag the rail, or <a class="pd-link" href="products.html?cat=gimbals">see the whole aisle</a>.</p>
+    </div>
+  </div>
+  <div class="pd-rail-wrap"><div class="hscroll pd-rail" id="pdRail"><a class="pcard" href="products/zhiyun-smooth-5.html" data-slug="zhiyun-smooth-5" data-cat="gimbals" data-brand="Zhiyun" data-stock="2" data-price="120" data-name="zhiyun smooth 5">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/zhiyun-smooth-5/1.webp" alt="Zhiyun Smooth 5" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/zhiyun-smooth-5/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Zhiyun</p><h4>Zhiyun Smooth 5</h4>
+    <div class="pcard-row"><span class="price">$120</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/zhiyun-smooth-q4.html" data-slug="zhiyun-smooth-q4" data-cat="gimbals" data-brand="Zhiyun" data-stock="1" data-price="90" data-name="zhiyun smooth q4">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/zhiyun-smooth-q4/1.webp" alt="Zhiyun Smooth Q4" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/zhiyun-smooth-q4/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Zhiyun</p><h4>Zhiyun Smooth Q4</h4>
+    <div class="pcard-row"><span class="price">$90</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/feiyutech-scorp-c2.html" data-slug="feiyutech-scorp-c2" data-cat="gimbals" data-brand="Feiyutech" data-stock="3" data-price="260" data-name="feiyutech scorp c2">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/feiyutech-scorp-c2/1.webp" alt="Feiyutech Scorp C2" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/feiyutech-scorp-c2/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Feiyutech</p><h4>Feiyutech Scorp C2</h4>
+    <div class="pcard-row"><span class="price">$260</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/zhiyun-crane-m3.html" data-slug="zhiyun-crane-m3" data-cat="gimbals" data-brand="Zhiyun" data-stock="3" data-price="150" data-name="zhiyun crane m3">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/zhiyun-crane-m3/1.webp" alt="Zhiyun Crane M3" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/zhiyun-crane-m3/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Zhiyun</p><h4>Zhiyun Crane M3</h4>
+    <div class="pcard-row"><span class="price">$150</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/dji-osmo-mobile-4.html" data-slug="dji-osmo-mobile-4" data-cat="gimbals" data-brand="DJI" data-stock="1" data-price="120" data-name="dji osmo mobile 4">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span><span class="badge badge-new">New</span></div><img class="pcard-main" src="assets/products/dji-osmo-mobile-4/1.webp" alt="DJI Osmo Mobile 4" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/dji-osmo-mobile-4/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">DJI</p><h4>DJI Osmo Mobile 4</h4>
+    <div class="pcard-row"><span class="price">$120</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/feiyutech-scorp-c.html" data-slug="feiyutech-scorp-c" data-cat="gimbals" data-brand="Feiyutech" data-stock="1" data-price="230" data-name="feiyutech scorp c">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/feiyutech-scorp-c/1.webp" alt="Feiyutech Scorp C" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/feiyutech-scorp-c/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Feiyutech</p><h4>Feiyutech Scorp C</h4>
+    <div class="pcard-row"><span class="price">$230</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/zhiyun-smooth-q3-combo.html" data-slug="zhiyun-smooth-q3-combo" data-cat="gimbals" data-brand="Zhiyun" data-stock="3" data-price="80" data-name="zhiyun smooth q3 combo">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/zhiyun-smooth-q3-combo/1.webp" alt="Zhiyun Smooth Q3 Combo" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/zhiyun-smooth-q3-combo/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Zhiyun</p><h4>Zhiyun Smooth Q3 Combo</h4>
+    <div class="pcard-row"><span class="price">$80</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a>
+<a class="pcard" href="products/zhiyun-weebill-2-special-edition.html" data-slug="zhiyun-weebill-2-special-edition" data-cat="gimbals" data-brand="Zhiyun" data-stock="1" data-price="220" data-name="zhiyun weebill 2 special edition">
+  <div class="pcard-media"><div class="pcard-badges"><span class="badge badge-stock">In stock</span></div><img class="pcard-main" src="assets/products/zhiyun-weebill-2-special-edition/1.webp" alt="Zhiyun Weebill 2 Special Edition" loading="lazy" width="800" height="800"><img class="pcard-alt" src="assets/products/zhiyun-weebill-2-special-edition/2.webp" alt="" loading="lazy" width="800" height="800">
+    <span class="pcard-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></div>
+  <div class="pcard-body"><p class="pcard-cat">Zhiyun</p><h4>Zhiyun Weebill 2 Special Edition</h4>
+    <div class="pcard-row"><span class="price">$220</span><span class="pcard-cat">Gimbals &amp; Stabilizers</span></div></div>
+</a></div></div>
+</section>
+
+<section class="pd-invite" id="pdInvite" data-chapter="3" data-chapter-name="Invitation" data-theme="dark">
+  <div class="in-glow" aria-hidden="true"></div>
+  <div class="wrap pd-invite-in">
+    <div>
+      <p class="chapter-tag"><b>03</b><i></i>Invitation</p>
+      <h2 data-split>Want this one?</h2>
+      <p class="lead" data-arrive>Say so, and we'll hold it, tell you exactly what it comes with, and what we'd pair it with for your camera.</p>
+    </div>
+    <div class="pd-invite-side" data-arrive>
+      <a class="btn btn-primary magnetic" href="index.html#invite"><span>Ask about Zhiyun Weebill 3</span></a>
+      <a class="btn btn-ghost magnetic" href="products.html"><span>Back to the catalogue</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="footer">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <img src="assets/logo-mark.png" alt="" width="56" height="56">
+      <p class="foot-word">Alki<b>House</b></p>
+      <p class="muted">Gear for the shot you're chasing. Gimbals, studio light, audio and rigging — new and pre-owned, tested before it ships.</p>
+    </div>
+    <nav class="foot-col" aria-label="Shop">
+      <p class="label">Shop</p>
+      <a href="products.html">Full catalogue</a>
+      <a href="products.html?cat=gimbals">Gimbals &amp; stabilizers</a>
+      <a href="products.html?cat=lighting">Studio lighting</a>
+      <a href="products.html?cat=modifiers">Softboxes &amp; modifiers</a>
+      <a href="products.html?cat=audio">Audio</a>
+      <a href="products.html?cat=monitors">Monitors &amp; recording</a>
+      <a href="products.html?cat=rigs">Cages, rigs &amp; support</a>
+    </nav>
+    <nav class="foot-col" aria-label="Help">
+      <p class="label">Alki House</p>
+      <a href="index.html#promise">Why buy here</a>
+      <a href="index.html#way">How it works</a>
+      <a href="products.html?stock=1">In stock now</a>
+      <a href="index.html#invite">Ask about a piece</a>
+    </nav>
+    <div class="foot-col">
+      <p class="label">Inventory</p>
+      <p class="foot-stat"><b>235</b> products catalogued</p>
+      <p class="foot-stat"><b>142</b> lines on the floor</p>
+      <p class="foot-stat"><b>41</b> brands</p>
+      <p class="muted small mono">Live from the inventory sheet · 2026-09-13</p>
+    </div>
+  </div>
+  <div class="wrap foot-base">
+    <p class="mono">© 2026 Alki House</p>
+    <p class="mono muted">Website by Brandklout</p>
+  </div>
+</footer>
+</div></div>
+<div class="mob-bar" aria-hidden="false"><a class="btn btn-primary" href="index.html#invite"><span>Ask about this piece</span></a><a class="btn btn-ghost" href="products.html"><span>Catalogue</span></a></div><script src="assets/site.js"></script>
+</body>
+</html>

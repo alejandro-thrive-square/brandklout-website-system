@@ -1,0 +1,7 @@
+/* 05 THE FLOOR — live inventory grid. */
+.ch-floor{position:relative;background:var(--coffee-950);color:var(--fg-body);padding-block:var(--section)}
+.fl-stamp{display:flex;align-items:center;gap:.7rem;font-size:var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--apricot-deep)}
+.fl-stamp i{width:.6rem;height:.6rem;border-radius:50%;background:var(--ember-bright);box-shadow:0 0 0 0 rgba(201,122,60,.6);animation:fl-pulse 2.2s infinite}
+@keyframes fl-pulse{0%{box-shadow:0 0 0 0 rgba(201,122,60,.6)}70%{box-shadow:0 0 0 .7rem rgba(201,122,60,0)}100%{box-shadow:0 0 0 0 rgba(201,122,60,0)}}
+.fl-grid .pcard{will-change:transform,opacity}
+.fl-more{display:flex;justify-content:center;margin-top:3.5rem}

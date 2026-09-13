@@ -20,6 +20,24 @@ Create or collect the visual assets required by the approved wireframes and bran
 3. Collect, create, or request missing assets.
 4. Prepare assets for Design with clear names, usage notes, and source/licensing notes when relevant.
 
+## Alki House adaptation (2026-09-13)
+
+Three reproducible pipelines replaced manual collection; all live in this module's `.tmp/`:
+
+1. **Product photography** — `harvest-product-images.mjs`: per-product web image search (DuckDuckGo
+   `i.js` with dimensions, Bing `/images/async` as fallback with its own dimensions), host/size/
+   white-corner scoring, Pillow verification, perceptual-hash de-duplication, up to five angles,
+   `manifest.json` with source and page URL per file. Doubtful matches are listed in the runbook.
+2. **Scenes** — `generate-scenes.mjs`: Freepik API behind the `MAGNIFIC` key — Mystic 2k renders
+   in the brand palette, Kling 2.5 image-to-video loops, licensed stock via `/v1/resources`.
+   Prompts carry "unbranded, no markings, no text"; every render is eyeballed and rejects are kept.
+3. **Preparation** — `04-design/.tmp/site-src/prepare-assets.py`: scenes to WebP; product shots
+   flood-filled off white grounds (plus a bounded region-grow for drop shadows) into transparent
+   WebP cut-outs, indexed with a `cutout` flag the templates use.
+
+Outputs: `asset-direction.md`, `asset-inventory.json`, `scenes/scenes-manifest.json`,
+`product-images/manifest.json`.
+
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required before high-fidelity design.
 - **Figma to Webflow**: Validate that Figma assets, images, icons, fonts, and licensing notes are available for build; request only missing assets.
