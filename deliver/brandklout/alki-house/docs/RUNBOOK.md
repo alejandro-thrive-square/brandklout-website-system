@@ -17,12 +17,13 @@ Facts and open questions are in [`project-overview.md`](./project-overview.md).
 | Worktree | `~/orca/workspaces/Brandklout Website System/bk-alki-house`, branch `bk-alki-house`, sparse, cut from `da1612b1` |
 | `.env` | Generated: `[shared]` + `[alki-house]`. The client section is empty. |
 | Hosting | None. No Instatic instance, no Railway service, no domain recorded. |
-| Workflows | None copied yet. |
+| Workflows | `00` (handoff folders only), `01`-`06`, `08`-`10` copied from `da1612b1`. `07-webflow-build` skipped: the build is Instatic. Where references go: the table in `project-overview.md`. |
 
 ## Next
 
 1. Record the domain and the Asana task GID in `project-overview.md`.
-2. Collect brand assets into `workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
+2. Paste client material into `workflows/00-client-delivery-initialization/.tmp/client-handoff/`
+   and design references into `workflows/04-design/.tmp/references/`.
 3. Design and build, to [`../../docs/DESIGN-STANDARD.md`](../../docs/DESIGN-STANDARD.md).
 
 ## Gotchas

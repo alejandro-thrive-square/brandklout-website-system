@@ -31,10 +31,26 @@ lifted from another client's site; a technique may repeat, a layout may not.
 
 ## Workflows
 
-None copied yet. Copy modules from `deliver/process/` into `workflows/` as the build reaches them
-(see [`deliver/process/00-client-delivery-initialization`](../../../process/00-client-delivery-initialization/00-client-delivery-initialization.md)).
-Initial client-provided material goes once in
-`workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
+Copied 2026-09-12 from `deliver/process/` at `da1612b1`, following the **Development from
+Scratch** route in [`OFFER_ROUTING.md`](../../../process/OFFER_ROUTING.md):
+`01` -> `02` -> `03` -> `04` -> `05` -> `06` -> build -> `08` -> `09` -> `10`. Each module is the
+template's directive, executor and trigger prompt, with an empty `.tmp/` to work in.
+
+| Module | Put here |
+| :--- | :--- |
+| `00-client-delivery-initialization/.tmp/client-handoff/` | Everything the client or Brandklout sends at the start: brief, logo, brand files, copy, links |
+| `00-client-delivery-initialization/.tmp/design-system/` | The chosen reference package from `deliver/process/design-system-library/`, if one is picked |
+| `04-design/.tmp/references/` | Design references and inspiration: screenshots, URLs, moodboards |
+| any other `<module>/.tmp/` | Files that phase receives or produces |
+
+**Skipped: `07-webflow-build`.** This site is built on Instatic, not Webflow. When the build
+starts, copy the Instatic modules it needs (`22-instatic-api-sync`, `18-instatic-embeds`,
+`20-instatic-domain-origins`) from `deliver/process/` the same way.
+
+> [!NOTE]
+> Images, PDFs and video are gitignored everywhere (`.gitignore`, "Binary / Media Assets"). A
+> screenshot pasted into a `.tmp/` stays on this machine until `scripts/mirror-assets.sh` syncs
+> it; only text files (`.md`, `.txt`, `.json`, URL lists) travel with a commit.
 
 ## Open questions
 
