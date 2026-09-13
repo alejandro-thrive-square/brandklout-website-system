@@ -5,7 +5,7 @@ to the high-end GSAP bar; style references for layout only; modern font; a sheet
 sync plugin comes later; product photos harvested per product; decorative stock and AI scenes via
 the Magnific (Freepik) key.
 
-## Done
+## Done (commit `6591b8f7`)
 
 - **Catalogue from the ledger.** `Stock/products.csv` is a per-lot purchase log in Spanish (600
   rows, costs and commissions). `site-src/data/build-catalogue.mjs` folds it into 235 products:
