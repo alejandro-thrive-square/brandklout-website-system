@@ -1,117 +1,117 @@
 {
-  "_note": "Hand-written merchandising layered over the ledger by build-catalogue.mjs, keyed by slug. In the Google Sheet these become the Tagline / Description / Specs / Featured columns. Specs are DRAFT from public spec sheets and must be confirmed by the client before launch.",
+  "_note": "Hand-written merchandising layered over the ledger by build-catalogue.mjs, keyed by product id (the English slug, which never changes). In the Google Sheet these become the Tagline / Description / Specs / Featured columns. The site is in Spanish, so every value here is Spanish. Specs are DRAFT from public spec sheets and must be confirmed by the client before launch.",
 
   "zhiyun-weebill-3": {
     "featured": true,
-    "tagline": "The mirrorless workhorse, with light and sound built in.",
-    "description": "Weebill 3 carries a full mirrorless rig all day on one hand. The sling grip and wrist rest take the weight off your forearm, the built-in fill light and microphone mean fewer things to bolt on, and the app handles balancing, tracking and timelapse.",
-    "specs": [["Payload", "up to 3.5 kg"], ["Runtime", "up to 21 h"], ["Fill light", "1,000 lumens, built in"], ["Mic", "Built-in, with wind cover"], ["Weight", "1.13 kg"]],
+    "tagline": "El caballo de batalla para mirrorless, con luz y sonido integrados.",
+    "description": "El Weebill 3 carga un rig mirrorless completo todo el día con una sola mano. El agarre tipo sling y el apoyo de muñeca le quitan el peso al antebrazo, la luz de relleno y el micrófono integrados significan menos cosas que atornillar, y la app se encarga del balance, el seguimiento y el timelapse.",
+    "specs": [["Carga", "hasta 3.5 kg"], ["Autonomía", "hasta 21 h"], ["Luz de relleno", "1,000 lúmenes, integrada"], ["Micrófono", "Integrado, con antiviento"], ["Peso", "1.13 kg"]],
     "tags": ["mirrorless", "run and gun"]
   },
   "feiyutech-scorp-c2": {
     "featured": true,
-    "tagline": "Serious stabilisation without the serious price.",
-    "description": "The SCORP-C2 gives a mirrorless or light cinema body three-axis stabilisation, a real handle you can hold underslung, and enough battery for a full shoot day. It is the gimbal we recommend first to anyone stepping up from a phone.",
-    "specs": [["Payload", "up to 2.5 kg"], ["Runtime", "up to 13 h"], ["Screen", "1.3\" touch display"], ["Plate", "Arca-Swiss / Manfrotto"], ["Weight", "1.2 kg"]],
-    "tags": ["mirrorless", "cinema"]
+    "tagline": "Estabilización seria sin el precio serio.",
+    "description": "El SCORP-C2 le da a una mirrorless o a un cuerpo de cine ligero estabilización en tres ejes, un asa de verdad que puedes sostener en modo bajo, y batería para un día completo de rodaje. Es el gimbal que recomendamos primero a quien da el salto desde el celular.",
+    "specs": [["Carga", "hasta 2.5 kg"], ["Autonomía", "hasta 13 h"], ["Pantalla", "Táctil de 1.3\""], ["Placa", "Arca-Swiss / Manfrotto"], ["Peso", "1.2 kg"]],
+    "tags": ["mirrorless", "cine"]
   },
   "colbor-cl60-cob-light": {
     "featured": true,
-    "tagline": "Sixty five watts of daylight from a light that fits in a bag.",
-    "description": "The CL60 is the small COB light that keeps ending up on every shoot: bi-colour, accurate skin tones, Bowens-adaptable, and it runs off a laptop charger or an NP-F battery. Pair it with a 65 cm softbox and you have a key light for interviews and product work.",
-    "specs": [["Power", "65 W COB"], ["Colour temperature", "2,700 K to 6,500 K"], ["Colour accuracy", "CRI 97+"], ["Mount", "Colbor mini mount, Bowens adapter included"], ["Power input", "USB-C PD or NP-F battery"]],
-    "tags": ["interview", "product", "key light"]
+    "tagline": "Sesenta y cinco watts de luz de día en una luz que cabe en la mochila.",
+    "description": "La CL60 es la luz COB pequeña que termina en cada rodaje: bicolor, tonos de piel fieles, adaptable a Bowens, y funciona con un cargador de laptop o una batería NP-F. Con un softbox de 65 cm tienes una luz principal para entrevistas y producto.",
+    "specs": [["Potencia", "65 W COB"], ["Temperatura de color", "2,700 K a 6,500 K"], ["Fidelidad de color", "CRI 97+"], ["Montura", "Mini montura Colbor, adaptador Bowens incluido"], ["Alimentación", "USB-C PD o batería NP-F"]],
+    "tags": ["entrevista", "producto", "luz principal"]
   },
   "hollyland-lark-m2-combo": {
     "featured": true,
-    "tagline": "Two nine-gram microphones and nowhere to clip a cable.",
-    "description": "Lark M2 is the wireless kit that disappears on camera. Each transmitter weighs nine grams and clips or magnets to a shirt, and the combo ships with both a camera receiver and a phone receiver, so one kit covers interviews, vlogs and phone-first content.",
-    "specs": [["Kit", "2 TX + camera RX + mobile RX"], ["Transmitter weight", "9 g"], ["Range", "up to 300 m line of sight"], ["Audio", "48 kHz / 24-bit"], ["Noise cancelling", "Environmental, one button"]],
-    "tags": ["interview", "vlog"]
+    "tagline": "Dos micrófonos de nueve gramos y ningún cable que esconder.",
+    "description": "El Lark M2 es el kit inalámbrico que desaparece en cámara. Cada transmisor pesa nueve gramos y se sujeta con clip o imán a la camisa, y el combo trae receptor para cámara y receptor para celular, así que un solo kit cubre entrevistas, vlogs y contenido desde el teléfono.",
+    "specs": [["Kit", "2 TX + RX para cámara + RX para celular"], ["Peso del transmisor", "9 g"], ["Alcance", "hasta 300 m con línea de vista"], ["Audio", "48 kHz / 24 bits"], ["Cancelación de ruido", "Ambiental, con un botón"]],
+    "tags": ["entrevista", "vlog"]
   },
   "dji-mic-mini-2-combo": {
     "featured": true,
-    "tagline": "DJI's smallest wireless mic, in the full two-person kit.",
-    "description": "Two transmitters, one receiver and a charging case: the Mic Mini combo is the set-and-forget audio kit for creators who shoot with a phone or a mirrorless body. Pairs directly with DJI cameras and phones, and the case keeps everything topped up between shoots.",
-    "specs": [["Kit", "2 TX + 1 RX + charging case"], ["Transmitter weight", "10 g"], ["Range", "up to 400 m"], ["Runtime", "up to 48 h with the case"], ["Connection", "Camera, USB-C, Lightning"]],
-    "tags": ["vlog", "phone"]
+    "tagline": "El micrófono inalámbrico más pequeño de DJI, en el kit completo para dos.",
+    "description": "Dos transmisores, un receptor y un estuche de carga: el combo Mic Mini es el kit de audio de poner y olvidar para quien graba con celular o con mirrorless. Se empareja directo con cámaras y teléfonos DJI, y el estuche mantiene todo cargado entre tomas.",
+    "specs": [["Kit", "2 TX + 1 RX + estuche de carga"], ["Peso del transmisor", "10 g"], ["Alcance", "hasta 400 m"], ["Autonomía", "hasta 48 h con el estuche"], ["Conexión", "Cámara, USB-C, Lightning"]],
+    "tags": ["vlog", "celular"]
   },
   "viltrox-dc-550-monitor": {
     "featured": true,
-    "tagline": "A bright 5.5-inch field monitor that survives daylight.",
-    "description": "The DC-550 puts a full-HD touch monitor on top of your rig with 3D LUTs, waveform, false colour and peaking, so what you see is what you shot. It mounts on any cold shoe and runs from an NP-F battery.",
-    "specs": [["Screen", "5.5\" touch, 1920 x 1080"], ["Brightness", "1,200 nits"], ["Inputs", "4K HDMI in and out"], ["Tools", "3D LUT, waveform, false colour, peaking"], ["Power", "NP-F battery or DC"]],
-    "tags": ["monitoring"]
+    "tagline": "Un monitor de campo de 5.5 pulgadas que aguanta la luz del día.",
+    "description": "El DC-550 pone un monitor táctil Full HD sobre tu rig, con LUTs 3D, forma de onda, falso color y peaking, para que lo que ves sea lo que grabaste. Se monta en cualquier zapata fría y funciona con batería NP-F.",
+    "specs": [["Pantalla", "Táctil de 5.5\", 1920 x 1080"], ["Brillo", "1,200 nits"], ["Entradas", "HDMI 4K de entrada y salida"], ["Herramientas", "LUT 3D, forma de onda, falso color, peaking"], ["Alimentación", "Batería NP-F o DC"]],
+    "tags": ["monitoreo"]
   },
   "zhiyun-crane-m3": {
     "featured": true,
-    "tagline": "One gimbal for the phone, the action cam and the mirrorless.",
-    "description": "Crane M3 is the compact all-rounder: light enough to carry all day, strong enough for a mirrorless body with a small prime, and it balances a phone or an action camera with the included mounts. The built-in fill light saves a trip back to the bag.",
-    "specs": [["Payload", "mirrorless, phone or action cam"], ["Fill light", "Built in, 800 lumens"], ["Runtime", "up to 8 h"], ["Weight", "700 g"], ["Screen", "1.22\" colour touch"]],
-    "tags": ["compact", "travel"]
+    "tagline": "Un solo gimbal para el celular, la cámara de acción y la mirrorless.",
+    "description": "El Crane M3 es el todoterreno compacto: ligero para cargarlo todo el día, con fuerza para una mirrorless con un fijo pequeño, y balancea un celular o una cámara de acción con los soportes incluidos. La luz de relleno integrada te ahorra volver a la mochila.",
+    "specs": [["Carga", "mirrorless, celular o cámara de acción"], ["Luz de relleno", "Integrada, 800 lúmenes"], ["Autonomía", "hasta 8 h"], ["Peso", "700 g"], ["Pantalla", "Táctil a color de 1.22\""]],
+    "tags": ["compacto", "viaje"]
   },
   "godox-s65t-softbox": {
     "featured": true,
-    "tagline": "A 65 cm octabox that opens like an umbrella.",
-    "description": "The S65T sets up in seconds, folds down to the size of an umbrella and turns any Bowens light into a soft, flattering key. It ships with the inner and outer diffusers and a grid for controlling spill.",
-    "specs": [["Size", "65 cm octagonal"], ["Mount", "Bowens"], ["Setup", "Umbrella quick-release"], ["Includes", "Inner and outer diffusion, honeycomb grid"], ["Folded length", "50 cm"]],
-    "tags": ["interview", "portrait"]
+    "tagline": "Un octabox de 65 cm que se abre como paraguas.",
+    "description": "El S65T se arma en segundos, se pliega al tamaño de un paraguas y convierte cualquier luz Bowens en una luz principal suave y favorecedora. Trae difusores interior y exterior y una rejilla para controlar el derrame.",
+    "specs": [["Tamaño", "65 cm, octagonal"], ["Montura", "Bowens"], ["Armado", "Apertura rápida tipo paraguas"], ["Incluye", "Difusión interior y exterior, rejilla de panal"], ["Largo plegado", "50 cm"]],
+    "tags": ["entrevista", "retrato"]
   },
   "feelworld-f6-plus-v2-monitor-kit": {
     "featured": true,
-    "tagline": "Six inches of touch monitoring, with the battery and arm in the box.",
-    "description": "The F6 Plus V2 kit is the field monitor as a complete package: screen, tilt arm, sun hood and battery. Load your LUTs, expose with waveform and false colour, and stop guessing from the camera's own display.",
-    "specs": [["Screen", "6\" touch, 1920 x 1080"], ["Brightness", "600 nits"], ["Inputs", "4K HDMI in and out"], ["Tools", "3D LUT, waveform, false colour, peaking"], ["Kit", "Monitor, tilt arm, sun hood, NP-F battery"]],
-    "tags": ["monitoring"]
+    "tagline": "Seis pulgadas de monitoreo táctil, con batería y brazo en la caja.",
+    "description": "El kit F6 Plus V2 es el monitor de campo como paquete completo: pantalla, brazo articulado, parasol y batería. Carga tus LUTs, expón con forma de onda y falso color, y deja de adivinar con la pantalla de la cámara.",
+    "specs": [["Pantalla", "Táctil de 6\", 1920 x 1080"], ["Brillo", "600 nits"], ["Entradas", "HDMI 4K de entrada y salida"], ["Herramientas", "LUT 3D, forma de onda, falso color, peaking"], ["Kit", "Monitor, brazo articulado, parasol, batería NP-F"]],
+    "tags": ["monitoreo"]
   },
   "zhiyun-smooth-5": {
     "featured": true,
-    "tagline": "The phone gimbal for people who film with a phone on purpose.",
-    "description": "Smooth 5 holds the latest large phones with a case on, adds a fill light with magnetic filters, and has real controls: a focus wheel, a joystick and a mode switch you can work without looking. Runs a full day.",
-    "specs": [["Fits", "Phones up to 300 g with case"], ["Fill light", "Built in, magnetic colour filters"], ["Runtime", "up to 24 h"], ["Controls", "Focus wheel, joystick, mode switch"], ["Weight", "615 g"]],
-    "tags": ["phone", "vlog"]
+    "tagline": "El gimbal de celular para quien graba con el celular a propósito.",
+    "description": "El Smooth 5 sostiene los celulares grandes más recientes con funda puesta, suma una luz de relleno con filtros magnéticos y tiene controles de verdad: rueda de enfoque, joystick y un selector de modo que manejas sin mirar. Aguanta un día completo.",
+    "specs": [["Compatible con", "Celulares de hasta 300 g con funda"], ["Luz de relleno", "Integrada, filtros de color magnéticos"], ["Autonomía", "hasta 24 h"], ["Controles", "Rueda de enfoque, joystick, selector de modo"], ["Peso", "615 g"]],
+    "tags": ["celular", "vlog"]
   },
   "sony-fx30-cinema-camera": {
     "featured": true,
-    "condition": "New, sealed",
-    "tagline": "Sony's entry into Cinema Line, still in the box.",
-    "description": "The FX30 is the compact cinema camera built around the same colour science as the FX3 and FX6: dual base ISO, S-Cinetone, 4K up to 120 fps and a body that mounts straight into a cage with 1/4-20 threads on every side.",
-    "specs": [["Sensor", "26 MP APS-C, back-illuminated"], ["Video", "4K up to 120 fps, 10-bit 4:2:2"], ["Colour", "S-Cinetone, S-Log3, dual base ISO"], ["Mount", "Sony E"], ["Body", "Threaded mounting points, active cooling"]],
-    "tags": ["cinema", "new"]
+    "condition": "Nuevo, sellado",
+    "tagline": "La entrada de Sony a Cinema Line, todavía en su caja.",
+    "description": "La FX30 es la cámara de cine compacta con la misma ciencia de color que la FX3 y la FX6: doble ISO base, S-Cinetone, 4K hasta 120 fps y un cuerpo que entra directo en una jaula, con roscas de 1/4-20 en cada lado.",
+    "specs": [["Sensor", "APS-C de 26 MP, retroiluminado"], ["Video", "4K hasta 120 fps, 10 bits 4:2:2"], ["Color", "S-Cinetone, S-Log3, doble ISO base"], ["Montura", "Sony E"], ["Cuerpo", "Puntos de montaje roscados, enfriamiento activo"]],
+    "tags": ["cine", "nuevo"]
   },
   "dji-rs4-mini-combo": {
     "featured": true,
-    "tagline": "DJI's compact gimbal with tracking in the combo kit.",
-    "description": "The RS 4 Mini carries a mirrorless body with a mid-size zoom, balances in minutes with the Teflon-coated arms, and the combo adds the tracking module, the briefcase handle and the phone holder. Vertical shooting is a quick flip, not a rebuild.",
-    "specs": [["Payload", "up to 2 kg"], ["Runtime", "up to 13 h"], ["Tracking", "Intelligent tracking module included"], ["Vertical", "Native vertical shooting"], ["Weight", "890 g"]],
-    "tags": ["mirrorless", "tracking"]
+    "tagline": "El gimbal compacto de DJI, con seguimiento en el kit combo.",
+    "description": "El RS 4 Mini carga una mirrorless con un zoom mediano, se balancea en minutos con sus brazos recubiertos de teflón, y el combo suma el módulo de seguimiento, el asa tipo maletín y el soporte para celular. Grabar en vertical es un giro rápido, no un rearmado.",
+    "specs": [["Carga", "hasta 2 kg"], ["Autonomía", "hasta 13 h"], ["Seguimiento", "Módulo de seguimiento inteligente incluido"], ["Vertical", "Grabación vertical nativa"], ["Peso", "890 g"]],
+    "tags": ["mirrorless", "seguimiento"]
   },
   "feiyutech-scorp-mini-2-kit": {
     "featured": true,
-    "tagline": "One stabiliser for every camera you own.",
-    "description": "SCORP-Mini 2 swaps between a phone, an action camera and a light mirrorless body with the clamps in the kit. AI tracking follows a face without an app, and the touch screen keeps the phone free for framing.",
-    "specs": [["Fits", "Phone, action camera, compact mirrorless"], ["Payload", "up to 1.2 kg"], ["Tracking", "Built-in AI tracker"], ["Runtime", "up to 13 h"], ["Screen", "1.3\" touch"]],
-    "tags": ["all-in-one", "phone"]
+    "tagline": "Un solo estabilizador para todas las cámaras que tienes.",
+    "description": "El SCORP-Mini 2 cambia entre celular, cámara de acción y una mirrorless ligera con las pinzas del kit. El seguimiento con IA sigue un rostro sin app, y la pantalla táctil deja el celular libre para encuadrar.",
+    "specs": [["Compatible con", "Celular, cámara de acción, mirrorless compacta"], ["Carga", "hasta 1.2 kg"], ["Seguimiento", "Rastreador con IA integrado"], ["Autonomía", "hasta 13 h"], ["Pantalla", "Táctil de 1.3\""]],
+    "tags": ["todo en uno", "celular"]
   },
   "magic-arm-super-clamp-kit": {
     "featured": true,
-    "tagline": "The two pieces that put a monitor, light or mic anywhere.",
-    "description": "An 11-inch articulated arm with a super clamp on the end. Clamp it to a light stand, a desk or a cage and lock the arm with one lever. Every rig ends up needing two.",
-    "specs": [["Arm", "11\" dual ball-head, single-lever lock"], ["Clamp", "Fits tubes 13 to 55 mm"], ["Threads", "1/4\"-20 and 3/8\"-16"], ["Load", "up to 3 kg"], ["Finish", "Anodised aluminium"]],
+    "tagline": "Las dos piezas que ponen un monitor, una luz o un micrófono donde sea.",
+    "description": "Un brazo articulado de 11 pulgadas con un súper clamp en la punta. Sujétalo a un tripié de luz, un escritorio o una jaula y bloquea el brazo con una sola palanca. Todo rig termina necesitando dos.",
+    "specs": [["Brazo", "11\", doble rótula, bloqueo de una palanca"], ["Clamp", "Para tubos de 13 a 55 mm"], ["Roscas", "1/4\"-20 y 3/8\"-16"], ["Carga", "hasta 3 kg"], ["Acabado", "Aluminio anodizado"]],
     "tags": ["rigging"]
   },
   "canon-ef-to-rf-adapter": {
     "featured": true,
-    "tagline": "Keep every EF lens you own on a mirrorless body.",
-    "description": "The EF to RF mount adapter carries autofocus, stabilisation and aperture control from EF and EF-S glass to any EOS R body, with no loss of image quality. Weather-sealed and tripod-collar ready.",
-    "specs": [["From", "Canon EF and EF-S"], ["To", "Canon RF"], ["Autofocus", "Full electronic control"], ["Sealing", "Dust and drip resistant"], ["Weight", "110 g"]],
+    "tagline": "Conserva cada lente EF que tienes en un cuerpo mirrorless.",
+    "description": "El adaptador de montura EF a RF lleva el autofoco, la estabilización y el control de apertura de los lentes EF y EF-S a cualquier cuerpo EOS R, sin pérdida de calidad de imagen. Sellado contra el clima y listo para collarín de trípode.",
+    "specs": [["De", "Canon EF y EF-S"], ["A", "Canon RF"], ["Autofoco", "Control electrónico completo"], ["Sellado", "Resistente a polvo y salpicaduras"], ["Peso", "110 g"]],
     "tags": ["canon", "mirrorless"]
   },
   "rgb-led-tube-light-30cm": {
     "featured": true,
-    "tagline": "A pocket tube of colour for backgrounds and rims.",
-    "description": "A 30 cm RGB tube light with a built-in battery and magnets on the back. Dial in any colour or a white balance from tungsten to daylight, stick it to anything metal, and paint a background or rim a subject in seconds.",
-    "specs": [["Length", "30 cm"], ["Colour", "Full RGB plus 2,500 K to 9,000 K white"], ["Power", "Built-in battery, USB-C charging"], ["Mounting", "Magnetic back, 1/4\"-20 thread"], ["Runtime", "up to 3 h at full power"]],
-    "tags": ["background", "rim light"]
+    "tagline": "Un tubo de color de bolsillo para fondos y contraluces.",
+    "description": "Un tubo de luz RGB de 30 cm con batería integrada e imanes en la parte trasera. Elige cualquier color o un balance de blancos de tungsteno a luz de día, pégalo a cualquier superficie metálica y pinta un fondo o recorta a tu sujeto en segundos.",
+    "specs": [["Largo", "30 cm"], ["Color", "RGB completo más blanco de 2,500 K a 9,000 K"], ["Alimentación", "Batería integrada, carga USB-C"], ["Montaje", "Parte trasera magnética, rosca de 1/4\"-20"], ["Autonomía", "hasta 3 h a máxima potencia"]],
+    "tags": ["fondo", "contraluz"]
   }
 }

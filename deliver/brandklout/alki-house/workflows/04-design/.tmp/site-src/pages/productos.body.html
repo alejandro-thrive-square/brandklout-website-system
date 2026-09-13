@@ -1,0 +1,66 @@
+<!-- ======================================================================
+     EL CATÁLOGO — four chapters: 00 Llegada · 01 Los Pasillos (pinned filter
+     rail) · 02 La Vitrina (the CMS grid) · 03 Invitación.
+     The grid is rendered from data/products.json at build time and filtered
+     client-side from the same JSON, so it works with and without script.
+     ====================================================================== -->
+<main>
+
+<section class="ct-arrival" id="ctArrival" data-chapter="0" data-chapter-name="Llegada" data-theme="dark">
+  <div class="ct-film" aria-hidden="true"><img src="{{CAT_SCENE}}" alt=""><div class="ct-veil"></div></div>
+  <div class="wrap ct-in">
+    <p class="chapter-tag" data-anim="hide"><b>00</b><i></i>El Catálogo</p>
+    <h1 data-split data-anim="hide">Cada pieza en la vitrina.</h1>
+    <p class="lead" data-arrive data-anim="hide"><b class="mono" id="ctCount">{{STAT_PRODUCTS}}</b> productos en {{CAT_COUNT}} categorías, con precios del inventario en vivo. Filtra por lo que está en stock, por marca, por lo que usas. Añade al carrito y envía tu pedido por WhatsApp.</p>
+    <div class="ct-jump" data-arrive data-anim="hide">
+      {{CAT_CHIPS}}
+    </div>
+  </div>
+</section>
+
+<section class="ct-aisles" id="aisles" data-chapter="1" data-chapter-name="Los Pasillos" data-theme="dark">
+  <div class="wrap ct-rail" id="ctRail">
+    <form class="ct-filters" id="ctFilters" onsubmit="return false" aria-label="Filtrar el catálogo">
+      <label class="ct-search"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><input type="search" name="q" placeholder="Busca en la vitrina — Weebill, softbox, NP-F…" aria-label="Buscar" autocomplete="off"></label>
+      <select name="brand" aria-label="Marca">{{BRAND_OPTIONS}}</select>
+      <select name="sort" aria-label="Ordenar">
+        <option value="featured">Destacados primero</option>
+        <option value="price-asc">Precio: menor a mayor</option>
+        <option value="price-desc">Precio: mayor a menor</option>
+        <option value="name">Nombre: A a Z</option>
+      </select>
+      <label class="ct-toggle"><input type="checkbox" name="stock"><span><i></i></span>Solo en stock</label>
+      <button type="button" class="pill ct-clear" id="ctClear">Limpiar</button>
+    </form>
+    <p class="mono ct-status" id="ctStatus" aria-live="polite">Mostrando <b>{{STAT_PRODUCTS}}</b> de {{STAT_PRODUCTS}}</p>
+  </div>
+</section>
+
+<section class="ct-floor" id="ctFloor" data-chapter="2" data-chapter-name="La Vitrina" data-theme="dark">
+  <div class="wrap">
+    <div class="pgrid ct-grid" id="ctGrid">
+      {{CATALOGUE}}
+    </div>
+    <div class="ct-empty" id="ctEmpty" hidden>
+      <p class="chapter-tag"><b>—</b><i></i>Nada en la vitrina con eso</p>
+      <h3>Prueba con una red más amplia.</h3>
+      <p class="lead">Quita un filtro, o pregúntanos: mucho de lo que tenemos se vende antes de llegar a la hoja.</p>
+    </div>
+  </div>
+</section>
+
+<section class="ct-invite" id="invite" data-chapter="3" data-chapter-name="Invitación" data-theme="light">
+  <div class="wrap ct-invite-in">
+    <div>
+      <p class="chapter-tag"><b>03</b><i></i>Invitación</p>
+      <h2 data-split>¿No lo ves? Pregunta igual.</h2>
+    </div>
+    <div class="ct-invite-side">
+      <p class="lead" data-arrive>El stock rota cada semana. Dinos tu cámara y el trabajo, y te decimos qué viene en camino.</p>
+      <a class="btn btn-primary magnetic" data-arrive href="{{WA_ASK}}" target="_blank" rel="noopener"><span>Preguntar por WhatsApp</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+<script id="catalogueData" type="application/json">{{CATALOGUE_JSON}}</script>

@@ -104,7 +104,7 @@
     var open = drawer.classList.toggle('is-open');
     burger.classList.toggle('is-open',open);
     burger.setAttribute('aria-expanded',String(open)); drawer.setAttribute('aria-hidden',String(!open));
-    burger.setAttribute('aria-label', open?'Close menu':'Open menu');
+    burger.setAttribute('aria-label', open?'Cerrar menú':'Abrir menú');
     document.body.classList.toggle('is-locked',open);
     if(W.smoother) W.smoother.paused(open);
   });

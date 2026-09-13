@@ -9,7 +9,8 @@
 | **Hosting** | not yet provisioned — the house target is Instatic on Railway |
 | **Asana task** | not yet recorded — find it in the Brandklout workspace and put the GID here |
 | **Started** | 2026-09-12 |
-| **Language** | English (assumed: the brief was in English and Brandklout's market is US; the ledger is Spanish) |
+| **Language** | **Spanish, the entire site** (Alejandro, 2026-09-13). Latin-American usage: *celular*, *audífonos*, *tú*. Product names are Spanish, head noun first; URLs are Spanish (`productos/<slug>.html`). |
+| **Ordering** | **A cart saved in the browser, checked out to WhatsApp** (Alejandro, 2026-09-13). No payment on the site: `pedido.html` sends the whole order as one WhatsApp message; the shop confirms stock, condition and the final total in the chat. Number: `site-src/data/site.json` — **not yet supplied**. |
 | **Sells** | Camera gimbals, studio lighting, softboxes, wireless audio, monitors, cages and rigs, lens adapters, batteries, camera care — new and pre-owned |
 | **CMS** | A Google Sheet the client maintains; columns in [`cms-schema.md`](./cms-schema.md). Local stand-in: `workflows/04-design/.tmp/site-src/data/products.json` |
 | **Worktree** | `bk-alki-house` at `~/orca/workspaces/Brandklout Website System/bk-alki-house` (sparse) |
@@ -66,7 +67,9 @@ starts, copy the Instatic modules it needs (`22-instatic-api-sync`, `18-instatic
 - The domain, and whether an existing site or DNS zone is live on it.
 - The Asana task GID for this build.
 - Which Instatic instance (new Railway service) the site will publish to.
-- Contact channel for the "Ask about a piece" form (email? WhatsApp?) and the shop's location, neither of which is in the handoff.
+- **The shop's WhatsApp number** (international format, digits only) for `site-src/data/site.json`. Until it is set, every WhatsApp link opens the contact picker instead of the shop's chat.
+- The shop's country and city: sets the Spanish variant, the currency label (prices show the ledger's `$`), the pickup address for "Recoger en Alki House", and how shipping is described.
+- How the shop takes payment once an order arrives on WhatsApp (the order page promises "Acordamos contigo el pago"; nothing more specific is claimed).
 - Whether the client's own unit photographs will replace the harvested manufacturer shots before launch (they should).
 - Confirmation of the draft specs in `catalogue-overrides.json` for the sixteen featured products.
 

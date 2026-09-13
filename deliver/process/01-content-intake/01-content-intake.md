@@ -19,6 +19,14 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 2. Receive the completed questionnaire and any attached source material.
 3. Normalize answers into structured page/content notes, open questions, and reusable copy blocks.
 4. Confirm that the minimum content required for wireframing is present before passing the package to Wireframe.
+   Two answers are part of that minimum and must be **asked, never assumed** — both reshape every page, and
+   a build that guessed them gets rebuilt:
+   - **Site language(s)**, and the regional variant when it matters (Latin-American vs Spain Spanish). Do not
+     infer it from the language of the brief or of the files: Alki House's brief was in English, its ledger in
+     Spanish, and the site had to be Spanish (2026-09-13).
+   - **How a customer buys or gets in touch**: a contact form, a phone number, a WhatsApp chat, a cart that
+     checks out to WhatsApp or email, or real online payment — and the number, address or account it goes to.
+     Record both in `docs/project-overview.md` before the first page is designed.
 5. When the engagement includes a competitive read, **screen the competitor set before scraping it**. Record the candidates, the criteria and the per-candidate evidence in `competitor-screen.csv` and a short selection report. Never state a rejection reason that has not been verified against the live site.
 
 ### Competitor screening criteria (in priority order)

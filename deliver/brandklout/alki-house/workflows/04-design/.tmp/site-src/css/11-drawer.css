@@ -17,4 +17,5 @@
 .drawer.is-open .drawer-links a:nth-child(6){transition-delay:.33s}
 .drawer.is-open .drawer-links a:nth-child(7){transition-delay:.38s}
 .drawer.is-open .drawer-links a:nth-child(8){transition-delay:.43s}
+.drawer.is-open .drawer-links a:nth-child(9){transition-delay:.48s}
 .drawer-foot{margin-top:auto;max-width:28em}

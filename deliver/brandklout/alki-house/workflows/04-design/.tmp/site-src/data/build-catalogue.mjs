@@ -1,6 +1,8 @@
 // Turns the client's stock ledger (a per-lot purchase log, Spanish names, one
 // row per lot bought) into the catalogue the site renders: one row per product,
-// English name, brand, category, latest sale price, units on hand.
+// Spanish name, brand, category, latest sale price, units on hand. A clean
+// English name is made first (classification and image search run on it) and
+// kept as nameEn; the Spanish name is made from it by spanish().
 //
 // This JSON is the stand-in for the Google Sheet the client will maintain. Its
 // columns ARE the sheet's columns; the sync plugin (later) writes the same shape.
@@ -116,6 +118,90 @@ const CANON = {
   'godox propac pb60': 'Godox PB960 Propac Power Pack', 'sony hvl-f60m flash': 'Sony HVL-F60M Flash', 'godox x3 pro': 'Godox X3 Pro Trigger (Canon)', 'godox x3 pro para sony': 'Godox X3 Pro Trigger (Sony)', 'godox it30 pro para canon': 'Godox iT30 Pro Flash (Canon)',
   'neewer fl-10 flashlight': 'Neewer FL-10 Flashlight', 'godox ad-15s cover': 'Godox AD-15S Cover', 'godox s2 bracket': 'Godox S2 Speedlite Bracket', 'godox c26 charger': 'Godox C26 Charger',
 };
+/* ---- Spanish display name -------------------------------------------------
+   The site is in Spanish. Everything above and below classifies on the English
+   canonical name (the brand and category rules, and the image harvester's
+   search queries, are written against it); the name a customer reads is made
+   here from that English name. ES holds the names no rule fits; RULES move the
+   English head noun to the front, Spanish order: "Jaula Sony FX30". */
+const ES = {
+  'RGB LED Tube Light 30cm': 'Tubo LED RGB 30 cm', 'RGB LED Tube Light 50cm': 'Tubo LED RGB 50 cm', 'Ulanzi 50cm RGB LED Tube Light': 'Tubo LED RGB Ulanzi 50 cm',
+  'Magic Arm + Super Clamp Kit': 'Kit brazo mágico + súper clamp', 'Camera Super Clamp': 'Súper clamp para cámara',
+  'Sony FX30 Cage + Top Handle': 'Jaula Sony FX30 + asa superior', 'Top Handle Grip': 'Asa superior', 'Side Handle': 'Asa lateral',
+  'Wooden Side Handle': 'Asa lateral de madera', 'Mini Side Handle SmallRig': 'Mini asa lateral SmallRig', 'Side Handle for Canon R50V': 'Asa lateral para Canon R50V',
+  'SmallRig Side Handle with Shutter Trigger': 'Asa lateral SmallRig con disparador', 'Neewer Dual Handle for DJI Ronin SC': 'Asa doble Neewer para DJI Ronin SC',
+  'Handgrip for DJI Ronin RS2': 'Empuñadura para DJI Ronin RS2',
+  '30cm Mini-Bowens Lantern Softbox': 'Softbox linterna Mini-Bowens 30 cm', '30cm Mini-Bowens Octa Softbox': 'Softbox octagonal Mini-Bowens 30 cm',
+  'Triopo 65cm Speedlite Softbox': 'Softbox Triopo 65 cm para speedlite', 'Ulanzi Mini-Bowens Softbox': 'Softbox Mini-Bowens Ulanzi',
+  'Bowens Snoot Optical Condenser': 'Snoot óptico condensador Bowens', 'Studio Backdrop 20ft x 10ft': 'Fondo de estudio de 20 x 10 pies',
+  '2m Light Stand': 'Trípode para luces de 2 m', '3m Selfie Stick': 'Bastón selfie de 3 m', 'Gimbal Base Plate': 'Base para gimbal', 'Gimbal Tripod (Large)': 'Trípode para gimbal (grande)',
+  'Canon 24-105mm II Zoom Ring Rubber': 'Goma del anillo de zoom Canon 24-105mm II', 'Canon 24-105mm II Focus Ring Rubber': 'Goma del anillo de enfoque Canon 24-105mm II',
+  'Canon 70-200mm f/2.8L Ring Rubber': 'Goma de anillo Canon 70-200mm f/2.8L', 'Canon 70-200mm f/2.8L Tripod Collar': 'Collarín para trípode Canon 70-200mm f/2.8L',
+  'HDMI Recorder Kit': 'Kit grabador HDMI', 'L Bracket': 'Soporte en L', 'ProMediaGear Bracket': 'Soporte en L ProMediaGear', 'Flash Bracket': 'Soporte para flash',
+  'Godox S2 Speedlite Bracket': 'Soporte Godox S2 para speedlite',
+  'Neewer 67mm Variable ND + CPL Filter': 'Filtro ND variable + CPL Neewer 67mm', 'Neewer True Colors 58mm ND + CPL': 'Filtro ND + CPL Neewer True Colors 58mm',
+  'Neewer True Colors 67mm ND + CPL Filter': 'Filtro ND + CPL Neewer True Colors 67mm', 'K&F Concept 58mm ND Filter': 'Filtro ND K&F Concept 58mm',
+  '4x5.65 ND Filter for Matte Box': 'Filtro ND 4x5.65 para matte box', 'SmallRig Filters Kit': 'Kit de filtros SmallRig',
+  'Neewer NP-FZ100 Power Bank': 'Power bank Neewer NP-FZ100', 'Phone LED Clip Light': 'Luz LED de clip para celular', 'Phone LED Panel Light': 'Panel LED para celular',
+  '90W 19V Laptop Power Cable': 'Cable de corriente 90W 19V para laptop', 'Camera Cleaning Kit': 'Kit de limpieza para cámara', 'Camera Thread Adapter Set': 'Set de roscas para cámara',
+  'Canon M50 Shutter Motor': 'Motor de obturador Canon M50', 'DJI Osmo Nano Accessory Kit': 'Kit de accesorios DJI Osmo Nano', 'DJI Osmo Pocket 3 Hard Case': 'Estuche rígido DJI Osmo Pocket 3',
+  'DJI Osmo Pocket 3 Phone Holder': 'Soporte para celular DJI Osmo Pocket 3', 'Godox AD-15S Cover': 'Cubierta Godox AD-15S', 'Lens Cleaner Fluid (3 pack)': 'Líquido limpiador de lentes (paquete de 3)',
+  'Minifocus Monitor Mount': 'Soporte para monitor Minifocus', 'Presonus HD9 Headphones': 'Audífonos Presonus HD9', 'Ritz Gear 64GB V60 SD Card': 'Tarjeta SD Ritz Gear 64GB V60',
+  'Sigma USB Dock UD01': 'Dock USB Sigma UD01', 'Sunset Projection Lamp': 'Lámpara de proyección atardecer', 'Triple Cold Shoe': 'Zapata fría triple', 'Ulanzi CU01 Fan Cooler': 'Ventilador Ulanzi CU01',
+  'VRIG Rotating Tripod Ring': 'Anillo giratorio para trípode VRIG', '100W COB Light + Softbox Kit': 'Kit luz COB 100W + softbox', "Alvin's Cables HDMI to Micro HDMI Cable": "Cable HDMI a Micro HDMI Alvin's Cables",
+  'Canon Battery Cover': 'Tapa de batería Canon', 'DJI Mic 2 Camera Adapter': 'Adaptador de cámara DJI Mic 2', 'Godox PB960 Propac Power Pack': 'Batería externa Godox PB960 Propac',
+  'K&F Concept Matte Box': 'Matte box K&F Concept', 'Neewer Mini Matte Box': 'Mini matte box Neewer', 'Llano Dual Battery Charger': 'Cargador doble Llano',
+  'Microphone Isolation Shield': 'Pantalla de aislamiento para micrófono', 'Neewer FL-10 Flashlight': 'Linterna Neewer FL-10', 'Quantum FW12 Module': 'Módulo Quantum FW12',
+  'Quantum QF91C Radio': 'Radio Quantum QF91C', 'Samsung S25 FE Case': 'Funda Samsung S25 FE', 'Satechi Mac Mini Hub': 'Hub Satechi para Mac Mini',
+  'Sony a7 II SD Card Door': 'Tapa de tarjeta SD Sony a7 II', 'Sony a7 II Viewfinder Eyecup': 'Ocular del visor Sony a7 II',
+  'Zhiyun Weebill S Quick Release Plate': 'Placa de liberación rápida Zhiyun Weebill S', 'Fifine USB Microphone': 'Micrófono USB Fifine', 'Sony FX30 Cinema Camera': 'Cámara de cine Sony FX30',
+  'Canon RF 50mm f/1.8 STM Lens': 'Lente Canon RF 50mm f/1.8 STM', 'Zhiyun Weebill 2 Special Edition': 'Zhiyun Weebill 2 Edición Especial',
+  'Feiyutech Scorp Mini 3 Smartphone Version': 'Feiyutech Scorp Mini 3 (versión smartphone)', 'Sony NP-FZ100 Battery Case': 'Estuche para baterías Sony NP-FZ100',
+};
+/* [English pattern, Spanish, gender of the Spanish head: 'm' | 'f'] — first match wins, so longer heads come first. */
+const RULES = [
+  [/^(.+?) to (.+?) Adapter( V2)?$/, (m) => `Adaptador ${m[1]} a ${m[2]}${m[3] || ''}`, 'm'],
+  [/^(.+?) Battery Pair \+ Charger$/, (m) => `Par de baterías ${m[1]} + cargador`, 'm'],
+  [/^(.+?) Battery Pair$/, (m) => `Par de baterías ${m[1]}`, 'm'],
+  [/^(.+?) Batteries \+ Charger$/, (m) => `Baterías ${m[1]} + cargador`, 'f'],
+  [/^(.+?) Battery Kit$/, (m) => `Kit de baterías ${m[1]}`, 'm'],
+  [/^(.+?) Battery Grip$/, (m) => `Grip de batería ${m[1]}`, 'm'],
+  [/^(.+?) Battery$/, (m) => `Batería ${m[1]}`, 'f'],
+  [/^(.+?) Charger$/, (m) => `Cargador ${m[1]}`, 'm'],
+  [/^(.+?) Cage with (.+)$/, (m) => `Jaula ${m[1]} con ${m[2]}`, 'f'],
+  [/^(.+?) Cage$/, (m) => `Jaula ${m[1]}`, 'f'],
+  [/^(.+?) Silicone (?:Case|Cover)$/, (m) => `Funda de silicona ${m[1]}`, 'f'],
+  [/^(.+?) COB Video Light$/, (m) => `Luz de video COB ${m[1]}`, 'f'],
+  [/^(.+?) RGB COB Light$/, (m) => `Luz COB RGB ${m[1]}`, 'f'],
+  [/^(.+?) COB Light$/, (m) => `Luz COB ${m[1]}`, 'f'],
+  [/^(.+?) RGB Light$/, (m) => `Luz RGB ${m[1]}`, 'f'],
+  [/^(.+?) Light$/, (m) => `Luz ${m[1]}`, 'f'],
+  [/^(.+?) Softbox \+ Grid$/, (m) => `Softbox ${m[1]} + rejilla`, 'm'],
+  [/^(\d+cm) (.+?) Softbox$/, (m) => `Softbox ${m[2]} ${m[1]}`, 'm'],
+  [/^(.+?) Softbox$/, (m) => `Softbox ${m[1]}`, 'm'],
+  [/^(.+?) Monitor Kit$/, (m) => `Kit monitor ${m[1]}`, 'm'],
+  [/^(.+?) Monitor$/, (m) => `Monitor ${m[1]}`, 'm'],
+  [/^(.+?) Top Handle$/, (m) => `Asa superior ${m[1]}`, 'f'],
+  [/^(.+?) Side Handle$/, (m) => `Asa lateral ${m[1]}`, 'f'],
+  [/^(.+?) Magic Arm$/, (m) => `Brazo mágico ${m[1]}`, 'm'],
+  [/^(.+?) Super Clamp$/, (m) => `Súper clamp ${m[1]}`, 'm'],
+  [/^(.+?) Lens Hood$/, (m) => `Parasol ${m[1]}`, 'm'],
+  [/^(.+?) Trigger$/, (m) => `Disparador ${m[1]}`, 'm'],
+  [/^(.+?) Flash$/, (m) => `Flash ${m[1]}`, 'm'],
+  [/^(.+?) Kit$/, (m) => `Kit ${m[1]}`, 'm'],
+];
+const COLOUR = { Red: ['rojo', 'roja'], Black: ['negro', 'negra'], Yellow: ['amarillo', 'amarilla'], White: ['blanco', 'blanca'], Camo: ['camuflaje', 'camuflaje'] };
+function spanish(en) {
+  if (ES[en]) return ES[en];
+  // A trailing "(Red)" or "(Canon)" rides along; colours agree with the Spanish head.
+  const pm = en.match(/^(.+?) \(([^)]+)\)$/);
+  const base = pm ? pm[1] : en, qual = pm ? pm[2] : '';
+  let out = base, gender = 'm';
+  for (const [re, to, g] of RULES) { const m = base.match(re); if (m) { out = to(m); gender = g; break; } }
+  if (qual) out += ` (${COLOUR[qual] ? COLOUR[qual][gender === 'f' ? 1 : 0] : qual})`;
+  return out.replace(/\b(\d+)cm\b/g, '$1 cm').replace(/\s+/g, ' ').trim();
+}
+
 /* Category corrections keyed by final name. */
 const CAT_FIX = {
   'Speedlite to Bowens Adapter': 'modifiers', 'Speedlite to Bowens Adapter V2': 'modifiers', 'Godox Speedlite to Elinchrom Adapter': 'modifiers', 'Flash Bracket': 'modifiers', 'Godox S2 Speedlite Bracket': 'modifiers', '2m Light Stand': 'modifiers', 'Studio Backdrop 20ft x 10ft': 'modifiers',
@@ -160,7 +246,14 @@ function category(name) {
   for (const [id, label, re] of CATS) if (re.test(name)) return { id, label };
   return { id: 'accessories', label: 'Accessories' };
 }
-const slugify = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+/* Classification runs on the English ids above; the sheet and the site use
+   these Spanish ids (they appear in ?cat= links) and labels. */
+const CAT_ES = {
+  gimbals: ['gimbals', 'Gimbals y estabilizadores'], lighting: ['iluminacion', 'Iluminación de estudio'], modifiers: ['modificadores', 'Softboxes y modificadores'],
+  audio: ['audio', 'Audio'], monitors: ['monitores', 'Monitores y grabación'], rigs: ['rigs', 'Jaulas, rigs y soportes'], adapters: ['adaptadores', 'Adaptadores y filtros'],
+  power: ['energia', 'Baterías y energía'], care: ['cuidado', 'Cuidado y fundas'], cameras: ['camaras', 'Cámaras y lentes'], accessories: ['accesorios', 'Accesorios'],
+};
+const slugify = (s) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /* ---- fold lots into products ------------------------------------------ */
 const map = new Map();
@@ -178,22 +271,28 @@ for (const r of rows) {
 
 const overrides = fs.existsSync(OVERRIDES) ? JSON.parse(fs.readFileSync(OVERRIDES, 'utf8')) : {};
 const products = [];
-const seen = new Set();
+// id   = the English slug: the stable key for images (assets/products/<id>/),
+//        overrides and the harvester. Never shown, never changes.
+// slug = the Spanish slug: the URL, productos/<slug>.html.
+const seen = new Set(), seenSlug = new Set();
 for (const e of map.values()) {
   const c = category(e.name);
-  let slug = slugify(e.name); while (seen.has(slug)) slug += '-2'; seen.add(slug);
-  const o = overrides[slug] || {};
-  const cat = o.category ? { id: o.category, label: CATS.find((x) => x[0] === o.category)?.[1] || 'Accessories' } : c;
+  let id = slugify(e.name); while (seen.has(id)) id += '-2'; seen.add(id);
+  const o = overrides[id] || {};
+  const catEn = o.category && CAT_ES[o.category] ? o.category : c.id;
+  const [catId, catLabel] = CAT_ES[catEn] || CAT_ES.accessories;
+  const name = o.name || spanish(e.name);
+  let slug = slugify(name); while (seenSlug.has(slug)) slug += '-2'; seenSlug.add(slug);
   products.push({
-    slug, name: o.name || e.name, brand: o.brand ?? brand(e.name), category: cat.id, categoryLabel: cat.label,
+    id, slug, name, nameEn: e.name, brand: o.brand ?? brand(e.name), category: catId, categoryLabel: catLabel,
     price: o.price ?? e.price.at(-1) ?? null, stock: e.stock, status: e.stock > 0 ? 'in-stock' : 'sold-out',
-    condition: o.condition || (e.isNew ? 'New, sealed' : ''),
+    condition: o.condition || (e.isNew ? 'Nuevo, sellado' : ''),
     tagline: o.tagline || '', description: o.description || '', specs: o.specs || [], featured: !!o.featured,
     tags: o.tags || [], images: [], lots: e.lots, sold: e.sold, ledgerNames: [...e.raw],
   });
 }
-products.sort((a, b) => (b.featured - a.featured) || ((b.stock > 0) - (a.stock > 0)) || b.lots - a.lots || a.name.localeCompare(b.name));
-const categories = CATS.map(([id, label]) => ({ id, label })).concat([{ id: 'accessories', label: 'Accessories' }]);
+products.sort((a, b) => (b.featured - a.featured) || ((b.stock > 0) - (a.stock > 0)) || b.lots - a.lots || a.name.localeCompare(b.name, 'es'));
+const categories = Object.values(CAT_ES).map(([id, label]) => ({ id, label }));
 fs.writeFileSync(OUT, JSON.stringify({ generated: new Date().toISOString().slice(0, 10), categories, products }, null, 2));
 const byCat = {}; for (const p of products) byCat[p.category] = (byCat[p.category] || 0) + 1;
 console.log(products.length, 'products', JSON.stringify(byCat));

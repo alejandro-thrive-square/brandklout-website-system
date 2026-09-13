@@ -16,6 +16,8 @@ h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;line-height:.9
 h1{font-size:var(--d1)} h2{font-size:var(--d2)} h3{font-size:var(--h2)} h4{font-size:var(--h3)}
 p{margin:0}
 ul{margin:0;padding:0;list-style-type:none}
+/* hidden always wins, even over a component's display (the cart and order page toggle it). */
+[hidden]{display:none!important}
 ::selection{background:var(--ember);color:var(--apricot-soft)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 
@@ -37,7 +39,7 @@ ul{margin:0;padding:0;list-style-type:none}
   border-radius:var(--radius-pill);font-size:var(--small);letter-spacing:.02em;font-weight:700;
   position:relative;overflow:hidden;isolation:isolate;
   transition:color .45s var(--ease),border-color .45s var(--ease),transform .45s var(--ease);will-change:transform}
-.btn>span{position:relative;z-index:1}
+.btn>span,.btn>b{position:relative;z-index:1}
 .btn>svg{position:relative;z-index:1;width:1.05em;height:1.05em;transition:transform .45s var(--ease)}
 .btn:hover>svg{transform:translateX(.25em)}
 .btn::after{content:"";position:absolute;inset:-1px;border-radius:inherit;transform:translateY(102%);

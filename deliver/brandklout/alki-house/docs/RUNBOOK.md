@@ -9,17 +9,21 @@ Nothing else.
 
 ## Where the site is, as of 2026-09-13
 
-A complete local design draft of the three page types, built to the design standard and gated.
-Nothing is hosted. Facts and open questions are in [`project-overview.md`](./project-overview.md);
-the CMS columns in [`cms-schema.md`](./cms-schema.md).
+A complete local design draft **in Spanish**: home, catalogue, the product template, and the order
+page; customers fill a cart saved in their browser and send the whole order to the shop's WhatsApp.
+Built to the design standard and gated. Nothing is hosted. Facts and open questions are in
+[`project-overview.md`](./project-overview.md); the CMS columns, the cart and the WhatsApp message
+in [`cms-schema.md`](./cms-schema.md).
 
 | | State |
 | :--- | :--- |
 | Worktree | `~/orca/workspaces/Brandklout Website System/bk-alki-house`, branch `bk-alki-house`, sparse, cut from `da1612b1` |
-| Source | `workflows/04-design/.tmp/site-src/` — `node build-site.mjs` → `../final-site/` (238 pages) |
-| CMS | `site-src/data/products.json`, 235 products from the ledger via `build-catalogue.mjs` + `catalogue-overrides.json`; the Google Sheet and its sync plugin do not exist yet |
-| Assets | `03-graphic-resources/.tmp/scenes/` (AI, video, stock) and `product-images/` (harvested), prepared into `site-src/assets/` by `prepare-assets.py`; all gitignored, all reproducible |
-| Gates | Journey audit, fluid root, scrub proof and console clean on the last run — see the newest runbook entry |
+| Source | `workflows/04-design/.tmp/site-src/` — `node build-site.mjs` → `../final-site/` (239 pages: `index`, `productos`, `productos/<slug>` ×235, `producto` canary, `pedido`) |
+| Language | Spanish, Latin-American usage. Product names from `spanish()` in `data/build-catalogue.mjs` |
+| CMS | `site-src/data/products.json`, 235 products from the ledger via `build-catalogue.mjs` + `catalogue-overrides.json`; each has `id` (stable, English) and `slug` (Spanish URL). The Google Sheet and its sync plugin do not exist yet |
+| Ordering | Cart in `localStorage` (`sections/cart.js`) → `pedido.html` → `wa.me/<number>?text=<order>` (`sections/pedido.js`). **The number is not set** — `site-src/data/site.json` |
+| Assets | `03-graphic-resources/.tmp/scenes/` (AI, video, stock) and `product-images/<id>/` (harvested), prepared into `site-src/assets/` by `prepare-assets.py`; all gitignored, all reproducible |
+| Gates | Journey audit, fluid root, scrub proof, console and an end-to-end cart test on the last run — see the newest runbook entry |
 | `.env` | Generated: `[shared]` + `[alki-house]`. The client section is empty. |
 | Hosting | None. No Instatic instance, no Railway service, no domain recorded. |
 
@@ -36,18 +40,25 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
 
 ## Next
 
-1. Get the client's answers listed under Open questions in `project-overview.md`.
-2. Provision Instatic on Railway and upload; then the sheet sync plugin.
-3. Wire the inquiry form and the contact CTA.
+1. The shop's **WhatsApp number** into `site-src/data/site.json`, rebuild.
+2. The client's other answers under Open questions in `project-overview.md` (country and city,
+   payment wording, domain, photos, draft specs).
+3. Provision Instatic on Railway and upload, cart included; then the sheet sync plugin, keyed on `id`.
 
 ## Gotchas
 
+- **Key on `id`, never `slug`.** Images, overrides, saved carts and the harvester use `id`.
+- **The cart is a snapshot** of each product when added; the order says *Total estimado* and the
+  shop confirms in the chat. It is not emptied on send.
+- **Instatic strips `data-*` from form controls**: the cart reads `closest('[data-item]')`, so the
+  payload can live on a wrapper when the buttons are imported.
 - `scripts/env-sync.mjs` refuses a worktree with no matching master section; `[alki-house]` exists
   for that reason, even while empty.
 - The worktree was made with `scripts/new-client-worktree.sh`, not from inside Orca, so the branch
   is bare `bk-alki-house`. If Orca does not list it, add it as an existing worktree.
 - The journey audit wants the literal `pin:true`; Draggable's `scrollLeft` mode breaks flex rails;
-  the fluid-root gate rejects px font-sizes even on inputs. Details in the 2026-09-13 run.
+  the fluid-root gate rejects px font-sizes even on inputs. Details in the 2026-09-13 build run.
+- Headless clicks right after a scroll miss while ScrollSmoother eases; wait ~2.5 s first.
 - Node fetch scripts must not write to a pipe on this machine — redirect to a log.
 
 ## Version Control

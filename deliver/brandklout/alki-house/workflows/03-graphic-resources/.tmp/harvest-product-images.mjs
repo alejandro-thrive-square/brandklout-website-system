@@ -505,7 +505,9 @@ async function harvest(p, manifest) {
 async function main() {
   fs.mkdirSync(OUT, { recursive: true });
   const manifest = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, 'utf8')) : {};
-  const { products } = JSON.parse(fs.readFileSync(PRODUCTS, 'utf8'));
+  // products.json names are Spanish and its slug is the Spanish URL. The harvest
+  // keys folders by the stable English id and searches by the English name.
+  const products = JSON.parse(fs.readFileSync(PRODUCTS, 'utf8')).products.map((p) => ({ ...p, slug: p.id || p.slug, name: p.nameEn || p.name }));
   let list = ONLY ? products.filter((p) => ONLY.includes(p.slug)) : products;
   list = list.slice(0, LIMIT);
   log(`harvest ${list.length} products (force=${FORCE})`);
