@@ -5,7 +5,7 @@ Brief (Alejandro, 2026-09-13, after the local build — "things I forgot to tell
 2. Customers keep a cart saved in their browser and go to a checkout; the whole selection is sent
    to WhatsApp.
 
-## Done (commit `PENDING`)
+## Done (commit `3e38116c`)
 
 - **Spanish everywhere.** Every page, partial and script string; `lang="es"`, titles and
   descriptions, alt text, aria labels, chapter names (Llegada · Los Pasillos · El Escenario ·
