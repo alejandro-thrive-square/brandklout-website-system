@@ -25,12 +25,11 @@ as-is, or home-only), accepting that the site stops taking Sang's zips as patche
   - New `#client-stories`: "Five stories. Told by the owners who lived the results." (Sang's own
     wording on v2), five video cards; each thumbnail opens Sang's video pop-up (visual.js), "Read
     story" goes to the story page. Sits between `#results` and "Why us".
-- **Admin edits ported** (made on the live site after the v11 push; diffed against
-  `.tmp/import-out.json`, snapshot `.tmp/live-pages-2026-09-14.json`): OCEANIC wordmark; "Built from
-  the practice's owner seat, around case acceptance."; the new founder quote in italics; the featured
-  stories heading "Growth you can tie to a real practice."; `/guarantee` h1 "60-Day promise. …"
-  (`patches/guarantee.html.mjs`); the hero paragraph's 40px bottom margin (it was set on the `lead`
-  class, which the verbatim CSS overrode).
+- **Admin edits: ported, then DROPPED** on Alejandro's instruction ("Forget the changes that we made
+  on Instatic", after seq 19 showed a wrong heading). The OCEANIC wordmark, the "Why us" headline,
+  the new founder quote, the featured-stories headline, `/guarantee`'s "60-Day promise" and the hero
+  paragraph's 40px margin are all gone; the pages carry Sang's v11 wording again. Republished as
+  seq 20. The snapshot of those edits stays in `.tmp/live-pages-2026-09-14.json` if anyone asks.
 - **The class system**: `class-system.mjs` + `class-parity.mjs`, and a registry mode through
   `build-import-input.mjs`, `import-run.ts`, `push-site.mjs`, `verify-live`, `css-parity`,
   `visual-diff`, `compare-live`. Directive: `21-instatic-upload.md` → "the class system (v12)".
@@ -77,9 +76,6 @@ as-is, or home-only), accepting that the site stops taking Sang's zips as patche
 - Style experiments in the admin, not carried: an inline `font-size: 5rem` on the hero h1, bold on a
   new `cta-button` class inside "Check My Market", `.8rem` on a new `bullets` class. With the class
   system these are now done on the element's own class chip.
-- The featured-stories heading now repeats the `#results` heading word for word
-  ("Growth you can tie to a real practice."). That is the admin edit, ported as made; say whether
-  it should differ.
 
 ### Gotchas
 

@@ -20,7 +20,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 - **Home page**: hero results slider (5 practices), `#results` as preview 1's three case cards with
   photos + logos, and preview 1's five-video client stories panel before "Why us".
 - **The Instatic admin is now the source of truth.** Sang's next zip does not drop in; a re-push
-  (`--force`) overwrites admin edits unless they are ported first (this run ported 2026-09-14's).
+  (`--force`) overwrites admin edits unless they are ported first. The admin edits of 2026-09-14
+  were dropped on Alejandro's instruction; the live pages carry Sang's wording (seq 20).
 - The v11 notes below (forms, legal pages, plugin, widget, IDs) still hold, except "CSS is a verbatim
   code asset": the code asset is now only Instatic's reset reverted + `site-src/code.css`.
 

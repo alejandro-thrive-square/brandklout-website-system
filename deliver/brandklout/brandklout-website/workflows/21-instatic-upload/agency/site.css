@@ -9,10 +9,6 @@
 
 /* ===== home v12 (2026-09-14): the three sections patches/index.html.mjs adds ===================== */
 
-/* The hero paragraph's bottom margin, as set on the `lead` class in the Instatic admin on 2026-09-14
-   (an edit the verbatim stylesheet overrode, which is what prompted the class system). */
-.reference-site .reference-hero .lead { margin-bottom: 40px; }
-
 /* 1. The hero results card is a slider (agency/slider.js). Each .bk-slide keeps Sang's own
    .ref-practice-row / .ref-chart-panel / .ref-result-pair markup, so it is styled by his rules. */
 .bk-slider { position: relative; }

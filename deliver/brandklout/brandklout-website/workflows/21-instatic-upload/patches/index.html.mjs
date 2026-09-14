@@ -215,27 +215,7 @@ export default [
     find: /<section class="section soft results-section" id="results">[\s\S]*?(?=<section class="section v5-founder" id="why-brandklout">)/,
     replace: RESULTS + '\n' + STORIES + '\n',
   },
-
-  /* --- admin edits, 2026-09-14 (live page vs .tmp/import-out.json) --------------------------- */
-  {
-    why: 'admin edit 2026-09-14: the Oceanic wordmark in the client strip is uppercase like the others',
-    find: '>oceanic<small>DENTAL</small></a>',
-    replace: '>OCEANIC<small>DENTAL</small></a>',
-  },
-  {
-    why: 'admin edit 2026-09-14: "Why us" headline',
-    find: "<h2>Built from the <br/>operator's seat, <br/>around the case.</h2>",
-    replace: "<h2>Built from the practice's owner seat, around case acceptance.</h2>",
-  },
-  {
-    why: 'admin edit 2026-09-14: Sang’s founder quote, set in italics',
-    find: '<blockquote>“I have sat through the quarterly call, looked at the impressions chart and asked the only question that matters: how many became a patient and a case?”</blockquote>',
-    replace:
-      '<blockquote style="font-style:italic">“I have sat through the monthly calls, looked at the useless impressions chart, and get blamed for mismanaging my leads, then to learn my marketer took on another practice near me.”</blockquote>',
-  },
-  {
-    why: 'admin edit 2026-09-14: the featured-stories headline (it now repeats the #results headline; flagged)',
-    find: '<h2>Real stories.<br/>Results you can inspect.</h2>',
-    replace: '<h2>Growth you can tie to a real practice.</h2>',
-  },
+  /* The edits made in the Instatic admin on 2026-09-14 (wordmark, "Why us" headline, founder quote,
+     featured-stories headline) were ported here once and then dropped the same evening, on
+     Alejandro's instruction: "Forget the changes that we made on Instatic". Sang's wording stands. */
 ]
