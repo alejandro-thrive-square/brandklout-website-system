@@ -65,10 +65,8 @@ const BREAKPOINTS = [
   { id: 'tablet-l', label: 'Tablet landscape', width: 1000, mediaQuery: '(max-width: 1000px)', icon: 'tablet' },
   { id: 'tablet', label: 'Tablet', width: 800, mediaQuery: '(max-width: 800px)', icon: 'tablet' },
   { id: 'tablet-p', label: 'Tablet portrait', width: 760, mediaQuery: '(max-width: 760px)', icon: 'tablet' },
-  { id: 'mobile-l', label: 'Large phone', width: 620, mediaQuery: '(max-width: 620px)', icon: 'smartphone' },
-  { id: 'mobile', label: 'Phone', width: 480, mediaQuery: '(max-width: 480px)', icon: 'smartphone' },
-  { id: 'mobile-s', label: 'Small phone', width: 400, mediaQuery: '(max-width: 400px)', icon: 'smartphone' },
-  { id: 'mobile-xs', label: 'Extra small phone', width: 360, mediaQuery: '(max-width: 360px)', icon: 'smartphone' },
+  { id: 'mobile-l', label: 'Mobile landscape', width: 620, mediaQuery: '(max-width: 620px)', icon: 'smartphone' },
+  { id: 'mobile', label: 'Mobile portrait', width: 480, mediaQuery: '(max-width: 480px)', icon: 'smartphone' },
 ]
 /* Where each of Sang's widths goes. Chosen so no common device width changes behaviour (1180, 1024,
    820, 768, 600, 430, 414, 390, 375, 360); every fold moves a boundary only across a range no device
@@ -76,8 +74,11 @@ const BREAKPOINTS = [
    desktop nav at 1024; ≤520 into 620 moved the buttons at 600; ≤360 into 480 moved phones at 390;
    ≤1150 and ≤1050 into 1199 shrank every story hero at 1180 (iPad Air landscape).
      1150 -> 1050 (1051-1150 lose Sang's ≤1150 rules)   980 -> 1000 (981-1000)
-     780 -> 800 (781-800)    720 -> 760 (721-760)    520 -> 480 (481-520) */
-const BP_MAP = { 1190: 'laptop', 1150: 'laptop-s', 1050: 'laptop-s', 1000: 'tablet-l', 980: 'tablet-l', 800: 'tablet', 780: 'tablet', 760: 'tablet-p', 720: 'tablet-p', 620: 'mobile-l', 520: 'mobile', 480: 'mobile', 400: 'mobile-s', 360: 'mobile-xs' }
+     780 -> 800 (781-800)    720 -> 760 (721-760)    520 -> 480 (481-520)
+   TWO PHONE BREAKPOINTS ONLY (Alejandro, 2026-09-14: "too many mobile breakpoints"). Sang's ≤400 and
+   ≤360 tweaks fold into Mobile portrait (480), so they now apply on every phone up to 480px: a
+   deliberate trade, and the one place class-parity.mjs is expected to differ (430, 414, 390, 375). */
+const BP_MAP = { 1190: 'laptop', 1150: 'laptop-s', 1050: 'laptop-s', 1000: 'tablet-l', 980: 'tablet-l', 800: 'tablet', 780: 'tablet', 760: 'tablet-p', 720: 'tablet-p', 620: 'mobile-l', 520: 'mobile', 480: 'mobile', 400: 'mobile', 360: 'mobile' }
 const bpFor = (w) => {
   if (BP_MAP[w]) return BREAKPOINTS.find((b) => b.id === BP_MAP[w])
   const exact = BREAKPOINTS.find((b) => b.width === w)

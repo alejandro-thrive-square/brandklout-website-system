@@ -40,8 +40,9 @@ as-is, or home-only), accepting that the site stops taking Sang's zips as patche
 - **Fluid**: rem everywhere + `html { font-size: clamp(100%, 100vw / 90, 160%) }`. Identical to v11
   up to 1440px; at 2560 the whole layout is 1.6x (checked by screenshot).
 - **Breakpoints** in the editor: Laptop 1190, Small laptop 1050, Tablet landscape 1000, Tablet 800,
-  Tablet portrait 760, Large phone 620, Phone 480, Small phone 400, Extra small phone 360 (Sang's
-  fourteen widths folded where no common device width changes).
+  Tablet portrait 760, Mobile landscape 620, Mobile portrait 480. First published with nine (two
+  more phone ones at 400 and 360); cut to two phone breakpoints on Alejandro's "too many mobile
+  breakpoints", so Sang's ≤400/≤360 tweaks now apply to every phone up to 480px.
 - Media: three logos uploaded as `bk-*.jpg` (duplicates of Sang's own uploads, under names the build
   can map); alt text updated on 8 images.
 
@@ -61,6 +62,11 @@ as-is, or home-only), accepting that the site stops taking Sang's zips as patche
   probe: no email sent); assessment 0 → 21/21, score 52; legal pages keep their bullets; the story
   player and video pop-up load youtube-nocookie with no CSP error.
 - 2560: hero and `#results` screenshots scale as one layout (1.6x).
+- **Seq 21 (two phone breakpoints)**: `class-parity` identical at 1440, 1024, 768, 600 and 360 (all 32
+  pages). It differs, as intended, at 480 and 430 (32 pages) and at 390 and 375 (9 pages), where Sang's
+  ≤400/≤360 tweaks now apply. Those are a smaller nav brand and menu button, the hero slider's
+  "CLIENT-REPORTED" tags hidden, and a few labels 1px smaller. Home at 430 checked side by side:
+  nothing breaks. `verify-live` FAIL none.
 - `compare-live` (seq 19, 1440 + 390): 84 findings, all benign.
   - 32 are the `.js` class push-site's bootstrap puts on `<html>`.
   - Auto-margin readings on a `.wrap` (0 vs 130/15px) sit on unmoved boxes (trap 30).

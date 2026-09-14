@@ -44,9 +44,11 @@ other selector becomes ambient). So even a registry import of his CSS would lose
 - **Fluid**: every px length >2px becomes rem (6 decimals), and `html { font-size: clamp(100%,
   100vw / 90, 160%) }` (code asset): exactly 16px up to 1440, then everything grows together, 1.6x at
   2304+.
-- **Breakpoints**: Sang's 14 max-width queries map (explicit `BP_MAP`) to 9 editor breakpoints,
-  1190 / 1050 / 1000 / 800 / 760 / 620 / 480 / 400 / 360, chosen so no common device width changes
-  (1180, 1024, 820, 768, 600, 430, 390, 360 are gated); the rest (min-width, compound, reduced
+- **Breakpoints**: Sang's 14 max-width queries map (explicit `BP_MAP`) to 7 editor breakpoints,
+  1190 / 1050 / 1000 / 800 / 760 and TWO for phones, Mobile landscape 620 and Mobile portrait 480
+  (Alejandro: "too many mobile breakpoints"; 400 and 360 were dropped). Above 480 no common device
+  width changes (1180, 1024, 820, 768, 600 are gated). Below it Sang's ≤400/≤360 tweaks now apply to
+  every phone up to 480px, the one deliberate difference. The rest (min-width, compound, reduced
   motion, print) are site conditions.
 - The registry goes to the container as finished rules (`site-src/registry.json` →
   `build-import-input.mjs` → `import-run.ts` registry mode), **never through happy-dom**, so traps
@@ -75,7 +77,7 @@ the gradient; ≤360 rules folded into 480 (390 moved); ≤1000 into 1050 (the d
 
 **Editing it in Instatic** (for Sang and the team): select an element and edit its first class chip
 for layout, spacing and colour; edit the `text-*` / `heading-*` chip to change that text style
-everywhere it is used. Breakpoint tabs are the nine above. To change one element only, add a new
+everywhere it is used. Breakpoint tabs are the seven above. To change one element only, add a new
 class to it (new classes come last and win). The hero results **slider** is plain blocks: each
 `bk-slide` inside `bk-slider-track` is one slide; duplicate, edit or delete slides freely, the dots
 follow (agency/slider.js).
