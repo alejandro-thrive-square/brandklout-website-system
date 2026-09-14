@@ -18,10 +18,12 @@ the same (`diff-all.mjs` 215/215; see `docs/runbook/2026-09-09-the-whole-site-on
 review link. Every gate is clean over 215 pages: `check.mjs` 0 errors, `audit-live.mjs` 215/215 at 1440
 and 390, `diff-all.mjs` 215 match, `crop-all.mjs --live` 0 across 215 x 2 widths.
 
-**2026-09-14: the site is live at <https://www.masonparkpediatricdental.com>** (apex serves too).
-Cloudflare DNS, DNS-only CNAMEs to Railway, admin origins verified. **Open: every canonical and
-`og:url` still says `pediatricdentistkatytx.com`**, so the SEO plugin's site URL must change if the
-new domain is the primary. See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
+**2026-09-14: the new design is on STAGING at <https://staging.masonparkpediatricdental.com>**
+(admin at `/admin`, origins verified). It is not ready for production. The plan is for
+`masonparkpediatricdental.com` to serve the **old WordPress site** until then, but that is blocked:
+**the SiteGround vhost is suspended** (`503`, `x-suspended-vhost: 1`), and our SSH key is refused.
+Until someone lifts that in the SiteGround Client Area, apex and `www` still point at the new design on
+Railway. Staging has no `noindex` and no `robots.txt`. See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
 | | State |
 | :--- | :--- |
