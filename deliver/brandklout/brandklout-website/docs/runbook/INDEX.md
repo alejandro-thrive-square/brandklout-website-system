@@ -1,11 +1,12 @@
 # Runbook index
 
-8 runs, newest first. Each line is one file in this folder.
+9 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-14 | **Class system**: Sang's CSS rebuilt as editable Instatic classes (class-system.mjs, parity 32 pages × 9 widths), fluid rem sizing for 2K+, 9 breakpoints; home hero slider, preview-1 case cards with photos, client stories panel; admin edits ported. Carries **gotchas** | [`2026-09-14-class-system-and-home-v12.md`](./2026-09-14-class-system-and-home-v12.md) |
 | 2026-09-14 | **Sang's v11 (32 pages) replaces v2**; CSS shipped verbatim; all 3 forms (incl. the assessment) email sales@ via FormSubmit; legal pages carry brandklout.com's text; YouTube frame-src fixed. Carries **gotchas** | [`2026-09-14-v11-published.md`](./2026-09-14-v11-published.md) |
 | 2026-09-12 | Sang's admin account (`sang@thrivesquare.com`) added with his Mason Park password hash, plus a `user.create` audit event | [`2026-09-12-sang-admin-account.md`](./2026-09-12-sang-admin-account.md) |
 | 2026-09-11 | Home lead form emails sales@brandklout.com via FormSubmit; **needs a one-time activation click at sales@** | [`2026-09-11-lead-form-to-sales.md`](./2026-09-11-lead-form-to-sales.md) |

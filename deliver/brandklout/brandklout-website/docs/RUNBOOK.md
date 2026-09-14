@@ -10,7 +10,21 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v11 PUBLISHED on the review link (2026-09-14)
+## Status: v12, the CLASS SYSTEM (2026-09-14, evening)
+
+- **The site's CSS is now Instatic classes**, editable in the Styles panel: every element carries its
+  own layout class plus a shared type class (`text-18`, `heading-60`), resolved from Sang's cascade
+  by `21-instatic-upload/class-system.mjs` and proven identical by `class-parity.mjs` (32 pages × 9
+  widths). Fluid: rem + a clamp() root, identical to v11 up to 1440, 1.6x at 2304+. Nine editor
+  breakpoints. Details: [`runbook/2026-09-14-class-system-and-home-v12.md`](./runbook/2026-09-14-class-system-and-home-v12.md).
+- **Home page**: hero results slider (5 practices), `#results` as preview 1's three case cards with
+  photos + logos, and preview 1's five-video client stories panel before "Why us".
+- **The Instatic admin is now the source of truth.** Sang's next zip does not drop in; a re-push
+  (`--force`) overwrites admin edits unless they are ported first (this run ported 2026-09-14's).
+- The v11 notes below (forms, legal pages, plugin, widget, IDs) still hold, except "CSS is a verbatim
+  code asset": the code asset is now only Instatic's reset reverted + `site-src/code.css`.
+
+## Previous: v11 PUBLISHED on the review link (2026-09-14)
 
 - **Live at <https://brandklout-production.up.railway.app>**: Sang's v11 site, **32** editable
   Instatic pages (home, solutions, specialties, six customer stories, `/market-opportunity`,

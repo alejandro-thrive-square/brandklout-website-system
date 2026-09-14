@@ -18,6 +18,68 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: the class system (v12, 2026-09-14, evening)
+
+**Supersedes the verbatim CSS below.** Alejandro: editing the hero paragraph in the admin "didn't
+quite properly update it", and the classes should be reusable and editable site-wide, with fluid
+type for 2K+ screens. Two causes: v11's CSS shipped as a code asset (userStyles, loads last, beats
+every panel edit), and Sang's 2,735 selectors style most elements contextually
+(`.reference-site .reference-hero .lead`, ~20 rules on that paragraph), while Instatic binds a class
+chip only to the bare `.lead` rule (`cssToStyleRules` → `normalizeParsedBindableClassRules`; every
+other selector becomes ambient). So even a registry import of his CSS would lose to itself.
+
+**`class-system.mjs`** (after `prepare-source.mjs`) rebuilds it as a class system:
+
+- In Chrome, per element, per page, it resolves which of Sang's declarations win (specificity,
+  source order, media conditions), and writes them onto the element's OWN classes: a **layout class**
+  (named after its first original class, e.g. `lead`, `ref-proof-top`; variants `ancestor_name`) and,
+  when it sets a font size, a shared **type class** (`text-18`, `heading-60`) that every element with
+  the same type style uses. Identical results share one class. Every class is `(0,1,0)`, so an edit
+  on any chip applies. States and runtime context keep their selector on the new class
+  (`.btn-primary:hover`, `.motion-ready .x:not(.is-visible)`, `.x::before`).
+- Kept **as written** (ambient): bare element and `html`/`:root` rules, generic selectors
+  (`.visual-site *`, `[hidden]`, `html.reduce-motion *`), rules for elements the scripts create (slider
+  dots, video pop-up), SVG internals (Instatic keeps `<svg>` raw). The original classes the scripts and
+  those selectors need stay on the markup as unstyled hooks (153).
+- **Fluid**: every px length >2px becomes rem (6 decimals), and `html { font-size: clamp(100%,
+  100vw / 90, 160%) }` (code asset): exactly 16px up to 1440, then everything grows together, 1.6x at
+  2304+.
+- **Breakpoints**: Sang's 14 max-width queries map (explicit `BP_MAP`) to 9 editor breakpoints,
+  1190 / 1050 / 1000 / 800 / 760 / 620 / 480 / 400 / 360, chosen so no common device width changes
+  (1180, 1024, 820, 768, 600, 430, 390, 360 are gated); the rest (min-width, compound, reduced
+  motion, print) are site conditions.
+- The registry goes to the container as finished rules (`site-src/registry.json` →
+  `build-import-input.mjs` → `import-run.ts` registry mode), **never through happy-dom**, so traps
+  1, 13, 19, 21, 26, 27, 32 and 34 cannot occur. `push-site.mjs` sets `site.breakpoints`,
+  `site.conditions`, and a code asset of only `site-src/code.css` (fluid root + @keyframes).
+- **`instatic-reset-revert.css` is the registry's FIRST rules, not the code asset.** Its `:where()`
+  reverts are zero-specificity; in the code asset (loads after the registry) they beat Sang's own
+  zero-specificity rules. The first class-system publish (seq 18) lost `* { box-sizing: border-box }`
+  that way: every live page ~12% different and ~30px taller. Local parity cannot see this (there is
+  no Instatic reset locally); only the live `visual-diff` can.
+
+Run: `prepare-source.mjs package-v11` → `class-system.mjs` → **`class-parity.mjs`** (must be all
+`ok`) → `upload-media` → `set-alt --apply` → `build-import-input` → `ship.sh` → `push-site
+--apply --force` (after diffing the live pages; trap 11) → publish → live gates. `visual-diff`,
+`compare-live`, `css-parity` and `verify-live` read `class-site/` and `code.css` when `pages.json`
+says `css: "classes"`.
+
+**`class-parity.mjs`** loads each page from `final-site/` (Sang's CSS) and `class-site/` (the class
+system, rendered the way Instatic emits the registry) and compares every element's box and ~90
+computed properties, `::before`/`::after` included. It is what found, in order: generic rules copied
+onto 769 classes; a var() shorthand emitted after the longhand it overrides (`.mark` lost its
+colour); Chrome serialising layered-background longhands as `x, initial`, which is invalid and drops
+the gradient; ≤360 rules folded into 480 (390 moved); ≤1000 into 1050 (the desktop nav collapsed at
+1024); ≤520 into 620 (600 moved); ≤1150 and ≤1050 into 1199 (every story hero shrank at 1180);
+4-decimal rems (5.5008px).
+
+**Editing it in Instatic** (for Sang and the team): select an element and edit its first class chip
+for layout, spacing and colour; edit the `text-*` / `heading-*` chip to change that text style
+everywhere it is used. Breakpoint tabs are the nine above. To change one element only, add a new
+class to it (new classes come last and win). The hero results **slider** is plain blocks: each
+`bk-slide` inside `bk-slider-track` is one slide; duplicate, edit or delete slides freely, the dots
+follow (agency/slider.js).
+
 ## Brandklout: the shared-layout run (v11, 2026-09-14)
 
 **v11 replaces v2.** Sang's `BrandKlout-Complete-Website-v11.zip`, unpacked into

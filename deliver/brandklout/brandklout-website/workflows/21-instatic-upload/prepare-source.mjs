@@ -347,6 +347,11 @@ async function buildShared() {
       // `<24-hex id>_<name>`: drop the id, keep a filename the media library will accept.
       return 'wf-' + decodeURIComponent(path.posix.basename(u.pathname)).replace(/^[0-9a-f]{24}_/, '').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/-+/g, '-')
     }
+    /* Our own Instatic's media library (2026-09-14): the practice logos Sang uploaded in the admin
+       (`/uploads/<21-char id>-<name>`), which exist nowhere else. The id is dropped. */
+    if (u.hostname === 'brandklout-production.up.railway.app' && u.pathname.startsWith('/uploads/')) {
+      return 'bk-' + decodeURIComponent(path.posix.basename(u.pathname)).replace(/^[A-Za-z0-9_-]{21}-/, '').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/-+/g, '-')
+    }
     refuse(`remote image from a host this step does not know how to name: ${src}`)
   }
   const localAssets = new Map() // package path -> asset name
@@ -436,6 +441,11 @@ async function buildShared() {
   }
   for (const rel of scriptRels) {
     jsParts.push(`/* ---- ${rel} (Sang, ${patches.has(rel) ? `patched by patches/${rel}.mjs` : 'verbatim'}). Instatic has one script asset (trap 17); order kept. ---- */\n${patched(rel)}`)
+  }
+  // Agency scripts (agency/*.js, e.g. the home slider), after Sang's, in name order.
+  const agencyDir = path.join(HERE, 'agency')
+  for (const f of fs.readdirSync(agencyDir).filter((n) => n.endsWith('.js')).sort()) {
+    jsParts.push(fs.readFileSync(path.join(agencyDir, f), 'utf8'))
   }
 
   fs.rmSync(SITE, { recursive: true, force: true })

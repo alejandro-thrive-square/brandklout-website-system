@@ -54,7 +54,8 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_ROOT = path.resolve(HERE, '.tmp/site/final-site')
+// The class system (class-system.mjs) publishes class-site/, so that is what the live site is compared with.
+const LOCAL_ROOT = path.resolve(HERE, JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8')).css === 'classes' ? '.tmp/site/class-site' : '.tmp/site/final-site')
 const SHOTS = path.join(HERE, '.tmp', 'compare')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const PORT = 8821

@@ -49,6 +49,49 @@ const {
 
 const input = JSON.parse(gunzipSync(readFileSync('/app/import-input.json.gz')).toString('utf8'))
 
+/* --- 0. a prebuilt registry (class-system.mjs, 2026-09-14) ----------------
+   The class system arrives as finished StyleRules, resolved in Chrome, so none
+   of it goes through cssToStyleRules and happy-dom (traps 1, 19, 21, 32, 34:
+   custom properties, math functions, layered backgrounds, unknown properties).
+   Each rule gets an id and timestamps and goes in at the order it was built
+   with. They are NOT merged by mergeImportedStyleRules, which skips a second
+   ambient rule with an identical selector; class-system.mjs relies on source
+   order across such rules. Class names on the markup then link to these rules
+   by name, exactly as below. */
+if (input.registry) {
+  const styleRules: Record<string, any> = {}
+  const byName = new Map<string, string>()
+  const now = Date.now()
+  let n = 0
+  for (const r of input.registry.rules) {
+    const id = `cs${(n++).toString(36).padStart(5, '0')}${Math.random().toString(36).slice(2, 10)}`
+    styleRules[id] = { ...r, id, createdAt: now, updatedAt: now }
+    if (r.kind === 'class') {
+      if (byName.has(r.name)) throw new Error(`two class rules named ${r.name}`)
+      byName.set(r.name, id)
+    }
+  }
+  let next = n
+  const allocateOrder = () => next++
+  const pages: any[] = []
+  const perPage: any[] = []
+  for (const p of input.pages) {
+    const { nodes, rootIds, body, stripped, warnings } = importHtml(p.html) as any
+    const before = Object.keys(styleRules).length
+    for (const node of Object.values<any>(nodes)) node.classIds = linkImportedClassNames(node.classIds, styleRules, byName, allocateOrder)
+    const root: any = createNode('base.body')
+    root.children = rootIds
+    root.classIds = linkImportedClassNames(body?.classIds, styleRules, byName, allocateOrder)
+    for (const id of rootIds) if (nodes[id]) nodes[id].parentId = root.id
+    nodes[root.id] = root
+    pages.push({ slug: p.slug, title: p.title, seoTitle: p.seoTitle, seoDescription: p.seoDescription, nodes, rootNodeId: root.id })
+    perPage.push({ slug: p.slug, nodes: Object.keys(nodes).length, autoCreatedClasses: Object.keys(styleRules).length - before, strippedScripts: stripped?.scripts ?? 0, warnings: (warnings ?? []).length })
+  }
+  writeFileSync('/app/import-out.json', JSON.stringify({ styleRules, conditions: input.registry.conditions, breakpoints: input.registry.breakpoints, pages }))
+  console.log(JSON.stringify({ mode: 'registry', registryRules: n, afterLinking: Object.keys(styleRules).length, conditions: input.registry.conditions.length, pages: perPage }, null, 1))
+  process.exit(0)
+}
+
 /* --- 1. CSS -------------------------------------------------------------- */
 // Both normalisations are load-bearing and both are documented in
 // convert-css.md; they are repeated here rather than imported because

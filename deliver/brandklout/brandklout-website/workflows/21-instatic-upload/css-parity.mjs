@@ -38,7 +38,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_CSS = path.resolve(HERE, '.tmp/site/final-site/assets/site.css')
+/* The class system (class-system.mjs, 2026-09-14): class-site/assets/site.css is the registry rendered
+   the way Instatic renders it, plus the code asset, so it is what the live stylesheets must carry. */
+const LOCAL_CSS = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8')).css === 'classes'
+  ? path.resolve(HERE, '.tmp/site/class-site/assets/site.css')
+  : path.resolve(HERE, '.tmp/site/final-site/assets/site.css')
 
 function loadEnv() {
   let dir = HERE
@@ -208,6 +212,11 @@ for (const [k, want] of L) {
     if (have.has(p)) continue
     const expanded = EXPANDS[p]
     if (expanded && expanded.some((x) => have.has(x))) continue
+    // The other direction: the publisher collapses four padding/margin sides into the shorthand
+    // (classCss.ts tryCollapseSides), so `padding-top` locally is `padding` live. (2,444 false
+    // alarms on the first class-system publish, 2026-09-14.)
+    const side = p.match(/^(padding|margin)-(top|right|bottom|left)$/)
+    if (side && have.has(side[1])) continue
     missingProps.push({ cond, sel, prop: p })
   }
 }

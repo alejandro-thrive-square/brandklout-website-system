@@ -1,7 +1,7 @@
 {
   "package": "package-v11",
   "layout": "shared",
-  "css": "verbatim",
+  "css": "classes",
   "overlay": [],
   "aliases": {
     "revenue-attribution.html": "lead-to-collection.html"
@@ -170,5 +170,6 @@
       "file": "terms.html",
       "scope": null
     }
-  ]
+  ],
+  "classSite": "class-site"
 }

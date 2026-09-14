@@ -37,7 +37,15 @@ const MANIFEST = JSON.parse(readFileSync(new URL('./.tmp/site/site-src/pages.jso
 const SHARED = MANIFEST.layout === 'shared'
 const ROUTES = MANIFEST.pages.map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`))
 // Local copy of the verbatim stylesheet, to prove the published one carries it (shared layout).
-const LOCAL_CSS = SHARED ? readFileSync(new URL('./.tmp/site/final-site/assets/site.css', import.meta.url), 'utf8') : ''
+// The class system (2026-09-14): the code asset is site-src/code.css, and the quoted font families
+// are read from the local rendering of the whole registry (class-site/assets/site.css).
+const CLASSES = MANIFEST.css === 'classes'
+const LOCAL_CSS = CLASSES
+  ? readFileSync(new URL('./.tmp/site/site-src/code.css', import.meta.url), 'utf8')
+  : SHARED
+    ? readFileSync(new URL('./.tmp/site/final-site/assets/site.css', import.meta.url), 'utf8')
+    : ''
+const FAMILY_CSS = CLASSES ? readFileSync(new URL('./.tmp/site/class-site/assets/site.css', import.meta.url), 'utf8') : LOCAL_CSS
 
 /* Retired routes, which must 404 after the apply. v11 (2026-09-14) replaced v2's seven pages;
    these six v2 slugs have no v11 page (the home page is overwritten, not retired). */
@@ -135,18 +143,18 @@ for (const route of ROUTES) {
   if (route === '/') {
     const styleHref = (html.match(/\/_instatic\/css\/style-[a-f0-9]+\.css/) ?? [])[0]
     const userHref = (html.match(/\/_instatic\/css\/userStyles-[a-f0-9]+\.css/) ?? [])[0]
-    if (!styleHref && !SHARED) fails.push('no style registry stylesheet on the homepage')
+    if (!styleHref && (!SHARED || CLASSES)) fails.push('no style registry stylesheet on the homepage')
     if (!userHref) fails.push(SHARED ? 'no userStyles stylesheet — the whole verbatim site CSS is missing' : 'no userStyles stylesheet — the token layer is missing')
     // v11: the CSS is the code asset, verbatim. Prove the published copy carries all of it.
     if (SHARED && userHref) {
       const css = (await (await fetch(BASE + userHref)).text()).replace(/\r\n/g, '\n')
-      if (!css.includes(LOCAL_CSS.replace(/\r\n/g, '\n'))) fails.push(`userStyles does not contain the local site.css verbatim (${css.length} vs ${LOCAL_CSS.length} bytes); run css-parity.mjs for the declarations`)
+      if (!css.includes(LOCAL_CSS.replace(/\r\n/g, '\n'))) fails.push(`userStyles does not contain the local ${CLASSES ? 'code.css' : 'site.css'} verbatim (${css.length} vs ${LOCAL_CSS.length} bytes); run css-parity.mjs for the declarations`)
       // Every quoted family the CSS asks for needs an @font-face somewhere on the page, or the text
       // silently falls back to a system font wherever the family is not installed. Instatic writes
       // them into framework-*.css (install-fonts.mjs); read every stylesheet the page links.
       let allCss = ''
       for (const m of html.matchAll(/href="(\/_instatic\/css\/[^"]+\.css)"/g)) allCss += '\n' + (await (await fetch(BASE + m[1])).text())
-      const families = new Set([...LOCAL_CSS.matchAll(/font-family:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]))
+      const families = new Set([...FAMILY_CSS.matchAll(/font-family:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]))
       if (!families.size) warns.push('no quoted font-family in the local CSS; the @font-face check did nothing')
       for (const fam of families) {
         if (!new RegExp(`@font-face\\s*\\{[^}]*font-family:\\s*['"]?${fam}['"]?\\s*;`).test(allCss)) fails.push(`no @font-face for "${fam}" in the page's stylesheets: visitors get a fallback font (run install-fonts.mjs --apply)`)

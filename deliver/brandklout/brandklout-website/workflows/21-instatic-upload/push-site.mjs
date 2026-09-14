@@ -495,17 +495,31 @@ const tokensCss =
    (reset -> framework -> style -> userStyles), after Instatic's reset, which is where a page's own
    stylesheet belongs. One style asset, so the path-order tie-break between assets never applies. */
 const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
-const VERBATIM = MANIFEST.css === 'verbatim'
+/* THE CLASS SYSTEM (class-system.mjs, 2026-09-14) supersedes the verbatim layout: the styles are the
+   registry import-run.ts put in import-out.json, and the code asset shrinks to Instatic's reset
+   reverted plus site-src/code.css (the fluid root and @keyframes). */
+const CLASSES = MANIFEST.css === 'classes'
+const VERBATIM = MANIFEST.css === 'verbatim' || CLASSES
 const STYLE_PATH = VERBATIM ? 'src/styles/site.css' : 'src/styles/tokens.css'
 // Verbatim: Instatic's reset undone first (instatic-reset-revert.css; it replaces ua-defaults.css,
 // which restored only p/h margins), then the stylesheet. There are no harvested tokens to carry:
 // site-src/css is empty in this layout, so tokensCss would only be its banner and ua-defaults.
-const styleAsset = VERBATIM
+const styleAsset = CLASSES
+  ? // The reset revert is NOT here: in the class system it is the first registry rules
+    // (class-system.mjs step 0), so it loads before Sang's rules and not after them.
+    '/* ===== class-system.mjs: what is not a registry rule ===== */\n' +
+    fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/code.css'), 'utf8')
+  : VERBATIM
   ? fs.readFileSync(path.join(HERE, 'instatic-reset-revert.css'), 'utf8') +
     '\n/* ===== the site stylesheet, verbatim (prepare-source.mjs, shared layout) ===== */\n' +
     fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.css'), 'utf8')
   : tokensCss
-if (VERBATIM) console.log(`style      ${STYLE_PATH}: ${(styleAsset.length / 1024).toFixed(1)}KB (Instatic's reset reverted + Sang's CSS, verbatim)`)
+if (CLASSES) console.log(`style      ${STYLE_PATH}: ${(styleAsset.length / 1024).toFixed(1)}KB (code.css; the reset revert is the registry's first rules); registry ${Object.keys(converted.styleRules).length} rules, breakpoints ${(converted.breakpoints ?? []).map((b) => b.width).join('/')}`)
+else if (VERBATIM) console.log(`style      ${STYLE_PATH}: ${(styleAsset.length / 1024).toFixed(1)}KB (Instatic's reset reverted + Sang's CSS, verbatim)`)
+if (CLASSES && !converted.breakpoints?.length) {
+  console.error('REFUSING: import-out.json has no breakpoints; re-run ship.sh with the class-system payload')
+  process.exit(1)
+}
 
 /* A token that is declared and never reaches the asset is the failure this
    whole block exists to stop, so assert the ones the layout cannot survive
@@ -621,6 +635,9 @@ const shell = {
   // Verbatim CSS (v11) converts no rules, so there are no conditions; replace the previous build's
   // rather than carry them forward from `site` as orphans.
   ...(converted.conditions.length || VERBATIM ? { conditions: converted.conditions } : {}),
+  // The class system's editor breakpoints (class-system.mjs BREAKPOINTS) replace Instatic's defaults;
+  // every class rule's contextStyles is keyed by these ids.
+  ...(CLASSES ? { breakpoints: converted.breakpoints } : {}),
   files: [
     ...(site.files ?? []).filter(
       (f) => f.path !== 'src/scripts/site.js' && f.path !== 'src/styles/tokens.css' && f.path !== 'src/styles/site.css',

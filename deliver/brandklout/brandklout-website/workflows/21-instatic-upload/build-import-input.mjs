@@ -210,9 +210,14 @@ function rewrite(html, file) {
   return out
 }
 
+/* THE CLASS SYSTEM (class-system.mjs, 2026-09-14): the pages come from class-site/, which is
+   final-site/ with every element's class attribute rewritten, and the styles travel as a finished
+   registry (site-src/registry.json) rather than as CSS for the converter. */
+const CLASSES = manifest.css === 'classes'
+const PAGE_ROOT = CLASSES ? path.join(SITE, manifest.classSite ?? 'class-site') : FINAL
 const pages = PAGES.filter((p) => fileBySlug.has(p.slug)).map((p) => {
   const file = fileBySlug.get(p.slug)
-  const raw = fs.readFileSync(path.join(FINAL, file), 'utf8')
+  const raw = fs.readFileSync(path.join(PAGE_ROOT, file), 'utf8')
   const d = seo.pages[p.slug] ?? {}
   return {
     slug: p.slug,
@@ -305,14 +310,25 @@ css = css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, (whole, q, ref) => {
 /* The shared layout (v11) ships its CSS verbatim as a code asset (push-site.mjs), not through the
    registry, so the converter gets none. Classes on the markup then link to bare, style-less class
    rules, which is what they are: the styling lives in the code asset. */
-if (manifest.css === 'verbatim') css = ''
+if (manifest.css === 'verbatim' || CLASSES) css = ''
+let registry = null
+if (CLASSES) {
+  registry = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'registry.json'), 'utf8'))
+  // Registry values are published as written; a relative url() would 404 from /_instatic/css/ (trap 14).
+  for (const r of registry.rules) {
+    for (const bag of [r.styles, ...Object.values(r.contextStyles)]) {
+      for (const v of Object.values(bag)) for (const m of String(v).matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)) if (!/^(data:|https?:|\/)/.test(m[2])) problems.push(`registry ${r.selector}: relative url(${m[2]})`)
+    }
+  }
+}
 
 if (problems.length) {
   console.error('REFUSING to build the payload:\n  ' + problems.join('\n  '))
   process.exit(1)
 }
 
-const payload = JSON.stringify({ css, pages })
+const payload = JSON.stringify({ css, pages, ...(registry ? { registry } : {}) })
+if (registry) console.log(`registry: ${registry.rules.length} rules, ${registry.conditions.length} conditions, ${registry.breakpoints.length} breakpoints (class-system.mjs)`)
 const gz = zlib.gzipSync(Buffer.from(payload, 'utf8'), { level: 9 })
 fs.writeFileSync(path.join(TMP, 'import-input.json.gz'), gz)
 fs.writeFileSync(path.join(TMP, 'import-input.b64'), gz.toString('base64'))
