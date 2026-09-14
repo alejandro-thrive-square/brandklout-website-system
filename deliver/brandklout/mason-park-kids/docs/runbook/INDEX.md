@@ -1,11 +1,12 @@
 # Runbook index
 
-14 runs, newest first. Each line is one file in this folder.
+15 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-14 | DONE 2026-09-14 - masonparkpediatricdental.com LIVE on Railway (apex + www, Cloudflare DNS-only, PUBLIC_ORIGIN verified). **Open: canonicals still say pediatricdentistkatytx.com.** | [`2026-09-14-domain-masonparkpediatricdental-live.md`](./2026-09-14-domain-masonparkpediatricdental-live.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
 | 2026-09-09 | DONE 2026-09-09 (night) - THE WHOLE SITE ON INSTATIC: 215 PAGES, THE BLOG INCLUDED. All 157 posts built and published; local against live 215/215 on structure, text and geometry. **Gotchas: four browser sweeps on one machine fake timeouts; `populate-seo` drops writes on a busy host; the harvest bakes link rewrites into the JSON; two more gates carried lists; consecutive `<p>` are one prose run; the probes want absolute paths.** Railway needed a re-login and an SSH key on the new account. | [`2026-09-09-the-whole-site-on-instatic-215-pages.md`](./2026-09-09-the-whole-site-on-instatic-215-pages.md) |

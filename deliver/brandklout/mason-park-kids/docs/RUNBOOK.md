@@ -18,6 +18,11 @@ the same (`diff-all.mjs` 215/215; see `docs/runbook/2026-09-09-the-whole-site-on
 review link. Every gate is clean over 215 pages: `check.mjs` 0 errors, `audit-live.mjs` 215/215 at 1440
 and 390, `diff-all.mjs` 215 match, `crop-all.mjs --live` 0 across 215 x 2 widths.
 
+**2026-09-14: the site is live at <https://www.masonparkpediatricdental.com>** (apex serves too).
+Cloudflare DNS, DNS-only CNAMEs to Railway, admin origins verified. **Open: every canonical and
+`og:url` still says `pediatricdentistkatytx.com`**, so the SEO plugin's site URL must change if the
+new domain is the primary. See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
+
 | | State |
 | :--- | :--- |
 | The **eleven core pages** | Designed, and the design is now identical on disk and published. `workflows/03-core-pages/` is the source. |
