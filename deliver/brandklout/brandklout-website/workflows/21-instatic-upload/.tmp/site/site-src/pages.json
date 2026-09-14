@@ -1,46 +1,174 @@
 {
-  "package": "package-v2",
-  "overlay": [
-    "survey/index.html"
-  ],
+  "package": "package-v11",
+  "layout": "shared",
+  "css": "verbatim",
+  "overlay": [],
   "aliases": {
-    "preview (1).html": "index.html"
+    "revenue-attribution.html": "lead-to-collection.html"
   },
+  "notPages": [
+    "OPEN-ME.html"
+  ],
   "pages": [
     {
-      "slug": "customer-stories-legacy-dental-pasadena",
-      "file": "customer-stories/legacy-dental-pasadena/index.html",
-      "scope": "pg-story"
+      "slug": "ai-growth-engine",
+      "file": "ai-growth-engine.html",
+      "scope": null
     },
     {
-      "slug": "customer-stories-oceanic-ai-search-growth",
-      "file": "customer-stories/oceanic-ai-search-growth/index.html",
-      "scope": "pg-story"
+      "slug": "ai-search-authority",
+      "file": "ai-search-authority.html",
+      "scope": null
     },
     {
-      "slug": "customer-stories-oceanic-future-ready",
-      "file": "customer-stories/oceanic-future-ready/index.html",
-      "scope": "pg-story"
+      "slug": "authority-score",
+      "file": "authority-score.html",
+      "scope": null
     },
     {
-      "slug": "customer-stories-ocpao-ai-authority",
-      "file": "customer-stories/ocpao-ai-authority/index.html",
-      "scope": "pg-story"
+      "slug": "book",
+      "file": "book.html",
+      "scope": null
     },
     {
-      "slug": "customer-stories-omnia-ai-search-growth",
-      "file": "customer-stories/omnia-ai-search-growth/index.html",
-      "scope": "pg-story"
+      "slug": "conversion-websites",
+      "file": "conversion-websites.html",
+      "scope": null
+    },
+    {
+      "slug": "cosmetic-dentist-marketing",
+      "file": "cosmetic-dentist-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-stories",
+      "file": "customer-stories.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-ava-dental-launch",
+      "file": "customer-story-ava-dental-launch.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-legacy-dental-pasadena",
+      "file": "customer-story-legacy-dental-pasadena.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-oceanic-ai-search-growth",
+      "file": "customer-story-oceanic-ai-search-growth.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-oceanic-future-ready",
+      "file": "customer-story-oceanic-future-ready.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-ocpao-ai-authority",
+      "file": "customer-story-ocpao-ai-authority.html",
+      "scope": null
+    },
+    {
+      "slug": "customer-story-omnia-ai-search-growth",
+      "file": "customer-story-omnia-ai-search-growth.html",
+      "scope": null
+    },
+    {
+      "slug": "dental-implant-marketing",
+      "file": "dental-implant-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "full-arch-marketing",
+      "file": "full-arch-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "general-dentistry-marketing",
+      "file": "general-dentistry-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "guarantee",
+      "file": "guarantee.html",
+      "scope": null
+    },
+    {
+      "slug": "hipaa",
+      "file": "hipaa.html",
+      "scope": null
     },
     {
       "slug": "index",
       "file": "index.html",
-      "scope": "pg-home"
+      "scope": null
     },
     {
-      "slug": "survey",
-      "file": "survey/index.html",
-      "scope": "pg-survey"
+      "slug": "lead-to-collection",
+      "file": "lead-to-collection.html",
+      "scope": null
+    },
+    {
+      "slug": "local-seo-maps",
+      "file": "local-seo-maps.html",
+      "scope": null
+    },
+    {
+      "slug": "market-opportunity",
+      "file": "market-opportunity.html",
+      "scope": null
+    },
+    {
+      "slug": "multi-location-dental-marketing",
+      "file": "multi-location-dental-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "oral-surgery-marketing",
+      "file": "oral-surgery-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "orthodontics-invisalign-marketing",
+      "file": "orthodontics-invisalign-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "periodontist-marketing",
+      "file": "periodontist-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "privacy",
+      "file": "privacy.html",
+      "scope": null
+    },
+    {
+      "slug": "prosthodontist-marketing",
+      "file": "prosthodontist-marketing.html",
+      "scope": null
+    },
+    {
+      "slug": "reputation-engine",
+      "file": "reputation-engine.html",
+      "scope": null
+    },
+    {
+      "slug": "solutions",
+      "file": "solutions.html",
+      "scope": null
+    },
+    {
+      "slug": "specialties",
+      "file": "specialties.html",
+      "scope": null
+    },
+    {
+      "slug": "terms",
+      "file": "terms.html",
+      "scope": null
     }
   ]
 }

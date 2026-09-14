@@ -30,29 +30,30 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up
 
    Add the six remaining treatment dossiers here the day they are published;
    `botox` is the only one built so far and it is the template for the rest. */
-/* Brandklout v2 (2026-09-11): seven routes. Checked against the build's page list below, so a
-   page added to the package and not here fails this gate instead of going unchecked. */
-const ROUTES = [
-  '/',
-  '/survey',
-  '/customer-stories-legacy-dental-pasadena',
-  '/customer-stories-oceanic-ai-search-growth',
-  '/customer-stories-oceanic-future-ready',
-  '/customer-stories-ocpao-ai-authority',
-  '/customer-stories-omnia-ai-search-growth',
-]
-{
-  const { readFileSync } = await import('node:fs')
-  const manifest = JSON.parse(readFileSync(new URL('./.tmp/site/site-src/pages.json', import.meta.url), 'utf8'))
-  const built = manifest.pages.map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`)).sort().join()
-  if (built !== [...ROUTES].sort().join()) throw new Error(`verify-live's routes do not match the build: ${built}`)
-}
+/* Every route the build has, from its own list (prepare-source.mjs -> site-src/pages.json). v2's
+   seven were written out; v11 has 33, and a hand list that drifts is how a gate goes blind. */
+const { readFileSync } = await import('node:fs')
+const MANIFEST = JSON.parse(readFileSync(new URL('./.tmp/site/site-src/pages.json', import.meta.url), 'utf8'))
+const SHARED = MANIFEST.layout === 'shared'
+const ROUTES = MANIFEST.pages.map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`))
+// Local copy of the verbatim stylesheet, to prove the published one carries it (shared layout).
+const LOCAL_CSS = SHARED ? readFileSync(new URL('./.tmp/site/final-site/assets/site.css', import.meta.url), 'utf8') : ''
 
-/* Nothing has ever been retired here. This instance was provisioned on
-   2026-09-04 and its first publish was this site, so there is no earlier slug
-   to have gone stale. Fill this in the first time a page is deleted rather than
-   overwritten — an empty list is a true statement, not an unfinished one. */
-const GONE = []
+/* Retired routes, which must 404 after the apply. v11 (2026-09-14) replaced v2's seven pages;
+   these six v2 slugs have no v11 page (the home page is overwritten, not retired). */
+const GONE = SHARED
+  ? [
+      '/survey',
+      '/customer-stories-legacy-dental-pasadena',
+      '/customer-stories-oceanic-ai-search-growth',
+      '/customer-stories-oceanic-future-ready',
+      '/customer-stories-ocpao-ai-authority',
+      '/customer-stories-omnia-ai-search-growth',
+    ]
+  : []
+// v11: the three pages with a `form[data-lead-form]`, which POST to FormSubmit (patches/assets/site.js.mjs).
+const FORM_ROUTES = ['/', '/market-opportunity', '/authority-score']
+const LEGAL_ROUTES = ['/privacy', '/terms', '/hipaa']
 
 const fails = []
 const warns = []
@@ -78,26 +79,31 @@ for (const route of ROUTES) {
   // The stories are ~8KB of source each, so the floor is lower than Stone's.
   if (html.length < 5000) fails.push(`${route} -> only ${html.length} bytes; page is probably empty`)
 
-  // Every rule of Sang's is scoped to a class on <body> (prepare-source.mjs). Without it the page
-  // publishes with none of its own styling, and nothing else here would say why.
+  const csp = (html.match(/Content-Security-Policy" content="([^"]*)"/) ?? [])[1] ?? ''
   const bodyClass = (html.match(/<body[^>]*\bclass="([^"]*)"/) ?? [])[1] ?? ''
-  if (!/\bpg-[a-z-]+\b/.test(bodyClass)) fails.push(`${route} -> <body> has no pg-* scope class ("${bodyClass}")`)
-  if (route.startsWith('/customer-stories-') && !/<iframe[^>]+src="https:\/\/www\.youtube(?:-nocookie)?\.com\/embed\//.test(html)) {
-    fails.push(`${route} -> no YouTube player`)
+  if (!SHARED) {
+    // v2: every rule of Sang's is scoped to a class on <body> (prepare-source.mjs). Without it the
+    // page publishes with none of its own styling, and nothing else here would say why.
+    if (!/\bpg-[a-z-]+\b/.test(bodyClass)) fails.push(`${route} -> <body> has no pg-* scope class ("${bodyClass}")`)
+  } else {
+    // v11: Sang's CSS keys its themes off his own body classes; the body node must carry them.
+    if (!/\bvisual-site\b/.test(bodyClass)) fails.push(`${route} -> <body> lost Sang's classes ("${bodyClass}")`)
+    // Story players and the video pop-up create youtube-nocookie iframes at runtime (stories-v10.js,
+    // visual.js): the page's CSP has to allow that host, or Play shows an empty box.
+    if (!/frame-src[^;]*https:\/\/www\.youtube-nocookie\.com/.test(csp)) fails.push(`${route} -> CSP frame-src does not allow https://www.youtube-nocookie.com; the in-place players would be blocked`)
   }
-  // The home lead form POSTs to FormSubmit (patches/index.html.mjs #12): its CSP must allow it.
-  if (route === '/') {
-    const csp = (html.match(/Content-Security-Policy" content="([^"]*)"/) ?? [])[1] ?? ''
-    if (!/connect-src[^;]*https:\/\/formsubmit\.co/.test(csp)) fails.push('/ -> CSP connect-src does not allow https://formsubmit.co; the lead form would be blocked')
+  if (FORM_ROUTES.includes(route)) {
+    if (!/<form[^>]+data-lead-form/.test(html)) fails.push(`${route} -> no form[data-lead-form]`)
+    if (!/connect-src[^;]*https:\/\/formsubmit\.co/.test(csp)) fails.push(`${route} -> CSP connect-src does not allow https://formsubmit.co; the form would be blocked`)
   }
-  // /survey is the rebuilt 21-point assessment (overlay/survey/index.html) since 2026-09-11.
-  if (route === '/survey') {
-    if (!/<form[^>]+id="contactForm"/.test(html)) fails.push('/survey -> no #contactForm')
-    const radios = (html.match(/<input[^>]+type="radio"[^>]+name="question_\d+"/g) ?? []).length
-    if (radios !== 42) fails.push(`/survey -> ${radios} yes/no radios, expected 42`)
-    // The page POSTs to SheetDB from the browser, so the published CSP must allow it (embed-origins).
-    const csp = (html.match(/Content-Security-Policy" content="([^"]*)"/) ?? [])[1] ?? ''
-    if (!/connect-src[^;]*https:\/\/sheetdb\.io/.test(csp)) fails.push('/survey -> CSP connect-src does not allow https://sheetdb.io; submissions would be blocked')
+  if (route === '/authority-score') {
+    const radios = (html.match(/<input[^>]+type="radio"/g) ?? []).length
+    if (radios !== 42) fails.push(`/authority-score -> ${radios} yes/no radios, expected 42`)
+  }
+  // The legal pages carry brandklout.com's text (patches/<page>.html.mjs), not Sang's draft template.
+  if (LEGAL_ROUTES.includes(route)) {
+    if (!html.includes('Effective Date')) fails.push(`${route} -> no "Effective Date": the brandklout.com legal text is missing`)
+    if (/Draft (website|explanatory)/.test(html)) fails.push(`${route} -> still shows Sang's draft legal note`)
   }
 
   const title = (html.match(/<title>([^<]*)<\/title>/) ?? [])[1] ?? ''
@@ -129,8 +135,38 @@ for (const route of ROUTES) {
   if (route === '/') {
     const styleHref = (html.match(/\/_instatic\/css\/style-[a-f0-9]+\.css/) ?? [])[0]
     const userHref = (html.match(/\/_instatic\/css\/userStyles-[a-f0-9]+\.css/) ?? [])[0]
-    if (!styleHref) fails.push('no style registry stylesheet on the homepage')
-    if (!userHref) fails.push('no userStyles stylesheet — the token layer is missing')
+    if (!styleHref && !SHARED) fails.push('no style registry stylesheet on the homepage')
+    if (!userHref) fails.push(SHARED ? 'no userStyles stylesheet — the whole verbatim site CSS is missing' : 'no userStyles stylesheet — the token layer is missing')
+    // v11: the CSS is the code asset, verbatim. Prove the published copy carries all of it.
+    if (SHARED && userHref) {
+      const css = (await (await fetch(BASE + userHref)).text()).replace(/\r\n/g, '\n')
+      if (!css.includes(LOCAL_CSS.replace(/\r\n/g, '\n'))) fails.push(`userStyles does not contain the local site.css verbatim (${css.length} vs ${LOCAL_CSS.length} bytes); run css-parity.mjs for the declarations`)
+      // Every quoted family the CSS asks for needs an @font-face somewhere on the page, or the text
+      // silently falls back to a system font wherever the family is not installed. Instatic writes
+      // them into framework-*.css (install-fonts.mjs); read every stylesheet the page links.
+      let allCss = ''
+      for (const m of html.matchAll(/href="(\/_instatic\/css\/[^"]+\.css)"/g)) allCss += '\n' + (await (await fetch(BASE + m[1])).text())
+      const families = new Set([...LOCAL_CSS.matchAll(/font-family:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]))
+      if (!families.size) warns.push('no quoted font-family in the local CSS; the @font-face check did nothing')
+      for (const fam of families) {
+        if (!new RegExp(`@font-face\\s*\\{[^}]*font-family:\\s*['"]?${fam}['"]?\\s*;`).test(allCss)) fails.push(`no @font-face for "${fam}" in the page's stylesheets: visitors get a fallback font (run install-fonts.mjs --apply)`)
+      }
+    }
+    const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
+    if (SHARED) {
+      if (!script) fails.push('no runtime script on the homepage')
+      else {
+        const js = await (await fetch(BASE + script)).text()
+        if (!/classList\.add\(["']js["']\)/.test(js)) fails.push('site.js is missing the `js` class bootstrap')
+        if (!js.includes('https://formsubmit.co/ajax/sales@brandklout.com')) fails.push('site.js does not point the forms at FormSubmit -> sales@brandklout.com')
+        if (!js.includes('data-authority-quiz')) fails.push('site.js does not contain the assessment script')
+        if (!js.includes('BKVisual') || !js.includes('BKStories')) fails.push('site.js is missing visual.js or stories-v10.js')
+      }
+    }
+  }
+  if (route === '/' && !SHARED) {
+    const styleHref = (html.match(/\/_instatic\/css\/style-[a-f0-9]+\.css/) ?? [])[0]
+    const userHref = (html.match(/\/_instatic\/css\/userStyles-[a-f0-9]+\.css/) ?? [])[0]
     // Brandklout: the runtime class is `.open` on `.faq-item` — the FAQ answers are
     // `max-height: 0` until it is set. The sibling checked its navbar state rules here.
     if (styleHref) {

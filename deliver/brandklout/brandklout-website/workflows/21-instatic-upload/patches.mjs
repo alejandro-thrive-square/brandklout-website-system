@@ -26,9 +26,14 @@ export async function loadPatches() {
   return out
 }
 
+/* `find` may also be a RegExp (v11, 2026-09-14: a whole legal-page body, which is too long to quote
+   as a literal). The exactly-once rule is the same: it is counted with a global copy of the regex. */
 export function applyPatches(rel, html, patches) {
   for (const p of patches.get(rel) ?? []) {
-    const n = html.split(p.find).length - 1
+    const n =
+      p.find instanceof RegExp
+        ? (html.match(new RegExp(p.find.source, p.find.flags.includes('g') ? p.find.flags : p.find.flags + 'g')) ?? []).length
+        : html.split(p.find).length - 1
     if (n !== 1) {
       throw new Error(`patch "${p.why}" on ${rel}: its anchor occurs ${n} times, expected exactly 1. The source changed; re-anchor the patch.`)
     }

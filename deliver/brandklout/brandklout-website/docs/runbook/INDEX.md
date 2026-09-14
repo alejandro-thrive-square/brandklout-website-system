@@ -1,11 +1,12 @@
 # Runbook index
 
-7 runs, newest first. Each line is one file in this folder.
+8 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-14 | **Sang's v11 (32 pages) replaces v2**; CSS shipped verbatim; all 3 forms (incl. the assessment) email sales@ via FormSubmit; legal pages carry brandklout.com's text; YouTube frame-src fixed. Carries **gotchas** | [`2026-09-14-v11-published.md`](./2026-09-14-v11-published.md) |
 | 2026-09-12 | Sang's admin account (`sang@thrivesquare.com`) added with his Mason Park password hash, plus a `user.create` audit event | [`2026-09-12-sang-admin-account.md`](./2026-09-12-sang-admin-account.md) |
 | 2026-09-11 | Home lead form emails sales@brandklout.com via FormSubmit; **needs a one-time activation click at sales@** | [`2026-09-11-lead-form-to-sales.md`](./2026-09-11-lead-form-to-sales.md) |
 | 2026-09-11 | "Why us" cards stacked, Sang's video plays in place (new `patches/`); brandklout.com CTA flow reviewed: the review link's main CTA is a dead end | [`2026-09-11-why-us-stacked-and-flow-review.md`](./2026-09-11-why-us-stacked-and-flow-review.md) |

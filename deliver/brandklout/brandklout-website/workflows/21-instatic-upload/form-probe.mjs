@@ -1,175 +1,170 @@
 /**
- * What does the published "Check my market" form actually do on submit?
+ * v11 (2026-09-14): do the published forms, the assessment, the legal pages and the players work?
  *
- * Fills every field, clicks submit, and records every request the page tries to make — then
- * ABORTS any non-GET request, so no submission ever reaches a server. Also checks the FAQ toggle.
+ * Every `form[data-lead-form]` (home, /market-opportunity, /authority-score) is filled and submitted
+ * the way a visitor would. Its POST to FormSubmit (patches/assets/site.js.mjs -> sales@brandklout.com)
+ * is CAPTURED AND ABORTED, so this probe never emails anyone: the CORS preflight is let through (it
+ * carries no body) so that the real POST is formed and can be inspected. Because the POST is
+ * aborted, the page must take its FAILURE path (the "could not be confirmed" status, the button
+ * re-enabled): that proves Sang's handler ran with the patched endpoint.
  *
- * Usage: node form-probe.mjs
+ * Also: the 21-question assessment scores as it is answered; the legal pages show brandklout.com's
+ * text with bullets; a story's in-place player and the home video pop-up create their iframes with
+ * no CSP error.
+ *
+ * Every other non-GET request is recorded and aborted. Instatic's own beacons (same host, random
+ * 40+ character paths) are ignored.
+ *
+ * Usage: node form-probe.mjs > .tmp/form-probe.log 2>&1
  */
 import puppeteer from 'puppeteer-core'
 
 const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up.railway.app').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
+const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new' })
-const page = await browser.newPage()
-const tried = []
-const errors = []
-const homeDialogs = []
-let leadPost = null
-page.on('pageerror', (e) => errors.push(e.message))
-page.on('console', (m) => m.type() === 'error' && errors.push(m.text()))
-page.on('dialog', async (d) => { homeDialogs.push(d.message()); await d.dismiss() })
-await page.setRequestInterception(true)
-page.on('request', (r) => {
-  // The lead form POSTs JSON to FormSubmit (patches/index.html.mjs #12). Let its CORS preflight
-  // through (no body, sends nothing) so the real POST is formed; then capture and ABORT the POST,
-  // so no email is ever sent to sales@brandklout.com by this probe.
-  if (r.method() === 'OPTIONS' && /^https:\/\/formsubmit\.co\//.test(r.url())) return r.continue()
-  if (r.method() === 'POST' && /^https:\/\/formsubmit\.co\//.test(r.url())) {
-    leadPost = { url: r.url(), contentType: r.headers()['content-type'], body: r.postData() ?? '' }
-    return r.abort()
-  }
-  if (r.method() !== 'GET') {
-    tried.push(`${r.method()} ${r.url()} ${(r.postData() ?? '').slice(0, 160)}`)
-    return r.abort()
-  }
-  r.continue()
-})
 
-await page.goto(BASE + '/', { waitUntil: 'networkidle0' })
-await page.evaluate(() => (document.documentElement.style.scrollBehavior = 'auto'))
-
-// FAQ: the second item starts closed; one click should open it.
-// The answer animates `max-height` over .3s, so measure after the transition, not on the click.
-const faq = await page.evaluate(async () => {
-  const item = document.querySelectorAll('.faq-item')[1]
-  const before = item.classList.contains('open')
-  item.querySelector('.faq-q').click()
-  await new Promise((r) => setTimeout(r, 700))
-  return { before, after: item.classList.contains('open'), height: item.querySelector('.faq-a').getBoundingClientRect().height }
-})
-
-// The legal pop-up (patches/index.html.mjs, cloned from brandklout.com): each footer link opens
-// its tab, a tab switches the title and body, Escape closes, and the page is scroll-locked meanwhile.
-const legal = []
-for (const [id, want] of [['terms', 'Terms of Service'], ['privacy', 'Privacy Policy'], ['hipaa', 'HIPAA Compliance']]) {
-  await page.click(`a[data-legal="${id}"]`)
-  await new Promise((r) => setTimeout(r, 300))
-  legal.push(await page.evaluate((want) => {
-    const m = document.getElementById('legalModal')
-    const shown = [...m.querySelectorAll('.modal-body')].filter((p) => !p.hidden)
-    return {
-      open: !m.hidden && getComputedStyle(m).display !== 'none',
-      title: document.getElementById('legalTitle').textContent === want,
-      oneBody: shown.length === 1,
-      activeTab: m.querySelector('.modal-tab.active')?.textContent === want,
-      bodyChars: shown[0]?.innerText.length ?? 0,
-      locked: document.body.style.overflow === 'hidden',
+async function open(route) {
+  const page = await browser.newPage()
+  const rec = { posts: [], other: [], errors: [], dialogs: [] }
+  page.on('pageerror', (e) => rec.errors.push(e.message))
+  page.on('console', (m) => ['error', 'warning'].includes(m.type()) && rec.errors.push(`${m.type()}: ${m.text()}`))
+  page.on('dialog', async (d) => { rec.dialogs.push(d.message()); await d.dismiss() })
+  await page.setRequestInterception(true)
+  page.on('request', (r) => {
+    const url = r.url()
+    if (r.method() === 'OPTIONS' && /^https:\/\/formsubmit\.co\//.test(url)) return r.continue()
+    if (r.method() === 'POST' && /^https:\/\/formsubmit\.co\//.test(url)) {
+      rec.posts.push({ url, contentType: r.headers()['content-type'], accept: r.headers().accept, body: r.postData() ?? '' })
+      return r.abort()
     }
-  }, want))
-  await page.keyboard.press('Escape')
-  await new Promise((r) => setTimeout(r, 200))
+    if (r.method() !== 'GET' && r.method() !== 'HEAD') {
+      if (!/\/[A-Za-z0-9_-]{40,}$/.test(url)) rec.other.push(`${r.method()} ${url}`)
+      return r.abort()
+    }
+    r.continue()
+  })
+  await page.goto(BASE + route, { waitUntil: 'networkidle0', timeout: 90000 })
+  await page.evaluate(() => (document.documentElement.style.scrollBehavior = 'auto'))
+  return { page, rec }
 }
-const legalClosed = await page.evaluate(() => document.getElementById('legalModal').hidden)
-console.log(JSON.stringify({ legal, legalClosedByEscape: legalClosed }))
 
-await page.type('input[name="name"]', 'Probe Test')
-await page.type('input[name="email"]', 'probe@example.com')
-await page.type('input[name="practice"]', 'Probe Practice')
-await page.type('input[name="market"]', 'Austin, TX')
-await page.type('textarea[name="problem"]', 'form probe — aborted, never sent')
-await new Promise((r) => setTimeout(r, 2500)) // Instatic's minSubmitSeconds is 2
-const urlBefore = page.url()
-await page.click('#leadForm [type="submit"]')
-await new Promise((r) => setTimeout(r, 2500))
+const FILL = {
+  name: 'Form Probe (aborted, never sent)',
+  email: 'probe@example.com',
+  phone: '5555555555',
+  practice: 'Probe Practice',
+  website: 'https://example.com',
+  market: 'Austin, TX',
+  bottleneck: 'form probe: aborted in the browser, never sent',
+}
 
-const after = await page.evaluate(() => ({
-  success: (() => { const s = document.getElementById('success'); return s ? getComputedStyle(s).display + ' | ' + s.textContent.trim() : 'no #success' })(),
-  formText: document.getElementById('leadForm')?.innerText.slice(-300),
-  attrs: Object.fromEntries([...document.getElementById('leadForm').attributes].map((a) => [a.name, a.value])),
-}))
-
-let leadPayload = null
-try { leadPayload = leadPost ? JSON.parse(leadPost.body) : null } catch { leadPayload = 'not JSON' }
-const lead = leadPost
-  ? { url: leadPost.url, contentType: leadPost.contentType, keys: leadPayload && typeof leadPayload === 'object' ? Object.keys(leadPayload) : leadPayload, subject: leadPayload?._subject }
-  : 'NO REQUEST to formsubmit.co: blocked by CSP, or the handler never sent'
-console.log(JSON.stringify({ faq, lead, homeDialogs, tried, urlBefore, urlAfter: page.url(), ...after, errors }, null, 1))
-
-/* --- /survey: the rebuilt 21-point assessment (overlay/survey/index.html, 2026-09-11) ----------
-   Walks it the way a visitor would: presses Get My Results with nothing answered (every question
-   should flag and the page should scroll to #1), answers all 21, opens the contact step, fills it
-   and submits. The SheetDB POST is ABORTED, so nothing reaches Sang's sheet; what is recorded is
-   the request itself (URL, method, headers, JSON body) and whether the browser's CSP let it leave:
-   a CSP block never reaches request interception and shows up as a console error instead.
-   The aborted fetch makes the page raise its own error alert, which is accepted and recorded. */
-const sp = await browser.newPage()
-const sTried = []
-const sErrors = []
-const dialogs = []
-sp.on('pageerror', (e) => sErrors.push(e.message))
-sp.on('console', (m) => ['error', 'warning'].includes(m.type()) && sErrors.push(`${m.type()}: ${m.text()}`))
-sp.on('dialog', async (d) => { dialogs.push(d.message()); await d.dismiss() })
-await sp.setRequestInterception(true)
-sp.on('request', (r) => {
-  // A JSON POST is cross-origin "non-simple", so Chrome sends a CORS preflight first. The
-  // preflight carries no body and writes nothing; abort IT and the real POST is never formed, so
-  // there is nothing to inspect. Let only SheetDB's preflight through; the POST is still aborted.
-  if (r.method() === 'OPTIONS' && /^https:\/\/sheetdb\.io\//.test(r.url())) return r.continue()
-  if (r.method() !== 'GET' && r.method() !== 'HEAD' && !/\/[A-Za-z0-9_-]{40,}$/.test(r.url())) {
-    sTried.push({ method: r.method(), url: r.url(), contentType: r.headers()['content-type'], body: r.postData() ?? '' })
-    return r.abort()
+const results = {}
+for (const route of ['/', '/market-opportunity', '/authority-score']) {
+  const { page, rec } = await open(route)
+  const out = {}
+  if (route === '/authority-score') {
+    out.quizBefore = await page.evaluate(() => ({
+      questions: document.querySelectorAll('[data-authority-quiz] .question[data-category]').length,
+      radios: document.querySelectorAll('[data-authority-quiz] input[type="radio"]').length,
+      progress: document.querySelector('[data-quiz-progress]')?.textContent,
+      score: document.querySelector('[data-score]')?.textContent,
+    }))
+    // Yes on the even questions, No on the odd ones: 11 of 21 Yes.
+    await page.evaluate(() => {
+      document.querySelectorAll('[data-authority-quiz] .question[data-category]').forEach((q, i) => q.querySelectorAll('input[type="radio"]')[i % 2].click())
+    })
+    await wait(800)
+    out.quizAfter = await page.evaluate(() => ({
+      progress: document.querySelector('[data-quiz-progress]')?.textContent,
+      score: document.querySelector('[data-score]')?.textContent,
+      yes: document.querySelector('[data-yes-count]')?.textContent,
+      state: document.querySelector('[data-score-state]')?.textContent,
+      hiddenScore: document.querySelector('#assessment-lead-form [name="authority_score"]')?.value,
+    }))
   }
-  if (r.method() !== 'GET') return r.abort()
-  r.continue()
-})
-await sp.goto(BASE + '/survey', { waitUntil: 'networkidle0' })
-await sp.evaluate(() => (document.documentElement.style.scrollBehavior = 'auto'))
-const boot = await sp.evaluate(() => ({
-  questions: document.querySelectorAll('.q').length,
-  radios: document.querySelectorAll('.q input[type="radio"]').length,
-  progress: document.querySelector('.progress-text')?.textContent,
-  modalHidden: document.getElementById('resultsModal')?.hidden,
-  csp: document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content ?? '',
-}))
-await sp.click('#getResults')
-await new Promise((r) => setTimeout(r, 900))
-const emptyTry = await sp.evaluate(() => ({
-  flagged: document.querySelectorAll('.q.invalid').length,
-  firstFlaggedTop: Math.round(document.querySelector('.q.invalid')?.getBoundingClientRect().top ?? -1),
-  modalHidden: document.getElementById('resultsModal').hidden,
-}))
-await sp.evaluate(() => {
-  document.querySelectorAll('.q').forEach((q, i) => q.querySelectorAll('input')[i % 2].click())
-})
-const answered = await sp.evaluate(() => ({
-  flagged: document.querySelectorAll('.q.invalid').length,
-  progress: document.querySelector('.progress-text')?.textContent,
-  bar: document.getElementById('progressBar').style.width,
-}))
-await sp.click('#getResults')
-await new Promise((r) => setTimeout(r, 300))
-const modalOpen = await sp.evaluate(() => !document.getElementById('resultsModal').hidden)
-await sp.type('#fullName', 'Form Probe (aborted, never sent)')
-await sp.type('#email', 'probe@example.com')
-await sp.type('#phone', '5555555555')
-await sp.click('#contactForm button[type="submit"]')
-await new Promise((r) => setTimeout(r, 2500))
-const sAfter = await sp.evaluate(() => ({
-  askHidden: document.getElementById('askContact').hidden,
-  doneHidden: document.getElementById('assessmentDone').hidden,
-  button: document.querySelector('#contactForm button[type="submit"]').textContent,
-}))
-const sent = sTried.find((t) => /sheetdb\.io/.test(t.url) && t.method === 'POST')
-let payloadKeys = null
-try { payloadKeys = sent ? Object.keys(JSON.parse(sent.body)) : null } catch { payloadKeys = 'not JSON' }
-const survey = {
-  boot: { ...boot, cspAllowsSheetdb: /connect-src[^;]*https:\/\/sheetdb\.io/.test(boot.csp), csp: undefined },
-  emptyTry, answered, modalOpen, after: sAfter,
-  sheetdb: sent ? { method: sent.method, url: sent.url, contentType: sent.contentType, payloadKeys } : 'NO REQUEST — blocked by CSP or never sent',
-  otherRequests: sTried.filter((t) => t !== sent).map((t) => `${t.method} ${t.url}`),
-  dialogs, errors: sErrors,
+  const form = 'form[data-lead-form]'
+  out.fields = await page.evaluate((form) => [...document.querySelector(form).elements].filter((e) => e.name && e.type !== 'hidden').map((e) => `${e.name}${e.required ? '*' : ''}:${e.type}`), form)
+  // An empty submit first: the browser's own `required` checks must stop it before any request.
+  await page.click(`${form} [type="submit"]`)
+  await wait(600)
+  out.emptySubmitSent = rec.posts.length > 0
+  for (const [name, value] of Object.entries(FILL)) {
+    const el = await page.$(`${form} [name="${name}"]`)
+    if (el) await el.type(value)
+  }
+  const selects = await page.$$eval(`${form} select`, (els) => els.map((s) => [s.name, [...s.options].find((o) => o.value)?.value ?? '']))
+  for (const [name, value] of selects) await page.select(`${form} select[name="${name}"]`, value)
+  await wait(500)
+  await page.click(`${form} [type="submit"]`)
+  await wait(3000)
+  out.after = await page.evaluate((form) => {
+    const f = document.querySelector(form)
+    return {
+      status: f.querySelector('[data-form-status]')?.textContent.trim(),
+      statusIsError: f.querySelector('[data-form-status]')?.classList.contains('error'),
+      successShown: f.querySelector('.success')?.classList.contains('show'),
+      buttonEnabled: !f.querySelector('[type="submit"]').disabled,
+    }
+  }, form)
+  const post = rec.posts[0]
+  let body = null
+  try { body = post ? JSON.parse(post.body) : null } catch { body = 'not JSON' }
+  out.formsubmit = post
+    ? { url: post.url, contentType: post.contentType, accept: post.accept, subject: body?._subject, template: body?._template, keys: body && typeof body === 'object' ? Object.keys(body) : body, q01: body?.Q01, categoryScores: body?.category_scores }
+    : 'NO REQUEST to formsubmit.co: blocked by CSP, or the handler never sent'
+  out.posts = rec.posts.length
+  out.otherRequests = rec.other
+  out.dialogs = rec.dialogs
+  out.errors = rec.errors
+  results[route] = out
+  await page.close()
 }
-console.log('\n=== survey\n' + JSON.stringify(survey, null, 1))
+console.log(JSON.stringify({ forms: results }, null, 1))
+
+const legal = {}
+for (const route of ['/privacy', '/terms', '/hipaa']) {
+  const { page, rec } = await open(route)
+  legal[route] = await page.evaluate(() => {
+    const box = document.querySelector('.legal')
+    const li = box?.querySelector('li')
+    return {
+      h1: document.querySelector('h1')?.textContent,
+      first: box?.innerText.slice(0, 60),
+      chars: box?.innerText.length ?? 0,
+      h3: box?.querySelectorAll('h3').length ?? 0,
+      bullets: li ? getComputedStyle(li).listStyleType : 'no list',
+      draftNote: !!box?.querySelector('.legal-note'),
+    }
+  })
+  legal[route].errors = rec.errors
+  await page.close()
+}
+console.log(JSON.stringify({ legal }, null, 1))
+
+const video = {}
+{
+  const { page, rec } = await open('/customer-story-legacy-dental-pasadena')
+  const play = await page.$('[data-story-play]')
+  if (play) {
+    await play.click()
+    await wait(1500)
+  }
+  video.story = await page.evaluate(() => ({ iframe: document.querySelector('[data-story-player] iframe')?.src ?? null }))
+  video.story.errors = rec.errors.filter((e) => /Content Security Policy|frame/i.test(e))
+  await page.close()
+}
+{
+  const { page, rec } = await open('/book')
+  const link = await page.$('[data-video]')
+  if (link) {
+    await link.click()
+    await wait(1500)
+  }
+  video.popup = await page.evaluate(() => ({ modal: !!document.querySelector('.bk-video-modal'), iframe: document.querySelector('.bk-video-modal iframe')?.src ?? null }))
+  video.popup.errors = rec.errors.filter((e) => /Content Security Policy|frame/i.test(e))
+  await page.close()
+}
+console.log(JSON.stringify({ video }, null, 1))
 await browser.close()

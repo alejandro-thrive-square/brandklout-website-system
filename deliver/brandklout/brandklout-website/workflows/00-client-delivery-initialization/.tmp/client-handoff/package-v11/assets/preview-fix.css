@@ -1,0 +1,191 @@
+/* Self-contained preview repair. Loaded after the reference design system. */
+/* Reveal effects must never make a section permanently invisible. */
+.motion-ready [data-reveal]{opacity:1;transform:none;}
+.motion-ready [data-reveal].is-visible{animation:bk-section-arrive .65s ease both;}
+@keyframes bk-section-arrive{from{translate:0 12px}to{translate:0 0}}
+.reference-site .nav-links{gap:15px;font-size:11px}
+.reference-site .growth-visual{display:block!important;visibility:visible!important;opacity:1!important;flex:none;padding:12px 18px;height:176px;min-height:176px;background:radial-gradient(ellipse at 85% 5%,#21535488,transparent 70%),#0e2030;overflow:hidden}
+.growth-diagram{width:100%;height:100%;display:block}
+.growth-diagram .growth-dot{transform-box:fill-box;transform-origin:center}
+.motion-ready .growth-visual.is-visible .growth-dot{animation:bk-node-arrive .55s ease both}
+.motion-ready .growth-visual.is-visible .dot-2{animation-delay:.35s}
+.motion-ready .growth-visual.is-visible .dot-3{animation-delay:.7s}
+@keyframes bk-node-arrive{from{scale:.3}to{scale:1}}
+.reference-site .inner-solution-visual>.growth-visual{height:245px;min-height:245px;padding:16px}
+/* The original three phases are restored as a dark, complete section. */
+.reference-site .v5-growth-system{background:radial-gradient(ellipse at 100% 0,#19305255,transparent 55%),#071019;color:#fff}
+.v5-center-head{max-width:870px;margin:0 auto 48px;text-align:center}
+.reference-site .v5-center-head h2{font-size:clamp(38px,4.3vw,60px);color:#fff;line-height:1.06;margin-bottom:22px}
+.reference-site .v5-center-head .kicker{color:#4ee1d2}
+.v5-center-head p{color:#aab9c6;font-size:18px;line-height:1.6;max-width:735px;margin:0 auto}
+.v5-phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.v5-phase{display:flex;flex-direction:column;padding:28px 26px;background:#ffffff05;border:1px solid #ffffff24;border-radius:24px}
+.v5-phase-num{color:#91a5b7;font-size:11px;text-transform:uppercase;letter-spacing:.09em;margin-bottom:25px}
+.reference-site .v5-phase h3{color:white;font-size:26px;line-height:1.15;margin-bottom:16px}
+.v5-phase-copy{color:#9dafbf;font-size:14px;line-height:1.7;min-height:75px}
+.v5-feature-list{list-style:none;margin:28px 0 30px;padding:0;display:grid;gap:15px}
+.v5-feature-list li{padding-left:19px;position:relative;font-size:13px;line-height:1.6;color:#c7d1db}
+.v5-feature-list li:before{content:'+';position:absolute;left:0;color:#4ee1d2;font-weight:700}
+.v5-phase-outcome{border-top:1px solid #ffffff1c;margin-top:auto;padding-top:18px;color:#8ea2b3;font-size:11px}
+.v5-phase-outcome strong{display:block;color:#fff;font-size:13px;line-height:1.55;margin-top:8px}
+/* Founder section: same editorial hierarchy and video/quote split as supplied. */
+.reference-site .v5-founder{background:white}
+.v5-editorial-head{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;margin-bottom:36px}
+.reference-site .v5-editorial-head h2{font-size:clamp(38px,4vw,57px);max-width:560px}
+.v5-editorial-head>p{color:#687b92;line-height:1.7;font-size:18px;padding-bottom:4px}
+.v5-founder-card{display:grid;grid-template-columns:1.35fr 1fr;border:1px solid #dfe7ee;border-radius:26px;overflow:hidden;background:#f7f9fc}
+.v5-founder-film{background:#0c1b29;padding:24px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.reference-site .v5-founder-poster{aspect-ratio:688/383;min-height:0;border:0;border-radius:17px;width:100%}
+.v5-founder-poster>img{object-fit:cover;object-position:center}
+.v5-founder-poster:focus-visible{outline-offset:-5px}
+.v5-founder-film>p{color:white;font-size:12px;font-weight:650;margin:15px 0 4px}
+.v5-founder-quote{padding:32px;align-self:center}
+.v5-founder-quote blockquote{font-size:clamp(23px,2.25vw,31px);font-weight:650;line-height:1.28;letter-spacing:-.035em;color:#071019;font-family:'Manrope',system-ui,sans-serif}
+.v5-founder-quote p{color:#687b92;font-size:14px;line-height:1.7;margin-top:20px}
+.v5-territory{margin-top:24px;padding:30px;border:1px solid #dfe7ee;border-radius:26px;display:grid;grid-template-columns:1fr 1.2fr;align-items:center;gap:44px}
+.reference-site .v5-territory h3{font-size:35px;line-height:1.12;color:#071019;margin-bottom:20px}
+.v5-territory>div>p{color:#687b92;font-size:14px;line-height:1.7;max-width:440px}
+.v5-territory .market-map-visual{width:100%;height:310px;border-radius:19px}
+/* Keep restored sections spacious and remove mismatched legacy text colors. */
+.reference-site .search-shift-copy h2{font-size:clamp(37px,4vw,56px);line-height:1.06}
+.search-shift-copy .lead{margin-top:24px;font-size:17px;line-height:1.65}
+.search-shift-grid{grid-template-columns:1fr 1.05fr;gap:42px}
+.search-signal-panel{padding:22px;gap:12px}
+.search-signal{grid-template-columns:40px minmax(0,1fr) auto;gap:14px;padding:16px;border-radius:17px}
+.search-signal strong{font-size:15px}
+.search-signal span{font-size:12px;line-height:1.6;display:block}
+.search-status{font-size:9px;padding:8px 9px;letter-spacing:0}
+.search-signal:nth-child(even) .search-status{background:#edf2ff;color:#436fea}
+.search-footer-cta{padding:20px;gap:6px 12px}
+.search-footer-cta span{line-height:1.6}
+.agency-head{grid-template-columns:1fr 1.12fr}
+.agency-head h2{max-width:510px}
+.agency-intro{font-size:18px}
+.model-card h3{letter-spacing:-.04em}
+.model-card.muted{background:#eef3f7;box-shadow:none}
+.model-point{padding:20px 0 20px 32px;position:relative}
+.model-point b{font-size:15px}
+.model-point span{font-size:13px}
+.model-point:before{content:'\00d7';position:absolute;left:0;top:20px;background:#e0e7ee;color:#788b9d;height:23px;width:23px;border-radius:6px;text-align:center;line-height:23px}
+.model-point.good:before{content:'\2713';background:#e6f7f3;color:#26866e}
+.model-point.good b:before{content:none}
+/* Explicit dark-theme contrast fixes: no black titles or blank white buttons. */
+.reference-site .relationship-section{background:#f7f9fc}
+.relationship-box{padding:48px;box-shadow:0 24px 60px #07101913}
+.reference-site .relationship-copy h2{font-size:clamp(39px,4.5vw,62px);color:white!important;line-height:1.05}
+.reference-site .relationship-copy .kicker{color:#64e3d8}
+.relationship-copy p{color:#b0c1ce;font-size:17px;line-height:1.7}
+.reference-site .relationship-copy .btn{background:white;color:#071019!important;border:1px solid white;min-width:220px;margin-top:24px}
+.reference-site .relationship-copy .btn:hover{background:#def8f2}
+.relationship-note{padding:25px}
+.relationship-note strong{color:#fff;font-size:24px;line-height:1.2}
+.relationship-note.highlight strong{color:#d7ffb8}
+.relationship-note p{font-size:14px}
+.v5-guarantee-link{font-size:11px;color:#d7ffb8;display:inline-block;margin-top:12px;text-decoration:underline;text-underline-offset:4px}
+/* The requested market-prequalification CTA, including the matching white form. */
+.reference-site .opportunity-section{background:#071019;border:0;color:white}
+.reference-site .opportunity-section .kicker{color:#4ee1d2}
+.reference-site .opportunity-section h2{color:white;font-size:clamp(43px,4.7vw,64px);line-height:1.06}
+.reference-site .opportunity-section .lead{color:#aabac7;font-size:18px;line-height:1.65;margin-top:22px}
+.reference-site .opportunity-section .offer-grid-v2{grid-template-columns:1fr 1fr;gap:65px;align-items:start}
+.reference-site .opportunity-section .offer-form-wrap{padding:0;border:0;border-radius:26px;background:white}
+.reference-site .opportunity-section .form{border:0;box-shadow:none;padding:30px;color:#071019;background:white;border-radius:26px}
+.reference-site .opportunity-section .form h3{color:#071019;font-size:29px;margin-bottom:8px}
+.v5-form-intro{color:#72829a;font-size:13px;margin-bottom:26px}
+.reference-site .opportunity-section .form .fields{margin-top:0;gap:18px 14px}
+.reference-site .opportunity-section .form label{color:#526477;font-size:10px;font-weight:700;text-transform:uppercase}
+.reference-site .opportunity-section .form input,.reference-site .opportunity-section .form select,.reference-site .opportunity-section .form textarea{background:white;border:1px solid #d9e3ed;color:#071019;border-radius:12px;min-height:48px;font-size:14px;width:100%;max-width:100%;padding:12px;font-family:inherit}
+.reference-site .opportunity-section .form textarea{min-height:86px;resize:vertical}
+.reference-site .opportunity-section .form .btn-primary{color:white!important;background:#071019;width:100%;font-size:16px;min-height:54px;margin-top:20px}
+.reference-site .opportunity-section .form-note{color:#72829a;font-size:11px;line-height:1.65;margin-top:15px}
+.v5-availability{display:flex;gap:14px;align-items:center;border:1px solid #ffffff20;background:#ffffff04;border-radius:17px;padding:20px;margin-top:28px;max-width:475px}
+.v5-availability i{display:block;width:9px;height:9px;border-radius:50%;background:#b6f36a;box-shadow:0 0 0 7px #b6f36a10;flex-shrink:0}
+.v5-availability strong{display:block;color:white;font-size:14px}
+.v5-availability span{display:block;color:#8e9eaf;font-size:12px;margin-top:5px}
+.reference-site .opportunity-section .form-status{color:#536273;font-size:12px}
+.reference-site .opportunity-section .form-status a{color:#2254b9;text-decoration:underline}
+/* Navigation and overflow guardrails. */
+.v5-founder-card>*,.v5-territory>*,.v5-editorial-head>*,.search-shift-grid>*,.v5-phases>*{min-width:0}
+@media(max-width:1000px){
+ .reference-site .nav-links{gap:9px;font-size:10px}
+ .reference-site .nav-actions .btn{font-size:10px;padding:0 10px}
+ .v5-phase{padding:23px 19px}
+ .reference-site .v5-phase h3{font-size:23px}
+ .search-shift-grid{gap:26px;grid-template-columns:1fr 1fr}
+ .search-signal{grid-template-columns:32px 1fr}
+ .signal-icon{height:32px;width:32px;font-size:18px}
+ .search-status{grid-column:2/3;justify-self:start}
+ .v5-founder-quote{padding:24px}
+ .v5-founder-quote blockquote{font-size:25px}
+ .relationship-box{padding:34px}
+ .reference-site .opportunity-section .offer-grid-v2{gap:32px}
+}
+@media(max-width:780px){
+ .v5-phases{grid-template-columns:1fr;gap:16px}
+ .v5-phase-copy{min-height:0}
+ .v5-phase{padding:26px}
+ .v5-feature-list{margin:20px 0 24px;gap:12px}
+ .v5-center-head{margin-bottom:28px}
+ .v5-center-head p{font-size:16px}
+ .v5-editorial-head,.v5-founder-card,.v5-territory,.search-shift-grid,.agency-head,.model-compare,.relationship-box,.reference-site .opportunity-section .offer-grid-v2{grid-template-columns:1fr}
+ .v5-editorial-head{gap:20px;margin-bottom:28px}
+ .v5-editorial-head>p{font-size:16px}
+ .v5-founder-film{padding:20px}
+ .v5-founder-quote{padding:28px}
+ .v5-founder-quote blockquote{font-size:27px}
+ .v5-territory{padding:25px;gap:22px}
+ .reference-site .v5-territory h3{font-size:32px}
+ .v5-territory .market-map-visual{height:280px}
+ .search-signal{grid-template-columns:36px 1fr auto}
+ .search-status{grid-column:auto}
+ .relationship-box{padding:30px;gap:27px}
+ .reference-site .relationship-copy h2{font-size:44px}
+ .relationship-copy p{font-size:16px}
+ .reference-site .opportunity-section h2{font-size:47px}
+ .reference-site .opportunity-section h2 br{display:none}
+ .reference-site .opportunity-section .lead{max-width:100%;font-size:16px}
+ .reference-site .opportunity-section .offer-grid-v2{gap:32px}
+ .reference-site .opportunity-section .form{padding:26px}
+ .reference-site .nav-links{font-size:14px}
+}
+@media(max-width:520px){
+ .reference-site .growth-visual{height:194px;min-height:194px;padding:14px}
+ .reference-site .v5-center-head h2{font-size:36px}
+ .v5-center-head p{font-size:14px}
+ .reference-site .v5-editorial-head h2{font-size:38px}
+ .v5-founder-quote{padding:25px 23px}
+ .v5-founder-quote blockquote{font-size:25px}
+ .v5-territory{padding:22px;gap:16px}
+ .v5-territory .market-map-visual{height:242px}
+ .search-signal-panel{padding:14px;gap:10px}
+ .search-signal{padding:13px 11px;gap:10px;grid-template-columns:30px minmax(0,1fr)}
+ .search-status{grid-column:2}
+ .search-signal strong{font-size:14px}
+ .search-signal span{font-size:11px}
+ .search-shift-copy .lead{font-size:15px}
+ .search-footer-cta strong{font-size:15px}
+ .search-footer-cta span{font-size:12px}
+ .search-bullets strong{font-size:14px}
+ .search-bullets span{font-size:13px}
+ .agency-intro{font-size:15px}
+ .model-card{padding:24px}
+ .model-card h3{font-size:25px}
+ .model-card>p{font-size:14px}
+ .model-point{padding-top:18px;padding-bottom:18px}
+ .relationship-box{border-radius:24px;padding:26px 22px}
+ .reference-site .relationship-copy h2{font-size:38px}
+ .relationship-note{padding:21px}
+ .relationship-note strong{font-size:22px}
+ .reference-site .relationship-copy .btn{width:100%;font-size:13px;min-width:0}
+ .reference-site .opportunity-section h2{font-size:41px}
+ .reference-site .opportunity-section .form{padding:25px 20px}
+ .reference-site .opportunity-section .form .fields{grid-template-columns:1fr}
+ .reference-site .opportunity-section .form select{font-size:14px}
+ .v5-availability strong{font-size:12px}
+ .v5-availability span{font-size:11px}
+ .reference-site .nav-actions .btn{font-size:10px;padding:0 11px}
+}
+@media(prefers-reduced-motion:reduce){[data-reveal].is-visible,.growth-dot{animation:none!important}}
+html.reduce-motion [data-reveal].is-visible,html.reduce-motion .growth-dot{animation:none!important}
+
+.reference-site main section[id]{scroll-margin-top:100px}

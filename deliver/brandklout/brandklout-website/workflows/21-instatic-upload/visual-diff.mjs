@@ -60,22 +60,12 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-/* Brandklout v2: seven pages. Written out, and checked against the build's own page list
-   (prepare-source.mjs -> site-src/pages.json) so this gate cannot quietly watch a subset. */
-const ALL = [
-  'index',
-  'survey',
-  'customer-stories-legacy-dental-pasadena',
-  'customer-stories-oceanic-ai-search-growth',
-  'customer-stories-oceanic-future-ready',
-  'customer-stories-ocpao-ai-authority',
-  'customer-stories-omnia-ai-search-growth',
-]
+/* Every page the build has, read from its own list (prepare-source.mjs -> site-src/pages.json).
+   v2 wrote its seven out and checked them against it; v11 has 33, and a hand list that drifts from
+   the build is how a gate goes quietly blind. */
 const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
 const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
-if ([...FILE.keys()].sort().join() !== [...ALL].sort().join()) {
-  throw new Error(`visual-diff's page list does not match the build: build ${[...FILE.keys()].sort().join(', ')}`)
-}
+const ALL = [...FILE.keys()]
 const args = process.argv.slice(2)
 const slugArg = args.find((a) => !a.startsWith('--') && /^(?!\d+$)[a-z0-9/-]+$/.test(a))
 const PAGES = slugArg ? [slugArg] : ALL
@@ -105,7 +95,8 @@ const serve = (...roots) =>
     const key = rel.replace(/^\//, '')
     if (roots.length > 1 && patches.has(key)) {
       const base = roots.map((r) => path.join(r, key)).find((f) => fs.existsSync(f))
-      res.writeHead(200, { 'content-type': 'text/html' })
+      // By extension: since v11 a patch can target a script (patches/assets/site.js.mjs).
+      res.writeHead(200, { 'content-type': MIME[path.extname(key)] ?? 'text/html' })
       return res.end(applyPatches(key, fs.readFileSync(base, 'utf8'), patches))
     }
     const hit = (root) => {
@@ -153,8 +144,20 @@ const VIEW = 900
    > So scroll a real viewport down the page and stitch the tiles. Fixed
    > elements are hidden after the first tile so the navbar does not repeat down
    > the seam — done identically on both sides, so the comparison stays honest. */
+/* THE LIVE SITE RUNS A WIDGET THE BUILD DOES NOT HAVE: sienna-accessibility, loaded site-wide from
+   cdn.jsdelivr.net by the embed-origins plugin's `siteScripts` (added outside this toolkit). It
+   rewrites the font-size of every text element inline, ROUNDED DOWN (`data-asw-org-font-size=64` on a
+   64.8px heading; found 2026-09-14), which moves text on every page with viewport-sized type. That
+   is not the import, so it is blocked on both sides here. KEEP_WIDGET=1 shows the site as visitors see it. */
+async function blockWidget(pg) {
+  if (process.env.KEEP_WIDGET) return
+  await pg.setRequestInterception(true)
+  pg.on('request', (r) => (/cdn\.jsdelivr\.net\/npm\/sienna-accessibility/.test(r.url()) ? r.abort() : r.continue()))
+}
+
 async function shoot(url, file) {
   const pg = await browser.newPage()
+  await blockWidget(pg)
   await pg.setViewport({ width: WIDTH, height: VIEW })
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
   await pg.goto(url, { waitUntil: 'networkidle0', timeout: 120000 })

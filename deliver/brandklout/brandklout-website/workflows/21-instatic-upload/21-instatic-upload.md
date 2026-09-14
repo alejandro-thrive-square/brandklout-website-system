@@ -18,6 +18,70 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: the shared-layout run (v11, 2026-09-14)
+
+**v11 replaces v2.** Sang's `BrandKlout-Complete-Website-v11.zip`, unpacked into
+`client-handoff/package-v11/`: 33 flat `<name>.html` files that ALL link the same six stylesheets
+(`assets/site.css`, `visual.css`, `reference-theme.css`, `preview-fix.css`, `update-v6.css`,
+`stories-v10.css`, in that order) and the same three scripts (`site.js`, then `visual.js` and
+`stories-v10.js` deferred), with no inline `<style>` or `<script>`. `prepare-source.mjs` detects
+that and takes its **shared-layout** branch:
+
+- **No scoping, and the CSS skips the style registry.** It ships verbatim as one code asset,
+  `src/styles/site.css` (push-site.mjs: `ua-defaults.css`, then Sang's six files, then
+  `agency/site.css`). `build-import-input.mjs` sends the converter no CSS at all. The reason: this
+  CSS is exactly what the registry cannot carry. It has `min-width`, compound, `prefers-reduced-motion`
+  and `print` queries (trap 40 orders conditions site-wide), `@keyframes`, `html.reduce-motion …`
+  selectors, and six files that override each other in source order. Verbatim keeps his cascade,
+  and the registry's lossy traps (1, 19, 21, 32, 34, 35) cannot occur. Text, links and images stay
+  editable as nodes; the Styles panel is empty. `css-parity.mjs` and `verify-live.mjs` check that the
+  published userStyles contain the local `site.css` byte for byte.
+- **Instatic's reset is undone first** (`instatic-reset-revert.css`, prepended by push-site). The
+  published page loads `reset-*.css` before the code asset, and its zero-specificity `:where(*)
+  { margin: 0; padding: 0 }`, `img, svg { display: block }`, `button { background: none; border: 0 }`,
+  `a { color: inherit }` and list rules took away every browser default Sang's CSS relied on. The
+  first v11 publish was 12–17px shorter on every page and 58–84px shorter on three
+  (`visual-diff.mjs`). Each rule is reverted with `revert` at the same zero specificity: it beats the
+  reset by loading later and loses to every rule of Sang's. It replaces v2's `ua-defaults.css`, which
+  restored only p/h margins. Re-check it against the live reset when Instatic updates.
+- **Fonts need nothing extra.** Instatic writes the installed fonts' `@font-face` rules into
+  `/_instatic/css/framework-*.css` on every page, registry or not. The installed files are Google's
+  variable woff2s, the same bytes the local build loads, so the fonts render identically (checked with
+  CDP `getPlatformFontsForNode`). `verify-live.mjs` fails any quoted `font-family` with no `@font-face`
+  in the page's stylesheets. Grep for `@font-face` loosely: a pattern expecting `@font-face{` missed
+  them once and sent this run after a defect that did not exist.
+- **One script asset**: the three files concatenated in their order, after the trap 41 repairs, which
+  are now keyed by route (`/authority-score`'s 42 radios carry `form="assessment-lead-form"`, which
+  `base.radio` drops).
+- **Images**: every `<img data-online-src>` (a data: placeholder that visual.js swaps for the online
+  photo) is downloaded and becomes the real `src` with its `data-online-alt`. The originals live on
+  brandklout.com's Webflow CDN (`cdn.prod.website-files.com`), which goes away when the domain moves.
+  Local `assets/…` images are copied. **A `data:` URI image is decoded into an `inline-<hash>` file**,
+  because the importer drops it and publishes `<img src="#" alt="">`. That happened to six specialty
+  heroes on 2026-09-14. All go through `upload-media.mjs` and `set-alt.mjs` as before.
+- **Not pages**: `OPEN-ME.html` (Sang's self-contained preview, built by his `tools/build_preview.py`).
+  **Aliases**: a top-level page byte-identical to another is an alias of the one the package links
+  to (`revenue-attribution.html` = `lead-to-collection.html`, linked from nowhere). 32 pages publish.
+- **Agency edits** (`patches/`, whose `find` may now be a RegExp):
+  - `patches/assets/site.js.mjs`: every `form[data-lead-form]` (home, `/market-opportunity`,
+    `/authority-score`) goes to **FormSubmit -> sales@brandklout.com**. Sang's handler already POSTs
+    JSON to `BK_CONFIG.formEndpoint`; the patch sets it, adds `_subject` / `_template`, turns the
+    assessment's JSON answers into one row per question, asks for a JSON reply, and treats a 200
+    without `success: "true"` as a failure (FormSubmit answers the pre-activation POST that way).
+    Replace it with the GoHighLevel endpoint when that is ready.
+  - `patches/privacy|terms|hipaa.html.mjs`: the full pages keep Sang's layout; the body is
+    brandklout.com's own legal text (`patches/assets/brandklout-com-legal.json`), in place of his
+    "Draft … for counsel review" templates. The v2 home pop-up is retired (`retired-v2/`).
+- **Retired from v2**: `/survey` (the SheetDB rebuild) and the five `/customer-stories-*` routes. v11's
+  assessment is `/authority-score` and its stories are `/customer-story-*`. `verify-live.mjs` checks
+  the six old routes 404.
+- **The live site runs a widget the build does not**: sienna-accessibility, loaded site-wide by the
+  plugin's `siteScripts`. It rewrites text elements' font sizes inline, rounded down (64.8px -> 64px).
+  `visual-diff` and `compare-live` block it so they measure the import; `KEEP_WIDGET=1` keeps it.
+- The gates read their page lists from `pages.json` (`verify-live`, `visual-diff`, `compare-live`).
+  `form-probe.mjs` was rewritten for v11: the three forms, the assessment, the legal pages, and both
+  video players.
+
 ## Brandklout: the package run (v2, 2026-09-11)
 
 v1 (the same morning) was one HTML file, `preview (1).html`, published as one page. **v2 is a

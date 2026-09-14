@@ -37,6 +37,7 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
@@ -71,7 +72,12 @@ const { loadPatches, applyPatches } = await import('./patches.mjs')
 const patches = await loadPatches()
 const read = (rel) => fs.readFileSync(path.join(overlaid.has(rel) ? OVERLAY : PKG, rel), 'utf8')
 const all = [...new Set([...walkDir(PKG), ...overlaid])]
-const htmlFiles = all.filter((f) => /\.html?$/i.test(f)).sort()
+/* NOT PAGES. v11 ships `OPEN-ME.html`, a 1.3MB self-contained preview that Sang's own
+   `tools/build_preview.py` builds by inlining every page, stylesheet and image into one file (his
+   README: "It deliberately excludes OPEN-ME.html and START-HERE.html from the page registry"). It is a
+   viewer for the package, not a page of the site. */
+const NOT_PAGES = new Set(['OPEN-ME.html', 'START-HERE.html'])
+const htmlFiles = all.filter((f) => /\.html?$/i.test(f) && !NOT_PAGES.has(f)).sort()
 if (!htmlFiles.includes('index.html')) refuse('the package has no top-level index.html')
 
 /* ALIASES. v2 ships `preview (1).html` BYTE-IDENTICAL to `index.html`, and every story and the
@@ -86,6 +92,25 @@ for (const f of htmlFiles) {
     continue
   }
   pageFiles.push(f)
+}
+/* DUPLICATE PAGES (v11, 2026-09-14). `revenue-attribution.html` is byte-identical to
+   `lead-to-collection.html` (same <title>, same copy) and no page links to it. Published, that is
+   two pages under one title. A top-level page identical to another one is an alias of whichever of
+   the two the rest of the package links to, the same way `preview (1).html` is an alias of `/`. */
+{
+  const byText = new Map()
+  for (const f of pageFiles) byText.set(read(f), [...(byText.get(read(f)) ?? []), f])
+  for (const group of byText.values()) {
+    if (group.length < 2) continue
+    if (group.some((f) => f.includes('/'))) refuse(`identical nested pages, alias them by hand: ${group.join(', ')}`)
+    const linkedFrom = (f) => pageFiles.filter((p) => !group.includes(p) && read(p).includes(`href="${f}`)).length
+    const keep = [...group].sort((a, b) => linkedFrom(b) - linkedFrom(a) || a.localeCompare(b))[0]
+    for (const f of group) {
+      if (f === keep) continue
+      aliases[f] = keep
+      pageFiles.splice(pageFiles.indexOf(f), 1)
+    }
+  }
 }
 
 /* FLAT SLUGS (trap 39). `core/page-tree/slugs.ts` accepts `customer-stories/omnia-ai-search-growth`
@@ -246,6 +271,212 @@ function droppedAttributes(html, file) {
     }
   }
   return out
+}
+
+/* --- SHARED LAYOUT (v11, 2026-09-14) --------------------------------------------------------
+   v11 is 33 flat pages that all link the SAME six stylesheets in the same order and the same three
+   `<script src>` files, with no inline <style> or <script>. Nothing disagrees between pages, so
+   nothing is scoped (the v2 path below stays for a package with per-page stylesheets).
+
+   AND THE CSS SKIPS THE STYLE REGISTRY ALTOGETHER. It ships VERBATIM as a code asset (push-site.mjs),
+   because this CSS is exactly what the registry conversion cannot carry: `min-width`, compound,
+   `prefers-reduced-motion` and `print` queries (trap 40 orders conditions site-wide, and the v2
+   media sort refuses anything but one max-width), `@keyframes`, `html.reduce-motion …` selectors, and
+   six stylesheets that override one another in source order (`preview-fix`, `update-v6`,
+   `stories-v10` are patch layers over the first three). Verbatim keeps Sang's cascade exactly as he
+   wrote it, and traps 1, 19, 21, 32, 34 and 35 (the registry's lossy values) cannot happen. Text,
+   links and images stay editable as page nodes; the cost is that the Styles panel shows no rules.
+
+   Images: local `assets/…` files are copied into final-site/assets; every `data-online-src` photo
+   (Sang's pages carry a data: placeholder that visual.js swaps for the online original when it loads)
+   is downloaded and becomes the real `src`, with its `data-online-alt`. That is what a visitor sees
+   anyway, and it stops the site depending on brandklout.com's Webflow CDN, which goes away when the
+   domain moves here. */
+const sheetsOf = (html) =>
+  [...html.matchAll(/<link\b[^>]*>/gi)]
+    .map((m) => m[0])
+    .filter((t) => /rel=["']?stylesheet/i.test(t))
+    .map((tag) => ({ tag, href: (tag.match(/href=["']([^"']+)["']/i) ?? [])[1] }))
+    .filter((l) => l.href && !/^(https?:)?\/\//i.test(l.href))
+const scriptsOf = (html) => [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => !/type=["']?application\/(ld\+)?json/i.test(m[1]))
+const srcOf = (attrs) => (attrs.match(/\bsrc=["']([^"']+)["']/i) ?? [])[1]
+const layoutOf = (html) => {
+  if (/<style\b/i.test(html)) return null
+  const scripts = scriptsOf(html)
+  if (scripts.some((m) => !srcOf(m[1]))) return null
+  const sheets = sheetsOf(html)
+  if (!sheets.length) return null
+  return sheets.map((s) => s.href).join(',') + ' | ' + scripts.map((m) => srcOf(m[1])).join(',')
+}
+const layouts = new Set(pageFiles.map((f) => layoutOf(read(f))))
+if (pageFiles.length > 1 && layouts.size === 1 && !layouts.has(null)) {
+  await buildShared()
+  process.exit(0)
+}
+
+function decodeEntities(s) {
+  return s.replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+}
+
+async function buildShared() {
+  const first = read(pageFiles[0])
+  const sheetRels = sheetsOf(first).map((s) => path.posix.normalize(s.href))
+  const scriptRels = scriptsOf(first).map((m) => path.posix.normalize(srcOf(m[1])))
+  const patched = (rel) => {
+    try {
+      return applyPatches(rel, read(rel), patches)
+    } catch (e) {
+      refuse(e.message)
+    }
+  }
+
+  let css = sheetRels.map((rel) => `/* ===== ${rel} (Sang, ${patches.has(rel) ? `patched by patches/${rel}.mjs` : 'verbatim'}) ===== */\n${patched(rel)}\n`).join('\n')
+  const agencyCss = path.join(HERE, 'agency', 'site.css')
+  if (fs.existsSync(agencyCss)) css += '\n' + fs.readFileSync(agencyCss, 'utf8')
+  const bare = css.replace(/\/\*[\s\S]*?\*\//g, ' ')
+  // The asset is served from /_instatic/…, so a relative url() would 404 there, silently (trap 14).
+  for (const m of bare.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)) {
+    if (!/^(data:|https?:)/.test(m[2])) refuse(`a relative url(${m[2]}) in the CSS; map it to the media library before shipping it verbatim`)
+  }
+  if (/@import\b/.test(bare)) refuse('@import in the CSS: inline it')
+
+  const remoteName = (src) => {
+    const u = new URL(src)
+    if (u.hostname === 'i.ytimg.com') return localImageName(src)
+    if (u.hostname === 'cdn.prod.website-files.com') {
+      // `<24-hex id>_<name>`: drop the id, keep a filename the media library will accept.
+      return 'wf-' + decodeURIComponent(path.posix.basename(u.pathname)).replace(/^[0-9a-f]{24}_/, '').replace(/[^A-Za-z0-9._-]+/g, '-').replace(/-+/g, '-')
+    }
+    refuse(`remote image from a host this step does not know how to name: ${src}`)
+  }
+  const localAssets = new Map() // package path -> asset name
+  const remote = new Map() // url -> asset name
+  const claim = (map, key, name) => {
+    for (const m of [localAssets, remote]) for (const [k, v] of m) if (v === name && k !== key) refuse(`two images would both be assets/${name}: ${k} and ${key}`)
+    map.set(key, name)
+    return name
+  }
+
+  const out = []
+  const repairs = {}
+  const seo = { pages: {} }
+  let placeholders = 0
+  for (const file of pageFiles) {
+    const route = routeOf(file)
+    if (!SLUG_OK.test(route)) refuse(`${file} -> slug "${route}" is not a valid Instatic page slug`)
+    const html = patched(file)
+    let page = html
+    const sheets = sheetsOf(page)
+    // The same two tags the v2 path writes (LINK / SCRIPT below, not yet initialised at this point).
+    page = page.replace(sheets[0].tag, () => '<link rel="stylesheet" href="/assets/site.css">')
+    for (const s of sheets.slice(1)) page = page.replace(s.tag, '')
+    for (const m of scriptsOf(page)) page = page.replace(m[0], '')
+    page = page.replace(/<\/body>/i, '<script type="module" src="/assets/site.js"></script>\n</body>')
+    // The favicon is a <head> tag the import drops (trap 31), and its relative href is not a page.
+    page = page.replace(/<link\b[^>]*\brel="icon"[^>]*>/gi, '')
+    page = page.replace(/<img\b[^>]*>/gi, (tag) => {
+      const a = attrsOf(tag)
+      if (a['data-online-src']) {
+        const name = claim(remote, a['data-online-src'], remoteName(a['data-online-src']))
+        let t = tag.replace(/\sdata-online-(?:src|alt)="[^"]*"/g, '').replace(/\ssrc="[^"]*"/, () => ` src="/assets/${name}"`)
+        if (a['data-online-alt'] !== undefined) t = t.replace(/\salt="[^"]*"/, () => ` alt="${a['data-online-alt']}"`)
+        return t
+      }
+      const src = a.src ?? ''
+      /* A data: URI IMAGE IS DROPPED BY THE IMPORTER. FOUND 2026-09-14 by visual-diff.mjs: the six
+         specialty pages' hero illustrations (inline data: images with no online original) published
+         as `<img src="#" alt="">`, alt and size gone. So each is decoded into a real file, named by
+         its content hash, and goes through the media library like any other image. */
+      if (src.startsWith('data:')) {
+        placeholders++
+        const m = src.match(/^data:(image\/[a-z0-9.+-]+)(;[^,]*)?,(.*)$/is)
+        if (!m) refuse(`${file}: a data: image that is not image/*: ${src.slice(0, 60)}`)
+        const ext = { 'image/svg+xml': 'svg', 'image/png': 'png', 'image/jpeg': 'jpg', 'image/webp': 'webp', 'image/gif': 'gif' }[m[1].toLowerCase()]
+        if (!ext) refuse(`${file}: a data: image of type ${m[1]}, which upload-media.mjs does not handle`)
+        const bytes = /;base64/i.test(m[2] ?? '') ? Buffer.from(m[3], 'base64') : Buffer.from(decodeURIComponent(m[3]), 'utf8')
+        const name = `inline-${crypto.createHash('sha256').update(bytes).digest('hex').slice(0, 10)}.${ext}`
+        fs.mkdirSync(IMG_CACHE, { recursive: true })
+        if (!fs.existsSync(path.join(IMG_CACHE, name))) fs.writeFileSync(path.join(IMG_CACHE, name), bytes)
+        claim(remote, src, name) // copied from the cache into final-site/assets with the downloads
+        return tag.replace(`src="${src}"`, () => `src="/assets/${name}"`)
+      }
+      if (/^https?:/i.test(src)) return tag.replace(`src="${src}"`, () => `src="/assets/${claim(remote, src, remoteName(src))}"`)
+      const rel = path.posix.normalize(path.posix.join(path.posix.dirname(file), src))
+      if (!fs.existsSync(path.join(PKG, rel))) refuse(`${file}: image ${src} is not in the package`)
+      return tag.replace(`src="${src}"`, () => `src="/assets/${claim(localAssets, rel, path.posix.basename(rel))}"`)
+    })
+    if (/<(?:img|source)\b[^>]*\ssrcset=/i.test(page)) refuse(`${file}: srcset is not handled`)
+
+    const lost = droppedAttributes(html, file)
+    if (lost.length) repairs[route === 'index' ? '/' : `/${route}`] = lost
+
+    const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1].trim()
+    const descTag = html.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0]
+    const description = descTag ? attrsOf(descTag).content : undefined
+    if (!title || !description) refuse(`${file}: no <title> or no meta description`)
+    seo.pages[route] = { title: decodeEntities(title), description: decodeEntities(description) }
+    out.push({ slug: route, file, out: page })
+  }
+
+  const jsParts = []
+  if (Object.keys(repairs).length) {
+    jsParts.push(
+      `/* ---- import repairs, generated by prepare-source.mjs: the attributes Instatic's form-control\n` +
+        `   modules drop (trap 41), put back per page before any page script runs. A no-op locally. ---- */\n` +
+        `{\n` +
+        `  const lost = ${JSON.stringify(repairs)}\n` +
+        `  const here = location.pathname.replace(/\\.html$/, '').replace(/\\/index$/, '/') || '/'\n` +
+        `  for (const [sel, nth, attrs] of lost[here] ?? []) {\n` +
+        `    const el = document.querySelectorAll(sel)[nth]\n` +
+        `    if (!el) { console.warn('import repair: nothing matches', sel, nth); continue }\n` +
+        `    for (const [k, v] of Object.entries(attrs)) if (el.getAttribute(k) !== v) el.setAttribute(k, v)\n` +
+        `  }\n` +
+        `}`,
+    )
+  }
+  for (const rel of scriptRels) {
+    jsParts.push(`/* ---- ${rel} (Sang, ${patches.has(rel) ? `patched by patches/${rel}.mjs` : 'verbatim'}). Instatic has one script asset (trap 17); order kept. ---- */\n${patched(rel)}`)
+  }
+
+  fs.rmSync(SITE, { recursive: true, force: true })
+  fs.mkdirSync(path.join(FINAL, 'assets'), { recursive: true })
+  fs.mkdirSync(CSS_SRC, { recursive: true }) // empty: nothing for push-site to harvest, the CSS is verbatim
+  fs.mkdirSync(IMG_CACHE, { recursive: true })
+  for (const p of out) fs.writeFileSync(path.join(FINAL, p.file), p.out)
+  fs.writeFileSync(path.join(FINAL, 'assets', 'site.css'), css)
+  fs.writeFileSync(path.join(FINAL, 'assets', 'site.js'), jsParts.join('\n\n') + '\n')
+  for (const [rel, name] of localAssets) fs.copyFileSync(path.join(PKG, rel), path.join(FINAL, 'assets', name))
+  for (const [src, name] of remote) {
+    const cached = path.join(IMG_CACHE, name)
+    if (!fs.existsSync(cached)) {
+      const r = await fetch(src)
+      const type = r.headers.get('content-type') ?? ''
+      if (!r.ok || !type.startsWith('image/')) refuse(`${src} -> ${r.status} ${type}`)
+      fs.writeFileSync(cached, Buffer.from(await r.arrayBuffer()))
+    }
+    fs.copyFileSync(cached, path.join(FINAL, 'assets', name))
+  }
+  fs.writeFileSync(path.join(SITE, 'site-src', 'seo.json'), JSON.stringify(seo, null, 2) + '\n')
+  fs.writeFileSync(
+    path.join(SITE, 'site-src', 'pages.json'),
+    JSON.stringify(
+      { package: path.basename(PKG), layout: 'shared', css: 'verbatim', overlay: [...overlaid], aliases, notPages: [...NOT_PAGES].filter((f) => all.includes(f)), pages: out.map(({ slug, file }) => ({ slug, file, scope: null })) },
+      null,
+      2,
+    ) + '\n',
+  )
+
+  console.log(`package  ${path.basename(PKG)}: SHARED layout, ${out.length} page(s), not pages: ${[...NOT_PAGES].filter((f) => all.includes(f)).join(', ') || '-'}`)
+  for (const [rel, list] of patches) if (all.includes(rel)) console.log(`patches  ${rel}: ${list.length} applied`)
+  console.log(`css      ${sheetRels.join(' + ')}${fs.existsSync(agencyCss) ? ' + agency/site.css' : ''} = ${(css.length / 1024).toFixed(1)}KB, verbatim`)
+  console.log(`js       ${scriptRels.join(' + ')} = ${(jsParts.join('').length / 1024).toFixed(1)}KB`)
+  for (const [route, lost] of Object.entries(repairs)) {
+    console.log(`repairs  ${route}: ${lost.length} element(s)`)
+    for (const [sel, nth, attrs] of lost.slice(0, 6)) console.log(`    ${sel}${nth ? `[${nth}]` : ''}  ${JSON.stringify(attrs)}`)
+    if (lost.length > 6) console.log(`    … and ${lost.length - 6} more`)
+  }
+  console.log(`images   ${localAssets.size} local, ${remote.size} downloaded (${[...remote.values()].join(', ')}), ${placeholders} data: image(s) decoded into inline-<hash> files (the importer drops data: srcs)`)
+  for (const p of out) console.log(`  ${p.slug.padEnd(40)} ${seo.pages[p.slug].title}`)
 }
 
 /* --- pages --------------------------------------------------------------------------------- */

@@ -1,0 +1,5 @@
+# Sang's self-contained preview: every page, stylesheet and image inlined into one HTML file
+# (1.3MB in v11, built by his tools/build_preview.py). It is media in an .html wrapper, and the
+# pages it is built from are committed beside it. See README.md.
+package-*/OPEN-ME.html
+package-*/START-HERE.html

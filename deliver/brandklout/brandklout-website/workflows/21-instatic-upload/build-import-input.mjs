@@ -73,14 +73,44 @@ const manifest = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'pages.j
 // `/customer-stories-<name>`, because the pages table routes on a slug with `-` for `/` whatever
 // the save accepted (trap 39). `title` is only the admin label; push-site.mjs publishes the page's
 // own <title> from seo.json.
+// v11 (2026-09-14): 33 flat pages, `<name>.html` -> `/<name>`. This REPLACES v2: in replace mode the
+// v2 slugs absent here (`survey`, `customer-stories-*`) are deleted on the next apply, deliberately.
+// v11's own 21-question assessment is `authority-score`; nothing in v11 links to /survey.
 const PAGES = [
   { slug: 'index', title: 'Home' },
-  { slug: 'survey', title: 'Growth Survey' },
-  { slug: 'customer-stories-legacy-dental-pasadena', title: 'Story: Legacy Dental Pasadena' },
-  { slug: 'customer-stories-oceanic-ai-search-growth', title: 'Story: Oceanic Dental (AI search)' },
-  { slug: 'customer-stories-oceanic-future-ready', title: 'Story: Oceanic Dental (future-ready)' },
-  { slug: 'customer-stories-ocpao-ai-authority', title: 'Story: OCPAO Implant Courses' },
-  { slug: 'customer-stories-omnia-ai-search-growth', title: 'Story: Omnia Dental' },
+  { slug: 'solutions', title: 'Solutions' },
+  { slug: 'ai-search-authority', title: 'Solution: AI Search Authority' },
+  { slug: 'local-seo-maps', title: 'Solution: Local SEO & Maps' },
+  { slug: 'reputation-engine', title: 'Solution: Reputation Engine' },
+  { slug: 'conversion-websites', title: 'Solution: Conversion Websites' },
+  // `revenue-attribution.html` is a byte-identical copy of lead-to-collection that nothing links to:
+  // an alias (prepare-source.mjs), not a page.
+  { slug: 'lead-to-collection', title: 'Solution: Lead to Collection' },
+  { slug: 'ai-growth-engine', title: 'AI Growth Engine' },
+  { slug: 'specialties', title: 'Specialties' },
+  { slug: 'dental-implant-marketing', title: 'Specialty: Dental Implants' },
+  { slug: 'full-arch-marketing', title: 'Specialty: Full Arch' },
+  { slug: 'cosmetic-dentist-marketing', title: 'Specialty: Cosmetic' },
+  { slug: 'general-dentistry-marketing', title: 'Specialty: General Dentistry' },
+  { slug: 'multi-location-dental-marketing', title: 'Specialty: Multi-location' },
+  { slug: 'oral-surgery-marketing', title: 'Specialty: Oral Surgery' },
+  { slug: 'orthodontics-invisalign-marketing', title: 'Specialty: Orthodontics' },
+  { slug: 'periodontist-marketing', title: 'Specialty: Periodontics' },
+  { slug: 'prosthodontist-marketing', title: 'Specialty: Prosthodontics' },
+  { slug: 'customer-stories', title: 'Customer Stories' },
+  { slug: 'customer-story-legacy-dental-pasadena', title: 'Story: Legacy Dental Pasadena' },
+  { slug: 'customer-story-ava-dental-launch', title: 'Story: AVA Dental' },
+  { slug: 'customer-story-ocpao-ai-authority', title: 'Story: OCPAO Implant Courses' },
+  { slug: 'customer-story-oceanic-ai-search-growth', title: 'Story: Oceanic Dental (AI search)' },
+  { slug: 'customer-story-oceanic-future-ready', title: 'Story: Oceanic Dental (future-ready)' },
+  { slug: 'customer-story-omnia-ai-search-growth', title: 'Story: Omnia Dental' },
+  { slug: 'market-opportunity', title: 'Market Prequalification (form)' },
+  { slug: 'authority-score', title: 'Authority Score (21-question assessment)' },
+  { slug: 'book', title: 'Book a Call' },
+  { slug: 'guarantee', title: '60-Day Guarantee' },
+  { slug: 'privacy', title: 'Privacy Policy' },
+  { slug: 'terms', title: 'Terms' },
+  { slug: 'hipaa', title: 'HIPAA & Data Handling' },
 ]
 
 const problems = []
@@ -271,6 +301,11 @@ css = css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, (whole, q, ref) => {
     problems.push(`site.css: url(${ref}) has no media-map entry and would 404 once published`)
   }
 }
+
+/* The shared layout (v11) ships its CSS verbatim as a code asset (push-site.mjs), not through the
+   registry, so the converter gets none. Classes on the markup then link to bare, style-less class
+   rules, which is what they are: the styling lives in the code asset. */
+if (manifest.css === 'verbatim') css = ''
 
 if (problems.length) {
   console.error('REFUSING to build the payload:\n  ' + problems.join('\n  '))

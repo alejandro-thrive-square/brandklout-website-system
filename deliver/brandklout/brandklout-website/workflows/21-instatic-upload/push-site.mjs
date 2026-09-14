@@ -489,6 +489,24 @@ const tokensCss =
     )
     .join('')
 
+/* THE SHARED LAYOUT (v11, 2026-09-14) SHIPS SANG'S CSS VERBATIM, here, after the browser defaults.
+   prepare-source.mjs explains why; build-import-input.mjs then sends the converter no CSS, so the
+   registry is empty and this asset is the whole stylesheet. It is served last in the cascade
+   (reset -> framework -> style -> userStyles), after Instatic's reset, which is where a page's own
+   stylesheet belongs. One style asset, so the path-order tie-break between assets never applies. */
+const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
+const VERBATIM = MANIFEST.css === 'verbatim'
+const STYLE_PATH = VERBATIM ? 'src/styles/site.css' : 'src/styles/tokens.css'
+// Verbatim: Instatic's reset undone first (instatic-reset-revert.css; it replaces ua-defaults.css,
+// which restored only p/h margins), then the stylesheet. There are no harvested tokens to carry:
+// site-src/css is empty in this layout, so tokensCss would only be its banner and ua-defaults.
+const styleAsset = VERBATIM
+  ? fs.readFileSync(path.join(HERE, 'instatic-reset-revert.css'), 'utf8') +
+    '\n/* ===== the site stylesheet, verbatim (prepare-source.mjs, shared layout) ===== */\n' +
+    fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.css'), 'utf8')
+  : tokensCss
+if (VERBATIM) console.log(`style      ${STYLE_PATH}: ${(styleAsset.length / 1024).toFixed(1)}KB (Instatic's reset reverted + Sang's CSS, verbatim)`)
+
 /* A token that is declared and never reaches the asset is the failure this
    whole block exists to stop, so assert the ones the layout cannot survive
    without rather than trusting the harvest. */
@@ -593,19 +611,25 @@ const now = Date.now()
   )
 }
 
+/* Fonts: nothing to do here. Instatic writes the @font-face rules for its installed fonts
+   (install-fonts.mjs, site.settings.fonts) into /_instatic/css/framework-*.css on every page, registry
+   or not; verify-live.mjs checks every quoted family has one. (2026-09-14: a grep for `@font-face{`
+   missed them there and suggested otherwise; generating a second set here was reverted.) */
 const shell = {
   ...site,
   styleRules: converted.styleRules,
-  ...(converted.conditions.length ? { conditions: converted.conditions } : {}),
+  // Verbatim CSS (v11) converts no rules, so there are no conditions; replace the previous build's
+  // rather than carry them forward from `site` as orphans.
+  ...(converted.conditions.length || VERBATIM ? { conditions: converted.conditions } : {}),
   files: [
     ...(site.files ?? []).filter(
-      (f) => f.path !== 'src/scripts/site.js' && f.path !== 'src/styles/tokens.css',
+      (f) => f.path !== 'src/scripts/site.js' && f.path !== 'src/styles/tokens.css' && f.path !== 'src/styles/site.css',
     ),
     {
       id: nid(),
-      path: 'src/styles/tokens.css',
+      path: STYLE_PATH,
       type: 'style',
-      content: tokensCss,
+      content: styleAsset,
       createdAt: now,
       updatedAt: now,
     },

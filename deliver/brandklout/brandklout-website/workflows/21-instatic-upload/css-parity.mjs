@@ -174,6 +174,19 @@ let liveCss = ''
 for (const h of hrefs) liveCss += '\n' + (await (await fetch(REMOTE + h)).text())
 console.log(`live stylesheets: ${hrefs.map((h) => h.split('/').pop()).join(', ')}`)
 
+/* v11's shared layout ships the CSS VERBATIM as a code asset (prepare-source.mjs). Then the direct
+   question is whether the published userStyles carry the local file byte for byte; if they do, every
+   declaration arrived by construction. If not, fall through to the declaration check below. */
+if (manifest.css === 'verbatim') {
+  const want = localCss.replace(/\r\n/g, '\n')
+  if (liveCss.replace(/\r\n/g, '\n').includes(want)) {
+    console.log(`\nverbatim: the published CSS contains the local site.css byte for byte (${(want.length / 1024).toFixed(1)}KB)`)
+    console.log('\nFAIL  none — every declared property reached the published CSS')
+    process.exit(0)
+  }
+  console.log('\nverbatim: the published CSS does NOT contain the local site.css as one block; checking declarations')
+}
+
 const L = index(localCss)
 const R = index(liveCss)
 

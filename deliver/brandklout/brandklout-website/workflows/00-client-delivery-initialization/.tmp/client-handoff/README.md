@@ -10,6 +10,12 @@ Drop the source material here, once, exactly as received.
   stylesheets. The zip is kept as received (gitignored). It is unpacked, never over itself, into
   **`package-v2/`**, which is the source `21-instatic-upload/prepare-source.mjs` reads. Its
   `preview (1).html` is byte-identical to its `index.html`. The v1 file above stays as it was.
+- **`BrandKlout-Complete-Website-v11.zip`** (2026-09-14, v11, **replaces v2**): 33 flat pages
+  sharing six stylesheets and three scripts, plus Sang's own README, CHANGELOG, QA summary and
+  `tools/`. Kept as received (gitignored), unpacked into **`package-v11/`**, which is what
+  `prepare-source.mjs package-v11` reads (its shared-layout branch). Its media and
+  `OPEN-ME.html` (a 1.3MB self-contained preview with every image inlined) are gitignored; the
+  pages, CSS, JS and notes are committed.
 - Anything else Sang sends that belongs to the first handoff (logo files, brand notes, the
   compliance request itself) goes here too. Later material goes in the `.tmp/` of the workflow
   that uses it.

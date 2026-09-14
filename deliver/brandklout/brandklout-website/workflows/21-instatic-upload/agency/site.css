@@ -1,0 +1,8 @@
+/* ===== agency additions, appended after Sang's stylesheets by prepare-source.mjs (shared layout) =====
+   The legal pages carry brandklout.com's text (patches/privacy|terms|hipaa.html.mjs), which uses
+   bulleted lists. Sang's `.legal ul` sets only padding, and Instatic's reset stylesheet removes list
+   bullets on the published page only (trap 43), so the bullets are declared outright. */
+.legal ul { list-style-type: disc; }
+.legal ol { list-style-type: decimal; }
+.legal li { margin-top: 6px; }
+.legal h3:first-child { margin-top: 0; }

@@ -81,21 +81,10 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-/* Brandklout v2: seven pages, written out and checked against the build's page list. */
-const ALL = [
-  'index',
-  'survey',
-  'customer-stories-legacy-dental-pasadena',
-  'customer-stories-oceanic-ai-search-growth',
-  'customer-stories-oceanic-future-ready',
-  'customer-stories-ocpao-ai-authority',
-  'customer-stories-omnia-ai-search-growth',
-]
+/* Every page the build has, from its own list (see visual-diff.mjs for why it is no longer hand-written). */
 const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
 const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
-if ([...FILE.keys()].sort().join() !== [...ALL].sort().join()) {
-  throw new Error(`compare-live's page list does not match the build: build ${[...FILE.keys()].sort().join(', ')}`)
-}
+const ALL = [...FILE.keys()]
 const slugArg = args.find((a) => /^(?!\d+$)[a-z0-9/-]+$/.test(a))
 const PAGES = slugArg ? [slugArg] : ALL
 
@@ -296,8 +285,17 @@ const RUNTIME_PROBE = () => {
   }
 }
 
+/* The live site's sienna-accessibility widget (plugin `siteScripts`) rewrites font sizes inline,
+   rounded down; it is not the import, so it is blocked. See visual-diff.mjs. KEEP_WIDGET=1 keeps it. */
+async function blockWidget(pg) {
+  if (process.env.KEEP_WIDGET) return
+  await pg.setRequestInterception(true)
+  pg.on('request', (r) => (/cdn\.jsdelivr\.net\/npm\/sienna-accessibility/.test(r.url()) ? r.abort() : r.continue()))
+}
+
 async function capture(browser, url, width, height, withJs, runtime = withJs) {
   const pg = await browser.newPage()
+  await blockWidget(pg)
   await pg.setJavaScriptEnabled(withJs)
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
   await pg.setViewport({ width, height })
