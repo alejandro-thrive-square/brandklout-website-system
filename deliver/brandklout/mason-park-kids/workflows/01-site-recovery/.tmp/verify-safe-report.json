@@ -1,11 +1,11 @@
 {
-  "verifiedAt": "2026-08-27T23:43:36.890Z",
+  "verifiedAt": "2026-09-15T00:19:51.166Z",
   "ok": true,
   "checks": [
     {
       "name": "no executable files",
       "ok": true,
-      "detail": "779 files scanned"
+      "detail": "1562 files scanned"
     },
     {
       "name": "no unexpected archives",
@@ -15,22 +15,27 @@
     {
       "name": "no injection markers",
       "ok": true,
-      "detail": "40 pages clean"
+      "detail": "41 pages clean, decoded blobs included"
+    },
+    {
+      "name": "no obfuscated inline loader",
+      "ok": true,
+      "detail": "41 pages"
     },
     {
       "name": "no external <script>",
       "ok": true,
-      "detail": "40 pages"
+      "detail": "41 pages"
     },
     {
       "name": "no external <iframe>",
       "ok": true,
-      "detail": "40 pages"
+      "detail": "41 pages"
     },
     {
       "name": "no absolute URLs",
       "ok": true,
-      "detail": "40 pages fully root-relative"
+      "detail": "41 pages fully root-relative"
     },
     {
       "name": "content recovered",
