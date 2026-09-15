@@ -12,6 +12,10 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: Sang's v16, published as seq 22; wide-screen sizing softened in seq 23 (2026-09-14)
 
+- **Widget removed (2026-09-15, seq still 25)**: the sienna accessibility widget is off the site
+  (`remove-site-widget.mjs` emptied the plugin's `siteScripts`), and `agency/widget-fluid.js` is gone
+  from the source. It had frozen the font sizes on every cached reload.
+  [`runbook/2026-09-15-widget-removed.md`](./runbook/2026-09-15-widget-removed.md).
 - **Seq 25 (2026-09-15)**: headings scale again under the accessibility widget (`agency/widget-fluid.js`
   undoes its frozen inline px sizes), and v16's max-width 900/680/600 are folded into the seven editor
   breakpoints (they had published as extra conditions).
@@ -72,9 +76,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   stylesheet (without it every page lost its browser-default margins, block-level icons and so on).
   Directive: `21-instatic-upload.md` → "Brandklout: the shared-layout run (v11)".
 - Plugin `brandklout.embed-origins`: `frameOrigins` YouTube (both hosts), `connectOrigins`
-  sheetdb.io + formsubmit.co, `autoTrust` on, and `siteScripts` = the sienna-accessibility widget
-  (added outside this toolkit). The widget rounds every text element's font size down inline on load;
-  the visual gates block it (`KEEP_WIDGET=1` to keep it).
+  sheetdb.io + formsubmit.co, `autoTrust` on, and `siteScripts` empty (it held the sienna
+  accessibility widget until 2026-09-15; removed on Alejandro's call).
 - **Not on any Brandklout domain.** The cutover waits for Sang's approval.
 - Worktree `bk-brandklout-website`. Railway project `Brandklout`
   `550ebd58-0e74-444e-96d5-2b836a2db98a`, service `742221a0-b1f1-45f1-bf42-fc7bab85adca`, env

@@ -1,11 +1,12 @@
 # Runbook index
 
-13 runs, newest first. Each line is one file in this folder.
+14 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | **Accessibility widget removed** (Alejandro): "bigger in the editor, small again on the 2nd refresh" was seq 25's `widget-fluid.js` losing a race to the widget on cached reloads. `siteScripts` emptied, published (seq stays 25). Carries **gotchas** | [`2026-09-15-widget-removed.md`](./2026-09-15-widget-removed.md) |
 | 2026-09-15 | **Headings not scaling = the accessibility widget** freezing every font size inline at load (`agency/widget-fluid.js`); **breakpoint problem again** = v16's max-width 900/680/600 as extra conditions, folded into the editor breakpoints. Seq 25. Carries **gotchas** | [`2026-09-15-widget-and-breakpoints.md`](./2026-09-15-widget-and-breakpoints.md) |
 | 2026-09-15 | **Admin edits restored (seq 24)**: OCEANIC wordmark, "Why us" headline, founder quote, `/guarantee` h1, hero margin; the duplicate story headline and the 5rem h1 deliberately not. Branch + backup tag pushed | [`2026-09-15-admin-edits-restored.md`](./2026-09-15-admin-edits-restored.md) |
 | 2026-09-14 | **"The heading is not right" = the fluid root** on wide screens (hero h1 96px at 1920, 115px at 2560 vs Sang's 72px); softened to 1.15x max, seq 23. Gates are blind above 1440. Carries **gotchas** | [`2026-09-14-heading-fluid-root.md`](./2026-09-14-heading-fluid-root.md) |

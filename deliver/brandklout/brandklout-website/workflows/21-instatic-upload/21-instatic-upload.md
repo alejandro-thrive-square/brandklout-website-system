@@ -62,11 +62,13 @@ Changes in the toolkit for v16:
   out and published as extra site conditions (11 instead of 7), which Alejandro read as "the
   breakpoint problem again"; since seq 25 they fold UP into the next breakpoint (1000, 760, 620).
   After each new package, compare class-system's "max-width blocks by width" line with `BP_MAP`.
-- **`agency/widget-fluid.js`** (seq 25): the sienna accessibility widget (plugin `siteScripts`) writes
-  every text element's size inline in whole px at load and never recomputes, which froze the fluid
-  and breakpoint sizes ("the heading is not scaling properly"). The script removes those inline sizes
-  at the widget's 100% setting and recomputes them from the stylesheet at other scales, on every
-  resize. The visual gates block the widget; test resizing with it loaded (`.tmp/resize-check.mjs`).
+- **No accessibility widget (seq 26, 2026-09-15).** The sienna widget (plugin `siteScripts`, added
+  outside this toolkit) wrote every text element's size inline in whole px at load and never
+  recomputed. Seq 25's `agency/widget-fluid.js` undid that only when it ran first; on a cached reload
+  the widget won, so Sang saw the editor's size on the first load and frozen sizes on every refresh
+  after. Alejandro removed the widget ("I don't think we need to have the widget on this site"):
+  `remove-site-widget.mjs` empties it from `siteScripts` (read-merge-write, dry run by default), and
+  `widget-fluid.js` is deleted. Do not add a site-wide script that rewrites font sizes.
 
 ## Brandklout: the class system (v12, 2026-09-14, evening)
 
@@ -192,9 +194,9 @@ that and takes its **shared-layout** branch:
 - **Retired from v2**: `/survey` (the SheetDB rebuild) and the five `/customer-stories-*` routes. v11's
   assessment is `/authority-score` and its stories are `/customer-story-*`. `verify-live.mjs` checks
   the six old routes 404.
-- **The live site runs a widget the build does not**: sienna-accessibility, loaded site-wide by the
-  plugin's `siteScripts`. It rewrites text elements' font sizes inline, rounded down (64.8px -> 64px).
-  `visual-diff` and `compare-live` block it so they measure the import; `KEEP_WIDGET=1` keeps it.
+- **The live site ran a widget the build did not** (sienna-accessibility, via the plugin's
+  `siteScripts`) until seq 26, when it was removed. `visual-diff` and `compare-live` still abort its
+  URL, which is now a no-op.
 - The gates read their page lists from `pages.json` (`verify-live`, `visual-diff`, `compare-live`).
   `form-probe.mjs` was rewritten for v11: the three forms, the assessment, the legal pages, and both
   video players.
