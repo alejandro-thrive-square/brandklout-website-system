@@ -11,7 +11,7 @@ ahead, push it when the check passes".
 to his file. That left 7 breakpoints (four at or below 800), and every package that brought a new
 width (v16: 900, 680, 600) published it as an extra condition until someone added it to `BP_MAP`.
 
-### Done
+### Done (commit `9c59b724`; build artifacts in the commit after it)
 
 - **Breakpoints, always the standard four**: Laptop 1279, Tablet 991, Mobile landscape 767, Mobile
   portrait 479. `snapQuery` snaps every width in Sang's CSS to the nearest standard boundary as it is
