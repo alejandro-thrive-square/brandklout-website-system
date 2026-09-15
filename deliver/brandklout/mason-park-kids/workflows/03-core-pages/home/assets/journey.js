@@ -233,7 +233,7 @@
     } else if (title) {
       gsap.set(title, { visibility: "visible" });
     }
-    var rest = $$(".ar-lede, .ar-actions, .ar-meta > div", sec);
+    var rest = $$(".ar-lede, .ar-offer, .ar-actions, .ar-meta > div", sec);
     gsap.set(rest, { opacity: 0, y: 26 });
     tl.to(rest, { visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .1, ease: EASE }, .45);
     });
@@ -391,14 +391,17 @@
   if (!reduced) {
     /* data-write: the statement, written word by word. The unwritten colour
        is set by the stylesheet, which keeps the text readable when this never
-       runs. `data-write-to` overrides the written colour. */
+       runs. `data-write-to` overrides the written colour.
+       It finishes when the statement's MIDDLE reaches the middle of the window.
+       Until 2026-09-15 it ran to "bottom 45%", so a long review was still half
+       grey after the photograph beside it had gone (BugHerd #26). */
     $$("[data-write]").forEach(function (el) {
       var to = el.getAttribute("data-write-to") || (dark(el) ? "#ffffff" : INK);
       var sp = splitWords(el);
       if (sp && sp.words && sp.words.length) {
         gsap.to(sp.words, {
           color: to, stagger: .35, ease: "none",
-          scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: .5 }
+          scrollTrigger: { trigger: el, start: "top 85%", end: "center 50%", scrub: .4 }
         });
       } else {
         gsap.to(el, { color: to, scrollTrigger: { trigger: el, start: "top 75%" } });
@@ -422,18 +425,43 @@
       });
     });
 
-    /* data-rail: a row that travels sideways as the page scrolls. Only above
-       900, where the stylesheet has not already made it a native scroller. */
+    /* data-rail: a row that rotates on its own and STOPS while the pointer or
+       keyboard focus is on it, so a review can be read where it stands. Until
+       2026-09-15 it was scrubbed to the scroll, which carried reviews off the
+       edge before anyone could finish them (BugHerd #27). The children are
+       cloned once, aria-hidden and inert, so the loop has no seam; the loop
+       length is measured between the first card and its clone, which is right
+       whatever the padding and gaps are. It only runs while the row is on
+       screen, and only above 900, where the stylesheet has not already made it
+       a native scroller. */
     $$("[data-rail]").forEach(function (row) {
-      var over = function () {
-        if (window.innerWidth < 900) return 0;
-        var host = row.parentElement;
-        return Math.max(0, row.scrollWidth - host.clientWidth + 24);
-      };
-      gsap.fromTo(row, { x: 0 }, {
-        x: function () { return -over(); },
-        ease: "none",
-        scrollTrigger: { trigger: row.parentElement, start: "top 85%", end: "bottom 15%", scrub: .6, invalidateOnRefresh: true }
+      if (window.innerWidth < 900) return;
+      var host = row.parentElement;
+      var kids = Array.prototype.slice.call(row.children);
+      if (kids.length < 2) return;
+      kids.forEach(function (kid) {
+        var c = kid.cloneNode(true);
+        c.setAttribute("aria-hidden", "true");
+        c.setAttribute("inert", "");
+        row.appendChild(c);
+      });
+      var twin = row.children[kids.length];
+      var x = 0, paused = false, seen = false;
+      var SPEED = 0.6; /* px per 60fps frame: about 36px a second */
+      function pause() { paused = true; }
+      function resume() { paused = false; }
+      host.addEventListener("mouseenter", pause);
+      host.addEventListener("mouseleave", resume);
+      host.addEventListener("focusin", pause);
+      host.addEventListener("focusout", resume);
+      ScrollTrigger.create({ trigger: host, start: "top bottom", end: "bottom top", onToggle: function (st) { seen = st.isActive; } });
+      gsap.ticker.add(function (time, dt) {
+        if (window.innerWidth < 900) { if (x) { x = 0; gsap.set(row, { x: 0 }); } return; }
+        if (paused || !seen) return;
+        var loop = twin.offsetLeft - kids[0].offsetLeft;
+        x -= SPEED * (dt / 16.67);
+        if (loop > 0 && x <= -loop) x += loop;
+        gsap.set(row, { x: x });
       });
     });
 

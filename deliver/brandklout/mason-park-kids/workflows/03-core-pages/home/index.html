@@ -93,18 +93,22 @@
 <button class="masthead_scrim" type="button" tabindex="-1" aria-hidden="true"></button>
 <main class="main-wrapper" id="main">
 
-<!-- 00 ARRIVAL. The practice's own photograph: Dr. Nguyen beside a child in
-     the treatment room. One sentence, taken from what a parent wrote in a
-     review ("has been asking to go to the dentist"), and three stickers. -->
+<!-- 00 ARRIVAL. The practice's own photograph: a toddler at the gumball
+     machine by the front desk, the front of house the two practices share.
+     It replaced `smile-flip` on 2026-09-15 (BugHerd #2: "too zoomed in"), which
+     now sits in the path at a size it can hold. One sentence, taken from what a
+     parent wrote in a review ("has been asking to go to the dentist"), the new
+     patient special where a parent decides (BugHerd #24), and three stickers. -->
 <section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="dark">
-  <div class="ar-bg is-top">
-    <img src="assets/uploads/smile-flip-1200.webp" srcset="assets/uploads/smile-flip-480.webp 480w, assets/uploads/smile-flip-960.webp 960w, assets/uploads/smile-flip-1200.webp 1200w, assets/uploads/smile-flip-1600.webp 1600w" sizes="100vw" alt="Dr. Tam Nguyen beside a smiling child in a treatment room at Mason Park Dental for Kids" width="1200" height="900" fetchpriority="high" decoding="async">
+  <div class="ar-bg is-mid">
+    <img src="assets/uploads/gumball-1440.webp" srcset="assets/uploads/gumball-480.webp 480w, assets/uploads/gumball-960.webp 960w, assets/uploads/gumball-1440.webp 1440w, assets/uploads/gumball-1920.webp 1920w" sizes="100vw" alt="A toddler at the gumball machine by the front desk at Mason Park Dental for Kids" width="2400" height="1802" fetchpriority="high" decoding="async">
   </div>
   <div class="ar-veil" aria-hidden="true"></div>
   <div class="ar-in">
     <p class="chapter-tag"><i></i><b>Pediatric dentist, Katy TX</b></p>
     <h1 class="ar-title" data-split>The dentist your child <em>asks</em> to go back to.</h1>
-    <p class="ar-lede" data-anim="hide">Dr. Nguyen, Katy pediatric dentist, is committed to providing you with excellent dentistry in a comfortable environment. Board certified in pediatric dentistry, from the first tooth to the last day of high school, with you in the room the whole time.</p>
+    <p class="ar-lede" data-anim="hide">Dr. Tam Nguyen is a board certified pediatric dentist, committed to providing you with excellent dentistry in a comfortable environment. From the first tooth to the last day of high school, with you in the room the whole time.</p>
+    <p class="ar-offer" data-anim="hide"><a href="/special-offers/"><b>New patient special</b> $129 exam, X-rays and cleaning, ages 12 and under <span aria-hidden="true">&rarr;</span></a></p>
     <div class="ar-actions" data-anim="hide"><a class="button is-sun is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book a first visit</a>
       <a class="button is-ghost-light is-lg" href="#first">Start at the first tooth</a></div>
     <div class="ar-meta">
@@ -131,12 +135,15 @@
       <p class="ch-foot"><a class="link-arrow" href="/knee-to-knee-pediatric-dental-exam/">What a knee-to-knee exam is <span aria-hidden="true">&rarr;</span></a></p>
     </div>
     <div class="ft-side">
-      <figure class="ft-media" data-drift>
+      <!-- No `data-drift` here since 2026-09-15 (BugHerd #6): the drift scales
+           the photograph to 1.09 and slides it down, and in this sticky column
+           it covered its own caption. -->
+      <figure class="ft-media">
         <img src="assets/uploads/knee-960.webp" srcset="assets/uploads/knee-480.webp 480w, assets/uploads/knee-960.webp 960w, assets/uploads/knee-1400.webp 1400w" sizes="(max-width: 899px) 100vw, 40vw" alt="An infant on a parent's lap during a knee-to-knee exam at Mason Park Dental for Kids" loading="lazy" decoding="async">
         <p class="ft-sticker">By the first birthday. Yes, really.</p>
         <figcaption>A knee-to-knee exam in the practice. The child stays on the parent's lap the whole time.</figcaption>
       </figure>
-      <p class="ft-turn">One building on Kingsland Boulevard, and a dentist trained to start this early.</p>
+      <p class="ft-turn">Board certified in pediatric dentistry, and trained at Boston University to treat children from six months old.</p>
     </div>
   </div>
 </section>
@@ -176,7 +183,7 @@
       <article class="gr-stage" data-age="6" data-age-note="to nine years">
         <p class="gr-stage_when">Losing teeth, growing teeth</p>
         <h3>Baby teeth matter, right up until they go.</h3>
-        <p>Baby teeth help with speech development, chewing, and guiding permanent teeth into proper alignment. Tooth-colored fillings if a cavity gets through, and an early look at how the bite is shaping up.</p>
+        <p>Baby teeth help with speech development, chewing, and guiding permanent teeth into proper alignment. Tooth-colored fillings if a cavity gets through, silver diamine fluoride (SDF) to stop an early cavity from growing without drilling, and an early look at how the bite is shaping up.</p>
         <ul><li><a href="/services/composite-fillings/">Tooth-colored fillings</a></li><li><a href="/services/space-maintainers/">Space maintainers</a></li><li><a href="/services/early-intervention/">Early orthodontic check</a></li></ul>
       </article>
       <article class="gr-stage" data-age="10" data-age-note="to thirteen years">
@@ -188,8 +195,8 @@
       <article class="gr-stage" data-age="14" data-age-note="to eighteen years">
         <p class="gr-stage_when">Nearly grown</p>
         <h3>A smile they chose, and habits that are theirs now.</h3>
-        <p>Invisalign for the teenager who would rather nobody noticed, a night guard if they grind, and the same team that met them as a toddler. When they turn eighteen, the adult practice is down the hall.</p>
-        <ul><li><a href="/services/invisalign/">Invisalign</a></li><li><a href="/services/night-guards/">Night guards</a></li><li><a href="/services/cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+        <p>Invisalign&reg; for the teenager who would rather nobody noticed, a night guard if they grind, and the same team that met them as a toddler. When they turn eighteen, Mason Park Dental of Katy is just down the hall.</p>
+        <ul><li><a href="/services/invisalign/">Invisalign&reg;</a></li><li><a href="/services/night-guards/">Night guards</a></li><li><a href="/services/cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
       </article>
     </div>
   </div>
@@ -218,7 +225,7 @@
       </div>
       <figure class="cf-shot">
         <img src="assets/uploads/shelf-kid-960.webp" srcset="assets/uploads/shelf-kid-480.webp 480w, assets/uploads/shelf-kid-960.webp 960w, assets/uploads/shelf-kid-1400.webp 1400w" sizes="(max-width: 699px) 100vw, (max-width: 1099px) 50vw, 33vw" alt="A smiling boy holding a toothpaste box at the product shelf by the front desk" loading="lazy" decoding="async">
-        <figcaption>The shelf by the front desk. Most visits end here, with something to take home.</figcaption>
+        <figcaption>The Cavity Free Club, by the front desk: there to reinforce healthy, everyday brushing habits.</figcaption>
       </figure>
       <div class="cf-card is-sky">
         <span class="cf-glyph" aria-hidden="true">2</span>
@@ -234,7 +241,7 @@
       <div class="cf-card is-sun">
         <span class="cf-glyph" aria-hidden="true">3</span>
         <h3>Sedation, when it is the kind thing to do.</h3>
-        <p>Nitrous oxide, oral conscious sedation, IV sedation, and general anesthesia in a hospital setting. Your child's sedation will be closely monitored by expertly trained and experienced professionals to ensure their safety and comfort at all times.</p>
+        <p>Nitrous oxide, oral conscious sedation, IV sedation, and general anesthesia. Your child's sedation will be closely monitored by expertly trained and experienced professionals to ensure their safety and comfort at all times.</p>
         <a class="link-arrow" href="/services/sedation-dentistry/">Sedation dentistry <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="cf-card is-wide">
@@ -255,7 +262,7 @@
 <section class="ch ch-people" id="people" data-chapter="4" data-chapter-name="The People" data-theme="dark">
   <div class="wrap ch-head">
     <p class="chapter-tag"><i></i><b>The People</b></p>
-    <h2 data-split>Meet the doctor who started this early.</h2>
+    <h2 data-split>Meet the dentist your child will grow up with.</h2>
   </div>
   <div class="wrap pe-grid">
     <figure class="pe-plate" data-wipe>
@@ -263,23 +270,25 @@
       <span class="pe-badge">Board certified</span>
     </figure>
     <div class="pe-copy">
-      <p class="pe-role">Pediatric dentist</p>
+      <p class="pe-role">Board certified pediatric dentist</p>
       <h3>Dr. Tam Nguyen, DMD</h3>
       <blockquote class="pe-quote">My philosophy focuses on promoting healthy lifestyles and oral habits from a young age. By introducing parents and patients to the dentist at an early age, my staff and I are able to guide parents and children as they grow, and build trusting relationships with our families.</blockquote>
       <p class="pe-blurb">Dr. Nguyen is proud to call Houston her home. Following several years of work as a general dentist, she realized her passion was to work with kids and went back to Boston University to serve her pediatric residency and earn a specialty degree, gaining insight and knowledge about treating children as young as 6 months old as well as patients with special needs.</p>
       <dl class="pe-facts">
         <div><b>Residency</b><span>Pediatric dentistry, Boston University</span></div>
         <div><b>Treats</b><span>Children from six months old, and patients with special needs</span></div>
-        <div><b>Also here</b><span>Dr. Dave Cho, general dentist</span></div>
+        <div><b>Hometown</b><span>Houston, born and raised in the southwest of the city</span></div>
       </dl>
       <p class="ch-foot"><a class="link-arrow is-light" href="/our-doctors/">Meet the doctors <span aria-hidden="true">&rarr;</span></a></p>
     </div>
   </div>
   <div class="wrap">
-    <div class="pe-band">
-      <img src="assets/uploads/team-1440.webp" srcset="assets/uploads/team-480.webp 480w, assets/uploads/team-960.webp 960w, assets/uploads/team-1440.webp 1440w, assets/uploads/team-1920.webp 1920w" sizes="100vw" alt="The Mason Park Dental team in the waiting room" loading="lazy" decoding="async">
+    <!-- A child, not the staff line-up (BugHerd #16, 2026-09-15). The team
+         photograph is on /our-team/, one click away. -->
+    <div class="pe-band is-low">
+      <img src="assets/uploads/shelf-kid-2-1400.webp" srcset="assets/uploads/shelf-kid-2-480.webp 480w, assets/uploads/shelf-kid-2-960.webp 960w, assets/uploads/shelf-kid-2-1400.webp 1400w" sizes="100vw" alt="A smiling boy holding a box from the shelf by the front desk" loading="lazy" decoding="async">
       <div class="pe-band-in">
-        <p>Front desk, assistants and hygienists. Nine people your child will see again at the next visit, and the one after that.</p>
+        <p>Our front desk, assistants and hygienists: friendly faces your child gets to know, visit after visit.</p>
         <a class="link-arrow is-light" href="/our-team/">Meet the team <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
@@ -298,7 +307,7 @@
       <article class="pa-card">
         <span class="pa-no">1</span>
         <h3>Book, and get the forms.</h3>
-        <p>Call (281) 578-7100 or book online. Our patient forms can be filled out online, or downloaded and filled out at home, so your child will be in and out in a flash.</p>
+        <p><a href="tel:+12815787100">Call (281) 578-7100</a> or <a href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">book online</a>. Our <a href="/new-patients/">patient forms</a> can be filled out online, or downloaded and filled out at home, so your child will be in and out in a flash.</p>
       </article>
       <article class="pa-card">
         <div class="pa-shot"><img src="assets/uploads/sofa-960.webp" srcset="assets/uploads/sofa-480.webp 480w, assets/uploads/sofa-960.webp 960w, assets/uploads/sofa-1440.webp 1440w, assets/uploads/sofa-1920.webp 1920w" sizes="24rem" alt="Two parents on the waiting-room sofa with the check-in tablet" loading="lazy" decoding="async"></div>
@@ -307,15 +316,15 @@
         <p>The corner of Mason Road and Kingsland Boulevard, behind the Ranch 99 complex. If you could not print the paperwork, arrive 20 minutes early and the front desk will help.</p>
       </article>
       <article class="pa-card">
-        <div class="pa-shot"><img src="assets/uploads/knee-2-960.webp" srcset="assets/uploads/knee-2-480.webp 480w, assets/uploads/knee-2-960.webp 960w" sizes="24rem" alt="A knee-to-knee exam" loading="lazy" decoding="async"></div>
+        <div class="pa-shot is-top"><img src="assets/uploads/smile-960.webp" srcset="assets/uploads/smile-480.webp 480w, assets/uploads/smile-960.webp 960w, assets/uploads/smile-1200.webp 1200w" sizes="24rem" alt="Dr. Tam Nguyen beside a smiling child in the dental chair" loading="lazy" decoding="async"></div>
         <span class="pa-no">3</span>
         <h3>Your lap, or the chair.</h3>
-        <p>Infants and anxious toddlers are examined knee to knee. Older children get the chair, the screen on the wall, and a step-by-step explanation before anything happens.</p>
+        <p>Infants and anxious toddlers are examined knee to knee, on a parent's lap. Older children climb up into the big chair, with the screen on the wall to watch and a step-by-step explanation before anything happens.</p>
       </article>
       <article class="pa-card">
         <span class="pa-no">4</span>
         <h3>Cleaning, fluoride, and a look around.</h3>
-        <p>A cleaning includes gentle plaque removal, polishing, fluoride application, and an oral exam to check teeth, gums, and bite development. Images from the intra-oral camera go on the screen so you see what we see.</p>
+        <p>A cleaning includes gentle plaque removal, polishing, fluoride application, and an oral exam to check teeth, gums, and bite development. Images from the intra-oral camera go on the screen, so you and your child see what we see.</p>
       </article>
       <article class="pa-card">
         <span class="pa-no">5</span>
@@ -323,10 +332,13 @@
         <p>Every question answered and the next visit booked. We accept most PPO insurance plans and Medicaid for qualified patients, with transparent billing and flexible financing.</p>
         <p class="pa-call"><a href="/financing/">Insurance and financing</a></p>
       </article>
-      <article class="pa-card">
+      <!-- Set apart on a sage ground (BugHerd #23): it was on the practice's old
+           /new-patients/ page, word for word, and it is what sets it apart. -->
+      <article class="pa-card is-give">
         <span class="pa-no">6</span>
-        <h3>Your visit pays it forward.</h3>
+        <h3>Every new patient visit gives back.</h3>
         <p>A portion of profits from all new patient exams goes to Parks Youth Ranch, a nonprofit focused on providing a stable temporary home for displaced children ages 7 to 17.</p>
+        <p class="pa-call"><a href="/new-patients/">The Pay It Forward program</a></p>
       </article>
       <article class="pa-card is-cta">
         <h3>New patient special: $129 for ages 12 and under.</h3>
@@ -345,7 +357,7 @@
   <div class="wrap ch-head is-split">
     <div>
       <p class="chapter-tag"><i></i><b>The Proof</b></p>
-      <h2 data-split>What Katy parents say afterwards.</h2>
+      <h2 data-split>What parents have to say.</h2>
     </div>
     <p class="ch-note">Every review on this page was left by a parent under their own name, on the practice's own pages or its Google listing. Nothing is written by us and nothing is trimmed.</p>
   </div>
@@ -407,9 +419,11 @@
       </dl>
     </div>
     <div class="iv-aside">
-      <figure class="iv-shot">
-        <img src="assets/uploads/gumball-960.webp" srcset="assets/uploads/gumball-2.webp 2w, assets/uploads/gumball-480.webp 480w, assets/uploads/gumball-960.webp 960w, assets/uploads/gumball-1440.webp 1440w, assets/uploads/gumball-1920.webp 1920w" sizes="(max-width: 899px) 100vw, 45vw" alt="A toddler at the gumball machine by the front desk" loading="lazy" decoding="async">
-        <figcaption>The gumball machine by the front desk. Suite 104B, free parking at the door.</figcaption>
+      <!-- The front desk since 2026-09-15: the gumball frame moved up to the
+           arrival, and one scene appears on the page once. -->
+      <figure class="iv-shot is-desk">
+        <img src="assets/uploads/desk-1-960.webp" srcset="assets/uploads/desk-1-480.webp 480w, assets/uploads/desk-1-960.webp 960w, assets/uploads/desk-1-1400.webp 1400w" sizes="(max-width: 899px) 100vw, 45vw" alt="A receptionist smiling across the front desk the two practices share" loading="lazy" decoding="async">
+        <figcaption>The front desk, shared with the family practice. Suite 104B, free parking at the door.</figcaption>
       </figure>
       <div class="iv-map">
         <div class="embed_component">

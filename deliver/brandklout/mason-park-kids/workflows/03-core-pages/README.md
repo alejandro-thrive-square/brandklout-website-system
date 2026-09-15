@@ -376,6 +376,17 @@ and some of those were written for adults. The old URLs were `/<slug>/`; the new
   prose gate silently reports 0 words for it.
 - **A new photograph:** add it to `PHOTOS` in `prep-images.py` under a name that says what it
   shows, run it, reference `<key>-<width>.webp`.
+- **A BugHerd round** (first run 2026-09-15): `workflows/.tmp/bugherd/fetch.mjs` pulls every
+  task BY ID (the list endpoint hides page, selector and screenshot) with comments,
+  attachments and screenshots; look at every screenshot before deciding. Fix here, then
+  `node section-shots.mjs local` / `live` for viewport crops of every chapter (a 16,000px
+  full-page PNG cannot show what one BugHerd note is about), which also reports whether the
+  review rail moves on its own and stops under the pointer. `reply.mjs` posts the replies
+  from `replies.json` and moves a task to done only when the plan says so; send it only after
+  the live crops confirm each fix. A homepage-only push is the import chain below with
+  `MSYS_NO_PATHCONV=1 node import-pages.mjs --only / --publish` as the last step: `--only`
+  matches the CONVERTED slug (`/`, `/about-us`), not the CMS slug (`index`), and Git Bash
+  rewrites a bare `/` argument into a Windows path unless path conversion is off.
 - Do not write `.mjs`, `.js` or `.css` here through a shell heredoc or a `node -e` string.
   Backslashes are eaten on the way through and the file still parses. It cost two rounds in
   this workflow alone (a Chrome path, a regex). Use an editor.
