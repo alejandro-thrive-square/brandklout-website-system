@@ -5,7 +5,18 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-10, evening
+## Where the build stands — 2026-09-15
+
+**BugHerd round two is answered on the board** ([`runbook/2026-09-15-bugherd-round-two-in-the-reviewers-safari.md`](./runbook/2026-09-15-bugherd-round-two-in-the-reviewers-safari.md)).
+The reviewer works in **Safari 26 on a Mac at 1512×735**, so every note was re-checked in
+WebKit at that size. Four of the 09-10 answers were not enough and are fixed: the logo gets
+air in its box (#3), the relay's sentence gets a photograph (#6), the home band gets a smiling
+frame (#21), and the **team page has its own photographs** — none of its team photos repeat
+the home page (#45). 45 notes are replied to and moved to done on BugHerd. **Waiting on the
+agency, left in todo with a question:** the family photograph (#1), one look at the logo in
+Safari (#3), the Canva team portraits (#43).
+
+## Earlier — 2026-09-10, evening
 
 **The agency's 48 BugHerd notes are answered on staging** (late run,
 [`runbook/2026-09-10-the-bugherd-round-48-notes-on-five-pages.md`](./runbook/2026-09-10-the-bugherd-round-48-notes-on-five-pages.md)):
@@ -77,6 +88,13 @@ is not obviously this practice's. It is preserved verbatim; somebody should chec
 Associates account it is.
 
 ### Traps that are live right now
+
+- **Check a BugHerd note in the reviewer's browser, not Chrome.** Pull tasks by id
+  (`.tmp/bugherd/pull.mjs`): `requester_browser`, `requester_browser_size`, assignees and
+  attachments are not in the list endpoint. The reviewer uses Safari; re-shoot with
+  `shot-tasks.mjs webkit` at their size before calling anything unreproducible.
+- **`import-album.mjs` must keep `frame: "external"` entries** (fixed 2026-09-15; it used to
+  drop `dr-sung-standing` from the manifest on every run). Confirm after any run.
 
 - **Never export `RAILWAY_TOKEN` from `.env` before `ship-payload` / `run-converter` /
   `fetch-nodes`.** The Railway CLI is logged in on its own; with the token in the

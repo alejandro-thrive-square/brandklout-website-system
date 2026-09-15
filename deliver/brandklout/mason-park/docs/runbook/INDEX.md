@@ -1,11 +1,12 @@
 # Runbook index
 
-14 runs, newest first. Each line is one file in this folder.
+15 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | 2026-09-15 — BugHerd round two: the same 48 notes, checked in the reviewer's Safari | [`2026-09-15-bugherd-round-two-in-the-reviewers-safari.md`](./2026-09-15-bugherd-round-two-in-the-reviewers-safari.md) |
 | 2026-09-10 | 2026-09-10 — The BugHerd round: 48 notes on five pages, locally then to staging | [`2026-09-10-the-bugherd-round-48-notes-on-five-pages.md`](./2026-09-10-the-bugherd-round-48-notes-on-five-pages.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
