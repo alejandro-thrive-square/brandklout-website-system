@@ -113,6 +113,12 @@ async function shoot(url, file) {
   const pg = await browser.newPage()
   await pg.setViewport({ width: WIDTH, height: VIEW })
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
+  // Trap 42: the live page carries a site-level Sienna accessibility widget the
+  // build does not, and it rewrites ~200 font sizes inline, rounded to whole px.
+  // That shifts every section below the fold and turns the diff into noise.
+  // Block it on both sides so the gate compares the build against the page.
+  await pg.setRequestInterception(true)
+  pg.on('request', (r) => (/sienna-accessibility/i.test(r.url()) ? r.abort() : r.continue()))
   await pg.goto(url, { waitUntil: 'networkidle0', timeout: 120000 })
   await pg.evaluate(async () => {
     document.documentElement.style.scrollBehavior = 'auto'

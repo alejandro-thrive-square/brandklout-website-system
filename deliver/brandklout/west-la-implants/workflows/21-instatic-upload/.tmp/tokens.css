@@ -25,8 +25,10 @@
         value, or a multi-layer background — from 02-base.css. See push-site.mjs ===== */
 html { -webkit-text-size-adjust: 100%; }
 html { scroll-behavior: auto; }
-.display { font-variation-settings: 'opsz' 96; }
-.h2 { font-variation-settings: 'opsz' 72; }
+.serif { font-variation-settings: 'opsz' 36; }
+.display { font-variation-settings: 'opsz' 48; }
+.h2 { font-variation-settings: 'opsz' 42; }
+.h3 { font-variation-settings: 'opsz' 36; }
 @media (prefers-reduced-motion:reduce) { * { animation-duration: .001ms!important; } }
 @media (prefers-reduced-motion:reduce) { *::before { animation-duration: .001ms!important; } }
 @media (prefers-reduced-motion:reduce) { *::after { animation-duration: .001ms!important; } }
@@ -45,12 +47,13 @@ html { scroll-behavior: auto; }
 .ch-arrival { min-height: 100svh; }
 .re-stage { min-height: 100svh; }
 .an-pin { min-height: 100svh; }
-.an-card { width: min(26rem,78vw); }
-.an-end { width: min(28rem,80vw); }
+.an-card { width: min(19rem,72vw); }
+.an-end { width: min(22rem,72vw); }
 @media (hover:none) and (pointer:coarse), (max-width:767px) { .an-pin { min-height: 0; } }
 .pr-pin { height: 100svh; }
 .tr-pin { min-height: 100svh; }
 .tr-media { max-height: 76svh; }
+.tr-story blockquote { font-variation-settings: 'opsz' 28; }
 @media (prefers-reduced-motion:reduce) { .tr-media { max-height: none; } }
 @media (max-width:1023px) { .tr-media.tr-media { max-height: 44svh; } }
 .ex-in { min-height: 100svh; }

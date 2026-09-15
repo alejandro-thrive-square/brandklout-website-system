@@ -1028,6 +1028,25 @@ as a declaration published without its property, because it pairs on property na
 two longhands in the source and the gate is clean. (The comma-layered case is trap 26 territory
 and is harvested into the code asset instead.)
 
+### 42. The live page carries a Sienna accessibility widget the build does not, and it freezes type sizes inline
+
+Found 2026-09-15 (BugHerd round two). The published HTML loads
+`cdn.jsdelivr.net/npm/sienna-accessibility/…umd.js` with `data-wz-site-script` — a site-level
+injection, not part of `site-src`, already present in the 2026-09-15 pre-push snapshot. At load it
+writes `font-size` inline on ~200 elements, **rounded to whole pixels and sometimes snapshotted
+before the stylesheet applies** (the hero read 32px — the UA `h1` default — for the first seconds,
+then 102px; the review quotes stay at 16px against the authored 17.92px). Consequences:
+
+- `visual-diff.mjs` went from 2.7 % to 15.9 % @1440 / 31.8 % @390 with the page height off by 66px @1440 and 120–220px @390:
+  every section below the fold shifted. With the widget blocked, live and local match to the pixel
+  in height and in every section top. `visual-diff.mjs` now aborts the widget's request on both
+  sides.
+- Any probe that reads `getComputedStyle().fontSize` on the live page in its first seconds reads
+  the widget's snapshot, not the CSS. Wait ~5s, or block it.
+- Frozen px sizes do not follow the fluid root on resize (see the memory note on gates above 1440).
+
+Removing the widget is the agency's call, not a build change — it is reported, not touched.
+
 ### The check: `css-parity.mjs`
 
 ```bash

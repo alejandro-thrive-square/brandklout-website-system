@@ -85,9 +85,14 @@ ul{margin:0;padding:0;list-style:none}
 
 /* animation hooks */
 [data-anim="hide"]{visibility:hidden}
-.wz-line{overflow:hidden}
-/* SplitText masks clip at the line box; give descenders room (BugHerd #5, #11) */
-.wz-line-mask{padding-bottom:.18em;margin-bottom:-.18em}
+/* SplitText masks clip at the line box, and so does the line itself. Bodoni's
+   descenders reach .27em below the baseline and its ascenders sit above a 1.04
+   line box, so BOTH boxes get padding with a matching negative margin — the
+   round-one fix padded only the mask while .wz-line still clipped at 1.04, and
+   the g and y stayed cut (BugHerd #5, #11, #14). Longhands on purpose: the
+   converter splits shorthands (trap 41). */
+.wz-line{overflow:hidden;padding-top:.14em;padding-bottom:.26em;margin-top:-.14em;margin-bottom:-.26em}
+.wz-line-mask{padding-top:.14em;padding-bottom:.26em;margin-top:-.14em;margin-bottom:-.26em}
 html.wz-ready .reveal-mask{overflow:hidden;display:block}
 
 /* horizontal rule */
