@@ -18,6 +18,28 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: the site is Sang's package VERBATIM (2026-09-15, evening)
+
+Alejandro: "make sure version 18 is the correct one. Just copy exactly that same version because I
+told you earlier that we are going to just change a few sections specifically but Sang already
+updated that in his version." That reverses the v16 decision ("keep the same structure and sections
+that we have currently"): **his package is the design, section for section**. Gone with it:
+`patches/index.html.mjs` (the agency hero slider, preview-1 case cards and client-stories panel,
+the v16 section reorder, the ported admin edits), `patches/guarantee.html.mjs` (an admin edit),
+`agency/slider.js`, and the home-v12 / hero-margin rules in `agency/site.css`. What stays is not
+design: `patches/assets/site.js.mjs` (every form emails sales@ through FormSubmit), the legal
+collection (his own CMS package; the body text is still brandklout.com's real policies, the
+2026-09-14 decision), the standard breakpoints + house type scale (Alejandro's standing rule), the
+reset revert and `agency/code.css` (Embed block heights), and the `.legal` element rules the
+markdown body needs. `visual-diff --source index` at 1440 = 0.000%: the prepared home page is his
+file. The shared layout is now the UNION of every page's stylesheet/script lists in relative order
+(`mergeOrders` in `prepare-source.mjs`): his home page links one extra sheet (`hero-carousel-v12.css`)
+and one extra script, both carried site-wide (all `.hc-*` selectors; the script mounts only on
+`[data-hero-carousel]`). A page that is not a subsequence of the union still refuses.
+
+**The next package goes in with NO design patches.** If Sang wants a section changed, he changes
+it in his package; the agency does not re-add sections on top.
+
 ## Brandklout: how a new package of Sang's goes in (v18, 2026-09-15)
 
 Sang sends a zip every day or two, each with a different packaging idea and a guide written for a

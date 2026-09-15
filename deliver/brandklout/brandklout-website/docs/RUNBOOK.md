@@ -10,8 +10,15 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: instance wiped blank and rebuilt from v18 (seq 30, 2026-09-15)
+## Status: Sang's v18 verbatim on a clean instance (seq 33, 2026-09-15)
 
+- **Seq 33 (2026-09-15, evening): the site is Sang's v18 package VERBATIM.** Alejandro: "copy
+  exactly that same version"; the v16 instruction to keep the agency's home sections is revoked.
+  `patches/index.html.mjs`, `patches/guarantee.html.mjs`, `agency/slider.js` and the home-v12 CSS
+  are gone; his hero carousel and results row are the home page. Only non-design layers remain
+  (forms to FormSubmit, the legal collection, standard breakpoints/type, reset revert). **No design
+  patch goes on top of his package from now on.**
+  [`runbook/2026-09-15-v18-verbatim.md`](./runbook/2026-09-15-v18-verbatim.md).
 - **Seq 30 (2026-09-15): the whole instance was emptied and re-uploaded from the v18 build** on
   Alejandro's and Sang's call (`wipe-instance.mjs`, then fonts → media → plugin → pages →
   collection → publish). Nothing from before the wipe remains except the two accounts and the site
@@ -28,8 +35,9 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   `/terms`, `/hipaa` URLs 404 (a row cannot live at the root). Body text is still brandklout.com's
   own policies. Rollback: tag `brandklout-website-live-seq26` + `cms-2026-09-15-seq26-pre-v18.db`.
   [`runbook/2026-09-15-v18-intake-and-legal-collection.md`](./runbook/2026-09-15-v18-intake-and-legal-collection.md).
-- **Source is `client-handoff/package-v18/`** + `patches/` + `cms-collections.mjs`, through the
-  class system (`prepare-source.mjs package-v18`). `package-v11/` stays for the home patch.
+- **Source is `client-handoff/package-v18/`** + `patches/` (forms and the legal template only) +
+  `cms-collections.mjs`, through the class system (`prepare-source.mjs package-v18`). Nothing
+  reads `package-v11/` or `package-v16/` any more; they stay as history.
 - **Seq 26 (2026-09-15): standard breakpoints and the house type scale**, whatever the package
   brings: Laptop 1279, Tablet 991, Mobile landscape 767, Mobile portrait 479 (Sang's widths snap to
   them), the house fluid root and plain rem font sizes. 1440 is identical to Sang's file; 1920 is

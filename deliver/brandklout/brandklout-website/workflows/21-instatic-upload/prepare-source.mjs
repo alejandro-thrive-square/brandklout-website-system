@@ -369,26 +369,45 @@ const sheetsOf = (html) =>
     .filter((l) => l.href && !/^(https?:)?\/\//i.test(l.href))
 const scriptsOf = (html) => [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)].filter((m) => !/type=["']?application\/(ld\+)?json/i.test(m[1]))
 const srcOf = (attrs) => (attrs.match(/\bsrc=["']([^"']+)["']/i) ?? [])[1]
-const layoutOf = (html) => {
-  if (/<style\b/i.test(html)) return null
-  const scripts = scriptsOf(html)
-  if (scripts.some((m) => !srcOf(m[1]))) return null
-  const sheets = sheetsOf(html)
-  if (!sheets.length) return null
-  return sheets.map((s) => s.href).join(',') + ' | ' + scripts.map((m) => srcOf(m[1])).join(',')
+/* Judged on the PATCHED pages. Until v18 the home patch removed Sang's carousel stylesheet and
+   script, so every page linked the same lists. v18 verbatim (2026-09-15, Alejandro: "copy exactly
+   that same version") keeps them: the home page links ONE extra sheet (hero-carousel-v12.css, between
+   stories-v10 and results-v13) and ONE extra script. The shared layout is the UNION of every page's
+   lists in their relative order; a page may link a subsequence of it. The extra sheet's rules are all
+   `.hc-*` selectors, so carrying it site-wide changes nothing elsewhere; the extra script mounts on
+   `[data-hero-carousel]` and is a no-op without one. Anything that is not a subsequence (a page that
+   orders two shared sheets differently, or an inline <style>) still refuses. */
+const layoutLists = new Map()
+for (const f of pageFiles) {
+  try {
+    const html = applyPatches(f, read(f), patches)
+    if (/<style\b/i.test(html)) { layoutLists.set(f, null); continue }
+    const scripts = scriptsOf(html)
+    if (scripts.some((m) => !srcOf(m[1]))) { layoutLists.set(f, null); continue }
+    const sheets = sheetsOf(html).map((s) => path.posix.normalize(s.href))
+    if (!sheets.length) { layoutLists.set(f, null); continue }
+    layoutLists.set(f, { sheets, scripts: scripts.map((m) => path.posix.normalize(srcOf(m[1]))) })
+  } catch (e) {
+    refuse(e.message)
+  }
 }
-/* Judged on the PATCHED pages (v16, 2026-09-14): Sang's home page links a carousel stylesheet and
-   script no other page does, and patches/index.html.mjs removes them. */
-const layouts = new Set(
-  pageFiles.map((f) => {
-    try {
-      return layoutOf(applyPatches(f, read(f), patches))
-    } catch (e) {
-      refuse(e.message)
+/** Merge ordered lists into one order that keeps every list's relative order; null if two disagree. */
+function mergeOrders(lists) {
+  const out = []
+  for (const list of lists) {
+    let at = 0
+    for (const item of list) {
+      const i = out.indexOf(item)
+      if (i < 0) out.splice(at, 0, item), (at += 1)
+      else if (i < at) return null
+      else at = i + 1
     }
-  }),
-)
-if (pageFiles.length > 1 && layouts.size === 1 && !layouts.has(null)) {
+  }
+  return out
+}
+const SHARED_SHEETS = pageFiles.length > 1 && ![...layoutLists.values()].includes(null) ? mergeOrders([...layoutLists.values()].map((l) => l.sheets)) : null
+const SHARED_SCRIPTS = SHARED_SHEETS ? mergeOrders([...layoutLists.values()].map((l) => l.scripts)) : null
+if (SHARED_SHEETS && SHARED_SCRIPTS) {
   await buildShared()
   process.exit(0)
 }
@@ -398,9 +417,8 @@ function decodeEntities(s) {
 }
 
 async function buildShared() {
-  const first = read(pageFiles[0])
-  const sheetRels = sheetsOf(first).map((s) => path.posix.normalize(s.href))
-  const scriptRels = scriptsOf(first).map((m) => path.posix.normalize(srcOf(m[1])))
+  const sheetRels = SHARED_SHEETS
+  const scriptRels = SHARED_SCRIPTS
   const patched = (rel) => {
     try {
       return applyPatches(rel, read(rel), patches)
