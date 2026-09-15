@@ -1,11 +1,12 @@
 # Runbook index
 
-17 runs, newest first. Each line is one file in this folder.
+18 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | 2026-09-15 — BugHerd staging loops launched in bk-mason-park, -kids, -west-la-implants — carries **gotchas** | [`2026-09-15-bugherd-staging-loops-launched.md`](./2026-09-15-bugherd-staging-loops-launched.md) |
 | 2026-09-12 | 2026-09-12 — Sienna accessibility widget on every Instatic site (all 8 published) | [`2026-09-12-sienna-accessibility-on-every-instatic-site.md`](./2026-09-12-sienna-accessibility-on-every-instatic-site.md) |
 | 2026-09-11 | 2026-09-11 — `new-client-worktree.sh` put worktrees under ~/Documents/orca; default path fixed | [`2026-09-11-new-client-worktree-path-fixed.md`](./2026-09-11-new-client-worktree-path-fixed.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed webzite.* -> brandklout.* on all five instances | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |

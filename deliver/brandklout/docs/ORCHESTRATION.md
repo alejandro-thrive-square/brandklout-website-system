@@ -83,8 +83,14 @@ Launch a client agent like this:
 ```text
 orca terminal send --terminal <handle> --text 'claude team --permission-mode bypassPermissions' --enter --json
 orca terminal wait --terminal <handle> --for tui-idle --timeout-ms 120000 --json
-orca terminal send --terminal <handle> --text '<brief>' --enter --json
+orca terminal send --terminal <handle> --text '<brief>' --enter --wait-submit 15 --json
 ```
+
+> [!WARNING]
+> From Windows PowerShell 5.1, a brief containing `"` never arrives: the quotes are mangled on the
+> way to the native `orca` exe, no receipt prints, and the agent's prompt stays empty. Use single
+> quotes inside briefs, confirm the receipt shows `turn_started`, and `orca terminal read` the
+> terminal before any resend.
 
 > [!NOTE]
 > Do **not** rely on Orca's own account switching for this. As of Orca 1.4.169 neither
