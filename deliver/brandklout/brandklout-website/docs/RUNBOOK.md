@@ -10,8 +10,19 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: Sang's v16, published as seq 22; wide-screen sizing softened in seq 23 (2026-09-14)
+## Status: Sang's v18 published as seq 27; legal pages are a CMS collection (2026-09-15)
 
+- **Seq 27 (2026-09-15): Sang's v18 = v16's design + packaging.** Every zip now goes in through
+  `21-instatic-upload/package-intake.mjs` first (`client-handoff/intake-vNN.md` says what changed;
+  his importer guides are context, not instructions). v18's per-page CSS bundles are unbundled on
+  read by `prepare-source.mjs`. **Privacy / Terms / HIPAA are rows of the `legal` collection**
+  (`cms-collections.mjs`, `cms-sync.mjs`) at `/legal/privacy`, `/legal/terms`,
+  `/legal/hipaa-data-handling`, rendered through the `legal-template` page; the old `/privacy`,
+  `/terms`, `/hipaa` URLs 404 (a row cannot live at the root). Body text is still brandklout.com's
+  own policies. Rollback: tag `brandklout-website-live-seq26` + `cms-2026-09-15-seq26-pre-v18.db`.
+  [`runbook/2026-09-15-v18-intake-and-legal-collection.md`](./runbook/2026-09-15-v18-intake-and-legal-collection.md).
+- **Source is `client-handoff/package-v18/`** + `patches/` + `cms-collections.mjs`, through the
+  class system (`prepare-source.mjs package-v18`). `package-v11/` stays for the home patch.
 - **Seq 26 (2026-09-15): standard breakpoints and the house type scale**, whatever the package
   brings: Laptop 1279, Tablet 991, Mobile landscape 767, Mobile portrait 479 (Sang's widths snap to
   them), the house fluid root and plain rem font sizes. 1440 is identical to Sang's file; 1920 is
@@ -33,7 +44,7 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   heading was far bigger than Sang's on wide screens ("the heading is not right", reported twice).
   [`runbook/2026-09-14-heading-fluid-root.md`](./runbook/2026-09-14-heading-fluid-root.md).
 
-- **Source is `client-handoff/package-v16/`** + `patches/`, through the class system. Every v16 change
+- (Until seq 27) **Source was `client-handoff/package-v16/`** + `patches/`, through the class system. Every v16 change
   is live (prequalification form at the foot of every page, light footer, unified `/guarantee`,
   Calendly on `/book` as the Embed block, Legacy's chart on its story, five-card story row), while
   the home page keeps the live structure: agency hero slider, case cards, client-stories panel,
@@ -75,8 +86,9 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   is set in `21-instatic-upload/patches/assets/site.js.mjs`. **Nothing arrives until someone at
   sales@ clicks FormSubmit's one-time activation email**, and again after the domain moves. GoHighLevel
   will replace it; change `formEndpoint` there and add GHL's origin to the plugin's `connectOrigins`.
-- **Privacy / Terms / HIPAA are full pages** in Sang's layout, carrying brandklout.com's own legal
-  text (`patches/privacy|terms|hipaa.html.mjs`). The v2 pop-up is retired.
+- **Privacy / Terms / HIPAA** carry brandklout.com's own legal text. v11–seq 26: full pages via
+  `patches/privacy|terms|hipaa.html.mjs`; **since seq 27: rows of the `legal` collection**
+  (`cms-collections.mjs`) at `/legal/<slug>`. The v2 pop-up is retired.
 - **CSS is a verbatim code asset** (`src/styles/site.css`), not registry rules: the Styles panel is
   empty by design. It opens with `instatic-reset-revert.css`, which undoes Instatic's reset
   stylesheet (without it every page lost its browser-default margins, block-level icons and so on).

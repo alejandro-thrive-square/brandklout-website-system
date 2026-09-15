@@ -26,6 +26,22 @@ Drop the source material here, once, exactly as received.
   (v12) and results cards (v13). The agency keeps the live home structure over those last two (see
   `21-instatic-upload/patches/index.html.mjs`). `package-v11/` stays: that patch reads v11's hero
   card and closing section from it.
+- **`Final Run/`** (2026-09-15, Sang on Slack: "with different css files and seperated the legal
+  pages to CMS"): `BrandKlout-Instatic-v18.zip` (v18, **replaces v16**), `BrandKlout-Legal-CMS-v18.zip`
+  (a subset of the same zip: `cms/`, `cms-templates/`, the legal stylesheet), his two guides and
+  `legal-pages.csv`. Kept as received (the zips are gitignored); the site zip is unpacked into
+  **`package-v18/`**, which is what `prepare-source.mjs package-v18` reads. **What changed against
+  v16 is in [`intake-v18.md`](./intake-v18.md)**, written by `21-instatic-upload/package-intake.mjs`:
+  the design is v16's (all eight CSS sources rule-identical, JS and media byte-identical); every
+  page now links ONE 208KB per-page bundle of those sheets (`assets/pages/<page>.css`, unbundled on
+  read by prepare-source); the three legal pages are CMS snapshots plus a `cms/legal-pages/`
+  export and `cms-templates/legal-page-template.html`, which became the `legal` collection
+  (`21-instatic-upload/cms-collections.mjs`). His guides describe a naive importer's workflow and
+  are context, not instructions. `package-v16/` and `package-v11/` stay: the home patch reads v11's
+  hero card and closing section.
+- **Every zip from now on goes in through `package-intake.mjs`** (`node package-intake.mjs "<zip>"
+  vNN` from `21-instatic-upload/`), which unpacks it and writes `intake-vNN.md` here. Read the
+  report, then only the pages it says changed.
 - Anything else Sang sends that belongs to the first handoff (logo files, brand notes, the
   compliance request itself) goes here too. Later material goes in the `.tmp/` of the workflow
   that uses it.

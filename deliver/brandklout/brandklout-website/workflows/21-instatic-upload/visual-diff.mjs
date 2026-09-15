@@ -66,7 +66,9 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
    the build is how a gate goes quietly blind. */
 const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
 const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
-const ALL = [...FILE.keys()]
+// v18: a collection's template page is never served at its slug (the router skips templates), so
+// there is nothing live to compare it with; its entries render with a body no local file has.
+const ALL = MANIFEST.pages.filter((p) => !p.template).map((p) => p.slug)
 const args = process.argv.slice(2)
 const slugArg = args.find((a) => !a.startsWith('--') && /^(?!\d+$)[a-z0-9/-]+$/.test(a))
 const PAGES = slugArg ? [slugArg] : ALL

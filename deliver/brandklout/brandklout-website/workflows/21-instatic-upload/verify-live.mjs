@@ -35,7 +35,11 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up
 const { readFileSync } = await import('node:fs')
 const MANIFEST = JSON.parse(readFileSync(new URL('./.tmp/site/site-src/pages.json', import.meta.url), 'utf8'))
 const SHARED = MANIFEST.layout === 'shared'
-const ROUTES = MANIFEST.pages.map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`))
+/* v18 (2026-09-15): a collection's template page (`template` in pages.json) is never served at its
+   own slug, so it is not a route; the collection's entries (`entries`: file -> /legal/<slug>) are. */
+const ENTRY_ROUTES = Object.values(MANIFEST.entries ?? {})
+const ROUTES = [...MANIFEST.pages.filter((p) => !p.template).map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`)), ...ENTRY_ROUTES]
+const TEMPLATE_ROUTES = MANIFEST.pages.filter((p) => p.template).map((p) => `/${p.slug}`)
 // Local copy of the verbatim stylesheet, to prove the published one carries it (shared layout).
 // The class system (2026-09-14): the code asset is site-src/code.css, and the quoted font families
 // are read from the local rendering of the whole registry (class-site/assets/site.css).
@@ -57,11 +61,15 @@ const GONE = SHARED
       '/customer-stories-oceanic-future-ready',
       '/customer-stories-ocpao-ai-authority',
       '/customer-stories-omnia-ai-search-growth',
+      // v18: the legal pages became rows of the `legal` collection, at /legal/<slug>; the page slugs
+      // are gone, and so is the template page's own slug (a template is never served).
+      ...Object.keys(MANIFEST.entries ?? {}).map((f) => '/' + f.replace(/\.html?$/i, '')),
+      ...TEMPLATE_ROUTES,
     ]
   : []
 // v11: the three pages with a `form[data-lead-form]`, which POST to FormSubmit (patches/assets/site.js.mjs).
 const FORM_ROUTES = ['/', '/market-opportunity', '/authority-score']
-const LEGAL_ROUTES = ['/privacy', '/terms', '/hipaa']
+const LEGAL_ROUTES = ENTRY_ROUTES.length ? ENTRY_ROUTES : ['/privacy', '/terms', '/hipaa']
 
 const fails = []
 const warns = []
@@ -209,6 +217,36 @@ for (const route of ROUTES) {
 
 /* The retired routes, if anyone has filled the list in. A page deleted from the
    site document should 404; anything else means the apply did not take. */
+/* v18: every collection entry renders through its template with the row's cells. The h1 must be the
+   row's title and the outlet's text must read as the source text, word for word (the body is
+   markdown rendered at request time, so a conversion slip shows here and nowhere local). */
+{
+  const { COLLECTIONS } = await import('./cms-collections.mjs')
+  const textOf = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim()
+  for (const c of COLLECTIONS) {
+    for (const e of c.entries(MANIFEST.package)) {
+      const route = `${c.routeBase}/${e.slug}`
+      const html = await (await fetch(BASE + route)).text()
+      const h1 = textOf((html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/) ?? [])[1] ?? '')
+      if (h1 !== e.cells.title) fails.push(`${route} -> h1 "${h1}", expected the row's title "${e.cells.title}"`)
+      // the outlet is the last thing in its section: from its opening tag to the section's close
+      const at = html.indexOf('data-instatic-content-region')
+      const region = at < 0 ? undefined : html.slice(html.indexOf('>', at) + 1, html.indexOf('</section>', at))
+      if (region === undefined) fails.push(`${route} -> no content outlet (data-instatic-content-region) in the page`)
+      else if (textOf(region) !== e.bodyText) {
+        const a = textOf(region)
+        let i = 0
+        while (i < a.length && a[i] === e.bodyText[i]) i++
+        fails.push(`${route} -> the rendered body differs from the source text at char ${i}: live "…${a.slice(Math.max(0, i - 30), i + 40)}" vs source "…${e.bodyText.slice(Math.max(0, i - 30), i + 40)}"`)
+      }
+      const eyebrow = textOf((html.match(/class="[^"]*\beyebrow\b[^"]*"[^>]*>([\s\S]*?)<\/div>/) ?? [])[1] ?? '')
+      if (e.cells.eyebrow && eyebrow !== e.cells.eyebrow) fails.push(`${route} -> eyebrow "${eyebrow}", expected "${e.cells.eyebrow}"`)
+      const title = textOf((html.match(/<title>([^<]*)<\/title>/) ?? [])[1] ?? '')
+      if (e.cells.seoTitle && title !== e.cells.seoTitle) warns.push(`${route} -> <title> "${title}", the row's seoTitle is "${e.cells.seoTitle}"`)
+    }
+  }
+}
+
 for (const route of GONE) {
   const status = await head(BASE + route)
   if (status !== 404) fails.push(`${route} -> HTTP ${status}, expected 404 (retired route still live)`)

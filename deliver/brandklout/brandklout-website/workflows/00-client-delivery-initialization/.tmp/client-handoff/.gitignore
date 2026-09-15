@@ -3,3 +3,7 @@
 # pages it is built from are committed beside it. See README.md.
 package-*/OPEN-ME.html
 package-*/START-HERE.html
+
+# v18 (2026-09-15): `instatic-css/` is a byte-for-byte duplicate of `assets/pages/` (Sang: "a duplicate flat copy
+# of all page CSS files for easy upload/copy-paste"); the pipeline reads assets/pages/, so the copy stays out.
+package-*/instatic-css/

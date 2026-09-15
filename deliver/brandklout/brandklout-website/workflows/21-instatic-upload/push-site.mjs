@@ -730,10 +730,64 @@ for (const p of converted.pages) {
   }
 }
 
+/* CMS COLLECTIONS (v18, 2026-09-15; cms-collections.mjs). A collection's template page is an ordinary
+   page row with `template: { enabled, target: { kind: 'postTypes', tableSlugs }, priority }`, and
+   the entry's fields reach its nodes through `dynamicBindings` (`{ text: { source: 'currentEntry',
+   field } }` on a base.text) and one `base.outlet` node, which the publisher fills with the entry's
+   body rendered from markdown. Sang marked the bindable elements `data-cms-field="…"`, the importer
+   keeps `data-*` on text and container nodes, so that attribute is how each node is found. A
+   binding with no node, or a node of the wrong kind, refuses: the template changed, re-anchor. The
+   table and the rows are cms-sync.mjs's job, after this push. */
+const { COLLECTIONS } = await import('./cms-collections.mjs')
+const templateBySlug = new Map()
+for (const c of COLLECTIONS) {
+  const p = converted.pages.find((x) => x.slug === c.template.slug)
+  if (!p) throw new Error(`collection ${c.slug}: its template page ${c.template.slug} is not in import-out.json`)
+  templateBySlug.set(p.slug, { enabled: true, target: { kind: 'postTypes', tableSlugs: [c.slug] }, priority: 0 })
+  const byField = new Map()
+  for (const n of Object.values(p.nodes)) {
+    const f = n.props?.htmlAttributes?.['data-cms-field']
+    if (f) byField.set(f, [...(byField.get(f) ?? []), n])
+  }
+  for (const [field, spec] of Object.entries(c.template.bindings)) {
+    const list = byField.get(field) ?? []
+    if (list.length !== 1) throw new Error(`collection ${c.slug}: data-cms-field="${field}" is on ${list.length} nodes of ${p.slug}, expected 1`)
+    const n = list[0]
+    if (spec === 'outlet') {
+      const drop = [...n.children]
+      while (drop.length) {
+        const id = drop.pop()
+        drop.push(...(p.nodes[id]?.children ?? []))
+        delete p.nodes[id]
+      }
+      n.moduleId = 'base.outlet'
+      n.props = { tag: n.props.tag || 'div', customTag: '', html: '' } // OutletPropsSchema: nothing else
+      n.children = []
+      console.log(`cms        ${p.slug}: ${field} -> base.outlet (the entry body, classes kept)`)
+      continue
+    }
+    // A `<div>` with only text (the eyebrow, the notice) imports as a base.container holding ONE
+    // base.text (tag "none"); the binding goes on that child. Headings, spans and paragraphs are the
+    // base.text themselves.
+    let target = n
+    if (n.moduleId === 'base.container' && n.children.length === 1 && p.nodes[n.children[0]]?.moduleId === 'base.text') target = p.nodes[n.children[0]]
+    if (target.moduleId !== 'base.text' || typeof target.props.text !== 'string') throw new Error(`collection ${c.slug}: data-cms-field="${field}" is a ${n.moduleId} with ${n.children.length} children, expected a base.text (or a container holding one) for a text binding`)
+    target.dynamicBindings = { text: { source: 'currentEntry', field: spec.text, ...(spec.fallback ? { fallback: spec.fallback } : {}) } }
+    console.log(`cms        ${p.slug}: ${field} -> {currentEntry.${spec.text}}${spec.fallback ? ` (fallback ${spec.fallback})` : ''}`)
+  }
+}
+{
+  // Replace mode deletes every live page the payload does not carry; say which, so a retired page
+  // is a decision on the console and not a surprise on the site.
+  const retired = existingPages.filter((e) => e.slug && !converted.pages.some((p) => p.slug === e.slug)).map((e) => e.slug)
+  if (retired.length) console.log(`retired    ${retired.map((s) => '/' + s).join(', ')} (live pages not in this build; deleted on --apply)`)
+}
+
 const idBySlug = new Map(existingPages.filter((p) => p.slug).map((p) => [p.slug, p.id]))
 const seoBySlugForTitle = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
 const pages = converted.pages.map((p) => ({
   id: idBySlug.get(p.slug) ?? nid(),
+  ...(templateBySlug.has(p.slug) ? { template: templateBySlug.get(p.slug) } : {}),
   // The SEO title, not the short name.
   //
   // This publisher build renders <title> from `page.title` and has no per-page

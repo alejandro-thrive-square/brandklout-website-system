@@ -108,9 +108,10 @@ const PAGES = [
   { slug: 'authority-score', title: 'Authority Score (21-question assessment)' },
   { slug: 'book', title: 'Book a Call' },
   { slug: 'guarantee', title: '60-Day Guarantee' },
-  { slug: 'privacy', title: 'Privacy Policy' },
-  { slug: 'terms', title: 'Terms' },
-  { slug: 'hipaa', title: 'HIPAA & Data Handling' },
+  // v18 (2026-09-15): Privacy, Terms and HIPAA are ROWS of the `legal` collection (cms-collections.mjs),
+  // served at /legal/<slug> through this template page. The three page slugs are gone on purpose
+  // (replace mode deletes them); the template page is never served at its own slug.
+  { slug: 'legal-template', title: 'Legal page (CMS template)' },
 ]
 
 const problems = []
@@ -191,6 +192,9 @@ function rewrite(html, file) {
     if (!target) return whole // an in-page anchor, or `#`
     if (/^(?:[a-z][a-z0-9+.-]*:|\/)/i.test(target)) return whole // a scheme, or already a route
     const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(file), decodeURIComponent(target)))
+    // A page that became a collection ROW (v18: privacy.html -> /legal/privacy) links to its entry route.
+    const entryRoute = manifest.entries?.[manifest.aliases[resolved] ?? resolved]
+    if (entryRoute) return `href="${entryRoute}${frag ?? ''}"`
     const slug = slugByFile.get(manifest.aliases[resolved] ?? resolved)
     if (!slug) {
       problems.push(`${file}: link "${target}" resolves to ${resolved}, which is not a page in the package`)

@@ -18,6 +18,7 @@
  * Usage: node form-probe.mjs > .tmp/form-probe.log 2>&1
  */
 import puppeteer from 'puppeteer-core'
+import fs from 'node:fs'
 
 const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up.railway.app').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
@@ -124,7 +125,9 @@ for (const route of ['/', '/market-opportunity', '/authority-score']) {
 console.log(JSON.stringify({ forms: results }, null, 1))
 
 const legal = {}
-for (const route of ['/privacy', '/terms', '/hipaa']) {
+// v18: the legal pages are rows of the `legal` collection (pages.json `entries`: file -> /legal/<slug>).
+const LEGAL_ROUTES = Object.values(JSON.parse(fs.readFileSync(new URL('./.tmp/site/site-src/pages.json', import.meta.url), 'utf8')).entries ?? {})
+for (const route of LEGAL_ROUTES.length ? LEGAL_ROUTES : ['/privacy', '/terms', '/hipaa']) {
   const { page, rec } = await open(route)
   legal[route] = await page.evaluate(() => {
     const box = document.querySelector('.legal')
@@ -135,7 +138,8 @@ for (const route of ['/privacy', '/terms', '/hipaa']) {
       chars: box?.innerText.length ?? 0,
       h3: box?.querySelectorAll('h3').length ?? 0,
       bullets: li ? getComputedStyle(li).listStyleType : 'no list',
-      draftNote: !!box?.querySelector('.legal-note'),
+      // v18: the notice is a bound cell; the element is always there, hidden by `:empty` when blank
+      draftNote: !!box?.querySelector('.legal-note')?.textContent.trim(),
     }
   })
   legal[route].errors = rec.errors

@@ -85,7 +85,8 @@ const wantShots = process.argv.includes('--shots')
 /* Every page the build has, from its own list (see visual-diff.mjs for why it is no longer hand-written). */
 const MANIFEST = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
 const FILE = new Map(MANIFEST.pages.map((p) => [p.slug, p.file]))
-const ALL = [...FILE.keys()]
+// v18: a collection's template page is never served at its slug; see visual-diff.mjs.
+const ALL = MANIFEST.pages.filter((p) => !p.template).map((p) => p.slug)
 const slugArg = args.find((a) => /^(?!\d+$)[a-z0-9/-]+$/.test(a))
 const PAGES = slugArg ? [slugArg] : ALL
 

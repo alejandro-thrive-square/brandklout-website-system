@@ -169,8 +169,10 @@ const localCss = fs.readFileSync(LOCAL_CSS, 'utf8')
    `body.pg-survey` is only guaranteed to appear on /survey. */
 const manifest = JSON.parse(fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/pages.json'), 'utf8'))
 const hrefSet = new Set()
-for (const p of manifest.pages) {
-  const html = await (await fetch(REMOTE + (p.slug === 'index' ? '/' : `/${p.slug}`))).text()
+// v18: template pages are not served at their slug; their entries (/legal/<slug>) are.
+const liveRoutes = [...manifest.pages.filter((p) => !p.template).map((p) => (p.slug === 'index' ? '/' : `/${p.slug}`)), ...Object.values(manifest.entries ?? {})]
+for (const route of liveRoutes) {
+  const html = await (await fetch(REMOTE + route)).text()
   for (const m of html.matchAll(/href="(\/_instatic\/css\/[^"]+\.css)"/g)) hrefSet.add(m[1])
 }
 const hrefs = [...hrefSet]

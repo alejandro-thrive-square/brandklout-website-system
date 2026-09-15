@@ -70,8 +70,61 @@ const overlaid = new Set(walkDir(OVERLAY))
 // PATCHES: small find/replace edits on top of a package page (patches.mjs). Applied to pages only.
 const { loadPatches, applyPatches } = await import('./patches.mjs')
 const patches = await loadPatches()
-const read = (rel) => fs.readFileSync(path.join(overlaid.has(rel) ? OVERLAY : PKG, rel), 'utf8')
+const readRaw = (rel) => fs.readFileSync(path.join(overlaid.has(rel) ? OVERLAY : PKG, rel), 'utf8')
 const all = [...new Set([...walkDir(PKG), ...overlaid])]
+
+/* BUNDLED STYLESHEETS (v17/v18, 2026-09-15). Sang's "Instatic-ready" packages give every page ONE
+   208KB stylesheet under assets/pages/, which is the previous packages' shared sheets concatenated
+   in link order under `SOURCE: assets/<name>.css` comment banners (package-intake.mjs proves the
+   copies rule-identical across pages and to v16). Read as shipped, 33 different stylesheets would
+   defeat the shared-layout path and the class system. So a bundle is split back into its sources as
+   the page is read: each source becomes a virtual sheet at its original path, the page's one link
+   tag becomes one tag per source in v16's own format (the home patch still anchors on the carousel
+   sheet's tag), and two pages that disagree on a source refuse. Nothing downstream can tell. */
+const virtualSheets = new Map() // 'assets/site.css' -> css, split out of a bundle
+const BUNDLE_BANNER = /\/\*\s*=+\s*SOURCE:\s*([^\s*]+)[\s\S]*?\*\//g
+const bundleFrom = new Map() // source path -> the first page it was read from
+function unbundle(rel, html) {
+  const links = [...html.matchAll(/<link\b[^>]*>/gi)]
+    .map((m) => m[0])
+    .filter((t) => /rel=["']?stylesheet/i.test(t))
+    .map((tag) => ({ tag, href: (tag.match(/href=["']([^"']+)["']/i) ?? [])[1] }))
+    .filter((l) => l.href && !/^(https?:)?\/\//i.test(l.href))
+  if (links.length !== 1 || !/^assets\/pages\//.test(links[0].href)) return html
+  // Sang writes every href from the package root, even in cms-templates/ (his template is a root
+  // page in disguise); resolve from the page's folder first, then from the root.
+  const fromDir = path.posix.normalize(path.posix.join(path.posix.dirname(rel), links[0].href))
+  const sheetRel = fs.existsSync(path.join(PKG, fromDir)) ? fromDir : links[0].href
+  if (!fs.existsSync(path.join(PKG, sheetRel))) refuse(`${rel}: links ${links[0].href}, which is not in the package`)
+  const css = readRaw(sheetRel)
+  const marks = [...css.matchAll(BUNDLE_BANNER)]
+  if (!marks.length) return html
+  const sources = []
+  for (let i = 0; i < marks.length; i++) {
+    const source = marks[i][1]
+    const body = css.slice(marks[i].index + marks[i][0].length, i + 1 < marks.length ? marks[i + 1].index : css.length).trim() + '\n'
+    const norm = (s) => s.replace(/\s+/g, ' ').trim()
+    if (virtualSheets.has(source) && norm(virtualSheets.get(source)) !== norm(body)) refuse(`${rel}: its copy of ${source} differs from ${bundleFrom.get(source)}'s; the bundles are not one shared set`)
+    if (!virtualSheets.has(source)) {
+      virtualSheets.set(source, body)
+      bundleFrom.set(source, rel)
+    }
+    sources.push(source)
+  }
+  return html.replace(links[0].tag, () => sources.map((s) => `<link href="${s}" rel="stylesheet"/>`).join('\n'))
+}
+const read = (rel) => (virtualSheets.has(rel) ? virtualSheets.get(rel) : /\.html?$/i.test(rel) ? unbundle(rel, readRaw(rel)) : readRaw(rel))
+
+/* CMS COLLECTIONS (v18, 2026-09-15). cms-collections.mjs says which package pages are ROWS of a
+   collection (they are not pages: their routes come from the table) and which package file is the
+   collection's TEMPLATE page (a page row with a template flag, built here like any page, then
+   bound by push-site.mjs). The template is written at the root under its slug, because Sang writes
+   its links and asset paths from the root and because build-import-input resolves links from the
+   page's own folder. */
+const { COLLECTIONS, entryRoutes } = await import('./cms-collections.mjs')
+const ENTRY_ROUTES = entryRoutes(path.basename(PKG)) // package file -> '/legal/privacy'
+const TEMPLATES = new Map(COLLECTIONS.map((c) => [c.template.file, { slug: c.template.slug, collection: c.slug, routeBase: c.routeBase }]))
+for (const f of TEMPLATES.keys()) if (!all.includes(f)) refuse(`collection template ${f} is not in the package`)
 /* NOT PAGES. v11 ships `OPEN-ME.html`, a 1.3MB self-contained preview that Sang's own
    `tools/build_preview.py` builds by inlining every page, stylesheet and image into one file (his
    README: "It deliberately excludes OPEN-ME.html and START-HERE.html from the page registry"). It is a
@@ -126,8 +179,17 @@ for (const f of htmlFiles) {
    at `/customer-stories-<name>` and every link to `/customer-stories/<name>` 404'd, while the
    save, the SEO pass and `{"publishedPages":7}` all said ok. So the folder path is flattened here,
    once, and every later step (the links, the gates, push-site's id reuse) uses the same string. */
+/* Collection entries are rows, not pages: out of the page list (their routes are ENTRY_ROUTES). */
+for (const f of Object.keys(ENTRY_ROUTES)) {
+  const i = pageFiles.indexOf(f)
+  if (i < 0) refuse(`cms-collections.mjs lists ${f} as a collection entry, but it is not a page in the package`)
+  pageFiles.splice(i, 1)
+}
+
 const SLUG_OK = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
-const routeOf = (f) => (f === 'index.html' ? 'index' : f.replace(/\/index\.html?$/i, '').replace(/\.html?$/i, '').replace(/\//g, '-'))
+const routeOf = (f) => TEMPLATES.get(f)?.slug ?? (f === 'index.html' ? 'index' : f.replace(/\/index\.html?$/i, '').replace(/\.html?$/i, '').replace(/\//g, '-'))
+/* A template page is written at the root as <slug>.html (see CMS COLLECTIONS above). */
+const outFileOf = (f) => (TEMPLATES.has(f) ? `${TEMPLATES.get(f).slug}.html` : f)
 
 const GENERIC_STEMS = new Set(['style', 'styles', 'main', 'site', 'index', 'app'])
 const scopeOf = (route, cssRel) => {
@@ -423,21 +485,23 @@ async function buildShared() {
         return tag.replace(`src="${src}"`, () => `src="/assets/${name}"`)
       }
       if (/^https?:/i.test(src)) return tag.replace(`src="${src}"`, () => `src="/assets/${claim(remote, src, remoteName(src))}"`)
-      const rel = path.posix.normalize(path.posix.join(path.posix.dirname(file), src))
+      const rel = path.posix.normalize(path.posix.join(path.posix.dirname(outFileOf(file)), src))
       if (!fs.existsSync(path.join(PKG, rel))) refuse(`${file}: image ${src} is not in the package`)
       return tag.replace(`src="${src}"`, () => `src="/assets/${claim(localAssets, rel, path.posix.basename(rel))}"`)
     })
     if (/<(?:img|source)\b[^>]*\ssrcset=/i.test(page)) refuse(`${file}: srcset is not handled`)
 
     const lost = droppedAttributes(html, file)
-    if (lost.length) repairs[route === 'index' ? '/' : `/${route}`] = lost
+    // A template's repairs apply on every entry route under the collection's base (`/legal/*`).
+    if (lost.length) repairs[TEMPLATES.has(file) ? `${TEMPLATES.get(file).routeBase}/*` : route === 'index' ? '/' : `/${route}`] = lost
 
-    const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1].trim()
+    // v18: Sang's CMS template writes `<title data-cms-seo="seo_title">`, so the tag may carry attributes.
+    const title = html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1].trim()
     const descTag = html.match(/<meta\b[^>]*\bname=["']description["'][^>]*>/i)?.[0]
     const description = descTag ? attrsOf(descTag).content : undefined
     if (!title || !description) refuse(`${file}: no <title> or no meta description`)
     seo.pages[route] = { title: decodeEntities(title), description: decodeEntities(description) }
-    out.push({ slug: route, file, out: page })
+    out.push({ slug: route, file: outFileOf(file), ...(TEMPLATES.has(file) ? { source: file, template: TEMPLATES.get(file).collection } : {}), out: page })
   }
 
   const jsParts = []
@@ -448,7 +512,9 @@ async function buildShared() {
         `{\n` +
         `  const lost = ${JSON.stringify(repairs)}\n` +
         `  const here = location.pathname.replace(/\\.html$/, '').replace(/\\/index$/, '/') || '/'\n` +
-        `  for (const [sel, nth, attrs] of lost[here] ?? []) {\n` +
+        `  // a collection template's repairs are keyed '<routeBase>/*' and apply to every entry under it\n` +
+        `  const list = lost[here] ?? Object.entries(lost).find(([k]) => k.endsWith('/*') && here.startsWith(k.slice(0, -1)))?.[1] ?? []\n` +
+        `  for (const [sel, nth, attrs] of list) {\n` +
         `    const el = document.querySelectorAll(sel)[nth]\n` +
         `    if (!el) { console.warn('import repair: nothing matches', sel, nth); continue }\n` +
         `    for (const [k, v] of Object.entries(attrs)) if (el.getAttribute(k) !== v) el.setAttribute(k, v)\n` +
@@ -469,7 +535,10 @@ async function buildShared() {
   fs.mkdirSync(path.join(FINAL, 'assets'), { recursive: true })
   fs.mkdirSync(CSS_SRC, { recursive: true }) // empty: nothing for push-site to harvest, the CSS is verbatim
   fs.mkdirSync(IMG_CACHE, { recursive: true })
-  for (const p of out) fs.writeFileSync(path.join(FINAL, p.file), p.out)
+  for (const p of out) {
+    fs.mkdirSync(path.dirname(path.join(FINAL, p.file)), { recursive: true })
+    fs.writeFileSync(path.join(FINAL, p.file), p.out)
+  }
   fs.writeFileSync(path.join(FINAL, 'assets', 'site.css'), css)
   fs.writeFileSync(path.join(FINAL, 'assets', 'site.js'), jsParts.join('\n\n') + '\n')
   for (const [rel, name] of localAssets) fs.copyFileSync(path.join(PKG, rel), path.join(FINAL, 'assets', name))
@@ -487,7 +556,18 @@ async function buildShared() {
   fs.writeFileSync(
     path.join(SITE, 'site-src', 'pages.json'),
     JSON.stringify(
-      { package: path.basename(PKG), layout: 'shared', css: 'verbatim', overlay: [...overlaid], aliases, notPages: [...NOT_PAGES].filter((f) => all.includes(f)), pages: out.map(({ slug, file }) => ({ slug, file, scope: null })) },
+      {
+        package: path.basename(PKG),
+        layout: 'shared',
+        css: 'verbatim',
+        overlay: [...overlaid],
+        aliases,
+        notPages: [...NOT_PAGES].filter((f) => all.includes(f)),
+        // package file -> live route, for pages that are now rows of a collection (cms-collections.mjs)
+        entries: ENTRY_ROUTES,
+        // a page with `template` is a collection's template page: built and pushed like a page, never served at its slug
+        pages: out.map(({ slug, file, source, template }) => ({ slug, file, ...(template ? { source, template } : {}), scope: null })),
+      },
       null,
       2,
     ) + '\n',

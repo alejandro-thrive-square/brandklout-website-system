@@ -1,11 +1,16 @@
 /* ===== agency additions, appended after Sang's stylesheets by prepare-source.mjs (shared layout) =====
-   The legal pages carry brandklout.com's text (patches/privacy|terms|hipaa.html.mjs), which uses
-   bulleted lists. Sang's `.legal ul` sets only padding, and Instatic's reset stylesheet removes list
-   bullets on the published page only (trap 43), so the bullets are declared outright. */
+   The legal pages carry brandklout.com's text (cms-collections.mjs, rows of the `legal` collection
+   since v18), which uses bulleted lists. Sang's `.legal ul` sets only padding, and Instatic's reset
+   stylesheet removes list bullets on the published page only (trap 43), so the bullets are declared
+   outright. The body is rendered from markdown at request time inside the outlet (`.legal-richtext`),
+   so these must stay element rules under `.legal` (nothing in the build matches them, and the class
+   system carries them as written). */
 .legal ul { list-style-type: disc; }
 .legal ol { list-style-type: decimal; }
 .legal li { margin-top: 6px; }
-.legal h3:first-child { margin-top: 0; }
+.legal h3:first-child, .legal-richtext > :first-child { margin-top: 0; }
+/* The optional notice above the body: an empty cell must not leave an empty callout box. */
+.legal-note:empty { display: none; }
 
 /* ===== home v12 (2026-09-14): the three sections patches/index.html.mjs adds ===================== */
 
