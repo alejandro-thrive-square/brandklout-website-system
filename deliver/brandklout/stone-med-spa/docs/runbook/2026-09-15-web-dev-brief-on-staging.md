@@ -8,7 +8,7 @@ teammate's write-up of a client call with Summer Takkouch. Most of it repeated t
 the [earlier run](./2026-09-15-client-feedback-on-staging.md) had already applied, so this run
 applied only the **differences**. **Staging only**, and production is unchanged.
 
-## Done (commit SHA in INDEX)
+## Done (`81845d05`)
 
 | Brief | Change |
 | :-- | :-- |

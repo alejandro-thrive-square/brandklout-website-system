@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-09-15 | 2026-09-15 — The teammate's web dev brief (client call) applied on staging: phone back to the 383-8361 tracking number, Facials before Restoration, Biostimulators, wallet + signed agreement, real Google reviews; the Dr. Stone injection rules held for the client — carries **gotchas** | [`2026-09-15-web-dev-brief-on-staging.md`](./2026-09-15-web-dev-brief-on-staging.md) |
+| 2026-09-15 | 2026-09-15 — The teammate's web dev brief (client call) applied on staging: phone back to the 383-8361 tracking number, Facials before Restoration, Biostimulators, wallet + signed agreement, real Google reviews; the Dr. Stone injection rules held for the client (`81845d05`) — carries **gotchas** | [`2026-09-15-web-dev-brief-on-staging.md`](./2026-09-15-web-dev-brief-on-staging.md) |
 | 2026-09-15 | 2026-09-15 — The client's website feedback (Asana, ten subtasks) applied and published to staging only: Westlake Medical Aesthetics, 12 treatments in 4 categories, two providers, one $149 membership — carries **gotchas** | [`2026-09-15-client-feedback-on-staging.md`](./2026-09-15-client-feedback-on-staging.md) |
 | 2026-09-15 | 2026-09-15 — Staging created at staging.westlaketxmedspa.com, and /sitemap.xml live via a Cloudflare Worker — carries **gotchas** | [`2026-09-15-staging-and-sitemap.md`](./2026-09-15-staging-and-sitemap.md) |
 | 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at westlaketxmedspa.com, Sang added, republished with the cross-links fixed — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
