@@ -23,7 +23,7 @@ px at the load width: nothing followed the stylesheet or a resize. The editor ru
 it always showed the stylesheet's size. (Not reproduced: Sang's exact window width, or the difference
 in the "Growth" block, which was not visible in headless at 1440/1920.)
 
-### Done
+### Done (commit `0d0484b4`, not pushed)
 
 - `remove-site-widget.mjs` (new; read-merge-write, dry run by default, saves the settings before the change to
   `.tmp/plugins-before-widget-removal.json`): the embed-origins plugin's `siteScripts` was only the
