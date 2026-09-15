@@ -15,6 +15,15 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
 
+**2026-09-15 — staging and the sitemap.** Staging is `https://staging.westlaketxmedspa.com`
+(admin `/admin`, same login as production). It is the Railway environment `staging`, seeded from
+production (11/11 content-equivalent) and noindex at the edge. `/sitemap.xml` is live on the apex
+and www, served by the Cloudflare Worker `westlaketxmedspa-sitemap` from
+`workflows/06-cloudflare-sitemap/`. **Open:** every production page now shares one `<title>` after
+an admin edit on 2026-09-12. Submit the sitemap in Search Console. There is still no canonical or
+`og:url` —
+[2026-09-15 run](./runbook/2026-09-15-staging-and-sitemap.md).
+
 **2026-09-10 — domain cutover.** `westlaketxmedspa.com` (+ `www`) is connected and the admin is
 `https://westlaketxmedspa.com/admin`. The old `stone-med-spa-production.up.railway.app` host was
 **detached** by the cutover and 404s everywhere; everything below that names it is historical.
@@ -23,7 +32,8 @@ Park). Republished the same evening: every link to Stone Surgical Arts (the foot
 about button, the treatments door) now goes to `https://www.dfwsurgicalarts.com/`. The upload
 scripts import `insta-api.mjs` from `deliver/process/22-instatic-api-sync/` —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md). **Still open:**
-neither Stone site serves a canonical, `og:url` or sitemap, so `seo.json` reaches nothing live.
+neither Stone site serves a canonical or `og:url`, so `seo.json` reaches nothing live. (The med
+spa's sitemap was added 2026-09-15.)
 
 **2026-09-04.** The brand has an Instatic instance of its own, provisioned name-first so the
 generated host already carries the business name, and the second build is on it. Gates:

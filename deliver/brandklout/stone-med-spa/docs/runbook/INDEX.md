@@ -1,11 +1,12 @@
 # Runbook index
 
-8 runs, newest first. Each line is one file in this folder.
+9 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | 2026-09-15 — Staging created at staging.westlaketxmedspa.com, and /sitemap.xml live via a Cloudflare Worker — carries **gotchas** | [`2026-09-15-staging-and-sitemap.md`](./2026-09-15-staging-and-sitemap.md) |
 | 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at westlaketxmedspa.com, Sang added, republished with the cross-links fixed — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
 | 2026-09-03 | Previous status: eleven core pages REBUILT (second build, 2026-09-03 evening), local only | [`2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md`](./2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md) |
 | 2026-09-02 | Done this session (2026-09-02) — the worktree exists (`f1560bad`) | [`2026-09-02-this-session-the-worktree-exists-f1560bad.md`](./2026-09-02-this-session-the-worktree-exists-f1560bad.md) |

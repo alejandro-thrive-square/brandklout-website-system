@@ -32,6 +32,13 @@
       "alternates": [],
       "railway": { "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d", "service": "Westlake Medical Aesthetics" },
       "note": "Cut over 2026-09-10 to westlaketxmedspa.com + www. Connecting them DETACHED stone-med-spa-production.up.railway.app (now 404 everywhere) while PUBLIC_ORIGIN still named only that host, so no address could log in. PUBLIC_ORIGIN is now apex, www, then the dead railway host (kept per the rule; not listed here because it no longer serves the admin). The service was renamed 'Westlake Medical Aesthetics'; the project is still 'Stone Med Spa'. History: provisioned 2026-09-04 and clean from the first boot, which is the point: the Railway project, the service and the generated domain were all named 'Stone Med Spa' BEFORE the domain was minted, and PUBLIC_ORIGIN was set to that host in the same call. A generated domain is derived from the service name at creation, so naming afterwards leaves the origin pointing at the old host and every admin write answers 403. There is no client domain yet; when one is bought, follow the cutover in this module and keep the railway host in PUBLIC_ORIGIN — INSTATIC_BASE_URL points at it."
+    },
+    {
+      "client": "stone-med-spa-staging",
+      "adminUrl": "https://staging.westlaketxmedspa.com",
+      "alternates": [],
+      "railway": { "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d", "service": "Westlake Medical Aesthetics", "environment": "staging" },
+      "note": "Created 2026-09-15 as the Railway environment `staging` (ca87e7fd-2965-4fad-a082-0eaec9e8e3cf), own volume at /app/storage. PUBLIC_ORIGIN is the staging host alone and was set BEFORE the volume and domain mutations, and no generated railway host was ever minted - the only door is the Cloudflare-proxied one carrying X-Robots-Tag noindex. Same login as production; seeded from production the same day."
     }
   ]
 }
