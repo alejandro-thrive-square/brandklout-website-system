@@ -107,6 +107,24 @@ const PICKS = [
   [94, "patient-chair-team", "Two of the team with a patient in the chair"],
   [174, "team-plaques-2", "Two of the team reading a schedule under the award plaques"],
   [20, "team-pair-talking-2", "Two of the clinical team talking in the corridor"],
+  // BugHerd 2026-09-15: #45 "we are also using a LOT of the same photos, are
+  // there no others?" -- nine of the team page's fifteen frames were also on
+  // the homepage. These give the team page its own, one scene per slot. #21:
+  // the huddle still read glum on the home band; 162 is the frame where the
+  // front of the group is smiling. #6: 84 sits beside the relay's sentence.
+  [162, "team-huddle-smile", "The team at the front desk before the doors open, one of them laughing"],
+  [80, "team-desk-morning", "The whole team at the front desk, reading the day's schedule"],
+  [13, "team-desk-plan", "The front desk going over the morning's list with the clinical team"],
+  [21, "desk-laugh", "The front desk laughing on a call with a patient"],
+  [50, "clinical-charting", "A hygienist charting at the treatment room computer with a colleague"],
+  [138, "dentist-assistant", "A dentist in loupes with his assistant at the chair"],
+  [91, "hygienist-loupes", "A hygienist in loupes at the chair with an adult patient"],
+  [181, "clinical-pair-chair", "Two of the clinical team with an adult patient in the chair"],
+  [188, "desk-pair-tablet", "Two of the front desk going through a plan on the tablet"],
+  [48, "checkin-screen", "The front desk turning the tablet so the patient can see the plan"],
+  [206, "desk-phone", "The front desk on the phone, booking a visit"],
+  [84, "checkin-counter", "A patient at the front counter while the front desk reads her the plan"],
+  [169, "clinical-room", "Two of the clinical team with a patient in a treatment room"],
 ];
 
 const urls = fs.readFileSync(URLS, "utf8").split(/\r?\n/).filter(Boolean);
@@ -126,7 +144,12 @@ function jpegSize(buf) {
   return null;
 }
 
-const manifest = {};
+// Frames that did not come from the album (frame.mjs writes them with
+// frame:"external", e.g. dr-sung-standing) are not in PICKS. Carry them over,
+// or every re-run of this script deletes them from the manifest.
+const MANIFEST = path.join(HERE, "album-manifest.json");
+const previous = fs.existsSync(MANIFEST) ? JSON.parse(fs.readFileSync(MANIFEST, "utf8")) : {};
+const manifest = Object.fromEntries(Object.entries(previous).filter(([, v]) => v.frame === "external"));
 for (const [n, slug, alt] of PICKS) {
   const url = urls[n - 1];
   if (!url) { console.error(`no url for frame ${n}`); process.exit(1); }

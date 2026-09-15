@@ -67,6 +67,11 @@
 | `.tmp/frame.mjs` | Crops and resizes one image (any format Chrome decodes) into the four-width JPEG set and registers it in `album-manifest.json`. `--probe` writes a labelled grid to find the crop box. For a frame that did not come from the album. |
 | `.tmp/crop-tree.mjs` | The tree out of the logo as a transparent PNG (`mp-tree-mark.png`), the seals' mark. |
 | `.tmp/bugherd/` | One review round: the BugHerd export (`tasks-<date>.json`), the scripts that applied its structural edits, and the push logs. |
+| `.tmp/bugherd/pull.mjs` | Every task by id with its comments and attachments, screenshots and attachments downloaded (`screens-<date>/`). The list endpoint hides page, selector, browser and attachments. |
+| `.tmp/bugherd/diff-rounds.mjs` | What moved on the board between two exports: description, status, selector, screenshot, comments, attachments. |
+| `.tmp/bugherd/shot-tasks.mjs` / `shot-sel.mjs` | Each note re-shot where the reviewer stood (their page, `requester_browser_size`, their selector), in `webkit` or `chromium`; `shot-sel` takes named selectors. |
+| `.tmp/bugherd/reply-<date>.mjs` | The round's replies on the board: one comment per task, `done` only for notes verified live. Dry run by default, `--send` posts. |
+| `.tmp/album-sheet/render-cands.mjs` | Candidate album frames at 900 px with number and orientation, for choosing replacements by eye. |
 | `.tmp/album-sheet/` | The client's Google Photos album as a numbered contact sheet (`render-sheet.mjs`), so "the photo with X" can be found by eye. Numbers match `album-urls.txt`. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
 
@@ -543,6 +548,39 @@ on `\n` matches some pages and not others — use `\r?\n`. And **never export
 the exported token answers "Unauthorized"; a chain built on `node x | tail` does not stop
 there, and the first push of this round published the new stylesheet over the old pages
 before the run was caught and redone.
+
+### The review round, 2026-09-15: the same 48 notes, checked in the reviewer's browser
+
+Nothing new was written on the board: no comments, no edited notes, no status moves. The
+19:32–19:34Z touches on #1–#33 were the agency **assigning** those notes (the 09-10 export
+never recorded assignees, so the change was invisible until each task was pulled whole). What
+the whole pull did show was two things the 09-10 round had missed:
+
+**Every note was filed from Safari 26.6.2 on a Mac at 1512×735** (`requester_browser`,
+`requester_browser_size` on each task), and the 09-10 round had verified in Chrome at 1440.
+So a note that "does not reproduce" has to be tried in WebKit at the reviewer's size before it
+is called unreproducible: `node .tmp/node_modules/playwright-core/cli.js install webkit` once,
+then `shot-tasks.mjs webkit <origin> <out>`.
+
+**Six notes carry attachments** (#3, #5, #6, #15, #38, #42): the reviewer's own crops, which
+the 09-10 export did not fetch. #3's is the logo with the foot of the L gone, which settled
+"which browser" without asking.
+
+What changed in the build: the logo has air inside its box (Safari clips a filtered image at
+the box's fractional edge, and the artwork has under a CSS pixel under DENTAL); the relay's
+closing sentence has a photograph beside it (#6); the home band is a smiling huddle frame
+(#21); and **the team page uses its own photographs** (#45) — ten of its frames were swapped
+for album shots used nowhere else, one scene per slot, so none of its team photos repeat the
+home page. Per-photo framing is keyed on the file (`img[src*="mp-<key>-"]`), which survives
+Instatic's `/uploads/<id>-` rename, so the rule follows the picture and not the slot.
+
+**`import-album.mjs` used to delete `frame.mjs`'s entries.** It rebuilt `album-manifest.json`
+from `PICKS` alone, so every re-run dropped the `frame: "external"` frames (Dr. Sung's
+`dr-sung-standing`, on 33 pages). It now carries them over.
+
+**Answering the board.** `reply-<date>.mjs` writes one comment per task and moves a note to
+`done` only once it is verified live; a note that needs the agency (a photo they hold, a
+browser we cannot run) gets a question and stays in `todo`. Never write to Asana from here.
 
 ## Instatic import
 

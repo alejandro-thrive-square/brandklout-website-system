@@ -5957,3 +5957,36 @@ a.el-stack { display: block; text-decoration: none; cursor: pointer; }
 /* #47  A lighter line under the emergency fact on the team page. */
 .iv-fun { display: block; margin-top: .6rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .05em; color: #e3c3a8; line-height: 1.6; }
 .iv-fun a { color: #fff; border-bottom-color: rgba(255, 255, 255, .5); }
+
+/* ===========================================================================
+   THE 2026-09-15 REVIEW ROUND — the same 48 notes, re-checked where the
+   reviewer stands: Safari 26 at 1512x735. Export and screenshots in
+   .tmp/bugherd/tasks-2026-09-15.json; the number is in the comment.
+   ======================================================================== */
+
+/* #3  "The bottom of the logo is being cut off" (Safari 26, 1512x652). The
+   artwork has two source pixels under DENTAL, under one CSS pixel at this
+   size, and Safari composites the filtered logo on a layer cut at the box's
+   fractional edge. Air inside the box keeps the letters off that edge. */
+.navbar_logo { box-sizing: content-box; padding-block: .3rem; }
+
+/* #6  The relay's closing sentence hung alone beside a column of air. A
+   photograph of the front counter now sits beside it. */
+.re-inset { margin: 0; max-width: 14rem; }
+.re-inset img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 42%; }
+.re-inset figcaption { padding-top: .7rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; color: var(--fg-soft); line-height: 1.5; }
+@media (min-width: 900px) {
+  .re-after { grid-template-columns: minmax(0, 1fr) minmax(0, 12rem); column-gap: clamp(1.5rem, 3vw, 2.75rem); align-items: start; max-width: none; }
+  .re-inset { max-width: none; }
+}
+
+/* #21 and #45  Framing for the frames this round brought in. Keyed on the
+   file, which survives the import's /uploads/<id>- rename, so each rule
+   follows its picture and not a slot. */
+.pe-band img[src*="mp-team-huddle-smile-"] { object-position: 50% 44%; }
+.el-pane img[src*="mp-hygienist-loupes-"] { object-position: 68% 28%; }
+.el-pair_frame img[src*="mp-clinical-pair-chair-"] { object-position: 50% 30%; }
+.cp-band img[src*="mp-checkin-screen-"] { object-position: 50% 40%; }
+.iv-shot img[src*="mp-desk-phone-"] { object-position: 50% 40%; }
+.el-sheet_tile img[src*="mp-desk-laugh-"] { object-position: 50% 30%; }
+.el-sheet_tile img[src*="mp-dentist-assistant-"] { object-position: 72% 0%; }

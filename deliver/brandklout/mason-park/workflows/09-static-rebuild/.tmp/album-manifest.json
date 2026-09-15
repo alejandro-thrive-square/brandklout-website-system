@@ -1,4 +1,35 @@
 {
+  "dr-sung-standing": {
+    "frame": "external",
+    "alt": "Dr. William Sung, DMD",
+    "source": "grandmissiondentistry.com, GrandMissionDentistry(15of28).webp 3931x5241, Dr. Sung beside Dr. Nguyen, cropped to him (1400px wide, the 1536 candidate is a 10% upscale); fetched 2026-09-10 for BugHerd #16 (no crossed arms)",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-dr-sung-standing-410x546.jpg",
+        "bytes": 26041
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-dr-sung-standing-768x1023.jpg",
+        "bytes": 66596
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-dr-sung-standing-1024x1364.jpg",
+        "bytes": 107070
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-dr-sung-standing-1536x2046.jpg",
+        "bytes": 188368
+      }
+    ]
+  },
   "team-front-desk": {
     "frame": 64,
     "alt": "The Mason Park Dental team gathered at the front desk",
@@ -379,7 +410,7 @@
         "w": 1024,
         "h": 1364,
         "file": "mp-kid-xray-1024x1364.jpg",
-        "bytes": 236357
+        "bytes": 236337
       },
       {
         "w": 1536,
@@ -505,7 +536,7 @@
         "w": 1536,
         "h": 1153,
         "file": "mp-kid-toy-machine-2-1536x1153.jpg",
-        "bytes": 280713
+        "bytes": 280725
       }
     ]
   },
@@ -559,13 +590,13 @@
         "w": 1024,
         "h": 1365,
         "file": "mp-kid-shelf-small-1024x1365.jpg",
-        "bytes": 338906
+        "bytes": 338877
       },
       {
         "w": 1536,
         "h": 2048,
         "file": "mp-kid-shelf-small-1536x2048.jpg",
-        "bytes": 684895
+        "bytes": 684329
       }
     ]
   },
@@ -739,7 +770,7 @@
         "w": 1024,
         "h": 1364,
         "file": "mp-desk-call-2-1024x1364.jpg",
-        "bytes": 346690
+        "bytes": 346693
       },
       {
         "w": 1536,
@@ -1249,13 +1280,13 @@
         "w": 1024,
         "h": 1364,
         "file": "mp-ceiling-screen-1024x1364.jpg",
-        "bytes": 361462
+        "bytes": 361457
       },
       {
         "w": 1536,
         "h": 2046,
         "file": "mp-ceiling-screen-1536x2046.jpg",
-        "bytes": 855072
+        "bytes": 855049
       }
     ]
   },
@@ -1435,7 +1466,7 @@
         "w": 1536,
         "h": 2046,
         "file": "mp-hygienist-working-5-1536x2046.jpg",
-        "bytes": 676436
+        "bytes": 676448
       }
     ]
   },
@@ -1889,34 +1920,393 @@
       }
     ]
   },
-  "dr-sung-standing": {
-    "frame": "external",
-    "alt": "Dr. William Sung, DMD",
-    "source": "grandmissiondentistry.com, GrandMissionDentistry(15of28).webp 3931x5241, Dr. Sung beside Dr. Nguyen, cropped to him (1400px wide, the 1536 candidate is a 10% upscale); fetched 2026-09-10 for BugHerd #16 (no crossed arms)",
+  "team-huddle-smile": {
+    "frame": 162,
+    "alt": "The team at the front desk before the doors open, one of them laughing",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-team-huddle-smile-410x308.jpg",
+        "bytes": 49122
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-team-huddle-smile-768x576.jpg",
+        "bytes": 127770
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-team-huddle-smile-1024x769.jpg",
+        "bytes": 203575
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-team-huddle-smile-1536x1153.jpg",
+        "bytes": 366706
+      }
+    ]
+  },
+  "team-desk-morning": {
+    "frame": 80,
+    "alt": "The whole team at the front desk, reading the day's schedule",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-team-desk-morning-410x308.jpg",
+        "bytes": 50162
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-team-desk-morning-768x576.jpg",
+        "bytes": 133314
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-team-desk-morning-1024x769.jpg",
+        "bytes": 209018
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-team-desk-morning-1536x1153.jpg",
+        "bytes": 375101
+      }
+    ]
+  },
+  "team-desk-plan": {
+    "frame": 13,
+    "alt": "The front desk going over the morning's list with the clinical team",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-team-desk-plan-410x308.jpg",
+        "bytes": 50414
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-team-desk-plan-768x576.jpg",
+        "bytes": 137645
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-team-desk-plan-1024x769.jpg",
+        "bytes": 223600
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-team-desk-plan-1536x1153.jpg",
+        "bytes": 420922
+      }
+    ]
+  },
+  "desk-laugh": {
+    "frame": 21,
+    "alt": "The front desk laughing on a call with a patient",
     "sizes": [
       {
         "w": 410,
         "h": 546,
-        "file": "mp-dr-sung-standing-410x546.jpg",
-        "bytes": 26041
+        "file": "mp-desk-laugh-410x546.jpg",
+        "bytes": 75488
       },
       {
         "w": 768,
         "h": 1023,
-        "file": "mp-dr-sung-standing-768x1023.jpg",
-        "bytes": 66596
+        "file": "mp-desk-laugh-768x1023.jpg",
+        "bytes": 213579
       },
       {
         "w": 1024,
         "h": 1364,
-        "file": "mp-dr-sung-standing-1024x1364.jpg",
-        "bytes": 107070
+        "file": "mp-desk-laugh-1024x1364.jpg",
+        "bytes": 339978
       },
       {
         "w": 1536,
         "h": 2046,
-        "file": "mp-dr-sung-standing-1536x2046.jpg",
-        "bytes": 188368
+        "file": "mp-desk-laugh-1536x2046.jpg",
+        "bytes": 642925
+      }
+    ]
+  },
+  "clinical-charting": {
+    "frame": 50,
+    "alt": "A hygienist charting at the treatment room computer with a colleague",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-clinical-charting-410x546.jpg",
+        "bytes": 79359
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-clinical-charting-768x1023.jpg",
+        "bytes": 220210
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-clinical-charting-1024x1364.jpg",
+        "bytes": 350399
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-clinical-charting-1536x2046.jpg",
+        "bytes": 678515
+      }
+    ]
+  },
+  "dentist-assistant": {
+    "frame": 138,
+    "alt": "A dentist in loupes with his assistant at the chair",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-dentist-assistant-410x546.jpg",
+        "bytes": 63689
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-dentist-assistant-768x1023.jpg",
+        "bytes": 180332
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-dentist-assistant-1024x1364.jpg",
+        "bytes": 292555
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-dentist-assistant-1536x2046.jpg",
+        "bytes": 599234
+      }
+    ]
+  },
+  "hygienist-loupes": {
+    "frame": 91,
+    "alt": "A hygienist in loupes at the chair with an adult patient",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-hygienist-loupes-410x546.jpg",
+        "bytes": 75460
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-hygienist-loupes-768x1023.jpg",
+        "bytes": 216612
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-hygienist-loupes-1024x1364.jpg",
+        "bytes": 347827
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-hygienist-loupes-1536x2046.jpg",
+        "bytes": 710373
+      }
+    ]
+  },
+  "clinical-pair-chair": {
+    "frame": 181,
+    "alt": "Two of the clinical team with an adult patient in the chair",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-clinical-pair-chair-410x546.jpg",
+        "bytes": 63286
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-clinical-pair-chair-768x1023.jpg",
+        "bytes": 163040
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-clinical-pair-chair-1024x1364.jpg",
+        "bytes": 248975
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-clinical-pair-chair-1536x2046.jpg",
+        "bytes": 456605
+      }
+    ]
+  },
+  "desk-pair-tablet": {
+    "frame": 188,
+    "alt": "Two of the front desk going through a plan on the tablet",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-desk-pair-tablet-410x546.jpg",
+        "bytes": 70693
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-desk-pair-tablet-768x1023.jpg",
+        "bytes": 199891
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-desk-pair-tablet-1024x1364.jpg",
+        "bytes": 325587
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-desk-pair-tablet-1536x2046.jpg",
+        "bytes": 698175
+      }
+    ]
+  },
+  "checkin-screen": {
+    "frame": 48,
+    "alt": "The front desk turning the tablet so the patient can see the plan",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-checkin-screen-410x546.jpg",
+        "bytes": 75422
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-checkin-screen-768x1023.jpg",
+        "bytes": 231811
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-checkin-screen-1024x1364.jpg",
+        "bytes": 380143
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-checkin-screen-1536x2046.jpg",
+        "bytes": 848554
+      }
+    ]
+  },
+  "desk-phone": {
+    "frame": 206,
+    "alt": "The front desk on the phone, booking a visit",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-desk-phone-410x546.jpg",
+        "bytes": 71533
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-desk-phone-768x1023.jpg",
+        "bytes": 212318
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-desk-phone-1024x1364.jpg",
+        "bytes": 349804
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-desk-phone-1536x2046.jpg",
+        "bytes": 711023
+      }
+    ]
+  },
+  "checkin-counter": {
+    "frame": 84,
+    "alt": "A patient at the front counter while the front desk reads her the plan",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-checkin-counter-410x546.jpg",
+        "bytes": 68879
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-checkin-counter-768x1023.jpg",
+        "bytes": 200224
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-checkin-counter-1024x1364.jpg",
+        "bytes": 328578
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-checkin-counter-1536x2046.jpg",
+        "bytes": 724234
+      }
+    ]
+  },
+  "clinical-room": {
+    "frame": 169,
+    "alt": "Two of the clinical team with a patient in a treatment room",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-clinical-room-410x308.jpg",
+        "bytes": 41752
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-clinical-room-768x576.jpg",
+        "bytes": 111983
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-clinical-room-1024x769.jpg",
+        "bytes": 180548
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-clinical-room-1536x1153.jpg",
+        "bytes": 343814
       }
     ]
   }
