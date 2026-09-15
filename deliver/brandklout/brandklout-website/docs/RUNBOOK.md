@@ -12,6 +12,9 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: Sang's v16, published as seq 22; wide-screen sizing softened in seq 23 (2026-09-14)
 
+- **Seq 24 (2026-09-15)**: Sang's and Sean's admin edits are back in the source (`patches/index.html.mjs`,
+  `patches/guarantee.html.mjs`, `agency/site.css`), except the duplicate story headline and the 5rem
+  h1. [`runbook/2026-09-15-admin-edits-restored.md`](./runbook/2026-09-15-admin-edits-restored.md).
 - **Seq 23**: the fluid root now grows at most 1.15x (at 2560) instead of 1.6x, because the home
   heading was far bigger than Sang's on wide screens ("the heading is not right", reported twice).
   [`runbook/2026-09-14-heading-fluid-root.md`](./runbook/2026-09-14-heading-fluid-root.md).

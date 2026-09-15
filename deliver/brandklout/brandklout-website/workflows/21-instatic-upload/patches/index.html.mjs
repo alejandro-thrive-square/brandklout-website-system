@@ -253,7 +253,27 @@ export default [
     find: /<section class="section soft results-section" id="results">[\s\S]*?(?=<section class="section v5-founder" id="why-brandklout">)/,
     replace: RESULTS + '\n' + STORIES + '\n',
   },
-  /* The edits made in the Instatic admin on 2026-09-14 (wordmark, "Why us" headline, founder quote,
-     featured-stories headline) were ported here once and then dropped the same evening, on
-     Alejandro's instruction: "Forget the changes that we made on Instatic". Sang's wording stands. */
+  /* --- admin edits, 2026-09-14 (Sang and Sean, in the Instatic admin before seq 19) -----------------
+     Ported at seq 19, dropped at seq 20 ("Forget the changes that we made on Instatic") because the
+     published heading looked wrong, then RESTORED at seq 24 (2026-09-15, Alejandro: "finish
+     everything") once the wrong heading turned out to be the fluid root on wide screens.
+     Two are deliberately NOT restored: the featured-stories headline, which the admin changed to
+     "Growth you can tie to a real practice." (word for word the #results headline above it), and an
+     inline `font-size: 5rem` on the hero h1 (it would undo the seq 23 sizing). */
+  {
+    why: 'admin edit 2026-09-14: the Oceanic wordmark in the client strip is uppercase like the others',
+    find: '>oceanic<small>DENTAL</small></a>',
+    replace: '>OCEANIC<small>DENTAL</small></a>',
+  },
+  {
+    why: 'admin edit 2026-09-14: "Why us" headline',
+    find: "<h2>Built from the <br/>operator's seat, <br/>around the case.</h2>",
+    replace: "<h2>Built from the practice's owner seat, around case acceptance.</h2>",
+  },
+  {
+    why: 'admin edit 2026-09-14: Sang’s founder quote, set in italics',
+    find: '<blockquote>“I have sat through the quarterly call, looked at the impressions chart and asked the only question that matters: how many became a patient and a case?”</blockquote>',
+    replace:
+      '<blockquote style="font-style:italic">“I have sat through the monthly calls, looked at the useless impressions chart, and get blamed for mismanaging my leads, then to learn my marketer took on another practice near me.”</blockquote>',
+  },
 ]
