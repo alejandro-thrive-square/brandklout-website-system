@@ -2,7 +2,9 @@
 // and check staging's media ids match media-map.json (set-alt PATCHes by id).
 import fs from 'node:fs'
 import { getSite, getPages, api, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
-const out = new URL('./backup-staging-2026-09-15/', import.meta.url)
+// Usage: node snapshot-staging.mjs [folder]  — never reuse a folder, it is overwritten.
+const out = new URL(`./${process.argv[2] || 'backup-staging-2026-09-15'}/`, import.meta.url)
+fs.mkdirSync(out, { recursive: true })
 const site = await getSite(); const pages = await getPages()
 fs.writeFileSync(new URL('site.json', out), JSON.stringify(site)); fs.writeFileSync(new URL('pages.json', out), JSON.stringify(pages))
 const media = await api('GET', '/admin/api/cms/media?limit=500')

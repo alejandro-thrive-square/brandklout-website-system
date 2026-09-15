@@ -196,6 +196,10 @@
         var visible = group.querySelectorAll("[data-treatment]:not([hidden])");
         group.hidden = visible.length === 0;
       });
+      // Same for a subheading inside a category (Biostimulators).
+      Array.prototype.forEach.call(root.querySelectorAll("[data-sub]"), function (sub) {
+        sub.hidden = sub.querySelectorAll("[data-treatment]:not([hidden])").length === 0;
+      });
 
       if (empty) empty.hidden = shown !== 0;
 

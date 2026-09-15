@@ -878,7 +878,7 @@ S=<scratchpad>                              # holds doh-lookup.cjs and a staging
 export INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com
 # railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d -e staging -s "Westlake Medical Aesthetics"   (in $S/link-staging)
 
-node -r $S/doh-lookup.cjs .tmp/snapshot-staging.mjs          # 0. site + pages -> .tmp/backup-staging-<date>/
+node -r $S/doh-lookup.cjs .tmp/snapshot-staging.mjs backup-staging-<date>-<slug>   # 0. site + pages; a NEW folder each push, it overwrites
 node -r $S/doh-lookup.cjs .tmp/staging-media-map.mjs          # 1. staging's media ids, by URL (trap 36)
 node -r $S/doh-lookup.cjs set-alt.mjs --map media-map.staging.json --apply
 node build-import-input.mjs                                   # 2. same payload as production; URLs match

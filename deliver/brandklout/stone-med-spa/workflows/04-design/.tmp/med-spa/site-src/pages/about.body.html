@@ -3,15 +3,15 @@
      "Rewritten to clarify the relationship between the surgical practice and
      the aesthetics side."
 
-     What the page now says, and nothing more: Westlake Medical Aesthetics is
-     the non-surgical sister practice to Stone Surgical Arts, in the same
-     building, with its own providers and its own menu. Dr. Stone is the surgeon
-     next door and does not treat patients here. The page does not invent a
-     title for her on this side (owner, medical director) — none was supplied.
+     Revised again for the teammate's "Web Dev Brief - WMA" (client call): the
+     surgical and aesthetics practices are now two separate businesses with two
+     teams, and a physical separation is likely, so the page no longer leans on
+     "same building" or "three names". What it says: options, non-invasive here
+     and surgical at the sister practice, and a plan customized to your goals.
+     Dr. Stone's role on this side is NOT stated — see THE RULES below.
 
        cover        the front desk, tall
-       the names    three sticky cards that stack — implants, surgery, aesthetics
-       the line     on the stone ground: where the menu is cut
+       the line     on the stone ground: two practices, two teams
        the rules    three tall photo tiles, one line each
        the room     the office as a rail you drag -->
 
@@ -24,16 +24,15 @@
       <div class="container-large">
         <div class="cover_inner">
           <p class="eyebrow is-alternate">About us</p>
-          <h1 class="cover_title" data-split data-split-now>Two practices. <em class="text-style-display-accent">One building.</em></h1>
+          <h1 class="cover_title" data-split data-split-now>A plan built around <em class="text-style-display-accent">your goals</em>.</h1>
           <p class="cover_lede">
-            Westlake Medical Aesthetics is the non-surgical sister practice to Stone Surgical
-            Arts. We share an address, but we have our own team, our own providers and our own
-            menu.
+            We'll walk you through every option, from non-invasive treatments with our team to
+            surgery with our sister practice, and build a treatment plan around what you want
+            and what your skin needs.
           </p>
           <div class="cover_facts">
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2"></span></span><span>licensed medical providers</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2"></span></span><span>medical providers on our team</span></p>
             <p class="cover_fact"><span class="cover_fact-num"><span data-count="4"></span></span><span>treatment categories</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="12"></span></span><span>treatments on our menu</span></p>
           </div>
         </div>
       </div>
@@ -41,59 +40,11 @@
   </div>
 </section>
 
-<!-- THE NAMES. Three cards, sticky at the same offset, so each one arrives over
-     the last (data-stack). The third card is this site, and it is the one you
-     end on. -->
-<section class="section_names names_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-large">
-        <div class="names_head">
-          <p class="eyebrow">How we're connected</p>
-          <h2 class="heading-style-h2" data-split>Three practices, each with its own <em class="text-style-display-accent">focus</em>.</h2>
-        </div>
-        <div class="stack_component names_stack" data-stack>
-          <article class="stack_item names_card">
-            <figure class="names_media" data-parallax="8">
-              <img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy">
-            </figure>
-            <div class="names_body">
-              <span class="names_index">01</span>
-              <h3 class="names_title">Stone Dental Implant Center</h3>
-              <p class="names_text">Dr. Mona Stone's oral surgery practice, for dental implants, jaw surgery and reconstruction.</p>
-              <a class="button is-link" href="https://www.stonedentalimplantcenter.com/" rel="noopener">Visit the implant center <span class="button_arrow">&rarr;</span></a>
-            </div>
-          </article>
-          <article class="stack_item names_card">
-            <figure class="names_media" data-parallax="8">
-              <img src="assets/gen-procedure-room.webp" alt="" width="1600" height="900" loading="lazy">
-            </figure>
-            <div class="names_body">
-              <span class="names_index">02</span>
-              <h3 class="names_title">Stone Surgical Arts</h3>
-              <p class="names_text">Dr. Stone's facial surgery practice, for facelifts, neck lifts, eyelid surgery and other procedures that need an operating room.</p>
-              <a class="button is-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">Visit Stone Surgical Arts <span class="button_arrow">&rarr;</span></a>
-            </div>
-          </article>
-          <article class="stack_item names_card is-here">
-            <figure class="names_media" data-parallax="8">
-              <img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy">
-            </figure>
-            <div class="names_body">
-              <span class="names_index">03</span>
-              <h3 class="names_title">Westlake Medical Aesthetics</h3>
-              <p class="names_text">Our non-surgical practice: injectables, skin rejuvenation, restoration and facials, with our own nurse practitioner and medical esthetician. You're here.</p>
-              <a class="button is-link" href="treatments.html">See our treatments <span class="button_arrow">&rarr;</span></a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE LINE. Where the menu is cut, on the stone ground: two photographs, one
-     of each side, and the rule between them. -->
+<!-- THE LINE. Two practices, two teams, on the stone ground: a photograph of
+     each side and the plain relationship between them. The three-card "names"
+     stack that stood here (implant center, surgical arts, aesthetics) came out
+     with the WMA web dev brief: the client found "three names" confusing, and
+     the practices are now two separate businesses. -->
 <section class="section_line line_component" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
@@ -101,16 +52,16 @@
         <div class="line_grid">
           <figure class="line_frame is-left" data-wipe>
             <span class="wipe_inner" data-parallax="10"><img src="assets/gen-instruments-warm.webp" alt="" width="1600" height="900" loading="lazy"></span>
-            <figcaption class="line_caption">Surgical &middot; next door</figcaption>
+            <figcaption class="line_caption">Surgical &middot; Stone Surgical Arts</figcaption>
           </figure>
           <div class="line_copy">
             <p class="eyebrow">Who does what</p>
-            <h2 class="heading-style-h2" data-split>Surgery next door. <em class="text-style-display-accent">Aesthetics here.</em></h2>
+            <h2 class="heading-style-h2" data-split>Two teams. <em class="text-style-display-accent">Your plan.</em></h2>
             <p class="text-size-medium line_text" data-reveal>
-              If a procedure needs an incision, Dr. Stone performs it at Stone Surgical Arts.
-              Everything on our menu is done here by our own medical providers. If your provider
-              thinks surgery would give you a better result, they'll tell you and can refer you
-              next door.
+              Westlake Medical Aesthetics is its own practice, with its own medical aesthetics
+              team. Surgery is done by a separate surgical team at our sister practice, Stone
+              Surgical Arts. If your provider thinks surgery would give you a better result,
+              they'll tell you and refer you.
             </p>
           </div>
           <figure class="line_frame is-right" data-wipe>
@@ -124,9 +75,14 @@
 </section>
 
 <!-- THE RULES. Three tall tiles, a photograph each, a number and one line.
-     Rule 03 used to be about patient consent for the gallery; the client asked
-     for consent language to come off the site until the new photographs are
-     published (1218433345526568). -->
+     Rule 03 is the brief's replacement for the old consent rule: every plan is
+     customized, no two are the same, and it is all discussed at the
+     consultation.
+
+     HELD, NOT PUBLISHED: the brief's rules 1-2 ("The surgeon injects. If Dr.
+     Stone is not in, you are not injected.") contradict the client's Asana
+     feedback that Dr. Stone neither assesses nor injects, and the brief itself
+     (section 11) says to confirm with the client before that copy goes live. -->
 <section class="section_rules rules_component">
   <div class="padding-global">
     <div class="container-large">
@@ -143,7 +99,7 @@
             <div class="rules_body">
               <span class="rules_num">01</span>
               <h3 class="rules_title">A medical assessment first</h3>
-              <p class="rules_text">Every new patient is seen by a licensed provider before any treatment is planned.</p>
+              <p class="rules_text">Every new patient is assessed by our highly skilled medical providers before any treatment is planned.</p>
             </div>
           </article>
           <article class="rules_tile" data-speed="-0.12">
@@ -162,8 +118,8 @@
             </figure>
             <div class="rules_body">
               <span class="rules_num">03</span>
-              <h3 class="rules_title">A plan you can follow</h3>
-              <p class="rules_text">You'll leave your first visit knowing what to do next and when to come back.</p>
+              <h3 class="rules_title">A plan that's yours alone</h3>
+              <p class="rules_text">No two plans are the same. We take your goals seriously and talk through every option with you at your consultation.</p>
             </div>
           </article>
         </div>

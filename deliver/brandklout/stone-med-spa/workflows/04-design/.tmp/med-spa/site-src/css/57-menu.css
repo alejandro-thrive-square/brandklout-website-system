@@ -107,6 +107,11 @@
 .menu_rows {
   border-top: 1px solid var(--line-strong);
 }
+/* A subheading inside a category: "Biostimulators" over Sculptra. */
+.menu_subhead {
+  margin: 0;
+  padding: 1.5rem 0 0.75rem;
+}
 .row_component {
   border-bottom: 1px solid var(--line);
   /* html already carries scroll-padding-top: 7rem (02-base.css); a second

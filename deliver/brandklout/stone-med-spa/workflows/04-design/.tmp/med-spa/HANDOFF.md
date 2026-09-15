@@ -1,6 +1,30 @@
 # Stone Med Spa — handoff
 
 > [!IMPORTANT]
+> **2026-09-15, LATER: THE WEB DEV BRIEF, ON STAGING.** A teammate's write-up of the client call,
+> [`Web Dev Brief - WMA.md`](../../../01-content-intake/.tmp/client-references/Web%20Dev%20Brief%20-%20WMA.md),
+> went over the Asana pass below. What it changed:
+>
+> | Brief | Now |
+> | :-- | :-- |
+> | Phone "no change needed" | **(817) 383-8361 is back.** It is a call-tracking number that forwards to the office line (817) 918-3666. The Asana pass had swapped it for the flyer's office line; that loses the tracking. |
+> | Category order | Injectables, Skin Rejuvenation, **Facials, Restoration**. Sculptra sits under a **Biostimulators** subheading (`group` in `treatments-data.mjs`). |
+> | Facials | HydraFacial "several versions"; dermaplaning explained; **skin boosters are HydraFacial booster serums**, not injections. |
+> | Counting copy | Treatment counts are off the covers; /treatments leads with what non-invasive treatment achieves. |
+> | About | The "three names" stack is gone and so is "same building" site-wide (separate businesses, a physical move is likely). Two practices, two teams; rule 03 is now "a plan that's yours alone". |
+> | Consultation language | "our highly skilled medical providers" on home, about, team, book, the closing band, SEO. |
+> | Membership | "Why a membership?" with the client's wallet framing; the **signed membership agreement** is disclosed next to the 90 days and 30 days' notice. |
+> | Financing | The membership FAQ is deleted. |
+> | Book | "You're assessed by our highly skilled medical providers…"; "Your first consultation can be in person or by video." |
+> | Reviews | Two verbatim Google excerpts (Botox; Botox/HydraFacial/microneedling). The listing's other three are by the client (Summer Takkouch), "Mona Stone" and "Martin Stone" and are **not** used as testimonials. No reviewer names until the client approves them. |
+>
+> **Held, on purpose:** the brief's rules "The surgeon injects. If Dr. Stone is not in, you are not
+> injected." They contradict the Asana feedback (Dr. Stone neither assesses nor injects), and the
+> brief's own section 11 says to confirm with the client before publishing. The site still says
+> Brooke injects. **Still waiting on the client:** the Cherry link, treatment pricing, bios and
+> photos for Brooke and Abby, and before-and-after photos.
+
+> [!IMPORTANT]
 > **2026-09-15: THE CLIENT'S FEEDBACK, ON STAGING.** Asana task
 > [`1218408530306236`](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218408530306236)
 > "Westlake Medical Aesthetics - website feedback", ten subtasks, applied to every page and

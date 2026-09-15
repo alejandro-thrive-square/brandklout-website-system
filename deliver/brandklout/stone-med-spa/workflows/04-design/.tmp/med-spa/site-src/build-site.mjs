@@ -184,6 +184,26 @@ function ledgerRow(t, index) {
           </details>`;
 }
 
+/** A category's rows. Consecutive treatments that share a `group` (Sculptra's
+    "Biostimulators", from the WMA web dev brief) sit under a small subheading
+    in a `data-sub` wrapper, which 10-ledger.js hides when the concern filter
+    leaves it empty. */
+function categoryRows(id, next) {
+  const out = [];
+  let open = null;
+  for (const t of byCategory(id)) {
+    const g = t.group || null;
+    if (g !== open) {
+      if (open) out.push(`          </div>`);
+      if (g) out.push(`          <div class="menu_sub" data-sub>\n            <p class="eyebrow menu_subhead">${esc(g)}</p>`);
+      open = g;
+    }
+    out.push(ledgerRow(t, next()));
+  }
+  if (open) out.push(`          </div>`);
+  return out.join("\n");
+}
+
 /** The whole menu, grouped by shelf. Each group opens on its still life at
     full size beside a roman numeral and the category name; the rows follow. */
 function ledger() {
@@ -202,9 +222,7 @@ function ledger() {
             </div>
           </div>
           <div class="menu_rows">
-${byCategory(c.id)
-  .map((t) => ledgerRow(t, ++n))
-  .join("\n")}
+${categoryRows(c.id, () => ++n)}
           </div>
         </div>`
   ).join("\n");

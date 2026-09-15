@@ -15,6 +15,15 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
 
+**2026-09-15, latest — the teammate's web dev brief is on STAGING too.** The phone is back to
+**(817) 383-8361**, a tracking number (so the "918-3666" below is superseded). The menu order is
+Injectables, Skin Rejuvenation, Facials, Restoration, with Sculptra under Biostimulators, and
+skin boosters are HydraFacial add-ons. "Same building" and the three-names stack are gone from
+/about. The membership discloses its signed agreement. Two real Google reviews replaced the
+placeholders. **Held for the client:** the brief's "Dr. Stone injects" rules, which contradict the
+Asana pass. Also open: how the wallet works, reviewer names, suite #110 or #110b —
+[run](./runbook/2026-09-15-web-dev-brief-on-staging.md).
+
 **2026-09-15, later — the client's feedback is on STAGING, not production.** Asana task
 `1218408530306236` (ten subtasks) is applied to every page and published to
 `https://staging.westlaketxmedspa.com`. The practice is now **Westlake Medical Aesthetics**. The

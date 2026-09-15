@@ -15,9 +15,15 @@
 //        at 45–90 minutes, dermaplaning, and skin boosters)."
 //
 //      That added five treatments — Sculptra, SkinPen, HydraFacial,
-//      dermaplaning and skin boosters — and a fourth category. Skin boosters
-//      are an injection, but the client filed them under Facials and that is
-//      where they sit. The HydraFacial's 45–90 minutes is the client's figure.
+//      dermaplaning and skin boosters — and a fourth category. The
+//      HydraFacial's 45–90 minutes is the client's figure.
+//
+//   3. 2026-09-15, later: the teammate's "Web Dev Brief - WMA" (client call,
+//      01-content-intake/.tmp/client-references/). Category order is now
+//      Injectables, Skin Rejuvenation, Facials, Restoration; Sculptra sits
+//      under a "Biostimulators" sub-item (`group`); HydraFacial comes in
+//      several versions; skin boosters are "offered with the HydraFacial", so
+//      they are HydraFacial booster serums, not injections.
 //
 // WHO TREATS. Not Dr. Stone. The same feedback ("Consultation language",
 // 1218433345526570) says patients are assessed by the practice's medical
@@ -42,7 +48,7 @@ export const CATEGORIES = [
     image: "gen-injectables.webp",
     portrait: "m-injectables.webp",
     blurb:
-      "Neuromodulators soften the lines that come from movement, fillers restore volume, and Sculptra helps your skin build its own collagen over time. Every injection is done by our nurse practitioner.",
+      "Neuromodulators soften the lines that come from movement, fillers restore volume, and biostimulators like Sculptra help your skin build its own collagen over time. Every injection is done by our nurse practitioner.",
   },
   {
     id: "skin",
@@ -53,20 +59,20 @@ export const CATEGORIES = [
       "These treatments prompt your skin to repair and renew itself. Most are done as a short series, and results keep improving for a few months after the last session.",
   },
   {
-    id: "restoration",
-    name: "Restoration",
-    image: "gen-iclight-wand.webp",
-    portrait: "m-freckles.webp",
-    blurb:
-      "PRP uses a concentrate of your own platelets to support skin and hair. Results come on gradually, and nothing synthetic is involved.",
-  },
-  {
     id: "facials",
     name: "Facials",
     image: "gen-skincare-shelf.webp",
     portrait: "m-cheek.webp",
     blurb:
       "Regular facials keep skin clear, smooth and hydrated between treatments. Members get one every month as part of their plan.",
+  },
+  {
+    id: "restoration",
+    name: "Restoration",
+    image: "gen-iclight-wand.webp",
+    portrait: "m-freckles.webp",
+    blurb:
+      "PRP uses a concentrate of your own platelets to support skin and hair. Results come on gradually, and nothing synthetic is involved.",
   },
 ];
 
@@ -149,6 +155,7 @@ export const TREATMENTS = [
     page: null,
     name: "Sculptra",
     category: "injectables",
+    group: "Biostimulators", // a sub-item of Injectables, per the WMA web dev brief
     concerns: ["volume", "laxity", "texture"],
     lede: "Sculptra is a biostimulator. Instead of filling a space, it prompts your skin to rebuild collagen, so results appear gradually over a few months and can last two years or more.",
     appointment: "30–45 min",
@@ -207,6 +214,56 @@ export const TREATMENTS = [
     portrait: "m-chin.webp",
   },
 
+  /* --- Facials ------------------------------------------------------------ */
+  {
+    slug: "hydrafacial",
+    page: null,
+    name: "HydraFacial",
+    category: "facials",
+    concerns: ["texture", "dullness", "pigment"],
+    lede: "Cleansing, exfoliation, extractions and hydration in a single treatment. We offer several versions, from 45 to 90 minutes, so your esthetician can match the facial to your skin, and you can go straight back to your day.",
+    appointment: "45–90 min",
+    onset: "Immediate",
+    cadence: "monthly",
+    lasts: "About a month",
+    downtime: "None",
+    area: "Face, neck",
+    portrait: "m-cheek.webp",
+  },
+  {
+    slug: "dermaplaning",
+    page: null,
+    name: "Dermaplaning",
+    category: "facials",
+    concerns: ["texture", "dullness"],
+    lede: "Dermaplaning is a gentle exfoliation. Your esthetician glides a sterile blade across the skin to lift away dead surface cells and fine facial hair, the peach fuzz, leaving skin smoother and brighter. Makeup and skincare go on more evenly afterward.",
+    appointment: "30–45 min",
+    onset: "Immediate",
+    cadence: "every 4–6 weeks",
+    lasts: "3–4 weeks",
+    downtime: "None",
+    area: "Face",
+    portrait: "m-street-brunette.webp",
+  },
+  {
+    // The brief: "Skin Boosters (offered with the HydraFacial)". So these are
+    // the targeted serums added to a HydraFacial, not injected hyaluronic acid,
+    // which is what this row described until the brief arrived.
+    slug: "skin-boosters",
+    page: null,
+    name: "Skin Boosters",
+    category: "facials",
+    concerns: ["dullness", "pigment", "lines"],
+    lede: "Boosters are targeted serums added to your HydraFacial, chosen for what your skin needs that day, whether that's brightening, firming or extra hydration. They're infused during the facial, so there's nothing extra to book.",
+    appointment: "Added to a HydraFacial",
+    onset: "Immediate",
+    cadence: "with your HydraFacial",
+    lasts: "About a month",
+    downtime: "None",
+    area: "Face, neck",
+    portrait: "p-eyes-mirror.webp",
+  },
+
   /* --- Restoration -------------------------------------------------------- */
   {
     slug: "prp",
@@ -237,53 +294,6 @@ export const TREATMENTS = [
     downtime: "Minimal",
     area: "Crown, hairline, part line",
     portrait: "m-man-suit.webp",
-  },
-
-  /* --- Facials ------------------------------------------------------------ */
-  {
-    slug: "hydrafacial",
-    page: null,
-    name: "HydraFacial",
-    category: "facials",
-    concerns: ["texture", "dullness", "pigment"],
-    lede: "Cleansing, exfoliation, extractions and hydration in a single treatment. Sessions run from 45 to 90 minutes depending on what your skin needs, and you can go straight back to your day.",
-    appointment: "45–90 min",
-    onset: "Immediate",
-    cadence: "monthly",
-    lasts: "About a month",
-    downtime: "None",
-    area: "Face, neck",
-    portrait: "m-cheek.webp",
-  },
-  {
-    slug: "dermaplaning",
-    page: null,
-    name: "Dermaplaning",
-    category: "facials",
-    concerns: ["texture", "dullness"],
-    lede: "A sterile blade gently removes dead skin and fine facial hair, leaving skin smoother and brighter. Makeup and skincare go on more evenly afterward.",
-    appointment: "30–45 min",
-    onset: "Immediate",
-    cadence: "every 4–6 weeks",
-    lasts: "3–4 weeks",
-    downtime: "None",
-    area: "Face",
-    portrait: "m-street-brunette.webp",
-  },
-  {
-    slug: "skin-boosters",
-    page: null,
-    name: "Skin Boosters",
-    category: "facials",
-    concerns: ["dullness", "lines", "texture"],
-    lede: "Very fine injections of hyaluronic acid spread through the skin to improve hydration and glow. Unlike filler, they don't add volume or change your shape.",
-    appointment: "30–45 min",
-    onset: "2–4 weeks",
-    cadence: "3, then every 6 months",
-    lasts: "About 6 months",
-    downtime: "1–2 days",
-    area: "Face, neck, hands",
-    portrait: "p-eyes-mirror.webp",
   },
 ];
 

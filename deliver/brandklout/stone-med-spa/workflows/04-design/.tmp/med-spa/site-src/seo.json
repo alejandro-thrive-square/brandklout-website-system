@@ -26,7 +26,7 @@
     "@type": "MedicalBusiness",
     "@id": "https://westlaketxmedspa.com/#practice",
     "name": "Westlake Medical Aesthetics",
-    "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, restoration and facials, provided by licensed medical providers.",
+    "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, facials and restoration, provided by highly skilled medical providers.",
     "medicalSpecialty": "Dermatology",
     "address": {
       "@type": "PostalAddress",
@@ -36,7 +36,7 @@
       "postalCode": "76262",
       "addressCountry": "US"
     },
-    "telephone": "+1-817-918-3666",
+    "telephone": "+1-817-383-8361",
     "sameAs": [
       "https://www.instagram.com/westlakeaesthetics/",
       "https://www.tiktok.com/@westlakeaesthetic"
@@ -68,11 +68,11 @@
     },
     "about": {
       "title": "About Us | Westlake Medical Aesthetics",
-      "description": "The non-surgical sister practice to Stone Surgical Arts, in the same Westlake, TX building, with our own medical providers and our own menu."
+      "description": "Non-invasive medical aesthetics in Westlake, TX, with a plan built around your goals. Surgery, when it's right, is with our sister practice, Stone Surgical Arts."
     },
     "meet-the-doctor": {
       "title": "Dr. Mona Stone, DDS | Westlake Medical Aesthetics",
-      "description": "Dr. Mona Stone is a board-certified oral and maxillofacial surgeon at Stone Surgical Arts, our sister practice in the same Westlake building.",
+      "description": "Dr. Mona Stone is a board-certified oral and maxillofacial surgeon at Stone Surgical Arts, our sister practice.",
       "schema": {
         "@type": "Physician",
         "name": "Dr. Mona Stone, DDS",
@@ -85,7 +85,7 @@
     },
     "treatments": {
       "title": "Treatments | Westlake Medical Aesthetics, Westlake TX",
-      "description": "Injectables, skin rejuvenation, restoration and facials in Westlake, TX. Appointment length, results, longevity and downtime for each treatment."
+      "description": "Injectables, skin rejuvenation, facials and restoration in Westlake, TX. Appointment length, results, longevity and downtime for each treatment."
     },
     "botox": {
       "title": "Botox & Xeomin in Westlake, TX | Westlake Medical Aesthetics",
@@ -158,11 +158,11 @@
     },
     "book": {
       "title": "Book a Consultation | Westlake Medical Aesthetics, Westlake TX",
-      "description": "Book a consultation with one of our medical providers, in our Westlake, TX office or by video. Serving the Dallas-Fort Worth area."
+      "description": "Book a consultation with our highly skilled medical providers, in our Westlake, TX office or by video. Serving the Dallas-Fort Worth area."
     },
     "membership": {
       "title": "Aesthetic & Wellness Membership | Westlake Medical Aesthetics",
-      "description": "$149 a month: a complimentary monthly facial, 10% off treatments and skincare, and access to member events. 90-day commitment, then 30 days' notice to cancel."
+      "description": "One membership, $149 a month: a complimentary monthly facial and 10% off treatments. Signed agreement, 90-day commitment, then 30 days' notice to cancel."
     },
     "thank-you": {
       "title": "Thank You | Westlake Medical Aesthetics",
