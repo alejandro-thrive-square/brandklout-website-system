@@ -16,6 +16,13 @@ Start at [`project-overview.md`](./project-overview.md).
 
 ## Status: PUBLISHED — the homepage is live on the client's Instatic instance
 
+**2026-09-15.** Brandklout's second BugHerd pass (#14–#18) is fixed, republished (**seq 12**) and
+closed — [run](./runbook/2026-09-15-bugherd-round-two-five-fixes-republished.md). Descenders no
+longer clip in any split headline, the "Chapter NN" numbering is gone, the doctor is framed, Emily
+has a real eyes-open photo (round one had fixed the wrong patient), and the review quotes are in
+Manrope. The live page also loads a **Sienna accessibility widget** that is not in the build and
+rewrites font sizes inline — raise it with the agency (trap 42).
+
 **2026-09-11.** Brandklout's first BugHerd pass (13 tasks on project 541030) is fixed, republished
 (seq 11) and every task is answered and closed — [run](./runbook/2026-09-11-bugherd-round-one-thirteen-fixes-republished.md).
 Type is heavier and larger-leaded, the treatment rail is shorter, the story stage is sized in JS,
@@ -46,7 +53,7 @@ follows.
 | What | Where |
 | :--- | :--- |
 | Homepage source | `workflows/04-design/.tmp/site-src/` — `index.html`, `css/NN-*.css`, `js/00-runtime.js`, `sections/chapters.js`, `js/90-boot.js`, `build.mjs` |
-| Built page | `workflows/04-design/.tmp/site-src/dist/` (committed snapshot) |
+| Built page | `workflows/04-design/.tmp/site-src/dist/` (gitignored — rebuild with `node build.mjs` before any gate) |
 | Media for the build | `site-src/media/` (video encodes + stills, gitignored), `site-src/fonts/` (variable woff2, gitignored) |
 | Asset mirror | `workflows/03-graphic-resources/.tmp/downloads/` (gitignored; catalogue in `ASSETS.md`) |
 | Research | `workflows/01-content-intake/.tmp/` — `current-site-scrape/`, `competitor-scrape/<domain>/`, `gap-analysis/`, `homepage-screenshots/` |
@@ -63,12 +70,14 @@ follows.
    full build (28–34 per the gap analysis).
 4. Their live site's "Read Our Google Reviews" link goes to another practice's Google listing, and
    the footer displays the current-patient number while dialling the new-patient one.
+5. The staging page loads a Sienna accessibility widget (`data-wz-site-script`) that is not in our
+   build; it freezes type sizes inline (quotes render 16px, not 17.92px). Keep or remove is theirs.
 
 ## Traps
 
 Read the **Gotchas** in the newest runbook entry, and
 [`workflows/21-instatic-upload/21-instatic-upload.md`](../workflows/21-instatic-upload/21-instatic-upload.md)
-before touching the upload — it carries forty of them, all found the hard way, and every single one
+before touching the upload — it carries forty-two of them, all found the hard way, and every single one
 answered 200 while doing the wrong thing.
 
 The ones that will bite again here: a typed Instatic module keeps only its own props and silently
