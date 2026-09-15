@@ -1,11 +1,12 @@
 # Runbook index
 
-16 runs, newest first. Each line is one file in this folder.
+17 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | **Instance wiped blank and rebuilt from v18 (seq 30)**: `wipe-instance.mjs` emptied pages, styles, code assets, media, fonts, the legal table and the plugin (accounts kept, blank state not published); fonts, media, plugin + settings, pages, collection re-created; all gates clean. Carries **gotchas** | [`2026-09-15-wipe-and-rebuild-from-v18.md`](./2026-09-15-wipe-and-rebuild-from-v18.md) |
 | 2026-09-15 | **Sang's v18: package intake, unbundled CSS, Legal Pages collection (seq 27)**: `package-intake.mjs` is step 0 of every iteration (v18 = v16 + packaging); per-page CSS bundles unbundled on read; Privacy/Terms/HIPAA are rows of the `legal` collection at `/legal/<slug>` through a template page; old legal URLs gone. Carries **gotchas** | [`2026-09-15-v18-intake-and-legal-collection.md`](./2026-09-15-v18-intake-and-legal-collection.md) |
 | 2026-09-15 | **Standard breakpoints + house type scale (seq 26)**: always 1279/991/767/479, Sang's widths snap to them (`snapQuery`); house fluid root, rem type, no clamp(); 1440 identical, new `standard-check.mjs` gate. Carries **gotchas** | [`2026-09-15-standard-breakpoints-and-type.md`](./2026-09-15-standard-breakpoints-and-type.md) |
 | 2026-09-15 | **Accessibility widget removed** (Alejandro): "bigger in the editor, small again on the 2nd refresh" was seq 25's `widget-fluid.js` losing a race to the widget on cached reloads. `siteScripts` emptied, published (seq stays 25). Carries **gotchas** | [`2026-09-15-widget-removed.md`](./2026-09-15-widget-removed.md) |

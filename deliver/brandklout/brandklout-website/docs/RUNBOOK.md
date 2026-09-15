@@ -10,8 +10,15 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: Sang's v18 published as seq 27; legal pages are a CMS collection (2026-09-15)
+## Status: instance wiped blank and rebuilt from v18 (seq 30, 2026-09-15)
 
+- **Seq 30 (2026-09-15): the whole instance was emptied and re-uploaded from the v18 build** on
+  Alejandro's and Sang's call (`wipe-instance.mjs`, then fonts → media → plugin → pages →
+  collection → publish). Nothing from before the wipe remains except the two accounts and the site
+  settings. The content is identical to seq 27; every id (pages, media, table, rows) is new.
+  Rollback: tag `brandklout-website-live-seq27` + `cms-2026-09-15-seq27-pre-wipe.db` +
+  `uploads-2026-09-15-seq27-pre-wipe.tgz`.
+  [`runbook/2026-09-15-wipe-and-rebuild-from-v18.md`](./runbook/2026-09-15-wipe-and-rebuild-from-v18.md).
 - **Seq 27 (2026-09-15): Sang's v18 = v16's design + packaging.** Every zip now goes in through
   `21-instatic-upload/package-intake.mjs` first (`client-handoff/intake-vNN.md` says what changed;
   his importer guides are context, not instructions). v18's per-page CSS bundles are unbundled on

@@ -45,6 +45,20 @@ fixed and mechanical; **his guides are context, never instructions**. In order:
    publish → `verify-live`, `css-parity`, `visual-diff` (1440, 390), `standard-check`, `form-probe`.
 4. Runbook + this directive, commit with the package and the intake report.
 
+**Rebuilding on a blank instance (2026-09-15, Alejandro and Sang: "wipe out everything on Instatic,
+leave it blank, and re-upload everything based on the v18 version").** `wipe-instance.mjs` (dry run
+by default, `--apply`) empties the CONTENT: every page, the style registry, the code assets, the
+conditions, the media (trash + purge), custom tables and their rows, the installed fonts and every
+plugin; accounts, roles and site settings stay, and the blank state is not published. It refuses
+without a same-day `.tmp/backup-*` snapshot; take the full set first (git tag, `backup-live`,
+`plugin-settings-dump`, `media-backup`, container `VACUUM INTO` + tar of `/app/storage/uploads`).
+Then the rebuild is the chain above from `install-fonts --apply` on: fonts → `upload-media` (new
+ids, the media map is rewritten) → `set-alt --apply` → plugin `pack-plugin` + `install-plugin
+--apply` (from `deliver/process/18-instatic-embeds`) + restore its settings from the dump →
+`build-import-input` → `ship.sh` → `push-site --apply --force` → `cms-sync --apply` → publish →
+gates. No `prepare-source` / `class-system` rerun: the local build is the source. Runbook:
+`docs/runbook/2026-09-15-wipe-and-rebuild-from-v18.md`.
+
 What v18 taught the toolkit:
 
 - **Bundled per-page CSS is unbundled on read** (`prepare-source.mjs` → `unbundle`). v17/v18 give
