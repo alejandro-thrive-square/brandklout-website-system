@@ -7,7 +7,7 @@
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Source** | Asana — `BK Activation - Stone Dental Implant Center` (not yet split per project) |
 | **Scope** | **One full website** — not landing pages |
-| **Platform** | Instatic — `stone-surgical-arts-production.up.railway.app` |
+| **Platform** | Instatic on Railway — production `www.dfwsurgicalarts.com`, staging `staging.dfwsurgicalarts.com` (since 2026-09-15) |
 | **Worktree** | `bk-stone` (Orca display name `bk-stone-surgical-arts`) |
 | **Due** | None set in Asana |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
@@ -21,8 +21,9 @@ recorded here.
 | Field | Value |
 | :--- | :--- |
 | `process_baseline_commit` | `968cd4a9` (local `main`, merged as `260ac72b`, 2026-09-08) |
-| Routed modules | `00-client-delivery-initialization`, `01-content-intake`, `04-design`, `21-instatic-upload` |
-| Not routed | 02, 03, 05-20 — this is an Instatic build, not a Webflow one, so the Webflow phases (07, 08) and the Figma/migration modules do not apply |
+| Routed modules | `00-client-delivery-initialization`, `01-content-intake`, `04-design`, `14-migration-seo-redirects` (2026-09-15), `21-instatic-upload` |
+| Not routed | 02, 03, 05-13, 15-20 — this is an Instatic build, not a Webflow one, so the Webflow phases (07, 08) do not apply |
+| Run, not copied | The staging clone (2026-09-15) ran from `bk-mason-park`'s `deliver/process/21-instatic-staging-clone`, unmerged; nothing of it lives in this folder |
 
 ### One client, three projects
 

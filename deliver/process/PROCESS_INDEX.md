@@ -112,6 +112,9 @@ Not part of the offer-routing sequence — they apply to any engagement whose si
 > on 2026-09-09. Still due: `19-cloudflare-launch`, `21-instatic-upload`, and the rest of the
 > Dr. Nahlah Instatic run (`16-instatic-plugins`, `17-instatic-platform-patch`,
 > `18-instatic-staging-clone` — each collides with a canonical module of the same number).
+> **`bk-mason-park` has since promoted the staging clone as `deliver/process/21-instatic-staging-clone`**
+> (`d1baa68d`, unmerged) — the same number `bk-stone` holds for `21-instatic-upload`. Stone's
+> staging (2026-09-15) was the third client to run it. Renumber one of the two when either merges.
 
 ## Supporting Workflows
 Non-sequential tools that delivery phases call as needed. They live flat inside `deliver/process/` alongside the numbered phases (mirroring how `deliver/process/` already holds non-numbered items such as `design-system-library`), but they are **not** part of the `00`-`17` offer-routing sequence. Each follows the same standard folder shape and can be cloned into `deliver/[client-name]/workflows/` when run for a specific engagement.

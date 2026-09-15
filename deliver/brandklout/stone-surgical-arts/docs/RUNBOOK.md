@@ -16,6 +16,15 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
+**Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
+It is a Railway environment `staging` in the same project, seeded from production on
+2026-09-15, and `noindex` at the edge. Work there, then promote with the staging-clone module;
+never publish half-finished work on production, where one publish replaces every page —
+[2026-09-15 run](./runbook/2026-09-15-301-map-built-and-staging-created.md).
+
+**Old domain:** `stonesurgicalarts.com` still sends every URL to the new home page. The page-level
+301 map is built and dry-run in `workflows/14-migration-seo-redirects/` but **not deployed**.
+
 | | |
 | :--- | :--- |
 | Twelve practice pages | `/`, `/neck-lift`, `/blepharoplasty`, `/treatments`, `/meet-the-doctor`, `/about`, `/team`, `/memberships`, `/results`, `/book`, `/myellevate-neck-lift`, `/face-and-neck-lift` |
@@ -50,9 +59,12 @@ node blog-test.mjs                     # 243 checks
 cd workflows/21-instatic-upload && node verify-live.mjs                       # ends "FAIL  none"
 
 # 3. the published pages still LOOK like the local build
-INSTATIC_BASE_URL=https://stone-surgical-arts-production.up.railway.app \
+INSTATIC_BASE_URL=https://www.dfwsurgicalarts.com \
   COMPARE_PORT=8851 node compare-live.mjs                                     # "no differences"
 ```
+
+Point `INSTATIC_BASE_URL` at `https://staging.dfwsurgicalarts.com` to run gates 2 and 3 against
+staging instead.
 
 `verify-live.mjs` ends with the literal line `FAIL  none` when it passes. That is the footer, not a
 failure — do not read the tail of the report and panic, as a previous session did.
@@ -90,6 +102,12 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 ## Next
 
+- **Deploy the 301 map** once approved: `deploy-redirects.mjs --apply` with a scoped, short-lived
+  token, then `verify-redirects.mjs` must end `FAIL  none`. The 19 skin and non-surgical URLs are
+  `provisional` (they go to `/treatments`; nobody has decided otherwise). See
+  [the directive](../workflows/14-migration-seo-redirects/14-migration-seo-redirects.md).
+- **Production has no canonical tag, no `/sitemap.xml`, no privacy/HIPAA page**, and apex and www
+  both answer 200. Each is a separate fix; none blocks the redirects.
 - **BugHerd is GONE, removed 2026-09-09, and must not be re-added as a script.** It could never
   have worked: Instatic publishes `script-src 'self'; frame-src 'none'`, which blocks both the
   bugherd.com script and the sidebar's iframe, whether the tag sits in the head or is injected at

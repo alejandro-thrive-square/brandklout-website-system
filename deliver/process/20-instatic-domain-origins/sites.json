@@ -20,6 +20,13 @@
       "note": "Cut over 2026-09-10. Connecting dfwsurgicalarts.com + www DETACHED the generated stone-surgical-arts-production.up.railway.app host (it now 404s everywhere), while PUBLIC_ORIGIN still named only that host - so the admin could not be logged into from any address. PUBLIC_ORIGIN is now www, apex, then the dead railway host (kept, harmless, per the rule). The railway host is not listed here because it no longer serves the admin. Both custom hosts verified live."
     },
     {
+      "client": "stone-surgical-arts-staging",
+      "adminUrl": "https://staging.dfwsurgicalarts.com",
+      "alternates": [],
+      "railway": { "project": "b3cae5d8-5f45-4e5c-8bfb-03113bb45327", "service": "Stone Surgical Arts", "environment": "staging" },
+      "note": "Created 2026-09-15 as the Railway environment `staging`. PUBLIC_ORIGIN is the staging host alone: the generated stone-surgical-arts-staging.up.railway.app host was deleted because it bypasses Cloudflare and cannot carry the noindex header. Same login as production; seeded from production the same day."
+    },
+    {
       "client": "dr-nahlah",
       "adminUrl": "https://www.drnahlah.com",
       "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
