@@ -20,8 +20,10 @@ and 390, `diff-all.mjs` 215 match, `crop-all.mjs --live` 0 across 215 x 2 widths
 
 **2026-09-14: the new design is on STAGING at <https://staging.masonparkpediatricdental.com>**
 (admin at `/admin`, origins verified). It is not ready for production.
-**`masonparkpediatricdental.com` and `www` serve the OLD WordPress site** as a static copy (the 27-Aug
-mirror) from Cloudflare Pages project `mason-park-kids-wp`. The real WordPress is unreachable: the
+**`masonparkpediatricdental.com` and `www` serve the OLD WordPress site** as a static copy
+(`workflows/01-site-recovery/.tmp/recovered/mirror-clean/`) from Cloudflare Pages project `mason-park-kids-wp`.
+**Deploy only `mirror-clean`, never `mirror/`: the original carries a malware loader on every page**
+(stripped 2026-09-15, see the security incident doc). `node verify-safe.mjs mirror-clean` must pass first. The real WordPress is unreachable: the
 SiteGround vhost is suspended and SSH is refused. To update the old site, redeploy the mirror with
 `wrangler pages deploy`. When the new design launches, repoint the apex/`www` CNAMEs to Railway and put them back
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.

@@ -13,7 +13,8 @@ before running anything here** — the host is actively compromised.
 | :--- | :--- |
 | `recovered/content.xml` | 12.7 MB WXR export — 40 pages, 157 posts, 580 attachments, verbatim copy |
 | `recovered/db.sql.gz` | 21.9 MB full database dump |
-| `recovered/mirror/` | **779 files** — all 40 pages plus the CSS, JS, fonts and images they use, fully offline |
+| `recovered/mirror/` | **779 files** — all 40 pages plus the CSS, JS, fonts and images they use, fully offline. **INFECTED: every page carries an inline loader. Never deploy it; keep it as evidence.** |
+| `recovered/mirror-clean/` | The deployable copy (built 2026-09-15): the loader stripped, a real `404.html`, the adult-site images localized, and the Elementor 4.2.3 lazy chunks restored from the official release. **This is what Cloudflare Pages `mason-park-kids-wp` serves on masonparkpediatricdental.com.** |
 | `screenshots/w1440/` | 40 full-page PNGs |
 | `pages/<slug>/` | `rendered.html`, `rendered.txt`, `meta.json` per page |
 | `recovered/pages.csv`, `posts.csv`, `media.csv`, `options.txt` | inventories + nav-menu structure |
@@ -49,9 +50,19 @@ node 06-sanitize.mjs          # URLs -> root-relative; strip external <script>/<
 node 07-assets.mjs            # copy referenced CSS/JS/img/fonts off the disk (2 passes)
 node 06-sanitize.mjs          # again: the CSS only exists after 07, and it has URLs too
 node 07-assets.mjs            # again: CSS references fonts and background images
-node verify-safe.mjs          # the gate — must pass before anyone opens the bundle
+node verify-safe.mjs          # the gate. Since 2026-09-15 it FAILS on mirror/, by design.
 node 08-shoot.mjs             # 40 full-page screenshots from the local mirror
+node 09-clean.mjs             # mirror/ -> mirror-clean/: strip the loader, add 404.html
+node 10-localize-images.mjs   # copy images hotlinked from bestdentistinkatytx.com out of bk-mason-park's scrape
+#   then copy the missing elementor/assets/js/*.bundle.min.js from elementor.4.2.3.zip (wordpress.org)
+node verify-safe.mjs mirror-clean   # must pass before deploying
 ```
+
+Deploying `mirror-clean` to Pages: `wrangler pages deploy <mirror-clean> --project-name
+mason-park-kids-wp --branch main`. Use a temp token with account `Pages Write`, minted from `CLOUDFLAREAPI`.
+**Check it in a real browser render, not with HTTP status codes.** Without a `404.html`,
+Pages answers every missing file with the homepage and a 200. The first "40/40 pages, 96/96 assets
+OK" sweep was a false positive that hid four missing scripts.
 
 `sg.sh` wraps ssh (host/user/port from repo-root `.env`, key from `SG_KEY`, default
 `.secrets/sg_pediatric_recovery`). `probe.mjs` and `diag.mjs` are the diagnostics that established
@@ -60,7 +71,9 @@ the facts above.
 ## Safety — what makes this bundle safe to open
 
 `verify-safe.mjs` asserts all of this and exits non-zero if any of it stops being true. Current
-run: **8/8 pass.**
+run (2026-09-15): **`mirror/` fails 2 of 9** (injection markers, obfuscated inline loader). That is
+correct, because it is infected. **`mirror-clean/` passes 9/9.** The 8/8 recorded here on 2026-08-27 was a false
+pass; see point 6.
 
 1. **No executable code was ever downloaded.** 779 files, not one `.php`, `.htaccess`, `.sh` or
    archive. `07-assets.mjs` allow-lists by extension, refuses executables even when a page
@@ -75,7 +88,11 @@ run: **8/8 pass.**
 5. **Rendering is offline.** Chrome runs with
    `--host-resolver-rules="EXCLUDE 127.0.0.1, EXCLUDE localhost, MAP * ~NOTFOUND"`, so no external
    host resolves at all.
-6. **No IOC markers** in any of the 40 pages, before or after sanitising.
+6. **No IOC markers, including inside decoded blobs, and no obfuscated inline loader.** The
+   original check only matched plain strings, so it passed all 40 pages while each one carried an inline
+   `atob -> fromCharCode -> new Function` loader whose markers (`data-sm="1"`, `2147483647`,
+   `webanalytics-cdn.sbs`) only exist after decoding. Point 3 did not help either: stripping *external*
+   tags leaves an inline loader intact, and this one fetches from blockchain RPCs, not a script host.
 7. **Read-only on the server.** Nothing outside `~/recovery-tmp` is written; the site's files and
    database are never modified.
 

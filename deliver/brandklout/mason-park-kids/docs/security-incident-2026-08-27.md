@@ -82,9 +82,18 @@ div[data-sm="1"]      iframe[src*="yourbodybydesign"]      yourbodybydesign
 2147483647            webanalytics-cdn.sbs
 ```
 
-**No IOC fired on any of the 40 captured pages.** Read that narrowly: the capture runs with all
-external hosts blocked, and a TDS serves conditionally anyway. It means the saved copy is clean,
-not that the live site is.
+~~**No IOC fired on any of the 40 captured pages.**~~ **Wrong, found 2026-09-15.** Every one of the
+40 captured pages carries an inline ClearFake/EtherHiding loader as its last `<script>`. It is
+14,034 bytes, `(function(){var _2e7be=atob("…")…new Function(…)()})()`, and it is base64 plus a
+per-byte `((c-156)&255)^38`. Decoded, it reads a URL from Polygon contract
+`0x08207B087F61d7e95E441E15fd6d40BEfd6eD308` (`eth_call` data `0x38bcdc1c`) through six public RPCs
+(drpc, publicnode, lava, subquery, and two nodies hosts). It then covers the page with a full-screen white
+`div[data-sm="1"]` at `z-index:2147483647` holding an iframe of that URL, and sets `_cf_verified` and
+`_wp_perf_ok` cookies for 90 days. That is the fake-verification (ClickFix) lure. The decoded body
+also names `webanalytics-cdn.sbs`, **the main site's IOC**, so it is the same campaign. The gate missed it
+because every marker exists only after decoding and the loader has no `src`. It was
+live on `masonparkpediatricdental.com` for about 1 h on 2026-09-14/15 before it was stripped. `verify-safe.mjs`
+now matches the loader's shape and scans decoded blobs. See `workflows/01-site-recovery/README.md`.
 
 ## What Brandklout should be told
 

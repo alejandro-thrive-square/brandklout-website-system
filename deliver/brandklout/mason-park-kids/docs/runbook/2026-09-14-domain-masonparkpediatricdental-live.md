@@ -80,7 +80,35 @@ stripped. `.tmp/verify-safe.mjs` still passes 8/8.
 - The one contact form (`/before-after/`, CF7) cannot submit. Maps and embeds were stripped.
   The theme's demo pages (shop, cart, wishlist, blog-masonry) remain, as they did on the live site.
 
+### 2026-09-15 - "the mirror is not loading properly": malware, missing chunks, hotlinked icons
+
+Rendered in headless Chrome, not probed with HTTP. Three separate faults:
+
+1. **Malware on every page.** An inline ClearFake/EtherHiding loader sat in all 40 pages of the mirror (the
+   last `<script>`, 14,034 bytes). It reads a lure URL from a Polygon contract and covers the window with
+   a full-screen iframe. It had been live for about 1 h. It is stripped in `recovered/mirror-clean/` (`09-clean.mjs`),
+   and all 40 live pages were fetched and checked clean. Details are in `docs/security-incident-2026-08-27.md`.
+   `verify-safe.mjs` had passed it. It now fails `mirror/` and passes `mirror-clean/`.
+2. **Missing Elementor lazy chunks** (section/shared handlers, text-editor, accordion, 70 in all). With no
+   `404.html`, Pages served the homepage as each "script", Chrome refused it on MIME, and Elementor crashed.
+   That hid the hero, the photos, the carousels and the FAQ accordions. All `*.bundle.min.js` were restored from
+   `elementor.4.2.3.zip` (wordpress.org). The mirror's `frontend.min.js` matches that release byte-for-byte.
+   A real `404.html` was added.
+3. **Service icons** `s1`-`s12.png` were hotlinked from `bestdentistinkatytx.com` in JSON-escaped URLs,
+   and that host no longer serves them. They were copied from bk-mason-park's site scrape and made root-relative (`10-localize-images.mjs`).
+
+Result: home, about, services and both FAQ pages have 0 broken images and 0 blockchain calls. Only
+`wp-emoji-release.min.js` is still missing, which is harmless. Five Pages deploys in total, the last `mirror-clean`. The fourth temp CF token was revoked.
+
+**Not the site: the random-path script.** A 99 KB script at a random first-party path, `DOMIdentifiers` POSTs,
+and a bare 204 with no `server` header came from **NordVPN Threat Protection**. Chrome saw the certificate issued by
+"NordVPN S.A. -ThreatProtection", while Node saw Google Trust Services WE1.
+
 ### Gotchas
+
+- **An HTTP sweep cannot vouch for a Pages site with no `404.html`.** Every missing path returns 200 with the
+  homepage. Render in a browser and list scripts served as `text/html`.
+- **Stripping external tags does not make a mirror safe.** Look for inline `atob` + `fromCharCode` + `new Function`.
 
 - `x-suspended-vhost: 1` on a SiteGround 503 means the account or site is suspended, not that WordPress crashed.
   Look at the headers before debugging PHP.

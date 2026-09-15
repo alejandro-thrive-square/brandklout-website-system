@@ -17,8 +17,14 @@
 //      ordinary browser cannot fetch a payload.
 //   4. NO ABSOLUTE URLs remain, so nothing silently reaches for the live host.
 //   5. The DB dump and WXR are present but are NOT tracked by git.
+//   6. NO OBFUSCATED INLINE LOADER survives. Added 2026-09-15: every page
+//      carried an inline ClearFake/EtherHiding script (atob -> char shift/XOR
+//      -> new Function) that the IOC check in 2. could not see, because its
+//      markers only exist after decoding. This check matches the loader's
+//      shape, not its strings, and 2. now also scans each decoded blob.
 //
-//   node verify-safe.mjs
+//   node verify-safe.mjs                 # checks recovered/mirror (the original: FAILS by design)
+//   node verify-safe.mjs mirror-clean    # checks recovered/mirror-clean (what is deployed)
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -26,7 +32,7 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REC = path.join(HERE, "recovered");
-const MIRROR = path.join(REC, "mirror");
+const MIRROR = path.join(REC, process.argv[2] || "mirror");
 
 const EXECUTABLE = /\.(php\d?|phtml|phar|sh|bash|cgi|pl|py|exe|dll|so|jsp|asp|aspx)$/i;
 const ARCHIVE = /\.(zip|rar|7z|wpress|tar|tgz)$/i;   // .tar.gz from our own transfers is allowed below
@@ -35,6 +41,28 @@ const IOC = ["yourbodybydesign", "webanalytics-cdn.sbs", 'data-sm="1"', "2147483
 const RE_ABS = /(?:https?:)?\/\/(?:127\.0\.0\.1(?::\d+)?|(?:www\.)?pediatricdentistkatytx\.com)/i;
 const RE_EXT_SCRIPT = /<script\b[^>]*\bsrc\s*=\s*["'](?:https?:)?\/\/[^"']*["']/i;
 const RE_EXT_IFRAME = /<iframe\b[^>]*\bsrc\s*=\s*["'](?:https?:)?\/\/[^"']*["']/i;
+const RE_INLINE = /<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/gi;
+const RE_B64 = /atob\(\s*["']([A-Za-z0-9+/=]{200,})["']\s*\)/g;
+
+// The loader's shape: decode a blob, rebuild it char by char, run it.
+const isLoader = (js) => /atob\(/.test(js) && /fromCharCode/.test(js) && /new\s+Function\s*\(|\beval\s*\(/.test(js);
+
+// Brute-force the single-byte shift+XOR families this kind of loader uses, and
+// report any decoding that reveals an IOC. Cheap: 256 x 256 over a short prefix.
+const decodedIoc = (b64) => {
+  const raw = Buffer.from(b64, "base64");
+  const probe = raw.subarray(0, 4096);
+  for (let add = 0; add < 256; add++) for (let x = 0; x < 256; x++) {
+    let s = "";
+    for (const c of probe) s += String.fromCharCode(((c - add + 256) & 255) ^ x);
+    if (!s.includes("function") && !s.includes("var ")) continue;
+    let full = "";
+    for (const c of raw) full += String.fromCharCode(((c - add + 256) & 255) ^ x);
+    const hit = [...IOC, "eth_call", "0x08207B087F61d7e95E441E15fd6d40BEfd6eD308"].find((m) => full.includes(m));
+    if (hit) return hit;
+  }
+  return null;
+};
 
 const walk = (dir, out = []) => {
   if (!fs.existsSync(dir)) return out;
@@ -69,17 +97,26 @@ arch.length
 
 // ---- 2..4. the mirrored HTML is local and inert
 const html = walk(MIRROR).filter((f) => f.toLowerCase().endsWith(".html"));
-let iocHits = [], absHits = [], scriptHits = [], iframeHits = [];
+let iocHits = [], absHits = [], scriptHits = [], iframeHits = [], loaderHits = [];
 for (const f of html) {
   const s = fs.readFileSync(f, "utf8");
   const rel = path.relative(MIRROR, f).replace(/\\/g, "/");
   if (IOC.some((m) => s.includes(m))) iocHits.push(rel);
+  for (const [, js] of s.matchAll(RE_INLINE)) {
+    if (isLoader(js)) { loaderHits.push(rel); break; }
+  }
+  for (const [, b64] of s.matchAll(RE_B64)) {
+    const hit = decodedIoc(b64);
+    if (hit) { iocHits.push(`${rel} (decoded: ${hit})`); break; }
+  }
   if (RE_ABS.test(s)) absHits.push(rel);
   if (RE_EXT_SCRIPT.test(s)) scriptHits.push(rel);
   if (RE_EXT_IFRAME.test(s)) iframeHits.push(rel);
 }
 iocHits.length ? fail("no injection markers", iocHits.slice(0, 5).join(", "))
-               : pass("no injection markers", `${html.length} pages clean`);
+               : pass("no injection markers", `${html.length} pages clean, decoded blobs included`);
+loaderHits.length ? fail("no obfuscated inline loader", `${loaderHits.length} pages: ` + loaderHits.slice(0, 5).join(", "))
+                  : pass("no obfuscated inline loader", `${html.length} pages`);
 scriptHits.length ? fail("no external <script>", scriptHits.slice(0, 5).join(", "))
                   : pass("no external <script>", `${html.length} pages`);
 iframeHits.length ? fail("no external <iframe>", iframeHits.slice(0, 5).join(", "))
