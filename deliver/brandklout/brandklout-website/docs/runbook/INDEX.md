@@ -1,11 +1,12 @@
 # Runbook index
 
-12 runs, newest first. Each line is one file in this folder.
+13 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | **Headings not scaling = the accessibility widget** freezing every font size inline at load (`agency/widget-fluid.js`); **breakpoint problem again** = v16's max-width 900/680/600 as extra conditions, folded into the editor breakpoints. Seq 25. Carries **gotchas** | [`2026-09-15-widget-and-breakpoints.md`](./2026-09-15-widget-and-breakpoints.md) |
 | 2026-09-15 | **Admin edits restored (seq 24)**: OCEANIC wordmark, "Why us" headline, founder quote, `/guarantee` h1, hero margin; the duplicate story headline and the 5rem h1 deliberately not. Branch + backup tag pushed | [`2026-09-15-admin-edits-restored.md`](./2026-09-15-admin-edits-restored.md) |
 | 2026-09-14 | **"The heading is not right" = the fluid root** on wide screens (hero h1 96px at 1920, 115px at 2560 vs Sang's 72px); softened to 1.15x max, seq 23. Gates are blind above 1440. Carries **gotchas** | [`2026-09-14-heading-fluid-root.md`](./2026-09-14-heading-fluid-root.md) |
 | 2026-09-14 | **Sang's v16 published (seq 22)** over the class system, live home structure kept; seq 21 backed up (git tag, API snapshot, container DB copy); prequal form on every page, light footer, unified guarantee, Calendly on /book as an Embed block, Legacy chart on its story. Carries **gotchas** | [`2026-09-14-v16-published.md`](./2026-09-14-v16-published.md) |

@@ -1,7 +1,7 @@
 {
  "dominatedStates": 2010,
  "partialOverlap": 911,
- "bpBeforeCondition": 212,
+ "bpBeforeCondition": 210,
  "unreadable": 0,
  "verbatimRules": 782,
  "conditionOrderConflicts": 0,
@@ -9,12 +9,9 @@
   "verbatim": 792,
   "type": 307,
   "layout": 766,
-  "state": 422
+  "state": 420
  },
  "conditions": [
-  "media:(max-width: 900px)",
-  "media:(max-width: 680px)",
-  "media:(max-width: 600px)",
   "media:(prefers-reduced-motion: reduce)",
   "media:print",
   "media:(min-width: 981px) and (max-height: 820px)",
@@ -71,6 +68,7 @@
   "film-caption",
   "fit",
   "fit-checklist",
+  "fontSize",
   "form-status",
   "founder-grid",
   "grid-2",

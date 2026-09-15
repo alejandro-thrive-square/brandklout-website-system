@@ -58,8 +58,15 @@ Changes in the toolkit for v16:
   embed lets the plugin's `autoTrust` open `frame-src` on that page.
 - **`agency/code.css`** is appended to the code asset by `push-site.mjs`: rules for markup only the
   live page has (the Embed block's inner iframe heights: 760 / 720 ≤900 / 680 ≤600, in rem).
-- New max-width values in v16's CSS (680, 900) are not in `BP_MAP`, so they stay site conditions
-  (11 instead of 7), exactly as written. Map them only if parity stays ok.
+- **Every new max-width value in Sang's CSS needs a `BP_MAP` entry.** v16's 900, 680 and 600 were left
+  out and published as extra site conditions (11 instead of 7), which Alejandro read as "the
+  breakpoint problem again"; since seq 25 they fold UP into the next breakpoint (1000, 760, 620).
+  After each new package, compare class-system's "max-width blocks by width" line with `BP_MAP`.
+- **`agency/widget-fluid.js`** (seq 25): the sienna accessibility widget (plugin `siteScripts`) writes
+  every text element's size inline in whole px at load and never recomputes, which froze the fluid
+  and breakpoint sizes ("the heading is not scaling properly"). The script removes those inline sizes
+  at the widget's 100% setting and recomputes them from the stylesheet at other scales, on every
+  resize. The visual gates block the widget; test resizing with it loaded (`.tmp/resize-check.mjs`).
 
 ## Brandklout: the class system (v12, 2026-09-14, evening)
 

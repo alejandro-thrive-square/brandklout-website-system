@@ -52,30 +52,6 @@
  ],
  "conditions": [
   {
-   "id": "media:(max-width: 900px)",
-   "label": "(max-width: 900px)",
-   "condition": {
-    "kind": "media",
-    "query": "(max-width: 900px)"
-   }
-  },
-  {
-   "id": "media:(max-width: 680px)",
-   "label": "(max-width: 680px)",
-   "condition": {
-    "kind": "media",
-    "query": "(max-width: 680px)"
-   }
-  },
-  {
-   "id": "media:(max-width: 600px)",
-   "label": "(max-width: 600px)",
-   "condition": {
-    "kind": "media",
-    "query": "(max-width: 600px)"
-   }
-  },
-  {
    "id": "media:(prefers-reduced-motion: reduce)",
    "label": "(prefers-reduced-motion: reduce)",
    "condition": {
@@ -11866,7 +11842,7 @@
    "order": 763,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "height": "37.875rem",
      "borderTopLeftRadius": "1.5rem",
      "borderTopRightRadius": "1.5rem",
@@ -11882,7 +11858,7 @@
    "order": 764,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "rowGap": "1.4375rem",
      "columnGap": "1.4375rem"
     }
@@ -11895,7 +11871,7 @@
    "order": 765,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "left": "1.5625rem",
      "right": "1.5625rem",
      "bottom": "1.5rem"
@@ -11909,7 +11885,7 @@
    "order": 766,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "4.5rem"
     }
    }
@@ -11921,7 +11897,7 @@
    "order": 767,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "1.4375rem"
     }
    }
@@ -11933,7 +11909,7 @@
    "order": 768,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "top": "1.3125rem",
      "right": "1.3125rem",
      "width": "2.4375rem",
@@ -11948,7 +11924,7 @@
    "order": 769,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "0.8125rem",
      "lineHeight": "1.5"
     }
@@ -11961,7 +11937,7 @@
    "order": 770,
    "styles": {},
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "0.625rem",
      "lineHeight": "1.7"
     }
@@ -14593,7 +14569,7 @@
     "fontSize": "0.75rem"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "0.6875rem"
     },
     "mobile": {
@@ -14652,7 +14628,7 @@
     "lineHeight": "1.25"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "1.5625rem"
     }
    }
@@ -14667,7 +14643,7 @@
     "lineHeight": "1.7"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "0.625rem",
      "lineHeight": "1.7"
     }
@@ -14683,7 +14659,7 @@
     "lineHeight": "1.7"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "fontSize": "0.625rem",
      "lineHeight": "1.75"
     }
@@ -14817,7 +14793,7 @@
     "fontWeight": "800"
    },
    "contextStyles": {
-    "media:(max-width: 680px)": {
+    "tablet-p": {
      "fontSize": "2.625rem"
     }
    }
@@ -23826,7 +23802,7 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 900px)": {
+    "tablet-l": {
      "gridTemplateColumns": "1fr",
      "rowGap": "0.75rem",
      "columnGap": "0.75rem"
@@ -23887,7 +23863,7 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "borderTopLeftRadius": "1.25rem",
      "borderTopRightRadius": "1.25rem",
      "borderBottomRightRadius": "1.25rem",
@@ -23960,10 +23936,10 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 900px)": {
+    "tablet-l": {
      "height": "45rem"
     },
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "height": "42.5rem"
     }
    }
@@ -27794,7 +27770,7 @@
     "transitionProperty": "color, background"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "paddingTop": "0.625rem",
      "paddingRight": "0.6875rem",
      "paddingBottom": "0.625rem",
@@ -27887,7 +27863,7 @@
     "minWidth": "0"
    },
    "contextStyles": {
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "paddingTop": "1.5625rem",
      "paddingRight": "1.375rem",
      "paddingBottom": "1.5625rem",
@@ -28746,7 +28722,7 @@
     "boxShadow": "0 1.125rem 2.8125rem rgba(5,17,28,.18)"
    },
    "contextStyles": {
-    "media:(max-width: 680px)": {
+    "tablet-p": {
      "paddingTop": "1rem",
      "paddingRight": "1rem",
      "paddingBottom": "1rem",
@@ -28869,6 +28845,9 @@
     },
     "tablet-l": {
      "minHeight": "32.5rem"
+    },
+    "tablet-p": {
+     "minHeight": "31.25rem"
     }
    }
   },
@@ -29232,7 +29211,7 @@
     "tablet-l": {
      "gridTemplateColumns": "1fr"
     },
-    "media:(max-width: 680px)": {
+    "tablet-p": {
      "paddingTop": "1rem",
      "paddingRight": "1rem",
      "paddingBottom": "1rem",
@@ -29262,7 +29241,7 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 680px)": {
+    "tablet-p": {
      "paddingTop": "0.875rem",
      "paddingRight": "0.25rem",
      "paddingBottom": "0.5rem",
@@ -29322,7 +29301,7 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 680px)": {
+    "tablet-p": {
      "gridTemplateColumns": "1fr"
     }
    }
@@ -29474,6 +29453,9 @@
     },
     "tablet-l": {
      "minHeight": "32.5rem"
+    },
+    "tablet-p": {
+     "minHeight": "31.25rem"
     }
    }
   },
@@ -30101,7 +30083,7 @@
     "media:(prefers-reduced-motion: reduce)": {
      "scrollBehavior": "auto"
     },
-    "media:(max-width: 600px)": {
+    "mobile-l": {
      "minWidth": "0",
      "width": "100%"
     }
@@ -48860,30 +48842,6 @@
    "order": 2258
   },
   {
-   "name": ".guarantee-unified-visual_photo-frame",
-   "kind": "ambient",
-   "selector": ".guarantee-unified-visual_photo-frame",
-   "styles": {},
-   "contextStyles": {
-    "media:(max-width: 680px)": {
-     "minHeight": "31.25rem"
-    }
-   },
-   "order": 2259
-  },
-  {
-   "name": ".guarantee-unified-visual",
-   "kind": "ambient",
-   "selector": ".guarantee-unified-visual",
-   "styles": {},
-   "contextStyles": {
-    "media:(max-width: 680px)": {
-     "minHeight": "31.25rem"
-    }
-   },
-   "order": 2260
-  },
-  {
    "name": ".hero",
    "kind": "ambient",
    "selector": ".hero",
@@ -48893,7 +48851,7 @@
      "paddingTop": "1.875rem"
     }
    },
-   "order": 2261
+   "order": 2259
   },
   {
    "name": ".text-13-16",
@@ -48905,7 +48863,7 @@
      "fontSize": "0.75rem"
     }
    },
-   "order": 2262
+   "order": 2260
   },
   {
    "name": ".heading-30-3",
@@ -48917,7 +48875,7 @@
      "fontSize": "clamp(1.375rem,1.85vw,1.6875rem)"
     }
    },
-   "order": 2263
+   "order": 2261
   },
   {
    "name": ".wrap_cs-card-grid",
@@ -48938,7 +48896,7 @@
      "marginRight": "auto"
     }
    },
-   "order": 2264
+   "order": 2262
   },
   {
    "name": ".cs-card-grid_cs-card",
@@ -48957,7 +48915,7 @@
      "borderBottomLeftRadius": "1.75rem"
     }
    },
-   "order": 2265
+   "order": 2263
   },
   {
    "name": ".cs-card_cs-card-top",
@@ -48971,7 +48929,7 @@
      "marginBottom": "1.375rem"
     }
    },
-   "order": 2266
+   "order": 2264
   },
   {
    "name": ".cs-card-top_cs-card-avatar",
@@ -48988,7 +48946,7 @@
      "borderBottomLeftRadius": "0.8125rem"
     }
    },
-   "order": 2267
+   "order": 2265
   },
   {
    "name": ".heading-18-4",
@@ -49000,7 +48958,7 @@
      "fontSize": "1rem"
     }
    },
-   "order": 2268
+   "order": 2266
   },
   {
    "name": ".cs-card-top_cs-card-badge",
@@ -49015,7 +48973,7 @@
      "paddingLeft": "0.75rem"
     }
    },
-   "order": 2269
+   "order": 2267
   },
   {
    "name": ".text-12-24",
@@ -49027,7 +48985,7 @@
      "fontSize": "0.625rem"
     }
    },
-   "order": 2270
+   "order": 2268
   },
   {
    "name": ".cs-video-play_cs-play-button",
@@ -49044,7 +49002,7 @@
      "borderBottomLeftRadius": "0.8125rem"
     }
    },
-   "order": 2271
+   "order": 2269
   },
   {
    "name": ".cs-video-play_cs-play-label",
@@ -49057,7 +49015,7 @@
      "left": "0.8125rem"
     }
    },
-   "order": 2272
+   "order": 2270
   },
   {
    "name": ".text-11-20",
@@ -49069,7 +49027,7 @@
      "fontSize": "0.5625rem"
     }
    },
-   "order": 2273
+   "order": 2271
   },
   {
    "name": ".cs-video-group_cs-video-meta-2",
@@ -49082,7 +49040,7 @@
      "columnGap": "0.4375rem"
     }
    },
-   "order": 2274
+   "order": 2272
   },
   {
    "name": ".text-10-20",
@@ -49094,7 +49052,7 @@
      "fontSize": "0.5625rem"
     }
    },
-   "order": 2275
+   "order": 2273
   },
   {
    "name": ".cs-card_cs-card-copy",
@@ -49106,7 +49064,7 @@
      "paddingTop": "1.4375rem"
     }
    },
-   "order": 2276
+   "order": 2274
   },
   {
    "name": ".cs-card-copy_cs-card-copy-p",
@@ -49122,7 +49080,7 @@
      "minHeight": "0"
     }
    },
-   "order": 2277
+   "order": 2275
   },
   {
    "name": ".text-16-8",
@@ -49135,7 +49093,7 @@
      "lineHeight": "1.75"
     }
    },
-   "order": 2278
+   "order": 2276
   },
   {
    "name": ".cs-card_cs-card-metrics",
@@ -49148,7 +49106,7 @@
      "columnGap": "1rem"
     }
    },
-   "order": 2279
+   "order": 2277
   },
   {
    "name": ".cs-card-metrics_cs-metric-2",
@@ -49160,7 +49118,7 @@
      "paddingTop": "1.125rem"
     }
    },
-   "order": 2280
+   "order": 2278
   },
   {
    "name": ".heading-43-3",
@@ -49172,7 +49130,7 @@
      "fontSize": "clamp(1.6875rem,2.4vw,2.25rem)"
     }
    },
-   "order": 2281
+   "order": 2279
   },
   {
    "name": ".text-13-10",
@@ -49185,7 +49143,7 @@
      "lineHeight": "1.6"
     }
    },
-   "order": 2282
+   "order": 2280
   },
   {
    "name": ".cs-card-metrics_cs-metric-4",
@@ -49197,7 +49155,7 @@
      "paddingTop": "1.125rem"
     }
    },
-   "order": 2283
+   "order": 2281
   },
   {
    "name": ".cs-card_cs-card-note",
@@ -49209,7 +49167,7 @@
      "marginTop": "1.3125rem"
     }
    },
-   "order": 2284
+   "order": 2282
   },
   {
    "name": ".text-10-21",
@@ -49221,7 +49179,7 @@
      "fontSize": "0.5625rem"
     }
    },
-   "order": 2285
+   "order": 2283
   },
   {
    "name": ".heading-31-3",
@@ -49233,7 +49191,7 @@
      "fontSize": "clamp(1.6875rem,2.4vw,2.25rem)"
     }
    },
-   "order": 2286
+   "order": 2284
   }
  ]
 }

@@ -78,7 +78,11 @@ const BREAKPOINTS = [
    TWO PHONE BREAKPOINTS ONLY (Alejandro, 2026-09-14: "too many mobile breakpoints"). Sang's ≤400 and
    ≤360 tweaks fold into Mobile portrait (480), so they now apply on every phone up to 480px: a
    deliberate trade, and the one place class-parity.mjs is expected to differ (430, 414, 390, 375). */
-const BP_MAP = { 1190: 'laptop', 1150: 'laptop-s', 1050: 'laptop-s', 1000: 'tablet-l', 980: 'tablet-l', 800: 'tablet', 780: 'tablet', 760: 'tablet-p', 720: 'tablet-p', 620: 'mobile-l', 520: 'mobile', 480: 'mobile', 400: 'mobile', 360: 'mobile' }
+/* 900, 680 and 600 arrived with Sang's v16 CSS (calendly, the guarantee card) and first published as
+   three extra site conditions beside the breakpoints: "the breakpoint problem again" (Alejandro,
+   2026-09-15). Each folds UP into the next editor breakpoint, so every gated device width at 768 and
+   above, and every phone, keeps its styles; only 900-1000, 680-760 and 600-620 change. */
+const BP_MAP = { 1190: 'laptop', 1150: 'laptop-s', 1050: 'laptop-s', 1000: 'tablet-l', 980: 'tablet-l', 900: 'tablet-l', 800: 'tablet', 780: 'tablet', 760: 'tablet-p', 720: 'tablet-p', 680: 'tablet-p', 620: 'mobile-l', 600: 'mobile-l', 520: 'mobile', 480: 'mobile', 400: 'mobile', 360: 'mobile' }
 const bpFor = (w) => {
   if (BP_MAP[w]) return BREAKPOINTS.find((b) => b.id === BP_MAP[w])
   const exact = BREAKPOINTS.find((b) => b.width === w)
