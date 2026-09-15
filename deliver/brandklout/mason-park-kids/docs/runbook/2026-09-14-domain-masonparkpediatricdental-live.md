@@ -51,6 +51,35 @@ The user decided the new design is **not ready for production**. The target is
   apex/`www` at SiteGround and drop them from Railway and from `PUBLIC_ORIGIN`.
 - Staging has **no `noindex`** and `/robots.txt` is a 404.
 
+### Later again - the old site is back on the domain, from the local static copy
+
+The user remembered a local copy. It is the mirror from 27 Aug:
+`workflows/01-site-recovery/.tmp/recovered/mirror/`. It is gitignored, so it exists on this disk only.
+It holds 40 pages and 767 files (62 MB). Every URL is root-relative, and external `<script>`/`<iframe>` tags are
+stripped. `.tmp/verify-safe.mjs` still passes 8/8.
+
+- Deployed as-is to **Cloudflare Pages project `mason-park-kids-wp`** (<https://mason-park-kids-wp.pages.dev>).
+  `wrangler pages project create` failed: wrangler 4.131 delegates it to Workers and reported "could not
+  detect a directory". Creating the project with `POST /accounts/{id}/pages/projects` worked, and then
+  `wrangler pages deploy <mirror> --project-name mason-park-kids-wp --branch main` uploaded it.
+- The apex and `www` are attached as Pages custom domains. Their CNAMEs were PATCHed to
+  `mason-park-kids-wp.pages.dev`, **proxied**. The `_railway-verify` TXT for apex/www was deleted. Both
+  domains went `active` in about 2 minutes. `www` served 522 for about a minute in between.
+- The apex and `www` were removed from Railway (`customDomainDelete`). `PUBLIC_ORIGIN` is now
+  `https://staging.masonparkpediatricdental.com,https://mason-park-kids.up.railway.app`, redeploy `4e9a83e9`.
+  `check-origins --all` is clean.
+- Verified on the real domain: pages 40/40 and homepage + about assets 96/96, all 200.
+  Staging still serves the new design.
+- Booking still works statically. The site books through `flexbook.me/masonpark/1` and `tel:` links.
+- The third temp CF token (account Pages Write + zone DNS Write) was revoked.
+
+**Known gaps. The first two are faithful to the old site, not caused by the copy:**
+- 17 `/services/*` menu links 404. They already 404'd on the live WordPress (see 2026-08-28).
+- The 157 blog posts were never mirrored. Post links (for example `/teeth-stages-childrens-dentist-katy/`) 404.
+  The WXR and DB dump are in `.tmp/recovered/` if the posts are ever wanted.
+- The one contact form (`/before-after/`, CF7) cannot submit. Maps and embeds were stripped.
+  The theme's demo pages (shop, cart, wishlist, blog-masonry) remain, as they did on the live site.
+
 ### Gotchas
 
 - `x-suspended-vhost: 1` on a SiteGround 503 means the account or site is suspended, not that WordPress crashed.

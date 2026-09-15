@@ -19,11 +19,13 @@ review link. Every gate is clean over 215 pages: `check.mjs` 0 errors, `audit-li
 and 390, `diff-all.mjs` 215 match, `crop-all.mjs --live` 0 across 215 x 2 widths.
 
 **2026-09-14: the new design is on STAGING at <https://staging.masonparkpediatricdental.com>**
-(admin at `/admin`, origins verified). It is not ready for production. The plan is for
-`masonparkpediatricdental.com` to serve the **old WordPress site** until then, but that is blocked:
-**the SiteGround vhost is suspended** (`503`, `x-suspended-vhost: 1`), and our SSH key is refused.
-Until someone lifts that in the SiteGround Client Area, apex and `www` still point at the new design on
-Railway. Staging has no `noindex` and no `robots.txt`. See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
+(admin at `/admin`, origins verified). It is not ready for production.
+**`masonparkpediatricdental.com` and `www` serve the OLD WordPress site** as a static copy (the 27-Aug
+mirror) from Cloudflare Pages project `mason-park-kids-wp`. The real WordPress is unreachable: the
+SiteGround vhost is suspended and SSH is refused. To update the old site, redeploy the mirror with
+`wrangler pages deploy`. When the new design launches, repoint the apex/`www` CNAMEs to Railway and put them back
+in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
+See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
 | | State |
 | :--- | :--- |
