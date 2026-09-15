@@ -98,8 +98,15 @@ for (const f of htmlFiles) {
    two pages under one title. A top-level page identical to another one is an alias of whichever of
    the two the rest of the package links to, the same way `preview (1).html` is an alias of `/`. */
 {
+  /* v16 (2026-09-14): each page's new prequalification form prefixes its field ids with the page's
+     own name (`revenue-attribution-cta-email`), so the two copies are no longer byte-identical. Those
+     self-prefixed id/for values are neutralised before comparing; any other difference still counts. */
+  const sameText = (f) => {
+    const stem = path.posix.basename(f).replace(/\.html?$/i, '')
+    return read(f).split(`id="${stem}-`).join('id="@self-').split(`for="${stem}-`).join('for="@self-')
+  }
   const byText = new Map()
-  for (const f of pageFiles) byText.set(read(f), [...(byText.get(read(f)) ?? []), f])
+  for (const f of pageFiles) byText.set(sameText(f), [...(byText.get(sameText(f)) ?? []), f])
   for (const group of byText.values()) {
     if (group.length < 2) continue
     if (group.some((f) => f.includes('/'))) refuse(`identical nested pages, alias them by hand: ${group.join(', ')}`)
@@ -308,7 +315,17 @@ const layoutOf = (html) => {
   if (!sheets.length) return null
   return sheets.map((s) => s.href).join(',') + ' | ' + scripts.map((m) => srcOf(m[1])).join(',')
 }
-const layouts = new Set(pageFiles.map((f) => layoutOf(read(f))))
+/* Judged on the PATCHED pages (v16, 2026-09-14): Sang's home page links a carousel stylesheet and
+   script no other page does, and patches/index.html.mjs removes them. */
+const layouts = new Set(
+  pageFiles.map((f) => {
+    try {
+      return layoutOf(applyPatches(f, read(f), patches))
+    } catch (e) {
+      refuse(e.message)
+    }
+  }),
+)
 if (pageFiles.length > 1 && layouts.size === 1 && !layouts.has(null)) {
   await buildShared()
   process.exit(0)

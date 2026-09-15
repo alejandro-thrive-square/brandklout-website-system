@@ -178,7 +178,45 @@ const STORIES =
   '<p class="bk-proof-note">Client experiences and outcomes are individual. Results vary and are not guaranteed.</p>\n' +
   '</div></div></section>'
 
+/* v16 (2026-09-14, Alejandro: "keep the same structure and sections that we have currently"). Sang's
+   v12 carousel and v13 results cards rebuilt the same two areas as the agency slider and case cards
+   below, and his home page dropped the closing section and moved the prequalification form under
+   the FAQ. The live structure is kept: his hero panel goes back to the v11 Legacy card (the anchor
+   the slider patches expect), and the section order is the live one. Everything else in v16 stands. */
+import fs from 'node:fs'
+
+const V11_HOME = fs.readFileSync(new URL('../../00-client-delivery-initialization/.tmp/client-handoff/package-v11/index.html', import.meta.url), 'utf8')
+const fromV11 = (re, what) => {
+  const m = V11_HOME.match(re)
+  if (!m) throw new Error(`patches/index.html.mjs: the v11 ${what} is not in package-v11/index.html`)
+  return m[0]
+}
+const V11_PROOF = fromV11(/<div class="reference-proof-wrap" data-reveal="">[\s\S]*?(?=\n<\/div><\/section>\n<section class="client-strip">)/, 'hero proof card')
+const V11_CLOSING = fromV11(/<section class="closing-section">[\s\S]*?<\/section>/, 'closing section')
+
 export default [
+  /* --- 0. v16 -> the live structure ---------------------------------------------------------- */
+  {
+    why: 'v16: the hero carousel stylesheet is not used (the agency slider replaces it)',
+    find: /<link href="assets\/hero-carousel-v12\.css"[^>]*>/,
+    replace: '',
+  },
+  {
+    why: 'v16: the hero carousel script is not used either; every page now links the same assets',
+    find: /<script[^>]*src="assets\/hero-carousel-v12\.js"[^>]*><\/script>/,
+    replace: '',
+  },
+  {
+    why: 'v16: Sang’s three-story carousel -> the v11 Legacy card, which the slider patches build on',
+    find: /<div aria-label="Featured customer success stories"[\s\S]*?(?=\n<\/div><\/section>\n<section class="client-strip">)/,
+    replace: V11_PROOF,
+  },
+  {
+    why: 'v16: the prequalification form back above the FAQ, and the closing section back after it',
+    find: /(<section class="section tight" id="faq">[\s\S]*?<\/section>)(<section class="section opportunity-section bottom-market-prequal" id="market-prequalification">[\s\S]*?<\/section>)(?=<\/main>)/,
+    replace: (_, faq, prequal) => prequal + faq + V11_CLOSING,
+  },
+
   /* --- 1. the hero slider ------------------------------------------------------------------- */
   {
     why: 'hero slider: open the slider and slide 1 (Sang’s Legacy card) after the card header',

@@ -16,6 +16,16 @@ Drop the source material here, once, exactly as received.
   `prepare-source.mjs package-v11` reads (its shared-layout branch). Its media and
   `OPEN-ME.html` (a 1.3MB self-contained preview with every image inlined) are gitignored; the
   pages, CSS, JS and notes are committed.
+- **`BrandKlout-Complete-Website-v16.zip`** (2026-09-14 evening, v16, **replaces v11**): the same
+  33 flat pages (his README and changelogs stop at v13; v14–v16 are undocumented). Unzipped as
+  `BrandKlout-Complete-Website-v16/` and renamed to **`package-v16/`**, which is what
+  `prepare-source.mjs package-v16` reads. What changed against v11: a market-prequalification form
+  at the foot of every page (replacing the CTA bands and story CTAs), a light footer, the unified
+  `/guarantee` card with a new photo, an embedded Calendly calendar on `/book`, Legacy's comparison
+  chart moved onto its story page, a five-card story row on home, and his own home hero carousel
+  (v12) and results cards (v13). The agency keeps the live home structure over those last two (see
+  `21-instatic-upload/patches/index.html.mjs`). `package-v11/` stays: that patch reads v11's hero
+  card and closing section from it.
 - Anything else Sang sends that belongs to the first handoff (logo files, brand notes, the
   compliance request itself) goes here too. Later material goes in the `.tmp/` of the workflow
   that uses it.

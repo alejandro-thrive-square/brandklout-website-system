@@ -508,7 +508,9 @@ const styleAsset = CLASSES
   ? // The reset revert is NOT here: in the class system it is the first registry rules
     // (class-system.mjs step 0), so it loads before Sang's rules and not after them.
     '/* ===== class-system.mjs: what is not a registry rule ===== */\n' +
-    fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/code.css'), 'utf8')
+    fs.readFileSync(path.resolve(HERE, '.tmp/site/site-src/code.css'), 'utf8') +
+    // agency/code.css (v16): rules for markup only the live page has, e.g. the Embed block's iframe.
+    (fs.existsSync(path.join(HERE, 'agency', 'code.css')) ? '\n' + fs.readFileSync(path.join(HERE, 'agency', 'code.css'), 'utf8') : '')
   : VERBATIM
   ? fs.readFileSync(path.join(HERE, 'instatic-reset-revert.css'), 'utf8') +
     '\n/* ===== the site stylesheet, verbatim (prepare-source.mjs, shared layout) ===== */\n' +
@@ -699,6 +701,35 @@ const shell = {
 // Reuse the existing row id for a slug we already have, so a re-run UPDATES a
 // page rather than replacing it with a new row — page ids are what the media
 // panel, the audit log and any external link point at.
+/* v16 (2026-09-14): /book's Calendly <iframe>. The importer keeps a non-YouTube iframe as a
+   base.container with customTag "iframe", which Instatic publishes as an empty <div> (iframe is a
+   forbidden custom tag). Each one becomes the embed-origins Embed block in URL mode, whose static
+   embed also lets the plugin's autoTrust open frame-src on that page. The node keeps its id, parent
+   and classes; agency/code.css restores the frame's per-breakpoint heights. */
+const EMBED_MODULE = 'brandklout.embed-origins.embed'
+for (const p of converted.pages) {
+  for (const n of Object.values(p.nodes)) {
+    if (n.moduleId !== 'base.container' || n.props?.customTag !== 'iframe') continue
+    const a = n.props.htmlAttributes ?? {}
+    if (!a.src) throw new Error(`${p.slug}: an imported <iframe> with no src; cannot make it an Embed block`)
+    n.moduleId = EMBED_MODULE
+    n.props = {
+      source: 'url',
+      url: a.src,
+      title: a.title ?? '',
+      fit: 'fixed',
+      height: 760,
+      lazy: a.loading !== 'eager',
+      allowFullscreen: /fullscreen/.test(a.allow ?? ''),
+      allow: a.allow ?? '',
+      snippet: '',
+      ratio: '16 / 9',
+    }
+    n.children = []
+    console.log(`embed      ${p.slug}: <iframe src="${a.src}"> -> ${EMBED_MODULE}`)
+  }
+}
+
 const idBySlug = new Map(existingPages.filter((p) => p.slug).map((p) => [p.slug, p.id]))
 const seoBySlugForTitle = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
 const pages = converted.pages.map((p) => ({

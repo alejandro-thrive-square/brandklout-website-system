@@ -10,7 +10,9 @@ const tab = LEGAL.tabs.find((t) => t.id === 'privacy')
 export default [
   {
     why: 'Legal pages (2026-09-14, Alejandro): brandklout.com\'s Privacy Policy text on the full page',
-    find: /<div class="wrap legal">[\s\S]*?<\/div><\/section><\/main>/,
-    replace: `<div class="wrap legal">${tab.body}</div></section></main>`,
+    /* v16 puts the market-prequalification form after the legal section, so the anchor ends at the
+       legal section's own close, not at </main>. */
+    find: /<div class="wrap legal">[\s\S]*?<\/div><\/section>(?=<section class="section opportunity-section bottom-market-prequal")/,
+    replace: `<div class="wrap legal">${tab.body}</div></section>`,
   },
 ]

@@ -10,7 +10,21 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v12, the CLASS SYSTEM (2026-09-14, evening)
+## Status: Sang's v16, published as seq 22 (2026-09-14, late evening)
+
+- **Source is `client-handoff/package-v16/`** + `patches/`, through the class system. Every v16 change
+  is live (prequalification form at the foot of every page, light footer, unified `/guarantee`,
+  Calendly on `/book` as the Embed block, Legacy's chart on its story, five-card story row), while
+  the home page keeps the live structure: agency hero slider, case cards, client-stories panel,
+  prequalification above the FAQ, closing section. Details:
+  [`runbook/2026-09-14-v16-published.md`](./runbook/2026-09-14-v16-published.md).
+- **Rollback point for seq 21**: git tag `brandklout-website-live-seq21`, the API snapshot in
+  `21-instatic-upload/.tmp/backup-2026-09-14-seq21/`, and
+  `/app/storage/backups/cms-2026-09-14-seq21-pre-v16.db` on the container.
+- The next zip of Sang's goes in the same way: back up, diff, re-anchor patches, rebuild (directive
+  `21-instatic-upload.md` → "Sang's v16 on the class system").
+
+## Previous: v12, the CLASS SYSTEM (2026-09-14, evening)
 
 - **The site's CSS is now Instatic classes**, editable in the Styles panel: every element carries its
   own layout class plus a shared type class (`text-18`, `heading-60`), resolved from Sang's cascade

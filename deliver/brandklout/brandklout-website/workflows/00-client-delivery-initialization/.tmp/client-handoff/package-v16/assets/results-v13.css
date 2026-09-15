@@ -1,0 +1,83 @@
+/* Matching, photographic client-result cards. Local photo fallbacks are always visible. */
+.reference-site .measurable-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+.reference-site .measurable-card{position:relative;display:block;isolation:isolate;min-width:0;height:626px;border-radius:27px;overflow:hidden;background:#09141e;color:#fff;text-decoration:none;border:1px solid #152b3829;box-shadow:0 10px 30px #0b1b3010;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s;outline-offset:6px}
+.reference-site .measurable-photo{position:absolute;inset:0 0 auto;height:65%;margin:0;background:#778387;overflow:hidden}
+.reference-site .measurable-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--photo-position,50% 25%);filter:saturate(.65);transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .5s}
+.reference-site .measurable-shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,#07101906 0%,#07101908 24%,#0710194d 36%,#071019bd 48%,#09141e 64%,#09141e 100%);pointer-events:none}
+.reference-site .measurable-open{position:absolute;right:24px;top:24px;width:43px;height:43px;display:grid;place-items:center;z-index:3;border:1px solid #ffffff86;border-radius:50%;background:#11223012;color:white;backdrop-filter:blur(4px);transition:background .3s,transform .3s}
+.reference-site .measurable-open .ui-icon{width:19px;height:19px}
+.reference-site .measurable-content{position:absolute;z-index:2;inset:auto 27px 26px;display:flex;flex-direction:column;gap:0;color:#fff}
+.reference-site .measurable-identity{min-height:57px;margin-bottom:8px}
+.reference-site .measurable-category{font:600 9px/1.5 "DM Sans",system-ui,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#d5e0e9;display:block;margin-bottom:5px}
+.reference-site .measurable-identity h3{font:750 23px/1.2 "Manrope",system-ui,sans-serif;letter-spacing:-.035em;color:#fff!important;margin:0}
+.reference-site .measurable-number{font:800 clamp(58px,5.2vw,76px)/1.08 "Manrope",system-ui,sans-serif;color:#97ede3;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-bottom:10px;white-space:nowrap}
+.reference-site .measurable-result{min-height:89px}
+.reference-site .measurable-result>strong{display:block;font-size:17px;line-height:1.4;font-weight:600;color:#fff}
+.reference-site .measurable-result>p{font-size:13px;line-height:1.55;color:#d9e3eb;margin:4px 0 0;max-width:310px}
+.reference-site .measurable-proof{border-top:1px solid #ffffff32;padding-top:16px;margin-top:15px;min-height:65px}
+.reference-site .measurable-proof>strong{font-size:12px;line-height:1.5;font-weight:600;color:#f7fbff;display:block}
+.reference-site .measurable-proof>span{font-size:11px;line-height:1.6;color:#b7c7d4;display:block;margin-top:3px}
+.reference-site .measurable-read{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;line-height:1.5;font-weight:600;color:#c4f7f0;margin-top:20px}
+.reference-site .measurable-read>span{font-size:20px;line-height:1;transition:transform .3s}
+.reference-site .measurable-source{color:#697d92;font-size:11px;line-height:1.7;margin:21px 0 0;max-width:1050px}
+.reference-site .measurable-card:hover,.reference-site .measurable-card:focus-visible{transform:translateY(-5px);box-shadow:0 22px 45px #0b1b3026}
+.reference-site .measurable-card:hover .measurable-photo img,.reference-site .measurable-card:focus-visible .measurable-photo img{transform:scale(1.035);filter:saturate(.95)}
+.reference-site .measurable-card:hover .measurable-open,.reference-site .measurable-card:focus-visible .measurable-open{background:#e6fff726;color:#fff}
+.reference-site .measurable-card:hover .measurable-read>span{transform:translate(2px,-2px)}
+/* Only this new group uses the stagger, leaving existing site motion unchanged. */
+.motion-ready .reference-site .measurable-card{opacity:0;transform:translateY(22px);transition:opacity .65s ease var(--card-delay,0ms),transform .75s cubic-bezier(.2,.7,.2,1) var(--card-delay,0ms),box-shadow .3s}
+.motion-ready .reference-site .measurable-card.is-visible{opacity:1;transform:translateY(0)}
+.motion-ready .reference-site .measurable-card.is-visible:hover,.motion-ready .reference-site .measurable-card.is-visible:focus-visible{transform:translateY(-5px)}
+/* Original homepage chart, now a detail-page module. */
+.reference-site .legacy-comparison-section{background:#f7f9fc;border-top:1px solid #e1e9f1;border-bottom:1px solid #e1e9f1}
+.reference-site .legacy-comparison-layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.85fr);gap:38px;align-items:center}
+.reference-site .legacy-comparison-layout .result-lab{padding:34px;border-radius:26px;min-width:0;box-shadow:0 12px 35px #0b1b3006}
+.reference-site .legacy-comparison-layout .result-lab .lab-heading h3{font-size:27px;color:#09141e;line-height:1.25;letter-spacing:-.04em}
+.reference-site .legacy-comparison-layout .chart-tabs{margin:25px 0 32px;gap:3px;max-width:100%;flex-wrap:wrap}
+.reference-site .legacy-comparison-layout .chart-tabs button{font-size:12px;padding:11px 16px}
+.reference-site .legacy-chart-guide{min-width:0;color:#0c1721}
+.reference-site .legacy-chart-guide h2{font-size:37px;line-height:1.12;letter-spacing:-.04em;margin:0 0 20px;color:#0c1721}
+.reference-site .legacy-chart-guide>p{font-size:15px;line-height:1.8;color:#64768c;margin:0}
+.reference-site .legacy-index-note{display:grid;gap:7px;margin:26px 0;padding:20px;border:1px solid #dce5ed;border-radius:17px;background:#fff}
+.reference-site .legacy-index-note strong{font-size:15px;color:#2a526f}
+.reference-site .legacy-index-note>span{font-size:12px;line-height:1.7;color:#64768c}
+.reference-site .legacy-milestone{display:flex;align-items:center;gap:15px;margin-top:20px}
+.reference-site .legacy-diamond{display:grid;place-items:center;width:46px;height:46px;flex-shrink:0;border-radius:15px;background:#edfbd8;color:#285d27;font-size:25px}
+.reference-site .legacy-milestone strong{display:block;font-size:14px;line-height:1.5;color:#142a3c}
+.reference-site .legacy-milestone div>span{display:block;font-size:11px;line-height:1.7;color:#64768c;margin-top:3px}
+@media(min-width:1600px){.reference-site .measurable-card{height:660px}.reference-site .measurable-number{font-size:80px}}
+@media(max-width:1100px) and (min-width:981px){.reference-site .measurable-grid{gap:17px}.reference-site .measurable-content{left:22px;right:22px}.reference-site .measurable-identity h3{font-size:21px}.reference-site .measurable-number{font-size:63px}.reference-site .measurable-result>strong{font-size:16px}.reference-site .measurable-proof>strong{font-size:11px}}
+@media(max-width:980px){.reference-site .measurable-grid{grid-template-columns:1fr;max-width:600px;margin:0 auto;gap:25px}.reference-site .measurable-card{height:660px}.reference-site .measurable-photo{height:70%}.reference-site .measurable-content{left:32px;right:32px;bottom:29px}.reference-site .measurable-number{font-size:76px}.reference-site .measurable-result>p{max-width:100%}.reference-site .measurable-result{min-height:82px}.reference-site .legacy-comparison-layout{grid-template-columns:1fr;gap:35px}.reference-site .legacy-chart-guide{max-width:570px}.reference-site .legacy-chart-guide h2{font-size:35px}}
+@media(max-width:600px){.reference-site .measurable-card{height:606px;border-radius:24px}.reference-site .measurable-grid{gap:23px}.reference-site .measurable-content{left:25px;right:25px;bottom:24px}.reference-site .measurable-number{font-size:72px}.reference-site .measurable-identity h3{font-size:23px}.reference-site .measurable-open{top:21px;right:21px;width:39px;height:39px}.reference-site .measurable-result>p{font-size:13px;line-height:1.5}.reference-site .measurable-source{font-size:10px;line-height:1.7}.reference-site .legacy-comparison-layout .result-lab{padding:25px 22px}.reference-site .legacy-comparison-layout .chart-tabs button{padding:10px 11px;font-size:11px}.reference-site .legacy-comparison-layout .result-lab .lab-heading h3{font-size:25px}.reference-site .legacy-comparison-layout .source-line{font-size:10px;line-height:1.75}.reference-site .legacy-comparison-layout .chart-note{font-size:10px;line-height:1.7}}
+@media(max-width:360px){.reference-site .measurable-content{left:22px;right:22px}.reference-site .measurable-number{font-size:65px}.reference-site .measurable-identity h3{font-size:21px}.reference-site .measurable-result>strong{font-size:16px}.reference-site .measurable-result>p{font-size:12px}.reference-site .legacy-comparison-layout .result-lab{padding:22px 18px}.reference-site .legacy-comparison-layout .chart-tabs button{font-size:10px;padding:9px}}
+.reduce-motion .reference-site .measurable-card,.reduce-motion .reference-site .measurable-card:hover,.reduce-motion .reference-site .measurable-card:focus-visible{opacity:1!important;transform:none!important;transition:none!important}
+.reduce-motion .reference-site .measurable-photo img,.reduce-motion .reference-site .measurable-read>span{transition:none!important;transform:none!important}
+@media(prefers-reduced-motion:reduce){.reference-site .measurable-card,.reference-site .measurable-card:hover,.reference-site .measurable-card:focus-visible{opacity:1!important;transform:none!important;transition:none!important}.reference-site .measurable-photo img,.reference-site .measurable-read>span{transition:none!important;transform:none!important}}
+
+
+/* v14 guarantee contrast + universal bottom market CTA */
+.reference-site .guarantee-promise-band.card{
+  background:linear-gradient(135deg,#071420 0%,#0a2030 48%,#113245 100%)!important;
+  color:#f6fbff!important;
+  border-color:rgba(255,255,255,.12)!important;
+  box-shadow:0 24px 60px rgba(7,16,25,.14);
+}
+.reference-site .guarantee-promise-band h2,
+.reference-site .guarantee-promise-band p,
+.reference-site .guarantee-promise-band li,
+.reference-site .guarantee-promise-band .small-label{color:#f6fbff!important}
+.reference-site .guarantee-promise-band .small-label{color:#72e5da!important}
+.reference-site .guarantee-checks li{
+  background:rgba(255,255,255,.055)!important;
+  border-color:rgba(255,255,255,.13)!important;
+}
+.reference-site .guarantee-checks li::before{background:rgba(91,226,210,.16);color:#82eee2}
+.reference-site .guarantee-support-photo{background:#0d1e2c}
+.reference-site .guarantee-support-photo>img{display:block;width:100%;height:100%;object-fit:cover}
+.reference-site .bottom-market-prequal{margin-top:0;border-bottom:0}
+.reference-site .bottom-market-prequal .v5-availability{margin-top:28px}
+.reference-site .bottom-market-prequal .form{box-shadow:0 24px 60px rgba(0,0,0,.16)}
+.reference-site .bottom-market-prequal .success .btn{width:auto;margin-top:14px}
+@media (max-width:720px){
+  .reference-site .bottom-market-prequal{padding-top:64px;padding-bottom:64px}
+}

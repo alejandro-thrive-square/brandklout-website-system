@@ -1,0 +1,27 @@
+{
+  "version": 12,
+  "interval_ms": 8000,
+  "order": [
+    "legacy",
+    "ava",
+    "oceanic"
+  ],
+  "sources": [
+    {
+      "practice": "Legacy Dental Pasadena",
+      "page": "customer-story-legacy-dental-pasadena.html",
+      "headline": "60% collections growth"
+    },
+    {
+      "practice": "AVA Dental",
+      "page": "customer-story-ava-dental-launch.html",
+      "headline": "$109K in monthly collections within the first 90 days after grand opening"
+    },
+    {
+      "practice": "Oceanic Dental",
+      "page": "customer-story-oceanic-ai-search-growth.html",
+      "headline": "35 positive reviews in two weeks"
+    }
+  ],
+  "note": "Figures are reproduced from the supplied V11 customer-story content, not independently verified. No invented monthly or daily series. Compiled markup in index.html is authoritative; this JSON is documentation only."
+}

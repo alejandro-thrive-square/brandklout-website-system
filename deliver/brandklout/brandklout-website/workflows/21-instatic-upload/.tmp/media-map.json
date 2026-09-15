@@ -1,6 +1,6 @@
 {
   "base": "https://brandklout-production.up.railway.app",
-  "uploadedAt": "2026-09-14T21:53:32.357Z",
+  "uploadedAt": "2026-09-15T00:05:36.749Z",
   "map": {
     "ava-reference.webp": {
       "id": "1pC9UvLc2PDK06b5xSFDy",
@@ -11,32 +11,34 @@
     "bk-AVA_Dental_Implants_Periodontics.jpg": {
       "id": "Byhzg-_TQU9sZfBVHLPr9",
       "url": "/uploads/4aq7XgCKQE0Y8NHoyevft-bk-AVA_Dental_Implants_Periodontics.jpg",
-      "uploadedAs": "bk-AVA_Dental_Implants_Periodontics.jpg",
-      "width": 600,
-      "height": 400,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "bk-AVA_Dental_Implants_Periodontics.jpg"
     },
     "bk-Legacy_Dental.jpg": {
       "id": "U7Ylp63X9B6BnypKNJ5Po",
       "url": "/uploads/y7RHiy_H5c_wWZc2O6CaW-bk-Legacy_Dental.jpg",
-      "uploadedAs": "bk-Legacy_Dental.jpg",
-      "width": 600,
-      "height": 400,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "bk-Legacy_Dental.jpg"
     },
     "bk-Oceanic_Dental.jpg": {
       "id": "BQTi70SKV4cFk9bumQDpv",
       "url": "/uploads/5s5EbbAx3_SlHcRIYn9ie-bk-Oceanic_Dental.jpg",
-      "uploadedAs": "bk-Oceanic_Dental.jpg",
-      "width": 600,
-      "height": 400,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "bk-Oceanic_Dental.jpg"
     },
     "founder-reference.webp": {
       "id": "nYwmj5Q2q8qp9Sl6sTp2C",
       "url": "/uploads/ubgT0wujP4FY6dRpbygkW-founder-reference.webp",
       "reused": true,
       "uploadedAs": "founder-reference.webp"
+    },
+    "guarantee-confidence.webp": {
+      "id": "AL0ANF5w7vmyi7oby7iRL",
+      "url": "/uploads/Uyhhd82eEcoEKCyFqKz09-guarantee-confidence.webp",
+      "uploadedAs": "guarantee-confidence.webp",
+      "width": 1200,
+      "height": 760,
+      "variants": 5
     },
     "inline-2e429aa2a6.svg": {
       "id": "e6vr0Y7VUBYoXukakbGcF",

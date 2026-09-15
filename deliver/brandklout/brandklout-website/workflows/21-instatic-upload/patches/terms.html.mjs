@@ -9,7 +9,8 @@ const tab = LEGAL.tabs.find((t) => t.id === 'terms')
 export default [
   {
     why: 'Legal pages (2026-09-14, Alejandro): brandklout.com\'s Terms of Service text on the full page',
-    find: /<div class="wrap legal">[\s\S]*?<\/div><\/section><\/main>/,
-    replace: `<div class="wrap legal">${tab.body}</div></section></main>`,
+    // v16: the market-prequalification form follows the legal section (see privacy.html.mjs).
+    find: /<div class="wrap legal">[\s\S]*?<\/div><\/section>(?=<section class="section opportunity-section bottom-market-prequal")/,
+    replace: `<div class="wrap legal">${tab.body}</div></section>`,
   },
 ]

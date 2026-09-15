@@ -18,6 +18,49 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: Sang's v16 on the class system (2026-09-14, late evening)
+
+**Source is now `package-v16`** (`prepare-source.mjs package-v16`). Alejandro: back up the live
+version, take every v16 change, "keep the same structure and sections that we have currently".
+How a new zip of Sang's goes in, now that the admin is the source of truth:
+
+1. **Back up first.** `git tag` the commit that is live; `.tmp/backup-live.mjs` saves the admin's
+   site shell + every page row (`getSite`/`getPages`) and each route's published HTML into
+   `.tmp/backup-<date>-seq<N>/` (gitignored-size, not committed); `.tmp/backup-plugins.mjs` saves the
+   plugin settings; and on the container, `bun:sqlite` `VACUUM INTO
+   '/app/storage/backups/cms-<date>-seq<N>-pre-<what>.db'` (a consistent copy while the server runs;
+   a plain `cp` of `cms.db` would miss the WAL). The site's `seq` in the snapshot also tells you
+   whether anyone edited in the admin since the last push: if it still equals our last publish,
+   nothing needs porting.
+2. **Unzip beside the old package**, rename to `package-vNN`, diff it against the previous package
+   page by page (sections and headings, not raw text: every page changes when a shared block is
+   added). Keep the previous package when a patch still reads from it.
+3. **Re-anchor the patches** (`patches/`). A patch whose anchor moved fails loudly: that is the point.
+   v16 needed: the legal pages' regex to stop at their own `</section>` (a form now follows them);
+   and the home page's four "v16 -> live structure" patches, which drop Sang's carousel assets,
+   put the v11 Legacy card back in place of his carousel (the slider patches anchor on it), and
+   restore the live section order (prequalification above the FAQ, the closing section after it).
+   `replace` may now be a function `(match, ...groups)` so a patch can MOVE Sang's own markup.
+4. The rest of the chain as before: `class-system` → `class-parity` (all ok) → `upload-media` →
+   `set-alt --apply` → `build-import-input` → `ship.sh` → `push-site --apply --force` → publish →
+   live gates.
+
+Changes in the toolkit for v16:
+
+- `prepare-source.mjs` decides "shared layout" on the **patched** pages (Sang's home page links a
+  carousel stylesheet + script no other page does; the patch removes them). And the duplicate-page
+  check neutralises self-prefixed `id`/`for` values (`revenue-attribution-cta-email`) before
+  comparing, so `revenue-attribution.html` stays an alias of `lead-to-collection.html` (32 pages).
+- **Non-YouTube iframes become the Embed block in `push-site.mjs`**: the importer keeps an `<iframe>`
+  as `base.container` + `customTag: "iframe"` with its attributes in `props.htmlAttributes`, which
+  publishes as an empty `<div>`. Each is rewritten to `brandklout.embed-origins.embed` (URL mode,
+  fit fixed), keeping id, parent and classes. First case: `/book`'s Calendly calendar. The static
+  embed lets the plugin's `autoTrust` open `frame-src` on that page.
+- **`agency/code.css`** is appended to the code asset by `push-site.mjs`: rules for markup only the
+  live page has (the Embed block's inner iframe heights: 760 / 720 ≤900 / 680 ≤600, in rem).
+- New max-width values in v16's CSS (680, 900) are not in `BP_MAP`, so they stay site conditions
+  (11 instead of 7), exactly as written. Map them only if parity stays ok.
+
 ## Brandklout: the class system (v12, 2026-09-14, evening)
 
 **Supersedes the verbatim CSS below.** Alejandro: editing the hero paragraph in the admin "didn't

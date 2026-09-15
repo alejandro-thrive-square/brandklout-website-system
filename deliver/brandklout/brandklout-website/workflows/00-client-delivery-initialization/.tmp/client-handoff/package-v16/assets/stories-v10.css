@@ -1,0 +1,281 @@
+/* V10: reference-matched, video-first customer stories.
+   These selectors are intentionally scoped so other pages keep their design. */
+.reference-site .cs-arrow{width:20px;height:20px;flex:none;vertical-align:middle}
+.reference-site .cs-kicker{color:#5277ec;font-size:11px;line-height:1.6;letter-spacing:.15em;font-weight:800;margin:0 0 18px;text-transform:uppercase}
+.reference-site .cs-gradient{background:linear-gradient(105deg,#204bed 5%,#30b2cc 53%,#279e70 98%);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.reference-site .cs-section-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.7fr);gap:64px;align-items:end;margin-bottom:42px}
+.reference-site .cs-section-head h2{font-size:clamp(36px,4.3vw,57px);line-height:1.09;margin:0}
+.reference-site .cs-section-aside p,.reference-site .cs-outcome-summary{font-size:16px;color:#687789;line-height:1.7;margin:0}
+.reference-site .cs-section-aside>a{display:inline-flex;gap:10px;align-items:center;color:#315ed6;font-size:13px;font-weight:700;margin-top:20px}
+.reference-site .cs-featured{background:#f7f9fc;border-top:1px solid #e6edf3;border-bottom:1px solid #e6edf3}
+.reference-site .cs-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;align-items:stretch}
+.reference-site .cs-card{min-width:0;display:flex;flex-direction:column;padding:28px;background:#fff;border:1px solid #dce6ef;border-radius:30px;box-shadow:0 6px 24px rgba(10,24,40,.025);transition:border-color .25s,box-shadow .25s}
+.reference-site .cs-card:hover{border-color:#b7c9df;box-shadow:0 16px 42px rgba(10,24,40,.055)}
+.reference-site .cs-card-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.reference-site .cs-card-avatar{height:48px;width:48px;flex:none;display:grid;place-items:center;background:#f6f8fb;border-radius:15px;color:#071019;font-family:Manrope,system-ui,sans-serif;font-size:18px;font-weight:800;letter-spacing:-.04em}
+.reference-site .cs-card-badge{font-size:12px;line-height:1.4;font-weight:700;letter-spacing:.02em;border-radius:999px;background:#eff5ff;color:#3665df;padding:10px 15px;max-width:78%;text-align:right}
+.reference-site .cs-video-group{min-width:0}
+.reference-site .cs-video{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border-radius:17px;background:#08151f;isolation:isolate}
+.reference-site .cs-video-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:0}
+.reference-site .cs-video-play{position:absolute;inset:0;z-index:2;width:100%;height:100%;padding:0;display:grid;place-items:center;border:0;border-radius:inherit;color:#fff;cursor:pointer;background:linear-gradient(180deg,rgba(7,16,25,.02),rgba(7,16,25,.08) 60%,rgba(7,16,25,.34));transition:background .25s}
+.reference-site .cs-play-button{display:grid;place-items:center;width:70px;height:51px;border-radius:15px;background:#f60035;box-shadow:0 8px 30px #0003;transition:transform .25s,background .25s}
+.reference-site .cs-play-button svg{width:29px;height:29px;transform:translateX(1px)}
+.reference-site .cs-video-play:hover .cs-play-button{transform:scale(1.08);background:#dc0030}
+.reference-site .cs-play-label{position:absolute;bottom:13px;left:16px;font-size:11px;line-height:1.3;letter-spacing:.03em;color:#fff;text-shadow:0 1px 8px #000}
+.reference-site .cs-video iframe{position:absolute;inset:0;border:0;width:100%;height:100%;z-index:4;background:#071019}
+.reference-site .cs-video-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px;font-size:10px;line-height:1.5;color:#728093}
+.reference-site .cs-video-meta>a{display:inline-flex;align-items:center;gap:4px;color:#446185;white-space:nowrap}
+.reference-site .cs-video-meta .cs-arrow{width:12px;height:12px}
+.reference-site .cs-player-notice{position:absolute;z-index:5;left:16px;right:16px;bottom:12px;padding:12px 15px;font-size:12px;line-height:1.5;border:1px solid #dfe7ee;border-radius:12px;background:#fff;color:#071019}
+.reference-site .cs-player-notice[hidden]{display:none}
+.reference-site .cs-stop-video{position:absolute;right:8px;top:8px;z-index:6;padding:6px 9px;border-radius:7px;background:#071019e8;color:#fff;border:1px solid #ffffff3f;font-size:10px;cursor:pointer}
+.reference-site .cs-card-copy{padding-top:25px}
+.reference-site .cs-card h3{font-size:clamp(24px,2.1vw,30px);line-height:1.18;color:#071019;letter-spacing:-.04em;margin:0 0 16px}
+.reference-site .cs-card h3 a:hover{color:#315ed6}
+.reference-site .cs-card-copy>p{font-size:16px;line-height:1.75;color:#687b90;margin:0 0 25px;min-height:84px}
+.reference-site .cs-card-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 20px;margin-top:auto}
+.reference-site .cs-metric{min-width:0;border-top:1px solid #dce5ee;padding-top:20px}
+.reference-site .cs-metric-value{font-family:Manrope,system-ui,sans-serif;display:block;font-size:clamp(31px,3vw,43px);font-weight:800;letter-spacing:-.035em;line-height:1.1;color:#071019;margin-bottom:10px}
+.reference-site .cs-metric-word{font-size:31px}
+.reference-site .cs-metric>span{font-size:13px;line-height:1.55;color:#687b90;display:block}
+.reference-site .cs-card-metrics.cs-odd-metrics .cs-metric:last-child{grid-column:1/-1}
+.reference-site .cs-card-note{font-size:10px;line-height:1.65;color:#7b8b9d;margin:22px 0 0}
+.reference-site .cs-card-link{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;font-weight:700;color:#24508c;margin-top:18px;padding-top:18px;border-top:1px solid #e5ecf3}
+.reference-site .cs-card-link:hover{color:#315ee2}
+.reference-site .cs-written-visual{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:#10212e;border-radius:17px;isolation:isolate}
+.reference-site .cs-written-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;z-index:0}
+.reference-site .cs-written-shade{position:absolute;inset:0;background:linear-gradient(90deg,#081720bf,#08172040 85%)}
+.reference-site .cs-written-label{position:absolute;top:18px;left:22px;color:#d2e7f2;font-size:9px;letter-spacing:.13em;font-weight:600}
+.reference-site .cs-written-result{position:absolute;left:22px;right:22px;bottom:23px;max-width:72%;color:#fff}
+.reference-site .cs-written-result strong{display:block;font-family:Manrope,system-ui,sans-serif;font-size:56px;letter-spacing:-.04em;line-height:1.15;color:#9befdf;margin-bottom:5px}
+.reference-site .cs-written-result span{display:block;max-width:275px;font-size:13px;line-height:1.5}
+.reference-site .cs-card>.cs-written-visual{margin-bottom:26px}
+/* Story directory */
+.reference-site .cs-directory-hero{padding:149px 0 64px;position:relative;background:radial-gradient(ellipse at 98% 0%,#4ee1d224,transparent 50%),#f7f9fc}
+.reference-site .cs-directory-hero h1{font-size:clamp(44px,5.5vw,73px);line-height:1.035;max-width:920px;margin:0 0 22px;letter-spacing:-.045em}
+.reference-site .cs-directory-hero .breadcrumb{margin-bottom:29px}
+.reference-site .cs-directory-lead{max-width:730px;font-size:19px;line-height:1.7;color:#627487;margin:0}
+.reference-site .cs-directory-meta{display:flex;flex-wrap:wrap;gap:15px 27px;color:#52677b;font-size:12px;line-height:1.5;margin-top:26px}
+.reference-site .cs-directory-meta span{display:flex;align-items:center;gap:8px}
+.reference-site .cs-directory-meta i{width:6px;height:6px;border-radius:50%;background:#38cabc;display:block}
+.reference-site .cs-directory-content{padding-top:48px;background:#f7f9fc}
+.reference-site .cs-directory-bottom{display:flex;justify-content:space-between;gap:25px;align-items:center;margin-top:42px}
+.reference-site .cs-directory-bottom p{font-size:13px;color:#687b90;line-height:1.6;margin:0;max-width:560px}
+/* Reference-inspired detail-page hero */
+.reference-site .cs-story-hero{position:relative;overflow:hidden;padding:154px 0 78px;background:radial-gradient(ellipse at 100% 0%,#4ee1d229,transparent 53%),#f7f9fc}
+.reference-site .cs-hero-grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:56px;align-items:center;position:relative}
+.reference-site .cs-hero-copy{min-width:0}
+.reference-site .cs-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;font-weight:700;color:#3e5ecd;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #d8e3ed;border-radius:999px;background:#fff;margin-bottom:25px;line-height:1.5;max-width:100%}
+.reference-site .cs-eyebrow i{width:7px;height:7px;border-radius:50%;background:#4ed8ca;flex:none}
+.reference-site .cs-story-hero h1{font-family:Manrope,"DM Sans",system-ui,sans-serif;font-size:clamp(44px,5.05vw,70px);line-height:1.035;font-weight:800;letter-spacing:-.05em;margin:0 0 24px}
+.reference-site .cs-hero-lead{font-size:18px;line-height:1.75;color:#576b81;margin:0 0 28px;max-width:610px}
+.reference-site .cs-person{display:flex;gap:13px;align-items:center;margin-top:25px;color:#62778a;font-size:12px;line-height:1.65}
+.reference-site .cs-person-avatar{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;flex:none;background:#071019;color:white;font-size:12px;font-weight:800}
+.reference-site .cs-person strong{display:block;color:#0b1925;font-size:14px;margin-bottom:2px}
+.reference-site .cs-person>div{min-width:0}
+.reference-site .cs-person>div>span{display:block}
+.reference-site .cs-hero-video-shell{min-width:0;transform:rotate(.45deg);padding:13px;border-radius:29px;background:#fff;border:1px solid #dce6ef;box-shadow:0 26px 65px rgba(10,24,40,.1)}
+.reference-site .cs-hero-video-shell .cs-video{border-radius:19px}
+.reference-site .cs-hero-video-shell .cs-video-meta{padding:0 6px 2px;font-size:10px;margin-top:10px}
+.reference-site .cs-hero-video-shell .cs-written-result strong{font-size:65px}
+.reference-site .cs-trustline{background:#071019;color:#bac7d2;padding:21px 0}
+.reference-site .cs-trustline-inner{display:flex;justify-content:center;gap:16px 34px;flex-wrap:wrap;font-size:12px;line-height:1.5}
+.reference-site .cs-trustline span:before{content:"";display:inline-block;width:6px;height:6px;background:#4ee1d2;border-radius:50%;margin:0 9px 2px 0}
+.reference-site .cs-trustline strong{color:#fff;font-weight:600}
+/* Metrics and restored original story sections */
+.reference-site .cs-outcome-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.reference-site .cs-outcome-metrics.cs-odd-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}
+.reference-site .cs-outcome-metrics .cs-metric{border:1px solid #dfe7ee;padding:24px;border-radius:21px;background:#fff}
+.reference-site .cs-outcome-note{font-size:11px;color:#7a8ca0;line-height:1.7;margin:21px 0 0}
+.reference-site.cs-story-page .case-visual-section{padding-top:12px;padding-bottom:77px}
+.reference-site.cs-story-page .case-visual-section .section-head h2{font-size:clamp(29px,3.1vw,42px)}
+.reference-site .cs-challenge-section{background:#f7f9fc}
+.reference-site .cs-challenge-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;align-items:stretch}
+.reference-site .cs-panel{padding:34px;border:1px solid #dce6ef;border-radius:28px;background:#fff;min-width:0}
+.reference-site .cs-panel h2{font-size:clamp(28px,2.8vw,36px);line-height:1.14;margin:0 0 22px;letter-spacing:-.04em}
+.reference-site .cs-panel .cs-kicker{font-size:11px;margin-bottom:23px}
+.reference-site .cs-panel-intro{font-size:17px;line-height:1.7;margin:0;color:#687b90}
+.reference-site .cs-points{display:grid;gap:24px;margin-top:30px}
+.reference-site .cs-point{display:grid;grid-template-columns:36px minmax(0,1fr);gap:14px;align-items:start}
+.reference-site .cs-point-number{height:36px;width:36px;border-radius:12px;background:#eaf8f4;color:#218c73;font-family:Manrope,system-ui,sans-serif;font-size:12px;font-weight:800;display:grid;place-items:center}
+.reference-site .cs-point strong{font-size:16px;line-height:1.45;display:block;margin:0 0 5px;color:#071019}
+.reference-site .cs-point p{font-size:14px;line-height:1.7;margin:0;color:#687b90}
+.reference-site .cs-panel-dark{background:linear-gradient(143deg,#071019,#102e39);color:#fff;border:1px solid #102e39}
+.reference-site .cs-panel-dark h2,.reference-site .cs-panel-dark .cs-point strong{color:#fff}
+.reference-site .cs-panel-dark .cs-point p{color:#aebfcd}
+.reference-site .cs-panel-dark .cs-kicker{color:#84a4ff}
+.reference-site .cs-panel-dark .cs-point-number{background:#4ee1d21c;color:#7debdc}
+.reference-site .cs-why{background:#071019;color:#fff}
+.reference-site .cs-why-grid{display:grid;grid-template-columns:1.13fr .87fr;gap:75px;align-items:center}
+.reference-site .cs-why h2{font-size:clamp(36px,4.6vw,60px);line-height:1.12;color:#fff;letter-spacing:-.045em;margin:0}
+.reference-site .cs-why .cs-kicker{color:#66e7da;margin-bottom:17px}
+.reference-site .cs-why-copy{color:#b3c2cf;font-size:18px;line-height:1.75;margin:0}
+.reference-site .cs-playbook{padding-bottom:54px}
+.reference-site .cs-playbook-head{margin-bottom:35px;max-width:1050px}
+.reference-site .cs-playbook-head h2{font-size:clamp(36px,4.5vw,59px);line-height:1.08;margin:0 0 16px;letter-spacing:-.043em}
+.reference-site .cs-playbook-head>p:last-child{font-size:18px;color:#687b90;line-height:1.7;margin:0}
+.reference-site .cs-takeaway-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.reference-site .cs-takeaway{padding:29px;border:1px solid #dce6ef;border-radius:25px;background:#fff}
+.reference-site .cs-takeaway-number{display:grid;place-items:center;height:45px;width:45px;border-radius:14px;background:#071019;color:#6de4d8;font-family:Manrope,system-ui,sans-serif;font-size:12px;font-weight:800;margin-bottom:33px}
+.reference-site .cs-takeaway h3{font-size:22px;line-height:1.23;color:#071019;margin:0 0 13px;letter-spacing:-.035em}
+.reference-site .cs-takeaway p{font-size:15px;color:#687b90;line-height:1.7;margin:0}
+.reference-site .cs-next-story{display:flex;align-items:center;justify-content:space-between;gap:25px;border-top:1px solid #dce6ef;margin-top:30px;padding-top:25px;font-size:12px;line-height:1.6}
+.reference-site .cs-next-story>a:last-child{color:#365eda;display:flex;align-items:center;gap:10px;font-weight:700;text-align:right}
+.reference-site .cs-next-story>a:last-child>span{color:#718297;font-weight:500}
+.reference-site .cs-story-cta{padding-top:20px}
+.reference-site .cs-final-cta{padding:43px;border-radius:29px;background:linear-gradient(128deg,#071019,#103537);color:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:35px;align-items:center}
+.reference-site .cs-final-cta .cs-kicker{color:#80dfd4}
+.reference-site .cs-final-cta h2{font-size:clamp(30px,3.6vw,46px);line-height:1.12;color:#fff;margin:0 0 15px}
+.reference-site .cs-final-cta p:last-child{font-size:16px;line-height:1.7;color:#b4c7d4;margin:0;max-width:730px}
+.reference-site .cs-final-cta>.btn{background:#fff;color:#071019;white-space:nowrap}
+@media(min-width:1600px){.reference-site .cs-story-hero h1{font-size:76px}}
+@media(max-width:1050px){
+ .reference-site .cs-hero-grid{gap:35px}
+ .reference-site .cs-story-hero h1{font-size:54px}
+ .reference-site .cs-hero-lead{font-size:16px}
+ .reference-site .cs-card{padding:24px}
+ .reference-site .cs-card-copy>p{font-size:15px}
+ .reference-site .cs-panel{padding:28px}
+ .reference-site .cs-section-head{gap:35px}
+ .reference-site .cs-why-grid{gap:42px}
+ .reference-site .cs-takeaway{padding:25px}
+}
+@media(max-width:800px){
+ .reference-site .cs-story-hero{padding:133px 0 58px}
+ .reference-site .cs-hero-grid{grid-template-columns:1fr;gap:37px}
+ .reference-site .cs-story-hero h1{font-size:clamp(43px,7.6vw,62px);max-width:730px}
+ .reference-site .cs-hero-lead{font-size:18px;max-width:none}
+ .reference-site .cs-hero-video-shell{max-width:680px;width:100%;margin:0 auto;transform:none}
+ .reference-site .cs-section-head{grid-template-columns:1fr;gap:23px}
+ .reference-site .cs-section-aside{max-width:580px}
+ .reference-site .cs-card-grid{grid-template-columns:1fr;max-width:650px;margin-left:auto;margin-right:auto;gap:24px}
+ .reference-site .cs-card-copy>p{min-height:0}
+ .reference-site .cs-card h3{font-size:29px}
+ .reference-site .cs-card .cs-metric-value{font-size:40px}
+ .reference-site .cs-outcome-metrics,.reference-site .cs-outcome-metrics.cs-odd-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .reference-site .cs-challenge-grid,.reference-site .cs-why-grid{grid-template-columns:1fr}
+ .reference-site .cs-why-grid{gap:32px}
+ .reference-site .cs-why h2{max-width:670px}
+ .reference-site .cs-takeaway-grid{grid-template-columns:1fr}
+ .reference-site .cs-takeaway{padding:27px;display:grid;grid-template-columns:45px minmax(0,1fr);column-gap:22px}
+ .reference-site .cs-takeaway-number{grid-column:1;grid-row:1/3;margin-bottom:0}
+ .reference-site .cs-takeaway h3{grid-column:2;margin-bottom:10px}
+ .reference-site .cs-takeaway p{grid-column:2}
+ .reference-site .cs-final-cta{grid-template-columns:1fr}
+ .reference-site .cs-final-cta>.btn{justify-self:start}
+ .reference-site .cs-directory-hero{padding-top:132px}
+ .reference-site .cs-directory-bottom{align-items:flex-start;flex-direction:column}
+ .reference-site .cs-trustline-inner{justify-content:flex-start;font-size:11px;gap:9px 24px}
+}
+@media(max-width:480px){
+ .reference-site .cs-card{padding:21px;border-radius:25px}
+ .reference-site .cs-card-top{gap:12px;margin-bottom:20px}
+ .reference-site .cs-card-avatar{height:43px;width:43px;border-radius:13px;font-size:16px}
+ .reference-site .cs-card-badge{font-size:10px;padding:9px 12px}
+ .reference-site .cs-card h3{font-size:25px}
+ .reference-site .cs-card-copy{padding-top:22px}
+ .reference-site .cs-card-copy>p{font-size:15px;line-height:1.75;margin-bottom:23px}
+ .reference-site .cs-card .cs-metric-value{font-size:32px}
+ .reference-site .cs-card .cs-metric-word{font-size:26px}
+ .reference-site .cs-card-metrics{gap:19px 15px}
+ .reference-site .cs-metric>span{font-size:12px;line-height:1.65}
+ .reference-site .cs-metric{padding-top:17px}
+ .reference-site .cs-card-note{font-size:9px;margin-top:22px}
+ .reference-site .cs-card-link{font-size:12px}
+ .reference-site .cs-video-meta{font-size:9px;gap:7px}
+ .reference-site .cs-play-button{width:59px;height:43px;border-radius:13px}
+ .reference-site .cs-play-button svg{width:25px;height:25px}
+ .reference-site .cs-play-label{font-size:9px;bottom:10px;left:12px}
+ .reference-site .cs-story-hero{padding:122px 0 48px}
+ .reference-site .cs-story-hero h1{font-size:44px;line-height:1.06;letter-spacing:-.043em}
+ .reference-site .cs-eyebrow{font-size:8px;padding:8px 10px;letter-spacing:.05em;margin-bottom:23px}
+ .reference-site .cs-hero-lead{font-size:16px;line-height:1.75;margin-bottom:22px}
+ .reference-site .cs-person{font-size:11px;gap:11px;line-height:1.6}
+ .reference-site .cs-person strong{font-size:13px}
+ .reference-site .cs-person-avatar{width:37px;height:37px;font-size:10px;border-radius:11px}
+ .reference-site .cs-hero-grid{gap:30px}
+ .reference-site .cs-hero-video-shell{padding:8px;border-radius:23px}
+ .reference-site .cs-hero-video-shell .cs-video{border-radius:16px}
+ .reference-site .cs-section-head h2{font-size:35px}
+ .reference-site .cs-kicker{font-size:9px;margin-bottom:14px}
+ .reference-site .cs-section-head{margin-bottom:28px}
+ .reference-site .cs-outcome-metrics{gap:12px}
+ .reference-site .cs-outcome-metrics .cs-metric{padding:18px 16px;border-radius:17px}
+ .reference-site .cs-outcome-metrics .cs-metric-value{font-size:28px}
+ .reference-site .cs-outcome-metrics .cs-metric-word{font-size:24px}
+ .reference-site .cs-outcome-note{font-size:10px}
+ .reference-site .cs-panel{padding:26px 23px;border-radius:25px}
+ .reference-site .cs-panel h2{font-size:29px}
+ .reference-site .cs-panel-intro{font-size:16px}
+ .reference-site .cs-point{grid-template-columns:31px minmax(0,1fr);gap:13px}
+ .reference-site .cs-point-number{height:31px;width:31px;border-radius:10px;font-size:10px}
+ .reference-site .cs-point strong{font-size:15px}
+ .reference-site .cs-point p{font-size:13px}
+ .reference-site .cs-points{gap:25px;margin-top:26px}
+ .reference-site .cs-why h2{font-size:36px;line-height:1.15}
+ .reference-site .cs-why-copy{font-size:16px}
+ .reference-site .cs-playbook-head h2{font-size:35px}
+ .reference-site .cs-playbook-head>p:last-child{font-size:16px}
+ .reference-site .cs-takeaway{display:block;padding:26px}
+ .reference-site .cs-takeaway-number{margin-bottom:24px}
+ .reference-site .cs-takeaway h3{font-size:22px}
+ .reference-site .cs-takeaway p{font-size:15px}
+ .reference-site .cs-next-story{flex-direction:column;align-items:flex-start;gap:16px}
+ .reference-site .cs-next-story>a:last-child{font-size:11px;gap:8px;text-align:left;flex-wrap:wrap}
+ .reference-site .cs-next-story>a:last-child>span{flex-basis:100%}
+ .reference-site .cs-final-cta{padding:29px 25px}
+ .reference-site .cs-final-cta h2{font-size:32px}
+ .reference-site .cs-final-cta p:last-child{font-size:14px}
+ .reference-site .cs-final-cta>.btn{font-size:12px;min-height:49px}
+ .reference-site .cs-directory-hero h1{font-size:45px}
+ .reference-site .cs-directory-lead{font-size:17px}
+ .reference-site .cs-directory-meta{font-size:10px;gap:12px 17px}
+ .reference-site .cs-written-label{top:14px;left:16px;font-size:7px}
+ .reference-site .cs-written-result{left:16px;bottom:16px;right:16px;max-width:78%}
+ .reference-site .cs-written-result strong,.reference-site .cs-hero-video-shell .cs-written-result strong{font-size:39px}
+ .reference-site .cs-written-result span{font-size:10px;line-height:1.6}
+}
+@media(max-width:360px){
+ .reference-site .cs-card{padding:18px}
+ .reference-site .cs-story-hero h1{font-size:40px}
+ .reference-site .cs-card h3{font-size:23px}
+ .reference-site .cs-card .cs-metric-value{font-size:30px}
+ .reference-site .cs-written-result{bottom:10px}
+ .reference-site .cs-written-result strong{font-size:33px}
+ .reference-site .cs-written-result span{font-size:9px}
+ .reference-site .cs-video-meta{font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){.reference-site .cs-card,.reference-site .cs-play-button{transition:none}}
+html.reduce-motion .cs-card,html.reduce-motion .cs-play-button{transition:none!important}
+
+
+/* V11: three selected stories in one desktop row; directory layout stays unchanged. */
+.reference-site .cs-panel-dark > .cs-panel-intro{color:#aebfcd}
+.reference-site .cs-panel#what-changed{scroll-margin-top:110px}
+@media(min-width:1000px){
+ .reference-site .cs-featured .cs-home-trio{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:none}
+ .reference-site .cs-home-trio > .cs-card{padding:24px;border-radius:28px}
+ .reference-site .cs-home-trio .cs-card-top{gap:10px;margin-bottom:22px}
+ .reference-site .cs-home-trio .cs-card-avatar{height:43px;width:43px;border-radius:13px;font-size:16px}
+ .reference-site .cs-home-trio .cs-card-badge{font-size:10px;padding:9px 12px;max-width:calc(100% - 53px)}
+ .reference-site .cs-home-trio .cs-card-copy{padding-top:23px}
+ .reference-site .cs-home-trio h3{font-size:clamp(22px,1.85vw,27px);line-height:1.2;min-height:2.4em;margin-bottom:15px}
+ .reference-site .cs-home-trio .cs-card-copy > p{font-size:14px;line-height:1.75;min-height:0;margin-bottom:26px}
+ .reference-site .cs-home-trio .cs-card-metrics{gap:18px 16px;grid-template-rows:repeat(2,minmax(0,1fr));min-height:272px}
+ .reference-site .cs-home-trio .cs-metric{padding-top:18px}
+ .reference-site .cs-home-trio .cs-metric-value{font-size:clamp(27px,2.4vw,36px);line-height:1.15;white-space:nowrap}
+ .reference-site .cs-home-trio .cs-metric > span{font-size:12px;line-height:1.6}
+ .reference-site .cs-home-trio .cs-card-note{min-height:4.95em;font-size:9px;margin-top:21px}
+ .reference-site .cs-home-trio .cs-card-link{font-size:12px}
+ .reference-site .cs-home-trio .cs-video-meta{font-size:9px;gap:7px}
+ .reference-site .cs-home-trio .cs-play-button{width:59px;height:43px;border-radius:13px}
+ .reference-site .cs-home-trio .cs-play-label{font-size:9px;left:13px;bottom:10px}
+ .reference-site .cs-home-trio .cs-written-label{left:17px;top:14px;font-size:7px}
+ .reference-site .cs-home-trio .cs-written-result{left:17px;right:17px;bottom:16px;max-width:82%}
+ .reference-site .cs-home-trio .cs-written-result strong{font-size:clamp(34px,3.1vw,44px);margin-bottom:4px}
+ .reference-site .cs-home-trio .cs-written-result span{font-size:10px;line-height:1.55;max-width:235px}
+}
+@media(min-width:801px) and (max-width:999px){
+ .reference-site .cs-featured .cs-home-trio{grid-template-columns:1fr;max-width:650px;margin-left:auto;margin-right:auto}
+ .reference-site .cs-home-trio .cs-card-copy > p{min-height:0}
+}

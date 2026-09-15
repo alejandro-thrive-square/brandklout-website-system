@@ -37,7 +37,9 @@ export function applyPatches(rel, html, patches) {
     if (n !== 1) {
       throw new Error(`patch "${p.why}" on ${rel}: its anchor occurs ${n} times, expected exactly 1. The source changed; re-anchor the patch.`)
     }
-    html = html.replace(p.find, () => p.replace)
+    /* `replace` may be a function (v16, 2026-09-14): it gets the match and its groups, so a patch can
+       move a block Sang supplied instead of quoting it (the home page's section order). */
+    html = html.replace(p.find, typeof p.replace === 'function' ? p.replace : () => p.replace)
   }
   return html
 }
