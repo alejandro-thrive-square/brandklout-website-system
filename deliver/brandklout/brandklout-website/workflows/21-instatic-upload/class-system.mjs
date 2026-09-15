@@ -21,12 +21,15 @@
  * (slider dots, the video pop-up), for SVG internals (Instatic keeps an <svg> as raw markup), for
  * `html`/`:root` and for bare element selectors stay as written.
  *
- * FLUID. Every px length above 2px becomes rem, and the root font size is
- * `clamp(100%, 0.8071rem + 0.2143vw, 115%)`: exactly 16px up to 1440px wide, so nothing changes
- * there, then text, spacing and the content width grow together, gently, to 1.15x at 2560px.
+ * FLUID TYPE, THE HOUSE STANDARD (2026-09-15). Every px length above 2px becomes rem, the root is
+ * the house fluid root (scripts/fluid-root.mjs: 12px at 320, 16px from 479 to 1440, 18px at 1920,
+ * 20px at 2400), and no font-size is a clamp(): each is a plain rem per breakpoint (the standard
+ * type scale pass, after the registry is built).
  *
- * BREAKPOINTS. Sang's fourteen max-width queries fold into five editor breakpoints (BREAKPOINTS);
- * everything else (min-width, compound, reduced motion, print) is a site condition.
+ * BREAKPOINTS, THE STANDARD FOUR (2026-09-15): Laptop 1279, Tablet 991, Mobile landscape 767,
+ * Mobile portrait 479. Every width in Sang's media queries snaps to them as the CSS is read
+ * (snapQuery), so no package can add a breakpoint. Min-width and range queries, and what is not a
+ * width (reduced motion, print, height), stay site conditions, their widths snapped the same way.
  *
  *   in:  .tmp/site/final-site/**            (prepare-source.mjs, shared layout)
  *   out: .tmp/site/class-site/**            the same pages with the new classes, and an
@@ -43,6 +46,7 @@ import path from 'node:path'
 import http from 'node:http'
 import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
+import { generate as fluidRootCss, rootPxAt } from '../../../../../scripts/fluid-root.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE = path.join(HERE, '.tmp', 'site')
@@ -56,17 +60,16 @@ const refuse = (m) => {
 }
 
 /* --- configuration ------------------------------------------------------------------------ */
-/* The editor's breakpoints. Sang's max-width queries fold into the nearest one at or ABOVE them
-   (a rule written for ≤980 now starts at ≤991), except where the table says otherwise. Checked
-   with class-parity.mjs at 1440, 1024, 820, 600, 390 and 360. */
+/* The editor's breakpoints: the standard four, identical on every build and every package
+   (Alejandro, 2026-09-15: "no matter the new versions we should be using the standardize font
+   scaling and regular breakpoints"). Until then they were derived from Sang's own widths, and every
+   package that brought a new width brought a breakpoint or a condition ("too many mobile
+   breakpoints", said twice). */
 const BREAKPOINTS = [
-  { id: 'laptop', label: 'Laptop', width: 1190, mediaQuery: '(max-width: 1190px)', icon: 'monitor' },
-  { id: 'laptop-s', label: 'Small laptop', width: 1050, mediaQuery: '(max-width: 1050px)', icon: 'monitor' },
-  { id: 'tablet-l', label: 'Tablet landscape', width: 1000, mediaQuery: '(max-width: 1000px)', icon: 'tablet' },
-  { id: 'tablet', label: 'Tablet', width: 800, mediaQuery: '(max-width: 800px)', icon: 'tablet' },
-  { id: 'tablet-p', label: 'Tablet portrait', width: 760, mediaQuery: '(max-width: 760px)', icon: 'tablet' },
-  { id: 'mobile-l', label: 'Mobile landscape', width: 620, mediaQuery: '(max-width: 620px)', icon: 'smartphone' },
-  { id: 'mobile', label: 'Mobile portrait', width: 480, mediaQuery: '(max-width: 480px)', icon: 'smartphone' },
+  { id: 'laptop', label: 'Laptop', width: 1279, mediaQuery: '(max-width: 1279px)', icon: 'monitor' },
+  { id: 'tablet', label: 'Tablet', width: 991, mediaQuery: '(max-width: 991px)', icon: 'tablet' },
+  { id: 'mobile-l', label: 'Mobile landscape', width: 767, mediaQuery: '(max-width: 767px)', icon: 'smartphone' },
+  { id: 'mobile', label: 'Mobile portrait', width: 479, mediaQuery: '(max-width: 479px)', icon: 'smartphone' },
 ]
 /* Where each of Sang's widths goes. Chosen so no common device width changes behaviour (1180, 1024,
    820, 768, 600, 430, 414, 390, 375, 360); every fold moves a boundary only across a range no device
@@ -82,17 +85,41 @@ const BREAKPOINTS = [
    three extra site conditions beside the breakpoints: "the breakpoint problem again" (Alejandro,
    2026-09-15). Each folds UP into the next editor breakpoint, so every gated device width at 768 and
    above, and every phone, keeps its styles; only 900-1000, 680-760 and 600-620 change. */
-const BP_MAP = { 1190: 'laptop', 1150: 'laptop-s', 1050: 'laptop-s', 1000: 'tablet-l', 980: 'tablet-l', 900: 'tablet-l', 800: 'tablet', 780: 'tablet', 760: 'tablet-p', 720: 'tablet-p', 680: 'tablet-p', 620: 'mobile-l', 600: 'mobile-l', 520: 'mobile', 480: 'mobile', 400: 'mobile', 360: 'mobile' }
-const bpFor = (w) => {
-  if (BP_MAP[w]) return BREAKPOINTS.find((b) => b.id === BP_MAP[w])
-  const exact = BREAKPOINTS.find((b) => b.width === w)
-  return exact ?? null // a width nobody mapped stays a condition of its own, rather than being guessed
+/* snapQuery: every width in a media query snaps to the nearest standard boundary as the CSS is
+   read, so no width of Sang's, in this package or the next, can become a breakpoint or a condition
+   of its own. A max-width goes to the nearest breakpoint (≤1050 -> ≤991, ≤620 -> ≤479, ≤1150 ->
+   ≤1279); a min-width to the first width above the nearest boundary (min-width 1000 -> 992), with
+   1439 and 1919 also open to it. A snap never crosses 1440, the width the design is approved at, so
+   1440 renders exactly as Sang's file: class-parity.mjs 1440 must stay identical, and below it the
+   class site differs by design (standard-check.mjs gates that). A range the snap empties widens its
+   max-width to the next boundary up. */
+const DESIGN_WIDTH = 1440
+const MAX_BOUNDS = BREAKPOINTS.map((b) => b.width)
+const MIN_BOUNDS = [...MAX_BOUNDS, 1439, 1919]
+const nearestOf = (w, pool) => pool.reduce((best, b) => (Math.abs(b - w) < Math.abs(best - w) ? b : best))
+const WIDTH_PART = /^\((min|max)-width: (\d+(?:\.\d+)?)px\)$/
+function snapQuery(q) {
+  const parts = q.split(' and ').filter((p) => p !== 'screen' && p !== 'all').map((p) => {
+    const m = p.match(WIDTH_PART)
+    if (!m) return { p }
+    const w = Number(m[2])
+    if (m[1] === 'max') {
+      const pool = MAX_BOUNDS.filter((b) => (b >= DESIGN_WIDTH) === (w >= DESIGN_WIDTH))
+      return pool.length ? { kind: 'max', w: nearestOf(w, pool) } : { p }
+    }
+    const pool = MIN_BOUNDS.filter((b) => (b < DESIGN_WIDTH) === (w - 1 < DESIGN_WIDTH))
+    return pool.length ? { kind: 'min', w: nearestOf(w - 1, pool) + 1 } : { p }
+  })
+  const min = parts.find((x) => x.kind === 'min')
+  const max = parts.find((x) => x.kind === 'max')
+  if (min && max && min.w > max.w) max.w = [...MIN_BOUNDS].sort((a, b) => a - b).find((b) => b >= min.w) ?? max.w
+  return [...new Set(parts.map((x) => x.p ?? `(${x.kind}-width: ${x.w}px)`))].join(' and ') || 'all'
 }
+const bpFor = (w) => BREAKPOINTS.find((b) => b.width === w) ?? null
 /* 16px up to 1440px, then a gentle line to 18.4px (1.15x) at 2560px, and no further. It was
    `clamp(100%, 100vw / 90, 160%)` (1.33x at 1920, 1.6x from 2304) until 2026-09-14: on wide screens
    the hero heading reached 96-115px against Sang's 72px, "the heading is not right". Alejandro chose
    gentle scaling. Slope 2.4px / 1120px = 0.2143vw; intercept 16 - 1440 x 0.002143 = 12.914px. */
-const FLUID_ROOT = 'clamp(100%, 0.8071rem + 0.2143vw, 115%)'
 const MARK = String.fromCharCode(1) // a character no CSS value contains
 
 // Classes the scripts add, remove or toggle (site.js, visual.js, stories-v10.js, agency/*.js, and
@@ -314,7 +341,7 @@ const raw = [] // at-rules carried as written into the code asset
       const at = b.sel.match(/^@([\w-]+)\s*([\s\S]*)$/)
       if (at) {
         const name = at[1].toLowerCase()
-        if (name === 'media' || name === 'supports') walk(b.body, [...ctx, { kind: name, query: normQuery(at[2]) }])
+        if (name === 'media' || name === 'supports') walk(b.body, [...ctx, { kind: name, query: name === 'media' ? snapQuery(normQuery(at[2])) : normQuery(at[2]) }])
         else if (/keyframes$/.test(name) || name === 'font-face' || name === 'page' || name === 'property') {
           const t = `${b.sel}{${pxToRem(b.body)}}`
           raw.push(ctx.length ? ctx.reduceRight((inner, c) => `@${c.kind} ${c.query}{${inner}}`, t) : t)
@@ -794,6 +821,117 @@ const condList = [...conditions.values()]
   report.conditionOrderConflicts = condOrder.filter(([a, b]) => pos.get(a) > pos.get(b)).length
 }
 
+/* --- the standard type scale ------------------------------------------------------------------- */
+/* House standard (deliver/process/04-design/fluid-root.md): the fluid root does the scaling, and a
+   font-size is a plain rem per breakpoint, never a clamp() (its vw term scales on top of the
+   root's). Each selector's font-size is read off its own cascade, as Instatic emits it, at one
+   reference width per breakpoint: 1440 (the approved design), 1024, 768 and 600, all on the flat
+   16px root, so Sang's sizes hold exactly at those widths. Below 479 the root shrinks (13px at
+   360): text is held at its 360 size there; display type (28px and up) follows the root down and
+   takes a Mobile portrait value only where Sang's is smaller still (no step up at the 479/480 seam). */
+const typeReport = { converted: 0, skipped: [] }
+{
+  const REF = { '': 1440, laptop: 1024, tablet: 768, 'mobile-l': 600, mobile: 360 }
+  const BANDS = Object.keys(REF)
+  const DISPLAY_PX = 28
+  const rem = (x) => `${+x.toFixed(6)}rem`
+  const condById = new Map(condList.map((c) => [c.id, c.condition]))
+  const condPos = new Map(condList.map((c, i) => [c.id, i]))
+  const bpW = new Map(BREAKPOINTS.map((b) => [b.id, b.width]))
+  const widthOnly = (c) => c.kind === 'media' && c.query.split(' and ').every((p) => WIDTH_PART.test(p))
+  const holds = (c, w) => c.query.split(' and ').every((p) => { const m = p.match(WIDTH_PART); return m[1] === 'min' ? w >= Number(m[2]) : w <= Number(m[2]) })
+  const evaluable = (id) => bpW.has(id) || (condById.has(id) && widthOnly(condById.get(id)))
+  // a font-size at viewport width w on a 16px root, in px; null for a keyword (inherit) or a unit it cannot resolve
+  const toPx = (v, w) => {
+    if (/var\(|%|\d(?:em|ex|ch)\b/.test(v)) return null
+    const js = v
+      .replace(/(-?\d*\.?\d+)(rem|px|vw)\b/g, (_, n, u) => `(${n}*${u === 'rem' ? 16 : u === 'px' ? 1 : w / 100})`)
+      .replace(/\bclamp\(/g, 'C(').replace(/\bmin\(/g, 'L(').replace(/\bmax\(/g, 'G(').replace(/\bcalc\(/g, '(')
+    if (/[^\d\s.+\-*\/(),CLG]/.test(js)) return null
+    try { return Function('C', 'L', 'G', `return ${js}`)((a, b, c) => Math.min(Math.max(a, b), c), Math.min, Math.max) } catch { return null }
+  }
+  const groups = new Map()
+  for (const r of out) {
+    const has = 'fontSize' in r.styles || Object.entries(r.contextStyles).some(([id, b]) => 'fontSize' in b && evaluable(id))
+    if (has) (groups.get(r.selector) ?? groups.set(r.selector, []).get(r.selector)).push(r)
+  }
+  const emptied = new Set()
+  for (const [sel, rs] of groups) {
+    rs.sort((a, b) => a.order - b.order)
+    // the winning declaration at viewport width w, as [value, important], in Instatic's emission
+    // order (base, conditions in site order, breakpoints widest first); !important beats a later normal one
+    const at = (w) => {
+      let v
+      let imp = false
+      const take = (value, i) => { if (i || !imp) { v = value; imp = i } }
+      for (const r of rs) {
+        if ('fontSize' in r.styles) take(r.styles.fontSize, !!r.stylePriorities?.fontSize)
+        const ids = Object.keys(r.contextStyles).filter((id) => 'fontSize' in r.contextStyles[id] && evaluable(id))
+        const pri = (id) => !!r.contextStylePriorities?.[id]?.fontSize
+        for (const id of ids.filter((id) => !bpW.has(id)).sort((a, b) => condPos.get(a) - condPos.get(b))) if (holds(condById.get(id), w)) take(r.contextStyles[id].fontSize, pri(id))
+        for (const id of ids.filter((id) => bpW.has(id)).sort((a, b) => bpW.get(b) - bpW.get(a))) if (w <= bpW.get(id)) take(r.contextStyles[id].fontSize, pri(id))
+      }
+      return v === undefined ? undefined : [v, imp]
+    }
+    const win = Object.fromEntries(BANDS.map((b) => [b, at(REF[b])]))
+    const defined = BANDS.map((b) => win[b] !== undefined)
+    if (defined.some((d, k) => !d && defined.slice(0, k).some(Boolean))) {
+      /* Set only above some width (a min-width condition), unset below it: no breakpoint can say
+         "unset", so the structure stays as it is, and a vw value is frozen at the widest reference
+         width where it applies, as 1440 is everywhere else. */
+      let frozen = 0
+      for (const r of rs) {
+        for (const [id, bag] of [[null, r.styles], ...Object.entries(r.contextStyles).filter(([id]) => evaluable(id))]) {
+          if (!('fontSize' in bag) || !/vw/.test(bag.fontSize)) continue
+          const w = BANDS.map((b) => REF[b]).find((w) => id === null || (bpW.has(id) ? w <= bpW.get(id) : holds(condById.get(id), w)))
+          const x = w && toPx(bag.fontSize, w)
+          if (x != null) { bag.fontSize = rem(x / 16); frozen++ }
+        }
+      }
+      typeReport.skipped.push(`${sel}: set above a width only${frozen ? ', vw frozen at its widest width' : ''}`)
+      continue
+    }
+    const raw = Object.fromEntries(BANDS.map((b) => [b, win[b]?.[0]]))
+    const px =Object.fromEntries(BANDS.map((b) => [b, raw[b] === undefined ? undefined : toPx(raw[b], REF[b])]))
+    const bad = BANDS.find((b) => px[b] === null && /\d/.test(raw[b]))
+    if (bad !== undefined) { typeReport.skipped.push(`${sel}: ${raw[bad]}`); continue }
+    const val = {}
+    for (const b of BANDS) if (raw[b] !== undefined) val[b] = px[b] === null ? raw[b] : rem(px[b] / 16)
+    if (px.mobile != null) {
+      const widest = BANDS.map((b) => px[b]).find((x) => x != null)
+      const held = px.mobile / rootPxAt(REF.mobile)
+      const above = parseFloat(val['mobile-l'])
+      val.mobile = widest < DISPLAY_PX || !(above > 0) || held < above ? rem(held) : val['mobile-l']
+    }
+    for (const r of rs) {
+      delete r.styles.fontSize
+      if (r.stylePriorities) { delete r.stylePriorities.fontSize; if (!Object.keys(r.stylePriorities).length) delete r.stylePriorities }
+      for (const [id, bag] of Object.entries(r.contextStyles)) {
+        if (!('fontSize' in bag) || !evaluable(id)) continue
+        delete bag.fontSize
+        if (!Object.keys(bag).length) delete r.contextStyles[id]
+        const p = r.contextStylePriorities?.[id]
+        if (p) { delete p.fontSize; if (!Object.keys(p).length) delete r.contextStylePriorities[id] }
+      }
+      if (r.contextStylePriorities && !Object.keys(r.contextStylePriorities).length) delete r.contextStylePriorities
+    }
+    let prev
+    for (const b of BANDS) {
+      if (val[b] === undefined || (prev && val[b] === prev[0] && win[b][1] === prev[1])) continue
+      const important = win[b][1]
+      if (b === '') { rs[0].styles.fontSize = val[b]; if (important) (rs[0].stylePriorities ??= {}).fontSize = 'important' }
+      else { (rs[0].contextStyles[b] ??= {}).fontSize = val[b]; if (important) ((rs[0].contextStylePriorities ??= {})[b] ??= {}).fontSize = 'important' }
+      prev = [val[b], important]
+    }
+    for (const r of rs.slice(1)) if (!Object.keys(r.styles).length && !Object.keys(r.contextStyles).length) emptied.add(r)
+    typeReport.converted++
+  }
+  for (let k = out.length - 1; k >= 0; k--) if (emptied.has(out[k])) out.splice(k, 1)
+  // a condition that only carried font sizes is gone with them
+  const used = new Set(out.flatMap((r) => Object.keys(r.contextStyles)))
+  for (let k = condList.length - 1; k >= 0; k--) if (!used.has(condList[k].id)) condList.splice(k, 1)
+}
+
 /* --- write the pages ------------------------------------------------------------------------- */
 // original classes kept on the markup: script hooks, state classes present in the markup, and
 // classes named in the context of a kept selector
@@ -835,10 +973,10 @@ server.close()
 
 /* --- the code asset and the local stylesheet -------------------------------------------------- */
 const codeCss =
-  `/* The fluid root (class-system.mjs): 16px up to 1440px wide, then everything sized in rem grows\n` +
-  `   with the screen, gently, to 1.15x at 2560px. Here, not in the registry: it is the one rule every size\n` +
-  `   depends on, and nobody should change it by accident. */\n` +
-  `html { font-size: ${FLUID_ROOT}; }\n\n` +
+  `/* The house fluid root (scripts/fluid-root.mjs), the same on every build: 12px at 320, 16px from 479\n` +
+  `   to 1440, 18px at 1920, 20px at 2400. Here, not in the registry: every size depends on it, its custom\n` +
+  `   properties would not survive the registry (trap 1), and nobody should change it by accident. */\n` +
+  fluidRootCss() + '\n' +
   `/* @keyframes and other at-rules, as Sang wrote them (px converted to rem). */\n` +
   raw.join('\n') +
   '\n'
@@ -883,3 +1021,4 @@ console.log(`elements ${classedEls} carry a new class; ${typeNames.size} type cl
 console.log(`hooks    ${keepClasses.size} original classes kept for the scripts and kept selectors`)
 console.log(`checks   ${report.dominatedStates} state declarations always outranked (dropped), ${report.partialOverlap} partly outranked, ${report.bpBeforeCondition} breakpoint-before-condition, ${report.conditionOrderConflicts} condition-order conflicts`)
 console.log(`max-width blocks by width: ${JSON.stringify(widths)}`)
+console.log(`type     ${typeReport.converted} font-size cascades re-based to rem per breakpoint; ${typeReport.skipped.length} left as written${typeReport.skipped.length ? ': ' + typeReport.skipped.slice(0, 10).join(' | ') : ''}`)

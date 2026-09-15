@@ -1,11 +1,12 @@
 # Runbook index
 
-14 runs, newest first. Each line is one file in this folder.
+15 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | **Standard breakpoints + house type scale (seq 26)**: always 1279/991/767/479, Sang's widths snap to them (`snapQuery`); house fluid root, rem type, no clamp(); 1440 identical, new `standard-check.mjs` gate. Carries **gotchas** | [`2026-09-15-standard-breakpoints-and-type.md`](./2026-09-15-standard-breakpoints-and-type.md) |
 | 2026-09-15 | **Accessibility widget removed** (Alejandro): "bigger in the editor, small again on the 2nd refresh" was seq 25's `widget-fluid.js` losing a race to the widget on cached reloads. `siteScripts` emptied, published (seq stays 25). Carries **gotchas** | [`2026-09-15-widget-removed.md`](./2026-09-15-widget-removed.md) |
 | 2026-09-15 | **Headings not scaling = the accessibility widget** freezing every font size inline at load (`agency/widget-fluid.js`); **breakpoint problem again** = v16's max-width 900/680/600 as extra conditions, folded into the editor breakpoints. Seq 25. Carries **gotchas** | [`2026-09-15-widget-and-breakpoints.md`](./2026-09-15-widget-and-breakpoints.md) |
 | 2026-09-15 | **Admin edits restored (seq 24)**: OCEANIC wordmark, "Why us" headline, founder quote, `/guarantee` h1, hero margin; the duplicate story headline and the 5rem h1 deliberately not. Branch + backup tag pushed | [`2026-09-15-admin-edits-restored.md`](./2026-09-15-admin-edits-restored.md) |

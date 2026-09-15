@@ -9,8 +9,9 @@
  *
  * Usage: node class-parity.mjs [width…] [--page slug] [--show N]
  *        (default widths 1440 1024 820 600 390 360)
- * Exit 1 if any page differs. Above 1440 the class system is bigger by design (the fluid root, up
- * to 1.15x at 2560); use visual inspection there, not this gate.
+ * Exit 1 if any page differs. SINCE 2026-09-15 ONLY 1440 MUST BE IDENTICAL: the class system snaps
+ * Sang's widths to the standard breakpoints and re-bases type on the house fluid root, so every other
+ * width differs by design. Run `class-parity.mjs 1440`, then standard-check.mjs for the rest.
  */
 import fs from 'node:fs'
 import path from 'node:path'

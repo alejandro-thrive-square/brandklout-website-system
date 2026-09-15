@@ -12,6 +12,12 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: Sang's v16, published as seq 22; wide-screen sizing softened in seq 23 (2026-09-14)
 
+- **Seq 26 (2026-09-15): standard breakpoints and the house type scale**, whatever the package
+  brings: Laptop 1279, Tablet 991, Mobile landscape 767, Mobile portrait 479 (Sang's widths snap to
+  them), the house fluid root and plain rem font sizes. 1440 is identical to Sang's file; 1920 is
+  12.5% larger, phones below 479 slightly smaller. Rollback: tag `brandklout-website-live-seq25` +
+  `cms-2026-09-15-seq25-pre-standard.db`.
+  [`runbook/2026-09-15-standard-breakpoints-and-type.md`](./runbook/2026-09-15-standard-breakpoints-and-type.md).
 - **Widget removed (2026-09-15, seq still 25)**: the sienna accessibility widget is off the site
   (`remove-site-widget.mjs` emptied the plugin's `siteScripts`), and `agency/widget-fluid.js` is gone
   from the source. It had frozen the font sizes on every cached reload.

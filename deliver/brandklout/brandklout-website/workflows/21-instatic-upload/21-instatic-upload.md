@@ -58,10 +58,20 @@ Changes in the toolkit for v16:
   embed lets the plugin's `autoTrust` open `frame-src` on that page.
 - **`agency/code.css`** is appended to the code asset by `push-site.mjs`: rules for markup only the
   live page has (the Embed block's inner iframe heights: 760 / 720 ≤900 / 680 ≤600, in rem).
-- **Every new max-width value in Sang's CSS needs a `BP_MAP` entry.** v16's 900, 680 and 600 were left
-  out and published as extra site conditions (11 instead of 7), which Alejandro read as "the
-  breakpoint problem again"; since seq 25 they fold UP into the next breakpoint (1000, 760, 620).
-  After each new package, compare class-system's "max-width blocks by width" line with `BP_MAP`.
+- **Standard breakpoints and type, whatever the package brings (2026-09-15).** Alejandro: "no matter
+  the new versions we should be using the standardize font scaling and regular breakpoints", after
+  "too many mobile breakpoints" twice. The editor breakpoints are always Laptop 1279, Tablet 991,
+  Mobile landscape 767, Mobile portrait 479. `class-system.mjs` `snapQuery` snaps every width in Sang's
+  media queries to the nearest standard boundary as it reads them (a min-width to the first width
+  above one, 1439 and 1919 also open), never across 1440, so no new width can add a breakpoint or a
+  condition; the old `BP_MAP` table is gone. Type follows the house standard
+  (`deliver/process/04-design/fluid-root.md`): the house fluid root in the code asset, and every
+  font-size a plain rem per breakpoint, solved so Sang's size holds at 1440 / 1024 / 768 / 600; below
+  479 text holds its 360 size and display type (≥28px) follows the root down. Gates: `class-parity.mjs
+  1440` must be all identical; below 1440 the site differs by design, so `standard-check.mjs` checks
+  the house root, sideways scroll, elements out of the viewport and overflowing headings against Sang's
+  own file; `node scripts/fluid-root.mjs --check` must pass on a copy of `class-site/assets/site.css`
+  linked relatively (the pages link `/assets/site.css`, which the check cannot resolve).
 - **No accessibility widget (seq 26, 2026-09-15).** The sienna widget (plugin `siteScripts`, added
   outside this toolkit) wrote every text element's size inline in whole px at load and never
   recomputed. Seq 25's `agency/widget-fluid.js` undid that only when it ran first; on a cached reload
