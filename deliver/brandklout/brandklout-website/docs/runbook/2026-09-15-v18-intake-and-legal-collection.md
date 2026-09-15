@@ -13,7 +13,7 @@ became one 208KB per-page bundle (`assets/pages/<page>.css`, the same sheets con
 `cms/legal-pages/` (schema, CSV, JSON), `cms-templates/legal-page-template.html`, two importer guides.
 His guides describe a paste-the-CSS importer's workflow; they are context, not instructions.
 
-### Done (commit: see below; live seq 27, 30 pages + 3 collection rows published)
+### Done (commit `ed7a8b6c`; live seq 27, 30 pages + 3 collection rows published)
 
 - **Process**: `21-instatic-upload/package-intake.mjs` — unpack beside the previous package, write
   the factual change report (`client-handoff/intake-vNN.md` + `.json`) before anyone touches a
