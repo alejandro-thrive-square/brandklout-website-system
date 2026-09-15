@@ -1,9 +1,23 @@
-<!-- MEMBERSHIP PLAN — Asana subtask 10 of 11. Second build.
+<!-- MEMBERSHIP PLAN — Asana subtask 10 of 11. Second build; rewritten
+     2026-09-15 for the client's "Membership" feedback (1218433345526566):
 
-     NO PRICES. The two tiers compare on what they include and how often;
-     every figure is a count or an interval. THE TIERS ARE A PROPOSAL with
-     working names, said once above the comparison. The question that decides
-     between them is the rotating line: are you maintaining, or changing. -->
+       "The two-tier structure is replaced with a single $149/month membership.
+       We'll state the 90-day commitment and 30-day cancellation notice clearly
+       on the page. See attachment for full details."
+
+     THE ATTACHMENT is the client's flyer, "Westlake aesthetic plan.jpeg":
+     "Aesthetic & Wellness Membership", "Wellness Wallet", $149 / month, and four
+     member perks — complimentary monthly facial, 10% off treatments, 10% off
+     skincare, exclusive access to events & giveaways — under "Save monthly.
+     Glow always." Every fact on this page comes from the flyer or the task.
+
+     THE PRICE. This is the client's own published retail price for their own
+     plan, supplied by them for this page. It is not a Brandklout price, rate or
+     quote, which is what the repo rule forbids recording.
+
+     The commitment and the notice period appear three times on purpose — the
+     cover facts, the plan card and the closing line — because the client asked
+     for them to be stated clearly. -->
 <section class="section_cover cover_component">
   <figure class="cover_media" data-parallax="10">
     <img src="assets/m-neck-outdoor.webp" alt="" width="2133" height="1200" fetchpriority="high">
@@ -13,12 +27,12 @@
       <div class="container-large">
         <div class="cover_inner">
           <p class="eyebrow is-alternate">Membership</p>
-          <h1 class="cover_title" data-split data-split-now>You are going to come back. <em class="text-style-display-accent">Plan for it.</em></h1>
-          <p class="cover_lede">Non-surgical results are a cadence. A membership holds the appointments, discounts them, and takes the decision off your mind.</p>
+          <h1 class="cover_title" data-split data-split-now>The Aesthetic &amp; Wellness <em class="text-style-display-accent">Membership</em>.</h1>
+          <p class="cover_lede">One simple plan: a complimentary facial every month, 10% off treatments and skincare, and access to member events and giveaways.</p>
           <div class="cover_facts">
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="4">4</span>&times;</span><span>a year is what most patients on this menu come in</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2">2</span></span><span>tiers, one per way people use the practice</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="0">0</span></span><span>contracts. Cancel any time</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="149" data-prefix="$">$149</span></span><span>per month</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="90">90</span></span><span>day minimum commitment</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="30">30</span></span><span>days' notice to cancel after that</span></p>
           </div>
         </div>
       </div>
@@ -26,22 +40,16 @@
   </div>
 </section>
 
-<!-- 01 THE QUESTION. The one line that decides the tier. -->
+<!-- 01 THE LINE. The flyer's own sign-off, beside a portrait. -->
 <section class="section_question question_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="question_grid">
           <div>
-            <p class="eyebrow">One question</p>
-            <h2 class="question_title" data-reveal>
-              Are you
-              <span class="words_component" data-words="2200" aria-label="maintaining or changing">
-                <span class="words_item text-style-display-accent">maintaining?</span>
-                <span class="words_item text-style-display-accent">changing?</span>
-              </span>
-            </h2>
-            <p class="text-size-medium question_text" data-reveal>Maintenance is a standing appointment. Change is a course with an end date, and then it becomes maintenance.</p>
+            <p class="eyebrow">Why join</p>
+            <h2 class="question_title" data-reveal>Save monthly. <em class="text-style-display-accent">Glow always.</em></h2>
+            <p class="text-size-medium question_text" data-reveal>Membership is made for people who come in regularly. Your monthly payment covers a facial, and it takes 10% off everything else you book with us.</p>
           </div>
           <figure class="question_media" data-wipe>
             <span class="wipe_inner" data-parallax="10"><img src="assets/m-facelift-hand.webp" alt="" width="1160" height="1450" loading="lazy"></span>
@@ -52,76 +60,67 @@
   </div>
 </section>
 
-<!-- 02 THE TWO TIERS. Split screen, a photograph between them. -->
+<!-- 02 THE PLAN. One card and a photograph, on stone. `is-single` sets the
+     split as two columns instead of the old tier-photo-tier three (63-plan.css). -->
 <section class="section_tiers tiers_component" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="tiers_head">
           <div>
-            <p class="eyebrow">Two ways in</p>
-            <h2 class="heading-style-h2" data-split>Working names, <em class="text-style-display-accent">real structure</em>.</h2>
+            <p class="eyebrow">What's included</p>
+            <h2 class="heading-style-h2" data-split>Member <em class="text-style-display-accent">perks</em>.</h2>
           </div>
-          <p class="tiers_flag text-size-small">A proposal, not an offer. Inclusions, names and pricing are the client&rsquo;s to set; no fee is published here.</p>
+          <p class="tiers_flag text-size-small">Membership has a 90-day minimum commitment. After that, you can cancel anytime with 30 days' notice.</p>
         </div>
-        <div class="tiers_split" data-reveal="stagger">
-          <article class="tier_card">
-            <span class="tier_eyebrow">Tier one</span>
-            <h3 class="tier_name">The Maintenance</h3>
-            <p class="tier_for">Already having Botox on a schedule. Held, discounted, off your mind.</p>
+        <div class="tiers_split is-single" data-reveal="stagger">
+          <article class="tier_card is-lead" data-theme="dark">
+            <span class="tier_eyebrow">Wellness Wallet</span>
+            <h3 class="tier_name">$149 / month</h3>
+            <p class="tier_for">The Aesthetic &amp; Wellness Membership.</p>
             <ul class="tier_lines">
-              <li><span>Neuromodulator visits a year</span><strong>4</strong></li>
-              <li><span>Two-week reviews included</span><strong>4</strong></li>
-              <li><span>Appointments held in advance</span><strong>All</strong></li>
-              <li><span>Member rate on everything else</span><strong>Yes</strong></li>
-              <li><span>Priority on cancellations</span><strong>Yes</strong></li>
+              <li><span>Monthly facial</span><strong>Complimentary</strong></li>
+              <li><span>Treatments</span><strong>10% off</strong></li>
+              <li><span>Skincare</span><strong>10% off</strong></li>
+              <li><span>Member events &amp; giveaways</span><strong>Exclusive access</strong></li>
+              <li><span>Minimum commitment</span><strong>90 days</strong></li>
+              <li><span>Cancellation notice</span><strong>30 days</strong></li>
             </ul>
-            <a class="button is-secondary" href="book.html">Ask about this tier</a>
+            <a class="button" href="book.html">Ask about membership</a>
           </article>
           <figure class="tiers_media" data-wipe>
             <span class="wipe_inner" data-parallax="12"><img src="assets/membership-still.webp" alt="" width="1600" height="900" loading="lazy"></span>
           </figure>
-          <article class="tier_card is-lead" data-theme="dark">
-            <span class="tier_eyebrow">Tier two</span>
-            <h3 class="tier_name">The Programme</h3>
-            <p class="tier_for">Changing something. A series first, then it settles into maintenance.</p>
-            <ul class="tier_lines">
-              <li><span>Everything in tier one</span><strong>Yes</strong></li>
-              <li><span>Treatments in the series, planned up front</span><strong>3</strong></li>
-              <li><span>Progress reviews across the year</span><strong>2</strong></li>
-              <li><span>Written twelve-month plan</span><strong>Yes</strong></li>
-              <li><span>Rolls into tier one when it ends</span><strong>Yes</strong></li>
-            </ul>
-            <a class="button" href="book.html">Ask about this tier</a>
-          </article>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 03 THE YEAR. The same generated grid as the home page, on green. -->
+<!-- 03 THE YEAR. The same generated grid as the home page, on green. Its first
+     row is the monthly facial. -->
 <section class="section_cadence cadence_component" data-theme="green">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="cadence_head">
           <div>
-            <p class="eyebrow">What you are buying</p>
-            <h2 class="heading-style-h2" data-split>A year, planned <em class="text-style-display-accent">in advance</em>.</h2>
+            <p class="eyebrow">A year as a member</p>
+            <h2 class="heading-style-h2" data-split>Your year, planned <em class="text-style-display-accent">ahead</em>.</h2>
           </div>
-          <p class="text-size-medium cadence_intro">Appointments held before you need them, and long stretches where you do nothing at all. A sample plan starting in January.</p>
+          <p class="text-size-medium cadence_intro">A sample year for a member who starts in January, with a facial every month and other treatments when they're due.</p>
         </div>
         <div data-in>
 {{CADENCE_GRID}}
         </div>
-        <p class="cadence_foot">An illustration, not a prescription. Yours is written at the consultation. <a class="text-style-link" href="financing.html">How patients spread the cost</a>.</p>
+        <p class="cadence_foot">A sample plan, not a prescription. Your provider will build yours at your consultation. <a class="text-style-link" href="financing.html">Ways to pay</a>.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 04 THE PEOPLE. A strip of faces, as people, drifting. -->
+<!-- 04 THE PEOPLE. A strip of faces, as people, drifting, and the terms once
+     more. -->
 <section class="section_faces faces_component">
   <div class="padding-global">
     <div class="container-large">
@@ -137,7 +136,7 @@
             <span class="wipe_frame" data-wipe><img src="assets/m-man-suit.webp" alt="" width="2133" height="1200" loading="lazy"></span>
           </figure>
         </div>
-        <p class="faces_line" data-split>Both tiers are cancelled by a phone call. What you have paid for stays yours.</p>
+        <p class="faces_line" data-split>Stay for 90 days, then cancel anytime with 30 days' notice.</p>
       </div>
     </div>
   </div>

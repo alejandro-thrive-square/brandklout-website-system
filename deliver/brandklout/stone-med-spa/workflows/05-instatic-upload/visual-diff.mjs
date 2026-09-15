@@ -113,6 +113,17 @@ async function shoot(url, file) {
   const pg = await browser.newPage()
   await pg.setViewport({ width: WIDTH, height: VIEW })
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
+  /* THE SIENNA ACCESSIBILITY WIDGET IS BLOCKED, added 2026-09-15. It is a site
+     plugin on the published side only (it arrived on production after the
+     2026-09-04 build and came across in the staging clone). At load it writes
+     text sizes inline in whole px and paints a floating button, so every live
+     page wrapped differently from the local build: 11–37% at 390 from a change
+     that touched no layout. Blocking it compares the site, not the plugin.
+     VISUAL_WIDGET=1 keeps it, to look at what a visitor actually gets. */
+  if (!process.env.VISUAL_WIDGET) {
+    await pg.setRequestInterception(true)
+    pg.on('request', (r) => (/sienna-accessibility/.test(r.url()) ? r.abort() : r.continue()))
+  }
   await pg.goto(url, { waitUntil: 'networkidle0', timeout: 120000 })
   await pg.evaluate(async () => {
     document.documentElement.style.scrollBehavior = 'auto'

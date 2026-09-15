@@ -44,7 +44,14 @@ const FINAL = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
 const TMP = path.join(HERE, '.tmp')
 const apply = process.argv.includes('--apply')
 
-const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
+/* --map <file> points at a different media map, for an instance whose media
+   ids differ from production's. STAGING IS ONE: clone-site copies every asset
+   with its URL intact but mints new ids, so every PATCH by a production id
+   misses. .tmp/staging-media-map.mjs rebuilds the map against staging's ids by
+   URL into .tmp/media-map.staging.json (2026-09-15). */
+const mapArg = process.argv.indexOf('--map')
+const mapFile = mapArg > -1 ? path.resolve(TMP, process.argv[mapArg + 1]) : path.join(TMP, 'media-map.json')
+const mediaMap = JSON.parse(fs.readFileSync(mapFile, 'utf8')).map
 
 /* filename -> Set(alt), harvested from the static build. The build is the
    source of truth for alt text: it is where a human wrote it, and audit.mjs

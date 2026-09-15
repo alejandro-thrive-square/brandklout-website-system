@@ -7,18 +7,18 @@
 <!-- Title, description, Open Graph, canonical and JSON-LD are injected by
      build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
      edit seo.json and rebuild. -->
-<title>Results &amp; Reviews | Stone Med Spa, Westlake TX</title>
-<meta name="description" content="What patients say about Dr. Stone, and an honest account of why the before-and-after gallery is not published yet.">
+<title>Results &amp; Reviews | Westlake Medical Aesthetics, Westlake TX</title>
+<meta name="description" content="What patients say about Westlake Medical Aesthetics in Westlake, Texas. Our new before-and-after gallery is coming soon.">
 <link rel="canonical" href="https://westlaketxmedspa.com/results">
-<meta property="og:site_name" content="Stone Med Spa">
+<meta property="og:site_name" content="Westlake Medical Aesthetics">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://westlaketxmedspa.com/results">
-<meta property="og:title" content="Results &amp; Reviews | Stone Med Spa, Westlake TX">
-<meta property="og:description" content="What patients say about Dr. Stone, and an honest account of why the before-and-after gallery is not published yet.">
+<meta property="og:title" content="Results &amp; Reviews | Westlake Medical Aesthetics, Westlake TX">
+<meta property="og:description" content="What patients say about Westlake Medical Aesthetics in Westlake, Texas. Our new before-and-after gallery is coming soon.">
 <meta property="og:image" content="https://westlaketxmedspa.com/assets/m-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Results &amp; Reviews | Stone Med Spa, Westlake TX">
-<meta name="twitter:description" content="What patients say about Dr. Stone, and an honest account of why the before-and-after gallery is not published yet.">
+<meta name="twitter:title" content="Results &amp; Reviews | Westlake Medical Aesthetics, Westlake TX">
+<meta name="twitter:description" content="What patients say about Westlake Medical Aesthetics in Westlake, Texas. Our new before-and-after gallery is coming soon.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,8 +26,8 @@
     {
       "@type": "MedicalBusiness",
       "@id": "https://westlaketxmedspa.com/#practice",
-      "name": "Stone Med Spa",
-      "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+      "name": "Westlake Medical Aesthetics",
+      "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, restoration and facials, provided by licensed medical providers.",
       "medicalSpecialty": "Dermatology",
       "address": {
         "@type": "PostalAddress",
@@ -37,7 +37,11 @@
         "postalCode": "76262",
         "addressCountry": "US"
       },
-      "telephone": "+1-817-383-8361",
+      "telephone": "+1-817-918-3666",
+      "sameAs": [
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.tiktok.com/@westlakeaesthetic"
+      ],
       "availableLanguage": [
         "English",
         "Spanish"
@@ -55,12 +59,7 @@
           "opens": "09:00",
           "closes": "17:00"
         }
-      ],
-      "founder": {
-        "@type": "Physician",
-        "name": "Dr. Mona Stone, DDS",
-        "medicalSpecialty": "OralAndMaxillofacialSurgery"
-      }
+      ]
     }
   ]
 }
@@ -84,10 +83,10 @@
     if (!window.__smsBooted) document.documentElement.classList.remove('js');
   }, 2500);
 </script>
-<!-- No favicon file has been supplied and no med spa brand identity exists yet
-     (project-overview.md, "Brand identity"). This draws the wordmark's S on the
-     brand ivory so the tab is never a blank sheet. Replace when a mark arrives. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+<!-- No favicon file has been supplied. The client's flyer shows a green serif W
+     beside the WESTLAKE wordmark; this draws that W on the brand ivory so the
+     tab is never a blank sheet. Replace with the real mark when a file arrives. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3EW%3C/text%3E%3C/svg%3E">
 
 </head>
 <body>
@@ -95,10 +94,12 @@
 <div class="page-wrapper">
 <!-- The navbar. Five links, the phone and the book button.
 
-     WHY THESE FIVE. The med spa sells a rhythm, not an operation, so the two
-     links a surgical site would never lead with — Membership and Results — are
-     in the bar rather than buried. Financing, About and the Team are reached
-     from the drawer and the footer, where there is room for everything.
+     WHY THESE FIVE. A med spa sells a routine rather than an operation, so
+     Membership and Results sit in the bar instead of being buried. "Our team"
+     replaced "Dr. Stone" on 2026-09-15: the client's feedback is that patients
+     are seen and treated by the practice's own providers, not by Dr. Stone, so
+     the bar leads to the people who actually treat you. Dr. Stone, Financing
+     and the rest are in the drawer and the footer.
 
      `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
      nothing everywhere else; build-site.mjs matches the token against the page
@@ -108,10 +109,10 @@
   <div class="padding-global">
     <div class="container-large">
       <div class="navbar_container">
-        <a class="navbar_logo-link" href="index.html" aria-label="Stone Med Spa, home">
+        <a class="navbar_logo-link" href="index.html" aria-label="Westlake Medical Aesthetics, home">
           <span class="brand_component">
-            <span class="brand_name">Stone</span>
-            <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+            <span class="brand_name">Westlake</span>
+            <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
           </span>
         </a>
 
@@ -119,14 +120,14 @@
           <a class="navbar_link" href="treatments.html">Treatments</a>
           <a class="navbar_link" href="results.html" aria-current="page">Results</a>
           <a class="navbar_link" href="membership.html">Membership</a>
-          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="team.html">Our team</a>
           <a class="navbar_link" href="about.html">About</a>
         </nav>
 
         <div class="navbar_actions">
-          <a class="navbar_phone" href="tel:+18173838361">
+          <a class="navbar_phone" href="tel:+18179183666">
             <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-            (817) 383-8361
+            (817) 918-3666
           </a>
           <a class="button is-small" href="book.html">Book a consultation</a>
           <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -140,15 +141,18 @@
 
 <!-- The mobile drawer. At 991px and below the navbar hides both its menu and
      its phone number, so this panel is the ONLY place a phone gets the number
-     without scrolling to the footer. It is not a menu, it is the mobile
-     contact card, and it lists every page because there is room here. -->
+     without scrolling to the footer. It lists every page because there is room.
+
+     No "Botox & Xeomin" link since 2026-09-15: the client asked for that tab to
+     be folded into All treatments (Asana 1218433345526567). The page itself
+     still exists and is reached from its row on /treatments. -->
 <div class="drawer_component" id="drawer">
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer_head">
       <span class="brand_component">
-        <span class="brand_name">Stone</span>
-        <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+        <span class="brand_name">Westlake</span>
+        <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
       </span>
       <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
     </div>
@@ -156,33 +160,34 @@
     <nav class="drawer_nav" aria-label="Mobile">
       <a class="drawer_link" href="index.html">Home</a>
       <a class="drawer_link" href="treatments.html">All treatments</a>
-      <a class="drawer_link" href="botox.html">Botox &amp; Xeomin</a>
       <a class="drawer_link" href="results.html" aria-current="page">Results &amp; reviews</a>
       <a class="drawer_link" href="membership.html">Membership</a>
       <a class="drawer_link" href="financing.html">Financing</a>
-      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
-      <a class="drawer_link" href="about.html">About the practice</a>
-      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="team.html">Our team</a>
+      <a class="drawer_link" href="about.html">About us</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Mona Stone</a>
       <a class="drawer_link" href="book.html">Book a consultation</a>
     </nav>
 
     <div class="drawer_foot">
       <a class="button" href="book.html">Book a consultation</a>
-      <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+      <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>
   </div>
 </div>
 
 <main class="main-wrapper" id="main">
-<!-- TESTIMONIALS / BEFORE & AFTER — Asana subtask 7 of 11. Second build.
+<!-- TESTIMONIALS / BEFORE & AFTER — Asana subtask 7 of 11. Second build;
+     revised 2026-09-15 for the client's "Before and after gallery" feedback
+     (1218433345526568): "Case numbers and consent disclaimers hidden until the
+     new photos are published." The "fifteen galleries / zero published" counts,
+     the "awaiting written consent" status and the consent FAQ are gone. When
+     the new photos arrive the plates fill; nothing around them moves.
 
-     The page is still designed to DEGRADE: the reviews are real-shaped
-     placeholders pending a verbatim pull, and the before-and-after frame is
-     reserved until per-case written consent arrives. What changed is the
-     density: a photographic cover, a big statement, the reviews as a rail you
-     drag, the reserved frame as a composed object rather than an apology, a
-     three-frame band of the practice, and four questions. -->
+     The reviews are still placeholders pending a verbatim pull from Google, and
+     the note under the rail still says so. The two that described Dr. Stone as
+     the injector were replaced. -->
 <section class="section_cover cover_component">
   <figure class="cover_media" data-parallax="10">
     <img src="assets/p-face-cat.webp" alt="" width="1400" height="2100" fetchpriority="high">
@@ -192,8 +197,8 @@
       <div class="container-large">
         <div class="cover_inner">
           <p class="eyebrow is-alternate">Results</p>
-          <h1 class="cover_title" data-split data-split-now>What patients say, and what we <em class="text-style-display-accent">cannot show yet</em>.</h1>
-          <p class="cover_lede">The reviews are public. The photographs exist, and stay unpublished until every patient has said yes again.</p>
+          <h1 class="cover_title" data-split data-split-now>Reviews and <em class="text-style-display-accent">results</em>.</h1>
+          <p class="cover_lede">See what patients say about us. Our new before-and-after gallery is coming soon.</p>
         </div>
       </div>
     </div>
@@ -221,29 +226,29 @@
   <div class="padding-global">
     <div class="wall_rail" data-drag data-cursor="Drag" data-overflow-ok>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;She talked me out of half of what I came in asking for.&rdquo;</p>
+        <p class="quote_text">&ldquo;They talked me out of half of what I came in asking for, and I'm glad they did.&rdquo;</p>
         <p class="quote_meta">Google review</p>
       </article>
       <article class="quote_card is-photo">
         <img src="assets/m-mature-smile.webp" alt="" width="900" height="1200" loading="lazy">
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;My sister asked if I had been sleeping better. That is the review.&rdquo;</p>
+        <p class="quote_text">&ldquo;My sister asked if I'd been sleeping better. Best review I could ask for.&rdquo;</p>
         <p class="quote_meta">Google review</p>
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;I did not realise until my second visit that she is an actual oral surgeon.&rdquo;</p>
+        <p class="quote_text">&ldquo;Everything was explained before we started, and nothing felt rushed.&rdquo;</p>
         <p class="quote_meta">Google review</p>
       </article>
       <article class="quote_card is-photo">
         <img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy">
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;The consultation was more specific than the last three places I went to.&rdquo;</p>
+        <p class="quote_text">&ldquo;The consultation was more thorough than anywhere else I've been.&rdquo;</p>
         <p class="quote_meta">Google review</p>
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;Smaller first dose than I expected. She was right.&rdquo;</p>
+        <p class="quote_text">&ldquo;A smaller first dose than I expected, and it was exactly right.&rdquo;</p>
         <p class="quote_meta">Google review</p>
       </article>
     </div>
@@ -265,16 +270,13 @@
         <div class="plates_grid">
           <div class="plates_copy">
             <p class="eyebrow">Before &amp; after</p>
-            <h2 class="heading-style-h2" data-split>Fifteen galleries exist. <em class="text-style-display-accent">None are published.</em></h2>
+            <h2 class="heading-style-h2" data-split>New photos are <em class="text-style-display-accent">coming soon</em>.</h2>
             <p class="text-size-medium plates_text" data-reveal>
-              Publishing a patient&rsquo;s face needs their current written consent for this exact use. We are asking each one again rather than relying on a form signed for a previous website. Until a case is covered, its frame stays empty.
+              We're refreshing our before-and-after gallery. Until the new photos are up, ask to
+              see results for your treatment at your consultation.
             </p>
-            <div class="plates_facts" data-reveal="stagger">
-              <p class="plates_fact"><span class="plates_fact-num"><span data-count="15">15</span></span><span>galleries photographed</span></p>
-              <p class="plates_fact"><span class="plates_fact-num"><span data-count="0">0</span></span><span>published without consent</span></p>
-            </div>
             <div class="button-group" data-reveal>
-              <a class="button" href="book.html">See cases in the room</a>
+              <a class="button" href="book.html">Book a consultation</a>
             </div>
           </div>
           <div class="plates_object" data-in aria-hidden="true">
@@ -286,7 +288,6 @@
               <span class="plates_label">After</span>
               <span class="plates_mark"></span>
             </div>
-            <span class="plates_status">Awaiting written consent, per case</span>
           </div>
         </div>
       </div>
@@ -300,15 +301,15 @@
     <div class="container-large">
       <div class="padding-section-large">
         <div class="room_head">
-          <p class="eyebrow">Where results are shown</p>
-          <h2 class="heading-style-h2" data-split>In the room, with consent <em class="text-style-display-accent">already in place</em>.</h2>
+          <p class="eyebrow">At your consultation</p>
+          <h2 class="heading-style-h2" data-split>See results <em class="text-style-display-accent">in person</em>.</h2>
         </div>
         <div class="room_grid">
           <figure class="room_frame is-a" data-speed="0.25">
-            <span class="wipe_frame" data-wipe><img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake practice" width="1748" height="983" loading="lazy"></span>
+            <span class="wipe_frame" data-wipe><img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake office" width="1748" height="983" loading="lazy"></span>
           </figure>
           <figure class="room_frame is-b" data-speed="-0.2">
-            <span class="wipe_frame" data-wipe><img src="assets/dr-stone-desk.webp" alt="Dr. Stone at her desk" width="700" height="525" loading="lazy"></span>
+            <span class="wipe_frame" data-wipe><img src="assets/ssa-treatment-room.webp" alt="A treatment room" width="2133" height="1200" loading="lazy"></span>
           </figure>
           <figure class="room_frame is-c" data-speed="0.1">
             <span class="wipe_frame" data-wipe><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></span>
@@ -325,25 +326,25 @@
     <div class="container-medium">
       <div class="padding-section-large">
         <div data-reveal>
-          <p class="eyebrow">Straight answers</p>
-          <h2 class="heading-style-h2">About the proof on this page.</h2>
+          <p class="eyebrow">Questions</p>
+          <h2 class="heading-style-h2">About reviews and results.</h2>
         </div>
         <div class="faq_list is-spaced">
           <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Are the reviews real patients?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer"><p>They come from the practice&rsquo;s public Google listing, readable in full there. Nothing is solicited in exchange for anything, and nothing is removed.</p></div>
+            <summary class="faq_question"><span class="faq_label">Where can I read more reviews?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+            <div class="faq_answer"><p>On our Google listing, where you can read every review in full.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Why no before-and-after photographs?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer"><p>Because current written consent for this website does not exist yet, and we are asking each patient rather than reusing a form signed for another one.</p></div>
+            <summary class="faq_question"><span class="faq_label">When will the new gallery be up?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+            <div class="faq_answer"><p>Soon. New photos will appear on this page as soon as they're ready. Until then, we're happy to show you results at your consultation.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Will the photographs be retouched?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer"><p>No. Same lighting, angle and lens on both visits, cropped and nothing else.</p></div>
+            <summary class="faq_question"><span class="faq_label">Will the photos be retouched?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+            <div class="faq_answer"><p>No. Same lighting, angle and lens for before and after, cropped and nothing else.</p></div>
           </details>
           <details class="faq_item">
             <summary class="faq_question"><span class="faq_label">Are the people on this website patients?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer"><p>No. They are models and are never presented as results. A patient will only ever appear on this page, labelled as one, with consent.</p></div>
+            <div class="faq_answer"><p>No. They're models and are never presented as results. Patient photos will only appear in the gallery, labeled as such.</p></div>
           </details>
         </div>
       </div>
@@ -353,11 +354,11 @@
 
 <!-- The closing invitation, on every page that does not end on its own.
 
-     Not the Surgical Arts band (copy on Carrara, the portrait at right) and
-     not the first build's marble either. Charcoal with a green light under
-     it, one display line that splits in, two buttons, three plain facts about
-     what a consultation is — the objection this answers, "what am I
-     committing to", is the one that stops a non-surgical booking. -->
+     Charcoal with a green light under it, one display line that splits in, two
+     buttons, and three plain facts about what a consultation is. The objection
+     it answers, "what am I committing to", is the one that stops a
+     non-surgical booking. Since 2026-09-15 the consultation is with one of the
+     practice's medical providers, not with Dr. Stone. -->
 <section class="section_close close_component" id="contact" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -365,24 +366,24 @@
         <div class="close_inner">
           <div>
             <p class="eyebrow">Start here</p>
-            <h2 class="heading-style-h2 close_title" data-split>One appointment. A plan for the <em class="text-style-display-accent">year</em>.</h2>
+            <h2 class="heading-style-h2 close_title" data-split>Start with a consultation and a plan for the <em class="text-style-display-accent">year</em>.</h2>
             <div class="button-group close_actions" data-reveal>
               <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-alternate" href="tel:+18173838361">Call (817) 383-8361</a>
+              <a class="button is-alternate" href="tel:+18179183666">Call (817) 918-3666</a>
             </div>
           </div>
           <div class="close_facts" data-reveal="stagger">
             <div class="close_fact">
-              <span class="close_fact-key">30 minutes</span>
-              <span class="close_fact-val">With Dr. Stone, not a coordinator.</span>
+              <span class="close_fact-key">A medical provider</span>
+              <span class="close_fact-val">Every consultation is with one of our licensed providers.</span>
             </div>
             <div class="close_fact">
               <span class="close_fact-key">No obligation</span>
-              <span class="close_fact-val">You leave with a written plan. Starting that day is your call.</span>
+              <span class="close_fact-val">You'll leave with a written plan. Whether you start that day is up to you.</span>
             </div>
             <div class="close_fact">
-              <span class="close_fact-key">Video or in person</span>
-              <span class="close_fact-val">A first consultation can be by video. Anything injected happens in Westlake.</span>
+              <span class="close_fact-key">In person or by video</span>
+              <span class="close_fact-val">Your first consultation can be by video. Treatments happen in our Westlake office.</span>
             </div>
           </div>
         </div>
@@ -395,18 +396,16 @@
 <!-- The three-column footer, on the shared 22-footer.css from the Surgical Arts
      build. The stylesheet is shared; the contents are this brand's.
 
-     NAP, AND IT IS NOT SETTLED. project-overview.md records the med spa's phone
-     as (817) 383-8361 and its suite as #110A. The Surgical Arts footer carries
-     a comment saying those exact two values were the SISTER practice's and were
-     wrong there. So one of two things is true: either the med spa genuinely
-     shares the implant centre's line, or the med spa overview inherited the
-     same bad pair. The address is the one part confirmed on every recovered
-     page: 72 Andorra Dr, Westlake, TX 76262.
+     NAP, SETTLED 2026-09-15. The phone is (817) 918-3666, from the client's own
+     Westlake Medical Aesthetics membership flyer (attached to Asana subtask
+     1218433345526566) and matching CareCredit's listing for the practice at
+     72 Andorra Dr Ste 110. The old (817) 383-8361 came from this pillar's
+     project overview and was always flagged as possibly the implant centre's.
+     Suite #110 is on the flyer too.
 
-     The suite is written #110 here, matching Surgical Arts' verified footer,
-     and the phone is left at 383-8361 because that is what this pillar's own
-     overview records. BOTH need one line of confirmation from the client
-     before a domain goes live. See HANDOFF.md. -->
+     SOCIALS are the two on the flyer: Instagram @westlakeaesthetics and TikTok
+     @westlakeaesthetic (no s). The Stone Surgical Arts Facebook page it used to
+     link is the sister practice's, not this one's. -->
 <footer class="footer_component" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -414,13 +413,12 @@
         <nav class="footer_nav" aria-label="Footer">
           <a href="index.html">Home</a>
           <a href="treatments.html">All treatments</a>
-          <a href="botox.html">Botox &amp; Xeomin</a>
           <a href="results.html" aria-current="page">Results &amp; reviews</a>
           <a href="membership.html">Membership</a>
           <a href="financing.html">Financing</a>
-          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="team.html">Our team</a>
           <a href="about.html">About</a>
-          <a href="team.html">The team</a>
+          <a href="meet-the-doctor.html">Dr. Mona Stone</a>
           <a href="book.html">Book a consultation</a>
         </nav>
         <div class="footer_top">
@@ -431,22 +429,22 @@
             </div>
             <div class="footer_item">
               <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18173838361">(817) 383-8361</a>
+              <a href="tel:+18179183666">(817) 918-3666</a>
             </div>
             <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_brand">
             <span class="brand_component is-large">
-              <span class="brand_name">Stone</span>
-              <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+              <span class="brand_name">Westlake</span>
+              <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
             </span>
             <div class="footer_socials">
-              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Stone Med Spa on Instagram" rel="noopener">
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
               </a>
-              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone on Facebook" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              <a class="footer_social" href="https://www.tiktok.com/@westlakeaesthetic" aria-label="Westlake Medical Aesthetics on TikTok" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.8 3.8 4.1 4v3.1c-1.5.1-2.8-.4-4.1-1.2v6.2c0 3.9-3.3 6.4-6.8 5.6-4.4-1-5.3-7-1.3-9.2 1.1-.6 2.2-.8 3.4-.6v3.3c-.5-.2-1-.2-1.6 0-1.4.5-1.7 2.4-.6 3.3 1.3 1.1 3.6.3 3.6-1.9V3h3.3Z" fill="currentColor"/></svg>
               </a>
             </div>
             <a class="footer_switch" href="https://www.dfwsurgicalarts.com/" rel="noopener">
@@ -468,13 +466,13 @@
         <div class="footer_signature">
           <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
-            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">W</text>
           </svg>
-          <p class="footer_signature-words">Maintain. Refine. Return.</p>
+          <p class="footer_signature-words">Save monthly. Glow always.</p>
         </div>
 
         <div class="footer_legal">
-          <span>&copy; <span data-year>2026</span> Stone Med Spa. All rights reserved.</span>
+          <span>&copy; <span data-year>2026</span> Westlake Medical Aesthetics. All rights reserved.</span>
           <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
           <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
           <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>

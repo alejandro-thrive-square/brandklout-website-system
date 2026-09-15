@@ -28,21 +28,21 @@ let pass = 0, fail = 0;
 const t = (name, ok, detail = "") => { ok ? pass++ : fail++; console.log(`${ok ? "ok  " : "FAIL"} ${name}${detail ? "  " + detail : ""}`); };
 
 const visible = () => pg.evaluate(() => [...document.querySelectorAll("[data-treatment]")].filter((r) => !r.hidden).map((r) => r.id));
-t("seven rows rendered", (await visible()).length === 7);
-t("seven anchors", (await pg.evaluate(() => ["botox","dysport-jeuveau","dermal-fillers","morpheus8","chemical-peels","prp","hair-restoration"].every((id) => document.getElementById(id)))));
+t("twelve rows rendered", (await visible()).length === 12);
+t("twelve anchors", (await pg.evaluate(() => ["botox","dysport-jeuveau","dermal-fillers","sculptra","morpheus8","chemical-peels","skinpen","prp","hair-restoration","hydrafacial","dermaplaning","skin-boosters"].every((id) => document.getElementById(id)))));
 
 await pg.click('[data-concern="hair"]');
 await new Promise((r) => setTimeout(r, 200));
 let v = await visible();
 t("hair thinning -> 2 rows", v.length === 2 && v.includes("prp") && v.includes("hair-restoration"), v.join(","));
 t("count text", (await pg.$eval("[data-ledger-count]", (e) => e.textContent)).includes("2 treatments address hair thinning"));
-t("empty groups hidden", (await pg.evaluate(() => [...document.querySelectorAll("[data-group]")].filter((g) => g.hidden).length)) === 2);
+t("empty groups hidden", (await pg.evaluate(() => [...document.querySelectorAll("[data-group]")].filter((g) => g.hidden).length)) === 3);
 t("pill pressed", (await pg.$eval('[data-concern="hair"]', (b) => b.getAttribute("aria-pressed"))) === "true");
 await pg.screenshot({ path: "../shots/_menu-filtered.png" });
 
 await pg.click('[data-concern="hair"]');
 await new Promise((r) => setTimeout(r, 200));
-t("click again clears", (await visible()).length === 7);
+t("click again clears", (await visible()).length === 12);
 
 await pg.click("#botox summary");
 await new Promise((r) => setTimeout(r, 1400));

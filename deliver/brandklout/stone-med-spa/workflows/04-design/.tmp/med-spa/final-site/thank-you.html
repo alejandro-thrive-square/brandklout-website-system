@@ -7,18 +7,18 @@
 <!-- Title, description, Open Graph, canonical and JSON-LD are injected by
      build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
      edit seo.json and rebuild. -->
-<title>Thank You | Stone Med Spa</title>
+<title>Thank You | Westlake Medical Aesthetics</title>
 <meta name="description" content="Your consultation request has been received.">
 <link rel="canonical" href="https://westlaketxmedspa.com/thank-you">
 <meta name="robots" content="noindex, follow">
-<meta property="og:site_name" content="Stone Med Spa">
+<meta property="og:site_name" content="Westlake Medical Aesthetics">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://westlaketxmedspa.com/thank-you">
-<meta property="og:title" content="Thank You | Stone Med Spa">
+<meta property="og:title" content="Thank You | Westlake Medical Aesthetics">
 <meta property="og:description" content="Your consultation request has been received.">
 <meta property="og:image" content="https://westlaketxmedspa.com/assets/m-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Thank You | Stone Med Spa">
+<meta name="twitter:title" content="Thank You | Westlake Medical Aesthetics">
 <meta name="twitter:description" content="Your consultation request has been received.">
 <script type="application/ld+json">
 {
@@ -27,8 +27,8 @@
     {
       "@type": "MedicalBusiness",
       "@id": "https://westlaketxmedspa.com/#practice",
-      "name": "Stone Med Spa",
-      "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+      "name": "Westlake Medical Aesthetics",
+      "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, restoration and facials, provided by licensed medical providers.",
       "medicalSpecialty": "Dermatology",
       "address": {
         "@type": "PostalAddress",
@@ -38,7 +38,11 @@
         "postalCode": "76262",
         "addressCountry": "US"
       },
-      "telephone": "+1-817-383-8361",
+      "telephone": "+1-817-918-3666",
+      "sameAs": [
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.tiktok.com/@westlakeaesthetic"
+      ],
       "availableLanguage": [
         "English",
         "Spanish"
@@ -56,12 +60,7 @@
           "opens": "09:00",
           "closes": "17:00"
         }
-      ],
-      "founder": {
-        "@type": "Physician",
-        "name": "Dr. Mona Stone, DDS",
-        "medicalSpecialty": "OralAndMaxillofacialSurgery"
-      }
+      ]
     }
   ]
 }
@@ -85,10 +84,10 @@
     if (!window.__smsBooted) document.documentElement.classList.remove('js');
   }, 2500);
 </script>
-<!-- No favicon file has been supplied and no med spa brand identity exists yet
-     (project-overview.md, "Brand identity"). This draws the wordmark's S on the
-     brand ivory so the tab is never a blank sheet. Replace when a mark arrives. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+<!-- No favicon file has been supplied. The client's flyer shows a green serif W
+     beside the WESTLAKE wordmark; this draws that W on the brand ivory so the
+     tab is never a blank sheet. Replace with the real mark when a file arrives. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3EW%3C/text%3E%3C/svg%3E">
 
 </head>
 <body>
@@ -96,10 +95,12 @@
 <div class="page-wrapper">
 <!-- The navbar. Five links, the phone and the book button.
 
-     WHY THESE FIVE. The med spa sells a rhythm, not an operation, so the two
-     links a surgical site would never lead with — Membership and Results — are
-     in the bar rather than buried. Financing, About and the Team are reached
-     from the drawer and the footer, where there is room for everything.
+     WHY THESE FIVE. A med spa sells a routine rather than an operation, so
+     Membership and Results sit in the bar instead of being buried. "Our team"
+     replaced "Dr. Stone" on 2026-09-15: the client's feedback is that patients
+     are seen and treated by the practice's own providers, not by Dr. Stone, so
+     the bar leads to the people who actually treat you. Dr. Stone, Financing
+     and the rest are in the drawer and the footer.
 
      `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
      nothing everywhere else; build-site.mjs matches the token against the page
@@ -109,10 +110,10 @@
   <div class="padding-global">
     <div class="container-large">
       <div class="navbar_container">
-        <a class="navbar_logo-link" href="index.html" aria-label="Stone Med Spa, home">
+        <a class="navbar_logo-link" href="index.html" aria-label="Westlake Medical Aesthetics, home">
           <span class="brand_component">
-            <span class="brand_name">Stone</span>
-            <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+            <span class="brand_name">Westlake</span>
+            <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
           </span>
         </a>
 
@@ -120,14 +121,14 @@
           <a class="navbar_link" href="treatments.html">Treatments</a>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="membership.html">Membership</a>
-          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="team.html">Our team</a>
           <a class="navbar_link" href="about.html">About</a>
         </nav>
 
         <div class="navbar_actions">
-          <a class="navbar_phone" href="tel:+18173838361">
+          <a class="navbar_phone" href="tel:+18179183666">
             <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-            (817) 383-8361
+            (817) 918-3666
           </a>
           <a class="button is-small" href="book.html">Book a consultation</a>
           <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -141,15 +142,18 @@
 
 <!-- The mobile drawer. At 991px and below the navbar hides both its menu and
      its phone number, so this panel is the ONLY place a phone gets the number
-     without scrolling to the footer. It is not a menu, it is the mobile
-     contact card, and it lists every page because there is room here. -->
+     without scrolling to the footer. It lists every page because there is room.
+
+     No "Botox & Xeomin" link since 2026-09-15: the client asked for that tab to
+     be folded into All treatments (Asana 1218433345526567). The page itself
+     still exists and is reached from its row on /treatments. -->
 <div class="drawer_component" id="drawer">
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer_head">
       <span class="brand_component">
-        <span class="brand_name">Stone</span>
-        <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+        <span class="brand_name">Westlake</span>
+        <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
       </span>
       <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
     </div>
@@ -157,26 +161,26 @@
     <nav class="drawer_nav" aria-label="Mobile">
       <a class="drawer_link" href="index.html">Home</a>
       <a class="drawer_link" href="treatments.html">All treatments</a>
-      <a class="drawer_link" href="botox.html">Botox &amp; Xeomin</a>
       <a class="drawer_link" href="results.html">Results &amp; reviews</a>
       <a class="drawer_link" href="membership.html">Membership</a>
       <a class="drawer_link" href="financing.html">Financing</a>
-      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
-      <a class="drawer_link" href="about.html">About the practice</a>
-      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="team.html">Our team</a>
+      <a class="drawer_link" href="about.html">About us</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Mona Stone</a>
       <a class="drawer_link" href="book.html">Book a consultation</a>
     </nav>
 
     <div class="drawer_foot">
       <a class="button" href="book.html">Book a consultation</a>
-      <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+      <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>
   </div>
 </div>
 
 <main class="main-wrapper" id="main">
-<!-- GENERAL THANK YOU PAGE — Asana subtask 11 of 11. Second build.
+<!-- GENERAL THANK YOU PAGE — Asana subtask 11 of 11. Second build; revised
+     2026-09-15 (the providers' schedule, not Dr. Stone's; the new phone).
 
      noindex (seo.json) and cta: false. Everything lives inside one tall cover
      on the practice's neon sign: a check mark that draws itself, the three
@@ -197,16 +201,16 @@
             <path class="thanks_mark-tick" d="M15 24.5 21 30.5 33 18.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <p class="eyebrow is-alternate">Received</p>
-          <h1 class="cover_title" data-split data-split-now>Thank you. <em class="text-style-display-accent">We have it.</em></h1>
-          <p class="cover_lede">Your request is with the front desk. Here is what happens next.</p>
+          <h1 class="cover_title" data-split data-split-now>Thank you. <em class="text-style-display-accent">We got your request.</em></h1>
+          <p class="cover_lede">Your request is with our front desk. Here's what happens next.</p>
           <dl class="thanks_next" data-reveal="stagger">
-            <div><dt>Today</dt><dd>The desk checks your request against Dr. Stone's diary. After 5pm or at a weekend, the next working morning.</dd></div>
-            <div><dt>Within one working day</dt><dd>We call the number you gave us to offer you times. If we cannot reach you, twice more, then email.</dd></div>
-            <div><dt>At your visit</dt><dd>Thirty minutes with Dr. Stone. A written plan, a cadence, no obligation to start.</dd></div>
+            <div><dt>Today</dt><dd>We check your request against our providers' schedules. Requests sent after 5 pm or on a weekend are handled the next business morning.</dd></div>
+            <div><dt>Within one business day</dt><dd>We'll call the number you gave us to offer you times. If we can't reach you, we'll try twice more, then email.</dd></div>
+            <div><dt>At your visit</dt><dd>A consultation with one of our medical providers. You'll leave with a written plan and no obligation to start.</dd></div>
           </dl>
           <div class="button-group cover_actions" data-reveal>
-            <a class="button is-alternate" href="tel:+18173838361">Faster: call (817) 383-8361</a>
-            <a class="button is-secondary thanks_button" href="treatments.html">The treatments</a>
+            <a class="button is-alternate" href="tel:+18179183666">Faster: call (817) 918-3666</a>
+            <a class="button is-secondary thanks_button" href="treatments.html">Our treatments</a>
           </div>
         </div>
       </div>
@@ -219,18 +223,16 @@
 <!-- The three-column footer, on the shared 22-footer.css from the Surgical Arts
      build. The stylesheet is shared; the contents are this brand's.
 
-     NAP, AND IT IS NOT SETTLED. project-overview.md records the med spa's phone
-     as (817) 383-8361 and its suite as #110A. The Surgical Arts footer carries
-     a comment saying those exact two values were the SISTER practice's and were
-     wrong there. So one of two things is true: either the med spa genuinely
-     shares the implant centre's line, or the med spa overview inherited the
-     same bad pair. The address is the one part confirmed on every recovered
-     page: 72 Andorra Dr, Westlake, TX 76262.
+     NAP, SETTLED 2026-09-15. The phone is (817) 918-3666, from the client's own
+     Westlake Medical Aesthetics membership flyer (attached to Asana subtask
+     1218433345526566) and matching CareCredit's listing for the practice at
+     72 Andorra Dr Ste 110. The old (817) 383-8361 came from this pillar's
+     project overview and was always flagged as possibly the implant centre's.
+     Suite #110 is on the flyer too.
 
-     The suite is written #110 here, matching Surgical Arts' verified footer,
-     and the phone is left at 383-8361 because that is what this pillar's own
-     overview records. BOTH need one line of confirmation from the client
-     before a domain goes live. See HANDOFF.md. -->
+     SOCIALS are the two on the flyer: Instagram @westlakeaesthetics and TikTok
+     @westlakeaesthetic (no s). The Stone Surgical Arts Facebook page it used to
+     link is the sister practice's, not this one's. -->
 <footer class="footer_component" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -238,13 +240,12 @@
         <nav class="footer_nav" aria-label="Footer">
           <a href="index.html">Home</a>
           <a href="treatments.html">All treatments</a>
-          <a href="botox.html">Botox &amp; Xeomin</a>
           <a href="results.html">Results &amp; reviews</a>
           <a href="membership.html">Membership</a>
           <a href="financing.html">Financing</a>
-          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="team.html">Our team</a>
           <a href="about.html">About</a>
-          <a href="team.html">The team</a>
+          <a href="meet-the-doctor.html">Dr. Mona Stone</a>
           <a href="book.html">Book a consultation</a>
         </nav>
         <div class="footer_top">
@@ -255,22 +256,22 @@
             </div>
             <div class="footer_item">
               <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18173838361">(817) 383-8361</a>
+              <a href="tel:+18179183666">(817) 918-3666</a>
             </div>
             <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_brand">
             <span class="brand_component is-large">
-              <span class="brand_name">Stone</span>
-              <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+              <span class="brand_name">Westlake</span>
+              <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
             </span>
             <div class="footer_socials">
-              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Stone Med Spa on Instagram" rel="noopener">
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
               </a>
-              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone on Facebook" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              <a class="footer_social" href="https://www.tiktok.com/@westlakeaesthetic" aria-label="Westlake Medical Aesthetics on TikTok" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.8 3.8 4.1 4v3.1c-1.5.1-2.8-.4-4.1-1.2v6.2c0 3.9-3.3 6.4-6.8 5.6-4.4-1-5.3-7-1.3-9.2 1.1-.6 2.2-.8 3.4-.6v3.3c-.5-.2-1-.2-1.6 0-1.4.5-1.7 2.4-.6 3.3 1.3 1.1 3.6.3 3.6-1.9V3h3.3Z" fill="currentColor"/></svg>
               </a>
             </div>
             <a class="footer_switch" href="https://www.dfwsurgicalarts.com/" rel="noopener">
@@ -292,13 +293,13 @@
         <div class="footer_signature">
           <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
-            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">W</text>
           </svg>
-          <p class="footer_signature-words">Maintain. Refine. Return.</p>
+          <p class="footer_signature-words">Save monthly. Glow always.</p>
         </div>
 
         <div class="footer_legal">
-          <span>&copy; <span data-year>2026</span> Stone Med Spa. All rights reserved.</span>
+          <span>&copy; <span data-year>2026</span> Westlake Medical Aesthetics. All rights reserved.</span>
           <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
           <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
           <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>

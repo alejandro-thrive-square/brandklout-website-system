@@ -1,5 +1,27 @@
 # Stone Med Spa — handoff
 
+> [!IMPORTANT]
+> **2026-09-15: THE CLIENT'S FEEDBACK, ON STAGING.** Asana task
+> [`1218408530306236`](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218408530306236)
+> "Westlake Medical Aesthetics - website feedback", ten subtasks, applied to every page and
+> published to **staging only** (`https://staging.westlaketxmedspa.com`). Production is unchanged.
+> Several open items below are now settled by the client:
+>
+> | Was open | Now |
+> | :-- | :-- |
+> | Trading name (item 2) | **Westlake Medical Aesthetics**, everywhere. Wordmark WESTLAKE / MEDICAL AESTHETICS. |
+> | NAP (item 3) | Phone **(817) 918-3666**, suite #110 — the client's own membership flyer, and CareCredit's listing for the practice. |
+> | Team roles (item 8) | Two people: **Brooke, Nurse Practitioner Injector** and **Abby, Medical Esthetician**. Everyone else removed. Abby still has no portrait. |
+> | Membership tiers (item 9) | One plan: **$149/month**, 90-day commitment, 30 days' notice — the client's flyer. The client's own retail price, not a Brandklout price. |
+> | Financing vendors (item 9) | **Cherry primary, CareCredit alongside**, each with an apply button. CareCredit's is its public apply page; **Cherry's is Cherry's generic patient site until the practice's own link is supplied.** |
+> | Menu (the six unnamed treatments) | Twelve treatments in four categories: Injectables (+ Sculptra), Skin Rejuvenation (+ SkinPen), Restoration, Facials (HydraFacial, dermaplaning, skin boosters). |
+> | Gallery (item 7) | Case counts and consent wording hidden until the new photos are published. The empty plates stay. |
+>
+> **And one reversal of the build's premise:** Dr. Stone does **not** assess or inject here. Every
+> "placed by the surgeon" line is gone; `meet-the-doctor.html` is now the surgeon at the sister
+> practice, and the navbar's "Dr. Stone" link became "Our team". The "Botox & Xeomin" nav link was
+> folded into All treatments. See the 2026-09-15 feedback run in `docs/runbook/`.
+
 **Built 2026-09-03, rebuilt the same day, PUBLISHED 2026-09-04** to this brand's own Instatic
 instance at <https://stone-med-spa-production.up.railway.app>. Eleven core pages. That is the link
 for review; the admin is the same URL + `/admin`.

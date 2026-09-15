@@ -1,16 +1,19 @@
-<!-- ABOUT US — Asana subtask 2 of 11. Second build, 2026-09-03.
+<!-- ABOUT US — Asana subtask 2 of 11. Second build 2026-09-03; rewritten
+     2026-09-15 for the client's "About section" feedback (1218433345526572):
+     "Rewritten to clarify the relationship between the surgical practice and
+     the aesthetics side."
 
-     The practice's story, NOT the doctor's bio (meet-the-doctor.html). About
-     carries one job no other page can: explaining why there are two Stone
-     websites. Five chapters, about 180 words, eleven photographs:
+     What the page now says, and nothing more: Westlake Medical Aesthetics is
+     the non-surgical sister practice to Stone Surgical Arts, in the same
+     building, with its own providers and its own menu. Dr. Stone is the surgeon
+     next door and does not treat patients here. The page does not invent a
+     title for her on this side (owner, medical director) — none was supplied.
 
        cover        the front desk, tall
-       the names    three sticky cards that stack — implants, surgery, med spa
-       the line     on the stone ground: where the menu is cut, in two sentences
+       the names    three sticky cards that stack — implants, surgery, aesthetics
+       the line     on the stone ground: where the menu is cut
        the rules    three tall photo tiles, one line each
-       the promise  a rotating word on the dark ground
-
-     The first build said all of this in nine paragraphs. -->
+       the room     the office as a rail you drag -->
 
 <section class="section_cover cover_component is-tall">
   <figure class="cover_media" data-parallax="10">
@@ -20,16 +23,17 @@
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate">About</p>
-          <h1 class="cover_title" data-split data-split-now>One surgeon. One suite. <em class="text-style-display-accent">Three names.</em></h1>
+          <p class="eyebrow is-alternate">About us</p>
+          <h1 class="cover_title" data-split data-split-now>Two practices. <em class="text-style-display-accent">One building.</em></h1>
           <p class="cover_lede">
-            Stone Med Spa is the non-surgical half of Dr. Mona Stone's practice in Westlake, kept
-            on its own menu so an afternoon's treatment is never sold beside an operation.
+            Westlake Medical Aesthetics is the non-surgical sister practice to Stone Surgical
+            Arts. We share an address, but we have our own team, our own providers and our own
+            menu.
           </p>
           <div class="cover_facts">
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="1"></span></span><span>surgeon, who places every injection</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="3"></span></span><span>practices under her name</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="7"></span></span><span>treatments on this menu</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2"></span></span><span>licensed medical providers</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="4"></span></span><span>treatment categories</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="12"></span></span><span>treatments on our menu</span></p>
           </div>
         </div>
       </div>
@@ -38,15 +42,15 @@
 </section>
 
 <!-- THE NAMES. Three cards, sticky at the same offset, so each one arrives over
-     the last (data-stack; the script scales the covered card down). The third
-     card is this site, and it is the one you end on. -->
+     the last (data-stack). The third card is this site, and it is the one you
+     end on. -->
 <section class="section_names names_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="names_head">
-          <p class="eyebrow">Why three websites</p>
-          <h2 class="heading-style-h2" data-split>Three different <em class="text-style-display-accent">decisions</em>.</h2>
+          <p class="eyebrow">How we're connected</p>
+          <h2 class="heading-style-h2" data-split>Three practices, each with its own <em class="text-style-display-accent">focus</em>.</h2>
         </div>
         <div class="stack_component names_stack" data-stack>
           <article class="stack_item names_card">
@@ -56,8 +60,8 @@
             <div class="names_body">
               <span class="names_index">01</span>
               <h3 class="names_title">Stone Dental Implant Center</h3>
-              <p class="names_text">Implants, jaws, reconstruction. The practice she built first, and the anatomy everything else sits on.</p>
-              <a class="button is-link" href="https://www.stonedentalimplantcenter.com/" rel="noopener">The implant centre <span class="button_arrow">&rarr;</span></a>
+              <p class="names_text">Dr. Mona Stone's oral surgery practice, for dental implants, jaw surgery and reconstruction.</p>
+              <a class="button is-link" href="https://www.stonedentalimplantcenter.com/" rel="noopener">Visit the implant center <span class="button_arrow">&rarr;</span></a>
             </div>
           </article>
           <article class="stack_item names_card">
@@ -67,8 +71,8 @@
             <div class="names_body">
               <span class="names_index">02</span>
               <h3 class="names_title">Stone Surgical Arts</h3>
-              <p class="names_text">Facelifts, neck lifts, eyelids, implants. Anything that needs an incision and an operating room.</p>
-              <a class="button is-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">The surgical practice <span class="button_arrow">&rarr;</span></a>
+              <p class="names_text">Dr. Stone's facial surgery practice, for facelifts, neck lifts, eyelid surgery and other procedures that need an operating room.</p>
+              <a class="button is-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">Visit Stone Surgical Arts <span class="button_arrow">&rarr;</span></a>
             </div>
           </article>
           <article class="stack_item names_card is-here">
@@ -77,9 +81,9 @@
             </figure>
             <div class="names_body">
               <span class="names_index">03</span>
-              <h3 class="names_title">Stone Med Spa</h3>
-              <p class="names_text">Injectables, skin and restoration. Forty-five minutes at most, a cadence rather than a recovery. You are here.</p>
-              <a class="button is-link" href="treatments.html">The seven treatments <span class="button_arrow">&rarr;</span></a>
+              <h3 class="names_title">Westlake Medical Aesthetics</h3>
+              <p class="names_text">Our non-surgical practice: injectables, skin rejuvenation, restoration and facials, with our own nurse practitioner and medical esthetician. You're here.</p>
+              <a class="button is-link" href="treatments.html">See our treatments <span class="button_arrow">&rarr;</span></a>
             </div>
           </article>
         </div>
@@ -89,7 +93,7 @@
 </section>
 
 <!-- THE LINE. Where the menu is cut, on the stone ground: two photographs, one
-     of each side, and two sentences between them. -->
+     of each side, and the rule between them. -->
 <section class="section_line line_component" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
@@ -100,11 +104,13 @@
             <figcaption class="line_caption">Surgical &middot; next door</figcaption>
           </figure>
           <div class="line_copy">
-            <p class="eyebrow">Where the line is</p>
-            <h2 class="heading-style-h2" data-split>Cut at the <em class="text-style-display-accent">incision</em>.</h2>
+            <p class="eyebrow">Who does what</p>
+            <h2 class="heading-style-h2" data-split>Surgery next door. <em class="text-style-display-accent">Aesthetics here.</em></h2>
             <p class="text-size-medium line_text" data-reveal>
-              If it needs one, it is Stone Surgical Arts. If it does not, it is here. Same
-              surgeon, same address, same phone &mdash; you are never handed between teams.
+              If a procedure needs an incision, Dr. Stone performs it at Stone Surgical Arts.
+              Everything on our menu is done here by our own medical providers. If your provider
+              thinks surgery would give you a better result, they'll tell you and can refer you
+              next door.
             </p>
           </div>
           <figure class="line_frame is-right" data-wipe>
@@ -117,24 +123,27 @@
   </div>
 </section>
 
-<!-- THE RULES. Three tall tiles, a photograph each, a number and one line. -->
+<!-- THE RULES. Three tall tiles, a photograph each, a number and one line.
+     Rule 03 used to be about patient consent for the gallery; the client asked
+     for consent language to come off the site until the new photographs are
+     published (1218433345526568). -->
 <section class="section_rules rules_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="rules_head">
           <p class="eyebrow">How we work</p>
-          <h2 class="heading-style-h2" data-split>Three rules we <em class="text-style-display-accent">do not bend</em>.</h2>
+          <h2 class="heading-style-h2" data-split>What you can <em class="text-style-display-accent">expect</em>.</h2>
         </div>
         <div class="rules_grid">
           <article class="rules_tile" data-speed="0.18">
             <figure class="rules_media" data-wipe>
-              <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS" width="988" height="1482" loading="lazy">
+              <img src="assets/staff-brooke.webp" alt="Brooke, nurse practitioner injector" width="800" height="1000" loading="lazy">
             </figure>
             <div class="rules_body">
               <span class="rules_num">01</span>
-              <h3 class="rules_title">The surgeon injects</h3>
-              <p class="rules_text">If Dr. Stone is not in, you are not injected.</p>
+              <h3 class="rules_title">A medical assessment first</h3>
+              <p class="rules_text">Every new patient is seen by a licensed provider before any treatment is planned.</p>
             </div>
           </article>
           <article class="rules_tile" data-speed="-0.12">
@@ -143,8 +152,8 @@
             </figure>
             <div class="rules_body">
               <span class="rules_num">02</span>
-              <h3 class="rules_title">Under-treat, then review</h3>
-              <p class="rules_text">Small first doses and a two-week review. Adding is five minutes; waiting out too much is three months.</p>
+              <h3 class="rules_title">Start small, then review</h3>
+              <p class="rules_text">We keep first treatments conservative and check in at two weeks. Adding a little more is easy.</p>
             </div>
           </article>
           <article class="rules_tile" data-speed="0.1">
@@ -153,8 +162,8 @@
             </figure>
             <div class="rules_body">
               <span class="rules_num">03</span>
-              <h3 class="rules_title">No face without consent</h3>
-              <p class="rules_text">Every published patient photograph carries that patient's current written permission. It is why our gallery is small.</p>
+              <h3 class="rules_title">A plan you can follow</h3>
+              <p class="rules_text">You'll leave your first visit knowing what to do next and when to come back.</p>
             </div>
           </article>
         </div>
@@ -170,11 +179,11 @@
       <div class="padding-section-large">
         <div class="room_head" data-drag-scope>
           <div>
-            <p class="eyebrow">The place</p>
+            <p class="eyebrow">The office</p>
             <h2 class="heading-style-h2" data-split>Small <em class="text-style-display-accent">on purpose</em>.</h2>
             <p class="text-size-medium room_text" data-reveal>
-              One suite off 114 with parking at the door. A desk, a consultation room, treatment
-              rooms, and no retail wall on the way out.
+              One private office off Highway 114 with parking at the door: a front desk, a
+              consultation room and treatment rooms.
             </p>
           </div>
           <div class="room_arrows">
@@ -187,12 +196,12 @@
   </div>
   <div class="padding-global">
     <div class="room_rail" data-drag data-cursor="Drag" data-overflow-ok>
-      <figure class="room_frame is-wide"><img src="assets/ssa-treatment-room.webp" alt="A treatment room at the Westlake practice" width="2133" height="1200" loading="lazy"></figure>
+      <figure class="room_frame is-wide"><img src="assets/ssa-treatment-room.webp" alt="A treatment room at the Westlake office" width="2133" height="1200" loading="lazy"></figure>
       <figure class="room_frame is-tall"><img src="assets/ssa-desk-laugh.webp" alt="The front desk" width="411" height="616" loading="lazy"></figure>
       <figure class="room_frame is-wide"><img src="assets/ssa-consult-room.webp" alt="The consultation room" width="1748" height="983" loading="lazy" class="u-focus-figure"></figure>
       <figure class="room_frame is-tall"><img src="assets/ssa-treatment-pair.webp" alt="A treatment in progress" width="411" height="616" loading="lazy"></figure>
-      <figure class="room_frame is-wide"><img src="assets/ssa-neon.webp" alt="The neon sign in the practice" width="2133" height="1200" loading="lazy"></figure>
-      <figure class="room_frame is-wide"><img src="assets/ssa-signage.webp" alt="The practice's sign" width="2133" height="1200" loading="lazy"></figure>
+      <figure class="room_frame is-wide"><img src="assets/ssa-neon.webp" alt="The neon sign in the office" width="2133" height="1200" loading="lazy"></figure>
+      <figure class="room_frame is-wide"><img src="assets/ssa-signage.webp" alt="The sign outside the office" width="2133" height="1200" loading="lazy"></figure>
     </div>
   </div>
   <div class="padding-global">
@@ -200,7 +209,7 @@
       <dl class="room_facts" data-reveal="stagger">
         <div><dt>Address</dt><dd><a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110, Westlake, TX 76262</a></dd></div>
         <div><dt>Hours</dt><dd>Monday to Friday, 9 to 5. Saturday by appointment.</dd></div>
-        <div><dt>Languages</dt><dd>English and Spanish, at the chair.</dd></div>
+        <div><dt>Languages</dt><dd>English and Spanish.</dd></div>
       </dl>
     </div>
   </div>

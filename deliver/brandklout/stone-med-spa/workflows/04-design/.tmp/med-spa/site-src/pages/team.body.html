@@ -1,28 +1,29 @@
-<!-- MEET THE TEAM — Asana subtask 4 of 11. Second build, 2026-09-03.
+<!-- MEET THE TEAM — Asana subtask 4 of 11. Second build 2026-09-03; cut to two
+     people 2026-09-15 by the client's "Team page" feedback (1218433345526565):
+     "Keep Brooke, Nurse Practitioner Injector, and Abby, Medical Esthetician.
+     All other profiles removed."
 
-     NOTHING ON THIS PAGE IS CONFIRMED EXCEPT THE PHOTOGRAPHS AND THE FIRST
-     NAMES. The portraits are the practice's own staff photographs; the roles
-     and credentials have not been supplied, and inventing a job title for a
-     named, photographed, real person on a medical site is a false credential.
-     So every card says "role to be confirmed", quietly, and the note above the
-     grid says why. Abby has no portrait; the lv portrait has no name.
+     The roles are the client's words, verbatim. Abby still has no portrait, so
+     her card keeps the initial until one is supplied.
 
-     Four chapters, about 120 words, fifteen photographs: cover, the people, a
-     pinned filmstrip of the practice, the surgeon. -->
+     The cover used to be the group photograph (assets/ssa-team.webp), which
+     shows people whose profiles the client removed, so it is now a treatment
+     room. The filmstrip lost its "two of the team at reception" frame for the
+     same reason. -->
 
 <section class="section_cover cover_component">
   <figure class="cover_media" data-parallax="10">
-    <img src="assets/ssa-team.webp" alt="" width="2133" height="1200" fetchpriority="high">
+    <img src="assets/ssa-treatment-room.webp" alt="" width="2133" height="1200" fetchpriority="high">
   </figure>
   <div class="cover_body">
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate">The team</p>
-          <h1 class="cover_title" data-split data-split-now>The people you will <em class="text-style-display-accent">actually see</em>.</h1>
+          <p class="eyebrow is-alternate">Our team</p>
+          <h1 class="cover_title" data-split data-split-now>The people who <em class="text-style-display-accent">treat you</em>.</h1>
           <p class="cover_lede">
-            Dr. Stone places every injection. These are the people who book you, prepare the
-            room and call you afterwards.
+            Every treatment at Westlake Medical Aesthetics is provided by one of our two
+            licensed medical providers.
           </p>
         </div>
       </div>
@@ -30,61 +31,32 @@
   </div>
 </section>
 
-<!-- THE PEOPLE. Eight cards on a staggered grid, each wiping in. -->
+<!-- THE PEOPLE. Two cards, wiping in. `is-pair` sets them as two wide columns
+     instead of the four-up grid (62-team.css). -->
 <section class="section_people people_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="people_head">
           <div>
-            <p class="eyebrow">Front of house</p>
-            <h2 class="heading-style-h2" data-split>Eight of us, and <em class="text-style-display-accent">one surgeon</em>.</h2>
+            <p class="eyebrow">Your providers</p>
+            <h2 class="heading-style-h2" data-split>Meet Brooke <em class="text-style-display-accent">and Abby</em>.</h2>
           </div>
           <p class="people_note" data-reveal>
-            Roles and credentials are not yet confirmed by the practice, so each card says only
-            what we know: a name and a face. Send us the roles and this page changes in minutes.
+            Your first visit is a consultation with one of them. They'll look at what you'd like
+            to change and recommend a plan that suits your skin and your schedule.
           </p>
         </div>
-        <div class="people_grid">
+        <div class="people_grid is-pair">
           <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-brooke.webp" alt="Brooke, Stone Med Spa" width="800" height="1000" loading="lazy"></figure>
+            <figure class="people_portrait" data-wipe><img src="assets/staff-brooke.webp" alt="Brooke, nurse practitioner injector" width="800" height="1000" loading="lazy"></figure>
             <h3 class="people_name">Brooke</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-alexis.webp" alt="Alexis, Stone Med Spa" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Alexis</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-jennifer.webp" alt="Jennifer, Stone Med Spa" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Jennifer</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-diana.webp" alt="Diana, Stone Med Spa" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Diana</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-breanna.webp" alt="Breanna, Stone Med Spa" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Breanna</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-lellie.webp" alt="Lellie, Stone Med Spa" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Lellie</h3>
-            <p class="people_role">Role to be confirmed</p>
-          </article>
-          <article class="people_card">
-            <figure class="people_portrait" data-wipe><img src="assets/staff-lv.webp" alt="A member of the Stone Med Spa team" width="492" height="615" loading="lazy"></figure>
-            <h3 class="people_name">Name to be confirmed</h3>
-            <p class="people_role">We have the portrait, not yet the name</p>
+            <p class="people_role">Nurse Practitioner Injector</p>
           </article>
           <article class="people_card">
             <figure class="people_portrait is-empty"><span class="people_initial" aria-hidden="true">A</span></figure>
             <h3 class="people_name">Abby</h3>
-            <p class="people_role">On the team; no portrait supplied yet</p>
+            <p class="people_role">Medical Esthetician</p>
           </article>
         </div>
       </div>
@@ -92,15 +64,15 @@
   </div>
 </section>
 
-<!-- THE FILMSTRIP. The practice, pinned, travelling sideways. On a phone it is
-     a plain horizontal scroller. -->
+<!-- THE FILMSTRIP. The office, pinned, travelling sideways. On a phone it is a
+     plain horizontal scroller. -->
 <section class="section_strip strip_component hscroll_component" data-hscroll data-theme="stone">
   <div class="strip_inner">
     <div class="padding-global">
       <div class="container-large">
         <div class="strip_head">
           <p class="eyebrow">Where we work</p>
-          <h2 class="heading-style-h2" data-split>Inside the <em class="text-style-display-accent">suite</em>.</h2>
+          <h2 class="heading-style-h2" data-split>Inside the <em class="text-style-display-accent">office</em>.</h2>
         </div>
       </div>
     </div>
@@ -111,8 +83,8 @@
         <figure class="strip_frame is-wide"><img src="assets/ssa-treatment-room.webp" alt="A treatment room" width="2133" height="1200" loading="lazy"><figcaption>Treatment room</figcaption></figure>
         <figure class="strip_frame is-tall"><img src="assets/ssa-treatment-pair.webp" alt="A treatment in progress" width="411" height="616" loading="lazy"><figcaption>In the chair</figcaption></figure>
         <figure class="strip_frame is-wide"><img src="assets/ssa-neon.webp" alt="The neon sign" width="2133" height="1200" loading="lazy"><figcaption>The neon</figcaption></figure>
-        <figure class="strip_frame is-square"><img src="assets/ssa-reception-pair.webp" alt="Two of the team at reception" width="700" height="525" loading="lazy"><figcaption>Front of house</figcaption></figure>
-        <figure class="strip_frame is-wide"><img src="assets/ssa-signage.webp" alt="The practice's sign" width="2133" height="1200" loading="lazy"><figcaption>The sign</figcaption></figure>
+        <figure class="strip_frame is-wide"><img src="assets/ssa-consult-room.webp" alt="The consultation room" width="1748" height="983" loading="lazy"><figcaption>Consultation room</figcaption></figure>
+        <figure class="strip_frame is-wide"><img src="assets/ssa-signage.webp" alt="The sign outside the office" width="2133" height="1200" loading="lazy"><figcaption>The sign</figcaption></figure>
       </div>
     </div>
     <div class="padding-global">
@@ -123,7 +95,8 @@
   </div>
 </section>
 
-<!-- THE SURGEON. One wide band: her portrait, one line, one link. -->
+<!-- THE SURGEON NEXT DOOR. One wide band: her portrait, what she does and
+     where, and that she does not treat patients here. -->
 <section class="section_lead lead_component">
   <div class="padding-global">
     <div class="container-large">
@@ -133,18 +106,17 @@
             <span class="wipe_inner" data-parallax="10"><img src="assets/dr-stone-smile.webp" alt="Dr. Mona Stone, DDS" width="550" height="550" loading="lazy"></span>
           </figure>
           <div class="lead_copy">
-            <p class="eyebrow">And the surgeon</p>
+            <p class="eyebrow">Our sister practice</p>
             <h2 class="heading-style-h2" data-split>Dr. Mona Stone, <em class="text-style-display-accent">DDS</em></h2>
             <p class="text-size-medium lead_text" data-reveal>
-              Board-certified oral and maxillofacial surgeon. The team books you and looks after
-              you; the clinical work is hers alone.
+              Dr. Stone is a board-certified oral and maxillofacial surgeon at Stone Surgical
+              Arts, in the same building. She doesn't treat patients at Westlake Medical
+              Aesthetics, but if surgery is the better route for you, our providers can refer
+              you to her.
             </p>
-            <div class="lead_facts" data-reveal="stagger">
-              <p class="lead_fact"><span class="lead_fact-num"><span data-count="100" data-suffix="%"></span></span><span>of injections placed by her</span></p>
-              <p class="lead_fact"><span class="lead_fact-num"><span data-count="2"></span></span><span>languages at the chair</span></p>
-            </div>
             <div class="button-group" data-reveal>
-              <a class="button is-secondary" href="meet-the-doctor.html">Read her background</a>
+              <a class="button is-secondary" href="meet-the-doctor.html">About Dr. Stone</a>
+              <a class="button is-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">Stone Surgical Arts <span class="button_arrow">&rarr;</span></a>
             </div>
           </div>
         </div>

@@ -866,9 +866,77 @@ rounding, and the `.navbar_burger:empty` repair. **Resist adding to that list to
 make a run quiet.** Both of the bugs above would have been caught before the
 first publish by exactly this check.
 
+## Pushing to staging (2026-09-15)
+
+Staging is the Railway environment `staging` at `https://staging.westlaketxmedspa.com` (see the
+2026-09-15 staging run). Every script here takes its target from `INSTATIC_BASE_URL`, and an
+exported value wins over the `.env` one, so the whole pipeline points at staging with one export.
+Client changes go to staging first and to production only once they are reviewed there.
+
+```bash
+S=<scratchpad>                              # holds doh-lookup.cjs and a staging link dir
+export INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com
+# railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d -e staging -s "Westlake Medical Aesthetics"   (in $S/link-staging)
+
+node -r $S/doh-lookup.cjs .tmp/snapshot-staging.mjs          # 0. site + pages -> .tmp/backup-staging-<date>/
+node -r $S/doh-lookup.cjs .tmp/staging-media-map.mjs          # 1. staging's media ids, by URL (trap 36)
+node -r $S/doh-lookup.cjs set-alt.mjs --map media-map.staging.json --apply
+node build-import-input.mjs                                   # 2. same payload as production; URLs match
+RAILWAY_LINK_DIR=$S/link-staging NODE_OPTIONS="-r $S/doh-lookup.cjs" bash ship.sh
+node -r $S/doh-lookup.cjs push-site.mjs --apply --force
+node -r $S/doh-lookup.cjs -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+node -r $S/doh-lookup.cjs verify-live.mjs && node -r $S/doh-lookup.cjs css-parity.mjs
+node compare-live.mjs && node visual-diff.mjs && node visual-diff.mjs 390
+```
+
+`doh-lookup.cjs` is only needed while this workstation's resolver still returns NXDOMAIN for the
+subdomain (memory: new-subdomain-nxdomain). Chrome-based gates use the OS resolver, so they wait
+until it resolves.
+
+### 35. The staging clone has NO FONTS — `clone-site --media` copies the media library, not `/uploads/fonts/`
+
+Found 2026-09-15 on the first push to staging. The shell's font library (`settings.fonts`) came
+across in the clone, so the published CSS still carried seven `@font-face` rules pointing at
+`/uploads/fonts/…` — and every one of those files answered **404**, because `install-fonts.mjs`
+writes them to the container's disk and the clone never ran it. The site rendered in fallback
+faces. `verify-live` and `css-parity` were clean (the rules exist, the URLs are syntactically
+fine); `compare-live` reported 142 findings, all width and wrap, and `visual-diff` 13–37%.
+
+**Fix:** run `install-fonts.mjs --apply` once against the staging instance, the same "once per
+instance" step as production. It rewrote the files and re-saved the library; findings fell from
+142 to 4. **Check fonts first on any cloned instance:** `curl` one `/uploads/fonts/` URL from the
+published CSS.
+
+### 36. Staging's media ids are not production's
+
+`clone-site` keeps every asset's **URL** and mints a new **id**. Image `src`s are unaffected
+(`build-import-input.mjs` writes URLs), but `set-alt.mjs` PATCHes `/media/<id>` and missed all 73.
+`.tmp/staging-media-map.mjs` rebuilds the map against staging's ids by URL into
+`.tmp/media-map.staging.json`; `set-alt.mjs --map media-map.staging.json` uses it.
+
+### 37. A 404 you probe for is cached at the edge for four hours
+
+Checking whether a staging font existed, *before* installing it, put its 404 in Cloudflare's cache
+(`cache-control: max-age=14400`, `cf-cache-status: HIT`). After the install the file served 200 with
+a cache-busting query string and 404 without one. Purge the one URL: mint a one-hour token from
+`CLOUDFLAREAPI` with the zone-scoped **Cache Purge** group (pick the group whose `scopes` end in
+`.zone`), wait ~5 s before using it — a fresh token answered `10000 Authentication error`
+immediately and worked on retry — then `DELETE` it. Better: don't probe a URL you are about to
+create; check the container's disk with `railway ssh ls` instead.
+
+### 38. The sienna accessibility widget is live-only and moves every line of text
+
+Production gained the `sienna-accessibility` plugin after this build, and the staging clone carries
+it. It writes text sizes inline at load and paints a floating button, so `visual-diff.mjs` at 390
+read 11–37% on pages whose layout `compare-live` found identical. `visual-diff.mjs` now aborts
+requests to `sienna-accessibility` by default (`VISUAL_WIDGET=1` keeps it). It is a client-side
+plugin; do not remove it from the site to make a gate quiet.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
+- `.tmp/media-map.staging.json` — the same, with staging's ids (trap 36)
+- `.tmp/backup-staging-2026-09-15/` — staging's site and pages before the first feedback push
 - `.tmp/import-input.json.gz` — the payload shipped to the container
 - `.tmp/import-out.json` — 985 style rules, 11 conditions, 11 page node trees
 - `.tmp/live-shots/` — full-page captures of the PUBLISHED site (reduced motion, so they show the
@@ -899,12 +967,9 @@ first publish by exactly this check.
   uploaded asset — and it is deliberately still empty because **this brand has no logo or identity
   yet** and a favicon invented here would be read as a proposed mark. Set it the day one exists.
   It is the only console error on the whole site.
-- **The domain, and before it the trading name.** The site is on its Railway URL, and `seo.json`'s
-  origin is that URL — a real, resolvable origin, unlike the `stonemedspa.example` placeholder it
-  replaced. When a domain is bought: change `site.origin`, rebuild, republish, and run
-  [`20-instatic-domain-origins`](../../../../process/20-instatic-domain-origins) before sending
-  anyone the admin link. Keep the railway host in `PUBLIC_ORIGIN` — `INSTATIC_BASE_URL` points at
-  it and every script here would start answering 403 without it.
+- ~~The domain, and before it the trading name.~~ Settled: the domain is `westlaketxmedspa.com`
+  (2026-09-10) and the trading name is **Westlake Medical Aesthetics** (the client's feedback,
+  2026-09-15).
 - **No brand identity, logo or favicon**, and no per-case photo consent — see `HANDOFF.md`.
 - **The booking form still posts nowhere.**
 - **The six remaining treatment dossiers.** `botox` is the built template; each of the others is a

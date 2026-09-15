@@ -1,74 +1,72 @@
-// THE MENU. Seven treatments, and the boundary they sit inside.
+// THE MENU. Twelve treatments in four categories.
 //
-// WHERE THIS LIST COMES FROM. The client sent two screenshots on 2026-09-03,
-// archived at 01-content-intake/.tmp/client-references/menu-surgical.png and
-// menu-med-spa.png. They are the practice's own two category images and they
-// draw the line themselves:
+// WHERE THIS LIST COMES FROM. Two sources, in order:
 //
-//   SURGICAL (stays on Stone Surgical Arts)   MED SPA (this site)
-//   MyEllevate(R) Facelift                    Dermal Fillers
-//   Neck Lift                                 Botox | Xeomin
-//   Facelift | Easy Lift                      Morpheus8
-//   FaceTite                                  Hair Restoration
-//   Facial Implants                           PRP Treatment
-//   Chin Sculpting & Reshaping                Chemical Peels
-//   Buccal Fat Removal                        Dysport & Jeuveau
-//   Blepharoplasty
-//   Neck Liposuction
-//   Skin Lesion Removal
-//   Male Facial Enhancement
-//   Facial Fat Transfer
+//   1. 2026-09-03: the client's two category images (archived at
+//      01-content-intake/.tmp/client-references/), which drew the line between
+//      this site and Stone Surgical Arts at the incision. Seven treatments.
 //
-// This settles the blocker recorded in docs/project-overview.md and in
-// .claude/RUNBOOK.md: it is the modality split, and the client drew it. The cut
-// is at the incision, not at the price. FaceTite is minimally invasive but it
-// is still an incision under local anaesthetic, so it is surgical; Morpheus8
-// delivers radiofrequency through microneedles and is not, so it is here.
+//   2. 2026-09-15: the client's website feedback, Asana task 1218408530306236,
+//      subtask "Treatment structure" (1218433345526564), verbatim:
 //
-// TWO CONSEQUENCES, BOTH REAL:
+//        "Services reorganized into four categories: Injectables (including
+//        biostimulators like Sculptra), Skin Rejuvenation (Morpheus8, chemical
+//        peels, SkinPen microneedling), Restoration, and Facials (HydraFacials
+//        at 45–90 minutes, dermaplaning, and skin boosters)."
 //
-//   1. Stone Surgical Arts currently publishes a fee schedule covering ALL
-//      SEVEN of these plus Sculptra, CO2 resurfacing, HydraFacial MD,
-//      microneedling, SkinPen and Cosmelan. That page has to lose them, and a
-//      301 map from those URLs to these has to exist before either domain
-//      goes live. It is a task on the bk-stone worktree, not this one.
+//      That added five treatments — Sculptra, SkinPen, HydraFacial,
+//      dermaplaning and skin boosters — and a fourth category. Skin boosters
+//      are an injection, but the client filed them under Facials and that is
+//      where they sit. The HydraFacial's 45–90 minutes is the client's figure.
 //
-//   2. Six treatments the sibling sells are on NEITHER list the client sent:
-//      Sculptra, CO2 laser resurfacing, HydraFacial MD, microneedling, SkinPen
-//      and Cosmelan. They are non-surgical, so by the rule they belong here,
-//      but the client did not name them. They are NOT in this file. Ask before
-//      adding them; do not infer a menu the client did not write.
+// WHO TREATS. Not Dr. Stone. The same feedback ("Consultation language",
+// 1218433345526570) says patients are assessed by the practice's medical
+// providers and that Dr. Stone neither assesses nor injects. The providers are
+// Brooke, Nurse Practitioner Injector, and Abby, Medical Esthetician (subtask
+// "Team page"). No lede below names Dr. Stone.
 //
-// NO PRICES ANYWHERE. Brandklout is a partner engagement (CLAUDE.md). Every
-// number below is a duration or an interval, never a fee.
+// NO FEES. Treatment prices are quoted at the consultation. The only price on
+// the site is the membership's, which the client supplied (membership.html).
 //
 // CLINICAL REVIEW IS OUTSTANDING. Every onset, longevity and downtime figure
 // here is the standard published range for the product, not a claim about this
-// practice's protocol. Dr. Stone signs these off before the site goes live.
+// practice's protocol. The practice signs these off before they are relied on.
 
-/** The three shelves the ledger groups by. Order is the order they render.
-    Each carries the instrument still life that heads its block on /treatments. */
+/** The four categories the menu groups by, in the client's order. Each carries
+    the still life that heads its block on /treatments and fills its panel on
+    the home page's shelf. */
 export const CATEGORIES = [
   {
     id: "injectables",
     name: "Injectables",
     image: "gen-injectables.webp",
+    portrait: "m-injectables.webp",
     blurb:
-      "Neuromodulators relax the muscle that folds the skin; fillers replace the volume that time takes out. Both are placed by Dr. Stone.",
+      "Neuromodulators soften the lines that come from movement, fillers restore volume, and Sculptra helps your skin build its own collagen over time. Every injection is done by our nurse practitioner.",
   },
   {
     id: "skin",
-    name: "Skin & Resurfacing",
+    name: "Skin Rejuvenation",
     image: "gen-laser-device.webp",
+    portrait: "m-jawline.webp",
     blurb:
-      "Controlled injury, then repair. These treatments work by asking the skin to rebuild itself, which is why they run as a series and improve for months after the last one.",
+      "These treatments prompt your skin to repair and renew itself. Most are done as a short series, and results keep improving for a few months after the last session.",
   },
   {
     id: "restoration",
     name: "Restoration",
     image: "gen-iclight-wand.webp",
+    portrait: "m-freckles.webp",
     blurb:
-      "Your own platelets, concentrated and returned to the tissue that needs them. The slowest results on the menu and the longest-lasting.",
+      "PRP uses a concentrate of your own platelets to support skin and hair. Results come on gradually, and nothing synthetic is involved.",
+  },
+  {
+    id: "facials",
+    name: "Facials",
+    image: "gen-skincare-shelf.webp",
+    portrait: "m-cheek.webp",
+    blurb:
+      "Regular facials keep skin clear, smooth and hydrated between treatments. Members get one every month as part of their plan.",
   },
 ];
 
@@ -80,49 +78,40 @@ export const CONCERNS = [
   { id: "pigment", name: "Pigmentation & tone" },
   { id: "laxity", name: "Laxity & jawline" },
   { id: "scarring", name: "Acne scarring" },
+  { id: "dullness", name: "Dryness & dullness" },
   { id: "hair", name: "Hair thinning" },
 ];
 
 /**
- * The seven.
+ * The twelve.
  *
- * `cadence` VS `lasts`. They are not the same fact, and the hero rail is what
- * proved it. `lasts` is how long ONE treatment holds — "Months, as a series" —
- * and belongs in the ledger's Lasts column. `cadence` is how often you come
- * back, phrased short enough to sit in a rail item without wrapping. The rail
- * shipped showing `lasts` under a heading reading "what we do, and how often",
- * which answered a different question from the one it asked.
+ * `cadence` VS `lasts`. They are not the same fact. `lasts` is how long ONE
+ * treatment holds and belongs in the menu's Lasts column. `cadence` is how
+ * often you come back, phrased short enough to sit in the home ticker.
  *
- * IMAGERY. Each treatment carries a `portrait` and nothing else: the model
- * photograph that fills its ledger row when the row is opened. The instrument
- * still lifes moved UP to CATEGORIES above, one per shelf, because there were
- * seven of them and only three shelves and the four spare ones were shipping
- * unreferenced — audit.mjs catches exactly that.
+ * IMAGERY. Each treatment carries a `portrait`: the model photograph in its
+ * menu row. A model appears as a PERSON, never as a patient and never as a
+ * result. Nothing on this site captions a model photograph as an outcome.
  *
- * THE RULE FOR A MODEL PORTRAIT, carried over from the sibling build and worth
- * restating: a model appears as a PERSON, never as a patient and never as a
- * result. Nothing on this site captions a model photograph as an outcome. The
- * before-and-after frames on /results and /botox are deliberately empty instead.
- *
- * `page` is set only where a detail page exists — the eleven-page
- * brief funds one (Botox), and the ledger renders the other six as expandable
- * rows rather than dead links. When a page is written, add its slug here and
- * the ledger row grows a link with no other change.
+ * `page` is set only where a detail page exists. Botox is the only one; the
+ * other rows open in place. When a page is written, set its slug here and the
+ * row grows a link with no other change.
  */
 export const TREATMENTS = [
+  /* --- Injectables -------------------------------------------------------- */
   {
     slug: "botox",
     page: "botox.html",
     name: "Botox | Xeomin",
     category: "injectables",
     concerns: ["lines"],
-    lede: "The two neuromodulators Dr. Stone keeps in the room. Same molecule, different formulation — Xeomin carries no accessory proteins, which matters if you have stopped responding to Botox.",
+    lede: "Botox and Xeomin relax the muscles that crease the skin, softening forehead lines, frown lines and crow's feet. Xeomin has no accessory proteins, which can help if Botox seems to wear off faster than it used to.",
     appointment: "15–20 min",
     onset: "3–7 days",
     cadence: "every 3–4 months",
     lasts: "3–4 months",
     downtime: "None",
-    area: "Forehead, glabella, crow's feet",
+    area: "Forehead, frown lines, crow's feet",
     portrait: "m-injectables.webp",
   },
   {
@@ -131,13 +120,13 @@ export const TREATMENTS = [
     name: "Dysport & Jeuveau",
     category: "injectables",
     concerns: ["lines"],
-    lede: "Two more neuromodulators, held because patients differ. Dysport spreads a little further from the injection point, which suits a broad forehead; Jeuveau is the newest of the four.",
+    lede: "Two more neuromodulators that work the same way as Botox. Dysport spreads a little further, which can suit a larger area like the forehead, and Jeuveau is often chosen for frown lines.",
     appointment: "15–20 min",
     onset: "2–5 days",
     cadence: "every 3–4 months",
     lasts: "3–4 months",
     downtime: "None",
-    area: "Forehead, glabella, crow's feet",
+    area: "Forehead, frown lines, crow's feet",
     portrait: "m-eyes-young.webp",
   },
   {
@@ -146,28 +135,45 @@ export const TREATMENTS = [
     name: "Dermal Fillers",
     category: "injectables",
     concerns: ["volume", "laxity"],
-    lede: "Hyaluronic acid, placed on the bone or in the mid-face to rebuild a structure that has flattened. An oral and maxillofacial surgeon plans this from the skeleton up, which is the difference.",
+    lede: "Hyaluronic acid filler restores shape and volume to the lips, cheeks, chin and jawline, and can soften hollows under the eyes. Placement is planned around your facial structure so the result looks like you.",
     appointment: "30–45 min",
     onset: "Immediate, settles at 2 weeks",
     cadence: "every 6–18 months",
     lasts: "6–18 months",
     downtime: "1–3 days",
-    area: "Lips, cheeks, chin, jawline, tear trough",
+    area: "Lips, cheeks, chin, jawline, under-eyes",
     portrait: "m-lips.webp",
   },
+  {
+    slug: "sculptra",
+    page: null,
+    name: "Sculptra",
+    category: "injectables",
+    concerns: ["volume", "laxity", "texture"],
+    lede: "Sculptra is a biostimulator. Instead of filling a space, it prompts your skin to rebuild collagen, so results appear gradually over a few months and can last two years or more.",
+    appointment: "30–45 min",
+    onset: "6–8 weeks, building",
+    cadence: "2–3 sessions, then every 2 years",
+    lasts: "Up to 2 years",
+    downtime: "1–2 days",
+    area: "Cheeks, temples, jawline",
+    portrait: "p-neck-profile.webp",
+  },
+
+  /* --- Skin Rejuvenation -------------------------------------------------- */
   {
     slug: "morpheus8",
     page: null,
     name: "Morpheus8",
     category: "skin",
     concerns: ["laxity", "texture", "scarring"],
-    lede: "Radiofrequency delivered below the surface through microneedles, so the heat lands in the layer that holds the jawline and the surface is left largely intact.",
+    lede: "Radiofrequency energy delivered through fine microneedles tightens and smooths the deeper layers of the skin while leaving the surface largely intact. It works well on the jawline, the neck and acne scarring.",
     appointment: "45–60 min",
     onset: "3 weeks, building to 3 months",
     cadence: "3, then yearly",
     lasts: "12+ months",
     downtime: "2–4 days",
-    area: "Lower face, jawline, neck",
+    area: "Face, jawline, neck",
     portrait: "m-jawline.webp",
   },
   {
@@ -175,29 +181,46 @@ export const TREATMENTS = [
     page: null,
     name: "Chemical Peels",
     category: "skin",
-    concerns: ["pigment", "texture"],
-    lede: "Depth is the whole decision. A superficial peel is a lunch hour and a glow; a medium one is a week indoors and a genuine change in tone. Dr. Stone picks the depth against your calendar.",
+    concerns: ["pigment", "texture", "dullness"],
+    lede: "A peel lifts away damaged surface skin to even out tone, fade sun spots and refine texture. Light peels have almost no downtime, deeper ones need about a week, and we'll help you pick one that fits your schedule.",
     appointment: "30–45 min",
     onset: "5–7 days",
     cadence: "2–4 a year",
     lasts: "Months, as a series",
-    downtime: "3–7 days",
-    area: "Face, neck, décolleté, hands",
+    downtime: "0–7 days",
+    area: "Face, neck, chest, hands",
     portrait: "m-skin-glow.webp",
   },
+  {
+    slug: "skinpen",
+    page: null,
+    name: "SkinPen Microneedling",
+    category: "skin",
+    concerns: ["texture", "scarring", "lines"],
+    lede: "SkinPen creates thousands of tiny channels in the skin, which starts its natural repair process and boosts collagen. It's a good fit for acne scars, enlarged pores and early fine lines.",
+    appointment: "45–60 min",
+    onset: "2–4 weeks",
+    cadence: "3–4 sessions, a month apart",
+    lasts: "Months, as a series",
+    downtime: "1–3 days of redness",
+    area: "Face, neck",
+    portrait: "m-chin.webp",
+  },
+
+  /* --- Restoration -------------------------------------------------------- */
   {
     slug: "prp",
     page: null,
     name: "PRP Treatment",
     category: "restoration",
     concerns: ["texture", "hair"],
-    lede: "Your blood is drawn, spun to concentrate the platelets, and the plasma is returned to the tissue. Nothing foreign goes in, which is why it is the treatment for people who will not have filler.",
+    lede: "A small amount of your blood is drawn and spun to concentrate the platelets, which are then returned to the skin. It's a good choice if you'd rather avoid fillers or synthetic products.",
     appointment: "45–60 min",
     onset: "4–6 weeks",
     cadence: "3, then 2 a year",
     lasts: "A series of 3, then maintenance",
     downtime: "1–2 days",
-    area: "Under-eye, face, scalp",
+    area: "Under-eyes, face, scalp",
     portrait: "m-freckles.webp",
   },
   {
@@ -206,7 +229,7 @@ export const TREATMENTS = [
     name: "Hair Restoration",
     category: "restoration",
     concerns: ["hair"],
-    lede: "PRP into the scalp, on a schedule, for thinning that has not yet become baldness. It works on follicles that are still alive, so the honest advice is to come early.",
+    lede: "PRP injected into the scalp to support thinning hair. It works best on follicles that are still active, so starting early tends to give better results.",
     appointment: "45–60 min",
     onset: "3–4 months",
     cadence: "every 6–12 months",
@@ -215,9 +238,56 @@ export const TREATMENTS = [
     area: "Crown, hairline, part line",
     portrait: "m-man-suit.webp",
   },
+
+  /* --- Facials ------------------------------------------------------------ */
+  {
+    slug: "hydrafacial",
+    page: null,
+    name: "HydraFacial",
+    category: "facials",
+    concerns: ["texture", "dullness", "pigment"],
+    lede: "Cleansing, exfoliation, extractions and hydration in a single treatment. Sessions run from 45 to 90 minutes depending on what your skin needs, and you can go straight back to your day.",
+    appointment: "45–90 min",
+    onset: "Immediate",
+    cadence: "monthly",
+    lasts: "About a month",
+    downtime: "None",
+    area: "Face, neck",
+    portrait: "m-cheek.webp",
+  },
+  {
+    slug: "dermaplaning",
+    page: null,
+    name: "Dermaplaning",
+    category: "facials",
+    concerns: ["texture", "dullness"],
+    lede: "A sterile blade gently removes dead skin and fine facial hair, leaving skin smoother and brighter. Makeup and skincare go on more evenly afterward.",
+    appointment: "30–45 min",
+    onset: "Immediate",
+    cadence: "every 4–6 weeks",
+    lasts: "3–4 weeks",
+    downtime: "None",
+    area: "Face",
+    portrait: "m-street-brunette.webp",
+  },
+  {
+    slug: "skin-boosters",
+    page: null,
+    name: "Skin Boosters",
+    category: "facials",
+    concerns: ["dullness", "lines", "texture"],
+    lede: "Very fine injections of hyaluronic acid spread through the skin to improve hydration and glow. Unlike filler, they don't add volume or change your shape.",
+    appointment: "30–45 min",
+    onset: "2–4 weeks",
+    cadence: "3, then every 6 months",
+    lasts: "About 6 months",
+    downtime: "1–2 days",
+    area: "Face, neck, hands",
+    portrait: "p-eyes-mirror.webp",
+  },
 ];
 
-/** Treatments on a shelf, in menu order. */
+/** Treatments in a category, in menu order. */
 export const byCategory = (id) => TREATMENTS.filter((t) => t.category === id);
 
 /** Treatments that address a concern, in menu order. */

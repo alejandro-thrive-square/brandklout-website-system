@@ -1,30 +1,26 @@
 <!-- BOOK CONSULTATION (VIRTUAL AND IN-OFFICE) — Asana subtask 9 of 11.
-     Second build, 2026-09-03.
+     Second build 2026-09-03; revised 2026-09-15: consultations are with the
+     practice's medical providers, not with Dr. Stone (1218433345526570).
 
      cta: false in build-site.mjs — this page IS the conversion. The form
      section carries id="contact" so the navbar's anchor lands here.
 
      THE FORM POSTS NOWHERE, ON PURPOSE. See the header of js/11-form.js: no
      endpoint, no scheduler, no decision on whether the virtual channel is
-     HIPAA-compliant. On submit the status line says so and gives the phone.
-
-     Shape: a short cover on the consultation room; then a split — the room
-     sticky at left with the practical facts under it, the two paths and the
-     form at right; then a dark band with the phone number at display size,
-     because it is the channel that works today. -->
+     HIPAA-compliant. On submit the status line says so and gives the phone. -->
 <section class="section_cover cover_component is-short">
   <figure class="cover_media" data-parallax="10">
-    <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake practice" width="1748" height="983" fetchpriority="high">
+    <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake office" width="1748" height="983" fetchpriority="high">
   </figure>
   <div class="cover_body">
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
           <p class="eyebrow is-alternate">Book</p>
-          <h1 class="cover_title" data-split data-split-now>Thirty minutes with <em class="text-style-display-accent">the surgeon</em>.</h1>
+          <h1 class="cover_title" data-split data-split-now>Book a <em class="text-style-display-accent">consultation</em>.</h1>
           <p class="cover_lede">
-            You are assessed by Dr. Stone, you leave with a written plan, and whether you start
-            that day is your call.
+            You'll meet one of our medical providers, talk through your goals and leave with a
+            plan. Whether you start that day is up to you.
           </p>
         </div>
       </div>
@@ -44,35 +40,35 @@
             </figure>
             <dl class="book_facts" data-reveal="stagger">
               <div><dt>Where</dt><dd><a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110, Westlake, TX 76262</a>. Parking at the door.</dd></div>
-              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18173838361">(817) 383-8361</a>, Monday to Friday, 9 to 5</dd></div>
+              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18179183666">(817) 918-3666</a>, Monday to Friday, 9 to 5</dd></div>
               <div><dt>Saturday</dt><dd>By appointment, existing patients first</dd></div>
-              <div><dt>Spoken</dt><dd>English and Spanish, at the chair</dd></div>
+              <div><dt>Languages</dt><dd>English and Spanish</dd></div>
             </dl>
           </aside>
 
           <div class="book_main">
             <div class="book_head">
               <p class="eyebrow">Two ways to start</p>
-              <h2 class="heading-style-h2" data-split>Pick the one that suits your <em class="text-style-display-accent">week</em>.</h2>
+              <h2 class="heading-style-h2" data-split>Choose what suits your <em class="text-style-display-accent">week</em>.</h2>
             </div>
             <div class="paths_grid" data-reveal="stagger">
               <div class="path_card">
                 <span class="path_tag">In the office</span>
-                <h3 class="path_title">Westlake, in person</h3>
-                <p class="path_text">The full assessment, in the light she treats in. You can be treated the same visit if you decide to.</p>
+                <h3 class="path_title">In person, in Westlake</h3>
+                <p class="path_text">A full assessment in person. If you decide to go ahead, you can often be treated the same day.</p>
                 <a class="button" href="#form" data-path="in-office">Request a visit</a>
               </div>
               <div class="path_card">
                 <span class="path_tag">By video</span>
-                <h3 class="path_title">From wherever you are</h3>
-                <p class="path_text">Same thirty minutes, same surgeon, no drive. A first step, not a shortcut: anything injected happens in Westlake.</p>
+                <h3 class="path_title">From home</h3>
+                <p class="path_text">Talk through your goals without the drive. Any treatment happens afterward in our Westlake office.</p>
                 <a class="button is-secondary" href="#form" data-path="virtual">Request a video call</a>
               </div>
             </div>
 
             <div class="form_component" id="form">
               <p class="eyebrow">Request an appointment</p>
-              <h2 class="form_title" data-split>Tell us a little, and we will call you.</h2>
+              <h2 class="form_title" data-split>Tell us a little, and we'll call you.</h2>
               <form class="form_grid" data-inert-form novalidate>
                 <div class="form_field">
                   <label class="form_label" for="f-name">Your name</label>
@@ -91,20 +87,20 @@
                   <select class="form_select" id="f-type" name="visit" data-visit-type>
                     <option value="in-office">In the office, Westlake</option>
                     <option value="virtual">By video</option>
-                    <option value="either">Either &mdash; whichever is sooner</option>
+                    <option value="either">Either, whichever is sooner</option>
                   </select>
                 </div>
                 <div class="form_field is-full">
-                  <label class="form_label" for="f-interest">What would you like to change?</label>
-                  <textarea class="form_textarea" id="f-interest" name="interest" rows="3" placeholder="In your own words. You do not need to know the name of a treatment."></textarea>
+                  <label class="form_label" for="f-interest">What would you like to improve?</label>
+                  <textarea class="form_textarea" id="f-interest" name="interest" rows="3" placeholder="In your own words. You don't need to know the name of a treatment."></textarea>
                 </div>
                 <div class="form_actions">
                   <button class="button" type="submit">Request a consultation</button>
                   <p class="form_status" data-form-status role="status" aria-live="polite"></p>
                 </div>
                 <p class="form_privacy">
-                  Please do not send detailed medical history through this form. We take that over
-                  the phone or in the room.
+                  Please don't send detailed medical history through this form. We'll go over that
+                  by phone or in person.
                 </p>
               </form>
             </div>
@@ -123,12 +119,12 @@
       <div class="padding-section-large">
         <div class="book_call-grid">
           <div>
-            <p class="eyebrow">Or just call</p>
-            <a class="book_call-number" href="tel:+18173838361" data-split>(817) 383-8361</a>
-            <p class="book_call-text" data-reveal>Answered by the same people who will book you in. Monday to Friday, 9 to 5.</p>
+            <p class="eyebrow">Or give us a call</p>
+            <a class="book_call-number" href="tel:+18179183666" data-split>(817) 918-3666</a>
+            <p class="book_call-text" data-reveal>Our front desk can book you in directly, Monday to Friday, 9 to 5.</p>
           </div>
           <figure class="book_call-media" data-wipe>
-            <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-desk-laugh.webp" alt="The front desk at the practice" width="411" height="616" loading="lazy"></span>
+            <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-desk-laugh.webp" alt="The front desk at the office" width="411" height="616" loading="lazy"></span>
           </figure>
         </div>
       </div>

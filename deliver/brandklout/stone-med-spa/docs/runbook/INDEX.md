@@ -1,11 +1,12 @@
 # Runbook index
 
-9 runs, newest first. Each line is one file in this folder.
+10 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | 2026-09-15 — The client's website feedback (Asana, ten subtasks) applied and published to staging only: Westlake Medical Aesthetics, 12 treatments in 4 categories, two providers, one $149 membership — carries **gotchas** | [`2026-09-15-client-feedback-on-staging.md`](./2026-09-15-client-feedback-on-staging.md) |
 | 2026-09-15 | 2026-09-15 — Staging created at staging.westlaketxmedspa.com, and /sitemap.xml live via a Cloudflare Worker — carries **gotchas** | [`2026-09-15-staging-and-sitemap.md`](./2026-09-15-staging-and-sitemap.md) |
 | 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at westlaketxmedspa.com, Sang added, republished with the cross-links fixed — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
 | 2026-09-03 | Previous status: eleven core pages REBUILT (second build, 2026-09-03 evening), local only | [`2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md`](./2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md) |

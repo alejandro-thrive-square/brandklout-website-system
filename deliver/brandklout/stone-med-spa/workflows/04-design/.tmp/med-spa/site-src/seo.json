@@ -1,26 +1,32 @@
 {
   "_note": [
     "ORIGIN IS THE CLIENT DOMAIN, westlaketxmedspa.com, since 2026-09-10.",
-    "It replaced the Railway review host (stone-med-spa-production), which Railway",
-    "detached when the domain was connected and which now 404s. PUBLIC_ORIGIN on the",
-    "Railway service lists both the apex and www — see",
+    "PUBLIC_ORIGIN on the Railway service lists both the apex and www - see",
     "deliver/process/20-instatic-domain-origins.",
     "",
-    "THE TRADING NAME IS STILL UNCONFIRMED. Asana says 'Stone Med Spa'; the live",
-    "Instagram account is @westlakeaesthetics, 'Westlake Medical Aesthetics'. If",
-    "the client picks the second, this file and the three partials carrying the",
-    "wordmark are the whole change."
+    "TRADING NAME: Westlake Medical Aesthetics, confirmed by the client's feedback",
+    "on 2026-09-15 (Asana 1218433345526563: 'Stone Med Spa becomes Westlake",
+    "Medical Aesthetics across the site').",
+    "",
+    "TITLES: someone set every page's title in the admin on 2026-09-12 to one",
+    "shared 'Westlake Medical Aesthetics | Westlake, TX & Dallas Forth Worth Area'",
+    "and one shared description. Their intent (the name, and the Dallas-Fort Worth",
+    "area) is kept below; the typo 'Forth' is not, and each page has its own title",
+    "again so search results can tell them apart.",
+    "",
+    "DR. STONE does not assess or treat patients here (Asana 1218433345526570).",
+    "No description below says she does."
   ],
   "site": {
-    "name": "Stone Med Spa",
+    "name": "Westlake Medical Aesthetics",
     "origin": "https://westlaketxmedspa.com",
     "ogImage": "/assets/m-hero.webp"
   },
   "organization": {
     "@type": "MedicalBusiness",
     "@id": "https://westlaketxmedspa.com/#practice",
-    "name": "Stone Med Spa",
-    "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+    "name": "Westlake Medical Aesthetics",
+    "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, restoration and facials, provided by licensed medical providers.",
     "medicalSpecialty": "Dermatology",
     "address": {
       "@type": "PostalAddress",
@@ -30,7 +36,11 @@
       "postalCode": "76262",
       "addressCountry": "US"
     },
-    "telephone": "+1-817-383-8361",
+    "telephone": "+1-817-918-3666",
+    "sameAs": [
+      "https://www.instagram.com/westlakeaesthetics/",
+      "https://www.tiktok.com/@westlakeaesthetic"
+    ],
     "availableLanguage": [
       "English",
       "Spanish"
@@ -48,53 +58,45 @@
         "opens": "09:00",
         "closes": "17:00"
       }
-    ],
-    "founder": {
-      "@type": "Physician",
-      "name": "Dr. Mona Stone, DDS",
-      "medicalSpecialty": "OralAndMaxillofacialSurgery"
-    }
+    ]
   },
   "pages": {
     "index": {
-      "title": "Stone Med Spa | Non-Surgical Facial Aesthetics in Westlake, TX",
-      "description": "Botox, fillers, Morpheus8 and PRP in Westlake, Texas — placed by Dr. Mona Stone, an oral and maxillofacial surgeon, not delegated. Book a 30-minute consultation.",
-      "ogTitle": "The surgeon does your injectables. Stone Med Spa, Westlake TX."
+      "title": "Westlake Medical Aesthetics | Westlake, TX & Dallas-Fort Worth Area",
+      "description": "Botox, fillers, Sculptra, Morpheus8, HydraFacials and more in Westlake, TX, serving Dallas-Fort Worth. Treatments by licensed medical providers.",
+      "ogTitle": "Westlake Medical Aesthetics, Westlake TX"
     },
     "about": {
-      "title": "About Stone Med Spa | Westlake, Texas",
-      "description": "One practice, one surgeon, three names. What Stone Med Spa is for, where it sits beside Stone Surgical Arts, and what happens in the room."
+      "title": "About Us | Westlake Medical Aesthetics",
+      "description": "The non-surgical sister practice to Stone Surgical Arts, in the same Westlake, TX building, with our own medical providers and our own menu."
     },
     "meet-the-doctor": {
-      "title": "Dr. Mona Stone, DDS | Stone Med Spa",
-      "description": "A board-certified oral and maxillofacial surgeon who plans facial aesthetics from the skeleton up — and who performs every injection herself.",
+      "title": "Dr. Mona Stone, DDS | Westlake Medical Aesthetics",
+      "description": "Dr. Mona Stone is a board-certified oral and maxillofacial surgeon at Stone Surgical Arts, our sister practice in the same Westlake building.",
       "schema": {
         "@type": "Physician",
         "name": "Dr. Mona Stone, DDS",
-        "medicalSpecialty": "OralAndMaxillofacialSurgery",
-        "worksFor": {
-          "@id": "https://westlaketxmedspa.com/#practice"
-        }
+        "medicalSpecialty": "OralAndMaxillofacialSurgery"
       }
     },
     "team": {
-      "title": "Meet the Team | Stone Med Spa, Westlake TX",
-      "description": "The people you will actually see — at the desk, in the treatment room and on the phone."
+      "title": "Our Team | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Meet Brooke, our nurse practitioner injector, and Abby, our medical esthetician, at Westlake Medical Aesthetics in Westlake, Texas."
     },
     "treatments": {
-      "title": "Treatments | Stone Med Spa, Westlake TX",
-      "description": "Seven non-surgical treatments, with the appointment length, when results show, how long they last and the downtime for each. Filter by what you want to change."
+      "title": "Treatments | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Injectables, skin rejuvenation, restoration and facials in Westlake, TX. Appointment length, results, longevity and downtime for each treatment."
     },
     "botox": {
-      "title": "Botox & Xeomin in Westlake, TX | Stone Med Spa",
-      "description": "Botox and Xeomin placed by an oral and maxillofacial surgeon in Westlake, TX. Fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
+      "title": "Botox & Xeomin in Westlake, TX | Westlake Medical Aesthetics",
+      "description": "Botox and Xeomin in Westlake, TX, placed by our nurse practitioner injector. About fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
       "schema": [
         {
           "@type": "MedicalProcedure",
           "name": "Botulinum toxin treatment (Botox, Xeomin)",
           "procedureType": "https://schema.org/NoninvasiveProcedure",
           "bodyLocation": "Face",
-          "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that fold the overlying skin, relaxing them for three to four months.",
+          "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that crease the overlying skin, relaxing them for three to four months.",
           "provider": {
             "@id": "https://westlaketxmedspa.com/#practice"
           }
@@ -104,10 +106,10 @@
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Does Botox hurt?",
+              "name": "Does it hurt?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "The needle is very fine and each injection takes about a second. Most patients describe it as a brief sting. No anaesthetic is needed for a standard upper-face treatment."
+                "text": "The needle is very fine and each injection takes about a second. Most patients describe a quick sting. No anesthetic is needed, and you can drive yourself home."
               }
             },
             {
@@ -115,15 +117,7 @@
               "name": "How soon will I see it?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Movement starts to soften at three to seven days and reaches its full effect at about fourteen days. Do not judge the result before two weeks."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What is the difference between Botox and Xeomin?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Both are botulinum toxin type A. Xeomin is formulated without the accessory proteins Botox carries, which is why it is often chosen for patients who appear to have stopped responding to Botox over time."
+                "text": "Movement starts to soften after three to seven days, and the full effect shows at about two weeks. We book your follow-up then."
               }
             },
             {
@@ -131,7 +125,23 @@
               "name": "Will I look frozen?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "That is a dosing and placement decision, not a property of the drug. Dr. Stone treats the specific muscles that are folding the skin and leaves the rest working, and a first treatment is deliberately conservative."
+                "text": "Not if it's dosed and placed well. We treat the muscles that are creasing the skin and leave the rest working, and we keep first treatments conservative."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when it wears off?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Your muscles gradually go back to how they worked before, and so do the lines. Nothing ends up worse than it was."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many units will I need?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on your muscles and the areas you want treated, so we can't say over the phone. You'll get your number and a quote after the assessment, before anything is injected."
               }
             }
           ]
@@ -139,23 +149,23 @@
       ]
     },
     "results": {
-      "title": "Results & Reviews | Stone Med Spa, Westlake TX",
-      "description": "What patients say about Dr. Stone, and an honest account of why the before-and-after gallery is not published yet."
+      "title": "Results & Reviews | Westlake Medical Aesthetics, Westlake TX",
+      "description": "What patients say about Westlake Medical Aesthetics in Westlake, Texas. Our new before-and-after gallery is coming soon."
     },
     "financing": {
-      "title": "Financing | Stone Med Spa, Westlake TX",
-      "description": "How patients spread the cost of non-surgical treatment, which third-party lenders the practice works with, and what each one is suited to."
+      "title": "Financing | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Finance your treatment at Westlake Medical Aesthetics with Cherry or CareCredit. Apply online in minutes, or pay at your visit."
     },
     "book": {
-      "title": "Book a Consultation | Stone Med Spa, Westlake TX",
-      "description": "Two ways to start: a video consultation from home, or thirty minutes in the Westlake office. Both are with Dr. Stone."
+      "title": "Book a Consultation | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Book a consultation with one of our medical providers, in our Westlake, TX office or by video. Serving the Dallas-Fort Worth area."
     },
     "membership": {
-      "title": "Membership | Stone Med Spa, Westlake TX",
-      "description": "Non-surgical results are a cadence, not an event. Two proposed membership tiers built around how often you actually come in."
+      "title": "Aesthetic & Wellness Membership | Westlake Medical Aesthetics",
+      "description": "$149 a month: a complimentary monthly facial, 10% off treatments and skincare, and access to member events. 90-day commitment, then 30 days' notice to cancel."
     },
     "thank-you": {
-      "title": "Thank You | Stone Med Spa",
+      "title": "Thank You | Westlake Medical Aesthetics",
       "description": "Your consultation request has been received.",
       "noindex": true
     }

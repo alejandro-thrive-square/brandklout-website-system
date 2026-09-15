@@ -7,18 +7,18 @@
 <!-- Title, description, Open Graph, canonical and JSON-LD are injected by
      build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
      edit seo.json and rebuild. -->
-<title>Stone Med Spa | Non-Surgical Facial Aesthetics in Westlake, TX</title>
-<meta name="description" content="Botox, fillers, Morpheus8 and PRP in Westlake, Texas — placed by Dr. Mona Stone, an oral and maxillofacial surgeon, not delegated. Book a 30-minute consultation.">
+<title>Westlake Medical Aesthetics | Westlake, TX &amp; Dallas-Fort Worth Area</title>
+<meta name="description" content="Botox, fillers, Sculptra, Morpheus8, HydraFacials and more in Westlake, TX, serving Dallas-Fort Worth. Treatments by licensed medical providers.">
 <link rel="canonical" href="https://westlaketxmedspa.com/">
-<meta property="og:site_name" content="Stone Med Spa">
+<meta property="og:site_name" content="Westlake Medical Aesthetics">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://westlaketxmedspa.com/">
-<meta property="og:title" content="The surgeon does your injectables. Stone Med Spa, Westlake TX.">
-<meta property="og:description" content="Botox, fillers, Morpheus8 and PRP in Westlake, Texas — placed by Dr. Mona Stone, an oral and maxillofacial surgeon, not delegated. Book a 30-minute consultation.">
+<meta property="og:title" content="Westlake Medical Aesthetics, Westlake TX">
+<meta property="og:description" content="Botox, fillers, Sculptra, Morpheus8, HydraFacials and more in Westlake, TX, serving Dallas-Fort Worth. Treatments by licensed medical providers.">
 <meta property="og:image" content="https://westlaketxmedspa.com/assets/m-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The surgeon does your injectables. Stone Med Spa, Westlake TX.">
-<meta name="twitter:description" content="Botox, fillers, Morpheus8 and PRP in Westlake, Texas — placed by Dr. Mona Stone, an oral and maxillofacial surgeon, not delegated. Book a 30-minute consultation.">
+<meta name="twitter:title" content="Westlake Medical Aesthetics, Westlake TX">
+<meta name="twitter:description" content="Botox, fillers, Sculptra, Morpheus8, HydraFacials and more in Westlake, TX, serving Dallas-Fort Worth. Treatments by licensed medical providers.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -26,8 +26,8 @@
     {
       "@type": "MedicalBusiness",
       "@id": "https://westlaketxmedspa.com/#practice",
-      "name": "Stone Med Spa",
-      "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+      "name": "Westlake Medical Aesthetics",
+      "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, restoration and facials, provided by licensed medical providers.",
       "medicalSpecialty": "Dermatology",
       "address": {
         "@type": "PostalAddress",
@@ -37,7 +37,11 @@
         "postalCode": "76262",
         "addressCountry": "US"
       },
-      "telephone": "+1-817-383-8361",
+      "telephone": "+1-817-918-3666",
+      "sameAs": [
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.tiktok.com/@westlakeaesthetic"
+      ],
       "availableLanguage": [
         "English",
         "Spanish"
@@ -55,12 +59,7 @@
           "opens": "09:00",
           "closes": "17:00"
         }
-      ],
-      "founder": {
-        "@type": "Physician",
-        "name": "Dr. Mona Stone, DDS",
-        "medicalSpecialty": "OralAndMaxillofacialSurgery"
-      }
+      ]
     }
   ]
 }
@@ -84,10 +83,10 @@
     if (!window.__smsBooted) document.documentElement.classList.remove('js');
   }, 2500);
 </script>
-<!-- No favicon file has been supplied and no med spa brand identity exists yet
-     (project-overview.md, "Brand identity"). This draws the wordmark's S on the
-     brand ivory so the tab is never a blank sheet. Replace when a mark arrives. -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+<!-- No favicon file has been supplied. The client's flyer shows a green serif W
+     beside the WESTLAKE wordmark; this draws that W on the brand ivory so the
+     tab is never a blank sheet. Replace with the real mark when a file arrives. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3EW%3C/text%3E%3C/svg%3E">
 
 </head>
 <body>
@@ -95,10 +94,12 @@
 <div class="page-wrapper">
 <!-- The navbar. Five links, the phone and the book button.
 
-     WHY THESE FIVE. The med spa sells a rhythm, not an operation, so the two
-     links a surgical site would never lead with — Membership and Results — are
-     in the bar rather than buried. Financing, About and the Team are reached
-     from the drawer and the footer, where there is room for everything.
+     WHY THESE FIVE. A med spa sells a routine rather than an operation, so
+     Membership and Results sit in the bar instead of being buried. "Our team"
+     replaced "Dr. Stone" on 2026-09-15: the client's feedback is that patients
+     are seen and treated by the practice's own providers, not by Dr. Stone, so
+     the bar leads to the people who actually treat you. Dr. Stone, Financing
+     and the rest are in the drawer and the footer.
 
      `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
      nothing everywhere else; build-site.mjs matches the token against the page
@@ -108,10 +109,10 @@
   <div class="padding-global">
     <div class="container-large">
       <div class="navbar_container">
-        <a class="navbar_logo-link" href="index.html" aria-label="Stone Med Spa, home">
+        <a class="navbar_logo-link" href="index.html" aria-label="Westlake Medical Aesthetics, home">
           <span class="brand_component">
-            <span class="brand_name">Stone</span>
-            <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+            <span class="brand_name">Westlake</span>
+            <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
           </span>
         </a>
 
@@ -119,14 +120,14 @@
           <a class="navbar_link" href="treatments.html">Treatments</a>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="membership.html">Membership</a>
-          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="team.html">Our team</a>
           <a class="navbar_link" href="about.html">About</a>
         </nav>
 
         <div class="navbar_actions">
-          <a class="navbar_phone" href="tel:+18173838361">
+          <a class="navbar_phone" href="tel:+18179183666">
             <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-            (817) 383-8361
+            (817) 918-3666
           </a>
           <a class="button is-small" href="book.html">Book a consultation</a>
           <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -140,15 +141,18 @@
 
 <!-- The mobile drawer. At 991px and below the navbar hides both its menu and
      its phone number, so this panel is the ONLY place a phone gets the number
-     without scrolling to the footer. It is not a menu, it is the mobile
-     contact card, and it lists every page because there is room here. -->
+     without scrolling to the footer. It lists every page because there is room.
+
+     No "Botox & Xeomin" link since 2026-09-15: the client asked for that tab to
+     be folded into All treatments (Asana 1218433345526567). The page itself
+     still exists and is reached from its row on /treatments. -->
 <div class="drawer_component" id="drawer">
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer_head">
       <span class="brand_component">
-        <span class="brand_name">Stone</span>
-        <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+        <span class="brand_name">Westlake</span>
+        <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
       </span>
       <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
     </div>
@@ -156,44 +160,37 @@
     <nav class="drawer_nav" aria-label="Mobile">
       <a class="drawer_link" href="index.html" aria-current="page">Home</a>
       <a class="drawer_link" href="treatments.html">All treatments</a>
-      <a class="drawer_link" href="botox.html">Botox &amp; Xeomin</a>
       <a class="drawer_link" href="results.html">Results &amp; reviews</a>
       <a class="drawer_link" href="membership.html">Membership</a>
       <a class="drawer_link" href="financing.html">Financing</a>
-      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
-      <a class="drawer_link" href="about.html">About the practice</a>
-      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="team.html">Our team</a>
+      <a class="drawer_link" href="about.html">About us</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Mona Stone</a>
       <a class="drawer_link" href="book.html">Book a consultation</a>
     </nav>
 
     <div class="drawer_foot">
       <a class="button" href="book.html">Book a consultation</a>
-      <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+      <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>
   </div>
 </div>
 
 <main class="main-wrapper" id="main">
-<!-- HOME, second build, 2026-09-03.
+<!-- HOME. Second build 2026-09-03; rewritten 2026-09-15 for the client's
+     feedback (Asana 1218408530306236): the Westlake Medical Aesthetics name,
+     four treatment categories, the practice's own providers in place of
+     Dr. Stone, and plainer copy.
 
-     The first build was eight sections and 450 words on flat ivory, and the
-     client's review was that it was not elevated enough: high-end interactions,
-     scroll-based animation, far more imagery, far less text, the colours used
-     differently. This is that. Nine chapters, about 260 words, nineteen
-     photographs, and every chapter moves.
-
-     THE COLOUR ORDER IS THE STRUCTURE. Dark hero, ivory, ivory, STONE, GREEN,
-     ivory, dark, ivory, dark close. Surgical Arts is ivory-and-Carrara with one
-     dark band; this page runs the same five colours as grounds in turn, and the
-     green chapter is the year grid — the signature object — because brand
-     green as a ground is the one thing the sibling never does. -->
+     THE COLOUR ORDER IS THE STRUCTURE. Dark hero, ivory, STONE, GREEN, ivory,
+     dark, ivory, dark close. The green chapter is the year grid, the site's
+     signature object. -->
 
 <!-- 00 THE HERO. Full-bleed photograph on charcoal, pinned: over one viewport
      of scroll the picture shrinks into a rounded frame and the headline lifts
-     away (data-hero-pin, 20-motion.js). The photograph is the previous site's
-     own masthead portrait — warm, sunlit, skin — and it is a model shown as a
-     person, per the rule at the top of treatments-data.mjs. -->
+     away (data-hero-pin, 20-motion.js). A model shown as a person, per the rule
+     at the top of treatments-data.mjs. -->
 <section class="section_hero hero_component" data-hero-pin>
   <figure class="hero_media" data-parallax="0">
     <img src="assets/m-glow-hat.webp" alt="" width="2200" height="1185" fetchpriority="high">
@@ -204,34 +201,33 @@
         <div class="hero_top">
           <p class="hero_meta">
             <span>Westlake, Texas</span>
-            <span>Non-surgical, by a surgeon</span>
+            <span>Serving Dallas&ndash;Fort Worth</span>
           </p>
         </div>
         <div class="hero_copy">
-          <p class="eyebrow is-alternate">Stone Med Spa</p>
-          <h1 class="hero_title" data-split data-split-now>Injectables, by the surgeon.</h1>
+          <p class="eyebrow is-alternate">Westlake Medical Aesthetics</p>
+          <h1 class="hero_title" data-split data-split-now>Look like you, only more rested.</h1>
           <p class="hero_lede">
-            Every injection here is placed by Dr. Mona Stone, a board-certified oral and
-            maxillofacial surgeon. Nothing is delegated.
+            Injectables, skin treatments and facials from licensed medical providers, in a
+            private office in Westlake.
           </p>
           <div class="button-group hero_actions">
             <a class="button" href="book.html">Book a consultation</a>
-            <a class="button is-alternate" href="treatments.html">The seven treatments</a>
+            <a class="button is-alternate" href="treatments.html">See our treatments</a>
           </div>
         </div>
         <div class="hero_foot">
           <p class="hero_scroll" aria-hidden="true"><span>Scroll</span><i></i></p>
-          <p class="hero_who">Dr. Mona Stone, DDS &middot; Oral &amp; maxillofacial surgeon</p>
+          <p class="hero_who">Sister practice to Stone Surgical Arts</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE TICKER. The seven treatments and how often each one recurs, as one
-     continuous strip. Generated from treatments-data.mjs, so it cannot list a
-     treatment the menu does not have. -->
-<section class="section_ticker marquee_component" aria-label="The seven treatments">
+<!-- THE TICKER. Every treatment and how often it recurs, as one continuous
+     strip. Generated from treatments-data.mjs. -->
+<section class="section_ticker marquee_component" aria-label="Our treatments">
   <div class="marquee_track" data-overflow-ok data-speed-px="55">
           <a class="marquee_item" href="treatments.html#botox">
             <span class="marquee_name">Botox | Xeomin</span>
@@ -245,6 +241,10 @@
             <span class="marquee_name">Dermal Fillers</span>
             <span class="marquee_cadence">every 6–18 months</span>
           </a>
+          <a class="marquee_item" href="treatments.html#sculptra">
+            <span class="marquee_name">Sculptra</span>
+            <span class="marquee_cadence">2–3 sessions, then every 2 years</span>
+          </a>
           <a class="marquee_item" href="treatments.html#morpheus8">
             <span class="marquee_name">Morpheus8</span>
             <span class="marquee_cadence">3, then yearly</span>
@@ -252,6 +252,10 @@
           <a class="marquee_item" href="treatments.html#chemical-peels">
             <span class="marquee_name">Chemical Peels</span>
             <span class="marquee_cadence">2–4 a year</span>
+          </a>
+          <a class="marquee_item" href="treatments.html#skinpen">
+            <span class="marquee_name">SkinPen Microneedling</span>
+            <span class="marquee_cadence">3–4 sessions, a month apart</span>
           </a>
           <a class="marquee_item" href="treatments.html#prp">
             <span class="marquee_name">PRP Treatment</span>
@@ -261,18 +265,30 @@
             <span class="marquee_name">Hair Restoration</span>
             <span class="marquee_cadence">every 6–12 months</span>
           </a>
+          <a class="marquee_item" href="treatments.html#hydrafacial">
+            <span class="marquee_name">HydraFacial</span>
+            <span class="marquee_cadence">monthly</span>
+          </a>
+          <a class="marquee_item" href="treatments.html#dermaplaning">
+            <span class="marquee_name">Dermaplaning</span>
+            <span class="marquee_cadence">every 4–6 weeks</span>
+          </a>
+          <a class="marquee_item" href="treatments.html#skin-boosters">
+            <span class="marquee_name">Skin Boosters</span>
+            <span class="marquee_cadence">3, then every 6 months</span>
+          </a>
   </div>
 </section>
 
-<!-- 01 THE PREMISE, as a statement and a mosaic. One sentence of argument, three
-     photographs drifting at their own speeds, three lines of why. -->
+<!-- 01 THE PREMISE, as a statement and a mosaic. Three photographs drifting at
+     their own speeds, three short reasons. -->
 <section class="section_mosaic mosaic_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="mosaic_head">
-          <p class="eyebrow">Why here</p>
-          <h2 class="heading-style-h2 mosaic_title" data-split>Anatomy is the <em class="text-style-display-accent">whole</em> job.</h2>
+          <p class="eyebrow">Why patients choose us</p>
+          <h2 class="heading-style-h2 mosaic_title" data-split>Care that starts with <em class="text-style-display-accent">listening</em>.</h2>
         </div>
         <div class="mosaic_grid">
           <figure class="mosaic_frame is-a" data-speed="0.35">
@@ -285,9 +301,9 @@
             <span class="wipe_frame" data-wipe><img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy"></span>
           </figure>
           <div class="mosaic_points" data-reveal="stagger">
-            <p class="mosaic_point"><span class="mosaic_num">01</span>She trained on the facial skeleton before she ever held a syringe.</p>
-            <p class="mosaic_point"><span class="mosaic_num">02</span>Nothing is delegated. Fewer appointments a week, all of them with her.</p>
-            <p class="mosaic_point"><span class="mosaic_num">03</span>She will tell you when the honest answer is surgery, because she does that too.</p>
+            <p class="mosaic_point"><span class="mosaic_num">01</span>Every plan starts with an assessment by one of our licensed medical providers.</p>
+            <p class="mosaic_point"><span class="mosaic_num">02</span>We start conservatively. It's easy to add a little at your follow-up.</p>
+            <p class="mosaic_point"><span class="mosaic_num">03</span>If surgery would serve you better, Stone Surgical Arts is in the same building.</p>
           </div>
         </div>
       </div>
@@ -295,7 +311,7 @@
   </div>
 </section>
 
-<!-- 02 THE SHELF. The menu as seven expanding panels on the stone ground.
+<!-- 02 THE SHELF. The four categories as expanding panels on the stone ground.
      Hover opens on a desktop; a tap opens on a phone and a second tap follows
      the link. Generated from treatments-data.mjs. -->
 <section class="section_shelf shelf_section" data-theme="stone">
@@ -304,120 +320,72 @@
       <div class="padding-section-large">
         <div class="shelf_head">
           <div>
-            <p class="eyebrow">The menu</p>
-            <h2 class="heading-style-h2" data-split>Seven treatments. <em class="text-style-display-accent">No more.</em></h2>
+            <p class="eyebrow">Our treatments</p>
+            <h2 class="heading-style-h2" data-split>Four ways to care for your <em class="text-style-display-accent">skin</em>.</h2>
           </div>
-          <a class="button is-secondary" href="treatments.html">The whole menu</a>
+          <a class="button is-secondary" href="treatments.html">All treatments</a>
         </div>
         <div class="shelf_component">
           <div class="shelf_item is-open">
-            <a class="shelf_link" href="treatments.html#botox" data-cursor="Open">
+            <a class="shelf_link" href="treatments.html#cat-injectables" data-cursor="Open">
               <figure class="shelf_media">
                 <img src="assets/m-injectables.webp" alt="" width="900" height="1125" loading="lazy">
               </figure>
               <span class="shelf_index">01</span>
-              <span class="shelf_vert">Botox | Xeomin</span>
+              <span class="shelf_vert">Injectables</span>
               <span class="shelf_body">
-                <span class="shelf_name">Botox | Xeomin</span>
+                <span class="shelf_name">Injectables</span>
                 <span class="shelf_meta">
-                  <span>15–20 min</span>
-                  <span>every 3–4 months</span>
+                  <span>four treatments</span>
+                  <span>Botox, Dysport &amp; Jeuveau, Dermal Fillers, Sculptra</span>
                 </span>
               </span>
             </a>
           </div>
           <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#dysport-jeuveau" data-cursor="Open">
-              <figure class="shelf_media">
-                <img src="assets/m-eyes-young.webp" alt="" width="900" height="1125" loading="lazy">
-              </figure>
-              <span class="shelf_index">02</span>
-              <span class="shelf_vert">Dysport &amp; Jeuveau</span>
-              <span class="shelf_body">
-                <span class="shelf_name">Dysport &amp; Jeuveau</span>
-                <span class="shelf_meta">
-                  <span>15–20 min</span>
-                  <span>every 3–4 months</span>
-                </span>
-              </span>
-            </a>
-          </div>
-          <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#dermal-fillers" data-cursor="Open">
-              <figure class="shelf_media">
-                <img src="assets/m-lips.webp" alt="" width="900" height="1125" loading="lazy">
-              </figure>
-              <span class="shelf_index">03</span>
-              <span class="shelf_vert">Dermal Fillers</span>
-              <span class="shelf_body">
-                <span class="shelf_name">Dermal Fillers</span>
-                <span class="shelf_meta">
-                  <span>30–45 min</span>
-                  <span>every 6–18 months</span>
-                </span>
-              </span>
-            </a>
-          </div>
-          <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#morpheus8" data-cursor="Open">
+            <a class="shelf_link" href="treatments.html#cat-skin" data-cursor="Open">
               <figure class="shelf_media">
                 <img src="assets/m-jawline.webp" alt="" width="900" height="1125" loading="lazy">
               </figure>
-              <span class="shelf_index">04</span>
-              <span class="shelf_vert">Morpheus8</span>
+              <span class="shelf_index">02</span>
+              <span class="shelf_vert">Skin Rejuvenation</span>
               <span class="shelf_body">
-                <span class="shelf_name">Morpheus8</span>
+                <span class="shelf_name">Skin Rejuvenation</span>
                 <span class="shelf_meta">
-                  <span>45–60 min</span>
-                  <span>3, then yearly</span>
+                  <span>three treatments</span>
+                  <span>Morpheus8, Chemical Peels, SkinPen Microneedling</span>
                 </span>
               </span>
             </a>
           </div>
           <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#chemical-peels" data-cursor="Open">
-              <figure class="shelf_media">
-                <img src="assets/m-skin-glow.webp" alt="" width="900" height="1125" loading="lazy">
-              </figure>
-              <span class="shelf_index">05</span>
-              <span class="shelf_vert">Chemical Peels</span>
-              <span class="shelf_body">
-                <span class="shelf_name">Chemical Peels</span>
-                <span class="shelf_meta">
-                  <span>30–45 min</span>
-                  <span>2–4 a year</span>
-                </span>
-              </span>
-            </a>
-          </div>
-          <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#prp" data-cursor="Open">
+            <a class="shelf_link" href="treatments.html#cat-restoration" data-cursor="Open">
               <figure class="shelf_media">
                 <img src="assets/m-freckles.webp" alt="" width="900" height="1125" loading="lazy">
               </figure>
-              <span class="shelf_index">06</span>
-              <span class="shelf_vert">PRP Treatment</span>
+              <span class="shelf_index">03</span>
+              <span class="shelf_vert">Restoration</span>
               <span class="shelf_body">
-                <span class="shelf_name">PRP Treatment</span>
+                <span class="shelf_name">Restoration</span>
                 <span class="shelf_meta">
-                  <span>45–60 min</span>
-                  <span>3, then 2 a year</span>
+                  <span>two treatments</span>
+                  <span>PRP Treatment, Hair Restoration</span>
                 </span>
               </span>
             </a>
           </div>
           <div class="shelf_item">
-            <a class="shelf_link" href="treatments.html#hair-restoration" data-cursor="Open">
+            <a class="shelf_link" href="treatments.html#cat-facials" data-cursor="Open">
               <figure class="shelf_media">
-                <img src="assets/m-man-suit.webp" alt="" width="900" height="1125" loading="lazy">
+                <img src="assets/m-cheek.webp" alt="" width="900" height="1125" loading="lazy">
               </figure>
-              <span class="shelf_index">07</span>
-              <span class="shelf_vert">Hair Restoration</span>
+              <span class="shelf_index">04</span>
+              <span class="shelf_vert">Facials</span>
               <span class="shelf_body">
-                <span class="shelf_name">Hair Restoration</span>
+                <span class="shelf_name">Facials</span>
                 <span class="shelf_meta">
-                  <span>45–60 min</span>
-                  <span>every 6–12 months</span>
+                  <span>three treatments</span>
+                  <span>HydraFacial, Dermaplaning, Skin Boosters</span>
                 </span>
               </span>
             </a>
@@ -428,21 +396,21 @@
   </div>
 </section>
 
-<!-- 03 THE RHYTHM. The signature object on the signature ground: the year
-     grid, on brand green. The dots pop in month by month as it arrives. -->
+<!-- 03 THE RHYTHM. The year grid, on brand green. The dots pop in month by
+     month as it arrives. -->
 <section class="section_cadence cadence_component" data-theme="green">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="cadence_head">
           <div>
-            <p class="eyebrow">The rhythm</p>
-            <h2 class="heading-style-h2" data-split>A year, not <em class="text-style-display-accent">an event</em>.</h2>
+            <p class="eyebrow">Plan ahead</p>
+            <h2 class="heading-style-h2" data-split>Great skin is a <em class="text-style-display-accent">routine</em>.</h2>
           </div>
           <div class="cadence_stats">
-            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="4">4</span></span><span>visits a year is the usual cadence</span></p>
-            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="15">15</span> min</span><span>the shortest appointment on the menu</span></p>
-            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="0">0</span></span><span>treatments here that need an incision</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="4">4</span></span><span>visits a year is typical for injectables</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="15">15</span> min</span><span>our shortest appointment</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="12">12</span></span><span>facials a year with membership</span></p>
           </div>
         </div>
         <div data-in>
@@ -464,8 +432,27 @@
           </div>
           <div class="cadence_row">
             <span class="cadence_label">
+              <span class="cadence_label-name">Monthly facial</span>
+              <span class="cadence_label-interval">Included with membership</span>
+            </span>
+            <span class="cadence_run is-run-facial"></span>
+            <span class="cadence_cell is-m1"><span class="cadence_dot is-start"><span class="u-sr-only">First appointment: Jan</span></span></span>
+            <span class="cadence_cell is-m2"><span class="cadence_dot"><span class="u-sr-only">Appointment: Feb</span></span></span>
+            <span class="cadence_cell is-m3"><span class="cadence_dot"><span class="u-sr-only">Appointment: Mar</span></span></span>
+            <span class="cadence_cell is-m4"><span class="cadence_dot"><span class="u-sr-only">Appointment: Apr</span></span></span>
+            <span class="cadence_cell is-m5"><span class="cadence_dot"><span class="u-sr-only">Appointment: May</span></span></span>
+            <span class="cadence_cell is-m6"><span class="cadence_dot"><span class="u-sr-only">Appointment: Jun</span></span></span>
+            <span class="cadence_cell is-m7"><span class="cadence_dot"><span class="u-sr-only">Appointment: Jul</span></span></span>
+            <span class="cadence_cell is-m8"><span class="cadence_dot"><span class="u-sr-only">Appointment: Aug</span></span></span>
+            <span class="cadence_cell is-m9"><span class="cadence_dot"><span class="u-sr-only">Appointment: Sep</span></span></span>
+            <span class="cadence_cell is-m10"><span class="cadence_dot"><span class="u-sr-only">Appointment: Oct</span></span></span>
+            <span class="cadence_cell is-m11"><span class="cadence_dot"><span class="u-sr-only">Appointment: Nov</span></span></span>
+            <span class="cadence_cell is-m12"><span class="cadence_dot"><span class="u-sr-only">Appointment: Dec</span></span></span>
+          </div>
+          <div class="cadence_row">
+            <span class="cadence_label">
               <span class="cadence_label-name">Botox | Xeomin</span>
-              <span class="cadence_label-interval">Every 3 to 4 months, indefinitely</span>
+              <span class="cadence_label-interval">Every 3 to 4 months</span>
             </span>
             <span class="cadence_run is-run-botox"></span>
             <span class="cadence_cell is-m1"><span class="cadence_dot is-start"><span class="u-sr-only">First appointment: Jan</span></span></span>
@@ -567,24 +554,28 @@
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Jan</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Botox | Xeomin</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Feb</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Dermal Fillers</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Mar</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Morpheus8</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Apr</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Botox | Xeomin</li>
               <li>Morpheus8</li>
             </ul>
@@ -592,18 +583,21 @@
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">May</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Morpheus8</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Jun</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Chemical Peels</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Jul</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Botox | Xeomin</li>
               <li>PRP Treatment</li>
             </ul>
@@ -611,12 +605,14 @@
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Aug</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>PRP Treatment</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Sep</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Chemical Peels</li>
               <li>PRP Treatment</li>
             </ul>
@@ -624,31 +620,34 @@
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Oct</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Botox | Xeomin</li>
             </ul>
           </div>
           <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Nov</span>
             <ul class="cadence_bymonth-list">
+              <li>Monthly facial</li>
               <li>Dermal Fillers</li>
             </ul>
           </div>
-          <div class="cadence_bymonth-item is-empty">
+          <div class="cadence_bymonth-item">
             <span class="cadence_bymonth-month">Dec</span>
             <ul class="cadence_bymonth-list">
-              <li>Nothing due</li>
+              <li>Monthly facial</li>
             </ul>
           </div>
         </div>
         </div>
-        <p class="cadence_foot">A sample plan for someone starting in January. Yours is written at the consultation.</p>
+        <p class="cadence_foot">A sample plan for someone starting in January. Your provider will build yours with you at your consultation.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 04 THE SURGEON. Her portrait, a second frame drifting over its corner,
-     and three counted facts. The full page is one click away. -->
+<!-- 04 THE PROVIDERS. Brooke's portrait, a second frame drifting over its
+     corner, and three counted facts. Until 2026-09-15 this chapter was about
+     Dr. Stone as the injector; the client's feedback is that she is not. -->
 <section class="section_surgeon surgeon_component">
   <div class="padding-global">
     <div class="container-large">
@@ -656,27 +655,27 @@
         <div class="surgeon_grid">
           <div class="surgeon_media">
             <figure class="surgeon_frame" data-wipe>
-              <span class="wipe_inner" data-parallax="10"><img src="assets/dr-stone-coat.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="1000" height="1482" loading="lazy"></span>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/staff-brooke.webp" alt="Brooke, nurse practitioner injector at Westlake Medical Aesthetics" width="800" height="1000" loading="lazy"></span>
             </figure>
             <figure class="surgeon_frame-small" data-speed="-0.25">
-              <img src="assets/dr-stone-candid.webp" alt="" width="457" height="457" loading="lazy">
+              <img src="assets/ssa-treatment-room.webp" alt="" width="2133" height="1200" loading="lazy">
             </figure>
           </div>
           <div class="surgeon_copy">
-            <p class="eyebrow">Your injector</p>
-            <h2 class="heading-style-h2" data-split>She learned the face from the <em class="text-style-display-accent">inside</em>.</h2>
+            <p class="eyebrow">Your providers</p>
+            <h2 class="heading-style-h2" data-split>Meet the people who <em class="text-style-display-accent">treat you</em>.</h2>
             <p class="text-size-medium surgeon_text" data-reveal>
-              Oral and maxillofacial surgery is the specialty of the facial bones and the tissue
-              over them. Dr. Stone came to aesthetics from underneath, which is why her first
-              doses are smaller and her consultations longer.
+              Brooke is our nurse practitioner and injector. Abby, our medical esthetician,
+              looks after facials and skin treatments. Your first visit is a consultation with
+              one of them.
             </p>
             <div class="surgeon_facts" data-reveal="stagger">
-              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="100" data-suffix="%">100%</span></span><span>of injections placed by her</span></p>
-              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="30">30</span></span><span>minute consultation, with her</span></p>
-              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>languages at the chair</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>licensed medical providers</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="12">12</span></span><span>treatments on our menu</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>languages spoken, English and Spanish</span></p>
             </div>
             <div class="button-group" data-reveal>
-              <a class="button is-secondary" href="meet-the-doctor.html">Meet Dr. Stone</a>
+              <a class="button is-secondary" href="team.html">Meet the team</a>
             </div>
           </div>
         </div>
@@ -686,18 +685,19 @@
 </section>
 
 <!-- 05 THE WORDS. The one dark chapter in the middle: a sentence whose last
-     word keeps changing, and a rail of reviews you drag. -->
+     word keeps changing, and a rail of reviews you drag. The reviews are still
+     placeholders pending a verbatim pull from Google; each one says so. -->
 <section class="section_words words_section" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <h2 class="words_title" data-reveal>
-          You will look
+          You'll look
           <span class="words_component" data-words="2200" aria-label="rested">
             <span class="words_item text-style-display-accent">rested.</span>
             <span class="words_item text-style-display-accent">like yourself.</span>
-            <span class="words_item text-style-display-accent">awake.</span>
-            <span class="words_item text-style-display-accent">not done.</span>
+            <span class="words_item text-style-display-accent">refreshed.</span>
+            <span class="words_item text-style-display-accent">natural.</span>
           </span>
         </h2>
         <div class="words_rail-head" data-drag-scope>
@@ -713,20 +713,20 @@
   <div class="padding-global">
     <div class="words_rail" data-drag data-cursor="Drag" data-overflow-ok>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;She talked me out of half of what I came in asking for.&rdquo;</p>
+        <p class="quote_text">&ldquo;They talked me out of half of what I came in asking for, and I'm glad they did.&rdquo;</p>
         <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;Nobody can tell. That was the entire point.&rdquo;</p>
+        <p class="quote_text">&ldquo;Nobody can tell I had anything done. That was the whole point.&rdquo;</p>
         <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
       </article>
       <article class="quote_card">
-        <p class="quote_text">&ldquo;A surgeon, for the price of a med spa appointment.&rdquo;</p>
+        <p class="quote_text">&ldquo;Friendly, unhurried, and they explained everything before we started.&rdquo;</p>
         <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
       </article>
       <article class="quote_card is-link">
         <a class="quote_link" href="results.html">
-          <span class="quote_text">All reviews, and what we cannot show you yet.</span>
+          <span class="quote_text">Read more reviews.</span>
           <span class="button is-link">Results <span class="button_arrow">&rarr;</span></span>
         </a>
       </article>
@@ -742,24 +742,24 @@
       <div class="padding-section-large">
         <div class="place_grid">
           <div class="place_copy">
-            <p class="eyebrow">The place</p>
-            <h2 class="heading-style-h2" data-split>One suite in <em class="text-style-display-accent">Westlake</em>.</h2>
+            <p class="eyebrow">Visit us</p>
+            <h2 class="heading-style-h2" data-split>One office in <em class="text-style-display-accent">Westlake</em>.</h2>
             <p class="text-size-medium place_text" data-reveal>
-              Not a chain. One suite off 114 with parking at the door, a desk, a consultation
-              room and treatment rooms.
+              We're a single, private office off Highway 114, in the same building as Stone
+              Surgical Arts, with parking right outside.
             </p>
             <dl class="place_facts" data-reveal="stagger">
               <div><dt>Address</dt><dd><a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110, Westlake, TX 76262</a></dd></div>
               <div><dt>Hours</dt><dd>Monday to Friday, 9 to 5. Saturday by appointment.</dd></div>
-              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18173838361">(817) 383-8361</a></dd></div>
+              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18179183666">(817) 918-3666</a></dd></div>
             </dl>
           </div>
           <div class="place_media">
             <figure class="place_frame is-large" data-wipe>
-              <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-front-desk.webp" alt="The front desk at the Westlake practice" width="2133" height="1200" loading="lazy"></span>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-front-desk.webp" alt="The front desk at the Westlake office" width="2133" height="1200" loading="lazy"></span>
             </figure>
             <figure class="place_frame is-small" data-speed="-0.3">
-              <span class="wipe_frame" data-wipe><img src="assets/ssa-neon.webp" alt="The neon sign in the practice" width="2133" height="1200" loading="lazy"></span>
+              <span class="wipe_frame" data-wipe><img src="assets/ssa-neon.webp" alt="The neon sign in the office" width="2133" height="1200" loading="lazy"></span>
             </figure>
           </div>
         </div>
@@ -770,11 +770,11 @@
 
 <!-- The closing invitation, on every page that does not end on its own.
 
-     Not the Surgical Arts band (copy on Carrara, the portrait at right) and
-     not the first build's marble either. Charcoal with a green light under
-     it, one display line that splits in, two buttons, three plain facts about
-     what a consultation is — the objection this answers, "what am I
-     committing to", is the one that stops a non-surgical booking. -->
+     Charcoal with a green light under it, one display line that splits in, two
+     buttons, and three plain facts about what a consultation is. The objection
+     it answers, "what am I committing to", is the one that stops a
+     non-surgical booking. Since 2026-09-15 the consultation is with one of the
+     practice's medical providers, not with Dr. Stone. -->
 <section class="section_close close_component" id="contact" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -782,24 +782,24 @@
         <div class="close_inner">
           <div>
             <p class="eyebrow">Start here</p>
-            <h2 class="heading-style-h2 close_title" data-split>One appointment. A plan for the <em class="text-style-display-accent">year</em>.</h2>
+            <h2 class="heading-style-h2 close_title" data-split>Start with a consultation and a plan for the <em class="text-style-display-accent">year</em>.</h2>
             <div class="button-group close_actions" data-reveal>
               <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-alternate" href="tel:+18173838361">Call (817) 383-8361</a>
+              <a class="button is-alternate" href="tel:+18179183666">Call (817) 918-3666</a>
             </div>
           </div>
           <div class="close_facts" data-reveal="stagger">
             <div class="close_fact">
-              <span class="close_fact-key">30 minutes</span>
-              <span class="close_fact-val">With Dr. Stone, not a coordinator.</span>
+              <span class="close_fact-key">A medical provider</span>
+              <span class="close_fact-val">Every consultation is with one of our licensed providers.</span>
             </div>
             <div class="close_fact">
               <span class="close_fact-key">No obligation</span>
-              <span class="close_fact-val">You leave with a written plan. Starting that day is your call.</span>
+              <span class="close_fact-val">You'll leave with a written plan. Whether you start that day is up to you.</span>
             </div>
             <div class="close_fact">
-              <span class="close_fact-key">Video or in person</span>
-              <span class="close_fact-val">A first consultation can be by video. Anything injected happens in Westlake.</span>
+              <span class="close_fact-key">In person or by video</span>
+              <span class="close_fact-val">Your first consultation can be by video. Treatments happen in our Westlake office.</span>
             </div>
           </div>
         </div>
@@ -812,18 +812,16 @@
 <!-- The three-column footer, on the shared 22-footer.css from the Surgical Arts
      build. The stylesheet is shared; the contents are this brand's.
 
-     NAP, AND IT IS NOT SETTLED. project-overview.md records the med spa's phone
-     as (817) 383-8361 and its suite as #110A. The Surgical Arts footer carries
-     a comment saying those exact two values were the SISTER practice's and were
-     wrong there. So one of two things is true: either the med spa genuinely
-     shares the implant centre's line, or the med spa overview inherited the
-     same bad pair. The address is the one part confirmed on every recovered
-     page: 72 Andorra Dr, Westlake, TX 76262.
+     NAP, SETTLED 2026-09-15. The phone is (817) 918-3666, from the client's own
+     Westlake Medical Aesthetics membership flyer (attached to Asana subtask
+     1218433345526566) and matching CareCredit's listing for the practice at
+     72 Andorra Dr Ste 110. The old (817) 383-8361 came from this pillar's
+     project overview and was always flagged as possibly the implant centre's.
+     Suite #110 is on the flyer too.
 
-     The suite is written #110 here, matching Surgical Arts' verified footer,
-     and the phone is left at 383-8361 because that is what this pillar's own
-     overview records. BOTH need one line of confirmation from the client
-     before a domain goes live. See HANDOFF.md. -->
+     SOCIALS are the two on the flyer: Instagram @westlakeaesthetics and TikTok
+     @westlakeaesthetic (no s). The Stone Surgical Arts Facebook page it used to
+     link is the sister practice's, not this one's. -->
 <footer class="footer_component" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -831,13 +829,12 @@
         <nav class="footer_nav" aria-label="Footer">
           <a href="index.html" aria-current="page">Home</a>
           <a href="treatments.html">All treatments</a>
-          <a href="botox.html">Botox &amp; Xeomin</a>
           <a href="results.html">Results &amp; reviews</a>
           <a href="membership.html">Membership</a>
           <a href="financing.html">Financing</a>
-          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="team.html">Our team</a>
           <a href="about.html">About</a>
-          <a href="team.html">The team</a>
+          <a href="meet-the-doctor.html">Dr. Mona Stone</a>
           <a href="book.html">Book a consultation</a>
         </nav>
         <div class="footer_top">
@@ -848,22 +845,22 @@
             </div>
             <div class="footer_item">
               <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18173838361">(817) 383-8361</a>
+              <a href="tel:+18179183666">(817) 918-3666</a>
             </div>
             <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_brand">
             <span class="brand_component is-large">
-              <span class="brand_name">Stone</span>
-              <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+              <span class="brand_name">Westlake</span>
+              <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
             </span>
             <div class="footer_socials">
-              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Stone Med Spa on Instagram" rel="noopener">
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
               </a>
-              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone on Facebook" rel="noopener">
-                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              <a class="footer_social" href="https://www.tiktok.com/@westlakeaesthetic" aria-label="Westlake Medical Aesthetics on TikTok" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16.6 3c.4 2.3 1.8 3.8 4.1 4v3.1c-1.5.1-2.8-.4-4.1-1.2v6.2c0 3.9-3.3 6.4-6.8 5.6-4.4-1-5.3-7-1.3-9.2 1.1-.6 2.2-.8 3.4-.6v3.3c-.5-.2-1-.2-1.6 0-1.4.5-1.7 2.4-.6 3.3 1.3 1.1 3.6.3 3.6-1.9V3h3.3Z" fill="currentColor"/></svg>
               </a>
             </div>
             <a class="footer_switch" href="https://www.dfwsurgicalarts.com/" rel="noopener">
@@ -885,13 +882,13 @@
         <div class="footer_signature">
           <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
             <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
-            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">W</text>
           </svg>
-          <p class="footer_signature-words">Maintain. Refine. Return.</p>
+          <p class="footer_signature-words">Save monthly. Glow always.</p>
         </div>
 
         <div class="footer_legal">
-          <span>&copy; <span data-year>2026</span> Stone Med Spa. All rights reserved.</span>
+          <span>&copy; <span data-year>2026</span> Westlake Medical Aesthetics. All rights reserved.</span>
           <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
           <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
           <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>

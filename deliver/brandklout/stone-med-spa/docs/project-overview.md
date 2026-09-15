@@ -3,7 +3,7 @@
 | Field | Value |
 | :--- | :--- |
 | **Client** | Stone Med Spa — the non-surgical pillar of Dr. Mona Stone's practice |
-| **Trading name** | Unconfirmed. Instagram calls it **Westlake Medical Aesthetics**; Asana calls it *Stone Med Spa*. Nobody has told us which is the brand. |
+| **Trading name** | **Westlake Medical Aesthetics** — confirmed by the client's feedback, 2026-09-15 (Asana `1218433345526563`: "Stone Med Spa becomes Westlake Medical Aesthetics across the site"). The folder and worktree keep the old name. |
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Asana task** | [`1217160668112180`](https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112180) — "Build New Stone Med Spa" |
 | **Asana project** | `BK Activation - Stone Dental Implant Center` `1213901750672059` |
@@ -80,7 +80,7 @@ Everything below came from public research and the archived site, not from a bri
 | :--- | :--- |
 | **Surgeon** | Dr. Mona Stone, DDS — board-certified oral & maxillofacial surgeon, the sole provider behind all three names |
 | **Address** | 72 Andorra Dr #110A, Westlake, TX 76262 |
-| **Phone** | (817) 383-8361 |
+| **Phone** | **(817) 918-3666** since 2026-09-15 — on the client's own membership flyer and on CareCredit's listing for the practice at 72 Andorra Dr Ste 110. The (817) 383-8361 recorded here before was never confirmed. |
 | **Brand identity** | **Does not exist as far as we can find.** No logo, palette or type system for a med spa brand. If identity is ours it sits on the critical path ahead of design. |
 | **Domain** | None chosen. `stonesurgicalarts.com` currently resolves to the implant centre and is already contested by the Surgical Arts build. |
 | **Content** | Recoverable from the Wayback archive — see [`archived-urls-medspa.md`](../workflows/00-client-delivery-initialization/.tmp/archived-urls-medspa.md). `web.archive.org` was blocking this IP as of 2026-08-30. |

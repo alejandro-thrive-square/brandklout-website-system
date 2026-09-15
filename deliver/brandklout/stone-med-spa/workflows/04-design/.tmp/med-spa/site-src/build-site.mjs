@@ -1,4 +1,5 @@
-// Assembles the Stone Med Spa site into ../final-site.
+// Assembles the Westlake Medical Aesthetics site (built as "Stone Med Spa",
+// renamed 2026-09-15) into ../final-site.
 //
 // Same shape as the Stone Surgical Arts and Dr. Nahlah builds, deliberately, so
 // every Instatic site in this repo is maintained the same way:
@@ -12,10 +13,10 @@
 //   seo.json            title, description, canonical, Open Graph and JSON-LD
 //                       per page. The head partial carries none of it.
 //
-// WHAT IS DIFFERENT HERE: treatments-data.mjs. The menu is seven records, and
-// five separate things on the site are views of those same seven — the home
-// ticker, the home shelf, the menu rows, the concern pills, and the vitals rail
-// on a treatment page. All five are GENERATED below rather than hand-written, so a
+// WHAT IS DIFFERENT HERE: treatments-data.mjs. The menu is twelve records in
+// four categories (seven records in three until 2026-09-15), and five separate
+// things on the site are views of them — the home ticker, the home shelf, the
+// menu rows, the concern pills, and the vitals rail on a treatment page. All five are GENERATED below rather than hand-written, so a
 // treatment cannot appear on the menu with one interval and in the year grid
 // with another. The sibling site learned this the expensive way: it had a
 // treatments-data.mjs, the pages drifted from it, and it was deleted.
@@ -93,27 +94,33 @@ function ticker() {
   ).join("\n");
 }
 
-/** The shelf: the seven treatments as expanding panels, each carrying its
-    portrait, its appointment length and its cadence. The home page's menu. */
+/** The shelf: the four categories as expanding panels, each carrying its
+    portrait, how many treatments it holds and their names. The home page's
+    menu. It was one panel per treatment until the menu grew to twelve on
+    2026-09-15; twelve panels in one row leaves each closed panel too narrow to
+    carry its vertical name, and the client asked for the four categories. */
+const countWord = ["zero", "one", "two", "three", "four", "five", "six"];
 function shelf() {
-  return TREATMENTS.map(
-    (t, i) => `          <div class="shelf_item${i === 0 ? " is-open" : ""}">
-            <a class="shelf_link" href="treatments.html#${t.slug}" data-cursor="Open">
+  return CATEGORIES.map((c, i) => {
+    const items = byCategory(c.id);
+    const n = countWord[items.length] || String(items.length);
+    return `          <div class="shelf_item${i === 0 ? " is-open" : ""}">
+            <a class="shelf_link" href="treatments.html#cat-${c.id}" data-cursor="Open">
               <figure class="shelf_media">
-                <img src="assets/${t.portrait}" alt="" width="900" height="1125" loading="lazy">
+                <img src="assets/${c.portrait}" alt="" width="900" height="1125" loading="lazy">
               </figure>
               <span class="shelf_index">0${i + 1}</span>
-              <span class="shelf_vert">${esc(t.name)}</span>
+              <span class="shelf_vert">${esc(c.name)}</span>
               <span class="shelf_body">
-                <span class="shelf_name">${esc(t.name)}</span>
+                <span class="shelf_name">${esc(c.name)}</span>
                 <span class="shelf_meta">
-                  <span>${esc(t.appointment)}</span>
-                  <span>${esc(t.cadence)}</span>
+                  <span>${esc(n)} treatment${items.length === 1 ? "" : "s"}</span>
+                  <span>${esc(items.map((t) => t.name.split(" | ")[0]).join(", "))}</span>
                 </span>
               </span>
             </a>
-          </div>`
-  ).join("\n");
+          </div>`;
+  }).join("\n");
 }
 
 /** The concern pills. Buttons, not links — they filter, they do not navigate. */
@@ -141,7 +148,7 @@ const concernNames = (t) =>
 function ledgerRow(t, index) {
   const link = t.page
     ? `<a class="button is-link" href="${t.page}">Read the full page <span class="button_arrow">&rarr;</span></a>`
-    : `<span class="row_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>`;
+    : `<span class="row_nopage">Ask about this treatment at your consultation and we'll go through it with you.</span>`;
   const vital = (key, val) =>
     `<span class="row_vital"><span class="row_vital-key">${key}</span><span class="row_vital-val">${esc(val)}</span></span>`;
   return `          <details class="row_component" id="${t.slug}" data-treatment data-concerns="${t.concerns.join(" ")}">
@@ -209,13 +216,19 @@ ${byCategory(c.id)
    says so; it is not this practice's protocol and clinical review is
    outstanding on every interval in it (see treatments-data.mjs).
 
-   Five rows, not seven. Seven rows of dots is a chart nobody reads, and the two
-   left out — Dysport & Jeuveau, and Hair Restoration — are the two that would
-   duplicate a row already there (they run the same cadence as Botox and as PRP
-   respectively). If a sixth is ever wanted, add it here; the grid grows. */
+   Six rows, not twelve. Twelve rows of dots is a chart nobody reads; the rows
+   left out would duplicate a cadence already shown. If another is wanted, add
+   it here; the grid grows.
+
+   THE FIRST ROW IS THE MEMBERSHIP'S MONTHLY FACIAL, added 2026-09-15 with the
+   single $149 plan. It is labelled as "Monthly facial" rather than as a named
+   treatment because the client's flyer says "complimentary monthly facial"
+   and does not say which one. A row may carry `label` for exactly that
+   reason; otherwise the label is the treatment's name. */
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const PLAN = [
-  { slug: "botox", note: "Every 3 to 4 months, indefinitely", months: [1, 4, 7, 10] },
+  { slug: "facial", label: "Monthly facial", note: "Included with membership", months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+  { slug: "botox", note: "Every 3 to 4 months", months: [1, 4, 7, 10] },
   { slug: "dermal-fillers", note: "Topped up at about a year", months: [2, 11] },
   { slug: "morpheus8", note: "A series of three, a month apart", months: [3, 4, 5] },
   { slug: "chemical-peels", note: "Twice, out of the strong sun", months: [6, 9] },
@@ -223,7 +236,7 @@ const PLAN = [
 ];
 
 function cadenceGrid() {
-  const name = (slug) => TREATMENTS.find((t) => t.slug === slug).name;
+  const label = (row) => row.label || TREATMENTS.find((t) => t.slug === row.slug).name;
 
   const header = `          <div class="cadence_months">
             <span class="cadence_months-spacer">Treatment</span>
@@ -252,7 +265,7 @@ ${MONTHS.map((m) => `            <span class="cadence_month">${m}</span>`).join(
     }).join("\n");
     return `          <div class="cadence_row">
             <span class="cadence_label">
-              <span class="cadence_label-name">${esc(name(row.slug))}</span>
+              <span class="cadence_label-name">${esc(label(row))}</span>
               <span class="cadence_label-interval">${esc(row.note)}</span>
             </span>
 ${run}${cells}
@@ -264,7 +277,7 @@ ${run}${cells}
   // months in which you do not come in.
   const byMonth = MONTHS.map((m, i) => {
     const month = i + 1;
-    const due = PLAN.filter((r) => r.months.indexOf(month) !== -1).map((r) => name(r.slug));
+    const due = PLAN.filter((r) => r.months.indexOf(month) !== -1).map((r) => label(r));
     const empty = due.length === 0;
     const items = empty
       ? `              <li>Nothing due</li>`

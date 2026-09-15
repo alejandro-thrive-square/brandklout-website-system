@@ -39,6 +39,17 @@
 .people_card:nth-child(4n + 4) {
   margin-top: 1.5rem;
 }
+/* TWO PEOPLE, since 2026-09-15. The client kept Brooke and Abby and removed
+   every other profile; two cards in a four-column grid left half the row
+   empty. `is-pair` sets them as two generous columns, the second one dropped
+   by the same stagger the four-up grid used. */
+.people_grid.is-pair {
+  grid-template-columns: repeat(2, minmax(0, 24rem));
+  gap: 2.5rem 3rem;
+}
+.people_grid.is-pair .people_name {
+  font-size: var(--size-h4);
+}
 .people_portrait {
   margin: 0;
   aspect-ratio: 4 / 5;

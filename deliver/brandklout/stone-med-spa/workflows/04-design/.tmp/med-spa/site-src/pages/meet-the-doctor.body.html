@@ -1,39 +1,39 @@
-<!-- MEET THE DOCTOR — Asana subtask 3 of 11. Second build, 2026-09-03.
+<!-- MEET THE DOCTOR — Asana subtask 3 of 11. Second build 2026-09-03;
+     reframed 2026-09-15 by the client's "Consultation language" feedback
+     (1218433345526570): patients are assessed by the practice's medical
+     providers, "not by Dr. Stone, nor does she do the injections".
 
-     The first build was a split header, a credential strip and two text bands.
-     This is four chapters and about 170 words: a full-height cover on her
-     portrait with three counted facts; her three rules as cards that STACK on
-     top of each other as you scroll (data-stack); the under-treat rule as a
-     green statement; and a pinned filmstrip (data-hscroll) of every
-     photograph the practice has of her and the rooms she works in.
+     So this is no longer "your injector". It is the surgeon at the sister
+     practice next door: who she is, what she does there, and when a patient
+     here would be referred to her. Nothing is claimed that the first build did
+     not already carry (board-certified oral and maxillofacial surgeon, DDS,
+     English and Spanish), and no role on this side is invented for her.
 
-     NOT the sibling's magazine profile (no name set behind the portrait, no
-     training ledger, no theatre behind a dark band) and not the home page's
-     surgeon chapter (a portrait with a small frame over its corner). Nothing
-     is claimed here that the first build did not: board-certified oral and
-     maxillofacial surgeon, DDS, English and Spanish, three practices, every
-     injection placed by her. -->
+     Four chapters: a full-height cover on her portrait; three cards that STACK
+     (data-stack); the practice's own approach on green; and a pinned filmstrip
+     (data-hscroll) of the photographs of her and the building. -->
 <section class="section_cover cover_component is-tall doctor_cover">
   <figure class="cover_media" data-parallax="10">
-    <img src="assets/dr-stone-coat.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="1000" height="1482" fetchpriority="high">
+    <img src="assets/dr-stone-coat.webp" alt="Dr. Mona Stone, DDS, in a white coat" width="1000" height="1482" fetchpriority="high">
   </figure>
   <div class="cover_body">
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate">Your injector</p>
+          <p class="eyebrow is-alternate">Stone Surgical Arts</p>
           <h1 class="cover_title" data-split data-split-now>Dr. Mona Stone, <em class="text-style-display-accent">DDS</em></h1>
           <p class="cover_lede">
-            Board-certified oral and maxillofacial surgeon. She came to aesthetics from
-            underneath the skin, and she performs every injection here herself.
+            A board-certified oral and maxillofacial surgeon at Stone Surgical Arts, our sister
+            practice in the same building. Dr. Stone doesn't treat patients at Westlake Medical
+            Aesthetics; our nurse practitioner and esthetician do.
           </p>
           <div class="cover_facts">
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="100" data-suffix="%">100%</span></span><span>of injections placed by her</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2">2</span></span><span>languages at the chair, English and Spanish</span></p>
-            <p class="cover_fact"><span class="cover_fact-num"><span data-count="3">3</span></span><span>practices under her name</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2">2</span></span><span>languages, English and Spanish</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="1">1</span></span><span>building, shared with us</span></p>
           </div>
           <div class="button-group cover_actions">
-            <a class="button" href="book.html">Book with Dr. Stone</a>
+            <a class="button" href="https://www.dfwsurgicalarts.com/" rel="noopener">Visit Stone Surgical Arts</a>
+            <a class="button is-alternate" href="team.html">Meet our team</a>
           </div>
         </div>
       </div>
@@ -41,15 +41,15 @@
   </div>
 </section>
 
-<!-- 01 THE THREE RULES, stacked. Each card is sticky at the same offset, so
-     the next one slides over the last and the covered card scales back. -->
+<!-- 01 THREE CARDS, stacked. Each card is sticky at the same offset, so the
+     next one slides over the last and the covered card scales back. -->
 <section class="section_rules doctor_rules">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="doctor_head">
-          <p class="eyebrow">How she works</p>
-          <h2 class="heading-style-h2" data-split>Three things that do not <em class="text-style-display-accent">change</em>.</h2>
+          <p class="eyebrow">When you'd see Dr. Stone</p>
+          <h2 class="heading-style-h2" data-split>Surgery is her <em class="text-style-display-accent">specialty</em>.</h2>
         </div>
         <div class="stack_component doctor_stack" data-stack>
           <article class="stack_item doctor_card">
@@ -58,18 +58,18 @@
             </figure>
             <div class="doctor_card-body">
               <span class="doctor_card-num">01</span>
-              <h3 class="doctor_card-title">She trained on the skeleton first.</h3>
-              <p class="doctor_card-text">Years operating on the facial bones and the tissue over them, before the first syringe. Filler goes where the bone has flattened, not where the cheek looks hollow.</p>
+              <h3 class="doctor_card-title">Her training is the face.</h3>
+              <p class="doctor_card-text">Oral and maxillofacial surgery covers the bones of the face and jaw and the tissue over them. It's the foundation of her surgical work.</p>
             </div>
           </article>
           <article class="stack_item doctor_card">
             <figure class="doctor_card-media" data-wipe>
-              <span class="wipe_inner" data-parallax="8"><img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy"></span>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/gen-procedure-room.webp" alt="" width="1600" height="900" loading="lazy"></span>
             </figure>
             <div class="doctor_card-body">
               <span class="doctor_card-num">02</span>
-              <h3 class="doctor_card-title">Nothing is delegated.</h3>
-              <p class="doctor_card-text">If Dr. Stone is not in, you are not injected. Fewer appointments a week, every one of them with the surgeon.</p>
+              <h3 class="doctor_card-title">Surgery happens next door.</h3>
+              <p class="doctor_card-text">Facelifts, neck lifts, eyelid surgery and other procedures that need an incision are done at Stone Surgical Arts.</p>
             </div>
           </article>
           <article class="stack_item doctor_card">
@@ -78,8 +78,8 @@
             </figure>
             <div class="doctor_card-body">
               <span class="doctor_card-num">03</span>
-              <h3 class="doctor_card-title">She will say when the answer is surgery.</h3>
-              <p class="doctor_card-text">Past a point, filler adds weight to a face that needs lifting. She has the surgical practice next door and no reason not to say so.</p>
+              <h3 class="doctor_card-title">We'll tell you if surgery makes sense.</h3>
+              <p class="doctor_card-text">Past a certain point, injectables can't do what surgery can. If that's where you are, our providers will say so and can refer you to Dr. Stone.</p>
             </div>
           </article>
         </div>
@@ -88,21 +88,23 @@
   </div>
 </section>
 
-<!-- 02 THE RULE, on green. One statement, one line, one photograph. -->
+<!-- 02 THE APPROACH, on green. The practice's own, not hers. -->
 <section class="section_rule doctor_rule" data-theme="green">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="doctor_rule-grid">
           <div class="doctor_rule-copy">
-            <p class="eyebrow">The approach</p>
-            <h2 class="doctor_rule-title" data-split>Under-treat. Then review at two weeks.</h2>
+            <p class="eyebrow">At Westlake Medical Aesthetics</p>
+            <h2 class="doctor_rule-title" data-split>Start small, then review at two weeks.</h2>
             <p class="text-size-medium doctor_rule-text" data-reveal>
-              Adding a little more at the review takes five minutes. Waiting out too much takes three months. So a first dose here is smaller than you expect.
+              Adding a little more at a follow-up takes a few minutes. Waiting for too much to
+              wear off takes months. That's why our providers keep first treatments
+              conservative.
             </p>
             <div class="doctor_rule-facts" data-reveal="stagger">
-              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="30">30</span> min</span><span>the consultation, with her</span></p>
-              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="2">2</span> wks</span><span>to the review, built into the plan</span></p>
+              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="2">2</span> wks</span><span>until your follow-up</span></p>
+              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="1">1</span></span><span>written plan, made for you</span></p>
             </div>
           </div>
           <figure class="doctor_rule-media" data-wipe>
@@ -114,16 +116,16 @@
   </div>
 </section>
 
-<!-- 03 THE FILMSTRIP. Pinned; the track travels sideways. Every photograph
-     the practice has of her, and the rooms she works in. Below 991 it is a
-     plain horizontal scroller. -->
+<!-- 03 THE FILMSTRIP. Pinned; the track travels sideways. Below 991 it is a
+     plain horizontal scroller. The group photograph ("The team") came out on
+     2026-09-15 with the removed staff profiles. -->
 <section class="section_film film_component hscroll_component" data-hscroll>
   <div class="padding-global">
     <div class="container-large">
       <div class="film_head">
         <div>
-          <p class="eyebrow">In the practice</p>
-          <h2 class="heading-style-h2" data-split>Her, and the <em class="text-style-display-accent">rooms</em>.</h2>
+          <p class="eyebrow">In the building</p>
+          <h2 class="heading-style-h2" data-split>Dr. Stone, and the <em class="text-style-display-accent">rooms</em>.</h2>
         </div>
         <div class="hscroll_bar" aria-hidden="true"><span class="hscroll_bar-fill"></span></div>
       </div>
@@ -131,7 +133,7 @@
   </div>
   <div class="hscroll_track film_track" data-overflow-ok>
     <figure class="film_item is-tall">
-      <img src="assets/dr-stone-standing.webp" alt="Dr. Stone standing at the practice" width="988" height="1482" loading="lazy">
+      <img src="assets/dr-stone-standing.webp" alt="Dr. Stone standing in the office" width="988" height="1482" loading="lazy">
       <figcaption class="film_caption">Dr. Stone</figcaption>
     </figure>
     <figure class="film_item">
@@ -150,10 +152,6 @@
       <img src="assets/dr-stone-portrait.webp" alt="Dr. Stone in the corridor" width="643" height="1020" loading="lazy">
       <figcaption class="film_caption">Between rooms</figcaption>
     </figure>
-    <figure class="film_item">
-      <img src="assets/ssa-team.webp" alt="The practice team" width="2133" height="1200" loading="lazy">
-      <figcaption class="film_caption">The team</figcaption>
-    </figure>
     <figure class="film_item is-square">
       <img src="assets/dr-stone-candid.webp" alt="Dr. Stone" width="457" height="457" loading="lazy">
       <figcaption class="film_caption">Off duty</figcaption>
@@ -163,12 +161,12 @@
       <figcaption class="film_caption">Outside</figcaption>
     </figure>
     <figure class="film_item">
-      <img src="assets/ssa-neon.webp" alt="The neon sign in the practice" width="2133" height="1200" loading="lazy">
+      <img src="assets/ssa-neon.webp" alt="The neon sign in the office" width="2133" height="1200" loading="lazy">
       <figcaption class="film_caption">The sign</figcaption>
     </figure>
     <figure class="film_item is-link">
       <a class="film_link" href="team.html">
-        <span class="film_link-text">The people you will actually see.</span>
+        <span class="film_link-text">The people who treat you here.</span>
         <span class="button is-link">Meet the team <span class="button_arrow">&rarr;</span></span>
       </a>
     </figure>

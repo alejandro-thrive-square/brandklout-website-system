@@ -15,6 +15,18 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
 
+**2026-09-15, later — the client's feedback is on STAGING, not production.** Asana task
+`1218408530306236` (ten subtasks) is applied to every page and published to
+`https://staging.westlaketxmedspa.com`. The practice is now **Westlake Medical Aesthetics**. The
+menu has 12 treatments in 4 categories, and the team is two people (Brooke NP injector, Abby
+esthetician). There is one $149/month membership with a 90-day commitment and 30 days' notice.
+Cherry is the primary lender, CareCredit sits alongside it, and the phone is (817) 918-3666.
+**Dr. Stone does not assess or inject here**, and the copy says so. **Open:** the practice's own
+Cherry apply link (the button goes to Cherry's generic site), then the client's review on staging,
+then the same push to production —
+[run](./runbook/2026-09-15-client-feedback-on-staging.md). Staging had no fonts until this run
+(upload directive trap 35).
+
 **2026-09-15 — staging and the sitemap.** Staging is `https://staging.westlaketxmedspa.com`
 (admin `/admin`, same login as production). It is the Railway environment `staging`, seeded from
 production (11/11 content-equivalent) and noindex at the edge. `/sitemap.xml` is live on the apex
