@@ -29,6 +29,13 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-15: BugHerd round one (project 540564) is through.** 24 of the 27 homepage notes are
+fixed, published to staging (shell seq 38) and done in BugHerd. **Three are open, waiting on the
+agency:** #4 (the brand guide in their Drive: we have the kids-logo palette, and the family practice's
+Figma palette differs, so no palette change until it is confirmed), #11 ("hospital setting" on ~10 other
+pages), #28 (the reviewer's edited gumball image, which was found nowhere). Re-run
+`workflows/.tmp/bugherd/fetch.mjs` to see their answers. See `runbook/2026-09-15-bugherd-staging-round-one.md`.
+
 | | State |
 | :--- | :--- |
 | The **eleven core pages** | Designed, and the design is now identical on disk and published. `workflows/03-core-pages/` is the source. |
@@ -56,6 +63,8 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `node audit-live.mjs` / `--width 390` | **All 57 routes**, not the eleven. |
 | `node verify-live.mjs` / `--migrated` | The published pages, end to end. |
 | `node probe-hooks.mjs <url>` | Do the scrubbed scenes actually do work? |
+| `node section-shots.mjs local\|live [width]` | What does each homepage chapter look like in ONE viewport, the way a BugHerd reviewer saw it? Also: is the Home pill legible, is the review written by mid-window, does the rail move and stop on hover? |
+| `MSYS_NO_PATHCONV=1 node import-pages.mjs --only / --publish` | A homepage-only push, after the conversion chain in the 03 README. `--only` takes the converted slug (`/`), not `index`. |
 
 ### The traps that have each cost a session
 

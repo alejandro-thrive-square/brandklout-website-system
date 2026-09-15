@@ -1,11 +1,12 @@
 # Runbook index
 
-15 runs, newest first. Each line is one file in this folder.
+16 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-15 | DONE 2026-09-15 - BUGHERD STAGING ROUND ONE (project 540564): 24 of 27 homepage notes fixed, published to staging and verified live; **#4 (brand guide), #11 (hospital setting elsewhere), #28 (the reviewer's edited image, not found) open with questions.** Per-number table inside. Gotchas: `import-pages`/`diff-all --only /` match the converted slug, and Git Bash mangles `/` without `MSYS_NO_PATHCONV=1`; `data-drift` covers a caption. Commits `94a5ef6c`, `77c30292`. | [`2026-09-15-bugherd-staging-round-one.md`](./2026-09-15-bugherd-staging-round-one.md) |
 | 2026-09-14 | DONE 2026-09-14/15 - masonparkpediatricdental.com serves the OLD WordPress site from `mirror-clean` (Cloudflare Pages `mason-park-kids-wp`); the new design is on `staging.masonparkpediatricdental.com`. **2026-09-15: the 27-Aug mirror had a ClearFake/EtherHiding loader on all 40 pages (live about 1 h, now stripped; verify-safe had passed it and is fixed). Missing Elementor chunks and hotlinked icons were also restored.** Gotchas: Pages without a `404.html` fakes 200s; wrangler 4.131 `pages project create` fails, so use the API; `x-suspended-vhost: 1` means suspended. | [`2026-09-14-domain-masonparkpediatricdental-live.md`](./2026-09-14-domain-masonparkpediatricdental-live.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
