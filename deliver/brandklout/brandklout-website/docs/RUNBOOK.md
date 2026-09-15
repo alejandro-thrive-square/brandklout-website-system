@@ -10,7 +10,11 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: Sang's v16, published as seq 22 (2026-09-14, late evening)
+## Status: Sang's v16, published as seq 22; wide-screen sizing softened in seq 23 (2026-09-14)
+
+- **Seq 23**: the fluid root now grows at most 1.15x (at 2560) instead of 1.6x, because the home
+  heading was far bigger than Sang's on wide screens ("the heading is not right", reported twice).
+  [`runbook/2026-09-14-heading-fluid-root.md`](./runbook/2026-09-14-heading-fluid-root.md).
 
 - **Source is `client-handoff/package-v16/`** + `patches/`, through the class system. Every v16 change
   is live (prequalification form at the foot of every page, light footer, unified `/guarantee`,
@@ -29,7 +33,7 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 - **The site's CSS is now Instatic classes**, editable in the Styles panel: every element carries its
   own layout class plus a shared type class (`text-18`, `heading-60`), resolved from Sang's cascade
   by `21-instatic-upload/class-system.mjs` and proven identical by `class-parity.mjs` (32 pages × 9
-  widths). Fluid: rem + a clamp() root, identical to v11 up to 1440, 1.6x at 2304+. Nine editor
+  widths). Fluid: rem + a clamp() root, identical to v11 up to 1440, then gently up to 1.15x at 2560 (was 1.6x until seq 23). Nine editor
   breakpoints. Details: [`runbook/2026-09-14-class-system-and-home-v12.md`](./runbook/2026-09-14-class-system-and-home-v12.md).
 - **Home page**: hero results slider (5 practices), `#results` as preview 1's three case cards with
   photos + logos, and preview 1's five-video client stories panel before "Why us".

@@ -1,7 +1,7 @@
 /* The fluid root (class-system.mjs): 16px up to 1440px wide, then everything sized in rem grows
-   with the screen, to 1.6x at 2304px. Here, not in the registry: it is the one rule every size
+   with the screen, gently, to 1.15x at 2560px. Here, not in the registry: it is the one rule every size
    depends on, and nobody should change it by accident. */
-html { font-size: clamp(100%, 100vw / 90, 160%); }
+html { font-size: clamp(100%, 0.8071rem + 0.2143vw, 115%); }
 
 /* @keyframes and other at-rules, as Sang wrote them (px converted to rem). */
 @keyframes line-flow{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}

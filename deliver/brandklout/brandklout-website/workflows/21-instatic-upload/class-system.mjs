@@ -22,8 +22,8 @@
  * `html`/`:root` and for bare element selectors stay as written.
  *
  * FLUID. Every px length above 2px becomes rem, and the root font size is
- * `clamp(100%, 100vw / 90, 160%)`: exactly 16px up to 1440px wide, so nothing changes there, then
- * text, spacing and the content width grow together, to 1.6x at 2304px and beyond.
+ * `clamp(100%, 0.8071rem + 0.2143vw, 115%)`: exactly 16px up to 1440px wide, so nothing changes
+ * there, then text, spacing and the content width grow together, gently, to 1.15x at 2560px.
  *
  * BREAKPOINTS. Sang's fourteen max-width queries fold into five editor breakpoints (BREAKPOINTS);
  * everything else (min-width, compound, reduced motion, print) is a site condition.
@@ -84,7 +84,11 @@ const bpFor = (w) => {
   const exact = BREAKPOINTS.find((b) => b.width === w)
   return exact ?? null // a width nobody mapped stays a condition of its own, rather than being guessed
 }
-const FLUID_ROOT = 'clamp(100%, 100vw / 90, 160%)'
+/* 16px up to 1440px, then a gentle line to 18.4px (1.15x) at 2560px, and no further. It was
+   `clamp(100%, 100vw / 90, 160%)` (1.33x at 1920, 1.6x from 2304) until 2026-09-14: on wide screens
+   the hero heading reached 96-115px against Sang's 72px, "the heading is not right". Alejandro chose
+   gentle scaling. Slope 2.4px / 1120px = 0.2143vw; intercept 16 - 1440 x 0.002143 = 12.914px. */
+const FLUID_ROOT = 'clamp(100%, 0.8071rem + 0.2143vw, 115%)'
 const MARK = String.fromCharCode(1) // a character no CSS value contains
 
 // Classes the scripts add, remove or toggle (site.js, visual.js, stories-v10.js, agency/*.js, and
@@ -828,7 +832,7 @@ server.close()
 /* --- the code asset and the local stylesheet -------------------------------------------------- */
 const codeCss =
   `/* The fluid root (class-system.mjs): 16px up to 1440px wide, then everything sized in rem grows\n` +
-  `   with the screen, to 1.6x at 2304px. Here, not in the registry: it is the one rule every size\n` +
+  `   with the screen, gently, to 1.15x at 2560px. Here, not in the registry: it is the one rule every size\n` +
   `   depends on, and nobody should change it by accident. */\n` +
   `html { font-size: ${FLUID_ROOT}; }\n\n` +
   `/* @keyframes and other at-rules, as Sang wrote them (px converted to rem). */\n` +

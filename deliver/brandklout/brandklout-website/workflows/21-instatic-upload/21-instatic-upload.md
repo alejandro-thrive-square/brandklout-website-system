@@ -86,7 +86,10 @@ other selector becomes ambient). So even a registry import of his CSS would lose
   those selectors need stay on the markup as unstyled hooks (153).
 - **Fluid**: every px length >2px becomes rem (6 decimals), and `html { font-size: clamp(100%,
   100vw / 90, 160%) }` (code asset): exactly 16px up to 1440, then everything grows together, 1.6x at
-  2304+.
+  2304+. **Softened 2026-09-14 (seq 23)** to `clamp(100%, 0.8071rem + 0.2143vw, 115%)`: still 16px up
+  to 1440, then 1.15x at 2560 at most. At 1.6x the hero h1 reached 96px at 1920 and 115px at 2560
+  (Sang's is 72px) and Alejandro twice reported "the heading is not right"; the first time it was
+  wrongly blamed on the admin edits. The gates never saw it: they stop at 1440.
 - **Breakpoints**: Sang's 14 max-width queries map (explicit `BP_MAP`) to 7 editor breakpoints,
   1190 / 1050 / 1000 / 800 / 760 and TWO for phones, Mobile landscape 620 and Mobile portrait 480
   (Alejandro: "too many mobile breakpoints"; 400 and 360 were dropped). Above 480 no common device
