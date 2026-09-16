@@ -7,6 +7,13 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-16
 
+**Production has Termly cookie consent on every page**
+([`runbook/2026-09-16-termly-cookie-consent-on-production.md`](./runbook/2026-09-16-termly-cookie-consent-on-production.md)),
+added through embed-origins `siteScripts`, with `us.consent.api.termly.io` allowed for connections and `app.termly.io` for frames.
+**Staging does not have it yet**: its plugin is 1.5.1. Install 1.6.0 and add the same settings there before launch.
+
+## Earlier — 2026-09-16, BugHerd round three
+
 **BugHerd round three is answered** ([`runbook/2026-09-16-bugherd-round-three-standalone-and-motion.md`](./runbook/2026-09-16-bugherd-round-three-standalone-and-motion.md)).
 The agency asked for **Mason Park to stand alone as a cosmetic and general practice**: the home
 page's two-practice story is rewritten, and Dr. Nguyen's practice is referenced as **Mason Park
