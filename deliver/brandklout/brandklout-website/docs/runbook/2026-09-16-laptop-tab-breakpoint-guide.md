@@ -25,7 +25,7 @@ least a guide.
 
 ## Done
 
-- **Seq 43**: `desktop` (1440, `(max-width: 1440px)`) added first to `site.breakpoints` and published.
+- **Seq 43** (commit `fae8e320`): `desktop` (1440, `(max-width: 1440px)`) added first to `site.breakpoints` and published.
   Published `style-4ffd548067f2.css` byte-identical before/after; headless editor shows "Desktop 1440px"
   as the first frame. Backup: `21-instatic-upload/.tmp/backup-2026-09-16-seq42-pre-desktop-bp/site.json`.
 - `class-system.mjs`: `DESKTOP` written first into the registry's breakpoints; kept out of `BREAKPOINTS`
