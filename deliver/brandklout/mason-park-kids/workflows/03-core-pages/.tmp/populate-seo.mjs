@@ -1,6 +1,6 @@
 /**
  * Gives every one of the fifty-seven published pages its own meta description,
- * canonical and share card, as `webzite.open-graph` per-page overrides.
+ * canonical and share card, as `brandklout.open-graph` per-page overrides.
  *
  *   node populate-seo.mjs --dry-run     print the table and the source of each
  *   node populate-seo.mjs               write the overrides
@@ -163,7 +163,7 @@ for (const p of plan) {
   console.log(`  ${p.source.padEnd(7)} /${(p.slug || "(home)").padEnd(45)} ${description.slice(0, 70)}`);
   if (DRY) continue;
   try {
-    await api("POST", "/admin/api/cms/plugins/webzite.open-graph/runtime/override", {
+    await api("POST", "/admin/api/cms/plugins/brandklout.open-graph/runtime/override", {
       key: p.slug, description, url, enabled: true,
     });
     written++;

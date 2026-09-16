@@ -123,7 +123,7 @@ export default [
       cards: [
         { h: 'Infants and tongue-tie', p: 'A frenectomy takes less than fifteen minutes, and Dr. Nguyen’s residency covered children as young as six months.' },
         { h: 'Special needs patients', p: 'Sensory-friendly, routine-based care, longer appointments and desensitization visits, with sedation where it is the kind option.' },
-        { h: 'Children who need sedation', p: 'Nitrous oxide, oral and IV sedation, and general anesthesia in a hospital setting at HCA West Houston.' },
+        { h: 'Children who need sedation', p: 'Nitrous oxide, oral and IV sedation, and general anesthesia.' },
         { h: 'The child who will not open', p: 'Knee-to-knee exams, and a practice arranged around the children other practices find difficult.' },
       ] },
     { k: 'invite', title: 'Call and we will take it over the phone.',

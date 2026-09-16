@@ -14,18 +14,11 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../../assets/uploads/logo.png">
-<!-- No Google Fonts link, and no preconnect to one. Both families are now
-     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
-     served from assets/fonts/ here and from /assets/uploads/ on Instatic, where
-     import-styles.mjs rewrites the url(). The <link> that used to be here
-     fetched the static instances, which nothing on the page uses any more:
-     "Fraunces" and "Nunito" survive only as fallback names behind
-     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
-     discovered inside a stylesheet starts downloading one round trip later
-     than one in the markup, and `font-display: swap` spends that round trip
-     painting Georgia. -->
-<link rel="preload" href="../../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
+<!-- No Google Fonts link. Both faces are self-hosted woff2 (Marcellus for the
+     brand guide's Collier, Figtree for its Avenir Next), declared @font-face at
+     the top of site.css. Preloaded so the first paint is not the fallback. -->
+<link rel="preload" href="../../assets/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/figtree-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/site.css">
 
 </head>

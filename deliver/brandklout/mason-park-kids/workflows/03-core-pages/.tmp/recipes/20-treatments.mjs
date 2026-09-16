@@ -325,7 +325,7 @@ export default [
       shot: { img: 'knee-2', alt: 'An infant on a parent’s lap during a knee-to-knee exam' },
       h3: 'What is available if the appointment is long.',
       items: [
-        'Nitrous oxide, oral and IV sedation, and general anesthesia in a hospital setting, where they help.',
+        'Nitrous oxide, oral and IV sedation, and general anesthesia, where they help.',
         'Longer appointments booked deliberately, so nothing has to be rushed.',
         'Everything explained on the screen in the room before it happens.',
         'Parents are always welcome to accompany their child.',
@@ -405,7 +405,7 @@ export default [
       shot: { img: 'knee-2', alt: 'An infant on a parent’s lap during a knee-to-knee exam' },
       h3: 'What can be arranged.',
       items: [
-        'Nitrous oxide, oral and IV sedation, and general anesthesia in a hospital setting at HCA West Houston.',
+        'Nitrous oxide, oral and IV sedation, and general anesthesia.',
         'A desensitization visit first, if this is not a day for a first impression of the practice.',
         'Parents are always welcome to accompany their child.',
         'The plan and the price explained before anything is done.',

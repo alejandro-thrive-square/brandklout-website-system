@@ -1,6 +1,6 @@
 /**
- * The Mason Park Dental for Kids values for `webzite.open-graph` and
- * `webzite.aeo-schema`.
+ * The Mason Park Dental for Kids values for `brandklout.open-graph` and
+ * `brandklout.aeo-schema`.
  *
  *   node configure-seo.mjs            show the diff, write nothing
  *   node configure-seo.mjs --apply
@@ -79,7 +79,7 @@ const ORGANIZATION = {
 };
 
 const WANT = {
-  "webzite.open-graph": {
+  "brandklout.open-graph": {
     enabled: true,
     siteUrl: SITE,
     siteName: NAME,
@@ -98,7 +98,7 @@ const WANT = {
     syncMetaDescription: true,
     emitCanonical: true,
   },
-  "webzite.aeo-schema": {
+  "brandklout.aeo-schema": {
     enabled: true,
     siteUrl: SITE,
     siteName: NAME,

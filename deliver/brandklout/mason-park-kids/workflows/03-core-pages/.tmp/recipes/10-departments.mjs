@@ -115,7 +115,7 @@ export default [
       shot: { img: 'knee-2', alt: 'An infant on a parent’s lap during a knee-to-knee exam' },
       h3: 'What is on offer when a child needs work done.',
       items: [
-        'Nitrous oxide, oral and IV sedation, and general anesthesia in a hospital setting at HCA West Houston.',
+        'Nitrous oxide, oral and IV sedation, and general anesthesia.',
         'Longer appointments and desensitization visits, so the first time is not also the day of the treatment.',
         'Parents are always welcome to accompany their child.',
         'Everything explained on the screen in the room, and the price before you leave.',
@@ -353,7 +353,7 @@ export default [
 {
   slug: 'services/sedation-dentistry',
   title: 'Sedation Dentistry for Children in Katy, TX | Mason Park Dental for Kids',
-  description: 'Nitrous oxide, oral conscious sedation, IV sedation and general anesthesia in a hospital setting, for children who need treatment and cannot get through it awake. Katy, TX.',
+  description: 'Nitrous oxide, oral conscious sedation, IV sedation and general anesthesia, for children who need treatment and cannot get through it awake. Katy, TX.',
   eyebrow: 'Sedation dentistry',
   h1: 'Four levels, and the point of all of them is that the appointment happens.',
   em: 'the appointment happens',
@@ -369,13 +369,13 @@ export default [
         { h: 'What the sedatives used here have in common', b: [1, 2] },
         { h: 'What it changes about the visit', b: [3] },
       ] },
-    { k: 'cards', id: 'levels', name: 'The Levels', title: 'Four levels, from a mask to a hospital.', theme: 'sage',
+    { k: 'cards', id: 'levels', name: 'The Levels', title: 'Four levels, from a mask to deep sleep.', theme: 'sage',
       lede: 'Which one is right depends on the treatment, on your child’s age and health, and on how the last visit went.',
       cards: [
         { h: 'Nitrous oxide', p: 'Also known as laughing gas, the mildest form. Once inhaled, it induces a state of mild relaxation and wears off within minutes of the mask coming off.' },
         { h: 'Oral conscious sedation', p: 'A stronger level than nitrous oxide. Many parents prefer it for the deeper relaxation it provides for longer or more involved treatment.' },
         { h: 'IV sedation', p: 'Generally used with shorter treatment sessions. The effects are immediate and may cause your child to feel as though they slept through the appointment.' },
-        { h: 'General anesthesia', p: 'Done in a hospital setting at HCA West Houston. The strongest level, for the treatment plans that cannot reasonably be done any other way.' },
+        { h: 'General anesthesia', p: 'Your child is fully asleep. The strongest level, for the treatment plans that cannot reasonably be done any other way.' },
       ] },
     { k: 'prose', id: 'safety', name: 'Safety', title: 'What we need to know before we sedate.', theme: 'sky',
       sections: [

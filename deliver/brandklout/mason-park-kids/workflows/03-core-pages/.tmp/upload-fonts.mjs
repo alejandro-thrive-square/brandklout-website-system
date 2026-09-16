@@ -55,26 +55,32 @@ const DRY = argv.includes("--dry");
    instance - the same mistake the platform's installer makes. A modern
    User-Agent is required too: with none, Google serves ttf. */
 const WANT = [
+  /* 2026-09-16, BugHerd #4: the practices' brand guide (Nikole Culo Designs,
+     Nov 2021, in the Mason Park shared drive) sets Collier, FreightNeo Pro and
+     Avenir Next. All three are Adobe-licensed and there is no Adobe Fonts web
+     project, so the site uses the nearest open faces: Marcellus for Collier
+     (the flared, glyphic caps of the logo), Figtree for Avenir Next. The old
+     Fraunces/Nunito entries stay in font-map.json but nothing names them. */
   {
-    file: "fraunces-vf.woff2",
-    family: "Fraunces VF",
-    css: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..600,0..100,0..1",
+    file: "marcellus.woff2",
+    family: "Marcellus MP",
+    css: "https://fonts.googleapis.com/css2?family=Marcellus",
     style: "normal",
-    weight: "400 600",
+    weight: "400",
   },
   {
-    file: "fraunces-vf-italic.woff2",
-    family: "Fraunces VF",
-    css: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@1,9..144,400..600,0..100,0..1",
+    file: "figtree-vf.woff2",
+    family: "Figtree VF",
+    css: "https://fonts.googleapis.com/css2?family=Figtree:wght@300..900",
+    style: "normal",
+    weight: "300 900",
+  },
+  {
+    file: "figtree-vf-italic.woff2",
+    family: "Figtree VF",
+    css: "https://fonts.googleapis.com/css2?family=Figtree:ital,wght@1,300..900",
     style: "italic",
-    weight: "400 600",
-  },
-  {
-    file: "nunito-vf.woff2",
-    family: "Nunito VF",
-    css: "https://fonts.googleapis.com/css2?family=Nunito:wght@400..800",
-    style: "normal",
-    weight: "400 800",
+    weight: "300 900",
   },
 ];
 

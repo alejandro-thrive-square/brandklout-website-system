@@ -14,18 +14,11 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<!-- No Google Fonts link, and no preconnect to one. Both families are now
-     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
-     served from assets/fonts/ here and from /assets/uploads/ on Instatic, where
-     import-styles.mjs rewrites the url(). The <link> that used to be here
-     fetched the static instances, which nothing on the page uses any more:
-     "Fraunces" and "Nunito" survive only as fallback names behind
-     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
-     discovered inside a stylesheet starts downloading one round trip later
-     than one in the markup, and `font-display: swap` spends that round trip
-     painting Georgia. -->
-<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
+<!-- No Google Fonts link. Both faces are self-hosted woff2 (Marcellus for the
+     brand guide's Collier, Figtree for its Avenir Next), declared @font-face at
+     the top of site.css. Preloaded so the first paint is not the fallback. -->
+<link rel="preload" href="../assets/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -159,7 +152,7 @@
     <div class="sq-grid" data-stagger>
       <div class="sq-card"><h3>Infants and tongue-tie</h3><p>A frenectomy takes less than fifteen minutes, and Dr. Nguyen’s residency covered children as young as six months.</p></div>
       <div class="sq-card is-sky"><h3>Special needs patients</h3><p>Sensory-friendly, routine-based care, longer appointments and desensitization visits, with sedation where it is the kind option.</p></div>
-      <div class="sq-card is-sun"><h3>Children who need sedation</h3><p>Nitrous oxide, oral and IV sedation, and general anesthesia in a hospital setting at HCA West Houston.</p></div>
+      <div class="sq-card is-sun"><h3>Children who need sedation</h3><p>Nitrous oxide, oral and IV sedation, and general anesthesia.</p></div>
       <div class="sq-card"><h3>The child who will not open</h3><p>Knee-to-knee exams, and a practice arranged around the children other practices find difficult.</p></div>
     </div>
   </div>

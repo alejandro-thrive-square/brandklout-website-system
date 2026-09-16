@@ -52,8 +52,9 @@ html {
        one warm accent added for a children's practice (sun) and one cool tint
        (sky) taken from the mural walls in the staff portraits. Nothing cyan:
        the old WordPress theme's #1bc1ff was the theme's colour, not the brand's.
-     - the display face is Fraunces, a soft optical-size serif, and the body
-       face is Nunito, rounded. Both are Google faces Instatic can self-host.
+     - SUPERSEDED 2026-09-16 (BugHerd #4): colour and type now follow the
+       practices' brand guide; see the variables block. Display is Marcellus
+       (for Collier), body is Figtree (for Avenir Next). Was Fraunces/Nunito.
      - corners are round, buttons are pills, panels are stickers. The parent's
        hairlines and 2px radii would read as a grown-up's site with the words
        swapped.
@@ -114,26 +115,32 @@ html {
 
    Paths come from `.tmp/font-map.json`. Re-uploading changes them; edit here.
    --------------------------------------------------------------------- */
+/* 2026-09-16 (BugHerd #4): the brand guide's type. Collier and Avenir Next
+   are Adobe-licensed with no web project here, so their nearest open faces are
+   self-hosted instead: Marcellus (one weight, like Collier Book) and Figtree.
+   The names are distinct from the platform's installed families for the same
+   reason as before. `font-synthesis: none` below keeps the browser from
+   inventing a bold or an italic Marcellus. */
 @font-face {
-  font-family: "Fraunces VF";
+  font-family: "Marcellus MP";
   font-style: normal;
-  font-weight: 400 600;
+  font-weight: 400;
   font-display: swap;
-  src: url("fonts/fraunces-vf.woff2") format("woff2");
+  src: url("fonts/marcellus.woff2") format("woff2");
 }
 @font-face {
-  font-family: "Fraunces VF";
+  font-family: "Figtree VF";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("fonts/figtree-vf.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree VF";
   font-style: italic;
-  font-weight: 400 600;
+  font-weight: 300 900;
   font-display: swap;
-  src: url("fonts/fraunces-vf-italic.woff2") format("woff2");
-}
-@font-face {
-  font-family: "Nunito VF";
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  src: url("fonts/nunito-vf.woff2") format("woff2");
+  src: url("fonts/figtree-vf-italic.woff2") format("woff2");
 }
 
 /* ---------------------------------------------------------------- variables */
@@ -146,30 +153,39 @@ html {
   --t-head: 1;
   --t-sub: 1;
 
-  /* From the logo. */
-  --slate: #505860;
-  --sage: #a3b5aa;
+  /* The practices' brand guide (Nikole Culo Designs, Nov 2021), exact hexes:
+     slate #545F62, sage #A0B4AA, light #EAE9E6, copper #B78668,
+     sand #CCBCA6, beige #E2D5C5. Adopted 2026-09-16 for BugHerd #4; before
+     that the palette was sampled from the logo plus a sun yellow and a sky. */
+  --slate: #545f62;
+  --sage: #a0b4aa;
   /* Derived from it. */
-  --ink: #2f3940;          /* headings, the darkest text */
-  --ink-deep: #242c32;     /* the ground of a dark chapter */
-  --ink-mid: #2e373e;      /* a raised panel on that ground */
-  --body: #56616a;         /* running copy */
-  --muted: #8a949b;        /* captions, timestamps */
+  --ink: #333c3f;          /* headings, the darkest text: the slate taken down */
+  --ink-deep: #262d2f;     /* the ground of a dark chapter */
+  --ink-mid: #30393b;      /* a raised panel on that ground */
+  --body: #545f62;         /* running copy: the brand slate itself (6.4:1) */
+  --muted: #858e91;        /* captions, timestamps */
   --sage-deep: #587a68;    /* the sage taken dark enough to carry text on white (4.7:1) */
   --sage-tint: #edf2ee;    /* a light sage ground */
   --sage-line: #d3ddd6;    /* rules and card edges */
-  /* Added for a children's practice. Never text on a light ground. */
-  --sun: #f6c04b;
-  --sun-deep: #9a6a0a;     /* sun taken dark enough for a glyph (5.6:1 on white) */
-  --sun-tint: #fff3d6;
-  --sky: #d7e6ee;
-  --sky-deep: #3f6f88;
-  --cream: #fbf8f2;        /* the warm ground */
+  /* The warm accent is the guide's copper. The names stay "sun" and "sky"
+     because 215 pages carry them as theme and variant names. */
+  --sun: #b78668;          /* copper: dots, bars, rules. Too light for text on white. */
+  --sun-fill: #93644a;     /* copper for a filled button or pill; white text 5.0:1 */
+  --on-sun: #ffffff;
+  --sun-glow: #d4aa8e;     /* copper as text on the dark grounds (6.3:1) */
+  --sun-deep: #8a5a3e;     /* copper dark enough for a glyph on white (5.8:1) */
+  --sun-tint: #f5efe8;     /* the beige, lightened for a ground */
+  --sun-line: #e2d5c5;     /* beige */
+  --sun-line-strong: #ccbca6; /* sand */
+  --sky: #eae9e6;          /* the guide's light grey */
+  --sky-deep: #545f62;
+  --cream: #f6f3ee;        /* the warm ground, between white and the beige */
   --white: #ffffff;
 
-  --font-display: "Fraunces VF", "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Nunito VF", "Nunito", "Segoe UI", system-ui, sans-serif;
-  --font-ui: "Nunito VF", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Marcellus MP", "Marcellus", Candara, Georgia, serif;
+  --font-body: "Figtree VF", "Avenir Next", Verdana, "Segoe UI", system-ui, sans-serif;
+  --font-ui: "Figtree VF", "Avenir Next", Verdana, "Segoe UI", system-ui, sans-serif;
 
   --radius: 1.5rem;
   --radius-sm: .9rem;
@@ -192,7 +208,7 @@ html {
 
 /* ------------------------------------------------------- document defaults */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; font-synthesis: none; }
 body {
   margin: 0;
   background: var(--white);
@@ -291,7 +307,7 @@ button { font: inherit; }
 .button:hover { color: #fff; border-color: var(--ink); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 .button:hover::after { transform: translateY(0); }
 .button.is-lg { padding: 1.15rem 2.2rem; font-size: calc(.92rem * var(--t-text)); }
-.button.is-sun { background: var(--sun); border-color: var(--sun); color: var(--ink); }
+.button.is-sun { background: var(--sun-fill); border-color: var(--sun-fill); color: var(--on-sun); }
 .button.is-sun:hover { color: #fff; }
 .button.is-ghost { background: transparent; color: var(--sage-deep); }
 .button.is-ghost:hover { color: #fff; }
@@ -447,7 +463,7 @@ button { font: inherit; }
 .foot_blurb { color: rgba(255, 255, 255, .6); max-width: 32ch; font-size: calc(.95rem * var(--t-text)); margin-bottom: 1.25rem; }
 .foot_heading {
   font-family: var(--font-ui); font-weight: 800; font-size: calc(.76rem * var(--t-ui)); letter-spacing: .18em;
-  text-transform: uppercase; color: var(--sun); margin-bottom: 1.1rem;
+  text-transform: uppercase; color: var(--sun-glow); margin-bottom: 1.1rem;
 }
 .foot_list { display: flex; flex-direction: column; gap: .55rem; }
 .foot_list a { color: rgba(255, 255, 255, .78); text-decoration: none; font-size: calc(.96rem * var(--t-text)); }
@@ -589,7 +605,7 @@ button { font: inherit; }
 }
 .ch[data-theme="warm"] { --bg: var(--cream); --bg-2: var(--white); --panel: var(--white); background: var(--bg); }
 .ch[data-theme="sage"] { --bg: var(--sage-tint); --bg-2: var(--white); --panel: var(--white); --rule: #c9d6cd; background: var(--bg); }
-.ch[data-theme="sun"]  { --bg: var(--sun-tint); --bg-2: var(--white); --panel: var(--white); --rule: #ecd9a8; --rule-strong: #d9b76a; --accent: var(--sun-deep); background: var(--bg); }
+.ch[data-theme="sun"]  { --bg: var(--sun-tint); --bg-2: var(--white); --panel: var(--white); --rule: var(--sun-line); --rule-strong: var(--sun-line-strong); --accent: var(--sun-deep); background: var(--bg); }
 
 /* ------------------------------------------------------------- chapter shell */
 .ch {
@@ -628,7 +644,7 @@ button { font: inherit; }
 }
 .ch p { color: var(--fg-body); }
 .ch em { font-style: italic; color: var(--accent); font-variation-settings: "SOFT" 100, "WONK" 1; }
-.ch[data-theme="dark"] em { color: var(--sun); }
+.ch[data-theme="dark"] em { color: var(--sun-glow); }
 
 /* The warm and dark grounds carry the confetti. On a pseudo element so it
    never tints the content. */
@@ -801,7 +817,7 @@ html.jr-ready .has-journey .main-wrapper { margin-top: calc(-1 * var(--jr-nav-h,
 .has-journey .masthead_component .masthead_phone { color: #fff; transition: color .45s var(--ease); }
 .has-journey .masthead_component .masthead_link:hover { background: rgba(255, 255, 255, .14); color: #fff; }
 .has-journey .masthead_component .masthead_toggle { color: #fff; border-color: rgba(255, 255, 255, .5); transition: color .45s var(--ease), border-color .45s var(--ease); }
-.has-journey .masthead_component .masthead_actions .button { border-color: var(--sun); background: var(--sun); color: var(--ink); }
+.has-journey .masthead_component .masthead_actions .button { border-color: var(--sun-fill); background: var(--sun-fill); color: var(--on-sun); }
 /* That rule outweighs `.button:hover`, so without this the masthead's Book
    stayed ink-on-ink while the fill slid up (2026-09-09, evening). */
 .has-journey .masthead_component .masthead_actions .button:hover { color: #fff; border-color: var(--ink); }
@@ -891,7 +907,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ar-offer a:hover { color: #fff; background: rgba(255, 255, 255, .2); }
 .ar-offer b {
   display: inline-block; margin-right: .6rem; line-height: 1.4;
-  padding: .35rem .75rem; border-radius: var(--pill); background: var(--sun); color: var(--ink);
+  padding: .35rem .75rem; border-radius: var(--pill); background: var(--sun-fill); color: var(--on-sun);
   font-weight: 800; font-size: var(--f-label); letter-spacing: .1em; text-transform: uppercase;
 }
 .ar-veil {
@@ -918,7 +934,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
   max-width: 14ch;
   font-variation-settings: "SOFT" 100, "opsz" 144;
 }
-.ar-title em { font-style: italic; color: var(--sun); font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; }
+.ar-title em { font-style: italic; color: var(--sun-glow); font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; }
 .ar-lede { max-width: 46ch; font-size: var(--f-lede); line-height: 1.62; color: rgba(255, 255, 255, .86); margin: 0 0 2.2rem; }
 .ar-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: 3rem; }
 .ar-meta { display: flex; flex-wrap: wrap; gap: .9rem; }
@@ -1111,12 +1127,12 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .pa-no {
   display: inline-grid; place-items: center;
   width: 2.6rem; height: 2.6rem; border-radius: 50%;
-  background: var(--sun); color: var(--ink);
+  background: var(--sun-fill); color: var(--on-sun);
   font-family: var(--font-ui); font-weight: 800; font-size: calc(.95rem * var(--t-text));
 }
 .pa-card h3 { font-size: var(--f-h4); }
 .pa-card p { font-size: var(--f-body); line-height: 1.66; }
-.pa-card.is-cta { background: var(--sun-tint); border-color: #ecd9a8; justify-content: center; }
+.pa-card.is-cta { background: var(--sun-tint); border-color: var(--sun-line); justify-content: center; }
 .pa-card.is-cta h3 { font-size: var(--f-h3); }
 .pa-card.is-cta .button { align-self: flex-start; margin-top: .4rem; }
 .pa-call { font-size: calc(.86rem * var(--t-text)); color: var(--fg-soft); }
@@ -1160,7 +1176,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .pr-quote figcaption b { font-weight: 700; color: var(--fg-soft); }
 .pr-portrait { overflow: hidden; border-radius: var(--radius); }
 .pr-portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.04); }
-.pr-stars { display: inline-flex; gap: .15rem; color: var(--sun); font-size: calc(1.1rem * var(--t-text)); letter-spacing: .05em; margin-bottom: .8rem; }
+.pr-stars { display: inline-flex; gap: .15rem; color: var(--sun-glow); font-size: calc(1.1rem * var(--t-text)); letter-spacing: .05em; margin-bottom: .8rem; }
 
 .pr-rail { overflow: hidden; padding: .5rem 0 1rem; }
 @media (max-width: 899px), (prefers-reduced-motion: reduce) {
@@ -1193,7 +1209,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .iv-lede { font-size: var(--f-lede); line-height: 1.7; max-width: 44ch; margin: 1.4rem 0 2.2rem; }
 .iv-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3rem; }
 .iv-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 2rem 1.75rem; margin: 0; padding-top: 2rem; border-top: 1px solid var(--rule); }
-.iv-facts dt { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--sun); margin-bottom: .6rem; }
+.iv-facts dt { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--sun-glow); margin-bottom: .6rem; }
 .iv-facts dd { margin: 0; font-size: var(--f-body); line-height: 1.7; color: var(--fg-body); }
 .iv-facts dd a { color: var(--fg-body); text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
 .iv-facts dd a:hover { color: #fff; }
@@ -1299,7 +1315,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ft-sticker {
   position: absolute; left: 1.2rem; bottom: 4.2rem;
   max-width: 15rem; padding: 1rem 1.2rem;
-  background: var(--sun); color: var(--ink); border-radius: var(--radius-sm);
+  background: var(--sun-fill); color: var(--on-sun); border-radius: var(--radius-sm);
   transform: rotate(-3deg);
   font-family: var(--font-display); font-weight: 500; font-size: var(--f-h4); line-height: 1.25;
   box-shadow: var(--shadow-sm);
@@ -1358,7 +1374,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .pe-badge {
   position: absolute; right: 1.2rem; top: 1.2rem;
   padding: .6rem 1rem; border-radius: var(--pill);
-  background: var(--sun); color: var(--ink);
+  background: var(--sun-fill); color: var(--on-sun);
   font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
 }
 .pe-copy { min-width: 0; }
@@ -1432,6 +1448,9 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 @media (min-width: 900px) {
   .lf-layout.lf-split { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   .lf-layout.lf-split .lf-head { position: sticky; top: calc(var(--jr-nav-h, 6rem) + 1.5rem); }
+  /* Marcellus (2026-09-16) is wider than Fraunces: "recommendation" at the
+     full chapter size overran the .8fr column and its line mask cut it. */
+  .lf-layout.lf-split .lf-head h2 { font-size: calc(var(--f-d2) * .78); hyphens: auto; }
 }
 .lf-layout.is-solo { max-width: 72ch; }
 .lf-section + .lf-section { margin-top: 2.25rem; padding-top: 2.25rem; border-top: 1px solid var(--rule); }
@@ -1465,7 +1484,7 @@ a.card:hover h3 { color: var(--accent); }
 .card_media { overflow: hidden; border-radius: var(--radius-sm); margin: -.4rem 0 .4rem; }
 .card_media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .card_no { display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--sun-tint); color: var(--sun-deep); font-family: var(--font-ui); font-weight: 800; font-size: calc(.9rem * var(--t-text)); }
-.card.is-fill { background: var(--sun-tint); border-color: #ecd9a8; }
+.card.is-fill { background: var(--sun-tint); border-color: var(--sun-line); }
 .ch[data-theme="dark"] .card.is-fill { background: var(--ink-mid); border-color: var(--rule-strong); }
 /* The callout band: a full width filled panel with one thing to do. */
 .callout { display: grid; gap: 1.5rem; padding: clamp(2rem, 4vw, 3.5rem); background: var(--sun-tint); border-radius: var(--radius); }
@@ -1516,7 +1535,7 @@ a.card:hover h3 { color: var(--accent); }
 .ab-door.is-adults h3 { color: #fff; }
 @media (min-width: 900px) { .ab-door.is-kids { border-radius: var(--radius) 0 0 var(--radius); } .ab-door.is-adults { border-radius: 0 var(--radius) var(--radius) 0; } }
 .ab-door_pill { justify-self: start; padding: .45rem .9rem; border-radius: var(--pill); font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-.ab-door.is-kids .ab-door_pill { background: var(--sun); color: var(--ink); }
+.ab-door.is-kids .ab-door_pill { background: var(--sun-fill); color: var(--on-sun); }
 .ab-door.is-adults .ab-door_pill { background: rgba(255, 255, 255, .12); color: #fff; }
 .ab-door h3 { font-size: var(--f-d3); max-width: 14ch; }
 .ab-door ul { display: grid; gap: .5rem; margin-top: .5rem; }
@@ -1723,7 +1742,7 @@ a.card:hover h3 { color: var(--accent); }
 @media (min-width: 900px) { .np-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2.5rem, 5vw, 5rem); align-items: start; } }
 .np-check { display: grid; gap: .8rem; counter-reset: bag; }
 .np-check li { display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: 1rem 1.2rem; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius-sm); }
-.np-check li::before { counter-increment: bag; content: counter(bag); display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--sun); color: var(--ink); font-family: var(--font-ui); font-weight: 800; font-size: calc(.9rem * var(--t-text)); }
+.np-check li::before { counter-increment: bag; content: counter(bag); display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--sun-fill); color: var(--on-sun); font-family: var(--font-ui); font-weight: 800; font-size: calc(.9rem * var(--t-text)); }
 .np-check b { display: block; font-family: var(--font-display); font-weight: 500; font-size: var(--f-h4); color: var(--fg); margin-bottom: .2rem; }
 .np-check p { font-size: calc(.92rem * var(--t-text)); line-height: 1.55; }
 .np-tour { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; }

@@ -42,7 +42,7 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `home/assets/journey.js` | The motion layer, ported from the parent practice: chrome, reveals, departures, arrival, the pinned path, the growth chart, the generic hooks, continuity. |
 | `home/assets/gsap/` | GSAP 3.13 + ScrollTrigger + SplitText, vendored. Never a CDN. |
 | `home/assets/uploads/` | Every photograph at a few widths each, written by `.tmp/prep-images.py`. **Gitignored**, like the parent's. |
-| `home/assets/fonts/` | Fraunces and Nunito, the VARIABLE files, self-hosted. **Gitignored** (the root refuses every font extension); `node .tmp/upload-fonts.mjs --fetch` puts them back. |
+| `home/assets/fonts/` | Marcellus and Figtree (Fraunces and Nunito before 2026-09-16), self-hosted, self-hosted. **Gitignored** (the root refuses every font extension); `node .tmp/upload-fonts.mjs --fetch` puts them back. |
 | `.tmp/stamp.mjs` | **The chrome is constant.** Re-stamps every page's head, top line, masthead, footer and script tags from the homepage, keeping each page's own title, description, canonical, og tags, robots and `<main>`. `--check` reports drift. |
 | `.tmp/check.mjs` | The static gate: assets resolve, braces balance, no control bytes, nothing Instatic refuses, the prose ceiling, ids and anchors, alt text, **no em dashes**, chrome identical to the homepage. |
 | `.tmp/shot.mjs` | The render gate: four widths, overflow, small text, never-revealed elements, broken images, console, **and which face is actually painted**. `--slices desktop` for readable windows. |
@@ -59,7 +59,7 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `.tmp/build-blog.mjs`, `blog-content.json` | **The blog.** `--harvest` reads the 157 posts out of workflow 01's WordPress export into `blog-content.json` (committed, 1.7 MB, so a worktree without the mirror can still build); a run writes `/blog/` and `/blog/<slug>/` for the nine sample posts, `--all` for every post, `--only a,b` for some. Its header is the record of what the harvest drops (pasted bios, disclaimers, a directions link) and how old links are rewritten. `--list` prints the old-URL to new-URL map for the cutover redirects. |
 | `.tmp/hover-probe.mjs` | Hovers one of every button variant on a page and records the label colour, the fill behind it and a crop. Exists because the fill slid up OVER the label on every button for a week and no gate measured a hover. |
 | `.tmp/shoot-all.mjs`, `viewport-probe.mjs` | Full-page captures of all 57 pages into one folder, and viewport captures through a pinned scene. The first is how this pass found what the per-page gates could not; the second is how it told a pin spacer from a fault. |
-| `.tmp/upload-fonts.mjs` | The variable Fraunces and Nunito: `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
+| `.tmp/upload-fonts.mjs` | The self-hosted faces (Marcellus, Figtree VF): `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
 | `.tmp/crop-probe.mjs`, `crop-all.mjs` | Does any heading lose ink to a clipping ancestor? Takes a file or a URL; `crop-all.mjs --live` sweeps the published site. |
 | `.tmp/audit-live.mjs` | **Every live route, not just the eleven.** HTTP, images, overflow, console, head tags, headings, chrome, dead links, tiny text, and any image painted more than 1.35x its own pixels. |
 | `.tmp/diff-all.mjs` | `diff-live.mjs` over all eleven pages, with a tally. |
@@ -80,6 +80,19 @@ for anything carrying text), with one warm accent (`--sun`) and one cool tint (`
 mural walls in the staff portraits). The display face is Fraunces, soft and slightly wonky; the
 body face is Nunito. Corners are round, buttons are pills, panels are stickers, and the warm
 and dark grounds carry a drawn confetti of dots instead of the parent's plaster.
+
+**2026-09-16 (BugHerd #4): colour and type now follow the practices' brand guide**
+(`Mason Park_Brand Guide.pdf`, Nikole Culo Designs, Nov 2021, in the Mason Park shared drive; it
+covers both the family practice and "Dental for kids"). Palette, exact: slate `#545F62`, sage
+`#A0B4AA`, light `#EAE9E6` (the PDF misprints it `EAE936`; its RGB is 234/233/230), copper `#B78668`,
+sand `#CCBCA6`, beige `#E2D5C5`. Copper replaced the sun yellow and the sky; the token NAMES `--sun`/
+`--sky` were kept because pages carry them as theme names. Copper is too light for text either way
+(3.5:1 with ink, 3.2:1 with white), so filled buttons and pills use `--sun-fill #93644a` with white
+text and copper text on dark grounds uses `--sun-glow`. Type: the guide's Collier, FreightNeo Pro and
+Avenir Next are Adobe-licensed and there is no Adobe Fonts web project, so the site self-hosts
+Marcellus (for Collier) and Figtree (for Avenir Next) as "Marcellus MP" / "Figtree VF";
+`font-synthesis: none` stops a fake bold or italic Marcellus. If the practice sends an Adobe kit id,
+swap the stacks. The paragraph above is the history.
 
 **What is the parent's is the process**, and all of it is kept: the fluid root as the first
 rule and no `px` or `clamp()` font-sizes; Client-First naming; the chapter architecture from
