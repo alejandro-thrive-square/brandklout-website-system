@@ -17,7 +17,7 @@ is one of 305 generated names (`text-18-7`) nobody can find or reason about. Tha
 update". (Also found on the way: `.text-18-8` in the seq 27 snapshot had become `.text-18-7` after
 the verbatim rebuild — generated names are not stable across builds either.)
 
-### Done (commit: see below)
+### Done (commit `a63efefa`)
 
 - `class-system.mjs`, new stage **Client-First type roles**: font-size lives ONLY on
   `text-size-{micro 6, mini 8, tiny 10, xsmall 12, small 14, regular 16, medium 18, large 22, xlarge 28,
