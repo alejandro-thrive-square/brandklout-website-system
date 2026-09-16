@@ -21,7 +21,7 @@ editor". The screenshot showed `/customer-stories` in the Pages list. Then Aleja
 
 - Backups: `.tmp/backup-2026-09-16-pre-page-restore/` (API site + pages + HTML, seq 43) and
   `.tmp/backup-2026-09-16-snapshot-1157-lost-pages/pages.json` (the two pages from the snapshot).
-- `.tmp/restore-lost-pages.mjs --apply`: incremental save (seq 44). SEO title and description from
+- Commit `da9c9e6d`. `.tmp/restore-lost-pages.mjs --apply`: incremental save (seq 44). SEO title and description from
   `site-src/seo.json` went in by read-merge-write, and the read-back node counts matched.
   `--publish`: draft matched published beforehand, so only these two pages changed. The new
   snapshot differs from 23:14 only in these pages plus `updatedByUserId`. Shell identical.
