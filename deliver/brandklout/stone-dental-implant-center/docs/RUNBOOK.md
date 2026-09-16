@@ -17,7 +17,8 @@ The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5
 
 ## Current
 
-- **Termly → GHL consent bridge**: v1.0 is live and values reach GHL (confirmed by Gage). **v1.1 still needs pasting into
-  the Webflow footer in place of v1.0**: the form renders without Termly's Enable step, and no choice counts as Decline.
-  See [`runbook/2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md`](./runbook/2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md)
+- **Termly (LIVE, 2026-09-16):** head is allowlist v1.1 → Termly → GTM; footer has the GHL bridge v1.1.
+  Fresh visitors get the full page, videos, maps and forms, with trackers still blocked, and the GHL
+  hidden consent fields fill in. Open: the Elfsight footer widget renders 0px even after Accept.
+  See [`runbook/2026-09-16-termly-allowlist-head-order.md`](./runbook/2026-09-16-termly-allowlist-head-order.md)
   and [`../snippets/termly-ghl-consent/`](../snippets/termly-ghl-consent/README.md).

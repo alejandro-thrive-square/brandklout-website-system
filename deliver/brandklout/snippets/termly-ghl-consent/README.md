@@ -3,8 +3,43 @@
 This is the standard way to get a visitor's Termly cookie choices into the GHL contact record. The
 same script works on every Brandklout client site that uses Termly and an embedded GHL form.
 
-**File:** [`termly-ghl-consent.html`](./termly-ghl-consent.html). Paste it as-is. It is one `<script>`
-tag with a `CONFIG` block at the top.
+**Files.** There are two snippets, and both are needed:
+
+| File | Where it goes | What it does |
+| :--- | :--- | :--- |
+| [`termly-allowlist.html`](./termly-allowlist.html) | site-wide **head**, **first**, before Termly | Stops Termly's auto-blocker from blocking the site itself and its content embeds |
+| [`termly-ghl-consent.html`](./termly-ghl-consent.html) | site-wide **footer** | Copies the Termly choice into the GHL form's hidden fields |
+
+**Head order, always:** allowlist → Termly resource blocker → GTM → everything else. Termly has to load
+before GTM so that Google Consent Mode defaults are in place first. The allowlist has to load before
+Termly so that its MutationObserver runs before Termly's.
+
+## Why the allowlist exists
+
+With `autoBlock=on`, Termly files every script and iframe it doesn't recognise as `unclassified` and
+holds it until the visitor clicks Accept. On Stone Dental (2026-09-16) that included **Webflow's own
+bundle** (`cdn.prod.website-files.com/.../*.js`), which left `Webflow` undefined, so the hero text
+never appeared. A fresh visitor saw a broken page until they accepted and reloaded. It also held every
+YouTube, Vimeo and embedly video, Google Maps, the GHL review widget, Elfsight, GHL surveys and forms,
+and `form_embed.js`.
+
+The allowlist marks trusted content hosts `data-categories="essential"`; Termly always lets essential
+resources through. It handles three cases:
+- **Tags in the page HTML:** a MutationObserver registered before Termly's marks them first.
+- **Tags that other scripts insert:** it wraps `appendChild` and `insertBefore`.
+- **Tags Termly has already blocked:** Termly judges a script created by another script before that
+  script reaches the DOM (Elfsight's `googleReviews.js`). The allowlist replaces each blocked copy with
+  a fresh tag marked essential.
+
+Trackers stay blocked until consent: `gtag/js`, anything GTM fires, and GHL's `number_pool.js` and
+`user_session.js`. **Never add a tracker to `ALLOW`.** For a new site, load a page in a fresh profile and
+list `script[data-autoblocked]` and `iframe[data-autoblocked]`. Every entry that renders content
+belongs in `ALLOW`.
+
+The only Termly API key the team can create (Consent API, `Authorization: <key>` against
+`app.termly.io/api/v1/cookie_whitelist?uuid=`) is **read-only**. It can't change categories or what the
+blocker blocks, which is why this fix lives on the site. The partner API (`api.termly.io/v1`, HMAC
+signed) needs agency keys that Termly issues by hand.
 
 ## How it works
 
@@ -58,10 +93,13 @@ Termly changes that format, those three fields come through empty, and the conse
    the form builder.
    The label-based `hideFields` script only works when it runs *inside* the form. Pasted on the
    website, it can't reach the fields in the iframe.
-3. **Website:** paste `termly-ghl-consent.html` into the footer custom code for the whole site. In
-   Webflow that is *Site settings → Custom code → Footer code*; on Instatic it goes in a site-wide
-   code asset. Set `marketingDisclosureVersion` to the date of the current consent wording, then publish.
-4. **Verify:** open a page with a form in a private window. The form should appear before you choose
+3. **Website:** paste `termly-allowlist.html` at the very top of the head code for the whole site,
+   put the Termly script right after it, and move GTM below Termly. Then paste `termly-ghl-consent.html`
+   into the footer code for the whole site. In Webflow those are *Site settings → Custom code → Head
+   code* and *Footer code*; on Instatic they go in site-wide code assets. Set `marketingDisclosureVersion` to the date of the current consent wording, then publish.
+4. **Verify:** open the site in a private window. The page should render fully and every video and
+   map should play before you answer the banner; in DevTools, `script[data-autoblocked]` should list
+   only trackers. Then open a page with a form in the same window. The form should appear before you choose
    anything, with no Enable box. In DevTools, the iframe `src` should include
    `privacy_analytics_consent=denied`. Click Accept: the iframe reloads with `granted`. Submit a test lead
    and check the contact's Consent folder in GHL.

@@ -1,0 +1,102 @@
+<!-- Brandklout: Termly allowlist (v1.1.0)
+     Paste as the FIRST thing in the site-wide <head> code, before the Termly resource-blocker script.
+     Termly's autoBlock files anything it doesn't know as "unclassified" and holds it until the visitor
+     accepts. That includes Webflow's own JS bundle, so the page renders broken, along with every
+     video, map, review widget and form. This marks the trusted resources below as essential before
+     Termly sees them. Trackers (GA, GTM tags, Meta, GHL call tracking) stay blocked.
+     Docs: deliver/brandklout/snippets/termly-ghl-consent/README.md -->
+<script>
+(function () {
+  // Per site, add hosts here only if they render content. Never add a tracker.
+  var ALLOW = [
+    /^https:\/\/(cdn\.prod\.)?website-files\.com\//,         // Webflow site bundle, GSAP, assets
+    /^https:\/\/d3e54v103j8qbb\.cloudfront\.net\//,          // Webflow jQuery
+    /^https:\/\/ajax\.googleapis\.com\/ajax\/libs\/webfont\//,  // Webflow Google Fonts loader
+    /^https:\/\/(www\.)?(youtube|youtube-nocookie)\.com\/embed\//,
+    /^https:\/\/player\.vimeo\.com\//,
+    /^(https:)?\/\/cdn\.embedly\.com\/widgets\//,            // Webflow video element
+    /^https:\/\/(www\.)?google\.com\/maps\/embed/,
+    /^https:\/\/maps\.google\.com\//,
+    /^https:\/\/([a-z0-9-]+\.)?elfsight(cdn)?\.com\//,
+    /^https:\/\/([a-z0-9-]+\.)?reputationhub\.site\//,       // GHL review widget
+    /\/widget\/(form|survey|booking)\//,                   // GHL forms, surveys, calendars
+    /^https:\/\/link\.msgsndr\.com\/js\/form_embed\.js/,    // GHL form sizing
+    /^https:\/\/cdn\.jsdelivr\.net\/npm\/(swiper|gsap|sienna-accessibility)/,
+    /^https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/(gsap|Swiper|jquery)/,
+    /^https:\/\/unpkg\.com\/(swiper|gsap|lenis)/
+  ];
+
+  function allowed(url) {
+    if (!url) return false;
+    for (var i = 0; i < ALLOW.length; i++) if (ALLOW[i].test(url)) return true;
+    return false;
+  }
+
+  function mark(el) {
+    if (!el || el.nodeType !== 1) return;
+    var tag = el.tagName;
+    if (tag !== "SCRIPT" && tag !== "IFRAME") return;
+    var url = el.getAttribute("src") || el.getAttribute("data-src");
+    if (!allowed(url)) return;
+    el.setAttribute("data-categories", "essential");
+    if (tag === "SCRIPT" && el.type === "text/plain" && el.hasAttribute("data-autoblocked")) rescue(el, url);
+  }
+
+  // Termly decides on scripts that other scripts create (Elfsight's widget loader) before they reach
+  // the DOM, so marking them is too late. Swap each one for a copy that is essential from the start.
+  function rescue(blocked, url) {
+    if (!blocked.parentNode) return;
+    var copy = document.createElement("script");
+    copy.setAttribute("data-categories", "essential");
+    for (var i = 0; i < blocked.attributes.length; i++) {
+      var a = blocked.attributes[i];
+      if (!/^(type|src|data-src|data-autoblocked|data-categories|data-has-derived-categories)$/.test(a.name)) copy.setAttribute(a.name, a.value);
+    }
+    copy.async = false;
+    copy.src = url;
+    blocked.parentNode.replaceChild(copy, blocked);
+  }
+
+  // Parser-inserted tags. Registered before Termly's observer, so this callback runs first for each batch.
+  new MutationObserver(function (records) {
+    for (var i = 0; i < records.length; i++) {
+      var added = records[i].addedNodes;
+      for (var j = 0; j < added.length; j++) {
+        mark(added[j]);
+        if (added[j].querySelectorAll) [].forEach.call(added[j].querySelectorAll("script[src],iframe[src]"), mark);
+      }
+    }
+  }).observe(document.documentElement, { childList: true, subtree: true });
+
+  // Tags that other scripts add later, such as Webflow's lazy chunks and widget loaders.
+  ["appendChild", "insertBefore"].forEach(function (name) {
+    var original = Node.prototype[name];
+    Node.prototype[name] = function (node) {
+      mark(node);
+      return original.apply(this, arguments);
+    };
+  });
+})();
+</script>
+
+<!-- Cookie consent -->
+<script src="https://app.termly.io/resource-blocker/e51fcbf6-ee3e-41de-8aeb-9af4d07bdb32?autoBlock=on"></script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MF9C6BGG');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Keep this css code to improve the font quality-->
+<style>
+  * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -o-font-smoothing: antialiased;
+}
+
+</style>
+<!-- Keep this css code to improve the font quality-->
