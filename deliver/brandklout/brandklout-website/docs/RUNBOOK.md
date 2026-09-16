@@ -10,9 +10,9 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v18 verbatim with Client-First type roles (seq 41, 2026-09-15)
+## Status: v18 verbatim with Client-First type roles (seq 42, 2026-09-15)
 
-- **Seq 41 (2026-09-15, night; seq 38 + the editing proof, reverted): font sizes are Client-First role classes.** Sang's edit that never
+- **Seq 42 (2026-09-15, night): font sizes are Client-First role classes, tightened.** No-op chips are gone, recurring utility stacks are composite styles (`text-style-label`, `text-style-kicker`…), identical layout classes merged. Sang's edit that never
   published (a paragraph's size) was a base-breakpoint edit on a generated class (`text-18-7`) that
   carried its own tablet and phone sizes. Now font-size lives ONLY on `text-size-{micro…display-xlarge}`
   and `heading-style-{h6…h1, display}`, responsive values on the same chip, everything else

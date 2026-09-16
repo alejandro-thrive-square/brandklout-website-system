@@ -631,7 +631,29 @@ const pick = (bag, keys, keep) => {
 }
 const empty = (b) => !b || (!Object.keys(b.styles).length && !Object.keys(b.ctx).length)
 const canon = (o) => JSON.stringify(o, (k, v) => k === 'ord' ? undefined : (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).sort()) : v))
+/* GENERIC DECLARATIONS STAY GENERIC (tightening, 2026-09-15). A generic rule (`.reference-site *`
+   under prefers-reduced-motion: `scroll-behavior: auto`) is carried as written AND, until now, its
+   declaration was also resolved onto every element it matched: 771 of 889 classes carried the same
+   reduced-motion entry, and five classes (`content-block-h2` on 897 elements) carried nothing else.
+   A declaration a carried generic rule already makes, under the same condition, comes off the bag. */
+const genericDecls = new Map()
+for (const r of rules) {
+  if (!r.an.some((a) => a && a.generic)) continue
+  const id = ctxId(r.ctx, conditions) ?? ''
+  for (const l of r.longs) genericDecls.set(`${id}|${l.prop.startsWith('--') ? l.prop : l.prop.replace(/-([a-z])/g, (_, c) => c.toUpperCase())}`, l.value)
+}
+const stripGeneric = (bag) => {
+  if (!bag) return
+  for (const [k, v] of Object.entries(bag.styles)) if (genericDecls.get('|' + k) === v) { delete bag.styles[k]; delete bag.prio[k] }
+  for (const [id, b] of Object.entries(bag.ctx)) {
+    for (const [k, v] of Object.entries(b)) if (genericDecls.get(`${id}|${k}`) === v) { delete b[k]; if (bag.ctxPrio[id]) delete bag.ctxPrio[id][k] }
+    if (!Object.keys(b).length) { delete bag.ctx[id]; delete bag.ctxPrio[id] }
+  }
+}
+const declCount = (b) => Object.keys(b.styles).length + Object.values(b.ctx).reduce((n, x) => n + Object.keys(x).length, 0)
+report.genericDeclsStripped = 0
 for (const el of elements) {
+  for (const b of Object.values(el.result)) { const before = declCount(b); stripGeneric(b); report.genericDeclsStripped += before - declCount(b) }
   const stat = el.result[STATIC + ''] ?? el.result['||']
   const hasType = stat && ('fontSize' in stat.styles || Object.values(stat.ctx).some((b) => 'fontSize' in b))
   el.type = hasType ? pick(stat, TYPO, true) : null
@@ -640,6 +662,26 @@ for (const el of elements) {
   for (const k of Object.keys(el.layout)) if (empty(el.layout[k])) delete el.layout[k]
   el.typeSig = el.type && !empty(el.type) ? canon(el.type) : null
   el.layoutSig = Object.keys(el.layout).length ? canon(el.layout) : null
+}
+/* IDENTICAL LAYOUT CLASSES MERGE (tightening, 2026-09-15). Two elements whose static styles, breakpoints
+   and state rules are the same get one class even when one of them also has a `::placeholder` rule (an
+   input beside a select): a placeholder rule on an element without a placeholder is nothing. Any other
+   state difference (a hover the other lacks) keeps them apart, because merging would add a state. */
+report.mergedLayoutClasses = 0
+{
+  const stripPh = (layout) => Object.fromEntries(Object.entries(layout).filter(([k]) => !k.includes('::placeholder')))
+  const canonical = new Map() // key without placeholder rules -> the first element's { sig, layout }
+  for (const el of elements) {
+    if (!el.layoutSig) continue
+    const key = canon(stripPh(el.layout))
+    const c = canonical.get(key)
+    if (!c) { canonical.set(key, { sig: el.layoutSig, layout: el.layout }); continue }
+    if (c.sig === el.layoutSig) continue
+    for (const [k, bag] of Object.entries(el.layout)) if (k.includes('::placeholder') && !c.layout[k]) c.layout[k] = bag
+    el.layout = c.layout
+    el.layoutSig = c.sig
+    report.mergedLayoutClasses++
+  }
 }
 const ident = (s) => s.replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '').replace(/^(\d)/, 'c$1') || 'el'
 const reserved = new Set([...stateClasses, ...keepClasses, ...hookClasses])
@@ -968,7 +1010,18 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
   const countByName = new Map()
   const sigByName = new Map()
   const tagsByName = new Map() // type class -> { tag: count }, to tell a heading from a big number
-  for (const el of elements) if (el.typeSig) { const n = typeNames.get(el.typeSig); countByName.set(n, (countByName.get(n) ?? 0) + 1); sigByName.set(n, el.typeSig); const t = tagsByName.get(n) ?? tagsByName.set(n, {}).get(n); t[el.info.tag] = (t[el.info.tag] ?? 0) + 1 }
+  const firstClassByName = new Map() // type class -> { original first class: count }, to name a composite style
+  for (const el of elements) if (el.typeSig) { const n = typeNames.get(el.typeSig); countByName.set(n, (countByName.get(n) ?? 0) + 1); sigByName.set(n, el.typeSig); const t = tagsByName.get(n) ?? tagsByName.set(n, {}).get(n); t[el.info.tag] = (t[el.info.tag] ?? 0) + 1; const fc = (el.info.cls || '').split(/\s+/).filter((c) => c && !stateClasses.has(c))[0] || el.info.tag; const f = firstClassByName.get(n) ?? firstClassByName.set(n, {}).get(n); f[fc] = (f[fc] ?? 0) + 1 }
+  const majority = (o) => Object.entries(o ?? {}).sort((a, b) => b[1] - a[1])[0]?.[0]
+  /* Values snap to a coarse grid so Sang's 32 letter-spacings and 29 line-heights become a handful of
+     utilities: tracking to 0.01em, line-height to 0.05. Below what anyone sees; 10 utilities had one use. */
+  const snap = (prop, v) => {
+    const m = String(v).match(/^(-?\d*\.?\d+)(em)?$/)
+    if (!m) return v
+    if (prop === 'letterSpacing' && m[2] === 'em') { const x = Math.round(Number(m[1]) * 100) / 100; return `${x < 0 ? '-' : ''}${String(Math.abs(x)).replace(/^0\./, '.')}em` }
+    if (prop === 'lineHeight' && !m[2]) return String(Math.round(Number(m[1]) * 20) / 20)
+    return v
+  }
   const mostlyHeadingTag = (n) => { const t = tagsByName.get(n) ?? {}; const all = Object.values(t).reduce((a, b) => a + b, 0); const h = Object.entries(t).filter(([k]) => /^h[1-6]$/.test(k)).reduce((a, [, v]) => a + v, 0); return all > 0 && h * 2 >= all }
   const hasLate = new Set()
   for (const el of elements) if (el.typeSig && el.type?.late) hasLate.add(typeNames.get(el.typeSig))
@@ -1008,6 +1061,7 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
   }
   const utilities = new Map() // name -> { prop, value }
   const utilByValue = new Map() // `${prop}|${value}` -> name
+  const composites = new Map() // sorted utility names -> { name, styles }
   const ROLE_PROPS = { text: ['lineHeight'], heading: ['lineHeight', 'fontFamily', 'fontWeight', 'letterSpacing'] }
   const retired = new Set()
   const pushed = []
@@ -1019,7 +1073,7 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
     // something this class must not override)
     for (const prop of ROLE_PROPS[role.heading ? 'heading' : 'text']) {
       if (!role.members.every((m) => m.r.styles[prop] !== undefined)) continue
-      styles[prop] = modal(role.members.map((m) => [m.r.styles[prop], m.n]))
+      styles[prop] = snap(prop, modal(role.members.map((m) => [snap(prop, m.r.styles[prop]), m.n])))
     }
     // responsive sizes: the modal ratio per band, on the role
     const ctx = {}
@@ -1051,10 +1105,10 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
       typeRoles.mapping[m.r.name] = name
       if (Math.abs(m.base - role.target) > 0) typeRoles.deviations.push({ was: m.base, now: role.target, elements: m.n, role: name })
       // utilities for what the role does not carry, one property each
-      const names = [name]
+      let names = [name]
       for (const prop of TYPO) {
         if (prop === 'fontSize') continue
-        const v = m.r.styles[prop]
+        const v = snap(prop, m.r.styles[prop])
         if (v === undefined || v === styles[prop]) continue
         // one utility per (property, value); a second value under the same name gets a numbered name
         const key = `${prop}|${v}`
@@ -1067,15 +1121,37 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
         }
         names.push(u)
       }
+      /* COMPOSITE STYLES. A stack of three or more utilities that 20+ elements share (the 210 form labels:
+         tiny, 700, tracked, allcaps) is one style with a name, not four chips: `text-style-field-label`
+         carries those properties itself, named after the elements' original class. */
+      if (m.n >= 20 && names.length >= 3) {
+        const key = names.slice(1).sort().join(' ')
+        let comp = composites.get(key)
+        if (!comp) {
+          const cname = claim(`text-style-${ident(String(majority(firstClassByName.get(m.r.name)) || 'text'))}`)
+          const cstyles = {}
+          for (const u of names.slice(1)) cstyles[utilities.get(u).prop] = utilities.get(u).value
+          comp = { name: cname, styles: cstyles, from: names.slice(1) }
+          composites.set(key, comp)
+        }
+        names = [name, comp.name]
+      }
       // per-breakpoint values other than the size do not travel (rare; counted)
       for (const [b, bag] of Object.entries(m.r.contextStyles)) for (const k of Object.keys(bag)) if (k !== 'fontSize') typeRoles.droppedResponsive += m.n
       typeClasses.set(sigByName.get(m.r.name), names)
       retired.add(m.r)
     }
   }
+  const usedUtil = new Set([...typeClasses.values()].flat())
   for (const [u, { prop, value, prio }] of utilities) {
+    if (!usedUtil.has(u)) continue // folded into a composite everywhere it appeared
     pushed.push({ name: u, kind: 'class', selector: '.' + u, order: 0, styles: { [prop]: value }, ...(prio ? { stylePriorities: { [prop]: prio } } : {}), contextStyles: {}, origin: 'type' })
     typeRoles.utilities[u] = `${prop}: ${value}`
+  }
+  typeRoles.composites = {}
+  for (const c of composites.values()) {
+    pushed.push({ name: c.name, kind: 'class', selector: '.' + c.name, order: 0, styles: c.styles, contextStyles: {}, origin: 'type' })
+    typeRoles.composites[c.name] = c.from.join(' + ')
   }
   for (let k = out.length - 1; k >= 0; k--) if (retired.has(out[k])) out.splice(k, 1)
   // roles, then utilities, after every other rule. Only THESE get an order here: the reset revert's
@@ -1087,13 +1163,14 @@ const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], dropp
   const lines = [`# Type roles (Client-First) — generated by class-system.mjs`, '', `Font-size lives only on these classes. Sang's sizes snap to the scale; "from" lists his sizes (elements) each role replaced.`, '', '| role | px at 1440 | elements | responsive (laptop/tablet/mobile-l/mobile) | from |', '| :-- | --: | --: | :-- | :-- |']
   for (const [n, r] of Object.entries(typeRoles.roles).sort((a, b) => a[1].px - b[1].px)) lines.push(`| \`${n}\` | ${r.px} | ${r.elements} | ${Object.entries(r.responsive).map(([b, v]) => `${b} ${v}`).join(', ') || '-'} | ${Object.entries(r.from).sort((a, b) => parseFloat(a[0]) - parseFloat(b[0])).map(([k, v]) => `${k} (${v})`).join(', ')} |`)
   lines.push('', `## Responsive ratios per role and band (ratio: elements), the chosen one first on desktop bands, the smallest sizeable one on phones`, '', ...Object.entries(typeRoles.ratios ?? {}).map(([k, v]) => `- \`${k}\`: ${Object.entries(v).map(([r, n]) => `${r}: ${n}`).join(', ')}`))
+  lines.push('', `## Composite styles (a recurring stack of utilities, one chip)`, '', ...Object.entries(typeRoles.composites).sort().map(([c, d]) => `- \`${c}\`: ${d}`))
   lines.push('', `## Utilities (one property each, stacked after the role)`, '', ...Object.entries(typeRoles.utilities).sort().map(([u, d]) => `- \`${u}\`: ${d}`))
   const dev = typeRoles.deviations
   const devEls = dev.reduce((s, d) => s + d.elements, 0)
   const worst = dev.slice().sort((a, b) => Math.abs(b.was - b.now) - Math.abs(a.was - a.now))[0]
   lines.push('', `## Deviations from Sang's sizes at 1440`, '', `- ${devEls} element(s) changed size; worst ${worst ? `${worst.was}px -> ${worst.now}px (${worst.role}, ${worst.elements} el)` : 'none'}`, `- ${typeRoles.droppedResponsive} element-breakpoint value(s) not carried (a bespoke responsive size or a per-breakpoint line-height/tracking; the role's applies)`, `- left as written: ${typeRoles.skipped.join('; ') || 'none'}`, '', '## Version Control', '', 'Generated; regenerate, never edit.', '')
   fs.writeFileSync(path.join(SRC, 'type-roles.md'), lines.join('\n'))
-  typeRoles.summary = `${Object.keys(typeRoles.roles).length} roles + ${utilities.size} utilities replace ${retired.size} type classes; ${devEls} elements snapped (worst ${worst ? `${worst.was}->${worst.now}px` : '-'})`
+  typeRoles.summary = `${Object.keys(typeRoles.roles).length} roles + ${Object.keys(typeRoles.utilities).length} utilities + ${composites.size} composite styles replace ${retired.size} type classes; ${devEls} elements snapped (worst ${worst ? `${worst.was}->${worst.now}px` : '-'}); ${report.genericDeclsStripped} generic declarations off the classes, ${report.mergedLayoutClasses} elements on a merged layout class`
 }
 
 /* --- write the pages ------------------------------------------------------------------------- */

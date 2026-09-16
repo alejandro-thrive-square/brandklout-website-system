@@ -50,7 +50,15 @@ so we can make updates very easy".
 - Everything else typographic an element had is a **one-property utility**, stacked after the role
   and named for what it does: `text-weight-700`, `text-style-allcaps`, `text-family-heading`,
   `text-tracking-n02`, `text-lh-1-65`. A custom (layout) class carries no font-size, family, weight,
-  line-height, tracking or transform at all, so no edit on it can fight a role.
+  line-height, tracking or transform at all, so no edit on it can fight a role. Tracking snaps to
+  0.01em and line-height to 0.05 before a utility is named, and a stack of three or more utilities
+  that 20+ elements share is one **composite style** named after those elements' original class
+  (`text-style-label`, `text-style-kicker`, `text-style-eyebrow`, `text-style-h4`…), so a form label
+  reads `field-label text-size-tiny text-style-label`, not five chips.
+- **Generic declarations stay generic**: a declaration that a carried generic rule already makes
+  (`.reference-site *` under prefers-reduced-motion) is stripped from every element's bag, so an
+  element whose cascade is nothing but generic rules gets no layout chip. Layout classes identical in
+  everything but a `::placeholder` rule merge; ones that differ in a hover or focus rule do not.
 - Left as written (about 20): type classes whose font-size existed only inside a media query or
   was a `clamp()`/`em`; they keep their old `text-NN` name and the gate knows them.
 - Cost, stated: sizes move by up to 2px at 1440 (a 13px label becomes 14, a 43px h2 becomes 44),

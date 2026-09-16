@@ -1,4 +1,4 @@
-## 2026-09-15 (night): a font-size edit that never published → Client-First type roles (seq 41)
+## 2026-09-15 (night): a font-size edit that never published → Client-First type roles (seq 42)
 
 Reported (Alejandro, after a call): Sang "tried to change the font size of one paragraph element and
 when published it wouldn't actually update. Might be the fluid responsive CSS rule ... we need to
@@ -52,6 +52,37 @@ the verbatim rebuild — generated names are not stable across builds either.)
   published: hero paragraph 18 → 24px at 1440, 1200 AND 900 (before the fix 900 stayed 16px);
   390 stayed 15px because the role carries its own phone value — the Webflow model, edit it on the
   phone tab. Tablet tab → 0.75rem: only 900 changed (12px). Reverted; seq 41 is seq 38's content.
+
+### Tightened (seq 42): "a lot of combo classes that don't serve any purpose"
+
+Alejandro's audit request found three kinds of dead weight; all three are gone in seq 42:
+
+- **A no-op class on 897 elements.** `content-block-h2` (and four others) carried nothing but the
+  reduced-motion `scroll-behavior: auto` that the generic rule `.reference-site *` already gives
+  every element; 771 of 889 classes carried that same entry. Generic declarations are now stripped
+  from every element's bag before its classes are formed (31,223 declarations off the classes),
+  so an element whose cascade was nothing but generic rules gets no chip at all: 847 elements lost
+  a useless class, avg chips 2.12 → 2.07, one-chip elements 3,636 → 2,852 of a smaller total.
+- **Utility stacks.** 32 `text-tracking-*` and 29 `text-lh-*` utilities (10 used once) came from
+  every letter-spacing and line-height Sang ever typed; values now snap to 0.01em / 0.05. A stack
+  of three or more utilities shared by 20+ elements is one **composite style** named after the
+  elements' original class: `text-style-label` (weight 700, tracking .1em, allcaps — the 210 form
+  labels), `text-style-kicker`, `text-style-eyebrow`, `text-style-cs-kicker`, `text-style-h4`,
+  `text-style-h3`, `text-style-brand`, `text-style-cs-point-number`, `text-style-photo-fallback`.
+  76 utilities → 53 + 9 composites; elements with a tracking chip 893 → 317.
+- **Duplicate layout classes.** Two elements with identical static styles and states now share a
+  class even when one has a `::placeholder` rule the other cannot use (an input beside a select):
+  62 elements merged. The 19 remaining identical-looking pairs differ in hover/focus rules and
+  stay apart, because merging them would add a state to one of them. Four classes with no static
+  styles remain (`a`, `form-input`, …): each anchors a hover/focus rule and is not a no-op.
+- 122 original class names stay on the markup with no rule: script hooks (`btn`, `nav-links`,
+  `dot-1`) and the classes kept selectors name. Not removable without touching Sang's scripts.
+
+Gates on the tightened build: `type-roles-check 1440` FAIL none, 390 advisory 40; `standard-check`
+270/270; live (seq 42) `verify-live` FAIL none, `css-parity` FAIL none, `visual-diff` 1440 index 0.087% / 390 0.158%, `type-roles-check 1440
+--live` clean on 29 pages and 2 mispairs on the home page (the live pairing window matched a
+"Local SEO" span in the mock diagram to another span of the same text; probed directly, both
+read 10px on Sang's page and live).
 
 ### Visible changes (tell Sang)
 
