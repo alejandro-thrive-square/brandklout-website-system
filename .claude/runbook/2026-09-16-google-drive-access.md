@@ -40,8 +40,20 @@ Repo-level. No client files changed.
   called the file binary. `safeName` now uses an `\x00-\x1f` range, written through a
   fromCharCode script.
 
+## Worktrees
+
+`main` would not merge cleanly into 14 of the 15 `bk-*` branches. The conflicts pre-date this work:
+`embed-origins/plugin.json`, runbooks, and `set-origins.mjs` on brandklout-website. So each branch
+instead got one commit that checks out `scripts/drive.mjs` and `deliver/brandklout/docs/GOOGLE_DRIVE.md`
+from `main` and adds the same entry-point line. These are identical changes, so they add no new
+conflicts. 13 branches are done and verified from `bk-livewell`. **`bk-mason-park` and
+`bk-mason-park-kids` were skipped** because their "BugHerd comments" sessions were live; give them the
+same commit once those sessions finish.
+
 ## Next
 
+- Apply the Drive commit to `bk-mason-park` and `bk-mason-park-kids`.
+- A real `main` sync pass across the worktrees, starting with the `embed-origins/plugin.json` conflict.
 - Ask the owners to share the three blocked shortcut targets with alejandro@thrivesquare.com.
 
 - Optional: fill in Branding and publish the app (or recreate the project inside the thrivesquare.com
