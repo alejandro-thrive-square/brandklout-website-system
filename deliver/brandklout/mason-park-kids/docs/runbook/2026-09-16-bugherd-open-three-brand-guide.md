@@ -33,6 +33,7 @@ They belong to `bk-mason-park` and were not handled here.
   `hyphens: auto`. It is clean at 920/1024/1280/1440, locally and live. The `our-services @390` rail crop and
   a one-off blog crop were already there: the first appears with the old CSS too, and the second did not
   reproduce.
+- Commits: `d586d471` (the fix), `38c6a9b3` (this runbook).
 - Replies sent with `bugherd/reply.mjs --send` (plan `replies.json`; 09-15's plan kept as
   `replies-0915.json`). #4, #11 and #28 are all **done**. The project has 0 open tasks.
 
