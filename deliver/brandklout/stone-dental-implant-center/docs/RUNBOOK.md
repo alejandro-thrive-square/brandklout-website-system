@@ -17,7 +17,7 @@ The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5
 
 ## Current
 
-- **Termly → GHL consent bridge** (2026-09-16): the standard snippet is built and tested, but **not yet pasted**
-  into Webflow footer code. The 11 consent fields on GHL form `0mtZk3CrshD7Y0OYOao4` still need to be set to
-  hidden. See [`runbook/2026-09-16-termly-ghl-consent-bridge.md`](./runbook/2026-09-16-termly-ghl-consent-bridge.md)
+- **Termly → GHL consent bridge**: v1.0 is live and values reach GHL (confirmed by Gage). **v1.1 still needs pasting into
+  the Webflow footer in place of v1.0**: the form renders without Termly's Enable step, and no choice counts as Decline.
+  See [`runbook/2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md`](./runbook/2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md)
   and [`../snippets/termly-ghl-consent/`](../snippets/termly-ghl-consent/README.md).

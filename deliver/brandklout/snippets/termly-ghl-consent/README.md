@@ -14,21 +14,29 @@ iframe URL, including dropdowns, checkboxes and text. The bridge uses that. It r
 adds the eleven `privacy_*` / `marketing_*` values to the `src` of every GHL form, survey or booking
 iframe on the page, and reloads those iframes whenever the visitor changes their choice.
 
-It also fixes a problem that Termly creates. With `autoBlock=on`, Termly marks the GHL iframe
-`data-categories="unclassified"` and leaves it blank until the visitor clicks **Accept**. A visitor who
-clicks Decline or ignores the banner never sees the form. With `loadFormsWithoutConsent: true` (the
-default), the bridge loads the form for everyone. The contact form is strictly necessary, and the
-consent values it carries are what makes that visitor's choice auditable.
+It also removes Termly's **"Enable this content?"** step in front of the form, which hurts conversions.
+With `autoBlock=on`, Termly marks the GHL iframe and GHL's `form_embed.js` as `unclassified`. It hides
+the iframe (`display:none`, empty `src`) and draws a placeholder box with an Enable button. With
+`loadFormsWithoutConsent: true` (the default), the bridge does three things. It sets the iframe `src`.
+It hides Termly's box for that iframe and shows the form, using a stylesheet rule with `!important`.
+It loads `form_embed.js` marked `data-categories="essential"`; without that script the form is stuck
+at 150px tall. GHL's tracking scripts (`number_pool.js`, `user_session.js`) and other embeds such as
+YouTube and Vimeo stay blocked.
+
+**Until the visitor answers the banner, the form sends the values a Decline click would send**:
+everything `denied`, opt-out `true`. The timestamp, receipt ID and policy version stay empty until
+there is a real Termly record, so a CRM can tell "declined by default" from "clicked Decline". The
+banner itself stays open.
 
 ## Mapping
 
 | Field | Value |
 | :--- | :--- |
-| `privacy_analytics_consent` | `granted` / `denied` from Termly `analytics`; `unknown` before any choice |
-| `privacy_advertising_consent` | `granted` only if `advertising` is allowed and there is no GPC signal or Do Not Sell request; otherwise `denied` (`unknown` before any choice) |
+| `privacy_analytics_consent` | `granted` / `denied` from Termly `analytics`; `denied` before any choice |
+| `privacy_advertising_consent` | `granted` only if `advertising` is allowed and there is no GPC signal or Do Not Sell request; otherwise `denied` (also before any choice) |
 | `privacy_ad_user_data_consent` | same as advertising |
 | `privacy_ad_personalization_consent` | same as advertising |
-| `privacy_sale_share_opt_out` | `true` if GPC is on, Do Not Sell was requested, or advertising was declined; otherwise `false` |
+| `privacy_sale_share_opt_out` | `true` if GPC is on, Do Not Sell was requested, advertising was declined, or the visitor has not chosen yet; otherwise `false` |
 | `privacy_gpc_detected` | `true` / `false` from `navigator.globalPrivacyControl` (or Termly's saved `gpc`) |
 | `privacy_consent_timestamp_utc` | ISO UTC time when the choice was saved; empty before any choice |
 | `privacy_policy_version` | `CONFIG.privacyPolicyVersion`, or Termly's `document_version_id` if that is empty |
@@ -54,8 +62,8 @@ Termly changes that format, those three fields come through empty, and the conse
    Webflow that is *Site settings → Custom code → Footer code*; on Instatic it goes in a site-wide
    code asset. Set `marketingDisclosureVersion` to the date of the current consent wording, then publish.
 4. **Verify:** open a page with a form in a private window. The form should appear before you choose
-   anything. In DevTools, the iframe `src` should include `privacy_analytics_consent=unknown`. Click
-   Decline: the iframe reloads with `denied` and `privacy_sale_share_opt_out=true`. Submit a test lead
+   anything, with no Enable box. In DevTools, the iframe `src` should include
+   `privacy_analytics_consent=denied`. Click Accept: the iframe reloads with `granted`. Submit a test lead
    and check the contact's Consent folder in GHL.
    The headless check used on Stone Dental is described in the 2026-09-16 run in that client's runbook.
 
@@ -64,8 +72,10 @@ Termly changes that format, those three fields come through empty, and the conse
 - **Reloads lose typed input.** When the visitor changes their choice in *Consent Preferences* while
   filling out the form, the iframe reloads and the fields they already filled are cleared. That is
   unavoidable: a cross-origin form can't be updated in place.
-- **Turning off `loadFormsWithoutConsent`** brings back Termly's default: decliners see an empty box
-  where the form should be.
+- **Turning off `loadFormsWithoutConsent`** brings back Termly's default: the Enable box, and nothing
+  for visitors who decline.
+- **After Accept, `form_embed.js` is on the page twice** (Termly unblocks the original). That is harmless:
+  the form still sizes correctly (991px on the Stone All-on-X page).
 - **GHL popup forms** (`data-layout` popup or sticky) are the same iframe, and the bridge handles them
   too. **Hosted GHL funnel pages** are not covered, because they have no parent page to run the script.
 - **Headless testing:** NordVPN returns a headerless 204 for `app.termly.io` in Chrome, so route

@@ -1,11 +1,12 @@
 # Runbook index
 
-7 runs, newest first. Each line is one file in this folder.
+8 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-16 | Termly → GHL bridge v1.1: form renders without Enable step, default = decline | [`2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md`](./2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md) |
 | 2026-09-16 | Termly → GHL consent bridge (standard snippet), tested, not yet installed | [`2026-09-16-termly-ghl-consent-bridge.md`](./2026-09-16-termly-ghl-consent-bridge.md) |
 | 2026-09-16 | Google Ads "Destination not crawlable" check — page returns 200 to AdsBot | [`2026-09-16-ads-destination-not-crawlable-check.md`](./2026-09-16-ads-destination-not-crawlable-check.md) |
 | 2026-09-03 | Status: all three pages fixed and STAGED, not live (2026-09-03, 4th session)
