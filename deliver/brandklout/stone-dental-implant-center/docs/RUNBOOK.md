@@ -17,8 +17,9 @@ The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5
 
 ## Current
 
-- **Termly (LIVE, 2026-09-16):** head is allowlist v1.1 → Termly → GTM; footer has the GHL bridge v1.1.
-  Fresh visitors get the full page, videos, maps and forms, with trackers still blocked, and the GHL
-  hidden consent fields fill in. Open: the Elfsight footer widget renders 0px even after Accept.
-  See [`runbook/2026-09-16-termly-allowlist-head-order.md`](./runbook/2026-09-16-termly-allowlist-head-order.md)
+- **Termly (LIVE, 2026-09-16, standard v2):** the head has Termly with `autoBlock=off`, above GTM. The footer
+  has GHL call tracking tagged `advertising` and the GHL connection script v2.0.0. There is no allowlist.
+  Fresh visitors get the full site, and tracking waits for Accept.
+  **Open:** the 4 ad landing pages have no Consent Preferences link.
+  See [`runbook/2026-09-16-termly-standard-v2-autoblock-off.md`](./runbook/2026-09-16-termly-standard-v2-autoblock-off.md)
   and [`../snippets/termly-ghl-consent/`](../snippets/termly-ghl-consent/README.md).

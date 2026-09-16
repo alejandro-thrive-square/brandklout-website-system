@@ -1,6 +1,6 @@
-<!-- Brandklout: Termly -> GoHighLevel consent bridge (v1.1.0)
-     Paste once, site-wide, in the footer custom code (Webflow: Site settings > Custom code > Footer).
-     It copies each visitor's Termly choice into the hidden privacy_* fields of every embedded GHL form or survey.
+<!-- Brandklout: Termly -> GoHighLevel consent bridge (v2.0.0)
+     Site-wide FOOTER code. Copies each visitor's Termly choice into the hidden privacy_* fields of every
+     embedded GHL form, survey or calendar. Needs Termly loaded with autoBlock=off (see README).
      Per site, only CONFIG changes. Docs: deliver/brandklout/snippets/termly-ghl-consent/README.md -->
 <script>
 (function () {
@@ -8,10 +8,7 @@
     // Written to marketing_disclosure_version. Bump it when the SMS/email consent wording on the form changes.
     marketingDisclosureVersion: "2026-09-16",
     // Written to privacy_policy_version. Leave it empty to use the document version ID Termly reports.
-    privacyPolicyVersion: "",
-    // Termly's auto-blocker hides GHL forms behind an "Enable this content?" box until the visitor accepts,
-    // which kills conversions. true: render the form at once, with no Enable step, for every visitor.
-    loadFormsWithoutConsent: true
+    privacyPolicyVersion: ""
   };
 
   var FORM_PATH = /\/widget\/(form|survey|booking)\//;
@@ -39,17 +36,13 @@
   function values() {
     var record = termlyRecord();
     var saved = record ? record.value : {};
-    var state = termlyState() || saved;
-    var chosen = !!record;
+    var state = record ? (termlyState() || saved) : {};
     var gpc = navigator.globalPrivacyControl === true || saved.gpc === true;
-    if (!chosen) state = {};
     var optOut = gpc || state.do_not_sell === true || state.advertising !== true;
-
-    function decide(allowed) { return allowed ? "granted" : "denied"; }
-    var ads = decide(state.advertising === true && !optOut);
+    var ads = state.advertising === true && !optOut ? "granted" : "denied";
 
     return {
-      privacy_analytics_consent: decide(state.analytics === true),
+      privacy_analytics_consent: state.analytics === true ? "granted" : "denied",
       privacy_advertising_consent: ads,
       privacy_ad_user_data_consent: ads,
       privacy_ad_personalization_consent: ads,
@@ -72,52 +65,13 @@
     return url.toString();
   }
 
-  // Stylesheet !important beats the inline display:none Termly puts on the iframe and its placeholder box.
-  function addStyles() {
-    if (document.getElementById("bk-consent-form-css")) return;
-    var css = document.createElement("style");
-    css.id = "bk-consent-form-css";
-    css.textContent = "iframe[data-bk-consent-form]{display:block!important}" +
-      ".termly-blocked-content[data-bk-consent-form]{display:none!important}";
-    (document.head || document.documentElement).appendChild(css);
-  }
-
-  // Termly also blocks GHL's form_embed.js, which sizes the iframe; without it the form is 150px tall.
-  // GHL's tracking scripts (number_pool.js, user_session.js) stay blocked.
-  function loadEmbedHelper() {
-    if (document.querySelector('script[data-bk-consent-form]')) return;
-    var loaded = [].some.call(document.scripts, function (el) {
-      return /\/js\/form_embed\.js/.test(el.getAttribute("src") || "") && el.type !== "text/plain";
-    });
-    if (loaded) return;
-    var tag = document.createElement("script");
-    tag.src = "https://link.msgsndr.com/js/form_embed.js";
-    tag.setAttribute("data-categories", "essential");
-    tag.setAttribute("data-bk-consent-form", "");
-    document.body.appendChild(tag);
-  }
-
+  // Adds the values to each GHL iframe's URL; GHL prefills fields from matching query keys.
   function update() {
     document.querySelectorAll("iframe").forEach(function (frame) {
-      var base = frame.getAttribute("src") || frame.getAttribute("data-src") || "";
-      if (!FORM_PATH.test(base)) return;
-      var blocked = frame.hasAttribute("data-autoblocked");
-      if (blocked && !CONFIG.loadFormsWithoutConsent) return;
-
-      if (blocked) {
-        addStyles();
-        loadEmbedHelper();
-        frame.setAttribute("data-bk-consent-form", "");
-        var id = frame.getAttribute("data-termly-iframe-id");
-        if (id) {
-          document.querySelectorAll('.termly-blocked-content[data-blocked-iframe-id="' + id + '"]').forEach(function (box) {
-            box.setAttribute("data-bk-consent-form", "");
-          });
-        }
-      }
-
-      var next = withConsent(base);
-      if (frame.getAttribute("src") !== next) frame.setAttribute("src", next);
+      var src = frame.getAttribute("src") || "";
+      if (!FORM_PATH.test(src)) return;
+      var next = withConsent(src);
+      if (src !== next) frame.setAttribute("src", next);
     });
   }
 
@@ -130,7 +84,7 @@
 
   update();
   new MutationObserver(schedule).observe(document.documentElement, {
-    childList: true, subtree: true, attributes: true, attributeFilter: ["src", "data-src"]
+    childList: true, subtree: true, attributes: true, attributeFilter: ["src"]
   });
 
   // Termly loads async; re-run when it is ready and each time the visitor changes their choice.
@@ -138,7 +92,7 @@
     if (window.Termly && Termly.on) {
       Termly.on("initialized", schedule);
       Termly.on("consent", schedule);
-      update();
+      schedule();
     } else if (tries < 100) {
       setTimeout(function () { hook(tries + 1); }, 100);
     }

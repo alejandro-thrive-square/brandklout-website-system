@@ -1,125 +1,109 @@
-# Termly → GoHighLevel consent bridge
+# Termly + GoHighLevel consent: standard install
 
-This is the standard way to get a visitor's Termly cookie choices into the GHL contact record. The
-same script works on every Brandklout client site that uses Termly and an embedded GHL form.
+This is the Brandklout standard for every client site that uses a Termly cookie banner and embedded
+GHL forms. It was first set up and verified on Stone Dental on 2026-09-16.
 
-**Files.** There are two snippets, and both are needed:
+## What goes on each site
 
-| File | Where it goes | What it does |
-| :--- | :--- | :--- |
-| [`termly-allowlist.html`](./termly-allowlist.html) | site-wide **head**, **first**, before Termly | Stops Termly's auto-blocker from blocking the site itself and its content embeds |
-| [`termly-ghl-consent.html`](./termly-ghl-consent.html) | site-wide **footer** | Copies the Termly choice into the GHL form's hidden fields |
+| # | Paste | Where | File |
+| :--- | :--- | :--- | :--- |
+| 1 | Termly script, **`autoBlock=off`** | Site-wide **head**, **above GTM** | [`termly-head.html`](./termly-head.html) |
+| 2 | GHL form embed (iframe + `form_embed.js`) as GHL gives it | The page | from GHL, unchanged |
+| 3 | GHL connection script | Site-wide **footer** | [`termly-ghl-consent.html`](./termly-ghl-consent.html) |
+| 4 | Consent Preferences link | **Every** footer, landing pages included | [`consent-preferences-link.html`](./consent-preferences-link.html) |
 
-**Head order, always:** allowlist → Termly resource blocker → GTM → everything else. Termly has to load
-before GTM so that Google Consent Mode defaults are in place first. The allowlist has to load before
-Termly so that its MutationObserver runs before Termly's.
+Per site, only three things change: the Termly website ID in #1, and `marketingDisclosureVersion` and
+`privacyPolicyVersion` in the `CONFIG` block of #3. There is **no allowlist**.
 
-## Why the allowlist exists
+**Tag every tracker that isn't in GTM.** With auto-block off, Termly holds only the scripts you tag.
+For example, GHL call tracking:
 
-With `autoBlock=on`, Termly files every script and iframe it doesn't recognise as `unclassified` and
-holds it until the visitor clicks Accept. On Stone Dental (2026-09-16) that included **Webflow's own
-bundle** (`cdn.prod.website-files.com/.../*.js`), which left `Webflow` undefined, so the hero text
-never appeared. A fresh visitor saw a broken page until they accepted and reloaded. It also held every
-YouTube, Vimeo and embedly video, Google Maps, the GHL review widget, Elfsight, GHL surveys and forms,
-and `form_embed.js`.
+```html
+<script type="text/plain" data-categories="advertising" src="https://backend.leadconnectorhq.com/appengine/loc/<LOCATION>/pool/<POOL>/number_pool.js"></script>
+<script type="text/plain" data-categories="advertising" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+```
 
-The allowlist marks trusted content hosts `data-categories="essential"`; Termly always lets essential
-resources through. It handles three cases:
-- **Tags in the page HTML:** a MutationObserver registered before Termly's marks them first.
-- **Tags that other scripts insert:** it wraps `appendChild` and `insertBefore`.
-- **Tags Termly has already blocked:** Termly judges a script created by another script before that
-  script reaches the DOM (Elfsight's `googleReviews.js`). The allowlist replaces each blocked copy with
-  a fresh tag marked essential.
+Termly loads a tagged script when the visitor accepts that category (`analytics`, `advertising`,
+`performance`, `social_networking`). GTM tags are held by Google Consent Mode instead. Termly sets the
+defaults to `denied`, and they switch to `granted` when the visitor accepts. That is why Termly must
+sit above GTM.
 
-Trackers stay blocked until consent: `gtag/js`, anything GTM fires, and GHL's `number_pool.js` and
-`user_session.js`. **Never add a tracker to `ALLOW`.** For a new site, load a page in a fresh profile and
-list `script[data-autoblocked]` and `iframe[data-autoblocked]`. Every entry that renders content
-belongs in `ALLOW`.
+## Why auto-block is off
 
-The only Termly API key the team can create (Consent API, `Authorization: <key>` against
-`app.termly.io/api/v1/cookie_whitelist?uuid=`) is **read-only**. It can't change categories or what the
-blocker blocks, which is why this fix lives on the site. The partner API (`api.termly.io/v1`, HMAC
-signed) needs agency keys that Termly issues by hand.
+`autoBlock=on` holds everything Termly doesn't recognise until the visitor clicks Accept. On Stone Dental
+that included **Webflow's own JavaScript**, so fresh visitors saw a broken page. It also held every
+YouTube, Vimeo and Maps embed, the review widgets, and the GHL forms (behind an "Enable" box). Working
+around that took an allowlist that had to be kept up to date on every site. With auto-block off, the
+site works as built, and trackers are held explicitly instead.
 
-## How it works
+**Trade-off:** a new tracker that someone adds without tagging it (and that isn't in GTM) runs before
+consent. Adding a tracker means tagging it; there is no automatic safety net.
 
-A GHL form is embedded as a cross-origin iframe (`…/widget/form/<id>`). A script on the website can't
-read or change fields inside that iframe. GHL does fill any field whose **query key** appears in the
-iframe URL, including dropdowns, checkboxes and text. The bridge uses that. It reads Termly's state,
-adds the eleven `privacy_*` / `marketing_*` values to the `src` of every GHL form, survey or booking
-iframe on the page, and reloads those iframes whenever the visitor changes their choice.
+## What the GHL connection script does
 
-It also removes Termly's **"Enable this content?"** step in front of the form, which hurts conversions.
-With `autoBlock=on`, Termly marks the GHL iframe and GHL's `form_embed.js` as `unclassified`. It hides
-the iframe (`display:none`, empty `src`) and draws a placeholder box with an Enable button. With
-`loadFormsWithoutConsent: true` (the default), the bridge does three things. It sets the iframe `src`.
-It hides Termly's box for that iframe and shows the form, using a stylesheet rule with `!important`.
-It loads `form_embed.js` marked `data-categories="essential"`; without that script the form is stuck
-at 150px tall. GHL's tracking scripts (`number_pool.js`, `user_session.js`) and other embeds such as
-YouTube and Vimeo stay blocked.
+The GHL form is a cross-origin iframe, so a website script can't touch its fields. GHL does prefill
+any field whose **query key** appears in the iframe URL, including dropdowns, checkboxes and text.
+The script adds the eleven values below to every `…/widget/(form|survey|booking)/…` iframe, and
+reloads those iframes when the visitor changes their choice.
 
-**Until the visitor answers the banner, the form sends the values a Decline click would send**:
-everything `denied`, opt-out `true`. The timestamp, receipt ID and policy version stay empty until
-there is a real Termly record, so a CRM can tell "declined by default" from "clicked Decline". The
-banner itself stays open.
-
-## Mapping
+**Until the visitor answers the banner, it sends the values a Decline click would send.** The
+timestamp, receipt ID and policy version stay empty until there is a real Termly record, so the CRM can
+tell "declined by default" from "clicked Decline".
 
 | Field | Value |
 | :--- | :--- |
-| `privacy_analytics_consent` | `granted` / `denied` from Termly `analytics`; `denied` before any choice |
-| `privacy_advertising_consent` | `granted` only if `advertising` is allowed and there is no GPC signal or Do Not Sell request; otherwise `denied` (also before any choice) |
+| `privacy_analytics_consent` | `granted` if Termly `analytics` was accepted, otherwise `denied` |
+| `privacy_advertising_consent` | `granted` only if `advertising` was accepted with no GPC signal or Do Not Sell request, otherwise `denied` |
 | `privacy_ad_user_data_consent` | same as advertising |
 | `privacy_ad_personalization_consent` | same as advertising |
-| `privacy_sale_share_opt_out` | `true` if GPC is on, Do Not Sell was requested, advertising was declined, or the visitor has not chosen yet; otherwise `false` |
+| `privacy_sale_share_opt_out` | `true` unless advertising was accepted with no GPC signal or Do Not Sell request |
 | `privacy_gpc_detected` | `true` / `false` from `navigator.globalPrivacyControl` (or Termly's saved `gpc`) |
 | `privacy_consent_timestamp_utc` | ISO UTC time when the choice was saved; empty before any choice |
 | `privacy_policy_version` | `CONFIG.privacyPolicyVersion`, or Termly's `document_version_id` if that is empty |
-| `privacy_cmp_receipt_id` | Termly visitor UUID (`visitor_id`) |
-| `privacy_source_url` | page origin + path (no query string, so no gclid or other personal data) |
+| `privacy_cmp_receipt_id` | Termly visitor UUID; empty before any choice |
+| `privacy_source_url` | page origin + path (no query string) |
 | `marketing_disclosure_version` | `CONFIG.marketingDisclosureVersion` |
 
-Termly doesn't give a timestamp, receipt ID or policy version through its public API, so the bridge
-reads them from Termly's own `localStorage` record (`TERMLY_API_CACHE` → `TERMLY_COOKIE_CONSENT`). If
-Termly changes that format, those three fields come through empty, and the consent fields still work.
+The timestamp, receipt ID and policy version come from Termly's `localStorage` record
+(`TERMLY_API_CACHE` → `TERMLY_COOKIE_CONSENT`), because Termly's public JavaScript API doesn't expose
+them. If Termly changes that format, those three fields come through empty.
 
-## Install on a client site
+## GHL setup (once per location)
 
-1. **GHL: custom fields.** In the location, create the eleven fields listed above (folder `Consent`).
-   Consent fields are single dropdowns with the options `granted`, `denied`, `unknown`. The two
-   true/false fields are checkboxes with the options `true`, `false`. Everything else is single line.
-2. **GHL: form.** Add all eleven fields to every form embedded on the site. Leave each field's
-   **Query Key** as the field key (for example `privacy_analytics_consent`). Mark each field hidden in
-   the form builder.
-   The label-based `hideFields` script only works when it runs *inside* the form. Pasted on the
-   website, it can't reach the fields in the iframe.
-3. **Website:** paste `termly-allowlist.html` at the very top of the head code for the whole site,
-   put the Termly script right after it, and move GTM below Termly. Then paste `termly-ghl-consent.html`
-   into the footer code for the whole site. In Webflow those are *Site settings → Custom code → Head
-   code* and *Footer code*; on Instatic they go in site-wide code assets. Set `marketingDisclosureVersion` to the date of the current consent wording, then publish.
-4. **Verify:** open the site in a private window. The page should render fully and every video and
-   map should play before you answer the banner; in DevTools, `script[data-autoblocked]` should list
-   only trackers. Then open a page with a form in the same window. The form should appear before you choose
-   anything, with no Enable box. In DevTools, the iframe `src` should include
-   `privacy_analytics_consent=denied`. Click Accept: the iframe reloads with `granted`. Submit a test lead
-   and check the contact's Consent folder in GHL.
-   The headless check used on Stone Dental is described in the 2026-09-16 run in that client's runbook.
+1. **Custom fields**, folder `Consent`. Create each field with the type below:
+   - `privacy_analytics_consent`, `privacy_advertising_consent`, `privacy_ad_user_data_consent`,
+     `privacy_ad_personalization_consent`: single dropdown with the options `granted`, `denied`,
+     `unknown`.
+   - `privacy_sale_share_opt_out`, `privacy_gpc_detected`: checkbox with the options `true`, `false`.
+   - The other five fields: single line.
+2. **Every embedded form** gets all eleven fields. Keep each field's **Query Key** equal to the field
+   key, and hide the fields inside the form. Hidden fields still prefill.
+
+## Verify
+
+Open the site in a private window.
+1. **Before answering the banner:** the page, videos, maps and forms all load. In DevTools,
+   `document.querySelectorAll('[data-autoblocked]').length` is `0`. No `number_pool.js` or
+   `user_session.js` request appears in the Network tab. The form iframe `src` contains
+   `privacy_analytics_consent=denied`.
+2. **After Decline:** the form's values stay `denied`, and a receipt ID appears.
+3. **After Accept:** the form reloads with `granted`, and the call-tracking scripts load.
+4. **Consent Preferences link:** clicking it opens Termly's window.
+
+On Stone Dental, `workflows/08-qa/.tmp/termly-ghl-consent-check.cjs` automates these checks.
 
 ## Gotchas
 
-- **Reloads lose typed input.** When the visitor changes their choice in *Consent Preferences* while
-  filling out the form, the iframe reloads and the fields they already filled are cleared. That is
-  unavoidable: a cross-origin form can't be updated in place.
-- **Turning off `loadFormsWithoutConsent`** brings back Termly's default: the Enable box, and nothing
-  for visitors who decline.
-- **After Accept, `form_embed.js` is on the page twice** (Termly unblocks the original). That is harmless:
-  the form still sizes correctly (991px on the Stone All-on-X page).
-- **GHL popup forms** (`data-layout` popup or sticky) are the same iframe, and the bridge handles them
-  too. **Hosted GHL funnel pages** are not covered, because they have no parent page to run the script.
-- **Headless testing:** NordVPN returns a headerless 204 for `app.termly.io` in Chrome, so route
-  Termly's requests through Node (`ctx.route`).
+- **NordVPN Threat Protection blocks `app.termly.io` in Chrome.** One symptom is that the banner's
+  Cookie Policy link opens nothing. For headless tests, send Termly's requests through Node
+  (`ctx.route`).
+- **Changing consent reloads the form.** If a visitor changes their choice mid-form, the iframe reloads
+  and the fields they already filled are cleared.
+- **The Termly key we can get is read-only.** It is a Consent API key (`Authorization: <key>` against
+  `app.termly.io/api/v1/cookie_whitelist?uuid=`). It can't change categories or blocking.
+- **Hosted GHL funnel pages are not covered.** There is no parent page to run the script on.
 
 ## Version Control
 
 This directive follows the root-level version control rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
-Change the version in the script header whenever its behaviour changes.
+Change the version in each script header whenever its behaviour changes.

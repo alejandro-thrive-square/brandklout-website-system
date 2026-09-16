@@ -1,11 +1,12 @@
 # Runbook index
 
-9 runs, newest first. Each line is one file in this folder.
+10 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-16 | Termly standard v2 LIVE: autoBlock off, no allowlist, tracking tagged, bridge v2 | [`2026-09-16-termly-standard-v2-autoblock-off.md`](./2026-09-16-termly-standard-v2-autoblock-off.md) |
 | 2026-09-16 | Termly allowlist + head order LIVE: site renders and embeds play before consent | [`2026-09-16-termly-allowlist-head-order.md`](./2026-09-16-termly-allowlist-head-order.md) |
 | 2026-09-16 | Termly → GHL bridge v1.1: form renders without Enable step, default = decline | [`2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md`](./2026-09-16-termly-ghl-consent-v1-1-no-enable-step.md) |
 | 2026-09-16 | Termly → GHL consent bridge (standard snippet), tested, not yet installed | [`2026-09-16-termly-ghl-consent-bridge.md`](./2026-09-16-termly-ghl-consent-bridge.md) |
