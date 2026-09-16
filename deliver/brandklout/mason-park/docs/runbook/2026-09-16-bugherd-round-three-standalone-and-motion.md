@@ -1,7 +1,7 @@
 # 2026-09-16 — BugHerd round three: a standalone adult site, readable motion, the team portraits
 
 **Instance:** `https://staging.masonparkdental.com`. Production untouched.
-**Commit:** see `git log --grep "BugHerd round three"` (this file lands in the same commit).
+**Commit:** `d967a971` (this file and the build, together).
 **Verified live:** see "The push" below.
 
 ## What arrived
