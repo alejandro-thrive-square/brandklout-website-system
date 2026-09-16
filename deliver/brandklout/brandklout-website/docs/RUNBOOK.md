@@ -10,9 +10,9 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v18 verbatim with Client-First type roles (seq 42, 2026-09-15)
+## Status: v18 verbatim with Client-First type roles (seq 43, 2026-09-16)
 
-- **2026-09-16: "my UI edit didn't publish" was the Laptop tab.** Laptop is max-width 1279, so an edit there never shows at 1280/1440/1512 (Webflow's 1280 tab cascades up; ours cascades down). Publishing works. Team guide: <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>. Open: whether `.cs-section-head`'s stacked layout goes to every width.
+- **Seq 43 (2026-09-16): the editor has a Desktop (base) frame again.** "My UI edit didn't publish" was a site with no `desktop` breakpoint: every canvas click selected Laptop (max-width 1279), so edits never showed at 1280+. `desktop` is first in `site.breakpoints` (published CSS byte-identical) and `class-system.mjs` writes it. Team guide: <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>. Open: whether `.cs-section-head`'s stacked layout goes to every width.
   [`runbook/2026-09-16-laptop-tab-breakpoint-guide.md`](./runbook/2026-09-16-laptop-tab-breakpoint-guide.md).
 - **Seq 42 (2026-09-15, night): font sizes are Client-First role classes, tightened.** No-op chips are gone, recurring utility stacks are composite styles (`text-style-label`, `text-style-kicker`…), identical layout classes merged. Sang's edit that never
   published (a paragraph's size) was a base-breakpoint edit on a generated class (`text-18-7`) that

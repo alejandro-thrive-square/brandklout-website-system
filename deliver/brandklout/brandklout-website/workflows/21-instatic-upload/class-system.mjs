@@ -64,7 +64,14 @@ const refuse = (m) => {
    (Alejandro, 2026-09-15: "no matter the new versions we should be using the standardize font
    scaling and regular breakpoints"). Until then they were derived from Sang's own widths, and every
    package that brought a new width brought a breakpoint or a condition ("too many mobile
-   breakpoints", said twice). */
+   breakpoints", said twice).
+   `desktop` MUST stay first (2026-09-16). The editor treats the breakpoint with that id as the
+   base: its canvas frame is where base styles are edited, and it is the default active breakpoint.
+   Without it every canvas click selected Laptop (≤1279), and edits "never published" at 1280+.
+   It is kept OUT of BREAKPOINTS, which snaps and assigns Sang's widths: there a `max-width: 1440px` rule
+   would become a `desktop` contextStyle, i.e. a base edit. Only the registry's editor list carries it,
+   so its media query never reaches the published CSS. */
+const DESKTOP = { id: 'desktop', label: 'Desktop', width: 1440, mediaQuery: '(max-width: 1440px)', icon: 'monitor' }
 const BREAKPOINTS = [
   { id: 'laptop', label: 'Laptop', width: 1279, mediaQuery: '(max-width: 1279px)', icon: 'monitor' },
   { id: 'tablet', label: 'Tablet', width: 991, mediaQuery: '(max-width: 991px)', icon: 'tablet' },
@@ -1247,7 +1254,7 @@ const registryCss = out
   .join('\n\n')
 fs.writeFileSync(path.join(OUT, 'assets', 'site.css'), `/* registry, as Instatic emits it */\n${registryCss}\n\n/* code asset */\n${codeCss}`)
 fs.writeFileSync(path.join(SRC, 'code.css'), codeCss)
-fs.writeFileSync(path.join(SRC, 'registry.json'), JSON.stringify({ breakpoints: BREAKPOINTS, conditions: condList, rules: out.map(({ origin, ...r }) => r) }, null, 1))
+fs.writeFileSync(path.join(SRC, 'registry.json'), JSON.stringify({ breakpoints: [DESKTOP, ...BREAKPOINTS], conditions: condList, rules: out.map(({ origin, ...r }) => r) }, null, 1))
 const counts = out.reduce((m, r) => ((m[r.origin] = (m[r.origin] ?? 0) + 1), m), {})
 const widths = {}
 for (const r of rules) for (const c of r.ctx) { const m = c.query.match(MAXW); if (m) widths[m[1]] = (widths[m[1]] ?? 0) + 1 }
@@ -1258,7 +1265,7 @@ manifest.classSite = 'class-site'
 fs.writeFileSync(path.join(SRC, 'pages.json'), JSON.stringify(manifest, null, 2) + '\n')
 
 console.log(`css      ${rules.length} rules, ${analysis.size} selectors (${unreadable} unreadable, kept as written)`)
-console.log(`registry ${out.length} rules: ${JSON.stringify(counts)}; ${condList.length} conditions; breakpoints ${BREAKPOINTS.map((b) => b.width).join('/')}`)
+console.log(`registry ${out.length} rules: ${JSON.stringify(counts)}; ${condList.length} conditions; breakpoints ${[DESKTOP, ...BREAKPOINTS].map((b) => b.width).join('/')}`)
 console.log(`elements ${classedEls} carry a new class; ${typeNames.size} type classes, ${layoutNames.size} layout classes`)
 console.log(`hooks    ${keepClasses.size} original classes kept for the scripts and kept selectors`)
 console.log(`checks   ${report.dominatedStates} state declarations always outranked (dropped), ${report.partialOverlap} partly outranked, ${report.bpBeforeCondition} breakpoint-before-condition, ${report.conditionOrderConflicts} condition-order conflicts`)

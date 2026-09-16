@@ -23,9 +23,18 @@
 "I changed `.cs-section-head` in the UI, published, and nothing changed." The edit (flex, column,
 gap 20px) was made with the **Laptop** tab selected and checked in DevTools at **1280×720**. It was
 in the published stylesheet inside `@media (max-width: 1279px)`: measured live, 1279 showed it and
-1280 did not. Nothing was wrong with publishing.
+1280 did not. Publishing was fine. **The real defect was ours: the site had no `desktop` breakpoint.**
+The editor (admin bundle, 2026-09-16) treats the breakpoint with id `desktop` as the base: editing
+with it active writes base styles, it is the default active breakpoint, and clicking inside a canvas
+frame makes that frame's breakpoint active. `class-system.mjs` wrote only the four max-width
+breakpoints, so there was no Desktop frame and every click landed on Laptop; nobody could edit base
+styles. Fixed at seq 43: `{ id: 'desktop', label: 'Desktop', width: 1440, mediaQuery: '(max-width: 1440px)' }`
+first in `site.breakpoints` (published CSS byte-identical, no rule has a `desktop` contextStyle), and
+`class-system.mjs` writes it into every registry. It is kept OUT of the list that snaps Sang's widths,
+or a `max-width: 1440px` rule would land on it and become a base edit. **Any instance whose
+breakpoints were replaced wholesale must keep a `desktop` entry first.**
 
-- **Instatic already cascades like Webflow**: base styles reach every width, each tab overrides only
+- **With the Desktop frame, Instatic cascades like Webflow**: base styles reach every width, each tab overrides only
   the properties set on it, and all four tabs are max-width (Laptop 1279, Tablet 991, Mobile
   landscape 767, Mobile portrait 479).
 - **The trap is Laptop.** Webflow's 1280/1440/1920 tabs are min-width and cascade UP; this site has
