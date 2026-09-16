@@ -50,10 +50,11 @@ const writes = await page.evaluate(() => [...document.querySelectorAll("[data-wr
 console.log(writes.length + " data-write element(s)");
 for (const wr of writes) {
   if (!wr.words) { fail("data-write #" + wr.i + " was never split into words"); continue; }
-  // The trigger is start "top 80%" .. end "bottom 45%": scroll positions that
-  // put the element's top at 80% of the viewport, and its bottom at 45%.
-  const start = wr.top - h * 0.8;
-  const end = wr.top + wr.height - h * 0.45;
+  // The trigger is start "top 95%" .. end "top 55%" (since 2026-09-16, BugHerd
+  // #64: written by the time the element's top is past mid-window). Scroll
+  // positions that put the element's top at 95% of the viewport, then at 55%.
+  const start = wr.top - h * 0.95;
+  const end = wr.top - h * 0.55;
   const states = [];
   for (const f of [0.1, 0.5, 0.9]) {
     await scrollTo(start + (end - start) * f);

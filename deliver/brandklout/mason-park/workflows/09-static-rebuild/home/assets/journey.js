@@ -114,12 +114,20 @@
       tl.from(tag.querySelectorAll("b"), { opacity: 0, x: -14, duration: .7, stagger: .08, ease: EASE }, .12);
     });
 
+    /* THE LINES ARE PUT BACK once they have risen. SplitText measures lines
+       with whatever face is loaded at boot; live, the display face arrives
+       later and is wider, and the frozen lines then broke mid-sentence ("Your
+       Lifetime Partner / in / Dental Health", home hero, 2026-09-16). After
+       the reveal the heading is plain text again and wraps with the real
+       face. The arrival title is split and revealed by arrival() below. */
     $$("[data-split]").forEach(function (el) {
+      if (el.classList.contains("ar-title")) return;
       var sp = splitLines(el);
       var targets = sp && sp.lines && sp.lines.length ? sp.lines : [el];
       gsap.from(targets, {
         yPercent: 108, opacity: 0, duration: 1.05, stagger: .09, ease: "power4.out",
-        scrollTrigger: { trigger: el, start: "top 86%" }
+        scrollTrigger: { trigger: el, start: "top 86%" },
+        onComplete: function () { if (sp && sp.revert) sp.revert(); }
       });
     });
 
@@ -201,7 +209,8 @@
     var sp = splitLines(title);
     if (sp && sp.lines) {
       gsap.set(title, { visibility: "visible" });
-      tl.from(sp.lines, { yPercent: 112, duration: 1.15, stagger: .1, ease: "power4.out" }, 0);
+      tl.from(sp.lines, { yPercent: 112, duration: 1.15, stagger: .1, ease: "power4.out",
+        onComplete: function () { sp.revert(); } }, 0);
     }
     tl.to($$(".ar-lede, .el-badge, .ar-actions, .ar-meta", sec), {
       visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .12, ease: EASE
@@ -234,11 +243,11 @@
       var body = sp.words.slice(0, -9);
       gsap.to(body, {
         color: "#2e3538", stagger: .4, ease: "none",
-        scrollTrigger: { trigger: sec, start: "top 68%", end: "center 45%", scrub: .5 }
+        scrollTrigger: { trigger: big, start: "top 92%", end: "top 45%", scrub: .5 }
       });
       gsap.to(tail, {
         color: "#8c6349", stagger: .3, ease: "none",
-        scrollTrigger: { trigger: sec, start: "center 55%", end: "bottom 68%", scrub: .5 }
+        scrollTrigger: { trigger: big, start: "top 60%", end: "top 35%", scrub: .5 }
       });
     } else {
       gsap.to(big, { color: "#2e3538", scrollTrigger: { trigger: sec, start: "top 70%" } });
@@ -477,7 +486,7 @@
     if (sp && sp.words && sp.words.length) {
       gsap.to(sp.words, {
         color: "#2e3538", stagger: .35, ease: "none",
-        scrollTrigger: { trigger: ".pr-lead", start: "top 78%", end: "bottom 55%", scrub: .5 }
+        scrollTrigger: { trigger: ".pr-lead", start: "top 92%", end: "top 45%", scrub: .5 }
       });
     } else if (q) {
       gsap.to(q, { color: "#2e3538", scrollTrigger: { trigger: ".pr-lead", start: "top 78%" } });
@@ -554,6 +563,29 @@
     document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
   }
   window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+
+  /* THE PAGE GROWS AFTER LOAD, AND EVERY TRIGGER BELOW IT GOES STALE.
+     ScrollTrigger only re-measures on a window resize. Opening a "read more"
+     fold on the doctors page made it 400px taller, so every start/end below
+     the fold fired 400px early: the voices and the measure headings sat on
+     screen at opacity 0 (their departure had already run), and Dr. Nguyen's
+     name faded in place (BugHerd #71, #77, 2026-09-16, measured in WebKit).
+     Re-measure whenever the document's height actually changes: a fold, a
+     late image, a filter, a font. Only on a real change, so the refresh's own
+     pin spacers cannot loop it. */
+  (function () {
+    var root = document.documentElement, last = root.scrollHeight, t = 0;
+    function reflow() {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        if (Math.abs(root.scrollHeight - last) < 2) return;
+        ScrollTrigger.refresh();
+        last = root.scrollHeight;
+      }, 120);
+    }
+    document.addEventListener("toggle", reflow, true);   // <details> toggle does not bubble; capture sees it
+    if ("ResizeObserver" in window) new ResizeObserver(reflow).observe(document.body);
+  })();
 })();
 
 
@@ -608,7 +640,7 @@
     if (sp && sp.words && sp.words.length) {
       gsap.to(sp.words, {
         color: to, stagger: .35, ease: "none",
-        scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: .5 }
+        scrollTrigger: { trigger: el, start: "top 95%", end: "top 55%", scrub: .5 }
       });
     } else {
       gsap.to(el, { color: to, scrollTrigger: { trigger: el, start: "top 75%" } });

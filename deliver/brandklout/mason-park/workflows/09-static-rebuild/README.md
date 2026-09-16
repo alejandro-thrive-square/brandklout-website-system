@@ -70,6 +70,10 @@
 | `.tmp/bugherd/pull.mjs` | Every task by id with its comments and attachments, screenshots and attachments downloaded (`screens-<date>/`). The list endpoint hides page, selector, browser and attachments. |
 | `.tmp/bugherd/diff-rounds.mjs` | What moved on the board between two exports: description, status, selector, screenshot, comments, attachments. |
 | `.tmp/bugherd/shot-tasks.mjs` / `shot-sel.mjs` | Each note re-shot where the reviewer stood (their page, `requester_browser_size`, their selector), in `webkit` or `chromium`; `shot-sel` takes named selectors. |
+| `.tmp/bugherd/serve.mjs` / `shot-at.mjs` | `home/` served on :8089 like staging; one page at one size and scroll (or selector), with `--hover` / `--click`, in WebKit by default. `TASKS=tasks-<date>.json` points `shot-tasks.mjs` at a round's export. |
+| `.tmp/bugherd/probe-fold.mjs` / `probe-split.mjs` | `probe-split`: after scrolling a page through, no heading may still be frozen in `.jr-line`s. `probe-fold`: opens every "read more" fold by click, then reads the opacity of later chapter headings and the split portrait's size: the stale-ScrollTrigger check (round three, #71/#77). |
+| `.tmp/bugherd/logo-rows.mjs` / `logo-pad.mjs` | How close the logo artwork runs to its file's edges, and the re-export with margin inside the file (#3). |
+| `.tmp/bugherd/apply-<date>.mjs` | The round's page edits, idempotent. Team portraits and other client images go in through `frame.mjs` first (`frame: "external"`). |
 | `.tmp/bugherd/reply-<date>.mjs` | The round's replies on the board: one comment per task, `done` only for notes verified live. Dry run by default, `--send` posts. |
 | `.tmp/album-sheet/render-cands.mjs` | Candidate album frames at 900 px with number and orientation, for choosing replacements by eye. |
 | `.tmp/album-sheet/` | The client's Google Photos album as a numbered contact sheet (`render-sheet.mjs`), so "the photo with X" can be found by eye. Numbers match `album-urls.txt`. |
@@ -581,6 +585,27 @@ from `PICKS` alone, so every re-run dropped the `frame: "external"` frames (Dr. 
 **Answering the board.** `reply-<date>.mjs` writes one comment per task and moves a note to
 `done` only once it is verified live; a note that needs the agency (a photo they hold, a
 browser we cannot run) gets a question and stays in `todo`. Never write to Asana from here.
+
+### The review round, 2026-09-16: 28 new notes, and the rules they set for the whole site
+
+Filed at **1512×652** this time; the window size changes between rounds, so read it per task.
+Four of the notes are general rules rather than fixes to one page, and the build now follows them:
+
+- **Mason Park stands alone as a cosmetic and general practice** (#53). The pediatric practice
+  is *referenced* as Mason Park Dental for Kids, never sold as part of this site. The home page and
+  the services page were reworked; other inner pages still carry "two practices" copy.
+- **Text never waits on scroll to be readable** (#64: "these are going to be ADA issues ... on all
+  pages and sites moving forward"). Unwritten words are `--jr-unwritten` (.66 alpha, ≥4.5:1) and the
+  write finishes by the time the element's top is past mid-window.
+- **Photographs are colour at rest** (#67, #75). No grayscale-to-colour on scroll or hover.
+- **Nothing on the page may leave ScrollTrigger stale.** `journey.js` refreshes when the document
+  height changes; a fold that grew the page had been fading headings still on screen (#71, #77).
+
+Also: button hover fills sit behind the label (#54/#55), the split portrait is held on "read
+more" (#73/#74, measured on click because `toggle` fires late), the header logo is a PNG with
+margin inside the file (#3), and the team page has the agency's named portraits (#43). The client's
+Drive is a **shared drive** (`drive.mjs roots`), and Asana detail can live in a comment on an
+unrelated task (`search_tasks` over the workspace found #65's insurance note).
 
 ## Instatic import
 

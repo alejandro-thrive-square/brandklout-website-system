@@ -1,0 +1,136 @@
+
+#1 [todo] / by BrandKlout Success
+  D: Change image to the one with Dr. Nguyen and Dr. Sung with their kids. /  / The image is inside of the drive / 
+  C 09-15T19:58 null: We looked for the photo of Dr. Nguyen and Dr. Sung with their kids in the practice's 212-photo marketing album, the old site's uploads and Grand Mission's site, and it is not in any of them. Could you send it at full size? It goes straight into the home page's first photograph. Leaving this open unt
+  C 09-15T20:23 620745: ![MasonParkDrive.png](https://files.bugherd.com/3vms7vgazimwtk00avpanw/MasonParkDrive.png)
+  A MasonParkDrive.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in win  Mac OS 10.15.7
+
+#3 [todo] / by BrandKlout Success
+  D: The bottom of the logo is being cut off / 
+  C 09-15T19:58 null: Thanks for the screenshot. It showed this was Safari 26.6 on a Mac at 1512 px, which is why we could not reproduce it in Chrome. The logo now has a few pixels of room inside its box, so Safari cannot clip the bottom of DENTAL when it rounds the box. Safari's engine renders the logo whole on our side
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>header.navbar_component>div.padding-global>div.container-xlarge>div.navbar_container>a.navbar_logo-link>img.navbar_logo win  Mac OS 10.15.7
+
+#43 [todo] /our-team by BrandKlout Success
+  D: photos of the team members in canva, if you need access let me know
+  C 09-15T20:01 null: We have not received these yet. Could you share the Canva team photos, either an export of the originals or view access to the design? The slot on the Team page where the named team section used to be is ready for them. Leaving this open until then.
+  C 09-15T20:19 620745: Canva access shared, the files are under the company name
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#named.ch.ch-named>div.wrap>div.cp-people>div.cp-people_row:nth-of-type(1)>div.cp-people_name>b win  Mac OS 10.15.7
+
+#50 [todo] / by BrandKlout Success
+  D: Needs to populate faster, its not showing all of it by the time you are scrolling by this area
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#relay.ch.ch-relay>div.wrap.re-grid>div.re-copy>p#relayBig.re-big win  Mac OS 10.15.7
+
+#51 [todo] / by BrandKlout Success
+  D: Your Lifetime Partner in Dental Health, Today and for Generations to Come
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>h1.ar-title win  Mac OS 10.15.7
+
+#52 [todo] / by BrandKlout Success
+  D: From routine cleanings to complete smile makeovers, we care for every smile in your family and across Harris County.
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>p.ar-lede win  Mac OS 10.15.7
+
+#53 [todo] / by BrandKlout Success
+  D: Since we are not linking the two sites together, we should have these as 2 stand alone sites that can reference each other but they need to stand alone. Let Mason Park focus on cosmetic and general dentistry. 
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>div.ar-meta win  Mac OS 10.15.7
+
+#54 [todo] / by BrandKlout Success
+  D: These hover colors need to change, you cant read them
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>div.ar-actions>a.button.is-lg win  Mac OS 10.15.7
+
+#55 [todo] /#together by BrandKlout Success
+  D: This one too
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>div.ar-actions>a.button.is-ghost-light.is-lg win  Mac OS 10.15.7
+
+#56 [todo] /#together by BrandKlout Success
+  D: We are here to guide you and walk you through your treatment options. No rush, no pressure, we take the time to answer all of your questions.
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#relay.ch.ch-relay>div.wrap.re-grid>div.re-side>figure.re-media.is-in>figcaption win  Mac OS 10.15.7
+
+#57 [todo] /our-services by BrandKlout Success
+  D: Katy, TX
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>p.ar-lede win  Mac OS 10.15.7
+
+#58 [todo] /our-services by BrandKlout Success
+  D: This makes no sense
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map.el-tabs>div.wrap>div.el-head>p.el-head_lede win  Mac OS 10.15.7
+
+#59 [todo] /our-services by BrandKlout Success
+  D: What does this mean, in one screen?
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map.el-tabs>div.wrap>div.el-head>div>h2 win  Mac OS 10.15.7
+
+#60 [todo] /our-services by BrandKlout Success
+  D: remove this. The # of treatments doesnt add any value 
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map.el-tabs>div.wrap>div.el-tabs_body>figure.el-tabs_frames>figcaption.el-tabs_count win  Mac OS 10.15.7
+
+#61 [todo] /our-services by BrandKlout Success
+  D: Everything Your Smile Needs, From Preventive Care to Complete Smile Makeovers
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>h1.ar-title win  Mac OS 10.15.7
+
+#62 [todo] /our-services#finder by BrandKlout Success
+  D: Most offices start with prevention and education. We dont want to position them as we know there is a problem.
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>div.ar-actions>a.button.is-ghost-light.is-lg win  Mac OS 10.15.7
+
+#63 [todo] /our-services#finder by BrandKlout Success
+  D: Pediatric side needs to have a photos of Dr. Nguyen 
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#practices.ch.ch-practices>div.ab-diptych>a.ab-half:nth-of-type(2)>img win  Mac OS 10.15.7
+
+#64 [todo] /financing by BrandKlout Success
+  D: These need to fill in faster. These are going to be ADA issues. Please make sure this occurs on all pages and sites moving forward
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#rule.ch.ch-rule>div.wrap>div.cp-promises win  Mac OS 10.15.7
+
+#65 [todo] /financing by BrandKlout Success
+  D: See details inside the task in asana about the insurance
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap.iv-faq.cp-foot>div.iv-faq-list>details.faq_item:nth-of-type(1)>div.faq_answer>p win  Mac OS 10.15.7
+
+#66 [todo] /financing by BrandKlout Success
+  D: Cherry needs to be linked so patients can apply independently 
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap>table.cp-matrix>thead>tr>th:nth-of-type(3) win  Mac OS 10.15.7
+
+#67 [todo] /our-doctors by BrandKlout Success
+  D: On scroll Dr. Cho is colored in and Dr. Sung is not / 
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#generalists.ch.ch-generalists>div.wrap>div.cp-duo win  Mac OS 10.15.7
+
+#68 [todo] /our-doctors by BrandKlout Success
+  D: Cosmetic and general dentistry
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#generalists.ch.ch-generalists>div.wrap.cp-head.is-split>div>h2>div.jr-line-mask:nth-of-type(1)>div.jr-line win  Mac OS 10.15.7
+
+#69 [todo] /our-doctors by BrandKlout Success
+  D: Cosmetic, Restorative, and General
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#generalists.ch.ch-generalists>div.wrap>div.cp-duo>article.cp-dossier:nth-of-type(1)>p.cp-kicker win  Mac OS 10.15.7
+
+#70 [todo] /our-doctors by BrandKlout Success
+  D: Cosmetic, Restorative, and General
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#generalists.ch.ch-generalists>div.wrap>div.cp-duo>article.cp-dossier:nth-of-type(2)>p.cp-kicker win  Mac OS 10.15.7
+
+#71 [todo] /our-doctors by BrandKlout Success
+  D: Her name disappears / 
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#specialist.ch.ch-specialist>div.cp-split>div.cp-split_warm>h2>div.jr-line-mask>div.jr-line win  Mac OS 10.15.7
+
+#72 [todo] /our-doctors by BrandKlout Success
+  D: Mason Park Dental for Kids and Mason Park Dental of Katy
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#specialist.ch.ch-specialist>div.cp-split>div.cp-split_warm>p.cp-kicker.cp-split_role win  Mac OS 10.15.7
+
+#73 [todo] /our-doctors by BrandKlout Success
+  D: Size changes when you select to reach more
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#specialist.ch.ch-specialist>div.cp-split>figure.cp-split_ink>img win  Mac OS 10.15.7
+
+#74 [todo] /our-doctors by BrandKlout Success
+  D: gets bigger
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#specialist.ch.ch-specialist>div.cp-split>div.cp-split_warm>details.el-fold>summary win  Mac OS 10.15.7
+
+#75 [todo] /our-doctors by BrandKlout Success
+  D: Shifts from full color to black and white and back again
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#specialist.ch.ch-specialist>div.cp-split>figure.cp-split_ink>img win  Mac OS 10.15.7
+
+#76 [todo] /our-doctors by BrandKlout Success
+  D: re-write this section
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#measure.ch.ch-measure>div.wrap.cp-head.is-split>p.pe-lede win  Mac OS 10.15.7
+
+#77 [todo] /our-doctors by BrandKlout Success
+  D: Big empty space / 
+  A image.png
+  sel html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#voices.ch.ch-voices win  Mac OS 10.15.7

@@ -5,7 +5,20 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-15
+## Where the build stands — 2026-09-16
+
+**BugHerd round three is answered** ([`runbook/2026-09-16-bugherd-round-three-standalone-and-motion.md`](./runbook/2026-09-16-bugherd-round-three-standalone-and-motion.md)).
+The agency asked for **Mason Park to stand alone as a cosmetic and general practice**: the home
+page's two-practice story is rewritten, and Dr. Nguyen's practice is referenced as **Mason Park
+Dental for Kids**. Site-wide: **photographs are in colour at rest** (no grayscale anywhere but
+the map), **words written on scroll are readable before they are written** (.66 alpha) and
+finish by mid-window, **ScrollTrigger re-measures when the page grows** (a "read more" fold used
+to fade headings that were still on screen), **button hover fills sit behind the label**, and
+the **header logo is a padded PNG** (`mp-logo-nav-422x180.png`). The home hero is the Nguyen/Sung
+family photograph; the team page has a named portrait chapter (`#team`). **Waiting on the
+agency:** Mason Park's Cherry link (#66), a look at the logo in Safari 26 (#3).
+
+## Earlier — 2026-09-15
 
 **BugHerd round two is answered on the board** ([`runbook/2026-09-15-bugherd-round-two-in-the-reviewers-safari.md`](./runbook/2026-09-15-bugherd-round-two-in-the-reviewers-safari.md)).
 The reviewer works in **Safari 26 on a Mac at 1512×735**, so every note was re-checked in
@@ -88,6 +101,12 @@ is not obviously this practice's. It is preserved verbatim; somebody should chec
 Associates account it is.
 
 ### Traps that are live right now
+
+- **Anything that changes page height after load is handled by `journey.js`'s height watcher**
+  (added 2026-09-16). Do not add per-component `ScrollTrigger.refresh()` calls, and measure a
+  `<details>` fold on the summary's click, not on `toggle` (which fires after layout grew).
+- **Photographs are colour at rest (2026-09-16).** Do not add `filter: grayscale` to a new
+  component; the agency reads a colour change on scroll as a bug.
 
 - **Check a BugHerd note in the reviewer's browser, not Chrome.** Pull tasks by id
   (`.tmp/bugherd/pull.mjs`): `requester_browser`, `requester_browser_size`, assignees and

@@ -399,7 +399,7 @@ button { font: inherit; }
   min-height: 6.25rem;
 }
 .navbar_logo-link { display: inline-flex; flex: 0 0 auto; }
-.navbar_logo { width: clamp(9.5rem, 12vw, 12rem); height: auto; }
+.navbar_logo { width: clamp(9.9rem, 12.5vw, 12.5rem); height: auto; }   /* the file carries its own margin since 2026-09-16 (#3) */
 
 .navbar_menu { flex: 1 1 auto; display: flex; justify-content: center; }
 .navbar_menu-list { display: flex; align-items: center; gap: clamp(1rem, 2.2vw, 2.4rem); }
@@ -1260,8 +1260,12 @@ button { font: inherit; }
   background: var(--ink);
   transform: translateY(101%);
   transition: transform .45s var(--ease);
-  z-index: 0;
+  /* BEHIND the label. The labels are bare text nodes, which `> *` never
+     lifts, so at z-index 0 the fill covered the words: white on ink and ink
+     on white both vanished on hover (BugHerd #54, #55, 2026-09-16). */
+  z-index: -1;
 }
+.ch .button { isolation: isolate; }
 .ch .button > * { position: relative; z-index: 1; }
 .ch .button:hover { color: #fff; border-color: var(--ink); }
 .ch .button:hover::after { transform: translateY(0); }
@@ -1446,7 +1450,7 @@ button { font: inherit; }
   font-size: var(--f-d3);
   line-height: 1.24;
   letter-spacing: -.012em;
-  color: rgba(46, 53, 56, .18);   /* the unwritten state; the scrub brightens it */
+  color: var(--jr-unwritten);   /* the unwritten state; the scrub darkens it. Readable on its own: BugHerd #50, #64 */
   margin: 0;
 }
 .re-after {
@@ -1715,7 +1719,6 @@ button { font: inherit; }
 .rg-thumb { width: 4.2rem; height: 3.4rem; overflow: hidden; background: var(--bg-2); }
 .rg-thumb img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
   transition: filter .45s var(--ease), transform .6s var(--ease);
 }
 .rg-item > a:hover .rg-thumb img { filter: none; transform: scale(1.08); }
@@ -1759,7 +1762,6 @@ button { font: inherit; }
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: 50% 22%;
-  filter: grayscale(1) contrast(1.06) brightness(1.02);
   transform: scale(1.02);
   transition: filter .6s var(--ease), transform .8s var(--ease);
 }
@@ -1897,7 +1899,6 @@ button { font: inherit; }
      budget, so the photograph is the thing that has to give. */
   height: clamp(8rem, 20svh, 14rem);
   object-fit: cover;
-  filter: grayscale(1);
   transition: filter .6s var(--ease);
 }
 .pa-card.is-on .pa-shot img { filter: none; }
@@ -1980,7 +1981,7 @@ button { font: inherit; }
   font-size: calc(2.35rem * var(--t-lg));
   line-height: 1.34;
   letter-spacing: -.008em;
-  color: rgba(46, 53, 56, .2);
+  color: var(--jr-unwritten);
   max-width: 30ch;
 }
 .pr-quote figcaption {
@@ -2213,10 +2214,9 @@ html.jr-fail [data-anim="hide"] { visibility: visible !important; }
   html [data-anim="hide"] { visibility: visible !important; }
   .ch .re-big, .ch .pr-quote blockquote { color: var(--ink) !important; }
   .ar-cue i { animation: none; }
-  /* Only the filter a SCROLL class would otherwise have removed. Grayscale on
-     the portraits and the index thumbnails is a design treatment, not motion,
-     and stripping it here made the three doctor portraits reduced-motion-only
-     colour, which is the opposite of consistent. */
+  /* Photographs are in colour at rest everywhere since 2026-09-16 (BugHerd
+     #67, #75: portraits turning colour on scroll read as inconsistent). This
+     rule is kept for the scroll class it used to pair with. */
   .pa-shot img { filter: none !important; }
   * { scroll-behavior: auto !important; }
 }
@@ -2342,7 +2342,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 22%;
-  filter: grayscale(1) contrast(1.06) brightness(1.02);
   transform: scale(1.02);
   transition: filter .6s var(--ease), transform .8s var(--ease);
 }
@@ -2929,7 +2928,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   /* Grayscale at rest, like every other photograph in the system: these are
      stock frames shot on different days against different grounds, and one
      treatment is what makes a grid of them read as one set. */
-  filter: grayscale(1);
   transition: filter .6s var(--ease), transform .6s var(--ease);
 }
 .svc-card:hover .svc-card_media img { filter: none; transform: scale(1.04); }
@@ -3104,7 +3102,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   height: auto;
   aspect-ratio: 23 / 30;
   object-fit: cover;
-  filter: grayscale(1);
   transition: filter .6s var(--ease);
 }
 .svc-provider:hover .svc-provider_shot img { filter: none; }
@@ -3402,7 +3399,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   height: 100%;
   object-fit: cover;
   object-position: 50% 22%;
-  filter: grayscale(1);
   transition: filter .6s var(--ease);
 }
 .ab-vignette:hover .ab-vig_face img { filter: none; }
@@ -3487,7 +3483,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
     width: 100%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    filter: grayscale(1);
     transition: filter .6s var(--ease);
   }
   .ab-spec_shot:hover img { filter: none; }
@@ -3547,7 +3542,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  filter: grayscale(1);
   transform: scale(1.03);
   transition: filter .7s var(--ease), transform .7s var(--ease);
 }
@@ -3766,7 +3760,6 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
   aspect-ratio: 23 / 30;
   object-fit: cover;
   object-position: 50% 18%;
-  filter: grayscale(1);
   transition: filter .6s var(--ease), transform .6s var(--ease);
 }
 .tm-row:hover .tm-row_shot img { filter: none; transform: scale(1.03); }
@@ -4038,8 +4031,13 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
 
    `.ch [data-write]` is (0,2,0) on purpose: `.ch p` is (0,1,1) and beat the
    relay's start colour once already (JOURNEY-2026-09-01.md, bug 2). */
-.ch { --jr-unwritten: rgba(46, 53, 56, .18); }
-.ch[data-theme="dark"] { --jr-unwritten: rgba(255, 255, 255, .22); }
+/* THE UNWRITTEN STATE IS READABLE. It was .18 / .22 alpha, about 1.3:1, and
+   the agency flagged it as an accessibility problem on every page it appears
+   (BugHerd #50, #64, 2026-09-16). At .66 the unwritten words are ~4.5:1 on
+   the warm and white grounds and ~7:1 on ink; the scrub still reads as ink
+   being laid down, it just never hides the sentence. */
+.ch { --jr-unwritten: rgba(46, 53, 56, .66); }
+.ch[data-theme="dark"] { --jr-unwritten: rgba(255, 255, 255, .66); }
 .ch [data-write] { color: var(--jr-unwritten); }
 html.jr-fail .ch [data-write],
 html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
@@ -4136,7 +4134,6 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   height: 100%;
   object-fit: cover;
   aspect-ratio: 4 / 3;
-  filter: grayscale(1);
   transition: filter .7s var(--ease);
 }
 .cp-mosaic figure:hover img { filter: none; }
@@ -4208,7 +4205,6 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: 50% 20%;
-  filter: grayscale(1);
   transition: filter .6s var(--ease), transform .8s var(--ease);
 }
 .cp-person:hover .cp-person_shot img { filter: none; transform: scale(1.04); }
@@ -4287,7 +4283,6 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
   transition: filter .7s var(--ease);
 }
 .cp-spec_shot:hover img { filter: none; }
@@ -4314,7 +4309,7 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 .ch-specialist { padding: 0; }
 .cp-split { display: grid; }
 @media (min-width: 900px) { .cp-split { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); } }
-.cp-split_ink { background: var(--ink-deep); position: relative; overflow: hidden; }
+.cp-split_ink { background: var(--ink-deep); position: relative; overflow: hidden; margin: 0; }
 .cp-split_ink img {
   display: block;
   width: 100%;
@@ -4322,7 +4317,6 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   object-fit: cover;
   object-position: 50% 18%;
   aspect-ratio: 4 / 5;
-  filter: grayscale(1);
   transition: filter .8s var(--ease);
 }
 .cp-split:hover .cp-split_ink img { filter: none; }
@@ -4333,6 +4327,12 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 @media (min-width: 900px) {
   .cp-split_ink { min-height: 42rem; }
   .cp-split_ink img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
+}
+/* Held by elevate.js holdSplit() while a fold is open: the height it had
+   closed, pinned under the header, over an ink ground (BugHerd #73, #74). */
+@media (min-width: 900px) {
+  .cp-split:has(.cp-split_ink.is-held) { background: var(--ink-deep); }
+  .cp-split_ink.is-held { align-self: start; position: sticky; top: var(--jr-nav-h, 5.5rem); min-height: 0; }
 }
 .cp-split_ink figcaption {
   position: absolute;
@@ -4398,7 +4398,6 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   aspect-ratio: 23 / 30;
   object-fit: cover;
   object-position: 50% 18%;
-  filter: grayscale(1);
   transition: filter .6s var(--ease);
 }
 .cp-dossier:hover .cp-dossier_shot img { filter: none; }
@@ -4509,7 +4508,7 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 }
 .cp-byline { display: flex; align-items: center; gap: .9rem; text-decoration: none; color: inherit; }
 .cp-byline_face { width: 3.6rem; height: 3.6rem; border-radius: 50%; overflow: hidden; flex: none; border: 1px solid var(--rule); background: var(--sand); }
-.cp-byline_face img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; filter: grayscale(1); transition: filter .5s var(--ease); }
+.cp-byline_face img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transition: filter .5s var(--ease); }
 .cp-byline:hover .cp-byline_face img { filter: none; }
 .cp-byline b { display: block; font-family: var(--font-display); font-size: calc(1.15rem * var(--t-mid)); font-weight: 400; color: var(--fg); transition: color .3s var(--ease); }
 .cp-byline:hover b { color: var(--accent); }
@@ -4786,7 +4785,7 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 .cp-checklist p { margin: .3rem 0 0; font-size: var(--f-body); line-height: 1.65; color: var(--fg-soft); }
 .cp-bring_aside { display: grid; gap: 1.25rem; }
 .cp-bring_aside figure { margin: 0; }
-.cp-bring_aside img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: grayscale(1); transition: filter .7s var(--ease); }
+.cp-bring_aside img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: filter .7s var(--ease); }
 .cp-bring_aside figure:hover img { filter: none; }
 .cp-bring_aside figcaption { margin-top: .65rem; padding-left: .8rem; border-left: 1.5px solid var(--accent); font-family: var(--font-ui); font-size: calc(.78rem * var(--t-ui)); line-height: 1.45; color: var(--fg-soft); }
 .cp-bring_tour { background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.25rem, 2.5vw, 2rem); display: grid; gap: .6rem; }
@@ -4917,7 +4916,7 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 @media (min-width: 1024px) { .cp-situations { grid-template-columns: minmax(0, 1.1fr) repeat(3, minmax(0, 1fr)); } }
 .cp-situations_shot { margin: 0; grid-column: 1 / -1; }
 @media (min-width: 1024px) { .cp-situations_shot { grid-column: auto; } }
-.cp-situations_shot img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(1); transition: filter .7s var(--ease); }
+.cp-situations_shot img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: filter .7s var(--ease); }
 @media (max-width: 1023px) { .cp-situations_shot img { aspect-ratio: 16 / 7; } }
 .cp-situations_shot:hover img { filter: none; }
 .cp-situations_shot figcaption { margin-top: .65rem; padding-left: .8rem; border-left: 1.5px solid var(--accent); font-family: var(--font-ui); font-size: calc(.78rem * var(--t-ui)); line-height: 1.45; color: var(--fg-soft); }
@@ -5249,7 +5248,7 @@ html:not(.el-ready) .el-finder_panel img:first-child { opacity: 1; transform: no
    caption line under the sheet says what the tile under the pointer shows. */
 .el-sheet_grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
 .el-sheet_tile { margin: 0; aspect-ratio: 1; overflow: clip; background: var(--bg-2); display: block; }
-.el-sheet_tile img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: filter .5s var(--ease), transform .8s var(--ease); }
+.el-sheet_tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: filter .5s var(--ease), transform .8s var(--ease); }
 .el-sheet_tile:hover img, .el-sheet_tile:focus-visible img { filter: none; transform: scale(1.04); }
 html.el-reduce .el-sheet_tile img { filter: none; }
 .el-sheet_line { margin: 1.2rem 0 0; min-height: 1.5em; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); }
@@ -5598,7 +5597,6 @@ a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-col
 .bl-topic_shot { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--sand); }
 .bl-topic_shot img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
-  filter: grayscale(1);
   transition: filter .6s var(--ease), transform .8s var(--ease);
 }
 .bl-topic:hover .bl-topic_shot img, .bl-topic.is-on .bl-topic_shot img { filter: none; transform: scale(1.04); }
@@ -5945,6 +5943,9 @@ a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-col
 
 /* #2  The hero stack is a link, and its top frame flips. */
 a.el-stack { display: block; text-decoration: none; cursor: pointer; }
+/* ...but not below 992, where the stack is hidden: this rule's specificity
+   had put it back over the phone hero's buttons (seen 2026-09-16). */
+@media (max-width: 991px) { a.el-stack { display: none; } }
 .el-stack_frame { transition: opacity .42s var(--ease); }
 .el-stack_frame.is-flipping { opacity: 0; }
 
@@ -5968,7 +5969,9 @@ a.el-stack { display: block; text-decoration: none; cursor: pointer; }
    artwork has two source pixels under DENTAL, under one CSS pixel at this
    size, and Safari composites the filtered logo on a layer cut at the box's
    fractional edge. Air inside the box keeps the letters off that edge. */
-.navbar_logo { box-sizing: content-box; padding-block: .3rem; }
+/* Superseded 2026-09-16: the air is now inside the logo file itself
+   (mp-logo-nav-422x180.png, .tmp/bugherd/logo-pad.mjs), which no rounding of
+   the box can cut. The note was reopened after the padding fix. */
 
 /* #6  The relay's closing sentence hung alone beside a column of air. A
    photograph of the front counter now sits beside it. */
@@ -5990,3 +5993,50 @@ a.el-stack { display: block; text-decoration: none; cursor: pointer; }
 .iv-shot img[src*="mp-desk-phone-"] { object-position: 50% 40%; }
 .el-sheet_tile img[src*="mp-desk-laugh-"] { object-position: 50% 30%; }
 .el-sheet_tile img[src*="mp-dentist-assistant-"] { object-position: 72% 0%; }
+
+
+/* ===========================================================================
+   BUGHERD, 2026-09-16 — the agency's third round (#50-#77, #1, #43).
+   Site-wide: photographs in colour at rest, unwritten words readable, the
+   hover fill behind button labels, triggers re-measured when the page grows.
+   Export: .tmp/bugherd/tasks-2026-09-16.json.
+   ======================================================================== */
+
+/* #1  The family on the home hero. Faces sit in the top half of the frame. */
+.ar-bg img[src*="mp-family-nguyen-sung-"] { object-position: 50% 38%; }
+/* The agency's headline (#51) is three times the old one's length, and the
+   family sat under it. On wide screens the headline steps down a size and the
+   photograph is laid 18% wider than the hero from its left edge, which puts
+   the family in the right half, clear of the copy. */
+@media (min-width: 992px) {
+  .ch-arrival:has(img[src*="mp-family-nguyen-sung-"]) .ar-title { font-size: var(--f-d2); max-width: 17ch; }
+  .ar-bg img[src*="mp-family-nguyen-sung-"] { width: 118%; max-width: none; object-position: 0% 62%; }
+}
+
+/* #63  Dr. Nguyen's portrait on the pediatric half: a tall frame in a 4:3 box. */
+.ab-half img.is-portrait { object-position: 50% 16%; }
+
+/* #43  THE TEAM. The agency's studio portraits, one set, grouped by role: a
+   label column that holds its place while the group's portraits pass, and
+   square frames with the name and role under each. */
+.tm-roll { display: grid; gap: clamp(3rem, 6vw, 5rem); }
+.tm-group { display: grid; gap: 1.5rem; }
+.tm-group_head { border-top: 1px solid var(--rule-strong); padding-top: 1rem; }
+.ch .tm-group_head h3 { font-family: var(--font-display); font-weight: 300; font-size: var(--f-h3); line-height: 1.15; margin: 0; }
+.ch .tm-group_head p { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); margin: .6rem 0 0; }
+.tm-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 1rem; }
+.tm-card { margin: 0; }
+.tm-card_face { margin: 0; overflow: hidden; background: var(--sand); aspect-ratio: 1; }
+.tm-card_face img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; transition: transform .8s var(--ease); }
+.tm-card:hover .tm-card_face img { transform: scale(1.04); }
+.ch .tm-card_name { margin: .9rem 0 0; display: grid; gap: .3rem; }
+.ch .tm-card_name b { font-family: var(--font-display); font-weight: 400; font-size: calc(1.3rem * var(--t-mid)); line-height: 1.2; color: var(--fg); }
+.ch .tm-card_name span { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .1em; text-transform: uppercase; line-height: 1.5; color: var(--fg-soft); }
+@media (min-width: 768px) {
+  .tm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
+}
+@media (min-width: 992px) {
+  .tm-group { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  .tm-group_head { position: sticky; top: calc(var(--jr-nav-h, 5.5rem) + 1.5rem); }
+  .tm-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

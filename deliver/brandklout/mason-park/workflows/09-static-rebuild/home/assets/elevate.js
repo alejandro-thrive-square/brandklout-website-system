@@ -19,7 +19,7 @@
      the pair       two half-bleed photographs sliding in from either edge
      the pillars    three tall portraits revealed one after another by scroll
      the pane       a tall photograph in a narrow column beside a dark chapter
-     the sheet      a contact sheet, grayscale at rest, colour under the pointer
+     the sheet      a contact sheet, colour always, the caption under the pointer
      the seal       a slow-turning ring of type, the practice's own stamp
 
    Same three rules as journey.js, not negotiable:
@@ -456,6 +456,36 @@
     }
   }
 
+  /* --- the held portrait ----------------------------------------------------
+     A split chapter (Dr. Nguyen) fills its ink half with the portrait, as tall
+     as the copy beside it. Opening "Her story" made the copy 400px taller and
+     the portrait grew with it (BugHerd #73, #74, 2026-09-16). So the portrait
+     is held at the height it had with the fold closed, and rides along
+     (sticky) while the story is read; closing the fold releases it. */
+  function holdSplit() {
+    $$(".cp-split").forEach(function (split) {
+      var ink = $(".cp-split_ink", split);
+      if (!ink) return;
+      var anyOpen = function () { return $$("details", split).some(function (x) { return x.open; }); };
+      // Measured on the click, BEFORE the fold opens: `toggle` fires after
+      // the layout has already grown, so measuring there holds the tall size.
+      var hold = function () {
+        if (anyOpen() || ink.classList.contains("is-held")) return;
+        ink.style.height = ink.getBoundingClientRect().height + "px";
+        ink.classList.add("is-held");
+      };
+      $$("details", split).forEach(function (d) {
+        var s = $("summary", d);
+        if (s) s.addEventListener("click", hold);
+        d.addEventListener("toggle", function () {
+          if (anyOpen()) return;
+          ink.style.height = "";
+          ink.classList.remove("is-held");
+        });
+      });
+    });
+  }
+
   function boot() {
     masks();
     tabs();
@@ -465,6 +495,7 @@
     tilt();
     blog();
     stackCycle();
+    holdSplit();
     if (useGsap) {
       parallax();
       stack();

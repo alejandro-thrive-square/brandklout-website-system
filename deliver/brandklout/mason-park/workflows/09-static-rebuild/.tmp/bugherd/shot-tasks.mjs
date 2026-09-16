@@ -5,13 +5,14 @@
 //
 //   node shot-tasks.mjs <engine> <origin> <out-dir> [n,n,...] > log
 //   node shot-tasks.mjs webkit https://staging.masonparkdental.com shots-live-webkit
+//   TASKS=tasks-2026-09-16.json node shot-tasks.mjs webkit ... (default tasks-2026-09-15.json)
 //   node shot-tasks.mjs chromium http://127.0.0.1:8089 shots-local-chromium 5,6
 import fs from "node:fs";
 import { chromium, webkit } from "playwright-core";
 
 const [engine = "webkit", origin = "https://staging.masonparkdental.com", out = `shots-${engine}`, only] = process.argv.slice(2);
 const pick = only ? new Set(only.split(",").map(Number)) : null;
-const { tasks } = JSON.parse(fs.readFileSync("tasks-2026-09-15.json", "utf8"));
+const { tasks } = JSON.parse(fs.readFileSync(process.env.TASKS || "tasks-2026-09-15.json", "utf8"));
 fs.mkdirSync(out, { recursive: true });
 
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
