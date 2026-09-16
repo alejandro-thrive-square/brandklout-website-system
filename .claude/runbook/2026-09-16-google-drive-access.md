@@ -30,10 +30,19 @@ Repo-level. No client files changed.
   privacy policy, domain) is filled. "Make internal" is greyed out because the project is under no
   organization. In Testing the refresh token expires after **7 days**, so `invalid_grant` means run
   `node scripts/drive.mjs auth` again.
-- `search brandklout --folders` returns nothing. The Brandklout folders are not named that way, so
-  search by client name.
+- **Every client has a shared drive, and `search` does not match drive names.** Use `roots`. The map
+  is in `deliver/brandklout/docs/GOOGLE_DRIVE.md`, linked from CLAUDE/AGENTS/GEMINI.md and
+  DELIVER_SYSTEM_RULES.
+- **Most client drives hold shortcuts.** Listing a shortcut whose target was never shared returns an
+  empty page, not an error, so the script now checks the target and says so. Blocked on
+  2026-09-16: Arvada "Ready", Dr. Nahlah "Dr. Esam Nahlah", Grand Mission "Photos for brandklout".
+- A backslash-u NUL escape written into a regex landed as a raw NUL byte, and git and grep then
+  called the file binary. `safeName` now uses an `\x00-\x1f` range, written through a
+  fromCharCode script.
 
 ## Next
+
+- Ask the owners to share the three blocked shortcut targets with alejandro@thrivesquare.com.
 
 - Optional: fill in Branding and publish the app (or recreate the project inside the thrivesquare.com
   organization and make it Internal) to stop the weekly re-sign-in.

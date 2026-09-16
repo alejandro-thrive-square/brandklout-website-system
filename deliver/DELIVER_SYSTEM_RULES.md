@@ -40,6 +40,7 @@ Client assets are workflow-owned:
 - When Deliver owns design creation or redesign, store the selected central design-system reference in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/`.
 - Store later incoming files, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that receives, produces, or uses them.
 - Later workflows should reference the original handoff package instead of duplicating it unless they need a transformed copy.
+- Client photos, videos, brand guides and site exports are often in the client's Google shared drive. Check [brandklout/docs/GOOGLE_DRIVE.md](./brandklout/docs/GOOGLE_DRIVE.md) and pull with `scripts/drive.mjs` into the receiving workflow's `.tmp/` before asking for files again.
 - Do not create or use a client-level `assets/` folder as the default asset location.
 - When a legacy client-level asset path is retired after migration, add that obsolete VPS path to the root `scripts/deploy-cleanup.sh` allowlist so deployments remove stale ignored folders without touching valid workflow-owned media.
 

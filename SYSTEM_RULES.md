@@ -287,6 +287,7 @@ worktree `.env` for the same reason.
 
 ```bash
 node scripts/drive.mjs auth                       # one-time browser sign-in
+node scripts/drive.mjs roots                      # shared drives (one per client) + items shared directly
 node scripts/drive.mjs search <text> [--folders]  # includes shared drives
 node scripts/drive.mjs ls <folder id|url>
 node scripts/drive.mjs get <file id|url> [dir]    # Docs/Sheets/Slides export to docx/xlsx/pdf
@@ -297,7 +298,8 @@ The consent screen is in **Testing** (it cannot be published until Branding is c
 cannot be made Internal because the project has no organization). Google expires a Testing refresh
 token after **7 days**, so `invalid_grant` means run `auth` again. The downloaded client JSON is
 kept at `~/.webzite/google-drive-oauth-client.json`; a `client_secret_*.json` inside a repo is
-git-ignored.
+git-ignored. Which drive belongs to which client, and the shortcuts whose targets are not shared, is
+mapped in [deliver/brandklout/docs/GOOGLE_DRIVE.md](./deliver/brandklout/docs/GOOGLE_DRIVE.md).
 
 #### 4.2.1 Worktree → main asset mirror (automatic)
 

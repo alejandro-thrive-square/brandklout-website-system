@@ -11,6 +11,7 @@
  *
  *   node scripts/drive.mjs auth                    one-time browser sign-in
  *   node scripts/drive.mjs whoami                  which account the token is
+ *   node scripts/drive.mjs roots                   shared drives + items shared with me
  *   node scripts/drive.mjs search <text> [--folders]   name contains <text>
  *   node scripts/drive.mjs ls <folder id|url>      list a folder's children
  *   node scripts/drive.mjs get <file id|url> [dir]     download one file
@@ -43,6 +44,8 @@ const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.webzi
 const SCOPE = 'https://www.googleapis.com/auth/drive.readonly'
 const API = 'https://www.googleapis.com/drive/v3'
 const FOLDER = 'application/vnd.google-apps.folder'
+const SHORTCUT = 'application/vnd.google-apps.shortcut'
+const FILE_FIELDS = 'id, name, mimeType, size, modifiedTime, shortcutDetails(targetId, targetMimeType)'
 const EXPORTS = {
   'application/vnd.google-apps.document': ['application/vnd.openxmlformats-officedocument.wordprocessingml.document', '.docx'],
   'application/vnd.google-apps.spreadsheet': ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '.xlsx'],
@@ -219,20 +222,43 @@ function idOf (input) {
   return m ? m[1] : input
 }
 
+// Client shared drives are mostly shortcuts into folders stored elsewhere.
+// Resolve each to its target so ls/pull/get treat it as what it points at;
+// `via` keeps the shortcut's own id for display.
+function resolve (f) {
+  if (f.mimeType !== SHORTCUT || !f.shortcutDetails) return f
+  return { ...f, id: f.shortcutDetails.targetId, mimeType: f.shortcutDetails.targetMimeType, size: undefined, via: f.id }
+}
+
+// A shortcut can point at a folder that was never shared with this account.
+// Listing such a folder returns an empty page, not an error, so check first.
+async function fileMeta (id) {
+  const f = resolve(await api(`/files/${id}`, { fields: FILE_FIELDS }))
+  if (f.via) {
+    try {
+      await api(`/files/${f.id}`, { fields: 'id' })
+    } catch (err) {
+      if (!/Drive 404/.test(err.message)) throw err
+      throw new Error(`"${f.name}" is a shortcut to ${f.id}, which is not shared with this account. Ask for access to the target folder.`)
+    }
+  }
+  return f
+}
+
 async function listChildren (folderId) {
   const files = []
   let pageToken
   do {
     const j = await api('/files', {
       q: `'${folderId}' in parents and trashed = false`,
-      fields: 'nextPageToken, files(id, name, mimeType, size, modifiedTime)',
+      fields: `nextPageToken, files(${FILE_FIELDS})`,
       includeItemsFromAllDrives: 'true',
       corpora: 'allDrives',
       orderBy: 'folder,name',
       pageSize: '1000',
       ...(pageToken ? { pageToken } : {}),
     })
-    files.push(...j.files)
+    files.push(...j.files.map(resolve))
     pageToken = j.nextPageToken
   } while (pageToken)
   return files
@@ -241,7 +267,7 @@ async function listChildren (folderId) {
 function row (f) {
   const kind = f.mimeType === FOLDER ? 'folder' : f.mimeType.replace(/^application\/(vnd\.google-apps\.)?/, '')
   const size = f.size ? `${Math.round(f.size / 1024)} KB` : ''
-  return [f.id, kind.padEnd(14), size.padStart(9), f.name].join('  ')
+  return [f.id, kind.padEnd(14), size.padStart(9), f.via ? `${f.name}  (shortcut)` : f.name].join('  ')
 }
 
 async function whoami (token) {
@@ -253,22 +279,37 @@ async function whoami (token) {
   console.log(`Signed in as ${j.user.displayName} <${j.user.emailAddress}>`)
 }
 
+// The entry points this account can see: shared drives, then whatever was
+// shared with it directly. Search only matches names; this shows the tops.
+async function roots () {
+  const drives = await api('/drives', { pageSize: '100', fields: 'drives(id, name)' })
+  drives.drives.forEach(d => console.log([d.id, 'shared-drive'.padEnd(14), ''.padStart(9), d.name].join('  ')))
+  const j = await api('/files', {
+    q: 'sharedWithMe and trashed = false',
+    fields: `files(${FILE_FIELDS})`,
+    orderBy: 'folder,name',
+    pageSize: '200',
+  })
+  j.files.map(resolve).forEach(f => console.log(row(f)))
+  if (!drives.drives.length && !j.files.length) console.log('Nothing is shared with this account.')
+}
+
 async function search (text, foldersOnly) {
   const q = [`name contains '${text.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`, 'trashed = false']
   if (foldersOnly) q.push(`mimeType = '${FOLDER}'`)
   const j = await api('/files', {
     q: q.join(' and '),
-    fields: 'files(id, name, mimeType, size, modifiedTime)',
+    fields: `files(${FILE_FIELDS})`,
     includeItemsFromAllDrives: 'true',
     corpora: 'allDrives',
     pageSize: '100',
   })
-  j.files.forEach(f => console.log(row(f)))
+  j.files.map(resolve).forEach(f => console.log(row(f)))
   if (!j.files.length) console.log('No matches.')
 }
 
 function safeName (name) {
-  return name.replace(/[<>:"/\\|?* -]/g, '_').replace(/[. ]+$/, '') || '_'
+  return name.replace(/[<>:"/\\|?*\x00-\x1f]/g, '_').replace(/[. ]+$/, '') || '_'
 }
 
 async function download (file, dir) {
@@ -284,12 +325,20 @@ async function download (file, dir) {
   let name = safeName(file.name)
   if (exp && !name.toLowerCase().endsWith(exp[1])) name += exp[1]
   const out = path.join(dir, name)
+  // Re-running a pull resumes: a file already on disk at the same size is kept.
+  if (!exp && file.size && fs.existsSync(out) && fs.statSync(out).size === Number(file.size)) {
+    console.log(`have  ${out}`)
+    return
+  }
   await pipeline(Readable.fromWeb(res.body), fs.createWriteStream(out))
   console.log(`saved ${out}`)
 }
 
 async function pull (folderId, dir) {
   for (const f of await listChildren(folderId)) {
+    if (f.via && f.mimeType === FOLDER) {
+      try { await fileMeta(f.via) } catch (err) { console.log(`skip  ${err.message}`); continue }
+    }
     if (f.mimeType === FOLDER) await pull(f.id, path.join(dir, safeName(f.name)))
     else await download(f, dir)
   }
@@ -299,17 +348,28 @@ const [cmd, ...args] = process.argv.slice(2)
 const commands = {
   auth: () => auth(),
   whoami: () => whoami(),
+  roots: () => roots(),
   search: () => search(args.filter(a => a !== '--folders').join(' '), args.includes('--folders')),
-  ls: async () => (await listChildren(idOf(args[0]))).forEach(f => console.log(row(f))),
-  get: async () => download(await api(`/files/${idOf(args[0])}`, { fields: 'id, name, mimeType' }), args[1] || '.'),
+  ls: async () => {
+    const id = idOf(args[0])
+    // A shared drive id is not a file; anything else may be a shortcut.
+    const target = /^0A/.test(id) ? id : (await fileMeta(id)).id
+    ;(await listChildren(target)).forEach(f => console.log(row(f)))
+  },
+  get: async () => {
+    const f = await fileMeta(idOf(args[0]))
+    if (f.mimeType === FOLDER) throw new Error(`${f.name} is a folder; use pull.`)
+    return download(f, args[1] || '.')
+  },
   pull: () => {
     if (!args[1]) throw new Error('pull needs a destination directory.')
-    return pull(idOf(args[0]), args[1])
+    const id = idOf(args[0])
+    return (/^0A/.test(id) ? Promise.resolve({ id }) : fileMeta(id)).then(f => pull(f.id, args[1]))
   },
 }
 
 if (!commands[cmd]) {
-  console.log('Usage: node scripts/drive.mjs <auth|whoami|search|ls|get|pull> ...  (see the header of this file)')
+  console.log('Usage: node scripts/drive.mjs <auth|whoami|roots|search|ls|get|pull> ...  (see the header of this file)')
   process.exit(cmd ? 1 : 0)
 }
 commands[cmd]().catch(err => { console.error(err.message); process.exit(1) })
