@@ -18,6 +18,52 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: Client-First type roles, so a font-size edit publishes (2026-09-15, night)
+
+Sang showed Alejandro a paragraph whose font-size he changed in the admin and published, and
+nothing changed. Reproduced on the live draft (`.tmp/edit-experiment.mjs`): editing the paragraph's
+type class at the base breakpoint and publishing changed 1440 and 1200 to the new size and left 900
+and 390 exactly as they were, because the SAME class carried its own tablet, mobile-landscape and
+mobile font-sizes (the house re-basing wrote one per breakpoint), so a base edit never reaches a
+phone and a tablet-tab edit never reaches desktop. And the class was called `text-18-7`, one of 305
+generated names nobody can reason about. Alejandro: "reusable classes, client-first and relume
+approach, for example text-regular, text-medium, text-large, and we apply those throughout the site
+so we can make updates very easy".
+
+**What the class system does now** (`class-system.mjs`, "Client-First type roles" stage; report in
+`site-src/type-roles.md`; gate `type-roles-check.mjs`):
+
+- **Font-size lives only on role classes**, one short scale: `text-size-micro 6 / mini 8 / tiny 10 /
+  xsmall 12 / small 14 / regular 16 / medium 18 / large 22 / xlarge 28 / display 40 / display-medium
+  56 / display-large 64 / display-xlarge 80` and `heading-style-h6 26 / h5 30 / h4 36 / h3 44 / h2 56
+  / h1 64 / display 72` (px at 1440, written in rem on the house fluid root). Sang's sizes snap to the
+  nearest step; the report lists every size each role replaced and the gate refuses a deviation past
+  2px (text) or 12% (display type) at 1440. A heading role is a Manrope h1–h6 TAG at 24px and up;
+  a level is a style, not a tag (Sang's 43px `<h2>` is `heading-style-h3`, his 64px hero `<h1>` is
+  `h1`). A big stat number in a `<strong>` is display text, because it holds its size on phones
+  where a hero heading shrinks; Manrope kickers under 24px are text roles with `text-family-heading`.
+- A role also carries the members' modal line-height, and a heading role the family, weight and
+  tracking, but only when EVERY member had the property (otherwise a member would inherit
+  something the role must not override). Its responsive sizes are the members' modal ratios per
+  breakpoint, written on the role itself: the Webflow model, **edit the size on the breakpoint tab you
+  are looking at**, and it changes every element in that role at that breakpoint.
+- Everything else typographic an element had is a **one-property utility**, stacked after the role
+  and named for what it does: `text-weight-700`, `text-style-allcaps`, `text-family-heading`,
+  `text-tracking-n02`, `text-lh-1-65`. A custom (layout) class carries no font-size, family, weight,
+  line-height, tracking or transform at all, so no edit on it can fight a role.
+- Left as written (about 20): type classes whose font-size existed only inside a media query or
+  was a `clamp()`/`em`; they keep their old `text-NN` name and the gate knows them.
+- Cost, stated: sizes move by up to 2px at 1440 (a 13px label becomes 14, a 43px h2 becomes 44),
+  and about 1,700 element-breakpoint values (a bespoke responsive size, a per-breakpoint
+  line-height) are not carried — the role's responsive value applies. `class-parity` no longer
+  applies at 1440 for type; `type-roles-check.mjs` (1440 and 390, `--live` after publish) and
+  `standard-check.mjs` (overflow) are the gates, plus `visual-diff --source`.
+
+**Editing, for Sang**: select the text; the chips read e.g. `hero_lead` `text-size-medium`
+`text-weight-500`. Change the size on `text-size-medium` and every medium text follows; change it
+on the Tablet tab and only tablets follow. To make ONE paragraph larger, remove `text-size-medium`
+and add `text-size-large`. Never put a font-size on the first chip.
+
 ## Brandklout: the site is Sang's package VERBATIM (2026-09-15, evening)
 
 Alejandro: "make sure version 18 is the correct one. Just copy exactly that same version because I

@@ -932,6 +932,170 @@ const typeReport = { converted: 0, skipped: [] }
   for (let k = condList.length - 1; k >= 0; k--) if (!used.has(condList[k].id)) condList.splice(k, 1)
 }
 
+/* --- Client-First type roles (2026-09-15) ------------------------------------------------------ */
+/* Alejandro, after Sang's demo of a paragraph whose font-size edit never published: "reusable classes,
+   client-first and relume approach, for example text-regular, text-medium, text-large, and we apply
+   those throughout the site so we can make updates very easy". What went wrong is measured in the
+   runbook: font sizes lived on 305 generated classes named `text-18-7`, each with its own tablet and
+   phone overrides, so an edit on the base breakpoint changed nothing below 992px and an edit on a
+   breakpoint tab changed nothing on desktop. Here every one of them becomes a ROLE class from a short
+   scale, the same chip on every element that plays that role:
+     text-size-{micro 6, mini 8, tiny 10, xsmall 12, small 14, regular 16, medium 18, large 22,
+     xlarge 28, display 40, display-medium 56, display-large 64, display-xlarge 80}
+     heading-style-{h6 26, h5 30, h4 36, h3 44, h2 56, h1 64, display 72} (Manrope h1-h6 tags, 24px and
+     up; a level is a STYLE, not a tag: Sang's 43px <h2> is heading-style-h3, his 64px hero <h1> is h1;
+     a big stat number in a <strong> is text-size-display*, because it holds its size on phones)
+   Font-size exists NOWHERE else in the registry. A role carries its size, the members' modal
+   line-height, and (headings) family, weight and tracking when every member has them; its
+   responsive sizes are the members' modal ratios at each breakpoint, written on the same chip (the
+   Webflow model: edit the size on the breakpoint tab you are looking at). Everything else typographic
+   an element had is a one-property utility class stacked after the role, Client-First style:
+   text-weight-700, text-style-allcaps, text-family-heading, text-tracking-n02, text-lh-1-65. The
+   custom (layout) class carries no type at all, so no edit on it can fight one. Sang's sizes snap to
+   the scale: the deviation per element is reported in site-src/type-roles.md and gated by
+   type-roles-check.mjs (≤2px for text, ≤12% for display type at 1440). */
+const typeClasses = new Map() // typeSig -> [class names] (role + utilities); absent = the old single name
+const typeRoles = { roles: {}, utilities: {}, skipped: [], deviations: [], droppedResponsive: 0, mapping: {} }
+{
+  const pxOf = (v) => {
+    const m = String(v ?? '').match(/^(-?\d*\.?\d+)(rem|px)$/)
+    return m ? Number(m[1]) * (m[2] === 'rem' ? 16 : 1) : null
+  }
+  const rem = (x) => `${+(x / 16).toFixed(4)}rem`
+  const TEXT = [[6.5, 'micro', 6], [8.5, 'mini', 8], [10.5, 'tiny', 10], [12.5, 'xsmall', 12], [14.5, 'small', 14], [16.5, 'regular', 16], [19, 'medium', 18], [24, 'large', 22], [32, 'xlarge', 28], [48, 'display', 40], [60.5, 'display-medium', 56], [72, 'display-large', 64], [Infinity, 'display-xlarge', 80]]
+  const HEAD = [[28, 'h6', 26], [33, 'h5', 30], [40, 'h4', 36], [50.5, 'h3', 44], [60.5, 'h2', 56], [68.5, 'h1', 64], [Infinity, 'display', 72]]
+  const BANDS = ['', 'laptop', 'tablet', 'mobile-l', 'mobile']
+  const countByName = new Map()
+  const sigByName = new Map()
+  const tagsByName = new Map() // type class -> { tag: count }, to tell a heading from a big number
+  for (const el of elements) if (el.typeSig) { const n = typeNames.get(el.typeSig); countByName.set(n, (countByName.get(n) ?? 0) + 1); sigByName.set(n, el.typeSig); const t = tagsByName.get(n) ?? tagsByName.set(n, {}).get(n); t[el.info.tag] = (t[el.info.tag] ?? 0) + 1 }
+  const mostlyHeadingTag = (n) => { const t = tagsByName.get(n) ?? {}; const all = Object.values(t).reduce((a, b) => a + b, 0); const h = Object.entries(t).filter(([k]) => /^h[1-6]$/.test(k)).reduce((a, [, v]) => a + v, 0); return all > 0 && h * 2 >= all }
+  const hasLate = new Set()
+  for (const el of elements) if (el.typeSig && el.type?.late) hasLate.add(typeNames.get(el.typeSig))
+  const roles = new Map() // role name -> { target, kind, members: [{ r, n, base, bands }] }
+  for (const r of out) {
+    if (r.origin !== 'type') continue
+    const base = pxOf(r.styles.fontSize)
+    if (base == null || hasLate.has(r.name)) { typeRoles.skipped.push(`${r.name}: ${r.styles.fontSize ?? 'no base size'}`); continue }
+    // a heading role is for heading TAGS (Manrope, 20px and up); a big stat number in a <strong> is display text,
+    // whose phone behaviour (it holds its size) differs from a hero h1's (it shrinks) and must not share a role
+    const heading = /manrope/i.test(r.styles.fontFamily ?? '') && base >= 24 && mostlyHeadingTag(r.name)
+    const [, role, target] = (heading ? HEAD : TEXT).find(([max]) => base <= max)
+    const name = heading ? `heading-style-${role}` : `text-size-${role}`
+    // the member's effective size per band (a band without its own value holds the previous one)
+    const bands = {}
+    let prev = base
+    for (const b of BANDS) { const v = b === '' ? base : pxOf(r.contextStyles[b]?.fontSize); bands[b] = v ?? prev; prev = bands[b] }
+    ;(roles.get(name) ?? roles.set(name, { target, heading, members: [] }).get(name)).members.push({ r, n: countByName.get(r.name) ?? 0, base, bands })
+  }
+  const modal = (pairs) => { // [[value, weight]] -> the value with the most weight
+    const m = new Map()
+    for (const [v, w] of pairs) if (v !== undefined) m.set(v, (m.get(v) ?? 0) + w)
+    return [...m].sort((a, b) => b[1] - a[1])[0]?.[0]
+  }
+  // "Manrope,system-ui" and '"Manrope", system-ui' are one family: canonical form before naming or comparing
+  const canonFamily = (v) => String(v).split(',').map((f) => f.trim().replace(/^["']|["']$/g, '')).map((f) => (/\s/.test(f) ? `"${f}"` : f)).join(', ')
+  for (const r of out) if (r.origin === 'type' && r.styles.fontFamily) r.styles.fontFamily = canonFamily(r.styles.fontFamily)
+  const utilName = (prop, v) => {
+    const s = String(v)
+    if (prop === 'fontWeight') return `text-weight-${s}`
+    if (prop === 'fontFamily') return /manrope/i.test(s) ? 'text-family-heading' : /dm sans/i.test(s) ? 'text-family-body' : `text-family-${ident(s.split(',')[0].replace(/["']/g, '').toLowerCase())}`
+    if (prop === 'letterSpacing') return `text-tracking-${s.replace(/^-/, 'n').replace(/^(n?)0?\./, '$1').replace(/em$|px$|rem$/, '').replace(/\./g, '-')}`
+    if (prop === 'lineHeight') return `text-lh-${s.replace(/\./g, '-').replace(/[^\w-]/g, '')}`
+    if (prop === 'textTransform') return s === 'uppercase' ? 'text-style-allcaps' : `text-style-${ident(s)}`
+    if (prop === 'fontStyle') return `text-style-${ident(s)}`
+    return `text-${ident(prop)}-${ident(s)}`
+  }
+  const utilities = new Map() // name -> { prop, value }
+  const utilByValue = new Map() // `${prop}|${value}` -> name
+  const ROLE_PROPS = { text: ['lineHeight'], heading: ['lineHeight', 'fontFamily', 'fontWeight', 'letterSpacing'] }
+  const retired = new Set()
+  const pushed = []
+  for (const [name, role] of roles) {
+    const total = role.members.reduce((s, m) => s + m.n, 0) || 1
+    const styles = { fontSize: rem(role.target) }
+    const prio = {}
+    // a prop rides on the role only when EVERY member sets it (a member without it inherits
+    // something this class must not override)
+    for (const prop of ROLE_PROPS[role.heading ? 'heading' : 'text']) {
+      if (!role.members.every((m) => m.r.styles[prop] !== undefined)) continue
+      styles[prop] = modal(role.members.map((m) => [m.r.styles[prop], m.n]))
+    }
+    // responsive sizes: the modal ratio per band, on the role
+    const ctx = {}
+    let prevRatio = 1
+    for (const b of BANDS.slice(1)) {
+      const pairs = role.members.map((m) => [+(m.bands[b] / m.base).toFixed(3), m.n])
+      let ratio = Number(modal(pairs))
+      // on phones, the SMALLEST ratio any group of >=15% of the members had: a nowrap button that Sang
+      // shrank to 13px must not come back at 14.8px and push the page sideways
+      // (display type and headings wrap instead of overflowing, and shrinking a stat number to the smallest
+      // group's size halves it on a phone: they keep the modal)
+      if ((b === 'mobile-l' || b === 'mobile') && role.target < 24) {
+        const w = new Map()
+        for (const [v, n] of pairs) w.set(v, (w.get(v) ?? 0) + n)
+        const big = [...w].filter(([, n]) => n >= 0.15 * total).map(([v]) => v)
+        if (big.length) ratio = Math.min(...big)
+      }
+      typeRoles.roles[name] ??= {}
+      ;(typeRoles.ratios ??= {})[`${name} ${b}`] = Object.fromEntries([...pairs.reduce((m, [v, n]) => m.set(v, (m.get(v) ?? 0) + n), new Map())].sort((x, y) => y[1] - x[1]).slice(0, 6))
+      if (ratio !== prevRatio) ctx[b] = { fontSize: rem(role.target * ratio) }
+      prevRatio = ratio
+      for (const m of role.members) if (Math.abs(m.bands[b] - role.target * ratio) > 1.5) typeRoles.droppedResponsive += m.n
+    }
+    pushed.push({ name, kind: 'class', selector: '.' + name, order: 0, styles, ...(Object.keys(prio).length ? { stylePriorities: prio } : {}), contextStyles: ctx, origin: 'type' })
+    typeRoles.roles[name] = { px: role.target, elements: total, responsive: Object.fromEntries(Object.entries(ctx).map(([b, v]) => [b, v.fontSize])), from: {} }
+    for (const m of role.members) {
+      const key = `${m.base}px`
+      typeRoles.roles[name].from[key] = (typeRoles.roles[name].from[key] ?? 0) + m.n
+      typeRoles.mapping[m.r.name] = name
+      if (Math.abs(m.base - role.target) > 0) typeRoles.deviations.push({ was: m.base, now: role.target, elements: m.n, role: name })
+      // utilities for what the role does not carry, one property each
+      const names = [name]
+      for (const prop of TYPO) {
+        if (prop === 'fontSize') continue
+        const v = m.r.styles[prop]
+        if (v === undefined || v === styles[prop]) continue
+        // one utility per (property, value); a second value under the same name gets a numbered name
+        const key = `${prop}|${v}`
+        let u = utilByValue.get(key)
+        if (!u) {
+          u = utilName(prop, v)
+          if (utilities.has(u)) u = claim(u)
+          utilities.set(u, { prop, value: v, prio: m.r.stylePriorities?.[prop] })
+          utilByValue.set(key, u)
+        }
+        names.push(u)
+      }
+      // per-breakpoint values other than the size do not travel (rare; counted)
+      for (const [b, bag] of Object.entries(m.r.contextStyles)) for (const k of Object.keys(bag)) if (k !== 'fontSize') typeRoles.droppedResponsive += m.n
+      typeClasses.set(sigByName.get(m.r.name), names)
+      retired.add(m.r)
+    }
+  }
+  for (const [u, { prop, value, prio }] of utilities) {
+    pushed.push({ name: u, kind: 'class', selector: '.' + u, order: 0, styles: { [prop]: value }, ...(prio ? { stylePriorities: { [prop]: prio } } : {}), contextStyles: {}, origin: 'type' })
+    typeRoles.utilities[u] = `${prop}: ${value}`
+  }
+  for (let k = out.length - 1; k >= 0; k--) if (retired.has(out[k])) out.splice(k, 1)
+  // roles, then utilities, after every other rule. Only THESE get an order here: the reset revert's
+  // rules sit at order 0 on purpose (the registry's first rules), and renumbering them once moved
+  // `:where(*){box-sizing:revert}` behind `*{box-sizing:border-box}` and widened every wrap.
+  for (const r of pushed) { r.order = order++; out.push(r) }
+  for (const u of [...utilities.keys(), ...roles.keys()]) taken.add(u)
+  // the report
+  const lines = [`# Type roles (Client-First) — generated by class-system.mjs`, '', `Font-size lives only on these classes. Sang's sizes snap to the scale; "from" lists his sizes (elements) each role replaced.`, '', '| role | px at 1440 | elements | responsive (laptop/tablet/mobile-l/mobile) | from |', '| :-- | --: | --: | :-- | :-- |']
+  for (const [n, r] of Object.entries(typeRoles.roles).sort((a, b) => a[1].px - b[1].px)) lines.push(`| \`${n}\` | ${r.px} | ${r.elements} | ${Object.entries(r.responsive).map(([b, v]) => `${b} ${v}`).join(', ') || '-'} | ${Object.entries(r.from).sort((a, b) => parseFloat(a[0]) - parseFloat(b[0])).map(([k, v]) => `${k} (${v})`).join(', ')} |`)
+  lines.push('', `## Responsive ratios per role and band (ratio: elements), the chosen one first on desktop bands, the smallest sizeable one on phones`, '', ...Object.entries(typeRoles.ratios ?? {}).map(([k, v]) => `- \`${k}\`: ${Object.entries(v).map(([r, n]) => `${r}: ${n}`).join(', ')}`))
+  lines.push('', `## Utilities (one property each, stacked after the role)`, '', ...Object.entries(typeRoles.utilities).sort().map(([u, d]) => `- \`${u}\`: ${d}`))
+  const dev = typeRoles.deviations
+  const devEls = dev.reduce((s, d) => s + d.elements, 0)
+  const worst = dev.slice().sort((a, b) => Math.abs(b.was - b.now) - Math.abs(a.was - a.now))[0]
+  lines.push('', `## Deviations from Sang's sizes at 1440`, '', `- ${devEls} element(s) changed size; worst ${worst ? `${worst.was}px -> ${worst.now}px (${worst.role}, ${worst.elements} el)` : 'none'}`, `- ${typeRoles.droppedResponsive} element-breakpoint value(s) not carried (a bespoke responsive size or a per-breakpoint line-height/tracking; the role's applies)`, `- left as written: ${typeRoles.skipped.join('; ') || 'none'}`, '', '## Version Control', '', 'Generated; regenerate, never edit.', '')
+  fs.writeFileSync(path.join(SRC, 'type-roles.md'), lines.join('\n'))
+  typeRoles.summary = `${Object.keys(typeRoles.roles).length} roles + ${utilities.size} utilities replace ${retired.size} type classes; ${devEls} elements snapped (worst ${worst ? `${worst.was}->${worst.now}px` : '-'})`
+}
+
 /* --- write the pages ------------------------------------------------------------------------- */
 // original classes kept on the markup: script hooks, state classes present in the markup, and
 // classes named in the context of a kept selector
@@ -953,7 +1117,8 @@ for (const pd of pageData) {
     const el = els.find((e) => e.i === info.i)
     const orig = (info.cls || '').split(/\s+/).filter(Boolean)
     const keep = orig.filter((c) => keepClasses.has(c) || stateClasses.has(c))
-    const mine = el ? [el.layoutSig && layoutNames.get(el.layoutSig), el.typeSig && typeNames.get(el.typeSig)].filter(Boolean) : []
+    // the layout class, then the type role and its utilities (or the old single type class where a rule was left as written)
+    const mine = el ? [el.layoutSig && layoutNames.get(el.layoutSig), ...(el.typeSig ? (typeClasses.get(el.typeSig) ?? [typeNames.get(el.typeSig)]) : [])].filter(Boolean) : []
     const next = [...new Set([...mine, ...keep])]
     if (next.join(' ') !== orig.join(' ')) assign[info.i] = next.join(' ')
     if (mine.length) classedEls++
@@ -1021,4 +1186,5 @@ console.log(`elements ${classedEls} carry a new class; ${typeNames.size} type cl
 console.log(`hooks    ${keepClasses.size} original classes kept for the scripts and kept selectors`)
 console.log(`checks   ${report.dominatedStates} state declarations always outranked (dropped), ${report.partialOverlap} partly outranked, ${report.bpBeforeCondition} breakpoint-before-condition, ${report.conditionOrderConflicts} condition-order conflicts`)
 console.log(`max-width blocks by width: ${JSON.stringify(widths)}`)
+console.log(`roles    ${typeRoles.summary} (site-src/type-roles.md)`)
 console.log(`type     ${typeReport.converted} font-size cascades re-based to rem per breakpoint; ${typeReport.skipped.length} left as written${typeReport.skipped.length ? ': ' + typeReport.skipped.slice(0, 10).join(' | ') : ''}`)

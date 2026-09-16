@@ -10,8 +10,16 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: Sang's v18 verbatim on a clean instance (seq 33, 2026-09-15)
+## Status: v18 verbatim with Client-First type roles (seq 41, 2026-09-15)
 
+- **Seq 41 (2026-09-15, night; seq 38 + the editing proof, reverted): font sizes are Client-First role classes.** Sang's edit that never
+  published (a paragraph's size) was a base-breakpoint edit on a generated class (`text-18-7`) that
+  carried its own tablet and phone sizes. Now font-size lives ONLY on `text-size-{micro…display-xlarge}`
+  and `heading-style-{h6…h1, display}`, responsive values on the same chip, everything else
+  typographic as one-property utilities (`text-weight-700`, `text-style-allcaps`, …); custom classes
+  carry no type. Sizes snapped to the scale (≤2px at 1440, gated by `type-roles-check.mjs`; phones
+  advisory). Editing rules for Sang are in the directive.
+  [`runbook/2026-09-15-type-roles.md`](./runbook/2026-09-15-type-roles.md).
 - **Seq 33 (2026-09-15, evening): the site is Sang's v18 package VERBATIM.** Alejandro: "copy
   exactly that same version"; the v16 instruction to keep the agency's home sections is revoked.
   `patches/index.html.mjs`, `patches/guarantee.html.mjs`, `agency/slider.js` and the home-v12 CSS
