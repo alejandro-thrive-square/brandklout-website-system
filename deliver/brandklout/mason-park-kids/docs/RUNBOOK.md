@@ -29,12 +29,12 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
-**2026-09-15: BugHerd round one (project 540564) is through.** 24 of the 27 homepage notes are
-fixed, published to staging (shell seq 38) and done in BugHerd. **Three are open, waiting on the
-agency:** #4 (the brand guide in their Drive: we have the kids-logo palette, and the family practice's
-Figma palette differs, so no palette change until it is confirmed), #11 ("hospital setting" on ~10 other
-pages), #28 (the reviewer's edited gumball image, which was found nowhere). Re-run
-`workflows/.tmp/bugherd/fetch.mjs` to see their answers. See `runbook/2026-09-15-bugherd-staging-round-one.md`.
+**2026-09-16: BugHerd project 540564 is closed, with all 27 notes done.** The last three were resolved
+with the Drive brand guide: the site now uses the practices' brand palette, with Marcellus/Figtree
+standing in for the Adobe faces (#4). "Hospital setting" is gone site-wide (#11). The gumball frames were
+edited to black slacks (#28). Published to staging, 215 pages. Re-run
+`workflows/.tmp/bugherd/fetch.mjs` for new notes. See `runbook/2026-09-16-bugherd-open-three-brand-guide.md`
+(and `2026-09-15-bugherd-staging-round-one.md` for the first 24).
 
 | | State |
 | :--- | :--- |
@@ -42,7 +42,7 @@ pages), #28 (the reviewer's edited gumball image, which was found nowhere). Re-r
 | The **blog** | **Live, all 157 posts and the overview,** built by `build-blog.mjs` from the recovered export. On the masthead and in the footer. Which posts the practice keeps is still its call; unpublishing one is a line in the generator's list. |
 | The **46 migrated pages** | **Redesigned, 2026-09-09.** All 57 pages now carry the same masthead and footer, the fluid type, the journey layer, at least one photograph and a ground that changes under the reader. They have local source for the first time: `.tmp/harvest-migrated.mjs` pulled their content down, a recipe in `.tmp/recipes/` says which blocks go where, and `.tmp/build-pages.mjs` wrote the files. **From here the files are the source** - edit a page's `<main>` in place, exactly like the eleven. |
 | Head tags | Every page has a description, canonical, Open Graph and JSON-LD, written at publish by the two plugins in `deliver/process/19-instatic-seo`. |
-| Type | Fraunces and Nunito, the VARIABLE files, self-hosted on both sides. The platform's static instances are still installed as the fallback. |
+| Type & colour | **Brand guide since 2026-09-16:** Marcellus (for Collier) and Figtree VF (for Avenir Next), self-hosted on both sides; exact guide palette (slate, sage, light grey, copper, sand, beige). No Adobe Fonts kit yet. Fraunces/Nunito files remain uploaded but unused. |
 
 ### The gates, and what each one is for
 
