@@ -22,7 +22,7 @@ least a guide.
 
 - Team guide published as an artifact: <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>
   (Webflow → Instatic table, width ruler, the cs-section-head case, checklist).
-- Directive `21-instatic-upload.md`: new section "breakpoint tabs for Webflow users"; the stale
+- Commit `98ec2083`. Directive `21-instatic-upload.md`: new section "breakpoint tabs for Webflow users"; the stale
   "seven breakpoint tabs" line corrected to the standard four.
 - **No change to the site.** The edit stays Laptop-only until Alejandro decides (move it to base
   and clear the Tablet/Mobile-landscape gaps, or revert).
