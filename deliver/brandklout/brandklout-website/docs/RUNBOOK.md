@@ -12,6 +12,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: v18 verbatim with Client-First type roles (seq 42, 2026-09-15)
 
+- **2026-09-16: "my UI edit didn't publish" was the Laptop tab.** Laptop is max-width 1279, so an edit there never shows at 1280/1440/1512 (Webflow's 1280 tab cascades up; ours cascades down). Publishing works. Team guide: <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>. Open: whether `.cs-section-head`'s stacked layout goes to every width.
+  [`runbook/2026-09-16-laptop-tab-breakpoint-guide.md`](./runbook/2026-09-16-laptop-tab-breakpoint-guide.md).
 - **Seq 42 (2026-09-15, night): font sizes are Client-First role classes, tightened.** No-op chips are gone, recurring utility stacks are composite styles (`text-style-label`, `text-style-kicker`…), identical layout classes merged. Sang's edit that never
   published (a paragraph's size) was a base-breakpoint edit on a generated class (`text-18-7`) that
   carried its own tablet and phone sizes. Now font-size lives ONLY on `text-size-{micro…display-xlarge}`

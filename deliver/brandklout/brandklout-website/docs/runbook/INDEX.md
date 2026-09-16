@@ -1,11 +1,12 @@
 # Runbook index
 
-19 runs, newest first. Each line is one file in this folder.
+20 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-16 | **"UI edit didn't publish" = the Laptop tab (seq 42, no site change)**: the .cs-section-head edit was on Laptop (max-width 1279) and checked at 1280; Webflow-user guide published as an artifact, directive section added. Carries **gotchas** | [`2026-09-16-laptop-tab-breakpoint-guide.md`](./2026-09-16-laptop-tab-breakpoint-guide.md) |
 | 2026-09-15 | **Client-First type roles (seq 42)**: tightened (no-op chips gone, composite styles, merged duplicates);: Sang's font-size edit that never published was a base-tab edit on a class with its own phone overrides (`text-18-7`, one of 305); font-size now lives only on `text-size-*` / `heading-style-*` roles + one-property utilities; new gate `type-roles-check.mjs`; the ordering regression that widened every wrap. Carries **gotchas** | [`2026-09-15-type-roles.md`](./2026-09-15-type-roles.md) |
 | 2026-09-15 | **Sang's v18 VERBATIM (seq 33)**: the agency home/guarantee patches, slider and home-v12 CSS retired ("copy exactly that same version"); his carousel and results row are the home page; shared layout = union of page sheet/script lists. Carries **gotchas** | [`2026-09-15-v18-verbatim.md`](./2026-09-15-v18-verbatim.md) |
 | 2026-09-15 | **Instance wiped blank and rebuilt from v18 (seq 30)**: `wipe-instance.mjs` emptied pages, styles, code assets, media, fonts, the legal table and the plugin (accounts kept, blank state not published); fonts, media, plugin + settings, pages, collection re-created; all gates clean. Carries **gotchas** | [`2026-09-15-wipe-and-rebuild-from-v18.md`](./2026-09-15-wipe-and-rebuild-from-v18.md) |

@@ -18,6 +18,27 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: breakpoint tabs for Webflow users (2026-09-16)
+
+"I changed `.cs-section-head` in the UI, published, and nothing changed." The edit (flex, column,
+gap 20px) was made with the **Laptop** tab selected and checked in DevTools at **1280×720**. It was
+in the published stylesheet inside `@media (max-width: 1279px)`: measured live, 1279 showed it and
+1280 did not. Nothing was wrong with publishing.
+
+- **Instatic already cascades like Webflow**: base styles reach every width, each tab overrides only
+  the properties set on it, and all four tabs are max-width (Laptop 1279, Tablet 991, Mobile
+  landscape 767, Mobile portrait 479).
+- **The trap is Laptop.** Webflow's 1280/1440/1920 tabs are min-width and cascade UP; this site has
+  no larger breakpoints, and Laptop cascades DOWN from 1279. 1280, 1440, 1512 and 1920 are all
+  desktop. Sang's design keeps 77 rules on Laptop (mostly heading sizes), so the tab stays.
+- A smaller tab that already sets the same property wins for its widths: `.cs-section-head` had its
+  own Tablet/Mobile-landscape gaps, so the 20px gap only held from 992 to 1279.
+- **Diagnose "didn't publish" in this order**: read the rule from `GET /site` (`styles` vs
+  `contextStyles.<tab>`), grep the published `/_instatic/css/style-*.css` for it, then measure computed
+  style at 1279 and 1280. The stylesheet name is content-hashed, so a cache is never the cause.
+- The team guide (Webflow → Instatic table, width ruler, checklist) is the artifact
+  <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>; its content is summarised here.
+
 ## Brandklout: Client-First type roles, so a font-size edit publishes (2026-09-15, night)
 
 Sang showed Alejandro a paragraph whose font-size he changed in the admin and published, and
@@ -301,7 +322,7 @@ the gradient; ≤360 rules folded into 480 (390 moved); ≤1000 into 1050 (the d
 
 **Editing it in Instatic** (for Sang and the team): select an element and edit its first class chip
 for layout, spacing and colour; edit the `text-*` / `heading-*` chip to change that text style
-everywhere it is used. Breakpoint tabs are the seven above. To change one element only, add a new
+everywhere it is used. Breakpoint tabs are the standard four below the base view (Laptop ≤1279, Tablet ≤991, Mobile landscape ≤767, Mobile portrait ≤479, all max-width; see "breakpoint tabs for Webflow users" above). To change one element only, add a new
 class to it (new classes come last and win). The hero results **slider** is plain blocks: each
 `bk-slide` inside `bk-slider-track` is one slide; duplicate, edit or delete slides freely, the dots
 follow (agency/slider.js).
