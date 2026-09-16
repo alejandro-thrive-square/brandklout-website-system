@@ -1,11 +1,12 @@
 # Runbook index
 
-20 runs, newest first. Each line is one file in this folder.
+21 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-16 | **/customer-stories and /book emptied by "Restore version" (seq 44)**: page versions hold only title+slug; both pages restored from the 11:57 site snapshot + SEO cells, published. Found: the code asset has been scoped to no pages since Sang's 07:57 publish (fix awaiting approval). Carries **gotchas** | [`2026-09-16-restore-version-emptied-pages.md`](./2026-09-16-restore-version-emptied-pages.md) |
 | 2026-09-16 | **"UI edit didn't publish" = no Desktop breakpoint (seq 43)**: every canvas click selected Laptop (≤1279); `desktop` added back first (CSS unchanged), class-system writes it; Webflow-user guide published as an artifact, directive section added. Carries **gotchas** | [`2026-09-16-laptop-tab-breakpoint-guide.md`](./2026-09-16-laptop-tab-breakpoint-guide.md) |
 | 2026-09-15 | **Client-First type roles (seq 42)**: tightened (no-op chips gone, composite styles, merged duplicates);: Sang's font-size edit that never published was a base-tab edit on a class with its own phone overrides (`text-18-7`, one of 305); font-size now lives only on `text-size-*` / `heading-style-*` roles + one-property utilities; new gate `type-roles-check.mjs`; the ordering regression that widened every wrap. Carries **gotchas** | [`2026-09-15-type-roles.md`](./2026-09-15-type-roles.md) |
 | 2026-09-15 | **Sang's v18 VERBATIM (seq 33)**: the agency home/guarantee patches, slider and home-v12 CSS retired ("copy exactly that same version"); his carousel and results row are the home page; shared layout = union of page sheet/script lists. Carries **gotchas** | [`2026-09-15-v18-verbatim.md`](./2026-09-15-v18-verbatim.md) |

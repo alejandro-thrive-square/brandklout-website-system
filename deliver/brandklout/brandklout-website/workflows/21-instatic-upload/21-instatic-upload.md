@@ -1476,6 +1476,27 @@ rounding, and the `.navbar_burger:empty` repair. **Resist adding to that list to
 make a run quiet.** Both of the bugs above would have been caught before the
 first publish by exactly this check.
 
+### "Restore version" empties the page (2026-09-16)
+
+A page row's versions (`data_row_versions.cells_json`) hold only `title` and `slug`. The body is
+not in them. It lives in the row's cells, the page's collab doc and each publish's
+`site_snapshots.site_json`. So **"Restore version" in the editor wipes the page**: the row keeps
+its place in the Pages list, the canvas is empty, and the next site publish ships a blank page.
+Sang did this to `/customer-stories` and `/book` (audit `version.restore`, 12:12 and 12:34 UTC).
+SEO cells go too.
+
+**Recover** from the last `site_snapshots` row before the restore (its `pages[]` entry carries
+`nodes` + `rootNodeId`). First check that its class ids still exist and match the current build,
+then send an incremental `site-document` save, read-merge-write the SEO cells, and publish:
+`.tmp/restore-lost-pages.mjs`. Tell editors not to use "Restore version".
+
+### A code asset scoped to "pages" with no ids loads nowhere (2026-09-16)
+
+`site.runtime.styles[<fileId>]` absent means all pages. `{scope:{type:'pages',pageIds:[]}}` means
+none: `userStyles-*.css` disappears from every page, with no warning in the editor. Sang's 07:57 UTC
+publish set it on `src/styles/site.css` (fluid root, keyframes, Calendly shell). `verify-live`
+catches it ("no userStyles stylesheet").
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
