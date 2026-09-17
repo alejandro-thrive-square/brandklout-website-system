@@ -8,7 +8,7 @@ two-page push. I said so before running it and the answer was to push everything
 now carries the client's Asana feedback, the teammate's web dev brief pass **and** the two legal
 pages, all of which had been held on staging.
 
-## Done (see the commit that adds this file)
+## Done (`03db652c`)
 
 - `https://westlaketxmedspa.com` is now **13 pages** and content-equivalent to staging.
   - The trading name is **Westlake Medical Aesthetics** everywhere, the menu is 12 treatments in 4
