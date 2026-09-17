@@ -1,5 +1,5 @@
-/* Brandklout: Termly -> GoHighLevel consent bridge (v2.2.0)
-   Copies each visitor's Termly choice into the hidden privacy_* fields of every embedded GHL form,
+/* Brandklout: Termly/Silktide -> GoHighLevel consent bridge (v2.3.0)
+   Copies each visitor's consent choice (Termly, or the Silktide loader's "bk.consent" record) into the hidden privacy_* fields of every embedded GHL form,
    survey or calendar, through the iframe URL (GHL prefills fields from matching query keys).
    Source of truth for Webflow (inline, footer) and Instatic (site script asset). Docs:
    deliver/process/23-termly-ghl-consent/23-termly-ghl-consent.md
@@ -7,24 +7,23 @@
      window.BrandkloutConsentConfig = { marketingDisclosureVersion: "YYYY-MM-DD", privacyPolicyVersion: "" } */
 (function () {
   if (window.BrandkloutConsentBridge) return;
-  window.BrandkloutConsentBridge = "2.2.0";
+  window.BrandkloutConsentBridge = "2.3.0";
 
   var custom = window.BrandkloutConsentConfig || {};
-  var CONFIG = {
-    // Written to marketing_disclosure_version. Bump it when the SMS/email consent wording on the form changes.
-    marketingDisclosureVersion: custom.marketingDisclosureVersion || "2026-09-16",
-    // Written to privacy_policy_version. Empty uses the document version ID Termly reports.
-    privacyPolicyVersion: custom.privacyPolicyVersion || ""
-  };
+  // Written to marketing_disclosure_version. Bump it when the SMS/email consent wording on the form changes.
+  var DISCLOSURE = custom.marketingDisclosureVersion || "2026-09-16";
+  // Written to privacy_policy_version. Empty uses the record's document_version_id.
+  var POLICY = custom.privacyPolicyVersion;
 
   var FORM_PATH = /\/widget\/(form|survey|booking)\//;
 
-  // Termly's saved record for this visitor, or null before they choose.
+  // The visitor's saved record ({ value, createdAt }), or null before they choose. Silktide sites:
+  // kit/silktide/brandklout-silktide.js writes "bk.consent" in Termly's shape, so both read the same way.
   function termlyRecord() {
     try {
-      var cache = JSON.parse(localStorage.getItem("TERMLY_API_CACHE") || "{}");
-      var entry = cache.TERMLY_COOKIE_CONSENT;
-      return entry && entry.value ? { value: entry.value, createdAt: entry.createdAt } : null;
+      var entry = JSON.parse(localStorage.getItem("bk.consent")) ||
+        JSON.parse(localStorage.getItem("TERMLY_API_CACHE") || "{}").TERMLY_COOKIE_CONSENT;
+      return entry && entry.value ? entry : null;
     } catch (e) { return null; }
   }
 
@@ -44,13 +43,13 @@
 
     // Every key is a GHL custom field key; GHL prefills a field from the query parameter of the same name.
     var p = "privacy_";
-    var v = { marketing_disclosure_version: CONFIG.marketingDisclosureVersion };
+    var v = { marketing_disclosure_version: DISCLOSURE };
     v[p + "analytics_consent"] = state.analytics === true ? "granted" : "denied";
     v[p + "advertising_consent"] = v[p + "ad_user_data_consent"] = v[p + "ad_personalization_consent"] = ads;
     v[p + "sale_share_opt_out"] = String(optOut);
     v[p + "gpc_detected"] = String(gpc);
     v[p + "consent_timestamp_utc"] = record && record.createdAt ? new Date(record.createdAt).toISOString() : "";
-    v[p + "policy_version"] = CONFIG.privacyPolicyVersion || String(saved.document_version_id || "");
+    v[p + "policy_version"] = POLICY || String(saved.document_version_id || "");
     v[p + "cmp_receipt_id"] = saved.visitor_id || (saved.visitor && saved.visitor.uuid) || "";
     v[p + "source_url"] = location.origin + location.pathname;
     return v;
@@ -86,6 +85,8 @@
   new MutationObserver(schedule).observe(document.documentElement, {
     childList: true, subtree: true, attributes: true, attributeFilter: ["src"]
   });
+
+  addEventListener("bk:consent", schedule);
 
   // Termly loads async; re-run when it is ready and each time the visitor changes their choice.
   (function hook(tries) {

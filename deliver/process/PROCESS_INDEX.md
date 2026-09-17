@@ -83,6 +83,11 @@ from the client and is rolled out by the agent. Phase 2 (Termly script with `aut
 trackers tagged, Consent Preferences link) waits for the client's Termly account, which is created by
 hand. The directive holds the site registry and rollout state.
 
+**Silktide alternative (on test since 2026-09-17).** Sites with no Termly account can use the free,
+self-configured Silktide Consent Manager instead: one head block per site from `kit/silktide/sites.json`,
+no account, the same GHL fields (bridge 2.3.0 reads both). It has no cookie scan, no policy generator and no
+third-party consent log. Livewell Dental is the test site (staging only).
+
 ### Instatic modules (`18`, `20`, `22`)
 
 Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and all three are needed on every such site:

@@ -1,0 +1,33 @@
+{
+  "livewell-dental": {
+    "platform": "webflow",
+    "siteId": "69d03fdbe999e9907724a69d",
+    "settings": {
+      "live": false,
+      "testHosts": ["livewelldentalva.webflow.io"],
+      "position": "bottomRight",
+      "iconPosition": "bottomLeft",
+      "policyVersion": "2026-07-28",
+      "privacyUrl": "/privacy-policy",
+      "cookieUrl": "/cookie-policy",
+      "theme": {
+        "fontFamily": "Lato, Arial, sans-serif",
+        "primaryColor": "#585b2f",
+        "backgroundColor": "#fdf8ee",
+        "textColor": "#262626",
+        "iconBackgroundColor": "#585b2f",
+        "iconColor": "#fdf8ee"
+      },
+      "css": "#stcm-icon { bottom: 96px !important; } @media (max-width: 599px) { #stcm-banner { bottom: 88px !important; } }",
+      "trackers": {
+        "analytics": [
+          { "src": "https://analytics.ahrefs.com/analytics.js", "attrs": { "data-key": "VZ2r0P1IIckeo3QKzcd5Og" } }
+        ],
+        "advertising": [
+          { "src": "https://backend.leadconnectorhq.com/appengine/loc/As99qqyDrwVnWjg9w9qB/pool/WSleOccLOiEA2I19YBdH/number_pool.js" },
+          { "src": "https://backend.leadconnectorhq.com/appengine/js/user_session.js" }
+        ]
+      }
+    }
+  }
+}

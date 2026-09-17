@@ -19,6 +19,9 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 | 3 | **Trackers tagged** `type="text/plain" data-categories="…"` | Wherever they sit | **2** |
 | 4 | **Consent Preferences link** ([`kit/consent-preferences-link.html`](./kit/consent-preferences-link.html)) | Every footer, landing pages included | **2** (the link does nothing until Termly loads) |
 
+A site with no Termly account can take the **Silktide** path instead of pieces 2-4. See
+[Silktide alternative](#silktide-alternative-no-termly-account) below.
+
 **Phase 1 is safe without Termly.** With no Termly record, the bridge sends the values a Decline click
 would send (`denied`, opt-out `true`). **Phase 2 must wait for Termly.** A tracker tagged `text/plain`
 never runs until Termly releases it, so tagging before Termly exists switches call tracking off.
@@ -44,7 +47,7 @@ every `…/widget/(form|survey|booking)/…` iframe URL and reloads those iframe
 | `privacy_advertising_consent`, `privacy_ad_user_data_consent`, `privacy_ad_personalization_consent` | `granted` only if `advertising` was accepted with no GPC signal and no Do Not Sell request, else `denied` |
 | `privacy_sale_share_opt_out` | `true` unless advertising was accepted with no GPC signal and no Do Not Sell request |
 | `privacy_gpc_detected` | `navigator.globalPrivacyControl` (or Termly's saved `gpc`) |
-| `privacy_consent_timestamp_utc`, `privacy_cmp_receipt_id`, `privacy_policy_version` | From Termly's `localStorage` record (`TERMLY_API_CACHE` → `TERMLY_COOKIE_CONSENT`); empty before a real choice, so the CRM can tell "declined by default" from "clicked Decline" |
+| `privacy_consent_timestamp_utc`, `privacy_cmp_receipt_id`, `privacy_policy_version` | From the saved record: the Silktide loader's `bk.consent` if present, else Termly's (`TERMLY_API_CACHE` → `TERMLY_COOKIE_CONSENT`); empty before a real choice, so the CRM can tell "declined by default" from "clicked Decline" |
 | `privacy_source_url` | Page origin + path |
 | `marketing_disclosure_version` | `2026-09-16` by default. A site can override it by setting `window.BrandkloutConsentConfig = { marketingDisclosureVersion: "…" }` before the bridge runs |
 
@@ -62,12 +65,16 @@ every `…/widget/(form|survey|booking)/…` iframe URL and reloads those iframe
 
 ```bash
 cd deliver/process/23-termly-ghl-consent
-node consent-kit.mjs minify                        # rebuild kit/ghl-consent-bridge.min.js (<= 2000 chars)
+node consent-kit.mjs minify                        # rebuild the bridge (<= 2000 chars) and the Silktide loader
 node consent-kit.mjs instatic status               # read-only, every Instatic site
 node consent-kit.mjs instatic apply  [--only a,b] --apply
 node consent-kit.mjs instatic publish --only a,b  --apply
 node consent-kit.mjs check <url>[,<url>] [--termly-proxy]
 node consent-kit.mjs snippet [--disclosure DATE]  # paste-able block for a platform with no API
+# Silktide path (see below)
+node consent-kit.mjs silktide-snippet <site>
+node consent-kit.mjs silktide-merge <site> <head.html> <footer.html> <outdir>
+node consent-kit.mjs silktide-check <url> [--gpc] [--shot <dir>] [--preview <dir> [--as-published]]
 ```
 
 Run it with output redirected to a file, never piped (Node on Windows dies on a libuv assertion when
@@ -87,7 +94,7 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
    of `lastPublished`. Applying a registered script does not change `lastUpdated`, but a freeform code
    edit does. Otherwise leave it: the script ships with the team's next publish.
 5. Remove any older pasted copy of the bridge from the footer freeform code.
-6. `node consent-kit.mjs check <a page with a GHL form>` should report `bridge: "2.2.0"` and form values.
+6. `node consent-kit.mjs check <a page with a GHL form>` should report the bridge version (`2.3.0` from 2026-09-17; `2.2.0` still works on Termly sites) and form values.
 
 ### Phase 1 — Instatic
 `instatic apply --apply` writes the asset (draft) and reads it back. A SiteFile without an `id` is
@@ -110,6 +117,63 @@ script is served same-origin, so `script-src 'self'` is enough.
    `autoblocked` 0, no tracking requests, forms `denied`. After Decline: a receipt ID appears. After
    Accept: `granted`, and tracking loads. The Preferences link opens Termly.
 
+## Silktide alternative (no Termly account)
+
+Added 2026-09-17, **on test** (Livewell Dental, staging only). Use it where a Termly account cannot be
+created. [Silktide Consent Manager](https://silktide.com/consent-manager/) is MIT-licensed, has no
+accounts, and is one JavaScript file plus one CSS file. We load 2.0.1 from jsDelivr, pinned and
+SRI-checked. Everything else is ours:
+
+| File | What it is |
+| :--- | :--- |
+| [`kit/silktide/brandklout-silktide.js`](./kit/silktide/brandklout-silktide.js) | The loader (v1.0.0). Sets Consent Mode defaults to denied (restoring a saved choice at once), loads Silktide, configures the banner (Essential / Analytics / Advertising), loads the trackers outside GTM only after the matching consent, writes the GHL record, and opens the panel from any `#consent-preferences` link. |
+| [`kit/silktide/sites.json`](./kit/silktide/sites.json) | Per-site settings: test hosts or `live`, policy URLs and version, theme, extra CSS, and the tracker list. |
+| `kit/silktide/brandklout-silktide.min.js` | Built by `minify`; goes inline in the head block. |
+
+**How it maps to GHL.** The loader writes `localStorage["bk.consent"]` in Termly's shape
+(`{ createdAt, value: { analytics, advertising, visitor_id, document_version_id } }`), and bridge
+**2.3.0** reads it before Termly's cache. It also re-runs on the `bk:consent` event. All eleven fields fill
+as they do with Termly, with these differences:
+- `privacy_cmp_receipt_id` is **our own** random UUID, not a third-party receipt.
+- `privacy_policy_version` is `policyVersion` from `sites.json` (the privacy policy's effective date).
+- `privacy_consent_timestamp_utc` is written only when the stored choice changes, never on page load.
+- Silktide has no Do Not Sell switch. Rejecting Advertising sets `privacy_sale_share_opt_out=true`, and the
+  Advertising text says so.
+- **GPC** is honoured by the loader. With `navigator.globalPrivacyControl` set, the Advertising category is
+  not offered at all, the banner says why, the ad trackers never load, and `ad_*` stays denied.
+
+**What it does not do** (Termly does): no cookie scan, no policy generator, no consent log off the
+visitor's browser. The site must already have its own privacy and cookie policy pages.
+
+### Rolling it out on a site
+1. Add the site to `sites.json`. List every tracker outside GTM under `analytics` or `advertising` with its
+   exact `src` (plus `attrs`, e.g. Ahrefs' `data-key`). Set `testHosts` to the staging host and
+   `live: false`. Pick the theme from the site's CSS (`--_typography---font-styles--body`, brand colours),
+   keeping text contrast at 4.5:1 or better.
+2. Save the current head and footer code (`get_site_freeform_code`) to
+   `deliver/brandklout/<client>/workflows/consent/.tmp/freeform-before-<date>.json`, split it into
+   `before-head.html` and `before-footer.html`, and confirm both appear verbatim in the live page.
+3. `node consent-kit.mjs silktide-merge <site> before-head.html before-footer.html <dir>/after`. This puts
+   the block first in the head (above GTM) and removes only the listed tracker tags.
+4. **Test before writing:** `node consent-kit.mjs silktide-check <live page with a GHL form> --preview <dir>
+   --shot <dir>`, then again with `--gpc`, and once with `--as-published` (non-test hosts must get no
+   banner and the trackers as before). Look at the screenshots.
+5. Register bridge 2.3.0 if the site has an older one, `cmp` the hosted copy, and apply it
+   (`add_site_script`). Write the head and footer with `set_site_freeform_code`, then publish **to the
+   webflow.io subdomain only**. Confirm the new head and footer appear verbatim in the staging page, then
+   run `silktide-check` on staging (with and without `--gpc`).
+6. To go live, set `live: true`, re-run steps 3-5, and publish (only when nothing else is pending; see
+   phase 1). Add a `#consent-preferences` link to every footer (Designer change).
+
+**While `live` is false** the loader only injects the listed trackers exactly as before (no banner, no
+Consent Mode defaults), so the team's next publish changes nothing visible on the real domain.
+
+### What `silktide-check` walks through
+First visit (banner, no trackers, form `denied`), banner buttons not covered at 1440 and 390 px, Reject
+(record + receipt, still no trackers), Accept as a fresh visitor (trackers load, form `granted`), reload
+(timestamp kept), cookie icon not covered at the top or bottom of the page, and turning Advertising off
+from the footer link (page reloads, ad trackers gone, opt-out `true`).
+
 ## Site registry and rollout state (2026-09-17)
 
 | Site | Platform | ID / base | Bridge | Live? | Termly | Trackers outside GTM (phase 2) |
@@ -118,7 +182,7 @@ script is served same-origin, so `script-src 'self'` is enough.
 | Grand Mission Dentistry | Webflow | `698111847e9608eb30ee21c6` | 2.2.0 | **live** (published 2026-09-17), checked on /contact and /free-e-book | — | GHL (head), Ahrefs; GTM noscript only, no GTM loader in head |
 | Arvada Dental Center | Webflow | `693c51e685b19f0d0c149cab` | 2.2.0 | next publish (Designer changes pending since 2026-09-15) | — | GHL (head **and** footer, loaded twice), OpenAI pixel |
 | Legacy Dental Pasadena | Webflow | `68e12d861f12c7f04a762a8e` | 2.2.0 | next publish (pending since 2026-09-10; also serves caldentalpasadena.com) | — | GHL, Meta Pixel, Ahrefs, Sally AI widget |
-| Livewell Dental | Webflow | `69d03fdbe999e9907724a69d` | 2.2.0 | next publish (pending since 2026-09-14) | — | GHL, Ahrefs |
+| Livewell Dental | Webflow | `69d03fdbe999e9907724a69d` | **2.3.0** | next publish (pending since 2026-09-14); staging published 2026-09-17 | **Silktide on test**: banner on `livewelldentalva.webflow.io` only (`live: false`); checked on staging with and without GPC | GHL, Ahrefs: now loaded by the Silktide loader (tags removed from head/footer) |
 | Marvel Dental | Webflow | `69aedbc6b0c7e78051fd6a2c` | 2.2.0 | next publish (pending since 2026-09-07; live-domain publish is the user's call) | — | GHL, Ahrefs (loaded twice) |
 | Institute for Advanced Dentistry | Instatic | `institute-for-advanced-dentistry` | 2.2.0 | **live**, form checked | — | — |
 | Mason Park | Instatic | `mason-park` | 2.2.0 | **live** | present, **autoBlock=on**: switch to off | check |
@@ -149,6 +213,18 @@ All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form ca
   the worktree, while main's copy of the kit is LF. `consent-kit.mjs` ignores CR when it decides whether
   an asset is current, and deploys LF from now on. Byte-comparing a Webflow hosted copy is still exact
   (the min file has no line breaks).
+- **NordVPN also filters jsDelivr in Chrome.** The Silktide files come back empty, SRI blocks them
+  (the "computed" hash is the SHA-384 of an empty string), and no banner shows. Real visitors are
+  unaffected. `silktide-check` fetches jsDelivr through Node; to look by hand, pause the VPN.
+- **Silktide only calls a global `gtag()`**, and GTM-only sites have none. The loader defines it before
+  GTM. Silktide's per-type `onAccept`/`onReject` also run on every page load, which is why the loader
+  compares the stored choice with the record instead of stamping on every callback.
+- **Corners are crowded on Brandklout sites.** Sienna's accessibility button sits bottom-left and
+  Elfsight's review badge bottom-right (after scrolling). On Livewell the banner is bottom-right, and the
+  cookie icon sits bottom-left at 96px, above Sienna. `silktide-check` reports anything covering the
+  buttons or the icon.
+- **Livewell's `/cookie-policy` has the SEO title "Cookie Policy | ACE Dental Center"**, left over from
+  another site. The body text is Livewell's. Not fixed (page settings are the team's call).
 - **Changing consent reloads the form**, which clears any fields the visitor already filled in.
 - **Instatic `frame-src 'none'`** (Stone Surgical Arts, Stone Med Spa, West LA Implants) blocks GHL
   iframes outright. The bridge is ready for them, but a form needs the Embed block and its frame
