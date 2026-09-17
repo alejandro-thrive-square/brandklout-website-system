@@ -185,9 +185,10 @@
      cta: false in build-site.mjs — this page IS the conversion. The form
      section carries id="contact" so the navbar's anchor lands here.
 
-     THE FORM POSTS NOWHERE, ON PURPOSE. See the header of js/11-form.js: no
-     endpoint, no scheduler, no decision on whether the virtual channel is
-     HIPAA-compliant. On submit the status line says so and gives the phone. -->
+     THE FORM IS THE PRACTICE'S GO HIGH LEVEL FORM ("Contact Page",
+     Gqnb0W1NH95MjROPRaLe), embedded, since 2026-09-17. It replaced the inert
+     local form. Submissions land in the practice's GHL workspace; the phone
+     number beside it is the other contact point. See js/11-form.js. -->
 <section class="section_cover cover_component is-short">
   <figure class="cover_media" data-parallax="10">
     <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake office" width="1748" height="983" fetchpriority="high">
@@ -235,54 +236,64 @@
               <div class="path_card">
                 <span class="path_tag">In the office</span>
                 <h3 class="path_title">In person, in Westlake</h3>
-                <p class="path_text">A full assessment in person. If you decide to go ahead, you can often be treated the same day.</p>
-                <a class="button" href="#form" data-path="in-office">Request a visit</a>
+                <p class="path_text">A full assessment in person. If you decide to go ahead, you can often be treated the same day. Ask for it in the form below, or call us.</p>
+                <a class="button" href="#form">Request a visit</a>
               </div>
               <div class="path_card">
                 <span class="path_tag">By video</span>
                 <h3 class="path_title">From home</h3>
-                <p class="path_text">Talk through your goals from home, without the drive.</p>
-                <a class="button is-secondary" href="#form" data-path="virtual">Request a video call</a>
+                <p class="path_text">Talk through your goals from home, without the drive. Say so in the form below and we'll set it up.</p>
+                <a class="button is-secondary" href="#form">Request a video call</a>
               </div>
             </div>
 
             <div class="form_component" id="form">
               <p class="eyebrow">Request an appointment</p>
               <h2 class="form_title" data-split>Tell us a little, and we'll call you.</h2>
-              <form class="form_grid" data-inert-form novalidate>
-                <div class="form_field">
-                  <label class="form_label" for="f-name">Your name</label>
-                  <input class="form_input" id="f-name" name="name" type="text" autocomplete="name">
-                </div>
-                <div class="form_field">
-                  <label class="form_label" for="f-phone">Phone</label>
-                  <input class="form_input" id="f-phone" name="phone" type="tel" autocomplete="tel">
-                </div>
-                <div class="form_field">
-                  <label class="form_label" for="f-email">Email</label>
-                  <input class="form_input" id="f-email" name="email" type="email" autocomplete="email">
-                </div>
-                <div class="form_field">
-                  <label class="form_label" for="f-type">Consultation type</label>
-                  <select class="form_select" id="f-type" name="visit" data-visit-type>
-                    <option value="in-office">In the office, Westlake</option>
-                    <option value="virtual">By video</option>
-                    <option value="either">Either, whichever is sooner</option>
-                  </select>
-                </div>
-                <div class="form_field is-full">
-                  <label class="form_label" for="f-interest">What would you like to improve?</label>
-                  <textarea class="form_textarea" id="f-interest" name="interest" rows="3" placeholder="In your own words. You don't need to know the name of a treatment."></textarea>
-                </div>
-                <div class="form_actions">
-                  <button class="button" type="submit">Request a consultation</button>
-                  <p class="form_status" data-form-status role="status" aria-live="polite"></p>
-                </div>
-                <p class="form_privacy">
-                  Please don't send detailed medical history through this form. We'll go over that
-                  by phone or in person. See our <a href="privacy-policy.html">privacy policy</a>.
-                </p>
-              </form>
+              <p class="form_lede">Prefer to talk now? Call <a class="text-style-link" href="tel:+18173838361">(817) 383-8361</a>, Monday to Friday, 9 to 5.</p>
+              <!-- THE GO HIGH LEVEL FORM — the practice's main contact point, added
+                   2026-09-17. It replaces the inert local form.
+
+                   THIS DIV IS A SLOT, NOT THE EMBED. Instatic's importer treats a
+                   non-YouTube <iframe> as a forbidden custom tag and publishes it as an
+                   empty div, so the vendor paste cannot travel through the import the way
+                   it is written here. `push-site.mjs` finds this node by
+                   `data-embed="ghl-form"` and replaces it with a
+                   `brandklout.embed-origins.embed` module carrying the snippet verbatim
+                   (workflow 18). The snippet lives in push-site.mjs, next to the swap, so
+                   there is exactly one copy of it.
+
+                   The embed's page is the only page that gets the widened CSP, and it gets
+                   it because the block is on it — see 18-instatic-embeds, compatible mode.
+
+                   Locally (and on any plain static host) the slot is filled by
+                   js/11-form.js with the same iframe, so `node build-site.mjs` and the
+                   browser show the real form. -->
+              <div class="form_embed" data-embed="ghl-form"><iframe
+    src="https://api.leadconnectorhq.com/widget/form/Gqnb0W1NH95MjROPRaLe"
+    style="width:100%;height:565px;border:none;border-radius:8px"
+    id="inline-Gqnb0W1NH95MjROPRaLe"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Contact Page"
+    data-height="565"
+    data-layout-iframe-id="inline-Gqnb0W1NH95MjROPRaLe"
+    data-form-id="Gqnb0W1NH95MjROPRaLe"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Contact Page"
+    loading="lazy"
+></iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+              <p class="form_privacy">
+                Please don't send detailed medical history through this form. We'll go over that
+                by phone or in person. See our <a href="privacy-policy.html">privacy policy</a>.
+              </p>
             </div>
           </div>
 

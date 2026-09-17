@@ -26,6 +26,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { TREATMENTS, CATEGORIES, CONCERNS, byCategory } from "./treatments-data.mjs";
+import { SNIPPET as GHL_SNIPPET } from "./ghl-form.mjs";
 
 const SRC = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(SRC, "..", "final-site");
@@ -503,6 +504,10 @@ for (const page of PAGES) {
     .replace("{{CADENCE_GRID}}", cadenceGrid)
     .replace(/\{\{VITALS:([a-z0-9-]+)\}\}/g, (_, slug) => vitals(slug));
   if (body.includes("{{LEGAL_TOC}}")) body = body.replace("{{LEGAL_TOC}}", legalToc(body));
+  /* The vendor's form. Inlined here so the static build shows the real thing;
+     on Instatic the same snippet travels as an Embed block, because the
+     importer will not carry a third-party iframe (push-site.mjs). */
+  body = body.replace("{{GHL_FORM}}", () => GHL_SNIPPET);
 
   // `aria-current="page"` rather than a class, in the bar, the drawer and the
   // footer. 20-navbar.css already styles the attribute selector, so the marker

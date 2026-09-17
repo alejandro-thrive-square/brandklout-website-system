@@ -23,6 +23,7 @@ import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { getSite, getPages, api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { SNIPPET as GHL_SNIPPET, HEIGHT as GHL_HEIGHT, FORM_NAME as GHL_NAME } from '../04-design/.tmp/med-spa/site-src/ghl-form.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(HERE, '.tmp')
@@ -494,6 +495,91 @@ const tokensCss =
       `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
   )
   console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of the pairs the conversion is lossy on (math values, multi-layer backgrounds, properties it drops outright), from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
+}
+
+/* --- the embed blocks ------------------------------------------------------
+   THE ONE THING THE CONVERSION CANNOT CARRY.
+
+   `importHtml` treats a non-YouTube <iframe> as a forbidden custom tag and
+   publishes it as an EMPTY DIV — no error, no warning, an empty box on the live
+   page (memory: "Instatic iframe is a forbidden custom tag"). The practice's Go
+   High Level form is an iframe plus the vendor's script, so it cannot travel
+   that way.
+
+   The route that works is the Embed block from workflow 18
+   (`brandklout.embed-origins`, installed and enabled on this instance): a plugin
+   module whose snippet mode emits the paste VERBATIM into the published page,
+   and whose server half widens that page's CSP — and only that page's — so the
+   vendor's script and frame are allowed. Both halves are needed: the block
+   without the policy publishes markup the CSP then blocks.
+
+   So the static build carries the real iframe inside a marked slot, the
+   conversion reduces it to the empty div it always would, and here the slot's
+   children are replaced by ONE module node carrying the same snippet from
+   ghl-form.mjs. The slot keeps its own id, class and parent, so the page's CSS
+   still lays it out.
+
+   If the plugin is ever uninstalled, a page carrying this node publishes
+   `<!-- instatic: unknown module -->` in its place. That is why `embeds` is
+   verified below rather than assumed. */
+const EMBEDS = {
+  'ghl-form': {
+    props: {
+      source: 'snippet',
+      snippet: GHL_SNIPPET,
+      url: '',
+      title: GHL_NAME,
+      fit: 'auto',
+      height: GHL_HEIGHT,
+      ratio: '16 / 9',
+      lazy: true,
+      allowFullscreen: false,
+      allow: '',
+    },
+  },
+}
+const EMBED_MODULE_ID = 'brandklout.embed-origins.embed'
+{
+  let placed = 0
+  for (const p of converted.pages) {
+    for (const node of Object.values(p.nodes)) {
+      const key = node.props?.htmlAttributes?.['data-embed']
+      if (!key) continue
+      const spec = EMBEDS[key]
+      if (!spec) throw new Error(`${p.slug}: data-embed="${key}" has no entry in EMBEDS`)
+      // Drop whatever the conversion made of the vendor markup ...
+      for (const childId of node.children ?? []) delete p.nodes[childId]
+      // ... and hang one module node off the slot in its place.
+      const id = `ghlembed${Math.random().toString(36).slice(2, 10)}`
+      p.nodes[id] = {
+        id,
+        moduleId: EMBED_MODULE_ID,
+        props: spec.props,
+        breakpointOverrides: {},
+        children: [],
+        classIds: [],
+        parentId: node.id,
+      }
+      node.children = [id]
+      placed++
+      console.log(`embed      ${p.slug.padEnd(18)} ${key} -> ${EMBED_MODULE_ID} (${GHL_SNIPPET.length} chars, fit auto from ${GHL_HEIGHT}px)`)
+    }
+  }
+  if (placed === 0) console.log('embed      no [data-embed] slot in the build')
+  else {
+    // The block is worthless if the plugin that renders it is not there.
+    const installed = await api('GET', '/admin/api/cms/plugins').catch(() => null)
+    const row = (installed?.plugins ?? []).find((x) => x.id === 'brandklout.embed-origins')
+    if (!row || !row.enabled || row.lifecycleStatus !== 'active') {
+      throw new Error(
+        'brandklout.embed-origins is not installed/enabled on this instance — the Embed ' +
+          'block would publish as "unknown module". Install it first (deliver/process/18-instatic-embeds).',
+      )
+    }
+    const policy = await api('GET', '/admin/api/cms/plugins/brandklout.embed-origins/settings').catch(() => null)
+    const mode = policy?.values?.embedPolicy ?? policy?.settings?.embedPolicy ?? '(unset)'
+    console.log(`embed      plugin ${row.version} active, embedPolicy=${mode}`)
+  }
 }
 
 /* --- read current state --------------------------------------------------- */

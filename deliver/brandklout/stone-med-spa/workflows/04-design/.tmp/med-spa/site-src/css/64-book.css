@@ -123,71 +123,46 @@
   line-height: 1.1;
   max-width: 20ch;
 }
-.form_grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.75rem 2rem;
+/* THE EMBEDDED FORM (Go High Level, 2026-09-17).
+
+   The local form's fields, labels and focus rules are gone with it: what lives
+   inside the iframe is the vendor's, and nothing here can reach it. What is
+   left is the box it sits in.
+
+   NO FIXED HEIGHT. `form_embed.js` sets the iframe's own height as soon as the
+   form reports one, and it grows when a validation message appears. A height
+   here would either clip that or leave a gap under it. The 565px minimum is the
+   vendor's own starting height, so the page does not jump while the form loads.
+
+   On Instatic the iframe is one level deeper — the Embed block wraps it in
+   `.wz-embed` — so the iframe rules are written for both shapes. */
+.form_embed {
   margin-top: 2.25rem;
+  min-height: 565px;
 }
-.form_field {
-  display: grid;
-  gap: 0.5rem;
-  min-width: 0;
-}
-.form_field.is-full,
-.form_actions,
-.form_privacy {
-  grid-column: 1 / -1;
-}
-.form_label {
-  font-size: var(--size-text-tiny);
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.form_input,
-.form_select,
-.form_textarea {
+.form_embed > iframe,
+.form_embed .wz-embed > iframe {
+  display: block;
   width: 100%;
-  min-width: 0;
-  padding: 0.75rem 0;
   border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  border-radius: 0;
-  background: transparent;
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+}
+.form_embed .wz-embed {
+  width: 100%;
+}
+.form_fallback {
+  padding: 1.25rem 0;
+  font-size: var(--size-text-medium);
   color: var(--fg);
-  font-family: var(--font-body);
-  font-size: var(--size-text-regular);
-  transition: border-color 0.25s var(--ease);
 }
-.form_textarea {
-  resize: vertical;
-  min-height: 5.5rem;
-}
-.form_input:focus,
-.form_select:focus,
-.form_textarea:focus {
-  outline: none;
-  border-bottom-color: var(--accent-flat);
-  box-shadow: 0 1px 0 0 var(--accent-flat);
-}
-.form_actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem 1.5rem;
-  margin-top: 0.5rem;
-}
-.form_status {
-  flex: 1 1 18rem;
-  font-size: var(--size-text-small);
-  color: var(--accent);
-}
-.form_status:empty {
-  display: none;
+.form_lede {
+  margin-top: 0.75rem;
+  color: var(--fg-body);
+  max-width: 46ch;
 }
 .form_privacy {
+  margin-top: 1rem;
   font-size: var(--size-text-tiny);
   color: var(--fg-mute);
   max-width: 52ch;
@@ -358,8 +333,7 @@
   }
 }
 @media (max-width: 767px) {
-  .paths_grid,
-  .form_grid {
+  .paths_grid {
     grid-template-columns: 1fr;
   }
   .path_card {

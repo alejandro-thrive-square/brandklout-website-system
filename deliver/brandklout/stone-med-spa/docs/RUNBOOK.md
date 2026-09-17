@@ -15,7 +15,17 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
-**2026-09-17, latest — the drag rails' arrows never worked, and now do.** A client report ("the
+**2026-09-17, latest — the practice's Go High Level form is live on /book.** It replaced the inert
+local form, travelling as a `brandklout.embed-origins` Embed block because Instatic's importer
+publishes a third-party iframe as an empty div. Only /book gets the widened CSP. The production
+consent bridge appends the visitor's `privacy_*` values to the frame URL. Both legal pages now
+name LeadConnector and carry a **Text messages** section, because the form collects SMS consent.
+New gate `form-test.mjs`. Production seq 13, staging seq 8. **Two things the client must fix inside
+GHL:** the consent text names **Stone Surgical PLLC**, and the form's own Privacy/Terms links point
+at `example.com` —
+[run](./runbook/2026-09-17-ghl-form-embedded.md).
+
+**2026-09-17 — the drag rails' arrows never worked, and now do.** A client report ("the
 sliders buttons don't work") found that no arrow on the home reviews, /about's rooms or /results'
 reviews had ever been bound: `data-drag-scope` sat on the section head, which is a *sibling* of the
 rail, so the `closest()` lookup in `20-motion.js` found nothing. Fixed in the JS and the markup,

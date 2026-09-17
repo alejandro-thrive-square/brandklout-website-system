@@ -1,6 +1,15 @@
 # Stone Med Spa — handoff
 
 > [!IMPORTANT]
+> **2026-09-17: THE BOOKING FORM IS THE CLIENT'S GO HIGH LEVEL FORM.** `site-src/ghl-form.mjs`
+> holds the paste once; the static build inlines it into `[data-embed="ghl-form"]`, and
+> `push-site.mjs` swaps that slot for a `brandklout.embed-origins.embed` module because the
+> importer publishes a third-party iframe as an empty div. Prove it with
+> `node form-test.mjs https://westlaketxmedspa.com` — **not** locally, where Cloudflare Turnstile
+> keeps the form hidden. Both legal pages gained a Text messages section. See the 2026-09-17 form
+> run in `docs/runbook/`.
+
+> [!IMPORTANT]
 > **2026-09-17: THE DRAG RAILS' ARROWS WERE NEVER BOUND, AND ARE NOW.** `data-drag-scope` sat on
 > the section head, a sibling of the rail, so `20-motion.js` bound nothing on the home reviews,
 > /about's rooms or /results' reviews — from the second build until a client reported it. The

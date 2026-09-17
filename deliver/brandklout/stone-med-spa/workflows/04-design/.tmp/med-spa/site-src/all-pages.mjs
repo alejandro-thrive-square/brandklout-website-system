@@ -30,6 +30,17 @@ const ROOT = path.resolve(HERE, process.argv[2] || "../final-site");
 const PORT = 0;
 const WIDTHS = [390, 1024, 1440];
 
+/* THE ONE PLACE THE SITE IS ALLOWED TO LEAVE ITS OWN ORIGIN.
+   Everything else — fonts, scripts, images — is self-hosted, and this gate
+   exists to keep it that way. /book carries the practice's Go High Level form:
+   the page itself fetches the vendor's sizing script and the form's frame, and
+   those two hosts are named here rather than the check being switched off.
+   A request to any other third party from OUR document still fails the gate. */
+const EMBED_HOSTS = [
+  "https://link.msgsndr.com/",
+  "https://api.leadconnectorhq.com/",
+];
+
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webp": "image/webp", ".jpg": "image/jpeg", ".png": "image/png", ".avif": "image/avif", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
@@ -62,7 +73,13 @@ for (const file of pages) {
     page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 90)); });
     page.on("request", (r) => {
       const u = r.url();
-      if (!u.startsWith(`http://127.0.0.1:${LIVE}`) && !u.startsWith("data:") && !u.startsWith("blob:")) external.push(u.slice(0, 60));
+      /* INSIDE A THIRD-PARTY IFRAME IS THE THIRD PARTY'S BUSINESS. The GHL form
+         pulls its own bundle, its own CDN and Google Fonts into its frame, and
+         none of that is ours to police or to change. What this gate is for is
+         OUR document: it must stay self-hosted apart from the embed itself. */
+      if (r.frame() !== page.mainFrame()) return;
+      const ours = u.startsWith(`http://127.0.0.1:${LIVE}`) || u.startsWith("data:") || u.startsWith("blob:");
+      if (!ours && !EMBED_HOSTS.some((h) => u.startsWith(h))) external.push(u.slice(0, 60));
     });
     await page.setViewport({ width, height: 900 });
     await page.goto(`http://127.0.0.1:${LIVE}/${file}`, { waitUntil: "networkidle0", timeout: 60000 });

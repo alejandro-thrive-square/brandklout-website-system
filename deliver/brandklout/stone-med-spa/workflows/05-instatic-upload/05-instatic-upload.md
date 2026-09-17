@@ -904,6 +904,28 @@ missing the `js` class bootstrap" and "site.js does not contain the drawer logic
 was fine. It now prefers the `/entries/site-` bundle. **A site-script addition can break a gate
 that has nothing to do with it.**
 
+### 38. A third-party iframe needs the Embed block, and the page's CSP follows it
+
+Added 2026-09-17 with the practice's Go High Level form. `importHtml` publishes a non-YouTube
+`<iframe>` as an EMPTY DIV, silently. The route that works is `brandklout.embed-origins`
+(workflow 18): `push-site.mjs` finds `[data-embed="<key>"]` in the converted nodes and replaces its
+children with one `brandklout.embed-origins.embed` module node carrying the vendor snippet from
+`site-src/ghl-form.mjs`. It refuses to push if the plugin is missing or disabled, because the block
+would publish as `<!-- instatic: unknown module -->`.
+
+Two consequences to expect, neither a fault:
+
+- **`compare-live` reports findings on that page forever.** The published page has one extra
+  `div.wz-embed` wrapper that the static build does not, and every index-based runtime comparison
+  after it shifts by one. On /book that is exactly 3 findings.
+- **That page, and only that page, gets a widened CSP** (`frame-src 'self' https:`,
+  `script-src ... https: 'unsafe-inline'`). Check after any publish that another page still serves
+  `frame-src 'none'`.
+
+**Cloudflare Turnstile hides such a form from every automated browser** (console
+`[Cloudflare Turnstile] Error: 600010`), headless or headful, including on the client's own live
+site. Prove an embed on the deployed URL with `site-src/form-test.mjs`, never from `127.0.0.1`.
+
 ### 35. The staging clone has NO FONTS — `clone-site --media` copies the media library, not `/uploads/fonts/`
 
 Found 2026-09-15 on the first push to staging. The shell's font library (`settings.fonts`) came

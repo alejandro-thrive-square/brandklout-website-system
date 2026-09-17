@@ -1,74 +1,58 @@
-// THE BOOKING FORM, WHICH IS INERT, AND THE PATH CHOOSER ABOVE IT.
+// THE BOOKING FORM IS THE PRACTICE'S GO HIGH LEVEL FORM (2026-09-17).
 //
-// READ THIS BEFORE WIRING IT UP. The form does not post anywhere and that is
-// deliberate, not unfinished. This practice has:
+// It replaced a local form that deliberately posted nowhere: there was no
+// endpoint, no scheduler, and no answer to whether the channel was
+// HIPAA-appropriate, so submitting told the visitor to call instead. The client
+// has now supplied their GHL form ("Contact Page"), which is their main contact
+// point alongside the phone number, and it is the only form on the site.
 //
-//   - no scheduling endpoint chosen for the med spa brand,
-//   - no decision on who takes a virtual consultation or on what platform,
-//   - and therefore no answer to whether that platform is HIPAA-compliant.
+// NOTHING HERE RENDERS OR SUBMITS IT. The vendor's iframe is inlined into
+// [data-embed="ghl-form"] at build time from ghl-form.mjs, and the vendor's own
+// form_embed.js sizes it. On Instatic the same snippet ships as an Embed block
+// (push-site.mjs), because the importer will not carry a third-party iframe.
 //
-// A medical intake form that collects a name, a phone number and a description
-// of what someone dislikes about their face, and then drops it, is worse than
-// no form: the patient believes they have booked. So submit is prevented, the
-// status line says plainly that the form is not live yet, and it gives the
-// phone number, which is a channel that actually works today.
+// What is left is the guard below: on a page where the embed did not arrive —
+// an old published copy, a blocked third party, a corporate network that eats
+// leadconnectorhq.com — the slot would otherwise be an empty box with no
+// explanation. It gets the phone number instead.
 //
-// WHEN AN ENDPOINT EXISTS: delete the preventDefault branch, put the action on
-// the <form>, and delete this comment. Do not "just turn it on" without also
-// confirming the destination is HIPAA-appropriate — the fields below are PHI
-// the moment a patient types into them.
-//
-// The path chooser is the small piece that does work: choosing virtual or
-// in-office scrolls to the form and preselects the matching option, so the two
-// halves of the page are one flow rather than two.
+// The "in person / by video" buttons above the form are plain anchors again.
+// They used to preselect a <select> in the local form; the GHL form has no such
+// field, and silently doing nothing is worse than scrolling honestly.
 (function () {
   "use strict";
 
-  function initPaths() {
-    var links = document.querySelectorAll("[data-path]");
-    if (!links.length) return;
-    var select = document.querySelector("[data-visit-type]");
+  var PHONE = "(817) 383-8361";
 
-    Array.prototype.forEach.call(links, function (link) {
-      link.addEventListener("click", function () {
-        if (!select) return;
-        var want = link.getAttribute("data-path");
-        for (var i = 0; i < select.options.length; i++) {
-          if (select.options[i].value === want) {
-            select.selectedIndex = i;
-            break;
-          }
-        }
-      });
-    });
-  }
+  function initEmbedFallback() {
+    var slot = document.querySelector('[data-embed="ghl-form"]');
+    if (!slot) return;
+    var frame = slot.querySelector("iframe");
 
-  function initForm() {
-    var form = document.querySelector("[data-inert-form]");
-    if (!form) return;
-    var status = form.querySelector("[data-form-status]");
+    function fallback() {
+      if (slot.getAttribute("data-embed-state") === "fallback") return;
+      slot.setAttribute("data-embed-state", "fallback");
+      var p = document.createElement("p");
+      p.className = "form_fallback";
+      p.setAttribute("role", "status");
+      p.textContent =
+        "Our booking form could not load. Please call " +
+        PHONE +
+        " and we will book you in, Monday to Friday, 9 to 5.";
+      slot.appendChild(p);
+    }
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!status) return;
-      status.textContent =
-        "This form is not connected yet. Please call (817) 383-8361 and we will book you in — " +
-        "your details have not been sent.";
-      // Focus is NOT moved to the status line. It is aria-live="polite", so a
-      // screen reader announces it without yanking the caret out of the field
-      // the visitor was in, and a sighted user is already looking at the button
-      // the message appears beside.
-    });
-  }
-
-  function boot() {
-    initPaths();
-    initForm();
+    if (!frame) return fallback();
+    frame.addEventListener("error", fallback);
+    // A frame that has not started loading after 12s is not going to.
+    window.setTimeout(function () {
+      if (!frame.isConnected || frame.clientHeight < 40) fallback();
+    }, 12000);
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
+    document.addEventListener("DOMContentLoaded", initEmbedFallback);
   } else {
-    boot();
+    initEmbedFallback();
   }
 })();

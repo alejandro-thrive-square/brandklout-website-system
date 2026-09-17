@@ -134,7 +134,16 @@ for (const p of pages) {
   }
 
   // --- no inline styles: Client-First keeps presentation in classes ---
-  const inline = [...html.matchAll(/\sstyle="[^"]+"/g)];
+  //
+  // EXCEPT INSIDE A VENDOR EMBED. The rule exists for two reasons — Client-First
+  // keeps presentation in classes, and Instatic's conversion does not carry a
+  // style attribute across, so one written by hand silently vanishes at publish.
+  // Neither applies inside [data-embed]: that markup is the vendor's paste, it
+  // travels verbatim through the Embed block (push-site.mjs), and editing it to
+  // satisfy a house rule is how you break someone else's widget. The exemption
+  // is the slot's own subtree and nothing else.
+  const outside = html.replace(/<div[^>]*data-embed="[^"]*"[\s\S]*?<\/div>/g, '');
+  const inline = [...outside.matchAll(/\sstyle="[^"]+"/g)];
   if (inline.length) fail(p, `${inline.length} inline style attribute(s)`);
 }
 
