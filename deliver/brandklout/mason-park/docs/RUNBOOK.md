@@ -5,7 +5,17 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-16
+## Where the build stands — 2026-09-17
+
+**The old domain's 301 map is deployed but not live yet**
+([`runbook/2026-09-17-legacy-redirects-for-bestdentistinkatytx.md`](./runbook/2026-09-17-legacy-redirects-for-bestdentistinkatytx.md)).
+A Cloudflare Worker sends every `bestdentistinkatytx.com` URL (apex and www) to its page on
+`www.masonparkdental.com`. The zone is **pending**: the registrar (Squarespace) must switch the
+nameservers to `ajay`/`ruth.ns.cloudflare.com`, and someone must decide on the zone's DMARC
+record first. The 161 old article URLs land on `/` until production has the blog; after that,
+rebuild and redeploy `workflows/12-legacy-redirects`.
+
+## Earlier — 2026-09-16, Termly
 
 **Production has Termly cookie consent on every page**
 ([`runbook/2026-09-16-termly-cookie-consent-on-production.md`](./runbook/2026-09-16-termly-cookie-consent-on-production.md)),

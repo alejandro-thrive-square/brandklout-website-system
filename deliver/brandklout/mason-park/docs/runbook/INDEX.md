@@ -1,11 +1,12 @@
 # Runbook index
 
-17 runs, newest first. Each line is one file in this folder.
+18 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17 — 301s from bestdentistinkatytx.com to www.masonparkdental.com | [`2026-09-17-legacy-redirects-for-bestdentistinkatytx.md`](./2026-09-17-legacy-redirects-for-bestdentistinkatytx.md) |
 | 2026-09-16 | 2026-09-16 — Termly cookie consent on every production page | [`2026-09-16-termly-cookie-consent-on-production.md`](./2026-09-16-termly-cookie-consent-on-production.md) |
 | 2026-09-16 | 2026-09-16 — BugHerd round three: a standalone adult site, readable motion, the team portraits | [`2026-09-16-bugherd-round-three-standalone-and-motion.md`](./2026-09-16-bugherd-round-three-standalone-and-motion.md) |
 | 2026-09-15 | 2026-09-15 — BugHerd round two: the same 48 notes, checked in the reviewer's Safari | [`2026-09-15-bugherd-round-two-in-the-reviewers-safari.md`](./2026-09-15-bugherd-round-two-in-the-reviewers-safari.md) |
