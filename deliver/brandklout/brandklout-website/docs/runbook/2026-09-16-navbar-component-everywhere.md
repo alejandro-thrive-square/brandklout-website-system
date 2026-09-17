@@ -20,7 +20,7 @@ remove the old nav. Nav only. Don't re-push page code.
 ## Done
 
 - Backup: `.tmp/backup-2026-09-16-pre-navbar-component/` (site + all 30 full rows + component).
-- `.tmp/navbar-component.mjs --apply`: on the 23 pages, the old nav subtree was removed and a
+- Commit `4f96cdf7`. `.tmp/navbar-component.mjs --apply`: on the 23 pages, the old nav subtree was removed and a
   component ref put at the same index. No other node was touched. SEO cells were read, then written
   back by read-merge-write, and all read-backs were ok. The legal template stayed a template. Saved seq 45, then `--publish`.
   Draft matched published before the save.
