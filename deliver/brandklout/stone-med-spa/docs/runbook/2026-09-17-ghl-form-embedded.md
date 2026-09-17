@@ -6,7 +6,7 @@ contact point and the phone number. On every page that we have a form, we need t
 **/book is the only page on this site with a form**, so that is where it went. The inert local form
 it replaces is gone. Live on production and staging.
 
-## Done (see the commit that adds this file)
+## Done (`f436db40`)
 
 - **`site-src/ghl-form.mjs`** holds the vendor paste, once. Form `Gqnb0W1NH95MjROPRaLe`
   ("Contact Page"). Two deliberate edits to the client's paste: `height:100%` → `height:565px`
