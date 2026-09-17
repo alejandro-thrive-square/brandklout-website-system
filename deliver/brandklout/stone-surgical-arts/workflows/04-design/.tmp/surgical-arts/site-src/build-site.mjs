@@ -83,6 +83,10 @@ const PAGES = [
   { slug: "book", src: "book", photoHero: true, motion: true, cta: false },
   { slug: "myellevate-neck-lift", src: "myellevate-neck-lift", photoHero: true, motion: true, cta: false },
   { slug: "face-and-neck-lift", src: "face-and-neck-lift", photoHero: true, motion: true, cta: false },
+  // The legal pages, 2026-09-17, on the journal article template. No photo
+  // hero, no motion, no closing band: a policy is read, not sold.
+  { slug: "privacy-policy", src: "privacy-policy", photoHero: false, motion: false, cta: false },
+  { slug: "terms-of-service", src: "terms-of-service", photoHero: false, motion: false, cta: false },
 ];
 
 PAGES.push(...BLOG_PAGES);

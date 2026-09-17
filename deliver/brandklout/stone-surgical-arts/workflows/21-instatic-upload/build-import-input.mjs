@@ -77,6 +77,10 @@ const PAGES = [
   { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
   { file: 'myellevate-neck-lift.html', slug: 'myellevate-neck-lift', title: 'MyEllevate Neck Lift' },
   { file: 'face-and-neck-lift.html', slug: 'face-and-neck-lift', title: 'Face & Neck Lift' },
+  /* The legal pages, 2026-09-17. They replace the footer's links to the
+     sister practice's policies. */
+  { file: 'privacy-policy.html', slug: 'privacy-policy', title: 'Privacy Policy' },
+  { file: 'terms-of-service.html', slug: 'terms-of-service', title: 'Terms of Service' },
 ]
 
 addBlogSeo(seo)

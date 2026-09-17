@@ -92,7 +92,7 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const wantShots = process.argv.includes('--shots')
 const RUNTIME_LAYOUT = process.argv.includes('--runtime-layout')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty', 'treatments', 'meet-the-doctor', 'about', 'team', 'memberships', 'results', 'book', 'myellevate-neck-lift', 'face-and-neck-lift', ...BLOG_PAGES.map(p => p.slug)]
+const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty', 'treatments', 'meet-the-doctor', 'about', 'team', 'memberships', 'results', 'book', 'myellevate-neck-lift', 'face-and-neck-lift', 'privacy-policy', 'terms-of-service', ...BLOG_PAGES.map(p => p.slug)]
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists

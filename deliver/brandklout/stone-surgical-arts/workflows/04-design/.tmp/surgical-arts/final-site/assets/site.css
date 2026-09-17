@@ -8577,3 +8577,23 @@ a:hover > .offer_media img,
   .journal_image { transition: none; }
   .journal_feature-media:hover .journal_image, .journal_card-link:hover .journal_image { transform: none; }
 }
+
+
+/* ===== css/61-legal.css ===== */
+/* The legal pages: privacy-policy and terms-of-service, built 2026-09-17 on the
+   journal article template (60-journal.css). This file adds only what legal copy
+   has and articles do not: sub-headings, bulleted lists and a contact card.
+   Lists state their bullets and spacing on a class because Instatic's reset.css
+   strips them from bare ul/li on the live site. Base rules first, then @media. */
+.legal_body > p { font-size: 1rem; line-height: 1.9; color: var(--fg-body); margin-top: 1.2rem; }
+.legal_page .journal_section h3 { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.25; font-weight: 400; margin-top: 1.8rem; margin-bottom: .8rem; }
+.legal_page .journal_section h2 + h3 { margin-top: 0; }
+.legal_list { list-style: disc outside; padding-left: 1.25rem; margin-top: 0; margin-bottom: 1.2rem; }
+.legal_list > li { display: list-item; font-size: 1rem; line-height: 1.8; color: var(--fg-body); margin-bottom: .45rem; padding-left: .25rem; }
+.legal_list > li::marker { color: var(--green-ink); }
+.legal_list strong, .legal_card strong { font-weight: 600; color: var(--charcoal); }
+.legal_card { border-left: .15rem solid var(--green); background-color: var(--ivory-deep); padding: 1.5rem 2rem; margin-top: 1rem; font-size: 1rem; line-height: 1.9; font-style: normal; color: var(--fg-body); }
+@media (max-width: 767px) {
+  .legal_page .journal_section h3 { font-size: 1.45rem; }
+  .legal_card { padding: 1.2rem 1.3rem; }
+}

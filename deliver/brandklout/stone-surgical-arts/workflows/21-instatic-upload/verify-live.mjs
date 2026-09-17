@@ -39,7 +39,7 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://www.dfwsurgicalarts.com'
    the sixteen the cut deleted, and it is back as the second dossier page. A
    slug can be on one list or the other and never on both: leaving it on GONE
    after publishing it would have failed this gate, which is the gate working. */
-const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-doctor', '/about', '/team', '/memberships', '/results', '/book', '/myellevate-neck-lift', '/face-and-neck-lift']
+const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-doctor', '/about', '/team', '/memberships', '/results', '/book', '/myellevate-neck-lift', '/face-and-neck-lift', '/privacy-policy', '/terms-of-service']
 
 /* Routes that must NOT resolve. These were the sixteen slugs the 2026-09-01 cut
    deleted, and this list is what turns the cut from "we did not upload them"

@@ -106,7 +106,11 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
   token, then `verify-redirects.mjs` must end `FAIL  none`. The 19 skin and non-surgical URLs are
   `provisional` (they go to `/treatments`; nobody has decided otherwise). See
   [the directive](../workflows/14-migration-seo-redirects/14-migration-seo-redirects.md).
-- **Production has no canonical tag, no `/sitemap.xml`, no privacy/HIPAA page**, and apex and www
+- **Publish the legal pages.** `privacy-policy` and `terms-of-service` (the SMS terms are its `#sms`
+  section) are built and gated locally, but not published. The footer links on production still go
+  to the sister site until they are published. Publish to staging first —
+  [2026-09-17 run](./runbook/2026-09-17-privacy-policy-and-terms-pages.md).
+- **Production has no canonical tag and no `/sitemap.xml`**, and apex and www
   both answer 200. Each is a separate fix; none blocks the redirects.
 - **BugHerd is GONE, removed 2026-09-09, and must not be re-added as a script.** It could never
   have worked: Instatic publishes `script-src 'self'; frame-src 'none'`, which blocks both the
