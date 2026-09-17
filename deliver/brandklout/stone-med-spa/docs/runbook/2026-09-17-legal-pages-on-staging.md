@@ -3,7 +3,7 @@
 The ask: "We need to create privacy policy and terms of service pages, guide from
 https://www.stonedentalimplantcenter.com/". **Staging only**, and production is unchanged.
 
-## Done (see the commit that adds this file)
+## Done (`fc127a11`)
 
 - **Two new pages**, `/privacy-policy` (13 sections) and `/terms-of-service` (18 sections). They
   follow the implant centre's `/privacy-policy` and `/terms-of-service` (effective 2026-08-27)
