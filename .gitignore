@@ -146,3 +146,17 @@ nul
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
 **/.tmp/.session
+
+# --- 2026-09-09: worktree hygiene ---------------------------------------------
+# Repo-ROOT .tmp/ is ad-hoc session scratch, not a workflow artifact folder. In
+# bk-stone-dental it held 3.6MB of MCP tool-schema dumps, image previews and a
+# live session token. Workflow artifacts belong in that workflow's own .tmp/.
+/.tmp/
+
+# MCP/admin session tokens. Same class as **/.tmp/.session above: a live
+# credential written next to the script that minted it.
+**/.tmp/mcp-session.txt
+**/.tmp/mcp-call.py
+
+# Editors keep creating this empty file at the repo root.
+/untitled.md
