@@ -10,8 +10,10 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v18 verbatim with Client-First type roles (seq 45, 2026-09-16)
+## Status: v18 verbatim with Client-First type roles (seq 47, 2026-09-16)
 
+- **Seq 47 (2026-09-16): every page uses the Footer component** (`footer`, built from home's footer, so the address is now site-wide). The NavBar Menu button is visible again. Edit nav and footer only in their components.
+  [`runbook/2026-09-16-footer-component-everywhere.md`](./runbook/2026-09-16-footer-component-everywhere.md).
 - **Seq 45 (2026-09-16): every page uses the NavBar component** (`navbar`); the old hard-coded navs are gone. Edit the nav once, in the component. Open: the component hides Menu (and Stories), so tablets and phones can't open the links.
   [`runbook/2026-09-16-navbar-component-everywhere.md`](./runbook/2026-09-16-navbar-component-everywhere.md).
 - **Seq 44 (2026-09-16): /customer-stories and /book restored.** Sang's "Restore version" emptied both (versions hold only title+slug); content came back from the 11:57 UTC site snapshot. **Don't use Restore version.** Open: `src/styles/site.css` has been scoped to no pages since his 07:57 publish (no fluid root, keyframes or Calendly shell rules live); the fix is waiting for approval.
