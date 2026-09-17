@@ -17,9 +17,9 @@ The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5
 
 ## Current
 
-- **Termly (LIVE, 2026-09-16, standard v2):** the head has Termly with `autoBlock=off`, above GTM. The footer
-  has GHL call tracking tagged `advertising` and the GHL connection script v2.0.0. There is no allowlist.
-  Fresh visitors get the full site, and tracking waits for Accept.
+- **Termly (LIVE, standard v2):** head has Termly with `autoBlock=off` above GTM; footer has GHL call tracking
+  tagged `advertising`. The GHL bridge is now the registered site script `BrandkloutConsentBridge` 2.2.0,
+  **applied but unpublished**; the live site still runs the pasted v2.0 until the next publish.
   **Open:** the 4 ad landing pages have no Consent Preferences link.
-  See [`runbook/2026-09-16-termly-standard-v2-autoblock-off.md`](./runbook/2026-09-16-termly-standard-v2-autoblock-off.md)
-  and [`../snippets/termly-ghl-consent/`](../snippets/termly-ghl-consent/README.md).
+  The standard, the kit and every site's state: [`deliver/process/23-termly-ghl-consent/`](../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+  Latest run: [`runbook/2026-09-17-consent-module-23-rollout.md`](./runbook/2026-09-17-consent-module-23-rollout.md).
