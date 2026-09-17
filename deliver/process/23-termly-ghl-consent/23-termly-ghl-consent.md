@@ -175,7 +175,7 @@ visitor's browser. The site must already have its own privacy and cookie policy 
 Consent Mode defaults), so the team's next publish changes nothing visible on the real domain.
 
 ### What `silktide-check` walks through
-First visit (banner, no trackers, form `denied`), banner buttons not covered at 1440 and 390 px, Reject
+First visit (banner, no trackers, form `denied`), banner buttons not covered at 1440, 1024, 768 and 390 px, Reject
 (record + receipt, still no trackers), Accept as a fresh visitor (trackers load, form `granted`), reload
 (timestamp kept), cookie icon not covered at the top or bottom of the page, and turning Advertising off
 from the footer link (page reloads, ad trackers gone, opt-out `true`).
@@ -226,8 +226,8 @@ All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form ca
   GTM. Silktide's per-type `onAccept`/`onReject` also run on every page load, which is why the loader
   compares the stored choice with the record instead of stamping on every callback.
 - **Corners are crowded on Brandklout sites.** Sienna's accessibility button sits bottom-left and
-  Elfsight's review badge bottom-right (after scrolling). On Livewell the banner is bottom-right, and the
-  cookie icon sits bottom-left at 96px, above Sienna. `silktide-check` reports anything covering the
+  Elfsight's review badge bottom-right (after scrolling). On Livewell the banner is bottom-center (user's
+  choice, 2026-09-17), and the cookie icon sits bottom-left at 96px, above Sienna. `silktide-check` reports anything covering the
   buttons or the icon.
 - **Livewell's `/cookie-policy` has the SEO title "Cookie Policy | ACE Dental Center"**, left over from
   another site. The body text is Livewell's. Not fixed (page settings are the team's call).

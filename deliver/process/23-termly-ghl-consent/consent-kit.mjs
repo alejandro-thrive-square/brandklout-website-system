@@ -402,7 +402,7 @@ async function silktideCheck() {
     return
   }
   // The banner's buttons must not sit under a site widget either.
-  for (const [w, h] of [[1440, 900], [390, 844]]) {
+  for (const [w, h] of [[1440, 900], [1024, 768], [768, 1024], [390, 844]]) {
     await page.setViewportSize({ width: w, height: h })
     await page.waitForTimeout(800)
     const covered = await page.evaluate(() => [...document.querySelectorAll('#stcm-banner button')].map((b) => {

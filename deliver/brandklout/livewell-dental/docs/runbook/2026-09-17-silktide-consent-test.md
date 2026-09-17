@@ -43,7 +43,8 @@ the user chose to test the free Silktide Consent Manager on Livewell first.
 - Grepping a page for `#consent-preferences` also matches the loader in the head. Match the whole
   `<a …>Consent Preferences</a>` instead.
 - Sienna's accessibility button (bottom-left) and Elfsight's review badge (bottom-right, after scrolling)
-  take both corners. The banner sits bottom-right; the cookie icon sits bottom-left at 96px.
+  take both corners. The banner sits bottom-center (the user asked for it; buttons stay clear at
+  1440/1024/768/390); the cookie icon sits bottom-left at 96px.
 - `/cookie-policy` has the SEO title "Cookie Policy | ACE Dental Center". Not fixed.
 - The branch was behind main. Merging main conflicted on `18-instatic-embeds/embed-origins/plugin.json`;
   main's 1.6.0 was taken.
