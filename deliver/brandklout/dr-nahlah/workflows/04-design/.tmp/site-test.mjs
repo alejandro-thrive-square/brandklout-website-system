@@ -411,6 +411,27 @@ for (const page of PAGES) {
   const overflow = await evalJs(`document.documentElement.scrollWidth`);
   check(page, "no horizontal overflow @1440", overflow <= 1440, "scrollWidth=" + overflow);
 
+  /* CLICK THE FILM, do not just assert the markup is there. A click-to-play
+     facade that renders perfectly and does nothing when clicked looks identical
+     to a working one in every screenshot and in every other check on this page,
+     and these are paid pages where the testimonial is a large part of the
+     argument. So: click the first facade, and require that a real player took
+     its place. */
+  const facades = await evalJs(`document.querySelectorAll('.vl-card[data-yt]').length`);
+  if (facades > 0) {
+    const played = await evalJs(`(function(){
+      var card = document.querySelector('.vl-card[data-yt]');
+      var id = card.getAttribute('data-yt');
+      card.click();
+      var open = document.querySelector('.vl-card .vl-frame iframe');
+      if (!open) return 'click produced no player';
+      if ((open.getAttribute('src') || '').indexOf(id) === -1) return 'player is the wrong film';
+      if (document.querySelector('.vl-card[data-yt="' + id + '"]')) return 'facade still a control';
+      return 'plays';
+    })()`);
+    check(page, `${facades} film facades play when clicked`, played === "plays", played);
+  }
+
   const contrast = await evalJs(CONTRAST_JS);
   check(page, "text contrast meets WCAG AA",
     contrast.failCount === 0,

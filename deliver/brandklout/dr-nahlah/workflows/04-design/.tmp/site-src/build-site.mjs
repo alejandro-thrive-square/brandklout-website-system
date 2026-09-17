@@ -191,26 +191,35 @@ const PAGES = [
      serves it at `/a-b`, so a link to the nested path 404s. Prefixing instead
      of nesting gives the same grouping and survives publication.
 
-     `book` is where the page's CTA goes; `label` is what the button says.
-     The consultation pages point at their own form, and the thank-you pages
-     have nothing left to convert so they offer the telephone and carry no
-     mobile rail. ------------------------------------------------------------ */
+     EVERY LANDING AND CONSULTATION PAGE CARRIES THE GHL FORM IN ITS HERO, so
+     `book` is `#book` on all six of them: the CTA scrolls to the form that is
+     already on the page instead of navigating to a second page with a second
+     form. A click-through is a place to change your mind, and it is the one
+     step worth removing on a paid page.
+
+     The consultation pages are still built and still stand alone. They are the
+     leaner ad destination — form, proof, offices, objections, nothing else —
+     for campaigns that want to skip the argument. Nothing links to them from a
+     landing page any more, by design.
+
+     The thank-you pages have nothing left to convert, so they offer the
+     telephone and carry no mobile rail. --------------------------------------- */
   { slug: "ads-all-on-4", journey: 0, navKey: null,
-    landing: { book: "ads-all-on-4-consultation.html", label: "Book my consultation" } },
+    landing: { book: "#book", label: "Book my consultation" } },
   { slug: "ads-all-on-4-consultation", journey: 0, navKey: null,
     landing: { book: "#book", label: "Go to the form" } },
   { slug: "ads-all-on-4-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:+15717029900", label: "Call the office", rail: false } },
 
   { slug: "ads-dental-implants", journey: 0, navKey: null,
-    landing: { book: "ads-dental-implants-consultation.html", label: "Book my consultation" } },
+    landing: { book: "#book", label: "Book my consultation" } },
   { slug: "ads-dental-implants-consultation", journey: 0, navKey: null,
     landing: { book: "#book", label: "Go to the form" } },
   { slug: "ads-dental-implants-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:+15717029900", label: "Call the office", rail: false } },
 
   { slug: "ads-veneers", journey: 0, navKey: null,
-    landing: { book: "ads-veneers-consultation.html", label: "Book my evaluation" } },
+    landing: { book: "#book", label: "Book my evaluation" } },
   { slug: "ads-veneers-consultation", journey: 0, navKey: null,
     landing: { book: "#book", label: "Go to the form" } },
   { slug: "ads-veneers-thank-you", journey: 0, navKey: null,

@@ -443,12 +443,80 @@ landing header has its own `.lp-nav-in` row rather than reusing `.nav-in`, the
 footer swaps only `.foot-grid` for `.lp-foot-grid` and reuses everything else, and
 the form card's `min-height` is written as `.lp-form-card iframe`, by tag.
 
+### The form is in the hero on all six (2026-09-17, second pass)
+
+Brandklout's note was that every one of their pages carries the GHL form in the
+hero and that it is the step that earns the conversions. So all three landing
+pages and all three consultation pages now open with a two-column hero: copy on
+the left, the form card on the right, photograph behind both.
+
+Three consequences worth knowing before editing these pages:
+
+1. **The landing pages no longer link to the consultation pages.** Every CTA is
+   `#book`, which scrolls to the form already on the page. A click-through is a
+   place to change your mind, and it was the one step worth removing. The
+   consultation pages still build and still stand alone — they are the leaner ad
+   destination for campaigns that want to skip the argument.
+2. **The hero's DOM order is copy → form → under.** That is for the phone:
+   stacked, the form has to be the next thing after the headline. With the ticks,
+   the offer line and the numbers above it, the first field started about 900px
+   down a page whose entire purpose is a form in the hero. Above 1080,
+   `css/70-landing.css` places the three blocks explicitly, so the desktop
+   reading order is still headline, supporting copy, form.
+3. **Do not wrap already-revealing blocks in a `data-rv` container.**
+   `js/20-pagekit.js` skips a `data-rv` whose parent has one, so the first
+   version of `.lp-hero-under` (which carried `data-rv="stagger"`) silently
+   disabled all four of its children's reveals and left them at opacity 0 on six
+   pages. site-test caught it; nothing else would have.
+
+The h1 drops from `--d2` to `--h2` in this hero. At 1440 the copy column is about
+620px, and 4.68rem display type wraps a six-word headline onto four lines and
+pushes the form's first field under the fold.
+
+### Filmed patients (2026-09-17, second pass)
+
+The All-on-4 and dental-implant pages carry the practice's own filmed patients:
+one lead film beside its pull-quote (`.st-row`, from patient-stories) and three
+click-to-play facades (`.vl-grid`, from video-library). No new CSS and no new JS
+— `sections/video-library.js` guards on `.vl-grid` and picks the facades up.
+
+| Page | Lead film | Facades |
+| :--- | :--- | :--- |
+| `ads-all-on-4` | Melanie, full-arch | Stephen, Barbara, the couple |
+| `ads-dental-implants` | Yolanda, implants | Stephen, Donita, Barbara |
+| the two consultation pages | Melanie / Yolanda | none |
+| the two thank-you pages | Stephen / the couple | none |
+
+**One real iframe per page is not a performance compromise, it is the
+requirement.** Instatic lifts CSP `frame-src` only for a page that renders a real
+YouTube node, so a page of facades alone could never play anything once
+published. The lead film is that node.
+
+**The veneers campaign carries no film, and that is deliberate.** There is no
+veneer patient testimonial, and the only cosmetic films in the library
+(`Seven Steps of Veneers`, `Smile Makeovers`, `Fixing Grey Lines`) are three of
+the eight that feature a GENERIC PRESENTER against a white backdrop rather than
+Dr. Nahlah — gen-videos.mjs says so, and putting one on a paid page would imply
+it is the practice. The veneers page gets a wider case gallery and the porcelain
+close-ups instead. Worth asking the client for one filmed veneer patient.
+
+Imagery also roughly doubled: every landing page went from three before/after
+sliders to six, and every mosaic from three figures to four. Counts per page are
+now 26 / 28 / 25 local images plus three film thumbnails on two of them, and no
+page repeats an image — checked by hashing bytes, because the library holds
+byte-identical uploads under different names.
+
 ### Gated
 
-`site-test.mjs` over all 46 pages: **778/781, and zero failures on any of the nine.**
+`site-test.mjs` over all 46 pages: **781/784, and zero failures on any of the nine.**
 `fluid-qa.mjs` over the nine at 360/390/768/991/1280/1440/1920: **135/135.**
 `css-vocab.mjs`: 10 problems, every one pre-existing and none naming `landing`.
 No page repeats an image (bytes hashed, not filenames).
+
+site-test gained a check that CLICKS a film facade and requires a real player to
+take its place, rather than asserting the markup exists. A facade that renders
+perfectly and does nothing when clicked is invisible to every other check on the
+page. It covers `/video-library`'s thirteen facades too.
 
 The three surviving site-test failures are on `index` (an `<img>` with no `src`, created at
 runtime by `sections/ch-services.js` as `.sv-follow`) and on `our-facility` (four
@@ -477,7 +545,12 @@ the four drawer checks. A tenth landing page cannot quietly get tested as an edi
 3. **Call tracking.** Every page uses the McLean new-patient line
    (571) 702-9900. If tracking numbers are provisioned, they are swapped in
    `partials/lp-nav.html` and `partials/lp-rail.html` and nowhere else.
-4. **Which office each campaign points at.** The pages show both, with McLean's
+4. **The placeholder form has seven fields**, which makes the hero about 1300px
+   tall and puts the submit button well below the fold. The campaign forms should
+   be short — name, telephone, email and treatment type is enough to make the
+   call — and that is a LeadConnector setting, not markup here.
+5. **No veneer patient has been filmed.** See above.
+6. **Which office each campaign points at.** The pages show both, with McLean's
    number in the header and rail because it is the implant office. A geo-split
    campaign may want an Alexandria variant.
 

@@ -102,11 +102,14 @@ Three site-test failures survive and **none of them is mine**, both files unmodi
   `consult.jpg`/`pt-interaction.jpg`, `Dr_Nahlah_with_patient.jpg`/`dr-with-patient.jpg` and
   `dr-headshot.png`/`DGT_Dr_Nahlah_Headshot_White-Coat_V2.png`. Using both names of a pair
   on one page is the repeat BugHerd #11 was about. Compare bytes, not filenames.
-- **The LeadConnector widget hides its own iframe in headless Chrome** —
-  `visibility:hidden; left:-9999px` — so the form card screenshots nearly empty. The
-  existing `/contact-maclean` does exactly the same thing in the same harness, so it is the
-  environment, not the page. `.lp-form-card iframe{min-height:640px}` at least holds the
-  card's box while it loads.
+- **A blank GHL form under automation is Cloudflare Turnstile, not a broken embed.** The
+  widget parks its own iframe at `visibility:hidden; left:-9999px` and the card screenshots
+  nearly empty. It is not headless Chrome and it is not the page: the existing
+  `/contact-maclean` does exactly the same thing in the same harness, and the client's own
+  live form does it too. Turnstile refuses automation and localhost (error 600010), so the
+  form can only be proved on the deployed domain in a real browser.
+  `.lp-form-card iframe{min-height:640px}` holds the card's box meanwhile, and forcing the
+  iframe visible over CDP is enough to review the layout.
 - **The reviews are the practice's own eight**, from `reviews.json` via `gen-reviews.mjs`,
   picked per campaign by what they actually mention. No `AggregateRating` JSON-LD: self
   serving review markup on a business's own page is not eligible for rich results and risks

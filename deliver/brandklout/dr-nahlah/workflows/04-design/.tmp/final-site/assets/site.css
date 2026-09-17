@@ -2308,6 +2308,10 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 @media(max-width:559px){
   .lp-nav-phone span{display:none}
   .lp-nav-cta{padding:.7rem .95rem;letter-spacing:.08em}
+  /* The logo gives up 24px so the row is not three things fighting for 356px of
+     content width. Targeted by tag, because writing `.nav-logo img` here would
+     be a second declaration of a name 10-nav.css owns and css-vocab fails that. */
+  .lp-nav-in img{width:108px}
 }
 
 /* ---------- the hero ----------
@@ -2315,6 +2319,59 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
    rules are a single class, so this one wins on file order alone. */
 .lp-hero{padding-top:clamp(10.5rem,18vw,13.5rem);min-height:clamp(600px,82svh,900px)}
 .lp-hero h1{max-width:20ch}
+
+/* ---------- the hero, with the form in it ----------
+   EVERY landing and consultation page puts the GHL form in the hero. It is the
+   single highest-leverage thing on these pages: a visitor who has to click
+   through to a second page to start a form is a visitor who can change their
+   mind on the way, and the whole point of a paid landing page is that there is
+   nothing between the ad and the first form field.
+
+   That is why the mid-page CTAs on a landing page scroll to `#book` on the same
+   page rather than navigating to the consultation page. The consultation page
+   still exists and still carries its own hero form, because it is a valid ad
+   destination in its own right — a leaner one for campaigns that want to skip
+   the argument — but it is no longer a step the landing page pushes people
+   through.
+
+   `.pg-hero` is `align-items:flex-end`, which is right for a hero whose content
+   is a headline sitting on a photograph. A hero carrying a 640px form card is
+   taller than its own min-height, so it centres instead.
+
+   The h1 drops from `--d2` to `--h2`: at 1440 the copy column is about 620px
+   wide, and 4.68rem display type in 620px wraps a six-word headline onto four
+   lines and pushes the form's first field under the fold, which is the one
+   thing this layout exists to prevent. */
+.lp-hero-form{align-items:center;
+  padding-block:clamp(10.5rem,18vw,13.5rem) clamp(3rem,6vw,5rem)}
+.lp-hero-grid{display:grid;gap:clamp(1.5rem,3vw,2.5rem) clamp(2rem,4vw,3.5rem);
+  align-content:center;width:100%}
+.lp-hero-copy{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+.lp-hero-form h1{font-size:var(--h2);max-width:18ch}
+/* THE DOM ORDER IS copy -> form -> under, and that is for the phone. Stacked,
+   the form has to be the next thing after the headline: with the ticks, the
+   offer line and the numbers above it the first field started about 900px down
+   a page whose entire purpose is a form in the hero. Above 1080 the three
+   blocks are placed explicitly, so the reading order on a desktop is still
+   headline, supporting copy, form. */
+.lp-hero-under{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+/* The campaign's four numbers, in a 2x2 that fits the narrower column. The
+   kit's own `.ph-meta` is a flex row built for the full content width and wraps
+   to three ragged lines in half of it. */
+.lp-hero-facts{display:grid;grid-template-columns:1fr 1fr;
+  gap:.9rem clamp(1rem,2vw,1.75rem);
+  padding-top:clamp(.9rem,1.8vw,1.3rem);border-top:1px solid var(--line)}
+.lp-hero-facts div{display:grid;gap:.1rem}
+.lp-hero-facts b{font-family:var(--f-display);font-size:calc(1.45rem * var(--t-mid));
+  font-weight:500;color:var(--fg);line-height:1.1}
+.lp-hero-facts span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft);line-height:1.4}
+@media(min-width:1080px){
+  .lp-hero-grid{grid-template-columns:1fr 1.02fr}
+  .lp-hero-copy{grid-area:1 / 1}
+  .lp-hero-under{grid-area:2 / 1}
+  .lp-hero-grid .lp-form-card{grid-area:1 / 2 / span 2 / 3;align-self:center}
+}
 /* The offer, stated once, directly under the buttons. Not a banner and not a
    countdown: the practice runs no deadline, and inventing one on a medical
    page is both untrue and a compliance problem. */
@@ -2436,19 +2493,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .lp-lender a:hover{text-decoration:underline}
 @media(min-width:860px){ .lp-lenders{grid-template-columns:repeat(3,1fr)} }
 
-/* ---------- the consultation page ----------
-   The form is the page, so it is the first thing on it. Above 1080 the reasons
-   to fill it in sit beside it rather than above it: a form pushed under the
-   fold by its own reassurance copy is a form fewer people start. */
-/* The form section is the FIRST thing on the consultation page, so it clears
-   the two-row fixed header itself. `.section`'s padding bottoms out at 4.5rem
-   on a phone, which is less than the header is tall, and the h1 went under it. */
-.lp-book-top{padding-top:clamp(9.5rem,16vw,12rem);padding-bottom:clamp(3rem,6vw,5rem)}
-.lp-book{display:grid;gap:clamp(1.75rem,4vw,3.25rem);align-items:start}
-.lp-book-aside{display:grid;gap:clamp(1rem,2.2vw,1.5rem)}
-.lp-book-aside h1{font-size:var(--d2);max-width:18ch}
-.lp-book-aside h1 em{font-style:italic;color:var(--accent-lg)}
-.lp-book-lead{color:var(--fg-body);font-size:var(--body-lg);font-weight:400;max-width:46ch}
+/* ---------- the form card and its supporting copy ---------- */
 .lp-assure{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
 .lp-assure li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
   color:var(--fg);font-weight:500;line-height:1.55}
@@ -2472,10 +2517,33 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
    page reflowing under the cursor when it lands. Targeted by tag so this file
    never writes a second definition of `.wz-embed`. */
 .lp-form-card iframe{min-height:640px}
-@media(min-width:1080px){
-  .lp-book{grid-template-columns:1fr 1.05fr}
-  .lp-book-aside{position:sticky;top:clamp(9.5rem,14vw,12rem)}
-}
+
+/* ---------- video testimonials ----------
+   The films are the practice's own six filmed patients, and the components are
+   the ones patient-stories.html and video-library.html already use: `.st-row`
+   for the lead film beside its pull-quote, `.vl-grid` for the click-to-play
+   facades. Nothing new is declared for either — see the note at the top of
+   this file about one name, one stylesheet.
+
+   TWO CONSTRAINTS, BOTH LOAD-BEARING.
+
+   1. A page with only facades cannot play anything on Instatic. That platform
+      lifts CSP `frame-src` only for a page that renders a REAL YouTube node,
+      so each of these pages carries exactly one real `<iframe>` (the lead
+      film) and the rest are facades. One embed, and the facades work.
+   2. Only six of the fourteen films in videos.json are the practice's own.
+      The other eight are an older set with a GENERIC PRESENTER against a white
+      backdrop, and they are not Dr. Nahlah (gen-videos.mjs says so). None of
+      those eight appears on a paid page, which is also why the veneers
+      campaign carries no film at all: the only cosmetic films in the library
+      are three of those eight, and there is no veneer patient film.
+
+   Each page therefore carries FOUR films: one lead `.st-row` and three facades.
+   Three, not two, because `.vl-grid` goes to three columns at 1080 and this
+   file cannot restate that rule to change it — `.lp-films .vl-grid` would be a
+   second declaration of a name 61-video-library.css owns, and css-vocab fails
+   that. Three facades fill the row the component already builds. */
+.lp-films{display:grid;gap:clamp(1.75rem,3.5vw,3rem)}
 
 /* ---------- the thank-you page ---------- */
 .lp-next-list{display:grid;gap:clamp(1rem,2vw,1.6rem);margin:0;padding:0}

@@ -1,11 +1,12 @@
 # Runbook index
 
-81 runs, newest first. Each line is one file in this folder.
+82 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17b — ads landing pages: the GHL form moved into every hero, filmed patients added — carries **gotchas** | [`2026-09-17b-ads-landing-form-in-hero-and-filmed-patients.md`](./2026-09-17b-ads-landing-form-in-hero-and-filmed-patients.md) |
 | 2026-09-17 | 2026-09-17 — ads landing pages: nine pages built locally, NOT PUBLISHED, forms blocked — carries **gotchas** | [`2026-09-17-ads-landing-pages-nine-pages-built-locally.md`](./2026-09-17-ads-landing-pages-nine-pages-built-locally.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |

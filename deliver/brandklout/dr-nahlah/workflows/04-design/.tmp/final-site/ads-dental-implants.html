@@ -71,7 +71,7 @@
      the practice identifying itself, not a way back to a home page the visitor
      never came from and should not be sent to.
 
-     ads-dental-implants-consultation.html and Book my consultation are filled per page by
+     #book and Book my consultation are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
      THE TELEPHONE NUMBER. (571) 702-9900 is the McLean / Tysons Corner
@@ -100,7 +100,7 @@
     <div class="lp-nav-side">
       <a class="lp-nav-phone" href="tel:+15717029900">
         <i aria-hidden="true">&#9742;</i><span>(571) 702-9900</span></a>
-      <a class="lp-nav-cta" href="ads-dental-implants-consultation.html">Book my consultation</a>
+      <a class="lp-nav-cta" href="#book">Book my consultation</a>
     </div>
   </div>
 </header>
@@ -121,7 +121,7 @@
      ========================================================================== -->
 <div class="lp-rail">
   <a class="lp-rail-call" href="tel:+15717029900">Call now</a>
-  <a class="lp-rail-book" href="ads-dental-implants-consultation.html">Book my consultation</a>
+  <a class="lp-rail-book" href="#book">Book my consultation</a>
 </div>
 
 
@@ -163,26 +163,70 @@
      a $1,900 to $2,800 range for a single implant; this practice publishes no
      figure and one must not be invented for it.
      ========================================================================== -->
-<section class="pg-hero lp-hero" id="hero">
+<section class="pg-hero lp-hero lp-hero-form" id="hero">
   <div class="ph-bg">
     <img src="assets/pt-interaction.jpg" alt="Dr. Nahlah reviewing an implant plan with a patient" data-drift>
   </div>
   <div class="wrap ph-in">
-    <div class="chapter-tag" data-rv><i></i><span class="label">Dental Implants &middot; McLean and Alexandria, VA</span></div>
-    <h1 data-split>A tooth that is <em>attached to you</em> again.</h1>
-    <p class="ph-lead" data-rv>Not a better denture. A titanium root fused into your jaw, planned
-      and placed by the same board-certified prosthodontist who fits the tooth on top of it.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="ads-dental-implants-consultation.html"><span>Book my consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
-    </div>
-    <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>The consultation costs nothing, and
-      second opinions on implant surgery are free</p>
-    <div class="ph-meta" data-rv="stagger">
-      <div><b>Over 95%</b><span>Published success rate</span></div>
-      <div><b>5-year</b><span>Warranty on implant procedures</span></div>
-      <div><b>18,000+</b><span>Implants placed</span></div>
-      <div><b>4.9 &#9733;</b><span>Google, both offices</span></div>
+    <div class="lp-hero-grid">
+      <div class="lp-hero-copy">
+        <div class="chapter-tag" data-rv><i></i><span class="label">Dental Implants &middot; McLean and Alexandria, VA</span></div>
+        <h1 data-split>A tooth that is <em>attached to you</em> again.</h1>
+        <p class="ph-lead" data-rv>Not a better denture. A titanium root fused into your jaw, planned and placed by the same board-certified prosthodontist who fits the tooth on top of it.</p>
+      </div>
+
+      <!-- THE FORM IS IN THE HERO, and `id="book"` is on the card so every CTA
+           on the page scrolls to it instead of navigating anywhere. See the
+           placeholder-form warning in the page comment above. -->
+      <div class="lp-form-card" id="book" data-rv>
+        <h2>Book your implant consultation</h2>
+      <div class="wz-embed" data-wz-embed="auto"><iframe
+    src="https://api.leadconnectorhq.com/widget/form/axgcdqEPUFoHF8Dt5Nji"
+    style="width:100%;height:100%;border:none;border-radius:8px"
+    id="inline-axgcdqEPUFoHF8Dt5Nji"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Tyson Corner Office - Contact form Website"
+    data-height="1168"
+    data-layout-iframe-id="inline-axgcdqEPUFoHF8Dt5Nji"
+    data-form-id="axgcdqEPUFoHF8Dt5Nji"
+    title="Tyson Corner Office - Contact form Website"
+>
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+      <p class="lp-form-note">Prefer to speak to someone now? Call
+        <a href="tel:+15717029900">(571) 702-9900</a> for McLean and Tysons Corner, or
+        <a href="tel:+15712537790">(571) 253-7790</a> for Alexandria. If anxiety is what has kept
+        you away, say so when you call. It changes how the appointment is planned.</p>
+      </div>
+
+      <!-- Below the form on a phone, beside it on a desktop. The form has to be
+           the next thing after the headline on a narrow screen: with the ticks,
+           the offer line and the numbers above it, the first field started 900px
+           down a page whose whole purpose is a form in the hero. -->
+      <div class="lp-hero-under">
+        <ul class="lp-assure" data-rv="stagger">
+          <li><i aria-hidden="true">&#10003;</i>The consultation and the 3D scan cost nothing</li>
+          <li><i aria-hidden="true">&#10003;</i>You see the specialist, not a treatment
+            coordinator</li>
+          <li><i aria-hidden="true">&#10003;</i>A straight answer on candidacy, even when it is
+            that you do not need what you thought</li>
+          <li><i aria-hidden="true">&#10003;</i>Quoted elsewhere? Second opinions on implant
+            surgery are free</li>
+        </ul>
+        <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>No cost, no obligation. Nothing is decided on the call</p>
+        <div class="lp-hero-facts" data-rv="stagger">
+          <div><b>Over 95%</b><span>Published success rate</span></div>
+          <div><b>5-year</b><span>Warranty on implant procedures</span></div>
+          <div><b>18,000+</b><span>Implants placed</span></div>
+          <div><b>4.9 &#9733;</b><span>Google, both offices</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -230,7 +274,7 @@
     <p data-rv>Many patients already are. Others qualify after grafting or extractions. A 3D scan
       is what decides it, and the scan is part of the consultation.</p>
     <div class="lp-cta-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="ads-dental-implants-consultation.html"><span>Book my consultation</span></a>
+      <a class="btn btn-primary magnetic" href="#book"><span>Book my consultation</span></a>
       <span class="lp-cta-aside">No cost &middot; no obligation</span>
     </div>
   </div>
@@ -336,7 +380,7 @@
       <p data-rv>Bone grows onto the titanium post and locks it in place. That middle step is the
         reason implants do not slip, rub or need adhesive.</p>
     </div>
-    <div class="mz mz-3" data-rv="stagger">
+    <div class="mz mz-4" data-rv="stagger">
       <figure class="mz-fig mz-plain">
         <img src="assets/dental-implant-model-3.png" alt="A titanium implant post in the jawbone" loading="lazy">
         <figcaption class="mz-cap"><b>The post</b>Titanium, into the bone</figcaption>
@@ -348,6 +392,10 @@
       <figure class="mz-fig">
         <img src="assets/Dentist-holding-a-dental-implant-in-his-hands-.jpg" alt="An implant component held in the hand" loading="lazy">
         <figcaption class="mz-cap"><b>The restoration</b>Your shade, your bite</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/office-outside.jpg" alt="The practice building exterior" loading="lazy">
+        <figcaption class="mz-cap"><b>Two offices</b>McLean and Alexandria</figcaption>
       </figure>
     </div>
     <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>Which is why <strong>planning matters
@@ -443,6 +491,98 @@
         </div>
         <figcaption class="pk-ba-cap">Both arches rebuilt on implants</figcaption>
       </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-veneers-implants-2-before.jpg" alt="Before: missing and damaged front teeth" loading="lazy">
+          <img class="ba-img-after" src="assets/case-veneers-implants-2-after.jpg" alt="After: implants restored and veneered" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Implants combined with veneers</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-veneers-implants-3-before.jpg" alt="Before: a failing front restoration" loading="lazy">
+          <img class="ba-img-after" src="assets/case-veneers-implants-3-after.jpg" alt="After: implant and porcelain work completed" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Implants and porcelain, one plan</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-ao4-double-6-before.jpg" alt="Before: a full mouth of failing teeth" loading="lazy">
+          <img class="ba-img-after" src="assets/case-ao4-double-6-after.jpg" alt="After: both arches rebuilt on implants" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Both arches rebuilt on implants</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- filmed patients ----------
+     The practice's own filmed patients, from patient-stories.html. The lead
+     film is a REAL iframe and the rest are click-to-play facades, and that
+     split is not a performance nicety: Instatic lifts CSP `frame-src` only for
+     a page that renders a real YouTube node, so a page of facades alone could
+     never play anything once published. One embed, and the facades work.
+
+     Components are the site's own (`.st-row` from patient-stories, `.vl-grid`
+     from video-library), so sections/video-library.js picks the facades up with
+     no new JS and 70-landing.css declares nothing for either.
+
+     NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
+     pull-quote, the card carries the name and the treatment and no words. -->
+<section class="pk pk-light" id="films">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
+      <h2 data-split>Four people who had it done.</h2>
+      <p data-rv>Patients of this practice, filmed at it, describing what the treatment was actually like. Not a review widget.</p>
+    </div>
+    <div class="lp-films">
+    <article class="st-row" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/Vp6hSfd3oLI" loading="lazy" title="Yolanda tells their story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Dental implants</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">Yolanda</span>
+        <blockquote class="st-q">&ldquo;I haven&rsquo;t stopped smiling since I got my dental implants!&rdquo;</blockquote>
+        <p class="st-note">Filmed at the practice. Her before-and-after is in the gallery.</p>
+      </div>
+    </article>
+      <div class="vl-grid">
+        <div class="vl-card" role="button" tabindex="0" data-yt="oveSqavqCIQ"
+                aria-label="Play: Stephen">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/oveSqavqCIQ/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">Stephen · Implant-supported dentures</span>
+        </div>
+        <div class="vl-card" role="button" tabindex="0" data-yt="R_cKCMsVr8o"
+                aria-label="Play: Donita">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/R_cKCMsVr8o/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">Donita · A patient of the practice</span>
+        </div>
+        <div class="vl-card" role="button" tabindex="0" data-yt="yTCwgaq4zqw"
+                aria-label="Play: Barbara">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/yTCwgaq4zqw/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">Barbara · A patient of the practice</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -539,7 +679,7 @@
     <p data-rv>Second opinions on implant surgery cost nothing here. Bring the plan and the scan,
       and you will get a straight read on what is in it.</p>
     <div class="lp-cta-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="ads-dental-implants-consultation.html"><span>Book my consultation</span></a>
+      <a class="btn btn-primary magnetic" href="#book"><span>Book my consultation</span></a>
       <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
     </div>
   </div>
@@ -707,7 +847,7 @@
         cost. In writing, before anything is booked.</p>
     </div>
     <div class="lp-cta-actions" data-rv style="margin-bottom:clamp(2rem,4vw,3rem)">
-      <a class="btn btn-primary magnetic" href="ads-dental-implants-consultation.html"><span>Book my consultation</span></a>
+      <a class="btn btn-primary magnetic" href="#book"><span>Book my consultation</span></a>
       <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
     </div>
     <div class="ct-office-grid" data-rv="stagger">

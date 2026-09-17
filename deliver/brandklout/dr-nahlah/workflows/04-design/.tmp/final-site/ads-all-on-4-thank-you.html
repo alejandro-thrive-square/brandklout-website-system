@@ -213,6 +213,42 @@
   </div>
 </section>
 
+<!-- ---------- filmed patients ----------
+     The practice's own filmed patients, from patient-stories.html. The lead
+     film is a REAL iframe and the rest are click-to-play facades, and that
+     split is not a performance nicety: Instatic lifts CSP `frame-src` only for
+     a page that renders a real YouTube node, so a page of facades alone could
+     never play anything once published. One embed, and the facades work.
+
+     Components are the site's own (`.st-row` from patient-stories, `.vl-grid`
+     from video-library), so sections/video-library.js picks the facades up with
+     no new JS and 70-landing.css declares nothing for either.
+
+     NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
+     pull-quote, the card carries the name and the treatment and no words. -->
+<section class="pk" id="film">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
+      <h2 data-split>While you wait, hear from Stephen.</h2>
+      <p data-rv>He was where you are. Filmed at the practice, alongside its denture and full-arch work.</p>
+    </div>
+    <div class="lp-films">
+    <article class="st-row st-row-rev" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/oveSqavqCIQ" loading="lazy" title="Stephen tells their story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Implant-supported dentures</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">Stephen</span>
+        <blockquote class="st-q">&ldquo;Dental implants completely changed my life.&rdquo;</blockquote>
+        <p class="st-note">Filmed at the practice, alongside its denture work.</p>
+      </div>
+    </article>
+    </div>
+  </div>
+</section>
+
 <!-- ---------- band ---------- -->
 <section class="mband" id="band">
   <figure class="mband-fig">

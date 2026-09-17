@@ -11,7 +11,7 @@ then only the runs you need. Do not read them all.
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 37 editorial pages + 43 migrated blog posts, live and verified. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
-| **In flight** | The **nine ads landing pages**, built locally 2026-09-17. Not on Instatic, not published. |
+| **In flight** | The **nine ads landing pages**, built locally 2026-09-17, revised the same day to put the GHL form in every hero and add filmed patients. Not on Instatic, not published. |
 
 ## What is next
 
@@ -44,6 +44,15 @@ These bite every time somebody works in here. The per-run files carry the rest.
 - **`js/90-boot.js` reads `#nav` and `#navProgress` without guarding.** Any page with its own
   header has to keep those ids or the first scroll past 40px throws and takes the rest of
   boot with it.
+- **Only six of the fourteen films in `videos.json` are the practice's own.** The other eight
+  feature a generic presenter and are not Dr. Nahlah; the tell is `hqdefault` rather than
+  `maxresdefault`. Never put one on a paid page. There is no veneer patient film at all.
+- **A page with click-to-play film facades needs one real YouTube `<iframe>` on it.** Instatic
+  lifts CSP `frame-src` only for a page that renders a real YouTube node.
+- **Never wrap already-revealing blocks in a `data-rv` container** — `js/20-pagekit.js` skips a
+  `data-rv` whose parent has one, and the children silently stay at opacity 0.
+- **A blank GHL form under automation is Cloudflare Turnstile**, not a broken embed. It refuses
+  automation and localhost; prove the form on the deployed domain.
 - **THE ADS FORMS ARE A PLACEHOLDER.** All three consultation pages carry the McLean general
   contact form. It has no redirect, so nobody reaches the thank-you page and the Google Ads
   conversion never fires, and no campaign tag, so leads from all three campaigns land in one
