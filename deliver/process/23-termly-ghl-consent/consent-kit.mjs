@@ -458,9 +458,17 @@ async function silktideCheck() {
       }))
     }
     console.log(JSON.stringify({ step: 'cookie icon (top, bottom of page)', icon }))
-    // Open the panel the way the footer link does.
-    await page.evaluate(() => { const a = document.createElement('a'); a.href = '#consent-preferences'; a.id = 'bk-test-link'; a.textContent = 'Consent Preferences'; document.body.prepend(a) })
-    await page.evaluate(() => document.getElementById('bk-test-link').click())
+    // Open the panel from the site's footer link (or a stand-in when the footer has none yet).
+    const footerLink = await page.evaluate(() => {
+      let a = document.querySelector('a[href="#consent-preferences"]')
+      const real = !!a
+      if (!a) { a = document.createElement('a'); a.href = '#consent-preferences'; a.textContent = 'Consent Preferences'; document.body.prepend(a) }
+      a.click()
+      return real
+    })
+    await page.waitForTimeout(800)
+    const opened = await page.evaluate(() => getComputedStyle(document.querySelector('#stcm-modal') || document.body).display !== 'none' && !!document.querySelector('#stcm-modal'))
+    console.log(JSON.stringify({ step: 'Consent Preferences link', footerLink: footerLink ? 'present' : 'MISSING (stand-in used)', panelOpened: opened }))
     await page.waitForTimeout(800)
     await page.click('label[for="consent-advertising"]')
     await Promise.all([page.waitForEvent('load', { timeout: 15000 }).catch(() => null), page.click('.stcm-modal-save')])

@@ -163,7 +163,13 @@ visitor's browser. The site must already have its own privacy and cookie policy 
    webflow.io subdomain only**. Confirm the new head and footer appear verbatim in the staging page, then
    run `silktide-check` on staging (with and without `--gpc`).
 6. To go live, set `live: true`, re-run steps 3-5, and publish (only when nothing else is pending; see
-   phase 1). Add a `#consent-preferences` link to every footer (Designer change).
+   phase 1).
+7. **Footer link** (can be done at step 5): add a `#consent-preferences` "Consent Preferences" link to
+   every footer, copying the classes of the existing policy links (on Webflow, inside the footer
+   component). The element builder puts "Lorem ipsum" into a new Paragraph; remove that String. Check
+   every page, including landing pages outside the sitemap, for the whole `<a …>Consent Preferences</a>`.
+   (Grepping only for `#consent-preferences` also matches the loader.) `silktide-check` clicks the real
+   link when there is one.
 
 **While `live` is false** the loader only injects the listed trackers exactly as before (no banner, no
 Consent Mode defaults), so the team's next publish changes nothing visible on the real domain.
@@ -182,7 +188,7 @@ from the footer link (page reloads, ad trackers gone, opt-out `true`).
 | Grand Mission Dentistry | Webflow | `698111847e9608eb30ee21c6` | 2.2.0 | **live** (published 2026-09-17), checked on /contact and /free-e-book | — | GHL (head), Ahrefs; GTM noscript only, no GTM loader in head |
 | Arvada Dental Center | Webflow | `693c51e685b19f0d0c149cab` | 2.2.0 | next publish (Designer changes pending since 2026-09-15) | — | GHL (head **and** footer, loaded twice), OpenAI pixel |
 | Legacy Dental Pasadena | Webflow | `68e12d861f12c7f04a762a8e` | 2.2.0 | next publish (pending since 2026-09-10; also serves caldentalpasadena.com) | — | GHL, Meta Pixel, Ahrefs, Sally AI widget |
-| Livewell Dental | Webflow | `69d03fdbe999e9907724a69d` | **2.3.0** | next publish (pending since 2026-09-14); staging published 2026-09-17 | **Silktide on test**: banner on `livewelldentalva.webflow.io` only (`live: false`); checked on staging with and without GPC | GHL, Ahrefs: now loaded by the Silktide loader (tags removed from head/footer) |
+| Livewell Dental | Webflow | `69d03fdbe999e9907724a69d` | **2.3.0** | next publish (pending since 2026-09-14); staging published 2026-09-17 | **Silktide on test**: banner on `livewelldentalva.webflow.io` only (`live: false`); checked on staging with and without GPC; footer Consent Preferences link in `Main Footer` (staging) | GHL, Ahrefs: now loaded by the Silktide loader (tags removed from head/footer) |
 | Marvel Dental | Webflow | `69aedbc6b0c7e78051fd6a2c` | 2.2.0 | next publish (pending since 2026-09-07; live-domain publish is the user's call) | — | GHL, Ahrefs (loaded twice) |
 | Institute for Advanced Dentistry | Instatic | `institute-for-advanced-dentistry` | 2.2.0 | **live**, form checked | — | — |
 | Mason Park | Instatic | `mason-park` | 2.2.0 | **live** | present, **autoBlock=on**: switch to off | check |
