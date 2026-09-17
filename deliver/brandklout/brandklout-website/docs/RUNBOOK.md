@@ -10,8 +10,10 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v18 verbatim with Client-First type roles (seq 44, 2026-09-16)
+## Status: v18 verbatim with Client-First type roles (seq 45, 2026-09-16)
 
+- **Seq 45 (2026-09-16): every page uses the NavBar component** (`navbar`); the old hard-coded navs are gone. Edit the nav once, in the component. Open: the component hides Menu (and Stories), so tablets and phones can't open the links.
+  [`runbook/2026-09-16-navbar-component-everywhere.md`](./runbook/2026-09-16-navbar-component-everywhere.md).
 - **Seq 44 (2026-09-16): /customer-stories and /book restored.** Sang's "Restore version" emptied both (versions hold only title+slug); content came back from the 11:57 UTC site snapshot. **Don't use Restore version.** Open: `src/styles/site.css` has been scoped to no pages since his 07:57 publish (no fluid root, keyframes or Calendly shell rules live); the fix is waiting for approval.
   [`runbook/2026-09-16-restore-version-emptied-pages.md`](./runbook/2026-09-16-restore-version-emptied-pages.md).
 - **Seq 43 (2026-09-16): the editor has a Desktop (base) frame again.** "My UI edit didn't publish" was a site with no `desktop` breakpoint: every canvas click selected Laptop (max-width 1279), so edits never showed at 1280+. `desktop` is first in `site.breakpoints` (published CSS byte-identical) and `class-system.mjs` writes it. Team guide: <https://claude.ai/artifact/BqYyWXMvR7w73EiLjo76Qo>. Open: whether `.cs-section-head`'s stacked layout goes to every width.

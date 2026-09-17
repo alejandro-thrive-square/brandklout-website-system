@@ -1,11 +1,12 @@
 # Runbook index
 
-21 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-16 | **NavBar component on every page (seq 45)**: 23 old hard-coded navs replaced by the component in place, nothing else pushed; the component hides Menu + Stories, so ≤991 has no nav (decision open). Carries **gotchas** | [`2026-09-16-navbar-component-everywhere.md`](./2026-09-16-navbar-component-everywhere.md) |
 | 2026-09-16 | **/customer-stories and /book emptied by "Restore version" (seq 44)**: page versions hold only title+slug; both pages restored from the 11:57 site snapshot + SEO cells, published. Found: the code asset has been scoped to no pages since Sang's 07:57 publish (fix awaiting approval). Carries **gotchas** | [`2026-09-16-restore-version-emptied-pages.md`](./2026-09-16-restore-version-emptied-pages.md) |
 | 2026-09-16 | **"UI edit didn't publish" = no Desktop breakpoint (seq 43)**: every canvas click selected Laptop (≤1279); `desktop` added back first (CSS unchanged), class-system writes it; Webflow-user guide published as an artifact, directive section added. Carries **gotchas** | [`2026-09-16-laptop-tab-breakpoint-guide.md`](./2026-09-16-laptop-tab-breakpoint-guide.md) |
 | 2026-09-15 | **Client-First type roles (seq 42)**: tightened (no-op chips gone, composite styles, merged duplicates);: Sang's font-size edit that never published was a base-tab edit on a class with its own phone overrides (`text-18-7`, one of 305); font-size now lives only on `text-size-*` / `heading-style-*` roles + one-property utilities; new gate `type-roles-check.mjs`; the ordering regression that widened every wrap. Carries **gotchas** | [`2026-09-15-type-roles.md`](./2026-09-15-type-roles.md) |
