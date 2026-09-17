@@ -15,7 +15,14 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
 
-**2026-09-15, latest — the teammate's web dev brief is on STAGING too.** The phone is back to
+**2026-09-17, latest — Privacy Policy and Terms of Service are on STAGING.** `/privacy-policy`
+and `/terms-of-service` are adapted from the implant centre's pages, without its SMS program and
+without its PLLC. The footer's legal links now point to them, and the SMS Terms link is gone.
+Staging has 13 pages. **Open:** the client or their counsel reviews both pages, and supplies the
+legal entity name and a contact email. Then production, and add both slugs to the sitemap —
+[run](./runbook/2026-09-17-legal-pages-on-staging.md).
+
+**2026-09-15, later — the teammate's web dev brief is on STAGING too.** The phone is back to
 **(817) 383-8361**, a tracking number (so the "918-3666" below is superseded). The menu order is
 Injectables, Skin Rejuvenation, Facials, Restoration, with Sculptra under Biostimulators, and
 skin boosters are HydraFacial add-ons. "Same building" and the three-names stack are gone from

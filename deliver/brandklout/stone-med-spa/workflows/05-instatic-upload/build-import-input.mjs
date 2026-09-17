@@ -73,6 +73,9 @@ const PAGES = [
   { file: 'about.html', slug: 'about', title: 'About' },
   { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
   { file: 'thank-you.html', slug: 'thank-you', title: 'Thank You' },
+  // 2026-09-17: additions, safe in replace mode (see the warning above).
+  { file: 'privacy-policy.html', slug: 'privacy-policy', title: 'Privacy Policy' },
+  { file: 'terms-of-service.html', slug: 'terms-of-service', title: 'Terms of Service' },
 ]
 
 const problems = []

@@ -74,6 +74,10 @@ const PAGES = [
   { slug: "book", src: "book", ...M, cta: false }, //            9. Book Consultation
   { slug: "membership", src: "membership", ...M }, //           10. Membership Plan
   { slug: "thank-you", src: "thank-you", ...M, cta: false }, // 11. General Thank You Page
+  // 2026-09-17: the two legal pages, modelled on the implant centre's. Not an
+  // Asana subtask; the footer linked to the implant centre's copies until now.
+  { slug: "privacy-policy", src: "privacy-policy", ...M },
+  { slug: "terms-of-service", src: "terms-of-service", ...M },
 ];
 /* 2026-09-03, second build: `photoHero` and `motion` are TRUE ON EVERY PAGE.
    Every page now opens on a photograph with the navbar over it, and every page
@@ -344,6 +348,22 @@ function vitals(slug) {
     .join("\n");
 }
 
+/** The legal pages' table of contents, read from the body it sits in: every
+    `legal_section` id and the text of its h2 (numeral split off). Generated so
+    that adding or renumbering a section cannot leave the rail pointing at an
+    anchor that no longer exists. */
+function legalToc(body) {
+  const re = /<section class="legal_section" id="([a-z0-9-]+)">\s*<h2[^>]*><span class="legal_num">([^<]+)<\/span>([\s\S]*?)<\/h2>/g;
+  const items = [...body.matchAll(re)].map(
+    ([, id, num, text]) =>
+      `                  <li><a class="legal_toc-link" href="#${id}"><span class="legal_toc-num">${num}</span><span>${text.trim()}</span></a></li>`
+  );
+  if (!items.length) throw new Error("{{LEGAL_TOC}} on a page with no legal_section");
+  return `                <ol class="legal_toc-list">
+${items.join("\n")}
+                </ol>`;
+}
+
 /* --- the generated plan stylesheet ----------------------------------------
    THE ONE STYLESHEET THIS BUILD WRITES RATHER THAN READS.
 
@@ -482,6 +502,7 @@ for (const page of PAGES) {
     .replace("{{LEDGER}}", ledger)
     .replace("{{CADENCE_GRID}}", cadenceGrid)
     .replace(/\{\{VITALS:([a-z0-9-]+)\}\}/g, (_, slug) => vitals(slug));
+  if (body.includes("{{LEGAL_TOC}}")) body = body.replace("{{LEGAL_TOC}}", legalToc(body));
 
   // `aria-current="page"` rather than a class, in the bar, the drawer and the
   // footer. 20-navbar.css already styles the attribute selector, so the marker

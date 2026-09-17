@@ -879,6 +879,7 @@ export INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com
 # railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d -e staging -s "Westlake Medical Aesthetics"   (in $S/link-staging)
 
 node -r $S/doh-lookup.cjs .tmp/snapshot-staging.mjs backup-staging-<date>-<slug>   # 0. site + pages; a NEW folder each push, it overwrites
+#   its log line must read "pages <n> media <n> … missing 0"; logs before 2026-09-17 printed wrapper counts (pages 1 media 0)
 node -r $S/doh-lookup.cjs .tmp/staging-media-map.mjs          # 1. staging's media ids, by URL (trap 36)
 node -r $S/doh-lookup.cjs set-alt.mjs --map media-map.staging.json --apply
 node build-import-input.mjs                                   # 2. same payload as production; URLs match
@@ -936,6 +937,7 @@ plugin; do not remove it from the site to make a gate quiet.
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
 - `.tmp/media-map.staging.json` — the same, with staging's ids (trap 36)
+- `.tmp/backup-staging-2026-09-17-legal/` — staging before the legal pages push (seq 4, 11 pages)
 - `.tmp/backup-staging-2026-09-15/` — staging's site and pages before the first feedback push
 - `.tmp/import-input.json.gz` — the payload shipped to the container
 - `.tmp/import-out.json` — 985 style rules, 11 conditions, 11 page node trees

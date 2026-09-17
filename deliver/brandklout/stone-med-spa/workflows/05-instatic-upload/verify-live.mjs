@@ -30,7 +30,7 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://westlaketxmedspa.com').r
 
    Add the six remaining treatment dossiers here the day they are published;
    `botox` is the only one built so far and it is the template for the rest. */
-const ROUTES = ['/', '/treatments', '/botox', '/results', '/membership', '/financing', '/meet-the-doctor', '/team', '/about', '/book', '/thank-you']
+const ROUTES = ['/', '/treatments', '/botox', '/results', '/membership', '/financing', '/meet-the-doctor', '/team', '/about', '/book', '/thank-you', '/privacy-policy', '/terms-of-service']
 
 /* Nothing has ever been retired here. This instance was provisioned on
    2026-09-04 and its first publish was this site, so there is no earlier slug

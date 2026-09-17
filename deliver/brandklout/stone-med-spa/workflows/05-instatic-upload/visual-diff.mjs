@@ -60,7 +60,7 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-const ALL = ['index', 'treatments', 'botox', 'results', 'membership', 'financing', 'meet-the-doctor', 'team', 'about', 'book', 'thank-you']
+const ALL = ['index', 'treatments', 'botox', 'results', 'membership', 'financing', 'meet-the-doctor', 'team', 'about', 'book', 'thank-you', 'privacy-policy', 'terms-of-service']
 const args = process.argv.slice(2)
 const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ALL
 const WIDTH = Number(args.find((a) => /^\d+$/.test(a)) ?? 1440)
