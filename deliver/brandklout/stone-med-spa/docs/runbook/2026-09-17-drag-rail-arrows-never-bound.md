@@ -24,7 +24,7 @@ rather than "the slider is broken".
 Three rails, three pages: the home reviews (`.words_rail`), /about's rooms (`.room_rail`) and
 /results' reviews (`.wall_rail`).
 
-## Done (see the commit that adds this file)
+## Done (`aa9d899e`)
 
 - **`js/20-motion.js`:** the scope is resolved by walking up until an ancestor actually *contains*
   an arrow. The attribute is now the fast path, not the only one, so moving the markup around
