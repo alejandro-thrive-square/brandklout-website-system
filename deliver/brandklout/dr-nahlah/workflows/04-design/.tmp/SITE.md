@@ -4,8 +4,10 @@ The home journey was a single verified page. This turns it into a site: one home
 page plus interior pages, all assembled from one shell so they cannot drift
 apart.
 
-**Currently 28 pages.** Eleven of them are live in Webflow; the rest are local
-only — see [Build-out to 28 pages](#build-out-to-28-pages).
+**Currently 46 pages.** Thirty-seven are the editorial site, published on Instatic.
+The other nine are the ads landing pages added on 2026-09-17 and are local only —
+see [The ads landing pages](#the-ads-landing-pages-2026-09-17--46-pages). Webflow is
+superseded; the eleven pages it carried are described below as history.
 
 Package: [`final-site/`](./final-site/) · Source: [`site-src/`](./site-src/)
 
@@ -358,6 +360,126 @@ captioning a stranger's face with his name is exactly the mistake bug 14 was rai
    consent mechanism, no stated retention period, and SSL is the only named control. For
    a healthcare practice collecting patient details through a web form, that needs a
    review by someone qualified to give one. This build does not attempt one.
+
+## The ads landing pages (2026-09-17) — 46 pages
+
+Nine pages, three paid campaigns, each a combo of **landing page → consultation
+page → thank-you page**. Requested by Brandklout for Dr. Nahlah's Google Ads, ahead
+of Mason Park and West LA. Reference set given by the team was Livewell's
+`/ads-landing-pages/{dental-implants, dental-implant-consultation, thank-you-implants}`,
+with the explicit instruction that it is a **guide, not a thing to duplicate**.
+
+| Campaign | Landing | Consultation | Thank you |
+| :--- | :--- | :--- | :--- |
+| All-on-4 | `ads-all-on-4` | `ads-all-on-4-consultation` | `ads-all-on-4-thank-you` |
+| Dental implants | `ads-dental-implants` | `ads-dental-implants-consultation` | `ads-dental-implants-thank-you` |
+| Porcelain veneers | `ads-veneers` | `ads-veneers-consultation` | `ads-veneers-thank-you` |
+
+### They are not editorial pages, and the build knows it
+
+A page entry in `build-site.mjs` carrying `landing: { book, label, rail }` gets a
+different shell: `partials/lp-nav.html` instead of the site header, **no drawer at
+all**, `partials/lp-foot.html` instead of the site footer, and
+`partials/lp-rail.html` as a mobile CTA rail outside `#smooth-wrapper`. Every exit
+on a paid landing page is a click somebody paid for, so there is no primary nav and
+no site map; the only links off a landing page are the CTA, the telephone and the
+two legal documents. All nine are `robots: noindex, follow`, which is not optional:
+they target the same queries as `/dental-implants`, `/all-on-4` and `/veneers`, and
+those are the pages that should rank.
+
+`lp-nav` deliberately keeps `id="nav"`, `class="nav"` and `#navProgress`.
+`js/90-boot.js` reads both without guarding and throws on the first scroll past 40px
+otherwise, taking the rest of the boot sequence with it. `#burger` and `#drawer` are
+absent on purpose and boot already handles that by returning early.
+
+### Slugs are flat, not nested
+
+Livewell's set lives under `/ads-landing-pages/<name>`. That cannot be reproduced
+here: Instatic saves a slug of `a/b` and then serves it at `/a-b`, so every link to
+the nested path 404s. The `ads-` prefix gives the same grouping and survives
+publication.
+
+### What was changed from the reference, and why
+
+- **The offer is truthful.** The reference runs "Limited Consultation Availability".
+  The practice runs no deadline, so these pages say the consultation costs nothing,
+  which is a fact, and say it once.
+- **Cost comes before the FAQ**, not buried inside it. It is the first objection on
+  full-arch work and the reference makes the reader hunt for it.
+- **No prices.** The reference quotes $1,900–$2,800 for a single implant. This
+  practice publishes no figure, so the implants page carries a relative-weight
+  column ($ / $$ / $$$) and a line in the page saying that is what it is.
+- **The FP1/FP2/FP3 section sits above the process** on the All-on-4 page. It is the
+  differentiator no competitor's landing page has.
+- **The options ladder sits above the process** on the implants page, because that
+  visitor does not yet know which of the four routes applies to them.
+- **The veneers page names what veneers cannot do.** Veneers cannot fix a bite, and
+  saying so is both the honest position and what stops the practice booking
+  evaluations it will turn away.
+- **The veneers thank-you page does not use the bone-loss urgency panel.** Veneers
+  are elective; there is no honest clinical cost to waiting, and inventing one would
+  be a false medical claim. It carries what to bring to the design appointment
+  instead.
+
+Every clinical claim on all nine pages is traceable to `pages/all-on-4.body.html`,
+`pages/dental-implants.body.html`, `pages/veneers.body.html`,
+`pages/implant-cost.body.html` or `pages/meet-dr-nahlah.body.html`. Nothing was
+written that the practice has not already put its name to.
+
+### One new stylesheet, one new section module
+
+`css/70-landing.css` (the `lp-` vocabulary) and `sections/lp-steps.js` (the
+scroll-scrubbed process rail). The hero, sections, cards, before/after sliders,
+mosaics, band, FAQ, office panels, review wall and footer are all the site's own
+components, reused rather than reimplemented — which is why the two bundles grew by
+300 CSS lines and 57 JS lines and **all 37 editorial pages came out byte-identical**.
+
+`css-vocab.mjs` rule A fails any class declared in two stylesheets, so
+`70-landing.css` writes no rule for `.nav-in`, `.nav-cta`, `.nav-right`,
+`.foot-grid`, `.pg-hero`, `.rv-stars` or `.wz-embed`, not even to nudge one value.
+Where a site component had to behave differently, the landing markup carries its own
+`lp-` part beside it. Three consequences worth knowing before editing the file: the
+landing header has its own `.lp-nav-in` row rather than reusing `.nav-in`, the
+footer swaps only `.foot-grid` for `.lp-foot-grid` and reuses everything else, and
+the form card's `min-height` is written as `.lp-form-card iframe`, by tag.
+
+### Gated
+
+`site-test.mjs` over all 46 pages: **778/781, and zero failures on any of the nine.**
+`fluid-qa.mjs` over the nine at 360/390/768/991/1280/1440/1920: **135/135.**
+`css-vocab.mjs`: 10 problems, every one pre-existing and none naming `landing`.
+No page repeats an image (bytes hashed, not filenames).
+
+The three surviving site-test failures are on `index` (an `<img>` with no `src`, created at
+runtime by `sections/ch-services.js` as `.sv-follow`) and on `our-facility` (four
+`assets/tech-*.webp` files the page references that are not in the local assets folder).
+Both files are unmodified; both failures predate this work.
+
+`site-test.mjs` learned about the landing shell rather than being exempted from it. It
+derives the landing set from `build-site.mjs` the same way it derives PAGES, then asserts
+the landing shell, asserts the drawer and burger are ABSENT, asserts the rail is fixed
+outside `#smooth-wrapper`, and hit-tests the rail's two actions at 390 instead of running
+the four drawer checks. A tenth landing page cannot quietly get tested as an editorial one.
+
+### Open, and blocking the campaign going live
+
+1. **THE FORMS. All three consultation pages carry the McLean office's general
+   contact form (`axgcdqEPUFoHF8Dt5Nji`) as a placeholder, and the campaign cannot
+   run on it.** It has no redirect to the campaign's thank-you page, so the Google
+   Ads conversion — which is a page view on `/ads-<campaign>-thank-you` — never
+   fires; and it has no campaign tag, so leads from three campaigns and from the
+   organic contact pages land in one undifferentiated pile. What is needed is one
+   LeadConnector form per campaign, each redirecting to its own thank-you page.
+2. **The conversion tag is deliberately not in any page body.** The "no CSS or JS
+   inlined" gate fails any page that carries its own `<script>`, and a tag pasted
+   into one page body is a tag nobody finds again. Fire it on the URL: a
+   destination-URL conversion per thank-you path, or a GTM Page View trigger.
+3. **Call tracking.** Every page uses the McLean new-patient line
+   (571) 702-9900. If tracking numbers are provisioned, they are swapped in
+   `partials/lp-nav.html` and `partials/lp-rail.html` and nowhere else.
+4. **Which office each campaign points at.** The pages show both, with McLean's
+   number in the header and rail because it is the implant office. A geo-split
+   campaign may want an Alexandria variant.
 
 ## Navigation — the coherence fix
 

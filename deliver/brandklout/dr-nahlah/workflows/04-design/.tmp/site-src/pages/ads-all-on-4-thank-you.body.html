@@ -1,0 +1,186 @@
+<!-- ==========================================================================
+     ADS THANK YOU — ALL-ON-4. The destination of the consultation form, and
+     the page the Google Ads conversion fires on.
+
+     > [!IMPORTANT]
+     > THE CONVERSION TAG IS NOT IN THIS MARKUP, AND MUST NOT BE.
+     >
+     > Site-wide tags on this build are installed through Instatic's
+     > `siteScripts`, not into a page body, because the "no CSS or JS inlined"
+     > gate fails any page that carries its own `<script>`, and because a tag
+     > pasted into one page body is a tag nobody can find again. Fire the
+     > conversion on the URL instead: in Google Ads use a destination-URL
+     > conversion on `/ads-all-on-4-thank-you`, or in GTM a Page View trigger
+     > on that path. All three thank-you pages carry the same structure so the
+     > three campaigns can be reported separately by path.
+     >
+     > `robots: noindex, follow` in seo.json is not optional here. An indexed
+     > thank-you page puts a result in front of searchers telling them their
+     > form was submitted when it was not, and it can be landed on directly,
+     > which fires the conversion for a visitor who never converted.
+
+     DELIBERATELY SHORTER THAN THE REFERENCE. Livewell's thank-you page keeps
+     selling. What a person needs at this point is confirmation the form went
+     through, when they will hear back, what the call will cover, and a number
+     to ring if it cannot wait. The one piece of persuasion kept is the section
+     on what waiting costs, because it is the argument the practice's own cost
+     page already makes about bone, and because the thing that kills a booked
+     consultation is the patient quietly deciding to leave it another year.
+     ========================================================================== -->
+<section class="pg-hero lp-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/pt-interaction.jpg" alt="The consultation room at the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="chapter-tag" data-rv><i></i><span class="label">Request Received</span></div>
+    <h1 data-split>That is <em>received</em>. We will call you.</h1>
+    <p class="ph-lead" data-rv>Your full-arch consultation request has reached the practice. A
+      member of the team will call to arrange a time, and to answer anything you would rather ask
+      before you come in.</p>
+    <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If it cannot wait, call
+      (571) 702-9900 and say it is urgent</p>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>1 business day</b><span>Typical time to hear back</span></div>
+      <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Friday until 2</span></div>
+      <div><b>No cost</b><span>The consultation itself</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the call ---------- -->
+<section class="pk pk-alt" id="the-call">
+  <div class="wrap section pk-split">
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">On The Call</span></div>
+      <h2 data-split>What we will go over.</h2>
+      <dl class="lp-next-list" data-rv="stagger">
+        <div>
+          <dt aria-hidden="true">01</dt>
+          <dd><b>Your situation</b><span>What is going on now, how long it has been going on, and
+            what you have already been told. That is what decides whether four implants per arch
+            is the right conversation to be having.</span></dd>
+        </div>
+        <div>
+          <dt aria-hidden="true">02</dt>
+          <dd><b>How people pay for it</b><span>What insurance is likely to cover and what it is
+            not, and the three lenders the practice works with, explained plainly before you
+            commit to anything.</span></dd>
+        </div>
+        <div>
+          <dt aria-hidden="true">03</dt>
+          <dd><b>Your consultation</b><span>The examination and the cone-beam scan, at no cost, at
+            whichever of the two offices is closer to you.</span></dd>
+        </div>
+      </dl>
+    </div>
+    <div class="lp-warn" data-rv>
+      <h3>Why another year matters</h3>
+      <ul>
+        <li><i aria-hidden="true">&#8250;</i>Bone recedes where teeth are not loading it, and time
+          gone is the biggest predictor of whether anything has to be rebuilt first</li>
+        <li><i aria-hidden="true">&#8250;</i>Less bone can narrow the implant options open to you,
+          and a thin FP1 arch is the first thing it rules out</li>
+        <li><i aria-hidden="true">&#8250;</i>A denture resting on gum tissue keeps accelerating
+          that loss rather than slowing it</li>
+        <li><i aria-hidden="true">&#8250;</i>More extensive treatment later usually means grafting,
+          more healing time and a higher number</li>
+      </ul>
+      <p>None of that is a reason to rush a decision. It is the reason to get
+        the scan done, so the decision is made against what your bone is actually doing rather
+        than against a guess.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- band ---------- -->
+<section class="mband" id="band">
+  <figure class="mband-fig">
+    <img src="assets/case-ao4-double-9-after.jpg" alt="A completed full-arch restoration at the practice" data-drift loading="lazy">
+  </figure>
+  <div class="mband-in" data-rv>
+    <span class="mband-kicker">A patient of this practice</span>
+    <p class="mband-line">This started with the same phone call.</p>
+  </div>
+</section>
+
+<!-- ---------- if it is urgent ---------- -->
+<section class="pk" id="urgent">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">If You Cannot Wait</span></div>
+      <h2 data-split>Call the office directly.</h2>
+      <p data-rv>If you are in pain, have broken a tooth, or have a denture or temporary that has
+        come loose, do not wait for the callback. Phone whichever office is closer and say it is
+        urgent.</p>
+    </div>
+    <div class="ct-office-grid" data-rv="stagger">
+      <article class="ct-office">
+        <h3>Tysons Corner &middot; McLean</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          7901 Jones Branch Drive, Suite 220<br>
+          McLean, VA 22102</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+15717029900">(571) 702-9900</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17034483312">(703) 448-3312</a></div>
+        <a class="pk-more ct-office-dirs"
+           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+           target="_blank" rel="noopener">Directions</a>
+      </article>
+      <article class="ct-office">
+        <h3>Alexandria</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          2855 Duke Street<br>
+          Alexandria, VA 22314</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+15712537790">(571) 253-7790</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17039405410">(703) 940-5410</a></div>
+        <a class="pk-more ct-office-dirs"
+           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+           target="_blank" rel="noopener">Directions</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- while you wait ----------
+     The only outbound links on any of these nine pages, and they are here
+     because the click has already converted. Confidence between the form and
+     the appointment is what stops a booked consultation being cancelled. -->
+<section class="pk pk-light" id="meanwhile">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">While You Wait</span></div>
+      <h2 data-split>Worth a look before you come in.</h2>
+    </div>
+    <div class="mz mz-3" data-rv="stagger">
+      <figure class="mz-fig">
+        <img src="assets/tech-hero.jpg" alt="The cone-beam scanner at the practice" loading="lazy">
+        <figcaption class="mz-cap"><b>The 3D scan</b>What the consultation includes</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-1.avif" alt="A treatment room at the practice" loading="lazy">
+        <figcaption class="mz-cap"><b>Where it happens</b>Surgery and the laboratory, one roof</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/fp1-fp3-comparison.png" alt="FP1, FP2 and FP3 full-arch prostheses side by side" loading="lazy">
+        <figcaption class="mz-cap"><b>Ask about FP1</b>Which of the three you are being quoted</figcaption>
+      </figure>
+    </div>
+    <div class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="smile-gallery.html">
+        <span class="nx-k">Gallery</span>
+        <span class="nx-t">Before and after</span>
+        <span class="nx-d">Twenty-eight cases from this practice, filterable by treatment.</span></a>
+      <a href="patient-stories.html">
+        <span class="nx-k">Stories</span>
+        <span class="nx-t">Patients on film</span>
+        <span class="nx-d">Six people who went through it, in their own words.</span></a>
+      <a href="meet-dr-nahlah.html">
+        <span class="nx-k">Doctor</span>
+        <span class="nx-t">Dr. Esam Nahlah</span>
+        <span class="nx-d">Fourteen credentials, and what a prosthodontist actually is.</span></a>
+    </div>
+  </div>
+</section>

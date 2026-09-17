@@ -39,6 +39,14 @@ const drawer = read("partials/drawer.html");
 const footer = read("partials/footer.html");
 const pagekit = read("partials/pagekit.html");
 
+/* The ads landing shell. A page marked `landing:` in PAGES below swaps the
+   site header for `lp-nav`, drops the drawer entirely and swaps the footer for
+   `lp-foot`, because a paid landing page has no site map: every exit on it is
+   a click somebody paid for. See css/70-landing.css. */
+const lpNav = read("partials/lp-nav.html");
+const lpFoot = read("partials/lp-foot.html");
+const lpRail = read("partials/lp-rail.html");
+
 /* ---------------------------------------------------------------------------
    The two bundles.
 
@@ -164,6 +172,49 @@ const PAGES = [
   // The destination for the consultation request. Replaces the old site's two
   // identical survey thank-you pages; noindex, so it never surfaces in search.
   { slug: "thank-you", journey: 0, navKey: null },
+
+  /* ---- ADS LANDING PAGES (2026-09-17) --------------------------------------
+     Three campaigns — All-on-4, dental implants, porcelain veneers — each a
+     combo of three pages: the landing page the ad points at, the consultation
+     page that carries the form, and the thank-you page the form redirects to
+     and that the Google Ads conversion fires on.
+
+     WHY THEY ARE NOT EDITORIAL PAGES. They carry `landing:`, which swaps the
+     site header and footer for the stripped landing pair and drops the drawer,
+     and they are all `noindex, follow` in seo.json. Both are deliberate: a
+     paid landing page must not leak the click into the site, and it must not
+     compete in organic search with /dental-implants, /all-on-4 and /veneers,
+     which target the same queries and are the pages that should rank.
+
+     SLUGS ARE FLAT. Livewell's set lives under /ads-landing-pages/<name>, and
+     a nested slug cannot be reproduced here: Instatic saves `a/b` and then
+     serves it at `/a-b`, so a link to the nested path 404s. Prefixing instead
+     of nesting gives the same grouping and survives publication.
+
+     `book` is where the page's CTA goes; `label` is what the button says.
+     The consultation pages point at their own form, and the thank-you pages
+     have nothing left to convert so they offer the telephone and carry no
+     mobile rail. ------------------------------------------------------------ */
+  { slug: "ads-all-on-4", journey: 0, navKey: null,
+    landing: { book: "ads-all-on-4-consultation.html", label: "Book my consultation" } },
+  { slug: "ads-all-on-4-consultation", journey: 0, navKey: null,
+    landing: { book: "#book", label: "Go to the form" } },
+  { slug: "ads-all-on-4-thank-you", journey: 0, navKey: null,
+    landing: { book: "tel:+15717029900", label: "Call the office", rail: false } },
+
+  { slug: "ads-dental-implants", journey: 0, navKey: null,
+    landing: { book: "ads-dental-implants-consultation.html", label: "Book my consultation" } },
+  { slug: "ads-dental-implants-consultation", journey: 0, navKey: null,
+    landing: { book: "#book", label: "Go to the form" } },
+  { slug: "ads-dental-implants-thank-you", journey: 0, navKey: null,
+    landing: { book: "tel:+15717029900", label: "Call the office", rail: false } },
+
+  { slug: "ads-veneers", journey: 0, navKey: null,
+    landing: { book: "ads-veneers-consultation.html", label: "Book my evaluation" } },
+  { slug: "ads-veneers-consultation", journey: 0, navKey: null,
+    landing: { book: "#book", label: "Go to the form" } },
+  { slug: "ads-veneers-thank-you", journey: 0, navKey: null,
+    landing: { book: "tel:+15717029900", label: "Call the office", rail: false } },
 ];
 
 /* Escape for an HTML text node or a double-quoted attribute. seo.json holds
@@ -209,14 +260,38 @@ for (const p of PAGES) {
   }
   const body = read(bodyFile);
 
-  let navHtml = nav
-    .replace("{{JOURNEY}}", String(p.journey))
-    .replace("{{CHAPTER_READOUT}}", p.journey ? CHAPTER_READOUT : "");
-  for (const k of NAVKEYS) {
-    navHtml = navHtml.replace(`{{CUR_${k}}}`, p.navKey === k ? ' aria-current="page"' : "");
+  /* Two shells. The editorial one is the site's own header, drawer and footer.
+     The landing one is the stripped pair with no drawer and a mobile CTA rail,
+     and its CTA target comes from the page's `landing` entry. */
+  let navHtml, drawerHtml, footHtml, railHtml;
+  if (p.landing) {
+    const fill = (s) => s
+      .replaceAll("{{LP_BOOK_HREF}}", p.landing.book)
+      .replaceAll("{{LP_BOOK_LABEL}}", p.landing.label);
+    navHtml = fill(lpNav);
+    drawerHtml = "";
+    footHtml = lpFoot;
+    railHtml = p.landing.rail === false ? "" : fill(lpRail);
+  } else {
+    navHtml = nav
+      .replace("{{JOURNEY}}", String(p.journey))
+      .replace("{{CHAPTER_READOUT}}", p.journey ? CHAPTER_READOUT : "");
+    for (const k of NAVKEYS) {
+      navHtml = navHtml.replace(`{{CUR_${k}}}`, p.navKey === k ? ' aria-current="page"' : "");
+    }
+    drawerHtml = drawer;
+    footHtml = footer;
+    railHtml = "";
   }
 
   const headHtml = head.replace("{{HEAD_SEO}}", seoBlock(p.slug));
+
+  /* The fixed-UI block: the header, then either the drawer (editorial) or the
+     mobile CTA rail (landing). Assembled as ONE string rather than as three
+     template lines, so that an editorial page's output is byte-for-byte what it
+     was before the landing branch existed — an always-present `${railHtml}`
+     line resolving to "" rewrote all 37 of them with a blank line. */
+  const fixedUi = [navHtml, drawerHtml || railHtml].join("\n");
 
   const out = `${headHtml}
 <body>
@@ -224,8 +299,7 @@ for (const p of PAGES) {
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-${navHtml}
-${drawer}
+${fixedUi}
 
 <div id="smooth-wrapper">
 <div id="smooth-content">
@@ -235,7 +309,7 @@ ${body}
 
 </main>
 
-${footer}
+${footHtml}
 </div><!-- /#smooth-content -->
 </div><!-- /#smooth-wrapper -->
 

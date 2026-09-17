@@ -1,0 +1,18 @@
+<!-- ==========================================================================
+     MOBILE CTA RAIL — the two things a phone visitor can do, always in reach.
+
+     It sits OUTSIDE #smooth-wrapper, with the header, because ScrollSmoother
+     transforms everything inside the wrapper and a fixed element inside a
+     transformed ancestor is fixed to the ancestor, not to the viewport.
+
+     It is CSS only and always visible below 860px. A rail that slides in once
+     the hero has left needs JS to place it, and when that JS is the thing that
+     failed, the page has lost the only CTA within reach of a thumb. The footer
+     carries matching bottom padding so the rail never covers content.
+
+     Not on the thank-you page: there is nothing left to convert there.
+     ========================================================================== -->
+<div class="lp-rail">
+  <a class="lp-rail-call" href="tel:+15717029900">Call now</a>
+  <a class="lp-rail-book" href="{{LP_BOOK_HREF}}">{{LP_BOOK_LABEL}}</a>
+</div>

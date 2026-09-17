@@ -48,6 +48,17 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // The video library is the only page whose cards are third-party thumbnails
   // at a fixed aspect, so it is the one most likely to overflow a 360px view.
   "video-library",
+  // 2026-09-17 ads landing pages. All nine are here rather than one per shape,
+  // because css/70-landing.css is the newest CSS path on the site and the three
+  // page shapes have different overflow risks at 360: the landing page has the
+  // two-column `.lp-stakes` and the `.lp-tiers` spec rows, the consultation
+  // page has a third-party form iframe that sets its own width, and the
+  // thank-you page has the `.lp-next-list` numeral column. All nine also carry
+  // the two-row fixed header, which is the one piece of chrome on this site
+  // whose height the hero has to clear by hand.
+  "ads-all-on-4", "ads-all-on-4-consultation", "ads-all-on-4-thank-you",
+  "ads-dental-implants", "ads-dental-implants-consultation", "ads-dental-implants-thank-you",
+  "ads-veneers", "ads-veneers-consultation", "ads-veneers-thank-you",
 ];
 // Shooting all 11 at 7 widths is 77 images nobody will open. These three cover the
 // three distinct CSS paths: the journey, the shared page kit, and the one page with

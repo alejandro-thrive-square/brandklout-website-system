@@ -2232,3 +2232,303 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .bl-rel-card h3 a{color:inherit;text-decoration:none;
   border-bottom:1px solid transparent;transition:border-color .35s}
 .wz-fine .bl-rel-card h3 a:hover{border-bottom-color:var(--rule)}
+
+/* ===== css/70-landing.css ===== */
+/* ==========================================================================
+   ADS LANDING PAGES — the paid-traffic vocabulary. Prefix `lp-`.
+
+   Nine pages, three campaigns (All-on-4, dental implants, veneers), each a
+   combo of landing page -> consultation page -> thank-you page. They are NOT
+   part of the editorial site: there is no primary nav, no drawer and no site
+   map, because every exit on a paid landing page is a click that was paid for
+   and lost. The only ways off a landing page are the CTA, the telephone and
+   the two legal links a dental page has to carry.
+
+   REUSED AS-IS, NOT REDEFINED: the hero (`.pg-hero` + `.ph-*`), sections
+   (`.pk`, `.pk-alt`, `.pk-light`), `.pk-head`, `.pk-cards`, `.pk-card`,
+   `.pk-ba` sliders, `.pk-faq`, `.pk-stats`, `.pk-split`, `.mz` mosaics,
+   `.mband`, `.ct-office` panels, the `.rv-*` review wall and `footer.foot`.
+   Everything below is either a modifier sitting alongside one of those or a
+   part the editorial site has no use for.
+
+   ONE NAME, ONE STYLESHEET. `css-vocab.mjs` fails any class declared in two
+   files, because Webflow merges classes by name and would arrive with one
+   class carrying two conflicting definitions. So nothing here writes a rule
+   for `.nav-in`, `.nav-cta`, `.nav-right`, `.foot-grid`, `.pg-hero`,
+   `.rv-stars` or `.wz-embed`, not even to nudge one value: where a site
+   component needed to behave differently on these pages, the landing markup
+   carries its own `lp-` part beside it instead.
+
+   Cascade position: 70 puts this after the 50-series page overrides, so where
+   a single-class landing rule ties with a single-class kit rule — `.lp-hero`
+   against `.pg-hero` — file order decides it and the landing page wins
+   without the kit being touched.
+   ========================================================================== */
+
+/* ---------- the header ----------
+   The landing header is the site header with the navigation taken out: logo,
+   telephone, one CTA. It deliberately keeps `id="nav"`, `class="nav"` and the
+   `.nav-progress` row, because js/90-boot.js reads `#nav` and `#navProgress`
+   without guarding — a header element that is not `#nav` throws on the first
+   scroll past 40px and takes the rest of boot with it. `#burger` and `#drawer`
+   are absent on purpose; boot already handles that case and returns early. */
+.lp-nav{background:rgba(250,248,243,.92);backdrop-filter:blur(14px);
+  border-bottom-color:rgba(138,126,78,.2)}
+/* Its own row rather than `.nav-in`: the site's nav row is sized to hold six
+   links and a CTA (`max-width: 72rem + 200px`), which on a three-item landing
+   header throws the CTA out to the far edge of a very wide screen. */
+.lp-nav-in{display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(.75rem,2vw,1.5rem);padding-block:clamp(.7rem,1.3vw,1.1rem)}
+/* The trust strip is a row of the fixed header rather than a band above it, so
+   the hero has one fixed element to clear instead of two. */
+.lp-bar{border-bottom:1px solid var(--line-2);background:var(--bg-3)}
+.lp-bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem clamp(1rem,2.4vw,2.25rem);
+  padding-block:.5rem;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--fg-soft)}
+.lp-bar-item{display:flex;align-items:center;gap:.45rem;white-space:nowrap}
+.lp-bar-item b{color:var(--fg);font-weight:700}
+.lp-bar-stars{font-style:normal;color:var(--accent);letter-spacing:.1em;font-size:.86em}
+/* Only the rating survives on a phone. Three strips of small caps wrapping
+   over each other is the header eating the hero. */
+@media(max-width:767px){ .lp-bar-item.is-wide{display:none} }
+
+.lp-nav-side{display:flex;align-items:center;gap:clamp(.4rem,1.4vw,1.1rem)}
+.lp-nav-phone{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--fg);
+  white-space:nowrap;padding:.7rem .3rem}
+.lp-nav-phone:hover{color:var(--accent)}
+.lp-nav-phone i{font-style:normal;color:var(--accent);font-size:1.05em}
+/* The site's `.nav-cta` hides itself below 680 because the burger is there
+   instead. This page has no burger and the CTA is the whole point of it, so
+   the landing header carries its own button, which never hides. */
+.lp-nav-cta{display:inline-flex;align-items:center;background:var(--fg);color:var(--bg);
+  padding:.75rem 1.5rem;font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;white-space:nowrap;transition:background .4s ease,color .4s ease}
+.lp-nav-cta:hover{background:var(--gold-deep);color:var(--white)}
+@media(max-width:559px){
+  .lp-nav-phone span{display:none}
+  .lp-nav-cta{padding:.7rem .95rem;letter-spacing:.08em}
+}
+
+/* ---------- the hero ----------
+   `.pg-hero` leaves room for one header row. This leaves room for two. Both
+   rules are a single class, so this one wins on file order alone. */
+.lp-hero{padding-top:clamp(10.5rem,18vw,13.5rem);min-height:clamp(600px,82svh,900px)}
+.lp-hero h1{max-width:20ch}
+/* The offer, stated once, directly under the buttons. Not a banner and not a
+   countdown: the practice runs no deadline, and inventing one on a medical
+   page is both untrue and a compliance problem. */
+.lp-hero-note{display:flex;align-items:center;gap:.6rem;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+.lp-hero-note i{display:block;width:clamp(18px,3vw,34px);height:1px;background:var(--rule);
+  flex:none}
+
+/* ---------- stakes: life now against life after ----------
+   Two panels, one list each. The strongest section on the reference page and
+   the cheapest to build: no photography, no bespoke motion, and it says back
+   to the visitor the thing they came to have said. */
+.lp-stakes{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.lp-stakes-col{background:var(--card);padding:clamp(1.6rem,3vw,2.6rem);display:grid;gap:1.2rem;
+  align-content:start}
+.lp-stakes-col.is-before{background:var(--mist)}
+.lp-stakes-col h3{font-size:calc(1.9rem * var(--t-mid))}
+.lp-stakes-col.is-after .label{color:var(--accent)}
+.lp-stakes-list{display:grid;gap:.85rem;margin:0;padding:0;list-style:none}
+.lp-stakes-list li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  color:var(--fg-body);font-weight:400;line-height:1.6}
+.lp-stakes-list i{font-style:normal;font-size:.92em;line-height:1.7;color:var(--fg-soft)}
+.lp-stakes-col.is-after .lp-stakes-list i{color:var(--accent)}
+.lp-stakes-col.is-after .lp-stakes-list li{color:var(--fg)}
+@media(min-width:800px){ .lp-stakes{grid-template-columns:1fr 1fr} }
+
+/* ---------- inline CTA band ----------
+   Repeated every second or third section. `.pk-cta` is the site's closing CTA
+   and carries both office panels with it, which is far too much furniture to
+   drop into the middle of a page three times. */
+.lp-cta{background:var(--ink-900)}
+.lp-cta-in{display:grid;gap:clamp(1.1rem,2.4vw,1.75rem);justify-items:start;
+  padding-block:clamp(3rem,6vw,4.75rem)}
+.lp-cta h2{color:var(--white);max-width:24ch}
+.lp-cta p{color:rgba(255,255,255,.82);font-weight:400;font-size:var(--body-lg);max-width:52ch}
+.lp-cta-actions{display:flex;flex-wrap:wrap;gap:.85rem;align-items:center}
+/* `btn-ghost` is one of the stylesheet's declared globals, so restating it for
+   a dark ground here is not a second definition of a shared name. */
+.lp-cta .btn-ghost{border-color:rgba(255,255,255,.45);color:var(--white)}
+.lp-cta .btn-ghost::after{background:var(--white)}
+.lp-cta .btn-ghost:hover{color:var(--ink-900)}
+.lp-cta-aside{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(255,255,255,.68)}
+@media(max-width:719px){ .lp-cta .btn{flex:1 1 auto} }
+/* Wide screens put the buttons beside the argument rather than under it. The
+   band is full-bleed dark and the copy caps at 24ch and 52ch, so stacked in one
+   column it left two thirds of a 1440 band empty and read as an unfinished
+   section rather than a deliberate one. */
+@media(min-width:900px){
+  .lp-cta-in{grid-template-columns:minmax(0,1.3fr) auto;
+    column-gap:clamp(2.5rem,5vw,5rem);align-items:center}
+  .lp-cta-in h2{grid-area:1 / 1}
+  .lp-cta-in p{grid-area:2 / 1}
+  .lp-cta-actions{grid-area:1 / 2 / span 2 / 3;justify-self:end;align-self:center;
+    flex-direction:column;align-items:flex-end;gap:1.1rem}
+}
+
+/* ---------- the process rail ----------
+   The bespoke behaviour on these pages: a line that fills with the scroll and
+   lights each step as it passes. `--p` is written by sections/lp-steps.js. With
+   no JS the line sits at zero and every step is still fully legible, which is
+   why the lit state only ever adds emphasis and never reveals content. */
+.lp-steps{display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+.lp-steps-line{position:relative;height:1px;background:var(--line);display:none}
+.lp-steps-line i{position:absolute;inset:0;transform:scaleX(var(--p,0));transform-origin:left;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold) 60%,var(--gold-light))}
+.lp-steps-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem);
+  position:relative}
+/* The vertical spine on a phone, where the steps stack. */
+.lp-steps-grid::before{content:"";position:absolute;left:.95rem;top:.6rem;bottom:.6rem;width:1px;
+  background:var(--line)}
+.lp-step{display:grid;gap:.6rem;align-content:start;position:relative;
+  padding-left:clamp(2.4rem,4vw,2.9rem)}
+.lp-step h3{font-size:var(--h3)}
+.lp-step p{color:var(--fg-body);font-weight:400}
+.lp-step .lp-step-n{position:absolute;left:0;top:.05em;width:1.9rem;height:1.9rem;
+  display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;
+  font-size:.72rem;font-weight:700;letter-spacing:0;color:var(--fg-soft);background:var(--bg);
+  transition:border-color .5s ease,color .5s ease,background .5s ease}
+.lp-step.is-lit .lp-step-n{border-color:var(--rule);color:var(--black);
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+@media(min-width:900px){
+  .lp-steps-line{display:block}
+  .lp-steps-grid{grid-template-columns:repeat(3,1fr)}
+  .lp-steps-grid.is-four{grid-template-columns:repeat(4,1fr)}
+  .lp-steps-grid::before{display:none}
+  .lp-step{padding-left:0;padding-top:.4rem}
+  .lp-step .lp-step-n{position:static;margin-bottom:.5rem}
+}
+
+/* ---------- treatment tiers ----------
+   What the reference page calls the investment table. No figures: the practice
+   publishes none, and a range invented to fill a column is the fastest way to
+   lose the patient at the consultation instead. Relative weight only, and the
+   section says so in the page. */
+.lp-tiers{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.lp-tier{background:var(--card);padding:clamp(1.5rem,2.6vw,2.2rem);display:grid;gap:1rem;
+  align-content:start}
+.lp-tier h3{font-size:calc(1.62rem * var(--t-mid))}
+.lp-tier p{color:var(--fg-body);font-weight:400}
+.lp-tier-spec{display:grid;gap:.6rem;margin:0;padding-top:1rem;border-top:1px solid var(--line)}
+.lp-tier-spec div{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.lp-tier-spec dt{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-soft);font-weight:600}
+.lp-tier-spec dd{margin:0;color:var(--fg);font-weight:600;text-align:right}
+.lp-tier-weight{font-family:var(--f-display);color:var(--accent-lg);letter-spacing:.1em}
+@media(min-width:960px){ .lp-tiers{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- money ---------- */
+.lp-lenders{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem);
+  margin-top:clamp(1.75rem,3.5vw,2.75rem)}
+.lp-lender{border:1px solid var(--line);background:var(--card);
+  padding:clamp(1.25rem,2.2vw,1.8rem);display:grid;gap:.55rem;align-content:start}
+.lp-lender h4{font-size:calc(1.25rem * var(--t-sm))}
+.lp-lender p{color:var(--fg-body);font-weight:400;font-size:.94rem}
+.lp-lender a{color:var(--accent);font-weight:600}
+.lp-lender a:hover{text-decoration:underline}
+@media(min-width:860px){ .lp-lenders{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- the consultation page ----------
+   The form is the page, so it is the first thing on it. Above 1080 the reasons
+   to fill it in sit beside it rather than above it: a form pushed under the
+   fold by its own reassurance copy is a form fewer people start. */
+/* The form section is the FIRST thing on the consultation page, so it clears
+   the two-row fixed header itself. `.section`'s padding bottoms out at 4.5rem
+   on a phone, which is less than the header is tall, and the h1 went under it. */
+.lp-book-top{padding-top:clamp(9.5rem,16vw,12rem);padding-bottom:clamp(3rem,6vw,5rem)}
+.lp-book{display:grid;gap:clamp(1.75rem,4vw,3.25rem);align-items:start}
+.lp-book-aside{display:grid;gap:clamp(1rem,2.2vw,1.5rem)}
+.lp-book-aside h1{font-size:var(--d2);max-width:18ch}
+.lp-book-aside h1 em{font-style:italic;color:var(--accent-lg)}
+.lp-book-lead{color:var(--fg-body);font-size:var(--body-lg);font-weight:400;max-width:46ch}
+.lp-assure{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
+.lp-assure li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  color:var(--fg);font-weight:500;line-height:1.55}
+.lp-assure i{font-style:normal;color:var(--accent);line-height:1.5}
+/* Who is going to read the form. */
+.lp-signoff{display:flex;align-items:center;gap:1rem;padding-top:clamp(1rem,2vw,1.4rem);
+  border-top:1px solid var(--line)}
+.lp-signoff img{width:clamp(56px,6vw,74px);height:clamp(56px,6vw,74px);border-radius:50%;
+  object-fit:cover;object-position:50% 18%;flex:none;background:var(--mist)}
+.lp-signoff b{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.18rem * var(--t-sm));color:var(--fg)}
+.lp-signoff span{display:block;font-size:.78rem;color:var(--fg-soft);font-weight:400;
+  line-height:1.5;max-width:40ch}
+.lp-form-card{background:var(--card);border:1px solid var(--line);
+  padding:clamp(1.1rem,2vw,1.6rem);display:grid;gap:.9rem;
+  box-shadow:0 18px 50px rgba(20,20,22,.07)}
+.lp-form-card h2{font-size:calc(1.62rem * var(--t-mid));max-width:none}
+.lp-form-note{font-size:.78rem;color:var(--fg-soft);font-weight:400;line-height:1.65}
+/* The vendor form sets its own height from its own script. This min-height is
+   what stops the card collapsing to nothing while it loads, and what stops the
+   page reflowing under the cursor when it lands. Targeted by tag so this file
+   never writes a second definition of `.wz-embed`. */
+.lp-form-card iframe{min-height:640px}
+@media(min-width:1080px){
+  .lp-book{grid-template-columns:1fr 1.05fr}
+  .lp-book-aside{position:sticky;top:clamp(9.5rem,14vw,12rem)}
+}
+
+/* ---------- the thank-you page ---------- */
+.lp-next-list{display:grid;gap:clamp(1rem,2vw,1.6rem);margin:0;padding:0}
+.lp-next-list div{display:grid;grid-template-columns:auto 1fr;gap:.2rem clamp(1rem,2vw,1.5rem);
+  align-items:start;padding-bottom:clamp(1rem,2vw,1.6rem);border-bottom:1px solid var(--line)}
+.lp-next-list div:last-child{border-bottom:0;padding-bottom:0}
+/* The numeral is TEXT in the <dt>, not a CSS counter: Instatic's importer drops
+   elements it considers empty, and a <dt> whose only content is a ::before is
+   exactly that, so the numbering would vanish on publish. */
+.lp-next-list dt{grid-row:span 2;font-family:var(--f-display);
+  font-size:calc(2.34rem * var(--t-mid));line-height:1;color:var(--accent-lg)}
+.lp-next-list dd{margin:0}
+.lp-next-list dd b{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:var(--h3);color:var(--fg);line-height:1.15;margin-bottom:.4rem}
+.lp-next-list dd span{display:block;color:var(--fg-body);font-weight:400}
+/* Why waiting is not free. Framed as what the practice's own cost page already
+   argues about bone and neighbouring teeth. Not a countdown, not a discount. */
+.lp-warn{border:1px solid var(--line);border-left:3px solid var(--rule);background:var(--bg-3);
+  padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:1rem;align-content:start}
+.lp-warn h3{font-size:calc(1.62rem * var(--t-mid))}
+.lp-warn ul{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
+.lp-warn li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  color:var(--fg-body);font-weight:400;line-height:1.6}
+.lp-warn li i{font-style:normal;color:var(--accent);line-height:1.6}
+.lp-warn p{font-size:.84rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
+
+/* ---------- the footer ----------
+   `footer.foot` with the site map taken out: two offices, the hours, the legal
+   pair and the medical disclaimer a paid dental page has to carry. Only the
+   grid is replaced — `.foot-blurb`, `.foot-facts`, `.foot-base` and the
+   footer's own type and link rules are reused untouched. */
+.lp-foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+.lp-foot-note{margin-top:clamp(1.75rem,3.5vw,2.75rem);padding-top:clamp(1.25rem,2.4vw,1.8rem);
+  border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;line-height:1.7;
+  color:rgba(255,255,255,.6);max-width:100ch;font-weight:400}
+.lp-foot-office{display:grid;gap:.5rem;font-size:.92rem;font-weight:300;
+  color:rgba(255,255,255,.72);line-height:1.7}
+.lp-foot-office address{font-style:normal}
+@media(min-width:860px){ .lp-foot-grid{grid-template-columns:1.4fr 1fr 1fr} }
+/* The sticky rail covers the last 68px of the document on a phone. */
+@media(max-width:859px){ .lp-foot{padding-bottom:5.25rem} }
+
+/* ---------- the mobile CTA rail ----------
+   Deliberately CSS only, and always present below 860. A rail that slides in
+   past the hero needs JS to place it, and when that JS is the thing that
+   fails, the page has lost its only CTA within reach of a thumb. */
+.lp-rail{position:fixed;left:0;right:0;bottom:0;z-index:125;display:none;
+  gap:1px;background:rgba(138,126,78,.4);padding-bottom:env(safe-area-inset-bottom,0px);
+  box-shadow:0 -10px 30px rgba(20,20,22,.16)}
+.lp-rail a{display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:1.1rem .7rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;text-align:center}
+.lp-rail .lp-rail-call{background:var(--ink-900);color:var(--white)}
+.lp-rail .lp-rail-book{color:var(--black);
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+@media(max-width:859px){ .lp-rail{display:grid;grid-template-columns:1fr 1.3fr} }

@@ -29,6 +29,25 @@ const PAGES = (process.argv[3] || (() => {
   return slugs.join(",");
 })()).split(",");
 
+/* The ads landing pages carry a DIFFERENT shell on purpose: `lp-nav` instead of
+   the site header, no `#drawer` and no `#burger`, and `lp-foot` instead of the
+   site footer. That is the whole point of them — a paid landing page must not
+   leak the click into the site — so the four drawer checks below cannot apply,
+   and the shared-shell check has to ask a different question.
+   Derived from build-site.mjs the same way PAGES is, so a tenth landing page
+   cannot quietly get tested as an editorial one. Absent that file (an explicit
+   page list on the command line), the set is empty and every page is treated as
+   editorial, which is the stricter of the two. */
+const LANDING = new Set((() => {
+  try {
+    const src = fs.readFileSync(
+      path.resolve(import.meta.dirname, "site-src", "build-site.mjs"), "utf8");
+    const block = /const PAGES = \[([\s\S]*?)\];/.exec(src)[1];
+    return [...block.matchAll(/slug:\s*"([^"]+)"[^}]*?\blanding:\s*\{/g)].map((m) => m[1]);
+  } catch { return []; }
+})());
+console.log(`landing pages (no drawer by design): ${LANDING.size || "none"}`);
+
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const PORT = 9100 + Math.floor(Math.random() * 250);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cdp-site-"));
@@ -210,9 +229,37 @@ for (const page of PAGES) {
   await evalJs(`document.fonts ? document.fonts.ready.then(()=>1) : 1`);
   await wait(600);
 
-  check(page, "page loaded with the shared shell",
-    await evalJs(`!!(document.getElementById('nav') && document.getElementById('drawer')
-      && document.querySelector('footer.foot') && document.getElementById('smooth-wrapper'))`));
+  const isLanding = LANDING.has(page);
+  if (isLanding) {
+    /* The landing shell, asserted rather than assumed: the header still has to
+       be `#nav` with `#navProgress` inside it, because js/90-boot.js reads both
+       without guarding and throws on the first scroll past 40px otherwise. The
+       drawer and the burger have to be ABSENT — a site map on a paid landing
+       page is the leak these pages exist to close — and the CTA rail has to be
+       outside `#smooth-wrapper`, or ScrollSmoother's transform makes `fixed`
+       position it against the wrapper instead of the viewport and it scrolls
+       away with the page. */
+    check(page, "page loaded with the landing shell",
+      await evalJs(`!!(document.getElementById('nav') && document.getElementById('navProgress')
+        && document.querySelector('header.lp-nav') && document.querySelector('footer.lp-foot')
+        && document.getElementById('smooth-wrapper'))`));
+    check(page, "landing page has no site map to leak the click into",
+      await evalJs(`!document.getElementById('drawer') && !document.getElementById('burger')
+        && !document.querySelector('.nav-links')`));
+    const rail = await evalJs(`(function(){
+      var r = document.querySelector('.lp-rail');
+      if (!r) return 'none';
+      return document.getElementById('smooth-wrapper').contains(r) ? 'inside the smoother' : 'fixed';
+    })()`);
+    /* The thank-you pages deliberately ship no rail: there is nothing left to
+       convert once the form has been sent. */
+    check(page, "mobile CTA rail is fixed outside the smoother, or absent by design",
+      rail === "fixed" || (rail === "none" && /-thank-you$/.test(page)), rail);
+  } else {
+    check(page, "page loaded with the shared shell",
+      await evalJs(`!!(document.getElementById('nav') && document.getElementById('drawer')
+        && document.querySelector('footer.foot') && document.getElementById('smooth-wrapper'))`));
+  }
 
   /* The architecture claim, checked rather than asserted in a comment: styling
      and behaviour are site-wide, and each section's module runs exactly when
@@ -382,6 +429,37 @@ for (const page of PAGES) {
   await wait(600);
   const mOverflow = await evalJs(`document.documentElement.scrollWidth`);
   check(page, "no horizontal overflow @390", mOverflow <= 391, "scrollWidth=" + mOverflow);
+
+  /* A landing page has no burger and no drawer to open, so the four checks
+     below have nothing to measure on it. What it has instead is a CTA within
+     reach of a thumb, and THAT is the equivalent claim worth asserting: the
+     rail is pure CSS precisely so it cannot be the thing that failed, and a
+     landing page whose only CTA is above the fold on a phone is a landing page
+     that converts nobody who scrolled. */
+  if (isLanding) {
+    if (/-thank-you$/.test(page)) { continue; }
+    const railHit = await evalJs(`(function(){
+      var r = document.querySelector('.lp-rail');
+      if (!r) return 'no rail';
+      if (getComputedStyle(r).display === 'none') return 'hidden at 390';
+      var a = r.querySelectorAll('a');
+      if (a.length < 2) return a.length + ' action(s)';
+      for (var i = 0; i < a.length; i++) {
+        var b = a[i].getBoundingClientRect();
+        // Ask who owns the pixel rather than reading the box: that covers
+        // z-index, transform, opacity and clipping in one measurement, which is
+        // the same question the user's thumb asks.
+        var hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+        if (!hit || !r.contains(hit)) return 'action ' + (i + 1) + ' is covered by ' +
+          (hit ? hit.tagName.toLowerCase() + '.' + (hit.className || '') : 'nothing');
+        if (b.bottom > innerHeight + 1) return 'action ' + (i + 1) + ' is off the bottom';
+      }
+      return 'reachable';
+    })()`);
+    check(page, "CTA rail is reachable on mobile", railHit === "reachable", railHit);
+    continue;
+  }
+
   check(page, "menu button reachable on mobile",
     await evalJs(`getComputedStyle(document.getElementById('burger')).display !== 'none'`));
 
