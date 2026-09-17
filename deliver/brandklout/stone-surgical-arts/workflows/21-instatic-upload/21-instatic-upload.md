@@ -804,6 +804,43 @@ Two things about that API cost time the first time:
   `columns.json` for the board's status ids rather than guessing.
 
 
+### Trap 30 — a staging environment can publish the right `@font-face` and serve no fonts
+
+Added 2026-09-17, publishing the legal pages to `staging.dfwsurgicalarts.com`.
+
+`settings.fonts.items` is on the shell, so a site cloned from production has the font LIBRARY and
+the publisher duly emits the seven `@font-face` rules. The woff2 files are not on the shell: they
+live on the volume under `/app/storage/uploads/fonts/`, and a clone does not bring them. Every page
+then renders in Georgia and Arial while looking plausible, because `font-family` still resolves.
+
+- `compare-live.mjs` is the only gate that says so, as `fonts never loaded (live)` followed by
+  fifty width differences per page that are all one cause. `verify-live`, `diff-sites` and
+  `check-noindex` all pass.
+- The fix is `INSTATIC_BASE_URL=<the staging host> node install-fonts.mjs --apply`, which installs
+  server-side from Google. It is idempotent: it overwrites the matching `items` entry.
+- **Instatic sends `Cache-Control: max-age=14400` on a 404 under `/uploads/`.** Any request made
+  before the install poisons the Cloudflare edge for four hours, and installing the file does not
+  clear it. Purge the URLs with a minted Cache Purge token (permission group
+  `e17beae8b8cb423a99b1730f21238bed`, resource `com.cloudflare.api.account.zone.<zone id>`), then
+  revoke it. **Wait ten seconds after minting**: a purge sent immediately answers
+  `10000 Authentication error`, which reads like a bad scope and is propagation.
+
+### Trap 31 — Cloudflare Email Obfuscation makes every `mailto:` look like a broken link
+
+Also 2026-09-17, from the two legal pages, which are the only pages carrying an email address.
+
+Scrape Shield rewrites `mailto:info@…` in the HTML to `/cdn-cgi/l/email-protection#<hex>` with the
+visible text `[email protected]`, and restores both in the browser from
+`/cdn-cgi/scripts/.../email-decode.min.js` — same origin, so the published CSP allows it.
+
+- `verify-live.mjs` HEADed that path and got a 404. It now skips `/cdn-cgi/`; the comment there is
+  the evidence.
+- `compare-live.mjs` runs with **scripts off**, so it reports the obfuscated text and a narrower
+  link box on both pages, at both widths. That is the whole of the remaining findings on those
+  pages. Confirm with scripts on before investigating.
+- The trade is real: a reader with JavaScript disabled cannot see the address. The phone number
+  next to it is plain text either way.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions

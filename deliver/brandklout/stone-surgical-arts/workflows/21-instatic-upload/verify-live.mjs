@@ -91,7 +91,15 @@ for (const route of ROUTES) {
   // Internal links.
   for (const m of html.matchAll(/href="(\/[^"#][^"]*|\/)"/g)) {
     const href = m[1].split('#')[0]
-    if (!href || href.startsWith('/_instatic') || href.startsWith('/uploads')) continue
+    // `/cdn-cgi/l/email-protection#<hex>` is NOT a link this site wrote. It is
+    // Cloudflare's Email Obfuscation (Scrape Shield) rewriting every `mailto:`
+    // in the HTML, and the real address is restored in the browser by
+    // `/cdn-cgi/scripts/.../email-decode.min.js` — same origin, so the CSP
+    // allows it. The bare path answers 404 to a HEAD, which is Cloudflare's
+    // design, not a broken link: checked in Chrome on 2026-09-17, both legal
+    // pages resolve to `mailto:info@stonesurgicalarts.com`. The address is
+    // hidden to a reader with JavaScript off; the phone number beside it is not.
+    if (!href || href.startsWith('/_instatic') || href.startsWith('/uploads') || href.startsWith('/cdn-cgi/')) continue
     const status = await head(BASE + href)
     if (status >= 400) fails.push(`${route} -> link ${href} is ${status}`)
   }

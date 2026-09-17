@@ -16,6 +16,9 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
+**Staging is ahead of production** since 2026-09-17: it carries 54 pages, the 52 published ones plus
+`privacy-policy` and `terms-of-service`.
+
 **Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
 It is a Railway environment `staging` in the same project, seeded from production on
 2026-09-15, and `noindex` at the edge. Work there, then promote with the staging-clone module;
@@ -106,9 +109,9 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
   token, then `verify-redirects.mjs` must end `FAIL  none`. The 19 skin and non-surgical URLs are
   `provisional` (they go to `/treatments`; nobody has decided otherwise). See
   [the directive](../workflows/14-migration-seo-redirects/14-migration-seo-redirects.md).
-- **Publish the legal pages.** `privacy-policy` and `terms-of-service` (the SMS terms are its `#sms`
-  section) are built and gated locally, but not published. The footer links on production still go
-  to the sister site until they are published. Publish to staging first —
+- **Promote the legal pages to production.** `privacy-policy` and `terms-of-service` (the SMS terms
+  are its `#sms` section) are **published on staging** and gated clean there, and production still
+  links its footer at the sister practice's policies. Promote once the text is approved —
   [2026-09-17 run](./runbook/2026-09-17-privacy-policy-and-terms-pages.md).
 - **Production has no canonical tag and no `/sitemap.xml`**, and apex and www
   both answer 200. Each is a separate fix; none blocks the redirects.
