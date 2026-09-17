@@ -1,11 +1,12 @@
 # Runbook index
 
-19 runs, newest first. Each line is one file in this folder.
+20 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17 — bk-stone-dental merged into main (consent module 23) — carries **gotchas** | [`2026-09-17-bk-stone-dental-merged-consent-module.md`](./2026-09-17-bk-stone-dental-merged-consent-module.md) |
 | 2026-09-16 | 2026-09-16 — Google Drive access for agents via `scripts/drive.mjs` — carries **gotchas** | [`2026-09-16-google-drive-access.md`](./2026-09-16-google-drive-access.md) |
 | 2026-09-15 | 2026-09-15 — BugHerd staging loops launched in bk-mason-park, -kids, -west-la-implants — carries **gotchas** | [`2026-09-15-bugherd-staging-loops-launched.md`](./2026-09-15-bugherd-staging-loops-launched.md) |
 | 2026-09-12 | 2026-09-12 — Sienna accessibility widget on every Instatic site (all 8 published) | [`2026-09-12-sienna-accessibility-on-every-instatic-site.md`](./2026-09-12-sienna-accessibility-on-every-instatic-site.md) |
