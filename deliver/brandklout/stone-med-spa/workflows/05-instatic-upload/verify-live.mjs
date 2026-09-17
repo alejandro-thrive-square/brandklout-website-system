@@ -105,7 +105,14 @@ for (const route of ROUTES) {
         if (!css.includes(token)) fails.push(`token ${token} missing from userStyles`)
       }
     }
-    const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
+    // THE SITE BUNDLE, NOT THE FIRST SCRIPT ON THE PAGE. Production carries
+    // site scripts of its own (the Brandklout consent bridge, sienna), and
+    // Instatic serves them from the same /_instatic/assets/ prefix, ahead of
+    // the entry bundle (they sort by path — `001-…` wins). Taking the first
+    // match therefore tested the consent bridge and failed both checks below
+    // on a site that was fine. Found 2026-09-17 on the production push.
+    const scripts = [...html.matchAll(/src="(\/_instatic\/assets\/[^"]+\.js)"/g)].map((m) => m[1])
+    const script = scripts.find((s) => /\/entries\/site-/.test(s)) ?? scripts[0]
     if (!script) fails.push('no runtime script on the homepage')
     else {
       const js = await (await fetch(BASE + script)).text()

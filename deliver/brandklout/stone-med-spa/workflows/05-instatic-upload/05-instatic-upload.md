@@ -894,6 +894,16 @@ node compare-live.mjs && node visual-diff.mjs && node visual-diff.mjs 390
 subdomain (memory: new-subdomain-nxdomain). Chrome-based gates use the OS resolver, so they wait
 until it resolves.
 
+### 37. `verify-live.mjs` tested the wrong script — production has site scripts of its own
+
+Found 2026-09-17 on the production push. The gate matched the FIRST
+`src="/_instatic/assets/**.js"` on the homepage. Production carries the Brandklout consent bridge
+(`001-brandklout-consent-bridge.js`) and Instatic orders code assets **by path**, so the bridge is
+emitted before the entry bundle. The gate therefore fetched the bridge and reported "site.js is
+missing the `js` class bootstrap" and "site.js does not contain the drawer logic" on a site that
+was fine. It now prefers the `/entries/site-` bundle. **A site-script addition can break a gate
+that has nothing to do with it.**
+
 ### 35. The staging clone has NO FONTS — `clone-site --media` copies the media library, not `/uploads/fonts/`
 
 Found 2026-09-15 on the first push to staging. The shell's font library (`settings.fonts`) came

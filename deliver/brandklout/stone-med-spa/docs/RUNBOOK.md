@@ -13,9 +13,20 @@ implant centre (live on Webflow) and Stone Surgical Arts (twelve pages, publishe
 
 Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/project-overview.md).
 
-## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
+## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
-**2026-09-17, latest — Privacy Policy and Terms of Service are on STAGING.** `/privacy-policy`
+**2026-09-17, latest — EVERYTHING WENT TO PRODUCTION.** Production was eleven pages behind and
+the push is a whole-site replace, so the client's Asana feedback, the teammate's web dev brief pass
+and the two new legal pages all went live together: 13 pages, seq 11, `{"publishedPages":13}`.
+Gates: `verify-live` FAIL none (13 routes, **13/13 distinct titles** — the duplicate `<title>` from
+the 2026-09-12 admin edit is gone), `css-parity` FAIL none, `compare-live` 4 trap-30 findings.
+The sitemap was rebuilt and redeployed (12 URLs) and the Cloudflare token revoked. **Open:** the
+legal pages still need the client's review, the legal entity name and a contact email; the Cherry
+link, the "Dr. Stone injects" contradiction and the wallet question are now live unresolved; submit
+the sitemap in Search Console —
+[run](./runbook/2026-09-17-production-push.md).
+
+**2026-09-17 — Privacy Policy and Terms of Service, built and first published to staging.** `/privacy-policy`
 and `/terms-of-service` are adapted from the implant centre's pages, without its SMS program and
 without its PLLC. The footer's legal links now point to them, and the SMS Terms link is gone.
 Staging has 13 pages. **Open:** the client or their counsel reviews both pages, and supplies the
