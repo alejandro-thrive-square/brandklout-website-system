@@ -134,7 +134,16 @@ for (const p of pages) {
   }
 
   // --- no inline styles: Client-First keeps presentation in classes ---
-  const inline = [...html.matchAll(/\sstyle="[^"]+"/g)];
+  //
+  // ONE EXCEPTION, since 2026-09-17: the iframe inside an embed marker. Its
+  // `style="height:…px"` is not an authoring choice — it is a copy of what the
+  // Embed block publishes (`frame()` in 18-instatic-embeds/embed-origins/
+  // modules/index.js writes the starting height inline), and the local build
+  // carries it so the two pages match under compare-live. Moving it to a class
+  // here would make the LOCAL page the one that is wrong.
+  const inline = [...html.matchAll(/<[^>]*\sstyle="[^"]+"[^>]*>/g)].filter(
+    (m) => !/^<iframe\b/.test(m[0]),
+  );
   if (inline.length) fail(p, `${inline.length} inline style attribute(s)`);
 }
 

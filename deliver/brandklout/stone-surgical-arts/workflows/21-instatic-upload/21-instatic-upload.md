@@ -122,9 +122,12 @@ bash ship.sh                    # 3. ship to the container, run Instatic's own c
 node push-site.mjs              # 4. dry run
 node push-site.mjs --apply --force   # write shell + pages + code assets in ONE atomic PUT
                                #    --force is REQUIRED on any re-import: see trap 11
-node -e "import('.../insta-api.mjs').then(m=>m.publish())"   # 5. publish
-node verify-live.mjs            # 6. GATE — crawls every route, link and asset
-node compare-live.mjs           # 7. GATE — diffs the published pages against the
+node place-embeds.mjs           # 5. swap each embed MARKER for a real Embed block. Any page
+node place-embeds.mjs --apply   #    carrying [data-embed] publishes as an empty div without
+                               #    this, and no gate here says so. See trap 32
+node -e "import('.../insta-api.mjs').then(m=>m.publish())"   # 6. publish
+node verify-live.mjs            # 7. GATE — crawls every route, link and asset
+node compare-live.mjs           # 8. GATE — diffs the published pages against the
                                #    local build: structure, computed style, geometry,
                                #    text and runtime state. See traps 19 and 20
 ```
@@ -840,6 +843,47 @@ visible text `[email protected]`, and restores both in the browser from
   pages. Confirm with scripts on before investigating.
 - The trade is real: a reader with JavaScript disabled cannot see the address. The phone number
   next to it is plain text either way.
+
+### Trap 32 — a third-party form reaches a published page ONLY as an Embed block, and only with its own script
+
+Added 2026-09-17, putting the practice's Go High Level contact form on `/book`.
+
+Three separate walls, in the order they are hit:
+
+1. **The import cannot carry it.** `importHtml` strips `<script>` and publishes a non-YouTube
+   `<iframe>` as an empty div. Nothing pasted into `pages/*.body.html` survives.
+2. **The CSP would block it anyway** — `script-src 'self'; frame-src 'none'` (trap 29).
+3. **The Embed block is the only door**, and it is a node, not markup, so it has to be written
+   after the push.
+
+The shape that works, and is now wired:
+
+- the authored page carries a MARKER, `<div class="wz-embed form_embed" data-wz-embed="auto"
+  data-embed="<key>">`, holding the vendor snippet **verbatim** so the local build renders the real
+  thing;
+- `build-import-input.mjs` empties that marker on the way to the container;
+- **`place-embeds.mjs` swaps the emptied node for the plugin's module node**, reading the snippet
+  back out of the BUILT page so there is one copy of it, in the authored page, and the two cannot
+  drift. Run it after every `push-site.mjs --apply`, before the publish. Nothing else in this
+  toolkit notices a missing block: `verify-live.mjs` sees a healthy route and `compare-live.mjs`
+  compares with scripts off, where an empty div and a block full of widget look the same.
+
+**The vendor script is not optional, however much it looks it.** The Embed module's own runtime
+already understands `["lc.setHeight", …]`, which reads like the `form_embed.js` tag can be dropped
+in favour of URL mode. It cannot: a Go High Level frame posts `["iframeLoaded"]` and then WAITS,
+and the height message only ever follows the vendor script's answer to it. Measured both ways on
+2026-09-17 — with the script the frame settles at ~700px; without it, it sits at its 565px start
+with the Submit button cut off. So: snippet mode, snippet verbatim.
+
+Two more things that cost time here:
+
+- **The widget parks the frame off-screen while it boots** (`position:absolute; left:-9999px;
+  visibility:hidden`), then re-parents it into its own `.ep-wrapper`. Measure the page before that
+  finishes and you get a horizontal overflow that is not real. `all-pages.mjs` waits for the
+  widget instead of `networkidle0`, which a page holding a live widget never reaches at all.
+- **`compare-live.mjs` stays meaningful only because the local build carries the same markup.**
+  `css/62-embed.css` mirrors the module's own stylesheet for that reason; the published page and
+  the local one came back `no differences` on the first run after the swap.
 
 ## Output Artifacts
 

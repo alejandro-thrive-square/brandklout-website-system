@@ -7915,80 +7915,14 @@ a.ways-in_card:hover {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
-.form_row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-medium);
-}
-.form_field {
-  display: grid;
-  gap: 0.4rem;
-}
-.form_label {
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.form_required {
-  color: var(--accent);
-}
-.form_input,
-.form_select,
-.form_textarea {
-  width: 100%;
-  padding: 0.85rem 0;
-  border: 0;
-  border-bottom: 1px solid var(--line-strong);
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: var(--size-text-regular);
-  color: var(--fg);
-  border-radius: 0;
-  transition: border-color 0.25s var(--ease);
-}
-.form_input:focus,
-.form_select:focus,
-.form_textarea:focus {
-  outline: none;
-  border-bottom-color: var(--accent-flat);
-}
-.form_textarea {
-  height: 6rem;
-  min-height: 6rem;
-  resize: vertical;
-}
-.form_consent {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-small);
-  align-items: start;
-  font-size: var(--size-text-small);
-  color: var(--fg-mute);
-  line-height: 1.5;
-}
-.form_consent input {
-  width: 1.1rem;
-  height: 1.1rem;
-  margin: 0.25rem 0 0;
-  accent-color: var(--green-ink);
-}
+/* The hand-built form's field, consent and status rules were deleted on
+   2026-09-17 with the form itself; the Go High Level embed styles its own
+   controls inside the frame. `.form_component`, `.form_head` and `.form_note`
+   stay: they are the panel the embed sits in. See css/62-embed.css. */
 .form_note {
   margin: 0;
   font-size: var(--size-text-small);
   color: var(--fg-mute);
-}
-.form_status {
-  margin: 0;
-  padding: var(--space-small) var(--space-medium);
-  background: var(--green-wash);
-  border-left: 2px solid var(--accent-flat);
-  font-size: var(--size-text-small);
-  color: var(--fg-body);
-  line-height: 1.6;
-}
-.form_status[hidden] {
-  display: none;
 }
 .desk_panel {
   position: sticky;
@@ -8140,8 +8074,7 @@ a.ways-in_card:hover {
     aspect-ratio: 16 / 10;
   }
   .rates_component,
-  .recov_grid,
-  .form_row {
+  .recov_grid {
     grid-template-columns: 1fr;
   }
 }
@@ -8597,3 +8530,27 @@ a:hover > .offer_media img,
   .legal_page .journal_section h3 { font-size: 1.45rem; }
   .legal_card { padding: 1.2rem 1.3rem; }
 }
+
+
+/* ===== css/62-embed.css ===== */
+/* Third-party embeds, 2026-09-17. One of them: the Go High Level contact form
+   on the booking page.
+
+   These rules MIRROR the Embed module's own stylesheet
+   (deliver/process/18-instatic-embeds/embed-origins/modules/index.js, `CSS`),
+   which ships with the block on the published page and does not exist locally.
+   Keeping the two in step is what lets `compare-live.mjs` compare the booking
+   page at all. `.wz-embed` itself is left alone here — the module owns it live —
+   and `.form_embed` is the author class the block carries. */
+.form_embed { position: relative; width: 100%; max-width: 100%; }
+.form_embed > iframe { display: block; width: 100%; border: 0; }
+/* Before the vendor script boots the frame is `height:100%` of nothing, and
+   after it boots the script owns the height. This floor is what the reader
+   sees in between, and what a reader with no JavaScript sees for good. */
+.form_embed > iframe { min-height: 34rem; }
+/* The vendor script re-parents the frame into its own wrapper and gives the
+   whole thing a border-radius; keep that wrapper full width. */
+.form_embed .ep-wrapper, .form_embed .ep-iFrameContainer { width: 100%; }
+/* The panel around the form. `is-embed` drops the inner gap the hand-built
+   form needed between its rows. */
+.form_component.is-embed { gap: var(--space-medium); }

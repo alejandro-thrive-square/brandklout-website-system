@@ -578,30 +578,17 @@
     });
   }
 
-  /* --- the consultation form -----------------------------------------------
-     The form has no endpoint yet (HANDOFF.md, the wiring job at Instatic
-     setup). Until it does, submitting it must not look like it worked: the
-     page says so and points at the two ways in that do. Remove this the day
-     the action attribute exists. */
-  function form() {
-    var f = $('form[data-form="consultation"]');
-    if (!f || f.getAttribute("action")) return;
-    var status = $(".form_status", f);
-    f.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (status) {
-        status.hidden = false;
-        status.focus();
-      }
-    });
-  }
+  /* The consultation form used to be intercepted here, because the hand-built
+     form had no endpoint. It is a Go High Level embed since 2026-09-17 and
+     posts to the practice's own CRM, so there is nothing to intercept and
+     `form()` was deleted along with `.form_status`. js/14-embed.js carries the
+     only code the embed needs, which is the height listener. */
 
   function boot() {
     veil();
     jump();
     calculator();
     filter();
-    form();
     masks();
     marquees();
     magnetic();

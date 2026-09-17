@@ -122,6 +122,21 @@ function rewrite(html, file) {
   //     error and a wasted round trip.
   out = out.replace(/[ \t]*<link[^>]+rel="preload"[^>]+href="assets\/fonts\/[^"]+"[^>]*>\s*\n?/g, '')
 
+  // 0c. Empty every embed marker.
+  //
+  //     A marker is `<div class="wz-embed …" data-embed="…">` and it holds the
+  //     vendor's snippet verbatim — for the Go High Level form, an <iframe> and
+  //     a <script>. NEITHER can arrive this way: `importHtml` strips <script>
+  //     and publishes a non-YouTube iframe as an empty div, and the published
+  //     CSP would block both anyway. What has to arrive is the marker itself,
+  //     empty, because `place-embeds.mjs` finds that node after the push and
+  //     swaps it for the Embed block's module node — the one thing on this
+  //     platform that can publish a third-party frame (trap 32). That script
+  //     reads the snippet out of the BUILT page, so nothing is duplicated and
+  //     the two cannot drift.
+  out = out.replace(/(<div[^>]*\sdata-embed="[^"]*"[^>]*>)[\s\S]*?(<\/div>)/g, '$1$2')
+  if (/<iframe/i.test(out)) problems.push(`${file}: an <iframe> outside an embed marker — it cannot survive importHtml`)
+
   // 1. Image sources -> media library paths.
   out = out.replace(/(src|href)="assets\/([^"]+)"/g, (whole, attr, name) => {
     if (name === 'site.css' || name === 'site.js') return whole // handled below

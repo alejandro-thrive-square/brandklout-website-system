@@ -51,21 +51,90 @@ const browser = await puppeteer.launch({
 const failures = [];
 let checks = 0;
 
+/* The hosts a page is ALLOWED to reach, read from the page itself: the vendor
+   snippet inside an embed marker ([data-embed]) and nothing else. Reading them
+   per page rather than keeping a list here means the gate stays exactly as
+   strict as the markup is, and a vendor host that appears anywhere outside a
+   marker still fails. See css/62-embed.css and 21-instatic-upload/place-embeds.mjs. */
+function embedHosts(file) {
+  const html = fs.readFileSync(path.join(ROOT, file), "utf8");
+  const hosts = new Set();
+  for (const m of html.matchAll(/<div[^>]*\sdata-embed="[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
+    for (const u of m[1].matchAll(/https:\/\/([a-z0-9.-]+)/gi)) hosts.add(u[1].toLowerCase());
+  }
+  return hosts;
+}
+
 for (const file of pages) {
   const row = [];
+  const allowedHosts = embedHosts(file);
   for (const width of WIDTHS) {
     const page = await browser.newPage();
     const errors = [];
     const external = [];
+    /* A console message from INSIDE a vendor's frame is not this site's defect
+       and not this site's to fix. The Go High Level form logs a styled line
+       (`%c%d font-size:0;color:transparent NaN`) that Chrome reports as an
+       error, and it failed the booking page at two widths on 2026-09-17 while
+       the page itself was perfect. Same rule as the request listener below:
+       judge it by where it came from, and keep everything from our own origin. */
+    const ours = (url) => !url || url.startsWith(`http://127.0.0.1:${PORT}`);
     page.on("pageerror", (e) => errors.push(String(e).slice(0, 90)));
-    page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 90)); });
+    page.on("console", (m) => {
+      if (m.type() !== "error") return;
+      if (!ours(m.location()?.url ?? "")) return;
+      errors.push(m.text().slice(0, 90));
+    });
     page.on("request", (r) => {
+      // Only the PAGE's own requests. Since 2026-09-17 the booking page carries
+      // a third-party iframe (the Go High Level form), and everything that
+      // widget loads inside its own frame — its bundle, its fonts, its API —
+      // arrives on this listener too. None of it is ours to control, and
+      // listing the hosts would mean re-listing them whenever the vendor moves
+      // one. What this gate is for is the SITE reaching off-origin, so it asks
+      // the frame: the iframe's own navigation belongs to the child frame, as
+      // does everything under it.
+      if (r.frame() !== page.mainFrame()) return;
       const u = r.url();
-      if (!u.startsWith(`http://127.0.0.1:${PORT}`) && !u.startsWith("data:") && !u.startsWith("blob:")) external.push(u.slice(0, 60));
+      if (u.startsWith(`http://127.0.0.1:${PORT}`) || u.startsWith("data:") || u.startsWith("blob:")) return;
+      // The vendor script an embed marker on THIS page asks for is expected.
+      let host = "";
+      try { host = new URL(u).hostname.toLowerCase(); } catch { host = ""; }
+      if (allowedHosts.has(host)) return;
+      external.push(u.slice(0, 60));
     });
     await page.setViewport({ width, height: 900 });
-    await page.goto(`http://127.0.0.1:${PORT}/${file}`, { waitUntil: "networkidle0", timeout: 60000 });
-    await new Promise((r) => setTimeout(r, 450));
+    /* A page carrying a third-party widget NEVER reaches networkidle0: the Go
+       High Level form holds connections open and polls, so the booking page
+       timed out at 60s and took the whole gate down with it (2026-09-17).
+       Those pages wait for the document and then sit still long enough for the
+       widget to boot and settle its height, which is what the measurements
+       below need; every other page keeps the stricter wait. */
+    const hasEmbed = allowedHosts.size > 0;
+    await page.goto(`http://127.0.0.1:${PORT}/${file}`, {
+      waitUntil: hasEmbed ? "domcontentloaded" : "networkidle0",
+      timeout: 60000,
+    });
+    /* A widget parks its frame off-screen while it boots — Go High Level uses
+       `position:absolute; left:-9999px; visibility:hidden` — and a page
+       measured in that state reports a horizontal overflow that is not real,
+       at some widths and not others. So wait for the frame to be VISIBLE
+       rather than for a fixed number of seconds, and give up after 25s so a
+       vendor outage fails the page honestly rather than hanging the gate. */
+    if (hasEmbed) {
+      await page
+        .waitForFunction(
+          // SOME, not every: the vendor keeps helper frames of its own that stay
+          // hidden by design, and `every` waits for them forever.
+          () => [...document.querySelectorAll('[data-embed] iframe, .ep-wrapper iframe')]
+            .some((f) => getComputedStyle(f).visibility === "visible" && f.getBoundingClientRect().left > -1000),
+          { timeout: 25000, polling: 500 },
+        )
+        .catch((e) => errors.push(`the embedded widget never became visible: ${String(e).slice(0, 60)}`));
+      await new Promise((r) => setTimeout(r, 1500));
+    } else {
+      await new Promise((r) => setTimeout(r, 450));
+    }
 
     const res = await page.evaluate(() => {
       const de = document.documentElement;

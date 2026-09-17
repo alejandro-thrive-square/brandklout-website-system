@@ -5,7 +5,12 @@
 //
 //   partials/           the shell — head, navbar, drawer, cta, footer. One copy,
 //                       so no page can drift from another.
-//   pages/*.body.html   MARKUP ONLY. No <style>, no <script>.
+//   pages/*.body.html   MARKUP ONLY. No <style>, no <script> — with ONE
+//                        exception since 2026-09-17: the vendor snippet inside
+//                        an embed marker ([data-embed]), which is pasted
+//                        verbatim and carries its own <script>. It never
+//                        reaches Instatic as markup; place-embeds.mjs lifts it
+//                        out of the built page and into an Embed block.
 //   css/*.css           one file per concern, concatenated in FILENAME ORDER
 //                       into assets/site.css. Filename order IS cascade order.
 //   js/*.js             concatenated the same way into assets/site.js.

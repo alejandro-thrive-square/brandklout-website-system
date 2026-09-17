@@ -83,60 +83,63 @@
        THE FORM AND THE DESK
        ==================================================================== -->
   <section class="desk_component" id="form" data-chapter="02" data-chapter-name="The request">
-    <form class="form_component" data-form="consultation" novalidate data-j="rise">
+    <!-- THE GO HIGH LEVEL FORM, 2026-09-17. The practice's own contact form,
+         from their Go High Level account, replaces the hand-built request form
+         that had no endpoint and was intercepted by 12-elevate.js.
+
+         HOW IT SURVIVES THE TRIP TO INSTATIC. importHtml strips <script> and
+         publishes a non-YouTube <iframe> as an empty div, and the published CSP
+         is `script-src 'self'; frame-src 'none'`. The only way in is the
+         `brandklout.embed-origins` Embed block (deliver/process/18-instatic-embeds),
+         installed and in `compatible` mode on this instance: a page carrying one
+         gets its CSP widened at publish time.
+
+         So this wrapper is a MARKER, not the real thing. `data-embed` names a
+         row in `21-instatic-upload/place-embeds.mjs`, which after every push
+         swaps this node for the plugin's module node with the same URL, height
+         and title. The markup here is what that module publishes — the
+         `wz-embed` class, `data-wz-embed="auto"`, the same iframe attributes —
+         so the local build and the published page agree and `compare-live.mjs`
+         stays meaningful. `build-import-input.mjs` drops the <iframe> from the
+         payload; the div it sits in is what gets replaced.
+
+         THE SNIPPET IS VERBATIM, `form_embed.js` INCLUDED, and that script is
+         not optional however much it looks it. The form posts `["iframeLoaded"]`
+         and then waits: the height it reports later, as `["lc.setHeight", …]`,
+         only ever comes after the vendor script answers that first message. A
+         frame with no script never grows past the 565px it starts at and cuts
+         its own Submit button off. Measured both ways on 2026-09-17; see
+         trap 32. `place-embeds.mjs` reads this markup out of the BUILT page, so
+         the snippet lives here and nowhere else — re-paste it here when the
+         practice changes the form, and nothing else needs touching. -->
+    <div class="form_component is-embed" data-j="rise">
       <div class="form_head">
         <h2>Request a time</h2>
-        <p>Nothing you send here is a booking until the desk confirms it.</p>
+        <p>Nothing you send here is a booking until the desk confirms it. The desk replies within a business day.</p>
       </div>
-      <div class="form_row">
-        <div class="form_field">
-          <label class="form_label" for="first-name">First name <span class="form_required">*</span></label>
-          <input class="form_input" type="text" id="first-name" name="first-name" autocomplete="given-name" required>
-        </div>
-        <div class="form_field">
-          <label class="form_label" for="last-name">Last name <span class="form_required">*</span></label>
-          <input class="form_input" type="text" id="last-name" name="last-name" autocomplete="family-name" required>
-        </div>
-      </div>
-      <div class="form_row">
-        <div class="form_field">
-          <label class="form_label" for="email">Email <span class="form_required">*</span></label>
-          <input class="form_input" type="email" id="email" name="email" autocomplete="email" required>
-        </div>
-        <div class="form_field">
-          <label class="form_label" for="phone">Phone <span class="form_required">*</span></label>
-          <input class="form_input" type="tel" id="phone" name="phone" autocomplete="tel" required>
-        </div>
-      </div>
-      <div class="form_field">
-        <label class="form_label" for="interest">What are you interested in?</label>
-        <select class="form_select" id="interest" name="interest">
-          <option value="">Not sure yet, I&rsquo;d like advice</option>
-          <option value="face">Face: lifting, eyes, implants, contour</option>
-          <option value="neck">Neck &amp; jawline</option>
-          <option value="skin">Skin: resurfacing, peels, needling</option>
-          <option value="non-surgical">Non-surgical: injectables and filler</option>
-          <option value="membership">Memberships</option>
-        </select>
-      </div>
-      <div class="form_field">
-        <label class="form_label" for="preferred">Preferred days or times</label>
-        <input class="form_input" type="text" id="preferred" name="preferred" placeholder="e.g. Tuesday or Thursday mornings">
-      </div>
-      <div class="form_field">
-        <label class="form_label" for="message">Anything you&rsquo;d like Dr. Stone to know</label>
-        <textarea class="form_textarea" id="message" name="message" placeholder="What is bothering you, anything you have had done before, and what you are hoping for."></textarea>
-      </div>
-      <label class="form_consent">
-        <input type="checkbox" name="consent" required>
-        <span>I agree to be contacted about this request by phone, text or email. Please do not include medical details you would not want sent by email; a full history is taken at the visit. See the <a class="text-style-link" href="privacy-policy.html">privacy policy</a>.</span>
-      </label>
-      <p class="form_status" tabindex="-1" hidden>This request form is not connected yet, so nothing was sent. Call <a class="text-style-link" href="tel:+18179183666">(817) 918-3666</a> or <a class="text-style-link" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener">book online through Modento</a>.</p>
-      <div>
-        <button class="button" type="submit">Send request</button>
-      </div>
-      <p class="form_note">Prefer to pick a slot yourself? <a class="text-style-link" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener">Book online through Modento</a>.</p>
-    </form>
+      <div class="wz-embed form_embed" data-wz-embed="auto" data-embed="ghl-contact-form"><iframe
+    src="https://api.leadconnectorhq.com/widget/form/Nzf3xQVLhgMlABuVMxCN"
+    style="width:100%;height:100%;border:none;border-radius:8px"
+    id="inline-Nzf3xQVLhgMlABuVMxCN"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Contact Form"
+    data-height="565"
+    data-layout-iframe-id="inline-Nzf3xQVLhgMlABuVMxCN"
+    data-form-id="Nzf3xQVLhgMlABuVMxCN"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Contact Form"
+></iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+      <p class="form_note">Please keep medical details out of the form; a full history is taken at the visit. What you send is handled as our <a class="text-style-link" href="privacy-policy.html">privacy policy</a> describes.</p>
+      <p class="form_note">Prefer to pick a slot yourself? <a class="text-style-link" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener">Book online through Modento</a>. Or call <a class="text-style-link" href="tel:+18179183666">(817) 918-3666</a>, Monday to Friday, nine to five.</p>
+    </div>
 
     <aside class="desk_panel" id="visit">
       <div class="desk_media" data-j="mask">

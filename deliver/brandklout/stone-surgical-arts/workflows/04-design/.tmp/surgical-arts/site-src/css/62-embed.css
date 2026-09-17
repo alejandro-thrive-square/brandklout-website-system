@@ -1,0 +1,21 @@
+/* Third-party embeds, 2026-09-17. One of them: the Go High Level contact form
+   on the booking page.
+
+   These rules MIRROR the Embed module's own stylesheet
+   (deliver/process/18-instatic-embeds/embed-origins/modules/index.js, `CSS`),
+   which ships with the block on the published page and does not exist locally.
+   Keeping the two in step is what lets `compare-live.mjs` compare the booking
+   page at all. `.wz-embed` itself is left alone here — the module owns it live —
+   and `.form_embed` is the author class the block carries. */
+.form_embed { position: relative; width: 100%; max-width: 100%; }
+.form_embed > iframe { display: block; width: 100%; border: 0; }
+/* Before the vendor script boots the frame is `height:100%` of nothing, and
+   after it boots the script owns the height. This floor is what the reader
+   sees in between, and what a reader with no JavaScript sees for good. */
+.form_embed > iframe { min-height: 34rem; }
+/* The vendor script re-parents the frame into its own wrapper and gives the
+   whole thing a border-radius; keep that wrapper full width. */
+.form_embed .ep-wrapper, .form_embed .ep-iFrameContainer { width: 100%; }
+/* The panel around the form. `is-embed` drops the inner gap the hand-built
+   form needed between its rows. */
+.form_component.is-embed { gap: var(--space-medium); }

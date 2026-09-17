@@ -16,8 +16,11 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
-**Staging is ahead of production** since 2026-09-17: it carries 54 pages, the 52 published ones plus
-`privacy-policy` and `terms-of-service`.
+**Staging is ahead of production** since 2026-09-17: it carries 54 pages — the 52 published ones plus
+`privacy-policy` and `terms-of-service` — and the booking page's request form is now the practice's
+**Go High Level form**, placed as an Embed block by `21-instatic-upload/place-embeds.mjs`. That
+script is a required step after every `push-site.mjs --apply`; without it the form publishes as an
+empty div and no gate says so.
 
 **Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
 It is a Railway environment `staging` in the same project, seeded from production on
