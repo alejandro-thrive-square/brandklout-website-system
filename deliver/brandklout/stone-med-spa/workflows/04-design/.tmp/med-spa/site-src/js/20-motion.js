@@ -377,7 +377,22 @@
         var w = card ? card.getBoundingClientRect().width + 24 : rail.clientWidth * 0.8;
         rail.scrollBy({ left: dir * w, behavior: reduce ? "auto" : "smooth" });
       };
-      var scope = rail.closest("[data-drag-scope]") || rail.parentNode;
+      /* THE ARROWS' SCOPE. The buttons sit in the section's HEAD, which is a
+         SIBLING of the rail — the head is inside .padding-global/.container-large
+         and the rail is full-bleed below it. `closest("[data-drag-scope]")`
+         therefore returned null on every page and the fallback (rail.parentNode)
+         does not contain the buttons either, so no arrow was ever bound. Found
+         2026-09-17 by the client: "the sliders buttons don't work".
+         Walk up until an ancestor actually holds the arrows; the attribute (now
+         on the <section>) is the fast path, not the only one. */
+      var scope = rail.closest("[data-drag-scope]");
+      if (!scope || !scope.querySelector("[data-drag-prev],[data-drag-next]")) {
+        scope = rail.parentNode;
+        while (scope && scope.querySelector && !scope.querySelector("[data-drag-prev],[data-drag-next]")) {
+          scope = scope.parentElement;
+        }
+        if (!scope) scope = document;
+      }
       $$("[data-drag-prev]", scope).forEach(function (b) {
         b.addEventListener("click", function () {
           step(-1);

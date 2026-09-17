@@ -1,11 +1,12 @@
 # Runbook index
 
-13 runs, newest first. Each line is one file in this folder.
+14 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17, later still — The drag rails' arrows were never bound (data-drag-scope on a sibling, since the second build); fixed, new `drag-test.mjs` click gate, production seq 12 and staging seq 6 — carries **gotchas** | [`2026-09-17-drag-rail-arrows-never-bound.md`](./2026-09-17-drag-rail-arrows-never-bound.md) |
 | 2026-09-17 | 2026-09-17, later — Everything on staging pushed to PRODUCTION (13 pages, seq 11): the client feedback, the web dev brief and the two legal pages; sitemap redeployed with 12 URLs; verify-live fixed — carries **gotchas** | [`2026-09-17-production-push.md`](./2026-09-17-production-push.md) |
 | 2026-09-17 | 2026-09-17 — Privacy Policy and Terms of Service pages, adapted from the implant centre, on staging (13 pages); footer legal links now local, SMS Terms link dropped — carries **gotchas** | [`2026-09-17-legal-pages-on-staging.md`](./2026-09-17-legal-pages-on-staging.md) |
 | 2026-09-15 | 2026-09-15 — The teammate's web dev brief (client call) applied on staging: phone back to the 383-8361 tracking number, Facials before Restoration, Biostimulators, wallet + signed agreement, real Google reviews; the Dr. Stone injection rules held for the client (`81845d05`) — carries **gotchas** | [`2026-09-15-web-dev-brief-on-staging.md`](./2026-09-15-web-dev-brief-on-staging.md) |

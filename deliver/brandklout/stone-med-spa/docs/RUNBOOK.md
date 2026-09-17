@@ -15,7 +15,16 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
-**2026-09-17, latest — EVERYTHING WENT TO PRODUCTION.** Production was eleven pages behind and
+**2026-09-17, latest — the drag rails' arrows never worked, and now do.** A client report ("the
+sliders buttons don't work") found that no arrow on the home reviews, /about's rooms or /results'
+reviews had ever been bound: `data-drag-scope` sat on the section head, which is a *sibling* of the
+rail, so the `closest()` lookup in `20-motion.js` found nothing. Fixed in the JS and the markup,
+with a new click gate `site-src/drag-test.mjs` (3/3). Production is seq 12 and staging seq 6,
+both `{"publishedPages":13}` and `verify-live` FAIL none. **Every existing gate had been green on
+this for two weeks — none of them clicks anything** —
+[run](./runbook/2026-09-17-drag-rail-arrows-never-bound.md).
+
+**2026-09-17 — EVERYTHING WENT TO PRODUCTION.** Production was eleven pages behind and
 the push is a whole-site replace, so the client's Asana feedback, the teammate's web dev brief pass
 and the two new legal pages all went live together: 13 pages, seq 11, `{"publishedPages":13}`.
 Gates: `verify-live` FAIL none (13 routes, **13/13 distinct titles** — the duplicate `<title>` from
