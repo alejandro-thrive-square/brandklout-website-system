@@ -21,7 +21,7 @@ Just the footer".
 ## Done
 
 - Backup: `.tmp/backup-2026-09-16-pre-footer-component/` (site + all 30 full rows).
-- `.tmp/footer-component.mjs --apply`: component `Footer` / `footer` (`XLiDD0IUiRS2tpQhNA8wg`,
+- Commit `e5cd7b67`. `.tmp/footer-component.mjs --apply`: component `Footer` / `footer` (`XLiDD0IUiRS2tpQhNA8wg`,
   34 nodes with the root) saved at seq 46 and read back. Then all 30 pages: the footer subtree was
   removed and a component ref put at the same index (seq 47). SEO cells were read-merge-written,
   and the legal template stayed a template. `--publish`.
