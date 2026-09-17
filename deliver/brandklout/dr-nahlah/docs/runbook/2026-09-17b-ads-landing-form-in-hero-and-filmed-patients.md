@@ -5,7 +5,7 @@ testimonials, and the GHL form belongs in the hero of every page.** Still local,
 published, and the form is still the placeholder — see the 2026-09-17 run for that blocker,
 which this pass does not change.
 
-## Done (`<sha>`)
+## Done (`05b37bf4`)
 
 ### The form is in the hero on all six pages that take one
 
