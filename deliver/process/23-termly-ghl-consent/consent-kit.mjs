@@ -43,7 +43,11 @@ const option = (name) => {
   return i === -1 ? null : argv[i + 1] ?? ''
 }
 
-const bridgeSource = () => readFileSync(BRIDGE_FILE, 'utf8').trim()
+// Always deployed as LF. Checkouts differ (core.autocrlf): bk-stone-dental had the kit as CRLF, main has LF.
+const CR = String.fromCharCode(13)
+const bridgeSource = () => readFileSync(BRIDGE_FILE, 'utf8').split(CR).join('').trim()
+// Line endings do not count: assets deployed from a CRLF checkout carry CR characters.
+const sameCode = (a, b) => (a || '').split(CR).join('').trim() === (b || '').split(CR).join('').trim()
 const bridgeVersion = () => (bridgeSource().match(/BrandkloutConsentBridge = "([\d.]+)"/) || [])[1]
 
 function minify() {
@@ -127,7 +131,7 @@ async function instaticWorker() {
   const file = (shell.files ?? []).find((f) => f.path === ASSET_PATH)
   const runtime = file ? shell.runtime?.scripts?.[file.id] : null
   const live = await fetch(BASE + '/').then((r) => r.text()).catch(() => '')
-  const state = !file ? 'missing' : file.content === want ? 'current' : 'outdated'
+  const state = !file ? 'missing' : sameCode(file.content, want) ? 'current' : 'outdated'
   const csp = (live.match(/http-equiv="Content-Security-Policy" content="([^"]*)"/) || [])[1] || ''
   const frameSrc = (csp.match(/frame-src ([^;]*)/) || [])[1] || '(no CSP)'
   console.log(`  asset ${state}${runtime ? ` (${runtime.placement}/${runtime.timing}/${runtime.scope?.type}, enabled=${runtime.enabled})` : ''}`)
@@ -159,7 +163,7 @@ async function instaticWorker() {
     // A SiteFile the server does not accept is dropped silently while the save answers ok, so read back.
     const after = (await getSite()).site
     const saved = (after.files ?? []).find((f) => f.path === ASSET_PATH)
-    const ok = saved && saved.content === want && after.runtime?.scripts?.[saved.id]?.enabled
+    const ok = saved && sameCode(saved.content, want) && after.runtime?.scripts?.[saved.id]?.enabled
     console.log(`  saved seq ${res?.seq ?? '?'}; read back: ${ok ? 'OK' : 'FAILED'}`)
     const marker = JSON.parse(readFileSync(cleanMarker(), 'utf8'))
     writeFileSync(cleanMarker(), JSON.stringify({ ...marker, ourSeq: res?.seq }))

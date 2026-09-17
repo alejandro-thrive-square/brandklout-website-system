@@ -145,6 +145,10 @@ All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form ca
 - **`git sparse-checkout add` re-applies the sparse patterns** and deletes tracked files outside them
   from the working tree. On 2026-09-17 that removed the old `deliver/brandklout/snippets/` mid-move.
   Recover them with `git show HEAD:<path>`.
+- **Line endings differ between checkouts.** The Instatic assets deployed on 2026-09-17 carry CRLF from
+  the worktree, while main's copy of the kit is LF. `consent-kit.mjs` ignores CR when it decides whether
+  an asset is current, and deploys LF from now on. Byte-comparing a Webflow hosted copy is still exact
+  (the min file has no line breaks).
 - **Changing consent reloads the form**, which clears any fields the visitor already filled in.
 - **Instatic `frame-src 'none'`** (Stone Surgical Arts, Stone Med Spa, West LA Implants) blocks GHL
   iframes outright. The bridge is ready for them, but a form needs the Embed block and its frame
