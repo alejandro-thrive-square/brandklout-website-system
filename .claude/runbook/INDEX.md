@@ -1,11 +1,20 @@
 # Runbook index
 
-11 runs, newest first. Each line is one file in this folder.
+20 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17 — bk-stone-dental merged into main (consent module 23) — carries **gotchas** | [`2026-09-17-bk-stone-dental-merged-consent-module.md`](./2026-09-17-bk-stone-dental-merged-consent-module.md) |
+| 2026-09-16 | 2026-09-16 — Google Drive access for agents via `scripts/drive.mjs` — carries **gotchas** | [`2026-09-16-google-drive-access.md`](./2026-09-16-google-drive-access.md) |
+| 2026-09-15 | 2026-09-15 — BugHerd staging loops launched in bk-mason-park, -kids, -west-la-implants — carries **gotchas** | [`2026-09-15-bugherd-staging-loops-launched.md`](./2026-09-15-bugherd-staging-loops-launched.md) |
+| 2026-09-12 | 2026-09-12 — Sienna accessibility widget on every Instatic site (all 8 published) | [`2026-09-12-sienna-accessibility-on-every-instatic-site.md`](./2026-09-12-sienna-accessibility-on-every-instatic-site.md) |
+| 2026-09-11 | 2026-09-11 — `new-client-worktree.sh` put worktrees under ~/Documents/orca; default path fixed | [`2026-09-11-new-client-worktree-path-fixed.md`](./2026-09-11-new-client-worktree-path-fixed.md) |
+| 2026-09-10 | 2026-09-10 — plugin ids renamed webzite.* -> brandklout.* on all five instances | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
+| 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (source + 3 live instances) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
+| 2026-09-09 | 2026-09-09 — the six client runbooks copied to main (snapshot) | [`2026-09-09-client-runbooks-copied-to-main.md`](./2026-09-09-client-runbooks-copied-to-main.md) |
+| 2026-09-09 | 2026-09-09 — bk-dr-nahlah, bk-mason-park and bk-stone-dental cleaned and merged | [`2026-09-09-three-worktrees-cleaned-and-merged.md`](./2026-09-09-three-worktrees-cleaned-and-merged.md) |
 | 2026-09-09 | 2026-09-09 — Instatic API sync promoted out of `dr-nahlah/` to process `22` (`e3d8f864`) | [`2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md`](./2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md) |
 | 2026-09-04 | 2026-09-04 — Stone split into three projects (`604da383`) | [`2026-09-04-stone-split-into-three-projects-604da383.md`](./2026-09-04-stone-split-into-three-projects-604da383.md) |
 | 2026-09-04 | 2026-09-04 — Stone client folder standardised; the module-number registry was wrong | [`2026-09-04-stone-client-folder-standardised-the-module-numb.md`](./2026-09-04-stone-client-folder-standardised-the-module-numb.md) |

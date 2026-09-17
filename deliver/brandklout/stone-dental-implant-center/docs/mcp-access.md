@@ -12,7 +12,6 @@ Client delivery (via the Brandklout partnership).
 |:---|:---|:---|
 | `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
-
 Partnership-level Asana access is covered by
 [../../docs/mcp-access.md](../../docs/mcp-access.md) and is **read-only**. It grants nothing here:
 being able to read this client's Asana tasks confers no permission to touch their website,
@@ -25,13 +24,11 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client is read-only, and now for a stronger reason than "not yet discovered".**
-> `list_sites` on 2026-08-07 against the live grant returned 9 sites and **none of them is Stone's**
-> — there is no site in Brandklout's workspace for this client, so there is no ID to act on. That
-> matches the unconfirmed scope: nothing has been built. Before any Webflow work here, Brandklout
-> must create the site in workspace `63b4b7393e89b78575e9a9bb` and the grant must be
-> **re-authorized ticking every existing client plus Stone** (re-authorization replaces the grant
-> wholesale — a sibling left unticked is silently revoked). Then record the ID here and in the
+> The site is now discovered and confirmed: **`6a07d5aac093f0e4521d29bc`** (2026-09-03,
+> `list_sites`). It is a **live production site** serving two brands' domains —
+> `stonedentalimplantcenter.com` and `stonesurgicalarts.com` (+ `www.` on both). Single-page
+> publishing is not available on this plan; every publish is a full-site publish to all four
+> domains. Add pages; never mutate existing pages or shared classes. Record any change in the
 > [client site registry](../../docs/mcp-access.md#client-site-registry).
 
 > [!NOTE]
@@ -40,7 +37,10 @@ hosting, CRM, or ad accounts.
 
 ## Target Resources
 - **Asana parent task**: no parent task - two standalone tasks (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
+- **Live site**: `6a07d5aac093f0e4521d29bc` — "Stone Dental Implant Center" (short name
+  `stone-surgical-arts`), confirmed via `list_sites` 2026-09-03. Domains:
+  `stonedentalimplantcenter.com` + `www.` and `stonesurgicalarts.com` + `www.` (one site, two
+  brands — see the registry caution). Last published 2026-09-03 (All-on-X ad campaign pages).
 - **Staging / platform account**: none.
 
 ## Allowed Operations
@@ -54,8 +54,13 @@ hosting, CRM, or ad accounts.
 - **Do not touch another Brandklout client's site.** The shared instance can reach all of them; this
   folder authorizes exactly one. A call carrying a sibling's site ID is out of bounds even though
   the grant permits it.
-- **Do not publish.** Local design approval comes first, then a Webflow build, and publishing is a
-  separate explicit go-ahead. A published page is live to real paid traffic.
+- **Do not mutate existing pages.** The site is live paid-traffic production for two brands
+  (`stonedentalimplantcenter.com`, `stonesurgicalarts.com`). Campaign work is add-only: build in
+  the `/ads-landing-pages/` folder, never restyle shared classes, never republish someone else's
+  page.
+- **Do not publish without explicit go-ahead in the current conversation.** This was given on
+  2026-09-03 for the All-on-X ad campaign trio, and used twice that day (initial publish +
+  copy-correction republish). A published page is live to real paid traffic.
 - Do not create MCP server instances for this client on your own initiative.
 - Do not write to Asana. Comments and status changes notify real Brandklout staff.
 - Do not invent testimonials, reviews, patient stories, or statistics for this practice. Real

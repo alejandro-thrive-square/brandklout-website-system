@@ -47,7 +47,7 @@ console.log('\nEmbed module — render behaviour\n')
 
 // 1. Identity and shape the host requires of a plugin module.
 check('module id is namespaced under the plugin id',
-  EMBED.id === 'webzite.embed-origins.embed')
+  EMBED.id === 'brandklout.embed-origins.embed')
 check('every schema key has a default', Object.keys(EMBED.schema)
   .every((k) => Object.prototype.hasOwnProperty.call(D, k)))
 check('root element is a single wrapper div (author classes land on it)',

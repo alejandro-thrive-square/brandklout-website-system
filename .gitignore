@@ -24,6 +24,8 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 .env
 .env.*
 !.env.example
+# Google OAuth client downloads — they belong in ~/.webzite/, never in a repo.
+client_secret_*.json
 
 # ===== Binary / Media Assets =====
 # Heavy binary/media assets are stored on VPS (source of truth), synced via rclone SFTP.
@@ -144,3 +146,17 @@ nul
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
 **/.tmp/.session
+
+# --- 2026-09-09: worktree hygiene ---------------------------------------------
+# Repo-ROOT .tmp/ is ad-hoc session scratch, not a workflow artifact folder. In
+# bk-stone-dental it held 3.6MB of MCP tool-schema dumps, image previews and a
+# live session token. Workflow artifacts belong in that workflow's own .tmp/.
+/.tmp/
+
+# MCP/admin session tokens. Same class as **/.tmp/.session above: a live
+# credential written next to the script that minted it.
+**/.tmp/mcp-session.txt
+**/.tmp/mcp-call.py
+
+# Editors keep creating this empty file at the repo root.
+/untitled.md

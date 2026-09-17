@@ -20,7 +20,8 @@ set -euo pipefail
 #   bash scripts/new-client-worktree.sh <client-slug> [options]
 #
 #   <client-slug>      Prefix of a folder under deliver/<pillar>/, e.g. "mason-park".
-#   --path <dir>       Where to create it. Default: the sibling Orca workspaces dir.
+#   --path <dir>       Where to create it. Default: ~/orca/workspaces/<repo>/<branch>
+#                      ($ORCA_WORKSPACES overrides ~/orca/workspaces).
 #   --branch <name>    Branch to create. Default: bk-<client-slug>.
 #   --add <path>       Extra repo path to include in the cone. Repeatable.
 #   --no-assets        Skip seeding heavy assets from main.
@@ -70,7 +71,11 @@ else
 fi
 
 BRANCH="${BRANCH:-bk-$CLIENT}"
-WT_PATH="${WT_PATH:-$(dirname "$MAIN")/../orca/workspaces/$(basename "$MAIN")/$BRANCH}"
+# Orca keeps every worktree under ~/orca/workspaces/<repo>/. Do not derive this from
+# $MAIN's parent: the main checkout sits at ~/Documents/Webzite Studio/<repo>, so
+# "$(dirname "$MAIN")/../orca" resolves to ~/Documents/orca and the worktree lands
+# beside nothing else (it did, for bk-brandklout-website on 2026-09-11).
+WT_PATH="${WT_PATH:-${ORCA_WORKSPACES:-$HOME/orca/workspaces}/$(basename "$MAIN")/$BRANCH}"
 
 # Shared surfaces every client build reads: the process library, the pillar's own
 # docs and scripts, tooling, and MCP config.

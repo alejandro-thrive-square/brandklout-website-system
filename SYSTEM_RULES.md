@@ -277,6 +277,30 @@ itself, and every `.env` loader in this system fills in only variables that are 
 so an unprefixed `USERNAME` silently resolves to the Windows login rather than the host account.
 Hence `SITEGROUND_USERNAME`, not `USERNAME`.
 
+**Google Drive is read through `scripts/drive.mjs`, signed in as a person.** An API key
+(`GOOGLEDRIVE`) is anonymous: it opens "anyone with the link" files only and answers 403 to any
+listing, so it cannot see folders shared with the Brandklout account. The script uses an OAuth
+"Desktop app" client (`GOOGLEDRIVEOAUTHID`, `GOOGLEDRIVEOAUTH`, Cloud project `agentic-508813`,
+scope `drive.readonly`) and writes the refresh token, `GOOGLEDRIVEREFRESH`, **into `[shared]` of the
+master**. A worktree `.env` would lose it on the next sync. The script reads the master before any
+worktree `.env` for the same reason.
+
+```bash
+node scripts/drive.mjs auth                       # one-time browser sign-in
+node scripts/drive.mjs roots                      # shared drives (one per client) + items shared directly
+node scripts/drive.mjs search <text> [--folders]  # includes shared drives
+node scripts/drive.mjs ls <folder id|url>
+node scripts/drive.mjs get <file id|url> [dir]    # Docs/Sheets/Slides export to docx/xlsx/pdf
+node scripts/drive.mjs pull <folder id|url> <dir>
+```
+
+The consent screen is in **Testing** (it cannot be published until Branding is complete, and it
+cannot be made Internal because the project has no organization). Google expires a Testing refresh
+token after **7 days**, so `invalid_grant` means run `auth` again. The downloaded client JSON is
+kept at `~/.webzite/google-drive-oauth-client.json`; a `client_secret_*.json` inside a repo is
+git-ignored. Which drive belongs to which client, and the shortcuts whose targets are not shared, is
+mapped in [deliver/brandklout/docs/GOOGLE_DRIVE.md](./deliver/brandklout/docs/GOOGLE_DRIVE.md).
+
 #### 4.2.1 Worktree → main asset mirror (automatic)
 
 Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges

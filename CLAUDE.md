@@ -21,6 +21,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 ## Quick Links
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
 - **Runbooks**: [SYSTEM_RULES.md §5](./SYSTEM_RULES.md) - one file per run under `deliver/brandklout/<client>/docs/runbook/`, indexed; read the index, not the history
+- **Client runbooks on `main` are a SNAPSHOT.** Each client's runbook is written on its own branch; `main` carries a copy taken 2026-09-09 so the history is visible from here. The branch is always the newer one — read it there before trusting a date. The re-sync command is in commit `3a19c955`.
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh`

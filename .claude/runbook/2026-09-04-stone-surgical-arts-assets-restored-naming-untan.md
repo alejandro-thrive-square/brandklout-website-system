@@ -45,6 +45,10 @@ of the 16 jobs read their source from `img/...` under
 `01-content-intake/.tmp/google-drive-images`, which is **empty** — the client Drive export is gone
 too. Only `dr-stone-portrait.webp` has another source (`get-assets.mjs`, off the Webflow CDN).
 
+> **Superseded 2026-09-16:** Drive now works through `scripts/drive.mjs` with new credentials. See
+> [2026-09-16-google-drive-access](./2026-09-16-google-drive-access.md). The paragraph below
+> describes the old keys only.
+
 **The Google Drive API is not a way back.** Confirmed by Alejandro 2026-09-04: the `GOOGLEDRIVE`,
 `GOOGLEDRIVEOAUTH` and `GOOGLEDRIVEOAUTHID` values were **never successfully used** — they are not
 correct credentials, and `drive-oauth.mjs` additionally wants a `GOOGLEDRIVEREFRESH` that has never

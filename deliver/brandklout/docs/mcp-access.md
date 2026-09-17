@@ -52,7 +52,7 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `grand-mission-dentistry/` | Grand Mission Dentistry | `698111847e9608eb30ee21c6` | **Confirmed 2026-08-07.** Domains `grandmissiondentistry.com`, `www.` — a large live site, 303 pages |
 | `arvada-dental-center/` | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **Confirmed 2026-08-07 by the user** as the site to edit. Domains `arvadadentalimplants.com`, `www.` See the copies warning below |
 | `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
-| `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
+| `stone-dental-implant-center/` | Stone Dental Implant Center | `6a07d5aac093f0e4521d29bc` | **Confirmed 2026-09-03** via `list_sites` (short name `stone-surgical-arts`). Domains `stonedentalimplantcenter.com` + `www.` **and** `stonesurgicalarts.com` + `www.` — one site, two brands. Live production site, 39 pages. Two-domain caution below |
 | `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
 | `legacy-dental-pasadena/` | Legacy Dental Pasadena - Cosmetic & Implant Dentistry | `68e12d861f12c7f04a762a8e` | **Confirmed 2026-08-20** via `get_site`. Short name `legacy-dental`. **78 pages, live production site** serving `legacydentalpasadena.com`. **Also carries `caldentalpasadena.com` + `www.` — a second brand. Publish staging-only until that is explained.** See the warning below |
 | `marvel-dental/` | Marvel Dental Main | `69aedbc6b0c7e78051fd6a2c` | **Confirmed 2026-08-21** via `get_site`. Short name `marvel-dental-main`. **77 pages, live production site** serving `marveldentaldds.com` + `www.`. Four other sites in the workspace carry the Marvel name and are old iterations — match on the ID. See the warning below |
@@ -95,12 +95,14 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 > `publishToWebflowSubdomain: true` and `customDomains: []` to gate a change; publishing to the
 > live domain is the user's call.
 
-> [!IMPORTANT]
-> **Stone Dental Implant Center has no site in this workspace.** `list_sites` returned 9 sites and
-> none of them is Stone's. This is consistent with its scope never having been confirmed — there is
-> nothing built yet. It is **read-only by definition**: there is no site ID to act on. When Brandklout
-> confirms the engagement they must create the site in this workspace and the grant must be
-> re-authorized (ticking every existing client plus Stone), then record the ID here.
+> [!CAUTION]
+> **Stone Dental Implant Center is live production and carries a second brand's domains.** Site
+> `6a07d5aac093f0e4521d29bc` (39 pages) serves `stonedentalimplantcenter.com` **and**
+> `stonesurgicalarts.com` (+ `www.` on both) — the surgical-arts brand lives on the same Webflow
+> site. Single-page publishing is not available on this plan (`pageId` returns `bad_request`), so
+> every publish is a full-site publish to all four domains. Add pages; never mutate an existing
+> page, a shared class, or a CMS item. The site's ad-landing-page folder is
+> `/ads-landing-pages/` (folder ID `6a9976fa58138b416a8de7ea`), created 2026-09-03.
 
 ### Workspace premise — RESOLVED 2026-08-07
 

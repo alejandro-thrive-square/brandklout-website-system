@@ -74,6 +74,14 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
 | 21 | Instatic Upload (build → import → publish) | _client-local — `bk-stone` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion.**_ |
 | 22 | Instatic API Sync (CSS registry, publish, parity gate) | [22-instatic-api-sync.md](./22-instatic-api-sync/22-instatic-api-sync.md) |
+| 23 | Termly Consent + GoHighLevel Bridge (Webflow and Instatic) | [23-termly-ghl-consent.md](./23-termly-ghl-consent/23-termly-ghl-consent.md) |
+
+### Consent module (`23`)
+
+Applies to every live client site, on either platform. Phase 1 (the GHL consent bridge) needs nothing
+from the client and is rolled out by the agent. Phase 2 (Termly script with `autoBlock=off` above GTM,
+trackers tagged, Consent Preferences link) waits for the client's Termly account, which is created by
+hand. The directive holds the site registry and rollout state.
 
 ### Instatic modules (`18`, `20`, `22`)
 
@@ -86,7 +94,7 @@ Not part of the offer-routing sequence — they apply to any engagement whose si
 `20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
 
 > [!IMPORTANT]
-> **00-22 are all claimed. The next free number is `23`.**
+> **00-23 are all claimed. The next free number is `24`.**
 >
 > Numbers are claimed across every worktree, not just `main`, and most of the claims are invisible
 > from here. `19-cloudflare-launch` is promoted into `deliver/process/` on the `bk-dr-nahlah`
