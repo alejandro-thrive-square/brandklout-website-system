@@ -36,6 +36,8 @@
 | `home/dental-savings-plan/index.html` | **Membership Plan.** Asana `1217892732561698`. |
 | `home/patient-reviews/index.html` | **Patient Reviews.** Asana `1217892732561699`. |
 | `home/thank-you/index.html` | **General Thank You.** Asana `1217894480351481`. `noindex`. |
+| `home/invisalign*/index.html` | **Invisalign paid funnel:** landing, consultation and thank-you routes. Local staging source, `noindex`. |
+| `home/new-patient-*/index.html` | **$189 New Patient paid funnel:** landing, consultation and thank-you routes. Local staging source, `noindex`. |
 | `home/assets/site.css` | The whole stylesheet, one file. Fluid root first, then the layout, then the journey layer. |
 | `home/assets/site.js` | Mobile menu, deferred map. |
 | `home/assets/journey.js` | The GSAP scroll layer — the three scenes described in [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md). |
@@ -60,6 +62,10 @@
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
+| `.tmp/build-ad-pages.mjs` | Rebuilds the six paid routes from the reviewed Invisalign, New Patients and Thank You source pages. |
+| `.tmp/place-ad-embeds.mjs` | Replaces the four form placeholders with the two exact `brandklout.embed-origins` GHL modules and adds call tracking to all six pages. Run after conversion. |
+| `.tmp/probe-ad-journey.mjs` | Focused-tab proof that the offer, path and proof scenes really pin and that the path changes at 25/50/75%. |
+| `.tmp/qa-ad-pages.mjs` | Six pages at the six required widths: overflow, broken images, form slots, CTA reachability, tap targets and browser errors. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
 | `.tmp/apply-stock.mjs` | The page→stock-frame map for the 31 treatment pages and Dr. Sung's portrait swap. Idempotent; `--check` reports. |
@@ -607,6 +613,53 @@ margin inside the file (#3), and the team page has the agency's named portraits 
 Drive is a **shared drive** (`drive.mjs roots`), and Asana detail can live in a comment on an
 unrelated task (`search_tasks` over the workspace found #65's insurance note).
 
+## The paid-traffic funnels, redesigned for staging
+
+Production keeps the exact Webflow-derived pages in workflow 10. The routes here are the redesigned
+staging equivalents and must not be used to overwrite production before the client approves the
+new site. The six route names remain identical so promotion does not require an ad URL change:
+
+| Campaign | Landing | Consultation | Thank you | Form |
+| :--- | :--- | :--- | :--- | :--- |
+| Invisalign | `/invisalign` | `/invisalign-consultation` | `/invisalign-thank-you` | `YbX91GhEDKkCN4GH4gka` |
+| $189 New Patient | `/new-patient-special` | `/new-patient-special-consultation` | `/new-patient-thank-you` | `AFu5BpJpMjgSnSf8yybc` |
+
+`build-ad-pages.mjs` derives them from the reviewed staging pages, not from the Webflow markup:
+the design authority is `home/services/invisalign/`, `home/new-patients/` and `home/thank-you/`;
+workflow 10 remains the authority for each campaign's form id and GHL tracking scripts. Lead pages
+are compressed to eight named chapters. The overlapping Invisalign qualification, benefits and
+comparison beats do not repeat on the ad page; the organic service page keeps every one of them.
+
+The ad layer adds a focused header, a persistent phone/form rail, one campaign form chapter, two
+short desktop pins for offer and proof, touch-safe flow, and campaign-specific confirmation copy.
+The form in local HTML is a visual placeholder. Instatic's importer cannot create plugin modules,
+so `place-ad-embeds.mjs` must run after `fetch-nodes.mjs` and before importing pages. It refuses a
+crossed campaign mapping, requires four forms and six call-tracking blocks, and writes nothing if
+any assertion fails. It deliberately does not copy the old Elfsight embed because these pages use
+the redesigned site's own proof chapter.
+
+Local gates, 2026-09-17:
+
+```bash
+node .tmp/build-ad-pages.mjs
+node .tmp/check.mjs home/invisalign/index.html home/invisalign-consultation/index.html \
+  home/invisalign-thank-you/index.html home/new-patient-special/index.html \
+  home/new-patient-special-consultation/index.html home/new-patient-thank-you/index.html
+node deliver/brandklout/scripts/journey-audit.mjs \
+  home/invisalign home/invisalign-consultation home/new-patient-special home/new-patient-special-consultation
+cd .tmp
+node probe-ad-journey.mjs ../home/invisalign/index.html
+node probe-ad-journey.mjs ../home/invisalign-consultation/index.html
+node probe-ad-journey.mjs ../home/new-patient-special/index.html
+node probe-ad-journey.mjs ../home/new-patient-special-consultation/index.html
+node qa-ad-pages.mjs
+```
+
+Results: structural check 0 errors; all four lead pages pass the static journey gate; all twelve
+offer/proof pin checks and all four 25/50/75 path scrubs pass; 36 responsive renders pass with 0
+problems. The canary was visually reviewed at 1440 and 390. No staging or production write is part
+of the build command.
+
 ## Instatic import
 
 `home/` is already shaped for it: one stylesheet, one script, classic `<script>` tags and no
@@ -639,6 +692,7 @@ RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs,
 RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
 node apply-body-class.mjs                              # 8b. <body class> onto the converted root
 node apply-image-alt.mjs                               # 8c. alt text + the eager/high hero hints
+node place-ad-embeds.mjs                               # 8d. four GHL forms + six call-tracking blocks
 
 node import-fonts.mjs                                  # 9. the three families, self-hosted by Instatic
 node import-styles.mjs                                 # 10. class rules + site.css as a code asset

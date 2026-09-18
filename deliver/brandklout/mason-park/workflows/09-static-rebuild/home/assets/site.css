@@ -6035,6 +6035,64 @@ a.el-stack { display: block; text-decoration: none; cursor: pointer; }
 @media (min-width: 768px) {
   .tm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
 }
+
+/* ===========================================================================
+   PAID TRAFFIC, 2026-09-17
+
+   The six campaign routes reuse the reviewed site chapters. This layer keeps
+   the form and campaign action reachable, removes navigation leakage, and
+   gives the GHL Embed block a deliberate home without changing editorial pages.
+   ======================================================================== */
+.is-ad-page .navbar_menu { display: none; }
+.is-ad-page .navbar_toggle { display: none; }
+.is-ad-page .navbar_actions { margin-left: auto; }
+.is-ad-page .footer_grid { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, .8fr)); }
+.is-ad-page .footer_grid > div:nth-child(3) { display: none; }
+
+.ad-consult { --fg: var(--paper); --fg-soft: rgba(255, 255, 255, .72); --rule: rgba(255, 255, 255, .16); background: var(--ink); color: var(--paper); }
+.ad-consult_grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(22rem, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.ad-consult_copy { position: sticky; top: calc(var(--jr-nav-h, 5.5rem) + 2rem); }
+.ch .ad-consult_copy h2 { max-width: 11ch; color: var(--paper); }
+.ch .ad-consult_copy > p { max-width: 39rem; color: var(--fg-soft); }
+.ad-consult_points { list-style: none; margin: 2.5rem 0; padding: 0; border-top: 1px solid var(--rule); }
+.ad-consult_points li { padding: 1rem 0; border-bottom: 1px solid var(--rule); font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; text-transform: uppercase; }
+.ch .ad-consult_phone { color: var(--paper); }
+.ad-consult_phone a { color: var(--paper); border-bottom: 1px solid var(--copper); }
+.ad-form-card { background: var(--paper); color: var(--ink); padding: clamp(1.25rem, 3vw, 2.25rem); border-top: .25rem solid var(--copper); box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .22); }
+.ch .ad-form-card p { color: var(--ink); }
+.ch .ad-form-card .ad-form-kicker { margin: 0 0 1rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--copper-dark); }
+.ad-form-slot { min-height: 45.2rem; display: grid; place-content: center; text-align: center; border: 1px solid var(--rule-strong); background: var(--sand); }
+.ad-form-slot > p { margin: 0; font-family: var(--font-display); font-size: var(--f-h3); }
+.ad-form-slot > small { display: block; max-width: 24ch; margin: .6rem auto 0; color: #5f6667; }
+.ch .ad-form-card .ad-form-note { margin: 1rem 0 0; font-size: var(--f-label); color: #5f6667; }
+
+.ad-rail { position: fixed; z-index: 95; left: 50%; bottom: 1rem; transform: translateX(-50%); width: min(calc(100% - 2rem), 54rem); display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: .65rem .65rem .65rem 1.25rem; background: rgba(30, 36, 38, .95); color: var(--paper); border: 1px solid rgba(255, 255, 255, .15); box-shadow: 0 .8rem 2.5rem rgba(0, 0, 0, .24); backdrop-filter: blur(1rem); }
+.ad-rail span { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; text-transform: uppercase; }
+.ad-rail > a:not(.button) { color: var(--paper); font-family: var(--font-ui); }
+.ad-rail .button { min-height: 2.8rem; padding: .65rem 1rem; }
+.is-ad-page .callbar_component { display: none; }
+
+@media (max-width: 899px) {
+  .ad-consult_grid { grid-template-columns: 1fr; }
+  .ad-consult_copy { position: static; }
+  .is-ad-page .footer_grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 599px) {
+  .is-ad-page { padding-bottom: 5.2rem; }
+  .is-ad-page .topbar_note, .is-ad-page .navbar_phone { display: none; }
+  .is-ad-page .navbar_actions .button { display: inline-flex; }
+  .ad-form-slot { min-height: 42rem; }
+  .ad-rail { bottom: .5rem; width: calc(100% - 1rem); grid-template-columns: 1fr auto; gap: .5rem; padding: .5rem; }
+  .ad-rail span { display: none; }
+  .ad-rail a { min-height: 3.7rem; }
+  .ad-rail .button { min-height: 3.7rem; }
+  .ad-rail > a:not(.button) { display: inline-flex; align-items: center; justify-content: center; }
+  .is-ad-page .footer_grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ad-rail { backdrop-filter: none; }
+}
 @media (min-width: 992px) {
   .tm-group { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: clamp(2rem, 4vw, 4rem); align-items: start; }
   .tm-group_head { position: sticky; top: calc(var(--jr-nav-h, 5.5rem) + 1.5rem); }

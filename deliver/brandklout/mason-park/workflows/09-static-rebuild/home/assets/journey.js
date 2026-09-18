@@ -590,6 +590,51 @@
 
 
 /* ===========================================================================
+   PAID-PAGE CONTINUITY, 2026-09-17.
+
+   The campaign arc already owns the horizontal treatment path. Two shorter
+   desktop pins keep the offer and the proof heading present while their own
+   evidence passes. They are intentionally absent on touch layouts, where the
+   same content remains in normal document flow, and under reduced motion.
+   ======================================================================== */
+(function () {
+  "use strict";
+  if (!document.body.classList.contains("is-ad-page")) return;
+  if (!(window.gsap && window.ScrollTrigger)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  var offer = document.querySelector("#cost .svc-head, #offer .cp-head");
+  if (offer) {
+    ScrollTrigger.create({
+      id: "ad-offer-pin",
+      trigger: offer,
+      start: "top 22%",
+      endTrigger: offer.closest("section"),
+      end: "bottom 58%",
+      pin: true,
+      pinSpacing: false
+    });
+  }
+
+  var proof = document.querySelector("#proof .cp-head, #proof .rg-head");
+  if (proof) {
+    ScrollTrigger.create({
+      id: "ad-proof-pin",
+      trigger: proof,
+      start: "top 22%",
+      endTrigger: proof.closest("section"),
+      end: "bottom 62%",
+      pin: true,
+      pinSpacing: false
+    });
+  }
+})();
+
+
+/* ===========================================================================
    THE GENERIC HOOKS — added 2026-09-01 with the nine core pages.
 
    The block above binds every scene to a homepage chapter class and an id:
