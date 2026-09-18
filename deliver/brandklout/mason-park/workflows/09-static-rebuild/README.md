@@ -36,8 +36,7 @@
 | `home/dental-savings-plan/index.html` | **Membership Plan.** Asana `1217892732561698`. |
 | `home/patient-reviews/index.html` | **Patient Reviews.** Asana `1217892732561699`. |
 | `home/thank-you/index.html` | **General Thank You.** Asana `1217894480351481`. `noindex`. |
-| `home/invisalign*/index.html` | **Invisalign paid funnel:** landing, consultation and thank-you routes. Local staging source, `noindex`. |
-| `home/new-patient-*/index.html` | **$189 New Patient paid funnel:** landing, consultation and thank-you routes. Local staging source, `noindex`. |
+| `home/ads-landing-pages/*/index.html` | **The six paid-traffic routes**, two campaigns of three (landing, consultation, thank you), in Livewell's information flow. Written by `build-ads-landing-pages.mjs`, never by hand. `noindex`. |
 | `home/assets/site.css` | The whole stylesheet, one file. Fluid root first, then the layout, then the journey layer. |
 | `home/assets/site.js` | Mobile menu, deferred map. |
 | `home/assets/journey.js` | The GSAP scroll layer — the three scenes described in [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md). |
@@ -62,9 +61,14 @@
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
-| `.tmp/build-ad-pages.mjs` | Rebuilds the six paid routes from the reviewed Invisalign, New Patients and Thank You source pages. |
+| `.tmp/build-ads-landing-pages.mjs` | Writes the six paid routes under `home/ads-landing-pages/` from campaign data: copy, photographs, reviews, FAQ, offer and disclaimer per campaign, one shared chrome. Edit the data, re-run, never edit the six files. |
 | `.tmp/place-ad-embeds.mjs` | Replaces the four form placeholders with the two exact `brandklout.embed-origins` GHL modules and adds call tracking to all six pages. Run after conversion. |
-| `.tmp/probe-ad-journey.mjs` | Focused-tab proof that the offer, path and proof scenes really pin and that the path changes at 25/50/75%. |
+| `.tmp/probe-ad-journey.mjs` | Focused-tab proof of the paid page's three scenes: a different journey move lit at 12/38/62/88% with its own photograph on top, the Why head held while the reasons pass, the path travelling at 25/50/75%, and the rail away over the hero. Takes a file or a URL. |
+| `.tmp/probe-adblock.mjs` | **Asks the browser, over CDP, whether a blocker's cosmetic list matches any element of a published page.** Exit 1 on a hit. The injected sheet is invisible to `document.styleSheets` and absent on `file://`. |
+| `.tmp/probe-ad-form-box.mjs` | The published GHL iframe's box and every ancestor's up to the card. Catches a form that loaded but did not fill its card. |
+| `.tmp/probe-rule.mjs` | Which rules, from which published sheet, give an element a property. For "it computes to something the local file never said". |
+| `.tmp/shot-el.mjs` | One selector of one page (file or URL), scrolled to the top and SETTLED before the screenshot, with what each image inside it loaded. `OFFSET=<px>` nudges the scroll. |
+| `.tmp/retire-old-ad-routes.mjs` | Removes the six first-cut root routes from **staging only** (dry run by default, refuses production, refuses until the six replacements exist). |
 | `.tmp/qa-ad-pages.mjs` | Six pages at the six required widths: overflow, broken images, form slots, CTA reachability, tap targets and browser errors. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
@@ -613,75 +617,137 @@ margin inside the file (#3), and the team page has the agency's named portraits 
 Drive is a **shared drive** (`drive.mjs roots`), and Asana detail can live in a comment on an
 unrelated task (`search_tasks` over the workspace found #65's insurance note).
 
-## The paid-traffic funnels, redesigned for staging
+## The paid-traffic funnels, under `/ads-landing-pages/`
 
-Production keeps the exact Webflow-derived pages in workflow 10. The routes here are the redesigned
-staging equivalents and must not be used to overwrite production before the client approves the
-new site. The six route names remain identical so promotion does not require an ad URL change:
-
-**Published to staging on 2026-09-18.** Staging now has 63/63 published page rows with no draft
-drift. All six routes pass the live desktop and 390px gates; the four form frames and loaders
-return 200 with the campaign IDs below; all six number-pool scripts return 200 and swap the public
-number. Production remains the workflow-10 Webflow port.
+Production keeps the exact Webflow-derived pages in workflow 10, at the six root slugs the running
+ads point at. The routes here are the redesigned staging set, and they live **under
+`/ads-landing-pages/`**, the same folder the agency's reference set (Livewell) uses:
 
 | Campaign | Landing | Consultation | Thank you | Form |
 | :--- | :--- | :--- | :--- | :--- |
-| Invisalign | `/invisalign` | `/invisalign-consultation` | `/invisalign-thank-you` | `YbX91GhEDKkCN4GH4gka` |
-| $189 New Patient | `/new-patient-special` | `/new-patient-special-consultation` | `/new-patient-thank-you` | `AFu5BpJpMjgSnSf8yybc` |
+| Invisalign | `/ads-landing-pages/invisalign` | `/ads-landing-pages/invisalign-consultation` | `/ads-landing-pages/invisalign-thank-you` | `YbX91GhEDKkCN4GH4gka` |
+| $189 New Patient | `/ads-landing-pages/new-patient-special` | `/ads-landing-pages/new-patient-special-consultation` | `/ads-landing-pages/new-patient-thank-you` | `AFu5BpJpMjgSnSf8yybc` |
 
-`build-ad-pages.mjs` derives them from the reviewed staging pages, not from the Webflow markup:
-the design authority is `home/services/invisalign/`, `home/new-patients/` and `home/thank-you/`;
-workflow 10 remains the authority for each campaign's form id and GHL tracking scripts. Lead pages
-are compressed to eight named chapters. The overlapping Invisalign qualification, benefits and
-comparison beats do not repeat on the ad page; the organic service page keeps every one of them.
+**Second cut, published to staging on 2026-09-18.** The first cut (2026-09-17) was the organic
+service page with a form chapter added near the bottom and the consultation page a clone of the
+landing page. The agency's verdict: *"this output does not convince me. These landing pages should
+have the same flow of information that Livewell has."* So `build-ads-landing-pages.mjs` writes the
+six pages fresh, in Livewell's information flow and Mason Park's own design system. The first-cut
+root routes were removed from staging (`retire-old-ad-routes.mjs`, staging only).
 
-The ad layer adds a focused header, a persistent phone/form rail, one campaign form chapter, two
-short desktop pins for offer and proof, touch-safe flow, and campaign-specific confirmation copy.
-The form in local HTML is a visual placeholder. Instatic's importer cannot create plugin modules,
-so `place-ad-embeds.mjs` must run after `fetch-nodes.mjs` and before importing pages. It refuses a
-crossed campaign mapping, requires four forms and six call-tracking blocks, and writes nothing if
-any assertion fails. It deliberately does not copy the old Elfsight embed because these pages use
-the redesigned site's own proof chapter.
+### The flow, and what each beat is for
 
-Local gates, 2026-09-17:
+| Page | Chapters, in order |
+| :--- | :--- |
+| **Landing** (8) | **Arrival**: promise, offer, two CTAs, three facts, *and the lead form in the hero*. **The Journey**: four moves from "life before" to "the finish", one photograph each, the practice's own review lines as the quotes. **Why Here**: four reasons, then who it is for (three doors). **The Dentist**: the portrait split and four counted figures (two dossiers on the new-patient page). **The Path**: the pinned sideways steps. **The Proof**: the written review and the rail, then the rooms (`el-mosaic`). **Questions**: the accordion, cost and insurance first. **The Invitation**: offer restated, phone, map, credentials, disclaimer. |
+| **Consultation** (4) | **Arrival** with the form, offer chips and a byline. **The Proof** ("Hear from our patients"). **The Dentist** ("One dentist, start to finish") with the credential strip and the disclaimer. **The Invitation**. Short on purpose, as Livewell's is: the visitor has already decided. |
+| **Thank you** (5) | **Arrival** with the phone, no form. **The Call**: what to expect, as three moments, beside "why not to wait". **Why Mason Park**: three pillars. **Questions**. **The Invitation**: the number at headline size, hours, map, credentials, disclaimer. |
+
+Every CTA on a landing page goes to its consultation page, as Livewell's do; the hero form is there
+for the visitor who is already decided. The practice publishes no before-and-after cases, so the
+reference's smile gallery is not reproduced: the proof is the practice's 1,037 Google reviews and
+its own rooms. Nothing on these pages is invented.
+
+### Motion
+
+Three scroll-driven scenes on each landing page, all in the paid block at the end of `journey.js`
+and the shared scenes it reuses:
+
+| Scene | What the scroll does |
+| :--- | :--- |
+| **The Journey** (signature) | Desktop pointer: the stage pins, the four photographs crossfade on the scrub and only the lit move is open, so four moves and their quotes fit one window. Touch, under 900, reduced motion or no GSAP: nothing pins; the photograph holds under the header (CSS sticky) and an `IntersectionObserver` line at 72% of the window swaps it as each move passes. |
+| **Why Here** | The head holds in the left column while the four reasons pass. The reasons are **rows**, not a two by two: as a grid the column was shorter than the head and the pin measured a range of 0px. The section carries `data-no-depart` so the shared departure does not fade a head that is pinned. |
+| **The Path** | The site's own pinned track. |
+
+The rail (offer, phone, next step) waits until the hero has passed, because while the form itself is
+on screen a second bar offering the form is noise. After that it is in reach at every depth.
+
+### Two things that cost this run, and their gates
+
+1. **Ad blockers hide `ad-*` class names.** The first import used `is-ad`, `ad-hero`, `ad-rail`,
+   `ad-place` and `ad-disclaimer`. All five are on the generic cosmetic lists that uBlock, AdGuard,
+   Brave and this workstation's NordVPN Threat Protection apply, as
+   `position: absolute !important; clip-path: inset(100%) !important`. On staging the whole arrival,
+   form included, collapsed to a 0px box while every other gate was green; locally it rendered
+   perfectly, because the list is not applied to `file://`. The first cut's `.ad-rail` had been
+   hidden for every blocked visitor since it shipped. **The namespace is `lp-*` / `is-lp` /
+   `is-lp-page` now. Never name anything on a paid page `ad`.** `probe-adblock.mjs` asks the browser
+   over CDP which rules match each element and fails on any rule that is not the page's own; an
+   in-page `document.styleSheets` scan cannot see the injected sheet.
+2. **The placeholder's centring grid shrank the published form.** After import the slot node *is* the
+   Embed module: it keeps the class and gains `wz-embed`. `display: grid; place-content: center`
+   left the GHL iframe at its 300px intrinsic width in the corner of a 578px card. The placeholder
+   look is scoped to `:not(.wz-embed)`, the published slot is a full-width block, and its height is
+   reserved (`min-height: 50rem`) because the frame arrives at 150px and grows to 800 to 900 a few
+   seconds later. `probe-ad-form-box.mjs` prints the iframe and every ancestor up to the card.
+
+`place-ad-embeds.mjs` still looks up each page's form and tracking scripts in workflow 10's records
+by the **bare** slug (the last path segment), refuses a crossed campaign mapping, requires four
+forms and six call-tracking blocks, and writes nothing if any assertion fails.
+
+### Local gates
 
 ```bash
-node .tmp/build-ad-pages.mjs
-node .tmp/check.mjs home/invisalign/index.html home/invisalign-consultation/index.html \
-  home/invisalign-thank-you/index.html home/new-patient-special/index.html \
-  home/new-patient-special-consultation/index.html home/new-patient-thank-you/index.html
+node .tmp/build-ads-landing-pages.mjs
+node .tmp/check.mjs home/ads-landing-pages/*/index.html
 node deliver/brandklout/scripts/journey-audit.mjs \
-  home/invisalign home/invisalign-consultation home/new-patient-special home/new-patient-special-consultation
+  home/ads-landing-pages/invisalign home/ads-landing-pages/new-patient-special
 cd .tmp
-node probe-ad-journey.mjs ../home/invisalign/index.html
-node probe-ad-journey.mjs ../home/invisalign-consultation/index.html
-node probe-ad-journey.mjs ../home/new-patient-special/index.html
-node probe-ad-journey.mjs ../home/new-patient-special-consultation/index.html
-node qa-ad-pages.mjs
+node probe-ad-journey.mjs ../home/ads-landing-pages/invisalign/index.html
+node probe-ad-journey.mjs ../home/ads-landing-pages/new-patient-special/index.html
+node qa-ad-pages.mjs                                   # 6 pages x 6 widths
+node shot-el.mjs <page> <selector> <out.png> [w] [h]   # one element, after it has settled
 ```
 
-Results: structural check 0 errors; all four lead pages pass the static journey gate; all twelve
-offer/proof pin checks and all four 25/50/75 path scrubs pass; 36 responsive renders pass with 0
-problems. The canary was visually reviewed at 1440 and 390. The build command itself performs no
-staging or production write.
+Results, 2026-09-18: structural check 0 errors; both landing pages pass the static journey gate
+(8 chapters, 3 pins, 22 scrubs); both pass every assertion of the scene probe (a different move lit
+at 12/38/62/88%, its photograph on top, only the lit move open, the stage fits the window, the Why
+head held while the reasons pass, the path travelling at 25/50/75%, the rail away over the hero and
+in reach mid-page); 36 responsive renders, 0 problems. The journey audit is run on the two landing
+pages only: the consultation and thank-you pages are 4 and 5 chapters by design.
 
-Live staging gates:
+`shot.mjs` photographs the page on the move, so a mask reveal or a lazy image can be caught
+mid-arrival and look broken (two photographs did). `shot-el.mjs` scrolls one selector to the top,
+waits, and reports what each image inside it actually loaded.
+
+### Live staging gates
 
 ```bash
 cd .tmp
-INSTATIC_BASE_URL=https://staging.masonparkdental.com node verify-ad-draft.mjs
-node verify-live.mjs https://staging.masonparkdental.com \
-  /invisalign /invisalign-consultation /invisalign-thank-you \
-  /new-patient-special /new-patient-special-consultation /new-patient-thank-you
-node verify-ad-responsive-live.mjs https://staging.masonparkdental.com
-node verify-ad-tracking-isolated.mjs https://staging.masonparkdental.com
-TARGET_ORIGIN=https://staging.masonparkdental.com \
-  node ../../10-lp-instatic/.tmp/verify-form.mjs
+B=https://staging.masonparkdental.com
+INSTATIC_BASE_URL=$B node verify-ad-draft.mjs                      # before the publish
+MSYS_NO_PATHCONV=1 node verify-live.mjs $B /ads-landing-pages/invisalign ...   # see the note below
+node verify-ad-responsive-live.mjs $B
+node verify-ad-tracking-isolated.mjs $B
+TARGET_ORIGIN=$B TARGET_PREFIX=ads-landing-pages/ node ../../10-lp-instatic/.tmp/verify-form.mjs
+node probe-adblock.mjs $B/ads-landing-pages/invisalign ...         # all six
+node probe-ad-form-box.mjs $B/ads-landing-pages/invisalign-consultation
+node probe-ad-journey.mjs $B/ads-landing-pages/invisalign          # waits 14 s for the form to settle
 ```
+
+All pass on 2026-09-18: six 200s, 0 broken images, 0 overflow; six 390px renders clean; four form
+frames and loaders 200 with the right campaign id, 514px wide in their cards, no form on either
+thank-you page, nothing blocked by CSP; all six number-pool scripts 200 and the public number
+swapped; 0 elements matched by a blocker list; every scene assertion passes on the published page.
+
+**From Git Bash, an argument that starts with `/` is rewritten into a Windows path**
+(`/ads-landing-pages/x` became `C:/Program Files/Git/ads-landing-pages/x` and every route 404ed).
+Set `MSYS_NO_PATHCONV=1` for `verify-live.mjs`, or run it from PowerShell.
 
 `verify-ad-tracking-isolated.mjs` deliberately opens a fresh browser context per route. Reusing
 one browser across the staging and Webflow origins can suppress a later number-pool request or
 delay its rewrite, producing a false negative even though an isolated ad visit swaps correctly.
+
+### At promotion, three things change outside this repository
+
+1. **The two GHL forms redirect to production's root thank-you slugs.** They are the same forms the
+   live ads use, so they were not touched. When this set goes live, each form's redirect has to
+   become `/ads-landing-pages/<campaign>-thank-you`, or the conversion fires on the old page.
+2. **The ads' final URLs** move from `/invisalign` and `/new-patient-special` to the
+   `/ads-landing-pages/` routes, or the old root slugs need redirecting. Instatic has no URL
+   redirects of its own; the legacy-domain Cloudflare Worker (workflow 12) is the place for them.
+3. Production is a different build with its own stylesheet, script bundle and media. These pages
+   depend on staging's, so they go live with the rest of the staging site, not before it.
 
 ## Instatic import
 
@@ -731,10 +797,20 @@ WSL when it exists. The npm shell shim needs a WSL-side Node installation and ot
 `exec: node: not found`, before touching the remote container. Never export `RAILWAY_TOKEN`; the
 CLI's own authenticated session remains the authority.
 
-For an incremental paid-route import, do not run `reset-to-deliverable`: import only the six slugs
-with `import-pages.mjs --only /<slug>`, then reapply both template scripts, import styles, and
-re-import scripts after the rows exist so its explicit page-id scope includes all 63 pages. Run
-`verify-ad-draft.mjs` before the one publish.
+For an incremental paid-route import, do not run `reset-to-deliverable` and do not re-ship the
+whole site: copy the six `instatic/pages/ads-landing-pages__*.json` into `instatic/pages-ads/`,
+then `ship-payload.mjs --dir pages-ads`, `run-converter.mjs`, `fetch-nodes.mjs` (which leaves
+`converted-pages.json` holding those six), the three patch steps (8b to 8d), and
+`import-pages.mjs` (add `--overwrite` to replace rows that already carry content). Then reapply
+both template scripts, import styles, and re-import scripts after the rows exist so its explicit
+page-id scope includes all 63 pages. Run `verify-ad-draft.mjs` before the one publish. The status
+call straight after a publish can answer 502 while the container settles; the publish itself has
+already returned its page count.
+
+On Windows the three transport scripts ask the `bash` they get which spelling of the bundled
+`railway.exe` it can execute: from PowerShell `bash` is WSL (`/mnt/c/...`), from a Git Bash session
+it is MSYS (`/c/...`), and assuming WSL failed with "No such file or directory". They also set
+`MSYS_NO_PATHCONV`, so the remote `/tmp/...` paths are not rewritten into Windows ones.
 
 ### The BugHerd sidebar is on staging, and only staging
 

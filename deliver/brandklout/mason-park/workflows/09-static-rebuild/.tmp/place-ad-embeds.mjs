@@ -17,10 +17,15 @@ const PAGES_FILE = path.join(HERE, "converted-pages.json");
 const FORMS_FILE = path.join(HERE, "..", "..", "10-lp-instatic", ".tmp", "out", "forms.json");
 const TRACKING_FILE = path.join(HERE, "..", "..", "10-lp-instatic", ".tmp", "out", "tracking.json");
 const MODULE_ID = "brandklout.embed-origins.embed";
+// The six routes live under /ads-landing-pages/ since 2026-09-18. Workflow 10
+// still keys its form and tracking records by the bare production slug, so
+// the last path segment is what looks them up.
+const PREFIX = "/ads-landing-pages";
 const AD_SLUGS = new Set([
-  "/invisalign", "/invisalign-consultation", "/invisalign-thank-you",
-  "/new-patient-special", "/new-patient-special-consultation", "/new-patient-thank-you",
-]);
+  "invisalign", "invisalign-consultation", "invisalign-thank-you",
+  "new-patient-special", "new-patient-special-consultation", "new-patient-thank-you",
+].map((s) => `${PREFIX}/${s}`));
+const bare = (slug) => "/" + slug.split("/").pop();
 
 const pages = JSON.parse(fs.readFileSync(PAGES_FILE, "utf8"));
 const forms = JSON.parse(fs.readFileSync(FORMS_FILE, "utf8"));
@@ -35,7 +40,7 @@ let trackingPlaced = 0;
 for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
   const nodes = page.body.nodes;
   const slots = Object.values(nodes).filter((n) => n.props?.htmlAttributes?.["data-ghl-form"]);
-  const form = formBySlug.get(page.slug);
+  const form = formBySlug.get(bare(page.slug));
 
   if (!form) {
     if (slots.length) problems.push(`${page.slug}: thank-you page unexpectedly has a form slot`);
@@ -68,7 +73,7 @@ for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
     formsPlaced++;
   }
 
-  const sourceScripts = trackingBySlug.get(page.slug)?.scripts ?? [];
+  const sourceScripts = trackingBySlug.get(bare(page.slug))?.scripts ?? [];
   const scripts = sourceScripts.filter((s) => s.includes("backend.leadconnectorhq.com"));
   if (scripts.length !== 2) {
     problems.push(`${page.slug}: expected the two GHL tracking scripts, found ${scripts.length}`);
@@ -93,7 +98,7 @@ for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
     },
     breakpointOverrides: {},
     children: [],
-    classIds: ["ad-tracking"],
+    classIds: ["lp-tracking"],
     parentId: root,
   };
   nodes[root].children.push(nodeId);
@@ -112,7 +117,7 @@ for (const page of adPages) {
   );
   if (!formNode) continue;
   const id = formNode.props.snippet.match(/data-form-id="([^"]+)"/)?.[1];
-  const campaign = page.slug.startsWith("/invisalign") ? "invisalign" : "new-patient";
+  const campaign = bare(page.slug).startsWith("/invisalign") ? "invisalign" : "new-patient";
   if (!idsByCampaign.has(campaign)) idsByCampaign.set(campaign, new Set());
   idsByCampaign.get(campaign).add(id);
 }

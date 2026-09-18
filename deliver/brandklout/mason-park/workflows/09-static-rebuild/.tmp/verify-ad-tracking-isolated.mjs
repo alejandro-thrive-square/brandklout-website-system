@@ -7,7 +7,7 @@ const PUBLIC = "(281) 769-8878";
 const routes = [
   "invisalign", "invisalign-consultation", "invisalign-thank-you",
   "new-patient-special", "new-patient-special-consultation", "new-patient-thank-you",
-];
+].map((slug) => `ads-landing-pages/${slug}`);
 
 const browser = await chromium.launch({ executablePath: CHROME });
 let problems = 0;

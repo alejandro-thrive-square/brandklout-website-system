@@ -42,9 +42,27 @@ const toWslPath = (p) => {
 const bundledRailway = process.env.APPDATA
   ? path.join(process.env.APPDATA, "npm", "node_modules", "@railway", "cli", "bin", "railway.exe")
   : "";
-const railwayCommand = process.platform === "win32" && fs.existsSync(bundledRailway)
-  ? shq(toWslPath(bundledRailway))
-  : "railway";
+// WHICH bash answers depends on who is asking: from PowerShell it is WSL and
+// the drive is /mnt/c; from a Git Bash session it is MSYS and the drive is /c.
+// Assuming WSL failed with "No such file or directory" from Git Bash on
+// 2026-09-18, so ask the bash we actually got which spelling it can execute.
+const toMsysPath = (p) => {
+  const m = String(p).match(/^([A-Za-z]):[\\/](.*)$/);
+  return m ? `/${m[1].toLowerCase()}/${m[2].replace(/\\/g, "/")}` : p;
+};
+// MSYS rewrites anything that looks like a POSIX path before a native .exe
+// sees it, which would turn the remote "/tmp/..." into a Windows temp path.
+// Both switches are inert under WSL.
+const BASH_ENV = { ...process.env, MSYS_NO_PATHCONV: "1", MSYS2_ARG_CONV_EXCL: "*" };
+const runsInBash = (p) => {
+  try {
+    return execFileSync("bash", ["-c", `test -x ${shq(p)} && echo yes`], { encoding: "utf8", env: BASH_ENV }).trim() === "yes";
+  } catch { return false; }
+};
+const bundledInBash = process.platform === "win32" && fs.existsSync(bundledRailway)
+  ? [toWslPath(bundledRailway), toMsysPath(bundledRailway)].find(runsInBash)
+  : null;
+const railwayCommand = bundledInBash ? shq(bundledInBash) : "railway";
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 const ssh = (cmd, tries = 5) => {
   let last;
@@ -52,7 +70,7 @@ const ssh = (cmd, tries = 5) => {
     try {
       return execFileSync("bash",
         ["-c", `${railwayCommand} ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
-        { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+        { encoding: "utf8", maxBuffer: 64 * 1024 * 1024, env: BASH_ENV });
     } catch (e) { last = e; if (i < tries) sleep(1000 * i); }
   }
   throw last;

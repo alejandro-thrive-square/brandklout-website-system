@@ -4,12 +4,12 @@ import * as I from "./insta.mjs";
 if (!I.IS_STAGING) throw new Error("This verifier only runs against staging.");
 
 const campaigns = new Map([
-  ["invisalign", "YbX91GhEDKkCN4GH4gka"],
-  ["invisalign-consultation", "YbX91GhEDKkCN4GH4gka"],
-  ["invisalign-thank-you", null],
-  ["new-patient-special", "AFu5BpJpMjgSnSf8yybc"],
-  ["new-patient-special-consultation", "AFu5BpJpMjgSnSf8yybc"],
-  ["new-patient-thank-you", null],
+  ["ads-landing-pages/invisalign", "YbX91GhEDKkCN4GH4gka"],
+  ["ads-landing-pages/invisalign-consultation", "YbX91GhEDKkCN4GH4gka"],
+  ["ads-landing-pages/invisalign-thank-you", null],
+  ["ads-landing-pages/new-patient-special", "AFu5BpJpMjgSnSf8yybc"],
+  ["ads-landing-pages/new-patient-special-consultation", "AFu5BpJpMjgSnSf8yybc"],
+  ["ads-landing-pages/new-patient-thank-you", null],
 ]);
 
 const rows = (await I.api("GET", "/admin/api/cms/data/tables/pages/rows")).rows ?? [];
@@ -33,7 +33,7 @@ for (const [slug, expectedForm] of campaigns) {
   const ok = tracking.length === 1
     && formIds.length === (expectedForm ? 1 : 0)
     && (!expectedForm || formIds[0] === expectedForm)
-    && root?.classIds?.includes("is-ad-page");
+    && root?.classIds?.includes("is-lp-page");
   if (!ok) problems++;
   console.log(`${ok ? "PASS" : "FAIL"} /${slug}  nodes=${nodes.length}  form=${formIds[0] ?? "none"}  tracking=${tracking.length}`);
 }

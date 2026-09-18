@@ -167,6 +167,11 @@
   if (!reduced) {
     $$("section[data-chapter]").forEach(function (sec) {
       if (sec.classList.contains("ch-arrival")) return;   // has its own, above
+      /* A head that is PINNED beside its own content (the paid pages' Why Here)
+         never reaches the top edge, but this trigger is measured in document
+         flow and would fade it where it would have been. Same reason as the
+         sticky column below; the section opts out. */
+      if (sec.hasAttribute("data-no-depart")) return;
       var head = [sec.querySelector(".chapter-tag"), sec.querySelector("h2")].filter(Boolean);
       if (!head.length) return;
       /* A STICKY HEAD DEPARTS BY ITSELF, and must not be faded on top of that.
@@ -590,47 +595,129 @@
 
 
 /* ===========================================================================
-   PAID-PAGE CONTINUITY, 2026-09-17.
+   PAID PAGES, second cut, 2026-09-18  —  /ads-landing-pages/*
 
-   The campaign arc already owns the horizontal treatment path. Two shorter
-   desktop pins keep the offer and the proof heading present while their own
-   evidence passes. They are intentionally absent on touch layouts, where the
-   same content remains in normal document flow, and under reduced motion.
+   Two scenes of their own, on top of the shared ones the pages reuse (the
+   arrival, the pinned path, the written proof and its rail, the counters).
+
+   THE JOURNEY is the signature moment: four moves and four photographs. On a
+   desktop pointer the stage is pinned and the scroll does the work, each
+   photograph fading up through the last while its move lights and the others
+   recede. Everywhere else (touch, under 900, reduced motion, no GSAP) nothing
+   is pinned: the stylesheet holds the photograph under the header and an
+   IntersectionObserver swaps it as each move passes the middle of the window,
+   so the scene still answers to the scroll on a phone.
+
+   WHY HERE holds its heading in the left column while the four reasons pass
+   on the right. Desktop pointer only; in one column there is nothing to hold
+   it beside.
    ======================================================================== */
 (function () {
   "use strict";
-  if (!document.body.classList.contains("is-ad-page")) return;
-  if (!(window.gsap && window.ScrollTrigger)) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  if (!window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches) return;
+  if (!document.body.classList.contains("is-lp-page")) return;
 
-  gsap.registerPlugin(ScrollTrigger);
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var desktop = window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches;
+  var hasGsap = !!(window.gsap && window.ScrollTrigger);
+  var driven = hasGsap && desktop && !reduced;
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
 
-  var offer = document.querySelector("#cost .svc-head, #offer .cp-head");
-  if (offer) {
+  if (driven) gsap.registerPlugin(ScrollTrigger);
+
+  /* The rail waits for the hero to pass. While the form itself is on screen
+     a second bar offering the form is noise; after it, the offer, the phone
+     and the next step stay in reach at every depth. */
+  var railEl = $(".lp-rail"), heroEl = $(".ch-arrival");
+  if (railEl && heroEl) {
+    var railShow = function () {
+      railEl.classList.toggle("is-in", heroEl.getBoundingClientRect().bottom < window.innerHeight * .55);
+    };
+    document.documentElement.classList.add("lp-rail-ready");
+    railShow();
+    window.addEventListener("scroll", railShow, { passive: true });
+    window.addEventListener("resize", railShow);
+  }
+
+  var stage = $("#lpJourneyStage");
+  if (stage) {
+    var frames = $$(".lp-journey_frame", stage);
+    var steps = $$(".lp-journey_step", stage);
+    var bar = $("#lpJourneyBar");
+    var n = steps.length;
+    var light = function (i) {
+      steps.forEach(function (s, k) { s.classList.toggle("is-on", k === i); });
+      frames.forEach(function (f, k) { f.classList.toggle("is-on", k === i); });
+    };
+
+    stage.classList.add("is-live");
+    if (driven && n > 1) {
+      stage.classList.add("is-pinned");
+      frames.forEach(function (f, i) { gsap.set(f, { opacity: i === 0 ? 1 : 0, scale: i === 0 ? 1 : 1.07 }); });
+
+      var tl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          id: "lp-journey-pin",
+          trigger: stage,
+          start: "top top",
+          end: function () { return "+=" + Math.round(window.innerHeight * n * .85); },
+          pin: true,
+          scrub: .4,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          /* Measured before the path's pin below it, for the reason recorded
+             there: a later trigger that refreshes first measures a document
+             that does not yet contain this spacer. */
+          refreshPriority: 2,
+          onUpdate: function (self) {
+            if (bar) gsap.set(bar, { scaleX: self.progress });
+            var i = Math.min(n - 1, Math.floor(self.progress * n + .08));
+            steps.forEach(function (s, k) { s.classList.toggle("is-on", k === i); });
+          }
+        }
+      });
+      for (var i = 1; i < n; i++) {
+        tl.to(frames[i], { opacity: 1, scale: 1, duration: .4 }, i - .2);
+      }
+      tl.to({}, { duration: .7 });   /* the last move holds before the pin lets go */
+    } else if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) light(steps.indexOf(e.target)); });
+      /* The line sits at 72% of the window, not the middle: in one column the
+         photograph holds the top 40% of it, so a move has to light while its
+         heading is still below the frame, not as it slides under it. */
+      }, { rootMargin: "-72% 0px -27% 0px", threshold: 0 });
+      steps.forEach(function (s) { io.observe(s); });
+    }
+  }
+
+  /* The consultation and thank-you arrivals carry furniture the shared arrival
+     timeline does not know about. It arrives with the rest, on any device. */
+  if (hasGsap && !reduced) {
+    var extras = $(".ch-arrival .lp-chips, .ch-arrival .lp-byline, .ch-arrival .lp-hero_note, .ch-arrival .lp-hero_area");
+    if (extras.length) gsap.from(extras, { opacity: 0, y: 22, duration: .9, stagger: .1, ease: "power3.out", delay: .75 });
+  }
+
+  if (!driven) return;
+
+  var whyHead = $("#why .lp-why_head"), whyGrid = $("#why .lp-why_grid");
+  if (whyHead && whyGrid) {
     ScrollTrigger.create({
-      id: "ad-offer-pin",
-      trigger: offer,
-      start: "top 22%",
-      endTrigger: offer.closest("section"),
-      end: "bottom 58%",
+      id: "lp-why-pin",
+      trigger: whyHead,
+      start: function () { return "top " + (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--jr-nav-h")) + 32 || 120) + "px"; },
+      endTrigger: whyGrid,
+      end: function () { return "bottom " + Math.round(whyHead.offsetHeight + (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--jr-nav-h")) + 32 || 120)) + "px"; },
       pin: true,
-      pinSpacing: false
+      pinSpacing: false,
+      invalidateOnRefresh: true
     });
   }
 
-  var proof = document.querySelector("#proof .cp-head, #proof .rg-head");
-  if (proof) {
-    ScrollTrigger.create({
-      id: "ad-proof-pin",
-      trigger: proof,
-      start: "top 22%",
-      endTrigger: proof.closest("section"),
-      end: "bottom 62%",
-      pin: true,
-      pinSpacing: false
-    });
-  }
+  /* The form card arrives after the promise beside it has been read. */
+  var card = $(".ch-arrival .lp-form-card");
+  if (card) gsap.from(card, { opacity: 0, y: 34, duration: 1.05, ease: "power3.out", delay: .55 });
 })();
 
 

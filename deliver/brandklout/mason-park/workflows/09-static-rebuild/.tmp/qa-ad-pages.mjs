@@ -15,8 +15,8 @@ const HOME = path.join(HERE, "..", "home");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const ALL_WIDTHS = [360, 390, 768, 1024, 1440, 1920];
 const ALL_PAGES = [
-  "invisalign", "invisalign-consultation", "invisalign-thank-you",
-  "new-patient-special", "new-patient-special-consultation", "new-patient-thank-you",
+  "ads-landing-pages/invisalign", "ads-landing-pages/invisalign-consultation", "ads-landing-pages/invisalign-thank-you",
+  "ads-landing-pages/new-patient-special", "ads-landing-pages/new-patient-special-consultation", "ads-landing-pages/new-patient-thank-you",
 ];
 const PAGES = process.argv[2] ? [process.argv[2]] : ALL_PAGES;
 const WIDTHS = process.argv[3] ? [Number(process.argv[3])] : ALL_WIDTHS;
@@ -36,13 +36,17 @@ for (const slug of PAGES) {
     const file = path.join(HOME, slug, "index.html");
     await page.goto("file:///" + file.split(path.sep).join("/"), { waitUntil: "domcontentloaded" });
     await page.waitForTimeout(250);
+    // The rail arrives once the hero (which carries the form) has passed, so
+    // it is measured mid-page, where it has to be in reach.
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.5));
+    await page.waitForTimeout(350);
     const report = await page.evaluate((expectsForm) => {
       const root = document.documentElement;
-      const rail = document.querySelector(".ad-rail");
+      const rail = document.querySelector(".lp-rail");
       const railBox = rail?.getBoundingClientRect();
       const images = [...document.images];
       const slots = document.querySelectorAll("[data-ghl-form]").length;
-      const buttons = [...document.querySelectorAll(".ad-rail a")].map((el) => {
+      const buttons = [...document.querySelectorAll(".lp-rail a")].map((el) => {
         const r = el.getBoundingClientRect();
         return { w: Math.round(r.width), h: Math.round(r.height) };
       });

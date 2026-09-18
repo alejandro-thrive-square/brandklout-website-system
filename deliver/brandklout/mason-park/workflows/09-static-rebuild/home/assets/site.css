@@ -6037,61 +6037,301 @@ a.el-stack { display: block; text-decoration: none; cursor: pointer; }
 }
 
 /* ===========================================================================
-   PAID TRAFFIC, 2026-09-17
+   PAID TRAFFIC, second cut, 2026-09-18  —  /ads-landing-pages/*
 
-   The six campaign routes reuse the reviewed site chapters. This layer keeps
-   the form and campaign action reachable, removes navigation leakage, and
-   gives the GHL Embed block a deliberate home without changing editorial pages.
+   The first cut (2026-09-17) was the organic service page with a form chapter
+   added near the bottom, and the agency said so: it did not convince. These
+   six routes now run the information flow of the agency's own reference set
+   (Livewell's ads-landing-pages): the form is IN the arrival, then the journey,
+   why here, the dentist, the path, the proof and the rooms, the questions, and
+   the invitation with the offer, the credentials and the disclaimer. The
+   consultation page is the form first and the thank-you page is the phone first.
+
+   Everything here is either scoped to `.is-lp-page` / `.ch-arrival.is-lp` or is
+   a new `ad-*` class, so no organic page can move. The shared scenes the pages
+   reuse (ch-path, ch-proof, cp-split, cp-duo, cp-figures, cp-timeline,
+   cp-callbox, el-mosaic, el-seal) are untouched.
    ======================================================================== */
-.is-ad-page .navbar_menu { display: none; }
-.is-ad-page .navbar_toggle { display: none; }
-.is-ad-page .navbar_actions { margin-left: auto; }
-.is-ad-page .footer_grid { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, .8fr)); }
-.is-ad-page .footer_grid > div:nth-child(3) { display: none; }
+.is-lp-page .navbar_menu { display: none; }
+.is-lp-page .navbar_toggle { display: none; }
+.is-lp-page .navbar_actions { margin-left: auto; }
+.is-lp-page .footer_grid { grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, .8fr)); }
+.is-lp-page .footer_grid > div:nth-child(3) { display: none; }
+.is-lp-page .callbar_component { display: none; }
+.lp-cta_short { display: none; }
 
-.ad-consult { --fg: var(--paper); --fg-soft: rgba(255, 255, 255, .72); --rule: rgba(255, 255, 255, .16); background: var(--ink); color: var(--paper); }
-.ad-consult_grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(22rem, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
-.ad-consult_copy { position: sticky; top: calc(var(--jr-nav-h, 5.5rem) + 2rem); }
-.ch .ad-consult_copy h2 { max-width: 11ch; color: var(--paper); }
-.ch .ad-consult_copy > p { max-width: 39rem; color: var(--fg-soft); }
-.ad-consult_points { list-style: none; margin: 2.5rem 0; padding: 0; border-top: 1px solid var(--rule); }
-.ad-consult_points li { padding: 1rem 0; border-bottom: 1px solid var(--rule); font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; text-transform: uppercase; }
-.ch .ad-consult_phone { color: var(--paper); }
-.ad-consult_phone a { color: var(--paper); border-bottom: 1px solid var(--copper); }
-.ad-form-card { background: var(--paper); color: var(--ink); padding: clamp(1.25rem, 3vw, 2.25rem); border-top: .25rem solid var(--copper); box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .22); }
-.ch .ad-form-card p { color: var(--ink); }
-.ch .ad-form-card .ad-form-kicker { margin: 0 0 1rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--copper-dark); }
-.ad-form-slot { min-height: 45.2rem; display: grid; place-content: center; text-align: center; border: 1px solid var(--rule-strong); background: var(--sand); }
-.ad-form-slot > p { margin: 0; font-family: var(--font-display); font-size: var(--f-h3); }
-.ad-form-slot > small { display: block; max-width: 24ch; margin: .6rem auto 0; color: #5f6667; }
-.ch .ad-form-card .ad-form-note { margin: 1rem 0 0; font-size: var(--f-label); color: #5f6667; }
+/* --- the arrival with the form in it -------------------------------------
+   Livewell's hero carries the lead form beside the promise. The photograph and
+   the two scrims are the site's own arrival; what changes is that the copy
+   shares the row with the form card, so the headline drops a tier. */
+.ch-arrival.is-lp {
+  min-height: 0;
+  align-items: center;
+  padding-top: calc(var(--jr-nav-h, 5.5rem) + 3.5rem);
+  padding-bottom: 4.5rem;
+}
+.ch-arrival.is-lp .ar-bg img { object-position: 50% 38%; }
+.ch-arrival.is-lp .ar-veil {
+  background:
+    linear-gradient(180deg, rgba(30, 36, 38, .8) 0%, rgba(30, 36, 38, .5) 40%, rgba(30, 36, 38, .82) 100%),
+    linear-gradient(94deg, rgba(30, 36, 38, .86) 0%, rgba(30, 36, 38, .6) 52%, rgba(30, 36, 38, .42) 100%);
+}
+.ar-in.lp-hero { display: grid; gap: 3rem; align-items: center; }
+.ch-arrival.is-lp .ar-title { font-size: var(--f-d2); max-width: 15ch; }
+.ch-arrival.is-lp .ar-lede { margin-bottom: 2rem; }
+.ch-arrival.is-lp .ar-actions { margin-bottom: 2.4rem; }
+.ch-arrival.is-lp .ar-meta { gap: 1.5rem 3rem; }
+.ch-arrival.is-lp .ar-meta div { max-width: 13rem; }
+.ch .lp-hero_area {
+  margin: 1.5rem 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .62);
+}
+.ch .lp-hero_note { margin: 1.4rem 0 0; font-size: var(--f-body); line-height: 1.6; color: rgba(255, 255, 255, .74); max-width: 46ch; }
+.lp-hero_note a { color: #fff; text-decoration: none; border-bottom: 1px solid var(--copper); }
+.ch-arrival.is-thanks { min-height: 78svh; align-items: flex-end; }
+.ch-arrival.is-thanks .ar-actions { margin-bottom: 0; }
 
-.ad-rail { position: fixed; z-index: 95; left: 50%; bottom: 1rem; transform: translateX(-50%); width: min(calc(100% - 2rem), 54rem); display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: .65rem .65rem .65rem 1.25rem; background: rgba(30, 36, 38, .95); color: var(--paper); border: 1px solid rgba(255, 255, 255, .15); box-shadow: 0 .8rem 2.5rem rgba(0, 0, 0, .24); backdrop-filter: blur(1rem); }
-.ad-rail span { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; text-transform: uppercase; }
-.ad-rail > a:not(.button) { color: var(--paper); font-family: var(--font-ui); }
-.ad-rail .button { min-height: 2.8rem; padding: .65rem 1rem; }
-.is-ad-page .callbar_component { display: none; }
+.lp-chips { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.lp-chips li {
+  padding: .6rem .95rem;
+  border: 1px solid rgba(255, 255, 255, .38);
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.lp-chips li::before { content: none; }
+.lp-byline { display: flex; align-items: center; gap: 1rem; padding-top: 1.6rem; border-top: 1px solid rgba(255, 255, 255, .22); }
+.lp-byline_face { width: 4.2rem; height: 4.2rem; border-radius: 50%; overflow: hidden; flex: none; border: 1px solid rgba(255, 255, 255, .4); }
+.lp-byline_face img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; }
+.lp-byline b { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--f-h4); line-height: 1.2; color: #fff; }
+.lp-byline small { display: block; margin-top: .25rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 255, 255, .62); }
 
+/* --- the form card --------------------------------------------------------
+   The slot is what place-ad-embeds.mjs swaps for the GHL Embed module after
+   conversion; locally it is a labelled placeholder of the form's real height. */
+.lp-form-card {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 2rem;
+  border-top: .25rem solid var(--copper);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .3);
+}
+.ch .lp-form-card p { color: var(--ink); }
+.ch .lp-form-card .lp-form-kicker { margin: 0 0 .6rem; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brand-deep); }
+.ch .lp-form-card .lp-form-title { margin: 0 0 .5rem; font-size: var(--f-h3); line-height: 1.15; color: var(--ink); }
+.ch .lp-form-card .lp-form-lede { margin: 0 0 1.25rem; font-size: var(--f-body); line-height: 1.6; color: var(--body); }
+/* The placeholder look is for the LOCAL slot only. After import the slot node IS
+   the Embed module (it keeps the class and gains `wz-embed`), and a centring
+   grid shrank the published form to the iframe's 300px intrinsic width in the
+   corner of its card. Published, it is a plain full-width block. */
+.lp-form-slot:not(.wz-embed) { min-height: 45.2rem; display: grid; place-content: center; text-align: center; border: 1px solid var(--beige-mid); background: var(--sand); }
+/* The height is reserved up front: the GHL frame arrives at 150px and grows
+   to about 800 to 900 a few seconds later, which otherwise shoves the whole
+   page down under a visitor who has already started reading. */
+.lp-form-slot.wz-embed { display: block; width: 100%; min-height: 50rem; }
+.lp-form-slot.wz-embed > *, .lp-form-slot.wz-embed iframe { width: 100%; max-width: 100%; }
+.lp-form-slot > p { margin: 0; font-family: var(--font-display); font-size: var(--f-h3); }
+.lp-form-slot > small { display: block; max-width: 24ch; margin: .6rem auto 0; color: #5f6667; }
+.ch .lp-form-card .lp-form-note { margin: 1rem 0 0; font-size: var(--f-label); line-height: 1.5; color: #5f6667; }
+
+/* --- the journey -----------------------------------------------------------
+   Four moves and four photographs. Above 900 journey.js pins the stage and the
+   scroll crossfades the frames while each move lights in turn; below 900 the
+   frame holds under the header and the moves pass beneath it. With no runtime
+   at all the first frame shows and every move reads at full strength. */
+.ch-journey { padding-bottom: 0; }
+.lp-journey_head { margin-bottom: 3rem; }
+.lp-journey_stage { position: relative; }
+.lp-journey_frames { position: relative; overflow: clip; background: var(--ink-mid); }
+.lp-journey_frame { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity .6s var(--ease); }
+.lp-journey_frame.is-on { opacity: 1; }
+.lp-journey_stage.is-pinned .lp-journey_frame { transition: none; }
+.lp-journey_frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lp-journey_frame figcaption {
+  position: absolute; left: 1.2rem; right: 1.2rem; bottom: 1.1rem;
+  font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .82); text-shadow: 0 1px 10px rgba(0, 0, 0, .6);
+}
+.lp-journey_steps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
+.lp-journey_step {
+  display: grid;
+  grid-template-columns: 3.2rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  opacity: .42;
+  transition: opacity .5s var(--ease);
+}
+.lp-journey_step::before { content: none; }
+.lp-journey_step.is-on { opacity: 1; }
+html.jr-fail .lp-journey_step, html:not(.jr-ready) .lp-journey_step { opacity: 1; }
+.lp-journey_no { font-family: var(--font-display); font-weight: 300; font-size: calc(1.9rem * var(--t-lg)); line-height: 1; color: var(--accent-lg); }
+.ch .lp-journey_step h3 { margin: 0 0 .45rem; font-size: var(--f-h3); }
+.ch .lp-journey_step p { margin: 0; font-size: var(--f-body); line-height: 1.65; max-width: 46ch; }
+.lp-journey_quote { margin: .9rem 0 0; padding-left: .9rem; border-left: 1.5px solid var(--accent); }
+.ch .lp-journey_quote p { font-family: var(--font-display); font-style: italic; font-size: var(--f-h4); line-height: 1.4; color: var(--fg); }
+.lp-journey_quote cite { display: block; margin-top: .4rem; font-family: var(--font-ui); font-style: normal; font-size: var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-soft); }
+/* In the two-column stage only the lit move is open, so four moves and their
+   review lines fit one window. `is-live` is set by journey.js; without it
+   every move stays open. One column keeps them all open: there the moves ARE
+   the scroll. */
+.lp-journey_more > div { padding-top: .05rem; }
+.lp-journey_bar { height: 2px; background: var(--rule); }
+.lp-journey_bar i { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left center; }
+
+/* --- why here --------------------------------------------------------------
+   The head holds in the left column (journey.js pins it, desktop only) while
+   four reasons pass on the right. They are ROWS, one under the other, on
+   purpose: as a two by two the column was shorter than the head beside it and
+   the pin had nothing to hold the head through (measured: a range of 0px). */
+.lp-why { display: grid; gap: 2.5rem; }
+.lp-why_head .pe-lede { margin-top: 1.2rem; }
+.lp-why_head .button { margin-top: 1.8rem; }
+.lp-why_grid { display: grid; gap: 1.25rem; }
+.lp-why_card {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  padding: 2.2rem 2rem;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  transition: border-color .4s var(--ease), box-shadow .4s var(--ease);
+}
+.lp-why_card:hover { border-color: var(--rule-strong); box-shadow: var(--shadow); }
+.lp-why_no { font-family: var(--font-display); font-weight: 300; font-size: calc(2.2rem * var(--t-lg)); line-height: 1; color: var(--accent-lg); }
+.ch .lp-why_card h3 { font-size: var(--f-h3); line-height: 1.2; margin-bottom: .55rem; }
+.ch .lp-why_card p { margin: 0; font-size: var(--f-body); line-height: 1.65; max-width: 52ch; }
+
+.lp-doors_wrap { position: relative; margin-top: 5rem; padding-top: 3.5rem; border-top: 1px solid var(--rule-strong); }
+.lp-doors_wrap .el-seal { top: 3rem; right: var(--bleed); }
+.lp-doors_head, .lp-place_head { display: grid; gap: .7rem; margin-bottom: 2.2rem; max-width: 62ch; }
+.ch .lp-doors_head h3, .ch .lp-place_head h3 { font-size: var(--f-d3); font-weight: 300; line-height: 1.08; letter-spacing: -.012em; }
+.ch .lp-doors_head p, .ch .lp-place_head p { margin: 0; font-size: var(--f-lede); line-height: 1.65; }
+.lp-doors { display: grid; gap: 2rem 1.5rem; }
+.lp-door figure { margin: 0 0 1.1rem; }
+.lp-door img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.ch .lp-door h3 { font-size: var(--f-h4); margin-bottom: .4rem; }
+.ch .lp-door p { margin: 0; font-size: var(--f-body); line-height: 1.65; }
+
+/* --- the dentist -------------------------------------------------------- */
+.ch .lp-dentist_name { font-size: var(--f-d2); font-weight: 300; line-height: 1.04; letter-spacing: -.018em; max-width: 14ch; }
+.lp-dentist_figures { margin-top: 4rem; }
+/* His coat is white and so was his caption. A floor under it, this chapter only. */
+.ch-dentist .cp-split_ink::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 9rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .78) 100%); pointer-events: none; }
+.ch-dentist .cp-split_ink figcaption { z-index: 1; color: #fff; }
+.ch-dentist .cp-duo { margin-bottom: 0; }
+
+/* --- the rooms, inside the proof ---------------------------------------- */
+.lp-place { margin-top: 5rem; padding-top: 3.5rem; border-top: 1px solid var(--rule-strong); }
+.ch-proof .pr-foot .pr-note { margin-top: 1.5rem; }
+
+/* --- the credentials and the small print --------------------------------- */
+.ch-invitation .pr-badges { margin-top: 4.5rem; background: transparent; border-top: 1px solid var(--rule); }
+.pr-badges.is-on-warm { background: var(--ink); margin-top: 4.5rem; }
+.lp-legal { margin-top: 2.2rem; display: grid; gap: 1rem; }
+.ch .lp-disclaimer { margin: 0; max-width: 96ch; font-size: calc(.8rem * var(--t-text)); line-height: 1.65; color: var(--fg-soft); }
+.lp-legal_links { margin: 0; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .1em; text-transform: uppercase; }
+.ch .lp-legal_links, .lp-legal_links a { color: var(--fg-soft); }
+.lp-legal_links a { text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+.lp-legal_links a:hover { color: #fff; }
+
+/* --- the thank-you page's own two ---------------------------------------- */
+.lp-call { display: grid; gap: 2.5rem; }
+.lp-risks { padding: 2rem; background: var(--panel); border: 1px solid var(--rule); }
+.ch .lp-risks h3 { font-size: var(--f-h3); margin-bottom: 1rem; }
+.lp-risks ul { list-style: none; margin: 0; padding: 0; }
+.lp-risks li { display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); gap: .8rem; padding: .95rem 0; border-top: 1px solid var(--rule); font-size: var(--f-body); line-height: 1.6; color: var(--fg-body); }
+.lp-risks li::before { content: none; }
+.lp-risks li b { font-family: var(--font-display); font-weight: 300; font-size: calc(1.4rem * var(--t-mid)); line-height: 1.1; color: var(--accent-lg); }
+.lp-pillars { display: grid; border-top: 1px solid var(--rule-strong); }
+.lp-pillar { display: grid; gap: .7rem; align-content: start; padding: 2rem 0; border-bottom: 1px solid var(--rule); }
+.lp-pillar_no { font-family: var(--font-display); font-weight: 300; font-size: var(--f-d3); line-height: 1; color: var(--accent-lg); }
+.ch .lp-pillar h3 { font-size: var(--f-h3); }
+.ch .lp-pillar p { margin: 0; font-size: var(--f-body); line-height: 1.65; max-width: 40ch; }
+.ch-invitation .cp-callbox { margin-bottom: 3.5rem; }
+.ch-invitation .cp-head .pe-lede { color: var(--fg-body); }
+
+/* --- the rail: the offer, the phone and the next step, at every depth ---- */
+.lp-rail { position: fixed; z-index: 95; left: 50%; bottom: 1rem; transform: translateX(-50%); width: min(calc(100% - 2rem), 54rem); display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 1rem; padding: .65rem .65rem .65rem 1.25rem; background: rgba(30, 36, 38, .95); color: var(--paper); border: 1px solid rgba(255, 255, 255, .15); box-shadow: 0 .8rem 2.5rem rgba(0, 0, 0, .24); backdrop-filter: blur(1rem); }
+.lp-rail.is-single { grid-template-columns: 1fr auto; }
+html.lp-rail-ready .lp-rail { transition: transform .5s var(--ease), opacity .4s var(--ease); }
+html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opacity: 0; pointer-events: none; }
+.lp-rail span { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .08em; text-transform: uppercase; }
+.lp-rail > a:not(.button) { color: var(--paper); font-family: var(--font-ui); }
+.lp-rail .button { min-height: 2.8rem; padding: .65rem 1rem; }
+
+@media (min-width: 1024px) {
+  .ar-in.lp-hero { grid-template-columns: minmax(0, 1.05fr) minmax(24rem, .95fr); gap: 5rem; }
+}
+@media (min-width: 900px) {
+  .lp-journey_stage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem 5rem;
+    align-items: center;
+    align-content: center;
+    min-height: 100svh;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: calc(var(--jr-nav-h, 5.5rem) + 1rem) var(--bleed) 2rem;
+  }
+  .lp-journey_frames { aspect-ratio: 4 / 5; max-height: 74svh; justify-self: stretch; }
+  .lp-journey_stage.is-live .lp-journey_more { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s var(--ease); }
+  .lp-journey_stage.is-live .lp-journey_more > div { overflow: hidden; }
+  .lp-journey_stage.is-live .lp-journey_step.is-on .lp-journey_more { grid-template-rows: 1fr; }
+  .lp-journey_stage.is-live .lp-journey_step { opacity: .55; }
+  .lp-journey_stage.is-live .lp-journey_step.is-on { opacity: 1; }
+  .lp-journey_bar { grid-column: 1 / -1; }
+  .lp-why { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 5rem; align-items: start; }
+  .lp-call { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 5rem; align-items: start; }
+}
+@media (min-width: 760px) {
+  .lp-doors { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lp-pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lp-pillar { border-bottom: 0; padding: 2.5rem 2rem 2.5rem 0; }
+  .lp-pillar + .lp-pillar { border-left: 1px solid var(--rule); padding-left: 2rem; }
+}
 @media (max-width: 899px) {
-  .ad-consult_grid { grid-template-columns: 1fr; }
-  .ad-consult_copy { position: static; }
-  .is-ad-page .footer_grid { grid-template-columns: 1fr 1fr; }
+  .ch-journey { padding-bottom: var(--ch-pad); }
+  .lp-journey_frames { position: sticky; top: var(--jr-nav-h, 4.5rem); z-index: 2; height: 40svh; }
+  .lp-journey_steps { padding: 0 var(--bleed); border-top: 0; }
+  .lp-journey_step { min-height: 46svh; align-content: center; }
+  .lp-journey_bar { display: none; }
+  .is-lp-page .footer_grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 599px) {
-  .is-ad-page { padding-bottom: 5.2rem; }
-  .is-ad-page .topbar_note, .is-ad-page .navbar_phone { display: none; }
-  .is-ad-page .navbar_actions .button { display: inline-flex; }
-  .ad-form-slot { min-height: 42rem; }
-  .ad-rail { bottom: .5rem; width: calc(100% - 1rem); grid-template-columns: 1fr auto; gap: .5rem; padding: .5rem; }
-  .ad-rail span { display: none; }
-  .ad-rail a { min-height: 3.7rem; }
-  .ad-rail .button { min-height: 3.7rem; }
-  .ad-rail > a:not(.button) { display: inline-flex; align-items: center; justify-content: center; }
-  .is-ad-page .footer_grid { grid-template-columns: 1fr; }
+  .is-lp-page { padding-bottom: 5.2rem; }
+  .is-lp-page .topbar_note, .is-lp-page .navbar_phone { display: none; }
+  .is-lp-page .navbar_actions .button { display: inline-flex; }
+  .lp-cta_long { display: none; }
+  .lp-cta_short { display: inline; }
+  .ch-arrival.is-lp .ar-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .ch-arrival.is-lp { padding-top: calc(var(--jr-nav-h, 4.5rem) + 2rem); padding-bottom: 3rem; }
+  .lp-form-card { padding: 1.25rem; }
+  .lp-form-slot:not(.wz-embed) { min-height: 42rem; }
+  .lp-why_card, .lp-risks { padding: 1.5rem; }
+  .lp-why_card { grid-template-columns: 1fr; gap: .6rem; }
+  .lp-doors_wrap .el-seal { display: none; }
+  .lp-rail { bottom: .5rem; width: calc(100% - 1rem); grid-template-columns: 1fr auto; gap: .5rem; padding: .5rem; }
+  .lp-rail.is-single { grid-template-columns: 1fr; }
+  .lp-rail span { display: none; }
+  .lp-rail a { min-height: 3.7rem; }
+  .lp-rail .button { min-height: 3.7rem; justify-content: center; }
+  .lp-rail > a:not(.button) { display: inline-flex; align-items: center; justify-content: center; }
+  .is-lp-page .footer_grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ad-rail { backdrop-filter: none; }
+  .lp-rail { backdrop-filter: none; }
+  .lp-journey_frame, .lp-journey_step, .lp-journey_more, html.lp-rail-ready .lp-rail { transition: none !important; }
 }
 @media (min-width: 992px) {
   .tm-group { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); column-gap: clamp(2rem, 4vw, 4rem); align-items: start; }

@@ -4,12 +4,12 @@ import { chromium } from "playwright-core";
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const ORIGIN = (process.argv[2] || "https://staging.masonparkdental.com").replace(/\/+$/, "");
 const pages = new Map([
-  ["invisalign", "YbX91GhEDKkCN4GH4gka"],
-  ["invisalign-consultation", "YbX91GhEDKkCN4GH4gka"],
-  ["invisalign-thank-you", null],
-  ["new-patient-special", "AFu5BpJpMjgSnSf8yybc"],
-  ["new-patient-special-consultation", "AFu5BpJpMjgSnSf8yybc"],
-  ["new-patient-thank-you", null],
+  ["ads-landing-pages/invisalign", "YbX91GhEDKkCN4GH4gka"],
+  ["ads-landing-pages/invisalign-consultation", "YbX91GhEDKkCN4GH4gka"],
+  ["ads-landing-pages/invisalign-thank-you", null],
+  ["ads-landing-pages/new-patient-special", "AFu5BpJpMjgSnSf8yybc"],
+  ["ads-landing-pages/new-patient-special-consultation", "AFu5BpJpMjgSnSf8yybc"],
+  ["ads-landing-pages/new-patient-thank-you", null],
 ]);
 
 const browser = await chromium.launch({ executablePath: CHROME });
@@ -26,9 +26,12 @@ for (const [slug, expectedForm] of pages) {
   });
   const response = await page.goto(`${ORIGIN}/${slug}`, { waitUntil: "domcontentloaded", timeout: 120_000 });
   await page.waitForTimeout(600);
+  // The rail arrives once the hero, which carries the form, has passed.
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight * 0.5));
+  await page.waitForTimeout(700);
   const report = await page.evaluate(() => {
     const root = document.documentElement;
-    const rail = document.querySelector(".ad-rail");
+    const rail = document.querySelector(".lp-rail");
     const box = rail?.getBoundingClientRect();
     const iframe = document.querySelector('iframe[src*="leadconnectorhq.com/widget/form/"]');
     return {
@@ -37,7 +40,7 @@ for (const [slug, expectedForm] of pages) {
       overflow: root.scrollWidth - root.clientWidth,
       formId: iframe?.getAttribute("data-form-id") ?? null,
       railInView: !!box && box.left >= -1 && box.right <= innerWidth + 1 && box.bottom <= innerHeight + 1,
-      targets: [...document.querySelectorAll(".ad-rail a")].map((element) => {
+      targets: [...document.querySelectorAll(".lp-rail a")].map((element) => {
         const target = element.getBoundingClientRect();
         return [Math.round(target.width), Math.round(target.height)];
       }),
@@ -45,7 +48,7 @@ for (const [slug, expectedForm] of pages) {
   });
   const failures = [];
   if (response?.status() !== 200) failures.push(`HTTP ${response?.status()}`);
-  if (!report.bodyClass.split(/\s+/).includes("is-ad-page")) failures.push("missing is-ad-page");
+  if (!report.bodyClass.split(/\s+/).includes("is-lp-page")) failures.push("missing is-lp-page");
   if (!report.h1) failures.push("missing h1");
   if (report.overflow > 1) failures.push(`overflow ${report.overflow}px`);
   if (report.formId !== expectedForm) failures.push(`form ${report.formId ?? "none"}, expected ${expectedForm ?? "none"}`);
