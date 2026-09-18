@@ -5,7 +5,20 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-17
+## Where the build stands - 2026-09-18
+
+**The six redesigned paid-traffic routes are built and verified locally, not published**
+([`runbook/2026-09-18-redesigned-ad-funnels-built-locally.md`](./runbook/2026-09-18-redesigned-ad-funnels-built-locally.md)).
+Invisalign and the $189 New Patient campaign each have a landing page, consultation page and
+thank-you page at the same production slugs. The four lead pages use the reviewed staging design
+system, eight named chapters, three driven pin scenes, persistent conversion actions and the exact
+campaign-specific GHL form mapping. All six pass the structural and six-width responsive gates.
+**Production is unchanged. Staging is unchanged.** Next is an explicitly confirmed staging import,
+form/call-tracking verification and review; production remains the exact Webflow port until the
+client approves the redesigned site.
+
+
+## Earlier - 2026-09-17, legacy redirects
 
 **The old domain's 301 map is deployed but not live yet**
 ([`runbook/2026-09-17-legacy-redirects-for-bestdentistinkatytx.md`](./runbook/2026-09-17-legacy-redirects-for-bestdentistinkatytx.md)).
