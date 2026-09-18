@@ -1,11 +1,12 @@
 # Runbook index
 
-21 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-18 | 2026-09-18 - The Webflow ad pages on production: already cloned, verified, two leaks fixed | [`2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md`](./2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md) |
 | 2026-09-18 | 2026-09-18 - The ad pages rebuilt in Livewell's flow, under /ads-landing-pages | [`2026-09-18-ad-pages-rebuilt-in-livewells-flow.md`](./2026-09-18-ad-pages-rebuilt-in-livewells-flow.md) |
 | 2026-09-18 | 2026-09-18 - Redesigned ad funnels published to staging | [`2026-09-18-redesigned-ad-funnels-published-to-staging.md`](./2026-09-18-redesigned-ad-funnels-published-to-staging.md) |
 | 2026-09-18 | 2026-09-18 - Redesigned ad funnels built locally for staging | [`2026-09-18-redesigned-ad-funnels-built-locally.md`](./2026-09-18-redesigned-ad-funnels-built-locally.md) |

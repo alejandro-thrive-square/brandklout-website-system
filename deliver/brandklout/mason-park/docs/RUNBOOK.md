@@ -5,6 +5,19 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Production's live ad pages - 2026-09-18
+
+**The six Webflow ad pages are on production at the slugs the ads point at, and they match Webflow
+with zero differences**
+([`runbook/2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md`](./runbook/2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md)).
+They were ported on 2026-08-28 (workflow 10). A computed-style audit against
+`mason-park-dental.webflow.io` found the main site's unscoped heading and `.button` rules leaking
+Figtree, ink and letter spacing onto them, and `/invisalign`'s Privacy Policy link reduced to bare
+text; both are fixed and published (`2026-09-18T16:41:10Z`, shell seq 33). `type-diff.mjs --all` is
+the gate, and it must be re-run whenever the main site's stylesheet changes. Live changes to these
+pages go through `patch-live.mjs`, never a re-import. **Open:** the Webflow site carries
+unpublished Designer edits newer than its last publish; production mirrors what is published.
+
 ## Where the build stands - 2026-09-18
 
 **The six paid-traffic routes are rebuilt in Livewell's information flow and live on staging under
