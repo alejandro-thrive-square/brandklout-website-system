@@ -1023,6 +1023,32 @@ on both sides (`1280px`, `322.906px 861.094px`, `96px` gap), so the only moving 
 `.tmp/probe-sel.mjs <page> ".legal_body" 0 width` answers it in one command. If the wrapping ever
 has to match exactly, set the measure in `rem` rather than `ch`.
 
+### 41. An embed gate can race the vendor's Turnstile challenge and blame your push
+
+Found 2026-09-18 promoting the logo. `form-test.mjs` reported *"the GHL frame never attached"* on
+production, **three runs out of three**, immediately after a `--force` push — which looks exactly
+like the push having broken `/book`.
+
+It had not. The order of checks that proved it, cheapest first, and the order to repeat:
+
+1. **Compare the push log's embed line with the previous run's.** Byte-identical here:
+   `embed  book  ghl-form -> brandklout.embed-origins.embed (772 chars, fit auto from 565px)`.
+   If that line matches, the conversion did not change and the page almost certainly did not.
+2. **`curl` the vendor URL** — 200, 131KB. Rules out the network.
+3. **Load the vendor URL directly in headless Chrome** — 200, 18 inputs. Rules out the VPN
+   filtering Chrome specifically, which is a real failure mode on this workstation.
+4. **Probe the page with `networkidle0` and a few seconds' grace.** The frame *was* attached,
+   next to a `challenges.cloudflare.com/.../turnstile` frame, with `frame-src 'self' https:` in
+   the meta CSP and every `privacy_*` consent param on the frame URL.
+
+The `<iframe>` **element** is in the DOM the moment the page parses; puppeteer lists a **frame**
+only once the browser has navigated it, and the vendor puts a Turnstile challenge in front of that.
+Reading `pg.frames()` straight after `waitForFunction(() => document.querySelector('iframe[...]'))`
+is therefore a coin toss. It came up heads on 2026-09-17 and tails three times on 2026-09-18.
+
+**Fix:** `form-test.mjs` polls `pg.frames()` for up to 45s. A gate that answers differently on an
+unchanged page is worse than no gate.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions. **It holds

@@ -65,9 +65,26 @@ else {
   if (box.w < 300) fails.push(`iframe is ${box.w}px wide`)
 }
 
-// inside the frame: real fields, and typing sticks
-const frame = pg.frames().find((f) => /leadconnectorhq\.com\/widget\/form\//.test(f.url()))
-if (!frame) fails.push('the GHL frame never attached')
+/* Inside the frame: real fields, and typing sticks.
+
+   WAIT FOR THE FRAME, DO NOT JUST LOOK FOR IT. The <iframe> ELEMENT is in the
+   DOM the moment the page parses, but puppeteer only lists a frame once the
+   browser has actually navigated it — and the vendor puts a Cloudflare
+   Turnstile challenge in front of that, so it can be several seconds behind
+   the element. Reading `pg.frames()` straight after `waitForFunction` is a
+   race: it passed on 2026-09-17 and failed three runs out of three on
+   2026-09-18 against a /book that a probe showed was working perfectly.
+   A gate that answers differently on an unchanged page is worse than no gate. */
+const frame = await (async () => {
+  const find = () => pg.frames().find((f) => /leadconnectorhq\.com\/widget\/form\//.test(f.url()))
+  for (const deadline = Date.now() + 45000; Date.now() < deadline; ) {
+    const f = find()
+    if (f) return f
+    await new Promise((r) => setTimeout(r, 500))
+  }
+  return find()
+})()
+if (!frame) fails.push('the GHL frame never attached (45s)')
 else {
   await frame.waitForSelector('input, textarea', { timeout: 30000 }).catch(() => fails.push('no input fields inside the form'))
   const typed = await frame.evaluate(async () => {

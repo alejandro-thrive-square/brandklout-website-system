@@ -15,11 +15,19 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
-> **Production shows the text wordmark; the logo is on staging only.** Promoting it is not a
-> re-push of the staging payload — a new media asset gets a different URL on each instance, so
-> production needs `upload-media.mjs` against itself first. The 2026-09-18 run has the sequence.
+**2026-09-18, latest — the logo is LIVE on production.** `https://westlaketxmedspa.com` is
+**seq 14, 13 pages, 76 media**. Promotion was not a re-push of the staging payload: a new media
+asset mints its own `/uploads/<nanoid>-<name>` on each instance, so production got
+`upload-media.mjs` against itself first and a payload rebuilt from its own map (checked: zero
+staging ids in it). Gates all clean — and one of them lied on the way: **`form-test.mjs` said the
+GHL frame never attached, three runs out of three, on a booking form that was working**. It read
+`pg.frames()` straight after the `<iframe>` element appeared, and the vendor puts a Turnstile
+challenge in front of the navigation; it polls for 45s now. **`seq` advancing is the push, not the
+publish** — the publish silently no-op'd once on a bad relative path while seq had already moved,
+so check the live HTML —
+[run](./runbook/2026-09-18-logo-on-production.md).
 
-**2026-09-18, latest — the practice has a logo, and it is on STAGING.** The site had carried a
+**2026-09-18 — the practice has a logo.** The site had carried a
 text wordmark since it was built, because no logo file existed. Asana `1218408530306234` ("Update
 logo", assigned to us 2026-09-11) had one all along, attached to a task **outside** the slug
 `asana-context.mjs stone-med-spa` pulls — which is why that command reports "attachments: none

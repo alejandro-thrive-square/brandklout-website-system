@@ -17,9 +17,17 @@
 >    ones are the tight side of a breakpoint, and adding them exposed a clipped Book button at
 >    992–1007 that had been live since 2026-09-01.
 >
-> The logo is on staging only; production still shows the text wordmark, and promoting it needs
-> `upload-media.mjs` against production first (a new asset's URL differs per instance). See the
-> 2026-09-18 run in `docs/runbook/`.
+> **Live on production since 2026-09-18 (seq 14, 76 media).** Promoting it needed
+> `upload-media.mjs` against production first, because a new asset's URL differs per instance —
+> `.tmp/media-map.production.json` and `.tmp/media-map.staging.json` are both kept for that reason,
+> and `.tmp/media-map.json` is held at production's. See the two 2026-09-18 runs in
+> `docs/runbook/`.
+>
+> **`form-test.mjs` polls for the vendor frame now.** It used to read `pg.frames()` the moment the
+> `<iframe>` element appeared, which races the Turnstile challenge the vendor puts in front of the
+> navigation; it reported FAIL three runs out of three on a working form. If an embed gate fails,
+> check the push log's `embed  book  ghl-form -> …` line against the previous run before suspecting
+> the page.
 
 > [!IMPORTANT]
 > **2026-09-17: THE BOOKING FORM IS THE CLIENT'S GO HIGH LEVEL FORM.** `site-src/ghl-form.mjs`

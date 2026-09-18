@@ -1,11 +1,12 @@
 # Runbook index
 
-16 runs, newest first. Each line is one file in this folder.
+17 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-18 | 2026-09-18, later — The logo promoted to PRODUCTION (seq 14, 13 pages, 76 media); the three assets got different URLs from staging, as predicted; `form-test.mjs` was racing the Turnstile challenge and said FAIL on a working form — carries **gotchas** | [`2026-09-18-logo-on-production.md`](./2026-09-18-logo-on-production.md) |
 | 2026-09-18 | 2026-09-18 — The practice's logo (Asana `1218408530306234`) lifted off its black ground and put in the navbar, drawer and footer, replacing the text wordmark; `all-pages.mjs` widened to five widths, which found a navbar clip older than the logo; staging seq 10 — carries **gotchas** | [`2026-09-18-logo-on-staging.md`](./2026-09-18-logo-on-staging.md) |
 | 2026-09-17 | 2026-09-17, later still — The practice's Go High Level form embedded on /book via the Embed block (the importer drops iframes); legal pages gained an SMS section; new `form-test.mjs`; live on production (seq 13) — carries **gotchas** | [`2026-09-17-ghl-form-embedded.md`](./2026-09-17-ghl-form-embedded.md) |
 | 2026-09-17 | 2026-09-17, later still — The drag rails' arrows were never bound (data-drag-scope on a sibling, since the second build); fixed, new `drag-test.mjs` click gate, production seq 12 and staging seq 6 — carries **gotchas** | [`2026-09-17-drag-rail-arrows-never-bound.md`](./2026-09-17-drag-rail-arrows-never-bound.md) |
