@@ -7,15 +7,16 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands - 2026-09-18
 
-**The six redesigned paid-traffic routes are built and verified locally, not published**
-([`runbook/2026-09-18-redesigned-ad-funnels-built-locally.md`](./runbook/2026-09-18-redesigned-ad-funnels-built-locally.md)).
+**The six redesigned paid-traffic routes are published and verified on staging**
+([`runbook/2026-09-18-redesigned-ad-funnels-published-to-staging.md`](./runbook/2026-09-18-redesigned-ad-funnels-published-to-staging.md)).
 Invisalign and the $189 New Patient campaign each have a landing page, consultation page and
-thank-you page at the same production slugs. The four lead pages use the reviewed staging design
-system, eight named chapters, three driven pin scenes, persistent conversion actions and the exact
-campaign-specific GHL form mapping. All six pass the structural and six-width responsive gates.
-**Production is unchanged. Staging is unchanged.** Next is an explicitly confirmed staging import,
-form/call-tracking verification and review; production remains the exact Webflow port until the
-client approves the redesigned site.
+thank-you page at the same production slugs. Staging is clean at **63 draft / 63 published** pages,
+last published `2026-09-18T04:18:24.527Z`. The four lead pages load the correct GHL forms with 200
+iframe and loader responses; all six routes load the number pool and swap the public phone number;
+desktop and 390px live gates report zero problems. Blog and branded-404 templates remain enabled.
+**Production is unchanged** at 78/78 pages with its earlier `2026-09-17T03:26:35.837Z` publish.
+Next is client review on staging. Do not promote the redesign to production until the client
+approves it; production remains the exact Webflow port used by the active ads.
 
 
 ## Earlier - 2026-09-17, legacy redirects

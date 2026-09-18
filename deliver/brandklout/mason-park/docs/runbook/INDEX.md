@@ -1,11 +1,12 @@
 # Runbook index
 
-19 runs, newest first. Each line is one file in this folder.
+20 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-18 | 2026-09-18 - Redesigned ad funnels published to staging | [`2026-09-18-redesigned-ad-funnels-published-to-staging.md`](./2026-09-18-redesigned-ad-funnels-published-to-staging.md) |
 | 2026-09-18 | 2026-09-18 - Redesigned ad funnels built locally for staging | [`2026-09-18-redesigned-ad-funnels-built-locally.md`](./2026-09-18-redesigned-ad-funnels-built-locally.md) |
 | 2026-09-17 | 2026-09-17 — 301s from bestdentistinkatytx.com to www.masonparkdental.com | [`2026-09-17-legacy-redirects-for-bestdentistinkatytx.md`](./2026-09-17-legacy-redirects-for-bestdentistinkatytx.md) |
 | 2026-09-16 | 2026-09-16 — Termly cookie consent on every production page | [`2026-09-16-termly-cookie-consent-on-production.md`](./2026-09-16-termly-cookie-consent-on-production.md) |
