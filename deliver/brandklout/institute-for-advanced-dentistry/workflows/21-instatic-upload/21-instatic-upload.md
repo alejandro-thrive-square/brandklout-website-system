@@ -106,9 +106,46 @@ need the Cloudflare rewrites in `docs/dns/URL-RULES.md`, or 29 indexed URLs brea
 `node verify-wp-urls.mjs [base] > .tmp/verify-wp-urls.log 2>&1`: on the Railway host it applies
 the rules itself, and on the domain it tests Cloudflare.
 
+### Side pipelines: `legal/` and `tags/`
+
+Both write straight into the live instance and publish nothing. They exist because the two things
+a marketer normally does by hand — edit a policy page, paste a tag into `<head>` — have no door on
+this site: the pages are cloned WordPress node trees, and Instatic has no custom-head field.
+
+```bash
+cd legal
+node push-legal.mjs                # dry run; writes legal/.tmp/<slug>.preview.html to proofread
+node push-legal.mjs --apply        # /privacy-policy + /terms-of-service copy, titles, footer link
+
+cd ../tags
+node push-tags.mjs                 # dry run
+node push-tags.mjs --apply         # src/scripts/000-brandklout-tags.js into the shell
+node verify-tags.mjs https://www.ifadentistry.com > .tmp/verify-tags.log 2>&1   # GATE, after publishing
+```
+
+Then publish once, deliberately — a publish bakes every page:
+`node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"`.
+
+- **`legal/*.md` is the client's own copy, transcribed.** The source documents live in
+  `../00-client-delivery-initialization/.tmp/IFA-Dentistry-*.md`. Re-transcribe rather than edit in
+  place when a new version arrives, and never reword legal copy on the client's behalf.
+- **`tags/site-tags.js` is the source of truth for what runs site-wide**: Google Tag Manager
+  `GTM-5XR78DN7` and the GoHighLevel number pool, gated to `*.ifadentistry.com` like the WordPress
+  Google tag. `push-wp.mjs` rebuilds `files` from the live list minus `site.css`/`site.js`, so the
+  asset survives a full re-push of the clone.
+- The plugin's `siteScripts` setting (used for Sienna) takes **script URLs only, loaded `async`**,
+  so an inline bootstrap like GTM's cannot go there. A code asset is the way.
+- **A new code asset ships as a `type="module"` entry, not a classic script**, whatever its path
+  prefix — so it runs deferred rather than at the top of `<head>`. GTM still boots; it just starts
+  after the document parses.
+
 ### What is still not WordPress
 
 - **The contact form is the practice's GoHighLevel form, not Fluent Forms** (since 2026-09-11).
+- **`/privacy-policy` and `/terms-of-service` are the client's A2P 10DLC documents** (since
+  2026-09-18), not the WordPress text, and every page's footer links Terms of Service. Re-running
+  the page import from `current-site-scrape` would restore the WordPress copy — re-apply `legal/`
+  afterwards, the same trap the accessibility statement has.
   Fluent Forms posts to WordPress's `admin-ajax.php`, which the browser refuses cross-origin and
   which dies with the WordPress hosting. `prepare-wp.mjs` replaces the whole `.fluentform` wrapper
   of forms **#1** (the contact form, 57 pages) and **#6** (its short variant on
