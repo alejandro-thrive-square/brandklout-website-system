@@ -6,19 +6,51 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>All-on-4 Full-Arch Implants | McLean &amp; Alexandria, VA</title>
-<meta name="description" content="A full upper or lower arch on four implants, with fixed provisional teeth the same day. Planned and placed by a board-certified prosthodontist. The consultation costs nothing.">
+<title>All-on-4 Full-Arch Implants | McLean, VA</title>
+<meta name="description" content="A full upper or lower arch on four implants, with fixed provisional teeth the same day. Planned and placed by a board-certified prosthodontist. The consultation costs nothing. Tysons Corner office.">
 <meta name="robots" content="noindex, follow">
-<meta property="og:title" content="All-on-4 Full-Arch Implants | Dr. Nahlah, Northern Virginia">
+<meta property="og:title" content="All-on-4 Full-Arch Implants | Dr. Nahlah, McLean, VA">
 <meta property="og:description" content="Four implants, one arch, teeth the same day. Book a no-cost consultation with a board-certified prosthodontist.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="All-on-4 Full-Arch Implants | Dr. Nahlah, Northern Virginia">
+<meta name="twitter:title" content="All-on-4 Full-Arch Implants | Dr. Nahlah, McLean, VA">
 <meta name="twitter:description" content="Four implants, one arch, teeth the same day. Book a no-cost consultation with a board-certified prosthodontist.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
 
 <!-- ==========================================================================
      THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
@@ -53,6 +85,8 @@
 </head>
 
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
@@ -74,10 +108,11 @@
      #book and Book my consultation are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
-     THE TELEPHONE NUMBER. (571) 702-9900 is the McLean / Tysons Corner
-     new-patient line, which is the implant office. If a call-tracking number
-     is provisioned for these campaigns it is swapped HERE and in
-     partials/lp-rail.html, and nowhere else.
+     THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
+     per page from the LOCATIONS table in build-site.mjs (+15717029900 /
+     (571) 702-9900). Call tracking is the LeadConnector number pool loaded by
+     partials/site-scripts.html, which swaps the number in the page per
+     visitor; nothing here changes for it.
      ========================================================================== -->
 <header class="nav lp-nav" id="nav" data-journey="0">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
@@ -89,7 +124,7 @@
         <b>4.9</b> Google rating</span>
       <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
         <b>18,000+</b> implants placed</span>
-      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean and Alexandria, VA</span>
+      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean, VA</span>
     </div>
   </div>
 
@@ -179,7 +214,7 @@
   <div class="wrap ph-in">
     <div class="lp-hero-grid">
       <div class="lp-hero-copy">
-        <div class="chapter-tag" data-rv><i></i><span class="label">All-on-4 Full Arch &middot; McLean and Alexandria, VA</span></div>
+        <div class="chapter-tag" data-rv><i></i><span class="label">All-on-4 Full Arch &middot; Tysons Corner, McLean VA</span></div>
         <h1 data-split>A full set of teeth, fitted <em>the day</em> the implants go in.</h1>
         <p class="ph-lead" data-rv>An entire upper or lower arch on four titanium posts, planned and placed by a board-certified prosthodontist. Most patients walk out of surgery already wearing fixed provisional teeth.</p>
       </div>
@@ -190,9 +225,9 @@
       <div class="lp-form-card" id="book" data-rv>
         <h2>Book your full-arch consultation</h2>
       <div class="wz-embed" data-wz-embed="auto"><iframe
-    src="https://api.leadconnectorhq.com/widget/form/axgcdqEPUFoHF8Dt5Nji"
+    src="https://api.leadconnectorhq.com/widget/form/d1IIoFqitmgu2zBvvmfw"
     style="width:100%;height:100%;border:none;border-radius:8px"
-    id="inline-axgcdqEPUFoHF8Dt5Nji"
+    id="inline-d1IIoFqitmgu2zBvvmfw"
     data-layout="{'id':'INLINE'}"
     data-trigger-type="alwaysShow"
     data-trigger-value=""
@@ -200,18 +235,21 @@
     data-activation-value=""
     data-deactivation-type="neverDeactivate"
     data-deactivation-value=""
-    data-form-name="Tyson Corner Office - Contact form Website"
-    data-height="1168"
-    data-layout-iframe-id="inline-axgcdqEPUFoHF8Dt5Nji"
-    data-form-id="axgcdqEPUFoHF8Dt5Nji"
-    title="Tyson Corner Office - Contact form Website"
+    data-form-name="Tyson Corner Office - Google AO4"
+    data-height="1915"
+    data-layout-iframe-id="inline-d1IIoFqitmgu2zBvvmfw"
+    data-form-id="d1IIoFqitmgu2zBvvmfw"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Tyson Corner Office - Google AO4"
 >
 </iframe>
 <script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
-      <p class="lp-form-note">Prefer to speak to someone now? Call
-        <a href="tel:+15717029900">(571) 702-9900</a> for McLean and Tysons Corner, or
-        <a href="tel:+15712537790">(571) 253-7790</a> for Alexandria. If anxiety is what has kept
-        you away, say so when you call. It changes how the appointment is planned.</p>
+
+      <p class="lp-form-note">Prefer to speak to someone now? Call the Tysons Corner office on
+        <a href="tel:+15717029900">(571) 702-9900</a>, or Alexandria on
+        <a href="tel:+15712537790">(571) 253-7790</a>. If anxiety is what has kept you away, say
+        so when you call. It changes how the appointment is planned.</p>
       </div>
 
       <!-- Below the form on a phone, beside it on a desktop. The form has to be
@@ -255,7 +293,7 @@
       <p data-rv>Failing teeth, a loose denture and a mouth you plan your day around. That is the
         problem full-arch treatment is for.</p>
     </div>
-    <div class="lp-stakes" data-rv="stagger">
+    <div class="lp-stakes has-fig" data-rv="stagger">
       <div class="lp-stakes-col is-before">
         <span class="label">Life now</span>
         <h3>Working around it</h3>
@@ -267,6 +305,10 @@
           <li><i aria-hidden="true">&#10005;</i>Bone still receding under a denture that rests on the gum</li>
         </ul>
       </div>
+      <figure class="lp-stakes-fig">
+        <img src="assets/pt-hero-2.jpg" alt="Stephen, a patient of this practice, holding a photograph of his mouth before treatment" loading="lazy">
+        <figcaption>Stephen, with his own before photograph</figcaption>
+      </figure>
       <div class="lp-stakes-col is-after">
         <span class="label">After treatment</span>
         <h3>Teeth that are screwed down</h3>
@@ -283,7 +325,10 @@
 </section>
 
 <!-- ---------- CTA 1 ---------- -->
-<section class="lp-cta" id="cta-1">
+<section class="lp-cta has-fig" id="cta-1">
+  <figure class="lp-cta-fig" aria-hidden="true">
+    <img src="assets/office-wide.jpeg" alt="" loading="lazy">
+  </figure>
   <div class="wrap section lp-cta-in">
     <h2 data-split>Find out whether four posts will carry your case.</h2>
     <p data-rv>It takes a cone-beam scan to answer that, and the scan is part of the
@@ -510,7 +555,7 @@
 
      NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
      pull-quote, the card carries the name and the treatment and no words. -->
-<section class="pk pk-light" id="films">
+<section class="pk" data-theme="dark" id="films">
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
@@ -610,24 +655,28 @@
       <div class="lp-steps-grid is-four" data-rv="stagger">
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">1</span>
+          <figure class="lp-step-fig"><img src="assets/pt-interaction-5.jpg" alt="A consultation at the practice" loading="lazy"></figure>
           <h3>Consultation and cone-beam scan</h3>
           <p>The examination and the 3D scan establish whether there is enough bone. Pricing,
             insurance and financing are discussed at that appointment, not later.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">2</span>
+          <figure class="lp-step-fig"><img src="assets/sedation-dentistry-patient-1.jpg" alt="A patient in the chair on the day of surgery" loading="lazy"></figure>
           <h3>Transformation day</h3>
           <p>Four posts in a single visit, under the sedation you chose. You leave wearing a fixed
             PMMA provisional arch, not a removable denture.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">3</span>
+          <figure class="lp-step-fig"><img src="assets/pt-interaction-3.jpg" alt="A follow-up visit at the front desk" loading="lazy"></figure>
           <h3>Healing and follow-ups</h3>
           <p>Three to four months while the posts fuse, with reviews along the way to check
             integration and adjust the provisional.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">4</span>
+          <figure class="lp-step-fig"><img src="assets/case-ao4-double-2-after.jpg" alt="A finished full-arch restoration from this practice" loading="lazy"></figure>
           <h3>The zirconia final</h3>
           <p>The definitive arch is fitted, and a further two to four months completes healing
             around it. After that it is brushed and flossed like teeth.</p>
@@ -675,6 +724,10 @@
       <div><b>In writing</b><span>Before anything is booked</span></div>
       <div><b>Free</b><span>Second opinion on implant surgery</span></div>
     </div>
+    <figure class="lp-wide" data-rv>
+      <img src="assets/dr-team.jpg" alt="Dr. Nahlah and the practice team" loading="lazy">
+      <figcaption><b>The people who file the claims and arrange the financing.</b><span>In writing, before anything is booked</span></figcaption>
+    </figure>
     <div class="lp-lenders" data-rv="stagger">
       <article class="lp-lender">
         <h4>CareCredit</h4>
@@ -699,7 +752,7 @@
 </section>
 
 <!-- ---------- CTA 2 ---------- -->
-<section class="lp-cta" id="cta-2">
+<section class="lp-cta is-gold" id="cta-2">
   <div class="wrap section lp-cta-in">
     <h2 data-split>Bring another practice's quote with you.</h2>
     <p data-rv>Second opinions on implant surgery cost nothing here. Bring the plan and the scan,
@@ -767,12 +820,12 @@
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Where You Would Be Treated</span></div>
-      <h2 data-split>Two offices in Northern Virginia.</h2>
+      <h2 data-split>Two offices in Northern Virginia, run the same way.</h2>
     </div>
     <div class="mz mz-4" data-rv="stagger">
       <figure class="mz-fig">
         <img src="assets/office-hero.jpg" alt="The reception and waiting area at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Reception</b>Tysons Corner, McLean</figcaption>
+        <figcaption class="mz-cap"><b>Reception</b>The same standard at both offices</figcaption>
       </figure>
       <figure class="mz-fig">
         <img src="assets/practice-space-1.avif" alt="A treatment room at the practice" loading="lazy">
@@ -797,6 +850,11 @@
       <div class="chapter-tag" data-rv><i></i><span class="label">Before You Book</span></div>
       <h2 data-split>The questions people actually ask.</h2>
     </div>
+    <div class="lp-faq-grid">
+      <figure class="lp-faq-fig" data-rv>
+        <img src="assets/Doc_Nahlah.jpg" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah</b><span>Board-certified prosthodontist</span></figcaption>
+      </figure>
     <div class="pk-faq" data-rv="stagger">
       <details>
         <summary>Will I leave surgery without teeth?</summary>
@@ -837,6 +895,7 @@
           works the plan for every benefit it entitles you to.</div>
       </details>
     </div>
+    </div>
   </div>
 </section>
 
@@ -845,7 +904,10 @@
      third-party booking link. There is one conversion path on this page and it
      is the form; sending paid traffic out to a booking tool from the last
      section of the page is how that path gets abandoned. -->
-<section class="pk pk-light" id="book-now">
+<section class="pk lp-final" data-theme="dark" id="book-now">
+  <figure class="lp-final-bg" aria-hidden="true">
+    <img src="assets/hero-poster.jpg" alt="" loading="lazy">
+  </figure>
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">The Next Step</span></div>
@@ -858,28 +920,36 @@
       <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
     </div>
     <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
-        <h3>Tysons Corner &middot; McLean</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          7901 Jones Branch Drive, Suite 220<br>
-          McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-      <article class="ct-office">
-        <h3>Alexandria</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          2855 Duke Street<br>
-          Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
+<article class="ct-office">
+  <h3>Tysons Corner</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    7901 Jones Branch Drive, Suite 220<br>
+    McLean, VA 22102</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15717029900">(571) 702-9900</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17034483312">(703) 448-3312</a></div>
+  <p class="ct-office-flag">The office this campaign books at</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
+<article class="ct-office">
+  <h3>Alexandria</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    2855 Duke Street<br>
+    Alexandria, VA 22314</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15712537790">(571) 253-7790</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17039405410">(703) 940-5410</a></div>
+  <p class="ct-office-flag">Also available, run by the same team</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
     </div>
   </div>
 </section>
@@ -889,6 +959,9 @@
 
 <!-- ==========================================================================
      ADS LANDING FOOTER.
+
+     The two office columns are filled per page from the LOCATIONS table in
+     build-site.mjs, the campaign's own office first.
 
      `footer.foot` is kept as the outer class so the footer's own type, link,
      `.foot-blurb`, `.foot-facts` and `.foot-base` rules all still apply, and
@@ -923,7 +996,7 @@
         </ul>
       </div>
       <div>
-        <h4>Tysons Corner &middot; McLean</h4>
+        <h4>Tysons Corner</h4>
         <div class="lp-foot-office">
           <address>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</address>
           <span>New patients &nbsp;<a href="tel:+15717029900">(571) 702-9900</a></span>

@@ -4,7 +4,7 @@
 
      > [!IMPORTANT]
      > THE CONVERSION TAG IS NOT IN THIS MARKUP, AND MUST NOT BE. Fire it on
-     > the URL: a destination-URL conversion on `/ads-veneers-thank-you`, or a
+     > the URL: a destination-URL conversion on `/ads-<office>-veneers-thank-you`, or a
      > GTM Page View trigger on that path. Site-wide tags on this build go
      > through Instatic's `siteScripts`; the "no CSS or JS inlined" gate fails
      > any page carrying its own `<script>`. `robots: noindex, follow` is not
@@ -32,7 +32,7 @@
       the team will call to arrange a time, and to answer anything you would rather ask before you
       come in.</p>
     <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If you would rather speak to somebody
-      now, call (571) 702-9900</p>
+      now, call {{LOC_PHONE}}</p>
     <div class="ph-meta" data-rv="stagger">
       <div><b>1 business day</b><span>Typical time to hear back</span></div>
       <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Friday until 2</span></div>
@@ -62,7 +62,7 @@
         <div>
           <dt aria-hidden="true">03</dt>
           <dd><b>Your evaluation</b><span>Candidacy and a free Digital Smile Design preview of the
-            result, at whichever of the two offices is closer to you.</span></dd>
+            result, at the {{LOC_NAME}} office.</span></dd>
         </div>
       </dl>
     </div>
@@ -100,36 +100,12 @@
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Where To Go</span></div>
-      <h2 data-split>Both offices, and their hours.</h2>
-      <p data-rv>Whichever is closer. Each has its own laboratory in the building.</p>
+      <h2 data-split>{{LOC_NAME}}, and the hours.</h2>
+      <p data-rv>The {{OTHER_NAME}} office is run by the same team if it is closer. Each has its own
+        laboratory in the building.</p>
     </div>
     <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
-        <h3>Tysons Corner &middot; McLean</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          7901 Jones Branch Drive, Suite 220<br>
-          McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-      <article class="ct-office">
-        <h3>Alexandria</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          2855 Duke Street<br>
-          Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
+{{LOC_OFFICES}}
     </div>
     <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
       <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>

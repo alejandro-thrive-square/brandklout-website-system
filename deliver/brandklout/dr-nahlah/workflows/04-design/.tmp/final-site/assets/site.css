@@ -2403,9 +2403,9 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
    Repeated every second or third section. `.pk-cta` is the site's closing CTA
    and carries both office panels with it, which is far too much furniture to
    drop into the middle of a page three times. */
-.lp-cta{background:var(--ink-900)}
+.lp-cta{background:var(--ink-900);position:relative;overflow:hidden}
 .lp-cta-in{display:grid;gap:clamp(1.1rem,2.4vw,1.75rem);justify-items:start;
-  padding-block:clamp(3rem,6vw,4.75rem)}
+  padding-block:clamp(3rem,6vw,4.75rem);position:relative;z-index:1}
 .lp-cta h2{color:var(--white);max-width:24ch}
 .lp-cta p{color:rgba(255,255,255,.82);font-weight:400;font-size:var(--body-lg);max-width:52ch}
 .lp-cta-actions{display:flex;flex-wrap:wrap;gap:.85rem;align-items:center}
@@ -2600,3 +2600,98 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .lp-rail .lp-rail-book{color:var(--black);
   background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
 @media(max-width:859px){ .lp-rail{display:grid;grid-template-columns:1fr 1.3fr} }
+
+/* ==========================================================================
+   2026-09-17c — MORE IMAGERY, MORE GROUNDS. Brandklout asked for photography
+   in more of the sections and for the sections to change colour more often,
+   without the page getting longer or the CTA getting further away. Every part
+   below is a photograph dropped INTO a section that already existed; no
+   section was added and the CTA count is unchanged. The grounds a landing page
+   now cycles through: cream (.pk), white (.pk-alt), gold-wash (.pk-light),
+   black (.pk[data-theme="dark"]), ink with a photograph (.lp-cta.has-fig),
+   deep gold (.lp-cta.is-gold), and the photo-backed closer (.lp-final).
+   ========================================================================== */
+
+/* ---------- stakes, with a photograph between the two lists ----------
+   The visitor's "now" list, a patient of the practice, then the "after" list.
+   The figure is the argument's middle term, which is why it sits between the
+   columns on a wide screen and not above them. */
+.lp-stakes.has-fig .lp-stakes-fig{position:relative;overflow:hidden;margin:0;
+  background:var(--mist);aspect-ratio:16/9}
+.lp-stakes-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-stakes-fig figcaption{position:absolute;left:0;right:0;bottom:0;padding:.9rem 1.1rem;
+  background:linear-gradient(transparent,rgba(11,11,12,.84));color:#fff;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+/* Two columns between 800 and 1039: the figure drops under both lists, full
+   width, rather than leaving the after-list alone on a second row. */
+@media(min-width:800px) and (max-width:1039px){
+  .lp-stakes.has-fig .lp-stakes-fig{grid-column:span 2;order:3;aspect-ratio:21/9} }
+@media(min-width:1040px){
+  .lp-stakes.has-fig{grid-template-columns:1fr .85fr 1fr}
+  .lp-stakes.has-fig .lp-stakes-fig{aspect-ratio:auto;min-height:100%} }
+
+/* ---------- CTA band with a photograph behind it ----------
+   The copy column sits over the darkest part of the gradient. Worst case for
+   the text is a white area of the photograph under the .62 stop: with the
+   image itself at .55 over ink-900 that composes to about #454545, which is
+   7.6:1 against white. Nothing on the band drops under AA. */
+.lp-cta-fig{position:absolute;inset:0;margin:0;z-index:0}
+.lp-cta-fig img{width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(.7)}
+.lp-cta-fig::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(20,20,22,.96) 0%,rgba(20,20,22,.86) 55%,rgba(20,20,22,.62))}
+/* The second band is deep gold, so the two CTAs on a page are not the same
+   block twice. --gold-ink is 6.5:1 under white; --gold-deep would be 4.2. */
+.lp-cta.is-gold{background:var(--gold-ink)}
+.lp-cta.is-gold p{color:rgba(255,255,255,.9)}
+.lp-cta.is-gold .lp-cta-aside{color:rgba(255,255,255,.8)}
+.lp-cta.is-gold .btn-ghost{border-color:rgba(255,255,255,.6)}
+.lp-cta.is-gold .btn-ghost:hover{color:var(--gold-ink)}
+
+/* ---------- the process rail, with a photograph per step ---------- */
+.lp-step-fig{position:relative;overflow:hidden;margin:0 0 .5rem;aspect-ratio:4/3;
+  background:var(--mist)}
+.lp-step-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.lp-step:hover .lp-step-fig img{transform:scale(1.04)}
+
+/* ---------- a wide photograph inside a section ----------
+   Used under the money section: the plan in writing, in a patient's hands. */
+.lp-wide{position:relative;overflow:hidden;margin:clamp(2rem,4vw,3rem) 0 0;
+  aspect-ratio:21/9;min-height:220px;background:var(--mist)}
+.lp-wide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-wide figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.25rem;
+  padding:clamp(1rem,2vw,1.6rem) clamp(1.1rem,2.4vw,2rem);color:#fff;
+  background:linear-gradient(transparent,rgba(11,11,12,.86))}
+.lp-wide figcaption b{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.35rem * var(--t-sm));line-height:1.2}
+.lp-wide figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--gold-light)}
+
+/* ---------- the FAQ beside a photograph ----------
+   Not sticky: ScrollSmoother transforms #smooth-content, and position:sticky
+   inside a transformed ancestor sticks to the ancestor, not the viewport. */
+.lp-faq-grid{display:grid;gap:clamp(1.75rem,3.5vw,3rem);align-items:start}
+.lp-faq-fig{position:relative;overflow:hidden;margin:0;aspect-ratio:16/9;background:var(--mist)}
+.lp-faq-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-faq-fig figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.2rem;
+  padding:1rem 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
+.lp-faq-fig figcaption b{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.25rem * var(--t-sm));line-height:1.2}
+.lp-faq-fig figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--gold-light)}
+@media(min-width:960px){
+  .lp-faq-grid{grid-template-columns:.72fr 1.28fr}
+  .lp-faq-fig{aspect-ratio:4/5} }
+
+/* ---------- the closer, photo-backed and dark ----------
+   `data-theme="dark"` on the section re-tokens the office panels and the
+   heading for a dark ground; this only supplies the ground itself. The scrim
+   is heavier at the bottom, where the office cards sit. */
+.lp-final{position:relative;overflow:hidden;background:var(--ink-900)}
+.lp-final-bg{position:absolute;inset:0;margin:0;z-index:0}
+.lp-final-bg img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.lp-final-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,11,12,.72),rgba(11,11,12,.93) 70%)}
+.lp-final>.wrap{position:relative;z-index:1}
+/* A wide portrait whose subject stands right of centre: crop to that side. */
+.lp-faq-fig.is-right img{object-position:78% 50%}

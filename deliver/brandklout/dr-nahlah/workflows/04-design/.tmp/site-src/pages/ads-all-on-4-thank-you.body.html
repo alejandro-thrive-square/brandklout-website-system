@@ -10,7 +10,7 @@
      > gate fails any page that carries its own `<script>`, and because a tag
      > pasted into one page body is a tag nobody can find again. Fire the
      > conversion on the URL instead: in Google Ads use a destination-URL
-     > conversion on `/ads-all-on-4-thank-you`, or in GTM a Page View trigger
+     > conversion on `/ads-<office>-all-on-4-thank-you`, or in GTM a Page View trigger
      > on that path. All three thank-you pages carry the same structure so the
      > three campaigns can be reported separately by path.
      >
@@ -38,7 +38,7 @@
       member of the team will call to arrange a time, and to answer anything you would rather ask
       before you come in.</p>
     <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If it cannot wait, call
-      (571) 702-9900 and say it is urgent</p>
+      {{LOC_PHONE}} and say it is urgent</p>
     <div class="ph-meta" data-rv="stagger">
       <div><b>1 business day</b><span>Typical time to hear back</span></div>
       <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Friday until 2</span></div>
@@ -69,7 +69,7 @@
         <div>
           <dt aria-hidden="true">03</dt>
           <dd><b>Your consultation</b><span>The examination and the cone-beam scan, at no cost, at
-            whichever of the two offices is closer to you.</span></dd>
+            the {{LOC_NAME}} office.</span></dd>
         </div>
       </dl>
     </div>
@@ -105,7 +105,7 @@
 
      NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
      pull-quote, the card carries the name and the treatment and no words. -->
-<section class="pk" id="film">
+<section class="pk" data-theme="dark" id="film">
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
@@ -146,36 +146,10 @@
       <div class="chapter-tag" data-rv><i></i><span class="label">If You Cannot Wait</span></div>
       <h2 data-split>Call the office directly.</h2>
       <p data-rv>If you are in pain, have broken a tooth, or have a denture or temporary that has
-        come loose, do not wait for the callback. Phone whichever office is closer and say it is
-        urgent.</p>
+        come loose, do not wait for the callback. Phone the {{LOC_NAME}} office and say it is urgent.</p>
     </div>
     <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
-        <h3>Tysons Corner &middot; McLean</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          7901 Jones Branch Drive, Suite 220<br>
-          McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-      <article class="ct-office">
-        <h3>Alexandria</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          2855 Duke Street<br>
-          Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
+{{LOC_OFFICES}}
     </div>
   </div>
 </section>

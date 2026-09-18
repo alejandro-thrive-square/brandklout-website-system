@@ -6,19 +6,51 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Porcelain Veneers | Free Digital Smile Design | McLean, VA</title>
-<meta name="description" content="Thin porcelain veneers hand-designed to your lip line, gum line and coloring, with a free Digital Smile Design preview before anything is prepared.">
+<title>Porcelain Veneers | Free Digital Smile Design | Alexandria, VA</title>
+<meta name="description" content="Thin porcelain veneers hand-designed to your lip line, gum line and coloring, with a free Digital Smile Design preview before anything is prepared. Alexandria office.">
 <meta name="robots" content="noindex, follow">
-<meta property="og:title" content="Porcelain Veneers | Dr. Nahlah, McLean &amp; Alexandria VA">
+<meta property="og:title" content="Porcelain Veneers | Dr. Nahlah, Alexandria, VA, McLean &amp; Alexandria VA">
 <meta property="og:description" content="See your veneers before you have them. A free Digital Smile Design preview at the evaluation.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Porcelain Veneers | Dr. Nahlah, McLean &amp; Alexandria VA">
+<meta name="twitter:title" content="Porcelain Veneers | Dr. Nahlah, Alexandria, VA, McLean &amp; Alexandria VA">
 <meta name="twitter:description" content="See your veneers before you have them. A free Digital Smile Design preview at the evaluation.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
 
 <!-- ==========================================================================
      THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
@@ -53,6 +85,8 @@
 </head>
 
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
@@ -74,10 +108,11 @@
      #book and Book my evaluation are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
-     THE TELEPHONE NUMBER. (571) 702-9900 is the McLean / Tysons Corner
-     new-patient line, which is the implant office. If a call-tracking number
-     is provisioned for these campaigns it is swapped HERE and in
-     partials/lp-rail.html, and nowhere else.
+     THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
+     per page from the LOCATIONS table in build-site.mjs (+15712537790 /
+     (571) 253-7790). Call tracking is the LeadConnector number pool loaded by
+     partials/site-scripts.html, which swaps the number in the page per
+     visitor; nothing here changes for it.
      ========================================================================== -->
 <header class="nav lp-nav" id="nav" data-journey="0">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
@@ -89,7 +124,7 @@
         <b>4.9</b> Google rating</span>
       <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
         <b>18,000+</b> implants placed</span>
-      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean and Alexandria, VA</span>
+      <span class="lp-bar-item is-wide">Alexandria, VA &middot; Duke Street</span>
     </div>
   </div>
 
@@ -98,8 +133,8 @@
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </span>
     <div class="lp-nav-side">
-      <a class="lp-nav-phone" href="tel:+15717029900">
-        <i aria-hidden="true">&#9742;</i><span>(571) 702-9900</span></a>
+      <a class="lp-nav-phone" href="tel:+15712537790">
+        <i aria-hidden="true">&#9742;</i><span>(571) 253-7790</span></a>
       <a class="lp-nav-cta" href="#book">Book my evaluation</a>
     </div>
   </div>
@@ -120,7 +155,7 @@
      Not on the thank-you page: there is nothing left to convert there.
      ========================================================================== -->
 <div class="lp-rail">
-  <a class="lp-rail-call" href="tel:+15717029900">Call now</a>
+  <a class="lp-rail-call" href="tel:+15712537790">Call now</a>
   <a class="lp-rail-book" href="#book">Book my evaluation</a>
 </div>
 
@@ -172,7 +207,7 @@
   <div class="wrap ph-in">
     <div class="lp-hero-grid">
       <div class="lp-hero-copy">
-        <div class="chapter-tag" data-rv><i></i><span class="label">Porcelain Veneers &middot; McLean and Alexandria, VA</span></div>
+        <div class="chapter-tag" data-rv><i></i><span class="label">Porcelain Veneers &middot; Alexandria, VA</span></div>
         <h1 data-split>See your veneers <em>before</em> you have them.</h1>
         <p class="ph-lead" data-rv>Thin porcelain, hand-designed to your lip line, your gum line and your own coloring. The evaluation includes a free Digital Smile Design preview, and nothing is prepared until you have agreed to it.</p>
       </div>
@@ -183,9 +218,9 @@
       <div class="lp-form-card" id="book" data-rv>
         <h2>Book your smile evaluation</h2>
       <div class="wz-embed" data-wz-embed="auto"><iframe
-    src="https://api.leadconnectorhq.com/widget/form/axgcdqEPUFoHF8Dt5Nji"
+    src="https://api.leadconnectorhq.com/widget/form/if9TqDr0uPYPs2Hiz3vr"
     style="width:100%;height:100%;border:none;border-radius:8px"
-    id="inline-axgcdqEPUFoHF8Dt5Nji"
+    id="inline-if9TqDr0uPYPs2Hiz3vr"
     data-layout="{'id':'INLINE'}"
     data-trigger-type="alwaysShow"
     data-trigger-value=""
@@ -193,18 +228,21 @@
     data-activation-value=""
     data-deactivation-type="neverDeactivate"
     data-deactivation-value=""
-    data-form-name="Tyson Corner Office - Contact form Website"
-    data-height="1168"
-    data-layout-iframe-id="inline-axgcdqEPUFoHF8Dt5Nji"
-    data-form-id="axgcdqEPUFoHF8Dt5Nji"
-    title="Tyson Corner Office - Contact form Website"
+    data-form-name="Alexandria - Google Veneers"
+    data-height="1802"
+    data-layout-iframe-id="inline-if9TqDr0uPYPs2Hiz3vr"
+    data-form-id="if9TqDr0uPYPs2Hiz3vr"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Alexandria - Google Veneers"
 >
 </iframe>
 <script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
-      <p class="lp-form-note">Prefer to speak to someone now? Call
-        <a href="tel:+15717029900">(571) 702-9900</a> for McLean and Tysons Corner, or
-        <a href="tel:+15712537790">(571) 253-7790</a> for Alexandria. If anxiety is what has kept
-        you away, say so when you call. It changes how the appointment is planned.</p>
+
+      <p class="lp-form-note">Prefer to speak to someone now? Call the Alexandria office on
+        <a href="tel:+15712537790">(571) 253-7790</a>, or Tysons Corner on
+        <a href="tel:+15717029900">(571) 702-9900</a>. If anxiety is what has kept you away, say
+        so when you call. It changes how the appointment is planned.</p>
       </div>
 
       <!-- Below the form on a phone, beside it on a desktop. The form has to be
@@ -244,7 +282,7 @@
       <p data-rv>Most people arriving here have known for years, and have been waiting for a
         version of this that does not involve guessing at the result.</p>
     </div>
-    <div class="lp-stakes" data-rv="stagger">
+    <div class="lp-stakes has-fig" data-rv="stagger">
       <div class="lp-stakes-col is-before">
         <span class="label">What you do now</span>
         <h3>Managing it</h3>
@@ -256,6 +294,10 @@
           <li><i aria-hidden="true">&#10005;</i>Putting it off because you cannot picture the result</li>
         </ul>
       </div>
+      <figure class="lp-stakes-fig">
+        <img src="assets/case-1-smile-makeover-after.jpg" alt="A finished smile makeover case from this practice" loading="lazy">
+        <figcaption>A finished case from this practice</figcaption>
+      </figure>
       <div class="lp-stakes-col is-after">
         <span class="label">After treatment</span>
         <h3>Porcelain designed to your face</h3>
@@ -272,7 +314,10 @@
 </section>
 
 <!-- ---------- CTA 1 ---------- -->
-<section class="lp-cta" id="cta-1">
+<section class="lp-cta has-fig" id="cta-1">
+  <figure class="lp-cta-fig" aria-hidden="true">
+    <img src="assets/office-wide.jpeg" alt="" loading="lazy">
+  </figure>
   <div class="wrap section lp-cta-in">
     <h2 data-split>Have the design done before the decision.</h2>
     <p data-rv>The Digital Smile Design preview at the evaluation costs nothing, and you are not
@@ -487,24 +532,28 @@
       <div class="lp-steps-grid is-four" data-rv="stagger">
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">1</span>
+          <figure class="lp-step-fig"><img src="assets/pt-interaction-5.jpg" alt="A smile evaluation at the practice" loading="lazy"></figure>
           <h3>Smile evaluation</h3>
           <p>Candidacy, a free Digital Smile Design preview of the result, and time with Dr. Nahlah
             rather than a treatment coordinator. No cost.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">2</span>
+          <figure class="lp-step-fig"><img src="assets/office-room.jpg" alt="A treatment room at the practice" loading="lazy"></figure>
           <h3>Minimally invasive preparation</h3>
           <p>Less than a millimeter of enamel comes off the front surface. It is a permanent
             modification, which is exactly why the design is agreed first.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">3</span>
+          <figure class="lp-step-fig"><img src="assets/tech-advanced.jpg" alt="The microscope bench in the practice's own laboratory" loading="lazy"></figure>
           <h3>Design and fabrication</h3>
           <p>Each veneer is hand-designed in the practice's own laboratory to the size, shape and
             color for your face.</p>
         </article>
         <article class="lp-step">
           <span class="lp-step-n" aria-hidden="true">4</span>
+          <figure class="lp-step-fig"><img src="assets/porcelain-004-after.jpg" alt="A finished porcelain case from this practice" loading="lazy"></figure>
           <h3>Fit and bond</h3>
           <p>The fit is verified, then the veneers are bonded. As few as two appointments once the
             design is settled, and no special maintenance afterwards.</p>
@@ -515,20 +564,20 @@
 </section>
 
 <!-- ---------- CTA 2 ---------- -->
-<section class="lp-cta" id="cta-2">
+<section class="lp-cta is-gold" id="cta-2">
   <div class="wrap section lp-cta-in">
     <h2 data-split>Nothing is prepared until you have seen it.</h2>
     <p data-rv>The Digital Smile Design preview is the whole reason to come in before you decide.
       It costs nothing and commits you to nothing.</p>
     <div class="lp-cta-actions" data-rv>
       <a class="btn btn-primary magnetic" href="#book"><span>Book my evaluation</span></a>
-      <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+      <a class="btn btn-ghost magnetic" href="tel:+15712537790"><span>Call (571) 253-7790</span></a>
     </div>
   </div>
 </section>
 
 <!-- ---------- the work, closer ---------- -->
-<section class="pk" id="closer">
+<section class="pk" data-theme="dark" id="closer">
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">The Porcelain Itself</span></div>
@@ -608,6 +657,11 @@
       <div class="chapter-tag" data-rv><i></i><span class="label">Before You Book</span></div>
       <h2 data-split>The questions people actually ask.</h2>
     </div>
+    <div class="lp-faq-grid">
+      <figure class="lp-faq-fig is-right" data-rv>
+        <img src="assets/Dr_Nahlah.jpg" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah</b><span>Lectures on smile design</span></figcaption>
+      </figure>
     <div class="pk-faq" data-rv="stagger">
       <details>
         <summary>Do veneers ruin your teeth?</summary>
@@ -645,11 +699,15 @@
           CareCredit, Proceed Finance and LendingClub.</div>
       </details>
     </div>
+    </div>
   </div>
 </section>
 
 <!-- ---------- closing CTA ---------- -->
-<section class="pk pk-light" id="book-now">
+<section class="pk lp-final" data-theme="dark" id="book-now">
+  <figure class="lp-final-bg" aria-hidden="true">
+    <img src="assets/team-group.jpg" alt="" loading="lazy">
+  </figure>
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">The Next Step</span></div>
@@ -659,31 +717,39 @@
     </div>
     <div class="lp-cta-actions" data-rv style="margin-bottom:clamp(2rem,4vw,3rem)">
       <a class="btn btn-primary magnetic" href="#book"><span>Book my evaluation</span></a>
-      <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+      <a class="btn btn-ghost magnetic" href="tel:+15712537790"><span>Call (571) 253-7790</span></a>
     </div>
     <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
-        <h3>Tysons Corner &middot; McLean</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          7901 Jones Branch Drive, Suite 220<br>
-          McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-      <article class="ct-office">
-        <h3>Alexandria</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          2855 Duke Street<br>
-          Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
+<article class="ct-office">
+  <h3>Alexandria</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    2855 Duke Street<br>
+    Alexandria, VA 22314</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15712537790">(571) 253-7790</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17039405410">(703) 940-5410</a></div>
+  <p class="ct-office-flag">The office this campaign books at</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
+<article class="ct-office">
+  <h3>Tysons Corner</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    7901 Jones Branch Drive, Suite 220<br>
+    McLean, VA 22102</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15717029900">(571) 702-9900</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17034483312">(703) 448-3312</a></div>
+  <p class="ct-office-flag">Also available, run by the same team</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
     </div>
   </div>
 </section>
@@ -693,6 +759,9 @@
 
 <!-- ==========================================================================
      ADS LANDING FOOTER.
+
+     The two office columns are filled per page from the LOCATIONS table in
+     build-site.mjs, the campaign's own office first.
 
      `footer.foot` is kept as the outer class so the footer's own type, link,
      `.foot-blurb`, `.foot-facts` and `.foot-base` rules all still apply, and
@@ -727,19 +796,19 @@
         </ul>
       </div>
       <div>
-        <h4>Tysons Corner &middot; McLean</h4>
-        <div class="lp-foot-office">
-          <address>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</address>
-          <span>New patients &nbsp;<a href="tel:+15717029900">(571) 702-9900</a></span>
-          <span>Current patients &nbsp;<a href="tel:+17034483312">(703) 448-3312</a></span>
-        </div>
-      </div>
-      <div>
         <h4>Alexandria</h4>
         <div class="lp-foot-office">
           <address>2855 Duke Street<br>Alexandria, VA 22314</address>
           <span>New patients &nbsp;<a href="tel:+15712537790">(571) 253-7790</a></span>
           <span>Current patients &nbsp;<a href="tel:+17039405410">(703) 940-5410</a></span>
+        </div>
+      </div>
+      <div>
+        <h4>Tysons Corner</h4>
+        <div class="lp-foot-office">
+          <address>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</address>
+          <span>New patients &nbsp;<a href="tel:+15717029900">(571) 702-9900</a></span>
+          <span>Current patients &nbsp;<a href="tel:+17034483312">(703) 448-3312</a></span>
         </div>
       </div>
     </div>

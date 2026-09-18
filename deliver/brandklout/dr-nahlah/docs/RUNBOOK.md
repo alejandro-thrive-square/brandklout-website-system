@@ -11,16 +11,18 @@ then only the runs you need. Do not read them all.
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 37 editorial pages + 43 migrated blog posts, live and verified. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
-| **In flight** | The **nine ads landing pages**, built locally 2026-09-17, revised the same day to put the GHL form in every hero and add filmed patients. Not on Instatic, not published. |
+| **In flight** | The **ads landing pages**: eighteen, one set of nine per office (Alexandria, Tysons Corner), each with its own LeadConnector forms, more photography on more grounds, and the four site tags (Termly, GTM, LeadConnector number pool) on every page of the local build. Built and gated locally 2026-09-17 (three passes). Not on Instatic, not published. |
 
 ## What is next
 
-1. **Review the nine ads landing pages with Brandklout** (three campaigns × landing,
-   consultation, thank you). Built and gated locally; see the 2026-09-17 run.
-2. **Get one LeadConnector form per campaign, each redirecting to its own thank-you page.**
-   This blocks the campaign going live — see the trap below.
-3. Google Ads conversions, fired on the thank-you URLs.
-4. Import the nine to Instatic (workflow 22) and publish.
+1. **Review the eighteen ads landing pages with Brandklout** (two offices × three
+   campaigns × landing, consultation, thank you). See the 2026-09-17c run.
+2. **In LeadConnector, point each of the six forms at its own thank-you page**
+   (`/ads-<office>-<campaign>-thank-you`). The forms are wired; the redirect cannot be
+   verified from this repository.
+3. Google Ads conversions, one per thank-you URL (six).
+4. Import the eighteen to Instatic (workflow 22): the four site tags go into `siteScripts`,
+   the CSP has to allow their three hosts, then publish.
 
 ## Standing traps
 
@@ -53,10 +55,14 @@ These bite every time somebody works in here. The per-run files carry the rest.
   `data-rv` whose parent has one, and the children silently stay at opacity 0.
 - **A blank GHL form under automation is Cloudflare Turnstile**, not a broken embed. It refuses
   automation and localhost; prove the form on the deployed domain.
-- **THE ADS FORMS ARE A PLACEHOLDER.** All three consultation pages carry the McLean general
-  contact form. It has no redirect, so nobody reaches the thank-you page and the Google Ads
-  conversion never fires, and no campaign tag, so leads from all three campaigns land in one
-  pile. The pages look finished. They are not wired.
+- **The ads pages are templates: nine bodies, eighteen outputs.** `build-site.mjs` fills
+  `{{LOC_*}}` tokens from its `LOCATIONS` table per office. Edit the body once; never the
+  built page. The six form ids live in that table and nowhere else.
+- **The asset library's file names lie.** `Untitled-3.jpg` is the reception desk, `Untitled-4`
+  a handshake, `pt-hero-2` is Stephen, `dr-and-yolanda` is Barbara. Look before captioning.
+- **The four site tags are one partial, `partials/site-scripts.html`, on every page.** The
+  inline-script gate exempts only a `<script data-site-script>`. Termly runs autoBlock=off on
+  purpose: on, it would hide the GHL form and the films until consent.
 - **No prices anywhere**, on the client site or the landing pages: the practice publishes
   none, and the relative-weight column ($ / $$ / $$$) is the substitute.
 - **Open since the original build:** the McLean current-patient phone conflict

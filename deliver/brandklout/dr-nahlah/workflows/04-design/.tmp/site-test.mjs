@@ -283,7 +283,12 @@ for (const page of PAGES) {
      sentence in English, not an element. */
   const shipped = (await fetchText(url)).replace(/<!--[\s\S]*?-->/g, "");
   const shippedStyles = (shipped.match(/<style[\s>]/gi) || []).length;
-  const shippedInline = (shipped.match(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>/gi) || []).length;
+  /* 2026-09-17: partials/site-scripts.html ships the Google Tag Manager
+     bootstrap on every page, and GTM's bootstrap is inline by design. It is
+     the one inline script this build authors, it carries `data-site-script`,
+     and only a script carrying that attribute is exempt: an inline script in
+     a page body still fails. On Instatic the same tags live in `siteScripts`. */
+  const shippedInline = (shipped.match(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)(?![^>]*\bdata-site-script=)[^>]*>/gi) || []).length;
   check(page, "no CSS or JS inlined into the page",
     shippedStyles === 0 && shippedInline === 0,
     `${shippedStyles} style, ${shippedInline} inline script (as shipped)`);

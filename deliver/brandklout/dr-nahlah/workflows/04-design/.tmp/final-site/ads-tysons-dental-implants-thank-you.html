@@ -6,19 +6,51 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Request Received | Smile Evaluation | Dr. Nahlah</title>
-<meta name="description" content="Your smile evaluation request has reached the practice. Here is what happens next, and how to reach either office directly if it cannot wait.">
+<title>Request Received | Implant Consultation | Dr. Nahlah, McLean, VA</title>
+<meta name="description" content="Your implant consultation request has reached the practice. Here is what happens next, and how to reach the Tysons Corner office directly if it cannot wait. Tysons Corner office.">
 <meta name="robots" content="noindex, follow">
-<meta property="og:title" content="Request received | Veneers | Dr. Nahlah">
-<meta property="og:description" content="What happens next after a smile evaluation request.">
+<meta property="og:title" content="Request received | Implants | Dr. Nahlah, McLean, VA">
+<meta property="og:description" content="What happens next after an implant consultation request.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Request received | Veneers | Dr. Nahlah">
-<meta name="twitter:description" content="What happens next after a smile evaluation request.">
+<meta name="twitter:title" content="Request received | Implants | Dr. Nahlah, McLean, VA">
+<meta name="twitter:description" content="What happens next after an implant consultation request.">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
 
 <!-- ==========================================================================
      THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
@@ -53,6 +85,8 @@
 </head>
 
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
@@ -74,10 +108,11 @@
      tel:+15717029900 and Call the office are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
-     THE TELEPHONE NUMBER. (571) 702-9900 is the McLean / Tysons Corner
-     new-patient line, which is the implant office. If a call-tracking number
-     is provisioned for these campaigns it is swapped HERE and in
-     partials/lp-rail.html, and nowhere else.
+     THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
+     per page from the LOCATIONS table in build-site.mjs (+15717029900 /
+     (571) 702-9900). Call tracking is the LeadConnector number pool loaded by
+     partials/site-scripts.html, which swaps the number in the page per
+     visitor; nothing here changes for it.
      ========================================================================== -->
 <header class="nav lp-nav" id="nav" data-journey="0">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
@@ -89,7 +124,7 @@
         <b>4.9</b> Google rating</span>
       <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
         <b>18,000+</b> implants placed</span>
-      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean and Alexandria, VA</span>
+      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean, VA</span>
     </div>
   </div>
 
@@ -120,44 +155,36 @@
 
 
 <!-- ==========================================================================
-     ADS THANK YOU — PORCELAIN VENEERS. The destination of the evaluation
+     ADS THANK YOU — DENTAL IMPLANTS. The destination of the consultation
      form, and the page the Google Ads conversion fires on.
 
      > [!IMPORTANT]
      > THE CONVERSION TAG IS NOT IN THIS MARKUP, AND MUST NOT BE. Fire it on
-     > the URL: a destination-URL conversion on `/ads-veneers-thank-you`, or a
-     > GTM Page View trigger on that path. Site-wide tags on this build go
-     > through Instatic's `siteScripts`; the "no CSS or JS inlined" gate fails
-     > any page carrying its own `<script>`. `robots: noindex, follow` is not
-     > optional: an indexed thank-you page can be landed on directly, which
-     > fires a conversion for a visitor who never converted. The full note is
-     > on the All-on-4 thank-you page.
-
-     THE URGENCY PANEL IS DELIBERATELY DIFFERENT HERE. On the two implant
-     campaigns it is about bone loss, which is a real clinical consequence of
-     waiting that the practice's own cost page already argues. Veneers are
-     elective and cosmetic, and there is no honest clinical cost to waiting
-     six months for them, so inventing one would be a false medical claim on a
-     page aimed at somebody who has just handed over their telephone number.
-     What replaces it is the thing that is actually true and actually useful:
-     what to bring, and what to think about before the design appointment.
+     > the URL: a destination-URL conversion on
+     > `/ads-<office>-dental-implants-thank-you`, or a GTM Page View trigger on that
+     > path. Site-wide tags on this build go through Instatic's `siteScripts`;
+     > the "no CSS or JS inlined" gate fails any page carrying its own
+     > `<script>`. `robots: noindex, follow` is not optional: an indexed
+     > thank-you page can be landed on directly, which fires a conversion for a
+     > visitor who never converted. The full note is on the All-on-4 thank-you
+     > page.
      ========================================================================== -->
 <section class="pg-hero lp-hero" id="hero">
   <div class="ph-bg">
-    <img src="assets/case-veneers-5-after.jpg" alt="A completed porcelain veneer case at the practice" data-drift>
+    <img src="assets/consult-discussion.jpg" alt="A consultation at the practice" data-drift>
   </div>
   <div class="wrap ph-in">
     <div class="chapter-tag" data-rv><i></i><span class="label">Request Received</span></div>
     <h1 data-split>That is <em>received</em>. We will call you.</h1>
-    <p class="ph-lead" data-rv>Your smile evaluation request has reached the practice. A member of
-      the team will call to arrange a time, and to answer anything you would rather ask before you
-      come in.</p>
-    <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If you would rather speak to somebody
-      now, call (571) 702-9900</p>
+    <p class="ph-lead" data-rv>Your implant consultation request has reached the practice. A member
+      of the team will call to arrange a time, and to answer anything you would rather ask before
+      you come in.</p>
+    <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If it cannot wait, call
+      (571) 702-9900 and say it is urgent</p>
     <div class="ph-meta" data-rv="stagger">
       <div><b>1 business day</b><span>Typical time to hear back</span></div>
       <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Friday until 2</span></div>
-      <div><b>No cost</b><span>The evaluation and the preview</span></div>
+      <div><b>No cost</b><span>The consultation itself</span></div>
     </div>
   </div>
 </section>
@@ -171,36 +198,71 @@
       <dl class="lp-next-list" data-rv="stagger">
         <div>
           <dt aria-hidden="true">01</dt>
-          <dd><b>What you would change</b><span>Which teeth bother you, what you have tried
-            already, and whether whitening, bonding or veneers is the honest answer for it.</span></dd>
+          <dd><b>Your situation</b><span>How many teeth are involved, how long they have been gone,
+            and what you have already been told. That decides which of the four routes is even
+            worth discussing.</span></dd>
         </div>
         <div>
           <dt aria-hidden="true">02</dt>
-          <dd><b>How people pay for it</b><span>Cosmetic work is rarely covered by insurance, so
-            this is usually a financing conversation. CareCredit, Proceed Finance and LendingClub,
-            explained plainly before you commit to anything.</span></dd>
+          <dd><b>How people pay for it</b><span>What insurance is likely to cover and what it is
+            not, and the three lenders the practice works with, explained plainly before you
+            commit to anything.</span></dd>
         </div>
         <div>
           <dt aria-hidden="true">03</dt>
-          <dd><b>Your evaluation</b><span>Candidacy and a free Digital Smile Design preview of the
-            result, at whichever of the two offices is closer to you.</span></dd>
+          <dd><b>Your consultation</b><span>The examination and a 3D scan where it is useful, at no
+            cost, at the Tysons Corner office.</span></dd>
         </div>
       </dl>
     </div>
     <div class="lp-warn" data-rv>
-      <h3>Worth thinking about before you come in</h3>
+      <h3>Why another year matters</h3>
       <ul>
-        <li><i aria-hidden="true">&#8250;</i>Bring photographs of your own smile from years ago, if
-          you have them. They are the most useful reference there is</li>
-        <li><i aria-hidden="true">&#8250;</i>Bring photographs of smiles you like, and be ready to
-          say what it is about them</li>
-        <li><i aria-hidden="true">&#8250;</i>Decide roughly how many teeth you are thinking about.
-          The smile zone is usually six to ten</li>
-        <li><i aria-hidden="true">&#8250;</i>If you grind your teeth, or your bite has ever been
-          called a problem, say so on the call</li>
+        <li><i aria-hidden="true">&#8250;</i>Bone recedes where teeth are not loading it, and time
+          gone is the biggest predictor of whether anything has to be rebuilt first</li>
+        <li><i aria-hidden="true">&#8250;</i>Neighboring teeth drift into the gap, which changes the
+          bite and makes the eventual treatment more involved</li>
+        <li><i aria-hidden="true">&#8250;</i>Teeth either side of a gap carry load they were not
+          built for</li>
+        <li><i aria-hidden="true">&#8250;</i>Grafting or sinus work added later means more healing
+          time and a higher number</li>
       </ul>
-      <p>That last one matters most. Veneers cannot fix a bite, and a bite that is not dealt with
-        first is the usual reason cosmetic work does not last.</p>
+      <p>None of that is a reason to rush a decision. It is the reason to get the scan done, so the
+        decision is made against what your bone is actually doing rather than against a guess.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- filmed patients ----------
+     The practice's own filmed patients, from patient-stories.html. The lead
+     film is a REAL iframe and the rest are click-to-play facades, and that
+     split is not a performance nicety: Instatic lifts CSP `frame-src` only for
+     a page that renders a real YouTube node, so a page of facades alone could
+     never play anything once published. One embed, and the facades work.
+
+     Components are the site's own (`.st-row` from patient-stories, `.vl-grid`
+     from video-library), so sections/video-library.js picks the facades up with
+     no new JS and 70-landing.css declares nothing for either.
+
+     NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
+     pull-quote, the card carries the name and the treatment and no words. -->
+<section class="pk" data-theme="dark" id="film">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
+      <h2 data-split>While you wait, hear from two of them.</h2>
+      <p data-rv>Two patients treated at the same time, filmed together at the practice.</p>
+    </div>
+    <div class="lp-films">
+    <article class="st-row st-row-rev" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/bn3vdCgDTrc" loading="lazy" title="A couple, treated together tells their story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Two patients, one course of treatment</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">A couple, treated together</span>
+      </div>
+    </article>
     </div>
   </div>
 </section>
@@ -208,55 +270,54 @@
 <!-- ---------- band ---------- -->
 <section class="mband" id="band">
   <figure class="mband-fig">
-    <img src="assets/case-veneers-7-after.jpg" alt="A finished porcelain veneer case at the practice" data-drift loading="lazy">
+    <img src="assets/case-veneers-implants-1-after.jpg" alt="A completed implant and veneer restoration at the practice" data-drift loading="lazy">
   </figure>
   <div class="mband-in" data-rv>
     <span class="mband-kicker">A patient of this practice</span>
-    <p class="mband-line">The design came first. Then the porcelain.</p>
+    <p class="mband-line">This started with the same phone call.</p>
   </div>
 </section>
 
-<!-- ---------- where to go ---------- -->
-<section class="pk" id="offices">
+<!-- ---------- if it is urgent ---------- -->
+<section class="pk" id="urgent">
   <div class="wrap section">
     <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Where To Go</span></div>
-      <h2 data-split>Both offices, and their hours.</h2>
-      <p data-rv>Whichever is closer. Each has its own laboratory in the building.</p>
+      <div class="chapter-tag" data-rv><i></i><span class="label">If You Cannot Wait</span></div>
+      <h2 data-split>Call the office directly.</h2>
+      <p data-rv>If you are in pain, have broken a tooth, or have a denture or temporary that has
+        come loose, do not wait for the callback. Phone the Tysons Corner office and say it is urgent.</p>
     </div>
     <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
-        <h3>Tysons Corner &middot; McLean</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          7901 Jones Branch Drive, Suite 220<br>
-          McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-      <article class="ct-office">
-        <h3>Alexandria</h3>
-        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-          2855 Duke Street<br>
-          Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
-          <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs"
-           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-           target="_blank" rel="noopener">Directions</a>
-      </article>
-    </div>
-    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
-      <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>
-      <div><b>Friday</b><span>8:00am &ndash; 2:00pm</span></div>
-      <div><b>Saturday</b><span>Closed</span></div>
-      <div><b>Sunday</b><span>Closed</span></div>
+<article class="ct-office">
+  <h3>Tysons Corner</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    7901 Jones Branch Drive, Suite 220<br>
+    McLean, VA 22102</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15717029900">(571) 702-9900</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17034483312">(703) 448-3312</a></div>
+  <p class="ct-office-flag">The office this campaign books at</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
+<article class="ct-office">
+  <h3>Alexandria</h3>
+  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+    2855 Duke Street<br>
+    Alexandria, VA 22314</address>
+  <div class="ct-office-line"><span>New patients</span>
+    <a href="tel:+15712537790">(571) 253-7790</a></div>
+  <div class="ct-office-line"><span>Current patients</span>
+    <a href="tel:+17039405410">(703) 940-5410</a></div>
+  <p class="ct-office-flag">Also available, run by the same team</p>
+  <a class="pk-more ct-office-dirs"
+     href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+     target="_blank" rel="noopener">Directions</a>
+</article>
+
     </div>
   </div>
 </section>
@@ -270,16 +331,16 @@
     </div>
     <div class="mz mz-3" data-rv="stagger">
       <figure class="mz-fig">
-        <img src="assets/porcelain-003-after.jpg" alt="A finished porcelain case at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Shade</b>Matched to your own coloring</figcaption>
+        <img src="assets/xray-consult.jpg" alt="A clinician showing a patient their scan beside an implant model" loading="lazy">
+        <figcaption class="mz-cap"><b>The 3D scan</b>What the consultation includes</figcaption>
       </figure>
       <figure class="mz-fig">
-        <img src="assets/lab.jpg" alt="The practice's own digital laboratory" loading="lazy">
-        <figcaption class="mz-cap"><b>The laboratory</b>One in each office</figcaption>
+        <img src="assets/practice-space-3.avif" alt="A treatment room at the practice" loading="lazy">
+        <figcaption class="mz-cap"><b>Where it happens</b>Surgery and the laboratory, one roof</figcaption>
       </figure>
-      <figure class="mz-fig">
-        <img src="assets/practice-space-4.avif" alt="A treatment room at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Where it happens</b>Two appointments, once the design is settled</figcaption>
+      <figure class="mz-fig mz-plain">
+        <img src="assets/dental-implant-model-3.png" alt="A titanium implant post in the jawbone" loading="lazy">
+        <figcaption class="mz-cap"><b>Three parts</b>And four months to make one yours</figcaption>
       </figure>
     </div>
     <div class="pk-next" data-rv="stagger" aria-label="Related pages">
@@ -287,14 +348,14 @@
         <span class="nx-k">Gallery</span>
         <span class="nx-t">Before and after</span>
         <span class="nx-d">Twenty-eight cases from this practice, filterable by treatment.</span></a>
-      <a href="smile-makeover.html">
-        <span class="nx-k">The whole plan</span>
-        <span class="nx-t">Smile Makeover</span>
-        <span class="nx-d">Where veneers are one of five tools, not the whole answer.</span></a>
+      <a href="patient-stories.html">
+        <span class="nx-k">Stories</span>
+        <span class="nx-t">Patients on film</span>
+        <span class="nx-d">Six people who went through it, in their own words.</span></a>
       <a href="meet-dr-nahlah.html">
         <span class="nx-k">Doctor</span>
         <span class="nx-t">Dr. Esam Nahlah</span>
-        <span class="nx-d">A prosthodontist who lectures on smile design.</span></a>
+        <span class="nx-d">Fourteen credentials, and what a prosthodontist actually is.</span></a>
     </div>
   </div>
 </section>
@@ -304,6 +365,9 @@
 
 <!-- ==========================================================================
      ADS LANDING FOOTER.
+
+     The two office columns are filled per page from the LOCATIONS table in
+     build-site.mjs, the campaign's own office first.
 
      `footer.foot` is kept as the outer class so the footer's own type, link,
      `.foot-blurb`, `.foot-facts` and `.foot-base` rules all still apply, and
@@ -338,7 +402,7 @@
         </ul>
       </div>
       <div>
-        <h4>Tysons Corner &middot; McLean</h4>
+        <h4>Tysons Corner</h4>
         <div class="lp-foot-office">
           <address>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</address>
           <span>New patients &nbsp;<a href="tel:+15717029900">(571) 702-9900</a></span>

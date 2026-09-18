@@ -529,30 +529,55 @@ the landing shell, asserts the drawer and burger are ABSENT, asserts the rail is
 outside `#smooth-wrapper`, and hit-tests the rail's two actions at 390 instead of running
 the four drawer checks. A tenth landing page cannot quietly get tested as an editorial one.
 
-### Open, and blocking the campaign going live
+### Two offices, eighteen pages (2026-09-17, third pass)
 
-1. **THE FORMS. All three consultation pages carry the McLean office's general
-   contact form (`axgcdqEPUFoHF8Dt5Nji`) as a placeholder, and the campaign cannot
-   run on it.** It has no redirect to the campaign's thank-you page, so the Google
-   Ads conversion — which is a page view on `/ads-<campaign>-thank-you` — never
-   fires; and it has no campaign tag, so leads from three campaigns and from the
-   organic contact pages land in one undifferentiated pile. What is needed is one
-   LeadConnector form per campaign, each redirecting to its own thank-you page.
-2. **The conversion tag is deliberately not in any page body.** The "no CSS or JS
-   inlined" gate fails any page that carries its own `<script>`, and a tag pasted
-   into one page body is a tag nobody finds again. Fire it on the URL: a
-   destination-URL conversion per thank-you path, or a GTM Page View trigger.
-3. **Call tracking.** Every page uses the McLean new-patient line
-   (571) 702-9900. If tracking numbers are provisioned, they are swapped in
-   `partials/lp-nav.html` and `partials/lp-rail.html` and nowhere else.
-4. **The placeholder form has seven fields**, which makes the hero about 1300px
-   tall and puts the submit button well below the fold. The campaign forms should
-   be short — name, telephone, email and treatment type is enough to make the
-   call — and that is a LeadConnector setting, not markup here.
-5. **No veneer patient has been filmed.** See above.
-6. **Which office each campaign points at.** The pages show both, with McLean's
-   number in the header and rail because it is the implant office. A geo-split
-   campaign may want an Alexandria variant.
+The campaigns are geo-split, and each office has its own LeadConnector form per
+campaign, so every ads page now exists twice: `ads-alexandria-<campaign>[-consultation
+|-thank-you]` and `ads-tysons-…`. The nine bodies are templates; `build-site.mjs`
+carries a `LOCATIONS` table (both offices, all lines, the six form ids) and fills
+`{{LOC_*}}` / `{{OTHER_*}}` tokens in the body, the landing nav, the rail and the
+footer. `partials/lp-form.html` is the vendor embed written once; `partials/
+lp-office.html` is one office panel, rendered twice per page with the campaign's
+office first. The build throws on an unfilled token. All eighteen `PAGES` entries
+are written out because `site-test.mjs` and `check-page-lists.mjs` read the array
+as text.
+
+The placeholder McLean contact form is gone. What remains a LeadConnector setting
+is the redirect: each form must send its visitor to its own thank-you page.
+
+### More imagery on more grounds (2026-09-17, third pass)
+
+Brandklout asked for more photography in sections of different colours without
+losing conversion efficiency. Every photograph went INTO an existing section, so the
+page order and the CTA count are unchanged: a figure between the two stakes lists
+(`.lp-stakes.has-fig`), a photograph behind CTA 1 (`.lp-cta.has-fig`) and deep gold
+on CTA 2 (`.lp-cta.is-gold`), the films on black (`data-theme="dark"`), a photograph
+per process step (`.lp-step-fig`), the team as a wide figure in the money section
+(`.lp-wide`), a portrait beside the FAQ (`.lp-faq-grid`) and a photo-backed dark
+closer (`.lp-final`). A landing page cycles cream, white, gold-wash, black,
+ink-with-photo, deep gold and the closer. Image counts per landing page: 35 / 37 /
+33, no byte-level repeat on any page.
+
+The library's file names are unreliable (`Untitled-3.jpg` is the reception desk,
+`pt-hero-2.jpg` is Stephen), and nothing in it is identifiably the Alexandria
+office, so the Alexandria variants never caption a photograph as Tysons.
+
+### The four site tags (2026-09-17, third pass)
+
+`partials/site-scripts.html` is injected into every page's head: Termly
+(`autoBlock=off`, so the consent blocker does not hide the GHL form and the films),
+then GTM `GTM-MR7K64XD`, then the LeadConnector number pool and session helper; the
+GTM `<noscript>` follows `<body>`. The "no CSS or JS inlined" gate exempts a
+`<script data-site-script>` and nothing else. On Instatic these go into
+`siteScripts`, with the CSP opened for their three hosts.
+
+### Open
+
+1. **The six form redirects**, in LeadConnector, to `/ads-<office>-<campaign>-thank-you`.
+2. **Google Ads conversions**, one destination-URL conversion per thank-you path.
+3. **No veneer patient has been filmed**, and no photograph of the Alexandria office
+   exists in the library.
+4. Import to Instatic (workflow 22).
 
 ## Navigation — the coherence fix
 

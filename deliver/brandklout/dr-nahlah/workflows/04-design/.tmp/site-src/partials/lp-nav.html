@@ -15,10 +15,11 @@
      {{LP_BOOK_HREF}} and {{LP_BOOK_LABEL}} are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
-     THE TELEPHONE NUMBER. (571) 702-9900 is the McLean / Tysons Corner
-     new-patient line, which is the implant office. If a call-tracking number
-     is provisioned for these campaigns it is swapped HERE and in
-     partials/lp-rail.html, and nowhere else.
+     THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
+     per page from the LOCATIONS table in build-site.mjs ({{LOC_TEL}} /
+     {{LOC_PHONE}}). Call tracking is the LeadConnector number pool loaded by
+     partials/site-scripts.html, which swaps the number in the page per
+     visitor; nothing here changes for it.
      ========================================================================== -->
 <header class="nav lp-nav" id="nav" data-journey="0">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
@@ -30,7 +31,7 @@
         <b>4.9</b> Google rating</span>
       <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
         <b>18,000+</b> implants placed</span>
-      <span class="lp-bar-item is-wide">Tysons Corner &middot; McLean and Alexandria, VA</span>
+      <span class="lp-bar-item is-wide">{{LOC_BAR}}</span>
     </div>
   </div>
 
@@ -39,8 +40,8 @@
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </span>
     <div class="lp-nav-side">
-      <a class="lp-nav-phone" href="tel:+15717029900">
-        <i aria-hidden="true">&#9742;</i><span>(571) 702-9900</span></a>
+      <a class="lp-nav-phone" href="tel:{{LOC_TEL}}">
+        <i aria-hidden="true">&#9742;</i><span>{{LOC_PHONE}}</span></a>
       <a class="lp-nav-cta" href="{{LP_BOOK_HREF}}">{{LP_BOOK_LABEL}}</a>
     </div>
   </div>

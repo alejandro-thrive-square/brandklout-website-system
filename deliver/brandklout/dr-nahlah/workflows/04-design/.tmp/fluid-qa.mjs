@@ -56,9 +56,15 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // thank-you page has the `.lp-next-list` numeral column. All nine also carry
   // the two-row fixed header, which is the one piece of chrome on this site
   // whose height the hero has to clear by hand.
-  "ads-all-on-4", "ads-all-on-4-consultation", "ads-all-on-4-thank-you",
-  "ads-dental-implants", "ads-dental-implants-consultation", "ads-dental-implants-thank-you",
-  "ads-veneers", "ads-veneers-consultation", "ads-veneers-thank-you",
+  // 2026-09-17c: one set per office. Same nine bodies, two locations, so the
+  // eighteen are listed rather than nine: a body that overflows only when the
+  // longer office name in the form note wraps is a real failure on a real page.
+  "ads-alexandria-all-on-4", "ads-alexandria-all-on-4-consultation", "ads-alexandria-all-on-4-thank-you",
+  "ads-alexandria-dental-implants", "ads-alexandria-dental-implants-consultation", "ads-alexandria-dental-implants-thank-you",
+  "ads-alexandria-veneers", "ads-alexandria-veneers-consultation", "ads-alexandria-veneers-thank-you",
+  "ads-tysons-all-on-4", "ads-tysons-all-on-4-consultation", "ads-tysons-all-on-4-thank-you",
+  "ads-tysons-dental-implants", "ads-tysons-dental-implants-consultation", "ads-tysons-dental-implants-thank-you",
+  "ads-tysons-veneers", "ads-tysons-veneers-consultation", "ads-tysons-veneers-thank-you",
 ];
 // Shooting all 11 at 7 widths is 77 images nobody will open. These three cover the
 // three distinct CSS paths: the journey, the shared page kit, and the one page with
