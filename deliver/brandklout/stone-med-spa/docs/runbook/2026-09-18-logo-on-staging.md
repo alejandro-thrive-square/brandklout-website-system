@@ -141,7 +141,7 @@ New gate `.tmp/logo-swap-check.mjs` asserts it against the live site.
 
 ## Done
 
-Live on **staging only** — `https://staging.westlaketxmedspa.com`, **seq 10, 13 pages, 76 media**.
+Commit `5ff18cd6`. Live on **staging only** — `https://staging.westlaketxmedspa.com`, **seq 10, 13 pages, 76 media**.
 Production is untouched and still shows the text wordmark.
 
 - `site-src/make-logo.py` — new. Cuts the four files from the Asana PNG
