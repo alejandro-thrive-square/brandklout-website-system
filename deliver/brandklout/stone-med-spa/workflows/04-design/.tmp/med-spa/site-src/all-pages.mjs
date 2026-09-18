@@ -28,7 +28,14 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, process.argv[2] || "../final-site");
 const PORT = 0;
-const WIDTHS = [390, 1024, 1440];
+/* 1280 and 992 are here because 390/1024/1440 alone missed a real one. The
+   navbar is at its most crowded the moment a width crosses ABOVE 1279 — the
+   menu gaps widen from 1.4rem to 2.4rem and the phone is still shown — and
+   again just above 991, where the menu appears but the bar is still narrow.
+   Both are the tight side of a breakpoint, which is exactly what a gate that
+   samples only round numbers steps over: the 2026-09-18 logo swap clipped Book
+   a consultation at 1280 on all thirteen pages while this gate stayed green. */
+const WIDTHS = [390, 992, 1024, 1280, 1440];
 
 /* THE ONE PLACE THE SITE IS ALLOWED TO LEAVE ITS OWN ORIGIN.
    Everything else — fonts, scripts, images — is self-hosted, and this gate

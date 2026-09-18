@@ -109,10 +109,22 @@
   <div class="padding-global">
     <div class="container-large">
       <div class="navbar_container">
+        <!-- Both logos ship, stacked on top of each other, and CSS fades
+             between them: the bar is transparent over the home hero and ivory
+             after 24px of scroll, and swapping src in JS would flash on the
+             first scroll of every visit. They are STACKED rather than toggled
+             with `display` because Instatic makes every image lazy — a hidden
+             one is not fetched until the moment it is needed, which is the
+             flash again. 23-brand.css has the whole reasoning.
+
+             The link carries the accessible name, so both images are
+             decorative here; `aria-label` on an <a> overrides its contents, so
+             the alt the media library puts back on the published page (trap
+             28) is not read a second time. -->
         <a class="navbar_logo-link" href="index.html" aria-label="Westlake Medical Aesthetics, home">
-          <span class="brand_component">
-            <span class="brand_name">Westlake</span>
-            <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
+          <span class="brand_logo is-row is-pair">
+            <img class="brand_logo-light" src="assets/logo-row-on-light.webp" alt="" width="690" height="138">
+            <img class="brand_logo-dark" src="assets/logo-row-on-dark.webp" alt="" width="690" height="138">
           </span>
         </a>
 
@@ -150,9 +162,10 @@
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer_head">
-      <span class="brand_component">
-        <span class="brand_name">Westlake</span>
-        <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
+      <!-- The drawer panel is ivory whatever the page behind it is doing, so
+           this one is always the dark-ink file — no pair, no swap. -->
+      <span class="brand_logo is-row">
+        <img src="assets/logo-row-on-light.webp" alt="Westlake Medical Aesthetics" width="690" height="138" loading="lazy">
       </span>
       <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
     </div>
@@ -852,9 +865,11 @@
           </div>
 
           <div class="footer_brand">
-            <span class="brand_component is-large">
-              <span class="brand_name">Westlake</span>
-              <span class="brand_rule"><span class="brand_sub">Medical Aesthetics</span></span>
+            <!-- The footer is the one place with room for the full lockup, so
+                 it is the only place the leaf and the SKIN · WELLNESS · IV BAR
+                 strapline appear. Dark ground, so the artwork as supplied. -->
+            <span class="brand_logo is-stack">
+              <img src="assets/logo-stack-on-dark.webp" alt="Westlake Medical Aesthetics — skin, wellness, IV bar" width="432" height="390" loading="lazy">
             </span>
             <div class="footer_socials">
               <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">

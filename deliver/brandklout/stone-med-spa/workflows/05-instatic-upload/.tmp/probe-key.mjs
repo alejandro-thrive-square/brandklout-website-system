@@ -15,7 +15,9 @@ import puppeteer from 'puppeteer-core';
 // local server 404s the page into a blank body.
 const HERE = path.dirname(url.fileURLToPath(import.meta.url));
 const LOCAL_ROOT = path.resolve(HERE, '../../04-design/.tmp/med-spa/final-site');
-const REMOTE = 'https://stone-med-spa-production.up.railway.app';
+// Target follows INSTATIC_BASE_URL like every other script here, so a probe
+// run during a staging push does not silently measure production instead.
+const REMOTE = (process.env.INSTATIC_BASE_URL || 'https://stone-med-spa-production.up.railway.app').replace(/\/$/, '');
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 
 const [page, wantKey, ...props] = process.argv.slice(2);

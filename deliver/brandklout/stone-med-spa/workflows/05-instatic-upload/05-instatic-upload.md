@@ -880,9 +880,18 @@ export INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com
 
 node -r $S/doh-lookup.cjs .tmp/snapshot-staging.mjs backup-staging-<date>-<slug>   # 0. site + pages; a NEW folder each push, it overwrites
 #   its log line must read "pages <n> media <n> … missing 0"; logs before 2026-09-17 printed wrapper counts (pages 1 media 0)
-node -r $S/doh-lookup.cjs .tmp/staging-media-map.mjs          # 1. staging's media ids, by URL (trap 36)
+node upload-media.mjs                                         # 1. NEW assets -> staging's library.
+#   Skips what is already there, so this is cheap; run it whenever the build gained an image.
+#   It REWRITES .tmp/media-map.json with staging's ids and URLs — keep the copy:
+cp .tmp/media-map.json .tmp/media-map.staging.json
+#   (`.tmp/staging-media-map.mjs` is the older way in: it DERIVES staging ids from the production
+#    map by URL, which works only for assets the clone carried over. It cannot see a new upload.)
 node -r $S/doh-lookup.cjs set-alt.mjs --map media-map.staging.json --apply
-node build-import-input.mjs                                   # 2. same payload as production; URLs match
+node build-import-input.mjs                                   # 2. reads .tmp/media-map.json
+#   It is STAGING's map right now, which is what this push wants. Put production's back afterwards:
+#       cp .tmp/media-map.production.json .tmp/media-map.json
+#   The repo keeps media-map.json as PRODUCTION's, because the Execution Steps above run against
+#   production by default and a staging map there builds a payload of URLs that 404 live.
 RAILWAY_LINK_DIR=$S/link-staging NODE_OPTIONS="-r $S/doh-lookup.cjs" bash ship.sh
 node -r $S/doh-lookup.cjs push-site.mjs --apply --force
 node -r $S/doh-lookup.cjs -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
@@ -965,9 +974,68 @@ read 11–37% on pages whose layout `compare-live` found identical. `visual-diff
 requests to `sienna-accessibility` by default (`VISUAL_WIDGET=1` keeps it). It is a client-side
 plugin; do not remove it from the site to make a gate quiet.
 
+> [!NOTE]
+> There are two traps numbered **38** above (the Embed block's CSP, and the sienna widget). The
+> numbers are labels, not an ordering; nothing references them by number except this note. New
+> traps continue from 39.
+
+### 39. Every published image is LAZY, and `sizes="auto"` measures the RENDERED box
+
+Found 2026-09-18 on the logo swap. The navbar carries two logo files, one for the transparent bar
+over the hero and one for the ivory bar after 24px of scroll, and CSS showed one of them. Shipping
+both is the whole point: nothing has to be fetched at the moment the bar flips. On the published
+site it flashed anyway.
+
+The image module rewrites every `<img>` with `loading="lazy"` and `sizes="auto, 100vw"`, and it
+does so whatever the source markup said — a `fetchpriority="high"` in the build does not survive.
+Two consequences, and `display: none` triggers both:
+
+- **A hidden image is never fetched.** It starts downloading at the instant it is shown, which is
+  exactly the flash the pair existed to prevent.
+- **`auto` resolves against the rendered width, which is 0 for a hidden element**, so the selection
+  falls back to `100vw` and takes the 690px variant for a 184px box.
+
+**Fix: stack the pair and cross-fade opacity; never toggle `display`.** Both images then have a
+real box, both are in the viewport so both load immediately, both resolve `auto` to 184px and take
+the 640px variant, and the swap is an opacity change with nothing left to fetch. See the
+`.brand_logo.is-pair` block in `css/23-brand.css`.
+
+`.tmp/logo-swap-check.mjs` asserts it against the live site: it reads each logo's `complete` flag
+and the `-w<NNN>` in its `currentSrc` before and after the flip. **Do not check `naturalWidth`** —
+with `w` descriptors and a `sizes` value Chrome density-corrects it, so a 640px variant in a 184px
+box reports `184` and every image looks like it is exactly 1x. The first version of this gate
+failed the site for that reason and the site was fine.
+
+### 40. `ch` is not the same width live, and on a long page it moves the whole thing
+
+`.legal_body` is `max-width: 68ch`. Local that is **686.375px**; live it is **680px**, exactly
+68 × 10. The gap is 6.375px, which is nothing until a paragraph sits on a wrap boundary — and a
+privacy policy has dozens. `/privacy-policy` rewraps enough lines to finish **26px taller live**,
+which offsets every pixel below the first reflowed paragraph and reads as `visual-diff.mjs`
+**6.97%** against a 3.6% baseline.
+
+It is cosmetic and it is NOT a regression from whatever was published that day:
+`/terms-of-service` has the identical 686.375 → 680 column on the same template and stays at its
+baseline, because its text happens not to sit near a boundary. The parent grid measures identically
+on both sides (`1280px`, `322.906px 861.094px`, `96px` gap), so the only moving part is the `ch`.
+
+**Do not chase a `visual-diff` number on a text-heavy page without probing the column first.**
+`.tmp/probe-sel.mjs <page> ".legal_body" 0 width` answers it in one command. If the wrapping ever
+has to match exactly, set the measure in `rem` rather than `ch`.
+
 ## Output Artifacts
 
-- `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
+- `.tmp/media-map.json` — original filename → media library path, id, dimensions. **It holds
+  whichever instance was uploaded to last**, and `build-import-input.mjs` reads only this file, so
+  check its `base` before building a payload. The two stable copies beside it are the record:
+- `.tmp/media-map.production.json` — production's ids and URLs (73 files)
+- `.tmp/media-map.staging.json` — staging's (76 files, with the three logo assets)
+
+  **A NEW asset does not get the same URL on both instances.** `clone-site` preserved the URLs of
+  the 73 that existed when staging was seeded, which is why one payload served both until now; a
+  fresh upload mints `/uploads/<nanoid>-<name>` independently on each side. So promoting the logo
+  to production means `upload-media.mjs` against production FIRST, then `build-import-input.mjs`
+  against the production map — not a re-push of the staging payload.
 - `.tmp/media-map.staging.json` — the same, with staging's ids (trap 36)
 - `.tmp/backup-staging-2026-09-17-legal/` — staging before the legal pages push (seq 4, 11 pages)
 - `.tmp/backup-staging-2026-09-15/` — staging's site and pages before the first feedback push
@@ -978,9 +1046,14 @@ plugin; do not remove it from the site to make a gate quiet.
 - `.tmp/probe-key.mjs` — looks one `compare-live.mjs` finding up on both sides, with the CSS rules
   that set the property. Keys elements exactly as `compare-live.mjs` does, so a finding's key can
   be pasted straight in. This is the tool for turning "some element differs" into "this rule does"
+- `.tmp/logo-swap-check.mjs` — asserts the navbar's two logo files are both loaded and both at a
+  2x variant, before and after the bar flips from transparent to solid. Trap 39; run it after any
+  change to the navbar logo markup or to `.brand_logo` in `css/23-brand.css`
 - `.tmp/probe-sel.mjs` — the same, addressed by an ordinary CSS selector rather than by a
   comparison key. Reaches the things `compare-live.mjs` cannot: a bare `<img>`, a pseudo-element's
-  host, anything with no class
+  host, anything with no class. **Both probes take their live target from `INSTATIC_BASE_URL`**
+  (fixed 2026-09-18 — they were pinned to production, so a probe run during a staging push
+  silently measured the wrong site)
 - `.tmp/viewshot.mjs` — one section, local above live, captured in a REAL viewport scrolled to it.
   The arbiter when a full-page diff and a probe disagree; see trap 33
 - `.tmp/crop.mjs` — cuts a y-band out of the diff images so a band can be looked at rather than

@@ -1,6 +1,27 @@
 # Stone Med Spa — handoff
 
 > [!IMPORTANT]
+> **2026-09-18: THE WORDMARK IS NOW A LOGO FILE, ON STAGING.** `css/23-brand.css` no longer sets
+> type — it sizes four WebP files that `site-src/make-logo.py` cuts from the client's Asana PNG
+> (task `1218408530306234`). Three rules that are easy to undo by accident:
+>
+> 1. **The navbar's two logos are STACKED and cross-faded, never toggled with `display`.**
+>    Instatic makes every image `loading="lazy"` with `sizes="auto, 100vw"`, so a hidden one is
+>    never fetched *and* resolves `auto` to 0 and takes the 690px variant. Upload directive trap
+>    39. Prove it with `node .tmp/logo-swap-check.mjs <base>` against the live site — and never
+>    with `naturalWidth`, which Chrome density-corrects.
+> 2. **`.brand_logo.is-row` is 11.5rem because the bar has 166px of slack at 1280 and 136px at
+>    992**, not because 11.5 looked right. `node _measure.mjs ../final-site` prints that slack at
+>    every width and names anything clipped. Run it before growing the logo.
+> 3. **`all-pages.mjs` runs five widths now** — 390, **992**, 1024, **1280**, 1440. The two new
+>    ones are the tight side of a breakpoint, and adding them exposed a clipped Book button at
+>    992–1007 that had been live since 2026-09-01.
+>
+> The logo is on staging only; production still shows the text wordmark, and promoting it needs
+> `upload-media.mjs` against production first (a new asset's URL differs per instance). See the
+> 2026-09-18 run in `docs/runbook/`.
+
+> [!IMPORTANT]
 > **2026-09-17: THE BOOKING FORM IS THE CLIENT'S GO HIGH LEVEL FORM.** `site-src/ghl-form.mjs`
 > holds the paste once; the static build inlines it into `[data-embed="ghl-form"]`, and
 > `push-site.mjs` swaps that slot for a `brandklout.embed-origins.embed` module because the

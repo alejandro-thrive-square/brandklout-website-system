@@ -44,7 +44,11 @@ export const CLIENT_TASKS = {
   'legacy-dental-pasadena': ['1217611213174386'],
   // Stone is three brands in one Asana project. The slug above pulls both build tasks; these two
   // pull one pillar each, matching the client folder that owns it.
-  'stone-med-spa': ['1217160668112180'],
+  // 1218408530306236 is the client's website-feedback task and 1218408530306234 "Update logo" is
+  // where the practice's logo PNG actually arrived (2026-09-11). Neither hangs off the build task,
+  // so pulling 1217160668112180 alone reports "attachments: none anywhere" — which is true, and
+  // meant a client-supplied logo sat unnoticed for a week. Added 2026-09-18.
+  'stone-med-spa': ['1217160668112180', '1218408530306236', '1218408530306234'],
   'stone-surgical-arts': ['1217160668112175'],
   'institute-for-advanced-dentistry': ['1215476573810829', '1217929763942271'],
 }

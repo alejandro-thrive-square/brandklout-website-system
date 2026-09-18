@@ -15,7 +15,25 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
-**2026-09-17, latest — the practice's Go High Level form is live on /book.** It replaced the inert
+> **Production shows the text wordmark; the logo is on staging only.** Promoting it is not a
+> re-push of the staging payload — a new media asset gets a different URL on each instance, so
+> production needs `upload-media.mjs` against itself first. The 2026-09-18 run has the sequence.
+
+**2026-09-18, latest — the practice has a logo, and it is on STAGING.** The site had carried a
+text wordmark since it was built, because no logo file existed. Asana `1218408530306234` ("Update
+logo", assigned to us 2026-09-11) had one all along, attached to a task **outside** the slug
+`asana-context.mjs stone-med-spa` pulls — which is why that command reports "attachments: none
+anywhere" and means nothing. `site-src/make-logo.py` lifts the artwork off its black ground by
+unpremultiplying rather than keying (the glow survives; recompositing matches the original to
+1/255) and cuts four files: a **row** lockup for the navbar and drawer, a full **stack** for the
+footer, each in a light-type and a dark-ink variant. Staging is **seq 10, 13 pages, 76 media**.
+Two things worth carrying forward: the navbar's logo pair is **stacked and cross-faded, never
+toggled with `display`** — Instatic makes every image lazy and `sizes="auto"` measures the rendered
+box, so a hidden one is neither fetched nor sized (trap 39) — and `all-pages.mjs` now runs **five
+widths**, which caught a navbar clip at 992–1007 that **predates the logo by two weeks** —
+[run](./runbook/2026-09-18-logo-on-staging.md).
+
+**2026-09-17 — the practice's Go High Level form is live on /book.** It replaced the inert
 local form, travelling as a `brandklout.embed-origins` Embed block because Instatic's importer
 publishes a third-party iframe as an empty div. Only /book gets the widened CSP. The production
 consent bridge appends the visitor's `privacy_*` values to the frame URL. Both legal pages now
