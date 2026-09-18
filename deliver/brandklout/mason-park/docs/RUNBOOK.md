@@ -7,16 +7,36 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands - 2026-09-18
 
-**The six redesigned paid-traffic routes are published and verified on staging**
+**The six paid-traffic routes are rebuilt in Livewell's information flow and live on staging under
+`/ads-landing-pages/`**
+([`runbook/2026-09-18-ad-pages-rebuilt-in-livewells-flow.md`](./runbook/2026-09-18-ad-pages-rebuilt-in-livewells-flow.md)).
+The agency rejected the morning's first cut (the service page with a form near the bottom). The
+second cut is written by `build-ads-landing-pages.mjs`: a landing page with the **lead form in the
+hero**, the journey, why here, the dentist, the path, the proof and the rooms, questions and the
+invitation; a consultation page that is the form first; a thank-you page that is the phone first
+and carries no form. Invisalign and the $189 New Patient campaign each have the three.
+Staging is **63 draft / 63 published**, no drift, last published `2026-09-18T13:33:44.919Z`; the
+six first-cut root routes were removed from staging. All live gates pass: forms (right campaign id,
+514px wide in their cards), call tracking, mobile, the scroll scenes, and **zero elements hidden by
+an ad blocker**. **Production is unchanged and was not touched.**
+
+**The trap this run paid for: never name anything on a paid page `ad`.** `is-ad`, `ad-hero` and
+`ad-rail` are on ad blockers' cosmetic lists; the published hero, form included, collapsed to 0px
+while every other gate was green, and it renders perfectly on `file://`. The namespace is `lp-*`
+and `probe-adblock.mjs` is the gate.
+
+**Next:** agency review on staging. **At promotion, outside the repo:** each GHL form's redirect has
+to move to `/ads-landing-pages/<campaign>-thank-you` (they are the live ads' forms and still point
+at production's root thank-you slugs), and the ads' final URLs move or the old root slugs get
+redirected through the workflow-12 Cloudflare Worker. These pages depend on staging's stylesheet,
+scripts and media, so they go live with the rest of the staging site.
+
+## Earlier - 2026-09-18, the first cut of the paid routes
+
+Published to staging at the production slugs and superseded the same day
 ([`runbook/2026-09-18-redesigned-ad-funnels-published-to-staging.md`](./runbook/2026-09-18-redesigned-ad-funnels-published-to-staging.md)).
-Invisalign and the $189 New Patient campaign each have a landing page, consultation page and
-thank-you page at the same production slugs. Staging is clean at **63 draft / 63 published** pages,
-last published `2026-09-18T04:18:24.527Z`. The four lead pages load the correct GHL forms with 200
-iframe and loader responses; all six routes load the number pool and swap the public phone number;
-desktop and 390px live gates report zero problems. Blog and branded-404 templates remain enabled.
-**Production is unchanged** at 78/78 pages with its earlier `2026-09-17T03:26:35.837Z` publish.
-Next is client review on staging. Do not promote the redesign to production until the client
-approves it; production remains the exact Webflow port used by the active ads.
+Kept for its pipeline notes: the incremental import order, the isolated tracking verifier, and the
+rule that production stays the exact Webflow port until launch is authorised.
 
 
 ## Earlier - 2026-09-17, legacy redirects
