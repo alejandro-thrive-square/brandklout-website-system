@@ -7,7 +7,7 @@ and the two things that came out of it.
 
 ## Done
 
-**Live at <https://westlaketxmedspa.com> — seq 14, 13 pages, 76 media.** Production was seq 13 with
+Commit `b5f5b773`. **Live at <https://westlaketxmedspa.com> — seq 14, 13 pages, 76 media.** Production was seq 13 with
 73 media before.
 
 It is **not** a re-push of the staging payload, and that is the point worth remembering:
