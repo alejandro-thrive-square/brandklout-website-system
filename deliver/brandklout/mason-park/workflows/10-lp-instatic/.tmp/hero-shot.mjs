@@ -65,7 +65,7 @@ const URLS = argv.includes("--live")
 for (const [label, url] of URLS) {
   await S("Emulation.setDeviceMetricsOverride", { width: VW, height: 900, deviceScaleFactor: 1, mobile: VW < 500 });
   await S("Page.navigate", { url });
-  await wait(3500);
+  await wait(9000); // the GHL form paints several seconds after load
   await S("Runtime.evaluate", { expression: `window.scrollTo(0,${Y})` });
   await wait(900);
   const shot = await S("Page.captureScreenshot", { format: "png" });

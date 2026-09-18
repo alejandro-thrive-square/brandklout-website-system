@@ -94,13 +94,22 @@ node verify-form.mjs                               # GATE: forms load, per campa
 node verify-tracking.mjs                           # GATE: the number actually swaps
 node register-script.mjs lp-faq.js --publish       # FAQ accordions (once per instance)
 node verify-faq.mjs                                # GATE: every FAQ opens and closes
+node type-diff.mjs --all                           # GATE: computed styles, production vs Webflow
+node type-diff.mjs --all --vw 390
 ```
+
+**Changing the live pages later is a patch, not a re-import.** `import.mjs` rewrites every node of
+all six pages from `converted-pages.json`, which predates the placed Embed blocks and anything
+done in the editor since. `patch-live.mjs` edits the live document in place (dry run by default,
+`--apply`, `--publish`), is idempotent, and keeps the live stylesheet's own text. Back up first
+with `node ../../09-static-rebuild/.tmp/backup-site.mjs`.
 
 Local preview and reference diffing, neither of which touches Instatic:
 
 ```bash
 node preview.mjs            # :4320, serves lp.css UNDER the live site's own stylesheet
 node compare.mjs --vw 1440  # full-page captures, rebuilt vs mason-park-dental.webflow.io
+node compare.mjs --live --vw 1440 --settle 14000   # PRODUCTION vs Webflow, no preview needed
 node hero-shot.mjs invisalign --live --y 0
 node net-check.mjs invisalign
 ```
@@ -124,8 +133,11 @@ deliberate changes, all in `build.mjs`:
    blocks — see the GoHighLevel section below.
 4. **Styles.** The head `<style>` blocks are hoisted into `lp.css`. The **fluid rem engine** is
    among them and is load-bearing.
-5. **PDF.** The Patient Privacy Policy link is unwrapped to plain text — Instatic refuses
-   `application/pdf`, so the alternative is a link that 404s.
+5. **PDF.** The Patient Privacy Policy link keeps its **Webflow CDN href**. Instatic refuses
+   `application/pdf`, so the file cannot move with the page. Until 2026-09-18 the link was
+   unwrapped to plain text, which left `/invisalign` with no privacy link and the bare text
+   unstyled. It depends on the Webflow site existing: if that site is ever deleted, point the
+   link at `/privacy-policy`. `build.mjs --unwrap-pdf` restores the old behaviour.
 
 ## The four traps, in the order they bite
 
@@ -140,6 +152,18 @@ pages are sized by a fluid rem engine that sets `html{font-size:…}` from `:roo
 properties, and `rem` always resolves against the root, so those cannot be pushed into a
 descendant. They become **`html:has(.lp-page)`** — still the root element, matching only on a page
 that contains a landing page.
+
+**Scoping only protects a property the landing page sets.** A namespaced rule outranks the
+site's rule on the same name, but whatever *only the site* sets leaks straight through. Three
+weeks after go-live every gate was green while the buttons and card headings were in Figtree, the
+h2s were tracked `-.02em` and in the site's ink, and `.button` was an `inline-flex` with a gap —
+all from the site's unscoped `h1..h6`, `h2` and `.button` rules. None of it moves a page's height
+by more than a few pixels, so `compare.mjs` could not see it. `build.mjs` now opens `lp.css` with
+a **leak block** that puts those properties back to what Webflow computes; it goes first so every
+later landing-page rule still wins at equal specificity. The Elfsight portal hangs off `<body>`,
+so the body face is set with `body:has(.lp-page)` — a rule on the portal itself loses to
+Elfsight's own `font-family:inherit`. **`type-diff.mjs --all` is the gate**: run it after any
+change to the main site's stylesheet, because a new unscoped rule there is a new leak here.
 
 `scope-css.test.mjs` covers 21 cases and asserts **no rule can match outside the scope**. `audit.mjs`
 re-checks the built sheet the same way. Proof it worked: every one of the 26,780 bytes of the
@@ -263,6 +287,29 @@ Three deliberate choices, since there was no reference to match:
   `aria-expanded`, `aria-controls`, Enter/Space) because `webflow.js` is not there to do it.
 - **The `+` rotates 45° into an `×` when open** — the only new CSS, purely visual, so no copy
   changes.
+
+## What "exactly the same" excludes
+
+Checked 2026-09-18 with `type-diff.mjs --all` at 1440 and 390: **0 differences** in text, in the
+typography of every text element and in the box properties of every classed element, on all six
+pages. What production has that Webflow does not is site-wide and deliberate:
+
+- **Termly** cookie consent. It appends `privacy_*` query parameters to the GoHighLevel frame
+  `src`; `verify-form.mjs` compares the id before the `?` for that reason.
+- **The Sienna accessibility widget.** Once it runs it writes whole-pixel font sizes inline
+  (12.8px becomes 12px). `type-diff.mjs` blocks it by default; `--with-widget` shows the effect.
+- The FAQ glyph's rotate transition (see the FAQ section) and a missing favicon.
+
+`compare.mjs` reads heights three seconds after load, while the GoHighLevel frame grows from
+150px to about 900px over several seconds. A "HEIGHT DRIFT" of 13% that is gone with
+`--settle 14000` is the form, not the layout; the script prints the frame height apart from the
+rest for that reason. And a fixed header photographed with `captureBeyondViewport` lands in the
+middle of the page: use `hero-shot.mjs` before believing a full-page capture.
+
+**The Webflow site has unpublished Designer edits.** Its pages report `lastUpdated` later than
+the site's last publish (2026-08-21) — `/invisalign` as late as 2026-09-18. Production mirrors
+what is *published* on `mason-park-dental.webflow.io`. If those edits are wanted, publish the
+Webflow site, then re-run `fetch-assets.mjs` and `build.mjs` and compare before shipping.
 
 ## Open items
 

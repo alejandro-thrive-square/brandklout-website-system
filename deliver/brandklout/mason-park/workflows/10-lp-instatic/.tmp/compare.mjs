@@ -29,6 +29,8 @@ const num = (n, d) => { const i = argv.indexOf(n); return i === -1 ? d : Number(
 const VW = num("--vw", 1440);
 const ONE = argv.includes("--slug") ? argv[argv.indexOf("--slug") + 1] : null;
 const PORT = num("--port", 4320);
+const SETTLE = num("--settle", 0); // extra ms before measuring: the GHL form frame grows for several seconds
+const LIVE = argv.includes("--live") ? (process.env.TARGET_ORIGIN || "https://www.masonparkdental.com") : null; // compare production, not the local preview
 
 const SLUGS = (ONE ? [ONE] : [
   "invisalign", "new-patient-special", "invisalign-consultation",
@@ -77,7 +79,7 @@ async function shoot(url, file) {
   errors = [];
   await S("Emulation.setDeviceMetricsOverride", { width: VW, height: 1200, deviceScaleFactor: 1, mobile: VW < 500 });
   await S("Page.navigate", { url });
-  await wait(VW < 500 ? 3500 : 3000);
+  await wait((VW < 500 ? 3500 : 3000) + SETTLE);
   // Let lazy images resolve before measuring.
   await S("Runtime.evaluate", { expression: "window.scrollTo(0,document.body.scrollHeight)" });
   await wait(1200);
@@ -85,6 +87,7 @@ async function shoot(url, file) {
   await wait(400);
   const { result } = await S("Runtime.evaluate", {
     expression: `JSON.stringify({h:document.documentElement.scrollHeight,
+      frame:Math.round(Math.max(0,...[...document.querySelectorAll("iframe")].map(f=>f.getBoundingClientRect().height))),
       imgs:[...document.images].length,
       broken:[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length,
       text:document.body.innerText.replace(/\\s+/g,' ').trim().length})`,
@@ -100,13 +103,13 @@ console.log(`viewport ${VW}px\n`);
 console.log("page                              rebuilt-h    ref-h   delta   imgs broken  text-new  text-ref");
 const rows = [];
 for (const slug of SLUGS) {
-  const a = await shoot(`http://localhost:${PORT}/${slug}`, `${slug}-${VW}-new.png`);
+  const a = await shoot(LIVE ? `${LIVE}/${slug}` : `http://localhost:${PORT}/${slug}`, `${slug}-${VW}-new.png`);
   const b = await shoot(`https://mason-park-dental.webflow.io/${slug}`, `${slug}-${VW}-ref.png`);
   const delta = b.h ? Math.round(((a.h - b.h) / b.h) * 100) : 0;
   rows.push({ slug, a, b, delta });
   console.log(
     `${slug.padEnd(34)}${String(a.h).padStart(8)}${String(b.h).padStart(9)}${String(delta + "%").padStart(8)}`
-    + `${String(a.imgs).padStart(7)}${String(a.broken).padStart(7)}${String(a.text).padStart(10)}${String(b.text).padStart(10)}`);
+    + `${String(a.imgs).padStart(7)}${String(a.broken).padStart(7)}${String(a.text).padStart(10)}${String(b.text).padStart(10)}  frame ${a.frame}/${b.frame}  rest ${a.h - a.frame}/${b.h - b.frame}`);
 }
 
 console.log("");

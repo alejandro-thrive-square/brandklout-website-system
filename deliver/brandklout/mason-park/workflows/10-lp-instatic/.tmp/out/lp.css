@@ -1,3 +1,6 @@
+.lp-page h1,.lp-page h2,.lp-page h3,.lp-page h4,.lp-page h5,.lp-page h6{font-family:inherit;color:inherit;letter-spacing:inherit}
+.lp-page .button{display:revert;gap:normal;align-items:normal;font-family:inherit;transition:all 0s ease 0s}
+body:has(.lp-page){font-family:Montserrat,sans-serif}
 html:has(.lp-page){
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;

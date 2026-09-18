@@ -117,7 +117,8 @@ for (const c of CASES) {
     ["ref", `https://mason-park-dental.webflow.io/${c.slug}`],
   ]) {
     const d = await probe(url);
-    const gotId = d.src ? d.src.split("/").pop() : "-";
+    // The consent layer (Termly, 2026-09-16) appends privacy_* query params to the frame src.
+    const gotId = d.src ? d.src.split("/").pop().split("?")[0] : "-";
     console.log(
       `${c.slug.padEnd(34)} ${where.padEnd(5)}  ${String(d.iframes).padStart(6)}`
       + `  ${String(d.formStatus ?? "-").padStart(8)}  ${String(d.loaderStatus ?? "-").padStart(6)}`

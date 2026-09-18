@@ -33,9 +33,9 @@
  *                GSAP, the MPD runtime) only enhance pages that already render.
  *   4. STYLES.   <style> blocks in the head and body are hoisted into lp.css.
  *                The fluid rem engine is among them and is load-bearing.
- *   5. PDF.      The Patient Privacy Policy link is unwrapped to plain text.
- *                Instatic refuses application/pdf, so the alternative is a
- *                link that 404s in production.
+ *   5. PDF.      The Patient Privacy Policy link keeps its Webflow CDN href.
+ *                Instatic refuses application/pdf, so the file itself cannot
+ *                move; see unwrapPdf().
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -189,8 +189,16 @@ function rewriteMedia(html, used) {
   return out;
 }
 
-/** Instatic refuses application/pdf; a link to one would 404 in production. */
+/**
+ * Instatic refuses application/pdf, so the file cannot move with the page. Until 2026-09-18 the
+ * link was unwrapped to plain text, which left /invisalign's footer with no privacy link at all
+ * and the bare text unstyled (18px white instead of the link's 12.8px). The PDF still answers 200
+ * on Webflow's CDN, so the link now stays exactly as Webflow has it. It dies with the Webflow
+ * site: if that is ever deleted, point it at /privacy-policy instead. `--unwrap-pdf` restores the
+ * old behaviour.
+ */
 function unwrapPdf(html) {
+  if (!process.argv.includes("--unwrap-pdf")) return html;
   return html.replace(
     /<a\b[^>]*href="https:\/\/cdn\.prod\.website-files\.com\/[^"]*\.pdf"[^>]*>([\s\S]*?)<\/a>/gi,
     (_, text) => text,
@@ -262,7 +270,20 @@ for (const slug of SLUGS) {
 
 const bundle = [...styleBlocks.values()].join("\n");
 const webflow = fs.readFileSync(path.join(CAPTURE, "css", "webflow-shared.css"), "utf8");
-let css = scopeCss(`${webflow}\n${bundle}`);
+// The main site's stylesheet is on these pages too. Scoping makes our rules outrank its rules
+// on a shared name, but only for a property we set: whatever ONLY the site sets leaks through.
+// type-diff.mjs --all found the whole list on production (2026-09-18): its unscoped
+// `h1..h6{font-family;color}`, `h2{letter-spacing}` and `.button{display:inline-flex;gap;
+// align-items;font-family;transition}`, plus the Elfsight portal, which hangs off <body> and so
+// inherits the site's body face instead of Webflow's. Each is put back to what Webflow computes.
+// This block goes FIRST: at equal specificity every later landing-page rule still wins.
+const LEAK_CSS = [
+  ".lp-page h1,.lp-page h2,.lp-page h3,.lp-page h4,.lp-page h5,.lp-page h6{font-family:inherit;color:inherit;letter-spacing:inherit}",
+  ".lp-page .button{display:revert;gap:normal;align-items:normal;font-family:inherit;transition:all 0s ease 0s}",
+  // On the body, not on the portal: Elfsight sets `font-family:inherit` on its own root and wins.
+  "body:has(.lp-page){font-family:Montserrat,sans-serif}",
+].join("\n");
+let css = `${LEAK_CSS}\n${scopeCss(`${webflow}\n${bundle}`)}`;
 // Authored already scoped, so these deliberately bypass the transform above.
 css += `\n${MARKER_CSS}\n`;
 // The Embed block fills the form card again, exactly as the Webflow iframe
