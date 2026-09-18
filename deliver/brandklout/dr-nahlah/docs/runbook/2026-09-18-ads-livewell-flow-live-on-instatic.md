@@ -7,7 +7,7 @@ thank-you-implants}`), then for everything to go up on Instatic under `/ads-land
 Both done. Eighteen pages are live on production, verified, noindex, with the four site tags
 live site-wide.
 
-## Done (commit: see the row in INDEX.md)
+## Done (`b38c4523`)
 
 ### The flow, section for section
 
