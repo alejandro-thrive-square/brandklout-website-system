@@ -884,7 +884,11 @@ for (const r of results) {
       continue
     }
     const attrs = { ...s.attrs }
-    const gate = GATED.test(`${attrs.id || ''} ${s.src?.remote || ''} ${s.src?.local || ''}`) ? 1 : 0
+    // `s.text` is in the test on purpose. A tag's INLINE bootstrap — the classic
+    // `(function(w,d,s,l,i){…})(window,document,'script','dataLayer','GTM-…')` — has no src and no
+    // id, so a gate reading only those two fields never sees it. That is how GTM-K8N3JK3Q reached
+    // the staging clone and reported into the practice's analytics (found 2026-09-18).
+    const gate = GATED.test(`${attrs.id || ''} ${s.src?.remote || ''} ${s.src?.local || ''} ${s.text || ''}`) ? 1 : 0
     let item
     if (s.src?.remote) item = { t: 'src', u: s.src.remote, a: attrs, g: gate }
     else if (s.src?.local) {

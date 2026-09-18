@@ -15,23 +15,40 @@
     {
       "client": "dr-nahlah",
       "adminUrl": "https://www.drnahlah.com",
-      "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
-      "railway": { "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5", "service": "Dr Nahlah" },
+      "alternates": [
+        "https://encorercm.com",
+        "https://dr-nahlah.up.railway.app"
+      ],
+      "railway": {
+        "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5",
+        "service": "Dr Nahlah"
+      },
       "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live."
     },
     {
       "client": "mason-park",
       "adminUrl": "https://www.masonparkdental.com",
-      "alternates": ["https://mason-park.up.railway.app"],
-      "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
+      "alternates": [
+        "https://mason-park.up.railway.app"
+      ],
+      "railway": {
+        "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc",
+        "service": "Mason Park"
+      },
       "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
     },
     {
       "client": "institute-for-advanced-dentistry",
       "adminUrl": "https://www.ifadentistry.com",
-      "alternates": ["https://institute-for-advanced-dentistry-production.up.railway.app"],
-      "railway": { "project": "3449a121-3580-485b-97f5-8c8903f8e409", "service": "Institute for Advanced Dentistry" },
-      "note": "Cut over 2026-09-11 ~21:40Z. PUBLIC_ORIGIN set 21:57Z to www, apex, railway host (in that order) and redeployed; www fixed 22:20Z (CNAME wshw0478.up.railway.app, proxied) and the apex now 301s to www. check-origins --all clean: www and the railway host OK, zero TRAP."
+      "alternates": [
+        "https://institute-for-advanced-dentistry-production.up.railway.app",
+        "https://staging.ifadentistry.com"
+      ],
+      "railway": {
+        "project": "3449a121-3580-485b-97f5-8c8903f8e409",
+        "service": "Institute for Advanced Dentistry"
+      },
+      "note": "Cut over 2026-09-11 ~21:40Z. PUBLIC_ORIGIN set 21:57Z to www, apex, railway host (in that order) and redeployed; www fixed 22:20Z (CNAME wshw0478.up.railway.app, proxied) and the apex now 301s to www. check-origins --all clean: www and the railway host OK, zero TRAP. staging.ifadentistry.com is a SEPARATE Instatic instance (same Railway project, environment `staging`, volume 55e39064-0193-4639-b766-4c1fffee7f72), stood up 2026-09-18 for the redesign. Its PUBLIC_ORIGIN is the staging host ALONE and its generated Railway host was deleted on purpose: that host bypasses Cloudflare and so cannot carry the X-Robots-Tag noindex rule that keeps staging out of Google. One door, de-indexed at the edge."
     }
   ]
 }

@@ -15,7 +15,12 @@
  * Needs `'unsafe-inline'`: the embed-origins plugin grants it (compatible policy) on every page,
  * because every page carries data-wz-embed. See 21-instatic-upload.md.
  */
-var PROD = /(^|\.)ifadentistry\.com$/i.test(location.hostname)
+// `staging.ifadentistry.com` is a subdomain of the production zone, so the host test below passes
+// there — the one host the gate exists to exclude would be the one host it let through. The staging
+// clone is a complete copy of the site, so every page a reviewer opens would report into the
+// practice's analytics. Excluded by name, so a new production host keeps working.
+var STAGING = /^staging\./i.test(location.hostname)
+var PROD = /(^|\.)ifadentistry\.com$/i.test(location.hostname) && !STAGING
 var deferred = []
 
 // Off the production host the Google tag never loads, but WordPress's own inline code still
@@ -47,6 +52,18 @@ function headHtml(it) {
   for (var i = 0; i < nodes.length; i++) {
     var n = nodes[i]
     if (n.nodeType === 1) {
+      // Staging is served with `X-Robots-Tag: noindex`. A canonical — or an og:url — pointing at
+      // the PRODUCTION url on a noindexed page is the one combination that can hurt production:
+      // Google treats the two as contradictory and can apply the noindex to the canonical's
+      // target. These tags are baked into the cloned page data, not a plugin setting, so they are
+      // dropped here rather than by editing 59 pages. No-op on production.
+      if (
+        STAGING &&
+        (n.getAttribute('rel') === 'canonical' ||
+          n.getAttribute('property') === 'og:url' ||
+          n.getAttribute('name') === 'robots')
+      )
+        continue
       // og:image and friends must be absolute; the media library gives a same-origin path.
       var c = n.getAttribute('content')
       if (c && c.charAt(0) === '/' && c.charAt(1) !== '/') n.setAttribute('content', location.origin + c)
@@ -68,9 +85,15 @@ function place(s, anchor) {
   else document.head.appendChild(s)
 }
 
+// An inline tag bootstrap carries no src and no id, so the `g` flag prepare-wp.mjs computes from
+// those fields never covers it (fixed there too, but a bundle built before that fix still has
+// g:0 on them). On staging, read the code itself as well — belt and braces on the one host where
+// a leak costs the practice real money.
+var TAGTEXT = /googletagmanager\.com|google-analytics\.com|googlesitekit|gtag\(/i
+
 function run(id, anchor) {
   var it = D[id]
-  if (!it || (it.g && !PROD)) {
+  if (!it || (it.g && !PROD) || (STAGING && TAGTEXT.test(it.c || it.u || ''))) {
     if (anchor && anchor.parentNode) anchor.parentNode.removeChild(anchor)
     return
   }

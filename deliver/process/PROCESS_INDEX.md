@@ -72,15 +72,17 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 18 | Instatic Embeds | [18-instatic-embeds.md](./18-instatic-embeds/18-instatic-embeds.md) |
 | 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _promoted on the `bk-dr-nahlah` branch as `deliver/process/19-cloudflare-launch/`; **not yet merged to `main`**_ |
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
-| 21 | Instatic Upload (build → import → publish) | _client-local — `bk-stone` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion.**_ |
+| 21 | Instatic Staging Clone & Promotion | [21-instatic-staging-clone.md](./21-instatic-staging-clone/21-instatic-staging-clone.md) — promoted on `bk-mason-park`, **not yet merged to `main`**; present here because `bk-ifa-dentistry` ran it on 2026-09-18 |
+| ~~21~~ | Instatic Upload (build → import → publish) | _client-local — `bk-stone` and `bk-ifa-dentistry` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion, and it must take a free number**: `21` is already the promoted Staging Clone above._ |
 | 22 | Instatic API Sync (CSS registry, publish, parity gate) | [22-instatic-api-sync.md](./22-instatic-api-sync/22-instatic-api-sync.md) |
 
-### Instatic modules (`18`, `20`, `22`)
+### Instatic modules (`18`, `20`, `21`, `22`)
 
-Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and all three are needed on every such site:
+Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel. `18`, `20` and `22` are needed on every such site; `21` is needed the moment anyone has to work on a site that is already live:
 
 - **`18` Instatic Embeds** makes third-party widgets possible at all. Instatic publishes behind `frame-src 'none'`, so without this plugin no booking form, review widget or chat bubble can load. Install it on every Instatic site.
 - **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It is what makes the client's own `client.com/admin` able to **save**, and the checker in it is the thing to run before sending anyone an admin link.
+- **`21` Instatic Staging Clone & Promotion** stands up `staging.client.com` as a second, de-indexed Instatic instance seeded from production, and promotes approved work back. Instatic's publish replaces **every** public page at once, so a redesign or any multi-day change cannot live as drafts on the live site — one unrelated typo fix would ship it. Run it before starting work on a site that is already live.
 - **`22` Instatic API Sync** is the build-and-publish toolchain: the CSS registry migration, the `var()`/custom-property handling happy-dom does not survive, the publish call and the parity gate that catches a dropped declaration before it ships. It is shared tooling — run it from whichever worktree is active, and set `INSTATIC_BASE_URL` for the client you are pointing at.
 
 `20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.

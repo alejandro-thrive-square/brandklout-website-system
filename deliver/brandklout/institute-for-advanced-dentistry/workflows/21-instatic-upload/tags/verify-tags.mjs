@@ -33,8 +33,14 @@ const SESSION = 'backend.leadconnectorhq.com/appengine/js/user_session.js'
 let fail = 0
 const say = (ok, msg) => { if (!ok) fail++; console.log(`${ok ? 'ok  ' : 'FAIL'} ${msg}`) }
 
-if (!/ifadentistry\.com$/i.test(new URL(BASE).hostname)) {
+const HOST = new URL(BASE).hostname
+if (!/ifadentistry\.com$/i.test(HOST) || /^staging\./i.test(HOST)) {
+  // `staging.ifadentistry.com` ends in the production domain, so without the second test this
+  // gate ran against staging and reported 18 FAILED — correctly, since the tags are switched off
+  // there on purpose, and uselessly, since that is the desired state. What staging needs is the
+  // opposite assertion, and that is `21-instatic-staging-clone/verify-staging-clean.mjs`.
   console.log(`SKIP  ${BASE} is not the production host — the tag asset returns early there by design.`)
+  if (/^staging\./i.test(HOST)) console.log('      for a staging host run verify-staging-clean.mjs instead.')
   process.exit(0)
 }
 

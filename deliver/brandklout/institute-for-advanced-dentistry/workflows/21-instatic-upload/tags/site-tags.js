@@ -16,6 +16,11 @@
  */
 (function () {
   if (!/(^|\.)ifadentistry\.com$/i.test(location.hostname)) return
+  // `staging.ifadentistry.com` matches the test above — it is a subdomain of the production zone.
+  // The staging clone is a full copy of the site, so without this line every page a reviewer opens
+  // reports into the practice's GTM and burns a number from the GoHighLevel pool. Excluded by name
+  // rather than by an allow-list of production hosts, so a new production host keeps working.
+  if (/^staging\./i.test(location.hostname)) return
   if (window.BrandkloutSiteTags) return
   window.BrandkloutSiteTags = '1.0.0'
 
