@@ -1,6 +1,6 @@
 Effective date: September 18, 2026
 
-These Terms of Service govern your use of the website operated by Institute for Advanced Dentistry, also referred to as IFA Dentistry, at [https://www.ifadentistry.com/](https://www.ifadentistry.com/) (the Site), as well as our text messaging program and related online services.
+These Terms of Service govern your use of the website operated by Institute for Advanced Dentistry PLLC, also referred to as Institute for Advanced Dentistry or IFA Dentistry, at [https://www.ifadentistry.com/](https://www.ifadentistry.com/) (the Site), as well as our text messaging program and related online services.
 
 By accessing or using the Site, submitting information through a form, requesting an appointment, opting in to text messages, or communicating with us electronically, you agree to these Terms. If you do not agree, do not use the Site or our online services. We may update these Terms by posting a revised version and effective date. Your continued use after an update takes effect means you accept the revised Terms.
 
@@ -129,10 +129,11 @@ We may revise these Terms by posting an updated version on this page. Changes ta
 
 ## 20 Contact Us
 
-If you have questions about these Terms of Service or the SMS program, contact Institute for Advanced Dentistry:
+If you have questions about these Terms of Service or the SMS program, contact Institute for Advanced Dentistry PLLC:
 
 ### Phoenix
 
+Institute for Advanced Dentistry PLLC
 3443 N. Central Avenue, Suite 700
 Phoenix, AZ 85012
 United States
@@ -142,6 +143,7 @@ Website  [https://www.ifadentistry.com/](https://www.ifadentistry.com/)
 
 ### Peoria
 
+Institute for Advanced Dentistry PLLC
 13360 N. 94th Drive, Suite B
 Peoria, AZ 85381
 United States

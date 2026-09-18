@@ -1,6 +1,6 @@
 Effective date: September 18, 2026
 
-Institute for Advanced Dentistry, also referred to as IFA Dentistry, respects your privacy and is committed to protecting the personal information you share with us through [https://www.ifadentistry.com/](https://www.ifadentistry.com/) (the Site) and through our text messaging program. This Privacy Policy explains the information we collect, how we use and share it, and the choices available to you.
+Institute for Advanced Dentistry PLLC, also referred to as Institute for Advanced Dentistry or IFA Dentistry, respects your privacy and is committed to protecting the personal information you share with us through [https://www.ifadentistry.com/](https://www.ifadentistry.com/) (the Site) and through our text messaging program. This Privacy Policy explains the information we collect, how we use and share it, and the choices available to you.
 
 This policy applies to information collected through the Site and our SMS messaging program. Information collected from you as a patient in connection with dental care is governed by our separate Notice of Privacy Practices under the Health Insurance Portability and Accountability Act, or HIPAA, which is available at our offices and upon request.
 
@@ -129,10 +129,11 @@ The Site may link to websites that we do not control. We are not responsible for
 
 ## 12 Contact Us
 
-If you have questions about this Privacy Policy or the SMS program, or you wish to exercise an applicable privacy right, contact Institute for Advanced Dentistry:
+If you have questions about this Privacy Policy or the SMS program, or you wish to exercise an applicable privacy right, contact Institute for Advanced Dentistry PLLC:
 
 ### Phoenix
 
+Institute for Advanced Dentistry PLLC
 3443 N. Central Avenue, Suite 700
 Phoenix, AZ 85012
 United States
@@ -142,6 +143,7 @@ Website  [https://www.ifadentistry.com/](https://www.ifadentistry.com/)
 
 ### Peoria
 
+Institute for Advanced Dentistry PLLC
 13360 N. 94th Drive, Suite B
 Peoria, AZ 85381
 United States

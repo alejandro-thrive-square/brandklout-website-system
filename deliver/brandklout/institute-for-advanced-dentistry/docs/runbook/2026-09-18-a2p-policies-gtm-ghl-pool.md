@@ -45,11 +45,12 @@
   It decodes correctly in a browser (checked), but a scripted A2P vetting crawler sees
   `[email protected]`. Turning off Scrape Shield → Email Address Obfuscation for the zone is the fix
   if vetting complains; it is a spam trade-off, so it is the client's call.
-- **The legal entity is `Institute for Advanced Dentistry PLLC`** — the live GoHighLevel form's
-  consent line says so. The client's policy documents name only "Institute for Advanced Dentistry,
-  also referred to as IFA Dentistry". A2P vetting compares the registered legal name against the
-  policy pages, so the PLLC should probably appear on first mention in both. It is the client's
-  legal copy, so it was **not** changed without asking.
+- ~~The legal entity is not named in the policies.~~ **Done the same day, on request.** Both pages
+  now open "Institute for Advanced Dentistry PLLC, also referred to as Institute for Advanced
+  Dentistry or IFA Dentistry", the Contact Us line names the PLLC, and the PLLC heads both address
+  blocks. The name came from the live GoHighLevel form's consent line, which is the only place it
+  is written down here — A2P vetting compares the registered legal name against the policy pages.
+  Republished 2026-09-18T17:49:41Z.
 - **The SMS consent wording on the GHL form contradicts itself and is the biggest A2P risk here.**
   It reads: "I consent to receive **non-marketing** text messages from Institute for Advanced
   Dentistry PLLC, such as **special offers, discounts, newsletters**, and updates about services."
