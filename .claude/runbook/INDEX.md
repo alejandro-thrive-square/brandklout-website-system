@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-09-18 | 2026-09-18 — Gage and Jessica: content-editor accounts on all four staging instances — carries **gotchas** | [`2026-09-18-gage-jessica-content-accounts-on-staging.md`](./2026-09-18-gage-jessica-content-accounts-on-staging.md) |
+| 2026-09-18 | 2026-09-18 — Gage and Jessica: content-editor accounts on all five staging instances — carries **gotchas** | [`2026-09-18-gage-jessica-content-accounts-on-staging.md`](./2026-09-18-gage-jessica-content-accounts-on-staging.md) |
 | 2026-09-17 | 2026-09-17 - Obsidian vault set up on the repo root; 139 broken doc links repaired - carries **gotchas** | [`2026-09-17-obsidian-vault-setup.md`](./2026-09-17-obsidian-vault-setup.md) |
 | 2026-09-17 | 2026-09-17 — bk-stone-dental merged into main (consent module 23) — carries **gotchas** | [`2026-09-17-bk-stone-dental-merged-consent-module.md`](./2026-09-17-bk-stone-dental-merged-consent-module.md) |
 | 2026-09-16 | 2026-09-16 — Google Drive access for agents via `scripts/drive.mjs` — carries **gotchas** | [`2026-09-16-google-drive-access.md`](./2026-09-16-google-drive-access.md) |
