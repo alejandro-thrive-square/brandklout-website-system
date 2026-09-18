@@ -77,9 +77,29 @@ consent params present, typing sticks.**
 | `.tmp/logo-swap-check.mjs` | FAIL none — both logos loaded, both on the 640px variant, either side of the flip |
 | `drag-test.mjs` | 3/3 — every rail's arrows still move it |
 | `form-test.mjs` | FAIL none, after the fix above |
+| `.tmp/drawer-live.mjs` | FAIL none — new; opens the mobile drawer on the live site and finds a loaded 195 × 39 logo in its head |
+| `visual-diff.mjs` 1440 | book 9.19% (the GHL form, which renders differently every capture), privacy-policy 6.97% and terms-of-service 4.56% (trap 40, the `ch` measure, identical to staging), every other page 1.0–1.9% against a 0.66–1.4% baseline |
+| `visual-diff.mjs` 390 | about 23.0% (known to flip between 7.9% and 23.2% run to run with no change), book 15.4%, terms-of-service 15.2%, privacy-policy 8.8% — all matching staging's same-day numbers. The rest are **0.5–1.0pp above the 2026-09-15 baseline and they reproduce exactly**; see below |
 
 The three logo assets serve 200 at their exact byte sizes (29360 / 22352 / 56794), and the
 published `/` carries all four `<img>` tags with their alt text from the media library.
+
+### The 390 numbers are up, and it is the hero photograph, not the logo
+
+Seven pages read 0.5–1.0pp above the 390 baseline (index 3.44 vs 2.46, financing 2.95 vs 2.42,
+meet-the-doctor 3.31 vs 2.63) and they **reproduce to three decimal places on a re-run**, so this
+is not the batch wobble the staging run documented — it is deterministic.
+
+It is still not this change. Cropping `index` at 390 over the biggest band (y 0–551) and putting
+local, live and the diff side by side settles it in one look: **there is no magenta anywhere on the
+logo or the burger** — the lockup is pixel-identical between the two — while the hero photograph's
+eyelashes, nose and lips are covered in it. Live serves the photo from a smaller responsive variant
+and it resamples differently. That affects every image-heavy page and predates the logo.
+
+The other half of the explanation is that **the 390 baseline in `.tmp/vdiff-390.log` is three
+pushes stale** — it predates the arrows fix, the GHL form and the legal pages, none of which ever
+had a 390 diff recorded. Compare a push against the *same day's* staging run, not against whatever
+log happens to be in `.tmp/`.
 
 ## Gotchas
 

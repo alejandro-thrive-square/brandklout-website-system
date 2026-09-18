@@ -1075,6 +1075,9 @@ unchanged page is worse than no gate.
 - `.tmp/logo-swap-check.mjs` — asserts the navbar's two logo files are both loaded and both at a
   2x variant, before and after the bar flips from transparent to solid. Trap 39; run it after any
   change to the navbar logo markup or to `.brand_logo` in `css/23-brand.css`
+- `.tmp/drawer-live.mjs` — opens the mobile drawer on the LIVE site and asserts its head carries a
+  loaded logo. Nothing else covers it: `visual-diff.mjs` never opens the drawer, so the published
+  drawer head is the one piece of the shell no gate looks inside
 - `.tmp/probe-sel.mjs` — the same, addressed by an ordinary CSS selector rather than by a
   comparison key. Reaches the things `compare-live.mjs` cannot: a bare `<img>`, a pseudo-element's
   host, anything with no class. **Both probes take their live target from `INSTATIC_BASE_URL`**
