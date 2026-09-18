@@ -32,9 +32,19 @@ const CHUNK = 7000;
 console.log(`railway environment: ${ENV_NAME}`);
 
 const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
+const toWslPath = (p) => {
+  const m = String(p).match(/^([A-Za-z]):[\\/](.*)$/);
+  return m ? `/mnt/${m[1].toLowerCase()}/${m[2].replace(/\\/g, "/")}` : p;
+};
+const bundledRailway = process.env.APPDATA
+  ? path.join(process.env.APPDATA, "npm", "node_modules", "@railway", "cli", "bin", "railway.exe")
+  : "";
+const railwayCommand = process.platform === "win32" && fs.existsSync(bundledRailway)
+  ? shq(toWslPath(bundledRailway))
+  : "railway";
 const sshOnce = (cmd) => execFileSync(
   "bash",
-  ["-c", `railway ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
+  ["-c", `${railwayCommand} ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
   { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
 );
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);

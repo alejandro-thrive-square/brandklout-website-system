@@ -38,6 +38,19 @@ const CHUNK = 7000;
 // Go through bash, not cmd.exe: `railway` on PATH is a .cmd shim and cmd.exe
 // mangles the single-quoted payload ("El sistema no puede encontrar la ruta").
 const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
+// On Windows, `bash` can resolve the npm shell shim even when Node is not
+// installed inside WSL. Use Railway's bundled native executable directly in
+// that case so the transport does not depend on a second Node installation.
+const toWslPath = (p) => {
+  const m = String(p).match(/^([A-Za-z]):[\\/](.*)$/);
+  return m ? `/mnt/${m[1].toLowerCase()}/${m[2].replace(/\\/g, "/")}` : p;
+};
+const bundledRailway = process.env.APPDATA
+  ? path.join(process.env.APPDATA, "npm", "node_modules", "@railway", "cli", "bin", "railway.exe")
+  : "";
+const railwayCommand = process.platform === "win32" && fs.existsSync(bundledRailway)
+  ? shq(toWslPath(bundledRailway))
+  : "railway";
 // `railway ssh` intermittently dies with "Failed to fetch: error decoding
 // response body" - a transport hiccup, and the command may well have run. So
 // every chunk is written to its OWN numbered file rather than appended: a
@@ -45,7 +58,7 @@ const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
 // in order at the end.
 const sshOnce = (cmd) => execFileSync(
   "bash",
-  ["-c", `railway ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
+  ["-c", `${railwayCommand} ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
   { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
 );
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);

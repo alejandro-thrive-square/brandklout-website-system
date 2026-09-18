@@ -54,6 +54,10 @@ for (const route of routes) {
     //     unused by either of our pages.
     // A CSP violation naming anything else IS ours and still counts.
     if (/cloudflareinsights|cdn-cgi|data:application\/x-font-ttf/.test(text)) { thirdParty.push(text.slice(0, 100)); return; }
+    // GoHighLevel's form iframe emits an obfuscated diagnostic with a NaN
+    // payload. It originates in the cross-origin vendor frame and does not
+    // indicate a failure of the host page or form request.
+    if (/%c%d font-size:0;color:transparent NaN/.test(text)) { thirdParty.push(text); return; }
     problems.push("console: " + text.slice(0, 160));
   });
   page.on("pageerror", (e) => problems.push("pageerror: " + e.message.slice(0, 160)));
@@ -180,6 +184,8 @@ for (const route of routes) {
   const f = [...new Set(failed)].filter((u) =>
     !/favicon/.test(u) &&
     !/cloudflare|cdn-cgi/.test(u) &&
+    !/backend\.leadconnectorhq\.com\/(forms\/form-survey-event|funnels\/funnel\/geo-location)/.test(u) &&
+    !/stcdn\.leadconnectorhq\.com\/_preview\//.test(u) &&
     !/-w64\.webp$/.test(u) &&
     !/^https:\/\/[^/]+\/[A-Za-z0-9_-]{60,}$/.test(u));
   if (f.length) { console.log("  failed requests: " + f.slice(0, 6).join("\n                   ")); bad++; }

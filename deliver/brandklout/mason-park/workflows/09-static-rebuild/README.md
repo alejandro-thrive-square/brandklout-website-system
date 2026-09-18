@@ -619,6 +619,11 @@ Production keeps the exact Webflow-derived pages in workflow 10. The routes here
 staging equivalents and must not be used to overwrite production before the client approves the
 new site. The six route names remain identical so promotion does not require an ad URL change:
 
+**Published to staging on 2026-09-18.** Staging now has 63/63 published page rows with no draft
+drift. All six routes pass the live desktop and 390px gates; the four form frames and loaders
+return 200 with the campaign IDs below; all six number-pool scripts return 200 and swap the public
+number. Production remains the workflow-10 Webflow port.
+
 | Campaign | Landing | Consultation | Thank you | Form |
 | :--- | :--- | :--- | :--- | :--- |
 | Invisalign | `/invisalign` | `/invisalign-consultation` | `/invisalign-thank-you` | `YbX91GhEDKkCN4GH4gka` |
@@ -657,8 +662,26 @@ node qa-ad-pages.mjs
 
 Results: structural check 0 errors; all four lead pages pass the static journey gate; all twelve
 offer/proof pin checks and all four 25/50/75 path scrubs pass; 36 responsive renders pass with 0
-problems. The canary was visually reviewed at 1440 and 390. No staging or production write is part
-of the build command.
+problems. The canary was visually reviewed at 1440 and 390. The build command itself performs no
+staging or production write.
+
+Live staging gates:
+
+```bash
+cd .tmp
+INSTATIC_BASE_URL=https://staging.masonparkdental.com node verify-ad-draft.mjs
+node verify-live.mjs https://staging.masonparkdental.com \
+  /invisalign /invisalign-consultation /invisalign-thank-you \
+  /new-patient-special /new-patient-special-consultation /new-patient-thank-you
+node verify-ad-responsive-live.mjs https://staging.masonparkdental.com
+node verify-ad-tracking-isolated.mjs https://staging.masonparkdental.com
+TARGET_ORIGIN=https://staging.masonparkdental.com \
+  node ../../10-lp-instatic/.tmp/verify-form.mjs
+```
+
+`verify-ad-tracking-isolated.mjs` deliberately opens a fresh browser context per route. Reusing
+one browser across the staging and Webflow origins can suppress a later number-pool request or
+delay its rewrite, producing a false negative even though an isolated ad visit swaps correctly.
 
 ## Instatic import
 
@@ -702,6 +725,16 @@ node reset-to-deliverable.mjs --apply --publish        # 13. one atomic PUT, the
 node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 14. check what actually shipped
 node diff-live.mjs ../home/index.html $INSTATIC_BASE_URL/         # 15. and diff it against the local page
 ```
+
+On Windows, the three Railway transport scripts use the CLI's bundled native `railway.exe` from
+WSL when it exists. The npm shell shim needs a WSL-side Node installation and otherwise fails with
+`exec: node: not found`, before touching the remote container. Never export `RAILWAY_TOKEN`; the
+CLI's own authenticated session remains the authority.
+
+For an incremental paid-route import, do not run `reset-to-deliverable`: import only the six slugs
+with `import-pages.mjs --only /<slug>`, then reapply both template scripts, import styles, and
+re-import scripts after the rows exist so its explicit page-id scope includes all 63 pages. Run
+`verify-ad-draft.mjs` before the one publish.
 
 ### The BugHerd sidebar is on staging, and only staging
 

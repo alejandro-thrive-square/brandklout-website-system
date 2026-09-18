@@ -19,6 +19,7 @@ import os from "node:os";
 import path from "node:path";
 
 const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const TARGET = (process.env.TARGET_ORIGIN || "https://www.masonparkdental.com").replace(/\/+$/, "");
 const PUBLIC = "(281) 769-8878";
 const SLUGS = [
   "invisalign", "new-patient-special", "invisalign-consultation",
@@ -86,7 +87,7 @@ console.log(`${"page".padEnd(34)} ${"where".padEnd(5)}  pool  numbers shown`);
 for (const slug of SLUGS) {
   const out = {};
   for (const [where, url] of [
-    ["ours", `https://www.masonparkdental.com/${slug}`],
+    ["ours", `${TARGET}/${slug}`],
     ["ref", `https://mason-park-dental.webflow.io/${slug}`],
   ]) {
     const d = await probe(url);

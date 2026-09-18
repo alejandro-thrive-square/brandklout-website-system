@@ -105,6 +105,12 @@ node hero-shot.mjs invisalign --live --y 0
 node net-check.mjs invisalign
 ```
 
+`verify-form.mjs` and `verify-tracking.mjs` default to production, but accept
+`TARGET_ORIGIN=https://staging.masonparkdental.com` for a read-only check of the redesigned staging
+routes against the same Webflow references. The tracking verifier reuses one browser session for
+its comparison; use workflow 09's `verify-ad-tracking-isolated.mjs` as the final staging gate so
+vendor session state cannot create an early-page false negative.
+
 ## What the port changes, and why only this
 
 The pages carry **zero Webflow interactions** — no `data-w-id`, no inline `opacity:0` — so they

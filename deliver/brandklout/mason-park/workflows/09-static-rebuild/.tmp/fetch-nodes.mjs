@@ -35,13 +35,23 @@ const SERVICE = "8a9bb8d3-ed09-418d-9a67-b5c8bf0f19fb";
 const PART = 200000;
 
 const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
+const toWslPath = (p) => {
+  const m = String(p).match(/^([A-Za-z]):[\\/](.*)$/);
+  return m ? `/mnt/${m[1].toLowerCase()}/${m[2].replace(/\\/g, "/")}` : p;
+};
+const bundledRailway = process.env.APPDATA
+  ? path.join(process.env.APPDATA, "npm", "node_modules", "@railway", "cli", "bin", "railway.exe")
+  : "";
+const railwayCommand = process.platform === "win32" && fs.existsSync(bundledRailway)
+  ? shq(toWslPath(bundledRailway))
+  : "railway";
 const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 const ssh = (cmd, tries = 5) => {
   let last;
   for (let i = 1; i <= tries; i++) {
     try {
       return execFileSync("bash",
-        ["-c", `railway ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
+        ["-c", `${railwayCommand} ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
         { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
     } catch (e) { last = e; if (i < tries) sleep(1000 * i); }
   }

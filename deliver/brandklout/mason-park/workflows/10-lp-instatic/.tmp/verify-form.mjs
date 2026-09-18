@@ -19,6 +19,7 @@ import os from "node:os";
 import path from "node:path";
 
 const CHROME = process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
+const TARGET = (process.env.TARGET_ORIGIN || "https://www.masonparkdental.com").replace(/\/+$/, "");
 
 const CASES = [
   { slug: "invisalign", form: "YbX91GhEDKkCN4GH4gka", campaign: "Invisalign" },
@@ -108,7 +109,7 @@ const problems = [];
 console.log(`${"page".padEnd(34)} ${"where".padEnd(5)}  iframe  form-req  loader  size        form id`);
 for (const c of CASES) {
   for (const [where, url] of [
-    ["ours", `https://www.masonparkdental.com/${c.slug}`],
+    ["ours", `${TARGET}/${c.slug}`],
     ["ref", `https://mason-park-dental.webflow.io/${c.slug}`],
   ]) {
     const d = await probe(url);
