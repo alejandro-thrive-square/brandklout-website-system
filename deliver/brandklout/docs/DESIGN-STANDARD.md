@@ -153,6 +153,24 @@ chapters** — but keep it a narrative arc. The dental-LP shape:
 FAQ, financing and insurance fold **into** the beat they answer — financing belongs inside The Path
 or The Invitation where the objection actually lands, not as its own band.
 
+**A paid set is three pages, in the agency's reference flow, and it is not the service page.**
+(Added 2026-09-18.) Mason Park's first cut derived its ad pages from the organic service page and
+added a form chapter near the bottom; the agency rejected it: *"these landing pages should have the
+same flow of information that Livewell has."* The reference set is
+`www.livewelldentalva.com/ads-landing-pages/`. Per campaign: a **landing** page with the lead form
+**in the hero**, the emotional journey, why here, the dentist, options, the process, proof, the
+space, a dedicated FAQ and a final CTA with credentials and a disclaimer; a **consultation** page
+that is the form first, then patient proof and the dentist; a **thank-you** page that is the phone
+first, what to expect on the call, why here, the FAQ, and **no form**. All three live under
+`/ads-landing-pages/`, and every landing CTA goes to the consultation page. The flow is the
+agency's; the section shapes, photography and copy are the client's own. Where a client publishes
+no before-and-after cases the gallery is not reproduced: use their reviews and their rooms. The
+dedicated FAQ is the one deliberate exception to the folding rule above.
+
+**Name nothing on a paid page `ad`.** Classes such as `is-ad`, `ad-hero` and `ad-rail` are on ad
+blockers' cosmetic lists, and the published element collapses for every blocked visitor while the
+local render stays perfect. Use `lp-*`.
+
 ## Minimum per page
 
 1. **6–8 named chapters** with `data-chapter` / `data-chapter-name`, in a non-shuffleable order.
