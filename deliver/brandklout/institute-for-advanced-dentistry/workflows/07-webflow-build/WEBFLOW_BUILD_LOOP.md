@@ -140,7 +140,7 @@ A scheduled run is complete when it has done one of the following:
 - After the first run, inspect the state and handoff files before enabling a longer hourly sequence.
 
 ## Version Control
-- This loop document follows the root version control rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+- This loop document follows the root version control rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
 - Commit lightweight markdown state and handoff files when they support review, replay, or agent continuity.
 - Do not commit `.env` files, secrets, credentials, or binary/media assets.
 - Any change to this loop logic must be reflected here and, when relevant, in [07-webflow-build.md](./07-webflow-build.md).

@@ -196,5 +196,5 @@ the newest converter lives THERE, not in the Dr. Nahlah folder:
 ## Version Control
 
 Follows the root-level version control rules in
-[SYSTEM_RULES.md — Section 4](../../../SYSTEM_RULES.md). Update this file
+[SYSTEM_RULES.md — Section 4](../../../../../SYSTEM_RULES.md). Update this file
 whenever the component pipeline changes (Documentation Integrity Rule).

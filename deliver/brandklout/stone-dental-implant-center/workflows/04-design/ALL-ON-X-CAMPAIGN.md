@@ -123,6 +123,6 @@ titles. Not yet done: mobile-viewport screenshots, form submission end-to-end te
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). This doc and the
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). This doc and the
 `04-design/.tmp/build/` scripts are committed. Screenshots and downloaded reference HTML/CSS stay
 untracked media.

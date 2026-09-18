@@ -326,5 +326,5 @@ text nodes; check element `settings` too.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Reference captures
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Reference captures
 under `.tmp/arvada-reference/` stay untracked.

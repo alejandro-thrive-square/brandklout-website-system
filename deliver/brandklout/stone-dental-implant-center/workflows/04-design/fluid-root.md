@@ -270,6 +270,6 @@ the multiplier sits below it in the token block.
 
 ## Version Control
 
-- Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+- Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
 - `scripts/fluid-root.mjs` is the single source of truth for the scale. Change the table there and
   regenerate; never hand-edit emitted CSS in a client package.

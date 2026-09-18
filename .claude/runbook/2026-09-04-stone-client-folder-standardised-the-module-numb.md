@@ -1,7 +1,7 @@
 ## 2026-09-04 — Stone client folder standardised; the module-number registry was wrong
 
 Audited `deliver/brandklout/stone-dental-implant-center/` against
-[DELIVER_SYSTEM_RULES §3](../deliver/DELIVER_SYSTEM_RULES.md).
+[DELIVER_SYSTEM_RULES §3](../../deliver/DELIVER_SYSTEM_RULES.md).
 
 **The folder NAME is correct.** §3 says `deliver/[client-name]/`, and the client is the signed Asana
 project "BK Activation — Stone Dental Implant Center", whose scope is **two full websites**. Surgical

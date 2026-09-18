@@ -7,6 +7,12 @@ then only the runs you need. Do not read them all.
 
 ## Standing
 
+- **The repo is an Obsidian vault.** `.obsidian/` at the root is tracked, so the graph and its
+  colour groups are the same on every machine and every `bk-*` worktree. `.tmp/`,
+  `node_modules/` and friends are excluded, which leaves 368 real docs. Obsidian cannot see
+  dot-folders, so `.claude/` runbooks are absent from the graph. Links are relative markdown
+  links, never wikilinks. See [2026-09-17](./runbook/2026-09-17-obsidian-vault-setup.md).
+
 - **Google Drive works** through `node scripts/drive.mjs` (search, ls, get, pull), signed in as
   alejandro@thrivesquare.com. The app is in Testing, so the sign-in expires every 7 days:
   `invalid_grant` means run `node scripts/drive.mjs auth`. See

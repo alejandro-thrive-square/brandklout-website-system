@@ -230,7 +230,7 @@ Protection) — point them there, don't change their security settings for them.
 
 ## Version Control
 
-This document follows the root-level version control rules in [SYSTEM_RULES.md](/SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
+This document follows the root-level version control rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
 
 ## Infrastructure
 

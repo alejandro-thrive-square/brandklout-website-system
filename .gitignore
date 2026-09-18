@@ -89,7 +89,14 @@ desktop.ini
 
 # Obsidian's open-tab / pane state. Per-machine UI churn, and it kept a stale
 # pointer to a Webzite agency file alive inside this Brandklout-only repo.
+# The rest of .obsidian/ (app.json, graph.json, core-plugins.json, appearance.json)
+# IS tracked on purpose: it is the shared vault setup, so the graph looks the same
+# on every machine. Everything below is per-machine state or a local cache.
 .obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
+.trash/
 *.swp
 *.swo
 
@@ -158,5 +165,5 @@ nul
 **/.tmp/mcp-session.txt
 **/.tmp/mcp-call.py
 
-# Editors keep creating this empty file at the repo root.
-/untitled.md
+# Editors keep creating these empty files at the repo root.
+/untitled*.md

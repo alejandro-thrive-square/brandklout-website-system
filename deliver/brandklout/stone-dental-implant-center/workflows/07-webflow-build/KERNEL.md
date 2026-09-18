@@ -104,5 +104,5 @@ node verify.mjs https://[client-name].webflow.io/<page>
 
 ## Version Control
 
-Follows [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Commit the scripts and
+Follows [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Commit the scripts and
 this doc; never commit `KERNEL_API_KEY` or any `.env`.

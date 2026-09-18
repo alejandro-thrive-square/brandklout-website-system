@@ -1,11 +1,12 @@
 # Runbook index
 
-20 runs, newest first. Each line is one file in this folder.
+21 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-17 | 2026-09-17 - Obsidian vault set up on the repo root; 139 broken doc links repaired - carries **gotchas** | [`2026-09-17-obsidian-vault-setup.md`](./2026-09-17-obsidian-vault-setup.md) |
 | 2026-09-17 | 2026-09-17 — bk-stone-dental merged into main (consent module 23) — carries **gotchas** | [`2026-09-17-bk-stone-dental-merged-consent-module.md`](./2026-09-17-bk-stone-dental-merged-consent-module.md) |
 | 2026-09-16 | 2026-09-16 — Google Drive access for agents via `scripts/drive.mjs` — carries **gotchas** | [`2026-09-16-google-drive-access.md`](./2026-09-16-google-drive-access.md) |
 | 2026-09-15 | 2026-09-15 — BugHerd staging loops launched in bk-mason-park, -kids, -west-la-implants — carries **gotchas** | [`2026-09-15-bugherd-staging-loops-launched.md`](./2026-09-15-bugherd-staging-loops-launched.md) |

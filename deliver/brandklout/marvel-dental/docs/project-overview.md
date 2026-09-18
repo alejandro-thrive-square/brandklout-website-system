@@ -129,5 +129,5 @@ revert the client's work.
 
 ## Version Control
 
-Per [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). See also [brand.md](./brand.md) for the measured
+Per [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). See also [brand.md](./brand.md) for the measured
 brand basis, and `../docs/mcp-access.md` for the Webflow grant this work uses.

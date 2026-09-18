@@ -40,7 +40,7 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 - `deliver/[client-name]/docs/content-intake-approval.md` (final, persisted)
 
 ## Version Control
-- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../SYSTEM_RULES.md).
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
 - **Branch naming**: `deliver/[client-name]-content-intake-<change>` once cloned into a client folder.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.

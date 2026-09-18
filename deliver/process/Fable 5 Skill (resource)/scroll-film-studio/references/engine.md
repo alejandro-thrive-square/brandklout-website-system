@@ -161,7 +161,7 @@ nodes, no layout-thrashing reads in tickers. Same dev contract + jank meter as L
 
 ## Version Control
 
-This document follows the root-level version control rules in [SYSTEM_RULES.md](/SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
+This document follows the root-level version control rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
 
 ## Infrastructure
 
