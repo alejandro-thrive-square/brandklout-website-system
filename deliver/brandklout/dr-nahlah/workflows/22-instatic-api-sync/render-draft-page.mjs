@@ -73,7 +73,8 @@ const res = await api('POST', '/admin/api/cms/runtime/preview', {
   site: { ...shell, pages, visualComponents: shell.visualComponents ?? [] },
 })
 
-mkdirSync(OUT, { recursive: true })
+/* A nested slug (`ads-landing-pages/<name>`) lands in a subdirectory. */
+mkdirSync(dirname(join(OUT, `${SLUG}.html`)), { recursive: true })
 writeFileSync(join(OUT, `${SLUG}.html`), res.html, 'utf8')
 for (const a of res.assets ?? []) {
   const p = join(OUT, a.publicPath.replace(/^\//, ''))

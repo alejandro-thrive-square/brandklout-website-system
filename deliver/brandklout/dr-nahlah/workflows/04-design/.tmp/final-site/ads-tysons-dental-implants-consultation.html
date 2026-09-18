@@ -105,7 +105,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      the practice identifying itself, not a way back to a home page the visitor
      never came from and should not be sent to.
 
-     #book and Go to the form are filled per page by
+     #book and Start my consultation are filled per page by
      build-site.mjs from the `landing` entry in its PAGES table.
 
      THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
@@ -135,7 +135,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="lp-nav-side">
       <a class="lp-nav-phone" href="tel:+15717029900">
         <i aria-hidden="true">&#9742;</i><span>(571) 702-9900</span></a>
-      <a class="lp-nav-cta" href="#book">Go to the form</a>
+      <a class="lp-nav-cta" href="#book">Start my consultation</a>
     </div>
   </div>
 </header>
@@ -156,7 +156,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ========================================================================== -->
 <div class="lp-rail">
   <a class="lp-rail-call" href="tel:+15717029900">Call now</a>
-  <a class="lp-rail-book" href="#book">Go to the form</a>
+  <a class="lp-rail-book" href="#book">Start my consultation</a>
 </div>
 
 
@@ -173,21 +173,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- ==========================================================================
-     ADS CONSULTATION — DENTAL IMPLANTS. The form page for the implant campaign.
+     ADS CONSULTATION — DENTAL IMPLANTS. The form page of the combo, and the
+     page every CTA on the landing page points at.
 
-     Same shape as ads-all-on-4-consultation.body.html and for the same
-     reasons: the form is first, above the fold at every width, with its
-     reassurance copy beside it rather than above it. Everything below it
-     exists to recover somebody who scrolled past, and each section sends them
-     back up to it.
+     REBUILT 2026-09-18 TO THE LIVEWELL FLOW (livewelldentalva.com/
+     ads-landing-pages/dental-implant-consultation): the form and the doctor's
+     name above the fold, the filmed patients, then the specialist and his
+     credentials. Nothing else. A visitor here has already read the argument.
 
-     THE FORM is this office's LeadConnector form for this campaign, filled in
-     by build-site.mjs from its LOCATIONS table via partials/lp-form.html.
-
-     THE EMBED WRAPPER IS LOAD-BEARING. `<div class="wz-embed"
-     data-wz-embed="auto">` around the vendor markup verbatim is what the
-     Instatic CSP filter's `compatible` mode engages on. Do not rename it and
-     do not tidy the vendor snippet inside it.
+     THE FORM is this office's LeadConnector form for this campaign, filled by
+     build-site.mjs from its LOCATIONS table via partials/lp-form.html. THE
+     EMBED WRAPPER IS LOAD-BEARING: `<div class="wz-embed" data-wz-embed=
+     "auto">` is what the Instatic CSP filter's `compatible` mode engages on.
+     The redirect to the thank-you page is a LeadConnector setting on the
+     form, not markup here.
      ========================================================================== -->
 <section class="pg-hero lp-hero lp-hero-form" id="hero">
   <div class="ph-bg">
@@ -196,15 +195,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="wrap ph-in">
     <div class="lp-hero-grid">
       <div class="lp-hero-copy">
-        <div class="chapter-tag" data-rv><i></i><span class="label">Dental Implants</span></div>
-        <h1 data-split>Book your <em>no-cost</em> implant consultation.</h1>
-        <p class="ph-lead" data-rv>Tell us what you are dealing with. A member of the team calls you to arrange a time at the Tysons Corner office.</p>
+        <div class="chapter-tag" data-rv><i></i><span class="label">Dental Implants &middot; Tysons Corner, McLean VA</span></div>
+        <h1 data-split>Book your <em>free</em> implant consultation.</h1>
+        <p class="ph-lead" data-rv>Tell us a little about your situation and a member of the team will call to arrange your visit at the Tysons Corner office.</p>
+        <div class="lp-signoff" data-rv>
+          <img src="assets/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+          <div>
+            <b>Dr. Esam Nahlah, D.D.S., M.S.</b>
+            <span>Board-certified prosthodontist. Diplomate of the American Board of Prosthodontics, Fellow of the International Congress of Oral Implantologists.</span>
+          </div>
+        </div>
       </div>
 
-      <!-- THE FORM IS IN THE HERO, and `id="book"` is on the card so the header
-           CTA and the mobile rail scroll to it. DOM order is copy -> form ->
-           under so that on a phone the form is the next thing after the
-           headline; above 1080 css/70-landing.css places the three blocks. -->
       <div class="lp-form-card" id="book" data-rv>
         <h2>Start your implant consultation</h2>
         <div class="wz-embed" data-wz-embed="auto"><iframe
@@ -229,7 +231,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </iframe>
 <script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
 
-        <p class="lp-form-note">Prefer to speak to someone now? Call the Tysons Corner office on
+        <p class="lp-form-note">Prefer to speak to someone now? Call Tysons Corner on
         <a href="tel:+15717029900">(571) 702-9900</a>, or Alexandria on
         <a href="tel:+15712537790">(571) 253-7790</a>. If anxiety is what has kept you away, say
         so when you call. It changes how the appointment is planned.</p>
@@ -238,93 +240,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="lp-hero-under">
         <ul class="lp-assure" data-rv="stagger">
           <li><i aria-hidden="true">&#10003;</i>The consultation and the 3D scan cost nothing</li>
-          <li><i aria-hidden="true">&#10003;</i>You see the specialist, not a treatment
-            coordinator</li>
-          <li><i aria-hidden="true">&#10003;</i>A straight answer on candidacy, even when the
-            answer is that you do not need what you thought
-            you needed</li>
-          <li><i aria-hidden="true">&#10003;</i>Already been quoted elsewhere? Second opinions
-            on implant surgery are free</li>
-          <li><i aria-hidden="true">&#10003;</i>No obligation, and nothing is decided on the
-            call</li>
+          <li><i aria-hidden="true">&#10003;</i>You see the specialist, not a treatment coordinator</li>
+          <li><i aria-hidden="true">&#10003;</i>A straight answer on candidacy, even when it is that you do not need what you thought you needed</li>
+          <li><i aria-hidden="true">&#10003;</i>Quoted elsewhere? Second opinions on implant surgery are free</li>
+          <li><i aria-hidden="true">&#10003;</i>No obligation, and nothing is decided on the call</li>
         </ul>
-        <div class="lp-hero-facts" data-rv="stagger">
-          <div><b>No cost</b><span>The consultation and scan</span></div>
-          <div><b>1 business day</b><span>Typical time to hear back</span></div>
-          <div><b>Over 95%</b><span>Published success rate</span></div>
-          <div><b>4.9 &#9733;</b><span>Google, both offices</span></div>
-        </div>
-        <div class="lp-signoff" data-rv>
-          <img src="assets/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
-          <div>
-            <b>Reviewed by Dr. Esam Nahlah, D.D.S., M.S.</b>
-            <span>Board-certified prosthodontist. Diplomate of the American Board of Prosthodontics. 18,000+ implants placed.</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ---------- what happens next ---------- -->
-<section class="pk pk-alt" id="what-happens">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">After You Send It</span></div>
-      <h2 data-split>Three things, in this order.</h2>
-      <p data-rv>Nothing here needs anything from you until the call.</p>
-    </div>
-    <div class="lp-steps">
-      <div class="lp-steps-line" aria-hidden="true"><i></i></div>
-      <div class="lp-steps-grid" data-rv="stagger">
-        <article class="lp-step">
-          <span class="lp-step-n" aria-hidden="true">1</span>
-          <h3>We call you</h3>
-          <p>Usually within one business day. If you send this over a weekend, expect Monday. We ask
-            what is bothering you and roughly what you are hoping for, so the appointment is spent
-            on you rather than on paperwork.</p>
-        </article>
-        <article class="lp-step">
-          <span class="lp-step-n" aria-hidden="true">2</span>
-          <h3>You come in for the consultation</h3>
-          <p>Around an hour. The examination, a 3D scan where it is useful, and a look at what is
-            actually going on rather than at what a phone call guessed.</p>
-        </article>
-        <article class="lp-step">
-          <span class="lp-step-n" aria-hidden="true">3</span>
-          <h3>You get the plan in writing</h3>
-          <p>The options, what each involves, how long each takes and what each costs, before
-            anything is booked. Financing is arranged at this stage if you want it.</p>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- filmed patients ----------
-     The practice's own filmed patients, from patient-stories.html. The lead
-     film is a REAL iframe and the rest are click-to-play facades, and that
-     split is not a performance nicety: Instatic lifts CSP `frame-src` only for
-     a page that renders a real YouTube node, so a page of facades alone could
-     never play anything once published. One embed, and the facades work.
-
-     Components are the site's own (`.st-row` from patient-stories, `.vl-grid`
-     from video-library), so sections/video-library.js picks the facades up with
-     no new JS and 70-landing.css declares nothing for either.
-
-     NOTHING IS WRITTEN ON A PATIENT'S BEHALF. Where the source published no
-     pull-quote, the card carries the name and the treatment and no words. -->
+<!-- ---------- hear from our patients ----------
+     The lead film is the page's one REAL YouTube iframe; the rest are
+     click-to-play facades. Nothing is written on a patient's behalf. -->
 <section class="pk" data-theme="dark" id="films">
   <div class="wrap section">
     <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Patients On Camera</span></div>
-      <h2 data-split>Hear it from a patient first.</h2>
-      <p data-rv>Yolanda had the treatment you are asking about, and described it on camera at the practice.</p>
+      <div class="chapter-tag" data-rv><i></i><span class="label">Hear From Our Patients</span></div>
+      <h2 data-split>Real stories. Real relief. Real life.</h2>
+      <p data-rv>Patients of this practice, filmed at it, on their journey back to comfort and a smile they stopped hiding.</p>
     </div>
     <div class="lp-films">
     <article class="st-row" data-rv="stagger">
       <figure class="st-fig">
-        <div class="st-film"><iframe src="https://www.youtube.com/embed/Vp6hSfd3oLI" loading="lazy" title="Yolanda tells their story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/Vp6hSfd3oLI" loading="lazy" title="Yolanda tells her dental implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <figcaption>Dental implants</figcaption>
       </figure>
       <div class="st-body">
@@ -333,177 +272,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="st-note">Filmed at the practice. Her before-and-after is in the gallery.</p>
       </div>
     </article>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- proof ---------- -->
-<section class="pk" id="proof">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">What You Are Walking Into</span></div>
-      <h2 data-split>The scan, the specialist, and the tooth.</h2>
-    </div>
-    <div class="mz mz-4" data-rv="stagger">
-      <figure class="mz-fig">
-        <img src="assets/office-hero.jpg" alt="The reception and waiting area at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Two offices</b>McLean and Alexandria</figcaption>
-      </figure>
-      <figure class="mz-fig">
-        <img src="assets/tech-hero.jpg" alt="The cone-beam scanner at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>The 3D scan</b>Part of the consultation</figcaption>
-      </figure>
-      <figure class="mz-fig">
-        <img src="assets/case-ao4-single-1-after.jpg" alt="A completed implant restoration at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>The result</b>A patient of this practice</figcaption>
-      </figure>
-      <figure class="mz-fig">
-        <img src="assets/office-room.jpg" alt="A treatment room at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>The room</b>Where the surgery happens</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- reviews ---------- -->
-<section class="pk pk-alt" id="reviews">
-  <div class="wrap section">
-    <div class="rv-head">
-      <div>
-        <div class="chapter-tag" data-rv><i></i><span class="label">What Patients Say</span></div>
-        <h2 data-split>Their words, not ours.</h2>
-        <p class="rv-sub">Recent Google reviews from both offices.</p>
-      </div>
-      <div class="rv-score" data-rv>
-        <img src="assets/google.svg" alt="Google" width="48" height="48" loading="lazy">
-        <div>
-          <b>4.9 <i class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i></b>
-          <span>Google reviews &middot; both offices</span>
+      <div class="vl-grid" data-rv="stagger">
+        <div class="vl-card" role="button" tabindex="0" data-yt="oveSqavqCIQ" aria-label="Play: Stephen">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/oveSqavqCIQ/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">Stephen &middot; &ldquo;Dental implants completely changed my life&rdquo;</span>
+        </div>
+        <div class="vl-card" role="button" tabindex="0" data-yt="HiNtywrb4Yg" aria-label="Play: Melanie">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/HiNtywrb4Yg/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">Melanie &middot; &ldquo;My smile held me back. That&rsquo;s behind me&rdquo;</span>
+        </div>
+        <div class="vl-card" role="button" tabindex="0" data-yt="bn3vdCgDTrc" aria-label="Play: a couple treated together">
+          <span class="vl-shot">
+            <img src="https://img.youtube.com/vi/bn3vdCgDTrc/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+            <span class="vl-play" aria-hidden="true"></span>
+          </span>
+          <span class="vl-title">A couple, treated together at the practice</span>
         </div>
       </div>
     </div>
-    <div class="rv-wall" data-rv="stagger">
-      <article class="rv-card">
-        <div class="rv-meta">
-          <span class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="rv-when">Aug 18, 2026</span>
-        </div>
-        <p>&ldquo;Had an awesome visit! Their approach to dental implants makes everything feel less intimidating. Super transparent with their pricing and options. The team here is really knowledgeable, and the advanced tools make a big difference. If you want a reliable team for your dental needs, this is the place! Totally feel confident moving forward.&rdquo;</p>
-        <footer><span class="rv-av" aria-hidden="true">A</span>Allison Farouidi<i>Google</i></footer>
-      </article>
-      <article class="rv-card">
-        <div class="rv-meta">
-          <span class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="rv-when">Aug 12, 2026</span>
-        </div>
-        <p>&ldquo;Service excellence and Stephanie is amazing! This place is very professional and caring. The consultation was really helpful. They took the time to explain everything well, making me feel comfortable.&rdquo;</p>
-        <footer><span class="rv-av" aria-hidden="true">T</span>Tajala Battle<i>Google</i></footer>
-      </article>
-      <article class="rv-card">
-        <div class="rv-meta">
-          <span class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-          <span class="rv-when">Aug 12, 2026</span>
-        </div>
-        <p>&ldquo;Had a great time at Dr. Nahlah's office. An outstanding place with very welcoming staff. Clean environment which makes a big difference. Got some dental implant work done, felt so comfortable.&rdquo;</p>
-        <footer><span class="rv-av" aria-hidden="true">D</span>Demeka Johnson<i>Google</i></footer>
-      </article>
-    </div>
+    <p class="lp-foot-line" data-rv>Individual results vary. Every case shown is a patient of this practice.</p>
   </div>
 </section>
 
-<!-- ---------- offices ---------- -->
-<section class="pk" id="offices">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Where To Go</span></div>
-      <h2 data-split>This campaign books at Tysons Corner.</h2>
-      <p data-rv>The Alexandria office is run by the same team, with the same laboratory in the
-        building, if it is closer.</p>
-    </div>
-    <div class="ct-office-grid" data-rv="stagger">
-<article class="ct-office">
-  <h3>Tysons Corner</h3>
-  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-    7901 Jones Branch Drive, Suite 220<br>
-    McLean, VA 22102</address>
-  <div class="ct-office-line"><span>New patients</span>
-    <a href="tel:+15717029900">(571) 702-9900</a></div>
-  <div class="ct-office-line"><span>Current patients</span>
-    <a href="tel:+17034483312">(703) 448-3312</a></div>
-  <p class="ct-office-flag">The office this campaign books at</p>
-  <a class="pk-more ct-office-dirs"
-     href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-     target="_blank" rel="noopener">Directions</a>
-</article>
-
-<article class="ct-office">
-  <h3>Alexandria</h3>
-  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-    2855 Duke Street<br>
-    Alexandria, VA 22314</address>
-  <div class="ct-office-line"><span>New patients</span>
-    <a href="tel:+15712537790">(571) 253-7790</a></div>
-  <div class="ct-office-line"><span>Current patients</span>
-    <a href="tel:+17039405410">(703) 940-5410</a></div>
-  <p class="ct-office-flag">Also available, run by the same team</p>
-  <a class="pk-more ct-office-dirs"
-     href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-     target="_blank" rel="noopener">Directions</a>
-</article>
-
-    </div>
-    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
-      <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>
-      <div><b>Friday</b><span>8:00am &ndash; 2:00pm</span></div>
-      <div><b>Saturday</b><span>Closed</span></div>
-      <div><b>Sunday</b><span>Closed</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- objections ---------- -->
-<section class="pk pk-light" id="faq">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Before You Send It</span></div>
-      <h2 data-split>Four things people want to know first.</h2>
-    </div>
-    <div class="lp-faq-grid">
-      <figure class="lp-faq-fig is-right" data-rv>
-        <img src="assets/dr-portrait-alt.jpg" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
-        <figcaption><b>Dr. Esam Nahlah</b><span>Reads every request</span></figcaption>
-      </figure>
-    <div class="pk-faq" data-rv="stagger">
-      <details>
-        <summary>Is the consultation really free?</summary>
-        <div class="fa-body">Yes. The consultation, including the 3D scan where it is useful, costs
-          nothing, and a second opinion on implant surgery costs nothing either. Bring another
-          practice's plan and scan if you have them.</div>
-      </details>
-      <details>
-        <summary>Am I a candidate?</summary>
-        <div class="fa-body">Many patients already are. Others qualify after bone grafting or
-          extractions. Candidacy is determined from the examination and the scan, not guessed at
-          over the phone.</div>
-      </details>
-      <details>
-        <summary>Do you take my insurance?</summary>
-        <div class="fa-body">Most dental PPO plans are accepted. Coverage for implants is often
-          limited, but limited is not nothing, and the practice files the claims on your behalf.
-          Monthly payment plans are available through CareCredit, Proceed Finance and
-          LendingClub.</div>
-      </details>
-      <details>
-        <summary>What happens on the call?</summary>
-        <div class="fa-body">We ask what is going on, what you have been told already, and what you
-          are hoping for, and we find a time. Nothing is decided on the call and nothing is
-          charged.</div>
-      </details>
-    </div>
-    </div>
-    <div class="lp-cta-actions" data-rv style="margin-top:clamp(2.5rem,5vw,3.5rem)">
-      <a class="btn btn-primary magnetic" href="#book"><span>Back to the form</span></a>
-      <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+<!-- ---------- proof: one specialist, start to finish ---------- -->
+<section class="pk pk-light" id="proof">
+  <div class="wrap section pk-split">
+    <figure class="sp-fig sp-fig-top" style="margin:0">
+      <img src="assets/dr-with-patient.jpg" alt="Dr. Nahlah with a patient" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Who You Are Booking With</span></div>
+      <h2 data-split>One specialist, start to finish.</h2>
+      <p data-rv>The prosthodontist who plans your case places the implant and fits the final tooth, in a practice with the laboratory in the building. A prosthodontist trains three years beyond dental school in replacing and restoring teeth.</p>
+      <div class="lp-creds is-light" data-rv="stagger">
+        <b>Dr. Esam Nahlah, D.D.S., M.S.</b>
+        <span>Diplomate, American Board of Prosthodontics</span>
+        <span>Fellow, American College of Prosthodontists</span>
+        <span>Fellow, International Congress of Oral Implantologists</span>
+        <span>Adjunct Faculty, VCU Prosthodontics</span>
+        <span>18,000+ implants placed</span>
+      </div>
+      <div class="lp-cta-actions" data-rv style="margin-top:clamp(1.5rem,3vw,2.25rem)">
+        <a class="btn btn-primary magnetic" href="#book"><span>Back to the form</span></a>
+        <a class="btn btn-ghost magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+      </div>
     </div>
   </div>
 </section>

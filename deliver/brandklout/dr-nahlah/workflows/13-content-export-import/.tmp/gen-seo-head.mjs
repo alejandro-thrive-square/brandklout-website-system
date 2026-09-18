@@ -50,7 +50,11 @@ const ASSET_PATH = 'src/scripts/seo-head.js';
 const SENTINEL = '/*__wz_seo_end__*/';
 
 /** Route for a page slug. Instatic serves path style, home at "/". */
-const routeFor = (slug) => (slug === 'index' ? '/' : '/' + slug);
+/* The ads landing pages live under /ads-landing-pages/<office>-<campaign> on
+   Instatic (a nested slug, which this instance serves at the nested path —
+   proved on staging 2026-09-18); locally they are flat `ads-<rest>` files. */
+const routeFor = (slug) =>
+  slug === 'index' ? '/' : /^ads-/.test(slug) ? '/ads-landing-pages/' + slug.slice(4) : '/' + slug;
 
 const map = {};
 for (const [slug, e] of Object.entries(SEO)) {
@@ -128,7 +132,7 @@ const js = `/* Per-URL <head> for a platform that emits only the site defaults.
      It used to point link[rel=icon] at /favicon.svg, back when no page declared
      an icon and every browser fell back to a 404ing /favicon.ico. Since
      settings.faviconUrl was set (2026-08-25) the publisher emits the icon link
-     itself -- and `tag()` SELECTS-OR-CREATES, so this block found that link and
+     itself -- and tag() SELECTS-OR-CREATES, so this block found that link and
      overwrote it with the platform's default glyph on every page load. Two
      rounds of "the favicon still has not changed" were this line.
      settings.faviconUrl is the one source of truth; push-favicon.mjs writes it. */

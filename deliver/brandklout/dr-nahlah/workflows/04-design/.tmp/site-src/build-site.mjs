@@ -271,21 +271,22 @@ const PAGES = [
      compete in organic search with /dental-implants, /all-on-4 and /veneers,
      which target the same queries and are the pages that should rank.
 
-     SLUGS ARE FLAT. Livewell's set lives under /ads-landing-pages/<name>, and
-     a nested slug cannot be reproduced here: Instatic saves `a/b` and then
-     serves it at `/a-b`, so a link to the nested path 404s. Prefixing instead
-     of nesting gives the same grouping and survives publication.
+     LOCAL SLUGS ARE FLAT; THE PUBLISHED ONES ARE NESTED. On Instatic the set
+     lives under /ads-landing-pages/<office>-<campaign>[-consultation|-thank-you],
+     exactly as Livewell's does: this instance serves a slug with a slash at
+     the nested path (proved on staging 2026-09-18). The local files stay flat
+     (`ads-alexandria-veneers.html`) because site-test.mjs and fluid-qa.mjs
+     derive their page lists from these slugs, and
+     22-instatic-api-sync/ads-to-nodes.py maps `ads-<rest>` to
+     `ads-landing-pages/<rest>` on the way out, links included.
 
-     EVERY LANDING AND CONSULTATION PAGE CARRIES THE GHL FORM IN ITS HERO, so
-     `book` is `#book` on all six of them: the CTA scrolls to the form that is
-     already on the page instead of navigating to a second page with a second
-     form. A click-through is a place to change your mind, and it is the one
-     step worth removing on a paid page.
-
-     The consultation pages are still built and still stand alone. They are the
-     leaner ad destination — form, proof, offices, objections, nothing else —
-     for campaigns that want to skip the argument. Nothing links to them from a
-     landing page any more, by design.
+     THE COMBO IS THE FLOW (2026-09-18, Brandklout's ask: the same flow of
+     information as Livewell's ads landing pages). Every CTA on a landing page,
+     the header button and the mobile rail included, goes to that campaign's
+     CONSULTATION PAGE, as on the reference; `book` on a landing entry is the
+     consultation page's file. The hero still carries the form, also as on the
+     reference, so a visitor who is ready on arrival has nothing to click
+     through. On a consultation page `book` is `#book`, the form on that page.
 
      The thank-you pages have nothing left to convert, so they offer the
      telephone and carry no mobile rail.
@@ -297,40 +298,40 @@ const PAGES = [
      entry is written out rather than generated because site-test.mjs and
      check-page-lists.mjs read this array as TEXT. ------------------------- */
   { slug: "ads-alexandria-all-on-4", body: "ads-all-on-4", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my consultation", loc: "alexandria", campaign: "all-on-4" } },
+    landing: { book: "ads-alexandria-all-on-4-consultation.html", label: "Book a consultation", loc: "alexandria", campaign: "all-on-4" } },
   { slug: "ads-alexandria-all-on-4-consultation", body: "ads-all-on-4-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "alexandria", campaign: "all-on-4" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "alexandria", campaign: "all-on-4" } },
   { slug: "ads-alexandria-all-on-4-thank-you", body: "ads-all-on-4-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "alexandria", campaign: "all-on-4" } },
   { slug: "ads-alexandria-dental-implants", body: "ads-dental-implants", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my consultation", loc: "alexandria", campaign: "dental-implants" } },
+    landing: { book: "ads-alexandria-dental-implants-consultation.html", label: "Book a consultation", loc: "alexandria", campaign: "dental-implants" } },
   { slug: "ads-alexandria-dental-implants-consultation", body: "ads-dental-implants-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "alexandria", campaign: "dental-implants" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "alexandria", campaign: "dental-implants" } },
   { slug: "ads-alexandria-dental-implants-thank-you", body: "ads-dental-implants-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "alexandria", campaign: "dental-implants" } },
   { slug: "ads-alexandria-veneers", body: "ads-veneers", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my evaluation", loc: "alexandria", campaign: "veneers" } },
+    landing: { book: "ads-alexandria-veneers-consultation.html", label: "Book a smile evaluation", loc: "alexandria", campaign: "veneers" } },
   { slug: "ads-alexandria-veneers-consultation", body: "ads-veneers-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "alexandria", campaign: "veneers" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "alexandria", campaign: "veneers" } },
   { slug: "ads-alexandria-veneers-thank-you", body: "ads-veneers-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "alexandria", campaign: "veneers" } },
 
   { slug: "ads-tysons-all-on-4", body: "ads-all-on-4", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my consultation", loc: "tysons", campaign: "all-on-4" } },
+    landing: { book: "ads-tysons-all-on-4-consultation.html", label: "Book a consultation", loc: "tysons", campaign: "all-on-4" } },
   { slug: "ads-tysons-all-on-4-consultation", body: "ads-all-on-4-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "tysons", campaign: "all-on-4" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "tysons", campaign: "all-on-4" } },
   { slug: "ads-tysons-all-on-4-thank-you", body: "ads-all-on-4-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "tysons", campaign: "all-on-4" } },
   { slug: "ads-tysons-dental-implants", body: "ads-dental-implants", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my consultation", loc: "tysons", campaign: "dental-implants" } },
+    landing: { book: "ads-tysons-dental-implants-consultation.html", label: "Book a consultation", loc: "tysons", campaign: "dental-implants" } },
   { slug: "ads-tysons-dental-implants-consultation", body: "ads-dental-implants-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "tysons", campaign: "dental-implants" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "tysons", campaign: "dental-implants" } },
   { slug: "ads-tysons-dental-implants-thank-you", body: "ads-dental-implants-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "tysons", campaign: "dental-implants" } },
   { slug: "ads-tysons-veneers", body: "ads-veneers", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Book my evaluation", loc: "tysons", campaign: "veneers" } },
+    landing: { book: "ads-tysons-veneers-consultation.html", label: "Book a smile evaluation", loc: "tysons", campaign: "veneers" } },
   { slug: "ads-tysons-veneers-consultation", body: "ads-veneers-consultation", journey: 0, navKey: null,
-    landing: { book: "#book", label: "Go to the form", loc: "tysons", campaign: "veneers" } },
+    landing: { book: "#book", label: "Start my consultation", loc: "tysons", campaign: "veneers" } },
   { slug: "ads-tysons-veneers-thank-you", body: "ads-veneers-thank-you", journey: 0, navKey: null,
     landing: { book: "tel:{{LOC_TEL}}", label: "Call the office", rail: false, loc: "tysons", campaign: "veneers" } },
 ];

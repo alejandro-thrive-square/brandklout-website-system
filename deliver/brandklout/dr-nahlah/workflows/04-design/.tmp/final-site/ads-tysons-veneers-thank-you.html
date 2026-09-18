@@ -160,181 +160,194 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
      > [!IMPORTANT]
      > THE CONVERSION TAG IS NOT IN THIS MARKUP, AND MUST NOT BE. Fire it on
-     > the URL: a destination-URL conversion on `/ads-<office>-veneers-thank-you`, or a
-     > GTM Page View trigger on that path. Site-wide tags on this build go
-     > through Instatic's `siteScripts`; the "no CSS or JS inlined" gate fails
-     > any page carrying its own `<script>`. `robots: noindex, follow` is not
-     > optional: an indexed thank-you page can be landed on directly, which
-     > fires a conversion for a visitor who never converted. The full note is
-     > on the All-on-4 thank-you page.
+     > the URL: a destination-URL conversion on this page's path, or a GTM
+     > Page View trigger on it. Site-wide tags on this build go through
+     > Instatic's `siteScripts`; the "no CSS or JS inlined" gate fails any
+     > page carrying its own `<script>`. `robots: noindex, follow` in seo.json
+     > is not optional: an indexed thank-you page can be landed on directly,
+     > which fires a conversion for a visitor who never converted.
 
-     THE URGENCY PANEL IS DELIBERATELY DIFFERENT HERE. On the two implant
-     campaigns it is about bone loss, which is a real clinical consequence of
-     waiting that the practice's own cost page already argues. Veneers are
-     elective and cosmetic, and there is no honest clinical cost to waiting
-     six months for them, so inventing one would be a false medical claim on a
-     page aimed at somebody who has just handed over their telephone number.
-     What replaces it is the thing that is actually true and actually useful:
-     what to bring, and what to think about before the design appointment.
+     REBUILT 2026-09-18 TO THE LIVEWELL FLOW. Same shape as
+     ads-dental-implants-thank-you.body.html. The "what happens if you wait"
+     block is the cosmetic version and claims nothing the veneers page does
+     not: chips extend, wear continues, enamel that has thinned darkens.
      ========================================================================== -->
-<section class="pg-hero lp-hero" id="hero">
+<section class="pg-hero lp-hero lp-ty-hero" id="hero">
   <div class="ph-bg">
-    <img src="assets/case-veneers-5-after.jpg" alt="A completed porcelain veneer case at the practice" data-drift>
+    <img src="assets/consult-discussion.jpg" alt="A consultation at the practice" data-drift>
   </div>
   <div class="wrap ph-in">
-    <div class="chapter-tag" data-rv><i></i><span class="label">Request Received</span></div>
-    <h1 data-split>That is <em>received</em>. We will call you.</h1>
-    <p class="ph-lead" data-rv>Your smile evaluation request has reached the practice. A member of
-      the team will call to arrange a time, and to answer anything you would rather ask before you
-      come in.</p>
-    <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>If you would rather speak to somebody
-      now, call (571) 702-9900</p>
-    <div class="ph-meta" data-rv="stagger">
-      <div><b>1 business day</b><span>Typical time to hear back</span></div>
-      <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Friday until 2</span></div>
-      <div><b>No cost</b><span>The evaluation and the preview</span></div>
+    <div class="lp-ty-grid">
+      <div class="lp-hero-copy">
+        <div class="chapter-tag" data-rv><i></i><span class="label">Request Received</span></div>
+        <h1 data-split>Let&rsquo;s talk about your <em>new smile</em>.</h1>
+        <p class="ph-lead" data-rv>Your request has reached the practice. Give us a call now and a member of the Tysons Corner team will walk you through your options and get your complimentary smile evaluation with Dr. Nahlah on the calendar.</p>
+        <div class="ph-actions" data-rv>
+          <a class="btn btn-primary magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+        </div>
+        <p class="lp-rating" data-rv><i aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i><b>4.9</b> on Google, both offices</p>
+        <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>A quick two-minute call to talk through your options</p>
+      </div>
+      <figure class="lp-ty-fig" data-rv>
+        <img src="assets/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah, D.D.S., M.S.</b><span>Lectures on smile design</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
-<!-- ---------- the call ---------- -->
+<!-- ---------- what to expect on the call ---------- -->
 <section class="pk pk-alt" id="the-call">
-  <div class="wrap section pk-split">
-    <div class="sp-copy">
+  <div class="wrap section">
+    <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">On The Call</span></div>
-      <h2 data-split>What we will go over.</h2>
+      <h2 data-split>We are dedicated to getting you your new smile.</h2>
+      <p data-rv>Here is what to expect on the call, and why acting now matters.</p>
+    </div>
+    <div class="pk-split">
+    <div class="sp-copy">
+      <h3 data-rv>On your call, we will go over</h3>
       <dl class="lp-next-list" data-rv="stagger">
         <div>
           <dt aria-hidden="true">01</dt>
-          <dd><b>What you would change</b><span>Which teeth bother you, what you have tried
-            already, and whether whitening, bonding or veneers is the honest answer for it.</span></dd>
+          <dd><b>Your treatment options</b><span>What you would change, which teeth show when you smile, and whether whitening or a single veneer might be the whole answer. Dr. Nahlah reviews which route fits, from one tooth to the whole smile zone.</span></dd>
         </div>
         <div>
           <dt aria-hidden="true">02</dt>
-          <dd><b>How people pay for it</b><span>Cosmetic work is rarely covered by insurance, so
-            this is usually a financing conversation. CareCredit, Proceed Finance and LendingClub,
-            explained plainly before you commit to anything.</span></dd>
+          <dd><b>Your payment options</b><span>Cosmetic work is rarely covered by insurance, so the financing available through CareCredit, Proceed Finance and LendingClub is explained plainly before you commit to anything.</span></dd>
         </div>
         <div>
           <dt aria-hidden="true">03</dt>
-          <dd><b>Your evaluation</b><span>Candidacy and a free Digital Smile Design preview of the
-            result, at the Tysons Corner office.</span></dd>
+          <dd><b>Your complimentary evaluation</b><span>A no-cost evaluation at the Tysons Corner office with a Digital Smile Design preview of the result, so you see the design before any enamel is touched.</span></dd>
         </div>
       </dl>
     </div>
     <div class="lp-warn" data-rv>
-      <h3>Worth thinking about before you come in</h3>
+      <h3>What can happen if treatment is delayed</h3>
       <ul>
-        <li><i aria-hidden="true">&#8250;</i>Bring photographs of your own smile from years ago, if
-          you have them. They are the most useful reference there is</li>
-        <li><i aria-hidden="true">&#8250;</i>Bring photographs of smiles you like, and be ready to
-          say what it is about them</li>
-        <li><i aria-hidden="true">&#8250;</i>Decide roughly how many teeth you are thinking about.
-          The smile zone is usually six to ten</li>
-        <li><i aria-hidden="true">&#8250;</i>If you grind your teeth, or your bite has ever been
-          called a problem, say so on the call</li>
+        <li><i aria-hidden="true">&#8250;</i>A chip that catches can extend into a crack, and a crack is a different treatment</li>
+        <li><i aria-hidden="true">&#8250;</i>Worn edges keep wearing, and the shorter the tooth the more has to be rebuilt</li>
+        <li><i aria-hidden="true">&#8250;</i>Enamel that has thinned keeps thinning, and the tooth darkens as the layer under it shows through</li>
+        <li><i aria-hidden="true">&#8250;</i>Old bonding stains and chips, and every patch narrows what a veneer can cover cleanly</li>
       </ul>
-      <p>That last one matters most. Veneers cannot fix a bite, and a bite that is not dealt with
-        first is the usual reason cosmetic work does not last.</p>
+      <p>No cost, no obligation. We walk you through everything on the call. There is no pressure to decide.</p>
+    </div>
     </div>
   </div>
 </section>
 
-<!-- ---------- band ---------- -->
-<section class="mband" id="band">
-  <figure class="mband-fig">
-    <img src="assets/case-veneers-7-after.jpg" alt="A finished porcelain veneer case at the practice" data-drift loading="lazy">
+<!-- ---------- why this practice ---------- -->
+<section class="pk" id="why">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Why Dr. Nahlah</span></div>
+      <h2 data-split>Why patients choose this practice for it.</h2>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/dr-with-patient.jpg" alt="Dr. Nahlah with a patient" loading="lazy">
+          <span class="pk-card-figcap">Experience</span>
+        </div>
+        <h3>Experience</h3>
+        <p>A board-certified prosthodontist who lectures on smile design and teaches residents at Virginia Commonwealth University. Time with the specialist, not a treatment coordinator.</p>
+      </article>
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/tech-hero.jpg" alt="Digital design at the practice" loading="lazy">
+          <span class="pk-card-figcap">Personalized care</span>
+        </div>
+        <h3>Personalized care</h3>
+        <p>A free Digital Smile Design preview before any enamel is prepared, under a millimeter removed, and a laboratory in the building where each veneer is hand-designed to your face.</p>
+      </article>
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/financing-card.jpg" alt="A treatment plan reviewed with a patient" loading="lazy">
+          <span class="pk-card-figcap">Clear costs</span>
+        </div>
+        <h3>Clear costs</h3>
+        <p>The number depends on how many teeth are in the plan, so you get it in writing at the evaluation, before anything is booked, with the monthly options beside it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- any questions before you call ---------- -->
+<section class="pk pk-light" id="faq">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Before You Call</span></div>
+      <h2 data-split>Any questions before you call?</h2>
+    </div>
+    <div class="lp-faq-grid">
+      <figure class="lp-faq-fig is-right" data-rv>
+        <img src="assets/Dr_Nahlah.jpg" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah</b><span>Reads every request</span></figcaption>
+      </figure>
+    <div class="pk-faq" data-rv="stagger">
+      <details>
+        <summary>Do veneers ruin your teeth?</summary>
+        <div class="fa-body">Preparation removes less than a millimeter of enamel, enough for the veneer to sit flush. It is a permanent modification, which is exactly why the design is previewed and agreed before anything is prepared.</div>
+      </details>
+      <details>
+        <summary>Will they look like veneers?</summary>
+        <div class="fa-body">The size, shape and shade are chosen for your lip line, your gum line and your own coloring, and you see that design at the evaluation before any enamel is touched.</div>
+      </details>
+      <details>
+        <summary>Will they stain?</summary>
+        <div class="fa-body">Porcelain does not stain the way natural enamel does. Brush twice a day and floss once, as before.</div>
+      </details>
+      <details>
+        <summary>Can veneers fix my bite?</summary>
+        <div class="fa-body">No. Veneers are a cosmetic treatment for the smile zone. A bad bite is a functional problem and needs to be addressed as one, which is often the reason a prosthodontist is the right person to be assessing it.</div>
+      </details>
+      <details>
+        <summary>How long does it take?</summary>
+        <div class="fa-body">As few as two appointments once the design is settled: one to prepare and scan, one to verify the fit and bond.</div>
+      </details>
+      <details>
+        <summary>When will I find out the cost?</summary>
+        <div class="fa-body">At the evaluation. It depends on how many teeth are in the plan and what else is going on in the mouth. You get the number in writing before anything is booked.</div>
+      </details>
+      <details>
+        <summary>What is the process for financing?</summary>
+        <div class="fa-body">Handled at the evaluation. Once your plan is set, the team runs the application with you and brings back the monthly options. Nothing is agreed until you have seen the numbers in writing.</div>
+      </details>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- ready to take the next step ---------- -->
+<section class="pk lp-final" data-theme="dark" id="call-now">
+  <figure class="lp-final-bg" aria-hidden="true">
+    <img src="assets/cosmetic-transformation.jpg" alt="" loading="lazy">
   </figure>
-  <div class="mband-in" data-rv>
-    <span class="mband-kicker">A patient of this practice</span>
-    <p class="mband-line">The design came first. Then the porcelain.</p>
-  </div>
-</section>
-
-<!-- ---------- where to go ---------- -->
-<section class="pk" id="offices">
   <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Where To Go</span></div>
-      <h2 data-split>Tysons Corner, and the hours.</h2>
-      <p data-rv>The Alexandria office is run by the same team if it is closer. Each has its own
-        laboratory in the building.</p>
+    <div class="lp-final-grid">
+      <div class="lp-final-copy">
+        <div class="chapter-tag" data-rv><i></i><span class="label">The Next Step</span></div>
+        <h2 data-split>Ready to take the next step?</h2>
+        <p data-rv>Talk to the Tysons Corner team and get your complimentary smile evaluation with Dr. Nahlah scheduled today. We will walk through your options in about two minutes.</p>
+        <div class="lp-cta-actions" data-rv>
+          <a class="btn btn-primary magnetic" href="tel:+15717029900"><span>Call (571) 702-9900</span></a>
+          <span class="lp-cta-aside">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 on Google</span>
+        </div>
+      </div>
+      <div class="lp-details" data-rv="stagger">
+        <div><span class="label">Call</span><b><a href="tel:+15717029900">(571) 702-9900</a></b><span>Tysons Corner office, new patients</span></div>
+        <div><span class="label">Visit</span><b>7901 Jones Branch Drive, Suite 220</b><span>McLean, VA 22102</span></div>
+        <div><span class="label">Hours</span><b>Mon&ndash;Thu 8am to 5pm</b><span>Friday 8am to 2pm &middot; closed weekends</span></div>
+        <div><span class="label">Also</span><b><a href="tel:+15712537790">(571) 253-7790</a></b><span>Alexandria office, run by the same team</span></div>
+      </div>
     </div>
-    <div class="ct-office-grid" data-rv="stagger">
-<article class="ct-office">
-  <h3>Tysons Corner</h3>
-  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-    7901 Jones Branch Drive, Suite 220<br>
-    McLean, VA 22102</address>
-  <div class="ct-office-line"><span>New patients</span>
-    <a href="tel:+15717029900">(571) 702-9900</a></div>
-  <div class="ct-office-line"><span>Current patients</span>
-    <a href="tel:+17034483312">(703) 448-3312</a></div>
-  <p class="ct-office-flag">The office this campaign books at</p>
-  <a class="pk-more ct-office-dirs"
-     href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
-     target="_blank" rel="noopener">Directions</a>
-</article>
-
-<article class="ct-office">
-  <h3>Alexandria</h3>
-  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
-    2855 Duke Street<br>
-    Alexandria, VA 22314</address>
-  <div class="ct-office-line"><span>New patients</span>
-    <a href="tel:+15712537790">(571) 253-7790</a></div>
-  <div class="ct-office-line"><span>Current patients</span>
-    <a href="tel:+17039405410">(703) 940-5410</a></div>
-  <p class="ct-office-flag">Also available, run by the same team</p>
-  <a class="pk-more ct-office-dirs"
-     href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
-     target="_blank" rel="noopener">Directions</a>
-</article>
-
-    </div>
-    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
-      <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>
-      <div><b>Friday</b><span>8:00am &ndash; 2:00pm</span></div>
-      <div><b>Saturday</b><span>Closed</span></div>
-      <div><b>Sunday</b><span>Closed</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ---------- while you wait ---------- -->
-<section class="pk pk-light" id="meanwhile">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">While You Wait</span></div>
-      <h2 data-split>Worth a look before you come in.</h2>
-    </div>
-    <div class="mz mz-3" data-rv="stagger">
-      <figure class="mz-fig">
-        <img src="assets/porcelain-003-after.jpg" alt="A finished porcelain case at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Shade</b>Matched to your own coloring</figcaption>
-      </figure>
-      <figure class="mz-fig">
-        <img src="assets/lab.jpg" alt="The practice's own digital laboratory" loading="lazy">
-        <figcaption class="mz-cap"><b>The laboratory</b>One in each office</figcaption>
-      </figure>
-      <figure class="mz-fig">
-        <img src="assets/practice-space-4.avif" alt="A treatment room at the practice" loading="lazy">
-        <figcaption class="mz-cap"><b>Where it happens</b>Two appointments, once the design is settled</figcaption>
-      </figure>
-    </div>
-    <div class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="smile-gallery.html">
-        <span class="nx-k">Gallery</span>
-        <span class="nx-t">Before and after</span>
-        <span class="nx-d">Twenty-eight cases from this practice, filterable by treatment.</span></a>
-      <a href="smile-makeover.html">
-        <span class="nx-k">The whole plan</span>
-        <span class="nx-t">Smile Makeover</span>
-        <span class="nx-d">Where veneers are one of five tools, not the whole answer.</span></a>
-      <a href="meet-dr-nahlah.html">
-        <span class="nx-k">Doctor</span>
-        <span class="nx-t">Dr. Esam Nahlah</span>
-        <span class="nx-d">A prosthodontist who lectures on smile design.</span></a>
+    <div class="lp-creds" data-rv="stagger">
+      <b>Dr. Esam Nahlah, D.D.S., M.S.</b>
+      <span>Diplomate, American Board of Prosthodontics</span>
+      <span>Fellow, American College of Prosthodontists</span>
+      <span>Lectures on smile design</span>
+      <span>Adjunct Faculty, VCU Prosthodontics</span>
+      <span>Founder, Tysons Study Club</span>
     </div>
   </div>
 </section>

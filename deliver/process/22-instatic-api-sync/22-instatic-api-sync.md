@@ -307,6 +307,62 @@ ScrollSmoother translates `#smooth-content`, and a transformed ancestor makes `p
 
 The matching CSS gate should be a **class the JS adds only after the element actually exists** — the `.wz-smooth` shape from `js/90-boot.js`. Gating the fallback on the capability (`.wz-fine`) instead lets the two disagree: GSAP failing to load means the queued section never runs, and a card can end up with neither the follower nor its own laid-out image. `.wz-svfollow` in `push-services-images.mjs` is the worked example.
 
+## Headless page import: HTML -> node tree over REST  `ads-to-nodes.py` + `push-ads-pages.mjs`
+
+The platform's own HTML importer (`site_insert_html`, `site_replace_node_html`) runs only inside
+the Site editor through the MCP bridge, which needs a browser signed in as the connector owner
+and drops mid-push without warning; on Dr. Nahlah the OAuth grant it used also points at
+`encorercm.com`, a host that no longer exists. `PUT /site-document` takes whole page documents,
+so the only missing piece was the conversion, and on 2026-09-18 Dr. Nahlah's eighteen ads
+landing pages went in that way, headlessly, in one run each on staging and on production
+(`deliver/brandklout/dr-nahlah/workflows/22-instatic-api-sync/`):
+
+```bash
+node upload-ads-media.mjs --map <media map> --apply            # photographs the library lacks
+python ads-to-nodes.py --map <media map> --out .tmp/ads-nodes  # built HTML -> page documents
+node push-ads-pages.mjs --nodes .tmp/ads-nodes --apply          # class rules, stylesheet, pages, SEO cells
+node ../../../../process/22-instatic-api-sync/push-script-asset.mjs src/scripts/site.js <bundle> --apply
+node render-draft-page.mjs <slug> .tmp/draft-render             # the platform's own preview, no publish
+```
+
+What the converter knows, all read back from pages the platform's importer had produced
+(`.tmp/node-samples.mjs`): `div|section|nav|header|footer|main|article|ul` are `base.container`
+with `tag`; every other element is `tag:'custom'` + `customTag`; `p|h2|h3|h4|span|em|strong`
+holding only text are `base.text` with that tag, bare text runs are `base.text` `tag:'none'`,
+and `h1`, `li`, `dt`, `dd`, `summary`, `figcaption`, `blockquote`, `address`, `b`, `i` are
+containers with text children; `<a>` is `base.link` (`text` when it holds only text, children
+otherwise); `<img>` is `base.image` with `alt` in `htmlAttributes` (emitted FIRST, ahead of the
+module's own `alt=""`, and browsers keep the first); a YouTube `<iframe>` is `base.video`
+(`videoUrl`, `title`); `<input>` is `base.input` `inputType:'text'` (the range coercion in
+`20-pagekit.js` repairs the sliders); `style=""` is `inlineStyles` in camelCase; a
+`div.wz-embed[data-wz-embed=auto]` becomes the `brandklout.embed-origins.embed` module with the
+inner markup as its `snippet`. Class names travel as `classNames[]` and are resolved to
+`classIds` against the live registry by the pusher, which creates an EMPTY class-kind rule for
+any name that has none (they survive publish because nodes reference them).
+
+Three things learned on the way, each of which cost a publish:
+
+- **A nested slug (`ads-landing-pages/<name>`) IS served at the nested path on this build**,
+  after a site-document write. But **`PATCH /data/rows/:id` re-derives the routable slug through
+  `slugFromTitle` and flattens the slash**: the row still reads `a/b`, everything reports ok, and
+  the page serves at `/a-b`. So the site-document write has to be the LAST write a nested page
+  gets; `push-ads-pages.mjs` re-saves each page after its SEO patch for exactly this reason.
+- **A page-scoped code asset is the right home for a page-family stylesheet.** `landing.css` is
+  a `files[]` entry of `type:'style'` plus `runtime.styles[fileId] = { enabled, scope: { type:
+  'pages', pageIds }, priority }`. It is served after the registry (`userStyles-*.css`), which is
+  the local cascade position anyway, ships `clamp()` and `svh` verbatim, and never reaches the
+  editorial pages.
+- **`render-draft-page.mjs` does NOT expand shared components, so a page that uses one
+  renders with a hole.** The shell carries no `visualComponents`; the preview is handed an empty
+  list and drops every `base.visual-component-ref`. On 2026-09-18 that made the home page's two
+  office panels (a component since 2026-09-14) look deleted from the draft; a "restore" from the
+  design package then published them TWICE, and had to be reverted from the row backup. Before
+  concluding a block is missing from a draft, count `base.visual-component-ref` nodes in the
+  row; the preview is only trustworthy for pages without them.
+- **Check `publish/status` before publishing, and look at what `draftMatchesPublished:false` is
+  hiding.** `.tmp/draft-diff.mjs` lists rows, files and rules touched since the last publish.
+  A publish ships all of it.
+
 ## Draft and published can diverge, and a publish bakes the difference
 
 `POST /admin/api/cms/publish` republishes **every** page, not the one you edited. So the moment a draft page drifts from what is live, the next publish for any unrelated reason ships that drift.

@@ -4,25 +4,28 @@ The **standing** state of this project: what is true now, what is next, and the 
 Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) — read the index,
 then only the runs you need. Do not read them all.
 
-## Where things stand (2026-09-17)
+## Where things stand (2026-09-18)
 
 | | |
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
-| **Published site** | 37 editorial pages + 43 migrated blog posts, live and verified. |
+| **Published site** | 37 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
-| **In flight** | The **ads landing pages**: eighteen, one set of nine per office (Alexandria, Tysons Corner), each with its own LeadConnector forms, more photography on more grounds, and the four site tags (Termly, GTM, LeadConnector number pool) on every page of the local build. Built and gated locally 2026-09-17 (three passes). Not on Instatic, not published. |
+| **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. See the 2026-09-18 run. |
 
 ## What is next
 
-1. **Review the eighteen ads landing pages with Brandklout** (two offices × three
-   campaigns × landing, consultation, thank you). See the 2026-09-17c run.
-2. **In LeadConnector, point each of the six forms at its own thank-you page**
-   (`/ads-<office>-<campaign>-thank-you`). The forms are wired; the redirect cannot be
-   verified from this repository.
-3. Google Ads conversions, one per thank-you URL (six).
-4. Import the eighteen to Instatic (workflow 22): the four site tags go into `siteScripts`,
-   the CSP has to allow their three hosts, then publish.
+1. **Brandklout review of the eighteen live pages** (the Livewell order: hero with form, journey,
+   why here, the doctor, options, process, gallery, the space, FAQ, closer). Screenshots at
+   1440 and 390 of the published Alexandria implants page are in the 2026-09-18 run.
+2. **In LeadConnector, point each of the six forms at its own thank-you page**:
+   `/ads-landing-pages/<office>-<campaign>-thank-you`. The forms are live on the pages; the
+   redirect cannot be verified from this repository.
+3. Google Ads conversions, one per thank-you URL (six), or GTM page-view triggers on
+   `/ads-landing-pages/` + `-thank-you`.
+4. Ask the client for one filmed veneer patient and one photograph of the Alexandria office.
+5. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
+   are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
 
 ## Standing traps
 
@@ -55,6 +58,18 @@ These bite every time somebody works in here. The per-run files carry the rest.
   `data-rv` whose parent has one, and the children silently stay at opacity 0.
 - **A blank GHL form under automation is Cloudflare Turnstile**, not a broken embed. It refuses
   automation and localhost; prove the form on the deployed domain.
+- **Ads pages publish at a NESTED slug, and only a site-document write keeps it nested.**
+  `ads-landing-pages/<name>` serves at the nested URL after `PUT /site-document`; any
+  `PATCH /data/rows/:id` on the row (the SEO-cells write) re-derives the route and flattens it
+  to `/ads-landing-pages-<name>` until the page is re-saved through site-document.
+  `push-ads-pages.mjs` re-saves after the patch; `.tmp/reassert-slug.mjs` repairs a page by hand.
+- **`render-draft-page.mjs` drops shared components.** A page with a
+  `base.visual-component-ref` (the home page's office panels since 2026-09-14) previews with a
+  hole. Count the refs before concluding a block is missing; on 2026-09-18 that mistake
+  published the panels twice for a few minutes.
+- **The Instatic MCP grant is dead** (`.mcp.json` still points at `encorercm.com`). Nothing
+  needs it any more: pages go in through `ads-to-nodes.py` + `push-ads-pages.mjs`, code assets
+  through `push-script-asset.mjs`, media through `upload-ads-media.mjs`.
 - **The ads pages are templates: nine bodies, eighteen outputs.** `build-site.mjs` fills
   `{{LOC_*}}` tokens from its `LOCATIONS` table per office. Edit the body once; never the
   built page. The six form ids live in that table and nowhere else.
