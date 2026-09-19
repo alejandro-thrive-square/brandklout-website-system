@@ -3,7 +3,9 @@
 {
   const lost = {"/authority-score":[["#q1-yes",0,{"form":"assessment-lead-form"}],["#q1-no",0,{"form":"assessment-lead-form"}],["#q2-yes",0,{"form":"assessment-lead-form"}],["#q2-no",0,{"form":"assessment-lead-form"}],["#q3-yes",0,{"form":"assessment-lead-form"}],["#q3-no",0,{"form":"assessment-lead-form"}],["#q4-yes",0,{"form":"assessment-lead-form"}],["#q4-no",0,{"form":"assessment-lead-form"}],["#q5-yes",0,{"form":"assessment-lead-form"}],["#q5-no",0,{"form":"assessment-lead-form"}],["#q6-yes",0,{"form":"assessment-lead-form"}],["#q6-no",0,{"form":"assessment-lead-form"}],["#q7-yes",0,{"form":"assessment-lead-form"}],["#q7-no",0,{"form":"assessment-lead-form"}],["#q8-yes",0,{"form":"assessment-lead-form"}],["#q8-no",0,{"form":"assessment-lead-form"}],["#q9-yes",0,{"form":"assessment-lead-form"}],["#q9-no",0,{"form":"assessment-lead-form"}],["#q10-yes",0,{"form":"assessment-lead-form"}],["#q10-no",0,{"form":"assessment-lead-form"}],["#q11-yes",0,{"form":"assessment-lead-form"}],["#q11-no",0,{"form":"assessment-lead-form"}],["#q12-yes",0,{"form":"assessment-lead-form"}],["#q12-no",0,{"form":"assessment-lead-form"}],["#q13-yes",0,{"form":"assessment-lead-form"}],["#q13-no",0,{"form":"assessment-lead-form"}],["#q14-yes",0,{"form":"assessment-lead-form"}],["#q14-no",0,{"form":"assessment-lead-form"}],["#q15-yes",0,{"form":"assessment-lead-form"}],["#q15-no",0,{"form":"assessment-lead-form"}],["#q16-yes",0,{"form":"assessment-lead-form"}],["#q16-no",0,{"form":"assessment-lead-form"}],["#q17-yes",0,{"form":"assessment-lead-form"}],["#q17-no",0,{"form":"assessment-lead-form"}],["#q18-yes",0,{"form":"assessment-lead-form"}],["#q18-no",0,{"form":"assessment-lead-form"}],["#q19-yes",0,{"form":"assessment-lead-form"}],["#q19-no",0,{"form":"assessment-lead-form"}],["#q20-yes",0,{"form":"assessment-lead-form"}],["#q20-no",0,{"form":"assessment-lead-form"}],["#q21-yes",0,{"form":"assessment-lead-form"}],["#q21-no",0,{"form":"assessment-lead-form"}]]}
   const here = location.pathname.replace(/\.html$/, '').replace(/\/index$/, '/') || '/'
-  for (const [sel, nth, attrs] of lost[here] ?? []) {
+  // a collection template's repairs are keyed '<routeBase>/*' and apply to every entry under it
+  const list = lost[here] ?? Object.entries(lost).find(([k]) => k.endsWith('/*') && here.startsWith(k.slice(0, -1)))?.[1] ?? []
+  for (const [sel, nth, attrs] of list) {
     const el = document.querySelectorAll(sel)[nth]
     if (!el) { console.warn('import repair: nothing matches', sel, nth); continue }
     for (const [k, v] of Object.entries(attrs)) if (el.getAttribute(k) !== v) el.setAttribute(k, v)
@@ -551,120 +553,198 @@ window.BK_CONFIG = Object.assign({
 })();
 
 
-/* ---- agency/slider.js: the home hero's results slider (patches/index.html.mjs). ----
-   Every slide is ordinary markup inside [data-slider-track], so it can be edited, duplicated,
-   reordered or deleted in the Instatic editor. This script counts the slides when the page loads and
-   builds one dot per slide, so nothing here needs changing when a slide is added. The track is a
-   CSS scroll-snap strip, so it still swipes and scrolls without this script.
-   Autoplay: off for reduced motion, paused on hover, focus, a hidden tab or an off-screen slider,
-   and stopped for good after the visitor moves it themselves. */
+/* ---- assets/hero-carousel-v12.js (Sang, verbatim). Instatic has one script asset (trap 17); order kept. ---- */
+/* BrandKlout V12 - dependency-free hero carousel.
+   Autoplay: 8 seconds, suspended on hover/focus, offscreen and background tabs.
+   Manual browsing pauses autoplay. Reduced motion defaults to manual browsing.
+   Slide markup and claims live in index.html, not in a remote feed. */
 (function () {
   'use strict';
-  const DELAY = 6500;
-  const reduced = () =>
-    document.documentElement.classList.contains('reduce-motion') || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  document.querySelectorAll('[data-slider]').forEach((slider) => {
-    if (slider.dataset.sliderBound) return;
-    slider.dataset.sliderBound = 'true';
-    const track = slider.querySelector('[data-slider-track]');
-    if (!track) return;
-    const slides = [...track.children];
-    const controls = slider.querySelector('[data-slider-controls]');
-    if (slides.length < 2) {
-      if (controls) controls.hidden = true;
-      return;
+  let controllers = [];
+  function mount(root) {
+    const slides = Array.from(root.querySelectorAll('.hc-slide'));
+    const tabs = Array.from(root.querySelectorAll('[data-hero-select]'));
+    const badges = Array.from(root.querySelectorAll('[data-hero-badge]'));
+    const notes = Array.from(root.querySelectorAll('[data-hero-note]'));
+    const stage = root.querySelector('.hc-stage');
+    const toggle = root.querySelector('[data-hero-toggle]');
+    const toggleLabel = root.querySelector('[data-hero-toggle-label]');
+    const hint = root.querySelector('[data-hero-hint]');
+    const position = root.querySelector('[data-hero-position]');
+    const live = root.querySelector('[data-hero-announcement]');
+    if (slides.length < 2 || !stage || !toggle) return { destroy() {} };
+    const interval = Math.max(4000, Number(root.dataset.interval) || 8000);
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const aborter = new AbortController();
+    const reduced = () => media.matches || document.documentElement.classList.contains('reduce-motion');
+    let index = 0, elapsed = 0, last = 0, frame = 0, destroyed = false;
+    let hovering = false, focused = false, onScreen = false, paused = reduced();
+    let lastReduced = reduced();
+    let chartFrame = 0;
+    const animations = new Map();
+    const listen = (target, type, fn, options) => target.addEventListener(type, fn, Object.assign({}, options, { signal: aborter.signal }));
+    const counters = () => slides.flatMap(slide => Array.from(slide.querySelectorAll('[data-hero-count]')));
+    function numberText(el, value) {
+      const places = Number(el.dataset.decimals) || 0;
+      const n = places ? value.toFixed(places) : Math.round(value).toString();
+      return (el.dataset.prefix || '') + n + (el.dataset.suffix || '');
     }
-    const dotsBox = slider.querySelector('[data-slider-dots]');
-    let index = 0;
-    let timer = 0;
-    let settle = 0;
-    let manual = false;
-    let paused = false;
-    let onScreen = true;
-    let programmatic = false;
-
-    const mark = (i) => {
-      index = i;
-      slides.forEach((slide, n) => {
-        slide.inert = n !== i;
-        slide.classList.toggle('is-active', n === i);
-      });
-      dots.forEach((dot, n) => {
-        dot.classList.toggle('is-active', n === i);
-        dot.setAttribute('aria-current', n === i ? 'true' : 'false');
-      });
-    };
-    const schedule = () => {
-      clearTimeout(timer);
-      if (manual || paused || !onScreen || document.hidden || reduced()) return;
-      timer = setTimeout(() => go(index + 1), DELAY);
-    };
-    const go = (i) => {
-      const n = (i + slides.length) % slides.length;
-      programmatic = true;
-      track.scrollTo({ left: slides[n].offsetLeft - slides[0].offsetLeft, behavior: reduced() ? 'auto' : 'smooth' });
-      mark(n);
-      schedule();
-    };
-    const move = (i) => {
-      manual = true;
-      go(i);
-    };
-
-    const dots = slides.map((slide, i) => {
-      slide.setAttribute('role', 'group');
-      slide.setAttribute('aria-roledescription', 'slide');
-      slide.setAttribute('aria-label', `${i + 1} of ${slides.length}`);
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'bk-slider-dot';
-      dot.setAttribute('aria-label', `Show result ${i + 1} of ${slides.length}`);
-      dot.addEventListener('click', () => move(i));
-      dotsBox?.append(dot);
-      return dot;
-    });
-
-    slider.querySelector('[data-slider-prev]')?.addEventListener('click', () => move(index - 1));
-    slider.querySelector('[data-slider-next]')?.addEventListener('click', () => move(index + 1));
-    track.addEventListener('keydown', (event) => {
-      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
-      event.preventDefault();
-      move(index + (event.key === 'ArrowRight' ? 1 : -1));
-    });
-    // A swipe or trackpad scroll lands on a slide by itself (scroll-snap); follow it with the dots.
-    track.addEventListener(
-      'scroll',
-      () => {
-        clearTimeout(settle);
-        settle = setTimeout(() => {
-          if (programmatic) {
-            programmatic = false;
-            return;
-          }
-          const n = Math.min(Math.max(Math.round(track.scrollLeft / Math.max(track.clientWidth, 1)), 0), slides.length - 1);
-          if (n !== index) {
-            manual = true;
-            mark(n);
-            schedule();
-          }
-        }, 120);
-      },
-      { passive: true },
-    );
-    slider.addEventListener('pointerenter', () => { paused = true; schedule(); });
-    slider.addEventListener('pointerleave', () => { paused = false; schedule(); });
-    slider.addEventListener('focusin', () => { paused = true; schedule(); });
-    slider.addEventListener('focusout', () => { paused = false; schedule(); });
-    document.addEventListener('visibilitychange', schedule);
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(([entry]) => {
-        onScreen = entry.isIntersecting;
-        schedule();
-      }).observe(slider);
+    function settleCounters() {
+      animations.forEach(id => cancelAnimationFrame(id)); animations.clear();
+      counters().forEach(el => { el.textContent = numberText(el, Number(el.dataset.heroCount)); });
     }
-    mark(0);
-    schedule();
-  });
+    function animateSlide() {
+      cancelAnimationFrame(chartFrame);
+      settleCounters();
+      const slide = slides[index];
+      slides.forEach(s => s.classList.remove('hc-visual-ready'));
+      if (reduced() || !onScreen) { slide.classList.add('hc-visual-ready'); return; }
+      chartFrame = requestAnimationFrame(() => {
+        chartFrame = requestAnimationFrame(() => {
+          if (destroyed || !slide.classList.contains('is-active')) return;
+          slide.classList.add('hc-visual-ready');
+          slide.querySelectorAll('[data-hero-count]').forEach(el => {
+            const value = Number(el.dataset.heroCount), start = performance.now();
+            const update = now => {
+              if (destroyed || !el.isConnected || !slide.classList.contains('is-active')) return;
+              const progress = Math.min((now - start) / 950, 1);
+              el.textContent = numberText(el, value * (1 - Math.pow(1 - progress, 3)));
+              if (progress < 1) animations.set(el, requestAnimationFrame(update));
+              else animations.delete(el);
+            };
+            animations.set(el, requestAnimationFrame(update));
+          });
+        });
+      });
+    }
+    function runnable() { return !destroyed && root.isConnected && !paused && !reduced() && !hovering && !focused && onScreen && !document.hidden; }
+    function paintControls() {
+      const manuallyPaused = paused || reduced();
+      toggle.dataset.paused = String(manuallyPaused);
+      toggle.disabled = reduced();
+      toggleLabel.textContent = reduced() ? 'Manual' : manuallyPaused ? 'Play' : 'Pause';
+      toggle.setAttribute('aria-label', reduced() ? 'Automatic rotation is off for reduced motion' : manuallyPaused ? 'Start automatic story rotation' : 'Pause automatic story rotation');
+      const state = runnable() ? 'running' : 'paused';
+      root.dataset.rotationState = state;
+      hint.textContent = reduced() ? 'Reduced motion' : paused ? 'Manual browsing' : (hovering || focused) ? 'Paused to read' : '8s per story';
+    }
+    function stopClock() { cancelAnimationFrame(frame); frame = 0; last = 0; }
+    function tick(now) {
+      frame = 0;
+      if (!runnable()) { paintControls(); last = 0; return; }
+      if (last) elapsed += Math.min(now - last, 100);
+      last = now;
+      if (elapsed >= interval) show(index + 1, false);
+      root.style.setProperty('--hero-progress', String(Math.min(elapsed / interval, 1)));
+      if (runnable()) frame = requestAnimationFrame(tick);
+    }
+    function sync() {
+      paintControls();
+      if (runnable()) { if (!frame) { last = 0; frame = requestAnimationFrame(tick); } }
+      else stopClock();
+    }
+    function show(next, manual) {
+      index = ((next % slides.length) + slides.length) % slides.length;
+      elapsed = 0;
+      root.style.setProperty('--hero-progress', '0');
+      slides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', String(!active));
+        slide.toggleAttribute('inert', !active);
+      });
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle('is-active', i === index);
+        tab.setAttribute('aria-pressed', String(i === index));
+      });
+      [badges, notes].forEach(group => group.forEach((el, i) => {
+        el.classList.toggle('is-active', i === index);
+        el.setAttribute('aria-hidden', String(i !== index));
+      }));
+      root.dataset.activeStory = slides[index].dataset.story;
+      position.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(slides.length).padStart(2, '0');
+      if (manual) {
+        paused = true;
+        live.textContent = 'Now showing ' + slides[index].getAttribute('aria-label') + '. Automatic rotation paused.';
+      }
+      animateSlide();
+      // Automatic transitions are already inside the running tick.
+      if (manual) sync();
+    }
+    tabs.forEach((tab, i) => listen(tab, 'click', () => show(i, true)));
+    listen(root.querySelector('[data-hero-prev]'), 'click', () => show(index - 1, true));
+    listen(root.querySelector('[data-hero-next]'), 'click', () => show(index + 1, true));
+    listen(toggle, 'click', () => {
+      if (reduced()) return;
+      paused = !paused;
+      elapsed = 0; root.style.setProperty('--hero-progress', '0');
+      live.textContent = paused ? 'Automatic story rotation paused.' : 'Automatic story rotation enabled. It resumes when you leave the card.';
+      sync();
+    });
+    listen(root, 'keydown', event => {
+      if (!event.target.closest('.hc-controls')) return;
+      let next;
+      if (event.key === 'ArrowRight') next = index + 1;
+      else if (event.key === 'ArrowLeft') next = index - 1;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = slides.length - 1;
+      else return;
+      event.preventDefault(); show(next, true); tabs[index].focus({ preventScroll: true });
+    });
+    listen(root, 'pointerenter', event => { if (event.pointerType !== 'touch') { hovering = true; sync(); } });
+    listen(root, 'pointerleave', event => { if (event.pointerType !== 'touch') { hovering = false; sync(); } });
+    listen(root, 'focusin', () => { focused = true; sync(); });
+    listen(root, 'focusout', () => queueMicrotask(() => { if (!destroyed) { focused = root.contains(document.activeElement); sync(); } }));
+    listen(document, 'visibilitychange', sync);
+    let startTouch = null, suppressUntil = 0;
+    listen(stage, 'pointerdown', event => {
+      if (event.pointerType === 'touch') startTouch = { x:event.clientX, y:event.clientY, id:event.pointerId };
+    }, { passive:true });
+    listen(stage, 'pointercancel', () => { startTouch = null; });
+    listen(stage, 'pointerup', event => {
+      if (!startTouch || event.pointerId !== startTouch.id) return;
+      const dx = event.clientX - startTouch.x, dy = event.clientY - startTouch.y; startTouch = null;
+      if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy) * 1.5) { suppressUntil = performance.now() + 450; show(index + (dx < 0 ? 1 : -1), true); }
+    }, { passive:true });
+    listen(stage, 'click', event => { if (performance.now() < suppressUntil) { suppressUntil = 0; event.preventDefault(); event.stopPropagation(); } }, { capture:true });
+    const visibility = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const wasVisible = onScreen;
+        onScreen = entry.isIntersecting && entry.intersectionRatio >= .35;
+        if (onScreen && !wasVisible) animateSlide();
+        if (!onScreen) settleCounters();
+        sync();
+      });
+    }, { threshold:[0,.35] }) : null;
+    if (visibility) visibility.observe(root); else onScreen = true;
+    function motionChange() {
+      const nowReduced = reduced();
+      if (nowReduced === lastReduced) return;
+      lastReduced = nowReduced;
+      // Motion being re-enabled never silently starts a stopped carousel.
+      if (nowReduced) { paused = true; settleCounters(); slides[index].classList.add('hc-visual-ready'); }
+      sync();
+    }
+    const motionObserver = new MutationObserver(motionChange);
+    motionObserver.observe(document.documentElement, { attributes:true, attributeFilter:['class'] });
+    listen(media, 'change', motionChange);
+    root.classList.add('is-enhanced');
+    show(0, false); sync();
+    return {
+      destroy() {
+        destroyed = true; stopClock(); cancelAnimationFrame(chartFrame); settleCounters();
+        aborter.abort(); visibility?.disconnect(); motionObserver.disconnect();
+      }
+    };
+  }
+  function destroy() { controllers.forEach(c => c.destroy()); controllers = []; }
+  function init() {
+    destroy();
+    document.querySelectorAll('[data-hero-carousel]').forEach(root => controllers.push(mount(root)));
+  }
+  window.BKHeroCarousel = { init, destroy };
+  window.addEventListener('pagehide', destroy);
+  window.addEventListener('pageshow', event => { if (event.persisted) init(); });
+  init();
 })();
 

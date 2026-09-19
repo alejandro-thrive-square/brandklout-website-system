@@ -1,0 +1,298 @@
+
+=== verifying the link dir
+  link OK — Brandklout / production / Brandklout serves brandklout-production.up.railway.app
+
+=== shipping converter sources
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+763
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+8669
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+8282
+
+=== shipping import-input.json.gz (199632 b64 bytes)
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 1Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 2Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 3Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 4Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 5Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 6Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 7Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 8Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 9Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 10Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 11Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 12Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 13Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 14Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 15Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 16Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 17Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 18Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 19Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 20Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 21Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 22Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 23Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 24Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 25Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 26Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 27Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 28Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 29Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 30Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 31Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 32Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 33Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+  chunk 34
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+149722
+
+=== converting
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+{
+ "mode": "registry",
+ "registryRules": 2176,
+ "afterLinking": 2263,
+ "conditions": 7,
+ "pages": [
+  {
+   "slug": "index",
+   "nodes": 1414,
+   "autoCreatedClasses": 67,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "solutions",
+   "nodes": 274,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "ai-search-authority",
+   "nodes": 243,
+   "autoCreatedClasses": 4,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "local-seo-maps",
+   "nodes": 239,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "reputation-engine",
+   "nodes": 220,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "conversion-websites",
+   "nodes": 224,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "lead-to-collection",
+   "nodes": 238,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "ai-growth-engine",
+   "nodes": 227,
+   "autoCreatedClasses": 3,
+   "strippedScripts": 2,
+   "warnings": 0
+  },
+  {
+   "slug": "specialties",
+   "nodes": 163,
+   "autoCreatedClasses": 1,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "dental-implant-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 1,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "full-arch-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "cosmetic-dentist-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "general-dentistry-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "multi-location-dental-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "oral-surgery-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "orthodontics-invisalign-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "periodontist-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "prosthodontist-marketing",
+   "nodes": 203,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-stories",
+   "nodes": 357,
+   "autoCreatedClasses": 1,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-legacy-dental-pasadena",
+   "nodes": 306,
+   "autoCreatedClasses": 2,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-ava-dental-launch",
+   "nodes": 262,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-ocpao-ai-authority",
+   "nodes": 280,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-oceanic-ai-search-growth",
+   "nodes": 276,
+   "autoCreatedClasses": 1,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-oceanic-future-ready",
+   "nodes": 280,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "customer-story-omnia-ai-search-growth",
+   "nodes": 280,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "market-opportunity",
+   "nodes": 249,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "authority-score",
+   "nodes": 464,
+   "autoCreatedClasses": 4,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "book",
+   "nodes": 174,
+   "autoCreatedClasses": 2,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "guarantee",
+   "nodes": 227,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "privacy",
+   "nodes": 198,
+   "autoCreatedClasses": 1,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "terms",
+   "nodes": 180,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  },
+  {
+   "slug": "hipaa",
+   "nodes": 205,
+   "autoCreatedClasses": 0,
+   "strippedScripts": 1,
+   "warnings": 0
+  }
+ ]
+}
+
+=== retrieving import-out.json
+Using SSH key from file C:\Users\ACER\.ssh\godaddy_drnahlah.pub: claude-restore-drnahlah
+3734280

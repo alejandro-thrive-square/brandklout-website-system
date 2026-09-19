@@ -1,0 +1,1704 @@
+{
+ "events": [
+  {
+   "id": "sYeu50RKMJygsBdGgt7Uh",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "publish",
+   "targetType": "site",
+   "targetId": "default",
+   "metadata": {
+    "publishedPages": 30
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.16",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:18.582Z"
+  },
+  {
+   "id": "2YUqaNWhYFefJ-4uQS0DP",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "J3K2ALD-wSNaDCuhL6hqu",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "legal-template"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:16.140Z"
+  },
+  {
+   "id": "I8Pw8o4-3pfNi5MnoDGH8",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "7qtYI4dmiznfkX287EwxK",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "guarantee"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:15.598Z"
+  },
+  {
+   "id": "yneYWSNC2luhwcErqMDRP",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "azBQMqyCoSkiqJ9oW9sFb",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "book"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.14",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:15.053Z"
+  },
+  {
+   "id": "OKTelEETluX9w8ugOXR-d",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6_s1B3AAPsHTVBQJgRh_X",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "authority-score"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.25",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:14.469Z"
+  },
+  {
+   "id": "2dDfk4p2T3hT8URFZG-Ww",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "jp--aJ2mtuObDrwSxkLyD",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "market-opportunity"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.12",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:13.895Z"
+  },
+  {
+   "id": "68JP6ggnlcf6EtTc6lspY",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "zLVbM0q0FUdxnVnwJKW3K",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-omnia-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:13.335Z"
+  },
+  {
+   "id": "0-8nB27F88va8LeogCut3",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Uwrs_kIweHaQwcTqahbS6",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-future-ready"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.12",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:12.743Z"
+  },
+  {
+   "id": "kZ3XCLHRR5qDgg5WqPqv4",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bQYWwXY52dlhhgkzc4YwV",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:12.195Z"
+  },
+  {
+   "id": "PuFqJnkbJS-tfxjc18ZwZ",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Ajtc2QBmIOT34CKhxoWZJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ocpao-ai-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:11.582Z"
+  },
+  {
+   "id": "8-19S88cLjO32SqM__Cuq",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "I5NW4jBlJ1kXEUa8p4kWp",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ava-dental-launch"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:11.010Z"
+  },
+  {
+   "id": "0hBMY1TDePVjfqDSqQPbl",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "0rblh3T_WUCnFCXF-wcxN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-legacy-dental-pasadena"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:10.392Z"
+  },
+  {
+   "id": "1h5-ToiyPlJmZP99JxaxB",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "VG4fx9sQ9BG-bXXVMWZ86",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-stories"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:09.822Z"
+  },
+  {
+   "id": "bu4DfroC5K3EQq08bXH9w",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "9WWj5aoaonBdC9gEI6rQN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "prosthodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.24",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:09.262Z"
+  },
+  {
+   "id": "A4ESLbpkVScl4WLueTQRK",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Tg3kthBDnBmUAAgxJqpDy",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "periodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:08.679Z"
+  },
+  {
+   "id": "iCINuY83KdQwKyBJ04ixb",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "--8rqkoUyM-hAAvkpgGX_",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "orthodontics-invisalign-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.12",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:08.146Z"
+  },
+  {
+   "id": "RhbfNN9ZSj8VhYwrhLUV-",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "oiNZ-mPTOh8MTPXMYY6xP",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "oral-surgery-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:07.606Z"
+  },
+  {
+   "id": "imiNXSFrzOHfm7dG4yaAh",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "qV8VNq2tnGtpdwnmIlcxG",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "multi-location-dental-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:07.045Z"
+  },
+  {
+   "id": "Ll0fHjkS_Blbgpjj8flZ5",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "dlEXYG6txH9CZjy31Czlx",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "general-dentistry-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.11",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:06.494Z"
+  },
+  {
+   "id": "wrfO4TSXraJ9DhViwIYWe",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bSqxLtxCkSw11fMPhLWQa",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "cosmetic-dentist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:05.944Z"
+  },
+  {
+   "id": "oa6vtIHWZt0bgXbaOZ6qT",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "beEctT0MzXIGIgHm5QJMj",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "full-arch-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.14",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:05.434Z"
+  },
+  {
+   "id": "c1F1appb-j9ArJJNsTrmc",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "B4mI6yHFqsV6HTWVhlz2R",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "dental-implant-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.12",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:04.880Z"
+  },
+  {
+   "id": "wZDqMWlAe91sE3SHqKJPF",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kKwcLRnxJGaJOdoj5cnDJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "specialties"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.25",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:04.348Z"
+  },
+  {
+   "id": "gQvMBqGHFoCiomFihiO-L",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "a7XJAIcf7xj8quYdC4tah",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-growth-engine"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:03.842Z"
+  },
+  {
+   "id": "xuHTJkUP4bAB6pSj68SbL",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "prj8HOyIqMPHhmcty0Bjn",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "lead-to-collection"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:03.279Z"
+  },
+  {
+   "id": "FFLWc7iMdNINQjFBtjnsa",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "3rLKArV1El5l_aB-0yL_G",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "conversion-websites"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.14",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:02.706Z"
+  },
+  {
+   "id": "MKDP13zl2UL-M8p7Ct7HS",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "dCQX9MHB1BynJ-EBGJODM",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "reputation-engine"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.20",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:02.130Z"
+  },
+  {
+   "id": "1M_h5K_lCGBU0xjOKG8wy",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6ySVuVScdm5rlbUpL_0dz",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "local-seo-maps"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.14",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:01.530Z"
+  },
+  {
+   "id": "AZ-nMJrg_ZXESSV5IMYJj",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "ay_OJos06_j7HSr0rG80p",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-search-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:00.821Z"
+  },
+  {
+   "id": "ivu27zAhChvtO-6eCnxOx",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "rsdciqszg0NpOs1mIhJl1",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "solutions"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.8",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:41:00.233Z"
+  },
+  {
+   "id": "DQvp8PjvWtmLGYKMJg1aH",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kLQ8WUoqr2mVi8V8KKk9y",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "index"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.22",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:59.525Z"
+  },
+  {
+   "id": "oAqRC3vEduYoJ7BPU6bfs",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "publish",
+   "targetType": "site",
+   "targetId": "default",
+   "metadata": {
+    "publishedPages": 30
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:11.224Z"
+  },
+  {
+   "id": "4m-4rj8ZyfwzpYMnkFg6z",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "J3K2ALD-wSNaDCuhL6hqu",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "legal-template"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:08.129Z"
+  },
+  {
+   "id": "S_5AkCNQcitcA0hlQTYy4",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "7qtYI4dmiznfkX287EwxK",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "guarantee"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:07.594Z"
+  },
+  {
+   "id": "WhxXeRKzpxn8gYYkhwAvS",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "azBQMqyCoSkiqJ9oW9sFb",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "book"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:07.037Z"
+  },
+  {
+   "id": "ip2u5BCulzlLXaApuJ2jh",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6_s1B3AAPsHTVBQJgRh_X",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "authority-score"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:06.428Z"
+  },
+  {
+   "id": "DD7kgeWmnEk7H-lMiJfQr",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "jp--aJ2mtuObDrwSxkLyD",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "market-opportunity"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:05.728Z"
+  },
+  {
+   "id": "dZvmokOapv6iweUBShOC9",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "zLVbM0q0FUdxnVnwJKW3K",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-omnia-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:05.071Z"
+  },
+  {
+   "id": "qzs0RBI9KA4RiOdTaFwik",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Uwrs_kIweHaQwcTqahbS6",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-future-ready"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:04.452Z"
+  },
+  {
+   "id": "jxk306N7Tdrwc3OddmkDA",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bQYWwXY52dlhhgkzc4YwV",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:03.855Z"
+  },
+  {
+   "id": "BQl1LM06phOmiBrrQVLAo",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Ajtc2QBmIOT34CKhxoWZJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ocpao-ai-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:03.275Z"
+  },
+  {
+   "id": "xJtwNCTDP6Knw59yy7ACW",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "I5NW4jBlJ1kXEUa8p4kWp",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ava-dental-launch"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:02.637Z"
+  },
+  {
+   "id": "mBx7Gowt4A6hLh9OOuqyw",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "0rblh3T_WUCnFCXF-wcxN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-legacy-dental-pasadena"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:02.035Z"
+  },
+  {
+   "id": "KcCUIBjVmB0-Qxg-3cKD5",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "VG4fx9sQ9BG-bXXVMWZ86",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-stories"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:01.248Z"
+  },
+  {
+   "id": "iNohYrfIObRpHG5s9TKvU",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "9WWj5aoaonBdC9gEI6rQN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "prosthodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:40:00.291Z"
+  },
+  {
+   "id": "xAXn3DlHaaJPcoaWwdMGG",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Tg3kthBDnBmUAAgxJqpDy",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "periodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:59.667Z"
+  },
+  {
+   "id": "cHj2ummWIAG7d2ObYkP1h",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "--8rqkoUyM-hAAvkpgGX_",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "orthodontics-invisalign-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.8",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:59.086Z"
+  },
+  {
+   "id": "Hcv_B0I3Xnzu8CCvjWQNQ",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "oiNZ-mPTOh8MTPXMYY6xP",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "oral-surgery-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:58.506Z"
+  },
+  {
+   "id": "ElozViZwZo-59zcPzIJwF",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "qV8VNq2tnGtpdwnmIlcxG",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "multi-location-dental-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:57.887Z"
+  },
+  {
+   "id": "jYN58CjjHDhXTHbiH24PJ",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "dlEXYG6txH9CZjy31Czlx",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "general-dentistry-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:57.270Z"
+  },
+  {
+   "id": "U_BCr8zW_ZoO0kcPWfDvn",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bSqxLtxCkSw11fMPhLWQa",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "cosmetic-dentist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:56.660Z"
+  },
+  {
+   "id": "aWeYkIisPAxqaoblmMB3a",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "beEctT0MzXIGIgHm5QJMj",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "full-arch-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.8",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:56.061Z"
+  },
+  {
+   "id": "VKrfXCgpoR5bKi1_L3an5",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "B4mI6yHFqsV6HTWVhlz2R",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "dental-implant-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:55.050Z"
+  },
+  {
+   "id": "cr_5p2brHGM69GbLuvzuv",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kKwcLRnxJGaJOdoj5cnDJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "specialties"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.8",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:54.468Z"
+  },
+  {
+   "id": "dTDp0KHIwZSjm8-zbul-e",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "a7XJAIcf7xj8quYdC4tah",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-growth-engine"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:53.857Z"
+  },
+  {
+   "id": "FOguY6t8_XxkAr0DWmaGe",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "prj8HOyIqMPHhmcty0Bjn",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "lead-to-collection"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:53.249Z"
+  },
+  {
+   "id": "z6LneYDHPLbk6pRwN1nR0",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "3rLKArV1El5l_aB-0yL_G",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "conversion-websites"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.5",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:52.323Z"
+  },
+  {
+   "id": "j8II7EJCDwXWKRh0nPcaK",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6ySVuVScdm5rlbUpL_0dz",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "local-seo-maps"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:50.905Z"
+  },
+  {
+   "id": "I0asY38sVjn6JjGFWbhy9",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "ay_OJos06_j7HSr0rG80p",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-search-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:50.276Z"
+  },
+  {
+   "id": "LAEj0Wivn2L9-BIzD1la1",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "rsdciqszg0NpOs1mIhJl1",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "solutions"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.8",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:49.728Z"
+  },
+  {
+   "id": "1CZ8V3X66yPw2m2sRNxwO",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kLQ8WUoqr2mVi8V8KKk9y",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "index"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.25",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:39:48.875Z"
+  },
+  {
+   "id": "GmQeTwdhqI1R4vIjqJHEk",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "publish",
+   "targetType": "site",
+   "targetId": "default",
+   "metadata": {
+    "publishedPages": 30
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.7",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:52.352Z"
+  },
+  {
+   "id": "pfQKRFMeK42Cd7txI_YIa",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.publish",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling",
+    "versionNumber": 3
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:48.702Z"
+  },
+  {
+   "id": "l9CY7fSdpsW-2U23T8cYG",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:48.104Z"
+  },
+  {
+   "id": "MpHoIwjq7w3aSzBOI3u7q",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "J3K2ALD-wSNaDCuhL6hqu",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "legal-template"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:46.875Z"
+  },
+  {
+   "id": "JZDaSupeGlPFqhAc167ln",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "7qtYI4dmiznfkX287EwxK",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "guarantee"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:46.376Z"
+  },
+  {
+   "id": "WbmJGvl_sDf0z6WMkCSfl",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "azBQMqyCoSkiqJ9oW9sFb",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "book"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:45.865Z"
+  },
+  {
+   "id": "fdTZ0k8r9G6F-X20ki8OT",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6_s1B3AAPsHTVBQJgRh_X",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "authority-score"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:45.349Z"
+  },
+  {
+   "id": "LBdbpRR977iWkQXkhk1op",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "jp--aJ2mtuObDrwSxkLyD",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "market-opportunity"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:44.786Z"
+  },
+  {
+   "id": "fC5TlTc31tHNkgwtOr4Lq",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "zLVbM0q0FUdxnVnwJKW3K",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-omnia-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:44.261Z"
+  },
+  {
+   "id": "hFx5tFZooNg84zwb6Xp2Z",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Uwrs_kIweHaQwcTqahbS6",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-future-ready"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:43.527Z"
+  },
+  {
+   "id": "f1NHrwbZty8rAEGKdO2Ce",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bQYWwXY52dlhhgkzc4YwV",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-oceanic-ai-search-growth"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:43.024Z"
+  },
+  {
+   "id": "xvF4ktl22WVciog1yFU_E",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Ajtc2QBmIOT34CKhxoWZJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ocpao-ai-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:42.480Z"
+  },
+  {
+   "id": "m22v-QwF-jfB3Vpg0y5xX",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "I5NW4jBlJ1kXEUa8p4kWp",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-ava-dental-launch"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:41.977Z"
+  },
+  {
+   "id": "3GuJYrQI552oegv_Lykff",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "0rblh3T_WUCnFCXF-wcxN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-story-legacy-dental-pasadena"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:41.459Z"
+  },
+  {
+   "id": "u90H5LaUq-vM1qvfOLRJF",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "VG4fx9sQ9BG-bXXVMWZ86",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "customer-stories"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:40.942Z"
+  },
+  {
+   "id": "oVtbBclWlkWhT1u7RV4w7",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "9WWj5aoaonBdC9gEI6rQN",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "prosthodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:40.416Z"
+  },
+  {
+   "id": "QLCKKZIJ_SxzGLqtK75ne",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "Tg3kthBDnBmUAAgxJqpDy",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "periodontist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:39.865Z"
+  },
+  {
+   "id": "-wRs2biiSZDRgpx5DTdV4",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "--8rqkoUyM-hAAvkpgGX_",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "orthodontics-invisalign-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:39.359Z"
+  },
+  {
+   "id": "gqZeA40JGybT-BiusPeRL",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "oiNZ-mPTOh8MTPXMYY6xP",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "oral-surgery-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:38.752Z"
+  },
+  {
+   "id": "NWNTJwmdGSnN1DQLYtZJA",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "qV8VNq2tnGtpdwnmIlcxG",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "multi-location-dental-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.9",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:38.247Z"
+  },
+  {
+   "id": "ZAp8LU5d7RN5ap2Bz8e1f",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "dlEXYG6txH9CZjy31Czlx",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "general-dentistry-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.9",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:37.756Z"
+  },
+  {
+   "id": "Iu4oM80JUT7ElGWSjr29L",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "bSqxLtxCkSw11fMPhLWQa",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "cosmetic-dentist-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:37.263Z"
+  },
+  {
+   "id": "z15ZDe3r13q1icHss3TED",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "beEctT0MzXIGIgHm5QJMj",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "full-arch-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:36.740Z"
+  },
+  {
+   "id": "yfTpmt2RGkXMAgIz-GgnQ",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "B4mI6yHFqsV6HTWVhlz2R",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "dental-implant-marketing"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:36.226Z"
+  },
+  {
+   "id": "uewrJGrYw9rpLBhiR6juk",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kKwcLRnxJGaJOdoj5cnDJ",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "specialties"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:35.730Z"
+  },
+  {
+   "id": "F8ZF_auf3LevZZm-CeD3S",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "a7XJAIcf7xj8quYdC4tah",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-growth-engine"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:35.218Z"
+  },
+  {
+   "id": "zNZsaeVQVN2AZ_lCXbDd3",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "prj8HOyIqMPHhmcty0Bjn",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "lead-to-collection"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:34.703Z"
+  },
+  {
+   "id": "d7_g0Qe7MlNl9Mh-JnRbe",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "3rLKArV1El5l_aB-0yL_G",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "conversion-websites"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.9",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:34.191Z"
+  },
+  {
+   "id": "1P9HZhVzKZuobfruIWhU4",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "dCQX9MHB1BynJ-EBGJODM",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "reputation-engine"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:33.520Z"
+  },
+  {
+   "id": "bidqfFj2RTYe8sBJ6wehb",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "6ySVuVScdm5rlbUpL_0dz",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "local-seo-maps"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:33.018Z"
+  },
+  {
+   "id": "ULJqFL8dWpvhHGKVBH_3F",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "ay_OJos06_j7HSr0rG80p",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "ai-search-authority"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.9",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:32.504Z"
+  },
+  {
+   "id": "VMZfb6lZZxndAIKEupyct",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "rsdciqszg0NpOs1mIhJl1",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "solutions"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.19",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:31.976Z"
+  },
+  {
+   "id": "qWBRRqc8wHqgLzi0FWb1h",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "kLQ8WUoqr2mVi8V8KKk9y",
+   "metadata": {
+    "tableId": "pages",
+    "slug": "index"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.18",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:33:31.306Z"
+  },
+  {
+   "id": "V6t7TdjZQfRRBu5VmODSS",
+   "actorUserId": "WorNFQqywM6XYTcPv0VUM",
+   "action": "data.row.publish",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling",
+    "versionNumber": 2
+   },
+   "actorLabel": "Sang",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+   "createdAt": "2026-09-15T22:33:20.865Z"
+  },
+  {
+   "id": "EePqD07dHuDyVk8_yXeGW",
+   "actorUserId": "WorNFQqywM6XYTcPv0VUM",
+   "action": "data.row.update",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling"
+   },
+   "actorLabel": "Sang",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.0.0 Safari/537.36",
+   "createdAt": "2026-09-15T22:33:20.111Z"
+  },
+  {
+   "id": "wB6Bbeu3_MuJ-HDvcrc6c",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "publish",
+   "targetType": "site",
+   "targetId": "default",
+   "metadata": {
+    "publishedPages": 30
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.23",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:14:10.994Z"
+  },
+  {
+   "id": "IsuuyWfYorOB2NZiWgJON",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.publish",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling",
+    "versionNumber": 1
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.16",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:14:08.672Z"
+  },
+  {
+   "id": "fdOWJFlyvGXXOYb8eXDPD",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.create",
+   "targetType": "data_row",
+   "targetId": "McBzJc69f3vTDmFlQzG45",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "hipaa-data-handling"
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.13",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:14:08.498Z"
+  },
+  {
+   "id": "w_0dZnkMm2XBR4v6UM6WW",
+   "actorUserId": "uylYzilU-dnNQxGzVHEnO",
+   "action": "data.row.publish",
+   "targetType": "data_row",
+   "targetId": "xzwxH5EIFXHNijQ3-3A0x",
+   "metadata": {
+    "tableId": "7MSc_TW0bEkr46Rntb9e_",
+    "slug": "terms",
+    "versionNumber": 1
+   },
+   "actorLabel": "Alejandro Milano",
+   "targetLabel": null,
+   "metadataLabels": {},
+   "ipAddress": "100.64.0.20",
+   "userAgent": "node",
+   "createdAt": "2026-09-15T22:14:08.313Z"
+  }
+ ]
+}

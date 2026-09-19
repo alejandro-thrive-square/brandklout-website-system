@@ -1,5 +1,5 @@
 {
-  "package": "package-v16",
+  "package": "package-v18",
   "layout": "shared",
   "css": "classes",
   "overlay": [],
@@ -9,6 +9,11 @@
   "notPages": [
     "OPEN-ME.html"
   ],
+  "entries": {
+    "privacy.html": "/legal/privacy",
+    "terms.html": "/legal/terms",
+    "hipaa.html": "/legal/hipaa-data-handling"
+  },
   "pages": [
     {
       "slug": "ai-growth-engine",
@@ -28,6 +33,13 @@
     {
       "slug": "book",
       "file": "book.html",
+      "scope": null
+    },
+    {
+      "slug": "legal-template",
+      "file": "legal-template.html",
+      "source": "cms-templates/legal-page-template.html",
+      "template": "legal",
       "scope": null
     },
     {
@@ -96,11 +108,6 @@
       "scope": null
     },
     {
-      "slug": "hipaa",
-      "file": "hipaa.html",
-      "scope": null
-    },
-    {
       "slug": "index",
       "file": "index.html",
       "scope": null
@@ -141,11 +148,6 @@
       "scope": null
     },
     {
-      "slug": "privacy",
-      "file": "privacy.html",
-      "scope": null
-    },
-    {
       "slug": "prosthodontist-marketing",
       "file": "prosthodontist-marketing.html",
       "scope": null
@@ -163,11 +165,6 @@
     {
       "slug": "specialties",
       "file": "specialties.html",
-      "scope": null
-    },
-    {
-      "slug": "terms",
-      "file": "terms.html",
       "scope": null
     }
   ],
