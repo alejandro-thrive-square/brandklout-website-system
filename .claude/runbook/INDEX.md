@@ -1,11 +1,12 @@
 # Runbook index
 
-22 runs, newest first. Each line is one file in this folder.
+23 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-19 | 2026-09-19 — the workstation mirrored onto a Namespace devbox; media is 10 GB, not 1.5 — carries **gotchas** | [`2026-09-19-namespace-devbox-mirror.md`](./2026-09-19-namespace-devbox-mirror.md) |
 | 2026-09-18 | 2026-09-18 — full backup before the system cleanup; client media found to live only in worktrees — carries **gotchas** | [`2026-09-18-full-backup-before-system-cleanup.md`](./2026-09-18-full-backup-before-system-cleanup.md) |
 | 2026-09-18 | 2026-09-18 — Gage and Jessica: content-editor accounts on all five staging instances — carries **gotchas** | [`2026-09-18-gage-jessica-content-accounts-on-staging.md`](./2026-09-18-gage-jessica-content-accounts-on-staging.md) |
 | 2026-09-17 | 2026-09-17 - Obsidian vault set up on the repo root; 139 broken doc links repaired - carries **gotchas** | [`2026-09-17-obsidian-vault-setup.md`](./2026-09-17-obsidian-vault-setup.md) |
