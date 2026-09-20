@@ -23,6 +23,13 @@ then only the runs you need. Do not read them all.
   An asset mirror and the directive cleanup are next, in that order. See
   [2026-09-18](./runbook/2026-09-18-full-backup-before-system-cleanup.md).
 
+- **R2 passed a trial as that asset mirror, but nothing is built yet.** IFA's 1,582 files (1.6 GB)
+  were pushed, pulled and hash-verified against bucket `brandklout-assets-test` in Alejandro's
+  *personal* Cloudflare account (`CLOUDFLARETESTING` in the master `.env`, expires 2026-12-18).
+  There is no `scripts/assets.mjs`, no manifest and no schedule — the worktrees are still the only
+  working home of the media. Waiting on his go-ahead to build it. See
+  [2026-09-19](./runbook/2026-09-19-r2-asset-mirror-trial.md).
+
 - **The repo is an Obsidian vault.** `.obsidian/` at the root is tracked, so the graph and its
   colour groups are the same on every machine and every `bk-*` worktree. `.tmp/`,
   `node_modules/` and friends are excluded, which leaves 368 real docs. Obsidian cannot see
