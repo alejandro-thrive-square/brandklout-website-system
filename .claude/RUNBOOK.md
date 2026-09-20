@@ -25,8 +25,9 @@ then only the runs you need. Do not read them all.
   clone, all 15 sparse client worktrees, `~/.webzite/.env` and the Python/Playwright runtime are
   there, under `/workspaces/`. Reach it with `devbox ssh Brandklout` (the CLI is installed locally;
   the login expires 2026-10-19). **One devbox per user** — `devbox create` fails while it exists.
-  MCP/OAuth sign-ins are not mirrored, and Orca does not run there. The media was pushed once over
-  the wire, ~3 hours for 10 GB; there is still no asset source but this workstation. See
+  MCP/OAuth sign-ins are not mirrored, and Orca does not run there. All 12 GB of client media was
+  pushed once over the wire (~4½ hours) and verified per worktree; there is still no asset source
+  but this workstation, so the next box costs those hours again. See
   [2026-09-19](./runbook/2026-09-19-namespace-devbox-mirror.md).
 
 - **Client images are not in git and not on the VPS — they live only in each worktree folder.**

@@ -21,10 +21,13 @@ progress at the time of writing) every client's media.
   worktree's own `.env` — per-client sizes differ, as they do here.
 - **Runtime installed**: Python 3.14.7 venv in the clone, Playwright 1.63.0, Chrome Headless Shell
   153. There is no system Chrome on the box.
-- **Media transfer running** (started 22:51, ~3 h at the observed ~1.1 MB/s), smallest client first,
-  streamed as `tar -cz | devbox ssh -- tar -xz` per worktree. Done so far: stone-med-spa (430 MB),
-  arvada, grand-mission, livewell, stone-dental, west-la-implants (267 MB), brandklout-website in
-  flight. Log: the background task's output file in this session's scratchpad.
+- **All media transferred — 12 GB on the box, every client verified file-for-file.** Streamed as
+  `tar -cz | devbox ssh -T -- tar -xz` per worktree, smallest client first, 22:51 → 00:18 for
+  eleven clients and 11:30 → 12:52 the next morning for the two that failed. Observed throughput
+  ~1.1 MB/s. The only files that did not cross: each worktree's `.claude/scheduled_tasks.lock`
+  (local Claude Code state, unwanted) and exactly one file in bk-stone,
+  `…/stone-surgical-arts/workflows/01-content-intake/.tmp/website-files/blog/wp-includes/SimplePie/library/SimplePie/Decode/HTML/Entities.php`
+  — a deep path in a scraped WordPress mirror, almost certainly Windows long-path, and irrelevant.
 
 ## Found
 
@@ -62,10 +65,17 @@ progress at the time of writing) every client's media.
 - **Upstream is ~1.1 MB/s.** A full re-push of 10 GB is ~3 hours. Do not plan on doing it per
   devbox.
 
+- **The pipe breaks on long transfers — always wrap it in a retry.** At 00:18 one drop killed
+  ifa-dentistry ten minutes in (`tar: -: Cannot write: Broken pipe`) and then mason-park instantly,
+  leaving 388/1525 and 1/6386 files. The box, the auth and the network were all fine minutes later,
+  and both clients went through on the first retry. `tar -x` overwrites, so a re-run is idempotent
+  and only costs the bytes again — re-send the whole client, do not try to resume.
+
 ## Next
 
-- **Let the transfer finish** and check the tail of the log for any `FAIL` line; re-run that one
-  client's `tar | ssh` if so.
+- ~~Let the transfer finish~~ — done, verified by diffing local and remote `ls-files --ignored`
+  lists per worktree, not by trusting the counts. (The counts alone mislead: a remote list gains the
+  generated `.env` and loses the local lock file, so it can match by accident.)
 - **MCP and OAuth are not set up on the box**: Asana, Instatic, Webflow and Drive all need their own
   sign-in there, and `drive.mjs` will want `drive.mjs auth` on its own 7-day clock.
 - **Orca does not run there** — it is a Windows app. The worktrees are plain `git worktree`, so
