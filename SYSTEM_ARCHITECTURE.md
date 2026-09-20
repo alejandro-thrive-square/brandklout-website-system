@@ -116,12 +116,58 @@ These are proposed contracts to implement, not files or commands already availab
    entry-point documentation as their behavior changes. Archive old working locations only after
    verified recovery and migration; retain an explicit mapping from old to new repositories.
 
+## Technology guidance, 2026-09-19
+
+These are recommendations requested by Alejandro, not accepted implementation decisions.
+The diagram does not constitute selection of a production storage or execution provider.
+
+- **Keep Git/GitHub for version control.** The current media gap is caused by this repository's
+  broad media exclusions plus an unfinished asset recovery workflow. Git can track binary files;
+  GitHub also supports Git LFS, which versions pointers to separately stored large files.
+  The blanket prohibition on media is our repository policy, not a universal GitHub limitation.
+  LFS is a valid alternative for selected project media when a Git-integrated experience is the
+  priority. It would require an explicit policy and setup change, including deployment support;
+  the current exclusions still apply until then.
+- **Use R2 with rclone for the existing broad asset collection.** R2 is the storage destination;
+  rclone is a transfer tool that supports it. They are complementary. Prefer the maintained
+  transfer tool over turning the trial's custom S3 implementation into a second transfer stack.
+  Add the project-specific manifest and verification layer, and retain recoverable asset versions.
+  `rclone copy` avoids destination deletions but can replace changed files; it is not by itself
+  a versioned backup. Do not present an upload of latest files as historical recovery.
+- **Tie code and media together.** Each saved project version should include a tracked manifest
+  referencing immutable media hashes or snapshots already uploaded and verified. A restore should
+  retrieve the chosen code version and matching media and report missing files as a failure.
+  This unified save/restore experience is proposed work, not an existing command. CMS data and
+  private credentials require their own recovery paths.
+- **Prefer the existing VPS for the first continuous automation host.** This recommendation
+  follows the diagram's cron, webhook, and unattended-work needs, not a benchmark of either host.
+  Verify available CPU/RAM, existing workloads, and service restart behavior before rollout.
+  Hostinger VPS is self-managed: patching, process supervision, access, and backup checks remain
+  operational responsibilities. Neither execution host should hold the only recoverable copy.
+- **Keep Namespace optional as a remote development environment.** Standard Devboxes retain
+  persistent storage when stopped, but idle stopping can interrupt running jobs. Official
+  documentation says CPU load alone does not prevent idleness; long tasks need a task marker
+  under `/.namespace/tasks` or another documented active condition. Namespace can run unattended
+  work with correct lifecycle handling; it is not inherently unsuitable. If the immediate need
+  is an interactive cloud workstation rather than continuous automation, it is a strong candidate.
+  Avoid adding a two-host dispatcher before a single-host workflow works.
+
+Primary sources checked on 2026-09-19:
+
+- [Cloudflare: rclone with R2](https://developers.cloudflare.com/r2/examples/rclone/)
+- [rclone copy behavior](https://rclone.org/commands/rclone_copy/)
+- [GitHub: large files](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)
+- [GitHub: Git LFS](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage)
+- [Namespace: lifecycle](https://namespace.so/docs/devbox/lifecycle)
+- [Namespace: long tasks](https://namespace.so/docs/guides/devbox/long-running-tasks)
+- [Hostinger: self-managed VPS](https://www.hostinger.com/support/8311982-what-is-managed-hosting-in-hostinger/)
+
 ## Decisions needed before the migration
 
 | Decision | Diagram leaves open | Proposed direction for review |
 | :--- | :--- | :--- |
 | Project repositories | One separate repository containing site folders, or one repository per client. | One per client supports independent history and transfer; a shared sites repository is a valid simpler alternative. Neither topology has been created. |
-| Remote execution | Hostinger or Namespace, or a defined division between them. | Select one scheduler owner and verify its persistence/restart behavior before enabling cron or webhooks. |
+| Remote execution | Hostinger or Namespace, or a defined division between them. | Recommend the existing VPS for continuous automation, with Namespace optional for development. Verify capacity and restart behavior; user selection remains open. |
 | Asset destination | Production account, bucket, and access boundaries. | An agency-owned private bucket with scoped access; retain the existing trial only as trial evidence. |
 | First migration | Which active client becomes the pilot. | Choose a client whose latest branch, media, and build are understood; the IFA asset trial alone does not make it a completed-site pilot. |
 

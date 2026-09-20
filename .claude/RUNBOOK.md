@@ -14,6 +14,13 @@ then only the runs you need. Do not read them all.
   and pilot client remain open. This is a documentation pass; no infrastructure or client
   migration has occurred. See [the run](./runbook/2026-09-19-system-architecture-proposal.md).
 
+- **Technology selection remains advice, not approval.** The follow-up recommendation is
+  GitHub for code/history, R2 with rclone for versioned media recovery, and the existing VPS
+  as the first continuous automation host. Namespace remains an optional cloud workstation;
+  its idle lifecycle needs explicit handling for unattended work. Git LFS is a valid media
+  alternative; the current gap is our exclusion policy plus unfinished backup, not a GitHub
+  inability to store images. See [the comparison](./runbook/2026-09-19-storage-and-runtime-guidance.md).
+
 - **There is a cloud mirror of this workstation: the `Brandklout` devbox on namespace.so.** The
   clone, all 15 sparse client worktrees, `~/.webzite/.env` and the Python/Playwright runtime are
   there, under `/workspaces/`. Reach it with `devbox ssh Brandklout` (the CLI is installed locally;
