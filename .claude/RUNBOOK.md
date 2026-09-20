@@ -7,6 +7,13 @@ then only the runs you need. Do not read them all.
 
 ## Standing
 
+- **The new system diagram now has a concrete architecture proposal:**
+  [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md). It separates system and client project
+  version control, defines R2 recovery and transferable project requirements, and sequences a
+  pilot before rollout. Project repository topology, remote scheduler host, production bucket,
+  and pilot client remain open. This is a documentation pass; no infrastructure or client
+  migration has occurred. See [the run](./runbook/2026-09-19-system-architecture-proposal.md).
+
 - **There is a cloud mirror of this workstation: the `Brandklout` devbox on namespace.so.** The
   clone, all 15 sparse client worktrees, `~/.webzite/.env` and the Python/Playwright runtime are
   there, under `/workspaces/`. Reach it with `devbox ssh Brandklout` (the CLI is installed locally;

@@ -2,6 +2,13 @@
 
 This document serves as the master blueprint for the Webzite Agentic Workflow. It defines the architecture, directory structure, and operational standards for all agentic processes.
 
+> **Architecture transition, 2026-09-19:** [SYSTEM_ARCHITECTURE.md](./SYSTEM_ARCHITECTURE.md)
+> records the proposed diagram-based Brandklout architecture and migration sequence. Repository
+> separation, R2 recovery, and remote automation are not implemented by that proposal. Historical
+> four-pillar descriptions below do not override the Brandklout-only scope in `AGENTS.md`.
+> Asset recovery claims must be checked against the [current runbook](./.claude/RUNBOOK.md):
+> the existing scripts still reference the pre-split VPS path, and R2 has only passed a trial.
+
 > [!IMPORTANT]
 > **Documentation Integrity Rule**: Whenever a change is made to the technical implementation of this system, the corresponding markdown files **MUST** be updated immediately to maintain synchronization between documentation and code.
 

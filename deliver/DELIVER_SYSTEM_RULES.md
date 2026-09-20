@@ -29,6 +29,12 @@ Deliver MCP usage is client-scoped by default. Before using any MCP in a client 
 Every Deliver client project that uses MCPs must include `deliver/[client-name]/docs/mcp-access.md`. The file must list active MCP servers, target resources, allowed operations, forbidden operations, confirmation requirements, runtime auth notes, and artifact paths. Publishing, deleting, overwriting, production deploys, DNS changes, access changes, billing, emailing, and production data edits require explicit confirmation.
 
 ## 3. Project Organization
+
+The [2026-09-19 architecture proposal](../SYSTEM_ARCHITECTURE.md) separates shared process
+version control from client outputs and defines asset recovery before migration. It does not
+change the current folder layout or migrate existing sites. Brandklout clients currently live
+under `deliver/brandklout/<client>/`; preserve their latest branch state and versioned workflow
+instances when implementing that proposal.
 Every signed client project must have its own dedicated subdirectory within `deliver/`:
 - `deliver/[client-name]/`: Root folder for the client.
 - `deliver/[client-name]/workflows/`: Project-specific automations.

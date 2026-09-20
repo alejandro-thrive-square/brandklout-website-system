@@ -1,11 +1,12 @@
 # Runbook index
 
-23 runs, newest first. Each line is one file in this folder.
+Runs listed newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-19 | Diagram-based system architecture proposal and migration sequence; implementation choices remain open | [`2026-09-19-system-architecture-proposal.md`](./2026-09-19-system-architecture-proposal.md) |
 | 2026-09-19 | 2026-09-19 — R2 trialled as the client-asset mirror: IFA pushed, pulled and hash-verified; nothing built yet — carries **gotchas** | [`2026-09-19-r2-asset-mirror-trial.md`](./2026-09-19-r2-asset-mirror-trial.md) |
 | 2026-09-19 | 2026-09-19 — the workstation mirrored onto a Namespace devbox; media is 10 GB, not 1.5 — carries **gotchas** | [`2026-09-19-namespace-devbox-mirror.md`](./2026-09-19-namespace-devbox-mirror.md) |
 | 2026-09-18 | 2026-09-18 — full backup before the system cleanup; client media found to live only in worktrees — carries **gotchas** | [`2026-09-18-full-backup-before-system-cleanup.md`](./2026-09-18-full-backup-before-system-cleanup.md) |
