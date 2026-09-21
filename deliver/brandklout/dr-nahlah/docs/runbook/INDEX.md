@@ -169,3 +169,4 @@ eats a context window.
  — carries **gotchas** + open questions | [`2026-08-07-current-pasteable-components-pivot-supersedes-th.md`](./2026-08-07-current-pasteable-components-pivot-supersedes-th.md) |
 | 2026-09-21 | Vimeo: 12 films already uploaded; all 14 descriptions written (9 from YouTube, 4 from auto-captions) — carries **gotchas** on team-token access, the 50/min limit and open privacy | [`2026-09-21-vimeo-descriptions-synced.md`](./2026-09-21-vimeo-descriptions-synced.md) |
 | 2026-09-21 | YouTube -> Vimeo: 108 of 124 nodes swapped across 15 pages, live; 8 Wellness Hour films stay on YouTube | [`2026-09-21-youtube-to-vimeo-site-swap.md`](./2026-09-21-youtube-to-vimeo-site-swap.md) |
+| 2026-09-21 | Home story film clipped after the Vimeo swap (doubled 16:9 box) — fixed; carries **gotchas** on aspect-box collisions | [`2026-09-21-home-story-film-clipped-fix.md`](./2026-09-21-home-story-film-clipped-fix.md) |
