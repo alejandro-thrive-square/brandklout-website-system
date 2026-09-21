@@ -29,7 +29,7 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
-**2026-09-21: BugHerd round two, #29-#40. Nine done, two open.** The map on every page pointed at the
+**2026-09-21: BugHerd round two, #29-#40. Nine done and published to staging, two open.** The map on every page pointed at the
 **adult** practice's Google listing (suite 104A); it is the pediatric one now (#29/#40). The hours were
 wrong in six places and are **Mon to Thu 9am-6pm, Fri to Sun closed** everywhere, schema included
 (#30/#39) - **confirm them with the practice before production, Google is told this too.** The copper
@@ -40,6 +40,7 @@ sticker on the homepage was painting body grey at **1.3:1** because `.ch p` outr
 reproduced, and needs the reviewer to re-check. Two things not in any note were fixed on the way:
 "(281) 578 to 7100" on 18 pages (the generators' "6-18 months" rule was eating the phone number, now
 guarded) and a block of raw WordPress schema naming the **adult** practice on five blog posts.
+Published and verified on staging 13:35-13:36 UTC, 215 pages, `draftMatchesPublished`; replies sent.
 See `runbook/2026-09-21-bugherd-round-two.md`.
 
 **2026-09-16: BugHerd's first 27 notes are all done.** The last three were resolved

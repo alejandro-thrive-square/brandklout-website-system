@@ -4,8 +4,9 @@ BugHerd project **540564 "Mason Park Kids"** picked up **eleven new notes** afte
 #33-#40; #32 was deleted). Nine are done, two stay open on purpose. Nothing was written to Asana,
 and `masonparkpediatricdental.com` (the WordPress mirror) was not touched.
 
-Everything below is on disk in `workflows/03-core-pages/home/`. **It is NOT published yet** - see
-Next.
+**Published to staging and verified, 2026-09-21 13:35-13:36 UTC.** 215 pages, `draftMatchesPublished`,
+0 conversion failures, site seq 45 then 46 for the stylesheet top-up. Replies sent; #34 and #38 are
+the only notes still open on the project.
 
 ### Done
 
@@ -60,17 +61,20 @@ Next.
 - `colour-leak.mjs`: `.ft-sticker` is white again and nothing else on the site loses its colour to a
   contextual rule.
 - `guard-phone-check.mjs`: 9/9 cases pass in both generators.
+- `verify-0921.mjs`: **every check passes against staging** - the pediatric ftid on `/`, `/contacts/`,
+  `/about-us/` and `/blog/`, `Mon to Thu 9am to 6pm` with no `8am to 5pm` anywhere, the top bar, the
+  footer's Tuesday, no `578 to 7100`, no stray schema text, the sticker computing `rgb(255,255,255)`,
+  the comfort card's sentence, the button fill parked at 56.3px, the hours table two columns and
+  544px wide, the address linking to `maps/dir/?api=1` with its arrow, and the rephrased lede.
 
 ### Next
 
-1. **Publish.** Nothing here is on staging yet. `publish-0916.sh` is the sequence
-   (`backup-site.mjs` first). `import-styles.mjs` must run - two of these fixes are CSS.
-2. **Confirm the hours with the practice before production.** They are now in the structured data
+1. **Confirm the hours with the practice before production.** They are now in the structured data
    Google reads. The reply to #39 asks.
-3. **#34** needs the GHL form URL; **#38** needs the reviewer to re-check after publish.
-4. `diff-all.mjs` and `audit-live.mjs` have not been run over all 215 pages since 09-09. This round
+2. **#34** needs the GHL form URL; **#38** needs the reviewer to re-check, now that it is published.
+3. `diff-all.mjs` and `audit-live.mjs` have not been run over all 215 pages since 09-09. This round
    changed text, links and two CSS declarations, no structure. Run them before production.
-5. The adult project (539151) still has its own notes; they belong to `bk-mason-park`.
+4. The adult project (539151) still has its own notes; they belong to `bk-mason-park`.
 
 ### Gotchas
 
@@ -97,6 +101,16 @@ Next.
 - **`colour-leak.mjs` over all 215 pages does not finish inside ten minutes.** The default run picks
   the smallest set of pages that between them carry every coloured class - full class coverage, a
   handful of loads. `--all` is the slow path.
+
+- **`body.innerText` loses the top bar after a scroll.** The journey layer slides the chrome away, so
+  a text search for the hours in the top line reports a fault that is not there on four pages. Read
+  `.topline_note`'s own node.
+- **The stylesheet is built by `to-instatic.mjs`, not read from `home/`.** A CSS edit made after the
+  publish run started shipped nothing: `import-styles.mjs` sent the copy `to-instatic` had written
+  forty minutes earlier and said `+0` rules without complaint. Re-export, then import, then publish.
+- **Prefer a CSS-only fix when the payload is already in flight.** Scoping the hours table to
+  `.ch-hours` instead of tagging its markup turned a second 50-minute trip through the conversion
+  chain into three minutes of `to-instatic` + `import-styles` + `publish`.
 
 ## Version Control
 
