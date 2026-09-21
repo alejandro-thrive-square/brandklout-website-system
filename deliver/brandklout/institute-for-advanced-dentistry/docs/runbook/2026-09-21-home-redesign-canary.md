@@ -33,7 +33,7 @@ SOP ([DESIGN-STANDARD.md](../../../docs/DESIGN-STANDARD.md) + `04-design`).
   29 MB. Documented in [GOOGLE_DRIVE.md](../../../docs/GOOGLE_DRIVE.md).
 - Four gotchas added to DESIGN-STANDARD.md (below).
 
-Commit: see `git log` for `feat(ifa): home page redesign canary`.
+Commit: `2c50e986` feat(ifa): home page redesign canary, local, and drive.mjs thumbs.
 
 ## Next
 
