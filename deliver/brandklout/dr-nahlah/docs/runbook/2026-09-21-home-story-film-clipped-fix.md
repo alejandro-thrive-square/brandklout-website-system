@@ -25,7 +25,7 @@ embed box against its `.wz-embed` host, never the host against the clipping ance
 
 ## Done
 
-Commit: `<SHA>`
+Commit: `11539404`
 
 - Dropped `padding-top:56.25%` from `.ch-proof .pf-embed`, letting the snippet's own wrapper
   be the aspect box. `.ch-proof .pf-embed iframe` stays `position:absolute; inset:0` and now
