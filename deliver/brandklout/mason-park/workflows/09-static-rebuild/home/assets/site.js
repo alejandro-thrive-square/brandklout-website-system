@@ -107,4 +107,70 @@
       Array.prototype.forEach.call(lazyFrames, load);
     }
   }
+
+  // --------------------------------------------------- the phone number
+  // BugHerd #79-#84, #97 and #100, 2026-09-18: "the button is enabled, but it
+  // doesn't redirect to any page", filed seven times against seven different
+  // phone links. They are all `<a href="tel:+12817698878">`, and .tmp/probe-tel.mjs
+  // shows nothing on the page cancels the click. On a phone that link opens
+  // the dialler. On a desktop it hands the tel: scheme to the operating
+  // system, and a Windows machine with nothing registered for it does
+  // nothing at all -- which from the reviewer's chair is a dead button.
+  //
+  // The link is NOT changed and the default is NOT prevented: a handler, if
+  // there is one, still gets its chance. What is added is feedback. On a
+  // device with a fine pointer the number is copied to the clipboard and a
+  // short line says so, so the click always does something a reader can see.
+  // On a touch device this is skipped: the dialler is the feedback.
+  var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (finePointer && finePointer.matches) {
+    var note, noteTimer;
+    var say = function (text, x, y) {
+      if (!note) {
+        note = document.createElement("div");
+        note.className = "phone-copied";
+        note.setAttribute("role", "status");
+        note.setAttribute("aria-live", "polite");
+        document.body.appendChild(note);
+      }
+      note.textContent = text;
+      note.style.left = Math.round(x) + "px";
+      note.style.top = Math.round(y) + "px";
+      // Two frames, so the element is laid out before the class that fades it in.
+      requestAnimationFrame(function () { requestAnimationFrame(function () { note.classList.add("is-on"); }); });
+      clearTimeout(noteTimer);
+      noteTimer = setTimeout(function () { note.classList.remove("is-on"); }, 2400);
+    };
+    var copy = function (text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return legacyCopy(text); });
+      }
+      return Promise.resolve(legacyCopy(text));
+    };
+    var legacyCopy = function (text) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:-100px;opacity:0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      } catch (e) { return false; }
+    };
+    document.addEventListener("click", function (e) {
+      var el = e.target;
+      if (!el || !el.closest) return;
+      var a = el.closest('a[href^="tel:"]');
+      if (!a) return;
+      var shown = (a.textContent || "").replace(/^Call\s+/i, "").replace(/\s+now$/i, "").trim();
+      var raw = a.getAttribute("href").slice(4);
+      var box = a.getBoundingClientRect();
+      copy(shown || raw).then(function (ok) {
+        say(ok ? "Copied " + (shown || raw) : (shown || raw), box.left + box.width / 2, box.bottom);
+      });
+    }, false);
+  }
 })();

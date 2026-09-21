@@ -112,8 +112,8 @@ const ORG = {
   "url": "https://www.masonparkdental.com/", "telephone": PHONE,
   "address": { "@type": "PostalAddress", "streetAddress": "21830 Kingsland Blvd #104A", "addressLocality": "Katy", "addressRegion": "Texas", "postalCode": "77450", "addressCountry": "US" },
   "openingHoursSpecification": [
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Wednesday"], "opens": "09:00", "closes": "18:00" },
-    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Thursday"], "opens": "08:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday"], "opens": "09:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Thursday"], "opens": "09:00", "closes": "17:00" },
   ],
   "sameAs": ["https://www.facebook.com/p/Mason-Park-Dental-100083179359693/"],
 };
@@ -153,7 +153,7 @@ ${extraLd}
 <a class="visually-hidden" href="#main">Skip to content</a>
 <div class="topbar_component">
   <span><a href="${MAPS}" target="_blank" rel="noopener">21830 Kingsland Blvd #104A, Katy TX</a></span>
-  <span class="topbar_note">Mon &amp; Wed 9-6 &middot; Tue &amp; Thu 8-5 &middot; Fri&ndash;Sun closed</span>
+  <span class="topbar_note">Mon&ndash;Wed 9-6 &middot; Thu 9-5 &middot; Fri&ndash;Sun closed</span>
   <span><a href="${TEL}">${PHONE}</a></span>
 </div>`;
 }
@@ -201,7 +201,7 @@ function footer({ bookHref, bookLabel }) {
       <div>
         <h3 class="footer_heading">Hours</h3>
         <ul class="hours_list">
-    <li class="hours_row"><span>Monday</span><strong>9am - 6pm</strong></li><li class="hours_row"><span>Tuesday</span><strong>8am - 5pm</strong></li><li class="hours_row"><span>Wednesday</span><strong>9am - 6pm</strong></li><li class="hours_row"><span>Thursday</span><strong>8am - 5pm</strong></li><li class="hours_row"><span>Friday</span><strong>Closed</strong></li><li class="hours_row"><span>Saturday</span><strong>Closed</strong></li><li class="hours_row"><span>Sunday</span><strong>Closed</strong></li>
+    <li class="hours_row"><span>Monday</span><strong>9am - 6pm</strong></li><li class="hours_row"><span>Tuesday</span><strong>9am - 6pm</strong></li><li class="hours_row"><span>Wednesday</span><strong>9am - 6pm</strong></li><li class="hours_row"><span>Thursday</span><strong>9am - 5pm</strong></li><li class="hours_row"><span>Friday</span><strong>Closed</strong></li><li class="hours_row"><span>Saturday</span><strong>Closed</strong></li><li class="hours_row"><span>Sunday</span><strong>Closed</strong></li>
   </ul>
       </div>
     </div>
@@ -328,7 +328,7 @@ function invitationChapter(n, c, { headline, lede, primaryHref, primaryLabel, of
         <a class="button is-ghost-light is-lg" href="${TEL}">${PHONE}</a>
       </div>
       <dl class="iv-facts">
-        <div><dt>Address</dt><dd><a href="${MAPS}" target="_blank" rel="noopener">21830 Kingsland Blvd #104A<br>Katy, TX 77450</a></dd></div><div><dt>Hours</dt><dd>Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b></dd></div><div><dt>The offer</dt><dd>${offer}</dd></div>
+        <div><dt>Address</dt><dd><a href="${MAPS}" target="_blank" rel="noopener">21830 Kingsland Blvd #104A<br>Katy, TX 77450</a></dd></div><div><dt>Hours</dt><dd>Mon to Wed <b>9am to 6pm</b><br>Thu <b>9am to 5pm</b><br>Fri to Sun <b>Closed</b></dd></div><div><dt>The offer</dt><dd>${offer}</dd></div>
       </dl>
     </div>
     <div class="iv-aside">
@@ -980,9 +980,9 @@ ${questionsChapter(n++, c, p.faqHeadline, c.faq)}
       </div>
       <ul class="cp-callbox_hours">
         <li><span>Monday</span><b>9am to 6pm</b></li>
-        <li><span>Tuesday</span><b>8am to 5pm</b></li>
+        <li><span>Tuesday</span><b>9am to 6pm</b></li>
         <li><span>Wednesday</span><b>9am to 6pm</b></li>
-        <li><span>Thursday</span><b>8am to 5pm</b></li>
+        <li><span>Thursday</span><b>9am to 5pm</b></li>
         <li class="is-shut"><span>Friday to Sunday</span><b>Closed</b></li>
       </ul>
     </div>

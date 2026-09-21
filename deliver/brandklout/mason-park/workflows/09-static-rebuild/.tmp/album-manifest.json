@@ -1,35 +1,4 @@
 {
-  "dr-sung-standing": {
-    "frame": "external",
-    "alt": "Dr. William Sung, DMD",
-    "source": "grandmissiondentistry.com, GrandMissionDentistry(15of28).webp 3931x5241, Dr. Sung beside Dr. Nguyen, cropped to him (1400px wide, the 1536 candidate is a 10% upscale); fetched 2026-09-10 for BugHerd #16 (no crossed arms)",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 546,
-        "file": "mp-dr-sung-standing-410x546.jpg",
-        "bytes": 26041
-      },
-      {
-        "w": 768,
-        "h": 1023,
-        "file": "mp-dr-sung-standing-768x1023.jpg",
-        "bytes": 66596
-      },
-      {
-        "w": 1024,
-        "h": 1364,
-        "file": "mp-dr-sung-standing-1024x1364.jpg",
-        "bytes": 107070
-      },
-      {
-        "w": 1536,
-        "h": 2046,
-        "file": "mp-dr-sung-standing-1536x2046.jpg",
-        "bytes": 188368
-      }
-    ]
-  },
   "team-front-desk": {
     "frame": 64,
     "alt": "The Mason Park Dental team gathered at the front desk",
@@ -2610,6 +2579,261 @@
         "h": 750,
         "file": "mp-team-tiffany-cun-750x750.jpg",
         "bytes": 83027
+      }
+    ]
+  },
+  "sofa-tablet-pair": {
+    "frame": "external",
+    "alt": "Two patients going through their treatment plan on a tablet in the waiting room",
+    "source": "client photograph, PXL_20260715_150618801_MP.jpg 2607x1958, attached to BugHerd #89 on 2026-09-18; full frame",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-sofa-tablet-pair-410x308.jpg",
+        "bytes": 26663
+      },
+      {
+        "w": 768,
+        "h": 577,
+        "file": "mp-sofa-tablet-pair-768x577.jpg",
+        "bytes": 74040
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-sofa-tablet-pair-1024x769.jpg",
+        "bytes": 122944
+      },
+      {
+        "w": 1536,
+        "h": 1154,
+        "file": "mp-sofa-tablet-pair-1536x1154.jpg",
+        "bytes": 255624
+      }
+    ]
+  },
+  "stock-bad-breath": {
+    "frame": "external",
+    "alt": "A man checking his own breath against his hand",
+    "source": "client stock image, attached to BugHerd #101 on 2026-09-19 (2972x1673); cropped 4:3 from the left so the raised hand stays in frame",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 307,
+        "file": "mp-stock-bad-breath-410x307.jpg",
+        "bytes": 27521
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-stock-bad-breath-768x576.jpg",
+        "bytes": 85206
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "file": "mp-stock-bad-breath-1024x768.jpg",
+        "bytes": 143110
+      },
+      {
+        "w": 1536,
+        "h": 1152,
+        "file": "mp-stock-bad-breath-1536x1152.jpg",
+        "bytes": 302648
+      }
+    ]
+  },
+  "stock-bleeding-gums": {
+    "frame": "external",
+    "alt": "Inflamed lower gums, the lip held back",
+    "source": "client stock image, attached to BugHerd #102 on 2026-09-19 (998x664); cropped 4:3 on the mouth. The source is small: 1024 is a 1.16x upscale and there is no 1536",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-stock-bleeding-gums-410x308.jpg",
+        "bytes": 18510
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-stock-bleeding-gums-768x576.jpg",
+        "bytes": 50658
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "file": "mp-stock-bleeding-gums-1024x768.jpg",
+        "bytes": 77923
+      }
+    ]
+  },
+  "stock-toothache": {
+    "frame": "external",
+    "alt": "A woman holding her jaw, the sore side marked",
+    "source": "client stock image, attached to BugHerd #104 on 2026-09-19 (1003x667); cropped 4:3. The source is small: 1024 is a 1.15x upscale and there is no 1536",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-stock-toothache-410x308.jpg",
+        "bytes": 19042
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-stock-toothache-768x576.jpg",
+        "bytes": 46217
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "file": "mp-stock-toothache-1024x768.jpg",
+        "bytes": 69814
+      }
+    ]
+  },
+  "stock-gingivitis": {
+    "frame": "external",
+    "alt": "Inflamed gum margins behind the lower teeth",
+    "source": "client stock image, attached to BugHerd #105 on 2026-09-19 (2506x1661); cropped 16:10 for the .ch-why card frame",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 256,
+        "file": "mp-stock-gingivitis-410x256.jpg",
+        "bytes": 15643
+      },
+      {
+        "w": 768,
+        "h": 480,
+        "file": "mp-stock-gingivitis-768x480.jpg",
+        "bytes": 42388
+      },
+      {
+        "w": 1024,
+        "h": 640,
+        "file": "mp-stock-gingivitis-1024x640.jpg",
+        "bytes": 66959
+      },
+      {
+        "w": 1536,
+        "h": 960,
+        "file": "mp-stock-gingivitis-1536x960.jpg",
+        "bytes": 125885
+      }
+    ]
+  },
+  "desk-call-6": {
+    "frame": "external",
+    "alt": "A member of the front desk booking a visit by phone",
+    "source": "client photograph, attached to BugHerd #107 on 2026-09-19 (1244x1660); cropped 4:3 for the path card's band",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-desk-call-6-410x308.jpg",
+        "bytes": 33243
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-desk-call-6-768x576.jpg",
+        "bytes": 99144
+      },
+      {
+        "w": 1024,
+        "h": 768,
+        "file": "mp-desk-call-6-1024x768.jpg",
+        "bytes": 161106
+      }
+    ]
+  },
+  "clinical-pair-senior": {
+    "frame": "external",
+    "alt": "Two of the clinical team with an older patient in the chair",
+    "source": "client photograph, attached to BugHerd #108 on 2026-09-19 (1459x1929); cropped 16:10 across the two clinicians and the chair",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 256,
+        "file": "mp-clinical-pair-senior-410x256.jpg",
+        "bytes": 27181
+      },
+      {
+        "w": 768,
+        "h": 480,
+        "file": "mp-clinical-pair-senior-768x480.jpg",
+        "bytes": 75830
+      },
+      {
+        "w": 1024,
+        "h": 640,
+        "file": "mp-clinical-pair-senior-1024x640.jpg",
+        "bytes": 123831
+      }
+    ]
+  },
+  "schedule-screen-2": {
+    "frame": "external",
+    "alt": "The day's schedule on the front desk screen",
+    "source": "client photograph, attached to BugHerd #109 on 2026-09-19 (2596x1955); cropped 16:10 for the .ch-why card frame",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 256,
+        "file": "mp-schedule-screen-2-410x256.jpg",
+        "bytes": 24806
+      },
+      {
+        "w": 768,
+        "h": 480,
+        "file": "mp-schedule-screen-2-768x480.jpg",
+        "bytes": 69203
+      },
+      {
+        "w": 1024,
+        "h": 640,
+        "file": "mp-schedule-screen-2-1024x640.jpg",
+        "bytes": 114338
+      },
+      {
+        "w": 1536,
+        "h": 960,
+        "file": "mp-schedule-screen-2-1536x960.jpg",
+        "bytes": 236792
+      }
+    ]
+  },
+  "dr-sung-standing-2": {
+    "frame": "external",
+    "alt": "Dr. William Sung, DMD",
+    "source": "grandmissiondentistry.com, GrandMissionDentistry(15of28).webp 3931x5241, Dr. Sung beside Dr. Nguyen. Re-cut 2026-09-21 for BugHerd #85/#88/#92/#106 (\"the photo is not centered\"): box 930,700,1280,1705 puts his face on the vertical centre line and keeps Dr. Nguyen out of the right edge, which the old 1400px box could not do. The -2 in the key is deliberate: upload-media.mjs skips anything already in the library BY NAME, so a re-cut under the old name would never have reached Instatic.",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 546,
+        "file": "mp-dr-sung-standing-2-410x546.jpg",
+        "bytes": 24457
+      },
+      {
+        "w": 768,
+        "h": 1023,
+        "file": "mp-dr-sung-standing-2-768x1023.jpg",
+        "bytes": 62470
+      },
+      {
+        "w": 1024,
+        "h": 1364,
+        "file": "mp-dr-sung-standing-2-1024x1364.jpg",
+        "bytes": 98224
+      },
+      {
+        "w": 1536,
+        "h": 2046,
+        "file": "mp-dr-sung-standing-2-1536x2046.jpg",
+        "bytes": 172810
       }
     ]
   }

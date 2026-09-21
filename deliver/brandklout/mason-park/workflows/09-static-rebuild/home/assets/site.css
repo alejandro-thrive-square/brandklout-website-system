@@ -4443,7 +4443,12 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
   color: var(--fg);
 }
 .cp-figure b small { font-size: .45em; letter-spacing: 0; color: var(--accent); margin-left: .1em; }
-.cp-figure span {
+/* The DIRECT child only. The numeral inside <b> is a <span> too (the counter
+   binds to [data-count]), and an unscoped `.cp-figure span` set the digits at
+   label size while the unit beside them stayed at display size -- "100 hrs"
+   with the 100 the small half. BugHerd #87, 2026-09-18, and the same defect
+   the README warns about for .cp-score_num b. */
+.cp-figure > span {
   font-family: var(--font-ui);
   font-size: var(--f-label);
   font-weight: 700;
@@ -6338,3 +6343,114 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
   .tm-group_head { position: sticky; top: calc(var(--jr-nav-h, 5.5rem) + 1.5rem); }
   .tm-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* ===========================================================================
+   BUGHERD, 2026-09-21 — the agency's fourth round (#78-#109), filed from
+   Windows 10 / Chrome at 2560x1305. Export and screenshots in
+   .tmp/bugherd/tasks-2026-09-21.json; the number is in the comment. The page
+   edits are .tmp/bugherd/apply-2026-09-21.mjs, the photographs
+   .tmp/bugherd/import-2026-09-21.sh.
+   ======================================================================== */
+
+/* #93  "The titles are not all aligned on the same line." The seven service
+   group names wrapped at every width. Locally the row needed 1819px of 1829
+   at 2560 and just fitted; on the published page the same names measure
+   1831px, because Instatic installs static font instances of Newsreader and
+   they set a fraction wider than the variable font does here. Two pixels is
+   not a margin. From the desktop breakpoint up the names are set smaller and
+   the column gap is fluid, which leaves 13-20% of the row empty at every
+   width the reviewer or the house uses. Below 1280 the row is genuinely too
+   narrow for seven display-size names and still wraps, which is correct.
+   probe-tabs.mjs is the measurement, and it reads the LIVE page by URL. */
+@media (min-width: 900px) {
+  .el-tabs_row { gap: .4rem clamp(.9rem, 1.1vw, 2rem); }
+}
+@media (min-width: 1280px) {
+  .el-tabs_tab { font-size: calc(1.6rem * var(--t-lg)); white-space: nowrap; }
+}
+@media (min-width: 1600px) {
+  .el-tabs_tab { font-size: calc(1.8rem * var(--t-lg)); }
+}
+
+/* #90  "When hovering over the photos, it doesn't show where they were
+   taken." It did: elevate.js writes the hovered tile's data-caption into
+   .el-sheet_line, which sits under the whole grid, several hundred pixels
+   from the pointer. A caption that far from the thing it describes is a
+   caption nobody sees. It now also appears on the tile itself, from the same
+   attribute, in CSS alone -- no second source of truth, and nothing for the
+   Instatic export to drop. The line under the grid stays: it is what a
+   keyboard reader and a touch reader get. */
+.el-sheet_tile { position: relative; }
+.el-sheet_tile::after {
+  content: attr(data-caption);
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: .75rem .9rem;
+  background: linear-gradient(180deg, rgba(30, 36, 38, 0), rgba(30, 36, 38, .86));
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(.5rem);
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+  pointer-events: none;
+}
+.el-sheet_tile:hover::after,
+.el-sheet_tile:focus-visible::after { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .el-sheet_tile::after { transition: none; transform: none; }
+}
+
+/* #86 and #91  "The photo is not centered." Both are the same 4:3 frame of
+   two of the team reading a chart, and in both slots the crop is taller or
+   squarer than the file, so it cuts sideways. The pair stands right of the
+   middle of the frame, so a 50% centre clips the second person at the edge.
+   Keyed on the file, which survives the import's /uploads/<id>- rename. */
+.el-pane img[src*="mp-team-reading-chart-"] { object-position: 62% 42%; }
+.el-sheet_tile img[src*="mp-team-plaques-2-"] { object-position: 58% 45%; }
+
+/* #85 #88 #92 #106  The same note against Dr. Sung's portrait in four places.
+   This one was not a crop rule: the FILE had him off centre, and his frame
+   and its slot are both 3:4, so object-fit had nothing to move. The picture
+   is re-cut from the Grand Mission source (album-manifest.json records the
+   box and why it is the box it is) and every slot picks the new file up. No
+   rule here -- that is the point. */
+
+/* #103  Every card of the preventative "Is this you" grid now carries a
+   photograph. Two of the six are the practice's own frames rather than the
+   agency's attachments, and they are portraits going into 4:3 boxes. */
+.ch-qualify .svc-card_media img[src*="mp-hygienist-loupes-"] { object-position: 62% 30%; }
+.ch-qualify .svc-card_media img[src*="mp-checkin-counter-"] { object-position: 50% 32%; }
+.ch-qualify .svc-card_media img[src*="mp-dentist-assistant-"] { object-position: 50% 22%; }
+
+/* #79 #80 #81 #82 #84 #97 #100  "The button is enabled, but it doesn't
+   redirect to any page", seven times, for seven different phone numbers that
+   are all the same tel: link. probe-tel.mjs proves nothing cancels the click:
+   a desktop with no handler registered for the tel: scheme simply does
+   nothing, and the reviewer cannot tell that apart from a dead button. The
+   links are unchanged -- a phone number has to stay a tel: link for the
+   readers who are on a phone -- and site.js now copies the number on a fine
+   pointer and says so here. */
+.phone-copied {
+  position: fixed;
+  z-index: 9999;
+  transform: translate(-50%, .55rem);
+  padding: .55rem .85rem;
+  background: rgba(30, 36, 38, .95);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .28s var(--ease);
+}
+.phone-copied.is-on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .phone-copied { transition: none; } }

@@ -5,6 +5,30 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## BugHerd round four - 2026-09-21
+
+**The board is down to two notes, and both are waiting on the agency**
+([`runbook/2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md`](./runbook/2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md)).
+Thirty-two notes (#78-#109) filed from **Windows 10 / Chrome at 2560x1305** are answered, verified
+live and closed. The substantial ones: the **opening hours are Mon-Wed 9-6 and Thu 9-5** and are
+corrected in all six places they appear, the JSON-LD Google reads included; the **services finder's
+ten rows open their treatment pages** instead of scrolling to the foot of the page; **Dr. Sung's
+portrait is re-cut** so he is in the middle of his own frame (four notes, one photograph); the
+**seven service group names hold one line** from 1280 up; the **contact sheet writes its caption on
+the tile** you are hovering; and **nine photographs** the agency attached are placed, with every
+card of the preventative "Is this you" grid now carrying one.
+
+**Seven of the notes were not bugs and the answer matters:** "the button is enabled, but it doesn't
+redirect" is a `tel:` link on a desktop with nothing registered for the `tel:` scheme. Nothing on
+the page cancels the click (`probe-tel.mjs` proves it with a driven click). The links are unchanged
+and `site.js` now copies the number and says so on a fine pointer, so the click always does
+something visible.
+
+**Still open, both on the agency:** Mason Park's Cherry link (#66) and one look at the logo in
+Safari 26 (#3).
+
+**Staging only. Production is unchanged and was not read.**
+
 ## Production's live ad pages - 2026-09-18
 
 **The six Webflow ad pages are on production at the slugs the ads point at, and they match Webflow
@@ -18,7 +42,7 @@ the gate, and it must be re-run whenever the main site's stylesheet changes. Liv
 pages go through `patch-live.mjs`, never a re-import. **Open:** the Webflow site carries
 unpublished Designer edits newer than its last publish; production mirrors what is published.
 
-## Where the build stands - 2026-09-18
+## Earlier - 2026-09-18, where the build stands
 
 **The six paid-traffic routes are rebuilt in Livewell's information flow and live on staging under
 `/ads-landing-pages/`**

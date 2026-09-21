@@ -85,6 +85,12 @@
 | `.tmp/bugherd/logo-rows.mjs` / `logo-pad.mjs` | How close the logo artwork runs to its file's edges, and the re-export with margin inside the file (#3). |
 | `.tmp/bugherd/apply-<date>.mjs` | The round's page edits, idempotent. Team portraits and other client images go in through `frame.mjs` first (`frame: "external"`). |
 | `.tmp/bugherd/reply-<date>.mjs` | The round's replies on the board: one comment per task, `done` only for notes verified live. Dry run by default, `--send` posts. |
+| `.tmp/bugherd/verify-<date>.mjs` | **The round, asserted rather than photographed.** Takes a base URL, so the same file runs against `serve.mjs` before the push and against staging after it. A screenshot cannot tell you that a link points somewhere, that a click was bound, that a phone number answered, or that a row of tab names has room to spare. It found the sixth shape of the opening hours (the Contact page's ledger) by reading the page's rendered text for `8am` instead of trusting a list of known strings. |
+| `.tmp/bugherd/sweep-live-<date>.mjs` | **Every published page rendered**, scrolled through so the lazy images fetch: status, broken images, horizontal overflow, page and console errors. `verify-live.mjs` visits two pages; this one takes the URL list the backup produces. Two CSP refusals are staging-only noise and are filtered: BugHerd's own data: font and Cloudflare's beacon. |
+| `.tmp/bugherd/push-<date>.sh` / `push-blog-<date>.sh` | The round's push, in two halves. **The second half is not optional:** `/blog` and the `blog-article` template are 2 of the 63 live pages and are NOT in `instatic/pages/`, so `import-pages.mjs` never touches them and any change to the shared chrome leaves them stale. |
+| `.tmp/probe-tel.mjs` | Every `a[href^="tel:"]` on a page, and whether a real click on it is cancelled by anything. For "the button does nothing", which on a desktop is usually the operating system and not the page. |
+| `.tmp/probe-tabs.mjs` | How wide the service-group tab row wants to be, and how many lines it takes, at eight widths. Reads a URL as well as the local file — **measure the published page**, its static font instances set 3% wider than the variable font does locally, which is the whole margin. |
+| `.tmp/bugherd/probe-404s.mjs` | Every request a published page made that came back 400 or worse. |
 | `.tmp/album-sheet/render-cands.mjs` | Candidate album frames at 900 px with number and orientation, for choosing replacements by eye. |
 | `.tmp/album-sheet/` | The client's Google Photos album as a numbered contact sheet (`render-sheet.mjs`), so "the photo with X" can be found by eye. Numbers match `album-urls.txt`. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
@@ -213,6 +219,30 @@ Things that cost a round, and will cost the next batch one too:
    artefact of full-page capture under `isMobile`, not a duplicate section;
    `probe-heights.mjs` reports the real height.
 6. **Five facts on a centred strip orphan the fifth.** Four, or six.
+7. **A descendant selector inside a component reaches the numeral too.** The
+   same defect as 1, from the other side: `.cp-figure span` was written for the
+   small caption under each figure and also caught the `<span data-count>`
+   *inside* the `<b>`, so "100 hrs" published with the 100 at caption size and
+   the hrs at heading size, on the live site, for eleven days. It is `>` now.
+   If a rule is meant for one child, say so.
+8. **A re-cut picture needs a NEW FILENAME.** `upload-media.mjs` lists the live
+   library and skips anything already there by basename — that is what makes it
+   resumable. Re-crop a photograph under its old name and the upload is a
+   silent no-op: the local build is right, the gate that reads the local build
+   is green, and staging keeps serving the old crop. Dr. Sung's portrait went
+   out that way once in this round before the live check caught it, and the
+   file is `mp-dr-sung-standing-2-…` for that reason.
+9. **The blog's two pages are not in `instatic/pages/`.** `/blog` and the
+   `blog-article` template are 2 of the 63 live pages and live in
+   `instatic/pages-blog-cms/`, which `import-pages.mjs` never reads. Any change
+   to the shared chrome — hours, footer, topbar, nav — lands on 61 pages and
+   leaves those two behind, and the 161 articles render through the stale one.
+   `push-blog-<date>.sh` is the second half of every chrome push.
+10. **Measure type on the PUBLISHED page, not the local one.** Instatic installs
+   static instances of Newsreader, and they set about 3% wider than the variable
+   font does from `file://`. The service tabs fitted one line locally with 10px
+   to spare and wrapped live by 2px. Any "does it fit" question has to be asked
+   of the live page, and answered with a real margin, not with a pixel.
 
 ### The named, and why the team page is built this way
 
