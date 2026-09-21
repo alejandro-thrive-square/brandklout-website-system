@@ -109,11 +109,6 @@ for (const file of pages) {
     const seen = await page.evaluate((i) => {
       const el = document.querySelector(`[data-leak-probe="${i}"]`);
       const cs = getComputedStyle(el);
-      // Walk up for the ground this text actually sits on. If anything on the
-      // way paints a picture, or the element is fixed over whatever scrolls
-      // under it, there is no single colour to measure: the masthead is
-      // transparent over the hero photograph, and pretending its ground is the
-      // page's white made three links read 1.00:1 on every page.
       // What is actually BEHIND this text? Ask the document, not the ancestor
       // chain. The transparent sticky masthead sits over the hero PHOTOGRAPH,
       // which is an <img> -- no ancestor carries a url(), so walking up for a
@@ -138,7 +133,12 @@ for (const file of pages) {
         bgEl = bgEl.parentElement;
         bg = bgEl ? getComputedStyle(bgEl).backgroundColor : 'rgb(255, 255, 255)';
       }
-      return { color: cs.color, bg, overImage, text: (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 60), size: cs.fontSize };
+      // `color` on an element with no words is not text contrast -- the
+      // hamburger's bars are drawn from it, and a UI control answers to 3:1
+      // against its neighbours, not 4.5:1 against a ground. Reported, never
+      // failed.
+      const text = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      return { color: cs.color, bg, overImage: overImage || !text, text: text.slice(0, 60), size: cs.fontSize };
     }, cand.i);
     const cr = seen.overImage ? NaN : ratio(rgb(seen.color), rgb(seen.bg));
     const key = `${cand.cls}|${winner}`;
@@ -155,7 +155,7 @@ for (const r of rows) {
   const flag = unknown ? 'over ' : r.contrast < 4.5 ? (r.contrast < 3 ? 'FAIL ' : 'warn ') : 'ok   ';
   console.log(`${flag}.${r.cls}  ->  won by "${r.winner}"`);
   console.log(unknown
-    ? `      color ${r.color} over a picture or a fixed layer: no single ground, not measured`
+    ? `      color ${r.color} ${r.text ? 'over a picture or a floating layer: no single ground' : 'on an element with no words (an icon or a rule)'}, not measured`
     : `      color ${r.color} on ${r.bg} = ${r.contrast.toFixed(2)}:1 @ ${r.size}`);
   console.log(`      "${r.text}"`);
   console.log(`      ${r.pages.length} page(s), e.g. ${[...new Set(r.pages)].slice(0, 3).join(', ')}\n`);
@@ -163,5 +163,5 @@ for (const r of rows) {
 const fails = rows.filter((r) => r.contrast < 4.5);
 const unmeasured = rows.filter((r) => Number.isNaN(r.contrast)).length;
 console.log(fails.length ? `${fails.length} below 4.5:1` : 'nothing below 4.5:1');
-if (unmeasured) console.log(`${unmeasured} not measured (text over a picture or a fixed layer) - judge those by eye`);
+if (unmeasured) console.log(`${unmeasured} not measured (over a picture or a floating layer, or no words) - judge those by eye`);
 process.exitCode = fails.length ? 1 : 0;
