@@ -84,8 +84,8 @@ Copied from `deliver/process/` at baseline `21ae9682`. Route:
 | `00-client-delivery-initialization` | **Done** | This doc + `mcp-access.md`; folder scaffolded; Asana brief pulled |
 | `01-content-intake` | **In progress** | Maps to Asana "Study the site" + "Extract All Assets" (due 2026-09-03, already due). **Scrape done 2026-09-04**: `workflows/01-content-intake/.tmp/current-site-scrape/` holds a working local mirror (`site/index.html`), 56 desktop screenshots, the full 237-file media library, 3 of 10 Vimeo clips, and per-page text extracts; read `current-site-inventory.md` there first. The Yoast sitemap serves the 404 page, so the crawl came from the WP REST API. Still open: 7 domain-locked Vimeo clips (4 are the practice's own testimonials), placing the assets in Brandklout's Share Drive, and the questionnaire/summary side of intake |
 | `02-wireframe` | Pending | Asana "Comparable sites" (3 minimum) and "Content Gap analysis" (SpyFu) sit here |
-| `03-graphic-resources` | Pending | Client's own photography first; the practice documents smile transformations |
-| `04-design` | Pending | Home page first, due 2026-09-21. Elevated build from day one per [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md): photograph in every chapter, GSAP scroll moves, varied grounds, a sentence per idea |
+| `03-graphic-resources` | **In progress** | The client's Drive holds a 196-frame photoshoot, four patient films, b-roll, the logo files and a per-patient smile gallery. 2000 px copies and contact sheets are in `workflows/03-graphic-resources/.tmp/drive/` (gitignored; rebuild with the commands at the top of `04-design/.tmp/prototypes/build-media.py`) |
+| `04-design` | **In progress** | **Home page canary built locally 2026-09-21** (`workflows/04-design/.tmp/prototypes/home/`, run `node workflows/04-design/.tmp/prototypes/serve.mjs`): eight-chapter GSAP journey, gates 48/48, awaiting Alejandro's review before it goes to Brandklout. Direction and the authority ruling (logo colour guide: gold + greys, **no navy**) are in `.tmp/style-direction.md` and `.tmp/reference-inventory.md`. Home page first, due 2026-09-21. Elevated build from day one per [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md): photograph in every chapter, GSAP scroll moves, varied grounds, a sentence per idea |
 | `05-design-revisions` | Pending | Client review via Brandklout |
 | `06-content-seo` | Pending | Current site targets "Peoria / Phoenix comprehensive dentistry"; the new positioning is specialty prosthodontics — a deliberate keyword shift, plan it |
 | `07-webflow-build` | Pending | Target site unconfirmed — see open questions |
@@ -108,7 +108,7 @@ Copied from `deliver/process/` at baseline `21ae9682`. Route:
    concept to be replaced? Either way the shared grant must be re-authorized with it ticked.
 2. **Page count and site map.** "Complete Client Website" has no scope. The Asana project says
    "Start the work on the site map" — the site map is ours to propose in `02`.
-3. **Style Guide** — the blocking Asana task. Who owns it, and does a brand exist beyond the logo?
+3. **Style Guide** — the blocking Asana task. Who owns it? **Partly answered 2026-09-21:** the Drive's logo folder holds a colour guide (gold `#C3972B` Pantone 1245 C, greys `#727376` / `#BDBFC1` / `#373435`, Century Gothic). Nothing beyond that exists, and it contains no navy.
 4. **Implant count** — 2,500+ or 2,800+. **Smile-transformation patient count** — the `[X+]`
    placeholder.
 5. **Pricing and financing** — two done Asana tasks hold this; where is the content?

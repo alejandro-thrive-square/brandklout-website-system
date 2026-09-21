@@ -212,6 +212,17 @@ vendor originals; the *execution* is ours.
 - **Scrubbed scale must never land exactly on `1`** — causes edge flicker.
 - A fixed header's `z-index` can trap its own close button under an open drawer.
 - Fixed side rails need a real layout gutter plus a scrim, and inversion over light sections.
+- **A decorative fixed rail is `pointer-events: none`.** On IFA it overlaid the right gutter and
+  swallowed every click meant for the review arrows beneath it. No screenshot shows that; only a
+  written `page.click` does.
+- **`clip-path` does not contain overflow.** A film scaled 1.14 inside a clipped window still widens
+  the layout: on a phone the layout viewport grew from 390 to 418 px, the whole page rendered 7 %
+  small and the fixed call bar fell off the bottom. Give the window `overflow: hidden` as well.
+- **Measure mobile overflow against the device width, not `innerWidth`.** When a page overflows on a
+  phone, `innerWidth` grows with it, so `scrollWidth - innerWidth` reads 0 on a broken page.
+- **A pinned scene has one viewport to fit in.** Check it at the reviewer's 1512×735 and at
+  1366×768, not only 1440×900; step the display scale down under `max-height: 820px` rather than
+  let the last line clip.
 
 ## Brand Authority and Canary Gate
 

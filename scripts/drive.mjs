@@ -16,6 +16,8 @@
  *   node scripts/drive.mjs ls <folder id|url>      list a folder's children
  *   node scripts/drive.mjs get <file id|url> [dir]     download one file
  *   node scripts/drive.mjs pull <folder id|url> <dir>  download a folder tree
+ *   node scripts/drive.mjs thumbs <folder id|url> <dir> [--size 1600]
+ *                                                  web-size JPEG of every image in one folder
  *
  * Credentials (process.env, then ~/.webzite/.env [shared], then the nearest .env):
  *   GOOGLEDRIVEOAUTHID   client ID
@@ -344,6 +346,32 @@ async function pull (folderId, dir) {
   }
 }
 
+// Photoshoot originals run 10-28 MB each. Drive already renders every image at
+// any width through thumbnailLink, so this saves a web-size JPEG per file
+// (one level, no recursion) — enough to choose from and to build with.
+async function thumbs (folderId, dir, size) {
+  fs.mkdirSync(dir, { recursive: true })
+  const j = await api('/files', {
+    q: `'${folderId}' in parents and trashed = false and mimeType contains 'image/'`,
+    fields: 'files(id, name, thumbnailLink)',
+    includeItemsFromAllDrives: 'true',
+    corpora: 'allDrives',
+    orderBy: 'name',
+    pageSize: '1000',
+  })
+  for (const f of j.files) {
+    const out = path.join(dir, safeName(f.name).replace(/\.[^.]+$/, '') + '.jpg')
+    if (fs.existsSync(out)) { console.log(`have  ${out}`); continue }
+    if (!f.thumbnailLink) { console.log(`skip  ${f.name} (no thumbnail yet)`); continue }
+    const url = f.thumbnailLink.replace(/=s\d+$/, `=s${size}`)
+    let r = await fetch(url)
+    if (!r.ok) r = await fetch(url, { headers: { authorization: `Bearer ${await accessToken()}` } })
+    if (!r.ok) { console.log(`fail  ${f.name} (${r.status})`); continue }
+    await pipeline(Readable.fromWeb(r.body), fs.createWriteStream(out))
+    console.log(`saved ${out}`)
+  }
+}
+
 const [cmd, ...args] = process.argv.slice(2)
 const commands = {
   auth: () => auth(),
@@ -361,6 +389,12 @@ const commands = {
     if (f.mimeType === FOLDER) throw new Error(`${f.name} is a folder; use pull.`)
     return download(f, args[1] || '.')
   },
+  thumbs: async () => {
+    if (!args[1]) throw new Error('thumbs needs a destination directory.')
+    const at = args.indexOf('--size')
+    const f = await fileMeta(idOf(args[0]))
+    return thumbs(f.id, args[1], at > 0 ? Number(args[at + 1]) : 1600)
+  },
   pull: () => {
     if (!args[1]) throw new Error('pull needs a destination directory.')
     const id = idOf(args[0])
@@ -369,7 +403,7 @@ const commands = {
 }
 
 if (!commands[cmd]) {
-  console.log('Usage: node scripts/drive.mjs <auth|whoami|roots|search|ls|get|pull> ...  (see the header of this file)')
+  console.log('Usage: node scripts/drive.mjs <auth|whoami|roots|search|ls|get|pull|thumbs> ...  (see the header of this file)')
   process.exit(cmd ? 1 : 0)
 }
 commands[cmd]().catch(err => { console.error(err.message); process.exit(1) })

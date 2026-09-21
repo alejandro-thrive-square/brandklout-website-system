@@ -4,6 +4,14 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Where things are
 
+- **REDESIGN, home page canary, local only since 2026-09-21**: `workflows/04-design/.tmp/prototypes/home/`.
+  Run `node workflows/04-design/.tmp/prototypes/serve.mjs` (from this client folder) and open
+  `http://localhost:4173/home/`; `?motion=off` for the reduced-motion page. Eight-chapter GSAP
+  journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 48/48, `walk.mjs` for frames).
+  **It is awaiting Alejandro's review and has not been shown to Brandklout or pushed to staging.**
+  Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
+  gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:
+  [runbook/2026-09-21-home-redesign-canary.md](runbook/2026-09-21-home-redesign-canary.md).
 - **STAGING since 2026-09-18**: `https://staging.ifadentistry.com` — a **separate Instatic
   instance** (same Railway project, environment `staging`, its own volume), seeded from production
   and byte-for-byte equivalent at 59/59 pages. **The redesign happens here, not on production**:
@@ -37,6 +45,10 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Open
 
+- **Home redesign, before the client sees it:** 2,500+ or 2,800+ implants (the brief says both);
+  whether the complimentary exam + CBCT + smile preview is still the offer; consent for the
+  chapter 03 before/after on a home page; a WebKit pass at 1512×735. The Asana Style Guide task is
+  still open.
 - **Refer a Patient** (`patient-referrals`, Fluent #3) still posts to WordPress `admin-ajax.php`, which no longer exists at this domain. It needs its own GHL form, or a decision to drop it.
 - **Two GTM containers are on every page.** `GTM-K8N3JK3Q` and Site Kit's `GT-NBJ3HCBV` /
   `G-STF00595` come from the WordPress clone; `GTM-5XR78DN7` is ours. Decide which owns
