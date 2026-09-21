@@ -66,6 +66,28 @@ Two different causes, one ours and one GoHighLevel's.
    `node workflows/21-instatic-upload/check-ghl-form.mjs <formId> > file 2>&1` (exit 1 when on).
    A visitor who already has the saved key keeps seeing the prompt until they choose "Start over".
 
+## BugHerd on staging (same day)
+
+- **BugHerd project `542527` "Institute for Advanced Dentistry"**, created through the API with
+  `devurl` = the staging host. Members came with it: Sang Huynh, BrandKlout Success, Gauge Hill,
+  Jessica, Alejandro. Nobody needs inviting.
+- **The sidebar is on staging**, published. It is not a tag in the page: Instatic bakes a CSP into
+  every page, so it went in through `brandklout.embed-origins` — `siteScripts` gained
+  `https://www.bugherd.com/sidebarv2.js?apikey=<project key>` (Sienna kept), and script / connect /
+  frame origins for BugHerd and its Pusher socket were added. Written read-merge-write, with the
+  untouched keys asserted unchanged. Tool: `workflows/21-instatic-upload/home/bugherd.mjs`
+  (`status | create | install <key> | uninstall`), staging-locked like the rest of `home/`.
+- **Checked:** the script tag is in the published page, no CSP violation in the console, the loader
+  answers 302 to `sidebar.bugherd.com/embed.js` (200, 19 KB), GSAP and all 8 chapters still run.
+- **Headless Chrome on this workstation gets `204` for the loader.** That is NordVPN Threat
+  Protection filtering it inside Chrome; curl with the staging referer gets the real script. If the
+  sidebar does not appear in a browser here, pause Threat Protection before suspecting the site.
+- **`node home/bugherd.mjs uninstall` + publish before staging is ever promoted.** The setting lives in
+  the plugin record, and the plugin record is one of the things a clone copies.
+- Feedback arrives on the BugHerd board; pull it per
+  the usual convention: list the tasks, then fetch each task by id with its
+  screenshot, and reproduce in WebKit at 1512x735 before calling anything unreproducible.
+
 ## Backups taken before the delete — and how to go back
 
 | What | Where |

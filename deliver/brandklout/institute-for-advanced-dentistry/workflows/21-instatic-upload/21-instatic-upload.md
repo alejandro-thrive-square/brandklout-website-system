@@ -139,6 +139,9 @@ MSYS_NO_PATHCONV=1 node ../../../../process/21-instatic-staging-clone/verify-sta
   pre-entrance state is CSS (`html:not(.is-ready)`, with a timed fallback) and `home.js` lifts it.
 - `base.svg` keeps class and `data-*` verbatim; the form slot becomes the GoHighLevel Embed and the
   gate checks its frame fills the card (`.ask__embed` reserves 36rem so nothing below it shifts).
+- **BugHerd**: `node home/bugherd.mjs status | create | install <projectKey> | uninstall`, then
+  `publish-home.mjs` (a CSP change only reaches pages at publish). It writes the plugin settings
+  read-merge-write so Sienna and the embed policy survive.
 - Back up before a push that deletes: `VACUUM INTO` on the volume, an API snapshot, a git tag. The
   2026-09-21 run file lists where they are and the quicker way back (re-seed from production).
 

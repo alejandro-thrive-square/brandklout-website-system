@@ -17,6 +17,9 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
   [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
+- **BugHerd is on staging since 2026-09-21**: project `542527`, sidebar loaded through the
+  `brandklout.embed-origins` plugin settings (`workflows/21-instatic-upload/home/bugherd.mjs`).
+  Uninstall it before any promotion.
 - **STAGING since 2026-09-18**: `https://staging.ifadentistry.com` — a **separate Instatic
   instance** (same Railway project, environment `staging`, its own volume), seeded from production
   and byte-for-byte equivalent at 59/59 pages. **The redesign happens here, not on production**:
