@@ -167,3 +167,4 @@ eats a context window.
  | [`2026-08-07-current-webflow-build-loop-dynamic-loop-started.md`](./2026-08-07-current-webflow-build-loop-dynamic-loop-started.md) |
 | 2026-08-07 | CURRENT — Pasteable-components pivot (2026-08-07, supersedes the headless builds)
  — carries **gotchas** + open questions | [`2026-08-07-current-pasteable-components-pivot-supersedes-th.md`](./2026-08-07-current-pasteable-components-pivot-supersedes-th.md) |
+| 2026-09-21 | Vimeo: 12 films already uploaded; all 14 descriptions written (9 from YouTube, 4 from auto-captions) — carries **gotchas** on team-token access, the 50/min limit and open privacy | [`2026-09-21-vimeo-descriptions-synced.md`](./2026-09-21-vimeo-descriptions-synced.md) |
