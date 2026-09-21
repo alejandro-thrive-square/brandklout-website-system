@@ -523,6 +523,7 @@ None of these blocks review. All of them need somebody other than an engineer.
 | 8 | **Office hours.** ANSWERED 2026-09-21, BugHerd #30/#39: Mon to Thu 9 to 6, Fri to Sun closed. The old footer's Mon/Wed 9-6, Tue/Thu 8-5 split was wrong and is gone from all six places it appeared. | The schema, the top line, the footer, the Contact table, the Call card and every invitation say so. Confirm before production: Google is told this too. |
 | 9 | **What the thank-you page follows.** It assumes a request form whose reply is a phone call. | If the form confirms by email, the first chapter changes. |
 | 13 | **A GoHighLevel form for this practice.** BugHerd #34 asks for an enquiry form on `/contacts/`; the site has none and Instatic has no form backend, so the submission needs a destination. Brandklout's is GHL and no form is on record here. `.tmp/add-inquiry.mjs` is the whole change, waiting on the URL. | Until it lands there is no written route in; call, email and the booking page are the only ones. |
+| 14 | **`--sage-deep` on the paper ground is 4.31:1.** `colour-leak.mjs` measures the savings-plan table's head row (`.mb-vs_a`, 12.5px) below the 4.5:1 minimum. The token is the brand guide's sage, which #4 asked us to honour, so darkening it is the practice's call and not ours. | One table head on one page today, but the token is the site's accent: if it moves, it moves everywhere. |
 
 ## Version Control
 
