@@ -1,11 +1,12 @@
 # Runbook index
 
-87 runs, newest first. Each line is one file in this folder.
+88 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-21 | 2026-09-21d — the five-year warranty claim withheld from all 18 ads landing pages pending the practice's approval (reversible in two commands); where the claim came from — carries **gotchas** | [`2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md`](./2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md) |
 | 2026-09-21 | 2026-09-21c — veneers-filtered Google review wall on both consultation pages (#41/#42), /five-year-warranty built and linked eleven times (#47), and the site-wide `.rv-wall{display:none}` that was hiding every review card — carries **gotchas** | [`2026-09-21c-veneer-review-wall-and-the-warranty-terms-page.md`](./2026-09-21c-veneer-review-wall-and-the-warranty-terms-page.md) |
 | 2026-09-21 | 2026-09-21b — the August BugHerd backlog closed (ten pins fixed in August, never written back), #29 and #30 built and LIVE; board now 42 done / 5 blocked — carries **gotchas** | [`2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md`](./2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md) |
 | 2026-09-21 | BugHerd #32–#48 — Brandklout's review of the eighteen ads landing pages applied and live (2026-09-21) | [`2026-09-21-bugherd-32-48-ads-review-applied.md`](./2026-09-21-bugherd-32-48-ads-review-applied.md) |

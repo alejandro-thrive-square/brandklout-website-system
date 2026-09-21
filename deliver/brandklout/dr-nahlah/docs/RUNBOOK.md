@@ -22,6 +22,12 @@ then only the runs you need. Do not read them all.
    it"**, because the practice has published none and an invented limitation on a warranty
    takes away something a patient was promised. **Still open with the practice:** have
    Dr. Nahlah's team read it and send any exclusions or corrections. See the 2026-09-21c run.
+   **The claim is WITHHELD from all 18 ads landing pages** until they do (2026-09-21d, client
+   instruction). Put it back with `toggle-ads-warranty-claim.mjs --restore --apply` then
+   `push-warranty-links.mjs --apply`, and restore the four ads page sources from git.
+   Provenance, since it gets asked: the claim comes from the OLD WordPress site
+   (/about, /dental-implants, /all-on-4, captured 2026-07-30, trading as Dental Group of
+   Tysons). The current terms of service say nothing about a warranty at all.
 2. **In LeadConnector**: point each of the six forms at its own thank-you page,
    `/ads-landing-pages/<office>-<campaign>-thank-you`, and remove the Continue step and the
    "Preferred Method of Contact" field (BugHerd #32). Neither is reachable from this repository.
