@@ -8,7 +8,7 @@ is answered below with the source.
 The nine older main-site pins (#13, #14, #24–#31) were **not** touched — they predate this batch
 and several wait on the client. They are still open on the board.
 
-## Done (`<SHA>`)
+## Done (`f1196277`)
 
 | Pin | Asked | Done |
 | :-- | :-- | :-- |
