@@ -410,3 +410,11 @@
 .lp-rail .lp-rail-book{color:var(--black);
   background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
 @media(max-width:859px){ .lp-rail{display:grid;grid-template-columns:1fr 1.3fr} }
+
+/* A topic-filtered review wall on a landing page. `.rv-wall` goes to three
+   columns at 1080 because the home page shows six cards; a veneers page shows
+   the four reviews that actually name veneers, and 3+1 leaves one card hanging
+   on its own row. Two columns keeps it a block. The cards themselves are
+   `.rv-card` from 37-ch-proof.css, unchanged, and read correctly on the dark
+   ground because `[data-theme="dark"]` redefines --card, --fg and --line. */
+@media(min-width:1080px){ .lp-rv-wall{grid-template-columns:repeat(2,1fr)} }

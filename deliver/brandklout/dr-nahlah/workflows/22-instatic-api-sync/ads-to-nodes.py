@@ -322,6 +322,8 @@ def main():
     ap.add_argument('--out', required=True)
     ap.add_argument('--only', default='')
     ap.add_argument('--fragment', default='', help='convert one HTML fragment file instead of the ads pages')
+    ap.add_argument('--pages', default='', help='convert these built pages by local slug instead of the ads set; '
+                                                'the conversion is identical, only the discovery differs')
     a = ap.parse_args()
     media = Media(a.map)
     if a.fragment:
@@ -330,7 +332,17 @@ def main():
         print(f"fragment -> {a.out}: {len(frag['nodes'])} nodes")
         if media.missing: print('missing media:', sorted(media.missing)); sys.exit(1)
         return
-    slugs = sorted(f[:-5] for f in os.listdir(SITE) if f.startswith('ads-') and f.endswith('.html'))
+    if a.pages:
+        # An editorial page converts through exactly the same code: `instatic_slug`
+        # leaves a non-`ads-` slug alone and `route()` already maps `x.html` to
+        # `/x`. Only the discovery here was ads-only. Added 2026-09-21 for
+        # /five-year-warranty (BugHerd #47).
+        slugs = [x.strip() for x in a.pages.split(',') if x.strip()]
+        for s in slugs:
+            if not os.path.exists(os.path.join(SITE, s + '.html')):
+                raise SystemExit(f'{s}.html is not in {SITE} — build it first')
+    else:
+        slugs = sorted(f[:-5] for f in os.listdir(SITE) if f.startswith('ads-') and f.endswith('.html'))
     if a.only: slugs = [s for s in slugs if s in set(a.only.split(','))]
     seo = json.load(open(SEO, encoding='utf-8'))
     os.makedirs(a.out, exist_ok=True)

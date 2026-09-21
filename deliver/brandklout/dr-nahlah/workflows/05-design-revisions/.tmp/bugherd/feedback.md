@@ -620,7 +620,7 @@ This doesn't make sense remove please
 
 ## #41 — Dental Implants video needs to be replaced with Venners Video
 
-- **Status**: todo · **Priority**: critical · **Tags**: —
+- **Status**: done · **Priority**: critical · **Tags**: —
 - **Page**: `/ads-landing-pages/alexandria-veneers-consultation`  (https://staging.drnahlah.com)
 - **From**: gauge@thrivesquare.com · 2026-09-18T22:14:25.901Z
 - **Viewport**: 1728 x 962 px · Chrome 152.0.0.0
@@ -637,10 +637,24 @@ The practice has fourteen films. Six are its own patients, filmed at the practic
 
 So this needs one filmed veneer patient from the practice. It has been on the outstanding-assets list since 18 September. Same blocker as #42.
 - *unknown* (2026-09-21T16:20:54.255Z): Not addressed by the Vimeo swap, so leaving this open. The film on this page is now a Vimeo player rather than a YouTube one, but it is still Yolanda’s implant story — the host changed, the content did not. There is still no veneer patient film anywhere in the library; the only cosmetic clips feature a generic stock presenter rather than Dr. Nahlah, and we will not put one of those on a paid page. This needs one filmed veneer patient from the practice.
+- *unknown* (2026-09-21T19:54:11.988Z): Done and live. The films section is gone from both veneers consultation pages, and what replaced it is better than what was asked for.
+
+Rather than general practice testimonials, the section now carries the practice’s own five-star Google reviews FROM VENEER PATIENTS — four of them, each one a review whose own text names veneer treatment:
+
+• "I had veneers done 8 months ago and results have exceeded expectations coming for a perfectionist. Teeth designed in house with their team to with a natural appearance." — Benjamin Sturms
+• "He has completely improved my smile with 8 top veneers well beyond whatever I expected. My teeth look amazing and are a perfect match with my lower teeth!" — Angela Kelley
+• "Had some porcelain veneers done and very pleased with the results. It’s all been thorough and meticulous." — Daniel Bethea Jr
+• "Today, I have a beautiful smile because of him. My veneers are perfect!" — Patricia Araujo
+
+How they were found, since it is worth knowing: the review widget’s page only serves eight reviews, and none of those eight mention veneers — which is why a veneers filter looks impossible at first. The widget’s own data API serves all 319. We read the full set and filtered it, so the wall is a genuine treatment filter and not a hand-picked selection.
+
+They are rendered as native cards rather than as the vendor’s embedded widget, for two reasons that are not going to change: the platform’s security policy only permits YouTube iframes, so a third-party review widget cannot render on the published site at all; and inside an iframe those reviews count for the vendor’s domain rather than for drnahlah.com. The cards are refreshed by re-running the generator.
+
+No review is edited or trimmed — each is printed whole, with its star rating, its date and its author, as Google has it.
 
 ## #42 — Needs to be a veneers Video
 
-- **Status**: todo · **Priority**: critical · **Tags**: —
+- **Status**: done · **Priority**: critical · **Tags**: —
 - **Page**: `/ads-landing-pages/tysons-veneers-consultation`  (https://staging.drnahlah.com)
 - **From**: gauge@thrivesquare.com · 2026-09-18T22:16:22.850Z
 - **Viewport**: 1728 x 962 px · Chrome 152.0.0.0
@@ -653,6 +667,22 @@ Needs to be a veneers Video
 
 - *unknown* (2026-09-21T15:28:59.176Z): Same blocker as #41: there is no veneer patient film. The only cosmetic clips in the library feature a generic stock presenter rather than Dr. Nahlah, and we will not put one on a paid page. This needs one filmed veneer patient from the practice.
 - *unknown* (2026-09-21T16:20:54.443Z): Same as #41 — still open, and for the same reason. The embed is Vimeo now, but the film is still an implant story on a veneers page. It needs a filmed veneer patient; nothing in the current library can stand in.
+- *unknown* (2026-09-21T19:54:12.522Z): Done and live. The films section is gone from both veneers consultation pages, and what replaced it is better than what was asked for.
+
+Rather than general practice testimonials, the section now carries the practice’s own five-star Google reviews FROM VENEER PATIENTS — four of them, each one a review whose own text names veneer treatment:
+
+• "I had veneers done 8 months ago and results have exceeded expectations coming for a perfectionist. Teeth designed in house with their team to with a natural appearance." — Benjamin Sturms
+• "He has completely improved my smile with 8 top veneers well beyond whatever I expected. My teeth look amazing and are a perfect match with my lower teeth!" — Angela Kelley
+• "Had some porcelain veneers done and very pleased with the results. It’s all been thorough and meticulous." — Daniel Bethea Jr
+• "Today, I have a beautiful smile because of him. My veneers are perfect!" — Patricia Araujo
+
+How they were found, since it is worth knowing: the review widget’s page only serves eight reviews, and none of those eight mention veneers — which is why a veneers filter looks impossible at first. The widget’s own data API serves all 319. We read the full set and filtered it, so the wall is a genuine treatment filter and not a hand-picked selection.
+
+They are rendered as native cards rather than as the vendor’s embedded widget, for two reasons that are not going to change: the platform’s security policy only permits YouTube iframes, so a third-party review widget cannot render on the published site at all; and inside an iframe those reviews count for the vendor’s domain rather than for drnahlah.com. The cards are refreshed by re-running the generator.
+
+No review is edited or trimmed — each is printed whole, with its star rating, its date and its author, as Google has it.
+
+Same section as #41; both offices’ veneers consultation pages carry it.
 
 ## #43 — This section needs to be removed across all landing pages, it will get flagged b
 
@@ -715,7 +745,7 @@ On both dental implant consultation pages see screenshot
 
 ## #47 — Across Dental Implants page we need this to be linked to a five year warranty te
 
-- **Status**: todo · **Priority**: critical · **Tags**: —
+- **Status**: done · **Priority**: critical · **Tags**: —
 - **Page**: `/ads-landing-pages/alexandria-dental-implants`  (https://staging.drnahlah.com)
 - **From**: gauge@thrivesquare.com · 2026-09-18T22:45:18.304Z
 - **Viewport**: 1728 x 962 px · Chrome 152.0.0.0
@@ -731,6 +761,22 @@ Across Dental Implants page we need this to be linked to a five year warranty te
 There is no warranty terms sheet anywhere on the site to link to, and we are not going to write one out of marketing copy. What we have done instead: every mention of the five-year warranty on the paid pages now carries the one condition the All-on-4 pages already publish — "conditional on the Precare cleanings every six months". That is six mentions across the implants and All-on-4 pages, the hero stat included.
 
 To finish this properly we need the actual warranty document from the practice: what is covered, what voids it, and who it applies to. Once we have that it is one terms page plus six links. Fixed and live on www.drnahlah.com (and on staging). Commit f1196277; details in the 2026-09-21 runbook.
+- *unknown* (2026-09-21T19:54:12.919Z): Done and live: www.drnahlah.com/five-year-warranty, linked from every claim that needed one.
+
+ELEVEN LINKS across nine pages: both dental implants pages (twice each, the body claim and the FAQ answer), both All-on-4 pages, all four thank-you pages, and /about. On the paid pages the link opens in a new tab deliberately, so a visitor who is part-way through the form does not lose it.
+
+WHAT THE PAGE SAYS, and where every line of it came from. We did not write a warranty. Every commitment on that page is one the practice already publishes somewhere on this site, and nothing is stated more confidently than its source states it:
+
+• "Any part that fails inside five years is replaced free of charge" — /about
+• "conditional on Precare: general cleanings every six months" — /all-on-4
+• "5-Year warranty on implant procedures" — /dental-implants
+• "Free second opinions" — /our-team
+
+The page sets out what is covered (implant work, cosmetic work, full arches), what "replaced free of charge" means, the one condition, and how to claim — which is to call the office, because there is no form and no claims department.
+
+WHAT IT DELIBERATELY DOES NOT SAY, and this is the bit for Dr. Nahlah’s team. There is no exclusion list, no transferability clause and no "what voids it", because the practice has not published any and a warranty is the one document where inventing a limitation is worse than omitting one — an invented exclusion takes away something a patient was promised. Where the page cannot answer, it says to call the office.
+
+So please do put it in front of the practice. If they want exclusions, a transfer rule, or anything else added or corrected, send the wording and it is a ten-minute change. As it stands the page commits them to exactly what the site already committed them to, and nothing more.
 
 ## #48 — Adjust verbiage in screenshots for all six veneers page away from guaranteed res
 

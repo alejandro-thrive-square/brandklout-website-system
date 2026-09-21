@@ -235,6 +235,10 @@ const PAGES = [
   // -- Dental Implants (the rest of that group)
   { slug: "implant-supported-dentures", journey: 0, navKey: "IMPLANTS" },
   { slug: "dental-implant-faq", journey: 0, navKey: "IMPLANTS" },
+  // The five-year warranty terms sheet (BugHerd #47, 2026-09-21). It exists
+  // because the site claimed the warranty in twelve places and linked to
+  // nothing. Under IMPLANTS because that is where the claim is made most.
+  { slug: "five-year-warranty", journey: 0, navKey: "IMPLANTS" },
   // -- What To Expect / For Doctors / legal
   { slug: "patient-center", journey: 0, navKey: "ABOUT" },
   { slug: "financing", journey: 0, navKey: "ABOUT" },

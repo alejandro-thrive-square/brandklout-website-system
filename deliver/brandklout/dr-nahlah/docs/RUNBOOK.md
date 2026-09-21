@@ -9,23 +9,29 @@ then only the runs you need. Do not read them all.
 | | |
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
-| **Published site** | 37 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. |
+| **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
 
 ## What is next
 
-1. **A warranty terms sheet from the practice** (BugHerd #47). Six paid-page mentions of the
-   five-year warranty now state its Precare condition, but none links to terms, because no terms
-   sheet exists anywhere on the site. Do not write one from the marketing copy.
+1. ~~**A warranty terms sheet from the practice** (BugHerd #47).~~ **DONE 2026-09-21.**
+   `/five-year-warranty` is live and linked from eleven places. Every commitment on it traces
+   to something the practice already published (/about, /all-on-4, /dental-implants,
+   /our-team); it carries **no exclusion list, no transferability clause and no "what voids
+   it"**, because the practice has published none and an invented limitation on a warranty
+   takes away something a patient was promised. **Still open with the practice:** have
+   Dr. Nahlah's team read it and send any exclusions or corrections. See the 2026-09-21c run.
 2. **In LeadConnector**: point each of the six forms at its own thank-you page,
    `/ads-landing-pages/<office>-<campaign>-thank-you`, and remove the Continue step and the
    "Preferred Method of Contact" field (BugHerd #32). Neither is reachable from this repository.
 3. Google Ads conversions, one per thank-you URL (six), or GTM page-view triggers on
    `/ads-landing-pages/` + `-thank-you`.
-4. **One filmed veneer patient**, and a photograph of the Alexandria office, from the client.
-   Until the film exists, BugHerd #41 and #42 cannot be answered: the only cosmetic clips in the
-   library are generic-presenter ones and must not go on a paid page.
+4. ~~**One filmed veneer patient**… BugHerd #41 and #42.~~ **RESOLVED 2026-09-21** without one:
+   the client chose to drop the films from the two veneers consultation pages, and they now carry
+   the four five-star Google reviews that actually name veneer treatment. **A photograph of the
+   Alexandria office is still wanted from the client.** A filmed veneer patient remains the
+   better answer whenever one exists. See the 2026-09-21c run.
 5. ~~**Decide whether the film library moves to Vimeo** (BugHerd #34).~~ **DONE 2026-09-21.**
    Every practice-owned film on the site now plays from the Brandklout Vimeo library: 108 nodes
    across 15 pages, `player.vimeo.com` added to the Embed Origins `frameOrigins`, and
@@ -42,8 +48,8 @@ then only the runs you need. Do not read them all.
    so the domain-locked embedding the migration was *for* has not been applied.
    See the 2026-09-21 Vimeo run.
 6. ~~**Nine older BugHerd pins are still open**.~~ **DONE 2026-09-21.** The board is
-   **42 done / 5 open**, and the five are all blocked on somebody other than us (#32 and #47
-   above, #39 awaiting a wording call, #41/#42 awaiting a filmed veneer patient). Ten August
+   **45 done / 2 open**: #32 (a GHL form setting) and #39 (a wording call for the client).
+   Nothing on the board is waiting on us. Ten August
    pins were already fixed and live and had simply never been written back to the board; #29
    (title-case labels on /dental-conditions) and #30 (both street addresses in every footer)
    had never been picked up and were built and published that day. See the 2026-09-21b run.

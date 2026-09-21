@@ -3246,10 +3246,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:14:25.901Z",
-      "updated_at": "2026-09-21T16:20:54.257Z",
+      "updated_at": "2026-09-21T19:54:12.336Z",
       "local_task_id": 41,
       "priority_id": 1,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Dental Implants video needs to be replaced with Venners Video",
       "description_html": null,
@@ -3258,7 +3258,7 @@
       "requester_email": "gauge@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/2qavyusmtptzzxdxiwq9ea/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/NNGrZZiEx0Qv3PmXLFE2FA",
@@ -3289,7 +3289,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -3326,6 +3326,13 @@
           "text": "Not addressed by the Vimeo swap, so leaving this open. The film on this page is now a Vimeo player rather than a YouTube one, but it is still Yolanda’s implant story — the host changed, the content did not. There is still no veneer patient film anywhere in the library; the only cosmetic clips feature a generic stock presenter rather than Dr. Nahlah, and we will not put one of those on a paid page. This needs one filmed veneer patient from the practice.",
           "user_id": null,
           "is_private": false
+        },
+        {
+          "id": 18182803,
+          "created_at": "2026-09-21T19:54:11.988Z",
+          "text": "Done and live. The films section is gone from both veneers consultation pages, and what replaced it is better than what was asked for.\n\nRather than general practice testimonials, the section now carries the practice’s own five-star Google reviews FROM VENEER PATIENTS — four of them, each one a review whose own text names veneer treatment:\n\n• \"I had veneers done 8 months ago and results have exceeded expectations coming for a perfectionist. Teeth designed in house with their team to with a natural appearance.\" — Benjamin Sturms\n• \"He has completely improved my smile with 8 top veneers well beyond whatever I expected. My teeth look amazing and are a perfect match with my lower teeth!\" — Angela Kelley\n• \"Had some porcelain veneers done and very pleased with the results. It’s all been thorough and meticulous.\" — Daniel Bethea Jr\n• \"Today, I have a beautiful smile because of him. My veneers are perfect!\" — Patricia Araujo\n\nHow they were found, since it is worth knowing: the review widget’s page only serves eight reviews, and none of those eight mention veneers — which is why a veneers filter looks impossible at first. The widget’s own data API serves all 319. We read the full set and filtered it, so the wall is a genuine treatment filter and not a hand-picked selection.\n\nThey are rendered as native cards rather than as the vendor’s embedded widget, for two reasons that are not going to change: the platform’s security policy only permits YouTube iframes, so a third-party review widget cannot render on the published site at all; and inside an iframe those reviews count for the vendor’s domain rather than for drnahlah.com. The cards are refreshed by re-running the generator.\n\nNo review is edited or trimmed — each is printed whole, with its star rating, its date and its author, as Google has it.",
+          "user_id": null,
+          "is_private": false
         }
       ],
       "local_media": []
@@ -3335,10 +3342,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:16:22.850Z",
-      "updated_at": "2026-09-21T16:20:54.445Z",
+      "updated_at": "2026-09-21T19:54:12.722Z",
       "local_task_id": 42,
       "priority_id": 1,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Needs to be a veneers Video",
       "description_html": null,
@@ -3347,7 +3354,7 @@
       "requester_email": "gauge@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/cfcftyssli0kqz8kd8acdq/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/Xh9VUX3EhC4ruU7AMAKXPg",
@@ -3378,7 +3385,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -3413,6 +3420,13 @@
           "id": 18180046,
           "created_at": "2026-09-21T16:20:54.443Z",
           "text": "Same as #41 — still open, and for the same reason. The embed is Vimeo now, but the film is still an implant story on a veneers page. It needs a filmed veneer patient; nothing in the current library can stand in.",
+          "user_id": null,
+          "is_private": false
+        },
+        {
+          "id": 18182804,
+          "created_at": "2026-09-21T19:54:12.522Z",
+          "text": "Done and live. The films section is gone from both veneers consultation pages, and what replaced it is better than what was asked for.\n\nRather than general practice testimonials, the section now carries the practice’s own five-star Google reviews FROM VENEER PATIENTS — four of them, each one a review whose own text names veneer treatment:\n\n• \"I had veneers done 8 months ago and results have exceeded expectations coming for a perfectionist. Teeth designed in house with their team to with a natural appearance.\" — Benjamin Sturms\n• \"He has completely improved my smile with 8 top veneers well beyond whatever I expected. My teeth look amazing and are a perfect match with my lower teeth!\" — Angela Kelley\n• \"Had some porcelain veneers done and very pleased with the results. It’s all been thorough and meticulous.\" — Daniel Bethea Jr\n• \"Today, I have a beautiful smile because of him. My veneers are perfect!\" — Patricia Araujo\n\nHow they were found, since it is worth knowing: the review widget’s page only serves eight reviews, and none of those eight mention veneers — which is why a veneers filter looks impossible at first. The widget’s own data API serves all 319. We read the full set and filtered it, so the wall is a genuine treatment filter and not a hand-picked selection.\n\nThey are rendered as native cards rather than as the vendor’s embedded widget, for two reasons that are not going to change: the platform’s security policy only permits YouTube iframes, so a third-party review widget cannot render on the published site at all; and inside an iframe those reviews count for the vendor’s domain rather than for drnahlah.com. The cards are refreshed by re-running the generator.\n\nNo review is edited or trimmed — each is printed whole, with its star rating, its date and its author, as Google has it.\n\nSame section as #41; both offices’ veneers consultation pages carry it.",
           "user_id": null,
           "is_private": false
         }
@@ -3742,10 +3756,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:45:18.304Z",
-      "updated_at": "2026-09-21T15:33:03.223Z",
+      "updated_at": "2026-09-21T19:54:13.119Z",
       "local_task_id": 47,
       "priority_id": 1,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Across Dental Implants page we need this to be linked to a five year warranty terms sheet any where it specifically states five-year warranty we need proof. This is also in FAQ and on all 4 landing pages.",
       "description_html": null,
@@ -3754,7 +3768,7 @@
       "requester_email": "gauge@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/a3fekvwoibxbzhqtqs9rvw/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/4fSlhkIfIUSkvOxbFjMcLg",
@@ -3785,7 +3799,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -3813,6 +3827,13 @@
           "id": 18179425,
           "created_at": "2026-09-21T15:29:01.427Z",
           "text": "Partly done, and the rest needs the practice.\n\nThere is no warranty terms sheet anywhere on the site to link to, and we are not going to write one out of marketing copy. What we have done instead: every mention of the five-year warranty on the paid pages now carries the one condition the All-on-4 pages already publish — \"conditional on the Precare cleanings every six months\". That is six mentions across the implants and All-on-4 pages, the hero stat included.\n\nTo finish this properly we need the actual warranty document from the practice: what is covered, what voids it, and who it applies to. Once we have that it is one terms page plus six links. Fixed and live on www.drnahlah.com (and on staging). Commit f1196277; details in the 2026-09-21 runbook.",
+          "user_id": null,
+          "is_private": false
+        },
+        {
+          "id": 18182805,
+          "created_at": "2026-09-21T19:54:12.919Z",
+          "text": "Done and live: www.drnahlah.com/five-year-warranty, linked from every claim that needed one.\n\nELEVEN LINKS across nine pages: both dental implants pages (twice each, the body claim and the FAQ answer), both All-on-4 pages, all four thank-you pages, and /about. On the paid pages the link opens in a new tab deliberately, so a visitor who is part-way through the form does not lose it.\n\nWHAT THE PAGE SAYS, and where every line of it came from. We did not write a warranty. Every commitment on that page is one the practice already publishes somewhere on this site, and nothing is stated more confidently than its source states it:\n\n• \"Any part that fails inside five years is replaced free of charge\" — /about\n• \"conditional on Precare: general cleanings every six months\" — /all-on-4\n• \"5-Year warranty on implant procedures\" — /dental-implants\n• \"Free second opinions\" — /our-team\n\nThe page sets out what is covered (implant work, cosmetic work, full arches), what \"replaced free of charge\" means, the one condition, and how to claim — which is to call the office, because there is no form and no claims department.\n\nWHAT IT DELIBERATELY DOES NOT SAY, and this is the bit for Dr. Nahlah’s team. There is no exclusion list, no transferability clause and no \"what voids it\", because the practice has not published any and a warranty is the one document where inventing a limitation is worse than omitting one — an invented exclusion takes away something a patient was promised. Where the page cannot answer, it says to call the office.\n\nSo please do put it in front of the practice. If they want exclusions, a transfer rule, or anything else added or corrected, send the wording and it is a ten-minute change. As it stands the page commits them to exactly what the site already committed them to, and nothing more.",
           "user_id": null,
           "is_private": false
         }
