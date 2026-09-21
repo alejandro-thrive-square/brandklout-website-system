@@ -65,6 +65,19 @@ the stronger of the two. If the practice wants the softer phrasing on paid traff
 `publishedPages: 56` on both hosts, unchanged. `draftMatchesPublished` was `true` on production
 before the push, so nothing else rode along.
 
+## The board
+
+Written back on 2026-09-21 with `workflows/05-design-revisions/close-bugherd-2026-09-21.mjs`,
+which carries the exact text posted. Eleven pins moved to `done` with a note on what changed;
+the six that are answers, partials or blockers kept their status and got the reason.
+
+| | Pins |
+| :-- | :-- |
+| `done` (11) | #33, #35, #36, #37, #38, #40, #43, #44, #45, #46, #48 |
+| still `todo`, commented (6) | #32 (GHL), #34 (Vimeo), #39 (answered, one open question), #41, #42 (no veneer film), #47 (needs the terms document) |
+
+Re-pulled afterwards: 11 done, 6 open, one comment on each of the seventeen.
+
 ## Next
 
 1. **A warranty terms sheet from the practice** (#47). Six paid-page mentions of the five-year

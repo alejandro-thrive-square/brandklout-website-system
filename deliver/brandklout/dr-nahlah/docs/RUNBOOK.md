@@ -81,6 +81,11 @@ These bite every time somebody works in here. The per-run files carry the rest.
   built page. The six form ids live in that table and nowhere else.
 - **The asset library's file names lie.** `Untitled-3.jpg` is the reception desk, `Untitled-4`
   a handshake, `pt-hero-2` is Stephen, `dr-and-yolanda` is Barbara. Look before captioning.
+- **BugHerd writes back over the same API the pull uses.** `PUT /api_v2/projects/:p/tasks/:id.json`
+  with `{"task":{"status":"done"}}` moves a pin; `POST .../tasks/:id/comments.json` with
+  `{"comment":{"text":"..."}}` adds a note. Both want the INTERNAL `id`, not the `local_task_id`
+  the board shows — `.tmp/bugherd/tasks.json` carries both. Same Basic auth as the pull
+  (`BUGHERD` as the username, a literal `x` as the password).
 - **A bordered card row must not stagger on Y.** `js/20-pagekit.js` tweens `data-rv="stagger"`
   children `y: 30 -> 0` with a `.09` stagger, which puts a row of `.pk-card` boxes on a visible
   staircase for over a second. Brandklout read that as broken alignment twice (BugHerd #37, #38).
