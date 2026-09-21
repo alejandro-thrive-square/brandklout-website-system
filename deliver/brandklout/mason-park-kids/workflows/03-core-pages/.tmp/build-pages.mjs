@@ -388,7 +388,9 @@ function chTable(page, c, n) {
     ${c.lede ? `<p class="lede">${type(c.lede)}</p>` : ''}
   </div>
   <div class="wrap">
-    <table class="fi-matrix">
+    <!-- Two columns want a narrower measure: auto layout splits the row by
+         column count, so a pair left half the rule empty (BugHerd #37). -->
+    <table class="fi-matrix${(c.head || []).length === 2 ? ' is-pair' : ''}">
       ${head}
       <tbody>
         ${rows}

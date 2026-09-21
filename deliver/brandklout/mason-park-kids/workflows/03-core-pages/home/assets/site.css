@@ -1813,6 +1813,12 @@ a.card:hover h3 { color: var(--accent); }
 
 /* The matrix: a real table above 768, labelled cards below. */
 .fi-matrix { width: 100%; border-collapse: collapse; }
+/* Two columns, not three. Taking the Note column off the hours table (BugHerd
+   #37) left `Open` starting at the halfway mark with a hand's width of empty
+   rule after it, because auto layout had been splitting the row three ways.
+   Only the hours table is narrow; /financing/, /special-offers/ and
+   /toothpaste-rda-table/ still carry three columns and want the full measure. */
+.fi-matrix.is-pair { max-width: 34rem; }
 .fi-matrix th, .fi-matrix td { text-align: left; padding: 1rem 1rem 1rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-size: var(--f-body); line-height: 1.55; }
 .fi-matrix th { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); border-bottom-color: var(--rule-strong); }
 .fi-matrix td:first-child { font-family: var(--font-display); font-weight: 500; font-size: var(--f-h4); color: var(--fg); white-space: nowrap; }
