@@ -1,0 +1,395 @@
+{
+  "base": "https://staging.ifadentistry.com/",
+  "passed": 50,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Arrival: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Arrival: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        [
+          1.437,
+          -232,
+          -71
+        ],
+        [
+          2.532,
+          -814,
+          -250
+        ],
+        [
+          2.567,
+          -833,
+          -255
+        ]
+      ]
+    },
+    {
+      "name": "Arrival: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "The Question: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "The Question: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        26,
+        39,
+        57
+      ]
+    },
+    {
+      "name": "The Question: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "The Design: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "The Design: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        {
+          "pos": "0.00%",
+          "step": 0
+        },
+        {
+          "pos": "27.89%",
+          "step": 1
+        },
+        {
+          "pos": "59.14%",
+          "step": 2
+        }
+      ]
+    },
+    {
+      "name": "The Design: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "The Path: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "The Path: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        {
+          "x": -470,
+          "now": "03"
+        },
+        {
+          "x": -940,
+          "now": "04"
+        },
+        {
+          "x": -1410,
+          "now": "05"
+        }
+      ]
+    },
+    {
+      "name": "The Path: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "Arrival: film frame is 16:9, same as the film",
+      "pass": true,
+      "detail": {
+        "ratio": 1.778,
+        "video": 1.778,
+        "stage": 900,
+        "vh": 900
+      }
+    },
+    {
+      "name": "Arrival: opened film covers the window and is still 16:9",
+      "pass": true,
+      "detail": {
+        "l": -81,
+        "t": -1,
+        "r": -81,
+        "b": 0,
+        "ratio": 1.778
+      }
+    },
+    {
+      "name": "The Question: unlit words already clear 4.5:1",
+      "pass": true,
+      "detail": 5.18
+    },
+    {
+      "name": "Progress bar tracks real document progress",
+      "pass": true,
+      "detail": 0.5
+    },
+    {
+      "name": "Memberships marquee is running",
+      "pass": true,
+      "detail": [
+        -735.146,
+        -701.325
+      ]
+    },
+    {
+      "name": "Disciplines: hovering B opens B",
+      "pass": true
+    },
+    {
+      "name": "Reviews: next arrow changes the review",
+      "pass": true,
+      "detail": {
+        "before": "Tommy",
+        "after": {
+          "who": "Marlyin",
+          "count": "02 / 03",
+          "on": 1
+        }
+      }
+    },
+    {
+      "name": "Reviews: previous arrow goes back",
+      "pass": true
+    },
+    {
+      "name": "Patient story: opens with a playable video",
+      "pass": true,
+      "detail": {
+        "open": true,
+        "src": "/uploads/LIEPGxLp22gRSzYI9dRnP-home-story-helen.mp4",
+        "ready": 4,
+        "err": null
+      }
+    },
+    {
+      "name": "Patient story: Escape closes it",
+      "pass": true
+    },
+    {
+      "name": "Compare: dragging moves the divider",
+      "pass": true,
+      "detail": 70
+    },
+    {
+      "name": "Compare: arrow keys move the divider",
+      "pass": true,
+      "detail": 65
+    },
+    {
+      "name": "Form: the GoHighLevel frame is in the slot and fills the card",
+      "pass": true,
+      "detail": {
+        "src": "https://api.leadconnectorhq.com/widget/form/cxtQ5q29TfUr3cYlMmDB?marketing_disclosure_version=2026-09-16&privacy_analytics_consent=denied&privacy_ad_personalization_consent=denied&privacy_ad_user_data_consent=denied&privacy_advertising_consent=denied&privacy_sale_share_opt_out=true&privacy_gpc_detected=false&privacy_source_url=https%3A%2F%2Fstaging.ifadentistry.com%2F",
+        "w": 456,
+        "h": 1892,
+        "card": 536
+      }
+    },
+    {
+      "name": "Desktop: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "ScrollSmoother registered and running",
+      "pass": true,
+      "detail": {
+        "smoother": true,
+        "pins": 5
+      }
+    },
+    {
+      "name": "Smoother on: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Mobile: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "Mobile · The Question: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Mobile · The Question: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        26,
+        39,
+        57
+      ]
+    },
+    {
+      "name": "Mobile · The Question: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "Mobile · The Design: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Mobile · The Design: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        {
+          "pos": "0.00%",
+          "step": 0
+        },
+        {
+          "pos": "27.89%",
+          "step": 1
+        },
+        {
+          "pos": "59.14%",
+          "step": 2
+        }
+      ]
+    },
+    {
+      "name": "Mobile · The Design: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "Mobile · The Path: holds still while it plays",
+      "pass": true,
+      "detail": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Mobile · The Path: three distinct intermediate states",
+      "pass": true,
+      "detail": [
+        {
+          "x": -486,
+          "now": "03"
+        },
+        {
+          "x": -972,
+          "now": "04"
+        },
+        {
+          "x": -1457,
+          "now": "06"
+        }
+      ]
+    },
+    {
+      "name": "Mobile · The Path: releases cleanly",
+      "pass": true,
+      "detail": -900
+    },
+    {
+      "name": "Mobile: call bar on screen from the first pixel",
+      "pass": true,
+      "detail": {
+        "bottom": 844,
+        "h": 57,
+        "vh": 844
+      }
+    },
+    {
+      "name": "Mobile: burger opens the drawer",
+      "pass": true
+    },
+    {
+      "name": "Mobile: burger closes it again",
+      "pass": true
+    },
+    {
+      "name": "Mobile: call bar never covers the submit area of the form",
+      "pass": true
+    },
+    {
+      "name": "Mobile: no text under 12.5px",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Mobile: body copy renders at 16px or more",
+      "pass": true,
+      "detail": 17
+    },
+    {
+      "name": "Mobile: no console errors",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Reduced motion: nothing pins, no smoother",
+      "pass": true,
+      "detail": {
+        "pins": 0,
+        "smoother": false
+      }
+    },
+    {
+      "name": "Reduced motion: no content hidden",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Reduced motion: before/after rests at the midpoint, still draggable",
+      "pass": true,
+      "detail": "50.00%"
+    },
+    {
+      "name": "Contrast: every text node clears AA on its real ground",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "Reduced motion: no console errors",
+      "pass": true,
+      "detail": []
+    }
+  ]
+}

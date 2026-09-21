@@ -106,6 +106,42 @@ need the Cloudflare rewrites in `docs/dns/URL-RULES.md`, or 29 indexed URLs brea
 `node verify-wp-urls.mjs [base] > .tmp/verify-wp-urls.log 2>&1`: on the Railway host it applies
 the rules itself, and on the domain it tests Cloudflare.
 
+### Side pipeline: `home/` — the redesigned home page, STAGING ONLY (2026-09-21)
+
+The redesign's source is the local prototype, `../04-design/.tmp/prototypes/home/`, not WordPress.
+It reuses this pipeline's mechanics (x-wz containers, `__WZM__` tokens, the container importer, one
+atomic PUT) and none of its WordPress parsing.
+
+```bash
+export INSTATIC_BASE_URL=https://staging.ifadentistry.com      # the .env points at PRODUCTION; every script below refuses anything else
+node home/prepare-home.mjs      > .tmp/home/prepare.log 2>&1   # 0. prototype body -> .tmp/home/page.html, embeds, media list
+node home/upload-media-home.mjs > .tmp/home/upload.log  2>&1   # 1. images, films, woff2 -> the library as home-*; .tmp/home/media-map.json
+node home/build-home.mjs        > .tmp/home/build.log   2>&1   # 2. site.css (faces + home.css), site.js (wrapped GSAP + home.js), import-input
+WZ_TMP="$PWD/.tmp/home" RAILWAY_LINK_DIR=<dir linked to -e staging> env -u RAILWAY_TOKEN -u RAILWAY_PROJECT_ID bash ship.sh > .tmp/home/ship.log 2>&1
+node home/push-home.mjs                                        # 4. dry run: prints what replace mode will delete
+node home/push-home.mjs --apply --force                        #    ONE page in, every other stored page OUT
+node home/publish-home.mjs                                     # 5. publish staging, then the gates:
+node ../04-design/.tmp/qa/gate.mjs https://staging.ifadentistry.com/ > .tmp/home/gate.log 2>&1
+MSYS_NO_PATHCONV=1 node ../../../../process/21-instatic-staging-clone/verify-staging-clean.mjs --staging https://staging.ifadentistry.com --production https://www.ifadentistry.com --paths "/"
+```
+
+- **`push-home.mjs` deletes pages.** `mode: 'replace'` with one page in the payload removes every
+  other stored page. That was the brief. `home/staging-only.mjs` compares the hostname to
+  `staging.ifadentistry.com` exactly — not to the domain, which production also matches.
+- **`site.css` and `site.js` are replaced**, so from this push on, staging cannot be promoted over
+  production: production's 58 other pages live on the cascade and script replay those two files held.
+- **`ship.sh` takes `WZ_TMP`** so the home payload never overwrites the clone's `.tmp/import-*`.
+- **The vendor wrap** (West LA trap 36, now here): each GSAP UMD runs inside a function that shadows
+  `exports`/`module`/`define`/`self`/`globalThis` with `this` bound to a plain object, and its
+  exports are copied to `window` before the next file. Test the built `site.js` as
+  `<script type="module">` against the local page BEFORE shipping; SplitText failing is silent.
+- **No inline head bootstrap exists on Instatic**, so the prototype carries none: the hero's
+  pre-entrance state is CSS (`html:not(.is-ready)`, with a timed fallback) and `home.js` lifts it.
+- `base.svg` keeps class and `data-*` verbatim; the form slot becomes the GoHighLevel Embed and the
+  gate checks its frame fills the card (`.ask__embed` reserves 36rem so nothing below it shifts).
+- Back up before a push that deletes: `VACUUM INTO` on the volume, an API snapshot, a git tag. The
+  2026-09-21 run file lists where they are and the quicker way back (re-seed from production).
+
 ### Side pipelines: `legal/` and `tags/`
 
 Both write straight into the live instance and publish nothing. They exist because the two things

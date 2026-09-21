@@ -6,3 +6,7 @@
 !wp/
 wp/*
 !wp/report.json
+# home/ side pipeline: keep the media map (skips a re-upload) and nothing else.
+!home/
+home/*
+!home/media-map.json

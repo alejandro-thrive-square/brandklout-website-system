@@ -14,7 +14,8 @@
 set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
-TMP="$HERE/.tmp"
+# WZ_TMP lets a side pipeline (home/) ship its own payload without touching the clone's.
+TMP="${WZ_TMP:-$HERE/.tmp}"
 # No apostrophe in this message: inside ${VAR:?...} a single quote opens a
 # quoted string and the closing brace is never seen, so the whole file fails to
 # parse rather than the variable failing to expand.

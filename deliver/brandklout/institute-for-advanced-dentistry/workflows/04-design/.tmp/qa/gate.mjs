@@ -25,7 +25,19 @@ async function open (w, h, query, reduced) {
   if (reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
   const errors = []
   page.on('pageerror', e => errors.push(e.message))
-  page.on('console', m => { if (m.type() === 'error') errors.push(m.text()) })
+  // Only OUR errors. Two kinds of noise are dropped, both seen on the published page:
+  //  - a third party's own console output (the GoHighLevel frame, the Sienna widget): judged by the
+  //    script the message came from;
+  //  - this workstation's VPN answering Cloudflare's beacon with an EMPTY body, which the browser
+  //    reports as an SRI failure. The tell is the digest: z4PhNX7v... is SHA-512 of nothing.
+  const ORIGIN = new URL(BASE).origin
+  page.on('console', m => {
+    if (m.type() !== 'error') return
+    const from = m.location()?.url || ''
+    if (from && !from.startsWith(ORIGIN)) return
+    if (m.text().includes('z4PhNX7vuL3xVChQ1m2AB9Yg5AULVxXcg/SpIdNs6c5H0NE8XYXysP+DGNKHfuwvY7kxvUdBeoGlODJ6+SfaPg==')) return
+    errors.push(m.text())
+  })
   await page.goto(BASE + query, { waitUntil: 'networkidle2', timeout: 60000 })
   await wait(3200)
   return { page, errors }
@@ -137,8 +149,16 @@ const READ = {
 
   // form slot validates and says what it is
   await page.evaluate(() => document.querySelector('[data-ask]').scrollIntoView({ block: 'center' })); await wait(900)
-  await page.click('[data-ask] button[type="submit"]'); await wait(300)
-  ok('Form: empty submit flags the fields', await page.evaluate(() => document.querySelectorAll('[data-ask] .is-bad').length) === 3)
+  // Local prototype: the design of the slot, which validates. Published: the practice's GoHighLevel
+  // form in an Embed block. Its frame must fill the card, not sit at its 300px intrinsic width.
+  if (await page.$('[data-ask] button[type="submit"]')) {
+    await page.click('[data-ask] button[type="submit"]'); await wait(300)
+    ok('Form: empty submit flags the fields', await page.evaluate(() => document.querySelectorAll('[data-ask] .is-bad').length) === 3)
+  } else {
+    await wait(2500)
+    const f = await page.evaluate(() => { const c = document.querySelector('[data-ask]'), i = c.querySelector('iframe'); if (!i) return null; const r = i.getBoundingClientRect(), cr = c.getBoundingClientRect(); return { src: i.src, w: Math.round(r.width), h: Math.round(r.height), card: Math.round(cr.width) } })
+    ok('Form: the GoHighLevel frame is in the slot and fills the card', !!f && /leadconnectorhq\.com\/widget\/form\//.test(f.src) && f.w >= f.card * .8 && f.h >= 300, f)
+  }
 
   ok('Desktop: no console errors', errors.length === 0, errors)
   await page.close()
@@ -169,9 +189,17 @@ const READ = {
   await page.tap('[data-burger]'); await wait(900)
   ok('Mobile: burger closes it again', await page.evaluate(() => document.querySelector('[data-drawer]').hidden))
 
-  await page.evaluate(() => document.querySelector('[data-ask] button[type="submit"]').scrollIntoView({ block: 'center' })); await wait(900)
-  const cover = await page.evaluate(() => { const b = document.querySelector('[data-ask] button[type="submit"]').getBoundingClientRect(); const el = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return !!el.closest('[data-ask]') })
-  ok('Mobile: call bar never covers the submit button', cover)
+  // The submit button locally; on the published page the form is a cross-origin frame, so the
+  // bottom edge of its card stands in for the button.
+  const cover = await page.evaluate(async () => {
+    const t = document.querySelector('[data-ask] button[type="submit"]') || document.querySelector('[data-ask]')
+    const isBtn = t.tagName === 'BUTTON'
+    t.scrollIntoView({ block: isBtn ? 'center' : 'end' }); await new Promise(r => setTimeout(r, 1200))
+    const b = t.getBoundingClientRect(), y = isBtn ? b.top + b.height / 2 : b.bottom - 40
+    const el = document.elementFromPoint(b.left + b.width / 2, y)
+    return !!(el && el.closest('[data-ask]'))
+  })
+  ok('Mobile: call bar never covers the submit area of the form', cover)
 
   const small = await page.evaluate(() => {
     const bad = []

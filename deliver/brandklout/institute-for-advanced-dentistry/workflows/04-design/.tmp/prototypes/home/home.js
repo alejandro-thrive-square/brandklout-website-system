@@ -18,7 +18,7 @@
 
   if (!motion) html.classList.add('no-motion');
 
-  function unveil() { html.classList.remove('is-loading'); }
+  function unveil() { html.classList.add('is-ready'); }
 
   /* ------------------------------------------------------------------ chrome */
   var nav = $('[data-nav]'), rail = $('[data-rail]'), progress = $('[data-progress]');

@@ -8,10 +8,15 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   Run `node workflows/04-design/.tmp/prototypes/serve.mjs` (from this client folder) and open
   `http://localhost:4173/home/`; `?motion=off` for the reduced-motion page. Eight-chapter GSAP
   journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 50/50, `walk.mjs` for frames).
-  **It is awaiting Alejandro's review and has not been shown to Brandklout or pushed to staging.**
+  **Published to staging 2026-09-21** (gate 50/50 on the published page); not yet shown to Brandklout.
   Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
   gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:
   [runbook/2026-09-21-home-redesign-canary.md](runbook/2026-09-21-home-redesign-canary.md).
+- **STAGING HOLDS ONLY THE REDESIGNED HOME PAGE since 2026-09-21.** The 58 other cloned pages were
+  deleted on request; every old staging URL is a 404. Push pipeline: `workflows/21-instatic-upload/home/`
+  (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
+  replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
+  [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
 - **STAGING since 2026-09-18**: `https://staging.ifadentistry.com` — a **separate Instatic
   instance** (same Railway project, environment `staging`, its own volume), seeded from production
   and byte-for-byte equivalent at 59/59 pages. **The redesign happens here, not on production**:
@@ -22,7 +27,8 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   excluded from this host, so reviewing does not pollute analytics or burn pool numbers.
   Procedure and promotion: [process/21-instatic-staging-clone](../../../process/21-instatic-staging-clone/21-instatic-staging-clone.md);
   run: [runbook/2026-09-18-staging-environment.md](runbook/2026-09-18-staging-environment.md).
-  **Promote with `--strategy merge-overwrite` and never `--media`.**
+  ~~Promote with `--strategy merge-overwrite` and never `--media`.~~ **Superseded 2026-09-21: no
+  promotion until the whole site is rebuilt** (see the line above).
 - **LIVE since 2026-09-11 ~22:20Z**: `https://www.ifadentistry.com` serves the Instatic clone of the WordPress site (Railway project `Institute for Advanced Dentistry`, fallback host `https://institute-for-advanced-dentistry-production.up.railway.app`). The apex 301s to `www`. Admin: `https://www.ifadentistry.com/admin`. The pipeline is at `workflows/21-instatic-upload/21-instatic-upload.md`; the top section is this client's, and the rest is sibling history kept for its traps.
 - **DNS / email**: Cloudflare zone `223386e4…` on Brandklout's account, nameservers `ajay`/`ruth` set at Squarespace (whose own DNS records are now inactive; leave them). Email records are intact: Google Workspace plus Brevo. State and scripts: [`dns/DNS-CUTOVER.md`](dns/DNS-CUTOVER.md), [`dns/URL-RULES.md`](dns/URL-RULES.md), `dns/set-url-rules.mjs`, `dns/set-redirect-rules.mjs`. The latest run is [runbook/2026-09-11-cloudflare-conflicts.md](runbook/2026-09-11-cloudflare-conflicts.md).
 - **Contact form**: the practice's GoHighLevel form on 58 pages (gate `verify-ghl-form.mjs`). Its
@@ -45,6 +51,9 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Open
 
+- **The GoHighLevel contact form shows its hidden consent fields** (`privacy_*_consent` and nine
+  more, visible inputs under Submit) on production and staging alike. It is in the form itself;
+  fix it in GoHighLevel.
 - **Home redesign, before the client sees it:** 2,500+ or 2,800+ implants (the brief says both);
   whether the complimentary exam + CBCT + smile preview is still the offer; consent for the
   chapter 03 before/after on a home page; a WebKit pass at 1512×735. The Asana Style Guide task is
