@@ -27,7 +27,7 @@ was provisioned.
   reduced motion, contrast, GoHighLevel frame fills its card), zero overflow at 1440 and 390,
   frames reviewed against the local build, `verify-staging-clean.mjs` exit 0.
 
-Commit: see `git log` for `feat(ifa): home redesign on staging`.
+Commit: `d3745f9c` feat(ifa): home redesign on staging, which now holds only that page.
 
 ## Backups taken before the delete — and how to go back
 
