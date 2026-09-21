@@ -4,27 +4,33 @@ The **standing** state of this project: what is true now, what is next, and the 
 Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) — read the index,
 then only the runs you need. Do not read them all.
 
-## Where things stand (2026-09-18)
+## Where things stand (2026-09-21)
 
 | | |
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 37 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
-| **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. See the 2026-09-18 run. |
+| **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
 
 ## What is next
 
-1. **Brandklout review of the eighteen live pages** (the Livewell order: hero with form, journey,
-   why here, the doctor, options, process, gallery, the space, FAQ, closer). Screenshots at
-   1440 and 390 of the published Alexandria implants page are in the 2026-09-18 run.
-2. **In LeadConnector, point each of the six forms at its own thank-you page**:
-   `/ads-landing-pages/<office>-<campaign>-thank-you`. The forms are live on the pages; the
-   redirect cannot be verified from this repository.
+1. **A warranty terms sheet from the practice** (BugHerd #47). Six paid-page mentions of the
+   five-year warranty now state its Precare condition, but none links to terms, because no terms
+   sheet exists anywhere on the site. Do not write one from the marketing copy.
+2. **In LeadConnector**: point each of the six forms at its own thank-you page,
+   `/ads-landing-pages/<office>-<campaign>-thank-you`, and remove the Continue step and the
+   "Preferred Method of Contact" field (BugHerd #32). Neither is reachable from this repository.
 3. Google Ads conversions, one per thank-you URL (six), or GTM page-view triggers on
    `/ads-landing-pages/` + `-thank-you`.
-4. Ask the client for one filmed veneer patient and one photograph of the Alexandria office.
-5. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
+4. **One filmed veneer patient**, and a photograph of the Alexandria office, from the client.
+   Until the film exists, BugHerd #41 and #42 cannot be answered: the only cosmetic clips in the
+   library are generic-presenter ones and must not go on a paid page.
+5. **Decide whether the film library moves to Vimeo** (BugHerd #34). It is a job for all fourteen
+   films at once, and it needs `player.vimeo.com` in the Embed Origins `frameOrigins`.
+6. **Nine older BugHerd pins are still open**: #13, #14 (patient-stories), #24–#28, #30, #31
+   (main site), #29 (dental-conditions). Several wait on client assets.
+7. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
    are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
 
 ## Standing traps
@@ -75,6 +81,15 @@ These bite every time somebody works in here. The per-run files carry the rest.
   built page. The six form ids live in that table and nowhere else.
 - **The asset library's file names lie.** `Untitled-3.jpg` is the reception desk, `Untitled-4`
   a handshake, `pt-hero-2` is Stephen, `dr-and-yolanda` is Barbara. Look before captioning.
+- **A bordered card row must not stagger on Y.** `js/20-pagekit.js` tweens `data-rv="stagger"`
+  children `y: 30 -> 0` with a `.09` stagger, which puts a row of `.pk-card` boxes on a visible
+  staircase for over a second. Brandklout read that as broken alignment twice (BugHerd #37, #38).
+  The nine `.pk-cards` rows on the ads pages now use a plain `data-rv` and land as one block.
+- **`.sp-copy` only works inside `.pk-split`** — it is declared as `.pk-split .sp-copy`. Pull a
+  two-column split apart and the surviving column silently loses its grid, its gap and its 56ch
+  measure, with nothing failing.
+- **`seo.json` is CRLF with 2-space indent.** Re-serialize it the same way or a 22-line edit
+  lands as a 3,476-line diff.
 - **The four site tags are one partial, `partials/site-scripts.html`, on every page.** The
   inline-script gate exempts only a `<script data-site-script>`. Termly runs autoBlock=off on
   purpose: on, it would hide the GHL form and the films until consent.

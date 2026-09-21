@@ -125,6 +125,11 @@ function locationFill(s, locKey, campaign) {
     OTHER_NAME: O.name, OTHER_CITY: O.city, OTHER_ADDR1: O.addr1, OTHER_ADDR2: O.addr2,
     OTHER_TEL: O.tel, OTHER_PHONE: O.phone, OTHER_CUR_TEL: O.curTel, OTHER_CUR_PHONE: O.curPhone,
     LOC_FORM: form, LOC_OFFICES: offices,
+    /* The Nobel Biocare mark is only claimed where the page names the product.
+       It rode the shared footer onto the implants and veneers pages, where it
+       attributes a trademark the page never uses (Brandklout, BugHerd #44). */
+    LP_TRADEMARK: campaign === "all-on-4"
+      ? " All-on-4 is a registered trademark of Nobel Biocare." : "",
   };
   for (const [k, v] of Object.entries(pairs)) s = s.replaceAll(`{{${k}}}`, v);
   const left = s.match(/\{\{(LOC|OTHER|CAMPAIGN)[A-Z_]*\}\}/g);
