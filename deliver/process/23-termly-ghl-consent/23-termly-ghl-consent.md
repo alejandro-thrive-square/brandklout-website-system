@@ -132,10 +132,27 @@ script is served same-origin, so `script-src 'self'` is enough.
 All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form carried `denied`).
 
 ## Gotchas
-- **Termly accounts are created by hand.** The key the team can issue is the Consent API key: raw
-  `Authorization: <key>` against `app.termly.io/api/v1/cookie_whitelist?uuid=`, read-only. Creating
-  websites needs the partner API (`api.termly.io/v1`, HMAC-signed), whose keys Termly issues through
-  termly.io/agencies. With those keys this module could create the Termly websites too.
+- **Termly accounts are created by hand, and a free-account key automates nothing** (re-probed
+  2026-09-21). The key a free dashboard hands out is a *per-website legacy token*, not an account
+  credential: a bogus value against `app.termly.io/api/v1/cookie_whitelist` answers `Couldn't find
+  Website with [WHERE "websites"."legacy_token" = $1]`. That one read-only endpoint is the whole
+  surface. `/api/v1/websites` and `/api/v1/documents` answer `401 not_authenticated` — they are
+  dashboard session endpoints and no header form (raw, `Bearer`, `x-api-key`) opens them; every other
+  path 404s. So **no**: the key cannot create a website, trigger a scan, publish a policy, or return
+  the embed snippet, and it will not even tell you its own website UUID (`cookie_whitelist` returns
+  `uuid: null` — the same stub with no `uuid` param, with a junk one, and with a real live UUID, so
+  the one endpoint that does answer is inert). The embed is not an API problem anyway — it is
+  `https://app.termly.io/resource-blocker/<website-uuid>?autoBlock=off`, and the UUID is read off the
+  dashboard by hand.
+- **Creating websites, scans and policies needs the partner API**, base `https://api.termly.io`,
+  headers `X-Termly-Timestamp: %Y%m%dT%H%M%SZ` (15-minute window) and
+  `Authorization: TermlyV1, PublicKey=<key>, Signature=<hmac>`; endpoints cover Websites, Banners,
+  Cookies, Custom Consent Themes, Collaborators, Trigger Scan, Scan Reports, Document Preview and
+  Publish Cookie Policy. Termly issues those keys by hand through termly.io/agencies ("if you want to
+  use the partner API you need to be issued keys manually by us"); our free-account key returns `401
+  Unauthorized` there. **Applying for partner keys is the only way to automate the ~30-account
+  rollout** — until then account creation, the scan and the policy stay manual, and the agent's part
+  starts once the UUID exists.
 - **NordVPN Threat Protection** returns a headerless 204 for `app.termly.io` in Chrome. The symptom is
   that the banner's Cookie Policy link opens nothing. Use `check --termly-proxy`.
 - **The registered-script cap is 2,000 characters.** The v2.2 minified bridge is 1,965. Anything that

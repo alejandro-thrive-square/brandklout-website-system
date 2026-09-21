@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-21 | 2026-09-21 — Termly free-account API probed for Grand Mission: it cannot create, scan, publish or hand back the embed; partner keys are the only automation path — carries **gotchas** | [`2026-09-21-termly-api-feasibility.md`](./2026-09-21-termly-api-feasibility.md) |
 | 2026-09-19 | R2/rclone, GitHub/LFS, and Hostinger/Namespace guidance; recommendations are not approved selections | [`2026-09-19-storage-and-runtime-guidance.md`](./2026-09-19-storage-and-runtime-guidance.md) |
 | 2026-09-19 | Diagram-based system architecture proposal and migration sequence; implementation choices remain open | [`2026-09-19-system-architecture-proposal.md`](./2026-09-19-system-architecture-proposal.md) |
 | 2026-09-19 | 2026-09-19 — R2 trialled as the client-asset mirror: IFA pushed, pulled and hash-verified; nothing built yet — carries **gotchas** | [`2026-09-19-r2-asset-mirror-trial.md`](./2026-09-19-r2-asset-mirror-trial.md) |
