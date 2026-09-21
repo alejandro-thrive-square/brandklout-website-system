@@ -28,6 +28,13 @@ then only the runs you need. Do not read them all.
    library are generic-presenter ones and must not go on a paid page.
 5. **Decide whether the film library moves to Vimeo** (BugHerd #34). It is a job for all fourteen
    films at once, and it needs `player.vimeo.com` in the Embed Origins `frameOrigins`.
+   **The Vimeo side is ready**: the 12 practice-owned films have been sitting in the Brandklout
+   workspace since 2026-08-29 (account `/users/248712727`, folder `Dr. Nahlah` = project
+   `30326239`), and as of 2026-09-21 all 14 carry full descriptions. The manifest at
+   `03-graphic-resources/.tmp/video-migration-manifest.csv` now holds every `vimeo_id`.
+   Still open on that folder: all 14 are `privacy.view=anybody` / `privacy.embed=public`,
+   so the domain-locked embedding the migration was *for* has not been applied.
+   See the 2026-09-21 Vimeo run.
 6. **Nine older BugHerd pins are still open**: #13, #14 (patient-stories), #24–#28, #30, #31
    (main site), #29 (dental-conditions). Several wait on client assets.
 7. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
