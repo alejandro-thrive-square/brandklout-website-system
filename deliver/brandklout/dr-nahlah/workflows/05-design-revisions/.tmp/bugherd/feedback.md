@@ -127,7 +127,7 @@ need to use different photos for 2 to 4
 
 ## #13 — Her face is cut off. shift picture down
 
-- **Status**: todo · **Priority**: normal · **Tags**: —
+- **Status**: done · **Priority**: normal · **Tags**: —
 - **Page**: `/patient-stories`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T05:37:50.907Z
 - **Viewport**: 1857 x 1236 px · Chrome 151.0.0.0
@@ -141,10 +141,17 @@ Her face is cut off. shift picture down
 - *619229* (2026-08-27T13:40:33.209Z): Fixing this, the face is cut of on larger breakpoints so the solution is to have a max width on this section across the site.
 
 Should be larger than the global container or max width but on middle and smaller screens should be filling up the entire screen width.
+- *unknown* (2026-09-21T17:55:42.118Z): Fixed and live since 27 August 14:04 UTC, in two passes.
+
+The first pass moved the crop to the top of the frame (object-position 50% 0%), which kept her face in shot at 1440 but could not stop the photograph being magnified on a larger display — at 2560 only 36% of the source height was still visible. Your follow-up comment was the more precise diagnosis, so the second pass capped the band itself: max-width 120rem, centred, filling the full screen width below that. It holds the frame at roughly the 1440 proportion the design was drawn at however large the display gets, and it was applied to all five pages that use the band, which is what "across the site" asked for.
+
+Verified in the published stylesheet today: .mband { max-width:120rem; margin-inline:auto }.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
 
 ## #14 — Add review widget here
 
-- **Status**: todo · **Priority**: normal · **Tags**: —
+- **Status**: done · **Priority**: normal · **Tags**: —
 - **Page**: `/patient-stories`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T05:38:21.700Z
 - **Viewport**: 1857 x 1236 px · Chrome 151.0.0.0
@@ -152,6 +159,14 @@ Should be larger than the global container or max width but on middle and smalle
 - **Board**: https://www.bugherd.com/projects/537587/tasks/14
 
 Add review widget here
+
+**Comments**
+
+- *unknown* (2026-09-21T17:55:42.632Z): Added and live since 28 August 05:21 UTC. The review widget is on /patient-stories, directly under the paragraph that claims 4.9 out of 5 — the widget is the evidence for that claim, so it sits with it. It is copied from the home page’s embed at run time rather than pasted in as a second copy, so the two can never drift apart.
+
+One thing worth knowing if you ever screenshot it with a tool rather than a browser: the vendor renders the widget client-side from reputationhub.site, so it photographs as an empty white box in automated capture. Exactly the same is true of the home page instance you already approved. In a real browser both paint normally.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
 
 ## #15 — Here the images seem to be having some sort of margin. Should be covered so they
 
@@ -223,7 +238,7 @@ extend top picture to fill this gap
 
 ## #21 — wrong photo
 
-- **Status**: doing · **Priority**: important · **Tags**: —
+- **Status**: done · **Priority**: important · **Tags**: —
 - **Page**: `/our-facility`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T07:17:33.197Z
 - **Viewport**: 1857 x 1236 px · Chrome 151.0.0.0
@@ -236,10 +251,17 @@ wrong photo
 
 - *619229* (2026-08-27T13:21:18.681Z): Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.
 - *619229* (2026-08-27T13:23:27.887Z): I'm going to ask Jessica to get more context
+- *unknown* (2026-09-21T17:55:43.021Z): Replaced and live since 27 August 13:25 UTC. Card 02 "Intraoral scanner" was holding a stereo microscope. It now carries a licensed photograph of a scanner wand actually in the mouth.
+
+Timing note, because it explains the silence: this went live at 13:25 and your "can you attach the correct photo here please?" comment was written at 13:21. The replacement was already on its way out when you wrote it — you were looking at the pre-publish page.
+
+It also cleared a repeat nothing else would have caught: card 04 "In-house digital lab" held the same photograph as this card at a different crop and a different byte count, so the duplicate-image sweep could not see it.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
 
 ## #22 — wrong photo
 
-- **Status**: doing · **Priority**: important · **Tags**: —
+- **Status**: done · **Priority**: important · **Tags**: —
 - **Page**: `/our-facility`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T07:17:53.264Z
 - **Viewport**: 1857 x 1236 px · Chrome 151.0.0.0
@@ -251,10 +273,17 @@ wrong photo
 **Comments**
 
 - *619229* (2026-08-27T13:21:23.228Z): Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.
+- *unknown* (2026-09-21T17:55:43.381Z): Replaced and live since 27 August 13:25 UTC. Card 03 "Guided implant surgery" was holding a consultation photo — a dentist pointing at a tooth model — which is not guided surgery. It now carries two gowned clinicians placing an implant with the CBCT scan on the monitor behind them, which is the card’s own sentence in one frame.
+
+For the record, the most literal search result was rejected deliberately: an implant driven through a surgical template. Accurate, and it reads as raw anatomy on a page a nervous patient is browsing.
+
+Same timing as #21 — live at 13:25, your comment written at 13:21.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
 
 ## #23 — wrong photo
 
-- **Status**: doing · **Priority**: important · **Tags**: —
+- **Status**: done · **Priority**: important · **Tags**: —
 - **Page**: `/our-facility`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T07:18:07.962Z
 - **Viewport**: 1857 x 1236 px · Chrome 151.0.0.0
@@ -266,10 +295,15 @@ wrong photo
 **Comments**
 
 - *619229* (2026-08-27T13:21:26.488Z): Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.
+- *unknown* (2026-09-21T17:55:43.710Z): Replaced and live since 27 August 13:25 UTC. Card 06 "Zirconia & porcelain oven" was holding a crown on a model rather than an oven. It now carries a technician placing a crown into the furnace with tweezers — the card’s actual subject.
+
+Same timing as #21 and #22 — live at 13:25, your comment written at 13:23.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
 
 ## #24 — We shouldn't add doctors who are not Dr. Nahlah. Let's try to edit this photo wi
 
-- **Status**: todo · **Priority**: not set · **Tags**: All Breakpoints
+- **Status**: done · **Priority**: not set · **Tags**: All Breakpoints
 - **Page**: `/our-facility`  (https://www.drnahlah.com)
 - **From**: alejandro@thrivesquare.com · 2026-08-27T13:33:09.003Z
 - **Viewport**: 1685 x 860 px · Chrome 151.0.0.0
@@ -278,9 +312,17 @@ wrong photo
 
 We shouldn't add doctors who are not Dr. Nahlah. Let's try to edit this photo with the Magnific AI Generation API so we can swap the face for the Dr. Nahlah.
 
+**Comments**
+
+- *unknown* (2026-09-21T17:55:44.063Z): Done and live since 27 August 14:04 UTC. Card 05 "Milling machine" was a licensed stock model who read as a member of staff. It now holds a composite built through the Magnific API as you asked: the same laboratory, the same body, with Dr. Nahlah’s face from his own headshot.
+
+We raised the question once at the time — a synthetic photograph of a real, named clinician on a medical site — and you confirmed the call. Recording it here so the decision is on the pin and not only in a chat.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
+
 ## #25 — On this section the heading should be wrapped in a symmetrical way
 
-- **Status**: todo · **Priority**: normal · **Tags**: All Breakpoints
+- **Status**: done · **Priority**: normal · **Tags**: All Breakpoints
 - **Page**: `/smile-makeover`  (https://www.drnahlah.com)
 - **From**: alejandro@thrivesquare.com · 2026-08-27T13:37:38.516Z
 - **Viewport**: 1685 x 860 px · Chrome 151.0.0.0
@@ -289,9 +331,17 @@ We shouldn't add doctors who are not Dr. Nahlah. Let's try to edit this photo wi
 
 On this section the heading should be wrapped in a symmetrical way
 
+**Comments**
+
+- *unknown* (2026-09-21T17:55:44.455Z): Fixed and live since 27 August 14:04 UTC. The CTA heading on /smile-makeover was orphaning its last word ("See it before you commit to / it."). The heading now uses text-wrap: balance, which lets the browser even the lines out itself rather than breaking at a width we guessed — "See it before you / commit to it." at 1440, and it stays symmetrical at 1024 and below too.
+
+Verified in the published stylesheet today: .pk-cta h2 carries text-wrap: balance.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
+
 ## #26 — We need to create the topics, some sort of categories to filter.
 
-- **Status**: todo · **Priority**: normal · **Tags**: All Breakpoints
+- **Status**: done · **Priority**: normal · **Tags**: All Breakpoints
 - **Page**: `/posts`  (https://www.drnahlah.com)
 - **From**: alejandro@thrivesquare.com · 2026-08-27T20:12:14.303Z
 - **Viewport**: 1685 x 860 px · Chrome 151.0.0.0
@@ -300,9 +350,19 @@ On this section the heading should be wrapped in a symmetrical way
 
 We need to create the topics, some sort of categories to filter.
 
+**Comments**
+
+- *unknown* (2026-09-21T17:55:44.833Z): Fixed and live since 28 August 05:21 UTC. Worth saying what was actually wrong, because it was not what it looked like.
+
+The topics and the filter both existed. The dropdown prunes itself against the topics the article cards actually carry, and every published card was carrying an empty topic, so it pruned every option away and left you the single "All topics" you saw. The topics had been written to the draft rows only — publishing the site does not publish post rows, they are a separate step that had never been run.
+
+Live now, verified today: Implants 16, Aftercare 11, All-on-4 8, Dentures 3, Technology 3, Cost 1, Veneers 1.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
+
 ## #27 — If you see we have a lot of repeated images here, let's use stock photos from Ma
 
-- **Status**: todo · **Priority**: normal · **Tags**: All Breakpoints
+- **Status**: done · **Priority**: normal · **Tags**: All Breakpoints
 - **Page**: `/posts`  (https://www.drnahlah.com)
 - **From**: alejandro@thrivesquare.com · 2026-08-27T20:13:15.055Z
 - **Viewport**: 1685 x 860 px · Chrome 151.0.0.0
@@ -311,9 +371,17 @@ We need to create the topics, some sort of categories to filter.
 
 If you see we have a lot of repeated images here, let's use stock photos from Magnific API. Make sure to analyze the image so it matches the topic of the article.
 
+**Comments**
+
+- *unknown* (2026-09-21T17:55:45.213Z): Done and live since 28 August 05:21 UTC. It was worse than the pin said: across 43 articles there were only 22 distinct pictures — patient_hero.jpg and pt-hero-4.jpg were each on four articles. (Identity was settled by hashing the actual image bytes, not by asset name, which is why the earlier sweep missed them.)
+
+All 21 redundant images were re-shot from Freepik against each article’s curated topic phrase rather than its title, and every candidate was scored before it could be chosen: it has to read as dentistry, it gains points for the topic’s own vocabulary, and it is rejected outright on children, surgical fields, blood, braces or render language. No page repeats an image now.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
+
 ## #28 — picture is still cut off
 
-- **Status**: todo · **Priority**: critical · **Tags**: —
+- **Status**: done · **Priority**: critical · **Tags**: —
 - **Page**: `/`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-27T23:13:16.777Z
 - **Viewport**: 1857 x 1236 px · Chrome 152.0.0.0
@@ -322,9 +390,19 @@ If you see we have a lot of repeated images here, let's use stock photos from Ma
 
 picture is still cut off
 
+**Comments**
+
+- *unknown* (2026-09-21T17:55:45.630Z): Fixed and live since 28 August 05:21 UTC, and it needed a different picture rather than a crop.
+
+The frame there is 4:5 portrait, drawn for a 4:5 portrait of Dr. Nahlah. A de-duplication pass had swapped in a landscape photograph of him with Yolanda, 1.5:1 — 46% of that frame was being thrown away, his arm off one side and her shoulder off the other. No amount of repositioning fixes that; half the picture has nowhere to go. The 4:5 portrait is back in the 4:5 frame, so there is no crop at all.
+
+This did not undo the no-repeated-images rule — that rule is per page, and the home page carries this portrait nowhere else. The photograph with Yolanda stays on /about and /implant-supported-dentures.
+
+Apologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.
+
 ## #29 — capitalize all words
 
-- **Status**: todo · **Priority**: minor · **Tags**: —
+- **Status**: done · **Priority**: minor · **Tags**: —
 - **Page**: `/dental-conditions`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-31T02:47:15.988Z
 - **Viewport**: 2044 x 1236 px · Chrome 152.0.0.0
@@ -333,9 +411,20 @@ picture is still cut off
 
 capitalize all words
 
+**Comments**
+
+- *unknown* (2026-09-21T18:10:46.121Z): Done and live. All ten labels in "Ten things people come in with." are title case now — Loose Dentures, Bad Breath, Bleeding Gums, Cracked Teeth, Crooked Teeth, Gum Disease, A Gummy Smile, Missing or Failing Teeth, Toothache, Yellow or Discolored Teeth.
+
+Two small decisions worth stating, either of which we will reverse in a minute if you would rather:
+
+1. The two "or"s are left lowercase, which is ordinary title case. Read absolutely literally, "capitalize all words" would give "Missing Or Failing Teeth" — say the word and it is a one-line change.
+2. Only the accordion labels changed. The prose headings on that page ("Even the small things matter.", "Ten things people come in with.", "Where to go next.") are sentence case by design, across the whole site, so they were left alone. If you want those title case too it is a much larger change and a different decision, so it should be its own pin.
+
+Honest note on why this sat: this pin and #30 were filed on 31 August, three days after the last review round was worked through, and neither was ever picked up. That was our miss, not a disagreement.
+
 ## #30 — add both location addresses and phone numbers like the Webflow design
 
-- **Status**: todo · **Priority**: minor · **Tags**: —
+- **Status**: done · **Priority**: minor · **Tags**: —
 - **Page**: `/`  (https://www.drnahlah.com)
 - **From**: sang@thrivesquare.com · 2026-08-31T02:49:27.370Z
 - **Viewport**: 2044 x 1236 px · Chrome 152.0.0.0
@@ -344,9 +433,33 @@ capitalize all words
 
 add both location addresses and phone numbers like the Webflow design
 
+**Comments**
+
+- *unknown* (2026-09-21T18:10:46.667Z): Done and live, in every footer on the site.
+
+Half of it was already there — both new-patient numbers — but neither street address was, which is the half that matters for local search as much as for a reader. Each office is now a proper name/address/phone block:
+
+McLean
+7901 Jones Branch Drive, Suite 220
+McLean, VA 22102
+(571) 702-9900
+
+Alexandria
+2855 Duke Street
+Alexandria, VA 22314
+(571) 253-7790
+
+The office name moved out of the link and into bold, which is the same shape the hours list directly above already uses, so the column reads as one thing. The addresses are taken from the contact pages rather than typed in, and the script refuses to run if they ever stop matching.
+
+This touched 37 pages plus the article template — the footer is a separate copy on every page on this platform, not one shared block — and was then checked on all 55 live pages and on an article. The eighteen ads landing pages already had both addresses in their own footer and were not changed.
+
+One thing to expect if you go and look: the Alexandria number renders as (571) 583-4820 in a browser rather than (571) 253-7790. That is your GHL call-tracking number pool swapping it at page load, which is what it is supposed to do — the page itself, and the number a search engine reads, is 253-7790. Worth someone checking why the pool covers Alexandria and not McLean, but that is a GHL setting, not a website one.
+
+Same honest note as #29: filed 31 August, never picked up until today. Our miss.
+
 ## #31 — This should be a vimeo video
 
-- **Status**: todo · **Priority**: not set · **Tags**: All Breakpoints
+- **Status**: done · **Priority**: not set · **Tags**: All Breakpoints
 - **Page**: `/`  (https://staging.drnahlah.com)
 - **From**: alejandro@thrivesquare.com · 2026-09-02T01:39:08.744Z
 - **Viewport**: 1685 x 860 px · Chrome 152.0.0.0
@@ -354,6 +467,10 @@ add both location addresses and phone numbers like the Webflow design
 - **Board**: https://www.bugherd.com/projects/537587/tasks/31
 
 This should be a vimeo video
+
+**Comments**
+
+- *unknown* (2026-09-21T16:20:53.348Z): Done — and not just this one. Every practice-owned film on the site is now served from the Brandklout Vimeo library instead of YouTube: 108 embeds across 15 pages (the home page, patient stories, the video library and all eighteen ads landing pages). This pin’s film, Melanie’s story, is a Vimeo player now. The click-to-play cards carry Vimeo thumbnails too, so the pages no longer call YouTube at all on load. Live on www.drnahlah.com and on staging. Commit 15b4c882; details in the 2026-09-21 runbook.
 
 ## #32 — Continue Button and Preffered Method of contact removal
 
@@ -389,7 +506,7 @@ No Cost, No Obligation doesn't make sense lets remove this.
 
 ## #34 — Can we upload this on Vimeo?
 
-- **Status**: todo · **Priority**: normal · **Tags**: —
+- **Status**: done · **Priority**: normal · **Tags**: —
 - **Page**: `/ads-landing-pages/alexandria-all-on-4`  (https://staging.drnahlah.com)
 - **From**: gauge@thrivesquare.com · 2026-09-18T21:30:07.613Z
 - **Viewport**: 1728 x 962 px · Chrome 152.0.0.0
@@ -405,6 +522,9 @@ Can we upload this on Vimeo?
 That hero film is the page’s only real YouTube iframe, and it is what makes the platform open its content-security policy for the click-to-play players further down the page. Swapping it for Vimeo means also adding player.vimeo.com to the site’s allowed embed origins, and re-uploading the film.
 
 So it is worth doing — but as a decision about the whole film library (fourteen clips) rather than this one hero. Tell us if you want that scheduled and we will do the lot at once.
+- *unknown* (2026-09-21T16:20:53.875Z): Yes — it was already on Vimeo, and now the page uses it. The twelve practice-owned films were uploaded to the Dr. Nahlah folder back on 29 August; what was missing was the site pointing at them. This hero film (Restore Your Bad or Missing Teeth in One Day) and every other owned film across the site now play from Vimeo. All fourteen films in that folder also got their full descriptions written for SEO.
+
+One exception worth flagging: the eight THE WELLNESS HOUR clips in the video library stay on YouTube. They are third-party syndicated videos licensed for embedding, not the practice’s own footage, so re-hosting them on your Vimeo is a rights question we will not answer on our own. The video library is intentionally mixed-host until someone confirms redistribution rights or they are replaced with practice footage. Live on www.drnahlah.com and on staging. Commit 15b4c882; details in the 2026-09-21 runbook.
 
 ## #35 — A denture that shifts when you talk. One you have to pull out every night, then 
 
@@ -516,6 +636,7 @@ Dental Implants video needs to be replaced with Venners Video
 The practice has fourteen films. Six are its own patients, filmed at the practice. The other eight feature a generic stock presenter who is not Dr. Nahlah — and all three cosmetic titles (Seven Steps of Veneers, Smile Makeovers, Fixing Grey Lines) are in that eight. Putting a stock presenter on a paid page is not something we are willing to do.
 
 So this needs one filmed veneer patient from the practice. It has been on the outstanding-assets list since 18 September. Same blocker as #42.
+- *unknown* (2026-09-21T16:20:54.255Z): Not addressed by the Vimeo swap, so leaving this open. The film on this page is now a Vimeo player rather than a YouTube one, but it is still Yolanda’s implant story — the host changed, the content did not. There is still no veneer patient film anywhere in the library; the only cosmetic clips feature a generic stock presenter rather than Dr. Nahlah, and we will not put one of those on a paid page. This needs one filmed veneer patient from the practice.
 
 ## #42 — Needs to be a veneers Video
 
@@ -531,6 +652,7 @@ Needs to be a veneers Video
 **Comments**
 
 - *unknown* (2026-09-21T15:28:59.176Z): Same blocker as #41: there is no veneer patient film. The only cosmetic clips in the library feature a generic stock presenter rather than Dr. Nahlah, and we will not put one on a paid page. This needs one filmed veneer patient from the practice.
+- *unknown* (2026-09-21T16:20:54.443Z): Same as #41 — still open, and for the same reason. The embed is Vimeo now, but the film is still an implant story on a veneers page. It needs a filmed veneer patient; nothing in the current library can stand in.
 
 ## #43 — This section needs to be removed across all landing pages, it will get flagged b
 

@@ -912,10 +912,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T05:37:50.907Z",
-      "updated_at": "2026-08-27T13:40:33.211Z",
+      "updated_at": "2026-09-21T17:55:42.444Z",
       "local_task_id": 13,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Her face is cut off. shift picture down",
       "description_html": null,
@@ -924,7 +924,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/xu0b6omghe4tfbaoxnwoow/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/B4VL4B5Jcmdqg7wJmatdqw",
@@ -955,7 +955,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -977,18 +977,20 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
+      "updater": null,
       "comments": [
         {
           "id": 18002547,
           "created_at": "2026-08-27T13:40:33.209Z",
           "text": "Fixing this, the face is cut of on larger breakpoints so the solution is to have a max width on this section across the site.\n\nShould be larger than the global container or max width but on middle and smaller screens should be filling up the entire screen width.",
           "user_id": 619229,
+          "is_private": false
+        },
+        {
+          "id": 18181176,
+          "created_at": "2026-09-21T17:55:42.118Z",
+          "text": "Fixed and live since 27 August 14:04 UTC, in two passes.\n\nThe first pass moved the crop to the top of the frame (object-position 50% 0%), which kept her face in shot at 1440 but could not stop the photograph being magnified on a larger display — at 2560 only 36% of the source height was still visible. Your follow-up comment was the more precise diagnosis, so the second pass capped the band itself: max-width 120rem, centred, filling the full screen width below that. It holds the frame at roughly the 1440 proportion the design was drawn at however large the display gets, and it was applied to all five pages that use the band, which is what \"across the site\" asked for.\n\nVerified in the published stylesheet today: .mband { max-width:120rem; margin-inline:auto }.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
           "is_private": false
         }
       ],
@@ -999,10 +1001,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T05:38:21.700Z",
-      "updated_at": "2026-09-02T01:50:10.979Z",
+      "updated_at": "2026-09-21T17:55:42.832Z",
       "local_task_id": 14,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Add review widget here",
       "description_html": null,
@@ -1011,7 +1013,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/kedbhxvlbww1swm7njhlfg/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/uoUybDCyCKFkqKzBUPPtqQ",
@@ -1042,7 +1044,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1064,13 +1066,16 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181178,
+          "created_at": "2026-09-21T17:55:42.632Z",
+          "text": "Added and live since 28 August 05:21 UTC. The review widget is on /patient-stories, directly under the paragraph that claims 4.9 out of 5 — the widget is the evidence for that claim, so it sits with it. It is copied from the home page’s embed at run time rather than pasted in as a second copy, so the two can never drift apart.\n\nOne thing worth knowing if you ever screenshot it with a tool rather than a browser: the vendor renders the widget client-side from reputationhub.site, so it photographs as an empty white box in automated capture. Exactly the same is true of the home page instance you already approved. In a real browser both paint normally.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -1556,10 +1561,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T07:17:33.197Z",
-      "updated_at": "2026-08-27T13:41:13.812Z",
+      "updated_at": "2026-09-21T17:55:43.209Z",
       "local_task_id": 21,
       "priority_id": 2,
-      "status_id": 2308883,
+      "status_id": 2308884,
       "title": null,
       "description": "wrong photo",
       "description_html": null,
@@ -1568,7 +1573,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/xjogwexuco9ztb0hjawgxq/screenshot.jpg",
-      "status": "doing",
+      "status": "done",
       "priority": "important",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/mLCoCRXNI3BLLXU21Sg5lA",
@@ -1599,7 +1604,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308883,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1621,12 +1626,7 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
+      "updater": null,
       "comments": [
         {
           "id": 18002278,
@@ -1641,6 +1641,13 @@
           "text": "I'm going to ask Jessica to get more context",
           "user_id": 619229,
           "is_private": false
+        },
+        {
+          "id": 18181179,
+          "created_at": "2026-09-21T17:55:43.021Z",
+          "text": "Replaced and live since 27 August 13:25 UTC. Card 02 \"Intraoral scanner\" was holding a stereo microscope. It now carries a licensed photograph of a scanner wand actually in the mouth.\n\nTiming note, because it explains the silence: this went live at 13:25 and your \"can you attach the correct photo here please?\" comment was written at 13:21. The replacement was already on its way out when you wrote it — you were looking at the pre-publish page.\n\nIt also cleared a repeat nothing else would have caught: card 04 \"In-house digital lab\" held the same photograph as this card at a different crop and a different byte count, so the duplicate-image sweep could not see it.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
         }
       ],
       "local_media": []
@@ -1650,10 +1657,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T07:17:53.264Z",
-      "updated_at": "2026-08-27T13:41:17.254Z",
+      "updated_at": "2026-09-21T17:55:43.549Z",
       "local_task_id": 22,
       "priority_id": 2,
-      "status_id": 2308883,
+      "status_id": 2308884,
       "title": null,
       "description": "wrong photo",
       "description_html": null,
@@ -1662,7 +1669,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/mccjgu5qk4sq3owqy5ccaq/screenshot.jpg",
-      "status": "doing",
+      "status": "done",
       "priority": "important",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/XjpNsSaYfT0Pcqp2ARQU1Q",
@@ -1693,7 +1700,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308883,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1715,18 +1722,20 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
+      "updater": null,
       "comments": [
         {
           "id": 18002279,
           "created_at": "2026-08-27T13:21:23.228Z",
           "text": "Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.",
           "user_id": 619229,
+          "is_private": false
+        },
+        {
+          "id": 18181180,
+          "created_at": "2026-09-21T17:55:43.381Z",
+          "text": "Replaced and live since 27 August 13:25 UTC. Card 03 \"Guided implant surgery\" was holding a consultation photo — a dentist pointing at a tooth model — which is not guided surgery. It now carries two gowned clinicians placing an implant with the CBCT scan on the monitor behind them, which is the card’s own sentence in one frame.\n\nFor the record, the most literal search result was rejected deliberately: an implant driven through a surgical template. Accurate, and it reads as raw anatomy on a page a nervous patient is browsing.\n\nSame timing as #21 — live at 13:25, your comment written at 13:21.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
           "is_private": false
         }
       ],
@@ -1737,10 +1746,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T07:18:07.962Z",
-      "updated_at": "2026-08-27T13:41:18.677Z",
+      "updated_at": "2026-09-21T17:55:43.888Z",
       "local_task_id": 23,
       "priority_id": 2,
-      "status_id": 2308883,
+      "status_id": 2308884,
       "title": null,
       "description": "wrong photo",
       "description_html": null,
@@ -1749,7 +1758,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/vw766edbpolhaipar723pq/screenshot.jpg",
-      "status": "doing",
+      "status": "done",
       "priority": "important",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/xls6LTAXgLMVRCtIeXtsNQ",
@@ -1780,7 +1789,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308883,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1802,18 +1811,20 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
+      "updater": null,
       "comments": [
         {
           "id": 18002280,
           "created_at": "2026-08-27T13:21:26.488Z",
           "text": "Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.",
           "user_id": 619229,
+          "is_private": false
+        },
+        {
+          "id": 18181181,
+          "created_at": "2026-09-21T17:55:43.710Z",
+          "text": "Replaced and live since 27 August 13:25 UTC. Card 06 \"Zirconia & porcelain oven\" was holding a crown on a model rather than an oven. It now carries a technician placing a crown into the furnace with tweezers — the card’s actual subject.\n\nSame timing as #21 and #22 — live at 13:25, your comment written at 13:23.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
           "is_private": false
         }
       ],
@@ -1824,10 +1835,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T13:33:09.003Z",
-      "updated_at": "2026-08-27T13:41:16.133Z",
+      "updated_at": "2026-09-21T17:55:44.254Z",
       "local_task_id": 24,
       "priority_id": 0,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "We shouldn't add doctors who are not Dr. Nahlah. Let's try to edit this photo with the Magnific AI Generation API so we can swap the face for the Dr. Nahlah.",
       "description_html": null,
@@ -1838,7 +1849,7 @@
       "requester_email": "alejandro@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/ftzu99h5obgg0yyxsas7fw/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "not set",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/7ufWgLmX954JXLXX0qroZQ",
@@ -1869,7 +1880,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1891,13 +1902,16 @@
         "display_name": "Alejandro Milano",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181182,
+          "created_at": "2026-09-21T17:55:44.063Z",
+          "text": "Done and live since 27 August 14:04 UTC. Card 05 \"Milling machine\" was a licensed stock model who read as a member of staff. It now holds a composite built through the Magnific API as you asked: the same laboratory, the same body, with Dr. Nahlah’s face from his own headshot.\n\nWe raised the question once at the time — a synthetic photograph of a real, named clinician on a medical site — and you confirmed the call. Recording it here so the decision is on the pin and not only in a chat.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -1905,10 +1919,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T13:37:38.516Z",
-      "updated_at": "2026-08-27T13:37:39.733Z",
+      "updated_at": "2026-09-21T17:55:44.631Z",
       "local_task_id": 25,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "On this section the heading should be wrapped in a symmetrical way",
       "description_html": null,
@@ -1919,7 +1933,7 @@
       "requester_email": "alejandro@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/vydggydg2yckewoxavqhug/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/cQSFtPgHQHXc6VWjAzVyBg",
@@ -1950,7 +1964,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -1972,13 +1986,16 @@
         "display_name": "Alejandro Milano",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181183,
+          "created_at": "2026-09-21T17:55:44.455Z",
+          "text": "Fixed and live since 27 August 14:04 UTC. The CTA heading on /smile-makeover was orphaning its last word (\"See it before you commit to / it.\"). The heading now uses text-wrap: balance, which lets the browser even the lines out itself rather than breaking at a width we guessed — \"See it before you / commit to it.\" at 1440, and it stays symmetrical at 1024 and below too.\n\nVerified in the published stylesheet today: .pk-cta h2 carries text-wrap: balance.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -1986,10 +2003,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T20:12:14.303Z",
-      "updated_at": "2026-08-27T20:12:15.768Z",
+      "updated_at": "2026-09-21T17:55:45.033Z",
       "local_task_id": 26,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "We need to create the topics, some sort of categories to filter.",
       "description_html": null,
@@ -2000,7 +2017,7 @@
       "requester_email": "alejandro@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/krvpyw50oh9bfqu8cjxvfa/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/qmwgn8vqndTu0xdqBqDuYg",
@@ -2031,7 +2048,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2053,13 +2070,16 @@
         "display_name": "Alejandro Milano",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181184,
+          "created_at": "2026-09-21T17:55:44.833Z",
+          "text": "Fixed and live since 28 August 05:21 UTC. Worth saying what was actually wrong, because it was not what it looked like.\n\nThe topics and the filter both existed. The dropdown prunes itself against the topics the article cards actually carry, and every published card was carrying an empty topic, so it pruned every option away and left you the single \"All topics\" you saw. The topics had been written to the draft rows only — publishing the site does not publish post rows, they are a separate step that had never been run.\n\nLive now, verified today: Implants 16, Aftercare 11, All-on-4 8, Dentures 3, Technology 3, Cost 1, Veneers 1.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2067,10 +2087,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T20:13:15.055Z",
-      "updated_at": "2026-08-27T20:13:16.543Z",
+      "updated_at": "2026-09-21T17:55:45.411Z",
       "local_task_id": 27,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "If you see we have a lot of repeated images here, let's use stock photos from Magnific API. Make sure to analyze the image so it matches the topic of the article. ",
       "description_html": null,
@@ -2081,7 +2101,7 @@
       "requester_email": "alejandro@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/vpf4txn8sswrau0a4xgyhq/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/AAmO2HDUEgpH2qsOVf8RvQ",
@@ -2112,7 +2132,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2134,13 +2154,16 @@
         "display_name": "Alejandro Milano",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181185,
+          "created_at": "2026-09-21T17:55:45.213Z",
+          "text": "Done and live since 28 August 05:21 UTC. It was worse than the pin said: across 43 articles there were only 22 distinct pictures — patient_hero.jpg and pt-hero-4.jpg were each on four articles. (Identity was settled by hashing the actual image bytes, not by asset name, which is why the earlier sweep missed them.)\n\nAll 21 redundant images were re-shot from Freepik against each article’s curated topic phrase rather than its title, and every candidate was scored before it could be chosen: it has to read as dentistry, it gains points for the topic’s own vocabulary, and it is rejected outright on children, surgical fields, blood, braces or render language. No page repeats an image now.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2148,10 +2171,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-27T23:13:16.777Z",
-      "updated_at": "2026-09-02T01:50:09.967Z",
+      "updated_at": "2026-09-21T17:55:45.826Z",
       "local_task_id": 28,
       "priority_id": 1,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "picture is still cut off",
       "description_html": null,
@@ -2160,7 +2183,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/vjbxe93rjzwjabapwaxtuq/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "critical",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/SPQpSXCUTnV1uFT1ReXLsw",
@@ -2191,7 +2214,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2213,13 +2236,16 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181186,
+          "created_at": "2026-09-21T17:55:45.630Z",
+          "text": "Fixed and live since 28 August 05:21 UTC, and it needed a different picture rather than a crop.\n\nThe frame there is 4:5 portrait, drawn for a 4:5 portrait of Dr. Nahlah. A de-duplication pass had swapped in a landscape photograph of him with Yolanda, 1.5:1 — 46% of that frame was being thrown away, his arm off one side and her shoulder off the other. No amount of repositioning fixes that; half the picture has nowhere to go. The 4:5 portrait is back in the 4:5 frame, so there is no crop at all.\n\nThis did not undo the no-repeated-images rule — that rule is per page, and the home page carries this portrait nowhere else. The photograph with Yolanda stays on /about and /implant-supported-dentures.\n\nApologies for the late close: the fix shipped on the date above, but the board was not being written back to at the time. It is now — this and the other nine August pins were all re-checked against the live site today before being marked done.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2227,10 +2253,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-31T02:47:15.988Z",
-      "updated_at": "2026-09-02T01:50:08.692Z",
+      "updated_at": "2026-09-21T18:10:46.478Z",
       "local_task_id": 29,
       "priority_id": 4,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "capitalize all words",
       "description_html": null,
@@ -2239,7 +2265,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/azrrzg7l7qxcxapyh6cgka/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "minor",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/YlTGbs1o23PKP3rJcCtj3g",
@@ -2270,7 +2296,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2292,13 +2318,16 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181313,
+          "created_at": "2026-09-21T18:10:46.121Z",
+          "text": "Done and live. All ten labels in \"Ten things people come in with.\" are title case now — Loose Dentures, Bad Breath, Bleeding Gums, Cracked Teeth, Crooked Teeth, Gum Disease, A Gummy Smile, Missing or Failing Teeth, Toothache, Yellow or Discolored Teeth.\n\nTwo small decisions worth stating, either of which we will reverse in a minute if you would rather:\n\n1. The two \"or\"s are left lowercase, which is ordinary title case. Read absolutely literally, \"capitalize all words\" would give \"Missing Or Failing Teeth\" — say the word and it is a one-line change.\n2. Only the accordion labels changed. The prose headings on that page (\"Even the small things matter.\", \"Ten things people come in with.\", \"Where to go next.\") are sentence case by design, across the whole site, so they were left alone. If you want those title case too it is a much larger change and a different decision, so it should be its own pin.\n\nHonest note on why this sat: this pin and #30 were filed on 31 August, three days after the last review round was worked through, and neither was ever picked up. That was our miss, not a disagreement.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2306,10 +2335,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-08-31T02:49:27.370Z",
-      "updated_at": "2026-09-02T01:50:07.502Z",
+      "updated_at": "2026-09-21T18:10:46.853Z",
       "local_task_id": 30,
       "priority_id": 4,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "add both location addresses and phone numbers like the Webflow design",
       "description_html": null,
@@ -2318,7 +2347,7 @@
       "requester_email": "sang@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/kxn4jkezkpx0zv84l0s3zg/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "minor",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/4a6sQmR7FqloGMcXc8TxGw",
@@ -2349,7 +2378,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2371,13 +2400,16 @@
         "display_name": "Sang Huynh",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18181314,
+          "created_at": "2026-09-21T18:10:46.667Z",
+          "text": "Done and live, in every footer on the site.\n\nHalf of it was already there — both new-patient numbers — but neither street address was, which is the half that matters for local search as much as for a reader. Each office is now a proper name/address/phone block:\n\nMcLean\n7901 Jones Branch Drive, Suite 220\nMcLean, VA 22102\n(571) 702-9900\n\nAlexandria\n2855 Duke Street\nAlexandria, VA 22314\n(571) 253-7790\n\nThe office name moved out of the link and into bold, which is the same shape the hours list directly above already uses, so the column reads as one thing. The addresses are taken from the contact pages rather than typed in, and the script refuses to run if they ever stop matching.\n\nThis touched 37 pages plus the article template — the footer is a separate copy on every page on this platform, not one shared block — and was then checked on all 55 live pages and on an article. The eighteen ads landing pages already had both addresses in their own footer and were not changed.\n\nOne thing to expect if you go and look: the Alexandria number renders as (571) 583-4820 in a browser rather than (571) 253-7790. That is your GHL call-tracking number pool swapping it at page load, which is what it is supposed to do — the page itself, and the number a search engine reads, is 253-7790. Worth someone checking why the pool covers Alexandria and not McLean, but that is a GHL setting, not a website one.\n\nSame honest note as #29: filed 31 August, never picked up until today. Our miss.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2385,10 +2417,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-02T01:39:08.744Z",
-      "updated_at": "2026-09-02T01:39:10.555Z",
+      "updated_at": "2026-09-21T16:20:53.688Z",
       "local_task_id": 31,
       "priority_id": 0,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "This should be a vimeo video",
       "description_html": null,
@@ -2399,7 +2431,7 @@
       "requester_email": "alejandro@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/rx8ayukyx7wnnk8bx35glq/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "not set",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/NzbkSiXeIPjXXXLC5Av58A",
@@ -2430,7 +2462,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2452,13 +2484,16 @@
         "display_name": "Alejandro Milano",
         "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
       },
-      "updater": {
-        "id": 619229,
-        "email": "alejandro@thrivesquare.com",
-        "display_name": "Alejandro Milano",
-        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
-      },
-      "comments": [],
+      "updater": null,
+      "comments": [
+        {
+          "id": 18180043,
+          "created_at": "2026-09-21T16:20:53.348Z",
+          "text": "Done — and not just this one. Every practice-owned film on the site is now served from the Brandklout Vimeo library instead of YouTube: 108 embeds across 15 pages (the home page, patient stories, the video library and all eighteen ads landing pages). This pin’s film, Melanie’s story, is a Vimeo player now. The click-to-play cards carry Vimeo thumbnails too, so the pages no longer call YouTube at all on load. Live on www.drnahlah.com and on staging. Commit 15b4c882; details in the 2026-09-21 runbook.",
+          "user_id": null,
+          "is_private": false
+        }
+      ],
       "local_media": []
     },
     {
@@ -2630,10 +2665,10 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T21:30:07.613Z",
-      "updated_at": "2026-09-21T15:28:56.389Z",
+      "updated_at": "2026-09-21T16:20:54.068Z",
       "local_task_id": 34,
       "priority_id": 3,
-      "status_id": 2308882,
+      "status_id": 2308884,
       "title": null,
       "description": "Can we upload this on Vimeo?",
       "description_html": null,
@@ -2642,7 +2677,7 @@
       "requester_email": "gauge@thrivesquare.com",
       "attachments": [],
       "screenshot_url": "https://files.bugherd.com/5mpchxhjfjz8kiduvvhd0w/screenshot.jpg",
-      "status": "todo",
+      "status": "done",
       "priority": "normal",
       "closed_at": null,
       "secret_link": "https://www.bugherd.com/t/xFIALeXoz410h0qxRp9vUA",
@@ -2673,7 +2708,7 @@
         }
       },
       "due_at": null,
-      "column_id": 2308882,
+      "column_id": 2308884,
       "logs": null,
       "assignees": [
         {
@@ -2701,6 +2736,13 @@
           "id": 18179412,
           "created_at": "2026-09-21T15:28:56.387Z",
           "text": "Technically yes, but it is not a one-off and it is not free.\n\nThat hero film is the page’s only real YouTube iframe, and it is what makes the platform open its content-security policy for the click-to-play players further down the page. Swapping it for Vimeo means also adding player.vimeo.com to the site’s allowed embed origins, and re-uploading the film.\n\nSo it is worth doing — but as a decision about the whole film library (fourteen clips) rather than this one hero. Tell us if you want that scheduled and we will do the lot at once.",
+          "user_id": null,
+          "is_private": false
+        },
+        {
+          "id": 18180044,
+          "created_at": "2026-09-21T16:20:53.875Z",
+          "text": "Yes — it was already on Vimeo, and now the page uses it. The twelve practice-owned films were uploaded to the Dr. Nahlah folder back on 29 August; what was missing was the site pointing at them. This hero film (Restore Your Bad or Missing Teeth in One Day) and every other owned film across the site now play from Vimeo. All fourteen films in that folder also got their full descriptions written for SEO.\n\nOne exception worth flagging: the eight THE WELLNESS HOUR clips in the video library stay on YouTube. They are third-party syndicated videos licensed for embedding, not the practice’s own footage, so re-hosting them on your Vimeo is a rights question we will not answer on our own. The video library is intentionally mixed-host until someone confirms redistribution rights or they are replaced with practice footage. Live on www.drnahlah.com and on staging. Commit 15b4c882; details in the 2026-09-21 runbook.",
           "user_id": null,
           "is_private": false
         }
@@ -3204,7 +3246,7 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:14:25.901Z",
-      "updated_at": "2026-09-21T15:28:58.848Z",
+      "updated_at": "2026-09-21T16:20:54.257Z",
       "local_task_id": 41,
       "priority_id": 1,
       "status_id": 2308882,
@@ -3277,6 +3319,13 @@
           "text": "We cannot do this yet: there is no veneer patient film in the library.\n\nThe practice has fourteen films. Six are its own patients, filmed at the practice. The other eight feature a generic stock presenter who is not Dr. Nahlah — and all three cosmetic titles (Seven Steps of Veneers, Smile Makeovers, Fixing Grey Lines) are in that eight. Putting a stock presenter on a paid page is not something we are willing to do.\n\nSo this needs one filmed veneer patient from the practice. It has been on the outstanding-assets list since 18 September. Same blocker as #42.",
           "user_id": null,
           "is_private": false
+        },
+        {
+          "id": 18180045,
+          "created_at": "2026-09-21T16:20:54.255Z",
+          "text": "Not addressed by the Vimeo swap, so leaving this open. The film on this page is now a Vimeo player rather than a YouTube one, but it is still Yolanda’s implant story — the host changed, the content did not. There is still no veneer patient film anywhere in the library; the only cosmetic clips feature a generic stock presenter rather than Dr. Nahlah, and we will not put one of those on a paid page. This needs one filmed veneer patient from the practice.",
+          "user_id": null,
+          "is_private": false
         }
       ],
       "local_media": []
@@ -3286,7 +3335,7 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:16:22.850Z",
-      "updated_at": "2026-09-21T15:28:59.178Z",
+      "updated_at": "2026-09-21T16:20:54.445Z",
       "local_task_id": 42,
       "priority_id": 1,
       "status_id": 2308882,
@@ -3357,6 +3406,13 @@
           "id": 18179420,
           "created_at": "2026-09-21T15:28:59.176Z",
           "text": "Same blocker as #41: there is no veneer patient film. The only cosmetic clips in the library feature a generic stock presenter rather than Dr. Nahlah, and we will not put one on a paid page. This needs one filmed veneer patient from the practice.",
+          "user_id": null,
+          "is_private": false
+        },
+        {
+          "id": 18180046,
+          "created_at": "2026-09-21T16:20:54.443Z",
+          "text": "Same as #41 — still open, and for the same reason. The embed is Vimeo now, but the film is still an implant story on a veneers page. It needs a filmed veneer patient; nothing in the current library can stand in.",
           "user_id": null,
           "is_private": false
         }
@@ -3686,7 +3742,7 @@
       "project_id": 537587,
       "project_name": "Dr Nahlah",
       "created_at": "2026-09-18T22:45:18.304Z",
-      "updated_at": "2026-09-21T15:29:01.429Z",
+      "updated_at": "2026-09-21T15:33:03.223Z",
       "local_task_id": 47,
       "priority_id": 1,
       "status_id": 2308882,

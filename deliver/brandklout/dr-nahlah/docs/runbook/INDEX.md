@@ -1,11 +1,12 @@
 # Runbook index
 
-85 runs, newest first. Each line is one file in this folder.
+86 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-21 | 2026-09-21b — the August BugHerd backlog closed (ten pins fixed in August, never written back), #29 and #30 built and LIVE; board now 42 done / 5 blocked — carries **gotchas** | [`2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md`](./2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md) |
 | 2026-09-21 | BugHerd #32–#48 — Brandklout's review of the eighteen ads landing pages applied and live (2026-09-21) | [`2026-09-21-bugherd-32-48-ads-review-applied.md`](./2026-09-21-bugherd-32-48-ads-review-applied.md) |
 | 2026-09-18 | 2026-09-18 — ads landing pages: rebuilt to the Livewell flow, LIVE on production under /ads-landing-pages/ (18 pages, headless REST import, site tags live) — carries **gotchas** | [`2026-09-18-ads-livewell-flow-live-on-instatic.md`](./2026-09-18-ads-livewell-flow-live-on-instatic.md) |
 | 2026-09-17 | 2026-09-17c — ads landing pages: two offices (18 pages), more imagery on more grounds, the four site tags — carries **gotchas** | [`2026-09-17c-ads-two-offices-more-imagery-site-scripts.md`](./2026-09-17c-ads-two-offices-more-imagery-site-scripts.md) |

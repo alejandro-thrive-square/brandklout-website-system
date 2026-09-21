@@ -41,8 +41,15 @@ then only the runs you need. Do not read them all.
    Still open on that folder: all 14 are `privacy.view=anybody` / `privacy.embed=public`,
    so the domain-locked embedding the migration was *for* has not been applied.
    See the 2026-09-21 Vimeo run.
-6. **Nine older BugHerd pins are still open**: #13, #14 (patient-stories), #24–#28, #30, #31
-   (main site), #29 (dental-conditions). Several wait on client assets.
+6. ~~**Nine older BugHerd pins are still open**.~~ **DONE 2026-09-21.** The board is
+   **42 done / 5 open**, and the five are all blocked on somebody other than us (#32 and #47
+   above, #39 awaiting a wording call, #41/#42 awaiting a filmed veneer patient). Ten August
+   pins were already fixed and live and had simply never been written back to the board; #29
+   (title-case labels on /dental-conditions) and #30 (both street addresses in every footer)
+   had never been picked up and were built and published that day. See the 2026-09-21b run.
+   **Write the board back at the end of a review round** — `05-design-revisions/close-bugherd-*.mjs`
+   posts comments and statuses over the API, and leaving it to "whoever normally closes them"
+   is how seventeen pins sat open for a month.
 7. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
    are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
 
