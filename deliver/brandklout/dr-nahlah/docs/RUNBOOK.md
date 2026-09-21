@@ -26,8 +26,14 @@ then only the runs you need. Do not read them all.
 4. **One filmed veneer patient**, and a photograph of the Alexandria office, from the client.
    Until the film exists, BugHerd #41 and #42 cannot be answered: the only cosmetic clips in the
    library are generic-presenter ones and must not go on a paid page.
-5. **Decide whether the film library moves to Vimeo** (BugHerd #34). It is a job for all fourteen
-   films at once, and it needs `player.vimeo.com` in the Embed Origins `frameOrigins`.
+5. ~~**Decide whether the film library moves to Vimeo** (BugHerd #34).~~ **DONE 2026-09-21.**
+   Every practice-owned film on the site now plays from the Brandklout Vimeo library: 108 nodes
+   across 15 pages, `player.vimeo.com` added to the Embed Origins `frameOrigins`, and
+   `site.js` teaching the click-to-play cards to build either player. BugHerd #31 and #34
+   closed. **The eight THE WELLNESS HOUR films on `/video-library` stay on YouTube** —
+   third-party, rights unresolved — so that page is mixed-host by design. The Vimeo folder's
+   privacy is still `view=anybody` / `embed=public`; locking it to this domain is now
+   actionable and has not been done. See the 2026-09-21 Vimeo swap run.
    **The Vimeo side is ready**: the 12 practice-owned films have been sitting in the Brandklout
    workspace since 2026-08-29 (account `/users/248712727`, folder `Dr. Nahlah` = project
    `30326239`), and as of 2026-09-21 all 14 carry full descriptions. The manifest at

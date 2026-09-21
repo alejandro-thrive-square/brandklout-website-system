@@ -5,7 +5,7 @@ embeds to be replaced with the Vimeo ones and the Vimeo BugHerd pins closed.
 
 ## Done
 
-Commit: `<SHA>`
+Commit: `15b4c882`
 
 **108 of 124 YouTube nodes converted across 15 pages**, applied to staging first, then
 production, published to both. Zero YouTube *embeds* remain anywhere on the site.
