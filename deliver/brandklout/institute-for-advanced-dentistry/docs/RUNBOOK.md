@@ -7,7 +7,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 - **REDESIGN, home page canary, local only since 2026-09-21**: `workflows/04-design/.tmp/prototypes/home/`.
   Run `node workflows/04-design/.tmp/prototypes/serve.mjs` (from this client folder) and open
   `http://localhost:4173/home/`; `?motion=off` for the reduced-motion page. Eight-chapter GSAP
-  journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 50/50, `walk.mjs` for frames).
+  journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 50/50 local, 52/52 on staging, `walk.mjs` for frames).
   **Published to staging 2026-09-21** (gate 50/50 on the published page); not yet shown to Brandklout.
   Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
   gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:
@@ -51,6 +51,10 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Open
 
+- **The GoHighLevel contact form says "Submission in progress" on a form nobody touched**, on
+  production too. Cause: the form's save-and-exit setting (`enableSaveExitConfirmation`) plus the
+  consent bridge's URL prefill. Fix it in GoHighLevel; `workflows/21-instatic-upload/check-ghl-form.mjs`
+  checks any form. Detail and the list of affected clients: 2026-09-21 staging run, review round 2.
 - **The GoHighLevel contact form shows its hidden consent fields** (`privacy_*_consent` and nine
   more, visible inputs under Submit) on production and staging alike. It is in the form itself;
   fix it in GoHighLevel.

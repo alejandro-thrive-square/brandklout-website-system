@@ -29,6 +29,43 @@ was provisioned.
 
 Commit: `d3745f9c` feat(ifa): home redesign on staging, which now holds only that page.
 
+## Review round 2 (same day): the form overflowed its card and said "Submission in progress"
+
+Two different causes, one ours and one GoHighLevel's.
+
+1. **Ours, fixed and republished (seq 6).** The form card was pinned with ScrollTrigger so it would
+   travel beside the copy. A pin lifts its element out of the page and puts it back on every
+   refresh, and **a browser reloads an `<iframe>` every time it is moved in the DOM**: traced on
+   staging, the GoHighLevel frame was moved 25 times and reloaded 25 times in four seconds. The pin
+   also froze the card at the 747 px it measured before the form grew, which was the overflow. The
+   card is no longer pinned or faded; the frame now loads 3 times (first load, the consent bridge's
+   single `src` write, `form_embed.js` wrapping it once) and sits 40 px inside its card. Two gate
+   checks hold it there: at most 3 loads and none after a forced refresh; frame inside a visible,
+   unpinned card. Gate on staging **52/52**.
+2. **GoHighLevel's, and it is why other sites show it too.** The prompt is GoHighLevel's
+   save-and-exit feature. A form shows it when its setting **`enableSaveExitConfirmation`** is on
+   **and** any field arrives prefilled through the iframe URL, which the consent bridge does on
+   every load for the hidden `privacy_*` fields. GoHighLevel treats the prefilled values as a
+   submission in progress, writes `form_progress_<formId>` to the frame's localStorage, and offers
+   "Start over / Continue" on the next load. Proven on the bare form with no site around it (no query
+   string, two loads: nothing; consent query string, two loads: prompt on the second;
+   `?first_name=Test` alone: the same). Reproduced on production's `/contact-us/` at 4 s. Of the 13
+   forms referenced in the repo, exactly the ones with the flag on prompt:
+
+   | Flag ON (will prompt) | Client |
+   | :--- | :--- |
+   | `cxtQ5q29TfUr3cYlMmDB` | **Institute for Advanced Dentistry** (production and staging) |
+   | `PzBilvSVUmynr9PLukbt` | Arvada Dental Center, Stone Dental Implant Center |
+   | `iu5PnIxTRO7whKp6pahH`, `TYYxcIqi9UWzZBA9P5Ms`, `Jv5B9yuqGLgfrRpfWdLr` | Arvada Dental Center |
+
+   Off, and quiet: Grand Mission / Livewell / Stone `WFEJsiC2yvdshNv2x2ff`, Legacy Pasadena x3, Mason
+   Park `6SUhknD0606Y66ZAgaZI`, Marvel x2, Stone `0mtZk3CrshD7Y0OYOao4`.
+
+   **The fix is in GoHighLevel: turn save-and-exit off on those forms.** No site script can reach it:
+   the storage belongs to `api.leadconnectorhq.com`. Check any form with
+   `node workflows/21-instatic-upload/check-ghl-form.mjs <formId> > file 2>&1` (exit 1 when on).
+   A visitor who already has the saved key keeps seeing the prompt until they choose "Start over".
+
 ## Backups taken before the delete — and how to go back
 
 | What | Where |
@@ -53,6 +90,7 @@ library was not touched, so no media step is needed.
 
 ## Open, for Brandklout
 
+- **Turn save-and-exit off on the GoHighLevel form** (`enableSaveExitConfirmation`, review round 2 above).
 - **The GoHighLevel form shows its hidden consent fields.** `privacy_analytics_consent`,
   `privacy_advertising_consent` and nine more render as visible inputs under the Submit button.
   They are in the form itself: opening `api.leadconnectorhq.com/widget/form/cxtQ5q29TfUr3cYlMmDB`
@@ -69,6 +107,8 @@ library was not touched, so no media step is needed.
   would overwrite production's `site.css` and `site.js` — the whole WordPress clone's cascade and
   script replay — with the home page's, and every one of production's 58 other pages would lose its
   styling and scripts at the next publish. Promotion waits until the full site is rebuilt.
+- **Never pin, and never let anything re-parent, an element that holds an `<iframe>`.** Every DOM move
+  reloads the frame. ScrollTrigger pins move their element on every refresh.
 - **`replace` mode is the delete.** `push-home.mjs` sends one page with `mode: 'replace'`; Instatic
   derives the deletions itself. `deletedPageIds` stays empty.
 - **The script asset is served as a module, so there is no inline `<head>` bootstrap.** The hero's

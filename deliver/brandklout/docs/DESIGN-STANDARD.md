@@ -215,6 +215,16 @@ vendor originals; the *execution* is ours.
 - **A decorative fixed rail is `pointer-events: none`.** On IFA it overlaid the right gutter and
   swallowed every click meant for the review arrows beneath it. No screenshot shows that; only a
   written `page.click` does.
+- **Never pin an element that holds an `<iframe>`, and never put a form embed inside a pinned
+  chapter.** A pin lifts its element out of the page and back on every ScrollTrigger refresh, and a
+  browser reloads an iframe each time it is moved. On IFA the GoHighLevel form reloaded 25 times in
+  four seconds and its card was frozen at its pre-load height, so the form overflowed it. A lead form
+  also never gets `autoAlpha`: it must not depend on an animation to be visible.
+- **"Submission in progress" on an untouched GoHighLevel form is a GoHighLevel setting**
+  (`enableSaveExitConfirmation`) meeting the consent bridge's URL prefill, not a site bug. Turn it
+  off in GoHighLevel. `institute-for-advanced-dentistry/workflows/21-instatic-upload/check-ghl-form.mjs`
+  reads the flag from the public form; the affected forms as of 2026-09-21 are listed in that client's
+  runbook.
 - **`clip-path` does not contain overflow.** A film scaled 1.14 inside a clipped window still widens
   the layout: on a phone the layout viewport grew from 390 to 418 px, the whole page rendered 7 %
   small and the fixed call bar fell off the bottom. Give the window `overflow: hidden` as well.

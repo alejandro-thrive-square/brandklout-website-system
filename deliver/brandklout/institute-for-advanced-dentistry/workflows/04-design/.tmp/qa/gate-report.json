@@ -160,8 +160,8 @@
       "name": "Memberships marquee is running",
       "pass": true,
       "detail": [
-        -697.551,
-        -663.448
+        -688.1,
+        -651.922
       ]
     },
     {
@@ -222,7 +222,7 @@
       "pass": true,
       "detail": {
         "smoother": true,
-        "pins": 5
+        "pins": 4
       }
     },
     {
@@ -339,7 +339,7 @@
       "pass": true
     },
     {
-      "name": "Mobile: call bar never covers the submit button",
+      "name": "Mobile: call bar never covers the submit area of the form",
       "pass": true
     },
     {

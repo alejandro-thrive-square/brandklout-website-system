@@ -164,6 +164,30 @@ const READ = {
   await page.close()
 }
 
+/* ------------------------------------------------------------ the live form, where there is one */
+// A browser reloads an <iframe> every time it is moved in the DOM, and a ScrollTrigger pin moves its
+// element on every refresh. Pinned, this form reloaded 25 times in 4 s. Budget: the first load, the
+// consent bridge's one src write, and form_embed.js wrapping it once.
+{
+  const page = await browser.newPage()
+  await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 })
+  let loads = 0
+  page.on('request', r => { if (r.isNavigationRequest() && r.frame() !== page.mainFrame() && r.url().includes('/widget/form/')) loads++ })
+  await page.goto(BASE, { waitUntil: 'networkidle2', timeout: 60000 })
+  if (await page.$('[data-ask] iframe')) {
+    await page.evaluate(() => document.querySelector('[data-ask]').scrollIntoView({ block: 'start' }))
+    await wait(12000)
+    const settled = loads
+    await page.evaluate(() => { window.scrollTo(0, 0); window.dispatchEvent(new Event('resize')); if (window.ScrollTrigger) ScrollTrigger.refresh() })
+    await wait(3000)
+    ok('Live form: the frame loads at most 3 times, and a refresh does not reload it', settled <= 3 && loads === settled, { loads: settled, afterRefresh: loads })
+    await page.evaluate(() => document.querySelector('[data-ask]').scrollIntoView({ block: 'start' })); await wait(1500)
+    const box = await page.evaluate(() => { const c = document.querySelector('[data-ask]'), i = c.querySelector('iframe'), cr = c.getBoundingClientRect(), r = i.getBoundingClientRect(), cs = getComputedStyle(c); return { over: Math.round(r.bottom - cr.bottom), right: Math.round(r.right - cr.right), opacity: cs.opacity, visibility: cs.visibility, pinned: c.parentElement.classList.contains('pin-spacer'), cardH: Math.round(cr.height), frameH: Math.round(r.height) } })
+    ok('Live form: the frame sits inside its card, which is visible and not pinned', box.over <= 0 && box.right <= 0 && box.opacity === '1' && box.visibility === 'visible' && !box.pinned, box)
+  }
+  await page.close()
+}
+
 /* ------------------------------------------------------------ desktop, ScrollSmoother on */
 {
   const { page, errors } = await open(1440, 900, '')

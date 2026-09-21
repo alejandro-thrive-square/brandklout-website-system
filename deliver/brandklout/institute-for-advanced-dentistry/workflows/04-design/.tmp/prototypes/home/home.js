@@ -435,11 +435,12 @@
     gsap.from('.voices > *', { y: 40, autoAlpha: 0, stagger: .12, scrollTrigger: { trigger: voices, start: 'top 85%', once: true } });
 
     /* ---- 07 · the invitation ---- */
-    mm.add('(min-width: 992px)', function () {
-      var col = $('.invitation__copy');
-      ScrollTrigger.create({ trigger: ask, pin: ask, pinSpacing: false, start: function () { return 'top ' + (nav.offsetHeight + 24); }, end: function () { return '+=' + Math.max(0, col.offsetHeight - ask.offsetHeight); }, invalidateOnRefresh: true });
-    });
-    gsap.from(ask, { y: 60, autoAlpha: 0, duration: 1.2, scrollTrigger: { trigger: ask, start: 'top 88%', once: true } });
+    /* The form card is NEVER pinned and never faded. A pin lifts its element out of the page and puts
+       it back on every ScrollTrigger refresh, and a browser reloads an <iframe> each time it is moved:
+       pinned, the GoHighLevel form reloaded 25 times in four seconds ("submission in progress") and
+       its card was frozen at the height it had before the form grew. A lead form must also never
+       depend on an animation to be visible. It only rises a little. */
+    gsap.from(ask, { y: 40, duration: 1.2, scrollTrigger: { trigger: ask, start: 'top 92%', once: true } });
     gsap.from('.includes li', { x: -24, autoAlpha: 0, stagger: .07, duration: .9, scrollTrigger: { trigger: '.includes', start: 'top 86%', once: true } });
 
     /* ---- departures: leaving a chapter is animated too ---- */
