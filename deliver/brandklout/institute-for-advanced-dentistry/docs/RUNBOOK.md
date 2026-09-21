@@ -7,7 +7,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 - **REDESIGN, home page canary, local only since 2026-09-21**: `workflows/04-design/.tmp/prototypes/home/`.
   Run `node workflows/04-design/.tmp/prototypes/serve.mjs` (from this client folder) and open
   `http://localhost:4173/home/`; `?motion=off` for the reduced-motion page. Eight-chapter GSAP
-  journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 48/48, `walk.mjs` for frames).
+  journey, gates in `workflows/04-design/.tmp/qa/` (`gate.mjs` 50/50, `walk.mjs` for frames).
   **It is awaiting Alejandro's review and has not been shown to Brandklout or pushed to staging.**
   Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
   gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:

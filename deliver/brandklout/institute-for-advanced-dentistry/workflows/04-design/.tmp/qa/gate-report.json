@@ -1,6 +1,6 @@
 {
   "base": "http://localhost:4173/home/",
-  "passed": 48,
+  "passed": 50,
   "failed": 0,
   "results": [
     {
@@ -16,9 +16,21 @@
       "name": "Arrival: three distinct intermediate states",
       "pass": true,
       "detail": [
-        "inset(10.8134% 3.6045% 15.1388% 36.0448% round 11.5343px)",
-        "inset(0.3306% 0.1102% 0.4628% 1.102% round 0.3526px)",
-        "inset(0%)"
+        [
+          1.437,
+          -232,
+          -71
+        ],
+        [
+          2.532,
+          -814,
+          -250
+        ],
+        [
+          2.567,
+          -833,
+          -255
+        ]
       ]
     },
     {
@@ -114,6 +126,27 @@
       "detail": -900
     },
     {
+      "name": "Arrival: film frame is 16:9, same as the film",
+      "pass": true,
+      "detail": {
+        "ratio": 1.778,
+        "video": 1.778,
+        "stage": 900,
+        "vh": 900
+      }
+    },
+    {
+      "name": "Arrival: opened film covers the window and is still 16:9",
+      "pass": true,
+      "detail": {
+        "l": -81,
+        "t": -1,
+        "r": -81,
+        "b": 0,
+        "ratio": 1.778
+      }
+    },
+    {
       "name": "The Question: unlit words already clear 4.5:1",
       "pass": true,
       "detail": 5.18
@@ -127,8 +160,8 @@
       "name": "Memberships marquee is running",
       "pass": true,
       "detail": [
-        -819.113,
-        -700.363
+        -697.551,
+        -663.448
       ]
     },
     {

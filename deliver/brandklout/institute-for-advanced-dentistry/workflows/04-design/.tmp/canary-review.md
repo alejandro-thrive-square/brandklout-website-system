@@ -23,11 +23,11 @@ the rest of the batch.
 | ScrollSmoother | default URL, desktop | registered, running, 0 console errors |
 | Mobile | 390×844 touch | 0 overflow, call bar on screen from the first pixel and never over the submit button, body copy 17.5 px, no text under 12.5 px |
 | Horizontal overflow | `qa/walk.mjs` | 0 px at 360, 390, 768, 1024, 1440, 1920, 2560 |
-| Journey architecture | `journey-audit.mjs` | PASS: 8 chapters, 4 `pin: true`, 18 scrubs, 0 IntersectionObserver, 0 band sections |
+| Journey architecture | `journey-audit.mjs` | PASS: 8 chapters, 4 `pin: true`, 17 scrubs, 0 IntersectionObserver, 0 band sections |
 | Fluid root | `fluid-root.mjs --check` | exit 0 |
 | Visual review | viewport-step frames with motion on, all seven widths, looked at | see findings |
 
-**48 / 48** in `qa/gate-report.json`.
+**50 / 50** in `qa/gate-report.json`.
 
 ## Findings fixed during the canary
 
@@ -42,6 +42,16 @@ the rest of the batch.
 3. The cosmetic panel's text box covered the patient's face; the image now re-frames as the panel
    opens, and the stacked layout is used up to 991.
 4. Font URLs in `fonts/fonts.css` are relative to that file, not to the page.
+
+## Review round 1 — Alejandro, 2026-09-21
+
+- **Hero, at a 1347×614 window:** the left column was too tall for a stage locked to one viewport,
+  and the film was cropped hard inside its clipped window. **Changed:** the stage is now as tall as
+  its content (`min-height: 100svh`, no fixed height, no short-window special cases); the film sits
+  in a true 16:9 frame so nothing is cropped at rest; opening it is a plain scale of that same box
+  until it covers the window (full width only on a portrait screen). When the stage is taller than
+  the window it pins from its bottom edge, so the buttons and the figures are read first. Two gate
+  checks added: the frame is 16:9 like the film, and the opened film covers the window and is still 16:9.
 
 ## Open before this goes to the client
 

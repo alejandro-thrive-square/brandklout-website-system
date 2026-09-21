@@ -138,7 +138,7 @@ body {
 
 /* SplitText line masks: room for descenders and the italic overhang */
 .ln-mask { padding: 0 .08em .16em 0; margin: 0 -.08em -.16em 0; }
-.is-loading .arrival__copy, .is-loading .arrival__facts, .is-loading .arrival__media, .is-loading .arrival__frame { visibility: hidden; }
+.is-loading .arrival__copy, .is-loading .arrival__facts, .is-loading .arrival__fig { visibility: hidden; }
 
 /* ---------- buttons & links ---------- */
 .btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 3.25rem; padding: .9rem 1.6rem; border-radius: .2rem; font-size: calc(.9rem * var(--s-sp)); font-weight: 500; letter-spacing: .09em; text-transform: uppercase; line-height: 1.1; overflow: hidden; isolation: isolate; transition: color .45s var(--ease), border-color .45s var(--ease); will-change: transform; }
@@ -232,12 +232,15 @@ body {
 
 /* 00 · arrival */
 .ch-arrival { background: var(--ink); }
-.arrival__stage { position: relative; height: 100vh; height: 100svh; min-height: 42rem; overflow: hidden; }
-/* overflow as well as clip-path: a clip does not stop the scaled video widening the mobile layout viewport */
-.arrival__media { position: absolute; inset: 0; overflow: hidden; clip-path: inset(15% 5% 21% 50% round 1rem); will-change: clip-path; }
-.arrival__media video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+/* As tall as its content needs, never squeezed into one viewport. The film keeps its own 16:9, so
+   nothing is cropped at rest, and opening it is a plain scale of that same box (home.js). */
+.arrival__stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 3.5rem 4rem; align-items: center; padding: calc(var(--nav-h) + 3rem) var(--gutter) 2.25rem; }
+.arrival__fig { position: relative; z-index: 3; grid-column: 2; grid-row: 1; aspect-ratio: 16 / 9; }
+/* overflow: hidden as well: a clip or a radius alone does not stop scaled content widening a phone's layout viewport */
+.arrival__media { position: absolute; inset: 0; overflow: hidden; border-radius: 1rem; transform-origin: 0 0; will-change: transform; }
+.arrival__media video { width: 100%; height: 100%; object-fit: cover; }
 .arrival__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,17,18,.35), rgba(18,17,18,.1) 40%, rgba(18,17,18,.55)); opacity: .5; }
-.arrival__frame { position: absolute; inset: 15% 5% 21% 50%; pointer-events: none; }
+.arrival__frame { position: absolute; inset: 0; pointer-events: none; }
 .tick { position: absolute; width: 1.1rem; height: 1.1rem; border: 0 solid var(--gold); }
 .tick--tl { left: -.6rem; top: -.6rem; border-left-width: 1px; border-top-width: 1px; }
 .tick--tr { right: -.6rem; top: -.6rem; border-right-width: 1px; border-top-width: 1px; }
@@ -245,12 +248,13 @@ body {
 .tick--br { right: -.6rem; bottom: -.6rem; border-right-width: 1px; border-bottom-width: 1px; }
 .spec--tl { position: absolute; left: 0; bottom: calc(100% + 1rem); }
 .spec--br { position: absolute; right: 0; top: calc(100% + 1rem); }
-.arrival__copy { position: absolute; left: var(--gutter); top: var(--nav-h); bottom: 7.5rem; width: 43%; z-index: 2; display: flex; flex-direction: column; justify-content: center; }
+.arrival__copy { position: relative; z-index: 2; grid-column: 1; grid-row: 1; }
+.ch-arrival .d1 { font-size: calc(5rem * var(--s-d1)); }
 .arrival__copy .lede { margin-top: 2rem; }
 .arrival__cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.5rem; }
 .arrival__second em { color: var(--gold-hi); margin-inline: .12em; }
-.arrival__second { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; text-align: center; font-size: calc(5rem * var(--s-d1)); font-weight: 300; letter-spacing: -.03em; line-height: 1; padding-inline: var(--gutter); opacity: 0; visibility: hidden; text-shadow: 0 .1rem 2.5rem rgba(18,17,18,.55); }
-.arrival__facts { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 2.25rem; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(189, 191, 193, .22); }
+.arrival__second { position: absolute; left: 0; right: 0; top: var(--vt, 0px); height: 100vh; height: 100svh; z-index: 4; display: flex; align-items: center; justify-content: center; text-align: center; font-size: calc(5rem * var(--s-d1)); font-weight: 300; letter-spacing: -.03em; line-height: 1; padding-inline: var(--gutter); opacity: 0; visibility: hidden; text-shadow: 0 .1rem 2.5rem rgba(18,17,18,.55); pointer-events: none; }
+.arrival__facts { position: relative; z-index: 2; grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding-top: 1.25rem; border-top: 1px solid rgba(189, 191, 193, .22); }
 .arrival__facts li { display: flex; align-items: baseline; gap: .9rem; }
 .arrival__facts b { font-size: calc(1.75rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; color: var(--gold); white-space: nowrap; }
 .arrival__facts span { font-size: calc(.875rem * var(--s-sp)); line-height: 1.35; color: var(--on-dark-dim); max-width: 12rem; }
@@ -480,10 +484,10 @@ body {
   .nav__burger { display: block; }
   .ch__head { padding-top: 7rem; padding-bottom: 3rem; }
   .ch__head--split { grid-template-columns: 1fr; gap: 1.5rem; }
-  .arrival__copy { width: 52%; }
-  .arrival__media { clip-path: inset(15% 4% 24% 58% round 1rem); }
-  .arrival__frame { inset: 15% 4% 24% 58%; }
-  .arrival__facts { grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem; bottom: 1.5rem; }
+  .arrival__stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; gap: 3rem; padding-top: calc(var(--nav-h) + 2.5rem); }
+  .arrival__copy, .arrival__fig, .arrival__facts { grid-column: 1; grid-row: auto; }
+  .arrival__copy { max-width: 40rem; }
+  .arrival__facts { grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem; }
   .question__stage { grid-template-columns: minmax(0, 1fr); gap: 2rem; align-content: center; }
   .question__fig { order: -1; max-width: 22rem; }
   .question__img { aspect-ratio: 16 / 10; }
@@ -525,14 +529,13 @@ body {
   .callbar a.is-gold { background: var(--gold); color: var(--ink); }
   .callbar svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
 
-  .arrival__stage { height: auto; min-height: 0; display: flex; flex-direction: column; padding-top: var(--nav-h); overflow: visible; }
-  .arrival__media { position: relative; inset: auto; order: 1; height: 38vh; height: 38svh; margin: .5rem 0 0; clip-path: inset(0 1.5rem 0 1.5rem round .8rem); }
+  .arrival__stage { min-height: 0; gap: 2.25rem; padding: calc(var(--nav-h) + .75rem) var(--gutter) 3rem; }
+  .arrival__fig { order: -1; }
+  .arrival__media { border-radius: .8rem; transform-origin: 50% 50%; }
   .arrival__frame, .arrival__second { display: none; }
-  .arrival__copy { position: relative; left: auto; top: auto; bottom: auto; display: block; width: auto; order: 2; padding: 2.25rem var(--gutter) 0; }
   .arrival__copy .lede { margin-top: 1.4rem; }
   .arrival__cta { margin-top: 1.75rem; }
   .arrival__cta .btn { flex: 1 1 auto; }
-  .arrival__facts { position: relative; left: auto; right: auto; bottom: auto; order: 3; margin: 2.5rem var(--gutter) 3rem; }
   .arrival__facts li { flex-direction: column; gap: .2rem; }
 
   .question__stage { padding-bottom: 5rem; }
@@ -573,16 +576,10 @@ body {
 }
 
 /* Short laptop windows (the reviewer's Safari is 1512x735): a pinned scene has exactly one
-   viewport to fit in, so the display scale and the step list give way rather than clip. */
+   viewport to fit in, so the display scale and the step list give way rather than clip.
+   The hero is not in this list: it is as tall as it needs and pins from its bottom edge. */
 @media screen and (min-width: 992px) and (max-height: 820px) {
-  :root { --s-d1: .78; --s-d2: .8; --s-st: .86; }
-  .arrival__copy { bottom: 6.5rem; }
-  .arrival__copy .tag { margin-bottom: 1.1rem; }
-  .arrival__copy .lede { margin-top: 1.25rem; font-size: 1.125rem; }
-  .arrival__cta { margin-top: 1.5rem; }
-  .arrival__facts { bottom: 1.4rem; padding-top: .9rem; }
-  .arrival__media { clip-path: inset(14% 5% 19% 50% round 1rem); }
-  .arrival__frame { inset: 14% 5% 19% 50%; }
+  :root { --s-d2: .8; --s-st: .86; }
   .design__steps { margin-top: 1.5rem; }
   .design__steps li { padding-block: .8rem; }
   .design__stage.is-live .design__steps li:not(.is-on) p { display: none; }
@@ -591,7 +588,7 @@ body {
   .path__stage { gap: 1.5rem; }
 }
 @media screen and (min-width: 992px) and (max-width: 1279px) and (max-height: 820px) {
-  :root { --s-d1: .7; --s-d2: .72; }
+  :root { --s-d2: .72; }
 }
 
 @media screen and (max-width: 767px) and (max-height: 700px) {
@@ -603,7 +600,6 @@ body {
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  .arrival__media { clip-path: inset(15% 5% 21% 50% round 1rem); }
   .path__viewport { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; }
   .step { scroll-snap-align: start; }
   .cursor { display: none !important; }

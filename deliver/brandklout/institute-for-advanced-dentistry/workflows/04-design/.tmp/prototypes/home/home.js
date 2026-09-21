@@ -278,40 +278,55 @@
       gsap.fromTo(img, { yPercent: 0 }, { yPercent: -amt, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
 
-    /* ---- 00 · arrival ---- */
-    var stage = $('[data-arrival-stage]'), media = $('[data-arrival-media]'), frame = $('[data-arrival-frame]');
+    /* ---- 00 · arrival ----
+       The stage is as tall as its content. The film sits in a true 16:9 frame, uncropped, and opening
+       it is one transform: the same box scaled until it covers the viewport. If the stage is taller
+       than the window it pins from its bottom edge, so everything has been read before it opens. */
+    var stage = $('[data-arrival-stage]'), fig = $('[data-arrival-fig]'), media = $('[data-arrival-media]'), frame = $('[data-arrival-frame]');
     var copy = $('[data-arrival-copy]'), facts = $('[data-arrival-facts]'), second = $('[data-arrival-second]');
     var shade = $('.arrival__shade'), h1 = $('.ch-arrival .d1');
 
     var heroSplit = SplitText.create(h1, { type: 'lines', linesClass: 'ln', mask: 'lines' });
-    var small = window.innerWidth < 768;
-    var restClip = getComputedStyle(media).clipPath;
-    var openClip = small ? 'inset(0px 0px 0px 0px round 0px)' : 'inset(0% 0% 0% 0% round 0px)';
     var intro = gsap.timeline({ delay: .15 });
     intro
-      .fromTo(media, { clipPath: small ? 'inset(0px ' + (window.innerWidth / 2) + 'px 0px ' + (window.innerWidth / 2) + 'px round 13px)' : 'inset(50% 5% 50% 50% round 16px)' }, { clipPath: restClip, duration: 1.7, ease: 'expo.inOut' }, 0)
-      .fromTo(heroVideo, { scale: 1.35 }, { scale: 1.14, duration: 2.2 }, 0)
+      .fromTo(media, { clipPath: 'inset(50% 0% 50% 0% round 16px)' }, { clipPath: 'inset(0% 0% 0% 0% round 16px)', duration: 1.6, ease: 'expo.inOut', clearProps: 'clipPath' }, 0)
+      .fromTo(heroVideo, { scale: 1.25 }, { scale: 1, duration: 2.1, clearProps: 'transform' }, 0)
       .from($('.ch-arrival .tag').children, { x: -28, autoAlpha: 0, stagger: .08, duration: .9 }, .35)
       .from(heroSplit.lines, { yPercent: 112, stagger: .1, duration: 1.3 }, .45)
       .from($$('.ch-arrival [data-rise]'), { y: 30, autoAlpha: 0, stagger: .12, duration: 1 }, .9)
       .from($$('li', facts), { y: 24, autoAlpha: 0, stagger: .08, duration: .9 }, 1.1)
-      .from(frame, { autoAlpha: 0, scale: 1.04, duration: 1.2 }, 1.2);
+      .from(frame, { autoAlpha: 0, duration: 1.2 }, 1.2);
     unveil();
 
+    /* Where the visible window sits inside the stage while it is pinned, and the one scale that covers it. */
+    var open = function () {
+      var vw = stage.offsetWidth, vh = window.innerHeight;
+      var vt = Math.max(0, stage.offsetHeight - vh);
+      var bw = fig.offsetWidth, bh = fig.offsetHeight;
+      /* Landscape: cover the window. Portrait (a tablet held upright): full width only, because covering
+         a tall window with a 16:9 film would crop it down to a sliver of the doctor's coat. */
+      var sc = (vh > vw ? vw / bw : Math.max(vw / bw, vh / bh)) * 1.001;
+      return { vt: vt, scale: sc, x: (vw - bw * sc) / 2 - fig.offsetLeft, y: vt + (vh - bh * sc) / 2 - fig.offsetTop };
+    };
+    var placeSecond = function () { stage.style.setProperty('--vt', open().vt + 'px'); };
+    placeSecond();
+    ScrollTrigger.addEventListener('refreshInit', placeSecond);
+
     mm.add('(min-width: 768px)', function () {
-      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, pin: true, start: 'top top', end: '+=115%', scrub: true, anticipatePin: 1 } });
-      tl.fromTo(media, { clipPath: restClip }, { clipPath: openClip, ease: 'power2.inOut', duration: .62, immediateRender: false }, 0)
-        .to(frame, { top: 0, right: 0, bottom: 0, left: 0, autoAlpha: 0, ease: 'power2.inOut', duration: .4 }, 0)
+      var tl = gsap.timeline({ scrollTrigger: { trigger: stage, pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
+        start: function () { return stage.offsetHeight > window.innerHeight + 2 ? 'bottom bottom' : 'top top'; }, end: '+=115%' } });
+      tl.to(media, { x: function () { return open().x; }, y: function () { return open().y; }, scale: function () { return open().scale; }, borderRadius: 0, ease: 'power2.inOut', duration: .62 }, 0)
+        .to(frame, { autoAlpha: 0, ease: 'none', duration: .12 }, 0)
         .to(copy, { y: -90, autoAlpha: 0, ease: 'power1.in', duration: .3 }, 0)
         .to(facts, { y: 30, autoAlpha: 0, ease: 'power1.in', duration: .22 }, 0)
         .to(shade, { opacity: 1, ease: 'none', duration: .6 }, 0)
-        .fromTo(heroVideo, { scale: 1.14 }, { scale: 1.001, ease: 'none', duration: 1, immediateRender: false }, 0)
         .fromTo(second, { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: .3 }, .52)
-        .to(second, { autoAlpha: 0, y: -50, ease: 'power1.in', duration: .12 }, .9);
+        .to(second, { autoAlpha: 0, y: -50, ease: 'power1.in', duration: .12 }, .9)
+        .to({}, { duration: .01 }, .99);
     });
     mm.add('(max-width: 767px)', function () {
-      gsap.fromTo(media, { clipPath: restClip }, { clipPath: openClip, ease: 'none', immediateRender: false, scrollTrigger: { trigger: media, start: 'top 12%', end: 'bottom top', scrub: true } });
-      gsap.fromTo(heroVideo, { scale: 1.14 }, { scale: 1.001, ease: 'none', immediateRender: false, scrollTrigger: { trigger: media, start: 'top 12%', end: 'bottom top', scrub: true } });
+      gsap.to(media, { scale: function () { return stage.offsetWidth / fig.offsetWidth * 1.001; }, borderRadius: 0, ease: 'none',
+        scrollTrigger: { trigger: fig, start: 'top 15%', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
     });
     ScrollTrigger.create({ trigger: stage, start: 'top bottom', end: 'bottom top', onToggle: function (self) {
       if (self.isActive) { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); } else heroVideo.pause();

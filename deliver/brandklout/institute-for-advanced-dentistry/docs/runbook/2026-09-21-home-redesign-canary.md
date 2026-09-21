@@ -23,9 +23,9 @@ SOP ([DESIGN-STANDARD.md](../../../docs/DESIGN-STANDARD.md) + `04-design`).
 - **All real material.** Every photograph is from the practice's own 196-frame shoot; the hero is
   their 18 s b-roll; the four patient films are theirs; every figure and every sentence of claim is
   from the client's brief or the live site. Nothing invented.
-- **Gates.** `qa/gate.mjs` **48/48** (pins hold, three distinct states at 25/50/75 % on desktop and
+- **Gates.** `qa/gate.mjs` **50/50** (pins hold, three distinct states at 25/50/75 % on desktop and
   phone, real clicks, reduced motion, contrast, call bar). `journey-audit.mjs` PASS (8 chapters, 4
-  pins, 18 scrubs, 0 IntersectionObserver). `fluid-root.mjs --check` exit 0. Zero horizontal overflow
+  pins, 17 scrubs, 0 IntersectionObserver). `fluid-root.mjs --check` exit 0. Zero horizontal overflow
   at 360, 390, 768, 1024, 1366, 1440, 1512, 1920, 2560. Frames reviewed at every width. Detail in
   `.tmp/canary-review.md`.
 - **`scripts/drive.mjs thumbs`** — new command: a web-size JPEG of every image in a Drive folder,
@@ -34,6 +34,13 @@ SOP ([DESIGN-STANDARD.md](../../../docs/DESIGN-STANDARD.md) + `04-design`).
 - Four gotchas added to DESIGN-STANDARD.md (below).
 
 Commit: `2c50e986` feat(ifa): home page redesign canary, local, and drive.mjs thumbs.
+
+## Review round 1 (same day)
+
+Alejandro, on a 1347×614 window: the hero's left column was too tall for a one-viewport stage and
+the film was cropped inside its clipped window. The stage is now content-height, the film is a true
+16:9 frame, and opening it is one scale transform of that box (cover in landscape, full width in
+portrait). Taller than the window, it pins `bottom bottom` instead of `top top`.
 
 ## Next
 
@@ -70,7 +77,10 @@ Commit: `2c50e986` feat(ifa): home page redesign canary, local, and drive.mjs th
   the bottom. The window has `overflow: hidden` too. And `scrollWidth - innerWidth` read **0**
   throughout, because `innerWidth` grows with the overflow on a phone — measure against the device
   width.
-- **Short windows.** At 1512×735 the hero tag slid under the nav and the third design caption
+- **Do not lock the hero to `100svh`.** It was, and at 1347×614 the copy overflowed it. It is
+  `min-height` now and pins from the bottom when taller than the window; `.arrival__second` is placed
+  at `--vt` (written on `refreshInit`) so it centres in the visible window, not in the stage.
+- **Short windows.** At 1512×735 the third design caption
   clipped. There is a `min-width: 992px and max-height: 820px` block that steps the display scale
   down. Check pinned scenes at 735 and 768 tall, not only 900.
 - **`fonts/fonts.css` URLs are relative to that file.** `url('fonts/…')` inside it 404s.

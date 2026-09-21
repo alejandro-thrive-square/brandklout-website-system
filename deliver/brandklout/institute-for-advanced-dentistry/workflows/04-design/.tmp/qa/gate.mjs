@@ -50,7 +50,8 @@ async function scrubProof (page, label, sel, read) {
     states.push(await page.evaluate(read))
     tops.push(await page.evaluate(s => Math.round(document.querySelector(s).getBoundingClientRect().top), sel))
   }
-  ok(`${label}: holds still while it plays`, tops.every(t => Math.abs(t) <= 2), tops)
+  // A stage taller than the window pins from its bottom edge, so "still" means constant, not zero.
+  ok(`${label}: holds still while it plays`, tops.every(t => Math.abs(t - tops[0]) <= 2) && tops[0] <= 2, tops)
   ok(`${label}: three distinct intermediate states`, new Set(states.map(s => JSON.stringify(s))).size === 3, states)
   await scrollTo(page, range.end + 900)
   const after = await page.evaluate(s => Math.round(document.querySelector(s).getBoundingClientRect().top), sel)
@@ -58,7 +59,7 @@ async function scrubProof (page, label, sel, read) {
 }
 
 const READ = {
-  arrival: () => getComputedStyle(document.querySelector('[data-arrival-media]')).clipPath,
+  arrival: () => { const m = new DOMMatrix(getComputedStyle(document.querySelector('[data-arrival-media]')).transform); return [+m.a.toFixed(3), Math.round(m.e), Math.round(m.f)] },
   question: () => [...document.querySelectorAll('.statement .w')].filter(w => getComputedStyle(w).color !== 'rgb(143, 140, 135)').length,
   design: () => ({ pos: document.querySelector('[data-compare]').style.getPropertyValue('--pos'), step: [...document.querySelectorAll('[data-design-step]')].findIndex(s => s.classList.contains('is-on')) }),
   path: () => ({ x: Math.round(new DOMMatrix(getComputedStyle(document.querySelector('[data-path-rail]')).transform).m41), now: document.querySelector('[data-path-now]').textContent }),
@@ -71,6 +72,15 @@ const READ = {
   await scrubProof(page, 'The Question', '[data-question-stage]', READ.question)
   await scrubProof(page, 'The Design', '[data-design-stage]', READ.design)
   await scrubProof(page, 'The Path', '[data-path-stage]', READ.path)
+
+  // the hero film: true 16:9 at rest (nothing cropped), and the opened film covers the whole window
+  await scrollTo(page, 0)
+  const rest = await page.evaluate(() => { const f = document.querySelector('[data-arrival-fig]').getBoundingClientRect(), v = document.querySelector('[data-hero-video]'); return { ratio: +(f.width / f.height).toFixed(3), video: v.videoWidth ? +(v.videoWidth / v.videoHeight).toFixed(3) : null, stage: document.querySelector('[data-arrival-stage]').offsetHeight, vh: innerHeight } })
+  ok('Arrival: film frame is 16:9, same as the film', Math.abs(rest.ratio - 1.778) < .01 && (rest.video === null || Math.abs(rest.video - rest.ratio) < .01), rest)
+  const ar = await pinRange(page, '[data-arrival-stage]')
+  await scrollTo(page, ar.start + (ar.end - ar.start) * .7)
+  const cover = await page.evaluate(() => { const r = document.querySelector('[data-arrival-media]').getBoundingClientRect(); return { l: Math.round(r.left), t: Math.round(r.top), r: Math.round(innerWidth - r.right), b: Math.round(innerHeight - r.bottom), ratio: +(r.width / r.height).toFixed(3) } })
+  ok('Arrival: opened film covers the window and is still 16:9', cover.l <= 0 && cover.t <= 0 && cover.r <= 0 && cover.b <= 0 && Math.abs(cover.ratio - 1.778) < .01, cover)
 
   // scroll-written copy must be readable BEFORE it fills
   const unlit = await page.evaluate(() => {

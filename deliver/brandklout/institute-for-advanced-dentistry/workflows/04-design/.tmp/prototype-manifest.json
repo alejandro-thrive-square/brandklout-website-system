@@ -18,7 +18,7 @@
           "n": 0,
           "name": "Arrival",
           "theme": "dark",
-          "scroll": "pin + scrub: film window clip-path to full bleed, video scale, headline departs, descriptor arrives"
+          "scroll": "pin + scrub: the 16:9 film frame scales (one transform) until it covers the window; headline departs, descriptor arrives. Content-height stage, pins bottom-bottom when taller than the window"
         },
         {
           "n": 1,
@@ -65,8 +65,8 @@
       ],
       "formSlot": "[data-ghl-slot] is the design of the slot only; production places the practice's GoHighLevel form there",
       "gates": {
-        "behaviour": "qa/gate.mjs 48/48",
-        "journeyAudit": "PASS (8 chapters, 4 pins, 18 scrubs, 0 IntersectionObserver, 0 band sections)",
+        "behaviour": "qa/gate.mjs 50/50",
+        "journeyAudit": "PASS (8 chapters, 4 pins, 17 scrubs, 0 IntersectionObserver, 0 band sections)",
         "fluidRoot": "exit 0",
         "overflow": "0 px at 360, 390, 768, 1024, 1440, 1920, 2560"
       }

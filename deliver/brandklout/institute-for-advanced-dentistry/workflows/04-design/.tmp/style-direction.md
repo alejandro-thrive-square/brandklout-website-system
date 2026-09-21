@@ -31,7 +31,7 @@ the divider is yours to drag. It is the practice's method, shown rather than des
 
 | # | Chapter | Ground | What scroll does |
 | :--- | :--- | :--- | :--- |
-| 00 | **Arrival** | dark | **Pinned.** The film window opens from a framed figure to full bleed; the headline leaves, the practice's descriptor arrives over the film |
+| 00 | **Arrival** | dark | **Pinned.** The film sits in a true 16:9 frame, uncropped, and the same box scales up until it covers the window; the headline leaves, the practice's descriptor arrives over the film. The stage is as tall as its content and, when that is taller than the window, pins from its bottom edge |
 | 01 | **The Question** | dark | **Pinned.** "Who is actually designing your case?" is written word by word, then answered |
 | 02 | **Two Disciplines** | ivory | Two panels that open to the pointer; the four client figures count against the scroll |
 | 03 | **The Design** | dark | **Pinned, signature.** Guides draw, the after wipes in, three captions hand over. Then draggable |
