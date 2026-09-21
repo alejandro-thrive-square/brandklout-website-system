@@ -34,7 +34,7 @@ export default [
     { k: 'cards', id: 'ways', name: 'Four Ways', title: 'Pick whichever is easiest.', theme: 'warm',
       numbered: false,
       cards: [
-        { h: 'Call', p: '<a href="tel:+12815787100">(281) 578-7100</a>. Monday and Wednesday 9am to 6pm, Tuesday and Thursday 8am to 5pm. If your child is in pain today, call rather than book online.' },
+        { h: 'Call', p: '<a href="tel:+12815787100">(281) 578-7100</a>. Monday to Thursday, 9am to 6pm. If your child is in pain today, call rather than book online.' },
         { h: 'Email', p: '<a href="mailto:office@masonparkdental.com">office@masonparkdental.com</a>. Best for forms, insurance questions and anything that is not urgent.' },
         { h: 'Book online', p: 'Request a time through <a href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">the booking page</a> and the front desk will confirm it with you.' },
         { h: 'Come in', p: '21830 Kingsland Blvd #104B, Katy, TX 77450. Free parking at the door, and the suite is on the ground floor.' },
@@ -42,10 +42,10 @@ export default [
     { k: 'table', id: 'hours', name: 'The Hours', title: 'When the practice is open.', theme: 'sage',
       head: ['Day', 'Open', 'Note'],
       rows: [
-        ['Monday', '9am to 6pm', 'The late day. Good for after school.'],
-        ['Tuesday', '8am to 5pm', 'The early day.'],
-        ['Wednesday', '9am to 6pm', 'The late day.'],
-        ['Thursday', '8am to 5pm', 'The early day.'],
+        ['Monday', '9am to 6pm'],
+        ['Tuesday', '9am to 6pm'],
+        ['Wednesday', '9am to 6pm'],
+        ['Thursday', '9am to 6pm'],
         ['Friday', 'Closed', 'For an emergency, call and leave a message.'],
         ['Saturday', 'Closed', ''],
         ['Sunday', 'Closed', ''],

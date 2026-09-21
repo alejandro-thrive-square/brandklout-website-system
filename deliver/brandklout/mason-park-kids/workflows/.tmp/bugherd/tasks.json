@@ -4,10 +4,10 @@
     "project_id": 540564,
     "project_name": "Mason Park Kids",
     "created_at": "2026-09-14T19:30:37.278Z",
-    "updated_at": "2026-09-15T19:49:51.057Z",
+    "updated_at": "2026-09-18T18:44:28.570Z",
     "local_task_id": 1,
     "priority_id": 0,
-    "status_id": 2324677,
+    "status_id": 5,
     "title": null,
     "description": "Cant see change colors",
     "description_html": null,
@@ -16,9 +16,9 @@
     "requester_email": "agency@brandklout.com",
     "attachments": [],
     "screenshot_url": "https://files.bugherd.com/wonlcpxy7cfp5cobjgxtpg/screenshot.jpg",
-    "status": "done",
+    "status": "closed",
     "priority": "not set",
-    "closed_at": null,
+    "closed_at": "2026-09-18T18:44:28.518Z",
     "secret_link": "https://www.bugherd.com/t/l448Ayp18IxYq4yMh5egwg",
     "admin_link": "https://www.bugherd.com/projects/540564/tasks/1",
     "deleted_at": null,
@@ -47,7 +47,7 @@
       }
     },
     "due_at": null,
-    "column_id": 2324677,
+    "column_id": null,
     "logs": null,
     "assignees": [],
     "assigned_to": null,
@@ -57,7 +57,12 @@
       "display_name": "BrandKlout Success",
       "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
     },
-    "updater": null,
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
     "comments": [
       {
         "id": 18135661,
@@ -73,10 +78,10 @@
     "project_id": 540564,
     "project_name": "Mason Park Kids",
     "created_at": "2026-09-14T19:39:07.090Z",
-    "updated_at": "2026-09-15T19:49:51.479Z",
+    "updated_at": "2026-09-18T18:44:09.457Z",
     "local_task_id": 2,
     "priority_id": 0,
-    "status_id": 2324677,
+    "status_id": 5,
     "title": null,
     "description": "Change the hero photo to a different one. This is too zoomed in and it looks really bad",
     "description_html": null,
@@ -85,9 +90,9 @@
     "requester_email": "agency@brandklout.com",
     "attachments": [],
     "screenshot_url": "https://files.bugherd.com/e0ihn6y5syxnnwivlcpyig/screenshot.jpg",
-    "status": "done",
+    "status": "closed",
     "priority": "not set",
-    "closed_at": null,
+    "closed_at": "2026-09-18T18:44:09.411Z",
     "secret_link": "https://www.bugherd.com/t/haUk2byDsAv0PmiOYOHgFg",
     "admin_link": "https://www.bugherd.com/projects/540564/tasks/2",
     "deleted_at": null,
@@ -116,7 +121,7 @@
       }
     },
     "due_at": null,
-    "column_id": 2324677,
+    "column_id": null,
     "logs": null,
     "assignees": [
       {
@@ -138,7 +143,12 @@
       "display_name": "BrandKlout Success",
       "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
     },
-    "updater": null,
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
     "comments": [
       {
         "id": 18135662,
@@ -235,10 +245,10 @@
     "project_id": 540564,
     "project_name": "Mason Park Kids",
     "created_at": "2026-09-14T19:40:32.266Z",
-    "updated_at": "2026-09-15T19:49:52.138Z",
+    "updated_at": "2026-09-16T15:58:11.724Z",
     "local_task_id": 4,
     "priority_id": 0,
-    "status_id": 2324675,
+    "status_id": 2324677,
     "title": null,
     "description": "Why are the colors different, are we using the approved colors and fonts here? There is a brand guide for the practices inside of the drive",
     "description_html": null,
@@ -247,7 +257,7 @@
     "requester_email": "agency@brandklout.com",
     "attachments": [],
     "screenshot_url": "https://files.bugherd.com/pfldnsfjixtnd5ge1awalg/screenshot.jpg",
-    "status": "todo",
+    "status": "done",
     "priority": "not set",
     "closed_at": null,
     "secret_link": "https://www.bugherd.com/t/jxmguna9O9X7HjYYQfvuXw",
@@ -278,7 +288,7 @@
       }
     },
     "due_at": null,
-    "column_id": 2324675,
+    "column_id": 2324677,
     "logs": null,
     "assignees": [
       {
@@ -306,6 +316,13 @@
         "id": 18135664,
         "created_at": "2026-09-15T19:49:52.137Z",
         "text": "Question, nothing changed yet. The kids site uses slate #505860 and sage #A3B5AA taken from the Mason Park Dental for Kids logo, plus a sun yellow #F6C04B and a sky blue added for a children's practice; the fonts are Fraunces (headings) and Nunito (body). We do not have the brand guide from the Drive. The only practice palette we have on file is the family practice's Figma handoff (copper #8C6349, beige, slate #2E3538; Newsreader, Nunito Sans, Karla), which is different. Could you attach the brand guide here, or confirm which colours and fonts the kids site should use? We will apply it site-wide once confirmed.",
+        "user_id": null,
+        "is_private": false
+      },
+      {
+        "id": 18144658,
+        "created_at": "2026-09-16T15:58:11.488Z",
+        "text": "Done, from the Mason Park brand guide in the shared drive (Nikole Culo Designs, Nov 2021). Colors are now the guide's exact palette: slate #545F62, sage #A0B4AA, light grey #EAE9E6, copper #B78668, sand #CCBCA6 and beige #E2D5C5. The copper replaces the yellow and the sky blue we had added. Where copper sits behind text (buttons, badges) it is a deeper shade of the same copper so it stays readable (ADA contrast). Fonts: the guide's Collier, FreightNeo Pro and Avenir Next are Adobe-licensed fonts we have no web licence for, so the site uses the closest open fonts: Marcellus for Collier (it matches the logo lettering) and Figtree for Avenir Next. If the practice has an Adobe Fonts web project, send the kit ID and we will switch to the exact fonts. Applied on every page of staging.",
         "user_id": null,
         "is_private": false
       }
@@ -721,10 +738,10 @@
     "project_id": 540564,
     "project_name": "Mason Park Kids",
     "created_at": "2026-09-14T20:07:35.021Z",
-    "updated_at": "2026-09-15T19:49:54.473Z",
+    "updated_at": "2026-09-16T15:58:12.128Z",
     "local_task_id": 11,
     "priority_id": 0,
-    "status_id": 2324675,
+    "status_id": 2324677,
     "title": null,
     "description": "its not a hospital setting ",
     "description_html": null,
@@ -733,7 +750,7 @@
     "requester_email": "agency@brandklout.com",
     "attachments": [],
     "screenshot_url": "https://files.bugherd.com/1v3hgmppd4ixyoseymejkq/screenshot.jpg",
-    "status": "todo",
+    "status": "done",
     "priority": "not set",
     "closed_at": null,
     "secret_link": "https://www.bugherd.com/t/V8Whk5vi1BSSS2HLeG5KAw",
@@ -764,7 +781,7 @@
       }
     },
     "due_at": null,
-    "column_id": 2324675,
+    "column_id": 2324677,
     "logs": null,
     "assignees": [
       {
@@ -792,6 +809,13 @@
         "id": 18135670,
         "created_at": "2026-09-15T19:49:54.471Z",
         "text": "Fixed on the homepage: the card now reads \"Nitrous oxide, oral conscious sedation, IV sedation, and general anesthesia.\" with no hospital setting (verified live on staging). Leaving this open for one question: the old site said general anesthesia is done \"in a hospital setting at HCA West Houston\", and that line still appears on the sedation, restorative, extractions, crowns, comprehensive care, services, about, doctors and refer-a-patient pages. Should it come off those as well?",
+        "user_id": null,
+        "is_private": false
+      },
+      {
+        "id": 18144659,
+        "created_at": "2026-09-16T15:58:11.981Z",
+        "text": "Done everywhere, not just on this card. \"In a hospital setting\" and \"at HCA West Houston\" are removed from all 9 pages that said it (Sedation Dentistry, Our Services, About, Our Doctors, Refer a Patient, Comprehensive Pediatric Dentistry, Crowns, Extractions, Restorative), and from the Sedation page's search description. General anesthesia is still listed, with no location. Let us know if you want a line on where it is done.",
         "user_id": null,
         "is_private": false
       }
@@ -2107,10 +2131,10 @@
     "project_id": 540564,
     "project_name": "Mason Park Kids",
     "created_at": "2026-09-15T01:55:44.914Z",
-    "updated_at": "2026-09-15T19:50:01.368Z",
+    "updated_at": "2026-09-16T17:22:38.072Z",
     "local_task_id": 28,
     "priority_id": 0,
-    "status_id": 2324675,
+    "status_id": 2324677,
     "title": null,
     "description": "Ive updated this image so the woman in the background has black slacks.",
     "description_html": null,
@@ -2119,7 +2143,7 @@
     "requester_email": "agency@brandklout.com",
     "attachments": [],
     "screenshot_url": "https://files.bugherd.com/wjwk7fp95l9cz8fulccmdq/screenshot.jpg",
-    "status": "todo",
+    "status": "done",
     "priority": "not set",
     "closed_at": null,
     "secret_link": "https://www.bugherd.com/t/ekky83sBXBJnf7umG43Zrw",
@@ -2150,7 +2174,7 @@
       }
     },
     "due_at": null,
-    "column_id": 2324675,
+    "column_id": 2324677,
     "logs": null,
     "assignees": [
       {
@@ -2180,7 +2204,881 @@
         "text": "We could not find the updated image. Nothing new is in the Instatic media library since Sep 9, the frame in the Google Photos album is unchanged, and nothing is attached to this task. Could you attach it here? Also, per #2 this gumball photo is now the homepage hero, and the front desk photo took its place in this section so the scene appears once. Your edited version (black slacks) will replace it in the hero as soon as we have it.",
         "user_id": null,
         "is_private": false
+      },
+      {
+        "id": 18144660,
+        "created_at": "2026-09-16T15:58:12.471Z",
+        "text": "Done. Your edited file never reached us (it is not in the shared drive or the media library), so we made the same change: the woman in the background now wears plain black slacks instead of the floral print. Only her trousers were changed; the child, the gumball machine and the rest of the photo are the original pixels. The second gumball photo (used on the blog) had the same floral print and was changed the same way. If you would rather use your own version, attach it here and we will swap it in.",
+        "user_id": null,
+        "is_private": false
       }
     ]
+  },
+  {
+    "id": 31125964,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-16T18:09:07.175Z",
+    "updated_at": "2026-09-16T18:09:08.041Z",
+    "local_task_id": 29,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "https://share.google/VgLAfYt0iRqthpmSJ\n\nThis is the correct location for Pediatrics ",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/viorqwi9cv8fymmxxrmgqg/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/CDGYixJT2QmFppqsAtVOlw",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/29",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 1224,
+      "screenshot_pin_y": 420
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>div.iv-map>div.embed_component>iframe",
+      "html": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus\" title=\"Map to Mason Park Dental for Kids\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.6742079105404846,
+        "bugOffsetY": 0.3248546047165591
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31125971,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-16T18:09:29.954Z",
+    "updated_at": "2026-09-16T18:09:30.620Z",
+    "local_task_id": 30,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "M-Th 9-6pm\nclosed F-Sun",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/m5gdxvqv6uaspx47fnnbdw/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/JLXy5CnlTdDX9Bqi1AqFXg",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/30",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 351,
+      "screenshot_pin_y": 503
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-copy>dl.iv-facts>div:nth-of-type(2)>dd",
+      "html": "<dd>Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b></dd>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.22069968613641583,
+        "bugOffsetY": 0.36226851851851855
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31126881,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-16T18:50:09.134Z",
+    "updated_at": "2026-09-16T18:50:10.079Z",
+    "local_task_id": 31,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Changed to state always welcome to accompany their child during their first visit and checkups",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/jnjexawos8qa2m9092nx9w/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/5x1CwiIR2CrPbFuqXBRVEQ",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/31",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 345,
+      "screenshot_pin_y": 227
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#comfort.ch.ch-comfort>div.wrap:nth-of-type(1)>div.cf-grid>div.cf-card",
+      "html": "<div class=\"cf-card\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 26px); opacity: 1;\"><span class=\"cf-glyph\" aria-hidden=\"true\" data-asw-org-font-size=\"21\" style=\"font-size: 21px;\">1</span><h3 data-asw-org-font-size=\"27\" style=\"font-size: 27px;\">You stay in the room.</h3><p data-asw-org-font-size=\"16\" style=\"font-size: 16px;\">Parents are always welcome to accompany their child if it helps them feel more comfortable. Nobody is sent to the waiting room.</p></div>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.7140885619570884,
+        "bugOffsetY": 0.24428343385221912
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31161466,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T16:17:43.514Z",
+    "updated_at": "2026-09-18T16:17:44.343Z",
+    "local_task_id": 33,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "The color of the font is too dark. Please update to a lighter color",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/hetxo693uj3tistt0723ka/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/nu9dkiN92xsdg4c0tB2nvQ",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/33",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 979,
+      "screenshot_pin_y": 564
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 855 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#first.ch.ch-first>div.wrap.ft-grid>div.ft-side>figure.ft-media>p.ft-sticker",
+      "html": "<p class=\"ft-sticker\" data-asw-org-font-size=\"20\" style=\"font-size: 20px;\">By the first birthday. Yes, really.</p>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.5050037649473788,
+        "bugOffsetY": 0.7094099034923367
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164124,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:49:22.664Z",
+    "updated_at": "2026-09-18T18:49:23.331Z",
+    "local_task_id": 34,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Missing a form fill for inquires",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/72zsavvcw3bcqnrol0tezg/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/crrjtAVVV3AyAohbMP6ihg",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/34",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 707,
+      "screenshot_pin_y": 394
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways",
+      "html": "<section class=\"ch ch-ways\" data-chapter=\"1\" data-chapter-name=\"Four Ways\" data-theme=\"warm\" id=\"ways\"><div class=\"wrap ch-head is-split\"><div><p class=\"chapter-tag\" style=\"font-size: 12px; translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);\" data-asw-org-font-size=\"12\"><i style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"></i><b style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\">Fou",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.4729096989966555,
+        "bugOffsetY": 0.09186323101837472
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164140,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:50:28.008Z",
+    "updated_at": "2026-09-18T18:50:28.664Z",
+    "local_task_id": 35,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Please rephrase this.",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/d4why4qjnwmt4mkgezdxqq/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/2qhpND1q3MC82c5j7WyubQ",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/35",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 73.34375,
+      "screenshot_pin_y": 393.86260986328125
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>p.ar-lede",
+      "html": "<p class=\"ar-lede\" data-anim=\"hide\" data-asw-org-font-size=\"18\" style=\"font-size: 18px; translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1; visibility: visible;\">Free parking at the door, and the practice is on the ground floor. Call, email, or book a time online, whichever suits.</p>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0,
+        "bugOffsetY": 0.05172413793103448
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164151,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:50:59.502Z",
+    "updated_at": "2026-09-18T18:51:00.068Z",
+    "local_task_id": 36,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Link to address navigation",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/wfifogutntrcel48yvqf5g/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/YAto5KLnrLqAv2ZQzd7ETA",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/36",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 100.421875,
+      "screenshot_pin_y": 275.28125
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap>div.sq-grid>div.sq-card:nth-of-type(2)>p",
+      "html": "<p data-asw-org-font-size=\"16\" style=\"font-size: 16px;\">21830 Kingsland Blvd #104B, Katy, TX 77450. Free parking at the door, and the suite is on the ground floor.</p>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0,
+        "bugOffsetY": 0.04
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164155,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:51:19.405Z",
+    "updated_at": "2026-09-18T18:51:19.964Z",
+    "local_task_id": 37,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Remove this note section",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/mhcaxilzgcev3splaldgxg/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/gP47BiiAmOBy6co622XgDw",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/37",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 634,
+      "screenshot_pin_y": 219
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#hours.ch.ch-hours>div.wrap>table.fi-matrix>thead>tr>th:nth-of-type(3)",
+      "html": "<th scope=\"col\" data-asw-org-font-size=\"12\" style=\"font-size: 12px;\">Note</th>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.021136618669369677,
+        "bugOffsetY": 1.269537892930835
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164161,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:52:03.996Z",
+    "updated_at": "2026-09-18T18:52:04.690Z",
+    "local_task_id": 38,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "There is a line on the Book online button",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [
+      {
+        "id": 4261084,
+        "task_id": 31164161,
+        "user_id": 620745,
+        "created_at": "2026-09-18T18:52:04.019Z",
+        "url": "https://files.bugherd.com/swkmxxg4ozcofdg35pspnw/image.png",
+        "file_name": "image.png"
+      }
+    ],
+    "screenshot_url": "https://files.bugherd.com/0piuvlyreqccey3g3oyoww/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/EOhDAhaG0c1Efc0kEd0f3w",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/38",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 112,
+      "screenshot_pin_y": 378.984130859375
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-copy>div.iv-actions>a.button.is-sun.is-lg",
+      "html": "<a class=\"button is-sun is-lg\" href=\"https://www.flexbook.me/masonpark/1\" target=\"_blank\" rel=\"noopener noreferrer\" data-asw-org-font-size=\"14\" style=\"font-size: 14px;\">Book online</a>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.45097264029123757,
+        "bugOffsetY": 1.9286236768255094
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164170,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:52:40.110Z",
+    "updated_at": "2026-09-18T18:52:40.920Z",
+    "local_task_id": 39,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Updates these hours, they are wrong please make sure its correct throughout the site",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/vpttdavjyrgcvifaicxgxq/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/N6pn2Nws6sdEU27C8l33Ag",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/39",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 344,
+      "screenshot_pin_y": 440
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-copy>dl.iv-facts>div:nth-of-type(2)>dd",
+      "html": "<dd>Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b></dd>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.18640434815892215,
+        "bugOffsetY": 0.18267746913580246
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
+  },
+  {
+    "id": 31164198,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-18T18:54:18.872Z",
+    "updated_at": "2026-09-18T18:54:19.632Z",
+    "local_task_id": 40,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": "Need to map to pediatrics\nhttps://share.google/NHHkSXgJb7m9DLLDX ",
+    "description_html": null,
+    "tag_names": [],
+    "external_id": null,
+    "requester_email": "agency@brandklout.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/tofrrd5xgqxtm6hwxqux3w/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/MbFCKA0AOqZmnRgjlQuahQ",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/40",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/contacts",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1512,
+      "screenshot_height": 1512,
+      "screenshot_pin_x": 1171,
+      "screenshot_pin_y": 452
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Mac OS 10.15.7",
+    "requester_browser": "Safari 26.6.2",
+    "requester_browser_size": "1512 x 652 px",
+    "requester_resolution": "1920 x 1080 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>div.iv-map>div.embed_component>iframe",
+      "html": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus\" title=\"Map to Mason Park Dental for Kids\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.586405052805964,
+        "bugOffsetY": 0.3839713683134147
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 620745,
+      "email": "agency@brandklout.com",
+      "display_name": "BrandKlout Success",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
   }
 ]

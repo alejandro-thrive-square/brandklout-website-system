@@ -1,11 +1,12 @@
 # Runbook index
 
-17 runs, newest first. Each line is one file in this folder.
+18 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-21 | 2026-09-21 - BugHerd round two: the pediatric map, the hours, a 1.3:1 contrast bug. 9 of 11 done. | [`2026-09-21-bugherd-round-two.md`](./2026-09-21-bugherd-round-two.md) |
 | 2026-09-16 | DONE 2026-09-16 - BUGHERD 540564 CLOSED: #4 brand guide applied (the guide's exact palette, Marcellus/Figtree standing in for the Adobe faces), #11 "hospital setting" removed on all 9 pages, #28 trousers edited to black on both gumball frames (Gemini edit + masked composite). 215 published, replies sent, 0 open. Gotchas: the guide misprints `EAE936`; copper fails AA; `font-synthesis: none` for Marcellus; the SEO scripts needed the `brandklout.*` plugin ids. Adult project 539151 has 28 new notes, for `bk-mason-park`. | [`2026-09-16-bugherd-open-three-brand-guide.md`](./2026-09-16-bugherd-open-three-brand-guide.md) |
 | 2026-09-15 | DONE 2026-09-15 - BUGHERD STAGING ROUND ONE (project 540564): 24 of 27 homepage notes fixed, published to staging and verified live; **#4 (brand guide), #11 (hospital setting elsewhere), #28 (the reviewer's edited image, not found) open with questions.** Per-number table inside. Gotchas: `import-pages`/`diff-all --only /` match the converted slug, and Git Bash mangles `/` without `MSYS_NO_PATHCONV=1`; `data-drift` covers a caption. Commits `94a5ef6c`, `77c30292`. | [`2026-09-15-bugherd-staging-round-one.md`](./2026-09-15-bugherd-staging-round-one.md) |
 | 2026-09-14 | DONE 2026-09-14/15 - masonparkpediatricdental.com serves the OLD WordPress site from `mirror-clean` (Cloudflare Pages `mason-park-kids-wp`); the new design is on `staging.masonparkpediatricdental.com`. **2026-09-15: the 27-Aug mirror had a ClearFake/EtherHiding loader on all 40 pages (live about 1 h, now stripped; verify-safe had passed it and is fixed). Missing Elementor chunks and hotlinked icons were also restored.** Gotchas: Pages without a `404.html` fakes 200s; wrangler 4.131 `pages project create` fails, so use the API; `x-suspended-vhost: 1` means suspended. | [`2026-09-14-domain-masonparkpediatricdental-live.md`](./2026-09-14-domain-masonparkpediatricdental-live.md) |

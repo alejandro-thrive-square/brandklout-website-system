@@ -299,7 +299,16 @@ button { font: inherit; }
   position: absolute;
   inset: 0;
   background: var(--ink);
-  transform: translateY(101%);
+  /* 105%, not 101%. BugHerd #38 is a photograph of ONE darkened pixel row
+     across the copper "Book online", two pixels above its bottom: exactly the
+     padding box's bottom edge, which is where `overflow: hidden` clips this
+     fill, and the only thing on the site that can paint there. It did not
+     reproduce in headless WebKit at any of 1032 heights x 8 device scales
+     (btn38-sweep.mjs), so this is real Safari's rasterisation landing the park
+     a fraction of a device pixel short. 101% was only ever "just past the
+     edge"; 105% puts it beyond arithmetic. The fill is off-screen at rest
+     either way, so nothing about the hover changes. */
+  transform: translateY(105%);
   transition: transform .45s var(--ease);
   z-index: -1;
 }
@@ -1311,8 +1320,12 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ft-media { margin: 0; position: relative; }
 .ft-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 40%; border-radius: var(--radius); }
 .ft-media figcaption { position: relative; z-index: 1; padding-top: 1.1rem; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .06em; color: var(--fg-soft); line-height: 1.6; }
-/* The sticker on the photograph: the one fact a parent has not heard. */
-.ft-sticker {
+/* The sticker on the photograph: the one fact a parent has not heard.
+   Scoped to `.ch` on purpose. As a bare `.ft-sticker` (0,1,0) this rule lost
+   `color` to `.ch p` (0,1,1) further up the sheet, so the white the design
+   asks for painted as body slate: 1.3:1 on the copper, and BugHerd #33.
+   `colour-leak.mjs` is the gate for the whole class of it. */
+.ch .ft-sticker {
   position: absolute; left: 1.2rem; bottom: 4.2rem;
   max-width: 15rem; padding: 1rem 1.2rem;
   background: var(--sun-fill); color: var(--on-sun); border-radius: var(--radius-sm);
@@ -1696,6 +1709,19 @@ a.card:hover h3 { color: var(--accent); }
 .sq-card .cf-glyph { margin-bottom: .2rem; }
 .sq-card h3 { font-size: var(--f-h4); }
 .sq-card p { font-size: var(--f-body); line-height: 1.62; }
+.sq-card .link-arrow { margin-top: auto; padding-top: .4rem; }
+
+/* The slot the enquiry form sits in (BugHerd #34). The height is RESERVED:
+   a CRM form is an iframe that sizes itself by postMessage, and a slot with no
+   height of its own collapses to nothing until the first message arrives, so
+   the chapter below it jumps. Instatic keeps this class on the published Embed
+   block, so the centring and the height survive the import; the class is doing
+   layout, not decoration. Added with `.tmp/add-inquiry.mjs`. */
+.iq-slot { max-width: 44rem; margin-inline: auto; border-radius: var(--radius); overflow: hidden; background: var(--panel); border: 1px solid var(--rule); }
+.iq-slot .embed_component { min-height: 44rem; }
+.iq-slot iframe { display: block; width: 100%; min-height: 44rem; border: 0; }
+@media (max-width: 599px) { .iq-slot .embed_component, .iq-slot iframe { min-height: 52rem; } }
+
 /* The why cards on a warm ground overlap a photograph: the panel sits ON the
    picture from 900 up. */
 .sw-overlap { display: grid; gap: 1.25rem; }

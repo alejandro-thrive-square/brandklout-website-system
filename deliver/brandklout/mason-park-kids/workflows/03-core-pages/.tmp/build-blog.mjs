@@ -67,7 +67,15 @@ const txt = s => String(s).replace(/&(?!(?:amp|lt|gt|quot|nbsp|#\d+|#x[0-9a-f]+)
 function type(s) {
   return String(s)
     .replace(/\s*—\s*/g, ', ')
+    // A phone number is not a range. Without this guard the rule below turned
+    // (281) 578-7100 into "(281) 578 to 7100" on 18 pages, and the schema block
+    // a WP post carried into "281 to 578 to 7100". Both shapes are parked:
+    // 281-578-7100 and the bare local 578-7100. A three-then-four digit run is
+    // a phone number on this site; no real range is written that way.
+    .replace(/(?<!\d)(\d{3})[–-](\d{3})[–-](\d{4})(?!\d)/g, '$1\x01$2\x01$3')
+    .replace(/(?<!\d)(\d{3})[–-](\d{4})(?!\d)/g, '$1\x01$2')
     .replace(/(\d)\s*[–-]\s*(\d)/g, '$1 to $2')
+    .replace(/\x01/g, '-')
     .replace(/–/g, ', ')
     .replace(/'/g, '’')
     .replace(/&nbsp;/g, ' ')
@@ -258,11 +266,11 @@ function headline(h) {
   return w.slice(0, -2).join(' ') + ' <em>' + w.slice(-2).join(' ') + '</em>';
 }
 
-const HOURS = `<dt>Hours</dt><dd>Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b></dd>`;
-const ADDRESS = `<dt>Address</dt><dd><a href="https://www.google.com/maps/place/21830+Kingsland+Blvd,+Katy,+TX+77450" target="_blank" rel="noopener">21830 Kingsland Blvd #104B<br>Katy, TX 77450</a></dd>`;
+const HOURS = `<dt>Hours</dt><dd>Mon to Thu <b>9am to 6pm</b><br>Fri to Sun <b>Closed</b></dd>`;
+const ADDRESS = `<dt>Address</dt><dd><a href="https://www.google.com/maps/place/Mason+Park+Dental+for+Kids+-+Pediatric+Dentist+Katy+TX/@29.7759444,-95.7490312,17z/data=!4m6!3m5!1s0x8641277706112ec1:0x98941d027afdec7b!8m2!3d29.7759444!4d-95.7490312!16s%2Fg%2F11sff9c67k" target="_blank" rel="noopener">21830 Kingsland Blvd #104B<br>Katy, TX 77450</a></dd>`;
 const MAP = `<div class="iv-map">
         <div class="embed_component">
-          <iframe data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus" title="Map to Mason Park Dental for Kids" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.7490312!3d29.7759444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8641277706112ec1%3A0x98941d027afdec7b!2sMason%20Park%20Dental%20for%20Kids%20-%20Pediatric%20Dentist%20Katy%20TX!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus" title="Map to Mason Park Dental for Kids" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>`;
 const BADGES = () => `<div class="badges">
@@ -302,7 +310,7 @@ function invite(n, title, lede, related, shot) {
         <figcaption>${shot[2]}</figcaption>
       </figure>
       ${MAP}
-      <a class="link-arrow is-light" href="https://www.google.com/maps/place/21830+Kingsland+Blvd,+Katy,+TX+77450" target="_blank" rel="noopener">Get directions <span aria-hidden="true">&rarr;</span></a>
+      <a class="link-arrow is-light" href="https://www.google.com/maps/dir/?api=1&amp;destination=Mason%20Park%20Dental%20for%20Kids%20-%20Pediatric%20Dentist%20Katy%20TX%2C%2021830%20Kingsland%20Blvd%20%23104B%2C%20Katy%2C%20TX%2077450" target="_blank" rel="noopener">Get directions <span aria-hidden="true">&rarr;</span></a>
     </div>
   </div>
 </section>`;

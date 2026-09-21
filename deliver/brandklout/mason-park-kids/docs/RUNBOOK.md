@@ -29,7 +29,20 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
-**2026-09-16: BugHerd project 540564 is closed, with all 27 notes done.** The last three were resolved
+**2026-09-21: BugHerd round two, #29-#40. Nine done, two open.** The map on every page pointed at the
+**adult** practice's Google listing (suite 104A); it is the pediatric one now (#29/#40). The hours were
+wrong in six places and are **Mon to Thu 9am-6pm, Fri to Sun closed** everywhere, schema included
+(#30/#39) - **confirm them with the practice before production, Google is told this too.** The copper
+sticker on the homepage was painting body grey at **1.3:1** because `.ch p` outranks a bare
+`.ft-sticker`; `colour-leak.mjs` is the new gate for that whole class (#33). Also #31, #35, #36, #37.
+**Open: #34** needs a GoHighLevel form URL from Brandklout before an enquiry form can exist at all
+(`.tmp/add-inquiry.mjs` is the whole change, waiting on the URL); **#38** is changed but was never
+reproduced, and needs the reviewer to re-check. Two things not in any note were fixed on the way:
+"(281) 578 to 7100" on 18 pages (the generators' "6-18 months" rule was eating the phone number, now
+guarded) and a block of raw WordPress schema naming the **adult** practice on five blog posts.
+See `runbook/2026-09-21-bugherd-round-two.md`.
+
+**2026-09-16: BugHerd's first 27 notes are all done.** The last three were resolved
 with the Drive brand guide: the site now uses the practices' brand palette, with Marcellus/Figtree
 standing in for the Adobe faces (#4). "Hospital setting" is gone site-wide (#11). The gumball frames were
 edited to black slacks (#28). Published to staging, 215 pages. Re-run
@@ -59,6 +72,8 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `python recompose-figures.py --dry-run` | Is every picture still where the plan puts it? 0 pages should change. |
 | `node build-blog.mjs --list` | Which of the 157 posts are built, and the old-URL to new-URL map. `--all` builds every post; the overview links whatever is on disk. |
 | `node build-pages.mjs --list` | Which pages have a recipe. **Order is `build-pages` then `stamp` then `check`, and it does not commute.** |
+| `node colour-leak.mjs` | Whose rule is painting this text? A single-class rule that sets `color` loses to a contextual one like `.ch p`, and the element paints an ink it never asked for. Default run covers every coloured class on the first page that uses it; `--all` is the slow per-page path. |
+| `node btn-line-gate.mjs local\|live` | Does anything paint a line across a pill button, in WebKit at retina scale? Sample the column LEFT of centre: down the middle it reads the white label as a line. |
 | `node diff-all.mjs` | Local against live, all eleven: head, structure, text, geometry. |
 | `node audit-live.mjs` / `--width 390` | **All 57 routes**, not the eleven. |
 | `node verify-live.mjs` / `--migrated` | The published pages, end to end. |
