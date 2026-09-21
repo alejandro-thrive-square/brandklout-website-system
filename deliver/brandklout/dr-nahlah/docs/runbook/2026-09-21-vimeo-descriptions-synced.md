@@ -5,7 +5,7 @@ Dr. Nahlah folder?" — yes to the API, no MCP needed, and yes they were already
 
 ## Done
 
-Commit: `<SHA>`
+Commit: `884d0d3b`
 
 - **The Vimeo API works with the token already in `~/.webzite/.env` (`VIMEO=`).** No MCP
   server exists for Vimeo and none is needed — plain `fetch` + bearer token.
