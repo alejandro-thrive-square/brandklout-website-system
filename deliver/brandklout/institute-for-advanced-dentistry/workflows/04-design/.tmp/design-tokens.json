@@ -4,17 +4,18 @@
     "page": "home",
     "date": "2026-09-21",
     "authority": "Logo colour guide (Drive > Website Content > Branding > Logo > PNG)",
-    "fluidRoot": "webzite-house-v1"
+    "fluidRoot": "webzite-house-v1",
+    "polarity": "light only (Brandklout, 2026-09-21: dark-theme sites do not convert)"
   },
   "color": {
     "brand": {
       "gold": {
         "value": "#c3972b",
-        "note": "Pantone 1245 C. Fills, rules, numerals, text on dark only"
+        "note": "Pantone 1245 C. FILLS and RULES only: buttons, progress, ticks, stars, slider handle. Never text (2.4:1 on light)"
       },
       "gold-hi": {
         "value": "#e2bd58",
-        "note": "hover; gold text on glass panels"
+        "note": "the drawn smile guides over the photograph, and the ampersand on the hero film. Not text on a ground"
       },
       "gold-deep": {
         "value": "#74560f",
@@ -38,23 +39,45 @@
       }
     },
     "ground": {
-      "ink": "#121112",
-      "ink-2": "#1b1a1b",
-      "ink-3": "#272526",
+      "bone": "#fbf9f4",
       "paper": "#f5f1e8",
       "paper-2": "#ebe5d8",
-      "bone": "#fbf9f4"
+      "white": "#ffffff",
+      "mist": "#eef0f1",
+      "byChapter": [
+        "bone",
+        "paper-2",
+        "white",
+        "mist",
+        "bone",
+        "paper",
+        "white",
+        "paper-2"
+      ]
     },
     "text": {
-      "on-dark": "#edeae3",
-      "on-dark-dim": "#a9a6a0",
-      "on-dark-unlit": {
-        "value": "#8f8c87",
-        "note": "scroll-written copy before it fills; 5.18:1 on ink-2"
+      "fg": "#1d1b1c",
+      "fg-dim": "#5a5654",
+      "fg-unlit": {
+        "value": "#67625d",
+        "note": "scroll-written copy before it fills; 4.81:1 on paper-2"
       },
-      "on-light": "#1d1b1c",
-      "on-light-dim": "#5a5654"
-    }
+      "accent-text": {
+        "value": "#74560f",
+        "note": "every gold glyph; the bright gold is never text"
+      },
+      "on-ink": {
+        "value": "#edeae3",
+        "note": "text on the few graphite surfaces: secondary button, checked chip"
+      }
+    },
+    "rule": "rgba(55, 52, 53, .17)",
+    "functionalDark": [
+      "video modal scrim",
+      "shade over the hero film (white type sits on the photograph)",
+      "btn--ink",
+      "checked chip"
+    ]
   },
   "font": {
     "display": {

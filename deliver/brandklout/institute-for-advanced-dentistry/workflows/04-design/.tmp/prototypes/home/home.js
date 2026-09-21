@@ -13,8 +13,8 @@
   var motion = hasGsap && !reduce;
   var smoother = null;
 
-  var GOLD = '#c3972b';
-  var LIT = '#edeae3';
+  var GOLD = '#74560f';   /* gold as TEXT on a light ground */
+  var LIT = '#1d1b1c';
 
   if (!motion) html.classList.add('no-motion');
 

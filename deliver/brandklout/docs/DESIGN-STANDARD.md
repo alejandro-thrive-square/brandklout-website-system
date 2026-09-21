@@ -167,6 +167,31 @@ or The Invitation where the objection actually lands, not as its own band.
 9. **`prefers-reduced-motion` honoured throughout.** Non-negotiable, medical audience.
 10. **Mobile is designed, not degraded.** Most paid dental traffic is mobile; motion must survive.
 
+## Light grounds only — dark themes do not convert
+
+Set 2026-09-21 from Jessica (Brandklout): **dark-theme sites do not convert, so every Brandklout
+site is a light one.** This overrides the reference build's polarity (Dr. Nahlah is largely dark)
+and the `data-theme="dark"` chapters in the examples above. Keep the journey architecture; change
+how the palette is applied:
+
+- **Every ground is light.** The atmosphere still turns chapter to chapter, within light tones: a
+  warm white, an ivory, a sand, pure white, and one cool tint taken from the brand's neutral. Four
+  or five grounds is enough for eight chapters; never two neighbours the same.
+- **The brand's dark colour is the ink**: text, hairlines, one secondary button. Never a ground.
+- **The brand accent is a fill and a rule, not a glyph.** Most dental accents (gold, champagne,
+  teal) sit near 2-3:1 on a light ground. Keep the bright tone for buttons, progress, ticks, icons
+  and rules, and derive a deep variant for any accent TEXT (IFA: `#c3972b` fills, `#74560f` text).
+- **Panels over photographs are light glass**, not dark glass, with ink text.
+- **Dark is allowed only where it is functional, not thematic**: the scrim behind a playing video,
+  the shade over a hero film that carries white type, a checked chip, a secondary button.
+- **Scroll-written copy inverts too**: unlit words are a mid grey that already clears 4.5:1 on the
+  light ground, and they fill to ink.
+- Author the stylesheet light-by-default with ground-aware tokens (`--fg`, `--fg-dim`,
+  `--accent-text`, `--rule`), so there is no second theme to fall back into. IFA's `home.css` is the
+  worked example; its re-theme was a token swap plus a dozen surface rules, not a rewrite.
+
+The continuity device "theme shifts between chapters" now means ground shifts between light tones.
+
 ## Brand palette — sample the token layer, not a stray rule
 
 Take the palette from the client's **published stylesheet token block**, not from whichever colours

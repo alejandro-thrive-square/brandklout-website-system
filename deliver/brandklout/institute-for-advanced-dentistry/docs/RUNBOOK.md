@@ -4,6 +4,9 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Where things are
 
+- **LIGHT GROUNDS ONLY since 2026-09-21** (Brandklout: dark-theme sites do not convert). Graphite is
+  the ink, gold is fills and rules, gold text is `#74560f`. Every new template uses the ground-aware
+  tokens in `home.css`; the rule for all Brandklout sites is in `deliver/brandklout/docs/DESIGN-STANDARD.md`.
 - **REDESIGN, home page canary, local only since 2026-09-21**: `workflows/04-design/.tmp/prototypes/home/`.
   Run `node workflows/04-design/.tmp/prototypes/serve.mjs` (from this client folder) and open
   `http://localhost:4173/home/`; `?motion=off` for the reduced-motion page. Eight-chapter GSAP

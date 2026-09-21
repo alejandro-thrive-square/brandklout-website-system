@@ -66,6 +66,21 @@ Two different causes, one ours and one GoHighLevel's.
    `node workflows/21-instatic-upload/check-ghl-form.mjs <formId> > file 2>&1` (exit 1 when on).
    A visitor who already has the saved key keeps seeing the prompt until they choose "Start over".
 
+## Review round 3 (same day): light grounds only
+
+Jessica told Alejandro that dark-theme sites do not convert, so the palette is applied differently
+from here on: **every ground light, graphite as the ink, gold as fills and rules only, gold text in
+the deep gold `#74560f`**. The home page was re-themed (five of eight chapters had been dark),
+republished to staging (seq 7) and re-gated: 50/50 local, 52/52 staging, contrast clean. The rule is
+now in [DESIGN-STANDARD.md](../../../docs/DESIGN-STANDARD.md) for every Brandklout site, and in
+`04-design/.tmp/style-direction.md` and `design-tokens.json` for this one.
+
+How it was done, for the next page: `home.css` is light-by-default on ground-aware tokens (`--fg`,
+`--fg-dim`, `--fg-unlit`, `--accent-text`, `--rule`, `--on-ink`). A new template inherits the light
+system by using them; there is no dark theme left to fall into. `home.js` fills the scroll-written
+statement to ink (`LIT`) with the deep gold on the key phrase (`GOLD`), and the gate's unlit literal
+moved with it (`rgb(103, 98, 93)`).
+
 ## BugHerd on staging (same day)
 
 - **BugHerd project `542527` "Institute for Advanced Dentistry"**, created through the API with

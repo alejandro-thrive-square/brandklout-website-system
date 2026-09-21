@@ -17,13 +17,13 @@
         {
           "n": 0,
           "name": "Arrival",
-          "theme": "dark",
+          "theme": "light",
           "scroll": "pin + scrub: the 16:9 film frame scales (one transform) until it covers the window; headline departs, descriptor arrives. Content-height stage, pins bottom-bottom when taller than the window"
         },
         {
           "n": 1,
           "name": "The Question",
-          "theme": "dark",
+          "theme": "light",
           "scroll": "pin + scrub: two statements written word by word, meter"
         },
         {
@@ -35,7 +35,7 @@
         {
           "n": 3,
           "name": "The Design",
-          "theme": "dark",
+          "theme": "light",
           "scroll": "pin + scrub (signature): SVG guides draw, after image wipes over before, 3 captions; then pointer/keyboard slider"
         },
         {
@@ -47,7 +47,7 @@
         {
           "n": 5,
           "name": "The Path",
-          "theme": "dark",
+          "theme": "light",
           "scroll": "pin + scrub: horizontal rail, counter, progress rule, per-image containerAnimation parallax"
         },
         {
@@ -59,7 +59,7 @@
         {
           "n": 7,
           "name": "The Invitation",
-          "theme": "dark",
+          "theme": "light",
           "scroll": "parallax ground, form column pinned beside the copy (>=992)"
         }
       ],

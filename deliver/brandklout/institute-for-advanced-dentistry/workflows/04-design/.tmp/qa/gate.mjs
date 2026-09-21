@@ -72,7 +72,7 @@ async function scrubProof (page, label, sel, read) {
 
 const READ = {
   arrival: () => { const m = new DOMMatrix(getComputedStyle(document.querySelector('[data-arrival-media]')).transform); return [+m.a.toFixed(3), Math.round(m.e), Math.round(m.f)] },
-  question: () => [...document.querySelectorAll('.statement .w')].filter(w => getComputedStyle(w).color !== 'rgb(143, 140, 135)').length,
+  question: () => [...document.querySelectorAll('.statement .w')].filter(w => getComputedStyle(w).color !== 'rgb(103, 98, 93)').length,
   design: () => ({ pos: document.querySelector('[data-compare]').style.getPropertyValue('--pos'), step: [...document.querySelectorAll('[data-design-step]')].findIndex(s => s.classList.contains('is-on')) }),
   path: () => ({ x: Math.round(new DOMMatrix(getComputedStyle(document.querySelector('[data-path-rail]')).transform).m41), now: document.querySelector('[data-path-now]').textContent }),
 }
@@ -97,7 +97,7 @@ const READ = {
   // scroll-written copy must be readable BEFORE it fills
   const unlit = await page.evaluate(() => {
     const lum = c => { const v = c.match(/[\d.]+/g).slice(0, 3).map(n => { n /= 255; return n <= .03928 ? n / 12.92 : ((n + .055) / 1.055) ** 2.4 }); return .2126 * v[0] + .7152 * v[1] + .0722 * v[2] }
-    const a = lum('rgb(143, 140, 135)'), b = lum(getComputedStyle(document.querySelector('.ch-question')).backgroundColor)
+    const a = lum('rgb(103, 98, 93)'), b = lum(getComputedStyle(document.querySelector('.ch-question')).backgroundColor)
     return +((Math.max(a, b) + .05) / (Math.min(a, b) + .05)).toFixed(2)
   })
   ok('The Question: unlit words already clear 4.5:1', unlit >= 4.5, unlit)

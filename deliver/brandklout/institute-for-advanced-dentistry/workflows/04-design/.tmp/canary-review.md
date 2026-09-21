@@ -53,6 +53,16 @@ the rest of the batch.
   the window it pins from its bottom edge, so the buttons and the figures are read first. Two gate
   checks added: the frame is 16:9 like the film, and the opened film covers the window and is still 16:9.
 
+## Review round 3 — light grounds only, 2026-09-21
+
+Jessica (Brandklout): dark-theme sites do not convert. Five of the eight chapters were dark. The
+stylesheet was dark-by-default with light as the exception; it is now light-by-default on ground-aware
+tokens, every chapter is `data-theme="light"`, and the grounds run bone, sand, white, mist, bone,
+ivory, white, sand. Gold is fills and rules only; gold text is `#74560f`. The glass panels over the
+discipline photographs, the patient cards, the compare chips, the drawer, the phone call bar and the
+footer all went light. Dark remains only behind a playing film and over the hero film. Gates after
+the change: 50/50 local, 52/52 on staging, contrast pass clean, unlit statement 4.81:1.
+
 ## Open before this goes to the client
 
 - **2,500+ or 2,800+ implants**: the brief says both. The page says 2,500+.
