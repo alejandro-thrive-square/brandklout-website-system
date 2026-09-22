@@ -41,6 +41,21 @@ by being created with JavaScript.
 would send (`denied`, opt-out `true`). **Phase 2 must wait for Termly.** A tracker tagged `text/plain`
 never runs until Termly releases it, so tagging before Termly exists switches call tracking off.
 
+### Webflow does not have Instatic's embed problem
+On Instatic a cookie banner appears to break Vimeo, YouTube, GHL forms and DNI numbers. That is the
+**CSP**, not the banner: Instatic publishes a `Content-Security-Policy` meta tag (`script-src 'self'`,
+often `frame-src 'none'`), and third-party origins have to be granted through the `embed-origins`
+plugin. **Webflow emits no CSP at all** — verified on all 10 live sites, 2026-09-22 — so that whole
+class of failure does not exist there.
+
+With `autoBlock=off` Termly itself blocks nothing: measured before any consent choice, Vimeo players
+(584x329), GHL form iframes (~575-690px wide) and Google Maps all render, and
+`[data-autoblocked]` is 0 on every site. The only things that wait are the ones tagged by hand.
+
+**One consequence to know:** where `number_pool.js` is tagged `advertising`, GoHighLevel's dynamic
+number insertion does not run until the visitor accepts. That is correct consent behaviour, not a
+bug, but it means a declining visitor sees the practice's real number and that call is not attributed.
+
 ### Why `autoBlock=off` and no allowlist
 `autoBlock=on` held Webflow's own JavaScript, every video and map, and the GHL forms (behind an
 "Enable" box) until the visitor clicked Accept. Fresh visitors saw a broken page. An allowlist fixed
@@ -141,7 +156,7 @@ not a secret (it is in every page's source). The per-website API keys are in `~/
 account, UUID, domain and site id is in [`kit/termly-websites.json`](./kit/termly-websites.json);
 this table is the rollout state on top of it.
 
-**Consent is LIVE and gated on 16 sites.** Gated means: Termly present with `autoBlock=off`, the
+**Consent is LIVE and gated on 15 sites** (Grand Mission is live but carries the release defect below). Gated means: Termly present with `autoBlock=off`, the
 banner renders, the Cookie Preferences control is in the footer, clicking it opens Termly's
 preference modal, and no tracker fires before a choice is made.
 
@@ -152,7 +167,7 @@ preference modal, and no tracker fires before a choice is made.
 | Stone Surgical Arts | Instatic | off | yes | **live, gated** | none |
 | Institute for Advanced Dentistry | Instatic | off | yes | **live, gated** | none (GHL pair tagged in `site-tags.js` 1.1.0) |
 | Westlake Medical Spa | Instatic | off | yes | **live, gated** | none |
-| Grand Mission | Webflow | off | yes | **live, gated** | none |
+| Grand Mission | Webflow | off | yes | **live, but see defect below** | none before consent, and **none after** — the tags never release |
 | Livewell | Webflow | off | yes | **live, gated** | none (replaced the Silktide trial block) |
 | Omnia | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
 | Legacy Dental | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
@@ -190,6 +205,17 @@ have not been cut over. Consent is on the Instatic builds and will arrive with t
 WordPress sites have none, and we have no credentials for them.
 
 ## Gotchas
+- **Tagged scripts can stay held forever, and it looks like success.** On Grand Mission the three
+  `text/plain` scripts are still held after Accept, so ahrefs and GHL call tracking are simply off.
+  Hackensack releases correctly in the same browser run with the same tag values, and the two Termly
+  accounts have identical `region_settings` and `has_cookie_report`. **A gate that only checks
+  "nothing fires before consent" scores this as a pass** — check the other direction too: after
+  Accept, `document.querySelectorAll('script[type="text/plain"][data-categories]')` must be empty.
+- **Testing consent on this workstation needs care.** NordVPN answers `app.termly.io` with a bare 204
+  in Chrome, so without a proxy the banner never renders; with the naive proxy the consent POST to
+  `us.consent.api.termly.io` fails CORS and nothing is ever saved. A proxy that echoes the page
+  origin back in `access-control-allow-origin` and answers `OPTIONS` itself fixes that. Compare two
+  sites in ONE run before believing a site-specific result.
 - **Malformed page markup swallows anything Webflow appends before `</body>`.** A registered
   *footer* script is emitted last, so an unclosed `<style>` or a broken tag anywhere earlier eats it:
   the browser parses our `<script>` as CSS text and it never runs. South Bay had exactly that (an

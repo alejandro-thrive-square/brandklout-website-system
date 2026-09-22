@@ -10,7 +10,8 @@
     "clientFolder": "grand-mission-dentistry",
     "webflowSiteId": "698111847e9608eb30ee21c6",
     "embed": "https://app.termly.io/resource-blocker/db70a66f-b323-47a5-8db9-fb52fd1b9575?autoBlock=off",
-    "rollout": "live-gated"
+    "rollout": "live-tags-never-release",
+    "rolloutNote": "DEFECT 2026-09-22: the three tagged scripts (ahrefs, GHL number_pool, user_session) stay type=text/plain after Accept, so analytics and call tracking are currently OFF. Reproducible on / and /contact; Hackensack releases correctly in the same browser run, and the two accounts' region settings and cookie-report flags are identical. Cause unknown - compare the two banners' category settings in the Termly dashboard."
   },
   {
     "key": "nahlah",
