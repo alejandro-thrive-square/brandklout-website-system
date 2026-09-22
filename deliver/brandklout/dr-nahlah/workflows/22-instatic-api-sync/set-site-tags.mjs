@@ -23,6 +23,15 @@
  * grant the banner shows and the choice is never saved. The production CSP is
  * already `https:` for both, so this is belt and braces there and the real
  * fix on any instance with a strict CSP.
+ *
+ * Call tracking, 2026-09-22: TWO LeadConnector number pools, one per office.
+ * Alexandria's is on every page except the Tysons ads landing pages; Tysons'
+ * is on those nine pages only. Scoped with embed-origins 1.8.0's `except=` /
+ * `pages=` line options, matched against the page slug. No page is pointed at
+ * a number by hand — each pool swaps whatever forwarding number it owns, in
+ * link text and tel: href alike. Both stay consent-tagged (`advertising`), as
+ * the Termly rollout set them. Any older number_pool.js line is replaced, not
+ * kept beside the new ones.
  */
 import { api, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
@@ -32,9 +41,13 @@ const APPLY = process.argv.includes('--apply')
 const TAGS = [
   'https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off',
   'https://www.googletagmanager.com/gtm.js?id=GTM-MR7K64XD',
-  'https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js',
-  'https://backend.leadconnectorhq.com/appengine/js/user_session.js',
+  // Alexandria: site-wide, except the Tysons ads landing pages.
+  'https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js#consent=advertising&except=ads-landing-pages/tysons-*',
+  // Tysons Corner: the Tysons ads landing pages only.
+  'https://backend.leadconnectorhq.com/appengine/loc/xJDu1mFoW5jFYTNqmuk7/pool/YeoEOlrWx1ugHvOq8qoB/number_pool.js#consent=advertising&pages=ads-landing-pages/tysons-*',
+  'https://backend.leadconnectorhq.com/appengine/js/user_session.js#consent=advertising',
 ]
+const POOL_RE = /\/number_pool\.js|\/user_session\.js/
 const FRAME = ['https://app.termly.io']
 const CONNECT = ['https://us.consent.api.termly.io']
 
@@ -45,7 +58,8 @@ const cur = await api('GET', `/admin/api/cms/plugins/${ID}/settings`)
 const settings = { ...(cur.settings ?? {}) }
 const next = {
   ...settings,
-  siteScripts: merge(settings.siteScripts, TAGS),
+  // Pool and session lines are owned here: drop every existing one, then add ours.
+  siteScripts: merge(lines(settings.siteScripts).filter((l) => !POOL_RE.test(l)).join('\n'), TAGS),
   frameOrigins: merge(settings.frameOrigins, FRAME),
   connectOrigins: merge(settings.connectOrigins, CONNECT),
 }

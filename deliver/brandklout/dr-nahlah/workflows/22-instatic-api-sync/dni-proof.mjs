@@ -26,6 +26,13 @@
  *
  *   node dni-proof.mjs                       # production home page
  *   node dni-proof.mjs <url> [<url> ...]
+ *   node dni-proof.mjs --accept <url> ...  # click the cookie banner's Accept first
+ *
+ * Since the Termly rollout (2026-09-22) both LeadConnector tags publish as
+ * `type="text/plain" data-categories="advertising"`: they do not run at all
+ * until the visitor accepts. Without --accept a fresh visitor proves only that
+ * the hold works. With it, the harness accepts on the first page, as a person
+ * would, and the rest of the walk carries that consent.
  */
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
@@ -35,6 +42,7 @@ import http from 'node:http'
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const URLS = process.argv.slice(2).filter((a) => !a.startsWith('--'))
+const ACCEPT = process.argv.includes('--accept')
 const TARGETS = URLS.length ? URLS : ['https://www.drnahlah.com/']
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -65,6 +73,28 @@ ws.addEventListener('message', async (ev) => {
   const raw = typeof ev.data === 'string' ? ev.data : await ev.data.text()
   const m = JSON.parse(raw)
   if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); return }
+  /* --accept also relays the pool's LeadConnector calls through Node: NordVPN
+     Threat Protection fails them inside Chrome ("TypeError: Failed to fetch")
+     while Node reaches them fine. The real request goes out and the real
+     answer comes back; only the transport changes. */
+  if (m.method === 'Fetch.requestPaused') {
+    const q = m.params.request
+    try {
+      const r = await fetch(q.url, { method: q.method, headers: { 'content-type': 'application/json', origin: 'https://www.drnahlah.com' }, body: q.postData })
+      const body = Buffer.from(await r.arrayBuffer())
+      calls.push(r.status + ' ' + q.url + ' (relayed through Node)')
+      await send('Fetch.fulfillRequest', { requestId: m.params.requestId, responseCode: r.status,
+        responseHeaders: [{ name: 'content-type', value: r.headers.get('content-type') || 'application/json' },
+          { name: 'access-control-allow-origin', value: '*' },
+          // The pool POSTs JSON, so Chrome preflights it; answer that too.
+          { name: 'access-control-allow-headers', value: 'content-type' },
+          { name: 'access-control-allow-methods', value: 'GET, POST, OPTIONS' }], body: body.toString('base64') }, m.sessionId)
+    } catch (e) {
+      calls.push('RELAY FAILED ' + q.url + ' ' + e.message)
+      await send('Fetch.failRequest', { requestId: m.params.requestId, errorReason: 'Failed' }, m.sessionId)
+    }
+    return
+  }
   if (m.method === 'Runtime.consoleAPICalled') {
     logs.push(m.params.args.map((a) => a.value ?? a.description ?? JSON.stringify(a.preview ?? '')).join(' '))
   }
@@ -91,6 +121,7 @@ const { sessionId } = await send('Target.attachToTarget', { targetId: pt.targetI
 await send('Page.enable', {}, sessionId)
 await send('Runtime.enable', {}, sessionId)
 await send('Network.enable', {}, sessionId)
+if (ACCEPT) await send('Fetch.enable', { patterns: [{ urlPattern: 'https://services.leadconnectorhq.com/*' }] }, sessionId)
 // A real Chrome UA: the HeadlessChrome string is refused by some of the third
 // parties this site loads (see the Vimeo note in the runbook).
 await send('Network.setUserAgentOverride', {
@@ -155,12 +186,45 @@ const serverNumbers = async (url) => {
    then walk the site the way a person does. */
 await send('Network.clearBrowserCookies', {}, sessionId)
 
+/* Termly's banner Accept, found by its test id or its label. Returns what it
+   clicked, or null when there was no banner (consent already given). */
+const CLICK_ACCEPT = `(function(){
+  var b = document.querySelector('[data-tid="banner-accept"]');
+  if (!b) b = [].find.call(document.querySelectorAll('button'), function(x){ return /^\\s*accept( all)?\\s*$/i.test(x.textContent) });
+  if (!b) return null;
+  b.click(); return b.outerHTML.slice(0, 120);
+})()`
+
 let anySwap = false
+let accepted = false
 for (const url of TARGETS) {
   logs.length = 0
   calls.length = 0
   const before = await serverNumbers(url)
   await send('Page.navigate', { url }, sessionId)
+  if (ACCEPT && !accepted) {
+    let clicked = null
+    for (let i = 0; i < 20 && !clicked; i++) { await wait(500); clicked = await evalJs(CLICK_ACCEPT) }
+    console.log('\n  consent           : ' + (clicked ? 'accepted via ' + clicked : 'NO BANNER FOUND'))
+    accepted = !!clicked
+  }
+  /* No banner means Termly never ran (NordVPN Threat Protection blocks it in
+     Chrome on the workstation), so nothing will ever release the held tags.
+     Release them the way Termly does on Accept: a live copy of each
+     `type="text/plain"` advertising script. That proves the pools and the
+     page, not the banner. Done on every page, since without Termly no consent
+     is remembered either. */
+  if (ACCEPT && !accepted) {
+    const released = await evalJs(`(function(){
+      var n = 0;
+      [].forEach.call(document.querySelectorAll('script[type="text/plain"][data-categories*="advertising"]'), function(s){
+        var r = document.createElement('script'); r.src = s.getAttribute('src'); r.async = false;
+        s.parentNode.insertBefore(r, s); n++;
+      });
+      return n;
+    })()`)
+    console.log('  released by hand  : ' + released + ' held advertising script(s)')
+  }
   await wait(11000)                          // the assign-number round trip
   const after = await evalJs(SNAPSHOT)
 

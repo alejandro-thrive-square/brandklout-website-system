@@ -10,7 +10,7 @@ then only the runs you need. Do not read them all.
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. Home page reviews are the ReputationHub **embed only** since 2026-09-22. |
-| **Call tracking** | **OFF.** DNI was proved swapping earlier on 2026-09-22, then two things stopped it: the pool forwards from `(571) 253-7790`, which the number retarget removed from every page, and the cookie-consent run made both LeadConnector tags `type="text/plain" data-categories="advertising"` so they do not execute before consent. See the 2026-09-22 and 2026-09-22c runs. |
+| **Call tracking** | **ON, consent-held.** Two GoHighLevel pools since 2026-09-22d: Alexandria's (swaps (571) 617-7245) in the head of every page except `ads-landing-pages/tysons-*`, Tysons' (swaps (703) 448-3312) on those nine. Scoped by embed-origins **1.8.0** `pages=`/`except=` (`set-site-tags.mjs`; gate `check-pool-scope.mjs`). Swap proved in text and `tel:` with `dni-proof.mjs --accept`. Both tags stay `data-categories="advertising"`, so they don't run until a visitor accepts; that choice is still open. |
 | **Telephone numbers** | Tysons Corner · McLean **(703) 448-3312** (both lines), Alexandria new patients **(571) 617-7245**, Alexandria current patients (703) 940-5410. Retargeted 2026-09-22c; `(571) 702-9900` and `(571) 253-7790` are retired everywhere including the structured data. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
@@ -68,9 +68,9 @@ then only the runs you need. Do not read them all.
    are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
    **Leave it that way unless tags are actually being tested there**: with `siteScripts` on,
    the clone starts claiming real GoHighLevel pool numbers.
-8. **In GoHighLevel**: only `(571) 253-7790` is a forwarding number in the DNI pool, so only
-   that number is attributed. Decide with the client whether `(571) 702-9900`,
-   `(703) 448-3312` and `(703) 940-5410` should be tracked too. Nothing on the site changes.
+8. ~~**In GoHighLevel**: only `(571) 253-7790` was pooled.~~ **SUPERSEDED 2026-09-22d**: one pool per office,
+   each forwarding the office's new-patient number. Open: should call tracking wait for
+   cookie consent (it does now), and should `(703) 940-5410` be tracked (it is not).
 9. **The home page's reviews now have no fallback.** `check-review-embed.mjs` is the check;
    the vendor was serving zero reviews as recently as 2026-09-21.
 

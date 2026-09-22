@@ -108,12 +108,18 @@ function widen(csp, directive, origins) {
        refused, on that page only, with the fonts still listed in the CSS and
        nothing in the markup to explain it. Seed from the fallback first. */
     csp.order.push(directive)
-    var inherited = []
-    var fallback = csp.map['default-src'] || ["'self'"]
-    for (var f = 0; f < fallback.length; f++) {
-      if (fallback[f] !== "'none'") inherited.push(fallback[f])
+    var created = []
+    var seenCreated = {}
+    // Deduped like the widen path below: the same origin arrives twice when a
+    // site script is ALSO found on the page by auto-trust, and a doubled source
+    // makes the second publish differ from the first.
+    var sources = (csp.map['default-src'] || ["'self'"]).concat(origins)
+    for (var f = 0; f < sources.length; f++) {
+      if (sources[f] === "'none'" || seenCreated[sources[f]]) continue
+      seenCreated[sources[f]] = true
+      created.push(sources[f])
     }
-    csp.map[directive] = inherited.concat(origins)
+    csp.map[directive] = created
     return true
   }
   var next = []
@@ -475,13 +481,166 @@ function applyCompatible(csp) {
   return changed
 }
 
+/* ---------------------------------------------------------------------------
+ * Site scripts.
+ *
+ * Some tools belong on EVERY page — the accessibility widget is the first — and
+ * the platform gives them no way in: `importHtml` strips a head `<script>`, and
+ * a runtime injection from the site bundle is refused by `script-src 'self'`.
+ * This filter already runs last over every page, so it adds the tag here and
+ * grants its host in the same pass, which is the only order that works: a tag
+ * without the grant is refused, a grant without the tag loads nothing.
+ *
+ * The host gets script-src plus connect-src, style-src and font-src, exactly
+ * what an auto-trusted script origin gets below. Sienna needs three of the four
+ * from `cdn.jsdelivr.net`: the script, a `fetch` of its locale JSON, and the
+ * OpenDyslexic webfont.
+ *
+ * URLs are validated, not escaped. `&` is the one character written as an
+ * entity, because it is legal in a URL and means something in an attribute.
+ * ------------------------------------------------------------------------ */
+
+var SCRIPT_URL_RE = /^https:\/\/[a-z0-9.-]+(?::[0-9]{1,5})?\/[^\s"'<>`\\]*$/i
+// A site-script line may end in a fragment of `&`-separated options:
+//   #consent=advertising|analytics   hold it for the cookie banner
+//   #pages=<glob>,<glob>             only on these pages
+//   #except=<glob>,<glob>            on every page but these
+// e.g. <url>#consent=advertising&except=ads-landing-pages/tysons-*
+// The fragment is never sent to the server, so it is a safe place to hang
+// options, and a line without one behaves exactly as it always has.
+var OPTION_KEYS = { consent: true, pages: true, except: true }
+// Termly's category ids. Anything else is a typo, and a typo that reached the
+// page as data-categories would hold the script for a category nobody can accept.
+var CATEGORIES_RE = /^(essential|analytics|advertising|performance|social_networking|unclassified)(\|(essential|analytics|advertising|performance|social_networking|unclassified))*$/
+// A page glob is a slug with `*` for any run of characters, e.g.
+// `ads-landing-pages/tysons-*`. The home page is `index`.
+var GLOB_RE = /^[a-z0-9_.\/*-]+$/i
+var HEAD_CLOSE_RE = /<\/head\s*>/i
+
+function parseGlobs(value) {
+  if (!value) return null
+  var globs = value.split(',')
+  for (var i = 0; i < globs.length; i++) {
+    globs[i] = globs[i].replace(/^\/+|\/+$/g, '')
+    if (!GLOB_RE.test(globs[i]) || globs[i].length === 0) return null
+  }
+  return globs
+}
+
+function parseScriptUrls(raw) {
+  if (typeof raw !== 'string' || raw.length === 0) return []
+  var out = []
+  var seen = {}
+  var lines = raw.split(/\s+/)
+  lines: for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim()
+    if (line.length === 0) continue
+    var url = line
+    var entry = { url: '', categories: '', pages: null, except: null }
+    var hash = line.indexOf('#')
+    if (hash !== -1) {
+      url = line.slice(0, hash)
+      var parts = line.slice(hash + 1).split('&')
+      for (var j = 0; j < parts.length; j++) {
+        var eq = parts[j].indexOf('=')
+        var key = eq === -1 ? parts[j] : parts[j].slice(0, eq)
+        var value = eq === -1 ? '' : parts[j].slice(eq + 1)
+        // An unknown or malformed option refuses the whole line: a typo in
+        // `except` must not quietly put the script on the pages it names.
+        if (!OPTION_KEYS[key]) continue lines
+        if (key === 'consent') {
+          if (!CATEGORIES_RE.test(value)) continue lines
+          entry.categories = value
+        } else {
+          entry[key] = parseGlobs(value)
+          if (!entry[key]) continue lines
+        }
+      }
+    }
+    if (!SCRIPT_URL_RE.test(url) || seen[url]) continue
+    seen[url] = true
+    entry.url = url
+    out.push(entry)
+  }
+  return out
+}
+
+function globMatches(glob, slug) {
+  var parts = glob.split('*')
+  var re = ''
+  for (var i = 0; i < parts.length; i++) {
+    re += (i > 0 ? '.*' : '') + parts[i].replace(/[.\/-]/g, '\$&')
+  }
+  return new RegExp('^' + re + '$', 'i').test(slug)
+}
+
+function anyGlob(globs, slug) {
+  for (var i = 0; i < globs.length; i++) if (globMatches(globs[i], slug)) return true
+  return false
+}
+
+/** The site scripts that belong on this page. `slug` comes from the publish
+ *  context; a data-row page arrives with its template's slug. With no slug,
+ *  a `pages=` line is left off (it cannot be shown to match) and an `except=`
+ *  line stays on (it cannot be shown to be excluded). */
+function scriptsForPage(scripts, slug) {
+  var s = typeof slug === 'string' ? slug.replace(/^\/+|\/+$/g, '') : null
+  if (s === '') s = 'index'
+  var out = []
+  for (var i = 0; i < scripts.length; i++) {
+    var sc = scripts[i]
+    if (sc.pages && (s === null || !anyGlob(sc.pages, s))) continue
+    if (sc.except && s !== null && anyGlob(sc.except, s)) continue
+    out.push(sc)
+  }
+  return out
+}
+
+/** Add a tag per URL just before `</head>`, skipping any already on the page so
+ *  a republish of a published page never doubles it.
+ *
+ *  A script carrying a consent tag is emitted as `type="text/plain"` with
+ *  `data-categories`, which is how Termly holds a tracker until the visitor
+ *  accepts that category (see 23-termly-ghl-consent). Without this, a tracker
+ *  that has to be site-wide — GoHighLevel's call-tracking pair, for instance —
+ *  could only be added here untagged, and would run before any consent.
+ */
+function injectSiteScripts(html, scripts) {
+  var tags = ''
+  for (var i = 0; i < scripts.length; i++) {
+    var src = scripts[i].url.replace(/&/g, '&amp;')
+    if (html.indexOf('src="' + src + '"') !== -1) continue
+    if (scripts[i].categories) {
+      // text/plain is inert until Termly rewrites it, so `async` means nothing here.
+      tags += '<script type="text/plain" data-categories="' + scripts[i].categories +
+        '" src="' + src + '" data-wz-site-script></script>'
+    } else {
+      tags += '<script src="' + src + '" async data-wz-site-script></script>'
+    }
+  }
+  if (tags.length === 0) return html
+  var head = HEAD_CLOSE_RE.exec(html)
+  if (!head) return html
+  return html.slice(0, head.index) + tags + html.slice(head.index)
+}
+
 export function activate(api) {
-  api.cms.hooks.filter('publish.html', function (html) {
+  api.cms.hooks.filter('publish.html', function (html, ctx) {
     if (typeof html !== 'string' || html.length === 0) return html
+
+    var siteScripts = scriptsForPage(
+      parseScriptUrls(api.cms.settings.get('siteScripts')), ctx && ctx.slug)
+    html = injectSiteScripts(html, siteScripts)
 
     var frame = parseOrigins(api.cms.settings.get('frameOrigins'))
     var script = parseOrigins(api.cms.settings.get('scriptOrigins'))
     var connect = parseOrigins(api.cms.settings.get('connectOrigins'))
+    // A site script's host is trusted like a typed script origin, so it gets
+    // the same four directives on every page, embed or not.
+    for (var s = 0; s < siteScripts.length; s++) {
+      var siteOrigin = originOf(siteScripts[s].url)
+      if (script.indexOf(siteOrigin) === -1) script.push(siteOrigin)
+    }
     // Default is compatible: the setting exists because embeds were silently
     // half-failing, so an install that has never been configured gets the
     // behaviour that made them work.

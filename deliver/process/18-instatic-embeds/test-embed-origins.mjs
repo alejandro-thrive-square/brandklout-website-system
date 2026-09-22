@@ -20,7 +20,7 @@ const page = (csp) =>
   `  <meta http-equiv="Content-Security-Policy" content="${csp}">\n` +
   `  <title>x</title>\n</head>\n<body>\n<p>hi</p>\n</body>\n</html>`
 
-function run(settings, html = page(LIVE_CSP)) {
+function run(settings, html = page(LIVE_CSP), ctx) {
   let filter
   activate({
     plugin: { log: () => {} },
@@ -29,7 +29,7 @@ function run(settings, html = page(LIVE_CSP)) {
       hooks: { filter: (name, fn) => { if (name === 'publish.html') filter = fn } },
     },
   })
-  return filter(html)
+  return filter(html, ctx)
 }
 const cspOf = (html) =>
   (html.match(/content="([^"]*)"\s*\/?>/) || [])[1] ??
@@ -313,6 +313,106 @@ check('compatible mode is idempotent across republishes',
     const first = run({}, pageWith(EMBEDDED))
     return run({}, first) === first
   })())
+
+// Site scripts: a tag on every page and its host granted, in the same pass.
+console.log('\nSite scripts\n')
+const SIENNA = 'https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js'
+const TAG = `<script src="${SIENNA}" async data-wz-site-script></script>`
+const directive = (csp, name) =>
+  csp.split(';').map((s) => s.trim()).find((s) => s.split(' ')[0] === name) ?? ''
+const sited = run({ siteScripts: SIENNA })
+const sitedCsp = cspOf(sited)
+check('a site script is added once, just before </head>',
+  sited.split(TAG).length === 2 && sited.includes(TAG + '</head>'), sited)
+check('its host may load scripts, fetch, styles and fonts',
+  ['script-src', 'connect-src', 'style-src', 'font-src']
+    .every((d) => directive(sitedCsp, d).includes('https://cdn.jsdelivr.net')), sitedCsp)
+check("the importmap hash survives and 'unsafe-inline' is not introduced",
+  directive(sitedCsp, 'script-src').includes("'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='") &&
+    !directive(sitedCsp, 'script-src').includes("'unsafe-inline'"), sitedCsp)
+check("a created font-src keeps 'self', so the site's own fonts still load",
+  directive(sitedCsp, 'font-src').includes("'self'"), sitedCsp)
+check('republishing a published page does not double the tag',
+  run({ siteScripts: SIENNA }, sited) === sited)
+check('strict mode with autoTrust off still adds and grants it',
+  (() => {
+    const h = run({ siteScripts: SIENNA, embedPolicy: 'strict', autoTrust: false })
+    return h.includes(TAG) && directive(cspOf(h), 'script-src').includes('https://cdn.jsdelivr.net')
+  })())
+check('a page with an embed gets the tag and keeps the compatible policy',
+  (() => {
+    const h = run({ siteScripts: SIENNA }, pageWith(EMBEDDED))
+    return h.includes(TAG) && directive(cspOf(h), 'script-src').includes("'unsafe-inline'")
+  })())
+check('a page with no CSP meta still gets the tag',
+  run({ siteScripts: SIENNA }, bare).includes(TAG))
+check('non-https, relative, host-only and quote-breaking URLs are refused',
+  run({ siteScripts: 'http://x.com/a.js\njavascript:alert(1)\n//x.com/a.js\nhttps://x.com\n' +
+    'https://x.com/a.js"><script>alert(1)</script>' }) === src)
+check('& in a URL is written as an entity',
+  run({ siteScripts: 'https://x.com/a.js?a=1&b=2' }).includes('src="https://x.com/a.js?a=1&amp;b=2"'))
+
+// Consent tagging: a site script may be held by the cookie banner until the
+// visitor accepts its category (see 23-termly-ghl-consent).
+console.log('\nSite scripts: consent tagging\n')
+const GHL = 'https://backend.leadconnectorhq.com/appengine/js/user_session.js'
+const tagged = run({ siteScripts: GHL + '#consent=advertising' })
+check('a tagged script is inert until the banner releases it',
+  tagged.includes(`<script type="text/plain" data-categories="advertising" src="${GHL}" data-wz-site-script></script>`), tagged)
+check('a tagged script carries no async, which means nothing on text/plain',
+  !/data-categories="advertising"[^>]*async/.test(tagged), tagged)
+check("its host is still granted, so it can load once it is released",
+  directive(cspOf(tagged), 'script-src').includes('https://backend.leadconnectorhq.com'), cspOf(tagged))
+check('two categories are allowed, separated by a pipe',
+  run({ siteScripts: GHL + '#consent=advertising|analytics' })
+    .includes('data-categories="advertising|analytics"'))
+check('an untagged line is untouched by the feature',
+  run({ siteScripts: SIENNA }) === sited)
+check('tagged and untagged lines coexist',
+  (() => {
+    const h = run({ siteScripts: SIENNA + '\n' + GHL + '#consent=advertising' })
+    return h.includes(TAG) && h.includes('data-categories="advertising"')
+  })())
+check('a misspelt category is refused rather than held for a category nobody can accept',
+  run({ siteScripts: GHL + '#consent=advertizing' }) === src)
+check('an empty category is refused',
+  run({ siteScripts: GHL + '#consent=' }) === src)
+check('a category cannot break out of the attribute',
+  run({ siteScripts: GHL + '#consent=advertising" onload="alert(1)' }) === src)
+check('republishing does not double a tagged script',
+  run({ siteScripts: GHL + '#consent=advertising' }, tagged) === tagged)
+
+// Page scoping: one pool on most pages, another on a few (Dr. Nahlah, 2026-09-22).
+console.log('\nSite scripts: page scoping\n')
+const ALX = 'https://backend.leadconnectorhq.com/appengine/loc/A/pool/a/number_pool.js'
+const TYS = 'https://backend.leadconnectorhq.com/appengine/loc/T/pool/t/number_pool.js'
+const pools = [ALX + '#consent=advertising&except=ads-landing-pages/tysons-*',
+  TYS + '#consent=advertising&pages=ads-landing-pages/tysons-*', GHL + '#consent=advertising'].join('\n')
+const on = (slug) => run({ siteScripts: pools }, page(LIVE_CSP), slug === undefined ? undefined : { slug })
+const has = (h, u) => h.includes(`src="${u}"`)
+check('an ordinary page gets the except= pool and not the pages= pool',
+  (() => { const h = on('contact'); return has(h, ALX) && !has(h, TYS) && has(h, GHL) })())
+check('the home page (index) is an ordinary page',
+  (() => { const h = on('index'); return has(h, ALX) && !has(h, TYS) })())
+check('a matching page gets the pages= pool and not the except= pool',
+  (() => { const h = on('ads-landing-pages/tysons-all-on-4-thank-you'); return has(h, TYS) && !has(h, ALX) && has(h, GHL) })())
+check('a near miss is not a match',
+  (() => { const h = on('ads-landing-pages/alexandria-all-on-4'); return has(h, ALX) && !has(h, TYS) })())
+check('leading and trailing slashes on the slug are ignored',
+  has(on('/ads-landing-pages/tysons-veneers/'), TYS))
+check('with no slug, pages= is left off and except= stays on',
+  (() => { const h = on(undefined); return has(h, ALX) && !has(h, TYS) })())
+check('options combine with consent tagging',
+  on('contact').includes(`<script type="text/plain" data-categories="advertising" src="${ALX}"`))
+check('an unknown option refuses the line',
+  !has(run({ siteScripts: ALX + '#exept=index' }, page(LIVE_CSP), { slug: 'contact' }), ALX))
+check('a glob cannot break out of anything',
+  !has(run({ siteScripts: ALX + '#pages=a"b' }, page(LIVE_CSP), { slug: 'contact' }), ALX))
+check('several globs, comma-separated',
+  has(run({ siteScripts: ALX + '#pages=about,contact' }, page(LIVE_CSP), { slug: 'contact' }), ALX))
+check('the grant follows the tags: a page with none of them gets no LeadConnector grant',
+  !directive(cspOf(run({ siteScripts: TYS + '#pages=x' }, page(LIVE_CSP), { slug: 'contact' })), 'script-src')
+    .includes('leadconnectorhq'))
 
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)

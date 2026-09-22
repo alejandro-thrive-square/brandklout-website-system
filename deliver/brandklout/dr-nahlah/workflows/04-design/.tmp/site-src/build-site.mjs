@@ -53,6 +53,11 @@ const lpOffice = read("partials/lp-office.html");
    session helper), on every page. See partials/site-scripts.html for the
    order and the autoBlock decision. */
 const siteScripts = read("partials/site-scripts.html");
+/* One GoHighLevel number pool per office (2026-09-22). Alexandria's is the
+   site-wide one; the Tysons ads landing pages get Tysons' instead. */
+const GHL_POOL_ALEXANDRIA = "https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js";
+const GHL_POOL_TYSONS = "https://backend.leadconnectorhq.com/appengine/loc/xJDu1mFoW5jFYTNqmuk7/pool/YeoEOlrWx1ugHvOq8qoB/number_pool.js";
+const ghlPool = (slug) => (slug.startsWith("ads-tysons-") ? GHL_POOL_TYSONS : GHL_POOL_ALEXANDRIA);
 const GTM_NOSCRIPT = `<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>`;
 
@@ -415,7 +420,7 @@ for (const p of PAGES) {
   }
 
   const headHtml = head.replace("{{HEAD_SEO}}", seoBlock(p.slug))
-    .replace("{{SITE_SCRIPTS}}", siteScripts);
+    .replace("{{SITE_SCRIPTS}}", siteScripts.replace("{{GHL_POOL}}", ghlPool(p.slug)));
 
   /* The fixed-UI block: the header, then either the drawer (editorial) or the
      mobile CTA rail (landing). Assembled as ONE string rather than as three

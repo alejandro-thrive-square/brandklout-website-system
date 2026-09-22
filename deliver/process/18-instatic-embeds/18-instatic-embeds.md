@@ -83,6 +83,35 @@ Say the trade out loud at handover: on the pages carrying an embed, what stands 
 
 `strict` + `autoTrust: false` returns to "nothing is allowed unless an operator typed it", which is where this plugin started.
 
+## Site scripts: one tag on every page
+
+Since **plugin `1.6.0`** the `siteScripts` setting (one https URL per line) puts a script on **every** published page. The `publish.html` filter adds `<script src="…" async data-wz-site-script>` just before `</head>`, then grants that URL's host `script-src`, `connect-src`, `style-src` and `font-src`. That is the same set an auto-trusted script origin gets. It works in both policy modes, with `autoTrust` on or off, and on pages with or without an Embed block. It is the only way onto every page: `importHtml` strips a head `<script>`, and `script-src 'self'` refuses a runtime injection from the site bundle.
+
+Since **plugin `1.7.0`** a line may end with `#consent=advertising` (or `analytics`, or both joined by `|`). That script is emitted as `<script type="text/plain" data-categories="…">` instead of `async`, which is how the cookie banner holds a tracker until the visitor accepts that category (see [23-termly-ghl-consent](../23-termly-ghl-consent/23-termly-ghl-consent.md)). The fragment never reaches the server, so it is a safe place to hang the tag; the host is still granted its four directives, and a line with no tag behaves exactly as before. An unrecognised category is refused outright rather than emitted — a typo in `data-categories` would hold the script for a category nobody can accept, which looks identical to the script being broken.
+
+Since **plugin `1.8.0`** (2026-09-22, Dr. Nahlah) the line fragment takes `&`-joined options, and a line can be scoped to pages. `pages=<glob>[,<glob>]` puts it only on those pages; `except=<glob>[,<glob>]` puts it on every page but those. A glob is a page slug with `*` wildcards, matched against the `slug` the publish context passes (the home page is `index`; a data-row entry arrives with its **template's** slug, so all blog posts are `post`). Example: two call-tracking pools, one per office:
+
+```
+…/pool/<alexandria>/number_pool.js#consent=advertising&except=ads-landing-pages/tysons-*
+…/pool/<tysons>/number_pool.js#consent=advertising&pages=ads-landing-pages/tysons-*
+```
+
+If there is no slug, a `pages=` line is left off and an `except=` line stays on. An unknown option (`exept=`) or a malformed glob refuses the whole line, because a typo in `except` must not quietly put the script on the pages it names. Host grants follow the tags: a page that gets none of a host's scripts is not granted that host. **Before `1.8.0` there was no way to keep a site script off a page**, and a one-page script belonged in an Embed block. Use scoping for the head. It is a cleaner place than a body embed for a tracker that has to run before the page's numbers render.
+
+**Live 2026-09-12: the Sienna accessibility widget on every instance.** URL: `https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js`. It needs all three jsdelivr grants: the script, a `fetch` of `dist/locales/`, and the OpenDyslexic font.
+
+```bash
+cd deliver/process/18-instatic-embeds
+node pack-plugin.mjs embed-origins .tmp/embed-origins.zip
+node rollout-site-scripts.mjs status                      # plugin version, siteScripts, draft vs live
+node rollout-site-scripts.mjs apply --url <script> --apply  # upgrade/install + merge the URL; publishes nothing
+node rollout-site-scripts.mjs publish --apply             # REFUSES a site whose draft differs from live
+node rollout-site-scripts.mjs verify --url <script>       # every published page: one tag, CSP allows it
+# --only <section>[,<section>] narrows any of them
+```
+
+The sites are every `~/.webzite/.env` section with an `INSTATIC_BASE_URL`, so **a new instance is picked up by running `apply` then `publish` against it**, and `status` shows which instances are missing the script. Each site runs in its own child process, because `insta-api.mjs` fixes `BASE` at import. `set-origins.mjs --site-scripts <url>` sets the setting on one site, and it now merges, so setting one box never blanks the others.
+
 ## The canvas shows a card
 
 Since **module `1.1.0` / plugin `1.4.0`**, `preview()` — the editor-only path — never emits the frame or the snippet. It returns a static description of the block: mode, destination host(s), what a snippet contains, the height rule, and "Appears when the page is published". `render()`, the publish path, is untouched.
@@ -136,6 +165,9 @@ Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin tha
 
 ## Gotchas
 
+- **A site script can duplicate a widget the site already runs.** On IFA, Sienna appeared next to a UserWay button the WordPress clone was injecting from its `site.js` registry. The page HTML shows neither, because both are added at runtime. Before rolling out a site-wide widget, grep each site's `src/scripts/site.js` shell asset or published `site-*.js` bundle for the same kind of vendor.
+- **Check `draftMatchesPublished` before any fleet-wide publish.** `GET /admin/api/cms/publish/status` returns it, and `rollout-site-scripts.mjs publish` re-reads it right before publishing and skips a drifted site. On 2026-09-12 it held back Dr. Nahlah (unpublished edits on 38 pages) and Stone Med Spa (an 11th draft page that has never gone live).
+- **A created directive must be deduped.** `widen()` used to build an absent directive as `default-src + origins` without deduping. A site script that auto-trust also found on the page came out as `connect-src 'self' https://x https://x`, and a second publish rewrote it, so the filter was no longer idempotent. Fixed in `1.6.0`.
 - **A publish bakes EVERY page.** Unrelated drift ships with whatever you were publishing. On Dr. Nahlah this cost the home page its six review-card fallbacks — present in the published HTML, absent from the draft, gone the moment anything was published. Audit before and after:
   ```bash
   node ../../[client]/workflows/08-qa/.tmp/audit-site.mjs --base https://client.com --only index
@@ -174,6 +206,11 @@ Both run with no host, no network and no site. What they cannot prove is that th
 
 - **Executor status**: Working. The executor is the Node toolchain in this folder; `18-instatic-embeds.py` is a thin orchestrator over the documented sequence, in the same spirit as `07-webflow-build`.
 - **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site. That `.env` is **generated** from `~/.webzite/.env` by `scripts/env-sync.mjs`: `INSTATIC_EMAIL` comes from `[shared]`, and `INSTATIC_BASE_URL` + the per-instance `INSTATIC_PASSWORD` from the client's own section. Add a missing value to the master, never to the worktree file — see [SYSTEM_RULES.md §4.2.2](../../../SYSTEM_RULES.md).
+- **A plugin setting's `description` is capped at 500 characters.** Over it,
+  `inspect-package` answers `400 Invalid plugin manifest: Expected union value` — a zod union
+  error that names neither the field nor the limit. Bisect by shortening the description; the
+  rest of the manifest is fine. Reformatting `plugin.json` (e.g. re-dumping it from a JSON
+  library) is harmless on its own.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`, `GET|PUT /admin/api/cms/site-document`, `POST /admin/api/cms/publish`.
 - **Origin**: promoted from `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` (built and proven there on `encorercm.com`, plugin v1.3.0). The client folder's numbering (`15`, `16`) predates this promotion and does not match canonical module numbers.
 
@@ -182,7 +219,8 @@ Both run with no host, no network and no site. What they cannot prove is that th
 - `lib/insta-api.mjs` — headless admin REST client, no default site
 - `pack-plugin.mjs` — deterministic zip builder (forward-slashed entries; `Compress-Archive` writes backslash entry names on Windows and installs a plugin whose entrypoint can never be found)
 - `install-plugin.mjs` — inspect + install against an explicit permission grant
-- `set-origins.mjs` — read / set / clear the allowlist
+- `set-origins.mjs` — read / set / clear the allowlist and `siteScripts` on one site (merges; targets `brandklout.embed-origins`)
+- `rollout-site-scripts.mjs` — `status` / `apply` / `publish` / `verify` a site-wide script across every instance
 - `test-embed-origins.mjs`, `test-embed-module.mjs` — offline suites
 - `verify-embed-editor.mjs` — is the block offered to a person? (publishes nothing)
 - `verify-embed-canvas.mjs` — does the CANVAS show the card and not the embed? 15 assertions against the real editor, configured blocks written into a draft, inserter skipped (publishes nothing)
