@@ -82,6 +82,24 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   It renders the page, so it sees what a raw-HTML check cannot. `verify-tags.mjs` deliberately
   skips a staging host — on staging the tags are supposed to be absent.
 
+
+## Cookie consent (Termly) — 2026-09-22
+
+**Live.** The banner renders and the Cookie Preferences control opens Termly's modal. Tagged analytics and ad pixels wait for consent; the **GoHighLevel call-tracking pool deliberately does not** (client instruction, 2026-09-22). Account `ifadentistry@thrivesquare.com`, website UUID
+`8fd70023-515c-4230-bf39-f8ad2666f71c`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_IFA`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).
