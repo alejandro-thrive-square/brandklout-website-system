@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-17 | 2026-09-17, later — The Go High Level contact form on the booking page — carries **gotchas** | [`2026-09-17-ghl-contact-form-on-the-booking-page.md`](./2026-09-17-ghl-contact-form-on-the-booking-page.md) |
 | 2026-09-17 | 2026-09-17 — Privacy Policy and Terms of Service pages, published to STAGING — carries **gotchas** | [`2026-09-17-privacy-policy-and-terms-pages.md`](./2026-09-17-privacy-policy-and-terms-pages.md) |
 | 2026-09-15 | 2026-09-15 — The 301 map built (not deployed), and staging created — carries **gotchas** | [`2026-09-15-301-map-built-and-staging-created.md`](./2026-09-15-301-map-built-and-staging-created.md) |
