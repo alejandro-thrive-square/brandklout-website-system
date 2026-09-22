@@ -15,6 +15,8 @@ directly. **This fixes the 22c blocker**: the Alexandria pool already forwards f
 
 ## Done
 
+Commit: `481402de`.
+
 - **embed-origins `1.8.0`**, installed on this instance only
   (`deliver/process/18-instatic-embeds`). A site-script line can now end with
   `&pages=<glob>` / `&except=<glob>` beside `consent=`, matched against the publish context's
