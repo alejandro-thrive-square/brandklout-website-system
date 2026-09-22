@@ -4,6 +4,8 @@ Client instruction: "The pools should be running even if the cookie consent is n
 
 ## Done
 
+Commit: `6854eb4e`.
+
 - **Consent hold removed.** `set-site-tags.mjs` writes both pool lines and `user_session.js`
   without `#consent=advertising`, so they publish as plain `<script src async>`. Its header
   says not to put the hold back. Published.
