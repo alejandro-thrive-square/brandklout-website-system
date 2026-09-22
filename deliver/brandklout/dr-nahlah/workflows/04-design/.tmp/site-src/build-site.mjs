@@ -72,7 +72,7 @@ const LOCATIONS = {
     key: "tysons", name: "Tysons Corner", city: "McLean, VA",
     bar: "Tysons Corner &middot; McLean, VA", tag: "Tysons Corner, McLean VA",
     addr1: "7901 Jones Branch Drive, Suite 220", addr2: "McLean, VA 22102",
-    tel: "+15717029900", phone: "(571) 702-9900",
+    tel: "+17034483312", phone: "(703) 448-3312",
     curTel: "+17034483312", curPhone: "(703) 448-3312",
     maps: "https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102",
     forms: {
@@ -85,7 +85,7 @@ const LOCATIONS = {
     key: "alexandria", name: "Alexandria", city: "Alexandria, VA",
     bar: "Alexandria, VA &middot; Duke Street", tag: "Alexandria, VA",
     addr1: "2855 Duke Street", addr2: "Alexandria, VA 22314",
-    tel: "+15712537790", phone: "(571) 253-7790",
+    tel: "+15716177245", phone: "(571) 617-7245",
     curTel: "+17039405410", curPhone: "(703) 940-5410",
     maps: "https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314",
     forms: {

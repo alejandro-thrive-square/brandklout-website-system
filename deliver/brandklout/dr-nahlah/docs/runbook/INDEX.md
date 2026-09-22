@@ -1,11 +1,12 @@
 # Runbook index
 
-90 runs, newest first. Each line is one file in this folder.
+91 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-22 | 2026-09-22c — new-patient numbers retargeted per office (Tysons (703) 448-3312, Alexandria (571) 617-7245), live on 79 URLs; the head needed a separate fix from the body — carries **gotchas** | [`2026-09-22c-office-numbers-retargeted-live.md`](./2026-09-22c-office-numbers-retargeted-live.md) |
 | 2026-09-22 | 2026-09-22b — home page reviews: the six-card wall removed, the ReputationHub embed is the only reviews there; why both were on the page — carries **gotchas** | [`2026-09-22b-home-page-reviews-are-the-embed-only.md`](./2026-09-22b-home-page-reviews-are-the-embed-only.md) |
 | 2026-09-22 | 2026-09-22 — GoHighLevel DNI: the tags were already live since 2026-09-17; proved the swap works and gated the number formats — carries **gotchas** | [`2026-09-22-ghl-dni-number-swap-verified-live.md`](./2026-09-22-ghl-dni-number-swap-verified-live.md) |
 | 2026-09-21 | 2026-09-21d — the five-year warranty claim withheld from all 18 ads landing pages pending the practice's approval (reversible in two commands); where the claim came from — carries **gotchas** | [`2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md`](./2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md) |

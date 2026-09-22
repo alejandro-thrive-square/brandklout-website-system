@@ -10,7 +10,8 @@ then only the runs you need. Do not read them all.
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. Home page reviews are the ReputationHub **embed only** since 2026-09-22. |
-| **Call tracking** | GoHighLevel DNI is LIVE and **proved swapping** on 2026-09-22: `(571) 253-7790` -> a pool number, text and `tel:` alike, on every page. The other three published numbers are not in the pool. See the 2026-09-22 run. |
+| **Call tracking** | **OFF.** DNI was proved swapping earlier on 2026-09-22, then two things stopped it: the pool forwards from `(571) 253-7790`, which the number retarget removed from every page, and the cookie-consent run made both LeadConnector tags `type="text/plain" data-categories="advertising"` so they do not execute before consent. See the 2026-09-22 and 2026-09-22c runs. |
+| **Telephone numbers** | Tysons Corner · McLean **(703) 448-3312** (both lines), Alexandria new patients **(571) 617-7245**, Alexandria current patients (703) 940-5410. Retargeted 2026-09-22c; `(571) 702-9900` and `(571) 253-7790` are retired everywhere including the structured data. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
 
@@ -77,6 +78,12 @@ then only the runs you need. Do not read them all.
 
 These bite every time somebody works in here. The per-run files carry the rest.
 
+- **A phone number lives in FOUR places, and fixing the pages fixes only one.** The visible
+  numbers are `base.link` nodes on all 57 pages; the shared `cta-offices` component has its
+  own; the JSON-LD is `brandklout.aeo-schema` plugin settings; and the per-page meta/og/twitter
+  descriptions are materialised in the `brandklout.open-graph` **runtime store**. A body-only
+  check passes while the head still publishes the old number. `audit-live-numbers.mjs` sweeps
+  every sitemap URL and says which half a hit is in.
 - **The home page reviews are the EMBED ONLY, and `.rv-wall` still matters elsewhere.** The
   six-card wall came off `/` on 2026-09-22 at the client's request. Do NOT revert
   `fix-rv-wall-display.mjs` to undo it: `.rv-wall{display:grid}` is a site-wide rule and the
