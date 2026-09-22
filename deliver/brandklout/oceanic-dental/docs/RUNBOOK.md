@@ -17,7 +17,7 @@ through the dedicated `webflow-oceanic-dental` instance. See [`mcp-access.md`](.
 
 What is live (published 21:40, DNI 1.2.0 at ~21:46): `/contact-fountain-valley` and `/contact-huntington-beach` with their GHL forms;
 Termly (autoBlock off) first in the head; the Google Ads gtag tagged; the consent bridge 2.2.0 plus
-`OceanicDNI` 1.2.0 (FV pool site-wide, HB pool on the HB contact page, **not** consent-gated, by the user's choice) as header site
+`OceanicDNI` 2.0.0 (**both** pools on every page, each swapping its own number; **not** consent-gated, by the user's choice) as header site
 scripts; a Consent Preferences link in the footer. Details are in
 [`runbook/2026-09-22-contact-pages-forms-dni-consent.md`](./runbook/2026-09-22-contact-pages-forms-dni-consent.md).
 
@@ -31,6 +31,7 @@ scripts; a Consent Preferences link in the footer. Details are in
 
 ## Gotchas
 
+- An HB number typed with an en dash, `(714) 841–0203`, never swaps as text. Type it with a hyphen.
 - The DNI loader lives in [`../site-scripts/dni-loader.js`](../site-scripts/dni-loader.js). Change it
   there, minify with terser, register a new version, `cmp` the hosted copy, then re-apply with
   `add_site_script` (header). **It runs before consent on purpose** (the user, 2026-09-22): don't

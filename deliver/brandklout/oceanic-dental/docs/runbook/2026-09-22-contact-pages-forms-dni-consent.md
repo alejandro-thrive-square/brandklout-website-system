@@ -46,6 +46,27 @@ user's call.
 - Each driven run claimed a real pool number (3 FV, 1 HB in total). They're sticky per visitor and
   return to the pool.
 
+## Update 2: both pools on every page (OceanicDNI 2.0.0)
+
+- The user reported that on `/book` (the main location chooser) the HB number didn't swap, and asked
+  how to spread DNI across the site, because the footer shows both numbers.
+- `number_pool.js` runs `initNumberPool()` from a setTimeout, where `currentScript` is null, so it
+  scans every `<script>` with `number_pool` in its src and asks each pool for a number. After the
+  fetch, `getNumber` keys by the response's poolId and the location. So **2.0.0 executes only the FV
+  copy and adds HB as an inert `<script type="text/plain">`**. One init, one number per pool, and each
+  pool swaps only its own forwarding number. This is sitewide, footer included; the HB contact page
+  gets both pools too.
+- Tested before registering, by routing the live `oceanicdni-*.js` to the new file on `/book` with
+  the banner untouched: one `number_pool.js` fetch, **exactly two** assign-number 201s, and both
+  `tel:` links swapped (FV to 912-7609, HB to 942-5320). The hosted 2.0.0 was checked with `cmp`:
+  identical.
+- The en dash in `(714) 841–0203` blocks the HB text swap (the `tel:` link still swaps). It is now a
+  hyphen on `/book` (2 links), `/hb`, `/top-dentist-huntington-beach`, `/dentists-of-irvine`, `/contact`
+  and `/contact-huntington-beach`.
+- Published ~22:00, after checking that only those 5 pages had changed since the user's 21:51 publish.
+  Verified live as one visitor with the banner untouched: `/book` swapped both numbers (HB to
+  909-2982, FV to 874-8019, 2 assigns), then `/` showed the same numbers with no new assign.
+
 ## Next
 
 1. **Publish** (user). Then run `node deliver/process/23-termly-ghl-consent/consent-kit.mjs check
@@ -61,9 +82,7 @@ user's call.
    pushes to `dataLayer`.
 4. Decide what `/contact` becomes (nav links point there; it still has the native Webflow form).
    Options: a location chooser linking to the two new pages, or a 301 to one of them.
-5. The en dash `(714) 841–0203` is also on `/hb`, `/top-dentist-huntington-beach`, `/book`,
-   `/dentists-of-irvine` and `/contact`. The FV pool doesn't swap HB numbers, so it only matters if HB
-   DNI is ever extended to those pages.
+5. ~~En-dash HB numbers~~: all fixed and published.
 6. GHL side (Brandklout team): the eleven `privacy_*` consent fields on both forms. See module 23.
 
 ## Gotchas
@@ -71,8 +90,9 @@ user's call.
 - **Webflow registered scripts take `data-*` attributes only.** `type="text/plain"` is refused with a
   400, so the DNI loader gates itself on `Termly.getConsentState().advertising`. No Termly, no consent,
   no DNI. A visitor who never answers the banner sees the office numbers.
-- `number_pool.js` finds its pool from `document.currentScript.src`, or else from the first
-  `number_pool` script on the page. Never put two pools on one page.
+- **Two pools on one page:** execute ONE `number_pool.js` and add the other pools as inert
+  `type="text/plain"` script tags. The init scans every tag. Two executed copies run init twice.
+  (The earlier note "never put two pools on one page" was wrong.)
 - The Webflow MCP rate-limits `query_elements` (429 from `GET /v2/pages`) after roughly 30 calls in a
   few minutes. Batch the queries.
 
