@@ -33,6 +33,9 @@
   railway host). Previous file kept at `~/.webzite/.env.bak-2026-09-22-brandklout-origin`, and
   `node scripts/env-sync.mjs` regenerated the worktree `.env`.
 
+- **Commit** `3ebafe00` on `bk-brandklout-website` (this run file, `sites.json`, the module 20
+  directive and the standing runbook). The `.env` change is outside every repo, by design.
+
 ### Next
 
 1. **FormSubmit almost certainly needs re-activating for the new origin.** Every form on the site
