@@ -164,6 +164,25 @@ These bite every time somebody works in here. The per-run files carry the rest.
   four `assets/tech-*.webp` files `/our-facility` references that are not in the local
   assets folder.
 
+
+
+## Cookie consent (Termly) — 2026-09-22
+
+**Live.** The banner renders and the Cookie Preferences control opens Termly's modal. Tagged analytics and ad pixels wait for consent; the **GoHighLevel call-tracking pool deliberately does not** (client instruction, 2026-09-22). Account `dr.nahlah@thrivesquare.com`, website UUID
+`7737150b-c6b0-4003-a1b0-52a6495a4a4f`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_NAHLAH`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+
 ## Version Control
 
 Tracked with the repo. Follows the runbook rules in
