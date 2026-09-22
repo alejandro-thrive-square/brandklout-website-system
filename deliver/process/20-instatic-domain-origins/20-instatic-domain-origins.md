@@ -104,6 +104,11 @@ The Railway CLI on this machine is authenticated against workspace **Brandklout*
 |---|---|---|
 | Dr. Nahlah | `2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5` | `Dr Nahlah` |
 | Mason Park | `e4a73ef0-64a3-48e5-b3c3-b2ea60737acc` | `Mason Park` |
+| Brandklout | `550ebd58-0e74-444e-96d5-2b836a2db98a` | `Brandklout` |
+
+To see **every** domain on a service (the CLI prints only the one `url:` it calls primary),
+query GraphQL with the token at `user.accessToken` in `~/.railway/config.json`:
+`domains(projectId:, environmentId:, serviceId:){ serviceDomains{domain} customDomains{domain status{dnsRecords{...} certificateStatus}} }`.
 
 ```bash
 railway link -p <projectId> -s "<Service>" -e production
@@ -120,14 +125,16 @@ railway deployment list --service "<Service>"      # confirm a NEW deployment ac
 **Reading the variable is not the same as knowing the running config**, and that distinction is
 the whole reason the checker exists. See the Mason Park case below.
 
-## Current state — 2026-08-28, both FIXED
+## Current state — 2026-09-22, all three clean
 
-Both sites were repaired on 2026-08-28. `node check-origins.mjs --all` exits 0.
+`node check-origins.mjs --all` exits 0. Dr. Nahlah and Mason Park were repaired 2026-08-28;
+Brandklout was cut over 2026-09-22.
 
 | Client | Send this | Also works |
 |---|---|---|
 | Dr. Nahlah | `https://www.drnahlah.com/admin` | `encorercm.com`, `www.encorercm.com`, `dr-nahlah.up.railway.app` |
 | Mason Park | `https://www.masonparkdental.com/admin` | `mason-park.up.railway.app` |
+| Brandklout | `https://brandklout.ai/admin` | `www.brandklout.ai`, `brandklout-production.up.railway.app` |
 
 Live values now:
 
@@ -137,9 +144,12 @@ PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://dr-nahlah.
 
 # Mason Park   (was: https://masonparkdental.com alone)
 PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https://mason-park.up.railway.app
+
+# Brandklout   (was: the railway host alone — 2026-09-22)
+PUBLIC_ORIGIN=https://brandklout.ai,https://www.brandklout.ai,https://brandklout-production.up.railway.app
 ```
 
-### What each site had actually gone wrong — two different failures
+### What each site had actually gone wrong — three different failures
 
 **Dr. Nahlah — set once, never extended.** `PUBLIC_ORIGIN` already held
 `encorercm.com,www.encorercm.com,dr-nahlah.up.railway.app` from a fix on **2026-08-18**, recorded in
@@ -159,6 +169,14 @@ was wrong twice over:
    value) while accepting `mason-park.up.railway.app` (not in the variable at all) — the container
    was still running its boot-time derived value. Last deployment predated the variable change, so
    the setting had been sitting there inert.
+
+**Brandklout — the domain was attached and nothing else was done.** `brandklout.ai` and
+`www.brandklout.ai` were added in Railway, Cloudflare-proxied, certificates `VALID`, and both
+already served the site and a perfectly normal `/admin` login page. `PUBLIC_ORIGIN` was never
+touched, so it was still the railway host alone and **both** new hosts refused the login. This is
+the cleanest instance of the module's whole premise: attaching a domain is a platform action,
+setting `PUBLIC_ORIGIN` is an application action, and nothing connects them. Anyone who attaches a
+domain has finished half the job and has no way to tell.
 
 > [!IMPORTANT]
 > Mason Park is the case that proves reading the dashboard is not enough. The variable *looked*
@@ -193,6 +211,10 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 
 ## Gotchas
 
+- **A Cloudflare-proxied custom domain reads `DNS_RECORD_STATUS_REQUIRES_UPDATE` in Railway forever, and that is not a fault.** Railway wants to read its own CNAME target back and the orange cloud hides it, so `currentValue` stays empty. Judge the host by `certificateStatus: VALID` and by `check-origins.mjs`, not by the DNS badge. Observed on `www.brandklout.ai` 2026-09-22 while it served and logged in perfectly. Do not un-proxy to make the badge green.
+- **Attaching the domain and setting `PUBLIC_ORIGIN` are two unlinked actions.** Whoever points DNS is usually not whoever edits the service variables, and the platform gives no warning. Treat "a new domain was connected" as "there is a trap on that domain right now" until the checker says otherwise.
+- **The gate can go green seconds before the deployment finishes.** Brandklout probed `401` about 13s after the `--set`, while `railway deployment list` still read `DEPLOYING`. Confirm the deployment row too; an early green probe is not proof the new config is what is running.
+- **Five failed logins lock the account**, so if you finish with a real login rather than the unauthenticated probe, make it exactly one attempt with the password from the worktree `.env`.
 - **A variable that reads correctly in Railway may not be the one in force.** `resolvePublicOrigins()` runs once at boot, so the dashboard shows intent and the running process shows reality. Mason Park sat for a day with a correct-looking value that had never been applied. The checker probes the running server; that is the only proof.
 - **`railway variables --json` prints every secret**, `DATABASE_URL` and `INSTATIC_SECRET_KEY` included. Filter before pasting output anywhere.
 - **There is no zero-downtime redeploy on these services, by construction.** A Railway volume mounts to one container at a time, so the old one must stop first. Measured 2026-08-28: ~5-10s on Mason Park, ~5s on Dr. Nahlah. No data is lost (all state is on the volume) but unsaved editor state is - do not redeploy while someone is mid-edit.

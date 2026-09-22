@@ -28,10 +28,10 @@
     },
     {
       "client": "brandklout-website",
-      "adminUrl": "https://brandklout-production.up.railway.app",
-      "alternates": [],
+      "adminUrl": "https://brandklout.ai",
+      "alternates": ["https://brandklout-production.up.railway.app"],
       "railway": { "project": "550ebd58-0e74-444e-96d5-2b836a2db98a", "service": "Brandklout" },
-      "note": "Provisioned name-first 2026-09-11; PUBLIC_ORIGIN is the railway host from first boot. Review link only until Sang approves phase 1, then the Brandklout domain is added here."
+      "note": "Domain cutover 2026-09-22: brandklout.ai and www.brandklout.ai are both attached in Railway and Cloudflare-proxied, certificates valid, and both already served the site — but PUBLIC_ORIGIN was still the railway host alone, so both were TRAP hosts. Now https://brandklout.ai,https://www.brandklout.ai,https://brandklout-production.up.railway.app; redeployed (a127e9f6) and all three verified OK. www is a separate Railway customDomain reading REQUIRES_UPDATE because its CNAME is proxied by Cloudflare; it serves and accepts the login regardless, so it is not listed as an alternate — check-origins appends the www twin itself."
     }
   ]
 }

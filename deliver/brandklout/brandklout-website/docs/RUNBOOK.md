@@ -10,8 +10,15 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: v18 verbatim with Client-First type roles (seq 47, 2026-09-16)
+## Status: LIVE ON brandklout.ai - v18 verbatim with Client-First type roles (seq 47)
 
+- **2026-09-22: the domain cutover is done.** The site and its admin are on **brandklout.ai**.
+  Admin link to hand out: **<https://brandklout.ai/admin>** (`www.brandklout.ai/admin` and the
+  old `brandklout-production.up.railway.app/admin` both still work). `PUBLIC_ORIGIN` now lists
+  all three, apex first; until it did, both new hosts were TRAPs - the login page rendered and
+  the login POST answered `403 invalid origin`. Verified with a real login and
+  `check-origins.mjs --all`. **FormSubmit still needs activating for sales@ - the forms are
+  silent.** [`runbook/2026-09-22-domain-cutover-brandklout-ai.md`](./runbook/2026-09-22-domain-cutover-brandklout-ai.md).
 - **Seq 47 (2026-09-16): every page uses the Footer component** (`footer`, built from home's footer, so the address is now site-wide). The NavBar Menu button is visible again. Edit nav and footer only in their components.
   [`runbook/2026-09-16-footer-component-everywhere.md`](./runbook/2026-09-16-footer-component-everywhere.md).
 - **Seq 45 (2026-09-16): every page uses the NavBar component** (`navbar`); the old hard-coded navs are gone. Edit the nav once, in the component. Open: the component hides Menu (and Stories), so tablets and phones can't open the links.
@@ -104,7 +111,7 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Previous: v11 PUBLISHED on the review link (2026-09-14)
 
-- **Live at <https://brandklout-production.up.railway.app>**: Sang's v11 site, **32** editable
+- **Live at <https://brandklout.ai>** (was the railway review link until the 2026-09-22 cutover): Sang's v11 site, **32** editable
   Instatic pages (home, solutions, specialties, six customer stories, `/market-opportunity`,
   `/authority-score`, `/book`, `/guarantee`, `/privacy`, `/terms`, `/hipaa`). **v2 is gone**:
   `/survey` and `/customer-stories-*` 404. Source: `client-handoff/package-v11/`. Admin at `/admin`,
@@ -127,7 +134,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 - Plugin `brandklout.embed-origins`: `frameOrigins` YouTube (both hosts), `connectOrigins`
   sheetdb.io + formsubmit.co, `autoTrust` on, and `siteScripts` empty (it held the sienna
   accessibility widget until 2026-09-15; removed on Alejandro's call).
-- **Not on any Brandklout domain.** The cutover waits for Sang's approval.
+- ~~**Not on any Brandklout domain.**~~ Superseded 2026-09-22: `brandklout.ai` + `www` are live,
+  `PUBLIC_ORIGIN` lists them, and the railway host is kept as the toolkit's way in.
 - Worktree `bk-brandklout-website`. Railway project `Brandklout`
   `550ebd58-0e74-444e-96d5-2b836a2db98a`, service `742221a0-b1f1-45f1-bf42-fc7bab85adca`, env
   `production` `ebac465d-468b-4cd3-afc6-78da721e0eb0`.
@@ -139,8 +147,8 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 2. Sang: the three practice photos he added to v2's home cards (still in the media library), the
    "Terms of Use" / "Terms of Service" heading, the claims flagged in the run file, and the GHL
    endpoint.
-3. Domain cutover via `20-instatic-domain-origins`, then add the domain to `sites.json`, then
-   re-activate FormSubmit for the new origin.
+3. ~~Domain cutover via `20-instatic-domain-origins`~~ - done 2026-09-22, `sites.json` updated.
+   **Still open: re-activate FormSubmit for `brandklout.ai`** (item 1 above is the same job).
 4. Phase 2: redesign and expand (see the project overview).
 
 ## Gotchas
