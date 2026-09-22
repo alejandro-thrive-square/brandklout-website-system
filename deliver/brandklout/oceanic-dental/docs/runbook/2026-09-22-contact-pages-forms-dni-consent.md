@@ -32,6 +32,20 @@ user's call.
   `display:block` with inline links, so the wrapper div would otherwise put the link on its own line.
   This hasn't been seen rendered yet: the element snapshot needs the Designer open.
 
+## Update, same day: DNI ungated and published
+
+- The user reported "DNI not triggering". A driven Chrome run showed 1.1.0 working as designed: no
+  swap until Accept, then FV 378-0085 became 874-8019 and HB 841-0203 became 617-7432, with the
+  assign-number POST returning 201 both times.
+- The user asked for DNI **before any consent choice**. `oceanicdni` **1.2.0** loads the pool on page
+  load with no Termly check. Its hosted copy was checked with `cmp`: identical. This departs from the
+  kit's rule for this site only.
+- The user had already published the first round at 21:40. The agent published 1.2.0 to both custom
+  domains, having checked that nothing else was pending (`lastUpdated` 21:40:24 vs `lastPublished`
+  21:40:21). Verified live: the home page swaps FV 378-0085 to 599-8539 with the banner untouched.
+- Each driven run claimed a real pool number (3 FV, 1 HB in total). They're sticky per visitor and
+  return to the pool.
+
 ## Next
 
 1. **Publish** (user). Then run `node deliver/process/23-termly-ghl-consent/consent-kit.mjs check
