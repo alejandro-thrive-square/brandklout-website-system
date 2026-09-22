@@ -18,3 +18,6 @@ See [`../RUNBOOK.md`](../RUNBOOK.md) — Asana, scope, assets.
   shared context before the folder existed, `git add` refused the new files, and
   `sparsify-worktree.sh --client oceanic-dental` did not help because it only matches folders
   already tracked. `git sparse-checkout add deliver/brandklout/<slug>` is the fix.
+- `npm install` ran, but env-sync wrote no `.env` until an (empty) `[oceanic-dental]` section was
+  added to `~/.webzite/.env`. It now carries `[shared]` only; add client keys there, then
+  `node scripts/env-sync.mjs`.
