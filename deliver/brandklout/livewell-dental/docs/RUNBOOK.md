@@ -15,5 +15,23 @@
 The next live publish ships everything pending, including the consent code. With `live: false` that
 changes nothing visible on the live domain. Check `window.BrandkloutConsentBridge === "2.3.0"` afterwards.
 
+
+## Cookie consent (Termly) — 2026-09-22
+
+**Live.** The banner renders and the Cookie Preferences control opens Termly's modal. Tagged analytics and ad pixels wait for consent; the **GoHighLevel call-tracking pool deliberately does not** (client instruction, 2026-09-22). Account `livewelldental@thrivesquare.com`, website UUID
+`5fd99c51-71ee-4d73-8914-8d4d8565f19e`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_LIVEWELL`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+
 ## Version Control
 Tracked. Follows the root-level version control rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
