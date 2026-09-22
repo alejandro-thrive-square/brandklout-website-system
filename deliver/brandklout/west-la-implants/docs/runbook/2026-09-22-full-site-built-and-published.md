@@ -1,6 +1,6 @@
 # 2026-09-22 — The rest of the site: 34 designed pages + the 46-entry journal, built, pushed and published
 
-**Commit:** `COMMIT_SHA` `feat(west-la-implants): the full site`. Live at
+**Commit:** `85ee9b91` `feat(west-la-implants): the full site`. Live at
 <https://west-la-implants-production.up.railway.app/>, published **seq 18**, then **19** (journal titles at h2 size) and **20** (the two cascade fixes below); it was 17 when
 we started — the agency had added two consent code assets since our seq 12, and both survive.
 `{"publishedPages":80}`.
