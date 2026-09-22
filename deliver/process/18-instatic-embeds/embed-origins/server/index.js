@@ -501,6 +501,11 @@ function applyCompatible(csp) {
  * ------------------------------------------------------------------------ */
 
 var SCRIPT_URL_RE = /^https:\/\/[a-z0-9.-]+(?::[0-9]{1,5})?\/[^\s"'<>`\\]*$/i
+// `#consent=` on a site-script line marks it for the consent manager to hold.
+var CONSENT_MARK = '#consent='
+// Termly's category ids. Anything else is a typo, and a typo that reached the
+// page as data-categories would hold the script for a category nobody can accept.
+var CATEGORIES_RE = /^(essential|analytics|advertising|performance|social_networking|unclassified)(\|(essential|analytics|advertising|performance|social_networking|unclassified))*$/
 var HEAD_CLOSE_RE = /<\/head\s*>/i
 
 function parseScriptUrls(raw) {
@@ -510,21 +515,46 @@ function parseScriptUrls(raw) {
   var lines = raw.split(/\s+/)
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim()
-    if (line.length === 0 || !SCRIPT_URL_RE.test(line) || seen[line]) continue
-    seen[line] = true
-    out.push(line)
+    if (line.length === 0) continue
+    // A line may carry a consent tag: <url>#consent=advertising|analytics. The
+    // fragment is never sent to the server, so it is a safe place to hang it,
+    // and a line without one behaves exactly as it always has.
+    var url = line
+    var categories = ''
+    var hash = line.indexOf(CONSENT_MARK)
+    if (hash !== -1) {
+      url = line.slice(0, hash)
+      categories = line.slice(hash + CONSENT_MARK.length)
+      if (!CATEGORIES_RE.test(categories)) continue
+    }
+    if (!SCRIPT_URL_RE.test(url) || seen[url]) continue
+    seen[url] = true
+    out.push({ url: url, categories: categories })
   }
   return out
 }
 
 /** Add a tag per URL just before `</head>`, skipping any already on the page so
- *  a republish of a published page never doubles it. */
-function injectSiteScripts(html, urls) {
+ *  a republish of a published page never doubles it.
+ *
+ *  A script carrying a consent tag is emitted as `type="text/plain"` with
+ *  `data-categories`, which is how Termly holds a tracker until the visitor
+ *  accepts that category (see 23-termly-ghl-consent). Without this, a tracker
+ *  that has to be site-wide — GoHighLevel's call-tracking pair, for instance —
+ *  could only be added here untagged, and would run before any consent.
+ */
+function injectSiteScripts(html, scripts) {
   var tags = ''
-  for (var i = 0; i < urls.length; i++) {
-    var src = urls[i].replace(/&/g, '&amp;')
+  for (var i = 0; i < scripts.length; i++) {
+    var src = scripts[i].url.replace(/&/g, '&amp;')
     if (html.indexOf('src="' + src + '"') !== -1) continue
-    tags += '<script src="' + src + '" async data-wz-site-script></script>'
+    if (scripts[i].categories) {
+      // text/plain is inert until Termly rewrites it, so `async` means nothing here.
+      tags += '<script type="text/plain" data-categories="' + scripts[i].categories +
+        '" src="' + src + '" data-wz-site-script></script>'
+    } else {
+      tags += '<script src="' + src + '" async data-wz-site-script></script>'
+    }
   }
   if (tags.length === 0) return html
   var head = HEAD_CLOSE_RE.exec(html)
@@ -545,7 +575,7 @@ export function activate(api) {
     // A site script's host is trusted like a typed script origin, so it gets
     // the same four directives on every page, embed or not.
     for (var s = 0; s < siteScripts.length; s++) {
-      var siteOrigin = originOf(siteScripts[s])
+      var siteOrigin = originOf(siteScripts[s].url)
       if (script.indexOf(siteOrigin) === -1) script.push(siteOrigin)
     }
     // Default is compatible: the setting exists because embeds were silently

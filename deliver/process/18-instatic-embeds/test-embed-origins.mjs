@@ -352,5 +352,35 @@ check('non-https, relative, host-only and quote-breaking URLs are refused',
 check('& in a URL is written as an entity',
   run({ siteScripts: 'https://x.com/a.js?a=1&b=2' }).includes('src="https://x.com/a.js?a=1&amp;b=2"'))
 
+// Consent tagging: a site script may be held by the cookie banner until the
+// visitor accepts its category (see 23-termly-ghl-consent).
+console.log('\nSite scripts: consent tagging\n')
+const GHL = 'https://backend.leadconnectorhq.com/appengine/js/user_session.js'
+const tagged = run({ siteScripts: GHL + '#consent=advertising' })
+check('a tagged script is inert until the banner releases it',
+  tagged.includes(`<script type="text/plain" data-categories="advertising" src="${GHL}" data-wz-site-script></script>`), tagged)
+check('a tagged script carries no async, which means nothing on text/plain',
+  !/data-categories="advertising"[^>]*async/.test(tagged), tagged)
+check("its host is still granted, so it can load once it is released",
+  directive(cspOf(tagged), 'script-src').includes('https://backend.leadconnectorhq.com'), cspOf(tagged))
+check('two categories are allowed, separated by a pipe',
+  run({ siteScripts: GHL + '#consent=advertising|analytics' })
+    .includes('data-categories="advertising|analytics"'))
+check('an untagged line is untouched by the feature',
+  run({ siteScripts: SIENNA }) === sited)
+check('tagged and untagged lines coexist',
+  (() => {
+    const h = run({ siteScripts: SIENNA + '\n' + GHL + '#consent=advertising' })
+    return h.includes(TAG) && h.includes('data-categories="advertising"')
+  })())
+check('a misspelt category is refused rather than held for a category nobody can accept',
+  run({ siteScripts: GHL + '#consent=advertizing' }) === src)
+check('an empty category is refused',
+  run({ siteScripts: GHL + '#consent=' }) === src)
+check('a category cannot break out of the attribute',
+  run({ siteScripts: GHL + '#consent=advertising" onload="alert(1)' }) === src)
+check('republishing does not double a tagged script',
+  run({ siteScripts: GHL + '#consent=advertising' }, tagged) === tagged)
+
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)

@@ -7,7 +7,8 @@
  *   node consent-kit.mjs snippet [--disclosure YYYY-MM-DD]        # a paste-able footer block, to stdout
  *   node consent-kit.mjs merge-footer <current.html> <out.html>   # current footer code + the block, idempotent
  *   node consent-kit.mjs instatic status  [--only a,b]            # read-only, every Instatic site
- *   node consent-kit.mjs instatic apply   [--only a,b] [--apply]  # write the script asset (draft only)
+ *   node consent-kit.mjs instatic apply   [--only a,b] [--apply]  # write BOTH script assets (draft only)
+ *   node consent-kit.mjs instatic termly  [--only a,b] [--apply]  # phase 2: Termly head script + origins
  *   node consent-kit.mjs instatic publish  --only a,b  [--apply]  # publish sites whose only draft change is ours
  *   node consent-kit.mjs check <url>[,<url>...] [--termly-proxy]  # headless: bridge live? forms carry values?
  *
@@ -31,6 +32,21 @@ const MIN_FILE = join(HERE, 'kit', 'ghl-consent-bridge.min.js')
 const WEBFLOW_LIMIT = 2000
 const INSTA_API = join(HERE, '..', '18-instatic-embeds', 'lib', 'insta-api.mjs')
 const ASSET_PATH = 'src/scripts/brandklout-consent-bridge.js'
+const PREFS_FILE = join(HERE, 'kit', 'consent-preferences.js')
+const PREFS_PATH = 'src/scripts/brandklout-consent-preferences.js'
+const PREFS_MIN_FILE = join(HERE, 'kit', 'consent-preferences.min.js')
+// Every code asset this kit owns on an Instatic site, in the order it is written.
+// The bridge reads Termly and feeds GHL; the preferences control puts the footer
+// link on the page. They are separate files because Webflow registers each as its
+// own script against a 2,000-character cap that the bridge alone nearly fills.
+const ASSETS = [
+  { path: ASSET_PATH, file: BRIDGE_FILE, label: 'bridge' },
+  { path: PREFS_PATH, file: PREFS_FILE, label: 'preferences' },
+]
+const REGISTRY = join(HERE, 'kit', 'termly-websites.json')
+/** The one Termly website record for a client folder, or null. */
+const termlyFor = (clientFolder) =>
+  JSON.parse(readFileSync(REGISTRY, 'utf8')).find((r) => r.clientFolder === clientFolder) ?? null
 const BEGIN = '<!-- BEGIN brandklout-consent-bridge -->'
 const END = '<!-- END brandklout-consent-bridge -->'
 // Footer blocks pasted before the markers existed (v1.x, v2.0.0): the header comment through its </script>.
@@ -46,17 +62,37 @@ const option = (name) => {
 // Always deployed as LF. Checkouts differ (core.autocrlf): bk-stone-dental had the kit as CRLF, main has LF.
 const CR = String.fromCharCode(13)
 const bridgeSource = () => readFileSync(BRIDGE_FILE, 'utf8').split(CR).join('').trim()
+const sourceOf = (file) => readFileSync(file, 'utf8').split(CR).join('').trim()
 // Line endings do not count: assets deployed from a CRLF checkout carry CR characters.
 const sameCode = (a, b) => (a || '').split(CR).join('').trim() === (b || '').split(CR).join('').trim()
 const bridgeVersion = () => (bridgeSource().match(/BrandkloutConsentBridge = "([\d.]+)"/) || [])[1]
 
 function minify() {
   const quote = (p) => `"${p}"` // shell: true (npx is a .cmd on Windows), and the repo path has spaces
-  const res = spawnSync('npx', ['-y', 'terser@5', quote(BRIDGE_FILE), '-c', '-m', '--comments', 'false', '-o', quote(MIN_FILE)], { shell: true, encoding: 'utf8' })
-  if (res.status !== 0) throw new Error('terser failed: ' + (res.stderr || '').slice(-300))
-  const size = readFileSync(MIN_FILE, 'utf8').length
-  console.log(`${MIN_FILE}: ${size} chars (Webflow limit ${WEBFLOW_LIMIT})${size > WEBFLOW_LIMIT ? ' TOO LONG' : ''}`)
-  if (size > WEBFLOW_LIMIT) process.exitCode = 1
+  // Both files are registered inline scripts on Webflow, so both are capped.
+  // The bridge keeps its original `-c -m` flags on purpose: its minified bytes
+  // are byte-compared against the copy Webflow hosts on every site that already
+  // carries it, and changing terser's settings would break that check for no gain.
+  const builds = [
+    { src: BRIDGE_FILE, out: MIN_FILE, args: ['-c', '-m'] },
+    { src: PREFS_FILE, out: PREFS_MIN_FILE, args: ['-c', 'passes=3', '-m', 'toplevel=true'] },
+  ]
+  let over = false
+  for (const b of builds) {
+    const res = spawnSync('npx', ['-y', 'terser@5', quote(b.src), ...b.args, '--comments', 'false', '-o', quote(b.out)], { shell: true, encoding: 'utf8' })
+    if (res.status !== 0) throw new Error(`terser failed on ${b.src}: ` + (res.stderr || '').slice(-300))
+    const size = readFileSync(b.out, 'utf8').length
+    console.log(`${b.out}: ${size} chars (Webflow limit ${WEBFLOW_LIMIT})${size > WEBFLOW_LIMIT ? ' TOO LONG' : ''}`)
+    if (size > WEBFLOW_LIMIT) over = true
+    // The preferences control is transcribed into register_inline_script by hand.
+    // A backslash can lose a layer on the way through a tool call, so the build
+    // refuses to ship one (the bridge is deployed from the file, so it is exempt).
+    if (b.src === PREFS_FILE && readFileSync(b.out, 'utf8').includes(String.fromCharCode(92))) {
+      console.log('  contains a backslash: rewrite it without escape sequences')
+      over = true
+    }
+  }
+  if (over) process.exitCode = 1
 }
 
 function snippet() {
@@ -103,14 +139,16 @@ function instaticSites() {
 
 function instaticParent() {
   const sub = argv[1]
-  if (!['status', 'apply', 'publish'].includes(sub)) throw new Error('instatic status | apply | publish')
+  if (!['status', 'apply', 'termly', 'publish'].includes(sub)) throw new Error('instatic status | apply | termly | publish')
   if (sub === 'publish' && !option('--only')) throw new Error('publish needs --only <site>[,<site>]: name the sites you mean to ship')
   const sites = instaticSites()
   let failed = 0
   for (const site of sites) {
     console.log(`\n== ${site.name}  ${site.env.INSTATIC_BASE_URL}`)
     const res = spawnSync(process.execPath, [fileURLToPath(import.meta.url), ...argv, '--worker'], {
-      env: { ...process.env, ...site.env },
+      // The worker needs to know WHICH client it is, to find that site's Termly
+      // website in the registry. The section name is the client folder name.
+      env: { ...process.env, ...site.env, WZ_SITE_NAME: site.name },
       stdio: 'inherit',
     })
     if (res.status !== 0) failed++
@@ -125,35 +163,58 @@ const newId = () => Array.from(randomBytes(21), (b) => ALPHABET[b & 63]).join(''
 async function instaticWorker() {
   const { api, getSite, publish, publishStatus, BASE } = await import(pathToFileURL(INSTA_API).href)
   const sub = argv[1]
-  const want = bridgeSource() + '\n'
   const { site: shell, seq } = await getSite()
   const status = await publishStatus()
-  const file = (shell.files ?? []).find((f) => f.path === ASSET_PATH)
-  const runtime = file ? shell.runtime?.scripts?.[file.id] : null
   const live = await fetch(BASE + '/').then((r) => r.text()).catch(() => '')
-  const state = !file ? 'missing' : sameCode(file.content, want) ? 'current' : 'outdated'
+
+  // Where each of our assets stands on this site.
+  const states = ASSETS.map((a) => {
+    const file = (shell.files ?? []).find((f) => f.path === a.path)
+    const want = sourceOf(a.file) + '\n'
+    return {
+      ...a,
+      file,
+      want,
+      runtime: file ? shell.runtime?.scripts?.[file.id] : null,
+      state: !file ? 'missing' : sameCode(file.content, want) ? 'current' : 'outdated',
+    }
+  })
+
   const csp = (live.match(/http-equiv="Content-Security-Policy" content="([^"]*)"/) || [])[1] || ''
   const frameSrc = (csp.match(/frame-src ([^;]*)/) || [])[1] || '(no CSP)'
-  console.log(`  asset ${state}${runtime ? ` (${runtime.placement}/${runtime.timing}/${runtime.scope?.type}, enabled=${runtime.enabled})` : ''}`)
+  for (const a of states) {
+    console.log(`  ${a.label} ${a.state}${a.runtime ? ` (${a.runtime.placement}/${a.runtime.timing}/${a.runtime.scope?.type}, enabled=${a.runtime.enabled})` : ''}`)
+  }
   console.log(`  draft matches published: ${status.draftMatchesPublished}   frame-src: ${frameSrc.slice(0, 90)}`)
-  if (/frame-src 'none'/.test(csp)) console.log('  NOTE frame-src none: no GHL form can render here until the Embed block grants its origin')
+  if (/frame-src 'none'/.test(csp)) console.log("  NOTE frame-src none: no GHL form can render here until the Embed block grants its origin")
 
-  if (sub === 'status') return
+  if (sub === 'status') {
+    const want = termlyFor(process.env.WZ_SITE_NAME)
+    const onPage = live.match(/app\.termly\.io\/resource-blocker\/([0-9a-f-]{36})(\?autoBlock=(\w+))?/) || []
+    console.log(`  termly: ${onPage[1] ? `${onPage[1]} autoBlock=${onPage[3] ?? 'on (default)'}` : 'not on the page'}${want ? '' : '  (no registry entry for this site)'}`)
+    return
+  }
 
   if (sub === 'apply') {
-    if (state === 'current') { console.log('  nothing to do'); return }
-    const files = [...(shell.files ?? [])]
-    const now = Date.now()
-    const id = file?.id ?? newId()
-    const entry = { ...(file ?? { id, path: ASSET_PATH, type: 'script', createdAt: now }), content: want, updatedAt: now }
-    if (file) files[files.indexOf(file)] = entry
-    else files.push(entry)
-    const scripts = {
-      ...(shell.runtime?.scripts ?? {}),
-      [id]: { enabled: true, runInCanvas: false, format: 'classic', placement: 'body-end', timing: 'dom-ready', scope: { type: 'all-pages' }, priority: 50 },
-    }
-    if (!flag('--apply')) { console.log(`  DRY RUN: would ${file ? 'update' : 'add'} ${ASSET_PATH} (bridge v${bridgeVersion()})`); return }
+    const todo = states.filter((a) => a.state !== 'current')
+    if (!todo.length) { console.log('  nothing to do'); return }
+    if (!flag('--apply')) { console.log(`  DRY RUN: would write ${todo.map((a) => `${a.path} (${a.state})`).join(', ')}`); return }
     if (!status.draftMatchesPublished) console.log('  WARNING the draft already differs from live; `publish` will refuse this site')
+
+    // One atomic save for both assets: two site-document writes would make the
+    // second one race the first's seq.
+    const files = [...(shell.files ?? [])]
+    const scripts = { ...(shell.runtime?.scripts ?? {}) }
+    const now = Date.now()
+    for (const a of todo) {
+      const id = a.file?.id ?? newId()
+      const entry = { ...(a.file ?? { id, path: a.path, type: 'script', createdAt: now }), content: a.want, updatedAt: now }
+      if (a.file) files[files.indexOf(a.file)] = entry
+      else files.push(entry)
+      // The preferences control clones a footer link, so it must not run before
+      // the footer is in the DOM: same body-end/dom-ready placement as the bridge.
+      scripts[id] = { enabled: true, runInCanvas: false, format: 'classic', placement: 'body-end', timing: 'dom-ready', scope: { type: 'all-pages' }, priority: 50 }
+    }
     const res = await api('PUT', '/admin/api/cms/site-document', {
       mode: 'incremental',
       site: { ...shell, files, runtime: { ...(shell.runtime ?? {}), scripts } },
@@ -162,17 +223,75 @@ async function instaticWorker() {
     })
     // A SiteFile the server does not accept is dropped silently while the save answers ok, so read back.
     const after = (await getSite()).site
-    const saved = (after.files ?? []).find((f) => f.path === ASSET_PATH)
-    const ok = saved && sameCode(saved.content, want) && after.runtime?.scripts?.[saved.id]?.enabled
-    console.log(`  saved seq ${res?.seq ?? '?'}; read back: ${ok ? 'OK' : 'FAILED'}`)
+    let ok = true
+    for (const a of todo) {
+      const saved = (after.files ?? []).find((f) => f.path === a.path)
+      const good = saved && sameCode(saved.content, a.want) && after.runtime?.scripts?.[saved.id]?.enabled
+      console.log(`  ${a.label}: ${good ? 'OK' : 'FAILED'}`)
+      if (!good) ok = false
+    }
+    console.log(`  saved seq ${res?.seq ?? '?'}`)
     const marker = JSON.parse(readFileSync(cleanMarker(), 'utf8'))
     writeFileSync(cleanMarker(), JSON.stringify({ ...marker, ourSeq: res?.seq }))
     if (!ok) process.exitCode = 1
     return
   }
 
+  if (sub === 'termly') {
+    // Phase 2. The Termly line cannot be a code asset: `script-src 'self'` and the
+    // importHtml filter both refuse a third-party <script> in the head, so it goes
+    // through the brandklout.embed-origins plugin's `siteScripts`, which is the one
+    // supported way onto every page's head (see 18-instatic-embeds).
+    const want = termlyFor(process.env.WZ_SITE_NAME)
+    if (!want) { console.log('  no registry entry for this site -- skipped'); return }
+    const PLUGIN = 'brandklout.embed-origins'
+    let now
+    try {
+      now = (await api('GET', `/admin/api/cms/plugins/${PLUGIN}/settings`))?.settings ?? {}
+    } catch (e) {
+      console.log(`  ${PLUGIN} not installed here (${e.status ?? e.message}) -- skipped`)
+      process.exitCode = 1
+      return
+    }
+    const lines = String(now.siteScripts ?? '').split(/\s+/).filter(Boolean)
+    // Termly sets Google Consent Mode defaults, so it must come before GTM. The
+    // plugin emits these tags in list order.
+    const kept = lines.filter((l) => !/app\.termly\.io\/resource-blocker/.test(l))
+    const dropped = lines.filter((l) => /app\.termly\.io\/resource-blocker/.test(l) && l !== want.embed)
+    const gtmAt = kept.findIndex((l) => /googletagmanager\.com\/gtm\.js/.test(l))
+    const next = kept.slice()
+    next.splice(gtmAt === -1 ? next.length : gtmAt, 0, want.embed)
+
+    const addOrigin = (key, origin) => {
+      const cur = String(now[key] ?? '').split(/\s+/).filter(Boolean)
+      return cur.includes(origin) ? cur.join('\n') : cur.concat(origin).join('\n')
+    }
+    const settings = {
+      ...now,
+      siteScripts: next.join('\n'),
+      // Termly reads consent from its own API and opens its policy viewer in a frame.
+      connectOrigins: addOrigin('connectOrigins', 'https://us.consent.api.termly.io'),
+      frameOrigins: addOrigin('frameOrigins', 'https://app.termly.io'),
+    }
+    const same = ['siteScripts', 'connectOrigins', 'frameOrigins'].every((k) => String(now[k] ?? '') === settings[k])
+    if (same) { console.log('  termly already set'); return }
+    for (const d of dropped) console.log(`  replacing a different Termly line: ${d}`)
+    if (!flag('--apply')) {
+      console.log(`  DRY RUN: would set siteScripts to:\n${settings.siteScripts.split('\n').map((l) => '      ' + l).join('\n')}`)
+      return
+    }
+    if (!status.draftMatchesPublished) console.log('  WARNING the draft already differs from live; `publish` will refuse this site')
+    await api('PUT', `/admin/api/cms/plugins/${PLUGIN}/settings`, { settings })
+    const after = (await api('GET', `/admin/api/cms/plugins/${PLUGIN}/settings`))?.settings ?? {}
+    const ok = String(after.siteScripts ?? '').includes(want.embed)
+    console.log(`  termly ${ok ? 'OK' : 'FAILED'} -- position ${next.indexOf(want.embed) + 1} of ${next.length}${gtmAt === -1 ? ' (no GTM on this site)' : ', above GTM'}`)
+    if (!ok) process.exitCode = 1
+    return
+  }
+
   if (sub === 'publish') {
-    if (state !== 'current') { console.log('  refusing: the asset is not current; run apply first'); process.exitCode = 1; return }
+    const stale = states.filter((a) => a.state !== 'current')
+    if (stale.length) { console.log(`  refusing: ${stale.map((a) => a.label).join(', ')} not current; run apply first`); process.exitCode = 1; return }
     if (status.draftMatchesPublished) { console.log('  nothing to publish'); return }
     const clean = await onlyOurChangeIsPending()
     if (!clean.ok && !flag('--force')) {
@@ -269,7 +388,7 @@ else if (cmd === 'merge-footer') {
   writeFileSync(output, code)
   console.log(`${how}; ${code.length} chars -> ${output}`)
 } else if (cmd === 'instatic' && flag('--worker')) {
-  if (argv[1] === 'apply' && flag('--apply')) {
+  if (['apply', 'termly'].includes(argv[1]) && flag('--apply')) {
     const { publishStatus } = await import(pathToFileURL(INSTA_API).href)
     // Remember whether the draft was clean before our first write, so `publish` never ships someone else's edits.
     mkdirSync(join(HERE, '.tmp'), { recursive: true })

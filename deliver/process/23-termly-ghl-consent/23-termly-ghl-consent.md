@@ -17,7 +17,25 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 | 1 | **GHL consent bridge** ([`kit/ghl-consent-bridge.js`](./kit/ghl-consent-bridge.js)) | Webflow: registered site script `BrandkloutConsentBridge`, footer. Instatic: script asset `src/scripts/brandklout-consent-bridge.js`, all pages, body end | **1: agent**, no Termly needed |
 | 2 | **Termly script**, `?autoBlock=off` ([`kit/termly-head.html`](./kit/termly-head.html)) | Site-wide head, **above GTM** | **2**: needs the client's Termly account |
 | 3 | **Trackers tagged** `type="text/plain" data-categories="…"` | Wherever they sit | **2** |
-| 4 | **Consent Preferences link** ([`kit/consent-preferences-link.html`](./kit/consent-preferences-link.html)) | Every footer, landing pages included | **2** (the link does nothing until Termly loads) |
+| 4 | **Cookie Preferences control** ([`kit/consent-preferences.js`](./kit/consent-preferences.js)) | Webflow: registered site script `BrandkloutConsentPreferences`, **header**. Instatic: script asset `src/scripts/brandklout-consent-preferences.js`, all pages, body end | **2** (the control does nothing until Termly loads) |
+
+### Why the preferences control is a script, not HTML in the footer
+[`kit/consent-preferences-link.html`](./kit/consent-preferences-link.html) is still the right answer
+where a human is editing one footer. It does not scale to 29 sites:
+
+- **Instatic inlines the footer into every page** — 57 of them on `dr-nahlah`. A page write through
+  `PUT /site-document` drops `seoTitle`/`seoDescription`, and restoring those needs a
+  `PATCH /data/rows`, which flattens every `a/b` slug's route (see `22-instatic-api-sync`).
+- **Webflow's footer is a Designer layout.** The Data API writes site-wide freeform head/footer
+  *code*; it cannot put a link inside the footer nav. Only the Designer can, with a human present.
+
+So [`kit/consent-preferences.js`](./kit/consent-preferences.js) inserts it at runtime. It finds the
+footer's Privacy Policy and Terms links, works out the repeating unit they share (the `<a>`, or the
+`<li>`/`<span>` each sits in), **clones it**, relabels the copy and binds Termly's modal. Cloning is
+what makes one file work on 29 unrelated designs: the control inherits that site's exact typography,
+colour, spacing and hover without a line of CSS from us, and any separator between the two legal
+items (a `|`, a bullet) is cloned with it. A link that does nothing without JavaScript loses nothing
+by being created with JavaScript.
 
 **Phase 1 is safe without Termly.** With no Termly record, the bridge sends the values a Decline click
 would send (`denied`, opt-out `true`). **Phase 2 must wait for Termly.** A tracker tagged `text/plain`
@@ -62,9 +80,10 @@ every `…/widget/(form|survey|booking)/…` iframe URL and reloads those iframe
 
 ```bash
 cd deliver/process/23-termly-ghl-consent
-node consent-kit.mjs minify                        # rebuild kit/ghl-consent-bridge.min.js (<= 2000 chars)
+node consent-kit.mjs minify                        # rebuild BOTH .min.js files (each <= 2000 chars)
 node consent-kit.mjs instatic status               # read-only, every Instatic site
-node consent-kit.mjs instatic apply  [--only a,b] --apply
+node consent-kit.mjs instatic apply  [--only a,b] --apply   # both script assets, one atomic save
+node consent-kit.mjs instatic termly  [--only a,b] --apply  # phase 2: Termly head line + origins
 node consent-kit.mjs instatic publish --only a,b  --apply
 node consent-kit.mjs check <url>[,<url>] [--termly-proxy]
 node consent-kit.mjs snippet [--disclosure DATE]  # paste-able block for a platform with no API
@@ -95,6 +114,12 @@ silently dropped. `instatic publish` refuses a site unless the draft matched liv
 write **and** nothing has been saved since (tracked in `.tmp/clean-before-apply-<host>.json`). The
 script is served same-origin, so `script-src 'self'` is enough.
 
+`instatic termly` reads the site's Termly website UUID from
+[`kit/termly-websites.json`](./kit/termly-websites.json) — the tracked registry of all 29 accounts:
+client, account email, **public** website UUID, live domain, platform, Webflow site id. The UUID is
+not a secret (it is in every page's source). The per-website API keys are in `~/.webzite/.env`
+`[vars]` as `TERMLY_<CLIENT>`, referenced as `TERMLY_API_KEY` from each client section.
+
 ### Phase 2 — once the Termly script arrives (per site)
 1. **Head:** add the Termly line with `?autoBlock=off` as the first thing in the head, above GTM. On
    Instatic it goes in the `brandklout.embed-origins` `siteScripts`, together with
@@ -110,28 +135,86 @@ script is served same-origin, so `script-src 'self'` is enough.
    `autoblocked` 0, no tracking requests, forms `denied`. After Decline: a receipt ID appears. After
    Accept: `granted`, and tracking loads. The Preferences link opens Termly.
 
-## Site registry and rollout state (2026-09-17)
+## Site registry and rollout state (2026-09-22)
 
-| Site | Platform | ID / base | Bridge | Live? | Termly | Trackers outside GTM (phase 2) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Stone Dental Implant Center | Webflow | `6a07d5aac093f0e4521d29bc` | 2.2.0 registered; old v2.0 paste removed from footer | **v2.0 live**; v2.2 ships on next publish (left unpublished: pending state unclear) | **done**, off, above GTM | done (GHL tagged) |
-| Grand Mission Dentistry | Webflow | `698111847e9608eb30ee21c6` | 2.2.0 | **live** (published 2026-09-17), checked on /contact and /free-e-book | — | GHL (head), Ahrefs; GTM noscript only, no GTM loader in head |
-| Arvada Dental Center | Webflow | `693c51e685b19f0d0c149cab` | 2.2.0 | next publish (Designer changes pending since 2026-09-15) | — | GHL (head **and** footer, loaded twice), OpenAI pixel |
-| Legacy Dental Pasadena | Webflow | `68e12d861f12c7f04a762a8e` | 2.2.0 | next publish (pending since 2026-09-10; also serves caldentalpasadena.com) | — | GHL, Meta Pixel, Ahrefs, Sally AI widget |
-| Livewell Dental | Webflow | `69d03fdbe999e9907724a69d` | 2.2.0 | next publish (pending since 2026-09-14) | — | GHL, Ahrefs |
-| Marvel Dental | Webflow | `69aedbc6b0c7e78051fd6a2c` | 2.2.0 | next publish (pending since 2026-09-07; live-domain publish is the user's call) | — | GHL, Ahrefs (loaded twice) |
-| Institute for Advanced Dentistry | Instatic | `institute-for-advanced-dentistry` | 2.2.0 | **live**, form checked | — | — |
-| Mason Park | Instatic | `mason-park` | 2.2.0 | **live** | present, **autoBlock=on**: switch to off | check |
-| Mason Park Kids | Instatic | `mason-park-kids` | 2.2.0 | **live** | — | — |
-| Stone Surgical Arts | Instatic | `stone-surgical-arts` | 2.2.0 | **live** | — | — (frame-src 'none': no GHL form can render yet) |
-| Stone Med Spa | Instatic | `stone-med-spa` | 2.2.0 | **live** | — | — (frame-src 'none') |
-| West LA Implants | Instatic | `west-la-implants` | 2.2.0 | **live** | — | — (frame-src 'none') |
-| Dr. Nahlah | Instatic | `dr-nahlah` | 2.2.0 | draft only, ships with the owner's next publish (the draft was already dirty) | — | — |
-| Brandklout website | Instatic | `brandklout-website` | not applied (agency site, dirty draft) | — | — | — |
+29 Termly accounts were created by hand on 2026-09-22, one free account per client website. Every
+account, UUID, domain and site id is in [`kit/termly-websites.json`](./kit/termly-websites.json);
+this table is the rollout state on top of it.
 
-All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form carried `denied`).
+**Consent is LIVE and gated on 16 sites.** Gated means: Termly present with `autoBlock=off`, the
+banner renders, the Cookie Preferences control is in the footer, clicking it opens Termly's
+preference modal, and no tracker fires before a choice is made.
+
+| Site | Platform | Termly | Control | Live? | Trackers before consent |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Dr. Nahlah | Instatic | off | yes | **live, gated** | none (GHL pair tagged via plugin 1.7.0) |
+| Mason Park | Instatic | off (was `on`) | yes | **live, gated** | none |
+| Stone Surgical Arts | Instatic | off | yes | **live, gated** | none |
+| Institute for Advanced Dentistry | Instatic | off | yes | **live, gated** | none (GHL pair tagged in `site-tags.js` 1.1.0) |
+| Westlake Medical Spa | Instatic | off | yes | **live, gated** | none |
+| Grand Mission | Webflow | off | yes | **live, gated** | none |
+| Livewell | Webflow | off | yes | **live, gated** | none (replaced the Silktide trial block) |
+| Omnia | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
+| Legacy Dental | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
+| South Bay Dental Loft | Webflow | off | yes | **live, gated** | none |
+| Hackensack | Webflow | off | yes | **live, gated** | none |
+| Haven | Webflow | off | yes | **live, gated** | none (a review badge overlaps the footer row) |
+| AVA | Webflow | off | yes | **live, gated** | none |
+| Organ Mountain | Webflow | off | yes | **live, gated** | none |
+| Azusa | Webflow | off | yes | **live, gated** | none |
+| Mason Park Kids | Instatic | off | yes | applied + published to the **unlaunched** build | none |
+| West LA Implants | Instatic | off | yes | applied + published to the **unlaunched** build | none |
+| Arvada | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
+| Stone Dental Implant Center | Webflow | off | yes | **applied, not published** | already tagged |
+| Marvel Dental | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
+| Ortega | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
+| Dentiq | Webflow | off | yes | **applied, not published** | — |
+| Ason / KISSIME | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
+| Markham | Webflow | off | yes | **applied, not published** | — |
+| Elite | Webflow | off | yes | **applied, not published** | — |
+| Restore | Webflow | off | yes | **applied, not published** | — |
+| Makris | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
+| Atwood | Webflow | off | yes | **applied, not published** | — |
+| Oceanic | Webflow | — | — | **blocked** | account exists; site is not in our Webflow workspace |
+
+**"Applied, not published"** means the change is staged and ships with the team's next publish. Those
+sites had Designer work pending before this rollout touched them, so publishing would have shipped
+somebody else's unfinished page. Check `get_site`: `lastUpdated` within about a minute of
+`lastPublished` means clean. **Check it BEFORE writing freeform code — a head write moves
+`lastUpdated` and destroys the signal.**
+
+### Two sites are not the site the public gets
+`masonparkpediatricdental.com` and `westlaimplants.com` still answer from **WordPress**. The Instatic
+builds are on `mason-park-kids.up.railway.app` and `west-la-implants-production.up.railway.app` and
+have not been cut over. Consent is on the Instatic builds and will arrive with the cutover; the live
+WordPress sites have none, and we have no credentials for them.
 
 ## Gotchas
+- **Malformed page markup swallows anything Webflow appends before `</body>`.** A registered
+  *footer* script is emitted last, so an unclosed `<style>` or a broken tag anywhere earlier eats it:
+  the browser parses our `<script>` as CSS text and it never runs. South Bay had exactly that (an
+  unclosed `<style>` in page custom code, "Force your header font size back"), AVA a different one.
+  Both looked fine in the served HTML and both were invisible to any check that greps the HTML rather
+  than the DOM. **Register the preferences control in the `header`**, inside our own well-formed
+  block — it self-defers to `DOMContentLoaded`, so head placement costs nothing.
+- **A Termly category on a dynamically inserted script still works.** Termly picks up a
+  `script[type="text/plain"][data-categories]` appended *after* it has already scanned the page and
+  flips it to `text/javascript` on consent (verified live on drnahlah.com, 2026-09-22). That is what
+  lets a site's own tag loader gate itself — see IFA's `site-tags.js`.
+- **A tracker fired by GTM cannot be tagged from the page.** Omnia and Legacy still load the GHL
+  call-tracking pair before consent because their GTM containers fire it with no consent check.
+  Tagging the head does nothing for it; the fix is inside each GTM container.
+- **Cloudflare serves a stale page for minutes after a Webflow publish**, and where the cache level
+  ignores query strings a `?cb=` buster does not help. A check that fails right after a publish with
+  `cf-cache: HIT` and a non-zero `age` is the edge, not the deployment — re-check on a `MISS`.
+- **A gate that only asserts the control exists is worthless.** Click it and look for Termly's modal,
+  which renders as `<dialog class="termly-styles-root-…">` — there is no `data-testid` on it. Also
+  hit-test the control's centre: on Haven a floating review badge sits over the footer legal row, so
+  a bound control can still be unreachable for a real visitor.
+- **`register_inline_script` source is typed through a tool call**, where a backslash can lose a
+  layer. `kit/consent-preferences.js` is therefore written with no escape sequences at all (plain
+  substring matching instead of regexes) and `minify` refuses to ship a backslash. Verify anyway:
+  `curl` the returned `hostedLocation` and `cmp` it against the local min file.
 - **Termly accounts are created by hand, and a free-account key automates nothing** (re-probed
   2026-09-21). The key a free dashboard hands out is a *per-website legacy token*, not an account
   credential: a bogus value against `app.termly.io/api/v1/cookie_whitelist` answers `Couldn't find

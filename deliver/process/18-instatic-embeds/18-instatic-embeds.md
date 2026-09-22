@@ -87,6 +87,8 @@ Say the trade out loud at handover: on the pages carrying an embed, what stands 
 
 Since **plugin `1.6.0`** the `siteScripts` setting (one https URL per line) puts a script on **every** published page. The `publish.html` filter adds `<script src="…" async data-wz-site-script>` just before `</head>`, then grants that URL's host `script-src`, `connect-src`, `style-src` and `font-src`. That is the same set an auto-trusted script origin gets. It works in both policy modes, with `autoTrust` on or off, and on pages with or without an Embed block. It is the only way onto every page: `importHtml` strips a head `<script>`, and `script-src 'self'` refuses a runtime injection from the site bundle.
 
+Since **plugin `1.7.0`** a line may end with `#consent=advertising` (or `analytics`, or both joined by `|`). That script is emitted as `<script type="text/plain" data-categories="…">` instead of `async`, which is how the cookie banner holds a tracker until the visitor accepts that category (see [23-termly-ghl-consent](../23-termly-ghl-consent/23-termly-ghl-consent.md)). The fragment never reaches the server, so it is a safe place to hang the tag; the host is still granted its four directives, and a line with no tag behaves exactly as before. An unrecognised category is refused outright rather than emitted — a typo in `data-categories` would hold the script for a category nobody can accept, which looks identical to the script being broken.
+
 **Live 2026-09-12: the Sienna accessibility widget on every instance.** URL: `https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js`. It needs all three jsdelivr grants: the script, a `fetch` of `dist/locales/`, and the OpenDyslexic font.
 
 ```bash
@@ -195,6 +197,11 @@ Both run with no host, no network and no site. What they cannot prove is that th
 
 - **Executor status**: Working. The executor is the Node toolchain in this folder; `18-instatic-embeds.py` is a thin orchestrator over the documented sequence, in the same spirit as `07-webflow-build`.
 - **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site. That `.env` is **generated** from `~/.webzite/.env` by `scripts/env-sync.mjs`: `INSTATIC_EMAIL` comes from `[shared]`, and `INSTATIC_BASE_URL` + the per-instance `INSTATIC_PASSWORD` from the client's own section. Add a missing value to the master, never to the worktree file — see [SYSTEM_RULES.md §4.2.2](../../../SYSTEM_RULES.md).
+- **A plugin setting's `description` is capped at 500 characters.** Over it,
+  `inspect-package` answers `400 Invalid plugin manifest: Expected union value` — a zod union
+  error that names neither the field nor the limit. Bisect by shortening the description; the
+  rest of the manifest is fine. Reformatting `plugin.json` (e.g. re-dumping it from a JSON
+  library) is harmless on its own.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`, `GET|PUT /admin/api/cms/site-document`, `POST /admin/api/cms/publish`.
 - **Origin**: promoted from `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` (built and proven there on `encorercm.com`, plugin v1.3.0). The client folder's numbering (`15`, `16`) predates this promotion and does not match canonical module numbers.
 
