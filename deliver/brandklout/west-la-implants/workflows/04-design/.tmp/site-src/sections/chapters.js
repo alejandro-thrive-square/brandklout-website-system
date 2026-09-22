@@ -333,27 +333,12 @@ WZ.section('ch-invitation', function(W){
     var btn = form.querySelector('.btn span');
     btn.textContent = 'Thank you — we will be in touch';
   });
-  /* accordion — animated height, one open at a time */
-  var items = sec.querySelectorAll('.faq-item');
-  items.forEach(function(item){
-    var q = item.querySelector('.faq-q'), a = item.querySelector('.faq-a');
-    q.addEventListener('click', function(){
-      var open = q.getAttribute('aria-expanded') === 'true';
-      items.forEach(function(o){
-        var oq = o.querySelector('.faq-q'), oa = o.querySelector('.faq-a');
-        if (oq.getAttribute('aria-expanded') === 'true' && o !== item) {
-          oq.setAttribute('aria-expanded', 'false');
-          gsap.to(oa, { height: 0, duration: W.reduced ? 0 : .5, ease: 'power3.inOut' });
-        }
-      });
-      q.setAttribute('aria-expanded', String(!open));
-      gsap.to(a, { height: open ? 0 : 'auto', duration: W.reduced ? 0 : .6, ease: 'power3.inOut',
-        onComplete: function(){ ScrollTrigger.refresh(); } });
-    });
-  });
+  /* the accordion is bound once for every .faq on the site, in sections/blocks.js */
   if (W.reduced) return;
-  gsap.from(sec.querySelectorAll('.faq-item'), { y: 16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .07,
+  if (sec.querySelector('.faq')) gsap.from(sec.querySelectorAll('.faq-item'), { y: 16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .07,
     scrollTrigger: { trigger: sec.querySelector('.faq'), start: 'top 88%', once: true } });
+  if (sec.querySelector('.in-next')) gsap.from(sec.querySelectorAll('.in-next-card'), { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08,
+    scrollTrigger: { trigger: sec.querySelector('.in-next'), start: 'top 88%', once: true } });
   gsap.from(form, { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out',
     scrollTrigger: { trigger: form, start: 'top 85%', once: true } });
   gsap.from(sec.querySelectorAll('.in-contact div'), { y: 20, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08,

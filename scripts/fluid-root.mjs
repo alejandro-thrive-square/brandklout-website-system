@@ -118,11 +118,17 @@ function check (targets) {
   let installed = 0
 
   // The snippet may live in a linked stylesheet, so resolve local <link>/<script> siblings.
+  // A root-relative href (`/assets/site.css`, the multi-page builds' convention)
+  // resolves against the checked package root, not the page's own folder —
+  // otherwise every page of an 80-page site reports the snippet missing.
+  const roots = targets.map((t) => path.resolve(t))
   const readWithLinked = (file) => {
     const src = fs.readFileSync(file, 'utf8')
     let combined = src
     for (const m of src.matchAll(/<link[^>]+href=["']([^"']+\.css)["']/gi)) {
-      const p = path.resolve(path.dirname(file), m[1].split('?')[0])
+      const href = m[1].split('?')[0]
+      const root = roots.find((r) => file.startsWith(r)) || path.dirname(file)
+      const p = href.startsWith('/') ? path.join(root, href) : path.resolve(path.dirname(file), href)
       if (fs.existsSync(p)) combined += '\n' + fs.readFileSync(p, 'utf8')
     }
     return { src, combined }

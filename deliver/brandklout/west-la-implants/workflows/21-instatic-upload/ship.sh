@@ -29,7 +29,19 @@ LINK="${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the Rail
 # `$HERE` is `/c/Users/…` and `node "$HERE/check-link.mjs"` then hands node a
 # path Windows cannot resolve (`C:\c\Users\…`, MODULE_NOT_FOUND). Scope it to
 # the one call that crosses into the container.
-rs() { ( cd "$LINK" && MSYS_NO_PATHCONV=1 railway ssh "$@" ); }
+# Retried, because `railway ssh` fails transiently ("Failed to fetch: error
+# decoding response body") a few times in a hundred calls, and `set -e` then
+# aborts a fifty-chunk ship at chunk twelve. Three attempts, a short pause;
+# every call here is idempotent (truncate-then-append, or read-only).
+rs() {
+  local n
+  for n in 1 2 3; do
+    ( cd "$LINK" && MSYS_NO_PATHCONV=1 railway ssh "$@" ) && return 0
+    echo "  railway ssh failed (attempt $n), retrying" >&2
+    sleep 4
+  done
+  return 1
+}
 
 say() { printf '\n=== %s\n' "$1"; }
 

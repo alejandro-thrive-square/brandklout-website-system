@@ -7,58 +7,52 @@ then only the runs you need. Do not read them all.
 ## Objective
 
 **West LA Implants** (Dr. Tony Barriere, DDS, 12301 Wilshire Blvd #205) — a from-scratch rebuild of
-a 91-URL WordPress site, delivered through Brandklout. The immediate deliverable is **one page**:
-an awwwards-grade homepage in the "Dark Surgical Luxury" direction the client chose
-(`west-la-implants-concepts-7.webflow.io/concept-03-dark-surgical-luxury`), hosted on the
-client's own Instatic instance so Brandklout can send a link.
+a 91-URL WordPress site, delivered through Brandklout, in the "Dark Surgical Luxury" direction the
+client chose, hosted on the client's own Instatic instance. The homepage was approved on
+2026-09-22 and the rest of the site was built on it the same day. Asana: **"Complete Client
+Website" 1216841931530915** (Success Daily Stand-Up · BK Implementation - West LA Implants).
 
 Start at [`project-overview.md`](./project-overview.md).
 
-## Status: PUBLISHED — the homepage is live on the client's Instatic instance
+## Status: PUBLISHED — the full site (80 pages) is live on the client's Instatic instance
 
-**2026-09-15.** Brandklout's second BugHerd pass (#14–#18) is fixed, republished (**seq 12**) and
-closed — [run](./runbook/2026-09-15-bugherd-round-two-five-fixes-republished.md). Descenders no
-longer clip in any split headline, the "Chapter NN" numbering is gone, the doctor is framed, Emily
-has a real eyes-open photo (round one had fixed the wrong patient), and the review quotes are in
-Manrope. The live page also loads a **Sienna accessibility widget** that is not in the build and
-rewrites font sizes inline — raise it with the agency (trap 42).
+**2026-09-22.** 34 designed pages plus the 46-entry journal, built from `pages/*.mjs` and
+`templates/*.mjs` through `lib/blocks.mjs` on the approved homepage's chrome and runtime, pushed
+with `--force` and published at **seq 20** — [run](./runbook/2026-09-22-full-site-built-and-published.md).
+Every gate is green on all 80 routes; the review comment for Brandklout is
+[`SITE-REVIEW-COMMENT.md`](../SITE-REVIEW-COMMENT.md). Zocdoc is the second CTA everywhere.
+Waiting on: the BugHerd round, pricing figures, patient consent, the privacy text, the form's
+destination, a vector logo.
 
-**2026-09-11.** Brandklout's first BugHerd pass (13 tasks on project 541030) is fixed, republished
-(seq 11) and every task is answered and closed — [run](./runbook/2026-09-11-bugherd-round-one-thirteen-fixes-republished.md).
-Type is heavier and larger-leaded, the treatment rail is shorter, the story stage is sized in JS,
-Leslie has a new frame. `08-qa/.tmp/bugherd/pull-bugherd.mjs` and `reply-bugherd.mjs` handle the
-next round.
+**2026-09-15.** Brandklout's second BugHerd pass (#14–#18) fixed, republished (seq 12), closed —
+[run](./runbook/2026-09-15-bugherd-round-two-five-fixes-republished.md). The live page also loads
+a Sienna accessibility widget that is not in the build (trap 42); the agency has since added two
+consent code assets to the shell (seq 13–17), which `push-site.mjs` preserves.
 
-**2026-09-10.** <https://west-la-implants-production.up.railway.app/> serves the eight-chapter
-homepage. `{"publishedPages":1}`, 560 nodes, 272 style rules, 52 media assets (44 images, 5 mp4
-films, 3 variable woff2), alt text on 19 photographs, favicon set.
+**2026-09-11.** First BugHerd pass (13 tasks) fixed, republished (seq 11), closed —
+[run](./runbook/2026-09-11-bugherd-round-one-thirteen-fixes-republished.md).
+`08-qa/.tmp/bugherd/pull-bugherd.mjs` and `reply-bugherd.mjs` handle the next round.
 
-All five live gates pass: `verify-live.mjs` clean, `css-parity.mjs` **FAIL none**,
-`compare-live.mjs` down to the trap-37 artifact only, `visual-diff.mjs` bands all video frames or
-image re-encoding, and **`verify-motion-live.mjs` — the new fifth gate, the only one that drives the
-published page — FAIL none**: ScrollSmoother, four pins, the reality scrub, the precision iris, the
-story swap, both variable typefaces loaded, the hero film playing, zero console errors, no overflow
-at 390.
+**2026-09-10.** Homepage published; five gates written — [run](./runbook/2026-09-10-homepage-pushed-to-instatic-and-published.md).
 
-The homepage source is still the source of truth at `workflows/04-design/.tmp/site-src/`
-(`node build.mjs` → `dist/`); the Instatic admin is NOT. Any re-import runs with `--force` and
-overwrites anything edited in the CMS.
-
-Research is complete: the client scrape (91 pages, 102 MB of assets), three competitors scraped in
-full, and `01-content-intake/.tmp/gap-analysis/HOMEPAGE-GAP-ANALYSIS.md` is the blueprint the build
-follows.
+The build in `workflows/04-design/.tmp/site-src/` is the source of truth (`node build.mjs
+--strict` → `dist/`); the Instatic admin is NOT. Any re-import runs with `--force` and overwrites
+anything edited in the CMS. The full chain is in
+[`21-instatic-upload.md`](../workflows/21-instatic-upload/21-instatic-upload.md) → Execution Steps.
 
 ## Where things are
 
 | What | Where |
 | :--- | :--- |
-| Homepage source | `workflows/04-design/.tmp/site-src/` — `index.html`, `css/NN-*.css`, `js/00-runtime.js`, `sections/chapters.js`, `js/90-boot.js`, `build.mjs` |
-| Built page | `workflows/04-design/.tmp/site-src/dist/` (gitignored — rebuild with `node build.mjs` before any gate) |
+| Site source | `workflows/04-design/.tmp/site-src/` — `index.html` (the approved homepage), `pages/*.mjs` + `templates/*.mjs` (every other page), `lib/` (blocks, layout, site facts), `css/NN-*.css`, `js/00-runtime.js`, `sections/*.js`, `js/80-seo.js`, `js/90-boot.js`, `build.mjs --strict` |
+| IA record | `workflows/02-wireframe/.tmp/sitemap.json`, `wireframe-rationale.md` |
+| Page check (local and `--base=<live>`) | `workflows/08-qa/.tmp/check-local.mjs` — chapters, pins that scrub, console, 390 overflow, SEO injection, six-breakpoint screenshots |
+| Built site | `workflows/04-design/.tmp/site-src/dist/` (gitignored — rebuild with `node build.mjs --strict` before any gate; 80 pages) |
 | Media for the build | `site-src/media/` (video encodes + stills, gitignored), `site-src/fonts/` (variable woff2, gitignored) |
 | Asset mirror | `workflows/03-graphic-resources/.tmp/downloads/` (gitignored; catalogue in `ASSETS.md`) |
 | Research | `workflows/01-content-intake/.tmp/` — `current-site-scrape/`, `competitor-scrape/<domain>/`, `gap-analysis/`, `homepage-screenshots/` |
 | Upload toolkit | `workflows/21-instatic-upload/` (Stone Med Spa lineage, retargeted; directive `21-instatic-upload.md`; link dir in `.tmp/railway-link`) |
-| SEO source | `workflows/04-design/.tmp/site-src/seo.json` — origin, `<title>`, meta description |
+| SEO source | each page module's `title`/`description`; `seo.json` is regenerated by the build (origin + all 80) |
 | QA captures | `workflows/08-qa/.tmp/screenshots/home/` (local build), `…/live/` (published) |
 | Instatic admin | `https://west-la-implants-production.up.railway.app/admin` — owner account, shared password (`INSTATIC_PASSWORD_MASON_PARK` in the master file) |
 

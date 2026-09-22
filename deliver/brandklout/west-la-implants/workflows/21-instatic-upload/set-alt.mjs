@@ -51,13 +51,15 @@ const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'u
    already fails on an <img> without one. */
 const alts = new Map()
 const conflicts = []
-for (const file of fs.readdirSync(FINAL).filter((f) => f.endsWith('.html'))) {
-  const html = fs.readFileSync(path.join(FINAL, file), 'utf8')
+const walk = (dir) => fs.readdirSync(dir).flatMap((e) => (fs.statSync(path.join(dir, e)).isDirectory() ? walk(path.join(dir, e)) : e.endsWith('.html') ? [path.join(dir, e)] : []))
+for (const file of walk(FINAL)) {
+  const html = fs.readFileSync(file, 'utf8')
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     const tag = m[0]
     // WEST LA IMPLANTS: this build references `media/img/x.jpg`, not `assets/x`,
     // and `media-map.json` is keyed by that same dist-relative path.
-    const src = (tag.match(/\bsrc="(media\/[^"]+)"/) ?? [])[1]
+    // root-relative since the multi-page build; the map is keyed without the slash
+    const src = (tag.match(/\bsrc="\/?(media\/[^"]+)"/) ?? [])[1]
     const alt = (tag.match(/\balt="([^"]*)"/) ?? [])[1]
     if (!src || !alt) continue // a deliberately decorative image keeps alt=""
     if (!alts.has(src)) alts.set(src, new Set())

@@ -1025,6 +1025,16 @@ const seoBySlug = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
 for (const p of pages) {
   const src = seoBySlug[p.slug]
   if (!src?.seoTitle) continue
+  /* A NESTED SLUG IS NEVER PATCHED THROUGH /data/rows. `blog/x` serves nested
+     after a site-document write, but ANY PATCH /data/rows on that row
+     re-derives the slug through slugForTable and flattens the route to
+     `/blog-x` until the row is re-saved through site-document. The SEO cells
+     are stored-but-unread by this publisher anyway (trap 6), so the journal
+     entries skip the pass rather than lose their routes. */
+  if (p.slug.includes('/')) {
+    console.log(`seo  ${p.slug.padEnd(18)} skipped (nested slug; a rows PATCH would flatten the route)`)
+    continue
+  }
   try {
     const current = await api('GET', `/admin/api/cms/data/rows/${p.id}`)
     const cells = { ...(current.row?.cells ?? current.cells ?? {}) }

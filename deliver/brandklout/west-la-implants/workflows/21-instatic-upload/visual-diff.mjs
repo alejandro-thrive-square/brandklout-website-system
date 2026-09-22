@@ -60,9 +60,17 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-const ALL = ['index']
+/* Every designed page in dist/ plus one journal entry (the 46 entries share
+   one template). Derived, not listed: a hand-kept list goes blind. */
+const ALL = (() => {
+  const DIST_ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../04-design/.tmp/site-src/dist')
+  const pages = fs.readdirSync(DIST_).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''))
+  const posts = fs.existsSync(path.join(DIST_, 'blog')) ? fs.readdirSync(path.join(DIST_, 'blog')).filter((f) => f.endsWith('.html')).map((f) => 'blog/' + f.replace(/\.html$/, '')).slice(0, 1) : []
+  return ['index', ...pages.filter((p) => p !== 'index').sort(), ...posts]
+})()
+
 const args = process.argv.slice(2)
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ALL
+const PAGES = args.find((a) => /^[a-z\/-]+$/.test(a)) ? [args.find((a) => /^[a-z\/-]+$/.test(a))] : ALL
 const WIDTH = Number(args.find((a) => /^\d+$/.test(a)) ?? 1440)
 
 /* A pixel counts as different only past this per-channel distance. Text
@@ -291,9 +299,9 @@ async function diff(localFile, liveFile, diffFile) {
 const summary = []
 for (const slug of PAGES) {
   const route = slug === 'index' ? '' : slug
-  const localFile = path.join(OUT, `${slug}-${WIDTH}-local.png`)
-  const liveFile = path.join(OUT, `${slug}-${WIDTH}-live.png`)
-  const diffFile = path.join(OUT, `${slug}-${WIDTH}-diff.png`)
+  const localFile = path.join(OUT, `${slug.replace('/', '__')}-${WIDTH}-local.png`)
+  const liveFile = path.join(OUT, `${slug.replace('/', '__')}-${WIDTH}-live.png`)
+  const diffFile = path.join(OUT, `${slug.replace('/', '__')}-${WIDTH}-diff.png`)
 
   await shoot(`http://127.0.0.1:${port}/${slug}.html`, localFile)
   await shoot(`${REMOTE}/${route}`, liveFile)

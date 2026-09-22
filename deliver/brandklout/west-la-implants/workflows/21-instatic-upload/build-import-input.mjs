@@ -37,22 +37,36 @@ const TMP = path.join(HERE, '.tmp')
 const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'seo.json'), 'utf8'))
 
-/* ONE PAGE. West LA Implants is a single scrolling document — eight chapters
-   in one `index.html`, with every link on it an in-page `#anchor`, a `tel:` or
-   an off-site URL. There is nothing to rewrite from a filename to a slug and
-   nothing else to import.
+/* EVERY PAGE IN dist/, derived rather than listed. The site was one page
+   from 2026-09-10 to 2026-09-22 and is eighty from then on (34 designed pages
+   plus the 46-entry journal under blog/). A hand-kept list here goes blind
+   the day a page is added, so the list IS the build: every .html under dist,
+   recursively, with the slug taken from its path (`blog/x.html` -> `blog/x`).
 
    > [!WARNING]
    > This list IS the site, and trap 8 is the reason that matters. In replace
    > mode any stored page absent from `changedPages` is DELETED server-side.
-   > Removing a line here deletes a live page.
+   > A page missing from dist/ is deleted live on the next --force push.
    >
-   > `index` must be the first slug because setup already created a page at
-   > that slug and this overwrites it rather than duplicating it.
+   > `index` must be first: setup created a page at that slug and this
+   > overwrites it rather than duplicating it.
 
    `title` is the CMS page label in the admin list; the browser <title> comes
    from seo.json via `seoTitle` below (trap 6). */
-const PAGES = [{ file: 'index.html', slug: 'index', title: 'Home' }]
+const walk = (dir, pre = '') =>
+  fs
+    .readdirSync(dir)
+    .flatMap((e) =>
+      fs.statSync(path.join(dir, e)).isDirectory()
+        ? walk(path.join(dir, e), pre + e + '/')
+        : e.endsWith('.html')
+          ? [{ file: pre + e, slug: pre + e.replace(/\.html$/, '') }]
+          : [],
+    )
+const PAGES = walk(FINAL)
+  .sort((a, b) => (a.slug === 'index' ? -1 : b.slug === 'index' ? 1 : a.slug.localeCompare(b.slug)))
+  .map((p) => ({ ...p, title: p.slug === 'index' ? 'Home' : p.slug.replace(/^blog\//, 'Journal: ').replace(/-/g, ' ') }))
+if (PAGES[0]?.slug !== 'index') throw new Error('dist/index.html is missing — build first')
 
 const problems = []
 
@@ -78,7 +92,7 @@ function rewrite(html, file) {
   //     `assets/site.js` into it, IN THAT ORDER. `importHtml` would strip these
   //     tags anyway; removing them here stops step 1 looking for them in the
   //     media map.
-  out = out.replace(/[ \t]*<script[^>]+src="assets\/gsap\/[^"]+"[^>]*><\/script>\s*\n?/g, '')
+  out = out.replace(/[ \t]*<script[^>]+src="\/?assets\/gsap\/[^"]+"[^>]*><\/script>\s*\n?/g, '')
 
   // 1. Media sources -> media library paths.
   //
@@ -88,7 +102,10 @@ function rewrite(html, file) {
   //    children — and any of the three left pointing at `media/…` 404s on the
   //    published page exactly as an unrewritten <img> would, except that a
   //    video that never loads looks like a poster frame by design.
-  out = out.replace(/(src|href|poster|data-src|data-src-mobile)="(media\/[^"]+)"/g, (whole, attr, name) => {
+  // Paths are ROOT-RELATIVE since the multi-page build (`/media/img/x.jpg`),
+  // so a journal entry two levels down resolves them locally; the media map
+  // is keyed without the leading slash.
+  out = out.replace(/(src|href|poster|data-src|data-src-mobile|data-src-hover)="\/?(media\/[^"]+)"/g, (whole, attr, name) => {
     const hit = mediaMap[name]
     if (!hit) {
       problems.push(`${file}: no media-map entry for ${name}`)
@@ -106,17 +123,21 @@ function rewrite(html, file) {
   //     footer ribbon, category cards, every CTA — while each page in
   //     isolation looks perfect, which is exactly how it got missed the first
   //     time. `index.html` maps to `/`, not `/index`.
-  out = out.replace(/href="([a-z0-9-]+)\.html(#[^"]*)?"/g, (_whole, page, frag) => {
+  //     Root-relative and nested since the multi-page build: `/blog/x.html`
+  //     -> `/blog/x`, `/index.html` -> `/`.
+  out = out.replace(/href="\/?((?:[a-z0-9-]+\/)?[a-z0-9-]+)\.html(#[^"]*)?"/g, (_whole, page, frag) => {
     const target = page === 'index' ? '/' : `/${page}`
     return `href="${target}${frag ?? ''}"`
   })
 
   // 2. Drop the bundle links; both become site-level assets instead.
-  out = out.replace(/[ \t]*<link[^>]+href="assets\/site\.css"[^>]*>\s*\n?/g, '')
-  out = out.replace(/[ \t]*<script[^>]+src="assets\/site\.js"[^>]*><\/script>\s*\n?/g, '')
+  out = out.replace(/[ \t]*<link[^>]+href="\/?assets\/site\.css"[^>]*>\s*\n?/g, '')
+  out = out.replace(/[ \t]*<script[^>]+src="\/?assets\/site\.js"[^>]*><\/script>\s*\n?/g, '')
+  // the favicon and canonical are <head> content the importer drops anyway
+  out = out.replace(/[ \t]*<link[^>]+rel="(?:icon|canonical)"[^>]*>\s*\n?/g, '')
 
   // Anything still pointing into assets/ or media/ would 404 once published.
-  for (const m of out.matchAll(/"(assets|media|fonts)\/([^"]+)"/g)) {
+  for (const m of out.matchAll(/"\/?(assets|media|fonts)\/([^"]+)"/g)) {
     problems.push(`${file}: unrewritten reference to ${m[1]}/${m[2]}`)
   }
   return out

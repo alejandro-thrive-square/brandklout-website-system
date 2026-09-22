@@ -44,15 +44,17 @@ import { fileURLToPath } from 'node:url'
 const BASE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!BASE) throw new Error('INSTATIC_BASE_URL is not set')
 
-/* ONE ROUTE. West LA Implants is a single scrolling document: eight chapters in
-   one `index.html`, which Instatic serves at `/`. There is no second slug.
-
-   Note what this gate can and cannot tell you. It verifies the routes below are
-   healthy. It CANNOT tell you an unlisted route is gone, because a route absent
-   from this list is simply not checked — GONE exists for that half.
-
-   Add a line here the day a second page is built. */
-const ROUTES = ['/']
+/* EVERY ROUTE THE BUILD WROTE, derived from dist/ rather than listed. The
+   site was one route from 2026-09-10 to 2026-09-22 and is eighty from then
+   on; a list kept by hand here goes blind the day a page is added (three
+   gates on a sibling watched 11 of 57 pages and reported clean). A route
+   absent from dist is not checked — GONE exists for that half. */
+const DIST = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../04-design/.tmp/site-src/dist')
+const walk = (dir, pre = '') =>
+  fs.readdirSync(dir).flatMap((e) =>
+    fs.statSync(path.join(dir, e)).isDirectory() ? walk(path.join(dir, e), pre + e + '/') : e.endsWith('.html') ? [pre + e.replace(/\.html$/, '')] : [],
+  )
+const ROUTES = walk(DIST).map((s) => (s === 'index' ? '/' : '/' + s)).sort((a, b) => (a === '/' ? -1 : b === '/' ? 1 : a.localeCompare(b)))
 
 /* Nothing has ever been retired here. This instance was provisioned on
    2026-09-10 and its first publish was this site, so there is no earlier slug
@@ -122,7 +124,7 @@ for (const route of ROUTES) {
        each is here because a rule in `site-src/css/` styles it. */
     if (styleHref) {
       const css = await (await fetch(BASE + styleHref)).text()
-      for (const cls of ['is-solid', 'is-open', 'is-locked', 'is-link', 'wz-smooth', 'wz-line', 'reveal-mask']) {
+      for (const cls of ['is-solid', 'is-open', 'is-locked', 'is-link', 'wz-smooth', 'wz-line', 'reveal-mask', 'is-lit', 'is-on', 'is-drawn']) {
         if (!css.includes(cls)) fails.push(`runtime class .${cls} was tree-shaken out of the published registry`)
       }
     }
@@ -161,10 +163,19 @@ for (const route of ROUTES) {
         if (status >= 400) fails.push(`@font-face src ${m[1]} is ${status}`)
       }
     }
-    const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
-    if (!script) fails.push('no runtime script on the homepage')
+    /* FOUR script assets since 2026-09-22 (the agency added two consent
+       scripts to the shell); the site bundle is whichever one carries
+       `window.WZ`, not the first tag on the page. The first version of this
+       read the first tag, hit the consent bridge, and failed a good publish. */
+    const scripts = [...html.matchAll(/src="(\/_instatic\/assets\/[^"]+\.js)"/g)].map((m) => m[1])
+    let js = null
+    for (const s of scripts) {
+      const t = await (await fetch(BASE + s)).text()
+      if (t.includes('window.WZ')) { js = t; break }
+    }
+    if (!scripts.length) fails.push('no runtime script on the homepage')
+    else if (!js) fails.push(`none of ${scripts.length} script asset(s) carries the site bundle (window.WZ)`)
     else {
-      const js = await (await fetch(BASE + script)).text()
       /* ONE script asset carries GSAP AND the site bundle, in that order
          (trap 17 / push-site.mjs `VENDOR`). Order is load-bearing and fails
          SILENTLY when reversed — `00-runtime.js` guards on `window.gsap`, so a

@@ -2,8 +2,324 @@
   "origin": "https://west-la-implants-production.up.railway.app",
   "pages": {
     "index": {
-      "title": "West LA Implants — Dental Implants, All-on-4 & Robotic Implant Surgery in Los Angeles",
+      "title": "West LA Implants — Dental Implants, All-on-4 &amp; Robotic Implant Surgery in Los Angeles",
       "description": "West LA Implants is Dr. Tony Barriere's implant and cosmetic dentistry center on Wilshire Blvd, Los Angeles. Yomi robot-guided implant surgery, All-on-4 full arch, IV sedation and cosmetic dentistry under one roof."
+    },
+    "all-on-4": {
+      "title": "All-on-4® Full Arch Dental Implants in Los Angeles | West LA Implants",
+      "description": "All-on-4® full mouth dental implants at West LA Implants: a fixed arch of zirconia teeth on four or more implants, planned in 3D, placed with Yomi® guidance, with temporary teeth the same day."
+    },
+    "bone-grafting": {
+      "title": "Bone Grafting, Sinus Lift & Ridge Augmentation in Los Angeles | West LA Implants",
+      "description": "Bone grafting at West LA Implants rebuilds the jaw before implants: socket preservation after extraction, ridge augmentation, ridge splitting and sinus lifts, all done by the same surgeon who places the implant."
+    },
+    "contact": {
+      "title": "Contact West LA Implants: 12301 Wilshire Blvd Suite 205, Los Angeles | Book a Consultation",
+      "description": "Contact West LA Implants on Wilshire Blvd in Los Angeles. New patients (310) 692-9316, current patients (310) 481-0111, book online on Zocdoc, or send a consultation request. Monday to Friday, 9am to 5pm."
+    },
+    "cosmetic-dentistry": {
+      "title": "Cosmetic Dentistry in Los Angeles: Veneers, Whitening, Invisalign® & Smile Makeovers | West LA Implants",
+      "description": "Cosmetic dentistry at West LA Implants: porcelain veneers and Lumineers® in as few as two visits, Zoom teeth whitening in one, Invisalign® clear aligners, crowns, bonding and full smile makeovers, planned with smile simulation."
+    },
+    "dental-implants": {
+      "title": "Dental Implants in Los Angeles | West LA Implants",
+      "description": "Dental implants planned in 3D and placed with Yomi® robotic guidance at West LA Implants on Wilshire Blvd. One tooth, several, or a full arch, under one roof with IV sedation."
+    },
+    "dr-tony-barriere": {
+      "title": "Dr. Tony Barriere, DDS: Implant & Cosmetic Dentist in Los Angeles | West LA Implants",
+      "description": "Meet Dr. Tony Barriere, DDS. Ohio State College of Dentistry, a yearlong surgical residency at NYU Langone, more than 1,000 hours of continuing education, and a practice built around robot-guided implant surgery on Wilshire Blvd."
+    },
+    "failing-dental-implants": {
+      "title": "Failing Dental Implants & Peri-Implantitis Treatment in Los Angeles | West LA Implants",
+      "description": "Loose, sore or receding around an implant? West LA Implants treats peri-implantitis, rebuilds lost bone and rescues or replaces failing dental implants placed anywhere. Free second opinions on Wilshire Blvd."
+    },
+    "faq": {
+      "title": "Dental Implant FAQ: Cost, Pain, Recovery, Candidacy | West LA Implants, Los Angeles",
+      "description": "Straight answers to the questions patients ask West LA Implants about dental implants: what they are, who qualifies, what surgery and recovery are like, how long they last, and how to care for them."
+    },
+    "financing": {
+      "title": "Insurance & Financing for Dental Implants in Los Angeles | West LA Implants",
+      "description": "How patients pay at West LA Implants: most PPO dental plans in network, six financing partners with monthly payments, and the West LA Implants Dental Savings Plan for patients without insurance."
+    },
+    "general-dentistry": {
+      "title": "General Dentistry in Los Angeles: Cleanings, Crowns, Emergencies | West LA Implants",
+      "description": "General dentistry at West LA Implants: preventive cleanings and exams, same-day crowns and bridges, fillings, root canals, pediatric care and same-day emergency visits, with the same technology used for implants."
+    },
+    "hybrid-dentures": {
+      "title": "Hybrid Fixed Detachable Dentures in Los Angeles | West LA Implants",
+      "description": "Hybrid fixed detachable dentures at West LA Implants: a screw-retained arch on four or more implants that stays in day and night, leaves the palate open, and is unscrewed twice a year for cleaning."
+    },
+    "implant-cost": {
+      "title": "Dental Implant Cost in Los Angeles: What Decides It | West LA Implants",
+      "description": "What dental implants cost in Los Angeles and why: implant count, grafting, materials and the restoration. West LA Implants quotes after a 3D scan, offers six financing partners, a savings plan, a one-year warranty and free second opinions."
+    },
+    "implant-supported-dentures": {
+      "title": "Implant-Supported Dentures in Los Angeles | West LA Implants",
+      "description": "Implant-supported dentures at West LA Implants: a denture secured to two or more implants so it cannot slip, with no adhesives and less bone loss. Removable or fixed, planned in 3D on Wilshire Blvd."
+    },
+    "accessibility": {
+      "title": "Accessibility Statement | West LA Implants",
+      "description": "West LA Implants is committed to a website that everyone can use. How the site is built for accessibility, how to reach the practice another way, and how to report a problem."
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy | West LA Implants",
+      "description": "How West LA Implants handles the information you share through this website and as a patient: what is collected, how it is used, who it is shared with, and your choices."
+    },
+    "thank-you": {
+      "title": "Thank You | West LA Implants",
+      "description": "Your request has reached West LA Implants. The front desk replies within one business day."
+    },
+    "missing-teeth": {
+      "title": "Missing Teeth, Loose Dentures & Bone Loss in Los Angeles | West LA Implants",
+      "description": "Missing or failing teeth, loose dentures and jawbone loss are the three conditions West LA Implants treats most. Every replacement option compared, and the ones that stop the bone from receding."
+    },
+    "our-practice": {
+      "title": "Our Practice & Team: West LA Implants on Wilshire Blvd, Los Angeles",
+      "description": "Inside West LA Implants: the surgical suite with the Yomi® robot and CBCT, the reception, the amenities for nervous patients, and the team of assistants, hygienist and office manager who run the day."
+    },
+    "periodontics": {
+      "title": "Periodontics & Laser Gum Treatment in Los Angeles | West LA Implants",
+      "description": "Periodontal care at West LA Implants: laser scaling and root planing, osseous surgery, gingivectomy, crown lengthening, gum grafts and frenectomy, plus peri-implantitis treatment around implants."
+    },
+    "referring-doctors": {
+      "title": "Referring Doctors: Refer a Patient for Implants or Surgery | West LA Implants",
+      "description": "For general dentists and specialists referring patients to West LA Implants for implants, full-arch treatment, bone grafting, sinus lifts, extractions or sedation. How to refer, what to send, and how the patient comes back to you."
+    },
+    "results": {
+      "title": "Before & After Photos, Patient Stories & Video Library | West LA Implants",
+      "description": "Real results from West LA Implants: All-on-4® full arch, implants and crowns, full mouth reconstruction, veneers, whitening and Invisalign® before and after, three patient stories on film, and Dr. Barriere’s video library."
+    },
+    "sedation-dentistry": {
+      "title": "IV Sedation Dentistry in Los Angeles | West LA Implants",
+      "description": "IV, oral and nitrous oxide sedation at West LA Implants for anxious patients and long procedures. Sleep through implant surgery, combine several treatments in one visit, wake up with the work done."
+    },
+    "technology": {
+      "title": "Yomi® Robotic Implant Surgery & Dental Technology in Los Angeles | West LA Implants",
+      "description": "West LA Implants places implants with the Yomi® dental robot, plans every case on cone-beam CT, prints its own surgical guides and mills restorations in house. See the technology on Wilshire Blvd."
+    },
+    "tooth-extractions": {
+      "title": "Tooth Extractions & Wisdom Teeth Removal in Los Angeles | West LA Implants",
+      "description": "Gentle tooth extractions and wisdom teeth removal at West LA Implants, with sedation, socket preservation and a plan for the replacement. Same-day emergency visits on Wilshire Blvd."
+    },
+    "what-to-expect": {
+      "title": "Your First Visit & Post-Operative Instructions | West LA Implants, Los Angeles",
+      "description": "What happens at your first visit to West LA Implants, how the implant process runs from consultation to final teeth, and the practice’s post-operative guidelines for extractions, sinus lifts and implants."
+    },
+    "zirconia-fixed-bridge": {
+      "title": "Zirconia Fixed Bridge in Los Angeles | West LA Implants",
+      "description": "A zirconia fixed bridge at West LA Implants: a full arch milled from one solid block of zirconia and secured to dental implants. Will not stain, chip or break, and looks like natural teeth."
+    },
+    "blog": {
+      "title": "Journal: Dental Implant Questions Answered | West LA Implants, Los Angeles",
+      "description": "Forty-six short answers from West LA Implants to the questions patients ask about dental implants: candidacy, cost, recovery, full-arch treatment, bone grafting, sedation and care."
+    },
+    "blog/are-there-factors-that-determine-which-type-of-denta-a953c64": {
+      "title": "Are There Factors That Determine Which Type Of Dental Implant Procedure I Can Get Treated With? | West LA Implants",
+      "description": "Dental implants in Los Angeles, FL, are a safe and effective way to replace missing or damaged teeth. They are a permanent tooth replacement option that can"
+    },
+    "blog/does-anything-happen-to-my-jawbone-if-i-dont-immedia-3453d94": {
+      "title": "Does Anything Happen To My Jawbone If I Don’t Immediately Replace My Missing Teeth With Dental Implants? | West LA Implants",
+      "description": "Dental implants in Los Angeles, FL, are a gold standard tooth replacement option that are surgically placed in a patient’s jawbone. A dental implant post is"
+    },
+    "blog/after-my-smile-has-healed-how-is-the-final-prosthesis-placed": {
+      "title": "After My Smile Has Healed, How Is The Final Prosthesis Placed? | West LA Implants",
+      "description": "Dental implants in Los Angeles, CA are a gold standard tooth replacement option. The process of placing dental implants requires the dental implant post being"
+    },
+    "blog/is-there-a-difference-between-a-temporary-prosthesis-0eb13fe": {
+      "title": "Is There A Difference Between A Temporary Prosthesis And A Final Prosthesis? | West LA Implants",
+      "description": "A dental implant in Los Angeles, CA, is composed of a dental implant post, an abutment, and a prosthesis. After the dental implant post and abutment are"
+    },
+    "blog/what-happens-if-i-dont-have-a-bone-grafting-procedur-f49cf14": {
+      "title": "What Happens If I Don’t Have A Bone Grafting Procedure Before My Dental Implants Are Placed? | West LA Implants",
+      "description": "When people have had one or more missing teeth for a long period of time, then they may need a bone grafting procedure before they can get treated with dental"
+    },
+    "blog/after-getting-a-full-arch-of-teeth-extracted-should-4ec2dcc": {
+      "title": "After Getting A Full Arch Of Teeth Extracted, Should I Get Treated With Full Mouth Dental Implants? | West LA Implants",
+      "description": "When people have a full arch of severely decayed or infected teeth, then they will want to go get those teeth extracted. After the damaged or infected teeth"
+    },
+    "blog/is-there-a-difference-between-implant-supported-dent-f7be47a": {
+      "title": "Is There A Difference Between Implant Supported Dentures And Full Mouth Dental Implants? | West LA Implants",
+      "description": "Implant supported dentures are a restorative tooth replacement option for those who no longer want to wear traditional dentures. Full mouth dental implants in"
+    },
+    "blog/can-anyone-have-a-temporary-prosthesis-placed-after-b2907d6": {
+      "title": "Can Anyone Have A Temporary Prosthesis Placed After Having Dental Implant Surgery? | West LA Implants",
+      "description": "When people have one or more missing or failing teeth, it will be hard for them to live their lives normally. With dental implants in Los Angeles, CA,"
+    },
+    "blog/are-there-specific-parts-that-make-up-a-dental-implant": {
+      "title": "Are There Specific Parts That Make Up A Dental Implant? | West LA Implants",
+      "description": "While people may know that dental implants are used to replace one or more missing teeth, they may not know the specific parts that make up a dental implant"
+    },
+    "blog/are-there-aesthetic-and-functional-benefits-to-getti-b3b6309": {
+      "title": "Are There Aesthetic And Functional Benefits To Getting Treated With Multiple Dental Implants? | West LA Implants",
+      "description": "Multiple dental implants in Los Angeles, CA give several unique benefits for those who have missing or failing teeth. Not only do multiple dental implants"
+    },
+    "blog/what-makes-me-a-candidate-for-a-dental-implant-procedure": {
+      "title": "What Makes Me A Candidate For A Dental Implant Procedure? | West LA Implants",
+      "description": "When people have missing teeth, their jawbone tissue can get reabsorbed due to a lack of nutrients, blood flow, and stimulation. A great treatment to rebuild"
+    },
+    "blog/following-a-tooth-extraction-what-should-i-do": {
+      "title": "Following A Tooth Extraction, What Should I Do? | West LA Implants",
+      "description": "While it is always the goal of a skilled doctor to save and restore a patient’s natural teeth, there are times when that may not be possible. When teeth are"
+    },
+    "blog/are-full-mouth-dental-implants-able-to-restore-the-l-168a3e3": {
+      "title": "Are Full Mouth Dental Implants Able To Restore The Look And Function Of My Smile? | West LA Implants",
+      "description": "When a full arch of missing teeth is negatively affecting the look and function of a patients smile, then full arch dental implants in Los Angeles, CA could"
+    },
+    "blog/after-getting-dental-implants-how-can-i-take-care-of-them": {
+      "title": "After Getting Dental Implants, How Can I Take Care Of Them? | West LA Implants",
+      "description": "Dental implants in Los Angeles, CA can be very beneficial to patients, making them a preferable tooth replacement option over implant supported dentures."
+    },
+    "blog/is-it-possible-for-me-to-get-customized-dental-impla-739e461": {
+      "title": "Is It Possible For Me To Get Customized Dental Implant Treatments? | West LA Implants",
+      "description": "When people are struggling with damaged, misshapen, or missing teeth, dental implants can be a phenomenal option to restore their smile and tooth function,"
+    },
+    "blog/should-i-get-dental-implants-after-a-bone-grafting-procedure": {
+      "title": "Should I Get Dental Implants After A Bone Grafting Procedure? | West LA Implants",
+      "description": "Dental implants are a popular treatment option for those who are missing teeth or are experiencing damaged or broken teeth that need repair. Dental implants"
+    },
+    "blog/dental-implant-posts-can-improve-your-oral-health": {
+      "title": "Dental Implant Posts Can Improve Your Oral Health | West LA Implants",
+      "description": "The dental implants are composed of a few, but necessary, parts. Dental implants have a dental implant post, an abutment, and a dental prosthetic or crown."
+    },
+    "blog/reasons-to-get-a-temporary-dental-prosthetic": {
+      "title": "Reasons To Get A Temporary Dental Prosthetic | West LA Implants",
+      "description": "A trusted doctor may recommend people to get dental implants when they have one or more missing or damaged teeth. There are various types of dental implant"
+    },
+    "blog/why-would-i-get-dental-implants-after-a-tooth-extraction": {
+      "title": "Why Would I Get Dental Implants After a Tooth Extraction? | West LA Implants",
+      "description": "Whenever possible, dental professionals try to save existing, natural teeth. However, when a tooth has undergone extensive damage or decay—or has become a"
+    },
+    "blog/what-is-the-all-on-x-treatment": {
+      "title": "What Is The All On X Treatment? | West LA Implants",
+      "description": "Having a beautiful smile can certainly be a great feature to have. However, for those who have missing teeth, or those who have teeth that are damaged,"
+    },
+    "blog/how-many-teeth-can-dental-implants-replace": {
+      "title": "How Many Teeth Can Dental Implants Replace? | West LA Implants",
+      "description": "Single or multiple missing teeth can be replaced by dental implants. Dental implants are a revolutionary dental restoration procedure that provides 99% bite"
+    },
+    "blog/how-can-full-mouth-dental-implants-benefit-me": {
+      "title": "How Can Full Mouth Dental Implants Benefit Me? | West LA Implants",
+      "description": "People may be beyond ready for a new smile if they are experiencing missing teeth, damaged, or misshaped teeth. After assessing the patients teeth, a skilled"
+    },
+    "blog/who-qualifies-for-dental-implants": {
+      "title": "Who Qualifies For Dental Implants? | West LA Implants",
+      "description": "For many people, dealing with missing or damaged teeth can be a really hard experience. That is why dental implants in Los Angeles, CA, should be considered"
+    },
+    "blog/how-do-dental-implants-help-me": {
+      "title": "How Do Dental Implants Help Me? | West LA Implants",
+      "description": "For those who are currently struggling with missing teeth, damaged, or misshaped teeth, then dental implants in Los Angeles, CA could be the perfect solution."
+    },
+    "blog/why-choose-dental-implants-to-replace-teeth": {
+      "title": "Why Choose Dental Implants To Replace Teeth? | West LA Implants",
+      "description": "Experiencing missing teeth? The loss of even a single tooth can be devastating to surrounding tooth structures. Missing teeth can also extend beyond a"
+    },
+    "blog/what-are-full-mouth-dental-implants": {
+      "title": "What Are Full Mouth Dental Implants? | West LA Implants",
+      "description": "Experiencing a full arch of missing teeth? There is no doubt that this can affect a person’s smile and even their confidence. Luckily, Full mouth dental"
+    },
+    "blog/the-four-types-of-dental-implant-restorations": {
+      "title": "The Four Types Of Dental Implant Restorations | West LA Implants",
+      "description": "A dentist in Los Angeles, CA may recommend dental implants if a patient is experiencing missing, crooked, or damaged teeth. There are four types of dental"
+    },
+    "blog/when-is-dental-implant-surgery-needed": {
+      "title": "When Is Dental Implant Surgery Needed? | West LA Implants",
+      "description": "Dealing with a less than stellar smile can certainly be a drag and impact your daily quality of life. Fortunately, your dentist in Los Angeles, CA may"
+    },
+    "blog/can-you-get-all-on-4-dental-implants-in-one-day-in-l-78bf28a": {
+      "title": "Can You Get All-On-4 Dental Implants In One Day In Los Angeles, CA? | West LA Implants",
+      "description": "Imagine walking into a dentist’s office with an arch of failing or missing teeth and walking out a few hours later with a set of natural-looking replacement"
+    },
+    "blog/the-best-ways-to-find-affordable-dental-implants": {
+      "title": "The Best Ways To Find Affordable Dental Implants! | West LA Implants",
+      "description": "The benefits of dental implants in Los Angeles, CA are many and varied. They can provide a more secure foundation for teeth and allow for increased chewing"
+    },
+    "blog/do-you-need-sedation-for-dental-implants": {
+      "title": "Do You Need Sedation For Dental Implants? | West LA Implants",
+      "description": "Has a dentist told you that you need dental implants? Are dental implants painful to have implanted? Do you have questions about sedation used for dental"
+    },
+    "blog/what-is-the-recovery-time-for-dental-implants": {
+      "title": "What Is The Recovery Time For Dental Implants? | West LA Implants",
+      "description": "Interested in getting a brand-new smile? Then dental implants may be a great option for you. Dental implants are a great way to achieve a beautiful smile if"
+    },
+    "blog/methods-of-replacing-missing-teeth-in-los-angeles-ca": {
+      "title": "Methods Of Replacing Missing Teeth In Los Angeles, CA! | West LA Implants",
+      "description": "Years ago, adults who lost teeth had very few options to replace them. Fortunately, dentistry and technology have advanced tremendously. Treatment solutions"
+    },
+    "blog/what-is-osseointegration-when-it-comes-to-dental-implants": {
+      "title": "What Is Osseointegration When It Comes To Dental Implants? | West LA Implants",
+      "description": "There is no denying that dental implants are a phenomenal and amazing way to achieve a great new smile. The process is quite simple and can even be done in as"
+    },
+    "blog/what-foods-can-i-have-after-dental-implant-surgery": {
+      "title": "What Foods Can I Have After Dental Implant Surgery? | West LA Implants",
+      "description": "If you are experiencing tooth loss or decay, you might be interested in learning about options to remedy this issue. If so, a dentist may suggest placing"
+    },
+    "blog/how-many-types-of-dental-implants-and-techniques-are-there": {
+      "title": "How Many Types Of Dental Implants And Techniques Are There? | West LA Implants",
+      "description": "Having a beautiful smile can not only help increase your self-confidence, it can also help improve your overall health. If you are experiencing tooth loss due"
+    },
+    "blog/how-can-i-find-affordable-dental-implants": {
+      "title": "How Can I Find Affordable Dental Implants? | West LA Implants",
+      "description": "Are you interested in getting a brand-new smile, but may be a bit hesitant about how much the procedure may impact your wallet? If you are experiencing tooth"
+    },
+    "blog/why-should-i-consider-a-dental-implant-to-replace-my-c996c1d": {
+      "title": "Why Should I Consider A Dental Implant To Replace My Missing Tooth? | West LA Implants",
+      "description": "If you have missing teeth, there are a few cosmetic and functional restorations available to bring back your smile. Two popular restoration options for"
+    },
+    "blog/for-oral-health-month-consider-improving-your-health-b197164": {
+      "title": "For Oral Health Month, Consider Improving Your Health With Dental Implants! | West LA Implants",
+      "description": "Dealing with missing or damaged teeth can surely be disappointing and even affect tooth function and quality of life. This issue can also negatively impact"
+    },
+    "blog/do-robots-really-do-dental-implant-procedures": {
+      "title": "Do Robots Really Do Dental Implant Procedures? | West LA Implants",
+      "description": "Afraid of getting dental implants because of human error? Dental implants are a serious decision and so the risk of failure has driven many away because of"
+    },
+    "blog/making-the-most-of-your-dental-implants": {
+      "title": "Making the Most of Your Dental Implants! | West LA Implants",
+      "description": "If you are experiencing tooth loss or decay, you might be interested in learning about options to remedy this issue. If so, a dentist may suggest placing"
+    },
+    "blog/for-national-false-teeth-day-get-yourself-dental-imp-d4b254b": {
+      "title": "For National False Teeth Day, Get Yourself Dental Implants Instead! | West LA Implants",
+      "description": "There are many different reasons why tooth loss in Los Angeles, CA can occur for dental patients – including advanced gum disease and trauma. Believe it or"
+    },
+    "blog/do-i-have-to-extract-all-my-teeth-to-get-dental-implants": {
+      "title": "Do I Have To Extract All My Teeth To Get Dental Implants? | West LA Implants",
+      "description": "Having a couple of damaged teeth can be really irritating. From how it impacts our smiles, to not being able to eat our favorite foods, missing teeth impact a"
+    },
+    "blog/how-painful-is-it-to-get-dental-implants": {
+      "title": "How Painful Is It to Get Dental Implants? | West LA Implants",
+      "description": "Do you have a low tolerance for pain? Are you scared to correct your teeth because of the pain that may come from it? Have you heard horror stories about the"
+    },
+    "blog/what-do-you-need-to-get-dental-implants": {
+      "title": "What Do You Need to Get Dental Implants? | West LA Implants",
+      "description": "Is your bite alignment thrown off? Is your face shape altering? Are you self-conscious of your missing teeth? Have you not been able to smile because you are"
+    },
+    "blog/smile-confidently-with-your-brand-new-dental-implants": {
+      "title": "Smile Confidently with Your Brand New Dental Implants! | West LA Implants",
+      "description": "Has your confidence level decreased since you are not able to smile because of missing teeth? Are you embarrassed because you have holes in your mouth? Are"
+    },
+    "dental-implants-brentwood": {
+      "title": "Dental Implants near Brentwood, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 5 minutes from Brentwood at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
+    },
+    "dental-implants-santa-monica": {
+      "title": "Dental Implants near Santa Monica, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 10 to 15 minutes from Santa Monica at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
+    },
+    "dental-implants-westwood": {
+      "title": "Dental Implants near Westwood, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 5 to 10 minutes from Westwood at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
+    },
+    "dental-implants-century-city": {
+      "title": "Dental Implants near Century City, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 15 minutes from Century City at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
+    },
+    "dental-implants-culver-city": {
+      "title": "Dental Implants near Culver City, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 15 to 20 minutes from Culver City at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
+    },
+    "dental-implants-beverly-hills": {
+      "title": "Dental Implants near Beverly Hills, CA | West LA Implants on Wilshire Blvd",
+      "description": "Dental implants about 15 to 20 minutes from Beverly Hills at West LA Implants, 12301 Wilshire Blvd: robot-guided placement, All-on-4® full arch, grafting and IV sedation."
     }
   }
 }

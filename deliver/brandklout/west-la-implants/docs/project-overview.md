@@ -6,7 +6,7 @@
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Existing site** | https://westlaimplants.com/ — WordPress (Rank Math SEO, Site Kit by Google) |
 | **Selected offer** | `Development from Scratch` (full site, built new — not a page-for-page migration) |
-| **Source** | Direct from Brandklout. **No Asana task exists yet** — the 2026-08-05 pull in `docs/ASANA-DISPATCH.md` predates this client |
+| **Source** | Brandklout. Asana **"Complete Client Website" 1216841931530915** (project "BK Implementation - West LA Implants" 1213035312304439, owner Jessica); also "West LA All on 6 Page" and "West La 3 on 6 Landing Page" ad tasks |
 | **Due** | Not set |
 | **Instatic instance** | `https://west-la-implants-production.up.railway.app` — Railway project `a55b5cac-b92d-4653-a9ff-6da522a5c89c`, service "West LA Implants", provisioned 2026-09-10. Homepage review build only; the client domain stays on WordPress |
 | **Started** | 2026-08-20 (client folder initialized) |
@@ -75,13 +75,13 @@ Copied from `deliver/process/` at baseline `8d65269`. Route:
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done** | This doc + `mcp-access.md`; folder scaffolded |
 | `01-content-intake` | **Done (2026-08-20, extended 2026-09-10)** | Client scrape 91/91 + 102 MB asset mirror; three competitors in full (Wilshire OMS, Santa Monica OMS, Implant Center LA); `gap-analysis/HOMEPAGE-GAP-ANALYSIS.md` is the homepage blueprint |
-| `02-wireframe` | Pending | IA consolidation of the 42-page WP tree happens here |
+| `02-wireframe` | **Done (2026-09-22)** | `sitemap.json` + `wireframe-rationale.md`: 34 designed pages + journal, decided from the gap analysis; no separate wireframe round |
 | `03-graphic-resources` | **Done for the homepage** | The practice's four B-roll clips and 1080p stills cut from them carry the page; no stock used. Catalogue in `03-graphic-resources/.tmp/ASSETS.md` |
-| `04-design` | **Homepage built (2026-09-10)** | `04-design/.tmp/site-src/` — eight chapters, four pinned scrubs, passes every gate in [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). Interior pages pending page-count sign-off |
-| `05-design-revisions` | Pending | Owns client approval before build |
-| `06-content-seo` | Pending | Existing site ranks on a large service-page footprint; preserve topical coverage |
+| `04-design` | **Full site built (2026-09-22)** | Homepage 2026-09-10 (approved 2026-09-22); the other 33 designed pages and the 46-entry journal rendered from `pages/` and `templates/` through `lib/blocks.mjs` |
+| `05-design-revisions` | In progress | Homepage: two BugHerd rounds closed. Full site: awaiting Brandklout's review |
+| `06-content-seo` | **Done in the build** | Titles/descriptions per page, FAQPage + Dentist + procedure JSON-LD injected at runtime (`js/80-seo.js`), six neighbourhood pages, the journal carried over |
 | `07-webflow-build` | **Superseded by Instatic** | The build ships to the client's Instatic instance through `21-instatic-upload/` (Stone Med Spa lineage), not Webflow. Kept for the component library only |
-| `08-qa` | Pending | |
+| `08-qa` | **Ongoing** | `check-local.mjs` (local and live), six-breakpoint screenshots, plus the five 21-instatic-upload gates |
 | `09-launch` | Pending | Domain cutover from WordPress — see redirects below |
 | `10-handoff-support` | Pending | |
 

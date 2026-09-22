@@ -81,7 +81,15 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index']
+/* Every designed page in dist/ plus one journal entry (the 46 entries share
+   one template). Derived, not listed: a hand-kept list goes blind. */
+const ALL = (() => {
+  const DIST_ = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../04-design/.tmp/site-src/dist')
+  const pages = fs.readdirSync(DIST_).filter((f) => f.endsWith('.html')).map((f) => f.replace(/\.html$/, ''))
+  const posts = fs.existsSync(path.join(DIST_, 'blog')) ? fs.readdirSync(path.join(DIST_, 'blog')).filter((f) => f.endsWith('.html')).map((f) => 'blog/' + f.replace(/\.html$/, '')).slice(0, 1) : []
+  return ['index', ...pages.filter((p) => p !== 'index').sort(), ...posts]
+})()
+const PAGES = args.find((a) => /^[a-z\/-]+$/.test(a)) ? [args.find((a) => /^[a-z\/-]+$/.test(a))] : ALL
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists
@@ -408,8 +416,8 @@ for (const slug of PAGES) {
 
     if (wantShots) {
       fs.mkdirSync(SHOTS, { recursive: true })
-      await a.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-local.png`), fullPage: false })
-      await b.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-live.png`), fullPage: false })
+      await a.pg.screenshot({ path: path.join(SHOTS, `${slug.replace('/', '__')}-${width}-local.png`), fullPage: false })
+      await b.pg.screenshot({ path: path.join(SHOTS, `${slug.replace('/', '__')}-${width}-live.png`), fullPage: false })
     }
     await a.pg.close(); await b.pg.close()
   }

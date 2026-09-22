@@ -1,0 +1,146 @@
+/* ==========================================================================
+   THE SHELL — <head>, nav, site index (drawer), footer, mobile bar. Every
+   page is wrapped by `page()`. The homepage body is hand-authored
+   (pages/home.html); every other body is rendered from blocks.
+
+   Instatic keeps only <body>: the <head> here is for the local build and the
+   gates. Canonical, Open Graph and JSON-LD are ALSO carried on
+   <main data-seo> (base64 JSON) and written into <head> at runtime by
+   js/80-seo.js, because that is the only road to the published <head>
+   (21-instatic-upload.md, trap 31).
+   ========================================================================== */
+import { SITE, INDEX } from './site.mjs'
+
+const NAV_LINKS = [
+  ['/dental-implants.html', 'Implants'],
+  ['/technology.html', 'Technology'],
+  ['/dr-tony-barriere.html', 'Dr. Barriere'],
+  ['/results.html', 'Results'],
+  ['/contact.html', 'Contact'],
+]
+
+export function nav(current) {
+  const links = NAV_LINKS.map(([h, l]) => `<a href="${h}"${h === current ? ' aria-current="page"' : ''}>${l}</a>`).join('\n      ')
+  return `<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap--wide nav-in">
+    <a class="nav-logo" href="/index.html" aria-label="West LA Implants home">
+      <img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      ${links}
+      <div class="nav-readout" aria-hidden="true"><b id="navCh">00</b><span id="navName">Arrival</span><span class="bar" id="navBar"></span></div>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-phone" href="${SITE.phoneNewHref}">${SITE.phoneNew}</a>
+      <a class="btn btn-gold nav-cta magnetic" href="#invitation"><span>Request Consultation</span></a>
+      <button class="burger" id="burger" aria-label="Open the site index" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+    </div>
+  </div>
+</header>`
+}
+
+export function drawer() {
+  const cols = INDEX.map(
+    (g) => `<div class="dx-col"><div class="dx-title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
+  ).join('\n    ')
+  return `<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="wrap--wide dx-in">
+    <div class="dx-grid">
+    ${cols}
+    </div>
+    <div class="drawer-meta">
+      <a href="${SITE.phoneNewHref}">New patients ${SITE.phoneNew}</a>
+      <a href="${SITE.zocdoc}" target="_blank" rel="noopener">Book online on Zocdoc</a>
+      <span>${SITE.address1} · ${SITE.address2}</span>
+    </div>
+  </div>
+</div>`
+}
+
+export function footer() {
+  const cols = INDEX.slice(0, 3).map(
+    (g) => `<div><div class="footer-title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
+  ).join('\n      ')
+  return `<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo nav-logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span></div>
+        <p class="footer-about">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd. Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
+        <div class="footer-title">Los Angeles office</div>
+        <p>${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a> new patients<br><a href="${SITE.phoneCurrentHref}">${SITE.phoneCurrent}</a> current patients</p>
+        <div class="footer-title">Hours</div>
+        <p>Monday to Friday<br>9:00am to 5:00pm<br>Saturday &amp; Sunday closed</p>
+      </div>
+      ${cols}
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; West LA Implants &middot; Tony Barriere, DDS</span>
+      <div class="footer-links">
+        <a href="${SITE.social.instagram}" target="_blank" rel="noopener">Instagram</a>
+        <a href="${SITE.social.facebook}" target="_blank" rel="noopener">Facebook</a>
+        <a href="${SITE.social.youtube}" target="_blank" rel="noopener">YouTube</a>
+        <a href="${SITE.social.yelp}" target="_blank" rel="noopener">Yelp</a>
+        <a href="${SITE.zocdoc}" target="_blank" rel="noopener">Zocdoc</a>
+        <a href="/privacy-policy.html">Privacy</a>
+        <a href="/accessibility.html">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>`
+}
+
+export function mobileBar() {
+  return `<div class="mobile-bar">
+  <a class="btn btn-ghost" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a>
+  <a class="btn btn-gold" href="#invitation"><span>Request Consultation</span></a>
+</div>`
+}
+
+const GSAP = ['gsap', 'ScrollTrigger', 'ScrollToPlugin', 'ScrollSmoother', 'SplitText', 'Observer']
+
+/** Wrap a rendered body in the shell. `seo` is the object js/80-seo.js reads. */
+export function page({ slug, title, description, body, seo, bodyClass = '' }) {
+  const current = slug === 'index' ? '/index.html' : `/${slug}.html`
+  const seoB64 = Buffer.from(JSON.stringify(seo), 'utf8').toString('base64')
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<meta name="description" content="${description.replace(/"/g, '&quot;')}">
+<link rel="canonical" href="${seo.canonical}">
+<link rel="icon" href="/media/img/logo-icon-dark.png">
+<link rel="stylesheet" href="/assets/site.css">
+<!-- GSAP is vendored: Instatic's CSP is script-src 'self', so no CDN.
+     The runtime registers plugins at the END of <body>, never here. -->
+${GSAP.map((f) => `<script src="/assets/gsap/${f}.min.js"></script>`).join('\n')}
+</head>
+<body${bodyClass ? ` class="${bodyClass}"` : ''}>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+${nav(current)}
+
+${drawer()}
+
+<div id="smooth-wrapper"><div id="smooth-content">
+<main data-seo="${seoB64}">
+
+${body}
+
+</main>
+
+${footer()}
+
+</div></div><!-- /smooth -->
+
+${mobileBar()}
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
+`
+}

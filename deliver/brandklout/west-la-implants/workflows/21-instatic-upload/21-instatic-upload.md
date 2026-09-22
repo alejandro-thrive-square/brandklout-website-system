@@ -13,6 +13,25 @@ photographs, films and typefaces in the media library.
 > looked. Traps 35 onward are this build's own. Where a trap names a page, a class or a stylesheet
 > that does not exist here, it is a sibling's: **read the mechanism, not the filename.**
 
+## The multi-page build (2026-09-22)
+
+The homepage stayed exactly as approved; everything else is rendered from `site-src/pages/*.mjs`
+and `site-src/templates/*.mjs` by `build.mjs` through `lib/blocks.mjs`, wrapped in one shell
+(`lib/layout.mjs`: nav, the site-index drawer, footer, mobile bar). What that changed in this
+toolkit, each one a thing that would otherwise have gone blind:
+
+| Script | Change |
+| :--- | :--- |
+| `build-import-input.mjs` | `PAGES` is **walked from `dist/`** (index first, then sorted, `blog/x.html` → slug `blog/x`). Media and link rewrites accept a leading `/`; `data-src-hover` (the story cards' hover films) is rewritten too; `<link rel=icon/canonical>` stripped |
+| `set-alt.mjs` | walks `dist/` recursively; `src="/media/…"` accepted. **Alt is per asset**: a photograph used on eight pages gets ONE alt (the longest). The build keeps alts consistent per photograph for that reason |
+| `verify-live.mjs` | `ROUTES` walked from `dist/`; the runtime-class list gains `is-lit`, `is-on`, `is-drawn` (the interior blocks set them) |
+| `compare-live.mjs`, `visual-diff.mjs` | default page set = every designed page in `dist/` plus one journal entry; nested slugs allowed as the argument; screenshot names sanitise the `/` |
+| `push-site.mjs` | the SEO row PATCH **skips nested slugs** — a `PATCH /data/rows` on a `blog/x` row flattens its route to `/blog-x` until re-saved through site-document, and the cells are stored-but-unread anyway (trap 6) |
+| `../08-qa/.tmp/check-local.mjs --base=$INSTATIC_BASE_URL` | the **multi-page live gate**: every route, console clean, WZ armed, smoother at 1440, chapters 6–8, ≥3 pins that each scrub (different state at 25/50/75 %), no 390 overflow, canonical + JSON-LD injected. `verify-motion-live.mjs` keeps the homepage's deeper asserts |
+
+The published `<head>` is still four tags (trap 31); canonical, Open Graph and JSON-LD now
+travel on `<main data-seo>` (base64 JSON) and `js/80-seo.js` writes them at runtime.
+
 ## What is different about West LA Implants
 
 Read this before the Execution Steps; five things in this toolkit diverge from the med spa's copy
@@ -20,7 +39,7 @@ and each one is a thing that failed first.
 
 | | Stone Med Spa | **West LA Implants** |
 | :--- | :--- | :--- |
-| **Pages** | eleven | **ONE.** `index.html` — eight chapters in a single scrolling document. Every link on it is an in-page `#anchor`, a `tel:` or off-site, so trap 4's filename→slug rewrite has nothing to do |
+| **Pages** | eleven | **EIGHTY since 2026-09-22** (one from 2026-09-10 to then): 34 designed pages plus the 46-entry journal under `blog/`. `build-import-input.mjs` derives the page list from `dist/` recursively — nothing is listed by hand — and every link is root-relative (`/all-on-4.html`, `/blog/x.html`), rewritten to `/all-on-4` and `/blog/x` (trap 4 is load-bearing again) |
 | **Build layout** | `final-site/` with a flat `assets/` | `site-src/dist/` with `assets/`, `media/img/`, `media/video/` and `fonts/`. Every script here is keyed on that shape, and `media-map.json` is keyed by the **dist-relative path** (`media/img/x.jpg`) as well as by basename |
 | **Fonts** | `install-fonts.mjs`, Instatic's own font library | **media uploads.** All three faces are VARIABLE woff2 (`400 900`, `200 800`, plus an `opsz` axis `.display`/`.h2` set by hand) and Instatic's installer creates STATIC instances and ignores `font-variation-settings`. `font/woff2` is an accepted media mime, so the files upload as ordinary media and the three `@font-face` blocks travel in the token code asset with their `url()` rewritten. `install-fonts.mjs` IS NOT RUN — trap 16 is inverted here |
 | **Video** | none | **five mp4s, all uploaded.** `video/mp4` is an accepted mime and `MAX_MEDIA_BYTES` is 50 MB (`server/handlers/cms/mediaUpload.ts`); the largest file is 7.4 MB. Both `<video>` elements needed trap 35 to survive at all |
@@ -138,9 +157,12 @@ node css-parity.mjs            # 6. GATE - did every declared property reach the
 node compare-live.mjs          # 7. GATE - structure, computed style, geometry, text
 node visual-diff.mjs           # 8. GATE - pixels, at both widths. Read the BANDS, not the
 node visual-diff.mjs 390       #    percentage (trap 38)
-node verify-motion-live.mjs    # 9. GATE - DRIVES the published page: smoother, the four pins,
-                               #    the scrubs, the fonts, the hero film, 390 overflow.
-                               #    THE ONLY GATE THAT CAN SEE THE MOTION LAYER (trap 36)
+node verify-motion-live.mjs    # 9. GATE - DRIVES the published homepage: smoother, the four pins,
+                               #    the scrubs, the fonts, the hero film, 390 overflow (trap 36)
+node ../08-qa/.tmp/check-local.mjs --base=$INSTATIC_BASE_URL --widths=1440
+node ../08-qa/.tmp/check-local.mjs --base=$INSTATIC_BASE_URL --widths=390
+                               # 10. GATE - DRIVES EVERY published route: chapters, >=3 pins that
+                               #     scrub, console, 390 overflow, SEO injection (~12 min each)
 ```
 
 `verify-motion-live.mjs` is not optional and is not a nicety. The other four capture with
