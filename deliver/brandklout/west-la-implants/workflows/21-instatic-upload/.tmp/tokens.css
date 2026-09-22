@@ -60,3 +60,28 @@ html { scroll-behavior: auto; }
 @media (max-width:1023px) { .ex-in { min-height: 0; } }
 .in-fields select { background-image: linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%); }
 .in-fields select { background-position: calc(100% - 1.1rem) 50%,calc(100% - .75rem) 50%; }
+
+/* ===== the cascade of every pair the conversion is lossy on — a clamp()/min()/max()
+        value, or a multi-layer background — from 40-blocks.css. See push-site.mjs ===== */
+.b-cover--split .cv-in { min-height: 100svh; }
+.cv-media { max-height: 78svh; }
+.b-cover--bleed { min-height: 100svh; }
+@media (max-width:1023px) { .cv-media { max-height: 60svh; } }
+@media (max-width:767px) { .b-cover--split .cv-in { min-height: 0; } }
+.st-stage { min-height: 100svh; }
+.sp-pin { min-height: 100svh; }
+@media (max-width:767px), (hover:none) and (pointer:coarse) { .sp-pin { min-height: 0; } }
+.cp-pin { min-height: 100svh; }
+@media (max-width:1023px) { .cp-pin { min-height: 0; } }
+.lg-pin { min-height: 100svh; }
+@media (max-width:1023px) { .lg-pin { min-height: 0; } }
+.ba-pin { min-height: 100svh; }
+.ba-quote { font-variation-settings: 'opsz' 28; }
+@media (max-width:1023px) { .ba-stage.ba-stage { max-height: 44svh; } }
+.rl-pin { min-height: 100svh; }
+.rl-card { width: min(19rem,72vw); }
+.rl-card--text { width: min(22rem,72vw); }
+.rl-end { width: min(22rem,72vw); }
+@media (hover:none) and (pointer:coarse), (max-width:767px) { .rl-pin { min-height: 0; } }
+.sy-card blockquote { font-variation-settings: 'opsz' 28; }
+.pr2-body h2 { font-variation-settings: 'opsz' 36; }
