@@ -70,5 +70,22 @@ Full table in the directive.
 - The GHL consent bridge is still missing on 15 Webflow sites (Phase 1). Consent is collected and
   enforced there; it just is not written onto the GHL lead.
 
+## Correction, same day
+
+**GoHighLevel number pools are exempt from consent.** The client's instruction — *"The pools should
+be running even if the cookie consent is not accepted"* — was already recorded in dr-nahlah's
+`2026-09-22e` run, which reverted the hold this rollout had just put on that site. Confirmed by the
+user as applying everywhere, so the hold was removed from **grand-mission, arvada, livewell and
+IFA** too. Analytics and ad pixels stay tagged. The per-site runbooks in every client worktree carry
+this, and the directive now leads with it.
+
+While doing that, IFA got the same `connect-src` fix dr-nahlah needed: the pool asks for its number
+at `services.leadconnectorhq.com` and the session helper reports to `services.msgsndr.com`, and a
+page with no Embed block keeps the strict CSP that allows neither.
+
+**Grand Mission's defect narrowed rather than went away:** its call tracking is fine now, but the
+ahrefs tag still never releases, so analytics is off there until the Termly dashboard is compared
+with a working site's.
+
 ## Version Control
 This runbook follows the root-level rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

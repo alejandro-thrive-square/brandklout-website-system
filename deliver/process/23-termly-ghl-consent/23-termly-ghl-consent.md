@@ -52,9 +52,21 @@ With `autoBlock=off` Termly itself blocks nothing: measured before any consent c
 (584x329), GHL form iframes (~575-690px wide) and Google Maps all render, and
 `[data-autoblocked]` is 0 on every site. The only things that wait are the ones tagged by hand.
 
-**One consequence to know:** where `number_pool.js` is tagged `advertising`, GoHighLevel's dynamic
-number insertion does not run until the visitor accepts. That is correct consent behaviour, not a
-bug, but it means a declining visitor sees the practice's real number and that call is not attributed.
+### Call tracking is exempt, by client decision
+**GoHighLevel number pools are NEVER consent-tagged.** The client's instruction, 2026-09-22: *"The
+pools should be running even if the cookie consent is not accepted."* It was made knowingly and it
+applies to every site. Tagging `number_pool.js` as `advertising` was tried the same day and reverted
+on dr-nahlah, grand-mission, arvada, livewell and IFA.
+
+Analytics and ad pixels (ahrefs, Meta, the OpenAI pixel) **do** stay tagged. Termly still governs
+those and whatever is tagged inside GTM — just not call tracking.
+
+**A pool that has to reach a second host needs `connectOrigins`.** The pool loads from
+`backend.leadconnectorhq.com` but asks for its number at `services.leadconnectorhq.com`, and the
+session helper reports to `services.msgsndr.com`. On Instatic, a page with **no Embed block** keeps
+the strict CSP, whose `connect-src` allows neither, so the swap is silently refused there and
+nowhere else. Every Brandklout site carrying a pool has this trap; dr-nahlah hit it on 79 of 97
+URLs. Fixed on dr-nahlah and IFA. Webflow emits no CSP, so it cannot happen there.
 
 ### Why `autoBlock=off` and no allowlist
 `autoBlock=on` held Webflow's own JavaScript, every video and map, and the GHL forms (behind an
@@ -167,7 +179,7 @@ preference modal, and no tracker fires before a choice is made.
 | Stone Surgical Arts | Instatic | off | yes | **live, gated** | none |
 | Institute for Advanced Dentistry | Instatic | off | yes | **live, gated** | none (GHL pair tagged in `site-tags.js` 1.1.0) |
 | Westlake Medical Spa | Instatic | off | yes | **live, gated** | none |
-| Grand Mission | Webflow | off | yes | **live, but see defect below** | none before consent, and **none after** — the tags never release |
+| Grand Mission | Webflow | off | yes | **live**; call tracking fine, **ahrefs tag never releases** | pool un-gated by design; ahrefs held forever (defect) |
 | Livewell | Webflow | off | yes | **live, gated** | none (replaced the Silktide trial block) |
 | Omnia | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
 | Legacy Dental | Webflow | off | yes | **live** | **GHL pair, fired by GTM** |
@@ -205,6 +217,9 @@ have not been cut over. Consent is on the Instatic builds and will arrive with t
 WordPress sites have none, and we have no credentials for them.
 
 ## Gotchas
+- **Never consent-tag a GoHighLevel number pool.** See the client decision above. A hold there
+  turns call tracking off for everyone who does not accept, and on Grand Mission it turned it off
+  entirely, because the release never fired at all.
 - **Tagged scripts can stay held forever, and it looks like success.** On Grand Mission the three
   `text/plain` scripts are still held after Accept, so ahrefs and GHL call tracking are simply off.
   Hackensack releases correctly in the same browser run with the same tag values, and the two Termly

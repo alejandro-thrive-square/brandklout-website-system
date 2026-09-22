@@ -10,8 +10,9 @@
     "clientFolder": "grand-mission-dentistry",
     "webflowSiteId": "698111847e9608eb30ee21c6",
     "embed": "https://app.termly.io/resource-blocker/db70a66f-b323-47a5-8db9-fb52fd1b9575?autoBlock=off",
-    "rollout": "live-tags-never-release",
-    "rolloutNote": "DEFECT 2026-09-22: the three tagged scripts (ahrefs, GHL number_pool, user_session) stay type=text/plain after Accept, so analytics and call tracking are currently OFF. Reproducible on / and /contact; Hackensack releases correctly in the same browser run, and the two accounts' region settings and cookie-report flags are identical. Cause unknown - compare the two banners' category settings in the Termly dashboard."
+    "rollout": "live-analytics-tag-never-releases",
+    "rolloutNote": "Call tracking is fine (pool un-gated per client instruction, verified firing before any consent choice). DEFECT: the ahrefs tag stays type=text/plain after Accept, so ahrefs analytics is off. Hackensack releases correctly in the same browser run with the same tag value and identical account settings. Next: compare the two banners' category settings in the Termly dashboard.",
+    "poolsWaitForConsent": false
   },
   {
     "key": "nahlah",
@@ -25,7 +26,8 @@
     "webflowSiteId": null,
     "embed": "https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off",
     "rollout": "live-gated",
-    "rolloutNote": "GHL pair tagged through embed-origins 1.7.0 #consent=advertising."
+    "rolloutNote": "GHL pair tagged through embed-origins 1.7.0 #consent=advertising.",
+    "poolsWaitForConsent": false
   },
   {
     "key": "arvada",
@@ -38,7 +40,9 @@
     "clientFolder": "arvada-dental-center",
     "webflowSiteId": "693c51e685b19f0d0c149cab",
     "embed": "https://app.termly.io/resource-blocker/77ba2aba-a1b9-4abf-b939-15961125d597?autoBlock=off",
-    "rollout": "applied-not-published"
+    "rollout": "applied-not-published",
+    "poolsWaitForConsent": false,
+    "rolloutNote": ""
   },
   {
     "key": "stone-dental",
@@ -65,7 +69,8 @@
     "webflowSiteId": "69d03fdbe999e9907724a69d",
     "embed": "https://app.termly.io/resource-blocker/5fd99c51-71ee-4d73-8914-8d4d8565f19e?autoBlock=off",
     "rollout": "live-gated",
-    "rolloutNote": "Replaced the brandklout-silktide trial block; its two trackers were re-added tagged."
+    "rolloutNote": "Replaced the brandklout-silktide trial block; its two trackers were re-added tagged.",
+    "poolsWaitForConsent": false
   },
   {
     "key": "mason",
@@ -120,7 +125,8 @@
     "webflowSiteId": "68e12d861f12c7f04a762a8e",
     "embed": "https://app.termly.io/resource-blocker/3d3418ed-3972-4274-b429-4ebb8135fec7?autoBlock=off",
     "rollout": "live-trackers-via-gtm",
-    "rolloutNote": "GHL call-tracking pair still fires before consent; it is fired by the GTM container, which the page cannot tag. Fix inside GTM."
+    "rolloutNote": "GHL call-tracking pair still fires before consent; it is fired by the GTM container, which the page cannot tag. Fix inside GTM.",
+    "poolsWaitForConsent": false
   },
   {
     "key": "mason-pediatric",
@@ -333,7 +339,8 @@
     "webflowSiteId": null,
     "embed": "https://app.termly.io/resource-blocker/8fd70023-515c-4230-bf39-f8ad2666f71c?autoBlock=off",
     "rollout": "live-gated",
-    "rolloutNote": "GHL pair tagged inside the site's own site-tags.js 1.1.0."
+    "rolloutNote": "GHL pair un-gated again in site-tags.js 1.2.0 per client instruction. connectOrigins gained services.leadconnectorhq.com + services.msgsndr.com: without them the strict CSP on embed-free pages refuses the number swap.",
+    "poolsWaitForConsent": false
   },
   {
     "key": "oceanic",
