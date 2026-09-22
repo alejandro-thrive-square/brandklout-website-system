@@ -23,6 +23,14 @@ changes nothing visible on the live domain. Check `window.BrandkloutConsentBridg
 `BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
 Privacy Policy link so it matches this site's own type.
 
+**Banner sizing is fixed; keep the control at 1.3.0 or newer.** Termly renders into
+`#termly-code-snippet-support` in the page DOM, not an iframe, so this site's global
+`img { width: 100%; height: 100% }` rule inflated Termly's 76x20 logo to 1348x355 and turned the
+banner into a 511px white slab over the hero. `BrandkloutConsentPreferences` **1.3.0** injects
+`#termly-code-snippet-support :is(img,svg){width:auto;height:auto}` at parse time and fixes it —
+verified live at banner 1408x158, logo 76x20. Rolling below 1.3.0 brings the slab back. Detail:
+[`runbook/2026-09-22b-cookie-banner-oversized-by-a-global-img-rule.md`](./runbook/2026-09-22b-cookie-banner-oversized-by-a-global-img-rule.md).
+
 `TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
 `TERMLY_LIVEWELL`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
 The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
