@@ -93,6 +93,10 @@ vendors both plugins from `bk-dr-nahlah`, installs them, and carries the Brandkl
   4 `twitter:*` and a JSON-LD `@graph`.
 - **Production is configured but NOT published** — see Next. The settings are inert until a publish.
 
+- **Commit** `1914236c` on `bk-brandklout-website` — process 21 brought onto this branch, the new
+  `16-instatic-plugins` workflow, `sites.json`, `PROCESS_INDEX.md`, the module 21 directive and
+  these runbooks. Railway and Cloudflare state is outside every repo, by design.
+
 ### Next
 
 1. **Publish production to turn the SEO tags on** — and know that the same publish ships the
