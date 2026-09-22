@@ -41,6 +41,28 @@ by being created with JavaScript.
 would send (`denied`, opt-out `true`). **Phase 2 must wait for Termly.** A tracker tagged `text/plain`
 never runs until Termly releases it, so tagging before Termly exists switches call tracking off.
 
+### The banner is part of the page, so the page's CSS reaches it
+Termly renders its banner into `#termly-code-snippet-support` in the document, **not** an iframe.
+Every global rule on the site applies to it. Livewell shipped with
+
+```css
+img { width: 100%; max-width: 100%; height: 100%; max-height: 100%; display: inline-block; }
+```
+
+which sized Termly's own 76x20 logo to **1348x355** and turned the banner into a 511px slab over the
+hero. Nothing was wrong with the consent setup; the site's CSS was leaking into a third-party widget.
+
+`kit/consent-preferences.js` 1.3.0 injects a guard at parse time, before the banner exists:
+
+```css
+#termly-code-snippet-support :is(img,svg){width:auto;height:auto}
+```
+
+Only `width` and `height`, because those are what a site sets globally and Termly sets neither — it
+lets its logo size intrinsically. The id selector beats a bare `img` rule on specificity, so no
+`!important` is needed and Termly's own styling still wins everywhere it does set something.
+Confirmed a no-op on a healthy site (dr-nahlah: 76x20 before and after).
+
 ### Webflow does not have Instatic's embed problem
 On Instatic a cookie banner appears to break Vimeo, YouTube, GHL forms and DNI numbers. That is the
 **CSP**, not the banner: Instatic publishes a `Content-Security-Policy` meta tag (`script-src 'self'`,
@@ -217,6 +239,11 @@ have not been cut over. Consent is on the Instatic builds and will arrive with t
 WordPress sites have none, and we have no credentials for them.
 
 ## Gotchas
+- **A third-party widget that renders in the page inherits the page's CSS.** Any global
+  `img`/`svg`/`button` rule can disfigure it, and it will look like the widget is broken. Measure the
+  widget's own elements (`banner.mjs` in the scratchpad pattern: rendered size plus the stylesheet
+  rules that match), do not guess. The guard above covers images; a site with a global `button` or
+  `a` rule could need the same treatment.
 - **Never consent-tag a GoHighLevel number pool.** See the client decision above. A hold there
   turns call tracking off for everyone who does not accept, and on Grand Mission it turned it off
   entirely, because the release never fired at all.

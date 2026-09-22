@@ -26,15 +26,29 @@
  */
 (function () {
   if (window.BrandkloutConsentPreferences) return
-  window.BrandkloutConsentPreferences = '1.2.0'
+  window.BrandkloutConsentPreferences = '1.3.0'
+
+  // Termly renders its banner into the PAGE, not an iframe, so the site's own
+  // CSS reaches it. Livewell had a global `img { width:100%; height:100% }`,
+  // which blew Termly's 76x20 logo up to 1348x355 and made the banner 511px
+  // tall, covering the hero. Reset just those two properties inside Termly's
+  // root: Termly sizes its own logo intrinsically, so `auto` is what it wants,
+  // and the id selector beats a bare `img` rule without needing !important.
+  // Injected at parse time, before the banner exists, so it never flashes.
+  document.head.insertAdjacentHTML('beforeend',
+    '<style>#termly-code-snippet-support :is(img,svg){width:auto;height:auto}</style>')
 
   var LABEL = (window.BrandkloutConsentConfig || {}).preferencesLabel || 'Cookie Preferences'
   // Plain substrings, not regexes, and deliberately so: this file is transcribed
   // into Webflow's register_inline_script through a tool call, and an escape
   // sequence such as \s can lose a backslash layer on the way. No backslash in
   // the source means nothing to lose. `minify` fails the run if one appears.
-  var PRIVACY = ['privacy', 'private-policy', 'private policy']
-  var SECOND = ['terms', 'cookie', 'accessib', 'disclaim', 'hipaa', 'conditions']
+  // 'privacy' alone catches "Privacy Policy" and "Privacy Practices"; the
+  // hyphenated slug is here because two sites spell the URL /private-policy.
+  // 'terms' covers "Terms & Conditions", so 'conditions' would be dead weight —
+  // and every byte counts against Webflow's 2,000-character cap.
+  var PRIVACY = ['privacy', 'private-policy']
+  var SECOND = ['terms', 'cookie', 'accessib', 'disclaim', 'hipaa']
 
   function matches(el, words) {
     var t = (el.textContent + ' ' + el.getAttribute('href')).toLowerCase()
