@@ -22,7 +22,7 @@
   // rather than by an allow-list of production hosts, so a new production host keeps working.
   if (/^staging\./i.test(location.hostname)) return
   if (window.BrandkloutSiteTags) return
-  window.BrandkloutSiteTags = '1.1.0'
+  window.BrandkloutSiteTags = '1.2.0'
 
   var GTM_ID = 'GTM-5XR78DN7'
   var GHL = [
@@ -61,24 +61,13 @@
   // --- GoHighLevel: the number pool, then the session script, in that order -------------------
   // `async = false` on a created element keeps insertion order; without it the pool script can run
   // after the session script and miss the attribution it is meant to read.
-  /* GoHighLevel's call-tracking pair rewrites the number a visitor sees so the
-     call can be attributed to an ad, which makes it advertising, not essential.
-     The tags go in inert: Termly picks up a script[type="text/plain"] carrying
-     data-categories even when it is inserted after Termly has already scanned
-     the page (verified live 2026-09-22), and flips it to text/javascript once
-     the visitor accepts that category. Removing the two attributes would put
-     call tracking back in front of consent. See 23-termly-ghl-consent. */
-  function ghl() {
-    for (var i = 0; i < GHL.length; i++) {
-      var s = document.createElement('script')
-      s.type = 'text/plain'
-      s.setAttribute('data-categories', 'advertising')
-      s.src = GHL[i]
-      s.async = false
-      document.head.appendChild(s)
-    }
-  }
-
+  /* GoHighLevel's call-tracking pair runs for EVERY visitor, consent or not.
+     That is the client's instruction (2026-09-22, recorded in dr-nahlah's
+     runbook 2026-09-22e: "The pools should be running even if the cookie
+     consent is not accepted"), made knowingly. It was briefly tagged
+     type="text/plain" data-categories="advertising" earlier the same day;
+     do not put that back without a new client decision. The Termly banner
+     still governs the GTM tags and ahrefs - just not call tracking. */
   ghl()
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', noscript)
   else noscript()
