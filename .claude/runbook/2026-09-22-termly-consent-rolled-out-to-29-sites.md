@@ -87,5 +87,26 @@ page with no Embed block keeps the strict CSP that allows neither.
 ahrefs tag still never releases, so analytics is off there until the Termly dashboard is compared
 with a working site's.
 
+## Second correction — the banner was oversized on Livewell
+
+The client sent a screenshot: Livewell's banner was a 511px white slab across the hero with a giant
+grey Termly logo. **The consent setup was not at fault.** Termly renders its banner into
+`#termly-code-snippet-support` in the page DOM, not an iframe, so the site's own CSS reaches it, and
+Livewell ships `img { width:100%; max-width:100%; height:100%; max-height:100% }`. That sized
+Termly's own 76x20 logo to 1348x355.
+
+Fixed in `kit/consent-preferences.js` **1.3.0**, which injects at parse time:
+`#termly-code-snippet-support :is(img,svg){width:auto;height:auto}`. Two properties only — what a
+site sets globally, and what Termly sets neither of. Proved in both directions before shipping:
+Livewell 511px/1348x355 -> 158px/76x20, and a healthy site unchanged.
+
+**Only Livewell was affected** of the 15 live sites; the others set `max-width` on `img`, which is
+harmless. The guard shipped to all 29 anyway, including the 11 unpublished, so the bug cannot arrive
+with a later publish. All 15 live sites re-verified afterwards: control 1.3.0 (or the Instatic
+asset), `autoBlock=off`, banner 158-178px, logo 76x20.
+
+Deployed as four parallel worktree-scoped agents rather than from main, per the user's preference
+that client work happen in client sessions.
+
 ## Version Control
 This runbook follows the root-level rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
