@@ -293,6 +293,43 @@ for (const page of PAGES) {
     shippedStyles === 0 && shippedInline === 0,
     `${shippedStyles} style, ${shippedInline} inline script (as shipped)`);
 
+  /* 2026-09-22: the GoHighLevel number pool can only swap a telephone number
+     it can recognise. Its `replaceNumber` matches, in TEXT, only
+     `(NNN) NNN-NNNN`, `NNN-NNN-NNNN`, `NNN.NNN.NNNN` and `(NNN)NNN-NNNN`,
+     and in an `<a href>` a contiguous ten-digit run as well. A number written
+     `571 253 7790`, with a non-breaking space after the area code, or as bare
+     digits in running text is invisible to it: the page keeps the practice's
+     own number, the call is never attributed, and nothing anywhere fails.
+     So the format is a gate, not a preference. `noswap` opts a number out on
+     purpose and is therefore allowed any shape. */
+  const phoneShapes = await evalJs(`(function(){
+    /* The swapper uses String.includes, not a whole-string match, so a
+       recognised form ANYWHERE in the string is enough: "1-800-677-0718"
+       carries "800-677-0718" and swaps fine. */
+    var OK = /(\\(\\d{3}\\)\\s?\\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}|\\d{3}\\.\\d{3}\\.\\d{4})/;
+    var ANY = /(?:\\+?1[\\s.\\u00a0-]?)?\\(?\\d{3}\\)?[\\s.\\u00a0-]?\\d{3}[\\s.\\u00a0-]?\\d{4}/g;
+    var bad = [];
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var n;
+    while ((n = w.nextNode())) {
+      if (n.parentElement && n.parentElement.closest('.noswap')) continue;
+      var m = n.nodeValue.match(ANY);
+      if (!m) continue;
+      m.forEach(function(x){ if (!OK.test(x)) bad.push('text "' + x + '"'); });
+    }
+    [].forEach.call(document.querySelectorAll('a[href^="tel:"]'), function(a){
+      if (a.closest('.noswap')) return;
+      var h = a.getAttribute('href');
+      /* 911 and the other short codes are not ten-digit numbers, so no pool can
+         ever hold one and there is nothing here to keep swappable. */
+      if ((h.match(/\\d/g) || []).length < 10) return;
+      if (!/\\d{10}/.test(h.replace(/[^\\d]/g, '')) && !OK.test(h)) bad.push('href "' + h + '"');
+    });
+    return bad.length ? bad.slice(0, 4).join(', ') : 'ok';
+  })()`);
+  check(page, "every phone number is in a shape the GHL number pool can swap",
+    phoneShapes === "ok", phoneShapes);
+
   const modules = await evalJs(`(function(){
     if (!window.WZ || !WZ.modules) return 'no registry';
     var wrong = WZ.modules.filter(function(m){

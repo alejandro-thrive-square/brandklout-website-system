@@ -1,33 +1,34 @@
-// Generates the home page's Google review wall from the practice's OWN live
-// widget feed, into native markup this package controls.
+// Caches the practice's own ReputationHub feed to reviews.json, and writes the
+// home page's live-feed slot between the REVIEWS markers.
 //
-// WHY THIS EXISTS
-// ---------------
-// The reviews used to be a ReputationHub <iframe>. That cannot work on Instatic
-// and never will: Instatic builds a per-page CSP `<meta>` from module
-// contributions, and `frame-src` is lifted ONLY by its base.video module when it
-// renders a YouTube embed (src/modules/base/video/index.ts). A page with no
-// YouTube node keeps `frame-src 'none'`. There is no env var and no allowlist.
-// `default-src 'self'` also rules out a cross-origin fetch from our own JS, so
-// on that platform the reviews have to be real content, not a live embed.
+// IT NO LONGER WRITES A CARD WALL. As of 2026-09-22 the home page shows the
+// ReputationHub embed and nothing else, by the client's decision; the long note
+// beside `block` below records what that gives up and why the two were on the
+// page together in the first place. Do not re-add a wall here without going
+// back to the client: the cards and the embed are the same reviews, and having
+// both is the exact fault this removed.
 //
-// Self-hosting the vendor script does not help. review-widget.js is 1,974 bytes
-// and is only a postMessage height-resizer; every review lives inside the frame.
+// WHAT THE REST OF THIS FILE IS FOR
+// ---------------------------------
+// The widget PAGE is server-rendered with schema.org microdata, so the real
+// reviews are readable without the frame. gen-blog.mjs reads the reviews.json
+// this writes, and gen-reviews-topic.mjs uses the same feed to build the
+// topic-filtered walls on the veneers landing pages — an embed cannot filter to
+// veneer treatment, so those walls stay.
 //
-// The widget PAGE, though, is server-rendered with schema.org microdata, so the
-// real reviews are readable without the frame. This fetches them and writes the
-// cards straight into pages/home.body.html between the REVIEWS markers.
-//
-// A side benefit worth stating: inside the iframe those reviews belong to
-// reputationhub.site and do nothing for this domain. As native markup they are
-// finally on the page Google is reading.
+// STALE PREMISE, KEPT AS A WARNING. This generator was written because "an
+// iframe cannot work on Instatic and never will": that platform builds its CSP
+// from module contributions and only base.video lifted `frame-src`. That was
+// true when it was written and is not true now — the Embed Origins plugin
+// carries a `frameOrigins` list, and the live home page has been serving a
+// working ReputationHub frame. Check the platform before repeating the claim.
 //
 // DELIBERATELY NOT EMITTING Review/AggregateRating JSON-LD. Self-serving review
 // markup on a business's own page is not eligible for rich results under
 // Google's structured-data policy, and marking it up anyway risks a manual
 // action. The reviews are content here, not a rich-result play.
 //
-//   node gen-reviews.mjs [--limit 6] [--offline]
+//   node gen-reviews.mjs [--offline]
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -89,26 +90,13 @@ const reviews = OFFLINE
   ? JSON.parse(fs.readFileSync(CACHE, "utf8"))
   : await fetchReviews();
 fs.writeFileSync(CACHE, JSON.stringify(reviews, null, 1));
-console.log(`${reviews.length} reviews (${OFFLINE ? "cached" : "fetched"}), rendering ${Math.min(LIMIT, reviews.length)}`);
+console.log(`${reviews.length} reviews (${OFFLINE ? "cached" : "fetched"}) cached to reviews.json`);
 
-const MONTH = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-// Month first, day second (US convention, and the practice is in Virginia).
-// Changed 2026-08-25 at the client's request; was `18 Aug 2026`.
-const when = (iso) => {
-  const [y, m, d] = iso.split("-");
-  return `${MONTH[Number(m) - 1]} ${Number(d)}, ${y}`;
-};
-
-const card = (r) => `        <article class="rv-card">
-          <div class="rv-meta">
-            <span class="rv-stars" aria-hidden="true">${"★".repeat(r.rating)}</span>
-            <span class="rv-when">${when(r.date)}</span>
-          </div>
-          <p>&ldquo;${esc(r.body)}&rdquo;</p>
-          <footer><span class="rv-av" aria-hidden="true">${esc(r.author.trim()[0])}</span>${esc(r.author)}<i>Google</i></footer>
-        </article>`;
-
-const shown = reviews.slice(0, LIMIT);
+/* The card renderer that used to live here went with the wall on 2026-09-22.
+   gen-reviews-topic.mjs still has its own, for the veneers landing pages; if a
+   wall is ever wanted back on the home page, take it from there rather than
+   writing a third one. `LIMIT` now only bounds what is logged. */
+void LIMIT;
 
 // NOT computing the headline score from this feed. The widget serves only the
 // most recent handful of reviews, carries no aggregateRating, and those happen
@@ -116,24 +104,41 @@ const shown = reviews.slice(0, LIMIT);
 // this to on 2026-08-10. A sample is not an average. The score in .rv-score is
 // the client's figure and this generator does not touch it, nor claim a count.
 
-const block = `      <!-- Generated by gen-reviews.mjs from the practice's own ReputationHub feed.
-           Native markup, not the vendor iframe: Instatic's CSP allows a frame
-           only for YouTube, so an embed can never render there, and inside a
-           frame these reviews count for reputationhub.site rather than for this
-           domain. Re-run the generator to refresh; do not hand-edit the cards. -->
-      <div class="rv-wall" data-rv="stagger">
-${shown.map(card).join("\n")}
-      </div>
-      <a class="rv-more" href="patient-stories.html">Read the patient stories <i></i></a>
-
-      <!-- The practice's LIVE review feed. It replaces the cards above wherever
-           the host allows a third-party frame, which is local and Webflow, and
-           is removed without trace where it does not, which is Instatic: that
-           platform builds its CSP from module contributions and base/video is
-           the only module in its codebase that declares any, so frame-src ever
-           only lists YouTube. Cards first, upgrade second, so there is no state
-           in which this section is empty. Wired in ch-proof.js. -->
-      <div class="rv-live" data-widget="${WIDGET}" data-probing></div>`;
+/* 2026-09-22 — THE HOME PAGE IS EMBED ONLY, BY CLIENT DECISION.
+ *
+ * The card wall above used to be the content and `.rv-live` the upgrade, because
+ * Instatic could not render a third-party frame at all. That is no longer true:
+ * the Embed Origins plugin carries a `frameOrigins` list (Vimeo went in on
+ * 2026-09-21), and the live home page has been serving a working ReputationHub
+ * iframe since the widget was pinned in. What it was ALSO serving was the six
+ * generated cards, immediately above it — the same reviews twice.
+ *
+ * The duplication was not a restore going wrong. `ch-proof.js` hides the wall
+ * when the widget settles, but it hides `.rv-wall` only if it finds the
+ * `.rv-live` slot it built the frame into, and on the published page that slot
+ * is gone: the frame there is a separate brandklout Embed block. So the hide
+ * never ran, and both were on the page.
+ *
+ * Two things are knowingly given up, and the client was asked before this
+ * changed: ~356 words of review text that counted for this domain rather than
+ * for reputationhub.site, and the copy a visitor sees with JavaScript off or
+ * with the widget failing. The section can now be empty; it could not before.
+ *
+ * `reviews.json` is still fetched and cached here — gen-blog.mjs reads it — and
+ * the veneers landing pages keep their own topic-filtered wall, which an embed
+ * cannot reproduce because it cannot filter to veneer treatment
+ * (gen-reviews-topic.mjs). The `.rv-wall` / `.rv-card` rules in
+ * css/37-ch-proof.css therefore stay: those pages still use them.
+ */
+const block = `      <!-- The practice's LIVE review feed, and on this page the only reviews.
+           A brandklout Embed block on the platform; this local slot is what
+           ch-proof.js builds the same frame into so the page matches what is
+           published. Nothing renders here without JavaScript, which is the
+           accepted cost of the client's 2026-09-22 call for embed-only.
+           Cards are still generated for the veneers landing pages by
+           gen-reviews-topic.mjs; do not re-add a wall here. -->
+      <div class="rv-live" data-widget="${WIDGET}" data-probing></div>
+      <a class="rv-more" href="patient-stories.html">Read the patient stories <i></i></a>`;
 
 let page = fs.readFileSync(PAGE, "utf8");
 const BEGIN = "<!-- REVIEWS:BEGIN -->", END = "<!-- REVIEWS:END -->";
@@ -149,4 +154,4 @@ page = page.replace(
   `$1Recent Google reviews from both practices. Their words, not ours.$2`);
 
 fs.writeFileSync(PAGE, page);
-console.log(`wrote ${shown.length} cards into pages/home.body.html`);
+console.log("wrote the live-feed slot into pages/home.body.html (no card wall: embed only)");

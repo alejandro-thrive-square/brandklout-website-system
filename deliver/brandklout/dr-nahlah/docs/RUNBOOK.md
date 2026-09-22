@@ -4,12 +4,13 @@ The **standing** state of this project: what is true now, what is next, and the 
 Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) — read the index,
 then only the runs you need. Do not read them all.
 
-## Where things stand (2026-09-21)
+## Where things stand (2026-09-22)
 
 | | |
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
-| **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. |
+| **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. Home page reviews are the ReputationHub **embed only** since 2026-09-22. |
+| **Call tracking** | GoHighLevel DNI is LIVE and **proved swapping** on 2026-09-22: `(571) 253-7790` -> a pool number, text and `tel:` alike, on every page. The other three published numbers are not in the pool. See the 2026-09-22 run. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
 
@@ -64,11 +65,30 @@ then only the runs you need. Do not read them all.
    is how seventeen pins sat open for a month.
 7. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
    are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
+   **Leave it that way unless tags are actually being tested there**: with `siteScripts` on,
+   the clone starts claiming real GoHighLevel pool numbers.
+8. **In GoHighLevel**: only `(571) 253-7790` is a forwarding number in the DNI pool, so only
+   that number is attributed. Decide with the client whether `(571) 702-9900`,
+   `(703) 448-3312` and `(703) 940-5410` should be tracked too. Nothing on the site changes.
+9. **The home page's reviews now have no fallback.** `check-review-embed.mjs` is the check;
+   the vendor was serving zero reviews as recently as 2026-09-21.
 
 ## Standing traps
 
 These bite every time somebody works in here. The per-run files carry the rest.
 
+- **The home page reviews are the EMBED ONLY, and `.rv-wall` still matters elsewhere.** The
+  six-card wall came off `/` on 2026-09-22 at the client's request. Do NOT revert
+  `fix-rv-wall-display.mjs` to undo it: `.rv-wall{display:grid}` is a site-wide rule and the
+  two veneers consultation pages still use it. Remove nodes from a page, never the rule.
+  `restore-review-wall.mjs` would put the wall back and also looks for the pre-migration
+  plugin id, so it is the wrong tool for that page now.
+- **A phone number written in the wrong shape silently stops swapping.** The GHL pool reads
+  `(NNN) NNN-NNNN`, `NNN-NNN-NNNN`, `NNN.NNN.NNNN` and `(NNN)NNN-NNNN` in text, and a
+  ten-digit run in an href. Spaces, a non-breaking space or bare digits in text are invisible
+  to it and nothing fails. `site-test.mjs` gates this; `dni-proof.mjs` proves the swap.
+- **Proving DNI burns pool numbers if you clear cookies per page.** Clear once per run and
+  walk the site as one visitor, which is what `dni-proof.mjs` does.
 - **`site-src/` is the source; `final-site/` is output.** Edit the body, the partial or the
   CSS component, then rebuild. Three page lists move together: `PAGES` in `build-site.mjs`,
   and the lists in `site-test.mjs` (derived) and `fluid-qa.mjs` (hardcoded).
