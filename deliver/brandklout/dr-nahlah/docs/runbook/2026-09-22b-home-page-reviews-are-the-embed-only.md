@@ -41,7 +41,7 @@ So the duplication was structural, not a bad restore, and reverting
 
 ## Done
 
-Commit: see below.
+Commit: `61d880a9`
 
 - **`22-instatic-api-sync/drop-home-review-wall.mjs`** (new) — removes the `.rv-wall` subtree
   (61 nodes) from the home page document and nothing else. Seven guards run against the
