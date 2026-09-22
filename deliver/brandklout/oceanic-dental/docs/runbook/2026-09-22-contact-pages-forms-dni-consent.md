@@ -83,7 +83,13 @@ user's call.
 4. Decide what `/contact` becomes (nav links point there; it still has the native Webflow form).
    Options: a location chooser linking to the two new pages, or a 301 to one of them.
 5. ~~En-dash HB numbers~~: all fixed and published.
-6. GHL side (Brandklout team): the eleven `privacy_*` consent fields on both forms. See module 23.
+6. **GHL consent fields are MISSING on both forms** (checked 2026-09-22 from the public form pages: 0 of
+   11 on `wF05U3sxrzyvd6Hi4y3s` and `u3CsmKEaGt3BVpDDUaR0`; Stone Dental's `0mtZk3CrshD7Y0OYOao4`, the
+   reference, has all 11). The bridge already appends the values and GHL drops them. By hand, in BOTH
+   sub-accounts (FV `8WmQ7YIU19Ypcyg8yYnJ`, HB `v7GvWjHADYoI7Kae7xbU`): create the 11 fields in folder
+   `Consent` with Query Key = field key (spec in module 23), add them hidden to the Contact Form, and
+   submit a test lead. There are no GHL credentials in `~/.webzite/.env`. Re-check with
+   `curl -s https://api.leadconnectorhq.com/widget/form/<id> | grep -o 'privacy_[a-z_]*' | sort -u`.
 
 ## Gotchas
 
