@@ -14,7 +14,7 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 
 | # | Piece | Where | Phase |
 | :--- | :--- | :--- | :--- |
-| 1 | **GHL consent bridge** ([`kit/ghl-consent-bridge.js`](./kit/ghl-consent-bridge.js)) | Webflow: registered site script `BrandkloutConsentBridge`, footer. Instatic: script asset `src/scripts/brandklout-consent-bridge.js`, all pages, body end | **1: agent**, no Termly needed |
+| 1 | **GHL consent bridge** ([`kit/ghl-consent-bridge.js`](./kit/ghl-consent-bridge.js)) | Webflow: registered site script `BrandkloutConsentBridge`, **header** (see gotchas). Instatic: script asset `src/scripts/brandklout-consent-bridge.js`, all pages, body end | **1: agent**, no Termly needed |
 | 2 | **Termly script**, `?autoBlock=off` ([`kit/termly-head.html`](./kit/termly-head.html)) | Site-wide head, **above GTM** | **2**: needs the client's Termly account |
 | 3 | **Trackers tagged** `type="text/plain" data-categories="…"` | Wherever they sit | **2** |
 | 4 | **Consent Preferences link** ([`kit/consent-preferences-link.html`](./kit/consent-preferences-link.html)) | Every footer, landing pages included | **2** (the link does nothing until Termly loads) |
@@ -81,7 +81,7 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
 2. **Verify the hosted copy:** `curl` the returned `hostedLocation` and `cmp` it against the min file.
    It must be identical; the file was typed through a tool call.
 3. `get_site_scripts`. A 404 means no site scripts are applied, and then `add_site_script` fails with
-   the same 404, so use `set_site_scripts` with just `[{id, location: "footer", version}]`.
+   the same 404, so use `set_site_scripts` with just `[{id, location: "header", version}]`.
    If scripts are already applied, `add_site_script` keeps them.
 4. **Publish only when nothing else is pending.** Check that `get_site` `lastUpdated` is within seconds
    of `lastPublished`. Applying a registered script does not change `lastUpdated`, but a freeform code
@@ -115,6 +115,7 @@ script is served same-origin, so `script-src 'self'` is enough.
 | Site | Platform | ID / base | Bridge | Live? | Termly | Trackers outside GTM (phase 2) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Stone Dental Implant Center | Webflow | `6a07d5aac093f0e4521d29bc` | 2.2.0 registered; old v2.0 paste removed from footer | **v2.0 live**; v2.2 ships on next publish (left unpublished: pending state unclear) | **done**, off, above GTM | done (GHL tagged) |
+| Oceanic Dental | Webflow | `66cd6c49cbb85d43d9e41a7c` | 2.2.0, **header** (2026-09-22) | next publish (not published by the agent: Designer edits were pending) | **done**, off, first in head | Google Ads gtag tagged; GHL DNI self-gated (`OceanicDNI`, see gotchas); **GA4 via Webflow integration untaggable — move by hand**; `/brighten` page GA4 untagged |
 | Grand Mission Dentistry | Webflow | `698111847e9608eb30ee21c6` | 2.2.0 | **live** (published 2026-09-17), checked on /contact and /free-e-book | — | GHL (head), Ahrefs; GTM noscript only, no GTM loader in head |
 | Arvada Dental Center | Webflow | `693c51e685b19f0d0c149cab` | 2.2.0 | next publish (Designer changes pending since 2026-09-15) | — | GHL (head **and** footer, loaded twice), OpenAI pixel |
 | Legacy Dental Pasadena | Webflow | `68e12d861f12c7f04a762a8e` | 2.2.0 | next publish (pending since 2026-09-10; also serves caldentalpasadena.com) | — | GHL, Meta Pixel, Ahrefs, Sally AI widget |
@@ -132,6 +133,18 @@ script is served same-origin, so `script-src 'self'` is enough.
 All Instatic sites above were checked live on 2.2.0 on 2026-09-17 (IFA's form carried `denied`).
 
 ## Gotchas
+- **Webflow registered scripts take `data-*` attributes only.** `set_site_scripts` with
+  `type: "text/plain"` answers 400 "each key is prefixed with 'data-'", so a registered script can't be
+  Termly-tagged. Gate it in the script instead: wait for `window.Termly.on`, and inject the tracker only
+  when `Termly.getConsentState().advertising === true` (on `initialized` and `consent`). First used
+  for Oceanic Dental's per-page DNI loader (`deliver/brandklout/oceanic-dental/site-scripts/dni-loader.js`).
+- **Webflow's built-in Google Analytics integration** (Site settings → Apps & Integrations) prints its
+  gtag config above all custom code, so above Termly, and nothing in custom code can tag it. Remove the
+  ID there and re-add it in the head as `type="text/plain" data-categories="analytics"`. Spot it by
+  `gtag('set', 'developer_id.dZGVlNj', true)` in the served HTML.
+- **Webflow registered scripts go in the header**: a footer script is emitted last, and malformed page
+  markup can swallow it as text (South Bay, AVA, 2026-09-22). The bridge defers its own work, so head
+  placement costs nothing.
 - **Termly accounts are created by hand, and a free-account key automates nothing** (re-probed
   2026-09-21). The key a free dashboard hands out is a *per-website legacy token*, not an account
   credential: a bogus value against `app.termly.io/api/v1/cookie_whitelist` answers `Couldn't find

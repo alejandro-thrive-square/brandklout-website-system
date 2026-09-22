@@ -9,7 +9,7 @@ Client delivery (Brandklout partner engagement).
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 | :--- | :--- | :--- |
-| `webflow-oceanic-dental` | Webflow reads and writes for the Oceanic Dental site **only** | **Registered 2026-09-22, awaiting OAuth** |
+| `webflow-oceanic-dental` | Webflow reads and writes for the Oceanic Dental site **only** | **Authorized 2026-09-22**; `list_sites` returns only Oceanic Dental |
 | `webflow-clientfirst` | Local Client-First tooling, no network | Available |
 
 ### Why a dedicated instance, when the rest of Brandklout shares one
@@ -38,8 +38,8 @@ dedicated server for this site on 2026-09-22. Two things support that:
 | Resource | Value | Status |
 | :--- | :--- | :--- |
 | Webflow workspace | Brandklout (`63b4b7393e89b78575e9a9bb`) | Per the user, 2026-09-22 |
-| Webflow site | _Oceanic Dental_ | Name not yet confirmed |
-| Site ID | _unknown_ | **Read-only until recorded here from `list_sites`/`get_site`** |
+| Webflow site | Oceanic Dental (`oceanic-dental`), live on `www.oceanicdental.com` + `oceanicdental.com` | Confirmed 2026-09-22 |
+| Site ID | `66cd6c49cbb85d43d9e41a7c` | Recorded from `list_sites`, 2026-09-22 |
 
 Before any mutating call, pass the site ID from this table explicitly. Never act on whichever
 site a tool defaults to.
