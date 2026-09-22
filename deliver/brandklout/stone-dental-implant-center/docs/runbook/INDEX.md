@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-17 | Consent kit promoted to process module 23; GHL bridge v2.2 on all Webflow + Instatic sites | [`2026-09-17-consent-module-23-rollout.md`](./2026-09-17-consent-module-23-rollout.md) |
 | 2026-09-16 | Termly standard v2 LIVE: autoBlock off, no allowlist, tracking tagged, bridge v2 | [`2026-09-16-termly-standard-v2-autoblock-off.md`](./2026-09-16-termly-standard-v2-autoblock-off.md) |
 | 2026-09-16 | Termly allowlist + head order LIVE: site renders and embeds play before consent | [`2026-09-16-termly-allowlist-head-order.md`](./2026-09-16-termly-allowlist-head-order.md) |
