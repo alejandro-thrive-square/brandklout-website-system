@@ -67,6 +67,20 @@ user's call.
   Verified live as one visitor with the banner untouched: `/book` swapped both numbers (HB to
   909-2982, FV to 874-8019, 2 assigns), then `/` showed the same numbers with no new assign.
 
+## Update 3: our side of the GHL consent mapping, verified live
+
+- The "script in custom code" from earlier runs is the consent bridge. It is here as registered script
+  2.2.0 (header). Livewell's 2.3.0 only adds the Silktide source, and Oceanic runs Termly, so 2.2.0 is
+  correct. Don't sync it up.
+- `consent-kit.mjs check … --termly-proxy` on both contact pages: bridge 2.2.0, banner, 0 autoblocked,
+  preferences link 1, form `denied` (`.tmp/oceanic-check.txt` in module 23).
+- Driven on `/contact-huntington-beach`: before any choice the frame URL carries 8 values, all denied
+  (timestamp, receipt and policy are empty by design and left out). After Accept it carries all 11:
+  `granted`, the timestamp, policy `77900657` and a receipt UUID.
+- **What remains is GHL only:** the account manager creates the 11 fields (Query Key = field key) in
+  both sub-accounts and adds them hidden to the forms (item 6 below). No site change is needed after
+  that.
+
 ## Next
 
 1. **Publish** (user). Then run `node deliver/process/23-termly-ghl-consent/consent-kit.mjs check
