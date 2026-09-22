@@ -83,6 +83,24 @@ on the `railway ssh` call and nowhere else; pipe nothing out of a Node 24 script
 Railway (libuv assertion); capture full pages only under reduced motion; the B-roll has blank frames
 that the encodes trim; journey-audit caps chapters at eight.
 
+
+## Cookie consent (Termly) — 2026-09-22
+
+**Applied and published to the Instatic build**, which is not yet the live site. Nothing fires before a visitor chooses. Account `westlaimplants@thrivesquare.com`, website UUID
+`ca7a6606-636f-4af5-a0f0-83aaf6ec1ff1`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_WEST_LA`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+
 ## Version Control
 
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
