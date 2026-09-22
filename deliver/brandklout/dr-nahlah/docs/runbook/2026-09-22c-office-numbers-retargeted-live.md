@@ -15,7 +15,7 @@ made with the duplication shown to them. Collapsing Tysons to a single line is a
 
 ## Done
 
-Commit: see below. Published and audited: **79/79 URLs clean**, head and body.
+Commit: `ede9b71a`. Published and audited: **79/79 URLs clean**, head and body.
 
 - **`04-design/.tmp/retarget-office-numbers.mjs`** (new) — rewrites the source. 165
   replacements across 38 files, then refuses to exit 0 if any retired form survives.
