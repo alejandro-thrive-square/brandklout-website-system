@@ -27,7 +27,11 @@
  *   node dni-proof.mjs                       # production home page
  *   node dni-proof.mjs <url> [<url> ...]
  *   node dni-proof.mjs --accept <url> ...  # click the cookie banner's Accept first
+ *   node dni-proof.mjs --relay <url> ...   # a visitor who never answers the banner
  *
+ * UPDATE, later on 2026-09-22: by client instruction the tags are NO LONGER
+ * consent-held, so `--relay` (no consent step) is the normal run on this
+ * workstation. `--accept` is kept for a site that does hold them.
  * Since the Termly rollout (2026-09-22) both LeadConnector tags publish as
  * `type="text/plain" data-categories="advertising"`: they do not run at all
  * until the visitor accepts. Without --accept a fresh visitor proves only that
@@ -43,6 +47,8 @@ import http from 'node:http'
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const URLS = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const ACCEPT = process.argv.includes('--accept')
+// --relay: only the Node relay for LeadConnector calls (see below), no consent step.
+const RELAY = ACCEPT || process.argv.includes('--relay')
 const TARGETS = URLS.length ? URLS : ['https://www.drnahlah.com/']
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -69,11 +75,12 @@ let id = 0
 const pending = new Map()
 const logs = []
 const calls = []
+const reqUrls = new Map()
 ws.addEventListener('message', async (ev) => {
   const raw = typeof ev.data === 'string' ? ev.data : await ev.data.text()
   const m = JSON.parse(raw)
   if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); return }
-  /* --accept also relays the pool's LeadConnector calls through Node: NordVPN
+  /* --accept / --relay relay the pool's LeadConnector calls through Node: NordVPN
      Threat Protection fails them inside Chrome ("TypeError: Failed to fetch")
      while Node reaches them fine. The real request goes out and the real
      answer comes back; only the transport changes. */
@@ -102,9 +109,12 @@ ws.addEventListener('message', async (ev) => {
     const u = m.params.response.url
     if (/leadconnectorhq|number-pools|user_session/.test(u)) calls.push(m.params.response.status + ' ' + u)
   }
+  if (m.method === 'Network.requestWillBeSent') reqUrls.set(m.params.requestId, m.params.request.url)
   if (m.method === 'Network.loadingFailed') {
     const rid = m.params.requestId
-    if (m.params.type === 'Script') calls.push('FAILED ' + (m.params.errorText || '') + ' req=' + rid)
+    const u = reqUrls.get(rid) || ''
+    if (m.params.type === 'Script' || /leadconnectorhq|msgsndr/.test(u))
+      calls.push('FAILED ' + m.params.type + ' ' + (m.params.errorText || '') + ' ' + (m.params.blockedReason || '') + ' ' + (m.params.corsErrorStatus ? JSON.stringify(m.params.corsErrorStatus) : '') + ' ' + (u || 'req=' + rid))
   }
 })
 await new Promise((r) => ws.addEventListener('open', r, { once: true }))
@@ -121,7 +131,7 @@ const { sessionId } = await send('Target.attachToTarget', { targetId: pt.targetI
 await send('Page.enable', {}, sessionId)
 await send('Runtime.enable', {}, sessionId)
 await send('Network.enable', {}, sessionId)
-if (ACCEPT) await send('Fetch.enable', { patterns: [{ urlPattern: 'https://services.leadconnectorhq.com/*' }] }, sessionId)
+if (RELAY) await send('Fetch.enable', { patterns: [{ urlPattern: 'https://services.leadconnectorhq.com/*' }] }, sessionId)
 // A real Chrome UA: the HeadlessChrome string is refused by some of the third
 // parties this site loads (see the Vimeo note in the runbook).
 await send('Network.setUserAgentOverride', {

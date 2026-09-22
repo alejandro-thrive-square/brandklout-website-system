@@ -10,7 +10,7 @@ then only the runs you need. Do not read them all.
 | :--- | :--- |
 | **Platform** | Instatic on Railway. Production `www.drnahlah.com`, staging `staging.drnahlah.com` (a full clone). Webflow is superseded. |
 | **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages**, live and verified. `/five-year-warranty` added 2026-09-21. Home page reviews are the ReputationHub **embed only** since 2026-09-22. |
-| **Call tracking** | **ON, consent-held.** Two GoHighLevel pools since 2026-09-22d: Alexandria's (swaps (571) 617-7245) in the head of every page except `ads-landing-pages/tysons-*`, Tysons' (swaps (703) 448-3312) on those nine. Scoped by embed-origins **1.8.0** `pages=`/`except=` (`set-site-tags.mjs`; gate `check-pool-scope.mjs`). Swap proved in text and `tel:` with `dni-proof.mjs --accept`. Both tags stay `data-categories="advertising"`, so they don't run until a visitor accepts; that choice is still open. |
+| **Call tracking** | **ON for every visitor, no consent needed** (client, 2026-09-22e). Two GoHighLevel pools: Alexandria's (swaps (571) 617-7245) in the head of every page except `ads-landing-pages/tysons-*`, Tysons' (swaps (703) 448-3312) on those nine. Scoped by embed-origins **1.8.0** `pages=`/`except=` (`set-site-tags.mjs`). `connectOrigins` carries `services.leadconnectorhq.com` + `services.msgsndr.com`; without them, pages with no embed refuse the swap. Gate: `check-pool-scope.mjs`. Proof: `dni-proof.mjs --relay`. |
 | **Telephone numbers** | Tysons Corner · McLean **(703) 448-3312** (both lines), Alexandria new patients **(571) 617-7245**, Alexandria current patients (703) 940-5410. Retargeted 2026-09-22c; `(571) 702-9900` and `(571) 253-7790` are retired everywhere including the structured data. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
@@ -69,8 +69,8 @@ then only the runs you need. Do not read them all.
    **Leave it that way unless tags are actually being tested there**: with `siteScripts` on,
    the clone starts claiming real GoHighLevel pool numbers.
 8. ~~**In GoHighLevel**: only `(571) 253-7790` was pooled.~~ **SUPERSEDED 2026-09-22d**: one pool per office,
-   each forwarding the office's new-patient number. Open: should call tracking wait for
-   cookie consent (it does now), and should `(703) 940-5410` be tracked (it is not).
+   each forwarding the office's new-patient number. Consent: decided 2026-09-22e, the pools
+   run without it. Open: should `(703) 940-5410` be tracked (it is not).
 9. **The home page's reviews now have no fallback.** `check-review-embed.mjs` is the check;
    the vendor was serving zero reviews as recently as 2026-09-21.
 

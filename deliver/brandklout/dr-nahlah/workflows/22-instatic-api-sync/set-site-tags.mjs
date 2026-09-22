@@ -29,9 +29,13 @@
  * is on those nine pages only. Scoped with embed-origins 1.8.0's `except=` /
  * `pages=` line options, matched against the page slug. No page is pointed at
  * a number by hand — each pool swaps whatever forwarding number it owns, in
- * link text and tel: href alike. Both stay consent-tagged (`advertising`), as
- * the Termly rollout set them. Any older number_pool.js line is replaced, not
- * kept beside the new ones.
+ * link text and tel: href alike. Any older number_pool.js line is replaced,
+ * not kept beside the new ones.
+ *
+ * NOT consent-tagged, by client instruction (2026-09-22): the pools and the
+ * session helper run for every visitor whether or not the cookie banner is
+ * accepted. The Termly rollout had tagged them `#consent=advertising`; do not
+ * put that back.
  */
 import { api, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
@@ -42,14 +46,19 @@ const TAGS = [
   'https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off',
   'https://www.googletagmanager.com/gtm.js?id=GTM-MR7K64XD',
   // Alexandria: site-wide, except the Tysons ads landing pages.
-  'https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js#consent=advertising&except=ads-landing-pages/tysons-*',
+  'https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js#except=ads-landing-pages/tysons-*',
   // Tysons Corner: the Tysons ads landing pages only.
-  'https://backend.leadconnectorhq.com/appengine/loc/xJDu1mFoW5jFYTNqmuk7/pool/YeoEOlrWx1ugHvOq8qoB/number_pool.js#consent=advertising&pages=ads-landing-pages/tysons-*',
-  'https://backend.leadconnectorhq.com/appengine/js/user_session.js#consent=advertising',
+  'https://backend.leadconnectorhq.com/appengine/loc/xJDu1mFoW5jFYTNqmuk7/pool/YeoEOlrWx1ugHvOq8qoB/number_pool.js#pages=ads-landing-pages/tysons-*',
+  'https://backend.leadconnectorhq.com/appengine/js/user_session.js',
 ]
 const POOL_RE = /\/number_pool\.js|\/user_session\.js/
 const FRAME = ['https://app.termly.io']
-const CONNECT = ['https://us.consent.api.termly.io']
+// The pool loads from backend.leadconnectorhq.com (granted with the tag) but
+// asks for its number at services.leadconnectorhq.com, and the session helper
+// reports to services.msgsndr.com. A page with no Embed block keeps the strict
+// CSP, so without these two the swap was refused on every such page
+// (/our-team, /privacy-policy …) while pages with an embed swapped fine.
+const CONNECT = ['https://us.consent.api.termly.io', 'https://services.leadconnectorhq.com', 'https://services.msgsndr.com']
 
 const lines = (s) => String(s ?? '').split(/\r?\n/).map((l) => l.trim()).filter(Boolean)
 const merge = (cur, add) => { const out = lines(cur); for (const a of add) if (!out.includes(a)) out.push(a); return out.join('\n') }

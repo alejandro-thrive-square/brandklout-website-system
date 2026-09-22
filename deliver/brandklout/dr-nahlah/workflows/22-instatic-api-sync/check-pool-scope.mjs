@@ -2,7 +2,9 @@
 /**
  * check-pool-scope.mjs — every sitemap URL carries exactly the GoHighLevel
  * number pool it should, in the <head>: Alexandria's everywhere except the
- * Tysons ads landing pages, Tysons' on those nine only (2026-09-22).
+ * Tysons ads landing pages, Tysons' on those nine only (2026-09-22). And
+ * every LeadConnector tag must be a live `<script>`, never consent-held
+ * `type="text/plain"`: the pools run whether or not the banner is accepted.
  *
  *   node check-pool-scope.mjs > .tmp/pool-scope.txt
  */
@@ -27,9 +29,14 @@ for (const url of urls) {
   const want = isTysonsLp(path) ? TYS : ALX
   const other = want === ALX ? TYS : ALX
   const inHead = head.split(want).length - 1
-  const ok = res.status === 200 && inHead === 1 && !html.includes(other)
+  const held = /<script[^>]*type="text\/plain"[^>]*leadconnectorhq/.test(head)
+  // The pool's assign-number call must be allowed by the page's own CSP.
+  const csp = (head.match(/http-equiv="Content-Security-Policy"\s+content="([^"]*)"/i) || [])[1] || ''
+  const connect = (csp.split(';').map((d) => d.trim()).find((d) => d.startsWith('connect-src')) || '').split(/\s+/)
+  const canCall = !csp || connect.includes('https:') || connect.includes('https://services.leadconnectorhq.com')
+  const ok = res.status === 200 && inHead === 1 && !html.includes(other) && !held && canCall
   n++; if (isTysonsLp(path)) tys++
-  if (!ok) { bad++; console.log(`FAIL ${res.status} ${path} want=${want === ALX ? 'alexandria' : 'tysons'} inHead=${inHead} other=${html.includes(other)}`) }
+  if (!ok) { bad++; console.log(`FAIL ${res.status} ${path} want=${want === ALX ? 'alexandria' : 'tysons'} inHead=${inHead} other=${html.includes(other)} held=${held} canCall=${canCall}`) }
 }
 console.log(`${n} URLs, ${tys} Tysons LP, ${bad} failing`)
 process.exit(bad ? 1 : 0)

@@ -92,11 +92,13 @@ Since **plugin `1.7.0`** a line may end with `#consent=advertising` (or `analyti
 Since **plugin `1.8.0`** (2026-09-22, Dr. Nahlah) the line fragment takes `&`-joined options, and a line can be scoped to pages. `pages=<glob>[,<glob>]` puts it only on those pages; `except=<glob>[,<glob>]` puts it on every page but those. A glob is a page slug with `*` wildcards, matched against the `slug` the publish context passes (the home page is `index`; a data-row entry arrives with its **template's** slug, so all blog posts are `post`). Example: two call-tracking pools, one per office:
 
 ```
-…/pool/<alexandria>/number_pool.js#consent=advertising&except=ads-landing-pages/tysons-*
-…/pool/<tysons>/number_pool.js#consent=advertising&pages=ads-landing-pages/tysons-*
+…/pool/<alexandria>/number_pool.js#except=ads-landing-pages/tysons-*
+…/pool/<tysons>/number_pool.js#pages=ads-landing-pages/tysons-*
 ```
 
 If there is no slug, a `pages=` line is left off and an `except=` line stays on. An unknown option (`exept=`) or a malformed glob refuses the whole line, because a typo in `except` must not quietly put the script on the pages it names. Host grants follow the tags: a page that gets none of a host's scripts is not granted that host. **Before `1.8.0` there was no way to keep a site script off a page**, and a one-page script belonged in an Embed block. Use scoping for the head. It is a cleaner place than a body embed for a tracker that has to run before the page's numbers render.
+
+**A site script's host grant covers only that host.** A tracker that loads from one host and calls another needs the second host in `connectOrigins`, and the gap shows **only on pages without an Embed block**, which keep the strict CSP. Pages with an embed run compatible (`connect-src https:`) and hide it. GoHighLevel's call-tracking pool is exactly this: it loads from `backend.leadconnectorhq.com` and asks for its number at `services.leadconnectorhq.com` (its session helper reports to `services.msgsndr.com`). On Dr. Nahlah that refused the swap on 79 of 97 URLs, while every page anyone had tested swapped (2026-09-22e). Any site carrying the pool needs both hosts in `connectOrigins`.
 
 **Live 2026-09-12: the Sienna accessibility widget on every instance.** URL: `https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js`. It needs all three jsdelivr grants: the script, a `fetch` of `dist/locales/`, and the OpenDyslexic font.
 

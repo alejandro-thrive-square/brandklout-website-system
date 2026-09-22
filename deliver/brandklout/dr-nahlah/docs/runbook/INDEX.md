@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-22 | 2026-09-22e — DNI pools no longer wait for cookie consent (client); a strict CSP had been refusing the pool's number request on 79 of 97 URLs (every page without an embed), fixed and proved — carries **gotchas** | [`2026-09-22e-dni-pools-without-consent-and-csp-fix.md`](./2026-09-22e-dni-pools-without-consent-and-csp-fix.md) |
 | 2026-09-22 | 2026-09-22d — two GoHighLevel number pools scoped per office: Alexandria site-wide except the Tysons ads pages, Tysons on those nine (embed-origins 1.8.0 `pages=`/`except=`); swap proved in text and `tel:` — carries **gotchas** | [`2026-09-22d-two-dni-pools-scoped-per-office.md`](./2026-09-22d-two-dni-pools-scoped-per-office.md) |
 | 2026-09-22 | 2026-09-22c — new-patient numbers retargeted per office (Tysons (703) 448-3312, Alexandria (571) 617-7245), live on 79 URLs; the head needed a separate fix from the body — carries **gotchas** | [`2026-09-22c-office-numbers-retargeted-live.md`](./2026-09-22c-office-numbers-retargeted-live.md) |
 | 2026-09-22 | 2026-09-22b — home page reviews: the six-card wall removed, the ReputationHub embed is the only reviews there; why both were on the page — carries **gotchas** | [`2026-09-22b-home-page-reviews-are-the-embed-only.md`](./2026-09-22b-home-page-reviews-are-the-embed-only.md) |

@@ -46,7 +46,7 @@ Commit: `481402de`.
   before this one, or take ours for the four `18-instatic-embeds` files.** `1.8.0` is a
   superset of `1.7.0`. A site that reinstalls `1.7.0` loses the scoping, and both pools then
   land on every page.
-- **Both pools are still consent-held**, `type="text/plain" data-categories="advertising"`,
+- **SUPERSEDED by 2026-09-22e: the pools are no longer consent-held.** Was: **Both pools are still consent-held**, `type="text/plain" data-categories="advertising"`,
   as the Termly rollout left them. A visitor who has not accepted advertising cookies sees
   the practice's own numbers and no call is attributed. Left as found; whether call tracking
   should wait for consent is a compliance call for the client or agency, not something to
@@ -57,9 +57,9 @@ Commit: `481402de`.
   does on Accept, and relays `services.leadconnectorhq.com` through Node, CORS preflight
   included. Without the relay every `assign-number` is `TypeError: Failed to fetch`. That is
   the VPN, not GoHighLevel. Direct Node calls to the pool return 201.
-- **Each proof run burns one tracking number per pool.** Four runs today. The first run's
-  first page sometimes missed the relay; the second page then read from the pool's cache.
-  Don't loop it.
+- **Each proof run burns one tracking number per pool.** Don't loop it. (The "first page
+  missed the relay" seen here was NOT the harness: it was a real CSP block on pages without an
+  Embed block, found and fixed in 2026-09-22e.)
 - **Ordinary pages swap only Alexandria's number.** Tysons' (703) 448-3312 is in every footer
   and stays static outside the Tysons landing pages, and on those pages Alexandria's printed
   number stays static. That follows the strategy as given. Adding the other pool to a page
