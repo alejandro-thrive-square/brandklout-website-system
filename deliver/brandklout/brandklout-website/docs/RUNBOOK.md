@@ -12,6 +12,21 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: LIVE ON brandklout.ai - v18 verbatim with Client-First type roles (seq 47)
 
+- **2026-09-22: there is a STAGING instance.** `https://staging.brandklout.ai/admin`, same login
+  as production, a full copy of the site, de-indexed at the Cloudflare edge and with its Railway
+  host deleted so it has one door. **Redesign work goes there, not on production** — Instatic's
+  publish replaces every page at once. Promotion is
+  `clone-site.mjs --strategy merge-overwrite`, never `--media`.
+  [`runbook/2026-09-22-staging-and-cloudflare.md`](./runbook/2026-09-22-staging-and-cloudflare.md).
+- **2026-09-22: the site finally has an SEO layer.** Open Graph + AEO Schema are installed and
+  configured on both instances ([`workflows/16-instatic-plugins`](../workflows/16-instatic-plugins/16-instatic-plugins.md));
+  until today every page emitted no canonical, no `og:*` and no JSON-LD. Staging is published and
+  carries them. **Production is configured but not published** — and that publish will also ship
+  the NavBar logo currently sitting unpublished in production's draft.
+- **2026-09-22: Cloudflare hardened.** SSL `full` to **`strict`**, Always Use HTTPS **on**,
+  minimum TLS **1.2**. Still open: `www` does not 301 to the apex (the API refuses redirect rules
+  to account-owned tokens — it is a dashboard job), no `sitemap.xml`, no analytics of any kind, and
+  no SPF/DMARC on the domain.
 - **2026-09-22: the domain cutover is done.** The site and its admin are on **brandklout.ai**.
   Admin link to hand out: **<https://brandklout.ai/admin>** (`www.brandklout.ai/admin` and the
   old `brandklout-production.up.railway.app/admin` both still work). `PUBLIC_ORIGIN` now lists

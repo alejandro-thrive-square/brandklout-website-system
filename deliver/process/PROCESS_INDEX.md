@@ -72,10 +72,11 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 18 | Instatic Embeds | [18-instatic-embeds.md](./18-instatic-embeds/18-instatic-embeds.md) |
 | 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _promoted on the `bk-dr-nahlah` branch as `deliver/process/19-cloudflare-launch/`; **not yet merged to `main`**_ |
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
-| 21 | Instatic Upload (build → import → publish) | _client-local — `bk-stone` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion.**_ |
+| 21 | Instatic Staging Clone & Promotion | [21-instatic-staging-clone.md](./21-instatic-staging-clone/21-instatic-staging-clone.md) — promoted on `bk-mason-park`, **not yet merged to `main`**; present here because `bk-brandklout-website` ran it on 2026-09-22 |
+| ~~21~~ | Instatic Upload (build → import → publish) | _client-local — `bk-stone`, `bk-ifa-dentistry` and `bk-brandklout-website` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion, and it must take a free number**: `21` is already the promoted Staging Clone above._ |
 | 22 | Instatic API Sync (CSS registry, publish, parity gate) | [22-instatic-api-sync.md](./22-instatic-api-sync/22-instatic-api-sync.md) |
 
-### Instatic modules (`18`, `20`, `22`)
+### Instatic modules (`18`, `20`, `21`, `22`)
 
 Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and all three are needed on every such site:
 
