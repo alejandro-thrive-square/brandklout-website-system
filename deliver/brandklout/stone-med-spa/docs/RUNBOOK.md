@@ -15,6 +15,12 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
+**2026-09-23, later — the phone is (817) 767-4188, with call tracking on production.** Changed in
+place on production (13 pages, seq 19) and on staging (24 pages), and in `site-src/`. The
+GoHighLevel number pool is in Embed Origins `siteScripts` on **production only**
+(`set-dni-pool.mjs` refuses staging). The swap has not been proven yet —
+[run](./runbook/2026-09-23-new-phone-and-dni-pool.md).
+
 **2026-09-23 — the client's BugHerd pass is on STAGING, not production.** 41 tasks on production
 (BugHerd project 540569): 38 applied on `https://staging.westlaketxmedspa.com` (seq 13, **24
 pages** — eleven new treatment pages generated from `treatment-pages.mjs`), 3 waiting on Drive
