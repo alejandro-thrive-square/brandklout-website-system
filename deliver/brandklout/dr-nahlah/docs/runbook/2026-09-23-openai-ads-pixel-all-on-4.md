@@ -3,6 +3,9 @@
 Request (Alejandro): add the ChatGPT Ads pixel (`oaiq`, pixel id `2EKUEqMZC1in13nT8T8eb5`)
 and its `lead_created` conversion event to the All-on-X landing pages.
 
+> **SUPERSEDED 2026-09-23b:** the pixel is now on the ChatGPT page only, off all six pages below.
+> See `2026-09-23b-chatgpt-all-on-4-landing-page.md`.
+
 ## Done
 
 Commit: `31265aab`

@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 /**
- * set-openai-pixel.mjs — the OpenAI Ads (ChatGPT Ads) conversion pixel on the
- * six All-on-4 ads landing pages (2026-09-23).
+ * set-openai-pixel.mjs — the OpenAI Ads (ChatGPT Ads) pixel, on the ChatGPT
+ * All-on-4 landing page ONLY (`ads-landing-pages/alexandria-all-on-4-chatgpt`).
+ *
+ * History: 2026-09-23 it went on the six Google All-on-4 ads pages; the same day
+ * Brandklout asked for a dedicated ChatGPT page (dup-chatgpt-landing.mjs) and
+ * for the pixel to come OFF the Google pages. Re-running this narrows both the
+ * SDK line and the code asset to that one page.
  *
  *   node set-openai-pixel.mjs            # show current and intended
  *   node set-openai-pixel.mjs --apply    # write the draft; publish separately
@@ -9,17 +14,16 @@
  * Two halves, because Instatic's CSP refuses inline script:
  *
  *  1. The SDK, `https://bzrcdn.openai.com/sdk/oaiq.min.js`, as an embed-origins
- *     `siteScripts` line scoped `pages=ads-landing-pages/*-all-on-4*`. NOT
+ *     `siteScripts` line scoped `pages=ads-landing-pages/alexandria-all-on-4-chatgpt`. NOT
  *     consent-tagged, by client instruction (2026-09-23): like the GoHighLevel
  *     pools, it runs whether or not the cookie banner is accepted. The line
  *     grants bzrcdn.openai.com; the SDK POSTs events to bzr.openai.com, which
  *     goes into `connectOrigins` or every event is refused on a strict-CSP page.
  *
  *  2. `openai-ads-pixel.js` as the code asset `src/scripts/openai-ads-pixel.js`,
- *     scoped to those six pages: the queue stub, `init`, and on the two
- *     thank-you pages `measure lead_created`. Both All-on-4 LeadConnector forms
- *     redirect to their office's thank-you page on submit (read from the forms
- *     on 2026-09-23), so the thank-you page view IS the lead.
+ *     scoped to that page: the queue stub and `init`. NO `lead_created`: the page
+ *     keeps Alexandria's Google AO4 form (client choice), which redirects to the
+ *     Google thank-you page, and the pixel is not on that page any more.
  *
  * Read-merge-write throughout. Nothing here publishes.
  */
@@ -32,10 +36,10 @@ import { api, getSite, getPages, saveShell, BASE } from '../../../../process/22-
 const HERE = dirname(fileURLToPath(import.meta.url))
 const APPLY = process.argv.includes('--apply')
 const PLUGIN = 'brandklout.embed-origins'
-const SDK_LINE = 'https://bzrcdn.openai.com/sdk/oaiq.min.js#pages=ads-landing-pages/*-all-on-4*'
+const SDK_LINE = 'https://bzrcdn.openai.com/sdk/oaiq.min.js#pages=ads-landing-pages/alexandria-all-on-4-chatgpt'
 const CONNECT = 'https://bzr.openai.com'
 const ASSET = 'src/scripts/openai-ads-pixel.js'
-const SLUG_RE = /^ads-landing-pages\/(alexandria|tysons)-all-on-4(-consultation|-thank-you)?$/
+const SLUG_RE = /^ads-landing-pages\/alexandria-all-on-4-chatgpt$/
 
 const lines = (s) => String(s ?? '').split(/\r?\n/).map((l) => l.trim()).filter(Boolean)
 const merge = (cur, add) => { const out = lines(cur); if (!out.includes(add)) out.push(add); return out.join('\n') }
@@ -53,11 +57,11 @@ for (const k of ['siteScripts', 'connectOrigins']) {
   console.log(`  ${k.padEnd(15)} ${cur[k] === nextSettings[k] ? 'keep  ' : 'CHANGE'}`)
 }
 
-// ── 2. code asset, scoped to the six pages ──────────────────────────────────
+// ── 2. code asset, scoped to the one page ──────────────────────────────────
 const rows = (await getPages()).rows
 const pages = rows.filter((r) => SLUG_RE.test(r.cells?.slug ?? r.slug))
 for (const r of pages) console.log(`  page ${r.id}  /${r.cells?.slug ?? r.slug}`)
-if (pages.length !== 6) { console.error(`expected 6 All-on-4 pages, found ${pages.length}`); process.exit(1) }
+if (pages.length !== 1) { console.error(`expected the ChatGPT page, found ${pages.length}`); process.exit(1) }
 
 const content = readFileSync(resolve(HERE, 'openai-ads-pixel.js'), 'utf8')
 const { site: shell, seq } = await getSite()
