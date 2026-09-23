@@ -20,7 +20,6 @@ The BugHerd pass stays on staging, still waiting on its go.
   on 24 pages plus the shell, and published `{"publishedPages":24}`. **No pool**: the script
   refuses the staging host.
 - Backups: `05-instatic-upload/.tmp/backup-<host>-2026-09-23-pre-phone/`.
-- Commit `309b7647`.
 
 ## Verified
 
