@@ -23,8 +23,8 @@
  *
  * WHY GENERATE A FILE instead of having scripts read the master directly: four
  * different loaders already walk up to a repo-root `.env`
- * (18-instatic-embeds/lib/insta-api.mjs, 18-instatic-embeds.py,
- * 22-instatic-api-sync/insta-api.mjs, mason-park's live-qa.mjs), and agents write
+ * (instatic-embeds/lib/insta-api.mjs, instatic-embeds.py,
+ * instatic-api-sync/insta-api.mjs, mason-park's live-qa.mjs), and agents write
  * throwaway .mjs that does the same naive thing. Generating the file they
  * already expect means none of them change and none of them can forget.
  *

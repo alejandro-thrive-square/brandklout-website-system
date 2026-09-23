@@ -160,7 +160,7 @@ or The Invitation where the objection actually lands, not as its own band.
 6. **Interaction on every interactive element** — magnetic or cursor-aware CTAs, hover states with
    real transitions, animated accordions/tabs/sliders.
 7. **Considered typography** — scale, weight contrast, and rhythm doing visible work, sized off the
-   **fluid root font-size** (see [fluid-root.md](../../process/04-design/fluid-root.md)). Type,
+   **fluid root font-size** (see [FLUID-ROOT.md](./FLUID-ROOT.md)). Type,
    spacing and radii in `rem`; **no `px` font-sizes and no `clamp()` font-sizes** — the fluid root
    already does that job, and `clamp()` on top of it scales twice.
 8. **A signature moment** — one thing per page a visitor would remember and describe.
@@ -252,7 +252,7 @@ and a full-page capture that both reported clean. Same exposure for any state a 
 (selected quiz option, open FAQ) — those are tweened as rgba strings too.
 
 Scroll with motion on, collect console errors and exceptions, drive the controls, and read back
-the colour actually painted on the element. `workflows/08-qa/.tmp/runtime-colour.mjs` and
+the colour actually painted on the element. `workflows/04-qa/.tmp/runtime-colour.mjs` and
 `interact-colour.mjs` on the Arvada build are the reference implementations.
 
 One trap in writing those probes: **Webflow wraps every embed in a div carrying the same class**,
@@ -293,7 +293,7 @@ Capture every page full-height at each breakpoint and **look at the images**:
 | 1440 | Desktop |
 | 1920 | Large desktop |
 
-Store under `workflows/08-qa/.tmp/screenshots/<page-slug>/<width>.png`.
+Store under `workflows/04-qa/.tmp/screenshots/<page-slug>/<width>.png`.
 
 Check for, and fix:
 

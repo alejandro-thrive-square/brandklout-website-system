@@ -13,9 +13,14 @@ then only the runs you need. Do not read them all.
   follow it with `bash scripts/sparsify-worktree.sh --undo`. See
   [the run](./runbook/2026-09-22-system-v2-worktree-created.md).
 
+- **`deliver/process/` is now scenarios plus tools** (2026-09-23): `scenario-0-new-site`, `scenario-1-migration`,
+  `scenario-3-updates-expansions`, `scenario-5-ads-landing-pages`, and unnumbered `tools/`. The old 00–23
+  modules and the client folders are gone from this worktree (still on `main` and `bk-*`). Open questions
+  and next steps: [the run](./runbook/2026-09-23-process-reshaped-into-scenarios.md).
+
 - **Figma is readable by API and editable through Chrome.** `FIGMASECRET` is a working PAT. The
   Deliver SOP board and the Sitemap board (Relume ads sitemap + five specialty templates) live in
-  FigJam; `01-content-intake` step 5 starts every sitemap from a specialty template. REST cannot
+  FigJam; Scenario 0 step 02 starts every sitemap from a specialty template. REST cannot
   write FigJam — see [the run](./runbook/2026-09-22-figma-sop-board-and-specialty-sitemaps.md).
 
 - **The new system diagram now has a concrete architecture proposal:**

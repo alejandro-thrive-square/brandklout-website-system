@@ -1,0 +1,10 @@
+# Export bundles and media chunks carry the client's full site content and
+# images. They are reproducible in seconds from the live instance, so they are
+# never committed — see the Version Control section of the .md.
+.tmp/
+chunks/
+*.zip
+*.tgz
+*.b64
+uploads-list.txt
+__pycache__/

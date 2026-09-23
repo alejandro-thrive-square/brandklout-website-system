@@ -51,7 +51,7 @@ Every capability runs without an MCP client attached, which is what makes it tes
 
 ```bash
 node server.mjs eval_length '{"expr":"clamp(1.9rem,3.6vw,3.75rem)"}'
-node server.mjs harvest_style_guide '{"css_path":"deliver/process/00-client-delivery-initialization/style-guide/assets/webzite-relume.webflow.shared.62ada462d.css","out":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
+node server.mjs harvest_style_guide '{"css_path":"deliver/process/tools/client-first-style-guide/assets/webzite-relume.webflow.shared.62ada462d.css","out":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
 node server.mjs validate_payload '{"payload":"deliver/dr-nahlah/workflows/07-webflow-build/.tmp/probe/specialist.json","vocab":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
 ```
 

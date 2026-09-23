@@ -3,7 +3,6 @@
 # Heavy binary/media files inside .tmp remain excluded by the asset rules below.
 # Browser style-capture fetched resource mirrors are noisy third-party caches;
 # keep resource-urls.json instead.
-manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 # Rendered-DOM mirrors from content-intake captures are the same kind of noisy
 # third-party cache (~7.5MB for one client). The structured meta.json extracted
 # from each one is committed instead, and capture.mjs re-fetches the raw page.

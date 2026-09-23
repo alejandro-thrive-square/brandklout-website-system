@@ -70,7 +70,7 @@ node deliver/brandklout/scripts/asana-context.mjs --all
 node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>   # e.g. into a worktree
 ```
 
-Writes to `<client>/workflows/01-content-intake/.tmp/asana-context/`:
+Writes to `<client>/workflows/01-client-inquiry/.tmp/asana-context/`:
 
 - `CONTEXT.md` — the readable brief: full tree, verbatim descriptions, comments, attachment index
 - `context.json` — raw structured pull

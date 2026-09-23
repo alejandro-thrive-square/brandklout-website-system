@@ -147,7 +147,7 @@ pressure:
   awwwards-grade, motion-led, benchmarked against the Dr. Nahlah build. Copying the reference's
   visual design is a failure, and so is shipping a plain templatised page.
 - **Build locally**, at
-  `deliver/brandklout/<client>/workflows/04-design/.tmp/<page-slug>/`, and report the full path.
+  `deliver/brandklout/<client>/workflows/03-design-build/.tmp/<page-slug>/`, and report the full path.
 - **Local approval comes before Webflow.** Use the shared `webflow-brandklout` grant only for the
   exact site ID in the client's access file, and follow the pasteable-components build standard.
 - **Never invent testimonials, reviews, patient stories, or statistics.** Real practices, real

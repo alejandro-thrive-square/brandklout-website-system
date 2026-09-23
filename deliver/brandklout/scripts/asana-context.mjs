@@ -128,7 +128,7 @@ async function download(att, dir) {
 }
 
 async function pullClient(slug, gids, outOverride) {
-  const outDir = outOverride ?? join(CLIENT_ROOT, slug, 'workflows', '01-content-intake', '.tmp', 'asana-context')
+  const outDir = outOverride ?? join(CLIENT_ROOT, slug, 'workflows', '01-client-inquiry', '.tmp', 'asana-context')
   const attDir = join(outDir, 'attachments')
   await mkdir(attDir, { recursive: true })
 

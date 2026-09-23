@@ -1,0 +1,31 @@
+{
+  "_comment": "Scenario 5 campaign manifest. Copy to deliver/brandklout/<client>/workflows/ads-landing-pages/combo.json and fill it. Every gate in this folder reads it. Values below are Livewell's live set, the reference.",
+  "client": "livewell-dental",
+  "platform": "webflow",
+  "origin": "https://www.livewelldentalva.com",
+  "productionOrigin": "https://www.livewelldentalva.com",
+  "prefix": "ads-landing-pages/",
+  "phone": "(703) 844-2975",
+  "tags": [
+    "app.termly.io/resource-blocker",
+    "googletagmanager.com",
+    "number_pool.js"
+  ],
+  "campaigns": [
+    {
+      "name": "Dental Implants",
+      "landing": "dental-implants",
+      "consultation": "dental-implant-consultation",
+      "thankYou": "thank-you-implants",
+      "formId": "WFEJsiC2yvdshNv2x2ff",
+      "conversion": "Page view of the thank-you URL. GTM-KL36RQV2 loads GA4 only (no AW- tag, 2026-09-23), so it is a GA4 key event imported into Google Ads; owner confirms in Ads"
+    }
+  ],
+  "pools": [
+    {
+      "src": "appengine/loc/As99qqyDrwVnWjg9w9qB/pool/WSleOccLOiEA2I19YBdH/number_pool.js",
+      "pages": ["*"],
+      "except": []
+    }
+  ]
+}

@@ -144,7 +144,7 @@ Local PC ←──→ rclone bisync ──────────────�
 Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (100 GB)** is the single source of truth for those assets.
 
 - **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
-- **Deliver Project Files** (`deliver/[client-name]/workflows/[workflow-name]/.tmp/`): Initial client-provided source material lives once in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`. Later workflow inputs, generated media, extracted assets, design prototypes, and final assets live in the `.tmp/` folder of the workflow that receives, produces, or uses them. Repo-friendly files in these paths are committed; heavy binary/media files are synced to the VPS.
+- **Deliver Project Files** (`deliver/brandklout/<client>/workflows/<step>/.tmp/`): each scenario step writes into its own folder, named after the step (for example `workflows/03-design-build/.tmp/`). Client photos, videos and brand files live in the client's Google Drive and are pulled with `scripts/drive.mjs` into the step that uses them; never keep the only copy in a worktree.
 - **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
 - **Sync commands** — use `scripts/sync-assets.sh` (wraps rclone with the correct filters):
   ```bash
@@ -257,7 +257,7 @@ It is sectioned, and the sections are load-bearing:
 | `[vars]` | nothing — never written to a `.env` | named definitions, referenced as `${NAME}` from any section |
 
 **Why sections rather than one flat list.** `INSTATIC_BASE_URL` differs per client and the shared
-Instatic toolkit deliberately refuses to guess it ([18-instatic-embeds](./deliver/process/18-instatic-embeds/18-instatic-embeds.md)):
+Instatic toolkit deliberately refuses to guess it ([instatic-embeds](./deliver/process/tools/instatic-embeds/instatic-embeds.md)):
 a flat file holding several would resolve first-match and publish one client's plugin to **another
 client's site**. A missing section fails loudly instead. For the same reason the **main worktree gets
 `[shared]` only** — no client's site URL can leak into work done there.

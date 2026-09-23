@@ -34,15 +34,16 @@ Ignored: `Task 1` `1217163732661467`, `Task 2` `1217163732661469`, `Task 3` `121
 have the note "This is a placeholder task created for you". No client, no scope. Confirm with
 Brandklout before treating them as real work.
 
-## Build platform — RESOLVED: Webflow
+## Build platform
 
-Confirmed 2026-08-05. Pages ship to **Webflow**. GoHighLevel appears only as a *lead destination*
-(forms, tracking numbers), not as the page builder — so `sites.leadconnectorhq.com` references are
-structure references, not the platform.
+New sites are built on **Instatic** (Scenario 0, `deliver/process/scenario-0-new-site/`). Sites that
+are already live on **Webflow** stay there and get updates through Scenario 3. GoHighLevel appears only
+as a *lead destination* (forms, tracking numbers), not as the page builder, so
+`sites.leadconnectorhq.com` references are structure references, not the platform.
 
-Delivery sequence: **design and build locally first → review → then Webflow.** No Webflow paste
-happens until a page is approved locally. Use the shared Brandklout grant only against the exact
-site ID recorded in the client's access file.
+Delivery sequence on both platforms: **build and review first, then publish.** On Webflow, use the
+shared Brandklout grant only against the exact site ID recorded in the client's access file
+(2026-08-05 this section said Webflow for everything; superseded 2026-09-23).
 
 ## Commercial terms — no pricing on this batch
 
@@ -76,7 +77,7 @@ like the reference is a commercial failure, not a success.
 Practical method per page:
 
 1. **Capture** the reference at full page, desktop + mobile, into
-   `workflows/01-content-intake/.tmp/reference-captures/<page-slug>/`.
+   `workflows/01-client-inquiry/.tmp/reference-captures/<page-slug>/`.
 2. **Extract** the section order, the offer/proof/CTA rhythm, and the copy angles into a short
    structure note next to the captures. That note is the brief.
 3. **Design original** work against the client's own brand (see the content rule below).
@@ -93,14 +94,14 @@ Practical method per page:
 Local first, in the owning client's workflow folder:
 
 ```
-deliver/brandklout/<client>/workflows/04-design/.tmp/<page-slug>/
+deliver/brandklout/<client>/workflows/03-design-build/.tmp/<page-slug>/
 ```
 
 Each page ships as a self-contained coded HTML/CSS/JS package, the same pattern as
 [`livewell-dental`](../livewell-dental/docs/project-overview.md). **State the full path of what you
 built** when reporting back, so it can be opened and reviewed without hunting.
 
-Webflow build (`07-webflow-build`) comes after local approval. Brandklout uses one shared
+Webflow build (`webflow-build`) comes after local approval. Brandklout uses one shared
 `webflow-brandklout` OAuth grant because the partner owns the workspace; isolation is enforced by
 the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The current build
 standard is pasteable section components, followed by surgical MCP edits and staging verification.
@@ -126,7 +127,7 @@ than per-client direction:
 Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
 a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
 [`asana-context.mjs`](../scripts/README.md#getting-the-real-brief--asana-contextmjs) and read
-`<client>/workflows/01-content-intake/.tmp/asana-context/CONTEXT.md`.
+`<client>/workflows/01-client-inquiry/.tmp/asana-context/CONTEXT.md`.
 
 They are the real brief, and they carry verified practice facts — doctors, offers, phone numbers,
 genuine testimonials — that remove most of the "never invent content" risk. Key gotcha: attachments

@@ -37,9 +37,9 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 
 ## Operational Protocol
 1. **Understand the Pillar**: Before starting a task, read the rules for the relevant pillar.
-2. **Locate the Workflow**: Workflows are stored in subfolders with a `.md` directive and a `.py` executor.
-3. **Use Artifacts**: Store all intermediate data in the `.tmp/` folder within the specific workflow directory.
-4. **Token Optimization**: Filter your context to the specific workflow folder you are executing.
+2. **Locate the Step**: Delivery is organised as scenarios in `deliver/process/scenario-*/`, one `.md` directive per step; the scripts they use live in `deliver/process/tools/` (or the scenario's `scripts/`). Start at [deliver/process/PROCESS_INDEX.md](./deliver/process/PROCESS_INDEX.md). The FigJam board *Deliver SOP's* draws the same scenarios; keep them in step.
+3. **Use Artifacts**: Store all intermediate data in the client's `deliver/brandklout/<client>/workflows/<step>/.tmp/` folder.
+4. **Token Optimization**: Read the step directive you are executing and only the tools it names.
 5. **MCP Management**: MCP servers are shared infrastructure in `mcp-servers/`. Register new servers with `claude mcp add --scope project`. Before using any MCP, read the nearest `mcp-access.md` and the referenced profile in `mcp-servers/profiles/`. See [MCP Index](./mcp-servers/MCP_INDEX.md) and [MCP Access Model](./mcp-servers/ACCESS_MODEL.md).
 6. **Directive Improvement Loop**: At task completion, update the related directive `.md` files used to learn or execute the process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement.
 7. **Runbook Loop**: Also at task completion, add a dated run file at `deliver/brandklout/<client>/docs/runbook/YYYY-MM-DD-<slug>.md`, add its row to that folder's `INDEX.md`, and refresh the standing `docs/RUNBOOK.md`. Repo-level work that belongs to no client goes to `.claude/runbook/` instead. **Runbooks are tracked — commit them.** Read `INDEX.md` and only the runs you need, never the whole history — Done (with the commit SHA), Next, and especially **Gotchas**. Write it for a reader with no memory of your session, and read it yourself when you pick a worktree up; it is no longer injected for you. This is a separate obligation from the directive loop above: directives capture reusable process, the runbook captures the live state of *this* worktree.

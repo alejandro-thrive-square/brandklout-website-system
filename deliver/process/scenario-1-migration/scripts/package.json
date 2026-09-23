@@ -1,0 +1,9 @@
+{
+  "name": "scenario-1-migration-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Old-site capture and redirect tooling for scenario 1 (migration). Run npm install here once.",
+  "dependencies": {
+    "puppeteer-core": "^24.43.1"
+  }
+}

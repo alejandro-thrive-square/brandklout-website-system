@@ -43,7 +43,7 @@ It writes nothing anywhere.
 
 Pulling Relume library components/sections as a source of structure when building or converting
 pages. It complements, and does not replace, the local conversion pipeline
-(`deliver/process/**/html-to-webflow-clipboard.md`, `webflow-clientfirst`).
+(`webflow-clientfirst`).
 
 > [!WARNING]
 > Relume output is a **starting structure**, not a deliverable. The house standard is the awwwards

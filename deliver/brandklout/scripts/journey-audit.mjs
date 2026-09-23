@@ -91,8 +91,11 @@ const skipped = [];
 function discover() {
   const out = [];
   for (const [wt, client] of CLIENTS) {
-    const root = join(WORKTREE_ROOT, wt, 'deliver/brandklout', client, 'workflows/04-design/.tmp');
-    if (!existsSync(root)) continue;
+    // Scenario 0 layout first; client branches built before 2026-09-23 still use 04-design.
+    const root = ['workflows/03-design-build/.tmp/site-src', 'workflows/03-design-build/.tmp', 'workflows/04-design/.tmp']
+      .map((p) => join(WORKTREE_ROOT, wt, 'deliver/brandklout', client, p))
+      .find((p) => existsSync(p));
+    if (!root) continue;
     for (const e of readdirSync(root)) {
       const d = join(root, e);
       if (statSync(d).isDirectory() && existsSync(join(d, 'index.html'))) out.push([client, e, d]);
