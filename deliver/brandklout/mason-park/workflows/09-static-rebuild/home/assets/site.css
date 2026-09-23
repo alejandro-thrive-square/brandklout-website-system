@@ -6454,3 +6454,24 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
 }
 .phone-copied.is-on { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .phone-copied { transition: none; } }
+
+/* ========================================================================
+   BugHerd round five (2026-09-23). Export: .tmp/bugherd/tasks-2026-09-23.json.
+   ======================================================================== */
+
+/* #201  Implant restorations hero: the patient is in the chair at the foot of
+   the frame; the default 30% kept the ceiling and cut the chair off. */
+.ch-arrival.is-compact .ar-bg img[src*="mp-scanner-screen-2-"] { object-position: 50% 85%; }
+
+/* #158  Blog topic tiles: one height across the row, and the topic name on
+   one line. The <li> is the grid item, so the <a> inside has to be told to
+   fill it; the name wrapped at 4-up because of its .16em tracking. */
+.bl-topics > li { display: flex; }
+.bl-topics > li > .bl-topic { flex: 1 1 auto; }
+@media (min-width: 992px) { .bl-topic_name { white-space: nowrap; letter-spacing: .08em; } }
+
+/* #159  The article grid drew its rules as its own background showing
+   through a 1px gap, so an unfilled last row was a solid sand block. The
+   rules are now each card's outline, and an empty cell is the page. */
+.bl-grid { background: transparent; border: 0; }
+.bl-grid > .bl-card { outline: 1px solid var(--rule); }

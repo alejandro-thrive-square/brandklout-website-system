@@ -1,11 +1,12 @@
 # Runbook index
 
-23 runs, newest first. Each line is one file in this folder.
+24 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-23 | 2026-09-23 — BugHerd round five: 143 photographs, and every card of the qualify grid gets one — carries **gotchas** | [`2026-09-23-bugherd-round-five-photographs.md`](./2026-09-23-bugherd-round-five-photographs.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-21 | 2026-09-21 — BugHerd round four: the hours, the phone number, and the finder | [`2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md`](./2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md) |
 | 2026-09-18 | 2026-09-18 - The Webflow ad pages on production: already cloned, verified, two leaks fixed | [`2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md`](./2026-09-18-webflow-ad-pages-on-production-verified-and-fixed.md) |

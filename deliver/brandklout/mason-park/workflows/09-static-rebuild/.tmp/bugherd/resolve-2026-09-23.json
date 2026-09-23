@@ -1,0 +1,3908 @@
+[
+ {
+  "n": 3,
+  "url": "/",
+  "text": "The bottom of the logo is being cut off",
+  "att": [
+   {
+    "file": "3-att1-image.png",
+    "sha": "9d261bd9eb",
+    "bytes": 39312
+   }
+  ],
+  "shot": "screens-2026-09-23/3.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>header.navbar_component>div.padding-global>div.container-xlarge>div.navbar_container>a.navbar_logo-link>img.navbar_logo",
+  "status": 200,
+  "page": "/",
+  "slot": {
+   "section": null,
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": "mp-logo-nav-422x180.png",
+   "imgAlt": "Mason Park Dental of Katy",
+   "frame": "a.navbar_logo-link",
+   "w": 180,
+   "h": 77,
+   "aspect": 2.345
+  }
+ },
+ {
+  "n": 66,
+  "url": "/financing",
+  "text": "Cherry needs to be linked so patients can apply independently",
+  "att": [],
+  "shot": "screens-2026-09-23/66.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap>table.cp-matrix>thead>tr>th:nth-of-type(3)",
+  "status": 200,
+  "page": "/financing/",
+  "slot": {
+   "section": "ways.ch.ch-ways",
+   "heading": "Four ways to pay for it.",
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 293,
+   "h": 112,
+   "aspect": 2.613
+  }
+ },
+ {
+  "n": 110,
+  "url": "/services/preventative-dentistry",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "110-att1-image.png",
+    "sha": "9facf50b80",
+    "bytes": 2775368
+   }
+  ],
+  "shot": "screens-2026-09-23/110.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/preventative-dentistry/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "Fresher breath, whiter teeth",
+   "img": "mp-ceiling-screen-1536x2046.jpg",
+   "imgAlt": "The view from the chair: a screen on the ceiling",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 111,
+  "url": "/",
+  "text": "Replace the miniature with the attached image",
+  "att": [
+   {
+    "file": "111-att1-image.png",
+    "sha": "87d056ff59",
+    "bytes": 95684
+   }
+  ],
+  "shot": "screens-2026-09-23/111.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(1)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(1)>a>span.rg-thumb>img",
+  "status": 200,
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "li.rg-item 1/4",
+   "cardName": null,
+   "img": "mp-hygienist-working-5-1536x2046.jpg",
+   "imgAlt": null,
+   "frame": "span.rg-thumb",
+   "w": 67,
+   "h": 54,
+   "aspect": 1.235
+  }
+ },
+ {
+  "n": 112,
+  "url": "/",
+  "text": "Replace de miniature with the image attached",
+  "att": [
+   {
+    "file": "112-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/112.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(1)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(3)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "li.rg-item 3/4",
+   "cardName": null,
+   "img": "mp-sterilizer-2-1536x2046.jpg",
+   "imgAlt": null,
+   "frame": "span.rg-thumb",
+   "w": 67,
+   "h": 54,
+   "aspect": 1.235
+  }
+ },
+ {
+  "n": 113,
+  "url": "/",
+  "text": "Replace the miniature with the image attached",
+  "att": [
+   {
+    "file": "113-att1-image.png",
+    "sha": "eb23f52db7",
+    "bytes": 3704324
+   }
+  ],
+  "shot": "screens-2026-09-23/113.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc.is-flipped>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(3)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "li.rg-item 3/4",
+   "cardName": null,
+   "img": "mp-scanner-chair-1536x2046.jpg",
+   "imgAlt": null,
+   "frame": "span.rg-thumb",
+   "w": 67,
+   "h": 54,
+   "aspect": 1.235
+  }
+ },
+ {
+  "n": 114,
+  "url": "/",
+  "text": "Replace the miniature with the attached image",
+  "att": [
+   {
+    "file": "114-att1-image.png",
+    "sha": "bc295974b1",
+    "bytes": 4082601
+   }
+  ],
+  "shot": "screens-2026-09-23/114.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(2)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(1)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "li.rg-item 1/4",
+   "cardName": null,
+   "img": "mp-scanner-screen-3-1536x2046.jpg",
+   "imgAlt": null,
+   "frame": "span.rg-thumb",
+   "w": 67,
+   "h": 54,
+   "aspect": 1.235
+  }
+ },
+ {
+  "n": 115,
+  "url": "/",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "115-att1-image.png",
+    "sha": "f889e7de40",
+    "bytes": 4332760
+   }
+  ],
+  "shot": "screens-2026-09-23/115.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(2)>div.rg-media>img",
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "article.rg-arc.is-flipped 2/3",
+   "cardName": "Changing how it looks, on purpose",
+   "img": "mp-scanner-screen-2-1536x2046.jpg",
+   "imgAlt": "The scanner's screen during a digital impression",
+   "frame": "div.rg-media",
+   "w": 661,
+   "h": 826,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 116,
+  "url": "/",
+  "text": "Replace the miniature with the image attached",
+  "att": [
+   {
+    "file": "116-att1-image.png",
+    "sha": "5761ff7589",
+    "bytes": 3824805
+   }
+  ],
+  "shot": "screens-2026-09-23/116.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(2)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(4)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "section": "range.ch.ch-range",
+   "heading": "Lifelong beautiful healthy smiles.",
+   "card": "li.rg-item 4/4",
+   "cardName": null,
+   "img": "mp-desk-tablet-2-1536x2046.jpg",
+   "imgAlt": null,
+   "frame": "span.rg-thumb",
+   "w": 67,
+   "h": 54,
+   "aspect": 1.235
+  }
+ },
+ {
+  "n": 117,
+  "url": "/",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "117-att1-image.png",
+    "sha": "e1db48b8dd",
+    "bytes": 3127681
+   }
+  ],
+  "shot": "screens-2026-09-23/117.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(2)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(5)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "error": "no match"
+  }
+ },
+ {
+  "n": 118,
+  "url": "/",
+  "text": "Replace the minuature with the image attached",
+  "att": [
+   {
+    "file": "118-att1-image.png",
+    "sha": "3ef1ab0d71",
+    "bytes": 3848876
+   }
+  ],
+  "shot": "screens-2026-09-23/118.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#range.ch.ch-range>article.rg-arc:nth-of-type(2)>div.rg-body>ul.rg-index>li.rg-item:nth-of-type(6)>a>span.rg-thumb>img",
+  "page": "/",
+  "slot": {
+   "error": "no match"
+  }
+ },
+ {
+  "n": 119,
+  "url": "/",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "119-att1-image.png",
+    "sha": "2f8fe03afd",
+    "bytes": 4591939
+   }
+  ],
+  "shot": "screens-2026-09-23/119.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#people.ch.ch-people>div.pe-band>img",
+  "page": "/",
+  "slot": {
+   "section": "people.ch.ch-people",
+   "heading": "The doctors you will see.",
+   "card": null,
+   "cardName": null,
+   "img": "mp-team-huddle-smile-1536x1153.jpg",
+   "imgAlt": "The team at the front desk before the doors open, one of them laughing",
+   "frame": "div.pe-band",
+   "w": 1440,
+   "h": 378,
+   "aspect": 3.81
+  }
+ },
+ {
+  "n": 120,
+  "url": "/",
+  "text": "Replace this image with the attached one The same for all pages",
+  "att": [
+   {
+    "file": "120-att1-0684165c-d13d-4a37-98db-4e9285867e0d.png",
+    "sha": "dbce046052",
+    "bytes": 2586539
+   }
+  ],
+  "shot": "screens-2026-09-23/120.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img",
+  "page": "/",
+  "slot": {
+   "section": "invitation.ch.ch-invitation",
+   "heading": "Come and see for yourself.",
+   "card": "figure.iv-shot 1/1",
+   "cardName": "Suite 104A, on the ground floor. Free parking at the door.",
+   "img": "mp-team-corridor-1536x1153.jpg",
+   "imgAlt": "The corridor between the front desk and the treatment rooms",
+   "frame": "figure.iv-shot",
+   "w": 581,
+   "h": 360,
+   "aspect": 1.614
+  }
+ },
+ {
+  "n": 121,
+  "url": "/about-us",
+  "text": "Replace with the attached one",
+  "att": [
+   {
+    "file": "121-att1-94fa803d-c547-4201-9f2b-efe7ea9bfc6c.png",
+    "sha": "d046463ce1",
+    "bytes": 2371570
+   }
+  ],
+  "shot": "screens-2026-09-23/121.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#building.ch.ch-building>div.wrap>div.el-mosaic>figure.el-mosaic_tile.is-a>img",
+  "status": 200,
+  "page": "/about-us/",
+  "slot": {
+   "section": "building.ch.ch-building",
+   "heading": "The corner of Mason Road and Kingsland Boulevard.",
+   "card": "figure.el-mosaic_tile.is-a 1/5",
+   "cardName": "The corridor to the treatment rooms",
+   "img": "mp-team-corridor-1536x1153.jpg",
+   "imgAlt": "The corridor between the front desk and the treatment rooms",
+   "frame": "figure.el-mosaic_tile.is-a",
+   "w": 749,
+   "h": 464,
+   "aspect": 1.615
+  }
+ },
+ {
+  "n": 122,
+  "url": "/about-us",
+  "text": "In this section, it would be better to replace the image with the attached one.",
+  "att": [
+   {
+    "file": "122-att1-0684165c-d13d-4a37-98db-4e9285867e0d.png",
+    "sha": "dbce046052",
+    "bytes": 2586539
+   }
+  ],
+  "shot": "screens-2026-09-23/122.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "page": "/about-us/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 644,
+   "aspect": 2.235
+  }
+ },
+ {
+  "n": 123,
+  "url": "/our-doctors",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "123-att1-image.png",
+    "sha": "404408fd13",
+    "bytes": 3274313
+   }
+  ],
+  "shot": "screens-2026-09-23/123.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section.ch.el-pair>figure.el-pair_frame.is-right>img",
+  "status": 200,
+  "page": "/our-doctors/",
+  "slot": {
+   "section": ".ch.el-pair",
+   "heading": null,
+   "card": "figure.el-pair_frame.is-right 2/2",
+   "cardName": null,
+   "img": "mp-dentist-handheld-2-1536x2046.jpg",
+   "imgAlt": "A dentist setting up a handheld x-ray",
+   "frame": "figure.el-pair_frame.is-right",
+   "w": 720,
+   "h": 540,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 124,
+  "url": "/our-doctors",
+  "text": "Replace the image for the attached one",
+  "att": [
+   {
+    "file": "124-att1-2d9670d5-ec49-4eb8-90b0-0d30bb1ec32a.png",
+    "sha": "08b6312dc2",
+    "bytes": 1685743
+   }
+  ],
+  "shot": "screens-2026-09-23/124.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "page": "/our-doctors/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 644,
+   "aspect": 2.235
+  }
+ },
+ {
+  "n": 125,
+  "url": "/patient-reviews",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "125-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/125.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/patient-reviews/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 644,
+   "aspect": 2.235
+  }
+ },
+ {
+  "n": 126,
+  "url": "/patient-reviews",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "126-att1-image.png",
+    "sha": "365707cee8",
+    "bytes": 6484522
+   }
+  ],
+  "shot": "screens-2026-09-23/126.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#proof.ch.ch-proof>div.wrap.pr-lead>div.pr-portrait>img",
+  "page": "/patient-reviews/",
+  "slot": {
+   "section": "proof.ch.ch-proof",
+   "heading": "One at length, then the rest.",
+   "card": "div.pr-portrait 1/1",
+   "cardName": null,
+   "img": "mp-desk-patient-2-1536x2046.jpg",
+   "imgAlt": "A patient talking with the front desk",
+   "frame": "div.pr-portrait",
+   "w": 520,
+   "h": 650,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 127,
+  "url": "/patient-reviews",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "127-att1-image.png",
+    "sha": "f33b8be41f",
+    "bytes": 3818509
+   }
+  ],
+  "shot": "screens-2026-09-23/127.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#wall.ch.ch-names>div.wrap>div.cp-wall>figure.el-wall_photo>img",
+  "page": "/patient-reviews/",
+  "slot": {
+   "section": "wall.ch.ch-names",
+   "heading": "The rest of them, whole.",
+   "card": "figure.el-wall_photo 2/21",
+   "cardName": null,
+   "img": "mp-desk-call-4-1536x2046.jpg",
+   "imgAlt": "A member of the front desk on the phone",
+   "frame": "figure.el-wall_photo",
+   "w": 416,
+   "h": 520,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 128,
+  "url": "/our-services",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "128-att1-image.png",
+    "sha": "ad2ca69fb9",
+    "bytes": 5974682
+   }
+  ],
+  "shot": "screens-2026-09-23/128.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/our-services/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 864,
+   "aspect": 1.666
+  }
+ },
+ {
+  "n": 130,
+  "url": "/our-services",
+  "text": "Replace this image with the attached one",
+  "att": [
+   {
+    "file": "130-att1-b266ea36-a36d-4bb8-ac72-ced49ef8b78c.png",
+    "sha": "2ce4745a30",
+    "bytes": 2313916
+   }
+  ],
+  "shot": "screens-2026-09-23/130.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#practices.ch.ch-practices>div.ab-diptych>a.ab-half:nth-of-type(2)>img.is-portrait",
+  "page": "/our-services/",
+  "slot": {
+   "section": "practices.ch.ch-practices",
+   "heading": "This practice, and the children’s practice next door.",
+   "card": null,
+   "cardName": null,
+   "img": "HS-8-scaled.jpg",
+   "imgAlt": "Dr. Tam Nguyen",
+   "frame": "a.ab-half",
+   "w": 634,
+   "h": 476,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 131,
+  "url": "/our-services",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "131-att1-image.png",
+    "sha": "3d80d87ac4",
+    "bytes": 6402063
+   }
+  ],
+  "shot": "screens-2026-09-23/131.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#practices.ch.ch-practices>div.ab-diptych>a.ab-half:nth-of-type(1)>img",
+  "page": "/our-services/",
+  "slot": {
+   "section": "practices.ch.ch-practices",
+   "heading": "This practice, and the children’s practice next door.",
+   "card": null,
+   "cardName": null,
+   "img": "mp-desk-family-1536x1153.jpg",
+   "imgAlt": "A mother and daughter reviewing a treatment plan at the front desk",
+   "frame": "a.ab-half",
+   "w": 634,
+   "h": 476,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 132,
+  "url": "/services/oral-cancer-screening",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "132-att1-image.png",
+    "sha": "f67d2a2657",
+    "bytes": 2840489
+   }
+  ],
+  "shot": "screens-2026-09-23/132.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 1/6",
+   "cardName": "A sore that will not heal",
+   "img": "mp-desk-call-1536x2046.jpg",
+   "imgAlt": "The front desk taking a call",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 133,
+  "url": "/services/oral-cancer-screening",
+  "text": "Use the same format as de 01 **Also put the image attached**",
+  "att": [
+   {
+    "file": "133-att1-image.png",
+    "sha": "fa91376c5a",
+    "bytes": 2953178
+   }
+  ],
+  "shot": "screens-2026-09-23/133.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 2/6",
+   "cardName": "White or red patches",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 134,
+  "url": "/services/oral-cancer-screening",
+  "text": "Add the picture attached and use the same format from the first one",
+  "att": [
+   {
+    "file": "134-att1-image.png",
+    "sha": "520dba14e1",
+    "bytes": 3859616
+   }
+  ],
+  "shot": "screens-2026-09-23/134.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 3/6",
+   "cardName": "Chewing or swallowing is hard",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 135,
+  "url": "/services/oral-cancer-screening",
+  "text": "Use the same format as the first one and put the image attached",
+  "att": [
+   {
+    "file": "135-att1-image.png",
+    "sha": "ad6a818c10",
+    "bytes": 3189340
+   }
+  ],
+  "shot": "screens-2026-09-23/135.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 4/6",
+   "cardName": "A lump or thickening",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 492,
+   "aspect": 0.843
+  }
+ },
+ {
+  "n": 136,
+  "url": "/services/oral-cancer-screening",
+  "text": "replace the image with the one attached",
+  "att": [
+   {
+    "file": "136-att1-image.png",
+    "sha": "38bcc9c70e",
+    "bytes": 2973369
+   }
+  ],
+  "shot": "screens-2026-09-23/136.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 5/6",
+   "cardName": "A chronic sore throat, or hoarseness",
+   "img": "mp-desk-call-2-1536x2046.jpg",
+   "imgAlt": "A member of the front desk on the phone",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 137,
+  "url": "/services/oral-cancer-screening",
+  "text": "Use the same format of 01 and use the image attached",
+  "att": [
+   {
+    "file": "137-att1-image.png",
+    "sha": "afe9aa208b",
+    "bytes": 4214338
+   }
+  ],
+  "shot": "screens-2026-09-23/137.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(6)>div.svc-card_body",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs worth a phone call.",
+   "card": "article.svc-card 6/6",
+   "cardName": "Numbness",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 492,
+   "aspect": 0.843
+  }
+ },
+ {
+  "n": 138,
+  "url": "/services/oral-cancer-screening",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "138-att1-image.png",
+    "sha": "fb87a1ea3d",
+    "bytes": 1167493
+   }
+  ],
+  "shot": "screens-2026-09-23/138.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#compare.ch.ch-compare>div.svc-overlap.is-flipped>div.svc-overlap_media>img",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "compare.ch.ch-compare",
+   "heading": "How it compares.",
+   "card": "div.svc-overlap.is-flipped 3/3",
+   "cardName": "How often",
+   "img": "mp-team-reading-chart-1536x1153.jpg",
+   "imgAlt": "Two hygienists reading a chart under the practice's award plaques",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 139,
+  "url": "/services/oral-cancer-screening",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "139-att1-image.png",
+    "sha": "4b3a052cee",
+    "bytes": 4845130
+   }
+  ],
+  "shot": "screens-2026-09-23/139.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#proof.ch.ch-proof>div.wrap.pr-lead>div.pr-portrait>img",
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "proof.ch.ch-proof",
+   "heading": "What Katy families say about being here.",
+   "card": "div.pr-portrait 1/1",
+   "cardName": null,
+   "img": "mp-team-plaques-1536x1153.jpg",
+   "imgAlt": "Two of the team under the practice's award plaques",
+   "frame": "div.pr-portrait",
+   "w": 520,
+   "h": 650,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 140,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace this image with the attached one",
+  "att": [
+   {
+    "file": "140-att1-image.png",
+    "sha": "c793256c2e",
+    "bytes": 1509854
+   }
+  ],
+  "shot": "screens-2026-09-23/140.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Whether you are seven or seventy.",
+   "card": "article.svc-card 1/6",
+   "cardName": "You keep getting cavities",
+   "img": "mp-desk-family-3-1536x1153.jpg",
+   "imgAlt": "A family reviewing a treatment plan together at the front desk",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 141,
+  "url": "/services/dental-hygiene-education",
+  "text": "use the format for the 01 and use the image attached",
+  "att": [
+   {
+    "file": "141-att1-image.png",
+    "sha": "10f8f8b426",
+    "bytes": 2871839
+   }
+  ],
+  "shot": "screens-2026-09-23/141.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Whether you are seven or seventy.",
+   "card": "article.svc-card 2/6",
+   "cardName": "Sensitive teeth or sore gums",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 142,
+  "url": "/services/dental-hygiene-education",
+  "text": "use the same format as de 01 and use the image attached",
+  "att": [
+   {
+    "file": "142-att1-image.png",
+    "sha": "d9b32edb4c",
+    "bytes": 4932759
+   }
+  ],
+  "shot": "screens-2026-09-23/142.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Whether you are seven or seventy.",
+   "card": "article.svc-card 3/6",
+   "cardName": "Bad breath that will not shift",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 143,
+  "url": "/services/dental-hygiene-education",
+  "text": "Use the same format as 01 and put the image attached",
+  "att": [
+   {
+    "file": "143-att1-image.png",
+    "sha": "659fccde8a",
+    "bytes": 3740021
+   }
+  ],
+  "shot": "screens-2026-09-23/143.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Whether you are seven or seventy.",
+   "card": "article.svc-card 4/6",
+   "cardName": "Braces, aligners or retainers",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 144,
+  "url": "/services/dental-hygiene-education",
+  "text": "Use the image attached",
+  "att": [
+   {
+    "file": "144-att1-image.png",
+    "sha": "f8d4cdeb39",
+    "bytes": 3311550
+   }
+  ],
+  "shot": "screens-2026-09-23/144.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card.is-price>div.svc-card_body",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Whether you are seven or seventy.",
+   "card": "article.svc-card.is-price 6/6",
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 145,
+  "url": "/services/dental-hygiene-education",
+  "text": "Use the image attached",
+  "att": [
+   {
+    "file": "145-att1-image.png",
+    "sha": "d52522dc21",
+    "bytes": 3640989
+   }
+  ],
+  "shot": "screens-2026-09-23/145.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#compare.ch.ch-compare>div.svc-overlap.is-flipped>div.svc-overlap_media>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "compare.ch.ch-compare",
+   "heading": "What to lean on, and what to limit.",
+   "card": "div.svc-overlap.is-flipped 3/3",
+   "cardName": "Gum disease: the four signs to know",
+   "img": "mp-team-reading-chart-1536x1153.jpg",
+   "imgAlt": "Two hygienists reading a chart under the practice's award plaques",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 146,
+  "url": "/services/mouth-guards",
+  "text": "use the same format as 01 and put this image",
+  "att": [
+   {
+    "file": "146-att1-image.png",
+    "sha": "ca8e79ded9",
+    "bytes": 1923874
+   }
+  ],
+  "shot": "screens-2026-09-23/146.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "status": 200,
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 2/6",
+   "cardName": "You wake with a headache",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 147,
+  "url": "/services/mouth-guards",
+  "text": "use the same format as 01 and put the image attached",
+  "att": [
+   {
+    "file": "147-att1-image.png",
+    "sha": "b6894a983f",
+    "bytes": 3200875
+   }
+  ],
+  "shot": "screens-2026-09-23/147.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 3/6",
+   "cardName": "You grind or clench at night",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 148,
+  "url": "/services/mouth-guards",
+  "text": "change the format as 01 and add the image attached",
+  "att": [
+   {
+    "file": "148-att1-image.png",
+    "sha": "71c4b3bbf7",
+    "bytes": 3768283
+   }
+  ],
+  "shot": "screens-2026-09-23/148.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/6",
+   "cardName": "You have work worth protecting",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 149,
+  "url": "/services/mouth-guards",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "149-att1-image.png",
+    "sha": "ade7cf8282",
+    "bytes": 4288778
+   }
+  ],
+  "shot": "screens-2026-09-23/149.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 5/6",
+   "cardName": "You have been diagnosed with TMJ",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 150,
+  "url": "/services/mouth-guards",
+  "text": "Add the photo attached",
+  "att": [
+   {
+    "file": "150-att1-image.png",
+    "sha": "eeea913323",
+    "bytes": 4014205
+   }
+  ],
+  "shot": "screens-2026-09-23/150.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card.is-price>div.svc-card_body",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card.is-price 6/6",
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 151,
+  "url": "/services/mouth-guards",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "151-att1-Screenshot_2026-09-22_130933.png",
+    "sha": "0e70eefee9",
+    "bytes": 2535350
+   }
+  ],
+  "shot": "screens-2026-09-23/151.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/6",
+   "cardName": "You play a contact sport",
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 152,
+  "url": "/services/night-guards",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "152-att1-image.png",
+    "sha": "299abb1a73",
+    "bytes": 1912830
+   }
+  ],
+  "shot": "screens-2026-09-23/152.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/night-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "You cannot feel it happening. You can see what it leaves.",
+   "card": "article.svc-card 4/4",
+   "cardName": "Sensitivity you cannot explain",
+   "img": "mp-desk-call-5-1536x2046.jpg",
+   "imgAlt": "The front desk taking a booking",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 153,
+  "url": "/services/night-guards",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "153-att1-image.png",
+    "sha": "8f0583fd60",
+    "bytes": 3529477
+   }
+  ],
+  "shot": "screens-2026-09-23/153.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/night-guards/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "You cannot feel it happening. You can see what it leaves.",
+   "card": "article.svc-card 1/4",
+   "cardName": "Morning headaches",
+   "img": "mp-sofa-forms-3-1536x1153.jpg",
+   "imgAlt": "Two new patients on the waiting room sofa with the check-in tablet",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 284,
+   "aspect": 1.064
+  }
+ },
+ {
+  "n": 154,
+  "url": "/services/night-guards",
+  "text": "Replace with the photo attached",
+  "att": [
+   {
+    "file": "154-att1-vmJdibfO3PjLMtYpEA1LG-mp-stock-mouthguard-1536x1024-w1536.webp",
+    "sha": "00996ec7fe",
+    "bytes": 73526
+   }
+  ],
+  "shot": "screens-2026-09-23/154.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#compare.ch.ch-compare>div.svc-overlap.is-flipped>div.svc-overlap_media>img",
+  "page": "/services/night-guards/",
+  "slot": {
+   "section": "compare.ch.ch-compare",
+   "heading": "What else is on the table.",
+   "card": "div.svc-overlap.is-flipped 3/3",
+   "cardName": "And the one from the pharmacy?",
+   "img": "mp-team-front-desk-1536x1153.jpg",
+   "imgAlt": "The Mason Park Dental team gathered at the front desk",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 155,
+  "url": "/services/fluoride-treatment",
+  "text": "Replace the photo with the one attached",
+  "att": [
+   {
+    "file": "155-att1-image.png",
+    "sha": "9f3b347ef3",
+    "bytes": 2840746
+   }
+  ],
+  "shot": "screens-2026-09-23/155.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card 1/6",
+   "cardName": "Children",
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 156,
+  "url": "/services/fluoride-treatment",
+  "text": "Use the same format as 01 and put the image attached",
+  "att": [
+   {
+    "file": "156-att1-image.png",
+    "sha": "4d06afdb05",
+    "bytes": 3230769
+   }
+  ],
+  "shot": "screens-2026-09-23/156.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card 2/6",
+   "cardName": "Teenagers with braces",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 157,
+  "url": "/services/fluoride-treatment",
+  "text": "change the image for the one attached",
+  "att": [
+   {
+    "file": "157-att1-image.png",
+    "sha": "2cbc7cd67f",
+    "bytes": 3284692
+   }
+  ],
+  "shot": "screens-2026-09-23/157.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card 5/6",
+   "cardName": "Seniors",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 158,
+  "url": "/blog",
+  "text": "The tittle should be in the same line so in that way the square would be the same size.",
+  "att": [],
+  "shot": "screens-2026-09-23/158.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#articles.ch.ch-questions>div.wrap>ul.bl-topics>li:nth-of-type(2)>a.bl-topic>span.bl-topic_body",
+  "status": 200,
+  "page": "/blog/",
+  "slot": {
+   "section": "articles.ch.ch-questions",
+   "heading": "Everything the practice has written.",
+   "card": "li. 2/4",
+   "cardName": null,
+   "img": "mp-hygienist-working-3-1536x2046.jpg",
+   "imgAlt": "Two of the clinical team with a patient in the chair",
+   "frame": "span.bl-topic_shot",
+   "w": 303,
+   "h": 170,
+   "aspect": 1.778
+  }
+ },
+ {
+  "n": 159,
+  "url": "/blog#articles",
+  "text": "that final brown rectangle should be erased",
+  "att": [
+   {
+    "file": "159-att1-image.png",
+    "sha": "4ab9fe6906",
+    "bytes": 5746
+   }
+  ],
+  "shot": "screens-2026-09-23/159.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#articles.ch.ch-questions>div.wrap>ul.bl-grid",
+  "page": "/blog/",
+  "slot": {
+   "section": "articles.ch.ch-questions",
+   "heading": "Everything the practice has written.",
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1296,
+   "h": 2732,
+   "aspect": 0.474
+  }
+ },
+ {
+  "n": 160,
+  "url": "/blog/tooth-replacement-that-looks-real-exploring-natural-implants#why-natural-is-the-gold-standard",
+  "text": "Replace the image with the attached one / use the same image for all the blog pages",
+  "att": [
+   {
+    "file": "160-att1-ChatGPT_Image_Sep_22_2026_12_19_59_PM.png",
+    "sha": "4dbaad546a",
+    "bytes": 2509973
+   }
+  ],
+  "shot": "screens-2026-09-23/160.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#article.ch.ch-treatment.bl-article>div.wrap.bl-art>aside.bl-art_rail>div.bl-art_sticky>figure.bl-art_shot>img",
+  "status": 200,
+  "page": "/blog/tooth-replacement-that-looks-real-exploring-natural-implants/",
+  "slot": {
+   "section": "article.ch.ch-treatment.bl-article",
+   "heading": "A Smile That Doesn’t Give Away the Secret",
+   "card": "figure.bl-art_shot 1/1",
+   "cardName": "Mason Park Dental of Katy, 21830 Kingsland Blvd",
+   "img": "mp-team-reception-1536x1153.jpg",
+   "imgAlt": "The team at reception before the first appointment of the day",
+   "frame": "figure.bl-art_shot",
+   "w": 304,
+   "h": 380,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 161,
+  "url": "/contacts",
+  "text": "Replace the image for the attached one",
+  "att": [
+   {
+    "file": "161-att1-image.png",
+    "sha": "e5c7d8a2e5",
+    "bytes": 4343109
+   }
+  ],
+  "shot": "screens-2026-09-23/161.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#reach.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/contacts/",
+  "slot": {
+   "section": "reach.ch.ch-qualify",
+   "heading": "Three ways, and which to use.",
+   "card": "article.svc-card 1/3",
+   "cardName": "Visit us",
+   "img": "mp-team-reception-1536x1153.jpg",
+   "imgAlt": "The team at reception before the first appointment of the day",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 162,
+  "url": "/contacts",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "162-att1-image.png",
+    "sha": "2b65a87cef",
+    "bytes": 4990271
+   }
+  ],
+  "shot": "screens-2026-09-23/162.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#reach.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(2)>div.svc-card_media>img",
+  "page": "/contacts/",
+  "slot": {
+   "error": "no match"
+  }
+ },
+ {
+  "n": 163,
+  "url": "/contacts",
+  "text": "Replace the image for the one attached",
+  "att": [
+   {
+    "file": "163-att1-ChatGPT_Image_Sep_22_2026_12_19_59_PM.png",
+    "sha": "4dbaad546a",
+    "bytes": 2509973
+   }
+  ],
+  "shot": "screens-2026-09-23/163.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#finding.ch.ch-treatment>div.svc-overlap>div.svc-overlap_media>img",
+  "page": "/contacts/",
+  "slot": {
+   "section": "finding.ch.ch-treatment",
+   "heading": "At the corner of Mason and Kingsland.",
+   "card": "div.svc-overlap 2/2",
+   "cardName": "Behind the Ranch 99 complex",
+   "img": "mp-team-corridor-1536x1153.jpg",
+   "imgAlt": "The corridor between the front desk and the treatment rooms",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 164,
+  "url": "/contacts",
+  "text": "All the squares has to have the same format as the first one, and also put the front photos from each doctor.",
+  "att": [],
+  "shot": "screens-2026-09-23/164.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#who.ch.ch-why>div.wrap",
+  "page": "/contacts/",
+  "slot": {
+   "section": "who.ch.ch-why",
+   "heading": "Three doctors, one building.",
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 202,
+   "aspect": 7.139
+  }
+ },
+ {
+  "n": 165,
+  "url": "/contacts",
+  "text": "Replace with the attached photo",
+  "att": [
+   {
+    "file": "165-att1-image.png",
+    "sha": "80317ea2f9",
+    "bytes": 4966490
+   }
+  ],
+  "shot": "screens-2026-09-23/165.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#proof.ch.ch-proof>div.wrap.pr-lead>div.pr-portrait>img",
+  "page": "/contacts/",
+  "slot": {
+   "section": "proof.ch.ch-proof",
+   "heading": "What Katy families say about being here.",
+   "card": "div.pr-portrait 1/1",
+   "cardName": null,
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.pr-portrait",
+   "w": 520,
+   "h": 650,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 166,
+  "url": "/contacts",
+  "text": "change the photo for the one attached",
+  "att": [
+   {
+    "file": "166-att1-image.png",
+    "sha": "587dcfa317",
+    "bytes": 4158329
+   }
+  ],
+  "shot": "screens-2026-09-23/166.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "page": "/contacts/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 644,
+   "aspect": 2.235
+  }
+ },
+ {
+  "n": 167,
+  "url": "/services/oral-cancer-screening",
+  "text": "Change the photo for the one attached",
+  "att": [
+   {
+    "file": "167-att1-image.png",
+    "sha": "be73907c65",
+    "bytes": 4699226
+   }
+  ],
+  "shot": "screens-2026-09-23/167.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/services/oral-cancer-screening/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 673,
+   "aspect": 2.139
+  }
+ },
+ {
+  "n": 168,
+  "url": "/services/dental-hygiene-education",
+  "text": "Replace the image with the one attached",
+  "att": [
+   {
+    "file": "168-att1-image.png",
+    "sha": "b1e2bdae32",
+    "bytes": 3632360
+   }
+  ],
+  "shot": "screens-2026-09-23/168.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 600,
+   "aspect": 2.4
+  }
+ },
+ {
+  "n": 169,
+  "url": "/services/dental-hygiene-education",
+  "text": "Change the image for the one attached",
+  "att": [
+   {
+    "file": "169-att1-image.png",
+    "sha": "ce45d11b98",
+    "bytes": 3276085
+   }
+  ],
+  "shot": "screens-2026-09-23/169.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "Five corrections that do most of the work.",
+   "card": "article.svc-card 1/6",
+   "cardName": "45 degrees, not flat",
+   "img": "mp-hygienist-working-2-1536x2046.jpg",
+   "imgAlt": "A hygienist at the chair in a treatment room",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 170,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "170-att1-image.png",
+    "sha": "1f42495ace",
+    "bytes": 3486536
+   }
+  ],
+  "shot": "screens-2026-09-23/170.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "Five corrections that do most of the work.",
+   "card": "article.svc-card 5/6",
+   "cardName": "A fluoride rinse",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 171,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "171-att1-image.png",
+    "sha": "0120338a1c",
+    "bytes": 3740849
+   }
+  ],
+  "shot": "screens-2026-09-23/171.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/6",
+   "cardName": "Why it matters",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 172,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "172-att1-image.png",
+    "sha": "a730ac7eda",
+    "bytes": 4068401
+   }
+  ],
+  "shot": "screens-2026-09-23/172.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/6",
+   "cardName": "Why it matters",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 173,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image for the attached one",
+  "att": [
+   {
+    "file": "173-att1-image.png",
+    "sha": "1f25b7ed55",
+    "bytes": 2928773
+   }
+  ],
+  "shot": "screens-2026-09-23/173.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/6",
+   "cardName": "Why it matters",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 174,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image for the attached one",
+  "att": [
+   {
+    "file": "174-att1-image.png",
+    "sha": "6b5bd66d56",
+    "bytes": 4179059
+   }
+  ],
+  "shot": "screens-2026-09-23/174.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/6",
+   "cardName": "Why it matters",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 175,
+  "url": "/services/dental-hygiene-education",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "175-att1-image.png",
+    "sha": "fa6e80cbd3",
+    "bytes": 3906234
+   }
+  ],
+  "shot": "screens-2026-09-23/175.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/dental-hygiene-education/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/6",
+   "cardName": "Why it matters",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 176,
+  "url": "/services/mouth-guards",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "176-att1-image.png",
+    "sha": "3c0ca05553",
+    "bytes": 2811238
+   }
+  ],
+  "shot": "screens-2026-09-23/176.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 1/6",
+   "cardName": "It absorbs the hit",
+   "img": "mp-treatment-room-2-1536x2046.jpg",
+   "imgAlt": "A treatment room, seen from the corridor",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 177,
+  "url": "/services/mouth-guards",
+  "text": "replce the photo",
+  "att": [
+   {
+    "file": "177-att1-image.png",
+    "sha": "26186d6dd0",
+    "bytes": 2594388
+   }
+  ],
+  "shot": "screens-2026-09-23/177.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "You will actually wear it",
+   "img": "mp-hygienist-working-3-1536x2046.jpg",
+   "imgAlt": "Two of the clinical team with a patient in the chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 178,
+  "url": "/services/mouth-guards",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "178-att1-image.png",
+    "sha": "18c7eb59fe",
+    "bytes": 2565429
+   }
+  ],
+  "shot": "screens-2026-09-23/178.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#compare.ch.ch-compare>div.svc-overlap.is-flipped>div.svc-overlap_media>img",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "compare.ch.ch-compare",
+   "heading": "How it compares.",
+   "card": "div.svc-overlap.is-flipped 3/3",
+   "cardName": "What grinding costs if you leave it",
+   "img": "mp-team-corridor-1536x1153.jpg",
+   "imgAlt": "The corridor between the front desk and the treatment rooms",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 179,
+  "url": "/services/mouth-guards",
+  "text": "Replace the image with the attached photo **do the same for all the pages**",
+  "att": [
+   {
+    "file": "179-att1-image.png",
+    "sha": "14322610e3",
+    "bytes": 4928945
+   }
+  ],
+  "shot": "screens-2026-09-23/179.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#proof.ch.ch-proof>div.wrap.pr-lead>div.pr-portrait>img",
+  "page": "/services/mouth-guards/",
+  "slot": {
+   "section": "proof.ch.ch-proof",
+   "heading": "What Katy families say about being here.",
+   "card": "div.pr-portrait 1/1",
+   "cardName": null,
+   "img": "mp-team-pair-talking-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team talking between appointments",
+   "frame": "div.pr-portrait",
+   "w": 520,
+   "h": 650,
+   "aspect": 0.8
+  }
+ },
+ {
+  "n": 180,
+  "url": "/services/night-guards",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "180-att1-image.png",
+    "sha": "d915b44bc4",
+    "bytes": 4236348
+   }
+  ],
+  "shot": "screens-2026-09-23/180.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/night-guards/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "It protects more than teeth",
+   "img": "mp-hygienist-working-5-1536x2046.jpg",
+   "imgAlt": "A hygienist in the pediatric treatment room",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 181,
+  "url": "/services/night-guards",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "181-att1-image.png",
+    "sha": "f6708fa3c9",
+    "bytes": 3741521
+   }
+  ],
+  "shot": "screens-2026-09-23/181.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/night-guards/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 1/6",
+   "cardName": "A custom fit",
+   "img": "mp-scanner-screen-3-1536x2046.jpg",
+   "imgAlt": "A digital impression on screen in the treatment room",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 182,
+  "url": "/services/fluoride-treatment",
+  "text": "use the same format as the previous and put the image attached",
+  "att": [
+   {
+    "file": "182-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/182.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "status": 200,
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card 3/6",
+   "cardName": "Adults with fillings or crowns",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 183,
+  "url": "/services/fluoride-treatment",
+  "text": "use the same format as the first one and put the image attached",
+  "att": [
+   {
+    "file": "183-att1-image.png",
+    "sha": "9f1844fff6",
+    "bytes": 3600670
+   }
+  ],
+  "shot": "screens-2026-09-23/183.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card 4/6",
+   "cardName": "Anyone with dry mouth",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 184,
+  "url": "/services/fluoride-treatment",
+  "text": "use the photo attached",
+  "att": [
+   {
+    "file": "184-att1-image.png",
+    "sha": "f2c3a46ade",
+    "bytes": 2724261
+   }
+  ],
+  "shot": "screens-2026-09-23/184.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card.is-price>div.svc-card_body",
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Who gets more out of it than most.",
+   "card": "article.svc-card.is-price 6/6",
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 185,
+  "url": "/services/fluoride-treatment",
+  "text": "replace the image with the attached one",
+  "att": [
+   {
+    "file": "185-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/185.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/fluoride-treatment/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/5",
+   "cardName": "Oral examination",
+   "img": "mp-dentist-handheld-1536x2046.jpg",
+   "imgAlt": "A dentist with the handheld x-ray unit",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 186,
+  "url": "/services/sealants",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "186-att1-Screenshot_2026-09-21_191810.png",
+    "sha": "9f3b347ef3",
+    "bytes": 2840746
+   }
+  ],
+  "shot": "screens-2026-09-23/186.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/sealants/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "Children and adolescents",
+   "img": "mp-team-reception-1536x1153.jpg",
+   "imgAlt": "The team at reception before the first appointment of the day",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 187,
+  "url": "/services/sealants",
+  "text": "replace the photo with the one attached",
+  "att": [
+   {
+    "file": "187-att1-image.png",
+    "sha": "01477ea57d",
+    "bytes": 6319117
+   }
+  ],
+  "shot": "screens-2026-09-23/187.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/sealants/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "Where a brush cannot go.",
+   "card": "article.svc-card 5/6",
+   "cardName": "One visit",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 188,
+  "url": "/services/sealants",
+  "text": "change the photo for the attached one",
+  "att": [
+   {
+    "file": "188-att1-image.png",
+    "sha": "cb2b2daf3b",
+    "bytes": 3575065
+   }
+  ],
+  "shot": "screens-2026-09-23/188.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#process.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card>div.pa-shot>img",
+  "page": "/services/sealants/",
+  "slot": {
+   "section": "process.ch.ch-path",
+   "heading": "What happens, step by step.",
+   "card": "article.pa-card 1/5",
+   "cardName": "Cleaning and drying",
+   "img": "mp-team-front-desk-1536x1153.jpg",
+   "imgAlt": "The Mason Park Dental team gathered at the front desk",
+   "frame": "div.pa-shot",
+   "w": 337,
+   "h": 180,
+   "aspect": 1.873
+  }
+ },
+ {
+  "n": 189,
+  "url": "/services/sealants",
+  "text": "change the image for the one attached",
+  "att": [
+   {
+    "file": "189-att1-image.png",
+    "sha": "e9239e00ff",
+    "bytes": 4398832
+   }
+  ],
+  "shot": "screens-2026-09-23/189.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#compare.ch.ch-compare>div.svc-overlap.is-flipped>div.svc-overlap_media>img",
+  "page": "/services/sealants/",
+  "slot": {
+   "section": "compare.ch.ch-compare",
+   "heading": "How it compares.",
+   "card": "div.svc-overlap.is-flipped 3/3",
+   "cardName": "One part of a preventive plan",
+   "img": "mp-team-corridor-1536x1153.jpg",
+   "imgAlt": "The corridor between the front desk and the treatment rooms",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 190,
+  "url": "/services/cosmetic-dentistry",
+  "text": "change the photo for the one attached",
+  "att": [
+   {
+    "file": "190-att1-image.png",
+    "sha": "f7e941860c",
+    "bytes": 4109795
+   }
+  ],
+  "shot": "screens-2026-09-23/190.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/cosmetic-dentistry/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/4",
+   "cardName": "Something is coming up",
+   "img": "mp-team-pair-talking-2-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team talking in the corridor",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 253,
+   "aspect": 1.198
+  }
+ },
+ {
+  "n": 191,
+  "url": "/services/cosmetic-dentistry",
+  "text": "replace the photo with the one attached",
+  "att": [
+   {
+    "file": "191-att1-image.png",
+    "sha": "f8a0efb60f",
+    "bytes": 1544468
+   }
+  ],
+  "shot": "screens-2026-09-23/191.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/cosmetic-dentistry/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "You do not smile in photographs",
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 192,
+  "url": "/services/bonding",
+  "text": "replace the image for the one attached",
+  "att": [
+   {
+    "file": "192-att1-image.png",
+    "sha": "703cf34a21",
+    "bytes": 1853151
+   }
+  ],
+  "shot": "screens-2026-09-23/192.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/6",
+   "cardName": "A chipped tooth",
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 193,
+  "url": "/services/bonding",
+  "text": "use the first one format and put the image attached",
+  "att": [
+   {
+    "file": "193-att1-image.png",
+    "sha": "1f499937b5",
+    "bytes": 3661182
+   }
+  ],
+  "shot": "screens-2026-09-23/193.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 2/6",
+   "cardName": "Hairline cracks",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 194,
+  "url": "/services/bonding",
+  "text": "use the same format as the 01 and put the photo attached",
+  "att": [
+   {
+    "file": "194-att1-image.png",
+    "sha": "b354c54618",
+    "bytes": 2302839
+   }
+  ],
+  "shot": "screens-2026-09-23/194.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/6",
+   "cardName": "A gap between front teeth",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 195,
+  "url": "/services/bonding",
+  "text": "use the same format as the 1 one and put the attached image",
+  "att": [
+   {
+    "file": "195-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/195.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 3/6",
+   "cardName": "Uneven or worn edges",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 196,
+  "url": "/services/bonding",
+  "text": "change the photo",
+  "att": [
+   {
+    "file": "196-att1-image.png",
+    "sha": "afc180d7e7",
+    "bytes": 3276305
+   }
+  ],
+  "shot": "screens-2026-09-23/196.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 5/6",
+   "cardName": "Discolouration whitening will not shift",
+   "img": "mp-team-pair-talking-2-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team talking in the corridor",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 197,
+  "url": "/services/bonding",
+  "text": "change de format an put the image attached",
+  "att": [
+   {
+    "file": "197-att1-image.png",
+    "sha": "4170caf163",
+    "bytes": 3629999
+   }
+  ],
+  "shot": "screens-2026-09-23/197.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(6)>div.svc-card_body",
+  "page": "/services/bonding/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 6/6",
+   "cardName": "Exposed roots",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 198,
+  "url": "/services/porcelain-veneers",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "198-att1-image.png",
+    "sha": "634a5718e0",
+    "bytes": 3356304
+   }
+  ],
+  "shot": "screens-2026-09-23/198.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/porcelain-veneers/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Healthy teeth that look wrong.",
+   "card": "article.svc-card 1/4",
+   "cardName": "Stained",
+   "img": "mp-team-pair-laughing-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team laughing between appointments",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 253,
+   "aspect": 1.198
+  }
+ },
+ {
+  "n": 199,
+  "url": "/services/porcelain-veneers",
+  "text": "repolace the image",
+  "att": [
+   {
+    "file": "199-att1-image.png",
+    "sha": "4dc615f26c",
+    "bytes": 4249976
+   }
+  ],
+  "shot": "screens-2026-09-23/199.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/porcelain-veneers/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Healthy teeth that look wrong.",
+   "card": "article.svc-card 4/4",
+   "cardName": "Chipped or cracked",
+   "img": "mp-team-pair-talking-2-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team talking in the corridor",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 200,
+  "url": "/services/porcelain-veneers",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "200-att1-image.png",
+    "sha": "618ccb7c49",
+    "bytes": 2730666
+   }
+  ],
+  "shot": "screens-2026-09-23/200.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/porcelain-veneers/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "It still looks like you",
+   "img": "mp-team-pair-talking-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team talking between appointments",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 201,
+  "url": "/services/dental-implant-restorations",
+  "text": "move the image a little bit upper to see the patient",
+  "att": [],
+  "shot": "screens-2026-09-23/201.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/services/dental-implant-restorations/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 600,
+   "aspect": 2.4
+  }
+ },
+ {
+  "n": 202,
+  "url": "/services/dental-implant-restorations",
+  "text": "Replace the photo with the one attached",
+  "att": [
+   {
+    "file": "202-att1-image.png",
+    "sha": "e3ba1a80cb",
+    "bytes": 4608708
+   }
+  ],
+  "shot": "screens-2026-09-23/202.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/dental-implant-restorations/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 1/6",
+   "cardName": "It looks and feels like a tooth",
+   "img": "mp-team-pair-laughing-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team laughing between appointments",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 203,
+  "url": "/services/dental-implant-restorations",
+  "text": "replace the image with the one attached",
+  "att": [
+   {
+    "file": "203-att1-image.png",
+    "sha": "660ed92419",
+    "bytes": 4131599
+   }
+  ],
+  "shot": "screens-2026-09-23/203.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/dental-implant-restorations/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "The teeth beside it are untouched",
+   "img": "mp-team-reading-chart-1536x1153.jpg",
+   "imgAlt": "Two hygienists reading a chart under the practice's award plaques",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 204,
+  "url": "/services/dentures",
+  "text": "add the image attached",
+  "att": [
+   {
+    "file": "204-att1-image.png",
+    "sha": "04a36610e6",
+    "bytes": 2226961
+   }
+  ],
+  "shot": "screens-2026-09-23/204.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/6",
+   "cardName": "Several teeth are gone",
+   "img": "mp-sofa-forms-1536x1153.jpg",
+   "imgAlt": "A couple filling in their new patient forms on a tablet in the waiting room",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 205,
+  "url": "/services/dental-implant-restorations",
+  "text": "replace for the image attached",
+  "att": [
+   {
+    "file": "205-att1-image.png",
+    "sha": "ae611d3760",
+    "bytes": 3246683
+   }
+  ],
+  "shot": "screens-2026-09-23/205.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/dental-implant-restorations/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "One or more teeth are missing",
+   "img": "mp-desk-family-2-1536x1153.jpg",
+   "imgAlt": "A mother and daughter at the front desk with the treatment plan",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 206,
+  "url": "/services/dental-implant-restorations",
+  "text": "replace with the image attached",
+  "att": [
+   {
+    "file": "206-att1-image.png",
+    "sha": "9ce4a50394",
+    "bytes": 4672864
+   }
+  ],
+  "shot": "screens-2026-09-23/206.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/dental-implant-restorations/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/4",
+   "cardName": "You want it to be permanent",
+   "img": "mp-desk-tablet-1536x2046.jpg",
+   "imgAlt": "Checking in on a tablet at the front desk",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 207,
+  "url": "/services/dentures",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "207-att1-image.png",
+    "sha": "5330271162",
+    "bytes": 3215358
+   }
+  ],
+  "shot": "screens-2026-09-23/207.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "status": 200,
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 2/6",
+   "cardName": "Eating and speaking are hard",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 460,
+   "aspect": 0.901
+  }
+ },
+ {
+  "n": 208,
+  "url": "/services/dentures",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "208-att1-image.png",
+    "sha": "55794b5ebb",
+    "bytes": 3157183
+   }
+  ],
+  "shot": "screens-2026-09-23/208.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 3/6",
+   "cardName": "Jaw pain, or the face has changed",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 460,
+   "aspect": 0.901
+  }
+ },
+ {
+  "n": 209,
+  "url": "/services/dentures",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "209-att1-image.png",
+    "sha": "63bc68c134",
+    "bytes": 712041
+   }
+  ],
+  "shot": "screens-2026-09-23/209.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/6",
+   "cardName": "The teeth left are badly damaged",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 210,
+  "url": "/services/dentures",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "210-att1-image.png",
+    "sha": "b68a509068",
+    "bytes": 4226563
+   }
+  ],
+  "shot": "screens-2026-09-23/210.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 5/6",
+   "cardName": "You want to avoid surgery",
+   "img": "mp-desk-call-3-1536x2046.jpg",
+   "imgAlt": "The front desk on the phone with a patient",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 211,
+  "url": "/services/dentures",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "211-att1-image.png",
+    "sha": "ce4b35e446",
+    "bytes": 3760913
+   }
+  ],
+  "shot": "screens-2026-09-23/211.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(6)>div.svc-card_body",
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 6/6",
+   "cardName": "Cost is the deciding factor",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 212,
+  "url": "/services/dentures",
+  "text": "replace for the image attached",
+  "att": [
+   {
+    "file": "212-att1-image.png",
+    "sha": "9a09e513e0",
+    "bytes": 905581
+   }
+  ],
+  "shot": "screens-2026-09-23/212.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/dentures/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 1/6",
+   "cardName": "A smile you use again",
+   "img": "mp-team-pair-laughing-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team laughing between appointments",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 213,
+  "url": "/services/dental-crowns",
+  "text": "Replace for the image attached",
+  "att": [
+   {
+    "file": "213-att1-image.png",
+    "sha": "f77815b923",
+    "bytes": 1154937
+   }
+  ],
+  "shot": "screens-2026-09-23/213.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/dental-crowns/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "A cracked or broken tooth",
+   "img": "mp-treatment-room-1536x2046.jpg",
+   "imgAlt": "A treatment room with a patient in the chair",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 214,
+  "url": "/services/dental-crowns",
+  "text": "Replace with the image attached",
+  "att": [
+   {
+    "file": "214-att1-image.png",
+    "sha": "9a7e498737",
+    "bytes": 975726
+   }
+  ],
+  "shot": "screens-2026-09-23/214.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/dental-crowns/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/4",
+   "cardName": "A bridge or an implant",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 215,
+  "url": "/services/composite-fillings",
+  "text": "Change the image for the one attached",
+  "att": [
+   {
+    "file": "215-att1-image.png",
+    "sha": "6167e63148",
+    "bytes": 757991
+   }
+  ],
+  "shot": "screens-2026-09-23/215.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/composite-fillings/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "A small or moderate cavity",
+   "img": "mp-hygienist-working-1536x2046.jpg",
+   "imgAlt": "A hygienist at work in a treatment room",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 216,
+  "url": "/services/composite-fillings",
+  "text": "Change for the image attached",
+  "att": [
+   {
+    "file": "216-att1-image.png",
+    "sha": "cc229cca41",
+    "bytes": 2821499
+   }
+  ],
+  "shot": "screens-2026-09-23/216.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/composite-fillings/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/4",
+   "cardName": "You want nothing metal",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 253,
+   "aspect": 1.198
+  }
+ },
+ {
+  "n": 217,
+  "url": "/services/bridges",
+  "text": "replace for the image attached",
+  "att": [
+   {
+    "file": "217-att1-01.png",
+    "sha": "34212a8b78",
+    "bytes": 2236438
+   }
+  ],
+  "shot": "screens-2026-09-23/217.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/bridges/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/4",
+   "cardName": "A visible gap",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 284,
+   "aspect": 1.064
+  }
+ },
+ {
+  "n": 218,
+  "url": "/services/bridges",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "218-att1-image.png",
+    "sha": "c4a71c9472",
+    "bytes": 4323919
+   }
+  ],
+  "shot": "screens-2026-09-23/218.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/bridges/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/4",
+   "cardName": "You want it done without surgery",
+   "img": "mp-team-pair-window-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team by the treatment room window",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 219,
+  "url": "/services/root-canal-therapy",
+  "text": "Replace the image for the one attached",
+  "att": [
+   {
+    "file": "219-att1-image.png",
+    "sha": "588da98c18",
+    "bytes": 4010757
+   }
+  ],
+  "shot": "screens-2026-09-23/219.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil",
+  "status": 200,
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "arrival.ch.ch-arrival.is-compact",
+   "heading": null,
+   "card": null,
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 1440,
+   "h": 571,
+   "aspect": 2.523
+  }
+ },
+ {
+  "n": 220,
+  "url": "/services/root-canal-therapy",
+  "text": "Replace the image with the attached one",
+  "att": [
+   {
+    "file": "220-att1-image.png",
+    "sha": "ffd7967035",
+    "bytes": 1793618
+   }
+  ],
+  "shot": "screens-2026-09-23/220.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 1/6",
+   "cardName": "A toothache that will not stop",
+   "img": "mp-desk-call-4-1536x2046.jpg",
+   "imgAlt": "A member of the front desk on the phone",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 221,
+  "url": "/services/root-canal-therapy",
+  "text": "add the attached image",
+  "att": [
+   {
+    "file": "221-att1-image.png",
+    "sha": "e16709fd4c",
+    "bytes": 1584946
+   }
+  ],
+  "shot": "screens-2026-09-23/221.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 2/6",
+   "cardName": "Hot and cold hurt",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 222,
+  "url": "/services/root-canal-therapy",
+  "text": "replace the image with the one attached",
+  "att": [
+   {
+    "file": "222-att1-image.png",
+    "sha": "cd166d6cd3",
+    "bytes": 2806887
+   }
+  ],
+  "shot": "screens-2026-09-23/222.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 5/6",
+   "cardName": "A pimple on the gum",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 223,
+  "url": "/services/root-canal-therapy",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "223-att1-image.png",
+    "sha": "994b3a81ac",
+    "bytes": 3427487
+   }
+  ],
+  "shot": "screens-2026-09-23/223.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card.is-price>div.svc-card_body",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card.is-price 6/6",
+   "cardName": null,
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 224,
+  "url": "/services/root-canal-therapy",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "224-att1-Screenshot_2026-09-22_171427.png",
+    "sha": "cf1b4dccfa",
+    "bytes": 1879018
+   }
+  ],
+  "shot": "screens-2026-09-23/224.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 4/6",
+   "cardName": "The tooth has darkened",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 225,
+  "url": "/services/root-canal-therapy",
+  "text": "change the image for the attached one",
+  "att": [
+   {
+    "file": "225-att1-image.png",
+    "sha": "b3cfbdff2a",
+    "bytes": 948243
+   }
+  ],
+  "shot": "screens-2026-09-23/225.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 1/6",
+   "cardName": "The pain stops",
+   "img": "mp-treatment-room-1536x2046.jpg",
+   "imgAlt": "A treatment room with a patient in the chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 226,
+  "url": "/services/root-canal-therapy",
+  "text": "change the image for the attached one",
+  "att": [
+   {
+    "file": "226-att1-image.png",
+    "sha": "06736b7656",
+    "bytes": 3862288
+   }
+  ],
+  "shot": "screens-2026-09-23/226.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/root-canal-therapy/",
+  "slot": {
+   "section": "why.ch.ch-why",
+   "heading": "What it does for you.",
+   "card": "article.svc-card 5/6",
+   "cardName": "The face keeps its shape",
+   "img": "mp-hygienist-working-4-1536x2046.jpg",
+   "imgAlt": "A hygienist working with an assistant",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 258,
+   "aspect": 1.6
+  }
+ },
+ {
+  "n": 227,
+  "url": "/services/comprehensive-care",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "227-att1-image.png",
+    "sha": "29910b81bb",
+    "bytes": 4647753
+   }
+  ],
+  "shot": "screens-2026-09-23/227.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "status": 200,
+  "page": "/services/comprehensive-care/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 2/6",
+   "cardName": "Chronic bad breath",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 228,
+  "url": "/services/comprehensive-care",
+  "text": "Put the image attached",
+  "att": [
+   {
+    "file": "228-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/228.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/comprehensive-care/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Is this the treatment you need?",
+   "card": "article.svc-card 3/6",
+   "cardName": "Red, swollen or tender gums",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 229,
+  "url": "/services/laser-dentistry",
+  "text": "Replace with the attached one",
+  "att": [
+   {
+    "file": "229-att1-image.png",
+    "sha": "3d12ba08b8",
+    "bytes": 3618158
+   }
+  ],
+  "shot": "screens-2026-09-23/229.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/laser-dentistry/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Four reasons patients ask for the laser.",
+   "card": "article.svc-card 1/4",
+   "cardName": "The drill is the problem",
+   "img": "mp-sofa-forms-2-1536x1153.jpg",
+   "imgAlt": "New patient forms on a tablet, on the waiting room sofa",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 230,
+  "url": "/services/laser-dentistry",
+  "text": "replace the image with the attached one",
+  "att": [
+   {
+    "file": "230-att1-image.png",
+    "sha": "c355a2417c",
+    "bytes": 1563591
+   }
+  ],
+  "shot": "screens-2026-09-23/230.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "page": "/services/laser-dentistry/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Four reasons patients ask for the laser.",
+   "card": "article.svc-card 4/4",
+   "cardName": "Dental anxiety",
+   "img": "mp-sofa-forms-3-1536x1153.jpg",
+   "imgAlt": "Two new patients on the waiting room sofa with the check-in tablet",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 259,
+   "aspect": 1.17
+  }
+ },
+ {
+  "n": 231,
+  "url": "/services/airflow-one",
+  "text": "replace the image for the attached one",
+  "att": [
+   {
+    "file": "231-att1-image.png",
+    "sha": "f3e3a12507",
+    "bytes": 891332
+   }
+  ],
+  "shot": "screens-2026-09-23/231.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/airflow-one/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs to ask for this one.",
+   "card": "article.svc-card 1/6",
+   "cardName": "Persistent stains",
+   "img": "mp-team-pair-laughing-1536x1153.jpg",
+   "imgAlt": "Two of the clinical team laughing between appointments",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 232,
+  "url": "/services/airflow-one",
+  "text": "Add the image attached",
+  "att": [
+   {
+    "file": "232-att1-image.png",
+    "sha": "40fed04a9d",
+    "bytes": 3793629
+   }
+  ],
+  "shot": "screens-2026-09-23/232.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/airflow-one/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs to ask for this one.",
+   "card": "article.svc-card 2/6",
+   "cardName": "Tartar keeps coming back",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 233,
+  "url": "/services/airflow-one",
+  "text": "Use the image attached",
+  "att": [
+   {
+    "file": "233-att1-image.png",
+    "sha": "ce19a0602b",
+    "bytes": 3381104
+   }
+  ],
+  "shot": "screens-2026-09-23/233.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/airflow-one/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs to ask for this one.",
+   "card": "article.svc-card 3/6",
+   "cardName": "You dread the cleaning",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 234,
+  "url": "/services/airflow-one",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "234-att1-image.png",
+    "sha": "4dd17be924",
+    "bytes": 2370985
+   }
+  ],
+  "shot": "screens-2026-09-23/234.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/airflow-one/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs to ask for this one.",
+   "card": "article.svc-card 4/6",
+   "cardName": "Bad breath",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 235,
+  "url": "/services/airflow-one",
+  "text": "use the attached",
+  "att": [
+   {
+    "file": "235-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/235.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(6)>div.svc-card_body",
+  "page": "/services/airflow-one/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Six signs to ask for this one.",
+   "card": "article.svc-card 6/6",
+   "cardName": "A history of gum disease",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 236,
+  "url": "/services/frenectomy",
+  "text": "Use the image attached",
+  "att": [
+   {
+    "file": "236-att1-image.png",
+    "sha": "ee0d073cd2",
+    "bytes": 2509134
+   }
+  ],
+  "shot": "screens-2026-09-23/236.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/frenectomy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Three ages, three different problems.",
+   "card": "article.svc-card 1/3",
+   "cardName": "Infants",
+   "img": "mp-sofa-forms-1536x1153.jpg",
+   "imgAlt": "A couple filling in their new patient forms on a tablet in the waiting room",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 237,
+  "url": "/services/frenectomy",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "237-att1-image.png",
+    "sha": "debf84be6e",
+    "bytes": 3556668
+   }
+  ],
+  "shot": "screens-2026-09-23/237.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/frenectomy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Three ages, three different problems.",
+   "card": "article.svc-card 2/3",
+   "cardName": "Children",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 512,
+   "aspect": 0.811
+  }
+ },
+ {
+  "n": 238,
+  "url": "/services/frenectomy",
+  "text": "Replace the photo",
+  "att": [
+   {
+    "file": "238-att1-image.png",
+    "sha": "d96e5ecce7",
+    "bytes": 3692665
+   }
+  ],
+  "shot": "screens-2026-09-23/238.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(3)>div.svc-card_media>img",
+  "page": "/services/frenectomy/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Three ages, three different problems.",
+   "card": "article.svc-card 3/3",
+   "cardName": "Adults",
+   "img": "mp-desk-family-2-1536x1153.jpg",
+   "imgAlt": "A mother and daughter at the front desk with the treatment plan",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 239,
+  "url": "/services/frenectomy",
+  "text": "Replace the image or remove the logo from Colgate",
+  "att": [
+   {
+    "file": "239-att1-image.png",
+    "sha": "9fd687da2d",
+    "bytes": 4071586
+   }
+  ],
+  "shot": "screens-2026-09-23/239.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#treatment.ch.ch-treatment>div.svc-overlap>div.svc-overlap_media>img",
+  "page": "/services/frenectomy/",
+  "slot": {
+   "section": "treatment.ch.ch-treatment",
+   "heading": "What it is, and what it involves.",
+   "card": "div.svc-overlap 2/3",
+   "cardName": "What is a frenectomy?",
+   "img": "mp-stock-exam-room-1536x1024.jpg",
+   "imgAlt": "A dentist in a treatment room holding instruments",
+   "frame": "div.svc-overlap_media",
+   "w": 864,
+   "h": 576,
+   "aspect": 1.5
+  }
+ },
+ {
+  "n": 240,
+  "url": "/services/extractions",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "240-att1-image.png",
+    "sha": "6eab1b9e60",
+    "bytes": 3610181
+   }
+  ],
+  "shot": "screens-2026-09-23/240.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "status": 200,
+  "page": "/services/extractions/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "When a tooth has to come out.",
+   "card": "article.svc-card 2/6",
+   "cardName": "Advanced gum disease",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 241,
+  "url": "/services/extractions",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "241-att1-image.png",
+    "sha": "182a0788c1",
+    "bytes": 2842665
+   }
+  ],
+  "shot": "screens-2026-09-23/241.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/extractions/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "When a tooth has to come out.",
+   "card": "article.svc-card 3/6",
+   "cardName": "Impacted wisdom teeth",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.854
+  }
+ },
+ {
+  "n": 242,
+  "url": "/services/extractions",
+  "text": "add the image",
+  "att": [
+   {
+    "file": "242-att1-image.png",
+    "sha": "9e0fd07ac6",
+    "bytes": 832507
+   }
+  ],
+  "shot": "screens-2026-09-23/242.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/extractions/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "When a tooth has to come out.",
+   "card": "article.svc-card 4/6",
+   "cardName": "Making room",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 486,
+   "aspect": 0.853
+  }
+ },
+ {
+  "n": 243,
+  "url": "/services/extractions",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "243-att1-image.png",
+    "sha": "9f7f6ed1ad",
+    "bytes": 3952035
+   }
+  ],
+  "shot": "screens-2026-09-23/243.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/extractions/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "When a tooth has to come out.",
+   "card": "article.svc-card 5/6",
+   "cardName": "A fracture below the gum",
+   "img": "mp-treatment-room-2-1536x2046.jpg",
+   "imgAlt": "A treatment room, seen from the corridor",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 244,
+  "url": "/services/wisdom-teeth",
+  "text": "use the image attached",
+  "att": [
+   {
+    "file": "244-att1-image.png",
+    "sha": "9dd403cad5",
+    "bytes": 3794051
+   }
+  ],
+  "shot": "screens-2026-09-23/244.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/wisdom-teeth/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "No pain does not mean no problem.",
+   "card": "article.svc-card 1/6",
+   "cardName": "They are impacted",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 245,
+  "url": "/services/wisdom-teeth",
+  "text": "add the image",
+  "att": [
+   {
+    "file": "245-att1-image.png",
+    "sha": "1a9abfaafa",
+    "bytes": 761081
+   }
+  ],
+  "shot": "screens-2026-09-23/245.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(2)>div.svc-card_body",
+  "page": "/services/wisdom-teeth/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "No pain does not mean no problem.",
+   "card": "article.svc-card 2/6",
+   "cardName": "Partial eruption",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 512,
+   "aspect": 0.811
+  }
+ },
+ {
+  "n": 246,
+  "url": "/services/wisdom-teeth",
+  "text": "add the image",
+  "att": [
+   {
+    "file": "246-att1-image.png",
+    "sha": "ba5fe5569a",
+    "bytes": 1886000
+   }
+  ],
+  "shot": "screens-2026-09-23/246.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(3)>div.svc-card_body",
+  "page": "/services/wisdom-teeth/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "No pain does not mean no problem.",
+   "card": "article.svc-card 3/6",
+   "cardName": "Crowding",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 512,
+   "aspect": 0.811
+  }
+ },
+ {
+  "n": 247,
+  "url": "/services/wisdom-teeth",
+  "text": "Add the image",
+  "att": [
+   {
+    "file": "247-att1-image.png",
+    "sha": "a918a7e8db",
+    "bytes": 3545083
+   }
+  ],
+  "shot": "screens-2026-09-23/247.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_body",
+  "page": "/services/wisdom-teeth/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "No pain does not mean no problem.",
+   "card": "article.svc-card 4/6",
+   "cardName": "They are hard to clean",
+   "img": null,
+   "imgAlt": null,
+   "frame": null,
+   "w": 415,
+   "h": 518,
+   "aspect": 0.801
+  }
+ },
+ {
+  "n": 248,
+  "url": "/services/wisdom-teeth",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "248-att1-image.png",
+    "sha": "2da706fdd0",
+    "bytes": 415795
+   }
+  ],
+  "shot": "screens-2026-09-23/248.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(5)>div.svc-card_media>img",
+  "page": "/services/wisdom-teeth/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "No pain does not mean no problem.",
+   "card": "article.svc-card 5/6",
+   "cardName": "They are damaging the tooth in front",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 249,
+  "url": "/services/dental-implant-placement",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "249-att1-image.png",
+    "sha": "f7aa42b142",
+    "bytes": 748237
+   }
+  ],
+  "shot": "screens-2026-09-23/249.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(3)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/dental-implant-placement/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "One tooth, several, or all of them.",
+   "card": "article.svc-card 3/3",
+   "cardName": "A whole arch",
+   "img": "mp-desk-tablet-2-1536x2046.jpg",
+   "imgAlt": "The front desk handing a tablet across the counter",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 250,
+  "url": "/services/dental-implant-placement",
+  "text": "replace the image",
+  "att": [
+   {
+    "file": "250-att1-image.png",
+    "sha": "9a42bf3544",
+    "bytes": 457932
+   }
+  ],
+  "shot": "screens-2026-09-23/250.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/dental-implant-placement/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "One tooth, several, or all of them.",
+   "card": "article.svc-card 1/3",
+   "cardName": "A single tooth",
+   "img": "mp-desk-family-2-1536x1153.jpg",
+   "imgAlt": "A mother and daughter at the front desk with the treatment plan",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 335,
+   "aspect": 1.231
+  }
+ },
+ {
+  "n": 251,
+  "url": "/services/tmj-tmd",
+  "text": "replace the iamge",
+  "att": [
+   {
+    "file": "251-att1-image.png",
+    "sha": "32f63f838c",
+    "bytes": 4145067
+   }
+  ],
+  "shot": "screens-2026-09-23/251.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(4)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/tmj-tmd/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Eight symptoms, and only three of them are jaw pain.",
+   "card": "article.svc-card 4/4",
+   "cardName": "Ear symptoms",
+   "img": "mp-ceiling-screen-2-1536x2046.jpg",
+   "imgAlt": "The ceiling screen above the treatment chair",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 233,
+   "aspect": 1.299
+  }
+ },
+ {
+  "n": 252,
+  "url": "/services/tmj-tmd",
+  "text": "repolace the image",
+  "att": [
+   {
+    "file": "252-att1-image.png",
+    "sha": "da39a3ee5e",
+    "bytes": 0
+   }
+  ],
+  "shot": "screens-2026-09-23/252.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-4.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "page": "/services/tmj-tmd/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Eight symptoms, and only three of them are jaw pain.",
+   "card": "article.svc-card 1/4",
+   "cardName": "Jaw pain or tenderness",
+   "img": "mp-desk-patient-1536x2046.jpg",
+   "imgAlt": "A patient and the front desk going through her plan",
+   "frame": "div.svc-card_media",
+   "w": 303,
+   "h": 227,
+   "aspect": 1.333
+  }
+ },
+ {
+  "n": 253,
+  "url": "/services/sedation-dentistry",
+  "text": "Replace the image",
+  "att": [
+   {
+    "file": "253-att1-image.png",
+    "sha": "1dfe622c35",
+    "bytes": 755281
+   }
+  ],
+  "shot": "screens-2026-09-23/253.jpg",
+  "sel": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#qualify.ch.ch-qualify>div.wrap>div.svc-grid.is-3.is-stagger>article.svc-card:nth-of-type(1)>div.svc-card_media>img",
+  "status": 200,
+  "page": "/services/sedation-dentistry/",
+  "slot": {
+   "section": "qualify.ch.ch-qualify",
+   "heading": "Seven reasons people ask for it.",
+   "card": "article.svc-card 1/6",
+   "cardName": "Extreme anxiety or fear",
+   "img": "mp-sofa-forms-2-1536x1153.jpg",
+   "imgAlt": "New patient forms on a tablet, on the waiting room sofa",
+   "frame": "div.svc-card_media",
+   "w": 413,
+   "h": 310,
+   "aspect": 1.333
+  }
+ }
+]

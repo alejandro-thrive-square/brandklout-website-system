@@ -5,7 +5,24 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## BugHerd round four - 2026-09-21
+## BugHerd round five - 2026-09-23
+
+**133 of 143 new notes are done and live on staging, and every 3- and 6-card "Is this the
+treatment you need?" grid now has a photograph on every card**
+([`runbook/2026-09-23-bugherd-round-five-photographs.md`](./runbook/2026-09-23-bugherd-round-five-photographs.md)).
+The round was photographs: the agency attached one per note, and a teammate asked in chat for every
+six-box page to match the preventative grid. 149 frames were cut and placed. Two of the notes asked
+for "the same for all pages": the building exterior is now every page's invitation photo (58 pages
+and the blog), and the front desk is every proof portrait (37). Contact's three doctors have their own
+portraits (Dr. Nguyen's is cut from the kids' Drive family shoot). The blog's topic tiles are one
+height, and the sand block under an unfilled row is gone.
+
+**Open, all on the agency:** 8 notes whose attachment BugHerd stored as zero bytes
+(#112 #125 #182 #185 #195 #228 #235 #252), 2 same-photo-twice-on-a-page (#178 #202), and #3, #66.
+
+**Staging only. Production is unchanged and was not read.**
+
+## Earlier - BugHerd round four, 2026-09-21
 
 **The board is down to two notes, and both are waiting on the agency**
 ([`runbook/2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md`](./runbook/2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md)).

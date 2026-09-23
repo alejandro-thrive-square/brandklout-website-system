@@ -75,10 +75,12 @@ const TOPIC_IMG = {
 // The photograph in the article's sticky rail (2026-09-10), by topic. On
 // Instatic every article shares one template, so the template carries the
 // General one; the static build varies it.
+// #160 (2026-09-23): "use the same image for all the blog pages" -- one rail photograph,
+// the practice's building, whatever the topic.
 const TOPIC_RAIL = {
-  "Invisalign&reg;": "scanner-chair",
-  "Dental implants": "dentist-standing",
-  General: "team-reception",
+  "Invisalign&reg;": "n160-building-exterior-blog",
+  "Dental implants": "n160-building-exterior-blog",
+  General: "n160-building-exterior-blog",
 };
 
 const relatedFor = (p) => {
@@ -210,8 +212,8 @@ ${pager(pageNo, pageCount)}
     </div>
     <div class="iv-aside">
       <figure class="iv-shot" data-el="mask">
-        {{img slug="team-reception" sizes="(max-width: 899px) 100vw, 34vw"}}
-        <figcaption>Reception, where the reading stops and the appointment starts.</figcaption>
+        {{img slug="n120-building-exterior" sizes="(max-width: 899px) 100vw, 34vw"}}
+        <figcaption>Suite 104A, on the ground floor. Free parking at the door.</figcaption>
       </figure>
       <div class="iv-map">
         <div class="embed_component">
@@ -340,8 +342,8 @@ ${relatedHtml}
     </div>
     <div class="iv-aside">
       <figure class="iv-shot" data-el="mask">
-        {{img slug="team-front-desk" sizes="(max-width: 899px) 100vw, 34vw"}}
-        <figcaption>The front desk at Mason Park Dental of Katy.</figcaption>
+        {{img slug="n120-building-exterior" sizes="(max-width: 899px) 100vw, 34vw"}}
+        <figcaption>Suite 104A, on the ground floor. Free parking at the door.</figcaption>
       </figure>
       <div class="iv-map">
         <div class="embed_component">
