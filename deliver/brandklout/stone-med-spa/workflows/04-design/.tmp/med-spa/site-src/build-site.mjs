@@ -435,7 +435,7 @@ ${vitals(slug)}
             </div>
             <div class="button-group spec_actions">
               <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+              <a class="button is-secondary" href="tel:+18176742061">Call (817) 674-2061</a>
             </div>
             <p class="spec_note">${esc(p.priceNote)}</p>
           </aside>

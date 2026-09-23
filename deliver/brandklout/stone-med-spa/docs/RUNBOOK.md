@@ -15,6 +15,10 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
+**2026-09-23, latest — phone is (817) 674-2061**, the display number, on production (seq 21) and
+staging (seq 16). **No number pool yet**: it needs the med spa's own GHL `number_pool.js` URL for
+`set-dni-pool.mjs --pool` — [run](./runbook/2026-09-23-display-phone-674-2061.md).
+
 **2026-09-23 — the client's BugHerd pass is on STAGING, not production.** 41 tasks on production
 (BugHerd project 540569): 38 applied on `https://staging.westlaketxmedspa.com` (seq 13, **24
 pages** — eleven new treatment pages generated from `treatment-pages.mjs`), 3 waiting on Drive

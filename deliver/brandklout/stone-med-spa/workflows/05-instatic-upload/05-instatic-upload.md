@@ -157,6 +157,23 @@ the routes and assets resolve; `compare-live.mjs` asks whether the page still LO
 Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
 `width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
 
+### Changing the phone number, and the call-tracking pool
+
+Do not re-import to change a number. `swap-phone.mjs` rewrites it in place (page nodes and the
+shell's `site.js`, the only two stores that hold it on this site), backs up to `.tmp/`, reads back
+and publishes. Edit its `MAP` and the same literals in `site-src/`, then rebuild, so the next push
+cannot bring the old number back. Run it on production and on staging
+(`INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com`).
+
+The site shows **(817) 674-2061** since 2026-09-23. It is the display number: it stays in the
+HTML for SEO, and the pool swaps it for visitors. `set-dni-pool.mjs --pool <number_pool.js URL>`
+owns the GoHighLevel pool lines in the Embed Origins plugin's `siteScripts` and the two
+LeadConnector `connectOrigins`. The pool URL has to come from **this practice's** GHL location. The
+script refuses Stone Surgical Arts' location. **It refuses any host but production**: a staging
+clone that loads the pool uses up real tracking numbers. Plugin settings are not part of a page
+push, so promoting staging to production leaves the pool in place. Write numbers as
+`(NNN) NNN-NNNN` and `tel:+1NNNNNNNNNN`. The pool cannot see a number written with spaces.
+
 ### The link guard, and the three ways the Railway target gets crossed
 
 `ship.sh` runs `check-link.mjs` as step 0 and refuses to ship if it fails. The invariant it
