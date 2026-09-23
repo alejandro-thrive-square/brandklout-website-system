@@ -160,6 +160,77 @@ const READ = {
     ok('Form: the GoHighLevel frame is in the slot and fills the card', !!f && /leadconnectorhq\.com\/widget\/form\//.test(f.src) && f.w >= f.card * .8 && f.h >= 300, f)
   }
 
+  /* ---- BugHerd round 1 (2026-09-23): every change is proven by driving it, not by reading it ---- */
+  const gone = await page.evaluate(() => ({
+    chrome: [...document.querySelectorAll('.cursor, .rail, [data-rail], .arrival__frame')].length,
+    numbers: [...document.querySelectorAll('.tag')].filter(t => /\b0\d\b/.test(t.textContent)).map(t => t.textContent.slice(0, 20)),
+    fig: /\bFig\.\s*\d/.test(document.body.innerText),
+    coords: /\d+\.\d+°/.test(document.body.innerText),
+  }))
+  ok('BugHerd: no cursor dot, chapter rail, hero frame, chapter numbers, Fig. labels or coordinates', !gone.chrome && !gone.numbers.length && !gone.fig && !gone.coords, gone)
+
+  const q = await page.evaluate(() => { const s = document.querySelector('[data-question-stage]'), sp = s.parentElement; return { extra: sp.classList.contains('pin-spacer') ? sp.offsetHeight - s.offsetHeight : null, vh: innerHeight } })
+  ok('BugHerd: The Question holds for about one screen of scrolling', q.extra !== null && q.extra <= q.vh * 1.1, q)
+
+  // the steps are controls: click 03, then 01; then drag walks them
+  const design = () => page.evaluate(() => ({ step: [...document.querySelectorAll('[data-design-step]')].findIndex(s => s.classList.contains('is-on')), pos: parseFloat(document.querySelector('[data-compare]').style.getPropertyValue('--pos')), lines: +getComputedStyle(document.querySelector('[data-draw]')).opacity, notes: [...document.querySelectorAll('[data-note]')].filter(n => +getComputedStyle(n).opacity > .9).length }))
+  await page.evaluate(() => document.querySelector('.ch-design').scrollIntoView({ block: 'start' })); await wait(1200)
+  await page.click('[data-design-step]:nth-child(3) [data-design-go]'); await wait(2500)
+  const d3 = await design()
+  ok('BugHerd: clicking step 03 plays the scene to the after', d3.step === 2 && d3.pos > 95, d3)
+  ok('BugHerd: at "drag" the whole design shows, lines and labels', d3.lines === 1 && d3.notes === 4, d3)
+  const cbox = await (await page.$('[data-compare]')).boundingBox()
+  await page.mouse.move(cbox.x + cbox.width * .9, cbox.y + cbox.height / 2); await page.mouse.down()
+  await page.mouse.move(cbox.x + cbox.width * .5, cbox.y + cbox.height / 2, { steps: 6 }); await page.mouse.up(); await wait(200)
+  ok('BugHerd: dragging to the middle lights step 02', (await design()).step === 1, await design())
+  await page.click('[data-design-step]:nth-child(1) [data-design-go]'); await wait(2500)
+  const d1 = await design()
+  ok('BugHerd: clicking step 01 goes back to the studied before', d1.step === 0 && d1.pos < 5, d1)
+
+  // the memberships marquee stops under the pointer
+  await page.evaluate(() => document.querySelector('[data-marquee]').scrollIntoView({ block: 'center' })); await wait(900)
+  await page.hover('[data-marquee]'); await wait(900)
+  const h1 = await mq(); await wait(600); const h2 = await mq()
+  ok('BugHerd: marquee stops on hover', Math.abs(h1 - h2) < .5, [h1, h2])
+  await page.mouse.move(5, 5); await wait(1500)
+  ok('BugHerd: marquee runs again after', Math.abs((await mq()) - h2) > 1)
+
+  // reviews turn on their own, and not under the pointer
+  await page.evaluate(() => document.querySelector('[data-voices]').scrollIntoView({ block: 'center' })); await page.mouse.move(5, 5); await wait(800)
+  const r0 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
+  await wait(8200)
+  const r1 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
+  ok('BugHerd: reviews rotate on their own', r1 !== r0, [r0, r1])
+  await page.hover('.voices__quotes'); await wait(8200)
+  ok('BugHerd: reviews hold while hovered', await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent) === r1)
+  await page.mouse.move(5, 5)
+
+  // cards name the problem, then the procedure
+  const meta = await page.evaluate(() => [...document.querySelectorAll('.card__meta')].map(m => [m.querySelector('b').textContent, (m.querySelector('.card__issue') || {}).textContent, m.querySelector('i').textContent]))
+  ok('BugHerd: every story card shows the original issue, then the procedure', meta.length === 4 && meta.every(m => m[1] && /All-on-X/.test(m[2])), meta)
+
+  // finance logos: links, equal boxes
+  const fin = await page.evaluate(() => [...document.querySelectorAll('.finance__logo')].map(a => { const r = a.getBoundingClientRect(); return { href: a.getAttribute('href'), w: Math.round(r.width), h: Math.round(r.height) } }))
+  ok('BugHerd: the three payment logos link to Payment Options, in equal boxes', fin.length === 3 && fin.every(f => f.href === '/about-our-practice/payment-options/' && f.w === fin[0].w && f.h === fin[0].h), fin)
+
+  // FAQ opens and closes by click
+  await page.evaluate(() => document.querySelector('[data-faq]').scrollIntoView({ block: 'center' })); await wait(900)
+  const faq = () => page.evaluate(() => [...document.querySelectorAll('[data-faq-item]')].map(i => i.querySelector('[data-faq-btn]').getAttribute('aria-expanded') === 'true' && !i.querySelector('[data-faq-a]').hidden && i.querySelector('[data-faq-a]').offsetHeight > 20))
+  const f0 = await faq()
+  await page.click('[data-faq-item]:nth-child(2) [data-faq-btn]'); await wait(900)
+  const f1 = await faq()
+  await page.click('[data-faq-item]:nth-child(1) [data-faq-btn]'); await wait(400)
+  const f2 = await faq()
+  ok('BugHerd: FAQ has 7 questions, first open, and each opens and closes by click', f0.length === 7 && f0.join() === 'true,false,false,false,false,false,false' && f1[1] && !f2[0], { f0, f1, f2 })
+
+  // footer
+  const foot = await page.evaluate(() => { const f = document.querySelector('.foot'); return { tel: !!f.querySelector('a[href="tel:+16022422256"]'), maps: !!f.querySelector('a[href*="google.com/maps/dir"]'), fb: !!f.querySelector('a[href*="facebook.com/ifadentistry"]'), ig: !!f.querySelector('a[href*="instagram.com/doctor.bensoussan"]'), hours: /Monday to Thursday/.test(f.textContent), langs: /English, French and Dutch/.test(f.textContent) } })
+  ok('BugHerd: footer has socials, directions, phone, hours and languages', Object.values(foot).every(Boolean), foot)
+
+  // the hero film plays without any help
+  await page.evaluate(() => window.scrollTo(0, 0)); await wait(2500)
+  ok('BugHerd: hero film is playing at the top of the page', await page.evaluate(() => { const v = document.querySelector('[data-hero-video]'); return !v.paused && v.currentTime > 0 }))
+
   ok('Desktop: no console errors', errors.length === 0, errors)
   await page.close()
 }

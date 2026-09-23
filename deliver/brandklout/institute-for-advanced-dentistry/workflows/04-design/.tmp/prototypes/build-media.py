@@ -15,6 +15,11 @@ Run from the repository root, after the Drive pulls below (python -m pip install
   node scripts/drive.mjs thumbs 1iRdJMV3JNkUlQe4KrdMJ8KdYpfcY85fc $D/web/case-lori    --size 2000
   node scripts/drive.mjs pull   1tq9mHGZw4i4zEDr7tFilLXErAInv3YwP $D/logo-png
   node scripts/drive.mjs get    1-KV6rPkvi0WjIRfZL8Uzcp3ZDezf3aLq $D/broll        # Web Broll_Main.mp4
+  # BugHerd round 1 (2026-09-23): the four photos the reviewer named, by file name on the Drive
+  node scripts/drive.mjs get    1C4H1JSvrt5jOZa7H_36II6k3d86QEChd $D/bugherd-r1   # DSC_3137.jpg
+  node scripts/drive.mjs get    1DnJlQrQqX4NADmKPmepjzWwjis2y97jK $D/bugherd-r1   # DSC_3102.jpg
+  node scripts/drive.mjs get    1O8GyXcKwtRrcWBkbRjDj8CsRJC-Whmk6 $D/bugherd-r1   # DSC_3084-Edit.jpg
+  node scripts/drive.mjs get    1l_-Q-JAoNA5UORXFHxGBBo5BACgViANz $D/bugherd-r1   # Using technology to create smiles.png
 
   python deliver/brandklout/institute-for-advanced-dentistry/workflows/04-design/.tmp/prototypes/build-media.py
 
@@ -59,6 +64,12 @@ PHOTOS = {
     'office-wall.jpg': (shot('office', 196), 1600),
     'office-lounge.jpg': (shot('office', 191), 1600),
     'office-door.jpg': (shot('office', 198), 1200),
+    # BugHerd round 1: new NAMES, not overwrites. Instatic's media upload skips a file whose basename
+    # it already holds, so a replaced photo under the old name would keep serving the old one.
+    'dr-lab.jpg': (D + 'bugherd-r1/DSC_3137.jpg', 1400),
+    'path-3-lab.jpg': (D + 'bugherd-r1/DSC_3102.jpg', 1200),
+    'path-4-print.jpg': (D + 'bugherd-r1/DSC_3084-Edit.jpg', 1200),
+    'path-6-design.jpg': (D + 'bugherd-r1/Using technology to create smiles.png', 964),
 }
 for out, (src, width) in PHOTOS.items():
     im = Image.open(src).convert('RGB')

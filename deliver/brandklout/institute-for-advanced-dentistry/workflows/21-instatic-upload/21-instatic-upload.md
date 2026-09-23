@@ -114,6 +114,7 @@ atomic PUT) and none of its WordPress parsing.
 
 ```bash
 export INSTATIC_BASE_URL=https://staging.ifadentistry.com      # the .env points at PRODUCTION; every script below refuses anything else
+node home/snapshot-home.mjs <label> > .tmp/home/snapshot.log 2>&1   # before any --force push: shell + pages, gz; note the seq
 node home/prepare-home.mjs      > .tmp/home/prepare.log 2>&1   # 0. prototype body -> .tmp/home/page.html, embeds, media list
 node home/upload-media-home.mjs > .tmp/home/upload.log  2>&1   # 1. images, films, woff2 -> the library as home-*; .tmp/home/media-map.json
 node home/build-home.mjs        > .tmp/home/build.log   2>&1   # 2. site.css (faces + home.css), site.js (wrapped GSAP + home.js), import-input
@@ -131,6 +132,11 @@ MSYS_NO_PATHCONV=1 node ../../../../process/21-instatic-staging-clone/verify-sta
 - **`site.css` and `site.js` are replaced**, so from this push on, staging cannot be promoted over
   production: production's 58 other pages live on the cascade and script replay those two files held.
 - **`ship.sh` takes `WZ_TMP`** so the home payload never overwrites the clone's `.tmp/import-*`.
+  The link dir for staging on this workstation is `%LOCALAPPDATA%\Temp\rw-ifa-staging`. `ship.sh`
+  checks it before it ships.
+- **A replaced photo needs a new file name.** `upload-media-home.mjs` skips a basename the library
+  already holds, so reusing the old name keeps serving the old image (BugHerd round 1: `dr-lab`,
+  `path-*-lab/print/design`).
 - **The vendor wrap** (West LA trap 36, now here): each GSAP UMD runs inside a function that shadows
   `exports`/`module`/`define`/`self`/`globalThis` with `this` bound to a plain object, and its
   exports are copied to `window` before the next file. Test the built `site.js` as

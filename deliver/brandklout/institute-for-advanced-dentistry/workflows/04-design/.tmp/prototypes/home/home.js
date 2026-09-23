@@ -21,10 +21,9 @@
   function unveil() { html.classList.add('is-ready'); }
 
   /* ------------------------------------------------------------------ chrome */
-  var nav = $('[data-nav]'), rail = $('[data-rail]'), progress = $('[data-progress]');
+  var nav = $('[data-nav]'), progress = $('[data-progress]');
   var callbar = $('[data-callbar]'), ask = $('[data-ask]');
   var chapters = $$('[data-chapter]');
-  var railItems = $$('[data-rail-item]');
   var queued = false;
 
   function chapterAt(y) {
@@ -42,10 +41,6 @@
     progress.style.transform = 'scaleX(' + Math.min(1, Math.max(0, y / max)).toFixed(4) + ')';
     nav.classList.toggle('is-solid', y > 40);
     nav.classList.toggle('is-light', chapterAt(nav.offsetHeight / 2).getAttribute('data-theme') === 'light');
-    var mid = chapterAt(window.innerHeight / 2);
-    rail.classList.toggle('is-light', mid.getAttribute('data-theme') === 'light');
-    var on = mid.getAttribute('data-chapter');
-    railItems.forEach(function (li) { li.classList.toggle('is-on', li.getAttribute('data-rail-item') === on); });
     if (ask) {
       var a = ask.getBoundingClientRect();
       callbar.classList.toggle('is-away', a.top < window.innerHeight - 80 && a.bottom > 80);
@@ -101,11 +96,30 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeDrawer(); closeModal(); } });
 
   /* -------------------------------------------------------------- hero video */
+  /* BugHerd 4: Safari would not start the film until it had been scrolled past and back. WebKit
+     refuses or pauses a muted inline video it judges invisible, and at first play() the film is
+     inside an opacity:0 box and a clip-path closed to nothing (the entrance). So the film is asked
+     again whenever it could newly be allowed: data arriving, the entrance finishing, the first
+     scroll, pointer or key, and whenever it comes back on screen. The flags are set as properties
+     too, because a muted ATTRIBUTE alone does not always make the element muted. */
   var heroVideo = $('[data-hero-video]');
+  var heroOn = true;
+  function heroPlay() {
+    if (!heroVideo || reduce || !heroOn || !heroVideo.paused) return;
+    var p = heroVideo.play(); if (p && p.catch) p.catch(function () {});
+  }
   if (heroVideo) {
+    heroVideo.muted = true; heroVideo.defaultMuted = true; heroVideo.playsInline = true;
+    heroVideo.setAttribute('playsinline', ''); heroVideo.setAttribute('webkit-playsinline', '');
     heroVideo.src = heroVideo.getAttribute(window.innerWidth < 768 ? 'data-src-sm' : 'data-src-lg');
-    if (!reduce) { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); }
-    else heroVideo.controls = true;
+    if (!reduce) {
+      heroVideo.autoplay = true;
+      ['loadeddata', 'canplay'].forEach(function (n) { heroVideo.addEventListener(n, heroPlay); });
+      var nudge = function () { heroPlay(); if (!heroVideo.paused) ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (n) { window.removeEventListener(n, nudge); }); };
+      ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (n) { window.addEventListener(n, nudge, { passive: true }); });
+      if (window.IntersectionObserver) new IntersectionObserver(function (es) { heroOn = es[0].isIntersecting; if (heroOn) heroPlay(); else heroVideo.pause(); }).observe(heroVideo.parentNode);
+      heroPlay();
+    } else heroVideo.controls = true;
   }
 
   /* ------------------------------------------------------------- story modal */
@@ -154,9 +168,37 @@
         gsap.fromTo(to, { y: 30 * dir, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .8, ease: 'expo.out', onComplete: function () { vBusy = false; } });
       } });
     };
-    $('[data-voice-next]', voices).addEventListener('click', function () { showVoice((vi + 1) % vs.length, 1); });
-    $('[data-voice-prev]', voices).addEventListener('click', function () { showVoice((vi - 1 + vs.length) % vs.length, -1); });
+    /* BugHerd 33: the reviews turn on their own, stop while the pointer or keyboard focus is on
+       them (WCAG 2.2.2) and while they are off screen; the arrows still work and restart the clock. */
+    var vHold = false, vSeen = false, vTimer = null;
+    var vArm = function () {
+      clearTimeout(vTimer);
+      if (reduce) return;
+      vTimer = setTimeout(function () { if (!vHold && vSeen && !document.hidden) showVoice((vi + 1) % vs.length, 1); vArm(); }, 6500);
+    };
+    voices.addEventListener('pointerenter', function () { vHold = true; });
+    voices.addEventListener('pointerleave', function () { vHold = false; vArm(); });
+    voices.addEventListener('focusin', function () { vHold = true; });
+    voices.addEventListener('focusout', function (e) { if (!voices.contains(e.relatedTarget)) { vHold = false; vArm(); } });
+    if (window.IntersectionObserver) new IntersectionObserver(function (es) { vSeen = es[0].isIntersecting; if (vSeen) vArm(); }, { threshold: .4 }).observe(voices);
+    else vSeen = true;
+    $('[data-voice-next]', voices).addEventListener('click', function () { showVoice((vi + 1) % vs.length, 1); vArm(); });
+    $('[data-voice-prev]', voices).addEventListener('click', function () { showVoice((vi - 1 + vs.length) % vs.length, -1); vArm(); });
+    vArm();
   }
+
+  /* -------------------------------------------------------------------- faq */
+  /* Without this file every answer is open. With it, the first stays open and the rest fold. */
+  $$('[data-faq-item]').forEach(function (item, i) {
+    var btn = $('[data-faq-btn]', item), ans = $('[data-faq-a]', item);
+    var set = function (open) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); ans.hidden = !open; };
+    set(i === 0);
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      set(open);
+      if (open && motion) gsap.fromTo(ans, { height: 0, autoAlpha: 0 }, { height: 'auto', autoAlpha: 1, duration: .6, ease: 'expo.out', clearProps: 'height,opacity,visibility' });
+    });
+  });
 
   /* ------------------------------------------------------------ disciplines */
   var panels = $$('[data-disc-panel]');
@@ -177,12 +219,35 @@
     compare.classList.toggle('is-done', v > 96);
     handle.setAttribute('aria-valuenow', String(Math.round(v)));
   }
+
+  /* BugHerd 18/19: the three steps are controls. A click goes to that step: with motion it scrolls
+     the pinned scene to where that step plays; without, it sets the divider. Dragging the divider
+     walks the steps too: studied on the before, worn at the midpoint, made on the after. */
+  var steps = $$('[data-design-step]'), stepNow = 0, designST = null;
+  var STEP_POS = [0, 52, 100], STEP_AT = [.3, .64, .95];
+  function setStep(n) {
+    if (n === stepNow) return;
+    stepNow = n;
+    steps.forEach(function (s, i) { s.classList.toggle('is-on', i === n); });
+  }
+  function stepFromPos() { setStep(cmp.pos < 26 ? 0 : cmp.pos < 76 ? 1 : 2); }
+  function goStep(i) {
+    setStep(i);
+    if (designST) {
+      var y = designST.start + (designST.end - designST.start) * STEP_AT[i];
+      if (smoother) smoother.scrollTo(y, true);
+      else window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    } else { cmp.pos = STEP_POS[i]; paintCompare(); }
+  }
+  steps.forEach(function (s, i) { s.addEventListener('click', function () { goStep(i); }); });
+
   if (compare) {
     var dragging = false;
     var fromEvent = function (e) {
       var r = compare.getBoundingClientRect();
       cmp.pos = (e.clientX - r.left) / r.width * 100;
       paintCompare();
+      stepFromPos();
     };
     compare.addEventListener('pointerdown', function (e) {
       dragging = true;
@@ -196,8 +261,9 @@
       e.preventDefault();
       cmp.pos = Math.max(0, Math.min(100, cmp.pos + (e.key === 'ArrowRight' ? 5 : -5)));
       paintCompare();
+      stepFromPos();
     });
-    if (!motion) { cmp.pos = 50; paintCompare(); }
+    if (!motion) { cmp.pos = 50; paintCompare(); stepFromPos(); }
   }
 
   /* ------------------------------------------------------------------- form */
@@ -282,7 +348,7 @@
        The stage is as tall as its content. The film sits in a true 16:9 frame, uncropped, and opening
        it is one transform: the same box scaled until it covers the viewport. If the stage is taller
        than the window it pins from its bottom edge, so everything has been read before it opens. */
-    var stage = $('[data-arrival-stage]'), fig = $('[data-arrival-fig]'), media = $('[data-arrival-media]'), frame = $('[data-arrival-frame]');
+    var stage = $('[data-arrival-stage]'), fig = $('[data-arrival-fig]'), media = $('[data-arrival-media]');
     var copy = $('[data-arrival-copy]'), facts = $('[data-arrival-facts]'), second = $('[data-arrival-second]');
     var shade = $('.arrival__shade'), h1 = $('.ch-arrival .d1');
 
@@ -295,7 +361,7 @@
       .from(heroSplit.lines, { yPercent: 112, stagger: .1, duration: 1.3 }, .45)
       .from($$('.ch-arrival [data-rise]'), { y: 30, autoAlpha: 0, stagger: .12, duration: 1 }, .9)
       .from($$('li', facts), { y: 24, autoAlpha: 0, stagger: .08, duration: .9 }, 1.1)
-      .from(frame, { autoAlpha: 0, duration: 1.2 }, 1.2);
+      .call(heroPlay, null, 1.7);
     unveil();
 
     /* Where the visible window sits inside the stage while it is pinned, and the one scale that covers it. */
@@ -316,7 +382,6 @@
       var tl = gsap.timeline({ scrollTrigger: { trigger: stage, pin: true, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
         start: function () { return stage.offsetHeight > window.innerHeight + 2 ? 'bottom bottom' : 'top top'; }, end: '+=115%' } });
       tl.to(media, { x: function () { return open().x; }, y: function () { return open().y; }, scale: function () { return open().scale; }, borderRadius: 0, ease: 'power2.inOut', duration: .62 }, 0)
-        .to(frame, { autoAlpha: 0, ease: 'none', duration: .12 }, 0)
         .to(copy, { y: -90, autoAlpha: 0, ease: 'power1.in', duration: .3 }, 0)
         .to(facts, { y: 30, autoAlpha: 0, ease: 'power1.in', duration: .22 }, 0)
         .to(shade, { opacity: 1, ease: 'none', duration: .6 }, 0)
@@ -329,7 +394,7 @@
         scrollTrigger: { trigger: fig, start: 'top 15%', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
     });
     ScrollTrigger.create({ trigger: stage, start: 'top bottom', end: 'bottom top', onToggle: function (self) {
-      if (self.isActive) { var p = heroVideo.play(); if (p && p.catch) p.catch(function () {}); } else heroVideo.pause();
+      heroOn = self.isActive; if (heroOn) heroPlay(); else heroVideo.pause();
     } });
 
     /* ---- 01 · the question: the page holds while the copy is written ---- */
@@ -340,15 +405,15 @@
     var w2 = SplitText.create(s2, { type: 'words', wordsClass: 'w' }).words;
     var lit = function (i, el) { return el.closest('strong') ? GOLD : LIT; };
     gsap.set(s2, { autoAlpha: 0, y: 50 });
-    gsap.timeline({ scrollTrigger: { trigger: qStage, pin: true, start: 'top top', end: '+=240%', scrub: true, anticipatePin: 1 } })
+    gsap.timeline({ scrollTrigger: { trigger: qStage, pin: true, start: 'top top', end: '+=100%', scrub: true, anticipatePin: 1 } })
       .to(w1, { color: lit, stagger: .06, duration: .3, ease: 'none' }, 0)
       .to(s1, { autoAlpha: 0, y: -50, ease: 'power1.in', duration: .5 }, '>+.3')
       .to(s2, { autoAlpha: 1, y: 0, ease: 'power2.out', duration: .5 }, '>-.1')
       .to(w2, { color: lit, stagger: .06, duration: .3, ease: 'none' }, '>-.2')
       .to({}, { duration: .5 });
-    gsap.fromTo('[data-question-meter]', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top top', end: '+=240%', scrub: true } });
+    gsap.fromTo('[data-question-meter]', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top top', end: '+=100%', scrub: true } });
     var qImg = $('.question__img img');
-    gsap.fromTo(qImg, { scale: 1.3 }, { scale: 1.001, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top bottom', end: '+=340%', scrub: true } });
+    gsap.fromTo(qImg, { scale: 1.3 }, { scale: 1.001, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top bottom', end: '+=200%', scrub: true } });
     gsap.from($('.question__img'), { clipPath: 'inset(0% 0% 100% 0% round 10px)', duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: qStage, start: 'top 60%', once: true } });
 
     /* ---- 02 · disciplines ---- */
@@ -358,7 +423,7 @@
     gsap.to($('.ch-disciplines .ch__head'), { y: -50, ease: 'none', scrollTrigger: { trigger: disc, start: 'top 60%', end: 'top top', scrub: true } });
 
     /* ---- 03 · the design: one pin, scroll is the slider ---- */
-    var dStage = $('[data-design-stage]'), steps = $$('[data-design-step]'), notes = $$('[data-note]'), hint = $('[data-design-hint]');
+    var dStage = $('[data-design-stage]'), notes = $$('[data-note]'), hint = $('[data-design-hint]');
     dStage.classList.add('is-live');
     var drawn = [], faded = [];
     $$('[data-line]').forEach(function (l) {
@@ -370,23 +435,17 @@
     });
     gsap.set(faded, { autoAlpha: 0 });
     gsap.set(notes, { autoAlpha: 0, y: 8 });
-    var stepNow = -1;
-    var setStep = function (n) {
-      if (n === stepNow) return;
-      stepNow = n;
-      steps.forEach(function (s, i) { s.classList.toggle('is-on', i === n); });
-    };
     cmp.pos = 0; paintCompare();
-    gsap.timeline({ scrollTrigger: { trigger: dStage, pin: true, start: 'top top', end: '+=300%', scrub: true, anticipatePin: 1,
+    /* The guide lines and their labels stay on to the end (BugHerd 19): when the scene says "drag",
+       the whole design is on screen, and dragging walks the three steps. */
+    designST = gsap.timeline({ scrollTrigger: { trigger: dStage, pin: true, start: 'top top', end: '+=300%', scrub: true, anticipatePin: 1,
       onUpdate: function (self) { setStep(self.progress < .33 ? 0 : self.progress < .66 ? 1 : 2); hint.textContent = self.progress > .93 ? 'Drag to compare' : 'Scroll, then drag to compare'; } } })
       .to(drawn, { strokeDashoffset: 0, stagger: .025, duration: .2, ease: 'power1.inOut' }, 0)
       .to(faded, { autoAlpha: .85, stagger: .04, duration: .1 }, .12)
       .to(notes, { autoAlpha: 1, y: 0, stagger: .04, duration: .08 }, .16)
       .to(cmp, { pos: 52, duration: .27, ease: 'power1.inOut', onUpdate: paintCompare }, .36)
       .to(cmp, { pos: 100, duration: .22, ease: 'power1.inOut', onUpdate: paintCompare }, .69)
-      .to(notes, { autoAlpha: 0, duration: .06 }, .8)
-      .to($('[data-draw]'), { autoAlpha: 0, duration: .08 }, .82)
-      .to({}, { duration: .08 }, .92);
+      .to({}, { duration: .08 }, .92).scrollTrigger;
     gsap.from(compare, { clipPath: 'inset(0% 0% 100% 0% round 11px)', scale: 1.06, duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: dStage, start: 'top 65%', once: true } });
 
     /* ---- 04 · the specialist ---- */
@@ -401,7 +460,13 @@
     for (var c = 0; c < 3; c++) { var clone = set.cloneNode(true); clone.setAttribute('aria-hidden', 'true'); track.appendChild(clone); }
     var loop = gsap.to(track, { x: function () { return -set.offsetWidth; }, duration: 28, ease: 'none', repeat: -1 });
     loop.totalTime(28 * 40);
+    var mq = $('[data-marquee]'), mqHold = false;
+    var mqStop = function () { mqHold = true; gsap.killTweensOf(loop); gsap.to(loop, { timeScale: 0, duration: .35, ease: 'power2.out' }); };
+    var mqGo = function () { mqHold = false; gsap.to(loop, { timeScale: 1, duration: .8, ease: 'power2.in' }); };
+    mq.addEventListener('pointerenter', mqStop); mq.addEventListener('pointerleave', mqGo);
+    mq.addEventListener('focusin', mqStop); mq.addEventListener('focusout', mqGo);
     ScrollTrigger.create({ trigger: '[data-marquee]', start: 'top bottom', end: 'bottom top', onUpdate: function (self) {
+      if (mqHold) return;
       var v = gsap.utils.clamp(-7, 7, self.getVelocity() / 260), dir = v < 0 ? -1 : 1;
       gsap.to(loop, { timeScale: dir * (1 + Math.abs(v)), duration: .2, overwrite: true, onComplete: function () { gsap.to(loop, { timeScale: dir, duration: 1.4, ease: 'power2.out' }); } });
     } });
@@ -450,19 +515,6 @@
 
     /* ---- pointer craft ---- */
     if (fine) {
-      html.classList.add('has-cursor');
-      var cursor = $('[data-cursor]'), dot = $('span', cursor);
-      var cx = gsap.quickTo(cursor, 'x', { duration: .35, ease: 'power3' }), cy = gsap.quickTo(cursor, 'y', { duration: .35, ease: 'power3' });
-      window.addEventListener('pointermove', function (e) { cx(e.clientX); cy(e.clientY); });
-      compare.setAttribute('data-cursor-label', 'Drag');
-      $$('.card__btn').forEach(function (b) { b.setAttribute('data-cursor-label', 'Play'); });
-      document.addEventListener('pointerover', function (e) {
-        var lab = e.target.closest('[data-cursor-label]'), link = e.target.closest('a, button, .disc__panel');
-        cursor.classList.toggle('is-label', !!lab);
-        cursor.classList.toggle('is-link', !lab && !!link);
-        dot.textContent = lab ? lab.getAttribute('data-cursor-label') : '';
-      });
-
       $$('[data-magnetic]').forEach(function (el) {
         var mx = gsap.quickTo(el, 'x', { duration: .5, ease: 'power3' }), my = gsap.quickTo(el, 'y', { duration: .5, ease: 'power3' });
         el.addEventListener('pointermove', function (e) {
