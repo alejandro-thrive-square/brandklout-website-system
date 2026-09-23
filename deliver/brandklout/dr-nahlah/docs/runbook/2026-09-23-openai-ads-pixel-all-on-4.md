@@ -28,9 +28,10 @@ Commit: `31265aab`
 
 ## Gotchas
 
-- **Conversions only count for visitors who accept advertising cookies.** That follows the
-  house standard. If the client wants the pixel to run without consent, the way the GHL pools do,
-  drop `consent=advertising&` from `SDK_LINE` in `set-openai-pixel.mjs`, re-run `--apply`, then publish.
+- **SUPERSEDED the same day: the pixel runs WITHOUT cookie consent** (client instruction,
+  2026-09-23). `consent=advertising&` was removed from `SDK_LINE`, and the change was applied and published.
+  The SDK now emits as a plain `async` script. It was proved on `tysons-all-on-4-thank-you` with nothing
+  accepted: 0 held scripts, and `lead_created` was sent (aborted). Do not re-add the hold without a new client decision.
 - `debug: true` is kept as OpenAI's setup code gave it. It only writes `console.debug`
   lines. Set it to `false` in `openai-ads-pixel.js` once the event stream is confirmed.
 - The SDK drains a pre-existing `window.oaiq.q`, so the stub may run before the consent-held

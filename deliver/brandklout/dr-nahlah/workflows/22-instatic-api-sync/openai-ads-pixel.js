@@ -1,8 +1,8 @@
 /* OpenAI Ads (ChatGPT Ads) pixel — the six All-on-4 ads landing pages only.
    Source of the live code asset src/scripts/openai-ads-pixel.js; push with
    set-openai-pixel.mjs. The SDK itself (bzrcdn.openai.com/sdk/oaiq.min.js) is
-   an embed-origins site-script line, consent-held for advertising, so this file
-   only queues calls: the SDK drains window.oaiq.q whenever it arrives, before
+   an embed-origins site-script line (no consent hold, client 2026-09-23), so
+   this file only queues calls: the SDK drains window.oaiq.q whenever it arrives, before
    or after this runs. The conversion is the thank-you page view: both All-on-4
    LeadConnector forms redirect there on submit. */
 (function (w) {

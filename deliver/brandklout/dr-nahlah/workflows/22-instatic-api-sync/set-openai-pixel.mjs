@@ -9,9 +9,9 @@
  * Two halves, because Instatic's CSP refuses inline script:
  *
  *  1. The SDK, `https://bzrcdn.openai.com/sdk/oaiq.min.js`, as an embed-origins
- *     `siteScripts` line scoped `pages=ads-landing-pages/*-all-on-4*` and tagged
- *     `consent=advertising` — an ad pixel waits for Termly like every other one
- *     (only the GoHighLevel pools are exempt, by client instruction). The line
+ *     `siteScripts` line scoped `pages=ads-landing-pages/*-all-on-4*`. NOT
+ *     consent-tagged, by client instruction (2026-09-23): like the GoHighLevel
+ *     pools, it runs whether or not the cookie banner is accepted. The line
  *     grants bzrcdn.openai.com; the SDK POSTs events to bzr.openai.com, which
  *     goes into `connectOrigins` or every event is refused on a strict-CSP page.
  *
@@ -32,7 +32,7 @@ import { api, getSite, getPages, saveShell, BASE } from '../../../../process/22-
 const HERE = dirname(fileURLToPath(import.meta.url))
 const APPLY = process.argv.includes('--apply')
 const PLUGIN = 'brandklout.embed-origins'
-const SDK_LINE = 'https://bzrcdn.openai.com/sdk/oaiq.min.js#consent=advertising&pages=ads-landing-pages/*-all-on-4*'
+const SDK_LINE = 'https://bzrcdn.openai.com/sdk/oaiq.min.js#pages=ads-landing-pages/*-all-on-4*'
 const CONNECT = 'https://bzr.openai.com'
 const ASSET = 'src/scripts/openai-ads-pixel.js'
 const SLUG_RE = /^ads-landing-pages\/(alexandria|tysons)-all-on-4(-consultation|-thank-you)?$/
