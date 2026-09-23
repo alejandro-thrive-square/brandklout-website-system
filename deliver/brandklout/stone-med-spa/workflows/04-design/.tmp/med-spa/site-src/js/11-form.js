@@ -22,7 +22,7 @@
 (function () {
   "use strict";
 
-  var PHONE = "(817) 767-4188";
+  var PHONE = "(817) 383-8361";
 
   function initEmbedFallback() {
     var slot = document.querySelector('[data-embed="ghl-form"]');
