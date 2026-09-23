@@ -7,8 +7,7 @@ Production is untouched** — it needs a go.
 
 ## Done
 
-**Staging `https://staging.westlaketxmedspa.com` — seq 13, 24 pages, 77 media.** Commit: see the
-index row.
+**Staging `https://staging.westlaketxmedspa.com` — seq 13, 24 pages, 77 media.** Commit `074363ef`.
 
 | BugHerd | Change |
 | :-- | :-- |
