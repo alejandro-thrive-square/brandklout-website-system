@@ -11,7 +11,7 @@ step and every gate reads.
 - The client's live site and its platform (Instatic or Webflow). Seven clients are live on
   Webflow: Arvada, Grand Mission, Legacy, Livewell, Marvel, Stone Dental, Oceanic.
 - The client's runbook: `deliver/brandklout/<client>/RUNBOOK.md` and each step's `output/RUNBOOK.md`.
-- The client's Google Drive map: `deliver/brandklout/docs/GOOGLE_DRIVE.md`.
+- The client's Google Drive map: `deliver/docs/GOOGLE_DRIVE.md`.
 - The reference set: Livewell's live combo (see `02-build-the-combo.md`).
 
 ## Checklist
@@ -52,7 +52,7 @@ step and every gate reads.
    pool runs, record its script path and which pages it covers (`pools` in `combo.json`). Two
    offices mean two pools, scoped per page.
 6. **Collect assets.** Pull from the client's Drive (`node scripts/drive.mjs ls/pull`, see
-   `deliver/brandklout/docs/GOOGLE_DRIVE.md`) and the live site. To capture every image an existing
+   `deliver/docs/GOOGLE_DRIVE.md`) and the live site. To capture every image an existing
    ad set or reference page uses, run
    `node scripts/grab-page-images.mjs --out <media dir> <url>=<title> ...`.
    Media stays out of git. Inventory:

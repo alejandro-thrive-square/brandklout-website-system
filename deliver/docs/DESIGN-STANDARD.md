@@ -265,8 +265,8 @@ tag — `button[class*="quiz__opt"]`.
 Run before claiming a page is done:
 
 ```
-node deliver/brandklout/scripts/journey-audit.mjs <page-dir> [...]
-node deliver/brandklout/scripts/journey-audit.mjs --all      # from the orchestration checkout
+node deliver/scripts/journey-audit.mjs <page-dir> [...]
+node deliver/scripts/journey-audit.mjs --all      # from the orchestration checkout
 ```
 
 It resolves linked CSS/JS before counting — a body-only grep reports a false zero when the motion
@@ -344,4 +344,4 @@ content. If it would not look out of place on awwwards, it passes.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+Follows the root-level rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

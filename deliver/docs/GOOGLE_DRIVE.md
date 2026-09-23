@@ -16,7 +16,7 @@ node scripts/drive.mjs pull <folder id|url> <dir>   # whole tree; re-running res
 
 - **Where downloads go:** into the `output/` of the workflow that uses them, e.g.
   `deliver/brandklout/<client>/<scenario>/<step>/output/assets/drive/<folder name>/`
-  ([DELIVER_SYSTEM_RULES.md](../../DELIVER_SYSTEM_RULES.md)). **Never commit images, video or
+  ([DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md)). **Never commit images, video or
   zips.**
 - **List before you pull.** Some folders hold multi-GB video and zip files. Pull the subfolder you
   need, not the whole drive.
@@ -53,5 +53,5 @@ with alejandro@thrivesquare.com. Remove the note here once one opens.
 
 ## Version Control
 
-Tracked with the repo per [SYSTEM_RULES.md §4](../../../SYSTEM_RULES.md). Update the map when a drive
+Tracked with the repo per [SYSTEM_RULES.md §4](../../SYSTEM_RULES.md). Update the map when a drive
 is added, or when a blocked shortcut opens.

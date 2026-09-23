@@ -37,7 +37,7 @@ export async function loadTokens() {
     if (err.code === 'ENOENT') {
       throw new Error(
         `No Asana credentials at ${TOKEN_PATH}.\n` +
-          `Run: node deliver/brandklout/scripts/asana-auth.mjs`
+          `Run: node deliver/scripts/asana-auth.mjs`
       )
     }
     throw err

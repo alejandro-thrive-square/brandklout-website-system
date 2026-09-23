@@ -43,7 +43,7 @@ On Webflow every publish is whole-site, so this step decides between three resul
      - Click every control you touched (FAQ, slider, menu, CTA) and assert the state change.
      - Check responsive widths 1440, 991, 767 and 479. Block the Sienna widget when measuring.
      - For BugHerd items, re-shoot in WebKit at 1512x735.
-     - Pages with scroll motion: `node deliver/brandklout/scripts/staging-verify.mjs --url <staging url> --baseline <local package>`.
+     - Pages with scroll motion: `node deliver/scripts/staging-verify.mjs --url <staging url> --baseline <local package>`.
      - Consent: `node tools/termly-ghl-consent/consent-kit.mjs check <urls> --termly-proxy > <workdir>/consent.txt 2>&1`.
        Before a choice nothing tagged fires. After Accept no `script[type="text/plain"][data-categories]`
        is left. Clicking the preferences control opens Termly's `<dialog>`.
@@ -124,7 +124,7 @@ On Webflow every publish is whole-site, so this step decides between three resul
 - `tools/webflow-build/check-ghl-form.mjs <formId>`: save-and-exit flag and consent fields.
 - `tools/webflow-build/wf-publish.mjs state|staging|live`: pending set and guarded publishes.
 - `tools/webflow-build/live-page-check.mjs <urls>`: served-HTML first pass with cache status.
-- `deliver/brandklout/scripts/staging-verify.mjs --url <u> --baseline <dir>`: motion pins, 404s, console.
+- `deliver/scripts/staging-verify.mjs --url <u> --baseline <dir>`: motion pins, 404s, console.
 - `tools/termly-ghl-consent/consent-kit.mjs check <urls> --termly-proxy`: consent state and bridge version.
 
 ## Outputs
@@ -145,7 +145,7 @@ On Webflow every publish is whole-site, so this step decides between three resul
 - bk-livewell `docs/runbook/2026-09-22b-cookie-banner-oversized-by-a-global-img-rule.md`.
 - `.claude/runbook/2026-09-22-termly-consent-rolled-out-to-29-sites.md`: applied but unpublished on
   11 sites; footer scripts swallowed on South Bay and AVA.
-- `deliver/brandklout/docs/mcp-access.md`: second-brand domain cautions (Legacy, Stone).
+- `deliver/docs/mcp-access.md`: second-brand domain cautions (Legacy, Stone).
 
 ## Version Control
 Follows the root-level version control rules in [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).

@@ -9,13 +9,13 @@ this file defines the **grants**, both of which operate at the Brandklout partne
 Client delivery (partner agency).
 
 ## Referenced Profile
-[client-delivery.md](../../../mcp-servers/profiles/client-delivery.md)
+[client-delivery.md](../../mcp-servers/profiles/client-delivery.md)
 
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
 | `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — authenticated on the `team` profile 2026-08-07.** `list_sites` returns 9 sites, all in workspace `63b4b7393e89b78575e9a9bb`. |
-| `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../../mcp-servers/asana/setup.md). |
+| `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../mcp-servers/asana/setup.md). |
 
 ### Why one Webflow instance, not one per client
 
@@ -28,7 +28,7 @@ All Brandklout clients live in **one Webflow workspace that Brandklout owns**. A
 instance therefore authorizes against that same workspace and can see every sibling site anyway —
 the split bought no isolation, while costing one OAuth round trip, one `.mcp.json` edit and one
 session restart per client, forever. See
-[ACCESS_MODEL.md — When the partner owns the workspace](../../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).
+[ACCESS_MODEL.md — When the partner owns the workspace](../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).
 
 > [!IMPORTANT]
 > **The boundary is now the site ID, not the tool prefix.** Every client shares the
@@ -128,9 +128,9 @@ No new MCP server. No `.mcp.json` edit. No session restart.
 
 **Working access path:** [`../scripts/`](../scripts/README.md) - Node scripts that call the same
 Asana MCP server directly with our own OAuth token, bypassing the Claude Code bug. Read-only.
-Run `node deliver/brandklout/scripts/asana-pull.mjs` and read the artifact it writes.
+Run `node deliver/scripts/asana-pull.mjs` and read the artifact it writes.
 
-Per the [server-per-principal model](../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal),
+Per the [server-per-principal model](../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal),
 the `asana-brandklout` grant covers the Brandklout partnership only. Do not reuse it for
 another agency's Asana, and do not use a `claude.ai Asana` account connector for this work -
 an account-level connector holds one grant and would be silently overwritten by the next
@@ -202,7 +202,7 @@ This MCP exists so Asana tasks can be turned into agent work. When dispatching:
 ## Runtime Authentication Notes
 Asana MCP V2 uses runtime OAuth against `https://app.asana.com` with a pre-registered
 confidential client. Dynamic client registration is not supported, so the instance cannot be
-authenticated without the OAuth app described in [setup.md](../../../mcp-servers/asana/setup.md).
+authenticated without the OAuth app described in [setup.md](../../mcp-servers/asana/setup.md).
 Verify the connection through `/mcp` before using Asana tools. If authentication is missing or
 the Brandklout workspace is not visible, stop and ask for runtime access rather than guessing
 or falling back to another Asana instance or connector.
@@ -219,7 +219,7 @@ secret is held in the OS credential store, never in this repository.
 
 ## Version Control
 This project MCP access file follows the root-level version control rules in
-[SYSTEM_RULES.md](../../../SYSTEM_RULES.md). Commit documentation and lightweight
+[SYSTEM_RULES.md](../../SYSTEM_RULES.md). Commit documentation and lightweight
 JSON/CSV/HTML artifacts only. Do not commit secrets or binary/media assets.
 
 ## Infrastructure

@@ -7,7 +7,7 @@
  *
  * Usage (PowerShell, from the repo root):
  *   $env:ASANA_CLIENT_SECRET = Read-Host "Asana client secret"
- *   node deliver/brandklout/scripts/asana-auth.mjs
+ *   node deliver/scripts/asana-auth.mjs
  *   Remove-Item Env:ASANA_CLIENT_SECRET
  *
  * The redirect URI below must stay byte-identical to the Redirect URL

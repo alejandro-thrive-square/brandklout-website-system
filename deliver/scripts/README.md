@@ -47,7 +47,7 @@ pointing it at `app.asana.com/api/1.0`.
 | :--- | :--- |
 | `asana-lib.mjs` | Token load/refresh, MCP JSON-RPC client, paginated tool calls. |
 | `asana-auth.mjs` | One-time OAuth bootstrap. Re-run only if the grant is revoked. |
-| `asana-pull.mjs` | Read-only pull of assigned work into `../output/asana/`. |
+| `asana-pull.mjs` | Read-only pull of assigned work into `output/asana/`. |
 | `asana-context.mjs` | **Full context pull per client**: task tree, every description, comments, and all attachment files downloaded to disk. |
 
 ## Getting the real brief — `asana-context.mjs`
@@ -65,9 +65,9 @@ surface, and both were missed on the first pass:
 > walks the whole tree for this reason.
 
 ```bash
-node deliver/brandklout/scripts/asana-context.mjs grand-mission-dentistry
-node deliver/brandklout/scripts/asana-context.mjs --all
-node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>   # e.g. into a worktree
+node deliver/scripts/asana-context.mjs grand-mission-dentistry
+node deliver/scripts/asana-context.mjs --all
+node deliver/scripts/asana-context.mjs --task <gid> --out <dir>   # e.g. into a worktree
 ```
 
 Writes to `<client>/scenario-0-new-site/01-client-inquiry/output/asana-context/`:
@@ -103,7 +103,7 @@ a refresh token and the client secret — never commit it, never paste its conte
 
 ```powershell
 $env:ASANA_CLIENT_SECRET = Read-Host "Asana client secret"
-node deliver/brandklout/scripts/asana-auth.mjs
+node deliver/scripts/asana-auth.mjs
 Remove-Item Env:ASANA_CLIENT_SECRET
 ```
 
@@ -113,12 +113,12 @@ history; putting it on the command line does not.
 ## Usage
 
 ```bash
-node deliver/brandklout/scripts/asana-pull.mjs             # incomplete tasks assigned to Webzite
-node deliver/brandklout/scripts/asana-pull.mjs --all       # include completed
-node deliver/brandklout/scripts/asana-pull.mjs --projects  # also dump the workspace project list
+node deliver/scripts/asana-pull.mjs             # incomplete tasks assigned to Webzite
+node deliver/scripts/asana-pull.mjs --all       # include completed
+node deliver/scripts/asana-pull.mjs --projects  # also dump the workspace project list
 ```
 
-Outputs `../output/asana/my-tasks.json` and `../output/asana/my-tasks.md`.
+Outputs `output/asana/my-tasks.json` and `output/asana/my-tasks.md`.
 
 ## Rules for agents reading these artifacts
 
@@ -136,4 +136,4 @@ Outputs `../output/asana/my-tasks.json` and `../output/asana/my-tasks.md`.
 
 Commit the scripts and lightweight `output/` artifacts. Never commit
 `~/.webzite/asana-brandklout.json`, tokens, or the client secret. Follows the root-level rules in
-[SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+[SYSTEM_RULES.md](../../SYSTEM_RULES.md).

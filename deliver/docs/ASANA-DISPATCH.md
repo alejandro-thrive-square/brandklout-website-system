@@ -4,7 +4,7 @@ Maps the work assigned to Webzite in Brandklout's Asana onto client folders in t
 parallel agents can each take one client without colliding.
 
 - **Source**: Asana workspace `1210572425689866`, pulled 2026-08-05 via
-  [`../scripts/asana-pull.mjs`](../scripts/README.md). Raw artifacts: `../output/asana/`.
+  [`../scripts/asana-pull.mjs`](../scripts/README.md). Raw artifacts: `../scripts/output/asana/` (gitignored).
 - **Assignee**: Alejandro Milano `<alejandro@thrivesquare.com>` (gid `1217162291350352`).
 - **Access rules**: [mcp-access.md](./mcp-access.md).
 
@@ -190,7 +190,7 @@ Cloudflare-blocked. Reuse rather than rebuild —
 
 ## Version Control
 
-Documentation only. Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+Documentation only. Follows the root-level rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
 
 ## Infrastructure
 

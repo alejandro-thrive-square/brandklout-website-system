@@ -41,6 +41,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 5. **Consent.** Termly above GTM, auto blocking off, trackers tagged by hand, number pools exempt
    (client decision 2026-09-22). Grant Termly's origins. Check both directions: nothing fires before a
    choice, everything releases after Accept (`tools/termly-ghl-consent/consent-kit.mjs check`).
+   Each site's Termly account and resource-blocker script is listed in
+   [`termly-setup.html`](./termly-setup.html); add the new site there.
 6. **Images.** Compress every image; test the result of every step before moving on.
 7. **Promote.** Back up production (`ops/backup-site.mjs`), make sure nobody has pending drafts (a
    push publishes every draft site-wide), match plugin versions

@@ -14,7 +14,7 @@ Most damage on live sites came from acting on the wrong site or on top of someon
   - The user in the conversation.
 - The client folder `deliver/brandklout/<client>/` in its own worktree `bk-<client>`.
 - The client's `docs/mcp-access.md` (site id, domains, allowed operations) and the partner registry
-  in `deliver/brandklout/docs/mcp-access.md`.
+  in `deliver/docs/mcp-access.md`.
 - The client's `RUNBOOK.md` and the `output/RUNBOOK.md` of the steps you are about to run.
 
 ## Checklist
@@ -29,7 +29,7 @@ Most damage on live sites came from acting on the wrong site or on top of someon
 
 ## Steps
 1. **Pull the request.**
-   - Asana: run `node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <workdir>/asana`.
+   - Asana: run `node deliver/scripts/asana-context.mjs --task <gid> --out <workdir>/asana`.
      It walks the whole tree because attachments sit on the parent task.
    - BugHerd: the list endpoint hides the page, the selector and the screenshot. Fetch each task by
      id, fetch its attachments, and look at every screenshot before deciding what the fix is.
@@ -116,7 +116,7 @@ Most damage on live sites came from acting on the wrong site or on top of someon
   can be three lines.
 
 ## Tools
-- `deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>`: the full Asana brief with attachments.
+- `deliver/scripts/asana-context.mjs --task <gid> --out <dir>`: the full Asana brief with attachments.
 - BugHerd API: `GET /api_v2/projects/<id>/tasks/<task>.json` plus `/attachments.json`, basic auth
   with the `BUGHERD` key from the generated `.env`.
 - `tools/webflow-build/wf-publish.mjs state --site <id>`: site record, domains, pending pages.
@@ -135,8 +135,8 @@ Most damage on live sites came from acting on the wrong site or on top of someon
 - bk-livewell: `workflows/15-improvement-intake-audit/output/existing-site-audit.md` and `client-comments.json` (the only run of module 15).
 - bk-stone-dental: `docs/runbook/2026-09-03-this-session-third-session-em-dash-pass.md` (gotchas 2, 4, 18, 19).
 - bk-oceanic-dental: `docs/runbook/2026-09-22-webflow-mcp.md`, `docs/runbook/2026-09-22-contact-pages-forms-dni-consent.md`.
-- `deliver/brandklout/docs/mcp-access.md` (registry, second-brand domains, decoy sites).
-- `deliver/brandklout/scripts/README.md` (attachments on the parent task).
+- `deliver/docs/mcp-access.md` (registry, second-brand domains, decoy sites).
+- `deliver/scripts/README.md` (attachments on the parent task).
 
 ## Version Control
 Follows the root-level version control rules in [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).

@@ -86,7 +86,7 @@ Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 | [scroll-film-studio](./tools/scroll-film-studio/SKILL.md) | Scroll-driven film sections (GSAP + Lenis) | 0 (03) |
 
 Repo-level scripts: `scripts/fluid-root.mjs`, `scripts/drive.mjs`, `scripts/env-sync.mjs`,
-`scripts/new-client-worktree.sh`. Brandklout scripts: `deliver/brandklout/scripts/` (Asana, journey
+`scripts/new-client-worktree.sh`. Brandklout scripts: `deliver/scripts/` (Asana, journey
 audit, staging verify).
 
 ## Version Control

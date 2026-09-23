@@ -306,7 +306,7 @@ cannot be made Internal because the project has no organization). Google expires
 token after **7 days**, so `invalid_grant` means run `auth` again. The downloaded client JSON is
 kept at `~/.webzite/google-drive-oauth-client.json`; a `client_secret_*.json` inside a repo is
 git-ignored. Which drive belongs to which client, and the shortcuts whose targets are not shared, is
-mapped in [deliver/brandklout/docs/GOOGLE_DRIVE.md](./deliver/brandklout/docs/GOOGLE_DRIVE.md).
+mapped in [deliver/docs/GOOGLE_DRIVE.md](./deliver/docs/GOOGLE_DRIVE.md).
 
 #### 4.2.1 Worktree → main asset mirror (automatic)
 

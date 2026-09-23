@@ -13,8 +13,8 @@
  * entire motion layer in a shared external file and a body-only grep reported a false zero.
  *
  * Usage (from any worktree, or the orchestration checkout with --all):
- *   node deliver/brandklout/scripts/journey-audit.mjs <dir-containing-index.html> [...]
- *   node deliver/brandklout/scripts/journey-audit.mjs --all
+ *   node deliver/scripts/journey-audit.mjs <dir-containing-index.html> [...]
+ *   node deliver/scripts/journey-audit.mjs --all
  */
 
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';

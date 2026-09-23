@@ -28,8 +28,8 @@ first and come back here at step 02.
   `mcp-access.md`) and the client `RUNBOOK.md`.
 - **Client media:** the client's Google Drive and the step's `output/assets/` (gitignored, backed up to
   R2). Pull with `node scripts/drive.mjs`.
-- **Standards:** [`deliver/brandklout/docs/DESIGN-STANDARD.md`](../../brandklout/docs/DESIGN-STANDARD.md),
-  [`FLUID-ROOT.md`](../../brandklout/docs/FLUID-ROOT.md), [`CLIENT-FIRST.md`](../../brandklout/docs/CLIENT-FIRST.md).
+- **Standards:** [`deliver/docs/DESIGN-STANDARD.md`](../../docs/DESIGN-STANDARD.md),
+  [`FLUID-ROOT.md`](../../docs/FLUID-ROOT.md), [`CLIENT-FIRST.md`](../../docs/CLIENT-FIRST.md).
 
 ## Models
 

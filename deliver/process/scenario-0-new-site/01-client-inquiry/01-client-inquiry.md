@@ -57,7 +57,7 @@ direction the client picked.
    `plugins.mjs status --sites <client>` must show no drift. Later updates follow
    [Scenario 4](../../scenario-4-update-plugins/README.md).
 7. **Asana.** Create the project from the template and assign the tasks to the developer. Agents read
-   Asana with `deliver/brandklout/scripts/asana-pull.mjs`; any status change or comment is confirmed
+   Asana with `deliver/scripts/asana-pull.mjs`; any status change or comment is confirmed
    with a person first.
 8. **Drive.** Share a drive with the client for assets and follow up until they arrive. Before asking
    the client again, check the drive (`node scripts/drive.mjs ls/pull`) and every Asana attachment in
@@ -96,7 +96,7 @@ direction the client picked.
 - `tools/instatic-site/staging-clone/` — staging environment recipe and scripts.
 - `tools/instatic-plugins/install-plugin.mjs` — install or upgrade a `brandklout.*` plugin; `plugins.mjs status` proves both environments match (Scenario 4).
 - `tools/instatic-domain-origins/check-origins.mjs` — prove the admin login works on every host.
-- `deliver/brandklout/scripts/asana-pull.mjs`, `asana-context.mjs` — read the Asana project.
+- `deliver/scripts/asana-pull.mjs`, `asana-context.mjs` — read the Asana project.
 - `scripts/drive.mjs` — list and pull the client drive.
 
 ## Outputs

@@ -33,7 +33,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **Pricing & Timeline Rules**: not in this repository, and they do **not** apply here. Brandklout is a partner engagement, not a per-page client — never compute or record a price, rate, quote or cost anywhere under `deliver/brandklout/`.
 - **Deliver Pillar**: [deliver/DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
 - **Credentials**: [SYSTEM_RULES.md §4.2.2](./SYSTEM_RULES.md) - `~/.webzite/.env` is the single master file; every worktree `.env` is generated from it and must never be hand-edited
-- **Client assets on Google Drive**: [deliver/brandklout/docs/GOOGLE_DRIVE.md](./deliver/brandklout/docs/GOOGLE_DRIVE.md) - every client has a shared drive; read the map, then `node scripts/drive.mjs ls/pull` before asking anyone to re-send files
+- **Client assets on Google Drive**: [deliver/docs/GOOGLE_DRIVE.md](./deliver/docs/GOOGLE_DRIVE.md) - every client has a shared drive; read the map, then `node scripts/drive.mjs ls/pull` before asking anyone to re-send files
 - **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) - all MCP servers used across the project
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles
 - **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)

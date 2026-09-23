@@ -7,7 +7,7 @@
  *   System change: touches anything EXCEPT client folders (process, tools, docs, scripts, rules).
  *                  This is what main commits when the process or system is updated.
  *
- * deliver/brandklout/docs/ and deliver/brandklout/scripts/ are system files, not a client.
+ * deliver/docs/ and deliver/scripts/ are system files, not a client.
  *
  * Usage:
  *   node scripts/check-scope.mjs                     # the current branch's changes against main
@@ -22,7 +22,7 @@ import { execSync } from 'node:child_process'
 const arg = (n) => { const i = process.argv.indexOf(n); return i >= 0 ? process.argv[i + 1] : null }
 const has = (n) => process.argv.includes(n)
 const git = (c) => execSync(`git ${c}`, { encoding: 'utf8' }).trim()
-const SHARED = new Set(['docs', 'scripts'])
+const SHARED = new Set()   // deliver/brandklout/ holds client folders only
 
 let files
 if (has('--staged')) files = git('diff --cached --name-only')
@@ -36,7 +36,7 @@ else if (has('--merge')) {
 files = files.split('\n').filter(Boolean)
 
 const clientOf = (f) => {
-  const m = f.match(/^deliver\/brandklout\/([^/]+)\//)
+  const m = f.match(/^deliver\/brandklout\/([a-z0-9][a-z0-9-]*)\//)   // client slugs only; a stray .tmp is not a client
   return m && !SHARED.has(m[1]) ? m[1] : null
 }
 const clients = [...new Set(files.map(clientOf).filter(Boolean))]

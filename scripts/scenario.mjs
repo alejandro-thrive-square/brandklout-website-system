@@ -31,7 +31,7 @@ import path from 'node:path'
 const ROOT = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim()
 const PROCESS = path.join(ROOT, 'deliver', 'process')
 const CLIENTS = path.join(ROOT, 'deliver', 'brandklout')
-const SHARED = new Set(['docs', 'scripts'])              // deliver/brandklout/<these> are not clients
+const SHARED = new Set()   // deliver/brandklout/ holds client folders only (docs and scripts moved to deliver/ on 2026-09-23)
 const SKIP = new Set(['output', 'node_modules', '.tmp', '__pycache__'])
 
 const [cmd, clientArg, scenArg] = process.argv.slice(2).filter((a) => !a.startsWith('--'))

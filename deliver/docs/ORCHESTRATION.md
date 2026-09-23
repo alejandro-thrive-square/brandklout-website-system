@@ -47,7 +47,7 @@ A client worktree is isolated at a Git commit. It does not see later local `main
 to `deliver/process/`, or untracked root-worktree files until those inputs are deliberately made
 available. Before dispatch, checkpoint a clean client branch, merge current local `main`, record
 `process_baseline_commit` in the project overview and runbook, and confirm the task's references
-exist inside that worktree. Follow [ORCA.md](../../../ORCA.md#client-worktrees-and-directive-propagation).
+exist inside that worktree. Follow [ORCA.md](../../ORCA.md#client-worktrees-and-directive-propagation).
 
 Reusable client learning is promoted to `deliver/process/` in a separate canonical commit. Merge
 that commit into sibling clients only between bounded runs. Client agents do not edit the canonical
@@ -133,7 +133,7 @@ checkout will not exist in the new checkout.
 
 Every dispatched agent is expected to have read, in this order:
 
-1. `deliver/brandklout/docs/ASANA-DISPATCH.md` — the batch-wide rules, especially how reference
+1. `deliver/docs/ASANA-DISPATCH.md` — the batch-wide rules, especially how reference
    URLs may be used and where pages get built
 2. The relevant canonical directive under `deliver/process/` and the current baseline commit
 3. `deliver/brandklout/<client>/docs/project-overview.md` — the task manifest and deviations
@@ -201,7 +201,7 @@ scores alone are not progress measures.
 
 One branch per client worktree, merged back to `main` after review. Documentation and lightweight
 `output/` artifacts only — never secrets or binary/media assets. Follows the root-level rules in
-[SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+[SYSTEM_RULES.md](../../SYSTEM_RULES.md).
 
 ## Infrastructure
 

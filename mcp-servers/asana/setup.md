@@ -68,7 +68,7 @@ The `client_id` and `client_secret` must authorize the app.
 ```
 
 This was isolated to Claude Code — **not** to the Asana app — by replaying the identical flow by
-hand (`deliver/brandklout/scripts/`):
+hand (`deliver/scripts/`):
 
 | Variable | Result |
 | :--- | :--- |
@@ -84,7 +84,7 @@ The only untested difference is the client-authentication method. Asana's metada
 it for this app type, that fully explains the error.
 
 **Consequence:** register the instance for documentation and future use, but do not expect `/mcp` to
-connect. Use a direct-token script path (see `deliver/brandklout/scripts/README.md`) or the
+connect. Use a direct-token script path (see `deliver/scripts/README.md`) or the
 claude.ai connector until this is fixed upstream.
 
 ## App types: MCP app vs API app

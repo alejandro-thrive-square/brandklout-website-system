@@ -63,8 +63,8 @@ comes from `--site` or `WF_SITE_ID`.
 | `live-page-check.mjs` | Served-HTML check: status, cache, foreign names, em dashes, empty embeds, phones, forms, marker | `<url,url> [--foreign a,b] [--phone d] [--marker t]` | bk-stone-dental em-dash pass, bk-marvel-dental `gate.mjs`, bk-arvada `verify_links.mjs` |
 | `site-scripts/ghl-dni-loader.template.js` | One or several GHL number pools on one page | fill `POOLS`, minify, register | bk-oceanic-dental `site-scripts/dni-loader.js` 2.0.0 |
 
-Also used, not moved: `deliver/brandklout/scripts/asana-context.mjs` (Asana brief),
-`deliver/brandklout/scripts/staging-verify.mjs` (motion pages), `tools/termly-ghl-consent/consent-kit.mjs`.
+Also used, not moved: `deliver/scripts/asana-context.mjs` (Asana brief),
+`deliver/scripts/staging-verify.mjs` (motion pages), `tools/termly-ghl-consent/consent-kit.mjs`.
 
 ## Evidence
 Built from the client runbooks and commit history of bk-arvada, bk-grand-mission, bk-legacy-dental,

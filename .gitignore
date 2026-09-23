@@ -177,3 +177,6 @@ nul
 **/output/mcp-session.txt
 **/output/mcp-call.py
 **/output/**/node_modules/
+
+# Asana pulls are per-person task dumps, regenerated on demand
+deliver/scripts/output/

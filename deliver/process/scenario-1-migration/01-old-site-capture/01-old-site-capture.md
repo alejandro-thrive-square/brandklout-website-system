@@ -12,7 +12,7 @@ trackers and its blog. The old site will disappear at cutover. What is not captu
 - Old site URL(s), and the old domain if it differs from the new one.
 - Access if the client has it: WordPress admin, host panel or SSH, a site backup, the registrar
   login, Google Search Console. None of it is required to start.
-- The client's shared drive id from `deliver/brandklout/docs/GOOGLE_DRIVE.md`.
+- The client's shared drive id from `deliver/docs/GOOGLE_DRIVE.md`.
 
 ## Checklist
 
@@ -151,7 +151,7 @@ All in `scripts/` in this step folder (see its README for origins):
 - `wp-ssh-export.sh`: WordPress content export over SSH without loading plugins.
 - Collection import into Instatic: `deliver/process/tools/instatic-api-sync/` (collections need a
   post-type table, a template page and two-segment entry routes; each row is published separately).
-- Drive map: `deliver/brandklout/docs/GOOGLE_DRIVE.md`; `node scripts/drive.mjs ls|pull` to read.
+- Drive map: `deliver/docs/GOOGLE_DRIVE.md`; `node scripts/drive.mjs ls|pull` to read.
 
 ## Outputs
 

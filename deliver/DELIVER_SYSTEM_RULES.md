@@ -27,7 +27,9 @@ board draws this).
   - `scenario-N-name/NN-step/` is one folder per step: the directive `NN-step.md`, the step's own
     `scripts/`, `tools.json` (the shared toolkits it uses) and an empty `output/`.
   - `tools/<toolkit>/` holds the shared toolkits, one copy each. Plus the rules, `scripts/`,
-    `deliver/brandklout/docs/` and `deliver/brandklout/scripts/`.
+    `deliver/docs/` and `deliver/scripts/`.
+- **`deliver/brandklout/` holds client folders and nothing else.** Shared standards live in
+  `deliver/docs/`, cross-client scripts (Asana pulls, journey-audit, staging-verify) in `deliver/scripts/`.
 - **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, a
   mirror of the process layout for the scenarios it runs:
   - `README.md` (which scenarios, from which commit), `RUNBOOK.md` (standing state and a row per run),
@@ -67,10 +69,10 @@ board draws this).
 
 ## 4. Quality bar
 
-- [DESIGN-STANDARD.md](./brandklout/docs/DESIGN-STANDARD.md) is the design bar; brand authority is
+- [DESIGN-STANDARD.md](./docs/DESIGN-STANDARD.md) is the design bar; brand authority is
   resolved before tokens, and a canary page is approved before the rest of the pages are built.
 - Fluid root, rem sizing, breakpoints desktop / 1279 / 991 / 767 / 479
-  ([FLUID-ROOT.md](./brandklout/docs/FLUID-ROOT.md)).
+  ([FLUID-ROOT.md](./docs/FLUID-ROOT.md)).
 - Tested from 390 to 2560 wide and in Safari; gates click, take their page list from the site, and
   check the published page.
 - SEO ready: one H1 and ordered headings, titles, descriptions, schema, Open Graph and alt text on

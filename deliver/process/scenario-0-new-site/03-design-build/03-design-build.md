@@ -4,7 +4,7 @@
 
 Build the site on the VPS, get the core pages approved, then build and upload the complete site to
 Instatic staging for team review. The design bar is
-[`DESIGN-STANDARD.md`](../../../brandklout/docs/DESIGN-STANDARD.md).
+[`DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md).
 
 ## Inputs
 
@@ -28,10 +28,10 @@ Instatic staging for team review. The design bar is
 
 1. **Framework.** Create the Client-First style guide page with the base components on Instatic
    ([`tools/client-first-style-guide/`](../../tools/client-first-style-guide/),
-   [`CLIENT-FIRST.md`](../../../brandklout/docs/CLIENT-FIRST.md)). Set the variables, brand colours and
+   [`CLIENT-FIRST.md`](../../../docs/CLIENT-FIRST.md)). Set the variables, brand colours and
    fonts from the style pick.
 2. **Breakpoints and type.** Add the `desktop` base breakpoint plus 1279, 991, 767 and 479 on Instatic.
-   One fluid `html { font-size }` ([`FLUID-ROOT.md`](../../../brandklout/docs/FLUID-ROOT.md),
+   One fluid `html { font-size }` ([`FLUID-ROOT.md`](../../../docs/FLUID-ROOT.md),
    `node scripts/fluid-root.mjs`); type, spacing and radii in `rem`, never `px` and never `clamp()` for
    font size. Font sizes live on the Client-First type role classes.
 3. **Fonts and styles.** Upload fonts to Instatic's font library on production and staging
@@ -97,7 +97,7 @@ Instatic staging for team review. The design bar is
 - `tools/instatic-api-sync/` — fonts, CSS into the Styles registry, parity checks.
 - `tools/instatic-embeds/` — Embed blocks and site scripts.
 - `tools/gsap-animations/`, `tools/scroll-film-studio/` — motion modules and the scroll-film skill.
-- `scripts/fluid-root.mjs`, `deliver/brandklout/scripts/journey-audit.mjs`.
+- `scripts/fluid-root.mjs`, `deliver/scripts/journey-audit.mjs`.
 
 ## Outputs
 

@@ -16,7 +16,7 @@ Sibling toolkits this one relies on and does not copy:
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |
-| `deliver/brandklout/scripts/journey-audit.mjs` | GSAP journey standard (max eight chapters, `pin:true`); on a root-relative multi-page build use `gates/check-pages.mjs` instead |
+| `deliver/scripts/journey-audit.mjs` | GSAP journey standard (max eight chapters, `pin:true`); on a root-relative multi-page build use `gates/check-pages.mjs` instead |
 
 ## Scenario 0 step map
 

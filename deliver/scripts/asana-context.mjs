@@ -20,9 +20,9 @@
  *      the feed the obvious way silently drops them.
  *
  * Usage:
- *   node deliver/brandklout/scripts/asana-context.mjs grand-mission-dentistry
- *   node deliver/brandklout/scripts/asana-context.mjs --all
- *   node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>
+ *   node deliver/scripts/asana-context.mjs grand-mission-dentistry
+ *   node deliver/scripts/asana-context.mjs --all
+ *   node deliver/scripts/asana-context.mjs --task <gid> --out <dir>
  *
  * Read-only. Never writes to Asana.
  */
@@ -32,7 +32,7 @@ import { fileURLToPath } from 'node:url'
 import { callTool, getAccessToken } from './asana-lib.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const CLIENT_ROOT = join(HERE, '..')
+const CLIENT_ROOT = join(HERE, '..', 'brandklout')
 
 /** client slug -> root Asana task GID(s). Extend as new clients arrive. */
 export const CLIENT_TASKS = {
@@ -128,7 +128,7 @@ async function download(att, dir) {
 }
 
 async function pullClient(slug, gids, outOverride) {
-  const outDir = outOverride ?? join(CLIENT_ROOT, slug, 'workflows', '01-client-inquiry', 'output', 'asana-context')
+  const outDir = outOverride ?? join(CLIENT_ROOT, slug, 'scenario-0-new-site', '01-client-inquiry', 'output', 'asana-context')
   const attDir = join(outDir, 'attachments')
   await mkdir(attDir, { recursive: true })
 
