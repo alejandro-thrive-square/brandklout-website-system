@@ -163,6 +163,18 @@ html:not(.js) .hero_media > img {
   color: rgba(255, 255, 255, 0.72);
   text-align: right;
 }
+/* The sister practice's name links to its site (BugHerd #1, 2026-09-22). */
+.hero_who-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  transition: text-decoration-color 0.2s;
+}
+.hero_who-link:hover {
+  text-decoration-color: currentColor;
+}
 
 /* --- the ticker under it ------------------------------------------------------ */
 .section_ticker {

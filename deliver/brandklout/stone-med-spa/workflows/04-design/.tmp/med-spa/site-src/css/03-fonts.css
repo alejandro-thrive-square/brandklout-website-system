@@ -47,6 +47,20 @@
     U+FEFF, U+FFFD;
 }
 
+/* 600, added by hand 2026-09-23 (get-fonts.mjs is no longer in the tree):
+   the client asked for the year grid's row names in bold (BugHerd #6), and a
+   synthesized bold Cormorant smears. Also in install-fonts.mjs's WANTED. */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/cormorant-garamond-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
 @font-face {
   font-family: "Cormorant Garamond";
   font-style: italic;

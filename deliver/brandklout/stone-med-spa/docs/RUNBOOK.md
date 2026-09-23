@@ -15,6 +15,13 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
+**2026-09-23 — the client's BugHerd pass is on STAGING, not production.** 41 tasks on production
+(BugHerd project 540569): 38 applied on `https://staging.westlaketxmedspa.com` (seq 13, **24
+pages** — eleven new treatment pages generated from `treatment-pages.mjs`), 3 waiting on Drive
+auth for photos (#9, #10, #15). Address is now **#110b**. Production still needs a go, then a
+sitemap redeploy. **No JSON-LD reaches the live site** (pre-existing) —
+[run](./runbook/2026-09-23-bugherd-pass-on-staging.md).
+
 **2026-09-18, latest — the logo is LIVE on production.** `https://westlaketxmedspa.com` is
 **seq 14, 13 pages, 76 media**. Promotion was not a re-push of the staging payload: a new media
 asset mints its own `/uploads/<nanoid>-<name>` on each instance, so production got

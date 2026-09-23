@@ -14,6 +14,10 @@
 .u-cover-top {
   object-position: 50% 18% !important;
 }
+/* For a photograph whose subject's head touches its top edge. */
+.u-cover-flush {
+  object-position: 50% 0% !important;
+}
 
 /* --- the sheet ------------------------------------------------------------------ */
 .detail_layout {

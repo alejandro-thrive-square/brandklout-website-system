@@ -49,6 +49,10 @@
   --charcoal: #272727;
   --green: #8fbc46;
   --white: #ffffff;
+  /* The client's purple, BugHerd #7 (2026-09-22): "Integrate this purple in
+     the chart, either the line or the dots." Sampled from their attachment.
+     Used on the year grid's dots only; 3.5:1 on the green ground. */
+  --purple: #733da8;
 
   /* --- derived --- */
   --ivory-deep: #efece4; /* the alternate band, half a step down from ivory */

@@ -27,6 +27,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { TREATMENTS, CATEGORIES, CONCERNS, byCategory } from "./treatments-data.mjs";
 import { SNIPPET as GHL_SNIPPET } from "./ghl-form.mjs";
+import { PAGES as TREATMENT_PAGES } from "./treatment-pages.mjs";
+import { SITE_FAQ } from "./site-faq.mjs";
 
 const SRC = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(SRC, "..", "final-site");
@@ -79,6 +81,11 @@ const PAGES = [
   // Asana subtask; the footer linked to the implant centre's copies until now.
   { slug: "privacy-policy", src: "privacy-policy", ...M },
   { slug: "terms-of-service", src: "terms-of-service", ...M },
+  // 2026-09-23: a page per treatment (BugHerd, eleven "why doesn't this have a
+  // dedicated page"). No body file: `treatment` renders treatment-pages.mjs
+  // through treatmentPage() below, and the menu row links to it through the
+  // `page` field treatments-data.mjs derives from the same list.
+  ...Object.keys(TREATMENT_PAGES).map((slug) => ({ slug, treatment: slug, ...M })),
 ];
 /* 2026-09-03, second build: `photoHero` and `motion` are TRUE ON EVERY PAGE.
    Every page now opens on a photograph with the navbar over it, and every page
@@ -92,7 +99,7 @@ const PAGES = [
     20-motion.js clones the track until it is twice the viewport and loops it. */
 function ticker() {
   return TREATMENTS.map(
-    (t) => `          <a class="marquee_item" href="treatments.html#${t.slug}">
+    (t) => `          <a class="marquee_item" href="${t.page || `treatments.html#${t.slug}`}">
             <span class="marquee_name">${esc(t.name)}</span>
             <span class="marquee_cadence">${esc(t.cadence)}</span>
           </a>`
@@ -224,7 +231,8 @@ function ledger() {
               <span class="menu_group-num" aria-hidden="true">${roman[gi]}</span>
               <h2 class="heading-style-h2" data-split>${esc(c.name)}</h2>
               <p class="menu_group-blurb" data-reveal>${esc(c.blurb)}</p>
-            </div>
+${c.cta ? `              <div class="button-group menu_group-cta" data-reveal><a class="button is-link" href="${c.cta.href}">${esc(c.cta.label)} <span class="button_arrow">&rarr;</span></a></div>
+` : ""}            </div>
           </div>
           <div class="menu_rows">
 ${categoryRows(c.id, () => ++n)}
@@ -347,6 +355,302 @@ function vitals(slug) {
             </div>`
     )
     .join("\n");
+}
+
+/* --- the treatment pages ---------------------------------------------------
+   ONE TEMPLATE FOR ELEVEN PAGES (2026-09-23). The sections are Botox's, in
+   Botox's order and with Botox's classes, so the pages inherit every rule in
+   49-cover, 59-detail and the rest without a new stylesheet: cover, spec rail +
+   prose, who treats you, care, the reserved before-and-after frame, questions,
+   related. Botox keeps its hand-written body because its four-product stack is
+   its own. */
+const PROVIDERS = {
+  brooke: { eyebrow: "Who does your treatment", img: "staff-brooke-bright.webp", alt: "Brooke, nurse practitioner injector", small: "consult-room.webp" },
+  abby: { eyebrow: "Who does your treatment", img: "ssa-treatment-room.webp", alt: "A treatment room at the Westlake office", small: "consult-room.webp" },
+  team: { eyebrow: "Who does your treatment", img: "consult-room.webp", alt: "The consultation room at the Westlake office", small: "ssa-treatment-room.webp" },
+};
+const CATEGORY_NAME = (id) => CATEGORIES.find((c) => c.id === id).name;
+
+function relatedCard(slug) {
+  if (slug === "membership")
+    return `          <a class="related_card" href="membership.html" data-cursor="Open">
+            <figure class="related_media"><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="related_body">
+              <span class="related_meta">Membership</span>
+              <span class="related_name">$149 a month</span>
+              <span class="related_text">A monthly facial plus 10% off treatments, if you come in regularly.</span>
+            </span>
+          </a>`;
+  const t = TREATMENTS.find((x) => x.slug === slug);
+  if (!t) throw new Error(`related: no treatment "${slug}"`);
+  const text = slug === "botox" ? "Softens the lines that come from movement. About fifteen minutes, no downtime." : TREATMENT_PAGES[slug]?.card || t.lede;
+  return `          <a class="related_card" href="${t.page || `treatments.html#${t.slug}`}" data-cursor="Open">
+            <figure class="related_media"><img src="assets/${t.portrait}" alt="" width="1160" height="1450" loading="lazy"></figure>
+            <span class="related_body">
+              <span class="related_meta">${esc(CATEGORY_NAME(t.category))}</span>
+              <span class="related_name">${esc(t.name)}</span>
+              <span class="related_text">${esc(text)}</span>
+            </span>
+          </a>`;
+}
+
+function treatmentPage(slug) {
+  const p = TREATMENT_PAGES[slug];
+  const t = TREATMENTS.find((x) => x.slug === slug);
+  const who = PROVIDERS[p.who.provider];
+  if (!who) throw new Error(`${slug}: unknown provider "${p.who.provider}"`);
+  const paras = (list) => list.map((s) => `              <p>${esc(s)}</p>`).join("\n");
+  const items = (list) => list.map((s) => `              <li>${esc(s)}</li>`).join("\n");
+  return `<!-- TREATMENT PAGE — GENERATED by build-site.mjs from treatment-pages.mjs
+     ("${slug}"). Edit the record, not this output. CLINICAL REVIEW OUTSTANDING. -->
+<section class="section_cover cover_component">
+  <figure class="cover_media" data-parallax="10">
+    <img src="assets/${p.cover.image}" alt="" width="1160" height="1450" fetchpriority="high"${p.cover.top ? ' class="u-cover-top"' : ""}>
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner">
+          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>${esc(CATEGORY_NAME(t.category))}</p>
+          <h1 class="cover_title" data-split data-split-now>${p.cover.title}</h1>
+          <p class="cover_lede">${esc(p.cover.lede)}</p>
+          <div class="cover_facts">
+${p.cover.facts.map((f) => `            <p class="cover_fact"><span class="cover_fact-num">${esc(f.num)}</span><span>${esc(f.label)}</span></p>`).join("\n")}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_detail detail_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="detail_layout">
+          <aside class="spec_rail" data-reveal>
+            <p class="spec_title">At a glance</p>
+            <div class="spec_vitals">
+${vitals(slug)}
+            </div>
+            <div class="button-group spec_actions">
+              <a class="button" href="book.html">Book a consultation</a>
+              <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+            </div>
+            <p class="spec_note">${esc(p.priceNote)}</p>
+          </aside>
+          <div class="detail_prose">
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">What it is</h2>
+${paras(p.whatItIs)}
+            </div>
+            <figure class="detail_figure" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/${p.figure}" alt="" width="1600" height="900" loading="lazy"></span>
+            </figure>
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">What it can do for you</h2>
+              <p>${esc(p.canDo.intro)}</p>
+              <ul class="detail_list">
+${items(p.canDo.items)}
+              </ul>
+            </div>
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">Is it right for me?</h2>
+              <p>${esc(p.right.text)}</p>
+              <div class="detail_aside">
+                <p class="detail_aside-title">Not recommended if</p>
+                <p class="text-size-small">${esc(p.right.notIf)}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_why why_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="why_grid">
+          <div class="why_copy">
+            <p class="eyebrow">${who.eyebrow}</p>
+            <h2 class="heading-style-h2" data-split>${p.who.heading}</h2>
+            <p class="text-size-medium why_text" data-reveal>${esc(p.who.text)}</p>
+            <div class="button-group" data-reveal>
+              <a class="button is-secondary" href="team.html">Meet the team</a>
+            </div>
+          </div>
+          <div class="why_media">
+            <figure class="why_frame" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/${who.img}" alt="${esc(who.alt)}" width="800" height="1000" loading="lazy"></span>
+            </figure>
+            <figure class="why_frame-small" data-speed="-0.25">
+              <img src="assets/${who.small}" alt="" width="1600" height="900" loading="lazy">
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_care care_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="care_head">
+          <p class="eyebrow">Before and after your appointment</p>
+          <h2 class="heading-style-h2" data-split>A few simple <em class="text-style-display-accent">guidelines</em>.</h2>
+        </div>
+        <div class="care_grid">
+          <div class="care_col" data-reveal>
+            <p class="care_col-title">${esc(p.care.beforeTitle)}</p>
+            <ol class="care_list">
+${items(p.care.before)}
+            </ol>
+          </div>
+          <figure class="care_figure" data-wipe>
+            <span class="wipe_inner" data-parallax="8"><img src="assets/${p.care.image}" alt="" width="1600" height="900" loading="lazy"></span>
+          </figure>
+          <div class="care_col" data-reveal>
+            <p class="care_col-title">${esc(p.care.afterTitle)}</p>
+            <ol class="care_list" start="${p.care.before.length + 1}">
+${items(p.care.after)}
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_gallery gallery_component" data-theme="dark">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="gallery_grid">
+          <div class="gallery_plates" aria-hidden="true" data-reveal>
+            <span class="gallery_plate"><span>Before</span></span>
+            <span class="gallery_plate"><span>After</span></span>
+          </div>
+          <div class="gallery_copy">
+            <p class="eyebrow">Before &amp; after</p>
+            <h2 class="heading-style-h2" data-split>New photos are <em class="text-style-display-accent">on the way</em>.</h2>
+            <p class="text-size-medium gallery_text" data-reveal>
+              We're updating our before-and-after gallery. In the meantime, ask to see results
+              for your treatment at your consultation.
+            </p>
+            <div class="button-group" data-reveal>
+              <a class="button" href="book.html">Book a consultation</a>
+              <a class="button is-alternate" href="results.html">Reviews</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_faq detail_faq">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="detail_faq-grid">
+          <div class="detail_faq-head">
+            <p class="eyebrow">Questions</p>
+            <h2 class="heading-style-h2" data-split>The ones we hear <em class="text-style-display-accent">most</em>.</h2>
+          </div>
+          <div class="faq_list" data-reveal>
+${p.faq
+  .map(
+    ([q, a]) => `            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">${esc(q)}</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>${esc(a)}</p></div>
+            </details>`
+  )
+  .join("\n")}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_related related_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <p class="eyebrow">Often paired with</p>
+        <div class="related_grid" data-reveal="stagger">
+${p.related.map(relatedCard).join("\n")}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+}
+
+/** seo.json entries for the generated pages: title, description, and the
+    MedicalProcedure + FAQPage graph, from the same record the page renders. */
+for (const [slug, p] of Object.entries(TREATMENT_PAGES)) {
+  seo.pages[slug] = {
+    title: p.seoTitle,
+    description: p.seoDescription,
+    schema: [
+      {
+        "@type": "MedicalProcedure",
+        name: p.procedure.name,
+        procedureType: "https://schema.org/NoninvasiveProcedure",
+        bodyLocation: TREATMENTS.find((t) => t.slug === slug).area,
+        howPerformed: p.procedure.howPerformed,
+        provider: { "@id": `${seo.site.origin}/#practice` },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: p.faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+      },
+    ],
+  };
+}
+
+/** The general questions (site-faq.mjs), as a section of their own. */
+function siteFaq() {
+  return `<!-- GENERAL QUESTIONS — GENERATED from site-faq.mjs (BugHerd #26). -->
+<section class="section_faq detail_faq" id="faq">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="detail_faq-grid">
+          <div class="detail_faq-head">
+            <p class="eyebrow">Questions</p>
+            <h2 class="heading-style-h2" data-split>Frequently asked <em class="text-style-display-accent">questions</em>.</h2>
+          </div>
+          <div class="faq_list" data-reveal>
+${SITE_FAQ.map(
+  ([q, a]) => `            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">${esc(q)}</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>${esc(a)}</p></div>
+            </details>`
+).join("\n")}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`;
+}
+{
+  // The home page owns the FAQPage rich result for these.
+  const home = seo.pages.index;
+  const own = home.schema ? (Array.isArray(home.schema) ? home.schema : [home.schema]) : [];
+  if (own.some((x) => x["@type"] === "FAQPage")) throw new Error("seo.json index already has a FAQPage; merge by hand");
+  home.schema = own.concat({
+    "@type": "FAQPage",
+    mainEntity: SITE_FAQ.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  });
 }
 
 /** The legal pages' table of contents, read from the body it sits in: every
@@ -493,7 +797,7 @@ for (const f of fs.readdirSync(path.join(SRC, "assets"))) {
 
 const built = [];
 for (const page of PAGES) {
-  let body = read(`pages/${page.src}.body.html`);
+  let body = page.treatment ? treatmentPage(page.treatment) : read(`pages/${page.src}.body.html`);
 
   // The generated views. Done on the body only — no partial carries one.
   body = body
@@ -502,6 +806,7 @@ for (const page of PAGES) {
     .replace("{{CONCERNS}}", concernPills)
     .replace("{{LEDGER}}", ledger)
     .replace("{{CADENCE_GRID}}", cadenceGrid)
+    .replace("{{SITE_FAQ}}", siteFaq)
     .replace(/\{\{VITALS:([a-z0-9-]+)\}\}/g, (_, slug) => vitals(slug));
   if (body.includes("{{LEGAL_TOC}}")) body = body.replace("{{LEGAL_TOC}}", legalToc(body));
   /* The vendor's form. Inlined here so the static build shows the real thing;

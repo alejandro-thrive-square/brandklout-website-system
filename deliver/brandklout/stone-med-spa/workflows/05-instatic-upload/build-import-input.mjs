@@ -28,6 +28,8 @@ import fs from 'node:fs'
 import path from 'node:path'
 import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
+import { PAGES as TREATMENT_PAGES } from '../04-design/.tmp/med-spa/site-src/treatment-pages.mjs'
+import { TREATMENTS } from '../04-design/.tmp/med-spa/site-src/treatments-data.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE = path.resolve(HERE, '../04-design/.tmp/med-spa')
@@ -76,6 +78,9 @@ const PAGES = [
   // 2026-09-17: additions, safe in replace mode (see the warning above).
   { file: 'privacy-policy.html', slug: 'privacy-policy', title: 'Privacy Policy' },
   { file: 'terms-of-service.html', slug: 'terms-of-service', title: 'Terms of Service' },
+  // 2026-09-23: the eleven generated treatment pages, read from the same list
+  // build-site.mjs renders them from, so a new one cannot be built and not shipped.
+  ...Object.keys(TREATMENT_PAGES).map((slug) => ({ file: `${slug}.html`, slug, title: TREATMENTS.find((t) => t.slug === slug).name })),
 ]
 
 const problems = []
@@ -150,9 +155,19 @@ function rewrite(html, file) {
   return out
 }
 
+function fromHead(html) {
+  const un = (x) => x.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+  const t = html.match(/<title>([^<]*)<\/title>/)
+  const m = html.match(/<meta name="description" content="([^"]*)">/)
+  return { title: t ? un(t[1]) : undefined, description: m ? un(m[1]) : undefined }
+}
+
 const pages = PAGES.map((p) => {
   const raw = fs.readFileSync(path.join(FINAL, p.file), 'utf8')
-  const d = seo.pages[p.slug] ?? {}
+  // The eleven generated treatment pages have no seo.json entry: build-site.mjs
+  // writes their title and description straight into the page from
+  // treatment-pages.mjs. Read them back out of the built <head> for those.
+  const d = seo.pages[p.slug] ?? fromHead(raw)
   return {
     slug: p.slug,
     title: p.title,

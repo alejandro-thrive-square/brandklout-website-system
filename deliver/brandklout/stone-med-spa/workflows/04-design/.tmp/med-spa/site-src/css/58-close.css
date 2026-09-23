@@ -60,7 +60,9 @@
   font-family: var(--font-display);
   font-size: var(--size-h5);
   line-height: 1.15;
-  color: var(--green);
+  /* Ivory, not green: brand green on the charcoal-and-green glow read as
+     low contrast (BugHerd #23, 2026-09-22). */
+  color: var(--ivory);
 }
 .close_fact-val {
   font-size: var(--size-text-small);

@@ -65,19 +65,22 @@
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--fg);
 }
+/* The header row and the row names are bold at the client's request
+   (BugHerd #5 and #6, 2026-09-22): full ink, not muted. */
 .cadence_month {
   text-align: center;
   font-size: var(--size-text-tiny);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--fg-mute);
+  color: var(--fg);
 }
 .cadence_months-spacer {
   font-size: var(--size-text-tiny);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--fg-mute);
+  color: var(--fg);
 }
 .cadence_row {
   border-bottom: 1px solid var(--line);
@@ -92,6 +95,7 @@
   display: block;
   font-family: var(--font-display);
   font-size: var(--size-h5);
+  font-weight: 600;
   line-height: 1.2;
   color: var(--fg);
 }
@@ -127,12 +131,12 @@
   width: 0.85rem;
   height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--fg);
+  background-color: var(--purple);
   transition: transform 0.3s var(--ease);
 }
 .cadence_dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--fg);
+  border: 2px solid var(--purple);
 }
 .cadence_row:hover .cadence_dot {
   transform: scale(1.25);
@@ -206,12 +210,12 @@
   width: 0.85rem;
   height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--fg);
+  background-color: var(--purple);
   flex: 0 0 auto;
 }
 .cadence_legend-dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--fg);
+  border: 2px solid var(--purple);
 }
 
 /* --- the phone version ------------------------------------------------------ */

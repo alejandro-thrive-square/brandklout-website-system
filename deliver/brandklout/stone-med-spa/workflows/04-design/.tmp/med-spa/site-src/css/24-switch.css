@@ -36,3 +36,14 @@
   line-height: 1.2;
   color: var(--fg);
 }
+/* The hover ground is the pale green wash, and on the dark footer --fg and
+   --fg-mute are the light inks, so both lines vanished on hover (BugHerd #25,
+   2026-09-22). Pin them to the dark inks while the wash is showing. */
+.footer_switch:hover .footer_switch-label,
+.footer_switch:focus-visible .footer_switch-label {
+  color: var(--charcoal-soft);
+}
+.footer_switch:hover .footer_switch-brand,
+.footer_switch:focus-visible .footer_switch-brand {
+  color: var(--charcoal);
+}

@@ -102,6 +102,10 @@
   font-size: var(--size-text-medium);
   color: var(--fg-body);
 }
+/* A category's own link, where it has one: Facials -> membership. */
+.menu_group-cta {
+  margin-top: 1.25rem;
+}
 
 /* --- a row -------------------------------------------------------------------- */
 .menu_rows {
@@ -308,7 +312,7 @@
   color: var(--fg);
 }
 
-/* --- the two doors ------------------------------------------------------------ */
+/* --- the three doors ---------------------------------------------------------- */
 .doors_head {
   max-width: 46rem;
   margin-bottom: 2.5rem;
@@ -389,12 +393,13 @@
   gap: 0.8rem;
   justify-items: start;
 }
+/* Wraps since the third door (2026-09-23): a closed door is ~290px at 1440,
+   too narrow for "Stone Dental Implant Center" on one line. */
 .doors_name {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.7rem, 2.4vw, 2.5rem);
   font-weight: 300;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 1.05;
 }
 .doors_text {
   max-width: 34ch;

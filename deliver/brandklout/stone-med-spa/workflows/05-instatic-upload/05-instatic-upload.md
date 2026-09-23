@@ -57,6 +57,14 @@ registry rules, images in the media library.
 > Anything of that kind should also be HOST-GATED rather than remembered about
 > at launch. See the header of `js/90-bugherd.js`.
 
+> [!NOTE]
+> **Generated pages (2026-09-23).** The eleven treatment pages have no `pages/*.body.html` and no
+> `seo.json` entry. `build-import-input.mjs` takes their SEO title and description from the built
+> page's `<head>`, and every page list here (`build-import-input`, `verify-live`, `compare-live`,
+> `visual-diff`) spreads `Object.keys(TREATMENT_PAGES)` from `site-src/treatment-pages.mjs` — add a
+> page there and it ships and is gated. **JSON-LD in the static `<head>` does not reach the live
+> site** on this instance; that needs the aeo-schema route, not this workflow.
+
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be
 > documented here immediately.

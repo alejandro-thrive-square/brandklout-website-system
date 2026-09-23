@@ -65,6 +65,8 @@ export const CATEGORIES = [
     portrait: "m-cheek.webp",
     blurb:
       "Regular facials keep skin clear, smooth and hydrated between treatments. Members get one every month as part of their plan.",
+    // BugHerd #34, 2026-09-22: "Add a CTA or link to the page about the membership".
+    cta: { href: "membership.html", label: "See the membership" },
   },
   {
     id: "restoration",
@@ -99,9 +101,9 @@ export const CONCERNS = [
  * menu row. A model appears as a PERSON, never as a patient and never as a
  * result. Nothing on this site captions a model photograph as an outcome.
  *
- * `page` is set only where a detail page exists. Botox is the only one; the
- * other rows open in place. When a page is written, set its slug here and the
- * row grows a link with no other change.
+ * `page` is the detail page. Botox is hand-written; the other eleven are
+ * generated from treatment-pages.mjs (2026-09-23). A row with page null opens
+ * in place with no link.
  */
 export const TREATMENTS = [
   /* --- Injectables -------------------------------------------------------- */
@@ -122,7 +124,7 @@ export const TREATMENTS = [
   },
   {
     slug: "dysport-jeuveau",
-    page: null,
+    page: "dysport-jeuveau.html",
     name: "Dysport & Jeuveau",
     category: "injectables",
     concerns: ["lines"],
@@ -137,7 +139,7 @@ export const TREATMENTS = [
   },
   {
     slug: "dermal-fillers",
-    page: null,
+    page: "dermal-fillers.html",
     name: "Dermal Fillers",
     category: "injectables",
     concerns: ["volume", "laxity"],
@@ -152,7 +154,7 @@ export const TREATMENTS = [
   },
   {
     slug: "sculptra",
-    page: null,
+    page: "sculptra.html",
     name: "Sculptra",
     category: "injectables",
     group: "Biostimulators", // a sub-item of Injectables, per the WMA web dev brief
@@ -170,14 +172,14 @@ export const TREATMENTS = [
   /* --- Skin Rejuvenation -------------------------------------------------- */
   {
     slug: "morpheus8",
-    page: null,
+    page: "morpheus8.html",
     name: "Morpheus8",
     category: "skin",
     concerns: ["laxity", "texture", "scarring"],
     lede: "Radiofrequency energy delivered through fine microneedles tightens and smooths the deeper layers of the skin while leaving the surface largely intact. It works well on the jawline, the neck and acne scarring.",
     appointment: "45–60 min",
     onset: "3 weeks, building to 3 months",
-    cadence: "3, then yearly",
+    cadence: "3 sessions, then yearly",
     lasts: "12+ months",
     downtime: "2–4 days",
     area: "Face, jawline, neck",
@@ -185,7 +187,7 @@ export const TREATMENTS = [
   },
   {
     slug: "chemical-peels",
-    page: null,
+    page: "chemical-peels.html",
     name: "Chemical Peels",
     category: "skin",
     concerns: ["pigment", "texture", "dullness"],
@@ -200,7 +202,7 @@ export const TREATMENTS = [
   },
   {
     slug: "skinpen",
-    page: null,
+    page: "skinpen.html",
     name: "SkinPen Microneedling",
     category: "skin",
     concerns: ["texture", "scarring", "lines"],
@@ -217,11 +219,11 @@ export const TREATMENTS = [
   /* --- Facials ------------------------------------------------------------ */
   {
     slug: "hydrafacial",
-    page: null,
+    page: "hydrafacial.html",
     name: "HydraFacial",
     category: "facials",
     concerns: ["texture", "dullness", "pigment"],
-    lede: "Cleansing, exfoliation, extractions and hydration in a single treatment. We offer several versions, from 45 to 90 minutes, so your esthetician can match the facial to your skin, and you can go straight back to your day.",
+    lede: "Cleansing, exfoliation, extractions and hydration in a single treatment. We offer several versions, from 45 to 90 minutes, so your aesthetician can match the facial to your skin, and you can go straight back to your day.",
     appointment: "45–90 min",
     onset: "Immediate",
     cadence: "monthly",
@@ -232,11 +234,11 @@ export const TREATMENTS = [
   },
   {
     slug: "dermaplaning",
-    page: null,
+    page: "dermaplaning.html",
     name: "Dermaplaning",
     category: "facials",
     concerns: ["texture", "dullness"],
-    lede: "Dermaplaning is a gentle exfoliation. Your esthetician glides a sterile blade across the skin to lift away dead surface cells and fine facial hair, the peach fuzz, leaving skin smoother and brighter. Makeup and skincare go on more evenly afterward.",
+    lede: "Dermaplaning is a gentle exfoliation. Your aesthetician glides a sterile blade across the skin to lift away dead surface cells and fine facial hair, the peach fuzz, leaving skin smoother and brighter. Makeup and skincare go on more evenly afterward.",
     appointment: "30–45 min",
     onset: "Immediate",
     cadence: "every 4–6 weeks",
@@ -250,7 +252,7 @@ export const TREATMENTS = [
     // the targeted serums added to a HydraFacial, not injected hyaluronic acid,
     // which is what this row described until the brief arrived.
     slug: "skin-boosters",
-    page: null,
+    page: "skin-boosters.html",
     name: "Skin Boosters",
     category: "facials",
     concerns: ["dullness", "pigment", "lines"],
@@ -267,14 +269,14 @@ export const TREATMENTS = [
   /* --- Restoration -------------------------------------------------------- */
   {
     slug: "prp",
-    page: null,
+    page: "prp.html",
     name: "PRP Treatment",
     category: "restoration",
     concerns: ["texture", "hair"],
     lede: "A small amount of your blood is drawn and spun to concentrate the platelets, which are then returned to the skin. It's a good choice if you'd rather avoid fillers or synthetic products.",
     appointment: "45–60 min",
     onset: "4–6 weeks",
-    cadence: "3, then 2 a year",
+    cadence: "3 sessions, then 2 a year",
     lasts: "A series of 3, then maintenance",
     downtime: "1–2 days",
     area: "Under-eyes, face, scalp",
@@ -282,7 +284,7 @@ export const TREATMENTS = [
   },
   {
     slug: "hair-restoration",
-    page: null,
+    page: "hair-restoration.html",
     name: "Hair Restoration",
     category: "restoration",
     concerns: ["hair"],

@@ -96,6 +96,10 @@ html {
   --charcoal: #272727;
   --green: #8fbc46;
   --white: #ffffff;
+  /* The client's purple, BugHerd #7 (2026-09-22): "Integrate this purple in
+     the chart, either the line or the dots." Sampled from their attachment.
+     Used on the year grid's dots only; 3.5:1 on the green ground. */
+  --purple: #733da8;
 
   /* --- derived --- */
   --ivory-deep: #efece4; /* the alternate band, half a step down from ivory */
@@ -457,6 +461,20 @@ textarea {
   /* Latin only. The practice serves English and Spanish and both are covered;
      the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
      triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+/* 600, added by hand 2026-09-23 (get-fonts.mjs is no longer in the tree):
+   the client asked for the year grid's row names in bold (BugHerd #6), and a
+   synthesized bold Cormorant smears. Also in install-fonts.mjs's WANTED. */
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/cormorant-garamond-600.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
     U+FEFF, U+FFFD;
@@ -1573,6 +1591,17 @@ textarea {
   line-height: 1.2;
   color: var(--fg);
 }
+/* The hover ground is the pale green wash, and on the dark footer --fg and
+   --fg-mute are the light inks, so both lines vanished on hover (BugHerd #25,
+   2026-09-22). Pin them to the dark inks while the wash is showing. */
+.footer_switch:hover .footer_switch-label,
+.footer_switch:focus-visible .footer_switch-label {
+  color: var(--charcoal-soft);
+}
+.footer_switch:hover .footer_switch-brand,
+.footer_switch:focus-visible .footer_switch-brand {
+  color: var(--charcoal);
+}
 
 
 /* ===== css/36-faq.css ===== */
@@ -2466,6 +2495,18 @@ html:not(.js) .hero_media > img {
   color: rgba(255, 255, 255, 0.72);
   text-align: right;
 }
+/* The sister practice's name links to its site (BugHerd #1, 2026-09-22). */
+.hero_who-link {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  transition: text-decoration-color 0.2s;
+}
+.hero_who-link:hover {
+  text-decoration-color: currentColor;
+}
 
 /* --- the ticker under it ------------------------------------------------------ */
 .section_ticker {
@@ -2744,19 +2785,22 @@ html:not(.js) .hero_media > img {
   padding-bottom: 0.85rem;
   border-bottom: 1px solid var(--fg);
 }
+/* The header row and the row names are bold at the client's request
+   (BugHerd #5 and #6, 2026-09-22): full ink, not muted. */
 .cadence_month {
   text-align: center;
   font-size: var(--size-text-tiny);
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--fg-mute);
+  color: var(--fg);
 }
 .cadence_months-spacer {
   font-size: var(--size-text-tiny);
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--fg-mute);
+  color: var(--fg);
 }
 .cadence_row {
   border-bottom: 1px solid var(--line);
@@ -2771,6 +2815,7 @@ html:not(.js) .hero_media > img {
   display: block;
   font-family: var(--font-display);
   font-size: var(--size-h5);
+  font-weight: 600;
   line-height: 1.2;
   color: var(--fg);
 }
@@ -2806,12 +2851,12 @@ html:not(.js) .hero_media > img {
   width: 0.85rem;
   height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--fg);
+  background-color: var(--purple);
   transition: transform 0.3s var(--ease);
 }
 .cadence_dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--fg);
+  border: 2px solid var(--purple);
 }
 .cadence_row:hover .cadence_dot {
   transform: scale(1.25);
@@ -2885,12 +2930,12 @@ html:not(.js) .hero_media > img {
   width: 0.85rem;
   height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--fg);
+  background-color: var(--purple);
   flex: 0 0 auto;
 }
 .cadence_legend-dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--fg);
+  border: 2px solid var(--purple);
 }
 
 /* --- the phone version ------------------------------------------------------ */
@@ -3603,6 +3648,10 @@ html:not(.js) .hero_media > img {
   font-size: var(--size-text-medium);
   color: var(--fg-body);
 }
+/* A category's own link, where it has one: Facials -> membership. */
+.menu_group-cta {
+  margin-top: 1.25rem;
+}
 
 /* --- a row -------------------------------------------------------------------- */
 .menu_rows {
@@ -3809,7 +3858,7 @@ html:not(.js) .hero_media > img {
   color: var(--fg);
 }
 
-/* --- the two doors ------------------------------------------------------------ */
+/* --- the three doors ---------------------------------------------------------- */
 .doors_head {
   max-width: 46rem;
   margin-bottom: 2.5rem;
@@ -3890,12 +3939,13 @@ html:not(.js) .hero_media > img {
   gap: 0.8rem;
   justify-items: start;
 }
+/* Wraps since the third door (2026-09-23): a closed door is ~290px at 1440,
+   too narrow for "Stone Dental Implant Center" on one line. */
 .doors_name {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: clamp(1.7rem, 2.4vw, 2.5rem);
   font-weight: 300;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 1.05;
 }
 .doors_text {
   max-width: 34ch;
@@ -4081,7 +4131,9 @@ html:not(.js) .hero_media > img {
   font-family: var(--font-display);
   font-size: var(--size-h5);
   line-height: 1.15;
-  color: var(--green);
+  /* Ivory, not green: brand green on the charcoal-and-green glow read as
+     low contrast (BugHerd #23, 2026-09-22). */
+  color: var(--ivory);
 }
 .close_fact-val {
   font-size: var(--size-text-small);
@@ -4119,6 +4171,10 @@ html:not(.js) .hero_media > img {
    =========================================================================== */
 .u-cover-top {
   object-position: 50% 18% !important;
+}
+/* For a photograph whose subject's head touches its top edge. */
+.u-cover-flush {
+  object-position: 50% 0% !important;
 }
 
 /* --- the sheet ------------------------------------------------------------------ */

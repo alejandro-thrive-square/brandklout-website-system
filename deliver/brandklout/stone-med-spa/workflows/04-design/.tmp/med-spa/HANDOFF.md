@@ -1,3 +1,10 @@
+> [!IMPORTANT]
+> **2026-09-23: TWENTY-FOUR PAGES.** The eleven non-Botox treatments have pages, GENERATED:
+> content in `site-src/treatment-pages.mjs`, template `treatmentPage()` in `build-site.mjs`
+> (Botox's sections and classes), linked through `page` in `treatments-data.mjs`. The general FAQ
+> is `site-faq.mjs`, emitted where a body carries `{{SITE_FAQ}}` (home, team). Edit the records,
+> never the output. Upload page lists read the same keys. See the 2026-09-23 BugHerd run.
+
 # Stone Med Spa — handoff
 
 > [!IMPORTANT]

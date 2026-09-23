@@ -40,8 +40,9 @@ import { api, getSite, saveShell, login } from '../../../../process/22-instatic-
 
 const WANTED = [
   // 300 sets every display line, 400 the mid-weight headings, 400italic the
-  // accented half of a two-part display line (`.display-accent`).
-  { family: 'Cormorant Garamond', variants: ['300', '400', '400italic'] },
+  // accented half of a two-part display line (`.display-accent`), 600 the year
+  // grid's row names (BugHerd #6, 2026-09-23).
+  { family: 'Cormorant Garamond', variants: ['300', '400', '600', '400italic'] },
   // 400 body, 500 eyebrows and labels, 600 the self-check's active layer, 700
   // the button labels.
   { family: 'Inter', variants: ['400', '500', '600', '700'] },
