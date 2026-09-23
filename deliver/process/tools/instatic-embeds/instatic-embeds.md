@@ -33,21 +33,23 @@ They are separate on purpose, and the platform enforces it: `moduleAdapter.ts` d
 
 ## Installing it on a new client site
 
+> [!IMPORTANT]
+> **The plugin source moved on 2026-09-23.** `embed-origins/`, `pack-plugin.mjs`,
+> `install-plugin.mjs` and the two offline suites now live in
+> [`../instatic-plugins/`](../instatic-plugins/README.md), the one home for every `brandklout.*`
+> plugin. Installing and upgrading plugins across sites is
+> [Scenario 4](../../scenario-4-update-plugins/README.md). This folder keeps the Embed-block
+> tooling: settings, site scripts, editor and canvas gates, vendor probes, the handoff guide.
+
 ```bash
+# 1. The toolkit refuses to guess which site it is talking to. Run from the client folder so
+#    the generated worktree .env (INSTATIC_BASE_URL + login) is found; never hand-edit it.
+
+node ../instatic-plugins/plugins.mjs test --plugin embed-origins      # 85 + 54 assertions, offline
+node ../instatic-plugins/install-plugin.mjs embed-origins             # dry run: shows the grants
+node ../instatic-plugins/install-plugin.mjs embed-origins --apply     # needs step-up auth
+
 cd deliver/process/tools/instatic-embeds
-
-# 1. The toolkit refuses to guess which site it is talking to.
-#    Add to the repo-root .env:  INSTATIC_BASE_URL=https://client-site.com
-#                                INSTATIC_EMAIL=...
-#                                INSTATIC_PASSWORD=...
-
-node test-embed-origins.mjs                 # 54 assertions, offline
-node test-embed-module.mjs                  # 54 assertions, offline
-
-node pack-plugin.mjs embed-origins .tmp/embed-origins.zip
-node install-plugin.mjs .tmp/embed-origins.zip          # dry run: shows the grants
-node install-plugin.mjs .tmp/embed-origins.zip --apply  # needs step-up auth
-
 node set-origins.mjs                        # show the allowlist
 
 node verify-embed-editor.mjs --place        # is a person OFFERED the block?
@@ -89,11 +91,15 @@ Since **plugin `1.6.0`** the `siteScripts` setting (one https URL per line) puts
 
 Since **plugin `1.7.0`** a line may end with `#consent=advertising` (or `analytics`, or both joined by `|`). That script is emitted as `<script type="text/plain" data-categories="…">` instead of `async`, which is how the cookie banner holds a tracker until the visitor accepts that category (see [termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). The fragment never reaches the server, so it is a safe place to hang the tag; the host is still granted its four directives, and a line with no tag behaves exactly as before. An unrecognised category is refused outright rather than emitted — a typo in `data-categories` would hold the script for a category nobody can accept, which looks identical to the script being broken.
 
+Since **plugin `1.8.0`** (2026-09-22, Dr. Nahlah) the line fragment takes `&`-joined options, and a line can be scoped to pages. `pages=<glob>[,<glob>]` puts it only on those pages; `except=<glob>[,<glob>]` puts it on every page but those. A glob is a page slug with `*` wildcards, matched against the `slug` the publish context passes (the home page is `index`; a data-row entry arrives with its **template's** slug). Example, two call-tracking pools, one per office: `…/number_pool.js#except=ads-landing-pages/tysons-*` and `…/number_pool.js#pages=ads-landing-pages/tysons-*`. With no slug, a `pages=` line is left off and an `except=` line stays on. An unknown option or a malformed glob refuses the whole line. **A site that reinstalls anything older than 1.8.0 loses the scoping and puts every pool on every page**; `install-plugin.mjs` and `plugins.mjs` refuse a downgrade for that reason. Known flaw: the glob escape writes `'\$&'` where `'\\$&'` was meant, so a `.` in a glob matches any character (harmless for today's slugs; fix it as 1.8.1 through Scenario 4).
+
+**A site script's host grant covers only that host.** A tracker that loads from one host and calls another needs the second host in `connectOrigins`, and the gap shows **only on pages without an Embed block**, which keep the strict CSP. GoHighLevel's pool loads from `backend.leadconnectorhq.com`, asks for its number at `services.leadconnectorhq.com` and reports to `services.msgsndr.com`. On Dr. Nahlah that refused the swap on 79 of 97 URLs (2026-09-22e). Any site carrying the pool needs both hosts in `connectOrigins`.
+
 **Live 2026-09-12: the Sienna accessibility widget on every instance.** URL: `https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js`. It needs all three jsdelivr grants: the script, a `fetch` of `dist/locales/`, and the OpenDyslexic font.
 
 ```bash
 cd deliver/process/tools/instatic-embeds
-node pack-plugin.mjs embed-origins .tmp/embed-origins.zip
+node ../instatic-plugins/plugins.mjs pack --plugin embed-origins   # the package apply installs
 node rollout-site-scripts.mjs status                      # plugin version, siteScripts, draft vs live
 node rollout-site-scripts.mjs apply --url <script> --apply  # upgrade/install + merge the URL; publishes nothing
 node rollout-site-scripts.mjs publish --apply             # REFUSES a site whose draft differs from live
@@ -134,7 +140,7 @@ Verified against the v0.0.16 source and then against a live site:
 
 ## Permissions this asks for, and why
 
-`install-plugin.mjs` grants from an explicit `GRANT` list and refuses any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
+`../instatic-plugins/install-plugin.mjs` grants from the explicit `grants` list in `../instatic-plugins/plugins.json` and refuses any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
 
 | Permission | Needed for |
 |---|---|
@@ -187,8 +193,8 @@ Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin tha
 ## Testing
 
 ```bash
-node test-embed-origins.mjs     # 54 — CSP filter, both modes, hashes, inheritance
-node test-embed-module.mjs      # 54 — the Embed block, publisher and canvas paths
+node ../instatic-plugins/test-embed-origins.mjs     # 85 — CSP filter, both modes, hashes, inheritance, site scripts
+node ../instatic-plugins/test-embed-module.mjs      # 54 — the Embed block, publisher and canvas paths
 ```
 
 Both run with no host, no network and no site. What they cannot prove is that the host registers the module and calls it — that is what `verify-embed-editor.mjs` (is the block offered), `verify-embed-canvas.mjs` (does the canvas render the card) and `verify-embed-scripts.mjs` (the published path) are for. Only the last of those publishes.
@@ -206,13 +212,12 @@ Both run with no host, no network and no site. What they cannot prove is that th
 - **Origin**: promoted from `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` (built and proven there on `encorercm.com`, plugin v1.3.0). The client folder's numbering (`15`, `16`) predates this promotion and does not match canonical module numbers.
 
 ## Output Artifacts
-- `embed-origins/` — the plugin: `plugin.json`, `server/index.js` (CSP filter), `modules/index.js` (the Embed block)
+- `../instatic-plugins/embed-origins/` — the plugin (moved 2026-09-23): `plugin.json`, `server/index.js` (CSP filter), `modules/index.js` (the Embed block)
 - `lib/insta-api.mjs` — headless admin REST client, no default site
-- `pack-plugin.mjs` — deterministic zip builder (forward-slashed entries; `Compress-Archive` writes backslash entry names on Windows and installs a plugin whose entrypoint can never be found)
-- `install-plugin.mjs` — inspect + install against an explicit permission grant
+- `../instatic-plugins/pack-plugin.mjs`, `../instatic-plugins/install-plugin.mjs` — deterministic zip builder and the per-id grant installer (moved 2026-09-23)
 - `set-origins.mjs` — read / set / clear the allowlist and `siteScripts` on one site (merges; targets `brandklout.embed-origins`)
 - `rollout-site-scripts.mjs` — `status` / `apply` / `publish` / `verify` a site-wide script across every instance
-- `test-embed-origins.mjs`, `test-embed-module.mjs` — offline suites
+- `../instatic-plugins/test-embed-origins.mjs`, `test-embed-module.mjs` — offline suites (moved 2026-09-23)
 - `verify-embed-editor.mjs` — is the block offered to a person? (publishes nothing)
 - `verify-embed-canvas.mjs` — does the CANVAS show the card and not the embed? 15 assertions against the real editor, configured blocks written into a draft, inserter skipped (publishes nothing)
 - `verify-embed-module.mjs`, `verify-embed-scripts.mjs` — published-page gates (these publish)

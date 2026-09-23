@@ -55,7 +55,7 @@ const FILES = flag('files', join(HERE, '.tmp', 'plugins'))
 // Vendored beside this script (identical bytes to 16-instatic-plugins/pack-plugin.mjs,
 // which is client-scoped). A root process module cannot reach into one client's
 // workflow folder, so module 21 carries its own copy. `--packer` overrides it.
-const PACKER = flag('packer', join(HERE, 'pack-plugin.mjs'))
+const PACKER = flag('packer', join(HERE, '..', '..', 'instatic-plugins', 'pack-plugin.mjs'))
 if (!FROM || !TO) { console.error('usage: node clone-plugins.mjs --from <url> --to <url> [--files <dir>]'); process.exit(2) }
 if (!existsSync(FILES)) { console.error(`no plugin assets at ${FILES} — pull them off the source container first (see header)`); process.exit(2) }
 

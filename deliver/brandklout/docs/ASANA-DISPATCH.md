@@ -37,7 +37,7 @@ Brandklout before treating them as real work.
 ## Build platform
 
 New sites are built on **Instatic** (Scenario 0, `deliver/process/scenario-0-new-site/`). Sites that
-are already live on **Webflow** stay there and get updates through Scenario 3. GoHighLevel appears only
+are already live on **Webflow** stay there and get updates through Scenario 2. GoHighLevel appears only
 as a *lead destination* (forms, tracking numbers), not as the page builder, so
 `sites.leadconnectorhq.com` references are structure references, not the platform.
 

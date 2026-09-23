@@ -15,8 +15,9 @@
  * environment: `insta-api.mjs` resolves `BASE` once at import, so one process
  * can only ever talk to one site.
  *
- * `apply` upgrades the plugin where the installed version is not the one in
- * `embed-origins/plugin.json` (installing it where it is missing), then merges
+ * `apply` upgrades the plugin where the installed version is older than the one in
+ * `../instatic-plugins/embed-origins/plugin.json`, installs it where it is missing and refuses a
+ * site that is newer, then merges
  * the URL into `siteScripts` without touching any other setting. It publishes
  * nothing. `publish` is separate because a publish bakes EVERY page, and
  * `status` shows the draft state first so unrelated drift is seen before it
@@ -28,14 +29,18 @@
 import { readFileSync, existsSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { basename, dirname, join } from 'node:path'
-import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
+import { readMaster } from '../instatic-plugins/lib/fleet.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ID = 'brandklout.embed-origins'
 const GRANT = ['cms.hooks', 'modules.register', 'frontend.assets']
-const ZIP = join(HERE, '.tmp', 'embed-origins.zip')
-const WANT_VERSION = JSON.parse(readFileSync(join(HERE, 'embed-origins', 'plugin.json'), 'utf8')).version
+// The plugin source and its packages live in ../instatic-plugins since 2026-09-23 (one home for
+// every plugin). For a plugin upgrade on its own, use ../instatic-plugins/plugins.mjs rollout.
+const PLUGINS = join(HERE, '..', 'instatic-plugins')
+const WANT_VERSION = JSON.parse(readFileSync(join(PLUGINS, 'embed-origins', 'plugin.json'), 'utf8')).version
+const ZIP = join(PLUGINS, '.tmp', 'packages', `${ID}-${WANT_VERSION}.zip`)
+const newer = (a, b) => { const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0); return false }
 
 const cmd = process.argv[2]
 const APPLY = process.argv.includes('--apply')
@@ -44,51 +49,7 @@ const argOf = (flag) => {
   return i === -1 ? null : process.argv[i + 1] ?? ''
 }
 
-/* ── master env: the same sectioned format env-sync.mjs reads ─────────────── */
-
-function readMaster() {
-  const file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.webzite', '.env')
-  const sections = new Map([['shared', new Map()]])
-  let current = 'shared'
-  for (const raw of readFileSync(file, 'utf8').split(/\r?\n/)) {
-    const line = raw.trim()
-    if (!line || line.startsWith('#') || line.startsWith(';')) continue
-    const header = line.match(/^\[\s*([^\]]+?)\s*\]$/)
-    if (header) {
-      current = header[1].toLowerCase()
-      if (!sections.has(current)) sections.set(current, new Map())
-      continue
-    }
-    const kv = line.match(/^([A-Za-z_][A-Za-z0-9_.-]*)\s*=\s*(.*)$/)
-    if (!kv) continue
-    let value = kv[2].trim()
-    if (value.length >= 2 && /^(["']).*\1$/.test(value)) value = value.slice(1, -1)
-    sections.get(current).set(kv[1], value)
-  }
-  const vars = sections.get('vars') ?? new Map()
-  const shared = sections.get('shared')
-  const expand = (value, trail = []) =>
-    value.replace(/\$\{([A-Za-z_][A-Za-z0-9_]*)\}/g, (whole, name) => {
-      if (trail.includes(name)) throw new Error(`circular reference ${whole}`)
-      const hit = vars.get(name) ?? shared.get(name)
-      if (hit === undefined) throw new Error(`${whole} is not defined in [vars] or [shared]`)
-      return expand(hit, trail.concat(name))
-    })
-  const sites = []
-  for (const [name, keys] of sections) {
-    if (['shared', 'vars', 'aliases'].includes(name) || !keys.get('INSTATIC_BASE_URL')) continue
-    const get = (k) => expand(keys.get(k) ?? shared.get(k) ?? '')
-    sites.push({
-      name,
-      env: {
-        INSTATIC_BASE_URL: get('INSTATIC_BASE_URL'),
-        INSTATIC_EMAIL: get('INSTATIC_EMAIL'),
-        INSTATIC_PASSWORD: get('INSTATIC_PASSWORD'),
-      },
-    })
-  }
-  return sites
-}
+/* ── master env: lib/fleet.mjs in ../instatic-plugins owns the reader now ──── */
 
 /* ── parent: loop the sites, one child each ──────────────────────────────── */
 
@@ -98,7 +59,7 @@ async function parent() {
   if (cmd === 'apply' && !argOf('--url')) throw new Error('apply needs --url <script>')
   if (cmd === 'verify' && !argOf('--url')) throw new Error('verify needs --url <script>')
   if (cmd === 'apply' && !existsSync(ZIP)) {
-    throw new Error(`no package at ${ZIP} — run: node pack-plugin.mjs embed-origins .tmp/embed-origins.zip`)
+    throw new Error(`no package at ${ZIP} — run: node ../instatic-plugins/plugins.mjs pack --plugin embed-origins`)
   }
   let failed = 0
   for (const site of sites) {
@@ -135,6 +96,9 @@ async function worker() {
   if (cmd === 'apply') {
     let p = await findPlugin()
     const before = p ? await readSettings() : {}
+    // Never downgrade: a site ahead of the source (Dr. Nahlah ran 1.8.0 while this folder said 1.7.0)
+    // would lose features live. Bring the newer source into ../instatic-plugins first.
+    if (p && newer(p.version, WANT_VERSION)) throw new Error(`refused: installed v${p.version} is newer than the source v${WANT_VERSION}`)
     if (!p || p.version !== WANT_VERSION) {
       console.log(`  plugin   ${p ? `v${p.version}` : 'missing'} -> v${WANT_VERSION}${APPLY ? '' : '  (dry run)'}`)
       if (APPLY) {

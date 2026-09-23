@@ -43,7 +43,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    choice, everything releases after Accept (`tools/termly-ghl-consent/consent-kit.mjs check`).
 6. **Images.** Compress every image; test the result of every step before moving on.
 7. **Promote.** Back up production (`ops/backup-site.mjs`), make sure nobody has pending drafts (a
-   push publishes every draft site-wide), match plugin versions, then push staging to production with
+   push publishes every draft site-wide), match plugin versions
+   (`tools/instatic-plugins/plugins.mjs status --sites <client>`, no PARITY line), then push staging to production with
    `staging-clone` (`clone-site`, `diff-sites`, `clone-plugins`, `publish-rows`). Asana task for the
    developer's final review (confirm first).
 8. **Email first.** Before the nameserver switch, copy MX, SPF, DKIM and DMARC into the Cloudflare zone

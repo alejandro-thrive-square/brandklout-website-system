@@ -50,12 +50,29 @@ model and asked for the board first, then the directives, removing anything with
 - FigJam: Scenarios 3 (Website Updates / Expansions) and 5 (Ads Landing Pages) drawn from their
   directives; the board runs 0 to 6 left to right, with 2, 4 and 6 still headers only.
 
+- Owner renumbered the board (Migration & Redesign and Article Writing removed). Scenarios are now
+  0 new site, 1 migration, 2 updates/expansions, 3 ads landing pages, 4 update plugins, 5 Instatic
+  release update; repo folders renamed to match.
+- New **Scenario 4 · Update Plugins Across Sites** and `tools/instatic-plugins/` (one source per plugin:
+  embed-origins 1.8.0 moved in from instatic-embeds, open-graph 1.1.3 from bk-mason-park-kids,
+  aeo-schema 1.2.0, link-editor 1.0.2; registry `plugins.json`; `plugins.mjs status | rollout | verify`).
+  Read-only status: parity broken on dr-nahlah (1.8.0 vs 1.5.1) and mason-park (1.6.0 vs 1.5.1); IFA,
+  Stone Surgical Arts, Stone Med Spa and West LA have no open-graph or aeo-schema. `sites.json` gained
+  dr-nahlah-staging, mason-park-staging and client-branch entries.
+- New **Scenario 5 · Instatic Release Update** and `tools/instatic-release/` (inventory, backup with
+  VACUUM INTO, pinned image update, verify-data, rollback). Read-only inventory: all 14 Railway
+  instances run `ghcr.io/corebunch/instatic:latest` unpinned, spread over releases 0.0.16 to 0.0.20;
+  staging is ahead of production on IFA, Stone Surgical Arts, Stone Med Spa and Mason Park; only 4 of
+  14 volumes have Railway backups; 0.0.20 carries a rewriting migration (`030_iso_timestamps`).
+- Both drawn on the board. Nothing was installed, updated or published on any site.
+
 ## Next
 
 - Answer the agents' open questions (listed in the chat summary of this run): Webflow page branches, Arvada's `lw-` classes, per-request folder for updates,
   build folder layout for `push-site`, a script to add Sang's admin, SEO plugin sources as a toolkit,
   drive upload, IFA managed robots.txt, Google Ads conversion ownership.
 - Redraw the Sitemap board's ads columns from the corrected `section-flows.py`.
+- Owner go needed: pin all 14 instances to their current release (`update-image --pin-current`), then a first plugin round (embed-origins 1.8.1 glob fix, open-graph 1.1.3) and the SEO pair on the four sites without it.
 - Merge to `main` only when the owner says so; the 16 client branches still expect the old layout.
 
 ## Gotchas

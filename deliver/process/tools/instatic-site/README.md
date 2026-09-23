@@ -11,7 +11,8 @@ Sibling toolkits this one relies on and does not copy:
 | Toolkit | What it owns |
 |---|---|
 | [`../instatic-api-sync/`](../instatic-api-sync/instatic-api-sync.md) | `insta-api.mjs` (the admin client every script here uses via `lib/site.mjs`), `conv-encode.ts` / `conv-preload.ts` (shipped by `push/ship.sh`), `install-fonts.mjs`, CSS repair tools, `prune-versions` |
-| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the `brandklout.embed-origins` plugin: `install-plugin.mjs`, `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts) |
+| [`../instatic-plugins/`](../instatic-plugins/README.md) | every `brandklout.*` plugin source, `plugins.json` (registry), `install-plugin.mjs`, `plugins.mjs` (status, rollout, verify across sites) |
+| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts), editor and canvas gates |
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |
@@ -22,7 +23,7 @@ Sibling toolkits this one relies on and does not copy:
 | Step | Scripts | When to run |
 |---|---|---|
 | 01-client-inquiry | `setup/provision-instance.mjs` | New Railway project + Instatic service + volume + domain + variables, then `--setup` claims the admin at once |
-| | `../instatic-embeds/install-plugin.mjs`, `../instatic-domain-origins/check-origins.mjs` | Install every plugin; prove the admin login origin |
+| | `../instatic-plugins/install-plugin.mjs` (or `plugins.mjs rollout`), `../instatic-domain-origins/check-origins.mjs` | Install every plugin on production and staging; prove the admin login origin |
 | | `staging-clone/staging-clone.md` §A, `staging-clone/*` | Stand up the staging environment (volume, `PUBLIC_ORIGIN`, claim setup, delete the minted service domain) |
 | 02-research-sitemap | (none here) | Sitemap tooling is `../specialty-sitemaps/` |
 | 03-design-build | `scripts/fluid-root.mjs --check`, `gates/check-pages.mjs` (local), `gates/click-controls.mjs` (local), `gates/colour-leak.mjs`, `gates/cross-client-grep.mjs` | Every build, before any push |

@@ -70,20 +70,16 @@ def require_site() -> str:
 
 
 def cmd_test(_: argparse.Namespace) -> int:
-    failed = 0
-    for suite in ("test-embed-origins.mjs", "test-embed-module.mjs"):
-        failed |= node(suite)
-    return failed
+    # The plugin and its offline suites live in ../instatic-plugins since 2026-09-23.
+    return node("../instatic-plugins/plugins.mjs", "test", "--plugin", "embed-origins")
 
 
 def cmd_install(args: argparse.Namespace) -> int:
     site = require_site()
     print(f"target site: {site}")
-    zip_path = ".tmp/embed-origins.zip"
-    if node("pack-plugin.mjs", "embed-origins", zip_path):
-        return 1
-    install_args = [zip_path] + (["--apply"] if args.apply else [])
-    return node("install-plugin.mjs", *install_args)
+    # Packs from ../instatic-plugins/embed-origins and grants from plugins.json (2026-09-23).
+    install_args = ["embed-origins"] + (["--apply"] if args.apply else [])
+    return node("../instatic-plugins/install-plugin.mjs", *install_args)
 
 
 def cmd_verify(args: argparse.Namespace) -> int:

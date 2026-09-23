@@ -389,7 +389,7 @@ T['ads_folder'] = [['Note', 'Not a page: the /ads-landing-pages/ folder, noindex
 # The three ads flows follow Livewell's live set beat for beat
 # (livewelldentalva.com/ads-landing-pages/{dental-implants, dental-implant-consultation, thank-you-implants});
 # the reference's section names are in brackets. Checked 2026-09-23, see
-# deliver/process/scenario-5-ads-landing-pages/02-build-the-combo.md.
+# deliver/process/scenario-3-ads-landing-pages/02-build-the-combo.md.
 T['ads_landing'] = [['Navbar', 'Minimal: logo, phone and Book a Consultation only, no menu [imp-header]'],
     ['Hero Header Section', '{S}: offer headline, review badge, three checks, Book + Call, service area, the doctor on film, and the lead form in the hero [imp-hero]'],
     ['Comparison Section', "One patient's real journey: before and after slider, life before vs life after, four story beats in the patient's words [landing-journey]"],

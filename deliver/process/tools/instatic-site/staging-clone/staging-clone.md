@@ -464,7 +464,7 @@ API accepts anything.
 - `lib.mjs` - two-instance session/step-up helper
 - `clone-site.mjs` - document seed and promote (`--media` for small sites)
 - `clone-plugins.mjs` - plugins + settings
-- `pack-plugin.mjs` - vendored zip packer (byte-identical to `16-instatic-plugins`')
+- The zip packer is the shared `tools/instatic-plugins/pack-plugin.mjs` (`clone-plugins.mjs --packer` to override)
 - `pull-media.js` - container-to-container media bytes (large sites)
 - `chunk-media.py` / `import-media-chunks.mjs` - media rows under the 413 wall
 - `publish-rows.mjs` - per-row publish for collections

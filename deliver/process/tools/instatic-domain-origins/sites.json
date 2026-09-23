@@ -9,22 +9,156 @@
     "This file is the claim; `node check-origins.mjs --all` is the proof, and it probes the RUNNING",
     "server rather than the Railway dashboard. Re-run it after any domain change or redeploy and",
     "fix whichever of the two is wrong.",
-    "No secrets here. Credentials live in the per-worktree .env and never in this repo."
+    "No secrets here. Credentials live in the per-worktree .env and never in this repo.",
+    "A `<client>-staging` entry is that client's staging instance; tools/instatic-plugins reads production and staging hosts from here (2026-09-23)."
   ],
   "sites": [
     {
       "client": "dr-nahlah",
       "adminUrl": "https://www.drnahlah.com",
-      "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
-      "railway": { "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5", "service": "Dr Nahlah" },
+      "alternates": [
+        "https://encorercm.com",
+        "https://dr-nahlah.up.railway.app"
+      ],
+      "railway": {
+        "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5",
+        "service": "Dr Nahlah"
+      },
       "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live."
     },
     {
       "client": "mason-park",
       "adminUrl": "https://www.masonparkdental.com",
-      "alternates": ["https://mason-park.up.railway.app"],
-      "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
+      "alternates": [
+        "https://mason-park.up.railway.app"
+      ],
+      "railway": {
+        "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc",
+        "service": "Mason Park"
+      },
       "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+    },
+    {
+      "client": "brandklout-website",
+      "adminUrl": "https://brandklout.ai",
+      "alternates": [
+        "https://brandklout-production.up.railway.app"
+      ],
+      "railway": {
+        "project": "550ebd58-0e74-444e-96d5-2b836a2db98a",
+        "service": "Brandklout"
+      },
+      "note": "Domain cutover 2026-09-22: brandklout.ai and www.brandklout.ai are both attached in Railway and Cloudflare-proxied, certificates valid, and both already served the site — but PUBLIC_ORIGIN was still the railway host alone, so both were TRAP hosts. Now https://brandklout.ai,https://www.brandklout.ai,https://brandklout-production.up.railway.app; redeployed (a127e9f6) and all three verified OK. www is a separate Railway customDomain reading REQUIRES_UPDATE because its CNAME is proxied by Cloudflare; it serves and accepts the login regardless, so it is not listed as an alternate — check-origins appends the www twin itself."
+    },
+    {
+      "client": "brandklout-website-staging",
+      "adminUrl": "https://staging.brandklout.ai",
+      "alternates": [],
+      "railway": {
+        "project": "550ebd58-0e74-444e-96d5-2b836a2db98a",
+        "service": "Brandklout",
+        "environment": "staging"
+      },
+      "note": "Stood up 2026-09-22 per process 21-instatic-staging-clone. PUBLIC_ORIGIN is the staging host ALONE, set with skipDeploys before anything could deploy, because a duplicated environment is born holding production's list. The Railway service domain it minted (brandklout-staging.up.railway.app) was DELETED: it bypasses Cloudflare, so no edge rule can de-index it. One door only. Cloudflare response-header rule 1d696d05809041c386b3f328ab0265fb sets X-Robots-Tag noindex, nofollow on this host, and emitCanonical is OFF on its Open Graph plugin - noindex plus a canonical at production is the one pairing Google can resolve against production. There is no www twin and there must not be one."
+    },
+    {
+      "client": "institute-for-advanced-dentistry",
+      "adminUrl": "https://www.ifadentistry.com",
+      "alternates": [
+        "https://institute-for-advanced-dentistry-production.up.railway.app",
+        "https://staging.ifadentistry.com"
+      ],
+      "railway": {
+        "project": "3449a121-3580-485b-97f5-8c8903f8e409",
+        "service": "Institute for Advanced Dentistry"
+      },
+      "note": "Cut over 2026-09-11 ~21:40Z. PUBLIC_ORIGIN set 21:57Z to www, apex, railway host (in that order) and redeployed; www fixed 22:20Z (CNAME wshw0478.up.railway.app, proxied) and the apex now 301s to www. check-origins --all clean: www and the railway host OK, zero TRAP. staging.ifadentistry.com is a SEPARATE Instatic instance (same Railway project, environment `staging`, volume 55e39064-0193-4639-b766-4c1fffee7f72), stood up 2026-09-18 for the redesign. Its PUBLIC_ORIGIN is the staging host ALONE and its generated Railway host was deleted on purpose: that host bypasses Cloudflare and so cannot carry the X-Robots-Tag noindex rule that keeps staging out of Google. One door, de-indexed at the edge."
+    },
+    {
+      "client": "mason-park-kids",
+      "adminUrl": "https://staging.masonparkpediatricdental.com",
+      "alternates": [
+        "https://mason-park-kids.up.railway.app"
+      ],
+      "railway": {
+        "project": "a135c5ec-da62-4643-a775-c6a39317fb1b",
+        "service": "Mason Park Kids"
+      },
+      "note": "Added 2026-08-31, the day the rebuilt site was imported (54 pages). The service domain was generated from the IMAGE name (corebunchinstaticlatest-production-fb3b) and was renamed the same day to match the convention the other two sites use. Renaming a service domain silently invalidates PUBLIC_ORIGIN, which is the 403-on-login trap this module exists for, so the order was: widen PUBLIC_ORIGIN to hold BOTH hosts, confirm the container had actually applied it, rename, then narrow it back to the new host alone. pediatricdentistkatytx.com is still on SiteGround DNS and 301s to the parent practice's now-dead mason-park.up.railway.app; when it moves to Cloudflare and points here, add apex AND www to PUBLIC_ORIGIN and re-run the checker BEFORE sending anyone the link. 2026-09-14: the site's domain became masonparkpediatricdental.com (Squarespace registrar, Cloudflare DNS). Apex and www added in Railway, PUBLIC_ORIGIN = www, apex, railway host; redeployed; all three verified OK live. Same day: the new design is not ready for production, so it moved to staging.masonparkpediatricdental.com (now first in PUBLIC_ORIGIN, verified OK). Later still: apex/www now serve the static copy of the old WordPress site from Cloudflare Pages (project mason-park-kids-wp), so they were removed from Railway and from PUBLIC_ORIGIN, which is now staging then the railway host. The apex has no Instatic admin any more."
+    },
+    {
+      "client": "stone-surgical-arts",
+      "adminUrl": "https://www.dfwsurgicalarts.com",
+      "alternates": [],
+      "railway": {
+        "project": "b3cae5d8-5f45-4e5c-8bfb-03113bb45327",
+        "service": "Stone Surgical Arts"
+      },
+      "note": "Cut over 2026-09-10. Connecting dfwsurgicalarts.com + www DETACHED the generated stone-surgical-arts-production.up.railway.app host (it now 404s everywhere), while PUBLIC_ORIGIN still named only that host - so the admin could not be logged into from any address. PUBLIC_ORIGIN is now www, apex, then the dead railway host (kept, harmless, per the rule). The railway host is not listed here because it no longer serves the admin. Both custom hosts verified live."
+    },
+    {
+      "client": "stone-surgical-arts-staging",
+      "adminUrl": "https://staging.dfwsurgicalarts.com",
+      "alternates": [],
+      "railway": {
+        "project": "b3cae5d8-5f45-4e5c-8bfb-03113bb45327",
+        "service": "Stone Surgical Arts",
+        "environment": "staging"
+      },
+      "note": "Created 2026-09-15 as the Railway environment `staging`. PUBLIC_ORIGIN is the staging host alone: the generated stone-surgical-arts-staging.up.railway.app host was deleted because it bypasses Cloudflare and cannot carry the noindex header. Same login as production; seeded from production the same day."
+    },
+    {
+      "client": "stone-med-spa",
+      "adminUrl": "https://westlaketxmedspa.com",
+      "alternates": [],
+      "railway": {
+        "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d",
+        "service": "Westlake Medical Aesthetics"
+      },
+      "note": "Cut over 2026-09-10 to westlaketxmedspa.com + www. Connecting them DETACHED stone-med-spa-production.up.railway.app (now 404 everywhere) while PUBLIC_ORIGIN still named only that host, so no address could log in. PUBLIC_ORIGIN is now apex, www, then the dead railway host (kept per the rule; not listed here because it no longer serves the admin). The service was renamed 'Westlake Medical Aesthetics'; the project is still 'Stone Med Spa'. History: provisioned 2026-09-04 and clean from the first boot, which is the point: the Railway project, the service and the generated domain were all named 'Stone Med Spa' BEFORE the domain was minted, and PUBLIC_ORIGIN was set to that host in the same call. A generated domain is derived from the service name at creation, so naming afterwards leaves the origin pointing at the old host and every admin write answers 403. There is no client domain yet; when one is bought, follow the cutover in this module and keep the railway host in PUBLIC_ORIGIN — INSTATIC_BASE_URL points at it."
+    },
+    {
+      "client": "stone-med-spa-staging",
+      "adminUrl": "https://staging.westlaketxmedspa.com",
+      "alternates": [],
+      "railway": {
+        "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d",
+        "service": "Westlake Medical Aesthetics",
+        "environment": "staging"
+      },
+      "note": "Created 2026-09-15 as the Railway environment `staging` (ca87e7fd-2965-4fad-a082-0eaec9e8e3cf), own volume at /app/storage. PUBLIC_ORIGIN is the staging host alone and was set BEFORE the volume and domain mutations, and no generated railway host was ever minted - the only door is the Cloudflare-proxied one carrying X-Robots-Tag noindex. Same login as production; seeded from production the same day."
+    },
+    {
+      "client": "west-la-implants",
+      "adminUrl": "https://west-la-implants-production.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "a55b5cac-b92d-4653-a9ff-6da522a5c89c",
+        "service": "West LA Implants"
+      },
+      "note": "Provisioned 2026-09-10 name-first via 22-instatic-api-sync/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet — westlaimplants.com is still the WordPress site. Homepage-only review build."
+    },
+    {
+      "client": "dr-nahlah-staging",
+      "adminUrl": "https://staging.drnahlah.com",
+      "alternates": [],
+      "railway": {
+        "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5",
+        "service": "Dr Nahlah",
+        "environment": "staging"
+      },
+      "note": "Added 2026-09-23 for the plugin fleet (tools/instatic-plugins). Staging has been in every Dr. Nahlah runbook since the ads work (2026-09-18) but was in no registry, which is how the 2026-09-10 author pass missed it and how its Embed Origins stayed on 1.4.0 with no siteScripts. Same login as production. Run check-origins --all to confirm the host before relying on it."
+    },
+    {
+      "client": "mason-park-staging",
+      "adminUrl": "https://staging.masonparkdental.com",
+      "alternates": [],
+      "railway": {
+        "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc",
+        "service": "Mason Park",
+        "environment": "staging"
+      },
+      "note": "Added 2026-09-23 for the plugin fleet (tools/instatic-plugins), from INSTATIC_STAGING_URL in the [mason-park] master section. The rebuild lives here; its Embed Origins was 1.5.1 with no Termly on 2026-09-18. Same login as production. Run check-origins --all to confirm the host before relying on it."
     }
   ]
 }

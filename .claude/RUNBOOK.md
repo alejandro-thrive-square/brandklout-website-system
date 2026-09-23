@@ -14,7 +14,7 @@ then only the runs you need. Do not read them all.
   [the run](./runbook/2026-09-22-system-v2-worktree-created.md).
 
 - **`deliver/process/` is now scenarios plus tools** (2026-09-23): `scenario-0-new-site`, `scenario-1-migration`,
-  `scenario-3-updates-expansions`, `scenario-5-ads-landing-pages`, and unnumbered `tools/`. The old 00–23
+  `scenario-2-updates-expansions`, `scenario-3-ads-landing-pages`, and unnumbered `tools/`. The old 00–23
   modules and the client folders are gone from this worktree (still on `main` and `bk-*`). Open questions
   and next steps: [the run](./runbook/2026-09-23-process-reshaped-into-scenarios.md).
 

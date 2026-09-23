@@ -25,7 +25,7 @@ first and come back here at step 02.
   and the runbook in `docs/runbook/`.
 - **Client media:** the client's Google Drive, never the worktree (media is gitignored and dies with the
   worktree). Pull with `node scripts/drive.mjs`.
-- **Tools:** [`../tools/`](../tools/) — `instatic-site` (setup, push pipeline, gates), `instatic-embeds`,
+- **Tools:** [`../tools/`](../tools/) — `instatic-site` (setup, push pipeline, gates), `instatic-plugins`, `instatic-embeds`,
   `instatic-domain-origins`, `instatic-api-sync`, `termly-ghl-consent`, `cloudflare-launch`,
   `specialty-sitemaps`, `gsap-animations`, `scroll-film-studio`, `client-first-style-guide`.
 - **Standards:** [`deliver/brandklout/docs/DESIGN-STANDARD.md`](../../brandklout/docs/DESIGN-STANDARD.md),

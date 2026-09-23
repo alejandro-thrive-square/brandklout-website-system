@@ -10,11 +10,12 @@ the same scenarios; when the board and these files disagree, fix both.
 | --- | --- | --- | --- |
 | 0 | Website from Scratch | [process/scenario-0-new-site](./process/scenario-0-new-site/README.md) | Instatic on Railway, Cloudflare |
 | 1 | Website Migration | [process/scenario-1-migration](./process/scenario-1-migration/README.md) | capture the old site, then Scenario 0 |
-| 3 | Website Updates / Expansions | [process/scenario-3-updates-expansions](./process/scenario-3-updates-expansions/README.md) | Webflow (live clients) and Instatic |
-| 5 | Ads Landing Pages | [process/scenario-5-ads-landing-pages](./process/scenario-5-ads-landing-pages/README.md) | Instatic and Webflow |
+| 2 | Website Updates / Expansions | [process/scenario-2-updates-expansions](./process/scenario-2-updates-expansions/README.md) | Webflow (live clients) and Instatic |
+| 3 | Ads Landing Pages | [process/scenario-3-ads-landing-pages](./process/scenario-3-ads-landing-pages/README.md) | Instatic and Webflow |
+| 4 | Update Plugins Across Sites | [process/scenario-4-update-plugins](./process/scenario-4-update-plugins/README.md) | every Instatic site, staging then production |
+| 5 | Instatic Release Update | [process/scenario-5-instatic-release-update](./process/scenario-5-instatic-release-update/README.md) | every Railway instance, staging then production, no data loss |
 
-The numbers follow the board. Scenarios 2 (Migration & Redesign), 4 (Article Writing) and 6 (Update
-Plugins Across Sites) are on the board but not written yet. Full index:
+The numbers follow the board. Full index:
 [process/PROCESS_INDEX.md](./process/PROCESS_INDEX.md).
 
 ## 2. Where things live

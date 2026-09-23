@@ -92,7 +92,7 @@ export async function call(tool, actions, opts = {}) {
 
   const args = {
     actions: list,
-    context: opts.context || `Brandklout scenario 3 update on Webflow site ${site}`,
+    context: opts.context || `Brandklout scenario 2 update on Webflow site ${site}`,
     session_id: SESSION.id,
     agent_id: AGENT_ID,
   };

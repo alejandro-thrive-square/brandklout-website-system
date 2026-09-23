@@ -110,7 +110,7 @@ if (!plugin || plugin.enabled === false) {
   console.error(
     'REFUSING: the brandklout.embed-origins plugin is not installed or not enabled on this site.\n' +
       'A module node whose plugin is missing publishes as nothing at all. Install it first:\n' +
-      '  deliver/process/tools/instatic-embeds  ->  node install-plugin.mjs <zip> --apply',
+      '  deliver/process/tools/instatic-plugins  ->  node install-plugin.mjs embed-origins --apply',
   )
   process.exit(1)
 }

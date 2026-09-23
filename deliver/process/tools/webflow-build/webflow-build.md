@@ -5,7 +5,7 @@ Scripts for changing a live Brandklout Webflow site through the Webflow MCP. The
 Designer tree, adding pages and sections natively, registering site scripts, uploading assets,
 auditing, and publishing without shipping someone else's work.
 The process that uses them is
-[scenario 3 · updates and expansions](../../scenario-3-updates-expansions/README.md). Read that first.
+[scenario 2 · updates and expansions](../../scenario-2-updates-expansions/README.md). Read that first.
 
 Rewritten 2026-09-23 to match what the client runs actually did. The earlier version described a
 full-site build pipeline (clipboard paste of converted HTML, a config-driven orchestrator, an hourly

@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-09-23 | 2026-09-23 — process reshaped into scenarios (0 new site, 1 migration, 3 updates, 5 ads) with tools/; Scenario 0 audited and redrawn on FigJam; client folders out of v2 — carries **gotchas** | [`2026-09-23-process-reshaped-into-scenarios.md`](./2026-09-23-process-reshaped-into-scenarios.md) |
+| 2026-09-23 | 2026-09-23 — process reshaped into scenarios (0 new site, 1 migration, 2 updates, 3 ads, 4 plugins, 5 Instatic releases) with tools/; Scenario 0 audited and redrawn on FigJam; client folders out of v2 — carries **gotchas** | [`2026-09-23-process-reshaped-into-scenarios.md`](./2026-09-23-process-reshaped-into-scenarios.md) |
 | 2026-09-22 | 2026-09-22 — Figma API access, Deliver SOP board (v2 layout, QA step, cookie consent), Relume sitemap and five specialty sitemap templates in FigJam — carries **gotchas** | [`2026-09-22-figma-sop-board-and-specialty-sitemaps.md`](./2026-09-22-figma-sop-board-and-specialty-sitemaps.md) |
 | 2026-09-22 | 2026-09-22 — `system-v2` worktree created for the system rebuild; base folder stays on main for client work — carries **gotchas** | [`2026-09-22-system-v2-worktree-created.md`](./2026-09-22-system-v2-worktree-created.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie consent rolled out to all 29 Brandklout sites: 16 live and gated, 11 staged for the team's next publish — carries **gotchas** | [`2026-09-22-termly-consent-rolled-out-to-29-sites.md`](./2026-09-22-termly-consent-rolled-out-to-29-sites.md) |

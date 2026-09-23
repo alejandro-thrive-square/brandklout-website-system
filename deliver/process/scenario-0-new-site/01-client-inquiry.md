@@ -50,8 +50,11 @@ direction the client picked.
    plugins do not copy over.
 6. **Plugins.** From the client worktree, install the `brandklout.*` plugins (embed-origins,
    open-graph, aeo-schema) on production and staging with
-   [`tools/instatic-embeds/install-plugin.mjs`](../tools/instatic-embeds/install-plugin.mjs). Same
-   version on both environments.
+   [`tools/instatic-plugins/install-plugin.mjs`](../tools/instatic-plugins/install-plugin.mjs). Same
+   version on both environments. Add the site to `sites` in `tools/instatic-plugins/plugins.json`
+   and its staging host to `sites.json` as `<client>-staging`, then
+   `plugins.mjs status --sites <client>` must show no drift. Later updates follow
+   [Scenario 4](../scenario-4-update-plugins/README.md).
 7. **Asana.** Create the project from the template and assign the tasks to the developer. Agents read
    Asana with `deliver/brandklout/scripts/asana-pull.mjs`; any status change or comment is confirmed
    with a person first.
@@ -90,7 +93,7 @@ direction the client picked.
 
 - `tools/instatic-site/setup/provision-instance.mjs` — Railway project, service, volume, domain, variables; `--setup` claims the admin.
 - `tools/instatic-site/staging-clone/` — staging environment recipe and scripts.
-- `tools/instatic-embeds/install-plugin.mjs` — install or upgrade a `brandklout.*` plugin.
+- `tools/instatic-plugins/install-plugin.mjs` — install or upgrade a `brandklout.*` plugin; `plugins.mjs status` proves both environments match (Scenario 4).
 - `tools/instatic-domain-origins/check-origins.mjs` — prove the admin login works on every host.
 - `deliver/brandklout/scripts/asana-pull.mjs`, `asana-context.mjs` — read the Asana project.
 - `scripts/drive.mjs` — list and pull the client drive.

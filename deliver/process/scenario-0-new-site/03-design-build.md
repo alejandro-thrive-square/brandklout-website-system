@@ -57,7 +57,7 @@ Instatic staging for team review. The design bar is
 
 11. Build every page in the sitemap. Blog: CMS collection and template page.
 12. Legal pages from the client's own privacy, terms and SMS text. Ask the practice; don't draft them.
-13. Ads combos if the client runs ads ([Scenario 5](../scenario-5-ads-landing-pages/README.md)).
+13. Ads combos if the client runs ads ([Scenario 3](../scenario-3-ads-landing-pages/README.md)).
 14. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
     (new filename for any re-cut image) → `set-alt` → `build-import-input` → `ship.sh` → `push-site` →
     `place-embeds` → `ops/apply-template-flags` (blog, 404) → `gates/template-guard` → publish. Then

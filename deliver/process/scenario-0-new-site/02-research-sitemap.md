@@ -41,7 +41,7 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
 - **If the practice has more than one office:** brand pages at the root, one `/locations/<city>/` branch
   per office. Each office has its own phone, number pool, GHL form, hours and map.
 - **If the client runs ads:** plan the three-page combo per campaign under `/ads-landing-pages/`
-  ([Scenario 5](../scenario-5-ads-landing-pages/README.md)).
+  ([Scenario 3](../scenario-3-ads-landing-pages/README.md)).
 - **If the client has blog posts:** a CMS collection with a template page, not static pages.
 - **If this is a migration:** start from the old URL inventory, keep the pages that rank at their URL
   when possible, and plan nested slugs carefully (Instatic flattens `a/b` to `a-b` after some writes).

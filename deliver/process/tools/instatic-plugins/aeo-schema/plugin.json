@@ -1,0 +1,212 @@
+{
+  "id": "brandklout.aeo-schema",
+  "name": "AEO Schema",
+  "version": "1.2.0",
+  "apiVersion": 1,
+  "description": "Structured data for answer engines: one JSON-LD @graph on every published page — Organization, WebSite, WebPage, BreadcrumbList and Article — plus hand-written blocks per page. Managed from the admin, and changeable across the whole site in one API call.",
+  "permissions": [
+    "cms.hooks",
+    "cms.storage",
+    "cms.routes",
+    "cms.content.read",
+    "admin.navigation",
+    "editor.code"
+  ],
+  "contentAccess": [
+    {
+      "table": "pages",
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "table": "posts",
+      "modes": [
+        "read"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "schema-blocks",
+      "title": "Schema blocks",
+      "singularLabel": "Block",
+      "pluralLabel": "Blocks",
+      "fields": [
+        {
+          "id": "key",
+          "label": "Page key",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "json",
+          "label": "JSON-LD",
+          "type": "longtext"
+        },
+        {
+          "id": "note",
+          "label": "Note",
+          "type": "text"
+        },
+        {
+          "id": "enabled",
+          "label": "Enabled",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "adminPages": [
+    {
+      "id": "aeo-schema",
+      "title": "AEO Schema",
+      "navLabel": "AEO Schema",
+      "content": {
+        "kind": "app",
+        "heading": "AEO Schema",
+        "entry": "admin/index.js"
+      }
+    }
+  ],
+  "settings": [
+    {
+      "id": "enabled",
+      "type": "toggle",
+      "label": "Write structured data into published pages",
+      "description": "Off leaves every published page exactly as the platform rendered it.",
+      "default": true
+    },
+    {
+      "id": "siteUrl",
+      "type": "url",
+      "label": "Public address of the site",
+      "description": "With scheme, no trailing slash — https://www.drnahlah.com. Every @id, url and breadcrumb item in the graph is built from this, so with it empty the graph is emitted without them and answer engines cannot resolve the entities.",
+      "default": ""
+    },
+    {
+      "id": "siteName",
+      "type": "text",
+      "label": "Site name",
+      "description": "The WebSite entity's name.",
+      "default": ""
+    },
+    {
+      "id": "organizationType",
+      "type": "select",
+      "label": "What kind of organisation this is",
+      "description": "schema.org type for the practice. Dentist is a LocalBusiness subtype and is the specific one for a dental practice — prefer the most specific type that is true.",
+      "options": [
+        {
+          "label": "Dentist",
+          "value": "Dentist"
+        },
+        {
+          "label": "MedicalBusiness",
+          "value": "MedicalBusiness"
+        },
+        {
+          "label": "LocalBusiness",
+          "value": "LocalBusiness"
+        },
+        {
+          "label": "Organization",
+          "value": "Organization"
+        }
+      ],
+      "default": "Dentist"
+    },
+    {
+      "id": "organizationName",
+      "type": "text",
+      "label": "Organisation name",
+      "default": ""
+    },
+    {
+      "id": "logo",
+      "type": "text",
+      "label": "Logo",
+      "description": "/uploads/... or a full https:// address. Used as the organisation's logo and as the publisher logo on every article.",
+      "default": ""
+    },
+    {
+      "id": "telephone",
+      "type": "text",
+      "label": "Telephone",
+      "default": ""
+    },
+    {
+      "id": "priceRange",
+      "type": "text",
+      "label": "Price range",
+      "description": "Google shows this on a local business card. $$ or $$$ is the convention; leave empty to omit rather than guess.",
+      "default": ""
+    },
+    {
+      "id": "sameAs",
+      "type": "textarea",
+      "label": "Profiles elsewhere",
+      "description": "One URL per line — Google Business Profile, Facebook, Instagram, Yelp, Healthgrades. This is how an answer engine ties the entity here to the entity it already knows.",
+      "rows": 4,
+      "default": ""
+    },
+    {
+      "id": "organizationJson",
+      "type": "textarea",
+      "label": "Organisation block, written by hand",
+      "description": "Optional, and it REPLACES everything above. Paste a full Organization / LocalBusiness object when the generated one cannot express the practice — two locations, a department list, opening hours per office. Must be one JSON object; it is validated before it can be saved.",
+      "rows": 8,
+      "default": ""
+    },
+    {
+      "id": "emitOrganization",
+      "type": "toggle",
+      "label": "Organisation on every page",
+      "description": "The practice entity, with a stable @id, so every other node on every page can point at one organisation rather than re-declaring it.",
+      "default": true
+    },
+    {
+      "id": "emitWebSite",
+      "type": "toggle",
+      "label": "WebSite entity on the home page",
+      "default": true
+    },
+    {
+      "id": "emitWebPage",
+      "type": "toggle",
+      "label": "WebPage for each page",
+      "description": "Name, description and URL for the page itself, tied to the WebSite and the organisation.",
+      "default": true
+    },
+    {
+      "id": "emitBreadcrumbs",
+      "type": "toggle",
+      "label": "Breadcrumbs",
+      "description": "A BreadcrumbList built from the page's own address. Google renders it in place of the raw URL in a result.",
+      "default": true
+    },
+    {
+      "id": "emitArticle",
+      "type": "toggle",
+      "label": "Article for journal entries",
+      "description": "Headline, description, image, publish and modified dates and the publisher, for anything under a content table's route base.",
+      "default": true
+    }
+  ],
+  "entrypoints": {
+    "server": "server/index.js"
+  },
+  "author": {
+    "name": "Brandklout",
+    "url": "https://brandklout.com/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "schema",
+    "json-ld",
+    "structured-data",
+    "aeo",
+    "seo",
+    "rich-results"
+  ]
+}
