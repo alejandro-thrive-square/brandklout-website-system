@@ -21,6 +21,9 @@ and a set of sitemap templates per practice type drawn from what our clients act
     Surgery, Pediatric, Med Spa. Built from 14 client sites; each card shows how many sites carry
     that page type. Umbrella-ready: brand pages at the root, locations as a cloned `[City]` branch.
   - Analysis and rerunnable scripts: `deliver/process/01-content-intake/.tmp/specialty-sitemaps/`.
+  - **Second pass, same day:** the five sections were rebuilt in the Relume reference format, with
+    every page's section flow (1,800+ section cards). Flows come from 191 sampled client pages
+    (`outline-pages.py` → `outlines.txt`, condensed by a subagent) and live in `section-flows.py`.
 - `01-content-intake.md` step 5: start every sitemap from the matching specialty template.
 
 ## Next
@@ -40,6 +43,13 @@ and a set of sitemap templates per practice type drawn from what our clients act
   `/nodes` and `/images` shares one rate limit and hits 429 fast; poll every 10 s at most.
 - **Reflowing by y-range captures the next row's cards** once earlier rows have moved down. Rebuild
   the section from data instead of reflowing it.
+- **javascript_tool gives up after 45 s, but the page keeps running the script.** A 600-card build
+  "times out" and still finishes; query the board before re-running, or you get duplicates.
+- **Never start a fire-and-forget async loop in the Figma tab.** It stalls while no tool call is
+  driving the tab and resumes later, which produced a duplicate section. Build one section per call.
+- **Reloading the tab drops edits that have not synced yet.** A freshly built section vanished on
+  reload. Confirm by opening the board in a second tab (it loads from the server) before reloading
+  or closing the working tab.
 - **A page can be several page types.** The first classifier counted each path once and reported
   Stone's `all-on-x-implants` as "Dental Implants" only; `classify.py` now counts every match.
 

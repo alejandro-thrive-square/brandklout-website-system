@@ -20,6 +20,17 @@ Five starting sitemaps, one per practice type, built from what 14 Brandklout cli
 
 Pediatric and Med Spa rest on one site each, so treat them as a first draft, not a pattern.
 
+## Sections on every page
+
+Each page carries its section flow, drawn in the Relume format of the reference sitemap (a column per page, one card per section, name and what goes in it). The flows come from 191 real client pages: `outline-pages.py` fetched up to three pages per page type per specialty and recorded their headings and components in order (`outlines.txt`), and each flow in `section-flows.py` is the best combination of what those pages do. What the sampled pages share:
+
+- Treatment pages: hero, what it is, options, steps (4–6), before and after, testimonial (video beats written), FAQ, then the form.
+- Trust pages (about, doctor, team): bio or story, credentials timeline, affiliations, a human section, reviews.
+- Money pages (cost, financing, membership): price block first, then what changes the cost, partners, FAQ.
+- Location pages: local hero, services at that office, team, why locals choose it, local reviews, map and hours, local FAQ.
+
+`python section-flows.py` rewrites `detailed-sitemaps.json` (flows plus every page's flow key and subject), the data the FigJam sections were drawn from.
+
 ## Umbrella (multi-location) structure
 
 Every template separates brand pages from location pages. Brand pages (About, Services, Patients, Results, Blog, Contact) live at the root. Each location is a clone of the `[City]` branch under `/locations/[city]/`, carrying the city's own landing page, its top services, team and contact. Four of the six general practices already run location pages, as `/[city]-dentist/[service]` (Legacy, Marvel) or `/[city]/[service]` (Livewell); `/locations/[city]/` is the template's recommendation, change it per client if an existing URL scheme must be kept.
@@ -30,6 +41,8 @@ Every template separates brand pages from location pages. Brand pages (About, Se
 - `page-type-coverage.json`: how many sites in each group have each page type.
 - `sources.json`: URLs collected per site and how.
 - `sitemaps.json`, `navcrawl.json`: the raw page lists (sitemap.xml where published, otherwise a same-host link crawl from the homepage).
+- `outline-pages.py`, `outlines.json`, `outlines.txt`: sampled pages and their section outlines.
+- `section-flows.py`, `detailed-sitemaps.json`: the section flows and the per-page mapping.
 - `fetch-sitemaps.py`, `crawl-nav.py`, `classify.py`: rerun in this folder to refresh (`python fetch-sitemaps.py <domain>…`, `python crawl-nav.py <domain>…`, `python classify.py`). The classifier is regex on the URL path, and a page may match several types.
 
 Gathered 2026-09-22. IFA, Mason Park, Mason Park Pediatric, Stone Surgical Arts and Westlake publish no sitemap.xml, so their lists come from a link crawl and may miss pages that no menu links to.
