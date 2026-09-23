@@ -29,6 +29,8 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-23: BugHerd #41 done.** The /special-offers hero is the reviewer's own front-desk photo (`front-desk-tablet`), centred with `.ar-bg.is-counter`; published and verified on staging, replied, closed. #34 and #38 still open. See `runbook/2026-09-23-bugherd-41-special-offers-hero.md`.
+
 **2026-09-21: BugHerd round two, #29-#40. Nine done and published to staging, two open.** The map on every page pointed at the
 **adult** practice's Google listing (suite 104A); it is the pediatric one now (#29/#40). The hours were
 wrong in six places and are **Mon to Thu 9am-6pm, Fri to Sun closed** everywhere, schema included

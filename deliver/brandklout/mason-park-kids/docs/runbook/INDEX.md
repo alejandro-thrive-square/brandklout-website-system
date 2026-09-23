@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-23 | 2026-09-23 - BugHerd #41: the reviewer's front-desk photo on the /special-offers hero, centred; published, replied, closed. Gotchas: Python CRLF trips stamp, Railway SSH outage | [`2026-09-23-bugherd-41-special-offers-hero.md`](./2026-09-23-bugherd-41-special-offers-hero.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-21 | 2026-09-21 - BugHerd round two: the pediatric map, the hours, a 1.3:1 contrast bug. 9 of 11 done. | [`2026-09-21-bugherd-round-two.md`](./2026-09-21-bugherd-round-two.md) |
 | 2026-09-16 | DONE 2026-09-16 - BUGHERD 540564 CLOSED: #4 brand guide applied (the guide's exact palette, Marcellus/Figtree standing in for the Adobe faces), #11 "hospital setting" removed on all 9 pages, #28 trousers edited to black on both gumball frames (Gemini edit + masked composite). 215 published, replies sent, 0 open. Gotchas: the guide misprints `EAE936`; copper fails AA; `font-synthesis: none` for Marcellus; the SEO scripts needed the `brandklout.*` plugin ids. Adult project 539151 has 28 new notes, for `bk-mason-park`. | [`2026-09-16-bugherd-open-three-brand-guide.md`](./2026-09-16-bugherd-open-three-brand-guide.md) |
