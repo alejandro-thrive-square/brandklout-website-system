@@ -20,6 +20,12 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
   [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
+- **Share card on staging since 2026-09-23**: the `brandklout.open-graph` plugin (copied from
+  Dr. Nahlah's into `workflows/16-instatic-plugins/open-graph/`) is installed on **staging only**;
+  the home page's `og:image` is the colour logo on white (`home/og-card.mjs` makes it,
+  `home/set-og.mjs` uploads, configures and publishes). siteUrl is the staging host, canonical off.
+  **Production still has no Open Graph plugin**, so its links unfurl with whatever photo comes first:
+  [runbook/2026-09-23-og-logo-card.md](runbook/2026-09-23-og-logo-card.md).
 - **BugHerd is on staging since 2026-09-21**: project `542527`, sidebar loaded through the
   `brandklout.embed-origins` plugin settings (`workflows/21-instatic-upload/home/bugherd.mjs`).
   Uninstall it before any promotion. **Round 1 (42 notes) was addressed and published on 2026-09-23 (seq 8)**.
