@@ -85,6 +85,9 @@ model and asked for the board first, then the directives, removing anything with
   Webflow writes are untested.
 - **Two agents promoted Cloudflare scripts;** `tools/cloudflare-launch` is the only Cloudflare toolkit
   now (the duplicate `instatic-site/cloudflare` was deleted).
+- **FigJam edits can vanish when the tab closes.** Scenarios 4 and 5 were drawn, looked fine, and were
+  gone on the next load; redrawn and confirmed from a second, freshly loaded tab before closing. Always
+  prove a board change from a fresh tab (the REST API is often rate-limited).
 - **The Figma REST API stayed rate-limited (429) for hours**; the board was read and written in Chrome.
 
 ## Version Control
