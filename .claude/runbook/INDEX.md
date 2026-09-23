@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-22 | 2026-09-22 — `system-v2` worktree created for the system rebuild; base folder stays on main for client work — carries **gotchas** | [`2026-09-22-system-v2-worktree-created.md`](./2026-09-22-system-v2-worktree-created.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie consent rolled out to all 29 Brandklout sites: 16 live and gated, 11 staged for the team's next publish — carries **gotchas** | [`2026-09-22-termly-consent-rolled-out-to-29-sites.md`](./2026-09-22-termly-consent-rolled-out-to-29-sites.md) |
 | 2026-09-21 | 2026-09-21 — Termly free-account API probed for Grand Mission: it cannot create, scan, publish or hand back the embed; partner keys are the only automation path — carries **gotchas** | [`2026-09-21-termly-api-feasibility.md`](./2026-09-21-termly-api-feasibility.md) |
 | 2026-09-19 | R2/rclone, GitHub/LFS, and Hostinger/Namespace guidance; recommendations are not approved selections | [`2026-09-19-storage-and-runtime-guidance.md`](./2026-09-19-storage-and-runtime-guidance.md) |

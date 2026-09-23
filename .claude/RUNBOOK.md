@@ -7,6 +7,12 @@ then only the runs you need. Do not read them all.
 
 ## Standing
 
+- **This folder is the `system-v2` rebuild worktree** (`Brandklout Website System v2`, branch
+  `system-v2`, pushed to origin). Restructure here; client site work stays in the base folder on
+  `main`. Do not merge to main until v2 works end to end. `npm install` sparsifies this folder:
+  follow it with `bash scripts/sparsify-worktree.sh --undo`. See
+  [the run](./runbook/2026-09-22-system-v2-worktree-created.md).
+
 - **The new system diagram now has a concrete architecture proposal:**
   [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md). It separates system and client project
   version control, defines R2 recovery and transferable project requirements, and sequences a
