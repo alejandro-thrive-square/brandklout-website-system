@@ -6,7 +6,7 @@ then only the runs you need. Do not read them all.
 
 ## Where it stands
 
-Fifty-two routes are built and published to Instatic, served from Railway at
+Fifty-four routes are built and published to Instatic, served from Railway at
 **`https://www.dfwsurgicalarts.com`** (apex also serves) since 2026-09-10. The old
 `stone-surgical-arts-production.up.railway.app` host was **detached** by that cutover and 404s —
 any command below that still names it needs `INSTATIC_BASE_URL=https://www.dfwsurgicalarts.com`
@@ -21,11 +21,13 @@ the GoHighLevel number pool on **production only** (`21-instatic-upload/set-dni-
 staging). To change the number again, use `swap-phone.mjs`, not a re-import. The swap has not been
 proven yet — [run](./runbook/2026-09-23-new-phone-and-dni-pool.md).
 
-**Staging is ahead of production** since 2026-09-17: it carries 54 pages — the 52 published ones plus
-`privacy-policy` and `terms-of-service` — and the booking page's request form is now the practice's
-**Go High Level form**, placed as an Embed block by `21-instatic-upload/place-embeds.mjs`. That
-script is a required step after every `push-site.mjs --apply`; without it the form publishes as an
-empty div and no gate says so.
+**Production and staging are level again since 2026-09-23** (54 pages each): the legal pages
+`/privacy-policy` and `/terms-of-service` (updated 2026-09-23 for LeadConnector, Termly, call
+tracking), the footer's legal links pointing at them, and the practice's **Go High Level form**
+(`Nzf3xQVLhgMlABuVMxCN`) on `/book`, the only contact form on the site. The form is placed as an
+Embed block by `21-instatic-upload/place-embeds.mjs`, a required step after every
+`push-site.mjs --apply`; without it the form publishes as an empty div and no gate says so —
+[run](./runbook/2026-09-23-legal-pages-and-ghl-form-on-production.md).
 
 **Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
 It is a Railway environment `staging` in the same project, seeded from production on

@@ -278,13 +278,16 @@
      - The dental services, implant candidacy, smile photos, dental labs and
        implant manufacturers are gone; this practice does facial surgery, skin
        and injectables.
-     - Third-party tools list what THIS site actually touches: Modento
-       (online booking), Sunbit and CareCredit (financing), Google Maps links,
-       Instagram/Facebook/Linktree. The source names Go High Level, Cherry,
-       LendingClub, Proceed, Google Analytics and GTM, none of which runs here:
-       Instatic publishes `script-src 'self'` (trap 29), so no third-party
-       script CAN run. Add a tool here the day one is added to the site.
-     - No Cookie Policy link: this site has none, and sets no tracking cookies.
+     - Third-party tools list what THIS site actually runs or links to. Revised
+       2026-09-23 when the site gained them: LeadConnector (Go High Level) for
+       the booking-page form and the call-tracking number pool, Termly for
+       cookie consent, the Sienna accessibility widget (served from jsDelivr).
+       Plus Modento (online booking), Sunbit and CareCredit (financing), Google
+       Maps links, Instagram/Facebook/Linktree. The source's Cherry,
+       LendingClub, Proceed, Google Analytics and GTM do not run here. Add a
+       tool here the day one is added to the site.
+     - Cookies section describes Termly's banner and the call-tracking
+       identifier. There are still no advertising cookies and no analytics.
      - The SMS section stays because the consultation form's consent box says
        "phone, text or email". If this site gets its own A2P 10DLC campaign,
        the form needs a separate, optional SMS checkbox to match section 03.
@@ -295,7 +298,7 @@
      ========================================================================== -->
 <article class="journal_page journal_article legal_page">
   <header class="journal_article-head padding-global"><div class="container-large">
-    <p class="journal_meta"><span>Legal</span><span>Effective September 17, 2026</span></p>
+    <p class="journal_meta"><span>Legal</span><span>Effective September 23, 2026</span></p>
     <h1 class="journal_article-title">Privacy Policy</h1>
     <p class="journal_deck">What we collect when you use this website or contact us, how we use it, who we share it with, and the choices you have.</p>
     <div class="journal_byline"><span>Stone Surgical Arts PLLC</span><span>Westlake, Texas</span><span>Also read our <a class="text-style-link" href="terms-of-service.html">Terms of Service</a></span></div>
@@ -343,6 +346,8 @@
         <p>This may include your name, email address, phone number, the treatments you are interested in, your preferred appointment times, and anything else you tell us.</p>
         <h3>Information collected automatically</h3>
         <p>Like most websites, our hosting provider records basic technical information when you visit, such as your IP address, browser and device type, the pages you request and the page that referred you. We use it to keep the Site running, secure and fast.</p>
+        <h3>Call tracking</h3>
+        <p>The phone number shown on the Site may be a tracking number, provided by our communications platform LeadConnector, that forwards to our office. It lets us see which pages and sources lead to calls. To show you the same number throughout your visit, the platform stores an identifier in your browser and records the pages you view, the page that referred you and any campaign details in the link you followed. When you call, it logs the number you called from and the time and length of the call.</p>
         <h3>Health information and photographs</h3>
         <p>If you describe a concern or send photographs of your face, neck or skin, we treat that information with the same care as any patient record. Please do not send a detailed medical history through the website form, text message or ordinary email. A full history is taken at your visit, and for anything sensitive you can call us on <a class="text-style-link" href="tel:+18177674188">(817) 767-4188</a>.</p>
       </section>
@@ -391,7 +396,7 @@
         <h2>How we share it</h2>
         <p>We do not sell or rent your personal information. We share it only as needed to run the practice and look after you, with:</p>
         <ul class="legal_list">
-          <li>Service providers who host the Site, handle scheduling, messaging, email and payments, under agreements that limit how they may use it</li>
+          <li>Service providers who host the Site, handle scheduling, forms, messaging, call tracking, email and payments, under agreements that limit how they may use it</li>
           <li>Financing companies, when you choose to apply to them</li>
           <li>Other healthcare providers involved in your care, such as your physician, anesthesia providers, imaging centers and laboratories</li>
           <li>Authorities, when the law requires it or to protect the rights, property or safety of our patients, our staff or others</li>
@@ -402,8 +407,11 @@
       <section class="journal_section" id="third-parties">
         <p class="journal_section-number">05</p>
         <h2>Third-party services</h2>
-        <p>Some things you can do from the Site are provided by other companies. When you use them, you are on their service and their privacy policy applies:</p>
+        <p>Some parts of the Site are provided by other companies. Some of them process information on our behalf. For others, you use their service directly and their privacy policy applies:</p>
         <ul class="legal_list">
+          <li><strong>LeadConnector (Go High Level),</strong> which runs the consultation request form on our booking page, the call-tracking number described in <a class="text-style-link" href="#collect">section 01</a>, and the messaging we use to reply to you</li>
+          <li><strong>Termly,</strong> which shows the cookie banner and stores your cookie choices</li>
+          <li><strong>Sienna,</strong> the accessibility tool on every page, delivered by the jsDelivr network, which may remember your display settings in your browser</li>
           <li><strong>Modento,</strong> our online booking and patient-details service</li>
           <li><strong>Sunbit and CareCredit,</strong> which offer patient financing</li>
           <li><strong>Google Maps,</strong> for directions to the practice</li>
@@ -415,8 +423,13 @@
       <section class="journal_section" id="cookies">
         <p class="journal_section-number">06</p>
         <h2>Cookies</h2>
-        <p>A cookie is a small file a website stores on your device. The Site does not use advertising or cross-site tracking cookies, and it does not run third-party analytics. It may use cookies or similar storage that are strictly needed for it to work.</p>
-        <p>You can control cookies in your browser settings. If we add analytics or other tools that use cookies, we will update this policy first.</p>
+        <p>A cookie is a small file a website stores on your device. The Site, and the services it uses, may store cookies or similar browser storage for these purposes:</p>
+        <ul class="legal_list">
+          <li><strong>Essential:</strong> to make the Site and its request form work, and to remember your cookie choices (Termly)</li>
+          <li><strong>Call tracking:</strong> to show you the same tracking phone number throughout your visit and link a call to the page it came from (LeadConnector)</li>
+          <li><strong>Preferences:</strong> to remember settings you choose in the accessibility tool</li>
+        </ul>
+        <p>The Site does not use advertising cookies and does not run third-party analytics. The first time you visit, a banner asks for your choice. You can change it at any time with the <strong>Cookie Preferences</strong> link at the foot of every page, or through your browser settings. If we add tools that use cookies for other purposes, we will update this policy first.</p>
       </section>
 
       <section class="journal_section" id="choices">
@@ -426,7 +439,7 @@
           <li>Unsubscribe from marketing emails with the link in any email, or by contacting us.</li>
           <li>Stop text messages by replying STOP, as described in <a class="text-style-link" href="#text-messages">section 03</a>.</li>
           <li>Ask to see, correct or delete the personal information we hold about you.</li>
-          <li>Manage cookies through your browser.</li>
+          <li>Manage cookies with the Cookie Preferences link at the foot of every page, or through your browser.</li>
         </ul>
         <p>Depending on where you live, laws such as the Texas Data Privacy and Security Act may give you further rights. To use any of them, contact us using the details in <a class="text-style-link" href="#contact-us">section 13</a>. We will respond within the time the law requires and will not treat you differently for asking.</p>
         <p>Your medical record is governed by HIPAA and Texas law, which may limit what can be deleted or changed.</p>
