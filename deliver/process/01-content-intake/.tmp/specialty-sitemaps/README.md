@@ -29,6 +29,8 @@ Each page carries its section flow, drawn in the Relume format of the reference 
 - Money pages (cost, financing, membership): price block first, then what changes the cost, partners, FAQ.
 - Location pages: local hero, services at that office, team, why locals choose it, local reviews, map and hours, local FAQ.
 
+Ads landing pages are drawn as the campaign combo, not as one page: `/ads-landing-pages/` is a noindex folder, and each campaign is **landing → consultation → thank you**, one Go High Level form per campaign redirecting to its own thank-you page, where the Google Ads conversion fires. The flows follow Livewell's live set (`livewelldentalva.com/ads-landing-pages/dental-implants`, `…/dental-implant-consultation`, `…/thank-you-implants`): lead form in the hero, then the before/after life journey, why here, proof, the dentist, options, steps, the space, FAQ and a final call with credentials and disclaimer; consultation is form first; thank you is phone first with no form.
+
 `python section-flows.py` rewrites `detailed-sitemaps.json` (flows plus every page's flow key and subject), the data the FigJam sections were drawn from.
 
 ## Umbrella (multi-location) structure

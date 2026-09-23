@@ -385,13 +385,32 @@ T['book'] = [NAV,
     ['CTA Form Section', 'Booking form with reason for visit and preferred time'],
     ['How It Works Section', 'What happens after you book'],
     ['Locations Section', 'Office hours'], FOOT]
-T['ads'] = [NAV,
-    ['Hero Header Section', 'Offer headline with the lead form in the hero (see the Relume "Sitemap" reference for the full offer pages)'],
-    ['Features List Section', 'Three reasons to claim the offer'],
-    ['Pricing Section', 'Offer price vs regular price'],
-    ['Testimonial Section', 'Reviews from patients who had this treatment'],
-    ['FAQ Section', 'Offer terms and eligibility'],
-    ['CTA Form Section', 'Claim the offer'], FOOT]
+T['ads_folder'] = [['Note', 'Not a page: the /ads-landing-pages/ folder, noindex, out of the menu. Every campaign is a combo of three pages (landing, consultation, thank you) with its own Go High Level form']]
+T['ads_landing'] = [['Navbar', 'Minimal: logo and phone number only, no menu, so the only way on is the form'],
+    ['Hero Header Section', '{S}: offer headline over a patient video, trust badges, and the lead form in the hero'],
+    ['Comparison Section', 'The emotional journey: life before vs life after, with short patient quotes in their words'],
+    ['Benefits Section', 'Why patients drive past other offices: one doctor start to finish, planned before day one, comfort, built to last'],
+    ['Testimonial Section', 'Video patient stories plus the live review widget'],
+    ['About Section', 'The dentist: credentials, cases done, why other dentists learn from them'],
+    ['Features List Section', 'Treatment options for this offer, each with a before and after slider'],
+    ['How It Works Section', 'Three steps: consultation and 3D scan, treatment, final result'],
+    ['Gallery Section', 'The space: office and treatment rooms (use reviews and rooms when there are no before and afters)'],
+    ['FAQ Section', 'Cost, pain, recovery, financing, eligibility for the offer'],
+    ['CTA Section', 'Final call to claim the offer, with credentials and the offer disclaimer'],
+    ['Footer', 'Minimal: address, phone, privacy link']]
+T['ads_consult'] = [['Navbar', 'Minimal: logo and phone number only'],
+    ['CTA Form Section', 'Form first: book your free consultation. One Go High Level form per campaign, redirecting to the campaign thank-you page'],
+    ['Testimonial Section', 'Wall of video patient stories'],
+    ['About Section', 'One dentist, start to finish: who they will meet'],
+    ['Footer', 'Minimal: address, phone, privacy link']]
+T['ads_thankyou'] = [['Navbar', 'Minimal: logo and phone number only'],
+    ['Hero Header Section', 'Phone first, no form: thank you, we will call you, or call us now. The Google Ads conversion fires on this page'],
+    ['How It Works Section', 'What the call covers: your treatment options, your payment options, your complimentary consultation'],
+    ['Benefits Section', 'Why the practice: experience, personalized care, clear costs'],
+    ['FAQ Section', 'Any questions before you call'],
+    ['CTA Section', 'Ready for the next step: tap to call'],
+    ['Footer', 'Minimal: address, phone, privacy link']]
+T['ads_clone'] = [['Note', 'Same three pages for the next campaign (implants, All-on-X, veneers, emergency, new patient): new offer copy, its own form and its own thank-you page so each conversion is tracked']]
 T['thankyou'] = [NAV,
     ['Hero Header Section', 'Thank you: we will call you shortly to confirm'],
     ['How It Works Section', 'What happens next: confirmation call, reminder, visit'],
@@ -472,6 +491,15 @@ def main():
             depth -= 1
         elif depth == 1:
             cur['_more'] = False
+        if b == 'Ads Landing Pages':
+            cur['pages'] += [[depth, 'Ads Landing Pages', '/ads-landing-pages/', 'combo per campaign', 'ads_folder', ''],
+                             [depth + 1, '[Offer] Landing', '/ads-landing-pages/[offer]', '', 'ads_landing', '[Offer]'],
+                             [depth + 2, '[Offer] Consultation', '/ads-landing-pages/[offer]-consultation', '', 'ads_consult', '[Offer]'],
+                             [depth + 3, '[Offer] Thank You', '/ads-landing-pages/thank-you-[offer]', 'conversion page', 'ads_thankyou', '[Offer]'],
+                             [depth + 1, '[Offer 2] … clone of the combo', '/ads-landing-pages/[offer-2]…', '', 'ads_clone', '']]
+            continue
+        if b == 'Thank You':
+            continue
         key = flow_for(b, cur['spec'])
         cur['pages'].append([depth, b, c, d, key, subject(b, key, cur['spec'])])
     for m in maps:

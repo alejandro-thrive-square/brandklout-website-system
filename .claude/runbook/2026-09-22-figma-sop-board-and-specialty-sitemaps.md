@@ -24,6 +24,8 @@ and a set of sitemap templates per practice type drawn from what our clients act
   - **Second pass, same day:** the five sections were rebuilt in the Relume reference format, with
     every page's section flow (1,800+ section cards). Flows come from 191 sampled client pages
     (`outline-pages.py` → `outlines.txt`, condensed by a subagent) and live in `section-flows.py`.
+  - **Third pass (2026-09-23):** the Ads Landing Pages branch is now the three-page campaign combo
+    (landing → consultation → thank you, plus a clone card), following Livewell's live set.
 - `01-content-intake.md` step 5: start every sitemap from the matching specialty template.
 
 ## Next
