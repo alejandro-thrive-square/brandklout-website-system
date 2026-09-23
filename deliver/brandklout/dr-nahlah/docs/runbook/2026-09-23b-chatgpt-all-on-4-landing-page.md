@@ -26,9 +26,9 @@ Commit: `92d2a80e`
   consultation links and 8 `#book` links. The CTA click stays on the page, and `oaiq` is initialised
   with the SDK requested. Its hero and page heights match the source exactly (1286 / 14020 at 1440).
   None of the six Google All-on-4 pages loads `oaiq.min.js` or the pixel asset.
-- **Staging**: session bk-dr-nahlah-79 re-seeded staging from production at about 19:20Z, before
-  this publish. It was told production is final and asked to re-run its mirror
-  (18-instatic-staging-clone). The staging copy comes from that re-run, not from this script.
+- **Staging: mirrored.** Session bk-dr-nahlah-79 re-ran its production→staging mirror after this
+  publish (run 2026-09-23c). `staging.drnahlah.com/ads-landing-pages/alexandria-all-on-4-chatgpt`
+  returns 200 with the same 8 `#book` links. The pixel asset is host-guarded, so staging sends nothing.
 
 ## Gotchas
 
