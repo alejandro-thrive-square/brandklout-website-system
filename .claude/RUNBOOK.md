@@ -13,6 +13,11 @@ then only the runs you need. Do not read them all.
   follow it with `bash scripts/sparsify-worktree.sh --undo`. See
   [the run](./runbook/2026-09-22-system-v2-worktree-created.md).
 
+- **Figma is readable by API and editable through Chrome.** `FIGMASECRET` is a working PAT. The
+  Deliver SOP board and the Sitemap board (Relume ads sitemap + five specialty templates) live in
+  FigJam; `01-content-intake` step 5 starts every sitemap from a specialty template. REST cannot
+  write FigJam — see [the run](./runbook/2026-09-22-figma-sop-board-and-specialty-sitemaps.md).
+
 - **The new system diagram now has a concrete architecture proposal:**
   [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md). It separates system and client project
   version control, defines R2 recovery and transferable project requirements, and sequences a

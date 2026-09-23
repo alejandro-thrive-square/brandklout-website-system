@@ -19,7 +19,8 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 2. Receive the completed questionnaire and any attached source material.
 3. Normalize answers into structured page/content notes, open questions, and reusable copy blocks.
 4. Confirm that the minimum content required for wireframing is present before passing the package to Wireframe.
-5. When the engagement includes a competitive read, **screen the competitor set before scraping it**. Record the candidates, the criteria and the per-candidate evidence in `competitor-screen.csv` and a short selection report. Never state a rejection reason that has not been verified against the live site.
+5. Start the sitemap from the matching specialty template (General & Family, Implant & Full-Arch, Oral & Maxillofacial Surgery, Pediatric, Med Spa) on the FigJam [Sitemap](https://www.figma.com/board/COB1NVbhZFDvCUgEB5izba/Sitemap) board, then adjust it to the client. Keep the umbrella shape even for a single-location practice: brand pages at the root, the location under `/locations/[city]/`, so a second location is a clone, not a restructure. How the templates were derived: `.tmp/specialty-sitemaps/README.md`.
+6. When the engagement includes a competitive read, **screen the competitor set before scraping it**. Record the candidates, the criteria and the per-candidate evidence in `competitor-screen.csv` and a short selection report. Never state a rejection reason that has not been verified against the live site.
 
 ### Competitor screening criteria (in priority order)
 1. **Catchment overlap** - competes for the same searcher. Weighted highest for local-service clients.
