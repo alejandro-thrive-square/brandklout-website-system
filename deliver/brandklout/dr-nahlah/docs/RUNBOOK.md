@@ -65,10 +65,10 @@ then only the runs you need. Do not read them all.
    **Write the board back at the end of a review round** — `05-design-revisions/close-bugherd-*.mjs`
    posts comments and statuses over the API, and leaving it to "whoever normally closes them"
    is how seventeen pins sat open for a month.
-7. The staging clone's Embed Origins plugin is 1.4.0 and has no `siteScripts`; the four tags
-   are on production only. Upgrade staging's plugin if tag behaviour ever needs testing there.
-   **Leave it that way unless tags are actually being tested there**: with `siteScripts` on,
-   the clone starts claiming real GoHighLevel pool numbers.
+7. **Staging re-mirrored 2026-09-23c**: embed-origins 1.8.0, settings synced by
+   `18-instatic-staging-clone/sync-plugin-settings.mjs`, which copies everything EXCEPT the
+   GoHighLevel pools, user_session.js and GTM (they would burn real pool numbers and fire the
+   production container). To re-mirror, follow the 2026-09-23c run's recipe.
 8. ~~**In GoHighLevel**: only `(571) 253-7790` was pooled.~~ **SUPERSEDED 2026-09-22d**: one pool per office,
    each forwarding the office's new-patient number. Consent: decided 2026-09-22e, the pools
    run without it. Open: should `(703) 940-5410` be tracked (it is not).

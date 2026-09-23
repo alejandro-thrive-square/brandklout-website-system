@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-23 | 2026-09-23c — staging re-mirrored from production: 58/58 parity, 18 missing images imported, embed-origins 1.8.0, settings synced WITHOUT GHL pools or GTM (`sync-plugin-settings.mjs`) — carries **gotchas** | [`2026-09-23c-staging-remirror.md`](./2026-09-23c-staging-remirror.md) |
 | 2026-09-23 | 2026-09-23b — ChatGPT Ads All-on-4 landing page `/ads-landing-pages/alexandria-all-on-4-chatgpt` (live clone, CTAs to its own form); OpenAI pixel moved onto it only, off the Google pages — carries **gotchas** (no ChatGPT conversion measured) | [`2026-09-23b-chatgpt-all-on-4-landing-page.md`](./2026-09-23b-chatgpt-all-on-4-landing-page.md) |
 | 2026-09-23 | 2026-09-23 — OpenAI Ads (ChatGPT Ads) pixel on the six All-on-4 ads pages, `lead_created` on the two thank-you pages, consent-held for advertising; proved with requests aborted — carries **gotchas** | [`2026-09-23-openai-ads-pixel-all-on-4.md`](./2026-09-23-openai-ads-pixel-all-on-4.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
