@@ -7,8 +7,8 @@
  *   node set-dni-pool.mjs            # show current and intended
  *   node set-dni-pool.mjs --apply    # write, then republish
  *
- * Supplied 2026-09-23 with the new number (817) 767-4188, which the pool
- * forwards from. The pool swaps that number in link text and tel: hrefs.
+ * Supplied 2026-09-23. The site displays (817) 674-2061 (the SEO number); the pool
+ * swaps it for a tracking number in link text and tel: hrefs.
  *
  * PRODUCTION ONLY. A staging clone that loads the pool claims real tracking
  * numbers from it, so this refuses any other host.

@@ -7,8 +7,10 @@
  *   node swap-phone.mjs --apply            # write the draft AND publish
  *   INSTATIC_BASE_URL=https://staging.dfwsurgicalarts.com node swap-phone.mjs --apply
  *
- * 2026-09-23: (817) 918-3666 -> (817) 767-4188, the number the GoHighLevel
- * pool forwards from (set-dni-pool.mjs puts the pool on production).
+ * 2026-09-23: (817) 918-3666 -> (817) 767-4188, then the same day (817) 767-4188
+ * -> (817) 674-2061, the DISPLAY number: the one published for SEO and NAP, which
+ * the GoHighLevel pool (set-dni-pool.mjs, production only) swaps for a tracking
+ * number in the visitor's browser. Edit MAP for the next change.
  *
  * On this site the number lives in page nodes only (checked 2026-09-23: all
  * 52 production / 54 staging pages, slugs flat; nothing in the shell, no shared
@@ -29,13 +31,13 @@ const APPLY = process.argv.includes('--apply')
 
 /* Longest literal first, so a shorter one cannot eat half of a longer one. */
 const MAP = [
-  ['+1-817-918-3666', '+1-817-767-4188'],
-  ['(817) 918-3666', '(817) 767-4188'],
-  ['+18179183666', '+18177674188'],
-  ['817-918-3666', '817-767-4188'],
-  ['817.918.3666', '817.767.4188'],
+  ['+1-817-767-4188', '+1-817-674-2061'],
+  ['(817) 767-4188', '(817) 674-2061'],
+  ['+18177674188', '+18176742061'],
+  ['817-767-4188', '817-674-2061'],
+  ['817.767.4188', '817.674.2061'],
 ].sort((a, b) => b[0].length - a[0].length)
-const OLD = /918[\s.\- ]?3666/
+const OLD = /767.?4188/
 
 let hits = 0
 function sub(v) {

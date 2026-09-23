@@ -16,10 +16,12 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
-**The phone is (817) 767-4188 since 2026-09-23**, on production (52 pages) and staging (54), with
-the GoHighLevel number pool on **production only** (`21-instatic-upload/set-dni-pool.mjs` refuses
-staging). To change the number again, use `swap-phone.mjs`, not a re-import. The swap has not been
-proven yet — [run](./runbook/2026-09-23-new-phone-and-dni-pool.md).
+**The display phone is (817) 674-2061 since 2026-09-23**: it is the number published for SEO and
+NAP, on all 54 pages on production and staging. On production the GoHighLevel number pool swaps
+it for a tracking number in the visitor's browser. The pool is on **production only**
+(`21-instatic-upload/set-dni-pool.mjs` refuses staging). To change the number, edit `MAP` in
+`swap-phone.mjs` and the same literals in `site-src/`, not a re-import. The swap itself has not
+been proven — [run](./runbook/2026-09-23-display-number-674-2061.md).
 
 **Production and staging are level again since 2026-09-23** (54 pages each): the legal pages
 `/privacy-policy` and `/terms-of-service` (updated 2026-09-23 for LeadConnector, Termly, call
