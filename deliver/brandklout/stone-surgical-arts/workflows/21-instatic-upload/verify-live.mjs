@@ -133,7 +133,9 @@ for (const route of ROUTES) {
         if (!css.includes(token)) fails.push(`token ${token} missing from userStyles`)
       }
     }
-    const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
+    // The site bundle, not the first script: since 2026-09-22 the Termly consent
+    // scripts (`classic/00N-*.js`) come before it and have neither check in them.
+    const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\/entries\/site-[^"]+\.js)"/) ?? [])[1]
     if (!script) fails.push('no runtime script on the homepage')
     else {
       const js = await (await fetch(BASE + script)).text()

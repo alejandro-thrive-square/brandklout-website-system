@@ -139,6 +139,19 @@ the routes and assets resolve; `compare-live.mjs` asks whether the page still LO
 Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
 `width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
 
+### Changing the phone number, and the call-tracking pool
+
+Do not re-import to change a number. `swap-phone.mjs` rewrites it in place in every page's nodes
+(and any shell file), backs up to `.tmp/`, reads back and publishes. Edit its `MAP` and the same
+literals in `site-src/`, then rebuild, so the next push cannot bring the old number back. Run it
+on production and on staging (`INSTATIC_BASE_URL=https://staging.dfwsurgicalarts.com`).
+
+`set-dni-pool.mjs` owns the GoHighLevel pool lines in the Embed Origins plugin's `siteScripts`
+and the two LeadConnector `connectOrigins`. **It refuses any host but production**: a staging
+clone that loads the pool uses up real tracking numbers. Plugin settings are not part of a page
+push, so promoting staging leaves the pool in place. Write numbers as `(NNN) NNN-NNNN` and
+`tel:+1NNNNNNNNNN`. The pool cannot see a number written with spaces.
+
 ### The link guard, and the three ways the Railway target gets crossed
 
 `ship.sh` runs `check-link.mjs` as step 0 and refuses to ship if it fails. The invariant it

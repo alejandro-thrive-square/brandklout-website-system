@@ -16,6 +16,11 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
+**The phone is (817) 767-4188 since 2026-09-23**, on production (52 pages) and staging (54), with
+the GoHighLevel number pool on **production only** (`21-instatic-upload/set-dni-pool.mjs` refuses
+staging). To change the number again, use `swap-phone.mjs`, not a re-import. The swap has not been
+proven yet — [run](./runbook/2026-09-23-new-phone-and-dni-pool.md).
+
 **Staging is ahead of production** since 2026-09-17: it carries 54 pages — the 52 published ones plus
 `privacy-policy` and `terms-of-service` — and the booking page's request form is now the practice's
 **Go High Level form**, placed as an Embed block by `21-instatic-upload/place-embeds.mjs`. That

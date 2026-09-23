@@ -1,11 +1,12 @@
 # Runbook index
 
-17 runs, newest first. Each line is one file in this folder.
+18 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-23 | 2026-09-23 — New phone (817) 767-4188 on production (52 pages) and staging (54); GHL number pool on production only; verify-live read the wrong script; swap not yet proven — carries **gotchas** | [`2026-09-23-new-phone-and-dni-pool.md`](./2026-09-23-new-phone-and-dni-pool.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-17 | 2026-09-17, later — The Go High Level contact form on the booking page — carries **gotchas** | [`2026-09-17-ghl-contact-form-on-the-booking-page.md`](./2026-09-17-ghl-contact-form-on-the-booking-page.md) |
 | 2026-09-17 | 2026-09-17 — Privacy Policy and Terms of Service pages, published to STAGING — carries **gotchas** | [`2026-09-17-privacy-policy-and-terms-pages.md`](./2026-09-17-privacy-policy-and-terms-pages.md) |
