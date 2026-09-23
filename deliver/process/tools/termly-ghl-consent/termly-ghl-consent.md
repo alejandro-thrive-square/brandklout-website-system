@@ -14,7 +14,7 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 
 | # | Piece | Where | Phase |
 | :--- | :--- | :--- | :--- |
-| 1 | **GHL consent bridge** ([`kit/ghl-consent-bridge.js`](./kit/ghl-consent-bridge.js)) | Webflow: registered site script `BrandkloutConsentBridge`, footer. Instatic: script asset `src/scripts/brandklout-consent-bridge.js`, all pages, body end | **1: agent**, no Termly needed |
+| 1 | **GHL consent bridge** ([`kit/ghl-consent-bridge.js`](./kit/ghl-consent-bridge.js)) | Webflow: registered site script `BrandkloutConsentBridge`, **header** (standard since 2026-09-23; sites still on footer move at their next publish). Instatic: script asset `src/scripts/brandklout-consent-bridge.js`, all pages, body end | **1: agent**, no Termly needed |
 | 2 | **Termly script**, `?autoBlock=off` ([`kit/termly-head.html`](./kit/termly-head.html)) | Site-wide head, **above GTM** | **2**: needs the client's Termly account |
 | 3 | **Trackers tagged** `type="text/plain" data-categories="…"` | Wherever they sit | **2** |
 | 4 | **Cookie Preferences control** ([`kit/consent-preferences.js`](./kit/consent-preferences.js)) | Webflow: registered site script `BrandkloutConsentPreferences`, **header**. Instatic: script asset `src/scripts/brandklout-consent-preferences.js`, all pages, body end | **2** (the control does nothing until Termly loads) |
@@ -149,12 +149,12 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
 2. **Verify the hosted copy:** `curl` the returned `hostedLocation` and `cmp` it against the min file.
    It must be identical; the file was typed through a tool call.
 3. `get_site_scripts`. A 404 means no site scripts are applied, and then `add_site_script` fails with
-   the same 404, so use `set_site_scripts` with just `[{id, location: "footer", version}]`.
+   the same 404, so use `set_site_scripts` with just `[{id, location: "header", version}]`. Every Brandklout consent script is registered in the **header** (owner decision 2026-09-23): a footer script is emitted last and malformed page markup swallows it (see Gotchas).
    If scripts are already applied, `add_site_script` keeps them.
 4. **Publish only when nothing else is pending.** Check that `get_site` `lastUpdated` is within seconds
    of `lastPublished`. Applying a registered script does not change `lastUpdated`, but a freeform code
    edit does. Otherwise leave it: the script ships with the team's next publish.
-5. Remove any older pasted copy of the bridge from the footer freeform code.
+5. Remove any older pasted copy of the bridge from the footer freeform code, and move a bridge still applied in the `footer` location to `header`.
 6. `node consent-kit.mjs check <a page with a GHL form>` should report `bridge: "2.2.0"` and form values.
 
 ### Phase 1 — Instatic

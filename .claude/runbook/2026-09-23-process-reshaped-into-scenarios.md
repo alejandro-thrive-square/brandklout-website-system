@@ -42,13 +42,19 @@ model and asked for the board first, then the directives, removing anything with
 - New client layout: `deliver/brandklout/<client>/workflows/<step>/.tmp/`, scripts run from the client
   folder; the build lives in `workflows/03-design-build/.tmp/site-src/` (`SITE_SRC` / `SITE_DIST`).
 
+## Follow-up the same day
+
+- Owner decisions: Webflow consent scripts go in the **header** (termly-ghl-consent Phase 1 and
+  `set_site_scripts` now say header; sites still on footer, like Arvada, move at their next publish);
+  **www** is the main address (cloudflare-launch step 7, scenario 0 step 05).
+- FigJam: Scenarios 3 (Website Updates / Expansions) and 5 (Ads Landing Pages) drawn from their
+  directives; the board runs 0 to 6 left to right, with 2, 4 and 6 still headers only.
+
 ## Next
 
-- Answer the agents' open questions (listed in the chat summary of this run): consent bridge header vs
-  footer on Webflow, Webflow page branches, Arvada's `lw-` classes, per-request folder for updates,
+- Answer the agents' open questions (listed in the chat summary of this run): Webflow page branches, Arvada's `lw-` classes, per-request folder for updates,
   build folder layout for `push-site`, a script to add Sang's admin, SEO plugin sources as a toolkit,
-  canonical host default, drive upload, IFA managed robots.txt, Google Ads conversion ownership.
-- Draw scenarios 3 and 5 on the FigJam board; scenarios 2, 4, 6 are headers only.
+  drive upload, IFA managed robots.txt, Google Ads conversion ownership.
 - Redraw the Sitemap board's ads columns from the corrected `section-flows.py`.
 - Merge to `main` only when the owner says so; the 16 client branches still expect the old layout.
 

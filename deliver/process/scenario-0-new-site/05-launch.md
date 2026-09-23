@@ -51,8 +51,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    drops DKIM.
 9. **Connect the domain** ([`tools/cloudflare-launch/cloudflare-launch.md`](../tools/cloudflare-launch/cloudflare-launch.md)):
    Railway CNAME and the `_railway-verify` TXT record, DNS only until the certificate is VALID, then
-   proxy on. SSL Full (strict), Always HTTPS, TLS 1.2. Redirect the bare domain to www (or the reverse)
-   only after the target host serves. Use a scoped temporary Cloudflare token and revoke it after.
+   proxy on. SSL Full (strict), Always HTTPS, TLS 1.2. `www` is the main address: redirect the bare domain to www
+   only after www serves. Use a scoped temporary Cloudflare token and revoke it after.
 10. **Public origins.** Set production's `PUBLIC_ORIGIN` to the domain, www and the
     `business-name.up.railway.app` link, redeploy, confirm a new deployment appeared, and run
     `check-origins.mjs --all`. Update `sites.json` and the env master. Send the admin link only after

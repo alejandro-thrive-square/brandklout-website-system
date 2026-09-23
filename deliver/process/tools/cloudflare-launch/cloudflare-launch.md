@@ -67,8 +67,8 @@ Every script is a dry run until `--apply`.
    NEW deployment row, then `node ../instatic-domain-origins/check-origins.mjs --all` and exactly
    one real login (five failures lock the account). Update `sites.json`, `INSTATIC_BASE_URL` in
    `~/.webzite/.env`, then `node scripts/env-sync.mjs`.
-7. **Canonical host.** Keep the host the old site used (Google's index has it); a new domain
-   defaults to `www`. `node $C/canonical-host.mjs --zone <domain> --to https://www.<domain> --apply`
+7. **Canonical host.** `www` is the main address (owner decision 2026-09-23). On a migration keep the
+   host the old site used only if the owner agrees, since Google's index has it; otherwise `www`. `node $C/canonical-host.mjs --zone <domain> --to https://www.<domain> --apply`
    It refuses while the target does not serve 200, keeps path and query, and exempts
    `/.well-known/acme-challenge/` so the other host's certificate still renews.
 8. **SSL baseline.** `node $C/zone-hardening.mjs --zone <domain> --hosts <domain>,www.<domain> --apply`
