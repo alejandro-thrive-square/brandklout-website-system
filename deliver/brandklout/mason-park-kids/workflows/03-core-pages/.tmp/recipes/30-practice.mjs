@@ -248,7 +248,7 @@ export default [
   em: 'the small print',
   lede: 'Current offers at the practice. The conditions are set out beside each one rather than at the bottom of the page.',
   cta: 'Book an appointment', cta2: 'The offers', cta2href: 'offers',
-  hero: { img: 'st-brushes', alt: 'Children’s toothbrushes in a cup' },
+  hero: { img: 'front-desk-tablet', pos: 'counter', alt: 'A parent at the front desk while the receptionist goes through a form on a tablet' },
   crumbs: [['Patients', '/new-patients/'], 'Special offers'],
   chapters: [
     { k: 'table', id: 'offers', name: 'The Offers', title: 'What each one includes.', theme: 'warm',

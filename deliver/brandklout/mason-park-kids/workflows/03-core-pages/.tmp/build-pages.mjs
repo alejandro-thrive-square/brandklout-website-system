@@ -194,7 +194,7 @@ const themeAttr = t => (t && t !== 'plain' ? ` data-theme="${t}"` : '');
 function chArrival(page, r, n) {
   const hero = r.hero;
   return `<section class="ch ch-arrival is-compact" id="arrival" data-chapter="${n}" data-chapter-name="Arrival" data-theme="dark">
-  <div class="ar-bg" data-drift>
+  <div class="ar-bg${hero.pos ? ' is-' + hero.pos : ''}" data-drift>
     ${img(hero.img, { alt: hero.alt, sizes: '100vw', eager: true })}
   </div>
   <div class="ar-veil" aria-hidden="true"></div>

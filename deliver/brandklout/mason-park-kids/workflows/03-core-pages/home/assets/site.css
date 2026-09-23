@@ -901,6 +901,10 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 /* The gumball frame (2026-09-15): the child and the machine sit in the lower
    two thirds, so hold the frame below its middle. */
 .ar-bg.is-mid img { object-position: 50% 70%; }
+/* The front desk on /special-offers (BugHerd #41): the reviewer's own
+   landscape frame, both people and the counter. The faces sit at about a
+   quarter of its height, so hold the crop there rather than at the middle. */
+.ar-bg.is-counter img { object-position: 50% 28%; }
 /* The new patient special, where a parent is deciding (BugHerd #24). */
 .ar-offer { margin: -.8rem 0 1.8rem; }
 /* Inline, not flex: at 390 the text wraps, and as flex items the arrow fell
