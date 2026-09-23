@@ -1,0 +1,51 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--font-from:18;--font-to:20;--vw-from:calc(1920 / 100);--vw-to:calc(2400 / 100);--coefficient:calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));--base:calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)}
+html{font-size:calc(var(--base) * 1rem + var(--coefficient) * 1vw)}
+@media screen and (max-width:1920px){:root{--font-from:16;--font-to:18;--vw-from:calc(1440 / 100);--vw-to:calc(1920 / 100)}}
+@media screen and (max-width:1440px){:root{--font-from:16;--font-to:16;--vw-from:calc(479 / 100);--vw-to:calc(1440 / 100)}}
+@media screen and (max-width:479px){:root{--font-from:12;--font-to:16;--vw-from:calc(320 / 100);--vw-to:calc(479 / 100)}}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:clip;font-size:1.125rem;line-height:1.65}
+body.is-locked{overflow:hidden}
+@media (max-width:859px){body{padding-bottom:var(--bar-h)}}
+@media (max-width:478px){body{font-size:1.31rem}
+.arr-cue.arr-cue,.inv-div-7.inv-div-7,.inv-h3-4.inv-h3-4,.inv-p-11.chapter-tag.chapter-tag,.inv-p-12.label.label,.inv-p-16.eyebrow.eyebrow,.inv-p.chapter-tag.chapter-tag,.inv-p.eyebrow.eyebrow,.inv-p.label.label,.inv-span.inv-span,.inv-span-4.inv-span-4,.label-ty.label-ty,.ledger-state.ledger-state,.next-dot.next-dot,.nps-h3-4.nps-h3-4,.nps-p-11.label.label,.nps-p-14.eyebrow.eyebrow,.nps-p-8.chapter-tag.chapter-tag,.nps-p.chapter-tag.chapter-tag,.nps-p.eyebrow.eyebrow,.nps-p.label.label,.nps-span.nps-span,.prep-n.prep-n,.price-save.price-save,.ty-h3-4.ty-h3-4,.ty-p-3.chapter-tag.chapter-tag,.ty-p.chapter-tag.chapter-tag,.ty-span.ty-span,.urgency.urgency,.vis-dot.vis-dot{font-size:0.9rem}
+.chip.chip,.cor-foot.cor-foot,.fine-ty.fine-ty,.foot-base.foot-base,.inv-figcaption.inv-figcaption,.inv-p-18.small.small,.inv-p-3.fine.fine,.inv-p-8.fine.fine,.inv-p-9.inv-p-9,.inv-p.small.small,.inv-span-5.small.small,.inv-ul.hours-list.small.small,.nps-div-2.small.small,.nps-figcaption.nps-figcaption,.nps-p-13.fine.fine,.nps-p-16.small.small,.nps-p-3.fine.fine,.nps-p-5.fine.fine,.nps-p-6.fine.fine,.nps-p.small.small,.nps-span-4.small.small,.nps-ul-3.hours-list.small.small,.open-state.open-state,.ref-line.ref-line,.role.role,.role-ty.role-ty,.src.src,.ty-p-10.small.small,.ty-p-3.small.small,.ty-ul-2.hours-list.small.small,.ty-ul.hours-list.small.small,.when.when{font-size:1.0625rem}
+.inv-a-2.btn.btn,.inv-a-3.btn.btn,.inv-a-4.btn.btn,.inv-a-5.btn.btn,.inv-a-6.btn.btn,.inv-a.btn.btn,.inv-blockquote.inv-blockquote,.inv-li.inv-li,.inv-li-2.inv-li-2,.inv-p-14.inv-p-14,.inv-p-6.inv-p-6,.nps-a-2.btn.btn,.nps-a-3.btn.btn,.nps-a-4.btn.btn,.nps-a-5.btn.btn,.nps-a-6.btn.btn,.nps-a.btn.btn,.nps-blockquote.nps-blockquote,.nps-p-10.nps-p-10,.nps-p-7.nps-p-7,.price-was.price-was,.rail-offer.rail-offer,.ty-a-2.btn.btn,.ty-a.btn.btn,.ty-p-5.ty-p-5,.ty-p-7.ty-p-7{font-size:1.125rem}
+.inv-h3-2.inv-h3-2,.inv-main.inv-main,.inv-span-2.inv-span-2,.nps-main.nps-main,.nps-span-2.nps-span-2,.offer-rail.offer-rail,.rail-call.rail-call,.score.score,.site-foot.site-foot,.site-head.site-head,.skip-link.skip-link,.sticky-bar.sticky-bar,.ty-h3-3.ty-h3-3,.ty-main.ty-main,.ty-span-2.ty-span-2{font-size:1.31rem}
+.inv-a-8.inv-a-8,.inv-p-13.lead.lead,.inv-p-2.lead.lead,.inv-p-5.lead.lead,.inv-p-7.lead.lead,.nps-a-8.nps-a-8,.nps-p-2.lead.lead,.nps-p-5.lead.lead,.nps-p-9.lead.lead,.prep-close.prep-close,.ty-a-3.ty-a-3,.ty-p-2.lead.lead,.ty-p-6.lead.lead,.ty-p-8.lead.lead{font-size:1.47rem}
+.btn--lg.btn--lg.btn--lg{font-size:1.2rem}
+.form-card .field input{font-size:1.31rem}}
+@media (min-width:992px) and (max-width:1439px){.inv-h1.inv-h1,.nps-h1.nps-h1,.ty-h1.ty-h1{font-size:2.86rem}
+.inv-h2.inv-h2,.inv-h2-2.inv-h2-2,.inv-h2-3.inv-h2-3,.inv-h2-4.inv-h2-4,.inv-h2-5.inv-h2-5,.nps-h2.nps-h2,.nps-h2-2.nps-h2-2,.nps-h2-3.nps-h2-3,.nps-h2-4.nps-h2-4,.nps-h3-2.nps-h3-2,.ty-h2.ty-h2,.ty-h2-2.ty-h2-2{font-size:2.16rem}
+.catch-statement.catch-statement,.hes-statement.hes-statement{font-size:2.56rem}}
+.mpd-armed [data-anim="hide"]{visibility:hidden}
+.mpd-ready [data-anim="hide"]{visibility:visible}
+.mpd-line{will-change:transform}
+.site-head.is-solid.is-solid{background:rgba(255,255,255,.95);border-bottom-color:rgba(32,36,42,0.12);box-shadow:0 10px 30px -24px rgba(32,36,42,0.5)}
+.site-head.is-solid .wrap{padding-block:.6rem}
+.offer-rail.is-up.is-up{transform:translate(-50%,0);opacity:1}
+.faq details.is-open .answer-wrap{grid-template-rows:1fr}
+.btn .btn-before{background:radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%),rgba(255,255,255,0.22),transparent 62%)}
+.price-was .price-was-after{transform:scaleX(var(--strike, 1))}
+.step .step-before{transform:scaleX(var(--fill, 0))}
+.ch-inclusion .ledger-steps span.on{color:#007E9B;font-weight:700}
+.ch-hesitation .hes-statement .mpd-word.mpd-word.mpd-word{color:rgba(32, 36, 42, 0.19)}
+.ch-catch .catch-statement .mpd-word.mpd-word.mpd-word{color:rgba(32, 36, 42, 0.19)}
+.ch-fasttrack .open-dot.is-open.is-open.is-open{background:#3f9e63;box-shadow:0 0 0 3px rgba(63, 158, 99, 0.18)}
+.ch-find .hours-list li.is-today.is-today.is-today{background:#E8F6FA;color:#26292F;font-weight:600}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}[data-anim="hide"]{visibility:visible!important}.offer-rail{opacity:1;transform:translate(-50%,0)}.head-progress i{transform:scaleX(0)}}
+
+/* vendor-prefixed: refused by data_style_tool */
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.site-head,.sticky-bar{-webkit-backdrop-filter:blur(14px)}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>window.MPD=function(){"use strict";var e=[],t=!1,n={PUBLIC_PHONE:"(281) 769-8878",PUBLIC_PHONE_E164:"+12817698878",TRACKING:{invisalign:{display:"(281) 767-8698",e164:"+12817678698"},"new-patient-special":{display:"(281) 688-1610",e164:"+12816881610"},"thank-you":null},WEBHOOK_URL:"{{GHL_INBOUND_WEBHOOK_URL}}",THANK_YOU_URL:"../thank-you/index.html",BOOKING_URL:"https://www.flexbook.me/masonpark/1",MAP_URL:"https://www.google.com/maps/place/21830+Kingsland+Blvd+%23104a,+Katy,+TX+77450/@29.775949,-95.7512199,17z",reduced:!(!window.matchMedia||!window.matchMedia("(prefers-reduced-motion: reduce)").matches),ok:!(!window.gsap||!window.ScrollTrigger),pageKey:function(){return document.body&&document.body.getAttribute("data-page-key")||""},sourceKey:function(){var e=new URLSearchParams(window.location.search).get("src");return e&&Object.prototype.hasOwnProperty.call(n.TRACKING,e)?e:""},tracking:function(){var e=n.TRACKING[n.pageKey()];return e||(n.TRACKING[n.sourceKey()]||null)},phone:function(){var e=n.tracking();return e?e.display:n.PUBLIC_PHONE},phoneE164:function(){var e=n.tracking();return e?e.e164:n.PUBLIC_PHONE_E164},splitLines:function(e,t){if(!e||!window.SplitText)return null;try{var n={type:"lines",mask:"lines",linesClass:"mpd-line",autoSplit:!0};return t&&(n.onSplit=function(e){return t(e)}),SplitText.create?SplitText.create(e,n):new SplitText(e,n)}catch(t){try{return new SplitText(e,{type:"lines",linesClass:"mpd-line"})}catch(e){return null}}},splitOnce:function(e){if(!e||!window.SplitText)return null;try{var t={type:"lines",mask:"lines",linesClass:"mpd-line",autoSplit:!1};return SplitText.create?SplitText.create(e,t):new SplitText(e,t)}catch(e){return null}},splitWords:function(e){if(!e||!window.SplitText)return null;try{var t={type:"words",wordsClass:"mpd-word"};return SplitText.create?SplitText.create(e,t):new SplitText(e,t)}catch(e){return null}},run:function(e){try{e(n)}catch(e){window.console&&console.error&&console.error("[MPD chapter]",e)}},add:function(r){t?n.run(r):e.push(r)},flushQueue:function(){t=!0,e.forEach(n.run),e.length=0}};return n.ok&&!n.reduced&&(document.documentElement.classList.add("mpd-armed"),window.setTimeout(function(){t||document.documentElement.classList.remove("mpd-armed")},3e3)),n}();
+window.MPD.THANK_YOU_URL="/thank-you";</script>

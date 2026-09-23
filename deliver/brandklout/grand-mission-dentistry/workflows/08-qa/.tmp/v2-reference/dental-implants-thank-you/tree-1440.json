@@ -1,0 +1,2003 @@
+{
+ "width": 1440,
+ "sections": [
+  {
+   "i": 0,
+   "tag": "section",
+   "cls": "header section-2",
+   "box": [
+    1440,
+    57
+   ],
+   "pos": "fixed",
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "navbar w-nav",
+     "box": [
+      1440,
+      57
+     ],
+     "pos": "relative",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "nav-wrap",
+       "box": [
+        1440,
+        57
+       ],
+       "layout": "flex",
+       "dir": "row",
+       "align": "center",
+       "justify": "space-between",
+       "pos": "relative",
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "div-block-11",
+         "box": [
+          1440,
+          56
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "kids": [
+          {
+           "tag": "div",
+           "cls": "wrapper-nav-top show-right",
+           "box": [
+            1280,
+            52
+           ],
+           "layout": "flex",
+           "dir": "row",
+           "align": "center",
+           "justify": "space-between",
+           "gap": "16px",
+           "kids": [
+            {
+             "tag": "div",
+             "cls": "wrapper-nav-item left",
+             "box": [
+              405,
+              40
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "flex-start",
+             "kids": [
+              {
+               "tag": "a",
+               "cls": "header-logo-wrapper hide-tablet w-inline-block",
+               "box": [
+                188,
+                40
+               ],
+               "href": "/",
+               "kids": [
+                {
+                 "tag": "img",
+                 "cls": "logo-header hide-tablet",
+                 "box": [
+                  188,
+                  32
+                 ],
+                 "asset": "69812a11425065e0beea0877",
+                 "alt": ""
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "tag": "div",
+             "cls": "wrapper-topnav-links center",
+             "box": [
+              405,
+              44
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "kids": [
+              {
+               "tag": "a",
+               "cls": "button nav w-inline-block",
+               "box": [
+                150,
+                44
+               ],
+               "layout": "flex",
+               "dir": "row",
+               "align": "center",
+               "justify": "space-between",
+               "gap": "8px",
+               "href": "tel:+12817898836",
+               "kids": [
+                {
+                 "tag": "div",
+                 "cls": "icon-embed-xxsmall is-white w-embed",
+                 "box": [
+                  16,
+                  16
+                 ],
+                 "layout": "flex",
+                 "dir": "column",
+                 "align": "center",
+                 "justify": "center",
+                 "kids": [
+                  {
+                   "tag": "svg",
+                   "box": [
+                    16,
+                    16
+                   ],
+                   "kids": [
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "path",
+                     "box": [
+                      12,
+                      11
+                     ]
+                    }
+                   ]
+                  }
+                 ]
+                },
+                {
+                 "tag": "div",
+                 "cls": "nav-heading",
+                 "box": [
+                  94,
+                  20
+                 ],
+                 "text": "(281) 789-8836"
+                }
+               ]
+              },
+              {
+               "tag": "a",
+               "cls": "button nav w-inline-block",
+               "box": [
+                173,
+                44
+               ],
+               "layout": "flex",
+               "dir": "row",
+               "align": "center",
+               "justify": "space-between",
+               "gap": "8px",
+               "href": "/refer-a-patient",
+               "kids": [
+                {
+                 "tag": "div",
+                 "cls": "icon-embed-xxsmall is-white w-embed",
+                 "box": [
+                  16,
+                  16
+                 ],
+                 "layout": "flex",
+                 "dir": "column",
+                 "align": "center",
+                 "justify": "center",
+                 "kids": [
+                  {
+                   "tag": "svg",
+                   "box": [
+                    16,
+                    16
+                   ],
+                   "kids": [
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "g",
+                     "box": [
+                      12,
+                      12
+                     ],
+                     "kids": [
+                      {
+                       "tag": "path",
+                       "box": [
+                        6,
+                        6
+                       ]
+                      },
+                      {
+                       "tag": "path",
+                       "box": [
+                        0,
+                        0
+                       ]
+                      },
+                      {
+                       "tag": "g",
+                       "box": [
+                        0,
+                        0
+                       ]
+                      },
+                      {
+                       "tag": "path",
+                       "box": [
+                        12,
+                        5
+                       ]
+                      }
+                     ]
+                    }
+                   ]
+                  }
+                 ]
+                },
+                {
+                 "tag": "div",
+                 "cls": "nav-heading",
+                 "box": [
+                  117,
+                  20
+                 ],
+                 "text": "Referring Doctors"
+                }
+               ]
+              }
+             ]
+            },
+            {
+             "tag": "div",
+             "cls": "wrapper-nav-item right",
+             "box": [
+              405,
+              37
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "flex-end",
+             "kids": [
+              {
+               "tag": "a",
+               "cls": "button-3 white nav w-inline-block",
+               "box": [
+                162,
+                37
+               ],
+               "layout": "flex",
+               "dir": "row",
+               "align": "center",
+               "justify": "space-between",
+               "gap": "16px",
+               "href": "https://www.flexbook.me/gmdent/1",
+               "kids": [
+                {
+                 "tag": "div",
+                 "box": [
+                  80,
+                  19
+                 ],
+                 "text": "Book Online"
+                },
+                {
+                 "tag": "div",
+                 "cls": "icon-embed-xsmall small-white-3 w-embed",
+                 "box": [
+                  26,
+                  26
+                 ],
+                 "layout": "flex",
+                 "dir": "column",
+                 "align": "center",
+                 "justify": "center",
+                 "kids": [
+                  {
+                   "tag": "svg",
+                   "box": [
+                    26,
+                    26
+                   ],
+                   "kids": [
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "g",
+                     "box": [
+                      0,
+                      0
+                     ]
+                    },
+                    {
+                     "tag": "path",
+                     "box": [
+                      13,
+                      11
+                     ]
+                    }
+                   ]
+                  }
+                 ]
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "tag": "section",
+   "cls": "section_ty-hero",
+   "box": [
+    1440,
+    644
+   ],
+   "pos": "relative",
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-hero__glow",
+     "box": [
+      1008,
+      1008
+     ],
+     "pos": "absolute"
+    },
+    {
+     "tag": "div",
+     "cls": "ty-hero__in",
+     "box": [
+      1240,
+      471
+     ],
+     "layout": "flex",
+     "dir": "column",
+     "align": "center",
+     "justify": "normal",
+     "pos": "relative",
+     "kids": [
+      {
+       "tag": "img",
+       "cls": "qz-hero__aside-img",
+       "box": [
+        56,
+        56
+       ],
+       "asset": "698680daabddcb610e194249",
+       "alt": "Dr. Chris Kim, Livewell Dental"
+      },
+      {
+       "tag": "span",
+       "cls": "ty-hero__badge",
+       "box": [
+        392,
+        33
+       ],
+       "layout": "flex",
+       "dir": "row",
+       "align": "center",
+       "justify": "normal",
+       "gap": "9px",
+       "text": "You may be a candidate for implants",
+       "kids": [
+        {
+         "tag": "span",
+         "cls": "ty-hero__badge-dot",
+         "box": [
+          6,
+          6
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "h1",
+       "cls": "ty-hero__h1",
+       "box": [
+        926,
+        60
+       ],
+       "text": "Let's Talk About Your New Smile"
+      },
+      {
+       "tag": "p",
+       "cls": "ty-hero__lede",
+       "box": [
+        516,
+        72
+       ],
+       "text": "Give us a call and a member of the Grand Mission team will walk you through your options and get your complimentary consultation with Dr. William on the calendar."
+      },
+      {
+       "tag": "div",
+       "cls": "ty-hero__cta",
+       "box": [
+        368,
+        145
+       ],
+       "layout": "flex",
+       "dir": "column",
+       "align": "center",
+       "justify": "normal",
+       "gap": "16px",
+       "kids": [
+        {
+         "tag": "a",
+         "cls": "ty-head__logo lw-btn lw-btn--gold ty-hero__call",
+         "box": [
+          266,
+          59
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "gap": "10px",
+         "href": "tel:(703)844-2975",
+         "text": "Call (703) 844-2975"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-hero__proof",
+         "box": [
+          262,
+          32
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "gap": "11px",
+         "text": "320+ five star reviews",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-hero__stars",
+           "box": [
+            93,
+            32
+           ],
+           "text": "★★★★★"
+          }
+         ]
+        },
+        {
+         "tag": "p",
+         "cls": "ty-hero__micro",
+         "box": [
+          368,
+          22
+         ],
+         "text": "A quick two minute call to talk through your options."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "tag": "section",
+   "cls": "ty-div section_ty-expect lw-sec",
+   "box": [
+    1440,
+    977
+   ],
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-expect__head",
+     "box": [
+      1240,
+      159
+     ],
+     "kids": [
+      {
+       "tag": "span",
+       "cls": "imp-section-label center",
+       "box": [
+        1240,
+        19
+       ],
+       "text": "what happens next"
+      },
+      {
+       "tag": "h2",
+       "cls": "ty-h2",
+       "box": [
+        1240,
+        94
+       ],
+       "text": "We are dedicated to ‍getting you your new smile"
+      },
+      {
+       "tag": "p",
+       "cls": "ty-expect__lede",
+       "box": [
+        679,
+        30
+       ],
+       "text": "Here is what to expect on the call, and why acting now matters."
+      }
+     ]
+    },
+    {
+     "tag": "div",
+     "cls": "ty-expect__grid",
+     "box": [
+      1240,
+      634
+     ],
+     "layout": "grid",
+     "cols": "531.203px 531.203px",
+     "gap": "57.6px",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "ty-div",
+       "box": [
+        531,
+        501
+       ],
+       "kids": [
+        {
+         "tag": "p",
+         "cls": "ty-expect__label",
+         "box": [
+          531,
+          26
+         ],
+         "text": "On your call, we will go over"
+        },
+        {
+         "tag": "div",
+         "cls": "ty-steps",
+         "box": [
+          531,
+          452
+         ],
+         "pos": "relative",
+         "kids": [
+          {
+           "tag": "div",
+           "cls": "ty-steps__rail",
+           "box": [
+            2,
+            436
+           ],
+           "pos": "absolute"
+          },
+          {
+           "tag": "div",
+           "cls": "ty-div ty-step",
+           "box": [
+            400,
+            142
+           ],
+           "pos": "relative",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-div ty-step__num",
+             "box": [
+              36,
+              36
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "pos": "absolute",
+             "text": "1"
+            },
+            {
+             "tag": "h3",
+             "cls": "ty-step__h3",
+             "box": [
+              400,
+              23
+             ],
+             "text": "Your treatment options"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-step__p",
+             "box": [
+              400,
+              82
+             ],
+             "text": "We take down your situation and Dr. William reviews which path fits, from a single implant through to a full arch."
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-div ty-step",
+           "box": [
+            400,
+            169
+           ],
+           "pos": "relative",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-div ty-step__num",
+             "box": [
+              36,
+              36
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "pos": "absolute",
+             "text": "2"
+            },
+            {
+             "tag": "h3",
+             "cls": "ty-step__h3",
+             "box": [
+              400,
+              23
+             ],
+             "text": "Your payment options"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-step__p",
+             "box": [
+              400,
+              109
+             ],
+             "text": "What insurance is likely to cover, what it does not, and the financing options available, explained plainly before you commit to anything."
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-div ty-step",
+           "box": [
+            400,
+            142
+           ],
+           "pos": "relative",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-div ty-step__num",
+             "box": [
+              36,
+              36
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "pos": "absolute",
+             "text": "3"
+            },
+            {
+             "tag": "h3",
+             "cls": "ty-step__h3",
+             "box": [
+              400,
+              23
+             ],
+             "text": "Your complimentary consultation"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-step__p",
+             "box": [
+              400,
+              82
+             ],
+             "text": "A no cost assessment with a 3D scan at our Fairfax Station practice, so you can see exactly what is possible in your case."
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div",
+       "box": [
+        531,
+        421
+       ],
+       "kids": [
+        {
+         "tag": "p",
+         "cls": "ty-risks__label",
+         "box": [
+          531,
+          51
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "flex-start",
+         "gap": "9px",
+         "text": "What can happen if treatment is delayed",
+         "kids": [
+          {
+           "tag": "strong",
+           "box": [
+            16,
+            26
+           ],
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-div",
+             "box": [
+              16,
+              19
+             ],
+             "text": "⚠"
+            }
+           ]
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-risks__list",
+         "box": [
+          531,
+          346
+         ],
+         "layout": "grid",
+         "cols": "531.203px",
+         "gap": "16px",
+         "kids": [
+          {
+           "tag": "div",
+           "cls": "ty-risk",
+           "box": [
+            400,
+            54
+           ],
+           "layout": "flex",
+           "dir": "row",
+           "align": "flex-start",
+           "justify": "flex-start",
+           "gap": "13px",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-risk__mark",
+             "box": [
+              22,
+              22
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "text": "✓"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-risk__p",
+             "box": [
+              365,
+              54
+             ],
+             "text": "Bone loss in the jaw, which can narrow the implant options open to you later"
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-risk",
+           "box": [
+            400,
+            54
+           ],
+           "layout": "flex",
+           "dir": "row",
+           "align": "flex-start",
+           "justify": "flex-start",
+           "gap": "13px",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-risk__mark",
+             "box": [
+              22,
+              22
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "text": "✓"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-risk__p",
+             "box": [
+              365,
+              54
+             ],
+             "text": "Neighbouring teeth shifting, leading to bite issues and more complex treatment"
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-risk",
+           "box": [
+            400,
+            54
+           ],
+           "layout": "flex",
+           "dir": "row",
+           "align": "flex-start",
+           "justify": "flex-start",
+           "gap": "13px",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-risk__mark",
+             "box": [
+              22,
+              22
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "text": "✓"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-risk__p",
+             "box": [
+              365,
+              54
+             ],
+             "text": "A higher risk of gum disease or infection over time"
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-risk",
+           "box": [
+            400,
+            54
+           ],
+           "layout": "flex",
+           "dir": "row",
+           "align": "flex-start",
+           "justify": "flex-start",
+           "gap": "13px",
+           "kids": [
+            {
+             "tag": "span",
+             "cls": "ty-risk__mark",
+             "box": [
+              22,
+              22
+             ],
+             "layout": "flex",
+             "dir": "row",
+             "align": "center",
+             "justify": "center",
+             "text": "✓"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-risk__p",
+             "box": [
+              365,
+              54
+             ],
+             "text": "More extensive, and more costly, procedures further down the line"
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-reassure",
+       "box": [
+        1120,
+        67
+       ],
+       "layout": "flex",
+       "dir": "row",
+       "align": "center",
+       "justify": "center",
+       "gap": "14px",
+       "kids": [
+        {
+         "tag": "p",
+         "cls": "ty-risk__p",
+         "box": [
+          849,
+          27
+         ],
+         "text": "We walk you through everything on the call. There is no pressure to decide.",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-reassure__strong",
+           "box": [
+            208,
+            20
+           ],
+           "text": "No cost, no obligation."
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "tag": "section",
+   "cls": "ty-div section_ty-why lw-sec",
+   "box": [
+    1440,
+    517
+   ],
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-expect__head",
+     "box": [
+      1240,
+      66
+     ],
+     "kids": [
+      {
+       "tag": "span",
+       "cls": "imp-section-label center",
+       "box": [
+        1240,
+        19
+       ],
+       "text": "why people chose us"
+      },
+      {
+       "tag": "h2",
+       "cls": "ty-h2",
+       "box": [
+        1240,
+        47
+       ],
+       "text": "Why Grand Mission Dental?"
+      }
+     ]
+    },
+    {
+     "tag": "div",
+     "cls": "ty-why__grid",
+     "box": [
+      1240,
+      271
+     ],
+     "layout": "grid",
+     "cols": "390.656px 390.672px 390.656px",
+     "gap": "34px",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "ty-why__card",
+       "box": [
+        391,
+        271
+       ],
+       "layout": "grid",
+       "cols": "348.656px",
+       "gap": "0px 16px",
+       "kids": [
+        {
+         "tag": "span",
+         "cls": "ty-why__icon",
+         "box": [
+          46,
+          46
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "text": "☆"
+        },
+        {
+         "tag": "h3",
+         "cls": "ty-why__h3",
+         "box": [
+          138,
+          26
+         ],
+         "text": "Experience"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-why__p",
+         "box": [
+          349,
+          125
+         ],
+         "text": "Dr. Chris, a Kois Center graduate and Fellow of the International Congress of Oral Implantology, teaches implant surgery and manages your case from start to finish."
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-why__card",
+       "box": [
+        391,
+        271
+       ],
+       "layout": "grid",
+       "cols": "348.672px",
+       "gap": "0px 16px",
+       "kids": [
+        {
+         "tag": "span",
+         "cls": "ty-why__icon",
+         "box": [
+          46,
+          46
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "text": "♡"
+        },
+        {
+         "tag": "h3",
+         "cls": "ty-why__h3",
+         "box": [
+          221,
+          26
+         ],
+         "text": "Personalized Care"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-why__p",
+         "box": [
+          349,
+          125
+         ],
+         "text": "3D guided planning with CBCT imaging, sedation options for anxious patients, and a lab partnership that means the finished teeth are designed with the same hands that placed the implants."
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-why__card",
+       "box": [
+        391,
+        271
+       ],
+       "layout": "grid",
+       "cols": "348.656px",
+       "gap": "0px 16px",
+       "kids": [
+        {
+         "tag": "span",
+         "cls": "ty-why__icon",
+         "box": [
+          46,
+          46
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "text": "$"
+        },
+        {
+         "tag": "h3",
+         "cls": "ty-why__h3",
+         "box": [
+          137,
+          26
+         ],
+         "text": "Clear Costs"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-why__p",
+         "box": [
+          349,
+          125
+         ],
+         "text": "New teeth are a significant investment. We verify your benefits, quote any grafting or extractions upfront, and put your out of pocket figure in front of you before you commit to anything."
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "tag": "section",
+   "cls": "ty-div section_ty-faq lw-sec",
+   "box": [
+    1440,
+    1734
+   ],
+   "pos": "relative",
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-expect__head",
+     "box": [
+      1240,
+      66
+     ],
+     "kids": [
+      {
+       "tag": "span",
+       "cls": "imp-section-label center",
+       "box": [
+        1240,
+        19
+       ],
+       "text": "before you call"
+      },
+      {
+       "tag": "h2",
+       "cls": "ty-h2",
+       "box": [
+        1240,
+        47
+       ],
+       "text": "Any questions before you call?"
+      }
+     ]
+    },
+    {
+     "tag": "div",
+     "cls": "ty-faq__list",
+     "box": [
+      880,
+      1352
+     ],
+     "layout": "grid",
+     "cols": "880px",
+     "gap": "10px",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "Is the dental implant procedure painful?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "The procedure is done under local anaesthetic and sedation options are available, so you should not feel it. Some soreness and swelling during early healing is normal and manageable. Most patients tell us it was far easier than they expected."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "Can I really get a new tooth in one day?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "Sometimes, yes. Depending on your bone quality and overall health, a temporary tooth can be placed the same day as your implant. Your 3D scan at the consultation is what tells us whether you qualify."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "What if I have been told I do not have enough bone?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "Do not rule yourself out. Bone grafting, sinus lifts and alternative implant approaches make treatment possible for many patients who were told no elsewhere. A CBCT scan shows exactly what is possible in your case."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "How long do implants last?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "The implant post is designed as a lifetime replacement root. With healthy gums, daily care and regular checkups, implants can last decades. The crown on top may need maintenance over time, like any tooth."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "When will I find out the cost of my treatment?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "At your consultation, once the 3D scan shows what your case actually needs. A complete single implant, meaning post, abutment and crown, typically runs $1,900 to $2,800 at Grand Mission Dental. Bone grafting or extractions, if needed, are quoted upfront."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "Do you take my insurance?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "Insurance often covers part of the treatment, such as the crown or an extraction. Our team verifies your benefits before treatment and walks you through the financing options, so you know your exact out of pocket cost before you commit to anything."
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "div",
+       "cls": "ty-div ty-faq__item",
+       "box": [
+        880,
+        175
+       ],
+       "kids": [
+        {
+         "tag": "div",
+         "cls": "ty-faq__trigger",
+         "box": [
+          878,
+          65
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "space-between",
+         "gap": "18px",
+         "text": "What is the process for getting financing?",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-div ty-faq__sign",
+           "box": [
+            25,
+            22
+           ],
+           "text": "+"
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "ty-faq__panel",
+         "box": [
+          878,
+          108
+         ],
+         "kids": [
+          {
+           "tag": "p",
+           "cls": "ty-faq__a",
+           "box": [
+            810,
+            108
+           ],
+           "text": "We handle it at the consultation. Once your treatment plan is set, our team runs the application with you and brings back the monthly options it returns. Nothing is agreed until you have seen the numbers in writing."
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "tag": "div",
+     "cls": "w-embed w-script",
+     "box": [
+      1440,
+      0
+     ]
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "tag": "section",
+   "cls": "section_ty-cta",
+   "box": [
+    1440,
+    726
+   ],
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-cta__card",
+     "box": [
+      1240,
+      654
+     ],
+     "pos": "relative",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "ty-cta__glow",
+       "box": [
+        835,
+        835
+       ],
+       "pos": "absolute"
+      },
+      {
+       "tag": "div",
+       "cls": "ty-cta__in",
+       "box": [
+        1125,
+        510
+       ],
+       "pos": "relative",
+       "kids": [
+        {
+         "tag": "h2",
+         "cls": "ty-cta__h2",
+         "box": [
+          1125,
+          43
+         ],
+         "text": "Ready to take the next step?"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-cta__p",
+         "box": [
+          563,
+          54
+         ],
+         "text": "Talk to the Grand Mission team and get your complimentary consultation with Dr. Chris scheduled today."
+        },
+        {
+         "tag": "a",
+         "cls": "ty-head__logo lw-btn ty-cta__call",
+         "box": [
+          283,
+          68
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "gap": "10px",
+         "href": "tel:(703)844-2975",
+         "text": "Call (703) 844-2975"
+        },
+        {
+         "tag": "p",
+         "cls": "ty-cta__proof",
+         "box": [
+          1125,
+          21
+         ],
+         "layout": "flex",
+         "dir": "row",
+         "align": "center",
+         "justify": "center",
+         "gap": "11px",
+         "text": "320+ five star reviews",
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "ty-cta__stars",
+           "box": [
+            64,
+            21
+           ],
+           "text": "★★★★★"
+          }
+         ]
+        },
+        {
+         "tag": "p",
+         "cls": "ty-cta__micro",
+         "box": [
+          1125,
+          22
+         ],
+         "text": "We will walk through your options in about two minutes."
+        },
+        {
+         "tag": "div",
+         "cls": "ty-cta__facts",
+         "box": [
+          1125,
+          166
+         ],
+         "layout": "grid",
+         "cols": "360.266px 360.266px 360.281px",
+         "gap": "22px",
+         "kids": [
+          {
+           "tag": "div",
+           "cls": "ty-div",
+           "box": [
+            360,
+            125
+           ],
+           "kids": [
+            {
+             "tag": "p",
+             "cls": "ty-cta__fact-label",
+             "box": [
+              360,
+              26
+             ],
+             "text": "Call"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-cta__fact-copy",
+             "box": [
+              360,
+              22
+             ],
+             "kids": [
+              {
+               "tag": "a",
+               "cls": "ty-cta__fact-link",
+               "box": [
+                103,
+                18
+               ],
+               "href": "tel:(703)844-2975",
+               "text": "(703) 844-2975"
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-div",
+           "box": [
+            360,
+            125
+           ],
+           "kids": [
+            {
+             "tag": "p",
+             "cls": "ty-cta__fact-label",
+             "box": [
+              360,
+              26
+             ],
+             "text": "Visit"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-cta__p",
+             "box": [
+              360,
+              54
+             ],
+             "kids": [
+              {
+               "tag": "a",
+               "cls": "ty-cta__fact-link",
+               "box": [
+                345,
+                47
+               ],
+               "href": "https://maps.google.com/?q=9027+Silverbrook+Rd+Ste+F+Fairfax+Station+VA+22039",
+               "text": "9027 Silverbrook Rd Ste. F",
+               "kids": [
+                {
+                 "tag": "span",
+                 "box": [
+                  345,
+                  47
+                 ],
+                 "text": "Fairfax Station, VA 22039"
+                }
+               ]
+              }
+             ]
+            }
+           ]
+          },
+          {
+           "tag": "div",
+           "cls": "ty-div",
+           "box": [
+            360,
+            125
+           ],
+           "kids": [
+            {
+             "tag": "p",
+             "cls": "ty-cta__fact-label",
+             "box": [
+              360,
+              26
+             ],
+             "text": "Hours"
+            },
+            {
+             "tag": "p",
+             "cls": "ty-cta__p",
+             "box": [
+              360,
+              82
+             ],
+             "text": "Mon & Tue: 8am to 5pm ‍",
+             "kids": [
+              {
+               "tag": "span",
+               "box": [
+                207,
+                20
+               ],
+               "text": "Wed & Thu: 8am to 4pm ‍"
+              },
+              {
+               "tag": "span",
+               "box": [
+                131,
+                20
+               ],
+               "text": "Fri: 8am to 1pm"
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "tag": "footer",
+   "cls": "ty-foot",
+   "box": [
+    1440,
+    264
+   ],
+   "kids": [
+    {
+     "tag": "div",
+     "cls": "ty-div lw-shell foot",
+     "box": [
+      1240,
+      188
+     ],
+     "layout": "flex",
+     "dir": "column",
+     "align": "center",
+     "justify": "center",
+     "kids": [
+      {
+       "tag": "div",
+       "cls": "ty-foot__row",
+       "box": [
+        382,
+        117
+       ],
+       "kids": [
+        {
+         "tag": "p",
+         "cls": "ty-foot__legal-3",
+         "box": [
+          382,
+          62
+         ],
+         "text": "Grand Mission Dentistry, Dr. William Sung DMD",
+         "kids": [
+          {
+           "tag": "a",
+           "box": [
+            209,
+            37
+           ],
+           "href": "https://maps.app.goo.gl/EeX5CMrv2yQfDC8i6",
+           "kids": [
+            {
+             "tag": "strong",
+             "box": [
+              209,
+              37
+             ],
+             "text": "8620 Grand Mission Blvd Ste E, Richmond, TX 77407"
+            }
+           ]
+          },
+          {
+           "tag": "span",
+           "cls": "text-span-22",
+           "box": [
+            3,
+            16
+           ],
+           "text": "."
+          }
+         ]
+        },
+        {
+         "tag": "div",
+         "cls": "imp-hero-copy",
+         "box": [
+          382,
+          54
+         ],
+         "kids": [
+          {
+           "tag": "span",
+           "cls": "imp-footer-line",
+           "box": [
+            382,
+            27
+           ],
+           "text": "·",
+           "kids": [
+            {
+             "tag": "a",
+             "cls": "imp-a-6",
+             "box": [
+              116,
+              20
+             ],
+             "href": "/privacy-policy",
+             "text": "Privacy Policy"
+            },
+            {
+             "tag": "a",
+             "cls": "imp-a-6",
+             "box": [
+              139,
+              20
+             ],
+             "href": "/terms-of-service",
+             "text": "Terms of Service"
+            }
+           ]
+          },
+          {
+           "tag": "span",
+           "cls": "imp-footer-line",
+           "box": [
+            382,
+            27
+           ],
+           "text": "© 2026 Grand Mission Dentistry of Richmond"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "tag": "p",
+       "cls": "ty-foot__disc",
+       "box": [
+        1240,
+        51
+       ],
+       "text": "Individual results vary based on each patient's oral health, anatomy and treatment plan. Nothing on this page is a diagnosis or a promise of a specific outcome. Candidacy for cosmetic treatment is determined at a clinical examination with Dr. Sung. Pricing shown is a typical range and is confirmed in writing after your evaluation. A member of our team confirms full details when scheduling."
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -22,9 +22,9 @@ railway ssh "base64 -d /app/mi.b64 > /app/migrate-input.css.gz"
 # 3. Convert.
 railway ssh "cd /app && bun run /app/conv-run.ts"
 
-# 4. Bring the result back into .tmp/conv-out.json.
+# 4. Bring the result back into output/conv-out.json.
 railway ssh "gzip -9 -c /app/conv-out.json | base64 -w0" > conv-out.b64
-tr -d '\r\n' < conv-out.b64 | base64 -d | gunzip > .tmp/conv-out.json
+tr -d '\r\n' < conv-out.b64 | base64 -d | gunzip > output/conv-out.json
 ```
 
 `conv-preload.ts` and `conv-run.ts` in this folder are the two files copied to `/app`.

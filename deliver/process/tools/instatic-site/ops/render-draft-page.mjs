@@ -8,9 +8,9 @@
 /**
  * render-draft-page.mjs — render a DRAFT page to real HTML, without publishing.
  *
- *   node render-draft-page.mjs                     # index -> .tmp/draft-render/index.html
+ *   node render-draft-page.mjs                     # index -> output/draft-render/index.html
  *   node render-draft-page.mjs veneers
- *   node render-draft-page.mjs index .tmp/mydir
+ *   node render-draft-page.mjs index output/mydir
  *
  * ## Why this exists
  *
@@ -30,14 +30,14 @@
  * diagnostics.
  *
  * Serve the output directory with anything, proxying whatever is not on disk to
- * INSTATIC_BASE_URL so `/uploads/*` resolves — `.tmp/probe-services-hover.mjs`
+ * INSTATIC_BASE_URL so `/uploads/*` resolves — `output/probe-services-hover.mjs`
  * has that server in nine lines and takes a directory as its first argument.
  *
  * ## Two things to know about the output
  *
  * - It is the real publisher's render, so it reflects the STYLE REGISTRY and
  *   its cascade order. That is a class of bug the local design package under
- *   `04-design/.tmp/final-site` cannot show you, because the package has its
+ *   `04-design/output/final-site` cannot show you, because the package has its
  *   own hand-written stylesheet and no conditions array.
  * - `src/scripts/seo-head.js` still rewrites the <head> at runtime here, same as
  *   live. Read the head from the DOM after scripts run, never from this file.
@@ -49,7 +49,7 @@ import { writeFileSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 
 const SLUG = process.argv[2] ?? 'index'
-const OUT = process.argv[3] ?? '.tmp/draft-render'
+const OUT = process.argv[3] ?? 'output/draft-render'
 
 const { site: shell, seq } = await getSite()
 const { rows } = await getPages()

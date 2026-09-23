@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url'
 import { getSite, saveShell } from './insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 
 const normaliseSelector = (selector) =>
   (selector ?? '')

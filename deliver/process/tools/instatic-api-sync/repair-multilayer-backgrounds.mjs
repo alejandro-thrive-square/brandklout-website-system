@@ -28,13 +28,13 @@
  * Writing the draft is not publishing. Publish separately, then gate with
  * `node css-parity.mjs` and `node compare-local.mjs <page> .pg-hero`.
  */
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { getSite, saveShell } from './insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const LOCAL = join(process.env.SITE_DIST || join(process.cwd(), 'workflows', '03-design-build', '.tmp', 'site-src', 'dist'), 'assets', 'site.css')
+const LOCAL = join(process.env.SITE_DIST || [join(process.cwd(), 'output', 'code', 'site-src', 'dist'), join(process.cwd(), '..', '03-design-build', 'output', 'code', 'site-src', 'dist')].find((p) => existsSync(p)) || join(process.cwd(), 'output', 'code', 'site-src', 'dist'), 'assets', 'site.css')
 const apply = process.argv.includes('--apply')
 
 const stripComments = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '')

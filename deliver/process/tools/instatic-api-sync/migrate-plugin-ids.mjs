@@ -12,7 +12,7 @@
  *
  * The instance is whichever `INSTATIC_BASE_URL` `insta-api.mjs` resolves — the
  * worktree's `.env`, or an override in the environment for a staging host.
- * Everything is written under `.tmp/plugin-id-migration/<host>/`.
+ * Everything is written under `output/plugin-id-migration/<host>/`.
  *
  * ## Why this is a migration and not a rename
  *
@@ -65,7 +65,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const HOST = BASE.replace(/^https?:\/\//, '')
-const STATE = join(HERE, '.tmp', 'plugin-id-migration', HOST.replace(/[^a-z0-9.-]/gi, '_'))
+const STATE = join(HERE, 'output', 'plugin-id-migration', HOST.replace(/[^a-z0-9.-]/gi, '_'))
 const cmd = process.argv[2]
 const APPLY = process.argv.includes('--apply')
 const arg = (name) => {

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arvada Dental Center — Landing Page Drafts | Webzite for Brandklout</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_shared/journey.css">
+<style>
+  body{background:var(--ink-900)}
+  .idx-card{display:grid;gap:.7rem;align-content:start;border:1px solid var(--line);
+    border-radius:var(--radius-lg);overflow:hidden;background:var(--card);
+    transition:border-color .45s var(--ease),transform .5s var(--ease)}
+  .idx-card:hover{border-color:var(--cyan);transform:translateY(-4px)}
+  /* Thumbnails come from the QA capture pass and are gitignored with every
+     other image in this repo, so on a fresh clone they are simply absent —
+     the tinted panel below is the fallback. Regenerate with
+     `node ../../08-qa/.tmp/shots.mjs`. */
+  .idx-card .shot{aspect-ratio:16/10;overflow:hidden;
+    background:linear-gradient(140deg,var(--ink-800),var(--ink-850))}
+  .idx-card .shot img{width:100%;height:100%;object-fit:cover;object-position:top center}
+  .idx-card .body{padding:0 clamp(1.1rem,2vw,1.5rem) clamp(1.2rem,2.2vw,1.6rem);display:grid;gap:.5rem}
+  .tag{justify-self:start;font-family:var(--f-ui);font-size:calc(.64rem*var(--s-tx));font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;
+    background:rgba(3,197,236,.14);color:var(--cyan)}
+  .chapters{font-size:calc(.82rem*var(--s-tx));color:var(--fg-soft);line-height:1.7}
+  .chapters b{color:var(--cyan);font-weight:600}
+  .gid{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:calc(.74rem*var(--s-tx));color:var(--fg-soft)}
+  .note{border-left:3px solid var(--amber);background:rgba(251,142,40,.09);
+    padding:1.2rem 1.4rem;border-radius:12px}
+  .note strong{color:#fff}
+</style>
+</head>
+<body>
+<main class="wrap pad">
+  <p class="eyebrow">Webzite for Brandklout &middot; Draft for review</p>
+  <h1 class="h2 mt-s">Arvada Dental Center — six landing pages</h1>
+  <p class="lede mt-s">Built locally for review. Nothing has been published, and no client platform has been
+    touched. Asana parent task <span class="gid">1217040406855586</span>.</p>
+
+  <div class="note mt-l" role="note">
+    <p style="margin:0 0 .6rem"><strong>Rebuilt as journeys, 6 Aug 2026.</strong></p>
+    <p style="margin:0 0 .9rem;font-size:calc(.94rem*var(--s-tx))">The first round was a vertical stack of coloured bands
+      holding grids of cards. These six are <strong>6–8 named chapters</strong> in a fixed narrative order,
+      with at least <strong>three chapters per page where scroll drives the content</strong> — pinned and
+      scrubbed, not triggered. The motion layer is GSAP ScrollTrigger; there is no
+      observer-plus-class-toggle left anywhere in the build. Copy, offers, prices, doctors and reviews are
+      carried over unchanged.</p>
+
+    <p style="margin:0 0 .6rem"><strong>Three fabrications were purged and stay purged.</strong></p>
+    <p style="margin:0 0 .9rem;font-size:calc(.94rem*var(--s-tx))">Carried in the source material, not facts:
+      the <strong>4.8 / 1,000+ review aggregate</strong> (an estimate — every rating, review count and star
+      glyph is removed), the <strong>before/after photos</strong> (stock placeholders, not consented patient
+      photography — none are used here, and the two scenes that could have used them are labelled
+      illustrations instead), and the <strong>named finance partners</strong> (assumed — all removed).
+      Individually attributed reviews remain: each is a named person's published words, quoted verbatim,
+      with no score attached.</p>
+
+    <p style="margin:0 0 .6rem"><strong>Three things still need confirming before these take traffic.</strong></p>
+    <p style="margin:0;font-size:calc(.94rem*var(--s-tx))">1. The client's own site quotes <strong>two different full-arch
+      prices</strong> ($18,795 in the headline, $14,999 further down the same page) — the pages use $18,795.
+      2. Which <strong>phone number</strong> paid traffic should use — all six use the main line
+      (303) 421-7611, not the (720) tracking line, and no per-page call-tracking numbers were supplied.
+      3. Where <strong>form submissions</strong> should post — no GoHighLevel endpoint was supplied, so leads
+      resolve through a documented no-op. Full list in
+      <a href="../../../docs/project-overview.md" style="color:var(--cyan)">project-overview.md</a>.</p>
+  </div>
+
+  <div class="grid g3 mt-l">
+    <a class="idx-card" href="implants/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/implants/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">Implants</span>
+        <span class="h3">Dental Implants</span>
+        <span class="chapters">8 chapters &middot; Arrival &rarr; The Gap &rarr; <b>The Anatomy</b> &rarr; The Options &rarr;
+          The Surgeon &rarr; The Path &rarr; The Number &rarr; The Invitation<br>
+          Signature: an implant assembles itself as you scroll — post, abutment, crown.</span>
+        <span class="gid">1217162344633760</span>
+      </span>
+    </a>
+    <a class="idx-card" href="aox/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/aox/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">All-on-X</span>
+        <span class="h3">AOX Full Arch</span>
+        <span class="chapters">8 chapters &middot; Arrival &rarr; The Verdict &rarr; The Comparison &rarr;
+          <b>The Four</b> &rarr; The Day &rarr; The Investment &rarr; The Proof &rarr; The Invitation<br>
+          Signature: four implants seat into the arch, one per scroll segment.</span>
+        <span class="gid">1217162344633761</span>
+      </span>
+    </a>
+    <a class="idx-card" href="veneers/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/veneers/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">Cosmetic</span>
+        <span class="h3">Porcelain Veneers</span>
+        <span class="chapters">8 chapters &middot; Arrival &rarr; The Mirror &rarr; The Straight Answer &rarr;
+          <b>The Design</b> &rarr; The Method &rarr; The Materials &rarr; The Proof &rarr; The Invitation<br>
+          Signature: shade, shape and proportion resolve as you scroll.</span>
+        <span class="gid">1217133289235649</span>
+      </span>
+    </a>
+    <a class="idx-card" href="emergency/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/emergency/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">Urgent</span>
+        <span class="h3">Emergency Dentistry</span>
+        <span class="chapters">7 chapters &middot; Arrival &rarr; Right Now &rarr; <b>The First Minutes</b> &rarr;
+          What We Can Do Today &rarr; When You Arrive &rarr; The Proof &rarr; The Invitation<br>
+          Signature: the dial sweeps and each knocked-out-tooth instruction lights in turn.</span>
+        <span class="gid">1217162344633758</span>
+      </span>
+    </a>
+    <a class="idx-card" href="dentist-near-me/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/dentist-near-me/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">$109 special</span>
+        <span class="h3">Dentist Near Me</span>
+        <span class="chapters">7 chapters &middot; Arrival &rarr; The Search &rarr; <b>The Offer</b> &rarr;
+          Six Minutes Away &rarr; The Practice &rarr; The Proof &rarr; The Invitation<br>
+          Signature: the visit itemises itself line by line and the price lands.</span>
+        <span class="gid">1217162344633759</span>
+      </span>
+    </a>
+    <a class="idx-card" href="next-door/">
+      <span class="shot"><img src="../../08-qa/.tmp/screenshots/next-door/motion/1440.png" alt="" loading="lazy"></span>
+      <span class="body">
+        <span class="tag">$109 special</span>
+        <span class="h3">Next Door</span>
+        <span class="chapters">7 chapters &middot; Arrival &rarr; <b>Twenty-Two Years</b> &rarr;
+          Of Your Neighbourhood &rarr; The Whole Household &rarr; The Voices &rarr; The Introduction &rarr;
+          The Invitation<br>
+          Signature: the years run forward from 2003 while the story keeps pace.</span>
+        <span class="gid">1217133289235650</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="mt-l">
+    <h2 class="h3">How to review</h2>
+    <ul class="rule-list mt">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Scroll slowly through the pinned chapters.</strong> They are scrubbed — the page holds still and the scene plays at whatever pace you scroll, forwards or backwards. Scrolling past quickly is the one way to miss the whole point.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>The nav shows which chapter you are in and how far through the page you are.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Review in a focused tab.</strong> A background tab freezes transitions and timers and will make working motion look broken.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>The open/closed pill is live against the practice's real Mon–Fri 8–5 hours, so it changes depending on when you look.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Forms validate and confirm, but deliberately do not post anywhere yet. Payloads are logged to <code>window.__arvadaLeads</code>.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Every image is client-hosted, pulled from arvadadentalcenter.com — but several are evidently licensed stock the practice already uses. Nothing is captioned as a patient or a result. Rights need confirming before launch.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Every review is real and named, with no score attached. Sources in <a href="../../01-content-intake/.tmp/content-intake-summary.md" style="color:var(--cyan)">content-intake-summary.md</a>; verification in <a href="../../08-qa/.tmp/qa-report.md" style="color:var(--cyan)">qa-report.md</a>.</span></li>
+    </ul>
+  </div>
+</main>
+</body>
+</html>

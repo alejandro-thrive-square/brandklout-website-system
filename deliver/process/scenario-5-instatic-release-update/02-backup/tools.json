@@ -1,0 +1,8 @@
+{
+  "step": "scenario-5-instatic-release-update/02-backup",
+  "toolkits": [
+    "instatic-api-sync",
+    "instatic-release",
+    "instatic-site"
+  ]
+}

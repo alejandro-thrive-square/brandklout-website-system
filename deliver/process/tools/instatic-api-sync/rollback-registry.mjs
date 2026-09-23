@@ -4,7 +4,7 @@
  * Only those two fields are touched, so anything edited in the browser since
  * (page content, settings, files) is left alone.
  *
- *   node rollback-registry.mjs .tmp/shell.before.6.json [--apply]
+ *   node rollback-registry.mjs output/shell.before.6.json [--apply]
  */
 import { readFileSync } from 'node:fs'
 import { getSite, saveShell } from './insta-api.mjs'

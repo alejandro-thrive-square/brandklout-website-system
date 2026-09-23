@@ -189,7 +189,7 @@ async function check() {
   const S = (m, p = {}) => send(m, p, sessionId)
   await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable')
 
-  const sessionFile = path.resolve(import.meta.dirname, './lib/.tmp/.session')
+  const sessionFile = path.resolve(import.meta.dirname, './lib/output/.session')
   const cookie = fs.readFileSync(sessionFile, 'utf8').trim()
   const [name, ...rest] = cookie.split('=')
   await S('Network.setCookie', {

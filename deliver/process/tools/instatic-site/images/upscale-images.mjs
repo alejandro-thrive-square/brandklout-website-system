@@ -3,7 +3,7 @@
  * upscale-images.mjs — re-emit soft photographs at high resolution through Magnific (Freepik's
  * upscaler API), into <out>/<key>.png. THE SAME PHOTOGRAPH, ENLARGED, never a substitute.
  *
- * Origin: bk-mason-park-kids, workflows/03-core-pages/.tmp/upscale-images.mjs (2026-09-08). Generalized
+ * Origin: bk-mason-park-kids, workflows/03-core-pages/output/upscale-images.mjs (2026-09-08). Generalized
  * 2026-09-23: the job table is a JSON file instead of a constant.
  *
  * Settings are fixed on purpose: creativity 1, resemblance 3, hdr 2, engine magnific_sharpy,
@@ -13,7 +13,7 @@
  * `"skip": true` with the reason, and the page keeps the soft original.
  *
  * Usage:
- *   node upscale-images.mjs --jobs upscale-jobs.json [--src-dir <dir>] [--out .tmp/_upscaled]
+ *   node upscale-images.mjs --jobs upscale-jobs.json [--src-dir <dir>] [--out output/_upscaled]
  *                           [--force] [--only <key>] [--list]
  * upscale-jobs.json: [{ "key": "staff-gia", "from": "2023/12/Gia.jpg", "scale": "4x"|"2x",
  *                       "face": true, "skip": false, "note": "300x301 thumbnail" }, ...]
@@ -31,7 +31,7 @@ const JOBS_FILE = arg('jobs')
 if (!JOBS_FILE) { console.error('usage: --jobs upscale-jobs.json [--src-dir dir] [--out dir] [--force] [--only key] [--list]'); process.exit(2) }
 const JOBS = JSON.parse(fs.readFileSync(JOBS_FILE, 'utf8'))
 const SRC = path.resolve(arg('src-dir') || path.dirname(path.resolve(JOBS_FILE)))
-const OUT = path.resolve(arg('out') || path.join('.tmp', '_upscaled'))
+const OUT = path.resolve(arg('out') || path.join('output', '_upscaled'))
 const force = argv.includes('--force')
 const list = argv.includes('--list')
 const only = arg('only')

@@ -3,9 +3,9 @@
  * wf.mjs — the front end every Webflow script should call instead of wfmcp.mjs directly.
  *
  * Promoted 2026-09-23. Merges two copies that grew separately on the client worktrees:
- *   - grand-mission-dentistry/workflows/07-webflow-build/.tmp/mcp.mjs  (429 / 1101 retries,
+ *   - grand-mission-dentistry/workflows/07-webflow-build/output/mcp.mjs  (429 / 1101 retries,
  *     one-JSON-object-per-line parsing, throws on non-transient errors)
- *   - legacy-dental-pasadena and marvel-dental .../webflow-build/.tmp/native/wf.mjs
+ *   - legacy-dental-pasadena and marvel-dental .../webflow-build/output/native/wf.mjs
  *     (argument-shape injection; arvada's v2-native/wf.mjs is the same file)
  * Client site maps were removed. The site id now comes from --site or WF_SITE_ID.
  *

@@ -1,0 +1,115 @@
+:root{
+  --gold:#AB9E6A; --gold-light:#D4CDB2; --gold-deep:#8A7E4E; --gold-wash:#F5F2E9;
+  /* --gold-deep is only 3.7:1 on the cream ground — fine for display sizes,
+     short of AA for the small uppercase labels. --gold-ink is the same hue
+     taken dark enough to clear 4.5:1 on --warm and on white. */
+  --gold-ink:#665C33;
+  --black:#0B0B0C; --ink-900:#141416; --ink-800:#1C1C1F; --ink-700:#2A2A2E; --ink-500:#6B6B72;
+  --white:#fff; --warm:#FAF8F3; --mist:#F0EDE6;
+
+  /* ------------------------------------------------------------------
+     THEME LAYER.
+     The site is light: warm cream is the ground, ink is the text, and the
+     two dark chapters (the film and the invitation) plus the footer and the
+     drawer opt in with data-theme="dark". Every section below paints from
+     these six names only — never a raw hex or a raw rgba(255,255,255,x) —
+     so a section can be flipped by changing the scope it sits in, not by
+     rewriting its rules.
+       --bg      the ground                --fg       headings, strong text
+       --bg-2    the alternate band        --fg-body  body copy
+       --bg-3    the accent band           --fg-soft  meta, captions, labels
+       --card    raised panel              --line     hairlines and borders
+     Gold splits three ways because brand gold is only 2.4:1 on cream:
+       --accent      text-sized gold (labels, links)  — clears AA
+       --accent-lg   display-sized gold (numerals, quote marks)
+       --rule        gold hairlines and dots (non-text)
+     ------------------------------------------------------------------ */
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  /* Scrim over photography, so text on an image reads on either theme. */
+  --scrim:rgba(11,11,12,.62);
+  --f-display:'Playfair Display','Times New Roman',serif;
+  --f-body:'Raleway','Helvetica Neue',Arial,sans-serif;
+
+  /* ------------------------------------------------------------------
+     TYPE STEPS — the replacement for the clamp() type scale.
+
+     The fluid root is deliberately flat at 16px from 479 to 1440, so a
+     plain rem on its own cannot carry a type scale that used to span
+     3x across that range: --d1 would jump from 44px to 107px at 480 and
+     the hero would swallow every tablet. These five unitless multipliers
+     put the step-down back as plain rem + px media queries, which is what
+     the standard actually asks for — rem type, px breakpoints, one fluid
+     root and nothing else touching html font-size.
+
+       --t-disp  the steep display slopes (5.2-11vw): d1, d2, the two
+                 chapter numerals, the patient-stories figure
+       --t-lg    the moderate display slopes (2.9-6vw): h2, stat numbers,
+                 quote marks
+       --t-mid   section and card headings (1.9-2.6vw)
+       --t-sm    headings that sit just above body copy — stepped gently,
+                 and floored at 478 so they never collapse into it
+       --t-text  body copy and labels. 1 across the whole flat range, so
+                 479-1440 renders pixel-identical to the approved design;
+                 raised at 478 so body copy does NOT follow the root down
+                 on a phone (1.193 puts it at 16.0px at 390, where the raw
+                 root would give 13.4px).
+
+     Breakpoints are Webflow's own (1279/991/767/478) so the scale maps
+     one-to-one onto Designer breakpoints at build time. Every multiplier
+     is a minimax fit against the clamp() curve it replaces, measured at
+     every width in its tier, so 1440 renders pixel-exact and the rest
+     stays within about 20% of the approved design.
+     ------------------------------------------------------------------ */
+  --t-disp:1; --t-lg:1; --t-mid:1; --t-sm:1; --t-text:1;
+
+  --d1:calc(6.66rem * var(--t-disp));
+  --d2:calc(4.68rem * var(--t-disp));
+  --h2:calc(3.24rem * var(--t-lg));
+  --h3:calc(1.71rem * var(--t-mid));
+  --body-lg:calc(1.125rem * var(--t-text));
+  --body:calc(.975rem * var(--t-text));
+  --label:calc(.702rem * var(--t-text));
+  --gutter:clamp(1.25rem,4vw,4.5rem);
+  --section:clamp(4.5rem,9vw,9.5rem);
+  --maxw:1560px;
+  /* Was a gutter for the left chapter rail; the rail was removed in favour of a
+     progress bar on the nav, so content is full-width again. Kept as a token so
+     section rules that reference it stay valid. */
+  --rail:0px;
+}
+/* The type-step cascade. Breakpoints are in px, never rem: a rem media query is
+   measured against the root font-size that the query is about to change.
+   A tier only restates the groups that actually move at that width — mid, sm and
+   text were flat below 991 in the clamp() scale too, so they are not repeated. */
+@media(max-width:1279px){ :root{ --t-disp:.816; --t-lg:.816; --t-mid:.812; --t-sm:.834 } }
+@media(max-width:991px) { :root{ --t-disp:.688; --t-lg:.678; --t-mid:.75;  --t-sm:.82  } }
+@media(max-width:767px) { :root{ --t-disp:.534; --t-lg:.594 } }
+/* Below 479 the root itself starts shrinking (16px at 479 -> 12px at 320).
+   Display type wants that shrink — the old scale shrank there too, so --t-disp
+   is deliberately NOT restated. Everything from h2 down was flat below 767 in
+   the old scale, so those groups are compensated back up by 16/13.76 to hold
+   their pixel size at 390, and body copy a little beyond that to clear 16px. */
+@media(max-width:478px) { :root{ --t-lg:.691; --t-mid:.872; --t-sm:.95; --t-text:1.193 } }
+/* The dark chapters. Scoped, not global, so nesting works: a light card inside
+   a dark band only has to carry data-theme="light" to come back. */
+[data-theme="dark"]{
+  --bg:#0B0B0C; --bg-2:#141416; --bg-3:#1C1C1F; --card:#141416;
+  --fg:#FFFFFF; --fg-body:rgba(255,255,255,.78); --fg-soft:rgba(255,255,255,.62);
+  --fg-faint:rgba(255,255,255,.5);
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.07); --line-strong:rgba(255,255,255,.3);
+  --accent:var(--gold); --accent-lg:var(--gold); --rule:var(--gold);
+  --focus:var(--gold-light);
+  background:var(--bg);color:var(--fg-body);
+}
+[data-theme="light"]{
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  background:var(--bg);color:var(--fg-body);
+}

@@ -3,7 +3,7 @@
  * backup-site.mjs — API snapshot of a live Instatic site before any risky write
  * (push-site --apply --force, a clone, a wipe, a BugHerd round on production).
  *
- * Origin: bk-west-la-implants, workflows/21-instatic-upload/.tmp/backup-live.mjs (itself copied from
+ * Origin: bk-west-la-implants, workflows/21-instatic-upload/output/backup-live.mjs (itself copied from
  * the Brandklout website worktree), with Mason Park Kids' backup-site.mjs as the lighter variant.
  * Generalized 2026-09-23.
  *
@@ -18,7 +18,7 @@
  * Compare summary.seq with your last publish: equal means nobody edited in the admin since. Check it
  * again right before the push.
  *
- * Usage: node backup-site.mjs [--out .tmp/backups/<name>]
+ * Usage: node backup-site.mjs [--out output/backups/<name>]
  * Env: INSTATIC_BASE_URL (+ login).
  */
 import fs from 'node:fs'
@@ -40,7 +40,7 @@ if (argv.includes('--db-command')) {
 }
 
 const { getSite, getPages, BASE } = await import('../lib/site.mjs')
-const OUT = path.resolve(arg('out') || path.join('.tmp', 'backups', `backup-${new URL(BASE).host}-${stamp}`))
+const OUT = path.resolve(arg('out') || path.join('output', 'backups', `backup-${new URL(BASE).host}-${stamp}`))
 fs.mkdirSync(path.join(OUT, 'html'), { recursive: true })
 
 const site = await getSite()

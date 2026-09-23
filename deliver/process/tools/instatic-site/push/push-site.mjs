@@ -1,6 +1,6 @@
 // PROMOTED 2026-09-23 to deliver/process/tools/instatic-site/push/push-site.mjs
 // Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/push-site.mjs. Paths now come from ../lib/paths.mjs (run from the client's workflow
-// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/.tmp) and the admin client from
+// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/output) and the admin client from
 // ../lib/site.mjs (refuses to run without INSTATIC_BASE_URL). Client-specific notes below are the
 // origin's record; review them against the new site before --apply.
 /**
@@ -29,8 +29,8 @@ import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { getSite, getPages, api } from '../lib/site.mjs'
 
-const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
-const TMP = path.join(HERE, '.tmp')
+const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
+const TMP = path.join(HERE, 'output')
 const SITE_SRC = P.DIST
 
 const apply = process.argv.includes('--apply')
@@ -717,7 +717,7 @@ const tokensCss =
 
 /* The token asset is the one payload here nobody can read back without
    publishing, and three of this workflow's worst defects were in it. Write it
-   to `.tmp/tokens.css` on every run, dry or not, so it can be diffed and read
+   to `output/tokens.css` on every run, dry or not, so it can be diffed and read
    BEFORE it is live. */
 fs.writeFileSync(path.join(TMP, 'tokens.css'), tokensCss)
 

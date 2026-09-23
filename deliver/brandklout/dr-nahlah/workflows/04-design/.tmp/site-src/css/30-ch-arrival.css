@@ -1,0 +1,58 @@
+.ch-arrival{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;
+  padding-bottom:clamp(2.5rem,7vw,5.5rem);padding-top:clamp(7rem,14vw,9rem)}
+/* Bled 2px past every edge — see .pg-hero .ph-bg. The film already
+   overhung its own box; the two scrims on this wrapper did not, and they
+   are what leaves the unscrimmed row along the seam into chapter 01. */
+.ch-arrival .ar-bg{position:absolute;inset:-2px;z-index:0}
+.ch-arrival .ar-bg::before{content:"";position:absolute;inset:0;z-index:2;
+  background:
+    radial-gradient(110% 80% at 76% 40%,rgba(171,158,106,.20),transparent 62%),
+    /* Heaviest over the copy column, clearing to the right so the footage
+       is actually visible; it is a moving image, not a texture. */
+    linear-gradient(100deg,rgba(250,248,243,.96) 0%,rgba(250,248,243,.9) 34%,
+                    rgba(250,248,243,.52) 60%,rgba(250,248,243,.16) 100%),
+    /* Top strip carries the nav, bottom strip carries the seam into ch01. */
+    linear-gradient(180deg,rgba(250,248,243,.88) 0%,rgba(250,248,243,.12) 24%,
+                    rgba(250,248,243,.08) 58%,rgba(250,248,243,.82) 100%)}
+.ch-arrival{background:var(--bg)}
+.ch-arrival .ar-veil{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none}
+/* Bled left, right and top, but held 2px SHORT of the section's bottom edge.
+   A <video> composites on the video layer and rounds its edges there, not with
+   the scrim that is painted over it, so at a fractional ScrollSmoother offset
+   it reaches one device pixel further down than the scrim does and that row
+   renders as raw, unscrimmed footage. Keeping the film clear of the clip edge
+   is what fixes it; the scrim is 82% cream by then, so the 2px it gives up are
+   not visible. Measured across seven fractional offsets: 58 -> 3 (noise). */
+.ch-arrival .ar-film{position:absolute;inset:-2px -2px 4px -2px;width:auto;height:auto;
+  object-fit:cover;z-index:0;will-change:transform;backface-visibility:hidden;
+  filter:saturate(.92) brightness(1.06) contrast(.97)}
+.ch-arrival .ar-glow{position:absolute;right:6%;bottom:0;width:min(46vw,620px);height:min(46vw,620px);
+  background:radial-gradient(circle,rgba(171,158,106,.34),transparent 68%);filter:blur(30px);z-index:1}
+.ch-arrival .ar-in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin-inline:auto;
+  padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+  display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+.ch-arrival h1{font-size:var(--d1);max-width:15ch}
+.ch-arrival h1 em{font-style:italic;color:var(--accent-lg)}
+.ch-arrival .ar-lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
+.ch-arrival .ar-actions{display:flex;flex-wrap:wrap;gap:.85rem}
+.ch-arrival .ar-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
+  padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
+.ch-arrival .ar-meta div{display:grid;gap:.15rem}
+.ch-arrival .ar-meta b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
+.ch-arrival .ar-meta span{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+.ch-arrival .ar-cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
+  display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--fg-soft)}
+.ch-arrival .ar-cue i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--gold-deep),transparent)}
+@media(max-width:719px){
+  .ch-arrival{align-items:center;min-height:94svh}
+  /* There is no side column left to hide behind at 390px — the copy runs
+     the full width — so the footage sits further back under a flat veil
+     rather than being cleared to one side. */
+  .ch-arrival .ar-bg::after{content:"";position:absolute;inset:0;z-index:2;
+    background:linear-gradient(180deg,rgba(250,248,243,.9) 0%,rgba(250,248,243,.82) 46%,
+               rgba(250,248,243,.92) 100%)}
+  .ch-arrival .ar-glow{right:-10%;width:min(70vw,340px);height:min(70vw,340px)}
+  .ch-arrival .btn{flex:1 1 auto}
+  .ch-arrival .ar-cue{display:none}
+}

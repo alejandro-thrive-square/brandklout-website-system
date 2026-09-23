@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Journal | Implants, Prosthodontics and Smile Design | Dr. Nahlah</title>
+<meta name="description" content="Articles on dental implants, All-on-4, full-mouth reconstruction and cosmetic dentistry, written by the practice in McLean and Alexandria, Virginia.">
+<meta property="og:title" content="Journal | Dr. Nahlah Implants and Prosthodontics Specialists">
+<meta property="og:description" content="Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Journal | Dr. Nahlah Implants and Prosthodontics Specialists">
+<meta name="twitter:description" content="Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
+  "description": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
+  "url": "/posts",
+  "publisher": {
+    "@id": "/#practice"
+  }
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="posts.html" aria-current="page">Journal</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+            <li><a href="posts.html">Journal</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     JOURNAL — the index over the 43 posts migrated from the WordPress site.
+     GENERATED by gen-blog.mjs. Do not hand-edit; edit posts.json and re-run.
+
+     On Instatic the .bl-grid below is replaced by an <instatic-loop> over the
+     posts collection, so this list is what the local build and every static
+     host serve, and the loop is what the CMS serves. The card markup is
+     identical either way, which is the point.
+     ========================================================================== -->
+<section class="pg-hero" id="hero" style="min-height:clamp(380px,46svh,520px)">
+  <div class="ph-bg">
+    <img src="assets/xray-consult.jpg" alt="A clinician showing a patient their X-ray beside an implant model" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Journal</span></div>
+    <h1 data-split>Written by the <em>specialist</em>.</h1>
+    <p class="ph-lead" data-rv>43 articles on implants, full-arch restoration, cost,
+      aftercare and what actually goes wrong, from the practice's own archive.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="dental-implant-faq.html"><span>Read the implant FAQ</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the archive ---------- -->
+<section class="pk pk-alt" id="articles">
+  <div class="wrap section">
+    <!-- The reveal is per CARD, not a stagger on the grid. A stagger over 43
+         children runs for ~3.9s from a single trigger at the top of the list,
+         so the last cards animate long after they are on screen; and the loop
+         that replaces this grid on Instatic copies its CHILD markup, so a
+         per-card attribute is the only one that survives the swap. -->
+    <div class="bl-grid">
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/unlock-the-benefits-of-dental-implants-your-best-teeth-replacement-option.html">Unlock the Benefits of Dental Implants: Your Best Teeth Replacement Option</a></h2>
+        <p>Tooth loss can become an unfortunate reality for many as we age. Thankfully, advancements in dental technology, like dental implants, offer a reliable</p>
+        <a class="bl-more" href="posts/unlock-the-benefits-of-dental-implants-your-best-teeth-replacement-option.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution.html">Your Comprehensive Guide on Dental Implants: The Best Replacement of Tooth Solution</a></h2>
+        <p>Explore the benefits of dental implants: natural appearance, stability, and long-lasting results. Enjoy eating and smiling with confidence!</p>
+        <a class="bl-more" href="posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/uncovering-the-mystery-the-in-depth-guide-to-dental-implants.html">Uncovering the Mystery: The In-depth Guide to Dental Implants</a></h2>
+        <p>Discover the benefits of dental implants for a confident smile, durable, natural-looking, and long-lasting solutions for missing teeth.</p>
+        <a class="bl-more" href="posts/uncovering-the-mystery-the-in-depth-guide-to-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/uncover-the-lifespan-how-long-can-a-dental-implant-last.html">Uncover the Lifespan: How Long Can a Dental Implant Last?</a></h2>
+        <p>Are you ready to reclaim your smile? Our expert team is here to guide you through the life-changing journey of dental implants. Contact us on our website today!</p>
+        <a class="bl-more" href="posts/uncover-the-lifespan-how-long-can-a-dental-implant-last.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/unveiling-the-mystery-of-implant-dentistry-in-mclean-va.html">Unveiling the Mystery of Implant Dentistry in McLean, VA</a></h2>
+        <p>Transform your smile with dental implants! Discover their benefits, the procedure, and how to choose the right provider for your dental needs.</p>
+        <a class="bl-more" href="posts/unveiling-the-mystery-of-implant-dentistry-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/exploring-the-world-of-dental-implants-placements-in-mclean-va.html">Exploring the World of Dental Implants Placements in McLean, VA</a></h2>
+        <p>Explore dental implants: a durable tooth replacement solution. Learn about the procedure and tips for choosing the right provider for your needs.</p>
+        <a class="bl-more" href="posts/exploring-the-world-of-dental-implants-placements-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/deciphering-dental-implants-your-guide-to-implant-dentistry-in-mclean-va.html">Deciphering Dental Implants: Your Guide to Implant Dentistry in McLean, VA</a></h2>
+        <p>Looking for a skilled implant dentist in McLean, VA? Dr. Esam Nahlah of Dental Group of Tysons offers expert, personalized dental implant care.</p>
+        <a class="bl-more" href="posts/deciphering-dental-implants-your-guide-to-implant-dentistry-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/discover-the-promising-world-of-teeth-implants-in-mclean-va.html">Discover the Promising World of Teeth Implants in McLean, VA</a></h2>
+        <p>Discover the benefits of dental implants for a confident smile. Restore your teeth's function and aesthetics with our expert implant solutions today!</p>
+        <a class="bl-more" href="posts/discover-the-promising-world-of-teeth-implants-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va.html">Navigating the World of Dental Implant Surgery in McLean, VA</a></h2>
+        <p>Explore our completed dental implant work with a temporary abutment. With our expert solutions, enjoy a seamless transition to your new smile!</p>
+        <a class="bl-more" href="posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/integrating-treatment-dental-practices-into-your-dental-implant-procedure.html">Integrating Treatment Dental Practices into Your Dental Implant Procedure</a></h2>
+        <p>Dental implants are a reliable solution for missing teeth, providing a natural appearance and restoring functionality for a confident smile.</p>
+        <a class="bl-more" href="posts/integrating-treatment-dental-practices-into-your-dental-implant-procedure.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/revolutionize-your-smile-with-dental-implants-in-mclean-va.html">Revolutionize Your Smile with Dental Implants in McLean, VA</a></h2>
+        <p>Get natural, durable dental implants in McLean, VA, with Dr. Esam Nahlah. Restore your smile and confidence at Dental Group of Tysons.</p>
+        <a class="bl-more" href="posts/revolutionize-your-smile-with-dental-implants-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth.html">Navigating the Path to Smile Restoration: Unveiling the Secrets of Implants of Teeth</a></h2>
+        <p>Learn about the process, benefits, and common misconceptions about implants of teeth with us. Dive into our blog now!</p>
+        <a class="bl-more" href="posts/navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/unraveling-the-complexities-complications-in-implant-dentistry.html">Unraveling the Complexities: Complications in Implant Dentistry</a></h2>
+        <p>Learn about potential complications in implant dentistry and discover how Dr. Nahlah uses his skill and expertise to tackle challenges.</p>
+        <a class="bl-more" href="posts/unraveling-the-complexities-complications-in-implant-dentistry.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/complete-teeth-replacement-the-perks-of-dental-implants-explained.html">Complete Teeth Replacement: The Perks of Dental Implants Explained</a></h2>
+        <p>Discover the benefits of dental implants as a complete teeth replacement option. Learn why they're an effective choice at Dr Nahlahs' office.</p>
+        <a class="bl-more" href="posts/complete-teeth-replacement-the-perks-of-dental-implants-explained.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/revamp-your-smile-understanding-the-basics-of-tooth-implants-in-mclean-va.html">Revamp Your Smile: Understanding the Basics of Tooth Implants in McLean, VA</a></h2>
+        <p>Learn about tooth implants in McLean, VA with expert insights from Dr. Nahlah at Dental Group of Tysons. Contact us today!</p>
+        <a class="bl-more" href="posts/revamp-your-smile-understanding-the-basics-of-tooth-implants-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/longevity-of-dental-implants-causes-and-fixes-for-damages.html">Longevity of Dental Implants: Causes and Fixes for Damages</a></h2>
+        <p>Dental implants are the perfect solution for restoring your smile and confidence. This advanced dental procedure restores function and aesthetics.</p>
+        <a class="bl-more" href="posts/longevity-of-dental-implants-causes-and-fixes-for-damages.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/navigating-the-world-of-dental-implants-an-experts-guide.html">Navigating the World of Dental Implants: An Expert’s Guide</a></h2>
+        <p>Looking for a permanent solution to missing teeth? Learn about dental implants, a reliable option to restore your smile. Schedule today!</p>
+        <a class="bl-more" href="posts/navigating-the-world-of-dental-implants-an-experts-guide.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants.html">Exploring Your Options for Replacing a Missing Tooth: The Advantage of Dental Implants</a></h2>
+        <p>Achieve a perfect smile with dental implants. Our highly skilled team offers personalized care and long-lasting solutions for missing teeth.</p>
+        <a class="bl-more" href="posts/exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/discovering-the-benefits-and-process-of-snap-on-dentures-in-mclean-va.html">Discovering the Benefits and Process of Snap-On Dentures in McLean, VA</a></h2>
+        <p>Discover the benefits and process of snap-on dentures in McLean, VA with Dr. Esam Nahlah. Enhance your smile with secure dentures.</p>
+        <a class="bl-more" href="posts/discovering-the-benefits-and-process-of-snap-on-dentures-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/implant-vs-implant-clearing-the-confusion-on-dental-implants.html">Implant vs Inplant: Clearing the Confusion on Dental Implants</a></h2>
+        <p>Restore your smile with natural-looking dental implants. Our skilled dentists offer personalized solutions for a confident, healthy mouth.</p>
+        <a class="bl-more" href="posts/implant-vs-implant-clearing-the-confusion-on-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/are-dental-implants-worth-the-cost.html">Are Dental Implants Worth the Cost?</a></h2>
+        <p>Consider dental implants as a permanent solution for missing teeth. Learn more about the procedure from our experienced team.</p>
+        <a class="bl-more" href="posts/are-dental-implants-worth-the-cost.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants.html">Revolutionize Your Smile: A Journey Through Whole Set of Teeth Implants</a></h2>
+        <p>Looking for a long-term solution for missing teeth? Explore the advantages of dental implants and how they can improve your oral health.</p>
+        <a class="bl-more" href="posts/revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/revolutionizing-dental-restoration-the-top-implant-techniques.html">Revolutionizing Dental Restoration: The Top Implant Techniques by Dr. Nahlah, Esam</a></h2>
+        <p>Discover advanced dental implant solutions with Dr. Nahlah Esam at Dental Group of Tysons for a healthier, beautiful smile.</p>
+        <a class="bl-more" href="posts/revolutionizing-dental-restoration-the-top-implant-techniques.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/want-to-learn-how-to-take-care-of-your-dental-implants-here-is-how.html">Want To Learn How To Take Care Of Your Dental Implants? Here Is How</a></h2>
+        <p>Regain your smile's functionality and aesthetics with dental implants. We offer state-of-the-art implant procedures. Schedule an appointment today!</p>
+        <a class="bl-more" href="posts/want-to-learn-how-to-take-care-of-your-dental-implants-here-is-how.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants.html">Can Anything Be Done If I Am Not An Immediate Candidate For Dental Implants?</a></h2>
+        <p>Restore your smile with dental implants. Our experienced team offers safe and effective implant solutions. Book your consultation today!</p>
+        <a class="bl-more" href="posts/can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/are-there-side-effects-to-dental-implant-procedures.html">Are There Side Effects To Dental Implant Procedures?</a></h2>
+        <p>Say goodbye to missing teeth with dental implants. We provide personalized implant treatments to enhance your oral health. Learn more now!</p>
+        <a class="bl-more" href="posts/are-there-side-effects-to-dental-implant-procedures.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/should-i-upgrade-my-smile-from-traditional-dentures-to-all-on-4-dental-implants-in-mclean-va.html">Should I Upgrade My Smile From Traditional Dentures To All-On-4® Dental Implants In McLean, VA?</a></h2>
+        <p>Upgrade your smile from traditional dentures to All-On-4® dental implants in McLean, VA. Contact Dr. Esam Nahlah at Dental Group of Tysons for a life-changing appointment</p>
+        <a class="bl-more" href="posts/should-i-upgrade-my-smile-from-traditional-dentures-to-all-on-4-dental-implants-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/ready-to-learn-how-full-mouth-dental-implants-are-cost-effective.html">Ready To Learn How Full Mouth Dental Implants Are Cost-Effective?</a></h2>
+        <p>Discover the benefits of implant dentistry. Enhance your appearance and regain the ability to chew confidently with tooth implant solutions. Book a consultation today!</p>
+        <a class="bl-more" href="posts/ready-to-learn-how-full-mouth-dental-implants-are-cost-effective.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/how-many-missing-teeth-can-dental-implants-replace.html">How Many Missing Teeth Can Dental Implants Replace?</a></h2>
+        <p>Discover the benefits of dental implant surgery and restore your smile with our expert guide. Learn more today!</p>
+        <a class="bl-more" href="posts/how-many-missing-teeth-can-dental-implants-replace.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/can-i-upgrade-my-smile-from-traditional-dentures-to-implant-supported-dentures.html">Can I Upgrade My Smile From Traditional Dentures To Implant Supported Dentures?</a></h2>
+        <p>Restore your smile with implant dentistry and replace missing teeth with durable dental implants for a natural look. Learn more!</p>
+        <a class="bl-more" href="posts/can-i-upgrade-my-smile-from-traditional-dentures-to-implant-supported-dentures.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/considering-getting-treated-with-all-on-4-dental-implants-in-mclean-va-this-is-why-you-should.html">Considering Getting Treated With All-On-4® Dental Implants In McLean, VA? This Is Why You Should</a></h2>
+        <p>Experience the transformative benefits of All-On-4® dental implants in McLean, VA. Trust Dr. Esam Nahlah at Dental Group of Tysons for a custom-made, durable smile. Schedule your appointment now!</p>
+        <a class="bl-more" href="posts/considering-getting-treated-with-all-on-4-dental-implants-in-mclean-va-this-is-why-you-should.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/can-i-have-a-customized-new-smile-with-full-mouth-dental-implants.html">Can I Have A Customized New Smile With Full Mouth Dental Implants?</a></h2>
+        <p>Say goodbye to gaps in your smile with advanced dental implant technology. Discover the transformative benefits of this modern tooth replacement option.</p>
+        <a class="bl-more" href="posts/can-i-have-a-customized-new-smile-with-full-mouth-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/ready-to-learn-what-a-typical-full-mouth-dental-implant-procedure-looks-like.html">Ready To Learn What A Typical Full Mouth Dental Implant Procedure Looks Like?</a></h2>
+        <p>Regain confidence with dental implants. Achieve a natural-looking smile and explore this advanced tooth replacement solution today!</p>
+        <a class="bl-more" href="posts/ready-to-learn-what-a-typical-full-mouth-dental-implant-procedure-looks-like.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/do-i-need-a-full-mouth-dental-implant-consultation.html">Do I Need A Full Mouth Dental Implant Consultation?</a></h2>
+        <p>Discover the benefits of dental implants. Replace missing teeth with artificial tooth roots. Enhance your smile and functionality today!</p>
+        <a class="bl-more" href="posts/do-i-need-a-full-mouth-dental-implant-consultation.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/how-exactly-do-implant-supported-dentures-in-mclean-va-benefit-my-smile.html">How Exactly Do Implant Supported Dentures In McLean, VA Benefit My Smile?</a></h2>
+        <p>Discover how implant-supported dentures in McLean, VA, offer a comfortable and stable tooth replacement, enhancing your smile and oral health.</p>
+        <a class="bl-more" href="posts/how-exactly-do-implant-supported-dentures-in-mclean-va-benefit-my-smile.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/after-my-dental-implants-are-placed-how-will-i-know-if-i-have-peri-implantitis.html">After My Dental Implants Are Placed, How Will I Know If I Have Peri-Implantitis?</a></h2>
+        <p>Transform your future with advanced dental implant treatments. Achieve a beautiful smile. Come to our office today!</p>
+        <a class="bl-more" href="posts/after-my-dental-implants-are-placed-how-will-i-know-if-i-have-peri-implantitis.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/have-multiple-missing-teeth-you-should-get-treated-with-multiple-dental-implants.html">Have Multiple Missing Teeth? You Should Get Treated With Multiple Dental Implants</a></h2>
+        <p>A revolutionary solution for missing teeth, providing strength, stability, and a natural-looking smile. Restore your confidence today!</p>
+        <a class="bl-more" href="posts/have-multiple-missing-teeth-you-should-get-treated-with-multiple-dental-implants.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/should-sedation-dentistry-be-used-for-full-mouth-dental-implant-procedures.html">Should Sedation Dentistry Be Used For Full Mouth Dental Implant Procedures?</a></h2>
+        <p>Improve your life with our full mouth dental implant procedure. Lifelike appearance, secure fit. Get your new smile now!</p>
+        <a class="bl-more" href="posts/should-sedation-dentistry-be-used-for-full-mouth-dental-implant-procedures.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/are-there-advantages-to-replacing-my-missing-teeth-with-dental-implants-in-mclean-va.html">Are There Advantages To Replacing My Missing Teeth With Dental Implants In McLean, VA?</a></h2>
+        <p>Discover the advantages of replacing missing teeth with dental implants in McLean, VA for a beautiful, functional, and healthy smile.</p>
+        <a class="bl-more" href="posts/are-there-advantages-to-replacing-my-missing-teeth-with-dental-implants-in-mclean-va.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with.html">Are There Factors That Determine Which Type Of Dental Implant Procedure I Can Get Treated With?</a></h2>
+        <p>Transform your smile with our dental implants. A long-lasting solution for tooth loss, offering natural aesthetics and functionality. Contact us today!</p>
+        <a class="bl-more" href="posts/are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/porcelain-veneers-the-answers-to-your-questions.html">Porcelain Veneers, The Answers to Your Questions</a></h2>
+        <p>Are you thinking about getting porcelain veneers to bright your smile? In this post we answer the most common questions. Read now.</p>
+        <a class="bl-more" href="posts/porcelain-veneers-the-answers-to-your-questions.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/dental-implants-everything-you-need-to-know.html">Dental Implants, Everything You Need to Know</a></h2>
+        <p>Dental Implants are a long term solution for teeth loss and bad teeth. Here, in this article we answer all the questions you may have.</p>
+        <a class="bl-more" href="posts/dental-implants-everything-you-need-to-know.html">Read the article</a>
+      </article>
+      <article class="bl-card" data-rv>
+        <h2><a href="posts/all-on-four-your-questions.html">All-On-Four, Your Questions Answered</a></h2>
+        <p>In this post Dr. Nahlah answer most common questions about the dental implant All-on-Four. Click here to find out what was asked.</p>
+        <a class="bl-more" href="posts/all-on-four-your-questions.html">Read the article</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="posts.html">Journal</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
+          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+{
+  "bodyHeight": {
+    "390": 17017,
+    "768": 15924,
+    "1440": 10946
+  },
+  "overflow": {
+    "390": {
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "widestRight": 390,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 390
+      },
+      "offenders": []
+    },
+    "768": {
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "widestRight": 768,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 768
+      },
+      "offenders": []
+    },
+    "1440": {
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "innerWidth": 1440,
+      "clientWidth": 1440,
+      "widestRight": 1440,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 1440
+      },
+      "offenders": []
+    }
+  },
+  "sectionsAt1440": [
+    {
+      "id": "top",
+      "class": "section_lp_hero",
+      "offsetTop": 79,
+      "height": 959,
+      "heading": "A Smile You’ll LoveIn Every Photo"
+    },
+    {
+      "id": null,
+      "class": "section_lp_stats",
+      "offsetTop": 1038,
+      "height": 101,
+      "heading": null
+    },
+    {
+      "id": null,
+      "class": "section_lp_journey",
+      "offsetTop": 1139,
+      "height": 2180,
+      "heading": "From Hiding Your SmileTo Living Well"
+    },
+    {
+      "id": null,
+      "class": "section_lp_difference",
+      "offsetTop": 3319,
+      "height": 1127,
+      "heading": "Why Patients Drive PastOther Cosmetic Dentists"
+    },
+    {
+      "id": null,
+      "class": "section_lp_doctor",
+      "offsetTop": 4447,
+      "height": 1304,
+      "heading": "The Dentist Other Dentists Learn Advanced Cosmetics From"
+    },
+    {
+      "id": null,
+      "class": "section_lp_treatments",
+      "offsetTop": 5750,
+      "height": 1124,
+      "heading": "From One Small RefinementTo A Complete Smile"
+    },
+    {
+      "id": null,
+      "class": "section_lp_process",
+      "offsetTop": 6874,
+      "height": 1090,
+      "heading": "Your Dental WorkShouldn't Look & Feel Like Dental Work"
+    },
+    {
+      "id": null,
+      "class": "section_lp_tour",
+      "offsetTop": 7964,
+      "height": 1105,
+      "heading": "A Space Designed For Your Comfort"
+    },
+    {
+      "id": null,
+      "class": "section_lp_faq",
+      "offsetTop": 9069,
+      "height": 952,
+      "heading": "Everything Patients Ask Before Booking"
+    },
+    {
+      "id": null,
+      "class": "section_lp_closer",
+      "offsetTop": 10021,
+      "height": 594,
+      "heading": "Stop PostponingThe Smile You Actually Want"
+    }
+  ],
+  "sectionsByWidth": {
+    "390": [
+      {
+        "class": "section_lp_hero",
+        "height": 1840,
+        "heading": "A Smile You’ll LoveIn Every Photo"
+      },
+      {
+        "class": "section_lp_stats",
+        "height": 206,
+        "heading": null
+      },
+      {
+        "class": "section_lp_journey",
+        "height": 3580,
+        "heading": "From Hiding Your SmileTo Living Well"
+      },
+      {
+        "class": "section_lp_difference",
+        "height": 1803,
+        "heading": "Why Patients Drive PastOther Cosmetic Dentists"
+      },
+      {
+        "class": "section_lp_doctor",
+        "height": 1911,
+        "heading": "The Dentist Other Dentists Learn Advanced Cosmetics From"
+      },
+      {
+        "class": "section_lp_treatments",
+        "height": 2067,
+        "heading": "From One Small RefinementTo A Complete Smile"
+      },
+      {
+        "class": "section_lp_process",
+        "height": 1581,
+        "heading": "Your Dental WorkShouldn't Look & Feel Like Dental Work"
+      },
+      {
+        "class": "section_lp_tour",
+        "height": 2186,
+        "heading": "A Space Designed For Your Comfort"
+      },
+      {
+        "class": "section_lp_faq",
+        "height": 945,
+        "heading": "Everything Patients Ask Before Booking"
+      },
+      {
+        "class": "section_lp_closer",
+        "height": 536,
+        "heading": "Stop PostponingThe Smile You Actually Want"
+      }
+    ],
+    "768": [
+      {
+        "class": "section_lp_hero",
+        "height": 1657,
+        "heading": "A Smile You’ll LoveIn Every Photo"
+      },
+      {
+        "class": "section_lp_stats",
+        "height": 199,
+        "heading": null
+      },
+      {
+        "class": "section_lp_journey",
+        "height": 2710,
+        "heading": "From Hiding Your SmileTo Living Well"
+      },
+      {
+        "class": "section_lp_difference",
+        "height": 1606,
+        "heading": "Why Patients Drive PastOther Cosmetic Dentists"
+      },
+      {
+        "class": "section_lp_doctor",
+        "height": 1939,
+        "heading": "The Dentist Other Dentists Learn Advanced Cosmetics From"
+      },
+      {
+        "class": "section_lp_treatments",
+        "height": 2195,
+        "heading": "From One Small RefinementTo A Complete Smile"
+      },
+      {
+        "class": "section_lp_process",
+        "height": 2124,
+        "heading": "Your Dental WorkShouldn't Look & Feel Like Dental Work"
+      },
+      {
+        "class": "section_lp_tour",
+        "height": 1559,
+        "heading": "A Space Designed For Your Comfort"
+      },
+      {
+        "class": "section_lp_faq",
+        "height": 958,
+        "heading": "Everything Patients Ask Before Booking"
+      },
+      {
+        "class": "section_lp_closer",
+        "height": 582,
+        "heading": "Stop PostponingThe Smile You Actually Want"
+      }
+    ],
+    "1440": [
+      {
+        "class": "section_lp_hero",
+        "height": 959,
+        "heading": "A Smile You’ll LoveIn Every Photo"
+      },
+      {
+        "class": "section_lp_stats",
+        "height": 101,
+        "heading": null
+      },
+      {
+        "class": "section_lp_journey",
+        "height": 2180,
+        "heading": "From Hiding Your SmileTo Living Well"
+      },
+      {
+        "class": "section_lp_difference",
+        "height": 1127,
+        "heading": "Why Patients Drive PastOther Cosmetic Dentists"
+      },
+      {
+        "class": "section_lp_doctor",
+        "height": 1304,
+        "heading": "The Dentist Other Dentists Learn Advanced Cosmetics From"
+      },
+      {
+        "class": "section_lp_treatments",
+        "height": 1124,
+        "heading": "From One Small RefinementTo A Complete Smile"
+      },
+      {
+        "class": "section_lp_process",
+        "height": 1090,
+        "heading": "Your Dental WorkShouldn't Look & Feel Like Dental Work"
+      },
+      {
+        "class": "section_lp_tour",
+        "height": 1105,
+        "heading": "A Space Designed For Your Comfort"
+      },
+      {
+        "class": "section_lp_faq",
+        "height": 952,
+        "heading": "Everything Patients Ask Before Booking"
+      },
+      {
+        "class": "section_lp_closer",
+        "height": 594,
+        "heading": "Stop PostponingThe Smile You Actually Want"
+      }
+    ]
+  },
+  "headingContrast": {
+    "390": {
+      "text": "A Smile You’ll LoveIn Every Photo",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(46, 54, 52)",
+      "bgFrom": "section.section_lp_hero",
+      "contrast": 12.4
+    },
+    "768": {
+      "text": "A Smile You’ll LoveIn Every Photo",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(46, 54, 52)",
+      "bgFrom": "section.section_lp_hero",
+      "contrast": 12.4
+    },
+    "1440": {
+      "text": "A Smile You’ll LoveIn Every Photo",
+      "color": "rgb(255, 255, 255)",
+      "bg": "rgb(46, 54, 52)",
+      "bgFrom": "section.section_lp_hero",
+      "contrast": 12.4
+    }
+  }
+}

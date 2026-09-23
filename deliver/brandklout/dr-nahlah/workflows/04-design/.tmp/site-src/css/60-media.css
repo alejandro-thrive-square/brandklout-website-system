@@ -1,0 +1,70 @@
+/* ==========================================================================
+   MEDIA — the image-led parts.
+
+   The build had one way to show a picture beside copy (.pk-split) and one way
+   to show a before/after (.pk-ba). Everything else a page wanted to say, it
+   said in prose, which is why the service pages ran 700-1200 words against two
+   or three photographs while the practice's own asset library holds 370.
+
+   Two components, both deliberately caption-first: the picture carries the
+   claim and the words underneath it are a label, not a paragraph.
+
+     .mz      mosaic — a grid of figures with optional wide/tall spans. Lives
+              inside a .wrap like any other kit part.
+     .mband   band  — one full-bleed photograph across the viewport with a
+              single line over it. A section in its own right, so it escapes
+              the wrap; used to break a long page instead of another heading.
+
+   Both reuse the shell's generic hooks: data-rv for the reveal, data-drift for
+   the parallax. No module of their own, and nothing to register.
+   ========================================================================== */
+
+/* ---------- mosaic ---------- */
+.mz{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.5rem,1.2vw,1rem)}
+.mz .mz-fig{position:relative;overflow:hidden;margin:0;aspect-ratio:4/3;background:var(--mist)}
+.mz .mz-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.22,1,.36,1)}
+.mz .mz-fig:hover img{transform:scale(1.04)}
+/* The caption sits over the foot of the picture rather than under it, so a row
+   of figures keeps one baseline whatever the label lengths are. */
+.mz .mz-cap{position:absolute;left:0;right:0;bottom:0;z-index:1;
+  padding:clamp(.7rem,1.4vw,1.05rem);color:#fff;
+  background:linear-gradient(transparent,var(--scrim));
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+/* A second line under the label, for the one figure per mosaic that is carrying
+   a fact rather than a name. Deliberately not a paragraph. */
+.mz .mz-cap b{display:block;font-family:var(--f-display);font-size:calc(1.18rem * var(--t-sm));
+  letter-spacing:0;text-transform:none;font-weight:400;line-height:1.25;margin-bottom:.2rem}
+/* Portrait sources — headshots, arch renders — crop badly at 4/3. */
+.mz .mz-fig.mz-tall{aspect-ratio:3/4}
+.mz .mz-fig.mz-wide{aspect-ratio:16/9;grid-column:span 2}
+/* A diagram or a render on the cream, not a photograph cropped to the box. */
+.mz .mz-fig.mz-plain{background:var(--bg-3)}
+.mz .mz-fig.mz-plain img{object-fit:contain;padding:clamp(.9rem,1.8vw,1.6rem)}
+@media(min-width:720px){
+  .mz.mz-3{grid-template-columns:repeat(3,1fr)}
+  .mz.mz-4{grid-template-columns:repeat(4,1fr)}
+}
+/* Below 720 a 4-up would render at thumbnail size and a wide span would eat the
+   whole row twice over, so spans collapse with the columns. */
+@media(max-width:719px){
+  .mz .mz-fig.mz-wide{grid-column:span 2;aspect-ratio:16/10}
+}
+
+/* ---------- full-bleed band ---------- */
+.mband{position:relative;overflow:hidden;height:clamp(18rem,42vw,34rem);
+  display:grid;align-items:end;background:var(--ink-900)}
+.mband .mband-fig{position:absolute;inset:0;margin:0;overflow:hidden}
+.mband .mband-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform}
+/* The scrim is the whole reason a line of text can sit on any of the 370 source
+   photographs without being vetted one at a time. */
+.mband .mband-fig::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(transparent 30%,var(--scrim))}
+.mband .mband-in{position:relative;z-index:1;padding:0 var(--gutter) clamp(1.8rem,4vw,3rem);
+  max-width:var(--maxw);margin-inline:auto;width:100%}
+.mband .mband-line{color:#fff;font-family:var(--f-display);font-weight:400;
+  font-size:calc(2.1rem * var(--t-mid));line-height:1.15;max-width:22ch;margin:0}
+.mband .mband-kicker{display:block;color:var(--gold-light);font-family:var(--f-body);
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  margin-bottom:.6rem}

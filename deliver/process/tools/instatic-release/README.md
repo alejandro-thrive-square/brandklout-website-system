@@ -31,7 +31,7 @@ the sectioned `~/.webzite/.env` like `instatic-embeds/rollout-site-scripts.mjs`)
 
 ## Conventions
 
-- Run from the client folder so outputs land in its `.tmp/instatic-release/` (gitignored). The inventory
+- Run from the scenario 5 step folder in main so outputs land in its `output/instatic-release/` (gitignored). The inventory
   can run anywhere.
 - Railway token: `~/.railway/config.json` `user.accessToken` only. `user.token` is null and the shared
   `RAILWAY_TOKEN` is rejected. Never printed.
@@ -53,4 +53,4 @@ one staging instance and read every output.
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md). Scripts and this README are committed;
-outputs go to the client's `.tmp/`. No token or password is ever written here.
+outputs go to the client's `output/`. No token or password is ever written here.

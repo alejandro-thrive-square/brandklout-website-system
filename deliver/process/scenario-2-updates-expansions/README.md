@@ -29,11 +29,11 @@ Use something else when:
 ## The steps
 | Step | Directive | Output |
 | :--- | :--- | :--- |
-| 01 | [Request intake](./01-request-intake.md): Asana/BugHerd request, access, platform, baseline, scope | `change-list.md`, baseline `publish-state.txt` |
-| 02 | [Build](./02-build.md): the Webflow change types, then the Instatic path | the change in the Webflow draft (or Instatic draft) |
-| 03 | [QA and publish](./03-qa-and-publish.md): gates, staging, the live publish rules | verified staging/live, runbook run |
+| 01 | [Request intake](./01-request-intake/01-request-intake.md): Asana/BugHerd request, access, platform, baseline, scope | `change-list.md`, baseline `publish-state.txt` |
+| 02 | [Build](./02-build/02-build.md): the Webflow change types, then the Instatic path | the change in the Webflow draft (or Instatic draft) |
+| 03 | [QA and publish](./03-qa-and-publish/03-qa-and-publish.md): gates, staging, the live publish rules | verified staging/live, runbook run |
 
-Per-request working folder: `deliver/brandklout/<client>/workflows/updates/.tmp/<YYYY-MM-DD>-<slug>/`.
+Per-request working folder: `deliver/brandklout/<client>/scenario-2-updates-expansions/<step>/output/<YYYY-MM-DD>-<slug>/`.
 
 ## The rules that matter most
 1. **Every Webflow publish is whole-site.** It ships every pending Designer edit, including other
@@ -47,18 +47,18 @@ Per-request working folder: `deliver/brandklout/<client>/workflows/updates/.tmp/
 5. **Walk the Designer tree, not only the published HTML.** Unpublished foreign content hides there.
 
 ## Promoted scripts (in `deliver/process/tools/webflow-build/`)
-All Node 18+, no install. Redirect output to a file (`> .tmp/x.log 2>&1`), never pipe it. The site id
+All Node 18+, no install. Redirect output to a file (`> output/x.log 2>&1`), never pipe it. The site id
 comes from `--site` or `WF_SITE_ID`.
 
 | Script | Purpose | Usage | Origin |
 | :--- | :--- | :--- | :--- |
-| `wfmcp.mjs` | Webflow MCP JSON-RPC client that reuses Claude Code's stored OAuth grant | `node wfmcp.mjs list` / `call <tool> '<json>'`; `WEBFLOW_MCP_INSTANCE=webflow-oceanic-dental` | bk-grand-mission `workflows/07-webflow-build/.tmp/wfmcp.mjs` (copies on arvada, legacy, marvel) |
-| `wf.mjs` | Front end: site guard, Designer vs Data-API argument shapes, `session_id`/`agent_id`, 429 retries | `node wf.mjs <tool> '<action>' --site <id> [--page <id>] [--out f]` | bk-grand-mission `.tmp/mcp.mjs` + bk-legacy-dental / bk-marvel-dental `.tmp/native/wf.mjs` |
-| `wf-publish.mjs` | Pending-page report, staging-only publish, guarded live publish | `state --site <id>`; `staging --site <id> --yes`; `live --site <id> --domains a,b --yes [--expect ids]` | bk-grand-mission `.tmp/publish-staging.mjs` + the lastUpdated check from the Termly rollout and bk-oceanic-dental |
-| `wf-tree-audit.mjs` | Designer-tree audit: foreign names/classes, alt text, em dashes, empty embeds, dashed phone numbers, minted classes | `--site <id> --pages <ids/slug/all> --foreign "a,b" [--foreign-prefixes lw-] [--phone digits]` | bk-stone-dental `04-design/.tmp/build/build_v2.py verify`, bk-arvada `v2-native/extract-v1-sections.mjs`, bk-marvel-dental `08-qa/.tmp/gate.mjs` |
+| `wfmcp.mjs` | Webflow MCP JSON-RPC client that reuses Claude Code's stored OAuth grant | `node wfmcp.mjs list` / `call <tool> '<json>'`; `WEBFLOW_MCP_INSTANCE=webflow-oceanic-dental` | bk-grand-mission `workflows/07-webflow-build/output/wfmcp.mjs` (copies on arvada, legacy, marvel) |
+| `wf.mjs` | Front end: site guard, Designer vs Data-API argument shapes, `session_id`/`agent_id`, 429 retries | `node wf.mjs <tool> '<action>' --site <id> [--page <id>] [--out f]` | bk-grand-mission `output/mcp.mjs` + bk-legacy-dental / bk-marvel-dental `output/native/wf.mjs` |
+| `wf-publish.mjs` | Pending-page report, staging-only publish, guarded live publish | `state --site <id>`; `staging --site <id> --yes`; `live --site <id> --domains a,b --yes [--expect ids]` | bk-grand-mission `output/publish-staging.mjs` + the lastUpdated check from the Termly rollout and bk-oceanic-dental |
+| `wf-tree-audit.mjs` | Designer-tree audit: foreign names/classes, alt text, em dashes, empty embeds, dashed phone numbers, minted classes | `--site <id> --pages <ids/slug/all> --foreign "a,b" [--foreign-prefixes lw-] [--phone digits]` | bk-stone-dental `04-design/output/build/build_v2.py verify`, bk-arvada `v2-native/extract-v1-sections.mjs`, bk-marvel-dental `08-qa/output/gate.mjs` |
 | `wf-register-script.mjs` | Register and apply a site script: 2000-char cap, hosted-copy compare, 404 handling | `--site <id> --name X --version 1.0.0 --file x.min.js [--location header] [--dry]` | Consent rollout procedure (tools/termly-ghl-consent) and bk-oceanic-dental DNI runs |
-| `upload-asset.mjs` | Upload one file to the asset library (MD5, S3 field order), print its hostedUrl | `--site <id> <file> [name]` | bk-legacy-dental `.tmp/native/upload-asset.mjs` |
-| `lint-css.mjs` | Gate CSS for `data_whtml_builder` (media queries, selectors, clamp, fonts) | `<file.css> --fonts "karla,noto serif"` | bk-legacy-dental `.tmp/native/lint-css.mjs` (copies on arvada, marvel) |
+| `upload-asset.mjs` | Upload one file to the asset library (MD5, S3 field order), print its hostedUrl | `--site <id> <file> [name]` | bk-legacy-dental `output/native/upload-asset.mjs` |
+| `lint-css.mjs` | Gate CSS for `data_whtml_builder` (media queries, selectors, clamp, fonts) | `<file.css> --fonts "karla,noto serif"` | bk-legacy-dental `output/native/lint-css.mjs` (copies on arvada, marvel) |
 | `check-ghl-form.mjs` | GHL form: save-and-exit flag and the 11 consent fields | `<formId> [...]` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs` |
 | `live-page-check.mjs` | Served-HTML check: status, cache, foreign names, em dashes, empty embeds, phones, forms, marker | `<url,url> [--foreign a,b] [--phone d] [--marker t]` | bk-stone-dental em-dash pass, bk-marvel-dental `gate.mjs`, bk-arvada `verify_links.mjs` |
 | `site-scripts/ghl-dni-loader.template.js` | One or several GHL number pools on one page | fill `POOLS`, minify, register | bk-oceanic-dental `site-scripts/dni-loader.js` 2.0.0 |

@@ -206,7 +206,7 @@ every page inherits it.
 ## Verification
 
 ```bash
-node scripts/fluid-root.mjs --check deliver/brandklout/<client>/workflows/03-design-build/.tmp/site-src/
+node scripts/fluid-root.mjs --check deliver/brandklout/<client>/scenario-0-new-site/03-design-build/output/code/site-src/
 ```
 
 The gate resolves linked stylesheets before judging, so it sees snippets that live in a shared CSS
@@ -218,7 +218,7 @@ The static gate cannot see rendering. Also confirm during responsive QA that com
 479/480 boundary looks deliberate.
 
 Two runtime checks are worth copying rather than re-deriving. Reference implementations:
-`deliver/brandklout/mason-park/workflows/08-qa/.tmp/root-proof.mjs` and `pin-fit.mjs`.
+`deliver/brandklout/mason-park/workflows/08-qa/output/root-proof.mjs` and `pin-fit.mjs`.
 
 - **Root proof.** Read the computed root at each breakpoint and compare it to `rootPxAt()` imported
   from `scripts/fluid-root.mjs`, so the table and the browser can never drift apart. Assert the

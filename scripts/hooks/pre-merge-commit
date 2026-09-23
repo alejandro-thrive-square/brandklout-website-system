@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Webzite pre-merge-commit hook — a merge into main is ONE client's folder or system files, never both.
+#
+# A client worktree merges into main when its site launches; that merge may only add or change
+# deliver/brandklout/<client>/. System updates never land through a client merge.
+# See scripts/check-scope.mjs and deliver/DELIVER_SYSTEM_RULES.md §3.
+#
+# Fast-forward merges do not run this hook: merge client branches with `git merge --no-ff`.
+# Bypass only with explicit approval: WEBZITE_SKIP_SCOPE=1 git merge ...
+
+set -uo pipefail
+[[ -n "${WEBZITE_SKIP_SCOPE:-}" ]] && exit 0
+BRANCH="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
+[[ "$BRANCH" == "main" ]] || exit 0
+ROOT="$(git rev-parse --show-toplevel)"
+[[ -f "$ROOT/scripts/check-scope.mjs" ]] || exit 0
+node "$ROOT/scripts/check-scope.mjs" --merge || {
+  echo "pre-merge-commit: this merge mixes a client folder with system files (or several clients). Aborting." >&2
+  exit 1
+}

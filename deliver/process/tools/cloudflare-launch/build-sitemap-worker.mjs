@@ -7,7 +7,7 @@
  * Generalized 2026-09-23: canonical host, exclusions and extra URLs are arguments, and a crawl
  * picks up collection entries (blog posts) that the pages API does not list.
  *
- *   node build-sitemap-worker.mjs --canonical https://www.example.com --out <client>/workflows/cloudflare/out
+ *   node build-sitemap-worker.mjs --canonical https://www.example.com --out <client>/scenario-0-new-site/06-post-launch/output/cloudflare
  *   node build-sitemap-worker.mjs --canonical https://www.example.com --out <dir> --crawl --exclude thank-you,book-thank-you
  *   node build-sitemap-worker.mjs --canonical https://www.example.com --out <dir> --no-api --extra urls.txt
  *

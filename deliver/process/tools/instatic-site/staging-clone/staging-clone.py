@@ -44,11 +44,11 @@ SEED  {a.source}  ->  {a.to}
   # OR, large site: document first, then media separately
   node clone-site.mjs --from {a.source} --to {a.to} --strategy replace
   #   media bytes -> see pull-media.js header for the railway ssh commands
-  python chunk-media.py ./.tmp/prod-full.zip ./chunks
+  python chunk-media.py ./output/prod-full.zip ./chunks
   node import-media-chunks.mjs --to {a.to} --chunks ./chunks
 
   # ALWAYS, both paths - these are the two silent failures:
-  node clone-plugins.mjs --from {a.source} --to {a.to} --files ./.tmp/plugins
+  node clone-plugins.mjs --from {a.source} --to {a.to} --files ./output/plugins
   node publish-rows.mjs --site {a.to} --table posts
 
   # publish the site, then prove it:

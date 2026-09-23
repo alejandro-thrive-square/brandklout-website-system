@@ -1,0 +1,626 @@
+/* ==========================================================================
+   THANK YOU LANDING PAGE — chapter styles
+   Asana task 1217162605683014 (parent 1217040406855578)
+
+   One block per chapter, in the order the page plays them. Tokens and the
+   shared vocabulary live in assets/kit.css.
+   ========================================================================== */
+
+/* ==========================================================================
+   SHARED — chapter progress rail
+   ========================================================================== */
+.ch__rail {
+  position: relative;
+  height: 2px;
+  width: var(--shell);
+  margin-inline: auto;
+  background: rgba(0, 34, 65, 0.12);
+  overflow: hidden;
+}
+.ch__rail i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.ch__rail--shell {
+  width: var(--shell);
+}
+.wz-static .ch__rail i {
+  transform: none;
+}
+
+/* ==========================================================================
+   CHAPTER 00 — ARRIVAL   (Asana section 1: immediate status banner)
+   ========================================================================== */
+.ty-ch-arrival {
+  position: relative;
+  isolation: isolate;
+  background: var(--blue-deep);
+  color: #fff;
+  overflow: hidden;
+  text-align: center;
+  padding-top: clamp(7rem, 10vw, 8rem);
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+.arrival__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.arrival__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  will-change: transform;
+}
+.arrival__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(104deg, rgba(0, 34, 65, 0.97) 0%, rgba(0, 34, 65, 0.9) 46%, rgba(0, 34, 65, 0.62) 100%),
+    radial-gradient(70% 60% at 50% 12%, rgba(4, 102, 156, 0.5), transparent 70%);
+}
+.arrival__aurora {
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 150%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(40% 38% at 20% 28%, rgba(4, 102, 156, 0.55), transparent 68%),
+    radial-gradient(34% 40% at 84% 16%, rgba(171, 214, 255, 0.22), transparent 70%),
+    radial-gradient(44% 40% at 62% 88%, rgba(111, 72, 133, 0.28), transparent 72%);
+  filter: blur(10px);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+.arrival__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--blue-ink);
+  opacity: 0;
+  pointer-events: none;
+}
+.status {
+  max-width: 860px;
+  margin-inline: auto;
+  display: grid;
+  gap: 1.1rem;
+  justify-items: center;
+}
+.status h1 {
+  color: #fff;
+  font-size: calc(4.4rem * var(--tx));
+  max-width: 18ch;
+}
+.ty-arrival__sub {
+  margin-inline: auto;
+  max-width: 56ch;
+  font-size: var(--body-lg);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+}
+.ty-ch-arrival .chapter-tag {
+  color: var(--blue-light);
+  margin-bottom: 0;
+}
+/* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
+   On the navy hero that is barely legible — the arrival chapter is the one
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.ty-ch-arrival .gm-label {
+  color: var(--blue-light);
+}
+.ty-ch-arrival .chapter-tag em {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* THE SIGNATURE MOMENT: the receipt stamp. Sized in one place so the ring,
+   the ripple and the check stay concentric at every breakpoint. */
+.stamp {
+  --size: clamp(84px, 11vw, 116px);
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  margin-bottom: 0.6rem;
+  color: var(--blue-light);
+}
+.stamp__ring,
+.stamp__ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(171, 214, 255, 0.5);
+}
+.stamp__ring {
+  background: rgba(171, 214, 255, 0.12);
+  backdrop-filter: blur(4px);
+}
+.stamp__ripple {
+  border-color: rgba(171, 214, 255, 0.45);
+}
+.stamp__check {
+  position: relative;
+  width: 58%;
+  height: 58%;
+  overflow: visible;
+}
+
+.status__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem clamp(1.5rem, 4vw, 3rem);
+  margin-top: 0.9rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: calc(1.09rem * var(--tx));
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+}
+.status__meta span {
+  display: grid;
+  gap: 0.15rem;
+  text-align: left;
+}
+.status__meta strong {
+  font-size: calc(0.8rem * var(--tx));
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  font-weight: 700;
+}
+/* Once these wrap to one per line, centring the row leaves the last item
+   floating alone under two full-width ones. Stack them properly instead. */
+@media (max-width: 640px) {
+  .status__meta {
+    display: grid;
+    justify-content: stretch;
+    text-align: left;
+    gap: 0.9rem;
+  }
+}
+
+/* ==========================================================================
+   CHAPTER 01 — THE FAST TRACK   (Asana section 2)
+   The box lifts into the banner above it, so the page's first move after the
+   confirmation is the phone number.
+   ========================================================================== */
+.call-box {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  padding: clamp(1.75rem, 3.5vw, 3rem);
+  border-radius: var(--r-lg);
+  background: #fff;
+  border: 1px solid var(--n-200);
+  box-shadow: var(--shadow-lg);
+  margin-top: clamp(-5.5rem, -7vw, -3.5rem);
+  position: relative;
+  z-index: 3;
+}
+@media (min-width: 900px) {
+  .call-box { grid-template-columns: 1.4fr 0.6fr; }
+}
+.call-box__copy {
+  display: grid;
+  gap: 0.9rem;
+}
+.call-box h2 {
+  font-size: calc(2.4rem * var(--tx));
+}
+.call-box__actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.now {
+  padding: clamp(1.25rem, 2.4vw, 1.75rem);
+  border-radius: var(--r-md);
+  background: var(--n-100);
+  border: 1px solid var(--n-200);
+}
+.now h3 {
+  font-size: calc(0.87rem * var(--tx));
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--n-500);
+  margin-bottom: 0.7rem;
+  font-weight: 700;
+}
+.now__status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: calc(1.45rem * var(--tx));
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.4rem;
+  color: var(--n-700);
+}
+.now__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--n-300);
+  flex: none;
+  position: relative;
+}
+/* A live status deserves a live indicator — but only when it says "open". */
+.now__status.is-open {
+  color: var(--green);
+}
+.now__status.is-open .now__dot {
+  background: var(--green);
+}
+.now__status.is-open .now__dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--green);
+  animation: pulse 2.2s var(--ease) infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  70% { transform: scale(1.5); opacity: 0; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+.now__status.is-closed {
+  color: var(--brown-dark);
+}
+.now__status.is-closed .now__dot {
+  background: var(--brown);
+}
+.now__next {
+  font-size: calc(1.09rem * var(--tx));
+  color: var(--n-700);
+  font-weight: 400;
+}
+.now__langs {
+  margin-top: 0.9rem;
+  font-size: calc(0.92rem * var(--tx));
+  color: var(--n-500);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   CHAPTER 02 — THE PATH   (pinned, scrubbed)   Asana section 3
+   The rail draws as the scene scrubs — horizontal on desktop, vertical on
+   mobile, because that is the axis the steps actually run on there.
+   ========================================================================== */
+.ch-path {
+  overflow: hidden;
+}
+.path__pin {
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+.path__head {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 640px;
+}
+.path__body {
+  position: relative;
+}
+.path__rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 27px;
+  height: 2px;
+  background: var(--n-200);
+  overflow: hidden;
+}
+.path__rail i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  display: block;
+}
+.wz-static .path__rail i {
+  transform: none;
+}
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+}
+@media (min-width: 860px) {
+  .steps { grid-template-columns: repeat(3, 1fr); }
+}
+.stepc {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding-top: 4.2rem;
+  position: relative;
+  transition: transform 0.55s var(--ease);
+}
+.stepc__n {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: calc(1.39rem * var(--tx));
+  background: var(--white);
+  color: var(--n-300);
+  border: 2px solid var(--n-200);
+  transition: background 0.5s var(--ease), color 0.5s var(--ease),
+    border-color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.stepc h3 {
+  transition: color 0.5s var(--ease);
+}
+.stepc p {
+  color: var(--n-700);
+  font-weight: 400;
+  max-width: 42ch;
+}
+/* The active step steps forward. */
+.stepc.is-active .stepc__n {
+  background: var(--blue-deep);
+  border-color: var(--blue-deep);
+  color: #fff;
+  transform: scale(1.06);
+}
+.stepc.is-active h3 {
+  color: var(--blue);
+}
+@media (max-width: 859px) {
+  .path__rail {
+    left: 27px;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: auto;
+  }
+  .path__rail i {
+    transform: scaleY(0);
+    transform-origin: 50% 0;
+  }
+  .stepc {
+    padding-top: 0;
+    padding-left: 5rem;
+    min-height: 56px;
+  }
+}
+
+/* ==========================================================================
+   CHAPTER 03 — THE PREPARATION   (pinned, scrubbed)
+   ========================================================================== */
+.ch-prep {
+  overflow: hidden;
+}
+.prep__pin {
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.prep__grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .prep__grid { grid-template-columns: 0.85fr 1.15fr; }
+}
+.prep__head h2 {
+  max-width: 14ch;
+}
+.prep__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(0.75rem, 1.6vw, 1.2rem);
+}
+.prep__item {
+  padding: clamp(1.2rem, 2.4vw, 1.9rem);
+  border-radius: var(--r-lg);
+  background: #fff;
+  border: 1px solid var(--n-200);
+  display: grid;
+  gap: 0.45rem;
+  /* Not yet reached: legible, but clearly not the one on stage. */
+  opacity: 0.5;
+  transform: translateY(6px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease),
+    border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
+}
+.prep__n {
+  font-size: calc(0.87rem * var(--tx));
+  letter-spacing: 0.2em;
+  font-weight: 800;
+  color: var(--n-300);
+  transition: color 0.5s var(--ease);
+}
+.prep__item p {
+  color: var(--n-700);
+  font-weight: 400;
+  font-size: calc(1.16rem * var(--tx));
+}
+.prep__item.is-active {
+  opacity: 1;
+  transform: none;
+  border-color: var(--blue-light);
+  box-shadow: var(--shadow-md);
+}
+.prep__item.is-active .prep__n {
+  color: var(--blue);
+}
+.wz-static .prep__item {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   CHAPTER 04 — THE TEAM
+   ========================================================================== */
+.team__media {
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+}
+.team__media figcaption {
+  margin-top: 0.9rem;
+  font-size: calc(1.04rem * var(--tx));
+  color: var(--n-500);
+  text-align: center;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   CHAPTER 05 — THE PLACE   (pinned, scrubbed)   Asana section 4
+   ========================================================================== */
+.ch-place {
+  overflow: hidden;
+}
+.place__pin {
+  gap: clamp(1.25rem, 2.6vw, 2rem);
+}
+.place__grid {
+  display: grid;
+  gap: clamp(1.75rem, 3vw, 3rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .place__grid { grid-template-columns: 0.85fr 1.15fr; }
+}
+.place__panel {
+  display: grid;
+  gap: 0.9rem;
+  align-content: center;
+}
+.place__panel h2 {
+  font-size: calc(2.4rem * var(--tx));
+  max-width: 14ch;
+}
+/* The scrub marker is absolutely positioned against this box and rides on
+   its border-left. It cannot live INSIDE the <ol> (a non-list-item child of a
+   list is invalid HTML and the headless WHTML builder rejects the whole page
+   insert), so the wrapper below owns the positioning context and the outer
+   margin instead — same box, same geometry. */
+.place__list {
+  position: relative;
+  margin: 0.4rem 0 0;
+}
+.place__details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--n-200);
+}
+/* The marker travels the three details continuously — it is the readout of
+   scroll position, not a class toggle. */
+.place__marker {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 3px;
+  height: 33.3333%;
+  background: linear-gradient(180deg, var(--blue), var(--blue-light));
+  border-radius: 2px;
+  will-change: transform;
+}
+.wz-static .place__marker {
+  display: none;
+}
+.detail {
+  opacity: 0.55;
+  transition: opacity 0.5s var(--ease);
+}
+.detail.is-on {
+  opacity: 1;
+}
+.wz-static .detail {
+  opacity: 1;
+}
+.detail h3 {
+  font-size: calc(0.89rem * var(--tx));
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+.detail p {
+  margin-bottom: 0.6rem;
+  color: var(--n-700);
+  font-weight: 400;
+}
+.detail a:not(.gm-more) {
+  color: var(--blue-deep);
+  font-weight: 600;
+  border-bottom: 1px solid var(--n-200);
+  transition: border-color 0.3s;
+}
+.detail a:not(.gm-more):hover {
+  border-color: var(--blue);
+}
+.hours--light div {
+  border-bottom: 1px dashed var(--n-200);
+}
+.hours--light dt {
+  color: var(--n-900);
+}
+.hours--light dd {
+  color: var(--n-500);
+}
+.hours--light .is-today dt,
+.hours--light .is-today dd {
+  color: var(--blue);
+  font-weight: 700;
+}
+.place__map {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--n-200);
+  box-shadow: var(--shadow-md);
+  background: var(--n-100);
+  height: min(58svh, 460px);
+  will-change: transform;
+}
+.place__map iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+/* Below the pin breakpoint the scene plays without holding the viewport, so
+   the panel and the map simply stack at readable heights. */
+@media (max-width: 759px) {
+  .place__pin,
+  .path__pin,
+  .prep__pin {
+    min-height: 0;
+  }
+  .place__map {
+    height: 340px;
+  }
+}
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PROMOTED 2026-09-23 to deliver/process/tools/instatic-site/gates/css-declared-parity.mjs
 // Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/css-parity.mjs. Paths now come from ../lib/paths.mjs (run from the client's workflow
-// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/.tmp) and the admin client from
+// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/output) and the admin client from
 // ../lib/site.mjs (refuses to run without INSTATIC_BASE_URL). Client-specific notes below are the
 // origin's record; review them against the new site before --apply.
 /**
@@ -42,7 +42,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
+const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 const LOCAL_CSS = path.join(P.DIST, 'assets/site.css')
 
 function loadEnv() {

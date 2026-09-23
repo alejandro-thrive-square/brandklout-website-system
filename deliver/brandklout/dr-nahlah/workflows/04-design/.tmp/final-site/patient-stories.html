@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Patient Stories &amp; Reviews | Dr. Nahlah Prosthodontics</title>
+<meta name="description" content="Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation at the practice's McLean and Alexandria offices.">
+<meta property="og:title" content="Patient Stories | Dr. Nahlah Prosthodontics">
+<meta property="og:description" content="Real patients, real cases, in their own words.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Patient Stories | Dr. Nahlah Prosthodontics">
+<meta name="twitter:description" content="Real patients, real cases, in their own words.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "name": "Patient Stories",
+      "description": "Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html" aria-current="page">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="posts.html">Journal</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+            <li><a href="posts.html">Journal</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     PATIENT STORIES — the six filmed testimonials published on
+     drnahlah.com/testimonials/, plus the three pull-quotes that appear
+     attributed elsewhere on that site (Melanie on /all-on-4/, Yolanda on
+     /dental-implants/, Stephen on /implant-supported-dentures/).
+     NOTHING on this page is written on a patient's behalf. Where the source
+     published no quote, the card says so rather than inventing one, and the
+     film itself is the content. The 5-out-of-5 average is the practice's own
+     published figure.
+     ========================================================================== -->
+<section class="pg-hero" id="hero" style="min-height:clamp(460px,60svh,640px)">
+  <div class="ph-bg">
+    <img src="assets/patient-story.jpg" alt="Melanie holding a photograph of her smile before treatment" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Patient Stories</span></div>
+    <h1 data-split>Six people sat down <em>on camera</em>.</h1>
+    <p class="ph-lead" data-rv>Not a review widget. Patients of this practice, filmed at it,
+      describing what the treatment was actually like.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="smile-gallery.html"><span>See their cases</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the three quoted stories ---------- -->
+<section class="pk pk-alt" id="quoted">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">In Their Words</span></div>
+      <h2 data-split>Three of them left a line worth quoting.</h2>
+    </div>
+
+    <article class="st-row" id="melanie" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/HiNtywrb4Yg" loading="lazy" title="Melanie tells her full-arch implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Full-arch implants</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">Melanie</span>
+        <blockquote class="st-q">&ldquo;My smile held me back. That&rsquo;s behind me due to my
+          dental implants.&rdquo;</blockquote>
+        <p class="st-note">Holding a photograph of her own smile before treatment.</p>
+        <a class="pk-more" href="all-on-4.html">The treatment she had</a>
+      </div>
+    </article>
+
+    <article class="st-row st-row-rev" id="yolanda" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/Vp6hSfd3oLI" loading="lazy" title="Yolanda tells her dental implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Dental implants</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">Yolanda</span>
+        <blockquote class="st-q">&ldquo;I haven&rsquo;t stopped smiling since I got my dental
+          implants!&rdquo;</blockquote>
+        <p class="st-note">Her before-and-after is in the gallery.</p>
+        <a class="pk-more" href="dental-implants.html">The treatment she had</a>
+      </div>
+    </article>
+
+    <!-- Stephen had a typographic plate here because no photograph of him is
+         published and any patient portrait dropped in would read as "this is
+         Stephen". His own film is published, so it takes the slot instead. -->
+    <article class="st-row" id="stephen" data-rv="stagger">
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/oveSqavqCIQ" loading="lazy" title="Stephen tells his implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Implant-supported dentures</figcaption>
+      </figure>
+      <div class="st-body">
+        <span class="st-name">Stephen</span>
+        <blockquote class="st-q">&ldquo;Dental implants completely changed my life.&rdquo;</blockquote>
+        <p class="st-note">Published alongside the practice&rsquo;s denture work.</p>
+        <a class="pk-more" href="dental-implants.html">The treatment he had</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ---------- the three filmed-only stories ---------- -->
+<section class="pk" id="filmed">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Filmed</span></div>
+      <h2 data-split>Three more told it on film only.</h2>
+      <p data-rv>No pull-quote was ever published for these three, so none is written here.</p>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
+      <article class="pk-card" id="donita">
+        <h3>Donita</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/R_cKCMsVr8o" loading="lazy" title="Donita's testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <p>Filmed at the practice. Published without a written quote.</p>
+      </article>
+      <article class="pk-card" id="barbara">
+        <h3>Barbara</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/yTCwgaq4zqw" loading="lazy" title="Barbara's testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <p>Filmed at the practice. Published without a written quote.</p>
+      </article>
+      <article class="pk-card" id="couple">
+        <h3>A couple, treated together</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/bn3vdCgDTrc" loading="lazy" title="A joint patient testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <p>Two patients treated at the same time, filmed together. The one pairing that is inferred rather than confirmed.</p>
+      </article>
+    </div>
+    <!-- The six films are wired, 2026-08-18. Five pairings are confirmed by the
+         YouTube title matching the patient's published quote or naming her
+         outright; the couple's is inferred by elimination and is flagged on the
+         card itself. Ids and the derivation are in
+         03-graphic-resources/.tmp/video-embeds.csv and in the commit message.
+         They are hot-linked to YouTube, as the practice's own site does;
+         self-host only if the client turns out to own the masters. -->
+    <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
+      <a class="pk-more" href="contact.html#book">Ask to speak to a patient</a></p>
+  </div>
+</section>
+
+<!-- ---------- band ---------- -->
+<section class="mband" id="band">
+  <figure class="mband-fig">
+    <img src="assets/pt-yolanda-transformation.jpg" alt="Yolanda after her implant treatment" data-drift loading="lazy">
+  </figure>
+  <div class="mband-in" data-rv>
+    <span class="mband-kicker">Named, on camera</span>
+    <p class="mband-line">Harder to fake than a five-star average.</p>
+  </div>
+</section>
+
+<!-- ---------- the score ----------
+     Cut from three paragraphs to one on 2026-08-19. The caveat about reading a
+     perfect average carefully is the point of the section and stays; the two
+     paragraphs restating it do not. The 4.9 figure is the practice's own. -->
+<section class="pk pk-light" id="score">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Rating</span></div>
+      <h2 data-split>Five out of five, and what that is worth.</h2>
+      <p>The practice reports <strong>4.9 out of 5 stars</strong> across the reviews it has
+        collected. A perfect average is worth reading carefully on any practice's site, which is
+        why this page leads with the films instead.</p>
+    </div>
+    <div class="mz mz-4" data-rv="stagger">
+      <figure class="mz-fig">
+        <img src="assets/pt-hero-1.jpg" alt="A patient of the practice" loading="lazy">
+        <figcaption class="mz-cap">Filmed on site</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/pt-hero-3.jpg" alt="A patient of the practice" loading="lazy">
+        <figcaption class="mz-cap">Named, not anonymous</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/pt-interaction-3.jpg" alt="A consultation at the practice" loading="lazy">
+        <figcaption class="mz-cap">A specific treatment</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/pt-hero-4.jpg" alt="A patient of the practice" loading="lazy">
+        <figcaption class="mz-cap">Ask to speak to one</figcaption>
+      </figure>
+    </div>
+    <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
+      <a class="pk-more" href="smile-gallery.html">See the clinical results</a></p>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk pk-alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="smile-gallery.html"><span class="nx-k">Evidence</span>
+        <span class="nx-t">Smile Gallery</span>
+        <span class="nx-d">Twenty-eight cases, before and after.</span></a>
+      <a href="meet-dr-nahlah.html"><span class="nx-k">Who</span>
+        <span class="nx-t">The Specialist</span>
+        <span class="nx-d">The prosthodontist who treated every case on this site.</span></a>
+      <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>
+        <span class="nx-t">Sedation</span>
+        <span class="nx-d">If what is stopping you is the chair, not the cost.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>Start your own.</h2>
+    <p data-rv>The consultation includes the 3D scan and a straight answer.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book your consult</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15717029900">(571) 702-9900</a></span>
+      <span>Alexandria &middot; <a href="tel:+15712537790">(571) 253-7790</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="posts.html">Journal</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
+          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ PPC templates that every competitor is already running. A page that *looks like*
 converts like one. The target is **awwwards-grade**: high interaction, motion-led, memorable.
 
 **Reference implementation:** the Dr. Nahlah build in this repo —
-`deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/site-src/`
+`deliver/brandklout/dr-nahlah/workflows/04-design/output/site-src/`
 (11 pages, `pages/*.body.html` + `partials/`). Read it before designing. It is the standard,
 not an inspiration.
 
@@ -252,7 +252,7 @@ and a full-page capture that both reported clean. Same exposure for any state a 
 (selected quiz option, open FAQ) — those are tweened as rgba strings too.
 
 Scroll with motion on, collect console errors and exceptions, drive the controls, and read back
-the colour actually painted on the element. `workflows/04-qa/.tmp/runtime-colour.mjs` and
+the colour actually painted on the element. `scenario-0-new-site/04-qa/output/runtime-colour.mjs` and
 `interact-colour.mjs` on the Arvada build are the reference implementations.
 
 One trap in writing those probes: **Webflow wraps every embed in a div carrying the same class**,
@@ -293,7 +293,7 @@ Capture every page full-height at each breakpoint and **look at the images**:
 | 1440 | Desktop |
 | 1920 | Large desktop |
 
-Store under `workflows/04-qa/.tmp/screenshots/<page-slug>/<width>.png`.
+Store under `scenario-0-new-site/04-qa/output/screenshots/<page-slug>/<width>.png`.
 
 Check for, and fix:
 

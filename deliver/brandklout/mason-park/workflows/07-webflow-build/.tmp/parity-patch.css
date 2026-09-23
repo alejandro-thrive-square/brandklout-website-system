@@ -1,0 +1,131 @@
+/* mpd-parity: rules the class model cannot hold — see 08-qa/.tmp/parity/FINDINGS.md */
+/* Every declaration below is copied from 04-design/.tmp/shared/mpd.css or a page's
+   own <style> block, with custom properties resolved to the concrete values in
+   that file's :root — the paste did not carry the properties across, so a var()
+   here would evaluate to nothing. Class names are repeated to out-rank the
+   generated page-prefixed combos (.inv-p.chapter-tag and friends); this block is
+   injected AFTER the Webflow stylesheet, so an equal-specificity rule also wins
+   on source order. */
+
+/* 1. Section themes. The design flips a block of custom properties per section;
+   the properties did not survive, so the grounds are re-asserted concretely.
+   :where() drops these to zero specificity on purpose — they are defaults that
+   any section's own class must still be able to override, which is exactly
+   their position in mpd.css. */
+:where([data-theme="light"]){background:#ffffff;color:#525A64}
+:where([data-theme="dark"]){background:#26292F;color:rgba(255,255,255,0.78)}
+
+/* 2. The dark-theme descendant overrides. Without these the two dark chapters
+   carry the LIGHT palette: #007E9B tags and #525A64 leads on near-black. */
+[data-theme="dark"] .chapter-tag,
+[data-theme="dark"] .chapter-tag *{color:#8FDCEC}
+[data-theme="dark"] .lead.lead{color:rgba(255,255,255,0.78)}
+[data-theme="dark"] .label.label{color:#8FDCEC}
+[data-theme="dark"] .btn--ghost.btn--ghost.btn--ghost.btn--ghost{border-color:rgba(255,255,255,0.34);color:#ffffff}
+
+/* 3. Webflow's own bare-tag defaults, which the design's reset would have beaten
+   locally. figcaption is the single largest source of drift on these pages —
+   one rule centres every testimonial and team caption subtree. */
+figcaption{text-align:inherit;margin-top:0}
+blockquote{border-left:0;padding:0}
+/* The design carries no sup rule at all, so the correct instruction is not
+   "set these values" but "undo Webflow's author rule and keep the browser
+   default" — which is what `revert` means. Restating the values by hand went
+   wrong twice: `line-height:normal` put the mark on its own baseline, and
+   `line-height:inherit` was worse still, because it copies the parent's
+   COMPUTED 23.1px whereas the design's unitless 1.65 is re-resolved against the
+   mark's own smaller font-size. That inflated every line box holding a mark and
+   pushed the offer chips from 43px to 112px. `revert` reproduces the design
+   exactly and cannot drift from it. */
+sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;top:revert}
+/* Every inline SVG and every <sup> came through as a verbatim HtmlEmbed, and an
+   embed is a DIV — a block box where the design has no box at all. 55 of the 56
+   embeds on invisalign wrap exactly one inline thing, and each one forces a
+   line break: the offer chips measured 91px against the design's 43px while the
+   tick inside them was a correct 14x14 on both sides. The box between them was
+   the whole difference.
+   `display:contents` removes that box rather than re-typing it, so the svg
+   becomes a layout child of .chip and the design's own
+   `.chip .tick{display:inline-block}` lands exactly as authored. Re-typing the
+   wrapper as `inline` instead leaves a box that still carries the wrapper's
+   margins and does not reproduce the design.
+   NOTE this still cannot fix the marks that sit inside a <p>: a div is not
+   phrasing content, so the parser has already CLOSED the paragraph before it,
+   and no CSS can un-split a DOM the parser built. See FINDINGS.md. */
+/* FALLBACK ONLY. parity-unwrap.js removes the embed wrapper from the DOM, which
+   is the actual fix — CSS provably cannot do it. `display:contents` was applied
+   and confirmed in the computed style and the FAQ span still measured 222x95
+   against the design's 379x34; deleting the div gives 198x34 against 198x34.
+   These two rules only soften the damage when the script has not run, so they
+   switch off the moment it has. Do not "simplify" them by dropping the guard:
+   with the script running, .chip{display:flex} renders 41px where the design is
+   43px, because it compensates for a wrapper that is no longer there.
+   The class is repeated three times because the converter copies the svg's own
+   class onto the wrapper — a tick's wrapper is `<div class="tick w-embed">` —
+   and the embed's <style> sits in the BODY carrying `.chip .tick{display:
+   inline-block}`, written for the svg. It matches the wrapper too, ties on
+   specificity and wins on source order, so the single-class version of this
+   rule did nothing at all. */
+html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> svg),
+html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> sup){display:contents}
+/* The `.chip{display:flex}` fallback that used to sit here is GONE, and must not
+   come back. It was applying even with html.mpd-unwrapped present — the rule was
+   served correctly and the class was confirmed on the element, so why the guard
+   did not take is unexplained. What is not in doubt is the effect: a flex
+   container makes each run of text an anonymous flex item and strips its leading
+   whitespace, so "Free Vivera® retainers" rendered as "Free Vivera®retainers",
+   and the tick stretched to 14x23. Removing it puts the chips back to the
+   design's 165x43 / 213x43 / 196x43 / 213x43 with 14x14 ticks, all four MATCH.
+   The unwrap script is what makes the chips correct now, and it is reliable —
+   html.mpd-unwrapped present, zero console errors, every svg embed unwrapped. */
+.consent.consent{font-weight:400}
+
+/* 4a. The two custom properties still referenced by a surviving inline style.
+   The conversion baked the token layer out completely — the Webflow stylesheet
+   holds ZERO var() references — but the form's step legend came through inside
+   a verbatim embed with `font-family:var(--display);font-size:var(--t-body)`
+   still on it, which resolved to nothing and fell back to Inter. Defining just
+   these two puts the serif back without reviving the whole token layer. The
+   478px step matches the one in mpd.css. */
+:root{--display:"Fraunces",Georgia,"Times New Roman",serif;--t-body:1.125rem;--chapter-y:clamp(3.5rem,7vw,7rem)}
+@media (max-width:478px){:root{--t-body:1.31rem}}
+/* --chapter-y is not only a stylesheet reference: a chapter script assigns
+   `pin.style.paddingBlock = 'var(--chapter-y)'` at RUNTIME, and an undefined
+   token makes that inline style invalid. Defining it covers that case.
+   The rule below is separate and deliberately spells the clamp out rather than
+   using the token. The design's `.chapter-body{padding-block:var(--chapter-y)}`
+   was baked to fixed values per generated class, and two of the seven were
+   baked short — #proof and #invitation each measured exactly 43px under. A
+   literal cannot be knocked out by a token that fails to resolve, and restating
+   it is a no-op for the five that were already correct (verified: #provider is
+   unchanged at 1263). */
+.chapter-body.chapter-body.chapter-body{padding-block:clamp(3.5rem,7vw,7rem)}
+
+/* 4b. Scoped token remap. `.ledger` redefines --accent, so the ledger's active
+   step is a deeper cyan than the page accent. The baked rule in the site head
+   block carries the page value, so this has to out-rank it. */
+.ch-inclusion .ledger-steps span.on.on{color:#00738D}
+
+/* 5. Descendant rules with no class to live on. .faq .answer-wrap is FUNCTIONAL:
+   the accordion animates grid-template-rows, and the is-open half of the pair is
+   already installed above — without the base rule there is nothing to animate. */
+.faq .answer-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.45s cubic-bezier(0.22,0.61,0.36,1)}
+.faq .answer{overflow:hidden}
+.site-foot .fine.fine{color:rgba(255,255,255,0.45)}
+.progress span.on{background:#00B4D8}
+.ch-invitation .inv-close h2,
+.ch-invitation .inv-close .eyebrow.eyebrow{color:#26292F}
+.ch-invitation .inv-close .btn--ghost.btn--ghost{background:transparent;border-color:rgba(32,36,42,0.45);color:#26292F}
+
+/* 6. The sticky offer rail. Its class record kept only the font and colour and
+   lost every property that makes it a rail. `display` is deliberately NOT set
+   here — the record's main:flex / small:none / tiny:none ladder is correct, and
+   restating it would flatten the responsive behaviour. --gutter and --max are
+   resolved from mpd.css (clamp(1.25rem,4vw,2.5rem) and 73.75rem). */
+.offer-rail.offer-rail{position:fixed;left:50%;bottom:clamp(1rem,2.5vw,1.75rem);z-index:80;width:min(calc(100% - 2 * clamp(1.25rem,4vw,2.5rem)),73.75rem);transform:translate(-50%,calc(100% + 3rem));align-items:center;gap:clamp(0.75rem,2vw,1.5rem);padding:0.7rem 0.7rem 0.7rem 1.5rem;border-radius:999px;background:rgba(32,36,42,0.96);box-shadow:0 24px 60px -28px rgba(32,36,42,0.85);color:#ffffff;transition:transform 0.6s cubic-bezier(0.22,0.61,0.36,1),opacity 0.4s cubic-bezier(0.22,0.61,0.36,1);opacity:0}
+.offer-rail .rail-offer.rail-offer{flex:0 1 auto;min-width:0;color:rgba(255,255,255,0.88);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offer-rail .rail-sep{flex:none;width:1px;height:24px;background:rgba(255,255,255,0.2)}
+.offer-rail .rail-call.rail-call{flex:none;font-weight:600;color:#ffffff}
+.offer-rail .rail-call.rail-call:hover{color:#8FDCEC}
+.offer-rail .btn{flex:none;margin-left:auto;white-space:nowrap}
+/* mpd-parity end */

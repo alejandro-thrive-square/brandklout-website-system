@@ -1,0 +1,118 @@
+/* Restored runtime-state CSS.
+   The Instatic HTML importer prunes any selector whose classes are not present in the DOM
+   at import time, which is exactly the set of classes applied later by JavaScript: the
+   drawer/menu open state, the burger-to-X animation, the nav's scrolled "solid" state, the
+   scroll lock, and the reveal system. Without these the burger toggles a class that has no
+   styling and the menu never appears. */
+
+body.is-locked { overflow:hidden }
+
+.wz-ready [data-anim="hide"] { visibility:visible }
+
+.nav.solid { background:rgba(250,248,243,.9);backdrop-filter:blur(14px);border-bottom-color:rgba(138,126,78,.26) }
+
+.nav[data-journey="1"].solid .nav-links { opacity:0;pointer-events:none }
+
+.nav[data-journey="1"].solid .nav-chapter { opacity:1 }
+
+.burger.open span:nth-child(1) { transform:translateY(3.5px) rotate(45deg) }
+
+.burger.open span:nth-child(2) { transform:translateY(-3.5px) rotate(-45deg) }
+
+.nav.menu-open { z-index:130;background:transparent;backdrop-filter:none;
+      border-bottom-color:transparent }
+
+.nav.menu-open .nav-slot { opacity:0;pointer-events:none }
+
+.nav.menu-open .nav-cta { opacity:0;pointer-events:none }
+
+.nav.menu-open .nav-progress { opacity:0;pointer-events:none }
+
+.nav.menu-open .nav-close { opacity:1 }
+
+.nav.menu-open .burger span { background:#fff }
+
+.drawer.open { clip-path:circle(150% at calc(100% - 42px) 42px) }
+
+.drawer.open .dr-col li a { transform:translateY(0) }
+
+.drawer.open .dr-col:nth-child(1) li a { transition-delay:.10s }
+
+.drawer.open .dr-col:nth-child(2) li a { transition-delay:.16s }
+
+.drawer.open .dr-col:nth-child(3) li a { transition-delay:.22s }
+
+.drawer.open .dr-col:nth-child(4) li a { transition-delay:.28s }
+
+.drawer.open .dr-col:nth-child(5) li a { transition-delay:.34s }
+
+.pk-ba input[type=range] { position:absolute;inset:0;width:100%;height:100%;z-index:5;margin:0;
+  opacity:0;cursor:ew-resize }
+
+.wz-kit [data-rv] { opacity:0 }
+
+.of .of-flag { font-size:.72rem;color:var(--fg-soft);font-weight:400;line-height:1.55;
+      border-left:2px solid var(--rule);padding-left:.75rem }
+
+.ch-reality .big .wz-word { color:rgba(20,20,22,.2) }
+
+.ch-specialist .grid { display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start }
+
+.cmp .tag.b { left:1rem;background:rgba(11,11,12,.72);color:#fff }
+
+.cmp .tag.a { right:1rem;background:var(--gold-ink);color:#fff }
+
+.ga-empty { color:var(--fg-soft);font-weight:400 }
+
+/* ---- burger bars ----
+   The two <span> bars cannot exist in the DOM: Instatic's button module rejects child
+   nodes, so the importer stripped them and the control rendered blank. Drawn as
+   pseudo-elements instead; .burger is already position:relative. */
+.burger::before, .burger::after {
+  content: ""; position: absolute; left: 10px; width: 24px; height: 1.5px;
+  background: var(--fg); transition: transform .45s cubic-bezier(.22,1,.36,1);
+}
+.burger::before { top: 18px }
+.burger::after  { top: 25px }
+.burger.open::before { transform: translateY(3.5px) rotate(45deg) }
+.burger.open::after  { transform: translateY(-3.5px) rotate(-45deg) }
+.nav.menu-open .burger::before, .nav.menu-open .burger::after { background: #fff }
+
+/* ba-drag-surface ---- before/after sliders ----
+   Instatic rewrites the range input to type="text"; hide that stray box and make the
+   figure itself the drag surface (the JS gives it role="slider" and a tabindex). */
+.pk-ba input { display: none !important }
+.pk-ba { cursor: ew-resize; touch-action: pan-y }
+.pk-ba:focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px }
+
+
+/* === Restored: rules the publish pipeline purges from the main sheet ===
+   These were part of the shared stylesheet; after the 2026-08-13 registry
+   dedupe the publish purge started dropping them, so they live here. */
+.pk-ba .ba-tag.a {
+  right: 0.7rem;
+  background: var(--gold-ink);
+  color: rgb(255, 255, 255);
+}
+.pk-ba .ba-tag.b {
+  left: 0.7rem;
+  background: rgba(11, 11, 12, 0.78);
+  color: rgb(255, 255, 255);
+}
+@media (max-width: 679px) {
+  .nav .nav-cta { display: none; }
+}
+@media (max-width: 719px) {
+  .pg-hero .btn { flex: 1 1 auto; }
+}
+@media (min-width: 900px) {
+  .pk-split.rev .sp-fig { order: 2; }
+}
+footer.foot .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+}
+@media (min-width: 720px) {
+  footer.foot .grid { grid-template-columns: 1.6fr 1fr 1fr 1.2fr; }
+}

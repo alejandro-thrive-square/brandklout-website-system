@@ -1,6 +1,6 @@
 // PROMOTED 2026-09-23 to deliver/process/tools/instatic-site/push/upload-media.mjs
 // Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/upload-media.mjs. Paths now come from ../lib/paths.mjs (run from the client's workflow
-// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/.tmp) and the admin client from
+// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/output) and the admin client from
 // ../lib/site.mjs (refuses to run without INSTATIC_BASE_URL). Client-specific notes below are the
 // origin's record; review them against the new site before --apply.
 /**
@@ -13,7 +13,7 @@
  * broken image and the media panel stays empty — so the client cannot swap a
  * photograph without a developer, which is the whole point of the platform.
  *
- * The map it writes (`.tmp/media-map.json`) is what `build-import-input.mjs`
+ * The map it writes (`output/media-map.json`) is what `build-import-input.mjs`
  * rewrites the HTML against.
  *
  * `site.css` and `site.js` are deliberately skipped: those are code assets on
@@ -29,7 +29,7 @@ import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { api, requestForm, BASE } from '../lib/site.mjs'
 
-const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
+const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 /* WEST LA IMPLANTS. The build is `site-src/dist`, and its media is NOT a flat
    `assets/` folder: `dist/media/img/*`, `dist/media/video/*` and `dist/fonts/*`.
    The markup references them by that PATH (`media/img/x.jpg`), so the media map
@@ -48,7 +48,7 @@ const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
    (server/handlers/cms/mediaUpload.ts); the largest file here is 7.4MB. */
 const DIST = P.DIST
 const MEDIA_DIRS = ['media/img', 'media/video', 'fonts']
-const OUT = path.join(HERE, '.tmp', 'media-map.json')
+const OUT = path.join(HERE, 'output', 'media-map.json')
 
 const MIME = {
   '.webp': 'image/webp',
@@ -85,7 +85,7 @@ const only = onlyIx > -1 ? new Set(process.argv[onlyIx + 1].split(',')) : new Se
    `assets/banner-ssa.avif` and points it at the uploaded `.webp`.
 
    Report upstream. Until it is fixed, never upload AVIF here. */
-const TMPDIR = path.join(HERE, '.tmp', 'converted')
+const TMPDIR = path.join(HERE, 'output', 'converted')
 
 function avifToWebp(src, name) {
   fs.mkdirSync(TMPDIR, { recursive: true })

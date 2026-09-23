@@ -1,0 +1,10 @@
+{
+  "step": "scenario-2-updates-expansions/02-build",
+  "toolkits": [
+    "instatic-api-sync",
+    "instatic-domain-origins",
+    "instatic-embeds",
+    "termly-ghl-consent",
+    "webflow-build"
+  ]
+}

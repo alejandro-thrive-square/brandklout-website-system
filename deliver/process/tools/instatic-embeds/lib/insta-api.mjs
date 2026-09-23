@@ -31,7 +31,7 @@
  *   INSTATIC_EMAIL
  *   INSTATIC_PASSWORD
  *
- * The session cookie is cached in `.tmp/.session` so repeated runs do not
+ * The session cookie is cached in `output/.session` so repeated runs do not
  * re-hit the login rate limiter (5 failures locks the account).
  */
 
@@ -40,7 +40,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 const SESSION_FILE = join(TMP, '.session')
 const COOKIE_NAME = 'instatic_admin_session'
 

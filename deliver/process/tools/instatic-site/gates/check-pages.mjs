@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // PROMOTED 2026-09-23 to tools/instatic-site/gates/check-pages.mjs. Origin: bk-west-la-implants,
-// deliver/brandklout/west-la-implants/workflows/08-qa/.tmp/check-local.mjs (the per-page runtime gate that
+// deliver/brandklout/west-la-implants/workflows/08-qa/output/check-local.mjs (the per-page runtime gate that
 // replaced journey-audit on a root-relative multi-page build). Build root via SITE_SRC / --site-src.
 // The WZ runtime, 6-8 chapters and 3 pins are the house motion standard; adjust for a site that differs.
 /**
@@ -12,7 +12,7 @@
  *   - each pin scrubs: a sampled property differs at 25/50/75% of its range
  *   - no horizontal overflow at 390
  *   - optional: screenshots at six breakpoints (--shots) into
- *     <cwd>/.tmp/screenshots/<slug>/<width>.png
+ *     <cwd>/output/screenshots/<slug>/<width>.png
  *
  * Usage: node check-local.mjs [slug ...] [--shots] [--widths=1440,390] [--base=https://host]
  *        --base drives the PUBLISHED site instead of the local dist (the live

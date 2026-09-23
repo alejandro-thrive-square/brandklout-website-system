@@ -4,7 +4,7 @@
  *
  *   node plugins.mjs registry                                   # what we release, who must carry it
  *   node plugins.mjs test   [--plugin <name>]                   # offline suites, no site
- *   node plugins.mjs pack   [--plugin <name>]                   # .tmp/packages/<id>-<version>.zip
+ *   node plugins.mjs pack   [--plugin <name>]                   # output/packages/<id>-<version>.zip
  *   node plugins.mjs status [--plugin <name>] [--sites a,b] [--env production|staging|both]   # read-only
  *   node plugins.mjs rollout --plugin <name> --sites a,b|expected --env staging|production|both
  *                           [--apply] [--publish] [--allow-drift] [--allow-downgrade] [--no-staging-ok] [--limit 6]
@@ -36,7 +36,7 @@
  * of ../instatic-api-sync/migrate-plugin-ids.mjs, ../instatic-site/ops/backup-site.mjs and
  * ../instatic-site/gates/seo-head-check.mjs.
  *
- * Windows: redirect output to a file (`> .tmp/x.log 2>&1`); Node 24 can die when stdout is a pipe.
+ * Windows: redirect output to a file (`> output/x.log 2>&1`); Node 24 can die when stdout is a pipe.
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync, openSync, closeSync } from 'node:fs'
 import { join } from 'node:path'
@@ -256,7 +256,7 @@ async function verifyHost({ L, S, id, p, limit = 6 }) {
 /* ═══ parent ════════════════════════════════════════════════════════════ */
 
 function runOn(t, job) {
-  const dir = join(HERE, '.tmp', 'work')
+  const dir = join(HERE, 'output', 'work')
   mkdirSync(dir, { recursive: true })
   const out = join(dir, `${t.client}-${t.env}-${job.op}.json`)
   writeFileSync(out, '{}')
@@ -370,8 +370,8 @@ async function cmdStatus() {
       if (a !== b) issues.push(`${c}: PARITY ${id} production ${a ?? 'missing'} vs staging ${b ?? 'missing'}`)
     }
   }
-  const out = join(HERE, '.tmp', 'status', `status-${stamp()}.json`)
-  mkdirSync(join(HERE, '.tmp', 'status'), { recursive: true })
+  const out = join(HERE, 'output', 'status', `status-${stamp()}.json`)
+  mkdirSync(join(HERE, 'output', 'status'), { recursive: true })
   writeFileSync(out, JSON.stringify({ at: new Date().toISOString(), released: Object.fromEntries(Object.entries(reg.plugins).map(([k, v]) => [k, v.version])), rows, issues }, null, 1))
   console.log(issues.length ? `\n${issues.length} issue(s)\n  ${issues.join('\n  ')}` : '\nno drift')
   console.log(`\nwrote ${out}`)
@@ -389,7 +389,7 @@ async function cmdRollout() {
   const job = {
     op: 'rollout', id, apply: has('--apply'), publish: has('--publish'), allowDrift: has('--allow-drift'),
     allowDowngrade: has('--allow-downgrade'), limit: Number(arg('--limit', '6')),
-    snapDir: join(HERE, '.tmp', 'rollouts', `${stamp()}-${p.dir}-${p.version}`),
+    snapDir: join(HERE, 'output', 'rollouts', `${stamp()}-${p.dir}-${p.version}`),
   }
   let all = targets({ only: sitesArg === 'expected' ? null : sitesArg.split(',').map((s) => s.trim()), env: 'both' })
   if (sitesArg === 'expected') all = all.filter((t) => expectedPlugins(reg, t.client).includes(id))

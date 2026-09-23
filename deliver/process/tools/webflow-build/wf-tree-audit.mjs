@@ -4,11 +4,11 @@
  * HTML. This is where unpublished foreign content, emptied embeds and forked classes hide.
  *
  * Promoted 2026-09-23 and generalised from three client scripts:
- *   - stone-dental-implant-center/workflows/04-design/.tmp/build/build_v2.py `verify`
+ *   - stone-dental-implant-center/workflows/04-design/output/build/build_v2.py `verify`
  *     (re-read every HtmlEmbed's `code`, report empties)
- *   - arvada-dental-center/workflows/07-webflow-build/.tmp/v2-native/extract-v1-sections.mjs
+ *   - arvada-dental-center/workflows/07-webflow-build/output/v2-native/extract-v1-sections.mjs
  *     (String.textContent + Image settings walk)
- *   - marvel-dental and legacy-dental-pasadena workflows/08-qa/.tmp/gate.mjs (em dashes,
+ *   - marvel-dental and legacy-dental-pasadena workflows/08-qa/output/gate.mjs (em dashes,
  *     another client's names, {{tokens}}, placeholders) — moved from the local HTML to the tree.
  *
  * WHY (stone-dental runbook 2026-09-03, gotchas 7, 13, 18, 19; livewell/legacy class forks)
@@ -28,8 +28,8 @@
  * USAGE (read-only; site id from the client docs/mcp-access.md)
  *   node wf-tree-audit.mjs --site <id> --pages <pageId,pageId|slugFragment|all>
  *        [--foreign "arvada,bennett,livewell"] [--foreign-prefixes "lw-,imp-,camp_"]
- *        [--phone 8173838361] [--no-embeds] [--out .tmp/tree-audit.json]
- *   > .tmp/tree-audit.log 2>&1
+ *        [--phone 8173838361] [--no-embeds] [--out output/tree-audit.json]
+ *   > output/tree-audit.log 2>&1
  * --foreign: names of OTHER clients, doctors, towns. Always pass them.
  * --phone:   the digits this page set must use; any other 10-digit number is reported.
  * Exit 1 on any FAIL.

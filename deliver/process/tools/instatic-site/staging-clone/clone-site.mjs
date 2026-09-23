@@ -15,7 +15,7 @@
  *                       --strategy merge-overwrite --rows about,contact
  *
  *   --dry     export only, write the bundle, import nothing
- *   --out     where to keep the bundle (default ./.tmp/bundle-<ts>.zip)
+ *   --out     where to keep the bundle (default ./output/bundle-<ts>.zip)
  *   --media   include media rows AND bytes (seeding only; --strategy replace only)
  *
  * WHY THIS AND NOT A VOLUME COPY
@@ -79,7 +79,7 @@ if (TO && FROM.replace(/\/+$/, '') === TO.replace(/\/+$/, '')) {
   process.exit(2)
 }
 
-const OUT = flag('out', join(HERE, '.tmp', `bundle-${new Date().toISOString().replace(/[:.]/g, '-')}.zip`))
+const OUT = flag('out', join(HERE, 'output', `bundle-${new Date().toISOString().replace(/[:.]/g, '-')}.zip`))
 mkdirSync(dirname(OUT), { recursive: true })
 
 // ── export ────────────────────────────────────────────────────────────────

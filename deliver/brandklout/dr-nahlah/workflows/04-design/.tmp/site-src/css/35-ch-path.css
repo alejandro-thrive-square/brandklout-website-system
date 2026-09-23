@@ -1,0 +1,38 @@
+.ch-path{background:var(--bg);position:relative;overflow:hidden;
+  /* The content edge of this chapter, shared by the heading, the track and the
+     progress bar. Below --maxw it is just the gutter; above it, it follows the
+     centred column so the three do not drift apart.
+     They used to: .pa-head is `max-width:var(--maxw);margin-inline:auto` while
+     the track and the bar were only gutter-indented, so on a 3840px monitor the
+     heading sat at 1140, the cards started at 117 and the rule ran the full
+     3723 -- three different left edges in one section. Inside `calc`, 100%
+     resolves against .pa-pin, which is the containing block for all three. */
+  --pa-inset:calc(max(0px, (100% - var(--maxw)) / 2) + var(--gutter) + var(--rail));
+  --pa-inset-end:calc(max(0px, (100% - var(--maxw)) / 2) + var(--gutter))}
+.ch-path .pa-pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.ch-path .pa-head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+  max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+.ch-path h2{font-size:var(--h2);max-width:16ch}
+.ch-path .pa-track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+  padding-right:var(--pa-inset-end);padding-left:var(--pa-inset);
+  width:max-content;align-items:stretch}
+.ch-path .pa-card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
+  padding:clamp(1.4rem,2.4vw,2.25rem);display:flex;flex-direction:column;gap:.9rem;
+  background:var(--card);position:relative;overflow:hidden}
+.ch-path .pa-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:var(--rule);transform:scaleX(0);transform-origin:left}
+.ch-path .pa-card .pa-no{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
+  color:var(--accent-lg);line-height:.9}
+.ch-path .pa-card h3{font-size:var(--h3)}
+.ch-path .pa-card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
+.ch-path .pa-card .pa-shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
+.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
+  transition:filter .6s,transform .8s}
+.ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
+.ch-path .pa-bar{position:absolute;left:var(--pa-inset);right:var(--pa-inset-end);
+  bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
+/* Nothing to scroll means nothing to report: the JS adds this when the whole
+   track already fits on screen, which is what happens on a very wide monitor. */
+.ch-path.is-static .pa-bar{display:none}
+.ch-path .pa-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
+@media(max-width:719px){ .ch-path .pa-card{width:78vw} }

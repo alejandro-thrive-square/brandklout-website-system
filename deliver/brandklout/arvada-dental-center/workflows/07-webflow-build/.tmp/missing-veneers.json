@@ -1,0 +1,161 @@
+[
+ {
+  "sel": "*,*::before,*::after",
+  "body": "box-sizing:border-box",
+  "media": null,
+  "mapped": "*,*::before,*::after",
+  "n": 583
+ },
+ {
+  "sel": "img,video,svg",
+  "body": "max-width:100%;display:block",
+  "media": null,
+  "mapped": "img,video,svg",
+  "n": 18
+ },
+ {
+  "sel": "h1,h2,h3,h4",
+  "body": "margin:0;font-family:var(--f-display);font-weight:600;line-height:1.06; letter-spacing:.005em;color:var(--fg)",
+  "media": null,
+  "mapped": "h1,h2,h3,h4",
+  "n": 32
+ },
+ {
+  "sel": "h1,h2,h3,.since",
+  "body": "overflow-wrap:break-word",
+  "media": null,
+  "mapped": "h1,h2,h3,.vnr-since",
+  "n": 32
+ },
+ {
+  "sel": ".wrap>*,.grid>*,.flow>*",
+  "body": "min-width:0",
+  "media": null,
+  "mapped": ".vnr-wrap>*,.vnr-grid>*,.vnr-flow>*",
+  "n": 28
+ },
+ {
+  "sel": ".label,.eyebrow",
+  "body": "font-family:var(--f-ui);font-size:var(--label);letter-spacing:.2em; text-transform:uppercase;font-weight:700;color:var(--accent)",
+  "media": null,
+  "mapped": ".vnr-label,.vnr-eyebrow",
+  "n": 11
+ },
+ {
+  "sel": ".btn>span,.btn>svg",
+  "body": "position:relative;z-index:1",
+  "media": null,
+  "mapped": ".vnr-btn>span,.vnr-btn>svg",
+  "n": 10
+ },
+ {
+  "sel": ".btn-row>.btn",
+  "body": "flex:1 1 100%",
+  "media": "@media(max-width:560px)",
+  "mapped": ".vnr-btn-row>.vnr-btn",
+  "n": 5
+ },
+ {
+  "sel": ".actionbar .btn",
+  "body": "padding:.85rem .6rem;font-size:calc(.66rem*var(--s-tx));letter-spacing:.1em;min-height:46px; min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis",
+  "media": null,
+  "mapped": ".vnr-actionbar .vnr-btn",
+  "n": 2
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "padding-top:clamp(5.75rem,9vw,8.5rem)",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-stage,.vnr-ch .vnr-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage",
+  "body": "align-content:safe center",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-stage",
+  "n": 2,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .pin",
+  "body": "justify-content:safe center",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-pin",
+  "n": 1,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "min-height:0;height:auto; align-content:start;justify-content:start; padding-top:clamp(3.5rem,9vw,5rem); padding-bottom:calc(4.6rem + env(safe-area-inset-bottom));",
+  "media": "@media(max-width:899px)",
+  "mapped": ".vnr-ch .vnr-stage,.vnr-ch .vnr-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": ".compare th,.compare td",
+  "body": "padding:clamp(.8rem,1.5vw,1.15rem);text-align:left; border-bottom:1px solid var(--line);vertical-align:top",
+  "media": null,
+  "mapped": ".vnr-compare th,.vnr-compare td",
+  "n": 18
+ },
+ {
+  "sel": ".offer h3,.offer .h3",
+  "body": "color:#5a4426",
+  "media": null,
+  "mapped": ".vnr-offer h3,.vnr-offer .vnr-h3",
+  "n": 1
+ },
+ {
+  "sel": ".faq__q[aria-expanded=\"true\"]::after",
+  "body": "transform:rotate(-135deg) translateY(-2px)",
+  "media": null,
+  "mapped": ".vnr-faq__q[aria-expanded=\"true\"]::after",
+  "n": 12,
+  "stateKeyed": true
+ },
+ {
+  "sel": ".faq__a>div",
+  "body": "overflow:hidden",
+  "media": null,
+  "mapped": ".vnr-faq__a>div",
+  "n": 6
+ },
+ {
+  "sel": ".form-card .h3,.form-card h3",
+  "body": "color:var(--ink)",
+  "media": null,
+  "mapped": ".vnr-form-card .vnr-h3,.vnr-form-card h3",
+  "n": 1
+ },
+ {
+  "sel": ".field input,.field select,.field textarea",
+  "body": "width:100%;font:inherit;font-size:calc(.95rem*var(--s-tx)); padding:.8rem .9rem;border:1px solid rgba(20,24,33,.2);border-radius:10px;background:#fff; color:var(--ink);min-height:46px",
+  "media": null,
+  "mapped": ".vnr-field input,.vnr-field select,.vnr-field textarea",
+  "n": 4
+ },
+ {
+  "sel": ".ftr address",
+  "body": "font-style:normal;font-size:calc(.92rem*var(--s-tx));line-height:1.9",
+  "media": null,
+  "mapped": ".vnr-ftr address",
+  "n": 2
+ },
+ {
+  "sel": "*,*::before,*::after",
+  "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "*,*::before,*::after",
+  "n": 583
+ },
+ {
+  "sel": "[data-rv],[data-anim=\"hide\"]",
+  "body": "opacity:1!important;visibility:visible!important; transform:none!important;clip-path:none!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "[data-rv],[data-anim=\"hide\"]",
+  "n": 17
+ }
+]

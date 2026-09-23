@@ -16,7 +16,7 @@
 Third-party widgets — booking forms, review widgets, chat bubbles, CRM embeds — can be placed on an Instatic site by hand, from the editor, by whoever is editing the page. Paste the vendor's iframe or snippet, publish, done. No developer, no agent, no platform fork.
 
 > [!IMPORTANT]
-> **Integrity Rule**: Any change to the plugin, its scripts or its gates must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../PROCESS_INDEX.md) and [OFFER_ROUTING.md](../OFFER_ROUTING.md) when routing or module behaviour changes.
+> **Integrity Rule**: Any change to the plugin, its scripts or its gates must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../../PROCESS_INDEX.md) and OFFER_ROUTING.md when routing or module behaviour changes.
 
 ## Operational Purpose
 
@@ -42,7 +42,7 @@ They are separate on purpose, and the platform enforces it: `moduleAdapter.ts` d
 > tooling: settings, site scripts, editor and canvas gates, vendor probes, the handoff guide.
 
 ```bash
-# 1. The toolkit refuses to guess which site it is talking to. Run from the client folder so
+# 1. The toolkit refuses to guess which site it is talking to. Run from the step folder in the client's scenario copy so
 #    the generated worktree .env (INSTATIC_BASE_URL + login) is found; never hand-edit it.
 
 node ../instatic-plugins/plugins.mjs test --plugin embed-origins      # 85 + 54 assertions, offline
@@ -65,7 +65,7 @@ node verify-embed-scripts.mjs --check
 node verify-embed-scripts.mjs --cleanup
 ```
 
-Copy this module into `deliver/[client]/workflows/` only if that client needs client-specific adaptations; otherwise run it from here. **Record `process_baseline_commit`** in the client's `docs/project-overview.md` either way.
+A client gets its own copy of this toolkit (in `deliver/brandklout/<client>/tools/`) when a scenario that lists it is started with `node scripts/scenario.mjs start`; `scenario.mjs update` refreshes that copy from main. Never edit the client copy to fix the toolkit: fix it here, then update the clients.
 
 > [!WARNING]
 > `verify-embed-module.mjs` and `verify-embed-scripts.mjs` PUBLISH. On Instatic a publish bakes **every** page, so any page whose draft has drifted from what is live ships with it. Audit one known page before and after (see §Gotchas). `verify-embed-editor.mjs` publishes nothing and is the safe one to run first.
@@ -167,8 +167,8 @@ Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin tha
 - **A created directive must be deduped.** `widen()` used to build an absent directive as `default-src + origins` without deduping. A site script that auto-trust also found on the page came out as `connect-src 'self' https://x https://x`, and a second publish rewrote it, so the filter was no longer idempotent. Fixed in `1.6.0`.
 - **A publish bakes EVERY page.** Unrelated drift ships with whatever you were publishing. On Dr. Nahlah this cost the home page its six review-card fallbacks — present in the published HTML, absent from the draft, gone the moment anything was published. Audit before and after:
   ```bash
-  node ../../[client]/workflows/08-qa/.tmp/audit-site.mjs --base https://client.com --only index
-  git diff ../../[client]/workflows/08-qa/.tmp/audit-out/
+  node ../../[client]/workflows/08-qa/output/audit-site.mjs --base https://client.com --only index
+  git diff ../../[client]/workflows/08-qa/output/audit-out/
   ```
 - **A created CSP directive must inherit from `default-src`.** An absent directive falls back to it, so writing `font-src https://vendor` on a page that had no `font-src` silently revoked the site's own webfonts. It surfaces as one violation per font file, which reads like a font problem. `widen()` seeds from `default-src` first; any new directive must do the same.
 - **`escapeProps()` runs before `render()` on the publish path** and HTML-escapes every non-`url` string prop, and the plugin control vocabulary has no `richtext`/`svg` type — so a pasted snippet arrives as `&lt;iframe …&gt;`. The module decodes then escapes exactly once, which is idempotent and therefore also correct on the canvas path, where props arrive RAW.
@@ -202,7 +202,7 @@ Both run with no host, no network and no site. What they cannot prove is that th
 ## Technical Setup
 
 - **Executor status**: Working. The executor is the Node toolchain in this folder; `instatic-embeds.py` is a thin orchestrator over the documented sequence, in the same spirit as `webflow-build`.
-- **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site. That `.env` is **generated** from `~/.webzite/.env` by `scripts/env-sync.mjs`: `INSTATIC_EMAIL` comes from `[shared]`, and `INSTATIC_BASE_URL` + the per-instance `INSTATIC_PASSWORD` from the client's own section. Add a missing value to the master, never to the worktree file — see [SYSTEM_RULES.md §4.2.2](../../../SYSTEM_RULES.md).
+- **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site. That `.env` is **generated** from `~/.webzite/.env` by `scripts/env-sync.mjs`: `INSTATIC_EMAIL` comes from `[shared]`, and `INSTATIC_BASE_URL` + the per-instance `INSTATIC_PASSWORD` from the client's own section. Add a missing value to the master, never to the worktree file — see [SYSTEM_RULES.md §4.2.2](../../../../SYSTEM_RULES.md).
 - **A plugin setting's `description` is capped at 500 characters.** Over it,
   `inspect-package` answers `400 Invalid plugin manifest: Expected union value` — a zod union
   error that names neither the field nor the limit. Bisect by shortening the description; the
@@ -225,4 +225,4 @@ Both run with no host, no network and no site. What they cannot prove is that th
 - `handoff/embed-block-guide.html` — the non-engineer guide; give a marketer this and a developer the directive
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). Plugin source, scripts, gates and `.md` are committed; `.tmp/` build output and cached sessions are not (`**/.tmp/.session` is ignored repo-wide — it is a live CMS credential).
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Plugin source, scripts, gates and `.md` are committed; `output/` build output and cached sessions are not (`**/output/.session` is ignored repo-wide — it is a live CMS credential).

@@ -11,7 +11,7 @@
  *   node copy-dns-records.mjs --zone example.com --snapshot email-dns-example.com.json --apply
  *   node copy-dns-records.mjs --zone example.com --hosts ftp,shop,booking     # extra names to check
  *
- * --snapshot is the JSON written by scenario-1-migration/scripts/email-dns-audit.mjs. Without it
+ * --snapshot is the JSON written by scenario-1-migration/01-old-site-capture/scripts/email-dns-audit.mjs. Without it
  * only the apex, www and --hosts are compared (A, AAAA, CNAME, MX, TXT).
  *
  * --apply only ADDS live records missing from the zone, always DNS-only (grey cloud): mail

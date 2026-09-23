@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Livewell Dental — Elevated Home (r1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+  /* Page chrome only. Everything inside .lw-home is the pasteable payload. */
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#fff}
+</style>
+</head>
+<body>
+
+<!-- ===================================================================
+     SINGLE ROOT. Everything below .lw-home converts to one paste.
+     Style + script live inside the root so the section travels intact.
+     =================================================================== -->
+<div class="lw-home">
+
+<style>
+/* ============================================================
+   LIVEWELL DENTAL — ELEVATED HOME
+   Brand tokens lifted verbatim from the live site's compiled CSS
+   (livewelldentalva.shared.bb9994d33.min.css). Do not invent new
+   brand colors: navy #0b2c41 and gold #d3aa5a are the site's own
+   --color-scheme-1--green / --color-scheme-1--golden.
+   ============================================================ */
+.lw-home{
+  --navy:#0b2c41;
+  --navy-700:#0e3852;
+  --teal:#376b7b;
+  --gold:#d3aa5a;
+  --gold-soft:#e6cfa4;
+  --skin:#fff;
+  --bone:#f6f3ee;
+  --bone-2:#efe9e0;
+  --taupe:#ccbdb5;
+  --ink:#101820;
+  --ink-60:rgba(16,24,32,.62);
+  --ink-40:rgba(16,24,32,.4);
+  --line:rgba(11,44,65,.14);
+  --r-sm:4px; --r-md:8px; --r-lg:16px; --r-xl:28px;
+  --f-head:Marcellus,"Times New Roman",serif;
+  --f-body:Lato,Arial,sans-serif;
+  --shell:min(1240px,100% - 10vw);
+  --sp:clamp(72px,9vw,140px);
+
+  font-family:var(--f-body);
+  color:var(--ink);
+  background:var(--skin);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+.lw-home *{box-sizing:border-box}
+.lw-home img{max-width:100%;display:block}
+.lw-home h1,.lw-home h2,.lw-home h3,.lw-home h4{
+  font-family:var(--f-head);font-weight:400;margin:0;line-height:1.08;
+  letter-spacing:-.012em;
+}
+.lw-home p{margin:0}
+.lw-home a{color:inherit;text-decoration:none}
+
+.lw-shell{width:var(--shell);margin-inline:auto}
+.lw-sec{padding-block:var(--sp);position:relative}
+
+/* ---------- shared type ---------- */
+.lw-eyebrow{
+  font-size:clamp(11px,.78vw,12.5px);letter-spacing:.24em;text-transform:uppercase;
+  font-weight:700;color:var(--gold);display:flex;align-items:center;gap:12px;
+}
+.lw-eyebrow::before{content:"";width:28px;height:1px;background:var(--gold);flex:none}
+.lw-h2{font-size:clamp(32px,4.6vw,62px)}
+.lw-h3{font-size:clamp(21px,1.85vw,27px)}
+.lw-lede{font-size:clamp(16px,1.15vw,18.5px);color:var(--ink-60);max-width:62ch}
+
+/* ---------- buttons ---------- */
+.lw-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 30px;border-radius:var(--r-sm);font-size:13px;font-weight:700;
+  letter-spacing:.13em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;
+  transition:background .32s cubic-bezier(.22,1,.36,1),color .32s,border-color .32s,transform .32s;
+  will-change:transform;
+}
+.lw-btn--gold{background:var(--gold);color:var(--navy)}
+.lw-btn--gold:hover{background:var(--navy);color:#fff;transform:translateY(-2px)}
+.lw-btn--ghost{border-color:currentColor;color:var(--navy)}
+.lw-btn--ghost:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateY(-2px)}
+.lw-btn--ghost-light{border-color:rgba(255,255,255,.5);color:#fff}
+.lw-btn--ghost-light:hover{background:#fff;color:var(--navy);border-color:#fff;transform:translateY(-2px)}
+.lw-btn .lw-ar{transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.lw-btn:hover .lw-ar{transform:translateX(5px)}
+
+/* ---------- scroll reveal ---------- */
+.lw-rv{opacity:0;transform:translateY(26px);
+  transition:opacity .85s cubic-bezier(.22,1,.36,1),transform .85s cubic-bezier(.22,1,.36,1)}
+.lw-rv.is-in{opacity:1;transform:none}
+.lw-rv[data-d="1"]{transition-delay:.09s}
+.lw-rv[data-d="2"]{transition-delay:.18s}
+.lw-rv[data-d="3"]{transition-delay:.27s}
+.lw-rv[data-d="4"]{transition-delay:.36s}
+
+/* ============================================================
+   1 — NAV
+   ============================================================ */
+.lw-nav{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.9);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.lw-nav__in{width:var(--shell);margin-inline:auto;display:flex;align-items:center;
+  justify-content:space-between;gap:24px;height:82px}
+.lw-nav__logo img{height:44px;width:auto}
+.lw-nav__links{display:flex;align-items:center;gap:34px}
+.lw-nav__links a{font-size:13.5px;font-weight:700;letter-spacing:.04em;position:relative;padding-block:6px}
+.lw-nav__links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.lw-nav__links a:hover::after{transform:scaleX(1);transform-origin:left}
+.lw-nav__cta{display:flex;align-items:center;gap:16px}
+.lw-nav__tel{font-weight:900;font-size:15px;color:var(--navy);white-space:nowrap}
+
+/* ============================================================
+   2 — HERO / WHY LIVEWELL
+   ============================================================ */
+.lw-hero{position:relative;background:var(--navy);color:#fff;overflow:hidden;
+  padding-block:clamp(80px,10vw,132px) 0}
+.lw-hero::after{content:"";position:absolute;inset:auto 0 0 0;height:44%;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.34));pointer-events:none}
+.lw-hero__grid{width:var(--shell);margin-inline:auto;display:grid;
+  grid-template-columns:1.06fr .94fr;gap:clamp(36px,4vw,72px);align-items:end;position:relative;z-index:2}
+.lw-hero__copy{padding-bottom:clamp(56px,6vw,92px)}
+.lw-hero h1{font-size:clamp(42px,6.1vw,86px);color:#fff;margin-top:26px}
+.lw-hero h1 .lw-gold{color:var(--gold);font-style:italic}
+.lw-hero__lede{margin-top:26px;font-size:clamp(16px,1.2vw,19px);color:rgba(255,255,255,.78);max-width:52ch}
+.lw-hero__acts{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.lw-hero__media{position:relative;align-self:end}
+.lw-hero__media img{width:100%;height:clamp(400px,49vw,640px);object-fit:cover;
+  object-position:center 22%;border-radius:var(--r-xl) var(--r-xl) 0 0}
+.lw-hero__badge{
+  position:absolute;left:-28px;bottom:56px;background:#fff;color:var(--navy);
+  border-radius:var(--r-md);padding:18px 24px;box-shadow:0 22px 50px rgba(0,0,0,.26);
+  display:flex;align-items:center;gap:14px;
+}
+.lw-hero__badge strong{font-family:var(--f-head);font-size:29px;line-height:1;display:block}
+.lw-hero__badge span{font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-60);font-weight:700}
+.lw-stars{color:var(--gold);font-size:15px;letter-spacing:2px;line-height:1}
+
+/* credential marquee */
+.lw-creds{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.16);
+  margin-top:0;background:rgba(0,0,0,.16);overflow:hidden}
+.lw-creds__track{display:flex;gap:clamp(44px,5vw,86px);align-items:center;
+  width:max-content;padding-block:26px;animation:lw-slide 34s linear infinite}
+.lw-creds:hover .lw-creds__track{animation-play-state:paused}
+.lw-creds img{height:clamp(30px,2.6vw,40px);width:auto;opacity:.72;filter:brightness(0) invert(1);
+  transition:opacity .35s}
+.lw-creds img:hover{opacity:1}
+@keyframes lw-slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   3 — ABOUT DR CHRIS
+   ============================================================ */
+.lw-about__grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(40px,5vw,86px);align-items:start}
+.lw-about__media{position:relative}
+.lw-about__media img{width:100%;height:clamp(420px,46vw,600px);object-fit:cover;border-radius:var(--r-lg)}
+.lw-about__rule{position:absolute;left:-1px;top:0;width:3px;height:0;background:var(--gold);
+  transition:height 1.15s cubic-bezier(.22,1,.36,1) .2s}
+.is-in .lw-about__rule{height:100%}
+.lw-about h2{margin-top:22px}
+.lw-about__body{margin-top:26px;font-size:clamp(15.5px,1.06vw,17.5px);color:var(--ink-60)}
+.lw-creds-list{list-style:none;margin:34px 0 0;padding:0;display:grid;gap:2px}
+.lw-creds-list li{padding:19px 0 19px 30px;border-top:1px solid var(--line);position:relative;
+  font-size:15.4px;color:var(--ink);transition:padding-left .4s cubic-bezier(.22,1,.36,1)}
+.lw-creds-list li:last-child{border-bottom:1px solid var(--line)}
+.lw-creds-list li::before{content:"";position:absolute;left:6px;top:27px;width:9px;height:9px;
+  border-radius:50%;background:var(--gold)}
+.lw-creds-list li:hover{padding-left:38px}
+.lw-creds-list strong{font-weight:900}
+
+/* ============================================================
+   4 — LIVEWELL DIFFERENCE
+   ============================================================ */
+.lw-diff{background:var(--bone)}
+.lw-diff__head{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;flex-wrap:wrap}
+.lw-diff__grid{margin-top:clamp(44px,4.6vw,68px);display:grid;
+  grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.lw-diff__card{background:var(--bone);padding:clamp(30px,2.8vw,44px);position:relative;
+  transition:background .45s cubic-bezier(.22,1,.36,1)}
+.lw-diff__card:hover{background:#fff}
+.lw-diff__n{font-family:var(--f-head);font-size:13px;color:var(--gold);letter-spacing:.16em}
+.lw-diff__card h3{margin-top:18px;font-size:clamp(19px,1.5vw,23px)}
+.lw-diff__card p{margin-top:13px;font-size:15px;color:var(--ink-60)}
+
+/* ============================================================
+   5 — WHICH PROBLEM DO WE SOLVE
+   ============================================================ */
+.lw-prob{background:var(--navy);color:#fff}
+.lw-prob .lw-lede{color:rgba(255,255,255,.72)}
+.lw-prob__grid{margin-top:clamp(44px,4.6vw,68px);display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(20px,2vw,30px)}
+.lw-prob__card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.13);
+  border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .5s cubic-bezier(.22,1,.36,1),background .5s,border-color .5s}
+.lw-prob__card:hover{transform:translateY(-7px);background:rgba(255,255,255,.1);
+  border-color:rgba(211,170,90,.55)}
+.lw-prob__card img{width:100%;height:220px;object-fit:cover}
+.lw-prob__body{padding:clamp(24px,2.2vw,34px);display:flex;flex-direction:column;gap:14px;flex:1}
+.lw-prob__q{font-family:var(--f-head);font-size:clamp(20px,1.65vw,25px);color:#fff;line-height:1.22}
+.lw-prob__a{font-size:14.8px;color:rgba(255,255,255,.7);flex:1}
+.lw-prob__link{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:9px}
+.lw-prob__link .lw-ar{transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.lw-prob__card:hover .lw-ar{transform:translateX(5px)}
+
+/* ============================================================
+   6 — PATIENT STORY (video)
+   ============================================================ */
+.lw-story__frame{position:relative;border-radius:var(--r-lg);overflow:hidden;
+  margin-top:clamp(36px,3.6vw,54px);background:var(--navy)}
+.lw-story__frame img{width:100%;height:clamp(360px,48vw,660px);object-fit:cover;opacity:.62}
+.lw-story__play{position:absolute;inset:0;display:grid;place-items:center;cursor:pointer;border:0;
+  background:transparent;padding:0}
+.lw-story__disc{width:clamp(84px,7.4vw,112px);aspect-ratio:1;border-radius:50%;background:var(--gold);
+  display:grid;place-items:center;transition:transform .45s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 0 0 0 rgba(211,170,90,.55)}
+.lw-story__play:hover .lw-story__disc{transform:scale(1.09)}
+.lw-story__disc svg{width:26px;height:26px;fill:var(--navy);margin-left:4px}
+.lw-story__cap{position:absolute;left:0;right:0;bottom:0;padding:clamp(24px,3vw,44px);color:#fff;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
+.lw-story__cap p{font-family:var(--f-head);font-size:clamp(18px,1.9vw,29px);line-height:1.28;max-width:26ch}
+.lw-story__cap span{display:block;margin-top:12px;font-size:12px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--gold);font-weight:700}
+
+/* ============================================================
+   7 — PROOF / BEFORE + AFTER (drag)
+   ============================================================ */
+.lw-proof{background:var(--bone)}
+.lw-ba{margin-top:clamp(40px,4vw,60px);display:grid;grid-template-columns:repeat(2,1fr);
+  gap:clamp(22px,2.4vw,36px)}
+.lw-ba__item{background:#fff;border-radius:var(--r-lg);overflow:hidden;
+  box-shadow:0 12px 40px rgba(11,44,65,.09)}
+.lw-ba__win{position:relative;aspect-ratio:4/3;overflow:hidden;cursor:ew-resize;
+  touch-action:none;user-select:none;-webkit-user-select:none}
+.lw-ba__win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  pointer-events:none;-webkit-user-drag:none}
+.lw-ba__after{clip-path:inset(0 0 0 50%)}
+.lw-ba__handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;
+  transform:translateX(-1px);pointer-events:none;box-shadow:0 0 18px rgba(0,0,0,.4)}
+.lw-ba__knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;background:#fff;display:grid;place-items:center;
+  box-shadow:0 6px 22px rgba(0,0,0,.3);color:var(--navy);font-size:15px;letter-spacing:-2px}
+.lw-ba__tag{position:absolute;bottom:16px;padding:7px 14px;border-radius:100px;font-size:10.5px;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(0,0,0,.55);color:#fff;
+  pointer-events:none;backdrop-filter:blur(4px)}
+.lw-ba__tag--b{left:16px}
+.lw-ba__tag--a{right:16px;background:var(--gold);color:var(--navy)}
+.lw-ba__meta{padding:22px 26px 26px}
+.lw-ba__meta h3{font-size:19px}
+.lw-ba__meta p{margin-top:8px;font-size:14px;color:var(--ink-60)}
+.lw-proof__foot{margin-top:clamp(34px,3.4vw,48px);display:flex;justify-content:center}
+
+/* ============================================================
+   8 — PROMOTIONS  (content pending, see design-notes.md)
+   ============================================================ */
+.lw-promo__band{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border-radius:var(--r-lg);
+  overflow:hidden;background:var(--navy);color:#fff}
+.lw-promo__copy{padding:clamp(38px,4.2vw,66px);display:flex;flex-direction:column;
+  justify-content:center;gap:18px}
+.lw-promo__copy h2{font-size:clamp(27px,2.9vw,44px);color:#fff}
+.lw-promo__copy p{color:rgba(255,255,255,.74);max-width:46ch;font-size:16px}
+.lw-promo__acts{display:flex;flex-wrap:wrap;gap:13px;margin-top:10px}
+.lw-promo__media img{width:100%;height:100%;min-height:300px;object-fit:cover}
+.lw-flag{
+  border:1px dashed var(--gold);background:rgba(211,170,90,.1);color:var(--navy);
+  padding:11px 16px;border-radius:var(--r-sm);font-size:12.5px;line-height:1.5;
+  margin-bottom:18px;font-weight:700;letter-spacing:.02em;
+}
+.lw-flag--light{color:var(--gold);background:rgba(211,170,90,.14)}
+
+/* ============================================================
+   9 — SERVICES (sticky index)
+   ============================================================ */
+.lw-svc__grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(36px,4vw,80px);align-items:start}
+.lw-svc__aside{position:sticky;top:118px}
+.lw-svc__list{border-top:1px solid var(--line)}
+.lw-svc__row{border-bottom:1px solid var(--line);padding:24px 4px;display:grid;
+  grid-template-columns:44px 1fr auto;align-items:baseline;gap:18px;
+  transition:padding-left .45s cubic-bezier(.22,1,.36,1)}
+.lw-svc__row:hover{padding-left:16px}
+.lw-svc__row:hover .lw-svc__name{color:var(--gold)}
+.lw-svc__i{font-family:var(--f-head);font-size:12.5px;color:var(--ink-40);letter-spacing:.1em}
+.lw-svc__name{font-family:var(--f-head);font-size:clamp(20px,1.75vw,27px);line-height:1.2;
+  transition:color .35s}
+.lw-svc__sub{margin-top:7px;font-size:13.8px;color:var(--ink-60)}
+.lw-svc__go{font-size:19px;color:var(--gold);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.lw-svc__row:hover .lw-svc__go{transform:translateX(6px)}
+
+/* ============================================================
+   10 — CLOSING CTA  (the section the client said was missing)
+   ============================================================ */
+.lw-cta{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.lw-cta__glow{position:absolute;width:760px;height:760px;border-radius:50%;left:50%;top:-42%;
+  transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(211,170,90,.2),transparent 66%);pointer-events:none}
+.lw-cta__in{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;
+  align-items:center;gap:24px}
+.lw-cta h2{font-size:clamp(34px,5vw,70px);color:#fff;max-width:17ch}
+.lw-cta p{color:rgba(255,255,255,.74);max-width:56ch;font-size:17px}
+.lw-cta__acts{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px}
+.lw-cta__facts{margin-top:clamp(44px,4.4vw,64px);display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16);
+  border-radius:var(--r-md);overflow:hidden;width:100%}
+.lw-cta__fact{background:var(--navy);padding:26px clamp(18px,2vw,32px);text-align:left}
+.lw-cta__fact span{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--gold);
+  font-weight:700}
+.lw-cta__fact p{margin-top:10px;color:#fff;font-size:15.2px;max-width:none}
+.lw-cta__fact a:hover{color:var(--gold)}
+
+/* ============================================================
+   RESPONSIVE — Webflow breakpoints only (991 / 767 / 479)
+   ============================================================ */
+@media screen and (max-width:991px){
+  .lw-home{--shell:min(1240px,100% - 8vw)}
+  .lw-nav__links{display:none}
+  .lw-hero__grid{grid-template-columns:1fr;gap:0}
+  .lw-hero__copy{padding-bottom:44px}
+  .lw-hero__media img{height:clamp(320px,54vw,460px);border-radius:var(--r-lg)}
+  .lw-hero__badge{left:16px;bottom:16px}
+  .lw-about__grid,.lw-svc__grid,.lw-promo__band{grid-template-columns:1fr}
+  .lw-svc__aside{position:static}
+  .lw-diff__grid,.lw-prob__grid{grid-template-columns:repeat(2,1fr)}
+  .lw-cta__facts{grid-template-columns:1fr}
+}
+@media screen and (max-width:767px){
+  .lw-home{--sp:clamp(56px,11vw,84px)}
+  .lw-ba{grid-template-columns:1fr}
+  .lw-diff__grid,.lw-prob__grid{grid-template-columns:1fr}
+  .lw-nav__tel{display:none}
+  .lw-svc__row{grid-template-columns:32px 1fr auto;gap:12px}
+}
+@media screen and (max-width:479px){
+  .lw-home{--shell:min(1240px,100% - 40px)}
+  .lw-hero__acts .lw-btn,.lw-cta__acts .lw-btn{width:100%}
+  .lw-hero__badge{padding:14px 16px}
+  .lw-ba__knob{width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lw-home .lw-rv{opacity:1;transform:none;transition:none}
+  .lw-creds__track{animation:none}
+  .lw-home *{transition-duration:.01ms!important}
+}
+</style>
+
+<!-- ============================= 1. NAV ============================= -->
+<nav class="lw-nav">
+  <div class="lw-nav__in">
+    <a href="/" class="lw-nav__logo" aria-label="Livewell Dental home">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d04139a3722dab23ea4f15_imgi_1_LW-logo.png" alt="Livewell Dental">
+    </a>
+    <div class="lw-nav__links">
+      <a href="/about-us/about-dr-chris">Dr. Chris</a>
+      <a href="/services">Services</a>
+      <a href="/our-work/smile-gallery">Smile Gallery</a>
+      <a href="/about-us/livewell-difference">The Livewell Difference</a>
+      <a href="/contact-us">Contact</a>
+    </div>
+    <div class="lw-nav__cta">
+      <a href="tel:+17036900102" class="lw-nav__tel">(703) 690-0102</a>
+      <a href="/contact-us" class="lw-btn lw-btn--gold">Book an Appointment</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== 2. HERO / WHY LIVEWELL ==================== -->
+<header class="lw-hero">
+  <div class="lw-hero__grid">
+    <div class="lw-hero__copy">
+      <p class="lw-eyebrow lw-rv">Cosmetic. Implant. Full Mouth Reconstruction.</p>
+      <h1 class="lw-rv" data-d="1">Dentistry done right <span class="lw-gold">the first time.</span></h1>
+      <p class="lw-hero__lede lw-rv" data-d="2">
+        Livewell Dental is a cosmetic, implant, and full mouth reconstruction practice serving
+        Fairfax Station and the greater Northern Virginia area. Dr. Chris finds the real reason
+        behind the problem, then builds a plan that is clear before treatment begins.
+      </p>
+      <div class="lw-hero__acts lw-rv" data-d="3">
+        <a href="/contact-us" class="lw-btn lw-btn--gold">Book an Appointment <span class="lw-ar">&rarr;</span></a>
+        <a href="tel:+17036900102" class="lw-btn lw-btn--ghost-light">Call (703) 690-0102</a>
+      </div>
+    </div>
+    <div class="lw-hero__media lw-rv" data-d="2">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a023e6dfa21a5062d3e1025_photo-40.webp"
+           alt="Dr. Chris Kim of Livewell Dental in the practice's Fairfax Station office">
+      <div class="lw-hero__badge">
+        <div>
+          <strong>320+</strong>
+          <span>5-star reviews</span>
+        </div>
+        <div class="lw-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lw-creds" aria-label="Credentials and affiliations">
+    <div class="lw-creds__track">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4826e91521471682abafc_imgi_24_GKC-logo.svg" alt="Kois Center Graduate">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4823bbf5c65fbef6eff0a_imgi_25_FAG-logo.svg" alt="Fellow, Academy of General Dentistry">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a3693e859c3fcd384ef5370_icoi%20logo.png" alt="Fellow, International Congress of Oral Implantology">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4819a464637e990ef93d6_imgi_27_AAD-logo.svg" alt="American Academy of Cosmetic Dentistry">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a316989804e12f253a2b99c_IACI.webp" alt="Implant Accelerator Clinical Instructor">
+      <!-- duplicate set for seamless loop -->
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4826e91521471682abafc_imgi_24_GKC-logo.svg" alt="" aria-hidden="true">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4823bbf5c65fbef6eff0a_imgi_25_FAG-logo.svg" alt="" aria-hidden="true">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a3693e859c3fcd384ef5370_icoi%20logo.png" alt="" aria-hidden="true">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d4819a464637e990ef93d6_imgi_27_AAD-logo.svg" alt="" aria-hidden="true">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a316989804e12f253a2b99c_IACI.webp" alt="" aria-hidden="true">
+    </div>
+  </div>
+</header>
+
+<!-- ==================== 3. ABOUT DR CHRIS ==================== -->
+<section class="lw-sec lw-about">
+  <div class="lw-shell lw-about__grid">
+    <div class="lw-about__media lw-rv">
+      <div class="lw-about__rule"></div>
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d446266d265c2a16c702a7_dr%20kim%20with%20a%20patient.webp"
+           alt="Dr. Chris Kim reviewing a treatment plan with a patient at Livewell Dental">
+    </div>
+    <div>
+      <p class="lw-eyebrow lw-rv">About Dr. Chris</p>
+      <!-- Copy below is the client's own approved text (comment threads 71, 72, 73). Do not rewrite. -->
+      <h2 class="lw-h2 lw-rv" data-d="1">Meet Dr. Chris Kim, the Dentist You See When the Details Matter</h2>
+      <p class="lw-about__body lw-rv" data-d="2">
+        Some dental problems keep coming back because no one ever stopped to ask why. A tooth was
+        fixed, then another problem showed up. Old dental work stopped feeling right. The bite
+        changed. The smile changed. The confidence changed. Dr. Chris built Livewell Dental for
+        adults who want someone to slow down, find the real reason, and create a plan that is clear
+        before treatment begins. His focus is cosmetic dentistry, smile makeovers, implant
+        dentistry, and full mouth rehabilitation, but the same level of thinking is applied to
+        everyday dentistry too. Not rushed dentistry. Not patchwork dentistry. Dentistry done right
+        the first time.
+      </p>
+      <ul class="lw-creds-list lw-rv" data-d="3">
+        <li><strong>UCSF DDS and AEGD trained</strong>, with a foundation shaped by one of the most respected dental programs in the country</li>
+        <li><strong>Kois Center Graduate</strong>, trained in evidence-based diagnosis, risk assessment, bite function, and comprehensive treatment planning</li>
+        <li><strong>FAGD</strong>, Fellow in the Academy of General Dentistry, and <strong>FICOI</strong>, Fellow in the International Congress of Oral Implantology</li>
+        <li><strong>Clinical Instructor at Implant Accelerator</strong>, trusted to teach advanced implant surgery and restorative planning to other dentists</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. LIVEWELL DIFFERENCE ==================== -->
+<section class="lw-sec lw-diff">
+  <div class="lw-shell">
+    <div class="lw-diff__head">
+      <div>
+        <p class="lw-eyebrow lw-rv">The Livewell Difference</p>
+        <h2 class="lw-h2 lw-rv" data-d="1" style="margin-top:20px;max-width:16ch">A better standard of dental care</h2>
+      </div>
+      <!-- Client comment: this section previously had no button to reach the page. Added. -->
+      <a href="/about-us/livewell-difference" class="lw-btn lw-btn--ghost lw-rv" data-d="2">
+        Explore the Difference <span class="lw-ar">&rarr;</span>
+      </a>
+    </div>
+    <div class="lw-diff__grid">
+      <div class="lw-diff__card lw-rv"><p class="lw-diff__n">01</p><h3>We Listen First</h3>
+        <p>Your first visit starts with questions, not a drill. We want the full history before anyone recommends treatment.</p></div>
+      <div class="lw-diff__card lw-rv" data-d="1"><p class="lw-diff__n">02</p><h3>Guided by Proven Dentistry</h3>
+        <p>Kois Center training means diagnosis is evidence based, and risk is assessed before a plan is built.</p></div>
+      <div class="lw-diff__card lw-rv" data-d="2"><p class="lw-diff__n">03</p><h3>Modern Technology,<br>Personal Care</h3>
+        <p>Digital scanning, 3D imaging, and guided implant planning, used to make care more precise and more comfortable.</p></div>
+      <div class="lw-diff__card lw-rv" data-d="1"><p class="lw-diff__n">04</p><h3>Comfort Comes First</h3>
+        <p>Sedation options and a calm, unhurried pace for patients who have not enjoyed a dental visit in a long time.</p></div>
+      <div class="lw-diff__card lw-rv" data-d="2"><p class="lw-diff__n">05</p><h3>Clear and Simple Care</h3>
+        <p>You see the plan, the sequence, and the cost before treatment begins. No surprises partway through.</p></div>
+      <div class="lw-diff__card lw-rv" data-d="3"><p class="lw-diff__n">06</p><h3>Relationships Built to Last</h3>
+        <p>We plan for how your teeth need to function in twenty years, not just how they look next month.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. WHICH PROBLEM DO WE SOLVE ============ -->
+<section class="lw-sec lw-prob">
+  <div class="lw-shell">
+    <p class="lw-eyebrow lw-rv">Which problem are we solving</p>
+    <h2 class="lw-h2 lw-rv" data-d="1" style="margin-top:20px;color:#fff;max-width:18ch">
+      Most patients arrive with one of three problems
+    </h2>
+    <p class="lw-lede lw-rv" data-d="2" style="margin-top:22px">
+      Livewell is built around cosmetic dentistry, implant dentistry, and full mouth reconstruction.
+      That focus is the reason complex cases get solved here instead of being passed along.
+    </p>
+    <div class="lw-prob__grid">
+      <a href="/services/cosmetic-dentistry" class="lw-prob__card lw-rv">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a31353517460b025bb61c85_abbey-2-modelphotos%20cropped.webp" alt="Livewell Dental cosmetic dentistry patient after treatment">
+        <div class="lw-prob__body">
+          <p class="lw-prob__q">"My smile does not match how I feel."</p>
+          <p class="lw-prob__a">Veneers, bonding, whitening, and full smile makeovers, designed around your face rather than a template.</p>
+          <span class="lw-prob__link">Cosmetic Dentistry <span class="lw-ar">&rarr;</span></span>
+        </div>
+      </a>
+      <a href="/services/dental-implant" class="lw-prob__card lw-rv" data-d="1">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d5a4539d067dc2659509b6_hs-after-IMG_8475-cosmetic.fmr.implant.allonx.smilemakeover.webp"
+             style="object-position:center 30%" alt="Livewell Dental patient smiling after implant and All-on-X treatment">
+        <div class="lw-prob__body">
+          <p class="lw-prob__q">"I am missing teeth, or my denture moves."</p>
+          <p class="lw-prob__a">Single implants through All-on-X, planned digitally and placed by a dentist who teaches implant surgery.</p>
+          <span class="lw-prob__link">Implant Dentistry <span class="lw-ar">&rarr;</span></span>
+        </div>
+      </a>
+      <a href="/services/full-mouth-reconstruction" class="lw-prob__card lw-rv" data-d="2">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a41ad9e7c33c1f2b0a325a3_bk-after-cosmetic.fmr.smilemakeover.bridge.crown.veneer.crownlay.onlay00022.webp"
+             style="object-position:center 22%" alt="Livewell Dental patient smiling after full mouth reconstruction">
+        <div class="lw-prob__body">
+          <p class="lw-prob__q">"My dental work keeps failing."</p>
+          <p class="lw-prob__a">Full mouth reconstruction that treats the bite as one system, so the repair holds instead of breaking down again.</p>
+          <span class="lw-prob__link">Full Mouth Reconstruction <span class="lw-ar">&rarr;</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. PATIENT STORY ==================== -->
+<section class="lw-sec">
+  <div class="lw-shell">
+    <p class="lw-eyebrow lw-rv">Patient story</p>
+    <h2 class="lw-h2 lw-rv" data-d="1" style="margin-top:20px;max-width:20ch">Hear it from the person who lived it</h2>
+
+    <div class="lw-flag lw-rv" data-d="1">
+      PENDING CLIENT ASSET: the video currently in this slot on the live site is the dCOE video.
+      Flagged as wrong by Dr. Chris twice and by Jessica Acosta on 2026-07-07. Replacement file is
+      referenced in the comments as a Google Drive link that we do not have access to yet.
+      Poster image below is a placeholder from the existing library.
+    </div>
+
+    <div class="lw-story__frame lw-rv" data-d="2">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d44ff910dc3aade342015a_LIVEWELL%20Dental%20_%20Dexios%20Design-24.webp"
+           alt="Livewell Dental patient story video">
+      <button class="lw-story__play" type="button" aria-label="Play patient story video">
+        <span class="lw-story__disc">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </button>
+      <div class="lw-story__cap">
+        <p>"He was the first dentist who explained why it kept happening."</p>
+        <span>Full mouth reconstruction patient</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. PROOF / BEFORE + AFTER ============ -->
+<section class="lw-sec lw-proof">
+  <div class="lw-shell">
+    <p class="lw-eyebrow lw-rv">Proof</p>
+    <h2 class="lw-h2 lw-rv" data-d="1" style="margin-top:20px;max-width:18ch">Real patients. Real results.</h2>
+    <p class="lw-lede lw-rv" data-d="2" style="margin-top:22px">
+      Every case below was treated at Livewell by Dr. Chris. Drag to compare.
+    </p>
+
+    <div class="lw-ba">
+      <div class="lw-ba__item lw-rv">
+        <div class="lw-ba__win" data-ba role="slider" tabindex="0" aria-label="Before and after comparison, smile makeover"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="lw-ba__before" src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d40dabdf0a428ee79e2e48_SmileGallery_m_01%20before.webp" alt="Patient smile before treatment at Livewell Dental">
+          <img class="lw-ba__after" src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d40daa6f694c362ff34b22_SmileGallery_m_01%20after.webp" alt="The same patient's smile after treatment at Livewell Dental">
+          <span class="lw-ba__tag lw-ba__tag--b">Before</span>
+          <span class="lw-ba__tag lw-ba__tag--a">After</span>
+          <div class="lw-ba__handle"><span class="lw-ba__knob">&#8249;&#8250;</span></div>
+        </div>
+        <div class="lw-ba__meta">
+          <h3>Smile makeover</h3>
+          <p>Worn, uneven front teeth rebuilt for shape, length, and colour that suit the face.</p>
+        </div>
+      </div>
+
+      <div class="lw-ba__item lw-rv" data-d="1">
+        <div class="lw-ba__win" data-ba role="slider" tabindex="0" aria-label="Before and after comparison, full mouth reconstruction"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <img class="lw-ba__before" src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a0523a39cba54b57285830b_mr-1.before-IMG_2682-cosmetic.smilemakeover.fmr.bridge.crown.implant.gum.surgery.webp" alt="Patient before full mouth reconstruction at Livewell Dental">
+          <img class="lw-ba__after" src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a313427bc3af84fb9993f2c_mr-1.final-IMG_2682%20cropped.webp" alt="The same patient after full mouth reconstruction at Livewell Dental">
+          <span class="lw-ba__tag lw-ba__tag--b">Before</span>
+          <span class="lw-ba__tag lw-ba__tag--a">After</span>
+          <div class="lw-ba__handle"><span class="lw-ba__knob">&#8249;&#8250;</span></div>
+        </div>
+        <div class="lw-ba__meta">
+          <h3>Full mouth reconstruction</h3>
+          <p>Implants, crowns, bridgework, and gum surgery sequenced as one plan.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lw-proof__foot lw-rv">
+      <a href="/our-work/smile-gallery" class="lw-btn lw-btn--ghost">See the Full Smile Gallery <span class="lw-ar">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8. PROMOTIONS ==================== -->
+<section class="lw-sec">
+  <div class="lw-shell">
+    <div class="lw-flag lw-rv">
+      PENDING CLIENT INPUT: "Promotions" appears in Dr. Chris's requested page flow but no offer
+      exists anywhere on the current site. Placeholder copy below is written to be replaced.
+      If there is no offer to run, this section should be cut rather than filled with filler.
+    </div>
+    <div class="lw-promo__band lw-rv" data-d="1">
+      <div class="lw-promo__copy">
+        <p class="lw-eyebrow lw-flag--light" style="border:0;background:none;padding:0;margin-bottom:14px">New patients</p>
+        <h2>Start with a comprehensive exam</h2>
+        <p>
+          A full evaluation, digital imaging, and a written plan with sequence and cost, so you know
+          exactly what is being recommended and why before anything begins.
+        </p>
+        <div class="lw-promo__acts">
+          <a href="/new-patient/first-visit-new-exam" class="lw-btn lw-btn--gold">Book Your First Visit <span class="lw-ar">&rarr;</span></a>
+          <a href="/new-patient/insurance-financing" class="lw-btn lw-btn--ghost-light">Insurance &amp; Financing</a>
+        </div>
+      </div>
+      <div class="lw-promo__media">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d445d29ea2ec8ed2acf1ea_livewell%20technology.webp" alt="Digital scanning technology at Livewell Dental">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 9. SERVICES ==================== -->
+<section class="lw-sec">
+  <div class="lw-shell lw-svc__grid">
+    <div class="lw-svc__aside">
+      <p class="lw-eyebrow lw-rv">Dental services</p>
+      <h2 class="lw-h2 lw-rv" data-d="1" style="margin-top:20px;max-width:12ch">The care you need, in one place</h2>
+      <p class="lw-lede lw-rv" data-d="2" style="margin-top:22px">
+        Comprehensive dental care should connect the dots. We bring cosmetic dentistry, implants,
+        and restorative care together with your health, comfort, and confidence in mind.
+      </p>
+      <a href="/services" class="lw-btn lw-btn--ghost lw-rv" data-d="3" style="margin-top:30px">
+        View All Services <span class="lw-ar">&rarr;</span>
+      </a>
+    </div>
+
+    <!-- Order below follows the client's approved service hierarchy (comment thread 67). -->
+    <div class="lw-svc__list lw-rv" data-d="1">
+      <a class="lw-svc__row" href="/services/dcoe">
+        <span class="lw-svc__i">01</span>
+        <span><span class="lw-svc__name">dCOE</span><span class="lw-svc__sub">Comprehensive dental evaluation, the starting point for complex cases</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/full-mouth-reconstruction">
+        <span class="lw-svc__i">02</span>
+        <span><span class="lw-svc__name">Full Mouth Reconstruction</span><span class="lw-svc__sub">Rebuilding function and appearance as one system</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/sedation-dentistry">
+        <span class="lw-svc__i">03</span>
+        <span><span class="lw-svc__name">Sedation Dentistry</span><span class="lw-svc__sub">For patients who have avoided the dentist for years</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/cosmetic-dentistry">
+        <span class="lw-svc__i">04</span>
+        <span><span class="lw-svc__name">Cosmetic Dentistry</span><span class="lw-svc__sub">Smile makeover, porcelain veneers, no prep veneers, gum recontouring, whitening, bonding</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/dental-implant">
+        <span class="lw-svc__i">05</span>
+        <span><span class="lw-svc__name">Implant Dentistry</span><span class="lw-svc__sub">Single implants, implant bridges, All-on-X, locator retained dentures</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/restorative-dentistry">
+        <span class="lw-svc__i">06</span>
+        <span><span class="lw-svc__name">Restorative Dentistry</span><span class="lw-svc__sub">Crowns, inlays and onlays, bridges, tooth coloured fillings</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/oral-surgery">
+        <span class="lw-svc__i">07</span>
+        <span><span class="lw-svc__name">Oral Surgery</span><span class="lw-svc__sub">Bone grafting, ridge augmentation, extractions, sinus lift, wisdom teeth</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/orthodontics">
+        <span class="lw-svc__i">08</span>
+        <span><span class="lw-svc__name">Orthodontics</span><span class="lw-svc__sub">Invisalign and braces</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/general-dentistry">
+        <span class="lw-svc__i">09</span>
+        <span><span class="lw-svc__name">General Dentistry</span><span class="lw-svc__sub">Preventive dentistry, preventive cleaning, gum therapy, root canal therapy</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/tmj-treatment">
+        <span class="lw-svc__i">10</span>
+        <span><span class="lw-svc__name">TMJ Treatment</span><span class="lw-svc__sub">Jaw pain, clenching, and bite related symptoms</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+      <a class="lw-svc__row" href="/services/emergency-dentistry">
+        <span class="lw-svc__i">11</span>
+        <span><span class="lw-svc__name">Dental Emergencies</span><span class="lw-svc__sub">Same day care when something breaks or hurts</span></span>
+        <span class="lw-svc__go">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10. CLOSING CTA ==================== -->
+<section class="lw-sec lw-cta">
+  <div class="lw-cta__glow"></div>
+  <div class="lw-shell lw-cta__in">
+    <p class="lw-eyebrow lw-rv" style="justify-content:center">Reimagine your dental experience</p>
+    <h2 class="lw-rv" data-d="1">Let's find out what is actually going on.</h2>
+    <p class="lw-rv" data-d="2">
+      Book a comprehensive evaluation with Dr. Chris. You will leave knowing what is happening,
+      why it is happening, and what it takes to fix it properly.
+    </p>
+    <div class="lw-cta__acts lw-rv" data-d="3">
+      <a href="/contact-us" class="lw-btn lw-btn--gold">Book an Appointment <span class="lw-ar">&rarr;</span></a>
+      <a href="tel:+17036900102" class="lw-btn lw-btn--ghost-light">Call (703) 690-0102</a>
+    </div>
+
+    <div class="lw-cta__facts lw-rv" data-d="3">
+      <div class="lw-cta__fact">
+        <span>Visit</span>
+        <p><a href="https://maps.google.com/?q=9027+Silverbrook+Rd+Ste+F+Fairfax+Station+VA+22039" target="_blank" rel="noopener">9027 Silverbrook Rd Ste. F<br>Fairfax Station, VA 22039</a></p>
+      </div>
+      <div class="lw-cta__fact">
+        <span>Hours</span>
+        <p>Mon &amp; Tue: 8am to 5pm<br>Wed &amp; Thu: 8am to 4pm<br>Fri: 8am to 1pm</p>
+      </div>
+      <div class="lw-cta__fact">
+        <span>Call</span>
+        <p><a href="tel:+17036900102">(703) 690-0102</a><br>Serving the greater Northern Virginia area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('.lw-home');
+  if(!root) return;
+
+  /* ---- scroll reveal ---- */
+  var els = root.querySelectorAll('.lw-rv');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){ el.classList.add('is-in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { threshold:0.12, rootMargin:'0px 0px -8% 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---- before / after drag ---- */
+  root.querySelectorAll('[data-ba]').forEach(function(win){
+    var after  = win.querySelector('.lw-ba__after');
+    var handle = win.querySelector('.lw-ba__handle');
+    var active = false;
+
+    function set(pct){
+      pct = Math.max(0, Math.min(100, pct));
+      after.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left = pct + '%';
+      win.setAttribute('aria-valuenow', Math.round(pct));
+    }
+    function fromEvent(e){
+      var r = win.getBoundingClientRect();
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      set((x / r.width) * 100);
+    }
+
+    win.addEventListener('pointerdown', function(e){
+      active = true; win.setPointerCapture(e.pointerId); fromEvent(e);
+    });
+    win.addEventListener('pointermove', function(e){ if(active) fromEvent(e); });
+    win.addEventListener('pointerup',     function(){ active = false; });
+    win.addEventListener('pointercancel', function(){ active = false; });
+
+    /* keyboard access */
+    win.addEventListener('keydown', function(e){
+      var now = parseFloat(win.getAttribute('aria-valuenow')) || 50;
+      if(e.key === 'ArrowLeft'){  set(now - 4); e.preventDefault(); }
+      if(e.key === 'ArrowRight'){ set(now + 4); e.preventDefault(); }
+    });
+
+    set(50);
+  });
+})();
+</script>
+
+</div><!-- /.lw-home -->
+
+</body>
+</html>

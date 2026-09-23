@@ -8,7 +8,7 @@
  * running digest to its ghcr.io version tag.
  *
  * Usage (from anywhere):
- *   node inventory.mjs                  table + .tmp/instatic-release/<stamp>-inventory.json
+ *   node inventory.mjs                  table + output/instatic-release/<stamp>-inventory.json
  *   node inventory.mjs --origins        also read PUBLIC_ORIGIN per service (one extra query each)
  *   node inventory.mjs --db             also read cms.db facts over railway ssh (readonly open; slow)
  *   node inventory.mjs --json           print the JSON instead of the table
@@ -64,7 +64,7 @@ for (const t of targets) {
 rows.sort((a, b) => a.project.localeCompare(b.project) || a.environment.localeCompare(b.environment))
 
 const report = { at: new Date().toISOString(), newestTag: newest, newestDigest: latestDigest, sites: rows }
-const dir = join(process.cwd(), '.tmp', 'instatic-release')
+const dir = join(process.cwd(), 'output', 'instatic-release')
 mkdirSync(dir, { recursive: true })
 const file = join(dir, `${stamp()}-inventory.json`)
 writeJson(file, report)

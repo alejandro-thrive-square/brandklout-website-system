@@ -47,7 +47,7 @@ pointing it at `app.asana.com/api/1.0`.
 | :--- | :--- |
 | `asana-lib.mjs` | Token load/refresh, MCP JSON-RPC client, paginated tool calls. |
 | `asana-auth.mjs` | One-time OAuth bootstrap. Re-run only if the grant is revoked. |
-| `asana-pull.mjs` | Read-only pull of assigned work into `../.tmp/asana/`. |
+| `asana-pull.mjs` | Read-only pull of assigned work into `../output/asana/`. |
 | `asana-context.mjs` | **Full context pull per client**: task tree, every description, comments, and all attachment files downloaded to disk. |
 
 ## Getting the real brief — `asana-context.mjs`
@@ -70,7 +70,7 @@ node deliver/brandklout/scripts/asana-context.mjs --all
 node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>   # e.g. into a worktree
 ```
 
-Writes to `<client>/workflows/01-client-inquiry/.tmp/asana-context/`:
+Writes to `<client>/scenario-0-new-site/01-client-inquiry/output/asana-context/`:
 
 - `CONTEXT.md` — the readable brief: full tree, verbatim descriptions, comments, attachment index
 - `context.json` — raw structured pull
@@ -118,7 +118,7 @@ node deliver/brandklout/scripts/asana-pull.mjs --all       # include completed
 node deliver/brandklout/scripts/asana-pull.mjs --projects  # also dump the workspace project list
 ```
 
-Outputs `../.tmp/asana/my-tasks.json` and `../.tmp/asana/my-tasks.md`.
+Outputs `../output/asana/my-tasks.json` and `../output/asana/my-tasks.md`.
 
 ## Rules for agents reading these artifacts
 
@@ -134,6 +134,6 @@ Outputs `../.tmp/asana/my-tasks.json` and `../.tmp/asana/my-tasks.md`.
 
 ## Version Control
 
-Commit the scripts and lightweight `.tmp/` artifacts. Never commit
+Commit the scripts and lightweight `output/` artifacts. Never commit
 `~/.webzite/asana-brandklout.json`, tokens, or the client secret. Follows the root-level rules in
 [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).

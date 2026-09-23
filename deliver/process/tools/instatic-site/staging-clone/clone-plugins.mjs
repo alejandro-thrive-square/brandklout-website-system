@@ -4,7 +4,7 @@
  *
  *   node clone-plugins.mjs --from https://www.drnahlah.com \
  *                          --to   https://staging.drnahlah.com \
- *                          --files ./.tmp/plugins        # unpacked plugin assets
+ *                          --files ./output/plugins        # unpacked plugin assets
  *
  * WHY THIS EXISTS
  * ---------------
@@ -26,7 +26,7 @@
  *   railway ssh -s "<Service>" -e production \
  *     "sh -lc 'tar czf - -C /app/storage/uploads/plugins . | base64 -w0'" \
  *     | grep -v '^Using SSH' | tr -d '\r\n' > all.b64
- *   base64 -d all.b64 > all.tgz && mkdir -p .tmp/plugins && cd .tmp/plugins && tar xzf ../../all.tgz
+ *   base64 -d all.b64 > all.tgz && mkdir -p output/plugins && cd output/plugins && tar xzf ../../all.tgz
  *
  * This script writes each `plugin.json` from the live manifest, packs with
  * `16-instatic-plugins/pack-plugin.mjs`, installs, then copies settings.
@@ -51,7 +51,7 @@ const argv = process.argv.slice(2)
 const flag = (n, d) => { const i = argv.indexOf('--' + n); return i === -1 ? d : argv[i + 1] }
 
 const FROM = flag('from'), TO = flag('to')
-const FILES = flag('files', join(HERE, '.tmp', 'plugins'))
+const FILES = flag('files', join(HERE, 'output', 'plugins'))
 // Vendored beside this script (identical bytes to 16-instatic-plugins/pack-plugin.mjs,
 // which is client-scoped). A root process module cannot reach into one client's
 // workflow folder, so module 21 carries its own copy. `--packer` overrides it.

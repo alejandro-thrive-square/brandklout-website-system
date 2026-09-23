@@ -15,11 +15,11 @@ once now to stop the `:latest` drift below.
 
 | Step | Directive | Gate to leave the step |
 | --- | --- | --- |
-| 01 | [Assess the Release](01-assess-release.md) | Inventory saved, changelog and migrations read, go / wait decided with the owner |
-| 02 | [Backup](02-backup.md) | Every site in this round has a checked backup record taken on the digest it runs now |
-| 03 | [Update Staging](03-update-staging.md) | Every staging instance on the pinned release, `verify-data` PASS, a republish looked at |
-| 04 | [Update Production](04-update-production.md) | Owner said go; each production site updated, verified, admin login proven, one at a time |
-| 05 | [Rollback](05-rollback.md) | Only when a step failed: previous digest running, data proven intact or restored |
+| 01 | [Assess the Release](./01-assess-release/01-assess-release.md) | Inventory saved, changelog and migrations read, go / wait decided with the owner |
+| 02 | [Backup](./02-backup/02-backup.md) | Every site in this round has a checked backup record taken on the digest it runs now |
+| 03 | [Update Staging](./03-update-staging/03-update-staging.md) | Every staging instance on the pinned release, `verify-data` PASS, a republish looked at |
+| 04 | [Update Production](./04-update-production/04-update-production.md) | Owner said go; each production site updated, verified, admin login proven, one at a time |
+| 05 | [Rollback](./05-rollback/05-rollback.md) | Only when a step failed: previous digest running, data proven intact or restored |
 
 ## The state on 2026-09-23 (from `inventory.mjs`)
 
@@ -44,10 +44,10 @@ then upgrade on purpose.
   `backup`, `update-image`, `verify-data`, `rollback`). They reuse `tools/instatic-site/ops/backup-site.mjs`,
   `tools/instatic-site/staging-clone/lib.mjs`, `tools/instatic-domain-origins/check-origins.mjs`.
 - **Run from** the client folder (`deliver/brandklout/<client>/`) on the client's branch, so backups
-  land in that client's `.tmp/instatic-release/` (gitignored). The inventory and the release
+  land in that client's `output/instatic-release/` (gitignored). The inventory and the release
   assessment can run from the repo root.
 - **Runbook:** one repo run per release round in `.claude/runbook/` (versions, sites, results), plus a
-  short run in each client's `docs/runbook/` that names its backup folder and the digest before and after.
+  row in each client's `RUNBOOK.md` (on its branch) that names its backup folder and the digest before and after.
 
 ## Hard rules
 

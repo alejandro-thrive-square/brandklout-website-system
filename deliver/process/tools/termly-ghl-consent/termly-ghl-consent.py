@@ -29,7 +29,7 @@ def main() -> int:
         print("node is not on PATH")
         return 1
     cmd = [node, str(KIT), "instatic", "status"] if args[0] == "status" else [node, str(KIT), *args]
-    out = HERE / ".tmp" / f"{args[0]}.out"
+    out = HERE / "output" / f"{args[0]}.out"
     out.parent.mkdir(exist_ok=True)
     # Redirect to a file: Node on Windows can die on a libuv assertion when stdout is a pipe.
     with out.open("w", encoding="utf-8") as handle:

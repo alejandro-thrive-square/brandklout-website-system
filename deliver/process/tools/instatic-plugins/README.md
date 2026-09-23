@@ -4,7 +4,7 @@ One home for every Brandklout Instatic plugin: the source, the registry of what 
 who must carry it, and the scripts that pack, install, upgrade and verify them on every site,
 production and staging. The process that uses it is
 [Scenario 4 · Update Plugins Across Sites](../../scenario-4-update-plugins/README.md); new sites get
-their plugins in [Scenario 0 step 01](../../scenario-0-new-site/01-client-inquiry.md).
+their plugins in [Scenario 0 step 01](../../scenario-0-new-site/01-client-inquiry/01-client-inquiry.md).
 
 Built 2026-09-23. Before this, the four plugins lived in client folders
 (`bk-dr-nahlah/.../16-instatic-plugins/`, `bk-brandklout-website/.../16-instatic-plugins/`,
@@ -48,7 +48,7 @@ version has no changelog line, or if a manifest asks for a permission the regist
 ## Scripts
 
 All Node 18+, no install. Dry run unless `--apply`. On Windows redirect output to a file
-(`> .tmp/x.log 2>&1`); Node 24 can die when stdout is a pipe.
+(`> output/x.log 2>&1`); Node 24 can die when stdout is a pipe.
 
 | Script | Purpose | Usage | Origin |
 | --- | --- | --- | --- |
@@ -57,14 +57,14 @@ All Node 18+, no install. Dry run unless `--apply`. On Windows redirect output t
 | `pack-plugin.mjs` | Deterministic zip, forward-slashed entries; now creates its output folder | `node pack-plugin.mjs <dir> <out.zip>` | moved from `tools/instatic-embeds/` |
 | `lib/fleet.mjs` | Registry loader and checks, master env reader, host resolver | imported | `readMaster()` moved from `rollout-site-scripts.mjs`, which imports it now |
 | `lib/install.mjs` | Inspect with no grants, check id, version, grants, downgrade and old id, install | imported | `bk-dr-nahlah` `16-instatic-plugins/install-plugin.mjs` |
-| `lib/pack.mjs` | `.tmp/packages/<id>-<version>.zip` from source | imported | new |
+| `lib/pack.mjs` | `output/packages/<id>-<version>.zip` from source | imported | new |
 | `test-*.mjs`, `verify-link-editor.mjs` | Offline suites, no site | `node plugins.mjs test` | `bk-dr-nahlah` `16-instatic-plugins/` and `18-instatic-embeds/`. The aeo and og suites still matched the old `webzite.` markers after the 2026-09-10 rename; fixed here (the og one had been passing vacuously). |
 
 ```bash
 cd deliver/process/tools/instatic-plugins
 node plugins.mjs registry                                   # released versions, who carries what
 node plugins.mjs test --plugin open-graph                   # offline suites
-node plugins.mjs status > .tmp/status.log 2>&1              # every site, production and staging, read-only
+node plugins.mjs status > output/status.log 2>&1              # every site, production and staging, read-only
 node plugins.mjs rollout --plugin open-graph --sites expected --env staging            # dry run
 node plugins.mjs rollout --plugin open-graph --sites mason-park --env staging --apply --publish
 node plugins.mjs verify  --plugin open-graph --sites mason-park --env staging
@@ -75,7 +75,7 @@ node plugins.mjs rollout --plugin open-graph --sites mason-park --env production
 `AHEAD` (the site runs something newer than the source: stop and bring the source in), `MISSING`,
 plus `DRIFT` when the draft differs from what is live. Then issues: old `webzite.*` ids, disabled
 or errored plugins, and `PARITY` (staging and production on different versions). It writes
-`.tmp/status/status-<stamp>.json`.
+`output/status/status-<stamp>.json`.
 
 `rollout`, per host, one at a time, stops at the first failure:
 
@@ -84,7 +84,7 @@ or errored plugins, and `PARITY` (staging and production on different versions).
    downgrade, a production host whose staging is not already on the release, a client with no
    staging host (unless `--no-staging-ok`), a publish over drafts (unless `--allow-drift`).
 3. Snapshots `plugin-before.json` (settings and every record) and runs `ops/backup-site.mjs`, under
-   `.tmp/rollouts/<stamp>-<plugin>-<version>/<host>/`.
+   `output/rollouts/<stamp>-<plugin>-<version>/<host>/`.
 4. Installs the package rebuilt from source with the registry grants.
 5. Checks the row is active and enabled on the release, every setting unchanged, record counts equal.
 6. With `--publish`: publishes, only if the draft still matches what is live. A fresh install is
@@ -149,5 +149,5 @@ live `siteScripts` line carries a consent tag today.
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md). Plugin source, tests, scripts,
-`plugins.json` and this README are committed; `.tmp/` (packages, status, rollout snapshots, which
+`plugins.json` and this README are committed; `output/` (packages, status, rollout snapshots, which
 hold plugin settings and records) is not.

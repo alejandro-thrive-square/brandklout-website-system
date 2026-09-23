@@ -80,8 +80,8 @@ function toRgba(v) {
 }
 
 const { site: shell, seq } = await getSite()
-writeFileSync(`.tmp/shell.before.${seq}.json`, JSON.stringify(shell, null, 1), 'utf8')
-console.log(`snapshot .tmp/shell.before.${seq}.json`)
+writeFileSync(`output/shell.before.${seq}.json`, JSON.stringify(shell, null, 1), 'utf8')
+console.log(`snapshot output/shell.before.${seq}.json`)
 
 const fw = shell.settings?.framework
 if (!fw?.colors?.tokens?.length) {

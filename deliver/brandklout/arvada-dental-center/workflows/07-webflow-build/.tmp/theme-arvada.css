@@ -1,0 +1,140 @@
+/* ARVADA LIGHT — the practice's real palette, replacing the invented one.
+   ========================================================================
+   Every value is lifted from the practice's own published Webflow variables
+   (arvadadentalcenter.webflow.shared.css :root), not sampled by eye:
+
+     --color-scheme-1--background     #FDF8EF   cream, their dominant ground
+     --_primitives---brand--light     #FCFCFC
+     --_primitives---brand--gold      #C8B282
+     --_primitives---brand--brown-800 #403830
+     --_primitives---brand--brown-500 #8C6946
+     --_primitives---brand--silver-900 #5F5F5D
+     neutrals  black #222 #444 #666 #AAA #CCC #EEE
+
+   The design shipped with navy/cyan/amber, none of which appear anywhere in
+   that system. Counted off the pixels, the practice's own pages run 60-80%
+   cream; these ran 35-67% near-black.
+
+   HOW THE FLIP WORKS
+   ------------------
+   Chapters take their ground two different ways, and both have to be handled
+   or the page ends up half-flipped:
+
+     .ch{background:var(--bg)}          the semantic layer
+     .ch-options{background:var(--ink-900)}   a primitive, straight
+
+   So the ink scale itself is remapped rather than the semantic layer alone.
+   Reading the six pages, --ink-950 marks exactly two chapters each — the
+   opening chapter and .close — plus the footer, and it is ALSO the text
+   colour on the gold fills (.btn--primary is background:var(--cyan);
+   color:var(--ink-950)). All four of those roles want it dark, so it stays
+   dark and becomes the page's two accent bands. Everything above it in the
+   scale becomes cream, which is what turns the page over.
+
+   That leaves the practice's own rhythm: a cream page, a dark band early, a
+   dark band at the close, a dark footer.
+
+   SPECIFICITY
+   -----------
+   The paste made every <section> its own token scope (the converter rewrote
+   :root and [data-theme] as :scope{…}), so the override has to land on those
+   same elements: #main > * clears :scope at (1,0,1) vs (0,1,0). Established
+   by probing the live page — :scope here does not mean what it looks like.
+
+   This block declares TOKENS ONLY. An earlier draft also set background and
+   color, which at (1,0,1) outranked .ftr{background:var(--ink-950)} and
+   stranded the footer's white text on cream at 1.03:1. The design already
+   paints from the tokens; remapping them is the whole job. */
+
+#main, #main > * {
+  /* ---- brand primitives ---- */
+  --navy:#403830; --navy-deep:#2A231C; --blue:#8C6946;
+  --cyan:#C8B282; --cyan-deep:#A8905F; --cyan-ink:#6F5A38;
+  --amber:#8C6946; --amber-deep:#7A5B3D; --amber-ink:#5A4128;
+  --ink:#222222; --slate:#5F5F5D;
+
+  /* ---- the scale turns over; only 950 stays dark ---- */
+  --ink-950:#2A231C;      /* two accent bands, the footer, text on gold */
+  --ink-900:#FDF8EF;      /* was the default chapter ground */
+  --ink-850:#FCFCFC;
+  --ink-800:#F2ECE1;
+  --ink-700:#EDE4D6; --ink-600:#E2D6C4;
+
+  --paper:#FDF8EF; --paper-2:#FCFCFC; --paper-3:#F2ECE1;
+
+  /* ---- the ground ---- */
+  --bg:#FDF8EF; --bg-2:#FCFCFC; --bg-3:#F2ECE1;
+  --card:#FFFFFF;
+  --fg:#222222; --fg-body:#444444; --fg-soft:#666666;
+  --line:rgba(64,56,48,.16); --line-2:rgba(64,56,48,.08);
+  --line-strong:rgba(64,56,48,.34);
+  /* Gold is 1.7:1 on cream — a fill colour, never a text colour. Text-sized
+     accents take the brown ink variant, display-sized ones keep the gold.
+     The design already made exactly this distinction for cyan on paper. */
+  --accent:#6F5A38; --accent-lg:#A8905F; --rule:#A8905F;
+  --offer:#7A5B3D; --offer-ink:#5A4128;
+  --focus:#6F5A38;
+}
+
+/* ---- the dark sections keep light text ----
+   The opening chapter is named per page, so all six are listed; a name not on
+   the current page simply matches nothing.
+
+   .ch-arrival is here for a different reason than the rest. It declares no
+   background at all, so the token remap turned it cream — but it is the hero,
+   and a dark photograph sits behind it. Its heading went dark-brown-on-dark
+   and all but vanished, and the contrast pass scored the page 0 failures
+   anyway, because it skips text over images by design. Found by looking at
+   the screenshot. A gate that reports clean is not the same as a page that
+   reads. */
+#main [class*="-ch-arrival"],
+#main [class*="-ch-gap"], #main [class*="-ch-verdict"], #main [class*="-ch-mirror"],
+#main [class*="-ch-now"], #main [class*="-ch-search"], #main [class*="-ch-years"],
+#main [class*="-close"], #main [class*="-ftr"] {
+  --bg:#2A231C; --bg-2:#403830; --bg-3:#4A4038;
+  --card:rgba(252,252,252,.06);
+  --fg:#FCFCFC; --fg-body:rgba(252,252,252,.82); --fg-soft:rgba(252,252,252,.62);
+  --line:rgba(252,252,252,.16); --line-2:rgba(252,252,252,.08);
+  --line-strong:rgba(252,252,252,.34);
+  /* On brown, gold reads 4.6:1 — here it CAN carry text. */
+  --accent:#C8B282; --accent-lg:#C8B282; --rule:#C8B282;
+  --offer:#C8B282; --offer-ink:#C8B282;
+  --focus:#C8B282;
+}
+
+/* ---- the nav keeps its original design ----
+   It is transparent over the hero, which stays dark, and .nav.solid gives it
+   a solid bar once scrolled — so its white type is correct in both states and
+   a dark bar over a cream page is the practice's own pattern. An earlier
+   draft recoloured it dark and broke it against the hero photo. Only the two
+   cold literals need warming. */
+#main [class*="-nav"][class*="solid"], #main [class*="-nav"].solid{
+  background:rgba(42,35,28,.86) }
+/* The scroll-progress fill ended on a literal cyan highlight. */
+#main [class*="-navProgress"]{
+  background:linear-gradient(90deg,#A8905F,#C8B282 60%,#E3D5B8) }
+
+/* ---- places the design hard-codes a primitive, found by the contrast pass ---- */
+/* background:var(--amber);color:var(--ink-950) is brown on brown once amber
+   stops being orange — 3.12:1. */
+#main [class*="-btn--offer"]{ color:#FCFCFC }
+/* The offer card was already a warm cream gradient; only its border was
+   orange. */
+#main [class*="-offer"]{ border-color:rgba(200,178,130,.55) }
+
+/* ---- text links coloured with raw --cyan ----
+   A handful of rules reach past the semantic layer to paint TEXT with the
+   brand hue: .opt-card a, the footnote links, .nav-chapter b, .row b. Cyan
+   was readable on the old near-black ground; gold on cream is 2.07:1.
+   They resolve to var(--accent), not to a literal, so each one picks up the
+   brown on cream and the gold inside the dark bands automatically. */
+#main [class*="-opt-card"] a,
+#main [class*="-ch-number"] sup a,
+#main [class*="-ch-invest"] sup a,
+#main [class*="-nav-chapter"] b,
+#main [class*="-nav-tel"]:hover,
+#main [class*="-row"] b { color:var(--accent) }
+
+/* Footer fine print is rgba(255,255,255,.46); that cleared 4.5:1 on the old
+   near-black and lands at 4.41 on the warmer, lighter brown. */
+#main [class*="-ftr__legal"]{ color:rgba(252,252,252,.60) }

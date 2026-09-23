@@ -137,13 +137,13 @@ Once the code asset is off, `rule.order` and condition order are the only tiebre
 
 `POST /admin/api/cms/publish` republishes **every** page, not the one you edited. So the moment a draft page drifts from what is live, the next publish for any unrelated reason ships that drift.
 
-It happened on 2026-08-22. Publishing to verify a plugin baked all 35 pages, and the home page lost the six `.rv-card` review-fallback cards — they were in the published HTML, they were not in the draft. Three records agreed the published page really had them: `13-content-export-import/.tmp/home-readback.html` (2026-08-19, a readback of the platform page), `.tmp/.instatic2/index.json` (2026-08-20), and the committed `08-qa/.tmp/audit-out/index.json` (`words: 1741`, against `1385` after). `restore-review-wall.mjs` rebuilt them from the local build and the audit is byte-identical to its baseline again.
+It happened on 2026-08-22. Publishing to verify a plugin baked all 35 pages, and the home page lost the six `.rv-card` review-fallback cards — they were in the published HTML, they were not in the draft. Three records agreed the published page really had them: `13-content-export-import/output/home-readback.html` (2026-08-19, a readback of the platform page), `output/.instatic2/index.json` (2026-08-20), and the committed `08-qa/output/audit-out/index.json` (`words: 1741`, against `1385` after). `restore-review-wall.mjs` rebuilt them from the local build and the audit is byte-identical to its baseline again.
 
 **So: before publishing this site for any reason, and again afterwards**
 
 ```bash
-node workflows/04-qa/.tmp/audit-site.mjs --base https://encorercm.com --only index   # Dr. Nahlah's audit script, on bk-dr-nahlah
-git diff workflows/04-qa/.tmp/audit-out/          # the committed records are the baseline
+node scenario-0-new-site/04-qa/output/audit-site.mjs --base https://encorercm.com --only index   # Dr. Nahlah's audit script, on bk-dr-nahlah
+git diff scenario-0-new-site/04-qa/output/audit-out/          # the committed records are the baseline
 ```
 
 A whole-site run is ~20 minutes; a single page is under a minute and catches this class of thing on the page most likely to hold hand-built markup.
@@ -221,8 +221,8 @@ the horizontal cream scrim that puts a floor under the copy column, so on all
 ## Pushing a code asset (`site.js` and friends)
 
 ```bash
-node push-script-asset.mjs src/scripts/site.js workflows/03-design-build/.tmp/site-src/dist/assets/site.js
-node push-script-asset.mjs src/scripts/site.js workflows/03-design-build/.tmp/site-src/dist/assets/site.js --apply
+node push-script-asset.mjs src/scripts/site.js scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.js
+node push-script-asset.mjs src/scripts/site.js scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.js --apply
 node insta-api.mjs publish
 ```
 
@@ -231,7 +231,7 @@ inline, and `PUT /site-document` is atomic with an optimistic `seq` check, so th
 whole file goes in **one** write and a concurrent edit is rejected rather than
 interleaved.
 
-Prefer this over Dr. Nahlah's old `13-content-export-import/.tmp/push-site-js.mjs` (bk-dr-nahlah), which drives the
+Prefer this over Dr. Nahlah's old `13-content-export-import/output/push-site-js.mjs` (bk-dr-nahlah), which drives the
 MCP bridge (needs the editor open in a browser) and writes in ~10 KB chunks. That
 chunked path is what silently truncated the draft `site.css` once, losing its
 opening 13.7 KB.
@@ -243,18 +243,18 @@ the asset back after writing and refuses to report success unless it is byte-exa
 because **this platform reports some write failures as prose with a 200**.
 
 ## Output Artifacts
-- `.tmp/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)
+- `output/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)
 - `push-script-asset.mjs` — headless single-write replacement of one code asset's content
-- `.tmp/shell.before.<seq>.json` / `.tmp/shell.after.<seq>.json` — shell state either side of a write
-- `.tmp/conv-out.json` — converted rules, conditions and warnings
-- `.tmp/site.css.published` / `.tmp/site.css.draft-before` — repair evidence
+- `output/shell.before.<seq>.json` / `output/shell.after.<seq>.json` — shell state either side of a write
+- `output/conv-out.json` — converted rules, conditions and warnings
+- `output/site.css.published` / `output/site.css.draft-before` — repair evidence
 - `prune-versions.mjs` + `prune-versions.container.ts` — volume reclamation (see above)
 - `repair-multilayer-backgrounds.mjs` — restores gradient layers the shorthand parser flattened
 - `restore-review-wall.mjs` — rebuilds the home page's six review cards from the local build (dry run by default; never publishes)
-- `.tmp/parity-pseudo-before-1440.json` / `.tmp/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
+- `output/parity-pseudo-before-1440.json` / `output/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). Scripts and `.md` are committed. **`.tmp/` is not** — this is shared tooling run against every
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Scripts and `.md` are committed. **`output/` is not** — this is shared tooling run against every
 Instatic client from whichever worktree is active, so a tracked artifact here is one client's
-output on a path every other client also writes to. `.tmp/.gitignore` ignores the whole folder.
-The cached session (`.tmp/.session-<host>`) holds a live cookie and must never be committed.
+output on a path every other client also writes to. `output/.gitignore` ignores the whole folder.
+The cached session (`output/.session-<host>`) holds a live cookie and must never be committed.

@@ -2,7 +2,7 @@
 /**
  * push-script-asset.mjs — replace one code asset's content, headlessly.
  *
- *   node push-script-asset.mjs src/scripts/site.js workflows/03-design-build/.tmp/site-src/dist/assets/site.js [--apply]
+ *   node push-script-asset.mjs src/scripts/site.js scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.js [--apply]
  *
  * ## Why this exists next to the old Dr. Nahlah push-site-js.mjs (client branch, 13-content-export-import)
  *

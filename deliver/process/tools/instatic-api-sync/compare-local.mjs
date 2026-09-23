@@ -12,7 +12,7 @@
  *   node compare-local.mjs index .ch-transformation  # one section
  *   WIDTH=390 node compare-local.mjs index
  *
- * It serves the local build (`SITE_DIST`, default `workflows/03-design-build/.tmp/site-src/dist` under the client folder) on a throwaway port, opens both pages at
+ * It serves the local build (`SITE_DIST`, default `scenario-0-new-site/03-design-build/output/code/site-src/dist` under the client folder) on a throwaway port, opens both pages at
  * the same pinned viewport with scripts disabled, walks the two subtrees in
  * lockstep, and reports the first computed difference per element.
  *
@@ -42,7 +42,7 @@ import { tmpdir } from 'node:os'
 import http from 'node:http'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const LOCAL_ROOT = process.env.SITE_DIST || join(process.cwd(), 'workflows', '03-design-build', '.tmp', 'site-src', 'dist')
+const LOCAL_ROOT = process.env.SITE_DIST || [join(process.cwd(), 'output', 'code', 'site-src', 'dist'), join(process.cwd(), '..', '03-design-build', 'output', 'code', 'site-src', 'dist')].find((p) => existsSync(p)) || join(process.cwd(), 'output', 'code', 'site-src', 'dist')
 const REMOTE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const VIEWPORT = { width: Number(process.env.WIDTH || 1440), height: Number(process.env.HEIGHT || 900) }

@@ -306,7 +306,7 @@ async function instaticWorker() {
   }
 }
 
-const cleanMarker = () => join(HERE, '.tmp', `clean-before-apply-${new URL(process.env.INSTATIC_BASE_URL).host}.json`)
+const cleanMarker = () => join(HERE, 'output', `clean-before-apply-${new URL(process.env.INSTATIC_BASE_URL).host}.json`)
 
 /**
  * True only when the draft was clean (matched live) before our first `apply --apply` and the page
@@ -391,7 +391,7 @@ else if (cmd === 'merge-footer') {
   if (['apply', 'termly'].includes(argv[1]) && flag('--apply')) {
     const { publishStatus } = await import(pathToFileURL(INSTA_API).href)
     // Remember whether the draft was clean before our first write, so `publish` never ships someone else's edits.
-    mkdirSync(join(HERE, '.tmp'), { recursive: true })
+    mkdirSync(join(HERE, 'output'), { recursive: true })
     if (!existsSync(cleanMarker())) writeFileSync(cleanMarker(), JSON.stringify(await publishStatus()))
   }
   await instaticWorker()

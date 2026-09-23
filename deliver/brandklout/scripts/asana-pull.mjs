@@ -2,7 +2,7 @@
  * Pull the Asana work assigned to Webzite into a reviewable artifact.
  *
  * Read-only. Writes JSON + a Markdown summary to
- * deliver/brandklout/.tmp/asana/ so agents consume a stable artifact instead of
+ * deliver/brandklout/output/asana/ so agents consume a stable artifact instead of
  * each making ad-hoc live calls.
  *
  * Data comes from the Asana MCP server (see asana-lib.mjs for why REST is not
@@ -19,7 +19,7 @@ import { fileURLToPath } from 'node:url'
 import { callTool, callToolPaged, getAccessToken } from './asana-lib.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const OUT_DIR = join(HERE, '..', '.tmp', 'asana')
+const OUT_DIR = join(HERE, '..', 'output', 'asana')
 
 const argv = process.argv.slice(2)
 const includeCompleted = argv.includes('--all')

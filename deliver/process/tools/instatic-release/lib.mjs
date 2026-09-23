@@ -319,7 +319,7 @@ export async function health(base) {
 
 export function slug(t) { return `${t.project}-${t.environment}`.toLowerCase().replace(/[^a-z0-9]+/g, '-') }
 export function outDir(kind, t) {
-  const d = join(process.cwd(), '.tmp', 'instatic-release', `${stamp()}-${kind}-${slug(t)}`)
+  const d = join(process.cwd(), 'output', 'instatic-release', `${stamp()}-${kind}-${slug(t)}`)
   mkdirSync(d, { recursive: true })
   return d
 }

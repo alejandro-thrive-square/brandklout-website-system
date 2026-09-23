@@ -1,19 +1,19 @@
 // PROMOTED 2026-09-23 to deliver/process/tools/instatic-site/push/build-import-input.mjs
 // Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/build-import-input.mjs. Paths now come from ../lib/paths.mjs (run from the client's workflow
-// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/.tmp) and the admin client from
+// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/output) and the admin client from
 // ../lib/site.mjs (refuses to run without INSTATIC_BASE_URL). Client-specific notes below are the
 // origin's record; review them against the new site before --apply.
 /**
  * Step 2 — assemble the single payload the container-side converter consumes.
  *
- * Produces `.tmp/import-input.json.gz`:
+ * Produces `output/import-input.json.gz`:
  *   { css, pages: [{ slug, title, seoTitle, seoDescription, html }] }
  *
  * Three transformations happen here, all of them because the static build and
  * an Instatic document disagree about what a page IS:
  *
  * 1. **Image srcs are rewritten to media-library paths.** `assets/x.webp`
- *    becomes `/uploads/<id>-x.webp` from `.tmp/media-map.json`. Two of them
+ *    becomes `/uploads/<id>-x.webp` from `output/media-map.json`. Two of them
  *    also change extension, because AVIF cannot be uploaded here at all — see
  *    upload-media.mjs. An unrewritten src is a hard error: importing a page
  *    with a dangling image is worse than not importing it.
@@ -34,10 +34,10 @@ import path from 'node:path'
 import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
-const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
+const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 const SITE = P.SITE_SRC
 const FINAL = path.join(SITE, 'dist')
-const TMP = path.join(HERE, '.tmp')
+const TMP = path.join(HERE, 'output')
 
 const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'seo.json'), 'utf8'))

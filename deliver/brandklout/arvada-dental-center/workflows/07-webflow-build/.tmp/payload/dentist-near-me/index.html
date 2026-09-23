@@ -1,0 +1,32 @@
+<!doctype html>
+<meta charset="utf-8"><title>dentist-near-me — paste into Webflow</title>
+<style>
+ body{font:15px/1.6 system-ui,sans-serif;margin:0;padding:2.5rem;background:#0e1219;color:#e8eef5}
+ h1{font-size:1.4rem;margin:0 0 .4rem} p{color:#9fb0c4;max-width:70ch}
+ ol{padding-left:1.4rem;max-width:70ch} li{margin:.55rem 0}
+ a{color:#03c5ec} code{background:#1a2130;padding:.15rem .4rem;border-radius:4px}
+ .warn{border-left:3px solid #fb8e28;padding:.6rem 1rem;background:rgba(251,142,40,.08);
+        border-radius:0 8px 8px 0;margin:1.4rem 0;max-width:70ch}
+</style>
+<h1>dentist-near-me — 10 pasteable sections</h1>
+<p>Paste them in this order onto the target page in the Webflow Designer. Each one is
+self-contained: it carries its own scoped CSS and JS inside the section, so it needs no
+page-settings changes and cannot affect anything else on the page.</p>
+<div class="warn"><strong>Paste into a scratch page first.</strong> Every class is namespaced
+<code>dnm-</code> so it cannot merge with the client's existing classes, but the clipboard
+format is reverse-engineered and a scratch page costs nothing.</div>
+<ol>
+  <li><a href="nav.html" target="_blank">nav</a> &mdash; <code>.dnm-sec-nav</code>, 27 nodes, 2 embeds</li>
+  <li><a href="arrival.html" target="_blank">arrival</a> &mdash; <code>.dnm-arrival</code>, 45 nodes, 4 embeds</li>
+  <li><a href="search.html" target="_blank">search</a> &mdash; <code>.dnm-search</code>, 41 nodes, 6 embeds</li>
+  <li><a href="offer.html" target="_blank">offer</a> &mdash; <code>.dnm-offer</code>, 52 nodes, 6 embeds</li>
+  <li><a href="near.html" target="_blank">near</a> &mdash; <code>.dnm-near</code>, 86 nodes, 14 embeds</li>
+  <li><a href="practice.html" target="_blank">practice</a> &mdash; <code>.dnm-practice</code>, 43 nodes, 2 embeds</li>
+  <li><a href="proof.html" target="_blank">proof</a> &mdash; <code>.dnm-proof</code>, 38 nodes, 3 embeds</li>
+  <li><a href="invitation.html" target="_blank">invitation</a> &mdash; <code>.dnm-invitation</code>, 68 nodes, 7 embeds</li>
+  <li><a href="footer.html" target="_blank">footer</a> &mdash; <code>.dnm-footer</code>, 35 nodes, 4 embeds</li>
+  <li><a href="actionbar.html" target="_blank">actionbar</a> &mdash; <code>.dnm-sec-actionbar</code>, 10 nodes, 2 embeds</li>
+</ol>
+<p>Images still point at bare filenames. Upload the assets listed in
+<code>assets.json</code> and re-run with <code>--asset-base</code>, or remap them after
+pasting with the Webflow MCP.</p>

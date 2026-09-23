@@ -12,7 +12,7 @@ kept out of Google. Instatic serves no sitemap, no canonical and no redirects, s
 - The production Railway project, environment and service ids (`railway list --json`); the site
   serves on `<business-name>.up.railway.app` until now.
 - The domain, and who holds the registrar login (nameserver changes happen there, not in Cloudflare).
-- The email DNS snapshot (`scenario-1-migration/scripts/email-dns-audit.mjs`), taken before anything moves.
+- The email DNS snapshot (`scenario-1-migration/01-old-site-capture/scripts/email-dns-audit.mjs`), taken before anything moves.
 - For a migration: the built redirect map (`scenario-1-migration/02-redirect-map.md`, Part B).
 - `deliver/process/tools/instatic-domain-origins/sites.json` and `check-origins.mjs`.
 
@@ -77,7 +77,7 @@ Every script is a dry run until `--apply`.
 9. **Redirects (migrations).** Deploy and verify the map now, in this session:
    scenario-1 `02-redirect-map.md` steps 7 to 9.
 10. **Sitemap.**
-    `node $C/build-sitemap-worker.mjs --canonical https://www.<domain> --out <client>/workflows/cloudflare/out --crawl > sitemap.log`
+    `node $C/build-sitemap-worker.mjs --canonical https://www.<domain> --out <client>/scenario-0-new-site/06-post-launch/output/cloudflare --crawl > sitemap.log`
     `node $C/deploy-worker.mjs --zone <domain> --script <client>-sitemap --file <out>/sitemap-worker.js --routes "<domain>/sitemap.xml*,www.<domain>/sitemap.xml*" --apply`
     The trailing `*` is required (a bare route misses `?query` and falls to Instatic's 404).
     Never bind `/robots.txt`: it is the edge's managed file, and a Worker on it replaced 1248 B with
@@ -162,11 +162,11 @@ In `deliver/process/tools/cloudflare-launch/` (origins in [README.md](./README.m
 - `pages-mirror.mjs`: Cloudflare Pages stand-in for a dying old site.
 - `verify-launch.mjs`: outside-in proof of the whole launch.
 - `../instatic-domain-origins/check-origins.mjs`: PUBLIC_ORIGIN gate.
-- `../../scenario-1-migration/scripts/verify-redirects.mjs`: redirect map proof.
+- `../../scenario-1-migration/02-redirect-map/scripts/verify-redirects.mjs`: redirect map proof.
 
 ## Outputs
 
-- `deliver/brandklout/<client>/workflows/cloudflare/out/sitemap.xml`, `sitemap-worker.js` (committed)
+- `deliver/brandklout/<client>/scenario-0-new-site/06-post-launch/output/cloudflare/sitemap.xml`, `sitemap-worker.js` (committed)
 - `deliver/brandklout/<client>/docs/dns/DNS-CUTOVER.md`: registrar, zone id, nameservers, records
   copied, decisions, date of the switch
 - `deliver/process/tools/instatic-domain-origins/sites.json` entry updated

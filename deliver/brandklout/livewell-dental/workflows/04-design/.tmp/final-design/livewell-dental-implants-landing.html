@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dental Implants in Fairfax Station, VA | Livewell Dental</title>
+<meta name="description" content="Replace missing teeth for good. Dr. Chris Kim places and restores dental implants entirely in-house — from a single tooth to a full arch. Free consultation. 320+ five-star reviews.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2620;
+    --bg:#F6F3EC;
+    --forest:#2C4438;
+    --forest-dark:#1D2F26;
+    --wine:#8C3B40;
+    --wine-dark:#732E33;
+    --sand:#EAE1CE;
+    --gold:#B8935B;
+    --white:#FFFFFF;
+    --line:rgba(28,38,32,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  img{max-width:100%;display:block;}
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  em{font-style:italic;color:var(--wine);font-weight:500;}
+  a{color:inherit;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--wine);
+  }
+
+  /* ---------- Top strip ---------- */
+  .top-strip{
+    background:var(--forest-dark);
+    color:#EFE9DA;
+    font-size:13.5px;
+    padding:8px 0;
+  }
+  .top-strip .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .stars{color:var(--gold);letter-spacing:1px;}
+  .top-strip a{text-decoration:none;font-weight:600;}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,243,236,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 0;gap:16px;
+  }
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:20px;color:var(--forest-dark);}
+  .logo img{height:34px;width:auto;}
+  .header-cta{display:flex;align-items:center;gap:14px;}
+  .phone-link{
+    font-weight:700;font-size:16px;text-decoration:none;color:var(--forest-dark);
+    display:flex;align-items:center;gap:8px;
+  }
+  .phone-link svg{width:18px;height:18px;flex-shrink:0;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--wine);color:#fff;
+    padding:13px 22px;border-radius:3px;
+    font-weight:700;font-size:14.5px;letter-spacing:0.01em;
+    text-decoration:none;border:none;cursor:pointer;
+    transition:background .15s ease, transform .15s ease;
+    font-family:'Inter',sans-serif;
+  }
+  .btn:hover{background:var(--wine-dark);transform:translateY(-1px);}
+  .btn-ghost{
+    background:transparent;border:1.5px solid var(--forest-dark);color:var(--forest-dark);
+  }
+  .btn-ghost:hover{background:var(--forest-dark);color:#fff;}
+  .btn-block{width:100%;padding:16px 22px;font-size:15.5px;}
+
+  @media (max-width:640px){
+    .header-cta .phone-link span{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 64px;}
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:start;
+  }
+  .hero h1{font-size:clamp(34px,4.6vw,52px);color:var(--forest-dark);}
+  .hero-sub{
+    font-size:18px;color:#40514A;max-width:520px;margin-top:18px;
+  }
+  .hero-points{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:11px;}
+  .hero-points li{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:500;}
+  .hero-points svg{flex-shrink:0;margin-top:2px;width:18px;height:18px;color:var(--wine);}
+  .hero-cta-row{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;}
+
+  /* Before/after slider */
+  .slider-card{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;
+    padding:14px 14px 18px;box-shadow:0 20px 40px -24px rgba(28,38,32,0.35);
+  }
+  .ba-slider{
+    position:relative;width:100%;aspect-ratio:4/5;overflow:hidden;border-radius:4px;
+    cursor:ew-resize;user-select:none;background:#ddd;
+  }
+  .ba-slider img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+  .ba-after{clip-path:inset(0 0 0 50%);}
+  .ba-handle{
+    position:absolute;top:0;left:50%;height:100%;width:3px;background:#fff;
+    transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.08);
+  }
+  .ba-handle::after{
+    content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:44px;height:44px;border-radius:50%;background:#fff;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232C4438' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='9 6 4 12 9 18'></polyline><polyline points='15 6 20 12 15 18'></polyline></svg>");
+    background-repeat:no-repeat;background-position:center;background-size:20px;
+  }
+  .ba-tag{
+    position:absolute;bottom:12px;font-size:11px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;background:rgba(28,38,32,0.72);color:#fff;padding:5px 10px;border-radius:3px;
+  }
+  .ba-tag.before{left:12px;}
+  .ba-tag.after{right:12px;}
+  .slider-caption{
+    display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 4px;
+    font-size:12.5px;color:#5B6B62;
+  }
+  .slider-caption strong{color:var(--forest-dark);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:40px;}
+  }
+
+  /* ---------- Trust strip ---------- */
+  .trust{padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .trust .wrap{
+    display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;
+  }
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:#4B5C53;}
+  .trust-item svg{width:20px;height:20px;color:var(--wine);flex-shrink:0;}
+
+  /* ---------- Section base ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,38px);color:var(--forest-dark);margin-top:10px;}
+  .section-head p{font-size:16.5px;color:#40514A;margin-top:14px;}
+  .alt{background:var(--sand);}
+
+  /* ---------- Problem / agitation ---------- */
+  .agitate-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .agitate-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;}
+  .agitate-list li{
+    font-size:16px;padding:16px 18px;background:var(--white);border:1px solid var(--line);
+    border-radius:4px;font-weight:500;position:relative;padding-left:44px;
+  }
+  .agitate-list li::before{
+    content:'';position:absolute;left:16px;top:50%;transform:translateY(-50%);
+    width:8px;height:8px;border-radius:50%;background:var(--wine);
+  }
+  .agitate-flip{
+    margin-top:26px;padding:20px;background:var(--forest-dark);color:#EFE9DA;border-radius:4px;font-family:'Fraunces',serif;
+    font-size:19px;font-style:italic;line-height:1.4;
+  }
+  @media (max-width:860px){.agitate-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Why implants strip ---------- */
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .why-card{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 22px;}
+  .why-card svg{width:26px;height:26px;color:var(--wine);margin-bottom:14px;}
+  .why-card h3{font-size:18px;color:var(--forest-dark);margin-bottom:8px;}
+  .why-card p{font-size:14.5px;color:#4B5C53;margin:0;}
+  @media (max-width:860px){.why-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .gallery-item{border-radius:4px;overflow:hidden;border:1px solid var(--line);}
+  .gallery-item img{aspect-ratio:1/1;object-fit:cover;}
+  @media (max-width:800px){.gallery-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Collection cards ---------- */
+  .collection-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .collection-card{
+    background:var(--white);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .collection-card:hover{transform:translateY(-4px);box-shadow:0 20px 34px -22px rgba(28,38,32,.4);}
+  .collection-card img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+  .collection-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .collection-body h3{font-size:21px;color:var(--forest-dark);}
+  .collection-tag{font-size:11.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--wine);}
+  .collection-body p{font-size:14.5px;color:#4B5C53;margin:0;flex:1;}
+  .collection-body a{font-size:13.5px;font-weight:700;color:var(--forest-dark);text-decoration:none;margin-top:6px;}
+  .collection-body a::after{content:' →';}
+  @media (max-width:900px){.collection-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Process ---------- */
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .process-card{position:relative;padding-top:8px;}
+  .process-num{
+    font-family:'Fraunces',serif;font-size:44px;font-style:italic;color:var(--gold);
+    line-height:1;margin-bottom:14px;display:block;
+  }
+  .process-card h3{font-size:19px;color:var(--forest-dark);margin-bottom:8px;}
+  .process-card p{font-size:14.5px;color:#4B5C53;margin:0;}
+  @media (max-width:860px){.process-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Doctor ---------- */
+  .doc-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:52px;align-items:center;}
+  .doc-photo{border-radius:6px;overflow:hidden;}
+  .doc-photo img{aspect-ratio:3/4;object-fit:cover;}
+  .doc-credlist{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:12px;}
+  .doc-credlist li{font-size:14.5px;font-weight:500;display:flex;gap:10px;color:#354238;}
+  .doc-credlist svg{width:16px;height:16px;color:var(--wine);flex-shrink:0;margin-top:3px;}
+  @media (max-width:860px){.doc-grid{grid-template-columns:1fr;}.doc-photo{max-width:320px;}}
+
+  /* ---------- Testimonial ---------- */
+  .testi{
+    background:var(--forest-dark);color:#EFE9DA;text-align:center;padding:70px 0;
+  }
+  .testi blockquote{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+    font-size:clamp(22px,3vw,30px);max-width:760px;margin:0 auto;line-height:1.45;
+  }
+  .testi .stars{display:block;margin-bottom:20px;font-size:18px;}
+  .testi cite{display:block;margin-top:22px;font-family:'Inter',sans-serif;font-style:normal;font-size:14px;font-weight:600;color:#B9C6BD;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:20px 0;
+    font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--forest-dark);
+    display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:20px;
+  }
+  .faq-q .plus{font-size:22px;font-weight:400;color:var(--wine);transition:transform .2s ease;flex-shrink:0;}
+  .faq-item.open .faq-q .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{font-size:15px;color:#40514A;padding:0 0 20px;margin:0;max-width:680px;}
+
+  /* ---------- Final CTA / Form ---------- */
+  .final-cta{background:var(--sand);}
+  .cta-grid{display:grid;grid-template-columns:1fr 0.9fr;gap:48px;}
+  .cta-copy h2{font-size:clamp(28px,3.4vw,36px);color:var(--forest-dark);}
+  .cta-copy p{font-size:16px;color:#40514A;margin-top:16px;max-width:460px;}
+  .cta-info{margin-top:30px;display:flex;flex-direction:column;gap:14px;font-size:14.5px;color:#354238;}
+  .cta-info div{display:flex;gap:10px;}
+  .cta-info svg{width:18px;height:18px;color:var(--wine);flex-shrink:0;margin-top:2px;}
+
+  .form-card{
+    background:var(--white);border-radius:8px;padding:34px 30px;border:1px solid var(--line);
+    box-shadow:0 24px 48px -30px rgba(28,38,32,.4);
+  }
+  .form-card h3{font-size:21px;color:var(--forest-dark);margin-bottom:6px;}
+  .form-card .sub{font-size:13.5px;color:#5B6B62;margin-bottom:20px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.03em;color:#354238;margin-bottom:6px;text-transform:uppercase;}
+  .field input, .field select{
+    width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:4px;
+    font-family:'Inter',sans-serif;font-size:14.5px;background:#FBFAF7;color:var(--ink);
+  }
+  .field input:focus, .field select:focus{outline:2px solid var(--forest);outline-offset:1px;border-color:var(--forest);}
+  .form-note{font-size:11.5px;color:#7A8A80;margin-top:12px;text-align:center;}
+  .form-success{display:none;text-align:center;padding:20px 0;}
+  .form-success.show{display:block;}
+  .form-success svg{width:40px;height:40px;color:var(--forest);margin:0 auto 12px;display:block;}
+  .form-success h3{font-size:19px;color:var(--forest-dark);margin-bottom:8px;}
+  .form-success p{font-size:14px;color:#40514A;}
+
+  @media (max-width:860px){.cta-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--forest-dark);color:#B9C6BD;padding:38px 0 26px;font-size:13px;}
+  .footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;}
+  footer a{color:#EFE9DA;text-decoration:none;}
+  .disclaimer{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.12);font-size:11.5px;color:#8CA093;line-height:1.6;}
+
+  /* ---------- Sticky mobile bar ---------- */
+  .mobile-bar{
+    display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;
+    background:var(--forest-dark);padding:10px 14px;gap:10px;
+    box-shadow:0 -6px 20px rgba(0,0,0,.2);
+  }
+  @media (max-width:720px){
+    .mobile-bar{display:flex;}
+    body{padding-bottom:66px;}
+  }
+  .mobile-bar a{flex:1;}
+  .mobile-bar .btn{width:100%;padding:12px;}
+</style>
+</head>
+<body>
+
+<div class="top-strip">
+  <div class="wrap">
+    <span><span class="stars">★★★★★</span> 320+ Five-Star Reviews &nbsp;·&nbsp; Fairfax Station, VA</span>
+    <a href="tel:+17036900102">Call (703) 690-0102</a>
+  </div>
+</div>
+
+<header>
+  <div class="wrap header-row">
+    <div class="logo">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d04139a3722dab23ea4f15_imgi_1_LW-logo.png" alt="Livewell Dental logo">
+    </div>
+    <div class="header-cta">
+      <a class="phone-link" href="tel:+17036900102">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span>(703) 690-0102</span>
+      </a>
+      <a class="btn" href="#consult-form">Book Free Consultation</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Dental Implants · Fairfax Station, VA</p>
+      <h1>Replace missing teeth for <em>good</em>, not just for now.</h1>
+      <p class="hero-sub">Dr. Chris Kim plans, places, and restores your implant entirely in-house — from the first scan to the final crown. One tooth or a full arch, built to look, feel, and function like your own.</p>
+
+      <ul class="hero-points">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Implants placed and restored under one roof — no referring out</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> The only tooth replacement that stops bone loss at the site</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Fellow, International Congress of Oral Implantologists (FICOI)</li>
+      </ul>
+
+      <div class="hero-cta-row">
+        <a class="btn" href="#consult-form">Book Your Free Consultation</a>
+        <a class="btn btn-ghost" href="tel:+17036900102">Call (703) 690-0102</a>
+      </div>
+    </div>
+
+    <div class="slider-card">
+      <div class="ba-slider" id="baSlider">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a0523a39cba54b57285830b_mr-1.before-IMG_2682-cosmetic.smilemakeover.fmr.bridge.crown.implant.gum.surgery.webp" alt="Before dental implant treatment: worn teeth and missing tooth">
+        <img class="ba-after" id="baAfterImg" src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a313427bc3af84fb9993f2c_mr-1.final-IMG_2682%20cropped.webp" alt="After dental implant placed in-house at Livewell Dental">
+        <span class="ba-tag before">Before</span>
+        <span class="ba-tag after">After</span>
+        <div class="ba-handle" id="baHandle"></div>
+      </div>
+      <div class="slider-caption">
+        <span>Drag to compare ↔</span>
+        <strong>Real Livewell Dental patient</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 1-5.5 5 1.5 7-6-3.5-6 3.5 1.5-7L2 9.5l7-1z"></path></svg> Fellow, Int'l Congress of Oral Implantologists</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 1-5.5 5 1.5 7-6-3.5-6 3.5 1.5-7L2 9.5l7-1z"></path></svg> Clinical Instructor, Implant Accelerator</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 1-5.5 5 1.5 7-6-3.5-6 3.5 1.5-7L2 9.5l7-1z"></path></svg> Kois Center Graduate</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6.5 7 1-5.5 5 1.5 7-6-3.5-6 3.5 1.5-7L2 9.5l7-1z"></path></svg> UCSF School of Dentistry</div>
+  </div>
+</div>
+
+<!-- AGITATE -->
+<section>
+  <div class="wrap agitate-grid">
+    <div>
+      <p class="eyebrow">Sound Familiar?</p>
+      <h2 style="font-size:clamp(26px,3.2vw,34px);color:var(--forest-dark);margin-top:10px;">A missing tooth never stays "just one problem."</h2>
+      <ul class="agitate-list" style="margin-top:24px;">
+        <li>Avoiding certain foods because chewing is difficult</li>
+        <li>A gap you cover up when you smile or laugh</li>
+        <li>A loose bridge, partial, or denture that shifts when you eat or talk</li>
+        <li>Told the bone has deteriorated too much to treat simply</li>
+      </ul>
+    </div>
+    <div>
+      <p class="agitate-flip">"When a tooth is missing, the bone underneath it starts to deteriorate — often faster than people realize."</p>
+      <p style="margin-top:18px;font-size:15.5px;color:#40514A;">Implants are the only replacement option that stops that process, preserve your facial structure, and give you back a fully functioning tooth root. Dr. Chris places and restores implants entirely in-house, from the initial scan to the final crown.</p>
+      <a class="btn" style="margin-top:22px;" href="#consult-form">Start With a Free Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY IMPLANTS -->
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Why Implants</p>
+      <h2>Built to replace the whole tooth, not just the crown you see.</h2>
+      <p>A bridge or denture sits on top of the gum. An implant replaces the root — which is why it's the only option that protects the bone underneath.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M12 10a4 4 0 1 1 4-4M12 10a4 4 0 1 0-4-4"></path><path d="M8 6a4 4 0 0 0 0 8M16 6a4 4 0 0 1 0 8"></path></svg>
+        <h3>Preserves Your Jawbone</h3>
+        <p>The implant post replaces the natural tooth root, so the bone stays stimulated and stable instead of shrinking away over time.</p>
+      </div>
+      <div class="why-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <h3>Placed and Restored In-House</h3>
+        <p>From the digital scan to surgical placement to the final crown, Dr. Chris manages every step — no referring you out to a separate surgeon.</p>
+      </div>
+      <div class="why-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+        <h3>Built to Last</h3>
+        <p>With proper care, a dental implant is designed to function as a permanent, stable replacement — no adhesives, no slipping, no removing it at night.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Real Patients, Real Results</p>
+      <h2>See what's possible.</h2>
+      <p>Every case below was planned, placed, and restored at Livewell — no filters, no stock photos.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a052ab7c7b5c93ad542073d_jm-IMG_0403s-cosmetic.crown.bridge.veneer.crownlay.onlay.elab.webp" alt="Implant crown and bridge restoration result"></div>
+      <div class="gallery-item"><img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d5a4539d067dc2659509b6_hs-after-IMG_8475-cosmetic.fmr.implant.allonx.smilemakeover.webp" alt="All-on-X implant supported full arch result"></div>
+      <div class="gallery-item"><img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d44afbce419995a396ba38_beforeafters-bb2.jpg" alt="Before and after dental implant result"></div>
+    </div>
+    <div style="text-align:center;margin-top:34px;">
+      <a class="btn btn-ghost" href="https://www.livewelldentalva.com/our-work/smile-gallery" target="_blank" rel="noopener">See the Full Smile Gallery</a>
+    </div>
+  </div>
+</section>
+
+<!-- COLLECTION -->
+<section class="alt" id="options">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Find Your Starting Point</p>
+      <h2>Implant Solutions for Every Situation</h2>
+      <p>One missing tooth or a full mouth that needs rebuilding — Dr. Chris will map out exactly what you need at your consultation.</p>
+    </div>
+    <div class="collection-grid">
+      <div class="collection-card">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a08ebbabc291cd097dfc863_ai-257-cosmetic.veneer.perfect1.perfectone.elab.gum.surgery.webp" alt="Single tooth dental implant">
+        <div class="collection-body">
+          <span class="collection-tag">One Missing Tooth</span>
+          <h3>Single Implant</h3>
+          <p>A titanium post and custom crown replace one missing tooth root to root, without touching the healthy teeth on either side.</p>
+          <a href="#consult-form">Ask about Single Implants</a>
+        </div>
+      </div>
+      <div class="collection-card">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a052684afa772667cb47248_kp-175-cosmetic.social10.socialten.crown.elab.webp" alt="Implant-supported bridge for multiple missing teeth">
+        <div class="collection-body">
+          <span class="collection-tag">Several Missing Teeth</span>
+          <h3>Implant Bridge</h3>
+          <p>Two or more implants anchor a fixed bridge, replacing several missing teeth in a row without relying on your remaining natural teeth.</p>
+          <a href="#consult-form">Ask about Implant Bridges</a>
+        </div>
+      </div>
+      <div class="collection-card">
+        <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/69d5a4539d067dc2659509b6_hs-after-IMG_8475-cosmetic.fmr.implant.allonx.smilemakeover.webp" alt="All-on-X full arch implant supported denture">
+        <div class="collection-body">
+          <span class="collection-tag">Full Arch / Denture Wearers</span>
+          <h3>All-on-X</h3>
+          <p>A full arch of fixed, permanent teeth supported by as few as four implants — an alternative to a removable denture.</p>
+          <a href="#consult-form">Ask about All-on-X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How It Works</p>
+      <h2>One dentist, one plan, start to finish.</h2>
+      <p>Here's what your implant journey actually looks like at Livewell.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <span class="process-num">1</span>
+        <h3>Consultation &amp; 3D Scan</h3>
+        <p>A digital scan and full exam map your bone, bite, and goals so Dr. Chris can confirm you're a candidate and plan the exact implant position.</p>
+      </div>
+      <div class="process-card">
+        <span class="process-num">2</span>
+        <h3>Guided Placement</h3>
+        <p>Using a surgical guide printed from your scan data, the implant is placed exactly where it was planned — done in-house by Dr. Chris.</p>
+      </div>
+      <div class="process-card">
+        <span class="process-num">3</span>
+        <h3>Custom Restoration</h3>
+        <p>Once healed, your custom crown, bridge, or denture is fabricated, tried in, and verified for fit and bite before final placement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section class="alt">
+  <div class="wrap doc-grid">
+    <div class="doc-photo">
+      <img src="https://cdn.prod.website-files.com/69d03fdbe999e9907724a69d/6a08c5ab60e024fdd73cda15_chris-26.webp" alt="Dr. Chris Kim, implant dentist in Fairfax Station, VA">
+    </div>
+    <div>
+      <p class="eyebrow">Your Dentist</p>
+      <h2 style="font-size:clamp(26px,3.2vw,34px);color:var(--forest-dark);margin-top:10px;">Meet Dr. Chris Kim</h2>
+      <p style="margin-top:16px;font-size:15.5px;color:#40514A;max-width:520px;">Dr. Chris is a Fellow of the International Congress of Oral Implantologists and a nationally recognized clinical instructor at Implant Accelerator, where he teaches other dentists advanced implant surgery and restorative planning. At Livewell, that same expertise goes into every case — from a single implant to a full-arch rebuild.</p>
+      <ul class="doc-credlist">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> DDS &amp; AEGD Residency, UCSF School of Dentistry</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Fellow, International Congress of Oral Implantologists (FICOI)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Clinical Instructor, Implant Accelerator</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Graduate, Kois Center — bite function &amp; comprehensive treatment planning</li>
+      </ul>
+      <a class="btn" style="margin-top:26px;" href="#consult-form">Book Time With Dr. Chris</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<div class="testi">
+  <div class="wrap">
+    <span class="stars">★★★★★</span>
+    <blockquote>A patient recently shared that Dr. Kim replaced a missing tooth with an implant and made sure the entire process was completely comfortable, with a team that was caring and attentive from start to finish.</blockquote>
+    <cite>— Livewell Dental Patient, Fairfax Station, VA</cite>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-head">
+      <p class="eyebrow">Common Questions</p>
+      <h2>Before you book</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Does getting an implant hurt? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Placement is done under local anesthesia, and most patients describe the recovery as similar to a tooth extraction. Sedation options are available if you feel anxious about the procedure. Dr. Chris will walk you through exactly what to expect at your consultation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Am I a candidate if I've had bone loss? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Often, yes. Bone grafting and ridge augmentation can rebuild the foundation needed to support an implant, and these procedures are available in-house. Your 3D scan at your consultation will confirm exactly what your case needs.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long does the whole process take? <span class="plus">+</span></button>
+        <div class="faq-a"><p>A single implant typically takes a few months from placement to final crown, allowing time for the bone to heal and integrate around the implant. Multi-tooth and full-arch cases vary based on your specific plan, which Dr. Chris outlines clearly at your consultation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does insurance cover dental implants? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Coverage varies widely by plan — some cover a portion of the crown or the extraction, while the implant itself may or may not be included. Our team reviews your specific benefits and financing options before treatment begins.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What's the difference between an implant and a bridge or denture? <span class="plus">+</span></button>
+        <div class="faq-a"><p>A bridge or denture sits on or is supported by your remaining teeth or gums. An implant replaces the tooth root directly in the jawbone, which is why it's the only option that stops the bone loss that follows tooth loss and functions most like a natural tooth.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA / FORM -->
+<section class="final-cta" id="consult-form">
+  <div class="wrap cta-grid">
+    <div class="cta-copy">
+      <p class="eyebrow">Fairfax Station, VA</p>
+      <h2>Ready to talk about your options?</h2>
+      <p>Book a free consultation with Dr. Chris Kim. He'll review your scan, answer your questions, and lay out a clear plan — no pressure, no obligation.</p>
+
+      <div class="cta-info">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <a href="tel:+17036900102"><strong>(703) 690-0102</strong></a>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>9027 Silverbrook Rd Ste. F, Fairfax Station, VA 22039</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Mon–Tue 8am–5pm · Wed–Thu 8am–4pm · Fri 8am–1pm</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form id="leadForm">
+        <h3>Book Your Free Consultation</h3>
+        <p class="sub">A member of our team will confirm your visit within one business day.</p>
+
+        <div class="field">
+          <label for="fname">Full Name</label>
+          <input type="text" id="fname" name="name" required placeholder="Jane Smith">
+        </div>
+        <div class="field">
+          <label for="fphone">Phone Number</label>
+          <input type="tel" id="fphone" name="phone" required placeholder="(703) 555-0123">
+        </div>
+        <div class="field">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" name="email" required placeholder="jane@email.com">
+        </div>
+        <div class="field">
+          <label for="fservice">How many teeth are you missing?</label>
+          <select id="fservice" name="service">
+            <option>One tooth</option>
+            <option>A few teeth in a row</option>
+            <option>Most or all of my upper or lower teeth</option>
+            <option>I currently wear a denture or partial</option>
+            <option>Not sure yet — need advice</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-block">Request My Free Consultation</button>
+        <p class="form-note">By submitting, you agree to be contacted by Livewell Dental about your inquiry. No spam, ever.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <h3>Request received!</h3>
+        <p>Thanks — our team will call or email you within one business day to schedule your visit. Prefer to skip the wait?</p>
+        <a class="btn" style="margin-top:16px;" href="tel:+17036900102">Call (703) 690-0102 Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <span>© <span id="yr"></span> Livewell Dental — Dr. Chris Kim, DDS. Serving Fairfax Station &amp; Greater Northern Virginia.</span>
+      <a href="tel:+17036900102">(703) 690-0102</a>
+    </div>
+    <div class="disclaimer">
+      Individual results vary based on each patient's oral health, bone density, and treatment plan. Photos shown reflect real patient outcomes and are not a guarantee of any specific result. Not every patient is a candidate for immediate implant placement; a 3D scan and exam are required to confirm eligibility. Complimentary consultation applies to new implant dentistry patients; a member of our team will confirm full details when scheduling.
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a href="tel:+17036900102" class="btn btn-ghost" style="background:transparent;border-color:#EFE9DA;color:#EFE9DA;">Call Now</a>
+  <a href="#consult-form" class="btn">Book Free Consult</a>
+</div>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Before/After slider
+  (function(){
+    const slider = document.getElementById('baSlider');
+    const after = document.getElementById('baAfterImg');
+    const handle = document.getElementById('baHandle');
+    let dragging = false;
+
+    function setPos(clientX){
+      const rect = slider.getBoundingClientRect();
+      let pct = ((clientX - rect.left) / rect.width) * 100;
+      pct = Math.max(0, Math.min(100, pct));
+      after.style.clipPath = `inset(0 0 0 ${pct}%)`;
+      handle.style.left = pct + '%';
+    }
+    slider.addEventListener('mousedown', e => { dragging = true; setPos(e.clientX); });
+    window.addEventListener('mousemove', e => { if(dragging) setPos(e.clientX); });
+    window.addEventListener('mouseup', () => dragging = false);
+    slider.addEventListener('touchstart', e => setPos(e.touches[0].clientX), {passive:true});
+    slider.addEventListener('touchmove', e => setPos(e.touches[0].clientX), {passive:true});
+  })();
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // Lead form (client-side only — wire to your CRM / booking backend)
+  const leadForm = document.getElementById('leadForm');
+  leadForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    // TODO: replace this block with a real POST to your CRM, booking system,
+    // or an email service (e.g. Formspree, NexHealth, Weave) so leads
+    // actually reach your front desk. Currently this only shows a confirmation.
+    leadForm.style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  });
+</script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 /**
  * lint-css.mjs — gate a stylesheet against the Webflow-safe dialect BEFORE data_whtml_builder.
  *
- * Promoted 2026-09-23 from legacy-dental-pasadena/workflows/07-webflow-build/.tmp/native/lint-css.mjs
+ * Promoted 2026-09-23 from legacy-dental-pasadena/workflows/07-webflow-build/output/native/lint-css.mjs
  * (near-identical copies ran on arvada-dental-center v2-native and marvel-dental). Generalised:
  * the installed font list was hardcoded per client; it is now --fonts.
  *

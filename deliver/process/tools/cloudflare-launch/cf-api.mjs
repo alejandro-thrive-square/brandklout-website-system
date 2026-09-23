@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Cloudflare REST client shared by every script in tools/cloudflare-launch and
- * scenario-1-migration/scripts.
+ * scenario-1-migration step scripts.
  *
  * Origin: bk-dr-nahlah deliver/process/tools/cloudflare-launch/cf-api.mjs (2026-08-25),
  * generalized 2026-09-23 with the token rules learned on IFA, Stone, Mason Park and

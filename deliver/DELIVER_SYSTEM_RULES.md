@@ -20,33 +20,48 @@ The numbers follow the board. Full index:
 
 ## 2. Where things live
 
-- **Process (this repo, `main`):** `deliver/process/` — scenario folders with one directive per step,
-  and `tools/` with the shared scripts. Directives are the program: an agent reads the step `.md` and
-  runs the tools it names.
-- **Client work (the client's branch `bk-<client>`, its own Orca worktree):**
-  - `deliver/brandklout/<client>/docs/` — `project-overview.md`, `facts.md`, `mcp-access.md`,
-    `open-questions.md`, and the runbook (`RUNBOOK.md`, `runbook/INDEX.md`, dated runs).
-  - `deliver/brandklout/<client>/workflows/<step>/.tmp/` — everything a step produces, named after the
-    scenario step (for example `workflows/03-design-build/.tmp/site-src/`). Scripts run from
-    `deliver/brandklout/<client>/`.
-- **Shared Brandklout docs:** `deliver/brandklout/docs/` — design standard, fluid root, Client-First,
-  Google Drive map, MCP access, Asana dispatch, orchestration. Shared scripts in
-  `deliver/brandklout/scripts/` (Asana, journey audit, staging verify).
-- **Media:** the client's Google Drive, pulled with `scripts/drive.mjs` into the step that uses it.
-  Client media is gitignored and dies with the worktree: never keep the only copy there, and never
-  create a client-level `assets/` folder.
+**Main is for the system; client worktrees are for the sites** (the *Cloud Website Deliver System*
+board draws this).
+
+- **The system (main):** `deliver/process/`.
+  - `scenario-N-name/NN-step/` is one folder per step: the directive `NN-step.md`, the step's own
+    `scripts/`, `tools.json` (the shared toolkits it uses) and an empty `output/`.
+  - `tools/<toolkit>/` holds the shared toolkits, one copy each. Plus the rules, `scripts/`,
+    `deliver/brandklout/docs/` and `deliver/brandklout/scripts/`.
+- **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, a
+  mirror of the process layout for the scenarios it runs:
+  - `README.md` (which scenarios, from which commit), `RUNBOOK.md` (standing state and a row per run),
+    `docs/` (`project-overview.md`, `facts.md`, `mcp-access.md`).
+  - `<scenario>/<step>/` — copies of the step's directive and scripts, and **`output/`**: everything
+    the step produces. `output/assets/` (media, gitignored, backed up to R2), `output/code/`
+    (builds, scripts written for this client) and `output/RUNBOOK.md` (that step's history).
+  - `tools/<toolkit>/` — copies of the toolkits the started steps use, so every relative path in a
+    directive or script works the same on main and in the client folder.
+- **Media:** the client's Google Drive and the step's `output/assets/`, pulled with `scripts/drive.mjs`;
+  R2 holds the backup. Never keep the only copy in a worktree.
+- `output/` replaced `.tmp/` on 2026-09-23. Client branches from before keep `workflows/<module>/.tmp/`
+  until they are moved to the scenario layout.
 
 ## 3. Working rules
 
-- **Read the step directive before starting the step**, then only the tools it names.
-- **Promote, don't fork.** A fix or script that another client will need goes into
-  `deliver/process/` as its own commit on `main`, then client branches merge `main`. Never leave the
-  only copy of a rule or tool in one client folder.
+- **Start a scenario for a client with `node scripts/scenario.mjs start <client> <scenario>`.** It
+  copies the scenario's step folders and toolkits into the client folder and records the commit.
+- **Work in the step folder, write only to its `output/`.** Read the step directive first, then only
+  the tools it names. Scripts run from the step folder and write to `./output`.
+- **Fix the process on main, never in a client copy.** A directive, script or toolkit change is a
+  system commit on main; clients receive it with `node scripts/scenario.mjs update <client>`, which
+  refreshes directives and executables and never touches `output/`. `scenario.mjs status <client>`
+  shows what differs.
+- **A client branch changes only its own folder.** It merges into main when the site launches
+  (`git merge --no-ff`), adding or updating that client's folder and nothing else. A system update
+  changes everything except client folders. `node scripts/check-scope.mjs` checks both; the
+  `pre-commit` and `pre-merge-commit` hooks enforce it on main.
 - **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
 - **Asana and client-facing actions** (comments, status changes, emails, publishes to production) are
   confirmed with a person first.
-- **Runbook** after every task ([SYSTEM_RULES.md §5](../SYSTEM_RULES.md)).
+- **Runbook** after every run: the step's `output/RUNBOOK.md` and a row in the client `RUNBOOK.md`
+  ([SYSTEM_RULES.md §5](../SYSTEM_RULES.md)). System runs go to `.claude/runbook/`.
 - **No prices.** Brandklout is a partner engagement: never compute or record a price, rate, quote or
   cost under `deliver/brandklout/`.
 
@@ -65,7 +80,7 @@ The numbers follow the board. Full index:
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../SYSTEM_RULES.md). Never commit `.env` files, secrets or media;
-lightweight `.tmp/` artifacts may be committed when they help review or handoff.
+lightweight `output/` artifacts may be committed when they help review or handoff.
 
 ## Infrastructure
 

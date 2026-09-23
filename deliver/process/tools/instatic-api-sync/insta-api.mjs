@@ -31,7 +31,7 @@
  *   INSTATIC_EMAIL
  *   INSTATIC_PASSWORD
  *
- * The session cookie is cached in `.tmp/.session` so repeated runs do not
+ * The session cookie is cached in `output/.session` so repeated runs do not
  * re-hit the login rate limiter (5 failures locks the account).
  */
 
@@ -83,12 +83,12 @@ loadEnv()
    See deliver/process/tools/instatic-domain-origins/sites.json for canonical hosts. */
 export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 
-// The session cache is PER HOST. One shared `.tmp/.session` meant a cookie
+// The session cache is PER HOST. One shared `output/.session` meant a cookie
 // minted for one client's instance was replayed against the next one's; the
 // 401-and-relogin path papered over it, but it also meant two pipelines run
 // back to back kept evicting each other's session and re-hitting the login
 // rate limiter (5 failures locks the account).
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 export const SESSION_FILE = join(TMP, `.session-${BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_')}`)
 
 let cookie = null

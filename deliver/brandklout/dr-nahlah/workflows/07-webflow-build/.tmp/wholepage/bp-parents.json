@@ -1,0 +1,152 @@
+{
+ "site-nav": [
+  "nahlah-header"
+ ],
+ "wrap": [
+  "nahlah-div"
+ ],
+ "no-rail": [
+  "nahlah-div",
+  "wrap"
+ ],
+ "nav-in": [
+  "nahlah-div",
+  "wrap",
+  "no-rail"
+ ],
+ "nav-mid": [
+  "nahlah-div"
+ ],
+ "burger": [
+  "nahlah-button"
+ ],
+ "drawer": [
+  "nahlah-header"
+ ],
+ "portrait": [
+  "nahlah-img-2"
+ ],
+ "chapter-tag": [
+  "nahlah-div-3"
+ ],
+ "eyebrow": [
+  "nahlah-div"
+ ],
+ "btn": [
+  "nahlah-a-2"
+ ],
+ "btn-primary": [
+  "nahlah-a-2",
+  "btn"
+ ],
+ "magnetic": [
+  "nahlah-a-2",
+  "btn",
+  "btn-primary"
+ ],
+ "btn-ghost": [
+  "nav-logo",
+  "btn"
+ ],
+ "ch-reality": [
+  "nahlah-div"
+ ],
+ "stage": [
+  "nahlah-div-5",
+  "wrap"
+ ],
+ "big": [
+  "nahlah-p"
+ ],
+ "sec-pad": [
+  "nahlah-div",
+  "wrap"
+ ],
+ "head": [
+  "nahlah-div-6"
+ ],
+ "versus": [
+  "nahlah-div",
+  "wrap"
+ ],
+ "vs-row": [
+  "nahlah-div"
+ ],
+ "vs-head-row": [
+  "nahlah-div",
+  "vs-row"
+ ],
+ "vs-us": [
+  "nahlah-span-4"
+ ],
+ "vs-mid": [
+  "nahlah-span-5"
+ ],
+ "vs-them": [
+  "nahlah-span-6"
+ ],
+ "row": [
+  "nahlah-div-7"
+ ],
+ "grid": [
+  "nahlah-div-8",
+  "wrap",
+  "sec-pad"
+ ],
+ "ch-transformation": [
+  "nahlah-div"
+ ],
+ "pin": [
+  "nahlah-div-10"
+ ],
+ "cmp": [
+  "nahlah-div"
+ ],
+ "slide": [
+  "nahlah-div-12"
+ ],
+ "on": [
+  "nahlah-div-12",
+  "slide"
+ ],
+ "aft": [
+  "nahlah-img-5"
+ ],
+ "cmp-tag": [
+  "nahlah-span-12"
+ ],
+ "tag-before": [
+  "nahlah-span-12",
+  "cmp-tag"
+ ],
+ "tag-after": [
+  "nahlah-span-13",
+  "cmp-tag"
+ ],
+ "handle": [
+  "nahlah-div"
+ ],
+ "foot": [
+  "nahlah-div-13"
+ ],
+ "dots": [
+  "nahlah-span-14"
+ ],
+ "shot": [
+  "nahlah-div-16"
+ ],
+ "std": [
+  "nahlah-div"
+ ],
+ "wide": [
+  "nahlah-div",
+  "std"
+ ],
+ "cta": [
+  "nahlah-div"
+ ],
+ "btn-dark": [
+  "nahlah-a-4",
+  "btn"
+ ]
+}

@@ -51,4 +51,4 @@ Gathered 2026-09-22. IFA, Mason Park, Mason Park Pediatric, Stone Surgical Arts 
 
 ## Version Control
 
-Lightweight analysis artifacts, committed per [SYSTEM_RULES.md §4](../../../../../SYSTEM_RULES.md).
+Lightweight analysis artifacts, committed per [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).

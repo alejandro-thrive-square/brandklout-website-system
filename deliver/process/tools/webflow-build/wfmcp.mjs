@@ -3,7 +3,7 @@
  * wfmcp.mjs — talk to the Webflow MCP server over streamable HTTP from a script,
  * reusing the OAuth grant Claude Code already holds for a project MCP instance.
  *
- * Promoted 2026-09-23 from grand-mission-dentistry/workflows/07-webflow-build/.tmp/wfmcp.mjs
+ * Promoted 2026-09-23 from grand-mission-dentistry/workflows/07-webflow-build/output/wfmcp.mjs
  * (identical copies lived in arvada, legacy and marvel). Generalised: the instance name is an
  * argument instead of a hardcoded `webflow-brandklout|<hash>` key, and no site id is baked in.
  *

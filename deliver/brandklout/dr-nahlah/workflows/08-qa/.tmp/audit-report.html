@@ -1,0 +1,613 @@
+<title>Dr. Nahlah Site Audit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* ---------------------------------------------------------------------------
+   Palette: a cool green-grey neutral (biased toward the petrol accent, so the
+   greys read as chosen rather than inherited), one petrol accent, and three
+   semantic signals that never double as the accent.
+   Every colour is a token on bare :root, redefined for the two dark states.
+   --------------------------------------------------------------------------- */
+:root {
+  --ground:      #eef1f0;
+  --surface:     #ffffff;
+  --surface-2:   #f6f8f7;
+  --line:        #d2dad8;
+  --line-soft:   #e3e9e7;
+  --ink:         #101917;
+  --ink-soft:    #4d5b58;
+  --ink-faint:   #798a86;
+  --accent:      #0d5b57;
+  --accent-soft: #d9e8e6;
+  --was:         #99271f;   /* the state before the work */
+  --now:         #1c6440;   /* the state after it */
+  --open:        #8a5808;   /* deliberately not closed */
+  --shadow:      0 1px 2px rgba(16,25,23,.06), 0 8px 24px -16px rgba(16,25,23,.28);
+
+  --f-display: "Familjen Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-prose:   "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-data:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --measure: 66ch;
+  --pad: clamp(1.15rem, 4vw, 2.75rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0c1211;
+    --surface:     #141d1b;
+    --surface-2:   #182320;
+    --line:        #2a3936;
+    --line-soft:   #202d2b;
+    --ink:         #e4ecea;
+    --ink-soft:    #a3b3af;
+    --ink-faint:   #7b8c88;
+    --accent:      #5cc3b6;
+    --accent-soft: #16302e;
+    --was:         #e0847c;
+    --now:         #74c79b;
+    --open:        #d8ab5c;
+    --shadow:      0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:      #0c1211;
+  --surface:     #141d1b;
+  --surface-2:   #182320;
+  --line:        #2a3936;
+  --line-soft:   #202d2b;
+  --ink:         #e4ecea;
+  --ink-soft:    #a3b3af;
+  --ink-faint:   #7b8c88;
+  --accent:      #5cc3b6;
+  --accent-soft: #16302e;
+  --was:         #e0847c;
+  --now:         #74c79b;
+  --open:        #d8ab5c;
+  --shadow:      0 1px 2px rgba(0,0,0,.5), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--f-prose);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.shell {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) var(--pad) 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+/* --- masthead ------------------------------------------------------------ */
+.masthead { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.eyebrow {
+  font-family: var(--f-data);
+  font-size: .7rem;
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+}
+.eyebrow b { color: var(--accent); font-weight: 600; }
+
+h1 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(2.1rem, 5.5vw, 3.5rem);
+  line-height: 1.04;
+  letter-spacing: -.022em;
+  margin: 0;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+.standfirst {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: var(--ink-soft);
+}
+.standfirst strong { color: var(--ink); font-weight: 600; }
+
+/* --- the delta board ------------------------------------------------------
+   One row per measured quantity. Both bars share the row's scale, so the
+   before and after lengths are directly comparable rather than decorative. */
+.board {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.board-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.1rem var(--pad);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.board-head h2 { margin: 0; font-family: var(--f-display); font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+.legend { display: flex; gap: 1.1rem; font-family: var(--f-data); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+.legend span { display: inline-flex; align-items: center; gap: .4rem; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; display: block; }
+.legend .k-was { background: var(--was); }
+.legend .k-now { background: var(--now); }
+
+.metric {
+  display: grid;
+  grid-template-columns: minmax(11rem, 1.05fr) minmax(0, 2fr) auto;
+  gap: .5rem clamp(.9rem, 2.5vw, 2rem);
+  align-items: center;
+  padding: .95rem var(--pad);
+  border-top: 1px solid var(--line-soft);
+}
+.metric:first-of-type { border-top: 0; }
+.metric-name { font-family: var(--f-display); font-weight: 500; font-size: .95rem; line-height: 1.3; }
+.metric-note { display: block; font-family: var(--f-data); font-size: .68rem; letter-spacing: .04em; color: var(--ink-faint); margin-top: .2rem; }
+
+.bars { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.bar { display: grid; grid-template-columns: 3.4rem minmax(0,1fr); align-items: center; gap: .6rem; }
+.bar-label { font-family: var(--f-data); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+.bar-track { height: 9px; background: var(--line-soft); border-radius: 2px; overflow: hidden; }
+/* a span is inline, and width/height do not apply to inline boxes: without
+   this the fill measured 0x0 and every bar rendered as an empty track. */
+.bar-fill { display: block; height: 100%; border-radius: 2px; width: var(--w); transform-origin: left center; }
+.bar-was .bar-fill { background: var(--was); }
+.bar-now .bar-fill { background: var(--now); }
+
+.metric-read {
+  font-family: var(--f-data);
+  font-variant-numeric: tabular-nums;
+  font-size: .95rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: right;
+}
+.metric-read .was { color: var(--was); text-decoration: line-through; text-decoration-thickness: 1px; }
+.metric-read .arrow { color: var(--ink-faint); padding: 0 .35rem; }
+.metric-read .now { color: var(--now); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .metric { grid-template-columns: 1fr auto; }
+  .bars { grid-column: 1 / -1; }
+}
+
+/* --- findings ------------------------------------------------------------ */
+.section-title {
+  font-family: var(--f-display);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 600;
+  letter-spacing: -.018em;
+  margin: 0 0 .6rem;
+  text-wrap: balance;
+}
+.section-intro { margin: 0 0 2rem; max-width: var(--measure); color: var(--ink-soft); }
+
+.findings { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+
+.finding {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1.35rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+.finding-top { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.tag {
+  font-family: var(--f-data);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: .22rem .5rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+}
+.tag.fixed { color: var(--now); }
+.tag.open  { color: var(--open); }
+.scope { font-family: var(--f-data); font-size: .7rem; letter-spacing: .06em; color: var(--ink-faint); }
+.finding h3 { margin: 0; font-family: var(--f-display); font-size: 1.1rem; font-weight: 600; letter-spacing: -.012em; line-height: 1.25; text-wrap: balance; }
+.finding p { margin: 0; font-size: .96rem; color: var(--ink-soft); }
+.finding p + p { margin-top: -.1rem; }
+.finding code, .inline-code {
+  font-family: var(--f-data);
+  font-size: .84em;
+  background: var(--accent-soft);
+  color: var(--ink);
+  padding: .1em .32em;
+  border-radius: 2px;
+}
+
+/* --- the note about method ----------------------------------------------- */
+.method {
+  border-left: 3px solid var(--accent);
+  padding: .2rem 0 .2rem 1.35rem;
+  max-width: var(--measure);
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.method p { margin: 0; }
+.method .lede { font-size: 1.1rem; }
+
+/* --- the per-URL table --------------------------------------------------- */
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.table-tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem var(--pad);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.filters { display: flex; gap: .4rem; flex-wrap: wrap; }
+.filters button {
+  font-family: var(--f-data);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .38rem .7rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  border-radius: 2px;
+  cursor: pointer;
+}
+.filters button:hover { border-color: var(--accent); color: var(--ink); }
+.filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+:root[data-theme="dark"] .filters button[aria-pressed="true"],
+.filters button[aria-pressed="true"] { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .filters button[aria-pressed="true"] { color: #08100f; }
+}
+:root[data-theme="dark"] .filters button[aria-pressed="true"] { color: #08100f; }
+.filters button:focus-visible, .scroller:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.count { font-family: var(--f-data); font-size: .72rem; letter-spacing: .08em; color: var(--ink-faint); }
+
+.scroller { overflow-x: auto; max-height: 34rem; overflow-y: auto; }
+table { border-collapse: collapse; width: 100%; font-family: var(--f-data); font-size: .78rem; font-variant-numeric: tabular-nums; }
+thead th {
+  position: sticky; top: 0; z-index: 2;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  font-weight: 600;
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: .7rem .55rem;
+  white-space: nowrap;
+}
+thead th:first-child { text-align: left; padding-left: var(--pad); }
+tbody td { border-bottom: 1px solid var(--line-soft); padding: .5rem .55rem; text-align: right; white-space: nowrap; }
+tbody td:first-child { text-align: left; padding-left: var(--pad); white-space: normal; }
+tbody tr:hover { background: var(--surface-2); }
+.slug { color: var(--ink); word-break: break-word; }
+/* .kind is a SIBLING of .slug, not a child, so a descendant selector never
+   matched it and the two ran together as "/aboutpage". */
+.kind { color: var(--ink-faint); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; margin-left: .5rem; }
+.ok  { color: var(--now); }
+.bad { color: var(--was); }
+.nil { color: var(--ink-faint); }
+.delta .from { color: var(--was); }
+.delta .to { color: var(--now); font-weight: 600; }
+.delta .sep { color: var(--ink-faint); padding: 0 .18rem; }
+
+/* --- closing ------------------------------------------------------------- */
+.foot {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  font-family: var(--f-data);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  color: var(--ink-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 2rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bar-fill { animation: grow .8s cubic-bezier(.22,1,.36,1) both; }
+  .metric:nth-child(2) .bar-fill { animation-delay: .04s }
+  .metric:nth-child(3) .bar-fill { animation-delay: .08s }
+  .metric:nth-child(4) .bar-fill { animation-delay: .12s }
+  .metric:nth-child(5) .bar-fill { animation-delay: .16s }
+  .metric:nth-child(6) .bar-fill { animation-delay: .20s }
+  @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+}
+</style>
+
+<div class="shell">
+
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Published site &middot; <b>encorercm.com</b></span>
+      <span>77 URLs measured</span>
+      <span>20 August 2026</span>
+    </div>
+    <h1>Every page of the site, driven by a browser</h1>
+    <p class="standfirst">
+      The site had passed every gate this project owns. It had also been serving
+      <strong>72 dead before/after sliders</strong>, <strong>no alt text on any image</strong>, and a
+      JavaScript error on <strong>44 of its 77 URLs</strong>. Each gate reads a different layer of the
+      build; none of them had ever loaded the page a visitor actually gets. This audit does, at desktop
+      and at phone width, and everything below was found and closed in that pass.
+    </p>
+  </header>
+
+  <section class="board" aria-labelledby="board-h">
+    <div class="board-head">
+      <h2 id="board-h">What changed, measured on the live pages</h2>
+      <div class="legend">
+        <span><i class="k-was"></i> before</span>
+        <span><i class="k-now"></i> after</span>
+      </div>
+    </div>
+    <div id="metrics"></div>
+  </section>
+
+  <section>
+    <h2 class="section-title">What was wrong</h2>
+    <p class="section-intro">
+      Six defects, every one of them site-wide rather than confined to a page. Five are closed and live;
+      the sixth is a platform limit with a stop-gap in place.
+    </p>
+    <div class="findings">
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag fixed">Fixed</span><span class="scope">8 pages &middot; 72 sliders</span></div>
+        <h3>The before/after sliders were held shut by a dead CSS rule</h3>
+        <p>
+          Instatic's importer rewrites <code>&lt;input type=range&gt;</code> to <code>type="text"</code>.
+          An earlier session answered that by hiding the stray box and making the whole figure a drag
+          surface, in a script called <code>before-after.js</code>. That script was retired once
+          <code>site.js</code> took over and started coercing the input back to a range &mdash; but its CSS
+          stayed behind, and <code>.pk-ba input {display:none !important}</code> hides the very element
+          <code>site.js</code> repairs.
+        </p>
+        <p>
+          It survived because it lived in <code>runtime-states.css</code>, the one stylesheet on the site
+          with no local copy anyone diffed. That file now has a local owner and the simulator loads it.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag fixed">Fixed</span><span class="scope">all 77 URLs &middot; 614 images</span></div>
+        <h3>Every image had lost its alt text</h3>
+        <p>
+          Pushing a page to Instatic wipes every node-level attribute patch on it, and the 33-page sync
+          was not followed by the restore step. 549 images across the site carried an empty
+          <code>alt</code>, including all 111 on the smile gallery.
+        </p>
+        <p>
+          Restored from the local build as the source of truth. The five on the home page that had never
+          been written are now described too.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag fixed">Fixed</span><span class="scope">44 URLs</span></div>
+        <h3>The blog shipped a menu button with no menu</h3>
+        <p>
+          The post template pulled the mobile drawer out of another page into a variable and never
+          inserted it; the blog index never had one at all. So all 43 posts and the index served a burger
+          whose <code>aria-controls</code> pointed at nothing, and <code>drawer.querySelectorAll</code>
+          threw &mdash; taking the Escape handler and both layout-refresh calls down with it.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag fixed">Fixed</span><span class="scope">every page, phone widths only</span></div>
+        <h3>Nine links of the mobile menu were unreachable</h3>
+        <p>
+          The drawer is a column that centres its content and scrolls. At 390&times;844 the content is
+          946px tall in an 844px box, so centring pushed the overflow off the <em>top</em>, where
+          <code>scrollTop</code> cannot follow: the first nine entries of the site map sat at &minus;166px
+          on every page, and the drawer still reported itself open.
+        </p>
+        <p>
+          Only the mobile pass could see this. The drawer, the burger and the touch behaviour of the
+          sliders exist at phone widths and nowhere else.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag fixed">Fixed</span><span class="scope">1 page, phone widths only</span></div>
+        <h3>The thank-you page scrolled sideways</h3>
+        <p>
+          A parallax attribute sat on a <code>&lt;figure&gt;</code> instead of the image inside it. The
+          effect scales its target by 1.12: on the image, clipped by the figure; on the figure, it scales
+          the clipping container. 21px either side against a 17px gutter, and the page carried 4px of
+          horizontal scroll.
+        </p>
+      </article>
+
+      <article class="finding">
+        <div class="finding-top"><span class="tag open">Stop-gap</span><span class="scope">all 77 URLs</span></div>
+        <h3>Every URL published the same title and description</h3>
+        <p>
+          Instatic renders the <em>site</em> title and description into every page's head. The per-page
+          title is stored correctly and simply never emitted, and the platform exposes no way to write
+          head tags. There were no canonical links anywhere either, and the 43 blog posts had no
+          structured data at all.
+        </p>
+        <p>
+          One head script now carries all 77 routes: title, description, self-referential canonical, Open
+          Graph, and Article markup for the posts. Google renders this. Facebook and LinkedIn do not,
+          which is why the durable fix is still server-side in the Instatic deployment.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Why every gate was green</h2>
+    <div class="method">
+      <p class="lede">
+        The site exists three times over, and the checks only covered two of them.
+      </p>
+      <p>
+        The build tests read the local package. The parity check compares node counts on the Instatic
+        draft, which a CSS override cannot change. The simulator replayed the real imported markup, but
+        against two of the three stylesheets the platform actually serves &mdash; and the missing one was
+        exactly where the rule that killed the sliders lived. Nothing had ever driven the published page.
+      </p>
+      <p>
+        So the answer to &ldquo;is the size of the site causing the errors?&rdquo; is no. 77 URLs is a
+        perfectly ordinary size. The problem was that the layer the client looks at was the one layer
+        nobody measured, so defects survived every green result. That gap is now a gate of its own, run
+        at both widths, and the simulator loads all three stylesheets.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Page by page</h2>
+    <p class="section-intro">
+      All 77 URLs, as served. Columns marked with two figures show before and after.
+    </p>
+    <div class="table-wrap">
+      <div class="table-tools">
+        <div class="filters" role="group" aria-label="Filter rows">
+          <button type="button" data-filter="all" aria-pressed="true">All 77</button>
+          <button type="button" data-filter="page" aria-pressed="false">Pages</button>
+          <button type="button" data-filter="post" aria-pressed="false">Blog posts</button>
+          <button type="button" data-filter="changed" aria-pressed="false">Had a defect</button>
+        </div>
+        <span class="count" id="count"></span>
+      </div>
+      <div class="scroller" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">URL</th>
+              <th scope="col">Status</th>
+              <th scope="col">Words</th>
+              <th scope="col">Images</th>
+              <th scope="col">No alt</th>
+              <th scope="col">Sliders</th>
+              <th scope="col">JS errors</th>
+              <th scope="col">Triggers</th>
+              <th scope="col">H1</th>
+              <th scope="col">JSON-LD</th>
+              <th scope="col">Mobile overflow</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Measured under headless Chrome at 1440&times;900 and 390&times;844</span>
+    <span>Harness: <span class="inline-code">08-qa/.tmp/audit-site.mjs</span></span>
+    <span>Still open: JSON-LD on 6 legal pages and the video library</span>
+  </footer>
+
+</div>
+
+<script>
+const ROWS = [{"s":"index","k":"page","st":200,"w":1738,"im":25,"ab":17,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":67,"h1":1,"t":"Dental Implants & Prosthodontics | McLean & Alexandria VA","ld":1,"ov":0,"du":0},{"s":"about","k":"page","st":200,"w":653,"im":13,"ab":11,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":38,"h1":1,"t":"Why Choose Us | Dr. Nahlah Implants & Prosthodontics | McLean, VA","ld":1,"ov":0,"du":0},{"s":"all-on-4","k":"page","st":200,"w":1046,"im":24,"ab":21,"aa":0,"bt":3,"bb":0,"ba":3,"jb":0,"ja":0,"trig":52,"h1":1,"t":"All-on-4 Full Arch Dental Implants | McLean & Alexandria","ld":1,"ov":0,"du":0},{"s":"contact","k":"page","st":200,"w":531,"im":8,"ab":6,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":23,"h1":1,"t":"Contact & Locations | Dr. Nahlah Prosthodontics, Virginia","ld":1,"ov":0,"du":0},{"s":"cosmetic-dentistry","k":"page","st":200,"w":680,"im":15,"ab":14,"aa":0,"bt":2,"bb":0,"ba":2,"jb":0,"ja":0,"trig":34,"h1":1,"t":"Cosmetic Dentistry | Veneers, Crowns & Whitening | McLean, VA","ld":1,"ov":0,"du":0},{"s":"crowns-and-bridges","k":"page","st":200,"w":672,"im":10,"ab":9,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":37,"h1":1,"t":"Dental Crowns & Bridges | Reinforce At-Risk Teeth | McLean, VA","ld":1,"ov":0,"du":0},{"s":"dental-conditions","k":"page","st":200,"w":475,"im":9,"ab":8,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":28,"h1":1,"t":"Conditions We Treat | Gum Disease to Toothache | McLean, VA","ld":1,"ov":0,"du":0},{"s":"dental-implant-faq","k":"page","st":200,"w":449,"im":7,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":28,"h1":1,"t":"Dental Implant FAQ | 12 Common Questions | McLean, VA","ld":1,"ov":0,"du":0},{"s":"dental-implants","k":"page","st":200,"w":879,"im":22,"ab":14,"aa":0,"bt":3,"bb":0,"ba":3,"jb":0,"ja":0,"trig":45,"h1":1,"t":"Dental Implants | Board-Certified Prosthodontist | Virginia","ld":1,"ov":0,"du":0},{"s":"doctor-referral","k":"page","st":200,"w":600,"im":12,"ab":12,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":30,"h1":1,"t":"For Referring Doctors | Prosthodontic & Implant Referrals | McLean, VA","ld":1,"ov":0,"du":0},{"s":"emergency-dentistry","k":"page","st":200,"w":576,"im":9,"ab":8,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":31,"h1":1,"t":"Emergency Dentist in McLean, VA | Seen the Same Day","ld":1,"ov":0,"du":0},{"s":"financing","k":"page","st":200,"w":601,"im":12,"ab":12,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":33,"h1":1,"t":"Insurance & Financing | Payment Options | McLean, VA","ld":1,"ov":0,"du":0},{"s":"implant-cost","k":"page","st":200,"w":819,"im":13,"ab":10,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":33,"h1":1,"t":"Dental Implant Cost in Northern Virginia | Dr. Nahlah","ld":1,"ov":0,"du":0},{"s":"implant-supported-dentures","k":"page","st":200,"w":838,"im":16,"ab":12,"aa":0,"bt":2,"bb":0,"ba":2,"jb":0,"ja":0,"trig":38,"h1":1,"t":"Fixed Teeth vs. Removable | Implant Dentures | McLean, VA","ld":1,"ov":0,"du":0},{"s":"meet-dr-nahlah","k":"page","st":200,"w":754,"im":9,"ab":8,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":38,"h1":1,"t":"Meet Dr. Esam Nahlah, Prosthodontist | McLean & Alexandria","ld":1,"ov":0,"du":0},{"s":"oral-surgery","k":"page","st":200,"w":587,"im":12,"ab":8,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":28,"h1":1,"t":"Oral Surgery | Extractions, Bone Grafting & Implants | McLean, VA","ld":1,"ov":0,"du":0},{"s":"our-facility","k":"page","st":200,"w":671,"im":19,"ab":12,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":35,"h1":1,"t":"Our Facility | Six Surgical Suites & In-House Lab | McLean, VA","ld":1,"ov":0,"du":0},{"s":"our-team","k":"page","st":200,"w":598,"im":12,"ab":11,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":26,"h1":1,"t":"Meet the Team | Dr. Nahlah Implants & Prosthodontics | McLean, VA","ld":1,"ov":0,"du":0},{"s":"patient-center","k":"page","st":200,"w":626,"im":16,"ab":13,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":27,"h1":1,"t":"Your First Visit | What to Expect, Step by Step | McLean, VA","ld":1,"ov":0,"du":0},{"s":"patient-stories","k":"page","st":200,"w":513,"im":8,"ab":7,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":29,"h1":1,"t":"Patient Stories & Reviews | Dr. Nahlah Prosthodontics","ld":1,"ov":0,"du":0},{"s":"privacy-policy","k":"page","st":200,"w":262,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":7,"h1":1,"t":"Privacy Policy | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria","ld":1,"ov":0,"du":0},{"s":"privacy-policy-alexandria","k":"page","st":200,"w":2020,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":8,"h1":1,"t":"Privacy Policy | Alexandria Office | Dr. Nahlah Implants & Prosthodontics","ld":0,"ov":0,"du":0},{"s":"privacy-policy-maclean","k":"page","st":200,"w":2008,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":8,"h1":1,"t":"Privacy Policy | McLean Office | Dr. Nahlah Implants & Prosthodontics","ld":0,"ov":0,"du":0},{"s":"sedation-dentistry","k":"page","st":200,"w":601,"im":8,"ab":5,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":31,"h1":1,"t":"Sedation Dentistry | Nitrous, Oral & IV | McLean, VA","ld":1,"ov":0,"du":0},{"s":"smile-gallery","k":"page","st":200,"w":914,"im":111,"ab":111,"aa":0,"bt":54,"bb":0,"ba":54,"jb":0,"ja":0,"trig":18,"h1":1,"t":"Smile Gallery | Before & After Cases | Dr. Nahlah","ld":1,"ov":0,"du":0},{"s":"smile-makeover","k":"page","st":200,"w":669,"im":23,"ab":20,"aa":0,"bt":3,"bb":0,"ba":3,"jb":0,"ja":0,"trig":28,"h1":1,"t":"Smile Makeover | Digital Smile Design | McLean, Virginia","ld":1,"ov":0,"du":0},{"s":"teeth-whitening","k":"page","st":200,"w":561,"im":12,"ab":11,"aa":0,"bt":2,"bb":0,"ba":2,"jb":0,"ja":0,"trig":30,"h1":1,"t":"Teeth Whitening | A White Smile in One Visit | McLean, VA","ld":1,"ov":0,"du":0},{"s":"terms-conditions","k":"page","st":200,"w":267,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":7,"h1":1,"t":"Terms of Service | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria","ld":0,"ov":0,"du":0},{"s":"terms-of-service-alexandria","k":"page","st":200,"w":2390,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":8,"h1":1,"t":"Terms of Service | Alexandria Office | Dr. Nahlah Implants & Prosthodontics","ld":0,"ov":0,"du":0},{"s":"terms-of-service-maclean","k":"page","st":200,"w":2402,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":8,"h1":1,"t":"Terms of Service | McLean Office | Dr. Nahlah Implants & Prosthodontics","ld":0,"ov":0,"du":0},{"s":"thank-you","k":"page","st":200,"w":516,"im":8,"ab":6,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":14,"h1":1,"t":"Thank You | Dr. Nahlah Implants & Prosthodontics | McLean, VA","ld":0,"ov":4,"du":0},{"s":"veneers","k":"page","st":200,"w":573,"im":15,"ab":15,"aa":0,"bt":3,"bb":0,"ba":3,"jb":0,"ja":0,"trig":32,"h1":1,"t":"Porcelain Veneers | Digital Smile Design | McLean, VA","ld":1,"ov":0,"du":0},{"s":"video-library","k":"page","st":200,"w":366,"im":16,"ab":16,"aa":0,"bt":0,"bb":0,"ba":0,"jb":0,"ja":0,"trig":15,"h1":1,"t":"Video Library | Implant & Prosthodontic Procedures Explained | Dr. Nahlah","ld":0,"ov":0,"du":0},{"s":"after-my-dental-implants-are-placed-how-will-i-know-if-i-have-peri-implantitis","k":"post","st":200,"w":693,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"After My Dental Implants Are Placed, How Will I Know If I Have Peri-Implantitis? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"all-on-four-your-questions","k":"post","st":200,"w":905,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"All-On-Four - Your Questions Answered About Dental Implants","ld":1,"ov":0,"du":0},{"s":"are-dental-implants-worth-the-cost","k":"post","st":200,"w":842,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Are Dental Implants Worth the Cost? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"are-there-advantages-to-replacing-my-missing-teeth-with-dental-implants-in-mclean-va","k":"post","st":200,"w":882,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Are There Advantages To Replacing My Missing Teeth With Dental Implants In McLean, VA? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with","k":"post","st":200,"w":874,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Are There Factors That Determine Which Type Of Dental Implant Procedure I Can Get Treated With? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"are-there-side-effects-to-dental-implant-procedures","k":"post","st":200,"w":791,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Are There Side Effects To Dental Implant Procedures? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants","k":"post","st":200,"w":701,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Can Anything Be Done If I Am Not An Immediate Candidate For Dental Implants? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"can-i-have-a-customized-new-smile-with-full-mouth-dental-implants","k":"post","st":200,"w":702,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Can I Have A Customized New Smile With Full Mouth Dental Implants? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"can-i-upgrade-my-smile-from-traditional-dentures-to-implant-supported-dentures","k":"post","st":200,"w":716,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Can I Upgrade My Smile From Traditional Dentures To Implant Supported Dentures? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"complete-teeth-replacement-the-perks-of-dental-implants-explained","k":"post","st":200,"w":689,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Complete Teeth Replacement: The Perks of Dental Implants Explained | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"considering-getting-treated-with-all-on-4-dental-implants-in-mclean-va-this-is-why-you-should","k":"post","st":200,"w":990,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Considering Getting Treated With All-On-4\u00ae Dental Implants In McLean, VA? This Is Why You Should | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"deciphering-dental-implants-your-guide-to-implant-dentistry-in-mclean-va","k":"post","st":200,"w":1290,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Deciphering Dental Implants: Your Guide to Implant Dentistry in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"dental-implants-everything-you-need-to-know","k":"post","st":200,"w":1165,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Dental Implants - Everything You Need to Know | Dr. Nahlah DDS.","ld":1,"ov":0,"du":0},{"s":"discover-the-promising-world-of-teeth-implants-in-mclean-va","k":"post","st":200,"w":699,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Discover the Promising World of Teeth Implants in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"discovering-the-benefits-and-process-of-snap-on-dentures-in-mclean-va","k":"post","st":200,"w":991,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Discovering the Benefits and Process of Snap-On Dentures in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"do-i-need-a-full-mouth-dental-implant-consultation","k":"post","st":200,"w":733,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Do I Need A Full Mouth Dental Implant Consultation? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"exploring-the-world-of-dental-implants-placements-in-mclean-va","k":"post","st":200,"w":680,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Exploring the World of Dental Implants Placements in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants","k":"post","st":200,"w":790,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Exploring Your Options for Replacing a Missing Tooth: The Advantage of Dental Implants | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"have-multiple-missing-teeth-you-should-get-treated-with-multiple-dental-implants","k":"post","st":200,"w":745,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Have Multiple Missing Teeth? You Should Get Treated With Multiple Dental Implants | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"how-exactly-do-implant-supported-dentures-in-mclean-va-benefit-my-smile","k":"post","st":200,"w":897,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"How Exactly Do Implant Supported Dentures In McLean, VA Benefit My Smile? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"how-many-missing-teeth-can-dental-implants-replace","k":"post","st":200,"w":728,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"How Many Missing Teeth Can Dental Implants Replace? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"implant-vs-implant-clearing-the-confusion-on-dental-implants","k":"post","st":200,"w":685,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Implant vs Inplant: Clearing the Confusion on Dental Implants | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"integrating-treatment-dental-practices-into-your-dental-implant-procedure","k":"post","st":200,"w":720,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Integrating Treatment Dental Practices into Your Dental Implant Procedure | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"longevity-of-dental-implants-causes-and-fixes-for-damages","k":"post","st":200,"w":702,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Longevity of Dental Implants: Causes and Fixes for Damages | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth","k":"post","st":200,"w":662,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Navigating the Path to Smile Restoration: Unveiling the Secrets of Implants of Teeth | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"navigating-the-world-of-dental-implant-surgery-in-mclean-va","k":"post","st":200,"w":688,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Navigating the World of Dental Implant Surgery in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"navigating-the-world-of-dental-implants-an-experts-guide","k":"post","st":200,"w":706,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Navigating the World of Dental Implants: An Expert's Guide | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"porcelain-veneers-the-answers-to-your-questions","k":"post","st":200,"w":811,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Porcelain Veneers - The Answers to Your Questions | Dr. Nahlah DDS. MS.","ld":1,"ov":0,"du":0},{"s":"posts","k":"index","st":200,"w":1702,"im":3,"ab":2,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Journal | Implants, Prosthodontics and Smile Design | Dr. Nahlah","ld":1,"ov":0,"du":0},{"s":"ready-to-learn-how-full-mouth-dental-implants-are-cost-effective","k":"post","st":200,"w":908,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Ready To Learn How Full Mouth Dental Implants Are Cost-Effective? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"ready-to-learn-what-a-typical-full-mouth-dental-implant-procedure-looks-like","k":"post","st":200,"w":800,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Ready To Learn What A Typical Full Mouth Dental Implant Procedure Looks Like? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"revamp-your-smile-understanding-the-basics-of-tooth-implants-in-mclean-va","k":"post","st":200,"w":1373,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Revamp Your Smile: Understanding the Basics of Tooth Implants in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants","k":"post","st":200,"w":709,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Revolutionize Your Smile: A Journey Through Whole Set of Teeth Implants | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"revolutionize-your-smile-with-dental-implants-in-mclean-va","k":"post","st":200,"w":1216,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Revolutionize Your Smile with Dental Implants in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"revolutionizing-dental-restoration-the-top-implant-techniques","k":"post","st":200,"w":929,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Revolutionizing Dental Restoration: The Top Implant Techniques by Dr. Nahlah, Esam","ld":1,"ov":0,"du":0},{"s":"should-i-upgrade-my-smile-from-traditional-dentures-to-all-on-4-dental-implants-in-mclean-va","k":"post","st":200,"w":981,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Should I Upgrade My Smile From Traditional Dentures To All-On-4\u00ae Dental Implants In McLean, VA? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"should-sedation-dentistry-be-used-for-full-mouth-dental-implant-procedures","k":"post","st":200,"w":705,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Should Sedation Dentistry Be Used For Full Mouth Dental Implant Procedures? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"uncover-the-lifespan-how-long-can-a-dental-implant-last","k":"post","st":200,"w":655,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Uncover the Lifespan: How Long Can a Dental Implant Last? | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"uncovering-the-mystery-the-in-depth-guide-to-dental-implants","k":"post","st":200,"w":822,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Uncovering the Mystery: The In-depth Guide to Dental Implants | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"unlock-the-benefits-of-dental-implants-your-best-teeth-replacement-option","k":"post","st":200,"w":791,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Unlock the Benefits of Dental Implants: Your Best Teeth Replacement Option | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"unraveling-the-complexities-complications-in-implant-dentistry","k":"post","st":200,"w":644,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Unraveling the Complexities: Complications in Implant Dentistry | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"unveiling-the-mystery-of-implant-dentistry-in-mclean-va","k":"post","st":200,"w":722,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Unveiling the Mystery of Implant Dentistry in McLean, VA | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"want-to-learn-how-to-take-care-of-your-dental-implants-here-is-how","k":"post","st":200,"w":849,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Want To Learn How To Take Care Of Your Dental Implants? Here Is How | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0},{"s":"your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution","k":"post","st":200,"w":747,"im":3,"ab":3,"aa":0,"bt":0,"bb":0,"ba":0,"jb":1,"ja":0,"trig":2,"h1":1,"t":"Your Comprehensive Guide on Dental Implants: The Best Replacement of Tooth Solution | Dr. Esam Nahlah, D.D.S., M.S., FACP","ld":1,"ov":0,"du":0}];
+
+/* The delta board. Each metric names the quantity, the scale it is measured
+   against, and the two readings. Bars share the row's scale so their lengths
+   compare directly. */
+const METRICS = [
+  { name: "Before/after sliders that respond",  note: "of 72, across 8 pages",    was: 0,   now: 72,  max: 72,  invert: false },
+  { name: "Images carrying alt text",           note: "of 614, across 77 URLs",   was: 65,  now: 614, max: 614, invert: false },
+  { name: "URLs throwing a JavaScript error",   note: "lower is better",          was: 44,  now: 0,   max: 77,  invert: true },
+  { name: "Distinct page titles",               note: "of 77 URLs",               was: 1,   now: 77,  max: 77,  invert: false },
+  { name: "URLs with a canonical link",         note: "of 77 URLs",               was: 0,   now: 77,  max: 77,  invert: false },
+  { name: "Mobile menu links reachable",        note: "of 29, on every page",     was: 20,  now: 29,  max: 29,  invert: false }
+];
+
+const metricsEl = document.getElementById('metrics');
+metricsEl.innerHTML = METRICS.map(m => {
+  const pw = Math.max(1.5, (m.was / m.max) * 100);
+  const pn = Math.max(1.5, (m.now / m.max) * 100);
+  return `<div class="metric">
+    <div class="metric-name">${m.name}<span class="metric-note">${m.note}</span></div>
+    <div class="bars">
+      <div class="bar bar-was"><span class="bar-label">before</span><span class="bar-track"><span class="bar-fill" style="--w:${pw}%"></span></span></div>
+      <div class="bar bar-now"><span class="bar-label">after</span><span class="bar-track"><span class="bar-fill" style="--w:${pn}%"></span></span></div>
+    </div>
+    <div class="metric-read"><span class="was">${m.was}</span><span class="arrow">&rarr;</span><span class="now">${m.now}</span></div>
+  </div>`;
+}).join('');
+
+/* The table. A cell that changed shows both readings; one that never had a
+   problem shows a single dim figure, so the eye lands only on what moved. */
+const delta = (from, to, goodIsZero) => {
+  if (from === to) {
+    const good = goodIsZero ? to === 0 : true;
+    return `<span class="${good ? 'nil' : 'bad'}">${to}</span>`;
+  }
+  return `<span class="delta"><span class="from">${from}</span><span class="sep">&rarr;</span><span class="to">${to}</span></span>`;
+};
+
+const tbody = document.getElementById('rows');
+const countEl = document.getElementById('count');
+
+function render(filter) {
+  const shown = ROWS.filter(r => {
+    if (filter === 'all') return true;
+    if (filter === 'page') return r.k !== 'post';
+    if (filter === 'post') return r.k === 'post';
+    return r.ab > 0 || r.jb > 0 || (r.bt > 0 && r.bb < r.bt) || r.ov > 0 || r.du > 0;
+  });
+  tbody.innerHTML = shown.map(r => `<tr>
+    <td><span class="slug">/${r.s === 'index' ? '' : r.s}</span><span class="kind">${r.k === 'post' ? 'post' : 'page'}</span></td>
+    <td class="${r.st === 200 ? 'ok' : 'bad'}">${r.st}</td>
+    <td class="nil">${r.w}</td>
+    <td class="nil">${r.im}</td>
+    <td>${delta(r.ab, r.aa, true)}</td>
+    <td>${r.bt ? delta(r.bb, r.ba, false) + '<span class="nil">/' + r.bt + '</span>' : '<span class="nil">&mdash;</span>'}</td>
+    <td>${delta(r.jb, r.ja, true)}</td>
+    <td class="nil">${r.trig}</td>
+    <td class="${r.h1 === 1 ? 'nil' : 'bad'}">${r.h1}</td>
+    <td class="${r.ld ? 'ok' : 'bad'}">${r.ld ? 'yes' : 'no'}</td>
+    <td class="${r.ov > 0 ? 'bad' : 'nil'}">${r.ov > 0 ? r.ov + 'px' : 'none'}</td>
+  </tr>`).join('');
+  countEl.textContent = shown.length + ' of ' + ROWS.length + ' URLs shown';
+}
+
+document.querySelectorAll('.filters button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filters button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    render(btn.dataset.filter);
+  });
+});
+
+render('all');
+</script>

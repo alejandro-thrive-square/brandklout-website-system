@@ -163,7 +163,7 @@ Asana workspace connected.
 - Read tasks, subtasks, projects, sections, custom fields, assignees, due dates, attachments
   metadata, and comments within the Brandklout workspace.
 - Search and filter tasks to identify work delegated to Webzite.
-- Create reviewable artifacts summarising assigned work in the owning workflow's `.tmp/` folder.
+- Create reviewable artifacts summarising assigned work in the owning workflow's `output/` folder.
 - Update the status, comments, or completion state of tasks **that are assigned to Webzite**,
   after explicit confirmation (see below).
 
@@ -211,11 +211,11 @@ The client ID stored in `.mcp.json` is a public identifier and is safe to commit
 secret is held in the OS credential store, never in this repository.
 
 ## Artifact Storage
-- Asana task pulls: `deliver/brandklout/.tmp/asana/` (`my-tasks.json`, `my-tasks.md`).
-- Task/delegation artifacts: the owning workflow's `.tmp/` folder under
-  `deliver/brandklout/<client>/workflows/<workflow>/.tmp/`.
+- Asana task pulls: `deliver/brandklout/output/asana/` (`my-tasks.json`, `my-tasks.md`).
+- Task/delegation artifacts: the owning workflow's `output/` folder under
+  `deliver/brandklout/<client>/<scenario>/<step>/output/`.
 - Partnership-level artifacts with no single client owner:
-  `deliver/brandklout/.tmp/`.
+  `deliver/brandklout/output/`.
 
 ## Version Control
 This project MCP access file follows the root-level version control rules in

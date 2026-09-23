@@ -4,7 +4,7 @@
 When a client's real domain goes live, their team should reach the site editor at their own address — `drnahlah.com/admin`, `masonparkdental.com/admin` — log in, edit and save. This module is the step that makes that true, and the check that proves it before anyone is given a link.
 
 > [!IMPORTANT]
-> **Integrity Rule**: Any change to the origin model, the checker or `sites.json` must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../PROCESS_INDEX.md). `sites.json` must be re-verified with `node check-origins.mjs --all` in the same commit that changes it.
+> **Integrity Rule**: Any change to the origin model, the checker or `sites.json` must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../../PROCESS_INDEX.md). `sites.json` must be re-verified with `node check-origins.mjs --all` in the same commit that changes it.
 
 ## Operational Purpose
 
@@ -143,7 +143,7 @@ PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https:
 
 **Dr. Nahlah — set once, never extended.** `PUBLIC_ORIGIN` already held
 `encorercm.com,www.encorercm.com,dr-nahlah.up.railway.app` from a fix on **2026-08-18**, recorded in
-[`dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md`](../../brandklout/dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md). That entry diagnosed this exact class of bug (editor stuck
+`dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md` (bk-dr-nahlah runbook `2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md`). That entry diagnosed this exact class of bug (editor stuck
 "reconnecting", cannot sign out, new user cannot log in — all one origin check) and even wrote down
 the rule: *"Adding a custom domain in Railway does not update `PUBLIC_ORIGIN`, and `www` is a
 separate domain."* Then `drnahlah.com` went live on 2026-08-25 and was not appended. **The knowledge
@@ -221,4 +221,4 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 - `TRIGGER_PROMPT.txt` — the agent entry point
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.

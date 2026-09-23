@@ -4,7 +4,7 @@
  *
  *   node deliver/brandklout/scripts/staging-verify.mjs \
  *     --url https://grand-mission.webflow.io/implant-ai \
- *     --baseline deliver/brandklout/grand-mission-dentistry/workflows/04-design/.tmp/implant-landing-page
+ *     --baseline deliver/brandklout/grand-mission-dentistry/workflows/04-design/output/implant-landing-page
  *
  *   --url       staging URL of the built page          (required)
  *   --baseline  local package directory holding index.html   (optional but

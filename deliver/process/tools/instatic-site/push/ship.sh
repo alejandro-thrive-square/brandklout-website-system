@@ -11,14 +11,14 @@
 # re-run after a failure does not concatenate onto a half-written payload.
 #
 # Usage:  RAILWAY_LINK_DIR=<dir linked by project ID> bash <tools>/instatic-site/push/ship.sh
-#         run from the client folder that holds .tmp/import-input.b64 (build-import-input.mjs)
+#         run from the client folder that holds output/import-input.b64 (build-import-input.mjs)
 #
 # PROMOTED 2026-09-23. Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/ship.sh. conv-preload.ts / conv-encode.ts come from
 # tools/instatic-api-sync (identical there); import-run.ts sits beside this file.
 set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
-TMP="$(pwd)/.tmp"   # run from the client folder; payload and output live in <cwd>/.tmp
+TMP="$(pwd)/output"   # run from the client folder; payload and output live in <cwd>/output
 mkdir -p "$TMP"
 # No apostrophe in this message: inside ${VAR:?...} a single quote opens a
 # quoted string and the closing brace is never seen, so the whole file fails to

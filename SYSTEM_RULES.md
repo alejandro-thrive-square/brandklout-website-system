@@ -144,7 +144,7 @@ Local PC ←──→ rclone bisync ──────────────�
 Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (100 GB)** is the single source of truth for those assets.
 
 - **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
-- **Deliver Project Files** (`deliver/brandklout/<client>/workflows/<step>/.tmp/`): each scenario step writes into its own folder, named after the step (for example `workflows/03-design-build/.tmp/`). Client photos, videos and brand files live in the client's Google Drive and are pulled with `scripts/drive.mjs` into the step that uses them; never keep the only copy in a worktree.
+- **Deliver Project Files** (`deliver/brandklout/<client>/<scenario>/<step>/output/`): each scenario step writes into its own `output/` folder (assets, code and the step runbook; `.tmp/` on client branches from before 2026-09-23). Client photos, videos and brand files live in the client's Google Drive and are pulled with `scripts/drive.mjs` into the step that uses them; never keep the only copy in a worktree.
 - **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
 - **Sync commands** — use `scripts/sync-assets.sh` (wraps rclone with the correct filters):
   ```bash
@@ -396,13 +396,16 @@ The system has **two workspaces that can both change repo state**: the local mac
 
 ## 5. Runbooks — one file per run, tracked, per project
 
-**A run gets its own file.** After each task, write
-`deliver/brandklout/<client>/docs/runbook/YYYY-MM-DD-<slug>.md`, add its row to that folder's
-`INDEX.md`, and refresh the standing `docs/RUNBOOK.md` with what is true *now*. Repo-level work that
-belongs to no client goes to `.claude/runbook/` instead.
+**The runbook lives with the step (since 2026-09-23).** Client work happens in a scenario step
+folder, `deliver/brandklout/<client>/<scenario>/<step>/`. After each run, add a dated entry (newest
+first: Done with the commit SHA, Next, Gotchas) to that step's `output/RUNBOOK.md`, and a one-line row
+to the client's `deliver/brandklout/<client>/RUNBOOK.md`, whose top section is the standing state.
+System work (process, tools, rules) goes to `.claude/runbook/` on main as one file per run, indexed in
+`.claude/runbook/INDEX.md`. Client branches created before 2026-09-23 still keep
+`docs/runbook/` until they are moved to the scenario layout.
 
-**Reading rule: open `INDEX.md`, then only the runs you need.** Never read the whole history. The
-index flags which runs carry a `Gotchas` or `Open questions` section, which is usually all you want.
+**Reading rule: open the client `RUNBOOK.md` (or `.claude/runbook/INDEX.md`), then only the step
+runbooks or runs you need.** Never read the whole history.
 
 **Runbooks are tracked — commit them.** They were gitignored until 2026-09-04 for a reason that the
 current layout dissolves: every worktree wrote *the same path*, `.claude/RUNBOOK.md`, so tracking

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   CH 02 — WHAT IS INCLUDED
+   "All-inclusive" is a claim until it is a list. The seven items are the
+   practice's own; they draw in as the chapter is read, against the practice's
+   photograph of its own printed aligners.
+   ========================================================================== */
+.ch-included { background: var(--bg) }
+.inc__grid { display: grid; gap: 3.5rem var(--gutter); grid-template-columns: .9fr 1.1fr; align-items: center }
+
+.inc__media { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 5 }
+.inc__media img { width: 100%; height: 100%; object-fit: cover; will-change: transform }
+.inc__media figcaption {
+  position: absolute; inset: auto 0 0; padding: 4rem 1.5rem 1.25rem;
+  background: linear-gradient(180deg, transparent, rgba(36,38,15,.86));
+  color: var(--cream); font-size: var(--label); letter-spacing: .06em;
+}
+
+.inc__list { display: grid; gap: 0 }
+.inc__list li {
+  display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: center;
+  padding-block: 1.05rem; border-bottom: 1px solid var(--line); list-style: none;
+  font-size: var(--body-lg); color: var(--fg);
+}
+.inc__list li:first-child { border-top: 1px solid var(--line) }
+.inc__tick {
+  position: relative; width: 1.5rem; height: 1.5rem; flex: 0 0 auto;
+  border: 1px solid var(--line-strong); border-radius: 50%;
+}
+.inc__tick svg { position: absolute; inset: 0; margin: auto; width: .85rem; height: .85rem; color: var(--accent) }
+.inc__tick svg path { stroke-dasharray: 24; stroke-dashoffset: 24 }
+
+.inc__excluded {
+  margin-top: 2.25rem; padding: 1.4rem 1.6rem;
+  border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--card);
+  display: grid; gap: .4rem;
+}
+.inc__excluded b { font-family: var(--serif); font-size: var(--h4); font-weight: 400 }
+.inc__excluded p { font-size: var(--body); color: var(--fg-soft) }
+
+@media (max-width: 991px) { .inc__grid { grid-template-columns: 1fr } }

@@ -1,0 +1,98 @@
+{
+  "$meta": {
+    "client": "Dr. Nahlah — Implants & Prosthodontics Specialists",
+    "page": "home",
+    "derivedFrom": {
+      "brandGold": "Sampled from the client's own wordmark (Nahlah-Logo-Transparent.png), dominant opaque pixel #AB9E6A",
+      "bodyType": "Raleway — the family already declared on drnahlah.com",
+      "displayType": "Playfair Display — closest Google-hosted match to the didone letterforms in the existing wordmark",
+      "structure": "lakenonadentist.com section order (structure only, not visual direction)"
+    }
+  },
+
+  "color": {
+    "gold": {
+      "base":  "#AB9E6A",
+      "light": "#D4CDB2",
+      "deep":  "#8A7E4E",
+      "wash":  "#F5F2E9"
+    },
+    "ink": {
+      "black": "#0B0B0C",
+      "900":   "#141416",
+      "800":   "#1C1C1F",
+      "700":   "#2A2A2E",
+      "500":   "#6B6B72"
+    },
+    "paper": {
+      "white": "#FFFFFF",
+      "warm":  "#FAF8F3",
+      "mist":  "#F0EDE6"
+    },
+    "state": {
+      "focus": "#D4CDB2"
+    }
+  },
+
+  "font": {
+    "display": "'Playfair Display', 'Times New Roman', serif",
+    "body": "'Raleway', 'Helvetica Neue', Arial, sans-serif",
+    "weight": { "regular": 400, "medium": 500, "semibold": 600, "bold": 700 },
+    "tracking": {
+      "display": "-0.02em",
+      "body": "0",
+      "label": "0.18em"
+    }
+  },
+
+  "scale": {
+    "note": "Fluid via clamp(); min is the 360px value, max is the 1920px value",
+    "display1": "clamp(2.75rem, 7.4vw, 8.25rem)",
+    "display2": "clamp(2.25rem, 5.2vw, 5.5rem)",
+    "h2":       "clamp(1.9rem, 3.6vw, 3.75rem)",
+    "h3":       "clamp(1.35rem, 1.9vw, 2rem)",
+    "bodyLg":   "clamp(1.05rem, 1.25vw, 1.25rem)",
+    "body":     "clamp(0.975rem, 1.05vw, 1.0625rem)",
+    "label":    "clamp(0.68rem, 0.78vw, 0.78rem)"
+  },
+
+  "space": {
+    "gutter": "clamp(1.25rem, 4vw, 4.5rem)",
+    "section": "clamp(5rem, 11vw, 12rem)",
+    "maxWidth": "1560px"
+  },
+
+  "motion": {
+    "ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+    "easeInOut": "cubic-bezier(0.65, 0, 0.35, 1)",
+    "fast": "300ms",
+    "base": "700ms",
+    "slow": "1200ms",
+    "stagger": "90ms",
+    "reducedMotion": "All transforms collapse to opacity-only fades; parallax and counters resolve to final state immediately."
+  },
+
+  "radius": { "none": "0", "sm": "2px", "pill": "999px" },
+
+  "interactions": [
+    { "id": "preloader",        "type": "entry",        "detail": "Wordmark fade + 0-100 counter, curtain wipes up" },
+    { "id": "hero-parallax",    "type": "scroll",       "detail": "Doctor cut-out and headline translate at different rates" },
+    { "id": "line-mask",        "type": "reveal",       "detail": "Headline lines rise from an overflow mask" },
+    { "id": "credential-ticker","type": "loop",         "detail": "Infinite marquee, pauses on hover" },
+    { "id": "counters",         "type": "reveal",       "detail": "Stat numbers count up once on first view" },
+    { "id": "word-dim",         "type": "scroll-linked","detail": "Statement copy brightens word-by-word with scroll position" },
+    { "id": "compare-slider",   "type": "drag",         "detail": "Before/after wipe, pointer + keyboard accessible" },
+    { "id": "card-hover",       "type": "hover",        "detail": "Service card image zoom + gold sweep" },
+    { "id": "process-rail",     "type": "scroll",       "detail": "Sticky rail with progress fill and active step" },
+    { "id": "video-parallax",   "type": "scroll",       "detail": "B-roll panel scales within a fixed frame" },
+    { "id": "magnetic-cta",     "type": "pointer",      "detail": "Primary buttons drift toward the cursor" },
+    { "id": "nav-shift",        "type": "scroll",       "detail": "Transparent to solid, hides on scroll-down" }
+  ],
+
+  "breakpoints": {
+    "sm": "480px",
+    "md": "768px",
+    "lg": "1024px",
+    "xl": "1440px"
+  }
+}

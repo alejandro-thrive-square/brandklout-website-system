@@ -1,0 +1,158 @@
+<!-- ==========================================================================
+     THANK YOU — the destination for the consultation request on /contact.
+
+     Replaces TWO pages from the old site, /veneer-survey-thank-you/ and
+     /implant-survey-thank-you/, which are the same 978 words under two slugs.
+     Both redirect here.
+
+     DELIBERATELY SHORTER THAN ITS SOURCE. The old page followed its one line of
+     confirmation with roughly 800 words re-selling All-on-4, sedation and smile
+     makeovers to somebody who has just said yes. What a person needs at this
+     point is confirmation that the form went through, when they will hear back,
+     and a number to call if it is urgent — so that is what this is. The
+     re-marketing is one row of onward links at the end.
+
+     It carries `robots: noindex, follow`: a confirmation page has nothing to
+     rank for, and indexing it puts a page in the results that tells searchers
+     their form was submitted when it was not.
+
+     Open: the contact form still has no `action`, so nothing routes here yet.
+     Three different Flexbook URLs are in use on the old site and which survives
+     is unresolved — see SITE.md, "Still open".
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/interior.jpg" alt="The practice interior in McLean, Virginia" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Thank you</span></div>
+    <h1 data-split>That is <em>received</em>.</h1>
+    <p class="ph-lead" data-rv>Your consultation request has reached the practice. A member of the
+      team will call you to arrange a time, and to answer anything you would rather ask before you
+      come in.</p>
+    <div class="ph-meta" data-rv>
+      <div><b>1 business day</b><span>Typical time to hear back</span></div>
+      <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Fri until 2</span></div>
+      <div><b>No cost</b><span>The consultation itself</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- what happens next ---------- -->
+<section class="pk pk-alt" id="next-steps">
+  <div class="wrap section">
+    <div class="pk-head" data-rv>
+      <span class="label">What happens now</span>
+      <h2>Three things, in this order.</h2>
+      <p>Nothing here needs anything from you until the call.</p>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
+      <article class="pk-card">
+        <span class="pk-card-n">01</span>
+        <h3>We call you</h3>
+        <p>Usually within one business day. If you sent this over a weekend, expect Monday. We will
+          ask what is bothering you and roughly what you are hoping for, so the appointment is
+          spent on you rather than on paperwork.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">02</span>
+        <h3>You come in for the consultation</h3>
+        <p>Around an hour. A 3D scan where it is useful, a look at what is actually going on, and a
+          straight answer about what can be done, including when the answer is that you do
+          not need what you thought you needed.</p>
+        <a class="pk-readon" href="patient-center.html">What to bring</a>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">03</span>
+        <h3>You get the plan in writing</h3>
+        <p>The options, what each involves, how long each takes and what each costs, before anything
+          is booked. Financing is arranged at this stage if you want it.</p>
+        <a class="pk-readon" href="financing.html">Insurance and financing</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- what to expect, shown ----------
+     Added 2026-08-19. The page had two images and three short prose blocks; the
+     mosaic carries the same four promises the copy makes. -->
+<section class="pk pk-alt" id="expect-shots">
+  <div class="wrap section">
+    <div class="mz mz-4" data-rv="stagger">
+      <figure class="mz-fig">
+        <img src="assets/pt-interaction.jpg" alt="The front office at the practice" loading="lazy">
+        <figcaption class="mz-cap">A person, not a queue</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/tech-hero.jpg" alt="The cone-beam scanner at the practice" loading="lazy">
+        <figcaption class="mz-cap">The 3D scan</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/consult-discussion.jpg" alt="A consultation at the practice" loading="lazy">
+        <figcaption class="mz-cap">Time with the specialist</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-1.avif" alt="The waiting area at the practice" loading="lazy">
+        <figcaption class="mz-cap">Two offices</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- if it is urgent ---------- -->
+<section class="pk" id="urgent">
+  <div class="wrap section pk-split">
+    <div class="sp-copy" data-rv>
+      <span class="label">If you cannot wait</span>
+      <h2>Call the office directly.</h2>
+      <p>If you are in pain, have broken a tooth, or have a denture or a temporary that has come
+        loose, do not wait for the callback. Phone whichever office is closer and say it is urgent.</p>
+      <div class="pk-phones">
+        <div>
+          <span>Tysons Corner &middot; McLean</span>
+          <a href="tel:+15717029900">(571) 702-9900</a>
+        </div>
+        <div>
+          <span>Alexandria</span>
+          <a href="tel:+15712537790">(571) 253-7790</a>
+        </div>
+      </div>
+      <a class="pk-readon pk-readon-block" href="emergency-dentistry.html">Emergency care &rarr;</a>
+    </div>
+    <!-- data-drift belongs on the IMG, not on the figure. The drift scales its
+         target 1.12; on the img, which is absolutely positioned inside this
+         overflow:hidden figure, that is clipped. On the FIGURE it scales the
+         clipping container itself, and at 390px the 21px of extra width either
+         side beat the 17px gutter and put 4px of horizontal scroll on the page. -->
+    <figure class="sp-fig">
+      <img src="assets/office-hero.jpg" alt="The reception and waiting area" data-drift loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- ---------- onward ---------- -->
+<section class="pk pk-light" id="meanwhile">
+  <div class="wrap section">
+    <div class="pk-head" data-rv>
+      <span class="label">While you wait</span>
+      <h2>Worth a look before you come in.</h2>
+    </div>
+    <div class="pk-next" data-rv="stagger">
+      <a href="smile-gallery.html">
+        <span class="nx-k">Gallery</span>
+        <span class="nx-t">Before and after</span>
+        <span class="nx-d">The practice's own cases, filterable by treatment.</span>
+      </a>
+      <a href="patient-stories.html">
+        <span class="nx-k">Stories</span>
+        <span class="nx-t">Patients on film</span>
+        <span class="nx-d">Six people who went through it, in their own words.</span>
+      </a>
+      <a href="meet-dr-nahlah.html">
+        <span class="nx-k">Doctor</span>
+        <span class="nx-t">Meet Dr. Nahlah</span>
+        <span class="nx-d">Fourteen board credentials, and what a prosthodontist actually is.</span>
+      </a>
+    </div>
+  </div>
+</section>

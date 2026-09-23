@@ -1,7 +1,8 @@
 # Process Index
 
 Start with the scenario that matches the job, open its README, then the step you are on. Each step
-directive names the tools it uses. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
+is a folder: its directive, its `scripts/`, `tools.json` and `output/`. For a client, start the scenario
+with `node scripts/scenario.mjs start <client> <scenario>` and work in the client's copy. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
 
 ## Scenarios
 
@@ -9,48 +10,48 @@ directive names the tools it uses. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVE
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Client Inquiry](./scenario-0-new-site/01-client-inquiry.md) |
-| 02 | [Research & Sitemap](./scenario-0-new-site/02-research-sitemap.md) |
-| 03 | [Design & Build](./scenario-0-new-site/03-design-build.md) |
-| 04 | [QA](./scenario-0-new-site/04-qa.md) |
-| 05 | [Launch](./scenario-0-new-site/05-launch.md) |
-| 06 | [Post-Launch](./scenario-0-new-site/06-post-launch.md) |
+| 01 | [Client Inquiry](./scenario-0-new-site/01-client-inquiry/01-client-inquiry.md) |
+| 02 | [Research & Sitemap](./scenario-0-new-site/02-research-sitemap/02-research-sitemap.md) |
+| 03 | [Design & Build](./scenario-0-new-site/03-design-build/03-design-build.md) |
+| 04 | [QA](./scenario-0-new-site/04-qa/04-qa.md) |
+| 05 | [Launch](./scenario-0-new-site/05-launch/05-launch.md) |
+| 06 | [Post-Launch](./scenario-0-new-site/06-post-launch/06-post-launch.md) |
 
 ### 1 · Website Migration — [scenario-1-migration](./scenario-1-migration/README.md)
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Old Site Capture](./scenario-1-migration/01-old-site-capture.md) |
-| 02 | [Redirect Map](./scenario-1-migration/02-redirect-map.md) |
+| 01 | [Old Site Capture](./scenario-1-migration/01-old-site-capture/01-old-site-capture.md) |
+| 02 | [Redirect Map](./scenario-1-migration/02-redirect-map/02-redirect-map.md) |
 | then | Scenario 0 from step 02, with the redirects live at the domain switch |
 
-Scripts: [scenario-1-migration/scripts](./scenario-1-migration/scripts/).
+Scripts: in each step folder's `scripts/`.
 
 ### 2 · Website Updates / Expansions — [scenario-2-updates-expansions](./scenario-2-updates-expansions/README.md)
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Request Intake](./scenario-2-updates-expansions/01-request-intake.md) |
-| 02 | [Build](./scenario-2-updates-expansions/02-build.md) (Webflow path, Instatic path) |
-| 03 | [QA and Publish](./scenario-2-updates-expansions/03-qa-and-publish.md) |
+| 01 | [Request Intake](./scenario-2-updates-expansions/01-request-intake/01-request-intake.md) |
+| 02 | [Build](./scenario-2-updates-expansions/02-build/02-build.md) (Webflow path, Instatic path) |
+| 03 | [QA and Publish](./scenario-2-updates-expansions/03-qa-and-publish/03-qa-and-publish.md) |
 
 ### 3 · Ads Landing Pages — [scenario-3-ads-landing-pages](./scenario-3-ads-landing-pages/README.md)
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Campaign Intake](./scenario-3-ads-landing-pages/01-campaign-intake.md) |
-| 02 | [Build the Combo](./scenario-3-ads-landing-pages/02-build-the-combo.md) (landing, consultation, thank you) |
-| 03 | [QA and Launch](./scenario-3-ads-landing-pages/03-qa-and-launch.md) |
+| 01 | [Campaign Intake](./scenario-3-ads-landing-pages/01-campaign-intake/01-campaign-intake.md) |
+| 02 | [Build the Combo](./scenario-3-ads-landing-pages/02-build-the-combo/02-build-the-combo.md) (landing, consultation, thank you) |
+| 03 | [QA and Launch](./scenario-3-ads-landing-pages/03-qa-and-launch/03-qa-and-launch.md) |
 
-Scripts: [scenario-3-ads-landing-pages/scripts](./scenario-3-ads-landing-pages/scripts/).
+Scripts: in each step folder's `scripts/`; shared helpers in [tools/ads-combo](./tools/ads-combo/).
 
 ### 4 · Update Plugins Across Sites — [scenario-4-update-plugins](./scenario-4-update-plugins/README.md)
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Change and Version](./scenario-4-update-plugins/01-change-and-version.md) |
-| 02 | [Rollout](./scenario-4-update-plugins/02-rollout.md) (status, staging, verify, production, verify) |
-| 03 | [Verify and Record](./scenario-4-update-plugins/03-verify-and-record.md) |
+| 01 | [Change and Version](./scenario-4-update-plugins/01-change-and-version/01-change-and-version.md) |
+| 02 | [Rollout](./scenario-4-update-plugins/02-rollout/02-rollout.md) (status, staging, verify, production, verify) |
+| 03 | [Verify and Record](./scenario-4-update-plugins/03-verify-and-record/03-verify-and-record.md) |
 
 Scripts: [tools/instatic-plugins](./tools/instatic-plugins/README.md).
 
@@ -58,11 +59,11 @@ Scripts: [tools/instatic-plugins](./tools/instatic-plugins/README.md).
 
 | Step | Directive |
 | --- | --- |
-| 01 | [Assess the Release](./scenario-5-instatic-release-update/01-assess-release.md) |
-| 02 | [Backup](./scenario-5-instatic-release-update/02-backup.md) |
-| 03 | [Update Staging](./scenario-5-instatic-release-update/03-update-staging.md) |
-| 04 | [Update Production](./scenario-5-instatic-release-update/04-update-production.md) |
-| 05 | [Rollback](./scenario-5-instatic-release-update/05-rollback.md) (only when a step failed) |
+| 01 | [Assess the Release](./scenario-5-instatic-release-update/01-assess-release/01-assess-release.md) |
+| 02 | [Backup](./scenario-5-instatic-release-update/02-backup/02-backup.md) |
+| 03 | [Update Staging](./scenario-5-instatic-release-update/03-update-staging/03-update-staging.md) |
+| 04 | [Update Production](./scenario-5-instatic-release-update/04-update-production/04-update-production.md) |
+| 05 | [Rollback](./scenario-5-instatic-release-update/05-rollback/05-rollback.md) (only when a step failed) |
 
 Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 

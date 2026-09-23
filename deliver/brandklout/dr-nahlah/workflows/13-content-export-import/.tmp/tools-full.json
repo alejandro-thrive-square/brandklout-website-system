@@ -1,0 +1,1468 @@
+[
+  {
+    "name": "get_context",
+    "description": "Orient yourself before editing: reports whether the Site editor and Content workspace are connected (browser tools require their matching workspace), and which templates wrap pages — an \"everywhere\" template applies a nav/footer/etc. to every page, so anything you author is in addition to it. Pass entryId to also learn whether a template wraps that specific page. Headless — no editor needed. Call this first if a browser tool returns an \"open the workspace\" error.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "entryId": {
+          "description": "Optional page/post entry id — also reports whether a template wraps it.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_read_styles",
+    "description": "Read the site's design system as a CSS stylesheet — design tokens (CSS custom properties for colors, type scale, spacing) plus every class and ambient rule. This is the SAME CSS you write back with site_apply_css, so read it first to learn the available classes (e.g. .ist-btn) and token variables (e.g. var(--ist-accent)) before authoring HTML/CSS. Works headless — no open editor needed. Pass className to read one rule; omit for the whole sheet.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "format": {
+          "description": "full (default) = the complete CSS stylesheet. summary = a compact catalog of class names + the token variables each references, no declarations — scan this first to learn what exists, then read full for the ones you will edit.",
+          "anyOf": [
+            {
+              "const": "full",
+              "type": "string"
+            },
+            {
+              "const": "summary",
+              "type": "string"
+            }
+          ]
+        },
+        "className": {
+          "description": "Limit output to one class by name (without the leading dot). Omit for the full stylesheet.",
+          "type": "string"
+        },
+        "includeTokens": {
+          "description": "Include the design-token (CSS custom property) definitions. Defaults to true; ignored when className is set.",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_list_breakpoints",
+    "description": "List the configured viewport breakpoints (id, label, width), in order (the first is the base/widest context). Pass a breakpoint id to site_render_snapshot to capture a specific viewport. Headless — no editor needed.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "site_list_documents",
+    "description": "List editable documents: pages, templates, and visual components. Use the returned document refs with site_read_document/site_open_document. Each item includes rootNodeId, template metadata, and a short summary. Headless — no editor needed.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "site_publish",
+    "description": "Publish the saved site draft to the live public site. Call this ONCE after the requested site edits are complete — site_insert_html, site_apply_css, token tools, and other site writes save a draft and deliberately do not publish on their own. This runs the full-site publish pipeline, rebuilding content-hashed HTML/CSS/runtime assets and atomically swapping the public static slot. Requires the connector to have pages.publish.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "media_upload",
+    "description": "Upload a new image into the Media library and return its id + publicPath so you can reference or assign it. Provide the bytes as base64 in `data`, OR an https `sourceUrl` the server downloads. Accepts JPEG, PNG, GIF, WebP, and SVG (SVG is sanitised); the file type is sniffed from the bytes, not the filename. Requires the connector to have media.write.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "filename"
+      ],
+      "properties": {
+        "filename": {
+          "minLength": 1,
+          "maxLength": 255,
+          "description": "Display filename for the asset (e.g. \"winner-1.webp\"). The server picks the on-disk extension from the sniffed file type; the client extension is ignored.",
+          "type": "string"
+        },
+        "data": {
+          "maxLength": 69905324,
+          "description": "Base64-encoded image bytes (a bare `data:` URI prefix is also accepted). Provide EITHER `data` OR `sourceUrl`, not both.",
+          "type": "string"
+        },
+        "sourceUrl": {
+          "maxLength": 2048,
+          "description": "https URL the server downloads the image from (SSRF-guarded: private/loopback/link-local hosts are refused). Provide EITHER `data` OR `sourceUrl`, not both.",
+          "type": "string"
+        },
+        "altText": {
+          "maxLength": 4096,
+          "description": "Accessible alt text stored on the media asset.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_list_collections",
+    "description": "List every Content-workspace collection (routable post types only) with id, slug, label, kind, row count, and primary field id. Pages are edited through Site tools; reusable tables through Data tools.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "content_get_collection_schema",
+    "description": "Return one collection's field schema: each field's id, label, type, required flag, builtIn flag, and per-type extras (select options, media kind, relation target). Call BEFORE content_set_document_field on an unfamiliar collection so you know the field's value shape.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tableId"
+      ],
+      "properties": {
+        "tableId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_list_documents",
+    "description": "List documents in one collection. Returns id, title, slug, status, authorUserId, updatedAt — light projection. Filter by status / authorUserId, paginate with limit (default 25, max 200) + offset.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tableId"
+      ],
+      "properties": {
+        "tableId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "draft",
+              "type": "string"
+            },
+            {
+              "const": "unpublished",
+              "type": "string"
+            },
+            {
+              "const": "published",
+              "type": "string"
+            },
+            {
+              "const": "scheduled",
+              "type": "string"
+            }
+          ]
+        },
+        "authorUserId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": {
+          "minimum": 1,
+          "maximum": 200,
+          "type": "integer"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_get_document",
+    "description": "Return one document's full state: every field value (body is a markdown string), status, author, slug, timestamps. Use for the doc the user wants to edit when it isn't the active doc, or to refresh state after another agent action.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_search_documents",
+    "description": "Full-text search across document slugs (the slug is a URL-safe derivative of the title — reliable text proxy for free-text lookup). Returns light summaries (id, tableId, slug, status, updatedAt). `limit` default 25, max 100.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": {
+          "minimum": 1,
+          "maximum": 100,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_list_media",
+    "description": "List existing media assets so you can pick one for a media-typed field. Returns id, filename, publicPath, mimeType, altText, width, height. Optional `query` substring-matches filename + altText (case-insensitive); `mimeType` substring-matches the mime (e.g. 'image' to filter to images). `limit` default 25, max 100. To add a new image, use media_upload.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "limit": {
+          "minimum": 1,
+          "maximum": 100,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_create_document",
+    "description": "Create a new draft document in `tableId`. `fields` is a Record<fieldId, value> per the collection's schema; omit to create an empty draft. Success data includes the new id as `documentId`; the bridge auto-switches the user's editor to the new doc so they can see what you built. Use content_set_document_status separately to publish or schedule it.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tableId"
+      ],
+      "properties": {
+        "tableId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "patternProperties": {
+            "^(.*)$": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content_delete_document",
+    "description": "Soft-delete a document. User can restore via the Trash UI.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_set_document_status",
+    "description": "Set the document's lifecycle status. `status='scheduled'` requires `scheduledAt` (ISO datetime). Publishing requires the user to hold content.publish.own (own docs) or content.publish.any (any doc).\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId",
+        "status"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "const": "draft",
+              "type": "string"
+            },
+            {
+              "const": "unpublished",
+              "type": "string"
+            },
+            {
+              "const": "published",
+              "type": "string"
+            },
+            {
+              "const": "scheduled",
+              "type": "string"
+            }
+          ]
+        },
+        "scheduledAt": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_set_document_field",
+    "description": "Write one field on a document. The document MUST be the active one — call content_set_active_document first, or the write is refused. (content_create_document leaves the new document active, so create-then-fill needs no extra call.) `value` shape depends on the field type (read content_get_collection_schema first if unsure): text/longText/richText/url/email → string; number → number; boolean → boolean; date/dateTime → ISO string; select → option id; multiSelect → option id[]; media → { id } or { id }[]; relation → { rowId } or { rowId }[]; body → markdown string. Bridge converts markdown ↔ Tiptap automatically for body.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId",
+        "fieldId",
+        "value"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "fieldId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {}
+      }
+    }
+  },
+  {
+    "name": "content_set_document_fields",
+    "description": "Batch-write multiple fields on one document. The document MUST be the active one — call content_set_active_document first, or the write is refused. `fields` is Record<fieldId, value>; same per-type shapes as content_set_document_field. Prefer this when generating a whole post (title + slug + body + seo* in one call), and when filling several documents in sequence set each one active before writing to it.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId",
+        "fields"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "fields": {
+          "type": "object",
+          "patternProperties": {
+            "^(.*)$": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "content_set_document_author",
+    "description": "Reassign the document author to another user. Requires the caller to hold content.edit.any. Use content_list_users to find the right user id.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId",
+        "userId"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "userId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_set_active_document",
+    "description": "Switch the user's editor to this document so they can watch you work. Call BEFORE editing a doc that isn't already open — the user only sees the active doc, so content_set_document_field on a non-active doc happens invisibly.\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "documentId"
+      ],
+      "properties": {
+        "documentId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "content_set_active_collection",
+    "description": "Switch the workspace sidebar focus to this collection. Use when working across collection-level actions (browsing, bulk reviews).\n\nRequires the Instatic Content workspace to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tableId"
+      ],
+      "properties": {
+        "tableId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_list_modules",
+    "description": "List registered modules with id, name, category, props schema, and style targets. `category` filters case-insensitively.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_list_post_types",
+    "description": "List the routable post types a `postTypes` template can target. Each entry has { slug, label, routeBase, kind }; pass the `slug` values to site_set_page_template's `target.tableSlugs`. System tables, pages, components, layouts, and reusable data tables are excluded.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "site_list_loop_sources",
+    "description": "List loop source ids and the valid dynamic data tokens for loop children. Use before creating a <instatic-loop>. For posts/custom tables use sourceId \"data.rows\" and pass the chosen table id as data-table-id; inside the loop use returned tokens like {currentEntry.title}, never {{post.title}}.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "site_insert_html",
+    "description": "Insert semantic HTML as a subtree of editable nodes under an existing parent. Write structure as HTML (<section>, <h1>, <a>, <button>, <img>, <ul>, ...) and style it with CSS in the same call: put a <style> block in the HTML and/or class= attributes. Custom importer markers: <instatic-loop data-source-id=\"…\" ...> creates a real Loop node (call site_list_loop_sources first for source/table ids and {currentEntry.*} tokens; never place the loop inside a <table>, <tbody> or <tr> — HTML parsing moves it out of the table and leaves its rows behind, publishing one blank row. Wrap the whole <table> in the loop, or use a list); <instatic-outlet data-tag=\"div\"> creates a neutral template content outlet. On PAGE routes the outlet element is not rendered at all — the page content is spliced in at its position — so wrap the outlet in <main> yourself if pages should have a main landmark. data-tag only takes effect on ENTRY routes, where the outlet stays and wraps the entry body (use data-custom-tag for a safe custom element). The importer parses every rule — a bare `.foo {}` selector becomes a reusable Selectors-panel class bound to class=\"foo\"; any other selector (`.hero a`, `a:hover`, `nav > li`) becomes an ambient rule. Inline style= attributes land on the node's inline styles. To author or edit CSS on its own — pseudo/hover/descendant selectors, or restyling existing rules — use the dedicated site_apply_css tool instead (site_insert_html is for inserting structure). Returns `nodeIds` (the inserted roots) and `created` — every inserted node as { id, moduleId, classes } — so you can target a nested node (e.g. the wrapper you just added) without re-reading the whole tree.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "parentId",
+        "html"
+      ],
+      "properties": {
+        "parentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "html": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_get_node_html",
+    "description": "Return the current HTML the published page would emit for a node subtree. Use before site_replace_node_html to read existing structure.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_read_document",
+    "description": "Read any editable document as annotated HTML + relevant CSS without switching the visible canvas. Pass a document ref from site_list_documents; omit document to read the current document. If pageInfo.nextPart is not null, call site_read_document again with the same document and part.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "document": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "page",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "template",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "visualComponent",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "part": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_open_document",
+    "description": "Visibly open a page/template/visual component document in the editor. Use before site_render_snapshot or when the user asks to navigate. For background inspection, prefer site_read_document because it does not move the canvas.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "document"
+      ],
+      "properties": {
+        "document": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "page",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "template",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "visualComponent",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "site_replace_node_html",
+    "description": "Replace a node subtree's children with new HTML. The target node is preserved as the parent; its existing children are rebuilt from the HTML. Style with CSS exactly as in site_insert_html: a <style> block and/or class= attributes; bare `.foo` selectors become reusable classes, other selectors become ambient rules. Custom importer markers work here too: <instatic-loop data-source-id=\"…\" ...> creates a real Loop node and <instatic-outlet data-tag=\"div\"> creates a neutral template content outlet (omit data-tag only when the outlet should render as main). To author or edit CSS on its own (without rebuilding children), use the dedicated site_apply_css tool instead.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "html"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "html": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_delete_node",
+    "description": "Remove a node and its descendants. Not undoable from inside the loop (user can Cmd+Z after).\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_update_node_props",
+    "description": "Shallow-merge a patch onto an existing node's props. `breakpointId` is only valid for props marked `breakpointOverridable` in the schema (rejected for content props like text/tag/src). For per-breakpoint visual variation use site_apply_css with an `@media` query, not this. Richtext props are auto-sanitised.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "patch"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "breakpointId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "patch": {
+          "type": "object",
+          "patternProperties": {
+            "^(.*)$": {}
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_move_node",
+    "description": "Move a node to a different parent and/or position. `newIndex` is 0-based among the destination's children.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "newParentId",
+        "newIndex"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "newParentId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "newIndex": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_rename_node",
+    "description": "Set the node's display label in the DOM tree panel. Editor-only; doesn't affect rendered HTML.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "label"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_duplicate_node",
+    "description": "Deep-clone a node + subtree (props, classIds, breakpoint overrides) right after the original. `count` (1-50, default 1) produces N clones in one call. Success data includes the first new node id as `nodeId` and all new ids as `nodeIds`.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "count": {
+          "minimum": 1,
+          "maximum": 50,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_apply_css",
+    "description": "Author, repair, or delete CSS rules. `operation:\"merge\"` plus real CSS creates missing selectors and patches only authored declarations/contexts; use it for normal additive edits. `operation:\"replace\"` makes each supplied selector's COMPLETE CSS payload authoritative, removing omitted base/context declarations while preserving rule identity, cascade order, and class assignments. `operation:\"remove-properties\"` removes named CSS properties from base and every context without disturbing other declarations. `operation:\"delete\"` removes whole rules by exact emitted selector and detaches deleted classes. Selector identity is exact: `.grad`, `.hero .grad`, and `.grad, .hero .grad` are different rules; copy the full selector from site_read_document before destructive operations. Bare `.foo` rules are reusable classes; descendant/pseudo/element/grouped selectors are ambient rules. `@media`/`@supports`/`@container`, vendor properties, custom properties, and `!important` round-trip. Reference design tokens rather than repeated literals. Success data uses `cssRulesCreated`, `cssRulesUpdated`, `cssRulesDeleted`, and/or `cssPropertiesRemoved`.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "operation"
+      ],
+      "properties": {
+        "operation": {
+          "description": "The CSS mutation to perform. Its required companion fields are documented on css, selectors, and properties.",
+          "anyOf": [
+            {
+              "const": "merge",
+              "type": "string"
+            },
+            {
+              "const": "replace",
+              "type": "string"
+            },
+            {
+              "const": "delete",
+              "type": "string"
+            },
+            {
+              "const": "remove-properties",
+              "type": "string"
+            }
+          ]
+        },
+        "css": {
+          "minLength": 1,
+          "description": "Required for merge and replace. Contains complete CSS rules, including their selectors.",
+          "type": "string"
+        },
+        "selectors": {
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "description": "Required for delete and remove-properties. Each entry is one exact emitted selector.",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "properties": {
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "description": "Required only for remove-properties. Names use CSS kebab-case, including vendor/custom properties.",
+          "type": "array",
+          "items": {
+            "minLength": 1,
+            "pattern": "^-{0,2}[a-zA-Z][a-zA-Z0-9-]*$",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_assign_class",
+    "description": "Attach an existing CSS class to a node. `classId` accepts id or name.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "classId"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "classId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_remove_class",
+    "description": "Detach a class from a node (the class itself is not deleted). `classId` accepts id or name.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "nodeId",
+        "classId"
+      ],
+      "properties": {
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "classId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_list_code_assets",
+    "description": "List user-authored runtime code assets stored in the site file layer. Optional `type` filters to scripts or styles. Returns file ids, paths, content hashes, size metadata, and current runtime config. Use before site_read_code_asset / site_patch_code_asset when modifying existing scripts or stylesheets.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "anyOf": [
+            {
+              "const": "script",
+              "type": "string"
+            },
+            {
+              "const": "style",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "site_read_code_asset",
+    "description": "Read one script or stylesheet by fileId or path. Returns the exact content slice, full-file SHA-256 hash, runtime config, and pageInfo for pagination. If pageInfo.nextPart is not null, call site_read_code_asset again with the same asset and part.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "fileId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "part": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "maxChars": {
+          "minimum": 1,
+          "maximum": 100000,
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_write_code_asset",
+    "description": "Create or replace a runtime script/style file in site.files and attach normalized site.runtime config. Use `type:\"script\"` for behavior such as theme toggles, menus, tabs, analytics hooks, and DOM-ready interactions; use `type:\"style\"` for global user stylesheets that should load as files. `path` is a safe site-relative path such as src/scripts/theme-toggle.js or src/styles/theme.css. `runtime` is optional and merges with existing/default config. For module scripts that import npm packages, use bare package imports in `content` and declare them in `dependencies` (package name → semver/range) so they are added to the site dependency manifest; do not use npm CDN URLs for npm packages.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "path",
+        "type",
+        "content"
+      ],
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "const": "script",
+              "type": "string"
+            },
+            {
+              "const": "style",
+              "type": "string"
+            }
+          ]
+        },
+        "content": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "object",
+          "patternProperties": {
+            "^(.*)$": {}
+          }
+        },
+        "dependencies": {
+          "description": "Runtime npm dependencies required by a module script. Keys are package names, values are semver versions/ranges. Only valid when type is \"script\".",
+          "type": "object",
+          "patternProperties": {
+            "^(.*)$": {
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_patch_code_asset",
+    "description": "Patch an existing script or stylesheet by exact text replacement. Requires the latest `expectedHash` from site_read_code_asset/site_list_code_assets to prevent stale edits. Each replacement must match exactly; if oldText occurs multiple times, either make oldText more specific or set replaceAll:true.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "expectedHash",
+        "replacements"
+      ],
+      "properties": {
+        "fileId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "expectedHash": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "replacements": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "oldText",
+              "newText"
+            ],
+            "properties": {
+              "oldText": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "newText": {
+                "type": "string"
+              },
+              "replaceAll": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_inspect_code_runtime",
+    "description": "Inspect which runtime scripts and user stylesheets apply to the current page/template, or to a supplied page/template document ref. Returns each asset path, enabled state, scope applicability, priority, and script placement/timing. Use after site_write_code_asset to confirm a script/style is targeted correctly.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "document": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "page",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "template",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "type",
+                "id"
+              ],
+              "properties": {
+                "type": {
+                  "const": "visualComponent",
+                  "type": "string"
+                },
+                "id": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "site_add_page",
+    "description": "Add an EMPTY page and make it the active page. `slug` defaults to a slugified title and is auto-uniqued (a repeat add becomes `-2`, `-3`) — so never call site_add_page twice for the same page. Success data: `pageId` and `rootNodeId`. To build into the new page, pass `rootNodeId` as site_insert_html's `parentId` — a pageId is NOT a node id. The page is already active, so just start inserting; no need to site_read_document/site_list_documents first. For copying an existing page use site_duplicate_page.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_delete_page",
+    "description": "Permanently delete a page. Fails if it would leave the site with zero pages.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "pageId"
+      ],
+      "properties": {
+        "pageId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_rename_page",
+    "description": "Change a page's title and/or slug. `slug=\"index\"` makes this page the homepage. Omit slug to keep it.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "pageId",
+        "title"
+      ],
+      "properties": {
+        "pageId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_duplicate_page",
+    "description": "Deep-clone an existing page (every node, prop, class assignment, breakpoint override) under a new title/slug. Node ids are regenerated; class assignments preserved. Success data includes the new id as `pageId`.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "pageId",
+        "title"
+      ],
+      "properties": {
+        "pageId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_set_page_template",
+    "description": "Turn a page INTO a template (or update an existing template's target/priority). `target` is `{kind:\"everywhere\"}` for a site-wide layout that wraps every page+entry, `{kind:\"postTypes\", tableSlugs:[…]}` to wrap entries of those post types (slugs from site_list_post_types), or `{kind:\"notFound\"}` for the page served on public 404s (status 404, wrapped by the everywhere layout; needs no outlet). `priority` (default 100) breaks ties when several templates match at the same breadth level — higher wins. An everywhere/postTypes template needs exactly one `<instatic-outlet>` (insert it via site_insert_html) marking where matched content flows; a wrapper template with no outlet simply doesn't apply. Pass a real page id from the suffix / site_list_documents.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "pageId",
+        "target"
+      ],
+      "properties": {
+        "pageId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "type": "object",
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "everywhere",
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "kind",
+                "tableSlugs"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "postTypes",
+                  "type": "string"
+                },
+                "tableSlugs": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "kind"
+              ],
+              "properties": {
+                "kind": {
+                  "const": "notFound",
+                  "type": "string"
+                }
+              }
+            }
+          ]
+        },
+        "priority": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_clear_page_template",
+    "description": "Revert a template back to an ordinary page: drops its template target and any dynamic bindings. The `<instatic-outlet>` node (if any) stays — delete it separately if unwanted. No-op error if the page is not a template.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "pageId"
+      ],
+      "properties": {
+        "pageId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  },
+  {
+    "name": "site_set_color_tokens",
+    "description": "Create or update framework COLOR tokens — the source of truth for color. Each `{ slug, lightValue }` becomes `var(--<slug>)` plus generated utility classes (text-/bg-/border-) and shade/tint variants. Create-or-update is keyed by `slug`: an existing slug is patched, a new one is created. `lightValue` is any CSS color (hex/rgb/hsl); omit `darkValue` to auto-generate it. Establish color tokens before styling and reference them as `var(--<slug>)` instead of raw hex.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tokens"
+      ],
+      "properties": {
+        "tokens": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "slug",
+              "lightValue"
+            ],
+            "properties": {
+              "slug": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "lightValue": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "darkValue": {
+                "type": "string"
+              },
+              "darkModeEnabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_set_font_tokens",
+    "description": "Create or update FONT tokens — named typefaces referenced as `var(--<variable>)`. Pass `googleFamily` (e.g. \"Inter\") to install a new Google web font (downloads the files, then binds the token to it); `variants` defaults to [\"400\",\"700\"] and `subsets` to [\"latin\"]. Pass `familyId` to reference an already-installed family. Pass neither for a fallback-only/system token. Create-or-update is keyed by `variable` (defaults from `name`). Prefer exactly one of `googleFamily` or `familyId`; if both are sent, `googleFamily` wins and the stale `familyId` is ignored.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "required": [
+        "tokens"
+      ],
+      "properties": {
+        "tokens": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "variable": {
+                "type": "string"
+              },
+              "fallback": {
+                "type": "string"
+              },
+              "googleFamily": {
+                "type": "string"
+              },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "subsets": {
+                "type": "array",
+                "items": {
+                  "minLength": 1,
+                  "type": "string"
+                }
+              },
+              "familyId": {
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_set_type_scale",
+    "description": "Configure the TYPOGRAPHY scale — the fluid type ramp generating `--text-*` variables (default prefix \"text\"). A scale is a config: `min`/`max` give the base `fontSize` (px) and `scaleRatio` at the small/large screen anchors; `steps` is the comma-separated step list (e.g. \"xs,s,m,l,xl,2xl,3xl,4xl\") and `baseScaleIndex` picks which step equals the base size. Creates the group if none exists, else updates it. Only pass `groupId` when you have a real existing group id; use `namingConvention:\"text\"` for the prefix. Reference sizes as `var(--text-l)` rather than raw px.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "namingConvention": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "steps": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "baseScaleIndex": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "min": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "number"
+            },
+            "scaleRatio": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "max": {
+          "type": "object",
+          "properties": {
+            "fontSize": {
+              "type": "number"
+            },
+            "scaleRatio": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_set_spacing_scale",
+    "description": "Configure the SPACING scale — the fluid spacing ramp generating `--space-*` variables (default prefix \"space\"). Same shape as site_set_type_scale but `min`/`max` carry `size` (px) instead of `fontSize`; `steps` defaults to an 11-step scale and `baseScaleIndex` to 5 (\"m\"). Creates the group if none exists, else updates it. Only pass `groupId` when you have a real existing group id; use `namingConvention:\"space\"` for the prefix. Reference gaps/padding as `var(--space-l)` rather than raw px.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "namingConvention": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "steps": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "baseScaleIndex": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "min": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "number"
+            },
+            "scaleRatio": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        },
+        "max": {
+          "type": "object",
+          "properties": {
+            "size": {
+              "type": "number"
+            },
+            "scaleRatio": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "site_render_snapshot",
+    "description": "Inspect the rendered canvas. Returns viewport and node geometry, image-load status, overflow/visibility warnings, and key computed styles including color, background image/clip, and WebKit text-mask values. Those computed fields expose cascade failures such as a shorthand resetting `background-clip:text`; compare them with source CSS from site_read_document. When the provider supports image-bearing tool results, a screenshot is also attached. Pass any configured `breakpointId` to render a readiness-aware one-shot frame at that exact width, independent of collapsed/disabled frames or Live mode (defaults to active; unknown ids error). Pass `nodeId` to crop the document to that node while preserving its HTML/body/ancestor paint; omit it for the full page.\n\nRequires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "breakpointId": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "nodeId": {
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    }
+  }
+]

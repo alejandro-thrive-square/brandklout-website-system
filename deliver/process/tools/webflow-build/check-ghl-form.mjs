@@ -16,7 +16,7 @@
  *     is not a field on the form. Spec: deliver/process/tools/termly-ghl-consent.
  *
  * Reads the public form page only; submits nothing.
- *   node check-ghl-form.mjs <formId|url> [...]  > .tmp/ghl-forms.log 2>&1   (redirect, never pipe)
+ *   node check-ghl-form.mjs <formId|url> [...]  > output/ghl-forms.log 2>&1   (redirect, never pipe)
  * Exit 1 if any form has save-and-exit on or fewer than 11 consent fields.
  */
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';

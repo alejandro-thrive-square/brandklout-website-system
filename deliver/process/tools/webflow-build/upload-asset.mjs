@@ -2,11 +2,11 @@
 /**
  * upload-asset.mjs — put a local file into a Webflow site's asset library over the MCP.
  *
- * Promoted 2026-09-23 from legacy-dental-pasadena/workflows/07-webflow-build/.tmp/native/
+ * Promoted 2026-09-23 from legacy-dental-pasadena/workflows/07-webflow-build/output/native/
  * upload-asset.mjs (the same approach ran on marvel-dental's sync-assets). Generalised: site id
  * from --site / WF_SITE_ID, async wf.mjs.
  *
- *   node upload-asset.mjs --site <id> <file> [displayName]   > .tmp/upload.log 2>&1
+ *   node upload-asset.mjs --site <id> <file> [displayName]   > output/upload.log 2>&1
  *
  * Two steps, because that is what the Assets API is:
  *   1. create_asset with the file name and the MD5 of the raw bytes. Webflow answers with an

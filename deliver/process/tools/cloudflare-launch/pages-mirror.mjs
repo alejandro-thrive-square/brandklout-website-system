@@ -13,7 +13,7 @@
  * Steps (each idempotent):
  *   1. Refuse unless <dir>/404.html exists. Without it Pages answers EVERY missing path with the
  *      home page and a 200, so an HTTP sweep reports a broken mirror as perfect (40/40 false pass).
- *   2. Refuse unless the malware gate passed: run scenario-1-migration/scripts/scan-mirror.mjs <dir> --strict
+ *   2. Refuse unless the malware gate passed: run scenario-1-migration/01-old-site-capture/scripts/scan-mirror.mjs <dir> --strict
  *      first (ClearFake was live for an hour on Mason Park Kids because the old gate missed it).
  *   3. Create the project through the API (`wrangler pages project create` 4.131 delegates to
  *      Workers and fails with "Could not detect a directory containing static files").
@@ -43,7 +43,7 @@ if (!existsSync(join(DIR, '404.html'))) { console.error(`${DIR}/404.html missing
   const reportPath = join(DIR, '..', 'scan-mirror-report.json')
   const report = existsSync(reportPath) ? JSON.parse(readFileSync(reportPath, 'utf8')) : null
   if (!report || !report.ok || !report.strict || resolve(report.dir) !== DIR) {
-    console.error('no passing strict scan for this directory: run scenario-1-migration/scripts/scan-mirror.mjs <dir> --host <old> --strict first')
+    console.error('no passing strict scan for this directory: run scenario-1-migration/01-old-site-capture/scripts/scan-mirror.mjs <dir> --host <old> --strict first')
     process.exit(1)
   }
 }

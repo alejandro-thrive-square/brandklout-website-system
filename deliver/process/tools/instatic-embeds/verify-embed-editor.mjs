@@ -147,7 +147,7 @@ async function check() {
      disk; reuse it rather than driving the login form (which is step-up
      protected and rotates the cookie out from under a second client). */
   const sessionFile = path.resolve(
-    import.meta.dirname, './lib/.tmp/.session')
+    import.meta.dirname, './lib/output/.session')
   const cookie = fs.readFileSync(sessionFile, 'utf8').trim()
   const [name, ...rest] = cookie.split('=')
   await S('Network.setCookie', {

@@ -20,15 +20,15 @@ Arvada).
 
 | Step | Directive | Output |
 | :-- | :-- | :-- |
-| 01 | [01-campaign-intake.md](./01-campaign-intake.md) | `combo.json`, `INTAKE.md`, forms checked, assets located |
-| 02 | [02-build-the-combo.md](./02-build-the-combo.md) | three pages per campaign on staging, named as the reference names them |
-| 03 | [03-qa-and-launch.md](./03-qa-and-launch.md) | gates green on staging and production, a human test lead, handover |
+| 01 | [01-campaign-intake.md](./01-campaign-intake/01-campaign-intake.md) | `combo.json`, `INTAKE.md`, forms checked, assets located |
+| 02 | [02-build-the-combo.md](./02-build-the-combo/02-build-the-combo.md) | three pages per campaign on staging, named as the reference names them |
+| 03 | [03-qa-and-launch.md](./03-qa-and-launch/03-qa-and-launch.md) | gates green on staging and production, a human test lead, handover |
 
-The client's working folder is `deliver/brandklout/<client>/workflows/ads-landing-pages/`.
+The client's copy of this scenario is `deliver/brandklout/<client>/scenario-3-ads-landing-pages/`; each step writes to its own `output/`.
 
 ## The manifest
 
-Every gate reads one `combo.json` (template: [scripts/combo.example.json](./scripts/combo.example.json),
+Every gate reads one `combo.json` (template: [tools/ads-combo/combo.example.json](../tools/ads-combo/combo.example.json),
 filled with Livewell's live values). It gives the origin (`--origin` overrides it for staging),
 the production origin, the folder prefix, the display phone, the tag strings that must be on
 every page, the campaigns (`name`, `landing`, `consultation`, `thankYou`, `formId`, `conversion`)
@@ -45,12 +45,12 @@ to a file (`> x.log 2>&1`). Never pipe it: Node 24 on Windows dies when stdout i
 | :-- | :-- | :-- | :-- |
 | `verify-combo-live.mjs` | Fetch-only gate for every page and form. Checks: 200 for a browser and for AdsBot with `?gclid`, noindex, not in the sitemap, the right form on landing and consultation, no form and a `tel:` link on thank-you, the landing page links to its consultation page, no `ad`-named classes, tags present, the phone in a DNI-swappable format, and each form's redirect. | `--combo c.json [--origin url]` | bk-dr-nahlah `workflows/22-instatic-api-sync/verify-ads-live.mjs`, generalized and extended |
 | `check-ghl-form.mjs` | Reads a GHL form's public settings. Fails if save-and-exit is on, or (with `--combo`) if the form does not redirect to its campaign's thank-you page. | `<formId>...` or `--combo c.json` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs`, plus the redirect check |
-| `verify-form.mjs` | Rendered form check. Exactly one iframe with the right id, form and loader requests return 200, no CSP blocks, width at least 90% of its card, not clipped by any ancestor. Thank-you pages must have no form. | `--combo c.json [--origin url] [--widths 1440,390] [--wait ms]` | bk-mason-park `workflows/10-lp-instatic/.tmp/verify-form.mjs` merged with `09-static-rebuild/.tmp/probe-ad-form-box.mjs` |
-| `probe-adblock.mjs` | Uses CDP to ask Chrome which foreign `!important` hiding rules hit an element (ad-blocker cosmetic lists). | `<url>...` or `--combo c.json` | bk-mason-park `workflows/09-static-rebuild/.tmp/probe-adblock.mjs`, ported off playwright-core |
+| `verify-form.mjs` | Rendered form check. Exactly one iframe with the right id, form and loader requests return 200, no CSP blocks, width at least 90% of its card, not clipped by any ancestor. Thank-you pages must have no form. | `--combo c.json [--origin url] [--widths 1440,390] [--wait ms]` | bk-mason-park `workflows/10-lp-instatic/output/verify-form.mjs` merged with `09-static-rebuild/output/probe-ad-form-box.mjs` |
+| `probe-adblock.mjs` | Uses CDP to ask Chrome which foreign `!important` hiding rules hit an element (ad-blocker cosmetic lists). | `<url>...` or `--combo c.json` | bk-mason-park `workflows/09-static-rebuild/output/probe-adblock.mjs`, ported off playwright-core |
 | `check-conversion.mjs` | Lists the GTM, Google Ads and GA4 ids reaching each thank-you page, and whether the path is named in the GTM container. | `--combo c.json` | new, 2026-09-23 |
 | `dni-proof.mjs` | Proves the GHL number pool actually swaps the number, walking the pages as one visitor. `--relay` routes the pool's calls through Node, which works around NordVPN; `--accept` clicks through Termly. | `[--relay\|--accept] <url>...` or `--combo c.json` | bk-dr-nahlah `workflows/22-instatic-api-sync/dni-proof.mjs` |
 | `check-pool-scope.mjs` | Checks every sitemap URL and every combo page: each carries exactly the pools the manifest globs give it, no pool is consent-held unexpectedly, and the CSP allows the pool's calls. | `--combo c.json [--origin url]` | bk-dr-nahlah `workflows/22-instatic-api-sync/check-pool-scope.mjs` |
-| `grab-page-images.mjs` | Downloads every image on a set of pages, one folder per page, with a manifest per page and a README for the set. | `--out dir [--title T] <url>[=Title]...` | bk-arvada `workflows/07-webflow-build/.tmp/grab-page-images.mjs` |
+| `grab-page-images.mjs` | Downloads every image on a set of pages, one folder per page, with a manifest per page and a README for the set. | `--out dir [--title T] <url>[=Title]...` | bk-arvada `workflows/07-webflow-build/output/grab-page-images.mjs` |
 | `lib/combo.mjs` | Shared helpers: loads the manifest, lists the URLs, fetches with a browser UA, and reads GHL forms. | imported | new |
 | `lib/cdp.mjs` | Minimal headless Chrome over CDP. | imported | the raw-CDP harness shared by the Mason Park and Dr. Nahlah gates |
 

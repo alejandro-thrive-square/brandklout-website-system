@@ -1,0 +1,300 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--accent",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--accent",
+      "binding": "var(--accent)"
+    },
+    {
+      "sourceName": "--accent-lg",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--accent-lg",
+      "binding": "var(--accent-lg)"
+    },
+    {
+      "sourceName": "--bg",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bg",
+      "binding": "var(--bg)"
+    },
+    {
+      "sourceName": "--bg-2",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bg-2",
+      "binding": "var(--bg-2)"
+    },
+    {
+      "sourceName": "--bg-3",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bg-3",
+      "binding": "var(--bg-3)"
+    },
+    {
+      "sourceName": "--black",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--black",
+      "binding": "var(--black)"
+    },
+    {
+      "sourceName": "--body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--body",
+      "binding": "var(--body)"
+    },
+    {
+      "sourceName": "--body-lg",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--body-lg",
+      "binding": "var(--body-lg)"
+    },
+    {
+      "sourceName": "--card",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--card",
+      "binding": "var(--card)"
+    },
+    {
+      "sourceName": "--d1",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--d1",
+      "binding": "var(--d1)"
+    },
+    {
+      "sourceName": "--d2",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--d2",
+      "binding": "var(--d2)"
+    },
+    {
+      "sourceName": "--f-body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--f-body",
+      "binding": "var(--f-body)"
+    },
+    {
+      "sourceName": "--f-display",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--f-display",
+      "binding": "var(--f-display)"
+    },
+    {
+      "sourceName": "--fg",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--fg",
+      "binding": "var(--fg)"
+    },
+    {
+      "sourceName": "--fg-body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--fg-body",
+      "binding": "var(--fg-body)"
+    },
+    {
+      "sourceName": "--fg-faint",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--fg-faint",
+      "binding": "var(--fg-faint)"
+    },
+    {
+      "sourceName": "--fg-soft",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--fg-soft",
+      "binding": "var(--fg-soft)"
+    },
+    {
+      "sourceName": "--focus",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--focus",
+      "binding": "var(--focus)"
+    },
+    {
+      "sourceName": "--gold",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold",
+      "binding": "var(--gold)"
+    },
+    {
+      "sourceName": "--gold-deep",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold-deep",
+      "binding": "var(--gold-deep)"
+    },
+    {
+      "sourceName": "--gold-ink",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold-ink",
+      "binding": "var(--gold-ink)"
+    },
+    {
+      "sourceName": "--gold-light",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold-light",
+      "binding": "var(--gold-light)"
+    },
+    {
+      "sourceName": "--gold-wash",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold-wash",
+      "binding": "var(--gold-wash)"
+    },
+    {
+      "sourceName": "--gutter",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gutter",
+      "binding": "var(--gutter)"
+    },
+    {
+      "sourceName": "--h2",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--h2",
+      "binding": "var(--h2)"
+    },
+    {
+      "sourceName": "--h3",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--h3",
+      "binding": "var(--h3)"
+    },
+    {
+      "sourceName": "--ink-500",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-500",
+      "binding": "var(--ink-500)"
+    },
+    {
+      "sourceName": "--ink-700",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-700",
+      "binding": "var(--ink-700)"
+    },
+    {
+      "sourceName": "--ink-800",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-800",
+      "binding": "var(--ink-800)"
+    },
+    {
+      "sourceName": "--ink-900",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-900",
+      "binding": "var(--ink-900)"
+    },
+    {
+      "sourceName": "--label",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--label",
+      "binding": "var(--label)"
+    },
+    {
+      "sourceName": "--line",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line",
+      "binding": "var(--line)"
+    },
+    {
+      "sourceName": "--line-2",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line-2",
+      "binding": "var(--line-2)"
+    },
+    {
+      "sourceName": "--line-strong",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line-strong",
+      "binding": "var(--line-strong)"
+    },
+    {
+      "sourceName": "--maxw",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--maxw",
+      "binding": "var(--maxw)"
+    },
+    {
+      "sourceName": "--mist",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--mist",
+      "binding": "var(--mist)"
+    },
+    {
+      "sourceName": "--rail",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--rail",
+      "binding": "var(--rail)"
+    },
+    {
+      "sourceName": "--rule",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--rule",
+      "binding": "var(--rule)"
+    },
+    {
+      "sourceName": "--scrim",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--scrim",
+      "binding": "var(--scrim)"
+    },
+    {
+      "sourceName": "--section",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--section",
+      "binding": "var(--section)"
+    },
+    {
+      "sourceName": "--warm",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--warm",
+      "binding": "var(--warm)"
+    },
+    {
+      "sourceName": "--white",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--white",
+      "binding": "var(--white)"
+    }
+  ]
+}

@@ -1,0 +1,961 @@
+{
+  "xxl": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "cos-i": {
+      "width": "84px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "144px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "96px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "64px",
+      "grid-column-gap": "64px"
+    },
+    "cos-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "offer": {
+      "padding-top": "24px",
+      "padding-right": "28px",
+      "padding-bottom": "24px",
+      "padding-left": "28px"
+    },
+    "cos-head": {
+      "margin-bottom": "57.6px"
+    },
+    "doctors": {
+      "grid-row-gap": "72px",
+      "grid-column-gap": "72px"
+    },
+    "doc": {
+      "grid-row-gap": "48px",
+      "grid-column-gap": "48px"
+    },
+    "doctors__note": {
+      "margin-top": "48px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px",
+      "padding-block": "80px"
+    },
+    "work__grid": {
+      "grid-row-gap": "64px",
+      "grid-column-gap": "64px"
+    },
+    "work__card": {
+      "min-height": "260px"
+    },
+    "work__icon": {
+      "width": "68px"
+    },
+    "work__row": {
+      "padding-top": "16.8px",
+      "padding-bottom": "16.8px"
+    },
+    "offers": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px",
+      "margin-top": "64px",
+      "padding-top": "38.4px",
+      "padding-right": "38.4px",
+      "padding-bottom": "38.4px",
+      "padding-left": "38.4px"
+    },
+    "split": {
+      "grid-row-gap": "64px",
+      "grid-column-gap": "64px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "pillars": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "pillar": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "22.4px",
+      "grid-column-gap": "22.4px",
+      "padding-inline": "64px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "quote": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "xl": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "cos-i": {
+      "width": "84px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "122.4px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "96px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "57.6px",
+      "grid-column-gap": "57.6px"
+    },
+    "cos-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "offer": {
+      "padding-top": "24px",
+      "padding-right": "28px",
+      "padding-bottom": "24px",
+      "padding-left": "28px"
+    },
+    "cos-head": {
+      "margin-bottom": "57.6px"
+    },
+    "doctors": {
+      "grid-row-gap": "72px",
+      "grid-column-gap": "72px"
+    },
+    "doc": {
+      "grid-row-gap": "48px",
+      "grid-column-gap": "48px"
+    },
+    "doctors__note": {
+      "margin-top": "48px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px",
+      "padding-block": "80px"
+    },
+    "work__grid": {
+      "grid-row-gap": "64px",
+      "grid-column-gap": "64px"
+    },
+    "work__card": {
+      "min-height": "260px"
+    },
+    "work__icon": {
+      "width": "68px"
+    },
+    "work__row": {
+      "padding-top": "16.8px",
+      "padding-bottom": "16.8px"
+    },
+    "offers": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px",
+      "margin-top": "64px",
+      "padding-top": "38.4px",
+      "padding-right": "38.4px",
+      "padding-bottom": "38.4px",
+      "padding-left": "38.4px"
+    },
+    "split": {
+      "grid-row-gap": "57.6px",
+      "grid-column-gap": "57.6px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "pillars": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "pillar": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "22.4px",
+      "grid-column-gap": "22.4px",
+      "padding-inline": "57.6px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "quote": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "large": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "cos-i": {
+      "width": "81.6px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "115.6px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "95.2px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "cos-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "offer": {
+      "padding-top": "24px",
+      "padding-right": "28px",
+      "padding-bottom": "24px",
+      "padding-left": "28px"
+    },
+    "cos-head": {
+      "margin-bottom": "54.4px"
+    },
+    "doctors": {
+      "grid-row-gap": "68px",
+      "grid-column-gap": "68px"
+    },
+    "doc": {
+      "grid-row-gap": "47.6px",
+      "grid-column-gap": "47.6px"
+    },
+    "doctors__note": {
+      "margin-top": "48px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "35.36px",
+      "grid-column-gap": "35.36px",
+      "padding-block": "80px"
+    },
+    "work__grid": {
+      "grid-row-gap": "64px",
+      "grid-column-gap": "64px"
+    },
+    "work__card": {
+      "min-height": "260px"
+    },
+    "work__icon": {
+      "width": "68px"
+    },
+    "work__row": {
+      "padding-top": "16.8px",
+      "padding-bottom": "16.8px"
+    },
+    "offers": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px",
+      "margin-top": "64px",
+      "padding-top": "38.4px",
+      "padding-right": "38.4px",
+      "padding-bottom": "38.4px",
+      "padding-left": "38.4px"
+    },
+    "split": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "pillars": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "pillar": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "35.36px",
+      "grid-column-gap": "35.36px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "21.76px",
+      "grid-column-gap": "21.76px",
+      "padding-inline": "54.4px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "quote": {
+      "padding-top": "32px",
+      "padding-right": "32px",
+      "padding-bottom": "32px",
+      "padding-left": "32px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "desktop": {
+    "header__inner": {
+      "padding-block": "18.18px"
+    },
+    "logo-light": {
+      "height": "38.62px"
+    },
+    "logo-dark": {
+      "height": "38.62px"
+    },
+    "cos-i": {
+      "width": "68.16px"
+    },
+    "header__actions": {
+      "grid-row-gap": "15.9px",
+      "grid-column-gap": "15.9px"
+    },
+    "ch": {
+      "padding-block": "96.56px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "113.6px",
+      "padding-bottom": "79.52px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "cos-i-2": {
+      "width": "45.44px"
+    },
+    "gm-label-before": {
+      "width": "34.08px"
+    },
+    "offer": {
+      "padding-top": "22.72px",
+      "padding-right": "24.99px",
+      "padding-bottom": "22.72px",
+      "padding-left": "24.99px"
+    },
+    "cos-head": {
+      "margin-bottom": "45.44px"
+    },
+    "doctors": {
+      "grid-row-gap": "56.8px",
+      "grid-column-gap": "56.8px"
+    },
+    "doc": {
+      "grid-row-gap": "39.76px",
+      "grid-column-gap": "39.76px"
+    },
+    "doctors__note": {
+      "margin-top": "45.44px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "29.54px",
+      "grid-column-gap": "29.54px",
+      "padding-block": "68.16px"
+    },
+    "work__grid": {
+      "grid-row-gap": "56.8px",
+      "grid-column-gap": "56.8px"
+    },
+    "work__card": {
+      "min-height": "249.92px"
+    },
+    "work__icon": {
+      "width": "56.8px"
+    },
+    "work__row": {
+      "padding-top": "16.8px",
+      "padding-bottom": "16.8px"
+    },
+    "offers": {
+      "grid-row-gap": "22.72px",
+      "grid-column-gap": "22.72px",
+      "margin-top": "56.8px",
+      "padding-top": "34.08px",
+      "padding-right": "34.08px",
+      "padding-bottom": "34.08px",
+      "padding-left": "34.08px"
+    },
+    "split": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "34.08px",
+      "grid-column-gap": "34.08px"
+    },
+    "pillars": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "18.18px",
+      "grid-column-gap": "18.18px"
+    },
+    "pillar": {
+      "padding-top": "27.26px",
+      "padding-right": "27.26px",
+      "padding-bottom": "27.26px",
+      "padding-left": "27.26px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "29.54px",
+      "grid-column-gap": "29.54px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "18.18px",
+      "grid-column-gap": "18.18px",
+      "padding-inline": "45.44px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "20.45px",
+      "grid-column-gap": "20.45px"
+    },
+    "quote": {
+      "padding-top": "27.26px",
+      "padding-right": "27.26px",
+      "padding-bottom": "27.26px",
+      "padding-left": "27.26px"
+    },
+    "gm-footer": {
+      "padding-block": "68.16px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "tablet": {
+    "header__inner": {
+      "padding-block": "14.08px"
+    },
+    "logo-light": {
+      "height": "29.92px"
+    },
+    "logo-dark": {
+      "height": "29.92px"
+    },
+    "cos-i": {
+      "width": "52.8px"
+    },
+    "header__actions": {
+      "grid-row-gap": "12.32px",
+      "grid-column-gap": "12.32px"
+    },
+    "ch": {
+      "padding-block": "74.8px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "61.6px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "cos-i-2": {
+      "width": "35.2px"
+    },
+    "gm-label-before": {
+      "width": "26.4px"
+    },
+    "offer": {
+      "padding-top": "17.6px",
+      "padding-right": "19.36px",
+      "padding-bottom": "17.6px",
+      "padding-left": "19.36px"
+    },
+    "cos-head": {
+      "margin-bottom": "35.2px"
+    },
+    "doctors": {
+      "grid-row-gap": "44px",
+      "grid-column-gap": "44px"
+    },
+    "doc": {
+      "grid-row-gap": "30.8px",
+      "grid-column-gap": "30.8px"
+    },
+    "doctors__note": {
+      "margin-top": "35.2px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "22.88px",
+      "grid-column-gap": "22.88px",
+      "padding-block": "52.8px"
+    },
+    "work__grid": {
+      "grid-row-gap": "44px",
+      "grid-column-gap": "44px"
+    },
+    "work__card": {
+      "min-height": "193.6px"
+    },
+    "work__icon": {
+      "width": "48px"
+    },
+    "work__row": {
+      "padding-top": "13.2px",
+      "padding-bottom": "13.2px"
+    },
+    "offers": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px",
+      "margin-top": "44px",
+      "padding-top": "26.4px",
+      "padding-right": "26.4px",
+      "padding-bottom": "26.4px",
+      "padding-left": "26.4px"
+    },
+    "split": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "26.4px",
+      "grid-column-gap": "26.4px"
+    },
+    "pillars": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "14.08px",
+      "grid-column-gap": "14.08px"
+    },
+    "pillar": {
+      "padding-top": "21.12px",
+      "padding-right": "21.12px",
+      "padding-bottom": "21.12px",
+      "padding-left": "21.12px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "22.88px",
+      "grid-column-gap": "22.88px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "14.08px",
+      "grid-column-gap": "14.08px",
+      "padding-inline": "35.2px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "quote": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "52.8px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "mobileL": {
+    "header__inner": {
+      "padding-block": "13.6px"
+    },
+    "logo-light": {
+      "height": "28px"
+    },
+    "logo-dark": {
+      "height": "28px"
+    },
+    "cos-i": {
+      "width": "40px"
+    },
+    "header__actions": {
+      "grid-row-gap": "9.6px",
+      "grid-column-gap": "9.6px"
+    },
+    "ch": {
+      "padding-block": "72px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "56px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "cos-i-2": {
+      "width": "24.92px"
+    },
+    "gm-label-before": {
+      "width": "20px"
+    },
+    "offer": {
+      "padding-top": "17.6px",
+      "padding-right": "19.2px",
+      "padding-bottom": "17.6px",
+      "padding-left": "19.2px"
+    },
+    "cos-head": {
+      "margin-bottom": "35.2px"
+    },
+    "doctors": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "doc": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "doctors__note": {
+      "margin-top": "32px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px",
+      "padding-block": "48px"
+    },
+    "work__grid": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "work__card": {
+      "min-height": "180px"
+    },
+    "work__icon": {
+      "width": "48px"
+    },
+    "work__row": {
+      "padding-top": "11.2px",
+      "padding-bottom": "11.2px"
+    },
+    "offers": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px",
+      "margin-top": "40px",
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "split": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "pillars": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px"
+    },
+    "pillar": {
+      "padding-top": "20px",
+      "padding-right": "20px",
+      "padding-bottom": "20px",
+      "padding-left": "20px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px",
+      "padding-inline": "24.92px"
+    },
+    "case": {
+      "width": "340px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "quote": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "48px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "cos-img-3": {
+      "max-width": "560px"
+    }
+  },
+  "mobileP": {
+    "header__inner": {
+      "padding-block": "13.6px"
+    },
+    "logo-light": {
+      "height": "28px"
+    },
+    "logo-dark": {
+      "height": "28px"
+    },
+    "cos-i": {
+      "width": "40px"
+    },
+    "header__actions": {
+      "grid-row-gap": "9.6px",
+      "grid-column-gap": "9.6px"
+    },
+    "ch": {
+      "padding-block": "72px"
+    },
+    "cos-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "56px"
+    },
+    "arrival__inner": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "cos-i-2": {
+      "width": "24px"
+    },
+    "gm-label-before": {
+      "width": "20px"
+    },
+    "offer": {
+      "padding-top": "17.6px",
+      "padding-right": "19.2px",
+      "padding-bottom": "17.6px",
+      "padding-left": "19.2px"
+    },
+    "cos-head": {
+      "margin-bottom": "35.2px"
+    },
+    "doctors": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "doc": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "doctors__note": {
+      "margin-top": "32px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px",
+      "padding-block": "48px"
+    },
+    "work__grid": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "work__card": {
+      "min-height": "180px"
+    },
+    "work__icon": {
+      "width": "48px"
+    },
+    "work__row": {
+      "padding-top": "11.2px",
+      "padding-bottom": "11.2px"
+    },
+    "offers": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px",
+      "margin-top": "40px",
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "split": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "pillars__pin": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "pillars": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "pillars__list": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px"
+    },
+    "pillar": {
+      "padding-top": "20px",
+      "padding-right": "20px",
+      "padding-bottom": "20px",
+      "padding-left": "20px"
+    },
+    "proof__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "proof__rail": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px",
+      "padding-inline": "20px"
+    },
+    "case": {
+      "width": "248px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "quote": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "48px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "cos-img-3": {
+      "max-width": "368px"
+    }
+  }
+}

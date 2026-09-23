@@ -31,7 +31,7 @@ import { fileURLToPath } from 'node:url'
 import { BASE, getSite, saveShell, styleFile } from './insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 const TARGET = 'src/styles/site.css'
 
 /** Pull the published bundle and cut out one source file's segment. */
@@ -102,7 +102,7 @@ const tailLoss = restored.startsWith(current)
 if (!headLoss && !tailLoss) {
   console.error('\nrefusing to overwrite: the draft is neither truncated nor a prefix of the')
   console.error('published copy, so it holds content that would be lost. Inspect')
-  console.error('.tmp/site.css.draft-before first.')
+  console.error('output/site.css.draft-before first.')
   process.exit(1)
 }
 console.log(`repair shape         ${headLoss ? 'head loss' : 'tail loss (draft is a prefix)'}`)

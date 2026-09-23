@@ -1,0 +1,34 @@
+.ch-transformation{background:var(--bg-2);color:var(--fg-body)}
+.ch-transformation .tf-pin{min-height:100svh;display:grid;align-content:center;
+  padding-block:clamp(3rem,7vw,5rem);overflow:hidden}
+.ch-transformation .tf-head{display:grid;gap:.9rem;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+
+.ch-transformation h2{font-size:var(--h2);max-width:16ch}
+.tf-cmp{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--mist);
+  max-height:58svh;margin-inline:auto;width:100%}
+.tf-cmp .tf-slide{position:absolute;inset:0;opacity:0}
+.tf-cmp .tf-slide.is-on{opacity:1}
+.tf-cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tf-cmp .tf-aft{clip-path:inset(0 0 0 var(--pos,0%))}
+.tf-cmp .tf-handle{position:absolute;top:0;bottom:0;left:var(--pos,0%);width:2px;background:var(--gold);
+  transform:translateX(-1px);z-index:3;opacity:0}
+.tf-cmp .tf-handle::before{content:"";position:absolute;top:50%;left:50%;
+  width:clamp(44px,4.4vw,58px);height:clamp(44px,4.4vw,58px);transform:translate(-50%,-50%);
+  border-radius:50%;background:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.3)}
+.tf-cmp .tf-tag{position:absolute;top:1rem;padding:.4rem .85rem;font-size:.62rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;z-index:4}
+.tf-cmp .tf-tag.tf-b{left:1rem;background:rgba(11,11,12,.72);color:#fff}
+.tf-cmp .tf-tag.tf-a{right:1rem;background:var(--gold-ink);color:#fff}
+.ch-transformation .tf-foot{margin-top:1rem;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.6rem 1.5rem;font-size:.82rem;color:var(--fg-body)}
+.tf-more{margin-right:auto;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent);border-bottom:1px solid rgba(102,92,51,.55);
+  padding-bottom:.2rem;transition:color .35s,border-color .35s}
+.tf-more:hover{color:var(--fg);border-color:var(--fg)}
+.ch-transformation .tf-dots{display:flex;gap:.45rem;align-items:center}
+.ch-transformation .tf-dots i{display:block;width:26px;height:2px;background:var(--line)}
+.ch-transformation .tf-dots i.is-on{background:var(--accent-lg)}
+@media(max-width:719px){
+  .tf-cmp{aspect-ratio:4/3;max-height:none}
+  .tf-cmp .tf-tag{font-size:.54rem;padding:.3rem .55rem}
+}

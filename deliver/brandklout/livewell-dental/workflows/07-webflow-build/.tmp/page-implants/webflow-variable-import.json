@@ -1,0 +1,49 @@
+{
+  "source": ":root CSS custom properties",
+  "variables": [
+    {
+      "name": "--gold",
+      "value": "#d3aa5a"
+    },
+    {
+      "name": "--green",
+      "value": "#0b2c41"
+    },
+    {
+      "name": "--green-dk",
+      "value": "#071e2d"
+    },
+    {
+      "name": "--ink",
+      "value": "#101820"
+    },
+    {
+      "name": "--line",
+      "value": "#d8e0e4"
+    },
+    {
+      "name": "--max",
+      "value": "1140px"
+    },
+    {
+      "name": "--muted",
+      "value": "#4a5b66"
+    },
+    {
+      "name": "--paper",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "--radius",
+      "value": "16px"
+    },
+    {
+      "name": "--sage",
+      "value": "#e3edf1"
+    },
+    {
+      "name": "--soft",
+      "value": "#f6f3ee"
+    }
+  ]
+}

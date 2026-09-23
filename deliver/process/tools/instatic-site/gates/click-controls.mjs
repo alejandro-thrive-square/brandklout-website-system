@@ -5,7 +5,7 @@
  * listener was never attached; only a driven click finds it.
  *
  * Written 2026-09-23 for tools/instatic-site, generalizing the med spa's
- * workflows/04-design/.tmp/med-spa/site-src/drag-test.mjs (bk-stone-med-spa). The drag-rail arrows there
+ * workflows/04-design/output/med-spa/site-src/drag-test.mjs (bk-stone-med-spa). The drag-rail arrows there
  * were dead for two weeks (bound with closest() to a SIBLING) while every other gate was green.
  *
  * What counts as a control: button:not([type=submit]), [role=button], [role=tab], summary,

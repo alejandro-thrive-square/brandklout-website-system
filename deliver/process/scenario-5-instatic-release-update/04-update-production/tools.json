@@ -1,0 +1,10 @@
+{
+  "step": "scenario-5-instatic-release-update/04-update-production",
+  "toolkits": [
+    "cloudflare-launch",
+    "instatic-domain-origins",
+    "instatic-release",
+    "instatic-site",
+    "termly-ghl-consent"
+  ]
+}

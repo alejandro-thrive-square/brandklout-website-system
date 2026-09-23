@@ -1,0 +1,9 @@
+{
+  "step": "scenario-4-update-plugins/02-rollout",
+  "toolkits": [
+    "instatic-api-sync",
+    "instatic-domain-origins",
+    "instatic-plugins",
+    "instatic-site"
+  ]
+}

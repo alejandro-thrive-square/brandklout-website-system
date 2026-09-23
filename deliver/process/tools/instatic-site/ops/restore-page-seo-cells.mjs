@@ -6,8 +6,8 @@
  * restore-page-seo-cells.mjs — put back the `seoTitle` / `seoDescription` that
  * a page write dropped.
  *
- *   node restore-page-seo-cells.mjs --from .tmp/backups/pre-pin9-pages.json
- *   node restore-page-seo-cells.mjs --from .tmp/backups/pre-pin9-pages.json --only posts --apply
+ *   node restore-page-seo-cells.mjs --from output/backups/pre-pin9-pages.json
+ *   node restore-page-seo-cells.mjs --from output/backups/pre-pin9-pages.json --only posts --apply
  *
  * ## Why a page write drops them at all
  *
@@ -20,7 +20,7 @@
  *
  * `push-page-seo-cells.mjs` is where they come FROM (`seo.json`). This is the
  * repair for when a page tree write has already eaten them and the authored
- * values only survive in a `.tmp/backup.mjs` snapshot.
+ * values only survive in a `output/backup.mjs` snapshot.
  *
  * ## The trap inside the repair
  *

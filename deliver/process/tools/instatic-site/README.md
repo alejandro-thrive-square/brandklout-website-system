@@ -44,14 +44,14 @@ Sibling toolkits this one relies on and does not copy:
 
 ## Conventions (all scripts)
 
-- **Run from the client folder (`deliver/brandklout/<client>/`).** Outputs go to `<cwd>/.tmp`. Credentials come from the
+- **Run from the step folder in the client's scenario copy** (for example `deliver/brandklout/<client>/scenario-0-new-site/04-qa/`). Outputs go to `<cwd>/output`. Credentials come from the
   nearest generated `.env` (never hand-edit it; `node scripts/env-sync.mjs`).
 - **`INSTATIC_BASE_URL` is required.** `lib/site.mjs` refuses to run without it. The worktree `.env`
   points at production: for staging, prefix the command `INSTATIC_BASE_URL=https://<staging host>`.
   Scripts that write in replace mode or patch rows also call `lib/staging-guard.mjs`: set
   `STAGING_HOST=<exact hostname>` or pass `--allow-production` on purpose.
 - **Build root.** `lib/paths.mjs`: `--site-src <dir>` or `SITE_SRC`, default
-  `workflows/03-design-build/.tmp/site-src` (relative to `deliver/brandklout/<client>/`, where every script runs). Layout (West LA Implants, the most general build):
+  `scenario-0-new-site/03-design-build/output/code/site-src` (relative to `deliver/brandklout/<client>/`, where every script runs). Layout (West LA Implants, the most general build):
   `dist/` (every page `.html`, `assets/`, `assets/gsap/`, `media/img`, `media/video`, `fonts/`) and
   `css/` (source stylesheets in load order). Pages are always derived by walking `dist/`, never listed.
 - **Browser gates** need `puppeteer-core` (`npm i --no-save puppeteer-core` in the worktree, or
@@ -63,9 +63,9 @@ Sibling toolkits this one relies on and does not copy:
 ## The push pipeline, in order (staging)
 
 ```
-node push/upload-media.mjs                                 # media into the library; writes .tmp/media-map.json
+node push/upload-media.mjs                                 # media into the library; writes output/media-map.json
 node push/set-alt.mjs --apply                              # importHtml DISCARDS alt; always run
-node push/build-import-input.mjs                           # .tmp/import-input.json.gz + .b64
+node push/build-import-input.mjs                           # output/import-input.json.gz + .b64
 RAILWAY_LINK_DIR=<dir linked by project ID> bash push/ship.sh   # check-link, ship, bun import-run.ts, fetch result
 node push/push-site.mjs                                    # dry run
 node push/push-site.mjs --apply --force                    # REPLACE mode: a page missing from dist/ is deleted live
@@ -92,12 +92,12 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 | `push/push-site.mjs` | One `PUT /site-document` (replace): pages, registry, token + script assets (GSAP first, UMD wrap), SEO cells | `[--apply] [--force]`, `TOKEN_FILES=` | bk-west-la-implants |
 | `push/place-embeds.mjs` | Swap `data-embed` markers for Embed blocks (GHL forms, widgets) | `--config embeds.json [--apply] [--publish]` | bk-stone `21-instatic-upload/` |
 | `ops/apply-template-flags.mjs` | Re-set notFound / collection template flags after an import | `--page 404 --not-found` or `--page <tpl> --table <slug>` `[--check]` | bk-mason-park `apply-404-template` + `apply-blog-template` |
-| `ops/backup-site.mjs` | API snapshot (shell, rows, published HTML, seq); `--db-command` prints the `VACUUM INTO` railway command | `[--out dir]` / `--db-command --label x` | bk-west-la-implants `.tmp/backup-live.mjs` |
+| `ops/backup-site.mjs` | API snapshot (shell, rows, published HTML, seq); `--db-command` prints the `VACUUM INTO` railway command | `[--out dir]` / `--db-command --label x` | bk-west-la-implants `output/backup-live.mjs` |
 | `ops/render-draft-page.mjs` | Render an unpublished page through the editor preview (no shared components) | `[slug] [outDir]` | bk-dr-nahlah `instatic-api-sync/` |
 | `ops/restore-page-seo-cells.mjs` | Put back SEO cells a page write dropped, from a backup | `--from pages.json [--only slug] [--apply]` | same |
-| `gates/check-pages.mjs` | Per-page runtime gate: console/4xx, runtime armed, pins scrub, one h1, overflow at 390, optional screenshots | `[slug...] [--widths=1440,390] [--shots] [--base=https://host]`, `LIGHT_PAGES=` | bk-west-la-implants `08-qa/.tmp/check-local.mjs` |
+| `gates/check-pages.mjs` | Per-page runtime gate: console/4xx, runtime armed, pins scrub, one h1, overflow at 390, optional screenshots | `[slug...] [--widths=1440,390] [--shots] [--base=https://host]`, `LIGHT_PAGES=` | bk-west-la-implants `08-qa/output/check-local.mjs` |
 | `gates/click-controls.mjs` | Clicks every control; reports those whose click changes nothing | `[slug...] [--base url] [--widths 1440,390]` | new, from bk-stone-med-spa `drag-test.mjs` |
-| `gates/colour-leak.mjs` | Contextual CSS stealing a class's ink; contrast by hit-testing | `[--all] [--site dir]` | bk-mason-park-kids `.tmp/colour-leak.mjs` |
+| `gates/colour-leak.mjs` | Contextual CSS stealing a class's ink; contrast by hit-testing | `[--all] [--site dir]` | bk-mason-park-kids `output/colour-leak.mjs` |
 | `gates/verify-live.mjs` | Every built route live: links, assets, titles | `FAIL  none` to pass | bk-west-la-implants |
 | `gates/css-declared-parity.mjs` | Every declared property reached the live CSS (not the same tool as instatic-api-sync's `css-parity.mjs`) | | same (`css-parity.mjs`) |
 | `gates/compare-live.mjs` | Local vs live: computed style, geometry, runtime | `[slug] [width] [--shots]` | same |
@@ -124,12 +124,12 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
   runbooks 2026-09-17 (privacy and terms adapted from the sister practice).
 - SEO plugin configuration: bk-dr-nahlah `16-instatic-plugins/configure-seo-plugins.mjs`,
   `populate-seo.mjs` (stale `webzite.*` ids, broken import), `retarget-seo-numbers.mjs`;
-  bk-mason-park-kids `.tmp/configure-seo.mjs`, `populate-seo.mjs`; bk-brandklout-website
+  bk-mason-park-kids `output/configure-seo.mjs`, `populate-seo.mjs`; bk-brandklout-website
   `16-instatic-plugins/install-seo-plugins.mjs`. The plugin sources live in those worktrees too.
 - `set-site-tags.mjs` (bk-dr-nahlah): superseded by `../instatic-embeds/rollout-site-scripts.mjs`.
 - Mason Park static-to-Instatic pipeline (`to-instatic`, `ship-payload`, `run-converter`,
   `fetch-nodes`, `import-pages`, `import-styles`, `import-scripts`): bk-mason-park and
-  bk-mason-park-kids `.tmp/`. Older route than `push/`; `import-pages.mjs` is the reference for an
+  bk-mason-park-kids `output/`. Older route than `push/`; `import-pages.mjs` is the reference for an
   incremental write with `baseSeqs`.
 - Redirect maps (`cloudflare-launch` build/deploy/verify, bk-mason-park `12-legacy-redirects`):
   scenario 1.
@@ -150,5 +150,5 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md). Scripts and this README
-are committed; outputs land in the client folder's `.tmp/`, never here. No token or password is ever
+are committed; outputs land in the client folder's `output/`, never here. No token or password is ever
 written to a file in this folder.

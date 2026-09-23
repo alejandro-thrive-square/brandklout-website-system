@@ -1,0 +1,62 @@
+{
+  "_comment": "Every payload currently pasted (final.json = post-adopt, i.e. the exact bytes Webflow received) into the Webflow site, newest last. check_shared_classes.py reads this as the fork baseline, so a page missing from here is a page its successors were never checked against. Append a page the moment it goes live (`--record`), not later.",
+  "site_id": "6a6b84cc7fe55ddeabc0b314",
+  "staging": "https://dr-nahlah.webflow.io",
+  "live": [
+    {
+      "slug": "home",
+      "page_id": "6a6b84cf7fe55ddeabc0b3bf",
+      "payload": ".tmp/light/final.json"
+    },
+    {
+      "slug": "about",
+      "page_id": "6a7192045e08986900c971b0",
+      "payload": ".tmp/p-about/final.json"
+    },
+    {
+      "slug": "patient-stories",
+      "page_id": "6a719510e5ce71dc7be8cfb2",
+      "payload": ".tmp/p-patient-stories/final.json"
+    },
+    {
+      "slug": "contact",
+      "page_id": "6a719510e5ce71dc7be8d079",
+      "payload": ".tmp/p-contact/final.json"
+    },
+    {
+      "slug": "sedation-dentistry",
+      "page_id": "6a719511f930119433ab4247",
+      "payload": ".tmp/p-sedation-dentistry/final.json"
+    },
+    {
+      "slug": "implant-cost",
+      "page_id": "6a7198a872eeb266fa217f3b",
+      "payload": ".tmp/p-implant-cost/final.json"
+    },
+    {
+      "slug": "smile-makeover",
+      "page_id": "6a719ad75e08986900cb81a8",
+      "payload": ".tmp/p-smile-makeover/final.json"
+    },
+    {
+      "slug": "veneers",
+      "page_id": "6a719dd61311f970076306e6",
+      "payload": ".tmp/p-veneers/final.json"
+    },
+    {
+      "slug": "all-on-4",
+      "page_id": "6a71a01c67dd06721b4fb6db",
+      "payload": ".tmp/p-all-on-4/final.json"
+    },
+    {
+      "slug": "dental-implants",
+      "page_id": "6a71a26282b5747f186b6a67",
+      "payload": ".tmp/p-dental-implants/final.json"
+    },
+    {
+      "slug": "smile-gallery",
+      "page_id": "6a71a491d883c20ee30dc0d4",
+      "payload": ".tmp/p-smile-gallery/final.json"
+    }
+  ]
+}

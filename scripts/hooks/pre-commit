@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Webzite pre-commit hook — main is for the system: a commit on main never touches a client folder.
+#
+# Client work reaches main only by merging the client's branch (see pre-merge-commit). A process or
+# tool fix is committed on main and cascades to clients with `node scripts/scenario.mjs update`.
+# See scripts/check-scope.mjs and deliver/DELIVER_SYSTEM_RULES.md §3.
+#
+# Bypass only with explicit approval: WEBZITE_SKIP_SCOPE=1 git commit ...
+
+set -uo pipefail
+[[ -n "${WEBZITE_SKIP_SCOPE:-}" ]] && exit 0
+BRANCH="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
+[[ "$BRANCH" == "main" ]] || exit 0
+GITDIR="$(git rev-parse --git-dir)"
+[[ -f "$GITDIR/MERGE_HEAD" ]] && exit 0          # a merge commit is checked by pre-merge-commit
+ROOT="$(git rev-parse --show-toplevel)"
+[[ -f "$ROOT/scripts/check-scope.mjs" ]] || exit 0
+node "$ROOT/scripts/check-scope.mjs" --staged --expect system || {
+  echo "pre-commit: commits on main are system-only. Client files come in by merging the client's branch." >&2
+  exit 1
+}

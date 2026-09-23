@@ -39,7 +39,7 @@ const GRANT = ['cms.hooks', 'modules.register', 'frontend.assets']
 // every plugin). For a plugin upgrade on its own, use ../instatic-plugins/plugins.mjs rollout.
 const PLUGINS = join(HERE, '..', 'instatic-plugins')
 const WANT_VERSION = JSON.parse(readFileSync(join(PLUGINS, 'embed-origins', 'plugin.json'), 'utf8')).version
-const ZIP = join(PLUGINS, '.tmp', 'packages', `${ID}-${WANT_VERSION}.zip`)
+const ZIP = join(PLUGINS, 'output', 'packages', `${ID}-${WANT_VERSION}.zip`)
 const newer = (a, b) => { const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0); return false }
 
 const cmd = process.argv[2]

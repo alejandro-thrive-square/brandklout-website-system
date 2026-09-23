@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // PROMOTED 2026-09-23 to deliver/process/tools/instatic-site/gates/verify-motion-live.mjs
 // Origin: bk-west-la-implants/deliver/brandklout/west-la-implants/workflows/21-instatic-upload/verify-motion-live.mjs. Paths now come from ../lib/paths.mjs (run from the client's workflow
-// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/.tmp) and the admin client from
+// folder; build root = --site-src or SITE_SRC; outputs in <cwd>/output) and the admin client from
 // ../lib/site.mjs (refuses to run without INSTATIC_BASE_URL). Client-specific notes below are the
 // origin's record; review them against the new site before --apply.
 /**
@@ -36,7 +36,7 @@
  *   - no horizontal overflow at 390
  *
  * Screenshots of every sampled position go to
- * `08-qa/.tmp/screenshots/live/`, at 1440 and at 390.
+ * `08-qa/output/screenshots/live/`, at 1440 and at 390.
  *
  * Usage:  node verify-motion-live.mjs            # both widths
  *         node verify-motion-live.mjs 1440       # one
@@ -54,8 +54,8 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from '../lib/browser.mjs' // resolves PUPPETEER_DIR, then the worktree
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
-const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/.tmp
-const SHOTS = path.join(P.WORK, '.tmp/screenshots/live')
+const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
+const SHOTS = path.join(P.WORK, 'output/screenshots/live')
 
 function loadEnv() {
   let dir = HERE

@@ -14,8 +14,8 @@ node scripts/drive.mjs get <file id|url> <dir>
 node scripts/drive.mjs pull <folder id|url> <dir>   # whole tree; re-running resumes
 ```
 
-- **Where downloads go:** into the `.tmp/` of the workflow that uses them, e.g.
-  `deliver/brandklout/<client>/workflows/<nn-workflow>/.tmp/drive/<folder name>/`
+- **Where downloads go:** into the `output/` of the workflow that uses them, e.g.
+  `deliver/brandklout/<client>/<scenario>/<step>/output/assets/drive/<folder name>/`
   ([DELIVER_SYSTEM_RULES.md](../../DELIVER_SYSTEM_RULES.md)). **Never commit images, video or
   zips.**
 - **List before you pull.** Some folders hold multi-GB video and zip files. Pull the subfolder you

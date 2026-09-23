@@ -7,7 +7,7 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 
 > [!IMPORTANT]
 > **Integrity Rule**: any change to the bridge, the kit or the rollout state must be recorded here in the
-> same commit, and mirrored in [PROCESS_INDEX.md](../PROCESS_INDEX.md). Bump the version inside
+> same commit, and mirrored in [PROCESS_INDEX.md](../../PROCESS_INDEX.md). Bump the version inside
 > `kit/ghl-consent-bridge.js` whenever its behaviour changes, then run `node consent-kit.mjs minify`.
 
 ## What goes on every site
@@ -160,7 +160,7 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
 ### Phase 1 — Instatic
 `instatic apply --apply` writes the asset (draft) and reads it back. A SiteFile without an `id` is
 silently dropped. `instatic publish` refuses a site unless the draft matched live before our first
-write **and** nothing has been saved since (tracked in `.tmp/clean-before-apply-<host>.json`). The
+write **and** nothing has been saved since (tracked in `output/clean-before-apply-<host>.json`). The
 script is served same-origin, so `script-src 'self'` is enough.
 
 `instatic termly` reads the site's Termly website UUID from
@@ -323,5 +323,5 @@ WordPress sites have none, and we have no credentials for them.
   origin first.
 
 ## Version Control
-This directive follows the root-level version control rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
-`.tmp/` holds probe output and the per-host publish guards; it is git-ignored except its `.gitignore`.
+This directive follows the root-level version control rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
+`output/` holds probe output and the per-host publish guards; it is git-ignored except its `.gitignore`.

@@ -1,0 +1,10 @@
+{
+  "step": "scenario-5-instatic-release-update/03-update-staging",
+  "toolkits": [
+    "instatic-api-sync",
+    "instatic-domain-origins",
+    "instatic-plugins",
+    "instatic-release",
+    "instatic-site"
+  ]
+}

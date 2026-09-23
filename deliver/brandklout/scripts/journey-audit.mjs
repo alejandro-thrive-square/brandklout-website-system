@@ -75,7 +75,7 @@ function audit(dir) {
 }
 
 /**
- * Deliverable pages live in SUBDIRECTORIES of the package `.tmp`; an `index.html` sitting at the
+ * Deliverable pages live in SUBDIRECTORIES of the package `output`; an `index.html` sitting at the
  * package root is the drafts index — a card listing linking to those pages for client review.
  * Judging it against the journey standard produced a permanent phantom FAIL (0 chapters, 0 pins)
  * that understated the real pass rate.
@@ -92,7 +92,7 @@ function discover() {
   const out = [];
   for (const [wt, client] of CLIENTS) {
     // Scenario 0 layout first; client branches built before 2026-09-23 still use 04-design.
-    const root = ['workflows/03-design-build/.tmp/site-src', 'workflows/03-design-build/.tmp', 'workflows/04-design/.tmp']
+    const root = ['scenario-0-new-site/03-design-build/output/code/site-src', 'workflows/03-design-build/output', 'workflows/04-design/output']
       .map((p) => join(WORKTREE_ROOT, wt, 'deliver/brandklout', client, p))
       .find((p) => existsSync(p));
     if (!root) continue;

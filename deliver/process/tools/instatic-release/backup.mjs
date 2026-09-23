@@ -15,7 +15,7 @@
  * Optional: --railway-backup asks Railway for a native volume backup (volumeInstanceBackupCreate), the
  * only copy that survives the volume itself; --download pulls the DB copy to this machine.
  *
- * Usage (run from the client folder or any folder; output goes to ./.tmp/instatic-release/):
+ * Usage (run from the client folder or any folder; output goes to ./output/instatic-release/):
  *   node backup.mjs --site <env section> --env <production|staging>            plan only, reads Railway
  *   node backup.mjs --site dr-nahlah --env staging --snapshot                  + API snapshot (read only)
  *   node backup.mjs --site dr-nahlah --env staging --apply [--label pre-0.0.20] [--railway-backup] [--download]

@@ -5,7 +5,7 @@
  * Four rules were edited in the Styles panel and never took effect, because
  * `userStyles.css` loaded last and overrode them. They were captured before the
  * migration merged the code-asset values over the top
- * (`.tmp/unpublished-panel-edits.json`), as published-vs-draft pairs.
+ * (`output/unpublished-panel-edits.json`), as published-vs-draft pairs.
  *
  * This replays that delta — the exact property changes the user made — onto the
  * current registry. Now that the panel is the only source, they will render.
@@ -16,7 +16,7 @@ import { readFileSync } from 'node:fs'
 import { getSite, saveShell } from './insta-api.mjs'
 
 const apply = process.argv.includes('--apply')
-const edits = JSON.parse(readFileSync('.tmp/unpublished-panel-edits.json', 'utf8'))
+const edits = JSON.parse(readFileSync('output/unpublished-panel-edits.json', 'utf8'))
 const { site: shell, seq } = await getSite()
 const rules = shell.styleRules ?? {}
 

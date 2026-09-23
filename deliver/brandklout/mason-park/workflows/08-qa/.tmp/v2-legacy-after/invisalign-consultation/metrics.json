@@ -1,0 +1,142 @@
+{
+  "bodyHeight": {
+    "390": 2877,
+    "768": 2657,
+    "1440": 2189
+  },
+  "overflow": {
+    "390": {
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "innerWidth": 390,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "qz-hero__glow",
+          "left": -78,
+          "right": 164
+        },
+        {
+          "tag": "div",
+          "cls": "qz-proof__drift",
+          "left": 0,
+          "right": 2324
+        }
+      ]
+    },
+    "768": {
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "innerWidth": 768,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "qz-hero__glow",
+          "left": -154,
+          "right": 323
+        },
+        {
+          "tag": "div",
+          "cls": "qz-proof__drift",
+          "left": 0,
+          "right": 2975
+        }
+      ]
+    },
+    "1440": {
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "innerWidth": 1440,
+      "offenders": [
+        {
+          "tag": "div",
+          "cls": "qz-hero__glow",
+          "left": -288,
+          "right": 605
+        },
+        {
+          "tag": "div",
+          "cls": "qz-proof__drift",
+          "left": 0,
+          "right": 5579
+        }
+      ]
+    }
+  },
+  "sectionsAt1440": [
+    {
+      "id": "quiz",
+      "class": "section_qz-hero",
+      "offsetTop": 81,
+      "height": 602,
+      "heading": "Book Your Free Consultation"
+    },
+    {
+      "id": null,
+      "class": "qz-div section_qz-stories lw-sec",
+      "offsetTop": 683,
+      "height": 791,
+      "heading": "Hear From Our Patients"
+    },
+    {
+      "id": null,
+      "class": "qz-div section_qz-proof lw-sec",
+      "offsetTop": 1473,
+      "height": 425,
+      "heading": "One dentist, start to finish"
+    }
+  ],
+  "sectionsByWidth": {
+    "390": [
+      {
+        "class": "section_qz-hero",
+        "height": 1160,
+        "heading": "Book Your Free Consultation"
+      },
+      {
+        "class": "qz-div section_qz-stories lw-sec",
+        "height": 874,
+        "heading": "Hear From Our Patients"
+      },
+      {
+        "class": "qz-div section_qz-proof lw-sec",
+        "height": 338,
+        "heading": "One dentist, start to finish"
+      }
+    ],
+    "768": [
+      {
+        "class": "section_qz-hero",
+        "height": 1123,
+        "heading": "Book Your Free Consultation"
+      },
+      {
+        "class": "qz-div section_qz-stories lw-sec",
+        "height": 812,
+        "heading": "Hear From Our Patients"
+      },
+      {
+        "class": "qz-div section_qz-proof lw-sec",
+        "height": 310,
+        "heading": "One dentist, start to finish"
+      }
+    ],
+    "1440": [
+      {
+        "class": "section_qz-hero",
+        "height": 602,
+        "heading": "Book Your Free Consultation"
+      },
+      {
+        "class": "qz-div section_qz-stories lw-sec",
+        "height": 791,
+        "heading": "Hear From Our Patients"
+      },
+      {
+        "class": "qz-div section_qz-proof lw-sec",
+        "height": 425,
+        "heading": "One dentist, start to finish"
+      }
+    ]
+  }
+}

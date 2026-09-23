@@ -142,9 +142,9 @@ stock UI.
 
 ```bash
 cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs link-editor .tmp/link-editor.zip
-node install-plugin.mjs .tmp/link-editor.zip            # dry run — shows the grants
-node install-plugin.mjs .tmp/link-editor.zip --apply
+node pack-plugin.mjs link-editor output/link-editor.zip
+node install-plugin.mjs output/link-editor.zip            # dry run — shows the grants
+node install-plugin.mjs output/link-editor.zip --apply
 ```
 
 Then **reload the editor tab**: plugins activate at admin boot, and
@@ -171,5 +171,5 @@ than a quiet divergence.
 ## Version Control
 
 Follows the version control rules in
-[SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md). The packaged `.zip` under
-`.tmp/` is a build artifact and is not committed.
+[SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). The packaged `.zip` under
+`output/` is a build artifact and is not committed.

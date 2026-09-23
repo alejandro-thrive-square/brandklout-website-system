@@ -25,7 +25,7 @@
  * USAGE (site id from the client docs/mcp-access.md)
  *   node wf-register-script.mjs --site <id> --name BrandkloutConsentBridge --version 2.2.0 \
  *        --file kit/ghl-consent-bridge.min.js [--location header|footer] [--dry]
- *   > .tmp/register.log 2>&1
+ *   > output/register.log 2>&1
  * Keep the unminified source and the .min.js in the client folder (e.g. <client>/site-scripts/)
  * and bump --version on every change: a registered version is immutable.
  */

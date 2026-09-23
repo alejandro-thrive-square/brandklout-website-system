@@ -1,0 +1,6 @@
+{"context":"Discover settings keys for form elements to wire names, values, options and redirect.","siteId":"698111847e9608eb30ee21c6","pageId":"6a8299c905e084f80b8d481e","actions":[
+{"label":"form","get_settings":{"type":"query_settings","element_id":{"component":"6a8299c905e084f80b8d481e","element":"9f23c867-01e7-f002-fb11-fa7e93929028"},"queries":[{"label":"all"}]}},
+{"label":"radio","get_settings":{"type":"query_settings","element_id":{"component":"6a8299c905e084f80b8d481e","element":"e18b78c5-4e10-753e-4c73-eb9d8646c50f"},"queries":[{"label":"all"}]}},
+{"label":"select","get_settings":{"type":"query_settings","element_id":{"component":"6a8299c905e084f80b8d481e","element":"7599ba79-4171-46d4-2c96-6851e7e285b8"},"queries":[{"label":"all"}]}},
+{"label":"button","get_settings":{"type":"query_settings","element_id":{"component":"6a8299c905e084f80b8d481e","element":"5843f269-cb15-9c00-597a-38ac7c3c8c30"},"queries":[{"label":"all"}]}}
+]}

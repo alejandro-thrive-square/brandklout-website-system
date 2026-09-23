@@ -1,10 +1,10 @@
 """Before/after contact sheet for Magnific upscales (or any AI-touched photo of a real person).
 
-Origin: bk-mason-park-kids, workflows/03-core-pages/.tmp/contact-sheet.py (2026-09-09, caught two staff
+Origin: bk-mason-park-kids, workflows/03-core-pages/output/contact-sheet.py (2026-09-09, caught two staff
 portraits "replaced" by other people). Generalized 2026-09-23: pairs come from the same jobs JSON that
 upscale-images.mjs reads.
 
-    python contact-sheet.py --jobs upscale-jobs.json [--src-dir DIR] [--up .tmp/_upscaled] [--height 620]
+    python contact-sheet.py --jobs upscale-jobs.json [--src-dir DIR] [--up output/_upscaled] [--height 620]
 
 Writes <up>/_review/<key>.png: ORIGINAL on the left (nearest-neighbour to the same height, so its real
 pixels stay visible) against the UPSCALE on the right. Every one of these is a real, named person: open
@@ -20,7 +20,7 @@ from PIL import Image
 ap = argparse.ArgumentParser()
 ap.add_argument("--jobs", required=True)
 ap.add_argument("--src-dir")
-ap.add_argument("--up", default=os.path.join(".tmp", "_upscaled"))
+ap.add_argument("--up", default=os.path.join("output", "_upscaled"))
 ap.add_argument("--height", type=int, default=620)
 a = ap.parse_args()
 

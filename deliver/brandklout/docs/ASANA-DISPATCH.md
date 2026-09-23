@@ -4,7 +4,7 @@ Maps the work assigned to Webzite in Brandklout's Asana onto client folders in t
 parallel agents can each take one client without colliding.
 
 - **Source**: Asana workspace `1210572425689866`, pulled 2026-08-05 via
-  [`../scripts/asana-pull.mjs`](../scripts/README.md). Raw artifacts: `../.tmp/asana/`.
+  [`../scripts/asana-pull.mjs`](../scripts/README.md). Raw artifacts: `../output/asana/`.
 - **Assignee**: Alejandro Milano `<alejandro@thrivesquare.com>` (gid `1217162291350352`).
 - **Access rules**: [mcp-access.md](./mcp-access.md).
 
@@ -16,16 +16,16 @@ parallel agents can each take one client without colliding.
 
 | Client | Folder | Asana parent task | Pages / scope | Due | Folder status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | Three local journeys and staging build complete; pasteable-component migration in progress |
-| Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | Six local journeys complete; Webflow build not dispatched |
-| Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Three local/staging journeys re-themed; pasteable-component migration in progress |
-| Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
-| Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | — | 2 full websites | none | Scope only; no build dispatched |
-| Institute for Advanced Dentistry | [`institute-for-advanced-dentistry/`](../institute-for-advanced-dentistry/docs/project-overview.md) | `1217929763942271` (Design Home Page), `1215476573810829` (Complete Client Website) — project `1215461031852894`, pulled 2026-09-03 | Full site from scratch; home page first | 2026-09-21 (home page design) | Initialized 2026-09-03; worktree `bk-ifa-dentistry`; nothing built |
+| Grand Mission Dentistry | `grand-mission-dentistry/` (`grand-mission-dentistry/docs/project-overview.md` on the client branch) | `1217040406855578` | 3 landing pages | 2026-08-05 | Three local journeys and staging build complete; pasteable-component migration in progress |
+| Arvada Dental Center & Implants | `arvada-dental-center/` (`arvada-dental-center/docs/project-overview.md` on the client branch) | `1217040406855586` | 6 landing pages | 2026-08-05 | Six local journeys complete; Webflow build not dispatched |
+| Mason Park Dental | `mason-park/` (`mason-park/docs/project-overview.md` on the client branch) | `1217040406855582` | 3 landing pages | 2026-08-05 | Three local/staging journeys re-themed; pasteable-component migration in progress |
+| Dr. Esam Nahlah | `dr-nahlah/` (`dr-nahlah/docs/project-overview.md` on the client branch) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
+| Stone Dental Implant Center | `stone-dental-implant-center/` (`stone-dental-implant-center/docs/project-overview.md` on the client branch) | — | 2 full websites | none | Scope only; no build dispatched |
+| Institute for Advanced Dentistry | `institute-for-advanced-dentistry/` (`institute-for-advanced-dentistry/docs/project-overview.md` on the client branch) | `1217929763942271` (Design Home Page), `1215476573810829` (Complete Client Website) — project `1215461031852894`, pulled 2026-09-03 | Full site from scratch; home page first | 2026-09-21 (home page design) | Initialized 2026-09-03; worktree `bk-ifa-dentistry`; nothing built |
 
 Not in Asana but present in the repo:
 - `livewell-dental/` (no assigned tasks in this pull).
-- [`west-la-implants/`](../west-la-implants/docs/project-overview.md) — added 2026-08-20, direct from
+- `west-la-implants/` (`west-la-implants/docs/project-overview.md` on the client branch) — added 2026-08-20, direct from
   Brandklout. **Full site build from scratch** for https://westlaimplants.com/ (existing WordPress,
   42 pages + 46 posts). No Asana task exists; ask Brandklout to create one so a GID can be recorded
   in artifacts. Worktree `bk-west-la-implants`.
@@ -77,7 +77,7 @@ like the reference is a commercial failure, not a success.
 Practical method per page:
 
 1. **Capture** the reference at full page, desktop + mobile, into
-   `workflows/01-client-inquiry/.tmp/reference-captures/<page-slug>/`.
+   `scenario-0-new-site/01-client-inquiry/output/reference-captures/<page-slug>/`.
 2. **Extract** the section order, the offer/proof/CTA rhythm, and the copy angles into a short
    structure note next to the captures. That note is the brief.
 3. **Design original** work against the client's own brand (see the content rule below).
@@ -94,11 +94,11 @@ Practical method per page:
 Local first, in the owning client's workflow folder:
 
 ```
-deliver/brandklout/<client>/workflows/03-design-build/.tmp/<page-slug>/
+deliver/brandklout/<client>/scenario-0-new-site/03-design-build/output/<page-slug>/
 ```
 
 Each page ships as a self-contained coded HTML/CSS/JS package, the same pattern as
-[`livewell-dental`](../livewell-dental/docs/project-overview.md). **State the full path of what you
+`livewell-dental` (`livewell-dental/docs/project-overview.md` on the client branch). **State the full path of what you
 built** when reporting back, so it can be opened and reviewed without hunting.
 
 Webflow build (`webflow-build`) comes after local approval. Brandklout uses one shared
@@ -127,7 +127,7 @@ than per-client direction:
 Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
 a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
 [`asana-context.mjs`](../scripts/README.md#getting-the-real-brief--asana-contextmjs) and read
-`<client>/workflows/01-client-inquiry/.tmp/asana-context/CONTEXT.md`.
+`<client>/scenario-0-new-site/01-client-inquiry/output/asana-context/CONTEXT.md`.
 
 They are the real brief, and they carry verified practice facts — doctors, offers, phone numbers,
 genuine testimonials — that remove most of the "never invent content" risk. Key gotcha: attachments
@@ -160,18 +160,18 @@ times from scratch:
 | Thank-you page | Grand Mission, Mason Park |
 
 The thank-you page has an identical 4-section spec in both clients. The prior dental landing-page
-work in [`livewell-dental/`](../livewell-dental/docs/project-overview.md) is the closest existing
+work in `livewell-dental/` (`livewell-dental/docs/project-overview.md` on the client branch) is the closest existing
 reference.
 
 All four archetypes were built on Arvada 2026-08-05, plus a shared nine-beat spine, a reusable
 `brand.css`/`brand.js`, bot-challenge scrapers, and a warning that the Greenspot NPS reference is
 Cloudflare-blocked. Reuse rather than rebuild —
-[`arvada-dental-center/docs/shared-learnings.md`](../arvada-dental-center/docs/shared-learnings.md).
-- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05,
+`arvada-dental-center/docs/shared-learnings.md` (`arvada-dental-center/docs/shared-learnings.md` on the client branch).
+- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/output/thank-you/` (2026-08-05,
   rebuilt as a 4-chapter journey 2026-08-06). Client-specific values are isolated to one constants
   block — Grand Mission should clone, not rebuild.
 - **Before adding a manual `ScrollTrigger.refresh()`, read the bug note in
-  `mason-park/workflows/04-design/.tmp/README.md`** — racing SplitText's post-font re-split reverts
+  `mason-park/workflows/04-design/output/README.md`** — racing SplitText's post-font re-split reverts
   every pin on the page, silently, and makes later chapters unreachable by scrolling.
 - **Heads-up on the GHL preview reference** (`sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC`):
   it is a *Grand Mission* page. Its award, insurance carriers, review count and hours are theirs — do

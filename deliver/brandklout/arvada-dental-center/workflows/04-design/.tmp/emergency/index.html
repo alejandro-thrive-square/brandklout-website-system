@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en" data-asana-gid="1217162344633758">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emergency Dentist in Arvada, CO | Same-Day Care | Arvada Dental Center</title>
+<meta name="description" content="Emergency dentist in Arvada, CO. Toothache, broken teeth, infections and knocked-out teeth. Same-day appointments whenever possible. Call (303) 421-7611.">
+<meta name="robots" content="noindex, nofollow">
+<!--
+  Landing page — Emergency Dentistry.  Journey architecture: 7 chapters.
+  Asana task: 1217162344633758 (parent 1217040406855586)
+  Reference cited: smilecenter.com/treatments/emergency-dentistry
+    Used for SECTION ORDER AND COPY ANGLES ONLY, per docs/ASANA-DISPATCH.md.
+
+  IMPORTANT DEVIATION FROM THE REFERENCE: the reference headlines "Emergency Dentist
+  OPEN NOW" and claims walk-ins and guaranteed same-day appointments. Arvada Dental
+  Center is open Monday-Friday 8am-5pm ONLY and its own copy says it will make space
+  "whenever possible" — not guaranteed. Claiming 24/7 availability on a paid-traffic
+  page would be a lie the visitor discovers by phoning, so this page runs a LIVE
+  open/closed status instead and states the real promise.
+
+  All copy, conditions, reviews and imagery are the client's own. The first-minutes
+  sequence in Chapter 02 is the practice's own knocked-out-tooth advice, in order —
+  no timings are attached to it, because none were published.
+
+  Scroll-driven chapters (pinned + scrubbed):
+    01 Right Now         — the statement resolves, then every symptom we treat surfaces
+    02 The First Minutes — the dial sweeps and each instruction lights in turn
+    04 When You Arrive   — the visit travels horizontally
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_shared/journey.css">
+<style>
+  @media (prefers-reduced-motion: reduce){
+    [data-rv],[data-anim="hide"],.wz-line>*,.wz-word,
+    .dial *,.path-track,.sym-card{
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      clip-path:none!important;transition:none!important;animation:none!important}
+    .nav-progress{display:none!important}
+  }
+  html:not(.js-motion) [data-rv]{opacity:1}
+
+  /* The 911 note.
+
+     It was a tinted rounded rectangle with a 4px coloured left border — the
+     default "alert" shape every framework ships and every generated page
+     reaches for, which is exactly why it read as boilerplate rather than as
+     this practice speaking. It is now a printed safety notice: no fill, no
+     radius, ruled top and bottom, with the number itself set as the object on
+     the left instead of buried in the sentence. The seriousness comes from
+     the typography and the restraint, not from a red wash.
+
+     A grid, so the rule under the heading runs the full measure and the copy
+     hangs off the number the way it would on a printed card. */
+  .urgent{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(1rem,2.4vw,1.75rem);
+    align-items:start;border-block:1px solid rgba(64,56,48,.16);
+    padding-block:clamp(1rem,2.2vw,1.4rem);font-size:calc(.9rem*var(--s-tx));
+    color:var(--fg-soft);max-width:62ch}
+  .urgent__num{grid-row:1/span 2;font-family:var(--f-display);font-weight:700;
+    font-size:calc(2.5rem*var(--s-h2));line-height:.9;color:#c0392b;
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+    padding-right:clamp(1rem,2.4vw,1.75rem);border-right:1px solid rgba(64,56,48,.16);
+    align-self:stretch;display:flex;align-items:center}
+  .urgent__head{font-family:var(--f-ui);font-size:calc(.7rem*var(--s-tx));letter-spacing:.2em;
+    text-transform:uppercase;font-weight:700;color:#a8291c;margin-bottom:.5rem}
+  .urgent p{line-height:1.65}
+  .urgent strong{color:var(--fg);font-weight:600}
+  @media(max-width:560px){
+    .urgent{grid-template-columns:1fr;gap:.7rem}
+    .urgent__num{grid-row:auto;border-right:0;border-bottom:1px solid rgba(64,56,48,.16);
+      padding-right:0;padding-bottom:.5rem;font-size:calc(2rem*var(--s-h2))}
+  }
+  .tel-big{font-family:var(--f-display);font-weight:700;line-height:1.05;
+    font-size:calc(3.4rem*var(--s-h2));color:var(--offer);display:inline-block}
+  .tel-big:hover{color:var(--fg)}
+</style>
+<script src="../_shared/vendor/gsap/gsap.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollSmoother.min.js"></script>
+<script src="../_shared/vendor/gsap/SplitText.min.js"></script>
+<script src="../_shared/journey.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
+    </a>
+    <div class="nav-mid">
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+    </div>
+    <div class="nav-right">
+      <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <a class="nav-tel tel" href="tel:+13034217611">(303) 421-7611</a>
+      <a class="btn btn--offer nav-cta tel magnetic" href="tel:+13034217611"><span>Call now</span></a>
+    </div>
+  </div>
+</header>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="main">
+
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL   (the phone is the offer here; the medical-emergency
+     warning sits inside this chapter rather than a band further down, because
+     it is the first thing a visitor in trouble needs to read)
+     ========================================================================== -->
+<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <style>
+    .ch-arrival{min-height:100svh;display:flex;align-items:center;overflow:hidden;
+      padding-top:clamp(6rem,12vw,9rem);padding-bottom:clamp(3rem,7vw,6rem)}
+    .ch-arrival .ch-media img{transform:scale(1.12)}
+    .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(90% 70% at 76% 34%,rgba(211,170,90,.16),transparent 62%),
+        linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 42%,rgba(253,248,239,.56) 74%,rgba(253,248,239,.3) 100%),
+        linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.28) 30%,rgba(253,248,239,.9) 100%)}
+    .ch-arrival .in{max-width:62rem}
+    .ch-arrival h1{font-size:var(--d1);max-width:13ch}
+    .ch-arrival .lede{max-width:54ch}
+    .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center;
+      padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
+    .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--offer);flex:none}
+  </style>
+
+  <div class="ch-media" aria-hidden="true">
+    <img id="arrImg" src="../_shared/assets/dental-patient-in-need-of-emergency-treatment.jpg" alt="" style="object-position:60% 40%">
+  </div>
+
+  <div class="wrap ch-in in">
+    <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
+    <h1 class="d1" data-anim="hide" id="arrTitle">In pain right now?<br>Call us first.</h1>
+    <p class="lede mt" data-anim="hide" id="arrLead" data-status-swap
+       data-open-text="We're open right now. Call and we'll get you assessed today — whenever possible we make space in the schedule the same day."
+       data-closed-text="We're closed at the moment, but leave us a message or call the moment we open at 8am. Whenever possible we make space in the schedule the same day.">
+      Whenever possible we make space in the schedule the same day.
+    </p>
+    <div class="btn-row mt" data-anim="hide" id="arrActions">
+      <a class="btn btn--offer btn--lg tel magnetic" href="tel:+13034217611">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>(303) 421-7611</span>
+      </a>
+      <a class="btn btn--ghost btn--lg magnetic" href="#callback"><span>Request a call back</span></a>
+    </div>
+    <div class="trust mt" data-anim="hide" id="arrTrust">
+      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sedation available for anxious patients</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>6695 Wadsworth Blvd, Arvada</span>
+    </div>
+
+    <div class="urgent mt-l" role="note" data-anim="hide" id="arr911">
+      <span class="urgent__num" aria-hidden="true">911</span>
+      <p class="urgent__head">If this is a medical emergency</p>
+      <p>Neck or head pain, uncontrolled bleeding, dizziness, or severe trauma need
+        <strong>911</strong> or the nearest medical facility, not a dental appointment. Medical
+        personnel are better equipped for those symptoms, and waiting on a dental slot costs you
+        time you may not have.</p>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var root = document.getElementById('arrival');
+    var hide = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(hide, { visibility: 'visible' });
+    if (W.reduced) { gsap.set(hide, { opacity: 1, y: 0 }); return; }
+
+    var tl = gsap.timeline({ delay: .12 });
+    var split = W.splitLines(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 112 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.1, stagger: .09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -24, duration: .9, ease: 'power3.out' }, .05)
+      .from('#arrLead',    { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .42)
+      .from('#arrActions', { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .52)
+      .from('#arrTrust > *', { opacity: 0, y: 20, duration: .8, stagger: .08, ease: 'power3.out' }, .62)
+      .from('#arr911',    { opacity: 0, y: 24, duration: .9, ease: 'power3.out' }, .74)
+      .from('#arrImg',    { opacity: 0, scale: 1.26, duration: 1.8, ease: 'power3.out' }, 0);
+
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: .6 } })
+      .to(root.querySelector('.in'), { yPercent: -12, opacity: .12, ease: 'none' }, 0)
+      .to('#arrImg', { yPercent: 6, scale: 1.2, ease: 'none' }, 0);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 01 — RIGHT NOW   (pinned; the statement resolves, then every
+     symptom the practice treats surfaces in turn)
+     ========================================================================== -->
+<section class="ch ch-now" id="rightnow" data-chapter="1" data-chapter-name="Right Now">
+  <style>
+    .ch-now{background:var(--paper-3)}
+    .ch-now .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
+    .ch-now .big{font-family:var(--f-display);font-size:calc(3.5rem*var(--s-d2));
+      line-height:1.16;max-width:22ch;font-weight:600}
+    .ch-now .big .wz-word{color:rgba(64,56,48,.22)}
+    .sym-grid{display:grid;gap:.6rem;margin-top:clamp(1.8rem,3.5vw,2.8rem);grid-template-columns:1fr}
+    .sym-card{border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;
+      background:rgba(64,56,48,.04)}
+    .sym-card h3{font-size:calc(.98rem*var(--s-tx));margin-bottom:.25rem}
+    .sym-card p{font-size:calc(.86rem*var(--s-tx));color:var(--fg-body)}
+    @media(min-width:640px){ .sym-grid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1100px){ .sym-grid{grid-template-columns:repeat(4,1fr)} }
+  </style>
+
+  <div class="stage" id="nowPin">
+    <div class="wrap">
+      <div class="chapter-tag"><i></i><span class="label">Right Now</span></div>
+      <p class="big" id="nowBig">Dental problems get worse quickly and rarely settle on their own.
+        Find what is happening to you.</p>
+
+      <div class="sym-grid" id="symGrid">
+        <article class="sym-card"><h3>Sudden or severe toothache</h3><p>Pain that keeps you awake, or that has stopped responding to painkillers.</p></article>
+        <article class="sym-card"><h3>Knocked-out tooth</h3><p>Time-critical. Keep the tooth moist, handle it by the crown not the root, and call immediately.</p></article>
+        <article class="sym-card"><h3>Fractured or broken tooth</h3><p>From an accident, a sports injury, or biting down on something hard.</p></article>
+        <article class="sym-card"><h3>Infected or abscessed tooth</h3><p>Swelling, a bad taste, or fever alongside the pain. Infection needs treating, not waiting out.</p></article>
+        <article class="sym-card"><h3>Loose tooth or lost filling</h3><p>A filling that has come out, or a tooth that has started to move.</p></article>
+        <article class="sym-card"><h3>Chipped or cracked crown</h3><p>Damage to existing work, including a crown that has come off entirely.</p></article>
+        <article class="sym-card"><h3>Painful or inflamed gums</h3><p>Gums that bleed, throb or have swollen up over a short period.</p></article>
+        <article class="sym-card"><h3>Broken or damaged denture</h3><p>A denture that has cracked or no longer fits, leaving you unable to eat properly.</p></article>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('nowPin'),
+        big = document.getElementById('nowBig'),
+        cards = gsap.utils.toArray('#symGrid .sym-card');
+
+    if (W.reduced) return;
+    gsap.set(cards, { opacity: 0, y: 36 });
+
+    var tl = gsap.timeline({
+      scrollTrigger: W.scene(pin, { run: 2.4, scrub: .3 })
+    });
+
+    /* One left-to-right sweep, white into amber. The symptom cards deal in
+       from the closing clause, tied to the length of this paragraph. */
+    var sweep = W.sweepWords(tl, big, { accent: '#d3aa5a', tail: 5, step: .18 });
+    tl.to(cards, { opacity: 1, y: 0, stagger: .08, ease: 'none' }, sweep.tail);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 02 — THE FIRST MINUTES   (signature moment: pinned, and the dial
+     sweeps as you scroll while each instruction lights in turn. These are the
+     practice's own knocked-out-tooth instructions, in their published order.
+     No timings are attached to them, because none were published.)
+     ========================================================================== -->
+<section class="ch ch-clock" id="firstminutes" data-chapter="2" data-chapter-name="The First Minutes">
+  <style>
+    .ch-clock{background:var(--paper)}
+    .ch-clock .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
+    .ch-clock .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-clock h2{font-size:var(--h2);max-width:14ch}
+    .dial-fig{position:relative;justify-self:center;width:min(72vw,320px);max-width:100%}
+    .dial{width:100%;height:auto;display:block;overflow:visible;transform:rotate(-90deg)}
+    .dial .track{fill:none;stroke:rgba(64,56,48,.12);stroke-width:14}
+    .dial .arc{fill:none;stroke:var(--amber);stroke-width:14;stroke-linecap:round}
+    .dial .pip{fill:rgba(64,56,48,.3)}
+    .dial-mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+    .dial-mid b{display:block;font-family:var(--f-display);font-size:calc(3.6rem*var(--s-h2));
+      color:var(--fg);line-height:1;font-variant-numeric:tabular-nums}
+    .dial-mid span{font-family:var(--f-ui);font-size:calc(.62rem*var(--s-tx));letter-spacing:.22em;
+      text-transform:uppercase;color:var(--fg-soft);margin-top:.4rem;display:block}
+    .clk-steps{display:grid;margin-top:clamp(1.2rem,2.4vw,2rem)}
+    .clk-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+      padding-block:clamp(.8rem,1.6vw,1.1rem);border-top:1px solid var(--line);opacity:.3}
+    .clk-step:last-child{border-bottom:1px solid var(--line)}
+    .clk-step b{font-family:var(--f-display);font-size:calc(1.3rem*var(--s-tx));color:var(--offer);line-height:1;
+      font-variant-numeric:tabular-nums}
+    .clk-step h3{font-size:calc(1rem*var(--s-tx));margin-bottom:.2rem}
+    .clk-step p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
+    .clk-note{margin-top:1rem;font-size:calc(.78rem*var(--s-tx));color:var(--fg-soft)}
+    @media(min-width:900px){
+      .ch-clock .lay{grid-template-columns:.9fr 1.1fr;gap:clamp(2.5rem,5vw,5rem)}
+      .dial-fig{width:min(32vw,340px)}
+    }
+  </style>
+
+  <div class="stage" id="clkPin">
+    <div class="wrap lay">
+      <div class="dial-fig">
+        <svg class="dial" id="dialSvg" viewBox="0 0 240 240" role="img"
+             aria-label="A dial showing progress through the four things to do first when a tooth is knocked out">
+          <circle class="track" cx="120" cy="120" r="96"/>
+          <circle class="arc" id="dialArc" cx="120" cy="120" r="96"
+                  stroke-dasharray="603" stroke-dashoffset="603"/>
+          <g class="pip">
+            <circle cx="120" cy="10" r="4"/><circle cx="230" cy="120" r="4"/>
+            <circle cx="120" cy="230" r="4"/><circle cx="10" cy="120" r="4"/>
+          </g>
+        </svg>
+        <div class="dial-mid"><div><b id="dialStep">1</b><span>of four</span></div></div>
+      </div>
+
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">The First Minutes</span></div>
+        <h2 class="h2" id="clkTitle">A knocked-out tooth, in order</h2>
+        <p class="lede mt-s">This is the one dental emergency where the clock genuinely matters. Four things,
+          in this order, before anything else.</p>
+
+        <div class="clk-steps" id="clkSteps">
+          <div class="clk-step"><b>01</b><div><h3>Pick it up by the crown</h3><p>The crown is the part you chew with. Do not handle the root.</p></div></div>
+          <div class="clk-step"><b>02</b><div><h3>Keep it moist</h3><p>In milk, or in your own saliva. Drying it out is what does the damage.</p></div></div>
+          <div class="clk-step"><b>03</b><div><h3>Do not scrub it</h3><p>Rinsing it clean sounds sensible and is exactly the wrong instinct.</p></div></div>
+          <div class="clk-step"><b>04</b><div><h3>Call immediately</h3><p><a class="tel" href="tel:+13034217611" style="color:var(--offer);font-weight:700">(303) 421-7611</a> — whenever possible we make space in the schedule the same day.</p></div></div>
+        </div>
+
+        <p class="clk-note">For severe trauma, uncontrolled bleeding or dizziness, call 911 rather than
+          waiting on a dental appointment.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('clkPin'),
+        arc = document.getElementById('dialArc'),
+        num = document.getElementById('dialStep'),
+        steps = gsap.utils.toArray('#clkSteps .clk-step');
+
+    W.headline(document.getElementById('clkTitle'), { start: 'top 86%' });
+
+    if (W.reduced) {
+      gsap.set(arc, { attr: { 'stroke-dashoffset': 0 } });
+      gsap.set(steps, { opacity: 1 });
+      num.textContent = '4';
+      return;
+    }
+
+    gsap.set(steps, { opacity: .3 });
+    var state = { p: 0, idx: -1 };
+
+    function paint() {
+      gsap.set(arc, { attr: { 'stroke-dashoffset': 603 * (1 - state.p) } });
+      var i = Math.max(0, Math.min(3, Math.floor(state.p * 4 - 0.0001)));
+      if (state.p <= 0) i = 0;
+      num.textContent = String(i + 1);
+      if (i !== state.idx) {
+        state.idx = i;
+        steps.forEach(function (s, n) { gsap.to(s, { opacity: n === i ? 1 : .3, duration: .25 }); });
+      }
+    }
+
+    gsap.timeline({
+      scrollTrigger: W.scene(pin, { run: 2.8, scrub: .3 })
+    }).to(state, { p: 1, ease: 'none', duration: 1, onUpdate: paint }, 0);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 03 — WHAT WE CAN DO TODAY
+     ========================================================================== -->
+<section class="ch ch-today" id="today" data-chapter="3" data-chapter-name="What We Can Do Today" data-theme="light">
+  <style>
+    .ch-today{background:var(--bg);overflow:hidden}
+    .ch-today .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-today h2{font-size:var(--h2);max-width:15ch}
+    .ch-today .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:16/11;
+      background:var(--paper-3);clip-path:inset(0 0 100% 0)}
+    .ch-today .plate img{width:100%;height:100%;object-fit:cover}
+    .why{margin-top:clamp(2.5rem,5vw,4rem)}
+    .callout{background:linear-gradient(150deg,#fff8ef,#ffeeda);
+      border:1px solid rgba(211,170,90,.42);border-radius:var(--radius-lg);
+      padding:clamp(1.5rem,3vw,2.4rem);text-align:center;margin-top:clamp(2.5rem,5vw,4rem);
+      display:grid;gap:.5rem;justify-items:center;color:#4a3418}
+    .callout .lbl{font-family:var(--f-ui);font-size:calc(.68rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;
+      font-weight:700;color:var(--amber-ink)}
+    .callout .tel-big{color:var(--amber-deep)}
+    .callout .tel-big:hover{color:#4a3418}
+    .callout .status{border-color:rgba(74,52,24,.25);color:#7a6244}
+    @media(min-width:900px){ .ch-today .lay{grid-template-columns:1.05fr .95fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="lay">
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">What We Can Do Today</span></div>
+        <h2 class="h2" id="todTitle">A trip to the ER is rarely the right answer</h2>
+        <p class="lede mt-s" data-rv>These are all treated here, in one place, by the team you would see anyway.</p>
+        <ul class="checks mt" id="todList" style="grid-template-columns:1fr">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Root canal therapy</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Repair of a loose or lost filling</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Treatment of painful infections</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Broken tooth repair</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Abscess treatment</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Crown repair and replacement</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Oral surgery and extractions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Denture repair</li>
+        </ul>
+      </div>
+      <figure class="plate" id="todPlate" style="margin:0">
+        <img id="todImg" src="../_shared/assets/conditions-copy.jpg"
+             alt="Dentist reviewing a patient's dental imaging at Arvada Dental Center" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="why">
+      <p class="eyebrow" data-rv>Built for the appointment you didn't plan</p>
+      <div class="grid g3 mt" id="whyGrid">
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <h3 class="h3">Same day whenever possible</h3>
+          <p>The practice's own commitment: "whenever possible, we'll make space in our schedule so that we can see you the same day."</p>
+        </article>
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3 class="h3">Sedation for anxious patients</h3>
+          <p>Dr. Bennett is board certified to administer IV sedation himself, so fear of the chair doesn't have to mean staying in pain.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div>
+          <h3 class="h3">Diagnosed properly, quickly</h3>
+          <p>Modern treatment rooms with advanced imaging, so the cause gets identified rather than guessed at, and sterilisation meets current standards.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="callout" data-rv>
+      <p class="lbl">Stay calm and contact us without delay</p>
+      <a class="tel-big tel" href="tel:+13034217611">(303) 421-7611</a>
+      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <p style="font-size:calc(.9rem*var(--s-tx));color:#7a6244;margin:0">Monday to Friday, 8am to 5pm &middot; 6695 Wadsworth Blvd, Arvada, CO 80003</p>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('todTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#todPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+    gsap.to('#todPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#todPlate', start: 'top 84%' } });
+    gsap.fromTo('#todImg', { scale: 1.2, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#todPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#todList li', { opacity: 0, x: -20, duration: .55, stagger: .06, ease: 'power2.out',
+      scrollTrigger: { trigger: '#todList', start: 'top 88%' } });
+    gsap.from('#whyGrid .card', { opacity: 0, y: 38, duration: .9, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#whyGrid', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — WHEN YOU ARRIVE   (pinned horizontal)
+     ========================================================================== -->
+<section class="ch ch-arrive" id="arrive" data-chapter="4" data-chapter-name="When You Arrive">
+  <style>
+    .ch-arrive{background:var(--paper);overflow:hidden}
+    .ch-arrive .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-arrive .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    .ch-arrive h2{font-size:var(--h2);max-width:16ch}
+    .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
+      width:max-content;align-items:stretch}
+    .path-card{width:clamp(250px,27vw,400px);flex:none;border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
+      display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,background .5s ease}
+    .path-card .no{font-family:var(--f-display);font-size:calc(3rem*var(--s-h2));color:var(--offer);
+      line-height:.9;opacity:.35}
+    .path-card h3{font-size:var(--h3)}
+    .path-card p{font-size:calc(.92rem*var(--s-tx));color:var(--fg-body)}
+    .ch-arrive .bar{position:absolute;left:var(--gutter);right:var(--gutter);
+      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .ch-arrive .bar i{position:absolute;inset:0;background:var(--amber);transform:scaleX(0);transform-origin:left}
+    @media(max-width:700px){ .path-card{width:76vw} }
+  </style>
+
+  <div class="pin" id="arvPin">
+    <div class="head">
+      <div class="chapter-tag"><i></i><span class="label">When You Arrive</span></div>
+      <h2 class="h2">What actually happens next.</h2>
+    </div>
+    <div class="path-track" id="arvTrack">
+      <article class="path-card">
+        <span class="no">01</span>
+        <h3>You call, we triage</h3>
+        <p>Tell us what is happening. Whenever possible we make space in the schedule so we can see you the
+          same day — and if this is a case for 911 instead, we will say so on the phone.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">02</span>
+        <h3>Imaging, then a cause</h3>
+        <p>Modern treatment rooms with advanced imaging, so the source of the pain gets identified rather
+          than guessed at.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">03</span>
+        <h3>Out of pain first</h3>
+        <p>Sedation is available if the chair is the problem — a custom level of sedation can be arranged so
+          you can be treated comfortably.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">04</span>
+        <h3>Then the fix, and the plan</h3>
+        <p>Root canals, extractions, crown and filling repair and abscess treatment all happen here. Anything
+          longer-term is planned with you afterwards, not decided while you are hurting.</p>
+      </article>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="arvBar"></i></div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('arvPin'),
+        track = document.getElementById('arvTrack'),
+        bar = document.getElementById('arvBar');
+
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
+
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track, {
+      x: function () { return -distance(); }, ease: 'none',
+      scrollTrigger: {
+        trigger: pin, start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * .6); },
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+      }
+    });
+
+    gsap.utils.toArray('#arvTrack .path-card').forEach(function (card) {
+      ScrollTrigger.create({
+        trigger: card, containerAnimation: tween, start: 'left 72%', end: 'right 28%',
+        onEnter: function () { light(card, true); }, onEnterBack: function () { light(card, true); },
+        onLeave: function () { light(card, false); }, onLeaveBack: function () { light(card, false); }
+      });
+      gsap.fromTo(card.querySelector('.no'), { opacity: .35 }, { opacity: 1, duration: .4,
+        scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left 78%',
+          toggleActions: 'play none none reverse' } });
+    });
+
+    function light(card, on) {
+      gsap.to(card, { borderColor: on ? 'rgba(211,170,90,.55)' : 'rgba(64,56,48,.14)',
+        backgroundColor: on ? 'rgba(211,170,90,.07)' : 'rgba(255,255,255,.96)', duration: .5 });
+    }
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — THE PROOF
+     ========================================================================== -->
+<section class="ch ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof">
+  <style>
+    .ch-proof{background:var(--paper-3);overflow:hidden}
+    .ch-proof h2{font-size:var(--h2);max-width:18ch}
+  </style>
+
+  <div class="ridge-mark" aria-hidden="true" id="prRidge">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
+  </div>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">The Proof</span></div>
+    <h2 class="h2 mb-l" id="prTitle">People who came in hurting</h2>
+    <div class="grid g3" id="prReviews">
+      <div class="review">
+        <blockquote>They got me in immediately for an emergency visit, their prices were more than reasonable, and they were so friendly, and quick to help me with my problem and get me out of pain.</blockquote>
+        <p class="review__who">keri c<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Everyone is very polite / professional and they do excellent work</blockquote>
+        <p class="review__who">Janice Chadwick<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Really nice office! I'm visiting from out of town and wanted to get my retainer removed. Everyone was so nice and so helpful!</blockquote>
+        <p class="review__who">amanda trezza<br><span class="review__src">Google review</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('prTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.fromTo('#prRidge', { yPercent: 12 }, { yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#proof', start: 'top bottom', end: 'bottom top', scrub: .9 } });
+    gsap.from('#prReviews .review', { opacity: 0, y: 36, duration: .85, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prReviews', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 06 — THE INVITATION   (the call-back form and the questions,
+     together, because this is where "I can't call right now" actually lands)
+     ========================================================================== -->
+<section class="ch ch-invite" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invite{background:var(--bg)}
+    .ch-invite h2{font-size:var(--h2);max-width:16ch}
+    .ch-invite .lay{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:start;grid-template-columns:1fr}
+    .ch-invite .close{background:var(--paper-3);color:var(--fg);border-radius:var(--radius-lg);
+      padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
+      margin-top:clamp(2.5rem,5vw,4.5rem)}
+    .ch-invite .close h2{color:var(--fg);max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(64,56,48,.90);max-width:46ch}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(64,56,48,.76)}
+    @media(min-width:980px){ .ch-invite .lay{grid-template-columns:1fr 1fr} }
+  </style>
+
+  <div class="wrap pad" id="callback">
+    <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
+
+    <div class="lay">
+      <div>
+        <h2 class="h2" id="cbTitle">If you can't call right now</h2>
+        <p class="lede mt-s" data-rv>Tell us what's happening and we'll ring you back as soon as the office
+          opens. If you are in severe pain, please call rather than wait for us.</p>
+        <p class="mt" data-rv><a class="tel-big tel" href="tel:+13034217611" style="color:var(--amber-deep)">(303) 421-7611</a></p>
+
+        <div class="mt-l">
+          <div class="faq">
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq1" aria-expanded="false">What counts as a dental emergency?</button></h3>
+              <div class="faq__a" id="eq1"><div><p>Severe or persistent pain, a knocked-out or fractured tooth, swelling that suggests infection, a lost filling or crown, uncontrolled bleeding from the mouth, or a denture that has broken and left you unable to eat. If you are unsure, call — that is what the phone is for.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq2" aria-expanded="false">Will I be seen today?</button></h3>
+              <div class="faq__a" id="eq2"><div><p>Whenever possible, yes — the practice makes space in the schedule for emergencies. It cannot be guaranteed for every case on every day, and we would rather say that plainly than promise a slot that isn't there.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq3" aria-expanded="false">Are you open evenings and weekends?</button></h3>
+              <div class="faq__a" id="eq3"><div><p>No. The office is open Monday to Friday, 8am to 5pm. Outside those hours, leave a message using the form and we will call you back when we open. For anything involving severe trauma, uncontrolled bleeding or dizziness, call 911 rather than waiting.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq4" aria-expanded="false">My tooth was knocked out — what do I do right now?</button></h3>
+              <div class="faq__a" id="eq4"><div><p>Pick it up by the crown, not the root. Keep it moist — in milk, or in your own saliva. Do not scrub it. Then call immediately, because this is the one dental emergency where the clock genuinely matters.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq5" aria-expanded="false">I'm terrified of the dentist. Can you still treat me?</button></h3>
+              <div class="faq__a" id="eq5"><div><p>Yes, and it is a large part of what the practice does. Dr. Bennett is board certified to administer IV sedation himself, and a custom level of sedation can be arranged so you can be treated comfortably.</p></div></div>
+            </div>
+            <div class="faq__item">
+              <h3><button class="faq__q" aria-controls="eq6" aria-expanded="false">Do you take my insurance?</button></h3>
+              <div class="faq__a" id="eq6"><div><p>Most dental insurance is accepted, but <strong>HMO and Medicaid plans are not</strong>. Financing options are available if cost is the obstacle.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card" data-rv>
+        <form class="form" novalidate data-lead="emergency-callback" data-thanks="Thank you — we'll call you back as soon as we can.">
+          <div class="field">
+            <label for="e-name">Full name</label>
+            <input id="e-name" name="name" type="text" autocomplete="name" required>
+            <span class="field__err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="e-phone">Phone</label>
+            <input id="e-phone" name="phone" type="tel" autocomplete="tel" required>
+            <span class="field__err" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="e-problem">What's happening?</label>
+            <select id="e-problem" name="problem">
+              <option value="toothache">Severe toothache</option>
+              <option value="knocked-out">Knocked-out tooth</option>
+              <option value="broken">Broken or fractured tooth</option>
+              <option value="abscess">Swelling or suspected infection</option>
+              <option value="filling">Lost filling or crown</option>
+              <option value="denture">Broken denture</option>
+              <option value="other">Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="e-notes">Anything we should know? <span style="font-weight:400;color:#5f5f5d">(optional)</span></label>
+            <textarea id="e-notes" name="notes" rows="3"></textarea>
+          </div>
+          <button class="btn btn--offer btn--block btn--lg" type="submit"><span>Request a call back</span></button>
+          <p class="form__note">Please don't include medical details you wouldn't want sent by email. For a medical emergency, call 911.</p>
+        </form>
+      </div>
+    </div>
+
+    <div class="close" data-rv>
+      <p class="eyebrow">Don't wait it out</p>
+      <h2 class="h2" id="closeTitle">Resolve your toothache today</h2>
+      <p>Dental pain almost never improves on its own, and infections least of all.</p>
+      <div class="btn-row center mt">
+        <a class="btn btn--offer btn--lg tel magnetic" href="tel:+13034217611"><span>Call (303) 421-7611</span></a>
+        <a class="btn btn--ghost btn--lg magnetic" href="#callback"><span>Request a call back</span></a>
+      </div>
+      <p class="addr">6695 Wadsworth Blvd, Arvada, CO 80003 &middot; Monday to Friday, 8am to 5pm</p>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('cbTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#invitation .faq__item', { opacity: 0, x: -20, duration: .6, stagger: .07,
+      ease: 'power2.out', scrollTrigger: { trigger: '#invitation .faq', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div>
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
+        <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <address>6695 Wadsworth Blvd<br>Arvada, CO 80003<br><a href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener">Get directions</a></address>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <address><a class="tel" href="tel:+13034217611">(303) 421-7611</a><br><a href="mailto:info@arvadadentalcenter.com">info@arvadadentalcenter.com</a><br>Monday–Friday, 8am–5pm</address>
+      </div>
+      <div>
+        <h3>This page</h3>
+        <p style="font-size:calc(.9rem*var(--s-tx))">Emergency dentistry for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))"><a href="../">All landing pages</a></p>
+      </div>
+    </div>
+    <div class="ftr__legal">
+      <p><strong>Not a 24-hour service.</strong> Arvada Dental Center is open Monday to Friday, 8am to 5pm. Same-day emergency appointments are offered whenever possible and are not guaranteed. For medical emergencies call 911.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633758.</p>
+    </div>
+  </div>
+</footer>
+</div>
+</div>
+
+<div class="actionbar">
+  <a class="btn btn--offer tel" href="tel:+13034217611"><span>Call now</span></a>
+  <a class="btn btn--ghost" href="#callback"><span>Call me back</span></a>
+</div>
+
+<script src="../_shared/journey-boot.js"></script>
+</body>
+</html>

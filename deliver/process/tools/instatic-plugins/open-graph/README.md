@@ -132,9 +132,9 @@ the preview and the result can be diffed.
 
 ```bash
 cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs open-graph .tmp/open-graph.zip
-node install-plugin.mjs .tmp/open-graph.zip            # dry run — shows the grants
-node install-plugin.mjs .tmp/open-graph.zip --apply
+node pack-plugin.mjs open-graph output/open-graph.zip
+node install-plugin.mjs output/open-graph.zip            # dry run — shows the grants
+node install-plugin.mjs output/open-graph.zip --apply
 node configure-seo-plugins.mjs --apply                 # the Dr Nahlah values
 ```
 
@@ -166,5 +166,5 @@ calls it, that both plugins are enabled and configured, and that every one of th
 ## Version Control
 
 Follows the version control rules in
-[SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md). The packaged `.zip` under
-`.tmp/` is a build artifact and is not committed.
+[SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). The packaged `.zip` under
+`output/` is a build artifact and is not committed.

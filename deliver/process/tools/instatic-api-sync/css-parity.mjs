@@ -30,7 +30,7 @@ import { tmpdir } from 'node:os'
 import http from 'node:http'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 

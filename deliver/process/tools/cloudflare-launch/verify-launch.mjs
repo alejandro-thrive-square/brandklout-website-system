@@ -4,7 +4,7 @@
  *
  * Origin: bk-stone-med-spa 06-cloudflare-sitemap/verify-sitemap.mjs (2026-09-15) and bk-dr-nahlah
  * cloudflare-launch/verify-live.mjs (2026-08-25), generalized 2026-09-23. Redirect maps are
- * verified separately with scenario-1-migration/scripts/verify-redirects.mjs.
+ * verified separately with scenario-1-migration/02-redirect-map/scripts/verify-redirects.mjs.
  *
  *   node verify-launch.mjs --canonical https://www.example.com --sitemap out/sitemap.xml > verify.log
  *   node verify-launch.mjs --canonical https://www.example.com --sitemap out/sitemap.xml --no-staging

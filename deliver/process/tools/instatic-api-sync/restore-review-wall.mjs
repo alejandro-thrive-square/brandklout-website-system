@@ -15,16 +15,16 @@
  * ANY reason shipped that divergence and the cards vanished from the live site.
  *
  * Evidence that the published page really did have them (all three agree):
- *   - `13-content-export-import/.tmp/home-readback.html` (2026-08-19), a
+ *   - `13-content-export-import/output/home-readback.html` (2026-08-19), a
  *     readback of the PLATFORM page: 6 `.rv-card`;
- *   - `.tmp/.instatic2/index.json` (2026-08-20), same, with the section order
+ *   - `output/.instatic2/index.json` (2026-08-20), same, with the section order
  *     `rv-wall` → `rv-more` → `rv-live`;
- *   - `08-qa/.tmp/audit-out/index.json` as committed: `words: 1741`. The same
+ *   - `08-qa/output/audit-out/index.json` as committed: `words: 1741`. The same
  *     audit re-run after the divergence shipped reports `1385`.
  *
  * ## Where the content comes from
  *
- * `04-design/.tmp/final-site/index.html` — the local build, which is the
+ * `04-design/output/final-site/index.html` — the local build, which is the
  * reference for this site. The six cards are parsed out of it rather than
  * re-derived from `reviews.json` (which holds eight), so what goes back is what
  * was there, in the order it was there.
@@ -40,13 +40,13 @@
  * Classes are referenced by id; every id is looked up by NAME from the live
  * shell rather than hardcoded, and a missing one aborts before any write.
  */
-import { readFileSync } from 'node:fs'
+import { readFileSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { api, getSite, getPages } from './insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const LOCAL = join(process.env.SITE_DIST || join(process.cwd(), 'workflows', '03-design-build', '.tmp', 'site-src', 'dist'), 'index.html')
+const LOCAL = join(process.env.SITE_DIST || [join(process.cwd(), 'output', 'code', 'site-src', 'dist'), join(process.cwd(), '..', '03-design-build', 'output', 'code', 'site-src', 'dist')].find((p) => existsSync(p)) || join(process.cwd(), 'output', 'code', 'site-src', 'dist'), 'index.html')
 const APPLY = process.argv.includes('--apply')
 
 // ── read the six cards out of the local build ──────────────────────────────

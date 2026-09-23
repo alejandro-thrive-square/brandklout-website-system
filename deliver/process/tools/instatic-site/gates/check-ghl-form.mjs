@@ -22,7 +22,7 @@
  * the storage belongs to api.leadconnectorhq.com.
  *
  * Reads the public form page only; submits nothing.
- *   node check-ghl-form.mjs <formId|url> [...]  > .tmp/ghl-forms.log 2>&1     (redirect, never pipe)
+ *   node check-ghl-form.mjs <formId|url> [...]  > output/ghl-forms.log 2>&1     (redirect, never pipe)
  */
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
 let bad = 0

@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-08-20",
+  "client_id": "west-la-implants",
+  "destination": "deliver/brandklout/west-la-implants/workflows/",
+  "source": "deliver/process/",
+  "process_baseline_commit": "8d65269",
+  "copied_modules": [
+    "00-client-delivery-initialization",
+    "01-content-intake",
+    "02-wireframe",
+    "03-graphic-resources",
+    "04-design",
+    "05-design-revisions",
+    "06-content-seo",
+    "07-webflow-build",
+    "08-qa",
+    "09-launch",
+    "10-handoff-support"
+  ],
+  "preserved_internal_files": [".md", ".py", "TRIGGER_PROMPT.txt", ".tmp/"],
+  "excluded_from_copy": [
+    {
+      "path": "00-client-delivery-initialization/style-guide/",
+      "reason": "Shared reference material. Stays canonical in deliver/process/; not duplicated per client."
+    },
+    {
+      "path": "00-client-delivery-initialization/client-first-docs/",
+      "reason": "Shared reference material. Stays canonical in deliver/process/; not duplicated per client."
+    },
+    {
+      "path": "*/__pycache__/",
+      "reason": "Build artifact."
+    }
+  ],
+  "design_system_reference": {
+    "selected": null,
+    "reason": "No Sales handoff, so no selected_design_system_reference. Brandklout builds follow deliver/brandklout/docs/DESIGN-STANDARD.md (awwwards-grade, motion-led, benchmarked against the Dr. Nahlah build) rather than a package from deliver/process/design-system-library/. Seed 00/.tmp/design-system/ only if a library package is later routed.",
+    "path": "workflows/00-client-delivery-initialization/.tmp/design-system/"
+  },
+  "client_specific_edits": [],
+  "artifacts_seeded": [
+    "workflows/01-content-intake/.tmp/existing-site-urls.txt"
+  ]
+}

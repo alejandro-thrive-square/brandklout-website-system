@@ -30,7 +30,7 @@
  * Publishes nothing. Roll back with rollback-registry.mjs <snapshot>.
  */
 import { getSite, getPages, saveShell, BASE } from './insta-api.mjs'
-import { writeFileSync } from 'node:fs'
+import { writeFileSync, existsSync } from 'node:fs'
 
 const apply = process.argv.includes('--apply')
 
@@ -120,7 +120,7 @@ try {
   const { pathToFileURL } = await import('node:url')
   const { join: pjoin } = await import('node:path')
   // The local build: SITE_DIST, or the scenario-0 layout under the client folder this runs from.
-  const DIST_URL = pathToFileURL((process.env.SITE_DIST || pjoin(process.cwd(), 'workflows', '03-design-build', '.tmp', 'site-src', 'dist')) + '/')
+  const DIST_URL = pathToFileURL((process.env.SITE_DIST || [pjoin(process.cwd(), 'output', 'code', 'site-src', 'dist'), pjoin(process.cwd(), '..', '03-design-build', 'output', 'code', 'site-src', 'dist')].find((p) => existsSync(p)) || pjoin(process.cwd(), 'output', 'code', 'site-src', 'dist')) + '/')
   for (const f of ['assets/site.js', 'assets/site.css']) {
     const t = readFileSync(new URL(f, DIST_URL), 'utf8')
     for (const m of t.matchAll(/\.([A-Za-z][A-Za-z0-9_-]*)/g)) classes.add(m[1])
@@ -174,8 +174,8 @@ console.log(`  empty shells (no declarations): ${dead.filter((d) => !d.props).le
 const missingNames = [...new Set(dead.flatMap((d) => d.missing))].sort()
 console.log(`  distinct class/id names that exist nowhere on the site: ${missingNames.length}`)
 console.log('  ' + missingNames.join(' '))
-writeFileSync('.tmp/dead-rules.json', JSON.stringify(dead, null, 1), 'utf8')
-console.log('\nfull list -> .tmp/dead-rules.json')
+writeFileSync('output/dead-rules.json', JSON.stringify(dead, null, 1), 'utf8')
+console.log('\nfull list -> output/dead-rules.json')
 
 if (!apply) { console.log('\nDRY RUN — re-run with --apply'); process.exit(0) }
 

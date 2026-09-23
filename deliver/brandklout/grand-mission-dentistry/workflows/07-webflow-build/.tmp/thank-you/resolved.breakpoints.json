@@ -1,0 +1,863 @@
+{
+  "xxl": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "ty-i": {
+      "width": "84px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "144px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "144px"
+    },
+    "stamp": {
+      "width": "116px",
+      "height": "116px"
+    },
+    "ty-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 48px",
+      "grid-column-gap": "1rem 48px"
+    },
+    "ch--tight": {
+      "padding-block": "80px"
+    },
+    "call-box": {
+      "grid-row-gap": "48px",
+      "grid-column-gap": "48px",
+      "padding-top": "48px",
+      "padding-right": "48px",
+      "padding-bottom": "48px",
+      "padding-left": "48px",
+      "margin-top": "-88px"
+    },
+    "now": {
+      "padding-top": "28px",
+      "padding-right": "28px",
+      "padding-bottom": "28px",
+      "padding-left": "28px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px",
+      "padding-block": "80px"
+    },
+    "path__pin": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "steps": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "prep__list": {
+      "grid-row-gap": "19.2px",
+      "grid-column-gap": "19.2px"
+    },
+    "prep__item": {
+      "padding-top": "30.4px",
+      "padding-right": "30.4px",
+      "padding-bottom": "30.4px",
+      "padding-left": "30.4px"
+    },
+    "ty-head": {
+      "margin-bottom": "57.6px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-card": {
+      "padding-top": "33.6px",
+      "padding-right": "33.6px",
+      "padding-bottom": "33.6px",
+      "padding-left": "33.6px"
+    },
+    "team__media": {
+      "margin-top": "48px"
+    },
+    "place__pin": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "place__grid": {
+      "grid-row-gap": "48px",
+      "grid-column-gap": "48px"
+    },
+    "place__details": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    }
+  },
+  "xl": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "ty-i": {
+      "width": "84px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "122.4px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "144px"
+    },
+    "stamp": {
+      "width": "116px",
+      "height": "116px"
+    },
+    "ty-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 48px",
+      "grid-column-gap": "1rem 48px"
+    },
+    "ch--tight": {
+      "padding-block": "72px"
+    },
+    "call-box": {
+      "grid-row-gap": "43.2px",
+      "grid-column-gap": "43.2px",
+      "padding-top": "48px",
+      "padding-right": "48px",
+      "padding-bottom": "48px",
+      "padding-left": "48px",
+      "margin-top": "-88px"
+    },
+    "now": {
+      "padding-top": "28px",
+      "padding-right": "28px",
+      "padding-bottom": "28px",
+      "padding-left": "28px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "36px",
+      "grid-column-gap": "36px",
+      "padding-block": "80px"
+    },
+    "path__pin": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "steps": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    },
+    "prep__list": {
+      "grid-row-gap": "19.2px",
+      "grid-column-gap": "19.2px"
+    },
+    "prep__item": {
+      "padding-top": "30.4px",
+      "padding-right": "30.4px",
+      "padding-bottom": "30.4px",
+      "padding-left": "30.4px"
+    },
+    "ty-head": {
+      "margin-bottom": "57.6px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-card": {
+      "padding-top": "33.6px",
+      "padding-right": "33.6px",
+      "padding-bottom": "33.6px",
+      "padding-left": "33.6px"
+    },
+    "team__media": {
+      "margin-top": "48px"
+    },
+    "place__pin": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "place__grid": {
+      "grid-row-gap": "43.2px",
+      "grid-column-gap": "43.2px"
+    },
+    "place__details": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "56px",
+      "grid-column-gap": "56px"
+    }
+  },
+  "large": {
+    "header__inner": {
+      "padding-block": "21.6px"
+    },
+    "logo-light": {
+      "height": "40px"
+    },
+    "logo-dark": {
+      "height": "40px"
+    },
+    "ty-i": {
+      "width": "81.6px"
+    },
+    "header__actions": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "ch": {
+      "padding-block": "115.6px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "128px",
+      "padding-bottom": "136px"
+    },
+    "stamp": {
+      "width": "116px",
+      "height": "116px"
+    },
+    "ty-i-2": {
+      "width": "52px"
+    },
+    "gm-label-before": {
+      "width": "40px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 48px",
+      "grid-column-gap": "1rem 48px"
+    },
+    "ch--tight": {
+      "padding-block": "68px"
+    },
+    "call-box": {
+      "grid-row-gap": "40.8px",
+      "grid-column-gap": "40.8px",
+      "padding-top": "47.6px",
+      "padding-right": "47.6px",
+      "padding-bottom": "47.6px",
+      "padding-left": "47.6px",
+      "margin-top": "-88px"
+    },
+    "now": {
+      "padding-top": "28px",
+      "padding-right": "28px",
+      "padding-bottom": "28px",
+      "padding-left": "28px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "35.36px",
+      "grid-column-gap": "35.36px",
+      "padding-block": "80px"
+    },
+    "path__pin": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "steps": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "40px",
+      "grid-column-gap": "40px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    },
+    "prep__list": {
+      "grid-row-gap": "19.2px",
+      "grid-column-gap": "19.2px"
+    },
+    "prep__item": {
+      "padding-top": "30.4px",
+      "padding-right": "30.4px",
+      "padding-bottom": "30.4px",
+      "padding-left": "30.4px"
+    },
+    "ty-head": {
+      "margin-bottom": "54.4px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-card": {
+      "padding-top": "32.64px",
+      "padding-right": "32.64px",
+      "padding-bottom": "32.64px",
+      "padding-left": "32.64px"
+    },
+    "team__media": {
+      "margin-top": "48px"
+    },
+    "place__pin": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "place__grid": {
+      "grid-row-gap": "40.8px",
+      "grid-column-gap": "40.8px"
+    },
+    "place__details": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "gm-footer": {
+      "padding-block": "72px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "54.4px",
+      "grid-column-gap": "54.4px"
+    }
+  },
+  "desktop": {
+    "header__inner": {
+      "padding-block": "18.18px"
+    },
+    "logo-light": {
+      "height": "38.62px"
+    },
+    "logo-dark": {
+      "height": "38.62px"
+    },
+    "ty-i": {
+      "width": "68.16px"
+    },
+    "header__actions": {
+      "grid-row-gap": "15.9px",
+      "grid-column-gap": "15.9px"
+    },
+    "ch": {
+      "padding-block": "96.56px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "113.6px",
+      "padding-bottom": "113.6px"
+    },
+    "stamp": {
+      "width": "116px",
+      "height": "116px"
+    },
+    "ty-i-2": {
+      "width": "45.44px"
+    },
+    "gm-label-before": {
+      "width": "34.08px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 45.44px",
+      "grid-column-gap": "1rem 45.44px"
+    },
+    "ch--tight": {
+      "padding-block": "56.8px"
+    },
+    "call-box": {
+      "grid-row-gap": "34.08px",
+      "grid-column-gap": "34.08px",
+      "padding-top": "39.76px",
+      "padding-right": "39.76px",
+      "padding-bottom": "39.76px",
+      "padding-left": "39.76px",
+      "margin-top": "-79.52px"
+    },
+    "now": {
+      "padding-top": "27.26px",
+      "padding-right": "27.26px",
+      "padding-bottom": "27.26px",
+      "padding-left": "27.26px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "29.54px",
+      "grid-column-gap": "29.54px",
+      "padding-block": "68.16px"
+    },
+    "path__pin": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "steps": {
+      "grid-row-gap": "34.08px",
+      "grid-column-gap": "34.08px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "34.08px",
+      "grid-column-gap": "34.08px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    },
+    "prep__list": {
+      "grid-row-gap": "18.18px",
+      "grid-column-gap": "18.18px"
+    },
+    "prep__item": {
+      "padding-top": "27.26px",
+      "padding-right": "27.26px",
+      "padding-bottom": "27.26px",
+      "padding-left": "27.26px"
+    },
+    "ty-head": {
+      "margin-bottom": "45.44px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "20.45px",
+      "grid-column-gap": "20.45px"
+    },
+    "gm-card": {
+      "padding-top": "27.26px",
+      "padding-right": "27.26px",
+      "padding-bottom": "27.26px",
+      "padding-left": "27.26px"
+    },
+    "team__media": {
+      "margin-top": "45.44px"
+    },
+    "place__pin": {
+      "grid-row-gap": "29.54px",
+      "grid-column-gap": "29.54px"
+    },
+    "place__grid": {
+      "grid-row-gap": "34.08px",
+      "grid-column-gap": "34.08px"
+    },
+    "place__details": {
+      "grid-row-gap": "22.72px",
+      "grid-column-gap": "22.72px"
+    },
+    "gm-footer": {
+      "padding-block": "68.16px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "45.44px",
+      "grid-column-gap": "45.44px"
+    }
+  },
+  "tablet": {
+    "header__inner": {
+      "padding-block": "14.08px"
+    },
+    "logo-light": {
+      "height": "29.92px"
+    },
+    "logo-dark": {
+      "height": "29.92px"
+    },
+    "ty-i": {
+      "width": "52.8px"
+    },
+    "header__actions": {
+      "grid-row-gap": "12.32px",
+      "grid-column-gap": "12.32px"
+    },
+    "ch": {
+      "padding-block": "74.8px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "88px"
+    },
+    "stamp": {
+      "width": "96.8px",
+      "height": "96.8px"
+    },
+    "ty-i-2": {
+      "width": "35.2px"
+    },
+    "gm-label-before": {
+      "width": "26.4px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 35.2px",
+      "grid-column-gap": "1rem 35.2px"
+    },
+    "ch--tight": {
+      "padding-block": "48px"
+    },
+    "call-box": {
+      "grid-row-gap": "26.4px",
+      "grid-column-gap": "26.4px",
+      "padding-top": "30.8px",
+      "padding-right": "30.8px",
+      "padding-bottom": "30.8px",
+      "padding-left": "30.8px",
+      "margin-top": "-61.6px"
+    },
+    "now": {
+      "padding-top": "21.12px",
+      "padding-right": "21.12px",
+      "padding-bottom": "21.12px",
+      "padding-left": "21.12px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "22.88px",
+      "grid-column-gap": "22.88px",
+      "padding-block": "52.8px"
+    },
+    "path__pin": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "steps": {
+      "grid-row-gap": "26.4px",
+      "grid-column-gap": "26.4px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "26.4px",
+      "grid-column-gap": "26.4px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    },
+    "prep__list": {
+      "grid-row-gap": "14.08px",
+      "grid-column-gap": "14.08px"
+    },
+    "prep__item": {
+      "padding-top": "21.12px",
+      "padding-right": "21.12px",
+      "padding-bottom": "21.12px",
+      "padding-left": "21.12px"
+    },
+    "ty-head": {
+      "margin-bottom": "35.2px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "gm-card": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "team__media": {
+      "margin-top": "35.2px"
+    },
+    "place__pin": {
+      "grid-row-gap": "22.88px",
+      "grid-column-gap": "22.88px"
+    },
+    "place__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "place__details": {
+      "grid-row-gap": "17.6px",
+      "grid-column-gap": "17.6px"
+    },
+    "gm-footer": {
+      "padding-block": "52.8px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "35.2px",
+      "grid-column-gap": "35.2px"
+    }
+  },
+  "mobileL": {
+    "header__inner": {
+      "padding-block": "13.6px"
+    },
+    "logo-light": {
+      "height": "28px"
+    },
+    "logo-dark": {
+      "height": "28px"
+    },
+    "ty-i": {
+      "width": "40px"
+    },
+    "header__actions": {
+      "grid-row-gap": "9.6px",
+      "grid-column-gap": "9.6px"
+    },
+    "ch": {
+      "padding-block": "72px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "80px"
+    },
+    "stamp": {
+      "width": "84px",
+      "height": "84px"
+    },
+    "ty-i-2": {
+      "width": "24.92px"
+    },
+    "gm-label-before": {
+      "width": "20px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 24.92px",
+      "grid-column-gap": "1rem 24.92px"
+    },
+    "ch--tight": {
+      "padding-block": "48px"
+    },
+    "call-box": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px",
+      "padding-top": "28px",
+      "padding-right": "28px",
+      "padding-bottom": "28px",
+      "padding-left": "28px",
+      "margin-top": "-56px"
+    },
+    "now": {
+      "padding-top": "20px",
+      "padding-right": "20px",
+      "padding-bottom": "20px",
+      "padding-left": "20px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px",
+      "padding-block": "48px"
+    },
+    "path__pin": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "steps": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "prep__list": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px"
+    },
+    "prep__item": {
+      "padding-top": "19.2px",
+      "padding-right": "19.2px",
+      "padding-bottom": "19.2px",
+      "padding-left": "19.2px"
+    },
+    "ty-head": {
+      "margin-bottom": "35.2px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "gm-card": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "team__media": {
+      "margin-top": "32px"
+    },
+    "place__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "place__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "place__details": {
+      "grid-row-gap": "14.4px",
+      "grid-column-gap": "14.4px"
+    },
+    "gm-footer": {
+      "padding-block": "48px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    }
+  },
+  "mobileP": {
+    "header__inner": {
+      "padding-block": "13.6px"
+    },
+    "logo-light": {
+      "height": "28px"
+    },
+    "logo-dark": {
+      "height": "28px"
+    },
+    "ty-i": {
+      "width": "40px"
+    },
+    "header__actions": {
+      "grid-row-gap": "9.6px",
+      "grid-column-gap": "9.6px"
+    },
+    "ch": {
+      "padding-block": "72px"
+    },
+    "ty-ch-arrival": {
+      "padding-top": "112px",
+      "padding-bottom": "80px"
+    },
+    "stamp": {
+      "width": "84px",
+      "height": "84px"
+    },
+    "ty-i-2": {
+      "width": "24px"
+    },
+    "gm-label-before": {
+      "width": "20px"
+    },
+    "status__meta": {
+      "grid-row-gap": "1rem 24px",
+      "grid-column-gap": "1rem 24px"
+    },
+    "ch--tight": {
+      "padding-block": "48px"
+    },
+    "call-box": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px",
+      "padding-top": "28px",
+      "padding-right": "28px",
+      "padding-bottom": "28px",
+      "padding-left": "28px",
+      "margin-top": "-56px"
+    },
+    "now": {
+      "padding-top": "20px",
+      "padding-right": "20px",
+      "padding-bottom": "20px",
+      "padding-left": "20px"
+    },
+    "ch__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px",
+      "padding-block": "48px"
+    },
+    "path__pin": {
+      "grid-row-gap": "32px",
+      "grid-column-gap": "32px"
+    },
+    "steps": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "prep__pin": {
+      "grid-row-gap": "24px",
+      "grid-column-gap": "24px"
+    },
+    "prep__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "prep__list": {
+      "grid-row-gap": "12px",
+      "grid-column-gap": "12px"
+    },
+    "prep__item": {
+      "padding-top": "19.2px",
+      "padding-right": "19.2px",
+      "padding-bottom": "19.2px",
+      "padding-left": "19.2px"
+    },
+    "ty-head": {
+      "margin-bottom": "35.2px"
+    },
+    "gm-grid": {
+      "grid-row-gap": "16px",
+      "grid-column-gap": "16px"
+    },
+    "gm-card": {
+      "padding-top": "24px",
+      "padding-right": "24px",
+      "padding-bottom": "24px",
+      "padding-left": "24px"
+    },
+    "team__media": {
+      "margin-top": "32px"
+    },
+    "place__pin": {
+      "grid-row-gap": "20px",
+      "grid-column-gap": "20px"
+    },
+    "place__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    },
+    "place__details": {
+      "grid-row-gap": "14.4px",
+      "grid-column-gap": "14.4px"
+    },
+    "gm-footer": {
+      "padding-block": "48px 2rem"
+    },
+    "footer__grid": {
+      "grid-row-gap": "28px",
+      "grid-column-gap": "28px"
+    }
+  }
+}

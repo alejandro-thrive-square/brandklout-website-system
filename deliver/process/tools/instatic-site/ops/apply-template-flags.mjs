@@ -2,7 +2,7 @@
 /**
  * apply-template-flags.mjs — put the template flags back on a page after an import wiped them.
  *
- * Origin: bk-mason-park, workflows/09-static-rebuild/.tmp/apply-blog-template.mjs and
+ * Origin: bk-mason-park, workflows/09-static-rebuild/output/apply-blog-template.mjs and
  * apply-404-template.mjs (run on every Mason Park deploy, 2026-09-09 to 09-18). Merged and
  * generalized 2026-09-23.
  *

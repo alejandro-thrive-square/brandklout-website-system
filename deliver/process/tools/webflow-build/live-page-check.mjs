@@ -5,7 +5,7 @@
  * Promoted 2026-09-23. Generalises checks that were re-written per client:
  *   - stone-dental-implant-center runbook 2026-09-03 (em dash pass re-fetched live; the hero
  *     form published as an empty <div class="w-embed"></div>; CDN served the old page)
- *   - marvel-dental / legacy-dental-pasadena workflows/08-qa/.tmp/gate.mjs (foreign names,
+ *   - marvel-dental / legacy-dental-pasadena workflows/08-qa/output/gate.mjs (foreign names,
  *     {{tokens}}, placeholder form ids, main line vs campaign line)
  *   - arvada-dental-center workflows/07-webflow-build/verify_links.mjs (tel: and hrefs)
  *   - termly-ghl-consent gotcha: cf-cache HIT with a non-zero age is the edge, not the deploy.
@@ -15,7 +15,7 @@
  * markup) are only visible in a real browser DOM. Drive the page for those.
  *
  *   node live-page-check.mjs <url>[,<url>...] [--foreign "arvada,bennett"] [--phone 8173838361]
- *        [--marker "text that must be on the page"]   > .tmp/live-check.log 2>&1
+ *        [--marker "text that must be on the page"]   > output/live-check.log 2>&1
  * Exit 1 on any FAIL.
  */
 const argv = process.argv.slice(2);

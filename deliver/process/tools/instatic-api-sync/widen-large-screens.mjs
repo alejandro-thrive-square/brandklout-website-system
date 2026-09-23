@@ -70,8 +70,8 @@ const FONT_FROM = 'calc(var(--base) * 1rem + var(--coefficient) * 1vw)'
 const FONT_TO = 'clamp(12px, calc(var(--base) * 1rem + var(--coefficient) * 1vw), 20px)'
 
 const { site: shell, seq } = await getSite()
-writeFileSync(`.tmp/shell.before.${seq}.json`, JSON.stringify(shell, null, 1), 'utf8')
-console.log(`snapshot .tmp/shell.before.${seq}.json`)
+writeFileSync(`output/shell.before.${seq}.json`, JSON.stringify(shell, null, 1), 'utf8')
+console.log(`snapshot output/shell.before.${seq}.json`)
 
 const rules = Object.values(shell.styleRules ?? {})
 const root = rules.find((r) => (r.selector ?? '').trim() === ':root')

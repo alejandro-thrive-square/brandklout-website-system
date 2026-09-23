@@ -1,0 +1,7 @@
+# Screenshots are evidence for the session that took them, not repository state.
+shots/
+.chrome-*/
+
+# Screenshots and the headless browser profiles are regenerable.
+shots/
+.chrome-*/

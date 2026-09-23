@@ -237,11 +237,11 @@ node clone-site.mjs --from <prod> --to <staging> --strategy replace --media
 # large site - document first, then media separately
 node clone-site.mjs --from <prod> --to <staging> --strategy replace
 #   media bytes -> see pull-media.js header for the three railway ssh commands
-python chunk-media.py ./.tmp/prod-full.zip ./chunks 70    # 70, not the 90 default — see below
+python chunk-media.py ./output/prod-full.zip ./chunks 70    # 70, not the 90 default — see below
 node import-media-chunks.mjs --to <staging> --chunks ./chunks
 
 # always, both paths:
-node clone-plugins.mjs --from <prod> --to <staging> --files ./.tmp/plugins
+node clone-plugins.mjs --from <prod> --to <staging> --files ./output/plugins
 node publish-rows.mjs --site <staging> --table posts
 #   publish the site, then prove it:
 node diff-sites.mjs --a <prod> --b <staging>
@@ -262,9 +262,9 @@ Plugin CODE is not downloadable over the API - pull it off the source container 
 ```bash
 MSYS_NO_PATHCONV=1 RAILWAY_PROJECT_ID=<id> railway ssh -s "<Service>" -e production \
   "sh -lc 'tar czf - -C /app/storage/uploads/plugins . | base64 -w0'" \
-  | grep -v '^Using SSH' | tr -d '\r\n' > .tmp/all.b64
-base64 -d .tmp/all.b64 > .tmp/all.tgz
-mkdir -p .tmp/plugins && tar xzf .tmp/all.tgz -C .tmp/plugins
+  | grep -v '^Using SSH' | tr -d '\r\n' > output/all.b64
+base64 -d output/all.b64 > output/all.tgz
+mkdir -p output/plugins && tar xzf output/all.tgz -C output/plugins
 ```
 
 ### C. Promote
@@ -588,5 +588,5 @@ API accepts anything.
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Scripts and this `.md`
-are committed; `.tmp/`, `chunks/` and any exported bundle are not - they carry full site
+are committed; `output/`, `chunks/` and any exported bundle are not - they carry full site
 content and media. No secrets here.

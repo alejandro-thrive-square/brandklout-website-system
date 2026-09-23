@@ -145,9 +145,9 @@ that parses at write time cannot fail to parse at publish time.
 
 ```bash
 cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs aeo-schema .tmp/aeo-schema.zip
-node install-plugin.mjs .tmp/aeo-schema.zip            # dry run — shows the grants
-node install-plugin.mjs .tmp/aeo-schema.zip --apply
+node pack-plugin.mjs aeo-schema output/aeo-schema.zip
+node install-plugin.mjs output/aeo-schema.zip            # dry run — shows the grants
+node install-plugin.mjs output/aeo-schema.zip --apply
 node configure-seo-plugins.mjs --apply                 # the Dr Nahlah values
 ```
 
@@ -180,5 +180,5 @@ one that emits nothing, and "it looked right in the page source" is not a check.
 ## Version Control
 
 Follows the version control rules in
-[SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md). The packaged `.zip` under
-`.tmp/` is a build artifact and is not committed.
+[SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). The packaged `.zip` under
+`output/` is a build artifact and is not committed.

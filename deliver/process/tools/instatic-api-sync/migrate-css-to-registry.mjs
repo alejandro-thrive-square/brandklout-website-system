@@ -33,7 +33,7 @@
  *
  * ## Input
  *
- * `.tmp/conv-out.json`, produced by `convert-css.md`'s remote step — Instatic's
+ * `output/conv-out.json`, produced by `convert-css.md`'s remote step — Instatic's
  * OWN `cssToStyleRules` run headlessly under happy-dom. We use the platform's
  * converter rather than a reimplementation so the classification (class vs
  * ambient, breakpoint folding, condition ids) matches what the editor expects.
@@ -54,7 +54,7 @@ import { getSite, getPages, saveShell } from './insta-api.mjs'
 import { readCascadeOrder, normaliseMedia } from './cascade-order.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
+const TMP = join(HERE, 'output')
 const CODE_ASSETS = ['src/styles/runtime-states.css', 'src/styles/site.css']
 
 const nanoid = () => randomBytes(12).toString('base64url')

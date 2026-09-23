@@ -128,7 +128,7 @@ async function place() {
   console.log(JSON.stringify(await publish()).slice(0, 200))
   console.log(`\n  ${PAGE_URL}`)
   console.log('\n  A publish bakes EVERY page. Check the home page did not move:')
-  console.log('  node ../08-qa/.tmp/audit-site.mjs --base https://encorercm.com --only index && git diff ../08-qa/.tmp/audit-out/')
+  console.log('  node ../08-qa/output/audit-site.mjs --base https://encorercm.com --only index && git diff ../08-qa/output/audit-out/')
 }
 
 async function cleanup() {

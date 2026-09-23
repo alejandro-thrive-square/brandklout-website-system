@@ -1,0 +1,496 @@
+{
+  "url": "https://avenue.dental/services/veneers/",
+  "title": "Veneers in Los Angeles, CA | Porcelain Veneers | Avenue Dental",
+  "metaDescription": "Transform your smile with veneers in Los Angeles, CA. Dr. Oh blends global training, artistry, and advanced care to create veneers that define the LA smile.",
+  "bodyFont": "sans-serif",
+  "bodyBg": "rgba(0, 0, 0, 0)",
+  "topColors": [
+    [
+      "rgb(0, 0, 0)",
+      1443
+    ],
+    [
+      "rgb(255, 255, 255)",
+      325
+    ],
+    [
+      "rgb(51, 125, 4)",
+      150
+    ],
+    [
+      "rgb(102, 149, 46)",
+      23
+    ],
+    [
+      "rgb(0, 0, 238)",
+      22
+    ],
+    [
+      "rgb(110, 110, 110)",
+      17
+    ],
+    [
+      "rgb(88, 89, 91)",
+      5
+    ],
+    [
+      "rgb(99, 99, 99)",
+      5
+    ],
+    [
+      "rgb(229, 0, 0)",
+      1
+    ],
+    [
+      "rgb(193, 193, 193)",
+      1
+    ]
+  ],
+  "topFonts": [
+    [
+      "brandon-grotesque-1, brandon-grotesque, sans-serif",
+      209
+    ],
+    [
+      "din-condensed-1, din-condensed, sans-serif",
+      28
+    ],
+    [
+      "Arial, sans-serif",
+      9
+    ]
+  ],
+  "cssVars": {
+    "--breakpoint-small": "0px",
+    "--breakpoint-medium": "640px",
+    "--breakpoint-large": "1024px",
+    "--breakpoint-xlarge": "1200px",
+    "--breakpoint-xxlarge": "1440px",
+    "--font-size-title-secondary": "1.5rem",
+    "--font-size-title-tertiary": "1.25rem",
+    "--font-size-baseline": "1.125rem",
+    "--spacing-fixed-small": "15px",
+    "--spacing-variable-large": "1.875rem",
+    "--form-v2-color-scheme-button-text": "#ffffff",
+    "--form-v2-color-scheme-button-text-hover": "#ffffff",
+    "--form-v2-color-scheme-button-background": "#66952E",
+    "--form-v2-color-scheme-button-background-hover": "#337D04",
+    "--form-v2-color-scheme-link": "#ffffff",
+    "--form-v2-color-scheme-link-hover": "#ffffff",
+    "--form-v2-button-border-radius": "3px",
+    "--custom-color-green-over-cream": "#337D04",
+    "--custom-color-logo-green": "#66952E",
+    "--custom-color-dark-gray": "#58595B",
+    "--custom-color-light-cream": "#FAFAF4",
+    "--custom-color-light-gray": "#efefef",
+    "--custom-color-black": "#000000",
+    "--custom-color-white": "#ffffff",
+    "--custom-supertitle-font-family": "brandon-grotesque, sans-serif",
+    "--custom-supertitle-font-size-desktop": "21",
+    "--custom-supertitle-font-size-mobile": "26",
+    "--custom-supertitle-font-style": "normal",
+    "--custom-supertitle-font-weight": "300",
+    "--custom-supertitle-line-height": "1.6",
+    "--custom-supertitle-letter-spacing": "0",
+    "--custom-supertitle-text-transform": "none",
+    "--custom-supertitle-margin-bottom": "24",
+    "--custom-title-font-family": "din-condensed, sans-serif",
+    "--custom-title-font-size-desktop": "54",
+    "--custom-title-font-size-mobile": "36",
+    "--custom-title-font-style": "normal",
+    "--custom-title-font-weight": "400",
+    "--custom-title-line-height": "1.2",
+    "--custom-title-letter-spacing": "0",
+    "--custom-title-text-transform": "uppercase",
+    "--custom-title-margin-bottom": "32",
+    "--custom-subtitle-font-family": "din-condensed, sans-serif",
+    "--custom-subtitle-font-size-desktop": "36",
+    "--custom-subtitle-font-size-mobile": "26",
+    "--custom-subtitle-font-style": "normal",
+    "--custom-subtitle-font-weight": "300",
+    "--custom-subtitle-line-height": "1.2",
+    "--custom-subtitle-letter-spacing": "0",
+    "--custom-subtitle-text-transform": "none",
+    "--custom-subtitle-margin-bottom": "24",
+    "--custom-spacing-one": "64px",
+    "--custom-spacing-two": "76px",
+    "--custom-spacing-three": "40px",
+    "--custom-spacing-four": "24px",
+    "--custom-spacing-five": "110px",
+    "--custom-spacing-six": "36px",
+    "--custom-spacing-seven": "48px",
+    "--custom-spacing-eight": "375px",
+    "--custom-menu-column-gap": "var(--custom-spacing-three)",
+    "--custom-menu-row-gap": "var(--custom-spacing-three)",
+    "--custom-menu-card-column-gap": "0",
+    "--custom-menu-card-row-gap": "var(--custom-spacing-three)",
+    "--custom-menu-padding-no-card": "0",
+    "--custom-menu-padding-with-card": "var(--custom-spacing-three) var(--custom-spacing-three)",
+    "--custom-textblock-column-gap": "var(--custom-spacing-five)",
+    "--custom-textblock-row-gap": "var(--custom-spacing-three)",
+    "--custom-section-viewport-padding": "var(--custom-spacing-two)",
+    "--custom-width-one": "calc(1512px + (var(--custom-section-viewport-padding) * 2))",
+    "--custom-section-vertical-padding": "var(--custom-spacing-one)",
+    "--custom-row-spacing": "var(--custom-spacing-six)",
+    "--custom-form-v2-button-green-linear-gradient": "linear-gradient(90deg, #467329 0%, #1C3809 100%)",
+    "--custom-form-v2-button-background": "var(--custom-form-v2-button-green-linear-gradient)",
+    "--custom-form-v2-button-background-hover": "var(--custom-form-v2-button-green-linear-gradient)",
+    "--custom-form-v2-button-text-color": "var(--custom-color-white)",
+    "--custom-form-v2-button-text-color-hover": "var(--custom-color-white)",
+    "--custom-form-v2-button-svg-color": "var(--custom-color-white)",
+    "--custom-form-v2-button-background-border": "transparent",
+    "--custom-form-v2-button-border-radius": "0",
+    "--custom-form-v2-button-padding": "18px 15px 21px 15px",
+    "--custom-form-v2-button-line-height": "1",
+    "--custom-form-v2-button-row-gap": "var(--custom-spacing-four)",
+    "--custom-form-v2-button-column-gap": "var(--custom-spacing-four)",
+    "--custom-form-v2-button-border-width": "0",
+    "--custom-form-v2-button-border": "none",
+    "--custom-form-v2-button-box-shadow": "none",
+    "--custom-form-v2-button-font-family": "figtree, sans-serif",
+    "--custom-form-v2-button-font-size-desktop": "21",
+    "--custom-form-v2-button-font-size-mobile": "21",
+    "--custom-form-v2-button-font-style": "normal",
+    "--custom-form-v2-button-font-weight": "400",
+    "--custom-form-v2-button-letter-spacing": "0",
+    "--custom-form-v2-button-text-transform": "uppercase",
+    "--custom-form-v2-button-text-decoration": "none",
+    "--custom-form-v2-button-min-width": "200px",
+    "--custom-form-v2-box-shadow": "0 320.738px 90.053px 0 rgba(0, 0, 0, 0.01), 0 204.779px 82.652px 0 rgba(0, 0, 0, 0.03), 0 115.959px 69.082px 0 rgba(0, 0, 0, 0.05), 0 51.811px 51.811px 0 rgba(0, 0, 0, 0.07), 0 12.336px 28.373px 0 rgba(0, 0, 0, 0.10)",
+    "--custom-form-v2-input-background-color": "var(--custom-color-white)",
+    "--custom-form-v2-input-border-color": "#636363",
+    "--custom-footer-v2-background-color": "var(--custom-color-white)",
+    "--custom-social-icon-color": "var(--custom-color-green-over-cream)",
+    "--custom-social-icon-background-color": "var(--custom-color-white)",
+    "--custom-social-icon-background-color-hover": "var(--custom-color-white)",
+    "--custom-social-stripe-logo": "url(\"/assets/xp1i41/8099/487174/original_social-stripe-logo.svg\")",
+    "--custom-social-stripe-logo-width": "314px",
+    "--custom-social-stripe-logo-height": "102px",
+    "--custom-location-button-group-row-spacing": "var(--custom-spacing-six)",
+    "--custom-location-button-group-text-color": "var(--custom-color-logo-green)",
+    "--custom-location-button-group-text-color-hover": "var(--custom-color-logo-green)",
+    "--custom-figcaption-text-color": "var(--custom-color-white)",
+    "--custom-figcaption-linear-gradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.00) 13.11%, rgba(0, 0, 0, 0.50) 100%)",
+    "--custom-figcaption-padding-top": "30px",
+    "--custom-figcaption-padding-bottom": "15px",
+    "--custom-ticker-column-gap": "80px",
+    "--custom-ticker-image-width": "250px",
+    "--custom-ticker-image-height": "calc(var(--custom-ticker-image-width) * .7)",
+    "--custom-background-border-radius": "18vw",
+    "--form-max-width": "38rem"
+  },
+  "stylesheets": [
+    "https://p.typekit.net/p.css",
+    "https://use.typekit.net/xzr7dhx.css"
+  ],
+  "headings": [
+    {
+      "tag": "H1",
+      "text": "VENEERS IN LOS ANGELES, CA"
+    },
+    {
+      "tag": "H2",
+      "text": "LUXURY SMILE, FLEXIBLE PAYMENTS"
+    },
+    {
+      "tag": "H2",
+      "text": "WHY DR. OH IS LOS ANGELES’S VENEER OBSESSION"
+    },
+    {
+      "tag": "H3",
+      "text": "GLOBAL EXPERTISE"
+    },
+    {
+      "tag": "H3",
+      "text": "BOUTIQUE EXPERIENCE"
+    },
+    {
+      "tag": "H3",
+      "text": "ELITE DENTAL LABS"
+    },
+    {
+      "tag": "H3",
+      "text": "PERSONALIZED AESTHETICS"
+    },
+    {
+      "tag": "H2",
+      "text": "REAL PATIENTS, REAL RESULTS"
+    },
+    {
+      "tag": "H2",
+      "text": "THIS IS YOUR MOMENT"
+    },
+    {
+      "tag": "H2",
+      "text": "AM I A CANDIDATE FOR VENEERS?"
+    },
+    {
+      "tag": "H2",
+      "text": "VENEERS AND SMILE MAKEOVERS"
+    },
+    {
+      "tag": "H2",
+      "text": "HOW DR. OH DETERMINES IF VENEERS ARE RIGHT FOR YOU"
+    },
+    {
+      "tag": "H3",
+      "text": "GUM HEALTH AND INFLAMMATION"
+    },
+    {
+      "tag": "H3",
+      "text": "ORAL HEALTH AND DECAY RISK"
+    },
+    {
+      "tag": "H3",
+      "text": "BITE ALIGNMENT, GRINDING, OR CLENCHING"
+    },
+    {
+      "tag": "H2",
+      "text": "WHEN A CROWN MAY BE THE BETTER OPTION"
+    },
+    {
+      "tag": "H2",
+      "text": "CARING FOR YOUR VENEERS"
+    },
+    {
+      "tag": "H2",
+      "text": "FAQ\nABOUT VENEERS IN LOS ANGELES, CA"
+    },
+    {
+      "tag": "H3",
+      "text": "How long do porcelain veneers last?"
+    },
+    {
+      "tag": "H3",
+      "text": "Do veneers look natural?"
+    },
+    {
+      "tag": "H3",
+      "text": "Is the procedure painful?"
+    },
+    {
+      "tag": "H3",
+      "text": "How many veneers will I need?"
+    },
+    {
+      "tag": "H3",
+      "text": "Will veneers damage my teeth?"
+    },
+    {
+      "tag": "H2",
+      "text": "Contact Us"
+    },
+    {
+      "tag": "H2",
+      "text": "FLEXIBLE PAYMENT OPTIONS"
+    },
+    {
+      "tag": "H2",
+      "text": "OUR SERVICES"
+    },
+    {
+      "tag": "H2",
+      "text": "LOS ANGELES OFFICE"
+    },
+    {
+      "tag": "H2",
+      "text": "Los Angeles Office"
+    }
+  ],
+  "links": [
+    "https://avenue.dental/index.html",
+    "https://avenue.dental/photogallery/index.html",
+    "https://avenue.dental/locations/los-angeles-ca/index.html",
+    "https://avenue.dental/contact/index.html",
+    "https://avenue.dental/about-the-staff/index.html",
+    "https://avenue.dental/cosmetic-dentistry/index.html",
+    "https://share.google/zzRYodqWnAPbNsFDT",
+    "https://www.google.com/search?q=avenue+dental+los+angeles+ca&rlz=1C5CHFA_enUS988US988&oq=avenue+dental+los+angeles+ca&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhivARjHARiABDIICAIQABgWGB4yCAgDEAAYFhgeMggIBBAAGBYYHjIGCAUQRRg8MgYIBhBFGDwyBggHEEUYPNIBCDM1MzhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#",
+    "https://avenue.dental/services/general-dentistry/index.html",
+    "https://avenue.dental/services/smile-makeover/index.html",
+    "https://avenue.dental/services/invisalign/index.html",
+    "https://avenue.dental/privacy-policy/index.html",
+    "https://policies.google.com/privacy",
+    "https://policies.google.com/terms",
+    "https://avenue.dental/services/veneers/index.html",
+    "https://www.google.com/maps?cid=1816207810602792039",
+    "https://www.instagram.com/drminheeoh",
+    "https://avenue.dental/site-map/index.html",
+    "https://avenue.dental/first-visit/index.html",
+    "https://avenue.dental/services/dental-hygiene-products/index.html",
+    "https://avenue.dental/services/index.html"
+  ],
+  "navLinks": [
+    {
+      "text": "GALLERY",
+      "href": "https://avenue.dental/photogallery/index.html"
+    },
+    {
+      "text": "(213) 419-5500",
+      "href": "tel:+12134195500"
+    },
+    {
+      "text": "LOCATION",
+      "href": "https://avenue.dental/locations/los-angeles-ca/index.html"
+    },
+    {
+      "text": "CONTACT",
+      "href": "https://avenue.dental/contact/index.html"
+    },
+    {
+      "text": "MENU",
+      "href": "javascript:void(0)"
+    },
+    {
+      "text": "Menu",
+      "href": "javascript:void(0)"
+    },
+    {
+      "text": "Menu",
+      "href": "javascript:void(0)"
+    },
+    {
+      "text": "Menu",
+      "href": "javascript:void(0)"
+    },
+    {
+      "text": "Location",
+      "href": "https://avenue.dental/locations/los-angeles-ca/index.html"
+    },
+    {
+      "text": "(213) 419-5500\n        Call",
+      "href": "tel:+12134195500"
+    },
+    {
+      "text": "Contact",
+      "href": "https://avenue.dental/contact/index.html"
+    }
+  ],
+  "phones": [
+    "+12134195500",
+    "2134195500"
+  ],
+  "emails": [],
+  "images": [
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/501240/original_logo-horizontal_1776746024%3D%26auto%3Dformat%26fit%3Dmax%26w%3D347.svg",
+      "alt": "Avenue Dental",
+      "w": 1189,
+      "h": 192
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/501240/original_logo-horizontal.svg?1776746024=&auto=format&fit=max&w=347",
+      "alt": "Avenue Dental",
+      "w": 1189,
+      "h": 192
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/501240/original_logo-horizontal_1776746024%3D%26auto%3Dformat%26fit%3Dmax%26w%3D347.svg",
+      "alt": "Avenue Dental",
+      "w": 1189,
+      "h": 192
+    },
+    {
+      "src": "https://avenue.dental/services/veneers/",
+      "alt": "",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/486547/original.jpg?h=800&fit=facearea&facepad=30&auto=format&w=1200",
+      "alt": "Dr. Oh",
+      "w": 900,
+      "h": 600
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/486546/original_dr-oh-real-patient.jpg?h=800&fit=crop&auto=format&w=1200",
+      "alt": "Dr. Oh with a patient",
+      "w": 1500,
+      "h": 999
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496030/original.JPG?1769538809=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1920&h=1280",
+      "alt": "veneers in a model dental arch",
+      "w": 3888,
+      "h": 2592
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496792/original_real-patient-smiling.jpg?1770677352=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1200&h=800",
+      "alt": "our real LA veneers patient",
+      "w": 900,
+      "h": 600
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496051/original.jpg?1769542676=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1080&h=1080",
+      "alt": "two veneer patients before and after treatment",
+      "w": 1296,
+      "h": 1296
+    },
+    {
+      "src": "https://avenue.dental/services/veneers/",
+      "alt": "",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496813/original_real-patient-before-after-veneers.jpg?1770680646=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1080&h=1080",
+      "alt": "LA patient before and after treatment",
+      "w": 1296,
+      "h": 1296
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496814/original_real-patient-before-after-smile-makeover.jpg?1770680647=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1080&h=1080",
+      "alt": "LA patient before and after treatment",
+      "w": 1296,
+      "h": 1296
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/496815/original_real-patient-before-after-veneers-invisalign.jpg?1770680882=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=1080&h=1080",
+      "alt": "LA patient before and after treatment",
+      "w": 1296,
+      "h": 1296
+    },
+    {
+      "src": "https://avenue.dental/services/veneers/",
+      "alt": "",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "src": "https://avenue.dental/assets/0xqdbt/CareCredit_Logo_White.png?auto=format&fit=max&w=1000",
+      "alt": "",
+      "w": 1406,
+      "h": 185
+    },
+    {
+      "src": "https://avenue.dental/assets/xp1i41/8099/486609/original_Lending-Point.png?1756916251=&amp%3Bauto=format&amp%3Bfit=max&auto=format&w=547&h=274",
+      "alt": "",
+      "w": 1025,
+      "h": 513
+    },
+    {
+      "src": "https://avenue.dental/_cache/static_map_e078540bca742a991c89f33ef1c0e224.png",
+      "alt": "Google map image of our location in 10390 Santa Monica Blvd Los Angeles, CA",
+      "w": 1280,
+      "h": 1280
+    }
+  ],
+  "bgImages": [
+    "https://avenue.dental/assets/xp1i41/8099/496819/original_real-patient-veneers_1770681268%3D%26auto%3Dformat%26fit%3Dmax%26w%3D1920.jpg",
+    "https://avenue.dental/assets/xp1i41/8099/487215/original_videoframe_poster.png?auto=format&fit=max&w=1920",
+    "https://avenue.dental/assets/xp1i41/8099/491354/original_veneers-by-min-hee-oh-dds-cosmetic-dentist_1761943643%3D%26auto%3Dformat%26fit%3Dmax%26w%3D1920.jpg",
+    "https://avenue.dental/assets/xp1i41/8099/493011/original_hero-gen-dent-mobile.jpg?1764012817=&auto=format&fit=max&w=1920",
+    "https://avenue.dental/assets/xp1i41/8099/486610/original_smiling-real-patient-b-porcelain-veneers_1756916348%3D%26auto%3Dformat%26fit%3Dmax%26w%3D1920.jpg",
+    "https://avenue.dental/assets/xp1i41/8099/502703/original.jpg?auto=format&fit=max&w=1920",
+    "https://avenue.dental/assets/xp1i41/8099/487174/original_social-stripe-logo.svg"
+  ],
+  "videos": [],
+  "iframes": [
+    "https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LeCRFotAAAAADP3H2T0_0JGiRA_ZQ7uLoWGsYam&co=aHR0cHM6Ly9hdmVudWUuZGVudGFsOjQ0Mw..&hl=en&v=w_Yb7dGGXaKesJ7BMiqFJqBG&size=invisible&anchor-ms=20000&execute-ms=30000&cb=qe6rwreifrme"
+  ],
+  "jsonLd": [
+    "\n      {\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"WebSite\",\"@id\":\"https://www.avenue.dental/#website\",\"url\":\"https://www.avenue.dental/\",\"name\":\"Avenue Dental\"},{\"@type\":\"Dentist\",\"@id\":\"https://www.avenue.dental/#practice\",\"name\":\"Avenue Dental\",\"description\":\"Avenue Dental is a dental practice with an office in Los Angeles, CA.\",\"url\":\"https://www.avenue.dental/\",\"telephone\":\"(213) 419-5500\",\"image\":\"/assets/xp1i41/8099/501240/original_logo-horizontal.svg?1776746024\",\"logo\":\"/assets/xp1i41/8099/501240/original_logo-horizontal.svg?1776746024\",\"priceRange\":\"$$$\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"10390 Santa Monica Blvd\",\"addressLocality\":\"Los Angeles\",\"addressRegion\":\"CA\",\"postalCode\":\"90025\",\"addressCountry\":\"US\"},\"geo\":{\"@type\":\"GeoCoordinates\",\"latitude\":34.0573014,\"longitude\":-118.4233498},\"openingHoursSpecification\":[{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":[\"Monday\"],\"opens\":\"08:00\",\"closes\":\"17:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":[\"Tuesday\"],\"opens\":\"08:00\",\"closes\":\"17:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":[\"Thursday\"],\"opens\":\"08:00\",\"closes\":\"17:00\"},{\"@type\":\"OpeningHoursSpecification\",\"dayOfWeek\":[\"Friday\"],\"opens\":\"08:00\",\"closes\":\"17:00\"}],\"sameAs\":[\"https://www.google.com/maps?cid=1816207810602792039\",\"https://www.instagram.com/drminheeoh\"]},{\"@type\":\"WebPage\",\"@id\":\"https://www.avenue.dental/services/veneers/#webpage\",\"url\":\"https://www.avenue.dental/services/veneers/\",\"name\":\"Veneers in Los Angeles, CA | Porcelain Veneers | Avenue Dental\",\"description\":\"Transform your smile with veneers in Los Angeles, CA. Dr. Oh blends global training, artistry, and advanced care to create veneers that define the LA smile.\",\"isPartOf\":{\"@id\":\"https://www.avenue.dental/#website\"},\"about\":{\"@id\":\"https://www.avenue.dental/#practice\"},\"mainEntity\":{\"@id\":\"https://www.avenue.dental/services/veneers/#service\"}},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://www.avenue.dental/services/veneers/#breadcrumbs\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":{\"@id\":\"https://www.avenue.dental/#webpage\"}},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"All Services\",\"item\":{\"@id\":\"https://www.avenue.dental/services/#webpage\"}},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Veneers in Los Angeles, CA | Porcelain Veneers | Avenue Dental\",\"item\":{\"@id\":\"https://www.avenue.dental/services/veneers/#webpage\"}}]},{\"@type\":\"Service\",\"@id\":\"https://www.avenue.dental/services/veneers/#service\",\"name\":\"Veneers\",\"description\":\"Transform your smile with veneers in Los Angeles, CA. Dr. Oh blends global training, artistry, and advanced care to create veneers that define the LA smile.\",\"provider\":{\"@id\":\"https://www.avenue.dental/#practice\"},\"url\":\"https://www.avenue.dental/services/veneers/\"}]}    ",
+    "[{\"@context\":\"https:\\/\\/schema.org\",\"@type\":\"Organization\",\"@id\":\"https:\\/\\/#org\",\"name\":\"Avenue Dental\",\"url\":\"https:\\/\\/\",\"logo\":{\"@type\":\"ImageObject\",\"url\":\"\\/assets/xp1i41\\/8099\\/501240\\/original_logo-horizontal.svg?1776746024\"},\"location\":[{\"@type\":\"LocalBusiness\",\"@id\":\"https:\\/\\/\\/locations#loc-0\",\"name\":\"Los Angeles Office\",\"image\":\"\\/_cache\\/static_map_9595f379e50201583f62cf0334e92bae.png\",\"priceRange\":\"$$$\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"10390 Santa Monica Blvd Suite 330\",\"addressLocality\":\"Los Angeles\",\"addressRegion\":\"CA\",\"postalCode\":\"90025\",\"addressCountry\":\"US\"},\"openingHours\":\"mo,tu,th,fr 08:00-17:00\",\"telephone\":\"(213) 419-5500\"}],\"sameAs\":[\"https:\\/\\/www.google.com\\/maps?cid=1816207810602792039\",\"https:\\/\\/www.instagram.com\\/drminheeoh\"]},{\"@context\":\"https:\\/\\/schema.org\",\"@type\":\"WebSite\",\"@id\":\"https:\\/\\/#site\",\"name\":\"Avenue Dental\"},{\"@context\":\"https:\\/\\/schema.org\",\"@type\":\"BreadcrumbList\",\"@id\":\"\\/services\\/veneers\\/#breadcrumb\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"item\":{\"@id\":\"https:\\/\\/\\/services\\/\",\"name\":\"All Services\"}},{\"@type\":\"ListItem\",\"position\":2,\"item\":{\"@id\":\"\\/services\\/veneers\\/\",\"name\":\"Veneers\"}}]},{\"@context\":\"https:\\/\\/schema.org\",\"@type\":\"WebPage\",\"url\":\"\\/services\\/veneers\\/\",\"isPartOf\":{\"@id\":\"https:\\/\\/#site\"},\"breadcrumb\":{\"@id\":\"\\/services\\/veneers\\/#breadcrumb\"}}]"
+  ],
+  "text": "GALLERY\n(213) 419-5500\nLOCATION\nCONTACT\nMENU\nVENEERS IN LOS ANGELES, CA\n\nSERVE LOOKS, SERVE CONFIDENCE\n\nA Globally Trained Expert in Veneers\n\nLuxury-Level Care in a Modern, Lounge-Like Space\n\nElite Partnerships With World-Class Dental Labs\n\nPersonalized Plans That Highlight Your Natural Beauty\n\n \n\n(213) 419-5500\nWRITE TO US\nLUXURY SMILE, FLEXIBLE PAYMENTS\n\nThe cost of veneers depends on the number of teeth being treated, the complexity of your case, the materials used, and your choice of provider. When you choose our dentist in Los Angeles, CA, you’re investing in bespoke artistry, world-class materials, and the precision of one of Century City’s most skilled veneer providers. To make veneers accessible, we offer an in-house membership plan and partner with CareCredit® and LendingPoint for affordable monthly payments. Our staff will gladly help you explore these options so you can determine a budgeting approach that's best for you.\n\nCONTACT OUR OFFICE\nWHY DR. OH IS LOS ANGELES’S VENEER OBSESSION\n\nIn Los Angeles, your smile is your signature. It’s not just about looking good in photos. It’s about walking into every room with confidence, charisma, and ease. Dr. Min Hee Oh has become a top choice for veneers in Century City because of a number of qualities that set her apart:\n\nGLOBAL EXPERTISE\n\nDr. Oh has elite training from Seoul National University and UCLA, plus she completes 300+ hours of continuing education each year. She blends the precision of advanced dentistry with the artistry of K-beauty to design veneers that look natural and unmistakably you.\n\nBOUTIQUE EXPERIENCE\n\nAvenue Dental in Los Angeles feels more like a modern lounge than a dental office. From curated amenities to one-on-one attention, every detail is designed around your comfort. With Dr. Oh personally overseeing each step, your care is as individualized as your smile.\n\nELITE DENTAL LABS\n\nNot all veneers are created equal. Our dentist in Los Angeles, CA, partners with world-class labs and master ceramicists who craft ultra-thin porcelain restorations. The result: veneers with flawless translucency, natural color gradation, and lasting durability.\n\nPERSONALIZED AESTHETICS\n\nEvery smile is unique, which is why Dr. Oh never takes a one-size-fits-all approach. Her veneer designs are tailored to your features, harmonizing facial balance and personality. The goal is simple: veneers that make you look like the very best version of yourself.\n\nREAL PATIENTS, REAL RESULTS \n \n\nOur patients' new smiles reflect the artistry and precision behind our custom porcelain veneers. Each smile transformation is meticulously designed to enhance natural beauty, refine symmetry, and elevate overall harmony. \n\nFrom concealing discoloration and worn enamel to closing gaps and reshaping teeth, these veneers are tailored to the individual’s facial features and aesthetic goals. \n\n \n\nVIEW MORE BEFORE AND AFTER PHOTOS\n \n\n \n\nTHIS IS YOUR MOMENT\n\nWhen you choose the right cosmetic dentistry provider, veneers can be a profound transformation. If you’ve been hiding your smile or feeling held back by imperfections, now is the time to turn self-consciousness into pure confidence. Dr. Oh merges artistry, technology, and compassion to craft veneers that elevate your look and your life. Why wait? Step into a new personal era defined by your confidence.\n\n(213) 419-5500\n\n\"I am an on-air TV host and my smile is very important for my success. I had the best experience at Avenue Dental. Dr. Oh and her staff were so great and took my dentist office visit fear away. My cleaning was completely painless and my teeth looked perfect afterwards. Go make your appointment you will be very happy:).\" — Derrial, 5-Star Review\n\nREAD MORE REVIEWS\nAM I A CANDIDATE FOR VENEERS?\n\nVeneers may be right for you if you want to:\n\nConceal chips, cracks, or worn edges\nCorrect discoloration resistant to whitening\nClose small gaps between teeth\nRefine the size, shape, or symmetry of your smile\n\nDuring your consultation, Dr. Oh will evaluate your oral health and cosmetic goals. If veneers aren’t the ideal solution, she may recommend alternatives like bonding or crowns. We also offer a full scope of general dentistry services to improve your oral health if you don't initially qualify. Every recommendation Dr. Oh provides is in your best interest, so you can expect an honest assessment and an effective strategy for realizing the smile you’re dreaming of.\n\nVENEERS AND SMILE MAKEOVERS\n\nFor many Angelenos, veneers are just one step in a larger transformation. As part of a comprehensive smile makeover, Dr. Oh often combines veneers with other types of cosmetic dentistry like Invisalign®, teeth whitening, or dental bonding to create a result that feels balanced, radiant, and uniquely yours. Whether you need one veneer or a full transformation, Dr. Oh will design a plan that aligns with your vision and lifestyle.\n\nCALL NOW TO BOOK\nHOW DR. OH DETERMINES IF VENEERS ARE RIGHT FOR YOU\n\nVeneers are an amazing option for the right smile, but the best results start with the right foundation. During your consultation with our dentist in Los Angeles, Dr. Oh looks beyond the surface to make sure porcelain veneers will be truly worth your investment. She’ll evaluate:\n\nGUM HEALTH AND INFLAMMATION\n\nHealthy, stable gums are essential. If you have gum disease, swelling, or recession, Dr. Oh may recommend periodontal care first so your veneers sit on a clean, predictable frame.\n\nORAL HEALTH AND DECAY RISK\n\nCavities, failing fillings, and enamel weakness can affect how veneers bond and how long they last. Any underlying issues should be addressed before cosmetic work begins.\n\nBITE ALIGNMENT, GRINDING, OR CLENCHING\n\nIf your bite places heavy pressure on the front teeth or if you grind at night, Dr. Oh may recommend orthodontics, a night guard, or another solution to protect your results.\n\nREQUEST A CONSULTATION\nWHEN A CROWN MAY BE THE BETTER OPTION\n\nVeneers in Los Angeles are ideal for cosmetic enhancement, but a crown can be the smarter choice when a tooth is significantly weakened, heavily filled, cracked, or has extensive damage. In these cases, a crown can provide full-coverage strength while still delivering a beautiful, natural-looking result.\n\nIf veneers are not your best match, Dr. Oh will walk you through alternatives like bonding, whitening, Invisalign, or crowns so your plan fits your smile and your long-term oral health.\n\nCARING FOR YOUR VENEERS\n\nYour veneers are designed to look incredible and feel natural, but long-term results depend on a few simple habits. At Avenue Dental in Los Angeles, Dr. Oh will guide you on how to protect your new smile so it stays polished, comfortable, and photo-ready. Instructions include:\n\nBrush twice a day and floss once a day to support healthy gums around your veneers.\nKeep up with routine cleanings so we can monitor your bite and protect your enamel.\nAvoid biting hard items with your front teeth (ice, hard candy, nails, packaging).\nIf you grind or clench, ask about a custom night guard to help protect your veneers and natural teeth.\nFAQ\nABOUT VENEERS IN LOS ANGELES, CA\nHow long do porcelain veneers last?\n\nWith proper care, veneers placed by Dr. Oh can last 10–15 years or more. She uses premium porcelain and works with elite labs to ensure durability and longevity.\n\nDo veneers look natural?\n\nThey do when you choose a great provider. Dr. Oh designs veneers to complement your facial features and skin tone. Her K-beauty aesthetic ensures results that are stunning yet absolutely natural-looking.\n\nIs the procedure painful?\n\nMost patients report little to no discomfort. Dr. Oh uses advanced techniques and gentle anesthesia to make the process as comfortable as possible.\n\nHow many veneers will I need?\n\nIt depends on your goals. Some patients receive a single veneer to enhance one tooth, while others may choose to receive 6–10 veneers to transform their entire smile. Dr. Oh will recommend the right plan for you.\n\nWill veneers damage my teeth?\n\nWhen placed by a skilled provider like Dr. Oh, veneers require minimal alteration of the tooth surface. She prioritizes preserving as much of your natural tissue as possible while delivering stunning results.\n\nContact Us\nFields With  Are Required\nFirst Name\nLast Name\nEmail\nPhone Number\nHow can we help?\nI consent to receive texts and calls from Avenue Dental.\nText and data rates may apply. Message frequency varies. Reply STOP to unsubscribe. View our Privacy Policy for more details.\nI agree to receive emails from Avenue Dental. I understand I can unsubscribe at any time.\nSUBMIT\nYou can also call us at (213) 419-5500. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.\nFLEXIBLE PAYMENT OPTIONS\n\nAt Avenue Dental, we don’t accept insurance directly, but we provide coded statements you can submit to your dental insurance company for possible reimbursement. To make care more affordable, we offer an in-house membership plan that provides savings on cosmetic services on other treatments. We also partner with CareCredit® and LendingPoint to provide flexible monthly payment options, ensuring that high-quality cosmetic dental care is accessible to every patient.\n\nCONTACT US ABOUT FINANCING\nOUR SERVICES\nVeneers\nFull Mouth Reconstruction\nInvisalign\nCosmetic Bonding\nDentures\nFull Mouth Dental Implants\nEmergency Dentistry\nDental Bridges\nDental Crowns\nDental Exams\nCosmetic Dentistry\nSmile Makeover\nFluoride Treatments\nTeeth Whitening\nTMJ Treatment\nTeeth Cleaning\nTeeth Whitening\nDental Implants\nGeneral Dentistry\nBOTOX® (Masseter / TMJ therapy)\nCALL (213) 419-5500\nLOS ANGELES OFFICE\n\n10390 Santa Monica Blvd\nSuite 330\nLos Angeles, CA 90025\n\nClosed Today\n\nABOUT OUR OFFICE\nDIRECTIONS\n(213) 419-5500\n\nRATE, REVIEW & EXPLORE\n\n*Disclaimer: results are not guaranteed, may not be permanent, and can vary per individual. Some images are of models, not actual patients.\n\n©2026 Avenue Dental\n\nSitemap | Privacy Policy"
+}

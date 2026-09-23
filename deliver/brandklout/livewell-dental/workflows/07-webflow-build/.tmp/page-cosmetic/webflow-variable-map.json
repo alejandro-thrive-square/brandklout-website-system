@@ -1,0 +1,160 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--bone",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bone",
+      "binding": "var(--bone)"
+    },
+    {
+      "sourceName": "--bone-2",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bone-2",
+      "binding": "var(--bone-2)"
+    },
+    {
+      "sourceName": "--f-body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--f-body",
+      "binding": "var(--f-body)"
+    },
+    {
+      "sourceName": "--f-head",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--f-head",
+      "binding": "var(--f-head)"
+    },
+    {
+      "sourceName": "--gold",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold",
+      "binding": "var(--gold)"
+    },
+    {
+      "sourceName": "--gold-soft",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold-soft",
+      "binding": "var(--gold-soft)"
+    },
+    {
+      "sourceName": "--ink",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink",
+      "binding": "var(--ink)"
+    },
+    {
+      "sourceName": "--ink-40",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-40",
+      "binding": "var(--ink-40)"
+    },
+    {
+      "sourceName": "--ink-60",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-60",
+      "binding": "var(--ink-60)"
+    },
+    {
+      "sourceName": "--line",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line",
+      "binding": "var(--line)"
+    },
+    {
+      "sourceName": "--navy",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--navy",
+      "binding": "var(--navy)"
+    },
+    {
+      "sourceName": "--navy-700",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--navy-700",
+      "binding": "var(--navy-700)"
+    },
+    {
+      "sourceName": "--navy-900",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--navy-900",
+      "binding": "var(--navy-900)"
+    },
+    {
+      "sourceName": "--r-lg",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--r-lg",
+      "binding": "var(--r-lg)"
+    },
+    {
+      "sourceName": "--r-md",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--r-md",
+      "binding": "var(--r-md)"
+    },
+    {
+      "sourceName": "--r-sm",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--r-sm",
+      "binding": "var(--r-sm)"
+    },
+    {
+      "sourceName": "--r-xl",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--r-xl",
+      "binding": "var(--r-xl)"
+    },
+    {
+      "sourceName": "--shell",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--shell",
+      "binding": "var(--shell)"
+    },
+    {
+      "sourceName": "--skin",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--skin",
+      "binding": "var(--skin)"
+    },
+    {
+      "sourceName": "--sp",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--sp",
+      "binding": "var(--sp)"
+    },
+    {
+      "sourceName": "--taupe",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--taupe",
+      "binding": "var(--taupe)"
+    },
+    {
+      "sourceName": "--teal",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--teal",
+      "binding": "var(--teal)"
+    }
+  ]
+}

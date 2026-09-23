@@ -15,15 +15,15 @@ Use it when:
 - a site is found carrying an old `webzite.*` id.
 
 Not this scenario: a new site gets its plugins in
-[Scenario 0 step 01](../scenario-0-new-site/01-client-inquiry.md); changing a plugin's SETTINGS on
+[Scenario 0 step 01](../scenario-0-new-site/01-client-inquiry/01-client-inquiry.md); changing a plugin's SETTINGS on
 one site (an origin, a site script) is [Scenario 2](../scenario-2-updates-expansions/README.md) with
 [`tools/instatic-embeds`](../tools/instatic-embeds/instatic-embeds.md).
 
 | Step | Directive | Gate to leave the step |
 | --- | --- | --- |
-| 01 | [Change and Version](01-change-and-version.md) | Source changed, version bumped in `plugin.json` and `plugins.json`, changelog line, `plugins.mjs test` green |
-| 02 | [Rollout](02-rollout.md) | Every target site on the release, staging and production equal, settings and records kept, verify green |
-| 03 | [Verify and Record](03-verify-and-record.md) | `plugins.mjs status` shows no drift for the plugin, registry and runbook updated, committed |
+| 01 | [Change and Version](./01-change-and-version/01-change-and-version.md) | Source changed, version bumped in `plugin.json` and `plugins.json`, changelog line, `plugins.mjs test` green |
+| 02 | [Rollout](./02-rollout/02-rollout.md) | Every target site on the release, staging and production equal, settings and records kept, verify green |
+| 03 | [Verify and Record](./03-verify-and-record/03-verify-and-record.md) | `plugins.mjs status` shows no drift for the plugin, registry and runbook updated, committed |
 
 ## Where things live
 
@@ -33,7 +33,7 @@ one site (an origin, a site script) is [Scenario 2](../scenario-2-updates-expans
   (`<client>` = production, `<client>-staging` = staging).
 - **Credentials:** `~/.webzite/.env`, one `[<client>]` section per site; staging uses the same
   login. Never in a doc, a commit or chat.
-- **Outputs:** `tools/instatic-plugins/.tmp/` (status reports, rollout snapshots; not committed) and
+- **Outputs:** `tools/instatic-plugins/output/` (status reports, rollout snapshots; not committed) and
   the repo runbook `.claude/runbook/` (committed).
 
 ## The rules that matter most
