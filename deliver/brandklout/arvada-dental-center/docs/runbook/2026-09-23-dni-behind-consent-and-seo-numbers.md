@@ -71,6 +71,16 @@ from a stale copy: Termly and every `data-categories` tag disappeared, while the
 changes survived, and the Implants site shows (720) 719-9579 live. The consent code was re-applied on
 top of the new GTM IDs, in draft, so it needs another publish.
 
+## Verified live on arvadadentalimplants.com (after the user's publish)
+
+With a driven Chrome session and the Termly proxy (`scratchpad accept-test.mjs`, the pattern in module 23):
+- **Before any choice:** Termly `autoBlock=off`, banner shown, 0 autoblocked, preferences link present.
+  Three scripts are held (Practice By Numbers, `number_pool.js`, `user_session.js`). The page shows
+  (720) 719-9579. Only GTM loads, under Consent Mode.
+- **After Accept:** 0 held scripts. `number_pool.js`, `user_session.js`, `assign-number` and
+  `practicenumbers` all fire, and the number swaps to a tracking line (303) 732-6450. So the pool already
+  matches 720-719-9579. The run claimed one real pool number.
+
 ## Gotchas
 
 - **Site Settings → Custom code saved from an open Designer tab overwrites API freeform writes**
