@@ -18,9 +18,8 @@ The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5
 ## Current
 
 - **Termly (LIVE, standard v2):** head has Termly with `autoBlock=off` above GTM; footer has GHL call tracking
-  tagged `advertising`, **which is wrong**: the pool must run without consent (client, 2026-09-22), so it
-  never swaps for a visitor who skips the banner. Untag it and publish, see
-  [`runbook/2026-09-24-dni-pool-held-by-termly.md`](./runbook/2026-09-24-dni-pool-held-by-termly.md). The GHL bridge is now the registered site script `BrandkloutConsentBridge` 2.2.0,
+  **untagged since 2026-09-24** (runs without consent, client instruction 2026-09-22; swap proven), see
+  [`runbook/2026-09-24-dni-pool-held-by-termly.md`](./runbook/2026-09-24-dni-pool-held-by-termly.md).. The GHL bridge is now the registered site script `BrandkloutConsentBridge` 2.2.0,
   **applied but unpublished**; the live site still runs the pasted v2.0 until the next publish.
   **Open:** the 4 ad landing pages have no Consent Preferences link.
   The standard, the kit and every site's state: [`deliver/process/23-termly-ghl-consent/`](../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).

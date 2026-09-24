@@ -1,4 +1,4 @@
-# 2026-09-24 — The DNI pool is held by Termly on this site
+# 2026-09-24 — The DNI pool was held by Termly on this site; released and proven
 
 Asked: "The DNI number pool script is not swapping on the Stone Dental site."
 
@@ -14,18 +14,17 @@ Asked: "The DNI number pool script is not swapping on the Stone Dental site."
   `22-instatic-api-sync/`): `assign-number` 201, `(817) 383-8361` → `(817) 510-5371` in 4 text spots
   and 7 `tel:` links. The display number is in the pool's swap list, so the Termly hold is the only blocker.
 
-## Not done — needs the fix applied
+## Fixed (LIVE)
 
-Neither Webflow MCP connection can reach this site (`webflow-brandklout` sees only the two Arvada
-sites; `webflow` only Mused Design; both 404 on `6a07d5aac093f0e4521d29bc`). The fix:
-
-1. Site Settings → Custom Code → Footer: on the two LeadConnector `<script>` lines, delete
-   `type="text/plain" data-categories="advertising"` and change the comment to "not consent-held
-   (client instruction 2026-09-22)".
-2. Publish both domains. **This also ships the pending changes**: BrandkloutConsentBridge 2.2.0 and
-   the Cookie Preferences control, applied since 2026-09-17/22 and never published.
-3. Check: `curl` the home page and confirm no `text/plain` on `number_pool`. Then run one fresh
-   visit with no consent (`dni-proof.mjs --relay`); `tel:` links should change.
+- At first neither Webflow MCP connection could reach this site: `webflow-brandklout`'s grant had
+  shrunk to the two Arvada sites. The user re-authenticated it with the whole workspace ticked (74 sites).
+- Footer freeform code: the two LeadConnector tags are now plain `<script src>`. The comment reads
+  "NOT consent-held (client instruction 2026-09-22)". Backup of the previous footer:
+  `workflows/08-qa/.tmp/footer-before-2026-09-24.html`.
+- Published to `www.` + apex + webflow.io. The site had last been published 2026-09-23 22:42, after the
+  consent scripts (Bridge 2.2.0, Preferences 1.3.0) were applied, so nothing else was pending from us.
+- **Proof, no consent given** (`dni-proof.mjs --relay`, fresh visitor, banner unanswered):
+  `(817) 383-8361` → `(817) 623-5358`, 4 text + 1 dashed + 7 `tel:` links.
 
 ## Changed
 
@@ -34,9 +33,9 @@ sites; `webflow` only Mused Design; both 404 on `6a07d5aac093f0e4521d29bc`). The
 
 ## Gotchas
 
-- This run claimed one real pool number ((817) 510-5371).
-- To reach the site again, re-authorise the Webflow MCP OAuth with Stone Dental ticked.
-  The grant is per site, and the current grants do not include it.
+- This run claimed two real pool numbers ((817) 510-5371, (817) 623-5358).
+- `get_site_freeform_code` 404 "The site cannot be found" = the site is not in the OAuth grant.
+  Re-auth `webflow-brandklout` and tick every site: the grant is replaced wholesale.
 
 ## Version Control
 

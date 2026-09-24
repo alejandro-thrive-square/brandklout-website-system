@@ -116,7 +116,7 @@ script is served same-origin, so `script-src 'self'` is enough.
 
 | Site | Platform | ID / base | Bridge | Live? | Termly | Trackers outside GTM (phase 2) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Stone Dental Implant Center | Webflow | `6a07d5aac093f0e4521d29bc` | 2.2.0 registered; old v2.0 paste removed from footer | **v2.0 live**; v2.2 ships on next publish (left unpublished: pending state unclear) | **done**, off, above GTM | done (GHL tagged) |
+| Stone Dental Implant Center | Webflow | `6a07d5aac093f0e4521d29bc` | 2.2.0 registered; old v2.0 paste removed from footer | **v2.0 live**; v2.2 ships on next publish (left unpublished: pending state unclear) | **done**, off, above GTM | done; GHL pool **untagged** 2026-09-24 (client: pools run without consent) |
 | Grand Mission Dentistry | Webflow | `698111847e9608eb30ee21c6` | 2.2.0 | **live** (published 2026-09-17), checked on /contact and /free-e-book | — | GHL (head), Ahrefs; GTM noscript only, no GTM loader in head |
 | Arvada Dental Center | Webflow | `693c51e685b19f0d0c149cab` | 2.2.0 | next publish (Designer changes pending since 2026-09-15) | — | GHL (head **and** footer, loaded twice), OpenAI pixel |
 | Legacy Dental Pasadena | Webflow | `68e12d861f12c7f04a762a8e` | 2.2.0 | next publish (pending since 2026-09-10; also serves caldentalpasadena.com) | — | GHL, Meta Pixel, Ahrefs, Sally AI widget |

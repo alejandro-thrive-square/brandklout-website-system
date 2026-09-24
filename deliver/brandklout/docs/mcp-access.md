@@ -14,7 +14,7 @@ Client delivery (partner agency).
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — authenticated on the `team` profile 2026-08-07.** `list_sites` returns 9 sites, all in workspace `63b4b7393e89b78575e9a9bb`. |
+| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — re-authenticated 2026-09-24 with the whole workspace ticked:** `list_sites` returns 74 sites, all in workspace `63b4b7393e89b78575e9a9bb`. Before this the grant had shrunk to the two Arvada sites (a narrower re-auth), and every other client 404'd with "site cannot be found". That 404 means the site is not in the grant, not that the id is wrong. |
 | `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../../mcp-servers/asana/setup.md). |
 
 ### Why one Webflow instance, not one per client
