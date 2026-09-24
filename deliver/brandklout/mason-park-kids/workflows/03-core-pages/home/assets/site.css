@@ -1501,8 +1501,11 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .lf-section p { font-size: calc(1.02rem * var(--t-text)); line-height: 1.78; }
 .lf-lead { font-family: var(--font-ui); font-weight: 800; font-size: var(--f-label); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin-bottom: .9rem; }
 .lf-ticks { display: grid; gap: .6rem; margin: 1rem 0; }
-.lf-ticks li { display: flex; gap: .75rem; align-items: baseline; font-size: var(--f-body); line-height: 1.6; color: var(--fg-body); }
-.lf-ticks li::before { content: ""; flex: none; width: .55rem; height: .55rem; border-radius: 50%; background: var(--sun); transform: translateY(-.1rem); }
+/* A block, not a flex row: as flex, a leading <b> became its own item, and
+   overflow-wrap:anywhere let it shrink to one letter - "Fluor / ide." on two
+   lines (BugHerd #172). The dot is positioned on the first line instead. */
+.lf-ticks li { position: relative; padding-left: 1.3rem; font-size: var(--f-body); line-height: 1.6; color: var(--fg-body); }
+.lf-ticks li::before { content: ""; position: absolute; left: 0; top: calc(.8em - .275rem); width: .55rem; height: .55rem; border-radius: 50%; background: var(--sun); }
 .lf-more { margin-top: 1.25rem; }
 .lf-more summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: .5rem; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .lf-more summary::-webkit-details-marker { display: none; }

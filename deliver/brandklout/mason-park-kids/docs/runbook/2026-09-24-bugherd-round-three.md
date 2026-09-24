@@ -52,8 +52,29 @@ to `is-p6`. The new-patient-special card stays without a photo. Checked at pinne
   way to photograph what the pinned row shows. On live pages the Termly banner covers the images, so
   `pa169-check.mjs` checks the DOM instead.
 
+### Evening: #170-#187
+
+The reviewer added 18 notes that name photos from the practice Drive by filename. **15 are
+done, published (21:33 UTC, `publish-0924d.sh`: /, comprehensive, about-us and site.css),
+verified (`verify-0924b.mjs`, all pass) and closed.** #174 got a reply but stays open with
+**#176 (IMG_7693) and #182 (IMG_7695, the play area)**: both attachments are dim viewer
+screenshots 300-500 px wide. Their originals are in Drive, and **the Drive token had expired**
+(`invalid_grant`). `scripts/drive.mjs` is on `main`, not on this branch; a copy ran from the
+scratchpad. The user has to run `drive.mjs auth` before those two can be done.
+
+- Nine new frames (`rv-model-girl` ... `rv-ceiling-tv-2`) come from the attachments. Viewer
+  borders were cropped using content bounds (column/row std > 6). `bugherd-0924b.py` is the plan;
+  it reuses round three's `swap()` and adds `INSERTS` for path cards that had no photo.
+- **#172**: `.lf-ticks li` was a flex row, so a leading `<b>` became its own flex item, and
+  `overflow-wrap: anywhere` let it shrink to one letter ("Fluor / ide."). The item is now a block
+  with an absolutely positioned dot. This applies to every tick list on the site.
+- `import-pages.mjs --only` now takes a comma-separated list of converted slugs.
+- #180's "PXL_20240408_202735547" is the same frame as round three's `rv-shelf-smile` (#103), so
+  that key was reused.
+
 ### Next
 
+1. **#176, #182 (and #174)**: run `drive.mjs auth`, pull IMG_7693 and IMG_7695 from the Mason Park shared drive, place them (step 1 of the comprehensive path; about-us mosaic `.is-a`), publish, reply, close.
 1. **#82**: reattach the homepage "comfort" band photo when the reviewer resends it (the reply asks).
 2. #34 (GHL form URL) and #38 (re-check) are still where 09-21 left them. Confirm the hours with the practice before production.
 3. `recipes/` and `build-pages.mjs` are now behind the pages on the photo swaps and most of the copy. The files are the source (03 README); do not rebuild a page from its recipe without porting this round first.

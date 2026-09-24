@@ -1,7 +1,7 @@
 /**
  * Write the converted page bodies into the CMS.
  *
- *   node import-pages.mjs [--only <slug>] [--publish]
+ *   node import-pages.mjs [--only <slug>[,<slug>...]] [--publish]
  *
  * Every one of the eleven core pages is written, whether or not a row already
  * exists: eight of the slugs are pages the 02 migration imported and this run
@@ -36,7 +36,8 @@ const bySlug = new Map(existing.map((r) => [r.slug, r]));
 console.log(`site: ${BASE}`);
 console.log(`${all.length} converted, ${existing.length} already in the CMS`);
 
-const wanted = ONLY ? all.filter((p) => p.slug === ONLY) : all;
+// --only takes one converted slug or a comma-separated list: --only /,/about-us
+const wanted = ONLY ? all.filter((p) => ONLY.split(",").includes(p.slug)) : all;
 if (!wanted.length) { console.error(`nothing matches --only ${ONLY}`); process.exit(1); }
 
 const site = await getSite();

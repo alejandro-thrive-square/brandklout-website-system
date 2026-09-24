@@ -181,6 +181,9 @@ REVIEWER = {k: (REVIEWERDIR, f"{k}.png", WIDE) for k in (
     "rv-front-desk-team", "rv-shelf-smile", "rv-ceiling-tv", "rv-cap-exam",
     "rv-cap-model", "rv-anticavity-kids", "rv-mom-toddler", "rv-baby-paste",
     "rv-scanner", "rv-emergency", "rv-desk-phone", "rv-desk-phone-2",
+    # BugHerd #170-#184 (2026-09-24, later): named by the reviewer from the Drive
+    "rv-model-girl", "rv-mouth-exam", "rv-high-five", "rv-mirror-exam", "rv-toddler-exam",
+    "rv-brushing-lesson", "rv-tooth-calendar", "rv-cap-model-2", "rv-ceiling-tv-2",
 )}
 
 # --- mirrored variants ------------------------------------------------------
