@@ -12,7 +12,7 @@ Do not read them all.
 ## Call tracking vs consent — 2026-09-23 (latest)
 
 - **Implants site:** DNI (GHL + Practice By Numbers) runs **before** consent. Published and verified.
-- **Center site:** the GHL pair still waits for advertising consent.
+- **Center site:** the same. The GHL pool runs before consent. Published and verified.
 
 ### Earlier the same day
 

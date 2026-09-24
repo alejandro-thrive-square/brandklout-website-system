@@ -88,7 +88,10 @@ Once the user saw the hold working, they asked for DNI to fire before consent ("
 the preferences control and the bridge stay. The agent published at about 01:05 UTC (the only pending delta
 was 17 s of post-publish noise). Verified live with no banner click: 0 held scripts, and the number swaps to
 (303) 732-6450 on page load.
-**The Center site (`693c51e6…`) still holds its GHL pair until consent.** Ask before changing it.
+**Center site, same day ("yes, same on the dental center"):** the GHL pair is untagged and published at about
+01:26 UTC. Verified live with no banner click: the number swaps to (983) 228-0387. Only the OpenAI pixel is
+still held. The home page's hyphenated `(303)-421-7611` copy (outside the components) is **not** swapped by
+the pool. Practice By Numbers also loads there, which means GTM fires it.
 GTM was never blocked. Termly's Consent Mode default is `denied`, so Google tags run cookieless until Accept.
 
 ## Gotchas
