@@ -29,6 +29,12 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-24: `pediatricdentistkatytx.com` (the old domain) is prepped to 301 to
+`masonparkpediatricdental.com`,** through a Cloudflare Worker on the pending zone, tested on workers.dev.
+It is still delegated to Squarespace DNS and currently serves SiteGround's suspended 503. **Live the
+moment the Squarespace owner sets NS `ajay`/`ruth.ns.cloudflare.com`**; then run
+`workflows/.tmp/legacy-domain/verify.mjs`. See `runbook/2026-09-24-legacy-domain-redirect-prepped.md`.
+
 **2026-09-24: BugHerd round three, #42-#168. 126 of 127 done, published to staging, verified
 (`verify-0924.mjs` 118/118) and replied.** The reviewer's own photos across ~55 slots (`rv-*` keys,
 `REVIEWER` in `prep-images.py`), 11 band photos removed, ~30 copy edits, less space between
