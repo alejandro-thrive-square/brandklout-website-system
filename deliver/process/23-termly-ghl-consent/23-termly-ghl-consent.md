@@ -102,8 +102,10 @@ script is served same-origin, so `script-src 'self'` is enough.
    (see `18-instatic-embeds`). If Termly is already there with `autoBlock=on`, switch it to `off`.
 2. **Tag every tracker outside GTM.** Change `<script src=…>` to
    `<script type="text/plain" data-categories="advertising|analytics" src=…>`, and inline pixels to
-   `<script type="text/plain" data-categories="…">`. Known so far: GHL `number_pool.js` and
-   `user_session.js` (advertising), Meta Pixel (advertising), the OpenAI `oaiq` pixel (advertising),
+   `<script type="text/plain" data-categories="…">`. **Exception: never tag GHL `number_pool.js` or
+   `user_session.js`.** The client's instruction (2026-09-22) is that call tracking runs without
+   consent; a held pool never swaps for a visitor who ignores the banner (Stone Dental, found
+   2026-09-24). Tag: Meta Pixel (advertising), the OpenAI `oaiq` pixel (advertising),
    Ahrefs analytics (analytics).
 3. **Add the Consent Preferences link** to every footer, landing pages included.
 4. **Test** in a private window, or with `check --termly-proxy`. Before answering the banner:
