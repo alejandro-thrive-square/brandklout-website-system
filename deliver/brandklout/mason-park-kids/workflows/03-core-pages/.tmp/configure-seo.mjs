@@ -40,7 +40,9 @@ import { api } from "./insta.mjs";
 
 const APPLY = process.argv.includes("--apply");
 
-const SITE = "https://pediatricdentistkatytx.com";
+// 2026-09-24: the production launch. masonparkpediatricdental.com is the live domain on this
+// instance; pediatricdentistkatytx.com 301s to it (Cloudflare Worker, once its NS move).
+const SITE = "https://masonparkpediatricdental.com";
 const NAME = "Mason Park Dental for Kids";
 const LOGO = "/uploads/Cij5leM8-W0W5EUmwh-vA-logo.png";
 // The whole team in the waiting room. The share card is the first thing a
