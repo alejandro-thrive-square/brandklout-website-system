@@ -1,6 +1,6 @@
 # 2026-09-24 — Backup, then a content-fit QA pass on all 80 pages before Jessica's review
 
-**Published seq 22** (from 21). Report: [`../qa-report.md`](../qa-report.md). Reviewer doc:
+**Commit:** `b85fbd57`. **Published seq 22** (from 21). Report: [`../qa-report.md`](../qa-report.md). Reviewer doc:
 "West LA Implants — Pre-Review QA" <https://claude.ai/code/artifact/6613c321-fd82-4fb0-aae3-04222e1b3cbc>.
 
 ## Done
