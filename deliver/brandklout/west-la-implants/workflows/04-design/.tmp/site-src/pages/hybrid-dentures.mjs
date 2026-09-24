@@ -54,7 +54,7 @@ export default {
         { b: 'Stable', span: 'Four or more implants' },
       ],
       photos: [
-        { src: '/media/img/patients-eating.jpg', alt: 'Patients enjoying a meal together' },
+        { src: '/media/img/patients-eating.jpg', alt: 'A couple enjoying a meal together' },
         { src: '/media/img/implant-post-model.jpg', alt: 'A dental implant post' },
         { src: '/media/img/still-emily-consult.jpg', alt: 'Emily in consultation' },
       ],

@@ -12,7 +12,7 @@ const HOODS = [
     minutes: '5', route: 'down Bundy or Barrington to Wilshire',
     landmarks: 'Brentwood Country Mart, San Vicente Blvd, the Brentwood Village',
     faqLocal: [{ q: 'Where exactly is the office from Brentwood?', a: 'At 12301 Wilshire Blvd, Suite 205, at the corner of Wilshire and Bundy, on Brentwood’s southern edge. Most Brentwood patients are here in about five minutes.' }],
-    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'A patient welcomed at the front desk', photoPos: '10% 50%', patient: 'leslie',
+    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'Our front desk welcoming a patient', photoPos: '10% 50%', patient: 'leslie',
   },
   {
     slug: 'santa-monica', name: 'Santa Monica', prep: 'in',
@@ -20,7 +20,7 @@ const HOODS = [
     minutes: '10 to 15', route: 'east along Wilshire, with no freeway',
     landmarks: 'Montana Avenue, Santa Monica Pier, Third Street Promenade',
     faqLocal: [{ q: 'Is it easier than driving to a Santa Monica office?', a: 'Often, yes. Wilshire is a straight run east with parking at the building, which avoids the beach traffic and the meters downtown.' }],
-    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'A patient welcomed at the front desk', photoPos: '10% 50%', patient: 'emily',
+    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'Our front desk welcoming a patient', photoPos: '10% 50%', patient: 'emily',
   },
   {
     slug: 'westwood', name: 'Westwood', prep: 'in',
@@ -77,7 +77,7 @@ export default HOODS.map((h) => ({
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/missing-teeth-model.jpg' },
-      text: `${h.name} has no shortage of dentists. It has very few rooms with a surgical robot, a CBCT scanner, an in-house lab and a surgeon who does the grafting and the placement himself.`,
+      text: `${h.name} has no shortage of dentists. Very few have a surgical robot, a CBCT scanner, an in-house lab and one surgeon who grafts and places.`,
       after: ['That is what the short drive along Wilshire buys: one plan, one surgeon, one roof, from the first scan to the final tooth.'],
     },
     {

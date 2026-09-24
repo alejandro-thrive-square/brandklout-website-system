@@ -59,7 +59,7 @@ export default {
       ],
       actions: [{ href: '/implant-cost.html', label: 'What decides the cost', kind: 'text' }],
       photos: [
-        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient greeted at the front desk' },
+        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
         { src: '/media/img/front-desk-receptionist.jpg', alt: 'The front desk at West LA Implants' },
         { src: '/media/img/doctor-patient-2.jpg', pos: '60% 40%', alt: 'Dr. Barriere with a patient' },
       ],

@@ -16,6 +16,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { page as shell } from './lib/layout.mjs';
 import { renderChapters, faqJsonLd } from './lib/blocks.mjs';
+import { applyImageMap } from './lib/image-map.mjs';
 import { SITE } from './lib/site.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -105,6 +106,26 @@ for (const p of [...(await load('pages')), ...(await load('templates'))]) {
   if (p.description.length > 165) console.warn(`  description over 160 chars on ${p.slug} (${p.description.length})`);
   const body = p.body ?? renderChapters(p.chapters);
   pages.push({ ...p, body, seo: seoFor(p, p.chapters) });
+}
+
+/* the image-to-copy map (lib/image-map.mjs) — after every page has rendered, before anything is written */
+{
+  const misses = applyImageMap(pages, (f) => fs.existsSync(path.join(here, 'media', 'img', f)));
+  // second pass: rows without an alt take the one this photo carries on the finished site
+  const alts = {};
+  for (const p of pages) for (const m of p.body.matchAll(/<img[^>]*src="\/media\/img\/([^"]+)"[^>]*alt="([^"]*)"/g)) {
+    if (m[2] !== '__ALT__' && m[2].length > (alts[m[1]] || '').length) alts[m[1]] = m[2];
+  }
+  for (const p of pages) p.body = p.body.replace(/(<img[^>]*src="\/media\/img\/([^"]+)"[^>]*?)alt="__ALT__"/g, (_, pre, f) => `${pre}alt="${(alts[f] || '').replace(/"/g, '&quot;')}"`);
+  // one alt per photo: Instatic stores alt on the asset, so two different captions means one page is wrong
+  const seenAlt = {};
+  for (const p of pages) for (const m of p.body.matchAll(/<img[^>]*src="\/media\/img\/([^"]+)"[^>]*alt="([^"]+)"/g)) (seenAlt[m[1]] ||= new Set()).add(m[2]);
+  const multi = Object.entries(seenAlt).filter(([, v]) => v.size > 1).map(([f, v]) => `${f}: ${[...v].join(' | ')}`);
+  if (multi.length) console.warn('PHOTOS WITH MORE THAN ONE ALT (Instatic keeps the longest):\n  ' + multi.join('\n  '));
+  if (misses.length) {
+    console.error('IMAGE MAP rows that did not apply:\n  ' + misses.join('\n  '));
+    if (process.argv.includes('--strict')) process.exit(1);
+  }
 }
 
 // media is copied AFTER the templates ran: the journal copies its hero images into media/img as it loads

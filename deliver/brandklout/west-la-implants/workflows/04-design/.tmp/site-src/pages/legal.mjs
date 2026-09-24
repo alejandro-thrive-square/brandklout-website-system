@@ -17,7 +17,7 @@ const accessibility = {
       type: 'cover', name: 'Arrival', kicker: 'Accessibility',
       title: 'A website everyone can <em>use.</em>',
       lead: 'West LA Implants wants every patient to be able to read, navigate and book on this site, whatever tools they use to do it.',
-      image: { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient welcomed at the front desk' },
+      image: { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
       actions: [{ href: '#invitation', label: 'Report a Problem' }],
     },
     {

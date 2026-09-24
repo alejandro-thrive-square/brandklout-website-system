@@ -61,7 +61,7 @@ export function statement(b) {
   ${b.image ? `<div class="st-bg" aria-hidden="true">${img({ src: b.image.src, alt: '' }, 'st-img')}</div>` : ''}
   <div class="wrap st-stage">
     ${tag(b.tag)}
-    <p class="st-big serif">${b.text}</p>
+    <p class="st-big serif">${b.text.replace(/ (\S+)$/, '&nbsp;$1')}</p>
     <div class="st-after">${paras(b.after)}${b.figure ? `<div class="st-figure"><b data-count="${b.figure.value}"${b.figure.suffix ? ` data-suffix="${b.figure.suffix}"` : ''}>0</b><span>${b.figure.label}</span></div>` : ''}</div>
   </div>
 </section>`
@@ -242,7 +242,7 @@ export function stories(b) {
     const media = p.clip
       ? `<video class="sy-clip" poster="${p.poster}" muted loop playsinline preload="none" data-src-hover="${p.clip}" aria-label="${p.name}, in her own words"></video>`
       : `<img src="${p.poster}" alt="${p.name} after treatment" loading="lazy">`
-    return `<article class="sy-card"><a class="frame frame--tall sy-media" href="https://www.youtube.com/watch?v=${p.film.id}" target="_blank" rel="noopener" aria-label="Watch ${p.name}’s story on YouTube">${media}<span class="sy-play" aria-hidden="true"></span></a><blockquote class="serif">&ldquo;${p.quote}&rdquo;</blockquote><div class="sy-who"><b>${p.name}</b><span>${p.treatment}</span></div><div class="sy-ba"><img src="${p.before}" alt="${p.name} before" loading="lazy"><img src="${p.after}" alt="${p.name} after" loading="lazy"></div></article>`
+    return `<article class="sy-card"><a class="frame frame--tall sy-media" href="https://www.youtube.com/watch?v=${p.film.id}" target="_blank" rel="noopener" aria-label="Watch ${p.name}’s story on YouTube">${media}<span class="sy-play" aria-hidden="true"></span></a><blockquote class="serif">&ldquo;${p.quote}&rdquo;</blockquote><div class="sy-who"><b>${p.name}</b><span>${p.treatment}</span></div>${b.ba === false ? '' : `<div class="sy-ba"><img src="${p.before}" alt="${p.name} before" loading="lazy"><img src="${p.after}" alt="${p.name} after" loading="lazy"></div>`}</article>`
   }).join('\n')
   return `<section class="b-stories" id="${b.id || 'stories'}">
   <div class="wrap sy-head">${tag(b.tag || 'The Stories')}<h2 class="h2">${b.title}</h2>${b.lead ? `<p class="lead">${b.lead}</p>` : ''}</div>

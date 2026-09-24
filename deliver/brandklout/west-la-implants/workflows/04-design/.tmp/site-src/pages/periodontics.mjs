@@ -19,7 +19,7 @@ export default {
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/hygienist-procedure.jpg' },
-      text: 'Gingivitis becomes periodontitis becomes bone loss becomes tooth loss. The bacteria that do it are linked to diabetes complications, blood pressure and heart disease.',
+      text: 'Gingivitis becomes periodontitis, then bone loss, then tooth loss. The same bacteria are linked to diabetes, blood pressure and heart disease.',
       after: ['Even with implants, the gums around them can get the same disease. Keeping them healthy is what keeps the implant.'],
     },
     {

@@ -60,7 +60,7 @@ export default {
       actions: [{ href: '/what-to-expect.html', label: 'What to expect at your first visit', kind: 'text' }],
       photos: [
         { src: '/media/img/staff.jpg', alt: 'The West LA Implants team' },
-        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient welcomed at the front desk' },
+        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
         { src: '/media/img/still-reception-neon.jpg', alt: 'The reception' },
       ],
       flip: true,

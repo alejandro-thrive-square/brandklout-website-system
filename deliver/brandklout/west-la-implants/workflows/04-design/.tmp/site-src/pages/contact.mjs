@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Contact · Wilshire Blvd, Los Angeles',
       title: 'Get in <em>touch.</em>',
       lead: 'Call, book a time online, or send a request. New patients have their own line, and a real person answers it.',
-      image: { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient welcomed at the front desk' },
+      image: { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
       actions: [{ href: 'tel:+13106929316', label: 'Call (310) 692-9316' }, { href: 'https://www.zocdoc.com/booking-link/practice/west-la-implants-65990', label: 'Book online on Zocdoc', kind: 'text', ext: true }],
       meta: [
         { b: 'New patients', span: '(310) 692-9316' },

@@ -58,7 +58,7 @@ export default {
       ],
       actions: [{ href: '/bone-grafting.html', label: 'Socket preservation and grafting', kind: 'text' }],
       photos: [
-        { src: '/media/img/implant-crown-model.jpg', alt: 'A single implant with its crown' },
+        { src: '/media/img/implant-crown-model.jpg', alt: 'Two implants supporting a three-tooth bridge' },
         { src: '/media/img/bone-graft-model.jpg', pos: '70% 50%', alt: 'An implant and crown replacing an extracted tooth' },
         { src: '/media/img/still-emily-consult.jpg', alt: 'A consultation at West LA Implants' },
       ],

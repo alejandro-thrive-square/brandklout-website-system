@@ -1,0 +1,362 @@
+[
+ {
+  "key": "cosmetic-bonding",
+  "id": 23322018,
+  "pos": "58% 60%",
+  "alt": "Curing light hardening tooth-coloured composite on front teeth, lips retracted",
+  "why": "True curing-light-on-front-teeth close-up on a dark ground; no faces, no goggles cliche",
+  "retry_query": null
+ },
+ {
+  "key": "cosmetic-crown",
+  "id": 44103657,
+  "pos": "48% 50%",
+  "alt": "Gloved hands seating porcelain restorations on front teeth under a rubber dam",
+  "why": "Only candidate showing restorations actually being fitted in the mouth; others are lab shots or shade guides",
+  "retry_query": null
+ },
+ {
+  "key": "cosmetic-gum",
+  "id": null,
+  "pos": null,
+  "alt": null,
+  "why": "All 16 are curing lights or exams on young women in orange goggles; none shows a laser on the gum line or a gummy smile",
+  "retry_query": "soft tissue dental laser gum line closeup"
+ },
+ {
+  "key": "cosmetic-whitening",
+  "id": 174116487,
+  "pos": "55% 55%",
+  "alt": "Blue whitening lamp positioned over a woman's smile in a dental chair",
+  "why": "Clear in-office whitening lamp on the smile with retractor, natural clinic setting, subject holds a tall crop",
+  "retry_query": null
+ },
+ {
+  "key": "cost-warranty",
+  "id": 377680989,
+  "pos": "55% 50%",
+  "alt": "Hands signing a document on a clipboard at a desk",
+  "why": "Hands-only signing, moody low-key light that fits the dark design, no readable text or faces",
+  "retry_query": null
+ },
+ {
+  "key": "dentures-meal",
+  "id": 27232985,
+  "pos": "45% 45%",
+  "alt": "Older man smiling while eating dinner with his partner at home",
+  "why": "Warm, candid, mid-bite with a fork; older couple, not pizza, dark-warm palette",
+  "retry_query": null
+ },
+ {
+  "key": "extraction-aftercare",
+  "id": null,
+  "pos": null,
+  "alt": null,
+  "why": "No adult with a cold pack on the jaw on a sofa; the ice-pack shots are white-backdrop grimaces or a pack on the forehead",
+  "retry_query": "middle aged man holding ice pack to jaw on sofa at home"
+ },
+ {
+  "key": "failing-clean",
+  "id": 21959228,
+  "pos": "55% 45%",
+  "alt": "Close-up of a water flosser cleaning along the gum line",
+  "why": "Tight, naturally lit water-flosser close-up; subject is the tool at the teeth, not a posed face",
+  "retry_query": null
+ },
+ {
+  "key": "failing-floss",
+  "id": 381320475,
+  "pos": "50% 45%",
+  "alt": "Grey-haired man flossing his teeth at an arched bathroom mirror",
+  "why": "Natural home bathroom, a greying 40+ man mid-floss, reflection sits centrally for a portrait crop",
+  "retry_query": null
+ },
+ {
+  "key": "hood-beverly-hills",
+  "id": 31322302,
+  "pos": "50% 45%",
+  "alt": "Palm-lined residential street in Beverly Hills on a sunny day",
+  "why": "Titled Beverly Hills; the classic tall-palm residential avenue, no shop signage; the vertical palms suit a portrait crop.",
+  "retry_query": null
+ },
+ {
+  "key": "hood-brentwood",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No candidate is titled Brentwood; they are Beverly Hills, Venice, Cincinnati, London, Sydney and other places.",
+  "retry_query": "Brentwood Los Angeles San Vicente Boulevard coral trees"
+ },
+ {
+  "key": "hood-century-city",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No candidate names Century City; the LA ones are all downtown skylines (wrong neighbourhood), the rest are other cities.",
+  "retry_query": "Century City Los Angeles skyline Avenue of the Stars"
+ },
+ {
+  "key": "hood-culver-city",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No candidate is Culver City; they show Hollywood, the Sunset Strip, San Francisco and Australian towns.",
+  "retry_query": "Culver City California downtown Culver Boulevard"
+ },
+ {
+  "key": "hood-santa-monica",
+  "id": 149300013,
+  "pos": "45% 30%",
+  "alt": "Palm-topped Santa Monica bluffs above Pacific Coast Highway",
+  "why": "Taken from the culver-city pool; titled Santa Monica and verifiable (Palisades bluffs, Ocean Ave palms, PCH). None of the santa-monica pool names the city.",
+  "retry_query": null
+ },
+ {
+  "key": "hood-westwood",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No candidate is Westwood Village; they are Beverly Hills, Hollywood, Santa Barbara, Stanford and foreign cities.",
+  "retry_query": "Westwood Village Los Angeles Broxton Avenue"
+ },
+ {
+  "key": "index-cosmetic",
+  "id": 416031523,
+  "pos": "40% 45%",
+  "alt": "Shade guide held beside a smiling woman's teeth in a dental chair",
+  "why": "Shows the brief exactly: a shade guide beside a bright smile in a real clinic chair, with natural warmth and no white-backdrop pose.",
+  "retry_query": null
+ },
+ {
+  "key": "j-aesthetic",
+  "id": 40221971,
+  "pos": "40% 35%",
+  "alt": "Mature woman with short grey hair laughing outdoors in soft sunlight",
+  "why": "Confident open laugh from a woman over 50, natural outdoor light and bokeh, editorial rather than studio; the other apple shots are white-backdrop poses.",
+  "retry_query": null
+ },
+ {
+  "key": "j-after-extraction",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No render of an implant going into an extraction socket; the candidates are chairside surgery photos, bloody guided-surgery close-ups and lab shots.",
+  "retry_query": "dental implant immediate placement extraction socket 3d render"
+ },
+ {
+  "key": "j-care",
+  "id": 428015601,
+  "pos": "72% 45%",
+  "alt": "Water flosser tip rinsing between teeth along the gumline",
+  "why": "Only frame that shows the flosser working at the gumline; the others are young models with braces posing to camera.",
+  "retry_query": null
+ },
+ {
+  "key": "j-custom",
+  "id": 40648371,
+  "pos": "58% 45%",
+  "alt": "Dental technician hand-painting a prosthesis at a dark lab bench",
+  "why": "Real hand-finishing of a prosthesis in low, moody light that suits the dark editorial palette.",
+  "retry_query": null
+ },
+ {
+  "key": "j-extract-all",
+  "id": 431293531,
+  "pos": "62% 50%",
+  "alt": "Dentist pointing at a panoramic X-ray on a monitor beside a patient",
+  "why": "Panoramic X-ray is clearly on a screen, in a real clinic with a modern setting and a calm exchange.",
+  "retry_query": null
+ },
+ {
+  "key": "j-extraction-care",
+  "id": 431383216,
+  "pos": "62% 40%",
+  "alt": "Woman holding an ice pack to her cheek at a sunlit desk",
+  "why": "Adult at home with a cold compress in soft natural light, with an understated expression.",
+  "retry_query": null
+ },
+ {
+  "key": "j-false-teeth",
+  "id": 385922388,
+  "pos": "80% 50%",
+  "alt": "Dentures soaking in a glass beside reading glasses",
+  "why": "Dentures in a glass on a bedside table, with low-key light and a premium, lived-in still life.",
+  "retry_query": null
+ },
+ {
+  "key": "j-four-types",
+  "id": 7125192,
+  "pos": "50% 55%",
+  "alt": "Implant-supported overdenture lifted above four implant abutments on a model",
+  "why": "Shows the overdenture and the implants it clips onto clearly; a clean model shot.",
+  "retry_query": null
+ },
+ {
+  "key": "j-how-many",
+  "id": 329444659,
+  "pos": "55% 45%",
+  "alt": "Zirconia bridge resting on three implant bases against black",
+  "why": "Multi-tooth bridge on three implants on a black ground that matches the dark design; the crop trims the ends.",
+  "retry_query": null
+ },
+ {
+  "key": "j-methods",
+  "id": 424683385,
+  "pos": "55% 40%",
+  "alt": "Dental bridge model above prepared abutment teeth on a gum model",
+  "why": "Shows plainly how a bridge fills a gap over abutment teeth, with a compact subject that crops well.",
+  "retry_query": null
+ },
+ {
+  "key": "j-oral-health",
+  "id": 44646179,
+  "pos": "62% 30%",
+  "alt": "Man brushing his teeth at a bathroom sink",
+  "why": "Natural bathroom light and a man, which balances a set that leans female; everyday and unposed.",
+  "retry_query": null
+ },
+ {
+  "key": "j-osseo",
+  "id": 420878827,
+  "pos": "48% 62%",
+  "alt": "Cutaway render of a titanium implant set in jawbone between molars",
+  "why": "Photoreal cross-section showing the implant embedded in porous bone; no labels, reads premium.",
+  "retry_query": null
+ },
+ {
+  "key": "j-parts",
+  "id": 426012155,
+  "pos": "42% 50%",
+  "alt": "Implant crown, abutment and screw stacked apart on black",
+  "why": "Real macro photo of the stacked components on black; the vertical stack suits a portrait crop and the dark site.",
+  "retry_query": null
+ },
+ {
+  "key": "j-post",
+  "id": 430551623,
+  "pos": "66% 45%",
+  "alt": "Close-up of titanium implant screws in a clear jaw model",
+  "why": "Sharp macro of the threaded posts, clean and bright studio light; the right screw carries a portrait crop.",
+  "retry_query": null
+ },
+ {
+  "key": "j-restore",
+  "id": 25910496,
+  "pos": "47% 30%",
+  "alt": "Older man laughing with friends over wine at a dinner table",
+  "why": "Grey-bearded man laughing openly mid-meal, natural home light, and he is the focal point.",
+  "retry_query": null
+ },
+ {
+  "key": "j-sedation",
+  "id": 26153649,
+  "pos": "45% 45%",
+  "alt": "Woman in a dental chair having a nitrous oxide nasal mask fitted",
+  "why": "Clearly shows the nasal hood being fitted, calm expression, real clinic; the only adult set (patient is younger than ideal).",
+  "retry_query": null
+ },
+ {
+  "key": "j-soft-foods",
+  "id": 28014741,
+  "pos": "38% 45%",
+  "alt": "Bowls of smooth carrot soup topped with yogurt, with spoons",
+  "why": "Soft pureed soup with yogurt, calm neutral styling; not a busy mixed table.",
+  "retry_query": null
+ },
+ {
+  "key": "j-temp-prosthesis",
+  "id": 329493002,
+  "pos": "50% 55%",
+  "alt": "Full-arch acrylic prostheses with screw-access holes, upper and lower",
+  "why": "Screw-retained full-arch acrylic, exactly what a provisional implant prosthesis looks like; real photo.",
+  "retry_query": null
+ },
+ {
+  "key": "j-temp-reasons",
+  "id": 424109210,
+  "pos": "40% 50%",
+  "alt": "Temporary tooth crown fixed on a gold implant abutment",
+  "why": "Clean studio shot of a provisional crown on its abutment; the intraoral options show a fresh surgical site.",
+  "retry_query": null
+ },
+ {
+  "key": "j-temp-vs-final",
+  "id": 41474784,
+  "pos": "45% 62%",
+  "alt": "Technician's hands shaping a dental model with implant parts at a bench",
+  "why": "Real lab bench with tools, hands mid-work on a model with an implant component; the alternatives are posed or look AI-generated.",
+  "retry_query": null
+ },
+ {
+  "key": "j-types",
+  "id": 81621944,
+  "pos": "55% 50%",
+  "alt": "Three dental implant crowns, abutments and screws laid out side by side",
+  "why": "Real photo of three implant assemblies in rows; the vertical stack survives a portrait crop.",
+  "retry_query": null
+ },
+ {
+  "key": "j-vs-bridge",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No candidate shows an implant beside a bridge; all are crown/bridge lab models or unrelated scenes.",
+  "retry_query": "dental implant and dental bridge model side by side comparison"
+ },
+ {
+  "key": "j-when-needed",
+  "id": 387544953,
+  "pos": "58% 55%",
+  "alt": "Close-up of a mature woman's smile with a missing side tooth",
+  "why": "Only natural adult (40+) shot with a clear gap on a dark ground; the rest are children or white studio backdrops.",
+  "retry_query": null
+ },
+ {
+  "key": "j-who-qualifies",
+  "id": 15726778,
+  "pos": "40% 40%",
+  "alt": "Dentist with a tablet talking with a senior man in a dental chair",
+  "why": "Warm, natural consultation moment with a 60+ patient; face sits left of centre, dentist's tablet in frame.",
+  "retry_query": null
+ },
+ {
+  "key": "j-why-choose",
+  "id": 50075084,
+  "pos": "42% 55%",
+  "alt": "3D render of an implant with a crown between natural teeth",
+  "why": "Exactly the brief: a crowned implant among natural roots in cut-away gum, clean render on black.",
+  "retry_query": null
+ },
+ {
+  "key": "perio-laser",
+  "id": 12337209,
+  "pos": "52% 45%",
+  "alt": "Dentist aiming a diode laser at a woman's gums, red light visible",
+  "why": "True diode laser on gum tissue with safety glasses; the rest are mostly curing lights or whitening.",
+  "retry_query": null
+ },
+ {
+  "key": "perio-probe",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No real probing shot; 428050012 has a spatula tip (not a graduated probe), looks AI-made and has a coloured strip along the bottom edge that a portrait crop would show.",
+  "retry_query": "periodontal probe measuring gum pocket close-up gloved hands"
+ },
+ {
+  "key": "sedation-comfort",
+  "id": null,
+  "pos": "50% 50%",
+  "alt": "",
+  "why": "No adult with headphones in a dental chair; the chair shots are a blood-donation clinic or a child, the rest are sofa/airplane.",
+  "retry_query": "adult patient wearing headphones relaxing in dental chair"
+ },
+ {
+  "key": "sedation-hero",
+  "id": 7572680,
+  "pos": "40% 40%",
+  "alt": "Woman reclined in a dental chair, eyes closed, calm",
+  "why": "Calm, eyes closed, in a real dental operatory with low moody light that suits the dark design; no nitrous mask candidate exists (masks shown are hyperbaric/COVID).",
+  "retry_query": null
+ }
+]

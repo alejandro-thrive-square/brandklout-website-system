@@ -19,22 +19,58 @@ const fmt = (iso) => new Date(iso).toLocaleDateString('en-US', { year: 'numeric'
 /* 08-qa image review (2026-09-24): posts without a hero of their own all fell back to one laptop stock
    photo (8x on the index), and four heroes contradicted their titles. Slug -> [image, focal point]. */
 const HERO = {
+  // kept from the first pass (strict review: relevant and sharp)
   'after-getting-dental-implants-how-can-i-take-care-of-them': ['hygienist-procedure.jpg', '70% 50%'],
-  'can-anyone-have-a-temporary-prosthesis-placed-after-b2907d6': ['hybrid-denture-model-2.jpg'],
-  'how-can-full-mouth-dental-implants-benefit-me': ['full-mouth-patient-dentist.jpg'],
   'how-can-i-find-affordable-dental-implants': ['patient-calculator.jpg', '70% 40%'],
-  'how-many-types-of-dental-implants-and-techniques-are-there': ['three-single-implants.jpg'],
   'how-painful-is-it-to-get-dental-implants': ['sedation-patient-smiling.jpg', '70% 40%'],
   'what-is-the-recovery-time-for-dental-implants': ['woman-tea.jpg', '70% 50%'],
-  'after-getting-a-full-arch-of-teeth-extracted-should-4ec2dcc': ['hybrid-denture-model.jpg', '70% 50%'],
-  'can-you-get-all-on-4-dental-implants-in-one-day-in-l-78bf28a': ['leslie-allon4-3.jpg'],
+  'after-getting-a-full-arch-of-teeth-extracted-should-4ec2dcc': ['hybrid-denture-model.jpg', '80% 50%'],
   'do-robots-really-do-dental-implant-procedures': ['yomi-robot-surgical.jpg', '70% 50%'],
   'what-are-full-mouth-dental-implants': ['full-arch-model.jpg'],
+  // strict review (2026-09-24): the practice's own library where it shows the subject at ≥1000px tall;
+  // named patients only on their own treatment (Leslie = All-on-4, Michael = full mouth)
+  'after-my-smile-has-healed-how-is-the-final-prosthesis-placed': ['zirconia-model.jpg', '85% 50%'],
+  'are-there-factors-that-determine-which-type-of-denta-a953c64': ['still-doctor-xray-screen.jpg', '20% 40%'],
+  'can-you-get-all-on-4-dental-implants-in-one-day-in-l-78bf28a': ['leslie-allon4-2.jpg', '70% 40%'],
+  'does-anything-happen-to-my-jawbone-if-i-dont-immedia-3453d94': ['jaw-bone-loss.jpg', '70% 50%'],
+  'how-can-full-mouth-dental-implants-benefit-me': ['michael-full-mouth.jpg', '22% 40%'],
+  'how-do-dental-implants-help-me': ['dentures-patient-eating.jpg', '85% 50%'],
+  'is-there-a-difference-between-implant-supported-dent-f7be47a': ['overdenture-bar.jpg', '50% 50%'],
+  'should-i-get-dental-implants-after-a-bone-grafting-procedure': ['ridge-augmentation-model.jpg', '60% 50%'],
+  'smile-confidently-with-your-brand-new-dental-implants': ['still-emily-smile.jpg', '50% 40%'],
+  'the-best-ways-to-find-affordable-dental-implants': ['patient-paying.jpg', '60% 50%'],
+  'what-do-you-need-to-get-dental-implants': ['still-cbct-suite.jpg', '60% 50%'],
+  'what-happens-if-i-dont-have-a-bone-grafting-procedur-f49cf14': ['periimplantitis-model.jpg', '50% 50%'],
+  'what-is-the-all-on-x-treatment': ['blog-fullmouthdentalimplants.jpeg', '50% 50%'],
+  'what-makes-me-a-candidate-for-a-dental-implant-procedure': ['still-emily-consult.jpg', '50% 50%'],
+  // licensed stock (03-graphic-resources/.tmp/stock/stock-ledger.json), picked against each question
+  'are-full-mouth-dental-implants-able-to-restore-the-l-168a3e3': ['stock-j-restore.jpg', '47% 30%'],
+  'are-there-aesthetic-and-functional-benefits-to-getti-b3b6309': ['stock-j-aesthetic.jpg', '40% 35%'],
+  'are-there-specific-parts-that-make-up-a-dental-implant': ['stock-j-parts.jpg', '42% 50%'],
+  'can-anyone-have-a-temporary-prosthesis-placed-after-b2907d6': ['stock-j-temp-prosthesis.jpg', '50% 55%'],
+  'dental-implant-posts-can-improve-your-oral-health': ['stock-j-post.jpg', '66% 45%'],
+  'do-i-have-to-extract-all-my-teeth-to-get-dental-implants': ['stock-j-extract-all.jpg', '62% 50%'],
+  'do-you-need-sedation-for-dental-implants': ['stock-j-sedation.jpg', '45% 45%'],
+  'following-a-tooth-extraction-what-should-i-do': ['stock-j-extraction-care.jpg', '62% 40%'],
+  'for-national-false-teeth-day-get-yourself-dental-imp-d4b254b': ['stock-j-false-teeth.jpg', '80% 50%'],
+  'for-oral-health-month-consider-improving-your-health-b197164': ['stock-j-oral-health.jpg', '62% 30%'],
+  'how-many-teeth-can-dental-implants-replace': ['stock-j-how-many.jpg', '55% 45%'],
+  'how-many-types-of-dental-implants-and-techniques-are-there': ['stock-j-types.jpg', '55% 50%'],
+  'is-it-possible-for-me-to-get-customized-dental-impla-739e461': ['stock-j-custom.jpg', '58% 45%'],
+  'is-there-a-difference-between-a-temporary-prosthesis-0eb13fe': ['stock-j-temp-vs-final.jpg', '45% 62%'],
+  'making-the-most-of-your-dental-implants': ['stock-j-care.jpg', '72% 45%'],
+  'methods-of-replacing-missing-teeth-in-los-angeles-ca': ['stock-j-methods.jpg', '55% 40%'],
+  'reasons-to-get-a-temporary-dental-prosthetic': ['stock-j-temp-reasons.jpg', '40% 50%'],
+  'the-four-types-of-dental-implant-restorations': ['stock-j-four-types.jpg', '50% 55%'],
+  'what-foods-can-i-have-after-dental-implant-surgery': ['stock-j-soft-foods.jpg', '38% 45%'],
+  'what-is-osseointegration-when-it-comes-to-dental-implants': ['stock-j-osseo.jpg', '48% 62%'],
+  'when-is-dental-implant-surgery-needed': ['stock-j-when-needed.jpg', '58% 55%'],
+  'who-qualifies-for-dental-implants': ['stock-j-who-qualifies.jpg', '40% 40%'],
+  'why-choose-dental-implants-to-replace-teeth': ['stock-j-why-choose.jpg', '42% 55%'],
+  'why-should-i-consider-a-dental-implant-to-replace-my-c996c1d': ['stock-j-vs-bridge.jpg', '90% 50%'],
+  'why-would-i-get-dental-implants-after-a-tooth-extraction': ['stock-j-after-extraction.jpg', '50% 50%'],
 }
-const POS = {
-  'dental-implant-posts-can-improve-your-oral-health': '70% 50%',
-  'do-you-need-sedation-for-dental-implants': '80% 50%',
-}
+const POS = {}
 
 function heroFor(d) {
   if (HERO[d.slug]) return '/media/img/' + HERO[d.slug][0]

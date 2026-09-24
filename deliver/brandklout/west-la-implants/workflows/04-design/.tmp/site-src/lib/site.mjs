@@ -57,7 +57,7 @@ export const PATIENTS = {
   michael: {
     name: 'Michael', treatment: 'Full mouth reconstruction', quote: 'I have teeth again thanks to my full mouth reconstruction.',
     before: '/media/img/case12_before_westlaimplants_michael_barriere.jpg', after: '/media/img/case12_after_westlaimplants_michael_barriere.jpg',
-    poster: '/media/img/michael_dentalpatient_reconstruction_barriere.jpg', film: FILMS.michael,
+    poster: '/media/img/michael-full-mouth.jpg', film: FILMS.michael,
   },
 }
 

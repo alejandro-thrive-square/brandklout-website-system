@@ -63,7 +63,7 @@ export default {
       photos: [
         { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT imaging suite at West LA Implants' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
-        { src: '/media/img/implant-crown-model.jpg', alt: 'A dental implant with its abutment and crown' },
+        { src: '/media/img/implant-crown-model.jpg', alt: 'Two implants supporting a three-tooth bridge' },
       ],
     },
     {

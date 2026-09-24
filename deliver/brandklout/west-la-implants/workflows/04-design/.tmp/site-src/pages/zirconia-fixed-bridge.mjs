@@ -48,7 +48,7 @@ export default {
         { b: 'Second opinion', span: 'Free, before you decide anything' },
       ],
       photos: [
-        { src: '/media/img/emily-makeover-after.jpg', pos: '90% 50%', alt: 'Emily smiling after her smile makeover' },
+        { src: '/media/img/michael_dentalpatient_reconstruction_barriere.jpg', pos: '30% 40%', alt: 'Michael after his full mouth reconstruction' },
         { src: '/media/img/full-arch-model.jpg', alt: 'A full-arch bridge on four implants' },
         { src: '/media/img/blog-prosthedontist-milling-implant-model.jpg', pos: '40% 50%', alt: 'A prosthesis being hand-finished in the lab' },
       ],

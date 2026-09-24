@@ -16,6 +16,11 @@ Start at [`project-overview.md`](./project-overview.md).
 
 ## Status: PUBLISHED — the full site (80 pages) is live on the client's Instatic instance
 
+**2026-09-24 (later).** Strict image pass: every photo now shows what its copy is about, from the
+practice's library or licensed Freepik stock (42, ledger in `03-graphic-resources/.tmp/stock/`),
+published **seq 23** — [run](./runbook/2026-09-24-strict-image-pass.md). Only the before/after case
+photos remain soft (client originals owed).
+
 **2026-09-24.** Pre-review content-fit QA ran on all 80 pages (copy fit, and every photo judged
 against its copy). Fixes are published at **seq 22**; backed up at seq 21 first (tag
 `wla-pre-qa-2026-09-24`, API snapshot, `VACUUM INTO` DB copy) —

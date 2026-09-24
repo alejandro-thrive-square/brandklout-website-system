@@ -19,7 +19,7 @@ export default {
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/dental-xray.png' },
-      text: 'Peri-implantitis is gum disease around an implant. Left alone it takes the gum, then the bone, and then the implant loosens.',
+      text: 'Peri-implantitis is gum disease around an implant. Left alone, it takes the gum, the bone, then the implant.',
       after: ['Poor grafting, a bad extraction, bad bridgework or an implant placed at the wrong angle can all start it. Whatever started it, the treatment begins by removing every trace of infection.'],
     },
     {

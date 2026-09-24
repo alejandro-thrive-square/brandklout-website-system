@@ -10,7 +10,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Results · Los Angeles',
       title: 'The proof is in our <em>patients.</em>',
       lead: 'Before and after, in the practice’s own photographs. Three patients telling their own stories on film. And the doctor explaining the work in his own words.',
-      image: { src: '/media/img/michael-before-after.jpg', pos: '80% 50%', alt: 'Michael before and after his full mouth reconstruction' },
+      image: { src: '/media/img/michael-before-after.jpg', pos: '80% 50%', alt: 'Michael smiling after his full mouth reconstruction' },
       actions: [{ href: '#gallery', label: 'See the Gallery' }, { href: '#invitation', label: 'Request a consultation', kind: 'text' }],
       meta: [
         { b: '3', span: 'Patients on film' },
@@ -25,7 +25,7 @@ export default {
       after: ['Three of them agreed to be filmed. The rest are on the practice’s walls. Results vary; a consultation includes a simulation of your own.'],
     },
     {
-      type: 'stories', name: 'The Stories', title: 'Three patients, in their own <em>words.</em>',
+      type: 'stories', name: 'The Stories', title: 'Three patients, in their own <em>words.</em>', ba: false, // the gallery below carries the same before/after pairs
       lead: 'Leslie, Emily and Michael each agreed to be filmed. Hover to see them; click to watch the full story.',
     },
     {
@@ -34,7 +34,6 @@ export default {
       pairs: [
         { before: '/media/img/case10_before_westlaimplants_leslie_barriere.jpg', after: '/media/img/case10_after_westlaimplants_leslie_barriere.jpg', label: 'All-on-4® full arch', sub: 'Leslie' },
         { before: '/media/img/case11_before_westlaimplants_emily_barriere.jpg', after: '/media/img/case11_after_westlaimplants_emily_barriere.jpg', label: 'Implants & crowns', sub: 'Emily' },
-        { before: '/media/img/case12_before_westlaimplants_michael_barriere.jpg', after: '/media/img/case12_after_westlaimplants_michael_barriere.jpg', label: 'Full mouth reconstruction', sub: 'Michael' },
         { before: '/media/img/case2_before_westlaimplants_barriere_large.jpg', after: '/media/img/case2_after_westlaimplants_barriere_large.jpg', label: 'Dental implant & crowns' },
         { before: '/media/img/case3_before_westlaimplants_barriere_large.jpg', after: '/media/img/case3_after_westlaimplants_barriere_large.jpg', label: 'Dental implants' },
         { before: '/media/img/ba-case4-before.jpg', after: '/media/img/ba-case4-after.jpg', label: 'Dental implants' },

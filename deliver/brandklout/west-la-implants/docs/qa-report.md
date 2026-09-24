@@ -1,6 +1,6 @@
 # QA report — West LA Implants, pre-review content-fit pass
 
-**2026-09-24.** Live at <https://west-la-implants-production.up.railway.app/>, published **seq 22**.
+**2026-09-24.** Live at <https://west-la-implants-production.up.railway.app/>, published **seq 22**, then **seq 23** (strict image pass).
 The reviewer-facing version (with the checklist Jessica works from) is the Claude Doc
 **"West LA Implants — Pre-Review QA"**: <https://claude.ai/code/artifact/6613c321-fd82-4fb0-aae3-04222e1b3cbc>.
 The process is step 5 of [`08-qa.md`](../../../../process/08-qa/08-qa.md).
@@ -24,6 +24,15 @@ The process is step 5 of [`08-qa.md`](../../../../process/08-qa/08-qa.md).
 Gates after publish: `verify-live` 80 routes FAIL none · `css-parity` FAIL none · `verify-motion-live`
 FAIL none · `check-local --base` 80/80 at 1440 and 390 FAIL none · `qa-fit --base` 33 findings, all
 accepted above. Termly (resource-blocker + both consent code assets) still loads.
+
+## Strict image pass (same day, seq 23)
+
+The bar was raised to relevance 3 (the photo shows the specific subject of its copy) plus ≥1:1
+resolution at 1440. Re-review of 370 placements: **167 failed** → 67 swapped to the practice's own
+photos, 52 replaced by licensed Freepik stock (42 files), 3 re-cropped, 45 are before/after case
+photos that need the client's originals. Verification of the result: 33 residual crops/alts/duplicates,
+all fixed. Final audit: no visible photo under 1:1 except dark statement backgrounds and the
+before/after cases. Details: [run](./runbook/2026-09-24-strict-image-pass.md).
 
 ## Artifacts
 
