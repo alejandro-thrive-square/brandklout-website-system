@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | 2026-09-24 — BugHerd round six: the last twelve notes closed (six stock photos chosen for their copy, Cherry linked via Grand Mission's account, logo re-checked); board clear — carries **gotchas** | [`2026-09-24-bugherd-round-six-board-cleared.md`](./2026-09-24-bugherd-round-six-board-cleared.md) |
 | 2026-09-23 | 2026-09-23 — BugHerd round five: 143 photographs, and every card of the qualify grid gets one — carries **gotchas** | [`2026-09-23-bugherd-round-five-photographs.md`](./2026-09-23-bugherd-round-five-photographs.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-21 | 2026-09-21 — BugHerd round four: the hours, the phone number, and the finder | [`2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md`](./2026-09-21-bugherd-round-four-hours-phone-and-the-finder.md) |

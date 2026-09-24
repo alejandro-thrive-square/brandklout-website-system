@@ -6475,3 +6475,16 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
    rules are now each card's outline, and an empty cell is the page. */
 .bl-grid { background: transparent; border: 0; }
 .bl-grid > .bl-card { outline: 1px solid var(--rule); }
+
+/* ========================================================================
+   BugHerd round six (2026-09-24). Export: .tmp/bugherd/tasks-2026-09-24.json.
+   ======================================================================== */
+
+/* #66  Financing: Cherry links to the practice's own Cherry page (the account
+   is Grand Mission Dentistry's; Mason Park Dental is one of its locations).
+   `.cp-matrix td a` draws inline links as underlined ink, which would flatten
+   the Apply button, so the button gets its own colours back. */
+.cp-matrix thead th a.cp-lender { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+.cp-matrix thead th a.cp-lender:hover { color: var(--accent); border-color: var(--accent); }
+.cp-matrix td a.button.cp-apply { display: flex; width: fit-content; margin-top: .9rem; color: var(--white); border: 1px solid var(--brand); }
+.cp-matrix td a.button.cp-apply:hover { color: var(--white); background: var(--brand-deep); border-color: var(--brand-deep); }

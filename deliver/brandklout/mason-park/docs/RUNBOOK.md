@@ -5,7 +5,20 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## BugHerd round five - 2026-09-23
+## BugHerd round six - 2026-09-24: the board is clear
+
+**All 251 BugHerd notes are done; nothing is open**
+([`runbook/2026-09-24-bugherd-round-six-board-cleared.md`](./runbook/2026-09-24-bugherd-round-six-board-cleared.md)).
+The twelve left from round five had been waiting on the agency; asked to resolve them, we chose the
+photos ourselves. Six slots got licensed Freepik stock matched to their copy (#112 #125 #178 #185 #202
+#252), four keep the stand-ins placed on 09-23 (#182 #195 #228 #235), #3 was re-checked in WebKit and
+closed, and **#66 is linked**: Mason Park's Cherry page is Grand Mission Dentistry's account
+(`pay.withcherry.com/grand-mission-dentistry`), where Mason Park Dental is one of the locations.
+Every reply invites the agency to open a new note if they had a different photo in mind.
+
+**Staging only. Production is unchanged and was not read.**
+
+## Earlier - BugHerd round five, 2026-09-23
 
 **133 of 143 new notes are done and live on staging, and every 3- and 6-card "Is this the
 treatment you need?" grid now has a photograph on every card**
@@ -17,8 +30,9 @@ and the blog), and the front desk is every proof portrait (37). Contact's three 
 portraits (Dr. Nguyen's is cut from the kids' Drive family shoot). The blog's topic tiles are one
 height, and the sand block under an unfilled row is gone.
 
-**Open, all on the agency:** 8 notes whose attachment BugHerd stored as zero bytes
+Left open that day: 8 notes whose attachment BugHerd stored as zero bytes
 (#112 #125 #182 #185 #195 #228 #235 #252), 2 same-photo-twice-on-a-page (#178 #202), and #3, #66.
+All twelve were closed in round six (2026-09-24).
 
 **Staging only. Production is unchanged and was not read.**
 
