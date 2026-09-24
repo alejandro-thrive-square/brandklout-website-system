@@ -35,7 +35,7 @@ See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 chapters site-wide, short text columns centred, a **second level in the Services menu on every
 page** (with "Cosmetic and gum care"), a topic list on the FAQ, the reviews regrouped. Dr. William
 Sung (the adult practice) was named on three more pages and is gone; /thank-you had a seventh copy
-of the old hours. **Open: #82** (its attachment was 0 bytes; asked again), plus #34 and #38. The
+of the old hours. Later the same day, #169: a photo on every homepage step card, published and closed. **Open: #82** (its attachment was 0 bytes; asked again), plus #34 and #38. The
 recipes are now behind the pages; the files are the source. See `runbook/2026-09-24-bugherd-round-three.md`.
 
 **2026-09-23: BugHerd #41 done.** The /special-offers hero is the reviewer's own front-desk photo (`front-desk-tablet`), centred with `.ar-bg.is-counter`; published and verified on staging, replied, closed. #34 and #38 still open. See `runbook/2026-09-23-bugherd-41-special-offers-hero.md`.

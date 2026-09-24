@@ -2133,3 +2133,11 @@ a.card:hover h3 { color: var(--accent); }
 .ch-figure.is-band.is-y72 img { object-position: 50% 72%; }     /* #116 */
 .sw-overlap_shot.is-y60 img { object-position: 50% 60%; }       /* #145 */
 .pe-band.is-low.is-faces img { object-position: 50% 24%; }        /* #83 both faces, not their shoulders */
+/* #169: every homepage step has a photograph, a little taller so faces fit. */
+@media (min-width: 900px) { .ch-path .pa-shot img { height: clamp(9rem, 24svh, 15rem); } }
+.pa-shot.is-p1 img { object-position: 50% 22%; }
+.pa-shot.is-p2 img { object-position: 50% 55%; }
+.pa-shot.is-p3 img { object-position: 50% 0%; }
+.pa-shot.is-p4 img { object-position: 60% 30%; }
+.pa-shot.is-p5 img { object-position: 50% 35%; }
+.pa-shot.is-p6 img { object-position: 50% 30%; }

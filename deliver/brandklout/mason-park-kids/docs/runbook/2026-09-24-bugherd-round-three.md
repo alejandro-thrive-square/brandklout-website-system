@@ -34,6 +34,24 @@ Published 2026-09-24 14:21 UTC (full chain, 215 pages, `draftMatchesPublished`, 
 - `nav59-probe.mjs` live: desktop hover, flyout and click to /services/sealants; phone drawer, tap a category (it opens), tap Bonding (it navigates). All pass.
 - `audit-live.mjs` 215 routes at 1440 and 390. Every route has one fault: the Cookie Preferences control (runtime-inserted, no href, since 09-22). At 390 there are also 2 console errors, both `google is not defined` inside Google's own `init_embed.js`. There are no overflow, image, crop or tiny-text faults.
 
+### Later the same day: #169
+
+A new note on the homepage's step cards: "add images to all of the cards... related to the text
+and the doctor's face is not cut off". All six numbered cards now carry a frame that matches their
+words: front-desk phone, the building (replacing `sofa`), `smile`, `rv-tv-chair`,
+`rv-tablet-consult` and `rv-anticavity-kids`. `.ch-path .pa-shot img` is taller at 900px and up
+(`clamp(9rem, 24svh, 15rem)`, on every path page), and each card has a crop class `.pa-shot.is-p1`
+to `is-p6`. The new-patient-special card stays without a photo. Checked at pinned card size at
+900 and 735 tall (`pa169-shot.mjs`) and live (`pa169-check.mjs`: 6/6 frames decoded). Published
+16:39 UTC (`publish-0924c.sh`, homepage only, style rules 546 -> 552), replied, done.
+
+- **Gotcha: a key that was prepared but never used was never uploaded.** `rv-tablet-consult`
+  lost its first slot (#54 -> #141), so `publish-0924c.sh` without `upload-media.mjs` stopped at
+  "1 media path NOT mapped". Nothing was published. Any chain that places a new key runs the upload.
+- `pa169-shot.mjs` forces the pinned card width onto the reduced-motion layout, which is the only
+  way to photograph what the pinned row shows. On live pages the Termly banner covers the images, so
+  `pa169-check.mjs` checks the DOM instead.
+
 ### Next
 
 1. **#82**: reattach the homepage "comfort" band photo when the reviewer resends it (the reply asks).

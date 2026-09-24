@@ -14036,5 +14036,85 @@
         "is_private": false
       }
     ]
+  },
+  {
+    "id": 31241067,
+    "project_id": 540564,
+    "project_name": "Mason Park Kids",
+    "created_at": "2026-09-24T16:20:30.985Z",
+    "updated_at": "2026-09-24T16:20:32.460Z",
+    "local_task_id": 169,
+    "priority_id": 0,
+    "status_id": 2324675,
+    "title": null,
+    "description": " we need to add images to all of the cards. Make sure they are related to the text and the doctor's face is not cut off.",
+    "description_html": null,
+    "tag_names": [
+      "All Breakpoint"
+    ],
+    "external_id": null,
+    "requester_email": "alejandro@thrivesquare.com",
+    "attachments": [],
+    "screenshot_url": "https://files.bugherd.com/goqwrmkhwdrutltrgjdhtq/screenshot.jpg",
+    "status": "todo",
+    "priority": "not set",
+    "closed_at": null,
+    "secret_link": "https://www.bugherd.com/t/u7yV7o9Lv1x0cC8zYR6D2w",
+    "admin_link": "https://www.bugherd.com/projects/540564/tasks/169",
+    "deleted_at": null,
+    "site": "https://mason-park-kids.up.railway.app",
+    "url": "/",
+    "metadata": {},
+    "screenshot_data": {
+      "screenshot_width": 1685,
+      "screenshot_height": 1685,
+      "screenshot_pin_x": 1007,
+      "screenshot_pin_y": 491
+    },
+    "fullstory_session_url": null,
+    "logrocket_session_url": null,
+    "requester_os": "Windows 10",
+    "requester_browser": "Chrome 153.0.0.0",
+    "requester_browser_size": "1685 x 860 px",
+    "requester_resolution": "1685 x 948 px",
+    "selector_info": {
+      "path": "html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on:nth-of-type(3)>div.pa-shot.is-top>img",
+      "html": "<img alt=\"Dr. Tam Nguyen beside a smiling child in the dental chair\" src=\"/uploads/zEtn2VferX9u5d7b3ySC1-smile-960.webp\" srcset=\"/uploads/zEtn2VferX9u5d7b3ySC1-smile-960-w64.webp 64w, /uploads/zEtn2VferX9u5d7b3ySC1-smile-960-w320.webp 320w, /uploads/zEtn2VferX9u5d7b3ySC1-smile-960-w640.webp 640w, /uploads/zEtn2VferX9u5d7b3ySC1-smile-960-w960.webp 960w\" sizes=\"auto, 100vw\" width=\"960\" height=\"720\" loading=\"lazy\" decoding=\"async\">",
+      "version": 2,
+      "data": {
+        "bugOffsetX": 0.11437869087807045,
+        "bugOffsetY": 0.4303540250344506
+      }
+    },
+    "due_at": null,
+    "column_id": 2324675,
+    "logs": null,
+    "assignees": [
+      {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      }
+    ],
+    "assigned_to": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "requester": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "updater": {
+      "id": 619229,
+      "email": "alejandro@thrivesquare.com",
+      "display_name": "Alejandro Milano",
+      "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+    },
+    "comments": []
   }
 ]
