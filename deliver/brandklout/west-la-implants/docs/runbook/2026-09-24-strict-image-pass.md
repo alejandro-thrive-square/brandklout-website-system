@@ -1,5 +1,7 @@
 # 2026-09-24 — Strict image pass: every photo shows its copy, published seq 23
 
+**Commit:** `817b6d6a`.
+
 Follows [the content-fit QA run](./2026-09-24-pre-review-content-fit-qa.md) the same day. Backed up
 first at **seq 22**: API snapshot `21-instatic-upload/.tmp/backup-2026-09-24-pre-images/` and
 `VACUUM INTO /app/storage/backups/cms-2026-09-24-seq22-pre-images.db` (193 MB).
