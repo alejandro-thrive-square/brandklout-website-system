@@ -1,11 +1,12 @@
 # Runbook index
 
-21 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | 2026-09-24, later — Display number (817) 631-4619 on both hosts (54 pages); pool swap proven without consent — carries **gotchas** | [`2026-09-24-display-number-631-4619-pool-proven.md`](./2026-09-24-display-number-631-4619-pool-proven.md) |
 | 2026-09-24 | 2026-09-24 — DNI pool not blocked by consent; its GHL swap list lacks (817) 674-2061; med spa has no pool — carries **gotchas** | [`2026-09-24-dni-pool-not-swapping-diagnosed.md`](./2026-09-24-dni-pool-not-swapping-diagnosed.md) |
 | 2026-09-23 | 2026-09-23, latest — The display number is (817) 674-2061 (SEO/NAP) on both hosts; the production pool swaps it — carries **gotchas** | [`2026-09-23-display-number-674-2061.md`](./2026-09-23-display-number-674-2061.md) |
 | 2026-09-23 | 2026-09-23, later — Legal pages updated (LeadConnector, Termly, call tracking) and promoted with the GHL booking form: production then staging, 54 pages each — carries **gotchas** | [`2026-09-23-legal-pages-and-ghl-form-on-production.md`](./2026-09-23-legal-pages-and-ghl-form-on-production.md) |

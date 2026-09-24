@@ -16,12 +16,14 @@ instead.
 (`sang@thrivesquare.com`, admin, same password as on Mason Park) —
 [2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
-**The display phone is (817) 674-2061 since 2026-09-23**: it is the number published for SEO and
-NAP, on all 54 pages on production and staging. On production the GoHighLevel number pool swaps
-it for a tracking number in the visitor's browser. The pool is on **production only**
-(`21-instatic-upload/set-dni-pool.mjs` refuses staging). To change the number, edit `MAP` in
-`swap-phone.mjs` and the same literals in `site-src/`, not a re-import. The swap itself has not
-been proven — [run](./runbook/2026-09-23-display-number-674-2061.md).
+**The display phone is (817) 631-4619 since 2026-09-24** (Alejandro's final number): it is the
+number published for SEO and NAP, on all 54 pages on production and staging. On production the
+GoHighLevel pool `1ULKyOcYiRRAikT9TnhK` swaps it for a tracking number in the visitor's browser,
+**proven 2026-09-24**, with no consent needed (Termly `autoBlock=off`, pool tags untagged). The pool is
+on **production only** (`21-instatic-upload/set-dni-pool.mjs` refuses staging). To change the number,
+edit `MAP` in `swap-phone.mjs` and the same literals in `site-src/`, not a re-import. The pool's
+swap list in GHL must hold the display number, or nothing swaps —
+[run](./runbook/2026-09-24-display-number-631-4619-pool-proven.md).
 
 **Production and staging are level again since 2026-09-23** (54 pages each): the legal pages
 `/privacy-policy` and `/terms-of-service` (updated 2026-09-23 for LeadConnector, Termly, call

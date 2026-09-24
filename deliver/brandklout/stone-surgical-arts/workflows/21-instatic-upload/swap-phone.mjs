@@ -8,7 +8,7 @@
  *   INSTATIC_BASE_URL=https://staging.dfwsurgicalarts.com node swap-phone.mjs --apply
  *
  * 2026-09-23: (817) 918-3666 -> (817) 767-4188, then the same day (817) 767-4188
- * -> (817) 674-2061, the DISPLAY number: the one published for SEO and NAP, which
+ * -> (817) 674-2061; 2026-09-24 -> (817) 631-4619, the DISPLAY number: the one published for SEO and NAP, which
  * the GoHighLevel pool (set-dni-pool.mjs, production only) swaps for a tracking
  * number in the visitor's browser. Edit MAP for the next change.
  *
@@ -31,13 +31,13 @@ const APPLY = process.argv.includes('--apply')
 
 /* Longest literal first, so a shorter one cannot eat half of a longer one. */
 const MAP = [
-  ['+1-817-767-4188', '+1-817-674-2061'],
-  ['(817) 767-4188', '(817) 674-2061'],
-  ['+18177674188', '+18176742061'],
-  ['817-767-4188', '817-674-2061'],
-  ['817.767.4188', '817.674.2061'],
+  ['+1-817-674-2061', '+1-817-631-4619'],
+  ['(817) 674-2061', '(817) 631-4619'],
+  ['+18176742061', '+18176314619'],
+  ['817-674-2061', '817-631-4619'],
+  ['817.674.2061', '817.631.4619'],
 ].sort((a, b) => b[0].length - a[0].length)
-const OLD = /767.?4188/
+const OLD = /674.?2061/
 
 let hits = 0
 function sub(v) {
