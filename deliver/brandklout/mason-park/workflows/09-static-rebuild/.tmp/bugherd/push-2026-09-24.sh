@@ -31,6 +31,10 @@ step run-converter.mjs
 step fetch-nodes.mjs
 step apply-image-alt.mjs
 step apply-body-class.mjs
+# The six /ads-landing-pages/ GHL forms and call tracking are placed on the
+# converted nodes; without this step every full push drops them (they were
+# missing from staging from round five until the launch day, 2026-09-24).
+step place-ad-embeds.mjs
 step import-pages.mjs --overwrite
 step import-styles.mjs
 step apply-blog-template.mjs

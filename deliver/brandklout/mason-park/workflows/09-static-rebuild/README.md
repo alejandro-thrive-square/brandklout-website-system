@@ -842,6 +842,19 @@ page-id scope includes all 63 pages. Run `verify-ad-draft.mjs` before the one pu
 call straight after a publish can answer 502 while the container settles; the publish itself has
 already returned its page count.
 
+> [!IMPORTANT]
+> **Production is live since 2026-09-24** (the launch run in `docs/runbook/`). Every change now goes
+> to both instances. Production's chain is `.tmp/bugherd/push-production-2026-09-24.sh`: the same
+> steps with `RAILWAY_ENV_NAME=production`, `upload-media` against production first (the media map
+> is per instance), and `ALLOW_PRODUCTION=launch`, which is the only thing that lets the four blog
+> and 404 steps run there. It is a merge. Never run `reset-to-deliverable` or a `replace` save on
+> production: 31 production-only rows (the root ad pages the live ads use, privacy and cookie
+> policy, old URLs) must survive. After any `site.css` change, run
+> `10-lp-instatic/.tmp/type-diff.mjs --all` against production.
+>
+> **Step 8d (`place-ad-embeds.mjs`) belongs in every full push.** The dated round chains left it
+> out, and every one of them dropped the `/ads-landing-pages/` GHL forms on staging.
+
 On Windows the three transport scripts ask the `bash` they get which spelling of the bundled
 `railway.exe` it can execute: from PowerShell `bash` is WSL (`/mnt/c/...`), from a Git Bash session
 it is MSYS (`/c/...`), and assuming WSL failed with "No such file or directory". They also set

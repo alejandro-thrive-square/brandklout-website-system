@@ -34,7 +34,9 @@ const CHECK = process.argv.includes("--check");
 const li = process.argv.indexOf("--limit");
 const LIMIT = li > -1 ? Number(process.argv[li + 1]) : Infinity;
 
-if (!I.IS_STAGING) {
+// Production only on the launch: ALLOW_PRODUCTION=launch is set by the one-off
+// push-production-2026-09-24.sh that took the rebuilt site live (2026-09-24).
+if (!I.IS_STAGING && process.env.ALLOW_PRODUCTION !== "launch") {
   console.error("REFUSING: INSTATIC_BASE_URL is not a staging instance. This script is staging-only.");
   process.exit(1);
 }

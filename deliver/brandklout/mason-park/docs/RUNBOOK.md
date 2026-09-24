@@ -5,7 +5,28 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## BugHerd round six - 2026-09-24: the board is clear
+## LAUNCHED - 2026-09-24: the rebuilt site is live on www.masonparkdental.com
+
+**Production serves the rebuilt site**
+([`runbook/2026-09-24-launch-rebuilt-site-on-production.md`](./runbook/2026-09-24-launch-rebuilt-site-on-production.md)).
+It went on as a merge. 63 rebuilt pages overwrote or joined production's rows, and the blog is on as
+the `Articles` collection (161 rows). The 31 production-only pages still serve: the six Webflow-port
+ad pages at the root slugs the ads use, privacy and cookie policy, and 23 old URLs. Production is
+94 pages, draft == published.
+
+**Backups:** API snapshot `backup-www...2026-09-24T22-10-33.json`, database
+`/app/storage/backups/cms-2026-09-24-seq37-pre-launch.db` on the production volume, git tag
+`mason-park-pre-launch-2026-09-24`.
+
+**From now on, every change goes to production as well as staging.** Production's chain is
+`.tmp/bugherd/push-production-2026-09-24.sh`. After any stylesheet change, re-run
+`10-lp-instatic/.tmp/type-diff.mjs --all`: the root ad pages read this site's CSS now, and the
+`.lp-page` block at the foot of `site.css` keeps them matching Webflow.
+
+**Open:** production has no canonicals (the Open Graph and AEO `siteUrl` is empty, and was before
+launch). The legacy-redirect Worker can now send old article URLs to `/blog/<slug>`.
+
+## Earlier - BugHerd round six, 2026-09-24: the board is clear
 
 **All 251 BugHerd notes are done; nothing is open**
 ([`runbook/2026-09-24-bugherd-round-six-board-cleared.md`](./runbook/2026-09-24-bugherd-round-six-board-cleared.md)).

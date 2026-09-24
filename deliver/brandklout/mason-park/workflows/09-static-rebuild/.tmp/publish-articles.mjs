@@ -34,7 +34,9 @@ const CHECK = process.argv.includes("--check");
 const FORCE = process.argv.includes("--force");
 const TABLE_SLUG = "articles";
 
-if (!I.IS_STAGING) {
+// Production only on the launch: ALLOW_PRODUCTION=launch is set by the one-off
+// push-production-2026-09-24.sh that took the rebuilt site live (2026-09-24).
+if (!I.IS_STAGING && process.env.ALLOW_PRODUCTION !== "launch") {
   console.error("REFUSING: INSTATIC_BASE_URL is not a staging instance.");
   process.exit(1);
 }

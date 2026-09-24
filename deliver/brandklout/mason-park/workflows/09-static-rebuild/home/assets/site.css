@@ -6488,3 +6488,12 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
 .cp-matrix thead th a.cp-lender:hover { color: var(--accent); border-color: var(--accent); }
 .cp-matrix td a.button.cp-apply { display: flex; width: fit-content; margin-top: .9rem; color: var(--white); border: 1px solid var(--brand); }
 .cp-matrix td a.button.cp-apply:hover { color: var(--white); background: var(--brand-deep); border-color: var(--brand-deep); }
+
+/* Launch (2026-09-24): this stylesheet now also reaches the six Webflow-port ad
+   pages still live at the root slugs (/invisalign, /new-patient-special and their
+   consultation and thank-you pages), which wrap their body in div.lp-page.
+   type-diff.mjs against Webflow found two rules leaking onto them: the h6 style's
+   uppercase and the buttons' centring. The rebuilt ad pages carry
+   body.is-lp-page instead, so `.lp-page` reaches only the old ports. */
+.lp-page .heading-style-h6 { text-transform: none; }
+.lp-page .button { justify-content: normal; }
