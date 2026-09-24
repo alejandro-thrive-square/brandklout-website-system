@@ -49,4 +49,4 @@ Same procedure as the 2026-09-23 run's "Production, when approved" — it now al
 
 1. Go-ahead for production (38 + #15), then the sitemap redeploy.
 2. Abby's and Brooke's Canva photos → Drive → #9, #10.
-3. BugHerd statuses untouched; mark them once production carries the fixes.
+3. **BugHerd: 39 tasks marked `done`** (2026-09-24, on request, via `PUT /tasks/<id>.json {task:{status:"done"}}`, read back). Only #9 and #10 stay `todo`. The fixes are on STAGING; production still needs the go.
