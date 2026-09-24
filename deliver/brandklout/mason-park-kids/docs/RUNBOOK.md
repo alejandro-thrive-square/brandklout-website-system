@@ -29,6 +29,14 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-24, 22:31 UTC: PRODUCTION LAUNCH. `masonparkpediatricdental.com` (apex; `www` 301s to it)
+serves the Instatic site.** The old WordPress copy is off the domain but still deployed on Cloudflare
+Pages as the rollback. Backups are in `C:/Users/ACER/Backups/mason-park-kids/2026-09-24-prelaunch/`, plus a
+DB copy on the Railway volume. The edge Worker `masonparkpediatricdental-edge` owns www -> apex, 170 legacy
+301s, robots.txt and sitemap.xml. **Staging and production are the SAME instance: every admin edit is
+live.** See `runbook/2026-09-24-production-launch.md`. The paragraphs below that describe the domain
+serving WordPress are history.
+
 **2026-09-24: `pediatricdentistkatytx.com` (the old domain) is prepped to 301 to
 `masonparkpediatricdental.com`,** through a Cloudflare Worker on the pending zone, tested on workers.dev.
 It is still delegated to Squarespace DNS and currently serves SiteGround's suspended 503. **Live the
