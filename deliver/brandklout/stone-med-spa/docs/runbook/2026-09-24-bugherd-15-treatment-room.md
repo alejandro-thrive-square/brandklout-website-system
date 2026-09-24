@@ -6,7 +6,7 @@ sign-in renewed (`node scripts/drive.mjs auth`), so the three photo tasks were r
 
 ## Done
 
-**Staging `https://staging.westlaketxmedspa.com` — 24 pages published** (was seq 16; snapshot
+**Staging `https://staging.westlaketxmedspa.com` — 24 pages published** (commit `10d59fc0`) (was seq 16; snapshot
 `05-instatic-upload/.tmp/backup-staging-2026-09-24-bugherd-15`). Production untouched.
 
 | BugHerd | Change |
