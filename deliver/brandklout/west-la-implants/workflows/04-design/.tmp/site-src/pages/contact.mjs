@@ -2,13 +2,13 @@ export default {
   slug: 'contact',
   title: 'Contact West LA Implants: 12301 Wilshire Blvd Suite 205, Los Angeles | Book a Consultation',
   description: 'Contact West LA Implants on Wilshire Blvd in Los Angeles. New patients (310) 692-9316, current patients (310) 481-0111, book online on Zocdoc, or send a consultation request. Monday to Friday, 9am to 5pm.',
-  image: '/media/img/practice-full.jpg',
+  image: '/media/img/still-front-desk-handshake.jpg',
   chapters: [
     {
       type: 'cover', name: 'Arrival', kicker: 'Contact · Wilshire Blvd, Los Angeles',
       title: 'Get in <em>touch.</em>',
       lead: 'Call, book a time online, or send a request. New patients have their own line, and a real person answers it.',
-      image: { src: '/media/img/practice-full.jpg', alt: 'Dr. Barriere at West LA Implants' },
+      image: { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient welcomed at the front desk' },
       actions: [{ href: 'tel:+13106929316', label: 'Call (310) 692-9316' }, { href: 'https://www.zocdoc.com/booking-link/practice/west-la-implants-65990', label: 'Book online on Zocdoc', kind: 'text', ext: true }],
       meta: [
         { b: 'New patients', span: '(310) 692-9316' },
@@ -18,7 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/front-desk-receptionist.jpg' },
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/hygienist-procedure.jpg' },
       text: 'A phone call is still the fastest way into this practice. A person answers, checks your benefits, and finds the time.',
       after: ['Everything else on this page exists for the hours when nobody is at the desk.'],
     },

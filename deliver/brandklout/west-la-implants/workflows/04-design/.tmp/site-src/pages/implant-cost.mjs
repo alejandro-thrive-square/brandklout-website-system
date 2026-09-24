@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Dental implant cost · Los Angeles',
       title: 'An honest answer about <em>cost.</em>',
       lead: 'The price of an implant depends on your mouth, not on a menu. Here is what moves it, how the practice quotes, and how most patients pay.',
-      image: { src: '/media/img/patient-calculator.jpg', alt: 'A patient working through the cost of treatment' },
+      image: { src: '/media/img/patient-calculator.jpg', pos: '80% 50%', alt: 'A patient working through the cost of treatment' },
       actions: [{ href: '#invitation', label: 'Request a Quote After a Scan' }, { href: '/financing.html', label: 'Financing options', kind: 'text' }],
       meta: [
         { b: 'After a scan', span: 'Never before' },
@@ -60,9 +60,9 @@ export default {
       ],
       actions: [{ href: '/financing.html', label: 'See the financing options', kind: 'text' }],
       photos: [
-        { src: '/media/img/patient-paying.jpg', alt: 'A patient settling treatment at the front desk' },
-        { src: '/media/img/front-desk-emily.jpg', alt: 'Emily at the front desk discussing insurance' },
-        { src: '/media/img/doctor-handshake.jpg', alt: 'Dr. Barriere greeting a patient' },
+        { src: '/media/img/patient-paying.jpg', alt: 'A patient paying for treatment by card' },
+        { src: '/media/img/front-desk-emily.jpg', pos: '100% 50%', alt: 'Emily at the front desk discussing insurance' },
+        { src: '/media/img/doctor-handshake.jpg', pos: '70% 30%', alt: 'Dr. Barriere greeting a patient' },
       ],
       flip: true,
     },

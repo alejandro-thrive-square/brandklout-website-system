@@ -10,7 +10,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Cosmetic dentistry · Los Angeles',
       title: 'The smile you stopped <em>hiding.</em>',
       lead: 'Veneers, whitening, Invisalign®, crowns and complete makeovers, designed to your face and shown to you on screen before anything begins.',
-      image: { src: '/media/img/veneer-patient.jpg', alt: 'A cosmetic dentistry patient smiling' },
+      image: { src: '/media/img/veneer-patient.jpg', pos: '60% 40%', alt: 'A cosmetic dentistry patient smiling' },
       actions: [{ href: '#invitation', label: 'Request a Smile Evaluation' }, { href: `https://www.youtube.com/watch?v=${FILMS.cosmetic.id}`, label: 'Watch: three transformative procedures', kind: 'text', ext: true }],
       meta: [
         { b: 'Two visits', span: 'For veneers or Lumineers®' },
@@ -27,12 +27,12 @@ export default {
     {
       type: 'rail', name: 'The Treatments', tag: 'The Treatments', title: 'Seven ways to <em>change</em> a smile.',
       cards: [
-        { title: 'Porcelain veneers & Lumineers®', text: 'Thin porcelain shells over the front of the teeth that show when you smile. Chips, gaps, discolouration and worn edges fixed at once, in as few as two visits.', image: { src: '/media/img/emily-makeover-after.jpg', alt: 'Emily after her smile makeover' } },
+        { title: 'Porcelain veneers & Lumineers®', text: 'Thin porcelain shells over the front of the teeth that show when you smile. Chips, gaps, discolouration and worn edges fixed at once, in as few as two visits.', image: { src: '/media/img/ba-veneers-2-after.jpg', alt: 'Upper teeth after porcelain veneers' } },
         { title: 'Zoom teeth whitening', text: 'Professional light-activated gel, gums protected, several shades lighter in about an hour, with little or no sensitivity.', image: { src: '/media/img/whitening-patient.jpg', alt: 'A teeth whitening patient' } },
-        { title: 'Invisalign®', text: 'Clear removable aligners worn 20 to 22 hours a day, straightening crooked teeth and closing gaps without brackets or wires.', image: { src: '/media/img/invisalign-patient.jpg', alt: 'A patient fitting an Invisalign aligner' } },
+        { title: 'Invisalign®', text: 'Clear removable aligners worn 20 to 22 hours a day, straightening crooked teeth and closing gaps without brackets or wires.', image: { src: '/media/img/invisalign-patient.jpg', pos: '70% 50%', alt: 'A patient fitting an Invisalign aligner' } },
         { title: 'Crowns & bridges', text: 'Porcelain caps that restore a cracked, broken or misshapen tooth, and fixed bridges to replace missing ones. Same-day crowns are available.', image: { src: '/media/img/implant-crown-model.jpg', alt: 'A crown on an implant' } },
-        { title: 'Inlays, onlays & bonding', text: 'Tooth-coloured repairs for teeth that do not need a full crown, and composite fillings that replace the grey of amalgam.', image: { src: '/media/img/still-emily-mirror.jpg', alt: 'Emily seeing her new smile in the mirror' } },
-        { title: 'Gum contouring', text: 'Laser crown lengthening for a gummy smile, reshaping the gum line so the teeth are in proportion.', image: { src: '/media/img/patient-smiling.jpg', alt: 'A patient smiling after treatment' } },
+        { title: 'Inlays, onlays & bonding', text: 'Tooth-coloured repairs for teeth that do not need a full crown, and composite fillings that replace the grey of amalgam.', image: { src: '/media/img/hygienist-procedure.jpg', pos: '70% 50%', alt: 'A patient in the chair for a tooth-coloured repair' } },
+        { title: 'Gum contouring', text: 'Laser crown lengthening for a gummy smile, reshaping the gum line so the teeth are in proportion.', image: { src: '/media/img/patient-smiling.jpg', pos: '70% 30%', alt: 'A patient smiling after treatment' } },
         { title: 'Smile makeover', text: 'A combination, planned on your scan and photographs, that improves each tooth and the symmetry of the whole smile against your lips and face.', image: { src: '/media/img/emily-makeover.jpg', alt: 'Emily during her smile makeover' } },
       ],
       end: { title: 'Which of these is yours?', label: 'Ask Dr. Barriere', href: '#invitation' },

@@ -10,7 +10,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Results · Los Angeles',
       title: 'The proof is in our <em>patients.</em>',
       lead: 'Before and after, in the practice’s own photographs. Three patients telling their own stories on film. And the doctor explaining the work in his own words.',
-      image: { src: '/media/img/michael-before-after.jpg', alt: 'Michael before and after his full mouth reconstruction' },
+      image: { src: '/media/img/michael-before-after.jpg', pos: '80% 50%', alt: 'Michael before and after his full mouth reconstruction' },
       actions: [{ href: '#gallery', label: 'See the Gallery' }, { href: '#invitation', label: 'Request a consultation', kind: 'text' }],
       meta: [
         { b: '3', span: 'Patients on film' },

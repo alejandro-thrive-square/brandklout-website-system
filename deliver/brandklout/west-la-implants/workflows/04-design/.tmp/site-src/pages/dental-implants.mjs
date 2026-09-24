@@ -11,7 +11,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Dental implants · Wilshire Blvd, Los Angeles',
       title: 'A tooth that is <em>yours</em> again.',
       lead: 'A dental implant is a titanium root, a connector and a crown. Placed well, it looks, feels and works like the tooth it replaces, for decades.',
-      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing a 3D scan before implant surgery' },
+      image: { src: '/media/img/still-doctor-xray-screen.jpg', pos: '70% 40%', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/technology.html', label: 'See how it is placed', kind: 'text' }],
       meta: [
         { b: 'One roof', span: 'Scan, surgery, teeth' },

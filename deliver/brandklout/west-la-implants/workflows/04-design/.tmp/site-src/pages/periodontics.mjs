@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Periodontics · Los Angeles',
       title: 'Your gums are the <em>foundation.</em>',
       lead: 'Teeth and implants stand in gum and bone. Periodontal disease takes both, quietly. The practice treats it with a diode laser, which means less scraping, less pain and faster healing.',
-      image: { src: '/media/img/gum-disease-patient.jpg', alt: 'A patient being examined for gum disease' },
+      image: { src: '/media/img/gum-disease-patient.jpg', pos: '90% 50%', alt: 'A patient being examined for gum disease' },
       actions: [{ href: '#invitation', label: 'Request an Evaluation' }, { href: '/failing-dental-implants.html', label: 'Gum disease around an implant', kind: 'text' }],
       meta: [
         { b: 'Diode laser', span: 'Less pain, faster healing' },
@@ -59,7 +59,7 @@ export default {
       actions: [{ href: '/failing-dental-implants.html', label: 'Failing implants', kind: 'text' }],
       photos: [
         { src: '/media/img/periimplantitis-model.jpg', alt: 'A model of peri-implantitis around an implant' },
-        { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing a scan' },
+        { src: '/media/img/still-doctor-xray-screen.jpg', pos: '80% 40%', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
         { src: '/media/img/three-single-implants.jpg', alt: 'Three single implants' },
       ],
       flip: true,

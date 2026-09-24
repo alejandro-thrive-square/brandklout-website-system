@@ -30,7 +30,7 @@ export default {
         { title: 'The framework', text: 'Once healed, the implants are fitted with abutments that a metal framework screws onto. The denture teeth are carried on that framework.' },
         { title: 'Fitting and maintenance', text: 'The hybrid is screwed in, the bite is checked, and a small space is left between it and the gum so you can clean underneath. Twice a year it comes out for a professional clean.' },
       ],
-      image: { src: '/media/img/surgical-kit.jpg', alt: 'The guided implant surgery kit at West LA Implants' },
+      image: { src: '/media/img/surgical-kit.jpg', alt: 'The implant surgical motor used at West LA Implants' },
     },
     {
       type: 'compare', name: 'The Options', tag: 'The Options', title: 'Hybrid, or <em>zirconia?</em>',

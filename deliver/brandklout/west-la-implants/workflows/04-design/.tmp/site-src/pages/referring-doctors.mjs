@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Referring doctors · Los Angeles',
       title: 'Your patient, our <em>surgery</em>, back to you.',
       lead: 'Dr. Barriere accepts referrals for implant placement, full-arch treatment, grafting and sinus lifts, extractions and sedation cases. The restorative work stays with you if you want it to.',
-      image: { src: '/media/img/doctor-explaining.jpg', alt: 'Dr. Barriere explaining a case' },
+      image: { src: '/media/img/doctor-explaining.jpg', pos: '90% 40%', alt: 'Dr. Barriere explaining a case' },
       actions: [{ href: '#invitation', label: 'Refer a Patient' }, { href: '/technology.html', label: 'The surgical suite', kind: 'text' }],
       meta: [
         { b: 'Yomi®', span: 'Robot-guided placement' },
@@ -57,7 +57,7 @@ export default {
       actions: [{ href: '/dr-tony-barriere.html', label: 'About Dr. Barriere', kind: 'text' }],
       photos: [
         { src: '/media/img/yomi-robot-surgical.jpg', alt: 'The Yomi robot' },
-        { src: '/media/img/surgical-kit.jpg', alt: 'The guided surgery kit' },
+        { src: '/media/img/surgical-kit.jpg', alt: 'The implant surgical motor used at West LA Implants' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
       ],
       flip: true,

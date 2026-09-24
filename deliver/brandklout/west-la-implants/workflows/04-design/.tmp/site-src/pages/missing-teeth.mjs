@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Missing teeth · loose dentures · bone loss',
       title: 'Losing your smile? <em>Get it back</em>, and more.',
       lead: 'A limited diet, unclear speech, a hand over the mouth, a face that starts to look sunken. Tooth loss takes small freedoms one at a time. Every one of them can be returned.',
-      image: { src: '/media/img/patient-covering-mouth.jpg', alt: 'A patient covering her mouth, self-conscious about missing teeth' },
+      image: { src: '/media/img/patient-covering-mouth.jpg', pos: '80% 50%', alt: 'A patient covering her mouth, self-conscious about missing teeth' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/dental-implants.html', label: 'Dental implants', kind: 'text' }],
       meta: [
         { b: 'Missing teeth', span: 'One, several or all' },
@@ -48,7 +48,7 @@ export default {
       actions: [{ href: '/implant-supported-dentures.html', label: 'Implant-supported dentures', kind: 'text' }],
       photos: [
         { src: '/media/img/older-couple-smiling.jpg', alt: 'A couple smiling together' },
-        { src: '/media/img/dentures-patient-eating.jpg', alt: 'A denture patient eating comfortably' },
+        { src: '/media/img/dentures-patient-eating.jpg', pos: '90% 40%', alt: 'A denture patient eating comfortably' },
         { src: '/media/img/hybrid-denture-model.jpg', alt: 'An implant-retained denture' },
       ],
     },

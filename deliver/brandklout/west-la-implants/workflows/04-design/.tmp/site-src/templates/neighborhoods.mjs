@@ -12,7 +12,7 @@ const HOODS = [
     minutes: '5', route: 'down Bundy or Barrington to Wilshire',
     landmarks: 'Brentwood Country Mart, San Vicente Blvd, the Brentwood Village',
     faqLocal: [{ q: 'Where exactly is the office from Brentwood?', a: 'At 12301 Wilshire Blvd, Suite 205, at the corner of Wilshire and Bundy, on Brentwood’s southern edge. Most Brentwood patients are here in about five minutes.' }],
-    photo: '/media/img/still-reception-neon.jpg', photoAlt: 'The reception at West LA Implants', patient: 'leslie',
+    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'A patient welcomed at the front desk', photoPos: '10% 50%', patient: 'leslie',
   },
   {
     slug: 'santa-monica', name: 'Santa Monica', prep: 'in',
@@ -20,7 +20,7 @@ const HOODS = [
     minutes: '10 to 15', route: 'east along Wilshire, with no freeway',
     landmarks: 'Montana Avenue, Santa Monica Pier, Third Street Promenade',
     faqLocal: [{ q: 'Is it easier than driving to a Santa Monica office?', a: 'Often, yes. Wilshire is a straight run east with parking at the building, which avoids the beach traffic and the meters downtown.' }],
-    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'A patient greeted at the front desk', patient: 'emily',
+    photo: '/media/img/still-front-desk-handshake.jpg', photoAlt: 'A patient welcomed at the front desk', photoPos: '10% 50%', patient: 'emily',
   },
   {
     slug: 'westwood', name: 'Westwood', prep: 'in',
@@ -36,7 +36,7 @@ const HOODS = [
     minutes: '15', route: 'west along Wilshire or Santa Monica Blvd',
     landmarks: 'Westfield Century City, Avenue of the Stars, Fox Studios',
     faqLocal: [{ q: 'Can I come from a Century City office at lunch?', a: 'For a consultation or a hygiene visit, easily: about fifteen minutes each way along Wilshire. Surgery under sedation needs a driver and the rest of the day off.' }],
-    photo: '/media/img/still-cbct-suite.jpg', photoAlt: 'The CBCT imaging suite at West LA Implants', patient: 'leslie',
+    photo: '/media/img/still-doctor-patient-hug.jpg', photoAlt: 'Dr. Barriere greeting a patient', photoPos: '50% 40%', patient: 'leslie',
   },
   {
     slug: 'culver-city', name: 'Culver City', prep: 'in',
@@ -44,7 +44,7 @@ const HOODS = [
     minutes: '15 to 20', route: 'north on the 405 or Sepulveda to Wilshire',
     landmarks: 'Downtown Culver City, the Culver Steps, Sony Pictures',
     faqLocal: [{ q: 'Is there a closer implant office to Culver City?', a: 'There may be nearer chairs. The reasons patients make the drive are the robot-guided surgery, the surgeon who does the grafting and the placement himself, and the free second opinion on cases that were declined elsewhere.' }],
-    photo: '/media/img/still-yomi-robot-team.jpg', photoAlt: 'Dr. Barriere and his assistant with the Yomi surgical robot', patient: 'michael',
+    photo: '/media/img/still-yomi-robot-team.jpg', photoAlt: 'Dr. Barriere and his assistant with the Yomi surgical robot', photoPos: '30% 50%', patient: 'michael',
   },
   {
     slug: 'beverly-hills', name: 'Beverly Hills', prep: 'in',
@@ -66,7 +66,7 @@ export default HOODS.map((h) => ({
       type: 'cover', name: 'Arrival', kicker: `Dental implants near ${h.name} · Wilshire Blvd`,
       title: `Dental implants, <em>minutes</em> from ${h.name}.`,
       lead: `West LA Implants is at Wilshire and Bundy, about ${h.minutes} minutes ${h.route}. Robot-guided implant surgery, full-arch All-on-4®, grafting and IV sedation, all in one suite.`,
-      image: { src: h.photo, alt: h.photoAlt },
+      image: { src: h.photo, alt: h.photoAlt, pos: h.photoPos },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/dental-implants.html', label: 'How implants work here', kind: 'text' }],
       meta: [
         { b: `${h.minutes} min`, span: `From ${h.name}` },

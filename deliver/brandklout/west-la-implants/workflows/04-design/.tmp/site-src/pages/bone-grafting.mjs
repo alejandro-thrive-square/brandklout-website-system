@@ -58,7 +58,7 @@ export default {
       ],
       actions: [{ href: '/what-to-expect.html#instructions', label: 'Post-operative guidelines', kind: 'text' }],
       photos: [
-        { src: '/media/img/sinus-lift-graphic.jpg', alt: 'A diagram of a sinus lift' },
+        { src: '/media/img/sinus-lift-graphic.jpg', pos: '100% 30%', alt: 'A diagram of a sinus lift' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
         { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT suite' },
       ],

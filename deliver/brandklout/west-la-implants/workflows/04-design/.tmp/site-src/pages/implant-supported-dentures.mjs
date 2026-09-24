@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Implant-supported dentures · Los Angeles',
       title: 'A denture that <em>stays</em> where you put it.',
       lead: 'Two or more implants in the jaw hold the denture by a ball or bar attachment. It clicks on, it does not slide, and you never buy adhesive again.',
-      image: { src: '/media/img/denture-patient-renewed.jpg', alt: 'A denture patient smiling after treatment at West LA Implants' },
+      image: { src: '/media/img/denture-patient-renewed.jpg', pos: '90% 50%', alt: 'A denture patient smiling after treatment at West LA Implants' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/all-on-4.html', label: 'Compare with a fixed arch', kind: 'text' }],
       meta: [
         { b: '2+', span: 'Implants per arch' },
@@ -39,7 +39,7 @@ export default {
         { title: 'Healing', text: 'Three or more months while the implants integrate. A temporary denture, or your adapted one, is worn throughout.' },
         { title: 'The attachment', text: 'Ball or bar attachments are fitted and the final denture clicks on. It can be made removable for cleaning or permanently attached.' },
       ],
-      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere planning an implant case on screen' },
+      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
     },
     {
       type: 'strip', name: 'The Benefit', tag: 'The Benefit', title: 'Bite, chew, laugh, <em>forget</em> about it.',
@@ -57,7 +57,7 @@ export default {
       photos: [
         { src: '/media/img/older-couple-smiling.jpg', alt: 'A couple smiling together' },
         { src: '/media/img/hybrid-denture-model.jpg', alt: 'An implant-retained denture on its bar' },
-        { src: '/media/img/still-front-desk-handshake.jpg', alt: 'A patient greeted at the front desk' },
+        { src: '/media/img/blog-dental-patients-eating-3.jpg', alt: 'An older couple enjoying coffee and pastry' },
       ],
     },
     {

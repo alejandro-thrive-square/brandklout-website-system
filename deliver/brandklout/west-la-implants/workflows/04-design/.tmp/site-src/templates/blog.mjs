@@ -16,7 +16,28 @@ const IMG = path.resolve(here, '../media/img')
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const fmt = (iso) => new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 
+/* 08-qa image review (2026-09-24): posts without a hero of their own all fell back to one laptop stock
+   photo (8x on the index), and four heroes contradicted their titles. Slug -> [image, focal point]. */
+const HERO = {
+  'after-getting-dental-implants-how-can-i-take-care-of-them': ['hygienist-procedure.jpg', '70% 50%'],
+  'can-anyone-have-a-temporary-prosthesis-placed-after-b2907d6': ['hybrid-denture-model-2.jpg'],
+  'how-can-full-mouth-dental-implants-benefit-me': ['full-mouth-patient-dentist.jpg'],
+  'how-can-i-find-affordable-dental-implants': ['patient-calculator.jpg', '70% 40%'],
+  'how-many-types-of-dental-implants-and-techniques-are-there': ['three-single-implants.jpg'],
+  'how-painful-is-it-to-get-dental-implants': ['sedation-patient-smiling.jpg', '70% 40%'],
+  'what-is-the-recovery-time-for-dental-implants': ['woman-tea.jpg', '70% 50%'],
+  'after-getting-a-full-arch-of-teeth-extracted-should-4ec2dcc': ['hybrid-denture-model.jpg', '70% 50%'],
+  'can-you-get-all-on-4-dental-implants-in-one-day-in-l-78bf28a': ['leslie-allon4-3.jpg'],
+  'do-robots-really-do-dental-implant-procedures': ['yomi-robot-surgical.jpg', '70% 50%'],
+  'what-are-full-mouth-dental-implants': ['full-arch-model.jpg'],
+}
+const POS = {
+  'dental-implant-posts-can-improve-your-oral-health': '70% 50%',
+  'do-you-need-sedation-for-dental-implants': '80% 50%',
+}
+
 function heroFor(d) {
+  if (HERO[d.slug]) return '/media/img/' + HERO[d.slug][0]
   const og = d.seo?.og_image || ''
   const m = og.match(/wp-content\/uploads\/(\d{4}\/\d{2})\/(.+)$/)
   if (!m) return '/media/img/blog-hero.webp'
@@ -51,14 +72,15 @@ function bodyOf(d, title) {
 
 const posts = []
 for (const f of fs.readdirSync(DATA).filter((n) => n.endsWith('.json')).sort()) {
-  const d = JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8'))
+  // the practice's old blog said "Los Angeles, FL" in three entries; the scrape stays verbatim, the site says CA
+  const d = JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8').replace(/Los Angeles, FL\b/g, 'Los Angeles, CA'))
   if (d.kind !== 'post') continue
   const title = (d.seo?.title_tag || d.slug).replace(/\s*-\s*West LA Implants\s*$/, '').trim()
   const published = d.seo?.article_published || '2022-01-01'
   const body = bodyOf(d, title)
   const firstP = (body.find((x) => x.startsWith('<p>')) || '').replace(/<[^>]+>/g, '')
   const excerpt = firstP.length > 150 ? firstP.slice(0, 147).replace(/\s+\S*$/, '') + '…' : firstP
-  posts.push({ slug: d.slug, title, published, dateLabel: fmt(published), body, excerpt, image: heroFor(d), description: (d.seo?.meta_description || excerpt).slice(0, 160) })
+  posts.push({ slug: d.slug, title, published, dateLabel: fmt(published), body, excerpt, image: heroFor(d), imagePos: (HERO[d.slug] || [])[1] || POS[d.slug], description: (d.seo?.meta_description || excerpt).slice(0, 160) })
 }
 posts.sort((a, b) => (a.published < b.published ? 1 : -1))
 
@@ -93,7 +115,7 @@ const entries = posts.map((p, i) => ({
       type: 'cover', name: 'Arrival', small: true, kicker: `Journal · ${p.dateLabel}`,
       title: esc(p.title),
       lead: p.excerpt,
-      image: { src: p.image, alt: '' },
+      image: { src: p.image, alt: '', pos: p.imagePos },
       actions: [{ href: '/blog.html', label: 'All entries', kind: 'text' }],
     },
     {
@@ -108,13 +130,13 @@ const index = {
   slug: 'blog',
   title: 'Journal: Dental Implant Questions Answered | West LA Implants, Los Angeles',
   description: 'Forty-six short answers from West LA Implants to the questions patients ask about dental implants: candidacy, cost, recovery, full-arch treatment, bone grafting, sedation and care.',
-  image: '/media/img/blog-hero.webp',
+  image: '/media/img/doctor-explaining.jpg',
   chapters: [
     {
       type: 'cover', name: 'Arrival', kicker: 'The journal',
       title: 'Questions, <em>answered.</em>',
       lead: 'Short entries from the practice on the things patients ask most, from what a dental implant is made of to what to eat after surgery.',
-      image: { src: '/media/img/blog-hero.webp', alt: 'A dental implant model' },
+      image: { src: '/media/img/doctor-explaining.jpg', pos: '90% 40%', alt: 'Dr. Barriere explaining a case' },
       actions: [{ href: '#entries', label: 'Read the Entries' }, { href: '/faq.html', label: 'The short answers', kind: 'text' }],
     },
     { type: 'postindex', name: 'The Entries', title: `${posts.length} <em>entries.</em>`, lead: 'Newest first.', posts },

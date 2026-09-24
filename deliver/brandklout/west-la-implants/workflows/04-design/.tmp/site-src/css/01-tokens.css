@@ -52,7 +52,7 @@
   --t-quote:2.4rem;
   --t-lead:1.2rem;
   --t-body:1.06rem;
-  --t-small:.82rem;
+  --t-small:.9rem;     /* 14.4px: nothing a patient reads sits under 14px (08-qa "tiny") */
   --t-micro:.66rem;
 
   --wrap:82rem;
@@ -66,5 +66,5 @@
   :root{--t-display:4.6rem;--t-h2:3.3rem;--t-h3:1.8rem;--t-quote:1.9rem;--nav-h:4.5rem}
 }
 @media (max-width:767px){
-  :root{--t-display:3.6rem;--t-h2:2.7rem;--t-h3:1.6rem;--t-quote:1.65rem;--t-lead:1.16rem;--t-body:1.16rem;--t-small:.9rem;--t-micro:.72rem}
+  :root{--t-display:3.6rem;--t-h2:2.7rem;--t-h3:1.6rem;--t-quote:1.65rem;--t-lead:1.16rem;--t-body:1.16rem;--t-small:1.04rem;--t-micro:.72rem}
 }

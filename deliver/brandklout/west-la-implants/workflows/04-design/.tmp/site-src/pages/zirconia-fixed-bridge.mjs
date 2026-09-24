@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Zirconia fixed bridge · Los Angeles',
       title: 'New teeth that look and feel <em>real.</em>',
       lead: 'One solid block of zirconia, milled into a full arch and secured to your implants. It is the strongest material in dentistry and the closest match to the colour and translucency of teeth.',
-      image: { src: '/media/img/zirconia-model.jpg', alt: 'A zirconia fixed bridge' },
+      image: { src: '/media/img/zirconia-model.jpg', pos: '90% 50%', alt: 'A zirconia fixed bridge' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/all-on-4.html', label: 'How the arch is placed', kind: 'text' }],
       meta: [
         { b: 'One block', span: 'No acrylic base, no seams' },
@@ -48,9 +48,9 @@ export default {
         { b: 'Second opinion', span: 'Free, before you decide anything' },
       ],
       photos: [
-        { src: '/media/img/emily-makeover-after.jpg', alt: 'Emily smiling after her smile makeover' },
+        { src: '/media/img/emily-makeover-after.jpg', pos: '90% 50%', alt: 'Emily smiling after her smile makeover' },
         { src: '/media/img/full-arch-model.jpg', alt: 'A full-arch bridge on four implants' },
-        { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT imaging suite' },
+        { src: '/media/img/blog-prosthedontist-milling-implant-model.jpg', pos: '40% 50%', alt: 'A prosthesis being hand-finished in the lab' },
       ],
       flip: true,
     },

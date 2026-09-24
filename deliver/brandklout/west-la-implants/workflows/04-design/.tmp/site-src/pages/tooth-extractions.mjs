@@ -10,7 +10,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Tooth extractions · wisdom teeth · Los Angeles',
       title: 'Removal can be <em>restorative.</em>',
       lead: 'The goal is always to save the tooth. When infection, trauma or an impacted wisdom tooth make that impossible, a gentle extraction ends the pain and protects everything around it.',
-      image: { src: '/media/img/wisdom-tooth-extraction.jpg', alt: 'Dr. Barriere preparing for a wisdom tooth extraction' },
+      image: { src: '/media/img/wisdom-tooth-extraction.jpg', pos: '90% 50%', alt: 'Dr. Barriere reviewing X-rays before an extraction' },
       actions: [{ href: '#invitation', label: 'Request an Appointment' }, { href: `https://www.youtube.com/watch?v=${FILMS.wisdom.id}`, label: 'Watch: why wisdom teeth come out', kind: 'text', ext: true }],
       meta: [
         { b: 'Same day', span: 'Emergency visits' },
@@ -41,7 +41,7 @@ export default {
         { title: 'Day two', text: 'Expect minor pain, swelling, bruising, some limit on opening, perhaps a sore throat. Rest. No heavy lifting. Brush gently; a lukewarm salt water rinse, not spat out. Over-the-counter relief as directed.' },
         { title: 'The week after', text: 'Soft foods and fluids: yogurt, soup, fish, pasta, nothing spicy. Finish any antibiotics. Sutures come out in 7 to 10 days at a short visit. Call the office with anything unusual.' },
       ],
-      image: { src: '/media/img/dental-xray-consult.jpg', alt: 'Dr. Barriere explaining an X-ray to a patient' },
+      image: { src: '/media/img/woman-tea.jpg', pos: '70% 50%', alt: 'Resting at home after an extraction' },
     },
     {
       type: 'strip', name: 'The Replacement', tag: 'The Replacement', title: 'The extraction is not the <em>last</em> step.',
@@ -59,7 +59,7 @@ export default {
       actions: [{ href: '/bone-grafting.html', label: 'Socket preservation and grafting', kind: 'text' }],
       photos: [
         { src: '/media/img/implant-crown-model.jpg', alt: 'A single implant with its crown' },
-        { src: '/media/img/still-doctor-patient-hug.jpg', alt: 'Dr. Barriere with a patient' },
+        { src: '/media/img/bone-graft-model.jpg', pos: '70% 50%', alt: 'An implant and crown replacing an extracted tooth' },
         { src: '/media/img/still-emily-consult.jpg', alt: 'A consultation at West LA Implants' },
       ],
       flip: true,

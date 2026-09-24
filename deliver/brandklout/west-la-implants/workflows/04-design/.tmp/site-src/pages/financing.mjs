@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Insurance & financing · Los Angeles',
       title: 'Cost should not decide your <em>health.</em>',
       lead: 'Cash, card or check. Most PPO plans. Six financing partners. A savings plan for patients without insurance. There is almost always a way.',
-      image: { src: '/media/img/patient-paying.jpg', alt: 'A patient at the front desk of West LA Implants' },
+      image: { src: '/media/img/patient-paying.jpg', alt: 'A patient paying for treatment by card' },
       actions: [{ href: '#invitation', label: 'Ask About Financing' }, { href: '/implant-cost.html', label: 'What decides the cost', kind: 'text' }],
       meta: [
         { b: 'PPO', span: 'Most carriers, in network' },
@@ -59,9 +59,9 @@ export default {
       ],
       actions: [{ href: '/implant-cost.html', label: 'What decides the cost', kind: 'text' }],
       photos: [
-        { src: '/media/img/still-front-desk-handshake.jpg', alt: 'A patient greeted at the front desk' },
+        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient greeted at the front desk' },
         { src: '/media/img/front-desk-receptionist.jpg', alt: 'The front desk at West LA Implants' },
-        { src: '/media/img/doctor-patient-2.jpg', alt: 'Dr. Barriere with a patient' },
+        { src: '/media/img/doctor-patient-2.jpg', pos: '60% 40%', alt: 'Dr. Barriere with a patient' },
       ],
     },
     {

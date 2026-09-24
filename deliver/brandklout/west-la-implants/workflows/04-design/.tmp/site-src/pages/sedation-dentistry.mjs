@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Sedation dentistry · Los Angeles',
       title: 'Leave the fear at the <em>door.</em>',
       lead: 'Nervous patients are the rule here, not the exception. IV, oral and nitrous sedation are matched to how anxious you are and how long the work will take.',
-      image: { src: '/media/img/sedation-patient-smiling.jpg', alt: 'A relaxed patient at West LA Implants' },
+      image: { src: '/media/img/sedation-patient-smiling.jpg', pos: '80% 50%', alt: 'A relaxed patient at West LA Implants' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/our-practice.html', label: 'The comforts of the practice', kind: 'text' }],
       meta: [
         { b: 'IV', span: 'A sleep-like state' },

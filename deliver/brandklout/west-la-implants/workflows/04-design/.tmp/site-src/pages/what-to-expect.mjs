@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Your first visit · Los Angeles',
       title: 'Know what happens <em>before</em> it happens.',
       lead: 'The first visit, the implant process, and the instructions you will be handed after surgery, all written down here so nothing is a surprise.',
-      image: { src: '/media/img/front-desk-leslie.jpg', alt: 'Leslie welcomed at the front desk' },
+      image: { src: '/media/img/front-desk-leslie.jpg', pos: '90% 50%', alt: 'Leslie welcomed at the front desk' },
       actions: [{ href: '#invitation', label: 'Book a First Visit' }, { href: '#instructions', label: 'Post-operative guidelines', kind: 'text' }],
       meta: [
         { b: '1 hour', span: 'Your first exam' },

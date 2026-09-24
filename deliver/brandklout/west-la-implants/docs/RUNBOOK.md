@@ -16,6 +16,12 @@ Start at [`project-overview.md`](./project-overview.md).
 
 ## Status: PUBLISHED — the full site (80 pages) is live on the client's Instatic instance
 
+**2026-09-24.** Pre-review content-fit QA ran on all 80 pages (copy fit, and every photo judged
+against its copy). Fixes are published at **seq 22**; backed up at seq 21 first (tag
+`wla-pre-qa-2026-09-24`, API snapshot, `VACUUM INTO` DB copy) —
+[run](./runbook/2026-09-24-pre-review-content-fit-qa.md), [report](./qa-report.md). Next: Jessica
+reviews from the "West LA Implants — Pre-Review QA" doc's checklist.
+
 **2026-09-22.** 34 designed pages plus the 46-entry journal, built from `pages/*.mjs` and
 `templates/*.mjs` through `lib/blocks.mjs` on the approved homepage's chrome and runtime, pushed
 with `--force` and published at **seq 20** — [run](./runbook/2026-09-22-full-site-built-and-published.md).

@@ -60,7 +60,7 @@ export default {
       photos: [
         { src: '/media/img/full-arch-model.jpg', alt: 'A full-arch implant bridge on its four implants' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
-        { src: '/media/img/zirconia-model.jpg', alt: 'A zirconia fixed bridge' },
+        { src: '/media/img/zirconia-model.jpg', pos: '70% 50%', alt: 'A zirconia fixed bridge' },
       ],
       flip: true,
     },

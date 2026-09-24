@@ -69,8 +69,8 @@ export default {
       actions: [{ href: `https://www.youtube.com/watch?v=${FILMS.technology.id}`, label: 'Watch: state-of-the-art technology', kind: 'text', ext: true }],
       photos: [
         { src: '/media/img/yomi-robot-surgical.jpg', alt: 'The Yomi surgical robot in the operatory' },
-        { src: '/media/img/still-yomi-closeup.jpg', alt: 'The Yomi guidance arm, close up' },
-        { src: '/media/img/surgical-kit.jpg', alt: 'The guided surgery kit' },
+        { src: '/media/img/still-yomi-closeup.jpg', pos: '30% 50%', alt: 'The Yomi guidance arm, close up' },
+        { src: '/media/img/yomi-technology.jpg', alt: 'Yomi robotic guidance at West LA Implants' },
       ],
       flip: true,
     },

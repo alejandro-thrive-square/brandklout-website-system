@@ -1,11 +1,12 @@
 # Runbook index
 
-5 runs, newest first. Each line is one file in this folder.
+7 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | **Backup + pre-review content-fit QA**: three-layer backup at seq 21, `qa-fit.mjs` audit, ~1,000 copy and 82 image findings fixed down to accepted ones, published seq 22 — carries **gotchas** | [`2026-09-24-pre-review-content-fit-qa.md`](./2026-09-24-pre-review-content-fit-qa.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-22 | **The full site**: 34 designed pages + 46-entry journal built on the approved homepage, pushed (seq 18) and published, 80 routes gated — carries **gotchas** | [`2026-09-22-full-site-built-and-published.md`](./2026-09-22-full-site-built-and-published.md) |
 | 2026-09-15 | BugHerd round two: five fixes (#14–#18), republished seq 12, all closed; Sienna widget found — carries **gotchas** | [`2026-09-15-bugherd-round-two-five-fixes-republished.md`](./2026-09-15-bugherd-round-two-five-fixes-republished.md) |

@@ -17,7 +17,9 @@
 import { SITE, PATIENTS } from './site.mjs'
 
 const tag = (t) => (t ? `<div class="chapter-tag"><i></i><span>${t}</span></div>` : '')
-const img = (m, cls = '', extra = '') => (m ? `<img${cls ? ` class="${cls}"` : ''} src="${m.src}" alt="${(m.alt || '').replace(/"/g, '&quot;')}" loading="lazy"${extra}>` : '')
+/* m.pos = the photo's focal point as 'x% y%' — a class, not an inline style (css/45-focal.css, 08-qa image review) */
+const fp = (m) => (m && m.pos ? 'fp-' + m.pos.split(/\s+/).map((v) => Math.round(parseFloat(v) / 10) * 10).join('-') : '')
+const img = (m, cls = '', extra = '') => (m ? `<img${cls || fp(m) ? ` class="${[cls, fp(m)].filter(Boolean).join(' ')}"` : ''} src="${m.src}" alt="${(m.alt || '').replace(/"/g, '&quot;')}" loading="lazy"${extra}>` : '')
 const paras = (arr, cls = '') => (arr || []).map((p) => `<p${cls ? ` class="${cls}"` : ''}>${p}</p>`).join('\n')
 const action = (a) =>
   a.kind === 'text'
@@ -344,7 +346,7 @@ export function prose(b) {
 /* ---------- post index ---------- */
 export function postindex(b) {
   const cards = b.posts
-    .map((p) => `<a class="px-card" href="/blog/${p.slug}.html"><figure class="frame frame--wide">${img({ src: p.image, alt: '' })}</figure><span class="px-date">${p.dateLabel}</span><h3 class="h3">${p.title}</h3><p class="small">${p.excerpt}</p></a>`)
+    .map((p) => `<a class="px-card" href="/blog/${p.slug}.html"><figure class="frame frame--wide">${img({ src: p.image, alt: '', pos: p.imagePos })}</figure><span class="px-date">${p.dateLabel}</span><h3 class="h3">${p.title}</h3><p class="small">${p.excerpt}</p></a>`)
     .join('\n')
   return `<section class="b-postindex" id="${b.id || 'entries'}">
   <div class="wrap px-head">${tag(b.tag || 'The Journal')}<h2 class="h2">${b.title}</h2>${b.lead ? `<p class="lead">${b.lead}</p>` : ''}</div>

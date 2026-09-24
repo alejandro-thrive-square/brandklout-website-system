@@ -238,6 +238,6 @@
 .faq-q i::after{transform:rotate(90deg)}
 .faq-q[aria-expanded="true"] i::after{transform:rotate(0)}
 .faq-a{height:0;overflow:hidden}
-.faq-a p{padding:0 0 1.4rem;color:var(--ink-muted);max-width:40rem;font-size:var(--t-small);line-height:1.7}
+.faq-a p{padding:0 0 1.4rem;color:var(--ink-muted);max-width:40rem;font-size:var(--t-body);line-height:1.7} /* an answer is body copy: body size keeps it ~70 characters a line */
 @media (max-width:1023px){.in-grid{grid-template-columns:1fr;gap:3rem;padding:5rem 0 4rem}.in-faq{grid-template-columns:1fr;gap:1.5rem;padding-bottom:5rem}}
 @media (max-width:600px){.in-fields{grid-template-columns:1fr}.in-contact{grid-template-columns:1fr}.in-form{padding:1.6rem}}

@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'General dentistry · Los Angeles',
       title: 'Everyday care, with <em>surgical</em> standards.',
       lead: 'The same team, the same scanner and the same attention whether you are here for a cleaning or a full arch. One roof for everything, and a savings plan if you have no insurance.',
-      image: { src: '/media/img/patient-smiling.jpg', alt: 'A patient smiling in the chair at West LA Implants' },
+      image: { src: '/media/img/patient-smiling.jpg', pos: '90% 30%', alt: 'A patient smiling in the chair at West LA Implants' },
       actions: [{ href: '#invitation', label: 'Book a First Visit' }, { href: '/financing.html', label: 'Insurance and the savings plan', kind: 'text' }],
       meta: [
         { b: 'Same day', span: 'Emergency visits' },
@@ -60,7 +60,7 @@ export default {
       actions: [{ href: '/what-to-expect.html', label: 'What to expect at your first visit', kind: 'text' }],
       photos: [
         { src: '/media/img/staff.jpg', alt: 'The West LA Implants team' },
-        { src: '/media/img/still-front-desk-handshake.jpg', alt: 'A patient welcomed at the front desk' },
+        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'A patient welcomed at the front desk' },
         { src: '/media/img/still-reception-neon.jpg', alt: 'The reception' },
       ],
       flip: true,

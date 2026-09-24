@@ -34,7 +34,7 @@ export default {
         { title: 'Continuing education', text: 'More than a thousand hours since, in implant and cosmetic dentistry: full-arch protocols, guided and robotic surgery, sedation, laser periodontics and digital smile design.' },
         { title: 'The memberships', text: 'The American Academy of Cosmetic Dentistry, the American Academy of Implant Dentistry and the American Dental Association.' },
       ],
-      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing a 3D scan' },
+      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
     },
     {
       type: 'ledger', name: 'The Standard', tag: 'The Standard', title: 'What he insists <em>on.</em>',
@@ -65,7 +65,7 @@ export default {
       actions: [{ href: '/our-practice.html', label: 'Meet the team', kind: 'text' }],
       photos: [
         { src: '/media/img/still-doctor-patient-hug.jpg', alt: 'Dr. Barriere greeting a patient' },
-        { src: '/media/img/doctor-leslie.jpg', alt: 'Dr. Barriere with Leslie' },
+        { src: '/media/img/doctor-handshake.jpg', pos: '70% 30%', alt: 'Dr. Barriere greeting a patient' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
       ],
       flip: true,

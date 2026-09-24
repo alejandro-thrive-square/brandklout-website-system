@@ -22,7 +22,9 @@ let n = 0
 for (const slug of slugs) {
   const route = slug === '' || slug === 'index' ? '/' : '/' + slug
   const r = await fetch(BASE + route, { headers: { 'user-agent': 'Mozilla/5.0' } })
-  fs.writeFileSync(path.join(OUT, 'html', (route === '/' ? 'index' : slug) + '.html'), await r.text())
+  const file = path.join(OUT, 'html', (route === '/' ? 'index' : slug) + '.html') // nested slugs (blog/x) need their folder
+  fs.mkdirSync(path.dirname(file), { recursive: true })
+  fs.writeFileSync(file, await r.text())
   n++
 }
 console.log(JSON.stringify({ base: BASE, seq: site.seq ?? site.site?.seq ?? site.shellBaseSeq, pageRows: rows.length, htmlSaved: n, keys: Object.keys(site) }))

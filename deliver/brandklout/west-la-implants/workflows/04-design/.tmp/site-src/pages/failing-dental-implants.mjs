@@ -44,7 +44,7 @@ export default {
         { title: 'Rebuilding the foundation', text: 'Where bone has been lost, it is rebuilt with grafting so the implant sits in solid support again.' },
         { title: 'Replacing, if needed', text: 'An implant that cannot be saved is removed, the site is grafted, and a new implant is planned and placed with Yomi® guidance once the bone has healed.' },
       ],
-      image: { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
+      image: { src: '/media/img/cbct-emily.jpg', alt: 'A patient positioned for a 3D cone-beam scan' },
     },
     {
       type: 'strip', name: 'The Prevention', tag: 'The Prevention', title: 'Protecting the <em>investment.</em>',
