@@ -63,6 +63,10 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `.tmp/colour-leak.mjs` | **Whose rule is painting this text?** A single-class rule that sets `color` (0,1,0) loses to a contextual one like `.ch p` (0,1,1), so an element can paint an ink its own rule never asked for. That is how the copper sticker on the homepage ended up body-grey at 1.3:1 (BugHerd #33). Reports every element whose winning `color` comes from a rule other than its own class, with the contrast it actually has. Text over a photograph or a fixed layer is reported as unmeasured, not as a failure. |
 | `.tmp/btn-line-gate.mjs`, `btn38-sweep.mjs` | The pill buttons, read one pixel column at a time, in WebKit at retina scale: does anything paint a line across the bottom (BugHerd #38)? The sweep answers the general question - across 1032 heights and 8 device scales, can the parked hover fill ever show? Sample the column well left of centre: down the middle it runs through the white label and every button reads as a hit. |
 | `.tmp/guard-phone-check.mjs` | Lifts `type()` out of both generators and asserts a phone number survives it. The house rule that turns "6-18 months" into "6 to 18 months" had been turning (281) 578-7100 into "(281) 578 to 7100" on 18 pages. |
+| `.tmp/bugherd-0924-images.py`, `bugherd-0924-copy.py` | **BugHerd round three (2026-09-24) as two readable plans.** Every photo swap is a row naming the page, the chapter and the image that was on screen when the note was left (read from the note's own `selector_info.html`, which carries the live src), so a slot is found by what it shows rather than by a card index. The copy edits are exact replacements that must match once. Both are idempotent and write LF. Copy the shape for the next round. |
+| `.tmp/bh-shot.mjs` | One chapter of one page as a picture: `node bh-shot.mjs [--live] [--w 1920] services/bonding#arrival about-us#forward ...`. Reduced motion by default, so a reveal is at rest. It is the quickest way to see what one BugHerd note is about, before and after. |
+| `.tmp/nav59-probe.mjs` | Drives the Services menu the way a visitor does: hover a category on desktop and click a treatment, then open the drawer on a phone, tap a category once (it must open, not navigate) and tap a treatment. It found the drawer bug where a tap focused the link and the desktop transform slid the opened list half out of the panel. |
+| `.tmp/verify-0924.mjs` | The round-three proof against staging. It reads the swap and drop rows out of `bugherd-0924-images.py`, so every photo is checked, then the copy, the menu and the layout rules. |
 | `.tmp/crop-probe.mjs`, `crop-all.mjs` | Does any heading lose ink to a clipping ancestor? Takes a file or a URL; `crop-all.mjs --live` sweeps the published site. |
 | `.tmp/audit-live.mjs` | **Every live route, not just the eleven.** HTTP, images, overflow, console, head tags, headings, chrome, dead links, tiny text, and any image painted more than 1.35x its own pixels. |
 | `.tmp/diff-all.mjs` | `diff-live.mjs` over all eleven pages, with a tally. |
@@ -392,6 +396,22 @@ and some of those were written for adults. The old URLs were `/<slug>/`; the new
   prose gate silently reports 0 words for it.
 - **A new photograph:** add it to `PHOTOS` in `prep-images.py` under a name that says what it
   shows, run it, reference `<key>-<width>.webp`.
+- **A photograph the reviewer attached to a BugHerd note:** copy it from
+  `workflows/.tmp/bugherd/shots/<n>-att0.png` into `.tmp/_reviewer/<key>.png` (gitignored), add
+  the key to `REVIEWER` in `prep-images.py`, and run `python prep-images.py --only <key>,<key>`.
+  Name it by what it shows, and give it a **new** key: the Instatic media upload skips a
+  basename it already has. When the same frame comes attached at several sizes, use the largest
+  copy, but compare the crops first: two "duplicates" in round three were different frames.
+  A reviewer frame narrower than the next standard width is also emitted at its own width.
+- **Crop positions** are classes, because the converter drops `style` attributes:
+  `.ar-bg.is-y40` / `.is-y55` / `.is-mid` / `.is-top` / `.is-counter` for heroes, `.lf-figure.is-top`,
+  `.ch-figure.is-band.is-y72`, `.sw-overlap_shot.is-y60`, `.pe-band.is-low.is-faces`. A new frame
+  in a hero needs a look at 1920 wide (`bh-shot.mjs --w 1920 <page>#arrival`): a near-square
+  frame in a 2.6:1 header shows less than half its height.
+- **A path that should not pin:** add `is-grid` to `section.ch-path`; `journey.js` then keeps it
+  static at 900px and up, and the CSS lays the steps out in one row.
+- **A number with a unit** in `.figures`: `<b data-count="6"><em class="fig-n">6</em> <em class="fig-unit">months</em></b>`.
+  The counter writes only into `.fig-n`, so the smaller unit survives the animation.
 - **A BugHerd round** (first run 2026-09-15): `workflows/.tmp/bugherd/fetch.mjs` pulls every
   task BY ID (the list endpoint hides page, selector and screenshot) with comments,
   attachments and screenshots; look at every screenshot before deciding. Fix here, then

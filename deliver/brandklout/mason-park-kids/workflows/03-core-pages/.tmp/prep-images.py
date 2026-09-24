@@ -165,6 +165,24 @@ ALBUM = {
     "sofa":        (ALBUMDIR, "sofa.jpg", WIDE),
 }
 
+# --- the reviewer's own frames, BugHerd round three (2026-09-24) -----------
+# Attached to BugHerd notes #44-#168 by Brandklout as the picture they want in
+# that slot. Copied out of workflows/.tmp/bugherd/shots/ into _reviewer/
+# (gitignored) under a name that says what each shows; where one frame came
+# attached at several sizes, the largest copy is the source. Every key is new,
+# because the Instatic media upload skips a basename it already has.
+REVIEWERDIR = os.path.abspath(os.path.join(HERE, "_reviewer"))
+REVIEWER = {k: (REVIEWERDIR, f"{k}.png", WIDE) for k in (
+    "rv-tv-chair", "rv-piggy-bank", "rv-clipboard", "rv-tooth-model",
+    "rv-girl-brushing", "rv-tablet-consult", "rv-tablet-consult-2",
+    "rv-chair-team", "rv-loupes", "rv-lap-exam", "rv-shelf-girls",
+    "rv-model-brushing", "rv-building", "rv-boy-toy", "rv-desk-tablet",
+    "rv-tooth-question", "rv-operatory", "rv-operatory-wide",
+    "rv-front-desk-team", "rv-shelf-smile", "rv-ceiling-tv", "rv-cap-exam",
+    "rv-cap-model", "rv-anticavity-kids", "rv-mom-toddler", "rv-baby-paste",
+    "rv-scanner", "rv-emergency", "rv-desk-phone", "rv-desk-phone-2",
+)}
+
 # --- mirrored variants ------------------------------------------------------
 # A frame flipped left-to-right, written from the encoded widths of its source
 # so it is the same pixels in the other direction. `smile-flip` is the homepage
@@ -208,7 +226,10 @@ if "--mirror-only" in sys.argv:
 written = 0
 missing_stock = []
 missing_mirror = []
-for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM}.items():
+ONLY = set(sys.argv[sys.argv.index("--only") + 1].split(",")) if "--only" in sys.argv else None
+for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM, **REVIEWER}.items():
+    if ONLY is not None and key not in ONLY:
+        continue
     src = os.path.join(root, rel)
     # The recovery mirror is workflow 01's `recovered/`, which is gitignored
     # and is therefore absent from a worktree that did not run the recovery.
@@ -220,7 +241,7 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM}.items():
     if root == KIDS and not os.path.exists(src) and not os.path.exists(os.path.join(UPSCALED, f"{key}.png")):
         missing_mirror.append(key)
         continue
-    if root == ALBUMDIR and not os.path.exists(src):
+    if root in (ALBUMDIR, REVIEWERDIR) and not os.path.exists(src):
         missing_stock.append(key + " (album)")
         continue
     if root == STOCKDIR and not os.path.exists(src):
@@ -241,7 +262,9 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM}.items():
     w0, h0 = im.size
     done = []
     for w in widths:
-        if w > w0 and done:
+        # A source narrower than the next width is still emitted once at its
+        # own width, so an 899px frame is not served at 480 (2026-09-24).
+        if w > w0 and done and (done[-1] == w0 or root != REVIEWERDIR):
             break
         w = min(w, w0)
         h = round(h0 * w / w0)
@@ -253,7 +276,7 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM}.items():
     shutil.copyfile(os.path.join(OUT, f"{key}-{big}.webp"), os.path.join(OUT, f"{key}.webp"))
     print(f"{key:18s} {w0}x{h0}  -> {', '.join(str(d) for d in done)}{source_note}")
 
-for name, (root, rel) in COPY.items():
+for name, (root, rel) in ({} if ONLY is not None else COPY).items():
     src = os.path.join(root, rel)
     if name == "logo.png":
         # The logo is published on a WHITE ground, and the masthead inverts it
@@ -276,7 +299,8 @@ for name, (root, rel) in COPY.items():
     shutil.copyfile(src, os.path.join(OUT, name))
     print(f"{name:18s} copied")
 
-written += mirror_all()
+if ONLY is None:
+    written += mirror_all()
 
 if missing_mirror:
     print()

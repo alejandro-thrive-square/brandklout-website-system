@@ -1,11 +1,12 @@
 # Runbook index
 
-18 runs, newest first. Each line is one file in this folder.
+19 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | 2026-09-24 - BugHerd round three, #42-#168: 126 of 127 done (photo swaps, copy, spacing, a two-level Services menu, the FAQ contents), published and verified 118/118; #82 waits on a re-sent photo. Gotchas: edits after to-instatic do not ship, drawer inherits desktop focus transform | [`2026-09-24-bugherd-round-three.md`](./2026-09-24-bugherd-round-three.md) |
 | 2026-09-23 | 2026-09-23 - BugHerd #41: the reviewer's front-desk photo on the /special-offers hero, centred; published, replied, closed. Gotchas: Python CRLF trips stamp, Railway SSH outage | [`2026-09-23-bugherd-41-special-offers-hero.md`](./2026-09-23-bugherd-41-special-offers-hero.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-21 | 2026-09-21 - BugHerd round two: the pediatric map, the hours, a 1.3:1 contrast bug. 9 of 11 done. | [`2026-09-21-bugherd-round-two.md`](./2026-09-21-bugherd-round-two.md) |

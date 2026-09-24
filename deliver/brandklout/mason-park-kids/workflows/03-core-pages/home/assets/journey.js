@@ -319,8 +319,10 @@
     function decide() {
       /* The CSS decides the layout below 900; the runtime has to agree, or the
          pin holds the reader still while a clipped track translates. */
+      /* `.is-grid` opts a short path out of the pin: its steps sit in one row
+         at rest (BugHerd #79, /services/sealants). */
       var wants = window.innerWidth < 900 ? "flow"
-        : (track.scrollWidth > window.innerWidth + 40 ? "pinned" : "static");
+        : (sec.classList.contains("is-grid") || track.scrollWidth <= window.innerWidth + 40 ? "static" : "pinned");
       if (wants === built) return;
       built = wants;
       ScrollTrigger.getAll().forEach(function (st) {
@@ -414,13 +416,17 @@
       var dec = parseInt(b.getAttribute("data-decimals") || "0", 10);
       var pre = b.getAttribute("data-prefix") || "", suf = b.getAttribute("data-suffix") || "";
       var group = b.closest("[data-counters]") || b;
+      /* A unit set smaller beside the number (BugHerd #88/#123: "6 months",
+         the word whole) lives in its own element; the count writes only the
+         number, into .fig-n, so the unit survives the animation. */
+      var out = b.querySelector(".fig-n") || b;
       var o = { v: 0 };
       gsap.to(o, {
         v: to, duration: 1.8, ease: "power2.out",
         scrollTrigger: { trigger: group, start: "top 82%" },
         onUpdate: function () {
           var v = dec ? o.v.toFixed(dec) : Math.round(o.v).toLocaleString("en-US");
-          b.textContent = pre + v + suf;
+          out.textContent = pre + v + suf;
         }
       });
     });

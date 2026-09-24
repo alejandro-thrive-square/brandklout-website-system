@@ -417,6 +417,20 @@ button { font: inherit; }
   border-radius: var(--radius-sm);
 }
 .masthead_sub .masthead_link:hover { color: var(--sage-deep); background: var(--sage-tint); }
+/* The second level (BugHerd #59): each Services category opens its treatments
+   to the side on hover or focus; in the drawer a first tap on the category
+   opens them (site.js), a second follows the link. */
+@media (min-width: 1151px) {
+  .masthead_sub .masthead_sub { top: -.7rem; left: 100%; transform: translateX(.35rem); min-width: 14rem; }
+  .masthead_sub .masthead_item.has-sub:hover > .masthead_sub,
+  .masthead_sub .masthead_item.has-sub:focus-within > .masthead_sub { transform: translateX(0); }
+  .masthead_sub .has-sub > .masthead_link { padding-right: 2rem; }
+  .masthead_sub .has-sub > .masthead_link::after {
+    content: ""; position: absolute; right: .9rem; top: 50%; width: .4rem; height: .4rem;
+    border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor;
+    transform: translateY(-50%) rotate(45deg); opacity: .6;
+  }
+}
 
 .masthead_actions { display: flex; align-items: center; gap: 1rem; flex: 0 0 auto; }
 .masthead_phone {
@@ -527,6 +541,11 @@ button { font: inherit; }
   .masthead_item.is-open > .masthead_sub { display: block; }
   .masthead_item.has-sub:hover > .masthead_sub { display: none; }
   .masthead_item.has-sub.is-open:hover > .masthead_sub { display: block; }
+  /* The wide-screen open state centres the panel under its parent with a
+     transform; a tap that focuses the link (Android Chrome) applied it here
+     too and slid the opened list half out of the drawer (found 2026-09-24). */
+  .masthead_item.has-sub:hover > .masthead_sub,
+  .masthead_item.has-sub:focus-within > .masthead_sub { transform: none; }
   .masthead_sub .masthead_item { border-bottom: 0; }
   .masthead_sub .masthead_link { padding: .5rem .25rem; }
   /* One z-index above the drawer, or the drawer traps its own close button:
@@ -592,13 +611,13 @@ button { font: inherit; }
   --f-label: calc(.78rem * var(--t-ui));   /* Nunito 800 uppercase, floored at 12px */
 
   --maxw: 97.5rem;
-  --ch-pad: 8.5rem;
+  --ch-pad: 6rem;       /* 8.5rem until 2026-09-24: BugHerd #161, less air before every chapter */
   --bleed: 4.5rem;
 }
-@media (max-width: 1279px) { :root { --t-disp: .82; --t-lg: .82; --t-mid: .82; --t-sm: .84; --ch-pad: 7rem; --bleed: 3.5rem } }
-@media (max-width: 991px)  { :root { --t-disp: .69; --t-lg: .68; --t-mid: .76; --t-sm: .82; --ch-pad: 6rem; --bleed: 2.5rem } }
-@media (max-width: 767px)  { :root { --t-disp: .55; --t-lg: .6; --ch-pad: 5rem; --bleed: 1.5rem } }
-@media (max-width: 478px)  { :root { --t-lg: .69; --t-mid: .87; --t-sm: .95; --ch-pad: 4.25rem } }
+@media (max-width: 1279px) { :root { --t-disp: .82; --t-lg: .82; --t-mid: .82; --t-sm: .84; --ch-pad: 5rem; --bleed: 3.5rem } }
+@media (max-width: 991px)  { :root { --t-disp: .69; --t-lg: .68; --t-mid: .76; --t-sm: .82; --ch-pad: 4.5rem; --bleed: 2.5rem } }
+@media (max-width: 767px)  { :root { --t-disp: .55; --t-lg: .6; --ch-pad: 4rem; --bleed: 1.5rem } }
+@media (max-width: 478px)  { :root { --t-lg: .69; --t-mid: .87; --t-sm: .95; --ch-pad: 3.5rem } }
 
 .ch[data-theme="dark"] {
   --bg: var(--ink-deep); --bg-2: var(--ink-mid); --panel: var(--ink-mid);
@@ -1098,8 +1117,10 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 
 .crumbs {
   display: flex; flex-wrap: wrap; gap: .5rem;
-  max-width: var(--maxw); margin-left: auto; margin-right: auto;
-  padding: 1.1rem var(--bleed);
+  /* Full width, so its rule runs edge to edge; the words still sit on the
+     content column. Capped at --maxw, the rule stopped short of both edges on
+     wide screens over a coloured chapter (BugHerd #104). */
+  padding: 1.1rem max(var(--bleed), calc((100% - var(--maxw)) / 2 + var(--bleed)));
   font-family: var(--font-ui); font-weight: 800; font-size: var(--f-label);
   letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
   border-bottom: 1px solid var(--sage-line);
@@ -1217,6 +1238,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
    THE INVITATION — everything needed to act, and the questions
    ======================================================================== */
 .iv-top { display: grid; gap: 3rem; padding-bottom: 4rem; }
+.iv-top:last-child { padding-bottom: 0; }   /* nothing follows it but the footer (BugHerd #61/#92) */
 @media (min-width: 900px) { .iv-top { grid-template-columns: 1.05fr .95fr; gap: 4.5rem; align-items: start; } }
 .iv-copy { min-width: 0; }
 .iv-lede { font-size: var(--f-lede); line-height: 1.7; max-width: 44ch; margin: 1.4rem 0 2.2rem; }
@@ -1429,7 +1451,7 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 
 /* --- shared by the inner pages ------------------------------------------- */
 /* The written manifesto: one sentence centred at statement size. */
-.manifesto { max-width: 42ch; margin-left: auto; margin-right: auto; text-align: center; }
+.manifesto { max-width: 60ch; margin-left: auto; margin-right: auto; text-align: center; }
 .manifesto .kicker { margin-bottom: 1.4rem; }
 .manifesto .statement { font-size: calc(2.6rem * var(--t-lg)); line-height: 1.24; }
 /* Counted figures on a hairline grid. Every value is in the HTML before any
@@ -1439,6 +1461,9 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .figures b { font-family: var(--font-display); font-weight: 500; font-size: calc(3.2rem * var(--t-lg)); line-height: 1; color: var(--accent); font-variation-settings: "SOFT" 100, "opsz" 144; }
 .figures span { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-soft); }
 .figures small { font-size: calc(.88rem * var(--t-text)); color: var(--fg-body); line-height: 1.5; }
+/* BugHerd #88/#123: the unit beside a number, whole and smaller, in the number's own ink. */
+.figures b em { font-style: normal; }
+.figures b .fig-unit { font-size: .42em; letter-spacing: .01em; white-space: nowrap; }
 @media (max-width: 899px) { .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* One short review at display size, and nothing else in the chapter. */
 .oneword { text-align: center; margin-left: auto; margin-right: auto; }
@@ -1539,6 +1564,9 @@ a.card:hover h3 { color: var(--accent); }
   .ab-panel { grid-column: span 5; }
   .ab-mosaic .is-c { grid-column: span 4; aspect-ratio: 4 / 5; }
   .ab-mosaic .is-d { grid-column: span 3; aspect-ratio: auto; }
+  /* The side frames take the row's height instead of setting it: a tall frame
+     in .is-b left empty ground under .is-a on wide screens (BugHerd #95). */
+  .ab-mosaic .is-b img, .ab-mosaic .is-d img { position: absolute; inset: 0; }
 }
 @media (max-width: 599px) { .ab-mosaic > * { grid-column: span 12 !important; } .ab-mosaic .is-b, .ab-mosaic .is-d { aspect-ratio: 4 / 3; } }
 
@@ -1562,7 +1590,7 @@ a.card:hover h3 { color: var(--accent); }
 
 /* The ribbon: Pay It Forward, a statement written on a sun ground. */
 .ab-ribbon { display: grid; gap: 2rem; }
-@media (min-width: 900px) { .ab-ribbon { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: end; } }
+@media (min-width: 900px) { .ab-ribbon { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: center; } }
 .ab-ribbon .statement { font-size: calc(2.4rem * var(--t-lg)); max-width: 24ch; }
 .ab-ribbon_aside { display: grid; gap: 1rem; padding: 1.6rem; background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); }
 .ab-ribbon_aside b { font-family: var(--font-display); font-weight: 500; font-size: var(--f-h3); color: var(--fg); }
@@ -2056,3 +2084,52 @@ a.card:hover h3 { color: var(--accent); }
 }
 
 /* == end of the stylesheet: page blocks are appended above this line == */
+
+/* ========================================================================
+   BugHerd round three, 2026-09-24
+   ======================================================================== */
+/* #51 #57 #64 #129 #144 #159: a text column shorter than the sticky head beside
+   it sits centred on it, instead of leaving a gap under it. When the text is the
+   taller column this changes nothing, so the sticky head still works. Blog
+   articles (the head carries a contents list) are left as they were. */
+@media (min-width: 900px) {
+  .lf-layout.lf-split:not(:has(.bl-toc)) > :not(.lf-head) { align-self: center; }
+}
+/* #151: a path card with no photograph centres its words in the card. */
+.pa-card:not(:has(.pa-shot)) { justify-content: center; }
+/* #79: a short path laid out as one row of steps, no pin (journey.js). */
+.ch-path.is-grid.is-static .pa-track { display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.ch-path.is-grid.is-static .pa-card { width: auto; }
+/* #111: the topic cards carry a mark, not a number that read like a rank. */
+.card_no.is-mark { font-family: var(--font-display); font-size: calc(1.5rem * var(--t-text)); line-height: 1; padding-top: .35em; }
+/* Frame positions asked for in notes. */
+.lf-figure.is-top img { object-position: 50% 6%; }          /* #45 the doctor's whole face */
+.ab-mosaic .is-c.is-left img { object-position: 12% 30%; }   /* #96 the doctor and the child */
+/* #106: the visit's steps beside its photograph, not above it. */
+.np-visit { display: grid; gap: 2rem; }
+.np-visit_shot { margin: 0; border-radius: var(--radius); overflow: hidden; }
+.np-visit_shot img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+@media (min-width: 900px) {
+  .np-visit { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2.5rem, 5vw, 5rem); align-items: stretch; }
+  .np-visit_shot { position: relative; min-height: 22rem; }
+  .np-visit_shot img { position: absolute; inset: 0; aspect-ratio: auto; }
+}
+/* #164: the short reviews together, then the long ones two across with room. */
+.rv-wall.is-short, .rv-wall.is-long { columns: auto; display: grid; gap: 1.25rem; align-items: start; }
+.rv-wall.is-short .rv-item, .rv-wall.is-long .rv-item { margin: 0; }
+@media (min-width: 700px) {
+  .rv-wall.is-short { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .rv-wall.is-long { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-top: 2rem; }
+}
+@media (max-width: 699px) { .rv-wall.is-long { margin-top: 1.25rem; } }
+/* #166: the FAQ's topics, listed where the first chapter's head had room. */
+.faq-toc { align-self: end; }
+.faq-toc .kicker { margin-bottom: .9rem; }
+.faq-toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .6rem; }
+.faq-toc a { display: inline-block; padding: .55rem 1.05rem; border: 1px solid var(--rule-strong); border-radius: var(--pill); background: var(--panel); color: var(--fg); font-family: var(--font-ui); font-weight: 700; font-size: calc(.9rem * var(--t-text)); text-decoration: none; transition: border-color .3s var(--ease), background-color .3s var(--ease); }
+.faq-toc a:hover, .faq-toc a:focus-visible { border-color: var(--sage); background: var(--sage-tint, var(--panel)); }
+.ar-bg.is-y40 img { object-position: 50% 40%; }                 /* #47 #48 #138 */
+.ar-bg.is-y55 img { object-position: 50% 55%; }                 /* #65 #130 the baby's face, not the glove */
+.ch-figure.is-band.is-y72 img { object-position: 50% 72%; }     /* #116 */
+.sw-overlap_shot.is-y60 img { object-position: 50% 60%; }       /* #145 */
+.pe-band.is-low.is-faces img { object-position: 50% 24%; }        /* #83 both faces, not their shoulders */

@@ -29,6 +29,15 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-24: BugHerd round three, #42-#168. 126 of 127 done, published to staging, verified
+(`verify-0924.mjs` 118/118) and replied.** The reviewer's own photos across ~55 slots (`rv-*` keys,
+`REVIEWER` in `prep-images.py`), 11 band photos removed, ~30 copy edits, less space between
+chapters site-wide, short text columns centred, a **second level in the Services menu on every
+page** (with "Cosmetic and gum care"), a topic list on the FAQ, the reviews regrouped. Dr. William
+Sung (the adult practice) was named on three more pages and is gone; /thank-you had a seventh copy
+of the old hours. **Open: #82** (its attachment was 0 bytes; asked again), plus #34 and #38. The
+recipes are now behind the pages; the files are the source. See `runbook/2026-09-24-bugherd-round-three.md`.
+
 **2026-09-23: BugHerd #41 done.** The /special-offers hero is the reviewer's own front-desk photo (`front-desk-tablet`), centred with `.ar-bg.is-counter`; published and verified on staging, replied, closed. #34 and #38 still open. See `runbook/2026-09-23-bugherd-41-special-offers-hero.md`.
 
 **2026-09-21: BugHerd round two, #29-#40. Nine done and published to staging, two open.** The map on every page pointed at the

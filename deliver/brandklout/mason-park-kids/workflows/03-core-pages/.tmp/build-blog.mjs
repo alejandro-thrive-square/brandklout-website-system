@@ -397,7 +397,9 @@ const renderBlock = b => b.t === 'p' ? `<p>${type(b.html)}</p>`
   : '';
 
 function postCard(p, built, { big = false } = {}) {
-  const fr = frames(p).hero;
+  // BugHerd #108 (2026-09-24): the featured card on the overview carries the
+  // reviewer's chosen frame, whatever the post's own pool would give it.
+  const fr = big ? ['toddler', 'A smiling toddler'] : frames(p).hero;
   const linked = built.has(p.slug);
   const href = `/blog/${p.slug}/`;
   const title = linked ? `<a href="${href}">${txt(p.title)}</a>` : `<span class="is-soon">${txt(p.title)}</span>`;
@@ -531,7 +533,7 @@ ${rows}
   <div class="ar-in">
     ${tag('The Blog')}
     <h1 class="ar-title" data-split>Notes from the practice, written <em>for parents.</em></h1>
-    <p class="ar-lede" data-anim="hide">${all.length} posts since ${years[years.length - 1]}: first teeth, habits, cleanings, braces, and what actually happens at the visit. Newest first.</p>
+    <p class="ar-lede" data-anim="hide">Your go-to dental guide since ${years[years.length - 1]}. Discover helpful insights on first teeth, habits, cleanings, braces, and how we make visits fun and stress-free. Browse our latest updates first.</p>
     <div class="ar-actions" data-anim="hide"><a class="button is-sun is-lg" href="#latest">Start with the latest</a>
       <a class="button is-ghost-light is-lg" href="#archive">Every post</a></div>
     <div class="ar-meta">
@@ -566,13 +568,13 @@ ${BADGES()}
   <div class="wrap ch-head is-split">
     <div>
       ${tag('By Topic')}
-      <h2 data-split>Five shelves, by what a parent is <em>asking about.</em></h2>
+      <h2 data-split>Five core topics, based on what parents <em>ask us most.</em></h2>
     </div>
-    <p class="lede">Every post is on exactly one shelf. The archive below carries the shelf beside each title.</p>
+    <p class="lede">Everything is organized by category to help you browse easily. You&rsquo;ll find the main topic listed right next to each article title below.</p>
   </div>
   <div class="wrap">
     <div class="cards is-3 bl-topics" data-stagger>
-      ${topics.map(x => `<a class="card" href="#archive"><span class="card_no">${x.n}</span><h3>${txt(x.t)}</h3><p>${txt(x.one)}</p><span class="link-arrow">The archive <span aria-hidden="true">&rarr;</span></span></a>`).join('\n      ')}
+      ${topics.map(x => `<a class="card" href="#archive"><span class="card_no is-mark" aria-hidden="true">*</span><h3>${txt(x.t)}</h3><p>${txt(x.one)}</p><span class="link-arrow">${x.n} posts in the archive <span aria-hidden="true">&rarr;</span></span></a>`).join('\n      ')}
     </div>
   </div>
 </section>

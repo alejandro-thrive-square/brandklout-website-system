@@ -409,7 +409,7 @@ export default [
   eyebrow: 'Special needs patient care',
   h1: 'A flexible approach, which mostly means more time.',
   em: 'more time',
-  lede: 'Drs. Sung and Nguyen have found that many children with special needs have unique dental care needs that require a flexible approach.',
+  lede: 'Our doctors have found that many children with special needs have unique dental care needs that require a flexible approach.',
   cta: 'Call the practice', cta2: 'How we adapt', cta2href: 'how',
   hero: { img: 'knee-2', alt: 'An infant on a parent’s lap during a knee-to-knee exam' },
   crumbs: [['Services', '/our-services/'], ['Comprehensive pediatric dentistry', '/services/comprehensive-pediatric-dentistry/'], 'Special needs patient care'],

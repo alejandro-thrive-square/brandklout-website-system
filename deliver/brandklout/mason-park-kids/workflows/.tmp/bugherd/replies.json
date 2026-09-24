@@ -1,7 +1,637 @@
 [
   {
-    "n": 41,
+    "n": 42,
     "done": true,
-    "text": "Done. The header on Special Offers now uses the photo you attached (the parent at the front desk while the receptionist goes through a form on the tablet). The old image was a tall portrait crop, so at your screen width it zoomed in on one face. The new one is the full wide frame, positioned so the receptionist, the tablet and the counter sit in the middle of the header. I checked it at 2560, 1512 and 1440 wide and on a phone. It is on staging now, so please hard-refresh (Ctrl+Shift+R) to see it."
+    "text": "Fixed. The Thank You page had its own copy of the old hours (Tuesday and Thursday 8am to 5pm) that the last round missed. It now says Monday to Thursday 9am to 6pm, like the rest of the site. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 43,
+    "done": true,
+    "text": "Fixed. The headline now reads \"Five offers\", matching the five rows in the table. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 44,
+    "done": true,
+    "text": "Replaced with the photo you attached. Where the same photo came attached at several sizes, I used the largest copy, so it is sharp here. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 45,
+    "done": true,
+    "text": "Adjusted. The photo is now anchored at the top, so Dr. Nguyen's whole face is in the frame. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 46,
+    "done": true,
+    "text": "Replaced with the photo you attached (the hygienist with the screen on the wall), using the largest copy so it is no longer blurry. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 47,
+    "done": true,
+    "text": "Replaced with the photo you attached (the piggy bank), positioned so the coin and the piggy bank sit in the header. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 48,
+    "done": true,
+    "text": "Replaced with the photo you attached (the piggy bank), positioned so the coin and the piggy bank sit in the header. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 49,
+    "done": true,
+    "text": "Replaced with the photo you attached (the form on the clipboard). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 50,
+    "done": true,
+    "text": "Replaced with the photo you attached (the dentist showing the boy the model tooth). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 51,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 52,
+    "done": true,
+    "text": "Replaced with the photo you attached (the girl brushing her teeth), centred. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 53,
+    "done": true,
+    "text": "Replaced with the photo you attached for step 4, the brushing lesson. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 54,
+    "done": true,
+    "text": "The photo in this spot has been removed instead of replaced. Your later note #141 asked to delete this image on all pages to make them shorter, so that took priority. If you would rather keep a photo here with the one you attached, tell us and we will put it back. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 55,
+    "done": true,
+    "text": "Replaced with the photo you attached, centred in the header. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 56,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 57,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 58,
+    "done": true,
+    "text": "Changed. The label on this section now reads \"Explore our services\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 59,
+    "done": true,
+    "text": "Done. Each category in the Services menu now opens a second level with its treatments (Preventive dentistry shows Cleanings and exams, Hygiene education, Fluoride, Sealants, Mouth guards and Night guards), and each one links to its own page. On desktop it opens on hover. On a phone, tap a category once to open it, then tap a treatment. While testing on a phone we also found and fixed a bug where an opened submenu slid half out of the menu panel on Android. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 60,
+    "done": true,
+    "text": "Replaced with the photo you attached, positioned in the header. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 61,
+    "done": true,
+    "text": "Reduced. There was extra padding under the map and the directions link before the footer. It is gone on every page, and the space between all sections is also smaller (see #161). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 62,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 63,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 64,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 65,
+    "done": true,
+    "text": "Centred. The header now frames the child's face instead of the gloved hand. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 66,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 67,
+    "done": true,
+    "text": "We used the wording from your later note #100 on the same paragraph (\"At our clinic, we organize every care detail with your child's comfort in mind...\"). If you prefer this shorter version, tell us and we will switch it. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 68,
+    "done": true,
+    "text": "Changed to: \"Your child's care changes as they grow. We tailor each visit to their age, needs and comfort.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 69,
+    "done": true,
+    "text": "Changed to: \"Hear what families have shared about their visits.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 70,
+    "done": true,
+    "text": "Replaced with the photo you attached (Dr. Nguyen with the two girls at the prize shelf). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 71,
+    "done": true,
+    "text": "Changed to: \"Hear what families have shared about their visits.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 72,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 73,
+    "done": true,
+    "text": "Changed. The paragraph now starts \"Your child's treatment timeline depends on their needs and the option chosen.\" It also no longer names Dr. William Sung (see #146). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 74,
+    "done": true,
+    "text": "Replaced with the photo you attached (the building). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 75,
+    "done": true,
+    "text": "Replaced with the photo you attached (the boy with the toy). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 76,
+    "done": true,
+    "text": "Added. \"Cosmetic and gum care\" is now in the Services menu, with Bonding, Periodontics and Frenectomy under it. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 77,
+    "done": true,
+    "text": "Replaced with the photo you attached, using the largest copy so it is sharp. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 78,
+    "done": true,
+    "text": "Done. The photo is now flipped so the doctor is on the right, where the headline does not cover her. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 79,
+    "done": true,
+    "text": "Done. The four steps now sit in a simple row of cards with no sideways scrolling, the photo in step 2 has been removed, and the text is centred in each card, so the cards are much shorter. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 80,
+    "done": true,
+    "text": "Replaced with the photo you attached (the building). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 81,
+    "done": true,
+    "text": "Fixed. The statement is now vertically centred against the Parks Youth Ranch box, which also closes the gap between the section label and the text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 82,
+    "done": false,
+    "text": "We could not use this one: the attachment on this note arrived as an empty file (0 bytes), so the upload probably failed. Could you attach the photo again? We will swap it in as soon as it arrives."
+  },
+  {
+    "n": 83,
+    "done": true,
+    "text": "Replaced with the photo you attached, positioned so both faces are in the frame. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 84,
+    "done": true,
+    "text": "Replaced with the photo you attached (the tooth and the question mark). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 85,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 86,
+    "done": true,
+    "text": "Your later note #167 asked for a different photo in this same spot (the receptionist on the phone), so we used that one. The tooth and question mark photo you attached here is now the page header (#84). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 87,
+    "done": true,
+    "text": "Replaced with the photo you attached (the building). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 88,
+    "done": true,
+    "text": "Changed. It now reads \"6 months\", with the whole word in a smaller size and the same colour. Same on Our Doctors (#123). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 89,
+    "done": true,
+    "text": "Replaced with the photo you attached (the front desk). The caption now says \"The front desk\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 90,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 91,
+    "done": true,
+    "text": "Replaced with the photo you attached. The caption now says \"The treatment area\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 92,
+    "done": true,
+    "text": "Reduced. The extra padding under the map before the footer is gone on every page. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 93,
+    "done": true,
+    "text": "Replaced with the photo you attached (the building). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 94,
+    "done": true,
+    "text": "Reduced. The statement is set wider, so it takes fewer lines, and the space between sections is smaller on every page. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 95,
+    "done": true,
+    "text": "Fixed a different way. The empty space under the first photo appeared on wide screens, where the photo beside it grew taller. Both side photos now match the height of their row, so there is no empty space under the first photo at any width. If you would still like this text moved under the first photo, tell us. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 96,
+    "done": true,
+    "text": "Adjusted. The photo is repositioned so the doctor and the child are both in the frame. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 97,
+    "done": true,
+    "text": "Replaced with the photo you attached (the front desk). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 98,
+    "done": true,
+    "text": "Changed. The section is now named \"Explore our services\" in the floating label as well. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 99,
+    "done": true,
+    "text": "Changed. The label on this section now reads \"Find the right care\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 100,
+    "done": true,
+    "text": "Changed the paragraph to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 101,
+    "done": true,
+    "text": "Changed to \"Most parents do not know the name of a treatment.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 102,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 103,
+    "done": true,
+    "text": "Replaced with the photo you attached (the girl and team member at the prize shelf). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 104,
+    "done": true,
+    "text": "Fixed. The thin line under the breadcrumb only ran across the middle of wide screens, so it looked cut off over the coloured section below. It now runs the full width, like on the other pages. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 105,
+    "done": true,
+    "text": "Linked. \"forms\" now opens the online forms (the same Flexbook link the old site used for its \"Online forms\" button). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 106,
+    "done": true,
+    "text": "Done. The photo that sat under the steps now sits beside them on the right, so the steps and the photo fill the section together. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 107,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 108,
+    "done": true,
+    "text": "Replaced with the photo you attached (the smiling toddler). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 109,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 110,
+    "done": true,
+    "text": "Changed to \"Five core topics, based on what parents ask us most.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 111,
+    "done": true,
+    "text": "Changed. The numbers were post counts, which read like a ranking. Each card now shows a small asterisk, and the count moved into the link (for example \"12 posts in the archive\"). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 112,
+    "done": true,
+    "text": "Changed. It now ends \"We welcome new patients starting at six months of age.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 113,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 114,
+    "done": true,
+    "text": "Reduced. The space between sections is smaller on every page, so this short quote section takes much less room. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 115,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 116,
+    "done": true,
+    "text": "Centred. The photo now frames the baby's face instead of the gloved hand. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 117,
+    "done": true,
+    "text": "Replaced with the photo you attached, centred, with the caption \"Dr. Nguyen, with her patients\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 118,
+    "done": true,
+    "text": "Changed. The button now reads \"Book with Dr. Cho\" and opens online booking. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 119,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 120,
+    "done": true,
+    "text": "Changed to \"Where our doctors trained.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 121,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 122,
+    "done": true,
+    "text": "Removed. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 123,
+    "done": true,
+    "text": "Changed. The number now reads \"6 months\", with the whole word in a smaller size and the same colour. Same on About Us (#88). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 124,
+    "done": true,
+    "text": "Changed to \"Familiar faces at every visit.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 125,
+    "done": true,
+    "text": "Changed to \"And the two specialists who support our team.\" It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 126,
+    "done": true,
+    "text": "Replaced with the photo you attached. The attachment is only 899 pixels wide, so it may look a little soft across a large screen. If you have a larger copy, send it and we will swap it in. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 127,
+    "done": true,
+    "text": "Replaced with the photo you attached. The caption now says \"Chairside, with a young patient\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 128,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 129,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 130,
+    "done": true,
+    "text": "Adjusted. The header now frames the baby's face instead of the gloved hand. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 131,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 132,
+    "done": true,
+    "text": "Added. \"Cosmetic and gum care\" is now in the Services menu, with Bonding, Periodontics and Frenectomy under it (see #59 for the new second level). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 133,
+    "done": true,
+    "text": "Removed. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 134,
+    "done": true,
+    "text": "Replaced with the photo you attached (the two kids with their Anti-Cavity Club prizes). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 135,
+    "done": true,
+    "text": "Replaced with the photo you attached (the girl brushing her teeth). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 136,
+    "done": true,
+    "text": "Your later note #155 asked for a different photo for this same header, so the header uses that one. The photo you attached here (Dr. Nguyen with the two girls) went to the section you asked for in #156. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 137,
+    "done": true,
+    "text": "Replaced with the photo you attached (the mother and toddler at the prize shelf). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 138,
+    "done": true,
+    "text": "Replaced with the photo you attached, positioned so the clinician and the model are in the header. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 139,
+    "done": true,
+    "text": "Replaced with the photo you attached (the boy with the toy). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 140,
+    "done": true,
+    "text": "Done. Each of the six cards now has a \"Learn more\" link to its own treatment page. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 141,
+    "done": true,
+    "text": "Removed, on every page that had a photo at the end of its questions section: Preventive dentistry, Comprehensive pediatric dentistry, Cleanings and exams, Orthodontics, Invisalign, New patients, and Insurance and financing. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 142,
+    "done": true,
+    "text": "Replaced with the photo you attached (the baby with the toothpaste). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 143,
+    "done": true,
+    "text": "Replaced with the photo you attached (the smiling toddler). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 144,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 145,
+    "done": true,
+    "text": "Centred. The photo now frames the baby's face. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 146,
+    "done": true,
+    "text": "Fixed. Dr. William Sung is the doctor at the adult practice and should not have been named here, so the sentence no longer names a doctor. We also found his name on the Special Needs page (\"Drs. Sung and Nguyen\") and in one blog post about clear braces, and removed both. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 147,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 148,
+    "done": true,
+    "text": "Replaced with the photo you attached (the digital scan). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 149,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 150,
+    "done": true,
+    "text": "Replaced with the photo you attached (the digital scan). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 151,
+    "done": true,
+    "text": "Done, on every page with these step cards: in a card with no photo, the text is now centred vertically. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 152,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 153,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 154,
+    "done": true,
+    "text": "Changed to your text. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 155,
+    "done": true,
+    "text": "Replaced with the photo you attached, positioned so the child and the clinician are in the header. The page's intro also named Dr. Sung from the adult practice; it now says \"Our doctors\". It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 156,
+    "done": true,
+    "text": "Replaced with the photo you attached (Dr. Nguyen with the two girls). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 157,
+    "done": true,
+    "text": "Replaced with the photo you attached (the emergency sign). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 158,
+    "done": true,
+    "text": "Replaced with the photo you attached (the team member on the phone at the front desk). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 159,
+    "done": true,
+    "text": "Fixed. The text is now centred against the title and photo beside it, so there is no large empty space at the bottom. This applies to every page with this two-column layout. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 160,
+    "done": true,
+    "text": "Removed. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 161,
+    "done": true,
+    "text": "Done on every page. The space between sections is smaller at every screen size: about 30% less on desktop and 20% less on phones. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 162,
+    "done": true,
+    "text": "Replaced with the photo you attached (the mother and toddler at the prize shelf). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 163,
+    "done": true,
+    "text": "Removed. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 164,
+    "done": true,
+    "text": "Done. The short reviews now sit together in one row at the top, and the longer ones follow two across with more space around them. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 165,
+    "done": true,
+    "text": "Done. This section now comes right after the summary of what parents mention, before the full list of reviews, and its button opens the practice's Google overview page, not the reviews tab. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 166,
+    "done": true,
+    "text": "Added. The top of the page now has a \"Jump to a topic\" list that links to each of the seven sections. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 167,
+    "done": true,
+    "text": "Replaced with the photo you attached (the receptionist on the phone). It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
+  },
+  {
+    "n": 168,
+    "done": true,
+    "text": "Replaced with the photo you attached. It is on staging now; please hard-refresh (Ctrl+Shift+R) to see it."
   }
 ]
