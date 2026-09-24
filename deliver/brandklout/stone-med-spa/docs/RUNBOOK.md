@@ -20,6 +20,8 @@ staging (seq 16). **The med spa's own GHL number pool (`vHDCe45MFTjdydJul0cd`) i
 since 2026-09-24** and swaps that number in the browser with no consent needed; staging has no pool
 (`set-dni-pool.mjs --pool` refuses it) — [run](./runbook/2026-09-24-dni-pool-installed.md).
 
+**2026-09-24, later — BugHerd #15 on staging:** the /team strip's treatment-room frame is the client's Drive photo (upscaled 2× with Freepik precision; the creative Magnific upscale invented detail and was rejected). BugHerd has no new tasks or comments. **39 of 41 now on staging**; #9/#10 need Abby's and Brooke's photos exported from Canva — they are not on Drive. Production still awaits a go — [run](./runbook/2026-09-24-bugherd-15-treatment-room.md).
+
 **2026-09-23 — the client's BugHerd pass is on STAGING, not production.** 41 tasks on production
 (BugHerd project 540569): 38 applied on `https://staging.westlaketxmedspa.com` (seq 13, **24
 pages** — eleven new treatment pages generated from `treatment-pages.mjs`), 3 waiting on Drive

@@ -1,11 +1,12 @@
 # Runbook index
 
-21 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | 2026-09-24, later — BugHerd #15: the client's Drive treatment-room photo in the /team strip, upscaled with Freepik precision (Magnific creative hallucinated); on STAGING; #9/#10 still need Canva exports — carries **gotchas** | [`2026-09-24-bugherd-15-treatment-room.md`](./2026-09-24-bugherd-15-treatment-room.md) |
 | 2026-09-24 | 2026-09-24 — The med spa's own GHL number pool (vHDCe45MFTjdydJul0cd) on production; swap of (817) 674-2061 proven without consent — carries **gotchas** | [`2026-09-24-dni-pool-installed.md`](./2026-09-24-dni-pool-installed.md) |
 | 2026-09-23 | 2026-09-23, latest — Display phone (817) 674-2061 live on production (seq 21) and staging (seq 16); the number pool waits on the med spa's own GHL pool URL — carries **gotchas** | [`2026-09-23-display-phone-674-2061.md`](./2026-09-23-display-phone-674-2061.md) |
 | 2026-09-23 | 2026-09-23, later — A phone/number-pool change meant for Stone Surgical Arts was applied here and reverted (live and git); this site has no pool — carries **gotchas** | [`2026-09-23-phone-change-reverted.md`](./2026-09-23-phone-change-reverted.md) |
