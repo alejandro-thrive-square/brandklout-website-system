@@ -81,6 +81,16 @@ With a driven Chrome session and the Termly proxy (`scratchpad accept-test.mjs`,
   `practicenumbers` all fire, and the number swaps to a tracking line (303) 732-6450. So the pool already
   matches 720-719-9579. The run claimed one real pool number.
 
+## Reversed on the Implants site: DNI runs before consent (published)
+
+Once the user saw the hold working, they asked for DNI to fire before consent ("Allow to trigger before
+ please"). On `69f2fe63…` the Practice By Numbers loader and the GHL pair are **untagged** again. Termly,
+the preferences control and the bridge stay. The agent published at about 01:05 UTC (the only pending delta
+was 17 s of post-publish noise). Verified live with no banner click: 0 held scripts, and the number swaps to
+(303) 732-6450 on page load.
+**The Center site (`693c51e6…`) still holds its GHL pair until consent.** Ask before changing it.
+GTM was never blocked. Termly's Consent Mode default is `denied`, so Google tags run cookieless until Accept.
+
 ## Gotchas
 
 - **Site Settings → Custom code saved from an open Designer tab overwrites API freeform writes**

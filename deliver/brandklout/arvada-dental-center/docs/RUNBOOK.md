@@ -9,7 +9,12 @@ Do not read them all.
 - www.arvadadentalcenter.com → Webflow `693c51e685b19f0d0c149cab` "Arvada Dental Center" · display number (303) 421-7611
 - www.arvadadentalimplants.com → Webflow `69f2fe636ca87b3f22fa54c1` "Arvada Implants Center" · display number (720) 719-9579
 
-## Call tracking waits for consent — 2026-09-23
+## Call tracking vs consent — 2026-09-23 (latest)
+
+- **Implants site:** DNI (GHL + Practice By Numbers) runs **before** consent. Published and verified.
+- **Center site:** the GHL pair still waits for advertising consent.
+
+### Earlier the same day
 
 User instruction 2026-09-23 **replaces** the 2026-09-22 "pools run without consent" decision for both
 Arvada sites: the GHL pairs and (Implants) Practice By Numbers are tagged `advertising`. Both sites now run
