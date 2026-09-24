@@ -40,7 +40,7 @@ hosting, CRM, or ad accounts.
 > | Arvada Dental Center - Blue | `6957a3881484e0be00a9b0b2` | copy — do not touch |
 > | Arvada Cosmetic Dental Implants | `69bc29b491a12ccd5a2d47fa` | copy — do not touch |
 > | Arvada Dental Implants Center | `69c6a0f225e31703647d23cd` | copy — do not touch |
-> | Arvada Implants | `69f2fe636ca87b3f22fa54c1` | copy — do not touch |
+> | Arvada Implants Center | `69f2fe636ca87b3f22fa54c1` | **IN SCOPE since 2026-09-23** — now serves `arvadadentalimplants.com`; user asked for work on that domain by name |
 
 > [!NOTE]
 > Build platform is **resolved: Webflow** (see [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)).
