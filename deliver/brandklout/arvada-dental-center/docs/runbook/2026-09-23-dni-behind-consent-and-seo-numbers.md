@@ -63,7 +63,18 @@ the GHL pool can't match; they now read `(303) 421-7611`.
    (720) 419-3699 and 3 of them still show `(303)-421-7611`; McShane JSON-LD carries a Vietnamese
    placeholder `[DDS HOẶC DMD]`; 205 `/es-mx` pages on the Center site not reviewed.
 
+## Update: the custom code was overwritten and re-applied
+
+Both sites were published about 00:45 UTC from the Designer. The Site Settings custom-code boxes were saved
+from a stale copy: Termly and every `data-categories` tag disappeared, while the GTM IDs changed
+(Implants now `GTM-P8ZNXG6K`, Center `GTM-5LLWM9C4`). The page, SEO, JSON-LD, CMS and registered-script
+changes survived, and the Implants site shows (720) 719-9579 live. The consent code was re-applied on
+top of the new GTM IDs, in draft, so it needs another publish.
+
 ## Gotchas
+
+- **Site Settings → Custom code saved from an open Designer tab overwrites API freeform writes**
+  without warning. Re-read `get_site_freeform_code` after any publish you didn't do yourself.
 
 - `bulk_update_pages` (SEO) returned a bare 404 on the whole batch; `update_page_settings` one page per
   action works. `bulk_update_pages_schema_markup` works.
