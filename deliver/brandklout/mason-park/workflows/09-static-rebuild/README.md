@@ -62,7 +62,8 @@
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
 | `.tmp/build-ads-landing-pages.mjs` | Writes the six paid routes under `home/ads-landing-pages/` from campaign data: copy, photographs, reviews, FAQ, offer and disclaimer per campaign, one shared chrome. Edit the data, re-run, never edit the six files. |
-| `.tmp/place-ad-embeds.mjs` | Replaces the four form placeholders with the two exact `brandklout.embed-origins` GHL modules and adds call tracking to all six pages. Run after conversion. |
+| `.tmp/place-ad-embeds.mjs` | Replaces the four ad-page form placeholders and the one on `/contacts` with `brandklout.embed-origins` GHL modules, each filled by the form id its slot carries from `.tmp/site-forms.json`, and adds call tracking to all six ad pages. Run after conversion. |
+| `.tmp/site-forms.json` | The client's three GHL forms, snippets verbatim from `01-content-intake/.tmp/scripts.html` (2026-09-25): Contact form `JuzM9SxuJMPDMwfO6cgj` (on `/contacts`), Contact Form Invisalign `jRr3J74MVYjrYAsp4zZD`, Contact Form New Patient Special `jEXtvRc1ObkKd1QvmSGn`. |
 | `.tmp/probe-ad-journey.mjs` | Focused-tab proof of the paid page's three scenes: a different journey move lit at 12/38/62/88% with its own photograph on top, the Why head held while the reasons pass, the path travelling at 25/50/75%, and the rail away over the hero. Takes a file or a URL. |
 | `.tmp/probe-adblock.mjs` | **Asks the browser, over CDP, whether a blocker's cosmetic list matches any element of a published page.** Exit 1 on a hit. The injected sheet is invisible to `document.styleSheets` and absent on `file://`. |
 | `.tmp/probe-ad-form-box.mjs` | The published GHL iframe's box and every ancestor's up to the card. Catches a form that loaded but did not fill its card. |
@@ -660,8 +661,12 @@ ads point at. The routes here are the redesigned staging set, and they live **un
 
 | Campaign | Landing | Consultation | Thank you | Form |
 | :--- | :--- | :--- | :--- | :--- |
-| Invisalign | `/ads-landing-pages/invisalign` | `/ads-landing-pages/invisalign-consultation` | `/ads-landing-pages/invisalign-thank-you` | `YbX91GhEDKkCN4GH4gka` |
-| $189 New Patient | `/ads-landing-pages/new-patient-special` | `/ads-landing-pages/new-patient-special-consultation` | `/ads-landing-pages/new-patient-thank-you` | `AFu5BpJpMjgSnSf8yybc` |
+| Invisalign | `/ads-landing-pages/invisalign` | `/ads-landing-pages/invisalign-consultation` | `/ads-landing-pages/invisalign-thank-you` | `jRr3J74MVYjrYAsp4zZD` (Contact Form Invisalign) |
+| $189 New Patient | `/ads-landing-pages/new-patient-special` | `/ads-landing-pages/new-patient-special-consultation` | `/ads-landing-pages/new-patient-thank-you` | `jEXtvRc1ObkKd1QvmSGn` (Contact Form New Patient Special) |
+
+Since 2026-09-25 these pages carry the client's own forms (above). Until then they used the Google
+Ads forms `YbX91GhEDKkCN4GH4gka` / `AFu5BpJpMjgSnSf8yybc`, which the six root Webflow-port pages
+(workflow 10) still use. The GHL redirect after submit is set by the client in GHL, not here.
 
 **Second cut, published to staging on 2026-09-18.** The first cut (2026-09-17) was the organic
 service page with a form chapter added near the bottom and the consultation page a clone of the
@@ -716,9 +721,20 @@ on screen a second bar offering the form is noise. After that it is in reach at 
    reserved (`min-height: 50rem`) because the frame arrives at 150px and grows to 800 to 900 a few
    seconds later. `probe-ad-form-box.mjs` prints the iframe and every ancestor up to the card.
 
-`place-ad-embeds.mjs` still looks up each page's form and tracking scripts in workflow 10's records
-by the **bare** slug (the last path segment), refuses a crossed campaign mapping, requires four
-forms and six call-tracking blocks, and writes nothing if any assertion fails.
+`place-ad-embeds.mjs` asks workflow 10's records (by the **bare** slug, the last path segment) which
+pages carry a form and which tracking scripts they get; the form itself is the one whose id the slot
+carries, looked up in `site-forms.json`. It refuses a crossed campaign mapping, requires four ad
+forms, the Contact form on `/contacts` and six call-tracking blocks, and writes nothing if any
+assertion fails.
+
+## Booking goes to `/contacts/` (2026-09-25)
+
+Every booking button and link ("Book", "Book an appointment", "Book online", "Book a cleaning")
+links to `/contacts/` in the same tab. None goes to Flexbook any more; the generators
+(`build-blog.mjs`, `build-hub.mjs`, `build-dictionary.mjs`, `build-products.mjs`, `build-rda.mjs`,
+`build-ph.mjs`) write it too. `/contacts/` is **the hero and the form, nothing else**: the arrival
+(its "Book online" button jumps to `#form`) and `.ch-contact-form` with the GHL Contact form. Do not
+add sections back to it. `bugherd/check-contact-forms-live.mjs <base>` is the live gate.
 
 ### Local gates
 

@@ -39,7 +39,9 @@ See [`workflows/10-lp-instatic/README.md`](../workflows/10-lp-instatic/README.md
 The GoHighLevel forms are **embedded inline, one per campaign** — Invisalign
 (`YbX91GhEDKkCN4GH4gka`) on `/invisalign` and `/invisalign-consultation`, $189 New Patient
 (`AFu5BpJpMjgSnSf8yybc`) on `/new-patient-special` and `/new-patient-special-consultation`, and no
-form on the two thank-you pages. Per-campaign **call tracking works**: every page renders the pool
+form on the two thank-you pages. (These are the root Webflow ports. The rebuilt `/ads-landing-pages/`
+set uses the client's own Invisalign and New Patient Special forms since 2026-09-25, and `/contacts`
+the Contact form; see workflow 09's README.) Per-campaign **call tracking works**: every page renders the pool
 number (281) 645-5375 in place of the public one, matching the Webflow reference.
 
 This needed the four Webzite plugins, now installed here and **required on every new site**:

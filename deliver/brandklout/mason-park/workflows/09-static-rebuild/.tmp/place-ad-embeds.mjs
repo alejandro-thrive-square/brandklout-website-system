@@ -5,6 +5,12 @@
  * It also adds the existing GHL number-pool scripts to all six campaign pages.
  * No Elfsight script is copied: the redesign uses the site's own proof chapter.
  *
+ * Since 2026-09-25 the forms are the client's own (site-forms.json, copied
+ * verbatim from 01-content-intake/.tmp/scripts.html) and each slot is filled
+ * by the form id it carries: Invisalign and New Patient Special on the ad
+ * pages, and the general Contact form on /contacts, which every "Book"
+ * button on the site now links to.
+ *
  *   node place-ad-embeds.mjs
  */
 import fs from "node:fs";
@@ -15,6 +21,8 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGES_FILE = path.join(HERE, "converted-pages.json");
 const FORMS_FILE = path.join(HERE, "..", "..", "10-lp-instatic", ".tmp", "out", "forms.json");
+const SITE_FORMS_FILE = path.join(HERE, "site-forms.json");
+const CONTACT_SLUG = "/contacts";
 const TRACKING_FILE = path.join(HERE, "..", "..", "10-lp-instatic", ".tmp", "out", "tracking.json");
 const MODULE_ID = "brandklout.embed-origins.embed";
 // The six routes live under /ads-landing-pages/ since 2026-09-18. Workflow 10
@@ -31,6 +39,28 @@ const pages = JSON.parse(fs.readFileSync(PAGES_FILE, "utf8"));
 const forms = JSON.parse(fs.readFileSync(FORMS_FILE, "utf8"));
 const tracking = JSON.parse(fs.readFileSync(TRACKING_FILE, "utf8"));
 const formBySlug = new Map(forms.map((f) => [`/${f.slug}`, f]));
+const siteForms = new Map(JSON.parse(fs.readFileSync(SITE_FORMS_FILE, "utf8")).map((f) => [f.formId, f]));
+const slotsOf = (page) => Object.values(page.body.nodes).filter((n) => n.props?.htmlAttributes?.["data-ghl-form"]);
+const toEmbed = (slot, form) => ({
+  id: slot.id,
+  moduleId: MODULE_ID,
+  props: {
+    source: "snippet",
+    snippet: form.snippet,
+    url: "",
+    title: form.formName,
+    fit: "fixed",
+    height: Number(slot.props.htmlAttributes["data-ghl-height"]) || form.height || 723,
+    ratio: "16 / 9",
+    lazy: true,
+    allowFullscreen: false,
+    allow: "",
+  },
+  breakpointOverrides: {},
+  children: [],
+  classIds: slot.classIds ?? [],
+  parentId: slot.parentId ?? null,
+});
 const trackingBySlug = new Map(tracking.map((t) => [`/${t.slug}`, t]));
 const newId = () => `ad${crypto.randomBytes(8).toString("hex")}`;
 const problems = [];
@@ -39,38 +69,24 @@ let trackingPlaced = 0;
 
 for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
   const nodes = page.body.nodes;
-  const slots = Object.values(nodes).filter((n) => n.props?.htmlAttributes?.["data-ghl-form"]);
-  const form = formBySlug.get(bare(page.slug));
+  const slots = slotsOf(page);
+  // Workflow 10's record says which pages carry a form at all; the slot's own
+  // id says which form, and it must be one of the client's site forms.
+  const hasForm = formBySlug.has(bare(page.slug));
 
-  if (!form) {
+  if (!hasForm) {
     if (slots.length) problems.push(`${page.slug}: thank-you page unexpectedly has a form slot`);
   } else if (slots.length !== 1) {
     problems.push(`${page.slug}: expected one form slot, found ${slots.length}`);
   } else {
     const slot = slots[0];
     const carried = slot.props.htmlAttributes["data-ghl-form"];
-    if (carried !== form.formId) problems.push(`${page.slug}: ${carried} does not match ${form.formId}`);
-    nodes[slot.id] = {
-      id: slot.id,
-      moduleId: MODULE_ID,
-      props: {
-        source: "snippet",
-        snippet: form.snippet,
-        url: "",
-        title: form.formName,
-        fit: "fixed",
-        height: Number(slot.props.htmlAttributes["data-ghl-height"]) || form.height || 723,
-        ratio: "16 / 9",
-        lazy: true,
-        allowFullscreen: false,
-        allow: "",
-      },
-      breakpointOverrides: {},
-      children: [],
-      classIds: slot.classIds ?? [],
-      parentId: slot.parentId ?? null,
-    };
-    formsPlaced++;
+    const form = siteForms.get(carried);
+    if (!form) problems.push(`${page.slug}: ${carried} is not in site-forms.json`);
+    else {
+      nodes[slot.id] = toEmbed(slot, form);
+      formsPlaced++;
+    }
   }
 
   const sourceScripts = trackingBySlug.get(bare(page.slug))?.scripts ?? [];
@@ -105,6 +121,16 @@ for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
   trackingPlaced++;
 }
 
+const contact = pages.find((p) => p.slug === CONTACT_SLUG);
+let contactPlaced = 0;
+if (!contact) problems.push(`${CONTACT_SLUG}: not in converted-pages.json`);
+else {
+  const slots = slotsOf(contact);
+  const form = slots.length === 1 && siteForms.get(slots[0].props.htmlAttributes["data-ghl-form"]);
+  if (!form || form.formName !== "Contact form") problems.push(`${CONTACT_SLUG}: expected one Contact form slot, found ${slots.length}`);
+  else { contact.body.nodes[slots[0].id] = toEmbed(slots[0], form); contactPlaced++; }
+}
+
 const adPages = pages.filter((p) => AD_SLUGS.has(p.slug));
 if (adPages.length !== 6) problems.push(`expected six converted ad pages, found ${adPages.length}`);
 if (formsPlaced !== 4) problems.push(`expected four forms, placed ${formsPlaced}`);
@@ -130,7 +156,7 @@ if ([...idsByCampaign.values()].map((ids) => [...ids][0]).filter(Boolean).length
 }
 
 if (!problems.length) fs.writeFileSync(PAGES_FILE, JSON.stringify(pages, null, 2));
-console.log(`${formsPlaced} forms, ${trackingPlaced} tracking blocks, ${problems.length} problems`);
+console.log(`${formsPlaced} ad forms, ${contactPlaced} contact form, ${trackingPlaced} tracking blocks, ${problems.length} problems`);
 for (const problem of problems) console.log(`  PROBLEM ${problem}`);
 process.exitCode = problems.length ? 1 : 0;
 

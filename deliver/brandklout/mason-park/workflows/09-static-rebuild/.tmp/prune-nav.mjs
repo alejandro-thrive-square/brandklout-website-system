@@ -144,7 +144,7 @@ const footerPicks = TREATMENTS
   .map(([slug, label]) => `<li><a href="/services/${slug}/">${label}</a></li>`).join("");
 
 const CARE = `<ul class="footer_list"><li><a href="/our-services/">All services</a></li>${footerPicks}<li><a href="/our-doctors/">Meet the doctors</a></li><li><a href="/technology/">Technology</a></li><li><a href="/about-us/">About the practice</a></li></ul>`;
-const PATIENTS = `<ul class="footer_list"><li><a href="/new-patients/">New patients</a></li><li><a href="/financing/">Financing</a></li><li><a href="/dental-savings-plan/">Dental savings plan</a></li><li><a href="/patient-reviews/">Patient reviews</a></li><li><a href="/special-offers/">Special offers</a></li><li><a href="/patient-resources/">Patient resources</a></li><li><a href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book online</a></li></ul>`;
+const PATIENTS = `<ul class="footer_list"><li><a href="/new-patients/">New patients</a></li><li><a href="/financing/">Financing</a></li><li><a href="/dental-savings-plan/">Dental savings plan</a></li><li><a href="/patient-reviews/">Patient reviews</a></li><li><a href="/special-offers/">Special offers</a></li><li><a href="/patient-resources/">Patient resources</a></li><li><a href="/contacts/">Book online</a></li></ul>`;
 // A legal page nobody can reach is not published. The Terms of Service and
 // the Contact page both belong in the legal row, on every page.
 const LEGAL = `<div class="footer_legal">\n      &copy; 2026 Mason Park Dental of Katy &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/faq/">FAQs</a> &middot; <a href="/sitemap/">Sitemap</a> &middot; <a href="/contacts/">Contact</a>\n    </div>`;

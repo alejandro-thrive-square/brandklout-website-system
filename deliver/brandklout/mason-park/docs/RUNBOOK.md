@@ -5,6 +5,17 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Booking goes to /contacts - 2026-09-25
+
+**Every booking button and link goes to `/contacts`, and Contacts is only the hero and the GHL
+Contact form** ([`runbook/2026-09-25-book-buttons-to-contacts-and-client-forms.md`](./runbook/2026-09-25-book-buttons-to-contacts-and-client-forms.md)).
+Nothing links to Flexbook any more, on either instance (old production-only pages included). The
+`/ads-landing-pages/` set carries the client's own Invisalign and New Patient Special forms; the
+root ad pages keep the Google Ads forms. Do not add sections back to Contacts.
+`bugherd/check-contact-forms-live.mjs <base>` is the gate. **Open:** the two new forms redirect to
+routes that do not exist (`/thank-you-invisalign`, `/thank-you-new-patient`); the user is fixing
+this in GHL.
+
 ## Dr. Cho leads - 2026-09-24
 
 **Standing rule from the client:** Dr. Dave Cho is the lead dentist everywhere, Dr. Sung is only ever

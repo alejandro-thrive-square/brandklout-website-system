@@ -170,7 +170,7 @@ ${sections}
       <h2 data-split>Bring the tube in.</h2>
       <p class="iv-lede">A number on a chart cannot see your gums. If you have sensitivity, recession or wear, bring what you use to your next cleaning and we will tell you whether to change anything &mdash; often the answer is the brush, not the paste.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book a cleaning</a>
+        <a class="button is-lg" href="/contacts/">Book a cleaning</a>
         <a class="button is-ghost-light is-lg" href="/product-recommendations/">What we recommend</a>
       </div>
       <dl class="iv-facts">

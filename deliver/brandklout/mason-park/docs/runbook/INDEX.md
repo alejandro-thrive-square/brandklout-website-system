@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-25 | 2026-09-25 — Every "Book" button to /contacts; Contacts is the hero and the GHL Contact form; the client's Invisalign and NP forms on the ad pages; staging + production — carries **gotchas** | [`2026-09-25-book-buttons-to-contacts-and-client-forms.md`](./2026-09-25-book-buttons-to-contacts-and-client-forms.md) |
 | 2026-09-24 | 2026-09-24 — Dr. Cho leads: provider bands, 45 pages, both ad sets and 49 articles; Dr. Sung only beside him, off the ad pages; staging + production — carries **gotchas** | [`2026-09-24-dr-cho-leads.md`](./2026-09-24-dr-cho-leads.md) |
 | 2026-09-24 | 2026-09-24 — LAUNCH: the rebuilt site merged onto production (backups, the chain, old ad pages fixed under the new CSS, staging forms restored) — carries **gotchas** | [`2026-09-24-launch-rebuilt-site-on-production.md`](./2026-09-24-launch-rebuilt-site-on-production.md) |
 | 2026-09-24 | 2026-09-24 — BugHerd round six: the last twelve notes closed (six stock photos chosen for their copy, Cherry linked via Grand Mission's account, logo re-checked); board clear — carries **gotchas** | [`2026-09-24-bugherd-round-six-board-cleared.md`](./2026-09-24-bugherd-round-six-board-cleared.md) |

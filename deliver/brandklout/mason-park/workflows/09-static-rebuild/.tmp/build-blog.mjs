@@ -203,7 +203,7 @@ ${pager(pageNo, pageCount)}
       <h2 data-split>Reading is not the same as being seen.</h2>
       <p class="iv-lede">Everything here is general information. What is actually going on in your mouth takes an examination &mdash; and most of what these articles describe is cheapest to fix early.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="button is-lg" href="/contacts/">Book an appointment</a>
         <a class="button is-ghost-light is-lg" href="tel:+12817698878">(281) 769-8878</a>
       </div>
       <dl class="iv-facts">
@@ -289,7 +289,7 @@ ${cardsFor(related)}
     <p class="chapter-tag"><i></i><b>${esc(topic)}</b></p>
     <h1 class="ar-title" data-split>${esc(p.title)}</h1>
     ${p.published ? `<p class="ar-lede" data-anim="hide">Mason Park Dental of Katy &middot; <time datetime="${escAttr(p.published)}">${esc(niceDate(p.published))}</time></p>` : `<p class="ar-lede" data-anim="hide">Mason Park Dental of Katy</p>`}
-    <div class="ar-actions" data-anim="hide"><a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+    <div class="ar-actions" data-anim="hide"><a class="button is-lg" href="/contacts/">Book an appointment</a>
       <a class="button is-ghost-light is-lg" href="/blog/">All articles</a></div>
     <p class="el-cue" aria-hidden="true"><span>Scroll</span><i></i></p>
   </div>
@@ -312,7 +312,7 @@ ${cardsFor(related)}
           <div><dt>Published</dt><dd class="bl-art_date">${esc(niceDate(p.published)) || "Mason Park Dental of Katy"}</dd></div>
           <div><dt>Reading time</dt><dd data-readtime>A few minutes</dd></div>
         </dl>
-        <a class="button" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="button" href="/contacts/">Book an appointment</a>
         <figure class="bl-art_shot">
           {{img slug="${TOPIC_RAIL[topic]}" sizes="(max-width: 1023px) 1px, 19rem"}}
           <figcaption>Mason Park Dental of Katy, 21830 Kingsland Blvd</figcaption>
@@ -333,7 +333,7 @@ ${relatedHtml}
       <h2 data-split>Ask us in person.</h2>
       <p class="iv-lede">This article is general information and not a diagnosis. If any of it sounds like your own mouth, an examination is the way to find out.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="button is-lg" href="/contacts/">Book an appointment</a>
         <a class="button is-ghost-light is-lg" href="tel:+12817698878">(281) 769-8878</a>
       </div>
       <dl class="iv-facts">

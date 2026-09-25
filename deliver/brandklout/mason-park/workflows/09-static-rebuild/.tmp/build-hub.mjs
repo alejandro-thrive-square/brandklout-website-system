@@ -179,7 +179,7 @@ ${sections}
       <h2 data-split>Still easier to ask.</h2>
       <p class="iv-lede">None of this is a substitute for a person. If you cannot find what you need on any of these pages, call and the front desk will find it for you, or tell you it does not exist.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="button is-lg" href="/contacts/">Book an appointment</a>
         <a class="button is-ghost-light is-lg" href="/contacts/">Contact page</a>
       </div>
       <dl class="iv-facts">

@@ -105,7 +105,7 @@ ${sections}
       <h2 data-split>Ask, rather than nod.</h2>
       <p class="iv-lede">Nobody minds the question. If a word comes up in your appointment that you do not know, saying so is the fastest way to understand your own treatment plan.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <a class="button is-lg" href="/contacts/">Book an appointment</a>
         <a class="button is-ghost-light is-lg" href="/faq/">Read the FAQs</a>
       </div>
       <dl class="iv-facts">

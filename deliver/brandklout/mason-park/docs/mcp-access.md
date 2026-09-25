@@ -52,7 +52,8 @@ hosting, CRM, or ad accounts.
   asset ids and the verification results are in
   `workflows/07-webflow-build/.tmp/build-manifest.json`.
 - **Online booking**: `https://www.flexbook.me/masonpark/1` (FlexBook, linked from the client's own
-  site). Public link only - no account, no credentials, nothing written to it.
+  site). Public link only - no account, no credentials, nothing written to it. **Not linked from
+  the rebuilt site since 2026-09-25**: every booking button goes to `/contacts/` and its GHL form.
 
 > [!NOTE]
 > The live site sits behind a SiteGround bot wall (`/.well-known/sgcaptcha/`). Plain fetchers get a

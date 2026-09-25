@@ -189,7 +189,7 @@ ${sections}
       <h2 data-split>Or just ask at the desk.</h2>
       <p class="iv-lede">We keep some of this on the shelf at reception, and the rest we can point you at. Either way the useful version of this page is a two minute conversation at the end of your cleaning.</p>
       <div class="iv-actions">
-        <a class="button is-lg" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book a cleaning</a>
+        <a class="button is-lg" href="/contacts/">Book a cleaning</a>
         <a class="button is-ghost-light is-lg" href="tel:+12817698878">(281) 769-8878</a>
       </div>
       <dl class="iv-facts">

@@ -6520,3 +6520,17 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
 }
 .svc-provider_also b { font-family: var(--font-display); font-weight: 400; font-size: calc(1.2rem * var(--t-sub)); line-height: 1.2; color: var(--fg); }
 .svc-provider_also-body > span:last-child { font-size: calc(.9rem * var(--t-ui)); line-height: 1.45; color: var(--fg-body); }
+
+/* ========================================================================
+   Contact is the hero and the form (2026-09-25). Every "Book" button on the
+   site lands here, so the page does one job. The card reuses the ad pages'
+   .lp-form-card; on this light ground it needs a lighter shadow and a
+   readable width, centred.
+   ======================================================================== */
+.ch-contact-form .lp-form-card { max-width: 48rem; margin: 0 auto; box-shadow: 0 1rem 3rem rgba(46, 53, 56, .12); }
+.ch-contact-form .lp-form-lede a { color: var(--brand-deep); }
+.ch-contact-form .lp-form-slot:not(.wz-embed) { min-height: 60rem; }
+/* The client's own campaign forms (2026-09-25) settle at about 715px on the
+   ad pages, against the 800 to 900 of the Google Ads forms they replaced;
+   the 50rem reservation left an empty band under the Submit button. */
+.ch-arrival .lp-form-slot.wz-embed { min-height: 44rem; }
