@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Number pool site-wide - 2026-09-25
+
+**The GHL pool swaps the phone number on every production page**, loaded once through embed-origins
+`siteScripts` ([`runbook/2026-09-25-number-pool-site-wide.md`](./runbook/2026-09-25-number-pool-site-wide.md)).
+No page carries its own copy (`place-ad-embeds.mjs` `SITE_WIDE_POOL`), and staging has none.
+`bugherd/check-site-pool.mjs` is the gate; it uses one number per run.
+
 ## Root ad pages retired - 2026-09-25
 
 **The only ad landing pages are the `/ads-landing-pages/` set.** The six root Webflow ports (`/invisalign`,

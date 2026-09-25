@@ -2,7 +2,8 @@
  * Replace paid-page form placeholders with brandklout.embed-origins modules
  * after the HTML converter has written converted-pages.json.
  *
- * It also adds the existing GHL number-pool scripts to all six campaign pages.
+ * It used to add the GHL number-pool scripts to all six campaign pages; since 2026-09-25
+ * the pool is site-wide on production (SITE_WIDE_POOL), so it places none.
  * No Elfsight script is copied: the redesign uses the site's own proof chapter.
  *
  * Since 2026-09-25 the forms are the client's own (site-forms.json, copied
@@ -66,6 +67,7 @@ const newId = () => `ad${crypto.randomBytes(8).toString("hex")}`;
 const problems = [];
 let formsPlaced = 0;
 let trackingPlaced = 0;
+const SITE_WIDE_POOL = true;
 
 for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
   const nodes = page.body.nodes;
@@ -89,6 +91,9 @@ for (const page of pages.filter((p) => AD_SLUGS.has(p.slug))) {
     }
   }
 
+  // Since 2026-09-25 the pool loads site-wide on production (bugherd/set-site-pool.mjs),
+  // so no page carries its own copy: twice would ask GHL for two numbers per visitor.
+  if (SITE_WIDE_POOL) continue;
   const sourceScripts = trackingBySlug.get(bare(page.slug))?.scripts ?? [];
   const scripts = sourceScripts.filter((s) => s.includes("backend.leadconnectorhq.com"));
   if (scripts.length !== 2) {
@@ -134,7 +139,7 @@ else {
 const adPages = pages.filter((p) => AD_SLUGS.has(p.slug));
 if (adPages.length !== 6) problems.push(`expected six converted ad pages, found ${adPages.length}`);
 if (formsPlaced !== 4) problems.push(`expected four forms, placed ${formsPlaced}`);
-if (trackingPlaced !== 6) problems.push(`expected six tracking blocks, placed ${trackingPlaced}`);
+if (trackingPlaced !== (SITE_WIDE_POOL ? 0 : 6)) problems.push(`expected six tracking blocks, placed ${trackingPlaced}`);
 
 const idsByCampaign = new Map();
 for (const page of adPages) {
