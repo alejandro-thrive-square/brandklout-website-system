@@ -166,10 +166,12 @@ has to be reviewed and added deliberately. Inspection now runs with an empty gra
 `inspect-package` only reads the manifest and the id is what selects the list.
 
 > [!NOTE]
-> `embed-origins` lives in this folder, and since 2026-09-25 so does `open-graph` (1.2.0, which
-> adds the `favicon` and `appleTouchIcon` settings, because the platform has no favicon setting of
-> its own): `node pack-plugin.mjs open-graph .tmp/open-graph-1.2.0.zip`. The dr-nahlah copy is
-> still 1.1.2; this one is newer. `aeo-schema` and `link-editor` are still only in
+> `embed-origins` lives in this folder, and since 2026-09-25 so does `open-graph`, now **1.2.2**:
+> 1.2.0 adds the `favicon` and `appleTouchIcon` settings (the platform has none); 1.2.1 reads the
+> `articles` table and inserts a `<meta name="description">` where the page has none (Instatic
+> emits none); 1.2.2 matches entries by SEO title, so articles no longer resolve to their template.
+> Pack with `node pack-plugin.mjs open-graph .tmp/open-graph-1.2.2.zip`. The dr-nahlah copy is
+> still 1.1.2, and the other sites run that; this one is newer. `aeo-schema` and `link-editor` are still only in
 > `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` and have to be packed from there
 > (`node pack-plugin.mjs <path-to>/aeo-schema .tmp/aeo-schema.zip`). All four belong on every
 > new site, so those three should be promoted here the way `embed-origins` was.

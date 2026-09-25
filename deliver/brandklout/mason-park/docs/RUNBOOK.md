@@ -5,6 +5,14 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Open Graph and schema - 2026-09-25
+
+**Every page shares a full card (image, description, URL, site name) and has a meta description,
+a canonical (production) and a named `Dentist` schema**
+([`runbook/2026-09-25-open-graph-and-schema.md`](./runbook/2026-09-25-open-graph-and-schema.md)).
+Open Graph runs on plugin 1.2.2. `bugherd/check-open-graph.mjs <base>` is the gate. This closes the launch's "no
+canonicals" item. New pages need a description override (`set-open-graph.mjs`).
+
 ## Number pool site-wide - 2026-09-25
 
 **The GHL pool swaps the phone number on every production page**, loaded once through embed-origins
@@ -80,8 +88,7 @@ ad pages at the root slugs the ads use, privacy and cookie policy, and 23 old UR
 `10-lp-instatic/.tmp/type-diff.mjs --all`: the root ad pages read this site's CSS now, and the
 `.lp-page` block at the foot of `site.css` keeps them matching Webflow.
 
-**Open:** production has no canonicals (the Open Graph and AEO `siteUrl` is empty, and was before
-launch). The legacy-redirect Worker can now send old article URLs to `/blog/<slug>`.
+**Closed 2026-09-25:** canonicals and siteUrl are set. The legacy-redirect Worker can now send old article URLs to `/blog/<slug>`.
 
 ## Earlier - BugHerd round six, 2026-09-24: the board is clear
 

@@ -257,11 +257,18 @@ async function loadMirror (api) {
           seoDescription: typeof cells.seoDescription === 'string' ? cells.seoDescription : '',
         }
         if (isPages) bySlug[row.slug] = record
-        var key = titleKey(record.title)
         /* Pages must not shadow entries in the title index: the entry index is
            the only way an article can be identified at all, whereas a page can
-           always be found by its slug. */
-        if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+           always be found by its slug. 1.2.2: an entry is indexed by its SEO
+           title too, because a template that renders {currentEntry.seoTitle} as
+           the <title> otherwise matched nothing and every article was tagged as
+           the template page (og:url /blog-article, og:type website). */
+        var keys = [titleKey(record.title)]
+        if (!isPages && record.seoTitle) keys.push(titleKey(record.seoTitle))
+        for (var kk = 0; kk < keys.length; kk++) {
+          var key = keys[kk]
+          if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+        }
       }
     }
   } catch (e) {
@@ -623,15 +630,17 @@ export function activate (api) {
     if (!built) return html
 
     var out = html
+    var block = built.block
     if (built.description && flag(api, 'syncMetaDescription', true)) {
       var current = DESC_RE.exec(out)
       var tag = '<meta name="description" content="' + esc(built.description) + '">'
-      out = current
-        ? out.slice(0, current.index) + tag + out.slice(current.index + current[0].length)
-        : out
+      // 1.2.1: a page with no description tag at all gets one. The platform emits
+      // none unless Site settings has one, so "replace only" left every page bare.
+      if (current) out = out.slice(0, current.index) + tag + out.slice(current.index + current[0].length)
+      else block = '\n  ' + tag + block
     }
     var at = out.search(HEAD_END_RE)
-    return out.slice(0, at) + built.block + out.slice(at)
+    return out.slice(0, at) + block + out.slice(at)
   })
 
   api.plugin.log('open-graph active')
