@@ -231,7 +231,11 @@ The same mechanism carries the scripts the port had stripped, as a second Embed 
 - **`number_pool.js` + `user_session.js`** — the call-tracking number pool, on all six pages.
   Verified live: every page now renders **(281) 645-5375** in place of the markup's public
   (281) 769-8878, matching the Webflow reference on all six. Without this every ad call attributes
-  to the main site.
+  to the main site. **Since 2026-09-25 the pool is the client's correct one**: location
+  `9tm8C3iReDUyrhdV01Kd`, pool `haD8dfHnprszNglZQtBV` (the same location as the new GHL forms),
+  swapped live by `09-static-rebuild/.tmp/bugherd/swap-number-pool.mjs` and in `out/tracking.json`.
+  It renders **(281) 215-7453**, with the cookie banner up and nothing accepted. The pool is never
+  consent-gated (client, 2026-09-22).
 - **Elfsight `platform.js`** — the review widget on the four non-thank-you pages.
 
 `tracking.json` is built from what each page actually loaded on Webflow, filtered to an explicit
@@ -298,7 +302,7 @@ pages. What production has that Webflow does not is site-wide and deliberate:
   `src`; `verify-form.mjs` compares the id before the `?` for that reason.
 - **The Sienna accessibility widget.** Once it runs it writes whole-pixel font sizes inline
   (12.8px becomes 12px). `type-diff.mjs` blocks it by default; `--with-widget` shows the effect.
-- The FAQ glyph's rotate transition (see the FAQ section) and a missing favicon.
+- The FAQ glyph's rotate transition (see the FAQ section). (The favicon is served since 2026-09-25.)
 
 `compare.mjs` reads heights three seconds after load, while the GoHighLevel frame grows from
 150px to about 900px over several seconds. A "HEIGHT DRIFT" of 13% that is gone with
@@ -327,7 +331,7 @@ Webflow site, then re-run `fetch-assets.mjs` and `build.mjs` and compare before 
    exists. `brandklout.open-graph` writes `<head>` tags at publish and may be the right home for it.
 4. **Meta descriptions are not published** either, for the same reason. Pre-existing for all 77
    pages, not new here.
-5. **No favicon** is served on any page of this site (site-wide, not introduced here).
+5. ~~No favicon~~ **Fixed 2026-09-25**: `brandklout.open-graph` 1.2.0 writes the icon links on every page (`09-static-rebuild/.tmp/bugherd/set-favicon.mjs`).
 6. **The security bargain of `compatible` mode should be said out loud at handover**, as the
    18-instatic-embeds directive instructs: on a page carrying an embed, what stands between the
    site and a maliciously injected script is `default-src`. What stood between it and a *pasted*

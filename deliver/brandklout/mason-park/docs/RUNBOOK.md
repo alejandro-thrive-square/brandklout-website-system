@@ -5,6 +5,14 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Number pool and favicon - 2026-09-25
+
+**Call tracking is the client's pool `haD8dfHnprszNglZQtBV` (location `9tm8C3iReDUyrhdV01Kd`) on all 12 ad
+pages, and it runs with no cookie consent; every page has a favicon**
+([`runbook/2026-09-25-number-pool-and-favicon.md`](./runbook/2026-09-25-number-pool-and-favicon.md)).
+The favicon comes from `brandklout.open-graph` 1.2.0 (`favicon` setting), not the platform. **Open:** the root
+ad pages pair the new pool with the old Google Ads forms (a different GHL location).
+
 ## One name per doctor - 2026-09-25
 
 **Standing rule from the client: always Dr. Dave Cho, Dr. William Sung, Dr. Tam Nguyen; never the surname

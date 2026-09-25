@@ -31,7 +31,7 @@
  *   INSTATIC_EMAIL
  *   INSTATIC_PASSWORD
  *
- * The session cookie is cached in `.tmp/.session` so repeated runs do not
+ * The session cookie is cached per host in `.tmp/.session-<host>` so repeated runs do not
  * re-hit the login rate limiter (5 failures locks the account).
  */
 
@@ -41,7 +41,6 @@ import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TMP = join(HERE, '.tmp')
-const SESSION_FILE = join(TMP, '.session')
 const COOKIE_NAME = 'instatic_admin_session'
 
 
@@ -85,6 +84,10 @@ export const BASE = (() => {
   }
   return raw.replace(/\/+$/, '')
 })()
+
+/* Keyed BY HOST (2026-09-25). One bare `.session` sent staging's cookie to
+   production, which answers a plain 401 that nothing here retries. */
+const SESSION_FILE = join(TMP, '.session-' + BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_'))
 
 let cookie = null
 

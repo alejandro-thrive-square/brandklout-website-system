@@ -42,7 +42,9 @@ The GoHighLevel forms are **embedded inline, one per campaign** — Invisalign
 form on the two thank-you pages. (These are the root Webflow ports. The rebuilt `/ads-landing-pages/`
 set uses the client's own Invisalign and New Patient Special forms since 2026-09-25, and `/contacts`
 the Contact form; see workflow 09's README.) Per-campaign **call tracking works**: every page renders the pool
-number (281) 645-5375 in place of the public one, matching the Webflow reference.
+number in place of the public one. Since 2026-09-25 it is the client's pool `haD8dfHnprszNglZQtBV`
+(location `9tm8C3iReDUyrhdV01Kd`, e.g. (281) 215-7453), never consent-gated; before that it was
+`IEOmxFRkrrKh72B8hqHg`, which rendered (281) 645-5375.
 
 This needed the four Webzite plugins, now installed here and **required on every new site**:
 `embed-origins` (the Embed block plus the per-page CSP widening that makes any third-party embed

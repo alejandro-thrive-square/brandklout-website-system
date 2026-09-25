@@ -1,0 +1,233 @@
+{
+  "id": "brandklout.open-graph",
+  "name": "Open Graph",
+  "version": "1.2.0",
+  "apiVersion": 1,
+  "description": "Social sharing previews for every published page: Open Graph and Twitter Card tags, a canonical link, per-page meta descriptions, and the site favicon. Derives everything from the page by default; every value can be overridden per page in the admin, or in bulk over the plugin's own API.",
+  "permissions": [
+    "cms.hooks",
+    "cms.storage",
+    "cms.routes",
+    "cms.content.read",
+    "admin.navigation",
+    "editor.code"
+  ],
+  "contentAccess": [
+    {
+      "table": "pages",
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "table": "posts",
+      "modes": [
+        "read"
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "og-overrides",
+      "title": "Open Graph overrides",
+      "singularLabel": "Override",
+      "pluralLabel": "Overrides",
+      "fields": [
+        {
+          "id": "key",
+          "label": "Page key",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "title",
+          "label": "og:title",
+          "type": "text"
+        },
+        {
+          "id": "description",
+          "label": "og:description",
+          "type": "longtext"
+        },
+        {
+          "id": "image",
+          "label": "og:image",
+          "type": "text"
+        },
+        {
+          "id": "imageAlt",
+          "label": "og:image:alt",
+          "type": "text"
+        },
+        {
+          "id": "type",
+          "label": "og:type",
+          "type": "text"
+        },
+        {
+          "id": "url",
+          "label": "Canonical URL",
+          "type": "text"
+        },
+        {
+          "id": "enabled",
+          "label": "Enabled",
+          "type": "boolean"
+        }
+      ]
+    }
+  ],
+  "adminPages": [
+    {
+      "id": "open-graph",
+      "title": "Open Graph",
+      "navLabel": "Open Graph",
+      "content": {
+        "kind": "app",
+        "heading": "Open Graph",
+        "entry": "admin/index.js"
+      }
+    }
+  ],
+  "settings": [
+    {
+      "id": "enabled",
+      "type": "toggle",
+      "label": "Write social tags into published pages",
+      "description": "Off leaves every published page exactly as the platform rendered it. Turn it off to remove the tags again; nothing else in the site changes.",
+      "default": true
+    },
+    {
+      "id": "siteUrl",
+      "type": "url",
+      "label": "Public address of the site",
+      "description": "The address people actually visit, with scheme and no trailing slash — https://www.drnahlah.com. Facebook, LinkedIn and X refuse a relative og:image and a relative og:url, so with this empty the plugin can emit no image and no canonical link at all.",
+      "default": ""
+    },
+    {
+      "id": "siteName",
+      "type": "text",
+      "label": "Site name",
+      "description": "og:site_name — the small label above the headline in a share card.",
+      "default": ""
+    },
+    {
+      "id": "defaultImage",
+      "type": "text",
+      "label": "Fallback share image",
+      "description": "Used on any page with no override and no picture of its own. A path from the media library (/uploads/...) or a full https:// address. 1200x630 is what every network crops to.",
+      "default": ""
+    },
+    {
+      "id": "defaultImageAlt",
+      "type": "text",
+      "label": "Fallback share image, described",
+      "description": "og:image:alt for the fallback image. Read aloud by screen readers on the platforms that support it.",
+      "default": ""
+    },
+    {
+      "id": "defaultType",
+      "type": "select",
+      "label": "og:type for ordinary pages",
+      "options": [
+        {
+          "label": "website",
+          "value": "website"
+        },
+        {
+          "label": "article",
+          "value": "article"
+        }
+      ],
+      "default": "website"
+    },
+    {
+      "id": "articleType",
+      "type": "toggle",
+      "label": "Journal articles are og:type article",
+      "description": "On: anything published under a content table's route base (the 43 articles under /posts) is typed as an article rather than a website. That is what the type is for, and some readers show a byline and a date because of it.",
+      "default": true
+    },
+    {
+      "id": "locale",
+      "type": "text",
+      "label": "og:locale",
+      "description": "BCP-47 with an underscore, the way Open Graph writes it: en_US.",
+      "default": "en_US"
+    },
+    {
+      "id": "twitterCard",
+      "type": "select",
+      "label": "Twitter card shape",
+      "options": [
+        {
+          "label": "Large image above the headline",
+          "value": "summary_large_image"
+        },
+        {
+          "label": "Small square thumbnail",
+          "value": "summary"
+        }
+      ],
+      "default": "summary_large_image"
+    },
+    {
+      "id": "twitterSite",
+      "type": "text",
+      "label": "X / Twitter account",
+      "description": "The practice's handle, with the @. Left empty, the twitter:site tag is omitted rather than emitted blank.",
+      "default": ""
+    },
+    {
+      "id": "deriveFromPage",
+      "type": "toggle",
+      "label": "Fill the gaps from the page itself",
+      "description": "On: a page with no override gets its title from its own <title>, its description from its SEO description, and its image from the first picture on the page. This is what makes the plugin useful on a 80-page site without anyone typing 80 sets of tags. Off: only pages with an explicit override get tags.",
+      "default": true
+    },
+    {
+      "id": "syncMetaDescription",
+      "type": "toggle",
+      "label": "Give each page its own meta description",
+      "description": "The platform emits ONE description on every page — the one in Site settings — because per-page SEO description is stored but never published. On, this replaces it with the page's own whenever one is known, so the description a search engine reads and the description a share card shows are the same sentence. Off leaves the site-wide one in place.",
+      "default": true
+    },
+    {
+      "id": "emitCanonical",
+      "type": "toggle",
+      "label": "Add a canonical link",
+      "description": "Adds <link rel=\"canonical\"> pointing at the page's own address. Needs the public address above. Pages that already carry one are left alone.",
+      "default": true
+    },
+    {
+      "id": "favicon",
+      "type": "text",
+      "label": "Favicon",
+      "description": "The small icon in the browser tab and in search results. A path from the media library (/uploads/...) or a full https:// address; a square PNG of at least 48x48 (Google's minimum). Left empty, no icon tag is written. Pages that already carry one are left alone.",
+      "default": ""
+    },
+    {
+      "id": "appleTouchIcon",
+      "type": "text",
+      "label": "Home-screen icon",
+      "description": "What an iPhone or iPad shows when someone adds the site to the home screen: a square 180x180 PNG with no transparency. Left empty, the favicon is used.",
+      "default": ""
+    }
+  ],
+  "entrypoints": {
+    "server": "server/index.js"
+  },
+  "author": {
+    "name": "Brandklout",
+    "url": "https://brandklout.com/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "open-graph",
+    "og",
+    "twitter-card",
+    "social",
+    "seo",
+    "sharing"
+  ]
+}

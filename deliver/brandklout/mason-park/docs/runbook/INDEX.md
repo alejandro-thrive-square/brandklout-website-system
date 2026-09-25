@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-25 | 2026-09-25 — The client's GHL number pool on all 12 ad pages, proven to run with consent not given; the favicon via open-graph 1.2.0 (promoted to deliver/process); staging + production — carries **gotchas** | [`2026-09-25-number-pool-and-favicon.md`](./2026-09-25-number-pool-and-favicon.md) |
 | 2026-09-25 | 2026-09-25 — One name per doctor (Dr. Dave Cho, Dr. William Sung, Dr. Tam Nguyen) on 114 pages, 88 article cells and 17 production-only rows; reviews untouched; staging + production — carries **gotchas** | [`2026-09-25-doctor-names-one-form.md`](./2026-09-25-doctor-names-one-form.md) |
 | 2026-09-25 | 2026-09-25 — The Privacy Policy rebuilt as a site page (policy carried over, FlexBook out, effective 25 Sep), linked in every footer; staging + production — carries **gotchas** | [`2026-09-25-privacy-policy-page.md`](./2026-09-25-privacy-policy-page.md) |
 | 2026-09-25 | 2026-09-25 — Every "Book" button to /contacts; Contacts is the hero and the GHL Contact form; the client's Invisalign and NP forms on the ad pages; staging + production — carries **gotchas** | [`2026-09-25-book-buttons-to-contacts-and-client-forms.md`](./2026-09-25-book-buttons-to-contacts-and-client-forms.md) |
