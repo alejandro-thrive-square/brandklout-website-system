@@ -118,8 +118,8 @@ const TABLE = [
   ['/locations.kml', '/contacts', PR, 'the location feed; the address is on contacts'],
   ['/accessibility-statement', '/', 'no-equivalent', 'the new site has no such page'],
   ['/pricing', '/financing', PR],
-  ['/mpd-invisalign', '/invisalign', 'landing', 'the paid-traffic Invisalign page'],
-  ['/mpd-new-patient', '/new-patient-special', 'landing', 'the paid-traffic new-patient page'],
+  ['/mpd-invisalign', '/ads-landing-pages/invisalign', 'landing', 'the paid-traffic Invisalign page (the root /invisalign is a forwarder since 2026-09-25)'],
+  ['/mpd-new-patient', '/ads-landing-pages/new-patient-special', 'landing', 'the paid-traffic new-patient page (the root slug is a forwarder since 2026-09-25)'],
 
   ['/blog', BLOG, 'blog'],
   ['/blog-masonry', BLOG, 'blog', 'a theme layout of the blog'],

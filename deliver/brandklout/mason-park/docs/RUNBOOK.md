@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Old domains redirect - 2026-09-25
+
+**`bestdentistinkatytx.com` and `pediatricdentistkatytx.com` send every old link to its new page**
+([`runbook/2026-09-25-old-domains-redirect.md`](./runbook/2026-09-25-old-domains-redirect.md)). The first is this
+site's Worker (`workflows/12-legacy-redirects`); the second belongs to the kids site. **Open:** DMARC
+`p=quarantine` is now live on bestdentistinkatytx.com, so the practice's email senders need to be in its SPF.
+
 ## Share images - 2026-09-25
 
 **Every page and article shares a 1200x630 image under 300 KB, with size tags** (open-graph 1.2.3)
@@ -95,7 +102,7 @@ ad pages at the root slugs the ads use, privacy and cookie policy, and 23 old UR
 `10-lp-instatic/.tmp/type-diff.mjs --all`: the root ad pages read this site's CSS now, and the
 `.lp-page` block at the foot of `site.css` keeps them matching Webflow.
 
-**Closed 2026-09-25:** canonicals and siteUrl are set. The legacy-redirect Worker can now send old article URLs to `/blog/<slug>`.
+**Closed 2026-09-25:** canonicals and siteUrl are set. The legacy-redirect Worker sends old article URLs to `/blog/<slug>` since 2026-09-25.
 
 ## Earlier - BugHerd round six, 2026-09-24: the board is clear
 

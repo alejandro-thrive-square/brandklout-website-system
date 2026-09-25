@@ -15,6 +15,32 @@ The old site's addresses still have links, bookmarks and Google rankings pointin
 one now lands on the matching page of the new site. An old service page goes to that service,
 an old team page goes to the team, and so on.
 
+## State on 2026-09-25: live, and both old domains covered
+
+- **`bestdentistinkatytx.com` is active on Cloudflare** (the registrar's nameservers now point
+  at `ajay`/`ruth`), and the Worker answers on apex and `www`.
+- The map was rebuilt the same day:
+  - the blog is on production, so all 161 articles now go to `/blog/<slug>` instead of `/`;
+  - `/mpd-invisalign` and `/mpd-new-patient` go straight to `/ads-landing-pages/...`, because the
+    root ad pages are forwarders now.
+- `verify-redirects.mjs` covers 1,373 old URL variants (apex and www, with and without the slash)
+  against 235 destinations: `FAIL  none`.
+- **`pediatricdentistkatytx.com`** (the kids practice's old domain) is on the same Cloudflare
+  account. Its redirects belong to the kids site (`bk-mason-park-kids`):
+  - `pediatricdentistkatytx-redirect` sends every path as-is to `masonparkpediatricdental.com`;
+  - that domain's `masonparkpediatricdental-edge` Worker maps the old WordPress paths.
+  - `verify-pediatric-redirects.mjs`: all 172 old paths, on both hosts, land on a live kids page,
+    in 2 hops.
+- **Email**: both domains' MX still point at SiteGround (`mailspamprotection.com`). The zone's DMARC
+  `p=quarantine` on `bestdentistinkatytx.com` is now live (the 09-17 gotcha below). Whoever runs the
+  practice's email should confirm that every sender is in its SPF record.
+- **Tooling**:
+  - `cf-token.mjs mint|revoke` makes and removes the 3-hour zone token. It is stored in
+    `.tmp/.cf-token`, which is gitignored and never printed.
+  - `doh-preload.cjs` resolves chosen hosts over DoH, because this workstation's VPN served the
+    old SiteGround IP for `bestdentistinkatytx.com` well after the switch. Its "503 X-Suspended-Vhost"
+    is the VPN, not the Worker.
+
 ## State on 2026-09-17
 
 - The **Cloudflare zone is pending**. The domain is registered with Squarespace (Tucows), and
@@ -59,6 +85,7 @@ CLOUDFLARE_API_TOKEN=... node deploy-redirects.mjs            # dry run
 CLOUDFLARE_API_TOKEN=... node deploy-redirects.mjs --apply    # DNS, Worker (+ workers.dev preview), routes
 node verify-redirects.mjs --via https://mason-park-legacy-redirects.agency-45e.workers.dev   # before activation
 node verify-redirects.mjs                    # after activation: apex + www, slash variants, http; ends "FAIL  none"
+DOH_HOSTS=bestdentistinkatytx.com,www.bestdentistinkatytx.com node -r ./doh-preload.cjs verify-redirects.mjs   # when local DNS is stale
 CLOUDFLARE_API_TOKEN=... node deploy-redirects.mjs --rollback --apply   # unbind the routes
 ```
 
