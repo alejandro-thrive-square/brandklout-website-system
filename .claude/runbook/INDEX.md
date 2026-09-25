@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-25 | 2026-09-25 — image rules (client sources first, photo matches text, no overuse, `image-reuse` gate) and BugHerd scope rule, in the directives and on the FigJam SOP board — carries **gotchas** | [`2026-09-25-image-and-bugherd-scope-rules.md`](./2026-09-25-image-and-bugherd-scope-rules.md) |
 | 2026-09-23 | 2026-09-23 — `deliver/brandklout/` holds client folders only: docs → `deliver/docs/`, scripts → `deliver/scripts/`, Termly list → Scenario 0 launch step — carries **gotchas** | [`2026-09-23-brandklout-folder-clients-only.md`](./2026-09-23-brandklout-folder-clients-only.md) |
 | 2026-09-23 | 2026-09-23 — step folders with `output/`, `scenario.mjs` copies scenarios into clients, `check-scope` + hooks keep client and system changes apart; client folders restored on v2 — carries **gotchas** | [`2026-09-23-step-folders-output-and-scope.md`](./2026-09-23-step-folders-output-and-scope.md) |
 | 2026-09-23 | 2026-09-23 — process reshaped into scenarios (0 new site, 1 migration, 2 updates, 3 ads, 4 plugins, 5 Instatic releases) with tools/; Scenario 0 audited and redrawn on FigJam; client folders out of v2 — carries **gotchas** | [`2026-09-23-process-reshaped-into-scenarios.md`](./2026-09-23-process-reshaped-into-scenarios.md) |

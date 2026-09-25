@@ -34,6 +34,9 @@ Most damage on live sites came from acting on the wrong site or on top of someon
    - BugHerd: the list endpoint hides the page, the selector and the screenshot. Fetch each task by
      id, fetch its attachments, and look at every screenshot before deciding what the fix is.
      The reviewer works in Safari at 1512x735 with the Sienna accessibility widget on.
+     Then decide each task's scope, site-wide or this page only, by
+     [`deliver/docs/BUGHERD.md`](../../../docs/BUGHERD.md). A pin sits on one page; the comment may
+     be about all of them.
    - Webflow comments: `data_comments_tool` (Livewell's audit read 191 of them that way).
    - Save everything under `deliver/brandklout/<client>/scenario-2-updates-expansions/<step>/output/<date>-<slug>/`.
 2. **Read the client state.** Open the client `RUNBOOK.md`, then the step `output/RUNBOOK.md`, and read only
@@ -66,6 +69,8 @@ Most damage on live sites came from acting on the wrong site or on top of someon
    - its source id;
    - the page or pages;
    - its type (see the table below);
+   - its scope: `site-wide (<n> pages)` or `this page only`, with the words or the shared element
+     that decided it;
    - the release path: staging review, applied-but-unpublished, or live publish on go-ahead.
 8. **Ask what you cannot know.** Ask the user before you:
    - publish to a live domain;
@@ -98,6 +103,11 @@ Most damage on live sites came from acting on the wrong site or on top of someon
 - If the request needs Designer-only work, then list it for a human in `change-list.md`.
 - If the request reads "doesn't work", then plan a click test in step 03. Markup and screenshot
   gates pass on dead controls.
+- If a comment says "all pages", "everywhere" or "throughout", or sits on a shared style or
+  component, then it is site-wide: list every page that carries the element, not only the pinned one.
+- If a request adds or replaces photos, then source and check them by
+  [`deliver/docs/IMAGES.md`](../../../docs/IMAGES.md): client Drive, brief links and old-site assets
+  before stock.
 - If a BugHerd note is unclear ("formatting issue", "needs to be even"), then the screenshot decides.
   A scroll reveal caught mid-animation reads as misalignment.
 - If a task asks for a price, rate or quote for Brandklout's work, then refuse. No price is ever

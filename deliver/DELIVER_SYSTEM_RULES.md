@@ -77,6 +77,11 @@ board draws this).
   check the published page.
 - SEO ready: one H1 and ordered headings, titles, descriptions, schema, Open Graph and alt text on
   every page.
+- Images: client sources (Drive, brief links, old site) before stock, every photo showing what its
+  text says, no photo overused ([IMAGES.md](./docs/IMAGES.md)).
+- Review comments: every BugHerd comment gets a scope decision (site-wide or this page) before the
+  fix, and a site-wide fix is made at the source and checked on every page
+  ([BUGHERD.md](./docs/BUGHERD.md)).
 - Launch is blocked while a critical or high issue is open.
 
 ## Version Control

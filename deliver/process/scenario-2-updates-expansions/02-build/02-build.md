@@ -52,7 +52,8 @@ Type numbers with hyphens: an en dash stops the GHL pool from swapping the text.
 publish as `https://../`, so link pages with `linkType: "page"`. A DNI pool swaps whatever it matches,
 so confirm which number is the campaign line and which is the main practice line.
 
-**C. Images.**
+**C. Images.** Pick them by [`deliver/docs/IMAGES.md`](../../../docs/IMAGES.md): client sources
+before stock, every photo showing what its text says, none on more than two pages.
 1. `node upload-asset.mjs --site <id> <file>`. It prints the s3 `hostedUrl`.
 2. Bind with `set_image_asset`, then read back `assetId`. `set_image_asset` toggles: writing an image
    that is already bound unbinds it.

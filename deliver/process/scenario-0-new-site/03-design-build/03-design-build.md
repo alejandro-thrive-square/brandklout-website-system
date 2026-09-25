@@ -9,12 +9,14 @@ Instatic staging for team review. The design bar is
 ## Inputs
 
 - Style pick and `reference-inventory.md` (step 01), sitemap, keyword map and confirmed claims (step 02).
-- Client assets from the drive.
+- Client assets: the Google Drive, any album or links in the brief, and the old site's assets
+  ([`IMAGES.md`](../../../docs/IMAGES.md) §1).
 
 ## Checklist
 
 - [ ] Client-First framework set up on Instatic
 - [ ] Facts sheet (`docs/facts.md`) complete
+- [ ] Images sourced client-first, every photo matching its text, none overused (`IMAGES.md`, ledger in `output/images.csv`)
 - [ ] Core pages built and tested
 - [ ] Developer core pages review
 - [ ] Client core pages review, approved
@@ -44,10 +46,14 @@ Instatic staging for team review. The design bar is
 
 5. Build a canary first: home, one service page and contact, on the VPS in
    `scenario-0-new-site/03-design-build/output/code/site-src/`, from the inquiry, research and style pick.
-6. No client photos yet: stock and AI images (Magnific / Freepik) with the client's approval. Check
+6. **Images, by [`IMAGES.md`](../../../docs/IMAGES.md).** Source in order: the client's Google Drive,
+   albums and links in the brief, the old site's assets, then licensed stock (Freepik), AI last and
+   with approval. Every photo shows what its heading says (fit score 3), appears once per page and on
+   at most two pages, and each page's hero is its own. Keep the ledger in `output/images.csv`. Check
    every upscaled face with `tools/instatic-site/images/contact-sheet.py`.
 7. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
-   `click-controls.mjs`, `colour-leak.mjs`, `cross-client-grep.mjs`, `fluid-root.mjs --check`).
+   `click-controls.mjs`, `colour-leak.mjs`, `cross-client-grep.mjs`, `image-reuse.mjs`,
+   `fluid-root.mjs --check`).
 8. Asana task *developer core pages review*: in progress + comment (confirm first).
 9. Push to staging (pipeline below) and send the client the links. Remind until approved.
 10. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
@@ -62,9 +68,12 @@ Instatic staging for team review. The design bar is
     (new filename for any re-cut image) → `set-alt` → `build-import-input` → `ship.sh` → `push-site` →
     `place-embeds` → `ops/apply-template-flags` (blog, 404) → `gates/template-guard` → publish. Then
     `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`.
+    `image-reuse --base <staging>` must end `0 problem(s)` on the complete site.
     Details: [`tools/instatic-site/README.md`](../../tools/instatic-site/README.md).
 15. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on
-    BugHerd; fix every comment.
+    BugHerd; fix every comment, deciding its scope first ([`BUGHERD.md`](../../../docs/BUGHERD.md)):
+    a comment about a shared style or component, or one that says "all pages", is fixed at the
+    source and checked on every page.
 
 ## Conditionals
 
@@ -72,8 +81,11 @@ Instatic staging for team review. The design bar is
   moves, varied backgrounds, a sentence per idea), not a patch.
 - **If the client supplied the design:** import it verbatim and prove it with `visual-diff --source`
   at 0.000%.
-- **If there are no client photos:** stock and AI with approval. A Magnific upscale below ~500px
-  invents a new face: use the original.
+- **If there are no client photos:** check the Drive, the brief's links and the old site before
+  saying so; then stock, and AI with approval. Doctors, team, patients and the office are never stock
+  or AI: leave the slot and ask. A Magnific upscale below ~500px invents a new face: use the original.
+- **If the client library is thin:** vary crop and framing before repeating a photo; the reuse limits
+  still hold.
 - **If the site has more than one office:** location pages are clones of the `[City]` branch, each
   with its own facts.
 
@@ -85,6 +97,7 @@ Instatic staging for team review. The design bar is
 - Do keep text readable while it animates and photos in colour at rest; refresh ScrollTrigger when the
   page height changes.
 - Don't use em dashes in copy.
+- Don't put a photo on a section it does not show, or reuse one photo across many pages.
 - Don't use the reference sites' code, only their screenshots.
 - Don't copy reference layouts.
 - Don't use `ad` in class names (ad blockers hide them); use `lp-`.

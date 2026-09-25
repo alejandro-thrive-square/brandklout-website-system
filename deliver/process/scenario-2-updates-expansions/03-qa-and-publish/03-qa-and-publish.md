@@ -42,7 +42,8 @@ On Webflow every publish is whole-site, so this step decides between three resul
    - Then drive the page in a real browser for what raw HTML cannot show:
      - Click every control you touched (FAQ, slider, menu, CTA) and assert the state change.
      - Check responsive widths 1440, 991, 767 and 479. Block the Sienna widget when measuring.
-     - For BugHerd items, re-shoot in WebKit at 1512x735.
+     - For BugHerd items, re-shoot in WebKit at 1512x735. A site-wide item is checked on every page
+       that carries the element (`deliver/docs/BUGHERD.md` §4), not only the pinned page.
      - Pages with scroll motion: `node deliver/scripts/staging-verify.mjs --url <staging url> --baseline <local package>`.
      - Consent: `node tools/termly-ghl-consent/consent-kit.mjs check <urls> --termly-proxy > <workdir>/consent.txt 2>&1`.
        Before a choice nothing tagged fires. After Accept no `script[type="text/plain"][data-categories]`

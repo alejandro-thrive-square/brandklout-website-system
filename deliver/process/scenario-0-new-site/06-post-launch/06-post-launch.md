@@ -31,6 +31,8 @@ finish the team review.
 4. **Handoff.** Walkthrough of editing, publishing and page settings; admin links for the client;
    support window (3 weeks) and how to request changes. Write `docs/handoff-packet.md`.
 5. **Team review.** BugHerd tasks in batches of 10 pages per day until finished; close every pin.
+   Decide each comment's scope first ([`BUGHERD.md`](../../../docs/BUGHERD.md)); a site-wide
+   comment is fixed at the source and checked on every page, not only the pinned one.
 6. **Live sweep** after the first week: `seo-head-check`, `facts-sweep`. If a later page write
    dropped SEO fields, restore them with `ops/restore-page-seo-cells.mjs`.
 

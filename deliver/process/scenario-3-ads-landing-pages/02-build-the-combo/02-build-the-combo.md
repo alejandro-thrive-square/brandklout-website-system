@@ -77,7 +77,8 @@ never on the order.
    Same seven FAQ questions across a campaign's landing page and thank-you page is fine.
 3. **Design in the client's system.** Use the organic site's tokens, fonts and components. Give
    the ad set its own section shapes; never copy another client's shapes. Light themes only.
-   Photo in every section that has one on the reference. Motion must stay readable (ADA).
+   Photo in every section that has one on the reference, chosen by
+   [`deliver/docs/IMAGES.md`](../../../docs/IMAGES.md) (client sources first, photo matches its text). Motion must stay readable (ADA).
 4. **Name classes `lp-*`.** Ad blockers hide `ad`-named classes with `!important` on http(s)
    only, so the local render and every static gate look perfect while the published hero and
    form collapse to 0px. `/ads-landing-pages/` as a URL folder is fine.
