@@ -62,7 +62,7 @@
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
 | `.tmp/build-ads-landing-pages.mjs` | Writes the six paid routes under `home/ads-landing-pages/` from campaign data: copy, photographs, reviews, FAQ, offer and disclaimer per campaign, one shared chrome. Edit the data, re-run, never edit the six files. |
-| `.tmp/place-ad-embeds.mjs` | Replaces the four ad-page form placeholders and the one on `/contacts` with `brandklout.embed-origins` GHL modules, each filled by the form id its slot carries from `.tmp/site-forms.json`, and adds call tracking to all six ad pages. Run after conversion. |
+| `.tmp/place-ad-embeds.mjs` | Replaces the four ad-page form placeholders and the one on `/contacts` with `brandklout.embed-origins` GHL modules, each filled by the form id its slot carries from `.tmp/site-forms.json`. It no longer adds call tracking (`SITE_WIDE_POOL`): since 2026-09-25 the GHL pool loads on every production page through embed-origins `siteScripts` (`bugherd/set-site-pool.mjs`). Run after conversion. |
 | `.tmp/site-forms.json` | The client's three GHL forms, snippets verbatim from `01-content-intake/.tmp/scripts.html` (2026-09-25): Contact form `JuzM9SxuJMPDMwfO6cgj` (on `/contacts`), Contact Form Invisalign `jRr3J74MVYjrYAsp4zZD`, Contact Form New Patient Special `jEXtvRc1ObkKd1QvmSGn`. |
 | `.tmp/probe-ad-journey.mjs` | Focused-tab proof of the paid page's three scenes: a different journey move lit at 12/38/62/88% with its own photograph on top, the Why head held while the reasons pass, the path travelling at 25/50/75%, and the rail away over the hero. Takes a file or a URL. |
 | `.tmp/probe-adblock.mjs` | **Asks the browser, over CDP, whether a blocker's cosmetic list matches any element of a published page.** Exit 1 on a hit. The injected sheet is invisible to `document.styleSheets` and absent on `file://`. |
@@ -724,8 +724,8 @@ on screen a second bar offering the form is noise. After that it is in reach at 
 `place-ad-embeds.mjs` asks workflow 10's records (by the **bare** slug, the last path segment) which
 pages carry a form and which tracking scripts they get; the form itself is the one whose id the slot
 carries, looked up in `site-forms.json`. It refuses a crossed campaign mapping, requires four ad
-forms, the Contact form on `/contacts` and six call-tracking blocks, and writes nothing if any
-assertion fails.
+forms and the Contact form on `/contacts` (and no per-page call tracking), and writes nothing if
+any assertion fails.
 
 ## Booking goes to `/contacts/` (2026-09-25)
 
