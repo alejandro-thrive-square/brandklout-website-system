@@ -37,6 +37,11 @@ On the ad landing pages, remove Dr. Sung entirely.
 
 ## Rules
 
+0. **One name per doctor, every time (client, 2026-09-25).** Always **Dr. Dave Cho**, **Dr. William Sung**,
+   **Dr. Tam Nguyen**: never "Dr. Cho", "Dr Cho" or "Drs. Cho & Sung". With a credential, use a comma:
+   "Dr. Dave Cho, DMD". In a list: "Dr. Dave Cho and Dr. William Sung". The examples below use the short form
+   because they predate this rule; write the full name. `.tmp/doctor-names.py --check` is the gate (reviews
+   are exempt), and `--live <base>` checks the published site.
 1. **Dr. Sung never appears alone.** Any sentence, card, caption, FAQ answer or JSON-LD text that names Dr. Sung
    must also name Dr. Cho, **first**. Choose the rewrite that is true:
    - A generic statement about what the dentist does ("Dr. Sung measures the pocket depth…", "Dr. Sung will

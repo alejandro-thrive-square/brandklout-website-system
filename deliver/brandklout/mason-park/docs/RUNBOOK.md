@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## One name per doctor - 2026-09-25
+
+**Standing rule from the client: always Dr. Dave Cho, Dr. William Sung, Dr. Tam Nguyen; never the surname
+alone** ([`runbook/2026-09-25-doctor-names-one-form.md`](./runbook/2026-09-25-doctor-names-one-form.md)).
+Reviews are quoted verbatim and exempt. Live on both instances. `.tmp/doctor-names.py --check` is the local
+gate and `--live <base>` the live one. **Open:** old production-only pages still describe Dr. Sung alone.
+
 ## Privacy Policy - 2026-09-25
 
 **`/privacy-policy` is a rebuilt site page on both instances, linked from every footer**

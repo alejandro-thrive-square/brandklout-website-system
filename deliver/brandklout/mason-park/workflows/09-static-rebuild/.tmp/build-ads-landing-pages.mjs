@@ -386,7 +386,7 @@ const campaigns = [
       lede: "Every Invisalign office has the aligners. What differs is who plans the case, what the price includes, and whether you were shown the result before you paid for it.",
       cards: [
         ["One price, everything in it", "$3,800 after the $1,000 offer, and it includes the scan, x-rays, every aligner, refinements, retainers and K&ouml;r whitening gel. Nothing is added later."],
-        ["A consultation with Dr. Cho", "Your free consultation is with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry, whose calm manner puts nervous patients at ease. He tells you plainly whether Invisalign suits your teeth."],
+        ["A consultation with Dr. Dave Cho", "Your free consultation is with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry, whose calm manner puts nervous patients at ease. He tells you plainly whether Invisalign suits your teeth."],
         ["A scan, not a mouthful of putty", "The intraoral scanner maps your teeth in minutes and shows the finished smile on screen before an aligner is made."],
         ["Insurance and 0% financing, handled", "We check your orthodontic benefit before you commit. Cherry splits the balance at 0% APR with no hard credit check."],
       ],
@@ -397,7 +397,7 @@ const campaigns = [
       items: [
         { img: "desk-family-2", h: "Teens", p: "Clear enough for school photos, out for sport and brushing, no brackets or wires to break. Many teens finish in less time than with braces." },
         { img: "clinical-pair-chair", h: "Adults", p: "Crowding, spacing, and teeth that drifted years after the braces came off. Invisalign treats most of what walks in." },
-        { img: "checkin-screen", h: "Severe cases", p: "Some alignment needs something else. If yours does, Dr. Cho says so at the consultation, and it has cost you nothing to find out." },
+        { img: "checkin-screen", h: "Severe cases", p: "Some alignment needs something else. If yours does, Dr. Dave Cho says so at the consultation, and it has cost you nothing to find out." },
       ],
     },
     dentist: {
@@ -406,7 +406,7 @@ const campaigns = [
       kicker: "Cosmetic, restorative and general dentistry",
       name: "Dr. Dave Cho",
       caption: "Dr. Dave Cho, DMD",
-      quote: "Dr. Cho came to dentistry after a degree in biochemistry and five years at a pharmaceutical company, and took his dental degree at Tufts. Cosmetic dentistry is part of his everyday work, and his laid back, calm manner puts nervous patients at ease.",
+      quote: "Dr. Dave Cho came to dentistry after a degree in biochemistry and five years at a pharmaceutical company, and took his dental degree at Tufts. Cosmetic dentistry is part of his everyday work, and his laid back, calm manner puts nervous patients at ease.",
       dl: [["Trained", "Tufts University, Boston (DMD)"], ["Experience", "Cosmetic dentistry, implants, root canals and oral surgery"], ["Sedation", "Certified, to make a long appointment one appointment"]],
       after: "He sees patients of every age, and his favourite part of the work is the long relationship that follows the first visit.",
       figures: [
@@ -419,7 +419,7 @@ const campaigns = [
     path: {
       h2: "What happens, step by step.",
       steps: [
-        ["desk-family-3", "Free consultation", "Dr. Cho assesses your teeth, your history, and what you want from a straighter smile. You leave with a price in writing."],
+        ["desk-family-3", "Free consultation", "Dr. Dave Cho assesses your teeth, your history, and what you want from a straighter smile. You leave with a price in writing."],
         ["scanner-screen-3", "Scan and plan", "A 3D scan of your teeth, and a plan that maps each step, with a preview of the result on screen."],
         ["hygienist-working-4", "The first set", "Your aligners, made to fit. Worn 20 to 22 hours a day, out for meals and brushing."],
         ["girl-chair-2", "Checkups", "Every 4 to 6 weeks, a look at the movement and the next set of trays."],
@@ -476,7 +476,7 @@ const campaigns = [
       callH2: "What to expect <em>on the call.</em>",
       callLede: "Three things, in order. Nothing else is needed from you until the phone rings.",
       steps: [
-        ["First", "Your options", "What you would like to change, and whether Invisalign fits. If Dr. Cho would recommend something else for your teeth, the front desk says so now."],
+        ["First", "Your options", "What you would like to change, and whether Invisalign fits. If Dr. Dave Cho would recommend something else for your teeth, the front desk says so now."],
         ["Then", "Your payment options", "The $1,000 offer, the further $500 for prepaying, what your insurance is likely to cover and the 0% APR plan, explained plainly."],
         ["Finally", "Your free consultation", "A time for the visit itself: the 3D scan, the preview of the finished smile, and a price in writing before anything is made."],
       ],
@@ -490,12 +490,12 @@ const campaigns = [
       whyH2: "Why <em>Mason Park?</em>",
       pillars: [
         ["Experience", "Your consultation is with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry, with a calm manner that puts nervous patients at ease."],
-        ["Personalized care", "A 3D scan instead of putty, a preview of the result before it starts, and Dr. Cho&rsquo;s sedation certification for anyone who needs it."],
+        ["Personalized care", "A 3D scan instead of putty, a preview of the result before it starts, and Dr. Dave Cho&rsquo;s sedation certification for anyone who needs it."],
         ["Clear costs", "One all-inclusive price in writing: scan, x-rays, every aligner, refinements, retainers and whitening gel. Insurance checked first, 0% APR available."],
       ],
       faqHeadline: "Any questions <em>before you call?</em>",
       inviteH2: "Ready to take <em>the next step?</em>",
-      inviteLede: "Talk to the Mason Park team and get your free consultation with Dr. Cho on the calendar today.",
+      inviteLede: "Talk to the Mason Park team and get your free consultation with Dr. Dave Cho on the calendar today.",
     },
     disclaimer: "Individual results vary with each patient&rsquo;s teeth, bite and how consistently the aligners are worn. Nothing on this page is a diagnosis or a promise of a specific outcome; candidacy for Invisalign&reg; is confirmed at a clinical examination. The $1,000 offer applies to comprehensive Invisalign&reg; treatment at the regular price of $4,800; the further $500 applies only when treatment is prepaid in full, and insurance reimbursements are returned directly to you. The consultation is free for new Invisalign&reg; patients. Invisalign&reg; is a registered trademark of Align Technology, Inc.",
   },
@@ -540,7 +540,7 @@ const campaigns = [
       lede: "A first visit is a test of the whole practice: whether the price holds, whether someone explains what they found, and whether you would send your family.",
       cards: [
         ["$189 covers the whole visit", "Exam, x-rays, cleaning and a written plan. That is $328 off the regular price, and nothing is added at the desk."],
-        ["Adults and children, one building", "Dr. Cho and the team for the adults. Dr. Nguyen, a board certified pediatric dentist, across the hall for the children. Sedation, implants and root canals without being sent across town."],
+        ["Adults and children, one building", "Dr. Dave Cho and the team for the adults. Dr. Tam Nguyen, a board certified pediatric dentist, across the hall for the children. Sedation, implants and root canals without being sent across town."],
         ["You see what the doctor sees", "Digital x-rays and the intraoral camera on a screen in front of you, so the plan is something you watched being made."],
         ["Insurance or the savings plan, whichever is better", "Most major plans accepted and checked before you commit. No insurance? The membership plan covers routine care for a flat annual fee."],
       ],
@@ -551,7 +551,7 @@ const campaigns = [
       items: [
         { img: "hygienist-working-2", h: "Just a checkup", p: "It has been six months, or six years. The exam, x-rays and cleaning are the same visit, and nobody asks how long it has been." },
         { img: "dentist-handheld-2", h: "Something hurts", p: "Same-day slots for pain, breaks and knocked out teeth. Say it is urgent and the front desk finds the time." },
-        { img: "desk-family-2", h: "The whole family", p: "One front desk books both sides of the address. Children under 13 see Dr. Nguyen across the hall, with a $129 first exam of their own." },
+        { img: "desk-family-2", h: "The whole family", p: "One front desk books both sides of the address. Children under 13 see Dr. Tam Nguyen across the hall, with a $129 first exam of their own." },
       ],
     },
     dentist: {
@@ -596,7 +596,7 @@ const campaigns = [
       ["What if the exam finds something?", "<p>You get a written plan and a price, with what insurance covers and what it does not. Nothing is started the same day unless you ask for it, and a free second opinion on a plan you were given elsewhere is always available.</p>"],
       ["What should I bring to my first appointment?", "<p>Your insurance card if you have one, a valid photo ID, and a list of the medications you currently take, including anything over the counter.</p>"],
       ["Can I request a tour of the practice first?", "<p>Yes. There is no fee to tour the practice. Call and ask for a quiet weekday hour to see the rooms and meet the team before you become a patient.</p>"],
-      ["How does Dr. Cho approach new patient care?", "<p>He takes the time to listen to your concerns, answer your questions, and discuss the best treatment options for you. The aim is a welcoming visit that builds trust and open communication about your dental health.</p>"],
+      ["How does Dr. Dave Cho approach new patient care?", "<p>He takes the time to listen to your concerns, answer your questions, and discuss the best treatment options for you. The aim is a welcoming visit that builds trust and open communication about your dental health.</p>"],
     ],
     final: {
       h2: "Start at <em>step one.</em>",
@@ -610,12 +610,12 @@ const campaigns = [
       tag: "$189 new patient special",
       h1: "Claim your <em>$189 first visit.</em>",
       lede: "Tell us what brings you in. Our team calls during office hours to book the visit, send the forms ahead, and confirm what the $189 includes.",
-      chips: ["$189, $328 saved", "Exam, x-rays, cleaning, plan", "Dr. Cho for adults", "Kids across the hall"],
+      chips: ["$189, $328 saved", "Exam, x-rays, cleaning, plan", "Dr. Dave Cho for adults", "Kids across the hall"],
       byline: ["team-desk-morning", "The Mason Park front desk", "Answers the phone Mon to Thu, and calls you back"],
       heroImg: "team-huddle-smile",
       proofHeadline: "Hear from <em>our patients.</em>",
-      dentistH2: "Meet Dr. Cho <em>before your first visit.</em>",
-      dentistLede: "Dr. Dave Cho trained at Tufts and sees patients of every age. The children see Dr. Nguyen, a board certified pediatric dentist, across the hall.",
+      dentistH2: "Meet Dr. Dave Cho <em>before your first visit.</em>",
+      dentistLede: "Dr. Dave Cho trained at Tufts and sees patients of every age. The children see Dr. Tam Nguyen, a board certified pediatric dentist, across the hall.",
       inviteH2: "Prefer <em>to talk?</em>",
       inviteLede: "Call and say it is your first visit. The front desk will find the time, send the forms ahead, and tell you whether the special or your insurance works out better.",
     },
