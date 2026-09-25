@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Share images - 2026-09-25
+
+**Every page and article shares a 1200x630 image under 300 KB, with size tags** (open-graph 1.2.3)
+([`runbook/2026-09-25-share-images-1200x630.md`](./runbook/2026-09-25-share-images-1200x630.md)).
+The heroes were 1536x2046 portraits of up to 613 KB. New pages need the three share steps re-run. Old
+shares stay cached until they are re-scraped in the Facebook debugger or LinkedIn's Post Inspector.
+
 ## Open Graph and schema - 2026-09-25
 
 **Every page shares a full card (image, description, URL, site name) and has a meta description,

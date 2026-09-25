@@ -359,6 +359,15 @@ function buildTags (api, html, ctx) {
   out += meta('og:type', type)
   if (url) out += meta('og:url', url)
   if (image) out += meta('og:image', image)
+  /* 1.2.3: size and type when the file name carries them (`…-1200x630.jpg`, the way the
+     media library names resized uploads). Without them Facebook shows a link's first
+     share with no picture while it fetches the image. */
+  var dims = image ? /-(\d{2,5})x(\d{2,5})\.(jpe?g|png|webp)(?:\?|$)/i.exec(image) : null
+  if (dims) {
+    out += meta('og:image:width', dims[1])
+    out += meta('og:image:height', dims[2])
+    out += meta('og:image:type', 'image/' + (dims[3].toLowerCase() === 'jpg' ? 'jpeg' : dims[3].toLowerCase()))
+  }
   if (image && imageAlt) out += meta('og:image:alt', oneLine(imageAlt, 180))
   var siteName = setting(api, 'siteName', '')
   if (siteName) out += meta('og:site_name', siteName)

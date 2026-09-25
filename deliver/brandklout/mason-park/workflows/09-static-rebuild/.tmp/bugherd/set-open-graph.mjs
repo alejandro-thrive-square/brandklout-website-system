@@ -52,7 +52,9 @@ const listed = await I.api("GET", `${PLUGIN}/runtime/pages`);
 const rows = listed.rows ?? listed.pages ?? listed;
 const imageUrls = {};
 for (const [slug, o] of Object.entries(IMAGE_OVERRIDES)) imageUrls[slug] = findMedia(o.file);
-const want = (r) => ({ description: DESCS[r.slug], ...(IMAGE_OVERRIDES[r.slug] ? { image: imageUrls[r.slug] ?? "(upload)", imageAlt: IMAGE_OVERRIDES[r.slug].alt } : {}) });
+// An image already set (set-share-images.mjs points every page at its 1200x630 share
+// version) is never replaced here: these two only seed the source before that step.
+const want = (r) => ({ description: DESCS[r.slug], ...(IMAGE_OVERRIDES[r.slug] && !r.override?.image ? { image: imageUrls[r.slug] ?? "(upload)", imageAlt: IMAGE_OVERRIDES[r.slug].alt } : {}) });
 const plan = rows.filter((r) => r.kind === "page" && DESCS[r.slug] && Object.entries(want(r)).some(([k, v]) => r.override?.[k] !== v));
 console.log(`${I.BASE}: open-graph ${og.version}; siteUrl ${JSON.stringify(before.siteUrl)} -> ${next.siteUrl}; share image ${share ?? "(to upload)"}`);
 console.log(`${rows.filter((r) => r.kind === "page").length} pages, ${rows.filter((r) => r.kind === "entry").length} articles; ${plan.length} description override(s) to write; ${rows.filter((r) => r.kind === "page" && !DESCS[r.slug]).length} pages not in the build (old rows) keep deriving`);

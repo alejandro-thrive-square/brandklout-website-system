@@ -2,7 +2,8 @@
 // newest backup for that host plus every article must carry: <meta name="description">,
 // og:title, og:description, og:url equal to the page's own address, og:image (absolute, and
 // the file answers 200), og:site_name, twitter:card summary_large_image; articles og:type
-// article; a canonical on production (staging runs with canonicals off); a Dentist entity with
+// article; the image 1200x630 with og:image:width/height, and under 300 KB (WhatsApp drops a
+// heavier preview image); a canonical on production (staging runs with canonicals off); a Dentist entity with
 // a name and an address in the schema.
 //   node bugherd/check-open-graph.mjs https://www.masonparkdental.com > out.txt
 import fs from "node:fs";
@@ -42,9 +43,11 @@ await Promise.all(Array.from({ length: 8 }, async () => {
     const img = og(h, "og:image");
     if (!img || !/^https:\/\//.test(img)) bad(`og:image ${img}`);
     else {
-      if (!imgStatus.has(img)) imgStatus.set(img, fetch(img, { method: "HEAD" }).then((r) => r.status).catch(() => 0));
+      if (!imgStatus.has(img)) imgStatus.set(img, fetch(img).then(async (r) => ({ status: r.status, bytes: (await r.arrayBuffer()).byteLength })).catch(() => ({ status: 0, bytes: 0 })));
       const st = await imgStatus.get(img);
-      if (st !== 200) bad(`og:image answers ${st}`);
+      if (st.status !== 200) bad(`og:image answers ${st.status}`);
+      else if (st.bytes > 300_000) bad(`og:image is ${Math.round(st.bytes / 1024)} KB (over 300 KB)`);
+      if (og(h, "og:image:width") !== "1200" || og(h, "og:image:height") !== "630") bad(`og:image ${og(h, "og:image:width")}x${og(h, "og:image:height")}, want 1200x630 with size tags`);
     }
     if (!og(h, "og:site_name")) bad("no og:site_name");
     if (tw(h, "twitter:card") !== "summary_large_image") bad(`twitter:card ${tw(h, "twitter:card")}`);

@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-25 | 2026-09-25 — Share images fixed: every page and article shares a 1200x630 version under 300 KB with size tags (open-graph 1.2.3); both instances — carries **gotchas** | [`2026-09-25-share-images-1200x630.md`](./2026-09-25-share-images-1200x630.md) |
 | 2026-09-25 | 2026-09-25 — Open Graph, meta descriptions, canonicals and the Dentist schema on every page (open-graph 1.2.2: articles, description insert, seoTitle match); both instances — carries **gotchas** | [`2026-09-25-open-graph-and-schema.md`](./2026-09-25-open-graph-and-schema.md) |
 | 2026-09-25 | 2026-09-25 — The GHL number pool on every production page (siteScripts + connect origins), removed from the ad pages' own embeds and from staging — carries **gotchas** | [`2026-09-25-number-pool-site-wide.md`](./2026-09-25-number-pool-site-wide.md) |
 | 2026-09-25 | 2026-09-25 — The six root Webflow-port ad pages retired on production: each forwards to its /ads-landing-pages/ twin, keeping the query string — carries **gotchas** | [`2026-09-25-root-ad-pages-retired.md`](./2026-09-25-root-ad-pages-retired.md) |
