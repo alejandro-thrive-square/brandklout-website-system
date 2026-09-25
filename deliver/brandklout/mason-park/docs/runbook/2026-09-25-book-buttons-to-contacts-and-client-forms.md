@@ -8,7 +8,7 @@ The client sent three GHL forms (`workflows/01-content-intake/.tmp/scripts.html`
 The user settled two questions: the **Invisalign** and **New Patient Special** forms go on the
 **ads landing pages** (replacing the Google Ads forms), and the button **wording stays** as it is.
 
-**Done and live on staging and production.**
+**Done and live on staging and production** (commit `dc97da01`).
 
 ## What changed
 
