@@ -5,6 +5,15 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Dr. Cho leads - 2026-09-24
+
+**Standing rule from the client:** Dr. Dave Cho is the lead dentist everywhere, Dr. Sung is only ever
+named beside him (never alone, never first), and Dr. Sung is not on any ad landing page
+([`runbook/2026-09-24-dr-cho-leads.md`](./runbook/2026-09-24-dr-cho-leads.md)). It is live on both
+instances. The brief and fact sheet, `.tmp/bugherd/plan-2026-09-24/doctors/BRIEF.md`, apply to any
+new copy. `.tmp/bugherd/check-cho-live.mjs <base>` is the gate. Open for the client: the home hero
+(the Nguyen and Sung family photo), and the claims listed in the run file.
+
 ## LAUNCHED - 2026-09-24: the rebuilt site is live on www.masonparkdental.com
 
 **Production serves the rebuilt site**

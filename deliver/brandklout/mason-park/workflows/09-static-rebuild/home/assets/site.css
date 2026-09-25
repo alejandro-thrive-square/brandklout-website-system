@@ -6497,3 +6497,26 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
    body.is-lp-page instead, so `.lp-page` reaches only the old ports. */
 .lp-page .heading-style-h6 { text-transform: none; }
 .lp-page .button { justify-content: normal; }
+
+/* ========================================================================
+   Dr. Cho leads (2026-09-24). "Dr. Dave Cho needs to be more prominent; Dr.
+   Sung should be mentioned only beside Dr. Cho." Every provider band is Dr.
+   Cho's; Dr. Sung is the smaller card inside it, linking to Our Doctors.
+   ======================================================================== */
+.svc-provider_body > .svc-provider_also { margin-top: 1.5rem; }
+.svc-provider_also {
+  display: flex; align-items: center; gap: 1rem;
+  max-width: 26rem; padding: .75rem 1.1rem .75rem .75rem;
+  border: 1px solid var(--rule); background: var(--paper);
+  color: inherit; text-decoration: none;
+  transition: border-color .25s var(--ease);
+}
+.svc-provider_also:hover { border-color: var(--rule-strong); }
+.svc-provider_also img { flex: none; width: 3.5rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 12%; }
+.svc-provider_also-body { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.svc-provider_also-role {
+  font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+}
+.svc-provider_also b { font-family: var(--font-display); font-weight: 400; font-size: calc(1.2rem * var(--t-sub)); line-height: 1.2; color: var(--fg); }
+.svc-provider_also-body > span:last-child { font-size: calc(.9rem * var(--t-ui)); line-height: 1.45; color: var(--fg-body); }

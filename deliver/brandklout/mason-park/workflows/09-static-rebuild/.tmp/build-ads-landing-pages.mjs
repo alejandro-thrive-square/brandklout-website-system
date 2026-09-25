@@ -64,19 +64,11 @@ function img(key, sizes, o = {}) {
   return `<img src="${file(W, H)}" srcset="${srcset}" sizes="${sizes}" alt="${alt}" width="${W}" height="${H}" ${load} decoding="async">`;
 }
 
-/** Dr. Cho's portrait is the one frame not in the album; lift its tag from the doctors page. */
-function drCho(sizes) {
-  const src = fs.readFileSync(path.join(HOME, "our-doctors", "index.html"), "utf8");
-  const tag = src.match(/<img[^>]*HS-7-scaled\.jpg[^>]*>/)?.[0];
-  if (!tag) throw new Error("Dr. Cho's portrait not found on the doctors page");
-  return tag.replace(/\.\.\/assets\//g, A).replace(/sizes="[^"]*"/, `sizes="${sizes}"`);
-}
-
 const BADGES = `<div class="pr-badges">
     <div class="pr-badges-in">
       <p class="pr-badges-label">Credentialed by</p>
       <ul>
-        <li><img src="${A}uploads/2023/08/kois-1.webp" alt="Kois Center" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/ssc-1.webp" alt="Seattle Study Club" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy" decoding="async"></li><li><img src="${A}uploads/2023/08/agd-1.webp" alt="Academy of General Dentistry" loading="lazy" decoding="async"></li><li><img src="${A}uploads/2023/08/abpd-1.webp" alt="American Board of Pediatric Dentistry - Board Certified" loading="lazy" decoding="async"></li>
+        <li><img src="${A}uploads/2023/08/kois-1.webp" alt="Kois Center" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/ssc-1.webp" alt="Seattle Study Club" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy" decoding="async"></li><li><img src="${A}uploads/2023/08/abpd-1.webp" alt="American Board of Pediatric Dentistry - Board Certified" loading="lazy" decoding="async"></li>
       </ul>
     </div>
   </div>`;
@@ -91,7 +83,6 @@ const R = {
   glenn: ["Glenn Adrian De La Garza", "Had a very good time at the dental office. The cleaning was thorough and Genevieve did an amazing job! The high tech tools made me feel at ease. It&rsquo;s a calm atmosphere, which is just what anyone needs before a visit. Definitely a convenient place for dental care. Highly recommend it for anyone needing cleaning and exams."],
   gabriel: ["Gabriel Sanchez", "Very friendly staff and were willing to help in every way! Felt more comfortable here than at any other dentist office in the past, highly recommend!"],
   jocelyne: ["Jocelyne Lara", "I was recommend by another dentist who didn&rsquo;t accept my insurance anymore. First time experience was amazing, went in for a cleaning with Genevieve and she was amazing. She was very informing and kind with what she was doing. Will continue to keep coming back :)"],
-  chiaka: ["Chiaka U", "The team here is so wonderful. Very caring. They made me smile, especially Dr. Sung, Caisy and Nusrat. I really recommend this place. My first time here and I am so loving it. When I came back for my cleaning, Angela and Abigail were super nice"],
   melissa: ["Melissa Merino", "Found our family dentist!"],
   reem: ["Reem Almekhlafi", "The staff here is super friendly and informative. Just had my cleaning and exams done, and they were thorough without being rough. The dental filling went really well, didn&rsquo;t hurt one bit, and they took extra care to ensure it looked great. Overall, a very clear and calm vibe in the office. Highly recommend checking them out for your family dentistry needs."],
   md: ["MD The Cooking Doctor", "Tiffany was &ldquo;extremely&rdquo; informative with regards to providing critical information for my dental care. She kept me informed with everything she was doing and answered all my questions. This was one of the BEST dental experience I&rsquo;ve had. Thanks for the exceptional services provided!!!!"],
@@ -365,12 +356,12 @@ const campaigns = [
     serviceHref: "/services/invisalign/",
     serviceLabel: "Read about Invisalign treatment",
     title: "Invisalign in Katy, TX | $1,000 Off, All-Inclusive | Mason Park Dental",
-    description: "Invisalign clear aligners planned on a 3D scan by Dr. William Sung, FAGD. $1,000 off the all-inclusive price, a further $500 when prepaid, 0% APR financing. Free consultation in Katy.",
+    description: "Invisalign clear aligners planned on a 3D scan of your own teeth, and a free consultation with Dr. Dave Cho in Katy. $1,000 off the all-inclusive price, a further $500 when prepaid, 0% APR financing.",
     heroImg: "scanner-screen",
     hero: {
       tag: "Invisalign in Katy",
       h1: "Straighter teeth. No wires. <em>$1,000 off.</em>",
-      lede: "Clear aligners planned on a 3D scan of your own teeth by Dr. William Sung, a Fellow of the Academy of General Dentistry. One all-inclusive price, in writing, before you start.",
+      lede: "Clear aligners planned on a 3D scan of your own teeth, and a free consultation with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry. One all-inclusive price, in writing, before you start.",
       meta: [["4.9", "Google rating"], ["$3,800", "All-inclusive"], ["0% APR", "Financing"]],
     },
     form: {
@@ -394,7 +385,7 @@ const campaigns = [
       lede: "Every Invisalign office has the aligners. What differs is who plans the case, what the price includes, and whether you were shown the result before you paid for it.",
       cards: [
         ["One price, everything in it", "$3,800 after the $1,000 offer, and it includes the scan, x-rays, every aligner, refinements, retainers and K&ouml;r whitening gel. Nothing is added later."],
-        ["One dentist, start to finish", "Dr. Sung plans your case, fits the first set, checks every step and fits the retainer. You are never handed to someone who has not seen your scan."],
+        ["A consultation with Dr. Cho", "Your free consultation is with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry, whose calm manner puts nervous patients at ease. He tells you plainly whether Invisalign suits your teeth."],
         ["A scan, not a mouthful of putty", "The intraoral scanner maps your teeth in minutes and shows the finished smile on screen before an aligner is made."],
         ["Insurance and 0% financing, handled", "We check your orthodontic benefit before you commit. Cherry splits the balance at 0% APR with no hard credit check."],
       ],
@@ -405,28 +396,29 @@ const campaigns = [
       items: [
         { img: "desk-family-2", h: "Teens", p: "Clear enough for school photos, out for sport and brushing, no brackets or wires to break. Many teens finish in less time than with braces." },
         { img: "clinical-pair-chair", h: "Adults", p: "Crowding, spacing, and teeth that drifted years after the braces came off. Invisalign treats most of what walks in." },
-        { img: "checkin-screen", h: "Severe cases", p: "Some alignment needs something else. If yours does, Dr. Sung says so at the consultation, and it has cost you nothing to find out." },
+        { img: "checkin-screen", h: "Severe cases", p: "Some alignment needs something else. If yours does, Dr. Cho says so at the consultation, and it has cost you nothing to find out." },
       ],
     },
     dentist: {
-      h2: "The dentist who plans it, <em>fits it, and finishes it.</em>",
-      lede: "Your Invisalign case is not passed around. The dentist who reads your scan is the one who fits every set and the retainer at the end.",
+      h2: "The dentist you meet <em>at the consultation.</em>",
+      lede: "Your free consultation is with Dr. Dave Cho. He looks at your scan with you, answers every question, and tells you plainly whether Invisalign is the right tool for your teeth.",
       kicker: "Cosmetic, restorative and general dentistry",
-      name: "Dr. William Sung",
-      quote: "For Dr. Sung, dentistry is the family business: his father and two of his uncles are dentists. He trained at Tufts, holds a Fellowship in the Academy of General Dentistry that only 7% of Texas general dentists hold, and averages almost 100 hours of continuing education a year.",
-      dl: [["Trained", "Tufts University School of Dental Medicine, Boston"], ["Fellowship", "Academy of General Dentistry (FAGD)"], ["Invisalign", "Planned, fitted and checked by Dr. Sung himself"]],
-      after: "Across the hall, Dr. Dave Cho is sedation certified, for anyone who would rather sleep through a long appointment.",
+      name: "Dr. Dave Cho",
+      caption: "Dr. Dave Cho, DMD",
+      quote: "Dr. Cho came to dentistry after a degree in biochemistry and five years at a pharmaceutical company, and took his dental degree at Tufts. Cosmetic dentistry is part of his everyday work, and his laid back, calm manner puts nervous patients at ease.",
+      dl: [["Trained", "Tufts University, Boston (DMD)"], ["Experience", "Cosmetic dentistry, implants, root canals and oral surgery"], ["Sedation", "Certified, to make a long appointment one appointment"]],
+      after: "He sees patients of every age, and his favourite part of the work is the long relationship that follows the first visit.",
       figures: [
-        ['<b data-count="7" data-suffix="%">7%</b>', "The fellowship", "Of Texas general dentists hold the FAGD that Dr. Sung holds."],
-        ['<b data-count="100" data-prefix="~">~100</b>', "Hours a year", "Of continuing education. Over eight times what Texas asks of a dentist."],
         ['<b data-count="4.9" data-decimals="1">4.9</b>', "Google rating", "Across 1,037 reviews left by the practice&rsquo;s own patients."],
+        ['<b>$1,000</b>', "Off Invisalign", "Off the regular $4,800 price, and a further $500 when treatment is prepaid in full."],
+        ['<b>0%</b>', "APR financing", "Cherry splits the balance with no hard credit check."],
         ['<b>12&ndash;18</b>', "Months, typically", "Most patients finish in twelve to eighteen months. Some in as little as six."],
       ],
     },
     path: {
       h2: "What happens, step by step.",
       steps: [
-        ["desk-family-3", "Free consultation", "Dr. Sung assesses your teeth, your history, and what you want from a straighter smile. You leave with a price in writing."],
+        ["desk-family-3", "Free consultation", "Dr. Cho assesses your teeth, your history, and what you want from a straighter smile. You leave with a price in writing."],
         ["scanner-screen-3", "Scan and plan", "A 3D scan of your teeth, and a plan that maps each step, with a preview of the result on screen."],
         ["hygienist-working-4", "The first set", "Your aligners, made to fit. Worn 20 to 22 hours a day, out for meals and brushing."],
         ["girl-chair-2", "Checkups", "Every 4 to 6 weeks, a look at the movement and the next set of trays."],
@@ -437,7 +429,7 @@ const campaigns = [
     proofHeadline: "What Katy patients say <em>about being here.</em>",
     proofLead: R.metheVee,
     proofRail: [R.amy, R.toyin, R.glenn, R.gabriel],
-    proofImg: "desk-call-3",
+    proofImg: "n179-desk-tablet-family",
     placeLede: "The scanner is in the treatment room, the screen is on the ceiling, and the front desk answers the phone. These are the rooms, not a rendering.",
     place: [["patient-chair-team", "A treatment room"], ["ceiling-screen", "The view from the chair"], ["scanner-chair", "The scanner"], ["sterilizer", "Instruments out of the sterilizer"], ["team-front-desk", "The team at the front desk"]],
     faqHeadline: "Everything patients ask <em>before booking.</em>",
@@ -455,7 +447,7 @@ const campaigns = [
       h2: "Stop hiding <em>your smile.</em>",
       lede: "Every month you wait is a month you wear them later. The consultation is free, the scan happens on the day, and you leave with a price in writing.",
       offer: "$1,000 off Invisalign&reg;, and $500 more when prepaid in full. Insurance reimbursements returned to you.",
-      shot: ["scanner-screen-3", "The scanner, and the screen you watch it on."],
+      shot: ["n120-building-exterior", "Suite 104A, on the ground floor. Free parking at the door."],
     },
     consultPage: {
       title: "Book Your Free Invisalign Consultation | Mason Park Dental, Katy",
@@ -464,11 +456,11 @@ const campaigns = [
       h1: "Book your free <em>Invisalign consultation.</em>",
       lede: "Tell us a little about your smile. Our team calls during office hours to arrange the visit, and the 3D scan happens on the day.",
       chips: ["Free consultation", "$1,000 off", "3D scan on the day", "0% APR available"],
-      byline: ["dr-sung-standing", "Dr. William Sung, DMD, FAGD", "Plans and fits every Invisalign case himself"],
+      byline: ["dr-cho-portrait", "Dr. Dave Cho, DMD", "Your free Invisalign consultation is with him"],
       heroImg: "scanner-chair",
       proofHeadline: "Hear from <em>our patients.</em>",
-      dentistH2: "One dentist, <em>start to finish.</em>",
-      dentistLede: "The dentist who reads your scan is the one who fits every set of aligners and the retainer at the end. Nothing is referred out, and nobody is handed off.",
+      dentistH2: "Meet the dentist <em>before you commit.</em>",
+      dentistLede: "The free consultation is with Dr. Dave Cho: a look at your scan, a straight answer on whether Invisalign suits your teeth, and a price in writing before anything is made.",
       inviteH2: "Prefer <em>to talk?</em>",
       inviteLede: "Call and say it is for Invisalign. The front desk will find a consultation time and explain the offer before you commit to anything.",
     },
@@ -483,7 +475,7 @@ const campaigns = [
       callH2: "What to expect <em>on the call.</em>",
       callLede: "Three things, in order. Nothing else is needed from you until the phone rings.",
       steps: [
-        ["First", "Your options", "What you would like to change, and whether Invisalign fits. If Dr. Sung would recommend something else for your teeth, the front desk says so now."],
+        ["First", "Your options", "What you would like to change, and whether Invisalign fits. If Dr. Cho would recommend something else for your teeth, the front desk says so now."],
         ["Then", "Your payment options", "The $1,000 offer, the further $500 for prepaying, what your insurance is likely to cover and the 0% APR plan, explained plainly."],
         ["Finally", "Your free consultation", "A time for the visit itself: the 3D scan, the preview of the finished smile, and a price in writing before anything is made."],
       ],
@@ -496,15 +488,15 @@ const campaigns = [
       ],
       whyH2: "Why <em>Mason Park?</em>",
       pillars: [
-        ["Experience", "Dr. Sung holds a Fellowship in the Academy of General Dentistry that 7% of Texas general dentists hold, and plans and fits every Invisalign case himself."],
-        ["Personalized care", "A 3D scan instead of putty, a preview of the result before it starts, and Dr. Cho&rsquo;s sedation certification across the hall for anyone who needs it."],
+        ["Experience", "Your consultation is with Dr. Dave Cho, a Tufts trained dentist experienced in cosmetic dentistry, with a calm manner that puts nervous patients at ease."],
+        ["Personalized care", "A 3D scan instead of putty, a preview of the result before it starts, and Dr. Cho&rsquo;s sedation certification for anyone who needs it."],
         ["Clear costs", "One all-inclusive price in writing: scan, x-rays, every aligner, refinements, retainers and whitening gel. Insurance checked first, 0% APR available."],
       ],
       faqHeadline: "Any questions <em>before you call?</em>",
       inviteH2: "Ready to take <em>the next step?</em>",
-      inviteLede: "Talk to the Mason Park team and get your free consultation with Dr. Sung on the calendar today.",
+      inviteLede: "Talk to the Mason Park team and get your free consultation with Dr. Cho on the calendar today.",
     },
-    disclaimer: "Individual results vary with each patient&rsquo;s teeth, bite and how consistently the aligners are worn. Nothing on this page is a diagnosis or a promise of a specific outcome; candidacy for Invisalign&reg; is confirmed at a clinical examination with Dr. Sung. The $1,000 offer applies to comprehensive Invisalign&reg; treatment at the regular price of $4,800; the further $500 applies only when treatment is prepaid in full, and insurance reimbursements are returned directly to you. The consultation is free for new Invisalign&reg; patients. Invisalign&reg; is a registered trademark of Align Technology, Inc.",
+    disclaimer: "Individual results vary with each patient&rsquo;s teeth, bite and how consistently the aligners are worn. Nothing on this page is a diagnosis or a promise of a specific outcome; candidacy for Invisalign&reg; is confirmed at a clinical examination. The $1,000 offer applies to comprehensive Invisalign&reg; treatment at the regular price of $4,800; the further $500 applies only when treatment is prepaid in full, and insurance reimbursements are returned directly to you. The consultation is free for new Invisalign&reg; patients. Invisalign&reg; is a registered trademark of Align Technology, Inc.",
   },
   {
     key: "new-patient-special",
@@ -517,12 +509,12 @@ const campaigns = [
     serviceHref: "/new-patients/",
     serviceLabel: "Read about your first visit",
     title: "$189 New Patient Special in Katy, TX | Exam, X-Rays, Cleaning | Mason Park Dental",
-    description: "A comprehensive exam, digital x-rays, a cleaning and a written treatment plan for $189 at Mason Park Dental of Katy. Two general dentists, a pediatric dentist across the hall, same-day slots for pain.",
+    description: "A comprehensive exam, digital x-rays, a cleaning and a written treatment plan for $189 at Mason Park Dental of Katy. Dr. Dave Cho and the team, a pediatric dentist across the hall, same-day slots for pain.",
     heroImg: "desk-checkin-pair",
     hero: {
       tag: "New patients",
       h1: "Your whole first visit, <em>$189.</em>",
-      lede: "A comprehensive exam, digital x-rays, a cleaning and a written treatment plan, for $189 instead of $517. Two general dentists in Katy, and a front desk that answers the phone.",
+      lede: "A comprehensive exam, digital x-rays, a cleaning and a written treatment plan, for $189 instead of $517. Dr. Dave Cho and the team in Katy, and a front desk that answers the phone.",
       meta: [["4.9", "Google rating"], ["$328", "Saved"], ["Same day", "Slots for pain"]],
     },
     form: {
@@ -546,7 +538,7 @@ const campaigns = [
       lede: "A first visit is a test of the whole practice: whether the price holds, whether someone explains what they found, and whether you would send your family.",
       cards: [
         ["$189 covers the whole visit", "Exam, x-rays, cleaning and a written plan. That is $328 off the regular price, and nothing is added at the desk."],
-        ["Two general dentists, one building", "Dr. Cho and Dr. Sung for the adults. Dr. Nguyen, a board certified pediatric dentist, across the hall for the children. Sedation, implants and root canals without being sent across town."],
+        ["Adults and children, one building", "Dr. Cho and the team for the adults. Dr. Nguyen, a board certified pediatric dentist, across the hall for the children. Sedation, implants and root canals without being sent across town."],
         ["You see what the doctor sees", "Digital x-rays and the intraoral camera on a screen in front of you, so the plan is something you watched being made."],
         ["Insurance or the savings plan, whichever is better", "Most major plans accepted and checked before you commit. No insurance? The membership plan covers routine care for a flat annual fee."],
       ],
@@ -561,17 +553,19 @@ const campaigns = [
       ],
     },
     dentist: {
-      h2: "Two general dentists <em>you can ask for by name.</em>",
-      lede: "Both trained at Tufts, both see patients of every age, and the one you meet on the first visit is the one you keep.",
-      duo: [
-        { cho: true, kicker: "Cosmetic, restorative and general", name: "Dr. Dave Cho", p: "A laid back manner that puts nervous patients at ease, and the sedation certification to make a long appointment one appointment." },
-        { img: "dr-sung-standing", kicker: "Cosmetic, restorative and general", name: "Dr. William Sung", p: "A family business: his father and two of his uncles are dentists. A Fellow of the Academy of General Dentistry, which 7% of Texas general dentists hold." },
-      ],
+      h2: "A dentist <em>you can ask for by name.</em>",
+      lede: "Dr. Dave Cho trained at Tufts, sees patients of every age, and his favourite part of the work is the relationship that follows the first visit.",
+      kicker: "Cosmetic, restorative and general dentistry",
+      name: "Dr. Dave Cho",
+      caption: "Dr. Dave Cho, DMD",
+      quote: "A laid back manner that puts nervous patients at ease, and the sedation certification to make a long appointment one appointment. Before dentistry, a degree in biochemistry and five years at a pharmaceutical company.",
+      dl: [["Trained", "Tufts University, Boston (DMD)"], ["Experience", "Sedation, root canals, oral surgery, implants and cosmetic dentistry"], ["Children", "Dr. Tam Nguyen, board certified pediatric dentist, across the hall"]],
+      after: "He attends several continuing education courses every year.",
       figures: [
         ['<b data-count="4.9" data-decimals="1">4.9</b>', "Google rating", "Across 1,037 reviews left by the practice&rsquo;s own patients."],
-        ['<b data-count="3">3</b>', "Doctors, one building", "Two general dentists, and a board certified pediatric dentist across the hall."],
-        ['<b data-count="7" data-suffix="%">7%</b>', "The fellowship", "Of Texas general dentists hold the FAGD that Dr. Sung holds."],
+        ['<b data-count="189" data-prefix="$">$189</b>', "The first visit", "Exam, digital x-rays, cleaning and a written plan, regularly $517."],
         ['<b data-count="328" data-prefix="$">$328</b>', "Saved", "Against the regular price of the same exam, x-rays, cleaning and plan."],
+        ['<b>Same day</b>', "Slots for pain", "For pain, breaks and knocked out teeth. Say it is urgent when you call."],
       ],
     },
     path: {
@@ -589,37 +583,37 @@ const campaigns = [
     proofHeadline: "First visits, <em>in the visitors&rsquo; words.</em>",
     proofLead: R.jocelyne,
     proofRail: [R.toyin, R.glenn, R.gabriel, R.melissa, R.anjana],
-    proofImg: "desk-call-3",
+    proofImg: "n179-desk-tablet-family",
     placeLede: "The waiting room, the treatment rooms, the sterilizer and the front desk, photographed on an ordinary weekday. These are the rooms, not a rendering.",
     place: [["team-huddle-smile", "The team at the front desk"], ["treatment-room", "A treatment room"], ["sofa-forms-3", "The waiting room"], ["sterilizer", "Instruments out of the sterilizer"], ["ceiling-screen", "The view from the chair"]],
     faqHeadline: "What first visits <em>ask.</em>",
     faq: [
       ["What does the $189 new patient special include?", "<p>A comprehensive dental exam, x-rays, a cleaning and a full treatment plan in writing, regularly $517. It is for new patients only, cannot be combined with dental insurance, and does not apply in cases of periodontal (gum) disease, where a different cleaning is needed and is quoted before it is done.</p>"],
       ["Can I use the $189 special with my insurance?", "<p>No. The special cannot be combined with insurance, and that is not a catch: using your insurance is usually the better deal. Tell the front desk which plan you have and they will tell you which way round works out best for you.</p>"],
-      ["What should I expect during my first visit?", "<p>You begin with some paperwork that includes your health history, sent ahead if you ask for it. Then either Dr. William Sung or Dr. Dave Cho conducts a thorough dental exam: checking your teeth and gums, evaluating your oral health, and discussing any concerns you may have.</p>"],
+      ["What should I expect during my first visit?", "<p>You begin with some paperwork that includes your health history, sent ahead if you ask for it. Then Dr. Dave Cho or another Mason Park dentist conducts a thorough dental exam: checking your teeth and gums, evaluating your oral health, and discussing any concerns you may have.</p>"],
       ["What if the exam finds something?", "<p>You get a written plan and a price, with what insurance covers and what it does not. Nothing is started the same day unless you ask for it, and a free second opinion on a plan you were given elsewhere is always available.</p>"],
       ["What should I bring to my first appointment?", "<p>Your insurance card if you have one, a valid photo ID, and a list of the medications you currently take, including anything over the counter.</p>"],
       ["Can I request a tour of the practice first?", "<p>Yes. There is no fee to tour the practice. Call and ask for a quiet weekday hour to see the rooms and meet the team before you become a patient.</p>"],
-      ["How do Dr. Sung and Dr. Cho approach new patient care?", "<p>They take the time to listen to your concerns, answer your questions, and discuss the best treatment options for you. The aim is a welcoming visit that builds trust and open communication about your dental health.</p>"],
+      ["How does Dr. Cho approach new patient care?", "<p>He takes the time to listen to your concerns, answer your questions, and discuss the best treatment options for you. The aim is a welcoming visit that builds trust and open communication about your dental health.</p>"],
     ],
     final: {
       h2: "Start at <em>step one.</em>",
       lede: "Book in about a minute, or call. Ask for the forms and they arrive before you do. The $189 covers the whole visit, and nothing is started on the day unless you ask.",
       offer: "$189 for the exam, x-rays, cleaning and written plan. New patients, not combined with insurance, not for periodontal cases.",
-      shot: ["sofa-forms-3", "The waiting room, suite 104A. Free parking at the door."],
+      shot: ["n120-building-exterior", "Suite 104A, on the ground floor. Free parking at the door."],
     },
     consultPage: {
       title: "Claim Your $189 First Visit | Mason Park Dental, Katy",
-      description: "Request the $189 new patient visit at Mason Park Dental of Katy: exam, digital x-rays, cleaning and a written treatment plan. Two general dentists, kids across the hall.",
+      description: "Request the $189 new patient visit at Mason Park Dental of Katy: exam, digital x-rays, cleaning and a written treatment plan. Dr. Dave Cho for adults, kids across the hall.",
       tag: "$189 new patient special",
       h1: "Claim your <em>$189 first visit.</em>",
       lede: "Tell us what brings you in. Our team calls during office hours to book the visit, send the forms ahead, and confirm what the $189 includes.",
-      chips: ["$189, $328 saved", "Exam, x-rays, cleaning, plan", "Two general dentists", "Kids across the hall"],
+      chips: ["$189, $328 saved", "Exam, x-rays, cleaning, plan", "Dr. Cho for adults", "Kids across the hall"],
       byline: ["team-desk-morning", "The Mason Park front desk", "Answers the phone Mon to Thu, and calls you back"],
       heroImg: "team-huddle-smile",
       proofHeadline: "Hear from <em>our patients.</em>",
-      dentistH2: "Two dentists, <em>one first visit.</em>",
-      dentistLede: "The dentist you meet on the first visit is the one you keep. Both trained at Tufts, both see every age, and the children see Dr. Nguyen across the hall.",
+      dentistH2: "Meet Dr. Cho <em>before your first visit.</em>",
+      dentistLede: "Dr. Dave Cho trained at Tufts and sees patients of every age. The children see Dr. Nguyen, a board certified pediatric dentist, across the hall.",
       inviteH2: "Prefer <em>to talk?</em>",
       inviteLede: "Call and say it is your first visit. The front desk will find the time, send the forms ahead, and tell you whether the special or your insurance works out better.",
     },
@@ -647,7 +641,7 @@ const campaigns = [
       ],
       whyH2: "Why <em>Mason Park?</em>",
       pillars: [
-        ["Experience", "Two general dentists trained at Tufts, one of them a Fellow of the Academy of General Dentistry, and a board certified pediatric dentist across the hall."],
+        ["Experience", "Dr. Dave Cho, a Tufts trained general dentist with a sedation certification, and a board certified pediatric dentist across the hall."],
         ["Personalized care", "The x-rays and the camera on a screen you can see, a plan explained in plain words, and the same hygienist next time."],
         ["Clear costs", "$189 for the whole first visit, a written plan before anything is started, insurance checked first, and a savings plan if you have none."],
       ],
@@ -763,7 +757,7 @@ ${header({ ctaHref: consultHref, ctaLabel: c.cta, ctaShort: "Book" })}
   ${c.dentist.duo ? `<div class="wrap">
     <div class="cp-duo">
       ${c.dentist.duo.map((d) => `<article class="cp-dossier">
-        <figure class="cp-dossier_shot" data-el="mask">${d.cho ? drCho("15rem") : img(d.img, "15rem")}</figure>
+        <figure class="cp-dossier_shot" data-el="mask">${img(d.img, "15rem")}</figure>
         <p class="cp-kicker">${d.kicker}</p>
         <h3>${d.name}</h3>
         <p data-write>${d.p}</p>
@@ -771,8 +765,8 @@ ${header({ ctaHref: consultHref, ctaLabel: c.cta, ctaShort: "Book" })}
     </div>
   </div>` : `<div class="cp-split">
     <figure class="cp-split_ink" data-el="mask">
-      ${img("dr-sung-standing", "(max-width: 899px) 100vw, 45vw")}
-      <figcaption>Dr. William Sung, DMD, FAGD</figcaption>
+      ${img("dr-cho-portrait", "(max-width: 899px) 100vw, 45vw")}
+      <figcaption>${c.dentist.caption}</figcaption>
     </figure>
     <div class="cp-split_warm">
       <p class="cp-kicker">${c.dentist.kicker}</p>
@@ -836,7 +830,7 @@ function consultation(c) {
     ? `<div class="wrap">
     <div class="cp-duo">
       ${c.dentist.duo.map((d) => `<article class="cp-dossier">
-        <figure class="cp-dossier_shot" data-el="mask">${d.cho ? drCho("15rem") : img(d.img, "15rem")}</figure>
+        <figure class="cp-dossier_shot" data-el="mask">${img(d.img, "15rem")}</figure>
         <p class="cp-kicker">${d.kicker}</p>
         <h3>${d.name}</h3>
         <p data-write>${d.p}</p>
@@ -845,8 +839,8 @@ function consultation(c) {
   </div>`
     : `<div class="cp-split">
     <figure class="cp-split_ink" data-el="mask">
-      ${img("dr-sung-standing", "(max-width: 899px) 100vw, 45vw")}
-      <figcaption>Dr. William Sung, DMD, FAGD</figcaption>
+      ${img("dr-cho-portrait", "(max-width: 899px) 100vw, 45vw")}
+      <figcaption>${c.dentist.caption}</figcaption>
     </figure>
     <div class="cp-split_warm">
       <p class="cp-kicker">${c.dentist.kicker}</p>
