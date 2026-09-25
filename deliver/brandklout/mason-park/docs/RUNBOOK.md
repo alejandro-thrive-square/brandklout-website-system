@@ -5,6 +5,14 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Root ad pages retired - 2026-09-25
+
+**The only ad landing pages are the `/ads-landing-pages/` set.** The six root Webflow ports (`/invisalign`,
+`/new-patient-special`, and their consultation and thank-you pages) are now one-block forwarding pages to
+their twins, keeping `gclid`/UTMs ([`runbook/2026-09-25-root-ad-pages-retired.md`](./runbook/2026-09-25-root-ad-pages-retired.md)).
+`bugherd/check-root-ad-forwards.mjs` is the gate. `type-diff.mjs --all` no longer applies. **Open:** point
+the Google Ads final URLs at `/ads-landing-pages/`, then the forwarders can go.
+
 ## Number pool and favicon - 2026-09-25
 
 **Call tracking is the client's pool `haD8dfHnprszNglZQtBV` (location `9tm8C3iReDUyrhdV01Kd`) on all 12 ad
