@@ -37,6 +37,14 @@ async function worker() {
       const want = /consultation$|invisalign$|new-patient-special$/.test(u) ? (u.includes("invisalign") ? FORMS.invisalign : FORMS.np) : null;
       if (want && !h.includes(`data-form-id="${want}"`)) problems.push(`${u}: missing form ${want}`);
     }
+    // The six root Webflow-port ad pages (workflow 10) mirror Webflow: their footer
+    // links a Patient_Privacy_Policy.pdf on Webflow's CDN, the thank-you pages none.
+    const webflowPort = /^\/(invisalign|new-patient-special)(-consultation|-thank-you)?$|^\/new-patient-thank-you$/.test(u);
+    if (!webflowPort && !/href="\/privacy-policy\/?"/.test(h)) problems.push(`${u}: no Privacy Policy link`);
+    if (u === "/privacy-policy") {
+      const n = (h.match(/class="faq_item"/g) ?? []).length;
+      if (n !== 13) problems.push(`/privacy-policy: ${n} policy sections, want 13 (still the old page?)`);
+    }
     if (u === "/contacts") {
       const main = h.slice(h.indexOf("<main"), h.indexOf("</main>"));
       const sections = (main.match(/<section\b/g) ?? []).length;

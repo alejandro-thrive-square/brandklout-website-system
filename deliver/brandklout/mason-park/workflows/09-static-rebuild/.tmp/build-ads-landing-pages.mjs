@@ -197,7 +197,7 @@ function footer({ bookHref, bookLabel }) {
       </div>
     </div>
     <div class="footer_legal">
-      &copy; 2026 Mason Park Dental of Katy &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/faq/">FAQs</a> &middot; <a href="/sitemap/">Sitemap</a> &middot; <a href="/contacts/">Contact</a>
+      &copy; 2026 Mason Park Dental of Katy &middot; <a href="/privacy-policy/">Privacy Policy</a> &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/faq/">FAQs</a> &middot; <a href="/sitemap/">Sitemap</a> &middot; <a href="/contacts/">Contact</a>
     </div>
   </div></div></div>
 </footer>`;
@@ -338,7 +338,7 @@ function invitationChapter(n, c, { headline, lede, primaryHref, primaryLabel, of
   ${BADGES}
   <div class="wrap lp-legal">
     <p class="lp-disclaimer">${c.disclaimer}</p>
-    <p class="lp-legal_links"><a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/contacts/">Contact</a> &middot; <a href="/">masonparkdental.com</a></p>
+    <p class="lp-legal_links"><a href="/privacy-policy/">Privacy Policy</a> &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/contacts/">Contact</a> &middot; <a href="/">masonparkdental.com</a></p>
   </div>` : ""}
 </section>`;
 }
@@ -1001,7 +1001,7 @@ ${questionsChapter(n++, c, p.faqHeadline, c.faq)}
   ${BADGES}
   <div class="wrap lp-legal">
     <p class="lp-disclaimer">${c.disclaimer}</p>
-    <p class="lp-legal_links"><a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/contacts/">Contact</a> &middot; <a href="/">masonparkdental.com</a></p>
+    <p class="lp-legal_links"><a href="/privacy-policy/">Privacy Policy</a> &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/contacts/">Contact</a> &middot; <a href="/">masonparkdental.com</a></p>
   </div>
 </section>
 ${footer({ bookHref: TEL, bookLabel: "Call to book" })}

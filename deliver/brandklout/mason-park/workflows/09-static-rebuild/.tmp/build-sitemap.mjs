@@ -54,7 +54,7 @@ const SECTIONS = [
   ["Blog", ["/blog/"]],
   ["Resources", ["/patient-resources/", "/dental-dictionary/", "/product-recommendations/",
     "/toothpaste-rda-table/", "/ph-and-acidity-of-food-beverages/", "/town-resource/"]],
-  ["Legal", ["/terms-of-service/", "/sitemap/"]],
+  ["Legal", ["/privacy-policy/", "/terms-of-service/", "/sitemap/"]],
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

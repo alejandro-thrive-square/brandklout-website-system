@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Privacy Policy - 2026-09-25
+
+**`/privacy-policy` is a rebuilt site page on both instances, linked from every footer**
+([`runbook/2026-09-25-privacy-policy-page.md`](./runbook/2026-09-25-privacy-policy-page.md)).
+The old production policy is carried over; FlexBook is removed, and it is effective 25 September
+2026. `build-sitemap.mjs` has drifted: do not re-run it blind.
+
 ## Booking goes to /contacts - 2026-09-25
 
 **Every booking button and link goes to `/contacts`, and Contacts is only the hero and the GHL
