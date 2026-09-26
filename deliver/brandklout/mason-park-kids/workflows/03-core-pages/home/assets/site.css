@@ -2144,3 +2144,30 @@ a.card:hover h3 { color: var(--accent); }
 .pa-shot.is-p4 img { object-position: 60% 30%; }
 .pa-shot.is-p5 img { object-position: 50% 35%; }
 .pa-shot.is-p6 img { object-position: 50% 30%; }
+/* ---- BugHerd round five (2026-09-26) ---------------------------------------- */
+/* #387: scroll-written text is readable before it fills (ADA, 4.5:1 and up). */
+.ch { --jr-unwritten: rgba(47, 57, 64, .68); }
+.ch[data-theme="dark"] { --jr-unwritten: rgba(255, 255, 255, .6); }
+/* #207 #360 #361: the eyebrow and the arrow link were sage-deep on the dark ground. */
+.ch[data-theme="dark"] .kicker { color: var(--sage); }
+.ch[data-theme="dark"] .link-arrow { color: var(--sage); border-color: rgba(160, 180, 170, .45); }
+.ch[data-theme="dark"] .link-arrow:hover { color: #fff; border-color: #fff; }
+/* #192 #391-#394: small grey notes a step darker. */
+.sv-find_then span, .mb-vs_b { color: var(--fg-body); }
+/* #298 #316 #363: the FAQ source note had no room under its heading. */
+.ch-head h2 ~ .ch-note { margin-top: 1.25rem; }
+/* #218: a photograph filling the empty cells after the last card. */
+.sq-shot { margin: 0; min-height: 15rem; border-radius: var(--radius); overflow: hidden; }
+.sq-shot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 900px) { .sq-shot { grid-column: span 2; } }
+/* #188: the Parks Youth Ranch logo at the top of its card. */
+.ab-ribbon_logo { display: block; width: 7.5rem; height: auto; margin: 0 0 1.1rem; }
+/* #426: no chapter readout on the blog overview. */
+.is-blog-index .jr-readout { display: none !important; }
+/* #230 #355 #362 #427: heads kept in frame; #247 the whole guard shown. */
+.sw-overlap_shot.is-top img { object-position: 50% 8%; }
+.sw-overlap_shot.is-contain { background: #fff; }
+.sw-overlap_shot.is-contain img { object-fit: contain; }
+.pe-band.is-low.is-faces img { height: clamp(24rem, 62vh, 40rem); object-position: 50% 12%; }
+/* #376: the carriers as logos. */
+.fi-network li img { display: block; width: auto; height: auto; max-width: 78%; max-height: 2.6rem; object-fit: contain; }

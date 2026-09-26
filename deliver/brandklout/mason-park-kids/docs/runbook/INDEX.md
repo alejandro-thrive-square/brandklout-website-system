@@ -1,11 +1,13 @@
 # Runbook index
 
-21 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-26 | 2026-09-26 - BugHerd round five, #174-#433: 242 of 252 closed (Drive photos, badge strip home-only, Suite 104B captions gone site-wide, ~70 copy edits, SDF, insurer logos, ticker pause); 8 wait on the practice (GHL form, forms link, lender links, Invisalign Platinum). Gotchas: caption pass by pattern missed two, heredocs ate 
+ | [`2026-09-26-bugherd-round-five.md`](./2026-09-26-bugherd-round-five.md) |
 | 2026-09-24 | 2026-09-24 - PRODUCTION LAUNCH: masonparkpediatricdental.com serves the Instatic site (22:31 UTC). Backups, Railway domains, PUBLIC_ORIGIN, canonical rehost, edge Worker (www->apex, 170 legacy 301s, robots, sitemap). Rollback in the file | [`2026-09-24-production-launch.md`](./2026-09-24-production-launch.md) |
 | 2026-09-24 | 2026-09-24 - pediatricdentistkatytx.com -> masonparkpediatricdental.com: Cloudflare redirect Worker and routes prepped and tested; goes live when the Squarespace owner sets NS ajay/ruth.ns.cloudflare.com | [`2026-09-24-legacy-domain-redirect-prepped.md`](./2026-09-24-legacy-domain-redirect-prepped.md) |
 | 2026-09-24 | 2026-09-24 - BugHerd round three, #42-#169: 127 of 128 done (#169 later: a photo on every homepage step) (photo swaps, copy, spacing, a two-level Services menu, the FAQ contents), published and verified 118/118; #82 waits on a re-sent photo. Gotchas: edits after to-instatic do not ship, drawer inherits desktop focus transform | [`2026-09-24-bugherd-round-three.md`](./2026-09-24-bugherd-round-three.md) |

@@ -472,16 +472,21 @@
     });
 
     /* data-marquee: velocity reactive drift. Duplicated once so the loop is
-       seamless whatever the row measures. */
+       seamless whatever the row measures. It stops while the pointer is over
+       it, so a name can be read (BugHerd #205, #407). */
     $$("[data-marquee]").forEach(function (row) {
       row.innerHTML += row.innerHTML;
       var half = row.scrollWidth / 2;
-      var x = 0, extra = 0, last = window.pageYOffset;
+      var x = 0, extra = 0, last = window.pageYOffset, held = false;
+      var box = row.parentNode;
+      box.addEventListener("mouseenter", function () { held = true; });
+      box.addEventListener("mouseleave", function () { held = false; });
       gsap.ticker.add(function () {
         var now = window.pageYOffset;
         extra += (now - last) * 0.55;
         last = now;
         extra *= 0.92;
+        if (held) return;
         x -= 0.5 + extra * 0.06;
         if (half && x <= -half) x += half;
         if (x > 0) x -= half;

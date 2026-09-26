@@ -29,6 +29,14 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-26: BugHerd round five, #174-#433. 242 of 252 closed and live on production.** Photos
+from the practice Drive (`_drive/`, `DRIVE` pool in `prep-images.py`); the "Credentialed by" strip
+is on the homepage only; every "Suite 104B" caption is gone; ~70 copy edits; SDF on fillings and
+restorative; insurer logos on /financing; tickers pause on hover. **Open, on the practice:** #34/#198
+(no kids GHL form), #368 (no online-forms URL), #378-#381 (practice lender links; generic ones
+linked meanwhile), #406 (Invisalign Platinum badge). #38 and #82 unchanged. See
+`runbook/2026-09-26-bugherd-round-five.md`.
+
 **2026-09-24, 22:31 UTC: PRODUCTION LAUNCH. `masonparkpediatricdental.com` (apex; `www` 301s to it)
 serves the Instatic site.** The old WordPress copy is off the domain but still deployed on Cloudflare
 Pages as the rollback. Backups are in `C:/Users/ACER/Backups/mason-park-kids/2026-09-24-prelaunch/`, plus a

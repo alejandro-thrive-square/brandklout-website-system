@@ -18,7 +18,7 @@ const W = wi >= 0 ? +args[wi + 1] : 1440;
 const specs = args.filter((a, i) => a.includes('#') && args[i - 1] !== '--w');
 const out = path.join(here, 'shots', 'bh');
 fs.mkdirSync(out, { recursive: true });
-const LIVE = 'https://staging.masonparkpediatricdental.com';
+const LIVE = 'https://masonparkpediatricdental.com';
 
 const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true });
 const page = await browser.newPage({ viewport: { width: W, height: 900 }, reducedMotion: motion ? 'no-preference' : 'reduce' });

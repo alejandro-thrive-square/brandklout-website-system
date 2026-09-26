@@ -186,6 +186,24 @@ REVIEWER = {k: (REVIEWERDIR, f"{k}.png", WIDE) for k in (
     "rv-brushing-lesson", "rv-tooth-calendar", "rv-cap-model-2", "rv-ceiling-tv-2",
 )}
 
+# --- the practice's Drive, BugHerd round five (2026-09-26) ------------------
+# Notes #176-#432 name files in the Mason Park shared drive: Adobe Stock the
+# practice licensed (AdobeStock_<id>) and its own phone photos (PXL_*, IMG_*).
+# Pulled with scripts/drive.mjs into _drive/ (gitignored). Keys are `as-<id>`,
+# `px-<date>-<time>` and `img-<n>`, new basenames every one, because the
+# Instatic media upload skips a basename it already has. AdobeStock_462171644
+# is a clip; _drive holds a still from 1 s in. Phone photos carry an EXIF
+# rotation, so these are transposed before they are measured.
+DRIVEDIR = os.path.abspath(os.path.join(HERE, "_drive"))
+DRIVE = {}
+if os.path.isdir(DRIVEDIR):
+    import re as _re
+    for _f in sorted(os.listdir(DRIVEDIR)):
+        _m = _re.fullmatch(r"AdobeStock_(\d+)\.jpe?g", _f) or _re.fullmatch(r"PXL_(\d+_\d+)(?:\.MP)?\.jpe?g", _f) or _re.fullmatch(r"IMG_(\d+)\.jpe?g", _f)
+        if _m:
+            _k = ("as-" if _f.startswith("Adobe") else "px-" if _f.startswith("PXL") else "img-") + _m.group(1).replace("_", "-")
+            DRIVE[_k] = (DRIVEDIR, _f, WIDE)
+
 # --- mirrored variants ------------------------------------------------------
 # A frame flipped left-to-right, written from the encoded widths of its source
 # so it is the same pixels in the other direction. `smile-flip` is the homepage
@@ -195,6 +213,8 @@ REVIEWER = {k: (REVIEWERDIR, f"{k}.png", WIDE) for k in (
 #   python prep-images.py --mirror-only    just these, no re-encode
 MIRRORED = {
     "smile-flip": "smile",
+    # BugHerd #247: the guard sat under the overlap panel; mirrored, it sits in the open.
+    "st-guard-flip": "st-guard",
 }
 
 COPY = {
@@ -230,7 +250,7 @@ written = 0
 missing_stock = []
 missing_mirror = []
 ONLY = set(sys.argv[sys.argv.index("--only") + 1].split(",")) if "--only" in sys.argv else None
-for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM, **REVIEWER}.items():
+for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM, **REVIEWER, **DRIVE}.items():
     if ONLY is not None and key not in ONLY:
         continue
     src = os.path.join(root, rel)
@@ -261,7 +281,11 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM, **REVIEWER}.items()
     if os.path.exists(up):
         src = up
         source_note = "  (magnific)"
-    im = Image.open(src).convert("RGB")
+    im = Image.open(src)
+    if root == DRIVEDIR:
+        from PIL import ImageOps
+        im = ImageOps.exif_transpose(im)
+    im = im.convert("RGB")
     w0, h0 = im.size
     done = []
     for w in widths:

@@ -47,7 +47,10 @@ const listed = await listMedia();
 const existing = new Map();
 for (const a of listed.assets ?? listed.rows ?? []) {
   const key = `${a.filename ?? a.name}|${a.sizeBytes ?? a.size}`;
-  existing.set(key, existing.has(key) ? "AMBIGUOUS" : (a.publicPath ?? a.url ?? a.path));
+  // Same name AND same size is the same file uploaded twice (a retried upload,
+  // 2026-09-26): reuse the first copy. Only a name clash at different sizes is ambiguous.
+  if (existing.has(key)) { console.log(`  duplicate in library, reusing the first: ${key}`); continue; }
+  existing.set(key, a.publicPath ?? a.url ?? a.path);
 }
 console.log(`already in library: ${existing.size} distinct filename|size`);
 
