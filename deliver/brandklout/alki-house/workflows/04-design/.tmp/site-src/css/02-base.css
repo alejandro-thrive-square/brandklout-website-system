@@ -1,0 +1,95 @@
+/* Reset and the shared primitives. */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:auto}
+body{
+  margin:0;background:var(--bg);color:var(--fg-body);
+  font-family:var(--f-body);font-size:var(--body);line-height:1.6;font-weight:500;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.is-locked{overflow:hidden}
+img,video,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;line-height:.98;
+  letter-spacing:-.025em;color:var(--fg);text-wrap:balance}
+h1{font-size:var(--d1)} h2{font-size:var(--d2)} h3{font-size:var(--h2)} h4{font-size:var(--h3)}
+p{margin:0}
+ul{margin:0;padding:0;list-style-type:none}
+/* hidden always wins, even over a component's display (the cart and order page toggle it). */
+[hidden]{display:none!important}
+::selection{background:var(--ember);color:var(--apricot-soft)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.label{font-family:var(--f-mono);font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:500;color:var(--accent)}
+.lead{font-size:var(--body-lg);line-height:1.5;color:var(--fg-body);max-width:34em;text-wrap:pretty}
+.muted{color:var(--fg-soft)}
+.mono{font-family:var(--f-mono)}
+
+/* Chapter tag — the journey's numbering, visible in every chapter. */
+.chapter-tag{display:inline-flex;align-items:center;gap:.8rem;margin-bottom:1.6rem;white-space:nowrap;
+  font-family:var(--f-mono);font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.chapter-tag b{font-weight:500;color:var(--fg)}
+.chapter-tag i{width:2.6rem;height:1px;background:var(--rule);flex:none}
+
+/* Buttons. The label rides above a fill that sweeps in on hover. */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;min-height:3.25rem;padding:.95rem 1.8rem;
+  border-radius:var(--radius-pill);font-size:var(--small);letter-spacing:.02em;font-weight:700;
+  position:relative;overflow:hidden;isolation:isolate;
+  transition:color .45s var(--ease),border-color .45s var(--ease),transform .45s var(--ease);will-change:transform}
+.btn>span,.btn>b{position:relative;z-index:1}
+.btn>svg{position:relative;z-index:1;width:1.05em;height:1.05em;transition:transform .45s var(--ease)}
+.btn:hover>svg{transform:translateX(.25em)}
+.btn::after{content:"";position:absolute;inset:-1px;border-radius:inherit;transform:translateY(102%);
+  transition:transform .55s var(--ease);z-index:0}
+.btn:hover::after{transform:translateY(0)}
+.btn-primary{background:var(--accent-fill);color:var(--apricot-soft)}
+.btn-primary::after{background:var(--apricot)}
+.btn-primary:hover{color:var(--coffee-950)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg)}
+.btn-ghost::after{background:var(--fg)}
+.btn-ghost:hover{color:var(--bg)}
+.btn-light{background:var(--apricot);color:var(--coffee-950)}
+.btn-light::after{background:var(--ember)}
+.btn-light:hover{color:var(--apricot-soft)}
+.btn-sm{min-height:2.5rem;padding:.55rem 1.1rem;font-size:var(--label)}
+
+/* Pills and badges. */
+.pill{display:inline-flex;align-items:center;gap:.45rem;padding:.4rem .85rem;border-radius:var(--radius-pill);
+  border:1px solid var(--line);font-family:var(--f-mono);font-size:var(--label);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-soft)}
+.pill.is-on,.pill:hover{border-color:var(--line-strong);color:var(--fg)}
+.badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .65rem;border-radius:var(--radius-sm);
+  font-family:var(--f-mono);font-size:var(--label);letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.badge::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:currentColor}
+.badge-stock{background:rgba(255,235,183,.1);color:var(--apricot)}
+.badge-out{background:rgba(255,235,183,.06);color:var(--fg-faint)}
+.badge-new{background:var(--ember);color:var(--apricot-soft)}
+[data-theme="light"] .badge-stock{background:rgba(67,40,24,.08);color:var(--ember-ink)}
+[data-theme="light"] .badge-out{background:rgba(67,40,24,.05);color:var(--fg-faint)}
+
+/* Price. The sheet leaves some prices blank; those read "Ask". */
+.price{font-family:var(--f-display);font-weight:600;letter-spacing:-.02em;color:var(--fg)}
+.price small{font-family:var(--f-mono);font-size:.6em;font-weight:500;letter-spacing:.06em;color:var(--fg-soft);margin-left:.35em}
+
+/* ScrollSmoother scaffolding. Fixed UI lives OUTSIDE #smooth-wrapper. */
+#smooth-wrapper{overflow:hidden}
+
+/* Pre-paint guard. Split targets stay hidden until GSAP has set their
+   state, so unsplit text never flashes. .wz-ready is set by boot. */
+[data-anim="hide"]{visibility:hidden}
+.wz-ready [data-anim="hide"]{visibility:visible}
+.wz-line{display:block}
+
+/* Grain — one layer over the whole page, so the dark grounds never band. */
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:2000;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  [data-anim="hide"]{visibility:visible!important}
+  .grain{display:none}
+}

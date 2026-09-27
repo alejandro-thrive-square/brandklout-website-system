@@ -1,0 +1,17 @@
+/* 07 INVITATION — the ember glow, the question form. */
+.ch-invite{position:relative;background:var(--coffee-950);color:var(--fg-body);padding-block:var(--section);overflow:hidden}
+.in-glow{position:absolute;left:50%;top:0;width:90vw;height:70vh;transform:translate(-50%,-40%);border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(166,94,42,.4),rgba(30,16,10,0));filter:blur(30px)}
+.in-in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.in-copy h2{margin-bottom:1.4rem}
+.in-form{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.in-form label{display:flex;flex-direction:column;gap:.5rem}
+.in-form input,.in-form textarea{background:var(--coffee-800);border:1px solid var(--line);border-radius:var(--radius-sm);padding:.9rem 1rem;
+  color:var(--apricot-soft);font-size:var(--body);transition:border-color .3s}
+.in-form input:focus,.in-form textarea:focus{outline:0;border-color:var(--apricot)}
+.in-form textarea{resize:vertical}
+.in-wide{grid-column:1/-1}
+.in-form .btn{justify-self:start}
+.in-note{font-size:var(--label);letter-spacing:.06em}
+@media(max-width:991px){ .in-in{grid-template-columns:1fr;gap:2.5rem} }
+@media(max-width:560px){ .in-form{grid-template-columns:1fr} }

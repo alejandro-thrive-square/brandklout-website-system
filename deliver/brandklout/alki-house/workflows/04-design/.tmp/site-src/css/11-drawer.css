@@ -1,0 +1,21 @@
+/* Mobile drawer — sits above the page, below the nav, so the burger stays clickable. */
+.drawer{position:fixed;inset:0;z-index:900;background:var(--coffee-950);color:var(--apricot-soft);
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);visibility:hidden}
+.drawer.is-open{clip-path:inset(0 0 0 0);visibility:visible}
+.drawer-in{height:100%;padding:6rem var(--gutter) 2rem;display:flex;flex-direction:column;gap:2rem;overflow:auto}
+.drawer-links{display:flex;flex-direction:column}
+.drawer-links a{display:flex;align-items:baseline;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line);
+  font-family:var(--f-display);font-size:calc(2.4rem * var(--t-lg));font-weight:600;letter-spacing:-.02em;
+  transform:translateY(1.2rem);opacity:0;transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.drawer.is-open .drawer-links a{transform:none;opacity:1}
+.drawer-links a b{font-family:var(--f-mono);font-size:var(--label);font-weight:500;color:var(--ember-bright);letter-spacing:.14em}
+.drawer.is-open .drawer-links a:nth-child(1){transition-delay:.08s}
+.drawer.is-open .drawer-links a:nth-child(2){transition-delay:.13s}
+.drawer.is-open .drawer-links a:nth-child(3){transition-delay:.18s}
+.drawer.is-open .drawer-links a:nth-child(4){transition-delay:.23s}
+.drawer.is-open .drawer-links a:nth-child(5){transition-delay:.28s}
+.drawer.is-open .drawer-links a:nth-child(6){transition-delay:.33s}
+.drawer.is-open .drawer-links a:nth-child(7){transition-delay:.38s}
+.drawer.is-open .drawer-links a:nth-child(8){transition-delay:.43s}
+.drawer.is-open .drawer-links a:nth-child(9){transition-delay:.48s}
+.drawer-foot{margin-top:auto;max-width:28em}
