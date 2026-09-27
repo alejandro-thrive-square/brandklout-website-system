@@ -1,5 +1,6 @@
 {
   "_title": "Book your free Invisalign consultation | Legacy Dental Pasadena",
+  "_STALE": "SUPERSEDED 2026-08-24. The LIVE Webflow pages are AHEAD of this file and of the rendered body.html beside it. Do NOT re-render or re-build from here, it would clobber production. Client feedback of 2026-08-24: the Comes out to eat benefit is gone (this practice treats with the trays IN, patients eat with them in), the whole four-step HOW IT WORKS section is gone (the video below it covers the process), and there is NO free smile simulation before commitment. The patient pays, then the ClinCheck is reviewed a few weeks later. Any copy promising a preview of the finished result before payment is wrong. See .claude/RUNBOOK.md.",
   "_note": "The consultation page. The brief is narrow and deliberate: the form, the testimonial films, and little else. What is NOT here is the point — no offer ladder, no FAQ, no second CTA to another page. The only outbound destinations are the form slot, the phone number and the four films, and the films open in a new tab so they do not cost the visit. The form itself is a documented seam, not an install; see camp-sections.css and the comment in consult-template.tokens.html.",
   "consult.eyebrow": "FREE CONSULTATION · PASADENA",
   "consult.h1": "Book your free Invisalign consultation",
