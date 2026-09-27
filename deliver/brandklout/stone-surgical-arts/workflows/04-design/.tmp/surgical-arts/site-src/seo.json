@@ -1,0 +1,632 @@
+{
+  "_note": "Head metadata for the site. One entry per built page, keyed by slug. Since 2026-09-01 the site is the home page plus one service page, the neck lift, built to test the journey design on a page that has to sell a procedure. `schema` may be a single node or an array; both are merged into the page's @graph alongside the practice.",
+  "site": {
+    "name": "Stone Surgical Arts",
+    "origin": "https://www.stonesurgicalarts.com",
+    "ogImage": "/assets/banner-ssa.avif"
+  },
+  "organization": {
+    "@type": [
+      "MedicalBusiness",
+      "MedicalClinic"
+    ],
+    "@id": "https://www.stonesurgicalarts.com/#practice",
+    "name": "Stone Surgical Arts",
+    "alternateName": "Stone Surgical Arts: Facial & Cosmetic Surgery",
+    "url": "https://www.stonesurgicalarts.com/",
+    "description": "Boutique facial and cosmetic surgery practice in Westlake, Texas, led by oral and maxillofacial surgeon Dr. Mona Stone, DDS.",
+    "medicalSpecialty": "PlasticSurgery",
+    "telephone": "+1-817-631-4619",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "72 Andorra Dr #110",
+      "addressLocality": "Westlake",
+      "addressRegion": "TX",
+      "postalCode": "76262",
+      "addressCountry": "US"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Westlake"
+      },
+      {
+        "@type": "City",
+        "name": "Southlake"
+      },
+      {
+        "@type": "City",
+        "name": "Fort Worth"
+      },
+      {
+        "@type": "City",
+        "name": "Keller"
+      },
+      {
+        "@type": "City",
+        "name": "Colleyville"
+      },
+      {
+        "@type": "City",
+        "name": "Grapevine"
+      },
+      {
+        "@type": "City",
+        "name": "Roanoke"
+      },
+      {
+        "@type": "City",
+        "name": "Trophy Club"
+      },
+      {
+        "@type": "City",
+        "name": "North Richland Hills"
+      },
+      {
+        "@type": "City",
+        "name": "Coppell"
+      },
+      {
+        "@type": "City",
+        "name": "Flower Mound"
+      },
+      {
+        "@type": "City",
+        "name": "Irving"
+      },
+      {
+        "@type": "City",
+        "name": "Denton"
+      },
+      {
+        "@type": "City",
+        "name": "Argyle"
+      }
+    ],
+    "availableLanguage": [
+      "English",
+      "Spanish"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/stonesurgicalart/",
+      "https://www.instagram.com/westlakeaesthetics/",
+      "https://www.facebook.com/stonesurgicalarts/",
+      "https://linktr.ee/stonesurgicalarts"
+    ],
+    "founder": {
+      "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "email": "info@stonesurgicalarts.com",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "142"
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Facial & Cosmetic Surgery Westlake TX | Stone Surgical Arts",
+      "description": "Boutique facial and cosmetic surgery in Westlake, Texas. Dr. Mona Stone plans and performs every case herself: face, neck and jawline, skin and non-surgical.",
+      "ogTitle": "Stone Surgical Arts: Facial & Cosmetic Surgery, Westlake TX",
+      "ogDescription": "Precise treatments. Impeccable results. Surgery and aesthetics planned around your face, by the surgeon who performs them."
+    },
+    "neck-lift": {
+      "title": "Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full surgical procedure, with muscle repair and skin removal, for a neck that has gone past what a suture can hold. $11,000 in Westlake, TX.",
+      "ogTitle": "Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Muscle repair, contouring and skin removal, planned and performed by Dr. Mona Stone. $11,000 in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Neck Lift",
+          "description": "A full surgical neck lift: repair of the platysma, contouring of submental fat and removal of excess skin, for a neck that has gone past what a suture suspension can hold.",
+          "category": "Neck & Jawline",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Neck",
+          "howPerformed": "Under general anaesthetic or deep sedation, two to four hours in theatre. The platysma is repaired where it has separated, fat is contoured under the chin and along the jaw, and skin that is genuinely in excess is removed.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "Sutures come out in stages over two weeks. Most people are back at a desk at two weeks, and the contour refines for three to six months. Follow-ups are with Dr. Stone.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How is a neck lift different from MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyEllevate suspends the platysma with a suture and removes nothing, so there is no external incision and the recovery is days rather than weeks. A neck lift removes skin and repairs muscle directly. The first is for laxity, the second for excess, and which you have is an anatomical fact rather than a preference."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where do neck lift scars go?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A small incision under the chin, and incisions around and behind the ears following the natural creases. They are placed where the anatomy conceals them and they mature over months from pink to pale."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does a neck lift last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts a full surgical neck lift at up to ten years, against about five for MyEllevate. The muscle repair is durable; what changes is that your neck keeps ageing around it. Skin quality, weight stability and genetics all move that number."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I need a drain after a neck lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sometimes, for the first day or two, depending on how much work the neck needed. If one is used it is removed at your first post-operative visit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens at the consultation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You and Dr. Stone go through your concerns and your goals, she takes a medical history and assesses your general health, and photographs and measurements are taken so the plan is drawn against your own anatomy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does a neck lift cost, and can I finance it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$11,000 for the neck alone, or $18,000 combined with the face. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "blepharoplasty": {
+      "title": "Blepharoplasty Westlake TX | Stone Surgical Arts",
+      "description": "Eyelid surgery, upper or lower, by Dr. Mona Stone. An hour or less in the chair and seven to ten days off work. $3,400 in Westlake, TX.",
+      "ogTitle": "Eyelid Surgery | Stone Surgical Arts",
+      "ogDescription": "Excess lid skin, muscle and fat, removed and repositioned by Dr. Mona Stone. $3,400 in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Blepharoplasty",
+          "alternateName": "Eyelid surgery",
+          "description": "Eyelid surgery on the upper or lower lid: excess skin, muscle and the fat that has come forward behind it, removed or repositioned so the eye reads open rather than heavy.",
+          "category": "Face",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Eyelid",
+          "howPerformed": "An outpatient operation of an hour or less, under local anaesthetic with sedation. On the upper lid the incision is made in the natural crease; on the lower lid beneath the lash line, or inside the lid where only fat is being addressed.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy. The brow is held in position to establish whether the heaviness is in the lid or above it.",
+          "followup": "Fine sutures come out at around a week. Most people are back to normal activities inside a fortnight and comfortable in photographs at three weeks, and the last of the lid swelling resolves over two to three months.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/blepharoplasty"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will blepharoplasty scars show?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On the upper lid the incision sits in the natural crease and disappears into it once healed. On the lower lid it is placed just beneath the lash line, or inside the lid entirely where only fat is being addressed, in which case there is no external scar at all."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does eyelid surgery last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts eyelid surgery at ten to fifteen years or more, and upper lid surgery is a once in a lifetime operation for most patients. You continue to age, but the tissue that was removed does not come back."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will my insurance cover blepharoplasty?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Occasionally, for upper lids only, and only where the excess skin is documented to obstruct the visual field. That requires formal visual field testing and photographs. Most cases are cosmetic."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can filler or laser do this instead?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They address different things. Filler can soften a hollow under the eye and laser can improve the texture of thin lid skin, and for early changes either may be enough. Neither removes excess skin or repositions fat that has come forward, which is what makes a lid look heavy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens at the consultation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You and Dr. Stone go through your concerns and your goals, she takes a medical history and assesses your general health, and photographs and measurements are taken so the plan is drawn against your own anatomy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does blepharoplasty cost, and can I finance it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$3,400, which the practice's price list quotes for upper or lower. Whether you need one or both is settled at the consultation. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "treatments": {
+      "title": "Treatments & Fees | Stone Surgical Arts, Westlake TX",
+      "description": "Every treatment at Stone Surgical Arts with the fee beside it: face, neck and jawline, skin, and non-surgical. Consultation $175. Westlake, Texas.",
+      "ogTitle": "Treatments & Fees | Stone Surgical Arts",
+      "ogDescription": "Face, neck and jawline, skin and non-surgical treatments, each with the practice's published fee. Planned and performed by Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "MyEllevate or a neck lift: how do I know which?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A neck lift uses small incisions behind the ears and under the chin to reach the tissue underneath, and delivers a result that can last up to ten years. MyEllevate places internal sutures through small punctures instead, and lasts around five. MyEllevate suits earlier laxity; a neck lift reverses more advanced sagging, wrinkling or fullness. MyEllevate needs only local anaesthetic, so you can drive yourself home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will a neck lift fix my jowls?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Jowls sit low on the face, so people assume they are neck work, but they originate in sagging facial tissue and are addressed in a facelift, not a neck lift. A minimally invasive facelift is the procedure that reduces them."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Implants or filler?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fillers are gel injectables that plump and smooth lines, acne scars and thin lips, and last from months to a couple of years. Implants are customised inserts that reshape the underlying structure and are permanent. Filler changes the surface; an implant changes the frame."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does each result actually last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice's own published figures: blepharoplasty 10 to 15 years or more; a neck lift up to ten; MyEllevate around five; facial implants and buccal fat reduction permanent. Injectables are months, not years."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have more than one procedure at once?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often. A neck lift can be done alongside a facelift or eyelid surgery in a single procedure, with one recovery instead of two. What can be combined safely depends on your anatomy and is decided at the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do some rows say at consultation instead of a price?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because the practice never published a figure for those. Genioplasty, fat transfer and facelift fees vary with the case. Everything else on the page carries the fee the practice published, which is being reconfirmed for 2026."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "meet-the-doctor": {
+      "title": "Dr. Mona Stone, DDS | Stone Surgical Arts, Westlake TX",
+      "description": "Oral and maxillofacial surgeon and facial cosmetic surgeon in Westlake, Texas. Engineering first, then a full residency across three Level 1 trauma centres.",
+      "ogTitle": "Meet Dr. Mona Stone, DDS | Stone Surgical Arts",
+      "ogDescription": "The surgeon who plans, performs and follows up every case at Stone Surgical Arts. Engineering first, then a full oral and maxillofacial residency, then facial cosmetic surgery in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.stonesurgicalarts.com/meet-the-doctor#person",
+          "name": "Dr. Mona Stone, DDS",
+          "honorificPrefix": "Dr.",
+          "jobTitle": "Oral and maxillofacial surgeon; facial cosmetic surgeon",
+          "medicalSpecialty": [
+            "PlasticSurgery",
+            "Dentistry"
+          ],
+          "worksFor": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "University of Missouri-Kansas City"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Truman Medical Center"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Broward General Medical Center"
+            }
+          ],
+          "affiliation": [
+            {
+              "@type": "Hospital",
+              "name": "Baylor Medical Center"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Methodist Hospital"
+            }
+          ],
+          "sameAs": [
+            "https://www.instagram.com/drjawline/"
+          ],
+          "url": "https://www.stonesurgicalarts.com/meet-the-doctor"
+        }
+      ]
+    },
+    "about": {
+      "title": "About the Practice | Stone Surgical Arts, Westlake TX",
+      "description": "A boutique facial and cosmetic surgery practice at 72 Andorra Drive, Westlake, Texas. One surgeon, one address, and clear clinical oversight.",
+      "ogTitle": "About Stone Surgical Arts",
+      "ogDescription": "One building in Westlake, one surgeon, one plan. The rooms, the team and the way the practice is run.",
+      "schema": [
+        {
+          "@type": "AboutPage",
+          "name": "About Stone Surgical Arts",
+          "url": "https://www.stonesurgicalarts.com/about",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "team": {
+      "title": "Meet the Team | Stone Surgical Arts, Westlake TX",
+      "description": "The people at Stone Surgical Arts: Dr. Mona Stone, nurse injector Brooke, esthetician Abby, the office manager, the first assistant and the front desk.",
+      "ogTitle": "Meet the Team | Stone Surgical Arts",
+      "ogDescription": "One surgeon plans and performs every case. Around her, a nurse injector, an esthetician, an office manager, a first assistant and the front desk.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Meet the Team",
+          "url": "https://www.stonesurgicalarts.com/team",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "memberships": {
+      "title": "Memberships | Banked Credit | Stone Surgical Arts, Westlake TX",
+      "description": "Three membership tiers on a banked-credit model: a monthly amount that accumulates until you want it, spendable on injectables, skin or a surgical fee.",
+      "ogTitle": "Memberships | Stone Surgical Arts",
+      "ogDescription": "Credit that waits for you. Banked monthly, never expiring while the membership is active, spendable on anything at member pricing.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Memberships",
+          "url": "https://www.stonesurgicalarts.com/memberships",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "results": {
+      "title": "Results & Reviews | Stone Surgical Arts, Westlake TX",
+      "description": "Before-and-after cases published only with each patient's current consent, and the practice's own patient reviews: a 4.8 average across more than 142.",
+      "ogTitle": "Results & Reviews | Stone Surgical Arts",
+      "ogDescription": "Consented before-and-after photography and the practice's own reviews, from cosmetic patients of Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Results & Reviews",
+          "url": "https://www.stonesurgicalarts.com/results",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "book": {
+      "title": "Book a Consultation | Stone Surgical Arts, Westlake TX",
+      "description": "An hour with Dr. Mona Stone in Westlake, Texas. $175 for Texas residents, $250 out of state, a $100 deposit credited to the fee. Book online or call.",
+      "ogTitle": "Book a Consultation | Stone Surgical Arts",
+      "ogDescription": "An hour with the surgeon who would perform your procedure. You leave with a written plan, honest answers and a fee.",
+      "schema": [
+        {
+          "@type": "ContactPage",
+          "name": "Book a Consultation",
+          "url": "https://www.stonesurgicalarts.com/book",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "myellevate-neck-lift": {
+      "title": "MyEllevate Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "A light-guided suture suspends the neck muscle with no external incision and a recovery measured in days. $6,000 in Westlake, TX, by Dr. Mona Stone.",
+      "ogTitle": "MyEllevate Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Definition through the jaw and neck, achieved with a suture rather than a scar. $6,000, or $7,800 with FaceTite, in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "MyEllevate Neck Lift",
+          "description": "A light-guided suture suspension of the platysma for a neck whose skin still has tone: no external incision, local anaesthetic, and a recovery of about a week.",
+          "category": "Neck & Jawline",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Neck",
+          "howPerformed": "Under local anaesthetic, with sedation as an option, a suture is passed beneath the skin along a lit path and looped around the platysma to suspend it. Entry points are small and typically under the chin and behind the ears. About ninety minutes.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "A support garment for the first days; most people are back at a desk inside a week; the contour settles over six to twelve weeks. Follow-ups are with Dr. Stone.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/myellevate-neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will there be a visible scar after MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There is no external incision along the neck. The suture is passed through small entry points, typically under the chin and behind the ears, which settle to be very difficult to find."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does MyEllevate last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts MyEllevate at around five years, against up to ten for a full surgical neck lift. The suspension itself is permanent; the neck keeps ageing around it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I drive myself home after MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under local anaesthetic alone, yes. If sedation is added, a responsible adult brings you, waits, and drives you home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is MyEllevate the same as a thread lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. A thread lift places dissolving barbed threads in the soft tissue. MyEllevate places a permanent suture around the platysma itself under direct light guidance, performed by a surgeon."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have MyEllevate if I have already had a facelift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often, yes. It is a common way to refresh a neck without repeating a larger operation. Bring the operative details of the previous surgery to the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does MyEllevate cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$6,000 on its own, or $7,800 combined with FaceTite for the neck. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "face-and-neck-lift": {
+      "title": "Face & Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full face and neck lift: the SMAS repositioned, the platysma repaired, the skin redraped rather than pulled. $18,000 in Westlake, TX, by Dr. Mona Stone.",
+      "ogTitle": "Face & Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Face and neck addressed together, because the two age as one structure. $18,000, planned and performed by Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Face & Neck Lift",
+          "description": "A full face and neck lift: the SMAS lifted and repositioned, the platysma repaired, fat contoured along the jaw and under the chin, and the skin redraped with only the genuine excess removed.",
+          "category": "Face",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Face and neck",
+          "howPerformed": "Under general anaesthetic, four to six hours in theatre. Incisions follow the creases in front of the ear, around the lobe and into the hairline, with a small one under the chin. Home the same day with a responsible adult, or an overnight stay where that is safer.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "Sutures out in stages over two weeks; back to work at two to three weeks; the result settles over six to twelve months. Follow-ups are with Dr. Stone for up to eighteen months.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/face-and-neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Where do face lift scars go?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They follow the natural creases in front of the ear, around the earlobe and back into the hairline behind it, placed where the anatomy hides them, and they mature over months from pink to pale."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does a face and neck lift last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A well-executed lift resets the clock rather than stopping it. Most people look substantially better than their unoperated baseline for a decade or more and continue to age normally from the new starting point."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I look like a different person after a face lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The aim is that people register that you look well rather than altered, which is a matter of how much tension is placed on which layer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have just the neck?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The neck lift is quoted separately at $11,000, and for the right anatomy MyEllevate at $6,000 achieves a great deal with no external incision."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I combine a face lift with eyelid surgery or resurfacing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often. Blepharoplasty is commonly planned alongside a lift; laser resurfacing reaches the texture and pigment a lift cannot and is usually staged rather than done the same day."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does a face and neck lift cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$18,000 for the face and neck together. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy | Stone Surgical Arts",
+      "description": "How Stone Surgical Arts PLLC collects, uses and protects the information you share through our website, phone, email and text messages."
+    },
+    "terms-of-service": {
+      "title": "Terms of Service | Stone Surgical Arts",
+      "description": "The terms for using the Stone Surgical Arts website and our phone, email and text messages, including our SMS terms."
+    }
+  }
+}

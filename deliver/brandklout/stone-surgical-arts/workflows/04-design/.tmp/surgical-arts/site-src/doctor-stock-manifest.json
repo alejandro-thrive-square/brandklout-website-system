@@ -1,0 +1,194 @@
+{
+  "slots": {
+    "ds-botox-brow.webp": {
+      "kind": "chosen",
+      "from": "Botox and Xeomin treatments-3.jpeg",
+      "sourceSize": "7360 4912",
+      "output": "2200x1238",
+      "bytes": 104968,
+      "alt": "Gloved hands placing a fine syringe at the brow of a woman whose eyes are closed",
+      "used": "library",
+      "note": "The neuromodulator picture: the needle at the frown line. Tried as the Non-Surgical still and taken out again the same day: that band is 3.85:1 at 1440 and showed the face from the brow to the mouth with the chin cut, which is the complaint this pass exists to close. It needs a frame that is at least 4:3."
+    },
+    "ds-botox-smile.webp": {
+      "kind": "chosen",
+      "from": "Botox and Xeomin treatments-2.jpeg",
+      "sourceSize": "8768 4892",
+      "output": "2200x1237",
+      "bytes": 104772,
+      "alt": "A woman with long brown hair smiling, a hand at the back of her neck",
+      "used": "library",
+      "note": "A portrait on white, no treatment shown. 8768px at source."
+    },
+    "ds-botox-silver.webp": {
+      "kind": "chosen",
+      "from": "Botox and Xeomin treatments.jpeg",
+      "sourceSize": "5720 3814",
+      "output": "2200x1238",
+      "bytes": 108128,
+      "alt": "A woman with silver-blonde hair, a hand resting at her cheek",
+      "used": "library"
+    },
+    "ds-peel-brush.webp": {
+      "kind": "chosen",
+      "from": "Chemical peels.jpeg",
+      "sourceSize": "6652 2217",
+      "output": "2200x1238",
+      "bytes": 80664,
+      "alt": "A peel being brushed onto the forehead of a woman in a towel headband",
+      "used": "library",
+      "note": "The source is 6652x2217, a 3:1 strip; the 16:9 crop is centred on the face."
+    },
+    "ds-peel-lift.webp": {
+      "kind": "chosen",
+      "from": "Chemical peels-2.jpeg",
+      "sourceSize": "8688 5792",
+      "output": "2200x1238",
+      "bytes": 81308,
+      "alt": "A peel mask being lifted away from the cheek, close",
+      "used": "library"
+    },
+    "ds-dysport-chair.webp": {
+      "kind": "chosen",
+      "from": "Dysport.jpeg",
+      "sourceSize": "5472 3648",
+      "output": "2200x1238",
+      "bytes": 137214,
+      "alt": "A practitioner in blue gloves treating the cheek of a woman reclined in the chair",
+      "used": "library"
+    },
+    "ds-dysport-curls.webp": {
+      "kind": "chosen",
+      "from": "Dysport-2.jpeg",
+      "sourceSize": "5605 4826",
+      "output": "1200x1500",
+      "bytes": 255324,
+      "alt": "A woman with dark curls smiling, fingertips at her cheekbones",
+      "used": "library",
+      "note": "A portrait, warm ground, no treatment shown. Fits a 4:5 column."
+    },
+    "ds-filler-smile.webp": {
+      "kind": "chosen",
+      "from": "Facial Fillers.jpeg",
+      "sourceSize": "6123 4082",
+      "output": "1200x1500",
+      "bytes": 114280,
+      "alt": "A woman lying back and smiling, the practitioner’s hands framing her jaw",
+      "used": "treatments.html — Non-Surgical category band",
+      "note": "Replaces m-injectables. The face is centred in the source, so the 4:5 column crop holds it at every width."
+    },
+    "ds-filler-fold.webp": {
+      "kind": "chosen",
+      "from": "Facial Fillers-2.jpeg",
+      "sourceSize": "6000 4000",
+      "output": "2200x1238",
+      "bytes": 106124,
+      "alt": "A syringe held at the fold beside the mouth of a woman in a towel headband",
+      "used": "library"
+    },
+    "ds-hair-mark.webp": {
+      "kind": "chosen",
+      "from": "Hair restoration-2.jpeg",
+      "sourceSize": "5294 3522",
+      "output": "2200x1238",
+      "bytes": 105078,
+      "alt": "A man’s hairline being marked with a pen before treatment",
+      "used": "library"
+    },
+    "ds-hair-hand.webp": {
+      "kind": "chosen",
+      "from": "Hair restoration-3.jpeg",
+      "sourceSize": "6720 4480",
+      "output": "2200x1238",
+      "bytes": 149360,
+      "alt": "A woman with long dark hair, a hand pushed through it",
+      "used": "library"
+    },
+    "ds-hair-pen.webp": {
+      "kind": "chosen",
+      "from": "Hair restoration.jpeg",
+      "sourceSize": "4480 6720",
+      "output": "1200x1500",
+      "bytes": 75386,
+      "alt": "A microneedling pen at the hairline of a woman lying back",
+      "used": "library",
+      "note": "The only portrait frame in the folder, 4480x6720."
+    },
+    "ds-morpheus-jaw.webp": {
+      "kind": "chosen",
+      "from": "Morpheus8-2.jpeg",
+      "sourceSize": "4912 3664",
+      "output": "1200x1500",
+      "bytes": 70966,
+      "alt": "A radiofrequency microneedling handpiece held to the jaw",
+      "used": "treatments.html — Skin category band",
+      "note": "Replaces m-freckles. Morpheus8 is the chapter’s lead treatment."
+    },
+    "ds-morpheus-cheek.webp": {
+      "kind": "chosen",
+      "from": "Morpheus8.jpeg",
+      "sourceSize": "3936 2960",
+      "output": "2200x1238",
+      "bytes": 104250,
+      "alt": "The Morpheus8 handpiece held to a man’s cheek by a practitioner in blue gloves",
+      "used": "library"
+    },
+    "ds-prp-syringes.webp": {
+      "kind": "chosen",
+      "from": "PRP treatment-3.jpeg",
+      "sourceSize": "5436 3495",
+      "output": "2200x1238",
+      "bytes": 122922,
+      "alt": "Three syringes of platelet-rich plasma laid on folded gauze",
+      "used": "treatments.html — Skin still, \"The plasma\"",
+      "note": "A real still life for a chapter that had a generated one."
+    },
+    "ds-prp-draw.webp": {
+      "kind": "chosen",
+      "from": "PRP treatment-2.jpeg",
+      "sourceSize": "6000 3532",
+      "output": "2200x1238",
+      "bytes": 67346,
+      "alt": "A syringe of platelet-rich plasma drawn up beside a woman lying back",
+      "used": "library"
+    },
+    "ds-prp-tube.webp": {
+      "kind": "chosen",
+      "from": "PRP treatment-4.jpeg",
+      "sourceSize": "5616 3744",
+      "output": "2200x1238",
+      "bytes": 42510,
+      "alt": "A spun tube of blood with the plasma separated, held in gloved hands",
+      "used": "treatments.html — Non-Surgical still, \"The spin\"",
+      "note": "A still life for the chapter, like the theatre, the suture tray and the plasma above it. PRP belongs here too: hair restoration in this chapter is platelet-rich plasma to the scalp."
+    },
+    "ds-prp-tray.webp": {
+      "kind": "chosen",
+      "from": "PRP treatment.jpeg",
+      "sourceSize": "6192 3532",
+      "output": "2200x1238",
+      "bytes": 49042,
+      "alt": "A syringe of platelet-rich plasma on the tray, close",
+      "used": "library"
+    }
+  },
+  "source": "Stock photography chosen and supplied by Dr. Stone, 2026-09-03: 01-content-intake/.tmp/Stock Images-20260904T185452Z-1-001/Stock Images/",
+  "note": "Treatments being performed, on models. A slot may sit beside the name of the treatment it shows, as a picture of the procedure, and never inside a results grid, beside a before/after label or under a caption that claims an outcome. See the header of import-doctor-stock.mjs.",
+  "licenceNote": "The client chose and supplied these files; the licence is theirs and was not shown to us. Brandklout should confirm it covers web use on the practice’s own site before the domain goes live. Every slot names its source file so the question can be asked per picture.",
+  "video": {
+    "from": "Chemical peels-3.mov",
+    "sourceSpec": "2048x1080 H.264 QuickTime, 25 fps, 5.04 s, 31.4 MB",
+    "file": "video/ds-peel-clip.mp4",
+    "poster": "video/ds-peel-clip-poster.webp",
+    "output": "1920,1012 5.040000",
+    "bytes": 603232,
+    "alt": "A peel being applied with a brush, five seconds, no sound",
+    "used": "not placed — no component on the site plays video; see HANDOFF.md"
+  },
+  "excluded": {
+    "Facial Fillers-3.jpeg": {
+      "reason": "A before-and-after collage of an unknown person’s mouth. A stock before/after presented on a surgery site reads as this practice’s result, which it is not; audit.mjs fails any stock file in a results context, so this one is not written to assets/ at all.",
+      "sourceSize": "4077x2333"
+    }
+  }
+}

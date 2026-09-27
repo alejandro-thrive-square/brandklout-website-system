@@ -1,0 +1,311 @@
+<!-- ==========================================================================
+     BOOK A CONSULTATION. Built 2026-09-02 in the elevated system.
+
+     Sang: "request form, hours, pre-visit instructions, financing FAQ." All
+     four, in the order a patient needs them.
+
+     THE FORM POSTS NOWHERE YET. That is the wiring job at Instatic setup
+     (HANDOFF.md): point the action at GHL or Instatic's own handler. Until
+     then 12-elevate.js intercepts the submit and shows a message that says
+     so and points at the phone and at Modento, because a form that appears
+     to send a patient's details into a void is the worst thing a booking
+     page can do. The practice already books through
+     book.modento.io/stonesurgicalarts, so that link is the primary way in.
+
+     CLINICAL TEXT. The nine sedation instructions are the practice's own
+     archived page, reproduced in full, and must not be paraphrased. The
+     recovery windows are the practice's own post-operative page, and the
+     paragraph about how you will feel is the one no competitor writes; do
+     not cut it for length.
+
+     This page ends on its own facts and sets cta: false.
+     ========================================================================== -->
+
+<div class="book_page journey_page">
+
+  <section class="place_hero" data-chapter="00" data-chapter-name="Book">
+    <div class="place_media u-focus-figure" data-parallax="10" data-parallax-anchor="top">
+      <img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice’s consultation room" width="1748" height="983" fetchpriority="high">
+    </div>
+    <div class="place_inner">
+      <div>
+        <p class="chapter_mark" data-j="rise">Book a consultation &middot; Westlake, Texas</p>
+        <h1 class="display-xl" data-j-split>An hour with the surgeon.</h1>
+      </div>
+      <p class="place_lede" data-j="rise">You leave with a written plan, honest answers and a fee. Not a sales pitch.</p>
+    </div>
+  </section>
+
+  <div class="ledger_component" data-j="stagger">
+    <div class="ledger_item">
+      <p class="ledger_value">$175</p>
+      <p class="ledger_label">Consultation, Texas residents</p>
+    </div>
+    <div class="ledger_item">
+      <p class="ledger_value">$250</p>
+      <p class="ledger_label">Consultation, from out of state</p>
+    </div>
+    <div class="ledger_item">
+      <p class="ledger_value">$100</p>
+      <p class="ledger_label">Deposit to hold it, credited to the fee</p>
+    </div>
+    <div class="ledger_item">
+      <p class="ledger_value">1</p>
+      <p class="ledger_label">Business day to hear back from a request</p>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       THREE WAYS IN
+       ==================================================================== -->
+  <section class="ways-in_component" id="request" data-chapter="01" data-chapter-name="Three ways in">
+    <a class="ways-in_card is-primary" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener" data-j="rise">
+      <span class="ways-in_num" aria-hidden="true">01</span>
+      <h2 class="ways-in_title">Pick a slot online</h2>
+      <p class="ways-in_text">Choose a day and time through Modento and the desk confirms it.</p>
+      <p class="ways-in_more">Book through Modento <span aria-hidden="true">&rarr;</span></p>
+    </a>
+    <a class="ways-in_card" href="tel:+18176314619" data-j="rise">
+      <span class="ways-in_num" aria-hidden="true">02</span>
+      <h2 class="ways-in_title">Call the desk</h2>
+      <p class="ways-in_text">(817) 631-4619, Monday to Friday, nine to five. English and Spanish spoken. Ask about a virtual consultation if coming in is hard.</p>
+      <p class="ways-in_more">Call (817) 631-4619 <span aria-hidden="true">&rarr;</span></p>
+    </a>
+    <a class="ways-in_card" href="#form" data-j="rise">
+      <span class="ways-in_num" aria-hidden="true">03</span>
+      <h2 class="ways-in_title">Describe your case first</h2>
+      <p class="ways-in_text">Say what is bothering you first, in the form below. The desk replies within a business day.</p>
+      <p class="ways-in_more">The request form <span aria-hidden="true">&rarr;</span></p>
+    </a>
+  </section>
+
+  <!-- ====================================================================
+       THE FORM AND THE DESK
+       ==================================================================== -->
+  <section class="desk_component" id="form" data-chapter="02" data-chapter-name="The request">
+    <!-- THE GO HIGH LEVEL FORM, 2026-09-17. The practice's own contact form,
+         from their Go High Level account, replaces the hand-built request form
+         that had no endpoint and was intercepted by 12-elevate.js.
+
+         HOW IT SURVIVES THE TRIP TO INSTATIC. importHtml strips <script> and
+         publishes a non-YouTube <iframe> as an empty div, and the published CSP
+         is `script-src 'self'; frame-src 'none'`. The only way in is the
+         `brandklout.embed-origins` Embed block (deliver/process/18-instatic-embeds),
+         installed and in `compatible` mode on this instance: a page carrying one
+         gets its CSP widened at publish time.
+
+         So this wrapper is a MARKER, not the real thing. `data-embed` names a
+         row in `21-instatic-upload/place-embeds.mjs`, which after every push
+         swaps this node for the plugin's module node with the same URL, height
+         and title. The markup here is what that module publishes — the
+         `wz-embed` class, `data-wz-embed="auto"`, the same iframe attributes —
+         so the local build and the published page agree and `compare-live.mjs`
+         stays meaningful. `build-import-input.mjs` drops the <iframe> from the
+         payload; the div it sits in is what gets replaced.
+
+         THE SNIPPET IS VERBATIM, `form_embed.js` INCLUDED, and that script is
+         not optional however much it looks it. The form posts `["iframeLoaded"]`
+         and then waits: the height it reports later, as `["lc.setHeight", …]`,
+         only ever comes after the vendor script answers that first message. A
+         frame with no script never grows past the 565px it starts at and cuts
+         its own Submit button off. Measured both ways on 2026-09-17; see
+         trap 32. `place-embeds.mjs` reads this markup out of the BUILT page, so
+         the snippet lives here and nowhere else — re-paste it here when the
+         practice changes the form, and nothing else needs touching. -->
+    <div class="form_component is-embed" data-j="rise">
+      <div class="form_head">
+        <h2>Request a time</h2>
+        <p>Nothing you send here is a booking until the desk confirms it. The desk replies within a business day.</p>
+      </div>
+      <div class="wz-embed form_embed" data-wz-embed="auto" data-embed="ghl-contact-form"><iframe
+    src="https://api.leadconnectorhq.com/widget/form/Nzf3xQVLhgMlABuVMxCN"
+    style="width:100%;height:100%;border:none;border-radius:8px"
+    id="inline-Nzf3xQVLhgMlABuVMxCN"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Contact Form"
+    data-height="1218"
+    data-layout-iframe-id="inline-Nzf3xQVLhgMlABuVMxCN"
+    data-form-id="Nzf3xQVLhgMlABuVMxCN"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Contact Form"
+></iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+      <p class="form_note">Please keep medical details out of the form; a full history is taken at the visit. What you send is handled as our <a class="text-style-link" href="privacy-policy.html">privacy policy</a> describes.</p>
+      <p class="form_note">Prefer to pick a slot yourself? <a class="text-style-link" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener">Book online through Modento</a>. Or call <a class="text-style-link" href="tel:+18176314619">(817) 631-4619</a>, Monday to Friday, nine to five.</p>
+    </div>
+
+    <aside class="desk_panel" id="visit">
+      <div class="desk_media" data-j="mask">
+        <div class="u-fill" data-parallax="8"><img src="assets/ssa-front-desk.webp" alt="Two members of the practice team at the front desk beneath the Stone Surgical Arts sign" width="2133" height="1200" loading="lazy"></div>
+      </div>
+      <dl class="desk_facts invite_facts" data-j="stagger">
+        <div class="invite_fact">
+          <dt>Visit</dt>
+          <dd><a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a></dd>
+        </div>
+        <div class="invite_fact">
+          <dt>Call</dt>
+          <dd><a href="tel:+18176314619">(817) 631-4619</a></dd>
+        </div>
+        <div class="invite_fact">
+          <dt>Hours</dt>
+          <dd>Monday to Friday, 9 to 5<br>Saturday by appointment</dd>
+        </div>
+        <div class="invite_fact">
+          <dt>Parking</dt>
+          <dd>Free, at the door</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <!-- ====================================================================
+       BEFORE YOU COME
+       ==================================================================== -->
+  <section class="prep_component stone-panel" data-chapter="03" data-chapter-name="Before you come">
+    <div class="prep_media u-focus-top" data-j="mask">
+      <div class="u-fill" data-parallax="8"><img src="assets/m-mature-smile.webp" alt="A woman in her fifties smiling, in warm light" width="900" height="1200" loading="lazy"></div>
+    </div>
+    <div>
+      <p class="chapter_mark" data-j="rise">Before you come</p>
+      <h2 class="display-lg" data-j-split>Five minutes of preparation makes the hour worth more.</h2>
+      <p class="cv_lede" data-j="rise">The consultation goes further when Dr. Stone can see what you see. None of it is compulsory.</p>
+      <ol class="prep_list" data-j="stagger">
+        <li>Bring photographs of yourself from five or ten years ago. They are more useful than anyone else&rsquo;s.</li>
+        <li>Come without makeup, or bring a wipe. Skin and contour are hard to read through foundation.</li>
+        <li>List every medication and supplement, including anything with fish oil, vitamin E or aspirin in it.</li>
+        <li>Bring details of any previous facial surgery, filler or thread work: roughly when, and by whom.</li>
+        <li>Write down your three top concerns beforehand. Almost everyone forgets one in the room.</li>
+        <li>Bring somebody as a second pair of ears. Most people take in less than they expect.</li>
+      </ol>
+      <p class="prep_note" data-j="rise">Travelling from out of state? Say so when you book. The consultation and any imaging can usually happen on the same trip.</p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       IF YOU ARE BEING SEDATED
+       Verbatim in substance from the practice's archived page. Nine
+       instructions; all nine. Do not tighten.
+       ==================================================================== -->
+  <section class="prep_component is-reverse" data-chapter="04" data-chapter-name="If sedated">
+    <div class="prep_media" data-j="mask">
+      <div class="u-fill" data-parallax="8"><img src="assets/gen-procedure-room.webp" alt="An empty procedure chair and a monitor in a calm treatment room" width="1600" height="900" loading="lazy"></div>
+    </div>
+    <div>
+      <p class="chapter_mark" data-j="rise">If your procedure involves sedation</p>
+      <h2 class="display-lg" data-j-split>The rules are not suggestions.</h2>
+      <p class="cv_lede" data-j="rise">None of this applies to a consultation, only to the day of a procedure under intravenous anaesthesia. The practice will confirm it beforehand.</p>
+      <ol class="prep_list" data-j="stagger">
+        <li>Nothing to eat or drink, <strong>including water</strong>, for eight hours before the appointment.</li>
+        <li>No smoking for at least twelve hours before surgery. Ideally cut down or stop as far in advance as you can.</li>
+        <li>A responsible adult must bring you, stay in the office throughout, and drive you home.</li>
+        <li>Do not drive or operate machinery for 24 hours afterwards.</li>
+        <li>Wear loose clothing with sleeves that roll up past the elbow, and low-heeled shoes.</li>
+        <li>Contact lenses, jewellery and dentures come out at the time of surgery.</li>
+        <li>No lipstick, heavy makeup or nail polish on the day.</li>
+        <li>Tell the office if you have a cold, a sore throat, or a stomach or bowel upset, before the day if you can.</li>
+        <li>If you take routine oral medication, check with Dr. Stone in advance about what to take and what to hold.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       RECOVERY, HONESTLY
+       ==================================================================== -->
+  <section class="calc_component stone-band" data-theme="dark" data-chapter="05" data-chapter-name="Recovery">
+    <div class="calc_head">
+      <div>
+        <p class="chapter_mark" data-j="rise">Recovery</p>
+        <h2 class="display-lg" data-j-split>Plan for longer than you need, and come back early.</h2>
+      </div>
+      <p class="steps_lede" data-j="rise">The practice&rsquo;s own guidance, worth reading before you book. Give yourself one to two weeks of private time: not housebound, just nothing you would be sorry to attend swollen.</p>
+    </div>
+    <div class="recov_grid" data-j="stagger">
+      <div class="recov_card">
+        <p class="recov_label">Back to work</p>
+        <p class="recov_body">About a week after eyelid surgery, about ten days after CO2 laser resurfacing, two weeks after a facelift. Plan for more and return early if it is going well.</p>
+      </div>
+      <div class="recov_card">
+        <p class="recov_label">Exercise</p>
+        <p class="recov_body">Walk immediately. Nothing that raises a sweat for two weeks, and nothing over 10&nbsp;lb. From day 15, up to 20&nbsp;lb plus non-impact cardio. From day 21, jogging and swimming. After a facelift, no lifting or sharp head turns for six weeks.</p>
+      </div>
+      <div class="recov_card">
+        <p class="recov_label">Makeup &amp; sun</p>
+        <p class="recov_body">Makeup over incisions 48 hours after sutures come out; about ten days after CO2. Sun avoidance matters more: sun on healing skin darkens a scar. Broad-spectrum SPF 30 or higher from two weeks, until the pink has gone.</p>
+      </div>
+      <div class="recov_card is-key">
+        <p class="recov_label">How you will feel</p>
+        <p class="recov_body">In the first two to four weeks a general melancholy is common, and many patients quietly question the decision. It is normal, and it lifts as you feel physically better. Do not expect family and friends to comment, because people are busy. You had this done for your own reasons, and yours is the opinion that counts.</p>
+      </div>
+    </div>
+    <p class="followup_note" data-j="rise"><strong>Follow-up is included, and it goes on for a while.</strong> After general anaesthesia your first visit is the day after surgery, then at 7&ndash;12 days. After an in-office procedure under local, the first is at 7&ndash;12 days. Further visits follow as needed for up to eighteen months, because a face settles slowly.</p>
+  </section>
+
+  <!-- ====================================================================
+       PAYING FOR IT
+       ==================================================================== -->
+  <section class="hubfaq_component stone-panel" id="financing" data-chapter="06" data-chapter-name="Paying for it">
+    <div>
+      <p class="chapter_mark" data-j="rise">Paying for treatment</p>
+      <h2 class="display-lg" data-j-split>Financing, honestly answered.</h2>
+      <div class="faq_list margin-top margin-large" data-j="rise">
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Do you take insurance?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Cosmetic procedures are not covered by insurance. Some functional work, such as a lid that obstructs vision, a lesion that needs removing or reconstruction after trauma, may be, and Dr. Stone will tell you at the consultation which yours is. For covered procedures the practice is a preferred provider with all major dental and medical carriers.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">How does financing work?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Chiefly through Sunbit: the application takes about a minute, checking your options does not affect your credit score, and the decision is immediate. <a class="text-style-link" href="https://apply.sunbit.com/StoneSurgicalArts" rel="noopener">Check your options with Sunbit</a>. CareCredit and Scratchpay are also accepted: if you are already approved with one, bring it.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">What do I pay, and when?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>A $100 deposit holds your consultation and comes off the fee. For a procedure, the fee is in your written plan, a deposit reserves the surgical date, and the balance is due before the day.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Is a membership cheaper than paying as I go?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Usually yes, if you have treatment more than once or twice a year: credit banks rather than expiring, and members pay less per unit and per syringe. Otherwise, pay as you go. <a class="text-style-link" href="memberships.html">Compare the tiers</a>.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Is the quoted fee the whole cost?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Published fees cover the face unless stated otherwise. Additional areas are priced separately, and anaesthesia, where needed, is $300 per 15 minutes on top. Your written plan states the total, with nothing added afterwards.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">What if I decide not to go ahead?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>That is a normal outcome and there is no follow-up campaign. The plan stays on file for whenever you want it.</p></div>
+        </details>
+      </div>
+    </div>
+    <div class="hubfaq_media u-focus-upper" data-j="mask">
+      <div class="u-fill" data-parallax="8" data-parallax-anchor="top"><img src="assets/dr-stone-desk.webp" alt="Dr. Mona Stone at the front desk beneath the practice’s sign" width="2000" height="1500" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- The close: the facts, once more, because this is the page people
+       print. -->
+  <section class="book_component" id="contact">
+    <div class="book_media" data-parallax="8">
+      <div class="u-fill" data-j="mask"><img src="assets/ssa-signage.webp" alt="The Stone Surgical Arts sign at the Westlake practice" width="2133" height="1200" loading="lazy"></div>
+    </div>
+    <div class="book_body">
+      <p class="dsec_mark">Stone Surgical Arts</p>
+      <h2 class="book_title">One surgeon, from the consultation to the last follow-up.</h2>
+      <p class="book_lede">72 Andorra Drive, Suite 110, Westlake, Texas. Patients come from Southlake, Grapevine, Colleyville, Keller and Fort Worth. English and Spanish spoken.</p>
+      <div class="book_actions">
+        <a class="button" href="https://book.modento.io/stonesurgicalarts/patient-details" rel="noopener">Book online</a>
+        <a class="button is-secondary" href="tel:+18176314619">Call (817) 631-4619</a>
+      </div>
+      <dl class="book_facts">
+        <div class="book_fact"><dt>The practice</dt><dd>72 Andorra Dr #110<br>Westlake, TX 76262</dd></div>
+        <div class="book_fact"><dt>Hours</dt><dd>Monday to Friday, 9 to 5<br>Saturday by appointment</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</div>

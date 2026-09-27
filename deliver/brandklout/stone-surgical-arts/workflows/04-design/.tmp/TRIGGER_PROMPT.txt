@@ -1,0 +1,38 @@
+You are working on the Stone Surgical Arts website, in the bk-stone worktree.
+
+Read these first, in order:
+  1. deliver/brandklout/stone-surgical-arts/workflows/04-design/.tmp/STOCK-AND-CROPS-PLAN.md
+     — your two jobs, already diagnosed, with the exact selectors and file paths.
+  2. .claude/RUNBOOK.md — the live state of this worktree. Read the Gotchas.
+  3. deliver/brandklout/stone-surgical-arts/docs/project-overview.md — what this project is.
+  4. deliver/brandklout/stone-surgical-arts/workflows/04-design/.tmp/surgical-arts/HANDOFF.md
+     — the design's own handoff, written by the session that built it.
+
+Two jobs, in this order.
+
+JOB 1 — faces are being cut off. The client reported it on several pages. It is
+diagnosed: 40 `object-fit: cover` rules against only 12 `object-position`, so 31
+frames centre-crop and take the chin and forehead off a portrait. The plan lists
+every selector and marks the ones that carry people. Fix it from the RENDER, not
+from the rule: screenshot, find the actually-clipped faces, set object-position per
+selector from the photograph it shows. Do not blanket-apply one value.
+
+JOB 2 — bring in the doctor's chosen stock photography. 20 files, 134 MB, at
+workflows/01-content-intake/.tmp/Stock Images-20260904T185452Z-1-001/Stock Images/.
+They are camera originals up to 8768px and cannot go on a page as they are. Follow
+the existing manifest pipeline in site-src/ — a named slot with alt text and
+provenance, .webp at the srcset widths the pages already use. There is also a .mov;
+read the plan before deciding anything about video.
+
+Standing constraints:
+- Do NOT publish to Instatic unless asked. The last publish was 2026-09-01 and the
+  refinement pass after it is deliberately unpublished.
+- Never hand-edit .env — it is generated from ~/.webzite/.env by scripts/env-sync.mjs.
+- The local photographs are PRE-UPSCALE; the plan explains why and why re-upscaling
+  is currently blocked. Do not burn time on the Google Drive path, the credentials
+  do not work.
+- Commit as you go. This branch is 35+ commits ahead of origin/main and unpushed.
+- Update .claude/RUNBOOK.md when you finish, per the repo's rule 7.
+
+Start by reading the plan and confirming the diagnosis with your own screenshots
+before changing any CSS.

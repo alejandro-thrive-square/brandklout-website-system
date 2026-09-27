@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F4EF">
+<!-- Title, description, Open Graph, canonical and JSON-LD are injected by
+     build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
+     edit seo.json and rebuild. -->
+<title>Terms of Service | Stone Surgical Arts</title>
+<meta name="description" content="The terms for using the Stone Surgical Arts website and our phone, email and text messages, including our SMS terms.">
+<link rel="canonical" href="https://www.stonesurgicalarts.com/terms-of-service">
+<meta property="og:site_name" content="Stone Surgical Arts">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.stonesurgicalarts.com/terms-of-service">
+<meta property="og:title" content="Terms of Service | Stone Surgical Arts">
+<meta property="og:description" content="The terms for using the Stone Surgical Arts website and our phone, email and text messages, including our SMS terms.">
+<meta property="og:image" content="https://www.stonesurgicalarts.com/assets/banner-ssa.avif">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Terms of Service | Stone Surgical Arts">
+<meta name="twitter:description" content="The terms for using the Stone Surgical Arts website and our phone, email and text messages, including our SMS terms.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "MedicalBusiness",
+        "MedicalClinic"
+      ],
+      "@id": "https://www.stonesurgicalarts.com/#practice",
+      "name": "Stone Surgical Arts",
+      "alternateName": "Stone Surgical Arts: Facial & Cosmetic Surgery",
+      "url": "https://www.stonesurgicalarts.com/",
+      "description": "Boutique facial and cosmetic surgery practice in Westlake, Texas, led by oral and maxillofacial surgeon Dr. Mona Stone, DDS.",
+      "medicalSpecialty": "PlasticSurgery",
+      "telephone": "+1-817-631-4619",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "72 Andorra Dr #110",
+        "addressLocality": "Westlake",
+        "addressRegion": "TX",
+        "postalCode": "76262",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Westlake"
+        },
+        {
+          "@type": "City",
+          "name": "Southlake"
+        },
+        {
+          "@type": "City",
+          "name": "Fort Worth"
+        },
+        {
+          "@type": "City",
+          "name": "Keller"
+        },
+        {
+          "@type": "City",
+          "name": "Colleyville"
+        },
+        {
+          "@type": "City",
+          "name": "Grapevine"
+        },
+        {
+          "@type": "City",
+          "name": "Roanoke"
+        },
+        {
+          "@type": "City",
+          "name": "Trophy Club"
+        },
+        {
+          "@type": "City",
+          "name": "North Richland Hills"
+        },
+        {
+          "@type": "City",
+          "name": "Coppell"
+        },
+        {
+          "@type": "City",
+          "name": "Flower Mound"
+        },
+        {
+          "@type": "City",
+          "name": "Irving"
+        },
+        {
+          "@type": "City",
+          "name": "Denton"
+        },
+        {
+          "@type": "City",
+          "name": "Argyle"
+        }
+      ],
+      "availableLanguage": [
+        "English",
+        "Spanish"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/stonesurgicalart/",
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.facebook.com/stonesurgicalarts/",
+        "https://linktr.ee/stonesurgicalarts"
+      ],
+      "founder": {
+        "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "email": "info@stonesurgicalarts.com",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "142"
+      }
+    }
+  ]
+}
+</script>
+<!-- The two typefaces are SELF-HOSTED, in assets/fonts/, declared by
+     css/03-fonts.css and therefore already inside assets/site.css. There is no
+     request to fonts.googleapis.com any more: this is a medical practice, and a
+     third-party stylesheet on every page view hands Google the IP of everyone
+     who visits. Regenerate with `node site-src/get-fonts.mjs --force`.
+
+     The two most-used cuts are preloaded, because a webfont declared inside a
+     stylesheet is not discovered until that stylesheet has parsed, and these
+     two set the headline and the body copy. -->
+<link rel="preload" href="assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<!-- Every scroll-reveal rule in the stylesheet is scoped to .js, and this is
+     what sets it. Inline and in the head so it lands before first paint — there
+     is no flash of content that then hides itself.
+
+     The timer is the safety net. Reveals start at opacity 0, so if site.js
+     never boots — blocked bundle, an Instatic script conflict, a bad cache —
+     content that should be visible would stay invisible. If nothing has
+     signalled ready inside 2.5s the class comes off and the whole page paints,
+     unanimated. A site with no animation is fine; a site with no content is
+     not. -->
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    if (!window.__ssaBooted) document.documentElement.classList.remove('js');
+  }, 2500);
+</script>
+<!-- A favicon file has not been supplied. This draws the wordmark's S on the
+     brand ivory so the tab is never a blank sheet; replace it with the real
+     mark when the client sends one. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-wrapper">
+<!-- The navbar, on a ten-page site since 2026-09-02.
+
+     Five links and the book button. Treatments is the hub and the two
+     treatment dossiers sit under it; the team is reached from About and
+     from the drawer and the footer, where there is room for everything.
+     The book button goes to the booking page rather than to an in-page
+     anchor, because the booking page exists now and is the better landing.
+
+     `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+     nothing everywhere else; build-site.mjs matches the token against the
+     page slug, lower-cased with underscores turned into hyphens. -->
+<header class="navbar_component is-static" data-nav>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="navbar_container">
+        <a class="navbar_logo-link" href="index.html" aria-label="Stone Surgical Arts, home">
+          <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+        </a>
+
+        <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="treatments.html">Treatments</a>
+          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="about.html">About</a>
+          <a class="navbar_link" href="results.html">Results</a>
+          <a class="navbar_link" href="memberships.html">Memberships</a>
+          <a class="navbar_link" href="blog.html">Blog</a>
+        </nav>
+
+        <div class="navbar_actions">
+          <a class="navbar_phone" href="tel:+18176314619">
+            <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            (817) 631-4619
+          </a>
+          <a class="button is-small" href="book.html">Book a consultation</a>
+          <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. That is why it survives a one-page site:
+     it is not a menu any more, it is the mobile contact card.
+
+     A generated token used to expand here into four category headings and
+     twelve treatment links, built from treatments-data.mjs. Both are gone, and
+     so is the stray-token check's reason to complain about this file. -->
+<div class="drawer_component" id="drawer">
+  <div class="drawer_scrim"></div>
+  <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer_head">
+      <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+      <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="index.html">Home</a>
+      <a class="drawer_link" href="treatments.html">Treatments &amp; fees</a>
+      <a class="drawer_link" href="face-and-neck-lift.html">Face &amp; neck lift</a>
+      <a class="drawer_link" href="neck-lift.html">Neck lift</a>
+      <a class="drawer_link" href="myellevate-neck-lift.html">MyEllevate&reg; neck lift</a>
+      <a class="drawer_link" href="blepharoplasty.html">Eyelid surgery</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
+      <a class="drawer_link" href="about.html">About the practice</a>
+      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="results.html">Results &amp; reviews</a>
+      <a class="drawer_link" href="memberships.html">Memberships</a>
+          <a class="drawer_link" href="blog.html">Blog</a>
+      <a class="drawer_link" href="book.html">Book a consultation</a>
+    </nav>
+
+    <div class="drawer_foot">
+      <a class="button" href="book.html">Book a consultation</a>
+      <a class="button is-secondary" href="tel:+18176314619">Call (817) 631-4619</a>
+      <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
+    </div>
+  </div>
+</div>
+
+<main class="main-wrapper" id="main">
+<!-- ==========================================================================
+     TERMS OF SERVICE. Built 2026-09-17.
+
+     Adapted from stonedentalimplantcenter.com/terms-of-service (effective
+     2026-08-27), same legal entity. Read the header of
+     privacy-policy.body.html for what was changed and why; the same rules
+     apply here. Specific to this page:
+
+     - The sister site's separate SMS Terms page is folded in as section 05
+       (#sms). The footer's "SMS Terms" link points there, so this site has two
+       legal pages, not three.
+     - Dental candidacy, IPS Implants, KLS Martin and 3D imaging are gone.
+       MyEllevate is the one third-party mark this site names.
+     - Section 07 covers fees and memberships. Every fee on the site is still
+       unconfirmed (RUNBOOK "Next"), which is why the wording calls them a guide
+       and makes the written quote the binding figure.
+     - Venue stays Tarrant County, as the sister practice's counsel set it.
+     - 2026-09-23: sections 04 and 08 name the call-tracking number and the
+       services the site gained (LeadConnector, Termly).
+     ========================================================================== -->
+<article class="journal_page journal_article legal_page">
+  <header class="journal_article-head padding-global"><div class="container-large">
+    <p class="journal_meta"><span>Legal</span><span>Effective September 23, 2026</span></p>
+    <h1 class="journal_article-title">Terms of Service</h1>
+    <p class="journal_deck">The terms for using this website and for the phone, email and text messages you receive from our office.</p>
+    <div class="journal_byline"><span>Stone Surgical Arts PLLC</span><span>Westlake, Texas</span><span>Also read our <a class="text-style-link" href="privacy-policy.html">Privacy Policy</a></span></div>
+  </div></header>
+
+  <div class="journal_reading padding-global"><div class="container-large journal_reading-grid">
+    <aside class="journal_sidebar">
+      <nav class="journal_toc" aria-label="In these terms">
+        <p class="chapter_mark">In these terms</p>
+        <a class="journal_toc-link" href="#use-of-site"><span class="journal_toc-number">01</span><span>Using the Site</span></a>
+        <a class="journal_toc-link" href="#not-advice"><span class="journal_toc-number">02</span><span>Information, not medical advice</span></a>
+        <a class="journal_toc-link" href="#appointments"><span class="journal_toc-number">03</span><span>Appointment requests</span></a>
+        <a class="journal_toc-link" href="#communications"><span class="journal_toc-number">04</span><span>Phone and email</span></a>
+        <a class="journal_toc-link" href="#sms"><span class="journal_toc-number">05</span><span>SMS terms</span></a>
+        <a class="journal_toc-link" href="#photos"><span class="journal_toc-number">06</span><span>Photographs and virtual consultations</span></a>
+        <a class="journal_toc-link" href="#fees"><span class="journal_toc-number">07</span><span>Fees, memberships and financing</span></a>
+        <a class="journal_toc-link" href="#third-parties"><span class="journal_toc-number">08</span><span>Third-party services and links</span></a>
+        <a class="journal_toc-link" href="#responsibilities"><span class="journal_toc-number">09</span><span>Your responsibilities</span></a>
+        <a class="journal_toc-link" href="#ip"><span class="journal_toc-number">10</span><span>Our content</span></a>
+        <a class="journal_toc-link" href="#results"><span class="journal_toc-number">11</span><span>Results and reviews</span></a>
+        <a class="journal_toc-link" href="#warranties"><span class="journal_toc-number">12</span><span>Disclaimers and liability</span></a>
+        <a class="journal_toc-link" href="#law"><span class="journal_toc-number">13</span><span>Governing law</span></a>
+        <a class="journal_toc-link" href="#general"><span class="journal_toc-number">14</span><span>General terms</span></a>
+        <a class="journal_toc-link" href="#contact-us"><span class="journal_toc-number">15</span><span>Contact us</span></a>
+      </nav>
+    </aside>
+
+    <div class="journal_prose">
+      <p class="journal_lead">These terms apply when you use www.dfwsurgicalarts.com or hear from our office.</p>
+      <div class="legal_body">
+        <p>These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the website operated by Stone Surgical Arts PLLC (&ldquo;we,&rdquo; &ldquo;us&rdquo; or &ldquo;our&rdquo;) at www.dfwsurgicalarts.com (the &ldquo;Site&rdquo;), and our phone, email and text communications.</p>
+        <p>By using the Site, sending us a request or agreeing to receive text messages, you accept these Terms. If you do not agree, please do not use the Site. We may update these Terms by posting a new version here with a new effective date; using the Site after that means you accept the update.</p>
+      </div>
+
+      <section class="journal_section" id="use-of-site">
+        <p class="journal_section-number">01</p>
+        <h2>Using the Site</h2>
+        <p>You must be at least 18 years old, or have a parent or legal guardian involved, to request an appointment, send us information or agree to receive text messages. Please use the Site lawfully and in a way that does not interfere with its operation, security or accessibility for anyone else.</p>
+      </section>
+
+      <section class="journal_section" id="not-advice">
+        <p class="journal_section-number">02</p>
+        <h2>Information, not medical advice</h2>
+        <p>The Site describes our practice, our surgical, skin and non-surgical treatments, and general patient education. It is for information only. It is not medical advice and does not replace an in-person examination, diagnosis or treatment plan.</p>
+        <p>Using the Site does not create a doctor-patient relationship. That relationship begins only when our office accepts you as a patient. Whether a treatment suits you can only be decided at a consultation.</p>
+        <p>If you think you have a medical emergency, including a complication after a procedure, call 911 or go to the nearest emergency room. Do not rely on the website form, text messages or email for anything urgent.</p>
+      </section>
+
+      <section class="journal_section" id="appointments">
+        <p class="journal_section-number">03</p>
+        <h2>Appointment requests</h2>
+        <p>Sending a request through the Site does not guarantee an appointment. An appointment is confirmed only when our office contacts you to confirm it. Please give accurate and complete information. We may reschedule or decline a request because of availability, surgical commitments, missing information, clinical suitability or other reasonable grounds.</p>
+        <p>Consultation fees and deposits are explained on our <a class="text-style-link" href="book.html">booking page</a> and confirmed when you book.</p>
+      </section>
+
+      <section class="journal_section" id="communications">
+        <p class="journal_section-number">04</p>
+        <h2>Phone and email</h2>
+        <p>By giving us your contact details, you agree that we may contact you about your request, appointment or treatment by phone, voicemail, email and, where you have agreed, text message. These messages may include confirmations, reminders, pre-operative and post-operative instructions, follow-ups and replies to your questions.</p>
+        <p>The phone number shown on the Site may be a tracking number that forwards to our office, so that we can see which pages lead to calls. Our <a class="text-style-link" href="privacy-policy.html#collect">Privacy Policy</a> explains what that records.</p>
+        <p>Website forms, text messages and ordinary email are meant for routine questions and scheduling. Please do not send detailed medical, insurance or financial information through them; call our office instead. Information you give us as a patient is also governed by our Notice of Privacy Practices under HIPAA, available at our office and on request.</p>
+      </section>
+
+      <section class="journal_section" id="sms">
+        <p class="journal_section-number">05</p>
+        <h2>SMS terms</h2>
+        <p>Stone Surgical Arts PLLC, 72 Andorra Dr #110, Westlake, TX 76262, sends text messages to patients and prospective patients through a third-party messaging platform.</p>
+        <h3>How you opt in</h3>
+        <p>You opt in by giving us your mobile number and agreeing to be contacted by text, on a form on the Site or in writing. Consent is not a condition of any purchase or of receiving care. By opting in, you agree to receive recurring automated and conversational text messages at that number, and you confirm that the number is yours or that you are authorized to enroll it.</p>
+        <h3>What we send</h3>
+        <ul class="legal_list">
+          <li><strong>Appointment messages:</strong> confirmations, reminders, rescheduling notices, and pre-operative and post-operative instructions.</li>
+          <li><strong>Conversational messages:</strong> replies from our team to your questions, or to arrange your consultation or procedure.</li>
+          <li><strong>Promotional messages:</strong> treatment news, membership information and offers, only if you have separately agreed to receive them.</li>
+        </ul>
+        <h3>Program details</h3>
+        <ul class="legal_list">
+          <li>Message frequency varies with your appointments and your conversations with us.</li>
+          <li>Message and data rates may apply. We do not charge for our messages.</li>
+          <li>Reply <strong>STOP</strong> to any message to cancel. We will send one final message confirming it, and then no more. To rejoin, opt in again or call us.</li>
+          <li>Reply <strong>HELP</strong> for help, call <a class="text-style-link" href="tel:+18176314619">(817) 631-4619</a> or email <a class="text-style-link" href="mailto:info@stonesurgicalarts.com">info@stonesurgicalarts.com</a>.</li>
+          <li>Supported on major U.S. carriers. Carriers are not liable for delayed or undelivered messages.</li>
+        </ul>
+        <h3>Your mobile information</h3>
+        <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. It is shared only with the messaging platform and carriers that deliver our messages. Text messages are not fully secure and can be intercepted, so please keep sensitive information out of them. Our <a class="text-style-link" href="privacy-policy.html#text-messages">Privacy Policy</a> explains how we handle text-message data.</p>
+      </section>
+
+      <section class="journal_section" id="photos">
+        <p class="journal_section-number">06</p>
+        <h2>Photographs and virtual consultations</h2>
+        <p>If you send us photographs, you confirm that you have the right to share them. Photographs and information sent for a virtual consultation allow a preliminary, non-diagnostic opinion only. A treatment recommendation needs an in-person examination, and any early opinion may change once you have been examined.</p>
+      </section>
+
+      <section class="journal_section" id="fees">
+        <p class="journal_section-number">07</p>
+        <h2>Fees, memberships and financing</h2>
+        <p>Fees shown on the Site are a general guide, not a quote. Your fee depends on your anatomy, the treatment plan and what is included, and is set out in writing after your consultation. The written quote is the figure that applies. Fees may change without notice.</p>
+        <p>Memberships are governed by the membership agreement you sign with us, which prevails over anything on the Site.</p>
+        <p>Financing through Sunbit, CareCredit or any other lender is offered by that lender, not by us. We do not control approvals, credit requirements, rates or repayment terms. Please take questions about a financing decision or account to the lender.</p>
+      </section>
+
+      <section class="journal_section" id="third-parties">
+        <p class="journal_section-number">08</p>
+        <h2>Third-party services and links</h2>
+        <p>Some features are provided by other companies, including LeadConnector (Go High Level) for the consultation request form, call tracking and messaging, Termly for cookie consent, Modento for online booking, Sunbit and CareCredit for financing, and Google Maps for directions. The Site also links to our social media profiles and other websites. Those services have their own terms and privacy policies. We are not responsible for their availability, content, security or practices, and a link is not an endorsement.</p>
+      </section>
+
+      <section class="journal_section" id="responsibilities">
+        <p class="journal_section-number">09</p>
+        <h2>Your responsibilities</h2>
+        <p>When you use the Site or our messages, you agree to:</p>
+        <ul class="legal_list">
+          <li>Give truthful, accurate and complete information, including a mobile number you own or are authorized to use</li>
+          <li>Use the Site and our messages only for genuine personal or patient purposes</li>
+          <li>Not send false or unauthorized requests, or enroll a phone number that is not yours</li>
+          <li>Not try to disrupt, damage, reverse engineer or gain unauthorized access to the Site, our messaging platform or any connected service</li>
+          <li>Tell us if your contact details change and you still want to hear from us</li>
+        </ul>
+      </section>
+
+      <section class="journal_section" id="ip">
+        <p class="journal_section-number">10</p>
+        <h2>Our content</h2>
+        <p>Everything on the Site, including text, photographs, before-and-after images, videos, graphics, logos and design, is owned by or licensed to Stone Surgical Arts PLLC and protected by intellectual property law. You may not copy, republish, distribute or modify it without our written permission, except to view it or print a page for your own personal, non-commercial use.</p>
+        <p>Third-party trademarks named on the Site, including MyEllevate&reg;, belong to their owners and are used only to describe the treatments we offer.</p>
+      </section>
+
+      <section class="journal_section" id="results">
+        <p class="journal_section-number">11</p>
+        <h2>Results and reviews</h2>
+        <p>Individual results vary. Before-and-after photographs and patient reviews show the experience of particular patients and are not a promise or guarantee of your result. Every surgical and non-surgical treatment carries risks, which are discussed with you before you decide.</p>
+      </section>
+
+      <section class="journal_section" id="warranties">
+        <p class="journal_section-number">12</p>
+        <h2>Disclaimers and liability</h2>
+        <h3>No warranties</h3>
+        <p>The Site, our text messages and their content are provided &ldquo;as is&rdquo; and &ldquo;as available,&rdquo; without warranties of any kind, express or implied, including merchantability, fitness for a particular purpose, accuracy and non-infringement. We do not guarantee that the Site or our messages will always be available, current, complete, error-free or delivered without interruption. You use them at your own risk.</p>
+        <h3>Limitation of liability</h3>
+        <p>To the fullest extent the law allows, Stone Surgical Arts PLLC and its owners, staff and affiliates are not liable for any direct, indirect, incidental, consequential, special or punitive damages arising from your use of, or inability to use, the Site or our messages; errors or omissions in content; delayed or failed communications, including text messages; technical problems; unauthorized access to information you send; or your use of third-party services.</p>
+        <p>This does not limit any liability that cannot be limited by law, and nothing in these Terms limits liability arising from the clinical care we provide.</p>
+        <h3>Indemnity</h3>
+        <p>You agree to defend, indemnify and hold harmless Stone Surgical Arts PLLC and its owners, staff and affiliates against any claims, losses and expenses, including reasonable attorneys&rsquo; fees, arising from your breach of these Terms, your misuse of the Site or our messages (including enrolling a phone number that is not yours), or your breach of any law or anyone else&rsquo;s rights.</p>
+      </section>
+
+      <section class="journal_section" id="law">
+        <p class="journal_section-number">13</p>
+        <h2>Governing law</h2>
+        <p>These Terms are governed by the laws of the State of Texas, without regard to its conflict-of-laws rules. Any dispute about these Terms or the Site must be brought only in the state or federal courts in Tarrant County, Texas, and you consent to their jurisdiction.</p>
+      </section>
+
+      <section class="journal_section" id="general">
+        <p class="journal_section-number">14</p>
+        <h2>General terms</h2>
+        <p>If any part of these Terms is found unenforceable, the rest remains in effect. Not enforcing a provision is not a waiver of it. These Terms, together with our <a class="text-style-link" href="privacy-policy.html">Privacy Policy</a>, are the entire agreement between you and Stone Surgical Arts PLLC about your use of the Site and our text messages, and replace any earlier agreement on that subject. They do not replace the consent forms, financial policies or membership agreements you sign as a patient.</p>
+      </section>
+
+      <section class="journal_section" id="contact-us">
+        <p class="journal_section-number">15</p>
+        <h2>Contact us</h2>
+        <p>For questions about these Terms or our text messages, contact:</p>
+        <div class="legal_card">
+          <strong>Stone Surgical Arts PLLC</strong><br>
+          72 Andorra Dr #110<br>
+          Westlake, TX 76262<br>
+          Phone: <a class="text-style-link" href="tel:+18176314619">(817) 631-4619</a><br>
+          Email: <a class="text-style-link" href="mailto:info@stonesurgicalarts.com">info@stonesurgicalarts.com</a>
+        </div>
+      </section>
+    </div>
+  </div></div>
+</article>
+
+
+</main>
+<!-- The board's three-column footer.
+
+     The category ribbon that used to sit above it — Face, Neck & Jawline, Skin,
+     Non-Surgical, each linking to a tab on the treatments hub — went with the
+     hub on 2026-09-01. Its rules are still in 38-cta.css; nothing renders them.
+
+     NAP RESOLVED 2026-08-31. This used to carry the sister practice's values
+     ((817) 383-8361, suite #110A, Wed 9–3 / Fri 9–4) because the archive was
+     unreachable and the sister site was the only live source. The archive is
+     reachable again, and Stone Surgical Arts' OWN published footer — on every
+     recovered page — reads (817) 631-4619, 72 Andorra Dr #110, Mon–Fri 9–5,
+     Saturday by appointment. That is what is here now.
+
+     So the design board's footer was correct, not placeholder. See
+     SURGICAL-ARTS-BRIEF.md § "NAP" for the one page that disagrees. -->
+<footer class="footer_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="footer_top">
+          <!-- The site's pages, since 2026-09-02. A row above the columns until
+               2026-09-04; now the first column, one page under another, beside
+               the address, the mark and the hours (client: "in a column, one
+               before the other, on the side of the other elements"). -->
+          <nav class="footer_nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="treatments.html">Treatments &amp; fees</a>
+          <a href="face-and-neck-lift.html">Face &amp; neck lift</a>
+          <a href="neck-lift.html">Neck lift</a>
+          <a href="myellevate-neck-lift.html">MyEllevate&reg;</a>
+          <a href="blepharoplasty.html">Eyelid surgery</a>
+          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="about.html">About</a>
+          <a href="team.html">The team</a>
+          <a href="results.html">Results &amp; reviews</a>
+          <a href="memberships.html">Memberships</a>
+          <a href="blog.html">Blog</a>
+          <a href="book.html">Book a consultation</a>
+            </nav>
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18176314619">(817) 631-4619</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
+          </div>
+
+          <div class="footer_brand">
+            <span class="brand_component is-large">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+            <div class="footer_socials">
+              <a class="footer_social" href="https://www.instagram.com/stonesurgicalart/" aria-label="Stone Surgical Arts on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone Surgical Arts on Facebook" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              </a>
+              <!-- The med spa's own Instagram — a second account, so it gets the
+                   Instagram glyph too, distinguished by its label. -->
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://linktr.ee/stonesurgicalarts" aria-label="All Stone Surgical Arts links" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer_col is-right">
+            <p class="text-size-tiny text-style-allcaps text-color-accent">Hours</p>
+            <dl class="footer_hours">
+              <div class="footer_hours-row"><dt>Mon &ndash; Fri</dt><dd>9:00 – 5:00</dd></div>
+              <div class="footer_hours-row"><dt>Saturday</dt><dd>By appointment</dd></div>
+              <div class="footer_hours-row"><dt>Sunday</dt><dd>Closed</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="footer_signature">
+          <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+          </svg>
+          <p class="footer_signature-words">Sculpt. Lift. Define.</p>
+        </div>
+
+        <!-- The legal pages are this site's own since 2026-09-17. They pointed at
+             the sister practice's policies until then. SMS Terms is a section of
+             the terms page, not a third page. -->
+        <div class="footer_legal">
+          <span>&copy; <span data-year>2026</span> Stone Surgical Arts. All rights reserved.</span>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html" aria-current="page">Terms of Service</a>
+          <a href="terms-of-service.html#sms">SMS Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

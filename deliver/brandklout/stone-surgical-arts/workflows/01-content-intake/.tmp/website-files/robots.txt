@@ -1,0 +1,10 @@
+User-Agent: *
+Disallow: /landing*
+Disallow: /promotion*
+Disallow: /subpage/
+
+
+User-agent: AhrefsBot
+User-agent: AhrefsSiteAudit
+
+Sitemap: https://www.stonesurgicalarts.com/sitemap.xml

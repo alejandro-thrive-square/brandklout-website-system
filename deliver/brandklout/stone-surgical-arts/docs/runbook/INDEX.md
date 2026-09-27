@@ -1,11 +1,21 @@
 # Runbook index
 
-13 runs, newest first. Each line is one file in this folder.
+22 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-24 | 2026-09-24, later — Display number (817) 631-4619 on both hosts (54 pages); pool swap proven without consent — carries **gotchas** | [`2026-09-24-display-number-631-4619-pool-proven.md`](./2026-09-24-display-number-631-4619-pool-proven.md) |
+| 2026-09-24 | 2026-09-24 — DNI pool not blocked by consent; its GHL swap list lacks (817) 674-2061; med spa has no pool — carries **gotchas** | [`2026-09-24-dni-pool-not-swapping-diagnosed.md`](./2026-09-24-dni-pool-not-swapping-diagnosed.md) |
+| 2026-09-23 | 2026-09-23, latest — The display number is (817) 674-2061 (SEO/NAP) on both hosts; the production pool swaps it — carries **gotchas** | [`2026-09-23-display-number-674-2061.md`](./2026-09-23-display-number-674-2061.md) |
+| 2026-09-23 | 2026-09-23, later — Legal pages updated (LeadConnector, Termly, call tracking) and promoted with the GHL booking form: production then staging, 54 pages each — carries **gotchas** | [`2026-09-23-legal-pages-and-ghl-form-on-production.md`](./2026-09-23-legal-pages-and-ghl-form-on-production.md) |
+| 2026-09-23 | 2026-09-23 — New phone (817) 767-4188 on production (52 pages) and staging (54); GHL number pool on production only; verify-live read the wrong script; swap not yet proven — carries **gotchas** | [`2026-09-23-new-phone-and-dni-pool.md`](./2026-09-23-new-phone-and-dni-pool.md) |
+| 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
+| 2026-09-17 | 2026-09-17, later — The Go High Level contact form on the booking page — carries **gotchas** | [`2026-09-17-ghl-contact-form-on-the-booking-page.md`](./2026-09-17-ghl-contact-form-on-the-booking-page.md) |
+| 2026-09-17 | 2026-09-17 — Privacy Policy and Terms of Service pages, published to STAGING — carries **gotchas** | [`2026-09-17-privacy-policy-and-terms-pages.md`](./2026-09-17-privacy-policy-and-terms-pages.md) |
+| 2026-09-15 | 2026-09-15 — The 301 map built (not deployed), and staging created — carries **gotchas** | [`2026-09-15-301-map-built-and-staging-created.md`](./2026-09-15-301-map-built-and-staging-created.md) |
+| 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at dfwsurgicalarts.com, Sang added — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
 | 2026-09-09 | 2026-09-09, evening — Where the fees come from, and the list to get them confirmed | [`2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md`](./2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md) |
 | 2026-09-09 | 2026-09-09, afternoon — The first BugHerd round applied: four photographs off the home page | [`2026-09-09-bugherd-round-one-four-photographs-off-the-home.md`](./2026-09-09-bugherd-round-one-four-photographs-off-the-home.md) |
 | 2026-09-09 | 2026-09-09, later — BugHerd removed from the build | [`2026-09-09-bugherd-removed.md`](./2026-09-09-bugherd-removed.md) |

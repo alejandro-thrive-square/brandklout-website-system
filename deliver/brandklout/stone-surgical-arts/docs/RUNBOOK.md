@@ -6,8 +6,41 @@ then only the runs you need. Do not read them all.
 
 ## Where it stands
 
-Fifty-two routes are built and published to Instatic, served from Railway at
-`https://stone-surgical-arts-production.up.railway.app`.
+Fifty-four routes are built and published to Instatic, served from Railway at
+**`https://www.dfwsurgicalarts.com`** (apex also serves) since 2026-09-10. The old
+`stone-surgical-arts-production.up.railway.app` host was **detached** by that cutover and 404s —
+any command below that still names it needs `INSTATIC_BASE_URL=https://www.dfwsurgicalarts.com`
+instead.
+
+**Admin:** `https://www.dfwsurgicalarts.com/admin`. Users: the owner account and **Sang**
+(`sang@thrivesquare.com`, admin, same password as on Mason Park) —
+[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
+
+**The display phone is (817) 631-4619 since 2026-09-24** (Alejandro's final number): it is the
+number published for SEO and NAP, on all 54 pages on production and staging. On production the
+GoHighLevel pool `1ULKyOcYiRRAikT9TnhK` swaps it for a tracking number in the visitor's browser,
+**proven 2026-09-24**, with no consent needed (Termly `autoBlock=off`, pool tags untagged). The pool is
+on **production only** (`21-instatic-upload/set-dni-pool.mjs` refuses staging). To change the number,
+edit `MAP` in `swap-phone.mjs` and the same literals in `site-src/`, not a re-import. The pool's
+swap list in GHL must hold the display number, or nothing swaps —
+[run](./runbook/2026-09-24-display-number-631-4619-pool-proven.md).
+
+**Production and staging are level again since 2026-09-23** (54 pages each): the legal pages
+`/privacy-policy` and `/terms-of-service` (updated 2026-09-23 for LeadConnector, Termly, call
+tracking), the footer's legal links pointing at them, and the practice's **Go High Level form**
+(`Nzf3xQVLhgMlABuVMxCN`) on `/book`, the only contact form on the site. The form is placed as an
+Embed block by `21-instatic-upload/place-embeds.mjs`, a required step after every
+`push-site.mjs --apply`; without it the form publishes as an empty div and no gate says so —
+[run](./runbook/2026-09-23-legal-pages-and-ghl-form-on-production.md).
+
+**Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
+It is a Railway environment `staging` in the same project, seeded from production on
+2026-09-15, and `noindex` at the edge. Work there, then promote with the staging-clone module;
+never publish half-finished work on production, where one publish replaces every page —
+[2026-09-15 run](./runbook/2026-09-15-301-map-built-and-staging-created.md).
+
+**Old domain:** `stonesurgicalarts.com` still sends every URL to the new home page. The page-level
+301 map is built and dry-run in `workflows/14-migration-seo-redirects/` but **not deployed**.
 
 | | |
 | :--- | :--- |
@@ -43,9 +76,12 @@ node blog-test.mjs                     # 243 checks
 cd workflows/21-instatic-upload && node verify-live.mjs                       # ends "FAIL  none"
 
 # 3. the published pages still LOOK like the local build
-INSTATIC_BASE_URL=https://stone-surgical-arts-production.up.railway.app \
+INSTATIC_BASE_URL=https://www.dfwsurgicalarts.com \
   COMPARE_PORT=8851 node compare-live.mjs                                     # "no differences"
 ```
+
+Point `INSTATIC_BASE_URL` at `https://staging.dfwsurgicalarts.com` to run gates 2 and 3 against
+staging instead.
 
 `verify-live.mjs` ends with the literal line `FAIL  none` when it passes. That is the footer, not a
 failure — do not read the tail of the report and panic, as a previous session did.
@@ -83,6 +119,16 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 ## Next
 
+- **Deploy the 301 map** once approved: `deploy-redirects.mjs --apply` with a scoped, short-lived
+  token, then `verify-redirects.mjs` must end `FAIL  none`. The 19 skin and non-surgical URLs are
+  `provisional` (they go to `/treatments`; nobody has decided otherwise). See
+  [the directive](../workflows/14-migration-seo-redirects/14-migration-seo-redirects.md).
+- **Promote the legal pages to production.** `privacy-policy` and `terms-of-service` (the SMS terms
+  are its `#sms` section) are **published on staging** and gated clean there, and production still
+  links its footer at the sister practice's policies. Promote once the text is approved —
+  [2026-09-17 run](./runbook/2026-09-17-privacy-policy-and-terms-pages.md).
+- **Production has no canonical tag and no `/sitemap.xml`**, and apex and www
+  both answer 200. Each is a separate fix; none blocks the redirects.
 - **BugHerd is GONE, removed 2026-09-09, and must not be re-added as a script.** It could never
   have worked: Instatic publishes `script-src 'self'; frame-src 'none'`, which blocks both the
   bugherd.com script and the sidebar's iframe, whether the tag sits in the head or is injected at
@@ -108,6 +154,24 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
   `~/.webzite/.env` (a personal API key, Basic `<key>:x`), project **539158**. The first round —
   four photographs off the home page — was applied and published on 2026-09-09. The mechanics, and
   the two things that waste an hour the first time, are in trap 29.
+
+
+## Cookie consent (Termly) — 2026-09-22
+
+**Live.** The banner renders and the Cookie Preferences control opens Termly's modal. Nothing fires before a visitor chooses. Account `stonesurgicalarts@thrivesquare.com`, website UUID
+`0962fd2c-70b8-432a-b540-e9bb6ce46a5c`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_STONE_SURGICAL`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
 
 ## Version Control
 

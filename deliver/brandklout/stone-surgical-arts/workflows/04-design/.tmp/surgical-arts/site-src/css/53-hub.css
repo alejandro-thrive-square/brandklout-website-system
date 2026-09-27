@@ -1,0 +1,514 @@
+/* ===========================================================================
+   THE HUB LAYER — the treatments overview's own vocabulary. 2026-09-02.
+
+   THE THESIS. The home page is a JOURNEY, the treatment page is a DOSSIER,
+   and this is a MENU: sixty-odd line items with a fee beside each, which a
+   visitor reads the way they read a menu, by scanning for the one they came
+   for. Sang: "all four categories with prices; the main SEO entry point."
+
+   What makes it neither of the other two:
+
+     .jump_*      a horizontal category bar that sticks under the navbar the
+                  moment the hero leaves, and marks the chapter being read.
+                  The home page has a readout pill; the dossier has a vertical
+                  rail; this has a menu strip, because a menu has courses.
+     .catx_*      four category chapters. Each opens on a photograph of a
+                  PERSON with the category name set at display size across
+                  it, then a still-life strip of the instruments or devices
+                  that category uses, then its fee table. Person, tool, price:
+                  three materials per chapter, four chapters, and the eye is
+                  never on the same kind of thing for two screens.
+     .fee_*       the table itself: hairline rows, the name in the display
+                  face, the note under it, the fee flush right in tabular
+                  figures. A row that has a page is a link and says so with an
+                  arrow; a row that does not is not, and does not pretend.
+     .still_*     the instrument strips. Full-bleed, short, parallaxed. The
+                  client on 2026-09-02: "the instruments and location". The
+                  generated still lifes existed for these slots and had no
+                  page to be on since the cut.
+
+   Motion: mask reveals and parallax from 52-elevate.css and 12-elevate.js;
+   the rows rise in a stagger through 10-journey.js's data-j reveals, which is
+   why the page carries `.journey_page` as well as `.hub_page`. Nothing pins.
+
+   TOKENS. Nothing new at :root.
+   =========================================================================== */
+
+.hub_page {
+  background: var(--bg);
+}
+
+/* --- the hero: the index as type -------------------------------------------- */
+.hub_hero {
+  position: relative;
+  padding: calc(var(--section) + 3rem) var(--gutter) var(--section-sm);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: clamp(var(--space-xlarge), 6vw, var(--space-xxhuge));
+  align-items: end;
+  overflow: clip;
+}
+.hub_hero .display-xl {
+  max-width: calc(12ch * var(--wide));
+}
+.hub_lede {
+  margin: var(--space-medium) 0 0;
+  max-width: calc(34rem * var(--wide));
+  font-size: var(--size-text-large);
+  line-height: 1.5;
+  color: var(--fg-body);
+}
+.hub_index {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+.hub_index-link {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: baseline;
+  gap: var(--space-medium);
+  padding: var(--space-medium) 0;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--fg);
+  text-decoration: none;
+}
+.hub_index-num {
+  font-family: var(--font-display);
+  font-size: var(--size-text-medium);
+  color: var(--accent);
+  letter-spacing: 0.06em;
+}
+.hub_index-name {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.6rem * var(--t-heading));
+  line-height: 1;
+  transition: transform 0.5s var(--ease), color 0.3s var(--ease);
+}
+.hub_index-count {
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.hub_index-link:hover .hub_index-name,
+.hub_index-link:focus-visible .hub_index-name {
+  transform: translateX(0.6rem);
+  color: var(--accent);
+}
+
+/* --- the jump bar ----------------------------------------------------------- */
+.jump_component {
+  position: sticky;
+  top: 5.5rem;
+  z-index: 90;
+  background: rgba(246, 244, 239, 0.92);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.jump_inner {
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--space-large);
+  overflow-x: auto;
+  /* overflow-x: auto computes overflow-y to auto as well, and the current
+     link's underline sat 1px below the box, so Windows drew a scrollbar
+     inside the bar (client, 2026-09-04). The vertical axis is clipped and
+     the horizontal scrollbar is hidden: on a phone the row still swipes. */
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.jump_inner::-webkit-scrollbar {
+  display: none;
+}
+.jump_label {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.9rem 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.jump_link {
+  flex: 0 0 auto;
+  position: relative;
+  padding: 0.95rem 0;
+  font-family: var(--font-display);
+  font-size: var(--size-text-large);
+  color: var(--fg-mute);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.3s var(--ease);
+}
+.jump_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--accent-flat);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.4s var(--ease);
+}
+.jump_link:hover,
+.jump_link.is-current {
+  color: var(--fg);
+}
+.jump_link.is-current::after {
+  transform: scaleX(1);
+}
+.jump_cta {
+  margin-left: auto;
+  flex: 0 0 auto;
+}
+@media (max-width: 991px) {
+  .jump_component {
+    top: 0;
+  }
+  .jump_cta {
+    display: none;
+  }
+}
+
+/* --- the consultation ledger -------------------------------------------------- */
+.hub_consult {
+  padding: var(--section-sm) var(--gutter) 0;
+}
+.hub_consult .chapter_mark {
+  margin-bottom: var(--space-small);
+}
+
+/* --- a category chapter ------------------------------------------------------- */
+.catx_component {
+  padding-top: var(--section);
+  scroll-margin-top: 9rem;
+}
+.catx_band {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  min-height: clamp(26rem, 70vh, 40rem);
+  overflow: clip;
+}
+.catx_band.is-reverse .catx_media {
+  order: 2;
+}
+.catx_media {
+  position: relative;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.catx_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Same portraits as the home catalogue, same measurement: see
+     `.catalogue_media img` in 52-elevate.css. */
+  object-position: 50% 12%;
+  display: block;
+}
+/* The Skin and Non-Surgical bands carry the doctor's chosen photographs since
+   2026-09-04 (doctor-stock-manifest.json): landscape sources cut to 4:5 with
+   the subject in the MIDDLE, not portraits with the face at the top, so 12%
+   took the chin off on a phone. 40% is measured against ds-filler-smile,
+   whose face runs from 0.22 to 0.68 of the frame: the phone band shows 60%
+   of it, and 40% opens on the hairline with the chin just in. A modifier rather than a
+   utility because `.catx_media img` above sets its own value and a utility
+   from 02-base.css would lose to it on order. */
+.catx_media.is-centred img {
+  object-position: 50% 40%;
+}
+.catx_word {
+  position: absolute;
+  left: var(--space-medium);
+  bottom: var(--space-medium);
+  z-index: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-shadow: 0 2px 30px rgba(39, 39, 39, 0.35);
+}
+.catx_word small {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+.catx_body {
+  padding: var(--pad-panel) var(--gutter) var(--pad-panel) clamp(var(--space-large), 4vw, var(--space-xxlarge));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.catx_band.is-reverse .catx_body {
+  padding: var(--pad-panel) clamp(var(--space-large), 4vw, var(--space-xxlarge)) var(--pad-panel) var(--gutter);
+}
+.catx_title {
+  margin: 0 0 var(--space-medium);
+  max-width: calc(16ch * var(--wide));
+}
+.catx_text {
+  margin: 0;
+  max-width: calc(34rem * var(--wide));
+  color: var(--fg-body);
+  font-size: var(--size-text-medium);
+  line-height: 1.65;
+}
+.catx_note {
+  margin: var(--space-small) 0 0;
+  max-width: calc(34rem * var(--wide));
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.6;
+}
+.catx_leads {
+  margin: var(--space-large) 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.catx_leads li {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: var(--size-text-small);
+  color: var(--fg);
+}
+.catx_leads li.is-lead {
+  background: var(--green-wash);
+  border-color: var(--green-wash);
+  color: var(--accent);
+}
+
+/* --- the instrument strip ------------------------------------------------------ */
+.still_component {
+  position: relative;
+  height: clamp(14rem, 38vh, 24rem);
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.still_component img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.still_caption {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--space-medium);
+  z-index: 2;
+  margin: 0;
+  padding: 0.5rem 0.8rem;
+  background: rgba(246, 244, 239, 0.9);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+/* --- the fee table ------------------------------------------------------------- */
+.fee_component {
+  padding: var(--section-sm) var(--gutter) var(--section-sm);
+  display: grid;
+  grid-template-columns: minmax(0, 0.32fr) minmax(0, 0.68fr);
+  gap: clamp(var(--space-large), 5vw, var(--space-xxhuge));
+  align-items: start;
+}
+.fee_aside {
+  position: sticky;
+  top: 9rem;
+}
+.fee_aside .chapter_mark {
+  margin-bottom: var(--space-small);
+}
+.fee_aside-title {
+  margin: 0 0 var(--space-small);
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.2rem * var(--t-heading));
+  line-height: 1.05;
+  color: var(--fg);
+}
+.fee_aside-text {
+  margin: 0;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.6;
+  max-width: calc(22rem * var(--wide));
+}
+.fee_group {
+  margin: 0 0 var(--space-large);
+}
+.fee_group-title {
+  margin: 0;
+  padding: 0 0 var(--space-small);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--line-strong);
+}
+.fee_row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: var(--space-medium);
+  padding: var(--space-small) 0;
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  transition: padding-left 0.4s var(--ease), background-color 0.3s var(--ease);
+}
+a.fee_row:hover,
+a.fee_row:focus-visible {
+  padding-left: var(--space-small);
+  background: linear-gradient(90deg, var(--green-wash), transparent 70%);
+}
+.fee_name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--fg);
+}
+.fee_note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.5;
+}
+.fee_value {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  color: var(--fg);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
+}
+.fee_value.is-quiet {
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.fee_go {
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--fg);
+  align-self: center;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease), transform 0.4s var(--ease);
+}
+.fee_go svg {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+a.fee_row:hover .fee_go {
+  background: var(--accent-flat);
+  border-color: var(--accent-flat);
+  color: var(--btn-ink);
+  transform: rotate(-45deg);
+}
+.fee_go.is-blank {
+  visibility: hidden;
+}
+.fee_foot {
+  margin: 0;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.6;
+  max-width: calc(44rem * var(--wide));
+}
+
+/* --- the hub's questions --------------------------------------------------------- */
+.hubfaq_component {
+  padding: var(--section) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+  gap: clamp(var(--space-large), 5vw, var(--space-xxhuge));
+  align-items: start;
+}
+.hubfaq_media {
+  position: sticky;
+  top: 9rem;
+  height: min(calc(100vh - 12rem), 36rem);
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.hubfaq_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- responsive --------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .hub_hero {
+    grid-template-columns: 1fr;
+    padding-top: calc(var(--section-sm) + 2rem);
+  }
+  .hub_index-name {
+    font-size: calc(2rem * var(--t-heading));
+  }
+  .catx_band,
+  .catx_band.is-reverse {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .catx_band.is-reverse .catx_media {
+    order: 0;
+  }
+  .catx_media {
+    aspect-ratio: 4 / 3;
+  }
+  .catx_body,
+  .catx_band.is-reverse .catx_body {
+    padding: var(--space-large) var(--gutter);
+  }
+  .fee_component,
+  .hubfaq_component {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+  }
+  .fee_aside,
+  .hubfaq_media {
+    position: static;
+  }
+  .hubfaq_media {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    order: -1;
+  }
+}
+@media (max-width: 767px) {
+  .fee_row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .fee_go {
+    display: none;
+  }
+  .fee_value {
+    font-size: var(--size-h5);
+  }
+}
