@@ -56,7 +56,7 @@ single class inventory; "style direction" is a variable-collection swap.
    shared class inventory** + the theme's variables. Bespoke art-directed
    pieces get custom classes; the library covers layout/spacing/typography
    scaffolding. Candidate home for the inventory:
-   [design-system-library](../../../../process/design-system-library/LIBRARY_INDEX.md).
+   [design-system-library](../design-system-library/LIBRARY_INDEX.md).
 4. **Convert**: 07-webflow-build runs with a new `--known-classes
    library.json` mode — library classes are emitted **thin** (name only,
    empty styleLess) so the paste-merge adopts the project's bound definitions;
@@ -105,8 +105,8 @@ single class inventory; "style direction" is a variable-collection swap.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md)
+Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md)
 and the Deliver pillar rules in
-[DELIVER_SYSTEM_RULES.md](../../../../DELIVER_SYSTEM_RULES.md). Update this plan as
+[DELIVER_SYSTEM_RULES.md](../../DELIVER_SYSTEM_RULES.md). Update this plan as
 milestones complete; fold the final mechanism into
 [07-webflow-build.md](./07-webflow-build.md) once the workflow is live.

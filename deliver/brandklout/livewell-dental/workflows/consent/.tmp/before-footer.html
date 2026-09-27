@@ -1,0 +1,61 @@
+<script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js" defer></script>
+
+<!-- Elfsight Google Reviews | Livewell Dental -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-5dc13b7b-9ec4-4dc0-abef-4d396dcf8d20" data-elfsight-app-lazy></div>
+
+<!-- Code for Open Lightbox Vimeo Video -->
+<script>
+(function () {
+  function fixVimeo() {
+    var frame = document.querySelector('.w-lightbox-backdrop iframe');
+    if (!frame) return false;
+    var src = frame.getAttribute('src') || '';
+    if (src.indexOf('player.vimeo.com') > -1 && src.indexOf('autoplay=1') > -1) return true;
+    var m = src.match(/player\.vimeo\.com(?:%2F|\/)video(?:%2F|\/)(\d+)/) ||
+            src.match(/vimeo\.com(?:%2F|\/)(\d+)/);
+    if (m) {
+      frame.setAttribute('src', 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1');
+      return true;
+    }
+    return false;
+  }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.w-lightbox')) return;
+    var tries = 0;
+    var iv = setInterval(function () {
+      if (fixVimeo() || ++tries > 60) clearInterval(iv);
+    }, 50);
+  });
+})();
+</script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KL36RQV2"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const year = new Date().getFullYear();
+    document.querySelectorAll(".text-year").forEach(el => {
+      el.textContent = year;
+    });
+
+    const backToTop = document.querySelector(".back-to-top");
+
+    window.addEventListener("scroll", function () {
+      const scrollPosition = window.scrollY;
+      const triggerPoint = window.innerHeight;
+
+      if (scrollPosition > triggerPoint) {
+        backToTop.classList.add("show");
+      } else {
+        backToTop.classList.remove("show");
+      }
+    });
+  });
+</script>
+<script src="https://backend.leadconnectorhq.com/appengine/loc/As99qqyDrwVnWjg9w9qB/pool/WSleOccLOiEA2I19YBdH/number_pool.js"></script>
+<script src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
