@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>West LA Implants — Dental Implants, All-on-4 &amp; Robotic Implant Surgery in Los Angeles</title>
+<meta name="description" content="West LA Implants is Dr. Tony Barriere's implant and cosmetic dentistry center on Wilshire Blvd, Los Angeles. Yomi robot-guided implant surgery, All-on-4 full arch, IV sedation and cosmetic dentistry under one roof.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/site.css">
+<!-- GSAP is vendored: Instatic's CSP is script-src 'self', so no CDN.
+     The runtime registers plugins at the END of <body>, never here. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- ======================================================================
+     NAV — fixed, with the reading-progress line and the chapter readout
+     ====================================================================== -->
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap--wide nav-in">
+    <a class="nav-logo" href="#arrival" aria-label="West LA Implants home">
+      <img src="media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#answer">Implants</a>
+      <a href="#precision">Technology</a>
+      <a href="#surgeon">Dr. Barriere</a>
+      <a href="#transformation">Results</a>
+      <a href="#invitation">Contact</a>
+      <div class="nav-readout" aria-hidden="true"><b id="navCh">00</b><span id="navName">Arrival</span><span class="bar" id="navBar"></span></div>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-phone" href="tel:+13106929316">(310) 692-9316</a>
+      <a class="btn btn-gold nav-cta magnetic" href="#invitation"><span>Request Consultation</span></a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <ul>
+    <li><a href="#answer">Implants</a></li>
+    <li><a href="#precision">Technology</a></li>
+    <li><a href="#surgeon">Dr. Barriere</a></li>
+    <li><a href="#transformation">Results</a></li>
+    <li><a href="#experience">The Experience</a></li>
+    <li><a href="#invitation">Contact</a></li>
+  </ul>
+  <div class="drawer-meta">
+    <a href="tel:+13106929316">New patients (310) 692-9316</a>
+    <span>12301 Wilshire Blvd, Suite 205 · Los Angeles, CA 90025</span>
+  </div>
+</div>
+
+<div id="smooth-wrapper"><div id="smooth-content">
+<main>
+
+<!-- ======================================================================
+     CHAPTER 00 — ARRIVAL
+     The practice's own b-roll: reception, CBCT suite, the Yomi robot, the
+     front desk, Emily, Leslie. Poster is a frame from the same footage.
+     ====================================================================== -->
+<section class="ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <div class="ar-bg">
+    <video class="ar-film" id="heroFilm" poster="media/img/still-reception-neon.jpg" muted loop playsinline preload="metadata"
+           data-src="media/video/hero-practice-1920.mp4" data-src-mobile="media/video/hero-practice-960.mp4"
+           aria-label="Inside West LA Implants: the reception, the 3D imaging suite and the Yomi surgical robot"></video>
+    <div class="ar-veil" id="heroVeil"></div>
+  </div>
+  <div class="wrap--wide ar-in">
+    <div class="ar-copy">
+      <div class="chapter-tag" data-anim="hide"><i></i><span>West LA Implants &middot; Wilshire Blvd, Los Angeles</span></div>
+      <h1 class="display" id="heroTitle" data-anim="hide">Advanced surgery. <em>Exceptional</em> standards.</h1>
+      <p class="lead ar-lead" id="heroLead" data-anim="hide">An implant and cosmetic dentistry center built around precision, comfort and the person in the chair.</p>
+      <div class="ar-actions" data-anim="hide">
+        <a class="btn magnetic" href="#invitation"><span>Request a Consultation</span></a>
+        <a class="textlink" href="#precision">See the technology <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+    <ul class="ar-meta" id="heroMeta" aria-label="At a glance">
+      <li data-anim="hide"><b>Yomi&reg;</b><span>Robot-guided implant surgery</span></li>
+      <li data-anim="hide"><b>3D CBCT</b><span>Every case planned digitally</span></li>
+      <li data-anim="hide"><b>IV Sedation</b><span>Comfort for complex care</span></li>
+      <li data-anim="hide"><b>1,000+ hrs</b><span>Continuing education</span></li>
+    </ul>
+  </div>
+  <div class="ar-cue" data-anim="hide"><span>Scroll</span><i></i></div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 01 — THE REALITY  (pinned, the statement is written by scroll)
+     ====================================================================== -->
+<section class="ch-reality" id="reality" data-chapter="1" data-chapter-name="The Reality">
+  <div class="re-bg" aria-hidden="true"><img id="realityImg" src="media/img/dental-xray.png" alt="" loading="lazy"></div>
+  <div class="wrap re-stage">
+    <div class="chapter-tag"><i></i><span>The Reality</span></div>
+    <p class="re-big serif" id="realityBig">Missing teeth. A loose denture. An implant that failed somewhere else. You have probably been told this is complicated.</p>
+    <div class="re-after" id="realityAfter">
+      <p>It is. Which is why it belongs with a dentist who does this every day, under one roof, with the tools to plan it before the first incision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 02 — THE ANSWER  (pinned horizontal journey through the work)
+     ====================================================================== -->
+<section class="ch-answer" id="answer" data-chapter="2" data-chapter-name="The Answer">
+  <div class="an-pin" id="answerPin">
+    <div class="an-head wrap--wide">
+      <div>
+        <div class="chapter-tag"><i></i><span>The Answer</span></div>
+        <h2 class="h2" id="answerTitle">Specialized care for <em>complex</em> smiles.</h2>
+      </div>
+      <div class="an-progress" aria-hidden="true"><span id="answerCount">01 / 06</span><i><b id="answerBar"></b></i></div>
+    </div>
+    <div class="an-track" id="answerTrack">
+      <article class="an-card">
+        <figure class="frame frame--tall"><img class="fp-70-40" src="media/img/still-doctor-xray-screen.jpg" alt="Dr. Barriere reviewing X-rays on the operatory screen" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">01</span><h3 class="h3">Dental Implants</h3><p>One tooth or several, planned in 3D and placed to last.</p></div>
+      </article>
+      <article class="an-card">
+        <figure class="frame frame--tall"><img class="fp-80-40" src="media/img/leslie-allon4-2.jpg" alt="Leslie with Dr. Barriere after her full-arch treatment" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">02</span><h3 class="h3">All-on-4&reg; Full Arch</h3><p>A fixed set of teeth on four implants. Often in a single day.</p></div>
+      </article>
+      <article class="an-card">
+        <figure class="frame frame--tall"><img src="media/img/still-yomi-closeup.jpg" alt="The Yomi robotic guidance system in the surgical suite" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">03</span><h3 class="h3">Yomi&reg; Robotic Surgery</h3><p>Robot-assisted guidance for the position, angle and depth of every implant.</p></div>
+      </article>
+      <article class="an-card">
+        <figure class="frame frame--tall"><img class="fp-80-50" src="media/img/sinus-lift-graphic.jpg" alt="Illustration of a sinus lift adding bone beneath the sinus" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">04</span><h3 class="h3">Bone &amp; Sinus Grafting</h3><p>Rebuilding the foundation first, when the jaw needs it.</p></div>
+      </article>
+      <article class="an-card">
+        <figure class="frame frame--tall"><img src="media/img/still-doctor-masked.jpg" alt="Dr. Barriere in surgery" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">05</span><h3 class="h3">IV Sedation</h3><p>Sleep through it. Wake up with the work done.</p></div>
+      </article>
+      <article class="an-card">
+        <figure class="frame frame--tall an-shot--mirror"><img src="media/img/still-emily-mirror.jpg" alt="Emily seeing her new smile in the mirror" loading="lazy"></figure>
+        <div class="an-card-copy"><span class="num">06</span><h3 class="h3">Cosmetic Dentistry</h3><p>Veneers, whitening and Invisalign&reg; for the finishing touch.</p></div>
+      </article>
+      <div class="an-end">
+        <p class="h3">Not sure which is right for you?</p>
+        <a class="btn magnetic" href="#invitation"><span>Ask Dr. Barriere</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 03 — PRECISION  (the signature moment: the iris opens on Yomi)
+     ====================================================================== -->
+<section class="ch-precision" id="precision" data-chapter="3" data-chapter-name="Precision">
+  <div class="pr-pin" id="precisionPin">
+    <div class="pr-film" id="precisionFilm">
+      <video poster="media/img/still-yomi-robot-team.jpg" muted loop playsinline preload="metadata" id="precisionVideo"
+             data-src="media/video/dr-barriere-yomi-1920.mp4"
+             aria-label="Dr. Barriere and his assistant operating the Yomi surgical robot"></video>
+      <div class="pr-ring" aria-hidden="true"></div>
+    </div>
+    <div class="pr-words" id="precisionWords" aria-label="Plan digitally. Place precisely. Restore beautifully.">
+      <span class="pr-word serif">Plan <em>digitally.</em></span>
+      <span class="pr-word serif">Place <em>precisely.</em></span>
+      <span class="pr-word serif">Restore <em>beautifully.</em></span>
+    </div>
+    <div class="pr-tag"><div class="chapter-tag"><i></i><span>Precision</span></div></div>
+  </div>
+
+  <div class="wrap pr-body">
+    <div class="pr-grid">
+      <div>
+        <div class="kicker">Technology that supports the plan</div>
+        <h2 class="h2" id="precisionTitle">The first robot built for implant surgery is in this room.</h2>
+        <p class="lead">Yomi&reg; guides the drill along the plan made from your own 3D scan. Diagnostics, planning, surgery and the final teeth all happen under one roof.</p>
+      </div>
+      <ul class="pr-list" id="precisionList">
+        <li><b>Yomi&reg;</b><span>Robotic implant guidance</span></li>
+        <li><b>CBCT</b><span>3D cone-beam imaging</span></li>
+        <li><b>Scan</b><span>Intraoral digital impressions</span></li>
+        <li><b>Print</b><span>3D-printed surgical guides</span></li>
+        <li><b>Mill</b><span>In-house milling</span></li>
+        <li><b>Laser</b><span>Soft-tissue laser dentistry</span></li>
+      </ul>
+    </div>
+    <div class="pr-strip">
+      <figure class="frame frame--wide pr-shot" data-wipe><img class="par" src="media/img/still-cbct-suite.jpg" alt="The CBCT imaging suite at West LA Implants" loading="lazy"></figure>
+      <figure class="frame frame--wide pr-shot" data-wipe><img class="par" src="media/img/barriere_dentalpractice_dentalimplant_westla2.jpg" alt="Dr. Barriere explaining a scan on screen" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 04 — THE SURGEON
+     ====================================================================== -->
+<section class="ch-surgeon" id="surgeon" data-chapter="4" data-chapter-name="The Surgeon">
+  <div class="wrap su-grid">
+    <figure class="su-portrait frame" id="surgeonPortrait">
+      <img src="media/img/tonybarrerie_headshot_dentist_westlaimplants_frontfacing.jpg" alt="Dr. Tony Barriere, DDS" loading="lazy">
+      <figcaption><b>Tony Barriere, DDS</b><span>Implant &amp; cosmetic dentist</span></figcaption>
+    </figure>
+    <div class="su-copy">
+      <div class="chapter-tag"><i></i><span>The Surgeon</span></div>
+      <h2 class="h2" id="surgeonTitle">Complex dentistry deserves <em>focused</em> experience.</h2>
+      <p class="lead">Dr. Barriere trained at The Ohio State University College of Dentistry and completed a yearlong surgical residency at NYU Langone Hospital. He has since logged more than a thousand hours of continuing education in implant and cosmetic dentistry.</p>
+      <ul class="su-creds" id="surgeonCreds">
+        <li><b>Ohio State</b><span>College of Dentistry</span></li>
+        <li><b>NYU Langone</b><span>Yearlong surgical residency</span></li>
+        <li><b>1,000+ hours</b><span>Continuing education</span></li>
+        <li><b>AACD &middot; AAID &middot; ADA</b><span>Memberships</span></li>
+      </ul>
+      <a class="textlink" href="#invitation">Meet with Dr. Barriere <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+  <div class="wrap--wide su-strip">
+    <figure class="frame su-shot su-shot--doctor" data-wipe><img src="media/img/barriere_dentalpatient_welcoming_westlaimplants3.jpg" alt="Dr. Barriere with a patient in the treatment room" loading="lazy"></figure>
+    <figure class="frame su-shot" data-wipe><img class="par" src="media/img/still-doctor-patient-hug.jpg" alt="Dr. Barriere greeting a patient" loading="lazy"></figure>
+    <figure class="frame su-shot" data-wipe><img class="par fp-90-30" src="media/img/staff.jpg" alt="The West LA Implants team" loading="lazy"></figure>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 05 — THE TRANSFORMATION  (light, pinned, scroll turns the page
+     through three real patients — every quote is the title of that
+     patient's own video on the practice's YouTube channel)
+     ====================================================================== -->
+<section class="ch-transformation" id="transformation" data-chapter="5" data-chapter-name="Transformation" data-theme="light">
+  <div class="tr-pin" id="transPin">
+    <div class="wrap tr-grid">
+      <div class="tr-media" id="transMedia">
+        <figure class="frame tr-shot is-first"><img src="media/img/still-leslie-smile-tablet.jpg" alt="Leslie holding up her new smile" loading="lazy"></figure>
+        <figure class="frame tr-shot tr-shot--emily"><img src="media/img/emily_dentalimplant_westlaimplant_barriere2.jpg" alt="Emily smiling after her crowns and dental implants" loading="lazy"></figure>
+        <figure class="frame tr-shot tr-shot--michael"><img src="media/img/michael_dentalpatient_reconstruction_barriere.jpg" alt="Michael after his full mouth reconstruction" loading="lazy"></figure>
+      </div>
+      <div class="tr-copy">
+        <div class="chapter-tag"><i></i><span>The Transformation</span></div>
+        <h2 class="h2">The result is bigger than a set of <em>teeth.</em></h2>
+        <div class="tr-stories" id="transStories">
+          <article class="tr-story is-first">
+            <blockquote class="serif">&ldquo;Full Arch All-On-4 gave me my confidence back.&rdquo;</blockquote>
+            <div class="tr-who"><b>Leslie</b><span>Full arch All-on-4&reg;</span></div>
+            <div class="tr-ba"><img src="media/img/case10_before_westlaimplants_leslie_barriere.jpg" alt="Leslie before" loading="lazy"><img src="media/img/case10_after_westlaimplants_leslie_barriere.jpg" alt="Leslie after" loading="lazy"></div>
+            <a class="textlink" href="https://www.youtube.com/watch?v=nH1ST1jo8WQ" target="_blank" rel="noopener">Watch Leslie&rsquo;s story <span class="arrow">&rarr;</span></a>
+          </article>
+          <article class="tr-story">
+            <blockquote class="serif">&ldquo;I felt like the old me because of my crowns and dental implants.&rdquo;</blockquote>
+            <div class="tr-who"><b>Emily</b><span>Crowns &amp; dental implants</span></div>
+            <div class="tr-ba"><img src="media/img/case11_before_westlaimplants_emily_barriere.jpg" alt="Emily before" loading="lazy"><img src="media/img/case11_after_westlaimplants_emily_barriere.jpg" alt="Emily after" loading="lazy"></div>
+            <a class="textlink" href="https://www.youtube.com/watch?v=4skcfz94ZS4" target="_blank" rel="noopener">Watch Emily&rsquo;s story <span class="arrow">&rarr;</span></a>
+          </article>
+          <article class="tr-story">
+            <blockquote class="serif">&ldquo;I have teeth again thanks to my full mouth reconstruction.&rdquo;</blockquote>
+            <div class="tr-who"><b>Michael</b><span>Full mouth reconstruction</span></div>
+            <div class="tr-ba"><img src="media/img/case12_before_westlaimplants_michael_barriere.jpg" alt="Michael before" loading="lazy"><img src="media/img/case12_after_westlaimplants_michael_barriere.jpg" alt="Michael after" loading="lazy"></div>
+            <a class="textlink" href="https://www.youtube.com/watch?v=SDVe8k_zQUE" target="_blank" rel="noopener">Watch Michael&rsquo;s story <span class="arrow">&rarr;</span></a>
+          </article>
+        </div>
+        <div class="tr-dots" aria-hidden="true"><i class="is-on"></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 06 — THE EXPERIENCE
+     ====================================================================== -->
+<section class="ch-experience" id="experience" data-chapter="6" data-chapter-name="The Experience">
+  <div class="ex-scene">
+  <div class="ex-bg" aria-hidden="true"><img class="par" id="experienceImg" src="media/img/still-reception-neon.jpg" alt="" loading="lazy"></div>
+  <div class="wrap ex-in">
+    <div class="ex-copy">
+      <div class="chapter-tag"><i></i><span>The Experience</span></div>
+      <h2 class="h2" id="experienceTitle">Advanced dentistry, without forgetting the <em>person</em> in the chair.</h2>
+      <p class="lead">Nervous patients are the rule here, not the exception. The visit is built to feel calm from the front door to the last appointment.</p>
+    </div>
+    <ul class="ex-list" id="experienceList">
+      <li><span>IV sedation</span></li>
+      <li><span>Blankets &amp; pillows</span></li>
+      <li><span>TV &amp; Netflix</span></li>
+      <li><span>Noise-cancelling headphones</span></li>
+      <li><span>English &amp; Spanish</span></li>
+      <li><span>Same-day emergency visits</span></li>
+    </ul>
+  </div>
+  </div>
+
+  <!-- second beat of the same chapter: the experience, in the patients' own
+       words. Velocity-reactive marquee of the Google reviews that appear on
+       the practice's current site. -->
+  <div class="ch-proof" id="proof">
+  <div class="wrap pf-head">
+    <div class="kicker">In their words</div>
+    <h2 class="h2" id="proofTitle">Our patients tell it <em>best.</em></h2>
+  </div>
+  <div class="pf-marquee" id="proofMarquee" aria-hidden="true">
+    <div class="pf-row" data-dir="1">
+      <div class="pf-set">
+        <span>&ldquo;He&rsquo;s on my team, advising me on my behalf.&rdquo; <b>Peter C.</b></span>
+        <span>&ldquo;West LA Implants feels like home.&rdquo; <b>Joshua F.</b></span>
+        <span>&ldquo;I actually look forward to going to the dentist.&rdquo; <b>Annie G.</b></span>
+        <span>&ldquo;I am driving from Central California for my implant.&rdquo; <b>Mike H.</b></span>
+      </div>
+      <div class="pf-set">
+        <span>&ldquo;He&rsquo;s on my team, advising me on my behalf.&rdquo; <b>Peter C.</b></span>
+        <span>&ldquo;West LA Implants feels like home.&rdquo; <b>Joshua F.</b></span>
+        <span>&ldquo;I actually look forward to going to the dentist.&rdquo; <b>Annie G.</b></span>
+        <span>&ldquo;I am driving from Central California for my implant.&rdquo; <b>Mike H.</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap pf-grid">
+    <blockquote class="pf-quote">
+      <p>&ldquo;Dr. Barriere is a dentist who sees a long-term vision for my dental health. He&rsquo;s on my team, advising me on my behalf, instead of just someone I visit for procedures.&rdquo;</p>
+      <footer>Peter Chang &middot; Google review</footer>
+    </blockquote>
+    <blockquote class="pf-quote">
+      <p>&ldquo;He is very careful with his implant technique. He makes sure the implant has plenty of time to heal into the jawbone. I am confident he will do a good job with the implant crown.&rdquo;</p>
+      <footer>Mike Hascats &middot; Google review</footer>
+    </blockquote>
+    <blockquote class="pf-quote">
+      <p>&ldquo;The hygienist is the most gentle and proficient on the west side. The front desk is incredibly organized, compassionate and professional.&rdquo;</p>
+      <footer>Annie Gigliotti &middot; Google review</footer>
+    </blockquote>
+  </div>
+  <div class="wrap pf-links">
+    <a class="textlink" href="https://www.google.com/maps?q=west+la+implants" target="_blank" rel="noopener">Read our Google reviews <span class="arrow">&rarr;</span></a>
+    <a class="textlink" href="https://www.yelp.com/biz/west-la-implants-los-angeles-3" target="_blank" rel="noopener">Yelp <span class="arrow">&rarr;</span></a>
+    <a class="textlink" href="https://www.youtube.com/@westlaimplants892" target="_blank" rel="noopener">Patient video library <span class="arrow">&rarr;</span></a>
+  </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CHAPTER 07 — THE INVITATION
+     ====================================================================== -->
+<section class="ch-invitation" id="invitation" data-chapter="7" data-chapter-name="Invitation">
+  <div class="in-bg" aria-hidden="true"><img class="par" src="media/img/footer_cta_barriere.jpg" alt="" loading="lazy"></div>
+  <div class="wrap in-grid">
+    <div class="in-copy">
+      <div class="chapter-tag"><i></i><span>The Invitation</span></div>
+      <h2 class="h2" id="inviteTitle">Make the first step feel <em>clear.</em></h2>
+      <p class="lead">A consultation covers candidacy, options, sedation, financing and timing. No pressure, no surprises.</p>
+      <div class="in-contact">
+        <div><b>New patients</b><a href="tel:+13106929316">(310) 692-9316</a></div>
+        <div><b>Current patients</b><a href="tel:+13104810111">(310) 481-0111</a></div>
+        <div><b>Visit</b><a href="https://www.google.com/maps?q=12301+Wilshire+Blvd+Suite+205+Los+Angeles+CA+90025" target="_blank" rel="noopener">12301 Wilshire Blvd, Suite 205<br>Los Angeles, CA 90025</a></div>
+        <div><b>Hours</b><span>Monday to Friday, 9am to 5pm<br>Same-day emergency appointments</span></div>
+      </div>
+    </div>
+    <form class="in-form" id="consultForm" action="#" method="post" novalidate>
+      <h3 class="h3">Request an implant consultation</h3>
+      <div class="in-fields">
+        <label><span>First name</span><input type="text" name="first" autocomplete="given-name" required></label>
+        <label><span>Last name</span><input type="text" name="last" autocomplete="family-name" required></label>
+        <label><span>Phone</span><input type="tel" name="phone" autocomplete="tel" required></label>
+        <label><span>Email</span><input type="email" name="email" autocomplete="email"></label>
+        <label class="full"><span>What can we help with?</span>
+          <select name="interest"><option>Dental implants</option><option>All-on-4 / full arch</option><option>Failing implant or loose denture</option><option>IV sedation</option><option>Veneers or cosmetic</option><option>Not sure yet</option></select>
+        </label>
+        <label class="full"><span>Preferred contact</span>
+          <select name="contact"><option>Phone</option><option>Text</option><option>Email</option></select>
+        </label>
+      </div>
+      <button class="btn btn-gold magnetic" type="submit"><span>Request Consultation</span></button>
+      <p class="small in-note">We reply within one business day. Financing options are reviewed at your consultation.</p>
+    </form>
+  </div>
+  <!-- the objections, answered where they land — copy carried over from the
+       client-approved concept -->
+  <div class="wrap in-faq" id="inviteFaq">
+    <div class="in-faq-head"><div class="kicker">Before you call</div><h3 class="h3">Confidence starts with good information.</h3></div>
+    <div class="faq">
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What makes West LA Implants different?</span><i></i></button><div class="faq-a"><p>Dr. Tony Barriere, DDS, trained at The Ohio State University College of Dentistry, completed a yearlong surgical residency at NYU Langone Hospital and has logged more than 1,000 hours of continuing education in implant and cosmetic dentistry. He plans and places implants with Yomi&reg; robotic guidance and 3D diagnostics, and the surgery, the restoration and the cosmetic work all happen under one roof.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Do you offer sedation?</span><i></i></button><div class="faq-a"><p>Yes. IV sedation is available for anxious patients and for longer, more involved appointments.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>Can you treat complex or failed cases?</span><i></i></button><div class="faq-a"><p>Severe bone loss, failing implants and full-mouth rehabilitation are the cases the practice is built around.</p></div></div>
+      <div class="faq-item"><button class="faq-q" type="button" aria-expanded="false"><span>What happens at the consultation?</span><i></i></button><div class="faq-a"><p>A 3D scan, an honest read on candidacy, your options, sedation, timing and financing, so you leave with a plan.</p></div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo nav-logo"><img src="media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span></div>
+        <p style="margin-top:1rem">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd. Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
+      </div>
+      <div>
+        <div class="footer-title">Los Angeles office</div>
+        <p>12301 Wilshire Blvd, Suite 205<br>Los Angeles, CA 90025<br><a href="tel:+13106929316">(310) 692-9316</a></p>
+      </div>
+      <div>
+        <div class="footer-title">Hours</div>
+        <p>Monday to Friday<br>9:00am to 5:00pm<br>Saturday &amp; Sunday closed</p>
+      </div>
+      <div>
+        <div class="footer-title">Follow</div>
+        <ul>
+          <li><a href="https://www.instagram.com/west_la_implants/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/WestLAImplants1/" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.youtube.com/@westlaimplants892" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.yelp.com/biz/west-la-implants-los-angeles-3" target="_blank" rel="noopener">Yelp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; West LA Implants &middot; Tony Barriere, DDS</span>
+      <span>Privacy Policy &middot; Accessibility</span>
+    </div>
+  </div>
+</footer>
+
+</div></div><!-- /smooth -->
+
+<div class="mobile-bar">
+  <a class="btn btn-ghost" href="tel:+13106929316"><span>Call (310) 692-9316</span></a>
+  <a class="btn btn-gold" href="#invitation"><span>Request Consultation</span></a>
+</div>
+
+<script src="assets/site.js"></script>
+</body>
+</html>

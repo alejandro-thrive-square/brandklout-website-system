@@ -40,7 +40,12 @@ for this client yet.
   WordPress, hosting, DNS, or Google account access is granted or requested.
 - **Webflow site**: none recorded. Must be confirmed via `list_sites` before any write.
 - **Asana task**: none.
-- **Staging / platform accounts**: none.
+- **Instatic instance (ours, provisioned 2026-09-10)**: `https://west-la-implants-production.up.railway.app`
+  — Railway workspace Brandklout, project `a55b5cac-b92d-4653-a9ff-6da522a5c89c`, service "West LA Implants",
+  environment production. Owner account is the shared Instatic login (`[west-la-implants]` in the master
+  credential file). Writes go through `workflows/21-instatic-upload/` with the link dir in its `.tmp/`;
+  never through a sibling client's link dir — there are three Stone projects on the same account.
+- **Staging / platform accounts**: none beyond the above.
 
 ## Allowed Operations
 - Public, unauthenticated research and scraping of the client's own live site, including downloading
@@ -53,8 +58,8 @@ for this client yet.
   analytics, Google Business Profile, CRM, or ad account.
 - **Do not touch another Brandklout client's site.** The shared grant can reach all of them; this
   folder authorizes exactly one, and right now that one is not yet identified.
-- **Do not publish.** Local design approval comes first, then a Webflow build, and publishing is a
-  separate explicit go-ahead.
+- **Publishing to the Instatic review host is allowed** (it is ours, not the client's). Connecting
+  `westlaimplants.com` or any client domain to it is a separate explicit go-ahead.
 - Do not create MCP server instances for this client on your own initiative. A per-client Webflow
   instance authorizes against the same partner workspace and isolates nothing — see
   [ACCESS_MODEL.md](../../../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).

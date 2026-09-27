@@ -31,7 +31,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 ## Technical Setup
 - **Executor status**: Placeholder.
 - **Future automation**: Verify DNS records, publish via Webflow API, run smoke tests, and store publish receipts.
-- **Likely integrations**: Webflow API, DNS tools, registrar APIs, [Playwright Browser Tool](../../../../../manage/browser-tools/playwright-browser/playwright-browser.md).
+- **Likely integrations**: Webflow API, DNS tools, registrar APIs, [Playwright Browser Tool](../../../manage/browser-tools/playwright-browser/playwright-browser.md).
 
 ## Output Artifacts
 - `deliver/process/09-launch/.tmp/preflight/old-site-snapshot/`
@@ -41,7 +41,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 - `deliver/process/09-launch/.tmp/post-launch-monitoring.md` (migration only)
 
 ## Version Control
-- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
 - **Branch naming**: `deliver/[client-name]-launch-<change>` once cloned into a client folder.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.
