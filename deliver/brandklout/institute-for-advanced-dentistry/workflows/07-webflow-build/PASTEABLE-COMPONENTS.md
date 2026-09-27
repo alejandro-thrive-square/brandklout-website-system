@@ -238,5 +238,5 @@ control when the count moves.
 ## Version Control
 
 Follows the root-level version control rules in
-[SYSTEM_RULES.md — Section 4](../../../../../SYSTEM_RULES.md). Update this file
+[SYSTEM_RULES.md — Section 4](../../../SYSTEM_RULES.md). Update this file
 whenever the component pipeline changes (Documentation Integrity Rule).

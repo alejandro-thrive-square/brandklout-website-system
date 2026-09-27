@@ -37,7 +37,7 @@ This is currently a documented manual structure process. The Python executor and
     - Record the current Git commit as `process_baseline_commit`. This identifies the canonical
       `deliver/process/` version from which the client workflow instances were copied.
     - **Estimated duration**: compute from the handoff `pages_or_templates` count using the per-page formula in PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository): `pages × 2 days` for full-build offers, `pages × 1 day` for Figma-to-Webflow. Surface this as the `timeline` field in `project-overview.md`. If the handoff `timeline` differs from the formula output, record both and flag the deviation in `open_questions`.
-15. If any scoped workflow uses MCPs, add `deliver/[client-name]/docs/mcp-access.md` using [MCP Access Model](../../../../../mcp-servers/ACCESS_MODEL.md) and the relevant profile from `mcp-servers/profiles/`.
+15. If any scoped workflow uses MCPs, add `deliver/[client-name]/docs/mcp-access.md` using [MCP Access Model](../../../mcp-servers/ACCESS_MODEL.md) and the relevant profile from `mcp-servers/profiles/`.
 16. Before dispatching the first phase, verify that the client branch contains the recorded baseline,
     every required lightweight reference exists in that worktree, and ignored media has been synced
     there. Do not reference untracked files in the root checkout by absolute path.
@@ -83,7 +83,7 @@ This is currently a documented manual structure process. The Python executor and
 - `deliver/[client-name]/docs/mcp-access.md` (when MCPs are in scope)
 
 ## Version Control
-- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
 - **Branch naming**: `deliver/process-<change>` for changes to this template workflow.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.

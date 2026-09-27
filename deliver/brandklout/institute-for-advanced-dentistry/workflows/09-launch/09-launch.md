@@ -7,7 +7,7 @@ After QA is approved, we connect the domain, confirm hosting and SSL, publish th
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes, Vercel for the AI Claude/Vercel/Airtable route, and Instatic for sites delivered on that platform — Instatic adds a mandatory origin step, see [`20-instatic-domain-origins`](../../../../process/20-instatic-domain-origins/20-instatic-domain-origins.md).
+Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes, Vercel for the AI Claude/Vercel/Airtable route, and Instatic for sites delivered on that platform — Instatic adds a mandatory origin step, see [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md).
 For improvement work, this module is used only when `15-improvement-intake-audit` defines publishing, DNS, or a production release as in scope.
 
 ## Inputs From Sales / Previous Phase
@@ -20,7 +20,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 2. Update DNS records and connect the custom domain in the selected hosting platform.
 
 > [!IMPORTANT]
-> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any state-changing request whose `Origin` is not in the host's `PUBLIC_ORIGIN` — and logging in is one — so a domain moved without that env var produces a login page at the new address that renders fine and then refuses the login with 403 `invalid origin`, which reads like a permissions or password problem and is neither. Run [`20-instatic-domain-origins`](../../../../process/20-instatic-domain-origins/20-instatic-domain-origins.md) as part of this step. Setting the variable is not enough on its own — it is read once at boot, so the service must redeploy and you must confirm a new deployment actually appeared. Do not send anyone an admin link until `node check-origins.mjs --all` is clean against the **running** server.
+> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any state-changing request whose `Origin` is not in the host's `PUBLIC_ORIGIN` — and logging in is one — so a domain moved without that env var produces a login page at the new address that renders fine and then refuses the login with 403 `invalid origin`, which reads like a permissions or password problem and is neither. Run [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md) as part of this step. Setting the variable is not enough on its own — it is read once at boot, so the service must redeploy and you must confirm a new deployment actually appeared. Do not send anyone an admin link until `node check-origins.mjs --all` is clean against the **running** server.
 3. Publish or promote the approved build to production.
 4. Smoke test priority pages, sitemap, robots.txt, forms, and primary CTAs.
 
@@ -34,7 +34,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 ## Technical Setup
 - **Executor status**: Placeholder.
 - **Future automation**: Verify DNS records, publish via Webflow API, run smoke tests, and store publish receipts.
-- **Likely integrations**: Webflow API, DNS tools, registrar APIs, [Playwright Browser Tool](../../../../../manage/browser-tools/playwright-browser/playwright-browser.md).
+- **Likely integrations**: Webflow API, DNS tools, registrar APIs, [Playwright Browser Tool](../../../manage/browser-tools/playwright-browser/playwright-browser.md).
 
 ## Output Artifacts
 - `deliver/process/09-launch/.tmp/preflight/old-site-snapshot/`
@@ -44,7 +44,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 - `deliver/process/09-launch/.tmp/post-launch-monitoring.md` (migration only)
 
 ## Version Control
-- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
 - **Branch naming**: `deliver/[client-name]-launch-<change>` once cloned into a client folder.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.

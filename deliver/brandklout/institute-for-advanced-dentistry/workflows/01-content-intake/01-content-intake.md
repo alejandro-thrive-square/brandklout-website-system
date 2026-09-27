@@ -52,8 +52,9 @@ Rank by criterion 1 first; it decides whether a gap is a gap *for this client*. 
 - `deliver/[client-name]/docs/content-intake-approval.md` (final, persisted)
 
 ## Version Control
-- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
+- **Current-site scrape is local-only**: the bulk output of a scrape (`current-site-scrape/site/`, `raw-html/`, `screenshots/`, `media-library/`) is gitignored and is not synced anywhere, so a worktree cleanup or re-create deletes it. The scripts and manifests are committed, so rebuild it from `current-site-scrape/scrapers/` with `npm install`, then `node mirror.mjs`, `node screenshots.mjs` (use `--shard 0/2` and `--shard 1/2` in parallel), `node vimeo.mjs`, `node inventory.mjs`, and finally `node verify-mirror.mjs > ../verify-mirror.log` — it resolves every local reference on every page and stylesheet and lists what is missing, which is the proof the mirror is complete before anything (e.g. the Instatic clone in `21-instatic-upload`) is built from it. `mirror.mjs --no-media` refreshes pages and page assets when WordPress changes without re-pulling the media library.
 - **Branch naming**: `deliver/[client-name]-content-intake-<change>` once cloned into a client folder.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.
 
