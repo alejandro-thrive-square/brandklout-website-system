@@ -180,3 +180,7 @@ nul
 
 # Asana pulls are per-person task dumps, regenerated on demand
 deliver/scripts/output/
+
+# Run outputs recovered from the per-worktree deliver/process copies on 2026-09-27 (backups, bundles,
+# logs). Too large or too raw for git; scripts/assets.mjs keeps them in R2.
+deliver/brandklout/*/process-outputs/
