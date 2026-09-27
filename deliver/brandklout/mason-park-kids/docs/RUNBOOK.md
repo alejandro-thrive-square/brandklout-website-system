@@ -29,6 +29,13 @@ SiteGround vhost is suspended and SSH is refused. To update the old site, redepl
 in `PUBLIC_ORIGIN`. Staging has no `noindex` and no `robots.txt`.
 See `runbook/2026-09-14-domain-masonparkpediatricdental-live.md`.
 
+**2026-09-27: STAGING IS ITS OWN INSTANCE.** `staging.masonparkpediatricdental.com` is a separate
+Railway environment (`staging`, own volume and database), seeded from production, de-indexed at the
+edge, with the same logins. **This worktree's `INSTATIC_BASE_URL` is staging; every chain publishes
+there.** Promote to production by re-running the same chain with `PROMOTE=production
+INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app`. The paragraphs below that say "staging and
+production are the same instance" are history. See `runbook/2026-09-27-staging-environment.md`.
+
 **2026-09-26: BugHerd round five, #174-#433. 242 of 252 closed and live on production.** Photos
 from the practice Drive (`_drive/`, `DRIVE` pool in `prep-images.py`); the "Credentialed by" strip
 is on the homepage only; every "Suite 104B" caption is gone; ~70 copy edits; SDF on fillings and

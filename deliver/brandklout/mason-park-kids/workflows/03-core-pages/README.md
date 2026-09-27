@@ -429,6 +429,19 @@ and some of those were written for adults. The old URLs were `/<slug>/`; the new
 
 ## Instatic import
 
+> [!IMPORTANT]
+> **Two instances since 2026-09-27.** `INSTATIC_BASE_URL` (from the master `[mason-park-kids]`
+> section) is **staging**, `https://staging.masonparkpediatricdental.com`: its own Railway
+> environment, volume and database. Every chain below runs against staging by default, and
+> `railway-ssh.mjs` picks the matching container. **Production is reached only on purpose:**
+> `insta.mjs` refuses a production host unless `PROMOTE=production` is set. To promote, check
+> the change on staging, then run the SAME chain with
+> `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app bash publish-XXXX.sh`.
+> `upload-media.mjs` rebuilds `instatic-media-map.json` against whichever instance it is pointed
+> at, so the map is always right for that run. `configure-seo.mjs` and `populate-seo.mjs` name
+> the staging host on staging and turn its canonical off; never copy plugin settings from staging
+> to production. See `docs/runbook/2026-09-27-staging-environment.md`.
+
 ```bash
 cd .tmp && npm i                                   # once: playwright-core
 node list-site.mjs                                  # what is there

@@ -40,7 +40,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const HOME = path.resolve(HERE, "..", "home");
 const MIRROR = path.resolve(HERE, "..", "..", "01-site-recovery", ".tmp", "recovered", "mirror");
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-const SITE = "https://masonparkpediatricdental.com"; // 2026-09-24 launch (was pediatricdentistkatytx.com)
+const SITE = /\/\/staging\./.test(BASE) ? "https://staging.masonparkpediatricdental.com" : "https://masonparkpediatricdental.com"; // staging names itself (process 21)
 const DRY = process.argv.includes("--dry-run");
 const MAX = 158; // what Google renders before it truncates
 

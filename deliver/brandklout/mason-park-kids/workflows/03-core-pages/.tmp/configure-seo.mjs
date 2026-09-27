@@ -36,13 +36,13 @@
  * > the domain cutover, along with open item 1 in the README - the suite and
  * > the telephone number are still unconfirmed by the practice.
  */
-import { api } from "./insta.mjs";
+import { api, BASE } from "./insta.mjs";
 
 const APPLY = process.argv.includes("--apply");
 
 // 2026-09-24: the production launch. masonparkpediatricdental.com is the live domain on this
 // instance; pediatricdentistkatytx.com 301s to it (Cloudflare Worker, once its NS move).
-const SITE = "https://masonparkpediatricdental.com";
+const SITE = /\/\/staging\./.test(BASE) ? "https://staging.masonparkpediatricdental.com" : "https://masonparkpediatricdental.com"; // staging names itself (process 21)
 const NAME = "Mason Park Dental for Kids";
 const LOGO = "/uploads/Cij5leM8-W0W5EUmwh-vA-logo.png";
 // The whole team in the waiting room. The share card is the first thing a
@@ -98,7 +98,7 @@ const WANT = {
     // the page's own wherever the row has one - which is what populate-seo.mjs
     // is for.
     syncMetaDescription: true,
-    emitCanonical: true,
+    emitCanonical: !/\/\/staging\./.test(BASE), // never a canonical on the noindex staging host (process 21)
   },
   "brandklout.aeo-schema": {
     enabled: true,

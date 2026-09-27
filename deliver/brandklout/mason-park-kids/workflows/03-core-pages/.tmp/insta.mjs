@@ -56,8 +56,13 @@ if (!BASE) throw new Error("INSTATIC_BASE_URL is not set - refusing to guess a t
 // A misaimed run writes eleven pages into the wrong client's CMS. The parent
 // practice's hosts spell the name without "kids"; this guard wants the
 // pediatric instance and nothing else.
-if (!/(mason-park-kids|pediatricdentistkatytx)/i.test(BASE)) {
+if (!/(mason-park-kids|pediatricdentistkatytx|masonparkpediatricdental)/i.test(BASE)) {
   throw new Error(`INSTATIC_BASE_URL is ${BASE}, which is not the Mason Park Kids instance. Refusing to run.`);
+}
+// Since 2026-09-27 staging is its own instance and the default target. Production is reached
+// only on purpose: PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app
+if (!/\/\/staging\./.test(BASE) && process.env.PROMOTE !== "production") {
+  throw new Error(`INSTATIC_BASE_URL is production (${BASE}). Work on staging; to promote, set PROMOTE=production.`);
 }
 
 const SESSION_FILE = path.join(HERE, `.session-${BASE.replace(/^https?:\/\//, "").replace(/[^a-z0-9.-]/gi, "_")}`);
@@ -146,8 +151,24 @@ export const whoami = () => api("GET", "/admin/api/cms/me");
 export const getSite = () => api("GET", "/admin/api/cms/site");
 export const getPages = () => api("GET", "/admin/api/cms/pages");
 export const listMedia = () => api("GET", "/admin/api/cms/media");
-export const publish = () => api("POST", "/admin/api/cms/publish", {});
 export const publishStatus = () => api("GET", "/admin/api/cms/publish/status");
+// Staging is behind Cloudflare, which cuts a response off at 100 s with a 502/524 while the
+// server finishes the publish (2026-09-27). On that, wait for the status to show a newer
+// publish that matches the draft, instead of failing a chain that actually worked.
+export const publish = async () => {
+  const before = (await publishStatus()).lastPublishedAt ?? "";
+  try { return await api("POST", "/admin/api/cms/publish", {}); }
+  catch (e) {
+    if (!/-> (502|503|504|520|522|524)\b/.test(e.message)) throw e;
+    console.log(`  publish response cut off (${e.message.match(/-> (\d+)/)[1]}); waiting for the server to finish`);
+    for (let i = 0; i < 60; i++) {
+      await new Promise((r) => setTimeout(r, 10000));
+      const s = await publishStatus().catch(() => null);
+      if (s && (s.lastPublishedAt ?? "") > before && s.draftMatchesPublished) return { publishedPages: s.publishedPages, via: "status" };
+    }
+    throw e;
+  }
+};
 export async function saveShell(shell, shellBaseSeq) {
   return api("PUT", "/admin/api/cms/site-document", {
     mode: "incremental", site: shell, changedPages: [], deletedPageIds: [],

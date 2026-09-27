@@ -4,7 +4,7 @@
 // GraphQL takes the CLI's OAuth token (~/.railway/config.json user.accessToken); run
 // `railway whoami` first if it says Not Authorized.
 import fs from 'node:fs'; import os from 'node:os'; import path from 'node:path';
-import { PROJECT, ENVIRONMENT, SERVICE } from './railway-ssh.mjs';
+import { PROJECT, PRODUCTION as ENVIRONMENT, SERVICE } from './railway-ssh.mjs';
 const tok = JSON.parse(fs.readFileSync(path.join(os.homedir(), '.railway', 'config.json'), 'utf8')).user.accessToken;
 const gql = async (query, variables) => {
   const r = await fetch('https://backboard.railway.com/graphql/v2', { method: 'POST', headers: { Authorization: `Bearer ${tok}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ query, variables }) });
