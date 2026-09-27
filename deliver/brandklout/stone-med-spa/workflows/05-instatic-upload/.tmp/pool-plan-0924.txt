@@ -1,0 +1,6 @@
+https://westlaketxmedspa.com
+  siteScripts     CHANGE  "https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js\nhttps://app.termly.io/resource-blocker/1f62293e-6b6c-4599-95fa-b975654b6a3a?autoBlock=off\nhttps://backend.leadconnectorhq.com/appengine/loc/hNRZyhDNM7ZTpBZx63xO/pool/vHDCe45MFTjdydJul0cd/number_pool.js\nhttps://backend.leadconnectorhq.com/appengine/js/user_session.js"
+  connectOrigins  CHANGE  "https://us.consent.api.termly.io\nhttps://services.leadconnectorhq.com\nhttps://services.msgsndr.com"
+
+plan only — pass --apply
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 94

@@ -1,6 +1,6 @@
 {
   "base": "https://staging.westlaketxmedspa.com",
-  "uploadedAt": "2026-09-23T14:55:25.420Z",
+  "uploadedAt": "2026-09-24T22:03:49.218Z",
   "map": {
     "cat-nonsurgical-tall.webp": {
       "id": "6XjI2lnbPtGdLSU4Fd9s1",
@@ -419,10 +419,8 @@
     "staff-brooke-bright.webp": {
       "id": "Va8yRjGI0tWHjphcYDgyq",
       "url": "/uploads/OoQT9nKUJLpgziu16V7by-staff-brooke-bright.webp",
-      "uploadedAs": "staff-brooke-bright.webp",
-      "width": 800,
-      "height": 1000,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "staff-brooke-bright.webp"
     },
     "staff-brooke.webp": {
       "id": "jQ_KwrYcy8wznBrWEdLaO",
@@ -453,6 +451,14 @@
       "url": "/uploads/SFR_kDcyf-w3jsu3NYS7U-staff-lv.webp",
       "reused": true,
       "uploadedAs": "staff-lv.webp"
+    },
+    "stone-treatment-room.webp": {
+      "id": "ft3fN3mCDuVKRS6DN5LZ9",
+      "url": "/uploads/WDbE-70tOmHtPdeUbeu9P-stone-treatment-room.webp",
+      "uploadedAs": "stone-treatment-room.webp",
+      "width": 1308,
+      "height": 736,
+      "variants": 5
     },
     "tex-carrara.webp": {
       "id": "4jow3KdTh7e4gnYeT17M8",
