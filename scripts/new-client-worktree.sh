@@ -77,12 +77,12 @@ BRANCH="${BRANCH:-bk-$CLIENT}"
 # beside nothing else (it did, for bk-brandklout-website on 2026-09-11).
 WT_PATH="${WT_PATH:-${ORCA_WORKSPACES:-$HOME/orca/workspaces}/$(basename "$MAIN")/$BRANCH}"
 
-# Shared surfaces every client build reads: the process library, the pillar's own
-# docs and scripts, tooling, and MCP config.
+# Shared surfaces every client build reads: deliver/docs and deliver/scripts, tooling and MCP
+# config. No deliver/process: the client folder holds its own copy of each started scenario, and
+# scripts/scenario.mjs refreshes it from the checkout of main (the process is fixed only there).
 CONE=(
-  "deliver/process"
-  "$PILLAR/docs"
-  "$PILLAR/scripts"
+  "deliver/docs"
+  "deliver/scripts"
   "$CLIENT_DIR"
   "scripts"
   "mcp-servers"

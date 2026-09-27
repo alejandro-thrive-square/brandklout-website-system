@@ -50,6 +50,8 @@ board draws this).
   copies the scenario's step folders and toolkits into the client folder and records the commit.
 - **Work in the step folder, write only to its `output/`.** Read the step directive first, then only
   the tools it names. Scripts run from the step folder and write to `./output`.
+- **Client worktrees do not check out `deliver/process/`.** `scenario.mjs` reads it from the
+  checkout of `main`, so a finding is fixed there once and reaches every client through `update`.
 - **Fix the process on main, never in a client copy.** A directive, script or toolkit change is a
   system commit on main; clients receive it with `node scripts/scenario.mjs update <client>`, which
   refreshes directives and executables and never touches `output/`. `scenario.mjs status <client>`

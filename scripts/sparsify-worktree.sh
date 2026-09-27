@@ -130,9 +130,8 @@ if [[ ${#MATCHES[@]} -eq 1 ]]; then
 fi
 
 CONE=(
-  "deliver/process"
-  "$PILLAR/docs"
-  "$PILLAR/scripts"
+  "deliver/docs"
+  "deliver/scripts"
   "scripts"
   "mcp-servers"
   ".claude"

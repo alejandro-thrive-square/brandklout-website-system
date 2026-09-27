@@ -29,7 +29,16 @@ import fs from 'node:fs'
 import path from 'node:path'
 
 const ROOT = execSync('git rev-parse --show-toplevel', { encoding: 'utf8' }).trim()
-const PROCESS = path.join(ROOT, 'deliver', 'process')
+// Client worktrees check out no deliver/process/ (sparse, since 2026-09-27): the process is read from
+// the checkout of main, so a client copy is always refreshed from the one place it is fixed.
+const mainCheckout = () => {
+  const list = execSync('git worktree list --porcelain', { encoding: 'utf8' }).split(/\r?\n\r?\n/)
+  const hit = list.find((b) => /^branch refs\/heads\/main$/m.test(b))
+  return hit ? hit.match(/^worktree (.+)$/m)[1] : null
+}
+const PROCESS_ROOT = fs.existsSync(path.join(ROOT, 'deliver', 'process')) ? ROOT : mainCheckout()
+if (!PROCESS_ROOT) throw new Error('no deliver/process here and no checkout of main to read it from')
+const PROCESS = path.join(PROCESS_ROOT, 'deliver', 'process')
 const CLIENTS = path.join(ROOT, 'deliver', 'brandklout')
 const SHARED = new Set()   // deliver/brandklout/ holds client folders only (docs and scripts moved to deliver/ on 2026-09-23)
 const SKIP = new Set(['output', 'node_modules', '.tmp', '__pycache__'])
@@ -37,7 +46,7 @@ const SKIP = new Set(['output', 'node_modules', '.tmp', '__pycache__'])
 const [cmd, clientArg, scenArg] = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const DRY = process.argv.includes('--dry')
 const today = new Date().toISOString().slice(0, 10)
-const head = () => { try { return execSync('git rev-parse --short HEAD', { cwd: ROOT, encoding: 'utf8' }).trim() } catch { return 'unknown' } }
+const head = () => { try { return execSync('git rev-parse --short HEAD', { cwd: PROCESS_ROOT, encoding: 'utf8' }).trim() } catch { return 'unknown' } }
 
 const scenarios = () => fs.readdirSync(PROCESS).filter((d) => /^scenario-\d+-/.test(d)).sort()
 function resolveScenario(arg) {

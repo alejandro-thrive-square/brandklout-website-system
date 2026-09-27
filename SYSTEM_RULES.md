@@ -172,8 +172,10 @@ bash scripts/new-client-worktree.sh mason-park              # 722 files instead 
 bash scripts/new-client-worktree.sh newclient --dry-run     # print the plan first
 ```
 
-The cone is `deliver/process` + the pillar's `docs/` and `scripts/` + the client folder + `scripts`,
-`mcp-servers`, `.claude`. **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
+The cone is the client folder + `deliver/docs`, `deliver/scripts`, `scripts`, `mcp-servers`, `.claude`.
+**`deliver/process/` is left out on purpose (since 2026-09-27):** the client folder carries its own
+copy of each scenario it started, and `node scripts/scenario.mjs update <client>` refreshes it from
+the checkout of `main`, the only place the process is fixed. **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
 `AGENTS.md`, `SYSTEM_RULES.md` and `deliver/DELIVER_SYSTEM_RULES.md` arrive without being listed —
 agents still get their directives. An unknown slug is treated as a **new** client under
 `deliver/brandklout/`, since the folder does not exist until the agent creates it.
