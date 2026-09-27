@@ -1,0 +1,29 @@
+{
+  "probedAt": "2026-08-27T20:16:38.104Z",
+  "site": "https://web.archive.org/cdx/search/cdx?url=pediatricdentistkatytx.com&matchType=domain&fl=original,timestamp,statuscode&collapse=urlkey&filter=mimetype:text/html&limit=400",
+  "wallPassed": true,
+  "report": {
+    "url": "chrome-error://chromewebdata/",
+    "title": "web.archive.org",
+    "generator": null,
+    "htmlBytes": 188660,
+    "textChars": 223,
+    "textHead": "No se puede acceder a este sitio\n\nSe ha restablecido la conexión.\n\nIntenta:\n\nComprobar la conexión.\nComprobar el proxy y el firewall.\nEjecución del Diagnóstico de red de Windows\nERR_CONNECTION_RESET\nVolver a cargar\nDetalles",
+    "h1": [
+      "No se puede acceder a este sitio"
+    ],
+    "linksTotal": 2,
+    "internalLinks": 0,
+    "internalSample": [],
+    "images": 2,
+    "iframes": [],
+    "isWordPress": false,
+    "ioc": {
+      "overlay": false,
+      "yourbodybydesign": false,
+      "maxZ": false,
+      "cdnSbs": false
+    }
+  },
+  "topResponses": []
+}

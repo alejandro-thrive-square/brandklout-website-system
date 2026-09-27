@@ -1,0 +1,9 @@
+{
+  "name": "mason-park-kids-core-tmp",
+  "private": true,
+  "type": "module",
+  "description": "Tooling for home/: shot.mjs renders it, check.mjs reads it, the import scripts ship it to Instatic. home/ opens from file:// with none of this installed.",
+  "dependencies": {
+    "playwright-core": "1.49.1"
+  }
+}

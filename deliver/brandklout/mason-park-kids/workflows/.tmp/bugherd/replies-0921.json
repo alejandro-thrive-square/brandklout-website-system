@@ -1,0 +1,57 @@
+[
+  {
+    "n": 29,
+    "done": true,
+    "text": "Done. The map was pointing at \"Mason Park Dental - Katy Dentist\" (suite 104A, the adult practice). It now points at \"Mason Park Dental for Kids - Pediatric Dentist Katy TX\", suite 104B, the listing your link goes to. Changed on all 215 pages, not just this one, and the \"Get directions\" link beside it now opens turn-by-turn navigation to the pediatric listing rather than to a bare street address. The address links in the footer and in the top bar go to the same listing."
+  },
+  {
+    "n": 30,
+    "done": true,
+    "text": "Done. Hours now read Monday to Thursday 9am to 6pm, Friday to Sunday closed, everywhere they appear: the top bar, this panel, the footer list, the hours table on the Contact page, the Call card on the Contact page, and the opening-hours data search engines read. That is 215 pages. See #39, which is the same change."
+  },
+  {
+    "n": 31,
+    "done": true,
+    "text": "Done. The card now reads: \"Parents are always welcome to accompany their child during the first visit and at checkups. Nobody is sent to the waiting room.\""
+  },
+  {
+    "n": 33,
+    "done": true,
+    "text": "Done, and it was a bug rather than a choice. That label is meant to be white on the copper; a more specific rule elsewhere in the stylesheet was overriding it with the body grey, which measured 1.3:1 against the copper - well under the 4.5:1 accessibility minimum. It is white now, 5.0:1. We also added a check that sweeps every page for the same kind of override, so it cannot happen quietly again; nothing else on the site was affected."
+  },
+  {
+    "n": 34,
+    "done": false,
+    "text": "We need one thing from you to build this. The form itself is ready - layout, fields and placement on the Contact page - but a form has to send the enquiry somewhere, and for your other work that destination is GoHighLevel. We have no GHL form for Mason Park Kids on record. Send us the GHL form or survey embed link for this practice and it goes live in the same day. If you would rather the enquiries went straight to office@masonparkdental.com instead of into the CRM, say so and we will wire it that way. We have deliberately not published an empty form panel in the meantime."
+  },
+  {
+    "n": 35,
+    "done": true,
+    "text": "Done. It now reads: \"Free parking at the door, and the suite is on the ground floor. Call us, email us, or request a time online, whichever is easiest.\" Tell us if you would rather it said something different - there was no direction on the note, so this is our read of what was awkward about it."
+  },
+  {
+    "n": 36,
+    "done": true,
+    "text": "Done. The address on the \"Come in\" card is now a link, and there is a \"Get directions\" link under it. Both open Google Maps navigation to the pediatric listing from wherever the visitor is."
+  },
+  {
+    "n": 37,
+    "done": true,
+    "text": "Done. The Note column is gone; the table is now Day and Open only. The notes it carried described the old split hours (\"the late day\", \"the early day\"), which no longer applied once the hours were corrected in #30 and #39."
+  },
+  {
+    "n": 38,
+    "done": false,
+    "text": "Changed, but we would like you to confirm it. Your screenshot shows a single darkened pixel row across the button, two pixels above its bottom edge. That lands exactly on the one place anything can paint there: the dark fill that slides up on hover, which sits parked just below the button at rest. We could not reproduce it in testing - we rendered that button at 1032 different sizes across 8 display scales and it never appeared - so this looks like your Mac's display scaling rounding the park a fraction of a pixel short. We have moved the parked fill further out of frame, which costs nothing and removes the possibility. Please re-check on staging once this round is published and tell us if the line is still there; if it is, we will need a fresh screenshot with the accessibility widget turned off, because that widget was resizing type on the page when you took this one."
+  },
+  {
+    "n": 39,
+    "done": true,
+    "text": "Done, and checked throughout. Monday to Thursday 9am to 6pm, Friday to Sunday closed. Corrected in all six places the hours appear: the top bar on every page, the Contact page's hours table, the Call card, the invitation panel at the foot of every page, the footer's day-by-day list, and the structured opening-hours data search engines read. 215 pages. Please confirm those are the right hours before we go to production, since they are now also what Google will be told."
+  },
+  {
+    "n": 40,
+    "done": true,
+    "text": "Done. Same change as #29: the map on the Contact page, and on every other page, now shows \"Mason Park Dental for Kids - Pediatric Dentist Katy TX\" at suite 104B instead of the adult practice at 104A."
+  }
+]
