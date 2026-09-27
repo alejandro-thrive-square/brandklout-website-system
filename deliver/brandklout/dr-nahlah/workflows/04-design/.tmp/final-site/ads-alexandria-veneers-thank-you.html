@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Request Received | Smile Evaluation | Dr. Nahlah, Alexandria, VA</title>
+<meta name="description" content="Your smile evaluation request has reached the practice. Here is what happens next, and how to reach the Alexandria office directly if it cannot wait.">
+<meta name="robots" content="noindex, follow">
+<meta property="og:title" content="Request received | Veneers | Dr. Nahlah, Alexandria, VA">
+<meta property="og:description" content="What happens next after a smile evaluation request.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Request received | Veneers | Dr. Nahlah, Alexandria, VA">
+<meta name="twitter:description" content="What happens next after a smile evaluation request.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel. The src below is filled per page by
+     build-site.mjs (2026-09-22): Alexandria's pool on every page except the
+     Tysons ads landing pages, which carry Tysons' pool instead. On Instatic
+     the same split is the embed-origins `except=` / `pages=` line options. -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<!-- ==========================================================================
+     ADS LANDING HEADER — the site header with the navigation removed.
+
+     It deliberately keeps `id="nav"`, `class="nav"` and the `.nav-progress`
+     row, because js/90-boot.js reads `#nav` and `#navProgress` without
+     guarding: a landing page with its own header element and no `#nav` throws
+     on the first scroll past 40px and takes the rest of the boot sequence with
+     it. `#burger` and `#drawer` are absent on purpose, and boot handles that
+     case already by returning early.
+
+     There is no logo LINK and no site map. On a paid landing page the logo is
+     the practice identifying itself, not a way back to a home page the visitor
+     never came from and should not be sent to.
+
+     tel:+15716177245 and Call the office are filled per page by
+     build-site.mjs from the `landing` entry in its PAGES table.
+
+     THE TELEPHONE NUMBER is the campaign office's new-patient line, filled
+     per page from the LOCATIONS table in build-site.mjs (+15716177245 /
+     (571) 617-7245). Call tracking is the LeadConnector number pool loaded by
+     partials/site-scripts.html, which swaps the number in the page per
+     visitor; nothing here changes for it.
+     ========================================================================== -->
+<header class="nav lp-nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+
+  <div class="lp-bar">
+    <div class="wrap no-rail lp-bar-in">
+      <span class="lp-bar-item">
+        <i class="lp-bar-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i>
+        <b>4.9</b> Google rating</span>
+      <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
+        <b>18,000+</b> implants placed</span>
+      <span class="lp-bar-item is-wide">Alexandria, VA &middot; Duke Street</span>
+    </div>
+  </div>
+
+  <div class="wrap no-rail lp-nav-in">
+    <span class="nav-logo">
+      <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
+    </span>
+    <div class="lp-nav-side">
+      <a class="lp-nav-phone" href="tel:+15716177245">
+        <i aria-hidden="true">&#9742;</i><span>(571) 617-7245</span></a>
+      <a class="lp-nav-cta" href="tel:+15716177245">Call the office</a>
+    </div>
+  </div>
+</header>
+
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     ADS THANK YOU — PORCELAIN VENEERS. The destination of the evaluation
+     form, and the page the Google Ads conversion fires on.
+
+     > [!IMPORTANT]
+     > THE CONVERSION TAG IS NOT IN THIS MARKUP, AND MUST NOT BE. Fire it on
+     > the URL: a destination-URL conversion on this page's path, or a GTM
+     > Page View trigger on it. Site-wide tags on this build go through
+     > Instatic's `siteScripts`; the "no CSS or JS inlined" gate fails any
+     > page carrying its own `<script>`. `robots: noindex, follow` in seo.json
+     > is not optional: an indexed thank-you page can be landed on directly,
+     > which fires a conversion for a visitor who never converted.
+
+     REBUILT 2026-09-18 TO THE LIVEWELL FLOW. Same shape as
+     ads-dental-implants-thank-you.body.html. The "what happens if you wait"
+     block is the cosmetic version and claims nothing the veneers page does
+     not: chips extend, wear continues, enamel that has thinned darkens.
+     ========================================================================== -->
+<section class="pg-hero lp-hero lp-ty-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/consult-discussion.jpg" alt="A consultation at the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="lp-ty-grid">
+      <div class="lp-hero-copy">
+        <div class="chapter-tag" data-rv><i></i><span class="label">Request Received</span></div>
+        <h1 data-split>Let&rsquo;s talk about your <em>new smile</em>.</h1>
+        <p class="ph-lead" data-rv>Your request has reached the practice. Give us a call now and a member of the Alexandria team will walk you through your options and get your complimentary smile evaluation with Dr. Nahlah on the calendar.</p>
+        <div class="ph-actions" data-rv>
+          <a class="btn btn-primary magnetic" href="tel:+15716177245"><span>Call (571) 617-7245</span></a>
+        </div>
+        <p class="lp-rating" data-rv><i aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i><b>4.9</b> on Google, both offices</p>
+        <p class="lp-hero-note" data-rv><i aria-hidden="true"></i>A quick two-minute call to talk through your options</p>
+      </div>
+      <figure class="lp-ty-fig" data-rv>
+        <img src="assets/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah, D.D.S., M.S.</b><span>Lectures on smile design</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- what to expect on the call ---------- -->
+<section class="pk pk-alt" id="the-call">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">On The Call</span></div>
+      <h2 data-split>We are dedicated to getting you your new smile.</h2>
+      <p data-rv>Here is what to expect on the call.</p>
+    </div>
+    <h3 class="lp-next-head" data-rv>On your call, we will go over</h3>
+    <dl class="lp-next-list" data-rv="stagger">
+      <div>
+        <dt aria-hidden="true">01</dt>
+        <dd><b>Your treatment options</b><span>What you would change, which teeth show when you smile, and whether whitening or a single veneer might be the whole answer. Dr. Nahlah reviews which route fits, from one tooth to the whole smile zone.</span></dd>
+      </div>
+      <div>
+        <dt aria-hidden="true">02</dt>
+        <dd><b>Your payment options</b><span>Cosmetic work is rarely covered by insurance, so the financing available through CareCredit, Proceed Finance and LendingClub is explained plainly before you commit to anything.</span></dd>
+      </div>
+      <div>
+        <dt aria-hidden="true">03</dt>
+        <dd><b>Your complimentary evaluation</b><span>A no-cost evaluation at the Alexandria office with a Digital Smile Design, so you see the proposed design before any enamel is touched.</span></dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ---------- why this practice ---------- -->
+<section class="pk" id="why">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Why Dr. Nahlah</span></div>
+      <h2 data-split>Why patients choose this practice for it.</h2>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv>
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/dr-with-patient.jpg" alt="Dr. Nahlah with a patient" loading="lazy">
+          <span class="pk-card-figcap">Experience</span>
+        </div>
+        <h3>Experience</h3>
+        <p>A board-certified prosthodontist who lectures on smile design and teaches residents at Virginia Commonwealth University. Time with the specialist, not a treatment coordinator.</p>
+      </article>
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/tech-hero.jpg" alt="Digital design at the practice" loading="lazy">
+          <span class="pk-card-figcap">Personalized care</span>
+        </div>
+        <h3>Personalized care</h3>
+        <p>A free Digital Smile Design before any enamel is prepared, under a millimeter removed, and a laboratory in the building where each veneer is hand-designed to your face.</p>
+      </article>
+      <article class="pk-card">
+        <div class="pk-card-fig">
+          <img src="assets/financing-card.jpg" alt="A treatment plan reviewed with a patient" loading="lazy">
+          <span class="pk-card-figcap">Clear costs</span>
+        </div>
+        <h3>Clear costs</h3>
+        <p>The number depends on how many teeth are in the plan, so you get it in writing at the evaluation, before anything is booked, with the monthly options beside it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- any questions before you call ---------- -->
+<section class="pk pk-light" id="faq">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Before You Call</span></div>
+      <h2 data-split>Any questions before you call?</h2>
+    </div>
+    <div class="lp-faq-grid">
+      <figure class="lp-faq-fig is-right" data-rv>
+        <img src="assets/Dr_Nahlah.jpg" alt="Dr. Esam Nahlah, D.D.S., M.S." loading="lazy">
+        <figcaption><b>Dr. Esam Nahlah</b><span>Reads every request</span></figcaption>
+      </figure>
+    <div class="pk-faq" data-rv="stagger">
+      <details>
+        <summary>Do veneers ruin your teeth?</summary>
+        <div class="fa-body">Preparation removes less than a millimeter of enamel, enough for the veneer to sit flush. It is a permanent modification, which is exactly why the design is previewed and agreed before anything is prepared.</div>
+      </details>
+      <details>
+        <summary>Will they look like veneers?</summary>
+        <div class="fa-body">The size, shape and shade are chosen for your lip line, your gum line and your own coloring, and you see that design at the evaluation before any enamel is touched.</div>
+      </details>
+      <details>
+        <summary>Will they stain?</summary>
+        <div class="fa-body">Porcelain does not stain the way natural enamel does. Brush twice a day and floss once, as before.</div>
+      </details>
+      <details>
+        <summary>Can veneers fix my bite?</summary>
+        <div class="fa-body">No. Veneers are a cosmetic treatment for the smile zone. A bad bite is a functional problem and needs to be addressed as one, which is often the reason a prosthodontist is the right person to be assessing it.</div>
+      </details>
+      <details>
+        <summary>How long does it take?</summary>
+        <div class="fa-body">As few as two appointments once the design is settled: one to prepare and scan, one to verify the fit and bond.</div>
+      </details>
+      <details>
+        <summary>When will I find out the cost?</summary>
+        <div class="fa-body">At the evaluation. It depends on how many teeth are in the plan and what else is going on in the mouth. You get the number in writing before anything is booked.</div>
+      </details>
+      <details>
+        <summary>What is the process for financing?</summary>
+        <div class="fa-body">Handled at the evaluation. Once your plan is set, the team runs the application with you and brings back the monthly options. Nothing is agreed until you have seen the numbers in writing.</div>
+      </details>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- ready to take the next step ---------- -->
+<section class="pk lp-final" data-theme="dark" id="call-now">
+  <figure class="lp-final-bg" aria-hidden="true">
+    <img src="assets/cosmetic-transformation.jpg" alt="" loading="lazy">
+  </figure>
+  <div class="wrap section">
+    <div class="lp-final-grid">
+      <div class="lp-final-copy">
+        <div class="chapter-tag" data-rv><i></i><span class="label">The Next Step</span></div>
+        <h2 data-split>Ready to take the next step?</h2>
+        <p data-rv>Talk to the Alexandria team and get your complimentary smile evaluation with Dr. Nahlah scheduled today. We will walk through your options in about two minutes.</p>
+        <div class="lp-cta-actions" data-rv>
+          <a class="btn btn-primary magnetic" href="tel:+15716177245"><span>Call (571) 617-7245</span></a>
+          <span class="lp-cta-aside">&#9733;&#9733;&#9733;&#9733;&#9733; 4.9 on Google</span>
+        </div>
+      </div>
+      <div class="lp-details" data-rv="stagger">
+        <div><span class="label">Call</span><b><a href="tel:+15716177245">(571) 617-7245</a></b><span>Alexandria office, new patients</span></div>
+        <div><span class="label">Visit</span><b>2855 Duke Street</b><span>Alexandria, VA 22314</span></div>
+        <div><span class="label">Hours</span><b>Mon&ndash;Thu 8am to 5pm</b><span>Friday 8am to 2pm &middot; closed weekends</span></div>
+        <div><span class="label">Also</span><b><a href="tel:+17034483312">(703) 448-3312</a></b><span>Tysons Corner office, run by the same team</span></div>
+      </div>
+    </div>
+    <div class="lp-creds" data-rv="stagger">
+      <b>Dr. Esam Nahlah, D.D.S., M.S.</b>
+      <span>Diplomate, American Board of Prosthodontics</span>
+      <span>Fellow, American College of Prosthodontists</span>
+      <span>Lectures on smile design</span>
+      <span>Adjunct Faculty, VCU Prosthodontics</span>
+      <span>Founder, Tysons Study Club</span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<!-- ==========================================================================
+     ADS LANDING FOOTER.
+
+     The two office columns are filled per page from the LOCATIONS table in
+     build-site.mjs, the campaign's own office first.
+
+     `footer.foot` is kept as the outer class so the footer's own type, link,
+     `.foot-blurb`, `.foot-facts` and `.foot-base` rules all still apply, and
+     so site-test.mjs's shared-shell check still finds a `footer.foot` on the
+     page. Only the grid is swapped for `.lp-foot-grid`, because this footer
+     carries two offices rather than four columns of site map.
+
+     WHAT IT DELIBERATELY DOES NOT CARRY: links to treatments, patients, the
+     journal or the gallery. A paid landing page's footer is not a second
+     chance to browse the site; the only links on it are the two legal
+     documents, which a dental page has to be able to produce.
+
+     The disclaimer is not decoration. These pages show before-and-after
+     photography of real patients and name a treatment by brand, so the page
+     has to say in its own words that results vary and that candidacy is
+     decided at an examination. Both statements are already made on the
+     practice's own treatment pages; this restates them where the paid traffic
+     lands.
+     ========================================================================== -->
+<footer class="foot lp-foot" data-theme="dark">
+  <div class="wrap">
+    <div class="lp-foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Dr. Esam Nahlah, D.D.S., M.S. Board-certified prosthodontist,
+          Diplomate of the American Board of Prosthodontics, practicing in Northern Virginia
+          since 2013.</p>
+        <ul class="foot-facts" style="margin-top:1.1rem">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Alexandria</h4>
+        <div class="lp-foot-office">
+          <address>2855 Duke Street<br>Alexandria, VA 22314</address>
+          <span>New patients &nbsp;<a href="tel:+15716177245">(571) 617-7245</a></span>
+          <span>Current patients &nbsp;<a href="tel:+17039405410">(703) 940-5410</a></span>
+        </div>
+      </div>
+      <div>
+        <h4>Tysons Corner</h4>
+        <div class="lp-foot-office">
+          <address>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</address>
+          <span>New patients &nbsp;<a href="tel:+17034483312">(703) 448-3312</a></span>
+          <span>Current patients &nbsp;<a href="tel:+17034483312">(703) 448-3312</a></span>
+        </div>
+      </div>
+    </div>
+
+    <p class="lp-foot-note">Individual results vary with each patient's oral health, bone volume,
+      bite and treatment plan. Every case shown on this page is a patient of this practice.
+      Nothing on this page is a diagnosis, a treatment recommendation or a promise of a particular
+      outcome. Candidacy is determined at a clinical examination with a cone-beam scan, and the
+      treatment plan and its cost are given to you in writing before anything is booked.</p>
+
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

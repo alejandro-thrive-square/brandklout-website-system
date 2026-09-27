@@ -41,25 +41,27 @@ WZ.section("ch-proof", function (W) {
   gsap.from('#storyCopy > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#storyCopy',start:'top 80%'}});
 
-  /* Reviews: header, then cards deal in on a slight diagonal. */
+  /* Reviews: the header. There is no card wall on this page any more — the home
+     page has been embed-only since 2026-09-22 (see gen-reviews.mjs) — so the
+     [data-rv="stagger"] note that used to be here went with it. The veneers
+     landing pages still carry .rv-wall and still get the kit's stagger there. */
   gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
-  /* The review wall is generated markup as of 2026-08-19, so it gets the kit's
-     own stagger back. [data-rv="stagger"] on .rv-wall drives it; nothing needed
-     here beyond letting that rule find it. */
 
-  /* --- upgrade the cards to the LIVE feed, where the host permits it ---
+  /* --- build the LIVE feed, where the host permits it ---
      The client wants reviews that update the moment a patient leaves one, and
-     the vendor's iframe does exactly that. It cannot run everywhere: Instatic
-     publishes behind `frame-src 'none'` unless an operator widens it (see
-     workflows/16-instatic-plugins). Rather than pick one platform and lose on
-     the other, the generated cards ship as the content and this quietly swaps
-     in the live widget wherever it actually loads.
+     the vendor's iframe does exactly that. This used to be an UPGRADE over a
+     generated card wall, because Instatic published behind `frame-src 'none'`.
+     Both halves of that have changed: the platform now carries a `frameOrigins`
+     list, and as of 2026-09-22 the home page is embed-only by client decision,
+     so there is no wall left to fall back to. `wall` below is therefore null on
+     this page and kept only for the veneers pages, which still have one.
 
      Success is judged on the vendor's own postMessage, not on the iframe's
      load event: a blocked frame still fires load (about:blank), so trusting
      that would leave an empty well exactly where the reviews should be. If no
-     height arrives, everything added here is removed and the cards stay.
+     height arrives the slot is removed, and on the home page the section is
+     then a heading and a link — the accepted cost of embed-only.
 
      THE VENDOR'S PARENT SCRIPT IS DELIBERATELY NOT LOADED. Its only job is to
      size the iframe from `lc.setHeight`, and we already receive that message

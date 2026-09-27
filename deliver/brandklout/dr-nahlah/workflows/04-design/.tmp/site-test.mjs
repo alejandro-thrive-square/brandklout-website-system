@@ -29,6 +29,25 @@ const PAGES = (process.argv[3] || (() => {
   return slugs.join(",");
 })()).split(",");
 
+/* The ads landing pages carry a DIFFERENT shell on purpose: `lp-nav` instead of
+   the site header, no `#drawer` and no `#burger`, and `lp-foot` instead of the
+   site footer. That is the whole point of them — a paid landing page must not
+   leak the click into the site — so the four drawer checks below cannot apply,
+   and the shared-shell check has to ask a different question.
+   Derived from build-site.mjs the same way PAGES is, so a tenth landing page
+   cannot quietly get tested as an editorial one. Absent that file (an explicit
+   page list on the command line), the set is empty and every page is treated as
+   editorial, which is the stricter of the two. */
+const LANDING = new Set((() => {
+  try {
+    const src = fs.readFileSync(
+      path.resolve(import.meta.dirname, "site-src", "build-site.mjs"), "utf8");
+    const block = /const PAGES = \[([\s\S]*?)\];/.exec(src)[1];
+    return [...block.matchAll(/slug:\s*"([^"]+)"[^}]*?\blanding:\s*\{/g)].map((m) => m[1]);
+  } catch { return []; }
+})());
+console.log(`landing pages (no drawer by design): ${LANDING.size || "none"}`);
+
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const PORT = 9100 + Math.floor(Math.random() * 250);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cdp-site-"));
@@ -44,6 +63,14 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const getJSON = (p) => new Promise((res, rej) => {
   http.get({ host: "127.0.0.1", port: PORT, path: p }, (r) => {
     let d = ""; r.on("data", (c) => (d += c)); r.on("end", () => res(JSON.parse(d)));
+  }).on("error", rej);
+});
+/* The document as SERVED, before any script has touched it. Used by the
+   "no CSS or JS inlined" check — see the comment at its call site. */
+const fetchText = (u) => new Promise((res, rej) => {
+  http.get(u, (r) => {
+    let d = ""; r.setEncoding("utf8");
+    r.on("data", (c) => (d += c)); r.on("end", () => res(d));
   }).on("error", rej);
 });
 let wsUrl;
@@ -202,19 +229,106 @@ for (const page of PAGES) {
   await evalJs(`document.fonts ? document.fonts.ready.then(()=>1) : 1`);
   await wait(600);
 
-  check(page, "page loaded with the shared shell",
-    await evalJs(`!!(document.getElementById('nav') && document.getElementById('drawer')
-      && document.querySelector('footer.foot') && document.getElementById('smooth-wrapper'))`));
+  const isLanding = LANDING.has(page);
+  if (isLanding) {
+    /* The landing shell, asserted rather than assumed: the header still has to
+       be `#nav` with `#navProgress` inside it, because js/90-boot.js reads both
+       without guarding and throws on the first scroll past 40px otherwise. The
+       drawer and the burger have to be ABSENT — a site map on a paid landing
+       page is the leak these pages exist to close — and the CTA rail has to be
+       outside `#smooth-wrapper`, or ScrollSmoother's transform makes `fixed`
+       position it against the wrapper instead of the viewport and it scrolls
+       away with the page. */
+    check(page, "page loaded with the landing shell",
+      await evalJs(`!!(document.getElementById('nav') && document.getElementById('navProgress')
+        && document.querySelector('header.lp-nav') && document.querySelector('footer.lp-foot')
+        && document.getElementById('smooth-wrapper'))`));
+    check(page, "landing page has no site map to leak the click into",
+      await evalJs(`!document.getElementById('drawer') && !document.getElementById('burger')
+        && !document.querySelector('.nav-links')`));
+    const rail = await evalJs(`(function(){
+      var r = document.querySelector('.lp-rail');
+      if (!r) return 'none';
+      return document.getElementById('smooth-wrapper').contains(r) ? 'inside the smoother' : 'fixed';
+    })()`);
+    /* The thank-you pages deliberately ship no rail: there is nothing left to
+       convert once the form has been sent. */
+    check(page, "mobile CTA rail is fixed outside the smoother, or absent by design",
+      rail === "fixed" || (rail === "none" && /-thank-you$/.test(page)), rail);
+  } else {
+    check(page, "page loaded with the shared shell",
+      await evalJs(`!!(document.getElementById('nav') && document.getElementById('drawer')
+        && document.querySelector('footer.foot') && document.getElementById('smooth-wrapper'))`));
+  }
 
   /* The architecture claim, checked rather than asserted in a comment: styling
      and behaviour are site-wide, and each section's module runs exactly when
      that section's markup is present. That is what makes a section something
-     you can move between pages by moving only the markup. */
+     you can move between pages by moving only the markup.
+
+     The claim is about what THIS BUILD ships, so the count is taken from the
+     shipped document, not from the live DOM. A page carrying a third-party
+     embed cannot control what the vendor's script does after load, and
+     LeadConnector's form_embed.js injects a 2.8 KB `.ep-*` <style> into <head>
+     — measuring the live DOM failed both contact pages for a stylesheet this
+     repository does not write and cannot remove.
+
+     The check is NOT weakened by that: a <style> or an inline <script> that we
+     author into a page body is in the shipped HTML and still fails, on every
+     page, embed or no embed. What is no longer counted is what a vendor adds at
+     runtime, which was never this check's subject. */
+  /* Comments are stripped FIRST. The page bodies discuss their own markup —
+     "One <style> + one <script>, injected once per page" is a real comment in
+     contact.body.html — and counting those reports a violation that is a
+     sentence in English, not an element. */
+  const shipped = (await fetchText(url)).replace(/<!--[\s\S]*?-->/g, "");
+  const shippedStyles = (shipped.match(/<style[\s>]/gi) || []).length;
+  /* 2026-09-17: partials/site-scripts.html ships the Google Tag Manager
+     bootstrap on every page, and GTM's bootstrap is inline by design. It is
+     the one inline script this build authors, it carries `data-site-script`,
+     and only a script carrying that attribute is exempt: an inline script in
+     a page body still fails. On Instatic the same tags live in `siteScripts`. */
+  const shippedInline = (shipped.match(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)(?![^>]*\bdata-site-script=)[^>]*>/gi) || []).length;
   check(page, "no CSS or JS inlined into the page",
-    await evalJs(`document.querySelectorAll('style').length === 0
-      && document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length === 0`),
-    await evalJs(`document.querySelectorAll('style').length + ' style, '
-      + document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length + ' inline script'`));
+    shippedStyles === 0 && shippedInline === 0,
+    `${shippedStyles} style, ${shippedInline} inline script (as shipped)`);
+
+  /* 2026-09-22: the GoHighLevel number pool can only swap a telephone number
+     it can recognise. Its `replaceNumber` matches, in TEXT, only
+     `(NNN) NNN-NNNN`, `NNN-NNN-NNNN`, `NNN.NNN.NNNN` and `(NNN)NNN-NNNN`,
+     and in an `<a href>` a contiguous ten-digit run as well. A number written
+     `571 253 7790`, with a non-breaking space after the area code, or as bare
+     digits in running text is invisible to it: the page keeps the practice's
+     own number, the call is never attributed, and nothing anywhere fails.
+     So the format is a gate, not a preference. `noswap` opts a number out on
+     purpose and is therefore allowed any shape. */
+  const phoneShapes = await evalJs(`(function(){
+    /* The swapper uses String.includes, not a whole-string match, so a
+       recognised form ANYWHERE in the string is enough: "1-800-677-0718"
+       carries "800-677-0718" and swaps fine. */
+    var OK = /(\\(\\d{3}\\)\\s?\\d{3}-\\d{4}|\\d{3}-\\d{3}-\\d{4}|\\d{3}\\.\\d{3}\\.\\d{4})/;
+    var ANY = /(?:\\+?1[\\s.\\u00a0-]?)?\\(?\\d{3}\\)?[\\s.\\u00a0-]?\\d{3}[\\s.\\u00a0-]?\\d{4}/g;
+    var bad = [];
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    var n;
+    while ((n = w.nextNode())) {
+      if (n.parentElement && n.parentElement.closest('.noswap')) continue;
+      var m = n.nodeValue.match(ANY);
+      if (!m) continue;
+      m.forEach(function(x){ if (!OK.test(x)) bad.push('text "' + x + '"'); });
+    }
+    [].forEach.call(document.querySelectorAll('a[href^="tel:"]'), function(a){
+      if (a.closest('.noswap')) return;
+      var h = a.getAttribute('href');
+      /* 911 and the other short codes are not ten-digit numbers, so no pool can
+         ever hold one and there is nothing here to keep swappable. */
+      if ((h.match(/\\d/g) || []).length < 10) return;
+      if (!/\\d{10}/.test(h.replace(/[^\\d]/g, '')) && !OK.test(h)) bad.push('href "' + h + '"');
+    });
+    return bad.length ? bad.slice(0, 4).join(', ') : 'ok';
+  })()`);
+  check(page, "every phone number is in a shape the GHL number pool can swap",
+    phoneShapes === "ok", phoneShapes);
 
   const modules = await evalJs(`(function(){
     if (!window.WZ || !WZ.modules) return 'no registry';
@@ -339,6 +453,27 @@ for (const page of PAGES) {
   const overflow = await evalJs(`document.documentElement.scrollWidth`);
   check(page, "no horizontal overflow @1440", overflow <= 1440, "scrollWidth=" + overflow);
 
+  /* CLICK THE FILM, do not just assert the markup is there. A click-to-play
+     facade that renders perfectly and does nothing when clicked looks identical
+     to a working one in every screenshot and in every other check on this page,
+     and these are paid pages where the testimonial is a large part of the
+     argument. So: click the first facade, and require that a real player took
+     its place. */
+  const facades = await evalJs(`document.querySelectorAll('.vl-card[data-yt]').length`);
+  if (facades > 0) {
+    const played = await evalJs(`(function(){
+      var card = document.querySelector('.vl-card[data-yt]');
+      var id = card.getAttribute('data-yt');
+      card.click();
+      var open = document.querySelector('.vl-card .vl-frame iframe');
+      if (!open) return 'click produced no player';
+      if ((open.getAttribute('src') || '').indexOf(id) === -1) return 'player is the wrong film';
+      if (document.querySelector('.vl-card[data-yt="' + id + '"]')) return 'facade still a control';
+      return 'plays';
+    })()`);
+    check(page, `${facades} film facades play when clicked`, played === "plays", played);
+  }
+
   const contrast = await evalJs(CONTRAST_JS);
   check(page, "text contrast meets WCAG AA",
     contrast.failCount === 0,
@@ -357,6 +492,37 @@ for (const page of PAGES) {
   await wait(600);
   const mOverflow = await evalJs(`document.documentElement.scrollWidth`);
   check(page, "no horizontal overflow @390", mOverflow <= 391, "scrollWidth=" + mOverflow);
+
+  /* A landing page has no burger and no drawer to open, so the four checks
+     below have nothing to measure on it. What it has instead is a CTA within
+     reach of a thumb, and THAT is the equivalent claim worth asserting: the
+     rail is pure CSS precisely so it cannot be the thing that failed, and a
+     landing page whose only CTA is above the fold on a phone is a landing page
+     that converts nobody who scrolled. */
+  if (isLanding) {
+    if (/-thank-you$/.test(page)) { continue; }
+    const railHit = await evalJs(`(function(){
+      var r = document.querySelector('.lp-rail');
+      if (!r) return 'no rail';
+      if (getComputedStyle(r).display === 'none') return 'hidden at 390';
+      var a = r.querySelectorAll('a');
+      if (a.length < 2) return a.length + ' action(s)';
+      for (var i = 0; i < a.length; i++) {
+        var b = a[i].getBoundingClientRect();
+        // Ask who owns the pixel rather than reading the box: that covers
+        // z-index, transform, opacity and clipping in one measurement, which is
+        // the same question the user's thumb asks.
+        var hit = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2);
+        if (!hit || !r.contains(hit)) return 'action ' + (i + 1) + ' is covered by ' +
+          (hit ? hit.tagName.toLowerCase() + '.' + (hit.className || '') : 'nothing');
+        if (b.bottom > innerHeight + 1) return 'action ' + (i + 1) + ' is off the bottom';
+      }
+      return 'reachable';
+    })()`);
+    check(page, "CTA rail is reachable on mobile", railHit === "reachable", railHit);
+    continue;
+  }
+
   check(page, "menu button reachable on mobile",
     await evalJs(`getComputedStyle(document.getElementById('burger')).display !== 'none'`));
 

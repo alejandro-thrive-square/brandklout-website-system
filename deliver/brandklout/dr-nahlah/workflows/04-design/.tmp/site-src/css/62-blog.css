@@ -33,29 +33,389 @@
 @media(min-width:700px){ .bl-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .bl-grid{grid-template-columns:repeat(3,1fr)} }
 
-/* --- a single post ---
-   One column, measured for reading. The body arrives from the CMS as plain
-   h2/h3/p/ul, so it is styled by element rather than by class: nothing in the
-   entry markup carries one, and it is not ours to rewrite per post. */
-.bl-post{max-width:74ch;margin-inline:auto}
-.bl-post .bl-when{display:block;margin-bottom:1rem}
-/* --h1 is not a token in this system and never has been, so this declaration
-   was invalid and the headline fell back to the inherited body size: every one
-   of the 43 published articles rendered its title SMALLER than its own h2s.
-   Sized off the same ramp the article's h2 uses, one step up, because the
-   headline sits in the 74ch reading column and not in a page hero. */
-.bl-post h1{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-sm));font-weight:500;
-  line-height:1.14;max-width:20ch;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+/* --- index: search bar + topic filter ----------------------  BugHerd pin #10
+   Client, pinned on `section#articles > div.wrap.section`:
+   "Here we should have a search bar and a filter per topic".
+
+   All 43 rows are already in the DOM — the loop is `limit: 60`,
+   `pagination: 'none'` — so this filters what is on the page. No fetch, no
+   spinner, and nothing added to a site that already has one measured mobile
+   performance problem. No library either; it is ~90 lines of DOM work.
+
+   HIDING IS THE `hidden` ATTRIBUTE, NEVER A STATE CLASS. Two reasons, and the
+   second is the one that eats sessions:
+     1. `.bl-card` sets `display:grid`, which outranks the UA sheet's
+        `[hidden]{display:none}` — the same reason `.ga-item[hidden]` exists
+        for the gallery filter. So the rule has to be written out.
+     2. An attribute selector carries no CLASS TOKEN, so the publish tree-shake
+        (`styleRuleTreeShake.ts`) has nothing to purge. A `.is-hidden` class
+        rule that no node references is a *known class name that is unused*,
+        and that takes down every ambient rule mentioning it — which is exactly
+        how `.drawer.open` disappeared.
+
+   AND IT IS NOT `position:sticky`. ScrollSmoother wraps the page in
+   `#smooth-wrapper{position:fixed;overflow:hidden}`, so sticky is inert on this
+   site; it would need a ScrollTrigger pin. A filter row that follows you down
+   43 cards is also more furniture than help, so: it scrolls away. */
+.bl-filter{display:grid;gap:clamp(.9rem,2vw,1.4rem);grid-template-columns:1fr;
+  align-items:end;padding-bottom:clamp(1.25rem,2.5vw,1.75rem);
+  border-bottom:1px solid var(--line)}
+.bl-f-field{display:grid;gap:.5rem;min-width:0}
+.bl-f-label{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+/* `max(1rem,16px)`, not `1rem`. This site's root font-size is FLUID
+   (00-fluid-root.css), so 1rem computes to 13.76px at a 390px viewport — and
+   iOS Safari zooms the whole page in when you focus a control whose computed
+   font-size is under 16px, which on a filter bar means the reader is thrown
+   sideways the moment they tap the search box. Measured, not assumed.
+   (`.ct-form input` has the same `1rem` and the same defect; that is the
+   contact form's to fix, but there is no reason to copy it here.) */
+.bl-f-input,.bl-f-select{font:inherit;font-size:max(1rem,16px);font-weight:400;color:var(--fg);
+  background:var(--card);border:1px solid var(--line-strong);border-radius:0;
+  padding:.85rem 1rem;width:100%;transition:border-color .35s}
+.bl-f-input:focus,.bl-f-select:focus{border-color:var(--rule);outline:none}
+.bl-f-input:focus-visible,.bl-f-select:focus-visible{outline:2px solid var(--focus);
+  outline-offset:2px}
+.bl-f-input::placeholder{color:var(--fg-faint)}
+/* Two-layer arrow, copied from `.ct-form select` so the two controls on this
+   site agree. It is written as the `background-image` LONGHAND on purpose: the
+   `background` shorthand is the one happy-dom flattens to its last layer, and
+   that is how the hero lost two of its three gradients. */
+.bl-f-select{appearance:none;padding-right:2.6rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--fg-soft) 50%),
+    linear-gradient(135deg,var(--fg-soft) 50%,transparent 50%);
+  background-position:calc(100% - 1.15rem) 55%,calc(100% - .8rem) 55%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+/* `role="status"`; it announces the result count on every change. */
+.bl-f-count{margin:0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-faint);align-self:end;padding-bottom:.95rem}
+@media(min-width:700px){ .bl-filter{grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto} }
+
+/* The topic, rendered per card from the row's `topic` cell. `:empty` covers a
+   row nobody has classified — the token resolves to "" rather than to the
+   placeholder text, so an unfilled row collapses instead of showing a gap. */
+/* A <span>, not a <p>. `.bl-card p` is (0,1,1) and would outrank a (0,1,0)
+   `.bl-topic` on colour and weight; and it keeps `card.querySelector('p')` in
+   blog-filter.js meaning the excerpt and nothing else. */
+.bl-topic{font-family:var(--f-body);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin:0}
+.bl-topic:empty{display:none}
+
+.bl-card[hidden]{display:none}
+.bl-grid[hidden]{display:none}
+/* Only while the filter is NARROWING the set (JS sets the attribute when
+   visible < total). `.bl-grid`'s hairlines are its own background showing
+   through a 1px gap, so a filtered row of one or two in a three-track grid
+   would paint `--line` across the empty tracks. Dropping the background and
+   opening the gap turns the survivors into tiles instead. Typing a character
+   that still matches all 43 does not trigger it, so the page does not reflow
+   under the reader for nothing. */
+.bl-grid[data-bl-active]{background:transparent;gap:clamp(.75rem,1.6vw,1.25rem)}
+
+/* Reserve height so shrinking the result set cannot pull the footer up into
+   the fold. `.bl-grid` is the wrong place for it — its background IS the
+   hairline colour, so a min-height there paints a grey slab. */
+#articles .wrap.section{min-height:clamp(26rem,58svh,40rem)}
+
+.bl-empty{display:grid;gap:.9rem;justify-items:start;max-width:54ch;
+  padding:clamp(2rem,5vw,3.5rem) 0}
+.bl-empty[hidden]{display:none}
+.bl-empty h3{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));
+  font-weight:500;line-height:1.28;margin:0}
+.bl-empty p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.7;margin:0}
+/* Not `.btn`: `.btn` slides a `::after` panel up on hover and relies on a
+   `<span>` wrapper to keep its label above it (`.btn>span{z-index:1}`), and
+   Instatic's `base.button` emits `props.label` with no wrapper at all. Same
+   micro-link treatment as `.bl-more` instead, which needs no inner element. */
+.bl-clear{display:inline-flex;align-items:center;gap:.6rem;margin-top:.35rem;
+  font-family:var(--f-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.bl-clear::after{content:"";display:block;width:18px;height:1px;background:var(--rule);
+  transition:width .4s cubic-bezier(.22,1,.36,1)}
+.wz-fine .bl-clear:hover::after{width:38px}
+.bl-clear:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+/* --- end of the pin #10 block ---
+   push-posts-filter.mjs slices between this marker and its opening one, and
+   upserts every rule it finds in between. Anything written BELOW this line is
+   somebody else's and that script will not touch it. Pin #9 appended
+   `.bl-rel-fig` rules here while this was being written; the first version of
+   the slice ended at "A SINGLE POST" and swept them up. Keep new /posts index
+   rules ABOVE the marker only if they are pin #10's. */
+
+/* --- INDEX CARD IMAGE ----------------------------------- BugHerd pin #9 ---
+   "Here we should display the main image of the blog post."
+
+   The index is ONE `base.loop` whose single child is `article.bl-card`, so all
+   43 cards render from one node with one set of props. The thumbnail is
+   `{currentEntry.featuredMediaPath}` — the same field the article hero and the
+   related strip already read, resolved per row by the loop
+   (`src/core/loops/sources/dataRows.ts`), which also means the publisher's
+   media pre-pass finds it and the img ships with srcset, sizes, intrinsic
+   width/height and the library's alt text.
+
+   THERE IS NO SECOND THUMBNAIL STYLE HERE ON PURPOSE. The figure carries
+   `.bl-rel-fig`, the class the article page's related strip already uses:
+   same 16/10 box, same `object-fit:cover`, same `--mist` placeholder, same
+   hover scale, no rounding. Only the hover SELECTOR differs, because on the
+   index the hovered ancestor is `.bl-card` and not `.bl-rel-card`. The name
+   says "related" for historical reasons; read it as "the blog thumbnail".
+
+   No `loading:eager` / `fetchpriority:high` on the first row, and it is not an
+   oversight. A loop cannot express per-index props — `renderLoop` round-robins
+   over the loop's CHILDREN, so N children give N alternating variants, not a
+   hook on item 0. And this page's LCP image is already the `.pg-hero` photo,
+   which carries the page's one `fetchpriority="high"`; a second would compete
+   with it (see perf-image-priority.mjs). Lazy is both the only expressible
+   answer and the correct one. */
+.wz-fine .bl-card:hover .bl-rel-fig img{transform:scale(1.045)}
+/* The deliberate no-image case, and it needs no JS. `base.image.render` returns
+   `{html:''}` when `src` is empty, and `base.link` joins its children with '',
+   so a row with no `featuredMedia` publishes a genuinely EMPTY `<a>` rather
+   than a broken img — `:empty` matches it exactly and hides it before first
+   paint, with no flash of grey plate. This also covers the article page's
+   related strip, where `sections/blog-post.js` does the same removal at
+   runtime; belt and braces, and it works with JS off. */
+.bl-rel-fig:empty{display:none}
+
+/* =============================================================================
+   A SINGLE POST                                             BugHerd pin #7
+   Reworked 2026-08-27 to the layout of the reference the client attached (a
+   competitor's article page), in this site's own vocabulary rather than that
+   site's: full-bleed hero with the title over the photograph, a contents rail
+   on the left, the article in the middle, a persistent trust rail on the right,
+   an FAQ accordion and a related strip with thumbnails.
+
+   Nothing here invents a look. The hero is `.pg-hero`, which every interior
+   page already uses; the accordion is `.pk-faq`; the stars are `.rv-stars`;
+   the read-on links are `.pk-more`; the rail cards paint from the theme tokens
+   and nothing else. What changed is the ARRANGEMENT, which is what was asked.
+   ============================================================================= */
+
+/* --- the hero ---
+   `.pg-hero` sits OUTSIDE `.wrap` so the photograph is full bleed, which is why
+   the template moves it up to be a child of `.pk`. `.bl-ph` is the article
+   modifier: shorter than a landing-page hero, and titled at --h2 rather than
+   --d2 because an article title is a sentence and runs 12-16 words where a
+   landing headline runs four. */
+.pg-hero.bl-ph{min-height:clamp(380px,52svh,560px);
+  padding-top:clamp(7rem,13vw,9.5rem);padding-bottom:clamp(2rem,4.5vw,3.25rem)}
+.pg-hero.bl-ph h1{font-size:var(--h2);max-width:22ch}
+.pg-hero.bl-ph .ph-in{gap:clamp(.9rem,2vw,1.4rem)}
+/* Filled by sections/blog-post.js from the date inside the entry body -- there
+   is no date FIELD on the posts table (publishedAt is the import timestamp), so
+   the only true date is the one written into the article. Empty until it is
+   moved, and an article with no date simply has no line here.
+
+   Its OWN class, not `.bl-when`. On Instatic a node carries a class by
+   referencing a registry rule whose kind is `class`, and `.bl-when` is an
+   AMBIENT rule — ambient rules have a selector for a name, so a node pointing
+   at one emits `class=".bl-when"`. Rather than change the kind of a rule the
+   43 entry bodies already depend on, the hero brings its own. */
+.bl-ph-when{margin:0;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft)}
+.bl-ph-when:empty{display:none}
+/* A LIGHTER SCRIM THAN THE INTERIOR PAGES GET, and the reason is what the
+   photograph IS. On a service page the hero image is atmosphere behind a
+   headline, so `.pg-hero::after` drowns it to 94% cream and nobody misses it.
+   Here it is the article's FEATURED IMAGE — the one picture chosen for this
+   piece — and drowning it leaves the reader looking at a cream rectangle. The
+   copy column keeps its floor; the right of the frame lets the picture through.
+   Same three-layer structure and the same bled inset as the base rule, because
+   the hero-seam fix lives in that geometry and this must not disturb it. */
+.pg-hero.bl-ph::after{
+  background:
+    radial-gradient(80% 70% at 82% 40%,rgba(171,158,106,.16),transparent 64%),
+    linear-gradient(100deg,rgba(250,248,243,.97) 0%,rgba(250,248,243,.90) 34%,rgba(250,248,243,.30) 68%,rgba(250,248,243,.06) 100%),
+    linear-gradient(180deg,rgba(250,248,243,.80) 0%,rgba(250,248,243,.12) 32%,rgba(250,248,243,.88) 100%)}
+/* The base filter lifts brightness 6% to push a photo behind the heavy scrim.
+   With the lighter scrim above that reads as a washed-out picture. */
+.pg-hero.bl-ph .ph-bg img{filter:grayscale(.1) contrast(1.03) brightness(1)}
+
+/* --- the three columns ---
+   One column below 1280, three above it. 1280 rather than 1100 because the two
+   rails cost 30rem and the article still has to hold a readable measure: at
+   1100 the middle column lands around 50ch, which is worse than no rails. */
+.bl-post{max-width:none;margin-inline:0;display:grid;grid-template-columns:1fr;
+  gap:clamp(2.5rem,5vw,3.5rem)}
+.bl-main{min-width:0;max-width:74ch;display:grid;align-content:start}
+/* A rail with nothing in it is not a row. The contents rail is empty until the
+   script moves the list into it, and it stays empty on every article with fewer
+   than three headings. */
+.bl-rail{display:grid;gap:1px;background:var(--line);align-content:start}
+.bl-rail:empty{display:none}
+@media(min-width:1280px){
+  .bl-post{grid-template-columns:13rem minmax(0,66ch) 17rem;
+    column-gap:clamp(2rem,3.4vw,4rem);row-gap:clamp(2.5rem,5vw,4rem);
+    justify-content:center;align-items:start}
+  .bl-rail-l{grid-column:1;grid-row:1}
+  /* ScrollTrigger wraps a pinned element in a `.pin-spacer` of its own, and
+     THAT becomes the grid item in the rail's place. Placed explicitly so the
+     first column does not depend on auto-placement happening to pick the cell
+     the rail just vacated. */
+  .bl-post > .pin-spacer{grid-column:1;grid-row:1}
+  .bl-main{grid-column:2;grid-row:1;max-width:none}
+  .bl-rail-r{grid-column:3;grid-row:1}
+  .bl-related{grid-column:2;grid-row:2}
+  .bl-foot{grid-column:2;grid-row:3}
+}
+
+/* The article itself. The body arrives from the CMS as plain h2/h3/p/ul, so it
+   is styled by element rather than by class: nothing in the entry markup
+   carries one, and it is not ours to rewrite per post. */
 .bl-body{color:var(--fg-body);font-weight:300}
 .bl-body > * + *{margin-top:1.15rem}
+/* The title and date render in the HERO now. They still arrive inside the
+   outlet, so they are hidden here for the moment before the script lifts them
+   out -- CSS first so there is never a frame with the title in two places, and
+   the script then REMOVES rather than leaves a duplicate h1 in the document. */
+.bl-post .bl-body h1{display:none}
+.bl-post .bl-body .bl-when{display:none}
+/* `max-width:none` undoes `.pk h2{max-width:18ch}`, which the article body has
+   been inheriting since it moved under `.pk`: every heading in all 43 articles
+   was wrapping at 18 characters inside a 66ch column. A section heading in a
+   piece of prose is a sentence, not a display line. */
 .bl-body h2{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
-  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem)}
+  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem);max-width:none}
+/* An article that opens straight into a heading — several of the 43 do — should
+   not start with that heading's section gap above it. */
+.bl-body h2:first-child{margin-top:0}
 .bl-body h3{font-family:var(--f-display);font-size:calc(1.22rem * var(--t-sm));font-weight:500;
   color:var(--fg);margin-top:clamp(1.6rem,2.8vw,2.25rem)}
 .bl-body p{line-height:1.85}
 .bl-body ul{display:grid;gap:.6rem;padding-left:1.1rem;list-style:disc}
 .bl-body li{line-height:1.75}
 .bl-body a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em}
-.bl-foot{margin-top:clamp(2.5rem,5vw,4rem);padding-top:clamp(1.5rem,3vw,2.25rem);
+.bl-foot{padding-top:clamp(1.5rem,3vw,2.25rem);
   border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;
   justify-content:space-between;align-items:center}
+
+/* --- contents ---
+   Built by sections/blog-post.js from the headings the article actually has,
+   and only when there are three or more. Below 1280 it sits in the flow after
+   the first paragraph; above it, the script moves the same node into the left
+   rail. One list, two homes -- never a copy in each. */
+.bl-toc{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding-block:clamp(1rem,2.2vw,1.4rem);margin-block:clamp(1.5rem,3vw,2rem)}
+.bl-toc b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:.7rem}
+.bl-toc ol{display:grid;gap:.42rem;margin:0;padding:0;list-style:none;counter-reset:toc}
+.bl-toc li{counter-increment:toc;display:flex;gap:.7rem;align-items:baseline;line-height:1.45}
+.bl-toc li::before{content:counter(toc,decimal-leading-zero);flex:0 0 auto;
+  font-size:.68rem;color:var(--fg-faint);font-variant-numeric:tabular-nums}
+.bl-toc a{color:var(--fg);text-decoration:none;font-size:.92rem;
+  border-bottom:1px solid transparent;transition:border-color .3s}
+.wz-fine .bl-toc a:hover{border-bottom-color:var(--rule)}
+/* In the rail it is a column of its own, so it drops the horizontal rules and
+   the reading-column margins and takes the rail's hairline instead. The heading
+   the reader is inside is marked `.is-here` as they pass it. */
+.bl-rail .bl-toc{border:0;padding:0;margin:0;background:var(--bg)}
+.bl-rail .bl-toc ol{gap:0}
+.bl-rail .bl-toc li{padding-block:.55rem;border-top:1px solid var(--line)}
+.bl-rail .bl-toc li:first-child{border-top:0}
+.bl-rail .bl-toc a{font-size:.82rem;line-height:1.4;color:var(--fg-soft)}
+.bl-rail .bl-toc li.is-here a{color:var(--fg)}
+.bl-rail .bl-toc li.is-here::before{color:var(--accent)}
+
+/* --- the trust rail ---
+   Three cards, hairline-joined the way `.bl-grid` joins the Journal index the
+   reader just came from. Above 1280 it is the third column; below it the whole
+   rail moves under the article, which is why it is a normal grid item and never
+   a hidden one. */
+.bl-rc{background:var(--card);padding:clamp(1.1rem,1.8vw,1.35rem);
+  display:grid;gap:.6rem;align-content:start}
+/* `strong`, not `b`. On Instatic a text node's tag comes from a fixed
+   vocabulary — none|p|h1..h6|span|div|small|strong|em — and an invalid tag makes
+   the whole module fall back to its DEFAULTS, which is how two headings once
+   published as "Add your text here." while the stored props were correct. */
+.bl-rc strong{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.18rem * var(--t-sm));line-height:1.3;color:var(--fg)}
+.bl-rc p{color:var(--fg-body);font-weight:400;font-size:.84rem;line-height:1.65;margin:0}
+.bl-rc blockquote{margin:0;color:var(--fg-body);font-weight:300;font-size:.86rem;line-height:1.7}
+.bl-rc cite{font-style:normal;font-size:.72rem;letter-spacing:.06em;color:var(--fg-soft)}
+.bl-rc .pk-more{margin-top:.2rem;justify-self:start}
+.bl-rc .rv-stars{font-size:.8rem}
+/* The portrait is a transparent cutout, not a photograph with a background, so
+   it gets the plate the home page gives it rather than a scrim caption over it
+   -- a scrim over transparency paints a grey rectangle. */
+.bl-rc-fig{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--bg-3);
+  margin:calc(-1 * clamp(1.1rem,1.8vw,1.35rem)) calc(-1 * clamp(1.1rem,1.8vw,1.35rem)) .35rem}
+.bl-rc-fig img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  height:100%;width:auto;max-width:none;object-fit:contain}
+/* The consult card. Dark, because the CTA on every other page of this site is
+   the one thing that changes ground. Both offices, each booking its own
+   calendar -- a single button here would send every reader to Alexandria. */
+.bl-rc-dark{background:var(--bg)}
+.bl-rc-off{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;
+  padding-top:.7rem;border-top:1px solid var(--line)}
+.bl-rc-off span{font-size:.7rem;letter-spacing:.06em;color:var(--fg-soft);line-height:1.4}
+.bl-rc-off a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);white-space:nowrap;border-bottom:1px solid transparent;
+  transition:border-color .3s}
+.wz-fine .bl-rc-off a:hover{border-bottom-color:var(--rule)}
+
+/* --- the FAQ ---
+   Built by sections/blog-post.js, and only from headings that are QUESTIONS --
+   an article whose sections are statements gets no accordion. Each row carries
+   the opening of that section and a link into it rather than the whole section
+   again: the reference's accordion holds answers that exist nowhere else on its
+   page, and restating 2,000 words underneath themselves is not the same thing.
+   The same questions and their full answers go out as FAQPage JSON-LD, which is
+   what an FAQ block is really for. */
+.bl-faq{margin-top:clamp(2.5rem,5vw,3.5rem);padding-top:clamp(1.5rem,3vw,2.25rem);
+  border-top:1px solid var(--line)}
+.bl-faq > b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1rem}
+.bl-faq .pk-faq summary{font-size:calc(1.12rem * var(--t-sm))}
+.bl-faq .fa-body p{margin:0 0 .6rem}
+
+/* --- the consult block ---
+   Closes the article before the related strip. One action, the same one the
+   rest of the site asks for. */
+.bl-cta{margin-top:clamp(2.5rem,5vw,3.5rem);padding:clamp(1.6rem,3.4vw,2.4rem);
+  background:var(--bg-3);border:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;justify-content:space-between}
+.bl-cta div{max-width:46ch}
+.bl-cta strong{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.25rem * var(--t-sm));line-height:1.3;margin-bottom:.4rem}
+.bl-cta p{color:var(--fg-body);font-size:.92rem;line-height:1.65;margin:0}
+
+/* --- related ---
+   The reference leads each row with a thumbnail, so this does too: the loop
+   binds `{currentEntry.featuredMediaPath}`, the same field the hero reads.
+   Three across on a wide screen, a single stacked column on a phone. */
+/* No `margin-top`: `.bl-related` and `.bl-foot` are grid items of `.bl-post`
+   now, and the grid's own row gap already separates them. Keeping the margin as
+   well stacked the two and put 130px between the consult block and this strip. */
+.bl-related{padding-top:clamp(1.5rem,3vw,2.25rem);border-top:1px solid var(--line)}
+.bl-related > strong{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1.25rem}
+.bl-rel-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:700px){ .bl-rel-grid{grid-template-columns:repeat(3,1fr)} }
+.bl-rel-card{display:grid;gap:.7rem;align-content:start}
+/* `max-width` here is a PERFORMANCE declaration, not a layout one, and it is
+   inert at every width this design produces. The publisher derives each image's
+   `sizes` from the layout (`core/publisher/sizesResolver.ts`) by walking the
+   ancestor chain for px `width` / `max-width` / padding — and on this site it
+   finds NOTHING: `.wrap`'s cap is `max-width:var(--maxw)`, every gutter and
+   card padding is a `clamp()`, and the resolver skips both, plus it bails out
+   of a `base.loop` grid's track maths by design. So it returns null and the
+   module falls back to `sizes="auto, 100vw"`. Chrome 121+ honours `auto` and
+   picks correctly; Safari and Firefox read 100vw and fetch the w2000 variant —
+   measured 238 KB against the 38.5 KB w640 they actually need, on every card.
+   One px `max-width` on a class the node carries is the only hook the resolver
+   reads, and 640px is 45px above the widest this figure can ever be (595.08px,
+   at a 699px viewport, one column: 699 - 2x27.96 gutter - 2x24 card padding).
+   If the blog index is ever made one column ABOVE ~700px, raise this or the
+   thumbnail will stop short of the card. */
+.bl-rel-fig{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--mist);
+  max-width:640px}
+.bl-rel-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.wz-fine .bl-rel-card:hover .bl-rel-fig img{transform:scale(1.045)}
+/* The card's heading wraps the link, mirroring how the Journal index builds its
+   own loop items (`h2 > a`), so both grids share one markup shape. */
+.bl-rel-card h3{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.02rem * var(--t-sm));line-height:1.35;margin:0}
+.bl-rel-card h3 a{color:inherit;text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .35s}
+.wz-fine .bl-rel-card h3 a:hover{border-bottom-color:var(--rule)}

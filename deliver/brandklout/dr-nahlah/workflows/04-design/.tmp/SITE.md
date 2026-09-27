@@ -4,8 +4,10 @@ The home journey was a single verified page. This turns it into a site: one home
 page plus interior pages, all assembled from one shell so they cannot drift
 apart.
 
-**Currently 28 pages.** Eleven of them are live in Webflow; the rest are local
-only — see [Build-out to 28 pages](#build-out-to-28-pages).
+**Currently 46 pages.** Thirty-seven are the editorial site, published on Instatic.
+The other nine are the ads landing pages added on 2026-09-17 and are local only —
+see [The ads landing pages](#the-ads-landing-pages-2026-09-17--46-pages). Webflow is
+superseded; the eleven pages it carried are described below as history.
 
 Package: [`final-site/`](./final-site/) · Source: [`site-src/`](./site-src/)
 
@@ -358,6 +360,224 @@ captioning a stranger's face with his name is exactly the mistake bug 14 was rai
    consent mechanism, no stated retention period, and SSL is the only named control. For
    a healthcare practice collecting patient details through a web form, that needs a
    review by someone qualified to give one. This build does not attempt one.
+
+## The ads landing pages (2026-09-17) — 46 pages
+
+Nine pages, three paid campaigns, each a combo of **landing page → consultation
+page → thank-you page**. Requested by Brandklout for Dr. Nahlah's Google Ads, ahead
+of Mason Park and West LA. Reference set given by the team was Livewell's
+`/ads-landing-pages/{dental-implants, dental-implant-consultation, thank-you-implants}`,
+with the explicit instruction that it is a **guide, not a thing to duplicate**.
+
+| Campaign | Landing | Consultation | Thank you |
+| :--- | :--- | :--- | :--- |
+| All-on-4 | `ads-all-on-4` | `ads-all-on-4-consultation` | `ads-all-on-4-thank-you` |
+| Dental implants | `ads-dental-implants` | `ads-dental-implants-consultation` | `ads-dental-implants-thank-you` |
+| Porcelain veneers | `ads-veneers` | `ads-veneers-consultation` | `ads-veneers-thank-you` |
+
+### They are not editorial pages, and the build knows it
+
+A page entry in `build-site.mjs` carrying `landing: { book, label, rail }` gets a
+different shell: `partials/lp-nav.html` instead of the site header, **no drawer at
+all**, `partials/lp-foot.html` instead of the site footer, and
+`partials/lp-rail.html` as a mobile CTA rail outside `#smooth-wrapper`. Every exit
+on a paid landing page is a click somebody paid for, so there is no primary nav and
+no site map; the only links off a landing page are the CTA, the telephone and the
+two legal documents. All nine are `robots: noindex, follow`, which is not optional:
+they target the same queries as `/dental-implants`, `/all-on-4` and `/veneers`, and
+those are the pages that should rank.
+
+`lp-nav` deliberately keeps `id="nav"`, `class="nav"` and `#navProgress`.
+`js/90-boot.js` reads both without guarding and throws on the first scroll past 40px
+otherwise, taking the rest of the boot sequence with it. `#burger` and `#drawer` are
+absent on purpose and boot already handles that by returning early.
+
+### Slugs are flat, not nested
+
+Livewell's set lives under `/ads-landing-pages/<name>`. That cannot be reproduced
+here: Instatic saves a slug of `a/b` and then serves it at `/a-b`, so every link to
+the nested path 404s. The `ads-` prefix gives the same grouping and survives
+publication.
+
+### What was changed from the reference, and why
+
+- **The offer is truthful.** The reference runs "Limited Consultation Availability".
+  The practice runs no deadline, so these pages say the consultation costs nothing,
+  which is a fact, and say it once.
+- **Cost comes before the FAQ**, not buried inside it. It is the first objection on
+  full-arch work and the reference makes the reader hunt for it.
+- **No prices.** The reference quotes $1,900–$2,800 for a single implant. This
+  practice publishes no figure, so the implants page carries a relative-weight
+  column ($ / $$ / $$$) and a line in the page saying that is what it is.
+- **The FP1/FP2/FP3 section sits above the process** on the All-on-4 page. It is the
+  differentiator no competitor's landing page has.
+- **The options ladder sits above the process** on the implants page, because that
+  visitor does not yet know which of the four routes applies to them.
+- **The veneers page names what veneers cannot do.** Veneers cannot fix a bite, and
+  saying so is both the honest position and what stops the practice booking
+  evaluations it will turn away.
+- **The veneers thank-you page does not use the bone-loss urgency panel.** Veneers
+  are elective; there is no honest clinical cost to waiting, and inventing one would
+  be a false medical claim. It carries what to bring to the design appointment
+  instead.
+
+Every clinical claim on all nine pages is traceable to `pages/all-on-4.body.html`,
+`pages/dental-implants.body.html`, `pages/veneers.body.html`,
+`pages/implant-cost.body.html` or `pages/meet-dr-nahlah.body.html`. Nothing was
+written that the practice has not already put its name to.
+
+### One new stylesheet, one new section module
+
+`css/70-landing.css` (the `lp-` vocabulary) and `sections/lp-steps.js` (the
+scroll-scrubbed process rail). The hero, sections, cards, before/after sliders,
+mosaics, band, FAQ, office panels, review wall and footer are all the site's own
+components, reused rather than reimplemented — which is why the two bundles grew by
+300 CSS lines and 57 JS lines and **all 37 editorial pages came out byte-identical**.
+
+`css-vocab.mjs` rule A fails any class declared in two stylesheets, so
+`70-landing.css` writes no rule for `.nav-in`, `.nav-cta`, `.nav-right`,
+`.foot-grid`, `.pg-hero`, `.rv-stars` or `.wz-embed`, not even to nudge one value.
+Where a site component had to behave differently, the landing markup carries its own
+`lp-` part beside it. Three consequences worth knowing before editing the file: the
+landing header has its own `.lp-nav-in` row rather than reusing `.nav-in`, the
+footer swaps only `.foot-grid` for `.lp-foot-grid` and reuses everything else, and
+the form card's `min-height` is written as `.lp-form-card iframe`, by tag.
+
+### The form is in the hero on all six (2026-09-17, second pass)
+
+Brandklout's note was that every one of their pages carries the GHL form in the
+hero and that it is the step that earns the conversions. So all three landing
+pages and all three consultation pages now open with a two-column hero: copy on
+the left, the form card on the right, photograph behind both.
+
+Three consequences worth knowing before editing these pages:
+
+1. **The landing pages no longer link to the consultation pages.** Every CTA is
+   `#book`, which scrolls to the form already on the page. A click-through is a
+   place to change your mind, and it was the one step worth removing. The
+   consultation pages still build and still stand alone — they are the leaner ad
+   destination for campaigns that want to skip the argument.
+2. **The hero's DOM order is copy → form → under.** That is for the phone:
+   stacked, the form has to be the next thing after the headline. With the ticks,
+   the offer line and the numbers above it, the first field started about 900px
+   down a page whose entire purpose is a form in the hero. Above 1080,
+   `css/70-landing.css` places the three blocks explicitly, so the desktop
+   reading order is still headline, supporting copy, form.
+3. **Do not wrap already-revealing blocks in a `data-rv` container.**
+   `js/20-pagekit.js` skips a `data-rv` whose parent has one, so the first
+   version of `.lp-hero-under` (which carried `data-rv="stagger"`) silently
+   disabled all four of its children's reveals and left them at opacity 0 on six
+   pages. site-test caught it; nothing else would have.
+
+The h1 drops from `--d2` to `--h2` in this hero. At 1440 the copy column is about
+620px, and 4.68rem display type wraps a six-word headline onto four lines and
+pushes the form's first field under the fold.
+
+### Filmed patients (2026-09-17, second pass)
+
+The All-on-4 and dental-implant pages carry the practice's own filmed patients:
+one lead film beside its pull-quote (`.st-row`, from patient-stories) and three
+click-to-play facades (`.vl-grid`, from video-library). No new CSS and no new JS
+— `sections/video-library.js` guards on `.vl-grid` and picks the facades up.
+
+| Page | Lead film | Facades |
+| :--- | :--- | :--- |
+| `ads-all-on-4` | Melanie, full-arch | Stephen, Barbara, the couple |
+| `ads-dental-implants` | Yolanda, implants | Stephen, Donita, Barbara |
+| the two consultation pages | Melanie / Yolanda | none |
+| the two thank-you pages | Stephen / the couple | none |
+
+**One real iframe per page is not a performance compromise, it is the
+requirement.** Instatic lifts CSP `frame-src` only for a page that renders a real
+YouTube node, so a page of facades alone could never play anything once
+published. The lead film is that node.
+
+**The veneers campaign carries no film, and that is deliberate.** There is no
+veneer patient testimonial, and the only cosmetic films in the library
+(`Seven Steps of Veneers`, `Smile Makeovers`, `Fixing Grey Lines`) are three of
+the eight that feature a GENERIC PRESENTER against a white backdrop rather than
+Dr. Nahlah — gen-videos.mjs says so, and putting one on a paid page would imply
+it is the practice. The veneers page gets a wider case gallery and the porcelain
+close-ups instead. Worth asking the client for one filmed veneer patient.
+
+Imagery also roughly doubled: every landing page went from three before/after
+sliders to six, and every mosaic from three figures to four. Counts per page are
+now 26 / 28 / 25 local images plus three film thumbnails on two of them, and no
+page repeats an image — checked by hashing bytes, because the library holds
+byte-identical uploads under different names.
+
+### Gated
+
+`site-test.mjs` over all 46 pages: **781/784, and zero failures on any of the nine.**
+`fluid-qa.mjs` over the nine at 360/390/768/991/1280/1440/1920: **135/135.**
+`css-vocab.mjs`: 10 problems, every one pre-existing and none naming `landing`.
+No page repeats an image (bytes hashed, not filenames).
+
+site-test gained a check that CLICKS a film facade and requires a real player to
+take its place, rather than asserting the markup exists. A facade that renders
+perfectly and does nothing when clicked is invisible to every other check on the
+page. It covers `/video-library`'s thirteen facades too.
+
+The three surviving site-test failures are on `index` (an `<img>` with no `src`, created at
+runtime by `sections/ch-services.js` as `.sv-follow`) and on `our-facility` (four
+`assets/tech-*.webp` files the page references that are not in the local assets folder).
+Both files are unmodified; both failures predate this work.
+
+`site-test.mjs` learned about the landing shell rather than being exempted from it. It
+derives the landing set from `build-site.mjs` the same way it derives PAGES, then asserts
+the landing shell, asserts the drawer and burger are ABSENT, asserts the rail is fixed
+outside `#smooth-wrapper`, and hit-tests the rail's two actions at 390 instead of running
+the four drawer checks. A tenth landing page cannot quietly get tested as an editorial one.
+
+### Two offices, eighteen pages (2026-09-17, third pass)
+
+The campaigns are geo-split, and each office has its own LeadConnector form per
+campaign, so every ads page now exists twice: `ads-alexandria-<campaign>[-consultation
+|-thank-you]` and `ads-tysons-…`. The nine bodies are templates; `build-site.mjs`
+carries a `LOCATIONS` table (both offices, all lines, the six form ids) and fills
+`{{LOC_*}}` / `{{OTHER_*}}` tokens in the body, the landing nav, the rail and the
+footer. `partials/lp-form.html` is the vendor embed written once; `partials/
+lp-office.html` is one office panel, rendered twice per page with the campaign's
+office first. The build throws on an unfilled token. All eighteen `PAGES` entries
+are written out because `site-test.mjs` and `check-page-lists.mjs` read the array
+as text.
+
+The placeholder McLean contact form is gone. What remains a LeadConnector setting
+is the redirect: each form must send its visitor to its own thank-you page.
+
+### More imagery on more grounds (2026-09-17, third pass)
+
+Brandklout asked for more photography in sections of different colours without
+losing conversion efficiency. Every photograph went INTO an existing section, so the
+page order and the CTA count are unchanged: a figure between the two stakes lists
+(`.lp-stakes.has-fig`), a photograph behind CTA 1 (`.lp-cta.has-fig`) and deep gold
+on CTA 2 (`.lp-cta.is-gold`), the films on black (`data-theme="dark"`), a photograph
+per process step (`.lp-step-fig`), the team as a wide figure in the money section
+(`.lp-wide`), a portrait beside the FAQ (`.lp-faq-grid`) and a photo-backed dark
+closer (`.lp-final`). A landing page cycles cream, white, gold-wash, black,
+ink-with-photo, deep gold and the closer. Image counts per landing page: 35 / 37 /
+33, no byte-level repeat on any page.
+
+The library's file names are unreliable (`Untitled-3.jpg` is the reception desk,
+`pt-hero-2.jpg` is Stephen), and nothing in it is identifiably the Alexandria
+office, so the Alexandria variants never caption a photograph as Tysons.
+
+### The four site tags (2026-09-17, third pass)
+
+`partials/site-scripts.html` is injected into every page's head: Termly
+(`autoBlock=off`, so the consent blocker does not hide the GHL form and the films),
+then GTM `GTM-MR7K64XD`, then the LeadConnector number pool and session helper; the
+GTM `<noscript>` follows `<body>`. The "no CSS or JS inlined" gate exempts a
+`<script data-site-script>` and nothing else. On Instatic these go into
+`siteScripts`, with the CSP opened for their three hosts.
+
+### Open
+
+1. **The six form redirects**, in LeadConnector, to `/ads-<office>-<campaign>-thank-you`.
+2. **Google Ads conversions**, one destination-URL conversion per thank-you path.
+3. **No veneer patient has been filmed**, and no photograph of the Alexandria office
+   exists in the library.
+4. Import to Instatic (workflow 22).
 
 ## Navigation — the coherence fix
 

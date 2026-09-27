@@ -26,9 +26,30 @@
 .ch-path .pa-card h3{font-size:var(--h3)}
 .ch-path .pa-card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
 .ch-path .pa-card .pa-shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
-.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
-  transition:filter .6s,transform .8s}
-.ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
+/* The grayscale->colour reveal is a POINTER affordance, and it was costing a
+   phone the whole chapter. A CSS filter on an element inside a transformed
+   ancestor cannot be composited while that ancestor moves: the browser has to
+   re-rasterize the filtered subtree on every frame of the horizontal scrub, so
+   four filtered images turned this section into a sustained 30fps on mobile
+   (p50 33.3ms, 67% of frames over 32ms). Behind (hover:hover) it costs touch
+   devices nothing and desktop keeps the effect unchanged. Measured either side
+   with 08-qa/.tmp/mobile-pin-diagnose.mjs. */
+.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover}
+/* `.wz-fine` is set on <html> by js/90-boot.js when the device has a real
+   hovering pointer. A CLASS rather than `@media(hover:hover)` on purpose:
+   Instatic's style registry stores non-viewport media queries as custom
+   conditions whose emit order is the raw `site.conditions` array order, with
+   none of the sorting viewport breakpoints get -- so a hand-added pointer
+   condition is a cascade bug waiting to happen. A plain descendant selector
+   needs no condition at all and behaves identically in both places. */
+/* Ungated: the pinned build runs on touch now and the grayscale->colour reveal
+   is the half of the effect a reader actually notices. It was withheld because
+   tweening `filter` inside a TRANSFORM-pinned ancestor repainted four images
+   every frame; pinning is native `position:fixed` now, so there is no moving
+   transform to composite against. The HOVER lift below stays behind `.wz-fine`
+   — that one genuinely needs a pointer. */
+.ch-path .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s,transform .8s}
+.wz-fine .ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
 .ch-path .pa-bar{position:absolute;left:var(--pa-inset);right:var(--pa-inset-end);
   bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
 /* Nothing to scroll means nothing to report: the JS adds this when the whole
@@ -36,3 +57,63 @@
 .ch-path.is-static .pa-bar{display:none}
 .ch-path .pa-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
 @media(max-width:719px){ .ch-path .pa-card{width:78vw} }
+
+/* THE SWIPE PATH (touch). Added by sections/ch-path.js -- see the note there
+   for the measurements that made it necessary.
+
+   The pin becomes an ordinary block so the chapter takes only the height it
+   needs, and the track becomes a snapping scroller. `overscroll-behavior-x:
+   contain` stops a horizontal swipe that runs out of track from turning into
+   a browser back-gesture, which is the one way a carousel like this can lose
+   the reader the page. */
+/* Top padding clears the fixed nav: the pinned build centred its content in a
+   100svh box so there was always headroom, and a natural-height block has
+   none. `scroll-margin-top` does the same for an anchor jump to #path. */
+.ch-path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
+.ch-path.is-swipe .pa-pin{height:auto;
+  padding-top:calc(var(--nav-h,78px) + clamp(2rem,6vw,3.5rem));
+  padding-bottom:clamp(3rem,9vw,5rem)}
+.ch-path.is-swipe .pa-track{
+  overflow-x:auto;overflow-y:hidden;width:auto;
+  scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding-bottom:.5rem}
+.ch-path.is-swipe .pa-track::-webkit-scrollbar{display:none}
+.ch-path.is-swipe .pa-card{scroll-snap-align:center;
+  border-color:var(--line);transition:border-color .5s}
+
+/* THE REVEAL ON TOUCH. `.is-live` is toggled by an IntersectionObserver in
+   sections/ch-path.js as each card crosses the middle of the track — the same
+   cue the pinned build takes from `containerAnimation`, without the scrub.
+
+   These are CSS transitions on purpose. The pinned build tweened the same
+   properties from JS on every frame, and on a phone that is what made the
+   chapter stutter; a transition is declared once and run by the compositor,
+   and it fires on a discrete crossing rather than continuously.
+
+   The grayscale reveal is included here even though `.wz-fine` withholds it
+   from touch elsewhere. The reason it was withheld was per-frame repaint of a
+   filtered image inside a moving transform — the scrub. There is no scrub in
+   this build, so the filter animates once per crossing, which is a bounded
+   cost, and it is the most visible half of the effect. */
+.ch-path.is-swipe .pa-card .pa-no{opacity:.35;transition:opacity .45s}
+.ch-path.is-swipe .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s}
+.ch-path.is-swipe .pa-card.is-live{border-color:rgba(138,126,78,.55)}
+.ch-path.is-swipe .pa-card.is-live .pa-no{opacity:1}
+.ch-path.is-swipe .pa-card.is-live .pa-shot img{filter:grayscale(0)}
+
+@media(prefers-reduced-motion:reduce){
+  /* Reveal without the travel: every card lit, nothing transitioning. */
+  .ch-path.is-swipe .pa-card .pa-no{opacity:1}
+  .ch-path.is-swipe .pa-card .pa-shot img{filter:none}
+}
+/* RELATIVE, never static. `.pa-bar i` is the progress fill and is
+   `position:absolute;inset:0` — it needs .pa-bar to be its containing block. Set
+   static here and the fill escapes to `#pathPin` and paints a FULL-HEIGHT gold
+   rectangle over a third of the chapter (measured: 126x677 instead of 356x1).
+   It is invisible at rest because the fill starts at scaleX(0), so it only
+   appears once the reader actually swipes — which is exactly how it reached
+   production unnoticed. The bar only needs to leave the absolute flow of the
+   pinned build; relative does that and keeps the fill anchored. */
+.ch-path.is-swipe .pa-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
+  margin-inline:var(--pa-inset) var(--pa-inset-end)}

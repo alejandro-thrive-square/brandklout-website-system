@@ -42,8 +42,15 @@ p{margin:0}
 .btn-dark::after{background:var(--ink-700)}
 .btn-dark:hover{color:var(--bg)}
 
-/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper */
-#smooth-wrapper{overflow:hidden}
+/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper.
+
+   The clip is SCOPED to `.wz-smooth`, which js/90-boot.js sets only after
+   ScrollSmoother has actually been created. Unscoped, this rule clips a page
+   that has no smoother driving it and scrolling stops dead — the wrapper is
+   full document height with its overflow hidden and nothing translating the
+   content. On touch, where the smoother is now deliberately not created, the
+   wrapper must stay transparent to scrolling. */
+.wz-smooth #smooth-wrapper{overflow:hidden}
 
 /* Pre-paint guard: hide split targets until GSAP has set their state so we
    never flash unsplit text. .wz-ready is set by the bootstrap. */

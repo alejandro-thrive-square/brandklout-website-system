@@ -35,7 +35,7 @@ brief. All of it is applied to the **local package** (`deliver/brandklout/dr-nah
 The user restated it as a system rule: **no em dash in any copy, anywhere.** 72 had crept back in
 during the 28-page build. All removed, chosen per instance (comma / colon / semicolon / full stop);
 a blanket substitute leaves half of them ungrammatical. Recorded in
-[SYSTEM_RULES.md §3](../../../../../SYSTEM_RULES.md). Comments are not copy and were left alone. Verify on the
+[SYSTEM_RULES.md §3](../SYSTEM_RULES.md). Comments are not copy and were left alone. Verify on the
 **built** output with comments and `<script>`/`<style>` stripped first, or the check reads its own
 notes back: currently **0 across all 28 pages**.
 

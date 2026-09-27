@@ -74,6 +74,130 @@ These are hard rules, not preferences. Violating them produces redirect loops or
    each returned **200 serving a different page**, while an invented URL returned 404, which is
    what tells you the rules are installed and firing rather than absent.
 
+## Cloudflare delivery (Dr. Nahlah, 2026-08-25) — supersedes the Webflow CSV
+
+**Webflow is not the platform for this project.** The redirect map ships to **Cloudflare Bulk
+Redirects** against the Instatic build. `build_redirects.py` emitted Webflow's two-column
+"Import 301 redirects" format with `(.*)` wildcards; none of that is Cloudflare's format. Use
+`build_cloudflare.mjs` + `verify_cloudflare.mjs` for delivery. The old script is kept because its
+**mapping decisions** (the Wayback CDX sweep, the per-URL judgement calls) are read back in from
+`.tmp/drnahlah-301-redirects-audit.csv` rather than re-guessed.
+
+```bash
+node ../15-instatic-api-sync/.tmp/inventory.mjs        # pages, from the live build
+node ../15-instatic-api-sync/.tmp/inventory-posts.mjs  # posts
+node .tmp/live-status.mjs                              # what actually 200s
+node build_cloudflare.mjs                              # -> .tmp/out/
+node verify_cloudflare.mjs --live                      # 32 assertions
+```
+
+### Rules that were Webflow's job and are now ours
+
+These are the ones that silently produce a broken map if carried over unchanged.
+
+1. **Trailing slashes must be emitted.** Rule 2 above ("never emit trailing slashes") is a
+   *Webflow* rule — Webflow 301s `/foo/` → `/foo` itself, before redirect matching. **Instatic does
+   not**: `/veneers` and `/veneers/` both return 200. The old site was WordPress, whose default
+   permalinks carry a trailing slash, so the slashed form is what is indexed and linked. Emit both.
+2. **`preserve_path_suffix` defaults to TRUE and must be forced FALSE.** With `subpath_matching`
+   on, the default sends `/blog/some-post` → `/posts/some-post`, which does not exist. That is a
+   404 on every subpath hit, and the CSV looks perfectly correct.
+3. **No regex.** Cloudflare Bulk Redirects has no wildcards. `/blog/(.*)` becomes one row with
+   `subpath_matching=TRUE`, which matches the source URL *and* everything beneath it — so the bare
+   `/blog` row folds into the same row.
+4. **CSV has no header row**, and `source_url` must carry a hostname and no query string. Column
+   order is `SOURCE_URL,TARGET_URL,STATUS_CODE,PRESERVE_QUERY_STRING,INCLUDE_SUBDOMAINS,SUBPATH_MATCHING,PRESERVE_PATH_SUFFIX`.
+5. **`include_subdomains=TRUE` on the apex** covers `www` and the apex in one row. Needed here
+   because both hosts serve the site byte-identically.
+6. **Limits are not a constraint.** Free plan allows 10,000 URL redirects across 5 lists.
+
+### The sitemap has to be served by something
+
+Instatic 0.0.16 has **no sitemap route** — `/sitemap.xml`, `/sitemap_index.xml` and `/sitemap.txt`
+all 404 — and Cloudflare has no "upload a static file" slot. `build_cloudflare.mjs` therefore also
+emits `.tmp/out/sitemap-worker.js`: a Worker serving `/sitemap.xml` plus a `robots.txt` that names
+it, with everything else falling through to the origin. The origin's robots.txt is Cloudflare's
+default content-signals file and contains **no `Sitemap:` line and no `User-agent` rule at all**.
+
+### Exclude the entry template from the sitemap
+
+The `posts` entry template is a row in the `pages` table with slug `post`. It has no public URL and
+returns **404** in production. It must be filtered out of the sitemap, or the sitemap ships a known
+dead URL. Filter on `cells.templateEnabled === true`, not on a slug name.
+
+### Still open on this site (not redirect bugs, but they cost the same traffic)
+
+- **Apex and `www` both serve 200, byte-identical, with no canonical and no redirect.** Duplicate
+  content across two hosts. Fix with one Redirect Rule, apex → `https://www.drnahlah.com`.
+- **Trailing-slash URLs serve 200 rather than redirecting**, and `/index` duplicates `/`. A
+  normalising Redirect Rule would fix the class; the CSV covers the inventoried URLs either way.
+- The publisher emits **no `<link rel="canonical">`** on any page, which is what would otherwise
+  have absorbed both problems.
+
+## DEPLOYED to Cloudflare 2026-08-25 — live on drnahlah.com
+
+Account `45ec80048aabfb983a20f415546f62c7`, zone `drnahlah.com`
+`f126e891760316b7946887faacf306bd` (**Free plan** — everything below fits Free).
+
+| What | Where | Verify |
+|---|---|---|
+| Worker `drnahlah-seo` serving `/sitemap.xml` | routes on `www.` and apex | 200, `application/xml`, 79 URLs |
+| Bulk Redirect list `drnahlah_301` (190 rows) | account list `5b3c18e4409c48cb84a9ff2fb10b99ae` | 190/190 land correctly |
+| Bulk Redirect rule | account `http_request_redirect` ruleset `17b28c4e41c842958e5ec3016bd49ca8` | — |
+| apex → www Single Redirect | zone `http_request_dynamic_redirect` ruleset `45a726dfdb624887b1bfe0480620c46e` | 301, query string preserved |
+
+Scripts: `cf-api.mjs` (token from repo-root `.env`), `deploy-worker.mjs`,
+`deploy-redirects.mjs`, `deploy-canonical-host.mjs` — all with `--apply` gates —
+and `verify-live.mjs`, which replays **all 190** rows against production
+(**210 assertions, 0 failures**).
+
+### Gotchas earned here, all of which cost a live mistake or a 4xx
+
+1. **Do NOT route `/robots.txt` through a Worker.** The content-signals
+   `robots.txt` on this site is generated by **Cloudflare at the edge**, not by
+   Instatic — proven by `encorercm.com/robots.txt` (same app, no Worker route)
+   still returning the full 1248 bytes. A Worker on that path runs first, its
+   origin fetch 404s (Instatic serves no robots route), and the fallback
+   **replaces** the policy. Observed live: 1248 B → 70 B. Routes removed;
+   robots.txt has no `Sitemap:` line as a result, which is an acceptable trade.
+2. **`http_request_dynamic_redirect` runs BEFORE `http_request_redirect`.**
+   The opposite of what the phase names suggest. So a Single Redirect fires
+   ahead of Bulk Redirects, and an old URL arriving on the apex takes two hops.
+   Measured, not assumed.
+3. **A redirect-KIND list cannot be used in a boolean expression.**
+   `... and not (http.request.full_uri in $drnahlah_301)` is rejected with
+   `20127: the redirect list is not allowed`. Redirect lists are reachable only
+   through `from_list` on a Bulk Redirect rule. This is why gotcha 2 is not
+   worked around — see `deploy-canonical-host.mjs` for why enumerating the paths
+   instead would be worse.
+4. **Two Cloudflare objects, not one.** A Bulk Redirect *list* does nothing by
+   itself; the account-level *rule* in `http_request_redirect` is what makes
+   traffic follow it.
+5. **The permission for the list is not the permission for the rules.**
+   `Mass URL Redirects` covers the rules; `/accounts/*/rules/lists` needs
+   **`Account Filter Lists`** (shown as `Account Rule Lists` in the newer token
+   UI). Missing it gives `403 10000: Authentication error`, which reads like a
+   bad token rather than a missing scope.
+6. **Account-owned tokens 401 on `/user/tokens/verify`.** Tokens created under
+   *Manage account → Account API tokens* are not user tokens; verify them at
+   `/accounts/{id}/tokens/verify`. A 401 there does not mean the token is bad —
+   check a real read like `/zones` before concluding anything.
+7. **The token sees every zone on the account** (7 Brandklout clients). Every
+   script here hard-codes `drnahlah.com` and `deploy-redirects.mjs` refuses any
+   row whose source or target is not that domain.
+
+### Still open
+
+- **`/sitemap.xml` is a snapshot.** Re-run `build_cloudflare.mjs` then
+  `deploy-worker.mjs --apply` whenever the build gains or loses a page.
+- **Trailing slashes still serve 200** (`/veneers/` and `/veneers`), and
+  `/index` duplicates `/`. Normalising needs regex in a Single Redirect, which
+  is **Business+**. The CSV covers both forms of every inventoried old URL, so
+  this only affects URLs nobody linked to.
+- **No `<link rel="canonical">` on any page** — the publisher emits none. This
+  is the one remaining duplicate-content gap and the reason to build the
+  `publish.html` SEO plugin.
+
 ## Reference Implementation
 
 `deliver/brandklout/dr-nahlah/workflows/14-migration-seo-redirects/build_redirects.py` —

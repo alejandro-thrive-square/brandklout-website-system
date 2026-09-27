@@ -38,6 +38,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel. The src below is filled per page by
+     build-site.mjs (2026-09-22): Alexandria's pool on every page except the
+     Tysons ads landing pages, which carry Tysons' pool instead. On Instatic
+     the same split is the embed-origins `except=` / `pages=` line options. -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
+
+<!-- ==========================================================================
      THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
      from site-src/css/*.css in filename order, which IS the cascade order:
 
@@ -70,6 +105,8 @@
 </head>
 
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
@@ -165,10 +202,10 @@
   </div>
   <div class="dr-foot">
     <div><b>Tysons Corner &middot; McLean</b>
-      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
+      New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
     <div><b>Alexandria</b>
-      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
+      New patients <a href="tel:+15716177245">(571) 617-7245</a><br>
       Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
     <div><b>Hours</b>
       Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
@@ -355,10 +392,37 @@
   <div class="wrap section cta-in">
     <h2 data-split>Get on the path to better dental health.</h2>
     <p data-rv>You get a time with Dr. Nahlah, not a sales appointment with a coordinator.</p>
-    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Request a consultation</span></a>
-    <div class="cta-phones" data-rv>
-      <span>McLean &middot; <a href="tel:+15717029900">(571) 702-9900</a></span>
-      <span>Alexandria &middot; <a href="tel:+15712537790">(571) 253-7790</a></span>
+    <!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
+         books every reader into one office; see add-cta-offices.mjs. -->
+    <div class="cta-offices" data-rv="stagger">
+      <article class="ct-office">
+        <h3>Tysons Corner &middot; McLean</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          7901 Jones Branch Drive, Suite 220<br>
+          McLean, VA 22102</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+17034483312">(703) 448-3312</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17034483312">(703) 448-3312</a></div>
+        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+           target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+           target="_blank" rel="noopener"><span>Book now</span></a>
+      </article>
+      <article class="ct-office">
+        <h3>Alexandria</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          2855 Duke Street<br>
+          Alexandria, VA 22314</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+15716177245">(571) 617-7245</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17039405410">(703) 940-5410</a></div>
+        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+           target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+           target="_blank" rel="noopener"><span>Book now</span></a>
+      </article>
     </div>
   </div>
 </section>
@@ -402,9 +466,9 @@
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul style="margin-top:1.1rem">
-          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
-          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
+        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+          <li><b>McLean</b><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div><a href="tel:+17034483312">(703) 448-3312</a></li>
+          <li><b>Alexandria</b><div>2855 Duke Street</div><div>Alexandria, VA 22314</div><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>

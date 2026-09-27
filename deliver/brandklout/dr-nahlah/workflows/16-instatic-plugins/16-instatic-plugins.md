@@ -22,7 +22,31 @@
 > the canonical `15-improvement-intake-audit` and `16-vercel-deployment`.
 
 ## Client-Facing Overview
-Third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site through an installable plugin, instead of being impossible or requiring a modified platform build. A developer places them **by hand** from the editor — insert the **Embed** block, paste the URL or the vendor's snippet, publish — with no script and no agent involved.
+Capabilities the stock platform does not offer are added as **installable plugins**, never as a modified platform build. Four are in service:
+
+- **Embed Origins** — third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site. A developer places them **by hand** from the editor: insert the **Embed** block, paste the URL or the vendor's snippet, publish.
+- **Link Editor** — the link address on any button or link can be edited, including internal pages, on-page anchors and phone numbers, not only full `https://` addresses.
+- **Open Graph** — a link to any page unfurls with a headline, a description and a picture wherever it is pasted. Also gives every page its own meta description and a canonical link, neither of which the platform emits. [README](./open-graph/README.md)
+- **AEO Schema** — one JSON-LD `@graph` on every page (organisation, page, breadcrumb, article), managed from the admin and changeable across the whole site in one API call. [README](./aeo-schema/README.md)
+
+> [!IMPORTANT]
+> **The publisher's `<head>` is the smallest surface on this platform, and three of
+> these four plugins exist because of it.** `buildDocumentMetaTags`
+> (`src/core/publisher/render.ts`) emits a title, ONE site-wide description and a
+> favicon. Not a canonical link, not an `og:` tag, not a line of structured data,
+> and — the one that surprises people — **not the per-page `seoDescription` the
+> admin has a field for and 73 of this site's 80 pages had filled in.** Before the
+> Open Graph plugin, every published page carried the same sentence. Check what the
+> publisher actually emits before assuming a field that exists in the admin reaches
+> the page.
+
+> [!IMPORTANT]
+> **Plugins are the standing answer here; patching the image is not.** A patch to
+> `corebunch/instatic` has to be rebuilt and re-applied on every upstream release. That
+> maintenance debt is the reason the Link Editor exists as a plugin even though a working
+> three-file patch was already written ([workflow 17](../17-instatic-platform-patch/17-instatic-platform-patch.md), kept as
+> reference and **not** deployed). Reach for a plugin first; treat a platform patch as a last
+> resort that needs a deliberate decision.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be documented here immediately.
@@ -289,6 +313,134 @@ node verify-embed-editor.mjs --cleanup
 
 `test-embed-origins.mjs` covers passthrough, `'none'` replacement, preservation of every other directive, importmap-sha survival, dedupe, trailing-slash stripping, directive-injection rejection, absent-directive creation, idempotence, body integrity, and the no-meta-tag case.
 
+---
+
+# Plugin 2: Link Editor (`brandklout.link-editor` v1.0.0)
+
+Full detail in [`link-editor/README.md`](./link-editor/README.md). The short version, and
+the part that generalises beyond this one plugin:
+
+## The problem
+
+The platform's own "Link URL" field cannot express most of this site's links. `UrlControl.tsx`
+commits only on a valid value — `if (valid) onChange(propKey, v)` — and `isValidUrl()` accepts
+absolute `https:` / `http:` / `mailto:` **only**.
+
+The input is controlled from the store and the store is written only on a valid value, so every
+keystroke that leaves the value invalid is discarded and the field re-renders from the unchanged
+value. Backspacing `#invitation` passes through `#invitatio`, `#invitati`, … — each schemeless,
+each rejected, each snapped back. The empty string that *would* be accepted is unreachable, so
+the field can be neither edited **nor cleared**. It reads as broken, not restricted. That is what
+the client reported: **2,362 of 2,510** link/button nodes on this site.
+
+## The editor-plugin surface — the finding that made this possible
+
+An earlier pass concluded "a plugin cannot fix this" after testing only `modules.register`, and
+went to a platform patch. That rejection was correct **for what it tested** and wrong as a
+conclusion. The plugin API has a whole second surface:
+
+| Permission | Grants | Risk |
+|---|---|---|
+| `editor.code` | plugin JS in the admin window, **unsandboxed**, full admin privileges | `dangerous` |
+| `editor.store.read` | `api.editor.store.read()` → the entire `EditorStore` | medium |
+| `editor.store.write` | `api.editor.store.transaction(mutate)` → a mutable draft of the whole store | high |
+| `editor.panels` | a React panel in the editor's left rail | medium |
+| `editor.toolbar` / `editor.commands` / `editor.canvas` | toolbar buttons, ⌘K commands, canvas overlays | medium–high |
+
+All of it is really implemented in 0.0.16 — `editorPluginLoader.ts` loads the entrypoint,
+`runtime.ts:489-508` wires `read` / `transaction` behind `assertPluginPermission` — not merely
+typed. **Check this surface before ever proposing a platform patch to editor behaviour.**
+
+## How the plugin works
+
+Registers a **Link URL** panel; reads the selection via `useEditorStore`; writes via
+`api.editor.store.read().updateNodeProps(nodeId, { href })`. Nothing about `UrlControl` changes.
+
+Two decisions worth carrying to any future editor plugin:
+
+1. **Keep the draft in local React state.** This IS the fix. Deriving the input value from the
+   store is exactly what makes the platform's field snap back. Let the field be typed freely and
+   decline to *commit* an unsafe value instead of refusing to let it be *typed*.
+2. **Write through the store ACTION, not `store.transaction`.** The editor store is
+   `zustand-mutative`; `transaction(fn)` runs `setState((state) => fn(state))`, so `state` is a
+   **Mutative draft** and calling `state.updateNodeProps(...)` on it re-enters `set()` from
+   inside a producer. `store.read()` returns `getState()` — the real store, real actions, and
+   the same `updateNodeProps` the platform's property panel calls, so undo coalescing and dirty
+   tracking come along for free.
+
+## No build step
+
+Hand-written ESM, like the Embed block. Bare specifiers (`react`, `@instatic/host-hooks`,
+`@instatic/host-ui`) resolve through the host import map in `index.html`, which re-exports the
+host's live instances from `globalThis.__instatic`. `createElement` is used directly — JSX would
+need a compiler. **`@core/*` is NOT importable**; anything needed from core must be transcribed,
+which is why the safety gate has a drift test.
+
+## Gotchas
+
+- **Page refs must be allowed explicitly.** `urlScheme('cms:page:x')` returns `cms:`, so
+  `isSafeUrl` refuses it. Gating on `isSafeUrl` alone leaves a page-ref link uneditable in
+  *precisely* the way the platform's field is — every intermediate keystroke keeps the prefix.
+  Caught by the verify gate, not by inspection.
+- **Allowing them is a feature.** The native Page picker only *preserves* an existing fragment
+  (`makePageRef(pageId, ref?.fragment)`) and cannot type one, so `cms:page:<id>#book` is
+  unreachable from stock UI and reachable here.
+- **`Input` from `@instatic/host-ui` is NOT the design-system Input.** It is `PluginInput`, a
+  narrowed wrapper whose whole contract is `PluginUiInputProps`. Two traps, both of which cost a
+  live debugging round: **`onChange` is handed the STRING, not the event** (a handler written as
+  `(e) => e.target.value` throws on every keystroke and the field silently refuses input), and
+  **anything outside the contract is dropped** — `id`, `fieldSize`, `autoComplete`, `spellCheck`
+  all do nothing, and the wrapper assigns its own `id` from `useId()`. Use its `label` and
+  `description` props; it renders them in a host `FormField`.
+- **Debounce the write; do not commit per keystroke.** Every *prefix* of what is typed gets
+  written, and every prefix of a dangerous value is itself safe: `javascript:alert(1)` walks
+  through `j`, `ja`, … `javascript` — all schemeless, all committed — and only the colon stops
+  it. The live node was left holding `javascript` while the panel said "Not saved". 400 ms plus
+  an immediate commit on blur. Applies to ANY editor plugin writing from a text field.
+- **Do not write a literal `[\u0000-\u0020]` range into the source.** Doing so puts a real NUL
+  byte in the file: `grep` then reports "binary file matches" and editors mangle it on save. The
+  verify gate asserts the source is free of raw control characters.
+- **Only `editor.panels` exists — there is no right-hand inspector extension point.** The field
+  lives in the left rail, not beside the platform's own Link URL control.
+- **Reload the editor tab after installing.** Plugins activate at admin boot;
+  `useInstalledEditorPlugins` re-runs only on `CMS_PLUGINS_CHANGED_EVENT`.
+- **`install-plugin.mjs` now keys its grants by plugin id.** A flat list would have silently
+  handed the second plugin the first one's permissions; an unknown id is refused outright.
+
+## LIVE on Dr. Nahlah, 2026-08-24 — v1.0.2, verified in the editor
+
+Installed on `encorercm.com`, plugin `active`, `lastError: null`, all four permissions granted.
+Driven under CDP against the real editor, on the home page's `Book a Free Consult` CTA:
+
+| Typed | Result |
+|---|---|
+| `…#book` appended to a `cms:page:` ref | committed — a fragment on a page ref, which the Page picker cannot author |
+| `tel:+15717029900` | committed |
+| `#book` | committed; canvas re-rendered `<button>` → `<a href="#book">` in all three frames |
+| `javascript:alert(1)` | refused, field marked invalid, warning shown, **node untouched after 1.2 s** |
+| selecting a `base.container` | "has no link address" empty state |
+
+The node was restored to its original `cms:page:5eKjtlsP8RzgQ-CM7rh2c` and the draft re-read
+over the API to confirm it: **MATCH, and no test residue anywhere in the 37 page trees.** The
+draft was already at `seq 67` with unpublished work; nothing was published.
+
+Both v1.0.0 and v1.0.1 failed this run — see the two gotchas above. The bugs were only visible
+against the live editor; the offline gates passed throughout, which is why they now assert both.
+
+## Gate: `verify-link-editor.mjs`
+
+```bash
+node verify-link-editor.mjs        # 53 assertions, ~1s
+```
+
+Lifts the safety functions out of the real plugin file by source slice, then re-reads the host's
+`src/core/html-sanitize/index.ts` and fails if `SAFE_URL_SCHEMES`, `isSafeUrl` or `urlScheme`
+have drifted from what the copy was transcribed against. A hand-copied security check rots
+silently; this turns an upstream change into a test failure. Override the checkout with
+`--host=<path>` (default `C:\ifork\Instatic-main`).
+
+---
+
 ## Upstreaming
 
 Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTRIBUTING.md inviting contributions. This plugin needs no upstream change to work, but the cleanest long-term fix is for `moduleAdapter.ts` to forward `cspSources` from plugin modules, which would let an Embed module declare its own origin exactly as `base.video` does. Worth filing with the evidence above; nothing here depends on it landing.
@@ -299,8 +451,198 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 - **Credentials**: reuses `deliver/process/22-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
+---
+
+## Open Graph and AEO Schema — v1.0.0, LIVE 2026-08-28
+
+Two sibling plugins, built together because they need the same two facts and the
+same shape. Each has its own README; this section records what a future session
+needs and would otherwise have to rediscover.
+
+### The `<head>` surface, and the 73 buried descriptions
+
+`buildDocumentMetaTags` emits `settings.metaTitle ?? page.title`, a single
+`settings.metaDescription`, and `settings.faviconUrl`. That is the whole head.
+
+`pages.seoDescription` and `posts.seoDescription` are real cells with a real
+admin field, and 30 of 37 pages and 43 of 43 articles had one written — none of
+which ever reached a page. **A field existing in the Instatic admin is not
+evidence that the publisher emits it.** Read `render.ts` first.
+
+### `slug` does not identify an entry page — the trap both plugins are built around
+
+`applyPublishedHtmlPipeline` passes `publish.html` a context of
+`{ siteId, pageId, slug }`. For a data-row page those come from the merged
+TEMPLATE:
+
+```ts
+// publicRenderer.ts → renderPublishedDataRowTemplate
+return { ...rendered, pageId: merged.id, slug: merged.slug, siteId: … }
+```
+
+All 43 articles therefore arrive as `slug: "post"` sharing one `pageId`. Anything
+keyed off `slug` gives every article identical output, and it looks correct until
+two of them are compared. The same function sets `merged.title = row.cells.title`
+one line earlier, so `<title>` **is** the row's — which is why both plugins
+resolve slug-first-then-title, and why `verify-seo-plugins.mjs` asserts all 79
+published URLs carry a **distinct** `og:url`, canonical and `@id`.
+
+### A `publish.html` filter must be synchronous
+
+The filter runs inside the QuickJS worker over an RPC round-trip
+(`runHookFilterInWorker`). Calling `api.cms.content.*` or `api.cms.storage.*`
+from inside it is a second round-trip while the host awaits the first.
+`embed-origins` avoided this by reading only `api.cms.settings.get`, which is a
+synchronous mirror read. Both new plugins follow the same discipline: everything
+is loaded into an in-memory mirror on the `publish.before` event — which the
+pipeline `await`s — behind a 10-second floor, because `publish.before` fires
+**per page**, not per publish, and a 37-page publish would otherwise reload the
+whole content table 37 times.
+
+### An admin app page: what it costs and what it gives
+
+`adminPages[].content.kind = 'app'` mounts a real React component in the admin
+window. It requires the **`editor.code`** grant (`adminRuntime.ts` refuses the
+import without it, and says so in the page body rather than failing silently),
+and `admin.navigation` for the sidebar item. `assetPath` is filled in by the host
+at install — never set it in the manifest, it is stripped.
+
+No build step, exactly like the Link Editor: `react`, `@instatic/host-hooks` and
+`@instatic/host-ui` resolve through the host import map, and `createElement` is
+used directly because JSX would need a compiler. `usePluginRoutes()` gives
+`fetch`/`json` scoped to the plugin's own routes, so the admin page is a thin
+view and every rule lives on the server where the publish filter can also reach
+it.
+
+**The host-ui trap, again:** `Input` / `Textarea` / `Select` are the narrowed
+`PluginInput` wrappers and their `onChange` receives the **string value, not the
+event**. Anything outside `PluginUi*Props` (`id`, `name`, `autoComplete`) is
+dropped.
+
+### Manifest gotchas that cost a round-trip
+
+- **`keywords` must match `^[A-Za-z0-9_-]{1,30}$`.** `"open graph"` with a space
+  is a 400 at `inspect-package`, and the error names only the pattern, not the
+  field.
+- **`contentAccess[]` entries are keyed `table`, not `tableSlug`.**
+- Resource fields are `text | longtext | number | date | boolean`, and
+  `validatePluginRecordData` **drops any key not declared** — a JSON blob has to
+  be a declared `longtext` field or it silently vanishes.
+
+### The bulk API is the point
+
+Both plugins expose `POST /bulk` under
+`/admin/api/cms/plugins/<id>/runtime/`, gated on `content.manage`, **dry-run by
+default**, with `{title}` / `{slug}` / `{url}` / `{description}` interpolated per
+page — for AEO, inside every string of a JSON template however deeply nested.
+Eighty pages is past the point where clicking is a plan.
+
+### Live state, 2026-08-28
+
+Installed, `active`, configured by `configure-seo-plugins.mjs`, published, and
+gated: **`verify-seo-plugins.mjs` — 1511 assertions over all 79 published URLs,
+all green.** Every URL now carries a unique canonical, its own meta description,
+a full Open Graph and Twitter card, and a JSON-LD graph that parses.
+
+### The two blocks that needed a decision, not a generator
+
+`push-aeo-content.mjs` writes them through the plugin's own `POST /entry` route:
+
+- **FAQPage on `/dental-implant-faq`**, built by reading that page's twelve
+  `<details><summary>` pairs out of the PUBLISHED HTML. Google's guidance is that
+  FAQ markup must mirror visible content, so the script refuses to write if fewer
+  than four pairs are found — a page restructure becomes a failure, not silently
+  stale markup.
+- **MedicalWebPage on 11 treatment pages**, each `about` a named
+  `MedicalProcedure`, `specialty: Prosthodontics`, `audience: Patient`. The list is
+  curated, not matched by prefix: `/dental-conditions` describes conditions and
+  `/financing` is not a procedure, and a prefix rule would sweep both in.
+
+**What was deliberately not done, and it matters more than what was.** The bulk
+API can put an FAQPage on all 43 articles in one call — title as the question,
+meta description as the answer. It would be thin markup mirroring nothing visible
+on the page, which is the pattern Google names as a reason to distrust a site's
+structured data. Same for `aggregateRating`: the copy says 4.9 out of 5, and a
+rating in schema has to be backed by reviews the page displays and a real count.
+The capability exists; using it either way would be a mistake.
+### The per-page editor is a popup, and `<dialog>` is why
+
+Both admin pages open the per-page editor in a native `<dialog>` driven by
+`showModal()`. Not a styled div: the top layer escapes `overflow` and ancestor
+transforms, and the admin shell has both, so a `position: fixed` overlay would
+have been clipped by the scroll container the page lives in. The browser also
+supplies the focus trap, the inert background and Escape.
+
+Three things it cost, all worth writing down:
+
+- **`::backdrop` cannot be set inline.** One `<style>` is injected once. The
+  dialog itself is transparent and unpadded and the visible surface is the
+  host's own `Card`, so the popup is themed by the admin rather than by guesses
+  about its colour tokens.
+- **`inset: 0` + `margin: auto` is what centres it.** The UA sheet does that for
+  you only while nothing else sets margin or inset; the admin's reset does, and
+  without those the popup pinned itself to the top-left corner.
+- **Listen to `close`, not `cancel`.** Cancelling Escape and closing from React
+  looks right and was measured wrong: the element closed, the `cancel` handler
+  never ran, React went on believing the popup was open, and the row could never
+  be reopened. `close` fires however the element closed — including our own
+  `d.close()` — so it is the one source of truth.
+
+### One entity, one node
+
+`aeo-schema` collapses graph nodes that share an `@id`: the union of their
+`@type` (generated first), and the hand-written block wins on any property both
+carry. That is what lets a stored block EXTEND a generated node instead of
+sitting beside it — `/all-on-4` publishes one `["WebPage", "MedicalWebPage"]`
+and an article one `["Article", "BlogPosting"]`, a subtype added to the type it
+specialises. Before it, `/privacy-policy` published two `WebPage` nodes with the
+same id.
+
+**It also broke the gate, and that is the lesson.** `@type` is a string OR an
+array. `verify-seo-plugins.mjs` compared with `===`, silently stopped matching,
+and reported 93 failures against a site that was entirely correct. It now treats
+`@type` as the set it is, and additionally asserts no `@id` appears twice.
+
+### Populating every page
+
+`populate-seo.mjs` writes an explicit Open Graph override and a schema block for
+all 80 pages, through the plugins' own routes.
+
+Two values are left DERIVING on purpose, and both are the same judgement:
+**never freeze a fallback into 80 rows.** The canonical URL comes from the
+site-address setting, so storing 80 absolute URLs would make a domain change an
+80-row edit. And on the 7 pages with no `seoDescription`, the derived
+`og:description` is the site-wide sentence — freezing that would re-create the
+exact defect the Open Graph plugin was written to remove, except worse, because
+it would then no longer follow the setting. Those 7 pages are listed by the
+script so someone can write them a description.
+
+The mirror image of that rule caught a real bug in the dry run: `/` was
+deliberately pointed at the doctor's portrait, which is ALSO the fallback image,
+so the skip-the-fallback rule suppressed it and the home page would have come
+out with no override and fallen back to the first picture on the page — a
+patient's before photograph, as the card for the practice's front door. A
+hand-set picture now always wins over anything derived.
+
+**The script is the re-sync.** Materialising a derived value stops it tracking
+its source, so `og:title` no longer follows a CMS title edit. Re-running
+`populate-seo.mjs --apply` refreshes every stored title and description from the
+current content, while preserving the fields a person set by hand (image, alt,
+canonical URL, type).
+
 ## Output Artifacts
+- `open-graph/` — the Open Graph plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
+- `aeo-schema/` — the AEO Schema plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
+- `configure-seo-plugins.mjs` — the Dr Nahlah values for both, idempotent, dry-run by default
+- `push-aeo-content.mjs` — the FAQPage and MedicalWebPage blocks, written through the plugin's own API
+- `populate-seo.mjs` — an explicit Open Graph override and a schema block on all 80 pages; idempotent, and the re-sync after a content change
+- `test-open-graph.mjs` — 64 offline assertions, `--live` runs the filter over the real published pages
+- `test-aeo-schema.mjs` — 83 offline assertions, every emitted graph parsed back out of its script tag
+- `verify-seo-plugins.mjs` — the LIVE gate over every published URL; uniqueness of canonical / `og:url` is the check that matters
 - `embed-origins/` — the plugin source (`plugin.json`, `server/index.js` for the CSP filter, `modules/index.js` for the Embed block)
+- `link-editor/` — the Link Editor plugin source (`plugin.json`, `editor/index.js`, `README.md`)
+- `verify-link-editor.mjs` — offline gate for the Link Editor: safety-gate behaviour plus a drift test against the host's `html-sanitize`
+- `.tmp/link-editor.zip` — the built package
 - `pack-plugin.mjs` — deterministic zip builder (forward-slashed entries, fixed timestamps)
 - `install-plugin.mjs` — inspect + install with an explicit permission grant
 - `set-origins.mjs` — read / set / clear the allowlist

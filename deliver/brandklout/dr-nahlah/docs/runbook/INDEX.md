@@ -1,11 +1,29 @@
 # Runbook index
 
-80 runs, newest first. Each line is one file in this folder.
+92 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-23 | 2026-09-23d — ChatGPT page switched to its own GHL form `AD6c2Du26a0JUpxoh6p5`, production then staging — carries **gotchas** (the form redirects to the Tysons Google thank-you page) | [`2026-09-23d-chatgpt-page-own-form.md`](./2026-09-23d-chatgpt-page-own-form.md) |
+| 2026-09-23 | 2026-09-23c — staging re-mirrored from production: 58/58 parity, 18 missing images imported, embed-origins 1.8.0, settings synced WITHOUT GHL pools or GTM (`sync-plugin-settings.mjs`) — carries **gotchas** | [`2026-09-23c-staging-remirror.md`](./2026-09-23c-staging-remirror.md) |
+| 2026-09-23 | 2026-09-23b — ChatGPT Ads All-on-4 landing page `/ads-landing-pages/alexandria-all-on-4-chatgpt` (live clone, CTAs to its own form); OpenAI pixel moved onto it only, off the Google pages — carries **gotchas** (no ChatGPT conversion measured) | [`2026-09-23b-chatgpt-all-on-4-landing-page.md`](./2026-09-23b-chatgpt-all-on-4-landing-page.md) |
+| 2026-09-23 | 2026-09-23 — OpenAI Ads (ChatGPT Ads) pixel on the six All-on-4 ads pages, `lead_created` on the two thank-you pages, consent-held for advertising; proved with requests aborted — carries **gotchas** | [`2026-09-23-openai-ads-pixel-all-on-4.md`](./2026-09-23-openai-ads-pixel-all-on-4.md) |
+| 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
+| 2026-09-22 | 2026-09-22e — DNI pools no longer wait for cookie consent (client); a strict CSP had been refusing the pool's number request on 79 of 97 URLs (every page without an embed), fixed and proved — carries **gotchas** | [`2026-09-22e-dni-pools-without-consent-and-csp-fix.md`](./2026-09-22e-dni-pools-without-consent-and-csp-fix.md) |
+| 2026-09-22 | 2026-09-22d — two GoHighLevel number pools scoped per office: Alexandria site-wide except the Tysons ads pages, Tysons on those nine (embed-origins 1.8.0 `pages=`/`except=`); swap proved in text and `tel:` — carries **gotchas** | [`2026-09-22d-two-dni-pools-scoped-per-office.md`](./2026-09-22d-two-dni-pools-scoped-per-office.md) |
+| 2026-09-22 | 2026-09-22c — new-patient numbers retargeted per office (Tysons (703) 448-3312, Alexandria (571) 617-7245), live on 79 URLs; the head needed a separate fix from the body — carries **gotchas** | [`2026-09-22c-office-numbers-retargeted-live.md`](./2026-09-22c-office-numbers-retargeted-live.md) |
+| 2026-09-22 | 2026-09-22b — home page reviews: the six-card wall removed, the ReputationHub embed is the only reviews there; why both were on the page — carries **gotchas** | [`2026-09-22b-home-page-reviews-are-the-embed-only.md`](./2026-09-22b-home-page-reviews-are-the-embed-only.md) |
+| 2026-09-22 | 2026-09-22 — GoHighLevel DNI: the tags were already live since 2026-09-17; proved the swap works and gated the number formats — carries **gotchas** | [`2026-09-22-ghl-dni-number-swap-verified-live.md`](./2026-09-22-ghl-dni-number-swap-verified-live.md) |
+| 2026-09-21 | 2026-09-21d — the five-year warranty claim withheld from all 18 ads landing pages pending the practice's approval (reversible in two commands); where the claim came from — carries **gotchas** | [`2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md`](./2026-09-21d-warranty-claim-withheld-from-the-ads-pages.md) |
+| 2026-09-21 | 2026-09-21c — veneers-filtered Google review wall on both consultation pages (#41/#42), /five-year-warranty built and linked eleven times (#47), and the site-wide `.rv-wall{display:none}` that was hiding every review card — carries **gotchas** | [`2026-09-21c-veneer-review-wall-and-the-warranty-terms-page.md`](./2026-09-21c-veneer-review-wall-and-the-warranty-terms-page.md) |
+| 2026-09-21 | 2026-09-21b — the August BugHerd backlog closed (ten pins fixed in August, never written back), #29 and #30 built and LIVE; board now 42 done / 5 blocked — carries **gotchas** | [`2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md`](./2026-09-21b-bugherd-august-backlog-closed-pins-29-30-live.md) |
+| 2026-09-21 | BugHerd #32–#48 — Brandklout's review of the eighteen ads landing pages applied and live (2026-09-21) | [`2026-09-21-bugherd-32-48-ads-review-applied.md`](./2026-09-21-bugherd-32-48-ads-review-applied.md) |
+| 2026-09-18 | 2026-09-18 — ads landing pages: rebuilt to the Livewell flow, LIVE on production under /ads-landing-pages/ (18 pages, headless REST import, site tags live) — carries **gotchas** | [`2026-09-18-ads-livewell-flow-live-on-instatic.md`](./2026-09-18-ads-livewell-flow-live-on-instatic.md) |
+| 2026-09-17 | 2026-09-17c — ads landing pages: two offices (18 pages), more imagery on more grounds, the four site tags — carries **gotchas** | [`2026-09-17c-ads-two-offices-more-imagery-site-scripts.md`](./2026-09-17c-ads-two-offices-more-imagery-site-scripts.md) |
+| 2026-09-17 | 2026-09-17b — ads landing pages: the GHL form moved into every hero, filmed patients added — carries **gotchas** | [`2026-09-17b-ads-landing-form-in-hero-and-filmed-patients.md`](./2026-09-17b-ads-landing-form-in-hero-and-filmed-patients.md) |
+| 2026-09-17 | 2026-09-17 — ads landing pages: nine pages built locally, NOT PUBLISHED, forms blocked — carries **gotchas** | [`2026-09-17-ads-landing-pages-nine-pages-built-locally.md`](./2026-09-17-ads-landing-pages-nine-pages-built-locally.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
 | 2026-08-31 | DONE 2026-08-31: the 404 page — LIVE ON STAGING AND PRODUCTION, verified both
@@ -162,3 +180,6 @@ eats a context window.
  | [`2026-08-07-current-webflow-build-loop-dynamic-loop-started.md`](./2026-08-07-current-webflow-build-loop-dynamic-loop-started.md) |
 | 2026-08-07 | CURRENT — Pasteable-components pivot (2026-08-07, supersedes the headless builds)
  — carries **gotchas** + open questions | [`2026-08-07-current-pasteable-components-pivot-supersedes-th.md`](./2026-08-07-current-pasteable-components-pivot-supersedes-th.md) |
+| 2026-09-21 | Vimeo: 12 films already uploaded; all 14 descriptions written (9 from YouTube, 4 from auto-captions) — carries **gotchas** on team-token access, the 50/min limit and open privacy | [`2026-09-21-vimeo-descriptions-synced.md`](./2026-09-21-vimeo-descriptions-synced.md) |
+| 2026-09-21 | YouTube -> Vimeo: 108 of 124 nodes swapped across 15 pages, live; 8 Wellness Hour films stay on YouTube | [`2026-09-21-youtube-to-vimeo-site-swap.md`](./2026-09-21-youtube-to-vimeo-site-swap.md) |
+| 2026-09-21 | Home story film clipped after the Vimeo swap (doubled 16:9 box) — fixed; carries **gotchas** on aspect-box collisions | [`2026-09-21-home-story-film-clipped-fix.md`](./2026-09-21-home-story-film-clipped-fix.md) |

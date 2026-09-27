@@ -7,7 +7,7 @@
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
 <title>Contact &amp; Locations | Dr. Nahlah Prosthodontics, Virginia</title>
-<meta name="description" content="Two Northern Virginia offices: Tysons Corner in McLean and Old Town Alexandria. Request a consultation, or call to book with Dr. Nahlah's team.">
+<meta name="description" content="Two Northern Virginia offices: Tysons Corner in McLean and Old Town Alexandria. Each answers its own enquiries — choose an office to request a consultation, or call.">
 <meta property="og:title" content="Contact Dr. Nahlah | McLean &amp; Alexandria, Virginia">
 <meta property="og:description" content="Two offices, one specialist. Request a consultation with a board-certified prosthodontist.">
 <meta property="og:type" content="website">
@@ -43,13 +43,13 @@
         "postalCode": "22102",
         "addressCountry": "US"
       },
-      "telephone": "+1-571-619-9442",
+      "telephone": "+1-703-448-3312",
       "medicalSpecialty": "Prosthodontic",
       "contactPoint": [
         {
           "@type": "ContactPoint",
           "contactType": "new patients",
-          "telephone": "+1-571-619-9442"
+          "telephone": "+1-703-448-3312"
         },
         {
           "@type": "ContactPoint",
@@ -92,13 +92,13 @@
         "postalCode": "22314",
         "addressCountry": "US"
       },
-      "telephone": "+1-571-410-3430",
+      "telephone": "+1-571-617-7245",
       "medicalSpecialty": "Prosthodontic",
       "contactPoint": [
         {
           "@type": "ContactPoint",
           "contactType": "new patients",
-          "telephone": "+1-571-410-3430"
+          "telephone": "+1-571-617-7245"
         },
         {
           "@type": "ContactPoint",
@@ -135,6 +135,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- ==========================================================================
+     SITE SCRIPTS — the four tags Brandklout supplied on 2026-09-17
+     (workflows/00-client-delivery-initialization/.tmp/iframes.html), in the
+     order the house standard puts them: Termly FIRST, then Google Tag Manager,
+     then the two LeadConnector scripts (the dynamic-number pool that swaps the
+     telephone numbers per visitor, and its session helper).
+
+     Termly runs with autoBlock=off. With it on, the consent blocker holds back
+     every third-party resource until the visitor accepts, which on these pages
+     means the LeadConnector form and the YouTube films — the two things a paid
+     page exists to show. House standard: autoBlock off, Termly above GTM,
+     trackers tagged by hand in GTM.
+
+     `data-site-script` is what site-test.mjs's "no CSS or JS inlined" gate
+     keys on to leave the GTM bootstrap alone: it is the one inline script the
+     site ships, and it ships on every page. On Instatic the same four tags go
+     into the site's `siteScripts`, not into any page body.
+     ========================================================================== -->
+<!-- Termly -->
+<script data-site-script="termly" src="https://app.termly.io/resource-blocker/7737150b-c6b0-4003-a1b0-52a6495a4a4f?autoBlock=off"></script>
+<!-- Google Tag Manager -->
+<script data-site-script="gtm">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MR7K64XD');</script>
+<!-- End Google Tag Manager -->
+<!-- DNI number pool GoHighLevel. The src below is filled per page by
+     build-site.mjs (2026-09-22): Alexandria's pool on every page except the
+     Tysons ads landing pages, which carry Tysons' pool instead. On Instatic
+     the same split is the embed-origins `except=` / `pages=` line options. -->
+<script data-site-script="ghl-dni" src="https://backend.leadconnectorhq.com/appengine/loc/2TREkW8S3atQcs063Pqq/pool/JwgT5kbiwBqLqoz0SpUl/number_pool.js"></script>
+<script data-site-script="ghl-session" src="https://backend.leadconnectorhq.com/appengine/js/user_session.js"></script>
+
+
+<!-- ==========================================================================
      THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
      from site-src/css/*.css in filename order, which IS the cascade order:
 
@@ -167,6 +202,8 @@
 </head>
 
 <body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MR7K64XD"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
@@ -262,10 +299,10 @@
   </div>
   <div class="dr-foot">
     <div><b>Tysons Corner &middot; McLean</b>
-      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
+      New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
     <div><b>Alexandria</b>
-      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
+      New patients <a href="tel:+15716177245">(571) 617-7245</a><br>
       Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
     <div><b>Hours</b>
       Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
@@ -287,15 +324,32 @@
 
 
 <!-- ==========================================================================
-     CONTACT & LOCATIONS — from drnahlah.com/contact/. Addresses, hours and the
-     consultation-reason list are verbatim.
+     CONTACT & LOCATIONS — CHOOSER.
 
-     UNRESOLVED, FLAGGED FOR THE CLIENT: the McLean "current patients" number is
-     published twice on the live site with two different values —
-     (703) 493-1358 in the /contact/ body and (703) 448-3312 in the sitewide
-     footer and on /dr-esam-nahlah/. Three of the four sources say 448-3312, so
-     that is used here and the conflict is marked in the markup below. Do not
-     ship this page until the client confirms which line is live.
+     Was the site's single contact page. On 2026-08-24 the Webflow build split it
+     in two, one page per office, because the practice runs a SEPARATE
+     LeadConnector form for each and a form cannot be picked at submit time. This
+     URL keeps its job as the sitewide "Contact & Locations" destination — the
+     nav, the footer, the drawer and the Book a Consult CTA all point here, and it
+     is what inbound links point at — and hands the reader to the office that
+     will actually answer them.
+
+     Same pattern, and for the same reason, as privacy-policy.body.html and
+     terms-conditions.body.html: Instatic has no redirect tool, so a pre-split
+     slug is kept alive as a chooser rather than deleted.
+
+     WHY THE FORM IS NOT ALSO ON THIS PAGE: putting one of the two here would
+     silently route half the enquiries to the wrong office's inbox. The offices
+     are listed with everything a reader needs to decide — address, both lines,
+     directions — so the extra click buys a correctly-routed enquiry.
+
+     #book is on the office grid, not on a form, because the nav CTA links to
+     contact.html#book on every page of the site. If that anchor moves, fix
+     partials/nav.html in the same commit.
+
+     Addresses, hours and telephone numbers are shared with
+     contact-maclean.body.html and contact-alexandria.body.html. Change them in
+     all three, and in partials/footer.html and partials/drawer.html.
      ========================================================================== -->
 <section class="pg-hero" id="hero" style="min-height:clamp(440px,56svh,600px)">
   <div class="ph-bg">
@@ -305,39 +359,35 @@
     <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Contact</span></div>
     <h1 data-split>Two offices. <em>One</em> specialist.</h1>
     <p class="ph-lead" data-rv>Tysons Corner in McLean and Old Town Alexandria. Both run the same
-      way, by the same team, with the laboratory in the building.</p>
+      way, by the same team, with the laboratory in the building. Each office answers its own
+      enquiries, so start with the one you would travel to.</p>
     <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="#book"><span>Request a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="#offices"><span>Find an office</span></a>
+      <a class="btn btn-primary magnetic" href="#book"><span>Choose your office</span></a>
     </div>
   </div>
 </section>
 
-<!-- ---------- offices ---------- -->
+<!-- ---------- the chooser ---------- -->
 <section class="pk pk-alt" id="offices">
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Locations</span></div>
       <h2 data-split>Where to go.</h2>
     </div>
-    <div class="ct-office-grid" data-rv="stagger">
+    <div class="ct-office-grid" id="book" data-rv="stagger">
       <article class="ct-office">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
         <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15717029900">(571) 702-9900</a></div>
+          <a href="tel:+17034483312">(703) 448-3312</a></div>
         <div class="ct-office-line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <!-- FLAG: /contact/ publishes (703) 493-1358 for this line; the footer and
-             /dr-esam-nahlah/ publish (703) 448-3312. Still unconfirmed by the client.
-             The visible .ct-office-flag note that used to sit here was removed on 2026-08-10
-             because it shipped to the live site; the question stays open in the
-             runbook, not on the page. -->
         <a class="pk-more ct-office-dirs"
            href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="contact-maclean.html"><span>Contact this office</span></a>
       </article>
       <article class="ct-office">
         <h3>Alexandria</h3>
@@ -345,12 +395,13 @@
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
         <div class="ct-office-line"><span>New patients</span>
-          <a href="tel:+15712537790">(571) 253-7790</a></div>
+          <a href="tel:+15716177245">(571) 617-7245</a></div>
         <div class="ct-office-line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
         <a class="pk-more ct-office-dirs"
            href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="contact-alexandria.html"><span>Contact this office</span></a>
       </article>
     </div>
 
@@ -383,63 +434,7 @@
   </div>
 </section>
 
-<!-- ---------- request form ---------- -->
-<section class="pk" id="book">
-  <div class="wrap section pk-lede">
-    <div class="lc-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Request A Consultation</span></div>
-      <h2 data-split>Tell us what you are dealing with.</h2>
-      <p data-rv style="color:var(--fg-body);font-weight:400;margin-top:1rem;max-width:44ch">
-        The consultation includes the 3D scan and a straight answer. Second opinions on implant
-        surgery are free.</p>
-    </div>
-    <!-- BUILD NOTE: no action/method here on purpose. Wire to the practice's
-         booking system at Webflow build time — three different Flexbook URLs are
-         in use on the current site and which one survives is still open. -->
-    <form class="ct-form" data-rv="stagger" novalidate>
-      <div class="ct-form-row ct-form-row-2">
-        <label>First name <span class="ct-req">*</span>
-          <input type="text" name="first" autocomplete="given-name" required></label>
-        <label>Last name <span class="ct-req">*</span>
-          <input type="text" name="last" autocomplete="family-name" required></label>
-      </div>
-      <div class="ct-form-row ct-form-row-2">
-        <label>Email <span class="ct-req">*</span>
-          <input type="email" name="email" autocomplete="email" required></label>
-        <label>Phone <span class="ct-req">*</span>
-          <input type="tel" name="phone" autocomplete="tel" required></label>
-      </div>
-      <label>Which office suits you?
-        <select name="office">
-          <option>Tysons Corner &middot; McLean</option>
-          <option>Alexandria</option>
-          <option>Either, whichever is sooner</option>
-        </select></label>
-      <label>Reason for consultation <span class="ct-req">*</span>
-        <select name="reason" required>
-          <option value="">Select a reason</option>
-          <option>Dental implants</option>
-          <option>All-on-4 / full arch</option>
-          <option>Veneers</option>
-          <option>Crown</option>
-          <option>Bridge</option>
-          <option>Smile makeover</option>
-          <option>Second opinion on implant surgery</option>
-          <option>Something else</option>
-        </select></label>
-      <label>Anything we should know?
-        <textarea name="message" rows="4"
-          placeholder="Existing treatment plan, another quote, anxiety about the chair: all useful."></textarea></label>
-      <button class="btn btn-primary magnetic" type="submit"><span>Request consultation</span></button>
-      <p class="ct-note">Prefer to speak to someone? Call
-        <a href="tel:+15717029900" style="color:var(--accent)">(571) 702-9900</a> for McLean or
-        <a href="tel:+15712537790" style="color:var(--accent)">(571) 253-7790</a> for Alexandria.
-        If anxiety is what has kept you away, say so when you call.</p>
-    </form>
-  </div>
-</section>
-
-<!-- ---------- the offices ---------- -->
+<!-- ---------- before you come ---------- -->
 <section class="pk pk-light" id="visiting">
   <div class="wrap section pk-split">
     <figure class="sp-fig" style="margin:0">
@@ -517,9 +512,9 @@
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul style="margin-top:1.1rem">
-          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
-          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
+        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+          <li><b>McLean</b><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div><a href="tel:+17034483312">(703) 448-3312</a></li>
+          <li><b>Alexandria</b><div>2855 Duke Street</div><div>Alexandria, VA 22314</div><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>

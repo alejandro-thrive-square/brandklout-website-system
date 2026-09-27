@@ -1,0 +1,420 @@
+/* ==========================================================================
+   ADS LANDING PAGES — the paid-traffic vocabulary. Prefix `lp-`.
+
+   Nine bodies, eighteen pages: three campaigns (All-on-4, dental implants,
+   veneers) times two offices, each campaign a combo of landing page ->
+   consultation page -> thank-you page. They are NOT part of the editorial
+   site: there is no primary nav, no drawer and no site map, because every
+   exit on a paid landing page is a click that was paid for and lost. The only
+   ways off a landing page are the CTA, the telephone and the two legal links
+   a dental page has to carry.
+
+   2026-09-18: REBUILT TO THE LIVEWELL FLOW. Brandklout asked for the same
+   order of information as their Livewell ads landing pages, so the section
+   vocabulary changed with it: the stakes columns, the mid-page CTA bands, the
+   lender cards and the wide money figure are gone; the journey (one slider
+   and four beats), the section-foot CTA row, the doctor's pull-quote, the
+   option cards with a photograph, the credential strip, the closer's
+   two-column grid and the thank-you page's call-first hero are new.
+
+   REUSED AS-IS, NOT REDEFINED: the hero (`.pg-hero` + `.ph-*`), sections
+   (`.pk`, `.pk-alt`, `.pk-light`), `.pk-head`, `.pk-cards`, `.pk-card`,
+   `.pk-ba` sliders, `.pk-faq`, `.pk-stats`, `.pk-split`, `.mz` mosaics,
+   `.st-row` / `.st-film-card`, `.vl-grid` / `.vl-card`, `.ta-fig`,
+   `.ta-note`, `.ct-office` panels and `footer.foot`. Everything below is
+   either a modifier sitting alongside one of those or a part the editorial
+   site has no use for.
+
+   ONE NAME, ONE STYLESHEET. `css-vocab.mjs` fails any class declared in two
+   files, because Webflow and Instatic both merge classes by name. So nothing
+   here writes a rule for `.nav-in`, `.pg-hero`, `.pk-ba`, `.vl-grid` or
+   `.wz-embed`, not even in a descendant selector: where a site component
+   needed to behave differently on these pages, the landing markup carries
+   its own `lp-` part beside it, or the rule targets a tag under an `lp-`
+   parent (`.lp-ba-wide > div`).
+
+   Cascade position: 70 puts this after the 50-series page overrides, so where
+   a single-class landing rule ties with a single-class kit rule — `.lp-hero`
+   against `.pg-hero` — file order decides it and the landing page wins
+   without the kit being touched.
+   ========================================================================== */
+
+/* ---------- the header ----------
+   The landing header is the site header with the navigation taken out: logo,
+   telephone, one CTA. It deliberately keeps `id="nav"`, `class="nav"` and the
+   `.nav-progress` row, because js/90-boot.js reads `#nav` and `#navProgress`
+   without guarding — a header element that is not `#nav` throws on the first
+   scroll past 40px and takes the rest of boot with it. `#burger` and `#drawer`
+   are absent on purpose; boot already handles that case and returns early. */
+.lp-nav{background:rgba(250,248,243,.92);backdrop-filter:blur(14px);
+  border-bottom-color:rgba(138,126,78,.2)}
+.lp-nav-in{display:flex;align-items:center;justify-content:space-between;
+  gap:clamp(.75rem,2vw,1.5rem);padding-block:clamp(.7rem,1.3vw,1.1rem)}
+/* The trust strip is a row of the fixed header rather than a band above it, so
+   the hero has one fixed element to clear instead of two. */
+.lp-bar{border-bottom:1px solid var(--line-2);background:var(--bg-3)}
+.lp-bar-in{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem clamp(1rem,2.4vw,2.25rem);
+  padding-block:.5rem;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--fg-soft)}
+.lp-bar-item{display:flex;align-items:center;gap:.45rem;white-space:nowrap}
+.lp-bar-item b{color:var(--fg);font-weight:700}
+.lp-bar-stars{font-style:normal;color:var(--accent);letter-spacing:.1em;font-size:.86em}
+@media(max-width:767px){ .lp-bar-item.is-wide{display:none} }
+
+.lp-nav-side{display:flex;align-items:center;gap:clamp(.4rem,1.4vw,1.1rem)}
+.lp-nav-phone{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label);
+  letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--fg);
+  white-space:nowrap;padding:.7rem .3rem}
+.lp-nav-phone:hover{color:var(--accent)}
+.lp-nav-phone i{font-style:normal;color:var(--accent);font-size:1.05em}
+.lp-nav-cta{display:inline-flex;align-items:center;background:var(--fg);color:var(--bg);
+  padding:.75rem 1.5rem;font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;white-space:nowrap;transition:background .4s ease,color .4s ease}
+.lp-nav-cta:hover{background:var(--gold-deep);color:var(--white)}
+@media(max-width:559px){
+  .lp-nav-phone span{display:none}
+  .lp-nav-cta{padding:.7rem .95rem;letter-spacing:.08em}
+  .lp-nav-in img{width:108px}
+}
+
+/* ---------- the hero ----------
+   `.pg-hero` leaves room for one header row. This leaves room for two. */
+.lp-hero{padding-top:clamp(10.5rem,18vw,13.5rem);min-height:clamp(600px,82svh,900px)}
+.lp-hero h1{max-width:20ch}
+
+/* ---------- the hero, with the form in it ----------
+   Every landing and consultation page puts the campaign form in the hero, as
+   the reference does. DOM order is copy -> form -> under, for the phone: the
+   form has to be the next thing after the headline. Above 1080 the three
+   blocks are placed explicitly, so a desktop reads headline, buttons, film,
+   with the form beside them. */
+.lp-hero-form{align-items:center;
+  padding-block:clamp(10.5rem,18vw,13.5rem) clamp(3rem,6vw,5rem)}
+.lp-hero-grid{display:grid;gap:clamp(1.5rem,3vw,2.5rem) clamp(2rem,4vw,3.5rem);
+  align-content:center;width:100%}
+.lp-hero-copy{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+.lp-hero-form h1{font-size:var(--h2);max-width:18ch}
+.lp-hero-under{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+/* The doctor on film, under the copy. `.st-film-card` gives it the 16/9 box
+   and the absolute iframe; this only trims the margin the story rows carry
+   and puts a hairline round it on the photograph. */
+.lp-hero-film{margin:0;border:1px solid var(--line);background:var(--black)}
+.lp-hero-facts{display:grid;grid-template-columns:1fr 1fr;
+  gap:.9rem clamp(1rem,2vw,1.75rem);
+  padding-top:clamp(.9rem,1.8vw,1.3rem);border-top:1px solid var(--line)}
+.lp-hero-facts div{display:grid;gap:.1rem}
+.lp-hero-facts b{font-family:var(--f-display);font-size:calc(1.45rem * var(--t-mid));
+  font-weight:500;color:var(--fg);line-height:1.1}
+.lp-hero-facts span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft);line-height:1.4}
+@media(min-width:1080px){
+  .lp-hero-grid{grid-template-columns:1fr 1.02fr}
+  .lp-hero-copy{grid-area:1 / 1}
+  .lp-hero-under{grid-area:2 / 1}
+  .lp-hero-grid .lp-form-card{grid-area:1 / 2 / span 2 / 3;align-self:center}
+}
+/* The service-area line under the buttons. Not a banner and not a countdown:
+   the practice runs no deadline, and inventing one on a medical page is both
+   untrue and a compliance problem. */
+.lp-hero-note{display:flex;align-items:center;gap:.6rem;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+.lp-hero-note i{display:block;width:clamp(18px,3vw,34px);height:1px;background:var(--rule);
+  flex:none}
+
+/* ---------- the form card and its supporting copy ---------- */
+.lp-assure{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
+.lp-assure li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  color:var(--fg);font-weight:500;line-height:1.55}
+.lp-assure i{font-style:normal;color:var(--accent);line-height:1.5}
+/* Who is going to read the form. */
+.lp-signoff{display:flex;align-items:center;gap:1rem;padding-top:clamp(1rem,2vw,1.4rem);
+  border-top:1px solid var(--line)}
+.lp-signoff img{width:clamp(56px,6vw,74px);height:clamp(56px,6vw,74px);border-radius:50%;
+  object-fit:cover;object-position:50% 18%;flex:none;background:var(--mist)}
+.lp-signoff b{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.18rem * var(--t-sm));color:var(--fg)}
+.lp-signoff span{display:block;font-size:.78rem;color:var(--fg-soft);font-weight:400;
+  line-height:1.5;max-width:40ch}
+.lp-form-card{background:var(--card);border:1px solid var(--line);
+  padding:clamp(1.1rem,2vw,1.6rem);display:grid;gap:.9rem;
+  box-shadow:0 18px 50px rgba(20,20,22,.07)}
+.lp-form-card h2{font-size:calc(1.62rem * var(--t-mid));max-width:none}
+.lp-form-note{font-size:.78rem;color:var(--fg-soft);font-weight:400;line-height:1.65}
+/* The vendor form sets its own height from its own script. This min-height is
+   what stops the card collapsing to nothing while it loads. Targeted by tag so
+   this file never writes a second definition of `.wz-embed`. */
+.lp-form-card iframe{min-height:640px}
+
+/* ---------- the journey: one slider, four beats ----------
+   The reference's strongest section. The slider is the kit's `.pk-ba`, which
+   is 4/3; a single case across the content width wants 16/9, and the rule
+   targets the tag under the landing wrapper so `.pk-ba` is never redeclared
+   here. Specificity 0,1,1 beats the kit's 0,1,0. */
+.lp-journey{display:grid;gap:clamp(1.75rem,3.5vw,3rem)}
+.lp-ba-wide > div{aspect-ratio:16/9}
+.lp-ba-labels{display:grid;grid-template-columns:1fr;gap:.9rem clamp(1.5rem,3vw,2.5rem);
+  margin-top:1rem}
+.lp-ba-labels span{display:block;font-size:.92rem;color:var(--fg-body);font-weight:400;
+  line-height:1.6}
+.lp-ba-labels b{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.35rem * var(--t-sm));color:var(--fg);line-height:1.2;margin-bottom:.2rem}
+@media(min-width:700px){
+  .lp-ba-labels{grid-template-columns:1fr 1fr}
+  .lp-ba-labels span:last-child{text-align:right}
+}
+
+/* ---------- a CTA row at the foot of a section ----------
+   The reference repeats one button after the journey, the differentiators,
+   the process and the gallery. One row, one button, one line of context. */
+.lp-sec-cta{display:flex;flex-wrap:wrap;gap:.85rem clamp(1rem,2vw,1.5rem);align-items:center;
+  margin-top:clamp(2rem,4vw,3rem)}
+.lp-sec-aside{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--fg-soft)}
+@media(max-width:559px){ .lp-sec-cta .btn{flex:1 1 auto} }
+/* The same row on the closer, where the line beside the button carries the
+   telephone. */
+.lp-cta-actions{display:flex;flex-wrap:wrap;gap:.85rem clamp(1rem,2vw,1.5rem);align-items:center}
+.lp-cta-aside{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:var(--fg-soft)}
+.lp-cta-aside a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+@media(max-width:559px){ .lp-cta-actions .btn{flex:1 1 auto} }
+
+/* ---------- the films ----------
+   The practice's own filmed patients as click-to-play facades (`.vl-card`,
+   from video-library), which sections/video-library.js now binds anywhere on
+   the page. This only spaces the block from the cards above it. */
+.lp-films{margin-top:clamp(2rem,4vw,3rem)}
+/* One film on its own, outside a grid: the closer's and the specialist's. The
+   card is a grid of shot + title already; this just stops it stretching. */
+.lp-film{display:block;align-self:center}
+
+/* ---------- the doctor's pull-quote ---------- */
+.lp-quote{margin:.4rem 0 0;padding-left:clamp(1rem,2vw,1.4rem);border-left:2px solid var(--rule);
+  font-family:var(--f-display);font-style:italic;font-weight:400;
+  font-size:calc(1.35rem * var(--t-mid));line-height:1.35;color:var(--fg)}
+/* The four photographs under the doctor, closer to the split than a section
+   gap would put them. */
+.lp-mz-tight{margin-top:clamp(1.5rem,3vw,2.5rem);padding-bottom:clamp(3rem,6vw,5rem)}
+
+/* ---------- the process rail ----------
+   A line that fills with the scroll and lights each step as it passes. `--p`
+   is written by sections/lp-steps.js. With no JS the line sits at zero and
+   every step is still fully legible. */
+.lp-steps{display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+.lp-steps-line{position:relative;height:1px;background:var(--line);display:none}
+.lp-steps-line i{position:absolute;inset:0;transform:scaleX(var(--p,0));transform-origin:left;
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold) 60%,var(--gold-light))}
+.lp-steps-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem);
+  position:relative}
+.lp-steps-grid::before{content:"";position:absolute;left:.95rem;top:.6rem;bottom:.6rem;width:1px;
+  background:var(--line)}
+.lp-step{display:grid;gap:.6rem;align-content:start;position:relative;
+  padding-left:clamp(2.4rem,4vw,2.9rem)}
+.lp-step h3{font-size:var(--h3)}
+.lp-step p{color:var(--fg-body);font-weight:400}
+.lp-step .lp-step-n{position:absolute;left:0;top:.05em;width:1.9rem;height:1.9rem;
+  display:grid;place-items:center;border:1px solid var(--line-strong);border-radius:50%;
+  font-size:.72rem;font-weight:700;letter-spacing:0;color:var(--fg-soft);background:var(--bg);
+  transition:border-color .5s ease,color .5s ease,background .5s ease}
+.lp-step.is-lit .lp-step-n{border-color:var(--rule);color:var(--black);
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+.lp-step-fig{position:relative;overflow:hidden;margin:0 0 .5rem;aspect-ratio:4/3;
+  background:var(--mist)}
+.lp-step-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.lp-step:hover .lp-step-fig img{transform:scale(1.04)}
+@media(min-width:900px){
+  .lp-steps-line{display:block}
+  .lp-steps-grid{grid-template-columns:repeat(3,1fr)}
+  .lp-steps-grid.is-four{grid-template-columns:repeat(4,1fr)}
+  .lp-steps-grid::before{display:none}
+  .lp-step{padding-left:0;padding-top:.4rem}
+  .lp-step .lp-step-n{position:static;margin-bottom:.5rem}
+}
+
+/* ---------- the options ----------
+   The reference's "one tooth to a full smile": three cards, a photograph, a
+   short spec list, and what moves the number. NO FIGURES: the practice
+   publishes none, and the note under the cards says so in the page. */
+.lp-tiers{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.lp-tier{background:var(--card);padding:clamp(1.5rem,2.6vw,2.2rem);display:grid;gap:1rem;
+  align-content:start}
+.lp-tier h3{font-size:calc(1.62rem * var(--t-mid))}
+.lp-tier p{color:var(--fg-body);font-weight:400}
+.lp-tier-fig{position:relative;overflow:hidden;margin:0 0 .25rem;aspect-ratio:16/10;
+  background:var(--mist)}
+.lp-tier-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-tier-spec{display:grid;gap:.6rem;margin:0;padding-top:1rem;border-top:1px solid var(--line)}
+.lp-tier-spec div{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.lp-tier-spec dt{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-soft);font-weight:600}
+.lp-tier-spec dd{margin:0;color:var(--fg);font-weight:600;text-align:right}
+.lp-tier .lp-tier-note{font-size:.84rem;color:var(--fg-soft);line-height:1.65;
+  padding-top:.9rem;border-top:1px solid var(--line)}
+@media(min-width:960px){ .lp-tiers{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- the FAQ beside a photograph ----------
+   Not sticky: ScrollSmoother transforms #smooth-content, and position:sticky
+   inside a transformed ancestor sticks to the ancestor, not the viewport. */
+.lp-faq-grid{display:grid;gap:clamp(1.75rem,3.5vw,3rem);align-items:start}
+.lp-faq-fig{position:relative;overflow:hidden;margin:0;aspect-ratio:16/9;background:var(--mist)}
+.lp-faq-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-faq-fig figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.2rem;
+  padding:1rem 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
+.lp-faq-fig figcaption b{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.25rem * var(--t-sm));line-height:1.2}
+.lp-faq-fig figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--gold-light)}
+/* A wide portrait whose subject stands right of centre: crop to that side. */
+.lp-faq-fig.is-right img{object-position:78% 50%}
+@media(min-width:960px){
+  .lp-faq-grid{grid-template-columns:.72fr 1.28fr}
+  .lp-faq-fig{aspect-ratio:4/5} }
+
+/* ---------- the closer, photo-backed and dark ----------
+   `data-theme="dark"` on the section re-tokens the heading and copy for a
+   dark ground; this supplies the ground and the two-column grid: the
+   argument and the button on the left, one film or one photograph on the
+   right, the credential strip under both. */
+.lp-final{position:relative;overflow:hidden;background:var(--ink-900)}
+.lp-final-bg{position:absolute;inset:0;margin:0;z-index:0}
+.lp-final-bg img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.lp-final-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,11,12,.72),rgba(11,11,12,.93) 70%)}
+.lp-final>.wrap{position:relative;z-index:1}
+.lp-final-grid{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
+.lp-final-copy{display:grid;gap:clamp(1rem,2.2vw,1.5rem);justify-items:start}
+.lp-final-copy h2{max-width:16ch}
+.lp-final-copy p{max-width:52ch}
+.lp-final .lp-cta-aside{color:rgba(255,255,255,.72)}
+.lp-final .lp-cta-aside a{color:var(--gold-light)}
+.lp-final-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
+.lp-final-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lp-final-fig span{position:absolute;left:0;right:0;bottom:0;padding:.9rem 1.1rem;
+  background:linear-gradient(transparent,rgba(11,11,12,.86));color:#fff;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+@media(min-width:900px){ .lp-final-grid{grid-template-columns:1.15fr .85fr} }
+
+/* ---------- the credential strip ----------
+   The reference runs a marquee of association logos. The practice has no
+   logo files for its credentials and a strip of typeset ones is the honest
+   substitute: the name, then each credential as a chip. */
+.lp-creds{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .8rem;
+  margin-top:clamp(2rem,4vw,3rem);padding-top:clamp(1.25rem,2.4vw,1.8rem);
+  border-top:1px solid rgba(255,255,255,.14)}
+.lp-creds b{font-family:var(--f-display);font-weight:500;font-size:calc(1.18rem * var(--t-sm));
+  color:var(--white);margin-right:.4rem}
+.lp-creds span{display:inline-block;border:1px solid rgba(255,255,255,.28);padding:.5rem .85rem;
+  font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  color:rgba(255,255,255,.85);line-height:1.3}
+/* The same strip on a light ground, on the consultation page. Sits inside the
+   split's copy column, so no top rule and no top margin of its own. */
+.lp-creds.is-light{margin-top:.4rem;padding-top:0;border-top:0}
+.lp-creds.is-light b{color:var(--fg)}
+.lp-creds.is-light span{border-color:var(--line-strong);color:var(--fg-soft)}
+/* One line of small print under the films. */
+.lp-foot-line{margin-top:clamp(1.5rem,3vw,2.25rem);font-size:.78rem;color:var(--fg-soft);
+  font-weight:400;line-height:1.65}
+
+/* ---------- the thank-you page ----------
+   Call-first, as on the reference: the ask, the rating, the doctor. */
+.lp-ty-hero{align-items:center;padding-bottom:clamp(3rem,6vw,5rem)}
+.lp-ty-grid{display:grid;gap:clamp(1.75rem,3.5vw,3rem);align-items:center;width:100%}
+.lp-ty-fig{position:relative;overflow:hidden;margin:0;aspect-ratio:4/5;max-width:420px;
+  background:var(--mist);border:1px solid var(--line)}
+.lp-ty-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+.lp-ty-fig figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.2rem;
+  padding:1rem 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
+.lp-ty-fig figcaption b{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.25rem * var(--t-sm));line-height:1.2}
+.lp-ty-fig figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:600;color:var(--gold-light)}
+@media(min-width:900px){
+  .lp-ty-grid{grid-template-columns:1.25fr .75fr}
+  .lp-ty-fig{justify-self:end} }
+.lp-rating{display:flex;align-items:center;gap:.6rem;font-size:.82rem;color:var(--fg-body);
+  font-weight:400}
+.lp-rating i{font-style:normal;color:var(--accent);letter-spacing:.1em}
+.lp-rating b{color:var(--fg);font-weight:700}
+/* What the call covers: numbered, the numeral as TEXT in the <dt> rather than
+   a CSS counter, because Instatic's importer drops an element whose only
+   content is a ::before. */
+/* The heading above the list, which used to take its spacing from the
+   .pk-split .sp-copy grid it sat in. */
+.lp-next-head{margin-bottom:clamp(1.25rem,2.4vw,2rem)}
+.lp-next-list{display:grid;gap:clamp(1rem,2vw,1.6rem);margin:0;padding:0;max-width:62ch}
+.lp-next-list div{display:grid;grid-template-columns:auto 1fr;gap:.2rem clamp(1rem,2vw,1.5rem);
+  align-items:start;padding-bottom:clamp(1rem,2vw,1.6rem);border-bottom:1px solid var(--line)}
+.lp-next-list div:last-child{border-bottom:0;padding-bottom:0}
+.lp-next-list dt{grid-row:span 2;font-family:var(--f-display);
+  font-size:calc(2.34rem * var(--t-mid));line-height:1;color:var(--accent-lg)}
+.lp-next-list dd{margin:0}
+.lp-next-list dd b{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:var(--h3);color:var(--fg);line-height:1.15;margin-bottom:.4rem}
+.lp-next-list dd span{display:block;color:var(--fg-body);font-weight:400}
+/* One row of three once the band is wide enough to carry it. The stacked
+   form keeps its underlines; the row draws the same hairline down the side. */
+@media(min-width:1040px){
+  .lp-next-list{grid-template-columns:repeat(3,1fr);max-width:none;
+    gap:clamp(1.5rem,3vw,2.75rem)}
+  .lp-next-list div{padding-bottom:0;border-bottom:0;
+    padding-left:clamp(1.25rem,2.4vw,2rem);border-left:1px solid var(--line)}
+  .lp-next-list div:first-child{padding-left:0;border-left:0}
+}
+/* Why waiting is not free. Not a countdown, not a discount. */
+.lp-warn{border:1px solid var(--line);border-left:3px solid var(--rule);background:var(--bg-3);
+  padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:1rem;align-content:start}
+.lp-warn h3{font-size:calc(1.62rem * var(--t-mid))}
+.lp-warn ul{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
+.lp-warn li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
+  color:var(--fg-body);font-weight:400;line-height:1.6}
+.lp-warn li i{font-style:normal;color:var(--accent);line-height:1.6}
+.lp-warn p{font-size:.84rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
+/* Call, visit, hours: the office details beside the closing ask. */
+.lp-details{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.4rem)}
+.lp-details div{display:grid;gap:.3rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.18)}
+.lp-details b{font-family:var(--f-display);font-weight:500;font-size:calc(1.25rem * var(--t-sm));
+  color:var(--white);line-height:1.25}
+.lp-details b a{color:var(--white)}
+.lp-details b a:hover{color:var(--gold-light)}
+.lp-details span{font-size:.84rem;color:rgba(255,255,255,.72);font-weight:400;line-height:1.5}
+.lp-details .label{color:var(--gold-light);font-size:.64rem}
+@media(min-width:600px){ .lp-details{grid-template-columns:1fr 1fr} }
+
+/* ---------- the footer ----------
+   `footer.foot` with the site map taken out: two offices, the hours, the legal
+   pair and the medical disclaimer a paid dental page has to carry. */
+.lp-foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+.lp-foot-note{margin-top:clamp(1.75rem,3.5vw,2.75rem);padding-top:clamp(1.25rem,2.4vw,1.8rem);
+  border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;line-height:1.7;
+  color:rgba(255,255,255,.6);max-width:100ch;font-weight:400}
+.lp-foot-office{display:grid;gap:.5rem;font-size:.92rem;font-weight:300;
+  color:rgba(255,255,255,.72);line-height:1.7}
+.lp-foot-office address{font-style:normal}
+@media(min-width:860px){ .lp-foot-grid{grid-template-columns:1.4fr 1fr 1fr} }
+/* The sticky rail covers the last 68px of the document on a phone. */
+@media(max-width:859px){ .lp-foot{padding-bottom:5.25rem} }
+
+/* ---------- the mobile CTA rail ----------
+   Deliberately CSS only, and always present below 860. A rail that slides in
+   past the hero needs JS to place it, and when that JS is the thing that
+   fails, the page has lost its only CTA within reach of a thumb. */
+.lp-rail{position:fixed;left:0;right:0;bottom:0;z-index:125;display:none;
+  gap:1px;background:rgba(138,126,78,.4);padding-bottom:env(safe-area-inset-bottom,0px);
+  box-shadow:0 -10px 30px rgba(20,20,22,.16)}
+.lp-rail a{display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:1.1rem .7rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:700;text-align:center}
+.lp-rail .lp-rail-call{background:var(--ink-900);color:var(--white)}
+.lp-rail .lp-rail-book{color:var(--black);
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+@media(max-width:859px){ .lp-rail{display:grid;grid-template-columns:1fr 1.3fr} }
+
+/* A topic-filtered review wall on a landing page. `.rv-wall` goes to three
+   columns at 1080 because the home page shows six cards; a veneers page shows
+   the four reviews that actually name veneers, and 3+1 leaves one card hanging
+   on its own row. Two columns keeps it a block. The cards themselves are
+   `.rv-card` from 37-ch-proof.css, unchanged, and read correctly on the dark
+   ground because `[data-theme="dark"]` redefines --card, --fg and --line. */
+@media(min-width:1080px){ .lp-rv-wall{grid-template-columns:repeat(2,1fr)} }

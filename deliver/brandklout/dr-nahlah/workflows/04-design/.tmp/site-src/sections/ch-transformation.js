@@ -46,7 +46,14 @@ WZ.section("ch-transformation", function (W) {
       pin: true,
       scrub: .3,
       anticipatePin: 1,
-      invalidateOnRefresh: true
+      invalidateOnRefresh: true,
+      /* REFRESH ORDER MATTERS ONCE TWO SECTIONS PIN. ScrollTrigger measures in
+         creation order unless told otherwise, and Chapter 05 is built before
+         this one — so it measured #pathPin at its PRE-SPACER position and
+         started 2,700px too early, landing inside this chapter's pinned range
+         and rendering on top of it. Higher priority refreshes first, so this
+         pin's spacer is in the flow before anything downstream measures. */
+      refreshPriority: 1
     }
   });
 
