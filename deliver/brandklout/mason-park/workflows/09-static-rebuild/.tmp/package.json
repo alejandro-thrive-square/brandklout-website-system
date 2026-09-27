@@ -1,0 +1,9 @@
+{
+  "name": "mason-park-tmp",
+  "private": true,
+  "type": "module",
+  "description": "Tooling for the frozen home/ folder: shot.mjs renders it, check.mjs reads it, to-instatic.mjs exports it. Not a build step -- home/ is the source and opens from file:// with none of this installed.",
+  "dependencies": {
+    "playwright-core": "1.49.1"
+  }
+}

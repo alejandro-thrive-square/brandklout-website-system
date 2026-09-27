@@ -1,0 +1,188 @@
+[
+ {
+  "n": 1,
+  "id": 31040954,
+  "status": "done",
+  "text": "Done. The home page now opens on the photograph of Dr. Nguyen and Dr. Sung with their children, from the Mason Park shared drive. On wide screens the family sits on the right, clear of the headline. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 3,
+  "id": 31041249,
+  "status": "todo",
+  "text": "We found the root cause: the logo image itself had no spare space around the letters, so any rounding when Safari scales it could shave the bottom of DENTAL. The logo file now has transparent space built in on every side, on all pages, which a browser cannot round away. We cannot run Safari 26 itself here: could you take one more look and close this if DENTAL is whole?"
+ },
+ {
+  "n": 43,
+  "id": 31043638,
+  "status": "done",
+  "text": "Done. Thank you for the Canva access. The Team page has a new chapter, \"The people you will meet\", with all thirteen portraits, named, grouped as Hygienists, Dental assistants and Front office. Dr. Cho's headshot from the same set is saved for when you want it used. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 50,
+  "id": 31109551,
+  "status": "done",
+  "text": "Done. This is fixed across the whole site, not only here: words that fill in as you scroll are now readable before they fill in (at least 4.5:1 contrast), and they finish filling by the time the line reaches the middle of the screen. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 51,
+  "id": 31109672,
+  "status": "done",
+  "text": "Done. The headline reads \"Your Lifetime Partner in Dental Health, Today and for Generations to Come\". Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 52,
+  "id": 31109738,
+  "status": "done",
+  "text": "Done. The line under the headline reads \"From routine cleanings to complete smile makeovers, we care for every smile in your family and across Harris County.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 53,
+  "id": 31109860,
+  "status": "done",
+  "text": "Done. Mason Park now stands on its own as a cosmetic and general practice. The hero strip reads Cosmetic and general dentistry and Katy, TX. On the home page, the opening story, the \"Under One Roof\" chapter (now \"The Practice\"), the comparison table, the photo wall and the team band are all rewritten around this practice. Dr. Nguyen's practice is named as Mason Park Dental for Kids and referenced, not presented as part of this site's offer. The Services page's pediatric panel is reworded the same way. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 54,
+  "id": 31109952,
+  "status": "done",
+  "text": "Done. The button text was being covered by the hover colour sliding over it. The fill now sits behind the text on every button across the site, so the label stays readable (white on dark). Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 55,
+  "id": 31109957,
+  "status": "done",
+  "text": "Done. Same fix: the outline button now shows dark text on a white fill when hovered. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 56,
+  "id": 31109977,
+  "status": "done",
+  "text": "Done. The caption reads \"We are here to guide you and walk you through your treatment options. No rush, no pressure, we take the time to answer all of your questions.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 57,
+  "id": 31109994,
+  "status": "done",
+  "text": "Done. The line now ends \"in one practice in Katy, TX\" instead of naming the street. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 58,
+  "id": 31110007,
+  "status": "done",
+  "text": "Done. Rewritten as \"Seven kinds of care. Choose one to see every treatment in it.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 59,
+  "id": 31110017,
+  "status": "done",
+  "text": "Done. The heading is now \"Find the care you need.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 60,
+  "id": 31110042,
+  "status": "done",
+  "text": "Done. The treatment count is removed. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 61,
+  "id": 31110111,
+  "status": "done",
+  "text": "Done. The headline reads \"Everything Your Smile Needs, From Preventive Care to Complete Smile Makeovers\". Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 62,
+  "id": 31110145,
+  "status": "done",
+  "text": "Done. The button is now \"Start with a checkup\" and goes to Preventative Dentistry. The finder below is reframed the same way: \"Start with what you need\", and its first line is now \"A checkup and a cleaning, or it has been a while\". The closing line asks patients to book a checkup. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 63,
+  "id": 31110169,
+  "status": "done",
+  "text": "Done. The pediatric panel now shows Dr. Nguyen's portrait. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 64,
+  "id": 31110191,
+  "status": "done",
+  "text": "Done. This is fixed across the whole site, not only here: words that fill in as you scroll are now readable before they fill in (at least 4.5:1 contrast), and they finish filling by the time the line reaches the middle of the screen. The cause was that opening a \"read more\" section made the page taller, but the scroll animations kept their old positions, so headings further down faded out while they were still on screen. The animations now recalculate whenever the page changes height, on every page. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 65,
+  "id": 31110213,
+  "status": "done",
+  "text": "Done. Using Jessica's Asana note: \"We accept all PPO insurance plans, and we also take Delta Dental and Medicaid.\" The table header says the same. If Medicaid applies only to the kids' practice, tell us and we will adjust the wording. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 66,
+  "id": 31110239,
+  "status": "todo",
+  "text": "We would like to link Cherry, but we cannot find Mason Park's own Cherry application link. It is not on the old site or in Asana, and Cherry's site blocks automated lookups. Could you send the practice's Cherry link (it usually looks like pay.withcherry.com/<practice-name>)? We will link the Cherry column and add an Apply button as soon as we have it."
+ },
+ {
+  "n": 67,
+  "id": 31110261,
+  "status": "done",
+  "text": "Done. Photographs are now in full colour all the time across the site; nothing switches between black and white and colour any more. Dr. Cho and Dr. Sung are both in colour, always. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 68,
+  "id": 31110297,
+  "status": "done",
+  "text": "Done. The heading reads \"Cosmetic and general dentistry.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 69,
+  "id": 31110334,
+  "status": "done",
+  "text": "Done. Dr. Cho's title reads \"Cosmetic, Restorative, and General\" (also on his home page card). Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 70,
+  "id": 31110345,
+  "status": "done",
+  "text": "Done. Dr. Sung's title reads \"Cosmetic, Restorative, and General\" (also on his home page card). Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 71,
+  "id": 31110388,
+  "status": "done",
+  "text": "Done. The cause was that opening a \"read more\" section made the page taller, but the scroll animations kept their old positions, so headings further down faded out while they were still on screen. The animations now recalculate whenever the page changes height, on every page. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 72,
+  "id": 31110402,
+  "status": "done",
+  "text": "Done. Her title reads \"Board Certified Pediatric Dentist, Mason Park Dental for Kids and Mason Park Dental of Katy\", and her details say the same. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 73,
+  "id": 31110414,
+  "status": "done",
+  "text": "Done. Opening \"Her story\" no longer resizes her photo. It keeps its size and stays in view while you read. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 74,
+  "id": 31110422,
+  "status": "done",
+  "text": "Done. Same fix as #73: the photo keeps its size when the story opens. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 75,
+  "id": 31110436,
+  "status": "done",
+  "text": "Done. Photographs are now in full colour all the time across the site; nothing switches between black and white and colour any more. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 76,
+  "id": 31110465,
+  "status": "done",
+  "text": "Done. Rewritten as \"The standards behind the care: training well past what Texas asks of a dentist, and a fellowship few general dentists hold.\" Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ },
+ {
+  "n": 77,
+  "id": 31110487,
+  "status": "done",
+  "text": "Done. The reviews heading had already faded out before it reached you. The cause was that opening a \"read more\" section made the page taller, but the scroll animations kept their old positions, so headings further down faded out while they were still on screen. The animations now recalculate whenever the page changes height, on every page. Live on staging.masonparkdental.com, checked in Safari's engine at your 1512 x 652 window."
+ }
+]

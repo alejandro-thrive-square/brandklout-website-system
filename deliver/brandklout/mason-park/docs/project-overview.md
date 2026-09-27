@@ -11,7 +11,75 @@
 | **Started** | 2026-08-05 (folder scaffolded from Asana dispatch) |
 | **Live site** | **https://bestdentistinkatytx.com/** (`masonparkdental.com` 302-redirects here) |
 
+> [!IMPORTANT]
+> **This client has a second site.** The practice also runs a pediatric brand at
+> https://pediatricdentistkatytx.com — same owners, same address, same doctors, and the **same
+> ThemeREX `tooth-fairy` theme**. It has its own folder because it has its own domain, WordPress
+> install, SiteGround account and database, but it is one client:
+> [`mason-park-kids/`](../../mason-park-kids/docs/project-overview.md). Since 2026-08-28 it also
+> has **its own worktree**, `bk-mason-park-kids` — one worktree per *site*, not per client, after
+> sessions holding both kept crossing the two sites' facts. That folder is not checked out here.
+>
+> Findings cross over in both directions — the fabricated ThemeREX awards, the demo pages, the
+> hours contradiction and the injection IOCs are all worth re-checking on the other site before
+> assuming they are unique to this one.
+
 ## Status
+
+### 2026-08-28 — the six ad landing pages are LIVE on Instatic
+
+The domain cutover to Instatic took `masonparkdental.com` off Webflow, so the six paid-traffic
+landing pages 404'd while ad spend was running. They are rebuilt on Instatic **at the same six
+slugs**, so no campaign URL changed:
+`/invisalign`, `/invisalign-consultation`, `/invisalign-thank-you`, `/new-patient-special`,
+`/new-patient-special-consultation`, `/new-patient-thank-you`.
+
+See [`workflows/10-lp-instatic/README.md`](../workflows/10-lp-instatic/README.md).
+
+The GoHighLevel forms are **embedded inline, one per campaign** — Invisalign
+(`YbX91GhEDKkCN4GH4gka`) on `/invisalign` and `/invisalign-consultation`, $189 New Patient
+(`AFu5BpJpMjgSnSf8yybc`) on `/new-patient-special` and `/new-patient-special-consultation`, and no
+form on the two thank-you pages. (These are the root Webflow ports. The rebuilt `/ads-landing-pages/`
+set uses the client's own Invisalign and New Patient Special forms since 2026-09-25, and `/contacts`
+the Contact form; see workflow 09's README.) Per-campaign **call tracking works**: every page renders the pool
+number in place of the public one. Since 2026-09-25 it is the client's pool `haD8dfHnprszNglZQtBV`
+(location `9tm8C3iReDUyrhdV01Kd`, e.g. (281) 215-7453), never consent-gated; before that it was
+`IEOmxFRkrrKh72B8hqHg`, which rendered (281) 645-5375.
+
+This needed the four Webzite plugins, now installed here and **required on every new site**:
+`embed-origins` (the Embed block plus the per-page CSP widening that makes any third-party embed
+possible), `aeo-schema`, `open-graph` and `link-editor`. See
+[`deliver/process/18-instatic-embeds`](../../../process/18-instatic-embeds/18-instatic-embeds.md).
+
+Still open, and needing someone other than an engineer:
+
+- **The apex `masonparkdental.com` does not resolve at all** — only `www` does. Any ad, GBP link or
+  citation on the bare domain is dead, and fixing it needs Cloudflare dashboard access.
+- **`aeo-schema`, `open-graph` and `link-editor` are not in `deliver/process/`** yet — they were
+  packed from the `bk-dr-nahlah` worktree and should be promoted the way `embed-origins` was.
+
+### 2026-08-25 — SCOPE CHANGED: full static rebuild of the main site
+
+The client's WordPress install is compromised and SiteGround is taking it down, so the job is now
+an **emergency rebuild of the whole main site as static HTML**, to be hosted on **Instatic**. That
+supersedes the paid-landing-page work below as the active priority; the three landing pages are
+unaffected and stay where they are.
+
+**The main site is rebuilt: 71 pages + 404, on Client-First with a reusable component
+library, and exports cleanly for Instatic import.** Four gates pass: content audit, layout at
+three widths, page weight, and the export's own validation. Blog posts (~180) are deliberately
+out of scope for this pass.
+
+See [`workflows/09-static-rebuild/README.md`](../workflows/09-static-rebuild/README.md) — how to
+build it, what was authored rather than copied, and the open items for the client. Three of those
+matter beyond this rebuild:
+
+- the old site published **four awards the practice has not won** (ThemeREX demo content, CSS-hidden
+  but present in the HTML on every Elementor page);
+- the smile gallery was **theme stock photography** presented as the practice's own results;
+- the site publishes **two contradictory sets of office hours** (see Open Question 9, still open).
+
+### 2026-08-06 — the three landing pages
 
 **All three pages were rebuilt as journeys on 2026-08-06 and are awaiting review.** The client
 rejected the first round as *"a plain card website design"* rather than *"an interactive journey"*.
@@ -190,6 +258,7 @@ angles, then design original work. See
 | `04-design` | **Rebuilding** | Journey architecture — see [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). |
 | `07-webflow-build` | **Blocked** | Needs local approval and a Webflow grant. |
 | `08-qa` | **Required after every change** | Scrub proof + responsive screenshots. |
+| `09-static-rebuild` | **Built, awaiting review** | Whole main site as static HTML for Instatic. `node audit.mjs` is its gate. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 

@@ -1,0 +1,199 @@
+// Check the PUBLISHED pages, not the local files.
+//
+//   node verify-live.mjs https://staging.masonparkdental.com/ /services/invisalign
+//
+// A local file:// render proves the design. It proves nothing about the import:
+// Instatic stores a node graph, not our HTML, and the things that go wrong on
+// the way in are invisible locally -- a class that was dropped because no style
+// rule was registered for it, a button whose inline svg the base.button module
+// discarded, an image still pointing at /assets/ instead of /uploads/, a
+// <script> that never became a code asset.
+//
+// So this asserts, on the live URL: the response is 200 HTML, site.css and
+// site.js are actually linked and load, every image resolves, the chapter
+// classes survived, GSAP booted, and nothing errored in the console.
+import { chromium } from "playwright-core";
+import path from "node:path";
+import fs from "node:fs";
+import { fileURLToPath } from "node:url";
+
+const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const args = process.argv.slice(2);
+const origin = (args[0] || "https://staging.masonparkdental.com").replace(/\/+$/, "");
+const routes = args.length > 1 ? args.slice(1) : ["/", "/services/invisalign"];
+const outDir = path.join(HERE, "shots", "live");
+fs.mkdirSync(outDir, { recursive: true });
+
+const browser = await chromium.launch({ executablePath: CHROME });
+let bad = 0;
+
+for (const route of routes) {
+  const url = origin + (route.startsWith("/") ? route : "/" + route);
+  const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+  const page = await ctx.newPage();
+  const problems = [];
+  const thirdParty = [];
+  const failed = [];
+  page.on("console", (m) => {
+    if (m.type() !== "error") return;
+    const text = m.text();
+    // "Failed to load resource: ... 404" carries NO url in the console, so it
+    // cannot be attributed. Every such failure is already caught with its url
+    // by the response/requestfailed handlers below, where it can be judged --
+    // keeping the console copy too meant the gate always reported one problem
+    // for Cloudflare's bot beacon and could never read clean.
+    if (/^Failed to load resource/.test(text)) return;
+    // Two CSP violations are permanent furniture on this host and neither is
+    // ours, so they are reported and NOT counted -- a gate that always says
+    // "2 problems" is a gate nobody reads:
+    //   - Cloudflare injects its own analytics beacon, which the site's CSP
+    //     then blocks. Cloudflare's doing, both halves of it.
+    //   - a `data:application/x-font-ttf` face from `webflow-icons`, left in
+    //     the shell's style registry by the pre-Instatic build. Blocked, and
+    //     unused by either of our pages.
+    // A CSP violation naming anything else IS ours and still counts.
+    if (/cloudflareinsights|cdn-cgi|data:application\/x-font-ttf/.test(text)) { thirdParty.push(text.slice(0, 100)); return; }
+    // GoHighLevel's form iframe emits an obfuscated diagnostic with a NaN
+    // payload. It originates in the cross-origin vendor frame and does not
+    // indicate a failure of the host page or form request.
+    if (/%c%d font-size:0;color:transparent NaN/.test(text)) { thirdParty.push(text); return; }
+    problems.push("console: " + text.slice(0, 160));
+  });
+  page.on("pageerror", (e) => problems.push("pageerror: " + e.message.slice(0, 160)));
+  page.on("requestfailed", (r) => failed.push(r.url()));
+  page.on("response", (r) => { if (r.status() >= 400) failed.push(r.status() + " " + r.url()); });
+
+  // 120s, not 60. Staging is a small Railway container that cold-starts: TTFB
+  // is ~0.6s warm and was measured at 6.4s and 16.5s on the first hit after a
+  // publish. That is the instance, not the page -- nothing is pending after
+  // DOMContentLoaded -- but a 60s cap turned it into a hard failure on a page
+  // that was fine.
+  const res = await page.goto(url, { waitUntil: "load", timeout: 120000 });
+  await page.waitForTimeout(2500);
+  const total = await page.evaluate(() => document.body.scrollHeight);
+  for (let y = 0; y < total; y += 540) {
+    await page.evaluate((n) => window.scrollTo({ top: n, behavior: "instant" }), y);
+    await page.waitForTimeout(110);
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(600);
+
+  const r = await page.evaluate(async () => {
+    const de = document.documentElement;
+    // IS THE PAGE PAINTING THE WEBFONT, OR FALLING BACK? Neither
+    // `document.fonts.check()` nor computed `font-family` can tell you: the
+    // first answers true for a fallback, the second reports the stack that was
+    // ASKED for. Measure the string in the family and in its own fallback --
+    // identical widths mean the fallback is what is on screen.
+    // This shipped wrong once: to-instatic.mjs strips the <link> that loads the
+    // three families, so the live pages were Georgia and Segoe UI while every
+    // other check passed.
+    await (document.fonts.ready ?? Promise.resolve());
+    const cv = document.createElement("canvas").getContext("2d");
+    const S = "Handgloves 12345";
+    const wOf = (f) => { cv.font = f; return cv.measureText(S).width; };
+    const paints = (name, fb) => wOf(`300 48px "${name}", ${fb}`) !== wOf(`300 48px ${fb}`);
+    const fonts = {
+      Newsreader: paints("Newsreader", "Georgia, serif"),
+      Karla: paints("Karla", '"Segoe UI", system-ui, sans-serif'),
+      "Nunito Sans": paints("Nunito Sans", '"Segoe UI", system-ui, sans-serif'),
+    };
+    const imgs = [...document.images];
+    return {
+      fonts,
+      // THE BODY'S OWN CLASSES. `transform()` ships the body's CHILDREN, so a
+      // class on <body> reaches Instatic only if apply-body-class.mjs put it on
+      // the converted root node AND a style rule exists for it. `has-journey`
+      // is the switch for about forty rules -- transparent header, inverted
+      // logo, the hero pulled up under the chrome -- and journey.js checks for
+      // it before running the chrome scene at all. Missing, nothing errors:
+      // the page is simply the ordinary white-header version.
+      bodyClass: document.body.className || "",
+      navBg: getComputedStyle(document.querySelector(".navbar_component") || document.body).backgroundColor,
+      navH: getComputedStyle(document.documentElement).getPropertyValue("--jr-nav-h").trim(),
+      title: document.title,
+      chapters: document.querySelectorAll("section[data-chapter]").length,
+      cssLinked: [...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.href.split("/").pop()),
+      // proof the stylesheet actually applied, not merely linked
+      chPadded: getComputedStyle(document.querySelector(".ch") || document.body).paddingTop,
+      rootPx: getComputedStyle(de).fontSize,
+      gsap: !!window.gsap,
+      jrReady: de.classList.contains("jr-ready"),
+      jrFail: de.classList.contains("jr-fail"),
+      imgs: imgs.length,
+      broken: imgs.filter((i) => i.complete && i.naturalWidth === 0).map((i) => (i.currentSrc || i.src).split("/").pop()),
+      stillLocal: imgs.filter((i) => /\/assets\//.test(i.currentSrc || i.src)).length,
+      overflow: de.scrollWidth - de.clientWidth,
+      height: document.body.scrollHeight,
+      svcCards: document.querySelectorAll(".svc-card").length,
+      // A button with no text and no label is the base.button trap: Instatic's
+      // button module takes no child nodes, so an inline <svg> icon is dropped
+      // at import and the live control renders as an empty box.
+      // `aria-hidden` buttons are excluded -- `.navbar_scrim` is a deliberate
+      // click-catcher behind the open drawer, and flagging it made this gate
+      // cry wolf on both pages while the real toggle was fine.
+      emptyButtons: [...document.querySelectorAll("button")]
+        .filter((b) => !b.textContent.trim() && !b.getAttribute("aria-label") && b.getAttribute("aria-hidden") !== "true")
+        .length,
+    };
+  });
+
+  const file = path.join(outDir, (route === "/" ? "home" : route.replace(/\//g, "_").replace(/^_/, "")) + ".png");
+  await page.screenshot({ path: file, fullPage: true });
+
+  console.log("\n== " + url + " ==");
+  console.log("  HTTP        " + res.status() + "  " + (res.headers()["content-type"] || "").split(";")[0]);
+  console.log("  title       " + r.title);
+  console.log("  chapters    " + r.chapters + "   svc-cards " + r.svcCards);
+  console.log("  stylesheet  " + r.cssLinked.join(", ") + "   .ch padding-top " + r.chPadded + "   root " + r.rootPx);
+  const fell = Object.entries(r.fonts).filter(([, ok]) => !ok).map(([n]) => n);
+  console.log("  fonts       " + Object.entries(r.fonts).map(([n, ok]) => n + " " + (ok ? "ok" : "FALLBACK")).join("   "));
+  console.log("  body class  " + (r.bodyClass || "(none)") + "   nav bg " + r.navBg + "   --jr-nav-h " + (r.navH || "(unset)"));
+  console.log("  motion      gsap " + r.gsap + "   jr-ready " + r.jrReady + "   jr-fail " + r.jrFail);
+  console.log("  images      " + r.imgs + " (" + r.broken.length + " broken, " + r.stillLocal + " still /assets/)");
+  console.log("  overflow    " + r.overflow + "px   height " + r.height + "px");
+  console.log("  -> " + file);
+
+  if (res.status() !== 200) { console.log("  FAIL non-200"); bad++; }
+  if (!r.chapters) { console.log("  FAIL no data-chapter sections - the import flattened the page"); bad++; }
+  if (r.chPadded === "0px") { console.log("  FAIL .ch has no padding - site.css did not apply"); bad++; }
+  if (!r.gsap) { console.log("  FAIL gsap did not load"); bad++; }
+  if (fell.length) { console.log("  FAIL falling back to a system font: " + fell.join(", ")); bad++; }
+  // Split-and-includes, NOT a word-boundary regex. This line was first written
+  // through a shell heredoc and its two backslash-b escapes arrived as literal
+  // BACKSPACE bytes: the regex parsed, matched nothing, and failed a page whose
+  // body carried the class. Third time this workflow has paid for that trap.
+  // Edit files in this folder with an editor, and run the CTRL scan after.
+  // Split-and-includes, NOT a word-boundary regex. This line was first written
+  // through a shell heredoc and its two backslash-b escapes arrived as literal
+  // BACKSPACE bytes: the regex parsed, matched nothing, and failed a page whose
+  // body carried the class. Third time this workflow has paid for that trap.
+  // Edit files in this folder with an editor, and run the CTRL scan after.
+  if (!r.bodyClass.split(/\s+/).includes("has-journey")) { console.log("  FAIL body is missing has-journey - the chapter chrome is off"); bad++; }
+  if (!r.navH) { console.log("  FAIL --jr-nav-h unset - journey.js never measured the header"); bad++; }
+  if (r.jrFail) { console.log("  warn jr-fail: the motion layer degraded"); }
+  if (r.broken.length) { console.log("  FAIL broken images: " + r.broken.slice(0, 6).join(", ")); bad++; }
+  if (r.stillLocal) { console.log("  FAIL " + r.stillLocal + " image(s) still point at /assets/"); bad++; }
+  if (r.overflow > 1) { console.log("  FAIL horizontal overflow"); bad++; }
+  if (r.emptyButtons) { console.log("  FAIL " + r.emptyButtons + " empty button(s) - base.button dropped its children"); bad++; }
+  // Cloudflare's bot-management beacon posts to a long random path on this
+  // domain and is expected to 404; and Instatic generates its -w64 placeholder
+  // variants lazily, so the first request for a freshly published image can
+  // miss and succeed a moment later. Neither is ours.
+  const f = [...new Set(failed)].filter((u) =>
+    !/favicon/.test(u) &&
+    !/cloudflare|cdn-cgi/.test(u) &&
+    !/backend\.leadconnectorhq\.com\/(forms\/form-survey-event|funnels\/funnel\/geo-location)/.test(u) &&
+    !/stcdn\.leadconnectorhq\.com\/_preview\//.test(u) &&
+    !/-w64\.webp$/.test(u) &&
+    !/^https:\/\/[^/]+\/[A-Za-z0-9_-]{60,}$/.test(u));
+  if (f.length) { console.log("  failed requests: " + f.slice(0, 6).join("\n                   ")); bad++; }
+  if (problems.length) { console.log("  " + problems.slice(0, 6).join("\n  ")); bad++; }
+
+  await ctx.close();
+}
+
+await browser.close();
+console.log("\n" + (bad ? bad + " problem group(s)" : "clean"));
+process.exit(bad ? 1 : 0);
