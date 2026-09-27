@@ -1,0 +1,254 @@
+<!-- HOME. Second build 2026-09-03; rewritten 2026-09-15 for the client's
+     feedback (Asana 1218408530306236): the Westlake Medical Aesthetics name,
+     four treatment categories, the practice's own providers in place of
+     Dr. Stone, and plainer copy.
+
+     THE COLOUR ORDER IS THE STRUCTURE. Dark hero, ivory, STONE, GREEN, ivory,
+     dark, ivory, dark close. The green chapter is the year grid, the site's
+     signature object. -->
+
+<!-- 00 THE HERO. Full-bleed photograph on charcoal, pinned: over one viewport
+     of scroll the picture shrinks into a rounded frame and the headline lifts
+     away (data-hero-pin, 20-motion.js). A model shown as a person, per the rule
+     at the top of treatments-data.mjs. -->
+<section class="section_hero hero_component" data-hero-pin>
+  <figure class="hero_media" data-parallax="0">
+    <img src="assets/m-glow-hat.webp" alt="" width="2200" height="1185" fetchpriority="high">
+  </figure>
+  <div class="hero_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="hero_top">
+          <p class="hero_meta">
+            <span>Westlake, Texas</span>
+            <span>Serving Dallas&ndash;Fort Worth</span>
+          </p>
+        </div>
+        <div class="hero_copy">
+          <p class="eyebrow is-alternate">Westlake Medical Aesthetics</p>
+          <h1 class="hero_title" data-split data-split-now>Look like you, only more rested.</h1>
+          <p class="hero_lede">
+            Injectables, skin rejuvenation, facials and restoration from our highly skilled
+            medical providers, in a private office in Westlake.
+          </p>
+          <div class="button-group hero_actions">
+            <a class="button" href="book.html">Book a consultation</a>
+            <a class="button is-alternate" href="treatments.html">See our treatments</a>
+          </div>
+        </div>
+        <div class="hero_foot">
+          <p class="hero_scroll" aria-hidden="true"><span>Scroll</span><i></i></p>
+          <p class="hero_who">Sister practice to <a class="hero_who-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">Stone Surgical Arts</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE TICKER. Every treatment and how often it recurs, as one continuous
+     strip. Generated from treatments-data.mjs. -->
+<section class="section_ticker marquee_component" aria-label="Our treatments">
+  <div class="marquee_track" data-overflow-ok data-speed-px="55">
+{{TICKER}}
+  </div>
+</section>
+
+<!-- 01 THE PREMISE, as a statement and a mosaic. Three photographs drifting at
+     their own speeds, three short reasons. -->
+<section class="section_mosaic mosaic_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="mosaic_head">
+          <p class="eyebrow">Why patients choose us</p>
+          <h2 class="heading-style-h2 mosaic_title" data-split>Care that starts with <em class="text-style-display-accent">listening</em>.</h2>
+        </div>
+        <div class="mosaic_grid">
+          <figure class="mosaic_frame is-a" data-speed="0.35">
+            <span class="wipe_frame" data-wipe><img src="assets/m-jawline.webp" alt="" width="1200" height="1200" loading="lazy"></span>
+          </figure>
+          <figure class="mosaic_frame is-b" data-speed="-0.2">
+            <span class="wipe_frame" data-wipe><img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy"></span>
+          </figure>
+          <figure class="mosaic_frame is-c" data-speed="0.15">
+            <span class="wipe_frame" data-wipe><img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy"></span>
+          </figure>
+          <div class="mosaic_points" data-reveal="stagger">
+            <p class="mosaic_point"><span class="mosaic_num">01</span>Every plan starts with an assessment by our highly skilled medical providers.</p>
+            <p class="mosaic_point"><span class="mosaic_num">02</span>No two plans are the same. Yours is built around your goals.</p>
+            <p class="mosaic_point"><span class="mosaic_num">03</span><span>If surgery would serve you better, we'll tell you and refer you to our sister practice, <a class="text-style-link" href="https://www.dfwsurgicalarts.com/" rel="noopener">Stone Surgical Arts</a>.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 THE SHELF. The four categories as expanding panels on the stone ground.
+     Hover opens on a desktop; a tap opens on a phone and a second tap follows
+     the link. Generated from treatments-data.mjs. -->
+<section class="section_shelf shelf_section" data-theme="stone">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="shelf_head">
+          <div>
+            <p class="eyebrow">Our treatments</p>
+            <h2 class="heading-style-h2" data-split>Four ways to care for your <em class="text-style-display-accent">skin</em>.</h2>
+          </div>
+          <a class="button is-secondary" href="treatments.html">All treatments</a>
+        </div>
+        <div class="shelf_component">
+{{SHELF}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 THE RHYTHM. The year grid, on brand green. The dots pop in month by
+     month as it arrives. -->
+<section class="section_cadence cadence_component" data-theme="green">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="cadence_head">
+          <div>
+            <p class="eyebrow">Plan ahead</p>
+            <h2 class="heading-style-h2" data-split>Great skin is a <em class="text-style-display-accent">routine</em>.</h2>
+          </div>
+          <div class="cadence_stats">
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="4">4</span></span><span>visits a year is typical for injectables</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="15">15</span> min</span><span>our shortest appointment</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="12">12</span></span><span>facials a year with membership</span></p>
+          </div>
+        </div>
+        <div data-in>
+{{CADENCE_GRID}}
+        </div>
+        <p class="cadence_foot">A sample plan for someone starting in January. Your provider will build yours with you at your consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 THE PROVIDERS. Brooke's portrait, a second frame drifting over its
+     corner, and three counted facts. Until 2026-09-15 this chapter was about
+     Dr. Stone as the injector; the client's feedback is that she is not. -->
+<section class="section_surgeon surgeon_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="surgeon_grid">
+          <div class="surgeon_media">
+            <figure class="surgeon_frame" data-wipe>
+              <span class="wipe_inner"><img src="assets/staff-brooke-bright.webp" alt="Brooke, nurse practitioner injector at Westlake Medical Aesthetics" width="800" height="1000" loading="lazy"></span>
+            </figure>
+            <figure class="surgeon_frame-small" data-speed="-0.25">
+              <img src="assets/ssa-treatment-room.webp" alt="" width="2133" height="1200" loading="lazy">
+            </figure>
+          </div>
+          <div class="surgeon_copy">
+            <p class="eyebrow">Your providers</p>
+            <h2 class="heading-style-h2" data-split>Meet the people who <em class="text-style-display-accent">treat you</em>.</h2>
+            <p class="text-size-medium surgeon_text" data-reveal>
+              Brooke is our nurse practitioner and injector. Abby, our medical aesthetician and senior laser technician,
+              looks after facials and skin treatments. Your first visit is a consultation with
+              one of them.
+            </p>
+            <div class="surgeon_facts" data-reveal="stagger">
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>licensed medical providers</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="4">4</span></span><span>treatment categories</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>languages spoken, English and Spanish</span></p>
+            </div>
+            <div class="button-group" data-reveal>
+              <a class="button is-secondary" href="team.html">Meet the team</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 THE WORDS. The one dark chapter in the middle: a sentence whose last
+     word keeps changing, and a rail of reviews you drag. The two reviews are
+     verbatim excerpts from the practice's own Google listing (2026-09-15), see
+     results.body.html for which were left out and why. -->
+<section class="section_words words_section" data-theme="dark" data-drag-scope>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <h2 class="words_title" data-reveal>
+          You'll look
+          <span class="words_component" data-words="2200" aria-label="rested">
+            <span class="words_item text-style-display-accent">rested.</span>
+            <span class="words_item text-style-display-accent">like yourself.</span>
+            <span class="words_item text-style-display-accent">refreshed.</span>
+            <span class="words_item text-style-display-accent">natural.</span>
+          </span>
+        </h2>
+        <div class="words_rail-head">
+          <p class="eyebrow">In their words</p>
+          <div class="words_arrows">
+            <button class="button is-icon" type="button" data-drag-prev aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="button is-icon" type="button" data-drag-next aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="padding-global">
+    <div class="words_rail" data-drag data-cursor="Drag" data-overflow-ok>
+      <article class="quote_card">
+        <p class="quote_text">&ldquo;Had a really great time getting botox, hydrafacial treatment, and microneedling. The team is super knowledgeable and timely, which made the process smooth. Special shout out to Abby and Brooke who were so caring, making me feel at ease.&rdquo;</p>
+        <p class="quote_meta">Google review &middot; Botox, HydraFacial, microneedling</p>
+      </article>
+      <article class="quote_card">
+        <p class="quote_text">&ldquo;I was really impressed! This place shows a genuine dedication to patient care that's hard to find. From the initial consultation to the final botox treatment, I felt completely taken care of.&rdquo;</p>
+        <p class="quote_meta">Google review &middot; Botox</p>
+      </article>
+      <article class="quote_card is-link">
+        <a class="quote_link" href="results.html">
+          <span class="quote_text">Read more reviews.</span>
+          <span class="button is-link">Results <span class="button_arrow">&rarr;</span></span>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 06 THE PLACE. Two of the practice's own photographs, offset, and the
+     address as a link to the map. -->
+<section class="section_place place_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="place_grid">
+          <div class="place_copy">
+            <p class="eyebrow">Visit us</p>
+            <h2 class="heading-style-h2" data-split>One office in <em class="text-style-display-accent">Westlake</em>.</h2>
+            <p class="text-size-medium place_text" data-reveal>
+              We're a private office off Highway 114, with parking right outside.
+            </p>
+            <dl class="place_facts" data-reveal="stagger">
+              <div><dt>Address</dt><dd><a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110b+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110b, Westlake, TX 76262</a></dd></div>
+              <div><dt>Hours</dt><dd>Monday to Friday, 9 to 5. Saturday by appointment.</dd></div>
+              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18176742061">(817) 674-2061</a></dd></div>
+            </dl>
+          </div>
+          <div class="place_media">
+            <figure class="place_frame is-large" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-front-desk.webp" alt="The front desk at the Westlake office" width="2133" height="1200" loading="lazy"></span>
+            </figure>
+            <figure class="place_frame is-small" data-speed="-0.3">
+              <span class="wipe_frame" data-wipe><img src="assets/ssa-neon.webp" alt="The neon sign in the office" width="2133" height="1200" loading="lazy"></span>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{SITE_FAQ}}

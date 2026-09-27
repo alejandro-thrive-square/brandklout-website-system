@@ -1,0 +1,181 @@
+{
+  "_note": [
+    "ORIGIN IS THE CLIENT DOMAIN, westlaketxmedspa.com, since 2026-09-10.",
+    "PUBLIC_ORIGIN on the Railway service lists both the apex and www - see",
+    "deliver/process/20-instatic-domain-origins.",
+    "",
+    "TRADING NAME: Westlake Medical Aesthetics, confirmed by the client's feedback",
+    "on 2026-09-15 (Asana 1218433345526563: 'Stone Med Spa becomes Westlake",
+    "Medical Aesthetics across the site').",
+    "",
+    "TITLES: someone set every page's title in the admin on 2026-09-12 to one",
+    "shared 'Westlake Medical Aesthetics | Westlake, TX & Dallas Forth Worth Area'",
+    "and one shared description. Their intent (the name, and the Dallas-Fort Worth",
+    "area) is kept below; the typo 'Forth' is not, and each page has its own title",
+    "again so search results can tell them apart.",
+    "",
+    "DR. STONE does not assess or treat patients here (Asana 1218433345526570).",
+    "No description below says she does."
+  ],
+  "site": {
+    "name": "Westlake Medical Aesthetics",
+    "origin": "https://westlaketxmedspa.com",
+    "ogImage": "/assets/m-hero.webp"
+  },
+  "organization": {
+    "@type": "MedicalBusiness",
+    "@id": "https://westlaketxmedspa.com/#practice",
+    "name": "Westlake Medical Aesthetics",
+    "description": "Non-surgical medical aesthetics in Westlake, Texas, serving the Dallas-Fort Worth area: injectables, skin rejuvenation, facials and restoration, provided by highly skilled medical providers.",
+    "medicalSpecialty": "Dermatology",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "72 Andorra Dr #110b",
+      "addressLocality": "Westlake",
+      "addressRegion": "TX",
+      "postalCode": "76262",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-817-674-2061",
+    "sameAs": [
+      "https://www.instagram.com/westlakeaesthetics/",
+      "https://www.tiktok.com/@westlakeaesthetic"
+    ],
+    "availableLanguage": [
+      "English",
+      "Spanish"
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ]
+  },
+  "pages": {
+    "index": {
+      "title": "Westlake Medical Aesthetics | Westlake, TX & Dallas-Fort Worth Area",
+      "description": "Botox, fillers, Sculptra, Morpheus8, HydraFacials and more in Westlake, TX, serving Dallas-Fort Worth. Treatments by licensed medical providers.",
+      "ogTitle": "Westlake Medical Aesthetics, Westlake TX"
+    },
+    "about": {
+      "title": "About Us | Westlake Medical Aesthetics",
+      "description": "Non-invasive medical aesthetics in Westlake, TX, with a plan built around your goals. Surgery, when it's right, is with our sister practice, Stone Surgical Arts."
+    },
+    "meet-the-doctor": {
+      "title": "Dr. Mona Stone, DDS | Westlake Medical Aesthetics",
+      "description": "Dr. Mona Stone is a board-certified oral and maxillofacial surgeon at Stone Surgical Arts, our sister practice.",
+      "schema": {
+        "@type": "Physician",
+        "name": "Dr. Mona Stone, DDS",
+        "medicalSpecialty": "OralAndMaxillofacialSurgery"
+      }
+    },
+    "team": {
+      "title": "Our Team | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Meet Brooke, our nurse practitioner injector, and Abby, our medical aesthetician and senior laser technician, at Westlake Medical Aesthetics in Westlake, Texas."
+    },
+    "treatments": {
+      "title": "Treatments | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Injectables, skin rejuvenation, facials and restoration in Westlake, TX. Appointment length, results, longevity and downtime for each treatment."
+    },
+    "botox": {
+      "title": "Botox & Xeomin in Westlake, TX | Westlake Medical Aesthetics",
+      "description": "Botox and Xeomin in Westlake, TX, placed by our nurse practitioner injector. About fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Botulinum toxin treatment (Botox, Xeomin)",
+          "procedureType": "https://schema.org/NoninvasiveProcedure",
+          "bodyLocation": "Face",
+          "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that crease the overlying skin, relaxing them for three to four months.",
+          "provider": {
+            "@id": "https://westlaketxmedspa.com/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does it hurt?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The needle is very fine and each injection takes about a second. Most patients describe a quick sting. No anesthetic is needed, and you can drive yourself home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How soon will I see it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Movement starts to soften after three to seven days, and the full effect shows at about two weeks. We book your follow-up then."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I look frozen?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not if it's dosed and placed well. We treat the muscles that are creasing the skin and leave the rest working, and we keep first treatments conservative."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens when it wears off?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Your muscles gradually go back to how they worked before, and so do the lines. Nothing ends up worse than it was."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many units will I need?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on your muscles and the areas you want treated, so we can't say over the phone. You'll get your number and a quote after the assessment, before anything is injected."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "results": {
+      "title": "Results & Reviews | Westlake Medical Aesthetics, Westlake TX",
+      "description": "What patients say about Westlake Medical Aesthetics in Westlake, Texas. Our new before-and-after gallery is coming soon."
+    },
+    "financing": {
+      "title": "Financing | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Finance your treatment at Westlake Medical Aesthetics with Cherry or CareCredit. Apply online in minutes, or pay at your visit."
+    },
+    "book": {
+      "title": "Book a Consultation | Westlake Medical Aesthetics, Westlake TX",
+      "description": "Book a consultation with our highly skilled medical providers, in our Westlake, TX office or by video. Serving the Dallas-Fort Worth area."
+    },
+    "membership": {
+      "title": "Aesthetic & Wellness Membership | Westlake Medical Aesthetics",
+      "description": "One membership, $149 a month: a complimentary monthly facial and 10% off treatments. Signed agreement, 90-day commitment, then 30 days' notice to cancel."
+    },
+    "thank-you": {
+      "title": "Thank You | Westlake Medical Aesthetics",
+      "description": "Your consultation request has been received.",
+      "noindex": true
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy | Westlake Medical Aesthetics",
+      "description": "How Westlake Medical Aesthetics in Westlake, TX collects, uses, shares and protects the personal information you give us through our website."
+    },
+    "terms-of-service": {
+      "title": "Terms of Service | Westlake Medical Aesthetics",
+      "description": "The terms for using the Westlake Medical Aesthetics website: consultation requests, virtual consultations, financing links, membership and medical disclaimers."
+    }
+  }
+}

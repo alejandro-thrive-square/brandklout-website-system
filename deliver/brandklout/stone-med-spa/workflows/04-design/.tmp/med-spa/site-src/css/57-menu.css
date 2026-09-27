@@ -1,0 +1,522 @@
+/* ===========================================================================
+   THE MENU — /treatments, second build.
+
+   Three chapters after the cover: the concern picker on the green ground,
+   the menu itself, and the two doors. The menu is three category groups;
+   each group is its still life at full size beside a numbered heading, then
+   its rows. A row is a <details>: an index numeral, the name in display
+   type, the four numbers on hairlines, and it opens onto its portrait and
+   its lede. The rows are generated (build-site.mjs ledgerRow / ledger) and
+   filtered by js/10-ledger.js, which hides rows with the `hidden` attribute.
+
+   Not the first build's table and not the sibling's catalogue: no sticky
+   photograph, no jump bar, no fee column.
+   =========================================================================== */
+
+/* --- the concern picker ------------------------------------------------------ */
+.concern_head {
+  max-width: 40rem;
+}
+.concern_title {
+  margin-top: 1.25rem;
+}
+.concern_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.concern_chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.4s var(--ease);
+}
+.concern_chip:hover {
+  border-color: var(--fg);
+  transform: translateY(-2px);
+}
+.concern_chip[aria-pressed="true"] {
+  background: var(--fg);
+  border-color: var(--fg);
+  color: var(--white);
+}
+.concern_count {
+  min-height: 1.6em;
+  margin-top: 1.4rem;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  color: var(--fg);
+}
+
+/* --- the groups -------------------------------------------------------------- */
+.menu_group + .menu_group {
+  margin-top: var(--space-xhuge);
+}
+.menu_group-head {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 2.5rem 5rem;
+  align-items: end;
+  margin-bottom: 2.5rem;
+}
+.menu_group-figure {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+}
+.menu_group-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.menu_group-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1;
+  color: var(--accent);
+}
+.menu_group-copy .heading-style-h2 {
+  margin-top: 0.75rem;
+}
+.menu_group-blurb {
+  margin-top: 1.25rem;
+  max-width: 46ch;
+  font-size: var(--size-text-medium);
+  color: var(--fg-body);
+}
+/* A category's own link, where it has one: Facials -> membership. */
+.menu_group-cta {
+  margin-top: 1.25rem;
+}
+
+/* --- a row -------------------------------------------------------------------- */
+.menu_rows {
+  border-top: 1px solid var(--line-strong);
+}
+/* A subheading inside a category: "Biostimulators" over Sculptra. */
+.menu_subhead {
+  margin: 0;
+  padding: 1.5rem 0 0.75rem;
+}
+.row_component {
+  border-bottom: 1px solid var(--line);
+  /* html already carries scroll-padding-top: 7rem (02-base.css); a second
+     scroll-margin here landed anchors 224px down. */
+}
+.row_summary {
+  display: grid;
+  grid-template-columns: 3.5rem 4rem minmax(0, 2.2fr) minmax(0, 3fr) 2.5rem;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color 0.3s var(--ease);
+}
+.row_summary::-webkit-details-marker {
+  display: none;
+}
+.row_index {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  line-height: 1;
+  color: var(--fg-mute);
+  transition: color 0.3s var(--ease);
+}
+/* the closed row's portrait: a small round frame that grows on hover, so the
+   menu carries all seven faces before a single row is opened */
+.row_thumb {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.6s var(--ease);
+}
+.row_thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.row_summary:hover .row_thumb {
+  transform: scale(1.12);
+}
+.row_name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--fg);
+  transition: transform 0.5s var(--ease), color 0.3s var(--ease);
+}
+.row_summary:hover .row_index,
+.row_component[open] .row_index {
+  color: var(--accent);
+}
+.row_summary:hover .row_name {
+  transform: translateX(0.5rem);
+}
+.row_vitals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.row_vital {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+.row_vital-key {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.row_vital-val {
+  font-size: var(--size-text-small);
+  color: var(--fg);
+}
+.row_toggle {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.5s var(--ease);
+}
+.row_toggle::before,
+.row_toggle::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s var(--ease);
+}
+.row_toggle::before {
+  width: 0.9rem;
+  height: 1px;
+}
+.row_toggle::after {
+  width: 1px;
+  height: 0.9rem;
+}
+.row_summary:hover .row_toggle {
+  background: var(--accent-flat);
+  border-color: var(--accent-flat);
+  color: var(--btn-ink);
+}
+.row_component[open] .row_toggle {
+  transform: rotate(45deg);
+}
+
+.row_detail {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 2rem 4rem;
+  padding: 0.5rem 0 2.75rem 5.5rem;
+  align-items: start;
+}
+.row_figure {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.row_figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.row_component[open] .row_figure img {
+  animation: row-in 1.2s var(--ease) both;
+}
+.row_component[open] .row_body {
+  animation: rise 0.8s var(--ease) 0.1s both;
+}
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.row_lede {
+  font-size: var(--size-text-medium);
+  line-height: 1.6;
+  color: var(--fg-body);
+  max-width: 52ch;
+}
+.row_meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 1.75rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+.row_meta > div {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+.row_meta dt {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.row_meta dd {
+  margin: 0;
+  font-size: var(--size-text-small);
+  line-height: 1.5;
+  color: var(--fg);
+}
+.row_actions {
+  margin-top: 1.75rem;
+}
+.row_nopage {
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.menu_empty {
+  padding: 3rem 0;
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  color: var(--fg);
+}
+
+/* --- the three doors ---------------------------------------------------------- */
+.doors_head {
+  max-width: 46rem;
+  margin-bottom: 2.5rem;
+}
+.doors_head .heading-style-h2 {
+  margin-top: 1.25rem;
+}
+.doors_lede {
+  margin-top: 1.25rem;
+  max-width: 44ch;
+}
+.doors_component {
+  display: flex;
+  gap: 0.75rem;
+  height: clamp(24rem, 56vh, 34rem);
+}
+.doors_door {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+  background: var(--charcoal);
+  color: var(--white);
+  transition: flex 0.9s var(--ease);
+}
+.doors_door:hover,
+.doors_door:focus-visible {
+  flex: 2.4 1 0;
+}
+/* the open door starts open, and yields when the other is hovered */
+.doors_door.is-open {
+  flex: 2.4 1 0;
+}
+.doors_component:hover .doors_door.is-open:not(:hover) {
+  flex: 1 1 0;
+}
+.doors_media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.doors_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 1.4s var(--ease);
+}
+.doors_door:hover .doors_media img {
+  transform: none;
+}
+.doors_media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(39, 39, 39, 0.2) 0%, rgba(39, 39, 39, 0.1) 40%, rgba(39, 39, 39, 0.8) 100%);
+}
+.doors_label {
+  position: absolute;
+  top: 1.4rem;
+  left: 1.6rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius);
+  background: rgba(39, 39, 39, 0.72);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.doors_body {
+  position: absolute;
+  left: 1.6rem;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  display: grid;
+  gap: 0.8rem;
+  justify-items: start;
+}
+/* Wraps since the third door (2026-09-23): a closed door is ~290px at 1440,
+   too narrow for "Stone Dental Implant Center" on one line. */
+.doors_name {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.4vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+}
+.doors_text {
+  max-width: 34ch;
+  font-size: var(--size-text-small);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
+}
+.doors_body .button {
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.4s var(--ease) 0.1s, transform 0.5s var(--ease) 0.1s;
+}
+.doors_door:hover .doors_text,
+.doors_door:focus-visible .doors_text,
+.doors_door.is-open:not(.doors_component:hover *) .doors_text,
+.doors_door:hover .doors_body .button,
+.doors_door:focus-visible .doors_body .button {
+  opacity: 1;
+  transform: none;
+}
+.doors_door.is-open .doors_text,
+.doors_door.is-open .doors_body .button {
+  opacity: 1;
+  transform: none;
+}
+.doors_component:hover .doors_door.is-open:not(:hover) .doors_text,
+.doors_component:hover .doors_door.is-open:not(:hover) .doors_body .button {
+  opacity: 0;
+}
+
+@media (max-width: 991px) {
+  .menu_group-head {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .menu_group-figure {
+    aspect-ratio: 16 / 9;
+  }
+  .row_summary {
+    grid-template-columns: 3rem 3rem minmax(0, 1fr) 2.5rem;
+    grid-template-areas:
+      "index thumb name toggle"
+      "index thumb vitals vitals";
+    row-gap: 1rem;
+  }
+  .row_thumb {
+    grid-area: thumb;
+    align-self: start;
+    width: 3rem;
+    height: 3rem;
+  }
+  .row_index {
+    grid-area: index;
+    align-self: start;
+    font-size: var(--size-h4);
+  }
+  .row_name {
+    grid-area: name;
+  }
+  .row_toggle {
+    grid-area: toggle;
+  }
+  .row_vitals {
+    grid-area: vitals;
+  }
+  .row_detail {
+    grid-template-columns: 1fr;
+    padding-left: 4.5rem;
+  }
+  .row_figure {
+    max-width: 26rem;
+  }
+}
+@media (max-width: 767px) {
+  .menu_group + .menu_group {
+    margin-top: var(--space-xhuge);
+  }
+  .row_summary {
+    grid-template-columns: 2.4rem 2.6rem minmax(0, 1fr) 2.25rem;
+    gap: 0.9rem;
+  }
+  .row_thumb {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+  .row_index {
+    font-size: var(--size-h5);
+  }
+  .row_vitals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1rem;
+  }
+  .row_detail {
+    padding-left: 0;
+  }
+  .row_meta {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  .doors_component {
+    flex-direction: column;
+    height: auto;
+  }
+  .doors_door,
+  .doors_door.is-open,
+  .doors_door:hover {
+    flex: 0 0 auto;
+    min-height: 17rem;
+  }
+  .doors_text,
+  .doors_body .button,
+  .doors_component:hover .doors_door.is-open:not(:hover) .doors_text,
+  .doors_component:hover .doors_door.is-open:not(:hover) .doors_body .button {
+    opacity: 1;
+    transform: none;
+  }
+}

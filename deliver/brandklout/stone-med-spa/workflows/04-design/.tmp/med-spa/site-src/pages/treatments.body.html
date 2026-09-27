@@ -1,0 +1,119 @@
+<!-- SERVICES OVERVIEW — Asana subtask 5 of 11. Second build 2026-09-03;
+     regrouped 2026-09-15 into the client's four categories (Asana
+     1218433345526564) and absorbing the old "Botox & Xeomin" nav tab
+     (1218433345526567) — Botox is reached from its row here.
+
+     Still one page carrying both axes — the concern picker above, the menu
+     below, both landing on the same generated rows — and still containing no
+     treatment names of its own: every row, pill and category head is emitted by
+     build-site.mjs from treatments-data.mjs. -->
+<section class="section_cover cover_component">
+  <figure class="cover_media" data-parallax="10">
+    <img src="assets/m-profile-light.webp" alt="" width="2133" height="1200" fetchpriority="high">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner">
+          <p class="eyebrow is-alternate">Treatments</p>
+          <h1 class="cover_title" data-split data-split-now>Our <em class="text-style-display-accent">treatments</em>.</h1>
+          <p class="cover_lede">
+            Non-invasive treatments that soften lines, restore volume and help your skin make
+            more of its own collagen, so you look your best without surgery. Open any treatment
+            to see how long it takes, when you'll see results and how long they last.
+          </p>
+          <div class="cover_facts">
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="4">4</span></span><span>categories</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="15">15</span> min</span><span>our shortest appointment</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS B, on the green ground. Patients search for the problem, not the
+     product, so the concern picker comes first and filters the rows below. -->
+<section class="section_concern concern_component" data-theme="green">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="concern_head">
+          <p class="eyebrow">Start with your concern</p>
+          <h2 class="heading-style-h2 concern_title" data-split>What would you like to <em class="text-style-display-accent">improve</em>?</h2>
+        </div>
+        <ul class="concern_list" data-reveal="stagger">
+{{CONCERNS}}
+        </ul>
+        <p class="concern_count" data-ledger-count role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS A. The menu, generated. -->
+<section class="section_menu menu_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large" data-ledger>
+{{LEDGER}}
+        <p class="menu_empty" data-ledger-empty hidden>
+          Nothing on our menu is a match for that. Our providers may still be able to help,
+          so <a class="text-style-link" href="book.html">ask us at a consultation</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE BOUNDARY, as three doors. This is the page a visitor searching for a
+     facelift is most likely to land on, so it has to send them on properly.
+     Hover (or focus) opens a door; all are real links. The third, the implant
+     centre, and the "Dr. Jawline" line came from BugHerd #40 and #41
+     (2026-09-22): "We are missing Dental." -->
+<section class="section_doors doors_section" data-theme="stone">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="doors_head">
+          <p class="eyebrow">Looking for surgery or dental care?</p>
+          <h2 class="heading-style-h2" data-split>Two <em class="text-style-display-accent">sister practices</em>.</h2>
+          <p class="text-size-medium doors_lede" data-reveal>
+            Dr. Mona Stone, known to many as &ldquo;Dr. Jawline&rdquo;, leads two sister practices.
+            Anything that needs an incision is done by her surgical team at Stone Surgical Arts,
+            and smile makeovers are done at Stone Dental Implant Center.
+          </p>
+        </div>
+        <div class="doors_component" data-reveal>
+          <a class="doors_door is-here is-open" href="book.html" data-cursor="Book">
+            <figure class="doors_media"><img src="assets/gen-recovery-daylight.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="doors_label">Here</span>
+            <span class="doors_body">
+              <span class="doors_name">Westlake Medical Aesthetics</span>
+              <span class="doors_text">Injectables, skin rejuvenation, facials and restoration, with our highly skilled medical providers.</span>
+              <span class="button is-alternate is-small">Book a consultation</span>
+            </span>
+          </a>
+          <a class="doors_door is-there" href="https://www.dfwsurgicalarts.com/" rel="noopener" data-cursor="Visit">
+            <figure class="doors_media"><img src="assets/gen-procedure-room.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="doors_label">Surgical</span>
+            <span class="doors_body">
+              <span class="doors_name">Stone Surgical Arts</span>
+              <span class="doors_text">Facelifts, neck lifts, eyelid surgery, FaceTite, facial implants and fat transfer, with Dr. Stone.</span>
+              <span class="button is-alternate is-small">Visit Stone Surgical Arts</span>
+            </span>
+          </a>
+          <a class="doors_door is-there" href="https://www.stonedentalimplantcenter.com/" rel="noopener" data-cursor="Visit">
+            <figure class="doors_media"><img src="assets/clinic-detail.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="doors_label">Dental</span>
+            <span class="doors_body">
+              <span class="doors_name">Stone Dental Implant Center</span>
+              <span class="doors_text">Dental implants and smile makeovers, with Dr. Stone.</span>
+              <span class="button is-alternate is-small">Visit Stone Dental Implant Center</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

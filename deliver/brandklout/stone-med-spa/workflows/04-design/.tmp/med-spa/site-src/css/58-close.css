@@ -1,0 +1,84 @@
+/* ===========================================================================
+   THE CLOSING BAND — on every page that does not end on its own.
+
+   Charcoal, with a green light rising from the foot of the band rather than
+   the sibling's dark marble: this site has no marble anywhere, which is one of
+   the ways it reads as a different brand on the same palette. One split line
+   at display size, two buttons, three plain facts about a consultation. The
+   footer beneath it is dark too, so the page ends the way it began.
+   =========================================================================== */
+.close_component {
+  position: relative;
+  overflow: hidden;
+}
+.close_component::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -40%;
+  width: 90vw;
+  height: 70vw;
+  max-width: 1400px;
+  max-height: 900px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(143, 188, 70, 0.28) 0%, rgba(143, 188, 70, 0) 60%);
+  pointer-events: none;
+}
+.close_inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 3rem 5rem;
+  align-items: end;
+}
+.close_title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.8rem, 6.2vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 12ch;
+  color: var(--white);
+}
+.close_actions {
+  margin-top: 2.5rem;
+}
+.close_facts {
+  display: grid;
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.close_fact {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+.close_fact-key {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.15;
+  /* Ivory, not green: brand green on the charcoal-and-green glow read as
+     low contrast (BugHerd #23, 2026-09-22). */
+  color: var(--ivory);
+}
+.close_fact-val {
+  font-size: var(--size-text-small);
+  line-height: 1.55;
+  color: var(--fg-body);
+}
+
+@media (max-width: 991px) {
+  .close_inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+@media (max-width: 478px) {
+  .close_fact {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

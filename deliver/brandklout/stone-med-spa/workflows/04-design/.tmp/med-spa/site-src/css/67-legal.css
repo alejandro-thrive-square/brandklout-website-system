@@ -1,0 +1,170 @@
+/* ===========================================================================
+   THE LEGAL PAGES — /privacy-policy and /terms-of-service, added 2026-09-17.
+
+   A reference document, so it is built to be read and navigated, not
+   admired: a short cover like every other page, then a white card in a sticky
+   rail (effective date, the phone, a generated table of contents) beside
+   numbered sections on ivory at a 68ch measure. Numerals in the display face
+   carry the brand; nothing in the body moves, because text that animates in
+   is text someone is waiting to read.
+
+   Bullets reuse .detail_list from 59-detail.css (drawn dots, so the Instatic
+   reset that strips list-style cannot remove them).
+   =========================================================================== */
+.legal_component {
+  background: var(--bg);
+}
+.legal_layout {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
+  gap: 3rem 6rem;
+  align-items: start;
+}
+
+/* --- the rail ------------------------------------------------------------ */
+.legal_rail {
+  position: sticky;
+  top: 7rem;
+}
+.legal_card {
+  padding: 1.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+}
+.legal_card-key {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.legal_card-val {
+  margin-top: 0.3rem;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.25;
+  color: var(--fg);
+}
+.legal_card-val a {
+  color: inherit;
+  text-decoration: none;
+}
+.legal_card-val a:hover {
+  color: var(--accent);
+}
+.legal_toc {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+.legal_toc-list {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.legal_toc-link {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  padding: 0.35rem 0;
+  font-size: var(--size-text-small);
+  line-height: 1.4;
+  color: var(--fg-body);
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+.legal_toc-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-mute);
+}
+.legal_toc-link:hover,
+.legal_toc-link:focus-visible {
+  color: var(--accent);
+}
+
+/* --- the document -------------------------------------------------------- */
+.legal_body {
+  min-width: 0;
+  max-width: 68ch;
+}
+.legal_intro {
+  padding-bottom: var(--space-large);
+  border-bottom: 1px solid var(--line-strong);
+}
+.legal_intro p {
+  color: var(--fg-body);
+}
+.legal_intro p + p {
+  margin-top: 1rem;
+}
+.legal_section {
+  padding-top: var(--space-large);
+  scroll-margin-top: 6rem;
+}
+.legal_section + .legal_section {
+  margin-top: var(--space-large);
+  border-top: 1px solid var(--line);
+}
+.legal_heading {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.legal_num {
+  flex: none;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--accent);
+}
+.legal_subhead {
+  margin-top: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+.legal_section p {
+  color: var(--fg-body);
+}
+.legal_section p + p,
+.legal_section .detail_list + p {
+  margin-top: 1rem;
+}
+.legal_section .detail_list {
+  margin-bottom: 0;
+}
+.legal_body a:not(.button) {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.legal_address {
+  margin-top: 1.25rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  background: var(--green-wash);
+  font-style: normal;
+  line-height: 1.8;
+  color: var(--fg);
+}
+
+@media (max-width: 991px) {
+  .legal_layout {
+    grid-template-columns: 1fr;
+  }
+  .legal_rail {
+    position: static;
+  }
+  .legal_toc-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+  }
+}
+@media (max-width: 479px) {
+  .legal_toc-list {
+    grid-template-columns: 1fr;
+  }
+  .legal_card {
+    padding: 1.25rem;
+  }
+}

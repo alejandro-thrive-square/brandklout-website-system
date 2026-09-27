@@ -1,0 +1,258 @@
+/* ===========================================================================
+   RESULTS — second build. The wall (a drag rail of quotes and portraits), the
+   plates (the reserved before-and-after object on stone), the room (three
+   practice frames drifting), four questions. `.quote_card` is a component
+   from 55-words.css; the light-ground and photo variants are added here.
+   =========================================================================== */
+.padding-section-large.is-bottom-tight {
+  padding-bottom: var(--space-large);
+}
+.wall_head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.wall_head .heading-style-h2 {
+  margin-top: 1.25rem;
+}
+.wall_arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+.wall_rail {
+  display: flex;
+  gap: 1.5rem;
+  padding-right: 5%;
+  padding-bottom: 1.5rem;
+}
+.wall_rail .quote_card {
+  background: var(--white);
+  border-color: var(--line);
+  min-height: 19rem;
+}
+.wall_rail .quote_card:hover {
+  border-color: var(--line-strong);
+}
+.quote_card.is-photo {
+  width: min(16rem, 52vw);
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--stone);
+}
+.quote_card.is-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  transition: transform 1.2s var(--ease);
+}
+.quote_card.is-photo:hover img {
+  transform: scale(1.05);
+}
+.wall_note {
+  padding-bottom: var(--space-xlarge);
+  max-width: 60ch;
+}
+
+/* --- the plates ---------------------------------------------------------------- */
+.plates_grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 3rem 5rem;
+  align-items: center;
+}
+.plates_copy .heading-style-h2 {
+  margin-top: 1.25rem;
+  max-width: 14ch;
+}
+.plates_text {
+  margin-top: 1.5rem;
+  max-width: 42ch;
+}
+.plates_facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin: 2.25rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+.plates_fact {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.plates_fact-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  line-height: 1;
+  color: var(--fg);
+}
+.plates_object {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding-bottom: 3rem;
+}
+.plates_plate {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.plates_plate.is-after {
+  margin-top: 3rem;
+}
+.plates_label {
+  position: absolute;
+  top: 1rem;
+  left: 1.1rem;
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.plates_mark {
+  width: 34%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  position: relative;
+}
+.plates_mark::after {
+  content: "";
+  position: absolute;
+  inset: 28%;
+  border-radius: 50%;
+  background: var(--green);
+  opacity: 0.55;
+}
+.plates_status {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  padding: 0.8rem 1.4rem;
+  border-radius: var(--radius);
+  background: var(--charcoal);
+  color: var(--white);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.js .plates_object .plates_plate {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.js .plates_object.is-in .plates_plate {
+  opacity: 1;
+  transform: none;
+}
+.js .plates_object.is-in .plates_plate.is-after {
+  transition-delay: 0.2s;
+}
+
+/* --- the room ---------------------------------------------------------------- */
+.room_head {
+  display: grid;
+  justify-items: start;
+  max-width: 44rem;
+}
+.room_head .heading-style-h2 {
+  margin-top: 1.25rem;
+}
+/* Every frame placed explicitly, aligned to the start of its area, so an
+   aspect-ratio frame is never stretched to its row and cannot overlap the one
+   beside it (the first pass stretched the wide frame under the tall one). */
+.room_grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: auto;
+  align-items: start;
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+.room_frame {
+  margin: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.room_frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.room_frame.is-a {
+  grid-column: 1 / 8;
+  grid-row: 1;
+  aspect-ratio: 16 / 10;
+}
+.room_frame.is-b {
+  grid-column: 8 / 13;
+  grid-row: 1 / 3;
+  aspect-ratio: 4 / 5;
+  margin-top: 4rem;
+}
+.room_frame.is-c {
+  grid-column: 3 / 8;
+  grid-row: 2;
+  aspect-ratio: 16 / 10;
+}
+.proof_faq .heading-style-h2 {
+  margin-top: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 991px) {
+  .plates_grid {
+    grid-template-columns: 1fr;
+  }
+  .plates_object {
+    max-width: 30rem;
+  }
+  .room_frame.is-b {
+    margin-top: 2rem;
+  }
+  .room_frame.is-c {
+    grid-column: 1 / 8;
+  }
+}
+@media (max-width: 767px) {
+  .wall_head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+  .plates_plate.is-after {
+    margin-top: 2rem;
+  }
+  .plates_status {
+    white-space: normal;
+    text-align: center;
+    width: 90%;
+  }
+  .room_grid {
+    gap: 0.75rem;
+  }
+  .room_frame.is-a,
+  .room_frame.is-b,
+  .room_frame.is-c {
+    grid-column: 1 / 13;
+    grid-row: auto;
+    margin-top: 0;
+  }
+  .room_frame.is-b {
+    aspect-ratio: 4 / 3;
+  }
+}

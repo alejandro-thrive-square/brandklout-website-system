@@ -1,0 +1,49 @@
+/* THE BRAND SWITCHER.
+
+   Its own file rather than an edit to 22-footer.css, because that file is a
+   verbatim copy of the Surgical Arts stylesheet and keeping it byte-identical
+   means a fix made on either site can be moved to the other without a diff to
+   read. Anything this site adds to the footer lives here.
+
+   The switcher is the load-bearing piece of the modality split. A visitor who
+   arrives here wanting a facelift has to reach the surgical site in one click,
+   and the same link has to exist in the other direction. NassifMD puts it in
+   the header of both sites; ours is in the footer because the navbar already
+   hits its squeeze limit at 992px (see the note at the foot of 20-navbar.css).
+
+   LAUNCH TASK: the href currently points at the Surgical Arts Instatic staging
+   host. It becomes the real domain when one is chosen. */
+.footer_switch {
+  display: inline-grid;
+  gap: 0.25rem;
+  margin-top: 1.6rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+.footer_switch:hover {
+  border-color: var(--accent-flat);
+  background-color: var(--green-wash);
+}
+.footer_switch-label {
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+.footer_switch-brand {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--fg);
+}
+/* The hover ground is the pale green wash, and on the dark footer --fg and
+   --fg-mute are the light inks, so both lines vanished on hover (BugHerd #25,
+   2026-09-22). Pin them to the dark inks while the wash is showing. */
+.footer_switch:hover .footer_switch-label,
+.footer_switch:focus-visible .footer_switch-label {
+  color: var(--charcoal-soft);
+}
+.footer_switch:hover .footer_switch-brand,
+.footer_switch:focus-visible .footer_switch-brand {
+  color: var(--charcoal);
+}

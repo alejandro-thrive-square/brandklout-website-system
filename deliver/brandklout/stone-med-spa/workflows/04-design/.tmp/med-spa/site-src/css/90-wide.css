@@ -1,0 +1,30 @@
+/* ===========================================================================
+   2K AND 4K. Last in the cascade on purpose (it was 59-wide.css; renumbered
+   2026-09-03 so the page stylesheets that follow it in the sixties cannot land
+   after it by accident).
+
+   Above about 1700px the fluid root keeps growing the type but the full-bleed
+   frames keep growing their MEASURE, so a line of copy on a 4K monitor ends up
+   140 characters long. The container caps at 80rem everywhere else; these are
+   the places that opt out of it. A technique borrowed from the sibling build,
+   which is allowed — a technique may repeat, a section shape may not.
+   =========================================================================== */
+@media (min-width: 1700px) {
+  .hero_copy,
+  .cover_inner {
+    max-width: 44rem;
+  }
+  .hero_title {
+    font-size: 8.4rem;
+  }
+  .words_title,
+  .close_title {
+    font-size: 6.4rem;
+  }
+  .cadence_grid {
+    --cad-label: 16rem;
+  }
+  .shelf_component {
+    height: 40rem;
+  }
+}

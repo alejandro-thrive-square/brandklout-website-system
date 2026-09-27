@@ -1,0 +1,38 @@
+<!-- GENERAL THANK YOU PAGE — Asana subtask 11 of 11. Second build; revised
+     2026-09-15 (the providers' schedule, not Dr. Stone's; the new phone).
+
+     noindex (seo.json) and cta: false. Everything lives inside one tall cover
+     on the practice's neon sign: a check mark that draws itself, the three
+     real timings, the phone. Nothing routes here yet — the booking form is
+     inert (js/11-form.js) — so it is reachable only by URL. It exists because
+     it is the conversion-tracking endpoint and the tag needs somewhere to
+     fire. -->
+<section class="section_cover cover_component is-tall thanks_component">
+  <figure class="cover_media" data-parallax="8">
+    <img src="assets/ssa-neon.webp" alt="" width="2133" height="1200" fetchpriority="high">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner thanks_inner">
+          <svg class="thanks_mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle class="thanks_mark-ring" cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5"/>
+            <path class="thanks_mark-tick" d="M15 24.5 21 30.5 33 18.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="eyebrow is-alternate">Received</p>
+          <h1 class="cover_title" data-split data-split-now>Thank you. <em class="text-style-display-accent">We got your request.</em></h1>
+          <p class="cover_lede">Your request is with our front desk. Here's what happens next.</p>
+          <dl class="thanks_next" data-reveal="stagger">
+            <div><dt>Today</dt><dd>We check your request against our providers' schedules. Requests sent after 5 pm or on a weekend are handled the next business morning.</dd></div>
+            <div><dt>Within one business day</dt><dd>We'll call the number you gave us to offer you times. If we can't reach you, we'll try twice more, then email.</dd></div>
+            <div><dt>At your visit</dt><dd>A consultation with one of our medical providers. You'll leave with a written plan and no obligation to start.</dd></div>
+          </dl>
+          <div class="button-group cover_actions" data-reveal>
+            <a class="button is-alternate" href="tel:+18176742061">Faster: call (817) 674-2061</a>
+            <a class="button is-secondary thanks_button" href="treatments.html">Our treatments</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

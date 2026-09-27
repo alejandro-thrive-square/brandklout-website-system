@@ -13,7 +13,125 @@ implant centre (live on Webflow) and Stone Surgical Arts (twelve pages, publishe
 
 Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/project-overview.md).
 
-## Status: PUBLISHED — eleven pages live at <https://stone-med-spa-production.up.railway.app>
+## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
+
+**2026-09-23, latest — phone is (817) 674-2061**, the display number, on production (seq 21) and
+staging (seq 16). **The med spa's own GHL number pool (`vHDCe45MFTjdydJul0cd`) is live on production
+since 2026-09-24** and swaps that number in the browser with no consent needed; staging has no pool
+(`set-dni-pool.mjs --pool` refuses it) — [run](./runbook/2026-09-24-dni-pool-installed.md).
+
+**2026-09-24, later — BugHerd #15 on staging:** the /team strip's treatment-room frame is the client's Drive photo (upscaled 2× with Freepik precision; the creative Magnific upscale invented detail and was rejected). BugHerd has no new tasks or comments. **39 of 41 now on staging and marked done in BugHerd**; #9/#10 need Abby's and Brooke's photos exported from Canva — they are not on Drive. Production still awaits a go — [run](./runbook/2026-09-24-bugherd-15-treatment-room.md).
+
+**2026-09-23 — the client's BugHerd pass is on STAGING, not production.** 41 tasks on production
+(BugHerd project 540569): 38 applied on `https://staging.westlaketxmedspa.com` (seq 13, **24
+pages** — eleven new treatment pages generated from `treatment-pages.mjs`), 3 waiting on Drive
+auth for photos (#9, #10, #15). Address is now **#110b**. Production still needs a go, then a
+sitemap redeploy. **No JSON-LD reaches the live site** (pre-existing) —
+[run](./runbook/2026-09-23-bugherd-pass-on-staging.md).
+
+**2026-09-18, latest — the logo is LIVE on production.** `https://westlaketxmedspa.com` is
+**seq 14, 13 pages, 76 media**. Promotion was not a re-push of the staging payload: a new media
+asset mints its own `/uploads/<nanoid>-<name>` on each instance, so production got
+`upload-media.mjs` against itself first and a payload rebuilt from its own map (checked: zero
+staging ids in it). Gates all clean — and one of them lied on the way: **`form-test.mjs` said the
+GHL frame never attached, three runs out of three, on a booking form that was working**. It read
+`pg.frames()` straight after the `<iframe>` element appeared, and the vendor puts a Turnstile
+challenge in front of the navigation; it polls for 45s now. **`seq` advancing is the push, not the
+publish** — the publish silently no-op'd once on a bad relative path while seq had already moved,
+so check the live HTML —
+[run](./runbook/2026-09-18-logo-on-production.md).
+
+**2026-09-18 — the practice has a logo.** The site had carried a
+text wordmark since it was built, because no logo file existed. Asana `1218408530306234` ("Update
+logo", assigned to us 2026-09-11) had one all along, attached to a task **outside** the slug
+`asana-context.mjs stone-med-spa` pulls — which is why that command reports "attachments: none
+anywhere" and means nothing. `site-src/make-logo.py` lifts the artwork off its black ground by
+unpremultiplying rather than keying (the glow survives; recompositing matches the original to
+1/255) and cuts four files: a **row** lockup for the navbar and drawer, a full **stack** for the
+footer, each in a light-type and a dark-ink variant. Staging is **seq 10, 13 pages, 76 media**.
+Two things worth carrying forward: the navbar's logo pair is **stacked and cross-faded, never
+toggled with `display`** — Instatic makes every image lazy and `sizes="auto"` measures the rendered
+box, so a hidden one is neither fetched nor sized (trap 39) — and `all-pages.mjs` now runs **five
+widths**, which caught a navbar clip at 992–1007 that **predates the logo by two weeks** —
+[run](./runbook/2026-09-18-logo-on-staging.md).
+
+**2026-09-17 — the practice's Go High Level form is live on /book.** It replaced the inert
+local form, travelling as a `brandklout.embed-origins` Embed block because Instatic's importer
+publishes a third-party iframe as an empty div. Only /book gets the widened CSP. The production
+consent bridge appends the visitor's `privacy_*` values to the frame URL. Both legal pages now
+name LeadConnector and carry a **Text messages** section, because the form collects SMS consent.
+New gate `form-test.mjs`. Production seq 13, staging seq 8. **Two things the client must fix inside
+GHL:** the consent text names **Stone Surgical PLLC**, and the form's own Privacy/Terms links point
+at `example.com` —
+[run](./runbook/2026-09-17-ghl-form-embedded.md).
+
+**2026-09-17 — the drag rails' arrows never worked, and now do.** A client report ("the
+sliders buttons don't work") found that no arrow on the home reviews, /about's rooms or /results'
+reviews had ever been bound: `data-drag-scope` sat on the section head, which is a *sibling* of the
+rail, so the `closest()` lookup in `20-motion.js` found nothing. Fixed in the JS and the markup,
+with a new click gate `site-src/drag-test.mjs` (3/3). Production is seq 12 and staging seq 6,
+both `{"publishedPages":13}` and `verify-live` FAIL none. **Every existing gate had been green on
+this for two weeks — none of them clicks anything** —
+[run](./runbook/2026-09-17-drag-rail-arrows-never-bound.md).
+
+**2026-09-17 — EVERYTHING WENT TO PRODUCTION.** Production was eleven pages behind and
+the push is a whole-site replace, so the client's Asana feedback, the teammate's web dev brief pass
+and the two new legal pages all went live together: 13 pages, seq 11, `{"publishedPages":13}`.
+Gates: `verify-live` FAIL none (13 routes, **13/13 distinct titles** — the duplicate `<title>` from
+the 2026-09-12 admin edit is gone), `css-parity` FAIL none, `compare-live` 4 trap-30 findings.
+The sitemap was rebuilt and redeployed (12 URLs) and the Cloudflare token revoked. **Open:** the
+legal pages still need the client's review, the legal entity name and a contact email; the Cherry
+link, the "Dr. Stone injects" contradiction and the wallet question are now live unresolved; submit
+the sitemap in Search Console —
+[run](./runbook/2026-09-17-production-push.md).
+
+**2026-09-17 — Privacy Policy and Terms of Service, built and first published to staging.** `/privacy-policy`
+and `/terms-of-service` are adapted from the implant centre's pages, without its SMS program and
+without its PLLC. The footer's legal links now point to them, and the SMS Terms link is gone.
+Staging has 13 pages. **Open:** the client or their counsel reviews both pages, and supplies the
+legal entity name and a contact email. Then production, and add both slugs to the sitemap —
+[run](./runbook/2026-09-17-legal-pages-on-staging.md).
+
+**2026-09-15, later — the teammate's web dev brief is on STAGING too.** The phone is back to
+**(817) 383-8361**, a tracking number (so the "918-3666" below is superseded). The menu order is
+Injectables, Skin Rejuvenation, Facials, Restoration, with Sculptra under Biostimulators, and
+skin boosters are HydraFacial add-ons. "Same building" and the three-names stack are gone from
+/about. The membership discloses its signed agreement. Two real Google reviews replaced the
+placeholders. **Held for the client:** the brief's "Dr. Stone injects" rules, which contradict the
+Asana pass. Also open: how the wallet works, reviewer names, suite #110 or #110b —
+[run](./runbook/2026-09-15-web-dev-brief-on-staging.md).
+
+**2026-09-15, later — the client's feedback is on STAGING, not production.** Asana task
+`1218408530306236` (ten subtasks) is applied to every page and published to
+`https://staging.westlaketxmedspa.com`. The practice is now **Westlake Medical Aesthetics**. The
+menu has 12 treatments in 4 categories, and the team is two people (Brooke NP injector, Abby
+esthetician). There is one $149/month membership with a 90-day commitment and 30 days' notice.
+Cherry is the primary lender, CareCredit sits alongside it, and the phone is (817) 918-3666.
+**Dr. Stone does not assess or inject here**, and the copy says so. **Open:** the practice's own
+Cherry apply link (the button goes to Cherry's generic site), then the client's review on staging,
+then the same push to production —
+[run](./runbook/2026-09-15-client-feedback-on-staging.md). Staging had no fonts until this run
+(upload directive trap 35).
+
+**2026-09-15 — staging and the sitemap.** Staging is `https://staging.westlaketxmedspa.com`
+(admin `/admin`, same login as production). It is the Railway environment `staging`, seeded from
+production (11/11 content-equivalent) and noindex at the edge. `/sitemap.xml` is live on the apex
+and www, served by the Cloudflare Worker `westlaketxmedspa-sitemap` from
+`workflows/06-cloudflare-sitemap/`. **Open:** every production page now shares one `<title>` after
+an admin edit on 2026-09-12. Submit the sitemap in Search Console. There is still no canonical or
+`og:url` —
+[2026-09-15 run](./runbook/2026-09-15-staging-and-sitemap.md).
+
+**2026-09-10 — domain cutover.** `westlaketxmedspa.com` (+ `www`) is connected and the admin is
+`https://westlaketxmedspa.com/admin`. The old `stone-med-spa-production.up.railway.app` host was
+**detached** by the cutover and 404s everywhere; everything below that names it is historical.
+Users: the owner account and **Sang** (`sang@thrivesquare.com`, admin, same password as on Mason
+Park). Republished the same evening: every link to Stone Surgical Arts (the footer switch, the
+about button, the treatments door) now goes to `https://www.dfwsurgicalarts.com/`. The upload
+scripts import `insta-api.mjs` from `deliver/process/22-instatic-api-sync/` —
+[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md). **Still open:**
+neither Stone site serves a canonical or `og:url`, so `seo.json` reaches nothing live. (The med
+spa's sitemap was added 2026-09-15.)
 
 **2026-09-04.** The brand has an Instatic instance of its own, provisioned name-first so the
 generated host already carries the business name, and the second build is on it. Gates:
@@ -28,7 +146,25 @@ whose direction flips between runs (trap 30) · `console-live` clean on all elev
 `settings.faviconUrl` is deliberately unset and the browser tab shows a generic mark. It is one
 field pointing at one uploaded asset the day a mark exists — see gotcha 29.
 
-**This is the link to send for review**, and the admin is the same URL + `/admin`, same login as
-Mason Park. Anyone can confirm the admin link is safe to send with
+**This is the link to send for review**, and the admin is the same URL + `/admin`. Anyone can confirm the admin link is safe to send with
 `node deliver/process/20-instatic-domain-origins/check-origins.mjs --all`.
 
+## Cookie consent (Termly) — 2026-09-22
+
+**Live.** The banner renders and the Cookie Preferences control opens Termly's modal. Nothing fires before a visitor chooses. Account `stonesurgicalarts@brandklout.com`, website UUID
+`1f62293e-6b6c-4599-95fa-b975654b6a3a`, `autoBlock=off`. The Cookie Preferences control is inserted at runtime by
+`BrandkloutConsentPreferences` / `brandklout-consent-preferences.js`, which clones the footer's
+Privacy Policy link so it matches this site's own type.
+
+`TERMLY_API_KEY` is in this worktree's generated `.env`, from `~/.webzite/.env` `[vars]`
+`TERMLY_STONE_MED`. Never hand-edit `.env`; edit the master and run `node scripts/env-sync.mjs`.
+The key is near-useless (one read-only endpoint) — the public **website UUID** is what tooling needs.
+
+**Do not re-add a consent hold to a GoHighLevel number pool**: the client's instruction (2026-09-22)
+is that pools run even without consent.
+
+Full history: [`runbook/2026-09-22-termly-cookie-consent.md`](./runbook/2026-09-22-termly-cookie-consent.md). Cross-site detail:
+[`deliver/process/23-termly-ghl-consent`](../../../../process/23-termly-ghl-consent/23-termly-ghl-consent.md).
+
+## Version Control
+Tracked. Follows the root-level version control rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
