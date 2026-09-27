@@ -40,7 +40,11 @@ board draws this).
   - `tools/<toolkit>/` — copies of the toolkits the started steps use, so every relative path in a
     directive or script works the same on main and in the client folder.
 - **Media:** the client's Google Drive and the step's `output/assets/`, pulled with `scripts/drive.mjs`;
-  R2 holds the backup. Never keep the only copy in a worktree.
+  R2 holds the backup. Never keep the only copy in a worktree. `node scripts/assets.mjs push` uploads
+  every untracked file under each client folder in every worktree and writes the client's
+  `assets.tsv` manifest (commit it); `pull <client>` restores a client, hash-verified; `status`
+  compares. Session cookies, keys, env files and `recovered/` dumps are never uploaded. Run a push at
+  the end of every task that made media, and before removing a worktree.
 - `output/` replaced `.tmp/` on 2026-09-23. Client branches from before keep `workflows/<module>/.tmp/`
   until they are moved to the scenario layout.
 
