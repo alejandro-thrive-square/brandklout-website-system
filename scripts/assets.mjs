@@ -19,7 +19,9 @@
  * uploads the rest, and rewrites the client's manifest in THIS checkout. The same path in two
  * worktrees with different content: the newer file wins and the clash is printed.
  * pull downloads a client's manifest into a checkout and verifies each file's sha256.
- * Loose files at the root of deliver/brandklout/ are never read (they are not client media).
+ * Loose files at the root of deliver/brandklout/ are never read (they are not client media), and
+ * neither is anything SENSITIVE matches: session cookies, keys, env files and recovered/ DB dumps
+ * stay on the machine that made them.
  *
  * Credentials (process.env, then ~/.webzite/.env [shared], then the nearest .env):
  *   R2_TOKEN   a Cloudflare API token with R2 read/write (falls back to CLOUDFLARETESTING)
@@ -39,6 +41,9 @@ const ROOT = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: '
 const CLIENTS_REL = 'deliver/brandklout'
 const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.webzite', '.env')
 const SKIP_DIRS = /(^|\/)(node_modules|\.git|__pycache__|\.venv|\.pytest_cache)(\/|$)/
+// Never leaves this machine: login cookies (.session-<host>, a scrape's cookies.json with a live
+// PHPSESSID), keys, env files, and recovered/ (DB dumps with credentials and patient-adjacent PII).
+const SENSITIVE = /(^|\/)(\.session[^/]*|cookies\.json|\.secrets|recovered|\.env[^/]*|id_rsa[^/]*|id_ed25519[^/]*|[^/]*\.pem|php_errorlog)(\/|$)/
 const BIG = 64 * 1024 * 1024
 const PARALLEL = 8
 
@@ -149,7 +154,7 @@ function untracked (checkout, only) {
   const raw = execFileSync('git', ['-c', 'core.quotepath=false', 'ls-files', '-z', '-o', '--', CLIENTS_REL], { cwd: checkout, encoding: 'utf8', maxBuffer: 1 << 30 })
   return raw.split('\0').filter(Boolean).flatMap((p) => {
     const parts = p.split('/')
-    if (parts.length < 4 || SKIP_DIRS.test(p)) return [] // deliver/brandklout/<client>/<file…>
+    if (parts.length < 4 || SKIP_DIRS.test(p) || SENSITIVE.test(p)) return [] // deliver/brandklout/<client>/<file…>
     const client = parts[2]
     if (only && client !== only) return []
     const rel = parts.slice(3).join('/')
