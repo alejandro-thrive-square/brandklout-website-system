@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/uploads/fonts/dm-sans/400-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/uploads/fonts/dm-sans/500-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/uploads/fonts/dm-sans/600-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/uploads/fonts/dm-sans/700-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/uploads/fonts/manrope/500-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/uploads/fonts/manrope/600-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/uploads/fonts/manrope/700-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/uploads/fonts/manrope/800-latin-0.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root {
+  --text-grey: hsla(211.88, 16.16%, 38.82%, 1);
+  --text-grey-5: hsla(211.88, 16.16%, 38.82%, 0.05);
+  --text-grey-10: hsla(211.88, 16.16%, 38.82%, 0.1);
+  --text-grey-20: hsla(211.88, 16.16%, 38.82%, 0.2);
+  --text-grey-30: hsla(211.88, 16.16%, 38.82%, 0.3);
+  --text-grey-40: hsla(211.88, 16.16%, 38.82%, 0.4);
+  --text-grey-50: hsla(211.88, 16.16%, 38.82%, 0.5);
+  --text-grey-60: hsla(211.88, 16.16%, 38.82%, 0.6);
+  --text-grey-70: hsla(211.88, 16.16%, 38.82%, 0.7);
+  --text-grey-80: hsla(211.88, 16.16%, 38.82%, 0.8);
+  --text-grey-90: hsla(211.88, 16.16%, 38.82%, 0.9);
+  --text-grey-d-1: hsla(211.88, 16.16%, 32.61%, 1);
+  --text-grey-d-2: hsla(211.88, 16.16%, 26.4%, 1);
+  --text-grey-d-3: hsla(211.88, 16.16%, 20.19%, 1);
+  --text-grey-d-4: hsla(211.88, 16.16%, 13.98%, 1);
+  --text-grey-l-1: hsla(211.88, 16.16%, 48.61%, 1);
+  --text-grey-l-2: hsla(211.88, 16.16%, 58.4%, 1);
+  --text-grey-l-3: hsla(211.88, 16.16%, 68.19%, 1);
+  --text-grey-l-4: hsla(211.88, 16.16%, 77.98%, 1);
+  --white: hsla(0, 0%, 100%, 1);
+  --white-5: hsla(0, 0%, 100%, 0.05);
+  --white-10: hsla(0, 0%, 100%, 0.1);
+  --white-20: hsla(0, 0%, 100%, 0.2);
+  --white-30: hsla(0, 0%, 100%, 0.3);
+  --white-40: hsla(0, 0%, 100%, 0.4);
+  --white-50: hsla(0, 0%, 100%, 0.5);
+  --white-60: hsla(0, 0%, 100%, 0.6);
+  --white-70: hsla(0, 0%, 100%, 0.7);
+  --white-80: hsla(0, 0%, 100%, 0.8);
+  --white-90: hsla(0, 0%, 100%, 0.9);
+  --white-d-1: hsla(0, 0%, 84%, 1);
+  --white-d-2: hsla(0, 0%, 68%, 1);
+  --white-d-3: hsla(0, 0%, 52%, 1);
+  --white-d-4: hsla(0, 0%, 36%, 1);
+  --white-l-1: hsla(0, 0%, 100%, 1);
+  --white-l-2: hsla(0, 0%, 100%, 1);
+  --white-l-3: hsla(0, 0%, 100%, 1);
+  --white-l-4: hsla(0, 0%, 100%, 1);
+  --header-grey: hsla(210, 56.25%, 6.27%, 1);
+  --header-grey-5: hsla(210, 56.25%, 6.27%, 0.05);
+  --header-grey-10: hsla(210, 56.25%, 6.27%, 0.1);
+  --header-grey-20: hsla(210, 56.25%, 6.27%, 0.2);
+  --header-grey-30: hsla(210, 56.25%, 6.27%, 0.3);
+  --header-grey-40: hsla(210, 56.25%, 6.27%, 0.4);
+  --header-grey-50: hsla(210, 56.25%, 6.27%, 0.5);
+  --header-grey-60: hsla(210, 56.25%, 6.27%, 0.6);
+  --header-grey-70: hsla(210, 56.25%, 6.27%, 0.7);
+  --header-grey-80: hsla(210, 56.25%, 6.27%, 0.8);
+  --header-grey-90: hsla(210, 56.25%, 6.27%, 0.9);
+  --header-grey-d-1: hsla(210, 56.25%, 5.27%, 1);
+  --header-grey-d-2: hsla(210, 56.25%, 4.27%, 1);
+  --header-grey-d-3: hsla(210, 56.25%, 3.26%, 1);
+  --header-grey-d-4: hsla(210, 56.25%, 2.26%, 1);
+  --header-grey-l-1: hsla(210, 56.25%, 21.27%, 1);
+  --header-grey-l-2: hsla(210, 56.25%, 36.27%, 1);
+  --header-grey-l-3: hsla(210, 56.25%, 51.26%, 1);
+  --header-grey-l-4: hsla(210, 56.25%, 66.26%, 1);
+}
+.wz-embed{position:relative;width:100%;max-width:100%}.wz-embed>iframe{display:block;width:100%;border:0}.wz-embed[data-wz-embed="ratio"]>iframe{height:100%;position:absolute;inset:0}.wz-embed[data-wz-embed="ratio"]{aspect-ratio:var(--wz-embed-ratio,16/9)}.wz-embed-note{font:500 12px/1.5 system-ui,sans-serif;letter-spacing:.02em;padding:10px 12px;border:1px dashed currentColor;border-radius:6px;opacity:.65}.wz-embed[data-wz-embed-card]{display:flex;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;padding:12px;text-align:center;border:1px dashed currentColor;border-radius:6px;opacity:.65}.wz-embed-card{display:flex;flex-direction:column;gap:3px;max-width:100%;font:500 12px/1.5 system-ui,sans-serif;letter-spacing:.02em}.wz-embed-card-kind{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}.wz-embed-card-to{font-size:13px;word-break:break-all}.wz-embed-card-meta{opacity:.75}

@@ -1,0 +1,9 @@
+instance   https://brandklout-production.up.railway.app
+table      legal: CREATE (postType, /legal/<slug>, 10 fields)
+           created CId4CBUQNnL9Hve7Ey8Cf
+row        /legal/privacy: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+           4FyMEB8tmPEUqGl-2Xn6D published
+row        /legal/terms: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+           p0RfjiLpktsPz41siTAXb published
+row        /legal/hipaa-data-handling: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+           uFotR_C24LctL_pMId1Qi published
