@@ -32,19 +32,23 @@
     },
     "brandklout.open-graph": {
       "dir": "open-graph",
-      "version": "1.1.3",
+      "version": "1.2.3",
       "tests": ["test-open-graph.mjs"],
       "publishes": true,
       "grants": ["cms.hooks", "cms.storage", "cms.routes", "cms.content.read", "admin.navigation", "editor.code"],
       "why": {
-        "cms.hooks": "publish.html filter writing og:/twitter: tags, the canonical link and the meta description",
+        "cms.hooks": "publish.html filter writing og:/twitter: tags, the canonical link, the meta description and the favicon links",
         "cms.storage": "per-page overrides in the plugin's own record table",
         "cms.routes": "the admin page and bulk API under /admin/api/cms/plugins/<id>/runtime/, all behind a session",
-        "cms.content.read": "read-only pages + posts, to publish the seoDescription the platform stores and never emits",
+        "cms.content.read": "read-only pages + posts + articles, to publish the seoDescription the platform stores and never emits",
         "admin.navigation": "the Open Graph item in the admin sidebar",
         "editor.code": "required by the host for an adminPages app page; one hand-written file"
       },
       "changelog": {
+        "1.2.3": "2026-09-25 mason-park: og:image:width/height/type when the image file name carries its size (-1200x630.jpg); without them Facebook shows a first share with no picture.",
+        "1.2.2": "2026-09-25 mason-park: entries also indexed by SEO title, so an article whose <title> is its seoTitle no longer resolves to the template page (og:url /blog-article).",
+        "1.2.1": "2026-09-25 mason-park: contentAccess reads the articles table; description insert kept from 1.1.3.",
+        "1.2.0": "2026-09-25 mason-park: favicon + appleTouchIcon settings; writes <link rel=icon> and apple-touch-icon unless the page already names one (the platform has no favicon setting).",
         "1.1.3": "2026-09-09 mason-park-kids: INSERT <meta name=description> when the site has no site-wide one (57 of 57 Kids pages shipped without).",
         "1.1.2": "2026-08-28 dr-nahlah: the version every other site ran on 2026-09-10."
       }
@@ -92,7 +96,7 @@
     },
     "mason-park": {
       "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema", "brandklout.link-editor"],
-      "note": "All four since 2026-09-10. Production open-graph siteUrl was empty (no canonical); staging embed-origins 1.5.1 on 2026-09-18."
+      "note": "All four since 2026-09-10. Production open-graph siteUrl was empty (no canonical); staging embed-origins 1.5.1 on 2026-09-18. open-graph 1.2.x was written and installed from bk-mason-park on 2026-09-25 (source brought to main 2026-09-27); `status` says which host runs which."
     },
     "mason-park-kids": {
       "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],

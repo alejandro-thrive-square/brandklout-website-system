@@ -31,6 +31,11 @@ direction the client picked.
    site if any, domain registrar and DNS host, current tracking (GTM, analytics, number pools, GHL
    forms), privacy, terms and SMS consent text, brand guidelines, assets, and approval for AI images
    and stock photos. Missing answers go to `docs/open-questions.md` and back to the client.
+   Two answers are **asked, never assumed**, because each reshapes every page: the **site
+   language(s)** and regional variant (Alki House's brief was in English, its ledger in Spanish, and
+   the site had to be Spanish, 2026-09-13), and **how a customer buys or gets in touch** (form,
+   phone, WhatsApp, a cart that checks out to WhatsApp or email, or real payment, and the number or
+   account it goes to). Record both in `docs/project-overview.md` before any design.
 2. **Worktree.** Create the Orca worktree, rename the branch to the bare `bk-<client>`, add the client
    folder to the sparse checkout (`git sparse-checkout add deliver/brandklout/<client>`), add a
    `[<client>]` section to `~/.webzite/.env` (even empty) and run `node scripts/env-sync.mjs`. Then

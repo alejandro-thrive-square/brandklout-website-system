@@ -14,7 +14,7 @@ Client delivery (partner agency).
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — authenticated on the `team` profile 2026-08-07.** `list_sites` returns 9 sites, all in workspace `63b4b7393e89b78575e9a9bb`. |
+| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — re-authenticated 2026-09-24 with the whole workspace ticked:** `list_sites` returns 74 sites, all in workspace `63b4b7393e89b78575e9a9bb`. Before that the grant had shrunk to the two Arvada sites (a narrower re-auth) and every other client 404'd with "The site cannot be found". That 404 means the site is not in the grant, not that the id is wrong; the grant is replaced wholesale, so tick every site. |
 | `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../mcp-servers/asana/setup.md). |
 
 ### Why one Webflow instance, not one per client
@@ -53,9 +53,12 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `arvada-dental-center/` | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **Confirmed 2026-08-07 by the user** as the site to edit. Domains `arvadadentalimplants.com`, `www.` See the copies warning below |
 | `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
 | `stone-dental-implant-center/` | Stone Dental Implant Center | `6a07d5aac093f0e4521d29bc` | **Confirmed 2026-09-03** via `list_sites` (short name `stone-surgical-arts`). Domains `stonedentalimplantcenter.com` + `www.` **and** `stonesurgicalarts.com` + `www.` — one site, two brands. Live production site, 39 pages. Two-domain caution below |
+| `stone-surgical-arts/` | — | — | **Not a Webflow site.** Built on **Instatic** (`stone-surgical-arts-production.up.railway.app`). Worktree `bk-stone`. Same client as the two other Stone folders |
+| `stone-med-spa/` | — | — | **Not a Webflow site.** Built on Instatic. Worktree `bk-stone-med-spa` |
 | `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
 | `legacy-dental-pasadena/` | Legacy Dental Pasadena - Cosmetic & Implant Dentistry | `68e12d861f12c7f04a762a8e` | **Confirmed 2026-08-20** via `get_site`. Short name `legacy-dental`. **78 pages, live production site** serving `legacydentalpasadena.com`. **Also carries `caldentalpasadena.com` + `www.` — a second brand. Publish staging-only until that is explained.** See the warning below |
 | `marvel-dental/` | Marvel Dental Main | `69aedbc6b0c7e78051fd6a2c` | **Confirmed 2026-08-21** via `get_site`. Short name `marvel-dental-main`. **77 pages, live production site** serving `marveldentaldds.com` + `www.`. Four other sites in the workspace carry the Marvel name and are old iterations — match on the ID. See the warning below |
+| `oceanic-dental/` | Oceanic Dental | `66cd6c49cbb85d43d9e41a7c` | **Added 2026-09-22.** Reached through its **own** instance `webflow-oceanic-dental` (site-scoped grant), not `webflow-brandklout`. Worktree `bk-oceanic-dental`; details in the client's `docs/mcp-access.md` on that branch |
 | `institute-for-advanced-dentistry/` | Institute for Advanced Dentistry — Homepage Concepts | `6a946f89a8315fa7643642e3` | **Observed, NOT in the grant.** Read from the `data-wf-site` of the staging URL Brandklout posted 2026-08-31; `list_sites` (79 sites, 2026-09-03) does not return it. Re-authorize with it ticked, then confirm via `get_site`. Read-only until then |
 
 > [!CAUTION]
@@ -156,8 +159,13 @@ Asana workspace connected.
 > [!IMPORTANT]
 > Every client engagement seen in Asana now has a folder under `deliver/brandklout/`:
 > `arvada-dental-center`, `dr-nahlah`, `grand-mission-dentistry`, `livewell-dental`, `mason-park`,
-> `stone-dental-implant-center`. For any *new* client, create the folder and its `mcp-access.md`
-> before doing platform work, and add a row to the client site registry above.
+> `stone-surgical-arts`, `stone-dental-implant-center`, `stone-med-spa`. For any *new* client, create
+> the folder and its `mcp-access.md` before doing platform work, and add a row to the client site
+> registry above.
+>
+> **One client may be several projects.** The three Stone folders are one engagement delivered as
+> three separate websites, each with its own folder, worktree and platform instance. Give each its
+> own row; do not fold them together.
 
 ## Allowed Operations
 - Read tasks, subtasks, projects, sections, custom fields, assignees, due dates, attachments

@@ -52,6 +52,9 @@ Most damage on live sites came from acting on the wrong site or on top of someon
      (`WEBFLOW_MCP_INSTANCE=webflow-oceanic-dental`).
    - A site that is not in the grant is read-only. Tell the user. Do not re-authorize the partner
      instance yourself: re-authorizing replaces the grant, and every site left unticked loses access.
+   - A 404 "The site cannot be found" means the site is not in the grant, not a wrong id. On
+     2026-09-24 a narrower re-auth had shrunk the grant to the two Arvada sites; the user
+     re-authorized with every site ticked (74 sites).
 5. **Record the baseline.** `publish-state.txt` shows `lastUpdated` against `lastPublished` and lists
    every page changed since the last publish. Keep it. Writing freeform head or footer code moves
    `lastUpdated` and destroys this signal.

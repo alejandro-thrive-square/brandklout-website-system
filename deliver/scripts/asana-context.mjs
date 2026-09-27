@@ -38,10 +38,22 @@ const CLIENT_ROOT = join(HERE, '..', 'brandklout')
 export const CLIENT_TASKS = {
   'grand-mission-dentistry': ['1217040406855578'],
   'arvada-dental-center': ['1217040406855586'],
-  'mason-park': ['1217040406855582'],
+  // Two roots. `1217040406855582` is the closed paid-traffic landing page
+  // work; `1217634021276355` is "Build New Mason Park Site" (Week 3), which
+  // holds the Build Core Pages subtask and is the live one. Pulling only the
+  // first made the core-pages brief invisible to every context pull.
+  'mason-park': ['1217040406855582', '1217634021276355'],
   'dr-nahlah': ['1216611404338509'],
   'stone-dental-implant-center': ['1217160668112180', '1217160668112175'],
   'legacy-dental-pasadena': ['1217611213174386'],
+  // Stone is three brands in one Asana project. The slug above pulls both build tasks; these two
+  // pull one pillar each, matching the client folder that owns it.
+  // 1218408530306236 is the client's website-feedback task and 1218408530306234 "Update logo" is
+  // where the practice's logo PNG actually arrived (2026-09-11). Neither hangs off the build task,
+  // so pulling 1217160668112180 alone reports "attachments: none anywhere" — which is true, and
+  // meant a client-supplied logo sat unnoticed for a week. Added 2026-09-18.
+  'stone-med-spa': ['1217160668112180', '1218408530306236', '1218408530306234'],
+  'stone-surgical-arts': ['1217160668112175'],
   'institute-for-advanced-dentistry': ['1215476573810829', '1217929763942271'],
 }
 

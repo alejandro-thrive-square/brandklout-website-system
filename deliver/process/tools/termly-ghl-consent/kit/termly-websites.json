@@ -55,7 +55,8 @@
     "clientFolder": "stone-dental-implant-center",
     "webflowSiteId": "6a07d5aac093f0e4521d29bc",
     "embed": "https://app.termly.io/resource-blocker/e51fcbf6-ee3e-41de-8aeb-9af4d07bdb32?autoBlock=off",
-    "rollout": "applied-not-published"
+    "rollout": "live",
+    "rolloutNote": "Published 2026-09-24 with the GHL pool untagged (pools run without consent); swap proven with the banner unanswered."
   },
   {
     "key": "livewell",
@@ -350,11 +351,12 @@
     "websiteUuid": "e3f87a5b-5c33-47f9-a205-01534abe1f86",
     "url": "https://www.oceanicdental.com",
     "platform": "webflow",
-    "clientFolder": null,
-    "webflowSiteId": null,
+    "clientFolder": "oceanic-dental",
+    "webflowSiteId": "66cd6c49cbb85d43d9e41a7c",
     "embed": "https://app.termly.io/resource-blocker/e3f87a5b-5c33-47f9-a205-01534abe1f86?autoBlock=off",
-    "productionNote": "Webflow, but not in the Brandklout workspace this account can reach - no site ID",
-    "rollout": "blocked-site-not-in-our-workspace"
+    "productionNote": "Reached through its own MCP instance webflow-oceanic-dental, not webflow-brandklout",
+    "rollout": "live",
+    "rolloutNote": "Live 2026-09-22. GA4 comes from Webflow's GA integration and cannot be tagged; move it by hand. GHL consent fields missing on both forms."
   },
   {
     "key": "azusa",

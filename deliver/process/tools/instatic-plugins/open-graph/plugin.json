@@ -1,9 +1,9 @@
 {
   "id": "brandklout.open-graph",
   "name": "Open Graph",
-  "version": "1.1.3",
+  "version": "1.2.3",
   "apiVersion": 1,
-  "description": "Social sharing previews for every published page: Open Graph and Twitter Card tags, a canonical link, and per-page meta descriptions. Derives everything from the page by default; every value can be overridden per page in the admin, or in bulk over the plugin's own API.",
+  "description": "Social sharing previews for every published page: Open Graph and Twitter Card tags, a canonical link, per-page meta descriptions, and the site favicon. Derives everything from the page by default; every value can be overridden per page in the admin, or in bulk over the plugin's own API.",
   "permissions": [
     "cms.hooks",
     "cms.storage",
@@ -21,6 +21,12 @@
     },
     {
       "table": "posts",
+      "modes": [
+        "read"
+      ]
+    },
+    {
+      "table": "articles",
       "modes": [
         "read"
       ]
@@ -198,6 +204,20 @@
       "label": "Add a canonical link",
       "description": "Adds <link rel=\"canonical\"> pointing at the page's own address. Needs the public address above. Pages that already carry one are left alone.",
       "default": true
+    },
+    {
+      "id": "favicon",
+      "type": "text",
+      "label": "Favicon",
+      "description": "The small icon in the browser tab and in search results. A path from the media library (/uploads/...) or a full https:// address; a square PNG of at least 48x48 (Google's minimum). Left empty, no icon tag is written. Pages that already carry one are left alone.",
+      "default": ""
+    },
+    {
+      "id": "appleTouchIcon",
+      "type": "text",
+      "label": "Home-screen icon",
+      "description": "What an iPhone or iPad shows when someone adds the site to the home screen: a square 180x180 PNG with no transparency. Left empty, the favicon is used.",
+      "default": ""
     }
   ],
   "entrypoints": {

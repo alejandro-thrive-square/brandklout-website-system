@@ -18,7 +18,7 @@ said 1.7.0, and Kids ran open-graph 1.1.3 while every other copy said 1.1.2.
 | Id | Source | Released | What it does | Tests |
 | --- | --- | --- | --- | --- |
 | `brandklout.embed-origins` | [`embed-origins/`](embed-origins/README.md) | 1.8.0 | Embed block + per-page CSP; `siteScripts` on every page, `#consent=`, `pages=` / `except=` scoping | `test-embed-origins.mjs` (85), `test-embed-module.mjs` (54) |
-| `brandklout.open-graph` | [`open-graph/`](open-graph/README.md) | 1.1.3 | og/twitter tags, canonical, per-page meta description (inserted when the site has none) | `test-open-graph.mjs` (64) |
+| `brandklout.open-graph` | [`open-graph/`](open-graph/README.md) | 1.2.3 | og/twitter tags (image size when the file name carries it), canonical, per-page meta description (inserted when the site has none), favicon and home-screen icon | `test-open-graph.mjs` (64) |
 | `brandklout.aeo-schema` | [`aeo-schema/`](aeo-schema/README.md) | 1.2.0 | one JSON-LD `@graph` per page, managed from the admin and a bulk API | `test-aeo-schema.mjs` (92) |
 | `brandklout.link-editor` | [`link-editor/`](link-editor/README.md) | 1.0.2 | Link URL panel in the editor rail; editor-only, nothing on published pages | `verify-link-editor.mjs` (needs the Instatic source checkout, `--host=<path>`, default `C:\ifork\Instatic-main`) |
 
@@ -30,6 +30,12 @@ admin and README byte-identical); aeo-schema 1.2.0 and link-editor 1.0.2 from `b
 link-editor exists only there). `bk-brandklout-website` vendored open-graph 1.1.2 and aeo-schema
 1.2.0 verbatim from Dr. Nahlah; nothing there is newer. No other `bk-*` branch has a plugin source
 that is not one of these.
+
+**Later, 2026-09-27:** `bk-mason-park` had moved open-graph on to **1.2.3** in its old
+`deliver/process/18-instatic-embeds/open-graph/` (2026-09-25; 1.2.0 favicon, 1.2.1 articles,
+1.2.2 SEO-title lookup, 1.2.3 image size). That source is now the release here; the admin page and
+the description insert are unchanged. Sites still on 1.1.x show as `OLD` in `status` and upgrade
+through Scenario 4.
 
 ## The registry: `plugins.json`
 

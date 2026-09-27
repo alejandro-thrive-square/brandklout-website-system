@@ -5,6 +5,7 @@
  *   node verify-staging-clean.mjs --staging https://staging.client.com \
  *                                 --production https://www.client.com \
  *                                 [--paths /,/contact-us/] [--no-analytics]
+ *   STAGING_RESOLVE=staging.client.com:104.21.0.1 node verify-staging-clean.mjs ...   # stale resolver
  *
  * WHY THIS EXISTS, AND WHY `check-noindex.mjs` IS NOT ENOUGH
  * ---------------------------------------------------------
@@ -111,7 +112,8 @@ console.log(`production  ${PRODUCTION}  (${ph.status})\n`)
 say(/noindex/i.test(sh.robots || ''), `staging serves X-Robots-Tag noindex  (${sh.robots || 'none'})`)
 say(!/noindex/i.test(ph.robots || ''), `production does NOT serve noindex  (${ph.robots || 'none'})`)
 
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true })
+// STAGING_RESOLVE=host:ip pins a brand-new host past a stale local resolver (Mason Park Kids, 2026-09-27).
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: process.env.STAGING_RESOLVE ? [`--host-resolver-rules=MAP ${process.env.STAGING_RESOLVE.replace(':', ' ')}`] : [] })
 try {
   for (const p of PATHS) {
     const s = await render(browser, STAGING + p)

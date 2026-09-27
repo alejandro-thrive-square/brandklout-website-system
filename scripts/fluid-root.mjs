@@ -111,18 +111,36 @@ function walk (target, acc = []) {
  * rem, and nothing re-introduces a fixed or double-scaling root.
  */
 function check (targets) {
+  const roots = targets.map((t) => path.resolve(t))
   const files = targets.flatMap((t) => walk(path.resolve(t)))
   // `_`-prefixed HTML is an internal partial or contact sheet, not a shipped page.
   const htmls = files.filter((f) => f.endsWith('.html') && !path.basename(f).startsWith('_'))
   const problems = []
   let installed = 0
 
-  // The snippet may live in a linked stylesheet, so resolve local <link>/<script> siblings.
+  // The snippet may live in a linked stylesheet, so resolve local <link> siblings.
+  //
+  // A ROOT-ABSOLUTE href is the normal case, not the exception: every site we
+  // deploy links `/assets/site.css`, because one sheet is served to pages at
+  // every depth. Resolving that against the page's own directory throws the
+  // path away and yields the FILESYSTEM root, which never exists, so the sheet
+  // was never read and the page reported "fluid root snippet not found" while
+  // carrying it perfectly. Mason Park hit this on 75 of 75 pages, and the gate
+  // is the only thing standing between a missing root and a shipped site.
+  //
+  // An absolute href resolves against the DOCUMENT ROOT instead: whichever
+  // `--check` target contains the file. Relative hrefs behave as before.
+  const docRootFor = (file) =>
+    roots.find((r) => file === r || file.startsWith(r + path.sep)) || path.dirname(file)
+
   const readWithLinked = (file) => {
     const src = fs.readFileSync(file, 'utf8')
     let combined = src
     for (const m of src.matchAll(/<link[^>]+href=["']([^"']+\.css)["']/gi)) {
-      const p = path.resolve(path.dirname(file), m[1].split('?')[0])
+      const href = m[1].split('?')[0]
+      if (/^(?:https?:)?\/\//i.test(href)) continue           // third-party sheet
+      const base = href.startsWith('/') ? docRootFor(file) : path.dirname(file)
+      const p = path.join(base, href.replace(/^\/+/, ''))
       if (fs.existsSync(p)) combined += '\n' + fs.readFileSync(p, 'utf8')
     }
     return { src, combined }

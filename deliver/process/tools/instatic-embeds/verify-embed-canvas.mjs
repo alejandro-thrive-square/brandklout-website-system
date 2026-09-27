@@ -36,7 +36,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import http from 'node:http'
-import { api, getSite, getPages, BASE } from './lib/insta-api.mjs'
+import { api, getSite, getPages, BASE, SESSION_FILE } from './lib/insta-api.mjs'
 
 const SLUG = 'plugin-embed-canvas-test'
 const MODULE_ID = 'webzite.embed-origins.embed'
@@ -189,7 +189,7 @@ async function check() {
   const S = (m, p = {}) => send(m, p, sessionId)
   await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable')
 
-  const sessionFile = path.resolve(import.meta.dirname, './lib/output/.session')
+  const sessionFile = SESSION_FILE // per host since 2026-09-25
   const cookie = fs.readFileSync(sessionFile, 'utf8').trim()
   const [name, ...rest] = cookie.split('=')
   await S('Network.setCookie', {

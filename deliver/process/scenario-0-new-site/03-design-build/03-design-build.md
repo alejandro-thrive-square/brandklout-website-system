@@ -96,6 +96,11 @@ Instatic staging for team review. The design bar is
 - Do keep light backgrounds: brand dark for text, accent for fills and lines.
 - Do keep text readable while it animates and photos in colour at rest; refresh ScrollTrigger when the
   page height changes.
+- Do take only the palette and typefaces from a brand guide or board; the composition is ours
+  (`DESIGN-STANDARD.md`, "What a brand handoff supplies").
+- Do name chapter tags; never number them ("Chapter 04").
+- Don't ship a wall of text: at most ~110 words of consecutive paragraphs, fold the rest into
+  `<details>`, never rewrite clinical copy (`DESIGN-STANDARD.md`, "No wall of text").
 - Don't use em dashes in copy.
 - Don't put a photo on a section it does not show, or reuse one photo across many pages.
 - Don't use the reference sites' code, only their screenshots.
@@ -123,7 +128,8 @@ Instatic staging for team review. The design bar is
 Runbooks: bk-brandklout-website 2026-09-15 breakpoints, type roles, v18 verbatim; bk-dr-nahlah
 2026-08-21 fonts and styles, 2026-08-25 incident (43 articles 404); bk-mason-park 2026-09-10 404 page,
 2026-09-18 ad pages rebuilt; bk-stone-med-spa 2026-09-03 second build; bk-ifa-dentistry 2026-09-21
-redesign; bk-mason-park-kids RUNBOOK (upscaled faces).
+redesign; bk-mason-park-kids RUNBOOK (upscaled faces); bk-stone 2026-09-01 brand handoff and
+motion tests; bk-mason-park no-wall-of-text rule.
 
 ## Version Control
 

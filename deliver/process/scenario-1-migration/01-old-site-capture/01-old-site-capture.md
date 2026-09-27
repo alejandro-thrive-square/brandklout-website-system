@@ -97,6 +97,17 @@ on Windows dies when stdout is a pipe.
   Machine: `node $S/wayback-capture.mjs --domain <old> --paths wayback/wayback-paths.txt --out wayback --shots`.
   It picks the LARGEST 200 capture per URL (recent ones are often the host's own bot page) and
   paces itself (7 s, backoff 45/120/240 s). Record the capture date of each page.
+- **If the client rebranded and the old site is gone or redirects to a sister site**, then recover
+  its copy from the Wayback Machine before anyone writes new copy: it is already approved and in the
+  client's voice (Stone: ~26,000 words and 60 FAQ pairs turned a thin seven-page build into a full
+  one). A 301 on the live domain does not mean the copy is gone. The Archive rate-limits rather than
+  bans: a block that resets every request was gone the next day, so wait before building a
+  workaround. A pinned timestamp returns ~80-byte redirect stubs where the nearest capture is a 301;
+  find them by size and refetch. Cut the template chrome at both ends and excise mid-page carousels.
+  Select the old brand's reviews rather than bulk-importing them (a cosmetic rebrand inherits mostly
+  non-cosmetic reviews), and never republish old before-and-after photos: their consent was for a
+  retired brand. List them as a launch blocker until the client re-supplies them with current
+  consent. Reference scripts: bk-stone `stone-dental-implant-center/workflows/01-content-intake/.tmp/archive-text/`.
 - **If you have SSH but the site cannot be crawled** (captcha, domain-level redirect, jailed
   account), then export on the server without running the site's code:
   `WP_SSH_HOST=… WP_SSH_USER=… WP_SSH_PORT=… WP_SSH_KEY=… bash $S/wp-ssh-export.sh '~/www/<old>/public_html' > export.log`,

@@ -29,7 +29,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 
 ## Steps
 
-1. **Favicon** if the client has none.
+1. **Favicon** if the client has none. Instatic writes no icon link; set `favicon` (and
+   `appleTouchIcon`) in the `open-graph` plugin, 1.2.0 or later.
 2. **SEO.** Schema and Open Graph come from the `aeo-schema` and `open-graph` plugins; SEO fields per
    page. Set the site URL or no canonical tag is printed. Check the rendered head with
    `gates/seo-head-check.mjs`, never the raw HTML.
@@ -59,7 +60,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 10. **Public origins.** Set production's `PUBLIC_ORIGIN` to the domain, www and the
     `business-name.up.railway.app` link, redeploy, confirm a new deployment appeared, and run
     `check-origins.mjs --all`. Update `sites.json` and the env master. Send the admin link only after
-    it is clean.
+    it is clean. Record each domain's own Railway target (apex and www differ) under `dns` in
+    `sites.json` (`check-dns.mjs --record`) and run `check-dns.mjs`: zero `CHANGED`.
 11. **Staging subdomain.** Create `staging.<domain>` for the staging environment, delete staging's
     railway link (it bypasses Cloudflare), add an `X-Robots-Tag: noindex` Transform Rule, set staging's
     site URL with canonical output off, update staging's `PUBLIC_ORIGIN` and run check-origins again.
@@ -84,6 +86,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 - Don't turn on Termly auto blocking; it breaks the site and every embed.
 - Don't put number pools behind consent.
 - Don't send the admin link before check-origins is clean.
+- Don't delete and re-add a custom domain in Railway to "fix" it: that mints a new target and
+  orphans the DNS record. A redeploy never moves the target.
 - Don't push to production without a backup.
 - Don't request a URL on the new host before it exists; Cloudflare caches the 404 for hours.
 
@@ -94,7 +98,7 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 - `tools/instatic-embeds/`, `tools/termly-ghl-consent/`
 - `tools/cloudflare-launch/` — tokens, DNS copy, railway domain, zone hardening, staging noindex,
   canonical host, verify.
-- `tools/instatic-domain-origins/check-origins.mjs`
+- `tools/instatic-domain-origins/check-origins.mjs`, `check-dns.mjs`
 
 ## Outputs
 

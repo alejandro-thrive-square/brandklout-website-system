@@ -30,7 +30,7 @@ in the shell (minted, scoped) or `CLOUDFLAREAPI` from the generated `.env`; Rail
 `build_cloudflare.mjs`, `verify_cloudflare.mjs`, `deploy-redirects.mjs`, `verify-live.mjs`,
 `lib/config.mjs` and `cloudflare-launch.config.example.json` drive Dr. Nahlah's Bulk Redirect list
 and read Dr. Nahlah's inventory files. They stay on branch `bk-dr-nahlah`
-(`deliver/process/tools/cloudflare-launch/`). New maps use scenario 1's Worker; the Bulk Redirect
+(`deliver/process/19-cloudflare-launch/`). New maps use scenario 1's Worker; the Bulk Redirect
 gotchas are kept in the directive. The 19 `deploy-canonical-host.mjs` referenced an undefined
 `CFG`; `canonical-host.mjs` replaces it. The 19 `deploy-worker.mjs` bound `/sitemap.xml` without a
 trailing `*`; `deploy-worker.mjs` here warns on that.

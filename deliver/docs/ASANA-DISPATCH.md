@@ -20,10 +20,23 @@ parallel agents can each take one client without colliding.
 | Arvada Dental Center & Implants | `arvada-dental-center/` (`arvada-dental-center/docs/project-overview.md` on the client branch) | `1217040406855586` | 6 landing pages | 2026-08-05 | Six local journeys complete; Webflow build not dispatched |
 | Mason Park Dental | `mason-park/` (`mason-park/docs/project-overview.md` on the client branch) | `1217040406855582` | 3 landing pages | 2026-08-05 | Three local/staging journeys re-themed; pasteable-component migration in progress |
 | Dr. Esam Nahlah | `dr-nahlah/` (`dr-nahlah/docs/project-overview.md` on the client branch) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
-| Stone Dental Implant Center | `stone-dental-implant-center/` (`stone-dental-implant-center/docs/project-overview.md` on the client branch) | — | 2 full websites | none | Scope only; no build dispatched |
+| Stone Surgical Arts | `stone-surgical-arts/` (`stone-surgical-arts/docs/project-overview.md` on the client branch) | `1217160668112180` / `1217160668112175` (unsplit) | Full website | none | Built on Instatic; worktree `bk-stone` |
+| Stone Dental Implant Center | `stone-dental-implant-center/` (`stone-dental-implant-center/docs/project-overview.md` on the client branch) | `1217160668112180` / `1217160668112175` (unsplit) | Ad landing pages | none | Webflow; worktree `bk-stone-dental` |
+| Stone Med Spa | `stone-med-spa/` (`stone-med-spa/docs/project-overview.md` on the client branch) | — | Full website | none | Built on Instatic; worktree `bk-stone-med-spa` |
 | Institute for Advanced Dentistry | `institute-for-advanced-dentistry/` (`institute-for-advanced-dentistry/docs/project-overview.md` on the client branch) | `1217929763942271` (Design Home Page), `1215476573810829` (Complete Client Website) — project `1215461031852894`, pulled 2026-09-03 | Full site from scratch; home page first | 2026-09-21 (home page design) | Initialized 2026-09-03; worktree `bk-ifa-dentistry`; nothing built |
 
+> **The three Stone projects are one client.** Stone Surgical Arts, Stone Dental Implant Center and
+> Stone Med Spa are delivered as separate projects with separate folders, worktrees and platform
+> instances, because they are separate websites with separate brands. Asana has not been split to
+> match yet, so both Stone task GIDs are still listed against the first two.
+
 Not in Asana but present in the repo:
+- `mason-park-kids/` (`mason-park-kids/docs/project-overview.md` on the client branch) — added
+  2026-08-27. **The same client as `mason-park/`**, second brand: the pediatric practice at
+  https://pediatricdentistkatytx.com. Separate domain and hosting, so it gets its own folder, but it
+  is one client for the relationship. No Asana task exists; ask Brandklout to create one. Worktree
+  `bk-mason-park-kids`, split off `bk-mason-park` on 2026-08-28: sessions holding both near-identical
+  sites kept attributing one site's facts to the other. **One worktree per *site*, not per client.**
 - `livewell-dental/` (no assigned tasks in this pull).
 - `west-la-implants/` (`west-la-implants/docs/project-overview.md` on the client branch) — added 2026-08-20, direct from
   Brandklout. **Full site build from scratch** for https://westlaimplants.com/ (existing WordPress,

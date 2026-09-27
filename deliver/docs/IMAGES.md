@@ -23,6 +23,30 @@ Look in this order, and move on only when the one before has nothing that fits t
 
 Never stock or AI for: the doctors, the team, real patients, before and after results, the office
 itself. If the client has none of these, leave the slot for a client photo and ask; don't fake it.
+**On a medical site, no stock image beside a treatment may show a face that reads as a patient**: a
+stock model on a surgery page reads as that patient, and beside a treatment name as its result,
+whatever the alt text says. Restrict those slots to rooms, objects, instruments and textures (Stone,
+2026-09-01).
+
+Check the client's own photos for **the wrong branding** too: on Stone a genuine photograph of the
+surgeon had the sister practice's signage legible on a screen behind her.
+
+### Stock mechanics
+
+- **Drive it from a slot table**, one entry per image the markup asks for: target filename, search
+  term, a `prefer` list that re-ranks and an `avoid` list that drops. The filename is what the markup
+  points at, so a changed query never breaks a page. References: bk-stone
+  `workflows/04-design/.tmp/surgical-arts/site-src/get-stock.mjs`; bk-west-la-implants
+  `workflows/03-graphic-resources/.tmp/stock/` (`candidates.mjs` builds a contact sheet per brief,
+  a picker chooses ids with a focal point, `fetch.py` downloads and resizes, `stock-ledger.json`
+  logs every id; `unsplash.mjs` for named places).
+- **The API's orientation filter is not honoured** (a `horizontal` query returned 1600x2400 twice).
+  Enforce the aspect with a crop at build time.
+- **Downloads are full-resolution originals**, up to 16 MB each. Crop, resize (about 2400px at most)
+  and convert before anything ships. There is no ImageMagick (`convert` on PATH is the Windows
+  filesystem tool) and no `sharp`; use Pillow or headless Chrome.
+- **The licence runs with the subscription behind the key.** Record it as a launch item: it must
+  still be active at go-live.
 
 Write down where you looked. The ledger shows, per image, which source it came from; a stock image
 on a page is a claim that sources 1 to 3 had nothing for that section.

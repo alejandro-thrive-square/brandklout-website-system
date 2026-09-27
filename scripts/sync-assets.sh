@@ -56,6 +56,14 @@ MEDIA_FILTERS=(
   --filter "+ **/.tmp/**/*.pdf"    --filter "+ **/.tmp/**/*.mp4"     --filter "+ **/.tmp/**/*.mov"
   --filter "+ **/.tmp/**/*.zip"    --filter "+ **/.tmp/**/*.7z"      --filter "+ **/.tmp/**/*.psd"
   --filter "+ **/.tmp/**/*.ai"     --filter "+ **/.tmp/**/*.eps"     --filter "+ **/.tmp/**/*.fig"    --filter "+ **/.tmp/**/*.sketch"
+  # Step deliverables. A scenario step stores what it produces in its `output/`
+  # folder, OUTSIDE .tmp/, because that is the thing a client or reviewer opens.
+  # Its imagery is still binary media that git refuses, so without these lines it
+  # exists on one machine only. (First hit 2026-09-01 on Mason Park's frozen static
+  # rebuild, whose images sat in a plainly named folder the .tmp/ filters never saw.)
+  --filter "+ **/output/**/*.png"  --filter "+ **/output/**/*.jpg"   --filter "+ **/output/**/*.jpeg"
+  --filter "+ **/output/**/*.gif"  --filter "+ **/output/**/*.svg"   --filter "+ **/output/**/*.webp" --filter "+ **/output/**/*.ico"
+  --filter "+ **/output/**/*.avif" --filter "+ **/output/**/*.pdf"   --filter "+ **/output/**/*.mp4"  --filter "+ **/output/**/*.mov"
   --filter "- *"
 )
 

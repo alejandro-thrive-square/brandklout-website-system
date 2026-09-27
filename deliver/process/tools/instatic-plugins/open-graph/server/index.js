@@ -257,11 +257,18 @@ async function loadMirror (api) {
           seoDescription: typeof cells.seoDescription === 'string' ? cells.seoDescription : '',
         }
         if (isPages) bySlug[row.slug] = record
-        var key = titleKey(record.title)
         /* Pages must not shadow entries in the title index: the entry index is
            the only way an article can be identified at all, whereas a page can
-           always be found by its slug. */
-        if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+           always be found by its slug. 1.2.2: an entry is indexed by its SEO
+           title too, because a template that renders {currentEntry.seoTitle} as
+           the <title> otherwise matched nothing and every article was tagged as
+           the template page (og:url /blog-article, og:type website). */
+        var keys = [titleKey(record.title)]
+        if (!isPages && record.seoTitle) keys.push(titleKey(record.seoTitle))
+        for (var kk = 0; kk < keys.length; kk++) {
+          var key = keys[kk]
+          if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+        }
       }
     }
   } catch (e) {
@@ -352,6 +359,15 @@ function buildTags (api, html, ctx) {
   out += meta('og:type', type)
   if (url) out += meta('og:url', url)
   if (image) out += meta('og:image', image)
+  /* 1.2.3: size and type when the file name carries them (`…-1200x630.jpg`, the way the
+     media library names resized uploads). Without them Facebook shows a link's first
+     share with no picture while it fetches the image. */
+  var dims = image ? /-(\d{2,5})x(\d{2,5})\.(jpe?g|png|webp)(?:\?|$)/i.exec(image) : null
+  if (dims) {
+    out += meta('og:image:width', dims[1])
+    out += meta('og:image:height', dims[2])
+    out += meta('og:image:type', 'image/' + (dims[3].toLowerCase() === 'jpg' ? 'jpeg' : dims[3].toLowerCase()))
+  }
   if (image && imageAlt) out += meta('og:image:alt', oneLine(imageAlt, 180))
   var siteName = setting(api, 'siteName', '')
   if (siteName) out += meta('og:site_name', siteName)
@@ -565,6 +581,27 @@ function registerRoutes (api) {
   })
 }
 
+/* ── favicon ──────────────────────────────────────────────────────────── */
+
+var ICON_RE = /<link\b[^>]*\brel\s*=\s*["']?(?:shortcut\s+)?icon["']?[^>]*>/i
+var TOUCH_RE = /<link\b[^>]*\brel\s*=\s*["']?apple-touch-icon["']?[^>]*>/i
+
+// Instatic writes no icon link and serves nothing at /favicon.ico, so every
+// tab showed a blank page icon. Relative paths stay relative (the icon is on
+// the same host); a page that already names an icon is left alone.
+function withIcons (api, html) {
+  var icon = String(setting(api, 'favicon', '') || '').trim()
+  if (!icon || !HEAD_END_RE.test(html)) return html
+  var touch = String(setting(api, 'appleTouchIcon', '') || '').trim() || icon
+  var type = /\.png(\?|$)/i.test(icon) ? ' type="image/png"' : /\.svg(\?|$)/i.test(icon) ? ' type="image/svg+xml"' : ''
+  var block = ''
+  if (!ICON_RE.test(html)) block += '  <link rel="icon" href="' + esc(icon) + '"' + type + '>\n'
+  if (!TOUCH_RE.test(html)) block += '  <link rel="apple-touch-icon" href="' + esc(touch) + '">\n'
+  if (!block) return html
+  var at = html.search(HEAD_END_RE)
+  return html.slice(0, at) + block + html.slice(at)
+}
+
 /* ── lifecycle ────────────────────────────────────────────────────────── */
 
 export function activate (api) {
@@ -582,6 +619,9 @@ export function activate (api) {
 
   api.cms.hooks.filter('publish.html', function (html, ctx) {
     if (typeof html !== 'string' || html.length === 0) return html
+    // The favicon goes in first and on its own: the platform has no favicon
+    // setting at all, and the early returns below are about social tags only.
+    html = withIcons(api, html)
     if (!flag(api, 'enabled', true)) return html
     // Already tagged: another pass, another plugin, or a hand-written head.
     // Never append a second set — networks take the first and the duplicate is
@@ -599,26 +639,20 @@ export function activate (api) {
     if (!built) return html
 
     var out = html
-    var prepend = ''
+    var block = built.block
     if (built.description && flag(api, 'syncMetaDescription', true)) {
       var current = DESC_RE.exec(out)
       var tag = '<meta name="description" content="' + esc(built.description) + '">'
-      if (current) {
-        out = out.slice(0, current.index) + tag + out.slice(current.index + current[0].length)
-      } else {
-        // NO DESCRIPTION TO REPLACE. `buildDocumentMetaTags` emits one only
-        // when `settings.metaDescription` is set, and a site that never filled
-        // that in publishes no description tag at all - so the replace branch
-        // above found nothing, did nothing, and every page shipped without a
-        // description while its og:description was perfectly correct. Found on
-        // Mason Park Dental for Kids, 2026-09-09: 57 of 57 pages.
-        // Insert instead. The guard is the same one the replace relies on -
-        // there is no existing tag - so this cannot produce a duplicate.
-        prepend = tag
-      }
+      // A page with no description tag at all gets one (1.1.3 on Kids, 1.2.1 here).
+      // `buildDocumentMetaTags` emits one only when `settings.metaDescription` is set, so
+      // "replace only" left every page bare while og:description was correct - Mason Park
+      // Dental for Kids, 2026-09-09: 57 of 57 pages. The guard is the one the replace relies
+      // on (no existing tag), so the insert cannot produce a duplicate.
+      if (current) out = out.slice(0, current.index) + tag + out.slice(current.index + current[0].length)
+      else block = '\n  ' + tag + block
     }
     var at = out.search(HEAD_END_RE)
-    return out.slice(0, at) + prepend + built.block + out.slice(at)
+    return out.slice(0, at) + block + out.slice(at)
   })
 
   api.plugin.log('open-graph active')

@@ -65,8 +65,10 @@ Every script is a dry run until `--apply`.
    `railway variables --service "<S>" --set "PUBLIC_ORIGIN=https://<canonical>,https://<twin>,https://<railway host>"`
    canonical first (it sets the secure-cookie flag), railway host last, nothing dropped. Wait for a
    NEW deployment row, then `node ../instatic-domain-origins/check-origins.mjs --all` and exactly
-   one real login (five failures lock the account). Update `sites.json`, `INSTATIC_BASE_URL` in
-   `~/.webzite/.env`, then `node scripts/env-sync.mjs`.
+   one real login (five failures lock the account). Update `sites.json` (with each domain's own
+   Railway target under `dns`: `node ../instatic-domain-origins/check-dns.mjs --record`, then
+   `check-dns.mjs` must show zero `CHANGED`), `INSTATIC_BASE_URL` in `~/.webzite/.env`, then
+   `node scripts/env-sync.mjs`.
 7. **Canonical host.** `www` is the main address (owner decision 2026-09-23). On a migration keep the
    host the old site used only if the owner agrees, since Google's index has it; otherwise `www`. `node $C/canonical-host.mjs --zone <domain> --to https://www.<domain> --apply`
    It refuses while the target does not serve 200, keeps path and query, and exempts
@@ -128,9 +130,13 @@ Every script is a dry run until `--apply`.
 - **If the site keeps a Bulk Redirect list** (Dr. Nahlah, `drnahlah_301`, 190 rows), then remember:
   the list does nothing without the account-level rule; the list needs Account Filter Lists and the
   rule Mass URL Redirects permission; `preserve_path_suffix` must be FALSE; the CSV has no header;
+  `source_url` carries the hostname and no query string; every row is emitted twice, bare and with a
+  trailing slash, because Instatic serves `/foo` and `/foo/` both as 200;
   a redirect list cannot appear in an expression (20127); Single Redirects run first (apex hits take
-  two hops); quotas are per account (Free: 10,000 URLs, 5 lists, 15 rules). New sites use the Worker
-  from scenario 1 instead; the Bulk scripts stay on branch `bk-dr-nahlah` under `cloudflare-launch/`.
+  two hops); quotas are per account and follow the highest plan on it (Free: 10,000 URLs, 5 lists,
+  15 rules), so never one list per site: `source_url` holds the host, and one list per client batch
+  serves many sites. New sites use the Worker from scenario 1 instead; the Bulk scripts stay on
+  branch `bk-dr-nahlah` under `deliver/process/19-cloudflare-launch/`.
 
 ## Do / Don't
 
@@ -162,6 +168,7 @@ In `deliver/process/tools/cloudflare-launch/` (origins in [README.md](./README.m
 - `pages-mirror.mjs`: Cloudflare Pages stand-in for a dying old site.
 - `verify-launch.mjs`: outside-in proof of the whole launch.
 - `../instatic-domain-origins/check-origins.mjs`: PUBLIC_ORIGIN gate.
+- `../instatic-domain-origins/check-dns.mjs`: each domain's CNAME still the target Railway minted for it.
 - `../../scenario-1-migration/02-redirect-map/scripts/verify-redirects.mjs`: redirect map proof.
 
 ## Outputs

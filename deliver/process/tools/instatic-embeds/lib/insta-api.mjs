@@ -31,7 +31,7 @@
  *   INSTATIC_EMAIL
  *   INSTATIC_PASSWORD
  *
- * The session cookie is cached in `output/.session` so repeated runs do not
+ * The session cookie is cached per host in `output/.session-<host>` so repeated runs do not
  * re-hit the login rate limiter (5 failures locks the account).
  */
 
@@ -41,7 +41,6 @@ import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TMP = join(HERE, 'output')
-const SESSION_FILE = join(TMP, '.session')
 const COOKIE_NAME = 'instatic_admin_session'
 
 
@@ -85,6 +84,11 @@ export const BASE = (() => {
   }
   return raw.replace(/\/+$/, '')
 })()
+
+/* Keyed BY HOST (bk-mason-park, 2026-09-25). One bare `.session` sent staging's cookie to
+   production, which answers a plain 401 that nothing here retries. Declared after BASE.
+   Exported because verify-embed-canvas/editor hand the same cookie to Chrome. */
+export const SESSION_FILE = join(TMP, '.session-' + BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_'))
 
 let cookie = null
 
@@ -303,7 +307,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
         styleFiles: (site.files ?? []).filter((f) => f.type === 'style').map((f) => `${f.path} (${(f.content ?? '').length}c)`),
       }
     },
-    pages: async () => (await getPages()).pages?.map((p) => p.slug) ?? [],
+    // The endpoint answers { rows: [...] } - DataRows, not a `pages` array. The older `.pages`
+    // read printed an empty list for a site full of pages, which reads as "nothing imported yet"
+    // (fixed in bk-mason-park-kids). The slug is a cell on a data row.
+    pages: async () => (await getPages()).rows?.map((p) => p.cells?.slug ?? p.slug) ?? [],
     status: publishStatus,
     publish,
   }[cmd]

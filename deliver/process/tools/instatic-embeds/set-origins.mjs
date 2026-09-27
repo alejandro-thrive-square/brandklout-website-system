@@ -42,8 +42,21 @@ if (process.argv.length <= 2) {
   process.exit(0)
 }
 
+// The host does NOT merge: `PUT .../settings` replaces the whole record and every key left out
+// falls back to its schema default (measured 2026-09-01: a call carrying only the toggle emptied
+// all three origin boxes). Hence the read-merge-write above.
+const clear = process.argv.includes('--clear')
+if (!clear && Object.keys(FLAGS).every((flag) => argOf(flag) === null)) {
+  console.error(`nothing to set: pass ${Object.keys(FLAGS).join(', ')} or --clear`)
+  process.exit(2)
+}
 const settings = { ...values }
-if (process.argv.includes('--clear')) for (const key of Object.values(FLAGS)) settings[key] = ''
+// A key the current schema does not declare makes the validator reject the whole write. One
+// lingered from the short-lived 1.5.0 (`compatibleEverywhere`, 2026-09-02, reverted the same day;
+// bk-mason-park), so send back only what the installed version declares.
+const declared = new Set((cur.schema ?? []).map((def) => def.id))
+if (declared.size) for (const key of Object.keys(settings)) if (!declared.has(key)) delete settings[key]
+if (clear) for (const key of Object.values(FLAGS)) settings[key] = ''
 for (const [flag, key] of Object.entries(FLAGS)) {
   const value = argOf(flag)
   if (value !== null) settings[key] = value

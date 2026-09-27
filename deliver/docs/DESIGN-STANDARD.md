@@ -124,9 +124,14 @@ Chapters alone still read as a list unless the page tells you where you are:
 
 - **A reading-progress indicator.** The reference pins a 2px scaled bar to the top edge of the nav
   (`.nav-progress` → `transform:scaleX()`).
-- **Chapter tags.** `Chapter 04 · The Transformation` — visible, animated in, numbering the journey.
-- **Theme shifts between chapters.** `data-theme="light"` / `"dark"` so the page changes atmosphere
-  as the story turns, rather than alternating two background tints forever.
+- **Chapter tags.** `The Transformation` — visible, animated in, naming the beat the reader is in.
+  **Named, never numbered.** A visible "Chapter 04" counts sections the visitor has not read yet,
+  and on a template-driven page the same beat lands on a different number depending on how much
+  copy that page carries, so the numeral contradicts itself between pages. Keep `data-chapter` on
+  the section (the motion runtime binds to it); drop the numeral from the tag and the fixed readout.
+- **Ground shifts between chapters.** The page changes atmosphere as the story turns, rather than
+  alternating two background tints forever, within light tones only (see
+  [Light grounds only](#light-grounds-only--dark-themes-do-not-convert)).
 - **A signature moment** the visitor would describe to someone else afterwards.
 
 ### Adapting the journey to a paid landing page
@@ -148,6 +153,50 @@ chapters** — but keep it a narrative arc. The dental-LP shape:
 FAQ, financing and insurance fold **into** the beat they answer — financing belongs inside The Path
 or The Invitation where the objection actually lands, not as its own band.
 
+**A paid set is three pages in the agency's reference flow, and it is not the service page.**
+(2026-09-18.) Mason Park's first cut derived its ad pages from the organic service page with a form
+chapter near the bottom; the agency rejected it and pointed at Livewell's
+`/ads-landing-pages/` set: landing (form **in the hero**), consultation (form first) and thank-you
+(phone first, no form). The flow is the agency's; the section shapes, photography and copy are the
+client's own. The full beat list is [Scenario 3](../process/scenario-3-ads-landing-pages/README.md);
+its dedicated FAQ is the one deliberate exception to the folding rule above. **Name nothing on a
+paid page `ad`**: `is-ad`, `ad-hero` and `ad-rail` are on ad blockers' cosmetic lists and collapse on
+the published page while the local render stays perfect. Use `lp-*`.
+
+## What a brand handoff supplies — palette and type, nothing else
+
+Added 2026-09-01, from the Stone Surgical Arts home rebuild. Alejandro: *"When we are handed off with
+a design or style guide or a brand guideline, we should be extracting color palette and font and
+that's it. The rest should be elevated."* A client board, style guide or picked template is
+authority over **identity**, not composition. Reproducing its section order, centred headers and
+symmetric grids reproduces its ceiling, and that ceiling is what gets a build called "very ugly and
+simple". (A finished design the client supplies as the site is different: it is imported verbatim.)
+
+- Express the board's colours and typefaces as tokens and do not touch them afterwards. Everything
+  else lives in a layer of your own, so the identity stays diffable.
+- Display type almost always goes **above** what a board specifies. A board's h1 is a heading; an
+  editorial page needs a statement, typically 1.5x to 2x that again.
+
+### The five things that make a build read as cheap
+
+Check a first draft against these before showing it; every one was true of the rejected Stone v1:
+
+1. **One ground, no material.** Every section on the same flat colour. Look at what the client's
+   own current or retired site used (stone, paper, a photographic ground) and reproduce the
+   *material*, not the layout.
+2. **Everything centred, everything 50/50.** Nothing overlapping, bleeding off an edge, or
+   deliberately the wrong size.
+3. **No scale contrast.** An h1-to-body range of about 4x. Editorial pages run 10x, and the quiet
+   parts have to be genuinely quiet for the loud parts to land.
+4. **Sections, not chapters.** Equal-weight blocks build no argument. Each section makes a move.
+5. **Every image the same aspect ratio, each in a box.** A 16:9 library forces every section into a
+   horizontal band. Tall frames are what let a layout overlap and bleed; source or generate at the
+   aspect the composition needs.
+
+**An icon in a bordered box is an empty image slot with a drawing in it.** If a slot is for an
+image, it gets an image. And "big chunks of text" is a **measure** problem before it is a length
+problem: cap body columns (34rem is a good default) before cutting words.
+
 ## Minimum per page
 
 1. **6–8 named chapters** with `data-chapter` / `data-chapter-name`, in a non-shuffleable order.
@@ -156,7 +205,7 @@ or The Invitation where the objection actually lands, not as its own band.
 3. **At least 3 scroll-driven chapters** — pinned and scrubbed, per the table above. Fade-up-on-
    scroll does not count, and neither does an `IntersectionObserver` class toggle.
 4. **Chapter arrival *and* departure** — leaving a chapter is animated, not just entering it.
-5. **Continuity devices** — reading progress, chapter tags, theme shifts across the arc.
+5. **Continuity devices** — reading progress, named chapter tags, ground shifts (light tones) across the arc.
 6. **Interaction on every interactive element** — magnetic or cursor-aware CTAs, hover states with
    real transitions, animated accordions/tabs/sliders.
 7. **Considered typography** — scale, weight contrast, and rhythm doing visible work, sized off the
@@ -166,6 +215,28 @@ or The Invitation where the objection actually lands, not as its own band.
 8. **A signature moment** — one thing per page a visitor would remember and describe.
 9. **`prefers-reduced-motion` honoured throughout.** Non-negotiable, medical audience.
 10. **Mobile is designed, not degraded.** Most paid dental traffic is mobile; motion must survive.
+
+## Light grounds only — dark themes do not convert
+
+Set 2026-09-21 from Jessica (Brandklout): **dark-theme sites do not convert, so every Brandklout
+site is a light one.** This overrides the reference build's polarity (Dr. Nahlah is largely dark).
+Keep the journey architecture; change how the palette is applied:
+
+- **Every ground is light.** The atmosphere still turns chapter to chapter, within light tones: a
+  warm white, an ivory, a sand, pure white, and one cool tint taken from the brand's neutral. Four
+  or five grounds is enough for eight chapters; never two neighbours the same.
+- **The brand's dark colour is the ink**: text, hairlines, one secondary button. Never a ground.
+- **The brand accent is a fill and a rule, not a glyph.** Most dental accents (gold, champagne,
+  teal) sit near 2-3:1 on a light ground. Keep the bright tone for buttons, progress, ticks, icons
+  and rules, and derive a deep variant for any accent TEXT (IFA: `#c3972b` fills, `#74560f` text).
+- **Panels over photographs are light glass**, not dark glass, with ink text.
+- **Dark is allowed only where it is functional, not thematic**: the scrim behind a playing video,
+  the shade over a hero film that carries white type, a checked chip, a secondary button.
+- **Scroll-written copy inverts too**: unlit words are a mid grey that already clears 4.5:1 on the
+  light ground, and they fill to ink.
+- Author the stylesheet light-by-default with ground-aware tokens (`--fg`, `--fg-dim`,
+  `--accent-text`, `--rule`), so there is no second theme to fall back into. IFA's `home.css` is the
+  worked example; its re-theme was a token swap plus a dozen surface rules, not a rewrite.
 
 ## Brand palette — sample the token layer, not a stray rule
 
@@ -188,7 +259,8 @@ Two rules fall out of that:
 - **Frequency beats presence.** A colour existing in the CSS proves nothing. Rank by use count and
   cross-check against the `:root` primitives before committing.
 - **Match the client's light/dark polarity.** Arvada's body is `#fdf8ef` and 57 of its 69 section
-  scheme classes are the light one. A dark journey was off-brand regardless of accent colour.
+  scheme classes are the light one. A dark journey was off-brand regardless of accent colour. Since 2026-09-21 every
+  site is light whatever the client's polarity (see above).
 
 When a palette does have to be swapped later, note that gold-family accents **cannot carry text on
 a light ground** — `#c8b282` on `#fdf8ef` is 1.96:1. Keep the bright tone for fills, rules and
@@ -203,6 +275,50 @@ immediately reachable — sticky mobile call bar, visible CTA at every scroll de
 wins on craft and loses the lead has failed. Section order comes from the Asana brief and the
 vendor originals; the *execution* is ours.
 
+## No wall of text
+
+**A page may not render an undifferentiated block of body copy.** This is a conversion rule, not a
+taste one, and it came back from the client twice (Mason Park, homepage then `/services/invisalign/`):
+*"These chunks of text are not good for conversions or user experience at all. Remove this and make
+this a system rule."* It bites hardest on migrations: imported WordPress copy arrives as one column,
+its real sections flattened into bold paragraphs, its lists typed as glyphs, and a "call us today"
+after every heading.
+
+1. **A ceiling on unbroken prose.** No more than **~110 words of consecutive paragraphs** before
+   something breaks the column: a list, a sub-heading, a figure, a table, a pull quote. The ceiling
+   is on the *run*, not the section, so the fix is always *add structure*, never *cut clinical detail*.
+2. **Everything past the ceiling folds, it does not vanish.** The tail goes into a closed
+   `<details>`. The copy stays in the HTML, indexed and reachable.
+3. **Dead paragraphs are removed outright**: a bare "Call us today at …", a naked "Learn more about
+   X", an address already in the header and footer, the SEO coda that restates a section with the
+   search terms in it.
+4. **Structure the editor implied is restored, not invented.** A heading typed as a bold paragraph
+   becomes a heading; a list typed as glyph-prefixed lines becomes a list. Re-tagging, not rewriting.
+5. **Measure repetition, not just run length.** Mason Park's Invisalign page had four lists (21
+   items, 600 words) with 21 near-duplicate pairs between them; "virtually invisible" appeared 16
+   times. Every run was under the ceiling and three of eighteen desktop screens were the same six
+   sentences. A Jaccard pass over the page's own list items finds which chapters copy each other.
+   The fix is a fold at row level (label visible, the practice's own sentences in a `<details>`) or at
+   chapter level (the weaker of two same-argument sections folds whole into the stronger). Result:
+   2,155 visible words to 1,450, mobile 22.4 screens to 16.9, every word still indexed.
+
+**Never** rewrite, paraphrase or summarise clinical copy (removal and re-tagging only); never invent
+copy to fill a beat; never trim a review to fit (if a component cannot hold the long ones, the
+component is wrong). Be conservative with removal rules: across 35 treatment pages a rule that is 95%
+right still bins ~95 real paragraphs, so an ambiguous pattern must decline to fire, and the build
+prints its counts.
+
+**Pictures are half of it** (*"add more images overall"*): every long-form page carries a photograph
+below the hero and roughly one every two sections after. A practice photo on a treatment page may
+show the rooms, the team, a patient in the chair, but is never captioned as that treatment or its
+result ([IMAGES.md](./IMAGES.md)). Pick deterministically (seeded off the page slug) so every build
+and every screenshot gate sees the same page.
+
+**Gate the built HTML, not the build pass.** The first version was defeated by Elementor nesting its
+paragraphs six divs deep: the pass matched nothing and reported success on a 404-word wall. The
+reference implementation (`prose.mjs`, `photos.mjs`, `audit.mjs`) is in the bk-mason-park worktree
+under `workflows/09-static-rebuild/.tmp/site/` (untracked).
+
 ## GSAP gotchas — learned the hard way, do not rediscover
 
 - **All GSAP plugins are free since 3.13** — ScrollTrigger, ScrollSmoother, SplitText included.
@@ -212,6 +328,31 @@ vendor originals; the *execution* is ours.
 - **Scrubbed scale must never land exactly on `1`** — causes edge flicker.
 - A fixed header's `z-index` can trap its own close button under an open drawer.
 - Fixed side rails need a real layout gutter plus a scrim, and inversion over light sections.
+- **A decorative fixed rail is `pointer-events: none`.** On IFA it overlaid the right gutter and
+  swallowed every click meant for the review arrows beneath it. No screenshot shows that; only a
+  written `page.click` does.
+- **Never pin an element that holds an `<iframe>`, and never put a form embed inside a pinned
+  chapter.** A pin lifts its element out of the page and back on every ScrollTrigger refresh, and the
+  browser reloads the iframe each time. On IFA the GoHighLevel form reloaded 25 times in four seconds
+  inside a card frozen at its pre-load height. A lead form never gets `autoAlpha` either: it must not
+  depend on an animation to be visible.
+- **"Submission in progress" on an untouched GoHighLevel form** is GHL's `enableSaveExitConfirmation`
+  meeting the consent bridge's URL prefill, not a site bug. Turn it off in GHL;
+  `check-ghl-form.mjs` ([`tools/webflow-build`](../process/tools/webflow-build/webflow-build.md)) reads the flag.
+- **`clip-path` does not contain overflow.** A film scaled 1.14 inside a clipped window still widens
+  the layout: on a phone the layout viewport grew from 390 to 418 px, the page rendered 7 % small and
+  the fixed call bar fell off the bottom. Give the window `overflow: hidden` as well.
+- **Measure mobile overflow against the device width, not `innerWidth`.** When a page overflows on a
+  phone, `innerWidth` grows with it, so `scrollWidth - innerWidth` reads 0 on a broken page.
+- **A pinned scene has one viewport to fit in.** Check it at the reviewer's 1512×735 and at
+  1366×768, not only 1440×900; step the display scale down under `max-height: 820px` rather than let
+  the last line clip.
+- **The runtime's breakpoints must agree with the stylesheet's, and nothing enforces it.** Mason
+  Park's path scene guarded its pin on `(hover:none) and (pointer:coarse)` while the CSS turned the
+  track into a scroll region below 900px. A non-touch window between 768 and 899px got both: a
+  1,051px scene in a 4,064px section, three thousand pixels of scroll in which nothing moved, and
+  every screenshot gate green. **Assert `sectionHeight ≈ sceneHeight + travel` at every breakpoint on
+  both sides of each boundary.** A progress bar that cannot progress is hidden, not left inert.
 
 ## Brand Authority and Canary Gate
 
@@ -224,6 +365,48 @@ For a multi-page assignment, finish one representative canary page first. Review
 renderings and drive its signature interaction before copying the system across the other pages.
 Freeze the approved token set, shell, type scale, and interaction runtime for that batch. A static
 gate score cannot approve visual direction, brand fidelity, typography scale, or composition.
+
+**The canary is built at the review bar, not below it (2026-09-03).** Two builds in a row were
+rejected whole at first review: Stone Surgical Arts v1 ("very ugly and simple") and Stone Med Spa v1
+("we need to elevate it way more... high-end interactions and animations, scroll-based animations,
+way more imagery and less text"), eleven correct static pages on flat ivory. So from the first
+canary: every page opens on a photograph with the navbar over it, the GSAP bundle ships from day
+one, at least three scroll-driven moves per page, the ground changes chapter by chapter, body copy is
+one sentence per idea. A restrained v1 "to elevate later" costs a session and is thrown away.
+Techniques may repeat between two clients' sites; section shapes may not. Reference motion
+vocabulary: bk-stone-med-spa `workflows/04-design/.tmp/med-spa/site-src/css/40-motion.css` and
+`js/20-motion.js` (`data-split`, `data-wipe`, `data-parallax`, `data-count`, `data-hero-pin`,
+`data-hscroll`, `data-stack`, `data-words`, …) with its three rules: nothing is hidden unless the root
+carries `.js`; GSAP is optional and every hidden state has a class fallback; reduced motion is a
+branch, not a shorter duration.
+
+### The second canary: a shared component is not proven until a second page uses it
+
+**The first page that reuses a part is what actually tests it.** Mason Park's first service page,
+built on the frozen homepage sheet, found three defects in one afternoon, none visible on the page
+they were written for:
+
+- **The first page's copy baked into a media query.** The comparison table restated its column
+  names below 767px through `::before` literals (*"At Mason Park" / "Two practices"*), so on every
+  phone the Invisalign table said "At Mason Park" over all five rows. Content belongs in the markup:
+  `attr(data-label)`, literal as a fallback.
+- **A direct-child selector reaching a container the new page nests deeper.**
+  `.text-rich-text > * + *` gave the homepage its rhythm; the service page wraps prose in a section,
+  so its paragraphs rendered with no space between them.
+- **A reset with no rule above it is the tell** that a rule was written for one variant of a frame
+  only. Read those before trusting a frame you have not rendered.
+
+So the second page carries the same review weight as the canary: render it at every breakpoint and
+read the mobile branch of every shared component it touches.
+
+### "It looks different on that page" — measure the report before acting
+
+A client asked for the homepage navbar to be imported into a service page. The markup was
+byte-identical and a probe of both pages returned identical geometry, colours and heights. What
+differed was **the photograph behind it**: a bright close-up under the last nav items. Reproduce a
+visual report as a measurement before changing anything, and make any component that floats over
+client photography guarantee its own contrast (a scrim dark enough for white text whatever is
+behind it), not rely on the next photo being dark.
 
 ## Verification — interaction, not screenshots
 
@@ -242,6 +425,33 @@ respected. Verify by driving the page (Chrome CDP or equivalent) and asserting b
 
 **Test in a focused tab.** Background tabs freeze transitions, IntersectionObserver, and timers,
 so a backgrounded check will report broken animation that is actually fine.
+
+**Scroll-driven motion fails silently, so assert it** (Stone rebuild; reference
+`journey-test.mjs` in bk-stone `workflows/04-design/.tmp/surgical-arts/site-src/`):
+
+- **Assert the magnitude, not just the presence.** "A pin exists" passed while a pinned sideways
+  chapter travelled 144px: working, and visually nothing. Assert "the track moved more than 400px".
+  The Nahlah build shipped a guard that reported PASS while ScrollSmoother was dead.
+- **Wait for the page to stop moving.** With `scroll-behavior: smooth` every scroll-then-read is a
+  mid-glide sample. Disable it in the test page and poll `scrollY` until it settles.
+- **Never use `offsetTop` on anything pinned**: the pin-spacer makes it relative. Scroll to
+  `trigger.start` / `trigger.end`.
+- **`page.evaluate(aString, arg)` drops the arg.** Only a real function receives arguments.
+- **Verify all three failure branches**: no JavaScript, the motion library absent with the site
+  bundle fine, and `prefers-reduced-motion` (zero pins, nothing hidden).
+- **Gates read code, not prose.** A check that scans raw source reports a comment explaining a fixed
+  bug as the bug; strip comments first (bit twice, `check-copy.mjs` and `audit.mjs`).
+- **A relative `url()` in a bundled stylesheet resolves against the bundle, not the site root.** An
+  asset check resolving against the root missed a broken texture path on eighteen live pages.
+- **Verify a new check by breaking the thing it catches.** Disable the fix, watch the check fail by
+  name, restore, watch it pass. A check that has never failed has proved nothing.
+
+**Scroll performance is measured throttled.** At 1x every build is smooth on the machine that made
+it. Drive the scroll through CDP at 4x CPU throttle and read the frame timeline (reference
+`perf.mjs`, same folder). On Stone that found a chapter parallaxing twice (CSS and JS both), and cut
+the worst zone from 13% of frames under 30fps to 9%. **Never animate `background-position`** (a
+paint property: every frame repaints); move a layer with `transform`. Put `will-change: transform`
+on scrub targets only under the class the runtime sets, not idle.
 
 **Colour that JS paints needs its own pass, with motion ON.** Any check that runs under
 `prefers-reduced-motion` — which is most of them, because it is the only state where a
@@ -298,8 +508,16 @@ Store under `scenario-0-new-site/04-qa/output/screenshots/<page-slug>/<width>.pn
 Check for, and fix:
 
 - **Horizontal overflow** — the single most common failure. Assert
-  `document.documentElement.scrollWidth <= window.innerWidth`. A page that scrolls sideways on
-  mobile is broken, and it is invisible in a desktop-only check.
+  `document.documentElement.scrollWidth <= document.documentElement.clientWidth` (or the device
+  width). Not `innerWidth`: on a phone it grows with the overflow, so the difference reads 0 on a
+  broken page. A page that scrolls sideways on mobile is broken, and it is invisible in a
+  desktop-only check.
+- **Controls clipped out of reach** — the second overflow question, which the first cannot answer.
+  An editorial layout bleeds images off the edge on purpose, so ask about controls instead: no
+  visible link, button or input may sit past the right edge unless it is inside a real scrolling
+  rail. On Stone a navbar clipped its own booking button on every page for a week while six widths
+  passed the overflow gate. **Open the screenshots**: an assertion answers the question you thought
+  to ask; the picture answers the rest.
 - Text clipped, overlapping, or shrunk below ~14px on mobile
 - Tap targets under 44×44px
 - Sticky/fixed bars covering content or each other — especially a sticky mobile call bar sitting on
@@ -310,6 +528,20 @@ Check for, and fix:
 - Motion that works at 1440 but breaks or janks at 390
 
 Paid dental traffic is mostly mobile, so 360 and 390 matter more than 1920.
+
+### CSS traps that produce layouts nobody wrote (Stone rebuild)
+
+- **A `max-width` media rule reaches every width below it.** A 992-1279 fix written after the 991
+  block also matched at 768 and beat the mobile rule. Bound a band on both sides:
+  `@media (min-width: 992px) and (max-width: 1279px)`.
+- **`aspect-ratio` with `max-height` shrinks the width too.** A full-width hero rendered as a 504px
+  square. Add `width: 100%` when the box must stay full width.
+- **`min(<rem>, <vh>)` is a switch, not a curve.** A hero on `min(44rem, 92vh)` was 704px on a
+  2560x1440 monitor. Use `clamp(floor, vh, ceiling)` for "fluid between limits" (heights; font sizes
+  stay on the fluid root).
+- **Height problems need height queries**; a `max-width` query cannot see "too tall for the screen".
+- **Check the widest screen against the narrowest asset.** A full-bleed section is the one place an
+  image can exceed its source: at 2560 the Stone hero column was 1254px against a 1200px file.
 
 ### Capture gotchas
 
@@ -334,7 +566,7 @@ A page is not done when the sections exist. It is done when **all** of these hol
 6. `prefers-reduced-motion` disables motion without hiding content
 7. Behaviour verified by driving the page on a **focused** tab — not by screenshots
 8. Screenshots captured at all six breakpoints and **reviewed**, with responsive issues fixed
-9. Zero horizontal overflow at 360 and 390
+9. Zero horizontal overflow at 360 and 390, and no control clipped past the right edge
 10. Offer, phone and form reachable at every scroll depth on mobile
 11. **Fluid root installed and clean** — `node scripts/fluid-root.mjs --check <package>` exits 0
 

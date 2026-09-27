@@ -20,6 +20,14 @@
 > module cannot reach into one client's workflow folder), and `clone-site.mjs` gained
 > `--media`.
 >
+> **Fifth run: Mason Park Dental for Kids, 2026-09-27** (branch `bk-mason-park-kids`), the first
+> run on a site that was **already live with staging and production as two domains on ONE
+> instance**, so the staging domain had to be moved off production's service (see **Moving a
+> staging DOMAIN off a live production service**). It found a seventh thing that does not travel,
+> **plugin runtime data** (215 Open Graph per-page overrides, every page's description and URL),
+> and added `STAGING_RESOLVE` to `verify-staging-clean.mjs` for a workstation whose resolver
+> still holds the old target.
+>
 > **Fourth run: Brandklout's own website, 2026-09-22** (branch `bk-brandklout-website`), the
 > first **one-shot** run since Mason Park (34.6 MB with media) and the first on a native Instatic
 > build that had **no SEO plugins at all**. It added `--no-analytics` to
@@ -115,7 +123,7 @@ The volume **id** is shared across environments (it is a project-level record) w
 environment holds its own **instance**. Seeing production's `RAILWAY_VOLUME_ID` in staging's
 variables is correct and does not mean they share data.
 
-## The six things that DO NOT travel in an export bundle
+## The seven things that DO NOT travel in an export bundle
 
 Each one fails silently and looks like nothing.
 
@@ -125,8 +133,9 @@ Each one fails silently and looks like nothing.
 | 2 | **Media bytes** | every image 404s | `--media`, or `pull-media.js` |
 | 3 | **Media rows** | media library empty | `--media`, or `chunk-media.py` + `import-media-chunks.mjs` |
 | 4 | **srcset variants** | no responsive images (visually identical) | *no fix - accept* |
-| 5 | **Users / authorship** | `authorUserId` becomes `null` | *no fix - accept* |
+| 5 | **Users / authorship** | `authorUserId` becomes `null`; only the claimed admin can log in | authorship: *accept*; logins: copy the user rows (see Gotchas) |
 | 6 | **Row publish state** | collection listing renders **0** items, detail URLs **404** | `publish-rows.mjs` |
+| 7 | **Plugin runtime data** (Open Graph per-page overrides) | per-page descriptions fall back to defaults; `diff-sites.mjs` can still pass | copy them: `GET /plugins/brandklout.open-graph/runtime/pages` on the source, `POST .../runtime/override` per page on the target, host rewritten (Mason Park Kids: `og-export.mjs` + `staging-seo.mjs` in its worktree) |
 
 ### 1. Plugins - the dangerous one
 
@@ -279,6 +288,24 @@ node diff-sites.mjs --a <staging> --b <prod>
 `merge-overwrite` + `--rows` moves only what you changed and leaves the client's other edits
 alone. `replace` derives deletions server-side (stored - shipped) and is a whole-site
 cutover - highest blast radius, use deliberately. **Never `--media` in this direction.**
+
+## Moving a staging DOMAIN off a live production service
+
+When staging used to be just a second domain on production's service (Mason Park Kids until
+2026-09-27), the domain has to move. In order:
+
+1. Create the environment and upsert `PUBLIC_ORIGIN` (staging host only, `skipDeploys`).
+2. **Delete the minted service domain before anything deploys.** An unclaimed instance on a
+   public `*.up.railway.app` host can be claimed by anyone.
+3. `volumeCreate` at `/app/storage`.
+4. `customDomainDelete` on production, then `customDomainCreate` on staging. The existing
+   `_railway-verify.staging` TXT is still valid (same token); only the CNAME target changes.
+5. Point the CNAME at the new target **DNS-only**, and have a claim loop already polling
+   `/setup/status`. It claims on the first `needsSetup: true` (Mason Park Kids: 201 within seconds).
+6. Seed, plugins, overrides, SEO settings, publish. Then proxy the CNAME.
+
+Production's `PUBLIC_ORIGIN` still lists the staging host afterwards. That is harmless (the host
+no longer routes to production); removing it restarts production, so do it in a quiet window.
 
 ## Keeping staging out of Google
 
@@ -552,6 +579,14 @@ API accepts anything.
   was provisioned. `clone-plugins.mjs` reported `1 of 1` and was right. "Plugin count matches" is a
   parity gate, not a correctness one: check what the SOURCE emits before trusting it.
 - **Never clone by volume.** 170 KB/s, and the database is mostly history.
+- **Plugin runtime data does not travel** (7th row above). Mason Park Kids had 215 Open Graph
+  overrides on production and 0 on the fresh staging; `diff-sites.mjs` passed anyway. Count
+  them on both sides.
+- **Users do not travel either.** Copy the non-owner rows (password hashes included) over
+  `railway ssh` + `bun:sqlite`, base64-wrapped so no hash reaches a shell or a transcript.
+- **A stale local resolver hides the new staging from every gate.** Node: a `dns.lookup`
+  preload pinning the host to a Cloudflare IP. Chrome: `STAGING_RESOLVE=host:ip` for
+  `verify-staging-clean.mjs` (it becomes `--host-resolver-rules`).
 
 ## Technical Setup
 
@@ -575,6 +610,13 @@ API accepts anything.
     `ac20baa7-045b-4557-848e-cbe14720e0d9` (staging), both at `/app/storage`. Staging stood up
     2026-09-22; custom domain `staging.brandklout.ai` (`228c71cb-81e7-4d43-8b87-cc7f119e5915`),
     service domain `brandklout-staging.up.railway.app` **deleted**.
+  - Mason Park Kids `a135c5ec-da62-4643-a775-c6a39317fb1b`, service `d1d1ce4a-...`, envs
+    `production` (`f9cddccd-2fbf-4e54-8898-722250075937`) / `staging`
+    (`2433658d-4971-46e9-8dfc-e83cd8c96a2c`), volumes `8a02136a-...` (production) and
+    `eca481f9-9c82-4727-8f13-884c83e858d9` (staging), both at `/app/storage`. Staging stood up
+    2026-09-27; custom domain `staging.masonparkpediatricdental.com`
+    (`f05ba5ab-450e-4f8b-bc14-63e6b106dde5`), service domain deleted. Cloudflare header rule
+    `afd975c134ad4a66bad61d5de82c42df` (zone `190398a3…`). No analytics on production (Termly only).
 - **Credentials**: repo-root `.env` - `INSTATIC_EMAIL` / `INSTATIC_PASSWORD`. Staging is set
   up with the same pair deliberately, so one login works on both.
 - **Password hashing** is `Bun.password.hash(..., argon2id)` with **no pepper**, so a copied

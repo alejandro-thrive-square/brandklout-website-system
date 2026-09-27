@@ -12,6 +12,7 @@ node scripts/drive.mjs ls <drive id|folder id|url>  # one level; shortcuts are m
 node scripts/drive.mjs search <text> [--folders]    # file/folder NAMES only, not drive names
 node scripts/drive.mjs get <file id|url> <dir>
 node scripts/drive.mjs pull <folder id|url> <dir>   # whole tree; re-running resumes
+node scripts/drive.mjs thumbs <folder id|url> <dir> [--size 1600]   # web-size JPEG of every image, one level
 ```
 
 - **Where downloads go:** into the `output/` of the workflow that uses them, e.g.
@@ -20,6 +21,10 @@ node scripts/drive.mjs pull <folder id|url> <dir>   # whole tree; re-running res
   zips.**
 - **List before you pull.** Some folders hold multi-GB video and zip files. Pull the subfolder you
   need, not the whole drive.
+- **Photoshoots: use `thumbs`, not `pull`.** Camera originals run 10-28 MB a frame (IFA's 196-frame
+  shoot is about 3 GB). `thumbs --size 400` gives a folder you can lay out as a contact sheet to choose
+  from; `thumbs --size 2000` gives build-quality files at 200-500 KB each. Pull an original only when
+  a crop needs more than 2000 px.
 - **Most client drives hold shortcuts.** The script follows them. If a shortcut's target was never
   shared with the account, the script says so. Report it and move on; do not guess.
 - **`invalid_grant` means the sign-in expired.** The Google app is in Testing, so this happens every
@@ -34,7 +39,7 @@ node scripts/drive.mjs pull <folder id|url> <dir>   # whole tree; re-running res
 | `arvada-dental-center` | Arvada | `0AAJs1hDfPufZUk9PVA` | shortcut "Ready" — **target not shared** |
 | `dr-nahlah` | Dr. Nahlah | `0ACTKZqHCxqmeUk9PVA` | `site-archive-drnahlah-live-…` folder; shortcut "Dr. Esam Nahlah" — **target not shared** |
 | `grand-mission-dentistry` | Grand Mission | `0AAyk9B3cn8VwUk9PVA` | shortcut "Photos for brandklout" — **target not shared** |
-| `institute-for-advanced-dentistry` | Institute for Advanced Dentistry | `0AMP7hKbo3dnnUk9PVA` | shortcuts: Photos & Videos, Smile Gallery (case photos by treatment), Website Content (Branding, Photoshoot, Videos) |
+| `institute-for-advanced-dentistry` | Institute for Advanced Dentistry | `0AMP7hKbo3dnnUk9PVA` | shortcuts: Photos & Videos, Smile Gallery (case photos by treatment, one folder per patient), Website Content (Branding, Photoshoot, Videos). **Branding › Logo › PNG holds the only brand document: a colour guide** (gold `#C3972B`, greys, Century Gothic). Photoshoot = 196 frames in Dr. Portrait / Office / PT Dr:Staff Interactions / PT Portraits ×4 / Technology; Videos › BRoll holds an 18 s web b-roll |
 | `legacy-dental-pasadena` | Legacy Dental | `0AIyt2pOOdbwiUk9PVA` | shortcuts: "Legacy Dental Pasadena" (66 items), "Dr. Sean Sunyoto FINALS", five patient-story videos |
 | `livewell-dental` | Livewell | `0AEJPqRIRPMmDUk9PVA` | shortcut "ORGANIZED ASSET" (CASES, CK Lifestyle, CK teaching, Instagram, …) |
 | `marvel-dental` | Marvel Dental | `0AKhXvLRHzVBBUk9PVA` | Photos – Approved Patient Faces, Photos – no Patient Faces, Training – GHL |

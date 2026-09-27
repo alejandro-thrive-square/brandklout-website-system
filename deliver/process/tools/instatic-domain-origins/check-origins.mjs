@@ -130,16 +130,48 @@ const withTimeout = async (fn) => {
   try { return await fn(ac.signal) } finally { clearTimeout(t) }
 }
 
-/** Is there an Instatic admin here at all? */
+/**
+ * Is there an Instatic admin here at all?
+ *
+ * Distinguishes "no admin here" from "a CDN in front refused to let me look",
+ * because they are opposite problems and the second one used to be reported as
+ * the first. On 2026-08-29 `www.masonparkdental.com` read `no admin ... (http
+ * 403)` while the site was serving perfectly to the visitors it allows: the
+ * zone has a Cloudflare rule blocking all non-US traffic, and this checker runs
+ * from outside the US. Nothing here can see past that — so say so, and never
+ * call it a pass.
+ */
 async function reachable(origin) {
   try {
     return await withTimeout(async (signal) => {
       const res = await fetch(`${origin}/admin/login`, { redirect: 'follow', signal })
-      return { ok: res.status === 200, status: res.status, finalUrl: res.url }
+      if (res.status === 200) return { ok: true, status: 200, finalUrl: res.url }
+      const edge = edgeBlock(res, await res.text().catch(() => ''))
+      return { ok: false, status: res.status, finalUrl: res.url, edge }
     })
   } catch (e) {
     return { ok: false, status: 0, error: e.name === 'AbortError' ? 'timeout' : String(e.cause?.code || e.message) }
   }
+}
+
+/**
+ * Did an edge network answer instead of the origin? A Cloudflare block is a
+ * 403 carrying Cloudflare's own headers and its interstitial, never Instatic's
+ * JSON. Reported as UNKNOWN rather than pass or fail: the origin was never
+ * reached, so nothing at all was learned about it.
+ */
+function edgeBlock(res, body) {
+  const server = (res.headers.get('server') || '').toLowerCase()
+  const cloudflare = server.includes('cloudflare') || res.headers.has('cf-ray')
+  if (!cloudflare) return null
+  if (res.status === 403 && /Attention Required|you have been blocked|cf-error|__cf/i.test(body)) {
+    return { by: 'cloudflare', kind: 'blocked', ray: res.headers.get('cf-ray') || null }
+  }
+  if (res.status === 403) return { by: 'cloudflare', kind: 'blocked', ray: res.headers.get('cf-ray') || null }
+  if ([503, 429].includes(res.status) && /challenge|checking your browser|just a moment/i.test(body)) {
+    return { by: 'cloudflare', kind: 'challenge', ray: res.headers.get('cf-ray') || null }
+  }
+  return null
 }
 
 /**
@@ -188,14 +220,20 @@ async function checkSite({ client, adminUrl, alternates = [] }) {
     /* Probe each origin against ITSELF: that is what a browser does when a
        person works in the admin at that address. */
     const gate = reach.ok ? await originAccepted(origin, origin) : { verdict: 'unreachable', status: reach.status }
-    rows.push({ origin, servesAdmin: reach.ok, ...gate, reachError: reach.error })
+    rows.push({ origin, servesAdmin: reach.ok, ...gate, reachError: reach.error, edge: reach.edge })
   }
   const usable = rows.filter((r) => r.servesAdmin && r.verdict === 'accepted').map((r) => r.origin)
   /* The trap this whole script exists for: a host that happily serves the login
      PAGE but is not an allowed origin, so the login POST itself is refused. The
      address looks right, the form renders, and nobody gets in. */
   const traps = rows.filter((r) => r.servesAdmin && r.verdict === 'rejected').map((r) => r.origin)
-  return { client, adminUrl, rows, usable, traps }
+  const blocked = rows.filter((r) => r.edge).map((r) => r.origin)
+  /* The registry's own answer to "what link do I send?" must itself verify.
+     Before this, a site whose canonical adminUrl was unreachable still exited 0
+     as long as ANY host passed — so mason-park read "all clean" while the only
+     working host was the platform one nobody is supposed to be given. */
+  const canonicalOk = usable.includes(normalizeOrigin(adminUrl))
+  return { client, adminUrl, rows, usable, traps, blocked, canonicalOk }
 }
 
 function report(results) {
@@ -205,11 +243,13 @@ function report(results) {
     console.log(`\n${r.client ? r.client + ' — ' : ''}${r.adminUrl}`)
     for (const row of r.rows) {
       const mark =
+        row.edge ? 'BLOCKED  ' :
         !row.servesAdmin ? 'no admin ' :
         row.verdict === 'accepted' ? 'OK       ' :
         row.verdict === 'rejected' ? 'TRAP     ' :
         row.verdict === 'redirect' ? 'redirect ' : '???      '
       const why =
+        row.edge ? `${row.edge.by} ${row.edge.kind} this check (http ${row.status}) — NOTHING was learned about the origin behind it` :
         !row.servesAdmin ? `does not serve /admin/login (${row.reachError || 'http ' + row.status})` :
         row.verdict === 'accepted' ? 'serves the admin AND is an allowed origin' :
         row.verdict === 'rejected' ? 'serves the login page but REFUSES THE LOGIN — 403 invalid origin' :
@@ -226,6 +266,23 @@ function report(results) {
     } else {
       console.log('\n  NO USABLE ADMIN URL — do not hand any of these out.')
       problems++
+    }
+    /* Registry says one thing, the running server says another. Either the
+       domain is broken or sites.json is stale; both are problems, and neither
+       is cured by some other host happening to work. */
+    if (r.client && r.usable.length && !r.canonicalOk) {
+      problems++
+      console.log(`\n  ⚠ sites.json calls ${r.adminUrl} the canonical admin URL, and it did NOT verify.`)
+      console.log('    Either fix that host or change adminUrl — do not quietly hand out the')
+      console.log('    platform host instead; it is the fallback, not the address people get.')
+    }
+    if (r.blocked?.length) {
+      problems++
+      console.log(`\n  ⚠ ${r.blocked.length} host(s) blocked this check at the edge: ${r.blocked.join(', ')}`)
+      console.log('    A CDN answered before the origin did, so these rows are UNKNOWN, not failures.')
+      console.log('    Usual cause here: a Cloudflare rule blocking traffic from outside the US, which')
+      console.log('    blocks this checker too (and ACME validation — see instatic-domain-origins.md). Verify from')
+      console.log('    an allowed network, or exempt the check, before believing anything about them.')
     }
     if (r.traps.length) {
       problems++

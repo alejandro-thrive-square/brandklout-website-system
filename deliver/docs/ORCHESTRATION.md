@@ -6,15 +6,18 @@ Established 2026-08-05. Companion to [ASANA-DISPATCH.md](./ASANA-DISPATCH.md).
 
 ## The model
 
-**One worktree per client. This main checkout orchestrates and does not do client work.**
+**One worktree per site (a client with two sites gets two). This main checkout orchestrates and does not do client work.**
 
 ```
 Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-grand-mission        worktree   -> deliver/brandklout/grand-mission-dentistry/
 ├── bk-arvada               worktree   -> deliver/brandklout/arvada-dental-center/
 ├── bk-mason-park           worktree   -> deliver/brandklout/mason-park/
+├── bk-mason-park-kids      worktree   -> deliver/brandklout/mason-park-kids/
 ├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
-├── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
+├── bk-stone                worktree   -> deliver/brandklout/stone-surgical-arts/
+├── bk-stone-dental         worktree   -> deliver/brandklout/stone-dental-implant-center/
+├── bk-stone-med-spa        worktree   -> deliver/brandklout/stone-med-spa/
 ├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
 ├── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
 ├── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/

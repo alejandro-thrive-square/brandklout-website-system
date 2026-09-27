@@ -176,8 +176,10 @@ not a secret (it is in every page's source). The per-website API keys are in `~/
    (see `instatic-embeds`). If Termly is already there with `autoBlock=on`, switch it to `off`.
 2. **Tag every tracker outside GTM.** Change `<script src=…>` to
    `<script type="text/plain" data-categories="advertising|analytics" src=…>`, and inline pixels to
-   `<script type="text/plain" data-categories="…">`. Known so far: GHL `number_pool.js` and
-   `user_session.js` (advertising), Meta Pixel (advertising), the OpenAI `oaiq` pixel (advertising),
+   `<script type="text/plain" data-categories="…">`. **Exception: never tag GHL `number_pool.js` or
+   `user_session.js`** (client decision above). A 2026-09-16 footer still tagged them on Stone Dental,
+   so the pool never swapped for a visitor who ignored the banner (found and untagged 2026-09-24);
+   untag any you find. Tag: Meta Pixel (advertising), the OpenAI `oaiq` pixel (advertising),
    Ahrefs analytics (analytics).
 3. **Add the Consent Preferences link** to every footer, landing pages included.
 4. **Test** in a private window, or with `check --termly-proxy`. Before answering the banner:
@@ -214,7 +216,7 @@ preference modal, and no tracker fires before a choice is made.
 | Mason Park Kids | Instatic | off | yes | applied + published to the **unlaunched** build | none |
 | West LA Implants | Instatic | off | yes | applied + published to the **unlaunched** build | none |
 | Arvada | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
-| Stone Dental Implant Center | Webflow | off | yes | **applied, not published** | already tagged |
+| Stone Dental Implant Center | Webflow | off | yes | **live** (published 2026-09-24) | GHL pool untagged 2026-09-24 by design, swap proven with the banner unanswered; others already tagged |
 | Marvel Dental | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
 | Ortega | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
 | Dentiq | Webflow | off | yes | **applied, not published** | — |
@@ -224,7 +226,7 @@ preference modal, and no tracker fires before a choice is made.
 | Restore | Webflow | off | yes | **applied, not published** | — |
 | Makris | Webflow | off | yes | **applied, not published** | tagged, unverified until publish |
 | Atwood | Webflow | off | yes | **applied, not published** | — |
-| Oceanic | Webflow | — | — | **blocked** | account exists; site is not in our Webflow workspace |
+| Oceanic | Webflow | off, first in head | link in footer component (hand-placed) | **live** 2026-09-22, via its own MCP `webflow-oceanic-dental` (site `66cd6c49cbb85d43d9e41a7c`) | Google Ads gtag tagged; DNI (`OceanicDNI` 2.0.0) ungated by design; **GA4 from Webflow's GA integration cannot be tagged — move by hand**; `/brighten` loads GA4 again, untagged. GHL consent fields missing on both forms (GHL side) |
 
 **"Applied, not published"** means the change is staged and ships with the team's next publish. Those
 sites had Designer work pending before this rollout touched them, so publishing would have shipped
@@ -237,6 +239,16 @@ somebody else's unfinished page. Check `get_site`: `lastUpdated` within about a 
 builds are on `mason-park-kids.up.railway.app` and `west-la-implants-production.up.railway.app` and
 have not been cut over. Consent is on the Instatic builds and will arrive with the cutover; the live
 WordPress sites have none, and we have no credentials for them.
+
+### The Silktide trial is retired
+Before the Termly accounts existed, Livewell's staging ran a self-hosted
+[Silktide Consent Manager](https://silktide.com/consent-manager/) loader (2026-09-17, `live: false`)
+with bridge 2.3.0 reading its `bk.consent` record. Every site now has a Termly account, Livewell's
+trial block was replaced, and the kit never came to main. If a site ever cannot get a Termly account,
+the loader, `sites.json`, `silktide-*` commands and bridge 2.3.0 are on branch `bk-livewell`
+(commits `5ba1064a`..`571d2f01`, old path `deliver/process/23-termly-ghl-consent/kit/silktide/`).
+Lessons from it that still apply: Silktide only calls a global `gtag()` (GTM-only sites have none),
+its `onAccept`/`onReject` fire on every page load, and NordVPN empties jsDelivr in Chrome so SRI fails.
 
 ## Gotchas
 - **A third-party widget that renders in the page inherits the page's CSS.** Any global
@@ -310,6 +322,32 @@ WordPress sites have none, and we have no credentials for them.
   grows it must be paid for elsewhere, or split into two registered scripts.
 - **`add_site_script` 404s on a site with no applied scripts.** Use `set_site_scripts` there, after
   `get_site_scripts` has confirmed the 404.
+- **Webflow 404 "The site cannot be found" means the site is not in the OAuth grant**, not a wrong id.
+  On 2026-09-24 `webflow-brandklout`'s grant had shrunk to the two Arvada sites after a narrower
+  re-auth; re-authorising with every site ticked brought back all 74. The grant is replaced wholesale.
+- **Webflow registered scripts take `data-*` attributes only.** `set_site_scripts` with
+  `type: "text/plain"` answers 400 "each key is prefixed with 'data-'", so a registered script cannot be
+  Termly-tagged. Gate it inside the script instead: wait for `window.Termly.on`, and inject the tracker
+  only when `Termly.getConsentState().<category> === true` (on `initialized` and `consent`). First used
+  for Oceanic's DNI loader (`deliver/brandklout/oceanic-dental/site-scripts/dni-loader.js`), which has
+  since been ungated because it is a number pool.
+- **Webflow's built-in Google Analytics integration** (Site settings → Apps & Integrations) prints its
+  gtag config above all custom code, so above Termly, and nothing in custom code can tag it. Clear the
+  ID there and re-add GA4 in the head as `type="text/plain" data-categories="analytics"` (loader plus
+  config). Spot it by `gtag('set', 'developer_id.dZGVlNj', true)` in the served HTML.
+- **Two GHL pools on one page: execute ONE `number_pool.js`** and add the other pools as inert
+  `<script type="text/plain" src=…number_pool.js…>` tags. `initNumberPool()` runs from a `setTimeout`
+  where `currentScript` is null, so it scans every script whose `src` contains `number_pool` and asks
+  each pool for a number; two executed copies run init twice (Oceanic, `OceanicDNI` 2.0.0). A phone
+  number typed with an en dash (`(714) 841–0203`) never text-swaps; only its `tel:` link does.
+- **Check a GHL form's consent fields keyless**:
+  `curl -s https://api.leadconnectorhq.com/widget/form/<id> | grep -o 'privacy_[a-z_]*' | sort -u`
+  must list all eleven. The bridge appends the values either way and GHL silently drops the ones with
+  no field (Oceanic's two forms, 0 of 11 on 2026-09-22; Stone Dental's `0mtZk3CrshD7Y0OYOao4` is the
+  reference with all 11).
+- **Corners are crowded on Brandklout sites.** Sienna's accessibility button sits bottom-left and
+  Elfsight's review badge bottom-right (after scrolling). Hit-test any banner button or floating icon
+  at 1440, 1024, 768 and 390 px before calling it placed.
 - **`git sparse-checkout add` re-applies the sparse patterns** and deletes tracked files outside them
   from the working tree. On 2026-09-17 that removed the old `deliver/brandklout/snippets/` mid-move.
   Recover them with `git show HEAD:<path>`.

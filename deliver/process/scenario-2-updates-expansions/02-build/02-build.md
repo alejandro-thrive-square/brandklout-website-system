@@ -109,7 +109,11 @@ on Arvada v2, Grand Mission, Legacy, Marvel and Stone.
    Read the output, then run it without `--dry`.
 4. Register in the `header`, and let the script defer itself to `DOMContentLoaded`.
 5. Bump the version on every change.
-6. DNI: start from `site-scripts/ghl-dni-loader.template.js`.
+6. DNI: start from `site-scripts/ghl-dni-loader.template.js`. Two pools on one page: execute ONE
+   `number_pool.js` and add the others as inert `type="text/plain"` tags; its init scans every
+   `number_pool` script, and two executed copies run it twice (Oceanic `OceanicDNI` 2.0.0).
+7. Registered scripts take `data-*` attributes only, so one cannot be Termly-tagged `text/plain`.
+   Gate a tracker inside the script on `Termly.getConsentState()` instead (never a number pool).
 
 **H. Freeform head or footer code.**
 1. Take `publish-state.txt` first, because this write moves `lastUpdated`.

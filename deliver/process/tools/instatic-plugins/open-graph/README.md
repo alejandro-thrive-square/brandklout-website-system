@@ -1,7 +1,18 @@
-# Open Graph — `brandklout.open-graph` v1.1.2
+# Open Graph — `brandklout.open-graph` v1.2.3
 
 Social sharing previews for every published page: Open Graph and Twitter Card
-tags, a `<link rel="canonical">`, and the page's own meta description.
+tags, a `<link rel="canonical">`, the page's own meta description, and the site
+favicon.
+
+| Version | Change |
+| :--- | :--- |
+| 1.2.3 | `og:image:width` / `height` / `type` when the image's file name carries its size (`…-1200x630.jpg`, the way the media library names resized uploads). Without them Facebook shows a link's first share with no picture while it fetches the image. |
+| 1.2.2 | Entries are indexed by their SEO title as well as their title. A template that renders `{currentEntry.seoTitle}` as the `<title>` otherwise matched nothing, and every article was tagged as the template page (`og:url /blog-article`, `og:type website`). |
+| 1.2.1 | `contentAccess[]` reads the `articles` table too. |
+| 1.2.0 | `favicon` and `appleTouchIcon` settings. Instatic writes no icon link and serves nothing at `/favicon.ico`, so every tab showed a blank page icon. A page that already names an icon is left alone. |
+| 1.1.3 | Inserts `<meta name="description">` when the site has no site-wide one (below). |
+
+1.2.x was written in `bk-mason-park` (2026-09-25) and brought here on 2026-09-27.
 
 ## The problem it solves
 
@@ -27,10 +38,12 @@ description back on the page.
 | `og:description` / `twitter:description` | override → the row's `seoDescription` → the page's `<meta name="description">` |
 | `og:image` / `twitter:image` | override → the first content picture on the page → the fallback image in settings |
 | `og:image:alt` | override → that picture's own `alt` |
+| `og:image:width` / `height` / `type` | parsed from the image's file name, only when it carries `-<w>x<h>.<ext>` |
 | `og:url`, `<link rel="canonical">` | override → site address + the page's route |
 | `og:type` | override → `article` for a journal entry, else the default |
 | `og:site_name`, `og:locale`, `twitter:card`, `twitter:site` | settings |
-| `<meta name="description">` | **replaced in place** with the page's own, when one is known |
+| `<meta name="description">` | **replaced in place** with the page's own, when one is known; **inserted** when the page has none |
+| `<link rel="icon">`, `<link rel="apple-touch-icon">` | the `favicon` / `appleTouchIcon` settings (touch icon falls back to the favicon); skipped where the page already has one |
 
 Nothing is emitted blank. No site address means no `og:image`, no `og:url` and no
 canonical link — the networks reject relative values, and a relative `og:image`
@@ -131,15 +144,45 @@ the preview and the result can be diffed.
 ## Install
 
 ```bash
-cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs open-graph output/open-graph.zip
-node install-plugin.mjs output/open-graph.zip            # dry run — shows the grants
-node install-plugin.mjs output/open-graph.zip --apply
-node configure-seo-plugins.mjs --apply                 # the Dr Nahlah values
+cd deliver/process/tools/instatic-plugins
+node install-plugin.mjs open-graph            # dry run: packs from source, shows the grants
+node install-plugin.mjs open-graph --apply    # one site; plugins.mjs rollout for several
 ```
 
-Then publish. The plugin ships with empty defaults on purpose — a share image, a
-site address and a practice name belong to one client, not to a package.
+Back the site up first: a `publish.html` filter changes every published page at the
+next publish. Then configure it and publish. The plugin ships with empty defaults on
+purpose — a share image, a site address, a favicon and a practice name belong to one
+client, not to a package. Each client keeps its own configure script
+(`configure-seo-plugins.mjs` in Dr. Nahlah's worktree, `configure-seo.mjs` in Mason
+Park Kids'), idempotent, printing a diff before `--apply`.
+
+## Configure it, per client
+
+- **`siteUrl`** is the PUBLIC address, scheme included, no trailing slash. With it
+  empty the plugin emits no image, no `og:url` and no canonical at all (Mason Park
+  production ran that way for weeks). Re-check it at every domain cutover, and on a
+  staging host set it to the STAGING host (see
+  [staging-clone.md](../../instatic-site/staging-clone/staging-clone.md)).
+- **`deriveFromPage`** (on by default) is what makes it work at scale: a page with no
+  override takes its title from its `<title>`, its description from its SEO
+  description, and its image from the first picture on the page.
+- **`favicon`** (1.2.0+): a media-library path or an https URL, square PNG of at
+  least 48x48. Set it on every site; the platform has no favicon setting of its own.
+- **Per-page descriptions depend on the `pages` table.** A site whose rows have a
+  `seoDescription` cell (Dr. Nahlah's) needs nothing further. A site whose rows are
+  only `title, slug, body` (Mason Park Kids) has nowhere to put one: write the
+  plugin's override store instead, `POST .../runtime/override` with
+  `{ key: <slug>, description, url, enabled: true }`. Kids'
+  `03-core-pages/.tmp/populate-seo.mjs` sourced each description from the local
+  build's `<meta>`, then the WordPress recovery mirror, then the page's opening
+  paragraph, and reported which one each page used.
+- **Overrides are plugin records, and they do not travel** in a site export or a
+  staging clone. Count them on both sides.
+
+When a head diff gate (a client's `diff-live.mjs`) compares the local build with the
+published page, two differences are expected: live JSON-LD has **more** than local
+(aeo-schema adds `WebPage`, `WebSite`, `BreadcrumbList`), and `viewport` / `themeColor`
+never match because the platform owns them.
 
 ## Test and verify
 
@@ -161,7 +204,7 @@ calls it, that both plugins are enabled and configured, and that every one of th
 - **It does not upload or resize an image.** `og:image` should be 1200x630;
   the plugin points at whatever it is given and says so in the settings help.
 - **It does not touch page content.** `cms.content.read` is read-only and scoped
-  to `pages` and `posts` in the manifest's `contentAccess[]`.
+  to `pages`, `posts` and (1.2.1+) `articles` in the manifest's `contentAccess[]`.
 
 ## Version Control
 
