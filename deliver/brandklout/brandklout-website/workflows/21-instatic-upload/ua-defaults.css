@@ -1,0 +1,12 @@
+/* ===== browser defaults Sang's page relies on, restored. See push-site.mjs ===== */
+/* Found 2026-09-11 by compare-live.mjs: published, every <p> and heading that the page does not
+   give an explicit margin-bottom rendered with 0 (.phase-copy, .footer-copy, .faq-intro h2 + p,
+   .video-copy p), so the lower half of the page sat up to 49px higher than Sang's file.
+   The page sets margin-top: 0 on these itself and leaves the bottom to the browser.
+   Element selectors only, so every class-qualified rule of Sang's still wins, and this block is
+   emitted BEFORE the carried cascade so his own `h1 { margin-bottom: 22px }` still wins too. */
+p { margin-bottom: 1em; }
+h1 { margin-bottom: 0.67em; }
+h2 { margin-bottom: 0.83em; }
+h3 { margin-bottom: 1em; }
+h4 { margin-bottom: 1.33em; }

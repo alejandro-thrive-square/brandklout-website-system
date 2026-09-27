@@ -1,0 +1,7 @@
+instance   https://brandklout-production.up.railway.app   (dry run)
+table      legal: CREATE (postType, /legal/<slug>, 10 fields)
+row        /legal/privacy: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+row        /legal/terms: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+row        /legal/hipaa-data-handling: CREATE + publish  (title slug footerLabel eyebrow intro notice body seoTitle seoDescription sortOrder)
+
+dry run — re-run with --apply to write

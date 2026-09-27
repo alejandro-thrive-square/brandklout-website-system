@@ -1,0 +1,655 @@
+{
+ "package": "package-v18",
+ "against": "package-v16",
+ "date": "2026-09-15",
+ "files": {
+  "added": [
+   "INSTATIC_CMS_LEGAL_GUIDE.md",
+   "INSTATIC_IMPORT_GUIDE.md",
+   "INSTATIC_PAGE_MAP.csv",
+   "INSTATIC_PAGE_MAP.json",
+   "INSTATIC_QA.json",
+   "assets/pages/ai-growth-engine.css",
+   "assets/pages/ai-search-authority.css",
+   "assets/pages/authority-score.css",
+   "assets/pages/book.css",
+   "assets/pages/conversion-websites.css",
+   "assets/pages/cosmetic-dentist-marketing.css",
+   "assets/pages/customer-stories.css",
+   "assets/pages/customer-story-ava-dental-launch.css",
+   "assets/pages/customer-story-legacy-dental-pasadena.css",
+   "assets/pages/customer-story-oceanic-ai-search-growth.css",
+   "assets/pages/customer-story-oceanic-future-ready.css",
+   "assets/pages/customer-story-ocpao-ai-authority.css",
+   "assets/pages/customer-story-omnia-ai-search-growth.css",
+   "assets/pages/dental-implant-marketing.css",
+   "assets/pages/full-arch-marketing.css",
+   "assets/pages/general-dentistry-marketing.css",
+   "assets/pages/guarantee.css",
+   "assets/pages/index.css",
+   "assets/pages/lead-to-collection.css",
+   "assets/pages/legal-cms-template.css",
+   "assets/pages/local-seo-maps.css",
+   "assets/pages/market-opportunity.css",
+   "assets/pages/multi-location-dental-marketing.css",
+   "assets/pages/oral-surgery-marketing.css",
+   "assets/pages/orthodontics-invisalign-marketing.css",
+   "assets/pages/periodontist-marketing.css",
+   "assets/pages/prosthodontist-marketing.css",
+   "assets/pages/reputation-engine.css",
+   "assets/pages/revenue-attribution.css",
+   "assets/pages/solutions.css",
+   "assets/pages/specialties.css",
+   "cms-templates/legal-page-template.html",
+   "cms/legal-pages/entries/hipaa-data-handling.md",
+   "cms/legal-pages/entries/privacy.md",
+   "cms/legal-pages/entries/terms.md",
+   "cms/legal-pages/legal-pages.csv",
+   "cms/legal-pages/legal-pages.json",
+   "cms/legal-pages/schema.json",
+   "instatic-css/ai-growth-engine.css",
+   "instatic-css/ai-search-authority.css",
+   "instatic-css/authority-score.css",
+   "instatic-css/book.css",
+   "instatic-css/conversion-websites.css",
+   "instatic-css/cosmetic-dentist-marketing.css",
+   "instatic-css/customer-stories.css",
+   "instatic-css/customer-story-ava-dental-launch.css",
+   "instatic-css/customer-story-legacy-dental-pasadena.css",
+   "instatic-css/customer-story-oceanic-ai-search-growth.css",
+   "instatic-css/customer-story-oceanic-future-ready.css",
+   "instatic-css/customer-story-ocpao-ai-authority.css",
+   "instatic-css/customer-story-omnia-ai-search-growth.css",
+   "instatic-css/dental-implant-marketing.css",
+   "instatic-css/full-arch-marketing.css",
+   "instatic-css/general-dentistry-marketing.css",
+   "instatic-css/guarantee.css",
+   "instatic-css/index.css",
+   "instatic-css/lead-to-collection.css",
+   "instatic-css/legal-cms-template.css",
+   "instatic-css/local-seo-maps.css",
+   "instatic-css/market-opportunity.css",
+   "instatic-css/multi-location-dental-marketing.css",
+   "instatic-css/oral-surgery-marketing.css",
+   "instatic-css/orthodontics-invisalign-marketing.css",
+   "instatic-css/periodontist-marketing.css",
+   "instatic-css/prosthodontist-marketing.css",
+   "instatic-css/reputation-engine.css",
+   "instatic-css/revenue-attribution.css",
+   "instatic-css/solutions.css",
+   "instatic-css/specialties.css"
+  ],
+  "removed": [
+   "assets/hero-carousel-v12.css",
+   "assets/preview-fix.css",
+   "assets/reference-theme.css",
+   "assets/results-v13.css",
+   "assets/site.css",
+   "assets/stories-v10.css",
+   "assets/update-v6.css",
+   "assets/visual.css"
+  ],
+  "changed": [
+   "README.md",
+   "ai-growth-engine.html",
+   "ai-search-authority.html",
+   "authority-score.html",
+   "book.html",
+   "conversion-websites.html",
+   "cosmetic-dentist-marketing.html",
+   "customer-stories.html",
+   "customer-story-ava-dental-launch.html",
+   "customer-story-legacy-dental-pasadena.html",
+   "customer-story-oceanic-ai-search-growth.html",
+   "customer-story-oceanic-future-ready.html",
+   "customer-story-ocpao-ai-authority.html",
+   "customer-story-omnia-ai-search-growth.html",
+   "dental-implant-marketing.html",
+   "full-arch-marketing.html",
+   "general-dentistry-marketing.html",
+   "guarantee.html",
+   "hipaa.html",
+   "index.html",
+   "lead-to-collection.html",
+   "local-seo-maps.html",
+   "market-opportunity.html",
+   "multi-location-dental-marketing.html",
+   "oral-surgery-marketing.html",
+   "orthodontics-invisalign-marketing.html",
+   "periodontist-marketing.html",
+   "privacy.html",
+   "prosthodontist-marketing.html",
+   "reputation-engine.html",
+   "revenue-attribution.html",
+   "sitemap.xml",
+   "solutions.html",
+   "specialties.html",
+   "terms.html"
+  ]
+ },
+ "notes": [
+  "CHANGELOG-v11.md",
+  "CHANGELOG-v12.md",
+  "CHANGELOG-v13.md",
+  "DATA_AND_MEDIA_NOTES.md",
+  "INSTATIC_CMS_LEGAL_GUIDE.md",
+  "INSTATIC_IMPORT_GUIDE.md",
+  "INSTATIC_PAGE_MAP.csv",
+  "README.md",
+  "llms.txt",
+  "robots.txt"
+ ],
+ "pages": {
+  "ai-growth-engine.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/ai-growth-engine.css)"
+   ],
+   "body": []
+  },
+  "ai-search-authority.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/ai-search-authority.css)"
+   ],
+   "body": []
+  },
+  "authority-score.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/authority-score.css)"
+   ],
+   "body": []
+  },
+  "book.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/book.css)"
+   ],
+   "body": []
+  },
+  "conversion-websites.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/conversion-websites.css)"
+   ],
+   "body": []
+  },
+  "cosmetic-dentist-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/cosmetic-dentist-marketing.css)"
+   ],
+   "body": []
+  },
+  "customer-stories.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-stories.css)"
+   ],
+   "body": []
+  },
+  "customer-story-ava-dental-launch.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-ava-dental-launch.css)"
+   ],
+   "body": []
+  },
+  "customer-story-legacy-dental-pasadena.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-legacy-dental-pasadena.css)"
+   ],
+   "body": []
+  },
+  "customer-story-oceanic-ai-search-growth.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-oceanic-ai-search-growth.css)"
+   ],
+   "body": []
+  },
+  "customer-story-oceanic-future-ready.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-oceanic-future-ready.css)"
+   ],
+   "body": []
+  },
+  "customer-story-ocpao-ai-authority.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-ocpao-ai-authority.css)"
+   ],
+   "body": []
+  },
+  "customer-story-omnia-ai-search-growth.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/customer-story-omnia-ai-search-growth.css)"
+   ],
+   "body": []
+  },
+  "dental-implant-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/dental-implant-marketing.css)"
+   ],
+   "body": []
+  },
+  "full-arch-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/full-arch-marketing.css)"
+   ],
+   "body": []
+  },
+  "general-dentistry-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/general-dentistry-marketing.css)"
+   ],
+   "body": []
+  },
+  "guarantee.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/guarantee.css)"
+   ],
+   "body": []
+  },
+  "hipaa.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/legal-cms-template.css)"
+   ],
+   "body": [
+    "~ section.page-hero \"HIPAA & data handling\": text changed"
+   ]
+  },
+  "index.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 8 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/hero-carousel-v12.css, assets/results-v13.css) -> 1 (assets/pages/index.css)"
+   ],
+   "body": []
+  },
+  "lead-to-collection.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/lead-to-collection.css)"
+   ],
+   "body": []
+  },
+  "local-seo-maps.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/local-seo-maps.css)"
+   ],
+   "body": []
+  },
+  "market-opportunity.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/market-opportunity.css)"
+   ],
+   "body": []
+  },
+  "multi-location-dental-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/multi-location-dental-marketing.css)"
+   ],
+   "body": []
+  },
+  "oral-surgery-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/oral-surgery-marketing.css)"
+   ],
+   "body": []
+  },
+  "orthodontics-invisalign-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/orthodontics-invisalign-marketing.css)"
+   ],
+   "body": []
+  },
+  "periodontist-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/periodontist-marketing.css)"
+   ],
+   "body": []
+  },
+  "privacy.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/legal-cms-template.css)"
+   ],
+   "body": []
+  },
+  "prosthodontist-marketing.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/prosthodontist-marketing.css)"
+   ],
+   "body": []
+  },
+  "reputation-engine.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/reputation-engine.css)"
+   ],
+   "body": []
+  },
+  "revenue-attribution.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/revenue-attribution.css)"
+   ],
+   "body": []
+  },
+  "solutions.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/solutions.css)"
+   ],
+   "body": []
+  },
+  "specialties.html": {
+   "status": "changed",
+   "head": [
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/specialties.css)"
+   ],
+   "body": []
+  },
+  "terms.html": {
+   "status": "changed",
+   "head": [
+    "meta description: \"BrandKlout website terms of use.\" -> \"Terms for using the BrandKlout website.\"",
+    "stylesheet links: 7 (assets/site.css, assets/visual.css, assets/reference-theme.css, assets/preview-fix.css, assets/update-v6.css, assets/stories-v10.css, assets/results-v13.css) -> 1 (assets/pages/legal-cms-template.css)"
+   ],
+   "body": [
+    "~ section.page-hero \"Terms of Use\": text changed"
+   ]
+  },
+  "cms-templates/legal-page-template.html": {
+   "status": "NEW",
+   "title": "",
+   "desc": "Legal and policy information from BrandKlout.",
+   "jsonLd": [
+    "WebPage"
+   ],
+   "bodyClass": "visual-site reference-site",
+   "sections": [
+    {
+     "key": "nav",
+     "heading": "",
+     "text": "21f524cab426"
+    },
+    {
+     "key": "main#main",
+     "heading": "",
+     "text": "e3b0c44298fc"
+    },
+    {
+     "key": "section.page-hero",
+     "heading": "Legal page title",
+     "text": "7e263b3475d8"
+    },
+    {
+     "key": "section.section.tight",
+     "heading": "CMS rich text",
+     "text": "354790ba1efa"
+    },
+    {
+     "key": "section#market-prequalification.section.opportunity-section.bottom-market-prequal",
+     "heading": "Find out if BrandKlout can own your market with you.",
+     "text": "b1cdcdc71302"
+    },
+    {
+     "key": "footer.footer",
+     "heading": "",
+     "text": "e834f7e920f1"
+    }
+   ],
+   "headText": "00acb3ea6c7b",
+   "bodyText": "eb75c1c0686b",
+   "sheets": [
+    "assets/pages/legal-cms-template.css"
+   ],
+   "scripts": [
+    "assets/site.js",
+    "assets/visual.js",
+    "assets/stories-v10.js"
+   ]
+  }
+ },
+ "css": {
+  "cms-templates/assets/pages/legal-cms-template.css": {
+   "status": "MISSING (linked, not in the package)"
+  },
+  "linkSets": [
+   {
+    "sheets": "assets/pages/ai-growth-engine.css",
+    "pages": 1,
+    "example": "ai-growth-engine.html"
+   },
+   {
+    "sheets": "assets/pages/ai-search-authority.css",
+    "pages": 1,
+    "example": "ai-search-authority.html"
+   },
+   {
+    "sheets": "assets/pages/authority-score.css",
+    "pages": 1,
+    "example": "authority-score.html"
+   },
+   {
+    "sheets": "assets/pages/book.css",
+    "pages": 1,
+    "example": "book.html"
+   },
+   {
+    "sheets": "cms-templates/assets/pages/legal-cms-template.css",
+    "pages": 1,
+    "example": "cms-templates/legal-page-template.html"
+   },
+   {
+    "sheets": "assets/pages/conversion-websites.css",
+    "pages": 1,
+    "example": "conversion-websites.html"
+   },
+   {
+    "sheets": "assets/pages/cosmetic-dentist-marketing.css",
+    "pages": 1,
+    "example": "cosmetic-dentist-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/customer-stories.css",
+    "pages": 1,
+    "example": "customer-stories.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-ava-dental-launch.css",
+    "pages": 1,
+    "example": "customer-story-ava-dental-launch.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-legacy-dental-pasadena.css",
+    "pages": 1,
+    "example": "customer-story-legacy-dental-pasadena.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-oceanic-ai-search-growth.css",
+    "pages": 1,
+    "example": "customer-story-oceanic-ai-search-growth.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-oceanic-future-ready.css",
+    "pages": 1,
+    "example": "customer-story-oceanic-future-ready.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-ocpao-ai-authority.css",
+    "pages": 1,
+    "example": "customer-story-ocpao-ai-authority.html"
+   },
+   {
+    "sheets": "assets/pages/customer-story-omnia-ai-search-growth.css",
+    "pages": 1,
+    "example": "customer-story-omnia-ai-search-growth.html"
+   },
+   {
+    "sheets": "assets/pages/dental-implant-marketing.css",
+    "pages": 1,
+    "example": "dental-implant-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/full-arch-marketing.css",
+    "pages": 1,
+    "example": "full-arch-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/general-dentistry-marketing.css",
+    "pages": 1,
+    "example": "general-dentistry-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/guarantee.css",
+    "pages": 1,
+    "example": "guarantee.html"
+   },
+   {
+    "sheets": "assets/pages/legal-cms-template.css",
+    "pages": 3,
+    "example": "hipaa.html"
+   },
+   {
+    "sheets": "assets/pages/index.css",
+    "pages": 1,
+    "example": "index.html"
+   },
+   {
+    "sheets": "assets/pages/lead-to-collection.css",
+    "pages": 1,
+    "example": "lead-to-collection.html"
+   },
+   {
+    "sheets": "assets/pages/local-seo-maps.css",
+    "pages": 1,
+    "example": "local-seo-maps.html"
+   },
+   {
+    "sheets": "assets/pages/market-opportunity.css",
+    "pages": 1,
+    "example": "market-opportunity.html"
+   },
+   {
+    "sheets": "assets/pages/multi-location-dental-marketing.css",
+    "pages": 1,
+    "example": "multi-location-dental-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/oral-surgery-marketing.css",
+    "pages": 1,
+    "example": "oral-surgery-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/orthodontics-invisalign-marketing.css",
+    "pages": 1,
+    "example": "orthodontics-invisalign-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/periodontist-marketing.css",
+    "pages": 1,
+    "example": "periodontist-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/prosthodontist-marketing.css",
+    "pages": 1,
+    "example": "prosthodontist-marketing.html"
+   },
+   {
+    "sheets": "assets/pages/reputation-engine.css",
+    "pages": 1,
+    "example": "reputation-engine.html"
+   },
+   {
+    "sheets": "assets/pages/revenue-attribution.css",
+    "pages": 1,
+    "example": "revenue-attribution.html"
+   },
+   {
+    "sheets": "assets/pages/solutions.css",
+    "pages": 1,
+    "example": "solutions.html"
+   },
+   {
+    "sheets": "assets/pages/specialties.css",
+    "pages": 1,
+    "example": "specialties.html"
+   }
+  ],
+  "bundled": {
+   "sources": [
+    "assets/site.css",
+    "assets/visual.css",
+    "assets/reference-theme.css",
+    "assets/preview-fix.css",
+    "assets/update-v6.css",
+    "assets/stories-v10.css",
+    "assets/results-v13.css",
+    "assets/hero-carousel-v12.css"
+   ],
+   "disagreements": []
+  },
+  "sources": {
+   "assets/site.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 564
+   },
+   "assets/visual.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 2608
+   },
+   "assets/reference-theme.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 906
+   },
+   "assets/preview-fix.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 368
+   },
+   "assets/update-v6.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 394
+   },
+   "assets/stories-v10.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 538
+   },
+   "assets/results-v13.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 210
+   },
+   "assets/hero-carousel-v12.css": {
+    "status": "identical rules (comments/whitespace may differ)",
+    "rules": 270
+   }
+  },
+  "droppedSheets": []
+ },
+ "assets": {
+  "sitemap.xml": "CHANGED",
+  "cms/legal-pages/legal-pages.csv": "NEW",
+  "cms/legal-pages/legal-pages.json": "NEW",
+  "cms/legal-pages/schema.json": "NEW",
+  "INSTATIC_PAGE_MAP.csv": "NEW",
+  "INSTATIC_PAGE_MAP.json": "NEW",
+  "INSTATIC_QA.json": "NEW"
+ }
+}
