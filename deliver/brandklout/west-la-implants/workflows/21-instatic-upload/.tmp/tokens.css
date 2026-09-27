@@ -4,11 +4,11 @@
 
 /* ===== @font-face, rewritten to the uploaded variable woff2 ===== */
 @font-face{font-family:'Bodoni Moda';font-style:normal;font-weight:400 900;font-display:swap;
-  src:url("/uploads/z8dqn_QR6sN7LsL252Q0h-bodoni-moda-var.woff2") format('woff2')}
+  src:url("/uploads/Y7o19N-xH60Ud2gl34jY7-bodoni-moda-var.woff2") format('woff2')}
 @font-face{font-family:'Bodoni Moda';font-style:italic;font-weight:400 900;font-display:swap;
-  src:url("/uploads/Jju4VlXaQSuLzXAaIDiMl-bodoni-moda-italic-var.woff2") format('woff2')}
+  src:url("/uploads/xH9g-p6Pj3lbiwdi7pr53-bodoni-moda-italic-var.woff2") format('woff2')}
 @font-face{font-family:'Manrope';font-style:normal;font-weight:200 800;font-display:swap;
-  src:url("/uploads/i342JgceepizMxsObsCtL-manrope-var.woff2") format('woff2')}
+  src:url("/uploads/6gNIDElj53x4YcodnajZT-manrope-var.woff2") format('woff2')}
 
 /* ===== 00-fluid-root.css ===== */
 :root { --font-from: 18; --font-to: 20; --vw-from: calc(1920 / 100); --vw-to: calc(2400 / 100); --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from))); --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16); }
@@ -17,9 +17,9 @@
 @media screen and (max-width: 479px) {:root { --font-from: 12; --font-to: 16; --vw-from: calc(320 / 100); --vw-to: calc(479 / 100); }}
 
 /* ===== 01-tokens.css ===== */
-:root { --ground:#11110F; --ground-2:#191815; --ground-3:#1F1D19; --ground-deep:#090909; --ground-ink:#080808; --ink:#F4EFE5; --ink-muted:#B5AFA4; --ink-dim:rgba(244,239,229,.55); --gold:#C4A36A; --gold-deep:#8F7442; --gold-soft:rgba(196,163,106,.18); --line:rgba(244,239,229,.14); --line-soft:rgba(244,239,229,.08); --paper:#F4EFE5; --paper-2:#EAE3D6; --paper-ink:#11110F; --paper-muted:#5E574C; --serif:'Bodoni Moda',Georgia,'Times New Roman',serif; --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Arial,sans-serif; --t-display:6.4rem; --t-h2:4.4rem; --t-h3:2.1rem; --t-quote:2.4rem; --t-lead:1.2rem; --t-body:1.06rem; --t-small:.82rem; --t-micro:.66rem; --wrap:82rem; --gutter:clamp(1.25rem,4vw,4rem); --nav-h:5.25rem; --ease-out:cubic-bezier(.16,1,.3,1); --ease-in-out:cubic-bezier(.65,0,.35,1); }
+:root { --ground:#11110F; --ground-2:#191815; --ground-3:#1F1D19; --ground-deep:#090909; --ground-ink:#080808; --ink:#F4EFE5; --ink-muted:#B5AFA4; --ink-dim:rgba(244,239,229,.55); --gold:#C4A36A; --gold-deep:#8F7442; --gold-soft:rgba(196,163,106,.18); --line:rgba(244,239,229,.14); --line-soft:rgba(244,239,229,.08); --paper:#F4EFE5; --paper-2:#EAE3D6; --paper-ink:#11110F; --paper-muted:#5E574C; --serif:'Bodoni Moda',Georgia,'Times New Roman',serif; --sans:'Manrope',system-ui,-apple-system,'Segoe UI',Arial,sans-serif; --t-display:6.4rem; --t-h2:4.4rem; --t-h3:2.1rem; --t-quote:2.4rem; --t-lead:1.2rem; --t-body:1.06rem; --t-small:.9rem; --t-micro:.66rem; --wrap:82rem; --gutter:clamp(1.25rem,4vw,4rem); --nav-h:5.25rem; --ease-out:cubic-bezier(.16,1,.3,1); --ease-in-out:cubic-bezier(.65,0,.35,1); }
 @media (max-width:1023px) {:root { --t-display:4.6rem; --t-h2:3.3rem; --t-h3:1.8rem; --t-quote:1.9rem; --nav-h:4.5rem; }}
-@media (max-width:767px) {:root { --t-display:3.6rem; --t-h2:2.7rem; --t-h3:1.6rem; --t-quote:1.65rem; --t-lead:1.16rem; --t-body:1.16rem; --t-small:.9rem; --t-micro:.72rem; }}
+@media (max-width:767px) {:root { --t-display:3.6rem; --t-h2:2.7rem; --t-h3:1.6rem; --t-quote:1.65rem; --t-lead:1.16rem; --t-body:1.16rem; --t-small:1.04rem; --t-micro:.72rem; }}
 
 /* ===== the cascade of every pair the conversion is lossy on — a clamp()/min()/max()
         value, or a multi-layer background — from 02-base.css. See push-site.mjs ===== */

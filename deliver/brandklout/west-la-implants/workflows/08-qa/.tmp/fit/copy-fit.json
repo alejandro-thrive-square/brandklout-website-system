@@ -64,54 +64,6 @@
   "detail": "copy lengths 68/46/36 chars across one row"
  },
  {
-  "slug": "dental-implants-beverly-hills",
-  "width": 1440,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Beverly Hills has no shortage of dentists. It has very few rooms with a surgical robot, a ",
-  "detail": "last line is \"himself.\" (7 lines, 977px wide)"
- },
- {
-  "slug": "dental-implants-beverly-hills",
-  "width": 991,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Beverly Hills has no shortage of dentists. It has very few rooms with a surgical robot, a ",
-  "detail": "last line is \"himself.\" (7 lines, 732px wide)"
- },
- {
-  "slug": "dental-implants-century-city",
-  "width": 1440,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Century City has no shortage of dentists. It has very few rooms with a surgical robot, a C",
-  "detail": "last line is \"himself.\" (7 lines, 977px wide)"
- },
- {
-  "slug": "dental-implants-century-city",
-  "width": 991,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Century City has no shortage of dentists. It has very few rooms with a surgical robot, a C",
-  "detail": "last line is \"himself.\" (7 lines, 732px wide)"
- },
- {
-  "slug": "dental-implants-santa-monica",
-  "width": 1440,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Santa Monica has no shortage of dentists. It has very few rooms with a surgical robot, a C",
-  "detail": "last line is \"himself.\" (7 lines, 977px wide)"
- },
- {
-  "slug": "dental-implants-santa-monica",
-  "width": 991,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Santa Monica has no shortage of dentists. It has very few rooms with a surgical robot, a C",
-  "detail": "last line is \"himself.\" (7 lines, 732px wide)"
- },
- {
   "slug": "dr-tony-barriere",
   "width": 390,
   "kind": "tall",
@@ -120,36 +72,12 @@
   "detail": "5 lines at 50px"
  },
  {
-  "slug": "failing-dental-implants",
-  "width": 390,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Peri-implantitis is gum disease around an implant. Left alone it takes the gum, then the b",
-  "detail": "last line is \"loosens.\" (7 lines, 356px wide)"
- },
- {
   "slug": "our-practice",
   "width": 390,
   "kind": "tall",
   "where": "arrival > h1.display.cv-title",
   "text": "Advanced dentistry, without forgetting the person in the chair.",
   "detail": "6 lines at 50px"
- },
- {
-  "slug": "periodontics",
-  "width": 390,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Gingivitis becomes periodontitis becomes bone loss becomes tooth loss. The bacteria that d",
-  "detail": "last line is \"disease.\" (10 lines, 356px wide)"
- },
- {
-  "slug": "results",
-  "width": 1440,
-  "kind": "runt",
-  "where": "statement > p.st-big.serif",
-  "text": "Every photograph on this page is a patient of this practice. No stock, no models, no borro",
-  "detail": "last line is \"smiles.\" (4 lines, 977px wide)"
  },
  {
   "slug": "results",
@@ -170,10 +98,10 @@
  {
   "slug": "results",
   "width": 1440,
-  "kind": "runt",
-  "where": "gallery > figcaption",
-  "text": "Full mouth reconstruction MICHAEL",
-  "detail": "last line is \"Michael\" (2 lines, 428px wide)"
+  "kind": "uneven",
+  "where": "gallery > div.wrap--wide.ga-grid > .ga-card",
+  "text": "Dental implant & crowns DRAG OR HOVER TO COMPARE",
+  "detail": "copy lengths 26/23/48 chars across one row"
  },
  {
   "slug": "results",
@@ -202,14 +130,6 @@
  {
   "slug": "results",
   "width": 991,
-  "kind": "runt",
-  "where": "gallery > figcaption",
-  "text": "Full mouth reconstruction MICHAEL",
-  "detail": "last line is \"Michael\" (2 lines, 446px wide)"
- },
- {
-  "slug": "results",
-  "width": 991,
   "kind": "uneven",
   "where": "films > div.wrap.vd-grid > .vd-card",
   "text": "What Are The Consequences Of Not Getting Wisdom Teeth Remove",
@@ -230,14 +150,6 @@
   "where": "gallery > figcaption",
   "text": "Implants & crowns EMILY",
   "detail": "last line is \"Emily\" (2 lines, 356px wide)"
- },
- {
-  "slug": "results",
-  "width": 390,
-  "kind": "runt",
-  "where": "gallery > figcaption",
-  "text": "Full mouth reconstruction MICHAEL",
-  "detail": "last line is \"Michael\" (2 lines, 356px wide)"
  },
  {
   "slug": "what-to-expect",
