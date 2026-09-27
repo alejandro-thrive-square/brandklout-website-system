@@ -1,0 +1,6 @@
+https://www.dfwsurgicalarts.com
+  siteScripts     keep    "https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js\nhttps://app.termly.io/resource-blocker/0962fd2c-70b8-432a-b540-e9bb6ce46a5c?autoBlock=off\nhttps://backend.leadconnectorhq.com/appengine/loc/AtD362nKfN6w4mwob4iV/pool/1ULKyOcYiRRAikT9TnhK/number_pool.js\nhttps://backend.leadconnectorhq.com/appengine/js/user_session.js"
+  connectOrigins  keep    "https://us.consent.api.termly.io\nhttps://services.leadconnectorhq.com\nhttps://services.msgsndr.com"
+
+plan only — pass --apply
+Assertion failed: !(handle->flags & UV_HANDLE_CLOSING), file src\win\async.c, line 94

@@ -1,198 +1,150 @@
 {
-  "base": "https://stone-surgical-arts-production.up.railway.app",
-  "uploadedAt": "2026-09-04T21:28:16.929Z",
+  "base": "https://staging.dfwsurgicalarts.com",
+  "uploadedAt": "2026-09-23T22:39:40.915Z",
   "map": {
     "dr-stone-candid.webp": {
-      "id": "uT0EhynBfJ4JoAa9me-IF",
-      "url": "/uploads/rU3cXy6KjqVw9TqSorAo7-dr-stone-candid.webp",
-      "uploadedAs": "dr-stone-candid.webp",
-      "width": 1400,
-      "height": 1400,
-      "variants": 5
+      "id": "-ULNSdpnJ4WDYJDYNjfcg",
+      "url": "/uploads/LD0Nm8uNupNcbcIjohQQ6-dr-stone-candid.webp",
+      "reused": true,
+      "uploadedAs": "dr-stone-candid.webp"
     },
     "dr-stone-desk.webp": {
-      "id": "_SOrajM75BQx-QBXXwlKp",
-      "url": "/uploads/5KKvhU7wiSdj-I-Y-44ej-dr-stone-desk.webp",
-      "uploadedAs": "dr-stone-desk.webp",
-      "width": 2000,
-      "height": 1500,
-      "variants": 6
+      "id": "71lRtRiB6avXdZ2aH8_pt",
+      "url": "/uploads/YJa31O5BNMevprD7LqvSx-dr-stone-desk.webp",
+      "reused": true,
+      "uploadedAs": "dr-stone-desk.webp"
     },
     "dr-stone-portrait.webp": {
       "id": "YREInzlvNV_bbvvwwHAlo",
       "url": "/uploads/ZwRZ5bomC_P2fNSa2IpF4-dr-stone-portrait.webp",
-      "uploadedAs": "dr-stone-portrait.webp",
-      "width": 1200,
-      "height": 1903,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "dr-stone-portrait.webp"
     },
     "dr-stone-smile.webp": {
-      "id": "gg5UNyGNuNBBcbxDbrj3Q",
-      "url": "/uploads/2xd4Qoin5oAK_4vLuTc9P-dr-stone-smile.webp",
-      "uploadedAs": "dr-stone-smile.webp",
-      "width": 1600,
-      "height": 1600,
-      "variants": 5
+      "id": "w4hrZFH5xzdWyBemZLmYF",
+      "url": "/uploads/Ivnc66yaHAxeILzQUC9LX-dr-stone-smile.webp",
+      "reused": true,
+      "uploadedAs": "dr-stone-smile.webp"
     },
     "dr-stone-standing.webp": {
-      "id": "JdKcW9mxJYMdzpfxEEEVf",
-      "url": "/uploads/l4vIpVRFQmWU0yrukd1wu-dr-stone-standing.webp",
-      "uploadedAs": "dr-stone-standing.webp",
-      "width": 1973,
-      "height": 2960,
-      "variants": 6
+      "id": "swu-ywsjKpNuNYTTtJjRS",
+      "url": "/uploads/U3SNkxrKml6t6uM1MqoOA-dr-stone-standing.webp",
+      "reused": true,
+      "uploadedAs": "dr-stone-standing.webp"
     },
     "dr-stone-steps.webp": {
-      "id": "e036gOZljga87ZC-HtB5N",
-      "url": "/uploads/OgH1YBO7mWGTwnBjX_c9L-dr-stone-steps.webp",
-      "uploadedAs": "dr-stone-steps.webp",
-      "width": 2000,
-      "height": 1333,
-      "variants": 6
+      "id": "eoP7y8e-k_7A4dXSw2d_k",
+      "url": "/uploads/dSIopgTmtU2EFWIYBjlLa-dr-stone-steps.webp",
+      "reused": true,
+      "uploadedAs": "dr-stone-steps.webp"
     },
     "ds-botox-brow.webp": {
       "id": "ic1PPjakD12tcg2D5zcJw",
       "url": "/uploads/P4cFnlnHFNG2TAvYq4xCD-ds-botox-brow.webp",
-      "uploadedAs": "ds-botox-brow.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-botox-brow.webp"
     },
     "ds-botox-silver.webp": {
       "id": "FngSxunQ5aUHOYGgDQoCy",
       "url": "/uploads/VQSl6mf_O3nKC0hg2cW00-ds-botox-silver.webp",
-      "uploadedAs": "ds-botox-silver.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-botox-silver.webp"
     },
     "ds-botox-smile.webp": {
       "id": "TephfkD2CjmOn6cxxKq7I",
       "url": "/uploads/i1wrsGQQuGiyKhPEZVBH9-ds-botox-smile.webp",
-      "uploadedAs": "ds-botox-smile.webp",
-      "width": 2200,
-      "height": 1237,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-botox-smile.webp"
     },
     "ds-dysport-chair.webp": {
       "id": "LDp5-1z8Chu20FqB4WrCY",
       "url": "/uploads/gBbNNvFXOgzuB7OqxSG-R-ds-dysport-chair.webp",
-      "uploadedAs": "ds-dysport-chair.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-dysport-chair.webp"
     },
     "ds-dysport-curls.webp": {
       "id": "_KJC7ctHx0eRvTOhIFZiX",
       "url": "/uploads/ChC8QBvOuVYL8aeg4GFJg-ds-dysport-curls.webp",
-      "uploadedAs": "ds-dysport-curls.webp",
-      "width": 1200,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "ds-dysport-curls.webp"
     },
     "ds-filler-fold.webp": {
       "id": "qqTWK-0c3I-hrqTRtn_V8",
       "url": "/uploads/TkkP8Q3zhN4Y6N4_bGe5P-ds-filler-fold.webp",
-      "uploadedAs": "ds-filler-fold.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-filler-fold.webp"
     },
     "ds-filler-smile.webp": {
       "id": "wu0m-0H98mSOcgSYU4bSc",
       "url": "/uploads/qM1hEeh0sOa8SGaDAw_K9-ds-filler-smile.webp",
-      "uploadedAs": "ds-filler-smile.webp",
-      "width": 1200,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "ds-filler-smile.webp"
     },
     "ds-hair-hand.webp": {
       "id": "tQ8L0kF-dWwnnUrlY15jE",
       "url": "/uploads/qJp1y8MrLMBNjR3QHmSlR-ds-hair-hand.webp",
-      "uploadedAs": "ds-hair-hand.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-hair-hand.webp"
     },
     "ds-hair-mark.webp": {
       "id": "Cao0iuT683M3PzR4vFVaJ",
       "url": "/uploads/btFiTf52liCw7nSNsdFP1-ds-hair-mark.webp",
-      "uploadedAs": "ds-hair-mark.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-hair-mark.webp"
     },
     "ds-hair-pen.webp": {
       "id": "2DE2AD_AkcRy-luEMVKtY",
       "url": "/uploads/nI3PcDjqwTFd60Bf3JCHI-ds-hair-pen.webp",
-      "uploadedAs": "ds-hair-pen.webp",
-      "width": 1200,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "ds-hair-pen.webp"
     },
     "ds-morpheus-cheek.webp": {
       "id": "IQNz0fXfrl9n2T0_6Oexi",
       "url": "/uploads/4cN6ZGfIoiZ0fY3zOHIMy-ds-morpheus-cheek.webp",
-      "uploadedAs": "ds-morpheus-cheek.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-morpheus-cheek.webp"
     },
     "ds-morpheus-jaw.webp": {
       "id": "WC6K757g-A8Ws9Uv4lDiD",
       "url": "/uploads/CdEQhLHCtunw-aU2tvsTw-ds-morpheus-jaw.webp",
-      "uploadedAs": "ds-morpheus-jaw.webp",
-      "width": 1200,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "ds-morpheus-jaw.webp"
     },
     "ds-peel-brush.webp": {
       "id": "KCHxLZ0AcX-CzVMRQ4YEv",
       "url": "/uploads/GqY_70EJk6WBaiR4UhISe-ds-peel-brush.webp",
-      "uploadedAs": "ds-peel-brush.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-peel-brush.webp"
     },
     "ds-peel-lift.webp": {
       "id": "4ak4VWwnKIspRJy0DPqPW",
       "url": "/uploads/f3l3uH4EB-wBIfxMdPvxa-ds-peel-lift.webp",
-      "uploadedAs": "ds-peel-lift.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-peel-lift.webp"
     },
     "ds-prp-draw.webp": {
       "id": "HFnalsuErRxzSJeME5ITd",
       "url": "/uploads/14h-pC2w0oesPOu0o6QQ4-ds-prp-draw.webp",
-      "uploadedAs": "ds-prp-draw.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-prp-draw.webp"
     },
     "ds-prp-syringes.webp": {
       "id": "Iu2jIBvyKKCdmXiQ5fzCl",
       "url": "/uploads/pN71Qw-GnYnoiU_b4ZhWS-ds-prp-syringes.webp",
-      "uploadedAs": "ds-prp-syringes.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-prp-syringes.webp"
     },
     "ds-prp-tray.webp": {
       "id": "Sxe7GknuJ43eCgWFsapVz",
       "url": "/uploads/HFwIwWBzJ0Z7M6vR2Nw4L-ds-prp-tray.webp",
-      "uploadedAs": "ds-prp-tray.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-prp-tray.webp"
     },
     "ds-prp-tube.webp": {
       "id": "pPhJQf_MDAi8OYse3mO4G",
       "url": "/uploads/dohGb_H2jDHufOU667dB4-ds-prp-tube.webp",
-      "uploadedAs": "ds-prp-tube.webp",
-      "width": 2200,
-      "height": 1238,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ds-prp-tube.webp"
     },
     "gen-implant-forms.webp": {
       "id": "H4nRaJniu-3en3QejLDv-",
@@ -207,10 +159,12 @@
       "uploadedAs": "gen-injectables.webp"
     },
     "gen-laser-device.webp": {
-      "id": "sZ-MSCDJNFT3K1MEyJPvd",
-      "url": "/uploads/LLHoEa96dj3dK_zTJC4pW-gen-laser-device.webp",
-      "reused": true,
-      "uploadedAs": "gen-laser-device.webp"
+      "id": "hCo3SpXJ6x1_JMAvJWY5x",
+      "url": "/uploads/8dJImC211gj5yWI_HgBt_-gen-laser-device.webp",
+      "uploadedAs": "gen-laser-device.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "gen-or-light.webp": {
       "id": "_2AJ8kw0sxROz1sVONfBY",
@@ -225,10 +179,12 @@
       "uploadedAs": "gen-procedure-room.webp"
     },
     "gen-skincare-shelf.webp": {
-      "id": "7xq4qNHlP3oCGw2BDxIr7",
-      "url": "/uploads/WhZJEji19KVmtRLab-A_0-gen-skincare-shelf.webp",
-      "reused": true,
-      "uploadedAs": "gen-skincare-shelf.webp"
+      "id": "g7X189sL5zm17NBoPj8_d",
+      "url": "/uploads/77IN7hXvebicvE2LOVZ_1-gen-skincare-shelf.webp",
+      "uploadedAs": "gen-skincare-shelf.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "gen-surgical-loupes.webp": {
       "id": "AZkN7kabWURuk4GeGf5SV",
@@ -345,10 +301,12 @@
       "uploadedAs": "m-skin-glow.webp"
     },
     "membership-still.webp": {
-      "id": "LpwIXen6cof6llLTGkn1E",
-      "url": "/uploads/aAKjukeOh2JLT_rbgpJNn-membership-still.webp",
-      "reused": true,
-      "uploadedAs": "membership-still.webp"
+      "id": "Zlwir77XxkZT5b7r7sNuG",
+      "url": "/uploads/v1RMzWMLriuIwKj8zOeeN-membership-still.webp",
+      "uploadedAs": "membership-still.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "p-eyes-mirror.webp": {
       "id": "x2XYNo6wUUDwORiPar346",
@@ -413,10 +371,8 @@
     "ssa-exterior.webp": {
       "id": "5pd-0WRE2LVf6Vno_xed4",
       "url": "/uploads/AAYryxo-nFmQVwyJFe-Zr-ssa-exterior.webp",
-      "uploadedAs": "ssa-exterior.webp",
-      "width": 3200,
-      "height": 1800,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "ssa-exterior.webp"
     },
     "ssa-front-desk.webp": {
       "id": "8DCYUg-yzfPH7YOmJ0cdb",
