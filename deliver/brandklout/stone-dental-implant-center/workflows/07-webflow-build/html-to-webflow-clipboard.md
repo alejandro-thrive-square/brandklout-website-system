@@ -1151,7 +1151,7 @@ command per project once `webflow-build.config.json` is filled in. See
 
 ## Version Control
 
-Follows [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Commit converter code,
+Follows [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Commit converter code,
 workflow directives, tests, and lightweight `.tmp` reference/artifact files when
 useful for review, replay, or handoff. Never commit secrets or binary/media
 assets.

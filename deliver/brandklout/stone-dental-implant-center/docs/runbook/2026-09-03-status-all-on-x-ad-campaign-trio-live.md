@@ -11,7 +11,7 @@ First campaign delivered. Three pages live under `/ads-landing-pages/` (folder
 
 Everything about the build — structure, brand, class system, copy rules, build scripts, publish
 recipe — is documented in
-[`workflows/04-design/ALL-ON-X-CAMPAIGN.md`](../../workflows/04-design/ALL-ON-X-CAMPAIGN.md).
+[`workflows/04-design/ALL-ON-X-CAMPAIGN.md`](../deliver/brandklout/stone-dental-implant-center/workflows/04-design/ALL-ON-X-CAMPAIGN.md).
 Read it before touching these pages.
 
 ## Scope note — Stone is three brands, this worktree owns one

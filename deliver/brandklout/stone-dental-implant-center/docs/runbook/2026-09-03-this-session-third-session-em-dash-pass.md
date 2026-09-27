@@ -81,7 +81,7 @@ campaign-specific form for attribution) and needs another full-site publish.
    Brandklout engagement price anywhere under `deliver/brandklout/`.
 9. **`docs/project-overview.md` in this folder is stale** — describes all three Stone brands and
    predates the campaign. Trust this runbook and
-   [`ALL-ON-X-CAMPAIGN.md`](../../workflows/04-design/ALL-ON-X-CAMPAIGN.md).
+   [`ALL-ON-X-CAMPAIGN.md`](../deliver/brandklout/stone-dental-implant-center/workflows/04-design/ALL-ON-X-CAMPAIGN.md).
 
 10. **House style: no em dashes in client copy.** Alejandro asked for every `—` stripped from the
     All-on-X trio on 2026-09-03. Treat this as standing for Brandklout landing-page copy: write

@@ -12,7 +12,7 @@ Center** All-on-X ad page. It is published to the **Webflow subdomain only**:
 `https://stone-surgical-arts.webflow.io/ads-landing-pages/all-on-x`. The four custom domains still
 serve the previous version. **The live full-site publish is pending Alejandro's go-ahead.**
 
-Read [`workflows/04-design/ARVADA-PARITY-GAP.md`](../../workflows/04-design/ARVADA-PARITY-GAP.md)
+Read [`workflows/04-design/ARVADA-PARITY-GAP.md`](../deliver/brandklout/stone-dental-implant-center/workflows/04-design/ARVADA-PARITY-GAP.md)
 first: it holds the parity table, the asset and video inventory, the build recipe, the five bugs
 found in QA, and the open items for the client. Source of truth for the page is
 `workflows/04-design/.tmp/build/content_v2.py`, driven by `build_v2.py`.
