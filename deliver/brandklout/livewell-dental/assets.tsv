@@ -1,0 +1,16 @@
+# livewell-dental media in R2 at clients/livewell-dental/<path>. Restore: node scripts/assets.mjs pull livewell-dental
+# sha256	size	path
+422a6c6b9356e5a847b9d2e01da1674217feed838a180c49ea8cef142c64add0	436	process-outputs/23-termly-ghl-consent/.tmp/as-published.txt
+87f67545241c9f58d2609462bc5077b63feebb8bf910c4870fdbb539ad6b38c6	1910	process-outputs/23-termly-ghl-consent/.tmp/hosted-2.3.0.js
+4525b8f479ab25e39e149f8d0b79d8d24538aaf563b0b4c111b60c64b3b7bbcc	266	process-outputs/23-termly-ghl-consent/.tmp/merge.txt
+5087873e11f56fb4be2129ef8ac76ac6ee64b15e604944a05a1474a8a547ec5c	628	process-outputs/23-termly-ghl-consent/.tmp/minify.txt
+b629087e7f401c9e9fc42eb45d31cb9d02a6cef84f777c71b2493c6b9b369206	2672	process-outputs/23-termly-ghl-consent/.tmp/preview-gpc.txt
+e84baa17ae4a6f6e65a70aba0a64fced84b276ebb08db62d273729378fc72428	4551	process-outputs/23-termly-ghl-consent/.tmp/preview.txt
+c223eaca096e9e271b5572092dd0fbd6136871db34b4bb7124ce76bc1469a745	2944	process-outputs/23-termly-ghl-consent/.tmp/staging-gpc.txt
+c5cb823479f0ef0943b6f95d6c53c544349f286baf6add021fdeb6e4da2bef96	4464	process-outputs/23-termly-ghl-consent/.tmp/staging.txt
+776195adbf8cbab1dcabce2869b478105e2e998a31570681fd10b94021c61637	3546592	workflows/04-design/.tmp/final-design/preview-1440.png
+53f15848d7bf40946db7461ef4a1d7b18cf0bb2ed7b04086fdd4dc0a52e24f17	1926531	workflows/04-design/.tmp/final-design/preview-390.png
+86c8ced484a0b5f8f4f0778b3e6f842f231b02a0b5ffb66472d8cab8680f8880	2343042	workflows/04-design/.tmp/final-design/preview-cosmetic-1440.png
+0deed8ef40da0f7ebca6b70d7b07dbf8afea2c354490535c22c55d23efae499d	897718	workflows/04-design/.tmp/final-design/preview-cosmetic-390.png
+f48666aeb560b3a2669adf2b826ebe58164484d5b26f8f3d655b164a6fe0cbc2	3148172	workflows/04-design/.tmp/final-design/preview-veneers-1440.png
+cc6226505800fdc3abb73a73dc81a8da9780a349ace566024e469f2449c7c11b	1182045	workflows/04-design/.tmp/final-design/preview-veneers-390.png
