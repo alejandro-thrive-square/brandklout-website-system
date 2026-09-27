@@ -21,7 +21,7 @@ import { execSync } from 'node:child_process'
 
 const arg = (n) => { const i = process.argv.indexOf(n); return i >= 0 ? process.argv[i + 1] : null }
 const has = (n) => process.argv.includes(n)
-const git = (c) => execSync(`git ${c}`, { encoding: 'utf8' }).trim()
+const git = (c) => execSync(`git ${c}`, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }).trim()
 const SHARED = new Set()   // deliver/brandklout/ holds client folders only
 
 let files
