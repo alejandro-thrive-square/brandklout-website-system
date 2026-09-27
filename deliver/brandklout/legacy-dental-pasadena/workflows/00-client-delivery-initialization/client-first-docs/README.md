@@ -12,4 +12,4 @@ Notes:
 
 ## Version Control
 
-Follows the root rules in [SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md). Re-extract and replace `client-first-docs.md` in one atomic commit when Finsweet updates the docs.
+Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Re-extract and replace `client-first-docs.md` in one atomic commit when Finsweet updates the docs.
