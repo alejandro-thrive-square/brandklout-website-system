@@ -877,7 +877,9 @@ for (const r of results) {
           ? 'Cloudflare edge script (emails are decoded statically above)'
           : /cdn\.userway\.org/i.test(`${s.src?.remote || ''} ${s.text || ''}`)
             ? 'UserWay (Sienna is site-wide via brandklout.embed-origins since 2026-09-12; both showed two widgets)'
-            : null
+            : /GTM-K8N3JK3Q/.test(`${s.src?.remote || ''} ${s.text || ''}`)
+              ? "GTM-K8N3JK3Q (the outgoing agency's container, removed 2026-09-28; GTM-5XR78DN7 is the practice's)"
+              : null
     if (why) {
       skipped[why] = (skipped[why] || 0) + 1
       if (!s.inHead) bodyIds[s.n] = null

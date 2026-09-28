@@ -22,7 +22,7 @@
   // rather than by an allow-list of production hosts, so a new production host keeps working.
   if (/^staging\./i.test(location.hostname)) return
   if (window.BrandkloutSiteTags) return
-  window.BrandkloutSiteTags = '1.2.0'
+  window.BrandkloutSiteTags = '1.2.1'
 
   var GTM_ID = 'GTM-5XR78DN7'
   var GHL = [
@@ -67,7 +67,19 @@
      consent is not accepted"), made knowingly. It was briefly tagged
      type="text/plain" data-categories="advertising" earlier the same day;
      do not put that back without a new client decision. The Termly banner
-     still governs the GTM tags and ahrefs - just not call tracking. */
+     still governs the GTM tags and ahrefs - just not call tracking.
+     1.2.0 removed this function along with the hold and left the call below,
+     so the asset threw `ghl is not defined` and neither the pool nor the
+     <noscript> ran from 2026-09-22 to 2026-09-28. Restored in 1.2.1. */
+  function ghl() {
+    for (var i = 0; i < GHL.length; i++) {
+      var s = document.createElement('script')
+      s.src = GHL[i]
+      s.async = false
+      document.head.appendChild(s)
+    }
+  }
+
   ghl()
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', noscript)
   else noscript()

@@ -57,8 +57,11 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   code asset `src/scripts/000-brandklout-tags.js` (source `workflows/21-instatic-upload/tags/`),
   gated to `*.ifadentistry.com` **and excluded on `staging.*`** since 2026-09-18 — the staging
   clone is a subdomain of the production zone and would otherwise fire both. Gate
-  `tags/verify-tags.mjs`. Production's published copy is deliberately one line behind the source
-  (the line is a no-op there; a publish bakes all 59 pages, so it waits for the next real one).
+  `tags/verify-tags.mjs` (all passed 2026-09-28). **Production's only GTM container since
+  2026-09-28**: the outgoing agency's `GTM-K8N3JK3Q` is blanked in `site.js` and skipped by
+  `prepare-wp.mjs`. Asset `1.2.1` restores `ghl()`, which 1.2.0 deleted: **the number pool did not
+  run on production from 2026-09-22 to 2026-09-28.** See
+  [runbook/2026-09-28-old-gtm-removed-pool-restored.md](runbook/2026-09-28-old-gtm-removed-pool-restored.md).
 - **Accessibility widget**: since 2026-09-12 this is Sienna, injected on every page by `brandklout.embed-origins` `siteScripts`, the same as every other Instatic site. The WordPress site's UserWay is gone: its registry item in `site.js` is blanked and `prepare-wp.mjs` skips it. The statement no longer names UserWay. See [runbook/2026-09-12-userway-replaced-by-sienna.md](runbook/2026-09-12-userway-replaced-by-sienna.md).
 - **Scrape**: `workflows/01-content-intake/.tmp/current-site-scrape/current-site-inventory.md`, which is now the only copy of the WordPress site we control.
 - **Local only, not in git**: `site/` (a working `file://` mirror), `raw-html/`, `screenshots/desktop/`, `media-library/` (237 WP originals plus `vimeo/`, `vimeo-instatic/` re-encodes, `vimeo-posters/`), and `21-instatic-upload/.tmp/` except the media map. If they are missing, rebuild them; see the intake directive's Version Control section.
@@ -77,9 +80,10 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   chapter 03 before/after on a home page; a WebKit pass at 1512×735. The Asana Style Guide task is
   still open.
 - **Refer a Patient** (`patient-referrals`, Fluent #3) still posts to WordPress `admin-ajax.php`, which no longer exists at this domain. It needs its own GHL form, or a decision to drop it.
-- **Two GTM containers are on every page.** `GTM-K8N3JK3Q` and Site Kit's `GT-NBJ3HCBV` /
-  `G-STF00595` come from the WordPress clone; `GTM-5XR78DN7` is ours. Decide which owns
-  measurement before trusting either.
+- **Site Kit's Google tag `GT-NBJ3HCBV` still loads beside `GTM-5XR78DN7`** (replayed from the
+  WordPress clone by `site.js`, items `_xs27_EDLa` + three inline configs). The old container
+  `GTM-K8N3JK3Q` went 2026-09-28. If `GTM-5XR78DN7` fires the same GA4 property, pageviews are
+  counted twice; blank it the same way with `tags/remove-old-gtm.mjs` as the pattern.
 - **The GHL form's SMS consent wording contradicts itself** ("non-marketing … special offers,
   discounts"), which is what A2P vetting reads. It is fixed in GoHighLevel, not here.
 - **After WordPress is retired**: drop `a:bill.wordkeeper.net`, `mx` and `a` from SPF. Cancel the agency's hosting only once the client confirms nothing else lives there.
