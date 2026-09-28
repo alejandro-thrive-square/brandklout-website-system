@@ -11,7 +11,8 @@
  *     README.md, RUNBOOK.md, docs/          the client's own record (never overwritten)
  *     scenario-N-name/NN-step/              directive + scripts copied from main
  *     scenario-N-name/NN-step/output/       the step's assets, code and RUNBOOK.md (never overwritten)
- *     tools/<toolkit>/                      copies of the toolkits the started steps list
+ *     tools/<toolkit>/                      copies of the toolkits the started steps list, plus every
+ *                                           toolkit those declare in their own toolkit.json "requires"
  *
  * Usage (from anywhere inside the repo):
  *   node scripts/scenario.mjs list
@@ -61,6 +62,17 @@ const toolkitsOf = (scen, st) => {
   const f = path.join(PROCESS, scen, st, 'tools.json')
   return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).toolkits || [] : []
 }
+/** A toolkit's own toolkit.json lists the toolkits its scripts import or run; copy those too, transitively. */
+const requiresOf = (kit) => {
+  const f = path.join(PROCESS, 'tools', kit, 'toolkit.json')
+  return fs.existsSync(f) ? JSON.parse(fs.readFileSync(f, 'utf8')).requires || [] : []
+}
+function withRequires(kits) {
+  const all = new Set(kits), queue = [...kits]
+  while (queue.length) for (const r of requiresOf(queue.shift())) if (!all.has(r)) { all.add(r); queue.push(r) }
+  for (const k of all) if (!fs.existsSync(path.join(PROCESS, 'tools', k))) throw new Error(`toolkit "${k}" is listed but does not exist in deliver/process/tools/`)
+  return all
+}
 function clientDir(client) {
   if (!client || SHARED.has(client) || !/^[a-z0-9-]+$/.test(client)) throw new Error(`"${client}" is not a client slug (lowercase, dashes)`)
   return path.join(CLIENTS, client)
@@ -106,8 +118,8 @@ function copyScenario(client, scen, { starting }) {
     for (const sub of ['assets', 'code']) writeIfMissing(path.join(out, sub, '.gitkeep'), '', written)
     for (const k of toolkitsOf(scen, st)) kits.add(k)
   }
-  for (const k of kits) copyTree(path.join(PROCESS, 'tools', k), path.join(dir, 'tools', k), written)
-  const meta = { scenario: scen, fromCommit: head(), updated: today, steps: steps(scen), toolkits: [...kits].sort() }
+  for (const k of withRequires(kits)) copyTree(path.join(PROCESS, 'tools', k), path.join(dir, 'tools', k), written)
+  const meta = { scenario: scen, fromCommit: head(), updated: today, steps: steps(scen), toolkits: [...withRequires(kits)].sort() }
   const metaPath = path.join(dst, '.process.json')
   const prev = fs.existsSync(metaPath) ? JSON.parse(fs.readFileSync(metaPath, 'utf8')) : null
   if (prev) meta.started = prev.started; else meta.started = today

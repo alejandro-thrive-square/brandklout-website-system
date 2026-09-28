@@ -2,7 +2,7 @@
 
 Local, dependency-free MCP server that makes **Client-First class reuse the default**
 when building Webflow pages from coded sections — and blocks broken payloads before
-they reach Webflow. It serves the Webflow sites (Scenario 6 · Webflow sites).
+they reach Webflow. It serves the Webflow sites ([Scenario 6 · Webflow Sites](../../deliver/process/scenario-6-webflow-sites/README.md)).
 
 Built 2026-07-30 after a diagnosis of the Dr. Nahlah Webflow conversion found three defects the
 existing toolchain could not see (the diagnosis lived on that client branch's old

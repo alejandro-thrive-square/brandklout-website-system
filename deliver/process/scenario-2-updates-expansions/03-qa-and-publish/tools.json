@@ -2,7 +2,7 @@
   "step": "scenario-2-updates-expansions/03-qa-and-publish",
   "toolkits": [
     "instatic-api-sync",
-    "termly-ghl-consent",
-    "webflow-build"
+    "instatic-site",
+    "termly-ghl-consent"
   ]
 }

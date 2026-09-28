@@ -4,7 +4,8 @@
 
 Build the site on the VPS, get the core pages approved, then build and upload the complete site to
 Instatic staging for team review. The design bar is
-[`DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md).
+[`DESIGN-STANDARD.md`](./DESIGN-STANDARD.md), which lives beside this directive; its static motion gate
+is `scripts/journey-audit.mjs`.
 
 ## Inputs
 
@@ -114,8 +115,8 @@ Instatic staging for team review. The design bar is
 - `tools/instatic-site/` — push pipeline, ops, local and live gates, images.
 - `tools/instatic-api-sync/` — fonts, CSS into the Styles registry, parity checks.
 - `tools/instatic-embeds/` — Embed blocks and site scripts.
-- `tools/gsap-animations/`, `tools/scroll-film-studio/` — motion modules and the scroll-film skill.
-- `scripts/fluid-root.mjs`, `deliver/scripts/journey-audit.mjs`.
+- `DESIGN-STANDARD.md` (this folder) — the design and motion bar, GSAP self-hosted.
+- `scripts/journey-audit.mjs` (this folder) — static journey gate; `scripts/fluid-root.mjs` (repo root).
 
 ## Outputs
 

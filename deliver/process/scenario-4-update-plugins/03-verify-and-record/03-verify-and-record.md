@@ -70,7 +70,8 @@ record a later reader can trust without having been here.
 
 - Do record hosts, versions and the commit SHA in the runbook, never a password.
 - Do check the head in a rendered page for WordPress clones (`seo-head-check.mjs --render`).
-- Don't call a plugin broken from a red `verify-embed-editor.mjs`; run the canvas gate first.
+- Don't call a plugin broken from one red gate; `verify-embed-canvas.mjs` (the editor canvas shows
+  the card, publishes nothing) and `verify-embed-scripts.mjs` (the published page) are the embed gates.
 - Don't mark the rollout done while `status` still shows PARITY for the plugin.
 
 ## Tools

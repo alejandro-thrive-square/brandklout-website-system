@@ -150,14 +150,15 @@ Non-negotiables, repeated here because they are the ones most likely to be skipp
 pressure:
 
 - **Reference URLs are structure and content only.** Screenshot them, take the section order and
-  copy angles, then design original work to [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) —
+  copy angles, then design original work to [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) —
   awwwards-grade, motion-led, benchmarked against the Dr. Nahlah build. Copying the reference's
   visual design is a failure, and so is shipping a plain templatised page.
 - **Build locally**, at
   `deliver/brandklout/<client>/scenario-0-new-site/03-design-build/output/<page-slug>/`, and report the full path.
 - **Local approval comes before publishing.** New sites are built on Instatic; on a Webflow site
   use the shared `webflow-brandklout` grant only for the exact site ID in the client's access file,
-  and follow the Webflow build directive in `deliver/process/` (the HTML paste converter is retired).
+  and follow [Scenario 6 · Webflow Sites](../process/scenario-6-webflow-sites/README.md) (the HTML
+  paste converter is retired).
 - **Never invent testimonials, reviews, patient stories, or statistics.** Real practices, real
   content, sourced from the client's own material.
 - **Never write to Asana.** Comments and status changes notify real Brandklout staff.

@@ -2,7 +2,9 @@
  * staging-verify.mjs — does the page we BUILT in Webflow still behave like the
  * page we DESIGNED locally?
  *
- *   node deliver/scripts/staging-verify.mjs \
+ * Lives in scenario-6-webflow-sites/03-qa-and-publish/scripts/; run it from that step folder.
+ *
+ *   node scripts/staging-verify.mjs \
  *     --url https://grand-mission.webflow.io/implant-ai \
  *     --baseline deliver/brandklout/grand-mission-dentistry/workflows/04-design/output/implant-landing-page
  *

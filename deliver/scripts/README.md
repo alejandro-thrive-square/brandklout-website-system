@@ -1,8 +1,9 @@
 # Brandklout Cross-Client Scripts
 
-Scripts that serve every client rather than one scenario step. Today that is the Asana set below.
-`journey-audit.mjs` (motion/journey gate) and `staging-verify.mjs` are moving into the scenario steps
-that use them; until they do, they still sit in this folder.
+Scripts that serve every client rather than one scenario step: the Asana set below. Gates that
+belong to one step live in that step: `journey-audit.mjs` in
+`deliver/process/scenario-0-new-site/03-design-build/scripts/`, `staging-verify.mjs` in
+`deliver/process/scenario-6-webflow-sites/03-qa-and-publish/scripts/`.
 
 ## Asana
 

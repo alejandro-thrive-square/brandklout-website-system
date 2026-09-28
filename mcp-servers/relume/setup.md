@@ -42,7 +42,7 @@ It writes nothing anywhere.
 ## What it is for
 
 Pulling Relume library components/sections as a source of structure when building or converting
-pages for the Webflow sites (Scenario 6 · Webflow sites). It complements, and does not replace,
+pages for the Webflow sites ([Scenario 6 · Webflow Sites](../../deliver/process/scenario-6-webflow-sites/README.md)). It complements, and does not replace,
 the `webflow-clientfirst` class-reuse server.
 
 > [!WARNING]

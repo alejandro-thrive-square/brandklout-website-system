@@ -50,7 +50,8 @@ Brandklout before treating them as real work.
 ## Build platform
 
 New sites are built on **Instatic** (Scenario 0, `deliver/process/scenario-0-new-site/`). Sites that
-are already live on **Webflow** stay there and get updates through Scenario 2. GoHighLevel appears only
+are already live on **Webflow** stay there and get updates through Scenario 6
+(`deliver/process/scenario-6-webflow-sites/`); live Instatic sites through Scenario 2. GoHighLevel appears only
 as a *lead destination* (forms, tracking numbers), not as the page builder, so
 `sites.leadconnectorhq.com` references are structure references, not the platform.
 
@@ -75,13 +76,13 @@ Confirmed with the client 2026-08-05:
 > design.**
 
 So the reference is a **wireframe and a content brief**, not a visual target. The visual design is
-ours to author, and the bar is set by [DESIGN-STANDARD.md](./DESIGN-STANDARD.md): **awwwards-grade,
+ours to author, and the bar is set by [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md): **awwwards-grade,
 motion-led, high-interaction**, benchmarked against the Dr. Nahlah build. These are paid-traffic
 pages competing against the same handful of dental-PPC templates everyone else runs, so looking
 like the reference is a commercial failure, not a success.
 
 > [!IMPORTANT]
-> Read [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
+> Read [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
 > a plain templatised page on the first Grand Mission pass; the standard replaces the adjective
 > with a checklist.
 

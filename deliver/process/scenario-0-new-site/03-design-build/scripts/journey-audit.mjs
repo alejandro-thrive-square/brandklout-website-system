@@ -12,20 +12,31 @@
  * Resolves linked <link href>/<script src> CSS and JS, because the first round of pages kept their
  * entire motion layer in a shared external file and a body-only grep reported a false zero.
  *
- * Usage (from any worktree, or the orchestration checkout with --all):
- *   node deliver/scripts/journey-audit.mjs <dir-containing-index.html> [...]
- *   node deliver/scripts/journey-audit.mjs --all
+ * Lives in scenario-0-new-site/03-design-build/scripts/ beside DESIGN-STANDARD.md; 04-qa runs it
+ * from the same scenario copy.
+ *
+ * Usage (from any checkout of the repo):
+ *   node <scenario-0>/03-design-build/scripts/journey-audit.mjs <dir-containing-index.html> [...]
+ *   node <scenario-0>/03-design-build/scripts/journey-audit.mjs --all
+ *
+ * --all audits every client folder in every worktree of this repository (`git worktree list`).
+ * A client's own bk-* branch is newer than main's snapshot, so a client found in a bk-* worktree is
+ * not audited again from main.
  */
 
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, resolve, basename } from 'node:path';
+import { execSync } from 'node:child_process';
 
-const WORKTREE_ROOT = 'C:/Users/ACER/orca/workspaces/Webzite Agentic Workflow';
-const CLIENTS = [
-  ['bk-grand-mission', 'grand-mission-dentistry'],
-  ['bk-arvada', 'arvada-dental-center'],
-  ['bk-mason-park', 'mason-park'],
-];
+/** Every worktree of this repository, bk-* branches first so they win over main's snapshot. */
+function worktrees() {
+  const out = execSync('git worktree list --porcelain', { encoding: 'utf8' });
+  const list = out.split(/\r?\n\r?\n/).map((b) => ({
+    path: (b.match(/^worktree (.+)$/m) || [])[1],
+    branch: ((b.match(/^branch refs\/heads\/(.+)$/m) || [])[1]) || '',
+  })).filter((w) => w.path);
+  return list.sort((a, b) => Number(!a.branch.startsWith('bk-')) - Number(!b.branch.startsWith('bk-')));
+}
 
 /** Count non-overlapping matches, guarding against a global regex carrying lastIndex across calls. */
 const count = (text, re) => (text.match(new RegExp(re.source, 'g')) ?? []).length;
@@ -90,17 +101,24 @@ const skipped = [];
 
 function discover() {
   const out = [];
-  for (const [wt, client] of CLIENTS) {
-    // Scenario 0 layout first; client branches built before 2026-09-23 still use 04-design.
-    const root = ['scenario-0-new-site/03-design-build/output/code/site-src', 'workflows/03-design-build/output', 'workflows/04-design/output']
-      .map((p) => join(WORKTREE_ROOT, wt, 'deliver/brandklout', client, p))
-      .find((p) => existsSync(p));
-    if (!root) continue;
-    for (const e of readdirSync(root)) {
-      const d = join(root, e);
-      if (statSync(d).isDirectory() && existsSync(join(d, 'index.html'))) out.push([client, e, d]);
+  const seen = new Set();
+  for (const wt of worktrees()) {
+    const clientsDir = join(wt.path, 'deliver/brandklout');
+    if (!existsSync(clientsDir)) continue;
+    for (const client of readdirSync(clientsDir)) {
+      if (seen.has(client) || !statSync(join(clientsDir, client)).isDirectory()) continue;
+      // Scenario 0 layout first; client branches built before 2026-09-23 still use 04-design.
+      const root = ['scenario-0-new-site/03-design-build/output/code/site-src', 'workflows/03-design-build/output', 'workflows/04-design/output']
+        .map((p) => join(clientsDir, client, p))
+        .find((p) => existsSync(p));
+      if (!root) continue;
+      seen.add(client);
+      for (const e of readdirSync(root)) {
+        const d = join(root, e);
+        if (statSync(d).isDirectory() && existsSync(join(d, 'index.html'))) out.push([client, e, d]);
+      }
+      if (existsSync(join(root, 'index.html'))) skipped.push(`${client}/index.html (package-root drafts index)`);
     }
-    if (existsSync(join(root, 'index.html'))) skipped.push(`${client}/index.html (package-root drafts index)`);
   }
   return out;
 }
@@ -111,7 +129,7 @@ const targets = args.includes('--all')
   : args.map((a) => ['', basename(a), resolve(a)]);
 
 if (!targets.length) {
-  console.error('No pages found. Pass page directories, or --all from the orchestration checkout.');
+  console.error('No pages found. Pass page directories, or --all from inside a checkout of this repository.');
   process.exit(2);
 }
 

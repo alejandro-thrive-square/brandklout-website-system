@@ -5,7 +5,7 @@ Scripts for changing a live Brandklout Webflow site through the Webflow MCP. The
 Designer tree, adding pages and sections natively, registering site scripts, uploading assets,
 auditing, and publishing without shipping someone else's work.
 The process that uses them is
-[scenario 2 · updates and expansions](../../scenario-2-updates-expansions/README.md). Read that first.
+[Scenario 6 · Webflow Sites](../../scenario-6-webflow-sites/README.md). Read that first.
 
 Rewritten 2026-09-23 to match what the client runs actually did. The earlier version described a
 full-site build pipeline (clipboard paste of converted HTML, a config-driven orchestrator, an hourly
@@ -71,10 +71,12 @@ and the publish and register writes were not exercised.
   fails. Batch, and let `wf.mjs` back off.
 
 ## Using the scripts in a client worktree
-Import them by path from `deliver/process/tools/webflow-build/`. Do not copy them into the client
-folder: copies drift (the client `wfmcp.mjs`, `wf.mjs` and `lint-css.mjs` copies had already diverged).
+`node scripts/scenario.mjs start <client> 6` copies this toolkit into the client folder as
+`tools/webflow-build/`, and `scenario.mjs update <client>` refreshes it from main. Never edit that
+copy to fix a script: fix it here on main (hand-edited copies had already diverged: `wfmcp.mjs`,
+`wf.mjs`, `lint-css.mjs`).
 Client-specific build scripts (content JSON, templates, one-off fixes) stay in
-`deliver/brandklout/<client>/scenario-2-updates-expansions/<step>/output/<date>-<slug>/` and import `wf.mjs`.
+`deliver/brandklout/<client>/scenario-6-webflow-sites/<step>/output/<date>-<slug>/` and import `wf.mjs`.
 
 ## Retired paste route (removed)
 The clipboard converter built the first Dr. Nahlah, Mason Park, Grand Mission and Arvada v1 pages,

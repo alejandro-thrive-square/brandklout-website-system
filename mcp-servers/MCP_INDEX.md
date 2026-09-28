@@ -16,11 +16,11 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 
 | MCP Server | Type | Config Scope | Access Levels | Setup Doc | Purpose |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Webflow | HTTP (remote) | Project | Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing on the Webflow sites (Scenario 6 · Webflow sites) |
-| Webflow Client-First | stdio (local) | Project | Global | [webflow-clientfirst/setup.md](./webflow-clientfirst/setup.md) | Client-First class reuse and payload validation for Webflow builds (Scenario 6) |
+| Webflow | HTTP (remote) | Project | Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing on the Webflow sites ([Scenario 6](../deliver/process/scenario-6-webflow-sites/README.md)) |
+| Webflow Client-First | stdio (local) | Project | Global | [webflow-clientfirst/setup.md](./webflow-clientfirst/setup.md) | Client-First class reuse and payload validation for Webflow builds ([Scenario 6](../deliver/process/scenario-6-webflow-sites/README.md)) |
 | Instatic (per site) | HTTP (remote) | Project | Client | This index, below | The MCP endpoint an Instatic instance serves at `/_instatic/mcp`. One entry per site that needs it |
 | Asana | HTTP (remote) | Project | Client | [asana/setup.md](./asana/setup.md) | Reading a partner's/client's project-management workspace: tasks, projects, assignees, comments — used to pick up delegated work. **Blocked in Claude Code** (token-exchange bug); accessed via direct-token scripts. |
-| Relume | HTTP (remote) | Project | Global | [relume/setup.md](./relume/setup.md) | Reading the Relume component library as a source of page/section structure for the Webflow sites (Scenario 6). Read-only, no client account involved. Registered 2026-08-10 as `relume`, **awaiting OAuth** (scope `relume:components`). |
+| Relume | HTTP (remote) | Project | Global | [relume/setup.md](./relume/setup.md) | Reading the Relume component library as a source of page/section structure for the Webflow sites ([Scenario 6](../deliver/process/scenario-6-webflow-sites/README.md)). Read-only, no client account involved. Registered 2026-08-10 as `relume`, **awaiting OAuth** (scope `relume:components`). |
 
 ## Server Instances (One Per Principal)
 

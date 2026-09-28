@@ -13,8 +13,10 @@ dental-implant-consultation, thank-you-implants}`). **Follow its flow beat for b
 and Mason Park's first cuts improvised the flow, and both were rejected. Spend the originality on
 the client's own design system, not on the order of the sections.
 
-Works on both platforms: Instatic (Dr. Nahlah, Mason Park) and Webflow (Livewell, Stone Dental,
-Arvada).
+Designed here for both platforms. Instatic sites (Dr. Nahlah, Mason Park) are built here too; Webflow
+sites (Livewell, Stone Dental, Arvada) are built in
+[Scenario 6 · Webflow Sites](../scenario-6-webflow-sites/02-build/02-build.md) (section K) and come
+back to step 03 here for the gates.
 
 ## Steps
 

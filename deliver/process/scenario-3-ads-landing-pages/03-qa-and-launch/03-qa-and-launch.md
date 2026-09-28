@@ -71,7 +71,7 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    conversion in Google Ads or Tag Assistant. Tell Brandklout to delete the test lead.
 10. **Production.** Publish, then re-run steps 1 to 6 with `--origin` set to production.
     Instatic: check `publish/status` before publishing so nothing unexpected rides along. Webflow:
-    publish from the Designer; know which domains it reaches.
+    publish through Scenario 6 step 03; know which domains it reaches.
 11. **Old routes.** If ads previously pointed at root slugs, 301 them to the nested pages
     (Webflow: 301 redirects in site settings; Instatic: the Cloudflare Worker from scenario 1).
     Ask Brandklout to update the ads' final URLs anyway.

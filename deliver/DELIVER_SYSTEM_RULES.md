@@ -10,10 +10,11 @@ the same scenarios; when the board and these files disagree, fix both.
 | --- | --- | --- | --- |
 | 0 | Website from Scratch | [process/scenario-0-new-site](./process/scenario-0-new-site/README.md) | Instatic on Railway, Cloudflare |
 | 1 | Website Migration | [process/scenario-1-migration](./process/scenario-1-migration/README.md) | capture the old site, then Scenario 0 |
-| 2 | Website Updates / Expansions | [process/scenario-2-updates-expansions](./process/scenario-2-updates-expansions/README.md) | Webflow (live clients) and Instatic |
-| 3 | Ads Landing Pages | [process/scenario-3-ads-landing-pages](./process/scenario-3-ads-landing-pages/README.md) | Instatic and Webflow |
+| 2 | Website Updates / Expansions | [process/scenario-2-updates-expansions](./process/scenario-2-updates-expansions/README.md) | Instatic (live sites) |
+| 3 | Ads Landing Pages | [process/scenario-3-ads-landing-pages](./process/scenario-3-ads-landing-pages/README.md) | designed for both; built here on Instatic, in Scenario 6 on Webflow |
 | 4 | Update Plugins Across Sites | [process/scenario-4-update-plugins](./process/scenario-4-update-plugins/README.md) | every Instatic site, staging then production |
 | 5 | Instatic Release Update | [process/scenario-5-instatic-release-update](./process/scenario-5-instatic-release-update/README.md) | every Railway instance, staging then production, no data loss |
+| 6 | Webflow Sites | [process/scenario-6-webflow-sites](./process/scenario-6-webflow-sites/README.md) | Webflow (seven live clients), native builds over the MCP |
 
 The numbers follow the board. Full index:
 [process/PROCESS_INDEX.md](./process/PROCESS_INDEX.md).
@@ -26,10 +27,13 @@ board draws this).
 - **The system (main):** `deliver/process/`.
   - `scenario-N-name/NN-step/` is one folder per step: the directive `NN-step.md`, the step's own
     `scripts/`, `tools.json` (the shared toolkits it uses) and an empty `output/`.
-  - `tools/<toolkit>/` holds the shared toolkits, one copy each. Plus the rules, `scripts/`,
+  - `tools/<toolkit>/` holds the shared toolkits, one copy each. A toolkit whose scripts import or
+    run another toolkit lists it in its own `toolkit.json` (`"requires"`); `scenario.mjs` copies the
+    whole chain, so a step's `tools.json` names only what the step itself runs. Plus the rules, `scripts/`,
     `deliver/docs/` and `deliver/scripts/`.
 - **`deliver/brandklout/` holds client folders and nothing else.** Shared standards live in
-  `deliver/docs/`, cross-client scripts (Asana pulls, journey-audit, staging-verify) in `deliver/scripts/`.
+  `deliver/docs/`, cross-client scripts (the Asana pulls) in `deliver/scripts/`. A standard or gate that
+  belongs to one step lives in that step (the design standard and journey audit in Scenario 0 step 03).
 - **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, a
   mirror of the process layout for the scenarios it runs:
   - `README.md` (which scenarios, from which commit), `RUNBOOK.md` (standing state and a row per run),
@@ -75,7 +79,7 @@ board draws this).
 
 ## 4. Quality bar
 
-- [DESIGN-STANDARD.md](./docs/DESIGN-STANDARD.md) is the design bar; brand authority is
+- [DESIGN-STANDARD.md](./process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) is the design bar; brand authority is
   resolved before tokens, and a canary page is approved before the rest of the pages are built.
 - Fluid root, rem sizing, breakpoints desktop / 1279 / 991 / 767 / 479
   ([FLUID-ROOT.md](./docs/FLUID-ROOT.md)).

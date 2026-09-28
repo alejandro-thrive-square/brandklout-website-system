@@ -158,7 +158,7 @@ or The Invitation where the objection actually lands, not as its own band.
 chapter near the bottom; the agency rejected it and pointed at Livewell's
 `/ads-landing-pages/` set: landing (form **in the hero**), consultation (form first) and thank-you
 (phone first, no form). The flow is the agency's; the section shapes, photography and copy are the
-client's own. The full beat list is [Scenario 3](../process/scenario-3-ads-landing-pages/README.md);
+client's own. The full beat list is [Scenario 3](../../scenario-3-ads-landing-pages/README.md);
 its dedicated FAQ is the one deliberate exception to the folding rule above. **Name nothing on a
 paid page `ad`**: `is-ad`, `ad-hero` and `ad-rail` are on ad blockers' cosmetic lists and collapse on
 the published page while the local render stays perfect. Use `lp-*`.
@@ -209,7 +209,7 @@ problem: cap body columns (34rem is a good default) before cutting words.
 6. **Interaction on every interactive element** — magnetic or cursor-aware CTAs, hover states with
    real transitions, animated accordions/tabs/sliders.
 7. **Considered typography** — scale, weight contrast, and rhythm doing visible work, sized off the
-   **fluid root font-size** (see [FLUID-ROOT.md](./FLUID-ROOT.md)). Type,
+   **fluid root font-size** (see [FLUID-ROOT.md](../../../docs/FLUID-ROOT.md)). Type,
    spacing and radii in `rem`; **no `px` font-sizes and no `clamp()` font-sizes** — the fluid root
    already does that job, and `clamp()` on top of it scales twice.
 8. **A signature moment** — one thing per page a visitor would remember and describe.
@@ -311,7 +311,7 @@ prints its counts.
 **Pictures are half of it** (*"add more images overall"*): every long-form page carries a photograph
 below the hero and roughly one every two sections after. A practice photo on a treatment page may
 show the rooms, the team, a patient in the chair, but is never captioned as that treatment or its
-result ([IMAGES.md](./IMAGES.md)). Pick deterministically (seeded off the page slug) so every build
+result ([IMAGES.md](../../../docs/IMAGES.md)). Pick deterministically (seeded off the page slug) so every build
 and every screenshot gate sees the same page.
 
 **Gate the built HTML, not the build pass.** The first version was defeated by Elementor nesting its
@@ -322,6 +322,10 @@ under `workflows/09-static-rebuild/.tmp/site/` (untracked).
 ## GSAP gotchas — learned the hard way, do not rediscover
 
 - **All GSAP plugins are free since 3.13** — ScrollTrigger, ScrollSmoother, SplitText included.
+- **Self-host GSAP; never load it from a CDN.** Instatic publishes `script-src 'self'`, so a cdnjs
+  tag is blocked live while it works locally. The push pipeline ships `dist/assets/gsap/`
+  (`tools/instatic-site/README.md`).
+- **Cursor-follow and magnetic effects are pointer-only.** Disable them on touch devices.
 - **Register plugins in `<body>`, not `<head>`** — otherwise ScrollSmoother silently dies with no
   error and the page merely feels flat.
 - **ScrollSmoother breaks full-page screenshots.** Verify with real interaction, not captures.
@@ -338,7 +342,7 @@ under `workflows/09-static-rebuild/.tmp/site/` (untracked).
   depend on an animation to be visible.
 - **"Submission in progress" on an untouched GoHighLevel form** is GHL's `enableSaveExitConfirmation`
   meeting the consent bridge's URL prefill, not a site bug. Turn it off in GHL;
-  `check-ghl-form.mjs` ([`tools/termly-ghl-consent/gates`](../process/tools/termly-ghl-consent/termly-ghl-consent.md)) reads the flag.
+  `check-ghl-form.mjs` ([`tools/termly-ghl-consent/gates`](../../tools/termly-ghl-consent/termly-ghl-consent.md)) reads the flag.
 - **`clip-path` does not contain overflow.** A film scaled 1.14 inside a clipped window still widens
   the layout: on a phone the layout viewport grew from 390 to 418 px, the page rendered 7 % small and
   the fixed call bar fell off the bottom. Give the window `overflow: hidden` as well.
@@ -475,8 +479,8 @@ tag — `button[class*="quiz__opt"]`.
 Run before claiming a page is done:
 
 ```
-node deliver/scripts/journey-audit.mjs <page-dir> [...]
-node deliver/scripts/journey-audit.mjs --all      # from the orchestration checkout
+node scripts/journey-audit.mjs <page-dir> [...]         # from this step folder
+node scripts/journey-audit.mjs --all                 # every client in every worktree
 ```
 
 It resolves linked CSS/JS before counting — a body-only grep reports a false zero when the motion
@@ -576,4 +580,4 @@ content. If it would not look out of place on awwwards, it passes.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
