@@ -36,7 +36,7 @@ record a later reader can trust without having been here.
    - `open-graph`, `aeo-schema` on production: `tools/instatic-site/gates/seo-head-check.mjs
      --public <host>` over the live sitemap.
    - `embed-origins` with site scripts: `tools/instatic-embeds/rollout-site-scripts.mjs verify
-     --url <script>`; for DNI, `tools/instatic-site/gates/dni-proof.mjs` once (each run burns a pool
+     --url <script>`; for DNI, `tools/termly-ghl-consent/gates/dni-proof.mjs` once (each run burns a pool
      number).
    - `embed-origins` block changes: `tools/instatic-embeds/verify-embed-canvas.mjs` (publishes
      nothing).
@@ -76,7 +76,7 @@ record a later reader can trust without having been here.
 ## Tools
 
 - `tools/instatic-plugins/plugins.mjs`: `verify`, `status`.
-- `tools/instatic-site/gates/seo-head-check.mjs`, `dni-proof.mjs`.
+- `tools/instatic-site/gates/seo-head-check.mjs`, `tools/termly-ghl-consent/gates/dni-proof.mjs`.
 - `tools/instatic-embeds/rollout-site-scripts.mjs verify`, `verify-embed-canvas.mjs`.
 
 ## Outputs

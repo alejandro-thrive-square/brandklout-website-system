@@ -59,11 +59,10 @@ comes from `--site` or `WF_SITE_ID`.
 | `wf-register-script.mjs` | Register and apply a site script: 2000-char cap, hosted-copy compare, 404 handling | `--site <id> --name X --version 1.0.0 --file x.min.js [--location header] [--dry]` | Consent rollout procedure (tools/termly-ghl-consent) and bk-oceanic-dental DNI runs |
 | `upload-asset.mjs` | Upload one file to the asset library (MD5, S3 field order), print its hostedUrl | `--site <id> <file> [name]` | bk-legacy-dental `output/native/upload-asset.mjs` |
 | `lint-css.mjs` | Gate CSS for `data_whtml_builder` (media queries, selectors, clamp, fonts) | `<file.css> --fonts "karla,noto serif"` | bk-legacy-dental `output/native/lint-css.mjs` (copies on arvada, marvel) |
-| `check-ghl-form.mjs` | GHL form: save-and-exit flag and the 11 consent fields | `<formId> [...]` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs` |
 | `live-page-check.mjs` | Served-HTML check: status, cache, foreign names, em dashes, empty embeds, phones, forms, marker | `<url,url> [--foreign a,b] [--phone d] [--marker t]` | bk-stone-dental em-dash pass, bk-marvel-dental `gate.mjs`, bk-arvada `verify_links.mjs` |
 | `site-scripts/ghl-dni-loader.template.js` | One or several GHL number pools on one page | fill `POOLS`, minify, register | bk-oceanic-dental `site-scripts/dni-loader.js` 2.0.0 |
 
-Also used, not moved: `deliver/scripts/asana-context.mjs` (Asana brief),
+Also used, not moved: `tools/termly-ghl-consent/gates/check-ghl-form.mjs` (GHL form: save-and-exit and the 11 consent fields), `deliver/scripts/asana-context.mjs` (Asana brief),
 `deliver/scripts/staging-verify.mjs` (motion pages), `tools/termly-ghl-consent/consent-kit.mjs`.
 
 ## Evidence

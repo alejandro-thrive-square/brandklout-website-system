@@ -60,9 +60,7 @@ shared Brandklout grant only against the exact site ID recorded in the client's 
 
 ## Commercial terms — no pricing on this batch
 
-Brandklout is a **partner engagement**, not a per-page client. PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository)
-does **not** apply to any client under `deliver/brandklout/`, and no agent should compute a price,
-a per-page rate, or a quote for this work.
+No prices, rates or quotes — the rule is in [DELIVER_SYSTEM_RULES.md §3](../DELIVER_SYSTEM_RULES.md).
 
 Scope and page count still matter — for **sequencing and capacity**, not cost. Twelve landing pages
 sharing one due date is a real scheduling problem worth surfacing to Brandklout; it is not a
@@ -116,8 +114,9 @@ built** when reporting back, so it can be opened and reviewed without hunting.
 
 Webflow build (`webflow-build`) comes after local approval. Brandklout uses one shared
 `webflow-brandklout` OAuth grant because the partner owns the workspace; isolation is enforced by
-the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The current build
-standard is pasteable section components, followed by surgical MCP edits and staging verification.
+the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The build follows
+[webflow-build.md](../process/tools/webflow-build/webflow-build.md) (the HTML paste converter was
+retired 2026-09-23), followed by surgical MCP edits and staging verification.
 
 ## Orchestration
 

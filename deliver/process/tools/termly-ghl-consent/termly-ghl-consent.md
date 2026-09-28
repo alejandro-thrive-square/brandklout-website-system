@@ -1,4 +1,4 @@
-# Workflow: 23 - Termly Consent + GoHighLevel Bridge
+# Tools · Termly Consent + GoHighLevel Bridge
 
 ## Client-Facing Overview
 Every client site shows a Termly cookie banner. Each patient's choice is saved on the lead in GoHighLevel
@@ -7,7 +7,7 @@ keeps working whether or not the patient answers the banner, and tracking waits 
 
 > [!IMPORTANT]
 > **Integrity Rule**: any change to the bridge, the kit or the rollout state must be recorded here in the
-> same commit, and mirrored in [PROCESS_INDEX.md](../../PROCESS_INDEX.md). Bump the version inside
+> same commit. Bump the version inside
 > `kit/ghl-consent-bridge.js` whenever its behaviour changes, then run `node consent-kit.mjs minify`.
 
 ## What goes on every site
@@ -135,11 +135,23 @@ node consent-kit.mjs instatic apply  [--only a,b] --apply   # both script assets
 node consent-kit.mjs instatic termly  [--only a,b] --apply  # phase 2: Termly head line + origins
 node consent-kit.mjs instatic publish --only a,b  --apply
 node consent-kit.mjs check <url>[,<url>] [--termly-proxy]
-node consent-kit.mjs snippet [--disclosure DATE]  # paste-able block for a platform with no API
+node consent-kit.mjs snippet [--disclosure DATE]  # paste-able HEADER block for a platform with no API
 ```
 
 Run it with output redirected to a file, never piped (Node on Windows dies on a libuv assertion when
 stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `INSTATIC_BASE_URL`.
+
+### Gates (`gates/`, platform-neutral: Instatic and Webflow)
+
+```bash
+node gates/check-ghl-form.mjs <formId|url> [...]       > output/ghl-forms.log 2>&1  # save-and-exit off, 11 consent fields
+node gates/check-ghl-form.mjs --combo <combo.json>     > output/ghl-forms.log 2>&1  # + each form redirects to its thank-you page
+node gates/dni-proof.mjs --relay <url> [...]           > output/dni.log 2>&1        # the number pool really swaps (one visitor)
+node gates/dni-proof.mjs --relay --combo <combo.json>  > output/dni.log 2>&1
+```
+
+`--combo` reads a scenario 3 campaign manifest and needs `tools/ads-combo` beside this toolkit. Both gates
+were merged on 2026-09-28 from the copies in `instatic-site/gates/`, `webflow-build/` and scenario 3.
 
 ### Phase 1 — Webflow (MCP `webflow-brandklout`, site ID from the registry)
 1. `get_registered_scripts`. If `brandkloutconsentbridge` is missing, `register_inline_script` with
@@ -340,9 +352,8 @@ its `onAccept`/`onReject` fire on every page load, and NordVPN empties jsDelivr 
   where `currentScript` is null, so it scans every script whose `src` contains `number_pool` and asks
   each pool for a number; two executed copies run init twice (Oceanic, `OceanicDNI` 2.0.0). A phone
   number typed with an en dash (`(714) 841–0203`) never text-swaps; only its `tel:` link does.
-- **Check a GHL form's consent fields keyless**:
-  `curl -s https://api.leadconnectorhq.com/widget/form/<id> | grep -o 'privacy_[a-z_]*' | sort -u`
-  must list all eleven. The bridge appends the values either way and GHL silently drops the ones with
+- **Check a GHL form's consent fields keyless** with `gates/check-ghl-form.mjs <id>`: it must count
+  all eleven. The bridge appends the values either way and GHL silently drops the ones with
   no field (Oceanic's two forms, 0 of 11 on 2026-09-22; Stone Dental's `0mtZk3CrshD7Y0OYOao4` is the
   reference with all 11).
 - **Corners are crowded on Brandklout sites.** Sienna's accessibility button sits bottom-left and

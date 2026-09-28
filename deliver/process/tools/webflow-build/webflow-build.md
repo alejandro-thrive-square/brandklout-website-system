@@ -41,13 +41,12 @@ Windows dies on a libuv assertion when stdout is a pipe).
 | `wf-register-script.mjs` | Register and apply a site script. Enforces the 2000-char cap, compares the hosted copy byte for byte, uses `set_site_scripts` when nothing is applied (404) and keeps the other applied scripts otherwise. Header by default | `--site <id> --name <Name> --version <x.y.z> --file <min.js> [--location header] [--dry]` | termly-ghl-consent Phase 1 procedure; bk-oceanic-dental OceanicDNI runs |
 | `upload-asset.mjs` | `create_asset` (MD5), S3 POST (fields first, file last, canonical names), read back the s3 `hostedUrl` | `--site <id> <file> [name]` | bk-legacy-dental `output/native/upload-asset.mjs` |
 | `lint-css.mjs` | Gate CSS for `data_whtml_builder`: exact Webflow media queries, no pseudo-elements, structural pseudo-classes, combinators, attribute or bare tag selectors, no `clamp/min/max/calc`, `0 -8px` corruption, installed fonts | `<file.css> [...] --fonts "a,b"` or `--no-fonts` | bk-legacy-dental `output/native/lint-css.mjs` (also arvada, marvel) |
-| `check-ghl-form.mjs` | GHL form readiness: `enableSaveExitConfirmation` (causes "Submission in progress" with the consent bridge) and the 11 consent fields | `<formId|url> [...]` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs` |
 | `live-page-check.mjs` | Served-HTML first pass: status, redirect, `cf-cache-status`/age, other clients' names, em dashes, placeholders, empty `w-embed`, noindex, canonical, `tel:` and shown numbers, GHL form ids, a required marker | `<url,url> [--foreign a,b] [--phone d] [--marker text]` | bk-stone-dental em-dash pass; bk-marvel-dental `gate.mjs`; bk-arvada `verify_links.mjs` |
 | `site-scripts/ghl-dni-loader.template.js` | One or several GHL number pools on a page: execute the first, add the rest as inert `text/plain` tags | copy to the client's `site-scripts/`, fill `POOLS`, minify, register | bk-oceanic-dental `site-scripts/dni-loader.js` 2.0.0 |
 
 Tested 2026-09-23, read-only, against Arvada (`693c51e685b19f0d0c149cab`): `wf.mjs get_site`,
 `wf-publish.mjs state` (17 pages pending since 2026-09-15), `wf-tree-audit.mjs`,
-`wf-register-script.mjs --dry`, `check-ghl-form.mjs` and `live-page-check.mjs`. `upload-asset.mjs`
+`wf-register-script.mjs --dry`, `check-ghl-form.mjs` (now `../termly-ghl-consent/gates/`) and `live-page-check.mjs`. `upload-asset.mjs`
 and the publish and register writes were not exercised.
 
 ## MCP facts the scripts depend on

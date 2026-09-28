@@ -51,7 +51,7 @@ the installed Chrome is used, `CHROME_PATH` overrides). Python scripts use the s
 | `capture.gitignore` | What of the capture stays out of git | copy to the client's `capture/.gitignore` | new |
 
 Deploying the Worker, DNS copy, tokens and the cutover itself live in
-[tools/cloudflare-launch](../tools/cloudflare-launch/README.md).
+[tools/cloudflare-launch](../tools/cloudflare-launch/cloudflare-launch.md).
 
 ### Listed, not promoted
 

@@ -1,56 +1,42 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Bootstrap: download heavy VPS assets into a freshly cloned repo.
-# Run AFTER cloning, on a new computer. This script is the asset-restore half
-# of INSTALL.md (Steps 5-6). It does NOT install Python, restore .env, or set
-# up MCP auth — see INSTALL.md for the full setup.
+# Bootstrap a freshly cloned repo on a new computer: install the git hooks and
+# restore client media from Cloudflare R2. Run AFTER cloning. It does NOT install
+# Python/Node, restore ~/.webzite/.env, or set up MCP auth — see INSTALL.md.
 #
-# Safe by design: uses rclone COPY (VPS → local). It never deletes local files
-# and never writes to the VPS. Preview with --dry-run before the first run.
+# Media restore uses `node scripts/assets.mjs pull <client>`, which downloads the
+# files listed in deliver/brandklout/<client>/assets.tsv and verifies each sha256.
+# It never deletes local files and never writes to R2.
 #
 # Must be run from inside the cloned repo (Git Bash on Windows, or any bash).
 # Usage:
-#   bash scripts/bootstrap.sh [--dry-run] [--brand-only] [--media-only]
-#                             [--client <name>] [--no-ssh-check]
+#   bash scripts/bootstrap.sh [--dry-run] [--client <slug>]... [--all] [--hooks-only]
 #
-#   --dry-run        Preview what would be downloaded; transfer nothing.
-#   --brand-only     Only restore manage/brand-assets/.
-#   --media-only     Only restore heavy .tmp/ media under deliver/.
-#   --client <name>  Restrict media restore to deliver/<name>/ (e.g. dr-nahlah).
-#                    Default: all deliver/ clients.
-#   --no-ssh-check   Skip the VPS connectivity probe.
+#   --dry-run        Preview the restore; transfer nothing, install no hooks.
+#   --client <slug>  Restore one client (repeatable), e.g. mason-park.
+#   --all            Restore every client that has an assets.tsv manifest.
+#   --hooks-only     Install the git hooks and stop.
+#   (no client flag) Hooks only, then print the restore commands.
 #
-# Prerequisites (see INSTALL.md Steps 1, 5, 6):
-#   - rclone installed, with a remote named "vps" configured (SFTP to Hostinger VPS).
-#   - VPS SSH key restored and the VPS host key present in known_hosts.
-#
-# Companion scripts:
-#   scripts/sync-assets.sh — directional asset sync (push/pull/bisync) for ongoing work.
-#   scripts/sync.sh        — everyday both-ways sync (git + assets).
+# Prerequisites: Node 18+, and R2_TOKEN (or CLOUDFLARETESTING) in ~/.webzite/.env [shared].
 
-VPS_ROOT="vps:/root/webzite-agentic-workflow"
 DRY_RUN=""
-BRAND_ONLY=false
-MEDIA_ONLY=false
-CLIENT=""
-SSH_CHECK=true
+CLIENTS=()
+ALL=false
+HOOKS_ONLY=false
 
 print_usage() {
-  cat <<'USAGE'
-Usage: bash scripts/bootstrap.sh [--dry-run] [--brand-only] [--media-only]
-                                 [--client <name>] [--no-ssh-check]
-USAGE
+  sed -n '14,19p' "$0" | sed 's/^# \{0,1\}//'
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --dry-run)      DRY_RUN="--dry-run"; shift ;;
-    --brand-only)   BRAND_ONLY=true; shift ;;
-    --media-only)   MEDIA_ONLY=true; shift ;;
-    --client)       CLIENT="${2:-}"; shift 2 ;;
-    --no-ssh-check) SSH_CHECK=false; shift ;;
-    -h|--help)      print_usage; exit 0 ;;
+    --dry-run)    DRY_RUN="--dry"; shift ;;
+    --client)     CLIENTS+=("${2:-}"); shift 2 ;;
+    --all)        ALL=true; shift ;;
+    --hooks-only) HOOKS_ONLY=true; shift ;;
+    -h|--help)    print_usage; exit 0 ;;
     *)
       echo "Unknown flag: $1" >&2
       print_usage >&2
@@ -59,7 +45,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# ── 0. Preconditions ──────────────────────────────────────────────────────────
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [[ -z "$ROOT" ]]; then
   echo "ERROR: not inside a git repository. Clone the repo first, then run from its root." >&2
@@ -67,108 +52,40 @@ if [[ -z "$ROOT" ]]; then
 fi
 cd "$ROOT"
 
-if ! command -v rclone >/dev/null 2>&1; then
-  echo "ERROR: rclone is not installed or not on PATH." >&2
-  echo "       Install rclone, then run 'rclone config' to create the 'vps' remote." >&2
-  echo "       See INSTALL.md Step 6." >&2
-  exit 1
-fi
-
-if ! rclone listremotes 2>/dev/null | grep -q '^vps:$'; then
-  echo "ERROR: rclone remote 'vps' is not configured." >&2
-  echo "       Run 'rclone config' and create an SFTP remote named 'vps' (Hostinger VPS)." >&2
-  echo "       See INSTALL.md Step 6." >&2
-  exit 1
-fi
-
-echo "=== Webzite bootstrap — restore VPS assets ${DRY_RUN:+(dry run)} ==="
-echo "Repo:   $ROOT"
-echo "Remote: $VPS_ROOT"
-echo ""
-
-# ── 1. Connectivity probe (exercises the same SFTP path the copies will use) ──
-if [[ "$SSH_CHECK" == true ]]; then
-  echo "--- [1/3] VPS connectivity probe ---"
-  if rclone lsd "$VPS_ROOT" >/dev/null 2>&1; then
-    echo "VPS reachable via rclone 'vps' remote."
-  else
-    echo "ERROR: could not list $VPS_ROOT via rclone." >&2
-    echo "       Check the 'vps' remote config and SSH key. See INSTALL.md Steps 5-6." >&2
-    echo "       Re-run with --no-ssh-check to skip this probe." >&2
-    exit 1
-  fi
-  echo ""
-fi
-
-# ── 2. Brand assets ───────────────────────────────────────────────────────────
-restore_brand() {
-  echo "--- Brand assets: manage/brand-assets/ ---"
-  mkdir -p ./manage/brand-assets
-  rclone copy "$VPS_ROOT/manage/brand-assets/" "./manage/brand-assets/" \
-    ${DRY_RUN:+--dry-run} --progress
-  echo ""
-}
-
-# ── 3. Heavy .tmp/ media (file-type allowlist mirrors .gitignore & sync-assets.sh)
-restore_media() {
-  local scope_src="$VPS_ROOT/deliver/"
-  local scope_dst="./deliver/"
-  if [[ -n "$CLIENT" ]]; then
-    scope_src="$VPS_ROOT/deliver/$CLIENT/"
-    scope_dst="./deliver/$CLIENT/"
-    echo "--- Heavy media: deliver/$CLIENT/**/.tmp/ ---"
-  else
-    echo "--- Heavy media: deliver/**/.tmp/ ---"
-  fi
-
-  mkdir -p "$scope_dst"
-  # shellcheck disable=SC2086
-  rclone copy "$scope_src" "$scope_dst" \
-    --filter "+ **/" \
-    --filter "+ **/.tmp/**/*.png"    --filter "+ **/.tmp/**/*.jpg"     --filter "+ **/.tmp/**/*.jpeg" \
-    --filter "+ **/.tmp/**/*.gif"    --filter "+ **/.tmp/**/*.svg"     --filter "+ **/.tmp/**/*.webp"   --filter "+ **/.tmp/**/*.ico" \
-    --filter "+ **/.tmp/**/*.pdf"    --filter "+ **/.tmp/**/*.mp4"     --filter "+ **/.tmp/**/*.webm"    --filter "+ **/.tmp/**/*.mov" \
-    --filter "+ **/.tmp/**/*.zip"    --filter "+ **/.tmp/**/*.7z"      --filter "+ **/.tmp/**/*.psd" \
-    --filter "+ **/.tmp/**/*.ai"     --filter "+ **/.tmp/**/*.eps"     --filter "+ **/.tmp/**/*.fig"    --filter "+ **/.tmp/**/*.sketch" \
-    --filter "- *" \
-    ${DRY_RUN:+--dry-run} --progress
-  echo ""
-}
-
-# ── Dispatch ──────────────────────────────────────────────────────────────────
-if [[ "$BRAND_ONLY" == true && "$MEDIA_ONLY" == true ]]; then
-  echo "NOTE: --brand-only and --media-only both set — restoring both." >&2
-  BRAND_ONLY=false; MEDIA_ONLY=false
-fi
-
-if [[ "$BRAND_ONLY" == true ]]; then
-  restore_brand
-elif [[ "$MEDIA_ONLY" == true ]]; then
-  restore_media
-else
-  restore_brand
-  restore_media
-fi
-
 # ── Git hooks ─────────────────────────────────────────────────────────────────
 # core.hooksPath is set to an ABSOLUTE path on purpose. Worktrees share one
 # config, but a relative hooksPath resolves against each worktree's own root, so
 # a `bk-*` worktree on a branch predating scripts/hooks/ would silently run no
 # hook at all. Pointing every worktree at the main checkout's tracked hooks dir
-# means the post-commit asset mirror fires everywhere, and edits to the hook take
-# effect immediately without reinstalling.
+# means the post-commit asset mirror and the scope check fire everywhere.
 if [[ -z "$DRY_RUN" ]]; then
-  echo ""
   echo "--- Installing git hooks ---"
-  git config core.hooksPath "$(git rev-parse --show-toplevel)/scripts/hooks"
+  git config core.hooksPath "$ROOT/scripts/hooks"
   echo "core.hooksPath -> $(git config --get core.hooksPath)"
 fi
+[[ "$HOOKS_ONLY" == true ]] && exit 0
 
-# ── Summary ───────────────────────────────────────────────────────────────────
-echo "=== Bootstrap complete ${DRY_RUN:+(dry run — no files transferred)} ==="
+# ── Client media from R2 ──────────────────────────────────────────────────────
+if [[ "$ALL" == true ]]; then
+  for manifest in deliver/brandklout/*/assets.tsv; do
+    [[ -f "$manifest" ]] && CLIENTS+=("$(basename "$(dirname "$manifest")")")
+  done
+fi
+
+if [[ ${#CLIENTS[@]} -eq 0 ]]; then
+  echo ""
+  echo "No client selected. Restore media with:"
+  echo "  bash scripts/bootstrap.sh --client <slug>    # one client"
+  echo "  bash scripts/bootstrap.sh --all              # every client with an assets.tsv"
+  exit 0
+fi
+
+for client in "${CLIENTS[@]}"; do
+  echo ""
+  echo "--- Restoring $client ${DRY_RUN:+(dry run)} ---"
+  node scripts/assets.mjs pull "$client" ${DRY_RUN:+$DRY_RUN}
+done
+
 echo ""
-echo "Next steps (see INSTALL.md):"
-echo "  Step 3 — create the Python venv: python -m venv .venv && pip install -r requirements.txt"
-echo "  Step 4 — restore root .env from your private credential store"
-echo "  Step 7 — reauthorize MCP servers (claude mcp list)"
-echo "  Ongoing work — bash scripts/sync.sh --dry-run   (then drop --dry-run)"
+echo "=== Bootstrap complete ${DRY_RUN:+(dry run — nothing transferred)} ==="
+echo "Next steps: INSTALL.md (credentials in ~/.webzite/.env, then npm install; MCP auth)."

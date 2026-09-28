@@ -1,4 +1,10 @@
-# Brandklout Asana Scripts
+# Brandklout Cross-Client Scripts
+
+Scripts that serve every client rather than one scenario step. Today that is the Asana set below.
+`journey-audit.mjs` (motion/journey gate) and `staging-verify.mjs` are moving into the scenario steps
+that use them; until they do, they still sit in this folder.
+
+## Asana
 
 Read-only access to Brandklout's Asana workspace, used to see what work is assigned to Webzite
 and to dispatch it to agents. Governed by [../docs/mcp-access.md](../docs/mcp-access.md).

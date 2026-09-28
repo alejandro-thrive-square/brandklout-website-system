@@ -26,6 +26,41 @@ description of the block — mode, destination host(s), height rule — sized to
 occupy. It loads no vendor, runs no vendor markup and leaks no vendor stylesheet into the editor.
 The embed itself appears when the page is published; `render()` is unchanged.
 
-See `deliver/process/tools/instatic-embeds/instatic-embeds.md` for why this works and how to use
+See `deliver/process/tools/instatic-embeds/instatic-embeds.md` for how to use
 the block, and `deliver/process/tools/instatic-plugins/README.md` (Scenario 4) for how to build,
 test, install and update it across sites.
+
+## Permissions, and why
+
+`../install-plugin.mjs` and `../plugins.mjs rollout` grant exactly the `grants` list in
+`../plugins.json` and refuse a package asking for more, so a future version that quietly widens its
+request cannot be installed by re-running a script.
+
+| Permission | Needed for |
+|---|---|
+| `cms.hooks` | the `publish.html` CSP filter |
+| `modules.register` | the Embed block in the canvas library |
+| `frontend.assets` | module render `js`, used for ONE thing: the auto-height listener served same-origin from `/_instatic/module-js/`. It grants no third-party origin anything. |
+
+## Why a plugin can do this when a module cannot
+
+Verified against the v0.0.16 source and a live site:
+
+1. **A plugin MODULE cannot lift CSP.** `src/core/plugins/moduleAdapter.ts` rebuilds the render
+   output as `{ html, css, js }` and drops `cspSources`. A whitelist, not an oversight.
+2. **`publish.html` is a filter over the whole published HTML string**, registered under
+   `cms.hooks`. `publishedHtmlPipeline.ts` runs it LAST and returns the filter's string verbatim.
+3. **A public page's CSP is only a `<meta http-equiv>` tag.** `securityHeaders.ts` sets a CSP
+   *header* for `/admin` paths only, so nothing contradicts the meta tag.
+
+## Security posture
+
+- With `strict` + empty settings the filter returns the page byte-for-byte unchanged.
+- Every widening is per page and recomputed at each publish; nothing accumulates.
+- Origins typed into the settings are validated against `ORIGIN_RE`, not escaped, so a pasted
+  `https://x.com; default-src *` is rejected rather than sanitised.
+- `'none'` is replaced, never appended to: `frame-src 'none' https://x` is invalid CSP.
+- A created directive inherits from `default-src` first (a bare `font-src https://vendor` once
+  revoked the site's own webfonts), and is deduped (fixed in 1.6.0).
+- Plugin server code and module packs run in a QuickJS-WASM sandbox, scanned at upload for
+  forbidden literals.

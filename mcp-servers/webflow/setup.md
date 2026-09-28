@@ -18,7 +18,7 @@ claude mcp add --transport http webflow-<client-name> https://mcp.webflow.com/mc
 claude mcp add --transport http webflow-<partner-name> https://mcp.webflow.com/mcp -s project
 ```
 
-Current instances are listed in [MCP_INDEX.md](../MCP_INDEX.md#server-instances-one-per-principal). The original unscoped `webflow` entry is deprecated and will be removed once active work has migrated to per-principal instances.
+Current instances are listed in [MCP_INDEX.md](../MCP_INDEX.md#server-instances-one-per-principal). The original unscoped `webflow` entry was removed from `.mcp.json` on 2026-09-28; use `webflow-brandklout`.
 
 > [!IMPORTANT]
 > OAuth grants are keyed by server *name*. Re-authenticating a shared server for a different client silently wipes the previous client's grant — this is exactly why instances are per-principal. When authorizing an instance, select **only** that principal's sites in the OAuth screen.
@@ -45,17 +45,14 @@ Before using Webflow MCP:
 4. Verify Webflow runtime authentication through `/mcp`.
 5. Confirm the target Webflow workspace/site ID before making changes.
 
-Common profiles:
-- [agency-site.md](../profiles/agency-site.md) for Webzite-owned Webflow sites.
-- [client-delivery.md](../profiles/client-delivery.md) for signed client projects.
-- [prospect-audit.md](../profiles/prospect-audit.md) for public read-only prospect analysis.
+Profile: [client-delivery.md](../profiles/client-delivery.md) for every Brandklout client site.
 
 Client access should normally happen by the client inviting the agency Webflow account to the required workspace or site. Do not store Webflow credentials, OAuth tokens, or private session values in this repository.
 
 ## Authorization
 
 1. Start Claude Code
-2. Run `/mcp list` and select the `webflow` server
+2. Run `/mcp` and select the `webflow-brandklout` server
 3. Complete OAuth in the browser window that opens
 4. Authorize the Webflow sites/workspaces you want to access
 5. Open the Webflow Designer, press `E` to open the Apps panel, and launch the "Webflow MCP Bridge App"

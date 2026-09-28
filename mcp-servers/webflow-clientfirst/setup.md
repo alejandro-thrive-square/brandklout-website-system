@@ -1,12 +1,12 @@
 # MCP Server: webflow-clientfirst
 
 Local, dependency-free MCP server that makes **Client-First class reuse the default**
-when converting a coded design package into Webflow — and blocks broken payloads before
-they are pasted.
+when building Webflow pages from coded sections — and blocks broken payloads before
+they reach Webflow. It serves the Webflow sites (Scenario 6 · Webflow sites).
 
-Built 2026-07-30 after a diagnosis of the Dr. Nahlah conversion found three defects the
-existing toolchain could not see. See
-[CONVERSION-DIAGNOSIS.md](../../deliver/dr-nahlah/workflows/07-webflow-build/.tmp/CONVERSION-DIAGNOSIS.md).
+Built 2026-07-30 after a diagnosis of the Dr. Nahlah Webflow conversion found three defects the
+existing toolchain could not see (the diagnosis lived on that client branch's old
+`workflows/07-webflow-build/.tmp/`; the findings are the table below).
 
 ## Why it exists
 
@@ -30,7 +30,7 @@ Registered in the repo's `.mcp.json`:
 ```
 
 No authentication, no network access, no secrets. It reads repo files and writes only
-into its own `.tmp/`. Node 18+; no `npm install` required.
+into its own `.tmp/` (gitignored). Node 18+; no `npm install` required.
 
 ## Tools
 
@@ -52,7 +52,7 @@ Every capability runs without an MCP client attached, which is what makes it tes
 ```bash
 node server.mjs eval_length '{"expr":"clamp(1.9rem,3.6vw,3.75rem)"}'
 node server.mjs harvest_style_guide '{"css_path":"deliver/process/tools/client-first-style-guide/assets/webzite-relume.webflow.shared.62ada462d.css","out":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
-node server.mjs validate_payload '{"payload":"deliver/dr-nahlah/workflows/07-webflow-build/.tmp/probe/specialist.json","vocab":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
+node server.mjs validate_payload '{"payload":"<step>/output/<page>.json","vocab":"mcp-servers/webflow-clientfirst/.tmp/vocab-relume.json"}'
 ```
 
 Paths are resolved relative to the repo root.
@@ -96,4 +96,4 @@ two separate means the analysis half needs no credentials and runs in CI.
 
 ## Version Control
 - Follows the version control rules in [SYSTEM_RULES.md - Section 4](../../SYSTEM_RULES.md).
-- `.tmp/` holds generated vocabularies and resolved payloads; regenerate rather than rely on them.
+- `.tmp/` holds generated vocabularies and resolved payloads; it is gitignored — regenerate with `harvest_style_guide`.

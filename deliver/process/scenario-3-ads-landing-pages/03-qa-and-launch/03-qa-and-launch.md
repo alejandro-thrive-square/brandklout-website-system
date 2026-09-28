@@ -35,7 +35,7 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    consultation, no form and a `tel:` link on thank-you; landing links to its consultation page;
    no `ad`-named class or id; every manifest tag present; phone in a swappable format. Per form:
    redirect to the production thank-you URL, save-and-exit off.
-2. **Forms.** `node check-ghl-form.mjs --combo <combo.json> > output/ghl-forms.log 2>&1`. A failure
+2. **Forms.** `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --combo <combo.json> > output/ghl-forms.log 2>&1`. A failure
    here is fixed in GHL by Brandklout, not on the site. Send them the exact form id and the URL it
    must redirect to.
 3. **Form in the hero, rendered.**
@@ -55,7 +55,7 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    the answer into `combo.json` `conversion`.
 6. **DNI.** Production only. Staging must never run the pools or real GTM (a staging clone burns
    pool numbers and pollutes data): guard those tags by host. Walk as one visitor:
-   `node dni-proof.mjs --relay --combo <combo.json> > output/dni.log 2>&1`. Use `--accept` if the
+   `node tools/termly-ghl-consent/gates/dni-proof.mjs --relay --combo <combo.json> > output/dni.log 2>&1`. Use `--accept` if the
    client consent-holds the pools. Same number across pages is correct sticky DNI. Never clear
    cookies between pages. Then `node check-pool-scope.mjs --combo <combo.json> > output/pool-scope.log 2>&1`
    when pools are scoped per office or per page.
@@ -104,11 +104,11 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
 
 ## Tools
 - `scripts/verify-combo-live.mjs --combo c.json [--origin …]`: fetch-only gate for every page and form.
-- `scripts/check-ghl-form.mjs --combo c.json`: form redirect and save-and-exit.
+- `tools/termly-ghl-consent/gates/check-ghl-form.mjs --combo c.json`: form redirect, save-and-exit and the 11 consent fields.
 - `scripts/verify-form.mjs --combo c.json [--widths 1440,390]`: rendered form size, id, clipping, CSP.
 - `scripts/probe-adblock.mjs --combo c.json`: cosmetic filter hits over CDP.
 - `scripts/check-conversion.mjs --combo c.json`: Google tags reaching each thank-you page.
-- `scripts/dni-proof.mjs --relay --combo c.json`: proves the number pool swaps (production).
+- `tools/termly-ghl-consent/gates/dni-proof.mjs --relay --combo c.json`: proves the number pool swaps (production).
 - `scripts/check-pool-scope.mjs --combo c.json`: each URL has exactly the pools it should.
 - `tools/termly-ghl-consent/`: consent kit and checks.
 

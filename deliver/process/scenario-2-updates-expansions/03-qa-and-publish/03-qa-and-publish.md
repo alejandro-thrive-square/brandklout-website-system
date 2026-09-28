@@ -25,7 +25,7 @@ On Webflow every publish is whole-site, so this step decides between three resul
 1. **Pre-publish gates** (Designer draft):
    - `node wf-tree-audit.mjs --site <id> --pages <touched> --foreign "<other clients>" --phone <digits> > <workdir>/tree-audit.log 2>&1`.
      It must PASS. Read the warnings.
-   - Every GHL form id on the touched pages: `node check-ghl-form.mjs <ids>`. Save-and-exit must be
+   - Every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <ids>`. Save-and-exit must be
      off, and the form needs all 11 consent fields. Both are fixed in GHL, not on the site.
    - A registered script's hosted copy must be identical (`wf-register-script.mjs` checks it).
 2. **Re-check what a publish would ship.**
@@ -122,7 +122,7 @@ On Webflow every publish is whole-site, so this step decides between three resul
 
 ## Tools
 - `tools/webflow-build/wf-tree-audit.mjs`: pre-publish Designer audit.
-- `tools/webflow-build/check-ghl-form.mjs <formId>`: save-and-exit flag and consent fields.
+- `tools/termly-ghl-consent/gates/check-ghl-form.mjs <formId>`: save-and-exit flag and consent fields.
 - `tools/webflow-build/wf-publish.mjs state|staging|live`: pending set and guarded publishes.
 - `tools/webflow-build/live-page-check.mjs <urls>`: served-HTML first pass with cache status.
 - `deliver/scripts/staging-verify.mjs --url <u> --baseline <dir>`: motion pins, 404s, console.

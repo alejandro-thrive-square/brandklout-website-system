@@ -12,7 +12,7 @@ Sibling toolkits this one relies on and does not copy:
 |---|---|
 | [`../instatic-api-sync/`](../instatic-api-sync/instatic-api-sync.md) | `insta-api.mjs` (the admin client every script here uses via `lib/site.mjs`), `conv-encode.ts` / `conv-preload.ts` (shipped by `push/ship.sh`), `install-fonts.mjs`, CSS repair tools, `prune-versions` |
 | [`../instatic-plugins/`](../instatic-plugins/README.md) | every `brandklout.*` plugin source, `plugins.json` (registry), `install-plugin.mjs`, `plugins.mjs` (status, rollout, verify across sites) |
-| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts), editor and canvas gates |
+| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts), the canvas and published-page gates |
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |
@@ -32,8 +32,8 @@ Sibling toolkits this one relies on and does not copy:
 | | `push/*` in order (below), `ops/apply-template-flags.mjs`, `gates/template-guard.mjs` | Every push to staging |
 | | `gates/verify-live.mjs`, `css-declared-parity.mjs`, `compare-live.mjs`, `visual-diff.mjs`, `verify-motion-live.mjs` | After every staging publish |
 | | `ops/render-draft-page.mjs` | Look at an unpublished page without publishing |
-| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/perf-budget.mjs`, `gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
-| 05-launch | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
+| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
+| 05-launch | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
 | | `staging-clone/clone-site.mjs` / `diff-sites.mjs` / `clone-plugins.mjs` / `publish-rows.mjs` | Promote staging to production and prove parity |
 | | `../instatic-domain-origins/check-origins.mjs` | After connecting the domain and `staging.<domain>`; `PUBLIC_ORIGIN` on BOTH environments |
 | | `../cloudflare-launch/canonical-host.mjs` | One address per page (apex to www or back) |
@@ -82,7 +82,7 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 | Script | Purpose | Usage | Origin |
 |---|---|---|---|
 | `setup/provision-instance.mjs` | Railway project, service (`ghcr.io/corebunch/instatic`), `/app/storage` volume, domain, 7 variables, deploy, health poll, admin setup | `--name "<Business>" [--dry]`; later `--setup` with `INSTATIC_PROVISION_URL`, `INSTATIC_EMAIL`, `INSTATIC_SETUP_PASSWORD`. Token from `~/.railway/config.json` | bk-west-la-implants `deliver/process/tools/instatic-api-sync/provision-instance.mjs` |
-| `staging-clone/*` + `staging-clone.md` | Stand up staging, seed it, promote it, keep it out of Google; `verify-staging-clean.mjs` is the rendered-DOM leak gate | see `staging-clone.md`; `python staging-clone.py size|seed|promote|gates|standup` | bk-brandklout-website `deliver/process/21-instatic-staging-clone/` (newest of 4 runs) |
+| `staging-clone/*` + `staging-clone.md` | Stand up staging, seed it, promote it, keep it out of Google; `verify-staging-clean.mjs` is the rendered-DOM leak gate | see `staging-clone.md` | bk-brandklout-website `deliver/process/21-instatic-staging-clone/` (newest of 4 runs) |
 | `push/upload-media.mjs` | Resumable media upload (img, video, fonts incl. variable woff2), map keyed by path | `[--force] [--only a,b]` | bk-west-la-implants `21-instatic-upload/` |
 | `push/set-alt.mjs` | Alt text onto library assets (longest wins) | `[--apply]` | same |
 | `push/build-import-input.mjs` | Rewrite srcs to library URLs, strip `@font-face`, gzip payload | `EXPECT_FONT_FACES=<n>` | same |
@@ -104,14 +104,13 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 | `gates/visual-diff.mjs` | Pixel diff local vs live | `[slug] [width]` | same |
 | `gates/verify-motion-live.mjs` | Motion on the live home page: pins, smoother, console | `[widths]`, `MOTION_PINS=a,b` | same |
 | `gates/perf-budget.mjs` | Causes of slow pages: blocking head JS, lazy LCP, duplicate alt, eager iframes, big media | `--base url [--paths] [--quick] [--waivers json]` | bk-dr-nahlah `08-qa/` |
-| `gates/check-ghl-form.mjs` | GHL form with save-and-exit on ("Submission in progress") | `<formId|url> ...` | bk-ifa-dentistry `21-instatic-upload/` |
 | `gates/facts-sweep.mjs` | Phones/hours/retired values per URL, HEAD vs body, JSON-LD values | `--host url --facts facts.json [--urls]` | bk-dr-nahlah `audit-live-numbers.mjs` |
 | `gates/seo-head-check.mjs` | Title, one description, one canonical, unique og:url, og:image, parsed JSON-LD, plugin settings | `--public url [--tables posts] [--render] [--org-type Dentist]` | bk-dr-nahlah `16-instatic-plugins/verify-seo-plugins.mjs` (fixed) |
-| `gates/dni-proof.mjs` | Real Chrome over CDP: does the GHL number pool swap a number | `[--relay|--accept] <url>...` | bk-dr-nahlah `instatic-api-sync/` |
 | `gates/cross-client-grep.mjs` | Another practice's names, phones, domains, video ids on this site | `--deny deny.json [--dist] [--base]` | new |
 | `gates/image-reuse.mjs` | Same photo twice on a page, on more than two pages, or leading two pages ([`IMAGES.md`](../../../docs/IMAGES.md)) | `[--dist] [--base url] [--max-pages 2] [--allow json]` | new, 2026-09-25 |
 | `gates/template-guard.mjs` | Lists templated rows; proves a page write keeps `template` (writes nothing) | | bk-dr-nahlah `verify-template-guard.mjs` |
 | `gates/audit-double-aspect.mjs` | CSS reserving an aspect box twice around an embed | | bk-dr-nahlah |
+| `../termly-ghl-consent/gates/check-ghl-form.mjs`, `dni-proof.mjs` | GHL form readiness and the number-pool swap. Platform-neutral, so they live with the GHL toolkit since 2026-09-28 | see [`termly-ghl-consent.md`](../termly-ghl-consent/termly-ghl-consent.md) | was `gates/` here |
 | `images/upscale-images.mjs` | Magnific upscale (creativity 1, resemblance 3, sharpy) from a jobs file | `--jobs jobs.json [--only] [--list]`, `MAGNIFIC` | bk-mason-park-kids |
 | `images/contact-sheet.py` | Original vs upscale sheets to check every face | `--jobs jobs.json --up dir` | bk-mason-park-kids |
 
@@ -126,7 +125,7 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 - SEO plugin configuration: bk-dr-nahlah `16-instatic-plugins/configure-seo-plugins.mjs`,
   `populate-seo.mjs` (stale `webzite.*` ids, broken import), `retarget-seo-numbers.mjs`;
   bk-mason-park-kids `output/configure-seo.mjs`, `populate-seo.mjs`; bk-brandklout-website
-  `16-instatic-plugins/install-seo-plugins.mjs`. The plugin sources live in those worktrees too.
+  `16-instatic-plugins/install-seo-plugins.mjs`. (Plugin sources are in `../instatic-plugins/`.)
 - `set-site-tags.mjs` (bk-dr-nahlah): superseded by `../instatic-embeds/rollout-site-scripts.mjs`.
 - Mason Park static-to-Instatic pipeline (`to-instatic`, `ship-payload`, `run-converter`,
   `fetch-nodes`, `import-pages`, `import-styles`, `import-scripts`): bk-mason-park and

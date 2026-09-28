@@ -338,7 +338,7 @@ under `workflows/09-static-rebuild/.tmp/site/` (untracked).
   depend on an animation to be visible.
 - **"Submission in progress" on an untouched GoHighLevel form** is GHL's `enableSaveExitConfirmation`
   meeting the consent bridge's URL prefill, not a site bug. Turn it off in GHL;
-  `check-ghl-form.mjs` ([`tools/webflow-build`](../process/tools/webflow-build/webflow-build.md)) reads the flag.
+  `check-ghl-form.mjs` ([`tools/termly-ghl-consent/gates`](../process/tools/termly-ghl-consent/termly-ghl-consent.md)) reads the flag.
 - **`clip-path` does not contain overflow.** A film scaled 1.14 inside a clipped window still widens
   the layout: on a phone the layout viewport grew from 390 to 418 px, the page rendered 7 % small and
   the fixed call bar fell off the bottom. Give the window `overflow: hidden` as well.

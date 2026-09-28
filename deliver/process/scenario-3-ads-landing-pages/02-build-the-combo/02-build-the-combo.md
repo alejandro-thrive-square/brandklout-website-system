@@ -13,8 +13,8 @@ never on the order.
   - `https://www.livewelldentalva.com/ads-landing-pages/dental-implants`
   - `https://www.livewelldentalva.com/ads-landing-pages/dental-implant-consultation`
   - `https://www.livewelldentalva.com/ads-landing-pages/thank-you-implants`
-- Section cards for the Sitemap FigJam: `tools/specialty-sitemaps/section-flows.py`
-  (`T['ads_landing']`, `T['ads_consult']`, `T['ads_thankyou']`), kept identical to the tables below.
+- The tables below are the single source of the combo's section flow; the other page types are in
+  `tools/specialty-sitemaps/section-flows.md`.
 
 ## The flow (named as the reference names its sections)
 
@@ -161,7 +161,7 @@ never on the order.
 - `tools/instatic-embeds/instatic-embeds.md`: the Embed block, siteScripts, frame and connect origins.
 - `tools/instatic-api-sync/instatic-api-sync.md` and `insta-api.mjs`: REST writes to Instatic.
 - `tools/termly-ghl-consent/termly-ghl-consent.md`: Termly head and the GHL consent bridge.
-- `tools/specialty-sitemaps/section-flows.py`: the same flows as FigJam section cards.
+- `tools/specialty-sitemaps/section-flows.md`: section flows for every other page type.
 - Builders not promoted (content is per client), read as examples:
   bk-mason-park `workflows/09-static-rebuild/output/build-ads-landing-pages.mjs` and
   `place-ad-embeds.mjs`; bk-dr-nahlah `workflows/04-design/output/site-src/build-site.mjs`,
