@@ -28,10 +28,35 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
-import { fileURLToPath } from 'node:url'
-import { getPages, getSite, api } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { execFileSync } from 'node:child_process'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
+
+// Load the WORKTREE .env before the toolkit: `insta-api.mjs` walks up from its own folder, which in
+// a client worktree is the main checkout (a different client). Parsed by hand: `node --env-file`
+// ends a value at `#`.
+for (let dir = HERE; ; dir = path.dirname(dir)) {
+  const env = path.join(dir, '.env')
+  if (fs.existsSync(env)) {
+    for (const l of fs.readFileSync(env, 'utf8').split(/\r?\n/)) {
+      const m = l.match(/^([A-Z0-9_]+)=(.*)$/)
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '')
+    }
+    break
+  }
+  if (path.dirname(dir) === dir) throw new Error('no .env above this script')
+}
+// Client worktrees carry no deliver/process; fall back to the main checkout's copy.
+const TOOL = 'deliver/process/tools/instatic-api-sync/insta-api.mjs'
+let toolkit = path.resolve(HERE, '../../../../../../..', TOOL)
+if (!fs.existsSync(toolkit)) {
+  const common = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: HERE })
+  toolkit = path.join(path.dirname(String(common).trim()), TOOL)
+}
+const { getPages, getSite, api, BASE } = await import(pathToFileURL(toolkit).href)
+if (!/ifadentistry|institute-for-advanced-dentistry/.test(BASE)) throw new Error(`refusing: ${BASE} is not an IFA instance`)
+console.log(`host       ${BASE}`)
 const apply = process.argv.includes('--apply')
 const nid = () => crypto.randomBytes(16).toString('base64url').slice(0, 21)
 

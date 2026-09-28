@@ -50,6 +50,8 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   opt-in the policies describe; the wording itself has an A2P problem, see the 2026-09-18 run.
 - **Legal pages**: `/privacy-policy` and `/terms-of-service` carry the client's own A2P 10DLC
   documents since 2026-09-18, not the WordPress text, and every footer links Terms of Service.
+  **Peoria is the only office since 2026-09-28** (Phoenix closed; its address block is gone from both):
+  [runbook/2026-09-28-phoenix-closed-message-types.md](runbook/2026-09-28-phoenix-closed-message-types.md).
   Source `workflows/21-instatic-upload/legal/`; the originals the client sent are in
   `workflows/00-client-delivery-initialization/.tmp/`. See
   [runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md](runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md).
@@ -84,7 +86,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   WordPress clone by `site.js`, items `_xs27_EDLa` + three inline configs). The old container
   `GTM-K8N3JK3Q` went 2026-09-28. If `GTM-5XR78DN7` fires the same GA4 property, pageviews are
   counted twice; blank it the same way with `tags/remove-old-gtm.mjs` as the pattern.
-- **The GHL form's SMS consent wording contradicts itself** ("non-marketing … special offers,
+- **The GHL form's SMS consent wording contradicts itself** and fails GHL's "Message type disclosure" check (2026-09-28; replacement wording in that run) ("non-marketing … special offers,
   discounts"), which is what A2P vetting reads. It is fixed in GoHighLevel, not here.
 - **After WordPress is retired**: drop `a:bill.wordkeeper.net`, `mx` and `a` from SPF. Cancel the agency's hosting only once the client confirms nothing else lives there.
 - `verify-live-wp.mjs` compares against www.ifadentistry.com, which is Instatic now. Retarget it or retire it.
