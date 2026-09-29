@@ -4,7 +4,7 @@ The **standing** state of this project: what is true now, what is next, and the 
 Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) — read the index,
 then only the runs you need. Do not read them all.
 
-## Where things stand (2026-09-22)
+## Where things stand (2026-09-28)
 
 | | |
 | :--- | :--- |
@@ -12,6 +12,7 @@ then only the runs you need. Do not read them all.
 | **Published site** | 38 editorial pages + 43 migrated blog posts + **18 ads landing pages** + 1 ChatGPT page, live and verified. `/five-year-warranty` added 2026-09-21. Home page reviews are the ReputationHub **embed only** since 2026-09-22. |
 | **Call tracking** | **ON for every visitor, no consent needed** (client, 2026-09-22e). Two GoHighLevel pools: Alexandria's (swaps (571) 617-7245) in the head of every page except `ads-landing-pages/tysons-*`, Tysons' (swaps (703) 448-3312) on those nine. Scoped by embed-origins **1.8.0** `pages=`/`except=` (`set-site-tags.mjs`). `connectOrigins` carries `services.leadconnectorhq.com` + `services.msgsndr.com`; without them, pages with no embed refuse the swap. Gate: `check-pool-scope.mjs`. Proof: `dni-proof.mjs --relay`. |
 | **ChatGPT Ads** | Dedicated page `/ads-landing-pages/alexandria-all-on-4-chatgpt` (2026-09-23b), a live clone of the Alexandria All-on-4 page with every CTA on its own form, now its own GHL form `AD6c2Du26a0JUpxoh6p5` (2026-09-23d, `set-chatgpt-form.mjs`, prod + staging). OpenAI `oaiq` pixel `2EKUEqMZC1in13nT8T8eb5` on **that page only**, init only, no consent hold, www only; **off the Google pages**. **No ChatGPT lead is measured**: the new form redirects to the *Tysons* Google thank-you page, so the redirect needs changing in GHL. `dup-chatgpt-landing.mjs`, `set-openai-pixel.mjs` + `openai-ads-pixel.js`. |
+| **Sedation** | **Nitrous oxide and oral sedation only, no IV, no anaesthesiologist** (client, 2026-09-28). Every page, head, schema, OG, alt and post says so; `/meet-dr-nahlah` alone keeps "IV Sedation Certificate" as a credential (ask the client). Gate: `audit-live-sedation.mjs`. Never reintroduce IV/anaesthesiologist copy. See the 2026-09-28 run. |
 | **Telephone numbers** | Tysons Corner · McLean **(703) 448-3312** (both lines), Alexandria new patients **(571) 617-7245**, Alexandria current patients (703) 940-5410. Retargeted 2026-09-22c; `(571) 702-9900` and `(571) 253-7790` are retired everywhere including the structured data. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
 | **Ads landing pages** | **LIVE** at `www.drnahlah.com/ads-landing-pages/<office>-<campaign>[-consultation\|-thank-you]` (Alexandria and Tysons Corner × All-on-4, dental implants, veneers). Rebuilt 2026-09-18 to the Livewell flow, pushed headlessly over REST (`22-instatic-api-sync/ads-to-nodes.py` + `push-ads-pages.mjs`), noindex, with the four site tags live site-wide. Brandklout's review (BugHerd #32-#48) applied and republished 2026-09-21. See the 2026-09-18 and 2026-09-21 runs. |
@@ -79,6 +80,14 @@ then only the runs you need. Do not read them all.
 
 These bite every time somebody works in here. The per-run files carry the rest.
 
+- **Copy lives in SEVEN stores, not the page tree.** Nodes, the row `title` cell, code assets
+  (`jsonld/*.js`, `seo-head.js`), the open-graph runtime store, **aeo-schema stored blocks**
+  (`runtime/entries`), media alt text and `posts` rows. `push-sedation-copy.mjs` walks all of
+  them and is the template for any site-wide wording change.
+- **Every pre-v2 script in `22-instatic-api-sync/` imports a path that no longer exists**
+  (`../../../../process/...`). Go through `sedation-api.mjs`, which loads this worktree's
+  `.env` (without `process.loadEnvFile`: it cuts the password at `#`) and imports the helper
+  from the main checkout.
 - **A phone number lives in FOUR places, and fixing the pages fixes only one.** The visible
   numbers are `base.link` nodes on all 57 pages; the shared `cta-offices` component has its
   own; the JSON-LD is `brandklout.aeo-schema` plugin settings; and the per-page meta/og/twitter

@@ -247,7 +247,7 @@
        "name": "Will the surgery hurt?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Implant surgery is done under sedation. You feel nothing during it, and most patients have no memory of the appointment at all. Afterwards, patients generally report minor discomfort managed with over-the-counter medication."
+        "text": "Implant surgery is done under sedation. You feel nothing during it, and you stay relaxed throughout. Afterwards, patients generally report minor discomfort managed with over-the-counter medication."
        }
       },
       {
@@ -356,7 +356,7 @@
        "name": "What sedation is available?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Nitrous oxide, oral sedation and IV sedation. Oral and IV are administered by a medical anaesthesiologist and need transport arranged both ways."
+        "text": "Nitrous oxide and oral sedation, both given here by the practice’s own team. After oral sedation you need someone to drive you both ways. The practice does not offer IV sedation."
        }
       },
       {
@@ -432,17 +432,17 @@
   }
  },
  "sedation-dentistry": {
-  "title": "Sedation Dentistry | Nitrous, Oral & IV | McLean, VA",
-  "desc": "Nitrous, oral and IV sedation for implant and full-arch surgery, with hospital privileges at a Level 1 trauma centre and a medical anaesthesiologist.",
+  "title": "Sedation Dentistry | Nitrous & Oral Sedation | McLean, VA",
+  "desc": "Nitrous oxide and oral sedation for implant and full-arch surgery, with hospital privileges at a Level 1 trauma centre.",
   "ogTitle": "Sedation Dentistry | Dr. Nahlah, Northern Virginia",
-  "ogDesc": "Hours of full-arch surgery, turned into something you do not remember.",
+  "ogDesc": "Hours of full-arch surgery, sat through calmly.",
   "jsonLd": {
    "@context": "https://schema.org",
    "@graph": [
     {
      "@type": "MedicalWebPage",
      "name": "Sedation dentistry",
-     "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
+     "description": "Nitrous oxide and oral sedation for implant and full-arch surgery.",
      "isPartOf": {
       "@id": "/#website"
      },
@@ -453,7 +453,7 @@
     {
      "@type": "MedicalProcedure",
      "name": "Sedation dentistry",
-     "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
+     "description": "Nitrous oxide and oral sedation for implant and full-arch surgery.",
      "bodyLocation": "Mouth",
      "performerType": "Board-certified prosthodontist",
      "provider": {
@@ -468,7 +468,7 @@
        "name": "Will I be unconscious?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not in the general-anaesthetic sense. Under IV sedation most patients drift and have no memory of the procedure afterwards; you remain responsive throughout. Nitrous is lighter still: you stay awake and simply stop minding."
+        "text": "No. Nitrous oxide and oral sedation both leave you awake and responsive. Oral sedation is the deeper of the two: you feel drowsy and relaxed, and some patients remember little of the appointment afterwards. Nitrous is lighter still: you stay awake and simply stop minding. The practice does not offer IV sedation or general anaesthesia."
        }
       },
       {
@@ -476,7 +476,7 @@
        "name": "Can I drive myself home?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "After nitrous oxide, in most cases yes, because recovery is quick. After oral or IV sedation, no: transport to and from the appointment has to be arranged in advance."
+        "text": "After nitrous oxide, in most cases yes, because recovery is quick. After oral sedation, no: transport to and from the appointment has to be arranged in advance."
        }
       },
       {
@@ -492,7 +492,7 @@
        "name": "Who administers it?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oral and IV sedation are administered by a medical anaesthesiologist, depending on the extent of treatment and your personal health."
+        "text": "Dr. Nahlah’s own clinical team, here in the office. Which of the two suits you depends on the extent of treatment and your personal health, and is settled at the consultation."
        }
       }
      ]
@@ -1354,7 +1354,7 @@
        "name": "Will dental implant surgery be painful?",
        "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The surgery is completed while you are under sedation. You will feel no pain and may sleep lightly through it. Most patients have no memory of the appointment or the procedure."
+        "text": "The surgery is completed while you are under sedation. You will feel no pain, and you stay relaxed throughout."
        }
       },
       {
