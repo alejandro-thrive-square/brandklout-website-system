@@ -209,6 +209,17 @@
   grid-row: 2;
   aspect-ratio: 16 / 10;
 }
+/* Added on the client's word (BugHerd #57, 2026-09-28). */
+.room_frame.is-d {
+  grid-column: 1 / 7;
+  grid-row: 3;
+  aspect-ratio: 16 / 10;
+}
+/* BugHerd #55: more room between the text and the button. The section is
+   hidden (#54) until there are photographs; this holds for when it returns. */
+.plates_copy .button-group {
+  margin-top: 2.5rem;
+}
 .proof_faq .heading-style-h2 {
   margin-top: 1.25rem;
   margin-bottom: 2rem;
@@ -247,7 +258,8 @@
   }
   .room_frame.is-a,
   .room_frame.is-b,
-  .room_frame.is-c {
+  .room_frame.is-c,
+  .room_frame.is-d {
     grid-column: 1 / 13;
     grid-row: auto;
     margin-top: 0;

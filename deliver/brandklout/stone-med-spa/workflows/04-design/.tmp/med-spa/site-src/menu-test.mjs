@@ -37,7 +37,8 @@ let v = await visible();
 t("hair thinning -> 2 rows", v.length === 2 && v.includes("prp") && v.includes("hair-restoration"), v.join(","));
 t("count text", (await pg.$eval("[data-ledger-count]", (e) => e.textContent)).includes("2 treatments address hair thinning"));
 t("empty groups hidden", (await pg.evaluate(() => [...document.querySelectorAll("[data-group]")].filter((g) => g.hidden).length)) === 3);
-t("pill pressed", (await pg.$eval('[data-concern="hair"]', (b) => b.getAttribute("aria-pressed"))) === "true");
+t("pill active", (await pg.$eval('[data-concern="hair"]', (b) => b.getAttribute("data-active"))) === "true");
+t("pill lands on the menu", (await pg.evaluate(() => location.hash)) === "#menu");
 await pg.screenshot({ path: "../shots/_menu-filtered.png" });
 
 await pg.click('[data-concern="hair"]');

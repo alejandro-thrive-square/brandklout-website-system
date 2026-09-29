@@ -78,16 +78,20 @@ export const CATEGORIES = [
   },
 ];
 
-/** The concern axis. A patient searches for the problem, not the product. */
+/** The concern axis. A patient searches for the problem, not the product.
+ * `desc` is the hover description on /treatments (BugHerd #51, 2026-09-28:
+ * "convert these to links and send to the proper section. Upon hover, display
+ * the description"); the treatments that address it are appended by
+ * build-site.mjs from each treatment's `concerns`, so the two cannot disagree. */
 export const CONCERNS = [
-  { id: "lines", name: "Fine lines & wrinkles" },
-  { id: "volume", name: "Volume loss" },
-  { id: "texture", name: "Texture & pores" },
-  { id: "pigment", name: "Pigmentation & tone" },
-  { id: "laxity", name: "Laxity & jawline" },
-  { id: "scarring", name: "Acne scarring" },
-  { id: "dullness", name: "Dryness & dullness" },
-  { id: "hair", name: "Hair thinning" },
+  { id: "lines", name: "Fine lines & wrinkles", desc: "Creases from expression and time, around the eyes, forehead and mouth." },
+  { id: "volume", name: "Volume loss", desc: "Hollowing and flattening in the cheeks, temples and lips." },
+  { id: "texture", name: "Texture & pores", desc: "Rough, uneven skin and enlarged pores." },
+  { id: "pigment", name: "Pigmentation & tone", desc: "Sun spots, uneven tone and discoloration." },
+  { id: "laxity", name: "Laxity & jawline", desc: "Loosening skin and a softer jawline as collagen declines." },
+  { id: "scarring", name: "Acne scarring", desc: "Pitted or uneven marks left behind by acne." },
+  { id: "dullness", name: "Dryness & dullness", desc: "Dry, tired-looking skin that has lost its glow." },
+  { id: "hair", name: "Hair thinning", desc: "Thinning hair on the scalp, in men and women." },
 ];
 
 /**

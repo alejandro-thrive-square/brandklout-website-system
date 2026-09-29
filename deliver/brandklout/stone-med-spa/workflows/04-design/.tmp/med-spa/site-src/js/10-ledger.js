@@ -86,8 +86,9 @@
       }
 
       buttons.forEach(function (b) {
+        // data-active, not aria-pressed: the chips are links since BugHerd #51.
         b.setAttribute(
-          "aria-pressed",
+          "data-active",
           b.getAttribute("data-concern") === active ? "true" : "false"
         );
       });

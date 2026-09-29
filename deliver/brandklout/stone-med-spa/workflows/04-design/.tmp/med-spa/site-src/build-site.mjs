@@ -135,13 +135,49 @@ function shelf() {
   }).join("\n");
 }
 
-/** The concern pills. Buttons, not links — they filter, they do not navigate. */
+/** The concern pills. Links since BugHerd #51 (2026-09-28): a click filters the
+    menu (10-ledger.js) and then lands on it (#menu), and hovering one shows what
+    the concern is and which treatments address it. The tip sits beside the link,
+    not inside it, so it describes the link rather than renaming it. */
 function concernPills() {
-  return CONCERNS.map(
-    (c) => `          <li><button class="concern_chip" type="button" data-concern="${c.id}" aria-pressed="false">${esc(
+  return CONCERNS.map((c) => {
+    const names = TREATMENTS.filter((t) => t.concerns.includes(c.id)).map((t) => t.name);
+    return `          <li class="concern_item"><a class="concern_chip" href="#menu" data-concern="${c.id}" data-active="false" aria-describedby="concern-tip-${c.id}">${esc(
       c.name
-    )}</button></li>`
-  ).join("\n");
+    )}</a><span class="concern_tip" id="concern-tip-${c.id}" role="tooltip">${esc(c.desc)} <span class="concern_tip-list">Treated with ${esc(names.join(", "))}.</span></span></li>`;
+  }).join("\n");
+}
+
+/** The navbar's Treatments dropdown and the drawer's list (BugHerd #87,
+    2026-09-28: "add treatment sub pages in menu"). One source, TREATMENTS, so a
+    new page appears in both. Plain links and CSS (:hover / :focus-within), no
+    script, so it survives the Instatic import as it is. */
+function navTreatments() {
+  const cols = CATEGORIES.map((c) => {
+    const links = TREATMENTS.filter((t) => t.category === c.id && t.page)
+      .map((t) => `              <a class="navbar_sub-link" href="${t.page}">${esc(t.name)}</a>`)
+      .join("\n");
+    return `            <div class="navbar_sub-col">
+              <p class="navbar_sub-title">${esc(c.name)}</p>
+${links}
+            </div>`;
+  }).join("\n");
+  return `<div class="navbar_dropdown">
+          <a class="navbar_link" href="treatments.html"{{CUR_TREATMENTS}}>Treatments</a>
+          <div class="navbar_sub">
+            <div class="navbar_sub-panel">
+${cols}
+              <a class="navbar_sub-all" href="treatments.html">All treatments &rarr;</a>
+            </div>
+          </div>
+        </div>`;
+}
+function drawerTreatments() {
+  return `<div class="drawer_sub">
+${TREATMENTS.filter((t) => t.page)
+  .map((t) => `        <a class="drawer_sub-link" href="${t.page}">${esc(t.name)}</a>`)
+  .join("\n")}
+      </div>`;
 }
 
 /* The concerns a treatment addresses, written out.
@@ -374,7 +410,7 @@ const CATEGORY_NAME = (id) => CATEGORIES.find((c) => c.id === id).name;
 function relatedCard(slug) {
   if (slug === "membership")
     return `          <a class="related_card" href="membership.html" data-cursor="Open">
-            <figure class="related_media"><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <figure class="related_media"><img src="assets/stock-544821297.webp" alt="" width="2000" height="1429" loading="lazy"></figure>
             <span class="related_body">
               <span class="related_meta">Membership</span>
               <span class="related_name">$149 a month</span>
@@ -526,32 +562,7 @@ ${items(p.care.after)}
   </div>
 </section>
 
-<section class="section_gallery gallery_component" data-theme="dark">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-large">
-        <div class="gallery_grid">
-          <div class="gallery_plates" aria-hidden="true" data-reveal>
-            <span class="gallery_plate"><span>Before</span></span>
-            <span class="gallery_plate"><span>After</span></span>
-          </div>
-          <div class="gallery_copy">
-            <p class="eyebrow">Before &amp; after</p>
-            <h2 class="heading-style-h2" data-split>New photos are <em class="text-style-display-accent">on the way</em>.</h2>
-            <p class="text-size-medium gallery_text" data-reveal>
-              We're updating our before-and-after gallery. In the meantime, ask to see results
-              for your treatment at your consultation.
-            </p>
-            <div class="button-group" data-reveal>
-              <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-alternate" href="results.html">Reviews</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- The before-and-after placeholder stood here; removed on the client's word (BugHerd #84, 2026-09-28). Botox's copy is in pages/_hidden/botox-before-after.html. -->
 
 <section class="section_faq detail_faq">
   <div class="padding-global">
@@ -821,7 +832,7 @@ for (const page of PAGES) {
     s.replace(/\{\{CUR_([A-Z0-9_]+)\}\}/g, (_, key) =>
       key.toLowerCase().replace(/_/g, "-") === page.slug ? ' aria-current="page"' : ""
     );
-  const nav = cur(navbar).replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
+  const nav = cur(navbar.replace("{{NAV_TREATMENTS}}", navTreatments)).replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -832,7 +843,7 @@ ${head.replace("{{SEO}}", seoBlock(page.slug))}
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="page-wrapper">
 ${nav}
-${cur(drawer)}
+${cur(drawer.replace("{{DRAWER_TREATMENTS}}", drawerTreatments))}
 <main class="main-wrapper" id="main">
 ${body}
 ${

@@ -89,3 +89,20 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
+
+/* --- the treatment pages under "All treatments" (BugHerd #87) ------------- */
+.drawer_sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 1rem;
+  padding: 0.75rem 0 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.drawer_sub-link {
+  padding: 0.35rem 0;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.drawer_sub-link:hover {
+  color: var(--accent);
+}

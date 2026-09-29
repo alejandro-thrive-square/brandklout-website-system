@@ -41,6 +41,34 @@
 .words_component {
   min-width: 6ch;
 }
+/* The client's photograph beside the sentence (BugHerd #47, 2026-09-28). */
+.words_head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
+  gap: 3rem;
+  align-items: center;
+}
+.words_photo {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.words_photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+@media (max-width: 767px) {
+  .words_head {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .words_photo {
+    max-width: 18rem;
+  }
+}
 .words_item {
   white-space: nowrap;
 }

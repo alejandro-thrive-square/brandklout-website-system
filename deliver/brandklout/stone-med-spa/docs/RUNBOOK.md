@@ -15,6 +15,8 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 
 ## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
 
+**2026-09-29, latest — BugHerd round 2 on STAGING.** The client filed 45 more tasks (#43–#87) on production 2026-09-28. All on staging except **#10** (Abby/Brooke photos, Canva only) and **#73** (GHL form colours, a GHL setting): the client's AdobeStock photos, address **#110B** and new hours (Wed 9–3, Fri 9–4, weekends closed) site-wide, a Treatments dropdown, concern chips as links with hover descriptions, every FAQ question naming its subject, before-and-after placeholders and the doctor filmstrip hidden. **84 of 86 BugHerd tasks marked done** with a scope reply each. Production is still at 2026-09-18 and needs a go for rounds 1 + 2 — [run](./runbook/2026-09-29-bugherd-round-2-on-staging.md).
+
 **2026-09-23, latest — phone is (817) 674-2061**, the display number, on production (seq 21) and
 staging (seq 16). **The med spa's own GHL number pool (`vHDCe45MFTjdydJul0cd`) is live on production
 since 2026-09-24** and swaps that number in the browser with no consent needed; staging has no pool

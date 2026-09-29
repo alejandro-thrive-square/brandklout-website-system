@@ -230,10 +230,13 @@
 }
 
 /* --- why here ---------------------------------------------------------------------- */
+/* Two equal halves with the photograph centred in its own (BugHerd #82,
+   2026-09-28: "center photo"); it used to hang off the right edge with the gap
+   in the middle of the page. Every treatment page shares this section. */
 .why_grid {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  gap: 3rem 6rem;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3rem 4rem;
   align-items: center;
 }
 .why_copy .heading-style-h2 {
@@ -246,6 +249,9 @@
 }
 .why_media {
   position: relative;
+  width: 100%;
+  max-width: 32rem;
+  justify-self: center;
   padding-left: 3rem;
   padding-bottom: 3rem;
 }

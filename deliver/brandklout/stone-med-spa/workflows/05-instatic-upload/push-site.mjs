@@ -22,7 +22,7 @@ import zlib from 'node:zlib'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
-import { getSite, getPages, api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { getSite, getPages, api } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { SNIPPET as GHL_SNIPPET, HEIGHT as GHL_HEIGHT, FORM_NAME as GHL_NAME } from '../04-design/.tmp/med-spa/site-src/ghl-form.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))

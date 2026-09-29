@@ -51,7 +51,7 @@
   border-color: var(--fg);
   transform: translateY(-2px);
 }
-.concern_chip[aria-pressed="true"] {
+.concern_chip[data-active="true"] {
   background: var(--fg);
   border-color: var(--fg);
   color: var(--white);
@@ -518,5 +518,56 @@
   .doors_component:hover .doors_door.is-open:not(:hover) .doors_body .button {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* --- concern chips as links, with a description on hover (BugHerd #51) --- */
+.concern_item {
+  position: relative;
+}
+.concern_tip {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.6rem);
+  z-index: 4;
+  width: max-content;
+  max-width: 18rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-card);
+  background-color: var(--charcoal);
+  color: var(--white);
+  font-size: var(--size-text-small);
+  line-height: 1.45;
+  box-shadow: var(--shadow-card-hover);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.3rem);
+  pointer-events: none;
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    visibility 0s linear 0.2s;
+}
+.concern_tip-list {
+  display: block;
+  margin-top: 0.45rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: var(--size-text-tiny);
+}
+.concern_item:hover .concern_tip,
+.concern_chip:focus-visible + .concern_tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    visibility 0s;
+}
+/* No hover on a touch screen: the tap filters and lands on the menu, and the
+   count line under the chips says what was picked. */
+@media (hover: none) {
+  .concern_tip {
+    display: none;
   }
 }

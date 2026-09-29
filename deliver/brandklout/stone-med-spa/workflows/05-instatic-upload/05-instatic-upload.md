@@ -898,6 +898,17 @@ Staging is the Railway environment `staging` at `https://staging.westlaketxmedsp
 exported value wins over the `.env` one, so the whole pipeline points at staging with one export.
 Client changes go to staging first and to production only once they are reviewed there.
 
+> [!IMPORTANT]
+> **Since the system-v2 consolidation (2026-09-27) the API client is at
+> `deliver/process/tools/instatic-api-sync/insta-api.mjs`**, and this worktree's sparse cone did not
+> include it. Before any push: `git sparse-checkout add deliver/process/tools`. The scripts here were
+> repointed on 2026-09-29; a script still importing `process/22-instatic-api-sync` fails with
+> ERR_MODULE_NOT_FOUND.
+>
+> **`node scripts/assets.mjs push` rewrites every client's `assets.tsv`**, and in a sparse
+> worktree the other clients' folders are absent, so their manifests come back EMPTY (hundreds of
+> deletions). Commit only `deliver/brandklout/stone-med-spa/assets.tsv`; `git checkout --` the rest.
+
 ```bash
 S=<scratchpad>                              # holds doh-lookup.cjs and a staging link dir
 export INSTATIC_BASE_URL=https://staging.westlaketxmedspa.com
@@ -919,7 +930,7 @@ node build-import-input.mjs                                   # 2. reads .tmp/me
 #   production by default and a staging map there builds a payload of URLs that 404 live.
 RAILWAY_LINK_DIR=$S/link-staging NODE_OPTIONS="-r $S/doh-lookup.cjs" bash ship.sh
 node -r $S/doh-lookup.cjs push-site.mjs --apply --force
-node -r $S/doh-lookup.cjs -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+node -r $S/doh-lookup.cjs -e "import('../../../../process/tools/instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
 node -r $S/doh-lookup.cjs verify-live.mjs && node -r $S/doh-lookup.cjs css-parity.mjs
 node compare-live.mjs && node visual-diff.mjs && node visual-diff.mjs 390
 ```

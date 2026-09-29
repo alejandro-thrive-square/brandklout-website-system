@@ -31,7 +31,7 @@
       "medicalSpecialty": "Dermatology",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "72 Andorra Dr #110b",
+        "streetAddress": "72 Andorra Dr #110B",
         "addressLocality": "Westlake",
         "addressRegion": "TX",
         "postalCode": "76262",
@@ -52,12 +52,26 @@
           "dayOfWeek": [
             "Monday",
             "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
+            "Thursday"
           ],
           "opens": "09:00",
           "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Wednesday"
+          ],
+          "opens": "09:00",
+          "closes": "15:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "16:00"
         }
       ]
     },
@@ -84,7 +98,7 @@
         },
         {
           "@type": "Question",
-          "name": "Do I need a separate appointment?",
+          "name": "Do I need a separate appointment for a skin booster?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "No. The booster is added during your HydraFacial, so it fits in the same visit."
@@ -92,7 +106,7 @@
         },
         {
           "@type": "Question",
-          "name": "Which booster should I choose?",
+          "name": "Which skin booster should I choose?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Tell us what's bothering your skin. Your aesthetician will suggest one after looking at it."
@@ -100,7 +114,7 @@
         },
         {
           "@type": "Question",
-          "name": "Can I use a different booster each time?",
+          "name": "Can I use a different skin booster each time?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Yes. Many people change boosters with the seasons or as their skin changes."
@@ -176,7 +190,38 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
+          <div class="navbar_dropdown">
           <a class="navbar_link" href="treatments.html">Treatments</a>
+          <div class="navbar_sub">
+            <div class="navbar_sub-panel">
+            <div class="navbar_sub-col">
+              <p class="navbar_sub-title">Injectables</p>
+              <a class="navbar_sub-link" href="botox.html">Botox | Xeomin</a>
+              <a class="navbar_sub-link" href="dysport-jeuveau.html">Dysport &amp; Jeuveau</a>
+              <a class="navbar_sub-link" href="dermal-fillers.html">Dermal Fillers</a>
+              <a class="navbar_sub-link" href="sculptra.html">Sculptra</a>
+            </div>
+            <div class="navbar_sub-col">
+              <p class="navbar_sub-title">Skin Rejuvenation</p>
+              <a class="navbar_sub-link" href="morpheus8.html">Morpheus8</a>
+              <a class="navbar_sub-link" href="chemical-peels.html">Chemical Peels</a>
+              <a class="navbar_sub-link" href="skinpen.html">SkinPen Microneedling</a>
+            </div>
+            <div class="navbar_sub-col">
+              <p class="navbar_sub-title">Facials</p>
+              <a class="navbar_sub-link" href="hydrafacial.html">HydraFacial</a>
+              <a class="navbar_sub-link" href="dermaplaning.html">Dermaplaning</a>
+              <a class="navbar_sub-link" href="skin-boosters.html">Skin Boosters</a>
+            </div>
+            <div class="navbar_sub-col">
+              <p class="navbar_sub-title">Restoration</p>
+              <a class="navbar_sub-link" href="prp.html">PRP Treatment</a>
+              <a class="navbar_sub-link" href="hair-restoration.html">Hair Restoration</a>
+            </div>
+              <a class="navbar_sub-all" href="treatments.html">All treatments &rarr;</a>
+            </div>
+          </div>
+        </div>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="membership.html">Membership</a>
           <a class="navbar_link" href="team.html">Our team</a>
@@ -220,6 +265,20 @@
     <nav class="drawer_nav" aria-label="Mobile">
       <a class="drawer_link" href="index.html">Home</a>
       <a class="drawer_link" href="treatments.html">All treatments</a>
+      <div class="drawer_sub">
+        <a class="drawer_sub-link" href="botox.html">Botox | Xeomin</a>
+        <a class="drawer_sub-link" href="dysport-jeuveau.html">Dysport &amp; Jeuveau</a>
+        <a class="drawer_sub-link" href="dermal-fillers.html">Dermal Fillers</a>
+        <a class="drawer_sub-link" href="sculptra.html">Sculptra</a>
+        <a class="drawer_sub-link" href="morpheus8.html">Morpheus8</a>
+        <a class="drawer_sub-link" href="chemical-peels.html">Chemical Peels</a>
+        <a class="drawer_sub-link" href="skinpen.html">SkinPen Microneedling</a>
+        <a class="drawer_sub-link" href="hydrafacial.html">HydraFacial</a>
+        <a class="drawer_sub-link" href="dermaplaning.html">Dermaplaning</a>
+        <a class="drawer_sub-link" href="skin-boosters.html">Skin Boosters</a>
+        <a class="drawer_sub-link" href="prp.html">PRP Treatment</a>
+        <a class="drawer_sub-link" href="hair-restoration.html">Hair Restoration</a>
+      </div>
       <a class="drawer_link" href="results.html">Results &amp; reviews</a>
       <a class="drawer_link" href="membership.html">Membership</a>
       <a class="drawer_link" href="financing.html">Financing</a>
@@ -232,7 +291,7 @@
     <div class="drawer_foot">
       <a class="button" href="book.html">Book a consultation</a>
       <a class="button is-secondary" href="tel:+18176742061">Call (817) 674-2061</a>
-      <p class="drawer_meta">72 Andorra Dr #110b, Westlake, TX 76262</p>
+      <p class="drawer_meta">72 Andorra Dr #110B, Westlake, TX 76262</p>
     </div>
   </div>
 </div>
@@ -397,32 +456,7 @@
   </div>
 </section>
 
-<section class="section_gallery gallery_component" data-theme="dark">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-large">
-        <div class="gallery_grid">
-          <div class="gallery_plates" aria-hidden="true" data-reveal>
-            <span class="gallery_plate"><span>Before</span></span>
-            <span class="gallery_plate"><span>After</span></span>
-          </div>
-          <div class="gallery_copy">
-            <p class="eyebrow">Before &amp; after</p>
-            <h2 class="heading-style-h2" data-split>New photos are <em class="text-style-display-accent">on the way</em>.</h2>
-            <p class="text-size-medium gallery_text" data-reveal>
-              We're updating our before-and-after gallery. In the meantime, ask to see results
-              for your treatment at your consultation.
-            </p>
-            <div class="button-group" data-reveal>
-              <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-alternate" href="results.html">Reviews</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- The before-and-after placeholder stood here; removed on the client's word (BugHerd #84, 2026-09-28). Botox's copy is in pages/_hidden/botox-before-after.html. -->
 
 <section class="section_faq detail_faq">
   <div class="padding-global">
@@ -439,15 +473,15 @@
               <div class="faq_answer"><p>Not here. Our boosters are serums added to your HydraFacial. Nothing is injected.</p></div>
             </details>
             <details class="faq_item">
-              <summary class="faq_question"><span class="faq_label">Do I need a separate appointment?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <summary class="faq_question"><span class="faq_label">Do I need a separate appointment for a skin booster?</span><span class="faq_icon" aria-hidden="true"></span></summary>
               <div class="faq_answer"><p>No. The booster is added during your HydraFacial, so it fits in the same visit.</p></div>
             </details>
             <details class="faq_item">
-              <summary class="faq_question"><span class="faq_label">Which booster should I choose?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <summary class="faq_question"><span class="faq_label">Which skin booster should I choose?</span><span class="faq_icon" aria-hidden="true"></span></summary>
               <div class="faq_answer"><p>Tell us what's bothering your skin. Your aesthetician will suggest one after looking at it.</p></div>
             </details>
             <details class="faq_item">
-              <summary class="faq_question"><span class="faq_label">Can I use a different booster each time?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <summary class="faq_question"><span class="faq_label">Can I use a different skin booster each time?</span><span class="faq_icon" aria-hidden="true"></span></summary>
               <div class="faq_answer"><p>Yes. Many people change boosters with the seasons or as their skin changes.</p></div>
             </details>
           </div>
@@ -480,7 +514,7 @@
             </span>
           </a>
           <a class="related_card" href="membership.html" data-cursor="Open">
-            <figure class="related_media"><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <figure class="related_media"><img src="assets/stock-544821297.webp" alt="" width="2000" height="1429" loading="lazy"></figure>
             <span class="related_body">
               <span class="related_meta">Membership</span>
               <span class="related_name">$149 a month</span>
@@ -542,7 +576,7 @@
      2026 call and was told it is working as intended ("Web Dev Brief - WMA",
      section 1: "No change needed"), so the site keeps the tracking number. Do
      not "fix" it to the office line from the flyer; that loses the tracking.
-     Suite #110b: the client corrected #110 on BugHerd (#24, 2026-09-22).
+     Suite #110B: the client corrected #110 on BugHerd (#24, 2026-09-22).
 
      SOCIALS are the two on the flyer: Instagram @westlakeaesthetics and TikTok
      @westlakeaesthetic (no s). The Stone Surgical Arts Facebook page it used to
@@ -571,7 +605,7 @@
           <div class="footer_col">
             <div class="footer_item">
               <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
-              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110b+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110b<br>Westlake, TX 76262</a>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110B+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110B<br>Westlake, TX 76262</a>
             </div>
             <div class="footer_item">
               <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
@@ -604,9 +638,13 @@
           <div class="footer_col is-right">
             <p class="text-size-tiny text-style-allcaps text-color-accent">Hours</p>
             <dl class="footer_hours">
-              <div class="footer_hours-row"><dt>Mon &ndash; Fri</dt><dd>9:00 &ndash; 5:00</dd></div>
-              <div class="footer_hours-row"><dt>Saturday</dt><dd>By appointment</dd></div>
-              <div class="footer_hours-row"><dt>Sunday</dt><dd>Closed</dd></div>
+              <div class="footer_hours-row"><dt>Mon</dt><dd>9:00AM &ndash; 5:00PM</dd></div>
+              <div class="footer_hours-row"><dt>Tue</dt><dd>9:00AM &ndash; 5:00PM</dd></div>
+              <div class="footer_hours-row"><dt>Wed</dt><dd>9:00AM &ndash; 3:00PM</dd></div>
+              <div class="footer_hours-row"><dt>Thu</dt><dd>9:00AM &ndash; 5:00PM</dd></div>
+              <div class="footer_hours-row"><dt>Fri</dt><dd>9:00AM &ndash; 4:00PM</dd></div>
+              <div class="footer_hours-row"><dt>Sat</dt><dd>Closed</dd></div>
+              <div class="footer_hours-row"><dt>Sun</dt><dd>Closed</dd></div>
             </dl>
           </div>
         </div>

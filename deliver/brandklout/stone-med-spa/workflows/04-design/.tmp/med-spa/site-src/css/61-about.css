@@ -327,3 +327,16 @@
     height: 16rem;
   }
 }
+
+/* --- the surgical frame is a link to Stone Surgical Arts (BugHerd #64) ---- */
+a.line_frame {
+  display: block;
+  color: var(--white);
+}
+a.line_frame .line_caption {
+  transition: background-color 0.25s var(--ease);
+}
+a.line_frame:hover .line_caption,
+a.line_frame:focus-visible .line_caption {
+  background: var(--charcoal);
+}

@@ -1,7 +1,7 @@
 // One-off: rebuild media-map.json's entries against staging's own media ids,
 // matched by URL (clone-site keeps URLs, not ids). Writes media-map.staging.json.
 import fs from 'node:fs'
-import { api, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 const media = await api('GET', '/admin/api/cms/media?limit=500')
 const list = Array.isArray(media) ? media : media.assets || media.items || []
 if (!list.length) { console.log('unexpected shape', JSON.stringify(media).slice(0, 400)); process.exit(1) }

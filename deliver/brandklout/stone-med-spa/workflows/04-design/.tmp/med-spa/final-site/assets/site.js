@@ -225,8 +225,9 @@
       }
 
       buttons.forEach(function (b) {
+        // data-active, not aria-pressed: the chips are links since BugHerd #51.
         b.setAttribute(
-          "aria-pressed",
+          "data-active",
           b.getAttribute("data-concern") === active ? "true" : "false"
         );
       });
@@ -296,7 +297,7 @@
       p.textContent =
         "Our booking form could not load. Please call " +
         PHONE +
-        " and we will book you in, Monday to Friday, 9 to 5.";
+        " and we will book you in.";
       slot.appendChild(p);
     }
 

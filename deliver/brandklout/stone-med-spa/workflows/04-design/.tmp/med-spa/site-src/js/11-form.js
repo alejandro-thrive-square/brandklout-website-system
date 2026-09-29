@@ -38,7 +38,7 @@
       p.textContent =
         "Our booking form could not load. Please call " +
         PHONE +
-        " and we will book you in, Monday to Friday, 9 to 5.";
+        " and we will book you in.";
       slot.appendChild(p);
     }
 
