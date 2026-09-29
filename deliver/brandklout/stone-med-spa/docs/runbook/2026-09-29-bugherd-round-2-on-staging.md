@@ -8,7 +8,7 @@ path was wrong on #60). All 19 AdobeStock files the client named are on the Ston
 
 ## Done
 
-**Staging `https://staging.westlaketxmedspa.com` — 24 pages published, `{"publishedPages":24}`.**
+**Staging `https://staging.westlaketxmedspa.com` — 24 pages published, `{"publishedPages":24}`.** Commit `7129cf29`.
 Snapshot before: `05-instatic-upload/.tmp/backup-staging-2026-09-29-bugherd-round2` (seq 17).
 Production untouched (last pushed 2026-09-18; it still lacks rounds 1 and 2).
 
