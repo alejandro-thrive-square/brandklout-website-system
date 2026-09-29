@@ -1,11 +1,12 @@
 # Runbook index
 
-23 runs, newest first. Each line is one file in this folder.
+24 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-29 | 2026-09-29 - Elfsight Google Reviews (pediatric #104B listing, app d359c3c4) on STAGING: replaces the homepage chip rail and the /patient-reviews wall; not on production yet. Gotchas: data-elfsight-app-lazy never boots here, a re-import drops the widget, Jev cannot drive Elfsight's iframe editor | [`2026-09-29-elfsight-google-reviews-on-staging.md`](./2026-09-29-elfsight-google-reviews-on-staging.md) |
 | 2026-09-27 | 2026-09-27 - A REAL STAGING ENVIRONMENT: staging.masonparkpediatricdental.com is its own Railway env, volume and DB, seeded from production (215/215 equivalent), de-indexed, same logins. This worktree now publishes to staging; production needs PROMOTE=production. Gotchas: plugin overrides and users do not travel, dead RAILWAY_TOKEN, stale resolver | [`2026-09-27-staging-environment.md`](./2026-09-27-staging-environment.md) |
 | 2026-09-26 | 2026-09-26 - BugHerd round five, #174-#433: 242 of 252 closed (Drive photos, badge strip home-only, Suite 104B captions gone site-wide, ~70 copy edits, SDF, insurer logos, ticker pause); 8 wait on the practice (GHL form, forms link, lender links, Invisalign Platinum). Gotchas: caption pass by pattern missed two, heredocs ate 
  | [`2026-09-26-bugherd-round-five.md`](./2026-09-26-bugherd-round-five.md) |
