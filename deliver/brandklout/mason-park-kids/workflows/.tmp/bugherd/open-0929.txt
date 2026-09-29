@@ -1,0 +1,250 @@
+#34 /contacts [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways] att=
+  Missing a form fill for inquires
+    > We need one thing from you to build this. The form itself is ready - layout, fields and placement on the Contact page - but a form has to send the enquiry somewhere, and for your other work that desti
+    > Still open. We need a GoHighLevel form for the kids practice before we can add one (see #198).
+#38 /contacts [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-copy>div.iv-actions>a.button.is-sun.is-lg] att=image.png
+  There is a line on the Book online button
+    > Changed, but we would like you to confirm it. Your screenshot shows a single darkened pixel row across the button, two pixels above its bottom edge. That lands exactly on the one place anything can pa
+#82 / [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#comfort.ch.ch-comfort>div.wrap:nth-of-type(2)>figure.ch-figure.is-band>img] att=image.png
+  replace the image 
+    > We could not use this one: the attachment on this note arrived as an empty file (0 bytes), so the upload probably failed. Could you attach the photo again? We will swap it in as soon as it arrives.
+#198 /contacts [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#hours.ch.ch-hours] att=
+  Add a GHL form. Make sure to have a section for service they are looking for
+    > We can add this as soon as there is a form. The kids practice has no GoHighLevel form. The adult practice has three (Contact, Invisalign, New Patient Special) in its own account, but using one of thos
+#368 /new-patients [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#before.ch.ch-before>div.wrap.np-grid>ol.np-check>li:nth-of-type(1)>div>p] att=
+  This still needs to be addressed
+    > We could not find a working online forms link. The old site's "Online forms" button pointed to a PatientViewer page that now shows "There was an error loading the web forms", and Flexbook is for booki
+#378 /financing [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap:nth-of-type(1)>table.fi-matrix>tbody>tr:nth-of-type(4)>td:nth-of-type(1)] att=
+  Needs to link to their CareCredit account for people to apply
+    > For now, "CareCredit" links to CareCredit's own application page, so it works today. We could not find a CareCredit account for the kids practice: the only CareCredit listing is the adult practice's (
+#379 /financing [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#rule.ch.ch-rule>div.wrap.ch-withfig>div>div.fi-promises>div.fi-promise:nth-of-type(3)>p.statement] att=
+  Needs to link to the practice accounts on those third party sites for people to apply
+    > The CareCredit, Alphaeon and Lending Club names further down this page now link to each lender's application page (see #378, #380, #381). We did not put links inside this large line, because it is ani
+#380 /financing [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap:nth-of-type(1)>table.fi-matrix>tbody>tr:nth-of-type(5)>td:nth-of-type(1)] att=
+  Needs to link to the practice account for people to apply
+    > For now, "Alphaeon" links to Alphaeon's dental application page, so it works today. The practice is not in Alphaeon's provider directory. Please send us the practice's Alphaeon link and we will switch
+#381 /financing [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#ways.ch.ch-ways>div.wrap:nth-of-type(1)>table.fi-matrix>tbody>tr:nth-of-type(6)>td:nth-of-type(1)] att=
+  Needs to link to the practice account for people to apply
+    > For now, "Lending Club" links to its patient financing page (LendingClub patient financing is now run by Happen Bank), so it works today. There is no Lending Club account for Mason Park; there is one 
+#406 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#how.ch.ch-how>div.wrap.lf-layout.lf-split>div.lf-head>figure.lf-figure>img] att=
+  Change photo needs to highlight they are a platinum Invisalign provider 
+    > We need your help with this one. We could not confirm the practice's Invisalign tier: there is no Platinum mention on the old site or the adult site, and we have no badge image. Could you send us the 
+#434 / [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>p.ar-lede] att=
+  delete
+
+#435 / [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival>div.ar-in>div.ar-meta>div:nth-of-type(3)] att=
+  Invisalign Platinum Provider
+
+#436 / [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-faq>div.faq_list>details.faq_item:nth-of-type(2)>summary.faq_question] att=
+  Remove this question from the site
+
+#437 /about-us [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>p.ar-lede] att=
+  Mason Park Dental for Kids shares the same building as our sister practice Mason Park Dental. A convenient way for adults and children to get the dental care they need.
+
+#438 /about-us [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#building.ch.ch-building>div.wrap>div.ab-mosaic>figure.is-a>figcaption] att=
+  sit back and unwind, in our reception area
+
+#439 /about-us [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#building.ch.ch-building>div.wrap>div.ab-mosaic>figure.is-c>figcaption] att=
+  Lay back, relax, and enjoy the show
+
+#440 /about-us [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#building.ch.ch-building>div.wrap>div.ab-mosaic>div.ab-panel>p] att=
+  link [https://www.masonparkdental.com/](https://www.masonparkdental.com/)
+
+#441 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap.ch-head.is-split>p.lede] att=
+  remove
+
+#442 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap.ch-head.is-split>div>h2>div.jr-line-mask>div.jr-line] att=
+  Our dedicated team
+
+#443 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#named.ch.ch-named>div.wrap.ch-head.is-split>p.ch-note] att=
+  Each review is shown whole, where the reviewer has given our team a personalized shoutout! [See all our reviews on Google](https://maps.google.com/?cid=10994444486808824955).
+
+#444 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#reason.ch.ch-reason>div.wrap>div.manifesto>p.statement] att=
+  remove
+
+#445 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map>div.wrap:nth-of-type(1)>div.sv-depts>div.sv-dept.is-4:nth-of-type(1)>p] att=
+  We are a Platinum Invisalign provider! These clear aligners are for teens and adults who'd like to be discrete.
+
+#446 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map>div.wrap:nth-of-type(1)>div.sv-depts>div.sv-dept.is-12>p] att=
+  lost crowns, and soft tissue injuries
+
+#447 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#map.ch.ch-map>div.wrap:nth-of-type(2)>figure.ch-figure.is-band>figcaption] att=
+  remove
+
+#448 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>figure.ch-figure.is-plate>figcaption] att=
+  remove
+
+#449 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-head.is-split>p.lede] att=
+  Pricing is subject to change, please speak to the front desk for cost and a personalized treatment plan.
+
+#450 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>div>ul.sv-menu>li:nth-of-type(3)>span] att=
+  For a time when the unplanned and unexpected happen. This is a base cost for a limited visit, treatment cost will depend on the needs of the patient.
+
+#451 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>div>ul.sv-menu>li:nth-of-type(5)>b] att=
+  Add the ®
+
+#452 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>div>ul.sv-menu>li:nth-of-type(5)>span] att=
+  add ®
+
+#453 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>div>ul.sv-menu>li:nth-of-type(5)>span] att=
+  Add We are a Platinum Invisalign provider, meaning we have treated hundreds of smiles! We are deeply familiar with the nuances of aligner technology and troubleshooting tricky movements.
+
+#454 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  head cut off
+
+#455 /services/comprehensive-pediatric-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on>div.pa-shot.is-p1>img] att=
+  body cut off
+
+#456 /services/fluoride-treatment [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil] att=
+  replace with AdobeStock_417394782
+
+#457 /services/composite-fillings#prevent [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on:nth-of-type(1)>div.pa-shot.is-p1>img] att=
+  replace with AdobeStock_548586854
+
+#458 /services/composite-fillings#prevent [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on:nth-of-type(2)>div.pa-shot>img] att=
+  replace with AdobeStock_920561947
+
+#459 /services/composite-fillings#prevent [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on:nth-of-type(4)>div.pa-shot.is-p4>img] att=
+  replace with AdobeStock_431487749
+
+#460 /services/composite-fillings#prevent [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on:nth-of-type(5)>div.pa-shot>img] att=
+  replace with AdobeStock_198950188
+
+#461 /services/composite-fillings#prevent [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#prevent.ch.ch-prevent>div.wrap>div.sq-grid] att=
+  Add photo AdobeStock_2151232518
+
+#462 /services/dental-crowns [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.sw-overlap>figure.sw-overlap_shot>img] att=
+  Replace with AdobeStock_707517594
+
+#463 /services/early-intervention [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil] att=
+  Replace with AdobeStock_479833706
+
+#464 /services/early-intervention [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why-seven.ch.ch-why-seven>div.wrap.lf-layout.lf-split>div.lf-head>figure.lf-figure>img] att=
+  replace with AdobeStock_586528082
+
+#465 /services/early-intervention [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#gains.ch.ch-gains>div.wrap>div.sw-overlap>figure.sw-overlap_shot>img] att=
+  replace with AdobeStock_2152521356
+
+#466 /services/early-intervention [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=AdobeStock_548878838.jpeg
+  replace with AdobeStock_548878838
+
+#467 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on] att=
+  add AdobeStock_579790612
+
+#468 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on] att=
+  add AdobeStock_1073294513
+
+#469 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#path.ch.ch-path>div.pin-spacer>div#pathPin.pa-pin>div#pathTrack.pa-track>article.pa-card.is-on] att=
+  add AdobeStock_1016853197
+
+#470 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.sw-overlap>figure.sw-overlap_shot>img] att=
+  center photo or flip the image horizontally 
+
+#471 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#questions.ch.ch-questions>div.wrap.lf-layout.lf-split>div.lf-head>p.ch-note] att=
+  still needs more space
+
+#472 /services/invisalign [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  replace with AdobeStock_1891104752
+
+#473 /invisalign-faqs-katy-tx [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#band-1.ch.ch-band-1>div.wrap>figure.ch-figure.is-band>img] att=
+  image is blurry, resize or reformat the layout
+
+#474 /invisalign-faqs-katy-tx [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#candidacy.ch.ch-candidacy>div.wrap:nth-of-type(2)>figure.ch-figure.is-band>img] att=
+  resize or reformat, cutting off part of the image
+
+#475 /invisalign-faqs-katy-tx [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#general.ch.ch-general>div.wrap:nth-of-type(1)>div.np-qa] att=
+  Need to add these FAQs What does a Platinum Invisalign provider mean? Is Invisalign as effective as braces? Will Invisalign affect my speech? How does Platinum status differ from other Invisalign tiers? What areas near Katy do you serve? We services the Harris County and Fort Bend County area including: Cypress, Houston, Fulshear, Cinco Ranch, Sealy, and surrounding areas
+
+#476 /services/cosmetic-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in] att=
+  Change image to AdobeStock_306767010
+
+#477 /services/cosmetic-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#how.ch.ch-how>div.wrap.lf-layout.lf-split>div.lf-head>figure.lf-figure>img] att=
+  replace with AdobeStock_1051456099
+
+#478 /services/cosmetic-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.sw-overlap>figure.sw-overlap_shot>img] att=
+  Replace with AdobeStock_1627253751
+
+#479 /services/cosmetic-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  Replace with AdobeStock_433932780
+
+#480 /services/periodontics [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#why.ch.ch-why>div.wrap>div.sw-overlap>figure.sw-overlap_shot>img] att=
+  Center, cutting off kids face
+
+#481 /emergency-pediatric-dentistry [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#after.ch.ch-after>div.wrap.lf-layout.lf-split>div.lf-head>figure.lf-figure.is-top>img] att=
+  too much head space, center photo, but dont cut off head
+
+#482 /new-patients [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#before.ch.ch-before>div.wrap.np-grid>div.np-tour>figure:nth-of-type(1)>img] att=
+  replace with IMG_7695.jpeg
+
+#483 /new-patients [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#before.ch.ch-before>div.wrap.np-grid>div.np-tour>figure:nth-of-type(2)>img] att=
+  Replace with PXL_20260714_[221358715.MP](http://221358715.MP)
+
+#484 /new-patients [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#before.ch.ch-before>div.wrap.np-grid>div.np-tour>figure:nth-of-type(3)>img] att=
+  Replace with PXL_20260714_212931964
+
+#485 /financing [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  still cutting off the head
+
+#486 /dental-saving-plan [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil] att=
+  replace with AdobeStock_668611737
+
+#487 /dental-saving-plan [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#inside.ch.ch-inside>div.wrap.ch-head.is-split>p.lede] att=
+  replace with and fluoride treatments.
+
+#488 /dental-saving-plan [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#inside.ch.ch-inside>div.wrap>div.mb-ledger>div:nth-of-type(3)>span] att=
+  replace with and fluoride treatments.
+
+#489 /special-offers [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#terms.ch.ch-terms>div.wrap>div.sq-grid>div.sq-card.is-sky>p] att=
+  Mason Park Dental for Kids
+
+#490 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-in>p.ar-lede] att=
+  Every review on this page was left by a parent or guardian on our review profiles. 
+
+#491 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#word.ch.ch-word>div.wrap:nth-of-type(2)>figure.ch-figure.is-band>img] att=
+  replace photo with AdobeStock_169557997
+
+#492 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#count.ch.ch-count>div.wrap>div.figures] att=
+  Remove this section
+
+#493 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#write.ch.ch-write>div.wrap>div.callout>div>h3>div.jr-line-mask>div.jr-line] att=
+  Love us? Please share!
+
+#494 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#wall.ch.ch-wall>div.wrap.ch-head.is-split>div>h2>div.jr-line-mask>div.jr-line] att=
+  A few reviews, all unedited
+
+#495 /patient-reviews [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  replace with PXL_20250806_[223336154.MP](http://223336154.MP)
+
+#496 /contacts [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#invitation.ch.ch-invitation>div.wrap.iv-top>div.iv-aside>figure.iv-shot>img] att=
+  replace with PXL_20250428_[153338778.MP](http://153338778.MP)
+
+#497 /our-services [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#offers.ch.ch-offers>div.wrap.ch-withfig>div>ul.sv-menu>li:nth-of-type(3)>i] att=
+  $89
+
+#498 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#arrival.ch.ch-arrival.is-compact>div.ar-veil] att=
+  cutting off Dr. Cho's head
+
+#499 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(1)>div.tm-wall>figure.tm-cell:nth-of-type(1)] att=
+  Does billing
+
+#500 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(1)>div.tm-wall>figure.tm-cell:nth-of-type(2)] att=
+  No longer there
+
+#501 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(1)>div.tm-wall>figure.tm-cell:nth-of-type(3)] att=
+  No longer there
+
+#502 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(1)] att=
+  Priscilla, Amanda, and Nicole are who they will see at the front. Images are inside of Canva
+
+#503 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(2)>div.tm-wall>figure.tm-cell:nth-of-type(3)] att=
+  No longer there
+
+#504 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(2)] att=
+  Add Josh, Alison, and Luis. They are inside of Canva
+
+#505 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster>div.wrap>div.tm-group:nth-of-type(3)>div.tm-wall>figure.tm-cell:nth-of-type(2)] att=
+  No longer there
+
+#506 /our-team [html>body.has-journey>div.page-wrapper>main#main.main-wrapper>section#roster.ch.ch-roster] att=
+  Add Lola, inside of Canva
+

@@ -35,7 +35,7 @@ const SNIPPET = [
   // site (0px, no boot request); any later DOM mutation made it render. Verified 2026-09-29.
   '<div class="elfsight-app-d359c3c4-40bc-4c66-87ae-714ed666eb01"></div>',
 ].join("\n");
-const WALL_HEADING = ["All nine, unedited.", "Straight from Google."];
+const WALL_HEADING = ["All nine, unedited.", "A few reviews, all unedited."]; // #494
 
 const ALPHABET = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
 const nanoid = (n = 21) => [...randomBytes(n)].map((b) => ALPHABET[b & 63]).join("");

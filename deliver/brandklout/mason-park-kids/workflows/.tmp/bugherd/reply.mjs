@@ -17,10 +17,12 @@ const auth = 'Basic ' + Buffer.from(key + ':x').toString('base64');
 const PROJECT = 540564;
 const call = async (method, p, body) => {
   for (let i = 0; i < 5; i++) {
+    // A dropped connection ("fetch failed") is retried like a 429 (2026-09-29).
     const r = await fetch(`https://www.bugherd.com/api_v2/${p}`, {
       method, headers: { Authorization: auth, 'Content-Type': 'application/json' },
       body: body ? JSON.stringify(body) : undefined,
-    });
+    }).catch((e) => null);
+    if (!r) { await new Promise((s) => setTimeout(s, 3000 * (i + 1))); continue; }
     if (r.status === 429) { await new Promise((s) => setTimeout(s, 3000)); continue; }
     const t = await r.text();
     if (!r.ok) throw new Error(`${method} ${p} ${r.status} ${t.slice(0, 300)}`);
@@ -38,7 +40,10 @@ for (const { n, text, done } of plan) {
   if (!t) { console.log(`#${n} not in tasks.json, skipped`); continue; }
   console.log(`#${n} (id ${t.id}) ${done ? 'DONE' : 'stays open'}\n  ${text}`);
   if (!SEND) continue;
-  await call('POST', `projects/${PROJECT}/tasks/${t.id}/comments.json`, { comment: { text } });
+  // Idempotent: a re-run after a failure does not post the same reply twice.
+  const { comments } = await call('GET', `projects/${PROJECT}/tasks/${t.id}/comments.json`);
+  if ((comments || []).some((c) => c.text === text)) console.log('  comment already there');
+  else await call('POST', `projects/${PROJECT}/tasks/${t.id}/comments.json`, { comment: { text } });
   if (done) await call('PUT', `projects/${PROJECT}/tasks/${t.id}.json`, { task: { status: 'done' } });
   const { task } = await call('GET', `projects/${PROJECT}/tasks/${t.id}.json`);
   log.push({ n, id: t.id, status: task.status, at: new Date().toISOString() });

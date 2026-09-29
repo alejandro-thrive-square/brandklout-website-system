@@ -43,12 +43,14 @@ const once = (cmd) => execFileSync(
  * every caller must keep its commands idempotent (write to a numbered file,
  * never append) or a retry duplicates work.
  */
-export const ssh = (cmd, tries = 5) => {
+// Railway's API has answered "error decoding response body" for longer than the old 10 s
+// retry window (2026-09-29, twice in one publish), so the backoff now spans about 80 s.
+export const ssh = (cmd, tries = 8) => {
   let last;
   for (let i = 1; i <= tries; i++) {
     try { return once(cmd); } catch (e) {
       last = e;
-      if (i < tries) sleep(1000 * i);
+      if (i < tries) sleep(3000 * i);
     }
   }
   throw last;

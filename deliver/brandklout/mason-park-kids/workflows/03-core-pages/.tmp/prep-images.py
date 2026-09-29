@@ -215,6 +215,8 @@ MIRRORED = {
     "smile-flip": "smile",
     # BugHerd #247: the guard sat under the overlap panel; mirrored, it sits in the open.
     "st-guard-flip": "st-guard",
+    # BugHerd #470: the aligner sat under the overlap panel; mirrored, it is in the open.
+    "as-569098023-flip": "as-569098023",
 }
 
 COPY = {

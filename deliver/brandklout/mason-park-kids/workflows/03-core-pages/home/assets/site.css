@@ -2171,3 +2171,20 @@ a.card:hover h3 { color: var(--accent); }
 .pe-band.is-low.is-faces img { height: clamp(24rem, 62vh, 40rem); object-position: 50% 12%; }
 /* #376: the carriers as logos. */
 .fi-network li img { display: block; width: auto; height: auto; max-width: 78%; max-height: 2.6rem; object-fit: contain; }
+
+/* ---- BugHerd round six (2026-09-29) ------------------------------------------ */
+/* #471 (and #298 #316 #363): the source note sits in an .lf-head, which round five's .ch-head rule missed. */
+.lf-head h2 ~ .ch-note { margin-top: 1.5rem; }
+/* Crops for the faces the notes said were cut. */
+.iv-shot.is-y12 img { object-position: 50% 12%; }               /* #485 */
+.iv-shot.is-y20 img { object-position: 50% 20%; }               /* #454 */
+.iv-shot.is-y60 img { object-position: 50% 60%; }               /* #495 #496 */
+.pa-shot.is-y30 img { object-position: 50% 30%; }               /* #468 */
+.pa-shot.is-y40 img { object-position: 50% 40%; }               /* #469 */
+.pa-shot.is-y48 img { object-position: 50% 48%; }               /* #455 the whole person at the desk */
+.lf-figure.is-y40 img { object-position: 50% 40%; }             /* #481 */
+.np-tour figure.is-y45 img { object-position: 50% 45%; }        /* #484 */
+.sw-overlap_shot.is-x100 img { object-position: 100% 50%; }     /* #480 the face, clear of the panel */
+/* #473 #474: a band photo shown whole, at a size its pixels hold. */
+.ch-figure.is-band.is-whole { max-width: 46rem; margin-inline: auto; }
+.ch-figure.is-band.is-whole img { aspect-ratio: auto; height: auto; }
