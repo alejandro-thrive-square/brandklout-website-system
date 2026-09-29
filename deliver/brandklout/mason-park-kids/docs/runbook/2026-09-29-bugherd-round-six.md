@@ -1,5 +1,7 @@
 # 2026-09-29 - BugHerd round six: #434-#506, 70 closed, 4 waiting on the practice
 
+**PROMOTED TO PRODUCTION 2026-09-29 23:43 UTC** on the user's go-ahead: `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app bash publish-0929.sh` (backup `backup-mason-park-kids.up.railway.app-2026-09-29T23-24-47.json` first; payload verified; 215 published, draftMatchesPublished; Elfsight on / and /patient-reviews, so the 09-29 Elfsight run is on production too), then `populate-seo.mjs` against production (215 overrides). `publish-0929b.sh` was not needed: the full chain carries its three pages. `BASE=https://masonparkpediatricdental.com node verify-0929.mjs`: 73/73. Canonicals on the apex, no staging references, no noindex. Live render of /patient-reviews #wall and /our-team hero checked.
+
 BugHerd project **540564** had **83 open notes**: 73 new ones (#434-#506, left on staging over ~20
 pages) plus the ten carried from round five (#34, #38, #82, #198, #368, #378-#381, #406).
 Most name a Drive photo (`AdobeStock_<id>`, `PXL_*`, `IMG_*`); `scripts/drive.mjs` works from `main`
@@ -43,8 +45,9 @@ the practice has looked at it (see Next).
 
 ### Next
 
-1. Promote to production when the practice approves staging: `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app bash publish-0929.sh`, then `publish-0929b.sh` the same way, `populate-seo.mjs` against production, and `BASE=https://masonparkpediatricdental.com node verify-0929.mjs`. The Elfsight step in the chain also puts the widget on production (the 09-29 Elfsight run was waiting for client approval too).
-2. The headshots and #483 when they arrive.
+1. Done: production (above).
+2. The headshots and #483 when they arrive: staging first, then the same promotion.
+3. /patient-reviews #wall still has the lede "The short ones first, then the longer stories, in full." beside the Elfsight widget, which has its own "What Our Customers Say" title. Both were written for the static wall.
 
 ### Gotchas
 
