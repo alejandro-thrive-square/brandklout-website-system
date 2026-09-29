@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-29 | 2026-09-29 — Jev (TypeSafe) browser agent installed; `tools/jev-browser-agent` adds cross-origin iframe support and icon-button hints, verified clicking and typing inside Elfsight's editor — carries **gotchas** | [`2026-09-29-jev-browser-agent-iframe-support.md`](./2026-09-29-jev-browser-agent-iframe-support.md) |
 | 2026-09-28 | 2026-09-28 — Instatic update path: `push-site.mjs --update` writes only changed pages (ids mapped by class name, shell only when sources change, browser-edit guard); dry-run verified, live test pending — carries **gotchas** | [`2026-09-28-instatic-incremental-update-push.md`](./2026-09-28-instatic-incremental-update-push.md) |
 | 2026-09-28 | 2026-09-28 — main cleaned (one plugin home, one admin client, merged gates, stale docs out); Webflow split into Scenario 6; design standard inside Scenario 0; toolkit dependencies copied — carries **gotchas** | [`2026-09-28-main-cleanup.md`](./2026-09-28-main-cleanup.md) |
 | 2026-09-27 | 2026-09-27 — system-v2 merged into main, 16 client folders consolidated, 19.5 GB of media in R2 | [`2026-09-27-system-v2-merged-clients-consolidated-media-in-r2.md`](./2026-09-27-system-v2-merged-clients-consolidated-media-in-r2.md) |
