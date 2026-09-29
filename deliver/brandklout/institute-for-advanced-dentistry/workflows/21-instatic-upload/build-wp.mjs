@@ -47,7 +47,9 @@ for (const p of pages) {
   input.pages.push({ slug: p.slug, title: p.title || p.slug, seoTitle: p.title, seoDescription: p.description, html })
 }
 
-const siteCss = resolveTokens(fs.readFileSync(path.join(WP, 'site.css'), 'utf8'))
+// light-page-header.css: the header bar on pages whose first section is white (2026-09-28).
+const siteCss = resolveTokens(fs.readFileSync(path.join(WP, 'site.css'), 'utf8')) + '\n\n' +
+  fs.readFileSync(path.join(HERE, 'light-page-header.css'), 'utf8').replace(/\r\n/g, '\n').trim() + '\n'
 const { dict } = JSON.parse(fs.readFileSync(path.join(WP, 'scripts.json'), 'utf8'))
 const dictJson = resolveTokens(JSON.stringify(dict))
   // U+2028/2029 are legal in JSON and were line terminators in older JS parsers.
