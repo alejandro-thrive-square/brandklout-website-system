@@ -43,6 +43,14 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
 6. **Consent.** Termly and the GHL consent bridge: `tools/termly-ghl-consent/consent-kit.mjs instatic ...`.
 7. **Domains.** Any change to a domain or `PUBLIC_ORIGIN` goes through
    [`tools/instatic-domain-origins/`](../../tools/instatic-domain-origins/instatic-domain-origins.md).
+8. **Site built from `site-src` (the house build).** When the change is made in the static build
+   rather than in the editor, push only what changed. Use the update path in
+   [`tools/instatic-site/README.md`](../../tools/instatic-site/README.md#the-update-path-changed-pages-only-2026-09-28):
+   `build-import-input.mjs --changed`, `ship.sh`, `push-site.mjs --update`, then `--record`.
+   - Never re-run the full `push-site.mjs --apply --force` for an update. That replaces every page and
+     the whole registry, and deletes any page missing from `dist/`.
+   - If `--update` refuses because a page was edited in the browser, pull that edit into `site-src`
+     before pushing. Use `--force` only when the change list says the browser edit may be overwritten.
 
 ## Conditionals
 - If the page already has content and you are asked to rebuild it, then build a new page on a
@@ -66,6 +74,7 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
 ## Tools
 - `tools/instatic-api-sync/`: page and CSS writes, snapshots and the publish guard.
 - `tools/instatic-site/ops/`: backup, SEO cell restore, draft render.
+- `tools/instatic-site/push/`: the update path for sites built from `site-src` (`push-site.mjs --update`).
 - `tools/instatic-embeds/`: Embed block, site scripts, CSP origins.
 - `tools/instatic-domain-origins/`: domains and `PUBLIC_ORIGIN`.
 - `tools/termly-ghl-consent/`: consent kit.

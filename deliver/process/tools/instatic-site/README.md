@@ -74,8 +74,45 @@ node ops/apply-template-flags.mjs --page 404 --not-found   # + --page <tpl> --ta
 node gates/template-guard.mjs
 node ../instatic-api-sync/insta-api.mjs publish
 node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, compare-live, visual-diff 1440 and 390, verify-motion-live
+node push/push-site.mjs --record                           # baseline for the next update (after embeds/flags moved the seqs)
 ```
 (Paths above are relative to this folder; prefix them with the path from your client folder.)
+
+This full run is for the **first import** or a deliberate rebuild. Every later change goes through
+the update path below.
+
+## The update path (changed pages only, 2026-09-28)
+
+```
+node push/upload-media.mjs                                 # skips what is already uploaded
+node push/build-import-input.mjs --changed                 # only pages whose html differs from the last push (or --only a,b)
+RAILWAY_LINK_DIR=<dir> bash push/ship.sh                   # the converter still runs, on the smaller payload
+node push/push-site.mjs --update                           # dry run: pages written/untouched, shell sent or not
+node push/push-site.mjs --update --apply                   # INCREMENTAL: every page not in the payload is untouched
+node push/place-embeds.mjs --apply                         # only if a written page carries a data-embed marker (idempotent)
+node ../instatic-api-sync/insta-api.mjs publish
+node gates/verify-live.mjs                                 # + check-pages on the written pages
+node push/push-site.mjs --record
+```
+
+- **CSS/JS only**: `push-site.mjs --update --shell-only --apply` (no conversion of pages needed, but
+  `ship.sh` still has to produce the registry: build with `--only index` to keep the payload small).
+- **Ids.** The converter mints random style-rule ids every run. `--update` maps each converted class
+  onto the live rule's id by name, so rewritten pages and untouched pages resolve against the same
+  registry. It refuses if a written page would point at a rule that is not in the registry being sent.
+- **The shell** goes only when the CSS/JS sources changed since the last push, or a written page
+  uses a class the live registry lacks. `--with-shell` / `--no-shell` override. Live class rules
+  that only untouched pages use are carried over into a new shell.
+- **Browser edits.** `output/push-state.<host>.json` records each page's seq and the registry hash
+  after a push or `--record`. If the live values differ, someone edited in the editor since, and
+  the update refuses and lists them. Pull those edits into `site-src` first, or `--force`. The first
+  update on a site with no record needs `--record` (right after the last full push) or `--force`.
+- **Templates** travel with each rewritten page (read from the live row), so
+  `apply-template-flags.mjs` is not needed after an update.
+- **Deletions never happen** in an update: a page gone from `dist/` is reported, not removed.
+- A partial payload (`--only` / `--changed`) is refused by a replace push, which would delete the
+  pages it leaves out.
+- Every `--apply` of `push-site.mjs` needs `STAGING_HOST=<exact host>` or `--allow-production`.
 
 ## Scripts
 
@@ -85,11 +122,12 @@ node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, 
 | `staging-clone/*` + `staging-clone.md` | Stand up staging, seed it, promote it, keep it out of Google; `verify-staging-clean.mjs` is the rendered-DOM leak gate | see `staging-clone.md` | bk-brandklout-website `deliver/process/21-instatic-staging-clone/` (newest of 4 runs) |
 | `push/upload-media.mjs` | Resumable media upload (img, video, fonts incl. variable woff2), map keyed by path | `[--force] [--only a,b]` | bk-west-la-implants `21-instatic-upload/` |
 | `push/set-alt.mjs` | Alt text onto library assets (longest wins) | `[--apply]` | same |
-| `push/build-import-input.mjs` | Rewrite srcs to library URLs, strip `@font-face`, gzip payload | `EXPECT_FONT_FACES=<n>` | same |
+| `push/build-import-input.mjs` | Rewrite srcs to library URLs, strip `@font-face`, gzip payload | `[--only a,b \| --changed]`, `EXPECT_FONT_FACES=<n>` | same |
 | `push/check-link.mjs` | Fail closed unless the Railway link dir serves `INSTATIC_BASE_URL` | `<RAILWAY_LINK_DIR>` (ship.sh runs it) | same |
 | `push/ship.sh` | Chunked `railway ssh` ship of converter + payload, run, fetch `import-out.json` | `RAILWAY_LINK_DIR=... bash ship.sh` | same |
 | `push/import-run.ts` | Runs on the container: `cssToStyleRules`, `importHtml`, class linking; optional prebuilt registry | shipped by ship.sh | bk-brandklout-website `21-instatic-upload/` |
-| `push/push-site.mjs` | One `PUT /site-document` (replace): pages, registry, token + script assets (GSAP first, UMD wrap), SEO cells | `[--apply] [--force]`, `TOKEN_FILES=` | bk-west-la-implants |
+| `push/push-site.mjs` | One `PUT /site-document`: replace (first import) or `--update` incremental (changed pages, shell only if needed); pages, registry, token + script assets (GSAP first, UMD wrap), SEO cells; records `output/push-state.<host>.json` | `[--update [--pages a,b] [--with-shell\|--no-shell] \| --shell-only] [--apply] [--force]`, `--record`, `TOKEN_FILES=` | bk-west-la-implants |
+| `lib/push-state.mjs` | The per-instance push record: html hashes, page seqs, registry + source hashes | imported | new 2026-09-28 |
 | `push/place-embeds.mjs` | Swap `data-embed` markers for Embed blocks (GHL forms, widgets) | `--config embeds.json [--apply] [--publish]` | bk-stone `21-instatic-upload/` |
 | `ops/apply-template-flags.mjs` | Re-set notFound / collection template flags after an import | `--page 404 --not-found` or `--page <tpl> --table <slug>` `[--check]` | bk-mason-park `apply-404-template` + `apply-blog-template` |
 | `ops/backup-site.mjs` | API snapshot (shell, rows, published HTML, seq); `--db-command` prints the `VACUUM INTO` railway command | `[--out dir]` / `--db-command --label x` | bk-west-la-implants `output/backup-live.mjs` |
