@@ -1,4 +1,6 @@
-// THE ELEVEN TREATMENT PAGES, added 2026-09-23.
+// THE THIRTEEN GENERATED TREATMENT PAGES, added 2026-09-23. Xeomin, Dysport and
+// Jeuveau replaced the combined "Dysport & Jeuveau" page on 2026-09-29: one page
+// per product, on the team's word ("make sure every service is covered").
 //
 // WHY THEY EXIST. BugHerd, 2026-09-22/23: the client opened every row on
 // /treatments that had no page of its own and asked, eleven times, "Why doesnt
@@ -41,20 +43,94 @@ const EM = (s) => `<em class="text-style-display-accent">${s}</em>`;
 
 export const PAGES = {
   /* --- Injectables -------------------------------------------------------- */
-  "dysport-jeuveau": {
-    seoTitle: "Dysport & Jeuveau in Westlake, TX | Westlake Medical Aesthetics",
+  xeomin: {
+    seoTitle: "Xeomin in Westlake, TX | Westlake Medical Aesthetics",
     seoDescription:
-      "Dysport and Jeuveau soften forehead lines, frown lines and crow's feet. About fifteen minutes, no downtime, placed by our nurse practitioner in Westlake.",
+      "Xeomin softens forehead lines, frown lines and crow's feet. A purified neuromodulator with no accessory proteins, placed by our nurse practitioner in Westlake.",
     procedure: {
-      name: "Dysport and Jeuveau neuromodulator injections",
+      name: "Xeomin (incobotulinumtoxinA) injections",
+      howPerformed:
+        "Small amounts of botulinum toxin type A, purified of accessory proteins, are injected with a fine needle into the muscles of the upper face that crease the skin.",
+    },
+    cover: {
+      image: "stock-xeomin-injection.webp",
+      top: true,
+      title: `Xeomin in ${EM("Westlake")}.`,
+      lede: "The purified neuromodulator. Placed by our nurse practitioner in about fifteen minutes, with nothing to recover from.",
+      facts: [
+        { num: "15 min", label: "in the chair" },
+        { num: "3–7 days", label: "until you see it" },
+        { num: "0", label: "days of downtime" },
+      ],
+    },
+    whatItIs: [
+      "Xeomin is botulinum toxin type A, the same active ingredient as Botox. It temporarily relaxes the muscle it's placed in, so the line that muscle creases into the skin softens.",
+      "The difference is what's left out. Xeomin is filtered down to the active protein alone, with none of the accessory proteins that come with the other products. That's why it's often the choice when Botox seems to wear off faster than it used to.",
+    ],
+    figure: "stock-xeomin-smile.webp",
+    canDo: {
+      intro: "It treats the lines that come from movement, mostly in the upper face.",
+      items: [
+        "Forehead lines soften when you raise your eyebrows.",
+        "The two vertical lines between your brows relax.",
+        "Crow's feet ease when you smile.",
+        "Results look like Botox's: the same areas, the same natural movement.",
+      ],
+    },
+    right: {
+      text: "Most healthy adults are good candidates. If you've had Botox before, tell us how long it lasted and how it felt. That helps your provider decide whether Xeomin is worth trying.",
+      notIf:
+        "You're pregnant or breastfeeding, have a neuromuscular condition or have an infection where you'd be treated. Lines that stay when your face is at rest may need a different treatment.",
+    },
+    priceNote:
+      "Pricing depends on the number of units and the areas treated. You'll get a quote at your consultation.",
+    who: {
+      provider: "brooke",
+      heading: `Injections by a ${EM("nurse practitioner")}.`,
+      text: "Brooke, our nurse practitioner injector, assesses your face first and then chooses the product. If Xeomin is the right fit, she keeps a first treatment conservative and checks the result with you at two weeks.",
+    },
+    care: {
+      beforeTitle: "The week before",
+      before: [
+        "If your doctor agrees, pause fish oil, vitamin E and high-dose anti-inflammatories for about a week. They can make bruising more likely.",
+        "Avoid alcohol for 24 hours before your visit.",
+        "Tell us about any recent illness, vaccinations or dental work.",
+      ],
+      afterTitle: "The 24 hours after",
+      after: [
+        "Stay upright for four hours.",
+        "Don't rub, massage or press on the treated areas.",
+        "Skip hard workouts, saunas and alcohol for a day.",
+        "Small bumps settle within an hour. A bruise can take a few days.",
+        "Judge the result at two weeks. We'll book your follow-up then.",
+      ],
+      image: "gen-injectables.webp",
+    },
+    faq: [
+      ["How is Xeomin different from Botox?", "Both are botulinum toxin type A and treat the same lines. Xeomin has no accessory proteins, only the active ingredient. Onset, results and how long it lasts are very similar."],
+      ["Why would I switch from Botox to Xeomin?", "Some patients find Botox doesn't last as long as it used to. Because Xeomin carries only the active protein, it's a common next step. Your provider will talk it through with you."],
+      ["How soon will I see Xeomin results?", "Movement starts to soften after three to seven days, and the full effect shows at about two weeks. We book your follow-up then."],
+      ["How long does Xeomin last?", "Usually three to four months. As the muscle starts moving again, the lines gradually return to how they were."],
+      ["Does Xeomin hurt?", "The needle is very fine and each injection takes about a second. Most people describe a quick sting, and no anesthetic is needed."],
+    ],
+    related: ["botox", "dysport", "jeuveau"],
+    card: "The purified neuromodulator, with no accessory proteins. Often chosen when Botox wears off too soon.",
+  },
+
+  dysport: {
+    seoTitle: "Dysport in Westlake, TX | Westlake Medical Aesthetics",
+    seoDescription:
+      "Dysport softens forehead lines, frown lines and crow's feet, and spreads a little further for larger areas. About fifteen minutes, placed by our nurse practitioner in Westlake.",
+    procedure: {
+      name: "Dysport (abobotulinumtoxinA) injections",
       howPerformed:
         "Small amounts of botulinum toxin type A are injected with a fine needle into the muscles of the upper face that crease the skin.",
     },
     cover: {
-      image: "p-eyes-portrait.webp",
-      top: true,
-      title: `Dysport &amp; Jeuveau in ${EM("Westlake")}.`,
-      lede: "The same idea as Botox, with a slightly different feel. Placed by our nurse practitioner in about fifteen minutes, with nothing to recover from.",
+      image: "stock-dysport-injection.webp",
+      top: false,
+      title: `Dysport in ${EM("Westlake")}.`,
+      lede: "The same idea as Botox, with a slightly wider spread. Placed by our nurse practitioner in about fifteen minutes, with nothing to recover from.",
       facts: [
         { num: "15 min", label: "in the chair" },
         { num: "2–5 days", label: "until you see it" },
@@ -62,30 +138,30 @@ export const PAGES = {
       ],
     },
     whatItIs: [
-      "Dysport and Jeuveau are both botulinum toxin type A, like Botox. Each one temporarily relaxes the muscle it's placed in. When the muscle stops creasing the skin, the line above it softens.",
-      "The difference is in the details. Dysport spreads a little further, which can suit a broad forehead. Jeuveau is often chosen for the frown lines between the eyebrows. Both tend to start working a day or two sooner than Botox.",
+      "Dysport is botulinum toxin type A, like Botox. It temporarily relaxes the muscle it's placed in. When the muscle stops creasing the skin, the line above it softens.",
+      "It spreads a little further from each injection point, which can suit a broad forehead where an even result matters. It also tends to start working a day or two sooner than Botox.",
     ],
     figure: "gen-instruments-warm.webp",
     canDo: {
-      intro: "They treat the lines that come from movement, mostly in the upper face.",
+      intro: "It treats the lines that come from movement, mostly in the upper face.",
       items: [
-        "Forehead lines soften when you raise your eyebrows.",
+        "Forehead lines soften evenly across a broad forehead.",
         "The two vertical lines between your brows relax.",
         "Crow's feet ease when you smile.",
-        "A larger area can be covered evenly with fewer injection points.",
+        "A larger area can be covered with fewer injection points.",
       ],
     },
     right: {
-      text: "Most healthy adults are good candidates. If you've had Botox before, tell us how it went. That helps your provider decide whether Dysport or Jeuveau is worth trying.",
+      text: "Most healthy adults are good candidates. If you've had Botox before, tell us how it went. That helps your provider decide whether Dysport is worth trying.",
       notIf:
-        "You're pregnant or breastfeeding, have a neuromuscular condition, have an infection where you'd be treated, or are allergic to cow's milk protein, which rules out Dysport. Lines that stay when your face is at rest may need a different treatment.",
+        "You're pregnant or breastfeeding, have a neuromuscular condition, have an infection where you'd be treated, or are allergic to cow's milk protein. Lines that stay when your face is at rest may need a different treatment.",
     },
     priceNote:
-      "Pricing depends on the product, the number of units and the areas treated. You'll get a quote at your consultation.",
+      "Pricing depends on the number of units and the areas treated. You'll get a quote at your consultation.",
     who: {
       provider: "brooke",
       heading: `Injections by a ${EM("nurse practitioner")}.`,
-      text: "Brooke, our nurse practitioner injector, assesses your face first and then chooses the product. She keeps a first treatment conservative and checks the result with you at two weeks.",
+      text: "Brooke, our nurse practitioner injector, assesses your face first and then chooses the product. If Dysport is the right fit, she keeps a first treatment conservative and checks the result with you at two weeks.",
     },
     care: {
       beforeTitle: "The week before",
@@ -106,13 +182,87 @@ export const PAGES = {
     },
     faq: [
       ["How is Dysport different from Botox?", "It works the same way but spreads a little further from each injection point. That can help on a broad forehead and is less suited to very small, precise areas."],
-      ["Why would I choose Jeuveau over Botox or Dysport?", "Jeuveau is made only for cosmetic use and is often chosen for frown lines. Some patients simply prefer how it feels. Your provider will tell you if it's a good fit."],
       ["Does Dysport work faster than Botox?", "Often a little. Most people notice a change in two to five days, and the full effect shows at about two weeks."],
-      ["Can I switch between Botox, Dysport and Jeuveau?", "Yes. If one seems to wear off sooner than it used to, trying another is a reasonable next step. We'll note what you had so we can compare."],
-      ["How long do Dysport and Jeuveau last?", "Usually three to four months. As the muscle starts moving again, the lines gradually return to how they were."],
+      ["How long does Dysport last?", "Usually three to four months. As the muscle starts moving again, the lines gradually return to how they were."],
+      ["Who shouldn't have Dysport?", "Anyone allergic to cow's milk protein, as well as anyone pregnant, breastfeeding or with a neuromuscular condition. We go through your medical history before anything is injected."],
+      ["Can I switch between Botox and Dysport?", "Yes. If one seems to wear off sooner than it used to, trying another is a reasonable next step. We'll note what you had so we can compare."],
     ],
-    related: ["botox", "dermal-fillers", "hydrafacial"],
-    card: "Two more neuromodulators that soften movement lines, often starting a little sooner than Botox.",
+    related: ["botox", "xeomin", "jeuveau"],
+    card: "A neuromodulator with a slightly wider spread, often starting a little sooner than Botox.",
+  },
+
+  jeuveau: {
+    seoTitle: "Jeuveau in Westlake, TX | Westlake Medical Aesthetics",
+    seoDescription:
+      "Jeuveau is a neuromodulator made only for cosmetic use, often chosen for the frown lines between the brows. About fifteen minutes, placed by our nurse practitioner in Westlake.",
+    procedure: {
+      name: "Jeuveau (prabotulinumtoxinA) injections",
+      howPerformed:
+        "Small amounts of botulinum toxin type A are injected with a fine needle into the muscles between the eyebrows and in the upper face that crease the skin.",
+    },
+    cover: {
+      image: "p-eyes-portrait.webp",
+      top: true,
+      title: `Jeuveau in ${EM("Westlake")}.`,
+      lede: "The neuromodulator made only for aesthetics. Placed by our nurse practitioner in about fifteen minutes, with nothing to recover from.",
+      facts: [
+        { num: "15 min", label: "in the chair" },
+        { num: "2–5 days", label: "until you see it" },
+        { num: "0", label: "days of downtime" },
+      ],
+    },
+    whatItIs: [
+      "Jeuveau is botulinum toxin type A, like Botox. It temporarily relaxes the muscle it's placed in, so the line that muscle creases into the skin softens.",
+      "It's the only one of the four made solely for cosmetic use, and it's most often chosen for the frown lines between the eyebrows, the \"11s\". Like Dysport, it tends to start working a day or two sooner than Botox.",
+    ],
+    figure: "cat-nonsurgical-tall.webp",
+    canDo: {
+      intro: "It treats the lines that come from movement, especially between the brows.",
+      items: [
+        "The two vertical lines between your brows relax, so you look less cross.",
+        "Forehead lines soften when you raise your eyebrows.",
+        "Crow's feet ease when you smile.",
+        "The result keeps natural movement when it's dosed conservatively.",
+      ],
+    },
+    right: {
+      text: "Most healthy adults are good candidates, and it's a common first choice for frown lines. If you've had another neuromodulator before, tell us how it went.",
+      notIf:
+        "You're pregnant or breastfeeding, have a neuromuscular condition or have an infection where you'd be treated. Lines that stay when your face is at rest may need a different treatment.",
+    },
+    priceNote:
+      "Pricing depends on the number of units and the areas treated. You'll get a quote at your consultation.",
+    who: {
+      provider: "brooke",
+      heading: `Injections by a ${EM("nurse practitioner")}.`,
+      text: "Brooke, our nurse practitioner injector, assesses your face first and then chooses the product. If Jeuveau is the right fit, she keeps a first treatment conservative and checks the result with you at two weeks.",
+    },
+    care: {
+      beforeTitle: "The week before",
+      before: [
+        "If your doctor agrees, pause fish oil, vitamin E and high-dose anti-inflammatories for about a week. They can make bruising more likely.",
+        "Avoid alcohol for 24 hours before your visit.",
+        "Tell us about any recent illness, vaccinations or dental work.",
+      ],
+      afterTitle: "The 24 hours after",
+      after: [
+        "Stay upright for four hours.",
+        "Don't rub, massage or press on the treated areas.",
+        "Skip hard workouts, saunas and alcohol for a day.",
+        "Small bumps settle within an hour. A bruise can take a few days.",
+        "Judge the result at two weeks. We'll book your follow-up then.",
+      ],
+      image: "stock-jeuveau-care.webp",
+    },
+    faq: [
+      ["How is Jeuveau different from Botox?", "Both are botulinum toxin type A. Jeuveau is made only for cosmetic use and is often chosen for frown lines. Some patients simply prefer how it feels."],
+      ["Is Jeuveau good for frown lines?", "Yes. The lines between the eyebrows are what it's best known for, and it's also used on the forehead and crow's feet."],
+      ["How soon will I see Jeuveau results?", "Often in two to five days, with the full effect at about two weeks. We book your follow-up then."],
+      ["How long does Jeuveau last?", "Usually three to four months. As the muscle starts moving again, the lines gradually return to how they were."],
+      ["Can I switch to Jeuveau from Botox or Dysport?", "Yes. If another product seems to wear off sooner than it used to, trying Jeuveau is a reasonable next step. We'll note what you had so we can compare."],
+    ],
+    related: ["botox", "xeomin", "dysport"],
+    card: "The neuromodulator made only for aesthetics, most often chosen for frown lines.",
   },
 
   "dermal-fillers": {

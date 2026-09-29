@@ -102,12 +102,12 @@
       "description": "Injectables, skin rejuvenation, facials and restoration in Westlake, TX. Appointment length, results, longevity and downtime for each treatment."
     },
     "botox": {
-      "title": "Botox & Xeomin in Westlake, TX | Westlake Medical Aesthetics",
-      "description": "Botox and Xeomin in Westlake, TX, placed by our nurse practitioner injector. About fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
+      "title": "Botox in Westlake, TX | Westlake Medical Aesthetics",
+      "description": "Botox in Westlake, TX, placed by our nurse practitioner injector. About fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
       "schema": [
         {
           "@type": "MedicalProcedure",
-          "name": "Botulinum toxin treatment (Botox, Xeomin)",
+          "name": "Botulinum toxin treatment (Botox)",
           "procedureType": "https://schema.org/NoninvasiveProcedure",
           "bodyLocation": "Face",
           "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that crease the overlying skin, relaxing them for three to four months.",

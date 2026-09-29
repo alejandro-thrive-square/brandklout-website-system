@@ -13,7 +13,9 @@ implant centre (live on Webflow) and Stone Surgical Arts (twelve pages, publishe
 
 Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/project-overview.md).
 
-## Status: PUBLISHED — thirteen pages live at <https://westlaketxmedspa.com>
+## Status: PUBLISHED — 26 pages live at <https://westlaketxmedspa.com>
+
+**2026-09-29, latest — PRODUCTION CAUGHT UP: 26 pages, 14 treatments, each with its own page.** Botox | Xeomin and Dysport & Jeuveau split into Botox, Xeomin, Dysport and Jeuveau pages; production (was 13 pages, 2026-09-18) now carries both BugHerd rounds, #15 and the split, with Termly, Sienna and the GHL pool intact; sitemap 25 URLs. Staging and production match. Open: BugHerd #10, #73 — [run](./runbook/2026-09-29-one-page-per-product-and-production.md).
 
 **2026-09-29, latest — BugHerd round 2 on STAGING.** The client filed 45 more tasks (#43–#87) on production 2026-09-28. All on staging except **#10** (Abby/Brooke photos, Canva only) and **#73** (GHL form colours, a GHL setting): the client's AdobeStock photos, address **#110B** and new hours (Wed 9–3, Fri 9–4, weekends closed) site-wide, a Treatments dropdown, concern chips as links with hover descriptions, every FAQ question naming its subject, before-and-after placeholders and the doctor filmstrip hidden. **84 of 86 BugHerd tasks marked done** with a scope reply each. Production is still at 2026-09-18 and needs a go for rounds 1 + 2 — [run](./runbook/2026-09-29-bugherd-round-2-on-staging.md).
 

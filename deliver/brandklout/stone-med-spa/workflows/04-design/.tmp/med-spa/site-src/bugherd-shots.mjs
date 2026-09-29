@@ -40,7 +40,7 @@ const SHOTS = [
   ['book', ['.section_cover', '.section_book', '.book_call']],
   ['meet-the-doctor', ['.doctor_rules', '.doctor_rule']],
   ['botox', ['.section_why', '.section_care', '.detail_faq', '.section_related']],
-  ['dysport-jeuveau', ['.section_why', '.section_care']],
+  ['dysport', ['.section_why', '.section_care']],
 ];
 
 const browser = await puppeteer.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: 'new', args: ['--no-sandbox', '--hide-scrollbars'] });

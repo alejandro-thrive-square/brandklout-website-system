@@ -105,7 +105,7 @@ export const CONCERNS = [
  * menu row. A model appears as a PERSON, never as a patient and never as a
  * result. Nothing on this site captions a model photograph as an outcome.
  *
- * `page` is the detail page. Botox is hand-written; the other eleven are
+ * `page` is the detail page. Botox is hand-written; the other thirteen are
  * generated from treatment-pages.mjs (2026-09-23). A row with page null opens
  * in place with no link.
  */
@@ -114,10 +114,10 @@ export const TREATMENTS = [
   {
     slug: "botox",
     page: "botox.html",
-    name: "Botox | Xeomin",
+    name: "Botox",
     category: "injectables",
     concerns: ["lines"],
-    lede: "Botox and Xeomin relax the muscles that crease the skin, softening forehead lines, frown lines and crow's feet. Xeomin has no accessory proteins, which can help if Botox seems to wear off faster than it used to.",
+    lede: "Botox relaxes the muscles that crease the skin, softening forehead lines, frown lines and crow's feet. It has the longest track record of the four and is very predictable in small areas.",
     appointment: "15–20 min",
     onset: "3–7 days",
     cadence: "every 3–4 months",
@@ -127,12 +127,27 @@ export const TREATMENTS = [
     portrait: "m-injectables.webp",
   },
   {
-    slug: "dysport-jeuveau",
-    page: "dysport-jeuveau.html",
-    name: "Dysport & Jeuveau",
+    slug: "xeomin",
+    page: "xeomin.html",
+    name: "Xeomin",
     category: "injectables",
     concerns: ["lines"],
-    lede: "Two more neuromodulators that work the same way as Botox. Dysport spreads a little further, which can suit a larger area like the forehead, and Jeuveau is often chosen for frown lines.",
+    lede: "The same active ingredient as Botox with no accessory proteins, which can help if Botox seems to wear off faster than it used to.",
+    appointment: "15–20 min",
+    onset: "3–7 days",
+    cadence: "every 3–4 months",
+    lasts: "3–4 months",
+    downtime: "None",
+    area: "Forehead, frown lines, crow's feet",
+    portrait: "stock-xeomin-portrait.webp",
+  },
+  {
+    slug: "dysport",
+    page: "dysport.html",
+    name: "Dysport",
+    category: "injectables",
+    concerns: ["lines"],
+    lede: "Works the same way as Botox but spreads a little further, which can suit a larger area like the forehead. It often starts a day or two sooner.",
     appointment: "15–20 min",
     onset: "2–5 days",
     cadence: "every 3–4 months",
@@ -140,6 +155,21 @@ export const TREATMENTS = [
     downtime: "None",
     area: "Forehead, frown lines, crow's feet",
     portrait: "m-eyes-young.webp",
+  },
+  {
+    slug: "jeuveau",
+    page: "jeuveau.html",
+    name: "Jeuveau",
+    category: "injectables",
+    concerns: ["lines"],
+    lede: "A neuromodulator made only for cosmetic use, most often chosen for the frown lines between the eyebrows.",
+    appointment: "15–20 min",
+    onset: "2–5 days",
+    cadence: "every 3–4 months",
+    lasts: "3–4 months",
+    downtime: "None",
+    area: "Frown lines, forehead, crow's feet",
+    portrait: "stock-dysport-portrait.webp",
   },
   {
     slug: "dermal-fillers",

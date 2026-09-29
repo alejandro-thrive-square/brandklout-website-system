@@ -28,8 +28,8 @@ let pass = 0, fail = 0;
 const t = (name, ok, detail = "") => { ok ? pass++ : fail++; console.log(`${ok ? "ok  " : "FAIL"} ${name}${detail ? "  " + detail : ""}`); };
 
 const visible = () => pg.evaluate(() => [...document.querySelectorAll("[data-treatment]")].filter((r) => !r.hidden).map((r) => r.id));
-t("twelve rows rendered", (await visible()).length === 12);
-t("twelve anchors", (await pg.evaluate(() => ["botox","dysport-jeuveau","dermal-fillers","sculptra","morpheus8","chemical-peels","skinpen","prp","hair-restoration","hydrafacial","dermaplaning","skin-boosters"].every((id) => document.getElementById(id)))));
+t("fourteen rows rendered", (await visible()).length === 14);
+t("fourteen anchors", (await pg.evaluate(() => ["botox","xeomin","dysport","jeuveau","dermal-fillers","sculptra","morpheus8","chemical-peels","skinpen","prp","hair-restoration","hydrafacial","dermaplaning","skin-boosters"].every((id) => document.getElementById(id)))));
 
 await pg.click('[data-concern="hair"]');
 await new Promise((r) => setTimeout(r, 200));
@@ -43,7 +43,7 @@ await pg.screenshot({ path: "../shots/_menu-filtered.png" });
 
 await pg.click('[data-concern="hair"]');
 await new Promise((r) => setTimeout(r, 200));
-t("click again clears", (await visible()).length === 12);
+t("click again clears", (await visible()).length === 14);
 
 await pg.click("#botox summary");
 await new Promise((r) => setTimeout(r, 1400));
