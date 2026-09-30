@@ -39,6 +39,18 @@ It is a Railway environment `staging` in the same project, seeded from productio
 never publish half-finished work on production, where one publish replaces every page —
 [2026-09-15 run](./runbook/2026-09-15-301-map-built-and-staging-created.md).
 
+**Google reviews widget — on STAGING only, since 2026-09-30, and not yet doing its job.** The
+practice's Elfsight Google Reviews widget (`c92f78df`, its own #110 listing, 4.9 from 282) is
+published on staging as an Embed block in the three review sections (`/` chapter 07, `/results`
+`#reviews`, `/team` band 03), where the static quotes and the review wall used to be. The widget
+boots, but it is configured in Elfsight as a **floating card badge**, so the sections show an empty
+slot and a corner badge. Production keeps the static reviews until someone with the Elfsight
+account switches the widget to a section layout (Carousel or Grid); then
+`21-instatic-upload/add-google-reviews.mjs --apply --publish` against production, and a real-browser
+check. The authored pages and `place-embeds.mjs` already carry the change, so a full re-import
+does not lose it —
+[run](./runbook/2026-09-30-google-reviews-widget.md).
+
 **Old domain:** `stonesurgicalarts.com` still sends every URL to the new home page. The page-level
 301 map is built and dry-run in `workflows/14-migration-seo-redirects/` but **not deployed**.
 
@@ -119,6 +131,11 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 ## Next
 
+- **Get the Google reviews widget switched to a section layout in Elfsight, then promote it.**
+  Widget `c92f78df` is a floating card badge today; staging shows the consequence. The steps and
+  the dry-run output to expect are in the
+  [2026-09-30 run](./runbook/2026-09-30-google-reviews-widget.md). The same widget is embedded on
+  the sister practice's site as a badge, so the layout change reaches it too.
 - **Deploy the 301 map** once approved: `deploy-redirects.mjs --apply` with a scoped, short-lived
   token, then `verify-redirects.mjs` must end `FAIL  none`. The 19 skin and non-surgical URLs are
   `provisional` (they go to `/treatments`; nobody has decided otherwise). See

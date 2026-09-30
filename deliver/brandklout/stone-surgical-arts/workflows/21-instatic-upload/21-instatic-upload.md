@@ -95,14 +95,16 @@ and `GET /admin/api/cms/setup/status` answered `needsSetup: true`. `POST /admin/
 ## Execution Steps
 
 > [!IMPORTANT]
-> **In a sparse worktree, add the shared client first.** Every script here imports
-> `insta-api.mjs` from `deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync/`, which is
-> outside a Stone-only sparse checkout. The file is in the tree, so it fails as
-> `ERR_MODULE_NOT_FOUND` on a path that plainly exists in `git ls-tree` — which reads like a broken
-> import rather than a missing checkout. Once per worktree:
+> **In a sparse worktree, add the shared tools first.** Every script here imports
+> `insta-api.mjs` from `deliver/process/tools/instatic-api-sync/` (where system v2 put it on
+> 2026-09-27; the scripts were re-pointed on 2026-09-30, having imported the old
+> `process/22-instatic-api-sync/` path until then), which is outside a Stone-only sparse checkout.
+> The file is in the tree, so it fails as `ERR_MODULE_NOT_FOUND` on a path that plainly exists in
+> `git ls-tree` — which reads like a broken import rather than a missing checkout. Once per
+> worktree:
 >
 > ```bash
-> git sparse-checkout add deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync
+> git sparse-checkout add deliver/process/tools
 > ```
 
 ```bash
@@ -124,7 +126,11 @@ node push-site.mjs --apply --force   # write shell + pages + code assets in ONE 
                                #    --force is REQUIRED on any re-import: see trap 11
 node place-embeds.mjs           # 5. swap each embed MARKER for a real Embed block. Any page
 node place-embeds.mjs --apply   #    carrying [data-embed] publishes as an empty div without
-                               #    this, and no gate here says so. See trap 32
+                               #    this, and no gate here says so. See trap 32. Two markers
+                               #    exist: the GHL form on /book and the Google reviews widget
+                               #    on /, /results and /team (trap 33). For the reviews alone,
+                               #    add-google-reviews.mjs edits the three live rows in place
+                               #    instead of re-importing 54 pages
 node -e "import('.../insta-api.mjs').then(m=>m.publish())"   # 6. publish
 node verify-live.mjs            # 7. GATE — crawls every route, link and asset
 node compare-live.mjs           # 8. GATE — diffs the published pages against the
@@ -897,6 +903,31 @@ Two more things that cost time here:
 - **`compare-live.mjs` stays meaningful only because the local build carries the same markup.**
   `css/62-embed.css` mirrors the module's own stylesheet for that reason; the published page and
   the local one came back `no differences` on the first run after the swap.
+
+### Trap 33 — the Google reviews widget: a badge is not a section, and a snippet may hold a `<div>`
+
+Added 2026-09-30, placing the practice's Elfsight Google Reviews widget (`c92f78df`) where the
+three static review sections were: `/` chapter 07, `/results` `#reviews`, `/team` band 03.
+Full account in the [2026-09-30 run](../../docs/runbook/2026-09-30-google-reviews-widget.md).
+
+- **Same door as the form (trap 32), second key.** The marker is `data-embed="google-reviews"`,
+  the snippet is Elfsight's install code **without `data-elfsight-app-lazy`** (with it the widget
+  never boots on Instatic: 0px, no error, no boot request), `place-embeds.mjs` knows the key for
+  the three slugs, and `add-google-reviews.mjs` places it on the live rows without a re-import.
+- **A widget can boot perfectly and still put nothing in the section.** This widget is configured
+  in Elfsight as a floating **card badge** (`layout: cardBadge`, bottom-right, desktop only). CSP,
+  `platform.js`, `/p/boot`, the app bundle and the listing (4.9 from 282) were all fine, and the
+  inline mount stayed 0px by design while the badge rendered into a portal at the end of `<body>`.
+  Read `settings.layout` from `core.service.elfsight.com/p/boot/?page=<url>&w=<id>` before
+  blaming the page. A section layout (Carousel, Grid) is a widget-side change, not one made here.
+- **Markers are parsed with balanced tags now** (`embed-markers.mjs`). The lazy
+  `[\s\S]*?<\/div>` that every script used stops at the first `</div>`, which for this snippet
+  is the widget's own mount: a stray `</div>` in the import payload, half a snippet published, no
+  hosts read by the gate. Use `findMarkers` / `markerFor` / `emptyMarkers`; never the regex.
+- **An in-page widget's requests come from the main frame.** `all-pages.mjs` excuses a vendor
+  iframe's traffic by frame; it cannot do that for a script that renders in the page. The marker
+  declares the vendor's hosts in `data-embed-hosts` (suffixes), and the gate reads them. It also
+  treats a populated Elfsight portal as "booted", so a badge layout does not fail the wait.
 
 ## Output Artifacts
 

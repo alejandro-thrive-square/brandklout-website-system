@@ -822,11 +822,12 @@
 
   <!-- ====================================================================
        07 — THE PROOF
-       Six reviews the practice published itself, with the patient's name,
-       recovered verbatim from the archived testimonials page. Trimmed where
-       one ran long, never reworded.
+       The practice's live Google reviews (Elfsight, since 2026-09-30) under
+       the chapter's own photograph, rating and mark. The six hand-picked
+       quotes that sat here until then are in git history and on the
+       archived testimonials page; the widget shows what Google shows.
        ==================================================================== -->
-  <section class="proof_component" data-chapter="07" data-chapter-name="The proof" tabindex="-1" aria-roledescription="carousel" aria-label="Patient reviews">
+  <section class="proof_component" data-chapter="07" data-chapter-name="The proof" aria-label="Patient reviews">
     <div class="proof_layout">
       <div class="proof_media" data-j="mask">
         <div class="u-fill" data-parallax="10">
@@ -841,40 +842,18 @@
       <div class="proof_stage">
         <span class="proof_quotemark" aria-hidden="true">&ldquo;</span>
         <p class="chapter_mark" data-j="rise">In their words</p>
-        <div class="proof_slides" aria-live="polite">
-          <figure class="proof_slide is-active">
-            <blockquote>She said we would start small and work our way up. I am in love with my lips. Plump but natural.</blockquote>
-            <figcaption><span>Sarah Routon</span><span>Lip filler</span></figcaption>
-          </figure>
-          <figure class="proof_slide">
-            <blockquote>Dr. Stone will hear your concerns and give you all of your options. At no point will you feel pressured in your treatment choices. I couldn't be happier with the results.</blockquote>
-            <figcaption><span>Darci Wilson</span><span>Non-surgical</span></figcaption>
-          </figure>
-          <figure class="proof_slide">
-            <blockquote>Dr. Stone and her staff made me feel comfortable and welcomed. My eyelid surgery went very well and I am very pleased. I highly recommend her!</blockquote>
-            <figcaption><span>Bahereh Hessari</span><span>Blepharoplasty</span></figcaption>
-          </figure>
-          <figure class="proof_slide">
-            <blockquote>Dr. Stone is so kind and also a great, proactive surgeon. Not only do I send patients to her, I am one myself. The office and staff are equally fantastic.</blockquote>
-            <figcaption><span>Brittney Culp</span><span>Referring provider</span></figcaption>
-          </figure>
-          <figure class="proof_slide">
-            <blockquote>Absolutely beautiful office with cutting-edge equipment. Dr. Stone is an incredible surgeon, she takes the time to talk through procedures and treatment plans with her patients.</blockquote>
-            <figcaption><span>Dia P.</span><span>Consultation</span></figcaption>
-          </figure>
-          <figure class="proof_slide">
-            <blockquote>Four months ago I took my daughter to Dr. Stone with her face covered with acne, and through the past few months she has helped my daughter clear her skin tremendously.</blockquote>
-            <figcaption><span>Saul Rivera</span><span>Skin</span></figcaption>
-          </figure>
-        </div>
-        <div class="proof_controls" data-j="rise">
-          <div class="proof_arrows">
-            <button class="proof_arrow is-prev" type="button" aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none"><path d="M14 8H3M8 3L3 8l5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
-            <button class="proof_arrow is-next" type="button" aria-label="Next review"><svg viewBox="0 0 16 16" fill="none"><path d="M2 8h11M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.4"/></svg></button>
-          </div>
-          <p class="proof_count">01 <span>/ 06</span></p>
-          <div class="proof_bar" aria-hidden="true"><div class="proof_bar-fill"></div></div>
-        </div>
+        <!-- LIVE GOOGLE REVIEWS. This wrapper is an embed MARKER, not the widget:
+             `data-embed` names a row in 21-instatic-upload/place-embeds.mjs, which
+             swaps the node for the Embed block after every push, and the snippet
+             inside is what that block publishes, read out of the BUILT page, so
+             this is its only copy. Elfsight's `data-elfsight-app-lazy` is left
+             out on purpose: with it the widget never boots on Instatic (0px, no
+             error). `data-embed-hosts` is for all-pages.mjs, the hosts the vendor
+             script reaches from the page itself, since it renders in the page and
+             not in a frame. Widget c92f78df, the practice's own listing (#110).
+             See docs/runbook/2026-09-30-google-reviews-widget.md. -->
+        <div class="wz-embed reviews_embed" data-wz-embed="auto" data-embed="google-reviews" data-embed-hosts="elfsight.com elfsightcdn.com googleusercontent.com gstatic.com googleapis.com"><script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-c92f78df-0615-4ab9-a204-4f7b385011c9"></div></div>
       </div>
     </div>
   </section>

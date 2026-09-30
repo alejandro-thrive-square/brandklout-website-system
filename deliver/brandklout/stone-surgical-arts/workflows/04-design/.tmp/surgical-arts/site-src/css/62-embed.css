@@ -19,3 +19,12 @@
 /* The panel around the form. `is-embed` drops the inner gap the hand-built
    form needed between its rows. */
 .form_component.is-embed { gap: var(--space-medium); }
+
+/* The Google reviews widget (Elfsight), 2026-09-30, on the home page's proof
+   chapter, the results page's review wall and the team page's band. Same
+   mechanism as the form: `.reviews_embed` is the author class the Embed block
+   carries, and the module owns `.wz-embed`. The widget renders in the page,
+   not in a frame, and takes a moment to boot; the floor is what the reader sees
+   in between, and what a reader with no JavaScript sees for good, so the
+   chapter never collapses to the chapter mark alone. */
+.reviews_embed { position: relative; width: 100%; max-width: 100%; min-height: 26rem; }

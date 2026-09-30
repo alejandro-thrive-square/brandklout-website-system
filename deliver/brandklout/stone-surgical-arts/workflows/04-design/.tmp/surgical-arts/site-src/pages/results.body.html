@@ -13,10 +13,11 @@
      what the gallery is waiting for, and the filter and the wall are built
      so the day the practice hands over consented cases, each one is a card.
 
-     THE REVIEWS ARE REAL. Eight, published by the practice itself with the
-     patient's name on stonesurgicalarts.com, recovered verbatim from the
-     archived testimonials page and trimmed only for length. Two carry no
-     name because none was published. The filter works on these today.
+     THE REVIEWS ARE LIVE, since 2026-09-30: the practice's Google listing
+     through the Elfsight widget, placed as an embed marker below (see the
+     marker's own comment). Until then the wall held eight reviews the
+     practice had published itself, recovered verbatim from the archived
+     testimonials page, behind a treatment filter; they are in git history.
      ========================================================================== -->
 
 <div class="results_page journey_page">
@@ -73,64 +74,21 @@
         <p class="chapter_mark" data-j="rise">In their words</p>
         <h2 class="display-lg" data-j-split>What patients say afterwards.</h2>
       </div>
-      <p class="steps_lede" data-j="rise">These are the reviews from cosmetic patients, published by the practice itself.</p>
+      <p class="steps_lede" data-j="rise">Straight from the practice&rsquo;s Google listing, as patients wrote them.</p>
     </div>
 
-    <div data-filter data-j="rise">
-      <div class="filter_bar" role="group" aria-label="Filter reviews by treatment">
-        <button class="filter_btn" type="button" data-filter-value="all" aria-pressed="true">All</button>
-        <button class="filter_btn" type="button" data-filter-value="surgical" aria-pressed="false">Surgical</button>
-        <button class="filter_btn" type="button" data-filter-value="nonsurgical" aria-pressed="false">Non-surgical</button>
-        <button class="filter_btn" type="button" data-filter-value="skin" aria-pressed="false">Skin</button>
-        <button class="filter_btn" type="button" data-filter-value="consultation" aria-pressed="false">The consultation</button>
-      </div>
-      <p class="filter_count" data-filter-count>8 reviews</p>
-
-      <div class="wall_grid">
-        <figure class="wall_card is-large" data-filter-tags="nonsurgical">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">I went in looking for lip fillers wanting the &ldquo;sexy pout&rdquo;. Dr. Stone talked me through the process and told me she would not overfill for the sake of having big lips. Which I loved. She said we would start small and work our way up. I am in love with my lips. Plump but natural.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Sarah Routon</span><span class="wall_tag">Lip filler</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="surgical">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Dr. Stone and her staff made me feel comfortable and welcomed. My eyelid surgery went very well and I am very pleased. I highly recommend her!</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Bahereh Hessari</span><span class="wall_tag">Blepharoplasty</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="nonsurgical">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Dr. Stone will hear your concerns and give you all of your options. At no point will you feel pressured in your treatment choices. I started out with more of a conservative maintenance with my cosmetic facial routine and I couldn&rsquo;t be happier with the results.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Darci Wilson</span><span class="wall_tag">Non-surgical</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="consultation">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Dr. Stone is so kind and also a great, proactive surgeon. Not only do I send patients to her, I am one myself. The office and staff are equally fantastic.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Brittney Culp</span><span class="wall_tag">Referring provider</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="consultation">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Absolutely beautiful office with cutting-edge equipment. The staff at Stone Surgical Arts are an amazing team. Dr. Stone is an incredible surgeon, she takes the time to talk through procedures and treatment plans with her patients.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Dia P.</span><span class="wall_tag">Consultation</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="consultation">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">My consultation was unrushed and there was no pressure of any kind, while still being completely professional. Everyone at the front desk is friendly and helpful.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Google review</span><span class="wall_tag">Consultation</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="skin">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Four months ago I took my daughter to Dr. Stone with her face covered with acne, and through the past few months she has helped my daughter clear her skin tremendously. It&rsquo;s a friendly environment and she&rsquo;s the sweetest doctor ever.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Saul Rivera</span><span class="wall_tag">Skin</span></figcaption>
-        </figure>
-        <figure class="wall_card" data-filter-tags="consultation">
-          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
-          <blockquote class="wall_text">Solo quiero dar muchas gracias a la doctora Mona. Mi experiencia fue muy buena y todo el personal son s&uacute;per amables, y atentas.</blockquote>
-          <figcaption class="wall_meta"><span class="wall_name">Google review</span><span class="wall_tag">En espa&ntilde;ol</span></figcaption>
-        </figure>
-      </div>
-      <p class="wall_empty" data-filter-empty>No published cosmetic review carries this tag yet.</p>
-    </div>
-    <p class="tier_foot" data-j="rise">Two reviews are shown without a name because none was published with them.</p>
+    <!-- LIVE GOOGLE REVIEWS. This wrapper is an embed MARKER, not the widget:
+         `data-embed` names a row in 21-instatic-upload/place-embeds.mjs, which
+         swaps the node for the Embed block after every push, and the snippet
+         inside is what that block publishes, read out of the BUILT page, so
+         this is its only copy. Elfsight's `data-elfsight-app-lazy` is left
+         out on purpose: with it the widget never boots on Instatic (0px, no
+         error). `data-embed-hosts` is for all-pages.mjs, the hosts the vendor
+         script reaches from the page itself, since it renders in the page and
+         not in a frame. Widget c92f78df, the practice's own listing (#110).
+         See docs/runbook/2026-09-30-google-reviews-widget.md. -->
+    <div class="wz-embed reviews_embed" data-wz-embed="auto" data-embed="google-reviews" data-embed-hosts="elfsight.com elfsightcdn.com googleusercontent.com gstatic.com googleapis.com"><script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-c92f78df-0615-4ab9-a204-4f7b385011c9"></div></div>
   </section>
 
   <!-- The two treatment pages that exist, as the way into the work. -->

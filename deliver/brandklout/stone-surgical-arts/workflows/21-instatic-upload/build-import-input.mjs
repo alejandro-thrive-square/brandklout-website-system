@@ -30,6 +30,7 @@ import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
 import { BLOG_PAGES, addBlogSeo } from '../04-design/.tmp/surgical-arts/site-src/blog-render.mjs'
+import { emptyMarkers } from './embed-markers.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE = path.resolve(HERE, '../04-design/.tmp/surgical-arts')
@@ -134,7 +135,11 @@ function rewrite(html, file) {
   //     platform that can publish a third-party frame (trap 32). That script
   //     reads the snippet out of the BUILT page, so nothing is duplicated and
   //     the two cannot drift.
-  out = out.replace(/(<div[^>]*\sdata-embed="[^"]*"[^>]*>)[\s\S]*?(<\/div>)/g, '$1$2')
+  //
+  //     Balanced, not lazy, since 2026-09-30: the Google reviews snippet is a
+  //     <script> and a <div>, and a lazy `[\s\S]*?<\/div>` stopped inside it,
+  //     leaving a stray `</div>` that would have closed the chapter early.
+  out = emptyMarkers(out)
   if (/<iframe/i.test(out)) problems.push(`${file}: an <iframe> outside an embed marker — it cannot survive importHtml`)
 
   // 1. Image sources -> media library paths.

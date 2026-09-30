@@ -24,7 +24,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { api, BASE, getSite, getPages, toChangedPage, publish } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, BASE, getSite, getPages, toChangedPage, publish } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const APPLY = process.argv.includes('--apply')

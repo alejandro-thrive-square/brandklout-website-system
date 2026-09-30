@@ -20,7 +20,7 @@
  * helper reports to services.msgsndr.com; pages without an Embed block keep a
  * strict connect-src, so both are granted here or the swap is refused there.
  */
-import { api, BASE, publish } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, BASE, publish } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 
 const ID = 'brandklout.embed-origins'
 const APPLY = process.argv.includes('--apply')

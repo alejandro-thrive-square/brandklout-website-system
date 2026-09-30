@@ -39,7 +39,8 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { api, getSite, getPages, publish } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, getSite, getPages, publish } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
+import { markerFor } from './embed-markers.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
@@ -62,7 +63,10 @@ const MODULE_ID = 'brandklout.embed-origins.embed'
  * The snippet itself is NOT written here. It is read out of the built page, so
  * `site-src/pages/<page>.body.html` is the only copy and the published block
  * cannot drift from the local build. `height` is the editor card's height in
- * the admin; the live height is the vendor script's business. */
+ * the admin; the live height is the vendor script's business.
+ *
+ * `where` is the slug, or the slugs, a key may appear on. The same Google
+ * reviews snippet sits on three pages; each page's own built copy is read. */
 const EMBEDS = {
   'ghl-contact-form': {
     where: 'book',
@@ -78,21 +82,40 @@ const EMBEDS = {
       allow: '',
     },
   },
+  /* The practice's live Google reviews: Elfsight widget c92f78df (the #110
+     listing, dfwsurgicalarts.com), placed 2026-09-30 where the six-quote
+     carousel (home), the eight-card wall (results) and the four-quote band
+     (team) were. Snippet mode, and the snippet must NOT carry Elfsight's
+     `data-elfsight-app-lazy`: with it platform.js loads and the widget never
+     boots on Instatic (0px, no error). The page's CSP is widened by the plugin
+     for the one host the snippet names; platform.js's own follow-up requests
+     to core.service.elfsight.com etc. pass because compatible mode allows
+     `https:` for connect/img. First placed by add-google-reviews.mjs, which
+     edits the three live pages in place; this row is what puts the block back
+     after a full re-import. */
+  'google-reviews': {
+    where: ['index', 'results', 'team'],
+    props: {
+      source: 'snippet',
+      url: '',
+      title: 'Google reviews',
+      fit: 'auto',
+      height: 420,
+      ratio: '16 / 9',
+      lazy: true,
+      allowFullscreen: false,
+      allow: '',
+    },
+  },
 }
 
 /* The marker's contents in the BUILT page, which is what the block publishes. */
 function snippetFor(slug, key) {
   const file = path.join(SITE_SRC, `${slug}.html`)
   const html = fs.readFileSync(file, 'utf8')
-  // Built by hand rather than with `new RegExp` and a template literal: `\s`
-  // in a template literal is just "s", and the pattern silently matches
-  // nothing. It cost a run here on 2026-09-17.
-  const re = new RegExp('<div[^>]*\\sdata-embed="' + key + '"[^>]*>([\\s\\S]*?)<\\/div>')
-  const m = html.match(re)
-  if (!m || !m[1].trim()) {
-    throw new Error(`no marker "${key}" with contents in ${slug}.html — build the site first`)
-  }
-  return m[1].trim()
+  // Balanced tags, not a lazy regex: a snippet may hold a <div> of its own
+  // (Elfsight's does), and the lazy match used until 2026-09-30 stopped there.
+  return markerFor(html, key, `${slug}.html`).inner.trim()
 }
 
 /* The module publishes its own `class="wz-embed"`, and the publisher injects
@@ -146,8 +169,8 @@ for (const row of rows) {
       console.error(`REFUSING: ${cells.slug} carries data-embed="${key}", which is not in EMBEDS here.`)
       process.exit(1)
     }
-    if (embed.where !== cells.slug) {
-      console.error(`REFUSING: "${key}" is declared for "${embed.where}" and was found on "${cells.slug}".`)
+    if (![].concat(embed.where).includes(cells.slug)) {
+      console.error(`REFUSING: "${key}" is declared for "${[].concat(embed.where).join(', ')}" and was found on "${cells.slug}".`)
       process.exit(1)
     }
     if (marker.children?.length) {

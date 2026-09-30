@@ -24,6 +24,7 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { findMarkers, hostAllowed } from "../../../../21-instatic-upload/embed-markers.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, process.argv[2] || "../final-site");
@@ -52,16 +53,19 @@ const failures = [];
 let checks = 0;
 
 /* The hosts a page is ALLOWED to reach, read from the page itself: the vendor
-   snippet inside an embed marker ([data-embed]) and nothing else. Reading them
-   per page rather than keeping a list here means the gate stays exactly as
-   strict as the markup is, and a vendor host that appears anywhere outside a
-   marker still fails. See css/62-embed.css and 21-instatic-upload/place-embeds.mjs. */
+   snippet inside an embed marker ([data-embed]), plus the marker's own
+   `data-embed-hosts`, and nothing else. Reading them per page rather than
+   keeping a list here means the gate stays exactly as strict as the markup
+   is, and a vendor host that appears anywhere outside a marker still fails.
+   `data-embed-hosts` exists for a vendor that renders IN the page rather than
+   in a frame (Elfsight, 2026-09-30): its follow-up requests come from the main
+   frame, from hosts the snippet never names, and the frame test below cannot
+   excuse them. Each entry is a suffix. See css/62-embed.css and
+   21-instatic-upload/place-embeds.mjs. */
 function embedHosts(file) {
   const html = fs.readFileSync(path.join(ROOT, file), "utf8");
   const hosts = new Set();
-  for (const m of html.matchAll(/<div[^>]*\sdata-embed="[^"]*"[^>]*>([\s\S]*?)<\/div>/g)) {
-    for (const u of m[1].matchAll(/https:\/\/([a-z0-9.-]+)/gi)) hosts.add(u[1].toLowerCase());
-  }
+  for (const m of findMarkers(html)) for (const h of m.hosts) hosts.add(h);
   return hosts;
 }
 
@@ -100,7 +104,7 @@ for (const file of pages) {
       // The vendor script an embed marker on THIS page asks for is expected.
       let host = "";
       try { host = new URL(u).hostname.toLowerCase(); } catch { host = ""; }
-      if (allowedHosts.has(host)) return;
+      if (hostAllowed(host, allowedHosts)) return;
       external.push(u.slice(0, 60));
     });
     await page.setViewport({ width, height: 900 });
@@ -125,9 +129,19 @@ for (const file of pages) {
       await page
         .waitForFunction(
           // SOME, not every: the vendor keeps helper frames of its own that stay
-          // hidden by design, and `every` waits for them forever.
-          () => [...document.querySelectorAll('[data-embed] iframe, .ep-wrapper iframe')]
-            .some((f) => getComputedStyle(f).visibility === "visible" && f.getBoundingClientRect().left > -1000),
+          // hidden by design, and `every` waits for them forever. A vendor that
+          // renders in the page instead of a frame (Elfsight) counts as booted
+          // once its own mount point has grown past a bare line of text, or,
+          // for a widget whose layout is a floating badge, once its portal at
+          // the end of <body> has rendered the rating (the mount then stays 0px
+          // by design: found 2026-09-30, widget c92f78df is a "cardBadge").
+          () =>
+            [...document.querySelectorAll('[data-embed] iframe, .ep-wrapper iframe')]
+              .some((f) => getComputedStyle(f).visibility === "visible" && f.getBoundingClientRect().left > -1000) ||
+            [...document.querySelectorAll('[data-embed] [class^="elfsight-app-"]')]
+              .some((e) => e.getBoundingClientRect().height > 40) ||
+            [...document.querySelectorAll('[class*="ElfsightPortalNest"]')]
+              .some((e) => e.textContent.trim().length > 0),
           { timeout: 25000, polling: 500 },
         )
         .catch((e) => errors.push(`the embedded widget never became visible: ${String(e).slice(0, 60)}`));
