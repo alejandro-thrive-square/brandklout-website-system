@@ -16,6 +16,11 @@ Start at [`project-overview.md`](./project-overview.md).
 
 ## Status: PUBLISHED — the full site (80 pages) is live on the client's Instatic instance
 
+**2026-09-30.** Six ads landing pages (All-on-6 and 3-on-6; landing, consultation, thank you) were
+added under `/ads-landing-pages/` and published at **seq 24**, 86 pages in all. Their state, and
+every run from here on, is in the client runbook one level up: [`../RUNBOOK.md`](../RUNBOOK.md).
+The upload chain changed the same day: see "The ads set" and trap 43 in `21-instatic-upload.md`.
+
 **2026-09-24 (later).** Strict image pass: every photo now shows what its copy is about, from the
 practice's library or licensed Freepik stock (42, ledger in `03-graphic-resources/.tmp/stock/`),
 published **seq 23** — [run](./runbook/2026-09-24-strict-image-pass.md). Only the before/after case
