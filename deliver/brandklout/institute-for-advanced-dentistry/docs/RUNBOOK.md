@@ -20,6 +20,16 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
   [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
+- **Live Google reviews on staging since 2026-09-30**: the home page's `#proof` rotator is the
+  Elfsight Google Reviews widget (app `7febe92d-…`, the Peoria listing, 5.0 / 96) in an
+  `embed-origins` Embed, class `.rv-embed`, placed by `21-instatic-upload/home/add-elfsight-reviews.mjs`
+  (staging-locked, re-runnable). **A `push-home.mjs` drops it** — re-run the script after every
+  push, before publishing. Production has no widget and gets it with the rebuilt site. Widget
+  registry and ownership: `deliver/process/tools/elfsight-reviews/review-widgets.json`. Run:
+  [runbook/2026-09-30-elfsight-google-reviews-on-staging.md](runbook/2026-09-30-elfsight-google-reviews-on-staging.md).
+- **Pipeline scripts import `insta-api.mjs` from `deliver/process/tools/instatic-api-sync/`**
+  since 2026-09-30 (the pre-v2 `process/22-instatic-api-sync/` is gone). This worktree needs
+  `deliver/process` in its sparse cone (`git sparse-checkout add deliver/process`).
 - **Share card on staging since 2026-09-23**: the `brandklout.open-graph` plugin (copied from
   Dr. Nahlah's into `workflows/16-instatic-plugins/open-graph/`) is installed on **staging only**;
   the home page's `og:image` is the colour logo on white (`home/og-card.mjs` makes it,
