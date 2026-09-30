@@ -100,6 +100,7 @@ The FigJam board *Deliver SOP's* has no Scenario 6 lane yet; this index and the 
 | [specialty-sitemaps](./tools/specialty-sitemaps/README.md) | Sitemap templates per specialty and their section flows | 0 (02), 3 (02) |
 | [client-first-style-guide](./tools/client-first-style-guide/README.md) | Client-First reference CSS and style guide page | 0 (03), 6 (02) |
 | [jev-browser-agent](./tools/jev-browser-agent/README.md) | Jev (TypeSafe) computer use in vendor dashboards, with cross-origin iframe support (Elfsight widget editor) | none yet (ad hoc; widget creation before an embed step) |
+| [elfsight-reviews](./tools/elfsight-reviews/README.md) | One Google Reviews widget per client: registry, inventory, create over CDP, render check | none yet (ad hoc; before an embed step) |
 
 The design bar and its motion gate live in Scenario 0 step 03:
 [`DESIGN-STANDARD.md`](./scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) and
