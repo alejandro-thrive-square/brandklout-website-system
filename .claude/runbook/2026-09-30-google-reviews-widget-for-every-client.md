@@ -33,6 +33,27 @@ rather than in one client's runbook.
 - **The tool, registry and procedure** are in `deliver/process/tools/elfsight-reviews/`, with a row
   in `PROCESS_INDEX.md`.
 
+## Placement dispatched (same day, later)
+
+The user's scope: add the widget to every Instatic site on Railway **except** Mason Park Kids
+(done 2026-09-29), Dr. Nahlah and Brandklout. Six sites qualify. Each got a brief at
+`deliver/brandklout/<client>/docs/tasks/2026-09-30-google-reviews-widget.md` in its own worktree,
+and a new Claude session (Orca terminal titled "Review widget") was started there with it:
+
+| Worktree | Widget | Orca terminal | Site-specific rule in the brief |
+| :--- | :--- | :--- | :--- |
+| bk-hackensack-dental-implants | `cf96ca10` | `term_8e5275de…` | Reuse the widget that is live on the Webflow site. |
+| bk-ifa-dentistry | `7febe92d` | `term_170f9b25…` | **Staging only.** Staging is home-only; never promote it. |
+| bk-mason-park | `32926aff` (All-in-One Reviews, other account) | `term_5c2ca509…` | Reuse it. Production is live: push to both instances, never reset. |
+| bk-stone-med-spa | `73fff4ec` | `term_1cf8cfb9…` | Suite #110B only. |
+| bk-stone | `c92f78df` | `term_36c14a3b…` | Move it here from the Stone Dental site; do not touch Stone Dental. |
+| bk-west-la-implants | `670ca31c` | `term_1bd62177…` | One instance only (no staging): back up first. |
+
+Every brief says: embed-origins Embed block in snippet mode, `data-elfsight-app-lazy` stripped,
+back up first, staging before production, verify on a fresh load in a real browser, write the
+client runbook, commit, **no push or merge**, and do not touch any Elfsight widget. Hackensack,
+Mason Park and West LA already had another session open; the brief says to leave its files alone.
+
 ## Next
 
 - **Restore:** needs its Google Maps link. Then run
