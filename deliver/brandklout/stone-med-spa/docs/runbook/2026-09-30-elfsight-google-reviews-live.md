@@ -5,7 +5,7 @@ Brief: [`docs/tasks/2026-09-30-google-reviews-widget.md`](../tasks/2026-09-30-go
 in a drag rail on `/` and `/results`; both rails are now the live Elfsight widget for the med
 spa's own listing.
 
-## Done
+## Done (`7ef14428`, this worktree only — not pushed, not merged)
 
 - **Widget:** Elfsight Google Reviews `73fff4ec-b68f-4c97-af8a-7b022584e166` on the shared agency
   account, registered in `deliver/process/tools/elfsight-reviews/review-widgets.json`. Source:
