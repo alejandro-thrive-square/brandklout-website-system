@@ -21,12 +21,20 @@ Arvada task was found with `search_tasks` for "Arvada" modified after 2026-09-15
   1440/1920 on all three pages, the quiz clicked through to the thank-you page on both pages that
   carry it, validation, the video lightbox, the sticky bar, one phone number, single-fire tracking.
 
+- **Pushed to Webflow and published to staging only** (user: "Push to webflow"). Pages
+  `all-on-x-quiz` `6abd1c475916198b01bfe90d`, `all-on-x-quiz-consult` `6abd1c4f0b0c410a144a4850`,
+  `all-on-x-quiz-thank-you` `6abd1c00c6b0efd3cb30ff7f`, under `/ads-landing-pages/` on site
+  `693c51e685b19f0d0c149cab`. Custom-code route: stylesheet in page head code, markup in one Embed,
+  scripts in page footer code. Tooling and the site's quirks: `workflows/07-webflow-build/.tmp/aox-quiz/README.md`.
+  `parity.mjs` reports local and staging identical on all three pages at 1440 and 390; the click
+  gate passed 87 checks against staging. **Not published to arvadadentalcenter.com.**
+
 ## Next
 
-1. Review of the local pages, then answers to the open items below.
-2. Webflow build on site `693c51e685b19f0d0c149cab`. Needs a custom-code route; the v2 native
-   route cannot carry this design (script quiz, pseudo-elements, `clamp()`).
-3. Publishing is a separate go-ahead.
+1. Answers to the open items below.
+2. Publishing to the custom domain is a separate go-ahead. A whole-site publish by anyone will
+   take these pages live; with no webhook the quiz then shows the "call us" error, by design.
+3. After a webhook is set: one real submission from a browser (cross-origin JSON POST, preflight).
 
 ## Open, all blocking launch
 
@@ -53,6 +61,16 @@ Arvada task was found with `search_tasks` for "Arvada" modified after 2026-09-15
   and characters, not off the variable list.
 - **A named font that never loads still passes a computed-style check** (it reports the family and
   paints Verdana). Assert `document.fonts` loaded faces.
+- **`v2-native/wf.mjs` is dead**: the Webflow MCP now needs `session_id` and `agent_id` on every
+  call. Use `07-webflow-build/.tmp/aox-quiz/wfq.mjs`.
+- **Call tracking rewrites the phone number inside sentences.** "We'll call you from (720)..."
+  published as "from (983) 228-0387", a pool number. Never promise a caller ID on this site.
+- **The Sienna widget floors every font size to a whole pixel** on this site, after load. A
+  computed-style diff must block it or every rem size looks leaked.
+- **Staging runs the real call-tracking pool.** Each fresh-profile run of the staging gate takes a
+  number; do not loop it.
+- **The live ad page's canonical still points at `www.arvadadentalimplants.com`**, left from the
+  domain move. Not touched here.
 - A Bash heredoc halves backslashes even into `python -`; patch `.mjs` files with the Edit tool.
 
 ## Version Control

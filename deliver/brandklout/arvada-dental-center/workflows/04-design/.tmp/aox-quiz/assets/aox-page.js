@@ -18,12 +18,12 @@
   var dlg = null, frame = null, lastTile = null;
   function buildDialog(){
     dlg = document.createElement('dialog');
-    dlg.className = 'vid';
+    dlg.className = 'aq-vid';
     dlg.setAttribute('aria-label', 'Patient story video');
-    dlg.innerHTML = '<button type="button" class="vid-x" aria-label="Close video">&times;</button><div class="vid-frame"></div>';
+    dlg.innerHTML = '<button type="button" class="aq-vid-x" aria-label="Close video">&times;</button><div class="aq-vid-frame"></div>';
     document.body.appendChild(dlg);
-    frame = dlg.querySelector('.vid-frame');
-    dlg.querySelector('.vid-x').addEventListener('click', function(){ dlg.close(); });
+    frame = dlg.querySelector('.aq-vid-frame');
+    dlg.querySelector('.aq-vid-x').addEventListener('click', function(){ dlg.close(); });
     dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
     dlg.addEventListener('close', function(){
       frame.innerHTML = '';

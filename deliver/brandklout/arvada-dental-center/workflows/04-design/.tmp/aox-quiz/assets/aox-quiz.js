@@ -50,7 +50,7 @@
   var body = document.getElementById('quiz-body');
   var fill = document.getElementById('q-fill');
   var count = document.getElementById('q-count');
-  var bar = quiz.querySelector('.track');
+  var bar = quiz.querySelector('.aq-track');
 
   function esc(s){
     return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; });
@@ -66,17 +66,17 @@
   }
 
   function foot(showBack){
-    return '<div class="quiz-foot">' + (showBack ? '<button type="button" class="back">Back</button>' : '<span></span>') +
-      '<span class="time">Takes about 30 seconds</span></div>';
+    return '<div class="aq-quiz-foot">' + (showBack ? '<button type="button" class="aq-back">Back</button>' : '<span></span>') +
+      '<span class="aq-time">Takes about 30 seconds</span></div>';
   }
 
   function field(id, label, type, ac, val, ph, optional){
-    return '<div class="field"><label for="' + id + '">' + label + (optional ? ' <span class="opt-l">(optional)</span>' : '') + '</label>' +
+    return '<div class="aq-field"><label for="' + id + '">' + label + (optional ? ' <span class="aq-opt-l">(optional)</span>' : '') + '</label>' +
       '<input id="' + id + '" type="' + type + '" autocomplete="' + ac + '"' +
       (type === 'tel' ? ' inputmode="tel"' : '') + (type === 'email' ? ' inputmode="email"' : '') +
       ' value="' + esc(val) + '"' + (ph ? ' placeholder="' + ph + '"' : '') + (optional ? '' : ' required') +
       ' aria-describedby="' + id + '-err">' +
-      '<p class="err" id="' + id + '-err" hidden></p></div>';
+      '<p class="aq-err" id="' + id + '-err" hidden></p></div>';
   }
 
   function contactHTML(){
@@ -84,39 +84,39 @@
     var both = a === 'Both upper and lower';
     var label = both ? 'both arches' : (a === 'My upper teeth' ? 'upper arch' : (a === 'My lower teeth' ? 'lower arch' : 'one arch'));
     var p = both ? PRICE.both : PRICE.one;
-    return '<div class="step">' +
-      '<h3 class="q" tabindex="-1">Your next step is a free consultation and 3D scan.</h3>' +
-      '<div class="est"><p class="est-l">Published fee, ' + label + '</p><p class="est-n">' + p.total + '</p>' +
-      '<p class="est-m">or from ' + p.mo + '/mo with approved financing. Confirmed in writing after your scan.</p></div>' +
+    return '<div class="aq-step">' +
+      '<h3 class="aq-q" tabindex="-1">Your next step is a free consultation and 3D scan.</h3>' +
+      '<div class="aq-est"><p class="aq-est-l">Published fee, ' + label + '</p><p class="aq-est-n">' + p.total + '</p>' +
+      '<p class="aq-est-m">or from ' + p.mo + '/mo with approved financing. Confirmed in writing after your scan.</p></div>' +
       '<form id="lead-form" novalidate>' +
         field('f-name', 'First name', 'text', 'given-name', contact.first_name, '', false) +
         field('f-phone', 'Mobile phone', 'tel', 'tel-national', contact.phone, '(303) 555-0123', false) +
         field('f-email', 'Email', 'email', 'email', contact.email, '', true) +
-        '<label class="check"><input type="checkbox" id="f-sms"' + (contact.sms_consent ? ' checked' : '') + '>' +
+        '<label class="aq-check"><input type="checkbox" id="f-sms"' + (contact.sms_consent ? ' checked' : '') + '>' +
         '<span>Text me about my consultation. Message and data rates may apply. Reply STOP to opt out. Consent isn’t required to book.</span></label>' +
-        '<button class="btn btn-gold btn-block" type="submit">Request my free consultation</button>' +
-        '<p class="form-err" id="form-err" role="alert" hidden></p>' +
-        '<p class="fine">No cost and no obligation. We’ll call you from ' + PHONE.display + '.</p>' +
+        '<button class="aq-btn aq-btn-gold aq-btn-block" type="submit">Request my free consultation</button>' +
+        '<p class="aq-form-err" id="form-err" role="alert" hidden></p>' +
+        '<p class="aq-fine">No cost and no obligation. Our implant coordinator will call you.</p>' +
       '</form>' + foot(true) + '</div>';
   }
 
   function doneHTML(){
-    return '<div class="step done">' +
-      '<svg class="done-icon" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M15 27l7 7 15-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-      '<h3 class="q" tabindex="-1">Request received, ' + esc(contact.first_name) + '.</h3>' +
-      '<p>Our implant coordinator will call you from <strong>' + PHONE.display + '</strong>. Save that number so you recognize the call.</p>' +
-      '<p class="muted">Office hours are Monday to Friday, 8am to 5pm. Requests sent after hours get a call the next business morning.</p>' +
-      '<a class="btn btn-line btn-block" href="tel:' + PHONE.tel + '" data-loc="quiz_done">Call now instead</a>' +
-      '<p class="prequal">Want to know your monthly payment before your visit? <a href="' + PREQUAL_URL + '" target="_blank" rel="noopener" data-loc="quiz_done">Prequalify with Cherry</a>.</p></div>';
+    return '<div class="aq-step aq-done">' +
+      '<svg class="aq-done-icon" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M15 27l7 7 15-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<h3 class="aq-q" tabindex="-1">Request received, ' + esc(contact.first_name) + '.</h3>' +
+      '<p>Our implant coordinator will call you to set your free consultation.</p>' +
+      '<p class="aq-muted">Office hours are Monday to Friday, 8am to 5pm. Requests sent after hours get a call the next business morning.</p>' +
+      '<a class="aq-btn aq-btn-line aq-btn-block" href="tel:' + PHONE.tel + '" data-loc="quiz_done">Call now instead</a>' +
+      '<p class="aq-prequal">Want to know your monthly payment before your visit? <a href="' + PREQUAL_URL + '" target="_blank" rel="noopener" data-loc="quiz_done">Prequalify with Cherry</a>.</p></div>';
   }
 
   function render(moveFocus){
     setProgress();
     if (idx < STEPS.length) {
       var s = STEPS[idx];
-      body.innerHTML = '<fieldset class="step"><legend class="q" tabindex="-1">' + esc(s.q) + '</legend><div class="opts">' +
+      body.innerHTML = '<fieldset class="aq-step"><legend class="aq-q" tabindex="-1">' + esc(s.q) + '</legend><div class="aq-opts">' +
         s.opts.map(function(o, j){
-          return '<button type="button" class="opt" data-j="' + j + '" aria-pressed="' + (answers[s.key] === o) + '">' + esc(o) + '</button>';
+          return '<button type="button" class="aq-opt" data-j="' + j + '" aria-pressed="' + (answers[s.key] === o) + '">' + esc(o) + '</button>';
         }).join('') + '</div></fieldset>' + foot(idx > 0);
     } else if (idx === STEPS.length) {
       body.innerHTML = contactHTML();
@@ -125,7 +125,7 @@
     }
     wire();
     if (moveFocus) {
-      var q = body.querySelector('.q');
+      var q = body.querySelector('.aq-q');
       if (q) q.focus({ preventScroll: true });
       if (quiz.getBoundingClientRect().top < 0) quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
     }
@@ -154,8 +154,9 @@
 
   function sendLead(payload){
     if (!LEAD_WEBHOOK_URL) {
-      if (window.console) console.warn('[aox-quiz] LEAD_WEBHOOK_URL is empty: this lead was NOT sent anywhere (preview mode).');
-      return Promise.resolve();
+      var previewHost = /^(localhost|127\.0\.0\.1)$|\.webflow\.io$/.test(location.hostname);
+      if (window.console) console.warn('[aox-quiz] LEAD_WEBHOOK_URL is empty: this lead was NOT sent anywhere' + (previewHost ? ' (preview mode).' : '.'));
+      return previewHost ? Promise.resolve() : Promise.reject(new Error('no lead webhook configured'));
     }
     return fetch(LEAD_WEBHOOK_URL, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true
@@ -207,19 +208,19 @@
   }
 
   function wire(){
-    body.querySelectorAll('.opt').forEach(function(b){
+    body.querySelectorAll('.aq-opt').forEach(function(b){
       b.addEventListener('click', function(){
         if (advancing) return;
         var s = STEPS[idx], o = s.opts[+b.getAttribute('data-j')];
         answers[s.key] = o;
-        body.querySelectorAll('.opt').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+        body.querySelectorAll('.aq-opt').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
         if (!started) { started = true; track('quiz_start'); }
         track('quiz_step', { quiz_step: idx + 1, quiz_question: s.key, quiz_answer: o });
         advancing = true;
         setTimeout(function(){ idx++; advancing = false; render(true); }, reduce ? 0 : 170);
       });
     });
-    var back = body.querySelector('.back');
+    var back = body.querySelector('.aq-back');
     if (back) back.addEventListener('click', function(){ saveContact(); idx = Math.max(0, idx - 1); render(true); });
     var form = document.getElementById('lead-form');
     if (form) {
@@ -233,11 +234,11 @@
   }
 
   /* Every "See if I qualify" button scrolls to the quiz and keeps the visitor's place */
-  document.querySelectorAll('.js-to-quiz').forEach(function(b){
+  document.querySelectorAll('.aq-js-to-quiz').forEach(function(b){
     b.addEventListener('click', function(){
       track('cta_click', { cta_location: b.getAttribute('data-loc') || '' });
       quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-      setTimeout(function(){ var q = body.querySelector('.q'); if (q) q.focus({ preventScroll: true }); }, reduce ? 0 : 450);
+      setTimeout(function(){ var q = body.querySelector('.aq-q'); if (q) q.focus({ preventScroll: true }); }, reduce ? 0 : 450);
     });
   });
 
@@ -250,7 +251,7 @@
       entries.forEach(function(en){
         if (en.target === quiz) quizVisible = en.isIntersecting; else finalVisible = en.isIntersecting;
       });
-      sticky.classList.toggle('show', !quizVisible && !finalVisible);
+      sticky.classList.toggle('aq-show', !quizVisible && !finalVisible);
     }, { threshold: 0.12 });
     io.observe(quiz); io.observe(finalSec);
   }

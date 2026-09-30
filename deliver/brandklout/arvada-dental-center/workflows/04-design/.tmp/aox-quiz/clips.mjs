@@ -51,7 +51,7 @@ await ev(`document.fonts.ready.then(() => 1)`);
 await ev(`(async function(){ var h = document.documentElement.scrollHeight; for (var y = 0; y < h; y += 600) { window.scrollTo({ top: y, behavior: 'instant' }); await new Promise(function(r){ setTimeout(r, 120); }); } window.scrollTo({ top: 0, behavior: 'instant' }); return 1; })()`);
 await wait(900);
 
-const list = sels.length ? sels : ['header.topbar, main > section, footer.foot'];
+const list = sels.length ? sels : ['header.aq-topbar, main > section, footer.aq-foot'];
 const boxes = await ev(`Array.prototype.slice.call(document.querySelectorAll(${JSON.stringify(list.join(','))})).map(function(e){ var r = e.getBoundingClientRect(); return { y: r.top + scrollY, h: r.height }; })`);
 const name = file.replace(/\.html$/, '');
 let n = 0;

@@ -12,7 +12,15 @@
  *   video    a face tile opens the lightbox with a player, close removes it
  *   cta      "See if I qualify" brings the quiz into view; sticky bar shows
  *
- *   node verify.mjs            # everything, screenshots into shots/
+ *   node verify.mjs            # the local pages, screenshots into shots/
+ *   node verify.mjs --staging  # the same gate against the published webflow.io pages
+ *
+ * On staging the page shares the document with the site's own scripts (tag
+ * manager, consent banner, call tracking), so three checks change shape: the
+ * consent banner is dismissed first because it covers the sticky bar, console
+ * errors are listed rather than failed (they are mostly third-party), and the
+ * phone links only have to agree with each other, since call tracking may
+ * swap the number.
  */
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -24,7 +32,10 @@ import { fileURLToPath } from 'node:url';
 const HERE = fileURLToPath(new URL('.', import.meta.url));
 const SHOTS = join(HERE, 'shots');
 mkdirSync(SHOTS, { recursive: true });
-const PAGES = { landing: 'all-on-x-quiz.html', consult: 'all-on-x-quiz-consult.html', thanks: 'all-on-x-quiz-thank-you.html' };
+const LIVE = process.argv.includes('--staging');
+const PAGES = LIVE
+  ? { landing: 'all-on-x-quiz', consult: 'all-on-x-quiz-consult', thanks: 'all-on-x-quiz-thank-you' }
+  : { landing: 'all-on-x-quiz.html', consult: 'all-on-x-quiz-consult.html', thanks: 'all-on-x-quiz-thank-you.html' };
 const WIDTHS = [360, 390, 768, 1024, 1440, 1920];
 const SHOT_WIDTHS = [390, 1440];
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -39,7 +50,9 @@ const server = createServer((req, res) => {
   res.end(readFileSync(file));
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const ORIGIN = `http://127.0.0.1:${server.address().port}`;
+const ORIGIN = LIVE ? 'https://arvadadentalcenter.webflow.io/ads-landing-pages' : `http://127.0.0.1:${server.address().port}`;
+const PATH = (key) => new URL(`${ORIGIN}/${PAGES[key]}`).pathname;
+const TAG = LIVE ? 'staging-' : '';
 
 /* ---- chrome ---- */
 const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -95,6 +108,15 @@ async function open(url, width, height = 900) {
     await ev(`document.fonts.ready.then(() => 1)`);
   };
   await ready();
+  if (LIVE) {
+    // The consent banner sits over the bottom of the viewport, where the sticky bar is.
+    for (let i = 0; i < 20; i++) {
+      const gone = await ev(`(function(){ var b = Array.prototype.slice.call(document.querySelectorAll('button')).filter(function(x){ return x.textContent.trim() === 'Decline' && x.getBoundingClientRect().width; })[0];
+        if (b) { b.click(); return 'clicked'; } return sessionStorage.getItem('aq_consent_seen') || ''; })()`);
+      if (gone === 'clicked') { await wait(400); break; }
+      await wait(250);
+    }
+  }
   /* A real click at the element's centre, through the input pipeline. */
   const click = async (selector) => {
     const box = await ev(`(function(){ var e = document.querySelector(${JSON.stringify(selector)}); if (!e) return null;
@@ -131,32 +153,33 @@ for (const [key, file] of Object.entries(PAGES)) {
       window.scrollTo({ top: 0, behavior: 'instant' }); return 1; })()`);
     await wait(700);
     const m = await p.ev(`(function(){
-      var imgs = Array.prototype.slice.call(document.images);
+      var imgs = Array.prototype.slice.call(document.querySelectorAll('.aq-root img'));
       return { scrollW: document.documentElement.scrollWidth, inner: window.innerWidth,
         imgs: imgs.length, broken: imgs.filter(function(i){ return !i.complete || !i.naturalWidth; }).map(function(i){ return i.src; }),
         brand: (function(){
           function hex(c){ var p = c.match(/[\\d.]+/g).slice(0, 3); return '#' + p.map(function(n){ return ('0' + Math.round(n).toString(16)).slice(-2); }).join(''); }
           function cs(sel){ var e = document.querySelector(sel); return e ? getComputedStyle(e) : null; }
           var loaded = []; document.fonts.forEach(function(f){ if (f.status === 'loaded') loaded.push(f.family.replace(/["']/g, '') + ' ' + f.weight); });
-          var h = cs('h1'), b = cs('body'), t = cs('.topbar'), g = cs('.btn-gold');
+          var h = cs('h1'), b = cs('body'), t = cs('.aq-topbar'), g = cs('.aq-btn-gold');
           return { loaded: loaded.sort().join(', '), h1: h.fontFamily.split(',')[0].replace(/["']/g, '') + ' ' + h.fontWeight + ' ' + h.textTransform,
             body: b.fontFamily.split(',')[0] + ' ' + b.fontSize, ground: hex(b.backgroundColor), ink: hex(b.color), dark: hex(t.backgroundColor),
             cta: g ? hex(g.backgroundColor) + ' ' + hex(g.color) + ' ' + g.borderRadius + ' ' + g.textTransform : '' }; })() }; })()`);
     ok(m.scrollW <= m.inner, `${key} ${width}: no horizontal overflow (${m.scrollW}/${m.inner})`);
     ok(m.broken.length === 0, `${key} ${width}: ${m.imgs} images loaded${m.broken.length ? ' — broken: ' + m.broken.join(', ') : ''}`);
-    ok(p.errs.length === 0, `${key} ${width}: no console errors${p.errs.length ? ' — ' + p.errs.join(' | ') : ''}`);
+    if (LIVE) { if (p.errs.length && width === 1440) console.log(`  info ${key}: console errors on staging — ${[...new Set(p.errs)].join(' | ').slice(0, 400)}`); }
+    else ok(p.errs.length === 0, `${key} ${width}: no console errors${p.errs.length ? ' — ' + p.errs.join(' | ') : ''}`);
     if (width === 1440) {
       // The brand, as the live site renders it (brand/*.json). A family that is
       // named but never loads falls back to Verdana or Tahoma and still "passes"
       // a computed-style check, so the loaded faces are asserted too.
       const b = m.brand;
-      ok(b.loaded === 'Centurygothic 400, Centurygothic 700, area extended 700', `${key}: brand font files loaded (${b.loaded})`);
+      ok(['Centurygothic 400', 'Centurygothic 700', 'area extended 700'].every((f) => b.loaded.split(', ').includes(f)), `${key}: brand font files loaded (${b.loaded})`);
       ok(b.h1 === 'area extended 700 capitalize', `${key}: h1 is ${b.h1}`);
       ok(b.body === 'Centurygothic 17px', `${key}: body is ${b.body}`);
       ok(b.ground === '#fdf8ef' && b.ink === '#222222' && b.dark === '#5f5f5d', `${key}: grounds and ink ${b.ground} ${b.ink} ${b.dark}`);
       ok(b.cta === '#c8b282 #222222 0px uppercase', `${key}: primary button ${b.cta}`);
     }
-    if (SHOT_WIDTHS.includes(width)) await p.shot(`${key}-${width}.png`);
+    if (SHOT_WIDTHS.includes(width)) await p.shot(`${TAG}${key}-${width}.png`);
     await p.close();
   }
 }
@@ -165,29 +188,29 @@ for (const [key, file] of Object.entries(PAGES)) {
 for (const key of ['landing', 'consult']) {
   console.log(`\n-- quiz on ${key} (390)`);
   const p = await open(`${ORIGIN}/${PAGES[key]}?utm_source=verify`, 390, 844);
-  ok(await p.ev(`document.querySelectorAll('#quiz-body .opt').length === 4`), 'question 1 renders four options');
+  ok(await p.ev(`document.querySelectorAll('#quiz-body .aq-opt').length === 4`), 'question 1 renders four options');
   for (let q = 1; q <= 4; q++) {
-    await p.click(`#quiz-body .opt:nth-of-type(${q === 2 ? 3 : 1})`);   // question 2: "Both upper and lower"
+    await p.click(`#quiz-body .aq-opt:nth-of-type(${q === 2 ? 3 : 1})`);   // question 2: "Both upper and lower"
     await wait(420);
   }
   ok(await p.ev(`!!document.getElementById('lead-form')`), 'four clicks reach the contact step');
-  ok(await p.ev(`document.querySelector('.est-n').textContent`) === '$37,590', 'both arches shows $37,590');
-  await p.click('#quiz-body .back'); await wait(200);
-  ok(await p.ev(`document.querySelectorAll('#quiz-body .opt[aria-pressed="true"]').length === 1`), 'Back returns to question 4 with the answer kept');
-  await p.click('#quiz-body .opt[aria-pressed="true"]'); await wait(420);
+  ok(await p.ev(`document.querySelector('.aq-est-n').textContent`) === '$37,590', 'both arches shows $37,590');
+  await p.click('#quiz-body .aq-back'); await wait(200);
+  ok(await p.ev(`document.querySelectorAll('#quiz-body .aq-opt[aria-pressed="true"]').length === 1`), 'Back returns to question 4 with the answer kept');
+  await p.click('#quiz-body .aq-opt[aria-pressed="true"]'); await wait(420);
   await p.click('#lead-form button[type="submit"]'); await wait(200);
   ok(await p.ev(`document.getElementById('f-name').getAttribute('aria-invalid') === 'true' && !document.getElementById('f-phone-err').hidden`), 'empty submit shows field errors');
-  ok(await p.ev(`location.pathname`) === '/' + PAGES[key], 'empty submit does not leave the page');
+  ok(await p.ev(`location.pathname`) === PATH(key), 'empty submit does not leave the page');
   await p.type('#f-name', 'Dana');
   await p.type('#f-phone', '3035550123');
   await p.type('#f-email', 'dana@example.com');
   await p.click('#lead-form button[type="submit"]');
-  for (let i = 0; i < 40; i++) { await wait(150); try { if ((await p.ev(`location.pathname`)) === '/' + PAGES.thanks) break; } catch { /* navigating */ } }
+  for (let i = 0; i < 40; i++) { await wait(150); try { if ((await p.ev(`location.pathname`)) === PATH('thanks')) break; } catch { /* navigating */ } }
   await p.ready();
-  ok(await p.ev(`location.pathname`) === '/' + PAGES.thanks, 'valid submit lands on the thank-you page');
+  ok(await p.ev(`location.pathname`) === PATH('thanks'), 'valid submit lands on the thank-you page');
   ok(await p.ev(`document.getElementById('ty-title').textContent`) === 'Request received, Dana.', 'thank-you greets by first name');
   ok(await p.ev(`!/Dana|3035550123|example\\.com/.test(location.href)`), 'no personal detail in the thank-you URL');
-  if (key === 'landing') await p.shot('thanks-after-submit-390.png');
+  if (key === 'landing') await p.shot(TAG + 'thanks-after-submit-390.png');
   await p.close();
 }
 
@@ -196,7 +219,7 @@ console.log('\n-- headline swap and tracking');
 {
   const p = await open(`${ORIGIN}/${PAGES.landing}?utm_source=google&utm_campaign=aox&gclid=TESTGCLID&hl=price`, 1440);
   ok(await p.ev(`document.getElementById('hl').textContent`) === 'Full-arch implants for $18,795 per arch, in writing.', '?hl=price swaps the headline');
-  for (let q = 1; q <= 4; q++) { await p.click('#quiz-body .opt:nth-of-type(1)'); await wait(420); }
+  for (let q = 1; q <= 4; q++) { await p.click('#quiz-body .aq-opt:nth-of-type(1)'); await wait(420); }
   await p.type('#f-name', 'Dana'); await p.type('#f-phone', '(303) 555-0123');
   ok(await p.ev(`Array.isArray(window.dataLayer) && window.dataLayer.filter(function(e){ return e.event === 'quiz_step'; }).length === 4 && window.dataLayer.some(function(e){ return e.event === 'quiz_start'; })`), 'dataLayer has quiz_start and four quiz_step events');
   await p.close();
@@ -206,13 +229,13 @@ console.log('\n-- headline swap and tracking');
 for (const key of ['landing', 'thanks']) {
   console.log(`\n-- video lightbox on ${key} (1440)`);
   const p = await open(`${ORIGIN}/${PAGES[key]}`, 1440);
-  ok(await p.ev(`document.querySelectorAll('iframe').length === 0`), 'no player exists on page load');
-  await p.click('a.face[data-yt="n6pB30XJwng"]'); await wait(900);
-  ok(await p.ev(`(function(){ var d = document.querySelector('dialog.vid'); var f = d && d.querySelector('iframe'); return !!(d && d.open && f && f.src.indexOf('/embed/n6pB30XJwng') > 0); })()`), 'a face tile opens the player for that video');
-  ok(await p.ev(`location.pathname`) === '/' + PAGES[key], 'the visitor stays on the page');
-  if (key === 'landing') { const { data } = await send('Page.captureScreenshot', { format: 'png' }, p.sessionId); writeFileSync(join(SHOTS, 'lightbox-1440.png'), Buffer.from(data, 'base64')); }
-  await p.click('.vid-x'); await wait(300);
-  ok(await p.ev(`(function(){ var d = document.querySelector('dialog.vid'); return !d.open && !d.querySelector('iframe'); })()`), 'close removes the player');
+  ok(await p.ev(`document.querySelectorAll('.aq-root iframe, dialog.aq-vid iframe').length === 0`), 'no player exists on page load');
+  await p.click('a.aq-face[data-yt="n6pB30XJwng"]'); await wait(900);
+  ok(await p.ev(`(function(){ var d = document.querySelector('dialog.aq-vid'); var f = d && d.querySelector('iframe'); return !!(d && d.open && f && f.src.indexOf('/embed/n6pB30XJwng') > 0); })()`), 'a face tile opens the player for that video');
+  ok(await p.ev(`location.pathname`) === PATH(key), 'the visitor stays on the page');
+  if (key === 'landing') { const { data } = await send('Page.captureScreenshot', { format: 'png' }, p.sessionId); writeFileSync(join(SHOTS, TAG + 'lightbox-1440.png'), Buffer.from(data, 'base64')); }
+  await p.click('.aq-vid-x'); await wait(300);
+  ok(await p.ev(`(function(){ var d = document.querySelector('dialog.aq-vid'); return !d.open && !d.querySelector('iframe'); })()`), 'close removes the player');
   ok(await p.ev(`window.dataLayer.some(function(e){ return e.event === 'video_click' && e.video_id === 'n6pB30XJwng'; })`), 'video_click is tracked');
   await p.close();
 }
@@ -221,14 +244,14 @@ for (const key of ['landing', 'thanks']) {
 console.log('\n-- calls to action (landing, 390)');
 {
   const p = await open(`${ORIGIN}/${PAGES.landing}`, 390, 844);
-  ok(await p.ev(`!document.getElementById('sticky').classList.contains('show')`), 'sticky bar hidden while the quiz is on screen');
+  ok(await p.ev(`!document.getElementById('sticky').classList.contains('aq-show')`), 'sticky bar hidden while the quiz is on screen');
   await p.ev(`(function(){ document.getElementById('price').scrollIntoView({ behavior: 'instant' }); return 1; })()`); await wait(600);
-  ok(await p.ev(`document.getElementById('sticky').classList.contains('show')`), 'sticky bar shows once the quiz is out of view');
-  await p.click('#sticky .js-to-quiz'); await wait(1400);
+  ok(await p.ev(`document.getElementById('sticky').classList.contains('aq-show')`), 'sticky bar shows once the quiz is out of view');
+  await p.click('#sticky .aq-js-to-quiz'); await wait(1400);
   ok(await p.ev(`(function(){ var r = document.getElementById('quiz').getBoundingClientRect(); return r.top >= -2 && r.top < innerHeight / 2; })()`), '"See if I qualify" brings the quiz into view');
   const tels = await p.ev(`Array.prototype.slice.call(document.querySelectorAll('a[href^="tel:"]')).map(function(a){ return a.getAttribute('href'); })`);
-  ok(tels.length >= 4 && tels.every((t) => t === 'tel:+17204193699'), `one phone number in every tel: link (${tels.length})`);
-  await p.click('a.top-call'); await wait(150);
+  ok(tels.length >= 4 && tels.every((t) => t === (LIVE ? tels[0] : 'tel:+17204193699')), `one phone number in every tel: link (${tels.length}, ${tels[0]})`);
+  await p.click('a.aq-top-call'); await wait(150);
   ok(await p.ev(`window.dataLayer.some(function(e){ return e.event === 'phone_click' && e.cta_location === 'topbar'; })`), 'phone_click is tracked once per click') ;
   ok(await p.ev(`window.dataLayer.filter(function(e){ return e.event === 'phone_click'; }).length === 1`), 'phone_click does not fire twice');
   await p.close();

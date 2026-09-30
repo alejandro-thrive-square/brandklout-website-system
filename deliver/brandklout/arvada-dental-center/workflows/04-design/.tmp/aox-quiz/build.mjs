@@ -17,9 +17,10 @@
  *
  * Never hand-edit the generated files; edit this script or src/ and re-run.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { emit } from './emit.mjs';
 
 const HERE = fileURLToPath(new URL('.', import.meta.url));
 const SRC = join(HERE, '../../../01-content-intake/.tmp/asana-aox-sung-2026-09-30/attachments/1218929162756667-all-on-x-landing.html');
@@ -156,12 +157,20 @@ js = rep(js,
   "      idx = STEPS.length + 1; sending = false; render(true);\n    }).catch(",
   'thank-you redirect');
 
-// 3. Preview mode is silent in the attachment. Say so in the console, so an
-//    empty webhook is never mistaken for a working form.
+// 3. Preview mode is silent in the attachment: with no webhook it shows
+//    success and sends nothing. That is fine on a review URL and a lost lead
+//    on a real one, and the whole site can be published to the custom domain
+//    by anyone at any time. So preview mode only exists on localhost and the
+//    webflow.io staging host. Anywhere else an empty webhook FAILS, and the
+//    visitor gets the design's own "call us" error instead of a false thank-you.
 js = rep(js,
   "    if (!LEAD_WEBHOOK_URL) return Promise.resolve();",
-  "    if (!LEAD_WEBHOOK_URL) {\n      if (window.console) console.warn('[aox-quiz] LEAD_WEBHOOK_URL is empty: this lead was NOT sent anywhere (preview mode).');\n      return Promise.resolve();\n    }",
-  'preview warning');
+  "    if (!LEAD_WEBHOOK_URL) {\n" +
+  "      var previewHost = /^(localhost|127\\.0\\.0\\.1)$|\\.webflow\\.io$/.test(location.hostname);\n" +
+  "      if (window.console) console.warn('[aox-quiz] LEAD_WEBHOOK_URL is empty: this lead was NOT sent anywhere' + (previewHost ? ' (preview mode).' : '.'));\n" +
+  "      return previewHost ? Promise.resolve() : Promise.reject(new Error('no lead webhook configured'));\n" +
+  "    }",
+  'preview guard');
 
 // 4. Phone, video and prequalify click tracking moves to aox-page.js, which
 //    every page loads, so the thank-you page is tracked too and nothing fires twice.
@@ -171,6 +180,19 @@ js = rep(js,
   if (a < 0 || b < 0 || b < a) throw new Error('click tracking block not found');
   js = js.slice(0, a) + js.slice(b);
 }
+
+// 6. "We'll call you from (720) 419-3699" cannot stand on this site. Its call
+//    tracking rewrites every occurrence of the number with a rotating pool
+//    number, which turns the sentence into "we'll call you from" a number the
+//    office never dials from. The promise to call stays; the caller ID goes.
+js = rep(js,
+  "'<p class=\"fine\">No cost and no obligation. We’ll call you from ' + PHONE.display + '.</p>' +",
+  "'<p class=\"fine\">No cost and no obligation. Our implant coordinator will call you.</p>' +",
+  'caller id line');
+js = rep(js,
+  "'<p>Our implant coordinator will call you from <strong>' + PHONE.display + '</strong>. Save that number so you recognize the call.</p>' +",
+  "'<p>Our implant coordinator will call you to set your free consultation.</p>' +",
+  'caller id line, inline done state');
 
 // 5. The consult page has no sticky bar and no final section.
 js = rep(js,
@@ -336,9 +358,9 @@ const thanks = `${TOPBAR}
   <div class="wrap">
     <svg class="done-icon" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M15 27l7 7 15-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <h1 id="ty-title">Request received.</h1>
-    <p class="ty-lede">Our implant coordinator will call you from</p>
+    <p class="ty-lede">Our implant coordinator will call you to set your free consultation.</p>
+    <p class="ty-save">Rather not wait? Call us.</p>
     <a class="ty-phone" href="tel:${PHONE.tel}" data-loc="thank_you_number">${PHONE.display}</a>
-    <p class="ty-save">Save that number so you recognize the call.</p>
     <div class="actions">
       <a class="btn btn-gold" href="tel:${PHONE.tel}" data-loc="thank_you">${PHONE_SVG} Call now instead</a>
       <a class="btn btn-ghost" href="${PREQUAL_URL}" target="_blank" rel="noopener" data-loc="thank_you">Prequalify with Cherry</a>
@@ -354,7 +376,7 @@ const thanks = `${TOPBAR}
     <ol class="steps steps-3">
       <li>
         <h3>We call you</h3>
-        <span class="when">From ${PHONE.display}</span>
+        <span class="when">During office hours</span>
         <p>Our implant coordinator finds a time that works for you. Want to know your monthly payment before your visit? Prequalifying with Cherry takes a few minutes.</p>
       </li>
       <li>
@@ -387,49 +409,24 @@ const thanks = `${TOPBAR}
 </footer>`;
 
 /* ==========================================================================
-   Write
+   Write: the local pages and the Webflow parts, from the same strings
    ========================================================================== */
-const FONTS = '<link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin>\n<link rel="stylesheet" href="assets/brand-fonts.css">';
-const page =({ title, description, markup, quiz }) => `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>${title}</title>
-<meta name="description" content="${description}">
-<meta name="robots" content="noindex">
-<meta name="color-scheme" content="light">
-${FONTS}
-<link rel="stylesheet" href="assets/aox-quiz.css">
-</head>
-<body>
+const SITE_FOLDER = '/ads-landing-pages/';
+const SLUGS = { landing: 'all-on-x-quiz', consult: 'all-on-x-quiz-consult', thanks: 'all-on-x-quiz-thank-you' };
+const common = { thanksLocal: PAGES.thanks, thanksSite: SITE_FOLDER + SLUGS.thanks };
 
-${markup}
+emit({
+  HERE, css, js, pageJs, fontCss,
+  pages: [
+    { key: 'landing', file: PAGES.landing, slug: SLUGS.landing, markup: body, quiz: true, ...common,
+      title: between(src, '<title>', '</title>', 'title'),
+      description: between(src, '<meta name="description" content="', '">', 'description') },
+    { key: 'consult', file: PAGES.consult, slug: SLUGS.consult, markup: consult, quiz: true, ...common,
+      title: 'Book a Free All-on-X Consultation in Arvada, CO | Arvada Dental Center &amp; Implants',
+      description: 'Four quick questions and our implant coordinator calls to set your free consultation and 3D scan with Dr. Gregory Bennett in Arvada, CO.' },
+    { key: 'thanks', file: PAGES.thanks, slug: SLUGS.thanks, markup: thanks, quiz: false, ...common,
+      title: 'Request Received | Arvada Dental Center &amp; Implants',
+      description: 'Your consultation request is in. Our implant coordinator will call you.' },
+  ],
+});
 
-<script src="assets/aox-page.js"></script>
-${quiz ? '<script src="assets/aox-quiz.js"></script>\n' : ''}</body>
-</html>
-`;
-
-mkdirSync(join(HERE, 'assets'), { recursive: true });
-const out = (name, text) => { writeFileSync(join(HERE, name), text); console.log(`  ${name}  ${text.length} bytes`); };
-
-out('assets/brand-fonts.css', fontCss);
-out('assets/aox-quiz.css', css + '\n');
-out('assets/aox-quiz.js', js + '\n');
-out('assets/aox-page.js', pageJs);
-out(PAGES.landing, page({
-  title: between(src, '<title>', '</title>', 'title'),
-  description: between(src, '<meta name="description" content="', '">', 'description'),
-  markup: body, quiz: true,
-}));
-out(PAGES.consult, page({
-  title: 'Book a Free All-on-X Consultation in Arvada, CO | Arvada Dental Center &amp; Implants',
-  description: 'Four quick questions and our implant coordinator calls to set your free consultation and 3D scan with Dr. Gregory Bennett in Arvada, CO.',
-  markup: consult, quiz: true,
-}));
-out(PAGES.thanks, page({
-  title: 'Request Received | Arvada Dental Center &amp; Implants',
-  description: 'Your consultation request is in. Our implant coordinator will call you.',
-  markup: thanks, quiz: false,
-}));

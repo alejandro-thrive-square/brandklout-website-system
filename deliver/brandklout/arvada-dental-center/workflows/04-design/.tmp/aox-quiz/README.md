@@ -63,13 +63,17 @@ The layout, copy, section order and quiz logic are the attachment's own. The cha
    dark mode; Brandklout builds stay on light grounds. The dark hero band is kept, in the grey the live ad page already uses.
 6. **Click tracking moved** out of the quiz script into `aox-page.js` so the thank-you page is
    tracked too and nothing fires twice.
-7. **An empty webhook warns in the console** instead of pretending silently.
+7. **An empty webhook fails closed on a real host.** Preview mode (walk through, send nothing)
+   exists only on `localhost` and `*.webflow.io`; anywhere else the visitor gets the design's own
+   "call us" error rather than a false thank-you.
+8. **No caller-ID promise.** The design says "we'll call you from (720) 419-3699". This site's call
+   tracking rewrites that number wherever it appears, so the sentence published as a false one.
+   The pages promise the call and show the number only as a number to dial.
 
 ## Not decided here — blocks launch, not review
 
 - **`LEAD_WEBHOOK_URL` is empty** (top of `assets/aox-quiz.js`, set in the attachment's script).
-  Until the GoHighLevel inbound webhook is pasted in, the quiz collects nothing: it walks through
-  to the thank-you page and sends the lead nowhere. Once set, test one real submission from a
+  Until the GoHighLevel inbound webhook is pasted in, the quiz collects nothing. Once set, test one real submission from a
   browser; the POST is `application/json` cross-origin, so the webhook has to answer the preflight.
 - **The price.** The design says `$18,795` per arch (and `$235`/mo, `$37,590`, `$471`/mo). On
   2026-09-30 the practice's live cost page says **"Starting at $17,795"** and `$18,795` appears
@@ -86,10 +90,10 @@ The layout, copy, section order and quiz logic are the attachment's own. The cha
 
 ## Webflow
 
-Not built yet: `docs/mcp-access.md` puts local review first. This design cannot take the v2
-native route (`07-webflow-build/.tmp/v2-native`): the quiz is script, and the stylesheet uses
-pseudo-elements, `clamp()` and masks, all of which `data_whtml_builder` refuses. It needs custom
-code on the page, which is a different route from the 18 existing pages.
+Built and on staging since 2026-09-30: see `../../../07-webflow-build/.tmp/aox-quiz/README.md`.
+`build.mjs` writes the Webflow parts (`out/`) from the same strings as the local pages, and every
+class carries the `aq-` prefix in both, so what is gated locally is what is pushed. `emit.mjs`
+holds the namespacing and the host-stylesheet reset.
 
 ## Version Control
 

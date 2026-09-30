@@ -41,8 +41,8 @@ button.face{font:inherit;text-align:left;background:none;border:0;padding:0;curs
 .ty .done-icon{display:block;margin:0 auto 14px;color:var(--gold)}
 .ty h1{font-size:clamp(2.1rem,5.2vw,3.4rem);font-weight:800;letter-spacing:-.028em;line-height:1.05;text-wrap:balance}
 .ty-lede{margin:16px auto 0;max-width:44ch;font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--hero-muted)}
-.ty-phone{display:inline-block;margin-top:20px;font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums;text-decoration:none;color:var(--hero-ink);border-radius:8px}
+.ty-phone{display:inline-block;margin-top:4px;font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums;text-decoration:none;color:var(--hero-ink);border-radius:8px}
 .ty-phone:hover{color:var(--gold)}
-.ty-save{margin:8px auto 0;color:var(--hero-muted);font-size:1rem}
+.ty-save{margin:22px auto 0;color:var(--hero-muted);font-size:1rem}
 .ty .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
 .ty-hours{margin:20px auto 0;max-width:52ch;font-size:.95rem;color:var(--hero-muted)}

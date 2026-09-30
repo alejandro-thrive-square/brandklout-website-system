@@ -12,8 +12,9 @@ Do not read them all.
 ## New All-on-X "quiz" combo — 2026-09-30 (latest)
 
 A second All-on-X ads set, from the design on Asana `1218962992162869`: landing, consult and
-thank-you, **built locally only** in `workflows/04-design/.tmp/aox-quiz/` (`node build.mjs`,
-`node verify.mjs`). Not in Webflow, not published. It cannot launch until the GHL webhook URL is
+thank-you, built in `workflows/04-design/.tmp/aox-quiz/` and pushed to Webflow as custom-code pages
+(`workflows/07-webflow-build/.tmp/aox-quiz/`): `/ads-landing-pages/all-on-x-quiz`, `-consult`,
+`-thank-you`. **Published to webflow.io staging only, not to the custom domain.** It cannot launch until the GHL webhook URL is
 set, the price is settled ($18,795 in the design, "Starting at $17,795" on the live cost page) and
 the design's own claim checklist is confirmed. Details:
 [`runbook/2026-09-30-aox-quiz-combo-local.md`](./runbook/2026-09-30-aox-quiz-combo-local.md).
