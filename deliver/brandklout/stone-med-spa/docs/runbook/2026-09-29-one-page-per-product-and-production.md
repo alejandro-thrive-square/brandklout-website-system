@@ -46,6 +46,16 @@ everyone is covered." Two gaps, both closed on the user's word:
 3. The BugHerd reviewer works on production, which now matches staging; replies that said "live
    on staging" are now live everywhere.
 
+## Spacing utilities made pickable (later the same day)
+
+Question from the editor: `.margin-top` etc. listed under Ambient selectors, "Doesn't match this
+element". Cause: `push-site.mjs` demotes unused class rules to ambient. Fix: `margin|padding|spacer-*`
+are exempt unless another selector mentions them (34 kept). Re-pushed production (after diffing:
+the only editor change was an empty classless wrapper around the home "Meet the team" button group,
+removed by the push; snapshot `backup-prod-2026-09-29-pre-utilities`) and staging. Both 26/26 titles,
+FAIL none; production css-parity FAIL none; Termly, Sienna, pool intact. `.tmp/import-out.json` is
+now STAGING's conversion — rebuild and re-ship before any production push.
+
 ## Next
 
 1. Clinical review of the fourteen pages' figures (unchanged: standard published ranges).

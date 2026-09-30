@@ -624,7 +624,15 @@ const now = Date.now()
 
    Done generically rather than from a hard-coded list: any class the markup
    does not carry is by definition runtime-or-dead, and either way belongs in
-   the ambient layer. */
+   the ambient layer.
+
+   EXCEPT the Client-First spacing utilities (2026-09-29). Demoted, `.margin-top`
+   and friends appear in the editor's class picker only under "Ambient selectors",
+   greyed "Doesn't match this element", and cannot be put on an element. They are
+   standalone rules no script adds, so they stay class-kind as long as no OTHER
+   rule's selector mentions them: an unused one is then purged at publish (it
+   styles nothing, so that is harmless) and a used one survives. */
+const KEEP_CLASS = /^(margin|padding|spacer)-[a-z0-9-]+$/
 {
   const usedClassIds = new Set()
   for (const p of converted.pages) {
@@ -632,9 +640,19 @@ const now = Date.now()
       for (const id of node.classIds ?? []) usedClassIds.add(id)
     }
   }
+  const rules = Object.values(converted.styleRules)
+  const mentionedElsewhere = (rule) => {
+    const token = new RegExp(`\\.${rule.name.replace(/[-]/g, '\\-')}(?![\\w-])`)
+    return rules.some((r) => r !== rule && token.test(r.selector ?? ''))
+  }
   const demoted = []
-  for (const rule of Object.values(converted.styleRules)) {
+  const kept = []
+  for (const rule of rules) {
     if (rule.kind === 'class' && !usedClassIds.has(rule.id)) {
+      if (KEEP_CLASS.test(rule.name) && !mentionedElsewhere(rule)) {
+        kept.push(rule.name)
+        continue
+      }
       rule.kind = 'ambient'
       demoted.push(rule.name)
     }
@@ -643,6 +661,7 @@ const now = Date.now()
     `tree-shake  demoted ${demoted.length} unassigned class rule(s) to ambient` +
       (demoted.length ? `: ${demoted.slice(0, 12).join(', ')}${demoted.length > 12 ? ' …' : ''}` : ''),
   )
+  console.log(`tree-shake  kept ${kept.length} spacing utility class(es) pickable: ${kept.join(', ')}`)
 }
 
 const shell = {

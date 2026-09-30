@@ -898,6 +898,16 @@ Staging is the Railway environment `staging` at `https://staging.westlaketxmedsp
 exported value wins over the `.env` one, so the whole pipeline points at staging with one export.
 Client changes go to staging first and to production only once they are reviewed there.
 
+> [!NOTE]
+> **Spacing utilities stay pickable (2026-09-29).** `push-site.mjs` demotes every class rule no
+> node uses to `ambient` (so runtime classes and the selectors mentioning them survive the publish
+> tree-shake). That also made `.margin-*`, `.padding-*` and `.spacer-*` show in the editor only
+> under "Ambient selectors", greyed "Doesn't match this element", and impossible to add. They are now
+> exempt when no other rule's selector mentions them: 34 stay class-kind (unused ones are purged at
+> publish, harmlessly). The push log prints both lists. **Before any `--force` push, diff the live
+> pages against the payload**: an editor change (one on 2026-09-29: an empty wrapper div) is
+> overwritten by replace mode.
+
 > [!IMPORTANT]
 > **Since the system-v2 consolidation (2026-09-27) the API client is at
 > `deliver/process/tools/instatic-api-sync/insta-api.mjs`**, and this worktree's sparse cone did not
