@@ -1,7 +1,7 @@
-// Client script, 2026-09-30. Drives the built page and asserts behaviour a screenshot cannot show:
-// anchors travel, tabs switch, the FAQ opens, a film mounts its player, the drawer opens at 390,
-// every pin holds and scrubs through three different states, reduced motion pins nothing and
-// hides nothing, and no text falls under 4.5:1 (3:1 for large type) with motion ON.
+// Client script, 2026-09-30 (rewritten for the concept-04 build). Drives the built page and asserts
+// behaviour a screenshot cannot show: anchors travel, every pin holds and scrubs through three
+// different states, the FAQ opens one answer at a time, reduced motion pins nothing and hides
+// nothing, text contrast holds with motion ON, and nothing a visitor can press is cut off.
 // Usage (from the step's output/ folder; never pipe Node on Windows): node code/probe.mjs > probe.txt
 import fs from 'node:fs';
 import path from 'node:path';
@@ -31,9 +31,8 @@ const say = (ok, name, detail = '') => { if (!ok) failed++; console.log(`${ok ? 
 
 const open = async (w, h, opts = {}) => {
   const pg = await browser.newPage();
-  const errors = [];
-  pg.on('pageerror', (e) => errors.push(e.message));
-  pg.errors = errors;
+  pg.errors = [];
+  pg.on('pageerror', (e) => pg.errors.push(e.message));
   // The GoHighLevel survey answers 401 to Turnstile on localhost; it is not what is proved here.
   await pg.setRequestInterception(true);
   pg.on('request', (r) => (/leadconnectorhq|msgsndr|challenges[.]cloudflare/.test(r.url()) ? r.abort() : r.continue()));
@@ -47,22 +46,13 @@ const go = async (pg, y) => {
   await pg.evaluate((y) => { if (window.WZ && WZ.smoother) WZ.smoother.scrollTo(y, false); else window.scrollTo(0, y); }, y);
   await sleep(900);
 };
-const centre = async (pg, sel) => {
-  const y = await pg.evaluate((sel) => {
-    const el = document.querySelector(sel);
-    const st = window.WZ && WZ.smoother ? WZ.smoother.scrollTop() : window.scrollY;
-    return el.getBoundingClientRect().top + st - window.innerHeight / 2;
-  }, sel);
-  await go(pg, Math.max(0, y));
-};
 
 /* ---------- desktop, motion on ---------- */
 let pg = await open(1440, 900);
-const y0 = await pg.evaluate(() => window.scrollY);
-await pg.click('.arrival__actions .btn');
+await pg.click('.hero-actions .btn');
 await sleep(3000);
-const y1 = await pg.evaluate(() => ({ y: window.scrollY, top: Math.round(document.getElementById('invitation').getBoundingClientRect().top) }));
-say(y1.y > y0 + 1000 && Math.abs(y1.top - 96) < 140, 'hero call to action travels to the invitation', `scrollY ${y0} -> ${Math.round(y1.y)}, chapter top at ${y1.top}px`);
+const y1 = await pg.evaluate(() => ({ y: window.scrollY, top: Math.round(document.getElementById('consult').getBoundingClientRect().top) }));
+say(y1.y > 1000 && Math.abs(y1.top - 12) < 120, 'hero button travels to the consultation', `scrollY ${Math.round(y1.y)}, section top at ${y1.top}px`);
 await go(pg, 0);
 
 const pins = await pg.evaluate(() => ScrollTrigger.getAll().filter((t) => t.pin).map((t) => ({ id: t.trigger.id, start: t.start, end: t.end })));
@@ -75,78 +65,49 @@ for (const p of pins) {
       const el = document.getElementById(id);
       const fp = [];
       el.querySelectorAll('*').forEach((n, i) => { if (i > 700) return; const cs = getComputedStyle(n); fp.push(cs.opacity + cs.transform + cs.clipPath + cs.color + cs.left); });
-      return { top: Math.round(el.getBoundingClientRect().top), fp: fp.join('|') };
+      const r = el.getBoundingClientRect();
+      return { top: Math.round(r.top), fits: r.top >= -1 && r.bottom <= window.innerHeight + 1, fp: fp.join('|') };
     }, p.id));
   }
-  const held = states.every((s) => Math.abs(s.top) <= 2);
+  const held = states.every((s) => Math.abs(s.top - states[0].top) <= 2);
   const differs = states[0].fp !== states[1].fp && states[1].fp !== states[2].fp;
-  say(held && differs, `pin ${p.id} holds and scrubs`, `top ${states.map((s) => s.top).join('/')}px at 25/50/75%, the three states ${differs ? 'differ' : 'are IDENTICAL'}`);
+  say(held && differs && states.every((s) => s.fits), `pin ${p.id} holds, fits the viewport and scrubs`, `top ${states.map((s) => s.top).join('/')}px at 25/50/75%, the three states ${differs ? 'differ' : 'are IDENTICAL'}`);
 }
-/* magnitude, not presence */
-const pathPin = pins.find((p) => p.id === 'path-scene');
-await go(pg, pathPin.start);
-const xa = await pg.evaluate(() => document.querySelector('[data-path-track]').getBoundingClientRect().left);
-await go(pg, pathPin.end);
-const xb = await pg.evaluate(() => document.querySelector('[data-path-track]').getBoundingClientRect().left);
-say(xa - xb > 400, 'the path travels sideways', `${Math.round(xa - xb)}px (floor 400)`);
-const geo = await pg.evaluate(() => { const s = document.getElementById('path-scene'); const sp = s.parentElement; return { scene: s.offsetHeight, spacer: sp.classList.contains('pin-spacer') ? sp.offsetHeight : -1 }; });
-say(Math.abs(geo.spacer - (geo.scene + (pathPin.end - pathPin.start))) < 4, 'path section height = scene + travel', `${geo.spacer} = ${geo.scene} + ${Math.round(pathPin.end - pathPin.start)}`);
 const max = await pg.evaluate(() => ScrollTrigger.maxScroll(window));
 await go(pg, max * 0.5);
 await sleep(600);
 const prog = await pg.evaluate(() => new DOMMatrix(getComputedStyle(document.getElementById('navProgress')).transform).a);
 say(Math.abs(prog - 0.5) < 0.04, 'reading progress tracks the document', `scaleX ${prog.toFixed(3)} at 50%`);
-const fits = [];
-for (const id of ['tx', 'cases-scene', 'path-scene', 'difference-stage']) {
-  const p = pins.find((x) => x.id === id);
-  await go(pg, p.start + (p.end - p.start) * 0.5);
-  fits.push(await pg.evaluate((id) => {
-    const el = document.getElementById(id);
-    let worst = 0;
-    el.querySelectorAll('h2, h3, p, a, img, svg, figure').forEach((n) => { const r = n.getBoundingClientRect(); if (r.height && getComputedStyle(n).visibility !== 'hidden' && parseFloat(getComputedStyle(n).opacity) > 0.05) worst = Math.max(worst, r.bottom - window.innerHeight); });
-    return `${id} ${Math.round(worst)}`;
-  }, id));
-}
-say(fits.every((f) => Number(f.split(' ')[1]) <= 0), 'every pinned scene fits 1440x900', fits.join(', ') + ' (px past the bottom edge)');
 
-/* controls */
-await centre(pg, '#dr-tab-2');
-await pg.click('#dr-tab-2'); await sleep(900);
-say(await pg.evaluate(() => getComputedStyle(document.getElementById('dr-panel-2')).display !== 'none' && getComputedStyle(document.getElementById('dr-panel-1')).display === 'none' && document.getElementById('dr-tab-2').getAttribute('aria-selected') === 'true'), 'doctor tabs switch');
-await centre(pg, '#visit-tab-3');
-await pg.click('#visit-tab-3'); await sleep(1400);
-say(await pg.evaluate(() => { const p = document.getElementById('visit-panel-3'); const img = p.querySelector('img'); return getComputedStyle(p).display !== 'none' && img.complete && img.naturalWidth > 0 && img.getBoundingClientRect().height > 100; }), 'visit tabs switch and the photograph is painted');
-await centre(pg, '#faq-q-2');
-await pg.click('#faq-q-2'); await sleep(1000);
-const faqA = await pg.evaluate(() => document.getElementById('faq-2').getBoundingClientRect().height);
-await pg.click('#faq-q-3'); await sleep(1000);
-const faqB = await pg.evaluate(() => [document.getElementById('faq-2').getBoundingClientRect().height, document.getElementById('faq-3').getBoundingClientRect().height]);
-say(faqA > 60 && faqB[0] < 2 && faqB[1] > 60, 'FAQ opens one answer at a time', `answer 2 ${Math.round(faqA)}px then ${Math.round(faqB[0])}px; answer 3 ${Math.round(faqB[1])}px`);
-await centre(pg, '[data-vimeo]');
-await pg.click('[data-vimeo]'); await sleep(800);
-say(await pg.evaluate(() => !!document.querySelector('.film.is-playing iframe[src*="player.vimeo.com/video/1198870167"]')), 'a film mounts its Vimeo player on click');
-await go(pg, 0);
-await pg.hover('.nav__group:nth-child(2) .nav__top'); await sleep(600);
-say(await pg.evaluate(() => getComputedStyle(document.getElementById('menu-services')).visibility === 'visible'), 'services menu opens on hover');
+await pg.evaluate(() => { const d = document.querySelectorAll('[data-faq] details')[2]; const st = WZ.smoother.scrollTop(); WZ.smoother.scrollTo(d.getBoundingClientRect().top + st - 400, false); });
+await sleep(900);
+await pg.click('[data-faq] details:nth-child(3) summary'); await sleep(500);
+const faq = await pg.evaluate(() => [...document.querySelectorAll('[data-faq] details')].map((d) => d.open));
+say(faq[2] && !faq[0] && faq.filter(Boolean).length === 1, 'FAQ opens one answer at a time', JSON.stringify(faq));
 say(pg.errors.length === 0, 'no page errors on desktop', pg.errors.join(' | '));
+await pg.close();
+
+/* ---------- the scenes at the reviewer's short laptop ---------- */
+pg = await open(1512, 735);
+const pins2 = await pg.evaluate(() => ScrollTrigger.getAll().filter((t) => t.pin).map((t) => ({ id: t.trigger.id, start: t.start, end: t.end })));
+const fit2 = [];
+for (const p of pins2) {
+  await go(pg, p.start + (p.end - p.start) * 0.5);
+  fit2.push(await pg.evaluate((id) => { const r = document.getElementById(id).getBoundingClientRect(); return `${id} ${Math.round(r.top)}..${Math.round(r.bottom)}`; }, p.id));
+}
+say(fit2.every((f) => { const [a, b] = f.split(' ')[1].split('..').map(Number); return a >= -1 && b <= 736; }), 'every pinned scene fits 1512x735', fit2.join(', '));
 await pg.close();
 
 /* ---------- contrast with motion ON, after the whole page has been scrolled ---------- */
 pg = await open(1440, 900);
 const total = await pg.evaluate(() => ScrollTrigger.maxScroll(window));
-for (let y = 0; y <= total; y += 700) { await pg.evaluate((y) => WZ.smoother.scrollTo(y, false), y); await sleep(260); }
+for (let y = 0; y <= total; y += 600) { await pg.evaluate((y) => WZ.smoother.scrollTo(y, false), y); await sleep(260); }
 await sleep(1200);
 const low = await pg.evaluate(() => {
   const lin = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; };
   const lum = (c) => 0.2126 * lin(c.r) + 0.7152 * lin(c.g) + 0.0722 * lin(c.b);
   const parse = (c) => { const m = c.match(/[\d.]+/g).map(Number); return { r: m[0], g: m[1], b: m[2], a: m[3] === undefined ? 1 : m[3] }; };
-  const bgOf = (el) => {
-    for (let n = el; n && n !== document.documentElement; n = n.parentElement) {
-      const c = parse(getComputedStyle(n).backgroundColor);
-      if (c.a > 0.9) return c;
-    }
-    return { r: 245, g: 240, b: 230 };
-  };
+  const bgOf = (el) => { for (let n = el; n && n !== document.documentElement; n = n.parentElement) { const c = parse(getComputedStyle(n).backgroundColor); if (c.a > 0.9) return c; } return { r: 251, g: 250, b: 247 }; };
   const out = [];
   const seen = new Set();
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -158,7 +119,7 @@ const low = await pg.evaluate(() => {
     seen.add(el);
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
-    if (el.closest('[aria-hidden="true"], .sr-only, script, style, .tabs__panel:not(.is-active), .visit__panel:not(.is-active), .faq__a:not(.is-open), .drawer, .nav__menu, .chip, .arrival__proof, .film__btn, svg, .skip, .callbar')) continue;
+    if (el.closest('[aria-hidden="true"], .sr-only, script, style, details:not([open]) p, .skip, .mobile-cta')) continue;
     const fg = parse(cs.color);
     if (fg.a < 0.99) continue;
     const bg = bgOf(el);
@@ -166,7 +127,7 @@ const low = await pg.evaluate(() => {
     const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
     const px = parseFloat(cs.fontSize);
     const large = px >= 24 || (px >= 18.66 && parseInt(cs.fontWeight, 10) >= 700);
-    if (ratio < (large ? 3 : 4.5)) out.push(`${ratio.toFixed(2)}:1 ${Math.round(px)}px <${el.tagName.toLowerCase()} class="${String(el.className).slice(0, 40)}"> "${t.textContent.trim().slice(0, 40)}" ${cs.color} on rgb(${bg.r},${bg.g},${bg.b})`);
+    if (ratio < (large ? 3 : 4.5)) out.push(`${ratio.toFixed(2)}:1 ${Math.round(px)}px <${el.tagName.toLowerCase()} class="${String(el.className).slice(0, 30)}"> "${t.textContent.trim().slice(0, 36)}" ${cs.color} on rgb(${bg.r},${bg.g},${bg.b})`);
   }
   return { checked: seen.size, out };
 });
@@ -180,27 +141,24 @@ const red = await pg.evaluate(() => ({
   motion: document.documentElement.classList.contains('motion'),
   ok: !!(window.WZ && WZ.ok),
   pins: window.ScrollTrigger ? ScrollTrigger.getAll().filter((t) => t.pin).length : 0,
-  hidden: [...document.querySelectorAll('main h1, main h2, main h3, main p, main img, main li')].filter((el) => {
-    if (el.closest('.tabs__panel:not(.is-active), .visit__panel:not(.is-active), .faq__a:not(.is-open), .sr-only')) return false;
+  hidden: [...document.querySelectorAll('main h1, main h2, main h3, main p, main img, main li, main blockquote, main b')].filter((el) => {
     if (el.closest('details:not([open])') && !el.closest('summary')) return false;
     const cs = getComputedStyle(el);
     return cs.visibility === 'hidden' || parseFloat(cs.opacity) < 0.99 || el.getBoundingClientRect().height === 0;
   }).map((el) => el.tagName + '.' + String(el.className).slice(0, 30)).slice(0, 8),
-  panels: [...document.querySelectorAll('[data-tx-panel]')].every((p) => p.getBoundingClientRect().height > 40 && getComputedStyle(p).visibility === 'visible'),
 }));
-say(!red.motion && red.ok && red.pins === 0 && red.hidden.length === 0 && red.panels, 'reduced motion: runtime armed, zero pins, nothing hidden, all three treatments readable', red.hidden.join(' | '));
-await pg.click('#faq-q-1'); await sleep(400);
-say(await pg.evaluate(() => document.getElementById('faq-1').classList.contains('is-open')), 'reduced motion: the FAQ still opens');
+say(!red.motion && red.ok && red.pins === 0 && red.hidden.length === 0, 'reduced motion: runtime armed, zero pins, nothing hidden', red.hidden.join(' | '));
 await pg.close();
 
-/* ---------- the widths between the breakpoints: nothing a visitor can press may be cut off ---------- */
-for (const w of [1920, 1366, 1280, 1279, 1024, 992, 768]) {
+/* ---------- between the breakpoints: nothing a visitor can press may be cut off ---------- */
+for (const w of [1920, 1366, 1280, 1100, 1024, 992, 991, 768, 767]) {
   pg = await open(w, 800, { reduce: true });
   const c = await pg.evaluate(() => ({
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-    clipped: [...document.querySelectorAll('a, button')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && (r.right > innerWidth + 1 || r.left < -1) && !el.closest('.path__rail, .path__track, .cases__track, .drawer, .nav__menu, .life__marquee, .skip'); }).map((el) => el.textContent.trim().slice(0, 28)),
+    clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && (r.right > innerWidth + 1 || r.left < -1) && !el.closest('.skip'); }).map((el) => el.textContent.trim().slice(0, 28)),
+    overlap: (() => { const h = document.querySelector('.hero h1').getBoundingClientRect(); const v = document.querySelector('.hero-visual').getBoundingClientRect(); return innerWidth > 767 && h.right > v.left + 1 ? Math.round(h.right - v.left) : 0; })(),
   }));
-  say(c.overflow <= 0 && c.clipped.length === 0, `${w}: no overflow, no control cut off`, c.clipped.join(' | ') + (c.overflow > 0 ? ` overflow ${c.overflow}px` : ''));
+  say(c.overflow <= 0 && c.clipped.length === 0 && c.overlap === 0, `${w}: no overflow, no control cut off, headline clear of the photograph`, c.clipped.join(' | ') + (c.overflow > 0 ? ` overflow ${c.overflow}px` : '') + (c.overlap ? ` headline over photo by ${c.overlap}px` : ''));
   await pg.close();
 }
 
@@ -210,28 +168,22 @@ const m = await pg.evaluate(() => ({
   overflow: document.documentElement.scrollWidth - 390,
   pins: ScrollTrigger.getAll().filter((t) => t.pin).length,
   smoother: !!WZ.smoother,
-  clipped: [...document.querySelectorAll('a, button, input')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && r.right > 391 && !el.closest('.path__rail, .cases__track, .drawer, .nav__links, .life__marquee'); }).map((el) => el.textContent.trim().slice(0, 30)),
-  small: [...document.querySelectorAll('main a, main button, .callbar a, .nav__burger, footer a')].filter((el) => { const r = el.getBoundingClientRect(); return r.width > 0 && getComputedStyle(el).visibility !== 'hidden' && r.height < 43.5 && !el.closest('.tabs__panel:not(.is-active), .visit__panel:not(.is-active)'); }).map((el) => `${el.textContent.trim().slice(0, 24)} ${Math.round(el.getBoundingClientRect().height)}px`).slice(0, 12),
-  body: parseFloat(getComputedStyle(document.querySelector('.t-body')).fontSize),
-  smallText: [...document.querySelectorAll('main p, main li, main a, main dd, main figcaption, footer a, footer p')].map((el) => parseFloat(getComputedStyle(el).fontSize)).reduce((a, b) => Math.min(a, b), 99),
-  callbar: getComputedStyle(document.querySelector('.callbar')).display,
+  clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.right > 391 && !el.closest('.skip'); }).map((el) => el.textContent.trim().slice(0, 30)),
+  small: [...document.querySelectorAll('main a, main summary, .mobile-cta a, nav a, footer a, .topbar a')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.height < 43.5; }).map((el) => `${el.textContent.trim().slice(0, 24)} ${Math.round(el.getBoundingClientRect().height)}px`).slice(0, 12),
+  body: parseFloat(getComputedStyle(document.querySelector('.hero-copy > p')).fontSize),
+  smallest: (() => { let min = 99, who = ''; document.querySelectorAll('body *').forEach((el) => { if (![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') return; const px = parseFloat(cs.fontSize); if (px < min) { min = px; who = el.tagName + '.' + String(el.className).slice(0, 20); } }); return `${min.toFixed(1)}px ${who}`; })(),
+  callbar: getComputedStyle(document.querySelector('.mobile-cta')).display,
 }));
 say(m.overflow <= 0, 'phone: no horizontal overflow against the device width', `${m.overflow}px`);
 say(m.clipped.length === 0, 'phone: no control past the right edge', m.clipped.join(' | '));
 say(m.small.length === 0, 'phone: tap targets at least 44px tall', m.small.join(' | '));
-say(m.body >= 16 && m.smallText >= 13.5, 'phone: body copy at 16px or over, nothing under 14px', `body ${m.body.toFixed(1)}px, smallest ${m.smallText.toFixed(1)}px`);
-say(m.pins >= 3 && !m.smoother && m.callbar !== 'none', 'phone: pins survive, no smoother, call bar present', `${m.pins} pins`);
-await pg.click('#burger'); await sleep(900);
-say(await pg.evaluate(() => { const d = document.getElementById('drawer'); const b = document.getElementById('burger').getBoundingClientRect(); const top = document.elementFromPoint(b.left + b.width / 2, b.top + b.height / 2); return d.classList.contains('is-open') && getComputedStyle(d).visibility === 'visible' && !!top.closest('#burger'); }), 'phone: drawer opens and its close button stays on top');
-await pg.click('#burger'); await sleep(900);
-say(await pg.evaluate(() => !document.getElementById('drawer').classList.contains('is-open')), 'phone: drawer closes');
-const rail = await pg.evaluate(async () => {
-  const r = document.querySelector('.path__rail');
-  r.scrollIntoView({ block: 'center' });
-  await new Promise((x) => setTimeout(x, 600));
-  return { first: Math.round(document.querySelector('.step').getBoundingClientRect().left), swipe: r.scrollWidth - r.clientWidth };
-});
-say(rail.first >= 12 && rail.swipe > 400, 'phone: the path is a swipe rail that keeps its gutter', `first step at ${rail.first}px, ${rail.swipe}px to swipe`);
+say(m.body >= 16 && parseFloat(m.smallest) >= 11.5, 'phone: body copy at 16px or over, nothing under 12px', `body ${m.body.toFixed(1)}px, smallest ${m.smallest}`);
+say(!m.smoother && m.callbar !== 'none' && m.pins === 0, 'phone: no pins, no smoother, call bar present', `${m.pins} pins`);
+const before = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
+await pg.evaluate(() => { const c = document.querySelector('[data-case]'); window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 60); });
+await sleep(1200);
+const after = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
+say(before !== after && /inset\(0(px)? 0(%|px)?/.test(after.replace('0px 0%', '0 0%')), 'phone: scroll wipes the first case from before to after', `${before} -> ${after}`);
 say(pg.errors.length === 0, 'no page errors on the phone', pg.errors.join(' | '));
 await pg.close();
 

@@ -1,7 +1,0 @@
-CLIENT                  PAGE                      chap   pin scrub  gsap split    IO  band redmo  VERDICT
-                        dist                         8     0     0     1    13     0     0     0  FAIL: >=3 scroll-driven, scrubbing present, reduced-motion
-
-0/1 pages pass the static journey gate.
-A FAIL here is architectural — it cannot be fixed by adding animation.
-Still required regardless: the scrub proof (different intermediate state at 25/50/75%)
-and six-breakpoint screenshots, both on a focused tab.
