@@ -74,7 +74,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page made import-safe, pushed and published on staging; live checks 13/13, visual diff 0.62% | `a8524f16` |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page motion elevated to the editorial standard: arrival curtain, word-rise headlines, five pinned scenes (hero, story, journey, gallery, closing), self-drawing implant illustrations, CBCT scan line, pointer cursor, magnetic rolling buttons, draggable before/after; on staging; probe 29/29, live 14/14 | `c2f57ee7`; R2 manifest in the commit after it |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Layouts recomposed editorially in nine of twelve blocks: type-led masthead, moving proof line, bleeding photographs, numbered treatment index, horizontal journey, stepped gallery, name behind the team, stacked closing words; on staging; probe 28/28, live 14/14 | `354923bd` |
-| 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | see the next row |
+| 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | `c9c283aa` |
 
 ## Version Control
 
