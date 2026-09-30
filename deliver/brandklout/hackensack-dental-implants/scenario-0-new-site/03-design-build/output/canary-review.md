@@ -39,31 +39,53 @@ Side-by-side strips, concept on the left and build on the right, are in `look/co
 | Gallery intro sentence is the practice's consent statement | The concept's sentence there is an instruction to the builder |
 | "fit into your life, not the other way around" | House rule: no em dashes in copy |
 | Sizes are in rem on the house fluid root; headlines step instead of scaling continuously | Standard for every build. On phones spacing is about 14% tighter than the concept, the page 3% shorter |
-| Three scroll scenes and smooth scroll on desktop | The composition at rest is the concept's; see below |
+| Editorial motion and pointer interaction, five scroll scenes, smooth scroll on desktop | The composition at rest is the concept's; see below |
 
 Left out because the concept has no place for them: the multi-page menu, financing partners,
 hours, office photographs, the surgeons' portraits. They need a decision before launch, since the
 concept's navbar only has in-page links.
 
-## Motion
+## Motion (elevated 2026-09-30 to the editorial standard)
 
-The concept reveals sections as they enter and drifts its images. That is kept. Added, without
-moving anything: the patient's sentence is written word by word while the story block holds; the
-four steps light up in order while the process block holds; and scroll wipes each gallery tile from
-before to after while the gallery holds. On tablets and phones nothing is pinned and the same three
-are scrubbed by position. If the client wants the concept's motion and no more, the three pins come
-out with one block in `js/00-runtime.js`.
+The composition at rest is still the concept's; every screenshot of a settled page matches it. What
+moves, top to bottom:
+
+- **Arrival.** Once per visit, the round mark and a gold line fill, then the page is uncovered. It
+  is skipped when the script arrives late or the visitor has already scrolled.
+- **Headlines** rise word by word out of line masks, and the small gold labels type themselves in.
+  The proof bar words (NYU, 3D, Full Arch, Hackensack) scramble into place.
+- **Hero.** The photograph opens from the bottom. Then the page holds while it loses its rounded
+  corner and moves closer, and the copy drifts up at three speeds. It is pinned only where the
+  hero fits the window; on shorter laptop screens the same drift plays unpinned.
+- **Real Life.** The patient's sentence is written word by word while the block holds and the
+  photograph settles, then Eat / Smile / Live arrive.
+- **Treatments.** Each card draws its own treatment as scroll moves: one implant, a bridge on two
+  implants, and an arch on four angled implants. The cards arrive at three speeds.
+- **Full arch.** A circle opens onto the patient in the chair.
+- **Your Journey.** The four steps light up in order while a gold rule runs the length of them.
+- **Smile Gallery.** Scroll wipes each case from before to after while the gallery holds. With a
+  mouse, the divider then follows the pointer.
+- **Technology.** A gold scan line sweeps the CBCT photograph.
+- **Consultation and closing.** The headlines are lit word by word from the readable grey to ink.
+  The closing block holds while "Dinner. Photos. Laughter. Confidence." arrives one word at a time.
+- **Pointer (mouse only).** A ring cursor that grows over links and reads "View" over photographs
+  and "Drag" over the gallery. Buttons lean toward the pointer and roll their label. Nav links get
+  a gold rule. The FAQ eases open and shut.
+
+On tablets and phones nothing is pinned and the same scenes are scrubbed by position. Reduced
+motion gets none of it: no pins, nothing hidden, native FAQ. Text never fades below 4.5:1 while it
+moves, and the form is never pinned or faded.
 
 ## What was checked
 
 | Check | Result |
 | :--- | :--- |
-| `code/probe.mjs` | 27 of 27 pass: the three pins hold, fit 1440x900 and 1512x735, and show three different states at 25/50/75%; hero button reaches the form; FAQ opens one at a time; 188 text elements at or over 4.5:1 with motion on; reduced motion pins nothing and hides nothing; no overflow, no cut-off control and no headline over the photo at nine widths; on a phone tap targets are 44px, body copy 17px, smallest text 12px, and scroll wipes a gallery tile |
+| `code/probe.mjs` | 29 of 29 pass (twice): the five pins hold, fit 1440x900 and (four of them, the hero unpinned there) 1512x735, and show three different states at 25/50/75%; hero button reaches the form; FAQ opens one at a time; 188 text elements at or over 4.5:1 with motion on; reduced motion pins nothing and hides nothing; no overflow, no cut-off control and no headline over the photo at nine widths; on a phone tap targets are 44px, body copy 17px, smallest text 12px, and scroll wipes a gallery tile |
 | `fluid-root.mjs --check` | pass |
 | `gates/image-reuse.mjs` | 12 images, 0 problems |
 | `gates/check-pages.mjs` | 8 chapters, 3 pins at 1440, runtime armed, one h1, no overflow. **Exits 1**: its only errors are the GoHighLevel survey's Turnstile challenge answering 401 on localhost and the console line that iframe prints |
 | `gates/click-controls.mjs` | 36 clicks. **Exits 1** on two that change nothing because the page is already at that anchor when they are clicked |
-| Published page, `code/check-staging.mjs` | 13 of 13 pass: runtime and the three pins on the live page, variable fonts loaded, form block in place, icon and share image, noindex, no canonical |
+| Published page, `code/check-staging.mjs` | 14 of 14 pass: runtime and the five pins on the live page, the interaction layer created and styled, variable fonts loaded, form block in place, icon and share image, noindex, no canonical |
 | Local build versus staging, `visual-diff` | 0.62% at 1440, 0.80% at 390 |
 | Safari / WebKit, `colour-leak.mjs` | not run |
 

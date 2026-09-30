@@ -1,12 +1,17 @@
-/* WZ runtime for the Hackensack home page (concept 04).
+/* WZ runtime for the Hackensack home page (concept 04, elevated).
  *
- * The composition at rest is the concept's. Motion is layered on top of it and never changes where
- * anything sits: reveals as the concept has them, and three scenes where scroll drives the content
- * (the patient's sentence, the four steps, the before and after).
+ * The composition at rest is the concept's. The motion layer is editorial: a curtain on arrival, a
+ * cursor that names what it is over, buttons that roll their label, headlines that rise word by
+ * word, and five scenes where scroll drives the content (the hero opening up, the patient's
+ * sentence, the four steps, the before and after, the closing words). Between them: implant
+ * drawings that draw themselves, a CBCT scan line that sweeps its photograph, a circle that opens
+ * onto the full-arch patient, a scramble on the proof bar, and an accordion that eases.
  *
- * Two layers. The interface layer (anchors, FAQ, call bar) runs on every visit. The motion layer
- * runs only when <html> carries .motion: GSAP loaded and no reduced-motion request. Every reveal
- * is a ScrollTrigger; no visibility observers.
+ * Two layers. The interface layer (anchors, FAQ, call bar, staging noindex) runs on every visit.
+ * The motion layer runs only when GSAP loaded and the visitor has not asked for reduced motion.
+ * Every reveal is a ScrollTrigger; no visibility observers. Everything the motion layer adds to
+ * the page (curtain, cursor, drawings, scan line) is created here, so the imported page never
+ * carries markup that only motion needs.
  *
  * Contract with the gates (tools/instatic-site/gates/check-pages.mjs): window.WZ.ok, WZ.smoother,
  * WZ.active, and pinned triggers that carry an id.
@@ -15,12 +20,13 @@
   'use strict';
 
   var root = document.documentElement;
-  var WZ = (window.WZ = { ok: false, smoother: null, active: [], build: 'hackensack-home-concept-04' });
+  var WZ = (window.WZ = { ok: false, smoother: null, active: [], build: 'hackensack-home-concept-04-editorial' });
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var mark = function (name) { WZ.active.push(name); };
   /* Decided here, not in <head>: Instatic serves one script asset, as a deferred module. */
   var MOTION = !!(window.gsap && window.ScrollTrigger && window.SplitText) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (MOTION) root.classList.add('motion');
   var refreshSoon = (function () {
     var t;
@@ -51,15 +57,33 @@
     else window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 12, behavior: MOTION ? 'smooth' : 'auto' });
   });
 
-  /* FAQ: one answer open at a time, as the concept opens with its first */
+  /* FAQ: one answer open at a time, as the concept opens with its first. With motion the answer
+     eases open and shut; without it the native <details> behaviour is untouched. */
   $$('.js-faq').forEach(function (list) {
     var items = $$('details', list);
     items.forEach(function (d) {
+      var summary = $('summary', d);
+      var answer = $('p', d);
       d.addEventListener('toggle', function () {
-        if (d.open) items.forEach(function (other) { if (other !== d) other.open = false; });
+        /* the others shut at once, so only one answer is ever open */
+        if (d.open) items.forEach(function (other) { if (other !== d && other.open) { if (MOTION) { gsap.killTweensOf($('p', other)); gsap.set($('p', other), { clearProps: 'all' }); } other.open = false; } });
         refreshSoon();
       });
+      if (!MOTION || !summary || !answer) return;
+      summary.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (d.open) close(d);
+        else {
+          d.open = true;
+          gsap.fromTo(answer, { height: 0, autoAlpha: 0 }, { height: 'auto', autoAlpha: 1, duration: 0.55, ease: 'power3.out', clearProps: 'height', onComplete: refreshSoon });
+        }
+      });
     });
+    function close(d) {
+      var answer = $('p', d);
+      if (!MOTION || !answer) { d.open = false; return; }
+      gsap.to(answer, { height: 0, autoAlpha: 0, duration: 0.4, ease: 'power2.inOut', onComplete: function () { d.open = false; gsap.set(answer, { clearProps: 'all' }); refreshSoon(); } });
+    }
   });
 
   /* the phone call bar steps aside while the consultation form is on screen */
@@ -84,88 +108,193 @@
   var INK = '#292824';
   var EASE = 'power3.out';
   var mm = gsap.matchMedia();
+  var el = function (tag, cls, parent) { var n = document.createElement(tag); if (cls) n.className = cls; if (parent) parent.appendChild(n); return n; };
 
   /* smooth scroll on desktop only */
   if (window.matchMedia('(min-width: 992px)').matches && ScrollTrigger.isTouch !== 1) {
-    WZ.smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: 0.9, effects: false });
+    WZ.smoother = ScrollSmoother.create({ wrapper: '#smooth-wrapper', content: '#smooth-content', smooth: 1.1, effects: false });
     root.classList.add('smooth');
     mark('smoother');
   }
   root.classList.add('is-armed');
 
-  /* headlines: lines rise out of a mask; the split redoes itself when fonts or width change */
-  $$('.js-split').forEach(function (el) {
-    var hero = el.classList.contains('js-split-hero');
-    SplitText.create(el, {
-      type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true,
+  /* ---- arrival curtain: the round mark, a line that fills, then the page is uncovered ----
+     Once per session, and never longer than about a second. */
+  var intro = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+  var seen = false;
+  try { seen = sessionStorage.getItem('hk-curtain') === '1'; sessionStorage.setItem('hk-curtain', '1'); } catch (e) { seen = false; }
+  /* A script that arrives late would put the curtain over a page the visitor is already reading. */
+  if (!seen && window.pageYOffset < 10 && performance.now() < 2500) {
+    var curtain = el('div', 'curtain', document.body);
+    curtain.setAttribute('aria-hidden', 'true');
+    var logo = $('.brand img');
+    if (logo) { var mk = el('img', 'curtain__mark', curtain); mk.src = logo.currentSrc || logo.src; mk.alt = ''; }
+    var bar = el('span', 'curtain__bar', curtain);
+    intro
+      .from('.curtain__mark', { scale: 0.8, autoAlpha: 0, duration: 0.45, ease: EASE })
+      .fromTo(bar, { scaleX: 0 }, { scaleX: 1, duration: 0.55 }, '<0.1')
+      .to(curtain, { clipPath: 'inset(0 0 100% 0)', duration: 0.75 }, '+=0.05')
+      .add(function () { curtain.remove(); });
+    mark('curtain');
+  }
+
+  /* ---- headlines: words rise out of line masks; the split redoes itself when fonts or width change ---- */
+  $$('.js-split').forEach(function (h) {
+    var hero = h.classList.contains('js-split-hero');
+    SplitText.create(h, {
+      type: 'lines,words', mask: 'lines', linesClass: 'ln', wordsClass: 'wh', autoSplit: true,
       onSplit: function (self) {
-        return gsap.from(self.lines, {
-          yPercent: 108, duration: hero ? 1.25 : 1.05, stagger: 0.1, ease: 'power4.out', delay: hero ? 0.1 : 0,
-          scrollTrigger: hero ? null : { trigger: el, start: 'top 88%', once: true }
+        return gsap.from(self.words, {
+          yPercent: 115, rotate: 3, transformOrigin: '0% 100%', duration: hero ? 1.25 : 1.05, stagger: hero ? 0.06 : 0.035, ease: 'power4.out',
+          delay: hero ? intro.duration() * 0.72 : 0,
+          scrollTrigger: hero ? null : { trigger: h, start: 'top 88%', once: true }
         });
       }
     });
   });
+  /* kickers type themselves in */
+  $$('.kicker').forEach(function (k) {
+    var chars = SplitText.create(k, { type: 'chars', charsClass: 'kc' }).chars;
+    gsap.from(chars, { autoAlpha: 0, y: 6, duration: 0.5, stagger: 0.018, ease: EASE, delay: k.closest('.hero') ? intro.duration() * 0.7 : 0, scrollTrigger: k.closest('.hero') ? null : { trigger: k, start: 'top 90%', once: true } });
+  });
   mark('split');
 
-  /* ---- hero ---- */
+  /* ---- hero: the photograph opens, then the page holds while it widens and the headline drifts ---- */
   var hero = $('.hero');
   if (hero) {
+    hero.id = hero.id || 'hero-scene';
     var frame = $('.js-hero-frame', hero);
     var heroImg = $('.js-hero-img', hero);
-    gsap.fromTo(frame, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.5, ease: 'power4.inOut' });
-    gsap.fromTo(heroImg, { scale: 1.22 }, { scale: 1.06, duration: 2.2, ease: EASE });
-    gsap.from($$('.js-rise', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: 0.25 });
-    gsap.from($('.quote-card', hero), { y: 30, autoAlpha: 0, duration: 0.9, ease: EASE, delay: 1.1 });
-    /* leaving: the photograph drifts inside its window */
-    gsap.to(heroImg, { yPercent: 7, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+    var d0 = intro.duration() * 0.6;
+    gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power4.inOut', delay: d0, clearProps: 'clipPath' });
+    gsap.fromTo(heroImg, { scale: 1.3 }, { scale: 1.06, duration: 2.2, ease: EASE, delay: d0 });
+    gsap.from($$('.js-rise', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: d0 + 0.35 });
+    gsap.from($('.quote-card', hero), { x: 40, autoAlpha: 0, duration: 1, ease: EASE, delay: d0 + 1 });
+    /* The page holds while the photograph loses its rounded corner and moves closer, and the
+       copy drifts up at three speeds. Nothing fades: text stays at full contrast throughout. */
+    mm.add('(min-width: 992px)', function () {
+      /* The hero is pinned only where it fits the window (it is about 840px tall at 1512 wide); on a
+         shorter laptop screen the same drift plays as the hero scrolls away, unpinned. */
+      var fits = hero.offsetHeight <= window.innerHeight;
+      gsap.timeline({ scrollTrigger: fits ? { trigger: hero, start: 'top top', end: '+=70%', pin: true, scrub: 0.6 } : { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } })
+        .fromTo(frame, { borderBottomLeftRadius: '6.25rem' }, { borderBottomLeftRadius: '0rem', ease: 'none' }, 0)
+        .to(heroImg, { scale: 1.2, yPercent: -4, ease: 'none', immediateRender: false }, 0)
+        .to($('.quote-card', hero), { y: -80, ease: 'none' }, 0)
+        .to($('h1', hero), { y: -24, ease: 'none' }, 0)
+        .to($$('.hero-copy > p, .hero-actions', hero), { y: -44, ease: 'none' }, 0)
+        .to($('.warm-note', hero), { y: -64, ease: 'none' }, 0);
+    });
     mark('hero');
   }
 
-  /* reveals, as the concept has them: 34px up and in */
-  $$('.js-rise').forEach(function (el) {
-    if (hero && hero.contains(el)) return;
-    gsap.from(el, { y: 34, autoAlpha: 0, duration: 0.85, ease: EASE, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+  /* ---- proof bar: each word scrambles into place ---- */
+  var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  $$('.proof strong').forEach(function (s, i) {
+    var text = s.textContent;
+    var o = { p: 0 };
+    s.setAttribute('aria-label', text);
+    gsap.to(o, {
+      p: 1, duration: 1.1, delay: i * 0.12, ease: 'power2.out',
+      scrollTrigger: { trigger: s, start: 'top 92%', once: true },
+      onUpdate: function () {
+        var n = Math.floor(o.p * text.length);
+        s.textContent = text.slice(0, n) + text.slice(n).replace(/[^ ]/g, function () { return GLYPHS[(Math.random() * GLYPHS.length) | 0]; });
+      },
+      onComplete: function () { s.textContent = text; }
+    });
+  });
+
+  /* ---- reveals: 34px up and in, as the concept has them ---- */
+  $$('.js-rise').forEach(function (n) {
+    if (hero && hero.contains(n)) return;
+    gsap.from(n, { y: 34, autoAlpha: 0, duration: 0.85, ease: EASE, scrollTrigger: { trigger: n, start: 'top 90%', once: true } });
   });
   $$('.js-stagger').forEach(function (box) {
+    if (box.classList.contains('solutions')) return; /* scrubbed below */
     gsap.from(box.children, { y: 24, autoAlpha: 0, duration: 0.75, stagger: 0.09, ease: EASE, scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
   });
-  $$('.js-wipe').forEach(function (el) {
-    gsap.fromTo(el, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
+  $$('.js-wipe').forEach(function (n) {
+    if (n.closest('.feature-photo')) return; /* opens as a circle below */
+    gsap.fromTo(n, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: n, start: 'top 86%', once: true } });
   });
-  $$('.js-parallax').forEach(function (el) {
-    var img = $('img', el);
-    var p = 0.08;
-    gsap.set(img, { scale: 1.02 + p * 1.3 });
-    gsap.fromTo(img, { yPercent: -p * 50 }, { yPercent: p * 50, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
+  $$('.js-parallax').forEach(function (n) {
+    var img = $('img', n);
+    gsap.set(img, { scale: 1.12 });
+    gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: n, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
   mark('reveals');
 
-  /* ---- scene 1: the patient's sentence is written by the scroll, then Eat / Smile / Live arrive ---- */
+  /* ---- scene: the patient's sentence is written, then Eat / Smile / Live arrive ---- */
   var story = $('#story-scene');
   var quote = story && $('.js-words', story);
   var words = quote ? SplitText.create(quote, { type: 'words', wordsClass: 'wd' }).words : [];
   var benefits = story ? $$('.js-lit > div', story) : [];
+  var storyImg = story ? $('.story-photo img', story) : null;
   var writeStory = function (tl) {
-    return tl
-      .fromTo(words, { y: 6 }, { y: 0, color: INK, duration: 0.2, stagger: 0.2, ease: 'none' })
+    tl.fromTo(words, { y: 6 }, { y: 0, color: INK, duration: 0.2, stagger: 0.2, ease: 'none' })
       .fromTo(benefits, { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.6, ease: 'power2.out' }, '>-0.2')
       .to({}, { duration: 0.5 });
+    /* ends at the parallax's own scale, so its drift never shows an edge */
+    if (storyImg) tl.fromTo(storyImg, { scale: 1.26 }, { scale: 1.12, ease: 'none', duration: tl.duration() }, 0);
+    return tl;
   };
 
-  /* ---- scene 2: the four steps light up in order ---- */
+  /* ---- the three treatments draw themselves: one implant, a bridge on two, an arch on four ---- */
+  var crown = function (cx) { return 'M' + (cx - 8) + ' 48C' + (cx - 9.5) + ' 38 ' + (cx - 9) + ' 29 ' + (cx - 6.5) + ' 25.5C' + (cx - 4) + ' 22 ' + (cx + 4) + ' 22 ' + (cx + 6.5) + ' 25.5C' + (cx + 9) + ' 29 ' + (cx + 9.5) + ' 38 ' + (cx + 8) + ' 48Z'; };
+  var implant = function (cx, tilt) {
+    var g = '<g class="ti"' + (tilt ? ' transform="rotate(' + tilt + ' ' + cx + ' 50)"' : '') + '><path d="M' + (cx - 3.2) + ' 50h6.4l-1 22h-4.4z"/>';
+    for (var y = 54; y <= 68; y += 4) g += '<path d="M' + (cx - 4.2) + ' ' + y + 'h8.4"/>';
+    return g + '</g>';
+  };
+  var DRAWINGS = [
+    '<path class="gum" d="M4 49Q60 45 116 49"/><path class="old" d="' + crown(36) + '"/><path class="old" d="' + crown(84) + '"/><path class="new" d="' + crown(60) + '"/>' + implant(60),
+    '<path class="gum" d="M4 49Q60 45 116 49"/><path class="new" d="M40 46H80"/><path class="new" d="' + crown(40) + '"/><path class="new" d="' + crown(60) + '"/><path class="new" d="' + crown(80) + '"/>' + implant(40) + implant(80),
+    '<path class="gum" d="M4 49Q60 45 116 49"/><path class="new" d="M14 46H106"/><path class="new" d="' + crown(15) + '"/><path class="new" d="' + crown(33) + '"/><path class="new" d="' + crown(51) + '"/><path class="new" d="' + crown(69) + '"/><path class="new" d="' + crown(87) + '"/><path class="new" d="' + crown(105) + '"/>' + implant(20, 14) + implant(46) + implant(74) + implant(100, -14)
+  ];
+  $$('.solution').forEach(function (card, i) {
+    var holder = el('div', 'drawing');
+    card.insertBefore(holder, card.firstChild);
+    holder.setAttribute('aria-hidden', 'true');
+    holder.innerHTML = '<svg viewBox="0 0 120 80" fill="none">' + DRAWINGS[i % 3] + '</svg>';
+    var paths = $$('path', holder);
+    paths.forEach(function (p) { var len = p.getTotalLength() + 1; p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
+    gsap.to(paths, { strokeDashoffset: 0, ease: 'none', stagger: 0.04, scrollTrigger: { trigger: card, start: 'top 92%', end: 'top 45%', scrub: 0.6 } });
+  });
+  var cards = $$('.solution');
+  /* the three cards arrive at three speeds, so they land together as the section settles */
+  mm.add('(min-width: 768px)', function () {
+    cards.forEach(function (card, i) {
+      gsap.fromTo(card, { y: 50 + i * 70 }, { y: 0, ease: 'none', scrollTrigger: { trigger: '.solutions', start: 'top bottom', end: 'top 45%', scrub: 0.6 } });
+    });
+  });
+  mm.add('(max-width: 767px)', function () {
+    cards.forEach(function (card) { gsap.from(card, { y: 30, autoAlpha: 0, duration: 0.8, ease: EASE, scrollTrigger: { trigger: card, start: 'top 90%', once: true } }); });
+  });
+  mark('drawings');
+
+  /* ---- full arch: a circle opens onto the patient ---- */
+  var featurePhoto = $('.feature-photo .photo');
+  if (featurePhoto) {
+    gsap.fromTo(featurePhoto, { clipPath: 'circle(20% at 50% 55%)' }, { clipPath: 'circle(75% at 50% 55%)', ease: 'none', scrollTrigger: { trigger: featurePhoto, start: 'top 95%', end: 'center 50%', scrub: 0.6 } });
+    mark('feature');
+  }
+
+  /* ---- scene: the four steps light up in order, a gold rule runs along them ---- */
   var proc = $('#process-scene');
   var steps = proc ? $$('.step', proc) : [];
+  var grid = proc ? $('.processgrid', proc) : null;
+  var rule = grid ? el('span', 'process-rule', grid) : null;
   var lightSteps = function (tl) {
+    if (rule) tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, ease: 'none', duration: steps.length }, 0);
     steps.forEach(function (step, i) {
       tl.fromTo(step, { '--lit': 0 }, { '--lit': 1, duration: 1, ease: 'none' }, i)
         .fromTo($$('h3, p', step), { y: 20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.12, ease: 'power2.out' }, i + 0.15)
-        .fromTo($('.n', step), { scale: 0.86 }, { scale: 1, transformOrigin: 'left bottom', duration: 0.7, ease: 'power2.out' }, i);
+        .fromTo($('.n', step), { scale: 0.8, autoAlpha: 0.35 }, { scale: 1, autoAlpha: 1, transformOrigin: 'left bottom', duration: 0.7, ease: 'power2.out' }, i);
     });
     return tl.to({}, { duration: 0.4 });
   };
 
-  /* ---- scene 3: scroll is the before and after ---- */
+  /* ---- scene: scroll is the before and after; then the pointer can drag it ---- */
   var gallery = $('#results-scene');
   var cases = gallery ? $$('.js-case', gallery) : [];
   var wipe = function (tl, c, at) {
@@ -174,23 +303,61 @@
       .fromTo($('.result__line', c), { left: '0%' }, { left: '100%', duration: 1, ease: 'none' }, '<')
       .to($('.result__line', c), { autoAlpha: 0, duration: 0.06 }, '>-0.06');
   };
+  if (FINE) {
+    cases.forEach(function (c) {
+      var after = $('.result__after', c);
+      var line = $('.result__line', c);
+      var setClip = gsap.quickSetter(after, 'clipPath');
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect();
+        var p = Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100));
+        setClip('inset(0 ' + (100 - p).toFixed(1) + '% 0 0)');
+        gsap.set(line, { left: p + '%', autoAlpha: 1 });
+      });
+      c.addEventListener('pointerleave', function () {
+        gsap.to(after, { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: EASE });
+        gsap.to(line, { left: '100%', autoAlpha: 0, duration: 0.6, ease: EASE });
+      });
+    });
+  }
+
+  /* ---- the CBCT photograph: a scan line sweeps it while it settles ---- */
+  var tech = $('.tech-image');
+  if (tech) {
+    var scan = el('span', 'scanline', tech);
+    scan.setAttribute('aria-hidden', 'true');
+    gsap.fromTo(scan, { top: '0%', autoAlpha: 0 }, { top: '100%', autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: tech, start: 'top 80%', end: 'bottom 30%', scrub: 0.5 } });
+    mark('scan');
+  }
+
+  /* ---- headlines lit by the scroll: words go from the readable grey (#77736b, 4.5:1) to ink ---- */
+  $$('.js-light').forEach(function (h) { SplitText.create(h, { type: 'words', wordsClass: 'wl' }); });
+  var consultH = $('.consult .js-light');
+  if (consultH) {
+    gsap.fromTo($$('.wl', consultH), { color: '#77736b' }, { color: INK, stagger: 0.1, ease: 'none', scrollTrigger: { trigger: consultH, start: 'top 80%', end: 'bottom 45%', scrub: 0.5 } });
+  }
+
+  /* ---- scene: the closing words, one at a time, while the photograph settles ---- */
+  var fin = $('#final-scene');
+  var finWords = fin ? $$('.js-light .wl', fin) : [];
+  var finImg = fin ? $('.final-photo img', fin) : null;
+  var closeScene = function (tl) {
+    tl.fromTo(finWords, { color: '#77736b', y: 10 }, { color: INK, y: 0, stagger: 0.35, duration: 0.35, ease: 'none' }, 0);
+    if (finImg) tl.fromTo(finImg, { scale: 1.26 }, { scale: 1.12, ease: 'none', duration: tl.duration() }, 0);
+    return tl.to({}, { duration: 0.3 });
+  };
 
   /* desktop: the page holds while each scene plays (same width as the stylesheet's two-column layouts) */
   mm.add('(min-width: 992px)', function () {
-    if (story) {
-      writeStory(gsap.timeline({ scrollTrigger: { trigger: story, start: 'center center', end: '+=110%', pin: true, scrub: 0.4 } }));
-      mark('story');
-    }
-    if (proc) {
-      lightSteps(gsap.timeline({ scrollTrigger: { trigger: proc, start: 'center center', end: '+=130%', pin: true, scrub: 0.5 } }));
-      mark('process');
-    }
+    if (story) writeStory(gsap.timeline({ scrollTrigger: { trigger: story, start: 'center center', end: '+=110%', pin: true, scrub: 0.4 } }));
+    if (proc) lightSteps(gsap.timeline({ scrollTrigger: { trigger: proc, start: 'center center', end: '+=130%', pin: true, scrub: 0.5 } }));
     if (gallery) {
       var tl = gsap.timeline({ scrollTrigger: { trigger: gallery, start: 'center center', end: '+=220%', pin: true, scrub: 0.5 } });
       cases.forEach(function (c, i) { wipe(tl, c, i ? '>+0.25' : 0); });
       tl.to({}, { duration: 0.3 });
-      mark('results');
     }
+    if (fin) closeScene(gsap.timeline({ scrollTrigger: { trigger: fin, start: 'center center', end: '+=90%', pin: true, scrub: 0.5 } }));
+    mark('scenes');
   });
 
   /* tablet and phone: nothing is pinned; the same scenes are scrubbed by where they are on screen */
@@ -201,11 +368,54 @@
         .fromTo(step, { '--lit': 0 }, { '--lit': 1, duration: 1, ease: 'none' }, 0)
         .fromTo($$('h3, p', step), { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, stagger: 0.12 }, 0);
     });
-    cases.forEach(function (c) {
-      wipe(gsap.timeline({ scrollTrigger: { trigger: c, start: 'top 70%', end: 'top 12%', scrub: 0.4 } }), c, 0);
-    });
+    cases.forEach(function (c) { wipe(gsap.timeline({ scrollTrigger: { trigger: c, start: 'top 70%', end: 'top 12%', scrub: 0.4 } }), c, 0); });
+    if (fin) closeScene(gsap.timeline({ scrollTrigger: { trigger: fin, start: 'top 75%', end: 'bottom 60%', scrub: 0.4 } }));
     mark('scrubbed');
   });
+
+  /* ---- footer: the practice name rises line by line ---- */
+  var fb = $('.footer-brand');
+  if (fb) SplitText.create(fb, { type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true, onSplit: function (self) { return gsap.from(self.lines, { yPercent: 110, duration: 1, stagger: 0.1, ease: 'power4.out', scrollTrigger: { trigger: fb, start: 'top 95%', once: true } }); } });
+
+  /* ================= pointer ================= */
+  if (FINE) {
+    /* buttons roll their label and lean toward the pointer */
+    $$('.btn').forEach(function (b) {
+      var label = b.textContent.trim();
+      b.innerHTML = '<span class="roll"><span>' + label + '</span><span aria-hidden="true">' + label + '</span></span>';
+      b.classList.add('is-magnetic');
+      var x = gsap.quickTo(b, 'x', { duration: 0.5, ease: EASE });
+      var y = gsap.quickTo(b, 'y', { duration: 0.5, ease: EASE });
+      b.addEventListener('mousemove', function (e) { var r = b.getBoundingClientRect(); x((e.clientX - r.left - r.width / 2) * 0.25); y((e.clientY - r.top - r.height / 2) * 0.35); });
+      b.addEventListener('mouseleave', function () { x(0); y(0); });
+    });
+
+    /* a cursor that names what it is over. pointer-events: none, so it can never take a click */
+    var cur = el('div', 'cursor', document.body);
+    cur.setAttribute('aria-hidden', 'true');
+    var dot = el('span', 'cursor__dot', cur);
+    var ring = el('span', 'cursor__ring', cur);
+    var tag = el('span', 'cursor__label', ring);
+    var dx = gsap.quickTo(dot, 'x', { duration: 0.12, ease: 'power3' });
+    var dy = gsap.quickTo(dot, 'y', { duration: 0.12, ease: 'power3' });
+    var rx = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3' });
+    var ry = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3' });
+    window.addEventListener('pointermove', function (e) { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); cur.classList.add('is-on'); }, { passive: true });
+    document.addEventListener('pointerleave', function () { cur.classList.remove('is-on'); });
+    var state = function (e) {
+      var t = e.target;
+      var name = '';
+      var mode = '';
+      if (t.closest('.js-case')) { mode = 'is-media'; name = 'Drag'; }
+      else if (t.closest('.photo, .doctor-card, .story-photo')) { mode = 'is-media'; name = 'View'; }
+      else if (t.closest('a, button, summary')) mode = 'is-link';
+      cur.classList.toggle('is-media', mode === 'is-media');
+      cur.classList.toggle('is-link', mode === 'is-link');
+      tag.textContent = name;
+    };
+    document.addEventListener('pointerover', state);
+    mark('pointer');
+  }
 
   /* continuity: reading progress along the top edge */
   gsap.to('#navProgress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });

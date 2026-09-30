@@ -12,6 +12,10 @@ set -euo pipefail
 export INSTATIC_BASE_URL="https://hackensack-dental-implants-staging.up.railway.app"
 export STAGING_HOST="hackensack-dental-implants-staging.up.railway.app"
 export EXPECT_FONT_FACES=2
+# 25-interaction.css styles elements the runtime creates (curtain, cursor, drawings, scan line).
+# They are not in the imported markup, so the registry would drop their rules; ship the file verbatim
+# in the token asset instead.
+export TOKEN_FILES="00-fluid-root.css,01-tokens.css,25-interaction.css"
 : "${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the staging environment}"
 T=../../tools/instatic-site
 PRE="--import ./output/code/preload-paths.mjs"

@@ -2,6 +2,39 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-09-30 (night) · home page motion elevated to the editorial standard, on staging
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- `js/00-runtime.js` motion layer rewritten; new `css/25-interaction.css`. Scene by scene list in
+  `canary-review.md` → Motion. Five pins at desktop (`hero-scene`, `story-scene`, `process-scene`,
+  `results-scene`, `final-scene`); `#final-scene` is on `.final-grid`, the consult and closing h2
+  are `js-light` (words lit grey → ink by scroll). Hero pins only when it fits the window.
+- Everything motion-only (curtain, cursor, SVG implant drawings, scan line, process rule, rolling
+  button labels) is created by the runtime, never in the imported markup.
+- Checks: `code/probe.mjs` 29/29 twice; `fluid-root --check` pass; `check-staging.mjs` 14/14 (new
+  check: interaction layer created and styled on the live page); `visual-diff` 0.62% at 1440,
+  0.80% at 390 (unchanged).
+- Pushed with `push-staging.sh`, which now exports `TOKEN_FILES=00-fluid-root.css,01-tokens.css,25-interaction.css`.
+
+### Next
+
+Same as the run below: rulings in `canary-review.md`, then inner pages.
+
+### Gotchas
+
+- **CSS for elements the runtime creates must ship verbatim.** The registry importer keeps only
+  rules it can bind to imported markup, so `.curtain`, `.cursor`, `.drawing`… would publish
+  unstyled. `push-site.mjs` honours `TOKEN_FILES`; list the interaction stylesheet there. Worth a
+  line in the design-build directive on `main`.
+- **A puppeteer `screenshot({ clip })` resizes the viewport** (captureBeyondViewport defaults to
+  true), which fires `gsap.matchMedia` and reverts every pin: the capture comes back blank. Use
+  `look.mjs --at <fraction>` or pass `captureBeyondViewport: false`.
+- **FAQ close animation vs one-open rule:** auto-closed siblings must shut at once; animating them
+  left two answers open for 0.4s and the probe caught it intermittently.
+- `.solution` had a CSS `transition: transform`, which fights a GSAP scrub; `.motion .solution`
+  narrows it to `box-shadow`. Same for `.btn` under the magnetic hover (`.is-magnetic`).
+
 ## 2026-09-30 (evening) · home page published on Instatic staging
 
 Staging: https://hackensack-dental-implants-staging.up.railway.app/ . Production is provisioned and empty.

@@ -1,0 +1,53 @@
+/* Interaction layer. Everything styled here is created by js/00-runtime.js, and only when motion is
+   on (GSAP loaded, no reduced-motion request), so with no script or reduced motion none of it exists.
+   Colours are the concept's tokens: ink, ground, gold on rules only. */
+
+/* ---- arrival curtain ---- */
+.curtain { position: fixed; inset: 0; z-index: 1000; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; clip-path: inset(0 0 0 0); }
+.curtain__mark { width: 5.5rem; height: 5.5rem; border-radius: 50%; }
+.curtain__bar { display: block; width: 7.5rem; height: 1px; background: var(--accent); transform-origin: left center; }
+
+/* ---- cursor (fine pointers only; never takes a click) ---- */
+.cursor { position: fixed; left: 0; top: 0; z-index: 999; pointer-events: none; opacity: 0; transition: opacity 0.3s ease; }
+.cursor.is-on { opacity: 1; }
+.cursor__dot, .cursor__ring { position: absolute; left: 0; top: 0; border-radius: 50%; }
+.cursor__dot { width: 0.375rem; height: 0.375rem; margin: -0.1875rem 0 0 -0.1875rem; background: var(--ink); }
+.cursor__ring { width: 2.5rem; height: 2.5rem; margin: -1.25rem 0 0 -1.25rem; border: 1px solid rgba(41, 40, 36, 0.35); display: flex; align-items: center; justify-content: center; transition: width 0.35s ease, height 0.35s ease, margin 0.35s ease, background-color 0.35s ease, border-color 0.35s ease; }
+.cursor.is-link .cursor__ring { width: 3.75rem; height: 3.75rem; margin: -1.875rem 0 0 -1.875rem; border-color: var(--accent); }
+.cursor.is-media .cursor__ring { width: 5.5rem; height: 5.5rem; margin: -2.75rem 0 0 -2.75rem; background: var(--ink); border-color: var(--ink); }
+.cursor.is-media .cursor__dot { opacity: 0; }
+.cursor__label { color: var(--bg); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+
+/* ---- buttons: the label rolls, the button leans toward the pointer ---- */
+.btn .roll { display: inline-flex; flex-direction: column; height: 1.25em; line-height: 1.25; overflow: hidden; vertical-align: middle; }
+.btn .roll > span { display: block; transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
+.btn:hover .roll > span, .btn:focus-visible .roll > span { transform: translateY(-100%); }
+.btn.is-magnetic { transition: filter 0.3s ease, background-color 0.3s ease; }
+
+/* ---- nav links: a gold rule sweeps in under the hovered link ---- */
+.navlinks > a:not(.btn) { position: relative; }
+.navlinks > a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.625rem; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right center; transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1); }
+.navlinks > a:not(.btn):hover::after, .navlinks > a:not(.btn):focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+
+/* ---- treatment cards: a line drawing of each treatment, drawn by the scroll ---- */
+.solution { position: relative; }
+.motion .solution { transition: box-shadow 0.25s ease; }
+.drawing { position: absolute; top: 1.75rem; right: 1.75rem; width: 7.5rem; }
+@media screen and (max-width: 767px) { .drawing { top: 1.25rem; width: 5.75rem; } }
+.drawing svg { display: block; width: 100%; height: auto; overflow: visible; }
+.drawing path { stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.drawing .gum { stroke: var(--accent); }
+.drawing .old { stroke: #b9b3a8; }
+.drawing .ti path { stroke: var(--accent-num); }
+
+/* ---- process: a gold rule runs the length of the four steps ---- */
+.processgrid { position: relative; }
+.process-rule { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left center; pointer-events: none; }
+
+/* ---- technology: the CBCT scan line ---- */
+.scanline { position: absolute; left: 0; right: 0; top: 0; z-index: 2; height: 2px; background: var(--accent); box-shadow: 0 0 1.25rem 0.25rem rgba(178, 149, 104, 0.45); pointer-events: none; opacity: 0; }
+
+/* ---- the gallery can be dragged with the pointer ---- */
+@media (hover: hover) and (pointer: fine) {
+  .motion .js-case { cursor: ew-resize; }
+}

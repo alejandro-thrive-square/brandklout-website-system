@@ -1,4 +1,5 @@
-PASS  runtime armed on the published page  pins story-scene, process-scene, results-scene; smoother split hero reveals story process results
+PASS  runtime armed on the published page, five pinned scenes  pins hero-scene, story-scene, process-scene, results-scene, final-scene; smoother curtain split hero reveals drawings feature scan scenes pointer
+PASS  interaction layer created and styled (the verbatim stylesheet reached the page)  {"drawings":3,"drawingPos":"absolute","cursorPos":"fixed","scan":true,"rule":true}
 PASS  eight chapters, one h1
 PASS  both typefaces loaded from the media library  Newsreader, DM Sans
 PASS  Newsreader is the variable file (optical size changes the width)  736px at opsz 6, 628px at opsz 72

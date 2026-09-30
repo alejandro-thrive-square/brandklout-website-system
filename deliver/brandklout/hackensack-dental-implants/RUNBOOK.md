@@ -13,7 +13,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
   tracking. Read [`docs/migration/old-site-capture.md`](./docs/migration/old-site-capture.md) first.
 - **The home page is on Instatic staging:** https://hackensack-dental-implants-staging.up.railway.app/
   (not indexed). Built to the concept the client chose, concept 04
-  (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation). Read
+  (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation), with editorial
+  motion and pointer interaction layered on top (2026-09-30). Read
   [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md).
 - **Instatic on Railway**, project `Hackensack Dental Implants`: production
   https://hackensack-dental-implants-production.up.railway.app (admin works, nothing published) and a
@@ -65,6 +66,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page rebuilt to the client's chosen concept 04 (Newsreader, DM Sans, its sections and copy); client photos; three scroll scenes; double-click preview; probe 27/27 | `073af353`; R2 manifest in the commit after it |
 | 2026-09-30 | scenario-0-new-site / 01-client-inquiry | Railway project, production and staging Instatic, Alejandro and Sang on both, three plugins on both, origins clean | `a8524f16` |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page made import-safe, pushed and published on staging; live checks 13/13, visual diff 0.62% | `a8524f16` |
+| 2026-09-30 | scenario-0-new-site / 03-design-build | Home page motion elevated to the editorial standard: arrival curtain, word-rise headlines, five pinned scenes (hero, story, journey, gallery, closing), self-drawing implant illustrations, CBCT scan line, pointer cursor, magnetic rolling buttons, draggable before/after; on staging; probe 29/29, live 14/14 | see `git log` for "motion elevated" |
 
 ## Version Control
 
