@@ -12,7 +12,7 @@
  * added. Matching is by whole line, never by a regex built from a string: the source lines contain
  * backslashes, and a needle written with them does not survive a bash heredoc.
  */
-import { getSite, saveShell } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { getSite, saveShell } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 
 const ASSET = 'src/scripts/site.js'
 const apply = process.argv.includes('--apply')

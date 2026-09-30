@@ -32,7 +32,7 @@ node build-wp.mjs        > .tmp/build.log   2>&1   # 2. tokens -> media URLs; si
 RAILWAY_LINK_DIR=<dir> env -u RAILWAY_TOKEN -u RAILWAY_PROJECT_ID bash ship.sh > .tmp/ship.log 2>&1   # 3. Instatic's own importHtml, on the container
 node push-wp.mjs                                   # 4. dry run
 node push-wp.mjs --apply [--force]                 #    one atomic PUT: shell + code assets + 59 pages
-node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+node -e "import('../../../../process/tools/instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
 node verify-live-wp.mjs          > .tmp/verify.log 2>&1   # 5. GATE, every page vs the LIVE WordPress page (trap 50)
 node verify-live-wp.mjs --mobile > .tmp/verify-390.log 2>&1
 ```
@@ -121,10 +121,17 @@ node home/build-home.mjs        > .tmp/home/build.log   2>&1   # 2. site.css (fa
 WZ_TMP="$PWD/.tmp/home" RAILWAY_LINK_DIR=<dir linked to -e staging> env -u RAILWAY_TOKEN -u RAILWAY_PROJECT_ID bash ship.sh > .tmp/home/ship.log 2>&1
 node home/push-home.mjs                                        # 4. dry run: prints what replace mode will delete
 node home/push-home.mjs --apply --force                        #    ONE page in, every other stored page OUT
+node home/add-elfsight-reviews.mjs --apply                     # 4b. the live Google reviews Embed, which the push has just dropped (dry run without --apply)
 node home/publish-home.mjs                                     # 5. publish staging, then the gates:
 node ../04-design/.tmp/qa/gate.mjs https://staging.ifadentistry.com/ > .tmp/home/gate.log 2>&1
-MSYS_NO_PATHCONV=1 node ../../../../process/21-instatic-staging-clone/verify-staging-clean.mjs --staging https://staging.ifadentistry.com --production https://www.ifadentistry.com --paths "/"
+MSYS_NO_PATHCONV=1 node ../../../../process/tools/instatic-site/staging-clone/verify-staging-clean.mjs --staging https://staging.ifadentistry.com --production https://www.ifadentistry.com --paths "/"
 ```
+
+Every script here (and the WordPress clone's) imports `insta-api.mjs` from
+`deliver/process/tools/instatic-api-sync/`; the folder was `process/22-instatic-api-sync/` before
+the system-v2 merge of 2026-09-27, and the imports were repointed on 2026-09-30. If a script says
+`ERR_MODULE_NOT_FOUND` for the helper, the sparse checkout is missing `deliver/process`:
+`git sparse-checkout add deliver/process`.
 
 - **`push-home.mjs` deletes pages.** `mode: 'replace'` with one page in the payload removes every
   other stored page. That was the brief. `home/staging-only.mjs` compares the hostname to
@@ -145,6 +152,14 @@ MSYS_NO_PATHCONV=1 node ../../../../process/21-instatic-staging-clone/verify-sta
   pre-entrance state is CSS (`html:not(.is-ready)`, with a timed fallback) and `home.js` lifts it.
 - `base.svg` keeps class and `data-*` verbatim; the form slot becomes the GoHighLevel Embed and the
   gate checks its frame fills the card (`.ask__embed` reserves 36rem so nothing below it shifts).
+- **The Google reviews are an Embed the prototype does not have** (2026-09-30). `#proof`'s
+  `.voices` rotator (stars, "85 five-star reviews", three quotes, arrows) is replaced on staging by
+  a `brandklout.embed-origins.embed` in snippet mode (`.rv-embed`, Elfsight app
+  `7febe92d-b5da-447f-b53f-9593eec9da53`, the Peoria listing, 5.0 / 96). `push-home.mjs` rebuilds
+  the page from the prototype and drops it; `add-elfsight-reviews.mjs --apply` puts it back (it is
+  re-runnable, and refreshes the snippet of an embed already there). The snippet has no
+  `data-elfsight-app-lazy`: with it the widget never boots on Instatic (0px, no error). The gate
+  (`qa/gate.mjs`) checks the widget when `.rv-embed` is on the page and the rotator when it is not.
 - **BugHerd**: `node home/bugherd.mjs status | create | install <projectKey> | uninstall`, then
   `publish-home.mjs` (a CSP change only reaches pages at publish). It writes the plugin settings
   read-merge-write so Sienna and the embed policy survive.
@@ -169,7 +184,7 @@ node verify-tags.mjs https://www.ifadentistry.com > .tmp/verify-tags.log 2>&1   
 ```
 
 Then publish once, deliberately — a publish bakes every page:
-`node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"`.
+`node -e "import('../../../../process/tools/instatic-api-sync/insta-api.mjs').then(m=>m.publish())"`.
 
 - **`legal/*.md` is the client's own copy, transcribed.** The source documents live in
   `../00-client-delivery-initialization/.tmp/IFA-Dentistry-*.md`. Re-transcribe rather than edit in
@@ -302,7 +317,7 @@ RAILWAY_LINK_DIR=<dir linked by project id> env -u RAILWAY_TOKEN -u RAILWAY_PROJ
 node inspect-import.mjs          # 2b. buttons, form fields, ids — read it before pushing
 node push-site.mjs --force       # 3. dry run (it refuses without --force once a page has content)
 node push-site.mjs --apply --force     # trap 11: first check nobody edited a page in the admin
-node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+node -e "import('../../../../process/tools/instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
 node verify-live.mjs; node css-parity.mjs; node visual-diff.mjs; node visual-diff.mjs 390; node compare-live.mjs
 node form-probe.mjs              # the lead form AND the survey, end to end; aborts every non-GET request
 ```

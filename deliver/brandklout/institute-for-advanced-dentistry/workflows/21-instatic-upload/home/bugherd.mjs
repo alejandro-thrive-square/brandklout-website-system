@@ -21,7 +21,7 @@
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
-import { api, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { assertStaging } from './staging-only.mjs'
 
 assertStaging(BASE)

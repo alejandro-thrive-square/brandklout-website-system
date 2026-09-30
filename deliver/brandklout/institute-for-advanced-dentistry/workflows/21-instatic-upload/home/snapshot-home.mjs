@@ -7,7 +7,7 @@ import fs from 'node:fs'
 import zlib from 'node:zlib'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getSite, getPages, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { getSite, getPages, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { assertStaging } from './staging-only.mjs'
 
 assertStaging(BASE)

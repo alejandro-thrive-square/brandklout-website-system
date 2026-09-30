@@ -21,7 +21,7 @@ import zlib from 'node:zlib'
 import path from 'node:path'
 import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
-import { getSite, getPages, api, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { getSite, getPages, api, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { assertStaging } from './staging-only.mjs'
 
 assertStaging(BASE)
@@ -126,3 +126,6 @@ console.log('\nsaved:', JSON.stringify(res).slice(0, 200))
 const after = (await getPages()).rows ?? []
 console.log(`stored now ${after.length} page(s): ${after.map((p) => p.slug).join(', ')}`)
 if (after.length !== 1 || after[0].slug !== 'index') { console.error('UNEXPECTED: staging does not hold exactly the home page'); process.exitCode = 1 }
+// The prototype still carries the static review rotator; the live Google reviews are an Embed that
+// only add-elfsight-reviews.mjs places (2026-09-30). This push has just dropped it.
+console.log('\nNEXT: node home/add-elfsight-reviews.mjs --apply   (the Elfsight reviews Embed is not in the prototype), then home/publish-home.mjs')

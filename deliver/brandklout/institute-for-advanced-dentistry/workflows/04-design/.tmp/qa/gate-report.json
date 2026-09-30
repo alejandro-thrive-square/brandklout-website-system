@@ -1,6 +1,6 @@
 {
   "base": "https://staging.ifadentistry.com/",
-  "passed": 67,
+  "passed": 64,
   "failed": 0,
   "results": [
     {
@@ -160,8 +160,8 @@
       "name": "Memberships marquee is running",
       "pass": true,
       "detail": [
-        -872.163,
-        -837.07
+        -968.727,
+        -933.801
       ]
     },
     {
@@ -169,20 +169,16 @@
       "pass": true
     },
     {
-      "name": "Reviews: next arrow changes the review",
+      "name": "Reviews: the Google reviews widget boots (>0px, no lazy attribute, header with a count, old rotator gone)",
       "pass": true,
       "detail": {
-        "before": "Tommy",
-        "after": {
-          "who": "Marilyn",
-          "count": "02 / 03",
-          "on": 1
-        }
+        "found": true,
+        "lazy": false,
+        "h": 442,
+        "google": true,
+        "rotator": 0,
+        "text": " What Our Customers SayReviews5.0(96)Review us on GoogleJohn Boyer6 days agoVicki really knows her cleaning tools and pr"
       }
-    },
-    {
-      "name": "Reviews: previous arrow goes back",
-      "pass": true
     },
     {
       "name": "Patient story: opens with a playable video",
@@ -214,7 +210,7 @@
       "detail": {
         "src": "https://api.leadconnectorhq.com/widget/form/cxtQ5q29TfUr3cYlMmDB?marketing_disclosure_version=2026-09-16&privacy_analytics_consent=denied&privacy_ad_personalization_consent=denied&privacy_ad_user_data_consent=denied&privacy_advertising_consent=denied&privacy_sale_share_opt_out=true&privacy_gpc_detected=false&privacy_source_url=https%3A%2F%2Fstaging.ifadentistry.com%2F",
         "w": 454,
-        "h": 742,
+        "h": 752,
         "card": 536
       }
     },
@@ -280,24 +276,12 @@
       "name": "BugHerd: marquee stops on hover",
       "pass": true,
       "detail": [
-        -853.482,
-        -853.482
+        -1101.98,
+        -1101.98
       ]
     },
     {
       "name": "BugHerd: marquee runs again after",
-      "pass": true
-    },
-    {
-      "name": "BugHerd: reviews rotate on their own",
-      "pass": true,
-      "detail": [
-        "Tommy",
-        "Marilyn"
-      ]
-    },
-    {
-      "name": "BugHerd: reviews hold while hovered",
       "pass": true
     },
     {
@@ -418,8 +402,8 @@
         "opacity": "1",
         "visibility": "visible",
         "pinned": false,
-        "cardH": 915,
-        "frameH": 742
+        "cardH": 925,
+        "frameH": 752
       }
     },
     {

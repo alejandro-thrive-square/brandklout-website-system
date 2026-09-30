@@ -14,7 +14,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
-import { BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { BASE } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const slug = process.argv[2]
