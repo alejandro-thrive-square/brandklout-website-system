@@ -1,0 +1,532 @@
+{
+ "title": "Arvada Dental Center | Dental Implants & Family Dentistry",
+ "body": {
+  "bg": "#fdf8ef",
+  "color": "#222222",
+  "font": "Centurygothic, Tahoma, sans-serif",
+  "size": "16px",
+  "lh": "24px"
+ },
+ "backgrounds": [
+  [
+   "#fcfcfc",
+   13944330
+  ],
+  [
+   "#000000 @0.05",
+   518394
+  ],
+  [
+   "#ffffff",
+   393198
+  ],
+  [
+   "#cccccc",
+   344060
+  ],
+  [
+   "#041a34 @0.05",
+   211680
+  ],
+  [
+   "#8e8d8d",
+   77788
+  ],
+  [
+   "#000000 @0.1",
+   66240
+  ],
+  [
+   "#ffffff @0.4",
+   42834
+  ],
+  [
+   "#000000",
+   10802
+  ],
+  [
+   "#eeeeee",
+   3200
+  ]
+ ],
+ "textColors": [
+  [
+   "#fcfcfc",
+   3376
+  ],
+  [
+   "#222222",
+   2208
+  ],
+  [
+   "#ffffff",
+   608
+  ],
+  [
+   "#000000",
+   364
+  ],
+  [
+   "#444444",
+   193
+  ],
+  [
+   "#5f5f5d",
+   83
+  ],
+  [
+   "#8e8d8d",
+   31
+  ],
+  [
+   "#c8b282",
+   18
+  ]
+ ],
+ "fonts": [
+  [
+   "Centurygothic 400",
+   5117
+  ],
+  [
+   "area extended 700",
+   443
+  ],
+  [
+   "Centurygothic 700",
+   424
+  ],
+  [
+   "Roboto 400",
+   353
+  ],
+  [
+   "Centurygothic 500",
+   260
+  ],
+  [
+   "area extended 400",
+   89
+  ],
+  [
+   "Centurygothic 600",
+   83
+  ],
+  [
+   "area extended 500",
+   57
+  ],
+  [
+   "area extended 800",
+   31
+  ],
+  [
+   "Roboto 700",
+   24
+  ]
+ ],
+ "h1": [
+  {
+   "text": "Experience World-Class Dental Care With Small-Town Appeal",
+   "font": "area extended",
+   "weight": "500",
+   "size": "20px",
+   "lh": "28px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h5 is-white text-align-center"
+  }
+ ],
+ "h2": [
+  {
+   "text": "Dr. Gregory Bennett, DDS",
+   "font": "area extended",
+   "weight": "700",
+   "size": "32px",
+   "lh": "41.6px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#222222",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h4"
+  },
+  {
+   "text": "Professional Affiliations",
+   "font": "area extended",
+   "weight": "700",
+   "size": "17px",
+   "lh": "23.8px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#222222",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h6"
+  },
+  {
+   "text": "Expert Dental Implants & Full Smile Restorations",
+   "font": "area extended",
+   "weight": "700",
+   "size": "32px",
+   "lh": "41.6px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h4 is-white"
+  },
+  {
+   "text": "What Sets Us Apart",
+   "font": "area extended",
+   "weight": "700",
+   "size": "16px",
+   "lh": "20.8px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#5f5f5d",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "2px 16px 2px 0px",
+   "cls": "heading-style-h4 text-align-center tagline-2"
+  }
+ ],
+ "h3": [
+  {
+   "text": "All-on-4 Dental Implants",
+   "font": "area extended",
+   "weight": "700",
+   "size": "17px",
+   "lh": "23.8px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h6 is-white"
+  },
+  {
+   "text": "Dental Implants",
+   "font": "area extended",
+   "weight": "700",
+   "size": "17px",
+   "lh": "23.8px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h6 is-white"
+  },
+  {
+   "text": "Same-Day Crowns (CEREC)",
+   "font": "area extended",
+   "weight": "700",
+   "size": "17px",
+   "lh": "23.8px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "heading-style-h6 is-white"
+  }
+ ],
+ "p": [
+  {
+   "text": "Top-Rated Dentist in Arvada, CO",
+   "font": "area extended",
+   "weight": "800",
+   "size": "17px",
+   "lh": "25.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#fcfcfc",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "hero-tagline"
+  },
+  {
+   "text": "Meet our founder",
+   "font": "Centurygothic",
+   "weight": "700",
+   "size": "16px",
+   "lh": "24px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#5f5f5d",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "2px 16px 2px 0px",
+   "cls": "tagline"
+  },
+  {
+   "text": "Dr. Gregory Bennett received his Doctorate of Dental Surgery",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "17px",
+   "lh": "25.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#222222",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "text-size-small"
+  }
+ ],
+ "buttons": [
+  {
+   "text": "Preferences",
+   "font": "Roboto",
+   "weight": "700",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#000000",
+   "bg": null,
+   "radius": "3px",
+   "border": "1px #000000",
+   "pad": "7.5px 24px",
+   "cls": "termly-styles-module-root-a31374 termly-styles-module-primary-dce78c t"
+  },
+  {
+   "text": "Decline",
+   "font": "Roboto",
+   "weight": "700",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": "#000000",
+   "radius": "3px",
+   "border": "1px #000000",
+   "pad": "7.5px 24px",
+   "cls": "termly-styles-module-root-a31374 termly-styles-module-primary-dce78c t"
+  },
+  {
+   "text": "Accept",
+   "font": "Roboto",
+   "weight": "700",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": "#000000",
+   "radius": "3px",
+   "border": "1px #000000",
+   "pad": "7.5px 24px",
+   "cls": "termly-styles-module-root-a31374 termly-styles-module-primary-dce78c t"
+  },
+  {
+   "text": "6695 Wadsworth Blvd, Arvada, CO 80003",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "11px",
+   "lh": "16.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "8px 16px",
+   "cls": "button nav adress w-inline-block"
+  },
+  {
+   "text": "(983) 228-0453",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "11px",
+   "lh": "16.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "12px 16px",
+   "cls": "button nav w-inline-block"
+  },
+  {
+   "text": "Request Appointment",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#ffffff",
+   "bg": "#8e8d8d",
+   "radius": "0px",
+   "border": "1px #8e8d8d",
+   "pad": "8px 16px",
+   "cls": "button-3 small w-inline-block"
+  },
+  {
+   "text": "Request Appointment",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "16px",
+   "lh": "24px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#ffffff",
+   "bg": "#8e8d8d",
+   "radius": "0px",
+   "border": "1px #b3b6b5",
+   "pad": "12px 24px",
+   "cls": "button-3 _100 w-inline-block"
+  },
+  {
+   "text": "call (303)-421-7611",
+   "font": "Centurygothic",
+   "weight": "500",
+   "size": "16px",
+   "lh": "24px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "1px #c8b282",
+   "pad": "12px 24px",
+   "cls": "button-3 _100 outline white w-inline-block"
+  },
+  {
+   "text": "schedule your consultation",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "16px",
+   "lh": "24px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#ffffff",
+   "bg": "#8e8d8d",
+   "radius": "0px",
+   "border": "1px #b3b6b5",
+   "pad": "12px 24px",
+   "cls": "button-3 _100 w-inline-block"
+  },
+  {
+   "text": "Learn More",
+   "font": "Centurygothic",
+   "weight": "700",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "capitalize",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "4px 8px",
+   "cls": "button-3 transparent service is-white w-inline-block"
+  }
+ ],
+ "nav": [
+  {
+   "text": "6695 Wadsworth Blvd, Arvada, CO 80003",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "11px",
+   "lh": "16.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "8px 16px",
+   "cls": "button nav adress w-inline-block"
+  },
+  {
+   "text": "(983) 228-0453",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "11px",
+   "lh": "16.5px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "12px 16px",
+   "cls": "button nav w-inline-block"
+  },
+  {
+   "text": "Request Appointment",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "uppercase",
+   "color": "#ffffff",
+   "bg": "#8e8d8d",
+   "radius": "0px",
+   "border": "1px #8e8d8d",
+   "pad": "8px 16px",
+   "cls": "button-3 small w-inline-block"
+  },
+  {
+   "text": "Home",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "12px",
+   "lh": "18px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#ffffff",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "20px 0px",
+   "cls": "dropdown more _2 w-nav-link w--current"
+  }
+ ],
+ "footer": [
+  {
+   "text": "GET DIRECTIONS 6695 Wadsworth BlvdArvada, CO 80003CALL US TO",
+   "font": "Centurygothic",
+   "weight": "400",
+   "size": "16px",
+   "lh": "24px",
+   "ls": "normal",
+   "tt": "none",
+   "color": "#222222",
+   "bg": null,
+   "radius": "0px",
+   "border": "",
+   "pad": "0px",
+   "cls": "footer1_component"
+  }
+ ]
+}

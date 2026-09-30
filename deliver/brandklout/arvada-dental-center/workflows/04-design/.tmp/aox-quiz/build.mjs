@@ -84,7 +84,47 @@ let css = between(src, '<style>', '</style>', 'style');
   css = css.slice(0, a) + css.slice(b);
   if (css.includes('data-theme') || css.includes('prefers-color-scheme')) throw new Error('dark theme not fully removed');
 }
-css = css.trim() + '\n' + readFileSync(join(HERE, 'src/extra.css'), 'utf8');
+// Brand. The attachment's green-and-yellow palette and Atkinson Hyperlegible
+// are its own; the page has to read as Arvada Dental Center's site. Each
+// token keeps its role and takes the value the live site renders for that
+// role (brand-probe.mjs measured them; brand/*.json is the evidence). The
+// design's layout is driven entirely by these tokens, so nothing else moves.
+const BRAND_TOKENS = {
+  '--paper:#F3F6F5;': '--paper:#fdf8ef;',          // site body ground
+  '--ink:#12201B;': '--ink:#222222;',              // site body text
+  '--muted:#4A5B55;': '--muted:#5f5f5d;',          // brand silver-900, the site's secondary text
+  '--line:#D3DFD9;': '--line:#cccccc;',            // site neutral-lighter
+  '--tint:#E6EEEA;': '--tint:#f6f3ee;',            // the cream band on the live ad page
+  '--accent:#1F5A4A;': '--accent:#8c6946;',        // brand brown-500: gold, dark enough to be text on light
+  '--hero:#163D33;': '--hero:#5f5f5d;',            // the live ad page's hero ground
+  '--hero-ink:#F4F8F6;': '--hero-ink:#ffffff;',
+  '--hero-muted:#C2D5CD;': '--hero-muted:#eeeeee;',
+  '--gold:#F2B632;': '--gold:#c8b282;',            // brand gold
+  '--gold-hover:#FFC54A;': '--gold-hover:#f3daa3;',
+  '--gold-ink:#241A02;': '--gold-ink:#222222;',
+  '--gold-deep:#B07D06;': '--gold-deep:#8c6946;',
+  '--ok:#1E7A55;': '--ok:#8c6946;',                // the brand has no green
+  '--shadow:rgba(12,48,38,.16);': '--shadow:rgba(34,34,34,.14);',
+  '--font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;':
+    '--font:Centurygothic,Tahoma,sans-serif;\n  --font-head:"area extended",Verdana,sans-serif;',
+};
+for (const [from, to] of Object.entries(BRAND_TOKENS)) css = rep(css, from, to, 'brand token ' + from.split(':')[0]);
+if (/Atkinson/.test(css)) throw new Error('the attachment typeface is still referenced');
+
+css = css.trim() + '\n' + readFileSync(join(HERE, 'src/extra.css'), 'utf8') + readFileSync(join(HERE, 'src/brand.css'), 'utf8');
+
+// The site's own font files. On the Webflow site these families are already
+// installed, so this file is for the local pages only and is not part of the
+// Webflow build.
+const FONT_CDN = 'https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/';
+const face = (family, weight, file, format) =>
+  `@font-face{font-family:"${family}";font-weight:${weight};font-style:normal;font-display:swap;src:url("${FONT_CDN}${file}") format("${format}")}`;
+const fontCss = [
+  '/* Arvada Dental Center site fonts, as declared in the live site stylesheet. */',
+  face('area extended', 700, '6945a86085ce62cb49dbc5fb_fonnts.com-Area_Extended_Bold.otf', 'opentype'),
+  face('Centurygothic', 400, '693c51e685b19f0d0c149d2f_centurygothic.ttf', 'truetype'),
+  face('Centurygothic', 700, '693c51e685b19f0d0c149d30_centurygothic_bold.ttf', 'truetype'),
+].join('\n') + '\n';
 
 /* ==========================================================================
    Quiz script
@@ -349,8 +389,8 @@ const thanks = `${TOPBAR}
 /* ==========================================================================
    Write
    ========================================================================== */
-const FONTS = between(src, '<meta name="robots" content="noindex">', '<style>', 'font links').trim();
-const page = ({ title, description, markup, quiz }) => `<!doctype html>
+const FONTS = '<link rel="preconnect" href="https://cdn.prod.website-files.com" crossorigin>\n<link rel="stylesheet" href="assets/brand-fonts.css">';
+const page =({ title, description, markup, quiz }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -374,6 +414,7 @@ ${quiz ? '<script src="assets/aox-quiz.js"></script>\n' : ''}</body>
 mkdirSync(join(HERE, 'assets'), { recursive: true });
 const out = (name, text) => { writeFileSync(join(HERE, name), text); console.log(`  ${name}  ${text.length} bytes`); };
 
+out('assets/brand-fonts.css', fontCss);
 out('assets/aox-quiz.css', css + '\n');
 out('assets/aox-quiz.js', js + '\n');
 out('assets/aox-page.js', pageJs);

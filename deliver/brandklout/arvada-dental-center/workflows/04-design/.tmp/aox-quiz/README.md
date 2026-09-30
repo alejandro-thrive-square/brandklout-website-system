@@ -17,6 +17,7 @@ tracking, video lightbox, thank-you greeting).
 node build.mjs     # regenerate everything from the attachment + src/
 node verify.mjs    # the gate: layout at six widths, then it clicks through the quiz, the videos and the CTAs
 node clips.mjs <page.html> <width> [selector ...]   # readable review crops into shots/
+node brand-probe.mjs <url> [url ...]               # re-measure the live site's colours and fonts into brand/
 ```
 
 **Never hand-edit the three pages or `assets/`.** They are generated. Edit `build.mjs` or `src/`.
@@ -27,7 +28,28 @@ building half-patched.
 
 ## What differs from the attachment, and why
 
-The stylesheet, copy, section order and quiz logic are the attachment's own. The changes:
+The layout, copy, section order and quiz logic are the attachment's own. The changes:
+
+0. **The brand is the site's, not the attachment's.** The attachment came in green and yellow,
+   set in Atkinson Hyperlegible. `brand-probe.mjs` measured www.arvadadentalcenter.com as it
+   renders (evidence in `brand/*.json`) and `build.mjs` swaps each design token for the site's
+   value for the same role; `src/brand.css` carries the type and shape:
+
+   | Role | Site value |
+   | :--- | :--- |
+   | Grounds | `#fdf8ef` body, `#ffffff`, `#f6f3ee` band, `#5f5f5d` dark (the live ad page's hero) |
+   | Ink | `#222222`, secondary `#5f5f5d` |
+   | Accent | gold `#c8b282` for fills and rules, `#8c6946` where gold is text on light |
+   | Headings | `area extended` 700, capitalised, normal tracking, 3rem / 2rem at desktop |
+   | Body | `Centurygothic` 400 and 700, 17px / 1.5 |
+   | Eyebrow | uppercase bold with a 2px gold rule (the site's `tagline`) |
+   | Buttons | uppercase, square; primary is the site's gold gradient with dark text |
+   | Corners | square; 4px on form controls only |
+
+   The site's most common button is a silver gradient with white text. It is not used for the
+   primary action here: white on that silver is about 2:1. Gold with `#222` text is 7.7:1.
+   `assets/brand-fonts.css` loads the site's own font files for the local pages only; on the
+   Webflow site those families are already installed.
 
 1. **Photo slots filled** with the practice's own photographs from the Webflow asset library and
    stills from its own YouTube uploads. `transformation-image-1.jpg` is the same photograph as
@@ -38,8 +60,7 @@ The stylesheet, copy, section order and quiz logic are the attachment's own. The
    so the conversion has a page to fire on. The first name travels in `sessionStorage`, never in
    the URL. `generate_lead` is still pushed to the dataLayer before the redirect.
 5. **The automatic dark theme is removed.** The attachment turns the whole page dark on a phone in
-   dark mode; Brandklout builds stay on light grounds. The dark green hero is the design's own and
-   is kept.
+   dark mode; Brandklout builds stay on light grounds. The dark hero band is kept, in the grey the live ad page already uses.
 6. **Click tracking moved** out of the quiz script into `aox-page.js` so the thank-you page is
    tracked too and nothing fires twice.
 7. **An empty webhook warns in the console** instead of pretending silently.

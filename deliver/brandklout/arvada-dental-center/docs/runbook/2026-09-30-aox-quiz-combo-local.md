@@ -11,7 +11,13 @@ Arvada task was found with `search_tasks` for "Arvada" modified after 2026-09-15
 - Built the three-page combo locally in `workflows/04-design/.tmp/aox-quiz/`: landing (the
   attachment, photo slots filled), consult (quiz first), thank-you (phone first, no form).
   `build.mjs` generates all of it from the attachment; read that folder's `README.md`.
-- `node verify.mjs` passes 93 checks: no overflow and every image loaded at 360/390/768/1024/
+- **Rebranded to the live site** on the user's instruction ("make sure the brand looks the same as
+  the current site"). The attachment was green and yellow in Atkinson Hyperlegible; the pages now
+  use the site's measured values: grounds `#fdf8ef` / `#fff` / `#f6f3ee` / dark `#5f5f5d`, ink
+  `#222`, gold `#c8b282` (`#8c6946` as text), `area extended` 700 capitalised headings,
+  `Centurygothic` body, uppercase square buttons. `brand-probe.mjs` is the measuring tool and
+  `brand/*.json` the evidence.
+- `node verify.mjs` passes 105 checks, including the loaded font faces and brand colours: no overflow and every image loaded at 360/390/768/1024/
   1440/1920 on all three pages, the quiz clicked through to the thank-you page on both pages that
   carry it, validation, the video lightbox, the sticky bar, one phone number, single-fire tracking.
 
@@ -41,6 +47,12 @@ Arvada task was found with `search_tasks` for "Arvada" modified after 2026-09-15
   `www.arvadadentalimplants.com/ads-landing-pages/all-on-x-thank-you`**, the other Webflow site
   since the 2026-09-23 domain move. It answers 200, so nothing looks broken; worth a look by
   whoever owns the form.
+- **The site declares far more than it uses.** Its stylesheet carries Lato, Nexa, Didot, Playfair
+  and Garnetta faces and a brown `#403830`; the rendered pages are almost entirely Century Gothic
+  and Area Extended on cream, grey and gold. Read the brand off computed styles weighted by area
+  and characters, not off the variable list.
+- **A named font that never loads still passes a computed-style check** (it reports the family and
+  paints Verdana). Assert `document.fonts` loaded faces.
 - A Bash heredoc halves backslashes even into `python -`; patch `.mjs` files with the Edit tool.
 
 ## Version Control

@@ -1,24 +1,25 @@
 :root{
-  --paper:#F3F6F5;
+  --paper:#fdf8ef;
   --surface:#FFFFFF;
-  --ink:#12201B;
-  --muted:#4A5B55;
-  --line:#D3DFD9;
-  --tint:#E6EEEA;
-  --accent:#1F5A4A;
-  --hero:#163D33;
-  --hero-ink:#F4F8F6;
-  --hero-muted:#C2D5CD;
+  --ink:#222222;
+  --muted:#5f5f5d;
+  --line:#cccccc;
+  --tint:#f6f3ee;
+  --accent:#8c6946;
+  --hero:#5f5f5d;
+  --hero-ink:#ffffff;
+  --hero-muted:#eeeeee;
   --hero-line:rgba(255,255,255,.18);
-  --gold:#F2B632;
-  --gold-hover:#FFC54A;
-  --gold-ink:#241A02;
-  --gold-deep:#B07D06;
-  --ok:#1E7A55;
+  --gold:#c8b282;
+  --gold-hover:#f3daa3;
+  --gold-ink:#222222;
+  --gold-deep:#8c6946;
+  --ok:#8c6946;
   --err:#B3261E;
   --focus:#0B63CE;
-  --shadow:rgba(12,48,38,.16);
-  --font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --shadow:rgba(34,34,34,.14);
+  --font:Centurygothic,Tahoma,sans-serif;
+  --font-head:"area extended",Verdana,sans-serif;
   color-scheme:light;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
@@ -339,4 +340,65 @@ button.face{font:inherit;text-align:left;background:none;border:0;padding:0;curs
 .ty-save{margin:8px auto 0;color:var(--hero-muted);font-size:1rem}
 .ty .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
 .ty-hours{margin:20px auto 0;max-width:52ch;font-size:.95rem;color:var(--hero-muted)}
+
+/* ==========================================================================
+   Arvada Dental Center & Implants brand (src/brand.css).
+
+   Every value here was read off www.arvadadentalcenter.com as it renders
+   (brand-probe.mjs, 2026-09-30), not chosen: the site's own variables and the
+   computed styles of its headings, body copy, eyebrows and buttons. The colour
+   tokens themselves are swapped in the :root block by build.mjs; this file
+   carries the type, the square corners and the button treatment.
+
+     grounds   #fdf8ef body · #ffffff · #f6f3ee band · #5f5f5d dark (ad-page hero)
+     ink       #222222 · secondary #5f5f5d
+     accent    gold #c8b282 (fills, rules) · #8c6946 (gold as text on light)
+     type      "area extended" 700, capitalised, for headings
+               Centurygothic 400/700, 17px/1.5, for everything else
+     shape     square corners; 4px only on form controls
+   ========================================================================== */
+
+body{font-family:var(--font);font-size:1.0625rem;line-height:1.5}
+@media (min-width:960px){body{font-size:1.0625rem}}
+
+/* Headings: the site sets every heading in Area Extended 700, capitalised,
+   with normal tracking. It is a wide face, so the sizes follow the site's own
+   scale (3rem / 2rem at desktop) rather than the narrower face's. */
+h1,h2,h3,.q{font-family:var(--font-head);font-weight:700;letter-spacing:normal}
+h1,h2{text-transform:capitalize}
+.hero h1{font-size:clamp(1.75rem,4.1vw,3rem);line-height:1.2;letter-spacing:normal;font-weight:700;max-width:none}
+@media (min-width:600px){.hero h1{max-width:none}}
+.sec h2{font-size:clamp(1.4rem,2.9vw,2rem);line-height:1.3;letter-spacing:normal;font-weight:700;max-width:26ch}
+.faces-head h2{font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.3;letter-spacing:normal;font-weight:700;max-width:24ch}
+.quiz-head h2{font-size:1.25rem;font-weight:700}
+.q{font-size:1.0625rem;line-height:1.4;font-weight:700}
+.steps h3{font-size:1.0625rem;line-height:1.35;font-weight:700}
+.ty h1{font-size:clamp(1.75rem,4.1vw,3rem);line-height:1.2;letter-spacing:normal;font-weight:700}
+
+/* Eyebrow: the site's "tagline" — uppercase, bold, a 2px gold rule beneath. */
+.kicker{display:inline-block;text-transform:uppercase;letter-spacing:.08em;font-size:.875rem;font-weight:700;color:#f3daa3;border-bottom:2px solid var(--gold);padding:2px 16px 2px 0}
+
+/* Century Gothic ships in 400 and 700 only. */
+.brand,.lede strong,.hero-proof li,.opt,.field label,.est-n,.r-title,.r-total strong,.faq summary,.face b,.doc-quote p,.ty-phone,.top-call,.creds li,.cmp thead th,.cmp tbody th,.cmp .us,.steps li::before{font-weight:700}
+.est-n,.r-total strong,.ty-phone{letter-spacing:normal}
+.hero-proof li{font-weight:400}
+
+/* Buttons: uppercase and square, as on the site. The primary fill is the
+   site's gold gradient with dark text; outline buttons take the gold rule. */
+.btn{border-radius:0;text-transform:uppercase;letter-spacing:.05em;font-size:1rem;font-weight:700;border-width:1px}
+.btn-gold{background-color:var(--gold);background-image:linear-gradient(238deg,#c8b282,#f3daa3 55%,#c8b282);color:var(--gold-ink);border-color:var(--gold)}
+.btn-gold:hover{background-color:var(--gold);background-image:linear-gradient(238deg,#c8b282,#f3daa3 30%,#c8b282)}
+.btn-line{border-color:#8e8d8d}
+.btn-line:hover{border-color:var(--gold)}
+.btn-ghost{border-color:var(--gold)}
+.top-call{border-radius:0;border-width:1px}
+
+/* Square corners. */
+.quiz,.est,.r-note,.budget,.face,.face-ph,.ph,.ph-tag,.face-tag,.vid-frame,.cmp tr{border-radius:0}
+.cmp thead .us,.cmp tbody tr:last-child .us{border-radius:0}
+.opt,.field input{border-radius:4px}
+.opt,.field input,.budget{border-width:1px}
+.opt[aria-pressed="true"]{box-shadow:inset 0 0 0 1px var(--accent)}
+blockquote{border-left-width:2px}
+.vid::backdrop{background:rgba(34,34,34,.9)}
 

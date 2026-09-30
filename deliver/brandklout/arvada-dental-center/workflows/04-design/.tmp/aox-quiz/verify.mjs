@@ -134,11 +134,28 @@ for (const [key, file] of Object.entries(PAGES)) {
       var imgs = Array.prototype.slice.call(document.images);
       return { scrollW: document.documentElement.scrollWidth, inner: window.innerWidth,
         imgs: imgs.length, broken: imgs.filter(function(i){ return !i.complete || !i.naturalWidth; }).map(function(i){ return i.src; }),
-        font: document.fonts.check('700 16px "Atkinson Hyperlegible Next"') }; })()`);
+        brand: (function(){
+          function hex(c){ var p = c.match(/[\\d.]+/g).slice(0, 3); return '#' + p.map(function(n){ return ('0' + Math.round(n).toString(16)).slice(-2); }).join(''); }
+          function cs(sel){ var e = document.querySelector(sel); return e ? getComputedStyle(e) : null; }
+          var loaded = []; document.fonts.forEach(function(f){ if (f.status === 'loaded') loaded.push(f.family.replace(/["']/g, '') + ' ' + f.weight); });
+          var h = cs('h1'), b = cs('body'), t = cs('.topbar'), g = cs('.btn-gold');
+          return { loaded: loaded.sort().join(', '), h1: h.fontFamily.split(',')[0].replace(/["']/g, '') + ' ' + h.fontWeight + ' ' + h.textTransform,
+            body: b.fontFamily.split(',')[0] + ' ' + b.fontSize, ground: hex(b.backgroundColor), ink: hex(b.color), dark: hex(t.backgroundColor),
+            cta: g ? hex(g.backgroundColor) + ' ' + hex(g.color) + ' ' + g.borderRadius + ' ' + g.textTransform : '' }; })() }; })()`);
     ok(m.scrollW <= m.inner, `${key} ${width}: no horizontal overflow (${m.scrollW}/${m.inner})`);
     ok(m.broken.length === 0, `${key} ${width}: ${m.imgs} images loaded${m.broken.length ? ' — broken: ' + m.broken.join(', ') : ''}`);
     ok(p.errs.length === 0, `${key} ${width}: no console errors${p.errs.length ? ' — ' + p.errs.join(' | ') : ''}`);
-    if (width === 1440) ok(m.font, `${key}: Atkinson Hyperlegible Next loaded`);
+    if (width === 1440) {
+      // The brand, as the live site renders it (brand/*.json). A family that is
+      // named but never loads falls back to Verdana or Tahoma and still "passes"
+      // a computed-style check, so the loaded faces are asserted too.
+      const b = m.brand;
+      ok(b.loaded === 'Centurygothic 400, Centurygothic 700, area extended 700', `${key}: brand font files loaded (${b.loaded})`);
+      ok(b.h1 === 'area extended 700 capitalize', `${key}: h1 is ${b.h1}`);
+      ok(b.body === 'Centurygothic 17px', `${key}: body is ${b.body}`);
+      ok(b.ground === '#fdf8ef' && b.ink === '#222222' && b.dark === '#5f5f5d', `${key}: grounds and ink ${b.ground} ${b.ink} ${b.dark}`);
+      ok(b.cta === '#c8b282 #222222 0px uppercase', `${key}: primary button ${b.cta}`);
+    }
     if (SHOT_WIDTHS.includes(width)) await p.shot(`${key}-${width}.png`);
     await p.close();
   }
