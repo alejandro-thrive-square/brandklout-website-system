@@ -1,0 +1,758 @@
+{
+  "slug": "ad-hoc",
+  "gids": [
+    "1218962992162869"
+  ],
+  "nodes": [
+    {
+      "gid": "1218962992162869",
+      "actual_time_minutes": null,
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "assignee_status": "inbox",
+      "completed": false,
+      "completed_at": null,
+      "completed_by": null,
+      "created_at": "2026-09-29T03:10:38.466Z",
+      "custom_fields": [
+        {
+          "gid": "1210907656178881",
+          "enabled": true,
+          "name": "Estimated time",
+          "description": "Asana-created. Estimate time to complete a task.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1213654480386510",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1213654480386511",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386512",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386513",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Awaiting Client Response",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386514",
+              "color": "orange",
+              "enabled": true,
+              "name": "Client Review",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386515",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1210907656178887",
+          "enabled": true,
+          "name": "Percent allocation",
+          "description": "Asana-created. Percent allocation is a percentage of a person's time that will be spent on the work.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1211830978949300",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1216937025018723",
+              "color": "red",
+              "enabled": true,
+              "name": "Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949301",
+              "color": "orange",
+              "enabled": true,
+              "name": "High",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949302",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Medium",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949303",
+              "color": "yellow-green",
+              "enabled": true,
+              "name": "Low",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "Asana-created. Track the priority of each task.",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1215611096046618",
+          "enabled": true,
+          "name": "Original Due Date",
+          "description": "",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "date",
+          "resource_type": "custom_field",
+          "date_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "date"
+        },
+        {
+          "gid": "1216224867752821",
+          "enabled": true,
+          "name": "TaskTime",
+          "description": "",
+          "number_value": 0,
+          "precision": 0,
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": "0h 00m",
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": true,
+          "is_value_read_only": true,
+          "type": "number"
+        },
+        {
+          "gid": "1216937025018707",
+          "enabled": true,
+          "name": "Email Address",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018709",
+          "enabled": true,
+          "name": "Name",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018727",
+          "enabled": true,
+          "name": "Short Summary of Request",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1212508235432855",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1212508235432856",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432857",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432858",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Waiting",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432859",
+              "color": "orange",
+              "enabled": true,
+              "name": "Deferred",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432860",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1212508235432871",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1212508235432873",
+              "color": "red",
+              "enabled": true,
+              "name": "Customer Success",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215777334688745",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Ads",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432874",
+              "color": "orange",
+              "enabled": true,
+              "name": "Web Designer",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432875",
+              "color": "yellow-orange",
+              "enabled": true,
+              "name": "Client",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1212508235432872",
+              "color": "green",
+              "enabled": true,
+              "name": "Sales",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": {
+            "gid": "1212508235432874",
+            "color": "orange",
+            "enabled": true,
+            "name": "Web Designer",
+            "resource_type": "enum_option"
+          },
+          "name": "Responsible Team",
+          "description": "",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": "Web Designer",
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        }
+      ],
+      "dependencies": [],
+      "dependents": [],
+      "due_at": null,
+      "due_on": "2026-09-30",
+      "followers": [
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        },
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1210572357798246",
+          "name": "Sang Huynh"
+        }
+      ],
+      "html_notes": "<body></body>",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1212508097665006",
+            "name": "BK Implementation - Arvada Dental Center & Implants"
+          },
+          "section": {
+            "gid": "1216318075861974",
+            "name": "Ad-Hoc"
+          }
+        },
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769601",
+            "name": "Open Tasks"
+          }
+        }
+      ],
+      "modified_at": "2026-09-30T04:14:30.940Z",
+      "name": "Make new landing page - AOX",
+      "notes": "",
+      "num_subtasks": 0,
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218962992162869",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212508097665006",
+          "name": "BK Implementation - Arvada Dental Center & Implants"
+        }
+      ],
+      "start_on": null,
+      "tags": [],
+      "resource_subtype": "default_task",
+      "workspace": {
+        "gid": "1210572425689866",
+        "name": "ThriveSquare"
+      },
+      "subtasks": [],
+      "comments": [
+        {
+          "gid": "1218929162756670",
+          "created_at": "2026-09-29T03:35:14.569Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1218929162756674",
+          "created_at": "2026-09-29T03:35:54.143Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "fyi - these errors were found by AI. Let's make these correct and check other landing pages that we built recently\n \nThere are avoidable trust inconsistencies. Near the bottom, the page shows “call (303)-421-7611” and then immediately “Prefer to talk? Call (720) 419-3699.” https://www.arvadadentalcenter.com/ads-landing-pages/all-on-x-ads-landing Even if one is a tracking number, the visitor should see one consistent number while dynamic call tracking happens behind the scenes. The FAQ also makes aggressive statements such as “99.9%” same-day teeth and lifetime-oriented claims. https://www.arvadadentalcenter.com/ads-landing-pages/all-on-x-ads-landing I’d use slightly more qualified language on the ad page.\n \nWhat's likely holding the current page back\n    The page is slow. The page code contains two complete copies of the page stacked on top of each other: two heroes, two galleries and two FAQs. It also embeds about eight videos, all loading on page open. On a phone that's slow, and slow pages lose ad clicks.\n    There are three different ways to convert. Visitors get an embedded form, buttons that go to a separate consult page, and a mobile \"Free consult\" button that opens the PatientsReach scheduler. Every extra page or new flow loses people.\n    Your price differs across the site. It's $18,795 on the ad page and cost page, \"starts at $17,795\" on the Dental Implants page, and \"$20,000 to $30,000 per arch\" in the All-on-4 FAQ. Shoppers who compare pages will notice.\n    The phone numbers don't match. One button reads (303) 421-7611 but dials the 720 tracking number. The mobile header on your service pages dials a 719 number, which looks like a leftover bug.\n    The review claim isn't accurate. \"1,300+ Five-Star Reviews\" is off, because Google shows a 4.8 average across about 1,280 reviews. I used \"4.8 on Google, 1,200+ reviews\" instead. Please check the live count.\n    Small typos hurt trust. Examples are \"Book a Appointment,\" \"Clincial,\" and photo text naming a \"Dr. Kim.\"\n",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        }
+      ],
+      "depth": 0,
+      "attachments": [
+        {
+          "gid": "1218929162756667",
+          "created_at": "2026-09-29T03:35:06.865Z",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1218929162756666/8e3d9512647527037097266a99fc33e6?e=1790777498&v=0&t=xqOTLwQ3tn0PWFh_59YD8Nl_kdork0h42ylwm10n5RY",
+          "host": "asana",
+          "name": "all-on-x-landing.html",
+          "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1218929162756667",
+          "resource_subtype": "asana",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1218929162756666/8e3d9512647527037097266a99fc33e6?e=1790777498&v=0&t=xqOTLwQ3tn0PWFh_59YD8Nl_kdork0h42ylwm10n5RY",
+          "size": 55710
+        }
+      ],
+      "storyCounts": {
+        "added_to_project": 2,
+        "assigned": 1,
+        "follower_added": 2,
+        "due_date_changed": 1,
+        "unknown": 1,
+        "number_custom_field_changed": 1,
+        "comment_added": 2,
+        "due_today": 1
+      },
+      "stories": [
+        {
+          "gid": "1218962795140497",
+          "created_at": "2026-09-29T03:10:38.547Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica added this task to BK Implementation - Arvada Dental Center & Implants",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1218962795331286",
+          "created_at": "2026-09-29T03:11:17.517Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica assigned to you",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1218962978954781",
+          "created_at": "2026-09-29T03:11:22.285Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica added Gauge Hill as a collaborator",
+          "type": "system",
+          "resource_subtype": "follower_added"
+        },
+        {
+          "gid": "1218963036795059",
+          "created_at": "2026-09-29T03:11:25.298Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica added Sang Huynh as a collaborator",
+          "type": "system",
+          "resource_subtype": "follower_added"
+        },
+        {
+          "gid": "1218962992365581",
+          "created_at": "2026-09-29T03:11:30.947Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica changed the due date to Today",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1218962795215054",
+          "created_at": "2026-09-29T03:11:37.355Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1218963036853840",
+          "created_at": "2026-09-29T03:11:43.356Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1218962978954985",
+          "created_at": "2026-09-29T03:11:44.753Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1218929162756670",
+          "created_at": "2026-09-29T03:35:14.569Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1218929162756674",
+          "created_at": "2026-09-29T03:35:54.143Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "fyi - these errors were found by AI. Let's make these correct and check other landing pages that we built recently\n \nThere are avoidable trust inconsistencies. Near the bottom, the page shows “call (303)-421-7611” and then immediately “Prefer to talk? Call (720) 419-3699.” https://www.arvadadentalcenter.com/ads-landing-pages/all-on-x-ads-landing Even if one is a tracking number, the visitor should see one consistent number while dynamic call tracking happens behind the scenes. The FAQ also makes aggressive statements such as “99.9%” same-day teeth and lifetime-oriented claims. https://www.arvadadentalcenter.com/ads-landing-pages/all-on-x-ads-landing I’d use slightly more qualified language on the ad page.\n \nWhat's likely holding the current page back\n    The page is slow. The page code contains two complete copies of the page stacked on top of each other: two heroes, two galleries and two FAQs. It also embeds about eight videos, all loading on page open. On a phone that's slow, and slow pages lose ad clicks.\n    There are three different ways to convert. Visitors get an embedded form, buttons that go to a separate consult page, and a mobile \"Free consult\" button that opens the PatientsReach scheduler. Every extra page or new flow loses people.\n    Your price differs across the site. It's $18,795 on the ad page and cost page, \"starts at $17,795\" on the Dental Implants page, and \"$20,000 to $30,000 per arch\" in the All-on-4 FAQ. Shoppers who compare pages will notice.\n    The phone numbers don't match. One button reads (303) 421-7611 but dials the 720 tracking number. The mobile header on your service pages dials a 719 number, which looks like a leftover bug.\n    The review claim isn't accurate. \"1,300+ Five-Star Reviews\" is off, because Google shows a 4.8 average across about 1,280 reviews. I used \"4.8 on Google, 1,200+ reviews\" instead. Please check the live count.\n    Small typos hurt trust. Examples are \"Book a Appointment,\" \"Clincial,\" and photo text naming a \"Dr. Kim.\"\n",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1219023483766608",
+          "created_at": "2026-09-30T04:14:30.915Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano have a task due Today",
+          "type": "system",
+          "resource_subtype": "due_today"
+        }
+      ],
+      "dependentTasks": [],
+      "dependencyTasks": []
+    }
+  ],
+  "projects": [
+    {
+      "gid": "1211830976769588",
+      "archived": false,
+      "current_status": null,
+      "members": [
+        {
+          "gid": "1210572357798246",
+          "name": "Sang Huynh"
+        },
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        },
+        {
+          "gid": "1211145565450724",
+          "name": "Trong Huynh"
+        },
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1216639144002502",
+          "name": "Jiseth Valderrama"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
+      "name": "Success Daily Stand-Up",
+      "notes": "Capture agenda items, next steps, and action items to keep meetings focused and productive.",
+      "owner": {
+        "gid": "1210572357798246",
+        "name": "Sang Huynh"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 2354,
+        "num_completed_tasks": 2154,
+        "num_incomplete_tasks": 200
+      },
+      "attachments": []
+    },
+    {
+      "gid": "1212508097665006",
+      "archived": false,
+      "current_status": null,
+      "members": [
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        },
+        {
+          "gid": "1210572357798246",
+          "name": "Sang Huynh"
+        },
+        {
+          "gid": "1211145565450724",
+          "name": "Trong Huynh"
+        },
+        {
+          "gid": "1211894225964623",
+          "name": "Zoe Zou"
+        }
+      ],
+      "name": "BK Implementation - Arvada Dental Center & Implants",
+      "notes": "",
+      "owner": {
+        "gid": "1211675097206163",
+        "name": "Jessica"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1212508097665006",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 109,
+        "num_completed_tasks": 83,
+        "num_incomplete_tasks": 26
+      },
+      "attachments": []
+    }
+  ],
+  "downloads": [
+    {
+      "owner": "Make new landing page - AOX",
+      "ownerGid": "1218962992162869",
+      "name": "all-on-x-landing.html",
+      "size": 55710,
+      "dest": "deliver\\brandklout\\arvada-dental-center\\workflows\\01-content-intake\\.tmp\\asana-aox-sung-2026-09-30\\attachments\\1218929162756667-all-on-x-landing.html",
+      "bytes": 55710
+    }
+  ],
+  "people": [
+    {
+      "name": "Alejandro Milano",
+      "roles": [
+        "assignee",
+        "follower",
+        "commenter",
+        "activity",
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Jessica",
+      "roles": [
+        "follower",
+        "activity",
+        "member of \"Success Daily Stand-Up\"",
+        "owner of \"BK Implementation - Arvada Dental Center & Implants\"",
+        "member of \"BK Implementation - Arvada Dental Center & Implants\""
+      ]
+    },
+    {
+      "name": "Gauge Hill",
+      "roles": [
+        "follower",
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Sang Huynh",
+      "roles": [
+        "follower",
+        "owner of \"Success Daily Stand-Up\"",
+        "member of \"Success Daily Stand-Up\"",
+        "member of \"BK Implementation - Arvada Dental Center & Implants\""
+      ]
+    },
+    {
+      "name": "Trong Huynh",
+      "roles": [
+        "member of \"Success Daily Stand-Up\"",
+        "member of \"BK Implementation - Arvada Dental Center & Implants\""
+      ]
+    },
+    {
+      "name": "Jiseth Valderrama",
+      "roles": [
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Zoe Zou",
+      "roles": [
+        "member of \"BK Implementation - Arvada Dental Center & Implants\""
+      ]
+    }
+  ]
+}

@@ -9,7 +9,16 @@ Do not read them all.
 - www.arvadadentalcenter.com → Webflow `693c51e685b19f0d0c149cab` "Arvada Dental Center" · display number (303) 421-7611
 - www.arvadadentalimplants.com → Webflow `69f2fe636ca87b3f22fa54c1` "Arvada Implants Center" · display number (720) 719-9579
 
-## Call tracking vs consent — 2026-09-23 (latest)
+## New All-on-X "quiz" combo — 2026-09-30 (latest)
+
+A second All-on-X ads set, from the design on Asana `1218962992162869`: landing, consult and
+thank-you, **built locally only** in `workflows/04-design/.tmp/aox-quiz/` (`node build.mjs`,
+`node verify.mjs`). Not in Webflow, not published. It cannot launch until the GHL webhook URL is
+set, the price is settled ($18,795 in the design, "Starting at $17,795" on the live cost page) and
+the design's own claim checklist is confirmed. Details:
+[`runbook/2026-09-30-aox-quiz-combo-local.md`](./runbook/2026-09-30-aox-quiz-combo-local.md).
+
+## Call tracking vs consent — 2026-09-23
 
 - **Implants site:** DNI (GHL + Practice By Numbers) runs **before** consent. Published and verified.
 - **Center site:** the same. The GHL pool runs before consent. Published and verified.

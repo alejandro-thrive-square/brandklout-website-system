@@ -1,0 +1,905 @@
+<!doctype html>
+<!--
+  ALL-ON-X ADS LANDING PAGE, Arvada Dental Center & Implants
+  Handoff notes for the web engineer
+
+  1. LEAD CAPTURE (required before launch)
+     In the <script> near the bottom, set LEAD_WEBHOOK_URL to the GoHighLevel / LeadConnector
+     inbound webhook. The quiz POSTs JSON with: situation, arch, timeline, payment, first_name,
+     phone (10 digits), email, sms_consent, landing_page, submitted_at, plus any utm_*, gclid,
+     fbclid and hl URL parameters. Leave it empty and the form shows success without sending.
+
+  2. PHOTOS
+     Every element with class "ph" or "face-ph" is a labeled photo slot. Swap each for an <img>
+     (width/height set, loading="lazy" below the fold). Suggested assets from the Webflow library:
+     Chris-BEfore-and-After.jpg, transformation-image-1.jpg, transformation-image-2.jpg,
+     Theresa Before/After, Dr. Bennett portrait BB8A2838.jpg, and stills for Wick, Anna, Brittany.
+     Swap the text brand in the top bar for the logo image.
+
+  3. PATIENT VIDEOS
+     Face tiles link to YouTube (IDs in data-yt: Wick n6pB30XJwng, Anna IISjxdkk0Ok,
+     Brittany YrMQX7oFzmA). Ideally open them in a lightbox (Webflow Lightbox element) so
+     visitors stay on the page. Do not embed players on page load; it slows the page.
+
+  4. TRACKING (GTM-5LLWM9C4 goes in the <head> as usual)
+     dataLayer events: quiz_start, quiz_step (quiz_step, quiz_question, quiz_answer),
+     lead_form_error, generate_lead, phone_click, cta_click, video_click, prequal_click.
+     Use generate_lead as the Google Ads / Meta conversion.
+
+  5. AD MESSAGE MATCH
+     Append ?hl=dentures | failing | price | monthly to ad final URLs to swap the headline.
+
+  6. KEEP IT A LANDING PAGE
+     noindex, no site navigation, no footer menus. One phone number everywhere: (720) 419-3699.
+
+  7. VERIFY BEFORE LAUNCH
+     Google rating and review count, Healthgrades rating, $5,995 snap-on denture price,
+     the "$10,000 below national chains" claim, comparison table wording, and SMS consent text.
+
+  Fonts load from Google Fonts (Atkinson Hyperlegible Next). Everything else is self-contained.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>All-on-X Full-Arch Implants in Arvada, CO | Arvada Dental Center &amp; Implants</title>
+<meta name="description" content="Fixed full-arch teeth, often in a single day. $18,795 per arch, in writing. Free consultation and 3D scan with Dr. Gregory Bennett in Arvada, CO.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#F3F6F5;
+  --surface:#FFFFFF;
+  --ink:#12201B;
+  --muted:#4A5B55;
+  --line:#D3DFD9;
+  --tint:#E6EEEA;
+  --accent:#1F5A4A;
+  --hero:#163D33;
+  --hero-ink:#F4F8F6;
+  --hero-muted:#C2D5CD;
+  --hero-line:rgba(255,255,255,.18);
+  --gold:#F2B632;
+  --gold-hover:#FFC54A;
+  --gold-ink:#241A02;
+  --gold-deep:#B07D06;
+  --ok:#1E7A55;
+  --err:#B3261E;
+  --focus:#0B63CE;
+  --shadow:rgba(12,48,38,.16);
+  --font:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1614;--surface:#15201D;--ink:#E7EFEB;--muted:#A7B8B1;--line:#2B3C37;--tint:#1B2A26;--accent:#86CDB1;
+    --hero:#0F2D26;--hero-ink:#F1F6F4;--hero-muted:#B1C7BE;--hero-line:rgba(255,255,255,.14);
+    --ok:#74D3A8;--err:#FF9A8F;--focus:#8DB9FF;--shadow:rgba(0,0,0,.5);--gold-deep:#F2B632;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1614;--surface:#15201D;--ink:#E7EFEB;--muted:#A7B8B1;--line:#2B3C37;--tint:#1B2A26;--accent:#86CDB1;
+  --hero:#0F2D26;--hero-ink:#F1F6F4;--hero-muted:#B1C7BE;--hero-line:rgba(255,255,255,.14);
+  --ok:#74D3A8;--err:#FF9A8F;--focus:#8DB9FF;--shadow:rgba(0,0,0,.5);--gold-deep:#F2B632;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font);font-size:1.125rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+@media (min-width:960px){body{font-size:1.1875rem}}
+img,svg,video{max-width:100%}
+h1,h2,h3{margin:0;line-height:1.1;letter-spacing:-.015em}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1160px,100% - 40px);margin-inline:auto}
+
+/* Top bar */
+.topbar{background:var(--hero);color:var(--hero-ink);border-bottom:1px solid var(--hero-line)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.brand{font-weight:800;font-size:1.05rem;line-height:1.15}
+.brand small{display:block;font-weight:500;font-size:.82rem;color:var(--hero-muted)}
+.top-actions{display:flex;align-items:center;gap:20px}
+.top-rating{display:none;font-size:.95rem;color:var(--hero-muted)}
+.top-rating b{color:var(--hero-ink)}
+.stars{color:var(--gold);letter-spacing:1px}
+@media (min-width:720px){.top-rating{display:inline}}
+.top-call{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:1rem;text-decoration:none;padding:10px 16px;border:2px solid var(--hero-line);border-radius:999px;white-space:nowrap}
+.top-call:hover{border-color:var(--gold)}
+.top-call svg{flex:none}
+@media (max-width:420px){.brand{font-size:.98rem}.brand small{display:none}.top-call{padding:9px 14px;font-size:.95rem}}
+
+/* Hero */
+.hero{background:var(--hero);color:var(--hero-ink);padding:28px 0 48px}
+.hero-grid{display:grid;gap:26px;grid-template-areas:"copy" "quiz" "proof"}
+.hero-copy{grid-area:copy}
+.hero-quiz{grid-area:quiz}
+.hero-proof{grid-area:proof}
+@media (min-width:960px){
+  .hero{padding:56px 0 76px}
+  .hero-grid{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);grid-template-areas:"copy quiz" "proof quiz";column-gap:60px;row-gap:34px;align-items:start}
+}
+.kicker{color:var(--gold);font-weight:700;font-size:1rem;margin-bottom:14px}
+.hero h1{font-size:clamp(2.1rem,5.2vw,3.6rem);font-weight:800;letter-spacing:-.028em;line-height:1.03;text-wrap:balance}
+@media (min-width:600px){.hero h1{max-width:15ch}}
+@media (max-width:599px){.kicker{margin-bottom:10px}.lede{margin-top:14px}.hero h1{text-wrap:pretty}.quiz-head p{font-size:.95rem}}
+.lede{margin-top:18px;font-size:clamp(1.1rem,1.6vw,1.3rem);color:var(--hero-muted);max-width:40ch}
+.lede strong{color:var(--hero-ink);font-weight:800}
+.hero-proof{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.hero-proof li{display:flex;gap:12px;align-items:flex-start;font-weight:600}
+.ck{flex:none;width:24px;height:24px;margin-top:2px;color:var(--gold)}
+.ck path{stroke:var(--hero)}
+
+/* Quiz */
+.quiz{background:var(--surface);color:var(--ink);border-radius:20px;padding:22px 18px 18px;box-shadow:0 28px 56px -22px rgba(0,0,0,.5)}
+@media (min-width:600px){.quiz{padding:30px 28px 24px}}
+.quiz-head h2{font-size:1.45rem;font-weight:800}
+.quiz-head p{color:var(--muted);font-size:1rem;margin-top:6px}
+.progress{margin:18px 0 20px}
+.progress-meta{font-size:.92rem;color:var(--muted);font-weight:700;margin-bottom:8px}
+.track{height:8px;border-radius:99px;background:var(--tint);overflow:hidden}
+.fill{height:100%;width:0;background:var(--gold);border-radius:inherit;transition:width .35s ease}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0}
+.q{display:block;font-size:1.25rem;font-weight:800;line-height:1.25;margin:0 0 14px;outline:none}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;padding:14px 16px;text-align:left;font:inherit;font-size:1.0625rem;font-weight:600;line-height:1.3;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:14px;cursor:pointer;transition:border-color .15s,background-color .15s}
+.opt::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--muted);background:var(--surface);box-shadow:inset 0 0 0 4px var(--surface);transition:background-color .15s,border-color .15s}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);background:var(--tint)}
+.opt[aria-pressed="true"]::before{border-color:var(--accent);background:var(--accent)}
+.quiz-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;min-height:32px}
+.back{font:inherit;font-size:.95rem;font-weight:700;color:var(--muted);background:none;border:0;padding:6px 2px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.time{font-size:.88rem;color:var(--muted)}
+.step{animation:stepIn .28s ease-out both}
+@keyframes stepIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.est{background:var(--tint);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.est-l{font-size:.92rem;color:var(--muted);font-weight:700}
+.est-n{font-size:2.1rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.1;margin-top:2px}
+.est-m{font-size:.95rem;color:var(--muted);margin-top:4px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;font-size:1rem;margin-bottom:6px}
+.opt-l{font-weight:500;color:var(--muted)}
+.field input{width:100%;min-height:54px;padding:12px 14px;font:inherit;font-size:1.0625rem;color:var(--ink);background:var(--surface);border:2px solid var(--line);border-radius:12px}
+.field input:focus{border-color:var(--accent)}
+.field input[aria-invalid="true"]{border-color:var(--err)}
+.err,.form-err{color:var(--err);font-size:.95rem;font-weight:600;margin-top:6px}
+.form-err{margin-top:12px}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:.9rem;line-height:1.45;color:var(--muted);margin:6px 0 18px;cursor:pointer}
+.check input{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--accent)}
+.fine{font-size:.88rem;color:var(--muted);margin-top:12px;text-align:center}
+.done-icon{width:52px;height:52px;color:var(--ok);margin-bottom:12px}
+.done p{margin-top:10px}
+.done .muted{color:var(--muted);font-size:1rem}
+.done .btn{margin-top:20px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:14px 26px;font:inherit;font-size:1.0625rem;font-weight:800;line-height:1.2;border-radius:999px;text-decoration:none;cursor:pointer;border:2px solid transparent;transition:background-color .15s,border-color .15s}
+.btn-gold{background:var(--gold);color:var(--gold-ink)}
+.btn-gold:hover{background:var(--gold-hover)}
+.btn-line{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-line:hover{border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--hero-ink);border-color:var(--hero-line)}
+.btn-ghost:hover{border-color:var(--gold)}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.7;cursor:progress}
+
+/* Credentials */
+.creds{background:var(--surface);border-bottom:1px solid var(--line)}
+.creds ul{list-style:none;margin:0;padding:18px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 30px}
+.creds li{display:flex;align-items:center;gap:8px;font-weight:700;font-size:1rem}
+.creds li span{color:var(--muted);font-weight:500}
+.creds li .stars{color:var(--gold-deep)}
+
+/* Sections */
+.sec{padding:clamp(60px,8vw,108px) 0}
+.sec-alt{background:var(--surface)}
+.sec h2{font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:800;letter-spacing:-.022em;max-width:20ch;text-wrap:balance}
+.sec-intro{color:var(--muted);margin-top:16px;max-width:60ch}
+
+/* Price */
+.price-grid{display:grid;gap:44px;align-items:center}
+@media (min-width:900px){.price-grid{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:76px}}
+.price-copy > p{margin-top:18px;max-width:50ch}
+sup{line-height:0}
+.price-copy .btn{margin-top:30px}
+.partners{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);max-width:50ch}
+.partners b{display:block;font-size:1rem}
+.partners p{margin-top:6px;color:var(--muted);font-size:1rem}
+.receipt-wrap{filter:drop-shadow(0 18px 28px var(--shadow));max-width:460px;width:100%;justify-self:center}
+.receipt{
+  --s:9px;
+  background:var(--surface);padding:42px 28px 40px;
+  -webkit-mask:radial-gradient(circle var(--s) at 50% 0,#0000 97%,#000) 50% 0/calc(var(--s)*2.4) 51% repeat-x,radial-gradient(circle var(--s) at 50% 100%,#0000 97%,#000) 50% 100%/calc(var(--s)*2.4) 51% repeat-x;
+          mask:radial-gradient(circle var(--s) at 50% 0,#0000 97%,#000) 50% 0/calc(var(--s)*2.4) 51% repeat-x,radial-gradient(circle var(--s) at 50% 100%,#0000 97%,#000) 50% 100%/calc(var(--s)*2.4) 51% repeat-x;
+}
+.r-title{font-weight:800;font-size:1.3rem}
+.r-sub{color:var(--muted);font-size:1rem;margin-top:2px}
+.r-list{margin:22px 0 0;padding:0}
+.r-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:1rem}
+.r-row dt{font-weight:600}
+.r-row dd{margin:0;color:var(--ok);font-weight:700;white-space:nowrap}
+.r-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:18px;padding-top:16px;border-top:2px solid var(--ink)}
+.r-total span{font-weight:700}
+.r-total strong{font-size:clamp(2.3rem,5vw,2.9rem);font-weight:800;letter-spacing:-.028em;font-variant-numeric:tabular-nums;line-height:1}
+.r-month{text-align:right;color:var(--muted);font-size:1rem;margin-top:6px}
+.r-both{margin-top:18px;font-weight:700;font-size:1rem}
+.r-note{margin-top:12px;font-size:.92rem;color:var(--muted);padding:12px 14px;background:var(--tint);border-radius:10px}
+
+/* Patient faces strip */
+.faces{background:var(--surface);padding:clamp(44px,6vw,76px) 0 clamp(36px,5vw,64px)}
+.faces-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 24px}
+.faces-head h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.02em;max-width:22ch;text-wrap:balance}
+.faces-head p{color:var(--muted)}
+.faces-scroll{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin-top:26px;scroll-padding-inline:20px}
+.faces-list{list-style:none;margin:0;display:grid;grid-auto-flow:column;grid-auto-columns:clamp(148px,40vw,200px);gap:14px;padding:4px max(20px,calc((100% - 1160px) / 2)) 14px;width:max-content;min-width:100%}
+@media (min-width:1200px){.faces-list{grid-auto-columns:calc((1160px - 64px) / 5);gap:16px}}
+.face{display:block;color:inherit;text-decoration:none;scroll-snap-align:start;border-radius:16px}
+.face-ph{position:relative;display:grid;place-items:center;aspect-ratio:3/4;border-radius:16px;background:repeating-linear-gradient(135deg,var(--tint) 0 10px,transparent 10px 20px),var(--paper);border:1.5px dashed var(--line);color:var(--muted);font-size:.85rem;overflow:hidden;transition:border-color .15s}
+a.face:hover .face-ph{border-color:var(--accent)}
+.face-play{position:absolute;right:10px;bottom:10px;width:42px;height:42px;border-radius:50%;background:var(--gold);display:grid;place-items:center}
+.face-play svg{width:16px;height:16px;margin-left:3px;color:var(--gold-ink)}
+.face b{display:block;margin-top:10px;font-size:1.05rem}
+.face-l{display:block;color:var(--muted);font-size:.92rem}
+
+/* Budget option */
+.budget{margin-top:18px;padding:16px 18px;border:2px solid var(--line);border-radius:14px;max-width:50ch}
+.budget b{display:block;font-size:1rem}
+.budget p{margin-top:6px;color:var(--muted);font-size:1rem}
+
+/* Comparison */
+.cmp{width:100%;margin-top:36px;border-collapse:separate;border-spacing:0;font-size:1rem}
+.cmp th,.cmp td{text-align:left;vertical-align:top;padding:16px 18px;border-bottom:1px solid var(--line)}
+.cmp thead th{font-size:.98rem;font-weight:800;border-bottom:2px solid var(--ink)}
+.cmp tbody th{font-weight:700;width:28%}
+.cmp td{color:var(--muted)}
+.cmp .us{background:var(--tint);color:var(--ink);font-weight:700}
+.cmp thead .us{border-radius:14px 14px 0 0}
+.cmp tbody tr:last-child .us{border-radius:0 0 14px 14px}
+.cmp-note{margin-top:14px;font-size:.9rem;color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:759px){
+  .cmp thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+  .cmp,.cmp tbody,.cmp tr,.cmp th,.cmp td{display:block;width:auto}
+  .cmp tr{border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px;background:var(--surface)}
+  .cmp tbody th{padding:0 0 10px;border:0;font-size:1.05rem;font-weight:800;width:auto}
+  .cmp td{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:12px;padding:8px 0;border:0;border-top:1px dashed var(--line)}
+  .cmp td::before{content:attr(data-l);font-weight:600;color:var(--muted);font-size:.9rem}
+  .cmp .us{background:none;border-top:0}
+  .cmp tbody tr:last-child .us{border-radius:0}
+  .cmp td.us::before{color:var(--accent);font-weight:800}
+}
+.prequal{margin-top:14px;font-size:1rem}
+.prequal a{font-weight:700;text-underline-offset:3px}
+
+/* Results */
+.results-grid{display:grid;gap:36px;margin-top:40px}
+@media (min-width:900px){.results-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:52px;align-items:start}}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ph{margin:0;position:relative;border-radius:16px;background:repeating-linear-gradient(135deg,var(--tint) 0 10px,transparent 10px 20px),var(--paper);border:1.5px dashed var(--line);display:grid;place-items:center;padding:18px;text-align:center;color:var(--muted);font-size:.9rem;line-height:1.4;overflow:hidden}
+.ph b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+.ph-wide{grid-column:1/-1;aspect-ratio:16/10}
+.ph-sq{aspect-ratio:1/1}
+.ph-tag{position:absolute;left:12px;top:12px;background:var(--hero);color:var(--hero-ink);font-weight:700;font-size:.85rem;padding:4px 12px;border-radius:99px}
+.ba-cap{grid-column:1/-1;font-size:.9rem;color:var(--muted)}
+.quotes{display:grid;gap:28px}
+blockquote{margin:0;padding:2px 0 2px 20px;border-left:4px solid var(--gold)}
+blockquote p{font-size:1.15rem;line-height:1.5}
+blockquote footer{margin-top:10px;font-size:.95rem;color:var(--muted)}
+blockquote footer b{color:var(--ink)}
+
+/* Process */
+.steps{list-style:none;margin:44px 0 0;padding:0;display:grid;counter-reset:s}
+.steps li{position:relative;padding:0 0 34px 66px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:46px;height:46px;border-radius:50%;background:var(--hero);color:var(--hero-ink);display:grid;place-items:center;font-weight:800;font-size:1.1rem}
+.steps li::after{content:"";position:absolute;left:22px;top:52px;bottom:6px;width:2px;background:var(--line)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child::after{display:none}
+.steps h3{font-size:1.2rem;font-weight:800;padding-top:10px}
+.when{display:block;color:var(--accent);font-weight:700;font-size:.95rem;margin-top:4px}
+.steps p{margin-top:8px;color:var(--muted);max-width:44ch}
+@media (min-width:960px){
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:34px}
+  .steps li{padding:68px 0 0}
+  .steps li::after{left:56px;right:-26px;top:22px;bottom:auto;width:auto;height:2px}
+}
+
+/* Doctor */
+.doc{display:grid;gap:36px;align-items:center}
+@media (min-width:900px){.doc{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:68px}}
+.doc .ph{aspect-ratio:4/5;max-width:420px;width:100%}
+.doc-copy > p{margin-top:18px;max-width:54ch}
+.doc-list{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:12px}
+.doc-list li{display:flex;gap:12px;align-items:flex-start}
+.ck-a{flex:none;width:24px;height:24px;margin-top:2px;color:var(--accent)}
+.ck-a path{stroke:var(--surface)}
+.doc-quote{margin:30px 0 0;padding:0;border:0}
+.doc-quote p{font-size:1.35rem;font-weight:700;line-height:1.35;max-width:34ch}
+
+/* FAQ */
+.faq{margin-top:34px;max-width:820px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 0;font-weight:800;font-size:1.125rem;line-height:1.3}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:12px;height:12px;border-right:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(3px) rotate(-135deg)}
+.faq .a{padding:0 0 22px;color:var(--muted);max-width:66ch}
+
+/* Final CTA */
+.final{background:var(--hero);color:var(--hero-ink);text-align:center}
+.final h2{margin-inline:auto}
+.final p{color:var(--hero-muted);margin:18px auto 0;max-width:52ch}
+.final .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}
+.final .hours{font-size:.95rem;margin-top:18px}
+
+/* Footer */
+.foot{padding:44px 0 52px;font-size:.92rem;color:var(--muted)}
+.foot-grid{display:grid;gap:22px}
+@media (min-width:800px){.foot-grid{grid-template-columns:1fr 1fr 2.2fr;gap:40px}}
+.foot b{color:var(--ink);display:block;margin-bottom:4px}
+.foot a{text-underline-offset:3px}
+.legal p + p{margin-top:8px}
+
+/* Sticky mobile bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;display:grid;grid-template-columns:auto 1fr;gap:10px;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line);box-shadow:0 -10px 26px -14px var(--shadow);transform:translateY(110%);visibility:hidden;transition:transform .25s ease,visibility .25s}
+.sticky.show{transform:none;visibility:visible}
+.sticky .btn{min-height:52px;padding:12px 20px}
+.sticky-space{height:86px}
+@media (min-width:960px){.sticky,.sticky-space{display:none}}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">Arvada Dental Center<small>&amp; Implants, Dr. Gregory Bennett</small></div>
+    <div class="top-actions">
+      <span class="top-rating"><span class="stars" aria-hidden="true">★★★★★</span> <b>4.8</b> on Google</span>
+      <a class="top-call" href="tel:+17204193699" data-loc="topbar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+        (720) 419-3699
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">All-on-X implants in Arvada, CO</p>
+      <h1 id="hl">Fixed teeth in a day. A real price before you sit down.</h1>
+      <p class="lede">Dr. Gregory Bennett plans, places and restores your new smile under one roof. One arch is <strong>$18,795</strong>, or from <strong>$235 a month</strong> with approved financing.</p>
+    </div>
+
+    <div class="hero-quiz">
+      <div class="quiz" id="quiz" role="region" aria-labelledby="quiz-title">
+        <div class="quiz-head">
+          <h2 id="quiz-title">See if you qualify</h2>
+          <p>Four quick questions. Free, with no obligation.</p>
+        </div>
+        <div class="progress">
+          <p class="progress-meta" id="q-count">Question 1 of 4</p>
+          <div class="track" role="progressbar" aria-labelledby="q-count" aria-valuemin="0" aria-valuemax="100" aria-valuenow="17"><div class="fill" id="q-fill"></div></div>
+        </div>
+        <div id="quiz-body"></div>
+      </div>
+    </div>
+
+    <ul class="hero-proof">
+      <li><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Free consultation, 3D CT scan and a written plan</li>
+      <li><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>IV sedation, given by Dr. Bennett himself</li>
+      <li><svg class="ck" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Most patients leave surgery day with fixed teeth</li>
+    </ul>
+  </div>
+</section>
+
+<section class="creds" aria-label="Ratings and recognition">
+  <div class="wrap">
+    <ul>
+      <li><span class="stars" aria-hidden="true">★★★★★</span>4.8 on Google <span>1,200+ reviews</span></li>
+      <li>4.9 on Healthgrades <span>Dr. Bennett</span></li>
+      <li>5280 Magazine Top Dentist</li>
+      <li>In Arvada since 2003</li>
+    </ul>
+  </div>
+</section>
+
+<section class="faces" aria-labelledby="faces-title">
+  <div class="wrap faces-head">
+    <h2 id="faces-title">Patients who were where you are now</h2>
+    <p>Tap a photo to watch their story.</p>
+  </div>
+  <div class="faces-scroll" tabindex="0" role="region" aria-label="Patient stories, scrolls sideways">
+    <ul class="faces-list">
+      <li><a class="face" href="https://www.youtube.com/watch?v=n6pB30XJwng" target="_blank" rel="noopener" data-yt="n6pB30XJwng" aria-label="Watch Wick’s story on YouTube"><span class="face-ph">Photo slot<span class="face-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span></span><b>Wick</b><span class="face-l">Watch their story</span></a></li>
+      <li><a class="face" href="https://www.youtube.com/watch?v=IISjxdkk0Ok" target="_blank" rel="noopener" data-yt="IISjxdkk0Ok" aria-label="Watch Anna’s story on YouTube"><span class="face-ph">Photo slot<span class="face-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span></span><b>Anna</b><span class="face-l">Watch their story</span></a></li>
+      <li><a class="face" href="https://www.youtube.com/watch?v=YrMQX7oFzmA" target="_blank" rel="noopener" data-yt="YrMQX7oFzmA" aria-label="Watch Brittany’s story on YouTube"><span class="face-ph">Photo slot<span class="face-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></span></span><b>Brittany</b><span class="face-l">Watch their story</span></a></li>
+      <li><div class="face"><span class="face-ph">Photo slot</span><b>Chris</b><span class="face-l">All-on-X patient</span></div></li>
+      <li><div class="face"><span class="face-ph">Photo slot</span><b>Theresa</b><span class="face-l">Before and after</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" id="price">
+  <div class="wrap price-grid">
+    <div class="price-copy">
+      <h2>One arch, one price, written down.</h2>
+      <p>Most full-arch offices won’t give you a number until you’re in the chair. We publish ours, and at your free consultation you get it on paper, with nothing added that hasn’t been explained to you first.</p>
+      <p>The practice’s published fee is more than $10,000 below the national implant chains advertised on TV.<sup>*</sup></p>
+      <div class="partners">
+        <b>Monthly payments</b>
+        <p>CareCredit, Cherry, Sunbit, PatientFi, Proceed Finance and LendingClub, plus cash, check and card.</p>
+      </div>
+      <div class="budget">
+        <b>Working with a tighter budget?</b>
+        <p>Snap-on implant dentures start at $5,995 for the lower arch. They’re removable, but much more stable than regular dentures. Ask about them at your consultation.</p>
+      </div>
+      <button class="btn btn-gold js-to-quiz" type="button" data-loc="price">See if I qualify</button>
+    </div>
+
+    <div class="receipt-wrap">
+      <div class="receipt">
+        <p class="r-title">Written treatment estimate</p>
+        <p class="r-sub">Fixed full arch, upper or lower</p>
+        <dl class="r-list">
+          <div class="r-row"><dt>Exam with Dr. Bennett</dt><dd>Included</dd></div>
+          <div class="r-row"><dt>Cone beam 3D CT scan</dt><dd>Included</dd></div>
+          <div class="r-row"><dt>Extractions, if needed</dt><dd>Included</dd></div>
+          <div class="r-row"><dt>Four to six implants</dt><dd>Included</dd></div>
+          <div class="r-row"><dt>Same-day fixed temporary teeth</dt><dd>Included</dd></div>
+          <div class="r-row"><dt>Final zirconia arch</dt><dd>Included</dd></div>
+        </dl>
+        <div class="r-total"><span>Per arch</span><strong>$18,795</strong></div>
+        <p class="r-month">or from $235/mo with approved financing</p>
+        <p class="r-both">Both arches: $37,590, or from $471/mo</p>
+        <p class="r-note">Priced separately, and only if your scan shows you need them: bone grafting and IV sedation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="compare">
+  <div class="wrap">
+    <h2>How Arvada Dental Center compares</h2>
+    <p class="sec-intro">Questions worth asking any office before you commit to full-arch implants.</p>
+    <table class="cmp">
+      <thead>
+        <tr><th scope="col"><span class="sr-only">Question</span></th><th scope="col" class="us">Arvada Dental Center</th><th scope="col">National implant chains</th><th scope="col">Most general dentists</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Is the price published?</th><td class="us" data-l="Arvada">Yes, $18,795 per arch</td><td data-l="National chains">Often only quoted in person</td><td data-l="General dentists">Varies</td></tr>
+        <tr><th scope="row">Who does your surgery and final teeth?</th><td class="us" data-l="Arvada">Dr. Bennett, every phase</td><td data-l="National chains">Often split between a surgeon and a restoring dentist</td><td data-l="General dentists">Surgery is often referred out</td></tr>
+        <tr><th scope="row">Who gives IV sedation?</th><td class="us" data-l="Arvada">Dr. Bennett, in the office</td><td data-l="National chains">Usually available</td><td data-l="General dentists">Often not offered</td></tr>
+        <tr><th scope="row">Is surgery planned on a 3D scan?</th><td class="us" data-l="Arvada">Every case, with a surgical guide</td><td data-l="National chains">Usually</td><td data-l="General dentists">Varies</td></tr>
+        <tr><th scope="row">Where are your teeth made?</th><td class="us" data-l="Arvada">The practice’s own lab</td><td data-l="National chains">Varies</td><td data-l="General dentists">Usually an outside lab</td></tr>
+        <tr><th scope="row">Who cares for you afterward?</th><td class="us" data-l="Arvada">The same full-service office, here since 2003</td><td data-l="National chains">Mostly implant-focused</td><td data-l="General dentists">Your regular dentist</td></tr>
+      </tbody>
+    </table>
+    <p class="cmp-note">A general comparison of common practice models. Individual offices vary.</p>
+  </div>
+</section>
+
+<section class="sec" id="results">
+  <div class="wrap">
+    <h2>Real Arvada patients, real full-arch results</h2>
+    <p class="sec-intro">These cases come from the practice’s own patient gallery. Your result depends on your scan, your bone and your health, which is exactly what the free consultation tells you.</p>
+    <div class="results-grid">
+      <div class="ba">
+        <figure class="ph ph-wide"><span class="ph-tag">All-on-X patient</span><figcaption><b>Photo slot</b>Chris holding his before photo<br>Chris-BEfore-and-After.jpg</figcaption></figure>
+        <figure class="ph ph-sq"><figcaption><b>Photo slot</b>transformation-image-1.jpg</figcaption></figure>
+        <figure class="ph ph-sq"><figcaption><b>Photo slot</b>transformation-image-2.jpg</figcaption></figure>
+        <p class="ba-cap">Arvada Dental Center patients. Individual results vary.</p>
+      </div>
+      <div class="quotes">
+        <blockquote>
+          <p>“My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.”</p>
+          <footer><b>Rick Willcox</b>, Google review</footer>
+        </blockquote>
+        <blockquote>
+          <p>“Came in for consultation about an implant. The employee who helped me, Justeen, was very accommodating and helpful.”</p>
+          <footer><b>Dean Brancucci</b>, Google review</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="process">
+  <div class="wrap">
+    <h2>From first call to final smile</h2>
+    <p class="sec-intro">Two main visits with healing in between. You’re never without teeth at any stage.</p>
+    <ol class="steps">
+      <li>
+        <h3>Free consultation and 3D scan</h3>
+        <span class="when">Your first visit</span>
+        <p>Dr. Bennett examines you, takes a cone beam CT scan and tells you plainly what’s possible. You leave with a written plan and price, and no pressure to book that day.</p>
+      </li>
+      <li>
+        <h3>Surgery day</h3>
+        <span class="when">One appointment, under sedation</span>
+        <p>Any failing teeth are removed and four or more implants are placed from a guided plan. Most patients go home the same day with fixed temporary teeth.</p>
+      </li>
+      <li>
+        <h3>Healing</h3>
+        <span class="when">About 3 to 5 months</span>
+        <p>Expect mild soreness for three to five days and a soft diet at first. We check in as the implants fuse with your jawbone.</p>
+      </li>
+      <li>
+        <h3>Your final zirconia arch</h3>
+        <span class="when">After healing</span>
+        <p>Your permanent arch is finished in the practice’s in-house lab, matched to your face and smile, and fitted by Dr. Bennett.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" id="doctor">
+  <div class="wrap doc">
+    <figure class="ph"><figcaption><b>Photo slot</b>Dr. Gregory Bennett portrait<br>BB8A2838.jpg</figcaption></figure>
+    <div class="doc-copy">
+      <h2>The doctor who plans your case is the one who places it</h2>
+      <p>Dr. Gregory Bennett has practiced since 2001 and has cared for patients on Wadsworth Blvd since 2003. He handles every phase of a full-arch case himself, so you’re never handed between offices.</p>
+      <ul class="doc-list">
+        <li><svg class="ck-a" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>University of Iowa dental graduate, 2001</li>
+        <li><svg class="ck-a" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Certified in moderate IV sedation, with annual ACLS renewal</li>
+        <li><svg class="ck-a" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Thousands of implants placed and restored</li>
+        <li><svg class="ck-a" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>5280 Magazine Top Dentist</li>
+        <li><svg class="ck-a" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M6.8 12.4l3.4 3.4 7-7.4" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Cone beam 3D imaging and an in-house lab</li>
+      </ul>
+      <blockquote class="doc-quote"><p>“Most dentists tell you what you need. I’d rather help you understand why.”</p><footer>Dr. Gregory Bennett</footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-alt" id="faq">
+  <div class="wrap">
+    <h2>Questions people ask before they call</h2>
+    <div class="faq">
+      <details>
+        <summary>Will I ever be without teeth?</summary>
+        <div class="a">No. Extractions and implant placement happen in the same visit, and most patients go home with fixed temporary teeth that day. Your permanent zirconia arch goes in after three to five months of healing.</div>
+      </details>
+      <details>
+        <summary>Some offices advertise permanent teeth in 24 hours. Why is my final arch made later?</summary>
+        <div class="a">Your gums and bone change shape as they heal after extractions and implant placement. Making your final zirconia arch after that healing means it’s fitted to your mouth as it will be long-term. Until then you wear fixed temporary teeth, so you’re never without a smile.</div>
+      </details>
+      <details>
+        <summary>Does it hurt?</summary>
+        <div class="a">Dr. Bennett gives IV sedation himself, so you’re comfortable and relaxed during surgery. Most patients have mild soreness and swelling for three to five days, managed with medication.</div>
+      </details>
+      <details>
+        <summary>I’ve been told I don’t have enough bone. Can I still get implants?</summary>
+        <div class="a">Often, yes. Implants can be angled to use the bone you have, and Dr. Bennett decides how many to place from your 3D scan. For severe upper-jaw bone loss, zygomatic implants are another option. The scan at your free consultation gives you a real answer.</div>
+      </details>
+      <details>
+        <summary>What does $18,795 include?</summary>
+        <div class="a">Your exam, 3D CT scan, any extractions, four to six implants, same-day fixed temporary teeth and your final zirconia arch. Bone grafting and IV sedation are priced separately, and only if you need them. You’ll have the full number in writing before you commit to anything.</div>
+      </details>
+      <details>
+        <summary>Can I pay monthly?</summary>
+        <div class="a">Yes. With approved financing, one arch starts at about $235 a month. The practice works with CareCredit, Cherry, Sunbit, PatientFi, Proceed Finance and LendingClub, and your coordinator will talk through options at your consultation.</div>
+      </details>
+      <details>
+        <summary>Will my insurance help?</summary>
+        <div class="a">Some dental plans contribute toward implant treatment. The team checks your benefits before treatment and applies whatever your plan covers.</div>
+      </details>
+      <details>
+        <summary>Am I too old for this?</summary>
+        <div class="a">There’s no upper age limit. Patients in their 70s and 80s have this treatment regularly. Your general health and bone matter far more than your age.</div>
+      </details>
+      <details>
+        <summary>How long does it last?</summary>
+        <div class="a">With good care and regular checkups, the implants are designed to last decades. The zirconia arch may need an evaluation after 15 to 20 years of normal wear.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec final" id="final">
+  <div class="wrap">
+    <h2>Find out what your new smile would cost, in writing.</h2>
+    <p>A free consultation, a 3D scan and a written plan. If implants aren’t right for you, Dr. Bennett will tell you.</p>
+    <div class="actions">
+      <button class="btn btn-gold js-to-quiz" type="button" data-loc="final">See if I qualify</button>
+      <a class="btn btn-ghost" href="tel:+17204193699" data-loc="final">Call (720) 419-3699</a>
+    </div>
+    <p class="hours">Monday to Friday, 8am to 5pm. 6695 Wadsworth Blvd, Arvada, CO 80003.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div><b>Arvada Dental Center &amp; Implants</b>6695 Wadsworth Blvd<br>Arvada, CO 80003</div>
+    <div><b>Hours</b>Monday to Friday, 8am to 5pm<br><a href="tel:+17204193699" data-loc="footer">(720) 419-3699</a></div>
+    <div class="legal">
+      <p>$18,795 is the practice’s published fee for one fixed full arch, upper or lower, and includes the items listed above. Bone grafting and IV sedation are not included and are quoted only if needed. Monthly amounts are estimates with approved financing; terms vary by lender. *Practice’s comparison with national implant chains advertised on TV.</p>
+      <p>The free consultation is for new implant patients. Individual results vary. Nothing on this page is a diagnosis; candidacy is determined at a clinical exam with 3D imaging.</p>
+      <p><a href="https://www.arvadadentalcenter.com/privacy-policy" target="_blank" rel="noopener">Privacy policy</a> &nbsp; <a href="https://www.arvadadentalcenter.com/sms-terms-and-conditions" target="_blank" rel="noopener">SMS terms</a></p>
+    </div>
+  </div>
+  <div class="sticky-space" aria-hidden="true"></div>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="btn btn-line" href="tel:+17204193699" data-loc="sticky" aria-label="Call (720) 419-3699">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.12.37 2.33.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+    Call
+  </a>
+  <button class="btn btn-gold js-to-quiz" type="button" data-loc="sticky">See if I qualify</button>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ===== Setup =====
+     Paste your GoHighLevel / LeadConnector inbound webhook URL below when installing.
+     Leave it empty to preview the flow without sending anything. */
+  var LEAD_WEBHOOK_URL = '';
+  var PHONE = { display: '(720) 419-3699', tel: '+17204193699' };
+  var PREQUAL_URL = 'https://pay.withcherry.com/arvada-dental-center--implants';
+  var PRICE = { one: { total: '$18,795', mo: '$235' }, both: { total: '$37,590', mo: '$471' } };
+
+  /* Headline variants for ad message match: add ?hl=dentures (or failing, price, monthly) to the ad's final URL */
+  var HEADLINES = {
+    dentures: 'Done with dentures? Fixed teeth in a day.',
+    failing: 'Failing teeth? Leave with a fixed smile the same day.',
+    price: 'Full-arch implants for $18,795 per arch, in writing.',
+    monthly: 'Fixed teeth in a day, from $235 a month.'
+  };
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.dataLayer = window.dataLayer || [];
+  function track(event, data){
+    try { var o = { event: event }; if (data) for (var k in data) o[k] = data[k]; window.dataLayer.push(o); } catch (e) {}
+  }
+
+  var params = new URLSearchParams(location.search);
+  var hl = params.get('hl');
+  if (hl && HEADLINES[hl]) document.getElementById('hl').textContent = HEADLINES[hl];
+
+  var attribution = {};
+  ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','fbclid','hl'].forEach(function(k){
+    var v = params.get(k); if (v) attribution[k] = v;
+  });
+
+  var STEPS = [
+    { key: 'situation', q: 'What’s going on with your teeth right now?',
+      opts: ['I’m missing most or all of my teeth', 'I have several failing or broken teeth', 'I wear dentures and I’m tired of them', 'I’m not sure, I’d like an expert opinion'] },
+    { key: 'arch', q: 'Which teeth would you like to replace?',
+      opts: ['My upper teeth', 'My lower teeth', 'Both upper and lower', 'I’m not sure yet'] },
+    { key: 'timeline', q: 'When would you like to have new teeth?',
+      opts: ['As soon as possible', 'Within the next 3 months', 'In 3 to 6 months', 'I’m just researching for now'] },
+    { key: 'payment', q: 'How would you like to pay for treatment?',
+      opts: ['Monthly payments', 'Cash or savings', 'Insurance plus financing', 'I’d like to talk it through'] }
+  ];
+
+  var answers = {}, idx = 0, started = false, advancing = false, sending = false;
+  var contact = { first_name: '', phone: '', email: '', sms_consent: false };
+  var quiz = document.getElementById('quiz');
+  var body = document.getElementById('quiz-body');
+  var fill = document.getElementById('q-fill');
+  var count = document.getElementById('q-count');
+  var bar = quiz.querySelector('.track');
+
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; });
+  }
+
+  function setProgress(){
+    var total = STEPS.length + 2;
+    var pct = Math.round((Math.min(idx, STEPS.length + 1) + 1) / total * 100);
+    fill.style.width = pct + '%';
+    bar.setAttribute('aria-valuenow', pct);
+    count.textContent = idx < STEPS.length ? 'Question ' + (idx + 1) + ' of ' + STEPS.length
+      : (idx === STEPS.length ? 'Last step' : 'All done');
+  }
+
+  function foot(showBack){
+    return '<div class="quiz-foot">' + (showBack ? '<button type="button" class="back">Back</button>' : '<span></span>') +
+      '<span class="time">Takes about 30 seconds</span></div>';
+  }
+
+  function field(id, label, type, ac, val, ph, optional){
+    return '<div class="field"><label for="' + id + '">' + label + (optional ? ' <span class="opt-l">(optional)</span>' : '') + '</label>' +
+      '<input id="' + id + '" type="' + type + '" autocomplete="' + ac + '"' +
+      (type === 'tel' ? ' inputmode="tel"' : '') + (type === 'email' ? ' inputmode="email"' : '') +
+      ' value="' + esc(val) + '"' + (ph ? ' placeholder="' + ph + '"' : '') + (optional ? '' : ' required') +
+      ' aria-describedby="' + id + '-err">' +
+      '<p class="err" id="' + id + '-err" hidden></p></div>';
+  }
+
+  function contactHTML(){
+    var a = answers.arch || '';
+    var both = a === 'Both upper and lower';
+    var label = both ? 'both arches' : (a === 'My upper teeth' ? 'upper arch' : (a === 'My lower teeth' ? 'lower arch' : 'one arch'));
+    var p = both ? PRICE.both : PRICE.one;
+    return '<div class="step">' +
+      '<h3 class="q" tabindex="-1">Your next step is a free consultation and 3D scan.</h3>' +
+      '<div class="est"><p class="est-l">Published fee, ' + label + '</p><p class="est-n">' + p.total + '</p>' +
+      '<p class="est-m">or from ' + p.mo + '/mo with approved financing. Confirmed in writing after your scan.</p></div>' +
+      '<form id="lead-form" novalidate>' +
+        field('f-name', 'First name', 'text', 'given-name', contact.first_name, '', false) +
+        field('f-phone', 'Mobile phone', 'tel', 'tel-national', contact.phone, '(303) 555-0123', false) +
+        field('f-email', 'Email', 'email', 'email', contact.email, '', true) +
+        '<label class="check"><input type="checkbox" id="f-sms"' + (contact.sms_consent ? ' checked' : '') + '>' +
+        '<span>Text me about my consultation. Message and data rates may apply. Reply STOP to opt out. Consent isn’t required to book.</span></label>' +
+        '<button class="btn btn-gold btn-block" type="submit">Request my free consultation</button>' +
+        '<p class="form-err" id="form-err" role="alert" hidden></p>' +
+        '<p class="fine">No cost and no obligation. We’ll call you from ' + PHONE.display + '.</p>' +
+      '</form>' + foot(true) + '</div>';
+  }
+
+  function doneHTML(){
+    return '<div class="step done">' +
+      '<svg class="done-icon" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M15 27l7 7 15-16" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '<h3 class="q" tabindex="-1">Request received, ' + esc(contact.first_name) + '.</h3>' +
+      '<p>Our implant coordinator will call you from <strong>' + PHONE.display + '</strong>. Save that number so you recognize the call.</p>' +
+      '<p class="muted">Office hours are Monday to Friday, 8am to 5pm. Requests sent after hours get a call the next business morning.</p>' +
+      '<a class="btn btn-line btn-block" href="tel:' + PHONE.tel + '" data-loc="quiz_done">Call now instead</a>' +
+      '<p class="prequal">Want to know your monthly payment before your visit? <a href="' + PREQUAL_URL + '" target="_blank" rel="noopener" data-loc="quiz_done">Prequalify with Cherry</a>.</p></div>';
+  }
+
+  function render(moveFocus){
+    setProgress();
+    if (idx < STEPS.length) {
+      var s = STEPS[idx];
+      body.innerHTML = '<fieldset class="step"><legend class="q" tabindex="-1">' + esc(s.q) + '</legend><div class="opts">' +
+        s.opts.map(function(o, j){
+          return '<button type="button" class="opt" data-j="' + j + '" aria-pressed="' + (answers[s.key] === o) + '">' + esc(o) + '</button>';
+        }).join('') + '</div></fieldset>' + foot(idx > 0);
+    } else if (idx === STEPS.length) {
+      body.innerHTML = contactHTML();
+    } else {
+      body.innerHTML = doneHTML();
+    }
+    wire();
+    if (moveFocus) {
+      var q = body.querySelector('.q');
+      if (q) q.focus({ preventScroll: true });
+      if (quiz.getBoundingClientRect().top < 0) quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+  }
+
+  function saveContact(){
+    var f = document.getElementById('lead-form'); if (!f) return;
+    contact.first_name = f.querySelector('#f-name').value.trim();
+    contact.phone = f.querySelector('#f-phone').value.trim();
+    contact.email = f.querySelector('#f-email').value.trim();
+    contact.sms_consent = f.querySelector('#f-sms').checked;
+  }
+
+  function digits(p){
+    var d = String(p).replace(/\D/g, '');
+    if (d.length === 11 && d.charAt(0) === '1') d = d.slice(1);
+    return d;
+  }
+
+  function showErr(id, msg){
+    var input = document.getElementById(id), e = document.getElementById(id + '-err');
+    if (msg) { input.setAttribute('aria-invalid', 'true'); e.textContent = msg; e.hidden = false; }
+    else { input.removeAttribute('aria-invalid'); e.hidden = true; }
+    return !msg;
+  }
+
+  function sendLead(payload){
+    if (!LEAD_WEBHOOK_URL) return Promise.resolve();
+    return fetch(LEAD_WEBHOOK_URL, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true
+    }).then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); });
+  }
+
+  function onSubmit(ev){
+    ev.preventDefault();
+    if (sending) return;
+    saveContact();
+    var first = null;
+    if (!showErr('f-name', contact.first_name ? '' : 'Enter your first name so we know who to ask for.')) first = first || 'f-name';
+    var d = digits(contact.phone);
+    if (!showErr('f-phone', d.length === 10 ? '' : 'Enter a 10-digit mobile number so our coordinator can reach you.')) first = first || 'f-phone';
+    var emailOk = !contact.email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact.email);
+    if (!showErr('f-email', emailOk ? '' : 'Check your email address, or leave it blank.')) first = first || 'f-email';
+    if (first) { document.getElementById(first).focus(); track('lead_form_error', { field: first }); return; }
+
+    var btn = ev.target.querySelector('button[type="submit"]');
+    var formErr = document.getElementById('form-err');
+    formErr.hidden = true;
+    sending = true; btn.disabled = true; btn.textContent = 'Sending your request…';
+
+    var payload = {};
+    for (var k in answers) payload[k] = answers[k];
+    payload.first_name = contact.first_name;
+    payload.phone = d;
+    payload.email = contact.email;
+    payload.sms_consent = contact.sms_consent;
+    payload.landing_page = location.origin + location.pathname;
+    payload.submitted_at = new Date().toISOString();
+    for (var a in attribution) payload[a] = attribution[a];
+
+    sendLead(payload).then(function(){
+      track('generate_lead', { quiz_arch: answers.arch, quiz_timeline: answers.timeline, quiz_payment: answers.payment });
+      idx = STEPS.length + 1; sending = false; render(true);
+    }).catch(function(){
+      sending = false; btn.disabled = false; btn.textContent = 'Request my free consultation';
+      formErr.innerHTML = 'Your request didn’t go through. Try again, or call <a href="tel:' + PHONE.tel + '">' + PHONE.display + '</a> and we’ll book you directly.';
+      formErr.hidden = false;
+    });
+  }
+
+  function wire(){
+    body.querySelectorAll('.opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (advancing) return;
+        var s = STEPS[idx], o = s.opts[+b.getAttribute('data-j')];
+        answers[s.key] = o;
+        body.querySelectorAll('.opt').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+        if (!started) { started = true; track('quiz_start'); }
+        track('quiz_step', { quiz_step: idx + 1, quiz_question: s.key, quiz_answer: o });
+        advancing = true;
+        setTimeout(function(){ idx++; advancing = false; render(true); }, reduce ? 0 : 170);
+      });
+    });
+    var back = body.querySelector('.back');
+    if (back) back.addEventListener('click', function(){ saveContact(); idx = Math.max(0, idx - 1); render(true); });
+    var form = document.getElementById('lead-form');
+    if (form) {
+      var ph = form.querySelector('#f-phone');
+      ph.addEventListener('blur', function(){
+        var d = digits(ph.value);
+        if (d.length === 10) ph.value = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+      });
+      form.addEventListener('submit', onSubmit);
+    }
+  }
+
+  /* Every "See if I qualify" button scrolls to the quiz and keeps the visitor's place */
+  document.querySelectorAll('.js-to-quiz').forEach(function(b){
+    b.addEventListener('click', function(){
+      track('cta_click', { cta_location: b.getAttribute('data-loc') || '' });
+      quiz.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      setTimeout(function(){ var q = body.querySelector('.q'); if (q) q.focus({ preventScroll: true }); }, reduce ? 0 : 450);
+    });
+  });
+
+  /* Phone click tracking for every tel: link, including ones added by the quiz */
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+    if (a) track('phone_click', { cta_location: a.getAttribute('data-loc') || '' });
+    var v = e.target.closest && e.target.closest('a[data-yt]');
+    if (v) track('video_click', { video_id: v.getAttribute('data-yt') });
+    var pq = e.target.closest && e.target.closest('a[href="' + PREQUAL_URL + '"]');
+    if (pq) track('prequal_click');
+  });
+
+  /* Sticky mobile bar appears once the quiz and final call to action are out of view */
+  var sticky = document.getElementById('sticky');
+  var finalSec = document.getElementById('final');
+  if ('IntersectionObserver' in window) {
+    var quizVisible = true, finalVisible = false;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.target === quiz) quizVisible = en.isIntersecting; else finalVisible = en.isIntersecting;
+      });
+      sticky.classList.toggle('show', !quizVisible && !finalVisible);
+    }, { threshold: 0.12 });
+    io.observe(quiz); io.observe(finalSec);
+  }
+
+  render(false);
+})();
+</script>
+</body>
+</html>
