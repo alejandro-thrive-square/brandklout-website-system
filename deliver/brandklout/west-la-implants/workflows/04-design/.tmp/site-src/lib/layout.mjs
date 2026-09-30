@@ -98,10 +98,37 @@ export function mobileBar() {
 </div>`
 }
 
+/* ---------- the paid-traffic chrome (lib/lp.mjs): logo, phone, one button. No menu, no drawer. ----------
+   `id="nav"` and `#navProgress` stay: js/90-boot.js drives both on every page. */
+export function lpNav(chrome) {
+  const book = chrome.role === 'landing' ? `
+      <a class="btn btn-gold nav-cta magnetic" href="${chrome.book}"><span>Book a Consultation</span></a>` : ''
+  return `<header class="nav lp-nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap--wide nav-in">
+    <a class="nav-logo" href="${chrome.role === 'landing' ? '#top' : chrome.home}" aria-label="West LA Implants">
+      <img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-phone" href="${SITE.phoneNewHref}">${SITE.phoneNew}</a>${book}
+    </div>
+  </div>
+</header>`
+}
+
+export function lpMobileBar(chrome) {
+  if (chrome.role !== 'landing') return ''
+  return `<div class="mobile-bar">
+  <a class="btn btn-ghost" href="${SITE.phoneNewHref}"><span>Call Now</span></a>
+  <a class="btn btn-gold" href="${chrome.book}"><span>Book a Consultation</span></a>
+</div>`
+}
+
 const GSAP = ['gsap', 'ScrollTrigger', 'ScrollToPlugin', 'ScrollSmoother', 'SplitText', 'Observer']
 
 /** Wrap a rendered body in the shell. `seo` is the object js/80-seo.js reads. */
-export function page({ slug, title, description, body, seo, bodyClass = '' }) {
+export function page({ slug, title, description, body, seo, bodyClass = '', chrome = null }) {
+  const lp = chrome && chrome.type === 'lp'
   const current = slug === 'index' ? '/index.html' : `/${slug}.html`
   const seoB64 = Buffer.from(JSON.stringify(seo), 'utf8').toString('base64')
   return `<!DOCTYPE html>
@@ -111,20 +138,21 @@ export function page({ slug, title, description, body, seo, bodyClass = '' }) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
 <meta name="description" content="${description.replace(/"/g, '&quot;')}">
-<link rel="canonical" href="${seo.canonical}">
+<link rel="canonical" href="${seo.canonical}">${seo.noindex ? `
+<meta name="robots" content="${seo.robots || 'noindex, nofollow'}">` : ''}
 <link rel="icon" href="/media/img/logo-icon-dark.png">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- GSAP is vendored: Instatic's CSP is script-src 'self', so no CDN.
      The runtime registers plugins at the END of <body>, never here. -->
 ${GSAP.map((f) => `<script src="/assets/gsap/${f}.min.js"></script>`).join('\n')}
 </head>
-<body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<body${bodyClass || lp ? ` class="${[bodyClass, lp ? 'is-lp' : ''].filter(Boolean).join(' ')}"` : ''}>
 
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
-${nav(current)}
+${lp ? lpNav(chrome) : nav(current)}
 
-${drawer()}
+${lp ? '' : drawer()}
 
 <div id="smooth-wrapper"><div id="smooth-content">
 <main data-seo="${seoB64}">
@@ -133,11 +161,11 @@ ${body}
 
 </main>
 
-${footer()}
+${lp ? chrome.foot : footer()}
 
 </div></div><!-- /smooth -->
 
-${mobileBar()}
+${lp ? lpMobileBar(chrome) : mobileBar()}
 
 <script src="/assets/site.js"></script>
 </body>

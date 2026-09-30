@@ -51,7 +51,8 @@ const urlFor = (slug) => (BASE_ARG ? `${BASE_ARG}/${slug === 'index' ? '' : slug
 const walk = (d, pre = '') => fs.readdirSync(d).flatMap((e) => (fs.statSync(path.join(d, e)).isDirectory() ? walk(path.join(d, e), pre + e + '/') : e.endsWith('.html') ? [pre + e.replace(/\.html$/, '')] : []))
 let slugs = walk(DIST).sort()
 if (only.length) slugs = slugs.filter((s) => only.includes(s))
-const LIGHT = (s) => /^blog\/|^privacy-policy$|^accessibility$|^thank-you$|^blog$/.test(s)
+// the ads set's consultation (form first) and thank-you (phone first) pages are short by design: scenario 3, 02-build-the-combo.md
+const LIGHT = (s) => /^blog\/|^privacy-policy$|^accessibility$|^thank-you$|^blog$|^ads-landing-pages\/(.*-consultation|thank-you-.*)$/.test(s)
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, protocolTimeout: 300000, args: ['--no-sandbox', '--disable-gpu', '--autoplay-policy=no-user-gesture-required'] })

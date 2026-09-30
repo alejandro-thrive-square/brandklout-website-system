@@ -22,7 +22,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { api, requestForm, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, requestForm, BASE } from '../../tools/instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 /* WEST LA IMPLANTS. The build is `site-src/dist`, and its media is NOT a flat
@@ -138,6 +138,24 @@ const existing = new Map()
   const listed = await api('GET', '/admin/api/cms/media?limit=500')
   for (const a of listed.assets ?? listed.rows ?? listed.items ?? []) {
     if (a.filename) existing.set(a.filename, a)
+  }
+  /* THE LIST IS THE NEWEST 100, WHATEVER `limit` SAYS, and it ignores offset, page, cursor and
+     after (probed 2026-09-30, .tmp/probe-media-list.mjs). Past a hundred assets, everything older
+     looked absent and was uploaded again: 144 duplicates on 2026-09-30, and the 2026-09-24 run had
+     done the same without anyone noticing. So the previous run's map is the second witness: an
+     entry it holds for this host, whose file still answers 200, is in the library. */
+  if (fs.existsSync(OUT)) {
+    const prior = JSON.parse(fs.readFileSync(OUT, 'utf8'))
+    if (prior.base === BASE) {
+      let kept = 0
+      for (const e of Object.values(prior.map ?? {})) {
+        const name = e.uploadedAs
+        if (!name || !e.id || !e.url || existing.has(name)) continue
+        const r = await fetch(BASE + e.url, { method: 'HEAD' }).catch(() => null)
+        if (r && r.ok) { existing.set(name, { id: e.id, publicPath: e.url, filename: name, mimeType: MIME[path.extname(name).toLowerCase()], fromPriorMap: true }); kept++ }
+      }
+      console.error(`library list returned ${existing.size - kept}; ${kept} more recognised from the previous media-map.json`)
+    }
   }
 }
 

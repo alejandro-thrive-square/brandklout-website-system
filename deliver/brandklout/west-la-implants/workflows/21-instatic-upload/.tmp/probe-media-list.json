@@ -1,0 +1,52 @@
+{
+ "keys": [
+  "assets"
+ ],
+ "count": 100,
+ "meta": {},
+ "sampleKeys": [
+  "id",
+  "filename",
+  "mimeType",
+  "sizeBytes",
+  "publicPath",
+  "uploadedByUserId",
+  "createdAt",
+  "altText",
+  "caption",
+  "title",
+  "tags",
+  "width",
+  "height",
+  "durationMs",
+  "dominantColor",
+  "deletedAt",
+  "replacedAt",
+  "folderIds",
+  "blurHash",
+  "variants",
+  "posterPath",
+  "storageAdapterId",
+  "externallyHosted"
+ ],
+ "offset=100": {
+  "count": 100,
+  "firstSame": true,
+  "first": "leslie-story-1280.mp4"
+ },
+ "page=2": {
+  "count": 100,
+  "firstSame": true,
+  "first": "leslie-story-1280.mp4"
+ },
+ "cursor=": {
+  "count": 100,
+  "firstSame": true,
+  "first": "leslie-story-1280.mp4"
+ },
+ "after=_PyxQvd_tGyeVvpiABHeJ": {
+  "count": 100,
+  "firstSame": true,
+  "first": "leslie-story-1280.mp4"
+ }
+}

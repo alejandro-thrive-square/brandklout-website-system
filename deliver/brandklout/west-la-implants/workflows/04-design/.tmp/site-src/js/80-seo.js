@@ -25,7 +25,7 @@
   Object.keys(og).forEach(function (p) { if (og[p] && !head.querySelector('meta[property="' + p + '"]')) put('meta', { property: p, content: og[p] }); });
   var tw = { 'twitter:card': 'summary_large_image', 'twitter:title': seo.title, 'twitter:description': seo.description, 'twitter:image': seo.image };
   Object.keys(tw).forEach(function (n) { if (tw[n] && !head.querySelector('meta[name="' + n + '"]')) put('meta', { name: n, content: tw[n] }); });
-  if (seo.noindex && !head.querySelector('meta[name="robots"]')) put('meta', { name: 'robots', content: 'noindex, nofollow' });
+  if (seo.noindex && !head.querySelector('meta[name="robots"]')) put('meta', { name: 'robots', content: seo.robots || 'noindex, nofollow' });
   if (seo.jsonld && seo.jsonld.length && !head.querySelector('script[type="application/ld+json"]')) {
     var s = document.createElement('script');
     s.type = 'application/ld+json';

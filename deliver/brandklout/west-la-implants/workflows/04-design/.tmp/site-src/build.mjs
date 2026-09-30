@@ -65,7 +65,7 @@ function seoFor(p, chapters) {
   const faq = chapters ? faqJsonLd(chapters) : null;
   if (faq) jsonld.push({ '@context': 'https://schema.org', ...faq });
   if (p.jsonld) jsonld.push(...p.jsonld.map(j => ({ '@context': 'https://schema.org', ...j })));
-  return { canonical, title: p.title, description: p.description, image: ORIGIN + (p.image || '/media/img/still-reception-neon.jpg'), type: p.type || 'website', noindex: !!p.noindex, jsonld };
+  return { canonical, title: p.title, description: p.description, image: ORIGIN + (p.image || '/media/img/still-reception-neon.jpg'), type: p.type || 'website', noindex: !!p.noindex, ...(p.robots ? { robots: p.robots } : {}), jsonld };
 }
 
 /* ---------- 1. the homepage ---------- */
@@ -138,7 +138,7 @@ for (const p of pages) {
   if (seen.has(p.slug)) throw new Error(`duplicate slug ${p.slug}`);
   seen.add(p.slug);
   const seo = p.seo ?? seoFor(p, null);
-  const html = shell({ slug: p.slug, title: p.title, description: p.description, body: p.body, seo, bodyClass: p.bodyClass || '' });
+  const html = shell({ slug: p.slug, title: p.title, description: p.description, body: p.body, seo, bodyClass: p.bodyClass || '', chrome: p.chrome || null });
   const file = path.join(dist, p.slug + '.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, html);

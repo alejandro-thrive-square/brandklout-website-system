@@ -9,7 +9,7 @@ for (const line of fs.readFileSync(path.join(ROOT, '.env'), 'utf8').split(/\r?\n
   const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/)
   if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '')
 }
-const { getSite, getPages, BASE } = await import('../../../../../process/22-instatic-api-sync/insta-api.mjs')
+const { getSite, getPages, BASE } = await import('../../../tools/instatic-api-sync/insta-api.mjs')
 const OUT = path.join(HERE, process.argv[2] || 'backup-live') // e.g. backup-2026-09-15-pre-round-two
 fs.mkdirSync(path.join(OUT, 'html'), { recursive: true })
 const site = await getSite()

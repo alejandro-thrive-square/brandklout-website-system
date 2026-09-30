@@ -1,0 +1,35 @@
+{
+  "_comment": "Scenario 3 campaign manifest for West LA Implants. Every gate in 03-qa-and-launch reads it. Slugs must match workflows/04-design/.tmp/site-src/templates/ads-landing-pages.mjs. formId is the placeholder PENDING on both campaigns (the loader refuses an empty one): Brandklout has not sent the Go High Level forms yet (INTAKE.md, open question 1), so the form gates cannot pass until they do.",
+  "client": "west-la-implants",
+  "platform": "instatic",
+  "origin": "https://west-la-implants-production.up.railway.app",
+  "productionOrigin": "https://west-la-implants-production.up.railway.app",
+  "_origin_note": "The client's domain (westlaimplants.com) is still the WordPress site. The Instatic instance on its Railway host is the only place these pages exist. When the domain (or a subdomain for ads) moves to Instatic, change productionOrigin and every form's thank-you redirect with it.",
+  "prefix": "ads-landing-pages/",
+  "phone": "(310) 692-9316",
+  "tags": [
+    "app.termly.io/resource-blocker"
+  ],
+  "_tags_note": "Termly is the only site tag on this instance today. GTM and a GHL number pool are not installed; add 'googletagmanager.com' and 'number_pool.js' here the day they are.",
+  "campaigns": [
+    {
+      "name": "All-on-6 (ChatGPT Ads)",
+      "asana": "1218513737115127",
+      "landing": "all-on-6",
+      "consultation": "all-on-6-consultation",
+      "thankYou": "thank-you-all-on-6",
+      "formId": "PENDING",
+      "conversion": "NOT SET. No GTM, Google Ads or GA4 tag reaches this instance. ChatGPT Ads conversion method and owner to be confirmed by Brandklout (expected: page view of the thank-you URL)."
+    },
+    {
+      "name": "3-on-6 (Google Search)",
+      "asana": "1218556641026733",
+      "landing": "3-on-6",
+      "consultation": "3-on-6-consultation",
+      "thankYou": "thank-you-3-on-6",
+      "formId": "PENDING",
+      "conversion": "NOT SET. Expected: page view of the thank-you URL as a Google Ads conversion (tag in GTM) or a GA4 key event imported into Ads. Owner: Brandklout ads team, to confirm."
+    }
+  ],
+  "pools": []
+}

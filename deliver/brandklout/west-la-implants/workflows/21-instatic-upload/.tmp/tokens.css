@@ -85,3 +85,15 @@ html { scroll-behavior: auto; }
 @media (hover:none) and (pointer:coarse), (max-width:767px) { .rl-pin { min-height: 0; } }
 .sy-card blockquote { font-variation-settings: 'opsz' 28; }
 .pr2-body h2 { font-variation-settings: 'opsz' 36; }
+
+/* ===== the cascade of every pair the conversion is lossy on — a clamp()/min()/max()
+        value, or a multi-layer background — from 60-lp.css. See push-site.mjs ===== */
+.lp-review blockquote { font-variation-settings: 'opsz' 28; }
+.lp-hero-in { min-height: 100svh; }
+.lp-beat blockquote { font-variation-settings: 'opsz' 28; }
+.lp-quote p { font-variation-settings: 'opsz' 28; }
+.lp-ty-in { min-height: 100svh; }
+.lp-ty-shot { max-height: 74svh; }
+@media (max-width:1023px) { .lp-hero-in { min-height: 0; } }
+@media (max-width:1023px) { .lp-ty-in { min-height: 0; } }
+@media (max-width:1023px) { .lp-ty-shot { max-height: none; } }

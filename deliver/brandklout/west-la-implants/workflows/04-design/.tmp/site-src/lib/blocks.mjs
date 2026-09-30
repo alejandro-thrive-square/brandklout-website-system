@@ -232,6 +232,7 @@ export function gallery(b) {
     ${cards}
   </div>
   ${b.note ? `<div class="wrap"><p class="small ga-note">${b.note}</p></div>` : ''}
+  ${b.actions ? `<div class="wrap ga-actions">${b.actions.map(action).join('')}</div>` : ''}
 </section>`
 }
 

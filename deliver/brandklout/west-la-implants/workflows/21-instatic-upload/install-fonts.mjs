@@ -36,7 +36,7 @@
  *   node install-fonts.mjs           # show what would be installed
  *   node install-fonts.mjs --apply
  */
-import { api, getSite, saveShell, login } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, getSite, saveShell, login } from '../../tools/instatic-api-sync/insta-api.mjs'
 
 const WANTED = [
   // 300 sets every display line, 400 the mid-weight headings, 400italic the

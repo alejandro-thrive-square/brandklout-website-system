@@ -32,6 +32,28 @@ toolkit, each one a thing that would otherwise have gone blind:
 The published `<head>` is still four tags (trap 31); canonical, Open Graph and JSON-LD now
 travel on `<main data-seo>` (base64 JSON) and `js/80-seo.js` writes them at runtime.
 
+## The ads set (2026-09-30)
+
+Six more pages, under `ads-landing-pages/`: two campaigns of landing, consultation and thank you
+(scenario 3; builder `site-src/lib/lp.mjs`, copy `site-src/templates/ads-landing-pages.mjs`, styles
+`css/60-lp.css`, motion `sections/lp.js`). They ride the same chain as every other page: `dist/`
+is walked, so nothing here lists them. What they changed:
+
+| Script | Change |
+| :--- | :--- |
+| `upload-media.mjs`, `set-alt.mjs`, `push-site.mjs`, `install-fonts.mjs`, `.tmp/backup-live.mjs` | import `insta-api.mjs` from **`../../tools/instatic-api-sync/`** (the client's toolkit copy). The old path, `deliver/process/22-instatic-api-sync/`, left every worktree on 2026-09-27 and all five died on `ERR_MODULE_NOT_FOUND` |
+| `upload-media.mjs` | recognises an asset from the previous `media-map.json` when the library list does not show it (trap 43) |
+| `site-src/build.mjs`, `lib/layout.mjs` | a page may carry `chrome: { type: 'lp', … }` (logo, phone, one button; no menu, no drawer, its own foot) and `robots` |
+| `site-src/js/80-seo.js` | writes `seo.robots` when the page sets one (`noindex, follow` on the ads set) instead of the fixed `noindex, nofollow` |
+| `08-qa/.tmp/check-local.mjs` | consultation and thank-you ad pages are short by design and sit on the `LIGHT` list |
+
+The form on the four form-bearing pages is still the prototype (`.lp-proto`): Brandklout has not
+sent the Go High Level forms. With a snippet in `formSnippet` the slot becomes
+`<div class="lp-slot wz-embed" data-wz-embed="auto" data-embed="form-<key>">`, and **this toolkit
+has no `place-embeds.mjs` yet**: copy it from `deliver/process/tools/instatic-site/push/` on main,
+with an `embeds.json`, and make `build-import-input.mjs` empty the marker first (the promoted copy
+lost that step). Read `tools/instatic-embeds/instatic-embeds.md` before touching it.
+
 ## What is different about West LA Implants
 
 Read this before the Execution Steps; five things in this toolkit diverge from the med spa's copy
@@ -223,7 +245,7 @@ no styling at all.
 
 ## The traps
 
-Forty of them now. **1-34 are the siblings', kept verbatim**, and eight of those bit again on this
+Forty-three of them now. **1-34 are the siblings', kept verbatim**, and eight of those bit again on this
 build. 35-40 are this one's. Every single one answered 200, or printed "ok", while doing the wrong
 thing — that is the only thing they all have in common, and it is why the gates exist.
 
@@ -1068,6 +1090,32 @@ then 102px; the review quotes stay at 16px against the authored 17.92px). Conseq
 - Frozen px sizes do not follow the fluid root on resize (see the memory note on gates above 1440).
 
 Removing the widget is the agency's call, not a build change — it is reported, not touched.
+
+### 43. `GET /admin/api/cms/media` returns the NEWEST 100 assets, whatever you ask for
+
+Found 2026-09-30, by a run that printed 144 `ok` lines where it should have printed `skip`.
+`upload-media.mjs` asks the library what it already holds so a re-run uploads nothing twice:
+
+```js
+const listed = await api('GET', '/admin/api/cms/media?limit=500')   // 100 rows, always
+```
+
+`limit=500` is ignored, and so are `offset`, `page`, `cursor` and `after`
+(`.tmp/probe-media-list.mjs`: every one of them returns the same first row). This library passed a
+hundred assets on 2026-09-22, and from then on every file older than the newest hundred looked
+absent and was uploaded again. **The 2026-09-24 run did it too and nobody saw**, because a
+duplicate upload answers 200, the map is rewritten to point at the new copy, the page is
+re-imported against the new URL, and the old asset simply becomes an orphan.
+
+The 144 made on 2026-09-30 were removed the same hour (`.tmp/undo-duplicate-uploads.mjs`: only ids
+the failed run had just minted, and it refuses if one of them is in the map from before the run).
+The orphans the 09-24 run left are still in the library.
+
+**Fix:** the previous `media-map.json` is the second witness. An entry it holds for this host,
+whose file still answers 200, is in the library, listed or not. The run now prints
+`library list returned 100; 144 more recognised from the previous media-map.json`. **Read the
+first line of the upload log: more `ok` than new files is this trap.** The promoted copy on main
+(`tools/instatic-site/push/upload-media.mjs`) has the same `limit=500` line and the same bug.
 
 ### The check: `css-parity.mjs`
 
