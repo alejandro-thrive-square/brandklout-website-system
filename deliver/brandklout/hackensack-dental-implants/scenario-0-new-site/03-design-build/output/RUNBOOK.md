@@ -2,6 +2,64 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-09-30 (evening) · home page published on Instatic staging
+
+Staging: https://hackensack-dental-implants-staging.up.railway.app/ . Production is provisioned and empty.
+Instance details are in the step 01 runbook.
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- One command repeats the whole push: from this step folder,
+  `RAILWAY_LINK_DIR=<dir linked to the staging environment> bash output/code/push-staging.sh > output/push.log 2>&1`.
+  It builds, uploads media, sets alt text, builds and ships the payload, runs Instatic's own
+  importer on the container, writes the site document (replace), sets the editor breakpoints,
+  places the form Embed block, applies the Open Graph settings, publishes and records.
+- The build was made import-safe first: JS hooks are classes (`js-rise`, `js-split`, ...), not
+  `data-*`; no custom property is declared outside `:root`; `head.js` is folded into the one
+  script; keyframes and the reduced-motion rule live in `01-tokens.css`; underlines are borders.
+- Live checks: `output/code/check-staging.mjs` 13/13 (runtime armed with three pins and the
+  smoother, both variable fonts loaded from the media library, form Embed block in place, icon and
+  share image in the head, `noindex`, no canonical, `og:url` on staging). `visual-diff` local versus
+  live: 0.62% at 1440, 0.80% at 390. `compare-live`: the only computed-style differences are the
+  Embed block's own box.
+- Editor breakpoints are the house set: Desktop, 1279, 991, 767, 479.
+
+### What the generic gates said, and why
+
+| Gate | Exit | Reading |
+| :--- | :--- | :--- |
+| `verify-live.mjs` | 1 | Four real findings: links to `/services/single-implant`, `/services/implant-bridges`, `/dr-alan-meskin`, `/about` are 404 because only the home page exists. Its other lines look for West LA's runtime (`wz-ready`, drawer, hero film) |
+| `css-declared-parity.mjs` | 1 | `* { box-sizing }` was not published as written; the computed value on the page is `border-box` (checked). `.form-card .wz-embed` was tree-shaken; the Embed block carries its own box |
+| `check-pages.mjs --base` | 1 | 8 chapters, 3 pins, smoother, one h1. Fails on Turnstile's 401 inside the form frame and on `NOSEO`: there is no canonical on staging by design and no JSON-LD until AEO Schema is configured |
+| `verify-motion-live.mjs` | 1 | West LA specific (Bodoni, Manrope, `#heroFilm`); no pin finding |
+
+### Next
+
+1. Send the staging link for review once the items in `canary-review.md` are ruled on.
+2. Inner pages (the four 404 links above first), then AEO Schema and the production promotion at launch.
+3. After anyone edits in the browser, use `push-site.mjs --update`, not the replace chain.
+
+### Gotchas (toolkit copy, all need fixing on `main`)
+
+- **Seven scripts use `P.WORK` / `P.DIST` without importing `lib/paths.mjs`**: `push/upload-media.mjs`,
+  `push/set-alt.mjs`, `gates/verify-live.mjs`, `css-declared-parity.mjs`, `compare-live.mjs`,
+  `visual-diff.mjs`, `verify-motion-live.mjs`. They die with "P is not defined". Workaround:
+  `node --import ./output/code/preload-paths.mjs <script>`.
+- **`build-import-input.mjs` does not empty `data-embed` markers** (bk-stone's copy does, step 0c),
+  so `place-embeds.mjs` refuses. Workaround: `output/code/empty-embed-markers.mjs` between the build
+  and the ship.
+- **`push-site.mjs` hardcodes the favicon as `media/img/logo-icon-dark.png`** and wants all six GSAP
+  files in `dist/assets/gsap/`. The build names its icon that way and vendors `ScrollToPlugin` and
+  `Observer` although it does not use them.
+- `verify-live.mjs` and `verify-motion-live.mjs` still carry West LA's own assertions.
+- **A background-image underline publishes as a solid block**: size and position are lost in the
+  registry. Use a border.
+- **`process.exit()` after fetch trips a libuv assertion on Node 24 for Windows** and the script
+  reports failure after doing its work; with `set -e` that stops the chain. Set `process.exitCode`.
+- `tools/instatic-api-sync/output/` holds session cookies and had no `.gitignore` in the client
+  copy; one is added.
+- The replace push keeps the site's breakpoints, but `set-breakpoints.mjs` is in the chain anyway.
+
 ## 2026-09-30 (later) · home page rebuilt to the client's chosen concept
 
 Alejandro: the client chose https://hackensack-dental-implants.webflow.io/concept-04-human-transformation;

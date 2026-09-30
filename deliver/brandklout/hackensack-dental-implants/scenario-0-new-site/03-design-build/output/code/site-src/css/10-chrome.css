@@ -14,8 +14,8 @@
 .brand b { font-size: var(--t-xs); letter-spacing: 0.105em; line-height: 1.35; font-weight: 700; }
 .brand small { display: block; color: var(--accent-text); font-size: var(--t-xs); letter-spacing: 0.12em; margin-top: 0.1875rem; }
 .navlinks { display: flex; align-items: center; gap: 1.6875rem; font-size: var(--t-xs); font-weight: 700; }
-.navlinks > a:not(.btn) { white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px; background: linear-gradient(var(--accent), var(--accent)) 0 calc(100% - 0.5rem) / 0 1px no-repeat; transition: background-size 0.4s var(--ease); }
-.navlinks > a:not(.btn):hover, .navlinks > a:not(.btn):focus-visible { background-size: 100% 1px; }
+.navlinks > a:not(.btn) { white-space: nowrap; display: inline-flex; align-items: center; min-height: 44px; transition: color 0.3s ease; }
+.navlinks > a:not(.btn):hover, .navlinks > a:not(.btn):focus-visible { color: var(--accent-text); }
 
 .footer { background: var(--footer); color: #fff; padding: 4.0625rem 0 1.75rem; }
 .footergrid { display: grid; grid-template-columns: 1.35fr 0.8fr 0.8fr; gap: 3.75rem; }

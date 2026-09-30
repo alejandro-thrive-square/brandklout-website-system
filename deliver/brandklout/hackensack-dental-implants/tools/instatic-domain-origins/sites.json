@@ -210,6 +210,27 @@
           "expect": "pokjns4x.up.railway.app"
         }
       ]
+    },
+    {
+      "client": "hackensack-dental-implants",
+      "adminUrl": "https://hackensack-dental-implants-production.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "d22e4303-f42d-4d86-a8c4-4a3dfb1f956f",
+        "service": "Hackensack Dental Implants"
+      },
+      "note": "Provisioned 2026-09-30 name-first via tools/instatic-site/setup/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet: hackensackdentalimplants.com is still the Webflow site. Added on branch bk-hackensack-dental-implants; main's copy needs the same two rows."
+    },
+    {
+      "client": "hackensack-dental-implants-staging",
+      "adminUrl": "https://hackensack-dental-implants-staging.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "d22e4303-f42d-4d86-a8c4-4a3dfb1f956f",
+        "service": "Hackensack Dental Implants",
+        "environment": "staging"
+      },
+      "note": "Railway environment `staging`, created 2026-09-30 with its own volume; PUBLIC_ORIGIN is its platform host until staging.hackensackdentalimplants.com exists at launch. Same login as production."
     }
   ]
 }

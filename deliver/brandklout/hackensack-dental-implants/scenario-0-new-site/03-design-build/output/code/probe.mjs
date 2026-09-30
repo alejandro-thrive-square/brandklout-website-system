@@ -79,10 +79,10 @@ await sleep(600);
 const prog = await pg.evaluate(() => new DOMMatrix(getComputedStyle(document.getElementById('navProgress')).transform).a);
 say(Math.abs(prog - 0.5) < 0.04, 'reading progress tracks the document', `scaleX ${prog.toFixed(3)} at 50%`);
 
-await pg.evaluate(() => { const d = document.querySelectorAll('[data-faq] details')[2]; const st = WZ.smoother.scrollTop(); WZ.smoother.scrollTo(d.getBoundingClientRect().top + st - 400, false); });
+await pg.evaluate(() => { const d = document.querySelectorAll('.js-faq details')[2]; const st = WZ.smoother.scrollTop(); WZ.smoother.scrollTo(d.getBoundingClientRect().top + st - 400, false); });
 await sleep(900);
-await pg.click('[data-faq] details:nth-child(3) summary'); await sleep(500);
-const faq = await pg.evaluate(() => [...document.querySelectorAll('[data-faq] details')].map((d) => d.open));
+await pg.click('.js-faq details:nth-child(3) summary'); await sleep(500);
+const faq = await pg.evaluate(() => [...document.querySelectorAll('.js-faq details')].map((d) => d.open));
 say(faq[2] && !faq[0] && faq.filter(Boolean).length === 1, 'FAQ opens one answer at a time', JSON.stringify(faq));
 say(pg.errors.length === 0, 'no page errors on desktop', pg.errors.join(' | '));
 await pg.close();
@@ -180,7 +180,7 @@ say(m.small.length === 0, 'phone: tap targets at least 44px tall', m.small.join(
 say(m.body >= 16 && parseFloat(m.smallest) >= 11.5, 'phone: body copy at 16px or over, nothing under 12px', `body ${m.body.toFixed(1)}px, smallest ${m.smallest}`);
 say(!m.smoother && m.callbar !== 'none' && m.pins === 0, 'phone: no pins, no smoother, call bar present', `${m.pins} pins`);
 const before = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
-await pg.evaluate(() => { const c = document.querySelector('[data-case]'); window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 60); });
+await pg.evaluate(() => { const c = document.querySelector('.js-case'); window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 60); });
 await sleep(1200);
 const after = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
 say(before !== after && /inset\(0(px)? 0(%|px)?/.test(after.replace('0px 0%', '0 0%')), 'phone: scroll wipes the first case from before to after', `${before} -> ${after}`);

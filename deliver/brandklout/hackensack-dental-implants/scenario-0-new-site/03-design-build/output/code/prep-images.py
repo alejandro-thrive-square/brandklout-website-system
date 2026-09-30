@@ -41,7 +41,7 @@ SLOTS = [
     ("case-3-before.webp", "old-site", "608bd8_before 3.webp", (0, 0.04, 1, 0.94), 1500, 82, "Patient three before implant treatment"),
     ("case-3-after.webp", "old-site", "343c19_after 3.webp", (0, 0.04, 1, 0.94), 1500, 82, "Patient three after implant treatment"),
     ("logo-round.png", "drive", "logos/Hackensack Center Logo Circle-2.png", (0, 0, 1, 1), 192, 0, "Logo, white on black, round"),
-    ("favicon.png", "old-site", "4d4cc3_ hackensack logo.png", (0, 0, 1, 1), 192, 0, "Site icon, as on the current site"),
+    ("logo-icon-dark.png", "old-site", "4d4cc3_ hackensack logo.png", (0, 0, 1, 1), 192, 0, "Site icon, as on the current site. The name is the one push-site.mjs looks for"),
 ]
 
 

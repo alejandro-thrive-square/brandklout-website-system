@@ -30,6 +30,7 @@
   --accent-text: #7c6133;   /* the same gold deepened until 11px labels clear 4.5:1 on every ground */
   --accent-num: #9c7f4f;    /* large numerals: 3:1 and over */
   --muted: #706c64;
+  --muted-beige: #67635b;   /* the same grey on the beige sections, where #706c64 is 4.3:1 */
   --muted-sage: #5f6259;    /* body copy on the sage ground */
   --line: #ded9cf;
   --line-strong: #bbb3a5;
@@ -77,3 +78,9 @@
 @media screen and (max-width: 767px) { :root { --gutter: 1rem; --pad: 5.125rem; } }
 @media screen and (max-width: 479px) { :root { --s-h: 0.7; --s-tx: 1.08; --s-sm: 1.16; --s-xs: 1.16; --s-md: 1.06; } }
 @media screen and (max-width: 419px) { :root { --s-h: 0.76; --s-tx: 1.18; --s-sm: 1.28; --s-xs: 1.3; --s-md: 1.12; } }
+
+/* At-rules travel with the tokens: the registry only holds class and element rules. */
+@keyframes hero-wait { from { visibility: hidden; } to { visibility: visible; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

@@ -22,9 +22,8 @@ for (const d of ['assets/gsap', 'media/img', 'media/video', 'fonts']) fs.mkdirSy
 
 const css = list('css', '.css').map((f) => `/* ==== ${f} ==== */\n${read('css', f)}`).join('\n\n');
 fs.writeFileSync(path.join(dist, 'assets', 'site.css'), css);
-const js = list('js', '.js').filter((f) => f !== 'head.js').map((f) => `/* ==== ${f} ==== */\n${read('js', f)}`).join('\n\n');
+const js = list('js', '.js').map((f) => `/* ==== ${f} ==== */\n${read('js', f)}`).join('\n\n');
 fs.writeFileSync(path.join(dist, 'assets', 'site.js'), js);
-fs.copyFileSync(path.join(here, 'js', 'head.js'), path.join(dist, 'assets', 'head.js'));
 const copyDir = (from, to, keep = () => true) => {
   for (const f of fs.readdirSync(path.join(here, from))) if (keep(f)) fs.copyFileSync(path.join(here, from, f), path.join(dist, to, f));
 };
@@ -84,16 +83,15 @@ for (const file of list('pages', '.html')) {
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${ORIGIN}/media/img/${meta.image}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/media/img/favicon.png">
-<link rel="preload" href="/fonts/newsreader-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/media/img/logo-icon-dark.png">
 <link rel="stylesheet" href="/assets/site.css">
 <!-- GSAP is vendored: Instatic publishes script-src 'self', so no CDN. Plugins are registered at
-     the end of <body> by site.js, never here. head.js only decides whether motion is on. -->
+     the end of <body> by site.js, never here. ScrollToPlugin and Observer are vendored too
+     (push-site.mjs bundles all six) but this build does not use them. -->
 <script src="/assets/gsap/gsap.min.js"></script>
 <script src="/assets/gsap/ScrollTrigger.min.js"></script>
 <script src="/assets/gsap/ScrollSmoother.min.js"></script>
 <script src="/assets/gsap/SplitText.min.js"></script>
-<script src="/assets/head.js"></script>
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
 <body>

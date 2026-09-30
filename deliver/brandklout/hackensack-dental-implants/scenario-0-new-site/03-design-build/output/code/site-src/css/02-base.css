@@ -37,7 +37,7 @@ body {
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: -0.045em;
-  font-size: calc(var(--fs, 4.14rem) * var(--s-h));
+  font-size: calc(4.14rem * var(--s-h));
   color: var(--ink);
 }
 
@@ -62,6 +62,8 @@ body {
 }
 .btn:hover, .btn:focus-visible { transform: translateY(-2px); filter: brightness(1.35); }
 
+/* A border, as the concept draws it. A background-image underline does not survive the Instatic
+   registry: the size and position are dropped and the link publishes as a solid block. */
 .textlink {
   display: inline-flex;
   align-items: flex-end;
@@ -71,10 +73,10 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.75rem 0 0.3125rem;
-  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
-  transition: background-size 0.45s var(--ease);
+  border-bottom: 1px solid currentColor;
+  transition: color 0.3s ease;
 }
-.textlink:hover, .textlink:focus-visible { background-size: 0 1px; background-position: 100% 100%; }
+.textlink:hover, .textlink:focus-visible { color: var(--accent-text); }
 
 /* photographs sit in a window: the window keeps its one rounded corner, the picture moves inside */
 .photo { position: relative; overflow: hidden; }

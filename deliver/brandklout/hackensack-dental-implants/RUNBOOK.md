@@ -11,10 +11,14 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 - **The current site is captured in full** (2026-09-30): 38 pages, 1440 + 390 screenshots, 675 assets,
   a scanned mirror that renders offline, 6 blog posts from the Webflow CMS, URL inventory, email DNS,
   tracking. Read [`docs/migration/old-site-capture.md`](./docs/migration/old-site-capture.md) first.
-- **The client chose concept 04** (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation).
-  The home page is rebuilt to it as a local canary (2026-09-30), not pushed anywhere. Read
-  [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md);
-  open `OPEN-home.html` in that `output/` folder. It waits on six items to confirm.
+- **The home page is on Instatic staging:** https://hackensack-dental-implants-staging.up.railway.app/
+  (not indexed). Built to the concept the client chose, concept 04
+  (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation). Read
+  [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md).
+- **Instatic on Railway**, project `Hackensack Dental Implants`: production
+  https://hackensack-dental-implants-production.up.railway.app (admin works, nothing published) and a
+  `staging` environment with its own volume. Alejandro and Sang can log in on both; three plugins on both.
+  Details: [`scenario-0-new-site/01-client-inquiry/output/RUNBOOK.md`](./scenario-0-new-site/01-client-inquiry/output/RUNBOOK.md).
 - `scenario-0-new-site` is started (from `dd0359ee`); steps 01 and 02 have not been run.
 - `scenario-1-migration` is started (from `dd0359ee`) because the capture step lives there. **The
   scope is still not recorded**: migration to Instatic, or work on the Webflow site, is not decided.
@@ -23,8 +27,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 - Shared drive `0ADqUKcTkH0SxUk9PVA` is readable and holds logos, before and afters, clinical and
   office photos. Nothing is pulled from it yet.
 - Heavy capture files are in R2 ([`assets.tsv`](./assets.tsv)), not on the shared drive.
-- `~/.webzite/.env` has an empty `[hackensack-dental-implants]` section; the worktree `.env` carries
-  `[shared]` only.
+- `~/.webzite/.env` `[hackensack-dental-implants]` has the Railway project id, both Instatic URLs and
+  the password reference. `INSTATIC_BASE_URL` is PRODUCTION: prefix staging explicitly.
 
 ## Next
 
@@ -43,6 +47,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 - **Paths.** The step output folder is ~180 characters deep and Windows stops Python at 260. Capture
   files use short flat names; do not nest deeper under `output/`.
+- The toolkit copy in `tools/instatic-site` needs three workarounds to push (missing `paths` import, embed markers, favicon name). They are scripted in `output/code/push-staging.sh`; the fixes belong on `main`.
 - The design authority is concept 04 on `hackensack-dental-implants.webflow.io`, a different Webflow site from the live one.
 - The step's `mirror-site.mjs`, `export-posts.mjs --scrape` and plain `extract_assets.py` do not
   work on a Webflow site. Use the four scripts in the step's `output/code/`.
@@ -58,6 +63,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-1-migration / 01-old-site-capture | Full capture of the live Webflow site: 38 pages, screenshots, 675 assets, offline mirror (scanned), CMS blog export, URL inventory, email DNS, tracking; R2 backup; content findings written up | `6e6fc2cc`; R2 manifest (1,663 files, 568 MB) in the commit after it |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page canary: eight chapters, four pinned scroll scenes, client photos only, local build; drive pulled; probe 35/35 | `1ef53236`; R2 manifest in the commit after it |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page rebuilt to the client's chosen concept 04 (Newsreader, DM Sans, its sections and copy); client photos; three scroll scenes; double-click preview; probe 27/27 | `073af353`; R2 manifest in the commit after it |
+| 2026-09-30 | scenario-0-new-site / 01-client-inquiry | Railway project, production and staging Instatic, Alejandro and Sang on both, three plugins on both, origins clean | this commit |
+| 2026-09-30 | scenario-0-new-site / 03-design-build | Home page made import-safe, pushed and published on staging; live checks 13/13, visual diff 0.62% | this commit |
 
 ## Version Control
 

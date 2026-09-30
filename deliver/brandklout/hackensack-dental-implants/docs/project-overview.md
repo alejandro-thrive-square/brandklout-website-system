@@ -8,8 +8,8 @@
 | **Scope** | _To confirm_ |
 | **Current site** | https://www.hackensackdentalimplants.com/ on Webflow, site `6a1f4de5739bab24f074660f`. Captured in full on 2026-09-30: [`migration/old-site-capture.md`](./migration/old-site-capture.md) |
 | **Shared drive** | "Hackensack Center for Dental Implants", `0ADqUKcTkH0SxUk9PVA` |
-| **Hosts** | Production `www.hackensackdentalimplants.com`; staging and Railway link _not set up_ |
-| **Platform** | _To confirm_ (the current site is Webflow) |
+| **Hosts** | Live site: `www.hackensackdentalimplants.com` (Webflow). Instatic production: https://hackensack-dental-implants-production.up.railway.app (empty until launch; stays the fallback admin address). Instatic staging: https://hackensack-dental-implants-staging.up.railway.app (the home page, not indexed). Railway project `d22e4303-f42d-4d86-a8c4-4a3dfb1f956f` |
+| **Platform** | Instatic on Railway (instance created 2026-09-30 at Alejandro's instruction); the current site is Webflow |
 | **Style pick** | **Concept 04, "Human Transformation"**: https://hackensack-dental-implants.webflow.io/concept-04-human-transformation (Newsreader + DM Sans, ink `#292824`, gold `#b29568`, sage `#dfe5dc`). Home page built to it: [`canary-review.md`](../scenario-0-new-site/03-design-build/output/canary-review.md) |
 | **Worktree** | `bk-hackensack-dental-implants`, created 2026-09-30 |
 | **Branch base** | `main` at `dd0359ee` |

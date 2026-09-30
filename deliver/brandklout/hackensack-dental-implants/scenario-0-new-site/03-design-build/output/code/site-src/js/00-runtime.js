@@ -19,13 +19,25 @@
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var mark = function (name) { WZ.active.push(name); };
-  var MOTION = root.classList.contains('motion') && !!(window.gsap && window.ScrollTrigger);
+  /* Decided here, not in <head>: Instatic serves one script asset, as a deferred module. */
+  var MOTION = !!(window.gsap && window.ScrollTrigger && window.SplitText) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (MOTION) root.classList.add('motion');
   var refreshSoon = (function () {
     var t;
     return function () { clearTimeout(t); t = setTimeout(function () { if (window.ScrollTrigger) ScrollTrigger.refresh(); }, 150); };
   })();
 
   /* ================= interface ================= */
+
+  /* Staging stays out of Google. Before launch staging is a Railway host that no Cloudflare rule
+     can reach, so the page says it itself. Host-conditional, never a deletion: on production this
+     is a no-op, so the asset is safe to promote. */
+  if (/-staging[.]up[.]railway[.]app$|^staging[.]/i.test(location.hostname)) {
+    var robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = 'noindex, nofollow';
+    document.head.appendChild(robots);
+  }
 
   /* in-page anchors */
   document.addEventListener('click', function (e) {
@@ -40,7 +52,7 @@
   });
 
   /* FAQ: one answer open at a time, as the concept opens with its first */
-  $$('[data-faq]').forEach(function (list) {
+  $$('.js-faq').forEach(function (list) {
     var items = $$('details', list);
     items.forEach(function (d) {
       d.addEventListener('toggle', function () {
@@ -82,8 +94,8 @@
   root.classList.add('is-armed');
 
   /* headlines: lines rise out of a mask; the split redoes itself when fonts or width change */
-  $$('[data-split]').forEach(function (el) {
-    var hero = el.getAttribute('data-split') === 'hero';
+  $$('.js-split').forEach(function (el) {
+    var hero = el.classList.contains('js-split-hero');
     SplitText.create(el, {
       type: 'lines', mask: 'lines', linesClass: 'ln', autoSplit: true,
       onSplit: function (self) {
@@ -99,11 +111,11 @@
   /* ---- hero ---- */
   var hero = $('.hero');
   if (hero) {
-    var frame = $('[data-hero-frame]', hero);
-    var heroImg = $('[data-hero-img]', hero);
+    var frame = $('.js-hero-frame', hero);
+    var heroImg = $('.js-hero-img', hero);
     gsap.fromTo(frame, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.5, ease: 'power4.inOut' });
     gsap.fromTo(heroImg, { scale: 1.22 }, { scale: 1.06, duration: 2.2, ease: EASE });
-    gsap.from($$('[data-rise]', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: 0.25 });
+    gsap.from($$('.js-rise', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: 0.25 });
     gsap.from($('.quote-card', hero), { y: 30, autoAlpha: 0, duration: 0.9, ease: EASE, delay: 1.1 });
     /* leaving: the photograph drifts inside its window */
     gsap.to(heroImg, { yPercent: 7, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
@@ -111,19 +123,19 @@
   }
 
   /* reveals, as the concept has them: 34px up and in */
-  $$('[data-rise]').forEach(function (el) {
+  $$('.js-rise').forEach(function (el) {
     if (hero && hero.contains(el)) return;
     gsap.from(el, { y: 34, autoAlpha: 0, duration: 0.85, ease: EASE, scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
   });
-  $$('[data-stagger]').forEach(function (box) {
+  $$('.js-stagger').forEach(function (box) {
     gsap.from(box.children, { y: 24, autoAlpha: 0, duration: 0.75, stagger: 0.09, ease: EASE, scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
   });
-  $$('[data-wipe]').forEach(function (el) {
+  $$('.js-wipe').forEach(function (el) {
     gsap.fromTo(el, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
   });
-  $$('[data-parallax]').forEach(function (el) {
+  $$('.js-parallax').forEach(function (el) {
     var img = $('img', el);
-    var p = parseFloat(el.getAttribute('data-parallax')) || 0.08;
+    var p = 0.08;
     gsap.set(img, { scale: 1.02 + p * 1.3 });
     gsap.fromTo(img, { yPercent: -p * 50 }, { yPercent: p * 50, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
@@ -131,9 +143,9 @@
 
   /* ---- scene 1: the patient's sentence is written by the scroll, then Eat / Smile / Live arrive ---- */
   var story = $('#story-scene');
-  var quote = story && $('[data-words]', story);
+  var quote = story && $('.js-words', story);
   var words = quote ? SplitText.create(quote, { type: 'words', wordsClass: 'wd' }).words : [];
-  var benefits = story ? $$('[data-lit] > div', story) : [];
+  var benefits = story ? $$('.js-lit > div', story) : [];
   var writeStory = function (tl) {
     return tl
       .fromTo(words, { y: 6 }, { y: 0, color: INK, duration: 0.2, stagger: 0.2, ease: 'none' })
@@ -155,7 +167,7 @@
 
   /* ---- scene 3: scroll is the before and after ---- */
   var gallery = $('#results-scene');
-  var cases = gallery ? $$('[data-case]', gallery) : [];
+  var cases = gallery ? $$('.js-case', gallery) : [];
   var wipe = function (tl, c, at) {
     return tl
       .fromTo($('.result__after', c), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1, ease: 'none' }, at)

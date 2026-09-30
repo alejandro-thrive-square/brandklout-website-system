@@ -1,23 +1,24 @@
-/* Motion states. Nothing is hidden unless <html> carries .motion (GSAP loaded, no reduced-motion
-   request). The hero has a fail-safe so it shows itself if the runtime never arms. Reduced motion
-   is a branch: no .motion, no pins, nothing hidden. */
+/* Motion states. Three rules:
+   1. The scroll scenes hide nothing unless <html> carries .motion, which the runtime sets only when
+      GSAP loaded and the visitor has not asked for reduced motion.
+   2. The hero cannot wait for a class: on Instatic the script is a deferred module, so the page
+      paints first. Its pieces hold back for 1.4s with a CSS animation and then show themselves;
+      the runtime arms sooner and takes over. With no script the hero still appears.
+   3. Reduced motion is a branch: no .motion, no pins, nothing hidden, and the hero never waits. */
 
-.motion .hero [data-rise], .motion .hero h1, .motion .hero .quote-card { visibility: hidden; animation: failsafe 0s 4s forwards; }
-.motion.is-armed .hero [data-rise], .motion.is-armed .hero h1, .motion.is-armed .hero .quote-card { visibility: visible; animation: none; }
-@keyframes failsafe { to { visibility: visible; } }
+@media (prefers-reduced-motion: no-preference) {
+  .hero .js-rise, .hero .js-split, .hero .quote-card { animation: hero-wait 1.4s step-end both; }
+  .is-armed .hero .js-rise, .is-armed .hero .js-split, .is-armed .hero .quote-card { animation: none; }
+}
 
 /* SplitText line masks: room for descenders under a 0.98 line-height */
 .ln-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }
 
 /* the patient's sentence is written by the scroll: unlit words are already readable, then fill */
-.motion [data-words] .wd { color: #77736b; }
+.motion .js-words .wd { color: #77736b; }
 
 .motion .photo img, .motion .doctor-card img { will-change: transform; }
 
 /* scroll drives the before and after: each case starts on the "before" */
 .motion .result__after { clip-path: inset(0 100% 0 0); }
 .motion .result__line { left: 0; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-}

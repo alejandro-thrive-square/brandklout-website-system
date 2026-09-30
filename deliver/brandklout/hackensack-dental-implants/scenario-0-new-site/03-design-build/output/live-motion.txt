@@ -1,0 +1,33 @@
+
+=== 1440  triggers 53, pins story-scene, process-scene, results-scene
+    sections active: smoother, split, hero, reveals, story, process, results
+    fonts loaded: Newsreader, DM Sans  (23 declared)
+    story-scene   0.02  y=1033   nav="" lit=0/0 answerX=null clip=null stories=[]
+    story-scene   0.35  y=1360   nav="" lit=0/0 answerX=null clip=null stories=[]
+    story-scene   0.65  y=1657   nav="" lit=0/0 answerX=null clip=null stories=[]
+    story-scene   0.98  y=1983   nav="" lit=0/0 answerX=null clip=null stories=[]
+    process-scene 0.02  y=4544   nav="" lit=0/0 answerX=null clip=null stories=[]
+    process-scene 0.35  y=4931   nav="" lit=0/0 answerX=null clip=null stories=[]
+    process-scene 0.65  y=5282   nav="" lit=0/0 answerX=null clip=null stories=[]
+    process-scene 0.98  y=5668   nav="" lit=0/0 answerX=null clip=null stories=[]
+    results-scene 0.02  y=6729   nav="" lit=0/0 answerX=null clip=null stories=[]
+    results-scene 0.35  y=7382   nav="" lit=0/0 answerX=null clip=null stories=[]
+    results-scene 0.65  y=7976   nav="" lit=0/0 answerX=null clip=null stories=[]
+    results-scene 0.98  y=8629   nav="" lit=0/0 answerX=null clip=null stories=[]
+
+screenshots -> C:\Users\ACER\orca\workspaces\Brandklout Website System\bk-hackensack-dental-implants\deliver\brandklout\hackensack-dental-implants\scenario-0-new-site\03-design-build\output\screenshots\live
+
+FAIL
+  [1440] "Bodoni Moda" is declared but never loaded — the page is rendering in a fallback
+  [1440] "Manrope" is declared but never loaded — the page is rendering in a fallback
+  [1440] #heroFilm is not on the page
+  [1440] 9 console/page error(s):
+      401 https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4341f7c4cb5b08a/1790780697776/d80c0b42140722102422114c7b24e3e128a956847fcd8b635c01ca48930ee155/4kJHgqsXuNlvHtmyXTqAwAGeGeAfESM9QAtNfWsdXA0-1790780697-1.3.1.1-HizDG4wZ8Cl.g4s3wg4bwUL1MydE2D6JPn9s6APDc9FH2BOSCdFw740r1z9Fmk59eP7DBW2kPTJl7pRZiMFrV61LLkkG.P7H4MwegR3bAKaVFaZNJJBEpc89.3Bvdgzu1NI33Kxe0jBZpn5ieLCWq5JlpCxro5Z5FoNKuSxzsmvfE6YyDcUvRlSpwJAiv6QPRXXx44gthLURq7cmYHuQ5bV4xzqxaac1zP0y35hvTKMQBgzBrWv4PfnDiqVK6JuNNnsBJ.eWcaCiwjLJGLhm43JGAxDbzXEa1Ymx_tQmeHtRk.wNZSeJoURu5qPJFA8.6nYUvB3LchV22HhpbIOOiYFmt1rkTYnRBUmzdbEi0lZNZNzhdeF4aLmtPlIxuYsr39kvkmO2.BBcKuHNr.ZuA52Yr4YrZGaPE8.tp.t2iTV.09.bF5a0YeLuXyLYLtvhT4NKITObGcC71i.xGXeNeYk.oWUw6.nvflO.st9zI1huKhd9.t8v.dE.8VNpjtC53Tqmn7l52NIOU4KsS6z_QRGLb..W45JyIBmnHe0LJLBJVJA_eo6eHmLSlY4c5aaqS9BaK42QOckEq0tat.uArW8zs3svo41CFENsmF3Q6Xqn4_fK4ITVhK.a..LZAa_xfA96HP95wKuMdeW8u81XBiVGgZ7umV1Q23bkBoRR1Ezk4kaWF7IgF1h5UMEoCpTNjpc.Gxv_1Fj8tX7jYpu2ass2ZqBeS.m4j.tTW4IxwERPl1OEo1uFx9sPMJ9ZGQ60vg8E2_3gE.wWwsaWMz7z_HcFhWKF_MXmlTg8MSyGbYjzP7qP6.RkDbY7_TF9i.ps
+      401 https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4341f7cae6ab08a/1790780697820/aa3502f3b3ec510cc53fc273e4c3754f1dd4998365a9ae29e493be92bad6ac37/ftfrAdcDn.kEU8RfvUq4QoXbmK5Z2ndwOVE5kXpFzrg-1790780697-1.3.1.1-DJTCFMmsx_CLNx9ueQNMxBkcRnG22RrcJ5XO1e5KiNaMkAs4J6cO.al2s_troJjZSvwDZQG3vfVCq5mGUPGcZg3D7p99cIZVdu_6z7PhyRDs8t.Ai1_TmddXHv9pmz6AC6A6zkVrwezVD5T.sGVQfr1J29OvzVu91DOWn2vG0uy5utQIPHRmhcGmIdEXcWtYDeUoQ9jaUWW5mVSqG9M.JWFJcUO844cDHtjwoG_mekiv63r63GlfipMOsr0JSKUwMxiZnCuGwVTuinKUw8Eveao3pLTMhdLiaOuQ8FYJe9hwS1FVg7ZkxX.6YZmvd.YON2mK9ox6cA9ngy3sD0h4nORl.zqsQtQbc1ZNO0Nciacq7HxSncZDGh7Ml.OHjIlGCWwhbUR2JRjq__D3iUHtbGI.0ye8k.2RP8oU40usr92BxpQD2FsSnSUcqQImR3zvDyEkDr_gQUPY.g2CeOiTH4xmb6evrkZsh5.n.fXIAw2qYCH9LNUqCkDQlzW0qmybbej31YcOrrqdJtFZlYM5GW7rlAfBuxZHayT71FD.OdGtrKZRNg7ON4ifjKeQ14NAEmLSJd3L2c2Iy2nOUFK30OTmY8P2t7jMxJG2Cj6Nr32YOf1Y4Q.sXr2JxtDVldvELNuXr8W4itO.MKc25gmsUO9XTmITuwPyXUUwICFRe6oFAF0bZcLBlhnHbPQKR1yb_Klx3myHbhTqWEAVbFR6a2xrDafXH1DSLAkFLpza_feWRzjH19zn8ehkKxGHJc90syjAmpxyufhOwOuqzLRPPuWE3uqimGwJQkBXdYxM3_LJV18YszpiG.mmaLxphwVz
+      error %c%d font-size:0;color:transparent NaN
+      error %c%d font-size:0;color:transparent NaN
+      error %c%d font-size:0;color:transparent NaN
+      error %c%d font-size:0;color:transparent NaN
+      401 https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/pat/a4341fcbfd9bb08a/1790780710604/178287e5fc900d642beb6152707ef797fef25359417c1e8f31748f050a42fc77/p3mtbsvqEaAK6l577xsW4SYR7ehwSDO5ky9WnZy84TY-1790780710-1.3.1.1-xR3LXy.VLKo0tl7hbvqCZFvFCg1nEFhypMEfuvZ_JX760FeSn2XAWqYsX16EQRutw9rZnb7mpvMansnBBWU5uD4eh6ffWyBDPk0v9C4m5CKYJGY4D8mutJl2BPpgDG2vGeameqfujcmZLSzTbOEWy7IzEcKq7qwUuEQ8_gPselVe2u3Om2jc8LAwxwDz27n_wPQ4ZNRxmeALYb5LP9g8On2nXaM9zw8zYeL06.KYceDrYJQXxddXhpoxYz9s2copa.9SQbF7Mv5umnDmykvRIcCsDFeSMm2T_VMSOV78PgF1nCc1LEibxeoaaYcl7fCHak2QB65e6V_TAMaXOMtcvzB3nasSJ1UIC2uJBxSDd0Tpav8XswB0hBeNPI4Cf6ZRdXDzl8K2tr5d1DOX6v81ypUOjuvEFlk438AQ_R4_jHON8.5oCpJqTaBP527T4aiUctdMv1o63ByExxyViw7rAL9nN.7IzzTARuWUMREQT_mjikolV7hpm9B.SPXmfGStNqEy79NfxfsfGBkvuIkEdY7yIdbRFBOkhj2aqvQHoqhlZ8Am7z8uwG9KFvoHylCABYo8tWTUscDAzJmUuX12jL42QO.1tZe5rRjR_6VQeJVud2B_SgNJt3Nqr4fsYp7sWLIRiJCsZqNsYuAeSSqd9ZXTIxkaPdIxM5WjxK2OR_Xo8E_9EfvcdAoqhASr96a66i73jEEBu7riZVISpbvb..zAiFp7yXrU_jci7c.XWpT3iJlo9dGlQ5o8rC0xCOvvTqM8uREQ4FcfhZBLy3FM3KfTV4ymS8e8HGOokRu6Tahk80mzFDblW7igD4IVUiGT
+      error %c%d font-size:0;color:transparent NaN
+      error %c%d font-size:0;color:transparent NaN
