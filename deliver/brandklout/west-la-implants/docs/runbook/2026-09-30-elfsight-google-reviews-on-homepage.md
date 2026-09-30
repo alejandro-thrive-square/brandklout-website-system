@@ -1,6 +1,6 @@
 # 2026-09-30 — Elfsight Google Reviews on the homepage, published seq 25
 
-**Commit:** see the client `RUNBOOK.md` row (this file is committed with it).
+**Commit:** `ba81ca90` (the run); this runbook row in the follow-up docs commit.
 Brief: [`docs/tasks/2026-09-30-google-reviews-widget.md`](../tasks/2026-09-30-google-reviews-widget.md).
 
 Backed up first at **seq 24**: API snapshot `21-instatic-upload/.tmp/backup-2026-09-30-pre-reviews/`

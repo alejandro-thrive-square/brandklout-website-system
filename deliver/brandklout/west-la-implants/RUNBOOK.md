@@ -39,7 +39,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-09-30 | 3 · 01 campaign intake | Two Asana tasks pulled, `combo.json` and `INTAKE.md`, patient film transcripts found | `b9b96a5c` |
 | 2026-09-30 | 3 · 02 build the combo | Six pages built in `site-src`, pushed and published seq 24; upload chain repaired (imports, media list) | `b9b96a5c` |
 | 2026-09-30 | 3 · 03 QA and launch | Live gates clean except forms and conversion, which wait on Brandklout; three new checks | `b9b96a5c` |
-| 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | this commit |
+| 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | `ba81ca90` |
 
 ## Version Control
 
