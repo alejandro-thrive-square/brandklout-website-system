@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-09-30 | 2026-09-30 — Google reviews widget (Elfsight c92f78df) placed on STAGING in the three review sections; it is a floating badge, so production waits on a layout change in Elfsight — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |
+| 2026-09-30 | 2026-09-30 — Google reviews widget (Elfsight c92f78df) placed on STAGING in the three review sections; it is a floating badge, so production waits on a layout change in Elfsight (`cbf3bacf`) — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |
 | 2026-09-24 | 2026-09-24, later — Display number (817) 631-4619 on both hosts (54 pages); pool swap proven without consent — carries **gotchas** | [`2026-09-24-display-number-631-4619-pool-proven.md`](./2026-09-24-display-number-631-4619-pool-proven.md) |
 | 2026-09-24 | 2026-09-24 — DNI pool not blocked by consent; its GHL swap list lacks (817) 674-2061; med spa has no pool — carries **gotchas** | [`2026-09-24-dni-pool-not-swapping-diagnosed.md`](./2026-09-24-dni-pool-not-swapping-diagnosed.md) |
 | 2026-09-23 | 2026-09-23, latest — The display number is (817) 674-2061 (SEO/NAP) on both hosts; the production pool swaps it — carries **gotchas** | [`2026-09-23-display-number-674-2061.md`](./2026-09-23-display-number-674-2061.md) |

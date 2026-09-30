@@ -105,4 +105,4 @@ since April 2026 and was embedded on the sister practice's site instead of this 
 
 ## Version Control
 
-Tracked. Committed with the work it describes, on `bk-stone`; not pushed, not merged.
+Tracked. Committed with the work it describes as `cbf3bacf` on `bk-stone`; not pushed, not merged.
