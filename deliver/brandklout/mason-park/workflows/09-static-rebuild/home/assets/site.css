@@ -5214,6 +5214,18 @@ html:not(.el-ready) .el-finder_panel img:first-child { opacity: 1; transform: no
 .el-deck_score-label { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); margin-right: auto; }
 @media (max-width: 767px) { .el-deck_card { top: 5.5rem; } .el-deck_card.is-photo { aspect-ratio: 4 / 3; } }
 
+/* --- the live reviews (rv-) ----------------------------------------------
+   The practice's own Google reviews widget (Elfsight All-in-One 32926aff, the
+   one from the old site), where the homepage deck and the reviews wall were
+   (2026-09-30). On Instatic the slot is a brandklout.embed-origins Embed and
+   comes back as `.rv-embed.wz-embed` with the widget inside; locally it is an
+   empty panel that says so. The min-height holds the chapter open until
+   platform.js boots, so the scenes below do not jump. */
+.rv-embed { display: block; width: 100%; min-height: 26rem; }
+.rv-embed.wz-embed > * { width: 100%; max-width: 100%; }
+.rv-embed:not(.wz-embed) { display: grid; place-content: center; text-align: center; border: 1px solid var(--rule); background: var(--panel); font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); }
+.rv-embed:not(.wz-embed)::before { content: "Google reviews, live from the practice's profile"; }
+
 /* --- the pair -------------------------------------------------------------
    Two half-bleed photographs, one from each edge, and a line between them. */
 .el-pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; overflow: clip; background: var(--bg); }

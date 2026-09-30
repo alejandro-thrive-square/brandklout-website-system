@@ -5,6 +5,17 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Google reviews widget - 2026-09-30
+
+**The practice's own Elfsight All-in-One Reviews widget (`32926aff`, the other Elfsight account, adult listing
+#104A) is live on both instances where the static reviews were: the homepage deck and the reviews page wall**
+([`runbook/2026-09-30-google-reviews-widget.md`](./runbook/2026-09-30-google-reviews-widget.md)). It is a
+`brandklout.embed-origins` Embed, snippet mode, **never with `data-elfsight-app-lazy`**. The local HTML carries the
+slot (`.rv-embed[data-elfsight-reviews]`) and `place-ad-embeds.mjs` builds the Embed, so a chain run keeps it;
+`.tmp/add-elfsight-reviews.mjs --apply --publish` puts it back on the live rows if a page is rebuilt without the
+slot. The service pages' and ad pages' topic-matched chips stay static. **Open:** "1,037 Google reviews" is a
+fixed, stale number in 11 other places (Google says 1,084); the registry row's `onSite` is still empty.
+
 ## Old domains redirect - 2026-09-25
 
 **`bestdentistinkatytx.com` and `pediatricdentistkatytx.com` send every old link to its new page**

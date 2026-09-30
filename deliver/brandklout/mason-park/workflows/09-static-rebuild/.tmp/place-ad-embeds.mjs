@@ -4,7 +4,8 @@
  *
  * It used to add the GHL number-pool scripts to all six campaign pages; since 2026-09-25
  * the pool is site-wide on production (SITE_WIDE_POOL), so it places none.
- * No Elfsight script is copied: the redesign uses the site's own proof chapter.
+ * Since 2026-09-30 it also turns the `data-elfsight-reviews` slot on / and /patient-reviews
+ * into the practice's Google reviews widget (elfsight-snippet.mjs).
  *
  * Since 2026-09-25 the forms are the client's own (site-forms.json, copied
  * verbatim from 01-content-intake/.tmp/scripts.html) and each slot is filled
@@ -18,6 +19,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { WIDGET_ID, MODULE_ID as REVIEWS_MODULE_ID, embedProps } from "./elfsight-snippet.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGES_FILE = path.join(HERE, "converted-pages.json");
@@ -26,6 +28,7 @@ const SITE_FORMS_FILE = path.join(HERE, "site-forms.json");
 const CONTACT_SLUG = "/contacts";
 const TRACKING_FILE = path.join(HERE, "..", "..", "10-lp-instatic", ".tmp", "out", "tracking.json");
 const MODULE_ID = "brandklout.embed-origins.embed";
+const REVIEW_SLOTS = 2; // / and /patient-reviews
 // The six routes live under /ads-landing-pages/ since 2026-09-18. Workflow 10
 // still keys its form and tracking records by the bare production slug, so
 // the last path segment is what looks them up.
@@ -136,6 +139,24 @@ else {
   else { contact.body.nodes[slots[0].id] = toEmbed(slots[0], form); contactPlaced++; }
 }
 
+// The live Google reviews (2026-09-30): the practice's own Elfsight widget where the
+// homepage deck and the reviews wall were. The local slot is
+// `<div class="rv-embed" data-elfsight-reviews="<id>">`; it becomes an Embed here so a
+// re-import keeps the widget (add-elfsight-reviews.mjs does the same to the live rows).
+let reviewsPlaced = 0;
+for (const page of pages) {
+  for (const slot of Object.values(page.body.nodes).filter((n) => n.props?.htmlAttributes?.["data-elfsight-reviews"])) {
+    const id = slot.props.htmlAttributes["data-elfsight-reviews"];
+    if (id !== WIDGET_ID) { problems.push(`${page.slug}: reviews slot carries ${id}, not ${WIDGET_ID}`); continue; }
+    page.body.nodes[slot.id] = {
+      id: slot.id, moduleId: REVIEWS_MODULE_ID, props: embedProps(), breakpointOverrides: {},
+      children: [], classIds: slot.classIds ?? [], parentId: slot.parentId ?? null,
+    };
+    reviewsPlaced++;
+  }
+}
+if (pages.some((p) => p.slug === "/") && reviewsPlaced !== REVIEW_SLOTS) problems.push(`expected ${REVIEW_SLOTS} reviews slots (/ and /patient-reviews), placed ${reviewsPlaced}`);
+
 const adPages = pages.filter((p) => AD_SLUGS.has(p.slug));
 if (adPages.length !== 6) problems.push(`expected six converted ad pages, found ${adPages.length}`);
 if (formsPlaced !== 4) problems.push(`expected four forms, placed ${formsPlaced}`);
@@ -161,7 +182,7 @@ if ([...idsByCampaign.values()].map((ids) => [...ids][0]).filter(Boolean).length
 }
 
 if (!problems.length) fs.writeFileSync(PAGES_FILE, JSON.stringify(pages, null, 2));
-console.log(`${formsPlaced} ad forms, ${contactPlaced} contact form, ${trackingPlaced} tracking blocks, ${problems.length} problems`);
+console.log(`${formsPlaced} ad forms, ${contactPlaced} contact form, ${trackingPlaced} tracking blocks, ${reviewsPlaced} reviews widgets, ${problems.length} problems`);
 for (const problem of problems) console.log(`  PROBLEM ${problem}`);
 process.exitCode = problems.length ? 1 : 0;
 

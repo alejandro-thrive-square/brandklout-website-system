@@ -1,11 +1,12 @@
 # Runbook index
 
-24 runs, newest first. Each line is one file in this folder.
+25 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-30 | 2026-09-30 — The practice’s own Google reviews widget (Elfsight All-in-One 32926aff, no lazy attr) where the homepage deck and the reviews wall were; slot in the local HTML so the chain keeps it; staging + production, verified in Chrome — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |
 | 2026-09-25 | 2026-09-25 — The old domains redirect: bestdentistinkatytx.com map rebuilt and redeployed (articles to /blog, 1,373 URLs pass); pediatricdentistkatytx.com already covered by the kids Workers (172 paths pass) — carries **gotchas** | [`2026-09-25-old-domains-redirect.md`](./2026-09-25-old-domains-redirect.md) |
 | 2026-09-25 | 2026-09-25 — Share images fixed: every page and article shares a 1200x630 version under 300 KB with size tags (open-graph 1.2.3); both instances — carries **gotchas** | [`2026-09-25-share-images-1200x630.md`](./2026-09-25-share-images-1200x630.md) |
 | 2026-09-25 | 2026-09-25 — Open Graph, meta descriptions, canonicals and the Dentist schema on every page (open-graph 1.2.2: articles, description insert, seoTitle match); both instances — carries **gotchas** | [`2026-09-25-open-graph-and-schema.md`](./2026-09-25-open-graph-and-schema.md) |
