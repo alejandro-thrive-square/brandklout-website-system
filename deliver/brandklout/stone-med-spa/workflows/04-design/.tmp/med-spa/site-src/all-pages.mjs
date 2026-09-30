@@ -46,6 +46,17 @@ const WIDTHS = [390, 992, 1024, 1280, 1440];
 const EMBED_HOSTS = [
   "https://link.msgsndr.com/",
   "https://api.leadconnectorhq.com/",
+  /* The Elfsight Google Reviews widget on / and /results (2026-09-30): its
+     loader, its app bundle, its boot and reviews APIs, and the reviewers'
+     Google photos. It renders in OUR document, not in a frame, so every host
+     it touches has to be named. */
+  "https://elfsightcdn.com/",
+  "https://static.elfsight.com/",
+  "https://universe-static.elfsightcdn.com/",
+  "https://core.service.elfsight.com/",
+  "https://service-reviews-ultimate.elfsight.com/",
+  "https://phosphor.utils.elfsightcdn.com/", // its image proxy for the reviewers' Google photos
+  "https://lh3.googleusercontent.com/",
 ];
 
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webp": "image/webp", ".jpg": "image/jpeg", ".png": "image/png", ".avif": "image/avif", ".svg": "image/svg+xml", ".woff2": "font/woff2" };

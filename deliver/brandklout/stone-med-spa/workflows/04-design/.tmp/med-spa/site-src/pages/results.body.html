@@ -5,15 +5,15 @@
      the "awaiting written consent" status and the consent FAQ are gone. When
      the new photos arrive the plates fill; nothing around them moves.
 
-     THE REVIEWS, 2026-09-15 (WMA web dev brief, section 6). The placeholders
-     are gone. The practice's own Google listing (cid 5029391273850887414,
-     separate from Stone Surgical Arts) had five reviews, all five stars. Two
-     are quoted here, verbatim and cut only at a sentence end (Google truncates
-     both). The other three are by Summer Takkouch (the client), "Mona Stone"
-     and "Martin Stone"; an owner's or family member's review is not a patient
-     testimonial, so they are left out. No reviewer names until the client
-     says which ones may be published. Going forward, a review that names a
-     treatment belongs on that treatment's page too (Botox on /botox). -->
+     THE REVIEWS, 2026-09-30. The practice's own Google listing (cid
+     5029391273850887414, #110B — separate from Stone Surgical Arts at #110)
+     now shows LIVE through the Elfsight widget in elfsight-reviews.mjs: every
+     review, with the reviewer's Google name and photo, as Google publishes
+     them. The two hand-quoted, anonymised excerpts of 2026-09-15 (and the
+     rule that no reviewer is named until the client says so) went with the
+     rail they sat in; the widget shows what the listing shows, which includes
+     the owner's and family members' own five-star reviews. If the client wants
+     those hidden, it is a filter inside the Elfsight editor, not a site change. -->
 <section class="section_cover cover_component">
   <figure class="cover_media" data-parallax="10">
     <img src="assets/p-face-cat.webp" alt="" width="1400" height="2100" fetchpriority="high">
@@ -30,8 +30,10 @@
   </div>
 </section>
 
-<!-- 01 THE WALL. Reviews as a rail you drag, at the size of a statement. -->
-<section class="section_wall wall_component" data-drag-scope>
+<!-- 01 THE WALL. The practice's Google reviews, live (Elfsight, 2026-09-30).
+     The drag rail of two quotes and two portraits it replaces is in git before
+     that date; the link to the listing itself moved up beside the heading. -->
+<section class="section_wall wall_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large is-bottom-tight">
@@ -40,36 +42,11 @@
             <p class="eyebrow">In their words</p>
             <h2 class="heading-style-h2" data-split>From our <em class="text-style-display-accent">patients</em>.</h2>
           </div>
-          <div class="wall_arrows">
-            <button class="button is-icon" type="button" data-drag-prev aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="button is-icon" type="button" data-drag-next aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
+          <a class="button is-link" href="https://www.google.com/maps?cid=5029391273850887414" rel="noopener">Google reviews <span class="button_arrow">&rarr;</span></a>
         </div>
+        <!-- The live reviews: see the note on the same slot in home.body.html. -->
+        <div class="wall_reviews" data-embed="google-reviews">{{GOOGLE_REVIEWS}}</div>
       </div>
-    </div>
-  </div>
-  <div class="padding-global">
-    <div class="wall_rail" data-drag data-cursor="Drag" data-overflow-ok>
-      <article class="quote_card">
-        <p class="quote_text">&ldquo;Had a really great time getting botox, hydrafacial treatment, and microneedling. The team is super knowledgeable and timely, which made the process smooth. Special shout out to Abby and Brooke who were so caring, making me feel at ease.&rdquo;</p>
-        <p class="quote_meta">Google review &middot; Botox, HydraFacial, microneedling</p>
-      </article>
-      <article class="quote_card is-photo">
-        <img src="assets/m-mature-smile.webp" alt="" width="900" height="1200" loading="lazy">
-      </article>
-      <article class="quote_card">
-        <p class="quote_text">&ldquo;I was really impressed! This place shows a genuine dedication to patient care that's hard to find. From the initial consultation to the final botox treatment, I felt completely taken care of.&rdquo;</p>
-        <p class="quote_meta">Google review &middot; Botox</p>
-      </article>
-      <article class="quote_card is-photo">
-        <img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy">
-      </article>
-      <article class="quote_card is-link">
-        <a class="quote_link" href="https://www.google.com/maps?cid=5029391273850887414" rel="noopener">
-          <span class="quote_text">Read every review on Google.</span>
-          <span class="button is-link">Google reviews <span class="button_arrow">&rarr;</span></span>
-        </a>
-      </article>
     </div>
   </div>
 </section>

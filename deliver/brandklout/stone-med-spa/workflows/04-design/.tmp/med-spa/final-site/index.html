@@ -835,10 +835,11 @@
 </section>
 
 <!-- 05 THE WORDS. The one dark chapter in the middle: a sentence whose last
-     word keeps changing, and a rail of reviews you drag. The two reviews are
-     verbatim excerpts from the practice's own Google listing (2026-09-15), see
-     results.body.html for which were left out and why. -->
-<section class="section_words words_section" data-theme="dark" data-drag-scope>
+     word keeps changing, and the practice's Google reviews, live. Until
+     2026-09-30 this was a rail of two hand-picked quotes you could drag (see
+     git before that date); the Elfsight widget now shows whatever the listing
+     shows, reviewer names and photos included. Widget: elfsight-reviews.mjs. -->
+<section class="section_words words_section" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
@@ -858,30 +859,18 @@
         </div>
         <div class="words_rail-head">
           <p class="eyebrow">In their words</p>
-          <div class="words_arrows">
-            <button class="button is-icon" type="button" data-drag-prev aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <button class="button is-icon" type="button" data-drag-next aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          </div>
+          <a class="button is-link" href="results.html">Results &amp; reviews <span class="button_arrow">&rarr;</span></a>
         </div>
+        <!-- The live reviews. What sits inside the slot is Elfsight's paste, inlined
+             by build-site.mjs; on Instatic the slot's children are ONE Embed block
+             carrying the same snippet (push-site.mjs / add-elfsight-reviews.mjs),
+             because the importer strips a raw <script>. The widget draws its own
+             title, rating, cards and arrows; the white panel is ours, so its dark
+             text stays readable on this dark chapter. -->
+        <div class="words_reviews" data-embed="google-reviews"><!-- Elfsight Google Reviews | Westlake Medical Aesthetics (#110B) -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-73fff4ec-b68f-4c97-af8a-7b022584e166"></div></div>
       </div>
-    </div>
-  </div>
-  <div class="padding-global">
-    <div class="words_rail" data-drag data-cursor="Drag" data-overflow-ok>
-      <article class="quote_card">
-        <p class="quote_text">&ldquo;Had a really great time getting botox, hydrafacial treatment, and microneedling. The team is super knowledgeable and timely, which made the process smooth. Special shout out to Abby and Brooke who were so caring, making me feel at ease.&rdquo;</p>
-        <p class="quote_meta">Google review &middot; Botox, HydraFacial, microneedling</p>
-      </article>
-      <article class="quote_card">
-        <p class="quote_text">&ldquo;I was really impressed! This place shows a genuine dedication to patient care that's hard to find. From the initial consultation to the final botox treatment, I felt completely taken care of.&rdquo;</p>
-        <p class="quote_meta">Google review &middot; Botox</p>
-      </article>
-      <article class="quote_card is-link">
-        <a class="quote_link" href="results.html">
-          <span class="quote_text">Read more reviews.</span>
-          <span class="button is-link">Results <span class="button_arrow">&rarr;</span></span>
-        </a>
-      </article>
     </div>
   </div>
 </section>

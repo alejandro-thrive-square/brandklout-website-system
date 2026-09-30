@@ -3418,13 +3418,13 @@ html:not(.js) .hero_media > img {
 /* ===== css/55-words.css ===== */
 /* ===========================================================================
    THE WORDS — the dark chapter: a sentence whose last word keeps changing,
-   and the reviews as a rail you drag.
+   and the practice's Google reviews, live.
 
    The rotating word is the idea of the whole practice in one line — what you
    will look like is "rested", "like yourself", "awake", "not done" — and it
-   replaces the first build's three-paragraph premise. The rail underneath is
-   the reviews: short, at the size of a statement, dragged with a cursor that
-   says "Drag". Used again on /results with more cards.
+   replaces the first build's three-paragraph premise. Under it, since
+   2026-09-30, the Elfsight widget (see `.words_reviews` below); before that, a
+   rail of two hand-picked quotes you could drag. Used again on /results.
    =========================================================================== */
 .words_section {
   position: relative;
@@ -3497,74 +3497,37 @@ html:not(.js) .hero_media > img {
   gap: 2rem;
   margin-top: 4rem;
 }
-.words_arrows {
-  display: flex;
-  gap: 0.6rem;
-}
-.words_rail {
-  display: flex;
-  gap: 1.5rem;
-  padding-bottom: var(--space-xhuge);
-  padding-right: 5%;
-}
-.quote_card {
-  flex: 0 0 auto;
-  width: min(30rem, 78vw);
-  display: grid;
-  align-content: space-between;
-  gap: 2.5rem;
-  min-height: 17rem;
-  padding: 2rem;
-  border: 1px solid var(--line);
+/* THE LIVE REVIEWS (Elfsight Google Reviews, 2026-09-30). The rail of
+   `.quote_card`s this replaces, and its arrows, are in git before that date.
+
+   The widget is the vendor's: light theme, transparent ground, dark text, its
+   own title, rating, cards and arrows, 40px of its own padding all round. On
+   this dark chapter its dark text needs a light ground under it, so the slot is
+   a white panel at the card radius — the one thing here that is ours. No fixed
+   height: `platform.js` sizes the widget; the minimum only stops the page
+   jumping while it boots (memory: the header plus one carousel row is ~440px).
+
+   On Instatic the widget is one level deeper — the Embed block wraps it in
+   `.wz-embed` — which is a block and needs nothing from us. */
+.words_reviews {
+  margin-top: 2rem;
+  min-height: 420px;
   border-radius: var(--radius-card);
-  background: var(--bg-card);
-  transition: border-color 0.3s var(--ease), transform 0.5s var(--ease);
-}
-.quote_card:hover {
-  border-color: var(--line-strong);
-}
-.quote_text {
-  font-family: var(--font-display);
-  font-size: var(--size-h4);
-  line-height: 1.25;
-  color: var(--fg);
-}
-.quote_meta {
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.quote_card.is-link {
-  padding: 0;
-  background: transparent;
-  border-style: dashed;
-}
-.quote_link {
-  display: grid;
-  align-content: space-between;
-  gap: 2rem;
-  height: 100%;
-  padding: 2rem;
-  color: inherit;
-}
-.quote_card.is-link .quote_text {
-  color: var(--fg-mute);
-}
-.quote_card.is-link:hover .quote_text {
-  color: var(--fg);
+  background: var(--white);
+  color: var(--charcoal);
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
+  /* Eyebrow over link, like .wall_head on /results: side by side at 390 both wrapped. */
   .words_rail-head {
     margin-top: 2.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
-  .quote_card {
-    min-height: 14rem;
-    padding: 1.5rem;
-  }
-  .words_rail {
-    padding-bottom: var(--space-xlarge);
+  .words_reviews {
+    margin-top: 1.5rem;
   }
 }
 
@@ -6306,10 +6269,10 @@ a.line_frame:focus-visible .line_caption {
 
 /* ===== css/65-proof.css ===== */
 /* ===========================================================================
-   RESULTS — second build. The wall (a drag rail of quotes and portraits), the
-   plates (the reserved before-and-after object on stone), the room (three
-   practice frames drifting), four questions. `.quote_card` is a component
-   from 55-words.css; the light-ground and photo variants are added here.
+   RESULTS — second build. The wall (the practice's Google reviews, live, since
+   2026-09-30 — before that a drag rail of quotes and portraits), the plates
+   (the reserved before-and-after object on stone), the room (three practice
+   frames drifting), four questions.
    =========================================================================== */
 .padding-section-large.is-bottom-tight {
   padding-bottom: var(--space-large);
@@ -6323,40 +6286,22 @@ a.line_frame:focus-visible .line_caption {
 .wall_head .heading-style-h2 {
   margin-top: 1.25rem;
 }
-.wall_arrows {
-  display: flex;
-  gap: 0.6rem;
-}
-.wall_rail {
-  display: flex;
-  gap: 1.5rem;
-  padding-right: 5%;
-  padding-bottom: 1.5rem;
-}
-.wall_rail .quote_card {
+/* The live reviews — the same Elfsight widget as the home chapter (see
+   `.words_reviews` in 55-words.css for what is the vendor's and what is ours).
+   On this ivory page the widget's grey cards would sink into the ground, so
+   the slot is the white, hairlined panel the old quote cards were. */
+.wall_reviews {
+  margin-top: 3rem;
+  min-height: 420px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
   background: var(--white);
-  border-color: var(--line);
-  min-height: 19rem;
-}
-.wall_rail .quote_card:hover {
-  border-color: var(--line-strong);
-}
-.quote_card.is-photo {
-  width: min(16rem, 52vw);
-  padding: 0;
-  border: 0;
   overflow: hidden;
-  background: var(--stone);
 }
-.quote_card.is-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 20%;
-  transition: transform 1.2s var(--ease);
-}
-.quote_card.is-photo:hover img {
-  transform: scale(1.05);
+@media (max-width: 767px) {
+  .wall_reviews {
+    margin-top: 2rem;
+  }
 }
 .wall_note {
   padding-bottom: var(--space-xlarge);

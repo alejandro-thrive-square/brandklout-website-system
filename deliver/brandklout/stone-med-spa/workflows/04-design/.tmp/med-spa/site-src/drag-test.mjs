@@ -24,7 +24,10 @@ const PORT = server.address().port
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] })
 let fails = []
-for (const [page_, sel] of [['index.html','.words_rail'],['about.html','.room_rail'],['results.html','.wall_rail']]) {
+// ONE RAIL LEFT. The home and /results review rails became the Elfsight widget on
+// 2026-09-30 (its arrows are the vendor's, inside its own markup); /about's rooms
+// are the last rail this site drags.
+for (const [page_, sel] of [['about.html','.room_rail']]) {
   const pg = await browser.newPage()
   await pg.setViewport({ width: 1440, height: 900 })
   await pg.goto(`http://127.0.0.1:${PORT}/${page_}`, { waitUntil:'networkidle0', timeout:60000 })

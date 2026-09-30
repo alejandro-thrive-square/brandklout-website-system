@@ -1,11 +1,12 @@
 # Runbook index
 
-24 runs, newest first. Each line is one file in this folder.
+25 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-30 | 2026-09-30 — The practice's Google reviews LIVE through the Elfsight widget (listing #110B, 5.0/15) on `/` and `/results`, replacing the static quote rails, on STAGING (seq 22) and PRODUCTION (seq 26); new `add-elfsight-reviews.mjs`, `push-site.mjs` carries the slot — carries **gotchas** | [`2026-09-30-elfsight-google-reviews-live.md`](./2026-09-30-elfsight-google-reviews-live.md) |
 | 2026-09-29 | 2026-09-29, later — One page per product (Botox, Xeomin, Dysport, Jeuveau: 14 treatments, 26 pages) and EVERYTHING pushed to PRODUCTION (both BugHerd rounds, #15, the split); sitemap 25 URLs — carries **gotchas** | [`2026-09-29-one-page-per-product-and-production.md`](./2026-09-29-one-page-per-product-and-production.md) |
 | 2026-09-29 | 2026-09-29 — BugHerd round 2 (#43–#87, 45 tasks) on STAGING: client AdobeStock photos, #110B + new hours site-wide, Treatments dropdown, concern chips as links with hover text, FAQ questions name their subject, placeholders hidden; 84 of 86 BugHerd tasks done, #10/#73 open — carries **gotchas** | [`2026-09-29-bugherd-round-2-on-staging.md`](./2026-09-29-bugherd-round-2-on-staging.md) |
 | 2026-09-24 | 2026-09-24, later — BugHerd #15: the client's Drive treatment-room photo in the /team strip, upscaled with Freepik precision (Magnific creative hallucinated); on STAGING; #9/#10 still need Canva exports — carries **gotchas** | [`2026-09-24-bugherd-15-treatment-room.md`](./2026-09-24-bugherd-15-treatment-room.md) |

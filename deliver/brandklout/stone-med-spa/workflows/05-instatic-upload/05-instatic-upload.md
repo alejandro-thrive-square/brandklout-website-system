@@ -968,6 +968,16 @@ children with one `brandklout.embed-origins.embed` module node carrying the vend
 `site-src/ghl-form.mjs`. It refuses to push if the plugin is missing or disabled, because the block
 would publish as `<!-- instatic: unknown module -->`.
 
+The same route carries anything the importer strips, not only iframes: since 2026-09-30 the
+`google-reviews` key places the Elfsight Google Reviews widget (a `<script>` plus a `<div>`, from
+`site-src/elfsight-reviews.mjs`) on `/` and `/results`. `EMBEDS` in `push-site.mjs` is the list;
+a slot with a key missing from it fails the push. Between full pushes, the live instances are
+written directly by `add-elfsight-reviews.mjs` (incremental, backed up, re-runnable) — it produces
+the same tree the source describes, so the next push changes nothing there. Two things it
+learned: production's validator 400s a hand-made node without `children: []` (staging's does
+not — text nodes included), and a `PUT /site-document` drops `seoTitle`/`seoDescription`, so the
+script captures and PATCHes them back the way the push does.
+
 Two consequences to expect, neither a fault:
 
 - **`compare-live` reports findings on that page forever.** The published page has one extra

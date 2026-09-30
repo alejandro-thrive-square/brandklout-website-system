@@ -24,6 +24,7 @@ import crypto from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { getSite, getPages, api } from '../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { SNIPPET as GHL_SNIPPET, HEIGHT as GHL_HEIGHT, FORM_NAME as GHL_NAME } from '../04-design/.tmp/med-spa/site-src/ghl-form.mjs'
+import { SNIPPET as ELFSIGHT_SNIPPET, MIN_HEIGHT as ELFSIGHT_MIN_HEIGHT, TITLE as ELFSIGHT_TITLE } from '../04-design/.tmp/med-spa/site-src/elfsight-reviews.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(HERE, '.tmp')
@@ -537,6 +538,24 @@ const EMBEDS = {
       allow: '',
     },
   },
+  /* The live Google reviews (Elfsight), on / and /results since 2026-09-30. Same
+     route for a different reason: the importer strips a raw <script>, so the
+     paste can only travel as a module node. The snippet must match what
+     add-elfsight-reviews.mjs writes, and it does — both read the same file. */
+  'google-reviews': {
+    props: {
+      source: 'snippet',
+      snippet: ELFSIGHT_SNIPPET,
+      url: '',
+      title: ELFSIGHT_TITLE,
+      fit: 'auto',
+      height: ELFSIGHT_MIN_HEIGHT,
+      ratio: '16 / 9',
+      lazy: true,
+      allowFullscreen: false,
+      allow: '',
+    },
+  },
 }
 const EMBED_MODULE_ID = 'brandklout.embed-origins.embed'
 {
@@ -550,7 +569,7 @@ const EMBED_MODULE_ID = 'brandklout.embed-origins.embed'
       // Drop whatever the conversion made of the vendor markup ...
       for (const childId of node.children ?? []) delete p.nodes[childId]
       // ... and hang one module node off the slot in its place.
-      const id = `ghlembed${Math.random().toString(36).slice(2, 10)}`
+      const id = `${key.replace(/[^a-z0-9]/g, '')}embed${Math.random().toString(36).slice(2, 10)}`
       p.nodes[id] = {
         id,
         moduleId: EMBED_MODULE_ID,
@@ -562,7 +581,7 @@ const EMBED_MODULE_ID = 'brandklout.embed-origins.embed'
       }
       node.children = [id]
       placed++
-      console.log(`embed      ${p.slug.padEnd(18)} ${key} -> ${EMBED_MODULE_ID} (${GHL_SNIPPET.length} chars, fit auto from ${GHL_HEIGHT}px)`)
+      console.log(`embed      ${p.slug.padEnd(18)} ${key} -> ${EMBED_MODULE_ID} (${spec.props.snippet.length} chars, fit auto from ${spec.props.height}px)`)
     }
   }
   if (placed === 0) console.log('embed      no [data-embed] slot in the build')

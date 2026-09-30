@@ -27,6 +27,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { TREATMENTS, CATEGORIES, CONCERNS, byCategory } from "./treatments-data.mjs";
 import { SNIPPET as GHL_SNIPPET } from "./ghl-form.mjs";
+import { SNIPPET as ELFSIGHT_SNIPPET } from "./elfsight-reviews.mjs";
 import { PAGES as TREATMENT_PAGES } from "./treatment-pages.mjs";
 import { SITE_FAQ } from "./site-faq.mjs";
 
@@ -824,6 +825,8 @@ for (const page of PAGES) {
      on Instatic the same snippet travels as an Embed block, because the
      importer will not carry a third-party iframe (push-site.mjs). */
   body = body.replace("{{GHL_FORM}}", () => GHL_SNIPPET);
+  /* The live Google reviews, same route: inlined here, an Embed block on Instatic. */
+  body = body.replace(/\{\{GOOGLE_REVIEWS\}\}/g, () => ELFSIGHT_SNIPPET);
 
   // `aria-current="page"` rather than a class, in the bar, the drawer and the
   // footer. 20-navbar.css already styles the attribute selector, so the marker
