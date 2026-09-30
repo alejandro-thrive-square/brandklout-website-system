@@ -10,7 +10,7 @@ Read off the live site in the 2026-09-30 capture
 | :--- | :--- |
 | **Business name** | Hackensack Center for Dental Implants |
 | **Address** | 163 Main Street, Suite A1, Hackensack, NJ 07601 |
-| **Phone** | (551) 368-2476 on every page. (201) 488-8866 appears in the SMS help text of the legal pages and in three blog posts: _which is the office line, to confirm_ |
+| **Phone** | (551) 368-2476 on every page. (201) 488-8866 appears in the SMS help text of the legal pages and in three blog posts, and it is the number printed on the Aesthetic Dental Center awning (the practice is inside that center, Suite A1): _which number the new site should show, to confirm_ |
 | **Hours** | Monday to Friday 10:00 AM to 6:00 PM; Saturday and Sunday closed (contact page) |
 | **Email** | None published on the site. Mail is Google Workspace |
 

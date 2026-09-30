@@ -1,0 +1,37 @@
+PASS  hero call to action travels to the invitation  scrollY 0 -> 21142, chapter top at 84px
+PASS  pinned scenes  difference-stage 1350px, tx 2970px, cases-scene 2700px, path-scene 859px
+PASS  pin difference-stage holds and scrubs  top 0/0/0px at 25/50/75%, the three states differ
+PASS  pin tx holds and scrubs  top 0/0/0px at 25/50/75%, the three states differ
+PASS  pin cases-scene holds and scrubs  top 0/0/0px at 25/50/75%, the three states differ
+PASS  pin path-scene holds and scrubs  top 0/0/0px at 25/50/75%, the three states differ
+PASS  the path travels sideways  859px (floor 400)
+PASS  path section height = scene + travel  1759 = 900 + 859
+PASS  reading progress tracks the document  scaleX 0.500 at 50%
+PASS  every pinned scene fits 1440x900  tx 0, cases-scene 0, path-scene 0, difference-stage 0 (px past the bottom edge)
+PASS  doctor tabs switch
+PASS  visit tabs switch and the photograph is painted
+PASS  FAQ opens one answer at a time  answer 2 137px then 0px; answer 3 137px
+PASS  a film mounts its Vimeo player on click
+PASS  services menu opens on hover
+PASS  no page errors on desktop
+PASS  text contrast with motion on  333 text elements, 0 under the floor
+PASS  reduced motion: runtime armed, zero pins, nothing hidden, all three treatments readable
+PASS  reduced motion: the FAQ still opens
+PASS  1920: no overflow, no control cut off
+PASS  1366: no overflow, no control cut off
+PASS  1280: no overflow, no control cut off
+PASS  1279: no overflow, no control cut off
+PASS  1024: no overflow, no control cut off
+PASS  992: no overflow, no control cut off
+PASS  768: no overflow, no control cut off
+PASS  phone: no horizontal overflow against the device width  0px
+PASS  phone: no control past the right edge
+PASS  phone: tap targets at least 44px tall
+PASS  phone: body copy at 16px or over, nothing under 14px  body 17.3px, smallest 14.2px
+PASS  phone: pins survive, no smoother, call bar present  3 pins
+PASS  phone: drawer opens and its close button stays on top
+PASS  phone: drawer closes
+PASS  phone: the path is a swipe rail that keeps its gutter  first step at 21px, 1196px to swipe
+PASS  no page errors on the phone
+
+all passed

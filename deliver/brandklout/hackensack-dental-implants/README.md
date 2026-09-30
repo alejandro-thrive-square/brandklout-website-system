@@ -8,6 +8,7 @@ Client folder. Each started scenario is a copy of `deliver/process/<scenario>/`;
 
 | Scenario | Started | From commit |
 | --- | --- | --- |
+| scenario-0-new-site | 2026-09-30 | dd0359ee |
 | scenario-1-migration | 2026-09-30 | dd0359ee |
 
 ## Version Control

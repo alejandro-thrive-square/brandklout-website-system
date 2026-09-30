@@ -11,6 +11,11 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 - **The current site is captured in full** (2026-09-30): 38 pages, 1440 + 390 screenshots, 675 assets,
   a scanned mirror that renders offline, 6 blog posts from the Webflow CMS, URL inventory, email DNS,
   tracking. Read [`docs/migration/old-site-capture.md`](./docs/migration/old-site-capture.md) first.
+- **The home page is redesigned as a local canary** (2026-09-30), not pushed anywhere. Read
+  [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md);
+  look at it with `node code/serve.mjs` from that `output/` folder. It waits on a reaction and on
+  seven decisions listed there.
+- `scenario-0-new-site` is started (from `dd0359ee`); steps 01 and 02 have not been run.
 - `scenario-1-migration` is started (from `dd0359ee`) because the capture step lives there. **The
   scope is still not recorded**: migration to Instatic, or work on the Webflow site, is not decided.
 - The current site is Webflow site `6a1f4de5739bab24f074660f`, in the `webflow-brandklout` grant.
@@ -23,6 +28,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
+1. Get a reaction to the home page canary and rulings on its seven decisions; then the service and
+   contact pages.
 1. Record the scope and the Asana task in `docs/project-overview.md`, and get a ruling on the
    content findings (blog posts that still name Arvada Dental Center, four dead links, the second
    phone number).
@@ -48,6 +55,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | --- | --- | --- | --- |
 | 2026-09-30 | setup | Orca worktree `bk-hackensack-dental-implants` from `main` at `dd0359ee`; client folder scaffolded; master env section added | first commit on the branch |
 | 2026-09-30 | scenario-1-migration / 01-old-site-capture | Full capture of the live Webflow site: 38 pages, screenshots, 675 assets, offline mirror (scanned), CMS blog export, URL inventory, email DNS, tracking; R2 backup; content findings written up | `6e6fc2cc`; R2 manifest (1,663 files, 568 MB) in the commit after it |
+| 2026-09-30 | scenario-0-new-site / 03-design-build | Home page canary: eight chapters, four pinned scroll scenes, client photos only, local build; drive pulled; probe 35/35 | this commit |
 
 ## Version Control
 

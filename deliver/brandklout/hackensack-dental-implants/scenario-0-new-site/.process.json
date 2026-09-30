@@ -1,0 +1,26 @@
+{
+  "scenario": "scenario-0-new-site",
+  "fromCommit": "dd0359ee",
+  "updated": "2026-09-30",
+  "steps": [
+    "01-client-inquiry",
+    "02-research-sitemap",
+    "03-design-build",
+    "04-qa",
+    "05-launch",
+    "06-post-launch"
+  ],
+  "toolkits": [
+    "ads-combo",
+    "client-first-style-guide",
+    "cloudflare-launch",
+    "instatic-api-sync",
+    "instatic-domain-origins",
+    "instatic-embeds",
+    "instatic-plugins",
+    "instatic-site",
+    "specialty-sitemaps",
+    "termly-ghl-consent"
+  ],
+  "started": "2026-09-30"
+}

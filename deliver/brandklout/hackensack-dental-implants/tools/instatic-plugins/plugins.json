@@ -1,0 +1,114 @@
+{
+  "_comment": [
+    "The registry of every Brandklout Instatic plugin: its source folder, the version that is RELEASED",
+    "(the only version anyone may install), the permissions we grant it, and which sites must carry it.",
+    "`version` must equal the folder's plugin.json version; every command in plugins.mjs refuses to run",
+    "when they disagree, so a bump is always two edits in the same commit (step 01 of scenario 4).",
+    "Hosts are NOT here: production and staging come from ../instatic-domain-origins/sites.json",
+    "(`<client>` and `<client>-staging`), credentials from the matching ~/.webzite/.env section.",
+    "`grants` is the security review, written down. install-plugin.mjs grants exactly this list and",
+    "refuses a package that asks for anything else. Widen it only on purpose, with the reason in `why`.",
+    "No secrets here."
+  ],
+  "plugins": {
+    "brandklout.embed-origins": {
+      "dir": "embed-origins",
+      "version": "1.8.0",
+      "tests": ["test-embed-origins.mjs", "test-embed-module.mjs"],
+      "publishes": true,
+      "grants": ["cms.hooks", "modules.register", "frontend.assets"],
+      "why": {
+        "cms.hooks": "the publish.html filter that rewrites the page CSP meta tag and adds siteScripts",
+        "modules.register": "the Embed block in the canvas module library",
+        "frontend.assets": "module render() js: the auto-height listener served from /_instatic/module-js/brandklout.embed-origins.embed.js"
+      },
+      "changelog": {
+        "1.8.0": "2026-09-22 dr-nahlah: siteScripts line options joined by &; pages=<glob> and except=<glob> scope a script to pages (one DNI pool per office). Superset of 1.7.0.",
+        "1.7.0": "2026-09-22 termly rollout: #consent=<category> emits a script as text/plain for Termly to release.",
+        "1.6.0": "2026-09-12: siteScripts (one tag on every page, host granted script/connect/style/font); widen() dedupes.",
+        "1.5.1": "2026-09-10: id renamed webzite.embed-origins -> brandklout.embed-origins (byte-identical to 1.4.0 otherwise).",
+        "1.4.0": "2026-08-28: the canvas shows a card, not the embed."
+      }
+    },
+    "brandklout.open-graph": {
+      "dir": "open-graph",
+      "version": "1.2.3",
+      "tests": ["test-open-graph.mjs"],
+      "publishes": true,
+      "grants": ["cms.hooks", "cms.storage", "cms.routes", "cms.content.read", "admin.navigation", "editor.code"],
+      "why": {
+        "cms.hooks": "publish.html filter writing og:/twitter: tags, the canonical link, the meta description and the favicon links",
+        "cms.storage": "per-page overrides in the plugin's own record table",
+        "cms.routes": "the admin page and bulk API under /admin/api/cms/plugins/<id>/runtime/, all behind a session",
+        "cms.content.read": "read-only pages + posts + articles, to publish the seoDescription the platform stores and never emits",
+        "admin.navigation": "the Open Graph item in the admin sidebar",
+        "editor.code": "required by the host for an adminPages app page; one hand-written file"
+      },
+      "changelog": {
+        "1.2.3": "2026-09-25 mason-park: og:image:width/height/type when the image file name carries its size (-1200x630.jpg); without them Facebook shows a first share with no picture.",
+        "1.2.2": "2026-09-25 mason-park: entries also indexed by SEO title, so an article whose <title> is its seoTitle no longer resolves to the template page (og:url /blog-article).",
+        "1.2.1": "2026-09-25 mason-park: contentAccess reads the articles table; description insert kept from 1.1.3.",
+        "1.2.0": "2026-09-25 mason-park: favicon + appleTouchIcon settings; writes <link rel=icon> and apple-touch-icon unless the page already names one (the platform has no favicon setting).",
+        "1.1.3": "2026-09-09 mason-park-kids: INSERT <meta name=description> when the site has no site-wide one (57 of 57 Kids pages shipped without).",
+        "1.1.2": "2026-08-28 dr-nahlah: the version every other site ran on 2026-09-10."
+      }
+    },
+    "brandklout.aeo-schema": {
+      "dir": "aeo-schema",
+      "version": "1.2.0",
+      "tests": ["test-aeo-schema.mjs"],
+      "publishes": true,
+      "grants": ["cms.hooks", "cms.storage", "cms.routes", "cms.content.read", "admin.navigation", "editor.code"],
+      "why": {
+        "cms.hooks": "publish.html filter writing ONE application/ld+json @graph per page",
+        "cms.storage": "per-page schema blocks in the plugin's own record table",
+        "cms.routes": "the admin page and bulk API, behind a session",
+        "cms.content.read": "read-only pages + posts: titles, descriptions and dates for WebPage and Article",
+        "admin.navigation": "the AEO Schema item in the admin sidebar",
+        "editor.code": "required by the host for an adminPages app page; one hand-written file"
+      },
+      "changelog": {
+        "1.2.0": "2026-08-28 dr-nahlah; matches both data-aeo markers (brandklout. and webzite.) so a stale block is replaced, not doubled."
+      }
+    },
+    "brandklout.link-editor": {
+      "dir": "link-editor",
+      "version": "1.0.2",
+      "tests": ["verify-link-editor.mjs"],
+      "publishes": false,
+      "grants": ["editor.code", "editor.panels", "editor.store.read", "editor.store.write"],
+      "why": {
+        "editor.code": "required by the host for any entrypoints.editor; our own two-file module, no network",
+        "editor.panels": "mounts the Link URL panel in the editor rail",
+        "editor.store.read": "reads the selected node to show its current address",
+        "editor.store.write": "writes the link through updateNodeProps, the platform's own panel action"
+      },
+      "changelog": {
+        "1.0.2": "2026-08-24 dr-nahlah: link URLs editable from the editor rail. Editor-only: nothing on the published page, no settings route (GET settings 400s)."
+      }
+    }
+  },
+  "defaults": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
+  "sites": {
+    "dr-nahlah": {
+      "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema", "brandklout.link-editor"],
+      "note": "All four since 2026-08-28. Production embed-origins 1.8.0 (2026-09-22d); staging was 1.4.0 with no siteScripts on 2026-09-22."
+    },
+    "mason-park": {
+      "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema", "brandklout.link-editor"],
+      "note": "All four since 2026-09-10. Production open-graph siteUrl was empty (no canonical); staging embed-origins 1.5.1 on 2026-09-18. open-graph 1.2.x was written and installed from bk-mason-park on 2026-09-25 (source brought to main 2026-09-27); `status` says which host runs which."
+    },
+    "mason-park-kids": {
+      "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
+      "note": "Three plugins; the only site that already ran open-graph 1.1.3 (2026-09-10)."
+    },
+    "institute-for-advanced-dentistry": { "plugins": "defaults" },
+    "brandklout-website": {
+      "plugins": "defaults",
+      "note": "embed-origins only until 2026-09-22, when open-graph + aeo-schema were installed on both instances."
+    },
+    "stone-surgical-arts": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; SEO pair not recorded anywhere, status will say." },
+    "stone-med-spa": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; SEO pair not recorded anywhere, status will say." },
+    "west-la-implants": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; review build, no domain." }
+  }
+}

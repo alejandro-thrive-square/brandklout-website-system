@@ -1,0 +1,11 @@
+{
+  "step": "scenario-0-new-site/05-launch",
+  "toolkits": [
+    "cloudflare-launch",
+    "instatic-domain-origins",
+    "instatic-embeds",
+    "instatic-plugins",
+    "instatic-site",
+    "termly-ghl-consent"
+  ]
+}

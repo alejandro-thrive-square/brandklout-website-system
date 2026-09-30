@@ -1,0 +1,12 @@
+INFO / 1440: tel:+15513682476 (not clicked; desktop has no handler)
+/                                    1440  27 controls
+INFO / 390: tel:+15513682476 (not clicked; desktop has no handler)
+/                                     390  23 controls
+
+50 clicks
+DEAD (click changed nothing):
+  / @1440  a.skip "Skip to content"
+  / @1440  a.btn "Schedule Your Consultation"
+  / @1440  button.visit__tab "A Space to Feel at Ease"
+  / @390  a.skip "Skip to content"
+  / @390  button.visit__tab "A Space to Feel at Ease"

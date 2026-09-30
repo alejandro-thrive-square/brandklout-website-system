@@ -10,7 +10,7 @@
 | **Shared drive** | "Hackensack Center for Dental Implants", `0ADqUKcTkH0SxUk9PVA` |
 | **Hosts** | Production `www.hackensackdentalimplants.com`; staging and Railway link _not set up_ |
 | **Platform** | _To confirm_ (the current site is Webflow) |
-| **Style pick** | _To confirm_ |
+| **Style pick** | _Not made._ A home page canary exists (2026-09-30): ink, gold and ivory from the current stylesheet, Nunito Sans condensed. [`canary-review.md`](../scenario-0-new-site/03-design-build/output/canary-review.md) |
 | **Worktree** | `bk-hackensack-dental-implants`, created 2026-09-30 |
 | **Branch base** | `main` at `dd0359ee` |
 

@@ -1,0 +1,214 @@
+#|General & Family Dentistry|6|Arvada Dental Center, Grand Mission, Legacy Dental Pasadena, Livewell, Marvel, Mason Park
+1|About|/about|5/6 sites
+2|Meet the Doctor|/about/dr-[name]|6/6 sites
+2|Our Team|/about/team|3/6 sites
+2|Office Tour|/about/office-tour|4/6 sites
+2|Technology|/about/technology|6/6 sites
+2|Careers|/about/careers|2/6 sites · optional
+1|Services|/services|6/6 sites
+2|General & Preventive|/services/general-dentistry|5/6 sites
+3|Exams & Cleanings|/services/exams-cleanings|
+3|Fillings|/services/fillings|
+3|Gum Disease Treatment|/services/gum-disease|6/6 sites
+3|Oral Cancer Screening|/services/oral-cancer-screening|
+2|Cosmetic|/services/cosmetic-dentistry|6/6 sites
+3|Veneers|/services/veneers|6/6 sites
+3|Teeth Whitening|/services/teeth-whitening|5/6 sites
+3|Smile Makeover|/services/smile-makeover|5/6 sites
+2|Restorative|/services/restorative-dentistry|6/6 sites
+3|Crowns & Bridges|/services/crowns-bridges|
+3|Root Canal|/services/root-canal|
+3|Dentures|/services/dentures|5/6 sites
+2|Dental Implants|/services/dental-implants|6/6 sites
+3|All-on-X / Full Arch|/services/all-on-x|5/6 sites
+3|Bone Grafting & Sinus Lift|/services/bone-grafting|5/6 sites
+2|Invisalign & Orthodontics|/services/invisalign|6/6 sites
+2|Oral Surgery & Extractions|/services/oral-surgery|6/6 sites
+2|Emergency Dentistry|/services/emergency-dentistry|6/6 sites
+2|Sedation Dentistry|/services/sedation-dentistry|6/6 sites
+2|Children's Dentistry|/services/kids-dentistry|4/6 sites
+2|TMJ & Sleep Apnea|/services/tmj|4/6 sites
+1|Patients|/patients|3/6 sites
+2|New Patients / First Visit|/patients/first-visit|3/6 sites
+2|Insurance & Financing|/patients/insurance-financing|6/6 sites
+2|Membership / Savings Plan|/patients/savings-plan|2/6 sites · optional
+2|FAQ|/patients/faq|3/6 sites
+1|Results|/results|6/6 sites
+2|Smile Gallery|/results/smile-gallery|6/6 sites
+2|Reviews|/results/reviews|5/6 sites
+1|Locations|/locations|
+2|[City] Location|/locations/[city]|5/6 sites
+3|[City] Dentist|/locations/[city]/dentist|
+3|[City] Dental Implants|/locations/[city]/dental-implants|
+3|[City] Invisalign|/locations/[city]/invisalign|
+3|[City] Emergency Dentist|/locations/[city]/emergency-dentist|
+3|[City] Smile Makeover|/locations/[city]/smile-makeover|
+3|[City] Team|/locations/[city]/team|
+3|[City] Contact & Hours|/locations/[city]/contact|
+2|[City 2] … clone of the branch above|/locations/[city-2]/…|
+1|More||
+2|Blog|/blog|5/6 sites
+3|Blog Post (CMS)|/blog/[slug]|
+2|Special Offers|/special-offers|3/6 sites
+2|Contact|/contact|5/6 sites
+2|Book Appointment|/book|2/6 sites · optional
+2|Ads Landing Pages|/ads-landing-pages/[offer]|
+3|Thank You|/thank-you|
+2|Privacy · Terms · Cookies · Accessibility|/privacy-policy …|6/6 sites
+#|Implant & Full-Arch (Prosthodontics)|4|Dr. Nahlah, West LA Implants, Arvada Dental Implants, IFA
+1|About|/about|3/4 sites
+2|Meet the Doctor|/about/dr-[name]|2/4 sites
+2|Our Team|/about/team|2/4 sites
+2|Office Tour|/about/office-tour|3/4 sites
+2|Technology|/about/technology|1/4 sites · optional
+1|Dental Implants|/dental-implants|4/4 sites
+2|Single Tooth Implants|/dental-implants/single-tooth|
+2|Multiple Teeth Implants|/dental-implants/multiple-teeth|
+2|All-on-X / Full Arch|/dental-implants/all-on-x|3/4 sites
+2|Implant-Supported Dentures|/dental-implants/implant-dentures|4/4 sites
+2|Teeth in a Day|/dental-implants/teeth-in-a-day|
+2|Bone Grafting & Sinus Lift|/dental-implants/bone-grafting|2/4 sites
+2|Failing Implant Repair|/dental-implants/failing-implants|
+2|Implant Cost|/dental-implants/cost|4/4 sites
+2|Implant FAQ|/dental-implants/faq|2/4 sites
+1|Other Services|/services|3/4 sites
+2|Cosmetic Dentistry|/services/cosmetic-dentistry|4/4 sites
+3|Veneers|/services/veneers|4/4 sites
+3|Smile Makeover|/services/smile-makeover|3/4 sites
+3|Teeth Whitening|/services/teeth-whitening|3/4 sites
+2|Crowns & Bridges|/services/crowns-bridges|3/4 sites
+2|Extractions & Oral Surgery|/services/oral-surgery|4/4 sites
+2|Sedation Dentistry|/services/sedation|4/4 sites
+2|General Dentistry|/services/general-dentistry|3/4 sites
+2|Gum Treatment|/services/gum-treatment|2/4 sites
+1|Patients|/patients|2/4 sites
+2|New Patients / First Visit|/patients/first-visit|2/4 sites
+2|Insurance & Financing|/patients/insurance-financing|4/4 sites
+2|FAQ|/patients/faq|2/4 sites
+1|Results|/results|4/4 sites
+2|Smile Gallery|/results/smile-gallery|4/4 sites
+2|Patient Stories|/results/patient-stories|4/4 sites
+2|Video Library|/results/videos|
+1|Referring Doctors|/referring-doctors|2/4 sites
+1|Locations|/locations|
+2|[City] Location|/locations/[city]|2/4 sites
+3|[City] Dental Implants|/locations/[city]/dental-implants|
+3|[City] All-on-X|/locations/[city]/all-on-x|
+3|[City] Implant Dentures|/locations/[city]/implant-dentures|
+3|[City] Team|/locations/[city]/team|
+3|[City] Contact & Hours|/locations/[city]/contact|
+2|[City 2] … clone of the branch above|/locations/[city-2]/…|
+1|More||
+2|Blog|/blog|4/4 sites
+3|Blog Post (CMS)|/blog/[slug]|
+2|Contact|/contact|4/4 sites
+2|Ads Landing Pages|/ads-landing-pages/[offer]|
+3|Thank You|/thank-you|
+2|Privacy · Terms · Cookies · Accessibility|/privacy-policy …|4/4 sites
+#|Oral & Maxillofacial Surgery|2|Stone Dental Implant Center, Stone / DFW Surgical Arts
+1|About|/about|2/2 sites
+2|Meet the Doctor|/about/dr-[name]|2/2 sites
+2|Our Team|/about/team|1/2 sites
+1|Procedures|/procedures|2/2 sites
+2|Dental Implants|/procedures/dental-implants|2/2 sites
+3|Single Implants|/procedures/single-implants|
+3|All-on-X / Same-Day|/procedures/all-on-x|1/2 sites
+2|Bone Grafting & Sinus Lift|/procedures/bone-grafting|1/2 sites
+2|Wisdom Teeth & Impacted Teeth|/procedures/wisdom-teeth|2/2 sites
+2|Jaw Surgery (Orthognathic)|/procedures/jaw-surgery|2/2 sites
+2|Facial Trauma|/procedures/facial-trauma|2/2 sites
+2|Oral Pathology|/procedures/oral-pathology|2/2 sites
+2|TMJ Treatment|/procedures/tmj|2/2 sites
+2|Sleep Apnea Surgery|/procedures/sleep-apnea|2/2 sites
+2|Facial Cosmetic Surgery|/procedures/facial-cosmetic|1/2 sites
+1|Patients|/patients|1/2 sites
+2|Your First Visit|/patients/first-visit|1/2 sites
+2|Pre-Op & Post-Op Instructions|/patients/instructions|1/2 sites
+2|Patient Forms|/patients/forms|1/2 sites
+2|Insurance & Financing|/patients/insurance-financing|1/2 sites
+2|Anesthesia & Sedation|/patients/anesthesia|
+1|Results|/results|2/2 sites
+2|Smile Gallery|/results/smile-gallery|2/2 sites
+2|Reviews|/results/reviews|1/2 sites
+1|Locations|/locations|
+2|[City] Location|/locations/[city]|standard
+3|[City] Oral Surgeon|/locations/[city]/oral-surgeon|
+3|[City] Dental Implants|/locations/[city]/dental-implants|
+3|[City] Wisdom Teeth|/locations/[city]/wisdom-teeth|
+3|[City] Team|/locations/[city]/team|
+3|[City] Contact & Hours|/locations/[city]/contact|
+2|[City 2] … clone of the branch above|/locations/[city-2]/…|
+1|More||
+2|Blog|/blog|2/2 sites
+3|Blog Post (CMS)|/blog/[slug]|
+2|Contact|/contact|1/2 sites
+2|Book Appointment|/book|2/2 sites
+2|Ads Landing Pages|/ads-landing-pages/[offer]|
+3|Thank You|/thank-you|
+2|Privacy · Terms · Cookies · Accessibility|/privacy-policy …|1/2 sites
+#|Pediatric Dentistry|1|Mason Park Pediatric
+1|About|/about|1/1 sites
+2|Meet the Doctor|/about/dr-[name]|standard
+2|Our Team|/about/team|1/1 sites
+2|Technology|/about/technology|1/1 sites
+1|Services|/services|1/1 sites
+2|Baby's First Visit|/services/first-visit|
+2|Cleanings & Exams|/services/cleanings-exams|
+2|Sealants & Fluoride|/services/sealants-fluoride|
+2|Fillings & Baby Crowns|/services/fillings-crowns|
+2|Sedation & Laughing Gas|/services/sedation|
+2|Emergency Care|/services/emergency|1/1 sites
+2|Frenectomy (Tongue-Tie)|/services/frenectomy|
+2|Orthodontics for Kids|/services/orthodontics|
+2|Special Needs Dentistry|/services/special-needs|
+1|For Parents|/parents|1/1 sites
+2|New Patients|/parents/new-patients|1/1 sites
+2|Insurance & Financing|/parents/insurance-financing|standard
+2|Dental Savings Plan|/parents/savings-plan|1/1 sites
+2|FAQ|/parents/faq|1/1 sites
+2|Dental Library|/parents/dental-library|
+2|Refer a Patient|/parents/refer|1/1 sites
+1|Reviews|/reviews|standard
+1|Locations|/locations|
+2|[City] Location|/locations/[city]|standard
+3|[City] Pediatric Dentist|/locations/[city]/pediatric-dentist|
+3|[City] Emergency Pediatric Dentist|/locations/[city]/emergency|
+3|[City] Team|/locations/[city]/team|
+3|[City] Contact & Hours|/locations/[city]/contact|
+2|[City 2] … clone of the branch above|/locations/[city-2]/…|
+1|More||
+2|Blog|/blog|1/1 sites
+3|Blog Post (CMS)|/blog/[slug]|
+2|Special Offers|/special-offers|1/1 sites
+2|Contact|/contact|1/1 sites
+2|Book Appointment|/book|1/1 sites
+2|Ads Landing Pages|/ads-landing-pages/[offer]|
+3|Thank You|/thank-you|
+2|Privacy · Terms · Cookies · Accessibility|/privacy-policy …|standard
+#|Med Spa & Facial Aesthetics|1|Westlake TX Med Spa
+1|About|/about|1/1 sites
+2|Meet the Doctor|/about/dr-[name]|1/1 sites
+2|Our Team|/about/team|1/1 sites
+1|Treatments|/treatments|1/1 sites
+2|Botox & Neurotoxins|/treatments/botox|1/1 sites
+2|Dermal Fillers|/treatments/fillers|
+2|Skin & Laser|/treatments/skin-laser|
+2|Morpheus8 / Microneedling|/treatments/morpheus8|
+2|Weight Loss (GLP-1)|/treatments/weight-loss|
+2|Facial Surgery|/treatments/facial-surgery|
+1|Membership|/membership|1/1 sites
+1|Financing|/financing|1/1 sites
+1|Results|/results|1/1 sites
+1|Locations|/locations|
+2|[City] Location|/locations/[city]|standard
+3|[City] Med Spa|/locations/[city]/med-spa|
+3|[City] Botox|/locations/[city]/botox|
+3|[City] Team|/locations/[city]/team|
+3|[City] Contact & Hours|/locations/[city]/contact|
+2|[City 2] … clone of the branch above|/locations/[city-2]/…|
+1|More||
+2|Contact|/contact|standard
+2|Book Appointment|/book|1/1 sites
+2|Ads Landing Pages|/ads-landing-pages/[offer]|
+3|Thank You|/thank-you|
+2|Privacy · Terms · Cookies · Accessibility|/privacy-policy …|1/1 sites

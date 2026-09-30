@@ -1,0 +1,91 @@
+/* Identity layer. Colours and typefaces are the client's own, read from the :root block of the
+   published Webflow stylesheet (--text, --gold-1, --ivory, --cream, --linen, --surface-alt) and
+   from the black and silver logo set on the shared drive. Nothing below this file redefines them. */
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/nunito-sans-var.woff2') format('woff2');
+  font-weight: 200 1000;
+  font-stretch: 75% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Maven Pro';
+  src: url('../fonts/maven-pro-var.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* brand */
+  --ink: #030405;
+  --espresso: #2b2622;
+  --gold: #9a815a;
+  --gold-light: #b2966b;
+  --gold-deep: #66512f;      /* accent TEXT on light grounds: gold-1 darkened until it clears 4.5:1 */
+  --silver-1: #8d9399;
+  --silver-2: #dfe3e6;
+  --silver-3: #6d7379;
+
+  /* grounds: every one is light */
+  --g-ivory: #f5f0e6;
+  --g-white: #ffffff;
+  --g-linen: #e8dfd0;
+  --g-cream: #f8f3eb;
+  --g-cool: #f2f5f7;
+
+  /* ground-aware roles */
+  --fg: var(--ink);
+  --fg-body: var(--espresso);
+  --fg-dim: #4f5a60;
+  --unlit: #70777c;          /* scroll-written words before they fill: 4.5:1 on white */
+  --accent-text: var(--gold-deep);
+  --rule: rgba(3, 4, 5, 0.16);
+  --rule-soft: rgba(3, 4, 5, 0.08);
+  --glass: rgba(255, 255, 255, 0.78);
+  --metal: linear-gradient(115deg, var(--silver-1) 0%, var(--silver-2) 38%, var(--silver-3) 62%, #c9ced2 100%);
+
+  /* type */
+  --f-text: 'Nunito Sans', Arial, sans-serif;
+  --f-label: 'Maven Pro', Arial, sans-serif;
+
+  /* responsive multipliers: display falls as the screen narrows, text rises below 479 */
+  --s-d1: 1;
+  --s-d2: 1;
+  --s-d3: 1;
+  --s-tx: 1;
+
+  --d1: calc(6.5rem * var(--s-d1));       /* hero statement */
+  --d2: calc(4.25rem * var(--s-d2));      /* chapter headline */
+  --d3: calc(2.125rem * var(--s-d3));     /* block headline */
+  --lead: calc(1.375rem * var(--s-tx));
+  --body: calc(1.0625rem * var(--s-tx));
+  --small: calc(0.9375rem * var(--s-tx));
+  --label: calc(0.875rem * var(--s-tx));
+
+  /* space */
+  --gutter: 2.5rem;
+  --wrap: 84rem;
+  --measure: 34rem;
+  --ch-pad: 9rem;
+  --nav-h: 5.25rem;
+  --radius: 0.25rem;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media screen and (max-width: 1279px) {
+  :root { --s-d1: 0.84; --s-d2: 0.86; --ch-pad: 7.5rem; }
+}
+@media screen and (max-width: 991px) {
+  :root { --s-d1: 0.8; --s-d2: 0.76; --s-d3: 0.94; --gutter: 2rem; --ch-pad: 6.5rem; --nav-h: 4.5rem; }
+}
+@media screen and (max-width: 767px) {
+  :root { --s-d1: 0.6; --s-d2: 0.62; --s-d3: 0.9; --gutter: 1.5rem; --ch-pad: 5.5rem; }
+}
+/* display type follows the shrinking root; only text is held up, in two small steps, so body copy
+   stays at 16px and over down to 360 without one 18% jump at the 479 seam */
+@media screen and (max-width: 479px) { :root { --s-tx: 1.08; } }
+@media screen and (max-width: 419px) { :root { --s-tx: 1.18; } }
