@@ -1,0 +1,7 @@
+{
+  "step": "scenario-1-migration/01-old-site-capture",
+  "toolkits": [
+    "cloudflare-launch",
+    "instatic-api-sync"
+  ]
+}

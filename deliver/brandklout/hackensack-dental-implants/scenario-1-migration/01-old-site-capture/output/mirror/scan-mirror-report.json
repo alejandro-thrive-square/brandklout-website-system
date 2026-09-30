@@ -1,0 +1,44 @@
+{
+  "scannedAt": "2026-09-30T12:04:20.786Z",
+  "dir": "C:\\Users\\ACER\\orca\\workspaces\\Brandklout Website System\\bk-hackensack-dental-implants\\deliver\\brandklout\\hackensack-dental-implants\\scenario-1-migration\\01-old-site-capture\\output\\mirror\\site",
+  "strict": false,
+  "ok": true,
+  "checks": [
+    {
+      "name": "no executable files",
+      "ok": true,
+      "detail": "739 files scanned"
+    },
+    {
+      "name": "no archives",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "no injection markers (decoded blobs included)",
+      "ok": true,
+      "detail": "60 text files"
+    },
+    {
+      "name": "no obfuscated inline loader",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "not tracked by git",
+      "ok": true,
+      "detail": "untracked"
+    }
+  ],
+  "externalHosts": {
+    "app.termly.io": 39,
+    "analytics.ahrefs.com": 39,
+    "cdn.prod.website-files.com": 39,
+    "iframe:www.google.com": 39,
+    "iframe:www.googletagmanager.com": 39,
+    "link.msgsndr.com": 14,
+    "iframe:api.leadconnectorhq.com": 14,
+    "cdn.jsdelivr.net": 8,
+    "elfsightcdn.com": 3
+  }
+}

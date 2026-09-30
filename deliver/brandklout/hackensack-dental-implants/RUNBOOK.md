@@ -8,31 +8,46 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 **Hackensack Center for Dental Implants**, a Brandklout client. The worktree `bk-hackensack-dental-implants`
 owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/project-overview.md).
 
-- The worktree, branch and client folder exist. **No scenario is started**: the scope is not recorded
-  yet, so nothing under `deliver/process/` has been copied in.
-- The current site, https://www.hackensackdentalimplants.com/, is on Webflow.
+- **The current site is captured in full** (2026-09-30): 38 pages, 1440 + 390 screenshots, 675 assets,
+  a scanned mirror that renders offline, 6 blog posts from the Webflow CMS, URL inventory, email DNS,
+  tracking. Read [`docs/migration/old-site-capture.md`](./docs/migration/old-site-capture.md) first.
+- `scenario-1-migration` is started (from `dd0359ee`) because the capture step lives there. **The
+  scope is still not recorded**: migration to Instatic, or work on the Webflow site, is not decided.
+- The current site is Webflow site `6a1f4de5739bab24f074660f`, in the `webflow-brandklout` grant.
+  Read-only: [`docs/mcp-access.md`](./docs/mcp-access.md).
+- Shared drive `0ADqUKcTkH0SxUk9PVA` is readable and holds logos, before and afters, clinical and
+  office photos. Nothing is pulled from it yet.
+- Heavy capture files are in R2 ([`assets.tsv`](./assets.tsv)), not on the shared drive.
 - `~/.webzite/.env` has an empty `[hackensack-dental-implants]` section; the worktree `.env` carries
   `[shared]` only.
 
 ## Next
 
-1. Record the scope and the Asana task in `docs/project-overview.md`.
-2. Start the scenario that matches it: `node scripts/scenario.mjs start hackensack-dental-implants <scenario>`
-   (`node scripts/scenario.mjs list` prints them).
-3. Add client credentials to the master file section, then `node scripts/env-sync.mjs`.
-4. Write `docs/mcp-access.md` once the platform and its MCP profile are known.
+1. Record the scope and the Asana task in `docs/project-overview.md`, and get a ruling on the
+   content findings (blog posts that still name Arvada Dental Center, four dead links, the second
+   phone number).
+2. Upload the capture to the shared drive (manual) and re-run the Wayback sweep once; both are in the
+   step runbook.
+3. Migration: step 02, redirect map. Staying on Webflow: start `scenario-6-webflow-sites` instead.
+4. On `main`: add this client to the Webflow registry in `deliver/docs/mcp-access.md` and to the map
+   in `deliver/docs/GOOGLE_DRIVE.md`, and fix the capture scripts for Webflow (list in the step runbook).
 
 ## Gotchas
 
-- The folder was scaffolded by hand in the shape `scenario.mjs start` writes, because no scenario was
-  chosen. `start` leaves an existing README, RUNBOOK and `docs/` alone, so it is safe to run later.
-- `docs/facts.md` was read off the live home page on 2026-09-30, not confirmed by the client.
+- **Paths.** The step output folder is ~180 characters deep and Windows stops Python at 260. Capture
+  files use short flat names; do not nest deeper under `output/`.
+- The step's `mirror-site.mjs`, `export-posts.mjs --scrape` and plain `extract_assets.py` do not
+  work on a Webflow site. Use the four scripts in the step's `output/code/`.
+- The folder was scaffolded by hand before any scenario was chosen; `scenario.mjs start` left the
+  README, RUNBOOK and `docs/` alone.
+- `docs/facts.md` is read off the live site, not confirmed by the client.
 
 ## Runs
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
 | 2026-09-30 | setup | Orca worktree `bk-hackensack-dental-implants` from `main` at `dd0359ee`; client folder scaffolded; master env section added | first commit on the branch |
+| 2026-09-30 | scenario-1-migration / 01-old-site-capture | Full capture of the live Webflow site: 38 pages, screenshots, 675 assets, offline mirror (scanned), CMS blog export, URL inventory, email DNS, tracking; R2 backup; content findings written up | this commit |
 
 ## Version Control
 

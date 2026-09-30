@@ -6,7 +6,8 @@
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Asana task** | _Not yet linked_ |
 | **Scope** | _To confirm_ |
-| **Current site** | https://www.hackensackdentalimplants.com/ on Webflow, site `6a1f4de5739bab24f074660f` |
+| **Current site** | https://www.hackensackdentalimplants.com/ on Webflow, site `6a1f4de5739bab24f074660f`. Captured in full on 2026-09-30: [`migration/old-site-capture.md`](./migration/old-site-capture.md) |
+| **Shared drive** | "Hackensack Center for Dental Implants", `0ADqUKcTkH0SxUk9PVA` |
 | **Hosts** | Production `www.hackensackdentalimplants.com`; staging and Railway link _not set up_ |
 | **Platform** | _To confirm_ (the current site is Webflow) |
 | **Style pick** | _To confirm_ |
@@ -23,8 +24,11 @@ Locations, phones and doctors are in [`facts.md`](./facts.md).
 
 - Asana task and project IDs.
 - Scope: new build, migration off Webflow, or updates to the Webflow site; page list.
-- Brand assets: logo, palette, fonts, photography (check the client's shared drive first,
-  [`GOOGLE_DRIVE.md`](../../../docs/GOOGLE_DRIVE.md)).
+- Brand assets: the shared drive has Logos PNG, Logos SVG, Before and Afters, Clinical Photos, office
+  photos from 2026-09-14 and two brief documents. None of it is pulled yet
+  ([`GOOGLE_DRIVE.md`](../../../docs/GOOGLE_DRIVE.md)). Palette and fonts: not recorded.
+- The seven content findings in [`migration/old-site-capture.md`](./migration/old-site-capture.md),
+  starting with the blog posts that still name Arvada Dental Center.
 
 ## Version Control
 
