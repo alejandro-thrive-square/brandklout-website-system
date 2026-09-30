@@ -1,6 +1,6 @@
 # hackensack-dental-implants media in R2 at clients/hackensack-dental-implants/<path>. Restore: node scripts/assets.mjs pull hackensack-dental-implants
 # sha256	size	path
-e0b67e7381c9a460e2f88e2b403e53be020ad7749b4196445a45aa80b0542a94	24610	scenario-0-new-site/03-design-build/output/OPEN-home.html
+892d02b967065624bf2d05d090cd4ab6988987d0aa892f13eb1429ee1eb4fd15	24627	scenario-0-new-site/03-design-build/output/OPEN-home.html
 dd8996a1c29ae0d2ba240d06063553efd5a7ea27ecee1428fe8235f605a4365d	54371	scenario-0-new-site/03-design-build/output/assets/drive/ba/WhatsApp Image 2026-09-08 at 18.39.47.jpeg
 2c5f1acc00f04939e3f73d31ba126142b4c9bc0fdf78d8ecfc4daac8f913573a	832594	scenario-0-new-site/03-design-build/output/assets/drive/ba/WhatsApp Image 2026-09-08 at 18.39.48.jpeg
 01ea5b5bbc0f5026826bee3bbe94c2164c7aa78d4f4eee7285c80e545a09d2c0	1098021	scenario-0-new-site/03-design-build/output/assets/drive/ba/WhatsApp Image 2026-09-08 at 18.43.03 (1).jpeg
@@ -88,13 +88,13 @@ b0b14d67b55b0c43c756ac0b106cfcb09d0879945f6ead64451065b0672916a2	44575	scenario-
 419f7027a5f086a12cb7988736d8fdd3a6ed2200229661de25b6628ca7ced344	7732	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/gsap/SplitText.min.js
 92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb	72927	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/gsap/gsap.min.js
 bec5965aa0491a08199ba22f997b33e0d754950033222c8dec38708152707714	530	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/head.js
-20ccbde0c83d74b1ad23caa4c6228ca0de3dcc01e63173524dc25bc269efe8cf	27112	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.css
-389247039a1c45251d40afa032e003ceec181904cd773250e266bb3ab80dbb8b	10776	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.js
+1eb2dcc51b9ea72a9ff788724e63ab37c31ada5108e995c2bb7074c67a8161c5	31381	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.css
+482c8a954d86fe28ad9161fcb7a441e174ffcca18133f4577a9639dbfa02de03	24919	scenario-0-new-site/03-design-build/output/code/site-src/dist/assets/site.js
 9fea608a947e67020c33cad9a6fe3d60c54119dfb8cff87768a8117a15ed7543	36932	scenario-0-new-site/03-design-build/output/code/site-src/dist/fonts/dm-sans-var.woff2
 c66f6297235021f3449f9b80266bc830d8cfa31e5b01783072253a66b2be6ac2	17964	scenario-0-new-site/03-design-build/output/code/site-src/dist/fonts/maven-pro-var.woff2
 6e4f2958c3a7c4a80acde4e5a679abe7e01bc1e30b92be3c7a8b696ef401d101	132000	scenario-0-new-site/03-design-build/output/code/site-src/dist/fonts/newsreader-var.woff2
 4da56fab377a00c7362ec8b20b821f40204b6a08fab61de54d44b281ca6180fc	109052	scenario-0-new-site/03-design-build/output/code/site-src/dist/fonts/nunito-sans-var.woff2
-e3488e57365632fad42aa04fd6ca1ae23d3f5554006e695ed02870eb2535a1ad	24173	scenario-0-new-site/03-design-build/output/code/site-src/dist/index.html
+7d30664eabe25f902bc9c7f70e01e6148a74924f268ebffd42098d5700f6e16d	24190	scenario-0-new-site/03-design-build/output/code/site-src/dist/index.html
 c4ab3630b1f1a0a5caa8b7458df044ad17a894a1cdff4a6c24c2c934e996a435	20038	scenario-0-new-site/03-design-build/output/code/site-src/dist/media/img/carecredit.webp
 b61cd04adf383ad75ff2e94199ebb050e912784662f02ab25e166a8d4b19e9b6	220806	scenario-0-new-site/03-design-build/output/code/site-src/dist/media/img/case-1-after.webp
 b0e9895e3aca0a7c7c0352597f3354f378b49bb576e2c9954c5d7676435bd732	200798	scenario-0-new-site/03-design-build/output/code/site-src/dist/media/img/case-1-before.webp
@@ -177,19 +177,19 @@ b1443f6e15fa8dce234cbab4a32fe875eda5aba69d6d99a58f9a6e125cb2c486	48864	scenario-
 34094ce5913cef6f2128c71cd68b54954e9385ff2dd6cb98281d9c9322c33130	72114	scenario-0-new-site/03-design-build/output/code/site-src/media/img/tech.webp
 ff2824d53f7407632c4dea9ce1af7d449db737da1b5b8911b7b7e835ac486e75	4688	scenario-0-new-site/03-design-build/output/code/site-src/media/img/vitals.svg
 05010c647a318c1c42ade200c28b13ba947d3e28ca708d638e05c0c44b45a050	5733	scenario-0-new-site/03-design-build/output/code/site-src/media/img/webmd.svg
-d64a6f9cd5e9acd1340a6d979d0d68af7560c9958dc8cb043bdb4f0c49e486d1	17264	scenario-0-new-site/03-design-build/output/import-input.b64
-eb045ea32b167a3e4efcbd70c43a11bf4a669469e723d31eebce22e82f85bbb6	12947	scenario-0-new-site/03-design-build/output/import-input.json.gz
-696b07a9a148b981ead943d8812509ea942c0eb02b746906e35f4bcab9c2edbd	39496	scenario-0-new-site/03-design-build/output/import-out.b64
-275dbf36271fbf07156f26c9f76195371ec089e8dc447b10c8af34a4a0934b86	171719	scenario-0-new-site/03-design-build/output/import-out.json
+74034fe80423825eb076be5a91f2ea8f5889ce0990e7f8ca8d573297fcbed1c8	18588	scenario-0-new-site/03-design-build/output/import-input.b64
+97cc396c8c42ec5bdb1db2b684ef3c209733dfaf008b459cd81b5f3c6830acc5	13939	scenario-0-new-site/03-design-build/output/import-input.json.gz
+8621993fc573de82f0323ba51bd197777240724dfe6611c8e663f904b21cc82e	41696	scenario-0-new-site/03-design-build/output/import-out.b64
+f72cff08058023b32141da07b5af2f1cc3d794d65e43c7c16556e21b534f574d	181944	scenario-0-new-site/03-design-build/output/import-out.json
 7355f9d720bbf98b5b9de7afe2f4e4af0f26e81515217a6fe7ae522606a4d3c1	701052	scenario-0-new-site/03-design-build/output/look/1024/00.png
 9ae913c20eedc3e10769f58607bbbad1342df7ab3a433538d571233a3a9e350f	869116	scenario-0-new-site/03-design-build/output/look/1280/00.png
 7ef0d590ce63419301db2df6548b4990f7c044388ceac342fac580e3afe73083	907877	scenario-0-new-site/03-design-build/output/look/1366/00.png
 626c045fb2720fa851e42df21eb4aa1c22403f624ef347162f5a0f5838655821	3539775	scenario-0-new-site/03-design-build/output/look/1440-full/full.png
 bf96b2de43554146491be467dc1742444976deebd4416bd6c4149c50eaa781b6	896740	scenario-0-new-site/03-design-build/output/look/1440-scene/00.png
 6c8f645ea5642a0297ab81d0d3385d07e33bda7b62a9bfccea630110339144ca	1195275	scenario-0-new-site/03-design-build/output/look/1440-scene/01.png
-a09b4a6ca4bd814339163b2be1cc614bd49bff3e9707d77ba6eb56b68ecb6409	496424	scenario-0-new-site/03-design-build/output/look/1440/00.png
-6a459e714499f23cf4065c2652c7b731dc80c86b4a6f62200984e7b71574f263	366626	scenario-0-new-site/03-design-build/output/look/1440/01.png
-b3ce7b4793ee6962f3529b28168d6ff31b3bfbaa02b477213e1b4bec9353b41d	347803	scenario-0-new-site/03-design-build/output/look/1440/02.png
+b33435072028554bf1dd6c8977195ffc0b5f4b9714fff542e3512ec6afc65b27	118676	scenario-0-new-site/03-design-build/output/look/1440/00.png
+acc7b0dd5fecdee4e0fcdd4973368408cfd15203de11043f21ff5c058c06d622	56645	scenario-0-new-site/03-design-build/output/look/1440/01.png
+9416a6eafac9c1ff1399fb7638aa5b60ee3e6a40b530ae219daa4b2c0b4f4900	384363	scenario-0-new-site/03-design-build/output/look/1440/02.png
 4d0fa77491525de274b16e576a197d69754a1f1b5b2c855d8004897779070368	426268	scenario-0-new-site/03-design-build/output/look/1440/03.png
 228409ef31ead6f9fe9bd52e8927f68b87efffd614b545fbc9d2df168d76e85f	458203	scenario-0-new-site/03-design-build/output/look/1440/04.png
 b4b65b4e7cfd338bf484e7b7a41245ba7604fe77619351790fb88a43a19526d6	941112	scenario-0-new-site/03-design-build/output/look/1440/05.png
@@ -219,10 +219,13 @@ d9813bca6bf5bb313af54c93aaff0bf6e8da62ed9b30b717b493b9d7b5f2ec3f	849296	scenario
 e1d04b823c95aa48dd2e6334d6f89ec891ece8b12e9a5ae085ea03e4c607b346	367120	scenario-0-new-site/03-design-build/output/look/1440/29.png
 d7b8a38150fcff7196285500053b88a2a3216762066d03a2edecfd3944dcfcce	314930	scenario-0-new-site/03-design-build/output/look/1512-scene/00.png
 f6907ab06f08dede9530556df4523556d0e87077b15e7d70a8675c8158528adb	2151465	scenario-0-new-site/03-design-build/output/look/390-full/full.png
-5504ae029643ff4f63aac57ec9ab6dcd1b1c05164515e000bea34a820503f323	235246	scenario-0-new-site/03-design-build/output/look/390/00.png
-9463c7633c58d36b3c1400b7dd27cf47c2a83a318c27dfb1bd6b891f661b258d	242891	scenario-0-new-site/03-design-build/output/look/390/01.png
+8722cd74b5f0aa0e76eb4b5a10ec184eab835d8a5c8e045733ad31e7b4297e7b	64211	scenario-0-new-site/03-design-build/output/look/390/00.png
+887e766d537a320727e4428e673f0339342d04c60ba5b014d7edd81c69875bbe	56756	scenario-0-new-site/03-design-build/output/look/390/01.png
 1e32a6377bcc6850dcc34a6936ec8ee34d5147f79002dc4a3287a332799f5e84	403838	scenario-0-new-site/03-design-build/output/look/390/02.png
 01b690379c3375e2624704cab9bf221efe30a347a936bd8f72c766295c0ff715	345647	scenario-0-new-site/03-design-build/output/look/390/03.png
+b4c315da24bf7b920d340400deac59b2c4932edb9fcb9cab3d7d4e2e10f472ce	2284	scenario-0-new-site/03-design-build/output/look/bit-processgrid.png
+2350559956e99d6e2067635a5e846dc3a6a2e5ce395f72020671dbc2d6c28db0	2590	scenario-0-new-site/03-design-build/output/look/bit-solutions.png
+fd60d2cb26164dca22595920305ce6ee255054018a6660f45def42d93c17628b	3865	scenario-0-new-site/03-design-build/output/look/bit-techimage.png
 94c4d4900ae35b5e482bf5617323ad1ee2ad61c6c81051d8f310d993b3993c44	290794	scenario-0-new-site/03-design-build/output/look/compare-1440/00.jpg
 1ea83348c0b0cd011c91afc036b04def320eff9d57d38265ef917f40e0d07a31	227228	scenario-0-new-site/03-design-build/output/look/compare-1440/01.jpg
 fc68022ffdc812d47e690353bc4d60002fae261a5a1303b7585ee2683afde2fc	237957	scenario-0-new-site/03-design-build/output/look/compare-1440/02.jpg
@@ -265,7 +268,7 @@ d1bcfb0936254dc38f030faa68a7663c22701c92d8d55691e54b49bc4672c0be	257	scenario-0-
 5851cb1f4b4840cc39382b8d33e6860137fd8e2908672c80af75381d34d4a824	383	scenario-0-new-site/03-design-build/output/push-6-embeds.log
 f22330828453b5a360237bf5f45791b951169dcafd0a147a03f8301c1d526fb4	125	scenario-0-new-site/03-design-build/output/push-7-template-guard.log
 13806fc73ac1195fa8fdf1c9db27309a63a5e9bd1bed09c8d900102b6bf84850	26	scenario-0-new-site/03-design-build/output/push-8-publish.log
-2cb3eef918efde1ede1922343d9da7b99ece2e1a8ba0095091f4c7a5d7c5a6e8	3550	scenario-0-new-site/03-design-build/output/push.log
+c25212cf1969f27fe70bebedfbf02a069189aef8ee3b6b1fe8159dc484e8f67d	3652	scenario-0-new-site/03-design-build/output/push.log
 d58469e33e5d903f3d0eb5f17378f42b261db5d514fd2f2cea7c4f892b0cf80a	2781317	scenario-0-new-site/03-design-build/output/screenshots/index/1024.png
 392ea2992b23482eac8dffb376b162b16b82ed5de33acccb2670b4334340dba8	3435568	scenario-0-new-site/03-design-build/output/screenshots/index/1440.png
 5bbb154964c0448e23ef7d893d83e2e5ab6fa97bc938d8e1eae164682b336958	4111098	scenario-0-new-site/03-design-build/output/screenshots/index/1920.png
@@ -289,13 +292,13 @@ d719484100fba9b469b003873e51f9f549b82b7221757ee2261568649f293c65	793268	scenario
 73136b46b77a96737d9e4df3def50a69a43b3615af24e7ea431d555c535a1730	500882	scenario-0-new-site/03-design-build/output/screenshots/live/1440-view-hero.png
 fcae0e435087e7a0ccab7e765dc7496470b4a7c21d0e9dfe2de95753d41aa35e	67996	scenario-0-new-site/03-design-build/output/screenshots/live/1440-view-surgeon.png
 0c827fe2f73d80f09d8a0e8b26a5263dc2d9779a6ed0ad3cd38b8e29d3fd3ce6	608	scenario-0-new-site/03-design-build/output/seo-dry.log
-ed0ce6bddd7ff917f6d3a4ab3b247f12439472c5c42ad349682ebaf7ad63b512	2984	scenario-0-new-site/03-design-build/output/tokens.css
-0a08b6e7f18db9693a8ac61b08e9d40b12ab050838214f6260105f4cd81aed9d	4654615	scenario-0-new-site/03-design-build/output/visual/index-1440-diff.png
-0ee056f6a3b463804637557bf7aae36a1e03f2d819d5f386d9f3528bcaf3c3ed	4576103	scenario-0-new-site/03-design-build/output/visual/index-1440-live.png
-be3a392a70fdf3cd8e2fca0eca9c4b13e0ebce6d41372d4b6352d5b783c1e0f1	4922424	scenario-0-new-site/03-design-build/output/visual/index-1440-local.png
-01ed48a1522c8ebf86ab195d60bb7111076a9e5348406833545f3beb92f508f6	2902241	scenario-0-new-site/03-design-build/output/visual/index-390-diff.png
-25a72e5bd063894e76c4c15f3f6e081ce187f46c075c1f4419aa264b97d51723	2850716	scenario-0-new-site/03-design-build/output/visual/index-390-live.png
-25a1f6a6dbb6f9a268bebed6298b5efd77a79bdce55e93ea0bdf437c47dcf3f7	3036128	scenario-0-new-site/03-design-build/output/visual/index-390-local.png
+a09b0c51cee2e98493dde3f9812b1e29af660bdc7af36610e8841b90af15170c	3023	scenario-0-new-site/03-design-build/output/tokens.css
+972f84316d39b43ce8455c9e93052c4a0a76750fd39dfcfde25d2995a7f79e3f	4643246	scenario-0-new-site/03-design-build/output/visual/index-1440-diff.png
+050e46291f628d33ba38bb2c193ae5b3d399d5132bbd1cce60646150909fd7fc	4562921	scenario-0-new-site/03-design-build/output/visual/index-1440-live.png
+7f068468ef88f08920a7510c13f3ae24c615dbe1f65e7583218d6a7fb388be4b	4915275	scenario-0-new-site/03-design-build/output/visual/index-1440-local.png
+631ded7f4dfbff56ae3d2f5e9a32a0d6781fbb34b4d28f76ed0cf8ca10f682b5	2898721	scenario-0-new-site/03-design-build/output/visual/index-390-diff.png
+9e8bf1b0664071fd5600d72dd07aad962ff9983d449f56bad57574f6d3bccf15	2845955	scenario-0-new-site/03-design-build/output/visual/index-390-live.png
+735fa46afab99adba88067e9394d8ea5ea9e5666d8f5f1525ed6fd64c122d76c	3032363	scenario-0-new-site/03-design-build/output/visual/index-390-local.png
 02f2fef1b229b2f90df01855f2729ea7d508d2ffc3f62abe095ceb0b58583e87	5273	scenario-1-migration/01-old-site-capture/output/assets.log
 02377a904c5b5dbb4d8bf27208e9667fdb407eabc9f318dace9bec4300279e0c	9820	scenario-1-migration/01-old-site-capture/output/assets/downloads/wf/0032d8_Care-Credit-1024x133-p-500.webp
 82b7f42f5c68c69b4f325372765e64982ef594c0a082d3146211523595beb4df	18782	scenario-1-migration/01-old-site-capture/output/assets/downloads/wf/0032d8_Care-Credit-1024x133-p-800.webp
