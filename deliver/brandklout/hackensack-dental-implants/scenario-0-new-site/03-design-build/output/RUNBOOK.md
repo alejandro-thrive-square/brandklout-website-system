@@ -2,6 +2,64 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-09-30 (evening) · Google reviews widget (Elfsight) under the gallery, on staging
+
+Task brief: [`docs/tasks/2026-09-30-google-reviews-widget.md`](../../../docs/tasks/2026-09-30-google-reviews-widget.md).
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- **Where.** The home page had no review section (neither has concept 04), so the widget sits in the
+  proof chapter: a `.reviews` block (`#reviews`) inside `section#results`, after the pinned gallery,
+  with the chapter's own `.results-top` heading shape: kicker "Patient Reviews", "In their own
+  words.", "Google reviews of the practice, shown live and unedited." The old Webflow site runs the
+  same widget on `/patient-testimonials`, `/insurance-financing` and `/technology`, never on `/`.
+- **Widget.** Elfsight Google Reviews `cf96ca10-8feb-4ac7-8668-ddf398e0f61f` (registry key
+  `hackensack`, listing Aesthetic Dental Center of Hackensack, 163 Main St). Snippet without
+  `data-elfsight-app-lazy`. Nothing was created or edited on Elfsight.
+- **How.** An embed marker in `site-src/pages/index.html` (`data-embed="google-reviews"`) plus an
+  entry in `embeds.json`, so the normal chain (`push-staging.sh`) places it as a
+  `brandklout.embed-origins.embed` node in snippet mode and a re-import keeps it. Backup first:
+  `output/backups/pre-reviews-stg/` (seq 7). Chain run once: 356 nodes, 2 markers → 2 Embed blocks,
+  published, seq 8. CSS: `.reviews`, `.reviews-embed` in `30-sections.css` (+767 margins).
+- **Verified in real Chrome, fresh load:** 751px tall, "Excellent on Google 4.7 (1,104)", live
+  reviews (Nicole Obregon, Adriene Urquhart, Öznur Erdem, Laura Santos...). Published HTML has the
+  compatible CSP, `platform.js` and the widget div, no lazy attribute. `probe.mjs` 28/28,
+  `check-staging.mjs` 14/14.
+- **Production: not written.** The production instance is still the empty default (one page
+  "Home", one node, no style rules, nothing published). The marker ships with the site when the
+  home page is first pushed there; nothing to place until then.
+
+### Next
+
+1. Production gets the widget with the first push of the site (the chain places it). Verify in a
+   real browser there too, scrolled to `#reviews`.
+2. The widget brings its own header ("Excellent on Google"), Google-grey cards and its own font under
+   our chapter heading. If the reviewer wants it quieter, turn the widget header off and match the
+   colours in Elfsight's editor (Header / Theme), not in CSS.
+3. Promote the balanced-`</div>` fix in `tools/instatic-site/push/place-embeds.mjs` to `main`
+   (and fold `empty-embed-markers.mjs` into `build-import-input.mjs` there): `scenario.mjs update`
+   would overwrite the client copy with the broken one.
+
+### Gotchas
+
+- **Both marker regexes cut at the first `</div>`.** `place-embeds.mjs` (`snippetFor`) and
+  `empty-embed-markers.mjs` matched `<div data-embed>…</div>` non-greedily. The GHL survey has no
+  inner div so it never showed; Elfsight's snippet is `<script>` + `<div class="elfsight-app-…">`,
+  and the cut would have emptied the marker to `<div></div></div>` (closing the parent early) and
+  published an unclosed div. Both now walk to the div that balances the marker.
+- **The Google Reviews app renders only near the viewport, lazy attribute or not.** On a fresh
+  load the div is 0px with 0 children while `platform.js`, the boot request (200) and the app
+  bundle have all loaded; scroll `#reviews` into view and it renders within ~2s. A gate that
+  measures the widget at `scrollY 0` will call it broken. Measure after scrolling to it.
+- `probe.mjs` now aborts Elfsight hosts like the GHL ones: `platform.js` keeps polling and
+  `networkidle2` never settled (30s navigation timeout on the local build).
+- A comment in the page source that names `data-elfsight-app-lazy` reaches the built page: the
+  build keeps HTML comments, so a grep for the attribute is a false positive. The comment was
+  reworded.
+- The chain's `tail -3` hides `place-embeds.mjs`'s per-marker lines; `output/push-6-embeds.log`
+  is from an earlier hand run. Run `node ../../tools/instatic-site/push/place-embeds.mjs` (dry)
+  to see "2 block(s) already placed".
+
 ## 2026-09-30 (late) · layouts recomposed editorially, on staging
 
 ### Done (commit: see the client `RUNBOOK.md` row)

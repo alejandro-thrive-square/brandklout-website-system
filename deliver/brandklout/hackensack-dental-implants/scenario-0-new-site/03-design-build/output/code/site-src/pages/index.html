@@ -197,6 +197,20 @@
         </div>
         <div class="note">Every case is different; individual results vary.</div>
       </div>
+      <!-- Live Google reviews, the same Elfsight widget the current site runs (registry key `hackensack`).
+           An embed marker: the push chain empties it on import and place-embeds.mjs swaps the node for a
+           brandklout.embed-origins Embed carrying this snippet (embeds.json: google-reviews). Elfsight's
+           lazy attribute is left out on purpose: with it the widget never boots on Instatic (0px, no error). -->
+      <div class="reviews" id="reviews">
+        <div class="results-top">
+          <div>
+            <div class="kicker js-rise">Patient Reviews</div>
+            <h2 class="display js-split">In their own words.</h2>
+          </div>
+          <p class="js-rise">Google reviews of the practice, shown live and unedited.</p>
+        </div>
+        <div class="wz-embed reviews-embed" data-wz-embed="auto" data-embed="google-reviews"><!-- Elfsight Google Reviews | Aesthetic Dental Center of Hackensack --><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-cf96ca10-8feb-4ac7-8668-ddf398e0f61f"></div></div>
+      </div>
     </div>
   </section>
 

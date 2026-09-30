@@ -33,9 +33,10 @@ const open = async (w, h, opts = {}) => {
   const pg = await browser.newPage();
   pg.errors = [];
   pg.on('pageerror', (e) => pg.errors.push(e.message));
-  // The GoHighLevel survey answers 401 to Turnstile on localhost; it is not what is proved here.
+  // The GoHighLevel survey answers 401 to Turnstile on localhost, and Elfsight's platform.js keeps polling so
+  // networkidle2 never settles (2026-09-30); neither widget is what is proved here. Both are checked live.
   await pg.setRequestInterception(true);
-  pg.on('request', (r) => (/leadconnectorhq|msgsndr|challenges[.]cloudflare/.test(r.url()) ? r.abort() : r.continue()));
+  pg.on('request', (r) => (/leadconnectorhq|msgsndr|challenges[.]cloudflare|elfsight/.test(r.url()) ? r.abort() : r.continue()));
   if (opts.reduce) await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
   await pg.setViewport({ width: w, height: h, isMobile: w < 700, hasTouch: w < 700 });
   await pg.goto(URL_, { waitUntil: 'networkidle2' });

@@ -16,11 +16,35 @@ const out = path.join(process.cwd(), 'output');
 const gz = path.join(out, 'import-input.json.gz');
 const input = JSON.parse(zlib.gunzipSync(fs.readFileSync(gz)).toString('utf8'));
 let emptied = 0;
+// A marker is emptied up to the </div> that BALANCES it, not the first </div>: vendor snippets
+// carry divs of their own (Elfsight's `<div class="elfsight-app-…"></div>`), and a non-greedy match
+// left the marker's own </div> behind, closing the marker's parent early (2026-09-30).
+function emptyMarkers(html) {
+  const open = /<div[^>]*\sdata-embed="[^"]*"[^>]*>/g;
+  const tag = /<\/?div\b[^>]*>/g;
+  let out = '';
+  let cursor = 0;
+  let m;
+  while ((m = open.exec(html))) {
+    const innerStart = m.index + m[0].length;
+    tag.lastIndex = innerStart;
+    let depth = 1;
+    let t;
+    let innerEnd = -1;
+    while ((t = tag.exec(html))) {
+      depth += t[0].startsWith('</') ? -1 : 1;
+      if (depth === 0) { innerEnd = t.index; break; }
+    }
+    if (innerEnd < 0) throw new Error(`unbalanced embed marker at ${m.index}`);
+    if (html.slice(innerStart, innerEnd).trim()) emptied++;
+    out += html.slice(cursor, innerStart);
+    cursor = innerEnd;
+    open.lastIndex = innerEnd;
+  }
+  return out + html.slice(cursor);
+}
 for (const page of input.pages) {
-  page.html = page.html.replace(/(<div[^>]*\sdata-embed="[^"]*"[^>]*>)([\s\S]*?)(<\/div>)/g, (whole, open, inner, close) => {
-    if (inner.trim()) emptied++;
-    return open + close;
-  });
+  page.html = emptyMarkers(page.html);
   if (/<iframe/i.test(page.html)) throw new Error(`${page.slug}: an <iframe> outside an embed marker cannot survive importHtml`);
 }
 const packed = zlib.gzipSync(Buffer.from(JSON.stringify(input)), { level: 9 });

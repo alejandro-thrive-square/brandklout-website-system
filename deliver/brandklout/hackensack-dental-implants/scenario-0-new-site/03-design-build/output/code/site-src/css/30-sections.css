@@ -106,6 +106,12 @@ blockquote { font-family: var(--display); font-size: calc(2.125rem * var(--s-md)
 .tag { position: absolute; left: 0.875rem; bottom: 0.875rem; background: var(--ink); color: #fff; padding: 0.5625rem 0.75rem; font-size: var(--t-xs); letter-spacing: 0.13em; text-transform: uppercase; z-index: 3; line-height: 1.3; }
 .note { font-size: var(--t-xs); color: var(--muted); margin-top: 0.8125rem; }
 
+/* ---------- reviews: the live Google feed under the gallery (an Embed block on the published page) ---------- */
+.reviews { margin-top: 7.5rem; padding-top: 4.5rem; border-top: 1px solid var(--line-strong); }
+.reviews .results-top { margin-bottom: 2.25rem; }
+.reviews-embed { display: block; width: 100%; min-height: 26rem; }
+.reviews-embed > * { width: 100%; }
+
 /* ---------- team: portrait dropped low, copy set high (the doctor's name runs behind, from the runtime) ---------- */
 .team { background: var(--g-white); }
 .team-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: start; }
@@ -213,6 +219,7 @@ details p { font-size: var(--t-xs2); color: var(--muted); padding: 0 2.5rem 1.25
   .solution .go { justify-self: start; }
   .result:nth-child(n) { height: 360px; margin-top: 0; }
   .results-top > p { margin-top: 0.9375rem; }
+  .reviews { margin-top: 4.5rem; padding-top: 3rem; }
   .processgrid { grid-template-columns: 1fr; }
   .step { border-right: 0; min-height: 0; }
   .final h2 { font-size: calc(6.4rem * 0.62); }

@@ -85,12 +85,29 @@ function snippetFor(slug, key) {
   // Built by hand rather than with `new RegExp` and a template literal: `\s`
   // in a template literal is just "s", and the pattern silently matches
   // nothing. It cost a run here on 2026-09-17.
-  const re = new RegExp('<div[^>]*\\sdata-embed="' + key + '"[^>]*>([\\s\\S]*?)<\\/div>')
-  const m = html.match(re)
-  if (!m || !m[1].trim()) {
+  const open = new RegExp('<div[^>]*\\sdata-embed="' + key + '"[^>]*>').exec(html)
+  // The marker's contents end at the div that BALANCES the marker, not at the first `</div>`:
+  // most vendor snippets carry a div of their own (Elfsight's `<div class="elfsight-app-…"></div>`),
+  // and a non-greedy match cut the snippet at that inner close, publishing an unclosed div that
+  // swallowed the rest of the page (hackensack-dental-implants, 2026-09-30).
+  const inner = open ? balancedInner(html, open.index + open[0].length) : null
+  if (!inner || !inner.trim()) {
     throw new Error(`no marker "${key}" with contents in ${slug}.html — build the site first`)
   }
-  return m[1].trim()
+  return inner.trim()
+}
+
+/* The text between an opening <div …> that ends at `from` and the </div> that closes it. */
+function balancedInner(html, from) {
+  const tag = /<\/?div\b[^>]*>/g
+  tag.lastIndex = from
+  let depth = 1
+  let m
+  while ((m = tag.exec(html))) {
+    depth += m[0].startsWith('</') ? -1 : 1
+    if (depth === 0) return html.slice(from, m.index)
+  }
+  return null
 }
 
 /* The module publishes its own `class="wz-embed"`, and the publisher injects
