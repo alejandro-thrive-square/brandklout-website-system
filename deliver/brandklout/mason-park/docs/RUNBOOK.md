@@ -9,7 +9,7 @@ then only the runs you need. Do not read them all.
 
 **The practice's own Elfsight All-in-One Reviews widget (`32926aff`, the other Elfsight account, adult listing
 #104A) is live on both instances where the static reviews were: the homepage deck and the reviews page wall**
-([`runbook/2026-09-30-google-reviews-widget.md`](./runbook/2026-09-30-google-reviews-widget.md)). It is a
+([`runbook/2026-09-30-google-reviews-widget.md`](./runbook/2026-09-30-google-reviews-widget.md), commit `ab68c66c`). It is a
 `brandklout.embed-origins` Embed, snippet mode, **never with `data-elfsight-app-lazy`**. The local HTML carries the
 slot (`.rv-embed[data-elfsight-reviews]`) and `place-ad-embeds.mjs` builds the Embed, so a chain run keeps it;
 `.tmp/add-elfsight-reviews.mjs --apply --publish` puts it back on the live rows if a page is rebuilt without the

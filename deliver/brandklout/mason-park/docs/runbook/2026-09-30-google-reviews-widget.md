@@ -5,6 +5,8 @@ Task brief: [`docs/tasks/2026-09-30-google-reviews-widget.md`](../tasks/2026-09-
 
 ## Done
 
+Commit `ab68c66c` on `bk-mason-park` (not pushed, not merged).
+
 - **The widget is the practice's own**, Elfsight All-in-One Reviews `32926aff-7df5-4c6d-8f35-d4d3f5f46b4b`,
   from the old site, in the OTHER Elfsight account (not Trong's), on the adult listing (Mason Park Dental
   of Katy, 21830 Kingsland Blvd **#104A**). Nothing was created or edited in Elfsight. Registry row:
