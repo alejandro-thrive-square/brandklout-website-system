@@ -7,9 +7,11 @@
  * rule on a bare tag (li margins, label weight, link colour) reaches in and
  * moves the page by a few pixels, which no text, image or overflow gate can
  * see. This compares COMPUTED styles, element for element, between the local
- * build and staging, for every element inside .aq-root.
+ * build and staging, for every element inside .aq-page, at a width inside
+ * each of Webflow's breakpoints. It also proves the class layer: a style the
+ * builder stored differently from wf.css shows up here as a difference.
  *
- *   node parity.mjs [1440,390]      # exits 1 on any difference
+ *   node parity.mjs [1440,1100,900,600,390]      # exits 1 on any difference
  */
 import { spawn } from 'node:child_process';
 import { createServer } from 'node:http';
@@ -19,14 +21,17 @@ import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const HERE = fileURLToPath(new URL('.', import.meta.url));
-const LOCAL = join(HERE, '../../../04-design/.tmp/aox-quiz');
+const LOCAL = join(HERE, '../../../04-design/.tmp/aox-quiz/native/out');
 const STAGING = 'https://arvadadentalcenter.webflow.io/ads-landing-pages';
-const PAGES = [['all-on-x-quiz.html', 'all-on-x-quiz'], ['all-on-x-quiz-consult.html', 'all-on-x-quiz-consult'], ['all-on-x-quiz-thank-you.html', 'all-on-x-quiz-thank-you']];
-const WIDTHS = (process.argv[2] || '1440,390').split(',').map(Number);
+const PAGES = ['all-on-x-quiz', 'all-on-x-quiz-consult', 'all-on-x-quiz-thank-you'].map((s) => [s + '.html', s]);
+const ROOT = '.aq-page';
+const WIDTHS = (process.argv[2] || '1440,1100,900,600,390').split(',').map(Number);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Horizontal margins are not compared as values: an `auto` margin computes to a used length that
+// depends on when it is read (120px or 0px for the same centred box). Position and width are.
 const PROPS = ['display', 'position', 'font-family', 'font-size', 'font-weight', 'font-style', 'line-height', 'letter-spacing', 'text-transform',
-  'text-align', 'text-decoration-line', 'color', 'background-color', 'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
+  'text-align', 'text-decoration-line', 'color', 'background-color', 'margin-top', 'margin-bottom',
   'padding-top', 'padding-right', 'padding-bottom', 'padding-left', 'border-top-width', 'border-right-width', 'border-bottom-width',
   'border-left-width', 'border-top-color', 'border-radius', 'box-sizing', 'list-style-type', 'vertical-align', 'opacity'];
 
@@ -75,14 +80,14 @@ async function snapshot(url, width) {
   await wait(1500);
   const data = await ev(`(function(){
     var props = ${JSON.stringify(PROPS)};
-    var root = document.querySelector('.aq-root'); if (!root) return null;
+    var root = document.querySelector(${JSON.stringify(ROOT)}); if (!root) return null;
     var out = [], all = root.querySelectorAll('*');
     for (var i = 0; i < all.length; i++) {
       var e = all[i]; if (e.closest('svg') && e.tagName.toLowerCase() !== 'svg') continue;
       var cs = getComputedStyle(e), r = e.getBoundingClientRect(), o = {};
       for (var j = 0; j < props.length; j++) o[props[j]] = cs.getPropertyValue(props[j]);
-      o.width = Math.round(r.width); o.height = Math.round(r.height);
-      out.push({ sel: e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') + (e.getAttribute('class') ? '.' + e.getAttribute('class').trim().split(/\\s+/).join('.') : ''), s: o });
+      o.x = Math.round(r.left); o.width = Math.round(r.width); o.height = Math.round(r.height);
+      out.push({ sel: e.tagName.toLowerCase() + (e.id ? '#' + e.id : '') + (e.getAttribute('class') ? '.' + e.getAttribute('class').trim().split(/\\s+/).filter(function(c, n, all){ return all.indexOf(c) === n && c.indexOf('w--') !== 0; }).join('.') : ''), s: o });   // Webflow writes a DOM element's class twice
     }
     var b = getComputedStyle(document.body);
     return { els: out, body: { bg: b.backgroundColor, color: b.color, font: b.fontFamily, size: b.fontSize, lh: b.lineHeight, margin: b.margin }, height: Math.round(root.getBoundingClientRect().height) };
@@ -97,7 +102,7 @@ for (const [file, slug] of PAGES) {
     const a = await snapshot(`http://127.0.0.1:${server.address().port}/${file}`, width);
     const b = await snapshot(`${STAGING}/${slug}`, width);
     const diffs = [];
-    if (!a || !b) { diffs.push('no .aq-root on ' + (!a ? 'local' : 'staging')); }
+    if (!a || !b) { diffs.push('no ' + ROOT + ' on ' + (!a ? 'local' : 'staging')); }
     else {
       if (a.els.length !== b.els.length) diffs.push(`element count local ${a.els.length} staging ${b.els.length}`);
       for (const k of Object.keys(a.body)) if (a.body[k] !== b.body[k]) diffs.push(`body ${k}: local ${a.body[k]} | staging ${b.body[k]}`);

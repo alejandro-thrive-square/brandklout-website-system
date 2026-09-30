@@ -53,7 +53,7 @@ await wait(900);
 
 const list = sels.length ? sels : ['header.aq-topbar, main > section, footer.aq-foot'];
 const boxes = await ev(`Array.prototype.slice.call(document.querySelectorAll(${JSON.stringify(list.join(','))})).map(function(e){ var r = e.getBoundingClientRect(); return { y: r.top + scrollY, h: r.height }; })`);
-const name = file.replace(/\.html$/, '');
+const name = file.replace(/\.html$/, '').split('/').join('_');
 let n = 0;
 for (const b of boxes) {
   const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true, clip: { x: 0, y: b.y, width, height: Math.min(b.h, 2400), scale: 1 } }, sessionId);

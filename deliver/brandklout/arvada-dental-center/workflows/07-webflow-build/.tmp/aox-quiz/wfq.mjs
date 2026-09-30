@@ -21,6 +21,7 @@ export const SITE = '693c51e685b19f0d0c149cab';            // Arvada Dental Cent
 const SESSION_FILE = join(HERE, '.session.json');
 const CONTEXT = 'Builds the new All-on-X quiz landing, consult and thank-you pages on the Arvada Dental Center site from the approved local design.';
 
+const SITE_ONLY = new Set(['asset_tool']);                 // Designer tools that take a site and no page
 const DATA_API = new Set(['data_pages_tool', 'data_assets_tool', 'data_sites_tool', 'data_scripts_tool', 'data_fonts_tool']);
 
 function session() {
@@ -39,7 +40,8 @@ export async function wf(tool, actions, { pageId } = {}) {
   for (let attempt = 0; attempt < 6; attempt++) {
     const s = session();
     const args = { actions: list, session_id: s.session_id, agent_id: s.agent_id, context: CONTEXT };
-    if (!DATA_API.has(tool)) { args.siteId = SITE; args.pageId = pageId ?? ''; }
+    if (SITE_ONLY.has(tool)) args.siteId = SITE;
+    else if (!DATA_API.has(tool)) { args.siteId = SITE; args.pageId = pageId ?? ''; }
     ({ text } = await callTool(tool, args));
     const issued = text.match(/session_id: (ses_[0-9A-Za-z]{27})/);
     if (issued) { writeFileSync(SESSION_FILE, JSON.stringify({ ...s, session_id: issued[1] })); }
