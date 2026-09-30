@@ -314,19 +314,12 @@
       </div>
     </div>
   </div>
+  <!-- The live Google reviews (Elfsight widget 670ca31c, since 2026-09-30). This slot is a
+       plain div in the build: the import chain cannot carry an Embed block, so after any push
+       run workflows/21-instatic-upload/add-elfsight-reviews.mjs --apply --publish, which swaps
+       the slot (or the three static cards it replaced) for the brandklout.embed-origins node. -->
   <div class="wrap pf-grid">
-    <blockquote class="pf-quote">
-      <p>&ldquo;Dr. Barriere is a dentist who sees a long-term vision for my dental health. He&rsquo;s on my team, advising me on my behalf, instead of just someone I visit for procedures.&rdquo;</p>
-      <footer>Peter Chang &middot; Google review</footer>
-    </blockquote>
-    <blockquote class="pf-quote">
-      <p>&ldquo;He is very careful with his implant technique. He makes sure the implant has plenty of time to heal into the jawbone. I am confident he will do a good job with the implant crown.&rdquo;</p>
-      <footer>Mike Hascats &middot; Google review</footer>
-    </blockquote>
-    <blockquote class="pf-quote">
-      <p>&ldquo;The hygienist is the most gentle and proficient on the west side. The front desk is incredibly organized, compassionate and professional.&rdquo;</p>
-      <footer>Annie Gigliotti &middot; Google review</footer>
-    </blockquote>
+    <div class="pf-embed" data-embed="google-reviews"></div>
   </div>
   <div class="wrap pf-links">
     <a class="textlink" href="https://www.google.com/maps?q=west+la+implants" target="_blank" rel="noopener">Read our Google reviews <span class="arrow">&rarr;</span></a>

@@ -19,11 +19,18 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   undecided (the client's domain is still WordPress). The asks are in
   [`ADS-LANDING-COMMENT.md`](./ADS-LANDING-COMMENT.md); the full list in scenario 3's
   [`INTAKE.md`](./scenario-3-ads-landing-pages/01-campaign-intake/output/INTAKE.md).
-- **Backups before the 2026-09-30 push**: tag `wla-pre-ads-2026-09-30`,
-  `/app/storage/backups/cms-2026-09-30-seq23-pre-ads.db` on the container. The live state after it
-  is `workflows/21-instatic-upload/.tmp/after-ads-2026-09-30/`.
+- **The Google reviews widget** (Elfsight `670ca31c-8602-42c1-a126-f46f653fe07f`, the practice's
+  listing, 4.9 / 209) is live in the homepage proof chapter since 2026-09-30, published **seq
+  25**, as an Embed block where the three static cards were. Run
+  [`docs/runbook/2026-09-30-elfsight-google-reviews-on-homepage.md`](./docs/runbook/2026-09-30-elfsight-google-reviews-on-homepage.md).
+  **A re-import drops it**: after any `push-site.mjs`, run
+  `workflows/21-instatic-upload/add-elfsight-reviews.mjs --apply --publish`.
+- **Backups before the 2026-09-30 pushes**: ads: tag `wla-pre-ads-2026-09-30`,
+  `/app/storage/backups/cms-2026-09-30-seq23-pre-ads.db` on the container; reviews: API snapshot
+  `workflows/21-instatic-upload/.tmp/backup-2026-09-30-pre-reviews/` (seq 24). The live state now
+  is `workflows/21-instatic-upload/.tmp/after-reviews-2026-09-30/` (seq 25).
 - **Any push is still a full replace with `--force`.** Compare a fresh `backup-live.mjs` snapshot
-  with `after-ads-2026-09-30/` first: identical means nobody edited in the admin.
+  with `after-reviews-2026-09-30/` first: identical means nobody edited in the admin.
 
 ## Runs
 
@@ -32,6 +39,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-09-30 | 3 · 01 campaign intake | Two Asana tasks pulled, `combo.json` and `INTAKE.md`, patient film transcripts found | `b9b96a5c` |
 | 2026-09-30 | 3 · 02 build the combo | Six pages built in `site-src`, pushed and published seq 24; upload chain repaired (imports, media list) | `b9b96a5c` |
 | 2026-09-30 | 3 · 03 QA and launch | Live gates clean except forms and conversion, which wait on Brandklout; three new checks | `b9b96a5c` |
+| 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | this commit |
 
 ## Version Control
 

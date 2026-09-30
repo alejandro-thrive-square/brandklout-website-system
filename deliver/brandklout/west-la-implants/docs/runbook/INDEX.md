@@ -1,11 +1,12 @@
 # Runbook index
 
-8 runs, newest first. Each line is one file in this folder.
+9 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-30 | **Elfsight Google Reviews on the homepage**: the three static cards became the live widget (Embed block in `#proof`), site.js guard, published seq 25, verified in real Chrome — carries **gotchas** (a re-import drops it; the Chrome extension freezes on this page) | [`2026-09-30-elfsight-google-reviews-on-homepage.md`](./2026-09-30-elfsight-google-reviews-on-homepage.md) |
 | 2026-09-24 | **Strict image pass**: every photo re-judged against its copy (167/370 failed), library swaps via `lib/image-map.mjs`, 42 licensed Freepik photos, verified, published seq 23 — carries **gotchas** | [`2026-09-24-strict-image-pass.md`](./2026-09-24-strict-image-pass.md) |
 | 2026-09-24 | **Backup + pre-review content-fit QA**: three-layer backup at seq 21, `qa-fit.mjs` audit, ~1,000 copy and 82 image findings fixed down to accepted ones, published seq 22 — carries **gotchas** | [`2026-09-24-pre-review-content-fit-qa.md`](./2026-09-24-pre-review-content-fit-qa.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |

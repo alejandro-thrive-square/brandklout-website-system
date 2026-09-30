@@ -54,6 +54,25 @@ has no `place-embeds.mjs` yet**: copy it from `deliver/process/tools/instatic-si
 with an `embeds.json`, and make `build-import-input.mjs` empty the marker first (the promoted copy
 lost that step). Read `tools/instatic-embeds/instatic-embeds.md` before touching it.
 
+## The Google reviews widget (2026-09-30)
+
+The homepage proof chapter (`#proof`) shows the live Google reviews: an Elfsight widget
+(`670ca31c-8602-42c1-a126-f46f653fe07f`, the practice's listing) placed as a
+`brandklout.embed-origins.embed` block in snippet mode where the three static `.pf-quote` cards
+were, inside the same `.wrap.pf-grid`. The build cannot carry it: `dist/index.html` has a plain
+`<div class="pf-embed" data-embed="google-reviews">` slot, and `importHtml` has no Embed module.
+
+| Script | Change |
+| :--- | :--- |
+| `add-elfsight-reviews.mjs` | **new, and the LAST step of every push**: swaps the slot (or the cards) for the block, adds the `.pf-embed` rule, re-syncs `src/scripts/site.js` with `dist/assets/site.js` when they differ; dry run by default, `--apply --publish` |
+| `site-src/sections/chapters.js` | the proof chapter tweens `.pf-quote` only when there are any: an empty GSAP target list logs a warning, and `check-local.mjs` counts a warning as a failure |
+| `site-src/css/30-chapters.css` | `.pf-embed{grid-column:1/-1;display:block;width:100%;min-height:420px}` |
+
+Never put `data-elfsight-app-lazy` back on the snippet (0 px, no boot on Instatic), and never
+create, edit or delete a widget from here: the registry is
+`deliver/process/tools/elfsight-reviews/review-widgets.json` on main. Run:
+[`docs/runbook/2026-09-30-elfsight-google-reviews-on-homepage.md`](../../docs/runbook/2026-09-30-elfsight-google-reviews-on-homepage.md).
+
 ## What is different about West LA Implants
 
 Read this before the Execution Steps; five things in this toolkit diverge from the med spa's copy
@@ -185,6 +204,10 @@ node ../08-qa/.tmp/check-local.mjs --base=$INSTATIC_BASE_URL --widths=1440
 node ../08-qa/.tmp/check-local.mjs --base=$INSTATIC_BASE_URL --widths=390
                                # 10. GATE - DRIVES EVERY published route: chapters, >=3 pins that
                                #     scrub, console, 390 overflow, SEO injection (~12 min each)
+node add-elfsight-reviews.mjs --apply --publish
+                               # 11. ALWAYS, after any push: the import left a plain .pf-embed
+                               #     slot in the homepage #proof; this puts the Google reviews
+                               #     Embed block back and republishes (trap 44)
 ```
 
 `verify-motion-live.mjs` is not optional and is not a nicety. The other four capture with
@@ -1116,6 +1139,17 @@ whose file still answers 200, is in the library, listed or not. The run now prin
 `library list returned 100; 144 more recognised from the previous media-map.json`. **Read the
 first line of the upload log: more `ok` than new files is this trap.** The promoted copy on main
 (`tools/instatic-site/push/upload-media.mjs`) has the same `limit=500` line and the same bug.
+
+### 44. A push drops the Google reviews Embed block, and the page still passes every gate
+
+Since 2026-09-30 the homepage `#proof` carries an Embed block (`brandklout.embed-origins.embed`)
+with the Elfsight widget. The build's `dist/index.html` has only a plain `.pf-embed` div in its
+place: `importHtml` has no Embed module and strips a raw `<script>`, so a full push publishes an
+empty 420 px slot under "Our patients tell it best." — no console error, no missing route, no
+tree-shaken class, every gate green. `add-elfsight-reviews.mjs --apply --publish` is step 11 of
+the Execution Steps for that reason; it also re-syncs the site bundle and the `.pf-embed` rule.
+Keep `.pf-grid` (the ScrollTrigger anchor) and the marquee (`.pf-row`) when touching the chapter:
+`sections/chapters.js` queries both without a guard.
 
 ### The check: `css-parity.mjs`
 

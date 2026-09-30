@@ -296,7 +296,10 @@ WZ.section('ch-proof', function(W){
   var sec = document.querySelector('.ch-proof'),
       row = sec.querySelector('.pf-row');
   wzLinesIn(document.getElementById('proofTitle'));
-  gsap.from(sec.querySelectorAll('.pf-quote'), { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1,
+  /* the three static cards became the live Elfsight widget on 2026-09-30; an empty target list
+     makes GSAP warn "target not found", which the console gate counts as a failure */
+  var quotes = sec.querySelectorAll('.pf-quote');
+  if (quotes.length) gsap.from(quotes, { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: .1,
     scrollTrigger: { trigger: sec.querySelector('.pf-grid'), start: 'top 85%', once: true } });
   if (W.reduced) return;
 
