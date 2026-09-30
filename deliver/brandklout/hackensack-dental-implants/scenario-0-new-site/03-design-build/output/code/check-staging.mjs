@@ -60,14 +60,15 @@ const d = await pg.evaluate(async () => {
       cursorPos: document.querySelector('.cursor') ? getComputedStyle(document.querySelector('.cursor')).position : null,
       scan: !!document.querySelector('.tech-image .scanline'),
       rule: !!document.querySelector('.processgrid .process-rule'),
+      ticker: getComputedStyle(document.querySelector('.proofbar .proofgrid')).display === 'flex' && document.querySelectorAll('.proofbar .proof').length === 8,
     },
   };
 });
 
 const staging = /-staging[.]up[.]railway[.]app$|^staging[.]/.test(host);
-const PINS = ['hero-scene', 'story-scene', 'process-scene', 'results-scene', 'final-scene'];
-say(d.wz && d.wz.ok && d.wz.smoother && PINS.every((p) => d.pins.includes(p)), 'runtime armed on the published page, five pinned scenes', `pins ${d.pins.join(', ')}; ${d.wz ? d.wz.active.join(' ') : 'no WZ'}`);
-say(d.interaction.drawings === 3 && d.interaction.scan && d.interaction.rule && d.interaction.drawingPos === 'absolute' && d.interaction.cursorPos === 'fixed', 'interaction layer created and styled (the verbatim stylesheet reached the page)', JSON.stringify(d.interaction));
+const PINS = ['story-scene', 'process-scene', 'results-scene', 'final-scene'];
+say(d.wz && d.wz.ok && d.wz.smoother && PINS.every((p) => d.pins.includes(p)), 'runtime armed on the published page, four pinned scenes', `pins ${d.pins.join(', ')}; ${d.wz ? d.wz.active.join(' ') : 'no WZ'}`);
+say(d.interaction.drawings === 3 && d.interaction.scan && d.interaction.rule && d.interaction.drawingPos === 'static' && d.interaction.ticker && d.interaction.cursorPos === 'fixed', 'interaction layer created and styled (the verbatim stylesheet reached the page)', JSON.stringify(d.interaction));
 say(d.chapters === 8 && d.h1 === 1, 'eight chapters, one h1');
 say(d.fonts.includes('Newsreader') && d.fonts.includes('DM Sans') && /Newsreader/.test(d.h1Font), 'both typefaces loaded from the media library', d.fonts.join(', '));
 say(d.opszWidths[0] !== d.opszWidths[1], 'Newsreader is the variable file (optical size changes the width)', `${d.opszWidths[0]}px at opsz 6, ${d.opszWidths[1]}px at opsz 72`);

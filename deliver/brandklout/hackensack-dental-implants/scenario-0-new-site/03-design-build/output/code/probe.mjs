@@ -156,7 +156,8 @@ for (const w of [1920, 1366, 1280, 1100, 1024, 992, 991, 768, 767]) {
   const c = await pg.evaluate(() => ({
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && (r.right > innerWidth + 1 || r.left < -1) && !el.closest('.skip'); }).map((el) => el.textContent.trim().slice(0, 28)),
-    overlap: (() => { const h = document.querySelector('.hero h1').getBoundingClientRect(); const v = document.querySelector('.hero-visual').getBoundingClientRect(); return innerWidth > 767 && h.right > v.left + 1 ? Math.round(h.right - v.left) : 0; })(),
+    // the masthead sets the headline above the photograph: any intersection of the two boxes fails
+    overlap: (() => { const h = document.querySelector('.hero h1').getBoundingClientRect(); const v = document.querySelector('.hero-visual').getBoundingClientRect(); const x = Math.min(h.right, v.right) - Math.max(h.left, v.left); const y = Math.min(h.bottom, v.bottom) - Math.max(h.top, v.top); return x > 1 && y > 1 ? Math.round(y) : 0; })(),
   }));
   say(c.overflow <= 0 && c.clipped.length === 0 && c.overlap === 0, `${w}: no overflow, no control cut off, headline clear of the photograph`, c.clipped.join(' | ') + (c.overflow > 0 ? ` overflow ${c.overflow}px` : '') + (c.overlap ? ` headline over photo by ${c.overlap}px` : ''));
   await pg.close();

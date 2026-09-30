@@ -68,6 +68,8 @@
   --wrap: 76.25rem;
   --gutter: 1.5rem;
   --pad: 7.375rem;
+  /* how far past .wrap a photograph reaches to touch the page edge */
+  --bleed: max(var(--gutter), (100vw - var(--wrap)) / 2);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 

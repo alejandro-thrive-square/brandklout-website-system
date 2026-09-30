@@ -30,15 +30,52 @@
 .navlinks > a:not(.btn):hover::after, .navlinks > a:not(.btn):focus-visible::after { transform: scaleX(1); transform-origin: left center; }
 
 /* ---- treatment cards: a line drawing of each treatment, drawn by the scroll ---- */
-.solution { position: relative; }
-.motion .solution { transition: box-shadow 0.25s ease; }
-.drawing { position: absolute; top: 1.75rem; right: 1.75rem; width: 7.5rem; }
-@media screen and (max-width: 767px) { .drawing { top: 1.25rem; width: 5.75rem; } }
+.motion .solution { transition: background-color 0.4s ease; }
+.drawing { grid-area: draw; width: 100%; max-width: 8.5rem; justify-self: center; }
+@media screen and (max-width: 767px) { .drawing { max-width: 6rem; justify-self: end; } }
 .drawing svg { display: block; width: 100%; height: auto; overflow: visible; }
 .drawing path { stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
 .drawing .gum { stroke: var(--accent); }
 .drawing .old { stroke: #b9b3a8; }
 .drawing .ti path { stroke: var(--accent-num); }
+
+/* ---- proof bar: one moving line in the display face (the runtime doubles the items to loop) ---- */
+.proofbar.is-ticker { overflow: hidden; }
+.proofbar.is-ticker .proofgrid { display: flex; width: max-content; max-width: none; margin: 0; }
+.proofbar.is-ticker .proof { display: flex; align-items: baseline; gap: 1rem; padding: 1.5rem 0 1.5rem 3rem; border: 0; white-space: nowrap; }
+.proofbar.is-ticker .proof::before { content: ''; align-self: center; width: 0.5rem; height: 0.5rem; margin-right: 2rem; border-radius: 50%; background: var(--accent); }
+.proofbar.is-ticker .proof strong { font-size: calc(3.25rem * var(--s-h)); }
+.proofbar.is-ticker .proof span { margin-top: 0; }
+
+/* ---- process: on desktop the steps are one row that scroll carries to the left ---- */
+@media screen and (min-width: 992px) {
+  /* the heading stays on top, on its own ground reaching to the page edge; the steps pass under it */
+  .motion .process-wrap { align-items: stretch; }
+  .motion .process-head { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding-right: 2.5rem; margin-right: -2.5rem; background: var(--g-white); }
+  .motion .process-head::before { content: ''; position: absolute; top: 0; bottom: 0; right: 100%; width: 50vw; background: var(--g-white); }
+  .motion .processgrid { display: flex; width: max-content; border-top: 1px solid var(--line); }
+  .motion .step { width: 21rem; min-height: 26rem; border-bottom: 0; border-right: 1px solid var(--line); }
+  .motion .step:nth-child(2n) { border-right: 1px solid var(--line); }
+  .motion .step .n { font-size: calc(8.5rem * var(--s-h)); line-height: 0.85; }
+}
+
+/* ---- hero headline once split: the indent the h1 carries would be inherited by every line and
+   word, so it is cleared inside and the first line alone steps back out ---- */
+.hero h1 .ln-mask, .hero h1 .ln, .hero h1 .wh { text-indent: 0; }
+.hero h1 .ln-mask:first-child { margin-left: -15rem; }
+@media screen and (max-width: 991px) { .hero h1 .ln-mask:first-child { margin-left: -8rem; } }
+@media screen and (max-width: 767px) { .hero h1 .ln-mask:first-child { margin-left: -1.5rem; } }
+
+/* ---- team: the doctor's name, very large, behind the portrait ---- */
+.team-mark { position: absolute; left: -1rem; top: -4.5rem; z-index: 0; font-family: var(--display); font-size: calc(17rem * var(--s-h)); line-height: 1; letter-spacing: -0.04em; color: #f0ede6; white-space: nowrap; pointer-events: none; user-select: none; }
+@media screen and (max-width: 767px) { .team-mark { font-size: 6.5rem; top: -3rem; } }
+
+/* ---- closing words step to the right, one per line ---- */
+@media screen and (min-width: 768px) {
+  .final h2 .wl:nth-child(2) { margin-left: 1.1em; }
+  .final h2 .wl:nth-child(3) { margin-left: 2.2em; }
+  .final h2 .wl:nth-child(4) { margin-left: 0.55em; }
+}
 
 /* ---- process: a gold rule runs the length of the four steps ---- */
 .processgrid { position: relative; }

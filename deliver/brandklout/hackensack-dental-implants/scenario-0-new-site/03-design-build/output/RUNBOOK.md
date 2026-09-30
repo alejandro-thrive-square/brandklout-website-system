@@ -2,6 +2,36 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-09-30 (late) · layouts recomposed editorially, on staging
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- Asked for: "change the layout so it's not too common … the majority shouldn't be like a regular
+  layout". Nine of twelve blocks recomposed on a 12-column grid; list in `canary-review.md` →
+  Layout. Feature, consult form and FAQ kept.
+- Markup: hero masthead (`.hero-meta`, h1, `.hero-visual`, `.hero-copy`), treatment numerals are
+  `01/02/03`, `#process-scene` also carries `.process-wrap`. `--bleed` token in `01-tokens.css`.
+- Layout that exists only with motion (ticker, horizontal journey, name behind the team, stepped
+  closing words, split-headline indent) is in `25-interaction.css`, shipped verbatim.
+- Runtime: hero no longer pinned (the masthead is taller than a laptop window); pins are
+  story/process/results/final and each pins only if it fits the window (`scene()` helper),
+  otherwise scrubs unpinned.
+- Checks: probe 28/28; fluid-root pass; live `check-staging.mjs` 14/14; visual-diff 0.60% / 0.89%.
+
+### Gotchas
+
+- **A negative `text-indent` on a split headline** is inherited by every SplitText line and word
+  (inline-blocks): the words piled up on one spot. Clear it inside (`.ln-mask, .ln, .wh`) and pull
+  only the first `.ln-mask` back with a negative margin.
+- **Mobile one-column resets lose to desktop placements** like `.intro-grid > div:last-child`
+  (0,2,1). The reset uses `> div:nth-child(n)` to match that specificity and come later.
+- **Puppeteer clicking a control below the fold under ScrollSmoother** scrolls the window natively
+  first and the smoother stalls at that offset: the probe's hero-button check failed with the
+  button 30px under the fold. Moving the button above the fold fixed it; a JS `.click()` never
+  shows it.
+- A mouse click leaves focus on the in-page link; the handler now blurs it (mouse) or focuses the
+  destination (keyboard, `e.detail === 0`).
+
 ## 2026-09-30 (night) · home page motion elevated to the editorial standard, on staging
 
 ### Done (commit: see the client `RUNBOOK.md` row)

@@ -53,6 +53,13 @@
     var target = id && document.getElementById(id);
     if (!target) return;
     e.preventDefault();
+    /* ScrollSmoother keeps a focused element in view, and a mouse click focuses the link: left
+       there, it held the page near the top. A mouse click lets go of focus; a keyboard press
+       (detail 0) hands it to the destination, as an in-page link should. */
+    if (e.detail === 0) {
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    } else a.blur();
     if (WZ.smoother) WZ.smoother.scrollTo(target, true, 'top 12px');
     else window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - 12, behavior: MOTION ? 'smooth' : 'auto' });
   });
@@ -159,10 +166,9 @@
   });
   mark('split');
 
-  /* ---- hero: the photograph opens, then the page holds while it widens and the headline drifts ---- */
+  /* ---- hero: the photograph opens; scrolling away, it loses its corner and the copy drifts ---- */
   var hero = $('.hero');
   if (hero) {
-    hero.id = hero.id || 'hero-scene';
     var frame = $('.js-hero-frame', hero);
     var heroImg = $('.js-hero-img', hero);
     var d0 = intro.duration() * 0.6;
@@ -170,39 +176,40 @@
     gsap.fromTo(heroImg, { scale: 1.3 }, { scale: 1.06, duration: 2.2, ease: EASE, delay: d0 });
     gsap.from($$('.js-rise', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: d0 + 0.35 });
     gsap.from($('.quote-card', hero), { x: 40, autoAlpha: 0, duration: 1, ease: EASE, delay: d0 + 1 });
-    /* The page holds while the photograph loses its rounded corner and moves closer, and the
-       copy drifts up at three speeds. Nothing fades: text stays at full contrast throughout. */
+    /* The masthead is taller than a laptop window, so it is not pinned: as it scrolls away the
+       photograph loses its rounded corner and moves closer, and the copy drifts at two speeds.
+       Nothing fades: text stays at full contrast throughout. */
     mm.add('(min-width: 992px)', function () {
-      /* The hero is pinned only where it fits the window (it is about 840px tall at 1512 wide); on a
-         shorter laptop screen the same drift plays as the hero scrolls away, unpinned. */
-      var fits = hero.offsetHeight <= window.innerHeight;
-      gsap.timeline({ scrollTrigger: fits ? { trigger: hero, start: 'top top', end: '+=70%', pin: true, scrub: 0.6 } : { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } })
+      gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } })
         .fromTo(frame, { borderBottomLeftRadius: '6.25rem' }, { borderBottomLeftRadius: '0rem', ease: 'none' }, 0)
         .to(heroImg, { scale: 1.2, yPercent: -4, ease: 'none', immediateRender: false }, 0)
         .to($('.quote-card', hero), { y: -80, ease: 'none' }, 0)
-        .to($('h1', hero), { y: -24, ease: 'none' }, 0)
-        .to($$('.hero-copy > p, .hero-actions', hero), { y: -44, ease: 'none' }, 0)
-        .to($('.warm-note', hero), { y: -64, ease: 'none' }, 0);
+        .to($('h1', hero), { y: -60, ease: 'none' }, 0)
+        .to($('.hero-copy', hero), { y: -110, ease: 'none' }, 0);
     });
     mark('hero');
   }
 
-  /* ---- proof bar: each word scrambles into place ---- */
-  var GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  $$('.proof strong').forEach(function (s, i) {
-    var text = s.textContent;
-    var o = { p: 0 };
-    s.setAttribute('aria-label', text);
-    gsap.to(o, {
-      p: 1, duration: 1.1, delay: i * 0.12, ease: 'power2.out',
-      scrollTrigger: { trigger: s, start: 'top 92%', once: true },
-      onUpdate: function () {
-        var n = Math.floor(o.p * text.length);
-        s.textContent = text.slice(0, n) + text.slice(n).replace(/[^ ]/g, function () { return GLYPHS[(Math.random() * GLYPHS.length) | 0]; });
-      },
-      onComplete: function () { s.textContent = text; }
+  /* ---- proof bar: one line that keeps moving, and moves faster while the page does ---- */
+  var ticker = $('.proofbar');
+  var track = ticker && $('.proofgrid', ticker);
+  if (track) {
+    $$('.proof', track).forEach(function (p) { var c = p.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+    ticker.classList.add('is-ticker');
+    var loop = gsap.to(track, { xPercent: -50, ease: 'none', duration: 32, repeat: -1 });
+    var calm = gsap.delayedCall(0.25, function () { gsap.to(loop, { timeScale: 1, duration: 0.8, overwrite: true }); });
+    ScrollTrigger.create({
+      trigger: ticker, start: 'top bottom', end: 'bottom top',
+      onUpdate: function (self) {
+        gsap.to(loop, { timeScale: gsap.utils.clamp(-5, 5, 1 + self.getVelocity() / 300), duration: 0.25, overwrite: true });
+        calm.restart(true);
+      }
     });
-  });
+    /* moving content can be stopped (WCAG 2.2.2): it holds while the pointer or focus is on it */
+    ticker.addEventListener('mouseenter', function () { loop.pause(); });
+    ticker.addEventListener('mouseleave', function () { loop.resume(); });
+    mark('ticker');
+  }
 
   /* ---- reveals: 34px up and in, as the concept has them ---- */
   $$('.js-rise').forEach(function (n) {
@@ -210,7 +217,7 @@
     gsap.from(n, { y: 34, autoAlpha: 0, duration: 0.85, ease: EASE, scrollTrigger: { trigger: n, start: 'top 90%', once: true } });
   });
   $$('.js-stagger').forEach(function (box) {
-    if (box.classList.contains('solutions')) return; /* scrubbed below */
+    if (box.classList.contains('solutions') || box.classList.contains('proofgrid')) return; /* scrubbed below; the ticker */
     gsap.from(box.children, { y: 24, autoAlpha: 0, duration: 0.75, stagger: 0.09, ease: EASE, scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
   });
   $$('.js-wipe').forEach(function (n) {
@@ -261,10 +268,12 @@
     gsap.to(paths, { strokeDashoffset: 0, ease: 'none', stagger: 0.04, scrollTrigger: { trigger: card, start: 'top 92%', end: 'top 45%', scrub: 0.6 } });
   });
   var cards = $$('.solution');
-  /* the three cards arrive at three speeds, so they land together as the section settles */
+  /* each row of the index slides in from the right, its numeral from further out */
   mm.add('(min-width: 768px)', function () {
-    cards.forEach(function (card, i) {
-      gsap.fromTo(card, { y: 50 + i * 70 }, { y: 0, ease: 'none', scrollTrigger: { trigger: '.solutions', start: 'top bottom', end: 'top 45%', scrub: 0.6 } });
+    cards.forEach(function (card) {
+      gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 60%', scrub: 0.6 } })
+        .fromTo($$('h3, p, .go', card), { x: 80 }, { x: 0, ease: 'none', stagger: 0.08 }, 0)
+        .fromTo($('.num', card), { x: 160 }, { x: 0, ease: 'none' }, 0);
     });
   });
   mm.add('(max-width: 767px)', function () {
@@ -347,16 +356,32 @@
     return tl.to({}, { duration: 0.3 });
   };
 
-  /* desktop: the page holds while each scene plays (same width as the stylesheet's two-column layouts) */
+  /* how far the row of steps travels left: until the last step clears the right edge */
+  var travel = function () {
+    var left = grid.getBoundingClientRect().left - gsap.getProperty(grid, 'x');
+    return Math.min(0, window.innerWidth - left - grid.scrollWidth - 48);
+  };
+
+  /* desktop: the page holds while each scene plays. A scene is pinned only where it fits the
+     window; on a short laptop screen the same timeline is scrubbed while it passes, unpinned. */
+  var scene = function (el, length, scrub) {
+    return el.offsetHeight <= window.innerHeight - 24
+      ? { trigger: el, start: 'center center', end: '+=' + length, pin: true, scrub: scrub, invalidateOnRefresh: true }
+      : { trigger: el, start: 'top 75%', end: 'bottom 25%', scrub: scrub, invalidateOnRefresh: true };
+  };
   mm.add('(min-width: 992px)', function () {
-    if (story) writeStory(gsap.timeline({ scrollTrigger: { trigger: story, start: 'center center', end: '+=110%', pin: true, scrub: 0.4 } }));
-    if (proc) lightSteps(gsap.timeline({ scrollTrigger: { trigger: proc, start: 'center center', end: '+=130%', pin: true, scrub: 0.5 } }));
+    if (story) writeStory(gsap.timeline({ scrollTrigger: scene(story, '110%', 0.4) }));
+    if (proc) {
+      var ptl = gsap.timeline({ scrollTrigger: scene(proc, '180%', 0.5) });
+      if (grid) ptl.to(grid, { x: travel, ease: 'none', duration: steps.length + 0.4 }, 0);
+      lightSteps(ptl);
+    }
     if (gallery) {
-      var tl = gsap.timeline({ scrollTrigger: { trigger: gallery, start: 'center center', end: '+=220%', pin: true, scrub: 0.5 } });
+      var tl = gsap.timeline({ scrollTrigger: scene(gallery, '220%', 0.5) });
       cases.forEach(function (c, i) { wipe(tl, c, i ? '>+0.25' : 0); });
       tl.to({}, { duration: 0.3 });
     }
-    if (fin) closeScene(gsap.timeline({ scrollTrigger: { trigger: fin, start: 'center center', end: '+=90%', pin: true, scrub: 0.5 } }));
+    if (fin) closeScene(gsap.timeline({ scrollTrigger: scene(fin, '90%', 0.5) }));
     mark('scenes');
   });
 
@@ -372,6 +397,17 @@
     if (fin) closeScene(gsap.timeline({ scrollTrigger: { trigger: fin, start: 'top 75%', end: 'bottom 60%', scrub: 0.4 } }));
     mark('scrubbed');
   });
+
+  /* ---- team: the doctor's surname, very large, drifts behind the portrait ---- */
+  var teamGrid = $('.team-grid');
+  if (teamGrid) {
+    var tm = el('div', 'team-mark');
+    tm.setAttribute('aria-hidden', 'true');
+    tm.textContent = 'Meskin';
+    teamGrid.insertBefore(tm, teamGrid.firstChild);
+    gsap.fromTo(tm, { xPercent: 6 }, { xPercent: -10, ease: 'none', scrollTrigger: { trigger: teamGrid, start: 'top bottom', end: 'bottom top', scrub: true } });
+    mark('team');
+  }
 
   /* ---- footer: the practice name rises line by line ---- */
   var fb = $('.footer-brand');
