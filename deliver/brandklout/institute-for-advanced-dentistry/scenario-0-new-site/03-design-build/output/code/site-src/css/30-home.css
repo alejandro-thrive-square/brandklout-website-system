@@ -1,0 +1,395 @@
+/* 30-home — the eight home chapters. Split from the approved home.css (2026-10-01); the system is frozen: later pages vary content and layout, not these. */
+/* The hero waits for its entrance without an inline <head> script, because Instatic has no custom
+   head and strips inline scripts. home.js adds .is-ready the moment it has set the start states.
+   If the script never arrives, the animation below shows everything anyway after 3.5 s. */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.is-ready) .arrival__copy, html:not(.is-ready) .arrival__facts, html:not(.is-ready) .arrival__fig { opacity: 0; animation: unveil 0s linear 3.5s forwards; }
+}
+
+@keyframes unveil { to { opacity: 1; } }
+
+/* 00 · arrival */
+.ch-arrival { background: var(--bone); }
+
+/* As tall as its content needs, never squeezed into one viewport. The film keeps its own 16:9, so
+   nothing is cropped at rest, and opening it is a plain scale of that same box (home.js). */
+.arrival__stage { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: 3.5rem 4rem; align-items: center; padding: calc(var(--nav-h) + 3rem) var(--gutter) 2.25rem; }
+
+.arrival__fig { position: relative; z-index: 3; grid-column: 2; grid-row: 1; aspect-ratio: 16 / 9; }
+
+/* overflow: hidden as well: a clip or a radius alone does not stop scaled content widening a phone's layout viewport */
+.arrival__media { position: absolute; inset: 0; overflow: hidden; border-radius: 1rem; transform-origin: 0 0; will-change: transform; }
+
+.arrival__media video { width: 100%; height: 100%; object-fit: cover; }
+
+.arrival__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18,17,18,.35), rgba(18,17,18,.1) 40%, rgba(18,17,18,.55)); opacity: .5; }
+
+.arrival__copy { position: relative; z-index: 2; grid-column: 1; grid-row: 1; }
+
+.ch-arrival .d1 { font-size: calc(5rem * var(--s-d1)); }
+
+.arrival__copy .lede { margin-top: 2rem; }
+
+.arrival__cta { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.5rem; }
+
+.arrival__second em { color: var(--gold-hi); margin-inline: .12em; }
+
+/* This line sits ON the film, under its shade: white here is about the photograph, not the theme. */
+.arrival__second { color: var(--white); position: absolute; left: 0; right: 0; top: var(--vt, 0px); height: 100vh; height: 100svh; z-index: 4; display: flex; align-items: center; justify-content: center; text-align: center; font-size: calc(5rem * var(--s-d1)); font-weight: 300; letter-spacing: -.03em; line-height: 1; padding-inline: var(--gutter); opacity: 0; visibility: hidden; text-shadow: 0 .1rem 2.5rem rgba(18,17,18,.55); pointer-events: none; }
+
+.arrival__facts { position: relative; z-index: 2; grid-column: 1 / -1; grid-row: 2; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+
+.arrival__facts li { display: flex; align-items: baseline; gap: .9rem; }
+
+.arrival__facts b { font-size: calc(1.75rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; color: var(--accent-text); white-space: nowrap; }
+
+.arrival__facts span { font-size: calc(.875rem * var(--s-sp)); line-height: 1.35; color: var(--fg-dim); max-width: 12rem; }
+
+.arrival__cue { position: absolute; right: var(--gutter); bottom: 7.5rem; z-index: 2; display: none; }
+
+/* 01 · question */
+.ch-question { background: var(--paper-2); }
+
+.question__stage { position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 7.6fr) minmax(0, 3.4fr); gap: 5rem; align-items: center; padding: calc(var(--nav-h) + 2rem) var(--gutter) 4rem; max-width: 100rem; margin-inline: auto; }
+
+.question__copy { display: grid; }
+
+.question__copy .tag { grid-row: 1; }
+
+.statement { font-size: calc(3rem * var(--s-st)); font-weight: 300; line-height: 1.2; letter-spacing: -.022em; color: var(--fg); }
+
+.statement strong { font-weight: 300; color: var(--accent-text); }
+
+.statement + .statement { margin-top: 2.5rem; }
+
+.question__stage.is-live .statement { grid-row: 2; grid-column: 1; margin-top: 0; }
+
+.question__stage.is-live .statement .w { color: var(--fg-unlit); }
+
+.question__img { overflow: hidden; border-radius: .6rem; aspect-ratio: 4 / 5; }
+
+.question__img img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
+
+.question__fig figcaption { margin-top: 1rem; }
+
+.question__meter { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 2.5rem; height: 1px; background: var(--rule); }
+
+.question__meter span { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left; }
+
+/* 02 · disciplines */
+.ch-disciplines { background: var(--white); padding-bottom: 8rem; }
+
+.disc { display: flex; gap: 1rem; padding-inline: var(--gutter); height: 46rem; max-width: 110rem; margin-inline: auto; }
+
+.disc__panel { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; border-radius: .8rem; background: var(--paper-2); color: var(--fg); display: flex; align-items: flex-end; transition: flex-grow .9s var(--ease); cursor: pointer; }
+
+.disc__panel.is-open { flex-grow: 2.2; cursor: default; }
+
+/* BugHerd 11/14/15: the card used to float over the photograph and sat on both faces. Now the open
+   panel gives the card its own column and the photograph starts where the card ends; a closed panel
+   keeps only a title strip, below the chin. Each crop is centred on the face it holds. */
+.disc__media { position: absolute; inset: 0; overflow: hidden; transition: left .9s var(--ease); }
+
+.disc__panel.is-open .disc__media { left: calc(min(100% - 2.5rem, 29rem) + 2.5rem); }
+
+.disc__media img { width: 100%; height: 112%; object-fit: cover; object-position: 47% 72%; transition: object-position .9s var(--ease); }
+
+.disc__panel:nth-child(1).is-open .disc__media img { object-position: 45% 36%; }
+
+.disc__panel:nth-child(2) .disc__media img { object-position: 72% 24%; }
+
+.disc__panel:nth-child(2).is-open .disc__media img { object-position: 80% 24%; }
+
+.disc__panel:not(.is-open) .disc__stats { display: none; }
+
+.disc__panel:not(.is-open) .disc__body { padding: 1.1rem 1.4rem; }
+
+.disc__panel:not(.is-open) .disc__body .spec { margin-bottom: .35rem; }
+
+.disc__panel:not(.is-open) .d3 { font-size: calc(1.35rem * var(--s-d3)); }
+
+.disc__body { position: relative; z-index: 1; width: min(100% - 2.5rem, 29rem); margin: 1.25rem; padding: 2rem 2.1rem 1.9rem; border-radius: .5rem; background: rgba(251, 249, 244, .93); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border: 1px solid var(--rule); }
+
+.disc__body .spec { color: var(--accent-text); margin-bottom: .8rem; }
+
+.disc__body .d3 em { color: var(--accent-text); }
+
+.disc__text, .disc__list, .disc__body .link { display: none; }
+
+.disc__panel.is-open .disc__text, .disc__panel.is-open .disc__body .link { display: block; }
+
+.disc__panel.is-open .disc__body .link { display: inline-flex; color: var(--accent-text); margin-top: .6rem; }
+
+.disc__panel.is-open .disc__list { display: grid; }
+
+.disc__text { margin-top: 1rem; color: var(--fg-dim); }
+
+.disc__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+
+.disc__stats dt { font-size: calc(2.5rem * var(--s-d3)); font-weight: 300; letter-spacing: -.03em; line-height: 1; color: var(--fg); font-variant-numeric: tabular-nums; }
+
+.disc__stats dd { margin-top: .45rem; font-size: calc(.875rem * var(--s-sp)); line-height: 1.35; color: var(--fg-dim); }
+
+.disc__list { grid-template-columns: 1fr 1fr; gap: 0 1.25rem; margin-top: 1.4rem; }
+
+.disc__list a { display: block; padding: .7rem 0; border-top: 1px solid var(--rule); font-size: calc(.95rem * var(--s-sp)); transition: color .35s, padding-left .45s var(--ease); }
+
+.disc__list a:hover, .disc__list a:focus-visible { color: var(--accent-text); padding-left: .5rem; }
+
+/* 03 · design */
+.ch-design { background: var(--mist); }
+
+.design__stage { position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-columns: minmax(0, 4.4fr) minmax(0, 7.6fr); gap: 4.5rem; align-items: center; padding: calc(var(--nav-h) + 1.5rem) var(--gutter) 3rem; max-width: 104rem; margin-inline: auto; }
+
+.design__steps { margin-top: 2.75rem; display: grid; gap: 0; }
+
+.design__steps li { position: relative; padding: 1.15rem 0 1.15rem 1.6rem; border-top: 1px solid var(--rule); color: var(--fg-unlit); transition: color .6s var(--ease); }
+
+.design__steps li::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--gold); transform: scaleY(0); transform-origin: top; transition: transform .7s var(--ease); }
+
+.design__steps li.is-on { color: var(--fg); }
+
+.design__steps li.is-on::before { transform: scaleY(1); }
+
+.design__go { display: block; width: 100%; text-align: left; padding-block: .15rem; min-height: 1.75rem; font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .4rem; }
+
+.design__steps li.is-on .design__go { color: var(--accent-text); }
+
+.design__go:hover { color: var(--accent-text); }
+
+.design__steps li:not(.is-on) { cursor: pointer; }
+
+.design__fig figcaption { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
+
+.compare { position: relative; aspect-ratio: 16 / 10; max-height: 74vh; max-height: 74svh; margin-inline: auto; overflow: hidden; border-radius: .7rem; background: var(--ink-3); touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+
+.compare__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+.compare__after { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+
+.compare__draw { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
+.compare__draw .g, .compare__draw .g line { fill: none; stroke: var(--gold-hi); stroke-width: 2.6; }
+
+.compare__draw .g--soft { stroke-dasharray: 12 14; opacity: .85; }
+
+.compare__draw .g--ticks line { stroke-width: 1.8; opacity: .9; }
+
+.compare__note { position: absolute; padding: .3rem .55rem; background: rgba(251, 249, 244, .92); color: var(--accent-text); border-radius: .15rem; white-space: nowrap; }
+
+.compare__note--a { left: 51.8%; top: 7%; }
+
+.compare__note--b { left: 80.5%; top: 47.5%; }
+
+.compare__note--c { left: 27%; top: 73.5%; }
+
+.compare__note--d { left: 5%; top: 39%; }
+
+.compare__label { position: absolute; bottom: 1rem; padding: .35rem .7rem; background: rgba(251, 249, 244, .92); border-radius: .15rem; font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); letter-spacing: .14em; text-transform: uppercase; color: var(--fg); }
+
+.compare__label--before { right: 1rem; }
+
+.compare__label--after { left: 1rem; opacity: 0; transition: opacity .4s; }
+
+.compare.is-past .compare__label--after { opacity: 1; }
+
+.compare.is-done .compare__label--before { opacity: 0; }
+
+.compare__handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 48px; margin-left: -24px; cursor: ew-resize; touch-action: none; }
+
+.compare__handle i { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--white); }
+
+.compare__handle svg { position: absolute; left: 50%; top: 50%; width: 2.75rem; height: 2.75rem; margin: -1.375rem 0 0 -1.375rem; padding: .7rem; border-radius: 50%; background: var(--gold); fill: none; stroke: var(--ink); stroke-width: 1.8; transition: transform .4s var(--ease); }
+
+.compare__handle:hover svg, .compare__handle:focus-visible svg { transform: scale(1.12); }
+
+/* 04 · specialist */
+.ch-specialist { background: var(--bone); padding-top: 9rem; }
+
+.specialist { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 6rem; align-items: center; }
+
+.specialist__fig { position: relative; padding-bottom: 5rem; padding-right: 3rem; }
+
+.specialist__img { overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; }
+
+.specialist__img img { width: 100%; height: 118%; object-fit: cover; object-position: 66% 20%; }
+
+.specialist__inset { position: absolute; right: 0; bottom: 0; width: 52%; overflow: hidden; border-radius: .5rem; border: .45rem solid var(--bone); aspect-ratio: 4 / 3; }
+
+.specialist__inset img { width: 100%; height: 100%; object-fit: cover; }
+
+.specialist__badge { position: absolute; left: -2.25rem; top: -2.25rem; width: 8.5rem; }
+
+.specialist__copy .lede { margin-top: 1.75rem; max-width: 38rem; }
+
+.specialist__quote { margin-top: 2rem; padding-left: 1.5rem; border-left: 2px solid var(--gold); max-width: 38rem; }
+
+.specialist__quote p { font-family: var(--f-serif); font-style: italic; font-size: calc(1.55rem * var(--s-d3)); line-height: 1.3; color: var(--on-light); }
+
+.creds { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; margin: 2.5rem 0; }
+
+.creds li { padding: 1.25rem 0; border-top: 1px solid var(--rule); }
+
+.creds b { display: block; font-size: calc(2.1rem * var(--s-d3)); font-weight: 300; letter-spacing: -.025em; line-height: 1.05; color: var(--gold-deep); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.creds b i { font-style: normal; }
+
+.creds span { display: block; margin-top: .5rem; font-size: calc(.95rem * var(--s-sp)); line-height: 1.45; color: var(--on-light-dim); }
+
+/* 05 · path */
+.ch-path { background: var(--paper); overflow: hidden; }
+
+.path__stage { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 2.5rem; padding-block: calc(var(--nav-h) + 1rem) 2.5rem; }
+
+.path__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
+
+.path__head .tag { margin-bottom: 1.25rem; }
+
+.path__count { font-family: var(--f-mono); color: var(--fg-dim); letter-spacing: .1em; white-space: nowrap; }
+
+.path__count b { font-family: var(--f-sans); font-size: calc(3.5rem * var(--s-d2)); font-weight: 300; letter-spacing: -.03em; color: var(--accent-text); margin-right: .5rem; font-variant-numeric: tabular-nums; }
+
+.path__viewport { overflow: hidden; }
+
+.path__rail { display: flex; gap: 2.25rem; width: max-content; padding-inline: var(--gutter); will-change: transform; }
+
+.step { width: 25rem; flex: none; }
+
+.step__img { overflow: hidden; border-radius: .6rem; aspect-ratio: 3 / 2; margin-bottom: 1.4rem; background: var(--paper-2); }
+
+.step__img img { width: 116%; max-width: none; height: 100%; object-fit: cover; margin-left: -8%; }
+
+.step__img--fit { background: var(--ink); }
+
+.step__img--fit img { width: 100%; margin-left: 0; object-fit: contain; }
+
+.step .spec { color: var(--accent-text); margin-bottom: .5rem; }
+
+.step p:last-child { margin-top: .7rem; color: var(--fg-dim); }
+
+.step--coda { width: 36rem; display: flex; align-items: center; padding-left: 3rem; border-left: 1px solid var(--rule); }
+
+.coda { font-size: calc(2.1rem * var(--s-d3)); font-weight: 300; line-height: 1.22; letter-spacing: -.02em; }
+
+.path__bar { }
+
+.path__bar::before { content: ''; display: block; height: 1px; background: var(--rule); }
+
+.path__bar span { display: block; height: 2px; margin-top: -1.5px; background: var(--gold); transform: scaleX(0); transform-origin: left; }
+
+/* 06 · proof */
+.ch-proof { background: var(--white); padding-bottom: 8rem; }
+
+.proof__links { display: flex; flex-wrap: wrap; gap: .5rem 3rem; margin-top: 3.5rem; }
+
+.proof__links .link { color: var(--on-light); }
+
+@media screen and (max-width: 1279px) {
+  .question__stage, .design__stage { gap: 3rem; }
+  .specialist { gap: 4rem; }
+  /* Below 1280 the accordion would squeeze a photograph into a sliver beside the card and cut a
+     face in half, so the two disciplines become two plain cards, photograph above text. */
+  .disc { height: auto; align-items: stretch; }
+  .disc__panel, .disc__panel.is-open { flex: 1 1 0; cursor: default; min-height: 0; flex-direction: column; align-items: stretch; }
+  .disc__media, .disc__panel.is-open .disc__media { position: relative; inset: auto; left: auto; aspect-ratio: 16 / 10; }
+  .disc__panel:not(.is-open) .disc__stats { display: grid; }
+  .disc__panel:not(.is-open) .disc__body { padding: 2.25rem 2.25rem 2.5rem; }
+  .disc__panel:not(.is-open) .disc__body .spec { margin-bottom: .8rem; }
+  .disc__panel:not(.is-open) .d3 { font-size: calc(2.25rem * var(--s-d3)); }
+  .disc__body { width: auto; margin: 0; border-radius: 0; border: 0; background: var(--bone); -webkit-backdrop-filter: none; backdrop-filter: none; padding: 2.25rem 2.25rem 2.5rem; }
+  .disc__panel .disc__media img, .disc__panel.is-open .disc__media img { object-position: 47% 34%; }
+  .disc__panel:nth-child(2) .disc__media img, .disc__panel:nth-child(2).is-open .disc__media img { object-position: 72% 22%; }
+  .disc__text, .disc__body .link { display: block; }
+  .disc__body .link { display: inline-flex; color: var(--accent-text); margin-top: .6rem; }
+  .disc__list { display: grid; }
+}
+
+@media screen and (max-width: 991px) {
+  .arrival__stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; gap: 3rem; padding-top: calc(var(--nav-h) + 2.5rem); }
+  .arrival__copy, .arrival__fig, .arrival__facts { grid-column: 1; grid-row: auto; }
+  .arrival__copy { max-width: 40rem; }
+  .arrival__facts { grid-template-columns: repeat(2, 1fr); gap: 1rem 2rem; }
+  .question__stage { grid-template-columns: minmax(0, 1fr); gap: 2rem; align-content: center; }
+  .question__fig { order: -1; max-width: 22rem; }
+  .question__img { aspect-ratio: 16 / 10; }
+  .disc { flex-direction: column; }
+  .disc__panel, .disc__panel.is-open { flex: none; }
+  .design__stage { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; align-content: center; }
+  .design__copy { display: contents; }
+  .design__copy .tag { order: 1; margin-bottom: 0; }
+  .design__copy .d2 { order: 2; }
+  .design__fig { order: 3; }
+  .design__steps { order: 4; }
+  .compare { max-height: 44vh; max-height: 44svh; }
+  .design__steps { margin-top: 0; }
+  .design__stage.is-live .design__steps { display: grid; }
+  .design__stage.is-live .design__steps li { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .5s var(--ease), visibility .5s; border-top: 0; }
+  .design__stage.is-live .design__steps li.is-on { opacity: 1; visibility: visible; }
+  .specialist { grid-template-columns: 1fr; gap: 3.5rem; }
+  .specialist__fig { max-width: 34rem; }
+}
+
+@media screen and (max-width: 767px) {
+  .arrival__stage { min-height: 0; gap: 2.25rem; padding: calc(var(--nav-h) + .75rem) var(--gutter) 3rem; }
+  .arrival__fig { order: -1; }
+  .arrival__media { border-radius: .8rem; transform-origin: 50% 50%; }
+  .arrival__second { display: none; }
+  .arrival__copy .lede { margin-top: 1.4rem; }
+  .arrival__cta { margin-top: 1.75rem; }
+  .arrival__cta .btn { flex: 1 1 auto; }
+  .arrival__facts li { flex-direction: column; gap: .2rem; }
+  .question__stage { padding-bottom: 5rem; }
+  .question__fig { max-width: 15rem; }
+  .question__fig figcaption { display: none; }
+  .question__meter { right: var(--gutter); bottom: 5.25rem; }
+  .ch-disciplines, .ch-proof { padding-bottom: 5rem; }
+  .disc__media { aspect-ratio: 4 / 3; }
+  .disc__body, .disc__panel:not(.is-open) .disc__body { padding: 1.75rem 1.5rem 2rem; }
+  .compare__note--d { display: none; }
+  .compare__draw .g, .compare__draw .g line { stroke-width: 5; }
+  .compare__draw .g--ticks line { stroke-width: 3.5; }
+  .ch-specialist { padding-top: 6rem; }
+  .specialist__fig { padding-right: 1.5rem; padding-bottom: 3.5rem; }
+  .specialist__badge { left: -.5rem; top: -1.75rem; width: 6rem; }
+  .creds { grid-template-columns: 1fr; margin: 2rem 0; }
+  .step { width: 76vw; }
+  .step--coda { width: 84vw; padding-left: 1.5rem; }
+  .path__stage { gap: 1.5rem; padding-bottom: 5rem; }
+}
+
+@media screen and (max-width: 479px) {
+  .arrival__facts { gap: 1.25rem 1.5rem; }
+  .compare__note--c { left: 8%; }
+  .compare__note--b { left: auto; right: 3%; top: 38%; }
+  .disc__stats dt { font-size: 2.3rem; }
+}
+
+/* Short laptop windows (the reviewer's Safari is 1512x735): a pinned scene has exactly one
+   viewport to fit in, so the display scale and the step list give way rather than clip.
+   The hero is not in this list: it is as tall as it needs and pins from its bottom edge. */
+@media screen and (min-width: 992px) and (max-height: 820px) {
+  :root { --s-d2: .8; --s-st: .86; }
+  .design__steps { margin-top: 1.5rem; }
+  .design__steps li { padding-block: .8rem; }
+  .design__stage.is-live .design__steps li:not(.is-on) p { display: none; }
+  .compare { max-height: 66vh; }
+  .step__img { aspect-ratio: 16 / 9; margin-bottom: 1rem; }
+  .path__stage { gap: 1.5rem; }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1279px) and (max-height: 820px) {
+  :root { --s-d2: .72; }
+}
+
+@media screen and (max-width: 767px) and (max-height: 700px) {
+  .path__head .d2, .design__copy .d2 { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .path__viewport { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; }
+  .step { scroll-snap-align: start; }
+}
+
+html.no-motion .path__viewport { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; }
+
+html.no-motion .step { scroll-snap-align: start; }

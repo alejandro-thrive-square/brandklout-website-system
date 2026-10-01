@@ -1,0 +1,65 @@
+/* 01-tokens — faces, palette, type scale multipliers. Split from the approved home.css (2026-10-01); the system is frozen: later pages vary content and layout, not these. */
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/IBMPlexMono-400.woff2') format('woff2')}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url('../fonts/IBMPlexMono-500.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;font-display:swap;src:url('../fonts/InstrumentSerif-400i.woff2') format('woff2')}
+@font-face{font-family:'Instrument Serif';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/InstrumentSerif-400.woff2') format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:300;font-display:swap;src:url('../fonts/Jost-300.woff2') format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/Jost-400.woff2') format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:500;font-display:swap;src:url('../fonts/Jost-500.woff2') format('woff2')}
+@font-face{font-family:'Jost';font-style:normal;font-weight:600;font-display:swap;src:url('../fonts/Jost-600.woff2') format('woff2')}
+
+
+/* ==========================================================================
+   Institute for Advanced Dentistry — home
+   Identity from the practice's own logo board: gold 1245 C, cool greys, Century
+   Gothic (Jost is its web stand-in). Type, spacing and radii in rem; the display
+   scale is stepped by multipliers, never clamp().
+   ========================================================================== */
+:root {
+  --ink: #121112;
+  --ink-2: #1b1a1b;
+  --ink-3: #272526;
+  --graphite: #373435;
+  --steel: #727376;
+  --silver: #bdbfc1;
+  --gold: #c3972b;
+  --gold-hi: #e2bd58;
+  --gold-deep: #74560f;
+  --paper: #f5f1e8;
+  --paper-2: #ebe5d8;
+  --bone: #fbf9f4;
+
+  --mist: #eef0f1;
+  --white: #ffffff;
+
+  /* HOW THE PALETTE IS APPLIED (2026-09-21, from Brandklout: dark-theme sites do not convert).
+     Grounds are always light. Graphite is the ink: text, hairlines, one secondary button. Gold is a
+     FILL and a RULE, never a glyph: #c3972b on these grounds is 2.4:1, so gold text is --accent-text.
+     Dark survives only where it is functional, not thematic: the scrim behind a playing film and
+     the shade over the hero film. */
+  --fg: #1d1b1c;
+  --fg-dim: #5a5654;
+  --fg-unlit: #67625d;
+  --accent-text: var(--gold-deep);
+  --rule: rgba(55, 52, 53, .17);
+  --on-ink: #edeae3;
+  --on-light: #1d1b1c;
+  --on-light-dim: #5a5654;
+
+  --f-sans: 'Jost', 'Century Gothic', 'Avenir Next', system-ui, sans-serif;
+  --f-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --s-d1: 1; --s-d2: 1; --s-d3: 1; --s-st: 1; --s-tx: 1; --s-sp: 1;
+  --gutter: 4rem;
+  --nav-h: 5rem;
+  --ease: cubic-bezier(.22, .8, .2, 1);
+}
+
+@media screen and (max-width: 1279px) { :root { --s-d1: .84; --s-d2: .86; --s-st: .88; --gutter: 3rem; } }
+
+@media screen and (max-width: 991px)  { :root { --s-d1: .7;  --s-d2: .76; --s-d3: .9; --s-st: .78; --gutter: 2.25rem; } }
+
+@media screen and (max-width: 767px)  { :root { --s-d1: .54; --s-d2: .62; --s-d3: .82; --s-st: .62; --gutter: 1.5rem; --nav-h: 4.25rem; } }
+
+@media screen and (max-width: 479px)  { :root { --s-d1: .53; --s-d2: .64; --s-d3: .9; --s-st: .66; --s-tx: 1.2; --s-sp: 1.22; --gutter: 1.5rem; } }

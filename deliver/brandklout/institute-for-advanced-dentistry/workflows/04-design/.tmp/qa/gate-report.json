@@ -1,6 +1,6 @@
 {
-  "base": "https://staging.ifadentistry.com/",
-  "passed": 64,
+  "base": "http://localhost:4180/",
+  "passed": 65,
   "failed": 0,
   "results": [
     {
@@ -160,8 +160,8 @@
       "name": "Memberships marquee is running",
       "pass": true,
       "detail": [
-        -968.727,
-        -933.801
+        -660.126,
+        -624.804
       ]
     },
     {
@@ -169,23 +169,27 @@
       "pass": true
     },
     {
-      "name": "Reviews: the Google reviews widget boots (>0px, no lazy attribute, header with a count, old rotator gone)",
+      "name": "Reviews: next arrow changes the review",
       "pass": true,
       "detail": {
-        "found": true,
-        "lazy": false,
-        "h": 442,
-        "google": true,
-        "rotator": 0,
-        "text": " What Our Customers SayReviews5.0(96)Review us on GoogleJohn Boyer6 days agoVicki really knows her cleaning tools and pr"
+        "before": "Tommy",
+        "after": {
+          "who": "Marilyn",
+          "count": "02 / 03",
+          "on": 1
+        }
       }
+    },
+    {
+      "name": "Reviews: previous arrow goes back",
+      "pass": true
     },
     {
       "name": "Patient story: opens with a playable video",
       "pass": true,
       "detail": {
         "open": true,
-        "src": "/uploads/LIEPGxLp22gRSzYI9dRnP-home-story-helen.mp4",
+        "src": "/media/video/story-helen.mp4",
         "ready": 4,
         "err": null
       }
@@ -205,14 +209,8 @@
       "detail": 65
     },
     {
-      "name": "Form: the GoHighLevel frame is in the slot and fills the card",
-      "pass": true,
-      "detail": {
-        "src": "https://api.leadconnectorhq.com/widget/form/cxtQ5q29TfUr3cYlMmDB?marketing_disclosure_version=2026-09-16&privacy_analytics_consent=denied&privacy_ad_personalization_consent=denied&privacy_ad_user_data_consent=denied&privacy_advertising_consent=denied&privacy_sale_share_opt_out=true&privacy_gpc_detected=false&privacy_source_url=https%3A%2F%2Fstaging.ifadentistry.com%2F",
-        "w": 454,
-        "h": 752,
-        "card": 536
-      }
+      "name": "Form: empty submit flags the fields",
+      "pass": true
     },
     {
       "name": "BugHerd: no cursor dot, chapter rail, hero frame, chapter numbers, Fig. labels or coordinates",
@@ -276,12 +274,24 @@
       "name": "BugHerd: marquee stops on hover",
       "pass": true,
       "detail": [
-        -1101.98,
-        -1101.98
+        -581.181,
+        -581.181
       ]
     },
     {
       "name": "BugHerd: marquee runs again after",
+      "pass": true
+    },
+    {
+      "name": "BugHerd: reviews rotate on their own",
+      "pass": true,
+      "detail": [
+        "Tommy",
+        "Marilyn"
+      ]
+    },
+    {
+      "name": "BugHerd: reviews hold while hovered",
       "pass": true
     },
     {
@@ -384,27 +394,6 @@
       "name": "Desktop: no console errors",
       "pass": true,
       "detail": []
-    },
-    {
-      "name": "Live form: the frame loads at most 3 times, and a refresh does not reload it",
-      "pass": true,
-      "detail": {
-        "loads": 3,
-        "afterRefresh": 3
-      }
-    },
-    {
-      "name": "Live form: the frame sits inside its card, which is visible and not pinned",
-      "pass": true,
-      "detail": {
-        "over": -41,
-        "right": -41,
-        "opacity": "1",
-        "visibility": "visible",
-        "pinned": false,
-        "cardH": 925,
-        "frameH": 752
-      }
     },
     {
       "name": "ScrollSmoother registered and running",
@@ -539,7 +528,7 @@
     {
       "name": "Mobile: body copy renders at 16px or more",
       "pass": true,
-      "detail": 17
+      "detail": 17.5453
     },
     {
       "name": "Mobile: no console errors",

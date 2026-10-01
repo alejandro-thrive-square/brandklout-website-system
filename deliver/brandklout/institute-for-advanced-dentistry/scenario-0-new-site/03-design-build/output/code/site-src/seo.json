@@ -1,0 +1,17 @@
+{
+ "origin": "https://staging.ifadentistry.com",
+ "pages": {
+  "index": {
+   "title": "Institute for Advanced Dentistry | Implant & Cosmetic Prosthodontics in Peoria, AZ",
+   "description": "Arizona's first prosthodontic practice, led by Dr. Jonathan Bensoussan. Smile makeovers and dental implants designed and carried out by one surgically trained prosthodontist in Peoria, AZ.",
+   "route": "/",
+   "label": "Home"
+  },
+  "dental-services/dental-implants": {
+   "title": "Dental Implants in Peoria, AZ | Institute for Advanced Dentistry",
+   "description": "Full dental implant treatment in Peoria, AZ, from implant surgery to the final teeth. Dr. Jonathan Bensoussan, a surgically trained prosthodontist, has placed more than 2,500 implants. Free consultation with 3D x-rays.",
+   "route": "/dental-services/dental-implants/",
+   "label": "Dental implants"
+  }
+ }
+}
