@@ -1,11 +1,12 @@
 # Runbook index
 
-27 runs, newest first. Each line is one file in this folder.
+28 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01 - "HIPAA Disclosure" footer link after Privacy on all 216 pages, staging AND production (footer is inlined per page, no components) and in home/ source via stamp; 216/216 otherwise identical, link 216/216 per host. Gotcha: Cookie Preferences now sits after HIPAA Disclosure | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01 - /hipaa-disclosure (HHS model Notice of Privacy Practices) injected on staging AND production as one new row; entity = practice name (none stated anywhere, flagged); no footer link; not in the edge Worker's static sitemap.xml. Gotchas: draftMatchesPublished ignores OG overrides (this publish shipped round six's 4 pending descriptions on production), every publish re-mints script folder ids | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-10-01 | 2026-10-01 - BugHerd round seven, #507-#515: 8 closed on STAGING (home comfort card copy + booking link, /our-doctors note and two captions out, hygiene photo swap, team ticker fill fixed in journey.js); not on production. 13 still wait on the practice. Gotcha: a marquee duplicated once leaves a gap when items are removed | [`2026-10-01-bugherd-round-seven.md`](./2026-10-01-bugherd-round-seven.md) |
 | 2026-09-29 | 2026-09-29 - BugHerd round six, #434-#506: 70 closed, on staging AND PRODUCTION (25 Drive photos, 11 crops, team page, FAQ removals, $89, five Invisalign FAQs, #406 Platinum caption); 4 wait on the practice (Canva headshots, one missing Drive photo). Gotchas: three chains at once, bare <figure> crop helper, meta descriptions live in the OG store | [`2026-09-29-bugherd-round-six.md`](./2026-09-29-bugherd-round-six.md) |
