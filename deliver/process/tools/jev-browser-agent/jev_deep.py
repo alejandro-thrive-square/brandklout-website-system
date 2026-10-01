@@ -42,6 +42,9 @@ DANGER = [
     (r"publish|go live", r"publish|go live"),
     (r"\bsave\b|update information|submit", r"\bsave\b|\bupdate\b|submit|\bset\b|change|rename|edit"),
     (r"^close$|^discard", r"\bclose\b|discard"),
+    # Creating makes real objects (GoHighLevel's switcher offers "Create" when a search finds
+    # nothing; a real pilot clicked it, 2026-10-01).
+    (r"^\+?\s*(create|add|new)\b|\bcreate (new|sub)", r"\bcreate\b|\badd\b|\bnew\b"),
     (r"^copy$|copy\]", r"\bcopy\b|duplicate"),
 ]
 NEGATED = re.compile(r"\b(?:do not|don't|never|without|nor)\b[^.;]*|\bchange nothing\b|\bnothing else\b", re.I)

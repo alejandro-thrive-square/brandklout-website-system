@@ -72,11 +72,27 @@ The user asked to make computer use with Jev work properly and to compare approa
     model request ever contained it.
   - **Real Elfsight, plain sentence:** 2 clicks, 10.3 s.
 
+- **Real GoHighLevel pilot** in the user's Chrome. Agency: DriveRank at `app.gohighlevel.com`,
+  47 sub-accounts. Account: "Dr. Anna Gazu, DMD; Marvel Dental Practice", location
+  `ljvdYxYeswqNrIklUHLh`. **Failed, safely.**
+  - Jev took the agency Sub-Accounts list, which leads to the agency-side
+    `/accounts/detail/<id>`, not into the sub-account. "Settings" there was the agency's settings.
+  - The switcher search for the full name found nothing, and Jev clicked "Create". That opened a
+    form that was never submitted. Afterwards the search showed one Marvel and nothing new.
+  - Fix: "create / add / new" is now in `auto_forbid`. Generic regression: 10/10.
+- **The location API key is gone from GoHighLevel.** Opened directly at
+  `/v2/location/<id>/settings/company`, the page shows the right sub-account (exact name) but no
+  API Key field. The settings menu has no API-key or Private Integrations page.
+  The current equivalent is a Private Integration token, which is created and shown only once.
+
 ## Next
 
-- **GoHighLevel pilot:** needs the user's GoHighLevel login URL (white-label?) and one sub-account
-  to try, read-only, in the user's Chrome. Then decide where the keys live in `~/.webzite/.env`
-  (proposal: `GHL_LOCATION_API_KEY` + `GHL_LOCATION_ID` per client section).
+- **GoHighLevel, the user decides:**
+  - Private Integration tokens per sub-account: they are created, so writes are involved, and
+    the agency may need to enable the feature first.
+  - Or one agency-level token, if the use allows it.
+- **Location IDs need no clicking:** the agency Sub-Accounts list links each row to
+  `/accounts/detail/<locationId>`.
 
 - **Restore:** once the client has a Google Business Profile (or its Maps share link), run Jev on
   draft `393dc878`: search, connect the result with a rating, name it
