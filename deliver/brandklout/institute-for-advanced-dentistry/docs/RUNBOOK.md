@@ -39,7 +39,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   [runbook/2026-09-23-og-logo-card.md](runbook/2026-09-23-og-logo-card.md).
 - **BugHerd is on staging since 2026-09-21**: project `542527`, sidebar loaded through the
   `brandklout.embed-origins` plugin settings (`workflows/21-instatic-upload/home/bugherd.mjs`).
-  Uninstall it before any promotion. **Round 1 (42 notes) was addressed and published on 2026-09-23 (seq 8)**.
+  Uninstall it before any promotion. **Round 1 (42 notes) was addressed and published on 2026-09-23 (seq 8)**. **Closed on the board 2026-10-01**: 40 done, #33 (Elfsight autoplay) and #38 (GHL procedure field) open with replies; [run](runbook/2026-10-01-bugherd-round-1-closed.md).
   The tasks are still `todo` on the board. The GoHighLevel form notes and four confirmations are open:
   [runbook/2026-09-23-bugherd-round-1.md](runbook/2026-09-23-bugherd-round-1.md).
 - **STAGING since 2026-09-18**: `https://staging.ifadentistry.com` — a **separate Instatic
