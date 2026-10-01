@@ -4,7 +4,7 @@ The client's report: the home page's navigation was a different size from the ot
 real, and bigger than the nav: the Sienna accessibility widget had frozen text at the browser
 default on whichever page lost a load race. Fixed on STAGING and PRODUCTION the same day.
 
-## Done (`<sha>`, this worktree only — not pushed, not merged)
+## Done (`cff40aad`, this worktree only — not pushed, not merged)
 
 - **Cause.** Sienna (`siteScripts`, an `async` tag in `<head>`) runs `W(1)` at start-up. It reads
   every text element's computed font-size, stamps it as `data-asw-org-font-size` and writes it
