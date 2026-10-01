@@ -1105,6 +1105,31 @@ is therefore a coin toss. It came up heads on 2026-09-17 and tails three times o
 **Fix:** `form-test.mjs` polls `pg.frames()` for up to 45s. A gate that answers differently on an
 unchanged page is worse than no gate.
 
+### 42. Sienna pins text at 16px when it beats the stylesheet — and every gate blocks it
+
+Found 2026-10-01 from a client report ("the homepage has a different navigation size"). Sienna's
+start-up calls `W(1)`: for every `p, a, span, li, h1–h6…` it reads `getComputedStyle().fontSize`,
+stores it as `data-asw-org-font-size` and writes it back **inline, in px, even at 100%**. It is an
+`async` tag in `<head>` (trap 38), and an async script does not wait for stylesheets. When it runs
+first (cached Sienna, slower page CSS), it reads the browser default: nav links 16px instead of
+12px, the home `h1` 32px instead of ~124px, 131–516 elements per page. Which page loses the race
+changes from load to load; staging lost it 8 loads in 10 cold, while production lost none headless
+but did in the client's browser. Even when Sienna wins the race, the inline px freezes the fluid
+type at the width the page loaded at.
+
+No gate saw it, because every gate aborts `sienna-accessibility` to stay stable (trap 38).
+
+**Fix (client-side, no vendor patch):** `site-src/js/01-sienna.js`. The site bundle is a module,
+so it runs only once the stylesheets apply. It re-reads each stamped element's true size, stores
+that as Sienna's original, and drops the inline size, which hands 100% back to the CSS. A visitor's
+own scale is re-applied to the corrected original, and a `MutationObserver` covers a Sienna that
+starts later. Shipped with **`swap-site-js.mjs`**, which replaces only the bundle after the
+`/* ---- site.js ---- */` marker in the shell asset (incremental save, `shellBaseSeq`, backup,
+read-back, publish), so a JS fix never needs the replace-mode `push-site.mjs`. Gate:
+**`sienna-test.mjs <host>`**. It keeps Sienna, alternates cold and warm loads, and fails on a pinned
+size. **The same race exists on every Instatic site that carries Sienna**; the root fix (load it
+`defer`, or after `load`) belongs in `brandklout.embed-origins` on main, not in a client.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions. **It holds
