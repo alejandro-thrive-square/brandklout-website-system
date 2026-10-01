@@ -33,6 +33,12 @@ Embed block by `21-instatic-upload/place-embeds.mjs`, a required step after ever
 `push-site.mjs --apply`; without it the form publishes as an empty div and no gate says so —
 [run](./runbook/2026-09-23-legal-pages-and-ghl-form-on-production.md).
 
+**HIPAA Disclosure, `/hipaa-disclosure`, is live on both hosts since 2026-10-01** (55 pages each):
+the HHS model Notice of Privacy Practices for Stone Surgical Arts PLLC, injected as one page by
+`21-instatic-upload/add-hipaa-page.mjs` (no re-import). The footer's legal row does not link it yet,
+by decision —
+[run](./runbook/2026-10-01-hipaa-disclosure-page.md).
+
 **Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
 It is a Railway environment `staging` in the same project, seeded from production on
 2026-09-15, and `noindex` at the edge. Work there, then promote with the staging-clone module;

@@ -929,6 +929,27 @@ Full account in the [2026-09-30 run](../../docs/runbook/2026-09-30-google-review
   declares the vendor's hosts in `data-embed-hosts` (suffixes), and the gate reads them. It also
   treats a populated Elfsight portal as "booted", so a badge layout does not fail the wait.
 
+### Trap 34 — adding ONE page live: no re-import, and a publish rewrites every page's bytes anyway
+
+`push-site.mjs` is replace mode: every page, the shell and every admin edit. For a single new page
+use `add-hipaa-page.mjs` as the pattern (2026-10-01): clone the instance's own model page row
+(`/privacy-policy`) with fresh node ids so the chrome is what THAT host serves, swap its `<article>`
+for the authored body converted to nodes, write it with one incremental `PUT /site-document`, then a
+full-cells `PATCH` for `seoTitle`/`seoDescription`. Its converter self-tests first: run on
+`privacy-policy.body.html` it must reproduce the live privacy article node-for-node (`<li>` is always a
+custom container holding a `none` text run; mixed inline content is a custom container of `none`
+runs, `strong`/`em` texts and `base.link`s; `<br>` is a custom `br` container).
+
+There is no per-page publish: `POST /publish` ships the whole draft. So the script refuses unless
+`publish/status` said `draftMatchesPublished: true` before the write and no other row's
+`seq|updatedAt` moved before the publish. Also register the page in `build-site.mjs`, `seo.json`,
+`build-import-input.mjs` and the gates, or the next `push-site --apply` deletes it.
+
+To prove nothing else changed, hash every page before and after, but normalise first: each publish
+mints a new per-page folder for runtime scripts (`/_instatic/assets/<id>/entries/` and `/classic/`),
+bumps `/_instatic/module-js/<module>.js?v=N` on pages using a plugin module, and Cloudflare re-encodes
+`data-cfemail` per request. Take the baseline WITH that normalisation, twice, before publishing.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions

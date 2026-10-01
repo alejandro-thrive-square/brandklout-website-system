@@ -92,6 +92,8 @@ const PAGES = [
   // hero, no motion, no closing band: a policy is read, not sold.
   { slug: "privacy-policy", src: "privacy-policy", photoHero: false, motion: false, cta: false },
   { slug: "terms-of-service", src: "terms-of-service", photoHero: false, motion: false, cta: false },
+  // 2026-10-01, published by 21-instatic-upload/add-hipaa-page.mjs (not a re-import).
+  { slug: "hipaa-disclosure", src: "hipaa-disclosure", photoHero: false, motion: false, cta: false },
 ];
 
 PAGES.push(...BLOG_PAGES);

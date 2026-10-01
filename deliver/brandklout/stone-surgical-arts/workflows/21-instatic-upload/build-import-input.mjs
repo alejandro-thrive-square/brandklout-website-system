@@ -82,6 +82,9 @@ const PAGES = [
      sister practice's policies. */
   { file: 'privacy-policy.html', slug: 'privacy-policy', title: 'Privacy Policy' },
   { file: 'terms-of-service.html', slug: 'terms-of-service', title: 'Terms of Service' },
+  /* 2026-10-01, injected live by add-hipaa-page.mjs. Listed here so the next
+     replace-mode push-site keeps it rather than deleting it. */
+  { file: 'hipaa-disclosure.html', slug: 'hipaa-disclosure', title: 'HIPAA Disclosure' },
 ]
 
 addBlogSeo(seo)
