@@ -7,6 +7,7 @@
    so nothing here is copied from it. Until the practice or its counsel
    confirms the text, the page says so at the top. */
 import { SITE } from '../lib/site.mjs'
+import { HIPAA, toHtml, asideHtml } from '../lib/hipaa-notice.mjs'
 
 const accessibility = {
   slug: 'accessibility',
@@ -79,6 +80,26 @@ const privacy = {
   ],
 }
 
+/* The HIPAA Notice of Privacy Practices (2026-10-01): the HHS model notice our
+   Webflow sites carry, text in lib/hipaa-notice.mjs. Written to the live site
+   page-only by 21-instatic-upload/add-hipaa-page.mjs; this entry keeps a later
+   full push from dropping it. */
+const hipaa = {
+  slug: 'hipaa-disclosure',
+  title: 'HIPAA Disclosure | West LA Implants',
+  description: 'The West LA Implants Notice of Privacy Practices: how your medical information may be used and disclosed, your rights over it, and how to reach the practice.',
+  chapters: [
+    {
+      type: 'cover', name: 'Arrival', kicker: 'Notice of Privacy Practices',
+      title: 'HIPAA <em>Disclosure</em>',
+      lead: 'How medical information about you may be used and disclosed, and how you can get access to it. Effective ' + HIPAA.effective + '.',
+      image: { src: '/media/img/front-desk-emily.jpg', alt: 'The front desk at West LA Implants' },
+    },
+    { type: 'prose', name: 'The Notice', id: 'notice', html: toHtml(), aside: asideHtml() },
+    { type: 'invite', name: 'Invitation', title: 'A question about your <em>information?</em>', lead: 'Contact the office and ask for the office manager.', interests: ['A privacy question', 'A consultation', 'Not sure yet'] },
+  ],
+}
+
 const thankyou = {
   slug: 'thank-you',
   title: 'Thank You | West LA Implants',
@@ -110,4 +131,4 @@ const thankyou = {
   ],
 }
 
-export default [accessibility, privacy, thankyou]
+export default [accessibility, privacy, hipaa, thankyou]
