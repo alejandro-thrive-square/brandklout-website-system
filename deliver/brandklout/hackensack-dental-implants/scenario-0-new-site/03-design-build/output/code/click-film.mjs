@@ -30,8 +30,10 @@ for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'phone']]) {
   const v1 = await pg.evaluate(() => document.querySelector('.js-hero-video').currentTime);
   say(v0.playing && v1 > v0.t && /\/uploads\//.test(v0.src) && (w < 768 ? /hero-loop-m/.test(v0.src) : !/hero-loop-m/.test(v0.src)), `${label}: hero film plays the right file from the media library`, `${v0.src.split('/').pop()} ${v0.t.toFixed(1)}s -> ${v1.toFixed(1)}s`);
 
-  const firstView = await pg.evaluate(() => { const r = (s) => document.querySelector(s).getBoundingClientRect(); const d = r('.hero-doctor'); const p = r('.hero-play'); return { doctor: d.top >= 0 && d.bottom <= innerHeight, play: p.top >= 0 && p.bottom <= innerHeight, doctorBottom: Math.round(d.bottom) }; });
-  say(firstView.doctor && firstView.play, `${label}: the doctor's card and the play button are in the first view`, JSON.stringify(firstView));
+  /* BugHerd #16: the doctor's card sits at the foot of the film (off the faces); on a laptop that is
+     below the first view, so desktop asks only that it sits inside the film's lower edge */
+  const firstView = await pg.evaluate(() => { const r = (s) => document.querySelector(s).getBoundingClientRect(); const d = r('.hero-doctor'); const p = r('.hero-play'); const f = r('.hero-frame'); return { play: p.top >= 0 && p.bottom <= innerHeight, doctorInView: d.top >= 0 && d.bottom <= innerHeight, doctorAtFoot: f.bottom - d.bottom >= 0 && f.bottom - d.bottom < 80 }; });
+  say(firstView.play && (w < 768 ? firstView.doctorInView : firstView.doctorAtFoot), `${label}: play button in the first view; doctor's card ${w < 768 ? 'in the first view' : 'at the foot of the film'}`, JSON.stringify(firstView));
 
   await pg.click('.film-toggle');
   await sleep(400);
@@ -57,7 +59,7 @@ for (const [w, h, label] of [[1440, 900, 'desktop'], [390, 844, 'phone']]) {
   await pg.evaluate(() => { const s = document.querySelector('.stats'); if (window.WZ && WZ.smoother) WZ.smoother.scrollTo(s, false, 'top 60%'); else window.scrollTo(0, s.getBoundingClientRect().top + scrollY - innerHeight * 0.6); });
   await sleep(3500);
   const nums = await pg.evaluate(() => [...document.querySelectorAll('.stat strong')].map((n) => n.textContent.trim()));
-  say(nums.join('|') === '4.7|50,000+|30+|4', `${label}: the numbers count up and settle on the written values`, nums.join(' | '));
+  say(nums.join('|') === '5.0|50,000+|30+|4', `${label}: the numbers count up and settle on the written values`, nums.join(' | '));
   say(errors.length === 0, `${label}: no page errors`, errors.join(' | '));
   await pg.close();
 }

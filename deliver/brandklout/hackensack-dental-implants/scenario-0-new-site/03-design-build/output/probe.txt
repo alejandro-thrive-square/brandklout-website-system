@@ -1,14 +1,13 @@
-PASS  hero button travels to the consultation  scrollY 13179, section top at 12px
-PASS  pinned scenes  story-scene 990px, process-scene 1620px, results-scene 1980px, final-scene 810px
+PASS  hero button travels to the consultation  scrollY 12794, section top at 12px
+PASS  pinned scenes  story-scene 495px, process-scene 1620px, results-scene 1980px
 PASS  pin story-scene holds, fits the viewport and scrubs  top 130/130/130px at 25/50/75%, the three states differ
 PASS  pin process-scene holds, fits the viewport and scrubs  top 241/241/241px at 25/50/75%, the three states differ
-PASS  pin results-scene holds, fits the viewport and scrubs  top 178/178/178px at 25/50/75%, the three states differ
-PASS  pin final-scene holds, fits the viewport and scrubs  top 160/160/160px at 25/50/75%, the three states differ
+PASS  pin results-scene holds, fits the viewport and scrubs  top 179/179/179px at 25/50/75%, the three states differ
 PASS  reading progress tracks the document  scaleX 0.500 at 50%
 PASS  FAQ opens one answer at a time  [false,false,true,false,false]
 PASS  no page errors on desktop
-PASS  every pinned scene fits 1512x735  story-scene 42..694, process-scene 155..580, results-scene 91..644, final-scene 72..662
-PASS  text contrast with motion on  497 text elements, 0 under the floor
+PASS  every pinned scene fits 1512x735  story-scene 42..694, process-scene 155..580, results-scene 91..644
+PASS  text contrast with motion on  492 text elements, 0 under the floor
 PASS  reduced motion: runtime armed, zero pins, nothing hidden
 PASS  1920: no overflow, no control cut off, headline clear of the film
 PASS  1366: no overflow, no control cut off, headline clear of the film

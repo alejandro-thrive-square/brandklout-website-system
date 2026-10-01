@@ -57,8 +57,7 @@ const d = await pg.evaluate(async () => {
     interaction: {
       drawings: document.querySelectorAll('.solution .drawing svg').length,
       drawingPos: document.querySelector('.drawing') ? getComputedStyle(document.querySelector('.drawing')).position : null,
-      cursorPos: document.querySelector('.cursor') ? getComputedStyle(document.querySelector('.cursor')).position : null,
-      scan: !!document.querySelector('.tech-image .scanline'),
+      cursor: !!document.querySelector('.cursor'),
       rule: !!document.querySelector('.processgrid .process-rule'),
       film: (() => { const v = document.querySelector('.js-hero-video'); const t = document.querySelector('.hero-frame .film-toggle'); return !!(v && v.currentSrc && v.readyState >= 2 && t && getComputedStyle(t).position === 'absolute'); })(),
     },
@@ -66,9 +65,9 @@ const d = await pg.evaluate(async () => {
 });
 
 const staging = /-staging[.]up[.]railway[.]app$|^staging[.]/.test(host);
-const PINS = ['story-scene', 'process-scene', 'results-scene', 'final-scene'];
-say(d.wz && d.wz.ok && d.wz.smoother && PINS.every((p) => d.pins.includes(p)), 'runtime armed on the published page, four pinned scenes', `pins ${d.pins.join(', ')}; ${d.wz ? d.wz.active.join(' ') : 'no WZ'}`);
-say(d.interaction.drawings === 3 && d.interaction.scan && d.interaction.rule && d.interaction.drawingPos === 'static' && d.interaction.film && d.interaction.cursorPos === 'fixed', 'interaction layer created and styled (the verbatim stylesheet reached the page)', JSON.stringify(d.interaction));
+const PINS = ['story-scene', 'process-scene', 'results-scene'];
+say(d.wz && d.wz.ok && d.wz.smoother && PINS.every((p) => d.pins.includes(p)), 'runtime armed on the published page, three pinned scenes', `pins ${d.pins.join(', ')}; ${d.wz ? d.wz.active.join(' ') : 'no WZ'}`);
+say(d.interaction.drawings === 3 && d.interaction.rule && d.interaction.drawingPos === 'static' && d.interaction.film && !d.interaction.cursor, 'interaction layer created and styled (the verbatim stylesheet reached the page)', JSON.stringify(d.interaction));
 say(d.chapters === 8 && d.h1 === 1, 'eight chapters, one h1');
 say(d.fonts.includes('Newsreader') && d.fonts.includes('DM Sans') && /Newsreader/.test(d.h1Font), 'both typefaces loaded from the media library', d.fonts.join(', '));
 say(d.opszWidths[0] !== d.opszWidths[1], 'Newsreader is the variable file (optical size changes the width)', `${d.opszWidths[0]}px at opsz 6, ${d.opszWidths[1]}px at opsz 72`);

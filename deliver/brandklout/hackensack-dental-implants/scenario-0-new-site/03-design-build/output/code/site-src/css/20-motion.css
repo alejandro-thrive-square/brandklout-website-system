@@ -12,7 +12,7 @@
 }
 
 /* SplitText line masks: room for descenders under a 0.98 line-height */
-.ln-mask { padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.ln-mask { padding-top: 0.16em; margin-top: -0.16em; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 
 /* the patient's sentence is written by the scroll: unlit words are already readable, then fill */
 .motion .js-words .wd { color: #77736b; }

@@ -9,8 +9,8 @@
 
 .nav { background: rgba(251, 250, 247, 0.97); border-bottom: 1px solid var(--line); position: relative; z-index: 20; }
 .navin { height: 5.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.625rem; }
-.brand { display: flex; align-items: center; gap: 0.8125rem; }
-.brand img { width: 3rem; height: 3rem; object-fit: contain; border-radius: 50%; background: #151515; }
+.brand { display: flex; align-items: center; gap: 0.8125rem; min-height: 44px; }
+.brand img { width: auto; height: 3.875rem; }
 .brand b { font-size: var(--t-xs); letter-spacing: 0.105em; line-height: 1.35; font-weight: 700; }
 .brand small { display: block; color: var(--accent-text); font-size: var(--t-xs); letter-spacing: 0.12em; margin-top: 0.1875rem; }
 .navlinks { display: flex; align-items: center; gap: 1.6875rem; font-size: var(--t-xs); font-weight: 700; }
@@ -36,7 +36,7 @@
   .topbar .wrap { justify-content: center; text-align: center; }
   .topbar .wrap span:last-child { display: none; }
   .navin { height: 4.6875rem; }
-  .brand img { width: 2.5625rem; height: 2.5625rem; }
+  .brand img { width: auto; height: 2.875rem; }
   .navlinks .btn { display: none; }
   .footergrid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { display: block; }

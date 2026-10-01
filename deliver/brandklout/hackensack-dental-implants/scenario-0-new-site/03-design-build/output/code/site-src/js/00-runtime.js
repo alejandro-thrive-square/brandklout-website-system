@@ -1,17 +1,17 @@
 /* WZ runtime for the Hackensack home page (concept 04, elevated).
  *
- * The composition at rest is the concept's. The motion layer is editorial: a curtain on arrival, a
- * cursor that names what it is over, buttons that roll their label, headlines that rise word by
- * word, a hero film the scroll opens to the full window, and scenes where scroll drives the content
- * (the patient's sentence, the four steps, the before and after, the closing words). Between them:
- * the practice's numbers counting up, implant drawings that draw themselves, a CBCT scan line that
- * sweeps its photograph, a circle that opens onto the full-arch patient, and an accordion that eases.
+ * The composition at rest is the concept's. The motion layer is editorial: a curtain on arrival,
+ * buttons that roll their label, headlines that rise word by word, a hero film the scroll opens to
+ * the full window, and scenes where scroll drives the content (the patient's sentence, the four
+ * steps, the before and after, the closing words). Between them: the practice's numbers counting
+ * up, implant drawings that draw themselves, a circle that opens onto the full-arch patient, and an
+ * accordion that eases. No cursor follower and no scan line (BugHerd 544349 #1, #4, #23).
  *
  * Two layers. The interface layer (anchors, FAQ, call bar, the hero film and its light box, staging
  * noindex) runs on every visit.
  * The motion layer runs only when GSAP loaded and the visitor has not asked for reduced motion.
  * Every reveal is a ScrollTrigger; no visibility observers. Everything the motion layer adds to
- * the page (curtain, cursor, drawings, scan line) is created here, so the imported page never
+ * the page (curtain, drawings, film control) is created here, so the imported page never
  * carries markup that only motion needs.
  *
  * Contract with the gates (tools/instatic-site/gates/check-pages.mjs): window.WZ.ok, WZ.smoother,
@@ -424,15 +424,6 @@
     });
   }
 
-  /* ---- the CBCT photograph: a scan line sweeps it while it settles ---- */
-  var tech = $('.tech-image');
-  if (tech) {
-    var scan = el('span', 'scanline', tech);
-    scan.setAttribute('aria-hidden', 'true');
-    gsap.fromTo(scan, { top: '0%', autoAlpha: 0 }, { top: '100%', autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: tech, start: 'top 80%', end: 'bottom 30%', scrub: 0.5 } });
-    mark('scan');
-  }
-
   /* ---- headlines lit by the scroll: words go from the readable grey (#77736b, 4.5:1) to ink ---- */
   $$('.js-light').forEach(function (h) { SplitText.create(h, { type: 'words', wordsClass: 'wl' }); });
   var consultH = $('.consult .js-light');
@@ -464,7 +455,7 @@
       : { trigger: el, start: 'top 75%', end: 'bottom 25%', scrub: scrub, invalidateOnRefresh: true };
   };
   mm.add('(min-width: 992px)', function () {
-    if (story) writeStory(gsap.timeline({ scrollTrigger: scene(story, '110%', 0.4) }));
+    if (story) writeStory(gsap.timeline({ scrollTrigger: scene(story, '55%', 0.3) }));
     if (proc) {
       var ptl = gsap.timeline({ scrollTrigger: scene(proc, '180%', 0.5) });
       if (grid) ptl.to(grid, { x: travel, ease: 'none', duration: steps.length + 0.4 }, 0);
@@ -475,7 +466,8 @@
       cases.forEach(function (c, i) { wipe(tl, c, i ? '>+0.25' : 0); });
       tl.to({}, { duration: 0.3 });
     }
-    if (fin) closeScene(gsap.timeline({ scrollTrigger: scene(fin, '90%', 0.5) }));
+    /* not pinned (BugHerd #13, #25: the pin held an empty screen); played while it passes */
+    if (fin) closeScene(gsap.timeline({ scrollTrigger: { trigger: fin, start: 'top 85%', end: 'center 55%', scrub: 0.4, invalidateOnRefresh: true } }));
     mark('scenes');
   });
 
@@ -520,31 +512,6 @@
       b.addEventListener('mouseleave', function () { x(0); y(0); });
     });
 
-    /* a cursor that names what it is over. pointer-events: none, so it can never take a click */
-    var cur = el('div', 'cursor', document.body);
-    cur.setAttribute('aria-hidden', 'true');
-    var dot = el('span', 'cursor__dot', cur);
-    var ring = el('span', 'cursor__ring', cur);
-    var tag = el('span', 'cursor__label', ring);
-    var dx = gsap.quickTo(dot, 'x', { duration: 0.12, ease: 'power3' });
-    var dy = gsap.quickTo(dot, 'y', { duration: 0.12, ease: 'power3' });
-    var rx = gsap.quickTo(ring, 'x', { duration: 0.45, ease: 'power3' });
-    var ry = gsap.quickTo(ring, 'y', { duration: 0.45, ease: 'power3' });
-    window.addEventListener('pointermove', function (e) { dx(e.clientX); dy(e.clientY); rx(e.clientX); ry(e.clientY); cur.classList.add('is-on'); }, { passive: true });
-    document.addEventListener('pointerleave', function () { cur.classList.remove('is-on'); });
-    var state = function (e) {
-      var t = e.target;
-      var name = '';
-      var mode = '';
-      if (t.closest('.js-case')) { mode = 'is-media'; name = 'Drag'; }
-      else if (t.closest('.hero-play')) { mode = 'is-media'; name = 'Play'; }
-      else if (t.closest('.photo, .doc-portrait, .story-photo')) { mode = 'is-media'; name = 'View'; }
-      else if (t.closest('a, button, summary')) mode = 'is-link';
-      cur.classList.toggle('is-media', mode === 'is-media');
-      cur.classList.toggle('is-link', mode === 'is-link');
-      tag.textContent = name;
-    };
-    document.addEventListener('pointerover', state);
     mark('pointer');
   }
 
