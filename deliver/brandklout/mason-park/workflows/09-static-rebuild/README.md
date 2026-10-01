@@ -55,7 +55,8 @@
 | `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
 | `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
 | `.tmp/diff-live.mjs` | **Diffs a local page against its published twin** — head tags, every element signature, semantic tags, the attributes that get dropped, the visible text, and the box of every classed element. This is what finds the silent losses; run it after every import. |
-| `.tmp/apply-image-alt.mjs` | Restores `alt` and the `loading`/`fetchpriority` hints, which the converter drops. **Run it before `import-styles.mjs`.** |
+| `.tmp/apply-image-alt.mjs` | Restores the `loading`/`fetchpriority` hints, which the converter drops, and records each image file's alt in `media-alt.json`. **Run it before `import-styles.mjs`.** |
+| `.tmp/set-media-alt.mjs` | Writes those alts onto the media assets (`PATCH /admin/api/cms/media/:id {altText}`), where `base.image` reads them. Per instance; before the publish. Since 2026-10-01. |
 | `.tmp/apply-body-class.mjs` | Puts each page's `<body>` classes on its converted root node. Without it the homepage loses `has-journey` and comes up with a solid white header. **Run it before `import-styles.mjs`.** |
 | `.tmp/import-fonts.mjs` | Installs Karla, Newsreader and Nunito Sans through Instatic's own font store. Without it the live pages render in Georgia and Segoe UI. |
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
@@ -831,7 +832,8 @@ RAILWAY_ENV_NAME=staging node ship-payload.mjs         # 6. HTML -> the containe
 RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs, inside the container
 RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
 node apply-body-class.mjs                              # 8b. <body class> onto the converted root
-node apply-image-alt.mjs                               # 8c. alt text + the eager/high hero hints
+node apply-image-alt.mjs                               # 8c. alt text (recorded) + the eager/high hero hints
+node set-media-alt.mjs --apply                         # 8c'. the alts onto the media assets (before any publish)
 node place-ad-embeds.mjs                               # 8d. four GHL forms + six call-tracking blocks
 
 node import-fonts.mjs                                  # 9. the three families, self-hosted by Instatic
@@ -974,9 +976,12 @@ settled at build time instead.
 
 - **`alt` is dropped on every image** — 0 of 38 described on the homepage, against 24 in the
   source, and the 81-page site that was here before had the same hole. `props.alt` is *ignored*
-  by the module; it has to go through `htmlAttributes`, the escape hatch the map iframe's node
-  uses. The module then emits its own empty `alt=""` as well, so the published tag carries two —
-  ours first, which is the one every parser and screen reader takes.
+  by the module, and **`base.image` always writes `alt="<the media asset's altText>"` itself**
+  (`src/modules/base/image/index.ts`: alt comes only from the library asset). Until 2026-10-01
+  the alt went into `htmlAttributes`, so every published `<img>` carried two alts, ours and the
+  module's empty one (BugHerd #263, 952 images). It now goes on the media asset:
+  `apply-image-alt.mjs` records it, `set-media-alt.mjs` writes it, the node keeps no alt. One
+  file, one alt: where a file is described two ways, the most used wins.
 - **`loading` and `fetchPriority` are overwritten with `lazy`/`auto`**, so the hero — the LCP
   element, deliberately eager and high priority — was published lazy along with all 38 images.
 - `srcset` and `sizes` go too, and that one is fine: Instatic generates its own srcset at publish,

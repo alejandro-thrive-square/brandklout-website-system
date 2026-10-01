@@ -1,11 +1,12 @@
 # Runbook index
 
-27 runs, newest first. Each line is one file in this folder.
+28 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01 — BugHerd round seven: 10 of 11 ad-page notes fixed on both instances (copy, terms line, credentials label, portrait cap, anchors, rail vs Termly); alts moved onto media assets site-wide; lp stylesheet removed + Cloudflare Insights in CSP; #256 open for GHL — carries **gotchas** | [`2026-10-01-bugherd-round-seven-ad-pages.md`](./2026-10-01-bugherd-round-seven-ad-pages.md) |
 | 2026-10-01 | 2026-10-01 — "HIPAA Disclosure" in every footer legal row after Privacy Policy (65 staging rows, 89 production rows, 231 source pages + generators); every URL otherwise identical; a site-document save drops template flags — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01 — The HIPAA Disclosure page (HHS model notice, Mason Park Dental PLLC, effective Oct 1) injected as one cloned row on staging + production; every other page byte-identical; no footer link — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-09-30 | 2026-09-30 — The practice’s own Google reviews widget (Elfsight All-in-One 32926aff, no lazy attr) where the homepage deck and the reviews wall were; slot in the local HTML so the chain keeps it; staging + production, verified in Chrome — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |

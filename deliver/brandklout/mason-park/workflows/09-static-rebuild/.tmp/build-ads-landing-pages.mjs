@@ -64,9 +64,11 @@ function img(key, sizes, o = {}) {
   return `<img src="${file(W, H)}" srcset="${srcset}" sizes="${sizes}" alt="${alt}" width="${W}" height="${H}" ${load} decoding="async">`;
 }
 
+// The practice's, not one doctor's: the two pediatric marks are Dr. Tam Nguyen's,
+// and "Credentialed by" beside Dr. Dave Cho's profile read as his (BugHerd #259).
 const BADGES = `<div class="pr-badges">
     <div class="pr-badges-in">
-      <p class="pr-badges-label">Credentialed by</p>
+      <p class="pr-badges-label">Practice affiliations and credentials</p>
       <ul>
         <li><img src="${A}uploads/2023/08/kois-1.webp" alt="Kois Center" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/ssc-1.webp" alt="Seattle Study Club" loading="lazy" decoding="async"></li><li class="is-mark"><img src="${A}uploads/2023/08/aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy" decoding="async"></li><li><img src="${A}uploads/2023/08/abpd-1.webp" alt="American Board of Pediatric Dentistry - Board Certified" loading="lazy" decoding="async"></li>
       </ul>
@@ -234,7 +236,8 @@ function formCard(c) {
   return `<div class="lp-form-card" id="form">
       <p class="lp-form-kicker">${c.form.kicker}</p>
       <h3 class="lp-form-title">${c.form.title}</h3>
-      <p class="lp-form-lede">${c.form.lede}</p>
+      <p class="lp-form-lede">${c.form.lede}</p>${c.terms ? `
+      <p class="lp-terms">${c.terms}</p>` : ""}
       <div class="lp-form-slot" data-ghl-form="${c.formId}" data-ghl-name="${c.formName}" data-ghl-height="${c.formHeight}">
         <p>Contact form</p>
         <small>The live form is inserted by Instatic at import.</small>
@@ -396,7 +399,7 @@ const campaigns = [
       p: "The consultation decides which of these you are. It is free, and it is where you find out whether Invisalign is the right tool for your teeth.",
       items: [
         { img: "desk-family-2", h: "Teens", p: "Clear enough for school photos, out for sport and brushing, no brackets or wires to break. Many teens finish in less time than with braces." },
-        { img: "clinical-pair-chair", h: "Adults", p: "Crowding, spacing, and teeth that drifted years after the braces came off. Invisalign treats most of what walks in." },
+        { img: "clinical-pair-chair", h: "Adults", p: "Crowding, spacing, and teeth that drifted years after the braces came off. Invisalign can treat many common alignment concerns." },
         { img: "checkin-screen", h: "Severe cases", p: "Some alignment needs something else. If yours does, Dr. Dave Cho says so at the consultation, and it has cost you nothing to find out." },
       ],
     },
@@ -476,14 +479,14 @@ const campaigns = [
       callH2: "What to expect <em>on the call.</em>",
       callLede: "Three things, in order. Nothing else is needed from you until the phone rings.",
       steps: [
-        ["First", "Your options", "What you would like to change, and whether Invisalign fits. If Dr. Dave Cho would recommend something else for your teeth, the front desk says so now."],
+        ["First", "Your options", "The front desk will ask what you&rsquo;d like to change and schedule your consultation. Dr. Dave Cho will determine whether Invisalign is appropriate after examining your teeth and scan."],
         ["Then", "Your payment options", "The $1,000 offer, the further $500 for prepaying, what your insurance is likely to cover and the 0% APR plan, explained plainly."],
         ["Finally", "Your free consultation", "A time for the visit itself: the 3D scan, the preview of the finished smile, and a price in writing before anything is made."],
       ],
       risksH3: "Why not to wait",
       risks: [
         "Crowded teeth are harder to clean, so the gums and enamel around them pay for it over time.",
-        "Teeth keep drifting. A plan that would take a year now takes longer later.",
+        "Teeth can continue to shift; treatment timing varies by case.",
         "The $1,000 offer is current. Offers change; the consultation locks yours in.",
         "Every month you wait is a month you wear the aligners later.",
       ],
@@ -508,6 +511,9 @@ const campaigns = [
     formHeight: 1587,
     railLabel: "$189 first visit",
     cta: "Claim the $189 visit",
+    // The offer's limits beside the first price, CTA and form, not only in the FAQ and the
+    // fine print (BugHerd #258). The disclaimer below says the same at length.
+    terms: "New patients &bull; self-pay &bull; periodontal cases excluded",
     serviceHref: "/new-patients/",
     serviceLabel: "Read about your first visit",
     title: "$189 New Patient Special in Katy, TX | Exam, X-Rays, Cleaning | Mason Park Dental",
@@ -547,7 +553,7 @@ const campaigns = [
     },
     doors: {
       h3: "Three reasons people book, <em>and one front desk.</em>",
-      p: "Say which one you are when you call, or on the form. The $189 visit is the same either way.",
+      p: "Say which one you are when you call, or on the form.",
       items: [
         { img: "hygienist-working-2", h: "Just a checkup", p: "It has been six months, or six years. The exam, x-rays and cleaning are the same visit, and nobody asks how long it has been." },
         { img: "dentist-handheld-2", h: "Something hurts", p: "Same-day slots for pain, breaks and knocked out teeth. Say it is urgent and the front desk finds the time." },
@@ -673,7 +679,8 @@ ${header({ ctaHref: consultHref, ctaLabel: c.cta, ctaShort: "Book" })}
       <h1 class="ar-title" data-split>${c.hero.h1}</h1>
       <p class="ar-lede" data-anim="hide">${c.hero.lede}</p>
       <div class="ar-actions" data-anim="hide"><a class="button is-lg" href="${consultHref}">${c.cta}</a>
-        <a class="button is-ghost-light is-lg" href="${TEL}">Call ${PHONE}</a></div>
+        <a class="button is-ghost-light is-lg" href="${TEL}">Call ${PHONE}</a></div>${c.terms ? `
+      <p class="lp-terms is-on-dark" data-anim="hide">${c.terms}</p>` : ""}
       <div class="ar-meta" data-anim="hide">${c.hero.meta.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("")}</div>
       <p class="lp-hero_area">Serving Katy, Cinco Ranch, Fulshear and West Houston</p>
     </div>

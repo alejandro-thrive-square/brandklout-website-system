@@ -6546,3 +6546,39 @@ html.lp-rail-ready .lp-rail:not(.is-in) { transform: translate(-50%, 140%); opac
    ad pages, against the 800 to 900 of the Google Ads forms they replaced;
    the 50rem reservation left an empty band under the Submit button. */
 .ch-arrival .lp-form-slot.wz-embed { min-height: 44rem; }
+
+/* ========================================================================
+   BugHerd round seven (2026-10-01): the /ads-landing-pages/ set.
+   ======================================================================== */
+/* #258 The $189 offer's limits beside the first price, CTA and form. */
+.ch .lp-form-card .lp-terms,
+.ch .lp-terms {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--brand-deep);
+}
+.ch-arrival.is-lp .lp-terms.is-on-dark { margin: -1.2rem 0 2.4rem; color: rgba(255, 255, 255, .82); }
+/* #255 "Form" in the header and "What happens next" land under the floating
+   header (73px at 864 wide). The site's anchor targets carry their own
+   scroll-margin; these two did not. */
+.lp-form-card, .ch-call { scroll-margin-top: 7rem; }
+/* #260 Termly's consent banner (z-index 999999) sits over the bottom rail on
+   production. The rail steps aside while the banner is in the DOM; Termly
+   removes the banner node on Accept, Decline or a saved preference. */
+body:has([class*="termly-styles-termly-banner"]) .lp-rail { transform: translate(-50%, 140%); opacity: 0; pointer-events: none; }
+/* #257 Dr. Dave Cho's portrait is the practice's 750px headshot, cut 562x750.
+   Full-bleed at 864 wide it was stretched about 3x on a retina screen. It now
+   stops at 480px under 900, framed by the ink, and the ink column stops at
+   560px above it. In px on purpose: the limit is the photograph's own pixels,
+   and the fluid root made 36rem 668px at 1440. */
+@media (max-width: 899px) {
+  .ch-dentist .cp-split_ink { display: flex; justify-content: center; }
+  .ch-dentist .cp-split_ink img { width: min(100%, 480px); }
+}
+@media (min-width: 900px) {
+  .ch-dentist .cp-split { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); }
+}

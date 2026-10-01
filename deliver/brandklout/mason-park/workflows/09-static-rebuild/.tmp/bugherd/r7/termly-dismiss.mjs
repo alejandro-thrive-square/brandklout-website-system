@@ -1,0 +1,11 @@
+import { chromium } from "playwright-core";
+const br = await chromium.launch({ channel: "chrome" });
+const page = await br.newPage({ viewport: { width: 864, height: 906 } });
+await page.goto("https://www.masonparkdental.com/ads-landing-pages/invisalign-thank-you", { waitUntil: "load" });
+await page.waitForTimeout(4000);
+const q = () => page.evaluate(() => [...document.querySelectorAll('[class*="termly-styles-termly-banner"]')].map((e) => `${e.parentElement?.tagName}>${e.tagName} disp=${getComputedStyle(e).display} vis=${getComputedStyle(e).visibility} h=${e.getBoundingClientRect().height} inBody=${document.body.contains(e)} parentId=${e.parentElement?.id}`));
+console.log("before", await q());
+await page.getByRole("button", { name: "Decline" }).click();
+await page.waitForTimeout(1500);
+console.log("after decline", await q());
+await br.close();

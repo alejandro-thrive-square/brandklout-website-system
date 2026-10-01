@@ -1,0 +1,10 @@
+import { chromium } from "playwright-core";
+const br = await chromium.launch({ channel: "chrome" });
+const page = await br.newPage();
+const hits = [];
+page.on("response", async (r) => { try { const t = await r.text(); if (/x-font-ttf;charset=utf-8;base64,AAEAAAALAIAAAwAwT1MvMg8SBiUAAAC8/.test(t)) hits.push(r.url()); } catch {} });
+await page.goto(process.argv[2], { waitUntil: "load" });
+await page.waitForTimeout(4000);
+console.log("served in:", hits);
+console.log(await page.evaluate(() => [...document.querySelectorAll("style")].filter((s) => s.textContent.includes("x-font-ttf")).map((s) => (s.id || s.className || "?") + " :: " + s.textContent.match(/font-family:\s*['"]?([^;'"]+)/)?.[1] + " :: parent " + s.parentNode?.nodeName)));
+await br.close();

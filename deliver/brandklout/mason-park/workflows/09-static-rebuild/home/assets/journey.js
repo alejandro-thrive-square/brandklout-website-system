@@ -223,8 +223,11 @@
     gsap.set($$(".ar-lede, .el-badge, .ar-actions, .ar-meta", sec), { opacity: 0, y: 26 });
 
     /* The chapter departs: the photograph sinks and the copy lifts away, so
-       the hero is visibly LEFT rather than simply scrolled off. */
-    gsap.to($(".ar-in", sec), {
+       the hero is visibly LEFT rather than simply scrolled off. NOT when the
+       hero holds the ad pages' form: the lift moved the card 72px after an
+       anchor jump had picked its scroll position, so "Form" landed it under
+       the header, and the fade dimmed the form being filled in (BugHerd #255). */
+    if (!$(".lp-form-card", sec)) gsap.to($(".ar-in", sec), {
       yPercent: -14, opacity: .15, ease: "none",
       scrollTrigger: { trigger: sec, start: "top top", end: "bottom top", scrub: .5 }
     });
@@ -590,6 +593,25 @@
     }
     document.addEventListener("toggle", reflow, true);   // <details> toggle does not bubble; capture sees it
     if ("ResizeObserver" in window) new ResizeObserver(reflow).observe(document.body);
+  })();
+
+  /* A REFRESH CANCELS AN ANCHOR JUMP. refresh() scrolls to 0 to measure and
+     then back, which stops a smooth scroll where it is. The ad pages' GHL form
+     resizes its iframe three or four times in the first ~10s (150, 1724, 607,
+     715px), each resize refreshes, and "Form" in the header landed back at the
+     top about one time in three (BugHerd #255, production 2026-10-01). After a
+     refresh within 4s of an in-page link click, put the target back in view. */
+  (function () {
+    var target = null, at = 0;
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      var id = a && a.getAttribute("href").slice(1);
+      target = id ? document.getElementById(id) : null;
+      at = Date.now();
+    }, true);
+    ScrollTrigger.addEventListener("refresh", function () {
+      if (target && Date.now() - at < 4000) target.scrollIntoView({ behavior: "auto", block: "start" });
+    });
   })();
 })();
 

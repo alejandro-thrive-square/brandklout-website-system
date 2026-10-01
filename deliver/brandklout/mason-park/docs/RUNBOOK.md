@@ -5,6 +5,16 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## BugHerd round seven - 2026-10-01
+
+**Ten of gauge@'s eleven notes on the `/ads-landing-pages/` set are fixed on both instances and
+done. #256 (a GHL form's Submit label) is open, waiting on GHL access**
+([`runbook/2026-10-01-bugherd-round-seven-ad-pages.md`](./runbook/2026-10-01-bugherd-round-seven-ad-pages.md)).
+Two fixes are site-wide. **Image alts now live on the media assets** (`set-media-alt.mjs` is a
+chain step), because `base.image` always writes the asset's altText and the node alt had doubled
+it. **The retired `mason-park-lp.css` is gone**, and Cloudflare Insights is allowed in the CSP.
+**Open:** #256, and a high-resolution headshot of Dr. Dave Cho.
+
 ## HIPAA Disclosure - 2026-10-01
 
 **`/hipaa-disclosure` is live on both instances: the HHS model Notice of Privacy Practices for Mason Park Dental PLLC

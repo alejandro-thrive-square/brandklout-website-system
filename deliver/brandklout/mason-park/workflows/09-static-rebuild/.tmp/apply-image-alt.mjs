@@ -1,6 +1,7 @@
-// Put every image's alt text back on the converted nodes.
+// Record every image's alt text, and the loading hints, from the source HTML.
 //
 //   node apply-image-alt.mjs        # after fetch-nodes.mjs, before import-styles.mjs
+//   node set-media-alt.mjs          # later in the chain: writes the alts onto the media assets
 //
 // Instatic's HTML importer maps <img> onto `base.image` and keeps exactly
 // `src`, `loading`, `fetchPriority` and `decoding`. **`alt` is not among them.**
@@ -65,6 +66,9 @@ for (const f of fs.readdirSync(PAGES_DIR)) {
 }
 
 let set = 0, blank = 0, eager = 0;
+// src -> { alt: uses } for this converted set; read by set-media-alt.mjs.
+const MEDIA_ALT = path.join(HERE, "media-alt.json");
+const mediaAlt = {};
 for (const page of converted) {
   const src = bySlug.get(page.slug);
   if (!src) { console.error(`no exported html for ${page.slug}`); process.exit(1); }
@@ -88,19 +92,21 @@ for (const page of converted) {
   let pageSet = 0, pageBlank = 0;
   for (let i = 0; i < nodes.length; i++) {
     const alt = src[i].alt;
-    // `props.alt` is IGNORED by base.image -- setting it publishes and changes
-    // nothing, which is a convincing way to think you have fixed this. The
-    // module keeps src/loading/fetchPriority/decoding and nothing else, so
-    // anything more goes through `htmlAttributes`, the same escape hatch the
-    // map iframe's node uses for its data-src and title.
-    nodes[i].props.htmlAttributes = { ...(nodes[i].props.htmlAttributes || {}), alt };
-    // base.image emits its OWN `alt=""` unconditionally, so the published tag
-    // carries two alt attributes -- ours first (which is the one every parser
-    // and screen reader takes) and the module's empty one after. Invalid HTML,
-    // harmless in practice, and not something we can suppress from here. What
-    // we CAN avoid is adding a third: `props.alt` is ignored by the module but
-    // an earlier version of this script set it, so it is cleared.
+    // `props.alt` is IGNORED by base.image, and so, in effect, is an `alt` in
+    // `htmlAttributes`: the module ALWAYS emits `alt="<the media asset's
+    // altText>"` itself (src/modules/base/image/index.ts: "Alt text comes
+    // exclusively from the library asset"). Until 2026-10-01 this script put
+    // the alt in htmlAttributes, so every published <img> carried two alt
+    // attributes, ours and the module's empty one -- invalid HTML on all 952
+    // images (BugHerd #263). The alt now goes on the media asset: it is
+    // recorded here per src and written by set-media-alt.mjs, and no alt is
+    // left on the node.
+    const attrs = { ...(nodes[i].props.htmlAttributes || {}) };
+    delete attrs.alt;
+    nodes[i].props.htmlAttributes = attrs;
     delete nodes[i].props.alt;
+    const per = (mediaAlt[nodes[i].props.src] ??= {});
+    per[alt] = (per[alt] ?? 0) + 1;
     // AND THE LOADING HINTS. The converter defaults every image to
     // `loading: "lazy", fetchPriority: "auto"` regardless of what the source
     // said -- so the hero, which is the LCP element and is deliberately eager
@@ -116,7 +122,12 @@ for (const page of converted) {
 }
 
 fs.writeFileSync(CONVERTED, JSON.stringify(converted, null, 1));
+// One entry per converted set, so the page run and the template run each
+// replace only their own part. set-media-alt.mjs merges them.
+const all = fs.existsSync(MEDIA_ALT) ? JSON.parse(fs.readFileSync(MEDIA_ALT, "utf8")) : {};
+all[path.basename(CONVERTED)] = mediaAlt;
+fs.writeFileSync(MEDIA_ALT, JSON.stringify(all, null, 1));
 console.log(`${eager} image(s) kept eager (the hero)`);
 console.log(`
-${set} alt(s) written, ${blank} left empty (decorative) -> converted-pages.json`);
+${set} alt(s) recorded, ${blank} left empty (decorative), over ${Object.keys(mediaAlt).length} image file(s) -> ${path.basename(MEDIA_ALT)}`);
 if (!set) { console.error("nothing was set - do not publish this"); process.exit(1); }
