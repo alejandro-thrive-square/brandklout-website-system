@@ -5,6 +5,15 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## HIPAA Disclosure - 2026-10-01
+
+**`/hipaa-disclosure` is live on both instances: the HHS model Notice of Privacy Practices for Mason Park Dental PLLC
+(d/b/a Mason Park Dental of Katy), effective October 1, 2026, built from the Privacy Policy page's template**
+([`runbook/2026-10-01-hipaa-disclosure-page.md`](./runbook/2026-10-01-hipaa-disclosure-page.md)). Injected as one row
+(`.tmp/hipaa/add-hipaa-page.mjs`); the local twin `home/hipaa-disclosure/index.html` keeps it in a chain run. **A new
+row must join `mason-park.js`'s page scope** or it ships with no JavaScript. **Open:** no footer link yet (the footer
+has a `.footer_legal` row); the number pool rewrites the notice's phone number; the entity is unconfirmed by the practice.
+
 ## Google reviews widget - 2026-09-30
 
 **The practice's own Elfsight All-in-One Reviews widget (`32926aff`, the other Elfsight account, adult listing
