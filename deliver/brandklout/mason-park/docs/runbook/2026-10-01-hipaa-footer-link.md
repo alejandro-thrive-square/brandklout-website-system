@@ -6,6 +6,8 @@ as its neighbours. Footer link only.
 
 ## Done
 
+Commit `b2de91e0` on `bk-mason-park` (not pushed, not merged).
+
 - **There is no shared footer component** (`GET /components` → `[]`): every page row inlines its footer. So
   each row's `.footer_legal` was edited, nothing else. In each one the Privacy Policy link node and the
   separator text after it are **cloned** (new ids) and inserted after Privacy, so the new link has exactly
