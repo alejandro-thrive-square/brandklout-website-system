@@ -1,0 +1,38 @@
+/* 51-arch — the "arch" group's additions to the kit (new teeth in one day, denture stabilization, implant
+   complications, tooth extractions, full-mouth rehabilitation). Only what the kit lacks; class prefix arch-. */
+
+/* a wide diagram in a row: shown whole, never cropped */
+.row__fig.arch-diagram { aspect-ratio: 5 / 2; background: var(--paper-2); }
+.row__fig.arch-diagram img { height: 100%; object-fit: cover; }
+
+/* a benefits list in two columns under a mosaic (uses the signs marks and their motion) */
+.arch-ticks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 4rem; margin-top: 0; border-bottom: 0; }
+.arch-ticks li { border-bottom: 1px solid var(--rule); border-top: 0; }
+.arch-ticks li:nth-child(-n+2) { border-top: 1px solid var(--rule); }
+.arch-after { margin-top: 5rem; }
+
+/* a photograph under the side column of a prose chapter */
+.arch-side-fig { margin-top: 2.5rem; overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 3; }
+.arch-side-fig img { width: 100%; height: 116%; object-fit: cover; }
+
+/* a film followed by the numbers */
+.arch-film-head { margin-bottom: 3rem; }
+.arch-film-figs { margin-top: 5rem; }
+.arch-band { margin-bottom: 7rem; }
+.arch-band-end { margin-top: 7rem; }
+
+@media screen and (max-width: 991px) {
+  .arch-side-fig { max-width: 34rem; }
+  .arch-band { margin-bottom: 5rem; }
+  .arch-band-end { margin-top: 5rem; }
+}
+
+@media screen and (max-width: 767px) {
+  .arch-ticks { grid-template-columns: minmax(0, 1fr); }
+  .arch-ticks li:nth-child(2) { border-top: 0; }
+  .arch-after { margin-top: 3.5rem; }
+  .arch-film-figs { margin-top: 3.5rem; }
+}
+
+/* a small source portrait in a pull: keep it near its own size */
+.arch-pull-sm .pull__fig { width: 100%; max-width: 24rem; justify-self: center; }

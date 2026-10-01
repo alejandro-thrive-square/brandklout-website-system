@@ -329,7 +329,7 @@
 .tiles--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tiles--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .tile { display: block; }
-.tile__img { overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 3; background: var(--paper-2); }
+.tile__img { display: block; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 3; background: var(--paper-2); }
 .tile__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
 .tile:hover .tile__img img, .tile:focus-visible .tile__img img { transform: scale(1.06); }
 .tile .spec { margin-top: 1.25rem; color: var(--accent-text); }
@@ -482,6 +482,7 @@
   .vs, .vs tbody, .vs tr, .vs th, .vs td { display: block; width: 100%; }
   .vs tr { padding: 1.25rem 0; border-top: 1px solid var(--rule); }
   .vs th, .vs td { border: 0; padding: .3rem 0; }
+  .vs tbody th { width: 100%; }
   .vs td::before { content: attr(data-th) ' '; font-family: var(--f-mono); font-size: calc(.7rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); }
   .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); height: 36rem; }
   .mosaic__col:nth-child(3) { display: none; }

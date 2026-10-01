@@ -148,6 +148,8 @@
         var cards = $$('[data-stack-card]', stack), now = $('[data-stack-now]', stack);
         if (cards.length < 2) return;
         stack.classList.add('is-live');
+        /* filter from 'none' tweens through near-black: start every card at an explicit brightness(1) */
+        gsap.set(cards, { filter: 'brightness(1)' });
         gsap.set(cards.slice(1), { yPercent: 115 });
         var tl = gsap.timeline({ scrollTrigger: { trigger: stack, pin: true, start: 'top top', end: function () { return '+=' + (cards.length - 1) * window.innerHeight * .8; }, scrub: true, anticipatePin: 1, invalidateOnRefresh: true,
           onUpdate: function (self) { if (now) now.textContent = '0' + Math.min(cards.length, 1 + Math.floor(self.progress * (cards.length - 1) + .5)); } } });

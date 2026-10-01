@@ -7,11 +7,11 @@
    "route": "/",
    "label": "Home"
   },
-  "dental-services/dental-implants": {
-   "title": "Dental Implants in Peoria, AZ | Institute for Advanced Dentistry",
-   "description": "Full dental implant treatment in Peoria, AZ, from implant surgery to the final teeth. Dr. Jonathan Bensoussan, a surgically trained prosthodontist, has placed more than 2,500 implants. Free consultation with 3D x-rays.",
-   "route": "/dental-services/dental-implants/",
-   "label": "Dental implants"
+  "hipaa-disclosure": {
+   "title": "HIPAA Disclosure | Institute for Advanced Dentistry",
+   "description": "Notice of Privacy Practices for Institute for Advanced Dentistry PLLC: how your health information may be used and shared, and your rights under HIPAA.",
+   "route": "/hipaa-disclosure/",
+   "label": "HIPAA disclosure"
   }
  }
 }

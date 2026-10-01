@@ -127,6 +127,17 @@ Done means: build `ok`, zero console errors, zero failed requests, no overflow a
 viewed at both widths. Git Bash: `MSYS_NO_PATHCONV=1` before any command with a `/route` argument;
 never pipe a Node script's output (redirect to a file).
 
+## Lessons from the first full build (2026-10-01)
+
+- `.tile__img` is a `div` (a `span` ignores the aspect ratio unless forced; the kit now forces `display:block`).
+- A lightbox (`.lb[data-lb]`) must not stay inside `#smooth-content`: ScrollSmoother transforms it and a
+  `position:fixed` child opens far down the page. Move it to `<body>` on init (see `js/52-cosmetic.js`).
+- Hidden placeholders (`[data-more-float] img`, the lightbox images) start without a `src`; the script fills
+  them. Otherwise every page "repeats" a photo in the reuse gate.
+- Whole-site checks: `node tools/sweep.mjs [--base=...]` (console, failed requests, overflow, h1, links) and
+  `node ../../../../tools/instatic-site/gates/image-reuse.mjs --dist <dist> --allow data/image-reuse-allow.json`
+  (from the step folder).
+
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../../../../../../../SYSTEM_RULES.md). Pages, CSS, JS, data and tools are

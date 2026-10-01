@@ -4,6 +4,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Where things are
 
+- **THE WHOLE REDESIGNED SITE IS ON STAGING since 2026-10-01** (seq 12, published): 57 pages at their WordPress URLs, built from `scenario-0-new-site/03-design-build/output/code/site-src/` (read `KIT.md` there) and pushed with `.../output/code/push/` (README; staging-locked). Pages are stored with **flat slugs** and served nested by the zone-wide Cloudflare rewrites. The home source of truth moved from `workflows/04-design/.tmp/prototypes/home/` to `site-src/pages/index.html` + the css/js layers; the old `21-instatic-upload/home/` pipeline is retired (a push from it would replace the whole site with the home). Next: team review on BugHerd, WebKit pass, the open questions, then SEO and launch. Run: [runbook/2026-10-01-full-site-on-staging.md](runbook/2026-10-01-full-site-on-staging.md).
 - **LIGHT GROUNDS ONLY since 2026-09-21** (Brandklout: dark-theme sites do not convert). Graphite is
   the ink, gold is fills and rules, gold text is `#74560f`. Every new template uses the ground-aware
   tokens in `home.css`; the rule for all Brandklout sites is in `deliver/brandklout/docs/DESIGN-STANDARD.md`.
@@ -15,7 +16,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
   gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:
   [runbook/2026-09-21-home-redesign-canary.md](runbook/2026-09-21-home-redesign-canary.md).
-- **STAGING HOLDS ONLY THE REDESIGNED HOME PAGE since 2026-09-21.** The 58 other cloned pages were
+- ~~**STAGING HOLDS ONLY THE REDESIGNED HOME PAGE since 2026-09-21.**~~ Superseded 2026-10-01: staging holds the whole rebuilt site. The 58 other cloned pages were
   deleted on request; every old staging URL is a 404. Push pipeline: `workflows/21-instatic-upload/home/`
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
@@ -23,7 +24,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 - **Live Google reviews on staging since 2026-09-30**: the home page's `#proof` rotator is the
   Elfsight Google Reviews widget (app `7febe92d-…`, the Peoria listing, 5.0 / 96) in an
   `embed-origins` Embed, class `.rv-embed`, placed by `21-instatic-upload/home/add-elfsight-reviews.mjs`
-  (staging-locked, re-runnable). **A `push-home.mjs` drops it** — re-run the script after every
+  (staging-locked, re-runnable). ~~**A `push-home.mjs` drops it**~~ Since 2026-10-01 the widget is in the site source (`data-embed`) and survives every push — re-run the script after every
   push, before publishing. Production has no widget and gets it with the rebuilt site. Widget
   registry and ownership: `deliver/process/tools/elfsight-reviews/review-widgets.json`. Run:
   [runbook/2026-09-30-elfsight-google-reviews-on-staging.md](runbook/2026-09-30-elfsight-google-reviews-on-staging.md).
