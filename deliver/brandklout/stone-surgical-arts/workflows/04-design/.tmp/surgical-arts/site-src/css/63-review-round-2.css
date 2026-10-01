@@ -1,0 +1,298 @@
+/* ==========================================================================
+   BUGHERD ROUND 2 — 2026-09-29 and 2026-09-30, 127 pins from the agency.
+
+   One file for the round's site-wide and cross-page rules, so the changes can
+   be read together and traced to the pin that asked for them. Rules that
+   belong to one page's own component live with that component instead.
+
+   SPECIFICITY. Every override here doubles its class (`.x.x`), because
+   Instatic rebuilds the cascade from the style registry and source order is
+   not a contract across the import (trap 20 in 21-instatic-upload.md). Base
+   rules first, the media queries at the END (trap 26).
+   ========================================================================== */
+
+/* --- #16, site-wide: the outlined ghost words ------------------------------
+   "Transparent titles take up a lot of space and are barely visible; make
+   them a little smaller but a little more visible. Apply for all pages."
+   About 60% of the old size, a darker stroke, and twice the opacity. */
+.ghost_word.ghost_word {
+  font-size: clamp(4.5rem, 12.5vw, 13rem);
+  -webkit-text-stroke: 1px var(--fg-mute);
+  opacity: 0.55;
+}
+
+/* --- #22, #54: the navbar dropdowns ---------------------------------------- */
+.navbar_dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.navbar_caret {
+  width: 0.55rem;
+  height: 0.35rem;
+  transition: transform 0.25s var(--ease);
+}
+.navbar_dropdown:hover .navbar_caret,
+.navbar_dropdown:focus-within .navbar_caret {
+  transform: rotate(180deg);
+}
+.navbar_dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: -1.25rem;
+  z-index: 110;
+  display: grid;
+  min-width: 13rem;
+  padding: 0.6rem 0;
+  margin-top: 0.6rem;
+  background-color: var(--bg);
+  border: 1px solid var(--line);
+  border-top: 1px solid var(--accent-flat);
+  box-shadow: 0 18px 40px rgba(28, 27, 25, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.35rem);
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    visibility 0s linear 0.2s;
+}
+/* the gap between the link and the panel stays hoverable */
+.navbar_dropdown-list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.7rem;
+  height: 0.7rem;
+}
+.navbar_dropdown:hover .navbar_dropdown-list,
+.navbar_dropdown:focus-within .navbar_dropdown-list {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    visibility 0s;
+}
+.navbar_dropdown-link {
+  display: block;
+  padding: 0.6rem 1.25rem;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--fg);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.navbar_dropdown-link:hover,
+.navbar_dropdown-link[aria-current="page"] {
+  color: var(--accent);
+  background-color: var(--bg-alt);
+}
+/* over a photograph hero the bar is transparent and its links are white; the
+   panel is ivory, so its links stay dark */
+.navbar_component:not(.is-solid):not(.is-static) .navbar_dropdown-link {
+  color: var(--fg);
+}
+
+/* --- #43, #45: the footer -------------------------------------------------
+   The mark first and aligned left, then the seven main-menu links, the
+   address and the hours, with no tall column making the extra space. */
+.footer_top.footer_top {
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-between;
+  gap: 2.5rem 3rem;
+}
+.footer_brand.footer_brand {
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* --- #42, #139: the closing band's photograph and her name ----------------
+   Dr. Stone on the tiled steps is a landscape photograph, so the column
+   widens and the frame takes 3:2 instead of a tall crop. Her name sits in
+   the photograph's bottom-left corner at every width: it floated 22% up on
+   desktop, above the fade, so the fade went and the frame no longer bleeds
+   into the band's padding. */
+.cta_inner.cta_inner {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+}
+.cta_media.cta_media {
+  height: auto;
+  aspect-ratio: 3 / 2;
+  max-width: calc(40rem * var(--wide));
+  margin-bottom: 0;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.cta_media.cta_media img {
+  object-position: 50% 40%;
+}
+.cta_media-plate.cta_media-plate {
+  bottom: 0;
+}
+
+/* --- home: #14 the ledger's stars ------------------------------------------ */
+.ledger_stars {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0.35rem 0 0.5rem;
+  color: var(--accent-flat);
+}
+.ledger_stars svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+/* --- home: #31 the chapter mark links to her page ------------------------- */
+.chapter_mark-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-flat);
+  text-underline-offset: 0.3em;
+  transition: color 0.2s var(--ease);
+}
+.chapter_mark-link:hover {
+  color: var(--accent);
+}
+
+/* --- home: #24 her sentence is the chapter's heading, so it is set smaller
+   than the old four-word title */
+.surgeon_title.surgeon_title {
+  font-size: var(--size-h2);
+}
+
+/* --- home: #35 the treatments lead each concern, the instruction follows -- */
+.concern_to.concern_to strong {
+  color: var(--fg);
+}
+
+/* --- home: #29 #41 the practice strip and the facts close the page -------- */
+.invite_component.is-facts {
+  padding-top: var(--space-xlarge);
+}
+
+/* --- results: #10 the before-and-after strip, #55 the band's photograph ---- */
+.strip_component.is-cases {
+  padding-block: var(--section-sm);
+}
+.strip_component.is-cases .strip_tile {
+  height: clamp(16rem, 40vh, 27rem);
+}
+.strip_tile.is-portrait {
+  aspect-ratio: 4 / 5;
+}
+/* "slightly transparent so the letters are clearly visible" */
+.consent_media.consent_media img {
+  opacity: 0.4;
+}
+
+/* --- all pages: #5 the closing band carries less padding too -------------- */
+.cta_component .padding-section-large.padding-section-large {
+  padding-top: var(--section-sm);
+  padding-bottom: var(--section-sm);
+}
+
+/* --- treatments: #99 #101-103 the treatment names as plain bullets ---------
+   They read as buttons that link somewhere. One format for every item: the
+   two "lead" pills went too. */
+.catx_leads.catx_leads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem var(--space-medium);
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+.catx_leads.catx_leads li {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--fg-body);
+}
+.catx_leads.catx_leads li::marker {
+  color: var(--accent-flat);
+}
+
+/* --- treatments: #94 #104-106 a hairline where the still-life banner was -- */
+.catx_rule {
+  margin: var(--section-sm) var(--gutter) 0;
+  border: 0;
+  border-top: 1px solid var(--line-strong);
+}
+
+/* --- treatments: #110-113 a photograph under each fee aside, which is
+   sticky, so it travels with the fees as they scroll */
+.fee_aside-media {
+  margin: var(--space-large) 0 0;
+  max-width: calc(22rem * var(--wide));
+  overflow: clip;
+  background: var(--stone-soft);
+}
+/* each photograph at its own proportions: two are before-and-after pairs,
+   which a crop would cut in half */
+.fee_aside-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* --- book: #86 #87 the green wash moves from the fourth recovery card to the
+   follow-up note; the card matches the other three */
+.stone-band .recov_card.is-key.is-key {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.stone-band .followup_note.followup_note {
+  background: rgba(143, 188, 70, 0.14);
+  border-color: rgba(143, 188, 70, 0.3);
+}
+
+/* --- book: #89 the sign shows whole, not cropped to a tall column -------- */
+.book_page .book_media.book_media {
+  align-self: center;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
+/* --- procedure pages: #119 "Blepharoplasty" broke mid-word in the hero.
+   The one long title is set smaller and never breaks inside the word. */
+.dhero_title.is-one-word {
+  font-size: calc(var(--size-display) * 0.72);
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: manual;
+}
+
+/* --- procedure pages: #33 the gap between the questions and "Also
+   consider" was the layout's full bottom padding plus the band's top */
+.dossier_layout.dossier_layout {
+  padding-bottom: var(--section-sm);
+}
+
+/* --- procedure pages: the tighter rhythm (#5) brought the hero's facts down
+   onto the "Scroll" cue, so the hero keeps room for it */
+.dhero_inner.dhero_inner {
+  padding-bottom: calc(var(--section-sm) + 3rem);
+}
+
+@media (max-width: 991px) {
+  .footer_top.footer_top {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+  .footer_brand.footer_brand {
+    align-items: center;
+    text-align: center;
+  }
+  .cta_inner.cta_inner {
+    grid-template-columns: 1fr;
+  }
+  .cta_media.cta_media {
+    max-width: 100%;
+  }
+}

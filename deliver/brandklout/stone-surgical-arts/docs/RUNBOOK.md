@@ -45,6 +45,14 @@ It is a Railway environment `staging` in the same project, seeded from productio
 never publish half-finished work on production, where one publish replaces every page —
 [2026-09-15 run](./runbook/2026-09-15-301-map-built-and-staging-created.md).
 
+**BugHerd round two is on STAGING only, since 2026-10-01.** All 127 agency pins of 2026-09-29/30 are
+applied in `site-src/` and published to staging (54 pages, gates clean); production still serves the
+pre-round site. Before promoting: confirm consent for the agency's before-and-after photographs
+(seven are dental cases), check the steps photo's embroidery, and decide the Google widget, which a
+full production push would publish as a badge. Pin #7 (GHL "Submission in progress") is a GHL setting.
+`media-map.json` points at staging now: re-run `upload-media.mjs` against production first —
+[run](./runbook/2026-10-01-bugherd-round-two-on-staging.md).
+
 **Google reviews widget — on STAGING only, since 2026-09-30, and not yet doing its job.** The
 practice's Elfsight Google Reviews widget (`c92f78df`, its own #110 listing, 4.9 from 282) is
 published on staging as an Embed block in the three review sections (`/` chapter 07, `/results`

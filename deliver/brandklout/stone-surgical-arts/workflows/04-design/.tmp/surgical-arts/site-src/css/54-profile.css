@@ -27,47 +27,41 @@
    52-elevate.css; split lines and rises from 10-journey.js. Nothing pins.
    =========================================================================== */
 
-/* --- the hero --------------------------------------------------------------- */
+/* --- the hero ---------------------------------------------------------------
+   REBUILT 2026-09-29 (BugHerd #17 #18 #47 #48). Three columns: the name and
+   the facts, the portrait, the line. The name no longer runs behind the
+   portrait, which covered it. */
 .prof_hero {
   position: relative;
-  padding: calc(var(--section-sm) + 4rem) var(--gutter) 0;
+  padding: calc(var(--section-sm) + 1.5rem) var(--gutter) var(--section-sm);
   overflow: clip;
-  min-height: clamp(38rem, 96vh, 60rem);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  grid-template-rows: auto 1fr auto;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: var(--space-xlarge);
+  align-items: center;
+}
+.prof_intro {
+  display: grid;
+  gap: var(--space-medium);
+  align-content: center;
 }
 .prof_name {
-  grid-column: 1 / -1;
-  grid-row: 1;
   margin: 0;
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: clamp(4.5rem, 19vw, 18rem);
-  line-height: 0.86;
-  letter-spacing: -0.03em;
+  font-size: var(--size-h1);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   color: var(--fg);
-  text-align: center;
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  position: relative;
-  z-index: 0;
 }
 .prof_name em {
   font-style: italic;
   color: var(--accent-flat);
 }
 .prof_portrait {
-  grid-column: 2;
-  grid-row: 1 / -1;
-  align-self: end;
   position: relative;
-  z-index: 1;
-  width: clamp(16rem, 32vw, 30rem);
+  width: 100%;
   aspect-ratio: 2 / 3;
-  margin: -6vw auto 0;
   overflow: clip;
   background: var(--stone-soft);
 }
@@ -76,13 +70,6 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% 10%;
-}
-.prof_facts {
-  grid-column: 1;
-  grid-row: 3;
-  align-self: end;
-  padding-bottom: var(--section-sm);
-  z-index: 2;
 }
 .prof_facts .chapter_mark {
   margin-bottom: var(--space-small);
@@ -93,46 +80,45 @@
   font-size: var(--size-h4);
   line-height: 1.2;
   color: var(--fg);
-  max-width: calc(16ch * var(--wide));
+  max-width: calc(18ch * var(--wide));
 }
 .prof_side {
-  grid-column: 3;
-  grid-row: 3;
-  align-self: end;
-  justify-self: end;
-  padding-bottom: var(--section-sm);
-  z-index: 2;
   display: flex;
   align-items: center;
   gap: var(--space-small);
-  text-align: right;
 }
 .prof_side p {
   margin: 0;
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.5;
-  max-width: calc(14rem * var(--wide));
+  max-width: calc(16rem * var(--wide));
 }
 .prof_side img {
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--white);
   box-shadow: var(--shadow-card);
   flex: 0 0 auto;
 }
-.prof_hero .arrival_scroll {
-  bottom: var(--space-small);
+.prof_aside {
+  display: grid;
+  gap: var(--space-small);
+  align-content: center;
 }
-
-/* --- the line ---------------------------------------------------------------- */
-.prof_quote {
-  padding: var(--section) var(--gutter) var(--section-sm);
+.prof_line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-h3);
+  line-height: 1.2;
+  color: var(--fg);
 }
-.prof_quote .thesis_text {
-  max-width: calc(24ch * var(--wide));
+.prof_line em {
+  font-style: italic;
+  color: var(--accent);
 }
 
 /* --- the training ledger ------------------------------------------------------ */
@@ -280,9 +266,14 @@
 .beyond_grid .is-b {
   aspect-ratio: 1;
 }
+/* The vodcast still since BugHerd #19 (2026-09-29): the steps photograph read
+   as a video that would not play. Square and flush with the frame above it,
+   as the reviewer asked, rather than offset. */
 .beyond_grid .is-c {
-  aspect-ratio: 4 / 3;
-  margin-left: var(--space-large);
+  aspect-ratio: 1;
+}
+.beyond_grid .is-c img {
+  object-position: 50% 30%;
 }
 .beyond_body .display-lg {
   max-width: calc(14ch * var(--wide));
@@ -364,35 +355,13 @@
 @media (max-width: 991px) {
   .prof_hero {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    min-height: 0;
-    padding-top: calc(var(--section-sm) + 2rem);
-  }
-  .prof_name {
-    grid-row: 1;
-    font-size: clamp(3.4rem, 15vw, 7rem);
-    white-space: normal;
+    gap: var(--space-large);
+    padding-top: calc(var(--section-sm) + 1rem);
   }
   .prof_portrait {
-    grid-column: 1;
-    grid-row: 2;
+    order: -1;
     width: min(22rem, 78%);
-    margin: -0.5rem auto 0;
-  }
-  .prof_name {
-    line-height: 1;
-  }
-  .prof_facts {
-    grid-column: 1;
-    grid-row: 3;
-    padding: var(--space-large) 0 0;
-  }
-  .prof_side {
-    grid-column: 1;
-    grid-row: 4;
-    justify-self: start;
-    text-align: left;
-    padding: var(--space-medium) 0 var(--space-large);
+    margin: 0 auto;
   }
   .cv_component,
   .beyond_component {

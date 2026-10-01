@@ -1,12 +1,13 @@
 # Runbook index
 
-24 runs, newest first. Each line is one file in this folder.
+25 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
 | 2026-10-01 | 2026-10-01 — HIPAA Disclosure page (`/hipaa-disclosure`) injected on staging and production, 55 pages each, every other page unchanged — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
+| 2026-10-01 | 2026-10-01 — BugHerd round two: 127 agency pins applied and published to STAGING; production waits on the user (patient photos, the widget) — carries **gotchas** | [`2026-10-01-bugherd-round-two-on-staging.md`](./2026-10-01-bugherd-round-two-on-staging.md) |
 | 2026-09-30 | 2026-09-30 — Google reviews widget (Elfsight c92f78df) placed on STAGING in the three review sections; it is a floating badge, so production waits on a layout change in Elfsight (`cbf3bacf`) — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |
 | 2026-09-24 | 2026-09-24, later — Display number (817) 631-4619 on both hosts (54 pages); pool swap proven without consent — carries **gotchas** | [`2026-09-24-display-number-631-4619-pool-proven.md`](./2026-09-24-display-number-631-4619-pool-proven.md) |
 | 2026-09-24 | 2026-09-24 — DNI pool not blocked by consent; its GHL swap list lacks (817) 674-2061; med spa has no pool — carries **gotchas** | [`2026-09-24-dni-pool-not-swapping-diagnosed.md`](./2026-09-24-dni-pool-not-swapping-diagnosed.md) |

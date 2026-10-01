@@ -31,8 +31,11 @@
 
 /* --- 1. rhythm ------------------------------------------------------------ */
 :root {
-  --section: clamp(4.75rem, 8.25vw, 10.5rem);
-  --section-sm: clamp(3rem, 5.25vw, 6rem);
+  /* BugHerd #5 (2026-09-29), all pages: "reduce the big gaps between
+     sections, so the page doesn't look longer than necessary". About two
+     thirds of what this was. */
+  --section: clamp(3.25rem, 5.5vw, 7rem);
+  --section-sm: clamp(2.25rem, 3.6vw, 4.25rem);
   --pad-panel: clamp(2rem, 3.8vw, 4.5rem);
 }
 .chapter_mark {
@@ -105,9 +108,6 @@
 }
 .still_component {
   height: clamp(16rem, 44vh, 28rem);
-}
-.prof_portrait {
-  width: clamp(18rem, 34vw, 32rem);
 }
 .thesis_face {
   width: 3.25rem;

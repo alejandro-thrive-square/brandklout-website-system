@@ -251,9 +251,26 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <a class="navbar_link" href="treatments.html" aria-current="page">Treatments</a>
+          <!-- Two dropdowns since BugHerd #22 and #54 (2026-09-29): the four
+               treatment categories under Treatments, the team under About. CSS
+               only (hover and focus-within), so nothing here depends on site.js. -->
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="treatments.html" aria-current="page">Treatments <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="treatments.html#face">Face</a>
+              <a class="navbar_dropdown-link" href="treatments.html#neck">Neck &amp; Jawline</a>
+              <a class="navbar_dropdown-link" href="treatments.html#skin">Skin</a>
+              <a class="navbar_dropdown-link" href="treatments.html#nonsurgical">Non-Surgical</a>
+            </div>
+          </div>
           <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
-          <a class="navbar_link" href="about.html">About</a>
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="about.html">About <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="about.html">The practice</a>
+              <a class="navbar_dropdown-link" href="team.html">Meet the Team</a>
+            </div>
+          </div>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="memberships.html">Memberships</a>
           <a class="navbar_link" href="blog.html">Blog</a>
@@ -362,7 +379,7 @@
     <div>
       <p class="chapter_mark" data-j="rise">Treatments &amp; fees</p>
       <h1 class="display-xl" data-j-split>Every treatment, with the fee <em class="display-accent">beside it</em>.</h1>
-      <p class="hub_lede" data-j="rise">Everything the practice offers, in one place. If a treatment is not right for you, Dr. Stone will say so.</p>
+      <p class="hub_lede" data-j="rise">Everything the practice offers, in one place. If a treatment is not right for you, Dr. Stone will let you know.</p>
     </div>
     <ul class="hub_index" data-j="stagger">
       <li><a class="hub_index-link" href="#face"><span class="hub_index-num">01</span><span class="hub_index-name">Face</span><span class="hub_index-count">12 treatments</span></a></li>
@@ -382,7 +399,7 @@
       <a class="jump_link" href="#skin">Skin</a>
       <a class="jump_link" href="#nonsurgical">Non-Surgical</a>
       <a class="jump_link" href="#questions">Questions</a>
-      <a class="button is-small jump_cta" href="#contact">Book a consultation</a>
+      <a class="button is-small jump_cta" href="book.html">Book a consultation</a>
     </div>
   </nav>
 
@@ -416,17 +433,17 @@
   <section class="catx_component" id="face" data-chapter="01" data-chapter-name="Face">
     <div class="catx_band">
       <div class="catx_media" data-parallax="10">
-        <div class="u-fill" data-j="mask"><img src="assets/m-mature-smile.webp" alt="A woman in her fifties smiling, in warm light" width="900" height="1200" loading="lazy"></div>
+        <div class="u-fill" data-j="mask"><img src="assets/p-mirror.webp" alt="A woman with blonde hair looking into a round mirror, a hand at her neck" width="1400" height="933" loading="lazy"></div>
         <p class="catx_word"><small>01 of 04</small>Face</p>
       </div>
       <div class="catx_body">
         <p class="chapter_mark" data-j="rise">Facial plastic surgery for refined, natural results</p>
         <h2 class="display-lg catx_title" data-j-split>Structure first, skin second.</h2>
         <p class="catx_text" data-j="rise">Facial surgery here starts at the bone. Implants are planned in three dimensions for your anatomy, not stock sizes: a generic implant gives a generic result. Eyelid surgery tightens the upper or lower lid where drooping and puffiness read as tired. Buccal fat reduction slims a heavy mid-face, planned conservatively: it does not grow back.</p>
-        <p class="catx_note" data-j="rise">Most are outpatient. Plan about a week away after eyelid surgery, two weeks after a facelift.</p>
+        <p class="catx_note" data-j="rise">Most are outpatient. Plan about a week away after eyelid surgery, two weeks after a facelift. These and other facial procedures are listed below.</p>
         <ul class="catx_leads" data-j="rise">
-          <li class="is-lead">Facelift &amp; Easy Lift</li>
-          <li class="is-lead">Facial implants</li>
+          <li>Facelift &amp; Easy Lift</li>
+          <li>Facial implants</li>
           <li>Blepharoplasty</li>
           <li>Brow &amp; forehead lift</li>
           <li>Buccal fat removal</li>
@@ -436,15 +453,13 @@
         </ul>
       </div>
     </div>
-    <div class="still_component" data-parallax="12">
-      <img src="assets/gen-or-light.webp" alt="A surgical light above an empty draped operating table" width="1600" height="900" loading="lazy">
-      <p class="still_caption">The theatre</p>
-    </div>
+    <hr class="catx_rule">
     <div class="fee_component">
       <div class="fee_aside" data-j="rise">
         <p class="chapter_mark">Face fees</p>
         <h3 class="fee_aside-title">Lifting, structure, lips and lesions.</h3>
         <p class="fee_aside-text">Fees are for the face unless stated. Anaesthesia, where needed, adds $300 per fifteen minutes, and your written plan states the total.</p>
+        <figure class="fee_aside-media" data-j="mask"><img src="assets/bh-ba-lip-lines.webp" alt="Lines around the mouth before and after treatment" width="2200" height="1201" loading="lazy"></figure>
       </div>
       <div>
         <div class="fee_group">
@@ -485,10 +500,10 @@
         <p class="chapter_mark" data-j="rise">Restore youthful contours and definition</p>
         <h2 class="display-lg catx_title" data-j-split>The part of ageing that shows first.</h2>
         <p class="catx_text" data-j="rise">A neck lift combines liposuction, skin removal and muscle tightening as your anatomy needs, and the practice puts the result at five to ten years. MyEllevate<span class="reg">&reg;</span> is the lighter option: outpatient, under local anaesthetic, a suture suspending the muscle instead of opening the neck. It suits earlier laxity, where a neck lift reverses the advanced kind.</p>
-        <p class="catx_note" data-j="rise">This work earned Dr. Stone the name @drjawline. Jaw and chin surgery is the practice&rsquo;s most requested.</p>
+        <p class="catx_note" data-j="rise">This work earned Dr. Stone the name @drjawline. Jaw and chin surgery is the practice&rsquo;s most requested. These and other facial procedures are listed below.</p>
         <ul class="catx_leads" data-j="rise">
-          <li class="is-lead">Neck lift</li>
-          <li class="is-lead">MyEllevate<span class="reg">&reg;</span></li>
+          <li>Neck lift</li>
+          <li>MyEllevate<span class="reg">&reg;</span></li>
           <li>Jawline implant</li>
           <li>Submentoplasty</li>
           <li>FaceTite</li>
@@ -496,15 +511,13 @@
         </ul>
       </div>
     </div>
-    <div class="still_component" data-parallax="12">
-      <img src="assets/gen-suture-tray.webp" alt="A needle holder and a fine curved suture needle on folded surgical linen" width="1600" height="900" loading="lazy">
-      <p class="still_caption">The suture tray</p>
-    </div>
+    <hr class="catx_rule">
     <div class="fee_component">
       <div class="fee_aside" data-j="rise">
         <p class="chapter_mark">Neck &amp; jawline fees</p>
         <h3 class="fee_aside-title">Suspension, lifting, and the jaw.</h3>
         <p class="fee_aside-text">Two have their own page. The neck lift is the practice signature, and its page the site&rsquo;s most detailed.</p>
+        <figure class="fee_aside-media" data-j="mask"><img src="assets/bh-ba-neck-profile.webp" alt="A patient in profile before and after neck and jawline treatment" width="1440" height="1564" loading="lazy"></figure>
       </div>
       <div>
         <div class="fee_group">
@@ -536,10 +549,10 @@
         <p class="chapter_mark" data-j="rise">Advanced skin rejuvenation for a radiant glow</p>
         <h2 class="display-lg catx_title" data-j-split>Resurfacing, and the regenerative work underneath it.</h2>
         <p class="catx_text" data-j="rise">Fractionated CO2 drives microbeams of heat into the deeper skin so collagen rebuilds: about ten days of downtime, for fine lines, dark spots, acne scarring, enlarged pores and sun damage. Morpheus8 works sub-dermally, usually in one to three sessions. Chemical peels lift the top layers. PRP uses your own platelets so healing does more of the work.</p>
-        <p class="catx_note" data-j="rise">Microneedling is sold in packages of three. Fees are face-only, other areas extra.</p>
+        <p class="catx_note" data-j="rise">Microneedling is sold in packages of three. Fees are face-only, other areas extra. These and other facial procedures are listed below.</p>
         <ul class="catx_leads" data-j="rise">
-          <li class="is-lead">CO2 laser</li>
-          <li class="is-lead">Morpheus8</li>
+          <li>CO2 laser</li>
+          <li>Morpheus8</li>
           <li>Chemical peels</li>
           <li>Cosmelan</li>
           <li>HydraFacial MD<span class="reg">&reg;</span></li>
@@ -548,15 +561,13 @@
         </ul>
       </div>
     </div>
-    <div class="still_component" data-parallax="12">
-      <img src="assets/ds-prp-syringes.webp" alt="Three syringes of platelet-rich plasma laid on folded gauze" width="2200" height="1238" loading="lazy">
-      <p class="still_caption">The plasma</p>
-    </div>
+    <hr class="catx_rule">
     <div class="fee_component">
       <div class="fee_aside" data-j="rise">
         <p class="chapter_mark">Skin fees</p>
         <h3 class="fee_aside-title">Usually a course, so the package sits beside the session.</h3>
         <p class="fee_aside-text">Skin treatments are with Abby, the practice&rsquo;s esthetician, or the nurse injector where noted.</p>
+        <figure class="fee_aside-media" data-j="mask"><img src="assets/bh-dr-stone-injecting.webp" alt="Dr. Stone treating a patient in the practice" width="1440" height="1800" loading="lazy"></figure>
       </div>
       <div>
         <div class="fee_group">
@@ -601,25 +612,23 @@
         <p class="chapter_mark" data-j="rise">Enhance your look with minimal downtime</p>
         <h2 class="display-lg catx_title" data-j-split>The maintenance that keeps surgery further away.</h2>
         <p class="catx_text" data-j="rise">Neuromodulators soften the lines expression carves in, and are priced per unit rather than per area. Fillers raise and fill without incision, general anaesthetic or recovery: lips, folds, acne scarring, the hollows of volume loss. Sculptra works more slowly and structurally, in a course rather than a session.</p>
-        <p class="catx_note" data-j="rise">Injectables are with Brooke, a board-certified nurse practitioner and advanced aesthetic injector. Botox works in two to three days, with full effect around day ten.</p>
+        <p class="catx_note" data-j="rise">Injectables are with Brooke, a board-certified nurse practitioner and advanced aesthetic injector. Botox works in two to three days, with full effect around day ten. These and other facial procedures are listed below.</p>
         <ul class="catx_leads" data-j="rise">
-          <li class="is-lead">Filler</li>
-          <li class="is-lead">Botox &amp; Xeomin</li>
+          <li>Filler</li>
+          <li>Botox &amp; Xeomin</li>
           <li>Dysport &amp; Jeuveau</li>
           <li>Sculptra</li>
           <li>Hair restoration</li>
         </ul>
       </div>
     </div>
-    <div class="still_component" data-parallax="12">
-      <img src="assets/ds-prp-tube.webp" alt="A spun tube of blood with the plasma separated, held in gloved hands" width="2200" height="1238" loading="lazy">
-      <p class="still_caption">The spin</p>
-    </div>
+    <hr class="catx_rule">
     <div class="fee_component">
       <div class="fee_aside" data-j="rise">
         <p class="chapter_mark">Non-surgical fees</p>
         <h3 class="fee_aside-title">Per unit and per syringe, so you pay for what you need.</h3>
         <p class="fee_aside-text">Dysport is dosed differently from Botox, so compare the treatment rather than the unit price.</p>
+        <figure class="fee_aside-media" data-j="mask"><img src="assets/bh-skin-curls-glow.webp" alt="A smiling woman touching her cheeks" width="1922" height="1660" loading="lazy"></figure>
       </div>
       <div>
         <div class="fee_group">
@@ -633,7 +642,8 @@
           <p class="fee_group-title">Fillers &amp; volume</p>
           <div class="fee_row"><span><span class="fee_name">Dermal filler</span><span class="fee_note">Per syringe; the 8-point lift, up to eight syringes, is $6,000</span></span><span class="fee_value">$800</span><span class="fee_go is-blank"></span></div>
           <div class="fee_row"><span><span class="fee_name">Sculptra<span class="reg">&reg;</span>, single session</span><span class="fee_note">Collagen stimulator; results build over months</span></span><span class="fee_value">$900+</span><span class="fee_go is-blank"></span></div>
-          <div class="fee_row"><span><span class="fee_name">Sculptra<span class="reg">&reg;</span>, package of three</span><span class="fee_note">Package of four, $3,400</span></span><span class="fee_value">$2,500</span><span class="fee_go is-blank"></span></div>
+          <div class="fee_row"><span><span class="fee_name">Sculptra<span class="reg">&reg;</span></span><span class="fee_note">Pack of 3</span></span><span class="fee_value">$2,500</span><span class="fee_go is-blank"></span></div>
+          <div class="fee_row"><span><span class="fee_name">Sculptra<span class="reg">&reg;</span></span><span class="fee_note">Pack of 4</span></span><span class="fee_value">$3,400</span><span class="fee_go is-blank"></span></div>
           <div class="fee_row"><span><span class="fee_name">Hair restoration</span><span class="fee_note">Platelet-rich plasma to the scalp</span></span><span class="fee_value is-quiet">At consultation</span><span class="fee_go is-blank"></span></div>
         </div>
         <div class="fee_group">
@@ -660,7 +670,7 @@
           <h2 class="offer_title">Financing, and a membership that banks what you don&rsquo;t spend.</h2>
           <p class="offer_text">Sunbit takes about a minute to apply and does not affect your credit score to check. The practice also works with CareCredit and Scratchpay. For ongoing treatment, a membership is usually cheaper: the monthly amount becomes credit that accumulates instead of expiring.</p>
           <div class="arrival_actions">
-            <a class="button is-secondary" href="https://apply.sunbit.com/StoneSurgicalArts" rel="noopener">Check financing with Sunbit</a>
+            <a class="button is-secondary" href="https://apply.sunbit.com/StoneSurgicalArts" target="_blank" rel="noopener">Check financing with Sunbit</a>
             <a class="button is-secondary" href="memberships.html">Compare memberships</a>
           </div>
         </div>
@@ -705,7 +715,7 @@
       </div>
     </div>
     <div class="hubfaq_media" data-j="mask">
-      <div class="u-fill" data-parallax="8"><img src="assets/gen-surgical-loupes.webp" alt="A pair of surgical loupes resting on a marble counter" width="1000" height="1500" loading="lazy"></div>
+      <div class="u-fill" data-parallax="8"><img src="assets/bh-consult-doctor-desk.webp" alt="A doctor listening to a patient across a desk during a consultation" width="1672" height="941" loading="lazy"></div>
     </div>
   </section>
 
@@ -733,7 +743,7 @@
           </div>
           </div>
           <figure class="cta_media">
-            <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="1973" height="2960" loading="lazy">
+            <img src="assets/dr-stone-steps.webp" alt="Dr. Mona Stone seated on tiled steps outside the practice" width="2000" height="1333" loading="lazy">
             <figcaption class="cta_media-plate">Dr. Mona Stone, DDS</figcaption>
           </figure>
         </div>
@@ -763,37 +773,8 @@
     <div class="container-large">
       <div class="padding-section-medium">
         <div class="footer_top">
-          <!-- The site's pages, since 2026-09-02. A row above the columns until
-               2026-09-04; now the first column, one page under another, beside
-               the address, the mark and the hours (client: "in a column, one
-               before the other, on the side of the other elements"). -->
-          <nav class="footer_nav" aria-label="Footer">
-          <a href="index.html">Home</a>
-          <a href="treatments.html" aria-current="page">Treatments &amp; fees</a>
-          <a href="face-and-neck-lift.html">Face &amp; neck lift</a>
-          <a href="neck-lift.html">Neck lift</a>
-          <a href="myellevate-neck-lift.html">MyEllevate&reg;</a>
-          <a href="blepharoplasty.html">Eyelid surgery</a>
-          <a href="meet-the-doctor.html">Dr. Stone</a>
-          <a href="about.html">About</a>
-          <a href="team.html">The team</a>
-          <a href="results.html">Results &amp; reviews</a>
-          <a href="memberships.html">Memberships</a>
-          <a href="blog.html">Blog</a>
-          <a href="book.html">Book a consultation</a>
-            </nav>
-          <div class="footer_col">
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
-              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
-            </div>
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18176314619">(817) 631-4619</a>
-            </div>
-            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
-          </div>
-
+          <!-- The mark first, aligned left, then the pages, the address and the
+               hours (BugHerd #45, 2026-09-29). -->
           <div class="footer_brand">
             <span class="brand_component is-large">
             <span class="brand_name">Stone</span>
@@ -815,6 +796,31 @@
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
               </a>
             </div>
+          </div>
+
+          <!-- The site's pages. Since BugHerd #43 (2026-09-29) only what the main
+               menu carries: the treatment pages, the team and the legal pages are
+               reached from those. -->
+          <nav class="footer_nav" aria-label="Footer">
+            <a href="treatments.html" aria-current="page">Treatments</a>
+            <a href="meet-the-doctor.html">Dr. Stone</a>
+            <a href="about.html">About</a>
+            <a href="results.html">Results</a>
+            <a href="memberships.html">Memberships</a>
+            <a href="blog.html">Blog</a>
+            <a href="book.html">Book a consultation</a>
+          </nav>
+
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18176314619">(817) 631-4619</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_col is-right">

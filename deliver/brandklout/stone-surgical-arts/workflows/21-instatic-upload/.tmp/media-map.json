@@ -1,7 +1,359 @@
 {
   "base": "https://staging.dfwsurgicalarts.com",
-  "uploadedAt": "2026-09-23T22:39:40.915Z",
+  "uploadedAt": "2026-10-01T13:05:18.654Z",
   "map": {
+    "bh-anatomy-desk.webp": {
+      "id": "urmEQVSVSMVBEnWrfm53s",
+      "url": "/uploads/N0k4Il23XFHWw_Y9S-ePv-bh-anatomy-desk.webp",
+      "uploadedAs": "bh-anatomy-desk.webp",
+      "width": 1166,
+      "height": 1488,
+      "variants": 5
+    },
+    "bh-ba-dental-01.webp": {
+      "id": "u9ThuK7cn5p3JrQBxRQfa",
+      "url": "/uploads/aU3RwYZP3Wabo-q_ziatG-bh-ba-dental-01.webp",
+      "uploadedAs": "bh-ba-dental-01.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-02.webp": {
+      "id": "WIEMTEKM7VIhHuX3PzzmQ",
+      "url": "/uploads/nPgI1Z-P5LxxkDewePyYK-bh-ba-dental-02.webp",
+      "uploadedAs": "bh-ba-dental-02.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-03.webp": {
+      "id": "0UlQvDlHVyJy-RV-aO1_0",
+      "url": "/uploads/6-INa12lWpnmAk-RZ0xoG-bh-ba-dental-03.webp",
+      "uploadedAs": "bh-ba-dental-03.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-04.webp": {
+      "id": "CD2NTbZrKpQy7fGB2MQPw",
+      "url": "/uploads/Wkx9l6RMz-D-aci6hQEU1-bh-ba-dental-04.webp",
+      "uploadedAs": "bh-ba-dental-04.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-05.webp": {
+      "id": "327A7NkLNsRl3vydh2-38",
+      "url": "/uploads/wyYcqvt4iJ3MN8jJp1fZT-bh-ba-dental-05.webp",
+      "uploadedAs": "bh-ba-dental-05.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-06.webp": {
+      "id": "S19O5B7fXGracWH1JeJa1",
+      "url": "/uploads/-1h-nbpG-3kFClQFEI8wu-bh-ba-dental-06.webp",
+      "uploadedAs": "bh-ba-dental-06.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-07.webp": {
+      "id": "HFlFHfMGsrhAALCm_a7PT",
+      "url": "/uploads/dIZmrIilqzrKr1WM46tbG-bh-ba-dental-07.webp",
+      "uploadedAs": "bh-ba-dental-07.webp",
+      "width": 1604,
+      "height": 1000,
+      "variants": 6
+    },
+    "bh-ba-dental-pair.webp": {
+      "id": "Nm7n7tzdSKJ63J5CeMRmu",
+      "url": "/uploads/D24QDB2varDCu4S0INsHB-bh-ba-dental-pair.webp",
+      "uploadedAs": "bh-ba-dental-pair.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-ba-dental-veteran.webp": {
+      "id": "ZMoFGOtagGZQuwSK91Zk0",
+      "url": "/uploads/CxirBEd4VliDC0DtNg0Xy-bh-ba-dental-veteran.webp",
+      "uploadedAs": "bh-ba-dental-veteran.webp",
+      "width": 595,
+      "height": 793,
+      "variants": 3
+    },
+    "bh-ba-jaw-profile.webp": {
+      "id": "i9U_gcScmnw7eEDmC40Ra",
+      "url": "/uploads/zvNXCUHIK6bHrm1Bqejry-bh-ba-jaw-profile.webp",
+      "uploadedAs": "bh-ba-jaw-profile.webp",
+      "width": 1250,
+      "height": 1563,
+      "variants": 5
+    },
+    "bh-ba-lip-lines.webp": {
+      "id": "vUWAyYNyCd9SfHEfxcxqz",
+      "url": "/uploads/fiTMoFPECnShbFw0LvpyU-bh-ba-lip-lines.webp",
+      "uploadedAs": "bh-ba-lip-lines.webp",
+      "width": 2200,
+      "height": 1201,
+      "variants": 7
+    },
+    "bh-ba-neck-collage.webp": {
+      "id": "wK0bXkqZmwKBw0doVV1MN",
+      "url": "/uploads/ZasUacSZvK7Bc19wXo0oL-bh-ba-neck-collage.webp",
+      "uploadedAs": "bh-ba-neck-collage.webp",
+      "width": 1920,
+      "height": 1920,
+      "variants": 6
+    },
+    "bh-ba-neck-profile.webp": {
+      "id": "hw98n25y05caLs7YPS523",
+      "url": "/uploads/fjUn5jgQ2o9KzD5t9AEPT-bh-ba-neck-profile.webp",
+      "uploadedAs": "bh-ba-neck-profile.webp",
+      "width": 1440,
+      "height": 1564,
+      "variants": 5
+    },
+    "bh-botox-brow-gloves.webp": {
+      "id": "5SEJz7HfwomggzQ00EP3h",
+      "url": "/uploads/OiQMuhkOVntJoSPM5cPAP-bh-botox-brow-gloves.webp",
+      "uploadedAs": "bh-botox-brow-gloves.webp",
+      "width": 2200,
+      "height": 1476,
+      "variants": 7
+    },
+    "bh-consult-doctor-desk.webp": {
+      "id": "1Znwqt_vLI3DNHdjA1t05",
+      "url": "/uploads/Gl8kkAahlRQsv91ZNzJUG-bh-consult-doctor-desk.webp",
+      "uploadedAs": "bh-consult-doctor-desk.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-consult-tablet-smile.webp": {
+      "id": "BaXZoJwePF48e4mWaKJ7g",
+      "url": "/uploads/-pMYcuxDJGup1sWDzBvtu-bh-consult-tablet-smile.webp",
+      "uploadedAs": "bh-consult-tablet-smile.webp",
+      "width": 1448,
+      "height": 1086,
+      "variants": 5
+    },
+    "bh-dental-mirror-smile.webp": {
+      "id": "Ds4qKFXygRgSSYcB-V4k6",
+      "url": "/uploads/MZgL2vEyulUO4t0bLz1Gu-bh-dental-mirror-smile.webp",
+      "uploadedAs": "bh-dental-mirror-smile.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-diet-clipboard.webp": {
+      "id": "BJ64fEqqmRShJYb0NbIyK",
+      "url": "/uploads/gj5ySXRcfufyBlATve7Yr-bh-diet-clipboard.webp",
+      "uploadedAs": "bh-diet-clipboard.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-doctor-exam-cheek.webp": {
+      "id": "APfh27bt6eFTU0H9Dwgx6",
+      "url": "/uploads/CwSsu90qlpXNmanMsDp8A-bh-doctor-exam-cheek.webp",
+      "uploadedAs": "bh-doctor-exam-cheek.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-dr-stone-coat-sign.webp": {
+      "id": "QG87TqOmC3rMY4mZBc22L",
+      "url": "/uploads/KB2p4e9U-JE0CuTiJBsjW-bh-dr-stone-coat-sign.webp",
+      "uploadedAs": "bh-dr-stone-coat-sign.webp",
+      "width": 720,
+      "height": 1331,
+      "variants": 4
+    },
+    "bh-dr-stone-consult-coat.webp": {
+      "id": "LP2rmB3w2CjT79O8DBop8",
+      "url": "/uploads/n56MDIMib-0IgxCIuGnVX-bh-dr-stone-consult-coat.webp",
+      "uploadedAs": "bh-dr-stone-consult-coat.webp",
+      "width": 1535,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-dr-stone-injecting.webp": {
+      "id": "IAxx-BHxgfimF1gAaQU5t",
+      "url": "/uploads/-vMeq0zT35w50hqfQDpP0-bh-dr-stone-injecting.webp",
+      "uploadedAs": "bh-dr-stone-injecting.webp",
+      "width": 1440,
+      "height": 1800,
+      "variants": 5
+    },
+    "bh-dr-stone-podcast.webp": {
+      "id": "G-4Opv1hxHKq93_j5m0l8",
+      "url": "/uploads/yki8mpKAUoPlIUlZp9U97-bh-dr-stone-podcast.webp",
+      "uploadedAs": "bh-dr-stone-podcast.webp",
+      "width": 1440,
+      "height": 1800,
+      "variants": 5
+    },
+    "bh-dr-stone-product-coat.webp": {
+      "id": "a24K03jyfbcucHj5z5oD6",
+      "url": "/uploads/x0MyYOQWj_k_p79-L1giJ-bh-dr-stone-product-coat.webp",
+      "uploadedAs": "bh-dr-stone-product-coat.webp",
+      "width": 1440,
+      "height": 1440,
+      "variants": 5
+    },
+    "bh-emergency-sign.webp": {
+      "id": "EB4-VDI2gFXeS97g5Ev6l",
+      "url": "/uploads/qqy4EMRFv_6uCAmwbxPah-bh-emergency-sign.webp",
+      "uploadedAs": "bh-emergency-sign.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-face-hands-spa.webp": {
+      "id": "JBjBtUEI4RBGSuPg9xirT",
+      "url": "/uploads/_aFwmbnPsJs5Dg3VUBsMD-bh-face-hands-spa.webp",
+      "uploadedAs": "bh-face-hands-spa.webp",
+      "width": 2200,
+      "height": 1465,
+      "variants": 7
+    },
+    "bh-fees-calculator.webp": {
+      "id": "JOWgnKyf4x2iwsggP-7W-",
+      "url": "/uploads/xQgEjisPBqQabPLxUWJ_E-bh-fees-calculator.webp",
+      "uploadedAs": "bh-fees-calculator.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-filler-chin-gloves.webp": {
+      "id": "nsNjs6vgeWeOHMqbzxkUb",
+      "url": "/uploads/TKMhCG17D3Q1YDmzzlaA7-bh-filler-chin-gloves.webp",
+      "uploadedAs": "bh-filler-chin-gloves.webp",
+      "width": 2200,
+      "height": 1484,
+      "variants": 7
+    },
+    "bh-implant-parts.webp": {
+      "id": "MnK9Eu8TG_PtlzsDfiEkl",
+      "url": "/uploads/MI0QfrS6HEuD0_5ma1uwI-bh-implant-parts.webp",
+      "uploadedAs": "bh-implant-parts.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-laser-jaw.webp": {
+      "id": "FediZfoCI7rQ8ilM8xRQZ",
+      "url": "/uploads/gE9pz5R8j7Gl4Mh64t_iZ-bh-laser-jaw.webp",
+      "uploadedAs": "bh-laser-jaw.webp",
+      "width": 2200,
+      "height": 1648,
+      "variants": 7
+    },
+    "bh-m-mature-cheek-2.webp": {
+      "id": "bPI-IyvXUmhVSJb0Gd8mm",
+      "url": "/uploads/x3Gw6h7eqPMKfrhyczX7r-bh-m-mature-cheek-2.webp",
+      "uploadedAs": "bh-m-mature-cheek-2.webp",
+      "width": 2200,
+      "height": 1581,
+      "variants": 7
+    },
+    "bh-m-mature-cheek.webp": {
+      "id": "KGh4SUuY6O7fw-rkBK1Ma",
+      "url": "/uploads/sX7naexedsNs7iI0EizmA-bh-m-mature-cheek.webp",
+      "uploadedAs": "bh-m-mature-cheek.webp",
+      "width": 2200,
+      "height": 1468,
+      "variants": 7
+    },
+    "bh-portrait-curls-chair.webp": {
+      "id": "Z83S89SH0Oruh47mMpapH",
+      "url": "/uploads/cCxdu8c1YuiUieIQOMkYs-bh-portrait-curls-chair.webp",
+      "uploadedAs": "bh-portrait-curls-chair.webp",
+      "width": 1774,
+      "height": 1670,
+      "variants": 6
+    },
+    "bh-procedure-hairnet.webp": {
+      "id": "6UsiWGvIMa4_FY57m_Xoq",
+      "url": "/uploads/WeLr65PcNvXAyC1c1Q3HV-bh-procedure-hairnet.webp",
+      "uploadedAs": "bh-procedure-hairnet.webp",
+      "width": 1448,
+      "height": 1086,
+      "variants": 5
+    },
+    "bh-profile-curls-chair.webp": {
+      "id": "MC9HGkO9hp_HiIKLkDHQP",
+      "url": "/uploads/MQBiIg1nObeqvA4qRi6lU-bh-profile-curls-chair.webp",
+      "uploadedAs": "bh-profile-curls-chair.webp",
+      "width": 2192,
+      "height": 1643,
+      "variants": 7
+    },
+    "bh-profile-curls-neck.webp": {
+      "id": "kaSf8hP74P-j3KG0_hPxW",
+      "url": "/uploads/EpE5Nz9lCSIYYXGQ3Xr9D-bh-profile-curls-neck.webp",
+      "uploadedAs": "bh-profile-curls-neck.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-recovery-bed-night.webp": {
+      "id": "44QEDaqe7dJUVoou4N7uO",
+      "url": "/uploads/FRSCUOoXK6_ucnLn_zKR6-bh-recovery-bed-night.webp",
+      "uploadedAs": "bh-recovery-bed-night.webp",
+      "width": 1448,
+      "height": 1086,
+      "variants": 5
+    },
+    "bh-recovery-bed.webp": {
+      "id": "xc9FwRzsPM8RwJK8u651y",
+      "url": "/uploads/0l_ZIgX-I2ntARCtwAucJ-bh-recovery-bed.webp",
+      "uploadedAs": "bh-recovery-bed.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
+    "bh-recovery-window-chair.webp": {
+      "id": "ZZALDGx0cEkPe3Qn80cfn",
+      "url": "/uploads/CWbj8IY9N1N56LRKOQpnR-bh-recovery-window-chair.webp",
+      "uploadedAs": "bh-recovery-window-chair.webp",
+      "width": 1672,
+      "height": 941,
+      "variants": 6
+    },
+    "bh-skin-assess-gloves.webp": {
+      "id": "cOv3alZrEbfH5yATTxxha",
+      "url": "/uploads/R6I4lhdjovDJqcW3Ytfkn-bh-skin-assess-gloves.webp",
+      "uploadedAs": "bh-skin-assess-gloves.webp",
+      "width": 1422,
+      "height": 1433,
+      "variants": 5
+    },
+    "bh-skin-curls-glow.webp": {
+      "id": "-auzx1OrrReX_CwxSvnFs",
+      "url": "/uploads/N81mk9Oxude6-3zDYbhZA-bh-skin-curls-glow.webp",
+      "uploadedAs": "bh-skin-curls-glow.webp",
+      "width": 1922,
+      "height": 1660,
+      "variants": 6
+    },
+    "bh-team-portrait-12.webp": {
+      "id": "vUpmyVa4UIROwO2jNFyUv",
+      "url": "/uploads/zVLml37vj97_S5AWcVOcg-bh-team-portrait-12.webp",
+      "uploadedAs": "bh-team-portrait-12.webp",
+      "width": 1291,
+      "height": 1218,
+      "variants": 5
+    },
+    "bh-toothache.webp": {
+      "id": "zt8bdZLMgdeNt3U-9UeBi",
+      "url": "/uploads/eWR62wxHWMk3cqXJmnCEs-bh-toothache.webp",
+      "uploadedAs": "bh-toothache.webp",
+      "width": 1536,
+      "height": 1024,
+      "variants": 5
+    },
     "dr-stone-candid.webp": {
       "id": "-ULNSdpnJ4WDYJDYNjfcg",
       "url": "/uploads/LD0Nm8uNupNcbcIjohQQ6-dr-stone-candid.webp",
@@ -153,38 +505,40 @@
       "uploadedAs": "gen-implant-forms.webp"
     },
     "gen-injectables.webp": {
-      "id": "aAiebCebbnPMGTzU_tGaG",
-      "url": "/uploads/kHP1yqvF_5hdSFkUtSfL0-gen-injectables.webp",
-      "reused": true,
-      "uploadedAs": "gen-injectables.webp"
+      "id": "8bSJkplNc6c7R7yvXnTI4",
+      "url": "/uploads/N4K4H7fyKvx9yzlL84QoM-gen-injectables.webp",
+      "uploadedAs": "gen-injectables.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "gen-laser-device.webp": {
       "id": "hCo3SpXJ6x1_JMAvJWY5x",
       "url": "/uploads/8dJImC211gj5yWI_HgBt_-gen-laser-device.webp",
-      "uploadedAs": "gen-laser-device.webp",
+      "reused": true,
+      "uploadedAs": "gen-laser-device.webp"
+    },
+    "gen-or-light.webp": {
+      "id": "VHE3iBaDn-HJ6pSim8VUL",
+      "url": "/uploads/00Wjr_jtgZSum_f-NZLZ--gen-or-light.webp",
+      "uploadedAs": "gen-or-light.webp",
       "width": 1600,
       "height": 900,
       "variants": 5
     },
-    "gen-or-light.webp": {
-      "id": "_2AJ8kw0sxROz1sVONfBY",
-      "url": "/uploads/Z55rxPpA6hifCterHxsWq-gen-or-light.webp",
-      "reused": true,
-      "uploadedAs": "gen-or-light.webp"
-    },
     "gen-procedure-room.webp": {
-      "id": "Pc2ypUIUyPWl-lIKnBsWA",
-      "url": "/uploads/-H8E6tlsfBCP8RNMZckew-gen-procedure-room.webp",
-      "reused": true,
-      "uploadedAs": "gen-procedure-room.webp"
+      "id": "QbJUbZpCiJ9bNTFB0P7jg",
+      "url": "/uploads/3KeWkZbPazgXWq8hubk5B-gen-procedure-room.webp",
+      "uploadedAs": "gen-procedure-room.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "gen-skincare-shelf.webp": {
       "id": "g7X189sL5zm17NBoPj8_d",
       "url": "/uploads/77IN7hXvebicvE2LOVZ_1-gen-skincare-shelf.webp",
-      "uploadedAs": "gen-skincare-shelf.webp",
-      "width": 1600,
-      "height": 900,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "gen-skincare-shelf.webp"
     },
     "gen-surgical-loupes.webp": {
       "id": "AZkN7kabWURuk4GeGf5SV",
@@ -303,10 +657,8 @@
     "membership-still.webp": {
       "id": "Zlwir77XxkZT5b7r7sNuG",
       "url": "/uploads/v1RMzWMLriuIwKj8zOeeN-membership-still.webp",
-      "uploadedAs": "membership-still.webp",
-      "width": 1600,
-      "height": 900,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "membership-still.webp"
     },
     "p-eyes-mirror.webp": {
       "id": "x2XYNo6wUUDwORiPar346",

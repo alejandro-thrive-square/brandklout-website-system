@@ -240,9 +240,26 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <a class="navbar_link" href="treatments.html">Treatments</a>
+          <!-- Two dropdowns since BugHerd #22 and #54 (2026-09-29): the four
+               treatment categories under Treatments, the team under About. CSS
+               only (hover and focus-within), so nothing here depends on site.js. -->
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="treatments.html">Treatments <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="treatments.html#face">Face</a>
+              <a class="navbar_dropdown-link" href="treatments.html#neck">Neck &amp; Jawline</a>
+              <a class="navbar_dropdown-link" href="treatments.html#skin">Skin</a>
+              <a class="navbar_dropdown-link" href="treatments.html#nonsurgical">Non-Surgical</a>
+            </div>
+          </div>
           <a class="navbar_link" href="meet-the-doctor.html" aria-current="page">Dr. Stone</a>
-          <a class="navbar_link" href="about.html">About</a>
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="about.html">About <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="about.html">The practice</a>
+              <a class="navbar_dropdown-link" href="team.html">Meet the Team</a>
+            </div>
+          </div>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="memberships.html">Memberships</a>
           <a class="navbar_link" href="blog.html">Blog</a>
@@ -331,31 +348,36 @@
 
   <!-- ====================================================================
        THE HERO
+       Rebuilt for BugHerd round 2 (2026-09-29, #17 #18 #47 #48). The name
+       ran the full width behind the portrait and the portrait covered it;
+       the line about her eye was a whole chapter of its own for one
+       sentence. Now three columns that fit together: the name, the role and
+       the @drjawline note at left; the portrait, a little smaller, in the
+       middle; the line at its right. The "eye" chapter is gone.
        ==================================================================== -->
   <section class="prof_hero stone-panel" data-chapter="00" data-chapter-name="Dr. Stone">
-    <h1 class="prof_name" aria-label="Dr. Mona Stone, DDS">Mona <em>Stone</em></h1>
+    <div class="prof_intro">
+      <h1 class="prof_name" aria-label="Dr. Mona Stone, DDS">Mona <em>Stone</em></h1>
+      <div class="prof_facts">
+        <p class="chapter_mark" data-j="rise">Meet the doctor</p>
+        <p class="prof_role" data-j="rise">Oral and maxillofacial surgeon. Facial cosmetic surgeon. Founder of Stone Surgical Arts.</p>
+      </div>
+      <div class="prof_side" data-j="rise">
+        <img src="assets/dr-stone-candid.webp" alt="" width="1400" height="1400" loading="lazy">
+        <p>Known online as @drjawline, for the work that made her name: the jaw, the chin and the neck.</p>
+      </div>
+    </div>
     <div class="prof_portrait" data-j="mask">
       <div class="u-fill" data-parallax="6" data-parallax-anchor="top">
         <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="1973" height="2960" fetchpriority="high">
       </div>
     </div>
-    <div class="prof_facts">
-      <p class="chapter_mark" data-j="rise">Meet the doctor</p>
-      <p class="prof_role" data-j="rise">Oral and maxillofacial surgeon. Facial cosmetic surgeon. Founder of Stone Surgical Arts.</p>
+    <!-- The line. The sister site's framing of what makes her different. -->
+    <div class="prof_aside">
+      <p class="chapter_mark" data-j="rise">A surgeon's training. An artist's eye.</p>
+      <blockquote class="prof_line">She sees the face the way a plastic surgeon does: <em>reading proportion, balance, the way a jawline frames everything around it.</em></blockquote>
+      <p class="thesis_attribution" data-j="rise">From the practice&rsquo;s own description of her</p>
     </div>
-    <div class="prof_side" data-j="rise">
-      <p>Known online as @drjawline, for the work that made her name: the jaw, the chin and the neck.</p>
-      <img src="assets/dr-stone-candid.webp" alt="" width="1400" height="1400" loading="lazy">
-    </div>
-    <p class="arrival_scroll" aria-hidden="true"><span class="arrival_scroll-line"></span>Scroll</p>
-  </section>
-
-  <!-- The line. The sister site's framing of what makes her different. -->
-  <section class="prof_quote has-ghost" data-chapter="01" data-chapter-name="The eye">
-    <div class="ghost_word is-right" aria-hidden="true">Proportion</div>
-    <p class="chapter_mark" data-j="rise">A surgeon's training. An artist's eye.</p>
-    <blockquote class="thesis_text">She sees the face the way a plastic surgeon does: <em>reading proportion, balance, the way a jawline frames everything around it.</em></blockquote>
-    <p class="thesis_attribution" data-j="rise">From the practice&rsquo;s own description of her</p>
   </section>
 
   <!-- ====================================================================
@@ -363,7 +385,7 @@
        Institution level, from the archived About page. No dates, because
        the practice published none.
        ==================================================================== -->
-  <section class="cv_component" data-chapter="02" data-chapter-name="The training">
+  <section class="cv_component" data-chapter="01" data-chapter-name="The training">
     <div class="cv_head">
       <p class="chapter_mark" data-j="rise">The training</p>
       <h2 class="display-lg" data-j-split>Where the hours were put in.</h2>
@@ -430,15 +452,15 @@
   <!-- ====================================================================
        WHY A MAXILLOFACIAL SURGEON
        ==================================================================== -->
-  <section class="why_component stone-band" data-theme="dark" data-chapter="03" data-chapter-name="Why it matters">
+  <section class="why_component stone-band" data-theme="dark" data-chapter="02" data-chapter-name="Why it matters">
     <div class="why_photo" data-parallax="12" aria-hidden="true">
-      <img src="assets/gen-or-light.webp" alt="" width="1600" height="900" loading="lazy">
+      <img src="assets/dr-stone-steps.webp" alt="" width="2000" height="1333" loading="lazy">
     </div>
     <div class="why_inner">
-      <p class="chapter_mark" data-j="rise">Why a maxillofacial surgeon for cosmetic work</p>
-      <h2 class="display-lg" data-j-split>The implants here are planned to a scan, not picked from a tray.</h2>
-      <p class="why_text" data-j="rise">KLS Martin IPS<span class="reg">&reg;</span> is a reconstruction workflow in which an implant is designed to a particular skull from a particular scan rather than fitted from stock sizes. The practice&rsquo;s own position is that a generic implant gives a generic result.</p>
-      <p class="why_text" data-j="rise">The marginal mandibular nerve runs exactly where a neck lift works. A surgeon who spent her residency rebuilding it after it had been broken knows that anatomy in three dimensions, in a particular neck, rather than as a diagram.</p>
+      <p class="chapter_mark" data-j="rise">Dr. Stone&rsquo;s surgical approach</p>
+      <h2 class="display-lg" data-j-split>Her training shapes the way she plans each face.</h2>
+      <p class="why_text" data-j="rise">Dr. Mona Stone&rsquo;s background in biomedical engineering, facial reconstruction, and oral and maxillofacial surgery informs how she evaluates more than the feature a patient wants to change. She considers the relationship between bone, soft tissue, and facial proportions when discussing a treatment plan.</p>
+      <p class="why_text" data-j="rise">As a KLS Martin IPS<span class="reg">&reg;</span>-certified surgeon, she has training in patient-specific implant planning. When an implant is appropriate, three-dimensional imaging can help guide a design suited to the patient&rsquo;s anatomy. She brings that same attention to the structures of the jawline and neck when considering cosmetic procedures.</p>
     </div>
   </section>
 
@@ -446,7 +468,7 @@
        BEYOND THE PRACTICE
        From the archived About page. Kept to what the practice published.
        ==================================================================== -->
-  <section class="beyond_component" data-chapter="04" data-chapter-name="Beyond the practice">
+  <section class="beyond_component" data-chapter="03" data-chapter-name="Beyond the practice">
     <div class="beyond_grid">
       <figure class="is-a" data-j="mask">
         <div class="u-fill" data-parallax="8" data-parallax-anchor="top"><img src="assets/dr-stone-portrait.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="1200" height="1903" loading="lazy"></div>
@@ -455,7 +477,7 @@
         <img src="assets/dr-stone-candid.webp" alt="Dr. Mona Stone outdoors in a dark jacket" width="1400" height="1400" loading="lazy">
       </figure>
       <figure class="is-c" data-j="mask">
-        <img src="assets/dr-stone-steps.webp" alt="Dr. Mona Stone seated on tiled steps outside the practice" width="2000" height="1333" loading="lazy">
+        <img src="assets/bh-dr-stone-podcast.webp" alt="Dr. Mona Stone recording a vodcast interview at a studio microphone" width="1440" height="1800" loading="lazy">
       </figure>
     </div>
     <div class="beyond_body">
@@ -469,8 +491,48 @@
         <li><span class="dealt_num">04</span><span>English and Spanish spoken</span></li>
       </ul>
       <div class="arrival_actions" data-j="rise">
-        <a class="button is-secondary" href="https://www.instagram.com/drjawline/" rel="noopener">Follow @drjawline</a>
+        <a class="button is-secondary" href="https://www.instagram.com/drjawline/" target="_blank" rel="noopener">Follow @drjawline</a>
       </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       IN THE MEDIA
+       Moved here from the home page (BugHerd #32, 2026-09-29), with the
+       agency's own line under the heading (#13).
+       ==================================================================== -->
+  <section class="standard_component stone-band" data-theme="dark" data-chapter="04" data-chapter-name="In the media">
+    <div class="standard_photo" data-parallax="10" aria-hidden="true">
+      <img src="assets/m-profile-dark.webp" alt="" width="2133" height="1200" loading="lazy">
+    </div>
+    <div class="standard_inner">
+      <div>
+        <p class="chapter_mark" data-j="rise">In the media</p>
+        <h2 class="display-lg standard_title" data-j-split>She is asked about this work, not only for it.</h2>
+        <p class="standard_text" data-j="rise">Explore selected media coverage and community work featuring Dr. Stone.</p>
+      </div>
+      <ul class="index_component" data-j="stagger">
+        <li class="index_item">
+          <span class="index_key">D Magazine</span>
+          <span class="index_value">Mona Stone, D.D.S.</span>
+        </li>
+        <li class="index_item">
+          <span class="index_key">CW33 Morning After</span>
+          <span class="index_value">Daylight saving and sleep: mitigating the lost hour <span class="text-style-nowrap">(March 2021)</span></span>
+        </li>
+        <li class="index_item">
+          <span class="index_key">Real Heroes Need Masks</span>
+          <span class="index_value">Cofounder: PPE for medical professionals during COVID-19</span>
+        </li>
+        <li class="index_item">
+          <span class="index_key">Kelley School of Business</span>
+          <span class="index_value">#RealHeroesNeedMasks mask-donation drive</span>
+        </li>
+        <li class="index_item">
+          <span class="index_key">McKelvey Engineering</span>
+          <span class="index_value">Alumni pitch in to the COVID-19 effort</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -510,7 +572,7 @@
           </div>
           </div>
           <figure class="cta_media">
-            <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="1973" height="2960" loading="lazy">
+            <img src="assets/dr-stone-steps.webp" alt="Dr. Mona Stone seated on tiled steps outside the practice" width="2000" height="1333" loading="lazy">
             <figcaption class="cta_media-plate">Dr. Mona Stone, DDS</figcaption>
           </figure>
         </div>
@@ -540,37 +602,8 @@
     <div class="container-large">
       <div class="padding-section-medium">
         <div class="footer_top">
-          <!-- The site's pages, since 2026-09-02. A row above the columns until
-               2026-09-04; now the first column, one page under another, beside
-               the address, the mark and the hours (client: "in a column, one
-               before the other, on the side of the other elements"). -->
-          <nav class="footer_nav" aria-label="Footer">
-          <a href="index.html">Home</a>
-          <a href="treatments.html">Treatments &amp; fees</a>
-          <a href="face-and-neck-lift.html">Face &amp; neck lift</a>
-          <a href="neck-lift.html">Neck lift</a>
-          <a href="myellevate-neck-lift.html">MyEllevate&reg;</a>
-          <a href="blepharoplasty.html">Eyelid surgery</a>
-          <a href="meet-the-doctor.html" aria-current="page">Dr. Stone</a>
-          <a href="about.html">About</a>
-          <a href="team.html">The team</a>
-          <a href="results.html">Results &amp; reviews</a>
-          <a href="memberships.html">Memberships</a>
-          <a href="blog.html">Blog</a>
-          <a href="book.html">Book a consultation</a>
-            </nav>
-          <div class="footer_col">
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
-              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
-            </div>
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18176314619">(817) 631-4619</a>
-            </div>
-            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
-          </div>
-
+          <!-- The mark first, aligned left, then the pages, the address and the
+               hours (BugHerd #45, 2026-09-29). -->
           <div class="footer_brand">
             <span class="brand_component is-large">
             <span class="brand_name">Stone</span>
@@ -592,6 +625,31 @@
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
               </a>
             </div>
+          </div>
+
+          <!-- The site's pages. Since BugHerd #43 (2026-09-29) only what the main
+               menu carries: the treatment pages, the team and the legal pages are
+               reached from those. -->
+          <nav class="footer_nav" aria-label="Footer">
+            <a href="treatments.html">Treatments</a>
+            <a href="meet-the-doctor.html" aria-current="page">Dr. Stone</a>
+            <a href="about.html">About</a>
+            <a href="results.html">Results</a>
+            <a href="memberships.html">Memberships</a>
+            <a href="blog.html">Blog</a>
+            <a href="book.html">Book a consultation</a>
+          </nav>
+
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18176314619">(817) 631-4619</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_col is-right">

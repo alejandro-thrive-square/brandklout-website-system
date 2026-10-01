@@ -21,9 +21,26 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <a class="navbar_link" href="treatments.html"{{CUR_TREATMENTS}}>Treatments</a>
+          <!-- Two dropdowns since BugHerd #22 and #54 (2026-09-29): the four
+               treatment categories under Treatments, the team under About. CSS
+               only (hover and focus-within), so nothing here depends on site.js. -->
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="treatments.html"{{CUR_TREATMENTS}}>Treatments <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="treatments.html#face">Face</a>
+              <a class="navbar_dropdown-link" href="treatments.html#neck">Neck &amp; Jawline</a>
+              <a class="navbar_dropdown-link" href="treatments.html#skin">Skin</a>
+              <a class="navbar_dropdown-link" href="treatments.html#nonsurgical">Non-Surgical</a>
+            </div>
+          </div>
           <a class="navbar_link" href="meet-the-doctor.html"{{CUR_MEET_THE_DOCTOR}}>Dr. Stone</a>
-          <a class="navbar_link" href="about.html"{{CUR_ABOUT}}>About</a>
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="about.html"{{CUR_ABOUT}}>About <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="about.html">The practice</a>
+              <a class="navbar_dropdown-link" href="team.html"{{CUR_TEAM}}>Meet the Team</a>
+            </div>
+          </div>
           <a class="navbar_link" href="results.html"{{CUR_RESULTS}}>Results</a>
           <a class="navbar_link" href="memberships.html"{{CUR_MEMBERSHIPS}}>Memberships</a>
           <a class="navbar_link" href="blog.html"{{CUR_BLOG}}>Blog</a>

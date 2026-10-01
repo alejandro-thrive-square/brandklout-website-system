@@ -267,9 +267,26 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <a class="navbar_link" href="treatments.html">Treatments</a>
+          <!-- Two dropdowns since BugHerd #22 and #54 (2026-09-29): the four
+               treatment categories under Treatments, the team under About. CSS
+               only (hover and focus-within), so nothing here depends on site.js. -->
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="treatments.html">Treatments <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="treatments.html#face">Face</a>
+              <a class="navbar_dropdown-link" href="treatments.html#neck">Neck &amp; Jawline</a>
+              <a class="navbar_dropdown-link" href="treatments.html#skin">Skin</a>
+              <a class="navbar_dropdown-link" href="treatments.html#nonsurgical">Non-Surgical</a>
+            </div>
+          </div>
           <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
-          <a class="navbar_link" href="about.html">About</a>
+          <div class="navbar_dropdown">
+            <a class="navbar_link" href="about.html">About <svg class="navbar_caret" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2"/></svg></a>
+            <div class="navbar_dropdown-list">
+              <a class="navbar_dropdown-link" href="about.html">The practice</a>
+              <a class="navbar_dropdown-link" href="team.html">Meet the Team</a>
+            </div>
+          </div>
           <a class="navbar_link" href="results.html">Results</a>
           <a class="navbar_link" href="memberships.html">Memberships</a>
           <a class="navbar_link" href="blog.html">Blog</a>
@@ -451,7 +468,7 @@
     </div>
     <div class="dhero_inner">
       <p class="dhero_eyebrow" data-d="rise">Face &middot; Westlake, Texas</p>
-      <h1 class="dhero_title" data-d="rise">Blepharoplasty</h1>
+      <h1 class="dhero_title is-one-word" data-d="rise">Blepharoplasty</h1>
       <p class="dhero_sub" data-d="rise">Eyelid surgery, upper or lower. The smallest operation on this list and, for most faces, the one that changes the most.</p>
       <ul class="dhero_chips" data-d="rise">
         <li class="dhero_chip"><span>Fee</span>$3,400</li>
@@ -485,7 +502,7 @@
           <div class="spec_row"><dt>Back to work</dt><dd>Seven to ten days</dd></div>
           <div class="spec_row"><dt>Results settle</dt><dd>Two to three months</dd></div>
         </dl>
-        <a class="button spec_cta" href="#contact">Book a consultation</a>
+        <a class="button spec_cta" href="book.html">Book a consultation</a>
         <a class="spec_tel" href="tel:+18176314619">or call (817) 631-4619</a>
       </div>
 
@@ -530,9 +547,9 @@
                flattened into one string on import. Same trap as the neck lift
                and the same fix: no spans in here. -->
           <div class="layers_tabs" role="tablist" aria-label="The three tissues">
-            <button class="layers_tab" type="button" role="tab" id="tab-fat" aria-controls="panel-fat" aria-selected="true">Fat</button>
-            <button class="layers_tab" type="button" role="tab" id="tab-muscle" aria-controls="panel-muscle" aria-selected="false">Muscle</button>
             <button class="layers_tab" type="button" role="tab" id="tab-skin" aria-controls="panel-skin" aria-selected="false">Skin</button>
+            <button class="layers_tab" type="button" role="tab" id="tab-muscle" aria-controls="panel-muscle" aria-selected="false">Muscle</button>
+            <button class="layers_tab" type="button" role="tab" id="tab-fat" aria-controls="panel-fat" aria-selected="true">Fat</button>
           </div>
 
           <div class="layers_depth" aria-hidden="true">
@@ -689,11 +706,11 @@
              captions are this page's own; the timescale is different. -->
         <div class="recov_media">
           <figure class="recov_figure" data-j="mask">
-            <img src="assets/p-recovery-home.webp" alt="A woman with a cup of tea on a sofa by a window" width="1400" height="933" loading="lazy">
+            <img src="assets/bh-profile-curls-chair.webp" alt="A woman with curly hair in profile, eyes closed, in a treatment room" width="2192" height="1643" loading="lazy">
             <figcaption>The bruising week is at home, and it is a week.</figcaption>
           </figure>
           <figure class="recov_figure" data-j="mask">
-            <img src="assets/p-outdoors.webp" alt="A woman in a coat on a bridge in a park in autumn light" width="1400" height="2100" loading="lazy">
+            <img src="assets/bh-portrait-curls-chair.webp" alt="A woman with curly hair seated in a treatment room" width="1774" height="1670" loading="lazy">
             <figcaption>By three weeks most people have stopped avoiding cameras.</figcaption>
           </figure>
         </div>
@@ -864,7 +881,7 @@
     </div>
     <div class="related_grid">
       <a class="related_card" href="treatments.html#face">
-        <div class="related_media" data-j="mask"><img src="assets/m-eyes-young.webp" alt="" width="1160" height="1450" loading="lazy"></div>
+        <div class="related_media" data-j="mask"><img src="assets/bh-botox-brow-gloves.webp" alt="A gloved hand marking a woman's brow before an injection" width="2200" height="1476" loading="lazy"></div>
         <h3 class="related_name">Brow &amp; forehead lift</h3>
         <p class="related_text">When the heaviness is the brow rather than the lid, the lift belongs above the eye. $5,000 to $7,000.</p>
         <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
@@ -876,7 +893,7 @@
         <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
       </a>
       <a class="related_card" href="treatments.html#skin">
-        <div class="related_media" data-j="mask"><img src="assets/m-freckles.webp" alt="" width="1600" height="900" loading="lazy"></div>
+        <div class="related_media" data-j="mask"><img src="assets/bh-ba-lip-lines.webp" alt="Lines around the mouth before and after treatment" width="2200" height="1201" loading="lazy"></div>
         <h3 class="related_name">CO2 laser resurfacing</h3>
         <p class="related_text">Fine lines on the lid and the crow&rsquo;s feet beside it, where surgery removes nothing. $2,000 to $2,800.</p>
         <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
@@ -899,7 +916,7 @@
        ==================================================================== -->
   <section class="book_component" id="contact">
     <div class="book_media u-focus-figure" data-parallax="8" data-parallax-anchor="top">
-      <div class="u-fill" data-j="mask"><img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1748" height="983" loading="lazy"></div>
+      <div class="u-fill" data-j="mask"><img src="assets/bh-dr-stone-coat-sign.webp" alt="Dr. Mona Stone, DDS, in a white coat beneath the practice sign" width="720" height="1331" loading="lazy"></div>
     </div>
     <div class="book_body">
       <p class="dsec_mark">Book it</p>
@@ -919,7 +936,7 @@
   <!-- The mobile bar. Hidden above 991, where the rail does this job. -->
   <div class="mbar_component">
     <div class="mbar_fee"><span>Blepharoplasty</span>$3,400</div>
-    <a class="button is-small" href="#contact">Book</a>
+    <a class="button is-small" href="book.html">Book</a>
   </div>
 
 </div>
@@ -946,37 +963,8 @@
     <div class="container-large">
       <div class="padding-section-medium">
         <div class="footer_top">
-          <!-- The site's pages, since 2026-09-02. A row above the columns until
-               2026-09-04; now the first column, one page under another, beside
-               the address, the mark and the hours (client: "in a column, one
-               before the other, on the side of the other elements"). -->
-          <nav class="footer_nav" aria-label="Footer">
-          <a href="index.html">Home</a>
-          <a href="treatments.html">Treatments &amp; fees</a>
-          <a href="face-and-neck-lift.html">Face &amp; neck lift</a>
-          <a href="neck-lift.html">Neck lift</a>
-          <a href="myellevate-neck-lift.html">MyEllevate&reg;</a>
-          <a href="blepharoplasty.html" aria-current="page">Eyelid surgery</a>
-          <a href="meet-the-doctor.html">Dr. Stone</a>
-          <a href="about.html">About</a>
-          <a href="team.html">The team</a>
-          <a href="results.html">Results &amp; reviews</a>
-          <a href="memberships.html">Memberships</a>
-          <a href="blog.html">Blog</a>
-          <a href="book.html">Book a consultation</a>
-            </nav>
-          <div class="footer_col">
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
-              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
-            </div>
-            <div class="footer_item">
-              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-              <a href="tel:+18176314619">(817) 631-4619</a>
-            </div>
-            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
-          </div>
-
+          <!-- The mark first, aligned left, then the pages, the address and the
+               hours (BugHerd #45, 2026-09-29). -->
           <div class="footer_brand">
             <span class="brand_component is-large">
             <span class="brand_name">Stone</span>
@@ -998,6 +986,31 @@
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
               </a>
             </div>
+          </div>
+
+          <!-- The site's pages. Since BugHerd #43 (2026-09-29) only what the main
+               menu carries: the treatment pages, the team and the legal pages are
+               reached from those. -->
+          <nav class="footer_nav" aria-label="Footer">
+            <a href="treatments.html">Treatments</a>
+            <a href="meet-the-doctor.html">Dr. Stone</a>
+            <a href="about.html">About</a>
+            <a href="results.html">Results</a>
+            <a href="memberships.html">Memberships</a>
+            <a href="blog.html">Blog</a>
+            <a href="book.html">Book a consultation</a>
+          </nav>
+
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18176314619">(817) 631-4619</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
           </div>
 
           <div class="footer_col is-right">

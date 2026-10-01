@@ -3,7 +3,13 @@
 
      Sang: "filterable before/after gallery plus reviews."
 
-     THE GALLERY IS EMPTY, ON PURPOSE, AND THE PAGE SAYS SO. The archived
+     BUGHERD ROUND 2, 2026-09-29 (#10, #55): the agency supplied nine
+     before-and-after photographs and asked for them as a gallery that
+     scrolls by. They are the strip under the consent band now, and the
+     band's own copy no longer says photography is on its way. The note
+     below is the history of why the gallery was empty until then.
+
+     THE GALLERY WAS EMPTY, ON PURPOSE, AND THE PAGE SAID SO. The archived
      site published 33 before/after cases of identifiable patients who
      consented to a website that no longer exists under a brand that has
      been retired; the Drive export adds a device manufacturer's photograph
@@ -47,21 +53,37 @@
        ==================================================================== -->
   <section class="consent_component" id="gallery" data-chapter="01" data-chapter-name="Before & after">
     <div class="consent_media" data-parallax="12">
-      <img src="assets/m-profile-light.webp" alt="A woman in profile in a slant of warm light" width="2133" height="1200" loading="lazy">
+      <img src="assets/bh-ba-neck-collage.webp" alt="" width="1920" height="1920" loading="lazy">
     </div>
     <div class="consent_inner">
       <div>
         <p class="chapter_mark" data-j="rise">Before &amp; after</p>
-        <h2 class="display-lg" data-j-split>Photography is on its way, and it will be consented.</h2>
+        <h2 class="display-lg" data-j-split>The difference, in pairs of photographs.</h2>
       </div>
       <div data-j="rise">
-        <p class="consent_text">The practice is preparing a new set of before-and-after cases, published with each patient&rsquo;s current consent. Until then, Dr. Stone will show you cases like yours at your consultation.</p>
+        <p class="consent_text">A selection of Dr. Stone&rsquo;s patients, before treatment and after. At your consultation she will show you more cases like yours.</p>
         <p class="consent_text">No result here is a guarantee of yours: anatomy, healing and ageing differ from person to person.</p>
         <div class="consent_actions">
           <a class="button" href="book.html">Book a consultation</a>
           <a class="button is-secondary" href="https://www.instagram.com/stonesurgicalart/" rel="noopener">Recent work on Instagram</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- The cases, as a strip that scrolls by (BugHerd #10). The 12-elevate.js
+       marquee runs every .strip_track, so this needed no script. -->
+  <section class="strip_component is-cases" aria-label="Before and after photographs">
+    <div class="strip_track">
+      <figure class="strip_tile is-portrait"><img src="assets/bh-ba-neck-profile.webp" alt="A patient in profile before and after neck and jawline treatment" width="1440" height="1564" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-01.webp" alt="A patient smiling before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-02.webp" alt="A patient smiling before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-portrait"><img src="assets/bh-ba-jaw-profile.webp" alt="A man in profile before and after jawline treatment" width="1250" height="1563" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-03.webp" alt="A patient smiling before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-04.webp" alt="A patient smiling before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-05.webp" alt="A patient before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-06.webp" alt="A patient before and after treatment" width="1604" height="1000" loading="lazy"></figure>
+      <figure class="strip_tile is-wide"><img src="assets/bh-ba-dental-07.webp" alt="A patient before and after treatment" width="1604" height="1000" loading="lazy"></figure>
     </div>
   </section>
 
@@ -74,7 +96,7 @@
         <p class="chapter_mark" data-j="rise">In their words</p>
         <h2 class="display-lg" data-j-split>What patients say afterwards.</h2>
       </div>
-      <p class="steps_lede" data-j="rise">Straight from the practice&rsquo;s Google listing, as patients wrote them.</p>
+      <p class="steps_lede" data-j="rise">Hear directly from patients about their cosmetic care experience with Dr. Stone.</p>
     </div>
 
     <!-- LIVE GOOGLE REVIEWS. This wrapper is an embed MARKER, not the widget:

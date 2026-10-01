@@ -244,23 +244,9 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   const lines = await page.evaluate(() => document.querySelectorAll(".j-line-mask").length);
   check("headlines split into masked lines", lines >= 5, `${lines} lines`);
 
-  // The thesis is wrapped word by word and starts unlit.
-  const words = await page.evaluate(() => ({
-    total: document.querySelectorAll(".thesis_text .w").length,
-    lit: document.querySelectorAll(".thesis_text .w.is-lit").length,
-  }));
-  check("the thesis is wrapped word by word", words.total >= 9, `${words.total} words`);
-
-  // Scroll to the thesis and confirm the scrub actually lights words.
-  await settle(
-    page,
-    await page.evaluate(() => {
-      const r = document.querySelector(".thesis_component").getBoundingClientRect();
-      return r.top + window.scrollY - window.innerHeight * 0.35;
-    })
-  );
-  const litNow = await page.evaluate(() => document.querySelectorAll(".thesis_text .w.is-lit").length);
-  check("scrolling lights the thesis", litNow > words.lit, `${words.lit} -> ${litNow} of ${words.total}`);
+  // The thesis chapter (its sentence lit word by word on scroll) was retired in
+  // BugHerd round 2, 2026-09-29: the sentence is the surgeon chapter's heading
+  // now. thesis() in 10-journey.js still runs on any page with a .thesis_text.
 
   // The pinned path chapter really travels sideways.
   //
@@ -300,7 +286,7 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
       name: pad.querySelector(".journey_readout-name").textContent,
     };
   });
-  check("the chapter readout names the path chapter", readout.on && readout.num === "04", `${readout.num} ${readout.name}`);
+  check("the chapter readout names the path chapter", readout.on && readout.num === "03", `${readout.num} ${readout.name}`);
 
   // The nav progress bar, read at the very bottom of the document where it has
   // to be full.

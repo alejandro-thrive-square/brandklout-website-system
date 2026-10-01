@@ -224,6 +224,15 @@ for (const page of PAGES) {
   const nav = cur(navbar).replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
   const drawerHtml = cur(drawer);
 
+  // The shared closing band follows the page body, unless the body places it
+  // itself with a `<!-- {{CTA}} ... -->` comment (the home page, since BugHerd
+  // #41 on 2026-09-29, puts its practice strip and facts AFTER the band).
+  const ctaHtml =
+    page.cta === false ? "" : body.includes('id="contact"') ? cta : cta.replace('<section class="section_cta cta_component"', '<section class="section_cta cta_component" id="contact"');
+  const ctaSlot = /<!-- \{\{CTA\}\}[\s\S]*?-->/;
+  const placed = ctaSlot.test(body);
+  const bodyHtml = placed ? body.replace(ctaSlot, () => ctaHtml) : body;
+
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -235,8 +244,8 @@ ${head.replace("{{SEO}}", seoBlock(page.slug))}
 ${nav}
 ${drawerHtml}
 <main class="main-wrapper" id="main">
-${body}
-${page.cta === false ? "" : body.includes('id="contact"') ? cta : cta.replace('<section class="section_cta cta_component"', '<section class="section_cta cta_component" id="contact"')}
+${bodyHtml}
+${placed ? "" : ctaHtml}
 </main>
 ${cur(footer)}
 </div>
