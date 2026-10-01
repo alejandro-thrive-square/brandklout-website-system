@@ -253,25 +253,59 @@ class DeepBrowser(Browser):
         super().close()
 
 
-def drive(agent, goals, limit_s=150, patience=2, on_state=None):
+LOOP = 4  # the same action this many times in a row is a loop, not progress
+WAITS = 8  # this many WAITs in a row: the page is not going to change
+
+
+_field_context = jev_agent.field_context
+TASK = {"text": None}
+
+
+def _task_field_context(goal, action, page, history):
+    """The text helper sees the whole task as its only source of values; the decision model does not.
+
+    A step such as "Click Search" carries no value, and the helper then typed the page's own
+    placeholder example ("Brooklyn Museum, New York...") into Elfsight's search. Giving the whole task
+    to the decision model instead made it skip steps (2026-10-01).
+    """
+    context = _field_context(goal, action, page, history)
+    if TASK["text"]:
+        context["goal"] = (f"{goal}\nValues to type come ONLY from this task, never from page examples "
+                           f"or placeholders: {TASK['text']}")
+    return context
+
+
+jev_agent.field_context = _task_field_context
+
+
+def drive(agent, goals, limit_s=150, patience=2, on_state=None, task=None):
     """Run ordered sub-goals on one Agent (one tab). Returns the final status.
 
     * Each goal is a short step with its own stopping point; DONE moves to the next goal.
+    * The same action LOOP times in a row stops the run as "loop".
     * BLOCKED is retried `patience` times after a pause: Jev picks BLOCKED on loading screens.
     * A malformed model reply (TypeSafe, or an empty text-helper value) is retried once; nothing
       was executed when either is raised.
     """
     started = time.perf_counter()
-    for i, goal in enumerate(goals):
+    TASK["text"] = task or " ".join(goals)
+    for i in range(len(goals)):
         state = agent.state
-        if i:
-            state.update(goal=goal, status="ready")
+        state.update(goal=goals[i], status="ready")
         tries, bad_replies = 0, 0
         while True:
             try:
                 for snapshot in agent.run():
                     if on_state:
                         on_state(snapshot)
+                    last = [(h["kind"], h["action"]) for h in state["history"][-LOOP:]]
+                    if len(last) == LOOP and len(set(last)) == 1 and last[0][0] != "wait":
+                        return "loop"
+                    # Waiting forever is a loop too: 2026-10-01 burned all 60 steps on WAIT + Search
+                    # for results that never came.
+                    waits = [h["kind"] for h in state["history"][-WAITS:]]
+                    if len(waits) == WAITS and set(waits) == {"wait"}:
+                        return "stalled"
                     if time.perf_counter() - started > limit_s:
                         raise TimeoutError(f"over {limit_s}s")
             except ValueError as exc:

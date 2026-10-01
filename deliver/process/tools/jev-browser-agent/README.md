@@ -39,7 +39,12 @@ Runs that failed for plumbing reasons (daemon timeouts) are excluded; the raw lo
    stopping point ("… Stop when Connected shows it").
 4. **Patience:** Jev picks BLOCKED over WAIT on loading screens, so `drive()` retries BLOCKED twice
    after 1.5 s. A malformed model or text-helper reply is retried once.
-5. **A DONE is a claim, not proof.** Check the outcome yourself (install code read back, then
+5. **Guards in `drive()`:** 4 identical actions in a row return `loop`, and 8 WAITs in a row
+   return `stalled`. The text helper alone sees the whole task (`--task`) as its only source of
+   values, so it never types a page's placeholder example.
+6. **Overlays are read first.** Modals, dropdowns and popovers sit at the end of the DOM, and a
+   long preview would otherwise use up the 6000-character text budget (Elfsight's search results).
+7. **A DONE is a claim, not proof.** Check the outcome yourself (install code read back, then
    `elfsight-reviews/elfsight_render.py`).
 
 ## Install (once per machine)
@@ -74,7 +79,8 @@ cd ~/tools/jev-ultrafast && uv sync
 cd deliver/process/tools/jev-browser-agent
 uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env python run_elfsight.py \
   --url https://dash.elfsight.com/apps/google-reviews --out <scratch dir> \
-  --forbid '^close$' --forbid '^upgrade$' --forbid '^search for ' \
+  --forbid '^close$' --forbid '^upgrade$' --forbid '^search for ' --forbid 'viewport selector' \
+  --task "Connect <Name, address> as the Google source, name it '<Client> - Google Reviews', publish" \
   --goal "Click Create widget. Stop when the templates are shown." \
   --goal "Choose the Carousel template. Stop when a source search field is visible." \
   --goal "..."

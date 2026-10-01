@@ -33,6 +33,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--url", required=True)
 parser.add_argument("--goal", action="append", required=True, help="one step; repeat in order")
 parser.add_argument("--out", required=True)
+parser.add_argument("--task", help="the whole task in one sentence; typed values come only from here (default: all steps)")
 parser.add_argument("--forbid", action="append", default=[], help="regex on element labels, e.g. '^close$'")
 parser.add_argument("--patience", type=int, default=2, help="BLOCKED retries per step")
 parser.add_argument("--limit", type=float, default=180, help="seconds for the whole run")
@@ -60,7 +61,7 @@ def log(state):
 
 status = "error"
 try:
-    status = jev_deep.drive(agent, args.goal, limit_s=args.limit, patience=args.patience, on_state=log)
+    status = jev_deep.drive(agent, args.goal, limit_s=args.limit, patience=args.patience, on_state=log, task=args.task)
 finally:
     print("status:", status, "| url:", agent.state["page"]["url"], flush=True)
     found = agent.browser.evaluate(CODE_JS)

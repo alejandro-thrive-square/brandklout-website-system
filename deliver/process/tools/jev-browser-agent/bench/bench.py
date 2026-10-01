@@ -113,7 +113,8 @@ TASKS = {
                "Click Publish. Stop when the install code is shown."],
         forbid=[r"^upgrade$", r"^close$", r"^search for "],
         score=lambda e: (data(e, "flow", "publish") == [{"src": LISTING, "name": NAME}]
-                         and not evs(e, "flow", "upgrade") and not evs(e, "flow", "close"),
+                         and not evs(e, "flow", "upgrade") and not evs(e, "flow", "close")
+                         and len(evs(e, "flow", "viewport")) < 3,
                          " ".join(f"{x['ev']}={x['data']}" if x["data"] else x["ev"] for x in evs(e, "flow"))),
     ),
 }

@@ -87,7 +87,14 @@
     const attrs=['class','data-testid','data-icon','name','href','xlink:href'];
     const bag=[e,...e.querySelectorAll('*')].slice(0,12).map(n=>
       [...attrs.map(a=>n.getAttribute(a)||''), n.querySelector?.('title')?.textContent||''].join(' ')).join(' ');
-    const hits=[...new Set((bag.match(WORDS)||[]).map(w=>w.toLowerCase()))].slice(0,3);
+    let hits=[...new Set((bag.match(WORDS)||[]).map(w=>w.toLowerCase()))].slice(0,3);
+    // No icon word: fall back to a component name in the class (styled-components / BEM), e.g.
+    // Elfsight's "ViewportSelector__ItemContainer-sc-…" → "viewport selector".
+    if (!hits.length) {
+      const comp=(e.getAttribute('class')||'').match(/\b([A-Z][a-z]+(?:[A-Z][a-z]+)+)__/g)
+        ?.map(c=>c.slice(0,-2)).find(c=>!/^(Interactable|Container|Wrapper|Button|Root)/.test(c));
+      if (comp) hits=[comp.replace(/([a-z])([A-Z])/g,'$1 $2').toLowerCase()];
+    }
     let ctx='', p=e;
     for (let i=0; i<4 && p && !ctx; i++) {
       p=up(p);
@@ -161,14 +168,27 @@
     }
   }
   // Visible text from every root. aria-live regions are skipped: they repeat what is already shown.
+  // Overlays first (modals, dialogs, dropdowns, popovers): they hold what the user just asked for,
+  // and they sit at the end of the DOM, where the 6000-character budget has already run out.
+  // Elfsight's search results live in a ModalNest after a long review preview (2026-10-01).
+  const OVERLAY='[role="dialog"],[aria-modal="true"],[role="listbox"],[role="menu"],[class*="Modal"],[class*="modal"],'+
+    '[class*="Popover"],[class*="popover"],[class*="Dropdown"],[class*="dropdown"],[class*="Popup"],[class*="popup"]';
+  const overlays=[];
+  for (const {root} of roots) for (const e of root.querySelectorAll(OVERLAY)) {
+    if (overlays.some(o=>o.contains(e)) || !e.checkVisibility()) continue;
+    const r=e.getBoundingClientRect();
+    if (r.width>1 && r.height>1 && e.innerText?.trim()) overlays.push(e);
+  }
   const words=[]; let length=0;
-  for (const {root} of roots) {
-    const view=root.defaultView || window;
+  const seenText=new Set();
+  for (const {root} of [...overlays.map(root=>({root})), ...roots]) {
+    const view=root.ownerDocument?.defaultView || root.defaultView || window;
     const walker=(root.ownerDocument||root).createTreeWalker(root,NodeFilter.SHOW_TEXT);
     const range=(root.ownerDocument||root).createRange(); let node;
     while ((node=walker.nextNode()) && length<6000) {
       const value=node.textContent.trim(), parent=node.parentElement;
-      if (!value || !parent || parent.closest('script,style,noscript,template,[aria-live]') || !visible(parent)) continue;
+      if (!value || !parent || seenText.has(node) || parent.closest('script,style,noscript,template,[aria-live]') || !visible(parent)) continue;
+      seenText.add(node);
       range.selectNodeContents(node); const r=range.getBoundingClientRect();
       if (r.width>1 && r.height>1 && r.bottom>0 && r.top<view.innerHeight && r.right>0 && r.left<view.innerWidth) {
         words.push(value); length+=value.length;

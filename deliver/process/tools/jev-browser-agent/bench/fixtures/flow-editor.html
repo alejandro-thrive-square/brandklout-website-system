@@ -16,7 +16,10 @@
 <div id="app" hidden>
   <div class="step"><h3>1. Source</h3>
     <input id="q" placeholder="Business name or address">
-    <div class="dd" id="dd"></div><div class="sr" aria-live="polite" id="live"></div>
+    <!-- Like Elfsight's preview toggle: an icon-only button named only by its component class. -->
+    <button class="Interactable__Container-sc-1 ViewportSelector__ItemContainer-sc-2" onclick="report('flow','viewport')"><svg viewBox="0 0 16 16" width="16" height="16"><rect x="4" y="1" width="8" height="14" rx="2" fill="none" stroke="#333"/></svg></button>
+    <p><small>Enter your business name and address. For example: "Brooklyn Museum, New York, 200 Eastern Pkwy"</small></p>
+    <div class="sr" aria-live="polite" id="live"></div>
     <p>Connected: <strong id="src">none</strong></p></div>
   <div class="step"><h3>2. Widget name</h3>
     <input id="name" value="Untitled widget"> <small>Press Enter to save.</small>
@@ -24,11 +27,20 @@
   <div class="step"><h3>3. Publish</h3>
     <button id="publish">Publish</button>
     <div id="code" hidden><p>Paste this code into your website:</p><pre id="snippet"></pre></div></div>
+  <div class="preview" id="preview"><h3>Preview</h3></div>
 </div>
+<!-- Like Elfsight: results render in a modal layer at the END of the document, after a review
+     preview long enough to use up a 6000-character text budget. -->
+<div class="ModalNest dd" id="dd" style="position:fixed;top:150px;left:20px;background:#fff;z-index:5"></div>
 <script>
+  for (let i = 0; i < 40; i++) {
+    const r = document.createElement('p');
+    r.textContent = `Reviewer ${i + 1}: The team was kind and on time, the office spotless, and the follow-up call the next day showed they care about every patient who walks through the door.`;
+    document.getElementById('preview').append(r);
+  }
   // The editor paints a few seconds after the host page, like Elfsight's.
   setTimeout(() => { loading.hidden = true; app.hidden = false; }, 2500);
-  const PLACES = ['Livewell Dental, 900 Pine St, Denver, CO, USA', 'Livewell Dental, 12 Main St, Denver, CO, USA',
+  const PLACES = ['Brooklyn Museum, 200 Eastern Pkwy, Brooklyn, NY, USA', 'Livewell Dental, 900 Pine St, Denver, CO, USA', 'Livewell Dental, 12 Main St, Denver, CO, USA',
     'Livewell Dental Lab, 12 Main St Suite B, Denver, CO, USA'];
   const q = document.getElementById('q'), dd = document.getElementById('dd'), live = document.getElementById('live');
   let timer;

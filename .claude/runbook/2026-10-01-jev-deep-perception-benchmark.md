@@ -35,11 +35,31 @@ The user asked to make computer use with Jev work properly and to compare approa
   - The final text shows the Layout panel. It also shows the live review preview
     (4.9, 97 reviews), which sits in a nested frame and was unreadable before.
 
+- **Restore widget via Jev, same day.** The user asked Jev to create it. It finished the existing
+  draft `393dc878` rather than making a second widget. The first three runs exposed four bugs,
+  each now fixed, with a fixture trap in `flow` so the bench catches it:
+  - An icon-only button had no hint. It was Elfsight's preview toggle, `ViewportSelector__…`, and
+    Jev clicked it 10×. Hints now fall back to the component name in the class.
+  - The text helper typed the page's placeholder example ("Brooklyn Museum…"). The step it was
+    on held no value. The helper alone now gets the whole task as its only source of values.
+    Giving the whole task to the decision model instead made it skip steps (Publish before Enter).
+  - Same-action loops and endless WAITs had no guard. `drive()` now returns `loop` after 4
+    identical actions and `stalled` after 8 waits.
+  - Search results were invisible. Elfsight renders them in a `ModalNest` at the end of the
+    document, past the 6000-character text budget (the review preview eats it). Overlays are now
+    read first.
+  - Bench after the fixes: guarded 16/16.
+- **Outcome: Restore has no Google Business listing.** Jev searched by name, which returned only
+  other Las Vegas practices, and by address, which returned "8945 W Russell Rd #320" with no rating
+  or reviews. Nothing was connected; the boot API still shows `url: ""`. The registry note is updated.
+
 ## Next
 
-- Next: a real create run with Jev, on the next client that actually needs a widget, in place of
-  `elfsight-reviews/elfsight_widget.py`.
-  Each create spends one of the 50 Google Reviews slots.
+- **Restore:** once the client has a Google Business Profile (or its Maps share link), run Jev on
+  draft `393dc878`: search, connect the result with a rating, name it
+  "Restore Dental Implant Studio - Google Reviews", Enter, Publish.
+- A first full create by Jev is still unproven on real Elfsight. Each create spends one of the
+  50 Google Reviews slots; `elfsight-reviews/elfsight_widget.py` stays the proven creator until then.
 
 ## Gotchas
 
