@@ -1,0 +1,26 @@
+<!doctype html><meta charset="utf-8"><title>Choose a template</title>
+<script src="common.js"></script>
+<style>
+  body{margin:30px;font:15px system-ui}
+  .grid{display:grid;grid-template-columns:repeat(3,220px);gap:16px}
+  .card{border:1px solid #ddd;border-radius:10px;padding:12px;cursor:pointer}
+  .thumb{height:90px;background:#eef;border-radius:6px;margin-bottom:8px}
+  .card .name{font-weight:600}
+</style>
+<h2>Choose a template</h2>
+<p>Pick a starting layout. You can change everything later.</p>
+<!-- Cards are plain divs with click listeners: no role, no tabindex, no href. -->
+<div class="grid"></div>
+<p id="out"></p>
+<script>
+  const grid = document.querySelector('.grid');
+  for (const [name, note] of [['Slider', 'One review at a time'], ['Grid', 'Reviews in columns'],
+      ['Carousel', 'Scrolling row of cards'], ['Masonry', 'Staggered columns'],
+      ['List', 'Stacked reviews'], ['Badge', 'Rating badge only']]) {
+    const c = document.createElement('div');
+    c.className = 'card';
+    c.innerHTML = `<div class="thumb"></div><div class="name">${name}</div><div class="note">${note}</div>`;
+    c.addEventListener('click', () => { report('divcards', 'template', name); document.getElementById('out').textContent = 'Template: ' + name; });
+    grid.append(c);
+  }
+</script>

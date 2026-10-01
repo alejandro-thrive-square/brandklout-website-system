@@ -1,0 +1,63 @@
+<!doctype html><meta charset="utf-8"><title>editor</title>
+<script src="http://127.0.0.1:8801/common.js"></script>
+<style>
+  body{margin:0;font:15px system-ui;padding:20px}
+  input{width:380px;padding:8px}
+  .dd{width:396px;border:1px solid #ccc;border-top:0}
+  .row{padding:8px;cursor:pointer;border-bottom:1px solid #eee}
+  .echo{color:#555;font-style:italic}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .step{border:1px solid #eee;border-radius:8px;padding:14px;margin-bottom:14px}
+  pre{background:#f6f6f6;padding:10px}
+  [hidden]{display:none!important}
+  #loading{padding:40px}
+</style>
+<div id="loading">Loading editor…</div>
+<div id="app" hidden>
+  <div class="step"><h3>1. Source</h3>
+    <input id="q" placeholder="Business name or address">
+    <div class="dd" id="dd"></div><div class="sr" aria-live="polite" id="live"></div>
+    <p>Connected: <strong id="src">none</strong></p></div>
+  <div class="step"><h3>2. Widget name</h3>
+    <input id="name" value="Untitled widget"> <small>Press Enter to save.</small>
+    <p>Saved name: <strong id="saved">Untitled widget</strong></p></div>
+  <div class="step"><h3>3. Publish</h3>
+    <button id="publish">Publish</button>
+    <div id="code" hidden><p>Paste this code into your website:</p><pre id="snippet"></pre></div></div>
+</div>
+<script>
+  // The editor paints a few seconds after the host page, like Elfsight's.
+  setTimeout(() => { loading.hidden = true; app.hidden = false; }, 2500);
+  const PLACES = ['Livewell Dental, 900 Pine St, Denver, CO, USA', 'Livewell Dental, 12 Main St, Denver, CO, USA',
+    'Livewell Dental Lab, 12 Main St Suite B, Denver, CO, USA'];
+  const q = document.getElementById('q'), dd = document.getElementById('dd'), live = document.getElementById('live');
+  let timer;
+  q.oninput = () => { clearTimeout(timer); timer = setTimeout(render, 400); };
+  function render() {
+    dd.innerHTML = ''; live.textContent = '';
+    const v = q.value.trim(); if (v.length < 3) return;
+    const words = v.toLowerCase().split(/[\s,]+/).filter(Boolean);
+    const hits = PLACES.filter(p => words.some(w => p.toLowerCase().includes(w)));
+    const echo = document.createElement('div');
+    echo.className = 'row echo'; echo.textContent = 'Search for "' + v + '"';
+    echo.onclick = () => { report('flow', 'echo'); q.value = ''; dd.innerHTML = ''; };
+    dd.append(echo);
+    for (const p of hits) {
+      const r = document.createElement('div');
+      r.className = 'row'; r.textContent = p;
+      r.onclick = () => { report('flow', 'connect', p); src.textContent = p; dd.innerHTML = ''; q.value = ''; };
+      dd.append(r);
+    }
+    live.textContent = hits.length + ' results: ' + hits.join('; ');
+  }
+  const name = document.getElementById('name'), saved = document.getElementById('saved');
+  name.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { saved.textContent = name.value; report('flow', 'name', name.value); name.blur(); }
+  });
+  name.addEventListener('blur', () => { name.value = saved.textContent; });
+  document.getElementById('publish').onclick = () => {
+    report('flow', 'publish', { src: src.textContent, name: saved.textContent });
+    snippet.textContent = '<div class="elfsight-app-0b7c1f9e-5d2a-4c41-9b0e-3f6a8e2d7c10" data-elfsight-app-lazy></div>';
+    code.hidden = false;
+  };
+</script>
