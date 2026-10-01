@@ -103,7 +103,7 @@ journey chapter, so the page still has eight chapters.
 
 | Shown | Value | Source | Status |
 | :--- | :--- | :--- | :--- |
-| Google rating | 4.7 from 1,100+ reviews | Elfsight widget on staging and trustindex.io mirror of the Google listing: 4.7, 1,104 reviews | Verified. It is the **Aesthetic Dental Center of Hackensack** listing, not Dr. Meskin's own; the old site already credits it the same way |
+| Google rating | **5.0** (since BugHerd #24, 2026-10-01; was 4.7) | The office's own listing, Google "Hackensack Center for Dental Implants", kgmid `/g/11nvclyc8j`: 5.0 from 15 reviews | Verified 2026-10-01. The 4.7 / 1,104 was the Aesthetic Dental Center of Hackensack listing, which the reviewer called the wrong account |
 | DDS | NYU College of Dentistry, 2019 | old site `/dr-alan-meskin`, ClearChoice bio | Verified |
 | Prosthodontics | NYU certificate, three-year residency, 2022 | same | Verified |
 | Memberships | ACP, AAID, ADA | old site `/dr-alan-meskin` (logos) | Practice's own claim; not found in the societies' directories |
@@ -177,8 +177,8 @@ moves, and the form is never pinned or faded.
    `/dr-alan-meskin`, `/about`): only the home page is built.
 7. **The two team numbers**: "50,000+ implants placed by our surgeons" and "30+ years of combined
    implant experience" (sources in the table above). Swap or drop them if the client prefers.
-8. **The 4.7 rating is the Aesthetic Dental Center of Hackensack listing**, shown beside Dr. Meskin's
-   name. The old site does the same; the client should be happy with it.
+8. ~~The 4.7 rating~~ settled by BugHerd #10 and #24: the office's own listing, 5.0. The reviews
+   widget still shows the Aesthetic Dental Center listing until it is re-pointed (`bugherd/2026-10-01/change-list.md`).
 9. **The doctor in the films is not Dr. Meskin.** The chair-side shot (blue scrubs) and the #ADCsmiles
    wall shot show other dentists of the center, under Dr. Meskin's card. If that reads wrong, the
    loop can be re-cut without them, or with footage of Dr. Meskin if the practice has any.

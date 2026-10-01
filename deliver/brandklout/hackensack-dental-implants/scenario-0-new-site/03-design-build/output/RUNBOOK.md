@@ -2,6 +2,40 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-01 (night) · BugHerd round: 23 tasks, 22 fixed on staging
+
+Asked for: "resolve last bugherd comments". Project 544349, tasks #1 to #25 (no #6, #7).
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- Read first: [`bugherd/2026-10-01/change-list.md`](./bugherd/2026-10-01/change-list.md): every
+  task, its scope, the fix and a draft reply. Pulled by id with attachments by the new
+  `code/bugherd-pull.mjs` (read-only).
+- Fixed: cursor follower and scan line removed; Drive logo in the nav; top bar "Bergen County";
+  All-on-4 on its own line; two subtitles and two footer lines removed; portrait fills its arch;
+  surgeons link to their profiles; closing scene unpinned; story scene twice as fast; doctor card at
+  the foot of the film; "Meskin" fits a phone; line masks no longer clip capitals; full-arch photo
+  framed lower; rating 5.0 from the office's own Google listing.
+- Pushed (backup `backups/pre-bugherd-stg/`, seq 11). `check-staging` 14/14 (now three pins, no
+  cursor), `click-film` 16/16 (doctor card checked at the film's foot on desktop), probe 27/27,
+  `fluid-root` pass, `image-reuse` 0 problems.
+
+### Next
+
+1. **#10 waits on Alejandro:** re-point Elfsight `cf96ca10` to "Hackensack Center for Dental
+   Implants" (it is also on the live Webflow site) or make a new widget; then `review-widgets.json` on `main`.
+2. Post the draft replies and move the tasks to done once Alejandro says so.
+
+### Gotchas
+
+- **The reviewer's "wrong account" link is a `share.google` short link.** `curl -L` resolves it to a
+  Google search carrying the listing's `kgmid`; the rating renders only in a browser (Chrome extension).
+- Split headlines in Newsreader need room above the line as well: a mask padded only below clips
+  the tops of F and C.
+- `look/390` was held open by another process and `rm -rf` failed; capture at 392 instead.
+- A Python edit script that dies on its first assertion does not stop a commit chained after its
+  heredoc on the next line: the first commit of this round went in without the docs.
+
 ## 2026-10-01 (later) · film hero, doctor moved up with credentials and numbers, on staging
 
 Asked for (Alejandro, after a call with Jess): move the doctor up so he is seen sooner; add his

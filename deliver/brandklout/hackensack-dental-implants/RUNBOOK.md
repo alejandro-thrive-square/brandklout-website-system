@@ -46,6 +46,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
+1. BugHerd #10 (reviews widget on the wrong Google listing) and posting the replies wait on
+   Alejandro: `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
 1. Get rulings on the ten items in `canary-review.md` (7 to 10 are new: team numbers, rating
    listing, other dentists in the film, captions), and decide where the menu, financing, hours
    and office photographs go (the concept has no place for them); then the inner pages.
@@ -88,6 +90,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | `c9c283aa` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd project 544349 created via API on the staging URL; five team members added by default; columns todo/doing/done; no tasks yet | see the commit after `adcfdfd0` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | `a12f2124` |
+| 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd 544349 round: 23 tasks, 22 fixed on staging (cursor, scan line, logo, Bergen County, rating 5.0 from the office listing, clipped capitals, pins, footer); #10 reviews widget account waits on Alejandro; replies drafted, not posted | `f1d061a4` |
 
 ## Version Control
 
