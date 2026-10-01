@@ -4,7 +4,7 @@ Two client asks: the white panel around the Google reviews widget was "way too s
 widget's title sat on the panel's top edge and its dots on the bottom edge), and the site had no
 favicon (blank tab icon, `/favicon.ico` 404). Both live on STAGING and PRODUCTION.
 
-## Done (`<sha>`, this worktree only — not pushed, not merged)
+## Done (`b8a9a12d`, this worktree only — not pushed, not merged)
 
 - **Padding.** `.words_reviews` (`/`) and `.wall_reviews` (`/results`): `padding-block:
   var(--space-large)` (48px at 1440), `var(--space-medium)` at ≤767px (~30px). Source
