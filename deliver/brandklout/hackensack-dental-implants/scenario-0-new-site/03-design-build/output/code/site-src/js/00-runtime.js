@@ -2,12 +2,13 @@
  *
  * The composition at rest is the concept's. The motion layer is editorial: a curtain on arrival, a
  * cursor that names what it is over, buttons that roll their label, headlines that rise word by
- * word, and five scenes where scroll drives the content (the hero opening up, the patient's
- * sentence, the four steps, the before and after, the closing words). Between them: implant
- * drawings that draw themselves, a CBCT scan line that sweeps its photograph, a circle that opens
- * onto the full-arch patient, a scramble on the proof bar, and an accordion that eases.
+ * word, a hero film the scroll opens to the full window, and scenes where scroll drives the content
+ * (the patient's sentence, the four steps, the before and after, the closing words). Between them:
+ * the practice's numbers counting up, implant drawings that draw themselves, a CBCT scan line that
+ * sweeps its photograph, a circle that opens onto the full-arch patient, and an accordion that eases.
  *
- * Two layers. The interface layer (anchors, FAQ, call bar, staging noindex) runs on every visit.
+ * Two layers. The interface layer (anchors, FAQ, call bar, the hero film and its light box, staging
+ * noindex) runs on every visit.
  * The motion layer runs only when GSAP loaded and the visitor has not asked for reduced motion.
  * Every reveal is a ScrollTrigger; no visibility observers. Everything the motion layer adds to
  * the page (curtain, cursor, drawings, scan line) is created here, so the imported page never
@@ -20,7 +21,7 @@
   'use strict';
 
   var root = document.documentElement;
-  var WZ = (window.WZ = { ok: false, smoother: null, active: [], build: 'hackensack-home-concept-04-editorial' });
+  var WZ = (window.WZ = { ok: false, smoother: null, active: [], build: 'hackensack-home-concept-04-film' });
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   var mark = function (name) { WZ.active.push(name); };
@@ -107,6 +108,97 @@
     check();
   }
 
+  /* ---- the hero film: a muted loop of the practice's own patient films ----
+     Its src lives in data-src (data-src-mobile under 768px) because the importer keeps a tag's
+     attributes but not <source> children. A visitor who asked for reduced motion keeps the poster.
+     It plays only while on screen, and a control stops it (WCAG 2.2.2). */
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var heroVideo = $('.js-hero-video');
+  var heroFrame = $('.js-hero-frame');
+  if (heroVideo && heroFrame && !REDUCED) {
+    var vsrc = (window.matchMedia('(max-width: 767px)').matches && heroVideo.getAttribute('data-src-mobile')) || heroVideo.getAttribute('data-src');
+    heroVideo.muted = true;
+    heroVideo.loop = true;
+    heroVideo.playsInline = true;
+    heroVideo.setAttribute('muted', '');
+    heroVideo.setAttribute('playsinline', '');
+    heroVideo.preload = 'auto';
+    heroVideo.src = vsrc;
+    var held = false; /* the visitor paused it */
+    var toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'film-toggle';
+    heroFrame.appendChild(toggle);
+    var label = function () {
+      var paused = heroVideo.paused;
+      toggle.classList.toggle('is-paused', paused);
+      toggle.setAttribute('aria-label', paused ? 'Play the background video' : 'Pause the background video');
+    };
+    var play = function () { var pr = heroVideo.play(); if (pr && pr.catch) pr.catch(function () { label(); }); };
+    toggle.addEventListener('click', function () {
+      if (heroVideo.paused) { held = false; play(); } else { held = true; heroVideo.pause(); }
+    });
+    heroVideo.addEventListener('play', label);
+    heroVideo.addEventListener('pause', label);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { if (!held) play(); } else heroVideo.pause(); });
+      }).observe(heroFrame);
+    } else play();
+    label();
+    WZ.film = heroVideo;
+    mark('film');
+  }
+
+  /* ---- the full patient film, with sound, in a light box ----
+     The play button is a plain link to the file, so without a script it still opens the film. */
+  var lastFocus = null;
+  var closeFilm = function () {
+    var box = $('.film');
+    if (!box) return;
+    var v = $('video', box);
+    if (v) v.pause();
+    box.remove();
+    document.removeEventListener('keydown', filmKeys);
+    if (WZ.smoother) WZ.smoother.paused(false);
+    if (heroVideo && heroVideo.src && !held) heroVideo.play().catch(function () {});
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  };
+  var filmKeys = function (e) {
+    if (e.key === 'Escape') { closeFilm(); return; }
+    if (e.key !== 'Tab') return;
+    /* keep focus inside the light box: the close button and the player */
+    var box = $('.film');
+    var f = box ? $$('button, video', box) : [];
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+  $$('.js-film').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      lastFocus = link;
+      if (heroVideo) heroVideo.pause();
+      if (WZ.smoother) WZ.smoother.paused(true);
+      var box = document.createElement('div');
+      box.className = 'film';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.setAttribute('aria-label', "Isaac's story, a patient film");
+      box.innerHTML = '<div class="film__box"><p class="film__title">Isaac\u2019s story</p><button type="button" class="film__close">Close</button><video controls playsinline preload="auto"></video></div>';
+      var v = $('video', box);
+      v.src = link.getAttribute('href');
+      document.body.appendChild(box);
+      box.addEventListener('click', function (ev) { if (ev.target === box) closeFilm(); });
+      $('.film__close', box).addEventListener('click', closeFilm);
+      document.addEventListener('keydown', filmKeys);
+      $('.film__close', box).focus();
+      var pr = v.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    });
+  });
+
   if (!MOTION) { WZ.ok = true; mark('interface'); return; }
 
   /* ================= motion ================= */
@@ -166,50 +258,52 @@
   });
   mark('split');
 
-  /* ---- hero: the photograph opens; scrolling away, it loses its corner and the copy drifts ---- */
+  /* ---- hero: the film rises into its frame; scrolling away, the frame opens to the full window ---- */
   var hero = $('.hero');
   if (hero) {
     var frame = $('.js-hero-frame', hero);
-    var heroImg = $('.js-hero-img', hero);
+    var film = $('.hero-film', hero);
+    var heroVid = $('.js-hero-video', hero);
     var d0 = intro.duration() * 0.6;
-    gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power4.inOut', delay: d0, clearProps: 'clipPath' });
-    gsap.fromTo(heroImg, { scale: 1.3 }, { scale: 1.06, duration: 2.2, ease: EASE, delay: d0 });
+    /* how far the page margin is from the window edge: the film starts inside it */
+    var side = function () { return Math.max(0, $('.hero-grid', hero).getBoundingClientRect().left); };
+    var inset = function (top, x, r) { return 'inset(' + top + '% ' + x + 'px 0% ' + x + 'px round ' + r + 'px)'; };
+    var radius = function () { return parseFloat(getComputedStyle(frame).borderTopLeftRadius) || 28; };
     gsap.from($$('.js-rise', hero), { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: EASE, delay: d0 + 0.35 });
-    gsap.from($('.quote-card', hero), { x: 40, autoAlpha: 0, duration: 1, ease: EASE, delay: d0 + 1 });
-    /* The masthead is taller than a laptop window, so it is not pinned: as it scrolls away the
-       photograph loses its rounded corner and moves closer, and the copy drifts at two speeds.
-       Nothing fades: text stays at full contrast throughout. */
-    mm.add('(min-width: 992px)', function () {
-      gsap.timeline({ scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.6, invalidateOnRefresh: true } })
-        .fromTo(frame, { borderBottomLeftRadius: '6.25rem' }, { borderBottomLeftRadius: '0rem', ease: 'none' }, 0)
-        .to(heroImg, { scale: 1.2, yPercent: -4, ease: 'none', immediateRender: false }, 0)
-        .to($('.quote-card', hero), { y: -80, ease: 'none' }, 0)
-        .to($('h1', hero), { y: -60, ease: 'none' }, 0)
-        .to($('.hero-copy', hero), { y: -110, ease: 'none' }, 0);
+    gsap.from([$('.hero-doctor', hero), $('.hero-play', hero)], { y: 40, autoAlpha: 0, duration: 1, stagger: 0.12, ease: EASE, delay: d0 + 0.9 });
+    gsap.fromTo(heroVid, { scale: 1.25 }, { scale: 1.04, duration: 2.4, ease: EASE, delay: d0 });
+    mm.add({ wide: '(min-width: 992px)', narrow: '(max-width: 991px)' }, function (ctx) {
+      if (ctx.conditions.narrow) {
+        gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0% round 20px)' }, { clipPath: 'inset(0% 0% 0% 0% round 20px)', duration: 1.4, ease: 'power4.inOut', delay: d0, clearProps: 'clipPath' });
+        return;
+      }
+      /* the margins become a clip-path (25-interaction.css drops them under .motion), so the frame
+         can open to the window without moving the cards that sit on the page grid */
+      var r = radius();
+      frame.style.borderRadius = '0';
+      gsap.fromTo(frame, { clipPath: function () { return inset(100, side(), r); } }, { clipPath: function () { return inset(0, side(), r); }, duration: 1.5, ease: 'power4.inOut', delay: d0 });
+      gsap.timeline({ scrollTrigger: { id: 'hero-film', trigger: hero, start: 'top top', end: 'bottom 55%', scrub: 0.6, invalidateOnRefresh: true } })
+        .fromTo(frame, { clipPath: function () { return inset(0, side(), r); } }, { clipPath: inset(0, 0, 0), ease: 'none', immediateRender: false }, 0)
+        .to($('h1', hero), { y: -40, ease: 'none' }, 0)
+        .to($('.hero-copy', hero), { y: -70, ease: 'none' }, 0);
+      return function () { frame.style.borderRadius = ''; gsap.set(frame, { clearProps: 'clipPath' }); };
     });
     mark('hero');
   }
 
-  /* ---- proof bar: one line that keeps moving, and moves faster while the page does ---- */
-  var ticker = $('.proofbar');
-  var track = ticker && $('.proofgrid', ticker);
-  if (track) {
-    $$('.proof', track).forEach(function (p) { var c = p.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-    ticker.classList.add('is-ticker');
-    var loop = gsap.to(track, { xPercent: -50, ease: 'none', duration: 32, repeat: -1 });
-    var calm = gsap.delayedCall(0.25, function () { gsap.to(loop, { timeScale: 1, duration: 0.8, overwrite: true }); });
-    ScrollTrigger.create({
-      trigger: ticker, start: 'top bottom', end: 'bottom top',
-      onUpdate: function (self) {
-        gsap.to(loop, { timeScale: gsap.utils.clamp(-5, 5, 1 + self.getVelocity() / 300), duration: 0.25, overwrite: true });
-        calm.restart(true);
-      }
-    });
-    /* moving content can be stopped (WCAG 2.2.2): it holds while the pointer or focus is on it */
-    ticker.addEventListener('mouseenter', function () { loop.pause(); });
-    ticker.addEventListener('mouseleave', function () { loop.resume(); });
-    mark('ticker');
-  }
+  /* ---- the practice in numbers: each figure counts up once, the first time it is seen ---- */
+  $$('.js-stats .stat strong').forEach(function (n, i) {
+    var end = parseFloat(n.getAttribute('data-count'));
+    if (isNaN(end)) return;
+    var dec = parseInt(n.getAttribute('data-decimals') || '0', 10);
+    var suffix = n.getAttribute('data-suffix') || '';
+    var fmt = function (v) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suffix; };
+    var o = { v: 0 };
+    n.textContent = fmt(0);
+    gsap.to(o, { v: end, duration: 1.8, delay: i * 0.12, ease: 'power2.out', onUpdate: function () { n.textContent = fmt(dec ? o.v : Math.round(o.v)); }, onComplete: function () { n.textContent = fmt(end); }, scrollTrigger: { trigger: n, start: 'top 90%', once: true } });
+    gsap.from(n.parentNode, { y: 30, autoAlpha: 0, duration: 0.9, delay: i * 0.12, ease: EASE, scrollTrigger: { trigger: n, start: 'top 90%', once: true } });
+  });
+  mark('stats');
 
   /* ---- reveals: 34px up and in, as the concept has them ---- */
   $$('.js-rise').forEach(function (n) {
@@ -217,7 +311,7 @@
     gsap.from(n, { y: 34, autoAlpha: 0, duration: 0.85, ease: EASE, scrollTrigger: { trigger: n, start: 'top 90%', once: true } });
   });
   $$('.js-stagger').forEach(function (box) {
-    if (box.classList.contains('solutions') || box.classList.contains('proofgrid')) return; /* scrubbed below; the ticker */
+    if (box.classList.contains('solutions')) return; /* scrubbed below */
     gsap.from(box.children, { y: 24, autoAlpha: 0, duration: 0.75, stagger: 0.09, ease: EASE, scrollTrigger: { trigger: box, start: 'top 88%', once: true } });
   });
   $$('.js-wipe').forEach(function (n) {
@@ -398,15 +492,15 @@
     mark('scrubbed');
   });
 
-  /* ---- team: the doctor's surname, very large, drifts behind the portrait ---- */
-  var teamGrid = $('.team-grid');
+  /* ---- doctor: his surname, very large, drifts behind the portrait ---- */
+  var teamGrid = $('.doc-grid');
   if (teamGrid) {
     var tm = el('div', 'team-mark');
     tm.setAttribute('aria-hidden', 'true');
     tm.textContent = 'Meskin';
     teamGrid.insertBefore(tm, teamGrid.firstChild);
     gsap.fromTo(tm, { xPercent: 6 }, { xPercent: -10, ease: 'none', scrollTrigger: { trigger: teamGrid, start: 'top bottom', end: 'bottom top', scrub: true } });
-    mark('team');
+    mark('doctor');
   }
 
   /* ---- footer: the practice name rises line by line ---- */
@@ -443,7 +537,8 @@
       var name = '';
       var mode = '';
       if (t.closest('.js-case')) { mode = 'is-media'; name = 'Drag'; }
-      else if (t.closest('.photo, .doctor-card, .story-photo')) { mode = 'is-media'; name = 'View'; }
+      else if (t.closest('.hero-play')) { mode = 'is-media'; name = 'Play'; }
+      else if (t.closest('.photo, .doc-portrait, .story-photo')) { mode = 'is-media'; name = 'View'; }
       else if (t.closest('a, button, summary')) mode = 'is-link';
       cur.classList.toggle('is-media', mode === 'is-media');
       cur.classList.toggle('is-link', mode === 'is-link');

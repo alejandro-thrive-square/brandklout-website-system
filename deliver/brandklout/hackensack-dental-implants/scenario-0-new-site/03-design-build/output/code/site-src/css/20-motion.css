@@ -7,8 +7,8 @@
    3. Reduced motion is a branch: no .motion, no pins, nothing hidden, and the hero never waits. */
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero .js-rise, .hero .js-split, .hero .quote-card { animation: hero-wait 1.4s step-end both; }
-  .is-armed .hero .js-rise, .is-armed .hero .js-split, .is-armed .hero .quote-card { animation: none; }
+  .hero .js-rise, .hero .js-split, .hero-doctor, .hero-play { animation: hero-wait 1.4s step-end both; }
+  .is-armed .hero .js-rise, .is-armed .hero .js-split, .is-armed .hero-doctor, .is-armed .hero-play { animation: none; }
 }
 
 /* SplitText line masks: room for descenders under a 0.98 line-height */
@@ -17,7 +17,7 @@
 /* the patient's sentence is written by the scroll: unlit words are already readable, then fill */
 .motion .js-words .wd { color: #77736b; }
 
-.motion .photo img, .motion .doctor-card img { will-change: transform; }
+.motion .photo img, .motion .doc-portrait img { will-change: transform; }
 
 /* scroll drives the before and after: each case starts on the "before" */
 .motion .result__after { clip-path: inset(0 100% 0 0); }

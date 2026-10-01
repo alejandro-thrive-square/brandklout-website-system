@@ -25,6 +25,23 @@ As titled on their pages of the current site.
 | Dr. Won-Sang Lee, DDS | `/dr-won-sang-lee-dds` |
 | Dr. Dmitriy Klass, DDS, MSD | `/dr-dmitriy-klass-dds-msd` |
 
+## Reputation and credentials
+
+Researched 2026-10-01 for the home page's doctor section; full table with sources in
+[`../scenario-0-new-site/03-design-build/output/canary-review.md`](../scenario-0-new-site/03-design-build/output/canary-review.md)
+→ "Film hero and the doctor moved up".
+
+| Fact | Value | Status |
+| :--- | :--- | :--- |
+| Google rating | 4.7 from 1,104 reviews (Aesthetic Dental Center of Hackensack listing) | Verified 2026-10-01 |
+| Practice (host) founded | 2008 (business NPI 1154574804) | Verified |
+| Dr. Meskin | DDS NYU 2019; Certificate in Prosthodontics NYU 2022; NPI 1629605597; NJ licence 22DI02791000; English, Spanish, Russian | Verified |
+| Dr. Meskin memberships | ACP, AAID, ADA | Practice's own claim |
+| Dr. Lee | DDS Columbia; oral surgery NewYork-Presbyterian/Columbia; NPI 2010; "15+ years, 30,000+ implants" | Training verified; numbers the practice's own |
+| Dr. Srour | DDS NYU; oral surgery NYU/Bellevue; NPI 2015; "10+ years, 20,000+ implants, 5,000+ full arch" | Training verified; numbers the practice's own |
+| Dr. Klass | DDS NYU; MSD and periodontics Boston University; NPI 2019 | Verified |
+| Shown on the home page | 50,000+ implants by our surgeons; 30+ years combined | **To confirm with the client** |
+
 ## Version Control
 
 Follows [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).

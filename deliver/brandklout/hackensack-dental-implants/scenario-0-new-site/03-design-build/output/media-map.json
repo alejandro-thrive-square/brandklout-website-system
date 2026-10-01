@@ -1,6 +1,6 @@
 {
   "base": "https://hackensack-dental-implants-staging.up.railway.app",
-  "uploadedAt": "2026-09-30T21:42:29.303Z",
+  "uploadedAt": "2026-10-01T20:19:24.962Z",
   "map": {
     "fonts/dm-sans-var.woff2": {
       "id": "SItPFwPH7DgZrhDlAbpRQ",
@@ -98,6 +98,18 @@
       "reused": true,
       "uploadedAs": "case-3-before.webp"
     },
+    "media/img/doctor-face.webp": {
+      "id": "YztPt04ADTtPebXEa0e1y",
+      "url": "/uploads/gUkF9gj3Vbi2SVFs6nR61-doctor-face.webp",
+      "reused": true,
+      "uploadedAs": "doctor-face.webp"
+    },
+    "doctor-face.webp": {
+      "id": "YztPt04ADTtPebXEa0e1y",
+      "url": "/uploads/gUkF9gj3Vbi2SVFs6nR61-doctor-face.webp",
+      "reused": true,
+      "uploadedAs": "doctor-face.webp"
+    },
     "media/img/doctor.png": {
       "id": "RFXopFvrxAHZzexNX9xx1",
       "url": "/uploads/a84XaBugXj4q-VPJooB3p-doctor.png",
@@ -133,6 +145,18 @@
       "url": "/uploads/KzIHN2Z8bxXdp6sYQ-J9Z-final.webp",
       "reused": true,
       "uploadedAs": "final.webp"
+    },
+    "media/img/hero-poster.webp": {
+      "id": "MO6C9L7Nzh6I4V_H0uKdC",
+      "url": "/uploads/XPXXxKfrCVpgljvwJDwwF-hero-poster.webp",
+      "reused": true,
+      "uploadedAs": "hero-poster.webp"
+    },
+    "hero-poster.webp": {
+      "id": "MO6C9L7Nzh6I4V_H0uKdC",
+      "url": "/uploads/XPXXxKfrCVpgljvwJDwwF-hero-poster.webp",
+      "reused": true,
+      "uploadedAs": "hero-poster.webp"
     },
     "media/img/hero.webp": {
       "id": "g5zkCEHod9-EVz_zaVBGC",
@@ -193,6 +217,42 @@
       "url": "/uploads/R9j6EhCOzq2uj8zR39Nri-tech.webp",
       "reused": true,
       "uploadedAs": "tech.webp"
+    },
+    "media/video/hero-loop-m.mp4": {
+      "id": "GVRa0eO2IhlpZBNnSZSOW",
+      "url": "/uploads/eMu-0vNR9p7g3MybO6hym-hero-loop-m.mp4",
+      "reused": true,
+      "uploadedAs": "hero-loop-m.mp4"
+    },
+    "hero-loop-m.mp4": {
+      "id": "GVRa0eO2IhlpZBNnSZSOW",
+      "url": "/uploads/eMu-0vNR9p7g3MybO6hym-hero-loop-m.mp4",
+      "reused": true,
+      "uploadedAs": "hero-loop-m.mp4"
+    },
+    "media/video/hero-loop.mp4": {
+      "id": "fYbcFtgPRT260yORK0zIW",
+      "url": "/uploads/LT9lGW4kKuDiqQHd2wfSt-hero-loop.mp4",
+      "reused": true,
+      "uploadedAs": "hero-loop.mp4"
+    },
+    "hero-loop.mp4": {
+      "id": "fYbcFtgPRT260yORK0zIW",
+      "url": "/uploads/LT9lGW4kKuDiqQHd2wfSt-hero-loop.mp4",
+      "reused": true,
+      "uploadedAs": "hero-loop.mp4"
+    },
+    "media/video/isaac-story.mp4": {
+      "id": "IThHKlF5KY4FMtN3zuA3p",
+      "url": "/uploads/UW36TMHi1G8v1BkEs8Kvb-isaac-story.mp4",
+      "reused": true,
+      "uploadedAs": "isaac-story.mp4"
+    },
+    "isaac-story.mp4": {
+      "id": "IThHKlF5KY4FMtN3zuA3p",
+      "url": "/uploads/UW36TMHi1G8v1BkEs8Kvb-isaac-story.mp4",
+      "reused": true,
+      "uploadedAs": "isaac-story.mp4"
     }
   }
 }

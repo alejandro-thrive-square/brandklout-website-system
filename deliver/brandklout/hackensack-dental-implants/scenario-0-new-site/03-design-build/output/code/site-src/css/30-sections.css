@@ -4,30 +4,61 @@
    gallery, a giant closing statement. The consultation form and the FAQ keep the plain layout: that
    is where people act. Most layouts sit on a 12-column grid; under 768px everything is one column. */
 
-/* ---------- hero: a type-led masthead ---------- */
-.hero { background: var(--g-hero); }
-.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; padding: 2.25rem 0 4.5rem; }
+/* ---------- hero: the headline, then a film of the practice's own patients (2026-10-01) ----------
+   The film runs inside the page margins at rest; with motion on (desktop) the scroll opens it to the
+   full window (25-interaction.css). The doctor's card overlaps its lower left corner, so the doctor
+   and the reviews are on screen in the first view. */
+.hero { background: var(--g-hero); padding-bottom: 5rem; }
+.hero-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: end; padding: 2.25rem 0 2.75rem; }
 .hero-meta { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border-bottom: 1px solid var(--line-strong); padding-bottom: 0.875rem; }
 .hero-where { font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-/* the second and third lines step in under the first */
-.hero h1 { grid-column: 1 / -1; font-size: calc(6.9rem * var(--s-h)); margin: 2.25rem 0 2.5rem; padding-left: 15rem; text-indent: -15rem; }
-.hero-visual { grid-column: 1 / 9; grid-row: 3; margin: 0; border-radius: 0 0 0 6.25rem; height: 30rem; }
-.hero-visual img { position: absolute; inset: 0; object-position: 50% 40%; }
-/* set at the top of the photo row, so the button is above the fold on a 900px-tall window */
-.hero-copy { grid-column: 9 / 13; grid-row: 3; align-self: start; display: flex; flex-direction: column; }
+.hero h1 { grid-column: 1 / 9; font-size: calc(6.2rem * var(--s-h)); margin: 2.25rem 0 0; }
+.hero-copy { grid-column: 9 / 13; padding-bottom: 0.375rem; }
 .hero-copy > p { color: var(--muted); font-size: var(--t-lead); }
 .hero-actions { display: flex; gap: 1.125rem; align-items: center; flex-wrap: wrap; margin-top: 1.5625rem; }
-.warm-note { display: flex; gap: 0.625rem; flex-wrap: wrap; margin-top: 2rem; }
-.warm-note span { background: #fff; border: 1px solid #ded7cb; border-radius: 999px; padding: 0.5rem 0.75rem; font-size: var(--t-xs); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.3; }
-.quote-card { position: absolute; right: 1.5625rem; bottom: 1.5625rem; background: rgba(251, 250, 247, 0.94); padding: 1.125rem 1.3125rem; max-width: 20.625rem; font-family: var(--display); font-size: calc(1.3125rem * var(--s-md)); line-height: 1.2; z-index: 2; }
+.hero-film { position: relative; margin: 0 var(--bleed); }
+.hero-frame { position: relative; height: 38rem; border-radius: 1.75rem; overflow: hidden; background: #d9d2c4; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
+.hero-play { position: absolute; right: 5.5rem; top: 2rem; z-index: 2; display: flex; align-items: center; gap: 1rem; padding: 0.625rem 1.5rem 0.625rem 0.625rem; border-radius: 999px; background: rgba(251, 250, 247, 0.95); color: var(--ink); text-decoration: none; }
+.hero-play__ring { flex: none; display: flex; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--ink); transition: background-color 0.3s ease; }
+.hero-play__icon { width: 0; height: 0; margin-left: 0.25rem; border-style: solid; border-width: 0.5rem 0 0.5rem 0.8125rem; border-color: transparent transparent transparent #fff; }
+.hero-play:hover .hero-play__ring, .hero-play:focus-visible .hero-play__ring { background: var(--accent-text); }
+.hero-play__text b { display: block; font-family: var(--display); font-weight: 400; font-size: calc(1.375rem * var(--s-md)); line-height: 1.1; }
+.hero-play__text span { display: block; margin-top: 0.25rem; font-size: var(--t-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hero-doctor { position: absolute; left: 2rem; top: 2rem; z-index: 2; display: grid; grid-template-columns: 4rem minmax(0, 1fr); column-gap: 1rem; row-gap: 0.75rem; align-items: center; width: 21rem; padding: 1rem 1.5rem 1rem 1rem; border-radius: 1.25rem; background: rgba(251, 250, 247, 0.96); }
+.hero-doctor img { width: 4rem; height: 4rem; border-radius: 50%; background: #e7e8df; }
+.hero-doctor__who b { display: block; font-family: var(--display); font-weight: 400; font-size: calc(1.375rem * var(--s-md)); line-height: 1.1; }
+.hero-doctor__who span { display: block; margin-top: 0.25rem; font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); }
+.hero-doctor__rating { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--line); font-size: var(--t-xs); color: var(--muted); }
+.hero-doctor__rating strong { font-family: var(--display); font-weight: 400; font-size: calc(1.5rem * var(--s-md)); line-height: 1; color: var(--ink); }
+.stars { color: var(--accent-num); letter-spacing: 0.08em; }
 
-/* ---------- proof bar (a moving line with motion on; see 25-interaction.css) ---------- */
-.proofbar { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--panel); }
-.proofgrid { display: grid; grid-template-columns: repeat(4, 1fr); }
-.proof { padding: 1.5625rem 1.625rem; border-right: 1px solid var(--line); }
-.proof:last-child { border-right: 0; }
-.proof strong { display: block; font-family: var(--display); font-size: calc(1.625rem * var(--s-md)); font-weight: 400; line-height: 1; }
-.proof span { font-size: var(--t-xs); text-transform: uppercase; letter-spacing: 0.11em; color: var(--muted); display: block; margin-top: 0.4375rem; }
+/* ---------- doctor: an arched portrait, his training, then the practice in numbers ---------- */
+.doctor { background: var(--g-white); overflow: hidden; }
+.doc-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: center; }
+.doc-portrait { grid-column: 1 / 6; position: relative; z-index: 1; height: 38rem; overflow: hidden; border-radius: 15rem 15rem 0 0; background: #e7e8df; }
+.doc-portrait img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
+.doc-portrait__tag { position: absolute; left: 1.125rem; bottom: 1.125rem; z-index: 2; background: var(--ink); color: #fff; padding: 0.5625rem 0.75rem; font-size: var(--t-xs); letter-spacing: 0.13em; text-transform: uppercase; line-height: 1.3; }
+.doc-copy { grid-column: 7 / 13; position: relative; z-index: 1; }
+.doctor h2 { font-size: calc(4rem * var(--s-h)); margin: 0 0 1.375rem; }
+.doctor p { color: var(--muted); }
+.creds { margin: 2rem 0 1.75rem; border-top: 1px solid var(--line-strong); }
+.creds > div { display: grid; grid-template-columns: 12rem minmax(0, 1fr); column-gap: 1.5rem; padding: 0.875rem 0; border-bottom: 1px solid var(--line); }
+.creds dt { padding-top: 0.125rem; font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text); }
+.creds dd { margin: 0; font-size: var(--t-sm); }
+/* large gold numerals, after the reference the client liked (Dr. Nahlah's "The Difference") */
+.stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 0.9fr); column-gap: 1.5rem; margin-top: 6rem; padding-top: 3rem; border-top: 1px solid var(--line-strong); }
+.stat strong { display: block; font-family: var(--display); font-weight: 400; font-size: calc(5rem * var(--s-h)); line-height: 0.95; letter-spacing: -0.02em; color: var(--accent-num); font-variant-numeric: tabular-nums; }
+.stat span { display: block; max-width: 15rem; margin-top: 0.875rem; font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.specialists { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: start; margin-top: 4.5rem; }
+.specialists__lead { grid-column: 1 / 5; font-family: var(--display); font-size: calc(1.5rem * var(--s-md)); line-height: 1.25; }
+.doctor .specialists__lead { color: var(--ink); }
+.specialists .specialist-grid { grid-column: 6 / 13; margin: 0; }
+.specialist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.specialist-grid > div { border-top: 1px solid var(--line); padding-top: 0.6875rem; }
+.specialist-grid b, .specialist-grid span { display: block; }
+.specialist-grid b { font-family: var(--display); font-weight: 400; font-size: calc(1.25rem * var(--s-md)); line-height: 1.2; }
+.specialist-grid span { margin-top: 0.25rem; font-size: var(--t-xs); color: var(--muted); }
 
 /* ---------- intro: the photograph bleeds off the left edge, the quote breaks across it ---------- */
 .intro { background: var(--g-intro); }
@@ -112,22 +143,6 @@ blockquote { font-family: var(--display); font-size: calc(2.125rem * var(--s-md)
 .reviews-embed { display: block; width: 100%; min-height: 26rem; }
 .reviews-embed > * { width: 100%; }
 
-/* ---------- team: portrait dropped low, copy set high (the doctor's name runs behind, from the runtime) ---------- */
-.team { background: var(--g-white); }
-.team-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: start; }
-.doctor-card { grid-column: 1 / 6; margin-top: 7rem; background: #e7e8df; border-radius: 0 5rem 0 0; position: relative; overflow: hidden; height: 36rem; z-index: 1; }
-.doctor-card img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; }
-.team-grid > div:last-child { grid-column: 7 / 13; position: relative; z-index: 1; }
-.team h2 { font-size: calc(4.32rem * var(--s-h)); margin: 0 0 1.375rem; }
-.team p { color: var(--muted); }
-.doctor-name { font-family: var(--display); font-size: calc(1.875rem * var(--s-md)); margin-top: 1.75rem; }
-.role { font-size: var(--t-xs); color: var(--accent-text); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
-.specialist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1.75rem 0; }
-.specialist-grid > div { border-top: 1px solid var(--line); padding-top: 0.6875rem; }
-.specialist-grid b, .specialist-grid span { display: block; }
-.specialist-grid b { font-size: var(--t-xs); }
-.specialist-grid span { font-size: var(--t-xs); color: var(--muted); }
-
 /* ---------- technology: the scan runs off the right edge ---------- */
 .technology { background: var(--g-tech); }
 .tech-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 1.5rem; align-items: center; }
@@ -182,38 +197,47 @@ details p { font-size: var(--t-xs2); color: var(--muted); padding: 0 2.5rem 1.25
 
 /* ---------- 991 and down ---------- */
 @media screen and (max-width: 991px) {
-  .hero h1 { padding-left: 8rem; text-indent: -8rem; }
-  .hero-visual { grid-column: 1 / 8; height: 26rem; }
-  .hero-copy { grid-column: 8 / 13; }
+  .hero h1 { grid-column: 1 / -1; }
+  .hero-copy { grid-column: 1 / 9; margin-top: 1.75rem; }
+  .hero-frame { height: 30rem; }
+  .doc-portrait { height: 30rem; }
+  .creds > div { grid-template-columns: minmax(0, 1fr); row-gap: 0.25rem; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2.5rem; margin-top: 4rem; }
+  .specialists__lead, .specialists .specialist-grid { grid-column: 1 / -1; }
+  .specialists .specialist-grid { margin-top: 1.5rem; }
   blockquote { margin-left: -6rem; }
   .solution { grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, 1fr) 6.5rem; grid-template-areas: 'num title copy draw' '. go go go'; row-gap: 1rem; }
   .process-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
-  .doctor-card { margin-top: 3rem; }
 }
 
 /* ---------- 767 and down: one column ---------- */
 @media screen and (max-width: 767px) {
-  .hero-grid, .intro-grid, .feature-grid, .team-grid, .tech-grid, .consult-grid, .faqgrid, .final-grid, .section-head, .results-top, .gallery { grid-template-columns: minmax(0, 1fr); }
+  .hero-grid, .doc-grid, .intro-grid, .feature-grid, .tech-grid, .consult-grid, .faqgrid, .final-grid, .section-head, .results-top, .gallery { grid-template-columns: minmax(0, 1fr); }
   /* nth-child(n) lifts these over the desktop placements (`.intro-grid > div:last-child` and the like) */
-  .hero-grid > *:nth-child(n), .intro-grid > div:nth-child(n), .team-grid > div:nth-child(n), .tech-grid > div:nth-child(n), .final-grid > div:nth-child(n), .section-head > *:nth-child(n), .section-head > div:nth-child(n), .results-top > *:nth-child(n), .results-top > div:nth-child(n), .gallery > div:nth-child(n) { grid-column: 1 / -1; grid-row: auto; }
-  .hero-grid { padding: 1.5rem 0 2.5rem; }
-  .hero h1 { font-size: calc(5.4rem * var(--s-h)); padding-left: 1.5rem; text-indent: -1.5rem; margin: 1.75rem 0 1.5rem; }
+  .hero-grid > *:nth-child(n), .doc-grid > div:nth-child(n), .intro-grid > div:nth-child(n), .tech-grid > div:nth-child(n), .final-grid > div:nth-child(n), .section-head > *:nth-child(n), .section-head > div:nth-child(n), .results-top > *:nth-child(n), .results-top > div:nth-child(n), .gallery > div:nth-child(n) { grid-column: 1 / -1; grid-row: auto; }
+  /* on a phone the film comes straight after the headline, so the doctor's card is in the first screen */
+  .hero { display: flex; flex-direction: column; padding: 1.5rem 0 3rem; }
+  .hero-grid { display: contents; }
+  .hero-meta, .hero h1, .hero-copy { margin-left: var(--gutter); margin-right: var(--gutter); }
+  .hero-meta { order: 1; }
+  .hero h1 { order: 2; font-size: calc(5.4rem * var(--s-h)); margin-top: 1.25rem; margin-bottom: 1.5rem; }
+  .hero-film { order: 3; margin: 0 var(--gutter); }
+  .hero-copy { order: 4; margin-top: 1.75rem; }
   .hero-where { display: none; }
-  .hero-copy { margin-bottom: 2.1875rem; }
-  .hero-visual { border-radius: 0 0 0 3.75rem; height: 470px; }
-  .quote-card { left: 1rem; right: auto; bottom: 1rem; }
-  .intro-grid, .feature-grid, .team-grid, .tech-grid, .consult-grid, .final-grid { row-gap: 2.8125rem; }
-  .story-photo, .feature-photo .photo, .doctor-card, .tech-image, .final-photo { height: 440px; }
+  .hero-frame { height: 19rem; border-radius: 1.25rem; }
+  .hero-play { left: 0.75rem; right: auto; top: 0.75rem; gap: 0.75rem; padding-right: 1.125rem; }
+  .hero-play__ring { width: 2.75rem; height: 2.75rem; }
+  .hero-doctor { position: relative; left: auto; top: auto; width: auto; margin: -1.5rem 0.75rem 0; box-shadow: var(--shadow); }
+  .doc-portrait { height: 26rem; border-radius: 10rem 10rem 0 0; }
+  .stat strong { font-size: calc(5rem * 0.66); }
+  .doc-grid, .intro-grid, .feature-grid, .tech-grid, .consult-grid, .final-grid { row-gap: 2.8125rem; }
+  .story-photo, .feature-photo .photo, .tech-image, .final-photo { height: 440px; }
   .tech-image { margin-right: calc(-1 * var(--gutter)); }
   .story-photo { margin-left: calc(-1 * var(--gutter)); }
   blockquote { margin-left: 0; }
-  .doctor-card { margin-top: 0; }
   .human-benefits, .reassurance, .specialist-grid { grid-template-columns: 1fr; }
   .feature-grid { padding: 4.875rem 0; }
   .feature-caption { right: 0.625rem; }
-  .proofgrid { grid-template-columns: 1fr 1fr; }
-  .proof:nth-child(2) { border-right: 0; }
-  .proof:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
   .section-head { margin-bottom: 2.125rem; }
   .solution { grid-template-columns: minmax(0, 1fr) 6rem; grid-template-areas: 'num draw' 'title title' 'copy copy' 'go go'; row-gap: 0.75rem; padding: 1.75rem 0.25rem; }
   .solution .go { justify-self: start; }
@@ -228,4 +252,4 @@ details p { font-size: var(--t-xs2); color: var(--muted); padding: 0 2.5rem 1.25
   .faqgrid { gap: 2.5rem; }
 }
 /* the concept's phone headline is 58px on four lines */
-@media screen and (max-width: 419px) { .hero h1 { font-size: calc(5.4rem * 0.79); } }
+@media screen and (max-width: 419px) { .hero h1 { font-size: calc(5.4rem * 0.74); } }

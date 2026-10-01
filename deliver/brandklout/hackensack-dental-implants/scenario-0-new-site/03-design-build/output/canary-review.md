@@ -51,11 +51,9 @@ concept's navbar only has in-page links.
 The concept sets almost every section as an even two-column split. Nine of the twelve blocks are
 now composed editorially:
 
-- **Hero:** a type-led masthead. A rule with the kicker and "Hackensack, New Jersey", then the
-  headline across the page with its second line stepped in, then the photograph and the copy
-  beside it. The button is above the fold at 1440×900.
-- **Proof bar:** one moving line in the display face that speeds up with scroll and stops under
-  the pointer. Without motion it is the concept's four-cell bar.
+- **Hero:** replaced on 2026-10-01 by the film hero below. (Was a type-led masthead with a
+  photograph, then a moving proof bar; both are gone. The proof bar's facts now live in the doctor
+  section.)
 - **Real Life:** the photograph runs off the left edge of the page, and the quote breaks across its
   edge.
 - **Treatments:** a numbered index, one row per treatment (numeral, name, description, line
@@ -70,6 +68,54 @@ now composed editorially:
 
 Kept as in the concept: Full-Arch feature, consultation form, FAQ. The form and the FAQ are where
 people act, so they stay plain.
+
+## Film hero and the doctor moved up (2026-10-01)
+
+Asked for by Jess on a call with Alejandro: show the doctor sooner, add his credentials and a
+reputation section (the Dr. Nahlah "The Difference" numbers as inspiration, not a copy), and a new
+hero, with video if possible.
+
+**Hero.** The kicker rule, then the headline on two lines with the copy and buttons beside it, then
+a wide film of the practice's own patients. Dr. Meskin's card (portrait, "NYU-trained
+prosthodontist", 4.7 and 1,100+ Google reviews) sits on the top left of the film, and "Watch
+Isaac's story · 1:42" with a pause control on the top right. Both are in the first view at
+1440×900 and on a 390 phone, where the film moves up to come straight after the headline. With
+motion on, the scroll opens the film from the page margins to the full window.
+
+- **The loop** (`media/video/hero-loop.mp4`, 14s, 1080p, 4.2 MB; `hero-loop-m.mp4`, 540p, 1.3 MB
+  for phones): five shots from the two Hackensack patient films in the agency Vimeo, folder
+  "Hackensack Center" (`1198870167` Isaac, `1198867061` Daniel): Daniel at reception, Isaac
+  greeted at the desk, Daniel greeted in the chair, Isaac at the #ADCsmiles wall, Isaac smiling
+  outside. Muted, no sound track. It plays only while on screen, a visitor who asked for reduced
+  motion gets the still (`hero-poster.webp`), and the control stops it (WCAG 2.2.2).
+- **Left out on purpose:** Daniel walking in under a "Pediatric and Family Dentistry" sign and the
+  children's tooth logo behind Isaac. Both would read as a children's practice on an implant site.
+- **The full film** (`isaac-story.mp4`, 720p with sound, 12.8 MB) opens in a light box from the play
+  button: focus moves to Close, Escape closes it, focus returns. Without a script the button is a
+  plain link to the file. No captions yet (see below).
+- **Cut by** ffmpeg from the 1080p Vimeo downloads; the clip list is in the step runbook.
+
+**Doctor (chapter 1, straight after the hero).** An arched portrait with his surname very large
+behind it, a short bio, a credentials list, then four numbers in large gold figures that count up
+once, then the three surgeons. "Implant Team" in the menu and "Our Team" in the footer became "Your
+Doctor" and point here. The old team block lower down is gone; the technology block moved into the
+journey chapter, so the page still has eight chapters.
+
+| Shown | Value | Source | Status |
+| :--- | :--- | :--- | :--- |
+| Google rating | 4.7 from 1,100+ reviews | Elfsight widget on staging and trustindex.io mirror of the Google listing: 4.7, 1,104 reviews | Verified. It is the **Aesthetic Dental Center of Hackensack** listing, not Dr. Meskin's own; the old site already credits it the same way |
+| DDS | NYU College of Dentistry, 2019 | old site `/dr-alan-meskin`, ClearChoice bio | Verified |
+| Prosthodontics | NYU certificate, three-year residency, 2022 | same | Verified |
+| Memberships | ACP, AAID, ADA | old site `/dr-alan-meskin` (logos) | Practice's own claim; not found in the societies' directories |
+| Languages | English, Spanish, Russian | old site, NewPatientsInc listing | Verified |
+| 50,000+ implants placed by our surgeons | Dr. Lee 30,000+ plus Dr. Srour 20,000+ | old site `/dr-won-sang-lee-dds`, `/dr-maurice-srour-dds` | **Practice's own claims, summed: to confirm.** Career totals, not Hackensack alone |
+| 30+ years of combined implant experience | about 39 by NPI dates (Lee 2010, Srour 2015, Meskin 2019, Klass 2019); the About page says "three decades" | NPI registry, old site `/about` | **To confirm** |
+| 4 implant specialists under one roof | prosthodontist, two oral surgeons, periodontist | old site doctor pages | Verified |
+| Surgeons' training | Lee: Columbia; Srour: NYU / Bellevue; Klass: MSD Boston University | old site doctor pages, NPI registry | Verified |
+
+Not used, and why: board certification and awards for Dr. Meskin (none found); "Top Doctor 2025"
+and "Diamond Invisalign" (not his, or not found); full-arch counts (the old site says 1,000+ on
+`/about` and 5,000+ on Dr. Srour's page); years for Dr. Meskin alone (small: since 2019).
 
 ## Motion (elevated 2026-09-30 to the editorial standard)
 
@@ -106,12 +152,13 @@ moves, and the form is never pinned or faded.
 
 | Check | Result |
 | :--- | :--- |
-| `code/probe.mjs` | 28 of 28 pass: the four pins hold, fit 1440x900 and 1512x735, and show three different states at 25/50/75%; hero button reaches the form; FAQ opens one at a time; 188 text elements at or over 4.5:1 with motion on; reduced motion pins nothing and hides nothing; no overflow, no cut-off control and no headline over the photo at nine widths; on a phone tap targets are 44px, body copy 17px, smallest text 12px, and scroll wipes a gallery tile |
+| `code/click-film.mjs` (2026-10-01, live) | 16 of 16 pass, desktop and phone, with real clicks and key presses: the right loop file plays from the media library; the doctor's card and the play button are in the first view; the pause control stops and restarts the film; play opens the patient film with sound; focus moves into the light box and returns on Escape; the numbers settle on 4.7, 50,000+, 30+, 4 |
+| `code/probe.mjs` | 28 of 28 pass (re-run 2026-10-01 with the film hero): the four pins hold, fit 1440x900 and 1512x735, and show three different states at 25/50/75%; hero button reaches the form; FAQ opens one at a time; 188 text elements at or over 4.5:1 with motion on; reduced motion pins nothing and hides nothing; no overflow, no cut-off control and no headline over the photo at nine widths; on a phone tap targets are 44px, body copy 17px, smallest text 12px, and scroll wipes a gallery tile |
 | `fluid-root.mjs --check` | pass |
-| `gates/image-reuse.mjs` | 12 images, 0 problems |
+| `gates/image-reuse.mjs` | 13 images, 0 problems |
 | `gates/check-pages.mjs` | 8 chapters, 3 pins at 1440, runtime armed, one h1, no overflow. **Exits 1**: its only errors are the GoHighLevel survey's Turnstile challenge answering 401 on localhost and the console line that iframe prints |
 | `gates/click-controls.mjs` | 36 clicks. **Exits 1** on two that change nothing because the page is already at that anchor when they are clicked |
-| Published page, `code/check-staging.mjs` | 14 of 14 pass: runtime and the four pins on the live page, the interaction layer (ticker, drawings, cursor) created and styled, variable fonts loaded, form block in place, icon and share image, noindex, no canonical |
+| Published page, `code/check-staging.mjs` | 14 of 14 pass (2026-10-01): runtime and the four pins on the live page, the interaction layer (film playing with its control, drawings, cursor) created and styled, variable fonts loaded, form block in place, icon and share image, noindex, no canonical |
 | Local build versus staging, `visual-diff` | 0.60% at 1440, 0.89% at 390 (image resampling only) |
 | Safari / WebKit, `colour-leak.mjs` | not run |
 
@@ -122,13 +169,21 @@ moves, and the form is never pinned or faded.
    be his words (the testimonial film is the source) or sit beside no one.
 2. **"Full-Arch / All-on-4®".** The live site says All-on-X throughout. All-on-4 is a registered
    trademark of Nobel Biocare.
-3. **Dr. Meskin's dates** (DDS 2019, prosthodontics certificate 2022) and **"AOX Surgeon"** for
-   Dr. Srour come from the concept. The live site gives no years and calls Dr. Srour an oral and
-   maxillofacial surgeon.
+3. ~~Dr. Meskin's dates~~ confirmed 2026-10-01 (NYU, 2019 and 2022, in his ClearChoice bio as well).
+   Dr. Srour is now "Oral Surgeon, Full Arch", as the live site has him.
 4. **The phone number**, as above.
 5. **"By Aesthetic Dental Centers"** in the navbar and footer, as the concept has it.
 6. **Four links lead nowhere yet** on staging (`/services/single-implant`, `/services/implant-bridges`,
    `/dr-alan-meskin`, `/about`): only the home page is built.
+7. **The two team numbers**: "50,000+ implants placed by our surgeons" and "30+ years of combined
+   implant experience" (sources in the table above). Swap or drop them if the client prefers.
+8. **The 4.7 rating is the Aesthetic Dental Center of Hackensack listing**, shown beside Dr. Meskin's
+   name. The old site does the same; the client should be happy with it.
+9. **The doctor in the films is not Dr. Meskin.** The chair-side shot (blue scrubs) and the #ADCsmiles
+   wall shot show other dentists of the center, under Dr. Meskin's card. If that reads wrong, the
+   loop can be re-cut without them, or with footage of Dr. Meskin if the practice has any.
+10. **Captions for Isaac's film.** Vimeo's automatic English track can become a `.vtt`, but it gets
+   names wrong and needs a read-through; Instatic's media library has not been tried with `.vtt`.
 
 ## Version Control
 

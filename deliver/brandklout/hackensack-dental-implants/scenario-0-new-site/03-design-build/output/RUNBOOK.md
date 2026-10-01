@@ -2,6 +2,72 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-01 (later) · film hero, doctor moved up with credentials and numbers, on staging
+
+Asked for (Alejandro, after a call with Jess): move the doctor up so he is seen sooner; add his
+credentials and a reputation section like Dr. Nahlah's ("4.8 on Google", implants placed), after
+researching his reputation; a new hero, with video if possible.
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- Read first: [`canary-review.md`](./canary-review.md) → "Film hero and the doctor moved up": what
+  changed, every figure with its source, and four new items to confirm (7 to 10).
+- **Hero** (`pages/index.html`, `30-sections.css`, `25-interaction.css`, `00-runtime.js`): headline
+  and copy, then `.hero-film` > `.hero-frame` with a muted loop and two cards (doctor + rating, play
+  button). With motion on at ≥992 the scroll opens the frame from the page margins to the window
+  (`clip-path`, trigger id `hero-film`); the frame's margins move into the clip so the cards stay on
+  the grid. Under 768 the hero is a flex column with `.hero-grid` as `display: contents`, so the film
+  comes straight after the headline. The proof bar and its ticker are gone.
+- **Video:** both 1080p patient films from the agency Vimeo (folder "Hackensack Center", project
+  `29482006`: Isaac `1198870167`, Daniel `1198867061`) downloaded with the team token
+  (`download[]` links). Loop = Daniel 67.4s+2.5, Isaac 27.0s+2.8, Daniel 70.3s+2.5, Isaac 49.0s+2.8,
+  Isaac 72.0s+3.4, hard cuts, no audio; CRF 26 at 1920 and 960. Full film = Isaac at 1280, CRF 24,
+  AAC 128k, faststart. Poster = the loop's frame at 0.4s. Originals stay out of the repo (scratch).
+- **Interface layer** (runs with or without GSAP): sets the loop's `src` from `data-src` /
+  `data-src-mobile`, never under reduced motion; plays only while on screen
+  (`IntersectionObserver`); creates the pause control `.film-toggle`; opens `.js-film` links in a
+  light box (`.film`, role dialog, focus trap, Escape, focus returned, smoother paused).
+- **Doctor chapter** (`#doctor`, chapter 1): arched portrait, "Meskin" watermark (the old team
+  mark, now on `.doc-grid`), bio, `dl.creds`, `.stats` (count-up from `data-count`,
+  `data-decimals`, `data-suffix`; the HTML carries the final values), the three surgeons. Team block
+  removed; `#technology` moved into chapter 4 (journey), so there are still eight chapters.
+  Menu and footer: "Your Doctor" → `#doctor`.
+- New images: `doctor-face.webp` (192px crop of `doctor.png` for the hero card, so the portrait is
+  not used twice), `hero-poster.webp`. Rows added to `images.csv`.
+- Research: 4.7 / 1,104 Google reviews verified; Dr. Meskin's NYU dates verified; the team totals
+  are the practice's own claims. Summary in `docs/facts.md` → Reputation and credentials.
+- Pushed twice with `push-staging.sh` (backup first: `backups/pre-film-stg/`, seq 8 → 9 → 10).
+  Checks: `probe.mjs` 28/28; `check-staging.mjs` 14/14 (its ticker check is now a film check);
+  new `code/click-film.mjs` 16/16 live (real clicks, desktop and phone); `fluid-root` pass;
+  `image-reuse` 13 images, 0 problems.
+
+### Next
+
+1. Client answers on items 7 to 10 in `canary-review.md` (the two team numbers, the rating's
+   listing, other dentists in the film, captions).
+2. Captions for Isaac's film: Vimeo `/videos/1198870167/texttracks` → `.vtt`, read through, then
+   try a `.vtt` upload to the media library and add a `<track>` in the light box.
+3. The video tricks here (data-src, light box, pause control) are client code; if a second client
+   wants a film hero, lift them into the toolkit on `main`.
+
+### Gotchas
+
+- **The pause control was below the fold** at 1440×900 when it sat at the film's bottom corner, and
+  `click-film.mjs` failed on it: a puppeteer click below the fold scrolls natively under
+  ScrollSmoother and the play button then left the viewport. Controls for a hero film go in its top
+  edge.
+- **Clicking a control is the only proof it works.** `check-staging.mjs` saw the film playing; only
+  the click test opened the light box, pressed Escape and read the focus.
+- `ffmpeg` in a `while read` loop eats the loop's stdin: pass `-nostdin`, or only the first segment
+  is cut.
+- `drawtext` on Windows: copy the font next to the working folder and pass `fontfile=arial.ttf`; a
+  `C\:/Windows/...` path dies in the filter parser.
+- A Python heredoc in Git Bash with many apostrophes inside failed with "unexpected EOF"; the same
+  script written to a file with the Write tool ran.
+- Numbers that count up must be written at their final value in the HTML. The runtime sets them to
+  0 just before counting, so without a script, with reduced motion, and in the import they read
+  correctly.
+
 ## 2026-10-01 · BugHerd project for the staging site
 
 ### Done

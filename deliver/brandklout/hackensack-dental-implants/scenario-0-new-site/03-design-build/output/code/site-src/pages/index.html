@@ -17,7 +17,7 @@
     <div class="navlinks">
       <a href="#solutions">Implant Solutions</a>
       <a href="#results">Smile Gallery</a>
-      <a href="#team">Implant Team</a>
+      <a href="#doctor">Your Doctor</a>
       <a href="#faq">FAQ</a>
       <a class="btn" href="#consult">Schedule Consultation</a>
     </div>
@@ -27,6 +27,11 @@
 <main id="main">
 
   <!-- ============ 0 · ARRIVAL ============ -->
+  <!-- 2026-10-01 (Jess, on a call with Alejandro): a new hero with video, and the doctor seen sooner.
+       The film is the practice's own: b-roll from the Isaac and Daniel patient films (agency Vimeo,
+       folder "Hackensack Center"), muted and looping; the full film with sound opens from the play
+       button. The runtime sets the video's src from data-src (data-src-mobile under 768px): the
+       importer keeps attributes, not <source> children. -->
   <section class="ch" id="top" data-chapter="0" data-chapter-name="Arrival">
     <div class="hero">
       <div class="wrap hero-grid">
@@ -34,37 +39,83 @@
           <span class="kicker">Permanent Teeth · Renewed Confidence</span>
           <span class="hero-where">Hackensack, New Jersey</span>
         </div>
-        <h1 class="display js-split js-split-hero">Eat. Smile.<br>Live confidently again.</h1>
+        <h1 class="display js-split js-split-hero">Eat. Smile. Live confidently again.</h1>
         <div class="hero-copy">
           <p class="js-rise">Dental implants can give you more than new teeth. They can help you return to the meals, photos, conversations and everyday moments you have been missing.</p>
           <div class="hero-actions js-rise">
             <a class="btn" href="#consult">Explore Your Options</a>
-            <a class="textlink" href="#story">Read A Patient Story →</a>
+            <a class="textlink" href="#doctor">Meet Dr. Meskin →</a>
           </div>
-          <div class="warm-note js-rise">
-            <span>For missing teeth</span>
-            <span>For failing teeth</span>
-            <span>For unstable dentures</span>
-          </div>
-        </div>
-        <div class="hero-visual photo js-hero-frame">
-          <img class="js-hero-img" src="/media/img/hero.webp" width="906" height="1080" alt="A patient smiles at her reflection in a hand mirror, seated in the treatment chair" fetchpriority="high">
-          <div class="quote-card">“The goal is to stop thinking about your teeth.”</div>
         </div>
       </div>
-    </div>
-    <div class="proofbar">
-      <div class="wrap proofgrid js-stagger">
-        <div class="proof"><strong>NYU</strong><span>Trained prosthodontist</span></div>
-        <div class="proof"><strong>3D</strong><span>Digital diagnostics</span></div>
-        <div class="proof"><strong>Full Arch</strong><span>Implant solutions</span></div>
-        <div class="proof"><strong>Hackensack</strong><span>New Jersey</span></div>
+      <div class="hero-film">
+        <div class="hero-frame js-hero-frame">
+          <video class="hero-video js-hero-video" data-src="/media/video/hero-loop.mp4" data-src-mobile="/media/video/hero-loop-m.mp4" poster="/media/img/hero-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <a class="hero-play js-film" href="/media/video/isaac-story.mp4" aria-label="Watch Isaac's story, a patient film of 1 minute 42 seconds, with sound">
+            <span class="hero-play__ring" aria-hidden="true"><span class="hero-play__icon"></span></span>
+            <span class="hero-play__text"><b>Watch Isaac's story</b><span>A patient film · 1:42</span></span>
+          </a>
+        </div>
+        <div class="hero-doctor">
+          <img src="/media/img/doctor-face.webp" width="192" height="192" alt="Portrait of Dr. Alan Meskin">
+          <div class="hero-doctor__who">
+            <b>Dr. Alan Meskin</b>
+            <span>NYU-trained prosthodontist</span>
+          </div>
+          <div class="hero-doctor__rating">
+            <strong>4.7</strong>
+            <span class="stars" aria-hidden="true">★★★★★</span>
+            <span>1,100+ Google reviews</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 1 · REAL LIFE ============ -->
-  <section class="ch section intro" id="story" data-chapter="1" data-chapter-name="Real Life">
+  <!-- ============ 1 · YOUR DOCTOR ============ -->
+  <!-- Moved up on 2026-10-01 (Jess): the doctor is the second thing a visitor sees, with his
+       credentials and the practice's reputation in numbers. Sources for every figure are in
+       output/canary-review.md → Doctor and reputation; the two team totals are the practice's own
+       claims and wait for the client's confirmation. -->
+  <section class="ch section doctor" id="doctor" data-chapter="1" data-chapter-name="Your Doctor">
+    <div class="wrap">
+      <div class="doc-grid">
+        <div class="doc-portrait js-wipe">
+          <img src="/media/img/doctor.png" width="500" height="500" loading="lazy" alt="Dr. Alan Meskin, prosthodontist and implant specialist">
+          <span class="doc-portrait__tag">Prosthodontist · Implant Specialist</span>
+        </div>
+        <div class="doc-copy">
+          <div class="kicker js-rise">Meet Your Implant Doctor</div>
+          <h2 class="display js-split">Your new teeth, planned by a specialist in replacing them.</h2>
+          <p class="js-rise">Dr. Meskin is an NYU-trained prosthodontist: a dentist who completed three more years of specialty training in replacing and restoring teeth. He focuses on dental implants, full-mouth reconstruction and cosmetic smile design, with a patient-first, detail-driven approach and digital planning behind every case.</p>
+          <dl class="creds js-stagger">
+            <div><dt>Doctor of Dental Surgery</dt><dd>NYU College of Dentistry, 2019</dd></div>
+            <div><dt>Certificate in Prosthodontics</dt><dd>NYU, three-year specialty residency, 2022</dd></div>
+            <div><dt>Memberships</dt><dd>American College of Prosthodontists · American Academy of Implant Dentistry · American Dental Association</dd></div>
+            <div><dt>Speaks</dt><dd>English, Spanish and Russian</dd></div>
+          </dl>
+          <a class="textlink js-rise" href="/dr-alan-meskin">Read Dr. Meskin's story →</a>
+        </div>
+      </div>
+      <div class="stats js-stats" aria-label="The practice in numbers">
+        <div class="stat"><strong data-count="4.7" data-decimals="1">4.7</strong><span>Google rating from 1,100+ reviews</span></div>
+        <div class="stat"><strong data-count="50000" data-suffix="+">50,000+</strong><span>Implants placed by our surgeons</span></div>
+        <div class="stat"><strong data-count="30" data-suffix="+">30+</strong><span>Years of combined implant experience</span></div>
+        <div class="stat"><strong data-count="4">4</strong><span>Implant specialists under one roof</span></div>
+      </div>
+      <div class="specialists">
+        <p class="specialists__lead js-rise">Dr. Meskin works with a surgical team, so every stage of treatment stays in one place.</p>
+        <div class="specialist-grid js-stagger">
+          <div><b>Won-Sang Lee, DDS</b><span>Oral Surgeon · Columbia University</span></div>
+          <div><b>Maurice Srour, DDS</b><span>Oral Surgeon, Full Arch · NYU / Bellevue</span></div>
+          <div><b>Dmitriy Klass, DDS, MSD</b><span>Periodontist · Boston University</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2 · REAL LIFE ============ -->
+  <section class="ch section intro" id="story" data-chapter="2" data-chapter-name="Real Life">
     <div class="wrap intro-grid" id="story-scene">
       <div class="story-photo photo js-wipe js-parallax">
         <img src="/media/img/story.webp" width="950" height="1080" loading="lazy" alt="Isaac, a patient of the practice, smiling">
@@ -84,8 +135,8 @@
     </div>
   </section>
 
-  <!-- ============ 2 · IMPLANT SOLUTIONS ============ -->
-  <section class="ch" id="solutions" data-chapter="2" data-chapter-name="Implant Solutions">
+  <!-- ============ 3 · IMPLANT SOLUTIONS ============ -->
+  <section class="ch" id="solutions" data-chapter="3" data-chapter-name="Implant Solutions">
     <div class="section treatments">
       <div class="wrap">
         <div class="section-head">
@@ -147,25 +198,45 @@
     </div>
   </section>
 
-  <!-- ============ 3 · YOUR JOURNEY ============ -->
-  <section class="ch section process" id="journey" data-chapter="3" data-chapter-name="Your Journey">
-    <div class="wrap process-wrap" id="process-scene">
-      <div class="process-head">
-        <div class="kicker js-rise">Your Treatment Journey</div>
-        <h2 class="display js-split">Clear answers before treatment begins.</h2>
-        <p class="js-rise">A structured process helps you understand your options, your treatment plan and what to expect from one stage to the next.</p>
+  <!-- ============ 4 · YOUR JOURNEY ============ -->
+  <section class="ch" id="journey" data-chapter="4" data-chapter-name="Your Journey">
+    <div class="section process">
+      <div class="wrap process-wrap" id="process-scene">
+        <div class="process-head">
+          <div class="kicker js-rise">Your Treatment Journey</div>
+          <h2 class="display js-split">Clear answers before treatment begins.</h2>
+          <p class="js-rise">A structured process helps you understand your options, your treatment plan and what to expect from one stage to the next.</p>
+        </div>
+        <div class="processgrid">
+          <article class="step"><div class="n">01</div><h3>Consultation + 3D Imaging</h3><p>We evaluate your oral health, goals, bone structure and existing teeth.</p></article>
+          <article class="step"><div class="n">02</div><h3>Personalized Planning</h3><p>Your team maps the surgical and restorative needs before treatment begins.</p></article>
+          <article class="step"><div class="n">03</div><h3>Implant Placement</h3><p>Implants are positioned according to your plan, with provisional teeth when appropriate.</p></article>
+          <article class="step"><div class="n">04</div><h3>Final Smile</h3><p>After healing, your restoration is created for function, comfort and aesthetics.</p></article>
+        </div>
       </div>
-      <div class="processgrid">
-        <article class="step"><div class="n">01</div><h3>Consultation + 3D Imaging</h3><p>We evaluate your oral health, goals, bone structure and existing teeth.</p></article>
-        <article class="step"><div class="n">02</div><h3>Personalized Planning</h3><p>Your team maps the surgical and restorative needs before treatment begins.</p></article>
-        <article class="step"><div class="n">03</div><h3>Implant Placement</h3><p>Implants are positioned according to your plan, with provisional teeth when appropriate.</p></article>
-        <article class="step"><div class="n">04</div><h3>Final Smile</h3><p>After healing, your restoration is created for function, comfort and aesthetics.</p></article>
+    </div>
+    <div class="section technology" id="technology">
+      <div class="wrap tech-grid">
+        <div>
+          <div class="kicker js-rise">Confidence Comes From A Plan</div>
+          <h2 class="display js-split">Technology helps make the unknown feel clearer.</h2>
+          <p class="js-rise">3D imaging and digital planning help the team evaluate anatomy, explain treatment options and coordinate the path to your final restoration.</p>
+          <div class="tech-points js-stagger">
+            <div><b>See more</b><span>Three-dimensional diagnostics reveal details traditional images cannot.</span></div>
+            <div><b>Plan ahead</b><span>Implant position can be considered alongside the final smile.</span></div>
+            <div><b>Understand your case</b><span>Visual information can make treatment easier to discuss.</span></div>
+            <div><b>Coordinate care</b><span>Surgical and restorative needs stay connected.</span></div>
+          </div>
+        </div>
+        <div class="tech-image photo js-wipe js-parallax">
+          <img src="/media/img/tech.webp" width="1574" height="1080" loading="lazy" alt="A patient positioned in the 3D CBCT scanner">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 4 · SMILE GALLERY ============ -->
-  <section class="ch section results" id="results" data-chapter="4" data-chapter-name="Smile Gallery">
+  <!-- ============ 5 · SMILE GALLERY ============ -->
+  <section class="ch section results" id="results" data-chapter="5" data-chapter-name="Smile Gallery">
     <div class="wrap">
       <div class="results-top">
         <div>
@@ -210,48 +281,6 @@
           <p class="js-rise">Google reviews of the practice, shown live and unedited.</p>
         </div>
         <div class="wz-embed reviews-embed" data-wz-embed="auto" data-embed="google-reviews"><!-- Elfsight Google Reviews | Aesthetic Dental Center of Hackensack --><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-cf96ca10-8feb-4ac7-8668-ddf398e0f61f"></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 5 · THE TEAM ============ -->
-  <section class="ch" id="team" data-chapter="5" data-chapter-name="The Team">
-    <div class="section team">
-      <div class="wrap team-grid">
-        <div class="doctor-card js-wipe">
-          <img src="/media/img/doctor.png" width="500" height="500" loading="lazy" alt="Dr. Alan Meskin, prosthodontist and implant specialist">
-        </div>
-        <div>
-          <div class="kicker js-rise">People Taking Care Of People</div>
-          <h2 class="display js-split">A team that understands this is a big decision.</h2>
-          <p class="js-rise">Dr. Alan Meskin is an NYU-trained prosthodontist specializing in dental implants, implant restoration, full-mouth reconstruction and cosmetic smile design. He earned his DDS from NYU College of Dentistry in 2019 and completed his prosthodontics specialty certificate at NYU in 2022. His approach is patient-first and detail-driven, with digital planning and restorations designed to look and function naturally.</p>
-          <div class="doctor-name js-rise"><a href="/dr-alan-meskin">Alan Meskin, DDS</a></div>
-          <div class="role js-rise">Prosthodontist · Implant Specialist · NYU-Trained</div>
-          <div class="specialist-grid js-stagger">
-            <div><b>Won-Sang Lee, DDS</b><span>Oral Surgeon</span></div>
-            <div><b>Dmitriy Klass, DDS, MSD</b><span>Periodontist</span></div>
-            <div><b>Maurice Srour, DDS</b><span>AOX Surgeon</span></div>
-          </div>
-          <a class="textlink" href="/about">Meet the implant team →</a>
-        </div>
-      </div>
-    </div>
-    <div class="section technology" id="technology">
-      <div class="wrap tech-grid">
-        <div>
-          <div class="kicker js-rise">Confidence Comes From A Plan</div>
-          <h2 class="display js-split">Technology helps make the unknown feel clearer.</h2>
-          <p class="js-rise">3D imaging and digital planning help the team evaluate anatomy, explain treatment options and coordinate the path to your final restoration.</p>
-          <div class="tech-points js-stagger">
-            <div><b>See more</b><span>Three-dimensional diagnostics reveal details traditional images cannot.</span></div>
-            <div><b>Plan ahead</b><span>Implant position can be considered alongside the final smile.</span></div>
-            <div><b>Understand your case</b><span>Visual information can make treatment easier to discuss.</span></div>
-            <div><b>Coordinate care</b><span>Surgical and restorative needs stay connected.</span></div>
-          </div>
-        </div>
-        <div class="tech-image photo js-wipe js-parallax">
-          <img src="/media/img/tech.webp" width="1574" height="1080" loading="lazy" alt="A patient positioned in the 3D CBCT scanner">
-        </div>
       </div>
     </div>
   </section>

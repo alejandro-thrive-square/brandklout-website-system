@@ -16,6 +16,12 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
   (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation), with editorial
   motion, pointer interaction and editorial layouts in nine of twelve blocks (2026-09-30). Read
   [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md).
+- **Film hero and the doctor moved up** (2026-10-01, Jess): the hero is now a muted loop cut from the
+  Isaac and Daniel patient films (agency Vimeo, folder "Hackensack Center") with Dr. Meskin's card
+  and the 4.7 Google rating in the first view, and "Watch Isaac's story" opening the full film with
+  sound. Chapter 1 is now the doctor: credentials, then four numbers (4.7, 50,000+, 30+, 4) and the
+  three surgeons. **Two numbers are the practice's own claims, to confirm** (canary-review items 7
+  to 10).
 - **Google reviews on staging** (2026-09-30): the client's Elfsight widget (`cf96ca10-…`, registry key
   `hackensack`) is an Embed block under the Smile Gallery (`#reviews`), placed by the push chain from a
   marker in the source, so a re-push keeps it. Production has it once the site is first pushed there.
@@ -40,7 +46,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
-1. Get rulings on the six items in `canary-review.md`, and decide where the menu, financing, hours
+1. Get rulings on the ten items in `canary-review.md` (7 to 10 are new: team numbers, rating
+   listing, other dentists in the film, captions), and decide where the menu, financing, hours
    and office photographs go (the concept has no place for them); then the inner pages.
 1. Record the scope and the Asana task in `docs/project-overview.md`, and get a ruling on the
    content findings (blog posts that still name Arvada Dental Center, four dead links, the second
@@ -80,6 +87,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Layouts recomposed editorially in nine of twelve blocks: type-led masthead, moving proof line, bleeding photographs, numbered treatment index, horizontal journey, stepped gallery, name behind the team, stacked closing words; on staging; probe 28/28, live 14/14 | `354923bd` |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | `c9c283aa` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd project 544349 created via API on the staging URL; five team members added by default; columns todo/doing/done; no tasks yet | see the commit after `adcfdfd0` |
+| 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | see the commit after `7349e0ec` |
 
 ## Version Control
 
