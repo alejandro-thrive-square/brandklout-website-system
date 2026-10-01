@@ -1,6 +1,6 @@
 # 2026-10-01 - /patient-reviews rebuilt, the GHL contact form, Canva team portraits, #82; partial publishes
 
-All on **STAGING only** (staging.masonparkpediatricdental.com). Not promoted to production.
+**PROMOTED TO PRODUCTION 2026-10-01 15:38 UTC** on the user's go-ahead, together with round seven (#507-#515), in ONE chain: `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app bash publish-1001-all.sh` (`--only` over the union of the day's pages: /, /contacts, /patient-reviews, /our-team, /our-doctors, /services/dental-hygiene-education; styles, scripts, Elfsight, GHL form; 32 KB payload; backup `backup-mason-park-kids.up.railway.app-2026-10-01T15-36-05.json`). On https://masonparkpediatricdental.com: `verify-1001` 12/12, `verify-1001b` 26/26 (form visible, fills its card, no CSP errors), `verify-1001c` 26/26, `carousel-test` PASS at 1440 and 390; canonical on the apex, no staging references.
 
 ### Done
 
@@ -26,7 +26,7 @@ Both are gitignored and backed up to R2 (`scripts/assets.mjs push`).
 
 ### Next
 
-1. Promote to production on the user's go-ahead: round seven (`publish-1001.sh`), then `publish-1001b.sh`, then `publish-1001c.sh`, each with `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app`, one at a time, then the three verifies with `BASE=https://masonparkpediatricdental.com`.
+1. Done: production (above). Staging and production now match for everything changed on 2026-10-01.
 2. #198 when a Service field exists in GHL (nothing to change on the site). #483 still needs its photo.
 3. Round six's eleven "face cut" crops were fixed as static `object-position` and checked at rest. The user says "face cutting" notes mean the scroll animation clips the photo (drift/wipe): re-check those with motion on.
 4. The Google map on every Invitation chapter rendered as an empty box in headless shots (site.js builds the iframe at runtime; possibly the embed-origins frame-src). Not investigated.
