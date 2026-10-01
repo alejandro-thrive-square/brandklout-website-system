@@ -180,7 +180,7 @@
         "project": "a55b5cac-b92d-4653-a9ff-6da522a5c89c",
         "service": "West LA Implants"
       },
-      "note": "Provisioned 2026-09-10 name-first via 22-instatic-api-sync/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet — westlaimplants.com is still the WordPress site. Homepage-only review build."
+      "note": "Provisioned 2026-09-10 name-first via tools/instatic-site/setup/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet — westlaimplants.com is still the WordPress site. Homepage-only review build."
     },
     {
       "client": "dr-nahlah-staging",

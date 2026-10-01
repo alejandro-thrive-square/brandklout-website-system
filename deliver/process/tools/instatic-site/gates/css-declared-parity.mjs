@@ -36,7 +36,7 @@
  * is the tree-shake (trap 2) and it is expected for runtime-only classes, so
  * those are listed separately rather than failed.
  *
- * Usage: node css-parity.mjs
+ * Usage: node css-declared-parity.mjs
  */
 import fs from 'node:fs'
 import path from 'node:path'

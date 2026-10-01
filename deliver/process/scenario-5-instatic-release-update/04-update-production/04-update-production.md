@@ -32,7 +32,7 @@ round on the first failure. Same mechanics as staging, stricter gates.
 4. **Apply** with `--apply`. Same wait and digest proof as staging.
 5. **Verify.** `verify-data.mjs --backup <dir> --db --expect <digest>` must say PASS. `check-origins` runs on
    every `PUBLIC_ORIGIN` host (www, apex, the railway host). Then one real admin login.
-6. **Live checks.** `tools/cloudflare-launch/verify-launch.mjs` on the priority pages, `gates/dni-proof.mjs`
+6. **Live checks.** `tools/cloudflare-launch/verify-launch.mjs` on the priority pages, `tools/termly-ghl-consent/gates/dni-proof.mjs`
    (number pool swap), `tools/termly-ghl-consent/consent-kit.mjs check` (nothing fires before a choice),
    one GHL form open in a browser, `sitemap.xml` and `robots.txt`.
 7. **Republish only if needed.** If the release fixes something only a publish ships (0.0.20: classes
@@ -64,7 +64,7 @@ round on the first failure. Same mechanics as staging, stricter gates.
 ## Tools
 
 - `tools/instatic-release/backup.mjs`, `update-image.mjs`, `verify-data.mjs`
-- `tools/cloudflare-launch/verify-launch.mjs`, `tools/instatic-site/gates/dni-proof.mjs`,
+- `tools/cloudflare-launch/verify-launch.mjs`, `tools/termly-ghl-consent/gates/dni-proof.mjs`,
   `tools/termly-ghl-consent/consent-kit.mjs check`
 - `tools/instatic-domain-origins/check-origins.mjs --all` at the end of the round
 

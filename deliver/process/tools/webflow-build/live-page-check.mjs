@@ -62,7 +62,7 @@ for (const url of urls) {
     if (d.length === 10 && d !== phone) warn(`number ${n} is not the expected ${phone}`);
   }
   const forms = [...new Set((html.match(/widget\/form\/[A-Za-z0-9]+/g) || []).map((f) => f.split('/').pop()))];
-  if (forms.length) out.push(`info  GHL forms ${forms.join(', ')} (run check-ghl-form.mjs on them)`);
+  if (forms.length) out.push(`info  GHL forms ${forms.join(', ')} (run ../termly-ghl-consent/gates/check-ghl-form.mjs on them)`);
   if (marker && !html.includes(marker)) bad(`marker not found: "${marker}"`);
 
   console.log(`\n${url}  ${r.status}  cache ${cache}`);

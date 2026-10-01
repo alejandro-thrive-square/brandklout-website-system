@@ -11,7 +11,7 @@ This document explains **Agent Hermes** and how the system stays in sync when wo
 
 ## Why Hermes Is Documented Here
 
-Even though Hermes is external, it is one of the **actors that can change this repository's state**: when the user asks Hermes to work inside the VPS checkout of this repo (`/root/webzite-agentic-workflow`), its commits and generated assets must flow back to the local machine. This doc defines how that round-trip works so neither workspace clobbers the other.
+Even though Hermes is external, it is one of the **actors that can change this repository's state**: when the user asks Hermes to work inside the VPS checkout of this repo (`VPS_REPO_PATH` in [DEPLOYMENT.md](./DEPLOYMENT.md)), its commits must flow back to the local machine. This doc defines how that round-trip works so neither workspace clobbers the other.
 
 ## The Two Workspaces
 
@@ -19,27 +19,29 @@ The user can resume work from either of two workspaces, both of which can mutate
 
 | Workspace | How work happens | Where it runs |
 | :--- | :--- | :--- |
-| **Local** | IDE / Claude desktop app | Windows machine — **the only place the rclone `vps` remote is configured** |
+| **Local** | IDE / Claude desktop app / Orca | Windows machine |
 | **VPS** | Telegram → Hermes (or direct SSH) | Hostinger VPS (Ubuntu 24.04) |
 
 ```
                     ┌──────────────┐
                     │    GitHub     │   ← hub for all git-tracked files (code, docs,
-                    │  (origin/main)│      lightweight .tmp artifacts)
+                    │  (origin/main)│      runbooks, lightweight output/ artifacts)
                     └───┬───────▲──┘
        git pull/push    │       │   git pull (Actions) / vps-commit-push.sh
                         ▼       │
           ┌───────────────┐   ┌─┴───────────────┐
           │  Local (Win)  │   │   VPS (Ubuntu)  │
           │  IDE / Claude │   │  Hermes (Telegram)│
-          └───────▲───────┘   └─────────────────┘
+          └───────┬───────┘   └─────────────────┘
                   │
-                  │  rclone bisync (heavy binary/media assets)
-                  │  ── ONLY runs from local; the VPS has no remote
-                  └──────────────► back to the VPS
+                  │  node scripts/assets.mjs push / pull <client>
+                  ▼
+          ┌───────────────┐
+          │ Cloudflare R2 │   ← client media, listed in each client's assets.tsv
+          └───────────────┘
 ```
 
-**Key constraint:** git syncs both ways through GitHub, but the rclone `vps` remote exists **only on the local machine** — the VPS cannot reach back to the laptop. So **asset sync is always local-initiated.**
+Git syncs both ways through GitHub. Media never goes through git or the VPS: it is backed up to R2 with `scripts/assets.mjs` from any checkout that holds it (see [SYSTEM_RULES.md §4.2](./SYSTEM_RULES.md)).
 
 ## How Work Flows
 
@@ -49,24 +51,24 @@ The user can resume work from either of two workspaces, both of which can mutate
    ```bash
    bash scripts/vps-commit-push.sh "feat: <what Hermes did>"
    ```
-2. On local, pull everything (git changes **and** any VPS-generated assets) with one command:
+2. On local, pull it with one command:
    ```bash
    bash scripts/sync.sh
    ```
 
 ### Work done locally → VPS
 
-Same one command — it pushes local git changes (which auto-deploy to the VPS via GitHub Actions) and bisyncs assets:
+Same one command — it pushes local git changes (which deploy to the VPS via GitHub Actions once the deploy secrets are set):
 ```bash
 bash scripts/sync.sh --dry-run   # preview first
-bash scripts/sync.sh             # commit + push + bisync
+bash scripts/sync.sh             # commit + push
 ```
 
-`scripts/sync.sh` is the canonical "resume work from anywhere" command. It always runs on local, integrates remote work **before** pushing, and uses `rclone bisync` (a safe merge, never a destructive mirror). See [SYSTEM_RULES.md §4](./SYSTEM_RULES.md) for the full command reference.
+`scripts/sync.sh` is the canonical "resume work from anywhere" command for git. It integrates remote work **before** pushing and aborts on divergence. Media made in the session is backed up separately with `node scripts/assets.mjs push`.
 
 ## Authority & Conflict Policy
 
-The rules for which workspace wins, and how conflicts are handled, live in **[SYSTEM_RULES.md §4.5 — Workspace Authority & Conflict Policy](./SYSTEM_RULES.md)**. In short: GitHub `main` is the source of truth for git-tracked state, the VPS is the source of truth for heavy assets, divergence is resolved manually (never auto-clobbered), and Hermes must use `vps-commit-push.sh` and never force-push shared history.
+The rules for which workspace wins, and how conflicts are handled, live in **[SYSTEM_RULES.md §4.5 — Workspace Authority & Conflict Policy](./SYSTEM_RULES.md)**. In short: GitHub `main` is the source of truth for git-tracked state, R2 plus each client's `assets.tsv` is the source of truth for media, divergence is resolved manually (never auto-clobbered), and Hermes must use `vps-commit-push.sh` and never force-push shared history.
 
 ## Boundary Statement
 

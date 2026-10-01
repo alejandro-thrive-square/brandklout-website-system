@@ -18,16 +18,35 @@
  * afterwards: a second run of this against a site someone has edited would
  * discard their work. Guarded below.
  *
+ * UPDATES GO THROUGH `--update` INSTEAD (added 2026-09-28). Same build, same
+ * shell, but `mode: 'incremental'`: only the pages in import-out.json are
+ * written (build-import-input.mjs --changed / --only limits them), every other
+ * page is untouched, and the shell is sent only when the CSS/JS sources changed.
+ * See "THE UPDATE PATH" below for the id mapping that makes that safe.
+ *
  * Usage:
- *   node push-site.mjs           dry run — prints what would change
- *   node push-site.mjs --apply
+ *   node push-site.mjs                        dry run of a first import (replace)
+ *   node push-site.mjs --apply --force        first import / full rebuild: REPLACE, a page missing from dist/ is deleted
+ *   node push-site.mjs --update               dry run of an update (incremental)
+ *   node push-site.mjs --update --apply       write the changed pages (+ the shell if the sources changed)
+ *       --pages a,b     write only these of the converted pages
+ *       --with-shell    send the shell even if the sources look unchanged
+ *       --no-shell      never send the shell (refuses if a page needs a class the live registry lacks)
+ *       --shell-only    CSS/JS only, no pages
+ *       --force         write over browser edits made since the last push (listed first)
+ *   node push-site.mjs --record               snapshot the live page seqs + registry hash; run it
+ *                                             after place-embeds / template flags, at the end of a push
+ *
+ * Every --apply needs STAGING_HOST=<exact host> or --allow-production (lib/staging-guard.mjs).
  */
 import fs from 'node:fs'
 import zlib from 'node:zlib'
 import path from 'node:path'
 import crypto from 'node:crypto'
-import { fileURLToPath } from 'node:url'
-import { getSite, getPages, api } from '../lib/site.mjs'
+import * as P from '../lib/paths.mjs'
+import { getSite, getPages, api, toChangedPage } from '../lib/site.mjs'
+import { assertStaging } from '../lib/staging-guard.mjs'
+import { loadState, saveState, sha, styleRulesHash } from '../lib/push-state.mjs'
 
 const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 const TMP = path.join(HERE, 'output')
@@ -35,11 +54,49 @@ const SITE_SRC = P.DIST
 
 const apply = process.argv.includes('--apply')
 const force = process.argv.includes('--force')
+const argOf = (name) => {
+  const i = process.argv.indexOf(name)
+  return i >= 0 ? process.argv[i + 1] : undefined
+}
+const shellOnly = process.argv.includes('--shell-only')
+const update = shellOnly || process.argv.includes('--update')
+const pagesArg = argOf('--pages')
+const shellFlag = process.argv.includes('--with-shell') ? true : process.argv.includes('--no-shell') ? false : undefined
+
+/* --- --record: snapshot what is live now, write nothing -------------------
+   The update guard compares the live page seqs and registry against this
+   record. Every write after push-site (place-embeds, template flags, the SEO
+   pass) moves a seq, so the pipeline ends with a --record; otherwise the next
+   update would read our own post-processing as a browser edit. */
+if (process.argv.includes('--record')) {
+  const { site, seq } = await getSite()
+  const rows = (await getPages()).rows ?? []
+  const prev = loadState(TMP) ?? {}
+  const pagesState = {}
+  for (const r of rows) {
+    if (!r.slug) continue
+    pagesState[r.slug] = { ...(prev.pages?.[r.slug] ?? {}), id: r.id, seq: r.seq }
+  }
+  const f = saveState(TMP, {
+    shell: { ...(prev.shell ?? {}), seq, styleRulesHash: styleRulesHash(site.styleRules) },
+    pages: pagesState,
+  })
+  console.log(`recorded ${rows.length} page(s) and the registry (${Object.keys(site.styleRules ?? {}).length} rules) -> ${f}`)
+  process.exit(0)
+}
+if (apply) assertStaging()
 
 const converted = JSON.parse(fs.readFileSync(path.join(TMP, 'import-out.json'), 'utf8'))
 const input = JSON.parse(
   zlib.gunzipSync(fs.readFileSync(path.join(TMP, 'import-input.json.gz'))).toString('utf8'),
 )
+if (input.partial && !update) {
+  console.error(
+    `REFUSING: import-input.json.gz is a PARTIAL payload (${input.pages.length} page(s), built with --only/--changed).\n` +
+      `A replace push would delete every page it leaves out. Use --update, or rebuild the payload without --only/--changed.`,
+  )
+  process.exit(1)
+}
 
 const nid = () => crypto.randomBytes(16).toString('base64url').slice(0, 21)
 
@@ -725,12 +782,89 @@ fs.writeFileSync(path.join(TMP, 'tokens.css'), tokensCss)
 const { site, seq } = await getSite()
 const existingPages = (await getPages()).rows ?? []
 
+/* --- THE UPDATE PATH: which pages, and whose ids -----------------------------
+   The converter mints a RANDOM id for every style rule on every run, and a
+   page node points at its classes by id (`classIds`). So a page converted
+   today, written next to pages converted last week, would point at rules the
+   live registry has never heard of — and an unchanged page would lose its
+   classes the moment a fresh registry replaced the old one.
+
+   Class rules are unique by NAME, so the new conversion is mapped onto the
+   live ids by name before anything else looks at it. After that:
+     - a converted page links to the live rules, with or without a new shell;
+     - a new shell keeps every live id, so unchanged pages keep resolving;
+     - a class that exists only in the new conversion keeps its new id, and a
+       page that needs one cannot be written without the shell (checked below).
+   Condition ids are deterministic (`media:(max-width: 767px)`), so they need
+   no mapping. */
+const liveClassIdByName = new Map(
+  Object.values(site.styleRules ?? {}).filter((r) => r.kind === 'class').map((r) => [r.name, r.id]),
+)
+let writePages = converted.pages
+let sendShell = true
+const state = update ? loadState(TMP) : null
+if (update) {
+  const idMap = new Map()
+  const remapped = {}
+  for (const [id, rule] of Object.entries(converted.styleRules)) {
+    const liveId = rule.kind === 'class' ? liveClassIdByName.get(rule.name) : undefined
+    if (liveId && liveId !== id) idMap.set(id, liveId)
+    const newId = liveId ?? id
+    remapped[newId] = { ...rule, id: newId }
+  }
+  converted.styleRules = remapped
+  for (const p of converted.pages) {
+    for (const node of Object.values(p.nodes)) {
+      if (node.classIds) node.classIds = node.classIds.map((id) => idMap.get(id) ?? id)
+    }
+  }
+  console.log(`ids        ${idMap.size} converted class rule(s) mapped onto their live ids by name`)
+
+  if (shellOnly) writePages = []
+  else if (pagesArg) {
+    const want = pagesArg.split(',').map((x) => x.trim().replace(/^\/+|\/+$/g, '') || 'index')
+    const missing = want.filter((x) => !converted.pages.some((p) => p.slug === x))
+    if (missing.length) {
+      console.error(`REFUSING: ${missing.join(', ')} not in import-out.json — rebuild the payload with them (build-import-input.mjs --only)`)
+      process.exit(1)
+    }
+    writePages = converted.pages.filter((p) => want.includes(p.slug))
+  }
+
+  /* THE BROWSER-EDIT GUARD. An incremental write replaces each page it names
+     wholesale, and a shell write replaces the whole registry. Either one
+     would silently discard an edit made in the Instatic editor since our last
+     push, so compare against the record and refuse on any difference. */
+  const drift = []
+  if (!state) {
+    drift.push(`no push record for this instance (${path.basename(TMP)}/push-state.<host>.json) — cannot tell what was edited in the browser`)
+  } else {
+    const liveBySlug = new Map(existingPages.map((r) => [r.slug, r]))
+    for (const p of writePages) {
+      const live = liveBySlug.get(p.slug)
+      const rec = state.pages?.[p.slug]
+      if (live && rec && live.seq !== rec.seq) drift.push(`page ${p.slug}: seq ${rec.seq} -> ${live.seq}, edited since the last push`)
+      if (live && !rec) drift.push(`page ${p.slug}: exists live but was never pushed from here`)
+    }
+    if (state.shell?.styleRulesHash && state.shell.styleRulesHash !== styleRulesHash(site.styleRules)) {
+      drift.push('registry: the Styles panel (or another script) changed style rules since the last push')
+    }
+  }
+  if (drift.length && !force) {
+    console.error(`REFUSING the update:\n  ${drift.join('\n  ')}\n` +
+      `Pull those edits into site-src first, or re-run with --force to overwrite them. ` +
+      `If the only writes since were this pipeline's own (embeds, template flags), end the pipeline with --record next time.`)
+    process.exit(1)
+  }
+  if (drift.length) console.warn(`--force: overwriting\n  ${drift.join('\n  ')}`)
+}
+
 const authored = existingPages.filter((r) => {
   const nodes = r.cells?.body?.nodes ?? {}
   // The starter page setup creates has exactly one node and no children.
   return Object.keys(nodes).length > 1
 })
-if (authored.length > 0 && !force) {
+if (!update && authored.length > 0 && !force) {
   console.error(
     `REFUSING: ${authored.length} page(s) already carry authored content ` +
       `(${authored.map((p) => p.slug).join(', ')}).\n` +
@@ -769,6 +903,19 @@ const now = Date.now()
   for (const p of converted.pages) {
     for (const node of Object.values(p.nodes)) {
       for (const id of node.classIds ?? []) usedClassIds.add(id)
+    }
+  }
+  // On an update the pages NOT being rewritten stay live with their classIds,
+  // which are live ids and (after the mapping above) the same ids as here.
+  // Leaving them out would demote a class that only they use, and the
+  // unchanged page would lose it at the next publish.
+  if (update) {
+    const rewritten = new Set(writePages.map((p) => p.slug))
+    for (const r of existingPages) {
+      if (rewritten.has(r.slug)) continue
+      for (const node of Object.values(r.cells?.body?.nodes ?? {})) {
+        for (const id of node.classIds ?? []) usedClassIds.add(id)
+      }
     }
   }
   const demoted = []
@@ -877,6 +1024,34 @@ const now = Date.now()
   )
 }
 
+/* --- an update keeps the live rules only unchanged pages still need --------
+   A new shell replaces the registry wholesale. Every class in the source CSS
+   is in the new conversion under its live id (mapped above), but a class that
+   exists only because some page's markup carries it — auto-created during
+   linking, with no CSS — is created only for the pages converted THIS run. So
+   any live rule an unchanged page points at, and the conversion lacks, is
+   carried over as it is. */
+if (update) {
+  const rewritten = new Set(writePages.map((p) => p.slug))
+  const carried = []
+  const lost = []
+  for (const r of existingPages) {
+    if (rewritten.has(r.slug)) continue
+    for (const node of Object.values(r.cells?.body?.nodes ?? {})) {
+      for (const id of node.classIds ?? []) {
+        if (converted.styleRules[id]) continue
+        const live = site.styleRules?.[id]
+        if (live) {
+          converted.styleRules[id] = live
+          carried.push(live.name ?? id)
+        } else lost.push(`${r.slug}: ${id}`)
+      }
+    }
+  }
+  if (carried.length) console.log(`carried    ${carried.length} live class rule(s) only unchanged pages use: ${[...new Set(carried)].slice(0, 12).join(', ')}`)
+  if (lost.length) console.warn(`note       ${lost.length} classId(s) on unchanged pages point at no rule, live or new (already dangling): ${lost.slice(0, 6).join(', ')}`)
+}
+
 const shell = {
   ...site,
   styleRules: converted.styleRules,
@@ -960,7 +1135,7 @@ const shell = {
 // panel, the audit log and any external link point at.
 const idBySlug = new Map(existingPages.filter((p) => p.slug).map((p) => [p.slug, p.id]))
 const seoBySlugForTitle = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
-const pages = converted.pages.map((p) => ({
+const pages = writePages.map((p) => ({
   id: idBySlug.get(p.slug) ?? nid(),
   // The SEO title, not the short name.
   //
@@ -980,27 +1155,111 @@ const pages = converted.pages.map((p) => ({
 // Replace mode derives deletions itself and 400s if this is non-empty:
 //   "replace mode derives deletions server-side — deleted*Ids must be empty"
 // Any stored row not in changedPages is removed for us.
+// An update never deletes: a page gone from dist/ is reported, not removed.
 const deletedPageIds = []
 
-const body = {
-  mode: 'replace',
-  site: shell,
-  changedPages: pages,
-  deletedPageIds,
-  changedComponents: [],
-  deletedComponentIds: [],
-  changedLayouts: [],
-  deletedLayoutIds: [],
-  baseSeqs: {},
-  shellBaseSeq: seq,
+/* --- update: does the shell need to go, and does each page keep its template --- */
+const sourceHash = sha(
+  [input.css ?? '', JSON.stringify(input.registry ?? null), tokensCss, siteJs, shell.settings.metaDescription, shell.settings.faviconUrl].join('\n'),
+)
+const liveSeqById = new Map(existingPages.map((r) => [r.id, r.seq]))
+if (update) {
+  // A written page that links a class the live registry lacks needs the new shell.
+  const needShell = new Set()
+  for (const p of pages) {
+    for (const node of Object.values(p.nodes)) {
+      for (const id of node.classIds ?? []) {
+        if (!site.styleRules?.[id]) needShell.add(`${p.slug}: .${converted.styleRules[id]?.name ?? id}`)
+      }
+    }
+  }
+  if (shellOnly || shellFlag === true) sendShell = true
+  else if (shellFlag === false) {
+    if (needShell.size) {
+      console.error(`REFUSING --no-shell: these pages use classes the live registry does not have yet:\n  ${[...needShell].slice(0, 20).join('\n  ')}`)
+      process.exit(1)
+    }
+    sendShell = false
+  } else sendShell = needShell.size > 0 || state?.shell?.sourceHash !== sourceHash
+  console.log(
+    `shell      ${sendShell ? 'SENT' : 'unchanged, not sent'}` +
+      (sendShell && !shellOnly && shellFlag !== true
+        ? ` (${needShell.size ? `${needShell.size} new class use(s), e.g. ${[...needShell][0]}` : 'CSS/JS sources changed since the last push'})`
+        : ''),
+  )
+
+  // `PUT /site-document` REPLACES cells: a page written without its template
+  // block stops being a template (43 articles 404'd that way on 2026-08-25).
+  // Rebuild each entry from the live row so the template travels with it.
+  for (let i = 0; i < pages.length; i++) {
+    if (!liveSeqById.has(pages[i].id)) continue
+    const full = await api('GET', `/admin/api/cms/data/rows/${pages[i].id}`)
+    const { id, nodes, rootNodeId, title, slug } = pages[i]
+    pages[i] = toChangedPage(full.row ?? full, { id, nodes, rootNodeId, title, slug })
+    if (pages[i].template) console.log(`template   ${slug} keeps its template (${pages[i].template.target ?? '-'})`)
+  }
+  // The invariant the whole update path exists for: every class a written page
+  // points at is in the registry that will be live after this save.
+  const registry = sendShell ? shell.styleRules : site.styleRules ?? {}
+  const dangling = []
+  for (const p of pages) {
+    for (const node of Object.values(p.nodes)) {
+      for (const id of node.classIds ?? []) if (!registry[id]) dangling.push(`${p.slug}: ${id}`)
+    }
+  }
+  if (dangling.length) {
+    console.error(`REFUSING: ${dangling.length} classId(s) on written pages resolve to no rule: ${dangling.slice(0, 8).join(', ')}`)
+    process.exit(1)
+  }
+  if (!input.partial) {
+    const inBuild = new Set(converted.pages.map((p) => p.slug))
+    const gone = existingPages.filter((r) => r.slug && !inBuild.has(r.slug)).map((r) => r.slug)
+    if (gone.length) console.log(`not built  ${gone.length} live page(s) have no page in dist/ and are left alone: ${gone.slice(0, 10).join(', ')}`)
+  }
 }
 
+const body = update
+  ? {
+      mode: 'incremental',
+      // `site` is required even when unchanged; the live shell sent back as-is changes nothing.
+      site: sendShell ? shell : site,
+      changedPages: pages,
+      deletedPageIds,
+      changedComponents: [],
+      deletedComponentIds: [],
+      changedLayouts: [],
+      deletedLayoutIds: [],
+      // Each page's CURRENT seq: a browser save between our read and this write is a 409, not a loss.
+      baseSeqs: Object.fromEntries(pages.filter((p) => liveSeqById.has(p.id)).map((p) => [p.id, liveSeqById.get(p.id)])),
+      shellBaseSeq: seq,
+    }
+  : {
+      mode: 'replace',
+      site: shell,
+      changedPages: pages,
+      deletedPageIds,
+      changedComponents: [],
+      deletedComponentIds: [],
+      changedLayouts: [],
+      deletedLayoutIds: [],
+      baseSeqs: {},
+      shellBaseSeq: seq,
+    }
+
 const bytes = Buffer.byteLength(JSON.stringify(body))
-console.log(`shell      styleRules ${Object.keys(shell.styleRules).length}, conditions ${(shell.conditions ?? []).length}, files ${shell.files.length}`)
-console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (GSAP ${(vendorJs.length / 1024).toFixed(1)}KB + site bundle)`)
-console.log(`pages      ${pages.length} written, ${deletedPageIds.length} deleted`)
-for (const p of pages) console.log(`   ${p.slug.padEnd(18)} ${Object.keys(p.nodes).length} nodes  id=${p.id}`)
+console.log(`mode       ${body.mode}`)
+if (!update || sendShell) {
+  console.log(`shell      styleRules ${Object.keys(shell.styleRules).length}, conditions ${(shell.conditions ?? []).length}, files ${shell.files.length}`)
+  console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (GSAP ${(vendorJs.length / 1024).toFixed(1)}KB + site bundle)`)
+}
+const untouched = existingPages.length - pages.filter((p) => liveSeqById.has(p.id)).length
+console.log(`pages      ${pages.length} written, ${deletedPageIds.length} deleted${update ? `, ${untouched} untouched` : ''}`)
+for (const p of pages) console.log(`   ${p.slug.padEnd(18)} ${Object.keys(p.nodes).length} nodes  id=${p.id}${liveSeqById.has(p.id) ? '' : '  NEW'}`)
 console.log(`payload    ${(bytes / 1024 / 1024).toFixed(2)}MB`)
+if (update && !pages.length && !sendShell) {
+  console.log('\nnothing to write: no pages in the payload and the shell sources are unchanged')
+  process.exit(0)
+}
 
 if (!apply) {
   console.log('\ndry run — re-run with --apply to write')
@@ -1062,4 +1321,34 @@ for (const p of pages) {
     console.log(`seo  ${p.slug.padEnd(18)} FAILED ${e.message.slice(0, 160)}`)
     process.exitCode = 1
   }
+}
+
+/* --- record what is live now ----------------------------------------------
+   The baseline for the next --update: the html we just pushed per page, every
+   page's seq, the registry hash and (when the shell went) the source hash.
+   place-embeds / template flags move seqs again afterwards, so the pipeline
+   ends with `push-site.mjs --record` as well. */
+{
+  const prev = (update ? state : null) ?? {}
+  const after = (await getPages()).rows ?? []
+  const { site: siteAfter, seq: seqAfter } = await getSite()
+  const htmlBySlug = new Map(input.pages.map((p) => [p.slug, sha(p.html)]))
+  const written = new Set(pages.map((p) => p.slug))
+  const pagesState = {}
+  for (const r of after) {
+    if (!r.slug) continue
+    const old = prev.pages?.[r.slug] ?? {}
+    pagesState[r.slug] = written.has(r.slug)
+      ? { id: r.id, seq: r.seq, htmlHash: htmlBySlug.get(r.slug), pushedAt: new Date().toISOString() }
+      : { ...old, id: r.id, seq: r.seq }
+  }
+  const f = saveState(TMP, {
+    shell: {
+      sourceHash: !update || sendShell ? sourceHash : prev.shell?.sourceHash,
+      styleRulesHash: styleRulesHash(siteAfter.styleRules),
+      seq: seqAfter,
+    },
+    pages: pagesState,
+  })
+  console.log(`\nrecorded   ${f}`)
 }

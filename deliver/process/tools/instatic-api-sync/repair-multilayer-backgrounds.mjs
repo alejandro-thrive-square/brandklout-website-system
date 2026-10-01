@@ -26,7 +26,7 @@
  *   node repair-multilayer-backgrounds.mjs --apply   # write the draft shell
  *
  * Writing the draft is not publishing. Publish separately, then gate with
- * `node css-parity.mjs` and `node compare-local.mjs <page> .pg-hero`.
+ * `node ../instatic-site/gates/css-declared-parity.mjs` and `node ../instatic-site/gates/compare-live.mjs <page>`.
  */
 import { readFileSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -126,4 +126,4 @@ if (!repaired) { console.log('nothing to do'); process.exit(0) }
 if (!apply) { console.log('\nDRY RUN — re-run with --apply'); process.exit(0) }
 const res = await saveShell(shell, seq)
 console.log(`\nsaved draft — seq ${seq} -> ${res.seq}`)
-console.log('NOT published. Publish, then gate with css-parity.mjs and compare-local.mjs.')
+console.log('NOT published. Publish, then gate with ../instatic-site/gates/css-declared-parity.mjs and compare-live.mjs.')

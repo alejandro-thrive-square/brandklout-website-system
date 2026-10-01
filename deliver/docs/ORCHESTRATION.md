@@ -9,22 +9,26 @@ Established 2026-08-05. Companion to [ASANA-DISPATCH.md](./ASANA-DISPATCH.md).
 **One worktree per site (a client with two sites gets two). This main checkout orchestrates and does not do client work.**
 
 ```
-Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
-├── bk-grand-mission        worktree   -> deliver/brandklout/grand-mission-dentistry/
+Brandklout Website System  (main)   <-- the system + orchestration; no client work
+├── bk-alki-house           worktree   -> deliver/brandklout/alki-house/
 ├── bk-arvada               worktree   -> deliver/brandklout/arvada-dental-center/
+├── bk-brandklout-website   worktree   -> deliver/brandklout/brandklout-website/
+├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
+├── bk-grand-mission        worktree   -> deliver/brandklout/grand-mission-dentistry/
+├── bk-ifa-dentistry        worktree   -> deliver/brandklout/institute-for-advanced-dentistry/
+├── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/
+├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
+├── bk-marvel-dental        worktree   -> deliver/brandklout/marvel-dental/
 ├── bk-mason-park           worktree   -> deliver/brandklout/mason-park/
 ├── bk-mason-park-kids      worktree   -> deliver/brandklout/mason-park-kids/
-├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
+├── bk-oceanic-dental       worktree   -> deliver/brandklout/oceanic-dental/
 ├── bk-stone                worktree   -> deliver/brandklout/stone-surgical-arts/
 ├── bk-stone-dental         worktree   -> deliver/brandklout/stone-dental-implant-center/
 ├── bk-stone-med-spa        worktree   -> deliver/brandklout/stone-med-spa/
-├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
-├── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
-├── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/
-└── bk-ifa-dentistry        worktree   -> deliver/brandklout/institute-for-advanced-dentistry/
+└── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
 ```
 
-Repo id: `7b269532-4e7a-4ceb-baa4-707929ee41d3`
+Orca repo id: `db55534c-1992-4094-b865-7eaecc3e5eab` (see [Creating a worktree](#creating-a-worktree-for-a-new-client)).
 
 ### Why per-client worktrees rather than tabs in one checkout
 
@@ -46,15 +50,15 @@ scope decision — reports it back here rather than deciding alone.
 
 ### Propagation is versioned, not live
 
-A client worktree is isolated at a Git commit. It does not see later local `main` commits, changes
-to `deliver/process/`, or untracked root-worktree files until those inputs are deliberately made
-available. Before dispatch, checkpoint a clean client branch, merge current local `main`, record
-`process_baseline_commit` in the project overview and runbook, and confirm the task's references
-exist inside that worktree. Follow [ORCA.md](../../ORCA.md#client-worktrees-and-directive-propagation).
+A client worktree does not check out `deliver/process/`; its folder carries a copy of each scenario
+it started, recorded against a commit. Process changes are fixed on `main` and reach the client with
+`node scripts/scenario.mjs update <client>` (never by merging `main` into the client branch).
+Before dispatch, commit the process change on `main`, run the update, and confirm the task's
+references exist inside that worktree. The rules are in
+[DELIVER_SYSTEM_RULES.md §3](../DELIVER_SYSTEM_RULES.md).
 
-Reusable client learning is promoted to `deliver/process/` in a separate canonical commit. Merge
-that commit into sibling clients only between bounded runs. Client agents do not edit the canonical
-process opportunistically while also changing their client deliverable.
+Reusable client learning is promoted to `deliver/process/` on `main` in a separate system commit.
+Client agents do not edit their copy of the process while also changing their client deliverable.
 
 ## Claude accounts — which profile runs what
 
@@ -127,9 +131,9 @@ the client must start from the exact local baseline that contains its committed 
 Launch the team-profile client agent from the created terminal using the wrapper above; do not use
 `--agent claude` here because Orca cannot select the required per-worktree Claude profile.
 
-**Commit the client's starter docs and routed lightweight workflow files to local `main` before
-creating the worktree, then verify the new worktree contains that commit.** Binary/media assets stay
-ignored and must be synced separately. Anything uncommitted or untracked in the orchestration
+**Commit the client's starter docs to local `main` before creating the worktree, then verify the
+new worktree contains that commit.** Media stays ignored; restore it with
+`node scripts/assets.mjs pull <client>`. Anything uncommitted or untracked in the orchestration
 checkout will not exist in the new checkout.
 
 ## Standing brief for every client agent
@@ -138,7 +142,7 @@ Every dispatched agent is expected to have read, in this order:
 
 1. `deliver/docs/ASANA-DISPATCH.md` — the batch-wide rules, especially how reference
    URLs may be used and where pages get built
-2. The relevant canonical directive under `deliver/process/` and the current baseline commit
+2. The step directive in the client's scenario copy (`deliver/brandklout/<client>/<scenario>/<step>/`), refreshed with `scenario.mjs update`
 3. `deliver/brandklout/<client>/docs/project-overview.md` — the task manifest and deviations
 4. `deliver/brandklout/<client>/docs/mcp-access.md` — the exact target and what is not permitted
 
@@ -146,13 +150,15 @@ Non-negotiables, repeated here because they are the ones most likely to be skipp
 pressure:
 
 - **Reference URLs are structure and content only.** Screenshot them, take the section order and
-  copy angles, then design original work to [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) —
+  copy angles, then design original work to [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) —
   awwwards-grade, motion-led, benchmarked against the Dr. Nahlah build. Copying the reference's
   visual design is a failure, and so is shipping a plain templatised page.
 - **Build locally**, at
   `deliver/brandklout/<client>/scenario-0-new-site/03-design-build/output/<page-slug>/`, and report the full path.
-- **Local approval comes before Webflow.** Use the shared `webflow-brandklout` grant only for the
-  exact site ID in the client's access file, and follow the pasteable-components build standard.
+- **Local approval comes before publishing.** New sites are built on Instatic; on a Webflow site
+  use the shared `webflow-brandklout` grant only for the exact site ID in the client's access file,
+  and follow [Scenario 6 · Webflow Sites](../process/scenario-6-webflow-sites/README.md) (the HTML
+  paste converter is retired).
 - **Never invent testimonials, reviews, patient stories, or statistics.** Real practices, real
   content, sourced from the client's own material.
 - **Never write to Asana.** Comments and status changes notify real Brandklout staff.
@@ -166,7 +172,7 @@ or build run must therefore operate as a small persisted state machine, not as a
 
 Store `iteration-state.json` in the active workflow's `output/` folder with:
 
-- `baseline_commit` and `process_baseline_commit`;
+- `baseline_commit` and the scenario commit recorded in the client `README.md`;
 - approved brand/reference authority and canary artifact;
 - current page/component and the single acceptance transition this run owns;
 - required gates with commands and expected results;

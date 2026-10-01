@@ -1,0 +1,578 @@
+{
+ "generated": "2026-09-30",
+ "account": "trong@driverank.com",
+ "quota": "31/50 Google Reviews widgets after this rollout",
+ "dashboard": {
+  "b825b050-9f58-401f-a7b5-ebaa836a9661": "Livewell Dental - Google Reviews 2",
+  "d359c3c4-40bc-4c66-87ae-714ed666eb01": "Mason Park Dental for Kids",
+  "b429342c-facc-4943-8ff6-f961e3feb77c": "Arvada Dental Center",
+  "5b4f0a1d-1329-4668-b2c8-2054900227c5": "Marvel Dental Emegency",
+  "a3cf2f27-a2f9-4938-b48c-92674f85a165": "Legacy Dental Invisalign",
+  "b6fb7c5d-778c-42c9-b783-2820a05a44ee": "Jonathan Volland, DDS",
+  "f81ba9fa-74c2-41af-974e-744a1e19256d": "Dentiq Dental",
+  "cf96ca10-8feb-4ac7-8668-ddf398e0f61f": "Aesthetic Dental Center",
+  "c92f78df-0615-4ab9-a204-4f7b385011c9": "Stone Surgical Arts",
+  "a5eee310-92c4-4aed-9896-0e718a66dcf1": "Makris Dental",
+  "5dc13b7b-9ec4-4dc0-abef-4d396dcf8d20": "Livewell Dental",
+  "dd6f5ce5-606a-4a41-a2f1-412984add7f1": "Marvel Dental",
+  "a12c0745-a3a6-44a2-bddf-ffd0e49f52ae": "Markham Family Dental",
+  "eeba67f5-e02c-4f11-af73-f5daa44b61c2": "Organ Mountain Dental",
+  "8fa63e4d-6da7-4daa-a343-fff636771b50": "South Bay Dental Loft",
+  "3b315ce9-54d0-48df-b0fb-561c1473e479": "Ortega Cottage Dentistry",
+  "33f2eb26-ad12-4f8c-a68d-92dd234c5f4b": "Legacy Dental Invisalign Marketing Ad",
+  "61a74ef2-b14e-4bbe-8d44-840a1f22df37": "OCPAO Reviews",
+  "fe882ec6-9fa3-46c1-9819-6ffe4cba39a2": "Azusa Dental Clinic",
+  "aae2cece-bb76-44df-b210-a7e9bafcfcbc": "Atwood Implant Dentistry Carousel",
+  "6e983c99-8a3e-462a-a591-76516ba17221": "Grand Mission Dentistry",
+  "91c823e3-6657-49f9-b47c-c783c5865a0a": "Haven Cosmetic Dentistry & Implant Center",
+  "ef203923-1351-44a5-a9b0-e0f603e178d6": "AVA Dental implants"
+ },
+ "widgets": [
+  {
+   "key": "grandmission",
+   "label": "Grand Mission",
+   "url": "https://grandmissiondentistry.com",
+   "platform": "webflow",
+   "clientFolder": "grand-mission-dentistry",
+   "widget": "6e983c99-8a3e-462a-a591-76516ba17221",
+   "account": "trong@driverank.com",
+   "listing": "Grand Mission Dentistry Of Richmond, 8620 Grand Mission Blvd STE E, Richmond, TX 77407, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "6e983c99-8a3e-462a-a591-76516ba17221"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "nahlah",
+   "label": "Nahlah",
+   "url": "https://www.drnahlah.com",
+   "platform": "instatic",
+   "clientFolder": "dr-nahlah",
+   "widget": "da62eaec-a6dd-4fec-9860-7925d9ad4777",
+   "account": "trong@driverank.com",
+   "listing": "Dr. Nahlah Implants & Prosthodontics Specialists - Tysons Corner, 7901 Jones Branch Dr, McLean, VA 22102",
+   "verified": "4.9 (410)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "Site uses a reputationhub widget; the Elfsight widget is created but not placed. Nahlah has a second location (Alexandria) not included."
+  },
+  {
+   "key": "arvada",
+   "label": "Arvada Dental Center",
+   "url": "https://arvadadentalimplants.com",
+   "platform": "webflow",
+   "clientFolder": "arvada-dental-center",
+   "widget": "b429342c-facc-4943-8ff6-f961e3feb77c",
+   "account": "trong@driverank.com",
+   "listing": "Arvada Dental Center & Implants - Dentist in Arvada, 6695 Wadsworth Blvd, Arvada, CO 80003, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "b429342c-facc-4943-8ff6-f961e3feb77c"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "stone-dental",
+   "label": "Stone Dental Implants",
+   "url": "https://www.stonedentalimplantcenter.com",
+   "platform": "webflow",
+   "clientFolder": "stone-dental-implant-center",
+   "widget": "b694d47f-0013-4d8d-8657-ce04f4cf1a82",
+   "account": "trong@driverank.com",
+   "listing": "Stone Dental Implant Center, 72 Andorra Dr #110A, Westlake, TX 76262",
+   "verified": "4.9 (16)",
+   "state": "created-not-placed",
+   "onSite": [
+    "c92f78df-0615-4ab9-a204-4f7b385011c9"
+   ],
+   "deadOnSite": [
+    "7b3bee65-edf4-4c1d-8120-d7b999aed1ab"
+   ],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "The site's footer embeds Stone Surgical Arts' widget (c92f78df, #110) and a deleted app (7b3bee65); its own widget is b694d47f."
+  },
+  {
+   "key": "livewell",
+   "label": "Livewell",
+   "url": "https://www.livewelldentalva.com",
+   "platform": "webflow",
+   "clientFolder": "livewell-dental",
+   "widget": "5dc13b7b-9ec4-4dc0-abef-4d396dcf8d20",
+   "account": "trong@driverank.com",
+   "listing": "Livewell Dental (Chris Kim, DDS, FAGD, FICOI), 9027 Silverbrook Rd ste f, Fairfax Station, VA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "5dc13b7b-9ec4-4dc0-abef-4d396dcf8d20"
+   ],
+   "deadOnSite": [
+    "daf7a560-85d2-485e-81a9-f5ea07351447"
+   ],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "Two widgets on the same listing: 5dc13b7b (live) and b825b050 (created 2026-09-29 on request). The site also embeds a deleted app daf7a560."
+  },
+  {
+   "key": "mason",
+   "label": "Mason Park",
+   "url": "https://www.masonparkdental.com",
+   "platform": "instatic",
+   "clientFolder": "mason-park",
+   "widget": "32926aff-7df5-4c6d-8f35-d4d3f5f46b4b",
+   "account": "other",
+   "listing": "Mason Park Dental of Katy, 21830 Kingsland Blvd #104A, Katy, TX 77450",
+   "verified": null,
+   "state": "other-account-all-in-one",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": "Has an All-in-One Reviews widget 32926aff in the OTHER Elfsight account on its #104A listing (old site). Not recreated."
+  },
+  {
+   "key": "omnia",
+   "label": "Omnia",
+   "url": "https://www.omniadentalchinohills.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "7af5e247-2dd1-4546-99c4-b779cdeac1ef",
+   "account": "other",
+   "listing": "Omnia Dental Care - Chino Hills, 15911 Pomona Rincon Rd Unit 120, Chino Hills, CA 91709, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "7af5e247-2dd1-4546-99c4-b779cdeac1ef"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "Widget 7af5e247 is in the other Elfsight account."
+  },
+  {
+   "key": "marvel",
+   "label": "Marvel Dental",
+   "url": "https://www.marveldentaldds.com",
+   "platform": "webflow",
+   "clientFolder": "marvel-dental",
+   "widget": "dd6f5ce5-606a-4a41-a2f1-412984add7f1",
+   "account": "trong@driverank.com",
+   "listing": "Dr. Anna Gazu, DMD; Marvel Dental Practice, 1113 Main Ave Suite A, Clifton, NJ 07011, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "dd6f5ce5-606a-4a41-a2f1-412984add7f1"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "A second widget 5b4f0a1d (Marvel Dental Emergency) is on the same listing."
+  },
+  {
+   "key": "legacy",
+   "label": "Legacy Dental",
+   "url": "https://legacydentalpasadena.com",
+   "platform": "webflow",
+   "clientFolder": "legacy-dental-pasadena",
+   "widget": "3574fcbf-0bad-4538-8997-540a1ea3b1a5",
+   "account": "other",
+   "listing": "Legacy Dental Pasadena - Cosmetic & Implant Dentistry, 1213 N Lake Ave, Pasadena, CA 91104, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "3574fcbf-0bad-4538-8997-540a1ea3b1a5"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "Live widget 3574fcbf is in the other Elfsight account; 2 more in Trong's (a3cf2f27, 33f2eb26) for Invisalign pages."
+  },
+  {
+   "key": "mason-pediatric",
+   "label": "Mason Park Pediatrics",
+   "url": "https://www.masonparkpediatricdental.com",
+   "platform": "instatic",
+   "clientFolder": "mason-park-kids",
+   "widget": "d359c3c4-40bc-4c66-87ae-714ed666eb01",
+   "account": "trong@driverank.com",
+   "listing": "Mason Park Dental for Kids - Pediatric Dentist Katy TX, 21830 Kingsland Blvd #104B, Katy, TX 77450, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "d359c3c4-40bc-4c66-87ae-714ed666eb01"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "south-bay",
+   "label": "South Bay Dental Loft",
+   "url": "https://www.sbdentalloft.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "8fa63e4d-6da7-4daa-a343-fff636771b50",
+   "account": "trong@driverank.com",
+   "listing": "Cheryl Goldasich, DDS, 3610 Lomita Blvd #203, Torrance, CA 90505, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "8fa63e4d-6da7-4daa-a343-fff636771b50"
+   ],
+   "deadOnSite": [
+    "daf7a560-85d2-485e-81a9-f5ea07351447"
+   ],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "The site also embeds a deleted app daf7a560 (WIDGET_NOT_FOUND)."
+  },
+  {
+   "key": "ortega",
+   "label": "Ortega",
+   "url": "https://www.ortegacottagedentistry.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "3b315ce9-54d0-48df-b0fb-561c1473e479",
+   "account": "trong@driverank.com",
+   "listing": "Ortega Cottage Dentistry - San Juan, 27382 Calle Arroyo, San Juan Capistrano, CA 92675",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "3b315ce9-54d0-48df-b0fb-561c1473e479"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "west-la",
+   "label": "West LA",
+   "url": "https://westlaimplants.com",
+   "platform": "instatic",
+   "clientFolder": "west-la-implants",
+   "widget": "670ca31c-8602-42c1-a126-f46f653fe07f",
+   "account": "trong@driverank.com",
+   "listing": "West LA Implants, 12301 Wilshire Blvd #205, Los Angeles, CA 90025",
+   "verified": "4.9 (209)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "dentiq",
+   "label": "Dentiq",
+   "url": "https://www.dentiq.dental",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "f81ba9fa-74c2-41af-974e-744a1e19256d",
+   "account": "trong@driverank.com",
+   "listing": "Dentiq Dentistry Houston, 1355 W Gray St, Houston, TX 77019",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "f81ba9fa-74c2-41af-974e-744a1e19256d"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "stone-surgical",
+   "label": "Stone Surgical Arts",
+   "url": "https://dfwsurgicalarts.com",
+   "platform": "instatic",
+   "clientFolder": "stone-surgical-arts",
+   "widget": "c92f78df-0615-4ab9-a204-4f7b385011c9",
+   "account": "trong@driverank.com",
+   "listing": "Stone Surgical Arts, 72 Andorra Dr #110, Westlake, TX 76262",
+   "verified": null,
+   "state": "exists-placed-on-wrong-site",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": "Its widget c92f78df exists but is not on dfwsurgicalarts.com; it is embedded on stonedentalimplantcenter.com instead."
+  },
+  {
+   "key": "stone-med",
+   "label": "Westlake Medical Spa",
+   "url": "https://westlaketxmedspa.com",
+   "platform": "instatic",
+   "clientFolder": "stone-med-spa",
+   "widget": "73fff4ec-b68f-4c97-af8a-7b022584e166",
+   "account": "trong@driverank.com",
+   "listing": "Westlake Medical Aesthetics, 72 Andorra Dr #110b, Westlake, TX 76262",
+   "verified": "5.0 (15)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "hackensack",
+   "label": "Hackensack",
+   "url": "https://www.hackensackdentalimplants.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "cf96ca10-8feb-4ac7-8668-ddf398e0f61f",
+   "account": "trong@driverank.com",
+   "listing": "Aesthetic Dental Center of Hackensack, 163 Main St, Hackensack, NJ 07601",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "cf96ca10-8feb-4ac7-8668-ddf398e0f61f"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "kissime",
+   "label": "Ason / KISSIME",
+   "url": "https://kissimmeeoralsurgery.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "93b284c3-51b4-4bee-8521-219e6ad47d84",
+   "account": "trong@driverank.com",
+   "listing": "Kissimmee Oral Surgery, 3172 Bill Beck Blvd, Kissimmee, FL 34744",
+   "verified": "4.3 (1,212)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": "Google lists it by address in the search dropdown; the connected place is 'Kissimmee Oral Surgery' (verified 4.3, 1,212 reviews). Site uses reputationhub."
+  },
+  {
+   "key": "haven",
+   "label": "Haven",
+   "url": "https://havendentalcenter.net",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "91c823e3-6657-49f9-b47c-c783c5865a0a",
+   "account": "trong@driverank.com",
+   "listing": "Haven Cosmetic Dentistry and Implant Center, 8415 Haven Ave, Rancho Cucamonga, CA 91730, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "91c823e3-6657-49f9-b47c-c783c5865a0a"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "ava",
+   "label": "AVA",
+   "url": "https://www.myavadental.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "ef203923-1351-44a5-a9b0-e0f603e178d6",
+   "account": "trong@driverank.com",
+   "listing": "AVA Dental Implants Periodontics, 2600 Jacks Rd, Davenport, FL 33897, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "ef203923-1351-44a5-a9b0-e0f603e178d6"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "organ",
+   "label": "Organ Mountain",
+   "url": "https://www.organmountaindental.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "eeba67f5-e02c-4f11-af73-f5daa44b61c2",
+   "account": "trong@driverank.com",
+   "listing": "Organ Mountain Dental, 1425 S Telshor Blvd, Las Cruces, NM 88011",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "eeba67f5-e02c-4f11-af73-f5daa44b61c2"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "markham",
+   "label": "Markham",
+   "url": "https://www.markhamfamilydental.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "a12c0745-a3a6-44a2-bddf-ffd0e49f52ae",
+   "account": "trong@driverank.com",
+   "listing": "Markham Family Dental Associates, 2105 Pine St, Harlan, IA 51537",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "a12c0745-a3a6-44a2-bddf-ffd0e49f52ae"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "elite",
+   "label": "Elite",
+   "url": "https://myeliteoralsurgery.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "b6fb7c5d-778c-42c9-b783-2820a05a44ee",
+   "account": "trong@driverank.com",
+   "listing": "Jonathan Volland, DDS",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "b6fb7c5d-778c-42c9-b783-2820a05a44ee"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "restore",
+   "label": "Restore",
+   "url": "https://restore-dental-implant-studio.webflow.io",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "393dc878-ae85-45ac-bb22-fcb25ee8b274",
+   "account": "trong@driverank.com",
+   "listing": null,
+   "verified": null,
+   "state": "draft-needs-listing",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": "Draft 393dc878 created 2026-09-30, NOT connected: no Google listing found for Restore Dental Implant Studio (pre-launch site). Needs the Google Maps link."
+  },
+  {
+   "key": "ifa",
+   "label": "Institute",
+   "url": "https://www.ifadentistry.com",
+   "platform": "instatic",
+   "clientFolder": "institute-for-advanced-dentistry",
+   "widget": "7febe92d-b5da-447f-b53f-9593eec9da53",
+   "account": "trong@driverank.com",
+   "listing": "Institute for Advanced Dentistry and Implants, 13360 N 94th Dr B, Peoria, AZ 85381",
+   "verified": "5.0 (96)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [],
+   "note": null
+  },
+  {
+   "key": "oceanic",
+   "label": "Oceanic",
+   "url": "https://www.oceanicdental.com",
+   "platform": "webflow",
+   "clientFolder": "oceanic-dental",
+   "widget": "093a89eb-d130-42ed-833c-bed0bc181476",
+   "account": "trong@driverank.com",
+   "listing": "Oceanic Dental, 17991 Euclid St, Fountain Valley, CA 92708",
+   "verified": "4.8 (210)",
+   "state": "created-not-placed",
+   "onSite": [],
+   "deadOnSite": [],
+   "otherVendors": [
+    "birdeye"
+   ],
+   "note": "Site uses Birdeye; the Elfsight widget is created but not placed."
+  },
+  {
+   "key": "azusa",
+   "label": "Azusa",
+   "url": "https://azusadentalclinic.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "fe882ec6-9fa3-46c1-9819-6ffe4cba39a2",
+   "account": "trong@driverank.com",
+   "listing": "Azusa Dental Clinic - Dr. Virginia Ipapo - Dentist in La Puente, 525 N Azusa Ave Suite 112, La Puente, CA 91744",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "fe882ec6-9fa3-46c1-9819-6ffe4cba39a2"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "makris",
+   "label": "Makris",
+   "url": "https://www.lakenonadentist.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "a5eee310-92c4-4aed-9896-0e718a66dcf1",
+   "account": "trong@driverank.com",
+   "listing": "Makris Dental Prosthodontics, 13250 Narcoossee Rd #103, Orlando, FL 32832",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "a5eee310-92c4-4aed-9896-0e718a66dcf1"
+   ],
+   "deadOnSite": [],
+   "otherVendors": [
+    "reputationhub"
+   ],
+   "note": null
+  },
+  {
+   "key": "atwood",
+   "label": "Atwood",
+   "url": "https://atwoodimplantdentistry.com",
+   "platform": "webflow",
+   "clientFolder": null,
+   "widget": "aae2cece-bb76-44df-b210-a7e9bafcfcbc",
+   "account": "trong@driverank.com",
+   "listing": "Atwood Family Dentistry, 1651 E Orangethorpe Ave, Placentia, CA 92870, USA",
+   "verified": null,
+   "state": "live-on-site",
+   "onSite": [
+    "aae2cece-bb76-44df-b210-a7e9bafcfcbc"
+   ],
+   "deadOnSite": [
+    "daf7a560-85d2-485e-81a9-f5ea07351447"
+   ],
+   "otherVendors": [],
+   "note": "The site also embeds a deleted app daf7a560. OCPAO Reviews (61a74ef2) is the same address, for Atwood's training brand."
+  }
+ ]
+}

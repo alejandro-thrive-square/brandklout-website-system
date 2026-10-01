@@ -1,13 +1,9 @@
-# Webzite Agentic Workflow: System Core Rules
+# Brandklout Website System: System Core Rules
 
-This document serves as the master blueprint for the Webzite Agentic Workflow. It defines the architecture, directory structure, and operational standards for all agentic processes.
-
-> **Architecture transition, 2026-09-19:** [SYSTEM_ARCHITECTURE.md](./SYSTEM_ARCHITECTURE.md)
-> records the proposed diagram-based Brandklout architecture and migration sequence. Repository
-> separation, R2 recovery, and remote automation are not implemented by that proposal. Historical
-> four-pillar descriptions below do not override the Brandklout-only scope in `AGENTS.md`.
-> Asset recovery claims must be checked against the [current runbook](./.claude/RUNBOOK.md):
-> the existing scripts still reference the pre-split VPS path, and R2 has only passed a trial.
+This document is the master blueprint for the Brandklout Website System: the Deliver pillar scoped to
+Brandklout, split out of `webzite-agentic-workflow` on 2026-08-22. It defines the directory structure
+and operational standards for every agentic process in this repository. The Sales, Manage and Growth
+pillars, and the pricing rules, live in `webzite-agentic-workflow` and do not apply here.
 
 > [!IMPORTANT]
 > **Documentation Integrity Rule**: Whenever a change is made to the technical implementation of this system, the corresponding markdown files **MUST** be updated immediately to maintain synchronization between documentation and code.
@@ -18,73 +14,56 @@ This document serves as the master blueprint for the Webzite Agentic Workflow. I
 ## 0. Infrastructure
 This system is designed to run on a **Hostinger VPS** with the following specifications:
 - **OS**: Ubuntu 24.04 LTS
-- **Execution Environment**: All Python executors and system-level tools must be compatible with this Linux distribution.
+- **Execution Environment**: All scripts and system-level tools must be compatible with this Linux distribution.
 
 > [!IMPORTANT]
 > **Mandatory Section**: Every Markdown file created within this system **MUST** include an Infrastructure section at the end of the file to ensure environment compatibility.
 
 > [!IMPORTANT]
-> **Mandatory Section**: Every Markdown file created within this system **MUST** include a Version Control section (before Infrastructure) referencing the root-level version control rules. This ensures every workflow and pillar document reinforces Git discipline for agents operating in that context.
+> **Mandatory Section**: Every Markdown file created within this system **MUST** include a Version Control section (before Infrastructure) referencing the root-level version control rules. This ensures every directive reinforces Git discipline for agents operating in that context.
 
-## 1. System Architecture
+## 1. Scope
 
-The system is organized into four primary pillars (Microsystems), each responsible for a specific stage of the business lifecycle.
+One pillar, one partner: **Deliver, for Brandklout's clients.** Delivery is organised as
+**scenarios** (the kinds of job we do), each a numbered list of **steps**, plus shared **tools**. The
+scenario list and the rules for working in them are in
+[deliver/DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md); the full index is
+[deliver/process/PROCESS_INDEX.md](./deliver/process/PROCESS_INDEX.md). The FigJam board *Deliver
+SOP's* draws the same scenarios.
 
-```mermaid
-graph TD
-    A[Webzite Agentic Workflow] --> B[Sales]
-    A --> C[Manage]
-    A --> D[Growth]
-    A --> E[Deliver]
+**Main is for the system; client worktrees are for the sites.** A system change touches everything
+except client folders and is committed on `main`; a client change touches only
+`deliver/brandklout/<client>/` on that client's `bk-<client>` branch. `node scripts/check-scope.mjs`
+enforces the split (§4.3).
 
-    subgraph "Sales Microsystem"
-    B --> B1[Lead Gen]
-    B --> B2[Outreach]
-    B --> B3[CRM]
-    end
-
-    subgraph "Manage Microsystem"
-    C --> C1[Resource Planning]
-    C --> C2[Ops Management]
-    end
-
-    subgraph "Growth Microsystem"
-    D --> D1[Scraping/Redesign]
-    D --> D2[Marketing Automaion]
-    end
-
-    subgraph "Deliver Microsystem"
-    E --> E1[Project Execution]
-    E --> E2[QC/Reporting]
-    end
-```
-
-## 2. Directory Structure & Microsystems
-
-The root contains shared infrastructure (`mcp-servers/`) and four standalone Microsystems (pillars). The `mcp-servers/` directory sits above all microsystems as cross-cutting infrastructure — any pillar can reference its MCP servers.
+## 2. Directory Structure
 
 | Component | Directory | Purpose |
 | :--- | :--- | :--- |
-| **MCP Infrastructure** | `mcp-servers/` | Shared MCP server index, setup docs, and config — above all microsystems. |
-| **Sales** | `sales/` | Lead acquisition, Upwork scraping, CRM management, and proposal automation. |
-| **Manage** | `manage/` | Internal operations, documentation, **Global Assets Hub**, and financial maintenance. |
-| **Growth** | `growth/` | Dynamic prospecting, rapid prototyping (Vercel), and design comparisons. |
-| **Deliver** | `deliver/` | Client project execution, SEO optimization, and final handoffs. |
+| **Entry points & rules** | root `*.md` | `AGENTS.md`/`CLAUDE.md`/`GEMINI.md`, this file, install, deployment, Orca and Hermes docs. |
+| **Repo scripts** | `scripts/` | Worktrees (`new-client-worktree.sh`, `sparsify-worktree.sh`), scenarios (`scenario.mjs`), scope (`check-scope.mjs`), credentials (`env-sync.mjs`), media (`assets.mjs`, `mirror-assets.sh`, `drive.mjs`), git hooks, sync and deploy. |
+| **MCP Infrastructure** | `mcp-servers/` | Shared MCP server index, setup docs, access model and profiles. |
+| **Deliver rules** | `deliver/DELIVER_SYSTEM_RULES.md` | Scenarios, where things live, working rules, quality bar. |
+| **The process** | `deliver/process/` | `scenario-N-name/NN-step/` step folders and the shared `tools/<toolkit>/`. Fixed on `main` only. |
+| **Shared standards** | `deliver/docs/` | Standards every client uses (fluid root, images, BugHerd, Client-First, Drive map, Asana, orchestration, partner MCP registry). |
+| **Cross-client scripts** | `deliver/scripts/` | Asana pulls and other scripts that serve every client. |
+| **Clients** | `deliver/brandklout/<client>/` | One folder per client and nothing else: `README.md`, `RUNBOOK.md`, `docs/`, `assets.tsv`, and a copy of each scenario it started. |
+| **System runbook** | `.claude/runbook/` | One file per system run, indexed in `INDEX.md`. |
 
-### 2.1 Workflow Folder Structure
-Every workflow within a pillar must follow this structure:
-- `[workflow-name]/`: The root folder for the process.
-- `[workflow-name].md`: **The Directive**. Contains the logic, prompts, and requirements.
-- `[workflow-name].py`: **The Executor**. The Python script that triggers the logic.
-- `.tmp/`: **Artifact Storage**. Stores workflow-owned intermediate and output files (HTML, CSVs, scraped data, manifests, logs, and lightweight generated artifacts). `.tmp/` folders are included in Git so workflow state and text artifacts travel with the repository. Heavy binary/media assets inside `.tmp/` remain excluded by file type and are synced to the VPS via `rclone`.
+### 2.1 Step Folder Structure
+Every scenario step, on `main` and in a client's copy, has the same shape:
+- `NN-step/NN-step.md`: **The Directive**. The step's logic, requirements and gates. The directive is the program; code exists only for real consequences and verifiers.
+- `scripts/` (optional): the step's own executables.
+- `tools.json`: the shared toolkits under `deliver/process/tools/` the step uses. `scenario.mjs` copies only these into a client, so a script that imports another toolkit must list it here.
+- `output/`: **Artifact Storage**. Everything the step produces: `output/assets/` (media, gitignored, backed up to R2), `output/code/`, and the step's `output/RUNBOOK.md`. Lightweight text artifacts are committed; media never is. `output/` replaced `.tmp/` on 2026-09-23; client branches from before keep `workflows/<module>/.tmp/` until moved.
 
 ### 2.2 MCP Server Folder Structure
 Every MCP server registered in the project follows this structure under `mcp-servers/`:
-- `[mcp-name]/`: Subfolder for each MCP server (e.g., `webflow/`, `figma/`).
+- `[mcp-name]/`: Subfolder for each MCP server (e.g., `webflow/`, `asana/`).
 - `setup.md`: Setup, authorization, and usage documentation.
 - `MCP_INDEX.md`: Master index of all MCP servers in the project.
-- `ACCESS_MODEL.md`: Folder-based MCP access procedure shared by all pillars.
-- `profiles/`: Reusable MCP access profiles (agency, client, prospect, design, deployment).
+- `ACCESS_MODEL.md`: Folder-based MCP access procedure.
+- `profiles/`: Reusable MCP access profiles (`client-delivery.md`).
 
 ### 2.3 Folder-Based MCP Access
 MCP server definitions stay centralized in `.mcp.json` and `mcp-servers/`, but MCP usage is controlled by the active folder's nearest `mcp-access.md`.
@@ -97,37 +76,35 @@ Before using any MCP tool, agents must:
 5. Verify runtime authentication through `/mcp`, `claude mcp list`, or the active MCP client's equivalent status check.
 6. Confirm the target account, site, project, repository, base, deployment, or other resource before changing it.
 7. Ask explicit confirmation before publishing, deleting, overwriting, billing, emailing, deploying, changing production data, or using private session data.
-8. Store MCP outputs in the active workflow's `.tmp/` folder unless the workflow specifies another repo-safe path.
+8. Store MCP outputs in the active step's `output/` folder unless the step specifies another repo-safe path.
 
-Folders that rely on MCPs must include an `mcp-access.md` file documenting allowed MCPs, target resources, allowed operations, forbidden operations, confirmation requirements, runtime authentication notes, and artifact paths. Client projects use `deliver/[client-name]/docs/mcp-access.md`.
+Folders that rely on MCPs must include an `mcp-access.md` file documenting allowed MCPs, target resources, allowed operations, forbidden operations, confirmation requirements, runtime authentication notes, and artifact paths. Client projects use `deliver/brandklout/<client>/docs/mcp-access.md`; the partner registry is [deliver/docs/mcp-access.md](./deliver/docs/mcp-access.md).
 
 ## 3. Global Operational Standards
 
-- **Context Filtering**: When working on a specific workflow, agents should prioritize the `.md` file within that workflow folder to save tokens and maintain focus.
-- **Directive Improvement Loop**: At the end of each task, agents must update the specific directive `.md` files they used to learn or execute that process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement. This applies even when no code changes were made. Keep updates scoped to the relevant workflow, pillar, MCP, or root directive, and preserve the mirrored entry-point files when they are affected.
+- **Context Filtering**: When working on a step, agents read that step's directive and only the tools it names, to save tokens and maintain focus.
+- **Directive Improvement Loop**: At the end of each task, agents must update the specific directive `.md` files they used to learn or execute that process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement. This applies even when no code changes were made. Process fixes are made on `main`, never in a client's copy, and reach clients through `node scripts/scenario.mjs update <client>`. Preserve the mirrored entry-point files when they are affected.
 - **Copy Standards — no em dashes**: No em dash (`—`, `&mdash;`) may appear in any copy this system produces: client sites, proposals, emails, decks, any deliverable. Use a comma, colon, semicolon or full stop, chosen per instance — a blanket substitution leaves half of them ungrammatical. The rule covers every rendered string, including `alt`, `placeholder`, `title`, SEO and Open Graph descriptions, and JSON-LD. It does **not** cover code comments and developer notes, which are not copy. Verify on the **built** output with comments and `<script>`/`<style>` blocks stripped first, or the check reads its own notes back as failures.
-- **Environment Variables**: All API keys and secrets are shared globally via a root `.env` file.
-- **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Figma) authenticate at runtime — no static tokens required. Usage is controlled by the folder-based procedure in [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md).
-- **Inter-system Connectivity**: Microsystems connect through Python executors. Output from a `sales` workflow can trigger a `growth` or `deliver` process.
+- **Environment Variables**: All API keys and secrets live in the single master file `~/.webzite/.env`; every worktree `.env` is generated from it (§4.2.2).
+- **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Asana) authenticate at runtime — no static tokens required. Usage is controlled by the folder-based procedure in [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md).
 - **Safety**: No destructive actions (deleting client data, unapproved publishing) should be taken without explicit confirmation in the directive.
 
 ## 4. Version Control & Asset Management
 
 This system is version-controlled via a **GitHub repository**. All contributors and agents must follow these rules.
 
-**Architecture: Git for code, docs, and lightweight workflow artifacts; rclone for heavy binary assets. Both directions are supported.**
+**Architecture: Git for code, docs, runbooks and lightweight step artifacts; Cloudflare R2 for client media.**
 ```
 Local PC ──── git push (code/docs) ──────────→ GitHub ──→ VPS (git pull via GitHub Actions)
 VPS      ──── git push (agent artifacts) ────→ GitHub ──→ Local (git pull)
 
-Local PC ──── rclone sync --direction push ──→ VPS  (local assets → VPS)
-Local PC ←─── rclone sync --direction pull ──  VPS  (VPS-generated assets → local)
-Local PC ←──→ rclone bisync ─────────────────→ VPS  (merge both sides)
+Worktrees ─── node scripts/assets.mjs push ──→ R2   (clients/<client>/..., manifest assets.tsv in git)
+Any checkout ← node scripts/assets.mjs pull <client> ── R2   (sha256-verified restore)
 ```
 
-- **Resume work from anywhere — one command (local)**: `bash scripts/sync.sh` is the canonical way to bring both workspaces into sync in both directions. Run on the local machine, it: fetches and integrates remote git work **before** pushing local work (never auto-clobbering), pushes (triggering the VPS auto-deploy), and runs a safe `rclone bisync` for assets. Preview with `--dry-run`; the first-ever bisync needs `--resync`. The directional `sync-assets.sh` commands below remain the lower-level primitives. See [HERMES.md](./HERMES.md) and §4.5.
-- **Automatic VPS deploys**: Pushes to `main` trigger the GitHub Actions workflow in `.github/workflows/deploy-vps.yml`, which SSHes into the VPS and runs a guarded `git pull --ff-only origin main`. Setup details and required GitHub secrets are documented in [DEPLOYMENT.md](./DEPLOYMENT.md).
-- **VPS → GitHub pushes**: When a VPS agent (e.g., [Hermes](./HERMES.md)) produces git-tracked artifacts, run `bash scripts/vps-commit-push.sh` on the VPS to commit and push to GitHub (it pulls before pushing so it never clobbers). Receive them locally with `bash scripts/sync.sh` (git + assets) or a plain `git pull` for git-tracked files only.
+- **Resume work from anywhere — one command (local)**: `bash scripts/sync.sh` brings the local branch and GitHub into sync in both directions: it fetches and integrates remote git work **before** pushing local work (never auto-clobbering) and pushes. Preview with `--dry-run`. It does not move media. See [HERMES.md](./HERMES.md) and §4.5.
+- **VPS deploys**: Pushes to `main` trigger `.github/workflows/deploy-vps.yml`, which SSHes into the VPS and runs a guarded `git pull --ff-only origin main`. The repository does not hold the `VPS_*` secrets yet, so the job fails at "Configure SSH" and nothing reaches the VPS until they are set. Details in [DEPLOYMENT.md](./DEPLOYMENT.md).
+- **VPS → GitHub pushes**: When a VPS agent (e.g., [Hermes](./HERMES.md)) produces git-tracked artifacts, run `bash scripts/vps-commit-push.sh` on the VPS to commit and push to GitHub (it pulls before pushing so it never clobbers). Receive them locally with `bash scripts/sync.sh` or a plain `git pull`.
 
 ### 4.1 Repository Hygiene
 - **Platform**: GitHub (private repository).
@@ -137,30 +114,21 @@ Local PC ←──→ rclone bisync ──────────────�
   - Dependency folders, browser profile caches, and local test output (`node_modules/`, `**/pw-profile/`, `test-results/`, etc.).
   - **All binary/media files** (`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.webp`, `*.svg`, `*.ico`, `*.pdf`, `*.mp4`, `*.webm`, `*.mov`, `*.zip`, `*.7z`, `*.psd`, `*.ai`, `*.eps`, `*.fig`, `*.sketch`).
 - **`.gitattributes`**: Enforced at the repo root. Scripts and source files that may run on the Ubuntu VPS must keep LF line endings so Windows checkouts do not break shell execution.
-- **`.tmp/` folders**: Committed when they contain lightweight workflow state, text artifacts, HTML/CSS/JS, CSV/JSON, or other repo-friendly files. Heavy binary/media files inside `.tmp/` are still blocked by `.gitignore` and must not be force-added.
+- **`output/` folders** (and `.tmp/` on pre-2026-09-23 client branches): Committed when they contain lightweight state, text artifacts, HTML/CSS/JS, CSV/JSON, or other repo-friendly files. Media inside them is still blocked by `.gitignore` and must not be force-added.
 - **Commit Discipline**: Commits must be atomic and descriptive. One logical change per commit.
 
-### 4.2 Asset Management (VPS Storage)
-Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (100 GB)** is the single source of truth for those assets.
+### 4.2 Asset Management (R2)
+Media is **never** stored in Git. It lives in the client's Google Drive and the step's `output/assets/`, and every untracked file under a client folder is backed up to Cloudflare R2.
 
-- **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
-- **Deliver Project Files** (`deliver/brandklout/<client>/<scenario>/<step>/output/`): each scenario step writes into its own `output/` folder (assets, code and the step runbook; `.tmp/` on client branches from before 2026-09-23). Client photos, videos and brand files live in the client's Google Drive and are pulled with `scripts/drive.mjs` into the step that uses them; never keep the only copy in a worktree.
-- **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
-- **Sync commands** — use `scripts/sync-assets.sh` (wraps rclone with the correct filters):
+- **Client media** (`deliver/brandklout/<client>/<scenario>/<step>/output/assets/`, and `.tmp/` on older client branches): pulled from the client's Google Drive with `scripts/drive.mjs` into the step that uses it; never keep the only copy in a worktree.
+- **Backup and restore** — `scripts/assets.mjs` (details in [DELIVER_SYSTEM_RULES.md §2](./deliver/DELIVER_SYSTEM_RULES.md)):
   ```bash
-  # Local → VPS (default; after working locally)
-  bash scripts/sync-assets.sh --direction push
-
-  # VPS → Local (after VPS agent generates assets)
-  bash scripts/sync-assets.sh --direction pull
-
-  # Bidirectional merge (first run requires --resync)
-  bash scripts/sync-assets.sh --direction bisync --resync   # first time
-  bash scripts/sync-assets.sh --direction bisync            # subsequent runs
+  node scripts/assets.mjs push                 # every worktree -> R2; rewrites each client's assets.tsv (commit it)
+  node scripts/assets.mjs pull <client>        # R2 -> this checkout, sha256-verified
+  node scripts/assets.mjs status [<client>]    # manifest vs R2
   ```
-  Configure the `vps` remote in `~/.config/rclone/rclone.conf` with SFTP credentials. See [DEPLOYMENT.md § Asset Sync](./DEPLOYMENT.md) for the full workflow.
-
-- **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
+  Run a push at the end of every task that made media, and before removing a worktree. Session cookies, keys, env files and `recovered/` dumps are never uploaded. On a new computer, `bash scripts/bootstrap.sh --client <slug>` (or `--all`) restores from R2.
+- **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, add it to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup.
 
 #### 4.2.0 Creating a client worktree (sparse)
 
@@ -319,8 +287,8 @@ do not appear in `git status`, tracked ones would. **Un-ignoring assets would br
 
 The cost is that `git merge bk-<client>` brings the markup into `main` but not the images it
 references, so a design opened from `main` renders broken. Since every worktree lives on one machine
-and shares one `.git`, that gap is closed by a local copy — **not** by rclone, which is strictly the
-local↔VPS channel:
+and shares one `.git`, that gap is closed by a local copy — **not** by R2, which is the backup
+channel (§4.2):
 
 ```bash
 bash scripts/mirror-assets.sh                 # scopes derived from HEAD's paths
@@ -377,22 +345,22 @@ required once per clone). Notes that matter:
   batched invocation would otherwise condemn every file that shared it.
 
 ### 4.3 Branching Strategy
-- **`main`**: Production-ready state of the system. Protected — no direct pushes.
-- **`dev`**: Active development and integration branch.
-- **Feature branches**: Named `pillar/description` (e.g., `sales/upwork-scraper`, `manage/brand-refresh`). Merged into `dev` via pull request.
+- **`main`**: the system — process, tools, rules, scripts, docs — plus the client folders merged at launch. System changes are committed on `main` directly; the `pre-commit` and `pre-merge-commit` hooks run `check-scope.mjs` so a commit is either a system change or one client's change, never both.
+- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` and merges into `main` (`git merge --no-ff`) when the site launches. It receives process updates through `node scripts/scenario.mjs update <client>`, not by merging `main`.
+- **Backups**: `backup/*` branches and tags are recovery points; never delete or rewrite them.
 
 ### 4.4 Agent Responsibilities
-- Agents must **never** commit secrets or binary/media files. `.tmp/` folders are commit-eligible for lightweight workflow artifacts, but ignored heavy assets inside them must stay out of Git.
-- When an agent creates or modifies a binary asset intended to persist, it must be placed in the appropriate asset path on disk: `manage/brand-assets/` for agency brand assets, or the owning Deliver workflow's `.tmp/` folder for client project assets. The user will sync it between local and VPS via `scripts/sync-assets.sh`.
+- Agents must **never** commit secrets or binary/media files. `output/` folders are commit-eligible for lightweight artifacts, but ignored media inside them must stay out of Git.
+- When an agent creates or modifies a media file intended to persist, it goes in the owning step's `output/assets/` in the client folder, and is backed up with `node scripts/assets.mjs push`.
 - Agents should not force-push or rewrite shared branch history without explicit user confirmation.
 
 ### 4.5 Workspace Authority & Conflict Policy
 The system has **two workspaces that can both change repo state**: the local machine (IDE / Claude desktop) and the VPS (where [Hermes](./HERMES.md) runs). This policy keeps them from clobbering each other.
 
 - **GitHub `main` is the single source of truth for git-tracked state.** Neither workspace is inherently more authoritative — whoever pushes first wins the fast-forward, and the other must integrate remote work before pushing.
-- **The VPS is the single source of truth for heavy binary/media assets** (restates §4.2). Local mirrors them via `rclone bisync`, which keeps both copies as `..conflict` files on a clash rather than overwriting.
-- **Conflict resolution order**: (1) integrate remote git first, (2) resolve any git conflicts manually — never auto-clobber, (3) only then move assets.
-- **Default safety**: `scripts/sync.sh` defaults to abort-on-divergence and `rclone bisync`. The destructive `--direction push`/`pull` mirrors in `sync-assets.sh` remain available but are opt-in/advanced.
+- **R2 plus each client's `assets.tsv` is the source of truth for media** (§4.2). A push never deletes from R2; the same path in two worktrees with different content resolves to the newer file and prints the clash.
+- **Conflict resolution order**: (1) integrate remote git first, (2) resolve any git conflicts manually — never auto-clobber, (3) only then push media.
+- **Default safety**: `scripts/sync.sh` defaults to abort-on-divergence.
 - **Concurrency**: do not run `vps-commit-push.sh` on the VPS and `sync.sh` on local at the same time. If a push is rejected because the other side pushed first, simply re-run the safe command.
 - **Hermes**: when committing inside this repo, Hermes must use `scripts/vps-commit-push.sh` (which pulls before pushing) and must never force-push or rewrite shared history.
 
@@ -432,23 +400,15 @@ do not read a pre-migration `Next` as a plan.
 
 ### The session-rotation automation was removed on 2026-08-22
 
-There used to be a rule here: a session that reached 200,000 tokens handed off to a fresh one automatically. Four scripts implemented it — `session-lib.mjs`, `session-guard.mjs` (a `Stop` hook), `session-resume.mjs` (a `SessionStart` hook) and `session-rotate.mjs` — registered in a project-level `.claude/settings.json`. All of it is deleted. `git log -- scripts/session-rotate.mjs` has the history if it is ever wanted back.
+A session used to hand off to a fresh one automatically at 200,000 tokens, through `Stop` and
+`SessionStart` hooks. It could type into the wrong agent's live terminal and fail silently, so it was
+removed; `git log -- scripts/session-rotate.mjs` has the history.
 
-The economics that motivated it were real and still are: context is paid for on **every** turn, so a 200k session spends 200k on its next reply no matter how small the question. A handoff measured ~1.6k tokens against a 200k resume.
-
-What killed it was that **an automation which drives a terminal has to be right every single time, and this one had no way to be.**
-
-- It relaunched by driving the Orca terminal it believed the session was in — chosen as "the first live terminal whose worktree matches". The house pattern is several Orca tabs in **one** worktree, one per CLI or model, so that choice was a coin toss. When it lost, it typed `/exit` and a `claude …` launch line into a **different agent's live session**: that tab got a second Claude started inside it, and the session that actually hit the threshold was never replaced at all. Both halves of what the machine appeared to be doing — terminals launching in parallel, and no new session ever appearing — came from that one line.
-- It recorded the handoff **before** attempting it, and every later `Stop` of that session was then silent. So a rotation that aborted (no terminal it could identify, Orca not answering) muted the guard for the rest of the session's life with nothing running behind it. "Disabled" and "broken" looked identical from outside.
-- Switching it off was done by raising the thresholds to `100000000` in a gitignored `.claude/settings.local.json`, per worktree. By 2026-08-22 five worktrees had that override and four did not, so half the machine silently obeyed a rule the other half had never heard of.
-
-Every one of those was fixable, and all three were in fact fixed before the removal — addressing the terminal by `ORCA_TERMINAL_HANDLE` instead of by position, creating the successor with `orca terminal create --command` instead of typing into a shell, and reporting failed handoffs instead of swallowing them. The removal was still the right call: the rule saved tokens and cost attention, the thresholds were already off in most of the tree, and a background process that can type into a live agent session is a bad trade for a saving you can also get by starting a new session yourself.
-
-**If you want a fresh session, start one.** `claude team --permission-mode bypassPermissions` (client work) or `claude personal …` (orchestration) in a new terminal in that worktree — see [reference: Claude account profiles](./mcp-servers/MCP_INDEX.md). Write the runbook first; that part was never the problem.
+**If you want a fresh session, start one.** `claude team --permission-mode bypassPermissions` (client work) or `claude personal …` (orchestration) in a new terminal in that worktree — see [Claude account profiles](./deliver/docs/ORCHESTRATION.md). Write the runbook first.
 
 ## 6. Key Directives
-- **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) — how Telegram-driven VPS work and local work stay in sync via `scripts/sync.sh`.
-- **New Computer Install**: [INSTALL.md](./INSTALL.md) - restore this system on a new local workstation from GitHub, the VPS, and private credentials.
+- **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) — how Telegram-driven VPS work and local work stay in sync via `scripts/sync.sh` (git only; media goes through `scripts/assets.mjs`).
+- **New Computer Install**: [INSTALL.md](./INSTALL.md) - restore this system on a new local workstation from GitHub, R2, and private credentials.
 - **Sales, Manage and Growth pillars**: not in this repository. This repo is the Deliver pillar scoped to Brandklout; the other three live in `webzite-agentic-workflow`.
 - **Pricing & Timeline Rules**: not in this repository, and they do **not** apply here. Brandklout is a partner engagement, not a per-page client — never compute or record a price, rate, quote or cost anywhere under `deliver/brandklout/`.
 - **Deliver Rules**: [DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
