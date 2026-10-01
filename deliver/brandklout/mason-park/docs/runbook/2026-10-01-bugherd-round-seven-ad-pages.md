@@ -7,7 +7,7 @@ note out of 262**.
 
 ## Done
 
-Implementation commit: see the commit that carries this file.
+Implementation commit `c010d10f` on `bk-mason-park` (not pushed, not merged).
 
 Tools are in `workflows/09-static-rebuild/.tmp/bugherd/`. The pull is `open-2026-10-01.mjs`, which
 fetches only the open notes. Its first run is in `open-pull-2026-10-01.log`, untracked like the
