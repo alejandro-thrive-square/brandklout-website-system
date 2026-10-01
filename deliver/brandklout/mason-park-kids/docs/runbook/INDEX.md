@@ -1,11 +1,12 @@
 # Runbook index
 
-26 runs, newest first. Each line is one file in this folder.
+27 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01 - /hipaa-disclosure (HHS model Notice of Privacy Practices) injected on staging AND production as one new row; entity = practice name (none stated anywhere, flagged); no footer link; not in the edge Worker's static sitemap.xml. Gotchas: draftMatchesPublished ignores OG overrides (this publish shipped round six's 4 pending descriptions on production), every publish re-mints script folder ids | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-10-01 | 2026-10-01 - BugHerd round seven, #507-#515: 8 closed on STAGING (home comfort card copy + booking link, /our-doctors note and two captions out, hygiene photo swap, team ticker fill fixed in journey.js); not on production. 13 still wait on the practice. Gotcha: a marquee duplicated once leaves a gap when items are removed | [`2026-10-01-bugherd-round-seven.md`](./2026-10-01-bugherd-round-seven.md) |
 | 2026-09-29 | 2026-09-29 - BugHerd round six, #434-#506: 70 closed, on staging AND PRODUCTION (25 Drive photos, 11 crops, team page, FAQ removals, $89, five Invisalign FAQs, #406 Platinum caption); 4 wait on the practice (Canva headshots, one missing Drive photo). Gotchas: three chains at once, bare <figure> crop helper, meta descriptions live in the OG store | [`2026-09-29-bugherd-round-six.md`](./2026-09-29-bugherd-round-six.md) |
 | 2026-09-29 | 2026-09-29 - Elfsight Google Reviews (pediatric #104B listing, app d359c3c4) on STAGING: replaces the homepage chip rail and the /patient-reviews wall; not on production yet. Gotchas: data-elfsight-app-lazy never boots here, a re-import drops the widget, Jev cannot drive Elfsight's iframe editor | [`2026-09-29-elfsight-google-reviews-on-staging.md`](./2026-09-29-elfsight-google-reviews-on-staging.md) |
