@@ -1,4 +1,4 @@
-# 2026-10-01 — HIPAA Disclosure page injected on staging and production (55 pages each)
+# 2026-10-01 — HIPAA Disclosure page injected on staging and production (55 pages each) — `65e6321c`
 
 ## Done
 
