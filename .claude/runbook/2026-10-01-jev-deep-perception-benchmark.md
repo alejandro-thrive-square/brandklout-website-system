@@ -28,12 +28,16 @@ The user asked to make computer use with Jev work properly and to compare approa
 
   Guarded's median run is 3.7 s; the full flow takes 15 s over 7 steps. Logs are in `bench/results/`.
 
+- **Validated on real Elfsight, read-only, in the user's own Chrome** (the user chose it over the
+  automation profile). It ran in a background tab on the Mason Park Kids widget (`d359c3c4`), with
+  seven `--forbid` patterns (publish, close, upgrade, delete, duplicate, save, install/share).
+  - The two steps (Theme, then Layout) took 2 actions in 11.5 s, and each click had p = 1.0.
+  - The final text shows the Layout panel. It also shows the live review preview
+    (4.9, 97 reviews), which sits in a nested frame and was unreadable before.
+
 ## Next
 
-- **Validate on real Elfsight, read-only:** open an existing widget, open Theme, search a word,
-  stop. Do it first on a **dedicated automation Chrome profile** (port 9333, signed in to Elfsight
-  once by the user), so the user's own tabs are never driven.
-- **Only then** consider a real create run in place of `elfsight-reviews/elfsight_widget.py`.
+- A real create run is next: consider a real create run in place of `elfsight-reviews/elfsight_widget.py`.
   Each create spends one of the 50 Google Reviews slots.
 
 ## Gotchas

@@ -119,7 +119,7 @@ uv run --project ~/tools/jev-ultrafast python inspect_table.py --browser deep --
 
 - Closed shadow roots, canvas, uploads, pop-up tabs, and frame-local scrolling are not handled.
 - The text helper (`inception/mercury-2.5`) sometimes returns no value; `drive()` retries once.
-- Benchmarked on fixtures. Before trusting it on a new vendor, run a read-only goal there first.
+- Benchmarked on fixtures. On real Elfsight, a read-only run is verified (2026-10-01: Theme, then Layout, in 2 actions and 11.5 s, preview text read); a create run is not yet. Before trusting it on a new vendor, run a read-only goal there first.
 
 ## Version Control
 
