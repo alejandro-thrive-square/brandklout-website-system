@@ -3,7 +3,7 @@
 The task was to inject one page, **HIPAA Disclosure** at `/hipaa-disclosure`, to match what the Webflow sites carry (stonedentalimplantcenter.com,
 grandmissiondentistry.com). It is an injection only: no push-site, no other page, no nav, footer, component or CSS change, and no footer link.
 
-## Done
+## Done (`6e4663a1`, this worktree only — not pushed, not merged)
 
 - **New `05-instatic-upload/add-hipaa-page.mjs`** clones the instance's own `/privacy-policy` row: navbar,
   drawer, hero, aside (effective date, questions, "On this page"), CTA, footer, and the same class
