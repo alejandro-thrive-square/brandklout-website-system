@@ -24,6 +24,10 @@
 - `Mason Park -Team/`: the Canva team set, 15 PNGs (incl. the logo).
 Both are gitignored and backed up to R2 (`scripts/assets.mjs push`).
 
+### Asana
+
+- 2026-10-01: task 1218885013466701 ("Update Patient Reviews Page") marked complete, with a comment linking the live page and listing its chapters. Asana writes go through the MCP token: `callTool('add_comment')` / `callTool('update_tasks')` from `deliver/scripts/asana-lib.mjs`; the REST API 401s that token.
+
 ### Next
 
 1. Done: production (above). Staging and production now match for everything changed on 2026-10-01.
