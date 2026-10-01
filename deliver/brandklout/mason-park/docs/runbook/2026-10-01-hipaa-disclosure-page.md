@@ -7,6 +7,8 @@ sweep: no push chain, no other page, footer, nav, component or stylesheet touche
 
 ## Done
 
+Commit `33633efa` on `bk-mason-park` (not pushed, not merged).
+
 **Live, 200, on both instances:**
 - Staging: https://staging.masonparkdental.com/hipaa-disclosure (row `PRjjYrRlycWsqeDsWpYjM`, seq 147 → 149,
   published 2026-10-01T13:29:11Z, 65 draft / 65 published).
