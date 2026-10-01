@@ -97,7 +97,21 @@ const dropSubtree = (nodes, id) => {
 /* --- the two slot rules, registry form of 55-words.css / 65-proof.css --- */
 let shellChanged = false
 const ensureRule = (name, styles, contextStyles) => {
-  if (ruleByName(name)) { console.log(`rule     .${name} keep`); return }
+  const have = ruleByName(name)
+  if (have) {
+    // Merge, so a later change to the wanted styles (2026-10-01: the panel padding) reaches an
+    // instance that already has the rule. Properties set in the editor and not named here stay.
+    const diff = Object.entries(styles).filter(([k, v]) => have.styles?.[k] !== v)
+    const ctx = Object.entries(contextStyles ?? {}).flatMap(([c, st]) =>
+      Object.entries(st).filter(([k, v]) => have.contextStyles?.[c]?.[k] !== v).map(([k, v]) => [c, k, v]))
+    if (!diff.length && !ctx.length) { console.log(`rule     .${name} keep`); return }
+    have.styles = { ...have.styles, ...Object.fromEntries(diff) }
+    for (const [c, k, v] of ctx) ((have.contextStyles ??= {})[c] ??= {})[k] = v
+    have.updatedAt = Date.now()
+    shellChanged = true
+    console.log(`rule     .${name} <- ${JSON.stringify(Object.fromEntries(diff))}${ctx.length ? ' ' + JSON.stringify(ctx) : ''}`)
+    return
+  }
   const order = Math.max(0, ...Object.values(rules).map((r) => r.order ?? 0)) + 1
   const now = Date.now()
   const r = { id: nid(), name, kind: 'class', selector: `.${name}`, order, styles, contextStyles, createdAt: now, updatedAt: now }
@@ -106,11 +120,11 @@ const ensureRule = (name, styles, contextStyles) => {
   console.log(`rule     .${name} + ${JSON.stringify(styles)}`)
 }
 ensureRule('words_reviews',
-  { marginTop: '2rem', minHeight: `${MIN_HEIGHT}px`, borderRadius: 'var(--radius-card)', background: 'var(--white)', color: 'var(--charcoal)', overflow: 'hidden' },
-  { [MOBILE]: { marginTop: '1.5rem' } })
+  { marginTop: '2rem', minHeight: `${MIN_HEIGHT}px`, borderRadius: 'var(--radius-card)', background: 'var(--white)', color: 'var(--charcoal)', overflow: 'hidden', paddingTop: 'var(--space-large)', paddingBottom: 'var(--space-large)' },
+  { [MOBILE]: { marginTop: '1.5rem', paddingTop: 'var(--space-medium)', paddingBottom: 'var(--space-medium)' } })
 ensureRule('wall_reviews',
-  { marginTop: '3rem', minHeight: `${MIN_HEIGHT}px`, border: '1px solid var(--line)', borderRadius: 'var(--radius-card)', background: 'var(--white)', overflow: 'hidden' },
-  { [MOBILE]: { marginTop: '2rem' } })
+  { marginTop: '3rem', minHeight: `${MIN_HEIGHT}px`, border: '1px solid var(--line)', borderRadius: 'var(--radius-card)', background: 'var(--white)', overflow: 'hidden', paddingTop: 'var(--space-large)', paddingBottom: 'var(--space-large)' },
+  { [MOBILE]: { marginTop: '2rem', paddingTop: 'var(--space-medium)', paddingBottom: 'var(--space-medium)' } })
 /* The head that held the arrows now holds a text link; at 390 the two wrapped side by
    side, so on phones it stacks like .wall_head does (55-words.css, same media block). */
 {

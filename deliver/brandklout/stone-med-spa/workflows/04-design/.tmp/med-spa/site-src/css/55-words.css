@@ -94,6 +94,8 @@
 .words_reviews {
   margin-top: 2rem;
   min-height: 420px;
+  /* the widget runs edge to edge; without this its title sat on the panel's top edge */
+  padding-block: var(--space-large);
   border-radius: var(--radius-card);
   background: var(--white);
   color: var(--charcoal);
@@ -110,5 +112,6 @@
   }
   .words_reviews {
     margin-top: 1.5rem;
+    padding-block: var(--space-medium);
   }
 }

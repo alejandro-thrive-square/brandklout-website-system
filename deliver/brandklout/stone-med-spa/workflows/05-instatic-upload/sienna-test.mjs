@@ -7,6 +7,7 @@
 //
 //   node sienna-test.mjs https://westlaketxmedspa.com [loads=4]
 //   PAGES=/,/about node sienna-test.mjs https://staging.westlaketxmedspa.com
+//   (Git Bash rewrites PAGES=/... into a Windows path: prefix MSYS_NO_PATHCONV=1)
 import puppeteer from 'puppeteer-core'
 const [host, n = '4'] = process.argv.slice(2)
 const pages = (process.env.PAGES || '/,/about,/results,/botox').split(',')

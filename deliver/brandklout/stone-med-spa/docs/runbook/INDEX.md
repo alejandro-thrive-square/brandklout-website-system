@@ -1,11 +1,12 @@
 # Runbook index
 
-26 runs, newest first. Each line is one file in this folder.
+27 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01, later — Review panels padded (48px top/bottom); favicon (WA monogram) via `brandklout.open-graph` 1.2.3, newly installed, which also brings OG tags, canonical and per-page descriptions; new `set-favicon.mjs`; STAGING seq 24, PRODUCTION seq 28 — carries **gotchas** | [`2026-10-01-review-panel-padding-and-favicon.md`](./2026-10-01-review-panel-padding-and-favicon.md) |
 | 2026-10-01 | 2026-10-01 — "Different navigation size" on home: Sienna pinned text at 16px inline when it beat the CSS; fixed by `js/01-sienna.js`, shipped with the new `swap-site-js.mjs` to STAGING (seq 23) and PRODUCTION (seq 27); new `sienna-test.mjs` gate; BugHerd nothing new — carries **gotchas** | [`2026-10-01-sienna-pinned-nav-size.md`](./2026-10-01-sienna-pinned-nav-size.md) |
 | 2026-09-30 | 2026-09-30 — The practice's Google reviews LIVE through the Elfsight widget (listing #110B, 5.0/15) on `/` and `/results`, replacing the static quote rails, on STAGING (seq 22) and PRODUCTION (seq 26); new `add-elfsight-reviews.mjs`, `push-site.mjs` carries the slot — carries **gotchas** | [`2026-09-30-elfsight-google-reviews-live.md`](./2026-09-30-elfsight-google-reviews-live.md) |
 | 2026-09-29 | 2026-09-29, later — One page per product (Botox, Xeomin, Dysport, Jeuveau: 14 treatments, 26 pages) and EVERYTHING pushed to PRODUCTION (both BugHerd rounds, #15, the split); sitemap 25 URLs — carries **gotchas** | [`2026-09-29-one-page-per-product-and-production.md`](./2026-09-29-one-page-per-product-and-production.md) |

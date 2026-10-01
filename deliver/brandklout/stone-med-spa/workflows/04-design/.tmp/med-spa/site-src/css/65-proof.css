@@ -23,6 +23,7 @@
 .wall_reviews {
   margin-top: 3rem;
   min-height: 420px;
+  padding-block: var(--space-large);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   background: var(--white);
@@ -31,6 +32,7 @@
 @media (max-width: 767px) {
   .wall_reviews {
     margin-top: 2rem;
+    padding-block: var(--space-medium);
   }
 }
 .wall_note {

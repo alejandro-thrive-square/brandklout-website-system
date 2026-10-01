@@ -170,3 +170,46 @@ def row_lockup(stack):
 print("row")
 save(row_lockup(stack_on_dark), "logo-row-on-dark.webp")
 save(row_lockup(stack_on_light), "logo-row-on-light.webp")
+
+# --- the FAVICON: the monogram alone, on the brand charcoal --------------------
+# Added 2026-10-01. Instatic has no favicon of its own; brandklout.open-graph
+# writes the <link rel="icon"> from a media-library path (see
+# 05-instatic-upload/set-favicon.mjs). The monogram keeps the art's own inks
+# (white + lime) on charcoal, the ground the client's file was drawn on, so it
+# reads in a light tab and a dark one alike. 48 is Google's minimum for search
+# results; 192 is what Android asks for; 180 is the iOS home-screen icon, which
+# must be opaque (iOS rounds the corners itself), so it is a full square.
+# PNG, not webp: icon consumers are older and stricter than browsers' <img>.
+FAV = HERE / "assets" / "_favicon"
+FAV_GROUND = (0x27, 0x27, 0x27, 255)
+
+
+def favicon(size, rounded):
+    mono = stack_on_dark.crop((0, 0, stack_on_dark.width, mono_end))
+    # Trim to the solid ink, not the glow: the glow's faint alpha ramp widens the
+    # box by a fifth and shrinks the letters, which at 48px is the difference
+    # between a monogram and a smudge. The glow still draws; it may clip at the edge.
+    ink = mono.getchannel("A").point(lambda v: 255 if v > 90 else 0)
+    mono = mono.crop(ink.getbbox())
+    S = size * 8                                # draw big, downsample once
+    inner = round(S * 0.82)                     # monogram width inside the tile
+    scale = inner / max(mono.width, mono.height)
+    mono = mono.resize((round(mono.width * scale), round(mono.height * scale)), Image.LANCZOS)
+    tile = Image.new("RGBA", (S, S), FAV_GROUND)
+    tile.paste(mono, ((S - mono.width) // 2, (S - mono.height) // 2), mono)
+    if rounded:
+        from PIL import ImageDraw
+        mask = Image.new("L", (S, S), 0)
+        ImageDraw.Draw(mask).rounded_rectangle((0, 0, S - 1, S - 1), radius=round(S * 0.2), fill=255)
+        tile.putalpha(mask)
+    return tile.resize((size, size), Image.LANCZOS)
+
+
+print("favicon")
+FAV.mkdir(exist_ok=True)
+for size, rounded, name in ((48, True, "wma-favicon-48.png"), (192, True, "wma-favicon-192.png"), (180, False, "wma-favicon-180.png")):
+    im = favicon(size, rounded)
+    if not rounded:
+        im = im.convert("RGB")
+    im.save(FAV / name, format="PNG", optimize=True)
+    print(f"  {name:28s} {size:4d} x {size:4d}  {(FAV / name).stat().st_size / 1024:6.1f} KB   -> {FAV.name}/")

@@ -1175,19 +1175,20 @@ size. **The same race exists on every Instatic site that carries Sienna**; the r
 - **Nav and footer are inlined into the page rather than being a Visual Component.** Eleven pages
   means editing the nav is eleven edits. This is now the strongest item on the list —
   `changedComponents` / `changedLayouts` are already in the `PUT /site-document` contract.
-- **Per-page meta descriptions** — see trap 6. All eleven share the home page's.
-- **Canonical, Open Graph and JSON-LD are not on the published site at all** — see trap 31. Fine
-  for review, not fine for launch. The route is a runtime module in `site-src/js/` that injects
-  them, the way `js/90-bugherd.js` injects its tag.
-- **No favicon**, so every published page answers 404 for `/favicon.ico` and the browser tab shows
-  a generic mark. This is one field — `settings.faviconUrl` in the site shell, pointing at an
-  uploaded asset — and it is deliberately still empty because **this brand has no logo or identity
-  yet** and a favicon invented here would be read as a proposed mark. Set it the day one exists.
-  It is the only console error on the whole site.
+- ~~**Per-page meta descriptions**~~ and ~~**canonical / Open Graph**~~ — done 2026-10-01 by
+  `brandklout.open-graph` 1.2.3 (installed with `deliver/process/tools/instatic-plugins/plugins.mjs
+  rollout`, configured by `set-favicon.mjs`): each page's `seoDescription`, a canonical and the
+  og/twitter tags, `siteUrl` = the instance's own host. **JSON-LD is still not on the published
+  site** (trap 31); `brandklout.aeo-schema`, the third house-default plugin, is not installed here.
+- ~~**No favicon**~~ — done 2026-10-01. The WA monogram on charcoal, cut by `site-src/make-logo.py`
+  into `assets/_favicon/` (48, 180 opaque, 192; gitignored, in `assets.tsv`), uploaded and set by
+  **`set-favicon.mjs`** through the open-graph plugin. `settings.faviconUrl` in the shell is not
+  what any publisher here reads; the plugin's `<link rel="icon">` is. A re-cut icon needs a new
+  filename (media upload skips by basename).
 - ~~The domain, and before it the trading name.~~ Settled: the domain is `westlaketxmedspa.com`
   (2026-09-10) and the trading name is **Westlake Medical Aesthetics** (the client's feedback,
   2026-09-15).
-- **No brand identity, logo or favicon**, and no per-case photo consent — see `HANDOFF.md`.
+- No per-case photo consent — see `HANDOFF.md`. (Logo since 2026-09-18, favicon since 2026-10-01.)
 - **The booking form still posts nowhere.**
 - **The six remaining treatment dossiers.** `botox` is the built template; each of the others is a
   body file, a line in `PAGES` here and a line in `ROUTES` in `verify-live.mjs` and `PAGES` in
