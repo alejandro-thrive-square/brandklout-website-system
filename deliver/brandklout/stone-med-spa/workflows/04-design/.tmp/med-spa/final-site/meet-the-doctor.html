@@ -432,7 +432,10 @@
      LEGAL. Until 2026-09-17 the three legal links went to the implant centre's
      pages (another business). Privacy and Terms are now this site's own. The
      "SMS Terms" link was dropped: this site runs no text program. Restore it
-     with a page of its own if one starts. -->
+     with a page of its own if one starts. HIPAA Disclosure (2026-10-01) links a
+     page that exists only on the Instatic instances (add-hipaa-page.mjs), not in
+     pages/ — so it 404s in a local preview, and a full push-site deletes the page
+     unless add-hipaa-page.mjs is re-run after it. -->
 <footer class="footer_component" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
@@ -507,6 +510,7 @@
         <div class="footer_legal">
           <span>&copy; <span data-year>2026</span> Westlake Medical Aesthetics. All rights reserved.</span>
           <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="hipaa-disclosure.html">HIPAA Disclosure</a>
           <a href="terms-of-service.html">Terms of Service</a>
         </div>
       </div>
