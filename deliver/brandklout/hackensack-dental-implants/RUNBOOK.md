@@ -87,7 +87,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Layouts recomposed editorially in nine of twelve blocks: type-led masthead, moving proof line, bleeding photographs, numbered treatment index, horizontal journey, stepped gallery, name behind the team, stacked closing words; on staging; probe 28/28, live 14/14 | `354923bd` |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | `c9c283aa` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd project 544349 created via API on the staging URL; five team members added by default; columns todo/doing/done; no tasks yet | see the commit after `adcfdfd0` |
-| 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | see the commit after `7349e0ec` |
+| 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | `a12f2124` |
 
 ## Version Control
 
