@@ -1,11 +1,12 @@
 # Runbook index
 
-93 runs, newest first. Each line is one file in this folder.
+94 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01 — `/hipaa-disclosure` (HHS Notice of Privacy Practices) injected on staging + production, both entities named, every other page identical bar publish artefacts — carries **gotchas** + flags (static sitemap, Grand Mission text in both privacy policies) | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-09-28 | 2026-09-28 — IV sedation and the anaesthesiologist removed site-wide (Asana "Update Website"): nitrous + oral only, 7 stores, prod + staging + site-src, 0 hits on 99 URLs — carries **gotchas** (aeo-schema stored blocks, title cell, loadEnvFile `#`, v2 import path) | [`2026-09-28-no-iv-sedation-no-anaesthesiologist.md`](./2026-09-28-no-iv-sedation-no-anaesthesiologist.md) |
 | 2026-09-23 | 2026-09-23d — ChatGPT page switched to its own GHL form `AD6c2Du26a0JUpxoh6p5`, production then staging — carries **gotchas** (the form redirects to the Tysons Google thank-you page) | [`2026-09-23d-chatgpt-page-own-form.md`](./2026-09-23d-chatgpt-page-own-form.md) |
 | 2026-09-23 | 2026-09-23c — staging re-mirrored from production: 58/58 parity, 18 missing images imported, embed-origins 1.8.0, settings synced WITHOUT GHL pools or GTM (`sync-plugin-settings.mjs`) — carries **gotchas** | [`2026-09-23c-staging-remirror.md`](./2026-09-23c-staging-remirror.md) |
