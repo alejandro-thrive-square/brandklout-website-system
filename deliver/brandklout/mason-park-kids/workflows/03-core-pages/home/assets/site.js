@@ -141,4 +141,57 @@
       Array.prototype.forEach.call(lazyFrames, load);
     }
   }
+
+  // ------------------------------------------------------- story carousel
+  // /patient-reviews "The Stories" (2026-10-01). The track is a native
+  // scroll-snap row, so touch, trackpad and keyboard work with JS off; this
+  // adds the previous/next buttons (they wrap at the ends), the "01 / 05"
+  // counter, the progress bar and `is-on` on the card in front. Everything is
+  // found by class: Instatic drops data-* and aria-* from <button>.
+  Array.prototype.forEach.call(document.querySelectorAll(".st-carousel"), function (box) {
+    var track = box.querySelector(".st-track");
+    if (!track) return;
+    var cards = Array.prototype.slice.call(track.children);
+    if (cards.length < 2) return;
+    var count = box.querySelector(".st-count b");
+    var bar = box.querySelector(".st-bar i");
+    var current = -1;
+    var pos = function (i) { return cards[i].offsetLeft - cards[0].offsetLeft; };
+    var nearest = function () {
+      var best = 0, gap = Infinity;
+      for (var i = 0; i < cards.length; i++) {
+        var d = Math.abs(pos(i) - track.scrollLeft);
+        if (d < gap) { gap = d; best = i; }
+      }
+      // At the far end the last cards cannot reach the snap point.
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 2) best = cards.length - 1;
+      return best;
+    };
+    var mark = function () {
+      var i = nearest();
+      if (i === current) return;
+      current = i;
+      cards.forEach(function (c, k) { c.classList.toggle("is-on", k === i); });
+      if (count) count.textContent = (i < 9 ? "0" : "") + (i + 1);
+      if (bar) bar.style.transform = "scaleX(" + (i + 1) / cards.length + ")";
+    };
+    var go = function (i) {
+      i = (i + cards.length) % cards.length;
+      var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      track.scrollTo({ left: pos(i), behavior: smooth ? "smooth" : "auto" });
+    };
+    var prev = box.querySelector(".st-prev");
+    var next = box.querySelector(".st-next");
+    if (prev) prev.addEventListener("click", function () { go(current - 1); });
+    if (next) next.addEventListener("click", function () { go(current + 1); });
+    var queued = false;
+    track.addEventListener("scroll", function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; mark(); });
+    }, { passive: true });
+    window.addEventListener("resize", function () { current = -1; mark(); });
+    box.classList.add("is-ready");
+    mark();
+  });
 })();

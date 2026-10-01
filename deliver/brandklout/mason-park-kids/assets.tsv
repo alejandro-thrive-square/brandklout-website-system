@@ -1,6 +1,7 @@
 # mason-park-kids media in R2 at clients/mason-park-kids/<path>. Restore: node scripts/assets.mjs pull mason-park-kids
 # sha256	size	path
 58518b4a3fbda1ccdd9c51df71e614cb014ac9ab51847f899ec4f0d63a91013e	3873	docs/runbook/2026-10-01-bugherd-round-seven.md
+46301f86e97bd0b0b3f1eb8e679a69f864f944f7fa1abe6baf346a644022696f	5257	docs/runbook/2026-10-01-reviews-page-ghl-form-canva-team.md
 f5e9376172453624a15bafd2e8693b1d96388896c34f2163cef9deec9f736ff2	20201	process-outputs/18-instatic-embeds/.tmp/open-graph-113.zip
 f5e9376172453624a15bafd2e8693b1d96388896c34f2163cef9deec9f736ff2	20201	process-outputs/18-instatic-embeds/.tmp/open-graph-113.zip
 af813245c5d3ee4ecd88dfd041d60acf99ed0db843f9200d420a217f0dbde5aa	21145	process-outputs/19-instatic-seo/.tmp/aeo-schema.zip
@@ -188,6 +189,7 @@ b5c2dddaea05f0acad2113497a6ea05e8502f81ab8eb0c1177c3923c59a9052f	487	workflows/.
 0c2cf8d91bea9a29d6ec2df4e970af3d1960afa2aeea10df97d217d12a7221e5	6346	workflows/.tmp/bugherd/probe.log
 0c2cf8d91bea9a29d6ec2df4e970af3d1960afa2aeea10df97d217d12a7221e5	6346	workflows/.tmp/bugherd/probe.log
 9256c6d6a3b949a63546cd8b2c187c599a0ea9a17bff5ac8c1f8f94d524dcfc0	1324	workflows/.tmp/bugherd/replies-1001.py
+7ef72eb266ea36e28e9d1b698a154e5c57d87946c1fe04a49fa571fc13d16e05	2457	workflows/.tmp/bugherd/replies-1001b.py
 d597240de48c3484331666c977c06bd666142c15f2f784ecfc9db67cb43f6543	1864	workflows/.tmp/bugherd/reply-0916.log
 d597240de48c3484331666c977c06bd666142c15f2f784ecfc9db67cb43f6543	1864	workflows/.tmp/bugherd/reply-0916.log
 29a90cd71bee8499b9351e2174013fe6ccaec673a8077be3402a45cc70627b1c	4754	workflows/.tmp/bugherd/reply-0921.log
@@ -204,6 +206,8 @@ d597240de48c3484331666c977c06bd666142c15f2f784ecfc9db67cb43f6543	1864	workflows/
 5ad67c519d403bcbc7e42375e53408e5801decdd8d41b31011a7afeab18f8b36	17014	workflows/.tmp/bugherd/reply-0929b.log
 631204b81176c688767fef3ce9a2d9c06703c038b7c8a9182968e959e468cd54	1624	workflows/.tmp/bugherd/reply-1001-dry.log
 688d34c7bb4bec9ff6e22e594e2201877cb9ebcc77ccd9636c8db5292363cc86	1775	workflows/.tmp/bugherd/reply-1001.log
+58d7dc09a4ba0e15286bddc2cfb67265431c3d1805d88eb2d71235004c7f00f2	2494	workflows/.tmp/bugherd/reply-1001b-dry.log
+4bdd3a6c1f39bd876e9bb9e113a33d1a2b957b4551b9e77b7c1144eebf9fa8cd	2603	workflows/.tmp/bugherd/reply-1001b.log
 969ce3cb82134f4a143757f88bb11046eb768cb901f4bfe0430b7c21452bafe0	1818	workflows/.tmp/bugherd/reply-dry-0916.log
 969ce3cb82134f4a143757f88bb11046eb768cb901f4bfe0430b7c21452bafe0	1818	workflows/.tmp/bugherd/reply-dry-0916.log
 762ed114dc26795dd69ca8c4cf07519905b76589935e10fe49419001f3261273	4540	workflows/.tmp/bugherd/reply-dry-0921.log
@@ -2310,6 +2314,7 @@ c9d2bbd6ebb012da35d3e4f2ddc7c7433bd059ccacdce69e8fb113facfa65f30	3907182	workflo
 5d5093f2052280351f77670e3d73b4ee13ce256c1afb58bfa0440c744f477a0c	3943062	workflows/03-core-pages/.tmp/_drive/PXL_20260909_173634816.jpg
 c246bbe414b980804b271c8d69ad4ab96c81f4ca7026b163612743d24819efdb	62410	workflows/03-core-pages/.tmp/_drive/ParksRanchlogo.svg
 c246bbe414b980804b271c8d69ad4ab96c81f4ca7026b163612743d24819efdb	62410	workflows/03-core-pages/.tmp/_drive/ParksRanchlogo.svg
+abc7627c202929e6769bf3ec77fae493d34b48eb238056926dae708ffacda7aa	63754	workflows/03-core-pages/.tmp/_drive/Playarea.jpg
 eea01ce09ab2b7037b3b1cacdc04f50b9a8b1e0eacb22396b8391f40dd9361f6	99483	workflows/03-core-pages/.tmp/_drive/mov-1.jpg
 eea01ce09ab2b7037b3b1cacdc04f50b9a8b1e0eacb22396b8391f40dd9361f6	99483	workflows/03-core-pages/.tmp/_drive/mov-1.jpg
 4cdb7cfb0b43d0b303d3cf457c7efeb1da80f9533fa724ca628452fc8b97815e	96297	workflows/03-core-pages/.tmp/_drive/mov-4.jpg
@@ -2588,6 +2593,7 @@ b5c7812c1a0d73dff3b212d30e2b2c048b3f2a92f6c09b721bff8264150bfb8f	1913249	workflo
 7294f80c96ceacc4d5874596ebebbf2356021e5ab1a452eda64e1f9b67553590	11837062	workflows/03-core-pages/.tmp/_upscaled/toddler.png
 b272d4c448037b60ba3563a20dceeafd0d7c873514f55f5989a3ed557052cef0	5818381	workflows/03-core-pages/.tmp/_upscaled/waiting.png
 b272d4c448037b60ba3563a20dceeafd0d7c873514f55f5989a3ed557052cef0	5818381	workflows/03-core-pages/.tmp/_upscaled/waiting.png
+1daf8979c5e5067651d20e06aee40b774876a6f0e8c7fe430647b1eec06441fd	6034	workflows/03-core-pages/.tmp/add-ghl-contact-form.mjs
 552f0a8580c124f264917c4959bf697c3e3feeb506b67120524947ce7ff35099	8333	workflows/03-core-pages/.tmp/att38-zoom.png
 552f0a8580c124f264917c4959bf697c3e3feeb506b67120524947ce7ff35099	8333	workflows/03-core-pages/.tmp/att38-zoom.png
 1b3658879a84cd422150f8f04d23f74908f91f2614d13b716095b616366dd561	32105	workflows/03-core-pages/.tmp/audit-0924-1440.log
@@ -2634,9 +2640,15 @@ e79c47f9d91a819999a97ef53b9abdc1a559d67f4e4cbe5241fb978288ac3081	48126070	workfl
 dafe1bdee1ca992f8eb78fdc7b8dc826d9c46965c114d7df7e481821c5edb25b	46497521	workflows/03-core-pages/.tmp/backup-staging.masonparkpediatricdental.com-2026-09-29T17-50-26.json
 9e2db73320a9e83b2ebf69fb36e24195ec20c09d98399cc22f83c6dc30b960be	46452156	workflows/03-core-pages/.tmp/backup-staging.masonparkpediatricdental.com-2026-09-29T19-39-39.json
 8c8e749947c6f3ee168750dd0168420b1e74009fb68ed7cf6cffddebc1bfb249	46473003	workflows/03-core-pages/.tmp/backup-staging.masonparkpediatricdental.com-2026-10-01T12-36-42.json
+d4736bb35f3ab7d5600b4859cff001022137cb07997aec535fd130dfd8e60923	46817065	workflows/03-core-pages/.tmp/backup-staging.masonparkpediatricdental.com-2026-10-01T14-55-57.json
+deedb0368cadb6e5a7e5692a95ff7f8f46f516c94a90e51631cab9900cb7f7ba	46901552	workflows/03-core-pages/.tmp/backup-staging.masonparkpediatricdental.com-2026-10-01T15-25-52.json
 bb71653ce3c1a47462bb36cae930dd00f016f26d7108a835787a16113b608b98	151	workflows/03-core-pages/.tmp/backup.log
 bb71653ce3c1a47462bb36cae930dd00f016f26d7108a835787a16113b608b98	151	workflows/03-core-pages/.tmp/backup.log
 29ee6735268b2191a05189bfa3d0118741478b2aacc75252672a5d57c2c84e64	305	workflows/03-core-pages/.tmp/bh-1001.log
+1487654ca8e40d127dad81c1c8bd1b131947ae112b8379a710291d021ee91714	430	workflows/03-core-pages/.tmp/bh-1001b.log
+95a707a47037276c78ed9dc2b712b70d0684a298635883fa4b6e4bb7ddac5e50	178	workflows/03-core-pages/.tmp/bh-1001c.log
+59e887509cc3908e3e1d15652e61960331c2df170703208ad913ebed706c4d30	45	workflows/03-core-pages/.tmp/bh-1001d.log
+bfdd63684294c0d8ad782cda1833086c3c48b560d3598343fc64a508b8ee1bf7	49	workflows/03-core-pages/.tmp/bh-1001e.log
 b87268b956ae5193318cc0f05f7e5f463f0c634fe8c83ddd2990475afb97f3fd	383	workflows/03-core-pages/.tmp/bh1.log
 b87268b956ae5193318cc0f05f7e5f463f0c634fe8c83ddd2990475afb97f3fd	383	workflows/03-core-pages/.tmp/bh1.log
 4c1507ee9c3b9e288505c401b72d110b705e13b8c9ebd556c750f5e96c8f91f8	209	workflows/03-core-pages/.tmp/bh2.log
@@ -2720,6 +2732,9 @@ f90d0c9f78f4506c53d82214336d6b1b6b2731027c8ff16d223a2d03c94945f3	7851	workflows/
 d578410360c7d02966bfaac2410a8a873fc0a4b775cdd1cf4fce4e4528e85a21	57	workflows/03-core-pages/.tmp/btn38-sweep.log
 d578410360c7d02966bfaac2410a8a873fc0a4b775cdd1cf4fce4e4528e85a21	57	workflows/03-core-pages/.tmp/btn38-sweep.log
 d794fdbbe0b80ea223a8d02a52abdc321fbeb108a26941f092edf77fe46a9ea0	3924	workflows/03-core-pages/.tmp/bugherd-1001.py
+147d185a541c2d5715f95706563fe65ffd6ecc4b8ec6e60450f7f7af7f671014	142	workflows/03-core-pages/.tmp/carousel-live.log
+147d185a541c2d5715f95706563fe65ffd6ecc4b8ec6e60450f7f7af7f671014	142	workflows/03-core-pages/.tmp/carousel-test.log
+157982fc7393f1d9c8330a4a64fe5112a1ed3e76b30695f651c3f78e56fb1b2b	1712	workflows/03-core-pages/.tmp/carousel-test.mjs
 0acdb74eee9a14d81034a8994de4290af4cf2d67c145dc05484b7a0b169ae898	105394	workflows/03-core-pages/.tmp/chain-staging-test.log
 0acdb74eee9a14d81034a8994de4290af4cf2d67c145dc05484b7a0b169ae898	105394	workflows/03-core-pages/.tmp/chain-staging-test.log
 296b99508ea77d2a326e92c1539ff888c65de233246caf779eb0d12c85ed0586	43038	workflows/03-core-pages/.tmp/check-0916.log
@@ -2732,9 +2747,11 @@ fa7cf9157f35ef04449fcd62c5e3baeaa5892793565edf054566e529bd55541c	42897	workflows
 63b659f201a49107473d5c48bea9169c1c49277cc1b44dc0f638debf44ebf474	42544	workflows/03-core-pages/.tmp/check-0926.log
 1b397fde1c1864e6d8b88ca9296892eae74ad764ba6058ab32d72a529fb434e5	42546	workflows/03-core-pages/.tmp/check-0929.log
 f3f4d080bbd950388dd1ece75943561880983568f755428f3fc01c0a6ff664a6	42546	workflows/03-core-pages/.tmp/check-1001.log
+252edf15a7cc9bfaf1b5e56659f7627a66ee4333d0d0b81264a89bacb744e61c	42695	workflows/03-core-pages/.tmp/check-1001b.log
+c11457592274672571743c528e723d24eb94545501ae41aa066a1413df01d292	42695	workflows/03-core-pages/.tmp/check-1001c.log
 268609970f46f951b07a94f946ce5bdfb8404f3b4360e87b18552ad8b5ea667b	42894	workflows/03-core-pages/.tmp/check.log
 268609970f46f951b07a94f946ce5bdfb8404f3b4360e87b18552ad8b5ea667b	42894	workflows/03-core-pages/.tmp/check.log
-4ab7ce9b161c9f6e5f1e95a8cdd36385f50130cbdbc6be48eabaf331a9ba8e81	40288319	workflows/03-core-pages/.tmp/converted-pages.json
+bcdbe467ae7e2aea621639eab113025e491722d6f8235326fe5db056a48a09bc	610486	workflows/03-core-pages/.tmp/converted-pages.json
 87e3ceec21a3bad18263f8d577519251b8e249ade7aa6993c61b110cedba3686	40315063	workflows/03-core-pages/.tmp/converted-pages.json
 9ee4a7ee63189383b3ea47fd06baef382c8a6ea63655cf6574c361d8826ae5b9	31542	workflows/03-core-pages/.tmp/crop-0916.log
 9ee4a7ee63189383b3ea47fd06baef382c8a6ea63655cf6574c361d8826ae5b9	31542	workflows/03-core-pages/.tmp/crop-0916.log
@@ -2776,11 +2793,27 @@ f200063a53893b9278f2f6957ba3f649b6ab2a8feedc5aa9da81774d7f58942a	860059	workflow
 9d998a9c64f31c177478b9d266e5ded26af8e49a8a31fed16393c3f5bd717f21	260968	workflows/03-core-pages/.tmp/hero41-local-390.png
 ea582e7fe7bcc5de085c8f154cc28ebb8d339a8036c69202d71d61ef06419521	318	workflows/03-core-pages/.tmp/hero41.log
 ea582e7fe7bcc5de085c8f154cc28ebb8d339a8036c69202d71d61ef06419521	318	workflows/03-core-pages/.tmp/hero41.log
+961a3662f808157aadb5c9195a3395d28648c1e3c7740402cc7fe6823bd23acc	42694	workflows/03-core-pages/.tmp/hipaa/check.log
+ce364a05d16a0dcb93e059975f70e17e6deda6073b9772cc26a00aed29c52a6f	11779	workflows/03-core-pages/.tmp/hipaa/footer-masonparkpediatricdental.com-1440.png
+d74b5041baff5a1eb10edeff948b42d008299a758e76f342ea54273f33372cdb	12901	workflows/03-core-pages/.tmp/hipaa/footer-masonparkpediatricdental.com-390.png
+6b6d3a284b12c7ccbda8bcf59db7c04010225526008e9b952d9491e12ce8c635	741	workflows/03-core-pages/.tmp/hipaa/footer-production.log
+ab0fbd57e6f4a0665b8466dc3b95f398f2f139387f6a72b84d1dc9757ae303ad	527	workflows/03-core-pages/.tmp/hipaa/footer-shot-production.log
+ac7b5418d66018afb623b4af7c40ddf59ec1cfbaa43b867afe4d2598cccfeafe	98	workflows/03-core-pages/.tmp/hipaa/footer-slots-production.log
+ac7b5418d66018afb623b4af7c40ddf59ec1cfbaa43b867afe4d2598cccfeafe	98	workflows/03-core-pages/.tmp/hipaa/footer-slots-staging.log
+cf2ddac40ee600d6469f3b39ce350f4819fcde8f0a60df23b4a0c1edb82f7baf	747	workflows/03-core-pages/.tmp/hipaa/footer-staging.log
+ce364a05d16a0dcb93e059975f70e17e6deda6073b9772cc26a00aed29c52a6f	11779	workflows/03-core-pages/.tmp/hipaa/footer-staging.masonparkpediatricdental.com-1440.png
+d74b5041baff5a1eb10edeff948b42d008299a758e76f342ea54273f33372cdb	12901	workflows/03-core-pages/.tmp/hipaa/footer-staging.masonparkpediatricdental.com-390.png
+0bf37b5ef21b897a50eb36898db42141a46a142975c7877aa73169571261fafa	694	workflows/03-core-pages/.tmp/hipaa/inject-production.log
+d101640aa6b4c658c3ad3841965659bce2099bf2c9c64e2773c46a1840368bc0	700	workflows/03-core-pages/.tmp/hipaa/inject-staging.log
+1cd6996cb3804d71f130cd0b6a80d787766c3d05c53042c5e6cdc4170874bb8f	218	workflows/03-core-pages/.tmp/hipaa/slots-production.log
+220ff59ab35e2c9d03e3fbeec28a2eadf0ea27b3dda335eb6d99e655b0fafd62	164	workflows/03-core-pages/.tmp/hipaa/slots-staging.log
+b6c0fb680b973bb95cf3f22a2def1238c9349aed50034ea81a1f04f91730577f	104	workflows/03-core-pages/.tmp/hipaa/verify-footer-production.log
+15af48f0e42b9117ad8945fe262e3968ebae0bfa8091dea7eb21f4a0d40dfc24	112	workflows/03-core-pages/.tmp/hipaa/verify-footer-staging.log
 642c5fdf0b21717aa258704610b7480b1ea0d6509507522c0def848b12872b30	637	workflows/03-core-pages/.tmp/hover.log
 642c5fdf0b21717aa258704610b7480b1ea0d6509507522c0def848b12872b30	637	workflows/03-core-pages/.tmp/hover.log
 f70b17762cf8594d943ca2751da60c742697066569dfb9453dd8a99e4361745a	432	workflows/03-core-pages/.tmp/import-home.log
 f70b17762cf8594d943ca2751da60c742697066569dfb9453dd8a99e4361745a	432	workflows/03-core-pages/.tmp/import-home.log
-decb54fcae68182fd192e522f8ebef878785ea0b74ba1842687bfb0eaa7714bb	27047	workflows/03-core-pages/.tmp/instatic/media-manifest.json
+2c6df2f5139f057aca9aa3c000ef4ddb6e9e19a185250ab91cc5a58caeaba63e	4964	workflows/03-core-pages/.tmp/instatic/media-manifest.json
 fc6e9e1bc53797a3d2a27a700a860f90235bd5e623ccaf6054908997e099c4c4	24337	workflows/03-core-pages/.tmp/instatic/media-manifest.json
 8fc7224913c78c4fb2e6416fd0862330fb47e27a0db275b8314ee105cc7d3a5d	24613	workflows/03-core-pages/.tmp/instatic/pages/about-us.json
 b404899e1d1271fe0cc50d0a523b32f23ec5cc5f41e97d3a6bd79b980a89bc64	24607	workflows/03-core-pages/.tmp/instatic/pages/about-us.json
@@ -3120,7 +3153,7 @@ e2c73f44a23ff7343d683852a7dabac7a67c67121c70c1c00e5b25db51ee96d7	20402	workflows
 52af1651e219027ca5e2f95b96d3979a5a624f12fb6aeae996c7c7ce0c0d936f	20590	workflows/03-core-pages/.tmp/instatic/pages/faq-page.json
 93008ce2862d062d4b4050d37472e2f543c39914a37e82125cf8c52ac86f361d	26607	workflows/03-core-pages/.tmp/instatic/pages/financing.json
 d2115d29ba7a409a3cd039c3765b2d8b3dd19873eea263163b31f6b51d3206d0	26600	workflows/03-core-pages/.tmp/instatic/pages/financing.json
-d3518e3db30e1e94a12f37cb11c871d514a2713b0d3c971cca9a79955d2423a5	42085	workflows/03-core-pages/.tmp/instatic/pages/home.json
+7a1ab39af8e9fb2d10b832c6e46c2772a0671a27ef083b64185175b05ba78b81	42365	workflows/03-core-pages/.tmp/instatic/pages/home.json
 e9884b7c6b64fee92e70a0c577173131d3d0a66512668765ad568a2942d989f4	42149	workflows/03-core-pages/.tmp/instatic/pages/home.json
 8ab1f838f9700de33994e8f98e92d4840a87c9702b63519a639e429e1d49f44b	26645	workflows/03-core-pages/.tmp/instatic/pages/invisalign-faqs-katy-tx.json
 38f0b794075b793a369e486fd48a15f026d44c3e78c3388fd807d6744da7aef7	25231	workflows/03-core-pages/.tmp/instatic/pages/invisalign-faqs-katy-tx.json
@@ -3128,11 +3161,11 @@ fc0e83c46280b73921d468ca0764f0a1d6a06ebed3f4bfc87458fde29821c047	23076	workflows
 fc0e83c46280b73921d468ca0764f0a1d6a06ebed3f4bfc87458fde29821c047	23076	workflows/03-core-pages/.tmp/instatic/pages/knee-to-knee-pediatric-dental-exam.json
 5708e33aca3c88e11aadcf550322f15b3e7dd8dee7bfe94cbe262c88ad50cc0f	25274	workflows/03-core-pages/.tmp/instatic/pages/new-patients.json
 1ab17dcb07ed159d70634db4ff665c5009d2fd7d777b4d4e4864fa02aec5cbeb	25469	workflows/03-core-pages/.tmp/instatic/pages/new-patients.json
-e91b0b215faa7eeb2ff494f995fadcc13368b81a8dd184fd2eca8b8d38ad3ade	27127	workflows/03-core-pages/.tmp/instatic/pages/our-doctors.json
+c4e73e1710a677856d7a7d73cee02a9071c54dc581c04e051286ac41096e5873	27188	workflows/03-core-pages/.tmp/instatic/pages/our-doctors.json
 4ce307e16779a7db4824985adc4ec17863b3038ca99f11e0ecb53ac383eeab2a	27357	workflows/03-core-pages/.tmp/instatic/pages/our-doctors.json
 6c5bd9a896d74c1b20b5bcd199e0c521463e8d31b559d6cc2300c90e77f74115	30444	workflows/03-core-pages/.tmp/instatic/pages/our-services.json
 848ff59449644fe8ffe04500d6e33e7b71b23a89825d238b137fbb81286eda7a	30207	workflows/03-core-pages/.tmp/instatic/pages/our-services.json
-ddf01f1123a7ed73e228b3f5e7ac639d807fb953fd7462538cd384737a244272	23248	workflows/03-core-pages/.tmp/instatic/pages/our-team.json
+7d6fee9c03cd34254eac6d093684ccfd43f22878cde8510d4cba674837365cd7	25240	workflows/03-core-pages/.tmp/instatic/pages/our-team.json
 7aa7f37528c9482079c61bfd5c1975155e3f2755a63e738c2113595eee530f48	25055	workflows/03-core-pages/.tmp/instatic/pages/our-team.json
 21c150b5c3555c1319c329dbc57dd2273d123842b195800ee1368c63be6d1ba6	18902	workflows/03-core-pages/.tmp/instatic/pages/patient-resources.json
 21c150b5c3555c1319c329dbc57dd2273d123842b195800ee1368c63be6d1ba6	18902	workflows/03-core-pages/.tmp/instatic/pages/patient-resources.json
@@ -3212,9 +3245,9 @@ c48883f621194548e7a1e47b02625ba4273bb3c19436e987cac1fb7dabe8070d	26642	workflows
 652ee3264cde0e6a442f2426701495703fd7aa5ba1ea860ea65e03820c614bdc	19588	workflows/03-core-pages/.tmp/instatic/pages/town-resource.json
 bd1fcfc3e4d074feb1f704cd10a61572978606e030b795f3a06c032f63674d8f	19457	workflows/03-core-pages/.tmp/instatic/pages/virtual-consultation.json
 bd1fcfc3e4d074feb1f704cd10a61572978606e030b795f3a06c032f63674d8f	19457	workflows/03-core-pages/.tmp/instatic/pages/virtual-consultation.json
-5ea6124926e0008d4afe07314f6da954d00e10f524e867066ed6238abdb6b61d	139494	workflows/03-core-pages/.tmp/instatic/site.css
+e06ca2f901423c379c52253066a5c0199a3591917ae5c5ceacf34e8ace7a53b1	147083	workflows/03-core-pages/.tmp/instatic/site.css
 79244d4c75cf67326cc55ede89d1bc1d12d7aa87b80bfdad24318f46e5c29d0a	138250	workflows/03-core-pages/.tmp/instatic/site.css
-b6152a25c670d308c0147ffa08cb515031d28da3bc1f7d7f06a592a2abd8b722	6180	workflows/03-core-pages/.tmp/instatic/site.js
+9c0bfe9d017ce602e6bed1a700a35b240255baf78c7a2aafaf8e8f9c89d5fdb1	8680	workflows/03-core-pages/.tmp/instatic/site.js
 b6152a25c670d308c0147ffa08cb515031d28da3bc1f7d7f06a592a2abd8b722	6180	workflows/03-core-pages/.tmp/instatic/site.js
 a1e1ace5a4604b9d3639cb966133dc584be9cc566dcc3b0649263d9398d9f851	777	workflows/03-core-pages/.tmp/is-0916b.log
 a1e1ace5a4604b9d3639cb966133dc584be9cc566dcc3b0649263d9398d9f851	777	workflows/03-core-pages/.tmp/is-0916b.log
@@ -3252,7 +3285,7 @@ f1c00c9da4647543047651475a3920c7870486a550bb61554ffc728df6fa9dda	47189	workflows
 f1c00c9da4647543047651475a3920c7870486a550bb61554ffc728df6fa9dda	47189	workflows/03-core-pages/.tmp/look-ways.png
 1ead81838a3c22905f4ae4a29446b3f39e75b2cd2e73b0b7dc0baa04dcbdc4fc	2001	workflows/03-core-pages/.tmp/map-check.png
 1ead81838a3c22905f4ae4a29446b3f39e75b2cd2e73b0b7dc0baa04dcbdc4fc	2001	workflows/03-core-pages/.tmp/map-check.png
-61b181dcc2d6452697d91f3300e33ab582726365d7ff9992c6b8b9253303003d	26408	workflows/03-core-pages/.tmp/media-upload-log.json
+ce2508e136eb619d2f99e4e529d4969b1b5dc12caf10ab3e3ad014b66980164e	5163	workflows/03-core-pages/.tmp/media-upload-log.json
 e4e8a68fa9c7bf3d9e75a9586f82b25f7e17e549ba7b1f3e16471d0d3fbb8b29	23745	workflows/03-core-pages/.tmp/media-upload-log.json
 b7208d37e579cd8ffa4242c3ffcbb22b91c352c61ccf5db38eaf13c9ea927e09	1936	workflows/03-core-pages/.tmp/media.log
 b7208d37e579cd8ffa4242c3ffcbb22b91c352c61ccf5db38eaf13c9ea927e09	1936	workflows/03-core-pages/.tmp/media.log
@@ -3315,6 +3348,10 @@ ab1511a95440667a8c1f68ed25496117451657784034a8ca22f3b1f9faa0a017	128952	workflow
 9a9be70b338610786d5ddc685cd3c72846fa9aae70bb0f1e723281e92b6c9492	104661	workflows/03-core-pages/.tmp/publish-0929b.log
 91ae9fbd2da44350480faa2790ac5e32225627159e23e37b4c217f92091d4cd9	105941	workflows/03-core-pages/.tmp/publish-1001.log
 190716fb96333453b86da7edbdca5c6d5974ae61ab484ee24a1a8f7beb6f1cef	918	workflows/03-core-pages/.tmp/publish-1001.sh
+895b09481775bdd601be09b9f45be06a3c6dd08561156e08420732061ec8b830	107413	workflows/03-core-pages/.tmp/publish-1001b.log
+2b93dcf77aee02ebaabd96d004f01d2ad5b87eb5f92d85782adcbebc55da5078	1037	workflows/03-core-pages/.tmp/publish-1001b.sh
+f469e902491160b487d42ba56848d44be6fb77bc52cf9404d5ad073d27bf4097	8277	workflows/03-core-pages/.tmp/publish-1001c.log
+a7f33047bf41ee7525a40e8718085b285722a9178fe257a5017a544ae8b7b1af	1047	workflows/03-core-pages/.tmp/publish-1001c.sh
 091445a918e02c918a40db7afb3c8be2b1946ec9e6f2502a867bfda3ab89e67d	86565	workflows/03-core-pages/.tmp/publish-run.log
 091445a918e02c918a40db7afb3c8be2b1946ec9e6f2502a867bfda3ab89e67d	86565	workflows/03-core-pages/.tmp/publish-run.log
 d25b25a1d297e3db58635d02656963d1749c498e446406f6151caf65bd658a35	375	workflows/03-core-pages/.tmp/publish-seo.log
@@ -3325,10 +3362,12 @@ a62e9c95d14f9a34aa90e767443cd0ef610d545e358cdb6682780eeafea3081d	336	workflows/0
 8f459ba4281918451eaba15ea0970f567fb962573de05eae9fe2aa9033562abc	2120	workflows/03-core-pages/.tmp/railway-domains.log
 db4ee27172a13ff68028f5c8e4eb16481dec3a078a0cfc6070570300d4a23412	1949	workflows/03-core-pages/.tmp/rd.log
 db4ee27172a13ff68028f5c8e4eb16481dec3a078a0cfc6070570300d4a23412	1949	workflows/03-core-pages/.tmp/rd.log
+9b896789e0f8508b7ad308fae544ad0748361eccfe686b26d37da37adac45ba7	1143	workflows/03-core-pages/.tmp/ref-shot.mjs
 cf5960b35f7e0026ce61e5cb452055954afbb3842375a1bad4a92431fcfd8393	284	workflows/03-core-pages/.tmp/rehost.log
 cf5960b35f7e0026ce61e5cb452055954afbb3842375a1bad4a92431fcfd8393	284	workflows/03-core-pages/.tmp/rehost.log
 73315523e79c385eece6946c2eebe0b35360eac3653f1ef861addb1a40761044	1549	workflows/03-core-pages/.tmp/render-prod.log
 73315523e79c385eece6946c2eebe0b35360eac3653f1ef861addb1a40761044	1549	workflows/03-core-pages/.tmp/render-prod.log
+7d4c305e50af36010c8bfdcd2922d38b3d92f820fa56875ce14a45a28af9309d	12007	workflows/03-core-pages/.tmp/reviews-page-1001.py
 c8dcdbd640589a25564db18d6e0cfec4df6814f442e7602c45ca5a2c6747e3e4	1411	workflows/03-core-pages/.tmp/rw-state.log
 c8dcdbd640589a25564db18d6e0cfec4df6814f442e7602c45ca5a2c6747e3e4	1411	workflows/03-core-pages/.tmp/rw-state.log
 efba3833a1ea08151381439ee2c550ff30449096875fbec18848bac0d639844c	816	workflows/03-core-pages/.tmp/senv.log
@@ -3515,6 +3554,7 @@ dfab2e12c17c3d48e4a50cc823e540c6c7cae9b8293c2e6f01d9cf2568b15b85	116684	workflow
 0a9b55c63f6e1cb45f095b6ccfabdc20bc5076afd0d21233b43fdf3dc0ce161e	1499289	workflows/03-core-pages/.tmp/shots/bh/bh-contacts-arrival-1920.png
 0a9b55c63f6e1cb45f095b6ccfabdc20bc5076afd0d21233b43fdf3dc0ce161e	1499289	workflows/03-core-pages/.tmp/shots/bh/bh-contacts-arrival-1920.png
 a76040a9ac21fcf760c813160f8c9cda77427d26d0eeb07f1bdf435d955062bb	531184	workflows/03-core-pages/.tmp/shots/bh/bh-contacts-invitation-1512.png
+bb74ff34f6caee0508c9928d2d4df6a305c401f04fb93ef231d76ca0902cae0b	75530	workflows/03-core-pages/.tmp/shots/bh/bh-contacts-message-1440.png
 74fdb41b4b696529583359aa680ed63e709a727d6273466f701dc7a76ebc333f	867554	workflows/03-core-pages/.tmp/shots/bh/bh-dental-saving-plan-arrival-1920.png
 74fdb41b4b696529583359aa680ed63e709a727d6273466f701dc7a76ebc333f	867554	workflows/03-core-pages/.tmp/shots/bh/bh-dental-saving-plan-arrival-1920.png
 24f9b8ff8902f5b0e0bf37425c73c4f1f5fbfedbd005fef66cdfb71f25b13863	319156	workflows/03-core-pages/.tmp/shots/bh/bh-emergency-pediatric-dentistry-after-1440.png
@@ -3534,6 +3574,7 @@ cf5033a5495633eae959696337dd7befa9ab53e9660295429dfa972e22d445da	184169	workflow
 cf5033a5495633eae959696337dd7befa9ab53e9660295429dfa972e22d445da	184169	workflows/03-core-pages/.tmp/shots/bh/bh-financing-network-1512-live.png
 c2cf5e6c3b6a2ccb831b8af3b48782857dc199e4b39328508250fb6fcf0751f3	158878	workflows/03-core-pages/.tmp/shots/bh/bh-financing-network-1512.png
 c2cf5e6c3b6a2ccb831b8af3b48782857dc199e4b39328508250fb6fcf0751f3	158878	workflows/03-core-pages/.tmp/shots/bh/bh-financing-network-1512.png
+7a697d5419e79c63de49a2da5401ceae498e4a46333c022b80c568ed68520ca0	875719	workflows/03-core-pages/.tmp/shots/bh/bh-index-comfort-1440.png
 e2c2899715e17f3b0e2b497793b00b0c6a12946ba8c4bb9cedb90a330f11f50c	1396968	workflows/03-core-pages/.tmp/shots/bh/bh-index-comfort-1512.png
 721c193a5bbb97e5c4af96ce9f86d55e7d03e1e0cc03471e65f5cabf82b810fd	747877	workflows/03-core-pages/.tmp/shots/bh/bh-index-path-1440.png
 721c193a5bbb97e5c4af96ce9f86d55e7d03e1e0cc03471e65f5cabf82b810fd	747877	workflows/03-core-pages/.tmp/shots/bh/bh-index-path-1440.png
@@ -3570,9 +3611,16 @@ c45e9518dcab41fcc57c46bfa05c938eb4197e6c8267b90408bd75570f0fafc8	796051	workflow
 e5107eff789e3d5273dd0c09019f598a1da21bdf7faf214905c216fe1fd11b14	516371	workflows/03-core-pages/.tmp/shots/bh/bh-our-services-invitation-1512.png
 527e3e60ad1cd169610ab2a35e9fef61e7bc6b8b989f42fc6f68d6f8f9a46e02	762230	workflows/03-core-pages/.tmp/shots/bh/bh-our-team-arrival-1512-live.png
 90642297d88349331b5825fd663af4b66c93a9ddbcd428c77735fabae3e670e0	818040	workflows/03-core-pages/.tmp/shots/bh/bh-our-team-arrival-1512.png
+3b5366fb99154de72f3b879eb214e8ff76b2845cf11f1613c187bcaea812bd3d	802017	workflows/03-core-pages/.tmp/shots/bh/bh-our-team-roster-1440.png
 ebdd1a8e707d2e44caa54b2bbe7cd49c6542502075f54f493c66cbe50305728a	146079	workflows/03-core-pages/.tmp/shots/bh/bh-our-team-roster-1512.png
 efad0334413b73dd521011f49dc46f2990bc594c9762b6a9e9820f86a35036cf	140296	workflows/03-core-pages/.tmp/shots/bh/bh-our-team-roster-390.png
 519a3443e8f96a2f05b401852b775020860af6b8b5af095836198e4e487fdfc6	468416	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-invitation-1512.png
+d5a1491f4cd27aa782af766eaee68d9ad61c9bc4c3c0cd4bd28927e73f14574b	398624	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-question-1440.png
+f274f0827ae88e478c72f4ef25cd93a1e64183f5687d32c5b6cf899f64173a38	80776	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-reasons-1440.png
+3b7763dc1e18b05877c4b2458a73de84e997f74d54aa582a61de05c2cb71ce67	413116	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-right-1440.png
+f60b78e8ec877ce07c3f5ce9980a72e0f3d257fd3576a9db002199692cee5826	176071	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-right-390.png
+ff9bb9922ce857950c2ab57778518326221d09119e507424c88edec30bae631e	693061	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-stories-1440.png
+142b224648581fba25856a00b6cf35367d62b4d1ad9087ec3c58abdbe13a7833	262109	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-stories-390.png
 eae2297b747cf06e6771cedc24ac9e62e54086b5470361b8ed1276d7877ea5d3	272932	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-wall-1440-live.png
 eae2297b747cf06e6771cedc24ac9e62e54086b5470361b8ed1276d7877ea5d3	272932	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-wall-1440-live.png
 946ab51d2056dc42f0595f0742f893efd7f8d1071b0c1aedf3c97a6ba22e4faa	293374	workflows/03-core-pages/.tmp/shots/bh/bh-patient-reviews-wall-1440.png
@@ -3826,6 +3874,8 @@ de0ed9455e2fab054ee15280323e41a0d83e706728dad1bca35d1f72e0526921	339353	workflow
 66a473e951b9da73e1aae3c65701da72ebea0d0477f0f895e4e67236affb03d9	285924	workflows/03-core-pages/.tmp/shots/hd-5.png
 2908824daf1fc92e09d9c52fe28dd4380e172c558ae1cd3fd55ac351b8dcd25a	27006	workflows/03-core-pages/.tmp/shots/hd-6.png
 2908824daf1fc92e09d9c52fe28dd4380e172c558ae1cd3fd55ac351b8dcd25a	27006	workflows/03-core-pages/.tmp/shots/hd-6.png
+c105407564f1076fd86b54bf59d1a53d2ea03d59e1cdb72b30e29dfbfd93633b	2268674	workflows/03-core-pages/.tmp/shots/hipaa-disclosure-desktop.png
+a17d347bd87d836c3f601a469f7487d76ea1b4b0033f0d5598c1f697a548683c	4572572	workflows/03-core-pages/.tmp/shots/hipaa-disclosure-mobile.png
 598a3c3532c0fe860915ef5fc8ded258f1bf23fb19dfffb99c41d97a990c4067	6068909	workflows/03-core-pages/.tmp/shots/home-desktop.png
 598a3c3532c0fe860915ef5fc8ded258f1bf23fb19dfffb99c41d97a990c4067	6068909	workflows/03-core-pages/.tmp/shots/home-desktop.png
 8dc3341d9491c4ca38da9be2afe5983a83e2af44fdbc737c67ff746c47b26863	7884990	workflows/03-core-pages/.tmp/shots/home-mobile.png
@@ -3882,6 +3932,7 @@ e40afb9f73908c9c816d59d9a4ac165a8af661b033c26e8cd5866183087d6f7c	3414581	workflo
 e40afb9f73908c9c816d59d9a4ac165a8af661b033c26e8cd5866183087d6f7c	3414581	workflows/03-core-pages/.tmp/shots/live/dental-saving-plan.png
 b7c236774c18b160fb16aa0ed504ef39eba04d017208d23f1d1134b1db1c2629	3507582	workflows/03-core-pages/.tmp/shots/live/financing.png
 b7c236774c18b160fb16aa0ed504ef39eba04d017208d23f1d1134b1db1c2629	3507582	workflows/03-core-pages/.tmp/shots/live/financing.png
+ebd1d189fa18eea216a0887e75c319a95bca608ee9816c94136b74f27493a427	2214460	workflows/03-core-pages/.tmp/shots/live/hipaa-disclosure-1440.png
 633b3a50db19edf2d3d8fccf87048626d5d6eadb78bf1d38aa523d4082de0564	7077531	workflows/03-core-pages/.tmp/shots/live/home-390.png
 633b3a50db19edf2d3d8fccf87048626d5d6eadb78bf1d38aa523d4082de0564	7077531	workflows/03-core-pages/.tmp/shots/live/home-390.png
 e67b857f8db54d5bbfe2cdb7ff55cf2403d8a5e1247a6a555ba68955014cc5f1	5870748	workflows/03-core-pages/.tmp/shots/live/home.png
@@ -4126,6 +4177,7 @@ ed5102a46d62a61c5268a9bbbf13eec3af8659b1c1d517c1069e997db55adf41	4874	workflows/
 1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stamp-0923.log
 6f686d972967b71ebe76b0fa6127d6550ba7d6cf21da9e583f1a4ac77179fa27	43	workflows/03-core-pages/.tmp/stamp-0929.log
 1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stamp-1001.log
+1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stamp-1001b.log
 1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stamp.log
 1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stamp.log
 1dba2116c19c777f061095cf6e2c1b250e1e30b300ecfef54f9f0132b211d31a	42	workflows/03-core-pages/.tmp/stampc.log
@@ -4136,8 +4188,10 @@ e0c28a53905e4577e0e7c11a0c8a1f53d81d27a3a85565e11460e00590a8f742	737	workflows/0
 822d373f7b16af047d037aa84ac40c0423091ed74ca4fed3171e33f3f4f1e942	64	workflows/03-core-pages/.tmp/svg.log
 5b6228b0dc819465448fccda211e4a71d400f2682d9317b878a1fccbb2fea175	58	workflows/03-core-pages/.tmp/sweep101.log
 5b6228b0dc819465448fccda211e4a71d400f2682d9317b878a1fccbb2fea175	58	workflows/03-core-pages/.tmp/sweep101.log
+03acbb8a1657ea6042415c5da7aa3f6c0ca9a1914efb61096979ce56f7b3f2c0	5551	workflows/03-core-pages/.tmp/team-canva-1001.py
 4892f4ea54ffd518415412b68fa17d9f7bff2a7d67f5b3ee1906a2a73942496a	15665	workflows/03-core-pages/.tmp/ti-0916b.log
 4892f4ea54ffd518415412b68fa17d9f7bff2a7d67f5b3ee1906a2a73942496a	15665	workflows/03-core-pages/.tmp/ti-0916b.log
+ee1e0d8d91c8d9a6bd2151b74af6aef3e7d17fb55d7ca6c9141d11f4e80d823a	454	workflows/03-core-pages/.tmp/ti-test.log
 9ae39cfa41bc3371991a8e59778f534665593740126c6413d6102472306aaea2	15816	workflows/03-core-pages/.tmp/ti1.log
 9ae39cfa41bc3371991a8e59778f534665593740126c6413d6102472306aaea2	15816	workflows/03-core-pages/.tmp/ti1.log
 4867d1c1c19ff43abc3d18f846edb2e178c3065048d97d4fbb77e9c75ac60985	15665	workflows/03-core-pages/.tmp/topup-1.log
@@ -4168,6 +4222,10 @@ cddbd63946d6255f12fef74028adffe6326e73ccd3d31aba4e66861f21cfc982	1710	workflows/
 c46d4905feefbec4c44252f67ca42cbcd044e7dbf4c67ab52a234f61fab22c23	86	workflows/03-core-pages/.tmp/verify-0929.log
 830fc338979cfd9b0ed58b166975364eb96e1c393368b03c297a7a8aa46cc1d0	64	workflows/03-core-pages/.tmp/verify-1001.log
 8699384e99deac292ca85636378a8bcdd182a09c21fb41470293196163c2dfc4	1767	workflows/03-core-pages/.tmp/verify-1001.mjs
+25132bafcc787cad2fb3d3d861bda1ba894e398f8eac4f75bcec10b8314b6c33	361	workflows/03-core-pages/.tmp/verify-1001b.log
+db5519bd9f611371234b6ee7fe60e3e6cbdcb8e5527ce45c254766d57811793e	3775	workflows/03-core-pages/.tmp/verify-1001b.mjs
+889efb830029a33f3336383874a07bb70045a097114994ea68a8890f3cc43bf0	64	workflows/03-core-pages/.tmp/verify-1001c.log
+52d5fb2e3e3887239e3783f3dad6ac3273018590a5f8e3090e3c93c5dc8ff071	1613	workflows/03-core-pages/.tmp/verify-1001c.mjs
 5d6a9f52460a274c257266a9989d5140efef2778dd67a658d14e756d5132c862	26	workflows/03-core-pages/.tmp/verify-embed.log
 5d6a9f52460a274c257266a9989d5140efef2778dd67a658d14e756d5132c862	26	workflows/03-core-pages/.tmp/verify-embed.log
 1425389a4c1180e7149fc7707b33b3a766e5c472d82842f75ceab65f9504ffe3	986	workflows/03-core-pages/.tmp/verify-place.log
@@ -5007,6 +5065,32 @@ d37a72c05e49aa7cb0c391117c4c9edbba1b88ab2ff3973ab761e1de55d95b93	35882	workflows
 135ea8d8a99edd614bd79c69e14a2cd2a61152ea303be5f8c3ce8dd546d9c78f	63682	workflows/03-core-pages/home/assets/uploads/baby-960.webp
 135ea8d8a99edd614bd79c69e14a2cd2a61152ea303be5f8c3ce8dd546d9c78f	63682	workflows/03-core-pages/home/assets/uploads/baby.webp
 135ea8d8a99edd614bd79c69e14a2cd2a61152ea303be5f8c3ce8dd546d9c78f	63682	workflows/03-core-pages/home/assets/uploads/baby.webp
+11834b3e14283efe0a09e8540f5aa579166c87e35ddcf75d24562b74849f8fe7	25946	workflows/03-core-pages/home/assets/uploads/canva-alison-480.webp
+cdc895e4bb16b959f2d6b20f0eafb7b18fd1e20360eef262cfbb96cb330fd116	62398	workflows/03-core-pages/home/assets/uploads/canva-alison-960.webp
+4195a3598864083df8a0971ab26f39bd8bb1d88b5d8fb76f5bdee061d0d93f4a	23470	workflows/03-core-pages/home/assets/uploads/canva-amanda-480.webp
+180a6fd570dbfb1810af2e4c555898330bbd8d71e01ed72cbc55bd49e006022e	56876	workflows/03-core-pages/home/assets/uploads/canva-amanda-960.webp
+f5633599c32074a7ec07816913a34e0b788510ea38241096e9b11484051c1617	30200	workflows/03-core-pages/home/assets/uploads/canva-anabel-480.webp
+c608b50c8bd9e61b778f3c3640060daa33a12b7368272628157dba8af6fbe65f	76014	workflows/03-core-pages/home/assets/uploads/canva-anabel-960.webp
+17ce64552423782402c335252a7788f908a6e5c25647b7cdc7c4792ca35d2ee4	26590	workflows/03-core-pages/home/assets/uploads/canva-caisy-480.webp
+5264eee7f43ed342826a94e723b8b7ad9988092b2124cdf8024b6b057e21a838	67348	workflows/03-core-pages/home/assets/uploads/canva-caisy-960.webp
+081b82c214c8c203754084c4d5ce749b0eec7aa5921157dadbf9f3b2786ff733	15420	workflows/03-core-pages/home/assets/uploads/canva-cho-480.webp
+784db95cbef4a806593e6c79d06468ac532ba5432896125bcc51c771aa972d29	37696	workflows/03-core-pages/home/assets/uploads/canva-cho-960.webp
+c2b1d9e86be6181b12489fc06325d20262088fa2fb7976656800512ad620522d	33224	workflows/03-core-pages/home/assets/uploads/canva-genevieve-480.webp
+ccbd0c04c074f28d096b660f531a9d89532f44ab6ef1a12c0e85a28946b7718e	82010	workflows/03-core-pages/home/assets/uploads/canva-genevieve-960.webp
+b8c9236b0ce3d8276fd66d5d13616f47355674cb088645f2abf40da3a1fe965b	21632	workflows/03-core-pages/home/assets/uploads/canva-ivon-480.webp
+7714df41ea2aa7f55e25944a4bf6a6c54566c0ecfd5b251c8d253415504bd57e	53700	workflows/03-core-pages/home/assets/uploads/canva-ivon-960.webp
+e6fa5d6ddf8b48a264a79913ae6de0c436a7031cb8914aa96cd16e80e559a651	20548	workflows/03-core-pages/home/assets/uploads/canva-josh-480.webp
+5d9a0aaddae0fff95304fcf699cb1a3d281287d33bb01be9d4b1e320af9ed5ea	50106	workflows/03-core-pages/home/assets/uploads/canva-josh-960.webp
+0d03de0a6c43122a6291e28b4d8a04beaffdd69ebf72aa4b6ae27bb76323058a	20808	workflows/03-core-pages/home/assets/uploads/canva-lola-480.webp
+36162c91e5e8dfa0ab4e7879aadf3e7d3c55102a2af3bbf3a0b26ddb37087a59	49972	workflows/03-core-pages/home/assets/uploads/canva-lola-960.webp
+5d88a6c51aa2bbc76b1d7f971203bbce5925e3555e68b5e210dd21740ecf3063	20576	workflows/03-core-pages/home/assets/uploads/canva-luis-480.webp
+55fb7dd4bb957c61000f0c729c5877900ec66a70499d3f2da488b2b3ffbfcbed	47272	workflows/03-core-pages/home/assets/uploads/canva-luis-960.webp
+d845f55acd2ca18f07d99837a7685de9ef85a87ba1ceee117693d266a0c89800	30172	workflows/03-core-pages/home/assets/uploads/canva-nicole-480.webp
+99ea6c7977f839e442f7b82caebaec47ddd7242439f7ae605d18c783649577a5	76422	workflows/03-core-pages/home/assets/uploads/canva-nicole-960.webp
+4ac35eb3fd8baa45ed397bc3c1f8a2bed9b5fee98356fc8f46d021fc22b0df74	23552	workflows/03-core-pages/home/assets/uploads/canva-priscilla-480.webp
+177edcc51048767d7ac53e2aea848eb52c404b50ecbf7589e7ec7b3f7a51239b	63134	workflows/03-core-pages/home/assets/uploads/canva-priscilla-960.webp
+ff49c551195f1f7685fe47114dd00239e34a479826acbd336c54cb1703cdc1b1	23982	workflows/03-core-pages/home/assets/uploads/canva-tiffany-480.webp
+6c85fee184f26ef03ad80d1cdc9c73fb22a620d45d43b33eefce3fea36cff736	55292	workflows/03-core-pages/home/assets/uploads/canva-tiffany-960.webp
 a83393141fdf1a2649992efcf3f048a87f2b4472cc7db587154b1fd85a5491bd	73984	workflows/03-core-pages/home/assets/uploads/chair-1200.webp
 a83393141fdf1a2649992efcf3f048a87f2b4472cc7db587154b1fd85a5491bd	73984	workflows/03-core-pages/home/assets/uploads/chair-1200.webp
 0cda43c4b090c3085136bf71b40790cdae31f4234964bbb22fe11e9da25bc62f	113222	workflows/03-core-pages/home/assets/uploads/chair-1600.webp
@@ -5199,6 +5283,7 @@ b00ce413209752fe5b0b3b7e71dd2b808122f35e0cb6c89a5335349cea43e952	87688	workflows
 25732da8703ca0460e1a1f3686ae0e546fa370629132c3b4df358ea6bdde1ae6	118982	workflows/03-core-pages/home/assets/uploads/operatory.webp
 9332731e774b7d658303957d630d00f096a142da7218d3365d5396ec42135836	104832	workflows/03-core-pages/home/assets/uploads/parks-youth-ranch-logo.png
 9332731e774b7d658303957d630d00f096a142da7218d3365d5396ec42135836	104832	workflows/03-core-pages/home/assets/uploads/parks-youth-ranch-logo.png
+cc2698d12596a50be9cb74879c06a6c69b09db407ed5949c1a4dbed6615f6a44	38132	workflows/03-core-pages/home/assets/uploads/playarea-382.webp
 f141e6e5cfc1395293ba4b44eacf599108ee7c531dd65e8ff39e819c11792a40	431232	workflows/03-core-pages/home/assets/uploads/px-20240131-214955160-1440.webp
 f141e6e5cfc1395293ba4b44eacf599108ee7c531dd65e8ff39e819c11792a40	431232	workflows/03-core-pages/home/assets/uploads/px-20240131-214955160-1440.webp
 eebf5faf0e023b4faada095dbcaa08ec436c06d3e383be777422fa0103af7c20	640204	workflows/03-core-pages/home/assets/uploads/px-20240131-214955160-1920.webp
@@ -6157,3 +6242,139 @@ bcbab64c816c55f840410df213d218d0eba313ef4a5609d93cfe93dd530bf46b	12412	workflows
 74931cde9ab00e49c1cb7e820f9d7a93347488c63df814f014f7e8ec0099ac67	21668	workflows/03-core-pages/home/assets/uploads/waiting-960.webp
 8ffebdccf364ab622f4fe032b36200ee65c80760da3dad6228bbf21b1c4030e0	82176	workflows/03-core-pages/home/assets/uploads/waiting.webp
 8ffebdccf364ab622f4fe032b36200ee65c80760da3dad6228bbf21b1c4030e0	82176	workflows/03-core-pages/home/assets/uploads/waiting.webp
+9c50f921c6b2b9809146a0430fa2ca799c63f399f65e47a6c6a0671f4ce2fa27	25958370	workflows/Mason Park -Team.zip
+6351e7b80694684fa25ce047707030e1d67491aff78f38864c25680c8cf65168	1874774	workflows/Mason Park -Team/Alison Chen, RDA.png
+35761fff3fb7b6a160ece42cb583268a26ed88b3869537b7d4c2101334fba9fb	1773715	workflows/Mason Park -Team/Amanda Ortega, Patient and Treatment Coordinator.png
+f9f0780a131c9b0933381cdb36ed1fbbeab93f55c5d936220db314686f847975	2075414	workflows/Mason Park -Team/Anabel Paita, Billing Coordinator.png
+d270d392757284c67ba312fb262b8612711ee69db260b9cc540796de7633ab13	1775345	workflows/Mason Park -Team/Anju Lekshmi - RDA.png
+0e02c44c23c1140924cd38223fdbf650d1531ce74d64d023e70f86434b63ae68	1978490	workflows/Mason Park -Team/Caisy Bradley, RDA.png
+57a0f3a04acb138ac8684f296a71edb5ab01279bb94c0c747951ade4540b0d28	1566244	workflows/Mason Park -Team/Dr. Dave Cho, General Dentist.png
+d571df7a3bfeb36b61e7142e241cc01e3a0dffd64c8b51a5587c990acd54067b	2087565	workflows/Mason Park -Team/Genevieve Fabre, RDH.png
+6221b02fbeb34a963d41c7eadddc022d26bf03aba063a3f5f3360325b1276eaf	1784556	workflows/Mason Park -Team/Ivon Garcia, RDA.png
+df779adb7c90271f0184b3af509700b6cf6fd787010e928f54c7b915bce1b19c	1741392	workflows/Mason Park -Team/Josh Richardson, RDA.png
+44f4197024cd609cf75776ea0732c453957339224c3a2538eb6e8fc27a8c7962	1765759	workflows/Mason Park -Team/Lola Oboh, RDH.png
+ecada32f965bbf5c372eccf6d54c81de1eb7ab70570f975b9b304f45071050a2	1710215	workflows/Mason Park -Team/Luis Trevino, RDA.png
+b42be9ddee40819bf313c5ea9b8b983e00976fc8b807eb7cd746027ad6a9defb	57640	workflows/Mason Park -Team/Mason Park Logo.png
+b968ab9dcccf443c7ebb0d575b1744487b6666a55bfe4f08f9648be56c97ce41	1891963	workflows/Mason Park -Team/Nicole Salgado, RDA.png
+b6233bfc5110c0d20480bf393a1e8cada2493592ed1e2da14765efe2801ad8cc	1925761	workflows/Mason Park -Team/Priscilla Compean, Treatment Coordinator.png
+8fc322b6942a5588d439d8e49273cf5c071160f92006751d68217487b91808a1	1946107	workflows/Mason Park -Team/Tiffany Cun, RDH.png
+3fc816c88a4100684cde596959e69062bed2c2e55a7a25ecccc6459341b9e0d2	792642291	workflows/Mason Park Kids-20261001T144800Z-1-001.zip
+d9269a349989b5bc6a264f164818cf54a4b643943a40edac51549ada22f4d55f	5186680	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1016853197.jpeg
+977b3e17f31040a2d6985ee2b1b06c3cd80f351005aea0ae4e23cc043ea6f732	3167743	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1046540974.jpeg
+c1241a44c4e2b4890db57a18b44b4bec38f4e7378875b701af2b998d1ed056aa	11341996	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1051456099.jpeg
+d9bf49976196d32a2803c376dbef3004256a16684d0091029e1bdbb47d89d2ac	8481471	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1073294513.jpeg
+58bb44ad9ada4a5b23f20c4d40f30b925d7b42783d6bd005140eab80db2f1535	2107528	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1126345278.jpeg
+0429f9d9e71bf1c96c2ac2c921aa8f2f69cb7aea91a1a9a08eed0f6b41a8570a	6338033	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1259165112.jpeg
+7b4c412fb394f50497a761655c528c3a77f580be4e8d0303db1459d4a2b7fc94	7348367	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_129917761.jpeg
+cc7588bad46a9252aeb01810d3cac03bf7cfb6f75aa05b61712d2ff07aa2c42c	2784289	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_131912341.jpeg
+ac942bed4e4c14021700cfc61e6825b7025541ade40480877c846386983600f8	2224640	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_132555773.jpeg
+a9d9265139050d8435a813a3dd0f0010cb507d5adbb72e44b2781ef9237028cb	4426861	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1406063303.jpeg
+92407edd1ad0363b3e85622e9bed56e04686e1498d1590d53063677b90eb1f87	4182237	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_141181172.jpeg
+0ac622cf036bd672014e6dba41f2b5ff8037bdf842abf76d0abf812e48dc36cf	2321133	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_143925159.jpeg
+ab0bb257942c92b15f74641f98b97b5fa81c0770778e78f9e1f1c0e50bb72220	1966560	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1479590356.jpeg
+d46ba6dc2419dfd71e08071fab5a86dd1350f7a887bcea5ec7efdd741c4cd341	7336485	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1513353993.jpeg
+9710f3148c0babdc87cb8808caf124e37cb00669257cb9cd0498e24c0e5b1ecf	4131303	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1538968823.jpeg
+b5bde0b4ca9648669abbfee1fd17636b1cb0871978005ff784950e3a60d01ba0	16547105	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1627253751.jpeg
+3b70e41c0cf50b95e89db1f05c835c9fb97c7d53b5eef1f774ffe204160d08c6	5473242	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_166558109.jpeg
+70fd00c228e55013b6a931d5f2f72cdad325cc1f50f76e6feed4c52a28b29bd3	7570058	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_169557997.jpeg
+f1d9733e5f1862279ddbb851248ba507511d8e0da034a3acf3f238155856f775	2118206	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1745347474.jpeg
+a34ae0dc2549971ba2eea3d9fc1189c365085b2aaf97a3048958639b51478ac9	3110595	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1781157191.jpeg
+8fc2453876008d404b0685832c09bbeb526b23666cfefd9155d6864961a06e55	3475553	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1806344091.jpeg
+08122052c3b66606267790b432269ced2f16981fb3422e9301833eb0fab35c5b	1340247	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1818816693.jpeg
+e09c4ccbd46e661dc2af0dadec68042a0c6f7c773b9bd15f3b4a83fc106812e4	901264	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1828722901.jpeg
+63c5dfdc0ffe9ecec981095acf93d7c144d92b7ad36ff6c14ff97ee062b8b340	11144324	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_1891104752.jpeg
+b3d3d8e29b9e45760ee3b68c2d1f88e40c6cff3e5c11d5e28080e93a13ddefd7	1955467	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_198950188.jpeg
+65c731f72b43b643910f60134ccbc350a174907cecbc8f2cff5640ddd0931c52	1734616	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2035604342.jpeg
+af038769be982c5004eb152a841ab93e7408a371dd2d4ac53e4f98b65dd73b95	2225101	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2035633519.jpeg
+12198f85197419e418219aa6e88192bad22ec57f567ea0e76401c08fc81cdde0	4048540	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2151232518.jpeg
+df412729da4c6f6349e08604610a3497a07cc4a75922a439ffb85a0508bf7b62	3150239	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2152521356.jpeg
+c8c60f4c4a2c7aab2db8386259836dacf797f84a907f040e6b6af778fc2a4d5b	6080403	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2165153748.jpeg
+27b93c5e7370d23dc98962f2e5d58eccb7ba5eba6239aaa293c242c582711335	7607177	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2165161779.jpeg
+89bea20f2c00e05aaf4a2c7bc3a78ecf779728d6b3c696219fbdedcaaefb3d46	300220	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_2180201007.jpeg
+49ab099942015f65c8f1d556b5c16dd4fdd279f6b00c93d605335b5bbb52819e	5572203	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_226194791.jpeg
+e67d27c8a2bc807d1e7d9cc197d7e511aa8ea03345f6c3280971683e192828ef	4791591	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_231491407.jpeg
+fa26b471979f80f6a530f4abc1c38f7e9ab84cddada1c460e71c6526f2672c9b	7914020	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_235685320.jpeg
+09ab32f074d18e72ffefbf27d7bbe6fb7e9ee96cd4472dea7ed23a1e6b210441	5626688	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_254741431.jpeg
+1e08d23dbb52d160ec20671feae636974153b54597eb0450fdafa65786b640c0	6832987	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_268785677.jpeg
+69a9a50cdb1d2dbfe55c0979db8cd8ee60711ca79797d6826373d8716bfd82f7	2921005	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_306767010.jpeg
+b900c09562e8255eba54b8fe87994b5c9626a5aab1c14475c48a530571d6a324	2743020	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_307147558.jpeg
+b1f362ec6ea8594180fc505602961ba6c3f52797270951d264e7d5898eaa2208	2392098	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_318792486.jpeg
+a98520ec708f802e59962023c55cbce70197514b86c751fb4fef4211a7d75fbc	4443471	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_324760778.jpeg
+6b49e6742ea3b4d351f8644e1dce2cf1dc573dea4023778397ef724209ad4b33	5209236	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_325979483.jpeg
+4f8e2d412aa3e1896f2cb80ed0e6d2f9b9341a29199b141cc28ebe68a5ee86c1	7480148	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_329920292.jpeg
+2cfbac79cd76a8b4100953cf0e707b9b0268958d3eef3c413c2846b517fe0a1d	3936971	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_334122746.jpeg
+21143dfad42bfa6c11c1a8c7adab1b5ce53c03a757b2683aea79c630566f63d6	4690255	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_377376885.jpeg
+5f6f8219ba56177b1807f283c167bfcef48f836186a1ab83ed382ad3ddf9779c	3898443	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_410891764.jpeg
+a365a8c06e9ebe8a98233a5a44d03b706b0aeaa6c3b444eb5962d4100af791f4	5246900	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_417394782.jpeg
+2c32e0a781502c193f6f750db4fc2af1c39ab7eb6f7916c841760e88ab05c5a9	5981607	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_417786010.jpeg
+3b8c553fd75fada4f2d71bba97d0c3152906574f03015a61f477416dc055cf24	10648109	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_423603524.jpeg
+b40541d7022fbf4ee64ebe37b98bf4d2d81dbd448193d565147c7272b7685214	7703915	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_431487749.jpeg
+a12958a0cbcff3b41d5d29d268019578493aa038f67ad245c922f0ff20f434c2	9868003	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_433932780.jpeg
+1f11ac0f36554a3066cbcc38926484a905600a7983ab3f4cfa98257d49b7dc68	7236906	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_435979599.jpeg
+151e9a89293445cb2096a55af71021e16873ad1a5c4829ed052f8bea77f1fb6f	9549226	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_438235598.jpeg
+e04e68db93cbffb581f79e800ee8f5d98801e9d2ae8c2f9ea853719eee3d0ce4	2189205	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_44223324.jpeg
+e29c20ea263e1d9b9dcff47cb2dc6ca6f947922d06bdd70d852bba86f2223ae4	169772854	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_462171644.mov
+e674b566a1d12dd81864686a777a55bd356cda296e8d6a9a5be447208646cfe2	4703679	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_473241335.jpeg
+09c82659e3f1ac9f049999f08a764095b7cd0a593e4138e0139871e6a15bbf01	6639945	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_473268491.jpeg
+0a0cce3040d47c546f91ce0af7166693fdc4b8ef602329fade5617e66d33b362	7346553	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_477444358.jpeg
+f07a25ac3583ada504b6525af7b3ec8144c78b6ee855e07d78165d44a3ca3a1c	7648014	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_479547387.jpeg
+a21728aa4ea01330a2a9c286706c512788b996c9be80be6453854921c31bbeb6	12955005	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_479768646.jpeg
+4f8536b6b27ece752cc5c5c5eb3cf07a9126518f5407f35308e2a639e91becfa	4262887	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_479833706.jpeg
+fd9a7994e19aafa0ea3b49194268644178663baf9eefd7478e3d3f136dfea186	511098	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_481423800.jpeg
+dde7a6b5e04d5d16a1e5568c0b8f7dac6cde021fbf5e340732368d5278b77974	7510319	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_486954336.jpeg
+89000c4f61263e1d456de48e3e2155b2fa2b79a309c52af4f574888ee42ffebc	9092718	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_490594161.jpeg
+a84b0d70266395630970e7518b3a1f35eea91f3b2881e89c1082df88936bb300	2956150	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_492954197.jpeg
+dcf024698904b8b92fe2443953fb530b6cbe066a861d0f01651c340195acc366	1596474	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_496227870.jpeg
+eab22ad0162ae6c1d5c54977a64a3e5e121fff94e03151e1a9aa579675ca4222	1968069	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_507459136.jpeg
+55c7725c22ae2734eb267939dcde96953da7d51d5b552b92fc87787608b1b733	5971733	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_509550819.jpeg
+13929f67399f0ae0f21c63563b193b0262d6e80dec727f83a8ae33efc18319a3	3388950	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_513383020.jpeg
+078132a5ab605846a8bc641f4808b07cfc5a8f1f5554f1dd00c6e6b3372089c9	3544401	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_513384207.jpeg
+c74c474b487333a8f12b86f5afe1fdf54ff865e97a86b8cd2020cbb3fed02c54	3686272	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_513384257.jpeg
+17e8b565c6c3b92abb3fc430617715a72a2ff97271f9f45d486a8dbd48ee1828	7645999	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_524786813.jpeg
+50db4c1183026b2c34a731d7b92977556cab12930e13e00d3b41f973a6f7f150	3992575	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_524918964.jpeg
+cbedce1ae655544bc42830b395df22a568bac1da122570464b38b1dcb1957ffc	10999305	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_526592389.jpeg
+d5a53dd0acd711c644159b547b8436a5e52ef5ec2f073c635762c05ef74e2ba5	5531021	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_530839181.jpeg
+9993ca7854f626a17705a58ae66a78fea7f7493c8994b7385c84ba89b2c0e0b6	4663685	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_540678770.jpeg
+332364713bb03d9c956b20d3be9ee79acb945a9d8a4ca196cb3f4c3dcb3e3fa1	6731581	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_548586854.jpeg
+4b4fe4d7a29f4b83cad296484ea637dc58750889ec5ad1796d76cc4d17da34bc	3032041	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_548878838.jpeg
+ad03bcd708abd28d6e766ee2bf58b31344fed60ea0735a25a617ee5511ce3dea	4785220	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_555720018.jpeg
+e450db4f9071a9ed4b14c384bf4dfb5eab4660e13dbd1abad5732b0bd3edfd16	9955135	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_558496216.jpeg
+78a6dcc52a769563524e5209731ab9bd1c05d3a72447bb977d6278bc521b0e2b	3847218	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_569098023.jpeg
+ffcea549df2dca0e15b25d5c4951e8e7dfab74c865f1198c0f03e6f08a775863	7110702	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_577333284.jpeg
+e805eb00b3d4bcf1b196d404513f35acff23a8009b4b0bd22f700155bd4dbd89	5049732	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_579790612.jpeg
+f5938bd1f5a2c5d1d07037576fa33ff7fcdfc6243a44cb4b5eb2652d6d0470bf	5006710	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_580572976.jpeg
+4d78c2cac6e1de517754d013182b9d262d093feb56113f1ea07ac01d70128d2e	7850896	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_586528082.jpeg
+5114074fe46fd6fc57dfbb786c2f615f74536defea9f35246ef0c78483450eff	6812109	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_597461700.jpeg
+4ac118300c7898f85fad97f81bf4defcb360727f4ab6fbd76e8e2c510d8b125e	4227559	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_608941270.jpeg
+be1b3eaeb758d36427fd770107835db54d6442ff7a9c610d575a60fd65b86f26	8097139	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_616975730.jpeg
+a359af9593dc18df03dc3c60b6c2059ae4e3bcf19cd899b33aed5ee9fcc95154	4123392	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_630637757.jpeg
+29d2c64925c5ddc14ab09c0e39fc88dba30e601621f49a6ceddb17f65d3f3c94	4190916	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_668611737.jpeg
+6bf25d461b3d6f2d042853d389c2f8d180d8a20e40bc62ee53b2d511163de622	9317877	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_707517594.jpeg
+3c6ad458537e925819ecd537a9bd39b685b12ceb1be4659b3a16ba217f09be03	6575591	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_757490938.jpeg
+0340ec7dfc6364bf077071b5a366044f1b11d7fc04f77b41c63be007f2892d3b	6265831	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_769457155.jpeg
+b95d2fd258c682f6b39227d48c31bccd43e73144739e3c45275f2aa1be4c4040	601497	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_841531687.jpeg
+d539a2fb0d1e840f87d1e7a246448f2d3dedb55ff64875e435a1bd4a883e0077	5729996	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_865984007.jpeg
+b7305d8ccc777e2e078f5d1ab9d653a6374f42bef102f854a48a61db6a74eee2	2885219	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_88720748.jpeg
+56a5488226daa525f585cd112259a5e7bf549c15b449f23644493ca5b515816d	7154979	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_889284871.jpeg
+0cdb8c43ea1c04610d209177dcd2694e9b887b81fe44f71dad40c0e56c4bc11d	7928616	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/AdobeStock_920561947.jpeg
+88aa2cf25e8f163ecf87f5e5693f82fa39cbe39eefc26b6effebd8bea976efc1	4755382	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/IMG_7693.jpeg
+a2b7f566c7fe5a2b8ae7726895022b9039658c25d4e185a1264feab72002b3dc	4727402	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/IMG_7695.jpeg
+d3c2fb28c527dd1f0524329fdf3a2be14e749852d58ebea4ade636f10b683462	5939378	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20240131_214955160.MP.jpg
+feb6c0f23aaefaba7ac583ad9039ef5b4bafdb9560c199b9fe36f6c3ac440fc3	3465666	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20240228_164822333.jpg
+21708239d516b34994dd57a6a9dd618047abeb4445e113daf74433f619134c30	4331760	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20240408_202735547.MP.jpg
+b7311c17358e66bbb5712cbb0606fa9bd236b8dd774519851c3d6293399ccb1a	7087346	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20250428_153338778.MP.jpg
+689906e6720d3eb3be55549d3549d5812a6da6846404f5a33a1f35b8ac7c2bd2	4891363	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20250806_223336154.MP.jpg
+4641c5722e2e0a466850782eafb5dd3d2e21d8cac11a4d05d2d87779a51f344a	5249695	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260121_234111670.MP.jpg
+168604742a7c6c624c3d0ad8c29fb5ff68ee10689b1aa67e0067f233f01ac8aa	5482358	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260325_164750457.jpg
+eb633e11413562c9ba966b7bf5c4d9f852c72564f39cbb0f23efa04d90481a45	3088264	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260415_193423265.jpg
+1209e05bc035a7a198bb2937f717d5beb9a0728f9983db03ff530dd261dc1ec7	9304536	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260714_211519485.MP.jpg
+db9da8878462cab672b86771a8a8d6ab91e42e6159118c00c506220161ec2251	9757405	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260714_212222254.MP.jpg
+151501799bf368925f946d173b1067cde558e284a45efdd2dd7f7e86a5345d19	4372340	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260714_212931964.jpg
+93d99a39dbd0717278ca66c429a077c298fcbc4eef7b900e1fe24012a08222c0	7879497	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260714_220731094.MP.jpg
+af61263bb66a4748a1c9220e433e3e6fc67e9094dd9ca45a5eba04454e3a42c6	5183650	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260714_221325464.jpg
+b5502f94f5158333f4c1fbe428c89e927200059b9c005aa887a2fdbce3b334ac	4283070	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260715_145353043.jpg
+c9d2bbd6ebb012da35d3e4f2ddc7c7433bd059ccacdce69e8fb113facfa65f30	3907182	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260819_210535117.jpg
+5d5093f2052280351f77670e3d73b4ee13ce256c1afb58bfa0440c744f477a0c	3943062	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/PXL_20260909_173634816.jpg
+c246bbe414b980804b271c8d69ad4ab96c81f4ca7026b163612743d24819efdb	62410	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/ParksRanchlogo.svg
+abc7627c202929e6769bf3ec77fae493d34b48eb238056926dae708ffacda7aa	63754	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/Playarea.jpg
+1bc35fe22da8141a870567ac54c9c655304c441aa8902ee7b5ec309314e3d17b	2122203	workflows/Mason Park Kids-20261001T144800Z-1-001/Mason Park Kids/toothcalendar.jpeg

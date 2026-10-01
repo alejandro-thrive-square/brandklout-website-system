@@ -423,6 +423,20 @@ and some of those were written for adults. The old URLs were `/<slug>/`; the new
   `MSYS_NO_PATHCONV=1 node import-pages.mjs --only / --publish` as the last step: `--only`
   matches the CONVERTED slug (`/`, `/about-us`), not the CMS slug (`index`), and Git Bash
   rewrites a bare `/` argument into a Windows path unless path conversion is off.
+- **Update only the pages that changed (since 2026-10-01).** `to-instatic.mjs --only /,/our-team`
+  converts just those pages, and every later step (upload-media, ship-payload, run-convert,
+  fetch-nodes, apply-*, import-styles, import-pages) works on what it wrote: a three-page round
+  shipped 23 KB in 4 chunks instead of 1.4 MB in 205. Pass the SAME list to both `to-instatic`
+  passes and to `import-pages --only`; keep it in one `PAGES=` variable (`publish-1001c.sh` is
+  the template). It is safe because `import-pages` and `import-styles` are incremental: no page
+  is ever deleted and style rules are only added. `backup-site.mjs` still dumps the whole site,
+  on purpose. A full chain is only for a change every page carries (the chrome, a site-wide copy
+  edit); a code-asset-only change (site.css, site.js) needs `import-styles` / `import-scripts`
+  and a publish, no page import at all. An unknown slug in `--only` stops the run.
+- **Re-imported pages lose their embeds.** `import-pages` rebuilds a page from `home/`, which
+  holds placeholders: re-run `add-elfsight-reviews.mjs --apply --publish` after / or
+  /patient-reviews, and `add-ghl-contact-form.mjs --apply --publish` after /contacts or
+  /patient-reviews.
 - Do not write `.mjs`, `.js` or `.css` here through a shell heredoc or a `node -e` string.
   Backslashes are eaten on the way through and the file still parses. It cost two rounds in
   this workflow alone (a Chrome path, a regex). Use an editor.
@@ -446,7 +460,7 @@ and some of those were written for adults. The old URLs were `/<slug>/`; the new
 cd .tmp && npm i                                   # once: playwright-core
 node list-site.mjs                                  # what is there
 node backup-site.mjs                                # 1. dump the instance. 7 MB.
-node to-instatic.mjs --lean                         # 2. -> instatic/  (media not yet mapped)
+node to-instatic.mjs --lean                         # 2. -> instatic/  (media not yet mapped; --only /,/x for a subset)
 node upload-media.mjs                               # 3. upload; writes instatic-media-map.json
 node to-instatic.mjs --media instatic-media-map.json --lean   # 4. second pass, /uploads paths
 node ship-payload.mjs && node run-convert.mjs && node fetch-nodes.mjs   # 5. HTML -> node graphs, inside the container

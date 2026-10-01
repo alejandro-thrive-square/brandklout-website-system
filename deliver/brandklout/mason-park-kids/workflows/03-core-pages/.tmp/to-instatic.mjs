@@ -1,6 +1,6 @@
 // Turn home/ into what Instatic should hold.
 //
-//   node to-instatic.mjs [--media instatic-media-map.json] [--lean]
+//   node to-instatic.mjs [--media instatic-media-map.json] [--lean] [--only /,/our-team]
 //
 // Output: instatic/
 //   pages/<slug>.json     { slug, title, description, bodyClass, html }  - body-only
@@ -39,6 +39,12 @@ const MEDIA = mediaArg && fs.existsSync(mediaArg) ? JSON.parse(fs.readFileSync(m
 // derives its own width variants on upload, so the candidates are redundant
 // there; use the SAME flag on both passes.
 const LEAN = argv.includes("--lean");
+// --only /,/our-team converts just those pages (2026-10-01). Every later step of a publish chain
+// (upload-media, ship-payload, run-convert, fetch-nodes, apply-*, import-pages) works on what this
+// writes, so a two-page update ships two pages instead of all 216. Safe: import-pages and
+// import-styles are incremental (no deletions; style rules are only added). Use the SAME list on
+// both passes and on import-pages.
+const ONLY = argv.includes("--only") ? new Set(argv[argv.indexOf("--only") + 1].split(",")) : null;
 
 if (!fs.existsSync(HOME)) { console.error("../home/ does not exist"); process.exit(1); }
 
@@ -118,6 +124,7 @@ for (const file of pages) {
   const isHome = rel === "." || rel === "";
   const localRoute = isHome ? "/" : "/" + rel + "/";
   const slug = isHome ? "home" : rel;
+  if (ONLY && !ONLY.has(route(localRoute))) continue;
   const title = decodeEntities((html.match(/<title>([\s\S]*?)<\/title>/i) || [, ""])[1].trim());
   const description = decodeEntities((html.match(/<meta name="description" content="([^"]*)"/i) || [, ""])[1].trim());
   const bodyClass = (html.match(/<body[^>]*\sclass="([^"]*)"/i) || [, ""])[1].trim();
@@ -146,6 +153,7 @@ fs.writeFileSync(path.join(OUT, "media-manifest.json"), JSON.stringify({
 
 // ------------------------------------------------------------------ validate
 const problems = [];
+if (ONLY) for (const s of ONLY) if (!manifestPages.some((p) => p.slug === s)) problems.push(`--only ${s}: no such page`);
 for (const page of manifestPages) {
   const d = JSON.parse(fs.readFileSync(path.join(OUT, page.file), "utf8"));
   const bad = [];
