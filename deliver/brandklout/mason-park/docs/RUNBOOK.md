@@ -11,8 +11,8 @@ then only the runs you need. Do not read them all.
 (d/b/a Mason Park Dental of Katy), effective October 1, 2026, built from the Privacy Policy page's template**
 ([`runbook/2026-10-01-hipaa-disclosure-page.md`](./runbook/2026-10-01-hipaa-disclosure-page.md)). Injected as one row
 (`.tmp/hipaa/add-hipaa-page.mjs`); the local twin `home/hipaa-disclosure/index.html` keeps it in a chain run. **A new
-row must join `mason-park.js`'s page scope** or it ships with no JavaScript. **Open:** no footer link yet (the footer
-has a `.footer_legal` row); the number pool rewrites the notice's phone number; the entity is unconfirmed by the practice.
+row must join `mason-park.js`'s page scope** or it ships with no JavaScript. Since the same day **every footer links it, right after Privacy Policy**, on both instances and in the source
+([`runbook/2026-10-01-hipaa-footer-link.md`](./runbook/2026-10-01-hipaa-footer-link.md)). **Open:** the number pool rewrites the notice's phone number; the entity is unconfirmed by the practice.
 
 ## Google reviews widget - 2026-09-30
 
@@ -372,7 +372,9 @@ Associates account it is.
   Only `PUT /admin/api/cms/site-document` writes a page slug verbatim. `apply-seo.mjs`
   refuses to run for this reason and carries the whole story.
 - **`apply-blog-template.mjs` AND `apply-404-template.mjs` run AFTER any
-  `import-pages.mjs`.** The site-document save rebuilds each row through
+  `import-pages.mjs`, and after ANY site-document save that includes the `blog-article` or `404` row** (a
+  footer-only edit too: 2026-10-01 staging lost every article for a minute; `.tmp/hipaa/add-footer-link.mjs`
+  restores the flags itself). The site-document save rebuilds each row through
   `pageToCells()` and drops the template flags. Lose the first and every
   `/blog/<slug>` 404s; lose the second and Instatic's bare stock 404 is back.
   The full end-to-end order is in the 2026-09-10 run.
