@@ -37,7 +37,8 @@ The user asked to make computer use with Jev work properly and to compare approa
 
 ## Next
 
-- A real create run is next: consider a real create run in place of `elfsight-reviews/elfsight_widget.py`.
+- Next: a real create run with Jev, on the next client that actually needs a widget, in place of
+  `elfsight-reviews/elfsight_widget.py`.
   Each create spends one of the 50 Google Reviews slots.
 
 ## Gotchas
