@@ -2,6 +2,24 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-01 · BugHerd project for the staging site
+
+### Done
+
+- Created BugHerd project **544349** "Hackensack Dental Implants" with `POST /api_v2/projects.json`
+  (`BUGHERD` key from `[shared]`), `devurl` https://hackensack-dental-implants-staging.up.railway.app/,
+  private. The account added the five team members itself; columns todo / doing / done.
+
+### Next
+
+- Team complete site review on BugHerd once the inner pages exist (checklist item in this step).
+  Pull each task by id with attachments; decide scope first (`deliver/docs/BUGHERD.md`).
+
+### Gotchas
+
+- The BugHerd script cannot run on Instatic (CSP `script-src 'self'`): pin with the extension.
+- When production replaces staging, add the production URL to the project's sites.
+
 ## 2026-09-30 (evening) · Google reviews widget (Elfsight) under the gallery, on staging
 
 Task brief: [`docs/tasks/2026-09-30-google-reviews-widget.md`](../../../docs/tasks/2026-09-30-google-reviews-widget.md).

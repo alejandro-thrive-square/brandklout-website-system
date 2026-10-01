@@ -19,6 +19,10 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 - **Google reviews on staging** (2026-09-30): the client's Elfsight widget (`cf96ca10-…`, registry key
   `hackensack`) is an Embed block under the Smile Gallery (`#reviews`), placed by the push chain from a
   marker in the source, so a re-push keeps it. Production has it once the site is first pushed there.
+- **BugHerd project 544349** "Hackensack Dental Implants" (2026-10-01) on the staging URL, with the
+  usual five members (Jessica, Sang, Alejandro, Gauge, agency@brandklout.com). Instatic's CSP blocks
+  the BugHerd script, so reviewers pin with the browser extension. Fix comments per
+  [`deliver/docs/BUGHERD.md`](../../docs/BUGHERD.md) on `main` (scope first).
 - **Instatic on Railway**, project `Hackensack Dental Implants`: production
   https://hackensack-dental-implants-production.up.railway.app (admin works, nothing published) and a
   `staging` environment with its own volume. Alejandro and Sang can log in on both; three plugins on both.
@@ -75,6 +79,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Home page motion elevated to the editorial standard: arrival curtain, word-rise headlines, five pinned scenes (hero, story, journey, gallery, closing), self-drawing implant illustrations, CBCT scan line, pointer cursor, magnetic rolling buttons, draggable before/after; on staging; probe 29/29, live 14/14 | `c2f57ee7`; R2 manifest in the commit after it |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Layouts recomposed editorially in nine of twelve blocks: type-led masthead, moving proof line, bleeding photographs, numbered treatment index, horizontal journey, stepped gallery, name behind the team, stacked closing words; on staging; probe 28/28, live 14/14 | `354923bd` |
 | 2026-09-30 | scenario-0-new-site / 03-design-build | Google reviews: the client's Elfsight widget placed under the Smile Gallery as an embed-origins Embed (marker + `embeds.json`, chain re-run, backup first); verified in Chrome at 751px with 4.7 (1,104); production untouched (empty instance); marker regexes fixed for nested divs | `c9c283aa` |
+| 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd project 544349 created via API on the staging URL; five team members added by default; columns todo/doing/done; no tasks yet | see the commit after `adcfdfd0` |
 
 ## Version Control
 
