@@ -2,6 +2,44 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-01 (later): HIPAA Disclosure in the footer legal row
+
+### Done (`ea7dd53c`)
+
+- **Production, all 60 pages:** `HIPAA Disclosure` → `/hipaa-disclosure` right after Privacy Policy in
+  `ul#menu-legal-footer` (the footer is inlined per page; there is no shared component). Markup is the
+  neighbours': a `' '` text node, then `<li class="menu-item menu-item-type-post_type menu-item-object-page
+  bricks-menu-item"><a target="_self">` (class ids from the Privacy item; its per-item `menu-item-1333` / id not
+  copied). On `/hipaa-disclosure` itself the link has `aria-current="page"`. `legal/push-footer-hipaa.mjs`:
+  one incremental write of the 60 rows, the 3 rows' `seoTitle`/`seoDescription` restored by PATCH, templates
+  asserted, published at seq 24 (`draftMatchesPublished` true before). Verified: 60/60 pages 200 with exactly one
+  HIPAA link, and identical to before once that `<li>` and the per-publish tokens are removed.
+- **Wrapping regression, fixed with approval:** five links no longer fit the row (a non-wrapping flex `ul` in a
+  `space-between` row with the copyright), so every link broke onto two lines at 1440 and Terms onto three at 390.
+  `legal-footer-wrap.css` (`flex-wrap: wrap`, `li { white-space: nowrap }`, right-aligned, left under 768px) went
+  into the `site.css` shell asset as a fenced block by `push-legal-footer-wrap.mjs` (second publish, shell only);
+  `build-wp.mjs` appends it too. Now every link is one line (18px) at 1440/1280/991/390; the row runs to two
+  lines, and at 1440 the copyright also wraps to two lines. Only change in page HTML: the userStyles hash.
+- **Rebuilt site (staging):** `site-src/partials/footer.html` `.foot__legal` has
+  `· <a href="/hipaa-disclosure/">HIPAA Disclosure</a>` after Privacy Policy (trailing slash like its
+  neighbours). Not pushed; it ships with the next full push. Isolated build checked: links stay whole; at 390 the
+  line gains one row ("Accessibility" flows down).
+
+### Next
+
+- Staging still answers 404 for `/hipaa-disclosure`: the 13:38Z full push did not include it, although
+  `site-src/pages/hipaa-disclosure.html` is committed. Check it is in the next build/push.
+
+### Gotchas
+
+- **`site-src/build.mjs` writes `seo.json` on EVERY build**, `--out`/`--only` included (line 151 is not guarded
+  by `FULL`, despite the header comment). An isolated build replaces it with just the pages built; the
+  index+hipaa-only version from this morning's check went into `e8861d52`. Harmless for a push (a full
+  build rewrites it, and `push/prepare.mjs` refuses pages missing from it), but restore it after any
+  partial build: `git checkout -- seo.json`.
+- A re-run of `prepare-wp.mjs`/`build-wp.mjs` (a fresh WordPress-clone import) does not carry the footer
+  link; re-run `legal/push-footer-hipaa.mjs` (idempotent) after one.
+
 ## 2026-10-01: HIPAA Disclosure page injected (production), staged in site-src (staging)
 
 ### Done (`ee7f64db`)

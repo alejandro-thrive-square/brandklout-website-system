@@ -67,7 +67,8 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   `workflows/00-client-delivery-initialization/.tmp/`. See
   [runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md](runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md).
   **`/hipaa-disclosure` since 2026-10-01** (HHS model notice, Institute for Advanced Dentistry PLLC),
-  production only, not in any footer; `legal/push-hipaa.mjs`. Staging gets it from `site-src` with the
+  production only, in every footer legal row after Privacy Policy (`legal/push-hipaa.mjs`,
+  `legal/push-footer-hipaa.mjs`; the row wraps via `legal-footer-wrap.css`). Staging gets both from `site-src` with the
   next full push. Run: `scenario-0-new-site/06-post-launch/output/RUNBOOK.md`.
 - **Site-wide tags**: Google Tag Manager `GTM-5XR78DN7` and the GoHighLevel number pool, in the
   code asset `src/scripts/000-brandklout-tags.js` (source `workflows/21-instatic-upload/tags/`),
