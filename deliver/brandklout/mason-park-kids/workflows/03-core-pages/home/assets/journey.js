@@ -471,14 +471,21 @@
       });
     });
 
-    /* data-marquee: velocity reactive drift. Duplicated once so the loop is
-       seamless whatever the row measures. It stops while the pointer is over
-       it, so a name can be read (BugHerd #205, #407). */
+    /* data-marquee: velocity reactive drift. The words are repeated until one
+       run is wider than the strip, then that run is duplicated, so the loop is
+       seamless however few words there are: five names once left half the strip
+       empty (BugHerd #514). It stops while the pointer is over it, so a name
+       can be read (BugHerd #205, #407). */
     $$("[data-marquee]").forEach(function (row) {
-      row.innerHTML += row.innerHTML;
-      var half = row.scrollWidth / 2;
-      var x = 0, extra = 0, last = window.pageYOffset, held = false;
       var box = row.parentNode;
+      var words = row.innerHTML, n = 1;
+      var one = row.scrollWidth || 1;
+      while (one * n < box.clientWidth * 1.2 && n < 24) n++;
+      var run = new Array(n + 1).join(words);
+      row.innerHTML = run + run;
+      // One run plus the flex gap that separates it from the next.
+      var half = (row.scrollWidth + (parseFloat(getComputedStyle(row).columnGap) || 0)) / 2;
+      var x = 0, extra = 0, last = window.pageYOffset, held = false;
       box.addEventListener("mouseenter", function () { held = true; });
       box.addEventListener("mouseleave", function () { held = false; });
       gsap.ticker.add(function () {

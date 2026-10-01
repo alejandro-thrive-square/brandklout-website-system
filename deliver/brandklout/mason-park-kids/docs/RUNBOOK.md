@@ -12,6 +12,8 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 
 ## Where the site is, as of 2026-09-09
 
+**2026-10-01: BugHerd round seven, #507-#515, 8 closed and on STAGING ONLY.** Production is one promotion behind: `PROMOTE=production INSTATIC_BASE_URL=https://mason-park-kids.up.railway.app bash publish-1001.sh`, then `verify-1001.mjs` with `BASE=`. 13 notes still wait on the practice (#483 photo, #502/#504/#506 Canva headshots, GHL form, forms URL, lender links, #38, #82). See `runbook/2026-10-01-bugherd-round-seven.md`.
+
 **2026-09-29: LIVE GOOGLE REVIEWS ON STAGING (Elfsight app `d359c3c4`, the pediatric #104B listing).** It replaces the homepage `#proof` chip rail and the `/patient-reviews` wall; not promoted to production. `.tmp/add-elfsight-reviews.mjs` places it, and must be re-run after any re-import of those two pages. Never use `data-elfsight-app-lazy` (it never boots here). See `runbook/2026-09-29-elfsight-google-reviews-on-staging.md`.
 
 **215 pages live and published at <https://mason-park-kids.up.railway.app> as of the night of
