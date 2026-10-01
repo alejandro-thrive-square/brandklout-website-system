@@ -69,9 +69,34 @@ direction the client picked.
    the workspace, not only the main task.
 9. **Termly.** Create the client's Termly account by hand (agents cannot) and record the website ID in
    [`tools/termly-ghl-consent/kit/termly-websites.json`](../../tools/termly-ghl-consent/kit/termly-websites.json).
-10. **Style selection.** Research reference sites for the specialty, screenshot them, and turn the
-    folder into an HTML page on staging for the client to choose from. Record the choice in
-    `docs/project-overview.md`.
+10. **Style selection: the concept deck.** The client picks from five full homepages, not from
+    screenshots of other practices. An index page presents the five; each concept is its own subpage
+    (model: hackensack-dental-implants.webflow.io, Livewell's deck on its Instatic staging). Work in
+    `output/concepts/`:
+    - `content.md`: the homepage content, section by section, with every image URL. A migration
+      reads it off the old homepage (scenario 1 step 01 capture); a new site off the form and the
+      drive. **All five concepts carry the same content in the same order**, so the client compares
+      style against style.
+    - `directions.md`: five directions, each a name, a tag (`Recommended`, `Precision-led`,
+      `Patient-led`, `Design-led`, `Hospitality-led`...), a display + text font pair, a palette (ink,
+      four light grounds, accent with a deep text variant), a layout idiom and one signature moment.
+      01 is the client's current identity refined, and it is the recommendation. All five are light
+      (no "dark luxury"). The rules every concept follows go in the same file.
+    - `concept-0N-<slug>.html`: one self-contained page each (inline CSS and JS, Google Fonts, GSAP
+      from cdnjs, a class prefix per concept), built to [`DESIGN-STANDARD.md`](../03-design-build/DESIGN-STANDARD.md):
+      the client judges the deck as the site, so it is the elevated version from the start. Fixed
+      presentation chrome on each: `← All 5 concepts`, `Concept 0N · <Name>`, a progress bar. The
+      five are independent, so five agents can build them in parallel from the two files above.
+    - `index.html`: intro, one card per concept (number, tag, swatches, a preview set in that
+      concept's own fonts and colours, what it feels like, the type pair), a type table, how to choose.
+    - Check every page with `shoot-concept.mjs` (1440 + 390: overflow, broken images, JS errors,
+      viewport slices) and read the slices. Then publish to the client's Instatic **staging** with
+      `publish-deck.mjs`: `/concepts` plus `/concept-0N-<slug>`, each page one Embed block in snippet
+      mode, noindex injected, staging hosts only. Re-shoot the live URLs. Both scripts:
+      bk-livewell `scenario-0-new-site/01-client-inquiry/output/code/`.
+    Send the `/concepts` link. Record the pick, and anything they liked in the others, in
+    `docs/project-overview.md`; the chosen page is the design authority for step 03 (port its values,
+    rebuild it natively, never ship the embed).
 11. **Brand authority.** Write `scenario-0-new-site/01-client-inquiry/output/reference-inventory.md`: every source
     that can carry design direction (brand guide, logo files, old site, style pick), what it controls,
     and which one wins. If brand identity is unresolved, stop and ask before any design work.

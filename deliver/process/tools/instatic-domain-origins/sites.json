@@ -210,6 +210,27 @@
           "expect": "pokjns4x.up.railway.app"
         }
       ]
+    },
+    {
+      "client": "livewell-dental",
+      "adminUrl": "https://livewell-dental-production.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "47337011-9328-4c36-b1ff-a09b2434262a",
+        "service": "Livewell Dental"
+      },
+      "note": "Provisioned 2026-10-01 name-first (provision-instance.mjs). PUBLIC_ORIGIN = the generated host from first boot. No client domain yet: livewelldentalva.com is still the Webflow site. Nothing published on production."
+    },
+    {
+      "client": "livewell-dental-staging",
+      "adminUrl": "https://livewell-dental-staging.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "47337011-9328-4c36-b1ff-a09b2434262a",
+        "service": "Livewell Dental",
+        "environment": "staging"
+      },
+      "note": "Created 2026-10-01 with staging-env.mjs: own volume, PUBLIC_ORIGIN = this host only. Holds the concept deck (/concepts). No domain yet, so noindex is injected by the deck pages; replace the generated host with staging.<domain> at launch."
     }
   ]
 }
