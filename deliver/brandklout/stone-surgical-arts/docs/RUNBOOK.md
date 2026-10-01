@@ -49,7 +49,7 @@ never publish half-finished work on production, where one publish replaces every
 applied in `site-src/` and published to staging (54 pages, gates clean); production still serves the
 pre-round site. Before promoting: confirm consent for the agency's before-and-after photographs
 (seven are dental cases), check the steps photo's embroidery, and decide the Google widget, which a
-full production push would publish as a badge. Pin #7 (GHL "Submission in progress") is a GHL setting.
+full production push would publish as a badge. Pin #7 (GHL "Submission in progress") is a GHL setting. On the board, 125 pins are closed with staging replies; #7 and #95 stay open ([closing run](./runbook/2026-10-01-bugherd-round-two-pins-closed.md)).
 `media-map.json` points at staging now: re-run `upload-media.mjs` against production first —
 [run](./runbook/2026-10-01-bugherd-round-two-on-staging.md).
 
