@@ -1,11 +1,12 @@
 # Runbook index
 
-25 runs, newest first. Each line is one file in this folder.
+26 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | 2026-10-01, later — HIPAA Disclosure linked in the footer legal row on all 55 pages, staging and production; source footer too — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01 — HIPAA Disclosure page (`/hipaa-disclosure`) injected on staging and production, 55 pages each, every other page unchanged — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-10-01 | 2026-10-01 — BugHerd round two: 127 agency pins applied and published to STAGING; production waits on the user (patient photos, the widget) — carries **gotchas** | [`2026-10-01-bugherd-round-two-on-staging.md`](./2026-10-01-bugherd-round-two-on-staging.md) |
 | 2026-09-30 | 2026-09-30 — Google reviews widget (Elfsight c92f78df) placed on STAGING in the three review sections; it is a floating badge, so production waits on a layout change in Elfsight (`cbf3bacf`) — carries **gotchas** | [`2026-09-30-google-reviews-widget.md`](./2026-09-30-google-reviews-widget.md) |

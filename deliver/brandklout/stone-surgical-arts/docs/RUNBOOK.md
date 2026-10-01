@@ -35,9 +35,9 @@ Embed block by `21-instatic-upload/place-embeds.mjs`, a required step after ever
 
 **HIPAA Disclosure, `/hipaa-disclosure`, is live on both hosts since 2026-10-01** (55 pages each):
 the HHS model Notice of Privacy Practices for Stone Surgical Arts PLLC, injected as one page by
-`21-instatic-upload/add-hipaa-page.mjs` (no re-import). The footer's legal row does not link it yet,
-by decision —
-[run](./runbook/2026-10-01-hipaa-disclosure-page.md).
+`21-instatic-upload/add-hipaa-page.mjs` (no re-import). Since the same day the footer's legal row links
+it on every page, after Privacy Policy (`add-hipaa-footer-link.mjs`, and `partials/footer.html`) —
+[run](./runbook/2026-10-01-hipaa-disclosure-page.md), [footer run](./runbook/2026-10-01-hipaa-footer-link.md).
 
 **Staging:** `https://staging.dfwsurgicalarts.com` (admin at `/admin`, same owner login, no Sang).
 It is a Railway environment `staging` in the same project, seeded from production on

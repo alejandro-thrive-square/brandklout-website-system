@@ -950,6 +950,12 @@ mints a new per-page folder for runtime scripts (`/_instatic/assets/<id>/entries
 bumps `/_instatic/module-js/<module>.js?v=N` on pages using a plugin module, and Cloudflare re-encodes
 `data-cfemail` per request. Take the baseline WITH that normalisation, twice, before publishing.
 
+The footer is inlined in every page row (no shared component), so a footer change is a write of
+every page: `add-hipaa-footer-link.mjs` is the pattern (clone the neighbour `base.link`, one
+incremental save with every row's `seq` in `baseSeqs`, then re-apply `seoTitle`/`seoDescription`,
+which a site-document page write drops). A page cloned from another inherits that page's
+`aria-current="page"` footer link: move it. Prove it with "after minus the new link == before".
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions
