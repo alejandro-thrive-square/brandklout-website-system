@@ -1172,6 +1172,10 @@ size. **The same race exists on every Instatic site that carries Sienna**; the r
 
 ## What is NOT done
 
+- **`/hipaa-disclosure` lives only in the instances, not in site-src** (2026-10-01, `add-hipaa-page.mjs`,
+  cloned from each instance's `/privacy-policy`). `push-site.mjs` is `mode: 'replace'` and deletes it: after
+  any full re-push, run `add-hipaa-page.mjs --apply --publish` against that instance.
+
 - **Nav and footer are inlined into the page rather than being a Visual Component.** Eleven pages
   means editing the nav is eleven edits. This is now the strongest item on the list —
   `changedComponents` / `changedLayouts` are already in the `PUT /site-document` contract.
