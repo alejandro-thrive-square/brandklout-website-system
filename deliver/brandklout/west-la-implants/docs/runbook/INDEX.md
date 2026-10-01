@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-01 | "HIPAA Disclosure" footer link on all 87 pages, published seq 27; ads footer wraps at 390 — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | HIPAA Disclosure page injected page-only, published seq 26; entity unconfirmed — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-09-30 | **Elfsight Google Reviews on the homepage**: the three static cards became the live widget (Embed block in `#proof`), site.js guard, published seq 25, verified in real Chrome — carries **gotchas** (a re-import drops it; the Chrome extension freezes on this page) | [`2026-09-30-elfsight-google-reviews-on-homepage.md`](./2026-09-30-elfsight-google-reviews-on-homepage.md) |
 | 2026-09-24 | **Strict image pass**: every photo re-judged against its copy (167/370 failed), library swaps via `lib/image-map.mjs`, 42 licensed Freepik photos, verified, published seq 23 — carries **gotchas** | [`2026-09-24-strict-image-pass.md`](./2026-09-24-strict-image-pass.md) |

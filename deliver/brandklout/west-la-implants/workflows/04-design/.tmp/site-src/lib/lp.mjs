@@ -165,7 +165,7 @@ export function foot(c) {
     <p class="lp-foot-where">${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a><br>${SITE.hours}</p>
     <p class="lp-foot-legal">${c.disclaimer}</p>
   </div>
-  <div class="wrap lp-foot-bottom"><span>&copy; West LA Implants &middot; Tony Barriere, DDS</span><div class="lp-foot-links"><a href="/privacy-policy.html">Privacy</a><a href="/accessibility.html">Accessibility</a></div></div>
+  <div class="wrap lp-foot-bottom"><span>&copy; West LA Implants &middot; Tony Barriere, DDS</span><div class="lp-foot-links"><a href="/privacy-policy.html">Privacy</a><a href="/hipaa-disclosure.html">HIPAA Disclosure</a><a href="/accessibility.html">Accessibility</a></div></div>
 </footer>`
 }
 

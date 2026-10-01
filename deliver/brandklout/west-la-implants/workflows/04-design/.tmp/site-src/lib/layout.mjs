@@ -84,6 +84,7 @@ export function footer() {
         <a href="${SITE.social.yelp}" target="_blank" rel="noopener">Yelp</a>
         <a href="${SITE.zocdoc}" target="_blank" rel="noopener">Zocdoc</a>
         <a href="/privacy-policy.html">Privacy</a>
+        <a href="/hipaa-disclosure.html">HIPAA Disclosure</a>
         <a href="/accessibility.html">Accessibility</a>
       </div>
     </div>

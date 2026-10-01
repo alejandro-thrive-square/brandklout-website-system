@@ -27,7 +27,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   `workflows/21-instatic-upload/add-elfsight-reviews.mjs --apply --publish`.
 - **HIPAA Disclosure** (`/hipaa-disclosure`) live since 2026-10-01, published **seq 26**, injected
   page-only by `workflows/21-instatic-upload/add-hipaa-page.mjs` (text in `site-src/lib/hipaa-notice.mjs`).
-  Legal entity unconfirmed (practice name used), no email published. Run
+  Linked from both footer legal rows (after Privacy) since seq 27. Legal entity unconfirmed
+  (practice name used), no email published. Run
   [`docs/runbook/2026-10-01-hipaa-disclosure-page.md`](./docs/runbook/2026-10-01-hipaa-disclosure-page.md).
 - **Backups before the 2026-09-30 pushes**: ads: tag `wla-pre-ads-2026-09-30`,
   `/app/storage/backups/cms-2026-09-30-seq23-pre-ads.db` on the container; reviews: API snapshot
@@ -44,7 +45,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-09-30 | 3 · 02 build the combo | Six pages built in `site-src`, pushed and published seq 24; upload chain repaired (imports, media list) | `b9b96a5c` |
 | 2026-09-30 | 3 · 03 QA and launch | Live gates clean except forms and conversion, which wait on Brandklout; three new checks | `b9b96a5c` |
 | 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | `ba81ca90` |
-| 2026-10-01 | organic · 21 instatic upload | HIPAA Disclosure page injected page-only (cloned privacy chrome + prose notice), published seq 26; 86 other pages identical modulo per-publish asset ids | _this commit_ |
+| 2026-10-01 | organic · 21 instatic upload | HIPAA Disclosure page injected page-only (cloned privacy chrome + prose notice), published seq 26; 86 other pages identical modulo per-publish asset ids | `6e31792a` |
+| 2026-10-01 | organic · 21 instatic upload | "HIPAA Disclosure" footer link after Privacy on all 87 pages (site + ads footers) and in the source footers, published seq 27; ads footer wraps at 390 (needs CSS go-ahead) | _this commit_ |
 
 ## Version Control
 
