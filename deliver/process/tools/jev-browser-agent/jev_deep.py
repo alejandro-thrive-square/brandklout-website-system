@@ -28,6 +28,36 @@ FRAME_BASE = 1_000_000
 MIN_FRAME_PX = 40
 SETTLE_S = 10
 FORBID = []
+# JWTs (GoHighLevel location keys), private-integration tokens, and common vendor key shapes.
+SECRET = re.compile(r"eyJ[\w-]{8,}\.[\w-]{8,}\.[\w-]{8,}|\bpit-[0-9a-f-]{20,}|\b(?:sk|pk|rk)_(?:live|test)_\w{16,}|\bAIza[\w-]{30,}")
+
+
+# Generic safety: controls that destroy, rotate, spend, leave or publish are hidden from the model
+# unless the instruction itself asks for that action. No site knowledge involved.
+DANGER = [
+    (r"delete|remove|trash|erase", r"delete|remove|trash|erase"),
+    (r"regenerate|reset|rotate|revoke", r"regenerate|reset|rotate|revoke"),
+    (r"log ?out|sign ?out", r"log ?out|sign ?out"),
+    (r"upgrade|buy|purchase|checkout|subscribe|\bpay\b", r"upgrade|buy|purchase|checkout|subscribe|\bpay\b"),
+    (r"publish|go live", r"publish|go live"),
+    (r"\bsave\b|update information|submit", r"\bsave\b|\bupdate\b|submit|\bset\b|change|rename|edit"),
+    (r"^close$|^discard", r"\bclose\b|discard"),
+    (r"^copy$|copy\]", r"\bcopy\b|duplicate"),
+]
+NEGATED = re.compile(r"\b(?:do not|don't|never|without|nor)\b[^.;]*|\bchange nothing\b|\bnothing else\b", re.I)
+
+
+def auto_forbid(instruction):
+    """The DANGER patterns the instruction does not ask for ("do not click Close" asks for nothing)."""
+    asks = NEGATED.sub(" ", instruction)
+    return [hide for hide, asked in DANGER if not re.search(asked, asks, re.I)]
+
+
+ECHO = re.compile(r"""^(search(?: for)?|use|find|create|add)\s*[:"“'].+["”']?$""", re.I)
+
+
+def redact(text):
+    return SECRET.sub("[secret]", text) if text else text
 
 RESOLVE = """(action => {
   const c=window.__jevDeep, e=c?.nodes.get(action.node);
@@ -56,6 +86,8 @@ class DeepBrowser(Browser):
 
     def __init__(self, url):
         self.frame_sessions = {}
+        self.typed = {}  # node -> (label, value before typing, typed text)
+        self.enter_fields = set()  # fields seen to drop their value on blur: they save on Enter
         super().__init__(url)
         self.call("DOM.enable")
         self.call("Page.enable")
@@ -137,7 +169,7 @@ class DeepBrowser(Browser):
 
     def _observe(self, screenshot):
         docs, actions, guards, texts, markers = [], [], {}, [], []
-        controls, blank, focus = [], 0, False
+        controls, blank, focus, enter_hint = [], 0, False, ""
         for k, d in enumerate(self._documents()):
             try:
                 info = self._eval(d["session"], DEEP)
@@ -154,6 +186,7 @@ class DeepBrowser(Browser):
             docs.append(dict(session=d["session"], base=base, x=d["x"], y=d["y"], marker=info["marker"]))
             markers.append(info["marker"])
             focus = focus or info["focus_editable"]
+            enter_hint = enter_hint or (info.get("enter_hint") or "")
             x0, y0, x1, y1 = d.get("clip", (0, 0, d["w"], d["h"]))
             for a in info["actions"]:
                 if "node" not in a:
@@ -162,7 +195,7 @@ class DeepBrowser(Browser):
                     continue
                 r = a["rect"]
                 cx, cy = r["x"] + r["w"] / 2 + d["x"], r["y"] + r["h"] / 2 + d["y"]
-                if not (x0 <= cx < x1 and y0 <= cy < y1):
+                if not a.get("panel") and not (x0 <= cx < x1 and y0 <= cy < y1):
                     continue
                 actions.append({**a, "node": a["node"] + base,
                                 "rect": {**r, "x": r["x"] + d["x"], "y": r["y"] + d["y"]}})
@@ -171,14 +204,36 @@ class DeepBrowser(Browser):
             texts.append(info["text"])
         if self.forbid:
             actions = [a for a in actions if not any(re.search(p, a["label"], re.I) for p in self.forbid)]
+        # Echo rows: a suggestion that only repeats what was typed ('Search for "…"') resets the
+        # search on Elfsight and leads nowhere on most sites. Dropped everywhere.
+        typed = {a["value"].strip().lower() for a in actions if a.get("kind") == "fill" and a.get("value", "").strip()}
+        actions = [a for a in actions if not (a.get("kind") == "click" and ECHO.match(a["label"].strip())
+                                              and any(t in a["label"].lower() for t in typed))]
+        # Secrets never reach a model: page text, labels and field values go to TypeSafe and the
+        # text helper. Code that needs a secret reads it from the DOM itself (ghl_keys.read_secret).
+        texts = [redact(t) for t in texts]
+        for a in actions:
+            for k in ("label", "value", "current_value"):
+                if isinstance(a.get(k), str):
+                    a[k] = redact(a[k])
         actions = actions[:250]
         for i, a in enumerate(actions):
             a["id"] = f"e{i + 1}"
         if focus:
-            controls.insert(0, {"id": "press_enter", "kind": "key", "key": "Enter",
-                                "label": "Press Enter in the focused text field (saves or submits what was typed)"})
-        # Frames first: on a vendor dashboard the editor iframe is where the work is.
-        text = "\n".join(t for t in texts[1:] + texts[:1] if t)[:6000]
+            label = "Press Enter in the focused text field (saves or submits what was typed)"
+            if enter_hint:
+                label += f'. The page says: "{redact(enter_hint)}"'
+            controls.insert(0, {"id": "press_enter", "kind": "key", "key": "Enter", "label": label})
+        # Facts from code: a typed value that went back to the field's old value was never saved.
+        notes = []
+        for node, (label, before, typed_text) in list(self.typed.items()):
+            now = next((a.get("value", "") for a in actions if a.get("node") == node and a.get("kind") == "fill"), None)
+            if now is not None and before.strip() and now.strip() == before.strip() != typed_text.strip():
+                notes.append(f"NOTE: the text typed into '{label}' was not kept; the field shows '{redact(now)}' "
+                             "again. This field saves only with Enter; typing into it again will press Enter for you.")
+                del self.typed[node]
+        # Notes, then frames first: on a vendor dashboard the editor iframe is where the work is.
+        text = "\n".join(t for t in notes + texts[1:] + texts[:1] if t)[:6000]
         page = {**main, "text": text, "actions": actions + controls, "guards": guards,
                 "marker": markers, "_docs": docs, "_blank_frames": blank}
         page["fingerprint"] = fingerprint(page)
@@ -204,6 +259,51 @@ class DeepBrowser(Browser):
             return False
 
     # ── act ─────────────────────────────────────────────────────────────────
+    def _commit_check(self, page, target):
+        """Before clicking away from a field just typed into, blur it and see whether the value stuck.
+
+        Fields that save only on Enter throw the edit away on blur. The click would blur it anyway,
+        but the revert would show only after the click (Publish with the old name, 2026-10-01).
+        Blurring first and cancelling the click turns it into a NOTE the model sees in time.
+        """
+        for tnode, (label, before, typed_text) in list(self.typed.items()):
+            if tnode == target or not before.strip():
+                continue
+            tdoc = self._doc_for(page, tnode)
+            expr = (f"(n => {{ const e=window.__jevDeep?.nodes.get(n); if (!e) return null; "
+                    f"let a=document.activeElement; while (a?.shadowRoot?.activeElement) a=a.shadowRoot.activeElement; "
+                    f"if (a===e) e.blur(); return e.value ?? null; }})({tnode - tdoc['base']})")
+            try:
+                self._eval(tdoc["session"], expr)
+                time.sleep(0.2)
+                now = self._eval(tdoc["session"], f"window.__jevDeep?.nodes.get({tnode - tdoc['base']})?.value ?? null")
+            except (StalePage, RuntimeError):
+                continue
+            if now is not None and now.strip() == before.strip() != typed_text.strip():
+                # The field drops edits on blur, so it saves on Enter. Code repairs it with the exact
+                # text already typed (the classifier ignored a NOTE and clicked Publish again).
+                self.enter_fields.add(tnode)
+                local = {"kind": "fill", "node": tnode - tdoc["base"]}
+                spot = self._eval(tdoc["session"], RESOLVE + "(" + json.dumps(local) + ")")
+                if spot:
+                    self._mouse(spot["x"] + tdoc["x"], spot["y"] + tdoc["y"])
+                    self.call("Input.dispatchKeyEvent", type="keyDown", key="a", code="KeyA", modifiers=2,
+                              commands=["selectAll"])
+                    self.call("Input.dispatchKeyEvent", type="keyUp", key="a", code="KeyA", modifiers=2)
+                    self.call("Input.insertText", text=typed_text)
+                    common = dict(key="Enter", code="Enter", windowsVirtualKeyCode=13, nativeVirtualKeyCode=13)
+                    self.call("Input.dispatchKeyEvent", type="keyDown", text="\r", **common)
+                    self.call("Input.dispatchKeyEvent", type="keyUp", **common)
+                    time.sleep(0.3)
+                    self._eval(tdoc["session"], expr)  # blur again; the value must survive it now
+                    time.sleep(0.2)
+                    now = self._eval(tdoc["session"], f"window.__jevDeep?.nodes.get({tnode - tdoc['base']})?.value ?? null")
+                if now is not None and now.strip() == typed_text.strip():
+                    del self.typed[tnode]
+                    self.repairs = getattr(self, "repairs", 0) + 1
+                    raise StalePage(f"Saved the text typed into {label} with Enter; observe again before clicking.")
+                raise StalePage(f"The text typed into {label} was not kept; observe again.")
+
     def _mouse(self, x, y):
         self.call("Input.dispatchMouseEvent", type="mouseMoved", x=x, y=y)
         time.sleep(0.05)
@@ -226,6 +326,8 @@ class DeepBrowser(Browser):
             self.call("Input.dispatchKeyEvent", type="keyUp", **common)
         else:
             node = action["node"]
+            if kind == "click":
+                self._commit_check(page, node)
             doc = self._doc_for(page, node)
             local = {**action, "node": node - doc["base"]}
             target = self._eval(doc["session"], RESOLVE + "(" + json.dumps(local) + ")")
@@ -236,10 +338,16 @@ class DeepBrowser(Browser):
             if kind != "select":
                 self._mouse(target["x"] + doc["x"], target["y"] + doc["y"])
                 if kind == "fill":
+                    self.typed[node] = (action["label"], action.get("value", ""), text or "")
                     self.call("Input.dispatchKeyEvent", type="keyDown", key="a", code="KeyA", modifiers=2,
                               commands=["selectAll"])
                     self.call("Input.dispatchKeyEvent", type="keyUp", key="a", code="KeyA", modifiers=2)
                     self.call("Input.insertText", text=text)
+                    if node in self.enter_fields:
+                        common = dict(key="Enter", code="Enter", windowsVirtualKeyCode=13, nativeVirtualKeyCode=13)
+                        self.call("Input.dispatchKeyEvent", type="keyDown", text="\r", **common)
+                        self.call("Input.dispatchKeyEvent", type="keyUp", **common)
+                        self.typed.pop(node, None)
         time.sleep(0.2)  # let the UI react before the next observation
         return {"executed": action["id"]}
 
@@ -326,7 +434,10 @@ def drive(agent, goals, limit_s=150, patience=2, on_state=None, task=None):
     return "done"
 
 
-def install(forbid=None):
-    """Make every jev_ultrafast.Agent built after this call use DeepBrowser."""
-    DeepBrowser.forbid = list(forbid or [])
+def install(forbid=None, instruction=None):
+    """Make every jev_ultrafast.Agent built after this call use DeepBrowser.
+
+    With `instruction`, the generic DANGER patterns it does not ask for are hidden too.
+    """
+    DeepBrowser.forbid = list(forbid or []) + (auto_forbid(instruction) if instruction else [])
     jev_agent.Browser = DeepBrowser

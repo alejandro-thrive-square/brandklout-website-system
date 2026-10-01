@@ -6,14 +6,46 @@ checks the outcome, and builds the result into the site. Jev is TypeSafe's "syst
 driven by Browser Use's [jev-ultrafast](https://github.com/browser-use/jev-ultrafast). It picks an
 operation and a target element from an indexed table, in about 0.2 s per step.
 
+## Use it: one instruction, any site
+
+```bash
+cd deliver/process/tools/jev-browser-agent
+uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env python jev_do.py \
+  --url <where to start> "<the task in one plain sentence, with its stopping point>" \
+  [--read-secret "api key" --secrets-out <file outside the repo>] [--allow publish] [--out <dir>]
+```
+
+**No per-site steps or lists.** On 2026-10-01 it scored **30/30** on the 10 fixtures, from each task's
+one-sentence instruction alone; median 3.4 s, longest 15.3 s. It also ran the plain sentence on
+the real Elfsight editor: 2 correct clicks, 10.3 s. What makes it generic:
+
+- **Perception (`jev_deep`):**
+  - iframes at any depth, shadow DOM, div cards, and icon buttons, named from their class
+  - controls below the fold of a scrollable panel (sidebars), and overlays read first
+  - the page's own "press Enter" cue
+- **Auto-safety (`auto_forbid`):** delete / regenerate / log out / pay / publish / save / close /
+  copy controls are hidden unless the instruction asks for them. Negated clauses ("do not click
+  Close", "change nothing") ask for nothing. `--allow WORD` lifts one; `--forbid REGEX` adds one.
+- **Facts from code, not the model:**
+  - Echo rows are dropped.
+  - Secrets are masked before any model sees the page, and read back by code (`--read-secret`).
+  - Before a click elsewhere, a field just typed into is blurred. If it drops the value (it saves
+    on Enter), code retypes the same text and presses Enter, then verifies it stuck.
+  - It ends on `done`, `blocked`, `loop` (4 identical actions), `stalled` (8 waits) or `error`.
+
+A DONE is still a claim; check the outcome. A new real-site failure becomes a fixture in `bench/`
+before it is fixed, and the fix has to stay site-agnostic.
+
 This folder holds **our extension, not the vendor code**:
 
 | File | Job |
 | :--- | :--- |
+| `jev_do.py` | **The generic entry point** (above). |
+| `ghl_keys.py` | GoHighLevel location API keys: navigation steps, `read_secret()` and `named_exact()`. The two readers are generic and used by `jev_do.py`. |
 | `jev_deep.py` + `deep_snapshot.js` | **Use this.** `DeepBrowser` reads out-of-process iframes at any depth, open shadow roots, same-origin iframes, role-less click targets (div cards), and icon-only buttons (hinted). It offers `PRESS_ENTER` while a text field has focus, hovers before clicking, and hides `forbid` matches from the model. `drive()` runs ordered steps on one tab with patience for loading screens. |
 | `jev_frames.py` | The 2026-09-29 one-level iframe reader. Superseded by `jev_deep`; kept for comparison (`--frames`). |
 | `run_elfsight.py` | Runs a task as ordered `--goal` steps with `--forbid` patterns, logs every action, pulls any `elfsight-app-<id>` install code, and closes its tab. |
-| `bench/` | An offline benchmark: 8 fixtures that reproduce the traps of real dashboards, a two-origin fixture server, and `bench.py`, which scores every run by what the page recorded. |
+| `bench/` | An offline benchmark: 10 fixtures (8 Elfsight-style traps, 2 GoHighLevel sub-account key reads), a two-origin fixture server, and `bench.py`, which scores every run by what the page recorded. |
 
 ## The recipe (benchmarked 2026-10-01)
 

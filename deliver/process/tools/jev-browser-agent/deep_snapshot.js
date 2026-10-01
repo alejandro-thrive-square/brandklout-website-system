@@ -139,7 +139,20 @@
       if (!matched && !pointer(e)) continue;
       if (!safe(e) || !visible(e) || e.matches(':disabled') || closest(e,'[aria-disabled="true"]')) continue;
       const r=e.getBoundingClientRect(), cx=r.x+r.width/2, cy=r.y+r.height/2;
-      if (r.width<=0 || r.height<=0 || cx<0 || cy<0 || cx>=vw || cy>=vh) continue;
+      if (r.width<=0 || r.height<=0) continue;
+      // Below the fold of a scrollable panel (a sidebar, a menu) is still reachable: the click
+      // scrolls it into view first. Jev's only scroll moves the page, not the panel (GHL's Settings).
+      let inPanel=false;
+      if (cx<0 || cy<0 || cx>=vw || cy>=vh) {
+        for (let p=up(e); p && p!==document.body && p!==document.documentElement; p=up(p)) {
+          const cs=getComputedStyle(p);
+          if (!/(auto|scroll)/.test(cs.overflowY+cs.overflowX) || p.scrollHeight<=p.clientHeight+2 && p.scrollWidth<=p.clientWidth+2) continue;
+          const pr=p.getBoundingClientRect();
+          inPanel=pr.width>0 && pr.height>0 && pr.left<vw && pr.top<vh && pr.right>0 && pr.bottom>0;
+          break;
+        }
+        if (!inPanel) continue;
+      }
       const rname=role(e) || 'button';
       if (rname==='gridcell' && e.querySelector('button,[role="button"]')) continue;
       // A clickable card that holds a real visible control is represented by that control.
@@ -147,6 +160,7 @@
       let label=name(e).slice(0,160);
       if (!label || label===rname) { const h=hint(e); label=h ? rname+' ['+h+']' : rname; }
       const base={node:identity(e),role:rname,label,rect:{x:r.x+ox,y:r.y+oy,w:r.width,h:r.height}};
+      if (inPanel) base.panel=true;
       for (const key of ['checked','selected','expanded']) {
         const value=e.getAttribute('aria-'+key);
         if (value!==null) base[key]=value;
@@ -201,6 +215,12 @@
     if (!inner || inner===focus) break; focus=inner;
   }
   const focus_editable=!!focus && (focus.isContentEditable || ['INPUT','TEXTAREA'].includes(focus.tagName));
+  // The page's own words about Enter near the focused field ("Press Enter to save"), if any.
+  let enter_hint='';
+  for (let p=focus_editable ? up(focus) : null, i=0; p && i<3 && !enter_hint; p=up(p), i++) {
+    const m=(p.innerText||'').match(/[^.\n]{0,40}\benter\b[^.\n]{0,40}/i);
+    if (m) enter_hint=m[0].trim();
+  }
   const text=words.join('\n').slice(0,6000), height=document.documentElement.scrollHeight;
   const page_key=cache.pageKey(), guards={};
   for (const a of actions) if (!(a.node in guards)) guards[a.node]=cache.guard(cache.nodes.get(a.node));
@@ -213,6 +233,6 @@
   if (scrollY+innerHeight<height-2) actions.push({id:'scroll_down',kind:'scroll',label:'Scroll down',delta:560});
   if (scrollY>0) actions.push({id:'scroll_up',kind:'scroll',label:'Scroll up',delta:-560});
   actions.push({id:'wait',kind:'wait',label:'Wait for the page to update'});
-  return {url:location.href,title:document.title,w:innerWidth,h:innerHeight,text,focus_editable,
+  return {url:location.href,title:document.title,w:innerWidth,h:innerHeight,text,focus_editable,enter_hint,
     scroll:{y:scrollY,height},actions,marker,page_key,guards,omitted_actions};
 })()

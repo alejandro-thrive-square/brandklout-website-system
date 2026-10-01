@@ -53,7 +53,30 @@ The user asked to make computer use with Jev work properly and to compare approa
   other Las Vegas practices, and by address, which returned "8945 W Russell Rd #320" with no rating
   or reviews. Nothing was connected; the boot API still shows `url: ""`. The registry note is updated.
 
+- **A generic agent: `jev_do.py`, one plain instruction, any site.** The user's direction:
+  no per-site steps or lists. Its first use will be pulling each GoHighLevel sub-account's location
+  API key.
+  - **Fixtures:** `ghl.html` adds 30 look-alike sub-accounts, Settings below the sidebar fold, and
+    the key next to Regenerate / Update / Delete.
+  - **Generic fixes:**
+    - controls in scrollable panels
+    - `auto_forbid`, which hides danger controls unless the instruction asks for them, with
+      negations stripped
+    - an echo-row filter
+    - secret masking plus `read_secret`
+    - an exact account-name check
+    - the page's Enter cue on the Enter option
+    - the commit check: blur, detect a revert, and code retypes with Enter
+  - **Result:** generic **30/30** from the instruction alone (log
+    `2026-10-01-generic-instruction-only-x3.jsonl`). The key was read correctly every time and no
+    model request ever contained it.
+  - **Real Elfsight, plain sentence:** 2 clicks, 10.3 s.
+
 ## Next
+
+- **GoHighLevel pilot:** needs the user's GoHighLevel login URL (white-label?) and one sub-account
+  to try, read-only, in the user's Chrome. Then decide where the keys live in `~/.webzite/.env`
+  (proposal: `GHL_LOCATION_API_KEY` + `GHL_LOCATION_ID` per client section).
 
 - **Restore:** once the client has a Google Business Profile (or its Maps share link), run Jev on
   draft `393dc878`: search, connect the result with a rating, name it
