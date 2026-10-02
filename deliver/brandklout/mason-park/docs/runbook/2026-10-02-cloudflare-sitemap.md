@@ -10,7 +10,7 @@
 - `verify-sitemap.mjs`: `FAIL  none`. www serves it as `application/xml`, with and without a query
   string. The apex 301s to it, robots.txt is still Cloudflare's, and staging returns 404.
 - Token minted with `12-legacy-redirects/cf-token.mjs` and revoked the same session.
-- Commit: see the client RUNBOOK row.
+- Commit: `a0102d13`.
 
 ## Next
 
