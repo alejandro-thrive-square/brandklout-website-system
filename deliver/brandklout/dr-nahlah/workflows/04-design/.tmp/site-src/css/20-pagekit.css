@@ -60,7 +60,7 @@
 .pk{background:var(--bg);color:var(--fg-body)}
 .pk.pk-alt{background:var(--bg-2)}
 .pk.pk-light{background:var(--bg-3)}
-.pk h2{font-size:var(--h2);max-width:18ch}
+.pk h1,.pk h2{font-size:var(--h2);max-width:18ch}
 .pk h3{font-size:var(--h3)}
 .pk-head{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
 .pk-head p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}

@@ -193,7 +193,7 @@
   function closeDrawer(){
     burger.classList.remove('is-open'); drawer.classList.remove('is-open');
     document.getElementById('nav').classList.remove('is-menu-open');
-    burger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
+    burger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true'); drawer.inert = true;
     document.body.classList.remove('is-locked');
     if(W.smoother) W.smoother.paused(false);
   }
@@ -202,7 +202,7 @@
     burger.classList.toggle('is-open',open);
     document.getElementById('nav').classList.toggle('is-menu-open',open);
     burger.setAttribute('aria-expanded',String(open));
-    drawer.setAttribute('aria-hidden',String(!open));
+    drawer.setAttribute('aria-hidden',String(!open)); drawer.inert = !open;
     burger.setAttribute('aria-label', open?'Close menu':'Open menu');
     document.body.classList.toggle('is-locked',open);
     if(W.smoother) W.smoother.paused(open);

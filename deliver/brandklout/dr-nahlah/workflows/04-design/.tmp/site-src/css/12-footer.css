@@ -6,7 +6,7 @@ footer.foot{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
   padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
 footer.foot .foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
 footer.foot img{width:190px;margin-bottom:1.25rem}
-footer.foot h4{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+footer.foot h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
   font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
 footer.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 footer.foot a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}

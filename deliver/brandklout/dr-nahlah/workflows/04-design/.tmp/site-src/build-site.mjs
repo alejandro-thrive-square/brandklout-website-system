@@ -79,7 +79,7 @@ const LOCATIONS = {
     addr1: "7901 Jones Branch Drive, Suite 220", addr2: "McLean, VA 22102",
     tel: "+17034483312", phone: "(703) 448-3312",
     curTel: "+17034483312", curPhone: "(703) 448-3312",
-    maps: "https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102",
+    maps: "https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102",
     forms: {
       "all-on-4":        { id: "d1IIoFqitmgu2zBvvmfw", name: "Tyson Corner Office - Google AO4", h: 1915 },
       "dental-implants": { id: "ecngxD8mVLN8RZQBuzfm", name: "Tyson Corner Office - Google Implants", h: 1915 },
@@ -92,7 +92,7 @@ const LOCATIONS = {
     addr1: "2855 Duke Street", addr2: "Alexandria, VA 22314",
     tel: "+15716177245", phone: "(571) 617-7245",
     curTel: "+17039405410", curPhone: "(703) 940-5410",
-    maps: "https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314",
+    maps: "https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314",
     forms: {
       "all-on-4":        { id: "8jq7yzSeCzZrIkuA3sSG", name: "Alexandria - Google All On 4", h: 1802 },
       "dental-implants": { id: "9i1Vz7wQjmn7v4NPwp3o", name: "Alexandria - Google Implants", h: 1802 },

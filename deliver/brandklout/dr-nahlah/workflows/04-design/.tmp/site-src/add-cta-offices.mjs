@@ -50,7 +50,7 @@ const OFFICES = [
     lines: ['7901 Jones Branch Drive, Suite 220', 'McLean, VA 22102'],
     newTel: ['+17034483312', '(703) 448-3312'],
     curTel: ['+17034483312', '(703) 448-3312'],
-    maps: 'https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102',
+    maps: 'https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102',
     book: 'https://www.flexbook.me/DrNahlahTy/1',
   },
   {
@@ -58,7 +58,7 @@ const OFFICES = [
     lines: ['2855 Duke Street', 'Alexandria, VA 22314'],
     newTel: ['+15716177245', '(571) 617-7245'],
     curTel: ['+17039405410', '(703) 940-5410'],
-    maps: 'https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314',
+    maps: 'https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314',
     book: 'https://flexbook.me/drnahlah',
   },
 ]

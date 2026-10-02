@@ -333,7 +333,7 @@ p{margin:0}
   padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
 .drawer.is-open{clip-path:circle(150% at calc(100% - 42px) 42px)}
 .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
-.dr-col h4{font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
+.dr-col > p{line-height:1.02;font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold);font-weight:600;margin:0 0 1rem}
 .drawer ul{list-style:none;margin:0;padding:0}
 .dr-col li{overflow:hidden}
@@ -374,7 +374,7 @@ footer.foot{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
   padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
 footer.foot .foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
 footer.foot img{width:190px;margin-bottom:1.25rem}
-footer.foot h4{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+footer.foot h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
   font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
 footer.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 footer.foot a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
@@ -453,7 +453,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .pk{background:var(--bg);color:var(--fg-body)}
 .pk.pk-alt{background:var(--bg-2)}
 .pk.pk-light{background:var(--bg-3)}
-.pk h2{font-size:var(--h2);max-width:18ch}
+.pk h1,.pk h2{font-size:var(--h2);max-width:18ch}
 .pk h3{font-size:var(--h3)}
 .pk-head{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
 .pk-head p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}
@@ -877,7 +877,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-specialist .doc-bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .ch-specialist .doc-bio strong{color:var(--fg);font-weight:600}
 .doc-creds{margin-top:clamp(2rem,4vw,3rem)}
-.doc-creds h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+.doc-creds h3{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
   font-family:var(--f-body);font-weight:600;margin-bottom:1.1rem}
 .doc-creds ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
 .doc-creds li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
@@ -1426,7 +1426,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ct-office-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
 .ct-office{background:var(--card);padding:clamp(1.6rem,3vw,2.6rem);display:grid;gap:1.3rem;
   align-content:start}
-.ct-office h3{font-size:calc(2rem * var(--t-mid))}
+.ct-office h2,.ct-office h3{font-size:calc(2rem * var(--t-mid))}
 .ct-office address{font-style:normal;color:var(--fg-body);font-weight:400;line-height:1.8}
 .ct-office .ct-office-line{display:grid;gap:.25rem;padding-top:1rem;border-top:1px solid var(--line)}
 .ct-office .ct-office-line span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
