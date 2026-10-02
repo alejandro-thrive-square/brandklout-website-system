@@ -60,6 +60,11 @@ dashboards and reading pages.
   stayed claimed after the run and the next run got "already claimed by another browser session"
   and opened another. The prompt now bans `markDeliverable()`; claimed tabs that aren't marked
   are released and left open for the next run.
+- **A tab Codex opens itself stays bound to that run.** Even unmarked, a `tabs.new()` tab could
+  not be claimed later, so the first reuse rule still left one new tab per run (the user's second
+  catch, same day). Runs now `close()` the tabs they opened before reporting; only tabs the user
+  had open are kept, and those are released. Tabs left by runs before `b1379d58` stay locked to
+  their old sessions: close them by hand once.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.
