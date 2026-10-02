@@ -2,6 +2,17 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-02 · every fixed BugHerd pin verified on the live page
+
+Asked for: "make sure all of the resolved pins on BugHerd are addressed". New
+`code/bugherd-verify.mjs` (read-only): one assertion per task on live staging at 1512x735, #17 at
+390, plus a viewport shot of each pinned spot. 24/24 pass (`bugherd/2026-10-01/verify.txt`), commit
+`8f7a9ba1`. No new BugHerd activity. Still open: #10 (widget account) and posting the replies, both
+waiting on Alejandro.
+
+Gotcha: a puppeteer `clip` screenshot under ScrollSmoother failed with "0 height" once the page had
+scrolled; full-viewport shots after scrolling the element in work.
+
 ## 2026-10-01 (night) · BugHerd round: 23 tasks, 22 fixed on staging
 
 Asked for: "resolve last bugherd comments". Project 544349, tasks #1 to #25 (no #6, #7).

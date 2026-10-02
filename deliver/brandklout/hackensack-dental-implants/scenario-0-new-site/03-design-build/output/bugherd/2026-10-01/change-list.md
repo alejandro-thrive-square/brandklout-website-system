@@ -36,6 +36,13 @@ seq 10 → 11) and checked live: `check-staging.mjs` 14/14, `click-film.mjs` 16/
 | 24 | Update [rating] based on office | site-wide (hero card + stats) | 5.0 from the office's own listing (was 4.7, the Aesthetic Dental Center listing): hero card "5.0 · Google rating", stat "5.0 Five-star Google rating" | Updated to the office's 5.0. |
 | 25 | Too many scrolls to activate the animation | this section | As #13 | Fixed with #13. |
 
+## Verified live (2026-10-02)
+
+`code/bugherd-verify.mjs` checks each pin on the live staging page, one assertion per task, at the
+reviewer's 1512x735 and at 390 for #17: **24 of 24 pass, no page errors** (`verify.txt`). Viewport
+shots of each pinned spot are in `verify/<task>.png` and were looked at, not only measured. BugHerd
+had no new tasks or comments since 2026-10-01 22:42 UTC; all 23 tasks are still in "todo".
+
 ## Waiting on Alejandro
 
 1. **#10:** re-point Elfsight widget `cf96ca10` to the Hackensack Center for Dental Implants listing

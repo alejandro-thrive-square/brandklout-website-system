@@ -91,6 +91,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd project 544349 created via API on the staging URL; five team members added by default; columns todo/doing/done; no tasks yet | see the commit after `adcfdfd0` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | `a12f2124` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd 544349 round: 23 tasks, 22 fixed on staging (cursor, scan line, logo, Bergen County, rating 5.0 from the office listing, clipped capitals, pins, footer); #10 reviews widget account waits on Alejandro; replies drafted, not posted | `f1d061a4` |
+| 2026-10-02 | scenario-0-new-site / 03-design-build | Every fixed BugHerd pin re-checked on live staging by the new `bugherd-verify.mjs`: 24/24, shots looked at; no new BugHerd activity; #10 and the replies wait on Alejandro | `8f7a9ba1` |
 
 ## Version Control
 
