@@ -2,7 +2,7 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
-## 2026-10-02 · Instatic instance, staging, logins, plugins, and the concept deck
+## 2026-10-02 · Instatic instance, staging, logins, plugins, and the concept deck (`933f8103`)
 
 Asked for: "build the style selection for Oceanic like we did for Livewell", scraping the old site
 for assets. Followed bk-livewell's run step for step.
@@ -47,6 +47,7 @@ Local and live shots at 1440 + 390: no overflow, no broken images, no JS errors;
   YouTube `qoe`/doubleclick aborts in local shoot logs.
 - Every live page requests one random 100-character same-origin path that 404s: the platform.
 - Each deck page is one Embed (snippet mode); re-run `publish-deck.mjs` after any edit (it updates by slug).
+- `assets.mjs push oceanic-dental` ignores the bare slug and pushes every client, rewriting their `assets.tsv` here. Use `--client oceanic-dental`, and revert other clients' files before committing.
 
 ## Version Control
 

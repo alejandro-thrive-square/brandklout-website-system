@@ -2,7 +2,7 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
-## 2026-10-02 · Scrape of all 106 pages, every asset, homepage screenshots
+## 2026-10-02 · Scrape of all 106 pages, every asset, homepage screenshots (`933f8103`)
 
 ### Done
 

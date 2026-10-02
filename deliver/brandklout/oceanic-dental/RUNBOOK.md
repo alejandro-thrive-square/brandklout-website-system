@@ -22,8 +22,8 @@ Start at [`docs/project-overview.md`](./docs/project-overview.md).
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
-| 2026-10-02 | scenario-0 / 01-client-inquiry | Railway instance + staging, logins, plugins; five-concept deck built and published to staging | `SHA` |
-| 2026-10-02 | scenario-1 / 01-old-site-capture | 106-page scrape, 782 assets, homepage screenshots | `SHA` |
+| 2026-10-02 | scenario-0 / 01-client-inquiry | Railway instance + staging, logins, plugins; five-concept deck built and published to staging | `933f8103` |
+| 2026-10-02 | scenario-1 / 01-old-site-capture | 106-page scrape, 782 assets, homepage screenshots | `933f8103` |
 
 ## Version Control
 
