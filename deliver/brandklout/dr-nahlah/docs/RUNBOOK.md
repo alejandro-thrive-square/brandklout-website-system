@@ -4,7 +4,7 @@ The **standing** state of this project: what is true now, what is next, and the 
 Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) — read the index,
 then only the runs you need. Do not read them all.
 
-## Where things stand (2026-10-01)
+## Where things stand (2026-10-02)
 
 | | |
 | :--- | :--- |
@@ -13,6 +13,9 @@ then only the runs you need. Do not read them all.
 | **Call tracking** | **ON for every visitor, no consent needed** (client, 2026-09-22e). Two GoHighLevel pools: Alexandria's (swaps (571) 617-7245) in the head of every page except `ads-landing-pages/tysons-*`, Tysons' (swaps (703) 448-3312) on those nine. Scoped by embed-origins **1.8.0** `pages=`/`except=` (`set-site-tags.mjs`). `connectOrigins` carries `services.leadconnectorhq.com` + `services.msgsndr.com`; without them, pages with no embed refuse the swap. Gate: `check-pool-scope.mjs`. Proof: `dni-proof.mjs --relay`. |
 | **ChatGPT Ads** | Dedicated page `/ads-landing-pages/alexandria-all-on-4-chatgpt` (2026-09-23b), a live clone of the Alexandria All-on-4 page with every CTA on its own form, now its own GHL form `AD6c2Du26a0JUpxoh6p5` (2026-09-23d, `set-chatgpt-form.mjs`, prod + staging). OpenAI `oaiq` pixel `2EKUEqMZC1in13nT8T8eb5` on **that page only**, init only, no consent hold, www only; **off the Google pages**. **No ChatGPT lead is measured**: the new form redirects to the *Tysons* Google thank-you page, so the redirect needs changing in GHL. `dup-chatgpt-landing.mjs`, `set-openai-pixel.mjs` + `openai-ads-pixel.js`. |
 | **HIPAA notice** | `/hipaa-disclosure` live on production + staging since 2026-10-01 (59 pages each): HHS model Notice of Privacy Practices naming BOTH entities (Esam Abou Nahlah, DDS, MS, PLLC = McLean; Implants And Prosthodontics Specialists, PLLC = Alexandria), effective 2026-10-01. **Linked from the footer legal row on every page** (after Privacy Policy, 2026-10-01b, also in site-src `footer.html` + `lp-foot.html`); **not in the static sitemap**. Both office privacy policies still carry Grand Mission Dentistry's email, a Texas phone and Texas law: flagged, untouched. `push-hipaa-page.mjs`; see the 2026-10-01 run. |
+| **QA report (2026-09-28)** | Every Web Dev item fixed 2026-10-02 on prod + staging + site-src; `22-instatic-api-sync/audit-qa-fixes.cjs` = 81/81 sitemap pages clean, axe clean. QA's own package (01-content-intake/.tmp) is untouched. **Open with CS:** McLean phone (Google (571) 702-9900), the four office legal pages (entity, Texas law/courts, SMS scope, Grand Mission details), GA/FB pixel HIPAA sign-off, "Dental Group of Tysons" in 14 posts, `/video-library`, "&" vs "and", "Six people". See the 2026-10-02 run. |
+| **Addresses** | McLean pages are `/contact-mclean`, `/privacy-policy-mclean`, `/terms-of-service-mclean` since 2026-10-02; the `-maclean` URLs 301 from the `drnahlah_301` Bulk Redirect list (Instatic makes no redirect for a renamed page). |
+| **Share images / plugins** | Every page's OG override carries its own 1200x630 (`make-og-images.py`, `push-og-images.mjs`). open-graph **1.2.3** on both hosts (posts unfurl as themselves). seo-head.js no longer overwrites og:image. Cloudflare Web Analytics OFF (`enabled:false`). |
 | **Sedation** | **Nitrous oxide and oral sedation only, no IV, no anaesthesiologist** (client, 2026-09-28). Every page, head, schema, OG, alt and post says so; `/meet-dr-nahlah` alone keeps "IV Sedation Certificate" as a credential (ask the client). Gate: `audit-live-sedation.mjs`. Never reintroduce IV/anaesthesiologist copy. See the 2026-09-28 run. |
 | **Telephone numbers** | Tysons Corner · McLean **(703) 448-3312** (both lines), Alexandria new patients **(571) 617-7245**, Alexandria current patients (703) 940-5410. Retargeted 2026-09-22c; `(571) 702-9900` and `(571) 253-7790` are retired everywhere including the structured data. |
 | **Local source of truth** | `workflows/04-design/.tmp/site-src/`. `node build-site.mjs` assembles `../final-site/`. Never hand-edit `final-site/`. |
@@ -81,6 +84,7 @@ then only the runs you need. Do not read them all.
 
 These bite every time somebody works in here. The per-run files carry the rest.
 
+- **Site-wide wording goes through `push-copy-fixes.mjs <map>`** (2026-10-02): text fields only, URL/slug token guard, plan / --apply / --publish, staging first, then `04-design/.tmp/retarget-qa-copy.mjs` for the local source. The maps `copy-fixes-qa-*.mjs` are the examples.
 - **Copy lives in SEVEN stores, not the page tree.** Nodes, the row `title` cell, code assets
   (`jsonld/*.js`, `seo-head.js`), the open-graph runtime store, **aeo-schema stored blocks**
   (`runtime/entries`), media alt text and `posts` rows. `push-sedation-copy.mjs` walks all of
