@@ -39,12 +39,12 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // CSS path in batch 2, and the one at real risk of overflowing a 360px view.
   "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
   "emergency-dentistry", "dental-conditions", "implant-supported-dentures", "dental-implant-faq",
-  // privacy-policy-maclean carries the site's only single-column legal-prose
+  // privacy-policy-mclean carries the site's only single-column legal-prose
   // layout. It replaced the retired "privacy-policy" on 2026-08-19, and until
   // this line was updated the run measured Chrome's 404 page instead: a 404 has
   // a 16px root at every width, so it reported the fluid type scale as broken
   // at 390 and at 1920. A hardcoded page list that 404s fails as a LAYOUT bug.
-  "patient-center", "financing", "doctor-referral", "privacy-policy-maclean",
+  "patient-center", "financing", "doctor-referral", "privacy-policy-mclean",
   // The video library is the only page whose cards are third-party thumbnails
   // at a fixed aspect, so it is the one most likely to overflow a 360px view.
   "video-library",

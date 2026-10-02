@@ -32,7 +32,7 @@ const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
-    <loc>https://www.drnahlah.com/contact-maclean</loc>
+    <loc>https://www.drnahlah.com/contact-mclean</loc>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
@@ -120,7 +120,7 @@ const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
-    <loc>https://www.drnahlah.com/privacy-policy-maclean</loc>
+    <loc>https://www.drnahlah.com/privacy-policy-mclean</loc>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
@@ -148,7 +148,7 @@ const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
-    <loc>https://www.drnahlah.com/terms-of-service-maclean</loc>
+    <loc>https://www.drnahlah.com/terms-of-service-mclean</loc>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>

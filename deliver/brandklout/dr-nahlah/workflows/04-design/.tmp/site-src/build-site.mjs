@@ -209,7 +209,7 @@ const PAGES = [
   // Book a Consult CTA all point at it, and Instatic has no redirect tool. Same
   // treatment as privacy-policy / terms-conditions below.
   { slug: "contact", journey: 0, navKey: "CONTACT" },
-  { slug: "contact-maclean", journey: 0, navKey: "CONTACT" },
+  { slug: "contact-mclean", journey: 0, navKey: "CONTACT" },
   { slug: "contact-alexandria", journey: 0, navKey: "CONTACT" },
   // The blog index. 43 migrated WordPress posts live under /posts/<slug>; the
   // slug here has to stay "posts" because that is what all 43 of them and the
@@ -264,9 +264,9 @@ const PAGES = [
   // what inbound links point at, and Instatic has no redirect tool.
   { slug: "privacy-policy", journey: 0, navKey: null },
   { slug: "terms-conditions", journey: 0, navKey: null },
-  { slug: "privacy-policy-maclean", journey: 0, navKey: null },
+  { slug: "privacy-policy-mclean", journey: 0, navKey: null },
   { slug: "privacy-policy-alexandria", journey: 0, navKey: null },
-  { slug: "terms-of-service-maclean", journey: 0, navKey: null },
+  { slug: "terms-of-service-mclean", journey: 0, navKey: null },
   { slug: "terms-of-service-alexandria", journey: 0, navKey: null },
   // The destination for the consultation request. Replaces the old site's two
   // identical survey thank-you pages; noindex, so it never surfaces in search.

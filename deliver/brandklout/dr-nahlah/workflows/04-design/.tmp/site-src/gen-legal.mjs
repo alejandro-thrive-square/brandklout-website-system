@@ -36,23 +36,23 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 const nodash = (s) => s.replace(/\s*—\s*/g, ", ");
 
 const PAGES = {
-  "terms-of-service-maclean": {
+  "terms-of-service-mclean": {
     kind: "Terms of Service", office: "McLean", other: "terms-of-service-alexandria",
     otherOffice: "Alexandria", h1: "Terms of <em>service</em>.", crumb: "Terms of Service, McLean",
     hero: "office-wide.jpeg", heroAlt: "The practice's treatment floor",
   },
   "terms-of-service-alexandria": {
-    kind: "Terms of Service", office: "Alexandria", other: "terms-of-service-maclean",
+    kind: "Terms of Service", office: "Alexandria", other: "terms-of-service-mclean",
     otherOffice: "McLean", h1: "Terms of <em>service</em>.", crumb: "Terms of Service, Alexandria",
     hero: "office-wide.jpeg", heroAlt: "The practice's treatment floor",
   },
-  "privacy-policy-maclean": {
+  "privacy-policy-mclean": {
     kind: "Privacy Policy", office: "McLean", other: "privacy-policy-alexandria",
     otherOffice: "Alexandria", h1: "Privacy <em>statement</em>.", crumb: "Privacy Policy, McLean",
     hero: "office-hero.jpg", heroAlt: "The reception and waiting area",
   },
   "privacy-policy-alexandria": {
-    kind: "Privacy Policy", office: "Alexandria", other: "privacy-policy-maclean",
+    kind: "Privacy Policy", office: "Alexandria", other: "privacy-policy-mclean",
     otherOffice: "McLean", h1: "Privacy <em>statement</em>.", crumb: "Privacy Policy, Alexandria",
     hero: "office-hero.jpg", heroAlt: "The reception and waiting area",
   },
@@ -162,12 +162,12 @@ const HUBS = {
   "privacy-policy": {
     kind: "Privacy Policy", h1: "Privacy <em>statement</em>.",
     hero: "office-hero.jpg", heroAlt: "The reception and waiting area",
-    a: "privacy-policy-maclean", b: "privacy-policy-alexandria",
+    a: "privacy-policy-mclean", b: "privacy-policy-alexandria",
   },
   "terms-conditions": {
     kind: "Terms of Service", h1: "Terms of <em>service</em>.",
     hero: "office-wide.jpeg", heroAlt: "The practice's treatment floor",
-    a: "terms-of-service-maclean", b: "terms-of-service-alexandria",
+    a: "terms-of-service-mclean", b: "terms-of-service-alexandria",
   },
 };
 
