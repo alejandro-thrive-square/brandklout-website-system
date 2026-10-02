@@ -12,7 +12,7 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
   [--allow-writes] [--out <dir>] [--timeout <minutes, default 20>]
 ```
 
-- Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` land in `--out` (default
+- Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` (Codex's JSON event stream, which includes the code each tool call ran) land in `--out` (default
   `%TEMP%/codex-cu/<stamp>`).
 - **Read-only by default.** `--allow-writes` permits only the changes the instruction names.
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
@@ -28,6 +28,15 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
   `~/.agents/skills`. Left to choose, Codex picked it, and `orca computer` then needed the Chrome
   tab in the foreground. The wrapper's prompt pins Codex to the Chrome and Computer Use plugins and
   bans the Orca skill. Check `session.log` for `browser.` / `sky.` calls, not `orca computer`.
+- **The Chrome plugin needs its Bootstrap block.** Its skill lives at
+  `~/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/chrome/skills/control-chrome/SKILL.md`,
+  not under `plugins/cache`. Without that block, `browser` is undefined and Codex falls back to
+  `sky`. The wrapper passes the path in.
+- **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
+  run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
+  by another browser session"). Do any checks inside the run that made the tab, or have the user look.
+- **Plain `exec` logs hide the code**, so the wrapper runs `--json`. Grep `session.log` for
+  `browser.` / `tab.` / `sky.` to see which path a run took.
 - **Computer Use (`sky`) refuses browser windows** whose URL it cannot read ("could not determine
   the current browser URL … to enforce policy"). That is by design: browser tasks belong to the
   Chrome plugin.

@@ -22,6 +22,10 @@
   work must go through the Chrome plugin.
 - The ChatGPT app must be running (its `codex-computer-use` helper owns the native pipe).
 
+- Excalidraw test (with writes): Codex drew the five-box system diagram in a background tab.
+  The wrapper now logs `--json`, passes the Chrome plugin's Bootstrap path, and has Codex check its own
+  result before it finishes. A tab one session keeps open can't be claimed by the next.
+
 ## Next
 - GoHighLevel API access: decide between Private Integration tokens per sub-account (created and
   shown once; the agency may need to enable them) and one agency token. Then run with
