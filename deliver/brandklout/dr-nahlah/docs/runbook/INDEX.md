@@ -1,11 +1,12 @@
 # Runbook index
 
-96 runs, newest first. Each line is one file in this folder.
+97 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-02 | 2026-10-02b — `/doctor-referral` rebuilt (Asana referral form): Stone's order, both PDFs via the drnahlah-files Worker + 302s, a native PDF-style form posting to GHL workflow "Website - Doctor Referral" (verified end to end), the review wall; six old sections removed. **STAGING ONLY, client reviewing** — carries **gotchas** (GHL mapping tokens, webhook sample, Codex tabs, no PDFs in Instatic) | [`2026-10-02b-doctor-referral-form.md`](./2026-10-02b-doctor-referral-form.md) |
 | 2026-10-02 | 2026-10-02 — QA report of 2026-09-28: every Web Dev item fixed on prod + staging + site-src (template headings/inert/directions, sitemap, iOS icon, CF beacon off, spelling/names/titles/descriptions in 7 stores, 95 post fixes, axe, /posts grid, hero 2.8 MB, -mclean URLs + 301s, 81 share images, open-graph 1.2.3); audit 81/81 clean — carries **gotchas** (CF RUM enabled:false, token 403 on routes, no redirect on rename, seo-head og:image) + the CS decisions still open | [`2026-10-02-qa-report-fixes.md`](./2026-10-02-qa-report-fixes.md) |
 | 2026-10-01 | 2026-10-01b — "HIPAA Disclosure" added to the footer legal row on all 59 pages, prod + staging, plus site-src partials; every page otherwise identical, layout unchanged at 1440/390 — carries **gotchas** (site-test dead link, Termly control in the row) | [`2026-10-01b-hipaa-footer-link.md`](./2026-10-01b-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01 — `/hipaa-disclosure` (HHS Notice of Privacy Practices) injected on staging + production, both entities named, every other page identical bar publish artefacts — carries **gotchas** + flags (static sitemap, Grand Mission text in both privacy policies) | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
