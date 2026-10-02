@@ -68,6 +68,8 @@
 /* ---------- lede: sticky heading + prose ---------- */
 .pk-lede{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
 .pk-lede .lc-head{position:relative}
+/* links inside the intro copy need more than colour to stand out (axe link-in-text-block) */
+.lc-head p a{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
 .pk-lede .lc-body{display:grid;gap:1.15rem;max-width:64ch}
 .pk-lede .lc-body p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .pk-lede .lc-body strong{color:var(--fg);font-weight:600}

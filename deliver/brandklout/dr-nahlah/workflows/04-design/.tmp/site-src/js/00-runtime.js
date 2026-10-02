@@ -46,7 +46,7 @@ window.WZ = (function(){
   function splitWords(el){
     if(!window.SplitText) return null;
     try{
-      var opts = {type:'words', wordsClass:'wz-word'};
+      var opts = {type:'words', wordsClass:'wz-word', aria:'none'}; /* no aria-label on the <p>: axe aria-prohibited-attr (QA 2026-09-28) */
       return (SplitText.create ? SplitText.create(el,opts) : new SplitText(el,opts));
     }catch(e){ return null; }
   }

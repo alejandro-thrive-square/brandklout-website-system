@@ -461,6 +461,8 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 /* ---------- lede: sticky heading + prose ---------- */
 .pk-lede{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
 .pk-lede .lc-head{position:relative}
+/* links inside the intro copy need more than colour to stand out (axe link-in-text-block) */
+.lc-head p a{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
 .pk-lede .lc-body{display:grid;gap:1.15rem;max-width:64ch}
 .pk-lede .lc-body p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .pk-lede .lc-body strong{color:var(--fg);font-weight:600}
@@ -785,7 +787,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-reality .re-big{color:var(--fg)}
 /* The unread state has to be faint enough to read as "not yet" and dark
    enough to still be legible copy on cream. */
-.ch-reality .re-big .wz-word{color:rgba(20,20,22,.2)}
+.ch-reality .re-big .wz-word{color:rgba(20,20,22,.66)} /* >= 4.5:1 before it is written (Brandklout rule; QA 2026-09-28) */
 .ch-reality .re-after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
 .ch-reality .re-after p{color:var(--fg-body);font-weight:400;line-height:1.8}
 .ch-reality .re-frame{position:absolute;right:0;top:50%;transform:translateY(-50%);
@@ -1286,7 +1288,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-services .sv-card:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
 
 .ch-services .sv-no{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-lg));
-  color:var(--accent-lg);line-height:1}
+  color:var(--accent);line-height:1} /* text-size gold: below "large text" on phones (QA 2026-09-28) */
 .ch-services .sv-card h3{font-size:var(--h3)}
 .ch-services .sv-card p{color:var(--fg-body);font-weight:400;font-size:.95rem;
   margin-bottom:.35rem}
@@ -1638,7 +1640,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ga-filters button:hover{border-color:var(--rule);color:var(--fg)}
 .ga-filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
   color:#fff}
-.ga-filters button b{font-weight:600;opacity:.78;margin-left:.45rem}
+.ga-filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
 .ga-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
 @media(min-width:700px){ .ga-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .ga-grid{grid-template-columns:repeat(3,1fr)} }
@@ -1653,7 +1655,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .wt-table{width:100%;border-collapse:collapse;font-size:.94rem}
 .wt-table th,.wt-table td{text-align:left;padding:clamp(.85rem,1.7vw,1.15rem) .9rem;
   border-bottom:1px solid var(--line);vertical-align:top;color:var(--fg-body);font-weight:400}
-.wt-table thead th{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+.wt-table thead th,.wt-table thead td{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
   text-transform:uppercase;font-weight:600;color:var(--fg-soft);
   border-bottom:1px solid var(--line-strong)}
 .wt-table tbody th{font-weight:600;color:var(--fg);width:26%}

@@ -6,7 +6,7 @@
 .ch-reality .re-big{color:var(--fg)}
 /* The unread state has to be faint enough to read as "not yet" and dark
    enough to still be legible copy on cream. */
-.ch-reality .re-big .wz-word{color:rgba(20,20,22,.2)}
+.ch-reality .re-big .wz-word{color:rgba(20,20,22,.66)} /* >= 4.5:1 before it is written (Brandklout rule; QA 2026-09-28) */
 .ch-reality .re-after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
 .ch-reality .re-after p{color:var(--fg-body);font-weight:400;line-height:1.8}
 .ch-reality .re-frame{position:absolute;right:0;top:50%;transform:translateY(-50%);

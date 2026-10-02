@@ -12,7 +12,7 @@
 .ga-filters button:hover{border-color:var(--rule);color:var(--fg)}
 .ga-filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
   color:#fff}
-.ga-filters button b{font-weight:600;opacity:.78;margin-left:.45rem}
+.ga-filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
 .ga-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
 @media(min-width:700px){ .ga-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .ga-grid{grid-template-columns:repeat(3,1fr)} }

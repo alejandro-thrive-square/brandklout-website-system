@@ -5,7 +5,7 @@
 .wt-table{width:100%;border-collapse:collapse;font-size:.94rem}
 .wt-table th,.wt-table td{text-align:left;padding:clamp(.85rem,1.7vw,1.15rem) .9rem;
   border-bottom:1px solid var(--line);vertical-align:top;color:var(--fg-body);font-weight:400}
-.wt-table thead th{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+.wt-table thead th,.wt-table thead td{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
   text-transform:uppercase;font-weight:600;color:var(--fg-soft);
   border-bottom:1px solid var(--line-strong)}
 .wt-table tbody th{font-weight:600;color:var(--fg);width:26%}
