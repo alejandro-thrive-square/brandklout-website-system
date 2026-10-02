@@ -391,7 +391,9 @@ for (const p of PAGES) {
     console.warn(`SKIP ${p.slug} — no ${bodyFile}`);
     continue;
   }
-  const body = read(bodyFile);
+  /* <!--#include partials/x.html--> inlines an embed snippet (markup + its own
+     <style>/<script>), the one exception to MARKUP ONLY: see partials/referral-form.html. */
+  const body = read(bodyFile).replace(/<!--#include ([\w./-]+)-->/g, (_, f) => read(f).trim());
 
   /* Two shells. The editorial one is the site's own header, drawer and footer.
      The landing one is the stripped pair with no drawer and a mobile CTA rail,

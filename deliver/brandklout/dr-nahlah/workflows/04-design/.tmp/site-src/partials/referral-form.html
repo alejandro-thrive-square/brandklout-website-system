@@ -1,0 +1,188 @@
+<!-- ==========================================================================
+     REFERRAL FORM — the practice's printed Patient Referral Form (Asana
+     1219086723228800, Front.pdf) as a native form, laid out like the paper:
+     a gold band, paired underlined lines, the two 01-16 tooth rows, then the
+     two checklists. Client call 2026-10-02: the GoHighLevel form builder "seems
+     odd", so this posts straight to a GHL Inbound Webhook (workflow "Website -
+     Doctor Referral", McLean sub-account xJDu1mFoW5jFYTNqmuk7) instead.
+
+     ONE self-contained embed snippet (markup + <style> + <script>): Instatic's
+     own form controls drop attributes and its native POST 404s, and the
+     embed-origins module's compatible CSP is what lets an inline script run.
+     Pushed by 22-instatic-api-sync/push-referral-page.mjs. The webhook URL is
+     public by nature (it sits in the page source); it can only start that one
+     workflow. CORS on it is open (OPTIONS -> Access-Control-Allow-Origin: *), so
+     the script sends real JSON and reads the status.
+
+     The upload of radiographs is NOT here: a webhook carries no files. The
+     "Radiographs are attached" box stays, and the note under the button says
+     to fax or send them with the patient. Spam guard: a hidden honeypot field
+     and a minimum time on the form, both checked before anything is sent.
+     ========================================================================== -->
+<form class="rf" novalidate data-rf-hook="https://services.leadconnectorhq.com/hooks/xJDu1mFoW5jFYTNqmuk7/webhook-trigger/6a4edb9c-f6ef-4607-b759-dd3855fd9212" aria-labelledby="rf-title">
+  <div class="rf-band"><h3 id="rf-title">Patient Referral Form</h3><span>Implant dentistry &amp; prosthodontics specialist</span></div>
+  <div class="rf-body">
+    <div class="rf-grid">
+      <label class="rf-line rf-wide"><span>Patient <i aria-hidden="true">*</i></span><input name="patient_name" autocomplete="off" required></label>
+      <label class="rf-line"><span>Date</span><input name="referral_date" type="date"></label>
+      <label class="rf-line rf-wide"><span>Phone (home) <i aria-hidden="true">*</i></span><input name="patient_phone" type="tel" autocomplete="off" required></label>
+      <label class="rf-line"><span>DOB</span><input name="patient_dob" type="date"></label>
+      <label class="rf-line rf-wide"><span>Referring doctor <i aria-hidden="true">*</i></span><input name="referring_doctor" autocomplete="name" required></label>
+      <label class="rf-line"><span>Phone</span><input name="referring_doctor_phone" type="tel" autocomplete="tel"></label>
+    </div>
+
+    <fieldset class="rf-teeth"><legend>Upper</legend><div class="rf-chips" data-rf-teeth="upper_teeth"></div></fieldset>
+    <fieldset class="rf-teeth"><legend>Lower</legend><div class="rf-chips" data-rf-teeth="lower_teeth"></div></fieldset>
+
+    <label class="rf-block"><span class="rf-h">Doctor comments</span><textarea name="doctor_comments" rows="3"></textarea></label>
+
+    <fieldset class="rf-list"><legend class="rf-h">Reason for referral</legend>
+      <div class="rf-cols" data-rf-list="reason_for_referral">Implants and/or Implant Consultation|Prosthetic Consultation|Full Mouth Rehabilitation|Esthetic|Full Arch Implant Prosthesis (All-on-4)|Other</div>
+      <label class="rf-line rf-other" hidden><span>Other</span><input name="reason_other"></label>
+    </fieldset>
+
+    <fieldset class="rf-list"><legend class="rf-h">Additional information</legend>
+      <div class="rf-cols" data-rf-list="additional_information">Please call the patient|Patient will call|Appointment has been made|Radiographs are attached|Please return radiographs after use|Notify on completion|Please report - written|Please report - by phone|Post-referral maintenance by specialist|Post-referral maintenance in this office|Post-referral maintenance to be discussed|Other records are available</div>
+    </fieldset>
+
+    <div class="rf-hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+
+    <div class="rf-send">
+      <button type="submit" class="btn btn-primary"><span>Send referral</span></button>
+      <p class="rf-note">Radiographs and records: fax them to <span style="white-space:nowrap">(703) 448-3938</span> or send them with the patient.</p>
+    </div>
+    <p class="rf-status" role="status" aria-live="polite"></p>
+  </div>
+  <div class="rf-foot">
+    <div><b>Dr. Esam Abou Nahlah</b>DDS, M.S, AFAID, FICOI, FACP<br>Board certified prosthodontist</div>
+    <div>7901 Jones Branch Drive, Suite 220<br>McLean, VA 22102</div>
+    <div>Tel <a href="tel:+17034483312">(703) 448-3312</a><br>Fax (703) 448-3938</div>
+  </div>
+</form>
+<style>
+.rf{--rf-gold:linear-gradient(100deg,#8A7E4E 0%,#C9BC85 38%,#E9DFAE 52%,#B9AA6E 70%,#8A7E4E 100%);
+  background:#fff;border:1px solid var(--gold-light,#D4CDB2);border-radius:6px;overflow:hidden;
+  color:var(--fg,#141416);font-family:var(--f-body,Raleway,Arial,sans-serif);box-shadow:0 1.5rem 3rem -2rem rgba(20,20,22,.35)}
+.rf-band{background:var(--rf-gold);padding:1.1rem clamp(1.1rem,3vw,2rem);display:flex;flex-wrap:wrap;gap:.25rem 1.5rem;align-items:baseline;justify-content:space-between}
+.rf-band h3{margin:0;font-family:var(--f-display,'Playfair Display',serif);font-weight:500;font-size:clamp(1.25rem,2.2vw,1.6rem);letter-spacing:.04em;text-transform:uppercase;color:#141416}
+.rf-band span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#141416}
+.rf-body{padding:clamp(1.25rem,3vw,2.25rem) clamp(1.1rem,3vw,2rem);display:grid;gap:1.6rem}
+.rf-grid{display:grid;gap:1.1rem 2rem}
+@media (min-width:640px){.rf-grid{grid-template-columns:1.6fr 1fr}}
+.rf-line{display:flex;align-items:flex-end;gap:.75rem;margin:0}
+.rf-line>span{flex:none;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding-bottom:.35rem}
+.rf-line i{color:var(--accent,#665C33);font-style:normal}
+.rf input,.rf textarea{font:inherit;color:var(--fg-body,#3A3A40);background:transparent;border:0;border-bottom:1.5px solid #141416;border-radius:0;padding:.35rem .1rem;width:100%;min-width:0}
+.rf textarea{border:1.5px solid var(--gold-light,#D4CDB2);border-radius:4px;padding:.6rem .7rem;resize:vertical}
+.rf input:focus-visible,.rf textarea:focus-visible{outline:2px solid var(--focus,#8A7E4E);outline-offset:2px}
+.rf [aria-invalid="true"]{border-bottom-color:#A4262C}
+.rf fieldset{border:0;margin:0;padding:0;min-width:0}
+.rf-teeth{display:grid;gap:.6rem}
+@media (min-width:640px){.rf-teeth{grid-template-columns:5.5rem 1fr;align-items:center}}
+.rf-teeth legend{float:left;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;padding:0}
+.rf-chips{display:grid;grid-template-columns:repeat(8,1fr);gap:.35rem}
+@media (min-width:900px){.rf-chips{grid-template-columns:repeat(16,1fr)}}
+.rf-chip{position:relative;display:block;margin:0}
+.rf-chip input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer;border:0}
+.rf-chip span{display:block;text-align:center;font-weight:700;font-size:.85rem;padding:.45rem 0;border:1px solid var(--gold-light,#D4CDB2);border-radius:4px;background:#fff;transition:background .15s,color .15s}
+.rf-chip input:checked+span{background:#665C33;border-color:#665C33;color:#fff}
+.rf-chip input:focus-visible+span{outline:2px solid var(--focus,#8A7E4E);outline-offset:2px}
+.rf-h{display:block;font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0 0 .65rem;padding:0}
+.rf-block{display:block;margin:0}
+.rf-cols{display:grid;gap:.55rem 2rem}
+@media (min-width:640px){.rf-cols{grid-template-columns:1fr 1fr;grid-template-rows:repeat(var(--rf-rows,3),auto);grid-auto-flow:column}}
+.rf-check{display:flex;gap:.6rem;align-items:flex-start;margin:0;cursor:pointer;color:var(--fg-body,#3A3A40);line-height:1.45}
+.rf-check input{flex:none;width:1.05rem;height:1.05rem;margin:.15rem 0 0;accent-color:#665C33;border:0;padding:0}
+.rf-other{margin-top:.8rem;max-width:28rem}
+.rf [hidden]{display:none!important}
+.rf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.rf-send{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center}
+.rf-send .btn[disabled]{opacity:.6;pointer-events:none}
+.rf-note{margin:0;font-size:.85rem;color:var(--fg-soft,#55555C);max-width:38ch}
+.rf-status{margin:0;font-weight:600}
+.rf-status:empty{display:none}
+.rf-status.is-ok{color:#2F5D3A}.rf-status.is-err{color:#A4262C}
+.rf-foot{background:var(--rf-gold);display:grid;gap:.75rem 2rem;padding:1.1rem clamp(1.1rem,3vw,2rem);font-size:.8rem;line-height:1.5;color:#141416;text-transform:uppercase;letter-spacing:.03em}
+@media (min-width:640px){.rf-foot{grid-template-columns:1.3fr 1fr 1fr}}
+.rf-foot b{display:block;font-size:.9rem}
+.rf-foot a{color:inherit}
+.rf.is-sent .rf-body>*:not(.rf-status){display:none}
+</style>
+<script>
+(function () {
+  var form = document.currentScript && document.currentScript.previousElementSibling &&
+    document.currentScript.previousElementSibling.previousElementSibling
+  if (!form || !form.classList || !form.classList.contains('rf')) form = document.querySelector('form.rf')
+  if (!form || form.dataset.rfReady) return
+  form.dataset.rfReady = '1'
+  var opened = Date.now()
+
+  function chip(name, value, text, cls) {
+    var l = document.createElement('label'); l.className = cls
+    var i = document.createElement('input'); i.type = 'checkbox'; i.name = name; i.value = value
+    var s = document.createElement('span'); s.textContent = text
+    l.appendChild(i); l.appendChild(s); return l
+  }
+  form.querySelectorAll('[data-rf-teeth]').forEach(function (box) {
+    var row = box.closest('fieldset').querySelector('legend').textContent
+    for (var n = 1; n <= 16; n++) {
+      var t = (n < 10 ? '0' : '') + n
+      var c = chip(box.dataset.rfTeeth, t, t, 'rf-chip')
+      c.querySelector('input').setAttribute('aria-label', row + ' ' + t)
+      box.appendChild(c)
+    }
+  })
+  form.querySelectorAll('[data-rf-list]').forEach(function (box) {
+    var items = box.textContent.split('|'); box.textContent = ''
+    box.style.setProperty('--rf-rows', Math.ceil(items.length / 2))
+    items.forEach(function (v) { box.appendChild(chip(box.dataset.rfList, v.trim(), v.trim(), 'rf-check')) })
+  })
+  var other = form.querySelector('.rf-other')
+  form.addEventListener('change', function (e) {
+    if (e.target.name === 'reason_for_referral' && e.target.value === 'Other') other.hidden = !e.target.checked
+    if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid')
+  })
+
+  var status = form.querySelector('.rf-status')
+  var button = form.querySelector('button[type="submit"]')
+  function say(msg, ok) { status.textContent = msg; status.className = 'rf-status ' + (ok ? 'is-ok' : 'is-err') }
+  function all(name) {
+    return Array.prototype.map.call(form.querySelectorAll('input[name="' + name + '"]:checked'), function (i) { return i.value }).join(', ')
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault()
+    var missing = []
+    form.querySelectorAll('[required]').forEach(function (i) {
+      if (!i.value.trim()) { i.setAttribute('aria-invalid', 'true'); missing.push(i) }
+    })
+    if (missing.length) { missing[0].focus(); say('Please fill in the patient, their phone and the referring doctor.'); return }
+    if (form.website.value || Date.now() - opened < 4000) { form.classList.add('is-sent'); say('Thank you. The referral has been sent.', true); return }
+
+    var v = function (n) { return (form[n] && form[n].value || '').trim() }
+    var name = v('patient_name').split(/\s+/)
+    var data = {
+      source: 'Website - Doctor Referral', page: location.href,
+      full_name: v('patient_name'), first_name: name[0] || '', last_name: name.slice(1).join(' '),
+      phone: v('patient_phone'), date_of_birth: v('patient_dob'), referral_date: v('referral_date'),
+      referring_doctor: v('referring_doctor'), referring_doctor_phone: v('referring_doctor_phone'),
+      upper_teeth: all('upper_teeth'), lower_teeth: all('lower_teeth'),
+      doctor_comments: v('doctor_comments'),
+      reason_for_referral: all('reason_for_referral') + (v('reason_other') ? ' (Other: ' + v('reason_other') + ')' : ''),
+      additional_information: all('additional_information')
+    }
+    button.disabled = true; say('Sending…', true)
+    fetch(form.dataset.rfHook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) {
+        if (!r.ok) throw new Error(r.status)
+        form.classList.add('is-sent')
+        say('Thank you. The Tysons Corner · McLean office will be in touch about this referral.', true)
+        status.setAttribute('tabindex', '-1'); status.focus()
+      })
+      .catch(function () {
+        button.disabled = false
+        say('The referral could not be sent. Please try again, or call (703) 448-3312.')
+      })
+  })
+})()
+</script>
