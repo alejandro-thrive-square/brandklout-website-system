@@ -2,6 +2,14 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-02 (later) · 21 BugHerd tasks marked done
+
+Asked for: "mark the tasks done, the ones that you are sure you finished, double-check". Verified
+again live (24/24), then `code/bugherd-mark-done.mjs` moved 21 tasks to done, re-reading each first
+and reading it back after; no comments posted. **Open: #10** (widget account, waiting on Alejandro)
+and **#12** (profile pages not built yet, links 404 on staging). List in
+`bugherd/2026-10-01/change-list.md`.
+
 ## 2026-10-02 · every fixed BugHerd pin verified on the live page
 
 Asked for: "make sure all of the resolved pins on BugHerd are addressed". New

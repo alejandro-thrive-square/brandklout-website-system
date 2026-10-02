@@ -46,8 +46,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
-1. BugHerd #10 (reviews widget on the wrong Google listing) and posting the replies wait on
-   Alejandro: `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
+1. BugHerd: 21 of 23 done (2026-10-02). Open: #10 (reviews widget on the wrong Google listing,
+   waiting on Alejandro) and #12 (done when the doctor profile pages exist): `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
 1. Get rulings on the ten items in `canary-review.md` (7 to 10 are new: team numbers, rating
    listing, other dentists in the film, captions), and decide where the menu, financing, hours
    and office photographs go (the concept has no place for them); then the inner pages.
@@ -92,6 +92,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-10-01 | scenario-0-new-site / 03-design-build | Film hero (muted loop from the two Vimeo patient films, full film in a light box, pause control), doctor moved to chapter 1 with credentials and four numbers after researching his reputation; on staging; probe 28/28, live 14/14, click-film 16/16 | `a12f2124` |
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd 544349 round: 23 tasks, 22 fixed on staging (cursor, scan line, logo, Bergen County, rating 5.0 from the office listing, clipped capitals, pins, footer); #10 reviews widget account waits on Alejandro; replies drafted, not posted | `f1d061a4` |
 | 2026-10-02 | scenario-0-new-site / 03-design-build | Every fixed BugHerd pin re-checked on live staging by the new `bugherd-verify.mjs`: 24/24, shots looked at; no new BugHerd activity; #10 and the replies wait on Alejandro | `8f7a9ba1` |
+| 2026-10-02 | scenario-0-new-site / 03-design-build | 21 BugHerd tasks marked done after a fresh live check (24/24); #10 (widget account) and #12 (profile pages not built) left open | see the commit after `5078725f` |
 
 ## Version Control
 

@@ -43,6 +43,19 @@ reviewer's 1512x735 and at 390 for #17: **24 of 24 pass, no page errors** (`veri
 shots of each pinned spot are in `verify/<task>.png` and were looked at, not only measured. BugHerd
 had no new tasks or comments since 2026-10-01 22:42 UTC; all 23 tasks are still in "todo".
 
+## Marked done (2026-10-02, on Alejandro's word)
+
+After a fresh `bugherd-verify.mjs` run (24/24), `code/bugherd-mark-done.mjs` moved **21 tasks to
+done**: #1, #2, #3, #4, #5, #8, #9, #11, #13, #14, #15, #16, #17, #18, #19, #20, #21, #22, #23,
+#24, #25 (`mark-done.txt`; each re-read before the write and read back after). Status only: no
+reply was posted.
+
+**Left in todo on purpose:**
+- **#10:** the reviews widget still shows the Aesthetic Dental Center listing.
+- **#12:** the surgeons link to `/dr-won-sang-lee-dds`, `/dr-maurice-srour-dds`,
+  `/dr-dmitriy-klass-dds-msd`, but those pages are not built on staging, so the links 404 there.
+  Done when the profile pages exist.
+
 ## Waiting on Alejandro
 
 1. **#10:** re-point Elfsight widget `cf96ca10` to the Hackensack Center for Dental Implants listing
