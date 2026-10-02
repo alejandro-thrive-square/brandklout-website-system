@@ -5,6 +5,13 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Sitemap on Cloudflare - 2026-10-02
+
+**`https://www.masonparkdental.com/sitemap.xml` is live: 241 URLs (80 pages, 161 articles), served by the
+Worker `masonparkdental-sitemap`** ([`runbook/2026-10-02-cloudflare-sitemap.md`](./runbook/2026-10-02-cloudflare-sitemap.md),
+`workflows/13-cloudflare-sitemap`). Built from production; ad pages, thank-you pages, forwarders and the 404 are
+left out. **Rebuild and redeploy when pages change.** **Open:** submit it in Search Console and Bing.
+
 ## BugHerd round seven - 2026-10-01
 
 **Ten of gauge@'s eleven notes on the `/ads-landing-pages/` set are fixed on both instances and

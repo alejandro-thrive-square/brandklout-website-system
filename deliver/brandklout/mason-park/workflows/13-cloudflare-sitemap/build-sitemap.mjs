@@ -1,0 +1,122 @@
+#!/usr/bin/env node
+/**
+ * Build www.masonparkdental.com's /sitemap.xml and the Worker that serves it (2026-10-02).
+ *
+ *   node build-sitemap.mjs     # -> .tmp/out/sitemap.xml, .tmp/out/sitemap-worker.js
+ *
+ * Instatic serves no sitemap, so Cloudflare serves it from a Worker bound to /sitemap.xml only
+ * (Stone's 06-cloudflare-sitemap, which is module 19's pattern). Production is the only
+ * authority: pages and Articles come from its admin API, and every URL must answer 200 with a
+ * canonical equal to itself, or nothing is written.
+ *
+ * 09-static-rebuild/home/sitemap.xml is NOT this file: it is the pre-launch build on the old
+ * bestdentistinkatytx.com origin, and Instatic never served it.
+ */
+import { writeFileSync, mkdirSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import * as I from '../09-static-rebuild/.tmp/insta.mjs'
+
+const HERE = dirname(fileURLToPath(import.meta.url))
+const OUT = join(HERE, '.tmp', 'out')
+
+/* www is the canonical host: INSTATIC_BASE_URL, every page's <link rel="canonical">, and the
+   apex 301s to it. Canonicals carry no trailing slash, so neither does any <loc>. */
+export const CANONICAL = 'https://www.masonparkdental.com'
+if (I.BASE !== CANONICAL) throw new Error(`INSTATIC_BASE_URL is ${I.BASE}, expected ${CANONICAL}`)
+
+/* Rows that are published but are not search destinations. */
+const EXCLUDE = new Set([
+  'blog-article', // the Articles template; each article is listed from the collection instead
+  '404',
+  // The six retired root ad pages: one-block forwarders to /ads-landing-pages/ (2026-09-25).
+  'invisalign', 'invisalign-consultation', 'invisalign-thank-you',
+  'new-patient-special', 'new-patient-special-consultation', 'new-patient-thank-you',
+  'thank-you', // form confirmation
+])
+/* The /ads-landing-pages/ set is paid-traffic only: offer pages that duplicate the service
+   pages, plus their consultation and thank-you steps. */
+const isExcluded = (slug) => EXCLUDE.has(slug) || slug.startsWith('ads-landing-pages/')
+
+const pageRows = (await I.api('GET', '/admin/api/cms/data/tables/pages/rows')).rows || []
+const { tables } = await I.api('GET', '/admin/api/cms/data/tables')
+const blog = tables.find((t) => t.routeBase === '/blog' && t.kind === 'postType')
+if (!blog) throw new Error('no /blog postType table on production')
+const articleRows = (await I.api('GET', `/admin/api/cms/data/tables/${blog.id}/rows`)).rows || []
+
+const live = (r) => r.status === 'published' && !r.deletedAt
+const day = (r) => String(r.updatedAt || r.publishedAt || '').slice(0, 10)
+const pages = pageRows.filter(live).filter((r) => !isExcluded(r.cells.slug))
+const skipped = pageRows.filter((r) => !pages.includes(r)).map((r) => r.cells.slug)
+
+const entries = [
+  ...pages.map((r) => ({ path: r.cells.slug === 'index' ? '/' : `/${r.cells.slug}`, lastmod: day(r), priority: r.cells.slug === 'index' ? '1.0' : '0.7' })),
+  ...articleRows.filter(live).map((r) => ({ path: `/blog/${r.cells.slug}`, lastmod: day(r), priority: '0.5' })),
+].sort((a, b) => (a.path === '/' ? -1 : b.path === '/' ? 1 : a.path.localeCompare(b.path)))
+
+// Every URL must be live and canonical to itself, or the sitemap submits a page Google drops.
+const bad = []
+const q = [...entries]
+await Promise.all(Array.from({ length: 8 }, async () => {
+  while (q.length) {
+    const e = q.shift()
+    const loc = e.path === '/' ? CANONICAL + '/' : CANONICAL + e.path
+    const r = await fetch(loc, { redirect: 'manual' })
+    const h = r.status === 200 ? await r.text() : ''
+    const canon = (h.match(/<link rel="canonical" href="([^"]*)"/) || [])[1]
+    if (r.status !== 200) bad.push(`${e.path} ${r.status}`)
+    else if (/<meta name="robots" content="[^"]*noindex/i.test(h)) bad.push(`${e.path} noindex`)
+    else if (canon && canon.replace(/\/$/, '') !== loc.replace(/\/$/, '')) bad.push(`${e.path} canonical ${canon}`)
+  }
+}))
+if (bad.length) {
+  console.error(`refusing to write; not a clean destination on ${CANONICAL}:\n  ${bad.sort().join('\n  ')}`)
+  process.exit(1)
+}
+
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...entries.map((e) => [
+    '  <url>',
+    `    <loc>${esc(e.path === '/' ? CANONICAL + '/' : CANONICAL + e.path)}</loc>`,
+    e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
+    `    <priority>${e.priority}</priority>`,
+    '  </url>',
+  ].filter(Boolean).join('\n')),
+  '</urlset>',
+  '',
+].join('\n')
+
+/* JSON.stringify, not a template literal, so no slug can break the Worker source. Only
+   /sitemap.xml is routed here: a Worker on /robots.txt would replace Cloudflare's
+   content-signals file (module 19, trap 1). */
+const worker = `/**
+ * Serves /sitemap.xml for www.masonparkdental.com.
+ *
+ * GENERATED by mason-park/workflows/13-cloudflare-sitemap/build-sitemap.mjs - do not hand-edit.
+ * Rebuild and redeploy whenever a page or article is added, removed or renamed.
+ */
+const SITEMAP = ${JSON.stringify(sitemap)}
+
+export default {
+  async fetch(request) {
+    if (new URL(request.url).pathname === '/sitemap.xml') {
+      return new Response(SITEMAP, {
+        headers: { 'content-type': 'application/xml; charset=utf-8', 'cache-control': 'public, max-age=3600' },
+      })
+    }
+    return fetch(request)
+  },
+}
+`
+
+mkdirSync(OUT, { recursive: true })
+writeFileSync(join(OUT, 'sitemap.xml'), sitemap)
+writeFileSync(join(OUT, 'sitemap-worker.js'), worker)
+
+console.log(`page rows: ${pageRows.length}; listed ${pages.length}; skipped ${skipped.length}: ${skipped.sort().join(', ')}`)
+console.log(`articles: ${articleRows.length}; listed ${articleRows.filter(live).length}`)
+console.log(`sitemap.xml: ${entries.length} <url> entries, all 200 and self-canonical on ${CANONICAL}`)
+console.log(`wrote ${OUT}`)
