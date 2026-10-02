@@ -56,6 +56,10 @@ dashboards and reading pages.
   now makes Codex list the open tabs first and claim one already on the right site or page,
   opening a new tab only when none fits or the fitting one is mid-edit. The report says which tab
   it used. It still never closes a tab.
+- **`markDeliverable()` locks a tab to its session.** Codex marked its tabs "for handoff", so each
+  stayed claimed after the run and the next run got "already claimed by another browser session"
+  and opened another. The prompt now bans `markDeliverable()`; claimed tabs that aren't marked
+  are released and left open for the next run.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.
