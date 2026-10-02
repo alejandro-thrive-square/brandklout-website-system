@@ -161,6 +161,8 @@ const js = `/* Per-URL <head> for a platform that emits only the site defaults.
   /* og:image has to wait for the body: the largest image on the page is the
      honest choice and there is no per-page image in either source file. */
   function ogImage() {
+    /* The open-graph plugin emits a per-page 1200x630 since 2026-10-02: keep it. */
+    if (document.head.querySelector('meta[property="og:image"][content]')) return;
     var best = null;
     var imgs = document.images;
     for (var i = 0; i < imgs.length; i++) {
