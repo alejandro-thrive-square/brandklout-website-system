@@ -14,6 +14,7 @@
  *   export const RULES = [
  *     { from: 'exact text' | /regex/g, to: 'text' | fn, word?: true, only?: (store, where, key) => bool, note? },
  *   key = the field: text/label/alt… for nodes, title/seoTitle/seoDescription/body for rows, title/description for OG
+ *   raw: true = a rule on a post body's raw HTML (markup included), applied after the text-node pass
  *   ]
  *   export const OG_ADD = { slug: { title, description, image?, imageAlt? } }   // optional new overrides
  *
@@ -74,6 +75,7 @@ const changes = []
 function fix(s, store, where, guard, key = '') {
   let out = s
   for (const r of RULES) {
+    if (!!r.raw !== (key === 'rawbody')) continue
     if (r.only && !r.only(store, where, key)) continue
     out = out.replace(r.re, (...args) => {
       const m = args[0], at = args[args.length - 2], str = args[args.length - 1]
@@ -192,7 +194,7 @@ const postEdits = []
 for (const p of posts) {
   const next = { ...p.cells }
   for (const k of ['title', 'seoTitle', 'seoDescription']) if (typeof next[k] === 'string') next[k] = fix(next[k], 'post', p.cells.slug, false, k)
-  if (typeof next.body === 'string') next.body = fixHtml(next.body, 'post', p.cells.slug, 'body')
+  if (typeof next.body === 'string') next.body = fix(fixHtml(next.body, 'post', p.cells.slug, 'body'), 'post', p.cells.slug, false, 'rawbody')
   if (!isDeepStrictEqual(next, p.cells)) postEdits.push({ p, next })
 }
 

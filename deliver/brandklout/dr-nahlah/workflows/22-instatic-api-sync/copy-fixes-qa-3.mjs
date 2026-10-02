@@ -1,0 +1,133 @@
+/**
+ * copy-fixes-qa-3.mjs — QA 2026-09-28, the migrated blog posts: grammar, broken
+ * headings, typos and the two visible [contact-form-7] shortcodes (AI-02, C01).
+ * Every FROM was copied from the live posts (dump-copy-stores.mjs, 2026-10-02,
+ * after copy-fixes-qa-1/-2). Post headlines change only where they were
+ * ungrammatical; slugs never change.
+ *
+ * Deliberately NOT changed:
+ *   - "Implant vs Inplant": the misspelling IS the article's subject.
+ *   - every "Dental Group of Tysons" sentence: CS decides rewrite vs keep (decision 3).
+ *   - the 0.5-confidence "heading does not match" rows (a judgement, not an error).
+ */
+const POST = (s) => s === 'post'
+const P = (from, to, note) => ({ from, to, note, only: POST })
+
+export const RULES = [
+  // ── headlines (post title, H1, og, schema, seo-head) ──
+  { from: 'A Journey Through Whole Set of Teeth Implants', to: 'A Journey Through a Whole Set of Teeth Implants', note: 'headline: "Through Whole Set"' },
+  { from: 'Your Comprehensive Guide on Dental Implants: The Best Replacement of Tooth Solution', to: 'Your Comprehensive Guide to Dental Implants: The Best Tooth Replacement Solution', note: 'headline: "Replacement of Tooth Solution"' },
+  { from: 'Exploring the World of Dental Implants Placements in McLean, VA', to: 'Exploring the World of Dental Implant Placement in McLean, VA', note: 'headline: "Dental Implants Placements"' },
+  { from: 'Integrating Treatment Dental Practices into Your Dental Implant Procedure', to: 'Integrating Dental Treatment Practices into Your Dental Implant Procedure', note: 'headline: "Treatment Dental Practices"' },
+
+  // ── broken headings inside posts (also listed in each post's contents box) ──
+  P('How do You Clean?', 'How Do You Clean Dental Implants?', 'heading: How do You Clean?'),
+  P('What are used for?', 'What Are Dental Implants Used For?', 'heading: What are used for?'),
+  P('Can be done in one day?', 'Can Dental Implants Be Done in One Day?', 'heading: Can be done in one day?'),
+  P('Can Get Cavities?', 'Can Dental Implants Get Cavities?', 'heading: Can Get Cavities?'),
+  P('What Dental Implants Feel Like?', 'What Do Dental Implants Feel Like?', 'heading: What Dental Implants Feel Like?'),
+  P('When Are a Medical Necessity?', 'When Are Dental Implants a Medical Necessity?', 'heading: When Are a Medical Necessity?'),
+  P('Is permanent?', 'Are Veneers Permanent?', 'heading: Is permanent?'),
+  P('What are the process?', 'What Is the Process?', 'heading: What are the process?'),
+  P('Sedation Density:', 'Sedation Dentistry:', 'heading: Sedation Density'),
+  P('How Implant Supported Dentures In McLean, VA Benefit My Smiles', 'How Implant Supported Dentures In McLean, VA Benefit My Smile', 'heading: Benefit My Smiles'),
+  P('How Treatment Dental Factors into Dental Implant Procedures', 'How Dental Treatment Factors into Dental Implant Procedures', 'heading: Treatment Dental'),
+
+  // ── the two visible contact-form shortcodes: the form they promised does not exist ──
+  { from: '<p>Fill out the form below and our treatment coordinator will reach out to you briefly.</p>\n<p>[contact-form-7 id=”6391″ title=”Lead Form Home”]</p>',
+    to: '<p><a href="/contact">Request a consultation</a> and our treatment coordinator will reach out to you shortly.</p>', raw: true, note: 'shortcode: porcelain veneers post' },
+  { from: '<p>Please, fill out this form below and our treatment coordinator is going to reach out to you briefly.</p>\n<p>[contact-form-7 id=”6391″ title=”Lead Form Home”]</p>',
+    to: '<p><a href="/contact">Request a consultation</a> and our treatment coordinator will reach out to you shortly.</p>', raw: true, note: 'shortcode: everything-you-need-to-know post' },
+
+  // ── descriptions shown on the /posts index and in search ──
+  { from: 'getting porcelain veneers to bright your smile', to: 'getting porcelain veneers to brighten your smile', note: 'description: "to bright your smile"' },
+  { from: 'In this post Dr. Nahlah answer most common questions about the dental implant All-on-4.', to: 'In this post, Dr. Nahlah answers the most common questions about All-on-4 dental implants.', note: 'description: "Dr. Nahlah answer"' },
+
+  // ── sentences ──
+  P('people who suffer from missing teeth or failing.', 'people who suffer from missing or failing teeth.', 'missing teeth or failing'),
+  P('not integrating well with the patients jawbone due to peri-implantitis', 'not integrating well with the patient’s jawbone due to peri-implantitis', 'patients jawbone (peri-implantitis)'),
+  P('It is either the patient is already missing all their teeth already or is about to lose their teeth because of diseases and decay.', 'Either the patient is already missing all their teeth or is about to lose them because of disease and decay.', 'either … already'),
+  P('Click here to get more detailed look about the All-on-4.', 'Click here to get a more detailed look at the All-on-4.', 'more detailed look about'),
+  P('The first step is taking a record of the patient mouth.', 'The first step is taking a record of the patient’s mouth.', 'patient mouth'),
+  P('The patient usually is on a soft diet for 4 month period while the implant is healing and integrating into their jaw.', 'The patient is usually on a soft diet for a 4-month period while the implant is healing and integrating into their jaw.', '4 month period'),
+  P('Sometimes it is needed some minor maintenance from time to time but generally can last over 20 years.', 'It sometimes needs minor maintenance, but it can generally last over 20 years.', 'it is needed some'),
+  P('Zirconia Porcelain looks life-alike, very biocompatible, and cleansable material with an extremely high fracture strength of 1300 Megapascal which is extremely strong.', 'Zirconia porcelain looks lifelike, is very biocompatible and easy to clean, and has an extremely high fracture strength of 1,300 megapascals.', 'zirconia life-alike'),
+  P('Continue reading to to find out more.', 'Continue reading to find out more.', 'to to'),
+  P('One of the greatest advantages of dental implants, is their ability', 'One of the greatest advantages of dental implants is their ability', 'comma before is (advantages)'),
+  P('altering the persons facial structure and leading to them to having a more aged looking appearance.', 'altering the person’s facial structure and giving them a more aged-looking appearance.', 'persons facial structure'),
+  P('stimulating the patients jawbone so that it is kept healthy and strong.', 'stimulating the patient’s jawbone so that it is kept healthy and strong.', 'patients jawbone (healthy)'),
+  P('state-of-the-art-dental implants', 'state-of-the-art dental implants', 'state-of-the-art-dental'),
+  P('the procedure process for dental implants in McLean, VA are precise', 'the procedure for dental implants in McLean, VA is precise', 'procedure process … are'),
+  P('Another side effect people may experience from dental implant surgery, is minor bleeding.', 'Another side effect people may experience from dental implant surgery is minor bleeding.', 'comma before is (bleeding)'),
+  P('trauma to the patients surrounding tissue', 'trauma to the patient’s surrounding tissue', 'patients surrounding tissue'),
+  P('so they have a more solid foundation for a dental implant to be placed on.', 'so there is a more solid foundation on which to place a dental implant.', 'foundation … placed on'),
+  P('allows them to have a normal diet and speak properly with.', 'allows them to have a normal diet and speak properly.', 'speak properly with'),
+  P('so they become a permanent part of the patients smile once they have fused', 'so they become a permanent part of the patient’s smile once they have fused', 'patients smile (customized)'),
+  P('sitting on the patients gums', 'sitting on the patient’s gums', 'patients gums (sitting)'),
+  P('as the patients jawbone and facial structure begin to change', 'as the patient’s jawbone and facial structure begin to change', 'patients jawbone (change)'),
+  P('restores the patients jawbone density and volume', 'restores the patient’s jawbone density and volume', 'patients jawbone (density)'),
+  P('This isn’t just distressing, it’s also potentially detrimental', 'This isn’t just distressing; it’s also potentially detrimental', 'comma splice (distressing)'),
+  P('Contact Dr. Nahlah, and our exceptional team at our implant practice', 'Contact Dr. Nahlah and our exceptional team at our implant practice', 'comma after Nahlah'),
+  P('angled and placed in the patients jawbone', 'angled and placed in the patient’s jawbone', 'patients jawbone (angled)'),
+  P('the dental implant posts stimulate the patients jawbone like natural tooth roots do', 'the dental implant posts stimulate the patient’s jawbone like natural tooth roots do', 'patients jawbone (roots)'),
+  P('roots-shaped implants', 'root-shaped implants', 'roots-shaped'),
+  P('how many teeth are lost for this patient.', 'how many teeth the patient has lost.', 'teeth are lost for this patient'),
+  P('chewing and smiling with them like a permanent tooth.', 'chewing and smiling with them like natural teeth.', 'like a permanent tooth'),
+  P('there is not much bone around to support the teeth, the teeth become loose and then the patient loses the teeth.', 'there is not much bone left to support the teeth. The teeth become loose, and then the patient loses them.', 'comma splice (bone)'),
+  P('depending on the patient lost.', 'depending on how many teeth the patient has lost.', 'depending on the patient lost'),
+  P('if the patient is having an ailing implant which is the implant didn’t fail completely', 'if the patient has an ailing implant that has not failed completely', 'ailing implant which is'),
+  P('remove the implant and replaced it by a new dental implant.', 'remove the implant and replace it with a new dental implant.', 'replaced it by'),
+  P('hybrid teeth, or full arch dental implants. which all refer', 'hybrid teeth, or full arch dental implants, which all refer', 'fragment ". which all refer"'),
+  P('but the patient still need to clean around dental implants', 'but the patient still needs to clean around dental implants', 'patient still need'),
+  P('are not able to chew their food so which causes them some GI problems.', 'are not able to chew their food, which can cause GI problems.', 'so which causes'),
+  P('these patients have %25 higher risks of developing cardiovascular disease.', 'these patients have a 25% higher risk of developing cardiovascular disease.', '%25 higher risks'),
+  P('Suited for the long term, some patients may find the process lengthy and the cost more than alternative options.', 'Although implants are suited for the long term, some patients may find the process lengthy and the cost higher than alternative options.', 'dangling modifier (long term)'),
+  P('Depending on every patient’s smile, the number of dental implants they need, and the areas in their jawbone where they need to be placed, will be determined.', 'The number of dental implants each patient needs, and where in the jawbone they are placed, depends on that patient’s smile.', 'Depending on … will be determined'),
+  P('the patients new smile can be custom designed.', 'the patient’s new smile can be custom designed.', 'patients new smile'),
+  P('you will get new smile you need and deserve.', 'you will get the new smile you need and deserve.', 'get new smile'),
+  P('Imagine smiling with confidence again, dental implants can restore', 'Imagine smiling with confidence again! Dental implants can restore', 'comma splice (imagine)'),
+  P('it’s critical to unpack its procedure.', 'it’s critical to unpack their procedure.', 'its procedure'),
+  P('can benefit patient’s smiles:', 'can benefit patients’ smiles:', 'patient’s smiles'),
+  P('Besides giving patients a permanent new smile, when the dental implant posts are placed in the patient’s jawbone, it stimulates it so its volume and density are restored.', 'Besides giving patients a permanent new smile, the dental implant posts stimulate the jawbone they are placed in, which restores its volume and density.', 'it stimulates it'),
+  P('patients not only enhance the look of their smile, they also improve their overall oral health', 'patients not only enhance the look of their smile but also improve their overall oral health', 'not only …, they also'),
+  P('won’ t', 'won’t', 'won’ t'),
+  P('the difference between’ implant vs. inplant’ in dentistry?', 'the difference between ‘implant’ and ‘inplant’ in dentistry?', 'between’ implant vs. inplant’'),
+  P('By adopting a treatment dental approach', 'By adopting a dental treatment approach', 'treatment dental approach (a)'),
+  P('With our treatment dental approach to dental implants', 'With our dental treatment approach to dental implants', 'treatment dental approach (b)'),
+  P('their durability, comforts, and aesthetic advantages', 'their durability, comfort, and aesthetic advantages', 'comforts'),
+  P('which can lead to the need for root canal therapy the teeth', 'which can lead to the need for root canal therapy on the teeth', 'root canal therapy the teeth'),
+  P('as well taking initial records of photographs of the face and smile of the patient', 'as well as taking initial photographs of the patient’s face and smile', 'as well taking'),
+  P('retry in the patient mouth', 'try in the patient’s mouth', 'retry in the patient mouth'),
+  P('until the final are ready.', 'until the final veneers are ready.', 'until the final are ready'),
+  P('Dr. Nahlah will remove the temporary and bond the final permanently.', 'Dr. Nahlah will remove the temporary veneers and bond the final veneers permanently.', 'remove the temporary'),
+  P('Full mouth dental implants in McLean, VA are gold standard tooth replacement option', 'Full mouth dental implants in McLean, VA are a gold standard tooth replacement option', 'are gold standard'),
+  P('the ways it gives patient’s a beautiful, functional, and healthy new smile makes it', 'the ways it gives patients a beautiful, functional, and healthy new smile make it', 'gives patient’s … makes'),
+  P('traditonal dentures', 'traditional dentures', 'traditonal'),
+  P('(osseoitegrate)', '(osseointegrate)', 'osseoitegrate'),
+  P('By preserving the patients jawbone structures', 'By preserving the patient’s jawbone structure', 'patients jawbone structures'),
+  P('supporting the full arch prosthesis allows patients', 'supporting the full arch prosthesis allow patients', 'implants … allows'),
+  P('the color, shape, and size of the prosthesis is custom-made', 'the color, shape, and size of the prosthesis are custom-made', 'color, shape, and size … is (a)'),
+  P('the numerous ways they restore your smile makes them', 'the numerous ways they restore your smile make them', 'ways … makes'),
+  P('they also stimulate the patients jawbone', 'they also stimulate the patient’s jawbone', 'patients jawbone (stimulate)'),
+  P('our client expertly delivers a whole set of teeth implants.', 'our practice expertly delivers a whole set of teeth implants.', 'our client'),
+  P('the titanium implant posts-fuses with the jawbone', 'the titanium implant post fuses with the jawbone', 'posts-fuses'),
+  P('made to just sit on the patients gums and do not become a permanent part of their smile.', 'made to just sit on the patient’s gums and do not become a permanent part of their smile.', 'patients gums (dentures)'),
+  P('The prosthesis for All-on-4 implants, on the other hand, are fixed to the patients mouth', 'The prosthesis for All-on-4 implants, on the other hand, is fixed to the patient’s mouth', 'prosthesis … are fixed'),
+  P('they become a permanent part of the patients smile.', 'they become a permanent part of the patient’s smile.', 'patients smile (All-on-4)'),
+  P('the color, shape, and size of the full arch prosthesis is custom made to look natural looking and aesthetically enhance', 'the color, shape, and size of the full arch prosthesis are custom-made to look natural and aesthetically enhance', 'color, shape, and size … is (b)'),
+  P('All-on-4 dental implants preserve the patients jawbone density.', 'All-on-4 dental implants preserve the patient’s jawbone density.', 'patients jawbone density'),
+  P('stimulate the patients jawbone once they have been permanently placed in it.', 'stimulate the patient’s jawbone once they have been permanently placed in it.', 'patients jawbone (permanently)'),
+  P('they can depend on to live their life normally.', 'they can depend on to live their lives normally.', 'their life'),
+  P('When the final prosthesis is ready, they are attached to the full mouth dental implants.', 'When the final prosthesis is ready, it is attached to the full mouth dental implants.', 'prosthesis … they are'),
+  P('Dental implants don’t only look and function like natural teeth, they’re also designed', 'Dental implants don’t only look and function like natural teeth; they’re also designed', 'comma splice (lifespan)'),
+  P('not merely another restoration aesthetic but', 'not merely another aesthetic restoration but', 'restoration aesthetic'),
+  P('allow you to eat and babble', 'allow you to eat and speak', 'babble'),
+  P('improved oral health, we’re dedicated to delivering', 'improved oral health. We’re dedicated to delivering', 'comma splice (we’re dedicated)'),
+  P('for both tooth loss due to decay and gum disease, or injury.', 'for tooth loss due to decay, gum disease, or injury.', 'both … and …, or'),
+  P('protecting both the patients dental implant and their surrounding gum tissue', 'protecting both the patient’s dental implant and their surrounding gum tissue', 'patients dental implant'),
+  P('Getting regular dental check-ups are also an opportunity', 'Getting regular dental check-ups is also an opportunity', 'check-ups are'),
+  P('So, if you’re missing a tooth, your physical and mental well-being must consider replacement options.', 'So, if you’re missing a tooth, consider your replacement options for the sake of your physical and mental well-being.', 'well-being must consider'),
+  P('Dental implants in McLean, VA are small, and titanium posts are surgically placed', 'Dental implants in McLean, VA are small titanium posts that are surgically placed', 'small, and titanium posts'),
+  P('replace missing teeth’ root parts.', 'replace the root parts of missing teeth.', 'teeth’ root parts'),
+  P('Complications in implant dentistry’ refer to', 'Complications in implant dentistry refer to', 'dentistry’ refer'),
+]
