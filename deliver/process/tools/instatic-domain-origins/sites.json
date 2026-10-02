@@ -231,6 +231,27 @@
         "environment": "staging"
       },
       "note": "Created 2026-10-01 with staging-env.mjs: own volume, PUBLIC_ORIGIN = this host only. Holds the concept deck (/concepts). No domain yet, so noindex is injected by the deck pages; replace the generated host with staging.<domain> at launch."
+    },
+    {
+      "client": "oceanic-dental",
+      "adminUrl": "https://oceanic-dental-production.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "deb953e8-ca59-48c7-bac6-c2782ec06649",
+        "service": "Oceanic Dental"
+      },
+      "note": "Provisioned 2026-10-02 name-first (provision-instance.mjs). PUBLIC_ORIGIN = the generated host. No client domain yet: oceanicdental.com is still the live Webflow site (66cd6c49cbb85d43d9e41a7c). Nothing published on production."
+    },
+    {
+      "client": "oceanic-dental-staging",
+      "adminUrl": "https://oceanic-dental-staging.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "deb953e8-ca59-48c7-bac6-c2782ec06649",
+        "service": "Oceanic Dental",
+        "environment": "staging"
+      },
+      "note": "Created 2026-10-02 with staging-env.mjs: own volume, PUBLIC_ORIGIN = this host only. Holds the concept deck (/concepts). No domain yet, so noindex is injected by the deck pages."
     }
   ]
 }

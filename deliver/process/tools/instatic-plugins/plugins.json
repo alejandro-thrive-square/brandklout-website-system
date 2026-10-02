@@ -102,6 +102,10 @@
       "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
       "note": "Three plugins on production and staging since 2026-10-01 (embed-origins 1.8.0, open-graph 1.2.3, aeo-schema 1.2.0), installed with install-plugin.mjs --apply."
     },
+    "oceanic-dental": {
+      "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
+      "note": "Three plugins on production and staging since 2026-10-02 (embed-origins 1.8.0, open-graph 1.2.3, aeo-schema 1.2.0), installed with install-plugin.mjs --apply."
+    },
     "mason-park-kids": {
       "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
       "note": "Three plugins; the only site that already ran open-graph 1.1.3 (2026-09-10)."
