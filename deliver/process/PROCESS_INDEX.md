@@ -79,7 +79,7 @@ Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 | 03 | [QA and Publish](./scenario-6-webflow-sites/03-qa-and-publish/03-qa-and-publish.md) |
 
 Scripts: [tools/webflow-build](./tools/webflow-build/webflow-build.md); `03-qa-and-publish/scripts/staging-verify.mjs`.
-The FigJam board *Deliver SOP's* has no Scenario 6 lane yet; this index and the scenario README are the source.
+The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, added 2026-10-02 from the scenario README).
 
 ## Tools
 

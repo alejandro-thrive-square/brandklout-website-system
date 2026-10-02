@@ -53,8 +53,11 @@
   tier). Verify in the page and from a fresh tab, not through REST.
 
 ## Next
-- Apply the sandbox-proven Scenario 6 lane to the real board (same script, real file), and
-  make Scenario 2 Instatic-only. Both are writes to the owner's board: confirm first.
+- **Done:** the Scenario 6 lane is on the real *Deliver SOP's* board (section `374:1330`, x 7180,
+  71 cards). Built in one pass with the corrected script (templates by text, positions relative
+  to the section), checked in the page and from a fresh tab.
+- Still open: Scenario 2's lane should read Instatic only. That is a write to the owner's board,
+  so confirm first.
 - GoHighLevel API access: decide between Private Integration tokens per sub-account (created and
   shown once; the agency may need to enable them) and one agency token. Then run with
   `--allow-writes` on one sub-account.

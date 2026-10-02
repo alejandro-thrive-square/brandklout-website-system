@@ -55,8 +55,8 @@ Per-request working folder: `deliver/brandklout/<client>/scenario-6-webflow-site
 - `deliver/scripts/asana-context.mjs`: the Asana brief.
 
 ## FigJam
-The *Deliver SOP's* board draws scenarios 0 to 5. It needs a Scenario 6 lane with these three steps;
-until it has one, this README is the source.
+The *Deliver SOP's* board has the Scenario 6 lane (section `374:1330`, x 7180), drawn on 2026-10-02
+from this README's three steps. When a step changes here, update its cards on the board.
 
 ## Evidence
 Built from the client runbooks and commit history of bk-arvada, bk-grand-mission, bk-legacy-dental,
