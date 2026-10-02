@@ -180,6 +180,8 @@ nul
 
 # Asana pulls are per-person task dumps, regenerated on demand
 deliver/scripts/output/
+# A tool run from its own folder writes output/ beside the scripts; run output is never system code.
+deliver/process/tools/*/output/
 
 # Run outputs recovered from the per-worktree deliver/process copies on 2026-09-27 (backups, bundles,
 # logs). Too large or too raw for git; scripts/assets.mjs keeps them in R2.
