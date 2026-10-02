@@ -20,7 +20,11 @@ const acct = await accountId()
 const site = (await cf('GET', `/accounts/${acct}/rum/site_info/list`)).find((s) => s.ruleset?.zone_name === ZONE)
 if (!site) { console.error(`no Web Analytics site for ${ZONE}`); process.exit(1) }
 console.log(`${ZONE}: site_tag ${site.site_tag}, auto_install ${site.auto_install}`)
+/* `auto_install: false` alone did NOT stop the edge injecting the beacon (still in
+   every page 25 minutes later, 2026-10-02). Cloudflare's switch is `enabled`, which
+   it only honours in auto-install mode: auto_install true + enabled false = off. */
 const want = process.argv.includes('--enable') ? true : process.argv.includes('--apply') ? false : null
-if (want === null || site.auto_install === want) process.exit(0)
-const r = await cf('PUT', `/accounts/${acct}/rum/site_info/${site.site_tag}`, { auto_install: want, zone_tag: site.ruleset.zone_tag })
-console.log(`now auto_install ${r.auto_install}`)
+console.log(`  ruleset enabled ${site.ruleset?.enabled}`)
+if (want === null) process.exit(0)
+const r = await cf('PUT', `/accounts/${acct}/rum/site_info/${site.site_tag}`, { auto_install: true, enabled: want, zone_tag: site.ruleset.zone_tag })
+console.log(`now auto_install ${r.auto_install}, ruleset enabled ${r.ruleset?.enabled}`)
