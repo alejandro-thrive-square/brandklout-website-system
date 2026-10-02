@@ -479,6 +479,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       reason_for_referral: all('reason_for_referral') + (v('reason_other') ? ' (Other: ' + v('reason_other') + ')' : ''),
       additional_information: all('additional_information')
     }
+    /* GHL's Create Contact step errors on an empty date or a bare 10-digit number:
+       leave empty fields out, and send US numbers as +1XXXXXXXXXX. */
+    var e164 = function (t) { var d = t.replace(/\D/g, ''); if (d.length === 10) return '+1' + d; if (d.length === 11 && d[0] === '1') return '+' + d; return t }
+    data.phone = e164(data.phone); if (data.referring_doctor_phone) data.referring_doctor_phone = e164(data.referring_doctor_phone)
+    Object.keys(data).forEach(function (k) { if (data[k] === '') delete data[k] })
     button.disabled = true; say('Sending…', true)
     fetch(form.dataset.rfHook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) {
