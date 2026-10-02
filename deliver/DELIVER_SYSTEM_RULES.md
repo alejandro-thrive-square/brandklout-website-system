@@ -74,7 +74,9 @@ board draws this).
   API (GoHighLevel, Elfsight, vendor dashboards) runs as one plain instruction through
   [`tools/codex-computer-use`](./process/tools/codex-computer-use/README.md). It is read-only unless
   `--allow-writes`, and runs in a background tab of the user's own Chrome. Do not use Jev,
-  `orca computer`, Claude in Chrome or new CDP scripts for this.
+  `orca computer`, Claude in Chrome or new CDP scripts for this. **Exception: FigJam and Figma
+  edits** go through Claude in Chrome's `javascript_tool` and the plugin API. Codex cannot reach
+  `window.figma`, and it damaged a lane when it tried. Experiment on a duplicated board first.
 - **Asana and client-facing actions** (comments, status changes, emails, publishes to production) are
   confirmed with a person first.
 - **Runbook** after every run: the step's `output/RUNBOOK.md` and a row in the client `RUNBOOK.md`

@@ -18,6 +18,25 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
 
+## When not to use it: canvas apps with a scripting API
+
+**Codex's browser scripts cannot see the page's own JavaScript.** `tab.playwright.evaluate`
+found no `window.figma` on a loaded FigJam board (it listed no Figma globals at all). So on a
+canvas, Codex falls back to clicking, typing and the clipboard. In FigJam, 2026-10-02:
+- **Real board:** it duplicated the Scenario 2 lane and overwrote its title in place, then
+  reported success. The board was restored from version history.
+- **Sandbox, even with "only add" rules:** loose text blocks, an empty "Section 1" in the wrong
+  place, a duplicated Scenario 0 card, and a fresh-tab check that returned `false` while the
+  report said "verified".
+
+**Use Claude in Chrome for FigJam and Figma edits.** Its `javascript_tool` runs in the page and
+reaches the plugin API. The same lane built that way was right first time, and was confirmed
+from a fresh tab. The recipe is in the 2026-10-02 runbook. Codex stays the tool for forms,
+dashboards and reading pages.
+
+**Test canvas work on a copy.** The FigJam sandbox is *Deliver SOP's (copia)*
+(`figma.com/board/2sUFV9D8ReH76pzVRAQPBA`). Duplicate a board before any automated experiment.
+
 ## Requirements and gotchas
 
 - **The ChatGPT desktop app must be running**, with its Chrome extension connected. The wrapper
