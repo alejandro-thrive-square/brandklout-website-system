@@ -68,6 +68,14 @@ const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>2026-08-25</lastmod>
   </url>
   <url>
+    <loc>https://www.drnahlah.com/five-year-warranty</loc>
+    <lastmod>2026-09-21</lastmod>
+  </url>
+  <url>
+    <loc>https://www.drnahlah.com/hipaa-disclosure</loc>
+    <lastmod>2026-10-01</lastmod>
+  </url>
+  <url>
     <loc>https://www.drnahlah.com/implant-cost</loc>
     <lastmod>2026-08-25</lastmod>
   </url>

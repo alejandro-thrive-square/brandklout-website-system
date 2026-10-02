@@ -23,9 +23,10 @@ const ZONE = 'drnahlah.com'
 const SCRIPT_NAME = 'drnahlah-seo'
 const ROUTES = [
   'www.drnahlah.com/sitemap.xml',
-  'www.drnahlah.com/robots.txt',
   'drnahlah.com/sitemap.xml',
-  'drnahlah.com/robots.txt',
+  // NOT /robots.txt: Cloudflare generates the content-signals robots.txt at the
+  // edge, and a Worker on that path replaced it (14-migration-seo-redirects.md,
+  // gotcha 1). The routes were removed by hand; this list must not re-add them.
 ]
 const APPLY = process.argv.includes('--apply')
 
@@ -53,6 +54,11 @@ form.append('worker.js', new Blob([source], { type: 'application/javascript+modu
 
 const uploaded = await cf('PUT', `/accounts/${acct}/workers/scripts/${SCRIPT_NAME}`, form)
 console.log(`\nuploaded: ${uploaded.id} (modified ${uploaded.modified_on})`)
+
+/* --script-only: replace the code behind routes that are already bound. Since
+   2026-10-02 the token answers 403 on zone Workers Routes, so binding is a
+   dashboard job; uploading the script still works. */
+if (process.argv.includes('--script-only')) process.exit(0)
 
 // ── bind the routes ────────────────────────────────────────────────────────
 
