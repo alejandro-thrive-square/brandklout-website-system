@@ -51,6 +51,11 @@ dashboards and reading pages.
   `~/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/chrome/skills/control-chrome/SKILL.md`,
   not under `plugins/cache`. Without that block, `browser` is undefined and Codex falls back to
   `sky`. The wrapper passes the path in.
+- **Reuse open tabs; don't pile up new ones.** Until 2026-10-02 the prompt said "work in a NEW
+  Chrome tab", so six GoHighLevel runs on one form left six tabs (the user's catch). The prompt
+  now makes Codex list the open tabs first and claim one already on the right site or page,
+  opening a new tab only when none fits or the fitting one is mid-edit. The report says which tab
+  it used. It still never closes a tab.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.
