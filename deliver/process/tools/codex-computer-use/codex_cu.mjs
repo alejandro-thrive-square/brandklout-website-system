@@ -65,11 +65,11 @@ const rules = [
   'Rules:',
   '- Work in a NEW Chrome tab; never close, reload or navigate away from tabs the user already has open, and never close a window.',
   allowWrites
-    ? '- You may make the changes the task asks for, and only those. Anything destructive, paid, or sent to other people (delete, regenerate, pay, send, invite, publish) needs the task to name it explicitly; otherwise stop and report.'
+    ? '- You may make the changes the task asks for, and only those. Anything destructive, paid, or sent to other people (delete, regenerate, pay, send, invite, publish) needs the task to name it explicitly; otherwise stop and report. Never select-all, clear, or reset existing content: a permitted delete targets only the named elements, one by one, and if you cannot isolate them, stop and report. Undo your own mistakes with targeted edits or undo, never by wiping.'
     : '- READ-ONLY: do not create, save, submit, publish, delete, regenerate, send or change anything. Navigating, opening menus, scrolling and reading are fine. If the task needs a change, stop and report what you would change.',
   '- If you hit a login, 2FA, captcha or a permission prompt, stop and report it; do not enter credentials.',
   '- Never print secrets (API keys, tokens, passwords) in full in your report; show the first 6 characters only unless the task says otherwise.',
-  '- Before you finish, check your result on the page itself (read it back) and include that in the report; a later session cannot reopen a tab you keep open.',
+  '- Before you finish, check your result on the page itself and include that in the report; a later session cannot reopen a tab you keep open. The check must come from data you read off the page (DOM, accessibility tree, app state) or a screenshot you look at. Never write the expected values out yourself and call that verification; if you cannot read the result, say it is unverified.',
   '- Finish with a short report: what you did, what you found (exact names/values/URLs), and anything that blocked you.',
   '',
   'Task:',
