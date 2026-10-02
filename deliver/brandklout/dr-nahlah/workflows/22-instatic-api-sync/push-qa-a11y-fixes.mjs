@@ -83,6 +83,29 @@ if (!Object.values(shell.styleRules).some((r) => r.selector === '.lc-head p a'))
     styles: { textDecorationLine: 'underline', textUnderlineOffset: '0.18em', textDecorationThickness: '1px' }, contextStyles: {}, createdAt: now, updatedAt: now }
   notes.push('rule + .lc-head p a (underline)')
 }
+/* (Layout, not axe — QA AI-01 on /posts.) `.bl-grid` draws its hairlines as its own
+   grey background showing through 1px gaps, so the empty cells after the last
+   card (43 posts, 3 columns) read as a grey block two cards wide. A filler that
+   spans from wherever the last card ended to the end of its row, in the card
+   colour, closes the row for any count and any column count. */
+if (!Object.values(shell.styleRules).some((r) => r.selector === '.bl-grid::after')) {
+  const base = Object.values(shell.styleRules).filter((r) => r.selector.startsWith('.bl-grid')).sort((a, b) => b.order - a.order)[0]
+  const now = Date.now(), id = 'qaBlGridFill' + now.toString(36)
+  shell.styleRules[id] = { id, name: '.bl-grid::after', kind: 'ambient', selector: '.bl-grid::after', order: base.order + 0.5,
+    styles: { content: '""', background: 'var(--card)' }, contextStyles: {}, createdAt: now, updatedAt: now }
+  notes.push('rule + .bl-grid::after (fills the last row)')
+}
+{ // one cell by default; at three columns, a last row holding ONE card leaves two cells
+  const fill = Object.values(shell.styleRules).find((r) => r.selector === '.bl-grid::after')
+  if (fill.styles.gridColumn) { delete fill.styles.gridColumn; notes.push('rule .bl-grid::after: one cell by default') }
+  const SEL = '.bl-grid:has(> .bl-card:last-child:nth-child(3n+1))::after'
+  if (!Object.values(shell.styleRules).some((r) => r.selector === SEL)) {
+    const now = Date.now(), id = 'qaBlGridFill2' + now.toString(36)
+    shell.styleRules[id] = { id, name: SEL, kind: 'ambient', selector: SEL, order: fill.order + 0.25, styles: {},
+      contextStyles: { 'media:(min-width: 1080px)': { gridColumn: 'span 2' } }, createdAt: now, updatedAt: now }
+    notes.push('rule + three-column single-card filler span 2')
+  }
+}
 const rule = (sel) => { const h = Object.values(shell.styleRules).filter((r) => r.selector === sel); if (h.length !== 1) { console.error(`rule ${sel}: ${h.length}`); process.exit(1) } return h[0] }
 { const r = Object.values(shell.styleRules).find((x) => x.selector === '.ga-filters button b'); if (r && r.styles.opacity !== '.9') { r.styles.opacity = '.9'; notes.push('rule .ga-filters button b opacity .9') } }
 if (!Object.values(shell.styleRules).some((r) => r.selector === '.wt-table thead th, .wt-table thead td')) {

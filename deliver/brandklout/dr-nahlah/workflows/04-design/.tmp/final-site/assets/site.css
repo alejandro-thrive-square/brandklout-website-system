@@ -1847,6 +1847,12 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .bl-card:hover .bl-more::after{width:38px}
 @media(min-width:700px){ .bl-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .bl-grid{grid-template-columns:repeat(3,1fr)} }
+/* The hairlines are the grid's own background showing through 1px gaps, so empty
+   cells after the last card read as a grey block (QA 2026-09-28, /posts). The
+   ::after fills the rest of the last row in the card colour: one cell by default,
+   two when a three-column row holds a single card. */
+.bl-grid::after{content:"";background:var(--card)}
+@media(min-width:1080px){ .bl-grid:has(> .bl-card:last-child:nth-child(3n+1))::after{grid-column:span 2} }
 
 /* --- index: search bar + topic filter ----------------------  BugHerd pin #10
    Client, pinned on `section#articles > div.wrap.section`:
