@@ -33,7 +33,7 @@ Researched 2026-10-01 for the home page's doctor section; full table with source
 
 | Fact | Value | Status |
 | :--- | :--- | :--- |
-| Google rating | **5.0 from 15 reviews**, the office's own listing "Hackensack Center for Dental Implants" (kgmid `/g/11nvclyc8j`, from the reviewer, BugHerd #10). The host's listing, Aesthetic Dental Center of Hackensack, is 4.7 from 1,104 and is the wrong one to show | Verified 2026-10-01 |
+| Google rating | **5.0 from 21 reviews** (2026-10-02; 15 on 2026-10-01). Elfsight widget `948f2cd1` shows it. the office's own listing "Hackensack Center for Dental Implants" (kgmid `/g/11nvclyc8j`, from the reviewer, BugHerd #10). The host's listing, Aesthetic Dental Center of Hackensack, is 4.7 from 1,104 and is the wrong one to show | Verified 2026-10-01 |
 | Practice (host) founded | 2008 (business NPI 1154574804) | Verified |
 | Dr. Meskin | DDS NYU 2019; Certificate in Prosthodontics NYU 2022; NPI 1629605597; NJ licence 22DI02791000; English, Spanish, Russian | Verified |
 | Dr. Meskin memberships | ACP, AAID, ADA | Practice's own claim |

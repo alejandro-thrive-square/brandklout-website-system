@@ -2,6 +2,35 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-02 (evening) · the right Google reviews widget, BugHerd #10 done
+
+Alejandro supplied the right Elfsight widget: `948f2cd1-3863-46db-a63b-689bfc31ace0`, connected to
+"Hackensack Center for Dental Implants, 163 Main St Suite A1" (checked on Elfsight's boot API first).
+
+### Done (commit: see the client `RUNBOOK.md` row)
+
+- `pages/index.html`: the `google-reviews` embed marker now carries `948f2cd1` (lazy attribute left
+  out, as always on Instatic). Pushed (backup `backups/pre-reviews-948-stg/`, seq 12).
+- New `code/check-reviews.mjs`: scrolls to `#reviews` and reads the widget's shadow root. Live at
+  1512 and 390: only the new widget on the page, 5.0 from 21 reviews. `check-staging.mjs` 14/14.
+- BugHerd #10 marked done. 22 of 23 done; only #12 left (profile pages not built).
+
+### Next
+
+1. On `main`: update `deliver/process/tools/elfsight-reviews/review-widgets.json`, row `hackensack`:
+   widget `948f2cd1…`, listing "Hackensack Center for Dental Implants, 163 Main St Suite A1".
+   `cf96ca10` (Aesthetic Dental Center) stays on the live Webflow site until launch; decide then
+   whether to delete it.
+
+### Gotchas
+
+- **Claude in Chrome could not click Elfsight's source menu.** "⋯" opened it; "Change" ignored
+  direct clicks, hover-then-click and the keyboard. Orca's OS-level control could not take focus
+  from Orca on Windows. The user had the right widget all along: ask for the widget before trying
+  to re-point one. (The house skill for vendor dashboards is now `codex-computer-use`.)
+- The office listing gains reviews fast (15 to 21 in a day): the page says "5.0 Google rating" and
+  never prints the count.
+
 ## 2026-10-02 (later) · 21 BugHerd tasks marked done
 
 Asked for: "mark the tasks done, the ones that you are sure you finished, double-check". Verified

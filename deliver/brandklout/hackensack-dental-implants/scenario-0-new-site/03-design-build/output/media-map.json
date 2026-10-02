@@ -1,6 +1,6 @@
 {
   "base": "https://hackensack-dental-implants-staging.up.railway.app",
-  "uploadedAt": "2026-10-01T23:15:53.463Z",
+  "uploadedAt": "2026-10-02T23:45:59.425Z",
   "map": {
     "fonts/dm-sans-var.woff2": {
       "id": "SItPFwPH7DgZrhDlAbpRQ",
@@ -197,18 +197,14 @@
     "media/img/logo-stacked.webp": {
       "id": "7ZlgY1xQyOINBeo35U8oA",
       "url": "/uploads/9_RLfdUJaAGehoe8fbTaB-logo-stacked.webp",
-      "uploadedAs": "logo-stacked.webp",
-      "width": 620,
-      "height": 180,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "logo-stacked.webp"
     },
     "logo-stacked.webp": {
       "id": "7ZlgY1xQyOINBeo35U8oA",
       "url": "/uploads/9_RLfdUJaAGehoe8fbTaB-logo-stacked.webp",
-      "uploadedAs": "logo-stacked.webp",
-      "width": 620,
-      "height": 180,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "logo-stacked.webp"
     },
     "media/img/story.webp": {
       "id": "Fqkqukk__6axztMAbdLle",

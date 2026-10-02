@@ -50,8 +50,14 @@ done**: #1, #2, #3, #4, #5, #8, #9, #11, #13, #14, #15, #16, #17, #18, #19, #20,
 #24, #25 (`mark-done.txt`; each re-read before the write and read back after). Status only: no
 reply was posted.
 
+**#10 done 2026-10-02:** Alejandro gave the right widget, Elfsight `948f2cd1-3863-46db-a63b-689bfc31ace0`
+(Elfsight's boot data: source "Hackensack Center for Dental Implants, 163 Main St Suite A1"). It
+replaced `cf96ca10` in the page (no `data-elfsight-app-lazy`), pushed (backup
+`backups/pre-reviews-948-stg/`, seq 12), rendered live at 1512 and 390 as 5.0 from 21 reviews
+(`check-reviews.mjs`), then marked done (`mark-done-10.txt`). The old `cf96ca10` was not edited and
+still runs on the live Webflow site.
+
 **Left in todo on purpose:**
-- **#10:** the reviews widget still shows the Aesthetic Dental Center listing.
 - **#12:** the surgeons link to `/dr-won-sang-lee-dds`, `/dr-maurice-srour-dds`,
   `/dr-dmitriy-klass-dds-msd`, but those pages are not built on staging, so the links 404 there.
   Done when the profile pages exist.

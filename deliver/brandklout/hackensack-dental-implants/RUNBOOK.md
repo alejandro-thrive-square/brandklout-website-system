@@ -22,8 +22,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
   sound. Chapter 1 is now the doctor: credentials, then four numbers (4.7, 50,000+, 30+, 4) and the
   three surgeons. **Two numbers are the practice's own claims, to confirm** (canary-review items 7
   to 10).
-- **Google reviews on staging** (2026-09-30): the client's Elfsight widget (`cf96ca10-…`, registry key
-  `hackensack`) is an Embed block under the Smile Gallery (`#reviews`), placed by the push chain from a
+- **Google reviews on staging** (2026-09-30, widget swapped 2026-10-02): Elfsight `948f2cd1-…`, the office's own
+  listing "Hackensack Center for Dental Implants" (the old site's `cf96ca10` shows the host, Aesthetic Dental Center) is an Embed block under the Smile Gallery (`#reviews`), placed by the push chain from a
   marker in the source, so a re-push keeps it. Production has it once the site is first pushed there.
 - **BugHerd project 544349** "Hackensack Dental Implants" (2026-10-01) on the staging URL, with the
   usual five members (Jessica, Sang, Alejandro, Gauge, agency@brandklout.com). Instatic's CSP blocks
@@ -46,8 +46,8 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
-1. BugHerd: 21 of 23 done (2026-10-02). Open: #10 (reviews widget on the wrong Google listing,
-   waiting on Alejandro) and #12 (done when the doctor profile pages exist): `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
+1. BugHerd: 22 of 23 done (2026-10-02). Open: #12 (done when the doctor profile pages exist).
+   Reviews widget is now `948f2cd1`; update its row in `review-widgets.json` on `main`: `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
 1. Get rulings on the ten items in `canary-review.md` (7 to 10 are new: team numbers, rating
    listing, other dentists in the film, captions), and decide where the menu, financing, hours
    and office photographs go (the concept has no place for them); then the inner pages.
@@ -93,6 +93,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-10-01 | scenario-0-new-site / 03-design-build | BugHerd 544349 round: 23 tasks, 22 fixed on staging (cursor, scan line, logo, Bergen County, rating 5.0 from the office listing, clipped capitals, pins, footer); #10 reviews widget account waits on Alejandro; replies drafted, not posted | `f1d061a4` |
 | 2026-10-02 | scenario-0-new-site / 03-design-build | Every fixed BugHerd pin re-checked on live staging by the new `bugherd-verify.mjs`: 24/24, shots looked at; no new BugHerd activity; #10 and the replies wait on Alejandro | `8f7a9ba1` |
 | 2026-10-02 | scenario-0-new-site / 03-design-build | 21 BugHerd tasks marked done after a fresh live check (24/24); #10 (widget account) and #12 (profile pages not built) left open | see the commit after `5078725f` |
+| 2026-10-02 | scenario-0-new-site / 03-design-build | Reviews widget swapped to Elfsight `948f2cd1` (the office's own listing, 5.0 from 21), verified live; BugHerd #10 done; 22 of 23 done, #12 waits on the profile pages | see the commit after `2024e3f8` |
 
 ## Version Control
 
