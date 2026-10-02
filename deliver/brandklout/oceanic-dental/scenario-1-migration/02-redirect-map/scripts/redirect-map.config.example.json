@@ -1,0 +1,24 @@
+{
+  "target": "https://www.new-domain.com",
+  "checkOrigin": "https://client-name.up.railway.app",
+  "oldHosts": ["old-domain.com", "www.old-domain.com"],
+  "mode": "legacy-domain",
+  "status": 301,
+  "keepPath": false,
+  "fallback": "/",
+  "workerName": "client-legacy-redirects",
+  "inventory": "url-inventory.txt",
+  "pages": "new-pages.txt",
+  "samePathForLivePages": true,
+  "exact": [
+    ["/about-us", "/about", "practice", "renamed"],
+    ["/contact-information", "/book", "booking", ""],
+    ["/2021/08/10/old-post-slug", "/blog/old-post-slug", "article", "dated WordPress permalink"]
+  ],
+  "prefix": [
+    ["/category", "/blog", "article", "archive pages"],
+    ["/tag", "/blog", "article", "archive pages"],
+    ["/author", "/about", "practice", "agency authors, no author pages"],
+    ["/services", "/our-services", "service", "any old service page without its own row"]
+  ]
+}

@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoreline Retreat · Oceanic Dental</title>
+<meta name="description" content="Concept 05 for Oceanic Dental: concierge dentistry told as boutique hospitality.">
+<script>if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('js')}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500;600&family=Italiana&display=swap" rel="stylesheet">
+<style>
+:root{--font-from:18;--font-to:20;--vw-from:calc(1920 / 100);--vw-to:calc(2400 / 100);--coefficient:calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));--base:calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)}
+html{font-size:calc(var(--base) * 1rem + var(--coefficient) * 1vw)}
+@media screen and (max-width:1920px){:root{--font-from:16;--font-to:18;--vw-from:calc(1440 / 100);--vw-to:calc(1920 / 100)}}
+@media screen and (max-width:1440px){:root{--font-from:16;--font-to:16;--vw-from:calc(479 / 100);--vw-to:calc(1440 / 100)}}
+@media screen and (max-width:479px){:root{--font-from:12;--font-to:16;--vw-from:calc(320 / 100);--vw-to:calc(479 / 100)}}
+
+:root{
+  --s5-ink:#263235;--s5-ink-dim:#4f5c5a;--s5-unlit:#5d6a68;
+  --s5-linen:#f7f5f0;--s5-foam:#e8efec;--s5-white:#ffffff;--s5-sand:#efe7dc;
+  --s5-sea:#7fb7b0;--s5-sea-text:#3d6b65;--s5-champ:#c4ab83;--s5-champ-text:#6f5a36;
+  --s5-rule:rgba(38,50,53,.14);
+  --s5-display:'Italiana',Georgia,serif;--s5-text:'Albert Sans',system-ui,sans-serif;
+  --s5-gutter:2.5rem;--s5-max:76rem;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--s5-linen);color:var(--s5-ink);font-family:var(--s5-text);font-weight:300;font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,video,iframe{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--s5-sea-text);outline-offset:3px}
+
+/* ---------- presentation chrome ---------- */
+.deck-progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--s5-sea);transform-origin:0 50%;transform:scaleX(0);z-index:100}
+.deck-pill{position:fixed;top:.75rem;z-index:99;font:500 .75rem/1 var(--s5-text);letter-spacing:.06em;padding:.6rem 1rem;border-radius:999px;background:rgba(255,255,255,.9);color:var(--s5-ink);border:1px solid var(--s5-rule);text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.deck-back{left:.75rem}
+.deck-back:hover{background:var(--s5-ink);color:#fff}
+.deck-tag{right:.75rem}
+
+/* ---------- shared ---------- */
+.s5-wrap{width:min(var(--s5-max),100% - var(--s5-gutter) * 2);margin-inline:auto}
+.s5-ch{position:relative;padding:9rem 0}
+.s5-center{text-align:center}
+.s5-label{display:inline-block;font:500 .75rem/1.4 var(--s5-text);letter-spacing:.24em;text-transform:uppercase;color:var(--s5-sea-text)}
+.s5-h2{font:400 4.25rem/1.04 var(--s5-display);letter-spacing:-.005em;color:var(--s5-ink)}
+.s5-h3{font:400 2.25rem/1.1 var(--s5-display);color:var(--s5-ink)}
+.s5-lede{max-width:34rem;margin:1.5rem auto 0;color:var(--s5-ink-dim)}
+.s5-head{text-align:center;max-width:52rem;margin:0 auto 5rem}
+.s5-head .s5-label{margin-bottom:1.5rem}
+.s5-flower{width:2.25rem;height:auto;margin:0 auto 1.25rem;opacity:.85}
+.s5-rule{display:block;width:4rem;height:1px;background:var(--s5-champ);margin:1.75rem auto}
+.s5-arch{border-radius:999rem 999rem 0 0;overflow:hidden;position:relative;background:var(--s5-foam)}
+.s5-pill{border-radius:999rem;overflow:hidden;position:relative;background:var(--s5-foam)}
+.s5-arch img,.s5-pill img,.s5-arch video,.s5-pill video{width:100%;height:100%;object-fit:cover}
+.s5-par .s5-reveal{position:relative}
+.s5-par img{position:absolute;left:0;top:-9%;height:118%}
+.s5-reveal{width:100%;height:100%}
+
+.s5-btns{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:.9rem;margin-top:2.5rem}
+.s5-btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3.25rem;padding:0 1.75rem;border-radius:999px;font:500 .8125rem/1 var(--s5-text);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid transparent;transition:background-color .4s ease,color .4s ease,border-color .4s ease;will-change:transform}
+.s5-btn--solid{background:var(--s5-sea-text);color:#fff}
+.s5-btn--solid:hover{background:var(--s5-ink)}
+.s5-btn--line{border-color:var(--s5-champ);color:var(--s5-ink);background:rgba(255,255,255,.55)}
+.s5-btn--line:hover{background:var(--s5-champ);color:var(--s5-ink)}
+.s5-btn small{font-size:.75rem;letter-spacing:.08em;opacity:.8;text-transform:none;font-weight:400}
+
+/* ---------- nav ---------- */
+.s5-nav{position:fixed;top:3.25rem;left:50%;transform:translateX(-50%);z-index:90;width:min(72rem,100% - 2rem);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:.55rem .6rem .55rem 1.5rem;border-radius:999px;background:rgba(247,245,240,.86);border:1px solid var(--s5-rule);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.s5-nav-l,.s5-nav-r{display:flex;align-items:center;gap:1.75rem;font:500 .75rem/1 var(--s5-text);letter-spacing:.16em;text-transform:uppercase}
+.s5-nav-r{justify-content:flex-end}
+.s5-nav a{text-decoration:none}
+.s5-nav-l a:hover,.s5-nav-r>a:not(.s5-btn):hover,.s5-drop a:hover{color:var(--s5-sea-text)}
+.s5-logo img{height:2.1rem;width:auto}
+.s5-about{position:relative}
+.s5-about>a::after{content:'';display:inline-block;width:.35rem;height:.35rem;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-.2rem) rotate(45deg);margin-left:.45rem}
+.s5-drop{position:absolute;top:100%;left:-1rem;padding-top:1rem;opacity:0;visibility:hidden;transform:translateY(.5rem);transition:all .35s ease}
+.s5-drop div{background:#fff;border:1px solid var(--s5-rule);border-radius:1.25rem;padding:.75rem;display:grid;gap:.25rem;min-width:11rem}
+.s5-drop a{padding:.6rem .75rem;border-radius:.75rem}
+.s5-about:hover .s5-drop,.s5-about:focus-within .s5-drop{opacity:1;visibility:visible;transform:none}
+.s5-nav .s5-btn{min-height:2.6rem;padding:0 1.25rem;font-size:.6875rem}
+.s5-burger{display:none;width:2.75rem;height:2.75rem;border-radius:50%;border:1px solid var(--s5-rule);background:#fff;cursor:pointer;justify-self:end;position:relative}
+.s5-burger span{position:absolute;left:50%;width:1.1rem;height:1px;background:var(--s5-ink);transform:translateX(-50%);transition:transform .4s ease,top .4s ease}
+.s5-burger span:nth-child(1){top:1.15rem}.s5-burger span:nth-child(2){top:1.55rem}
+.s5-menu-open .s5-burger span:nth-child(1){top:1.35rem;transform:translateX(-50%) rotate(45deg)}
+.s5-menu-open .s5-burger span:nth-child(2){top:1.35rem;transform:translateX(-50%) rotate(-45deg)}
+.s5-menu{position:fixed;inset:0;z-index:85;background:var(--s5-linen);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;text-align:center;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s;padding:6rem 1.5rem 5rem}
+.s5-menu::before{content:'';position:absolute;left:50%;top:50%;width:min(22rem,80vw);height:min(34rem,70svh);transform:translate(-50%,-50%);border:1px solid var(--s5-champ);border-radius:999rem 999rem 0 0;pointer-events:none}
+.s5-menu a{position:relative;font:400 2.1rem/1.1 var(--s5-display);text-decoration:none}
+.s5-menu .s5-btn{font:500 .8125rem/1 var(--s5-text);margin-top:1rem}
+.s5-menu-open .s5-menu{opacity:1;visibility:visible}
+
+/* ---------- 1 hero ---------- */
+.s5-hero{background:var(--s5-linen);padding:11.5rem 0 6rem;overflow:hidden}
+.s5-hero-copy{text-align:center;position:relative;z-index:2}
+.s5-hero h1{font:400 6.25rem/1 var(--s5-display);letter-spacing:-.01em;max-width:62rem;margin:1.75rem auto 0}
+.s5-hero-line{max-width:36rem;margin:1.75rem auto 0;color:var(--s5-ink-dim)}
+.s5-hero-line strong{display:block;font:400 1.75rem/1.2 var(--s5-display);color:var(--s5-ink);margin-bottom:.5rem}
+.s5-hero-stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:3.5rem;margin-top:4.5rem}
+.s5-hero-main{width:27rem;height:35rem;position:relative}
+.s5-hero-main::before{content:'';position:absolute;inset:-1.25rem -1.25rem 0;border:1px solid var(--s5-champ);border-bottom:0;border-radius:999rem 999rem 0 0}
+.s5-hero-main .s5-arch{width:100%;height:100%}
+.s5-hero-main img{object-position:50% 25%}
+.s5-hero-side{display:flex}
+.s5-hero-side--l{justify-content:flex-end;padding-bottom:4rem}
+.s5-hero-side--r{justify-content:flex-start;padding-bottom:7rem}
+.s5-hero-hall{width:14rem;height:19rem}
+.s5-hero-hall img{object-position:75% 50%}
+.s5-seal{position:relative;width:14rem;height:14rem;border-radius:50%;background:var(--s5-white);display:grid;place-items:center;text-align:center;border:1px solid var(--s5-rule)}
+.s5-seal svg{position:absolute;inset:.6rem;width:calc(100% - 1.2rem);height:calc(100% - 1.2rem)}
+.s5-seal text{font:500 .62rem var(--s5-text);letter-spacing:.32em;text-transform:uppercase;fill:var(--s5-sea-text)}
+.s5-seal b{display:block;font:400 2.6rem/1 var(--s5-display);font-weight:400}
+.s5-stars{display:block;color:var(--s5-champ);letter-spacing:.2em;font-size:.8rem;margin-top:.35rem}
+.s5-seal span.s5-sr{position:absolute}
+
+/* ---------- 2 services ---------- */
+.s5-services{background:var(--s5-white)}
+.s5-svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3.5rem;align-items:start}
+.s5-svc{text-align:center}
+.s5-svc:nth-child(2){margin-top:-4rem}
+.s5-svc .s5-arch{aspect-ratio:3/4;width:100%;max-width:21rem;margin:0 auto}
+.s5-svc h3{margin-top:2rem}
+.s5-svc ul{margin-top:1.25rem;display:grid;gap:0}
+.s5-svc li a{display:block;padding:.7rem 0;border-top:1px solid var(--s5-rule);text-decoration:none;font-size:.95rem;color:var(--s5-ink-dim);transition:color .3s ease,letter-spacing .4s ease}
+.s5-svc li:last-child a{border-bottom:1px solid var(--s5-rule)}
+.s5-svc li a:hover{color:var(--s5-sea-text);letter-spacing:.03em}
+.s5-svc ul{max-width:19rem;margin-inline:auto}
+
+/* ---------- 3 statement ---------- */
+.s5-statement{background:var(--s5-foam);min-height:100svh;display:flex;align-items:center;padding:8rem 0}
+.s5-statement .s5-wrap{text-align:center}
+.s5-statement h2{font:400 7.5rem/1 var(--s5-display);letter-spacing:-.01em}
+.s5-horizon{display:flex;align-items:center;justify-content:center;gap:1.25rem;margin:2.75rem auto}
+.s5-horizon i{display:block;width:12rem;height:1px;background:var(--s5-champ)}
+.s5-horizon i:first-child{transform-origin:100% 50%}.s5-horizon i:last-child{transform-origin:0 50%}
+.s5-horizon img{width:2rem;height:auto}
+.s5-statement p{max-width:46rem;margin:0 auto;font:300 1.75rem/1.5 var(--s5-text);color:var(--s5-ink)}
+
+/* ---------- 4 the arrival ---------- */
+.s5-arrival{background:var(--s5-sand);padding:9rem 0 0}
+.s5-arrival .s5-head{margin-bottom:3rem}
+.s5-rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding:2rem var(--s5-gutter) 8rem;max-width:84rem;margin:0 auto;position:relative}
+.s5-room{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.25rem}
+.s5-room-cap{order:2}
+.s5-room-arch{position:relative;order:1;width:100%;max-width:18rem}
+.s5-room-win{aspect-ratio:.76;width:100%;border-radius:999rem 999rem 0 0;overflow:hidden;position:relative;background:var(--s5-foam)}
+.s5-room-win img,.s5-room-win .s5-bgimg{width:100%;height:100%;object-fit:cover}
+.s5-bgimg{background-size:200% auto;background-position:100% 0;background-repeat:no-repeat}
+.s5-room-point{order:3}
+.s5-room-cap .s5-label{display:block;margin-bottom:.5rem}
+.s5-room-cap b{display:block;font:400 2.5rem/1.05 var(--s5-display)}
+.s5-room-cap em{display:block;font-style:normal;font-size:.8125rem;color:var(--s5-ink-dim);margin-top:.5rem;letter-spacing:.04em}
+.s5-room-point h3{font:400 1.75rem/1.15 var(--s5-display)}
+.s5-room-point p{color:var(--s5-ink-dim);margin-top:.6rem;max-width:20rem;margin-inline:auto}
+.s5-room-point .s5-btns{margin-top:1.25rem}
+.s5-rooms-dots{display:none}
+.js .s5-rooms{display:block;height:100svh;padding:0;max-width:none}
+.js .s5-room{position:absolute;inset:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:4.5rem;padding:8.5rem 4rem 5rem;text-align:left}
+.js .s5-room-cap{order:0;justify-self:end;text-align:right}
+.js .s5-room-arch{order:0;width:auto;max-width:none}
+.js .s5-room-win{width:auto;height:min(40rem,calc(100svh - 15rem))}
+.js .s5-room-point{order:0;justify-self:start;max-width:22rem}
+.js .s5-room-point p{margin-inline:0}
+.js .s5-room-point .s5-btns{justify-content:flex-start}
+.js .s5-room-cap b{font-size:3.75rem}
+.js .s5-room-arch::before{content:'';position:absolute;inset:-1.2rem -1.2rem 0;border:1px solid var(--s5-champ);border-bottom:0;border-radius:999rem 999rem 0 0;pointer-events:none}
+.js .s5-rooms-dots{display:flex;position:absolute;left:50%;bottom:1.75rem;transform:translateX(-50%);gap:.6rem;z-index:3}
+.s5-rooms-dots i{display:block;width:2.25rem;height:3px;border-radius:3px;background:rgba(38,50,53,.18);overflow:hidden;position:relative}
+.s5-rooms-dots i b{position:absolute;inset:0;background:var(--s5-sea-text);transform-origin:0 50%;transform:scaleX(0)}
+
+/* ---------- 5 AI ---------- */
+.s5-ai{background:var(--s5-white)}
+.s5-ai-stage{display:flex;justify-content:center;align-items:center;gap:0;position:relative}
+.s5-ai-side{width:16rem;height:23rem;position:relative;z-index:1}
+.s5-ai-side--l{margin-right:-2.5rem}.s5-ai-side--r{margin-left:-2.5rem}
+.s5-ai-side--l img{object-position:40% 50%}
+.s5-ai-side--r img{object-position:42% 50%}
+.s5-ai-main{width:24rem;height:32rem;position:relative;z-index:2;border:.6rem solid var(--s5-white);box-sizing:content-box;border-bottom:0}
+.s5-ai-main video{object-position:60% 50%}
+.s5-film-tag{position:absolute;left:50%;bottom:1.25rem;transform:translateX(-50%);z-index:3;background:rgba(255,255,255,.9);border-radius:999px;padding:.5rem .9rem;font:500 .6875rem/1 var(--s5-text);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;border:0;cursor:pointer;color:var(--s5-ink)}
+.s5-points{display:grid;grid-template-columns:repeat(3,1fr);max-width:62rem;margin:4.5rem auto 0;text-align:center}
+.s5-points li{padding:0 2rem;border-left:1px solid var(--s5-champ)}
+.s5-points li:first-child{border-left:0}
+.s5-points .s5-label{display:block;margin-bottom:.8rem}
+.s5-points b{display:block;font:400 1.75rem/1.15 var(--s5-display);font-weight:400}
+
+/* ---------- 6 professionals ---------- */
+.s5-pros{background:var(--s5-foam)}
+.s5-pros-frame{width:100%;aspect-ratio:2.05;border-radius:2.5rem;overflow:hidden;background:var(--s5-sand)}
+.s5-pros-frame img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.s5-roster{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;margin-top:3.5rem;text-align:center}
+.s5-roster li{padding-top:1.25rem;border-top:1px solid var(--s5-champ)}
+.s5-roster b{display:block;font:400 1.5rem/1.15 var(--s5-display);font-weight:400}
+.s5-roster span{display:block;margin-top:.5rem;font:500 .6875rem/1.4 var(--s5-text);letter-spacing:.2em;text-transform:uppercase;color:var(--s5-sea-text)}
+.s5-pros-note{text-align:center;margin-top:2.5rem;color:var(--s5-ink-dim);font-size:.95rem}
+.s5-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;margin-top:2rem}
+.s5-chips li{padding:.7rem 1.25rem;border-radius:999px;background:var(--s5-white);font:400 .9rem/1.2 var(--s5-text);border:1px solid var(--s5-rule)}
+
+/* ---------- 7 veneers ---------- */
+.s5-veneers{background:var(--s5-linen)}
+.s5-cmp{position:relative;max-width:58rem;margin:0 auto;aspect-ratio:1280/614.5;border-radius:12rem 12rem 1.5rem 1.5rem;overflow:hidden;touch-action:pan-y;cursor:ew-resize;user-select:none;--p:50%;background:var(--s5-sand)}
+.s5-cmp-layer{position:absolute;inset:0;background-image:url('https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6aab371b49d55c6273efe331_no_prep-veneer-dr.Krystal_Pham_case16-p-1080.jpeg');background-size:106% 212%;background-repeat:no-repeat}
+.s5-cmp-after{background-position:50% 98%}
+.s5-cmp-before{background-position:50% 2%;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.s5-cmp-line{position:absolute;top:0;bottom:0;left:var(--p);width:1px;background:#fff;transform:translateX(-.5px)}
+.s5-cmp-handle{position:absolute;top:50%;left:var(--p);width:4rem;height:4rem;border-radius:50%;background:var(--s5-white);transform:translate(-50%,-50%);display:grid;place-items:center;box-shadow:0 .5rem 1.5rem rgba(38,50,53,.18)}
+.s5-cmp-handle::before{content:'\2039\00a0\00a0\203A';font:400 1.4rem/1 var(--s5-display);color:var(--s5-ink)}
+.s5-cmp:focus-visible .s5-cmp-handle{outline:2px solid var(--s5-sea-text);outline-offset:3px}
+.s5-cmp-tag{position:absolute;bottom:1.25rem;padding:.45rem .85rem;border-radius:999px;background:rgba(255,255,255,.9);font:500 .6875rem/1 var(--s5-text);letter-spacing:.18em;text-transform:uppercase;pointer-events:none}
+.s5-cmp-tag--b{left:1.25rem}.s5-cmp-tag--a{right:1.25rem}
+.s5-cmp-hint{text-align:center;margin-top:1rem;font:500 .6875rem/1 var(--s5-text);letter-spacing:.2em;text-transform:uppercase;color:var(--s5-ink-dim)}
+.s5-ven-row{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:3.5rem;align-items:center;margin-top:5rem}
+.s5-ven-case,.s5-ven-film{border-radius:2rem;overflow:hidden;aspect-ratio:1;background:var(--s5-sand);position:relative}
+.s5-ven-case img,.s5-ven-film video{width:100%;height:100%;object-fit:cover}
+.s5-ven-mid{text-align:center}
+.s5-ven-mid ul{display:grid;gap:1.25rem;margin-top:1.75rem}
+.s5-ven-mid li{font:400 1.6rem/1.2 var(--s5-display)}
+.s5-ven-mid li+li{padding-top:1.25rem;border-top:1px solid var(--s5-champ)}
+.s5-ven-mid p{color:var(--s5-ink-dim);font-size:.98rem}
+.s5-cap{font:500 .6875rem/1.4 var(--s5-text);letter-spacing:.18em;text-transform:uppercase;color:var(--s5-ink-dim);text-align:center;margin-top:.9rem}
+
+/* ---------- 8 reviews ---------- */
+.s5-love{background:var(--s5-sand)}
+.s5-love-band{width:100%;aspect-ratio:2.975;max-width:70rem;margin:0 auto 4.5rem}
+.s5-love-band img{object-position:60% 50%}
+.s5-love-line{font:400 2.6rem/1.2 var(--s5-display);max-width:50rem;margin:0 auto;text-align:center}
+.s5-love-rec{max-width:40rem;margin:1.75rem auto 0;text-align:center;color:var(--s5-ink-dim)}
+.s5-love-rec strong{color:var(--s5-ink);font-weight:500}
+.s5-counts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:4.5rem;text-align:center}
+.s5-counts li{padding:1rem 1.5rem;border-left:1px solid var(--s5-champ)}
+.s5-counts li:first-child{border-left:0}
+.s5-counts b{display:block;font:400 4.5rem/1 var(--s5-display);font-weight:400;font-variant-numeric:tabular-nums}
+.s5-counts .s5-stars{margin:.6rem 0 .4rem;font-size:.9rem}
+.s5-counts span{font:500 .75rem/1.4 var(--s5-text);letter-spacing:.2em;text-transform:uppercase;color:var(--s5-sea-text)}
+
+/* ---------- 9 stories ---------- */
+.s5-stories{background:var(--s5-white)}
+.s5-films{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.s5-film-frame{position:relative;aspect-ratio:16/9;border-radius:1.5rem;overflow:hidden;background:var(--s5-foam)}
+.s5-film-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.s5-film-wrap{position:relative;padding:1rem}
+.s5-film-wrap::before{content:'';position:absolute;inset:0;border:1px solid var(--s5-champ);border-radius:2.25rem;pointer-events:none}
+.s5-film-txt{text-align:center;margin-top:2rem;padding:0 1rem}
+.s5-film-txt b{display:block;font:400 2rem/1.1 var(--s5-display);font-weight:400}
+.s5-film-txt .s5-label{margin:.5rem 0 1rem}
+.s5-film-txt p{color:var(--s5-ink-dim);max-width:28rem;margin:0 auto}
+
+/* ---------- 10 expect ---------- */
+.s5-expect{background:var(--s5-foam)}
+.s5-expect .s5-h2{font-size:3.5rem}
+.s5-steps{display:grid;grid-template-columns:1fr auto 1fr;gap:4rem;align-items:center;position:relative}
+.s5-steps-line{position:absolute;left:4%;right:4%;top:50%;height:1px;background:var(--s5-champ);transform-origin:0 50%}
+.s5-step{position:relative;z-index:1;text-align:center;background:var(--s5-foam);padding:2rem 1rem}
+.s5-step i{display:block;font:400 6rem/1 var(--s5-display);font-style:normal;color:var(--s5-sea-text)}
+.s5-step .s5-label{display:block;margin:1rem 0 .75rem}
+.s5-step h3{font:400 2.25rem/1.1 var(--s5-display)}
+.s5-step p{color:var(--s5-ink-dim);max-width:21rem;margin:1rem auto 0}
+.s5-expect-film{position:relative;z-index:1;width:22rem;height:30rem}
+.s5-expect-film video{object-position:50% 50%;background:var(--s5-sand)}
+
+/* ---------- 11 offices ---------- */
+.s5-offices{background:var(--s5-linen);overflow:clip}
+.s5-office-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.s5-office{background:var(--s5-white);border-radius:2.5rem;padding:1rem 1rem 2.75rem;text-align:center;border:1px solid var(--s5-rule);display:flex;flex-direction:column;align-items:center}
+.s5-office-img{align-self:stretch}
+.s5-office .s5-btns{margin-top:auto !important;padding-top:1.75rem}
+.s5-office-img{aspect-ratio:16/6;border-radius:999rem;overflow:hidden;background:var(--s5-foam)}
+.s5-office-img img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.s5-office .s5-label{margin-top:2.25rem}
+.s5-office h3{font:400 3rem/1.05 var(--s5-display);margin-top:.6rem}
+.s5-office-mood{font:400 1.25rem/1.3 var(--s5-display);color:var(--s5-champ-text);margin-top:.4rem}
+.s5-office p.s5-office-txt{max-width:28rem;margin:1.25rem auto 0;color:var(--s5-ink-dim);font-size:.98rem}
+.s5-office address{font-style:normal;margin-top:1.5rem;font-size:.95rem}
+.s5-office address a{font-weight:500;text-decoration:none;border-bottom:1px solid var(--s5-champ)}
+.s5-office .s5-btns{margin-top:1.75rem}
+.s5-hours{display:flex;justify-content:center;flex-wrap:wrap;gap:.5rem 1.75rem;margin:3rem auto 0;padding:1rem 2rem;border-radius:999px;border:1px solid var(--s5-champ);width:fit-content;font-size:.9rem}
+.s5-hours b{font-weight:500}
+
+/* ---------- 12 tips ---------- */
+.s5-tips{background:var(--s5-white)}
+.s5-posts{display:grid;grid-template-columns:1fr 1fr;gap:4rem;max-width:64rem;margin:0 auto}
+.s5-post{text-align:center;text-decoration:none;display:block}
+.s5-post .s5-arch{aspect-ratio:5/4;border-radius:999rem 999rem 1.25rem 1.25rem}
+.s5-post img{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.s5-post:hover img{transform:scale(1.05)}
+.s5-post .s5-label{margin-top:1.75rem}
+.s5-post h3{font:400 2rem/1.15 var(--s5-display);margin-top:.75rem}
+.s5-post p{color:var(--s5-ink-dim);margin:.9rem auto 0;max-width:26rem;font-size:.95rem}
+.s5-post-meta{display:block;margin-top:1rem;font-size:.8125rem;color:var(--s5-ink-dim);letter-spacing:.06em}
+
+/* ---------- 13 closing ---------- */
+.s5-close{background:var(--s5-sand);padding:10rem 0 8rem;overflow:hidden}
+.s5-close-arch{position:relative;max-width:44rem;margin:0 auto;padding:9rem 3rem 3rem;text-align:center}
+.s5-close-line{position:absolute;inset:0;border:1px solid var(--s5-champ);border-bottom:0;border-radius:999rem 999rem 0 0;pointer-events:none}
+.s5-close-line::after{content:'';position:absolute;left:50%;top:-.45rem;width:.9rem;height:.9rem;margin-left:-.45rem;border-radius:50%;background:var(--s5-champ)}
+.s5-close h2{font:400 5rem/1.02 var(--s5-display);position:relative}
+.s5-close p{max-width:30rem;margin:1.75rem auto 0;color:var(--s5-ink-dim);position:relative}
+.s5-form{display:grid;grid-template-columns:1fr 1.4fr auto;gap:.6rem;max-width:44rem;margin:3.5rem auto 0;background:var(--s5-white);border-radius:999px;padding:.5rem;border:1px solid var(--s5-rule)}
+.s5-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.s5-form input{font:400 .95rem var(--s5-text);border:0;background:transparent;padding:0 1.25rem;min-height:3rem;color:var(--s5-ink);min-width:0}
+.s5-form input+input,.s5-form label+input{border-left:1px solid var(--s5-rule)}
+.s5-form input::placeholder{color:var(--s5-ink-dim)}
+.s5-form button{cursor:pointer;border:0}
+.s5-form-msg{text-align:center;margin-top:1rem;min-height:1.6rem;font-size:.9rem;color:var(--s5-sea-text)}
+
+/* ---------- footer ---------- */
+.s5-foot{background:var(--s5-linen);padding:6rem 0 3rem;border-top:1px solid var(--s5-rule)}
+.s5-foot-logo{width:15rem;height:auto;margin:0 auto 3.5rem}
+.s5-foot-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;text-align:center;font-size:.95rem}
+.s5-foot-cols h4{margin:0 0 .9rem;font:400 1.6rem/1.1 var(--s5-display)}
+.s5-foot-cols p{color:var(--s5-ink-dim)}
+.s5-foot-cols a{text-decoration:none;border-bottom:1px solid var(--s5-champ);color:var(--s5-ink);font-weight:500}
+.s5-foot-svc{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.6rem;margin:3.5rem auto 0;max-width:56rem;font-size:.875rem}
+.s5-foot-svc a{text-decoration:none;color:var(--s5-ink-dim)}
+.s5-foot-svc a:hover,.s5-foot-soc a:hover{color:var(--s5-sea-text)}
+.s5-foot-soc{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:2.5rem}
+.s5-foot-soc a{padding:.55rem 1rem;border-radius:999px;border:1px solid var(--s5-rule);text-decoration:none;font:500 .6875rem/1 var(--s5-text);letter-spacing:.14em;text-transform:uppercase}
+.s5-foot-legal{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--s5-rule);font-size:.8125rem;color:var(--s5-ink-dim)}
+.s5-foot-legal a{color:var(--s5-ink-dim)}
+
+/* ---------- JS-guarded initial states (only when motion runs) ---------- */
+.js .s5-hero h1,.js .s5-hero [data-in]{visibility:hidden}
+
+/* ---------- breakpoints ---------- */
+@media (max-width:1279px){
+  .s5-hero h1{font-size:5.5rem}
+  .s5-statement h2{font-size:6.5rem}
+  .js .s5-room{gap:3rem;padding-inline:2.5rem}
+  .js .s5-room-cap b{font-size:3rem}
+  .s5-roster b{font-size:1.3rem}
+}
+@media (max-width:991px){
+  :root{--s5-gutter:2rem}
+  .s5-ch{padding:7rem 0}
+  .s5-h2{font-size:3.5rem}
+  .s5-nav-l{display:none}
+  .s5-nav{grid-template-columns:auto 1fr;padding-left:1.25rem}
+  .s5-nav-r>a:not(.s5-btn){display:none}
+  .s5-nav-r{gap:.75rem}
+  .s5-burger{display:block}
+  .s5-hero h1{font-size:4.6rem}
+  .s5-hero-stage{gap:1.5rem}
+  .s5-hero-main{width:21rem;height:28rem}
+  .s5-hero-hall{width:10rem;height:14rem}
+  .s5-seal{width:11rem;height:11rem}
+  .s5-seal b{font-size:2rem}
+  .s5-svc-grid{gap:2rem}
+  .s5-svc h3{font-size:1.9rem}
+  .s5-statement h2{font-size:5.25rem}
+  .s5-statement p{font-size:1.5rem}
+  .js .s5-room{grid-template-columns:1fr auto 1fr;gap:2rem;padding-inline:1.5rem}
+  .js .s5-room-cap b{font-size:2.5rem}
+  .js .s5-room-win{height:min(30rem,calc(100svh - 15rem))}
+  .s5-ai-side{width:12rem;height:17rem}
+  .s5-ai-main{width:18rem;height:24rem}
+  .s5-roster{grid-template-columns:repeat(3,1fr);row-gap:2rem}
+  .s5-ven-row{grid-template-columns:1fr 1fr;gap:2rem}
+  .s5-ven-mid{grid-column:1 / -1;order:-1}
+  .s5-counts b{font-size:3.5rem}
+  .s5-films{gap:1.5rem}
+  .s5-steps{gap:2rem}
+  .s5-expect-film{width:16rem;height:22rem}
+  .s5-step i{font-size:4.5rem}
+  .s5-step h3{font-size:1.9rem}
+  .s5-office-grid{gap:1.5rem}
+  .s5-office h3{font-size:2.4rem}
+  .s5-posts{gap:2rem}
+  .s5-close h2{font-size:4rem}
+}
+@media (max-width:767px){
+  :root{--s5-gutter:1rem}
+  .deck-pill{top:auto;bottom:.75rem}
+  .deck-tag{display:none}
+  .s5-nav{top:.75rem}
+  .s5-ch{padding:5.5rem 0}
+  .s5-head{margin-bottom:3rem}
+  .s5-h2{font-size:2.9rem}
+  .s5-hero{padding:7.5rem 0 4rem}
+  .s5-hero h1{font-size:3.6rem}
+  .s5-hero-line strong{font-size:1.5rem}
+  .s5-btns{flex-direction:column;align-items:stretch;max-width:22rem;margin-inline:auto}
+  .s5-hero-stage{grid-template-columns:1fr;justify-items:center;margin-top:3rem;position:relative;gap:0}
+  .s5-hero-main{width:min(19rem,78vw);height:auto;aspect-ratio:.77}
+  .s5-hero-side{position:absolute;bottom:0;padding:0}
+  .s5-hero-side--l{left:0}
+  .s5-hero-side--r{right:0;bottom:7rem}
+  .s5-hero-hall{width:6.5rem;height:9rem;border:.3rem solid var(--s5-linen);box-sizing:content-box}
+  .s5-seal{width:7.5rem;height:7.5rem}
+  .s5-seal b{font-size:1.4rem}
+  .s5-seal .s5-stars{font-size:.6rem}
+  .s5-seal text{font-size:.78rem}
+  .s5-svc-grid{grid-template-columns:1fr;gap:4rem}
+  .s5-svc:nth-child(2){margin-top:0}
+  .s5-svc .s5-arch{max-width:17rem}
+  .s5-statement{padding:6rem 0}
+  .s5-statement h2{font-size:3.6rem}
+  .s5-horizon i{width:5rem}
+  .s5-statement p{font-size:1.3rem}
+  .s5-rooms{grid-template-columns:1fr 1fr}
+  .js .s5-room{display:flex;flex-direction:column;justify-content:center;gap:1.25rem;padding:5rem 1rem 4.5rem;text-align:center}
+  .js .s5-room-cap,.js .s5-room-point{justify-self:auto;text-align:center;max-width:22rem}
+  .js .s5-room-cap{order:2}.js .s5-room-arch{order:1}.js .s5-room-point{order:3}
+  .js .s5-room-point p{margin-inline:auto;margin-top:.35rem;font-size:.95rem}
+  .js .s5-room-point .s5-btns{justify-content:center;margin-top:.75rem}
+  .js .s5-room-point h3{font-size:1.5rem}
+  .js .s5-room-cap b{font-size:2.25rem}
+  .js .s5-room-cap em{display:none}
+  .js .s5-room-cap .s5-label{margin-bottom:.25rem}
+  .js .s5-room-win{height:min(30rem,calc(100svh - 22rem))}
+  .js .s5-room-arch::before{inset:-.7rem -.7rem 0}
+  .js .s5-rooms-dots{bottom:4.25rem}
+  .s5-ai-side{width:7.5rem;height:11rem}
+  .s5-ai-side--l{margin-right:-1.25rem}.s5-ai-side--r{margin-left:-1.25rem}
+  .s5-ai-main{width:12rem;height:16rem;border-width:.35rem}
+  .s5-film-tag{font-size:.6rem;padding:.4rem .7rem;bottom:.75rem}
+  .s5-points{grid-template-columns:1fr;gap:1.75rem;margin-top:3rem}
+  .s5-points li{border-left:0;padding:1.75rem 0 0;border-top:1px solid var(--s5-champ)}
+  .s5-points li:first-child{border-top:0;padding-top:0}
+  .s5-pros-frame{aspect-ratio:1.45;border-radius:1.5rem}
+  .s5-roster{grid-template-columns:1fr 1fr}
+  .s5-roster li:first-child{grid-column:1 / -1}
+  .s5-cmp{border-radius:6rem 6rem 1rem 1rem}
+  .s5-cmp-handle{width:3rem;height:3rem}
+  .s5-ven-row{grid-template-columns:1fr 1fr;gap:1rem;margin-top:3rem}
+  .s5-ven-case,.s5-ven-film{border-radius:1.25rem}
+  .s5-love-band{margin-bottom:3rem}
+  .s5-love-line{font-size:2rem}
+  .s5-counts{grid-template-columns:1fr 1fr;row-gap:2rem}
+  .s5-counts li:nth-child(3){border-left:0}
+  .s5-counts b{font-size:3rem}
+  .s5-films{grid-template-columns:1fr;gap:3rem}
+  .s5-film-wrap{padding:.6rem}
+  .s5-film-wrap::before{border-radius:1.75rem}
+  .s5-expect .s5-h2{font-size:2.5rem}
+  .s5-steps{grid-template-columns:1fr;gap:1rem;justify-items:center}
+  .s5-steps-line{left:50%;right:auto;top:0;bottom:0;width:1px;height:auto;transform-origin:50% 0}
+  .s5-expect-film{width:16rem;height:21rem}
+  .s5-office-grid{grid-template-columns:1fr;gap:2rem}
+  .s5-office{border-radius:1.75rem}
+  .s5-hours{border-radius:1.5rem;flex-direction:column;align-items:center;gap:.35rem;text-align:center}
+  .s5-posts{grid-template-columns:1fr;gap:3.5rem}
+  .s5-close{padding:6rem 0 6rem}
+  .s5-close-arch{padding:6.5rem 1.25rem 2rem}
+  .s5-close h2{font-size:3rem}
+  .s5-form{grid-template-columns:1fr;border-radius:1.5rem}
+  .s5-form input{border:0 !important;border-bottom:1px solid var(--s5-rule) !important}
+  .s5-foot-cols{grid-template-columns:1fr;gap:2.25rem}
+  .s5-foot{padding-bottom:5rem}
+}
+@media (max-width:479px){
+  .s5-hero h1{font-size:3.1rem}
+  .s5-h2{font-size:2.6rem}
+  .s5-statement h2{font-size:3.2rem}
+  .s5-love-line{font-size:1.8rem}
+  .s5-close h2{font-size:2.7rem}
+  .s5-office h3{font-size:2.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="deck-progress" aria-hidden="true"></div>
+<a class="deck-pill deck-back" href="index.html">&larr; All 5 concepts</a>
+<span class="deck-pill deck-tag">Concept 05 · Shoreline Retreat</span>
+
+<nav class="s5-nav" aria-label="Main">
+  <div class="s5-nav-l">
+    <a href="https://www.oceanicdental.com/services">Services</a>
+    <a href="https://www.oceanicdental.com/insurance-payment">Insurance &amp; Payment</a>
+    <span class="s5-about"><a href="https://www.oceanicdental.com/about/our-story">About</a>
+      <span class="s5-drop"><div><a href="https://www.oceanicdental.com/about/our-story">Our Story</a><a href="https://www.oceanicdental.com/about/our-team">Our Team</a></div></span>
+    </span>
+  </div>
+  <a class="s5-logo" href="https://www.oceanicdental.com/" aria-label="Oceanic Dental home"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6722a3d143778f507af0d612_OCEANIC-LOGO-WEB-p-500.png" width="500" height="112" alt="Oceanic Dental"></a>
+  <div class="s5-nav-r">
+    <a href="https://www.oceanicdental.com/contact">Contact</a>
+    <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Online</a>
+    <button class="s5-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="s5-menu"><span></span><span></span></button>
+  </div>
+</nav>
+<div class="s5-menu" id="s5-menu" aria-hidden="true">
+  <a href="https://www.oceanicdental.com/services">Services</a>
+  <a href="https://www.oceanicdental.com/insurance-payment">Insurance &amp; Payment</a>
+  <a href="https://www.oceanicdental.com/about/our-story">Our Story</a>
+  <a href="https://www.oceanicdental.com/about/our-team">Our Team</a>
+  <a href="https://www.oceanicdental.com/contact">Contact</a>
+  <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book">Book Online</a>
+</div>
+
+<main>
+
+<!-- 1 · Arrival hero -->
+<section class="s5-hero" data-chapter="0" data-chapter-name="The Welcome">
+  <div class="s5-wrap s5-hero-copy">
+    <span class="s5-label" data-in>Huntington Beach · Fountain Valley</span>
+    <h1 class="s5-split-hero">Cosmetic, Implant &amp; Family Dental&nbsp;Care</h1>
+    <p class="s5-hero-line" data-in><strong>Smile Bright, Feel Right.</strong>Experience concierge-level dental care that feels just right, because your smile deserves nothing less.</p>
+    <div class="s5-btns" data-in>
+      <a class="s5-btn s5-btn--line" href="tel:+17148410203" data-magnetic>Huntington Beach <small>(714) 841-0203</small></a>
+      <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Online</a>
+      <a class="s5-btn s5-btn--line" href="tel:+17143780085" data-magnetic>Fountain Valley <small>(714) 378-0085</small></a>
+    </div>
+  </div>
+  <div class="s5-wrap s5-hero-stage">
+    <div class="s5-hero-side s5-hero-side--l">
+      <div data-in><div class="s5-arch s5-hero-hall"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66fd8193cd325a53732ab315_IMG_81066.jpg" width="5472" height="2988" alt="The Oceanic Dental hallway with the flower logo"></div></div>
+    </div>
+    <div class="s5-hero-main">
+      <div class="s5-arch"><div class="s5-reveal s5-hero-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6a7a3904ec566b2d2b4b8798_4a1f3084a5b030a35b78bcfb74f3aded_Dr.Krystal_Pham_Oceanic_dental_2026.jpeg" width="3648" height="3648" alt="Dr. Krystal Pham, D.D.S., at the Oceanic Dental reception"></div></div>
+    </div>
+    <div class="s5-hero-side s5-hero-side--r">
+      <div data-in><div class="s5-seal">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="s5-ring" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text><textPath href="#s5-ring">Huntington Beach · Fountain Valley · Five-star care ·</textPath></text></svg>
+        <div><b>2,000+</b><span class="s5-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="s5-label" style="font-size:.6rem;letter-spacing:.18em;margin-top:.3rem">five-star reviews</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · Services -->
+<section class="s5-ch s5-services" data-chapter="1" data-chapter-name="The Menu">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">Dental Services We Offer</span>
+      <h2 class="s5-h2 s5-split">Everything You Need for a Happy, Healthy Smile</h2>
+      <p class="s5-lede">Our in-house specialists provide everything from routine check-ups to advanced cosmetic and full-mouth restorative treatments, for a seamless journey to the smile you love.</p>
+    </header>
+    <div class="s5-svc-grid">
+      <article class="s5-svc">
+        <div class="s5-arch s5-par" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/670ffd4d3cf853542eb469fa_Oceanic-dental-Jamie-Hygenist.jpg" width="1000" height="1000" loading="lazy" alt="A hygienist caring for a patient"></div></div>
+        <h3 class="s5-h3">General Dentistry</h3>
+        <ul>
+          <li><a href="https://www.oceanicdental.com/services/first-visit-new-patient-exam">Exams, X-ray &amp; oral cancer scans</a></li>
+          <li><a href="https://www.oceanicdental.com/services/cleanings-and-gum-disease-treatment">Cleanings &amp; gum disease treatment</a></li>
+          <li><a href="https://www.oceanicdental.com/services/sedation-dentistry">Sedation dentistry</a></li>
+        </ul>
+      </article>
+      <article class="s5-svc">
+        <div class="s5-arch s5-par" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/670ee958b89fe0dfb7c5278b_Oceanic-dental-veneer.jpg" width="1024" height="1024" loading="lazy" alt="A smiling woman"></div></div>
+        <h3 class="s5-h3">Cosmetic Dentistry</h3>
+        <ul>
+          <li><a href="https://www.oceanicdental.com/services/cosmetic-dentistry">Cosmetic &amp; teeth whitening</a></li>
+          <li><a href="https://www.oceanicdental.com/noprep">Porcelain crowns &amp; No-Prep veneers</a></li>
+          <li><a href="https://www.oceanicdental.com/services/invisalign-clear-teeth-straightening">Invisalign&reg; teeth straightening</a></li>
+        </ul>
+      </article>
+      <article class="s5-svc">
+        <div class="s5-arch s5-par" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/670ed75009e0aca1738d361a_Oceanic-dental-implant.jpg" width="1613" height="1613" loading="lazy" alt="An implant crown held in a hand"></div></div>
+        <h3 class="s5-h3">Restorative Dentistry</h3>
+        <ul>
+          <li><a href="https://www.oceanicdental.com/services/full-mouth-restoration">Full-mouth restoration</a></li>
+          <li><a href="https://www.oceanicdental.com/services/root-canal-therapy">Root canal therapy</a></li>
+          <li><a href="https://www.oceanicdental.com/services/composite-tooth-colored-fillings">Composite fillings</a></li>
+        </ul>
+      </article>
+    </div>
+    <div class="s5-btns"><a class="s5-btn s5-btn--line" href="https://www.oceanicdental.com/services" data-magnetic>All services</a></div>
+  </div>
+</section>
+
+<!-- 3 · Statement -->
+<section class="s5-statement" data-chapter="2" data-chapter-name="The Promise">
+  <div class="s5-wrap">
+    <h2 class="s5-split">Smile Bright, Feel&nbsp;Right.</h2>
+    <div class="s5-horizon" aria-hidden="true"><i></i><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66d0a95d2217b15864e41c13_LOGO-CYAN-SMALL.png" width="150" height="150" alt=""><i></i></div>
+    <p class="s5-fill">At Oceanic Dental, we believe everyone deserves high-quality, personalized dental care. That's why we're dedicated to making every visit effective, comfortable, and as pleasant as possible.</p>
+  </div>
+</section>
+
+<!-- 4 · Concierge: the arrival -->
+<section class="s5-arrival" data-chapter="3" data-chapter-name="The Arrival">
+  <div class="s5-wrap">
+    <header class="s5-head">
+      <span class="s5-label s5-tag">Your Smile, Our Priority</span>
+      <h2 class="s5-h2 s5-split">Concierge-Level Services for Exceptional Care</h2>
+    </header>
+  </div>
+  <div class="s5-rooms">
+    <figure class="s5-room">
+      <figcaption class="s5-room-cap"><span class="s5-label">The visit · I</span><b>Reception</b><em>Fountain Valley</em></figcaption>
+      <div class="s5-room-arch"><div class="s5-room-win"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66fc692201459effc1e4a4f8_Oceanic-Dental-Home.jpg" width="1534" height="803" loading="lazy" alt="The Oceanic Dental reception and flower logo wall" style="object-position:30% 50%"></div></div>
+      <div class="s5-room-point"><h3>Personalized Care</h3><p>From your first consultation to your final result, we provide personalized, one-on-one care.</p></div>
+    </figure>
+    <figure class="s5-room">
+      <figcaption class="s5-room-cap"><span class="s5-label">The visit · II</span><b>The Chair</b><em>Blanket and headphones</em></figcaption>
+      <div class="s5-room-arch"><div class="s5-room-win"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66fd98b38f58a153e5c147e1_Concierge%20care.jpg" width="1024" height="1024" loading="lazy" alt="A patient relaxing in the chair with headphones and a blanket" style="object-position:45% 50%"></div></div>
+      <div class="s5-room-point"><h3>Highest Comfort and Satisfaction</h3><p>Giving you the attention you deserve.</p></div>
+    </figure>
+    <figure class="s5-room">
+      <figcaption class="s5-room-cap"><span class="s5-label">The visit · III</span><b>The Consultation</b><em>With Dr. Krystal Pham</em></figcaption>
+      <div class="s5-room-arch"><div class="s5-room-win"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/67101ec8b4293f78a7c2b4d3_Oceanic-dental-dr-Pham-consultation.jpg" width="1000" height="1000" loading="lazy" alt="Dr. Krystal Pham explaining a treatment model to a patient" style="object-position:68% 50%"></div></div>
+      <div class="s5-room-point"><h3>Expertise with Compassion</h3><p>Combining expertise with genuine compassion.</p></div>
+    </figure>
+    <figure class="s5-room">
+      <figcaption class="s5-room-cap"><span class="s5-label">The visit · IV</span><b>The Result</b><em>No-Prep veneers, Dr. Pham's case</em></figcaption>
+      <div class="s5-room-arch"><div class="s5-room-win"><div class="s5-bgimg" role="img" aria-label="A no-prep veneer patient smiling after treatment" style="background-image:url('https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6aab36c79db1700ec3287b93_no_prep-veneer-dr.Krystal_Pham_case18.jpeg')"></div></div></div>
+      <div class="s5-room-point"><h3>Smile Bright, Feel Right.</h3><div class="s5-btns"><a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Now</a></div></div>
+    </figure>
+    <div class="s5-rooms-dots" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+  </div>
+</section>
+
+<!-- 5 · AI technology -->
+<section class="s5-ch s5-ai" data-chapter="4" data-chapter-name="The Clarity">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">Future of Dentistry</span>
+      <h2 class="s5-h2 s5-split">Experience the Latest AI&nbsp;Technology</h2>
+      <p class="s5-lede">Our state-of-the-art equipment and AI technology allow us to deliver precise and comprehensive diagnoses and treatments with unparalleled accuracy and efficiency.</p>
+    </header>
+    <div class="s5-ai-stage">
+      <div class="s5-pill s5-ai-side s5-ai-side--l"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6916522ae6d96094bfb792ca_dental_x-ray-tech-p-800.jpg" width="800" height="800" loading="lazy" alt="An assistant reviewing a panoramic X-ray on screen"></div>
+      <div class="s5-arch s5-ai-main">
+        <video class="s5-autofilm" muted loop playsinline autoplay preload="metadata" poster="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6710080dffdf06921d275cd5_Oceanic-dental-itero-3Dscan-poster-00001.jpg" aria-label="iTero 3D scan in progress">
+          <source src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6710080dffdf06921d275cd5_Oceanic-dental-itero-3Dscan-transcode.mp4" type="video/mp4">
+        </video>
+        <button class="s5-film-tag" type="button" data-toggle-film>iTero 3D scan · Pause</button>
+      </div>
+      <div class="s5-pill s5-ai-side s5-ai-side--r"><img src="https://cdn.prod.website-files.com/682138d7f666525258b6422c/68c30334bf3a6fc9c0612e62_oceanic-dental-AI-overjet-1.jpg" width="3491" height="1974" loading="lazy" alt="An AI X-ray readout on a tablet"></div>
+    </div>
+    <ul class="s5-points">
+      <li><b>Comprehensive Diagnoses</b></li>
+      <li><b>Precise and Effective Treatments</b></li>
+      <li><b>Exceptional Dental Experience</b></li>
+    </ul>
+    <div class="s5-btns"><a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Now</a></div>
+  </div>
+</section>
+
+<!-- 6 · Professionals -->
+<section class="s5-ch s5-pros" data-chapter="5" data-chapter-name="The Hosts">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">Local Experts You Can Trust</span>
+      <h2 class="s5-h2 s5-split">Top-Rated Dental Professionals</h2>
+      <p class="s5-lede">Our top-rated doctors and dental specialists provide all services in-house, eliminating the need for multiple providers. This saves you time, reduces headaches, and cuts extra costs.</p>
+    </header>
+    <div class="s5-pros-frame" data-allow-overflow><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6a7a380f4bb753dd019fa496_Oceanic_Dental_Doctors_2026-p-1600.jpeg" width="1600" height="957" loading="lazy" alt="The Oceanic Dental doctors at the logo wall, 2026"></div>
+    <ul class="s5-roster">
+      <li><b>Dr. Krystal Pham, D.D.S.</b><span>Lead dentist</span></li>
+      <li><b>Dr. William Noh</b><span>Oral Surgeon</span></li>
+      <li><b>Dr. Mamoru Tanaka</b><span>Prosthodontist</span></li>
+      <li><b>Dr. Liz Hoang</b><span>Periodontist</span></li>
+      <li><b>Dr. Samar Hubbi</b><span>Endodontist</span></li>
+    </ul>
+    <p class="s5-pros-note">Every clinical doctor and team member brings a minimum of five years of hands-on experience.</p>
+    <ul class="s5-chips"><li>All Treatments Under One Roof</li><li>Time and Cost Savings</li><li>Seamless Experience</li></ul>
+    <div class="s5-btns"><a class="s5-btn s5-btn--line" href="https://www.oceanicdental.com/about/our-team" data-magnetic>Meet our team</a></div>
+  </div>
+</section>
+
+<!-- 7 · No-Prep veneers -->
+<section class="s5-ch s5-veneers" data-chapter="6" data-chapter-name="The Refresh">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">No-Prep Porcelain Veneers</span>
+      <h2 class="s5-h2 s5-split">Add Beauty. Preserve the&nbsp;Tooth.</h2>
+      <p class="s5-lede">Considering a smile refresh without drilling? Oceanic Dental offers true no-prep porcelain veneers for qualified smiles: ultra-thin veneers that transform the shape, proportion and color of your smile while preserving the healthy enamel underneath.</p>
+    </header>
+    <div class="s5-cmp" role="slider" tabindex="0" aria-label="Before and after no-prep veneers, drag to compare" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% before">
+      <div class="s5-cmp-layer s5-cmp-after"></div>
+      <div class="s5-cmp-layer s5-cmp-before"></div>
+      <span class="s5-cmp-tag s5-cmp-tag--b">Before</span><span class="s5-cmp-tag s5-cmp-tag--a">After</span>
+      <span class="s5-cmp-line"></span><span class="s5-cmp-handle"></span>
+    </div>
+    <p class="s5-cmp-hint">Drag, or use the arrow keys</p>
+    <div class="s5-ven-row">
+      <figure><div class="s5-ven-case" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6aab371a9e06ee026f14b468_no_prep-veneer-dr.Krystal_Pham_case12.jpeg" width="1254" height="1254" loading="lazy" alt="No-prep veneer case, before and after"></div></div><figcaption class="s5-cap">Before · After</figcaption></figure>
+      <div class="s5-ven-mid">
+        <ul><li>No drilling. Typically no shots. No temporary veneers.</li><li>Remarkably thin. Beautifully natural.</li></ul>
+        <div class="s5-btns">
+          <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Now</a>
+          <a class="s5-btn s5-btn--line" href="https://www.oceanicdental.com/noprep" data-magnetic>Learn about No-Prep</a>
+        </div>
+      </div>
+      <figure><div class="s5-ven-film"><video controls playsinline preload="none" poster="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6aab4678a4474d4c3cf2e4b3_No_prep_veneers_patient_oceanic_dental_poster.0000000.jpg" aria-label="No-prep veneers patient film"><source src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6aab4678a4474d4c3cf2e4b3_No_prep_veneers_patient_oceanic_dental_mp4.mp4" type="video/mp4"></video></div><figcaption class="s5-cap">A no-prep patient · Film</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · Patients love us -->
+<section class="s5-ch s5-love" data-chapter="7" data-chapter-name="The Guestbook">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart" style="margin-bottom:3.5rem">
+      <span class="s5-label s5-tag">Our Patients Love Us!</span>
+    </header>
+    <div class="s5-pill s5-love-band s5-par" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66fcd588a7d21f1ced9c3db6_oceanic-dental-bright-smile-p-1600.jpg" width="1600" height="538" loading="lazy" alt="A woman with a bright smile"></div></div>
+    <p class="s5-love-line s5-split">When it comes to your dental care, you don't want just any dentist. You want the best dentist. And that's exactly what you'll find at Oceanic Dental.</p>
+    <p class="s5-love-rec">Recognized as one of Orange County's best dental practices by the Orange County Register People's Choice Awards, with <strong>2,000+</strong> combined 5-star reviews and trusted by over <strong>15,000</strong> patients in our local communities.</p>
+    <ul class="s5-counts">
+      <li><b data-count="1420">1,420+</b><span class="s5-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>PatientConnect</span></li>
+      <li><b data-count="850">850+</b><span class="s5-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>Yelp</span></li>
+      <li><b data-count="300">300+</b><span class="s5-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>Google</span></li>
+      <li><b data-count="360">360+</b><span class="s5-stars" aria-label="Five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span>Healthgrades</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 9 · Real stories -->
+<section class="s5-ch s5-stories" data-chapter="8" data-chapter-name="The Stories">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">Patient films</span>
+      <h2 class="s5-h2 s5-split">Real Stories. Real Smiles.</h2>
+      <p class="s5-lede">Hear directly from our patients about their experiences, their journeys, and why they trust Oceanic Dental with their smiles.</p>
+    </header>
+    <div class="s5-films">
+      <article>
+        <div class="s5-film-wrap"><div class="s5-film-frame"><iframe src="https://www.youtube.com/embed/SMSbvMEPLIc?rel=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Kurt Lichthardt, Huntington Beach patient" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+        <div class="s5-film-txt"><b>Kurt Lichthardt</b><span class="s5-label">Huntington Beach patient</span><p>For over 10 years, Kurt has trusted Dr. Pham and our team of skilled doctors and hygienists with his dental health.</p></div>
+      </article>
+      <article>
+        <div class="s5-film-wrap"><div class="s5-film-frame"><iframe src="https://www.youtube.com/embed/3sysxJy3Np4?rel=0" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Dr. Julia Close, Fountain Valley patient" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>
+        <div class="s5-film-txt"><b>Dr. Julia Close</b><span class="s5-label">Fountain Valley patient</span><p>Her 14+ year journey with Dr. Pham and the team, and how that care transformed her smile and her confidence.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 10 · What to expect -->
+<section class="s5-ch s5-expect" data-chapter="9" data-chapter-name="The Itinerary">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">What to Expect at Your Visit</span>
+      <h2 class="s5-h2 s5-split">Follow our 2 easy steps to achieve a selfie-worthy smile!</h2>
+    </header>
+    <div class="s5-steps">
+      <span class="s5-steps-line" aria-hidden="true"></span>
+      <div class="s5-step"><i>I</i><span class="s5-label">Step 1</span><h3>Let's Chat</h3><p>Book an in-person consultation to discuss your dental needs and goals. You'll leave with a personalized plan for your best smile.</p></div>
+      <div class="s5-arch s5-expect-film"><video controls playsinline preload="none" poster="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6aac3076fdd6eb92f6c69679_Highest%20Patient%20Comfort%20Dr.Krystal%20Pham%2C%20DDS_poster.0000000.jpg" aria-label="Highest Patient Comfort, Dr. Krystal Pham, DDS"><source src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c%2F6aac3076fdd6eb92f6c69679_Highest%20Patient%20Comfort%20Dr.Krystal%20Pham%2C%20DDS_mp4.mp4" type="video/mp4"></video></div>
+      <div class="s5-step"><i>II</i><span class="s5-label">Step 2</span><h3>Smile Transformation</h3><p>Gentle, attentive care, whether it's a cleaning or an advanced treatment. You'll walk away ready to show off a bright, confident smile!</p></div>
+    </div>
+    <p class="s5-cap" style="margin-top:1.5rem">Film · Highest Patient Comfort, Dr. Krystal Pham, DDS</p>
+  </div>
+</section>
+
+<!-- 11 · Offices -->
+<section class="s5-ch s5-offices" data-chapter="10" data-chapter-name="The Residences">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">Two offices</span>
+      <h2 class="s5-h2 s5-split">Book an Appointment</h2>
+      <p class="s5-lede">Ready to transform your smile and boost your confidence? Schedule your visit at one of our convenient locations.</p>
+    </header>
+    <div class="s5-office-grid">
+      <article class="s5-office s5-office--l">
+        <div class="s5-office-img" data-allow-overflow><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6887f0a317119c082fbf9c28_Oceanic-dental-huntington-beach-office-small-p-1080.jpg" width="1080" height="608" loading="lazy" alt="The Huntington Beach office building beside the water"></div>
+        <span class="s5-label">Near Bella Terra</span>
+        <h3>Huntington Beach</h3>
+        <p class="s5-office-mood">Serene &amp; Cozy</p>
+        <p class="s5-office-txt">Personalized dental care in a serene setting, with easy access off the 405 and Beach Blvd. Many patients visit from Oak View and Adams.</p>
+        <address>16052 Beach Blvd, Ste 112, Huntington Beach, CA 92647<br><a href="tel:+17148410203">(714) 841-0203</a></address>
+        <div class="s5-btns">
+          <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/contact-huntington-beach" data-magnetic>Book in Huntington Beach</a>
+          <a class="s5-btn s5-btn--line" href="https://maps.google.com/?q=16052+Beach+Blvd+Suite+112+Huntington+Beach+CA+92647" data-magnetic>Get Directions</a>
+        </div>
+      </article>
+      <article class="s5-office s5-office--r">
+        <div class="s5-office-img" data-allow-overflow><img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6887f0a7188237b2d0b42c15_Oceanic-dental-Fountain-Valley-office-small.jpg" width="1536" height="864" loading="lazy" alt="The Fountain Valley office"></div>
+        <span class="s5-label">Near Mile Square Park</span>
+        <h3>Fountain Valley</h3>
+        <p class="s5-office-mood">Modern &amp; Welcoming</p>
+        <p class="s5-office-txt">The latest technology, easy access from the 405, and five minutes from South Coast Plaza.</p>
+        <address>17991 Euclid St, Fountain Valley, CA 92708<br><a href="tel:+17143780085">(714) 378-0085</a></address>
+        <div class="s5-btns">
+          <a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/contact-fountain-valley" data-magnetic>Book in Fountain Valley</a>
+          <a class="s5-btn s5-btn--line" href="https://maps.google.com/?q=17991+Euclid+St+Fountain+Valley+CA+92708" data-magnetic>Get Directions</a>
+        </div>
+      </article>
+    </div>
+    <p class="s5-hours"><span><b>Mon-Thu</b> 8am-5pm</span><span><b>Fri</b> 7am-3pm</span><span><b>Sat</b> by appointment</span><span><b>Sun</b> closed</span></p>
+  </div>
+</section>
+
+<!-- 12 · Tips -->
+<section class="s5-ch s5-tips" data-chapter="11" data-chapter-name="The Journal">
+  <div class="s5-wrap">
+    <header class="s5-head s5-depart">
+      <span class="s5-label s5-tag">From your trusted dental team</span>
+      <h2 class="s5-h2 s5-split">Expert Tips</h2>
+      <p class="s5-lede">Expert-recommended strategies to keep your teeth and gums healthy.</p>
+    </header>
+    <div class="s5-posts">
+      <a class="s5-post" href="https://www.oceanicdental.com/resource/choosing-the-right-dental-implant-provider-in-fountain-valley">
+        <div class="s5-arch" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/682138d7f666525258b6422c/69265b3ccc3d3f584d24e1d1_dental_implant_provider_oceanic_dental.jpg" width="1456" height="816" loading="lazy" alt="A row of model teeth with one implant"></div></div>
+        <span class="s5-label">Oral Care</span>
+        <h3>Choosing the Right Dental Implant Provider in Fountain Valley</h3>
+        <p>A clear, concise guide to choosing the right implant provider in Fountain Valley, Huntington Beach and the surrounding OC area.</p>
+        <span class="s5-post-meta">November 25, 2025 · Oceanic Dental</span>
+      </a>
+      <a class="s5-post" href="https://www.oceanicdental.com/resource/why-diet-matters-for-your-summer-smile">
+        <div class="s5-arch" data-clip data-allow-overflow><div class="s5-reveal"><img src="https://cdn.prod.website-files.com/682138d7f666525258b6422c/6837b464955b19d8eadc7594_Summer_Diet_Guide_Oceanic_Dental.jpg" width="1456" height="816" loading="lazy" alt="A slice of watermelon held up on a beach"></div></div>
+        <span class="s5-label">Oral Care</span>
+        <h3>Why Diet Matters for Your Summer Smile</h3>
+        <p>Hydrating fruits, crunchy veggies and calcium-rich treats keep your teeth strong and gleaming.</p>
+        <span class="s5-post-meta">May 28, 2025 · Oceanic Dental</span>
+      </a>
+    </div>
+    <div class="s5-btns"><a class="s5-btn s5-btn--line" href="https://www.oceanicdental.com/resource" data-magnetic>View more</a></div>
+  </div>
+</section>
+
+<!-- 13 · Closing -->
+<section class="s5-close" data-chapter="12" data-chapter-name="The Invitation">
+  <div class="s5-wrap">
+    <div class="s5-close-arch">
+      <span class="s5-close-line" aria-hidden="true"></span>
+      <img class="s5-flower" src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66d0a95d2217b15864e41c13_LOGO-CYAN-SMALL.png" width="150" height="150" loading="lazy" alt="" style="position:relative">
+      <h2 class="s5-split">Achieve The Smile You Love, Today!</h2>
+      <div class="s5-btns" style="position:relative"><a class="s5-btn s5-btn--solid" href="https://www.oceanicdental.com/book" data-magnetic>Book Now</a></div>
+      <p>If you still have questions or need more info, we're here to help. Give us a call or send us a quick message.</p>
+    </div>
+    <form class="s5-form" novalidate>
+      <label for="s5-email">Email</label><input id="s5-email" type="email" placeholder="Email" autocomplete="email">
+      <label for="s5-q">Question</label><input id="s5-q" type="text" placeholder="Your question">
+      <button class="s5-btn s5-btn--solid" type="submit">Send</button>
+    </form>
+    <p class="s5-form-msg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="s5-foot">
+  <div class="s5-wrap">
+    <img class="s5-foot-logo" src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6722a3d143778f507af0d612_OCEANIC-LOGO-WEB-p-500.png" width="500" height="112" loading="lazy" alt="Oceanic Dental">
+    <div class="s5-foot-cols">
+      <div><h4>Huntington Beach</h4><p>16052 Beach Blvd, Ste 112<br>Huntington Beach, CA 92647</p><p style="margin-top:.6rem"><a href="tel:+17148410203">(714) 841-0203</a></p></div>
+      <div><h4>Hours</h4><p>Mon-Thu 8am-5pm<br>Fri 7am-3pm<br>Sat by appointment · Sun closed</p></div>
+      <div><h4>Fountain Valley</h4><p>17991 Euclid St<br>Fountain Valley, CA 92708</p><p style="margin-top:.6rem"><a href="tel:+17143780085">(714) 378-0085</a></p></div>
+    </div>
+    <nav class="s5-foot-svc" aria-label="Services">
+      <a href="https://www.oceanicdental.com/services/first-visit-new-patient-exam">Exams</a>
+      <a href="https://www.oceanicdental.com/services/cleanings-and-gum-disease-treatment">Cleanings &amp; gum care</a>
+      <a href="https://www.oceanicdental.com/services/sedation-dentistry">Sedation dentistry</a>
+      <a href="https://www.oceanicdental.com/services/cosmetic-dentistry">Cosmetic dentistry</a>
+      <a href="https://www.oceanicdental.com/services/teeth-whitening">Teeth whitening</a>
+      <a href="https://www.oceanicdental.com/noprep">No-Prep veneers</a>
+      <a href="https://www.oceanicdental.com/services/invisalign-clear-teeth-straightening">Invisalign&reg;</a>
+      <a href="https://www.oceanicdental.com/services/full-mouth-restoration">Full-mouth restoration</a>
+      <a href="https://www.oceanicdental.com/services/root-canal-therapy">Root canal therapy</a>
+      <a href="https://www.oceanicdental.com/services/composite-tooth-colored-fillings">Composite fillings</a>
+    </nav>
+    <div class="s5-foot-soc">
+      <a href="https://www.facebook.com/OceanicDental/">Facebook HB</a>
+      <a href="https://www.instagram.com/oceanic_dental/">Instagram HB</a>
+      <a href="https://www.facebook.com/OceanicDentalFV/">Facebook FV</a>
+      <a href="https://www.instagram.com/oceanicdentalfv/">Instagram FV</a>
+      <a href="https://www.youtube.com/channel/UCd9uMr5uqX7Sdk7fGaiPjug">YouTube</a>
+      <a href="https://www.linkedin.com/company/oceanicdental/">LinkedIn</a>
+    </div>
+    <div class="s5-foot-legal">
+      <span>&copy; 2026 Oceanic Dental</span>
+      <a href="https://www.oceanicdental.com/terms">Terms</a>
+      <a href="https://www.oceanicdental.com/private-policy">Privacy</a>
+      <a href="https://www.oceanicdental.com/hipaa-disclosure">HIPAA Disclosure</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+<script>
+(function(){
+  var html=document.documentElement;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $=function(s,c){return (c||document).querySelector(s)};
+  var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+  /* reading progress */
+  var bar=$('.deck-progress');
+  function prog(){var h=document.documentElement.scrollHeight-innerHeight;bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')'}
+  addEventListener('scroll',prog,{passive:true});addEventListener('resize',prog);prog();
+
+  /* mobile menu */
+  var burger=$('.s5-burger'),menu=$('#s5-menu');
+  function setMenu(open){document.body.classList.toggle('s5-menu-open',open);burger.setAttribute('aria-expanded',open);burger.setAttribute('aria-label',open?'Close menu':'Open menu');menu.setAttribute('aria-hidden',!open)}
+  burger.addEventListener('click',function(){setMenu(!document.body.classList.contains('s5-menu-open'))});
+  $$('a',menu).forEach(function(a){a.addEventListener('click',function(){setMenu(false)})});
+  addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+
+  /* veneer compare: pointer + keyboard */
+  var cmp=$('.s5-cmp'),touched=false;
+  function setP(v,user){v=Math.max(0,Math.min(100,v));cmp.style.setProperty('--p',v+'%');cmp.setAttribute('aria-valuenow',Math.round(v));cmp.setAttribute('aria-valuetext',Math.round(v)+'% before');if(user)touched=true}
+  function fromX(x){var r=cmp.getBoundingClientRect();setP((x-r.left)/r.width*100,true)}
+  var dragging=false;
+  cmp.addEventListener('pointerdown',function(e){dragging=true;cmp.setPointerCapture(e.pointerId);fromX(e.clientX)});
+  cmp.addEventListener('pointermove',function(e){if(dragging)fromX(e.clientX)});
+  ['pointerup','pointercancel'].forEach(function(t){cmp.addEventListener(t,function(){dragging=false})});
+  cmp.addEventListener('keydown',function(e){var v=parseFloat(cmp.getAttribute('aria-valuenow'));var step=e.shiftKey?10:2;
+    if(e.key==='ArrowLeft'||e.key==='ArrowDown'){setP(v-step,true);e.preventDefault()}
+    else if(e.key==='ArrowRight'||e.key==='ArrowUp'){setP(v+step,true);e.preventDefault()}
+    else if(e.key==='Home'){setP(0,true);e.preventDefault()}else if(e.key==='End'){setP(100,true);e.preventDefault()}});
+
+  /* ambient film toggle */
+  $$('[data-toggle-film]').forEach(function(b){var v=b.parentNode.querySelector('video');
+    b.addEventListener('click',function(){if(v.paused){v.play();b.textContent='iTero 3D scan · Pause'}else{v.pause();b.textContent='iTero 3D scan · Play'}});
+    if(reduce){v.removeAttribute('autoplay');v.pause();b.textContent='iTero 3D scan · Play'}});
+
+  /* form never submits */
+  $('.s5-form').addEventListener('submit',function(e){e.preventDefault();$('.s5-form-msg').textContent='Thanks, this is a concept preview.'});
+
+  if(reduce||!window.gsap||!window.ScrollTrigger){html.classList.remove('js');return}
+  gsap.registerPlugin(ScrollTrigger);
+  var hasSplit=!!window.SplitText;if(hasSplit)gsap.registerPlugin(SplitText);
+  var mm=gsap.matchMedia();
+
+  /* ---- hero arrival ---- */
+  var h1=$('.s5-split-hero');
+  var tl=gsap.timeline({defaults:{ease:'expo.out'},delay:.15});
+  gsap.set('.s5-hero [data-in]',{visibility:'visible'});
+  if(hasSplit){
+    var hs=SplitText.create(h1,{type:'lines,words',mask:'lines',linesClass:'s5-line'});
+    gsap.set(h1,{visibility:'visible'});
+    tl.from(hs.words,{yPercent:115,duration:1.5,stagger:.07},0);
+  }else{gsap.set(h1,{visibility:'visible'});tl.from(h1,{autoAlpha:0,y:30,duration:1.2},0)}
+  tl.from('.s5-hero-copy > .s5-label',{autoAlpha:0,letterSpacing:'.6em',duration:1.6},0)
+    .from('.s5-hero-line',{autoAlpha:0,y:24,duration:1.2},.45)
+    .from('.s5-hero-copy .s5-btns > *',{autoAlpha:0,y:20,duration:1,stagger:.08},.6)
+    .fromTo('.s5-hero-reveal',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.8,ease:'expo.inOut'},.3)
+    .from('.s5-hero-reveal img',{scale:1.35,duration:2.4},.3)
+    .from('.s5-hero-side > [data-in]',{autoAlpha:0,y:70,duration:1.6,stagger:.12},.8);
+  /* hero departure: scrubbed */
+  gsap.timeline({scrollTrigger:{trigger:'.s5-hero',start:'top top',end:'bottom top',scrub:true}})
+    .to('.s5-hero-copy',{y:-90,ease:'none'},0)
+    .to('.s5-hero-main .s5-arch',{scale:1.07,ease:'none'},0)
+    .to('.s5-hero-side--l',{y:-140,ease:'none'},0)
+    .to('.s5-hero-side--r',{y:-60,ease:'none'},0);
+  gsap.to('.s5-seal svg',{rotation:360,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:1}});
+
+  /* ---- chapter tags, headlines, departures ---- */
+  $$('.s5-tag').forEach(function(t){gsap.from(t,{autoAlpha:0,letterSpacing:'.6em',duration:1.6,ease:'expo.out',scrollTrigger:{trigger:t,start:'top 88%'}})});
+  $$('.s5-split').forEach(function(el){
+    if(el.closest('.s5-statement'))return;
+    if(!hasSplit){gsap.from(el,{autoAlpha:0,y:30,duration:1.2,scrollTrigger:{trigger:el,start:'top 85%'}});return}
+    var s=SplitText.create(el,{type:'lines,words',mask:'lines'});
+    gsap.from(s.words,{yPercent:110,duration:1.3,ease:'expo.out',stagger:.04,scrollTrigger:{trigger:el,start:'top 86%'}});
+  });
+  $$('.s5-lede').forEach(function(p){gsap.from(p,{autoAlpha:0,y:24,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:p,start:'top 90%'}})});
+  mm.add('(min-width:768px)',function(){$$('.s5-depart').forEach(function(h){gsap.to(h,{y:-36,ease:'none',scrollTrigger:{trigger:h,start:'top 20%',end:'bottom -10%',scrub:true}})})});
+
+  /* ---- clip reveals (arched windows open from below) ---- */
+  $$('[data-clip]').forEach(function(f){var r=$('.s5-reveal',f),img=$('img',f);
+    var t=gsap.timeline({scrollTrigger:{trigger:f,start:'top 85%'}});
+    t.fromTo(r,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.6,ease:'expo.inOut'})
+     .from(img,{scale:1.3,duration:2.2,ease:'expo.out'},0);
+  });
+  /* parallax inside frames: scrubbed */
+  $$('.s5-par img').forEach(function(img){gsap.fromTo(img,{yPercent:-6},{yPercent:6,ease:'none',scrollTrigger:{trigger:img.closest('.s5-par'),start:'top bottom',end:'bottom top',scrub:true}})});
+  /* services: centre column floats against the sides */
+  mm.add('(min-width:768px)',function(){
+    gsap.fromTo('.s5-svc:nth-child(2)',{y:90},{y:-30,ease:'none',scrollTrigger:{trigger:'.s5-svc-grid',start:'top bottom',end:'bottom top',scrub:true}});
+    gsap.fromTo('.s5-svc:nth-child(1), .s5-svc:nth-child(3)',{y:-20},{y:40,ease:'none',scrollTrigger:{trigger:'.s5-svc-grid',start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  /* ---- statement: pinned, written word by word ---- */
+  (function(){var sec=$('.s5-statement'),p=$('.s5-fill',sec),h=$('h2',sec);
+    var words=hasSplit?SplitText.create(p,{type:'words'}).words:[p];
+    var hw=hasSplit?SplitText.create(h,{type:'words,chars'}).chars:[h];
+    gsap.set(words,{color:'#5d6a68'});
+    gsap.from(hw,{yPercent:60,autoAlpha:0,stagger:.025,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:sec,start:'top 75%'}});
+    var t=gsap.timeline({scrollTrigger:{trigger:sec,start:'top top',end:'+=120%',pin:true,scrub:.6,anticipatePin:1}});
+    t.from('.s5-horizon i',{scaleX:0,duration:.5,ease:'none'},0)
+     .from('.s5-horizon img',{rotation:-90,scale:.4,autoAlpha:0,duration:.4},0)
+     .to(words,{color:'#263235',stagger:.05,duration:.2,ease:'none'},.2);
+  })();
+
+  /* ---- THE ARRIVAL: pinned walk-through of the visit ---- */
+  (function(){var rooms=$$('.s5-room'),dots=$$('.s5-rooms-dots b'),n=rooms.length;
+    rooms.forEach(function(r,i){if(i){gsap.set(r,{autoAlpha:0})}});
+    var t=gsap.timeline({scrollTrigger:{trigger:'.s5-rooms',start:'top top',end:'+='+(n*90)+'%',pin:true,scrub:.8,anticipatePin:1,
+      onUpdate:function(s){var p=s.progress*(n-1);dots.forEach(function(d,i){gsap.set(d,{scaleX:Math.max(0,Math.min(1,p-i+1))})})}}});
+    /* first room breathes in */
+    t.fromTo($('.s5-room-win > *',rooms[0]),{scale:1.12},{scale:1,duration:1,ease:'none'},0);
+    for(var i=1;i<n;i++){
+      var prev=rooms[i-1],cur=rooms[i],at=i*1.4-.6;
+      t.to($('.s5-room-win > *',prev),{scale:1.08,duration:1,ease:'none'},at)
+       .to($('.s5-room-cap',prev),{y:-40,autoAlpha:0,duration:.5},at)
+       .to($('.s5-room-point',prev),{y:-40,autoAlpha:0,duration:.5},at)
+       .set(cur,{autoAlpha:1},at)
+       .fromTo($('.s5-room-win',cur),{clipPath:'inset(100% 0% 0% 0% round 0px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',duration:1,ease:'power2.inOut'},at)
+       .fromTo($('.s5-room-win > *',cur),{scale:1.25},{scale:1,duration:1.4,ease:'none'},at)
+       .fromTo($('.s5-room-cap',cur),{y:50,autoAlpha:0},{y:0,autoAlpha:1,duration:.6},at+.4)
+       .fromTo($('.s5-room-point',cur),{y:50,autoAlpha:0},{y:0,autoAlpha:1,duration:.6},at+.5)
+       .set(prev,{autoAlpha:0},at+1);
+    }
+    t.to({},{duration:.4});
+  })();
+
+  /* ---- AI: side windows drift out from behind the centre arch ---- */
+  gsap.timeline({scrollTrigger:{trigger:'.s5-ai-stage',start:'top 90%',end:'center 50%',scrub:1}})
+    .fromTo('.s5-ai-side--l',{xPercent:60,rotation:-8,scale:.8},{xPercent:0,rotation:0,scale:1,ease:'none'},0)
+    .fromTo('.s5-ai-side--r',{xPercent:-60,rotation:8,scale:.8},{xPercent:0,rotation:0,scale:1,ease:'none'},0)
+    .fromTo('.s5-ai-main',{scale:.88},{scale:1,ease:'none'},0);
+  gsap.from('.s5-points li',{autoAlpha:0,y:30,duration:1,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:'.s5-points',start:'top 88%'}});
+
+  /* ---- professionals: the pill opens into the group portrait ---- */
+  mm.add({d:'(min-width:768px)',m:'(max-width:767px)'},function(c){
+    var side=c.conditions.d?'24%':'12%';
+    gsap.fromTo('.s5-pros-frame',{clipPath:'inset(0% '+side+' 0% '+side+' round 600px)'},{clipPath:'inset(0% 0% 0% 0% round 40px)',ease:'none',scrollTrigger:{trigger:'.s5-pros-frame',start:'top 92%',end:'center 50%',scrub:true}});
+    gsap.fromTo('.s5-pros-frame img',{scale:1.2},{scale:1,ease:'none',scrollTrigger:{trigger:'.s5-pros-frame',start:'top 92%',end:'center 50%',scrub:true}});
+  });
+  gsap.from('.s5-roster li',{autoAlpha:0,y:30,duration:1,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'.s5-roster',start:'top 90%'}});
+
+  /* ---- veneer compare: scroll sweeps the line until the visitor takes over ---- */
+  ScrollTrigger.create({trigger:cmp,start:'top 85%',end:'center 45%',scrub:true,onUpdate:function(s){if(!touched)setP(92-42*s.progress)}});
+
+  /* ---- counters ---- */
+  $$('[data-count]').forEach(function(b){var n=+b.getAttribute('data-count'),o={v:0};
+    b.textContent='0+';
+    ScrollTrigger.create({trigger:b,start:'top 90%',once:true,onEnter:function(){gsap.to(o,{v:n,duration:2.2,ease:'power2.out',onUpdate:function(){b.textContent=Math.round(o.v).toLocaleString('en-US')+'+'}})}});
+  });
+
+  /* ---- films: frames lift in ---- */
+  gsap.from('.s5-film-wrap',{y:80,autoAlpha:0,duration:1.4,stagger:.15,ease:'expo.out',scrollTrigger:{trigger:'.s5-films',start:'top 85%'}});
+
+  /* ---- itinerary: the line is drawn through both steps ---- */
+  mm.add({d:'(min-width:768px)',m:'(max-width:767px)'},function(c){
+    gsap.fromTo('.s5-steps-line',c.conditions.d?{scaleX:0}:{scaleY:0},Object.assign(c.conditions.d?{scaleX:1}:{scaleY:1},{ease:'none',scrollTrigger:{trigger:'.s5-steps',start:'top 80%',end:'bottom 55%',scrub:true}}));
+  });
+  gsap.from('.s5-step',{autoAlpha:0,y:40,duration:1.2,stagger:.2,ease:'power3.out',scrollTrigger:{trigger:'.s5-steps',start:'top 80%'}});
+  gsap.fromTo('.s5-expect-film',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.6,ease:'expo.inOut',scrollTrigger:{trigger:'.s5-steps',start:'top 80%'}});
+
+  /* ---- offices: two doors part from the centre ---- */
+  mm.add('(min-width:768px)',function(){
+    var st={trigger:'.s5-office-grid',start:'top 95%',end:'top 35%',scrub:true};
+    gsap.fromTo('.s5-office--l',{xPercent:12,rotation:-2},{xPercent:0,rotation:0,ease:'none',scrollTrigger:st});
+    gsap.fromTo('.s5-office--r',{xPercent:-12,rotation:2},{xPercent:0,rotation:0,ease:'none',scrollTrigger:st});
+  });
+  mm.add('(max-width:767px)',function(){
+    gsap.utils.toArray('.s5-office').forEach(function(o){gsap.from(o,{y:60,autoAlpha:0,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:o,start:'top 88%'}})});
+  });
+  $$('.s5-office-img img').forEach(function(img){gsap.fromTo(img,{scale:1.18},{scale:1,ease:'none',scrollTrigger:{trigger:img,start:'top bottom',end:'bottom top',scrub:true}})});
+
+  /* ---- invitation: the arch is drawn as you arrive ---- */
+  gsap.fromTo('.s5-close-line',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'.s5-close-arch',start:'top 90%',end:'top 30%',scrub:true}});
+  gsap.from('.s5-form',{autoAlpha:0,y:40,duration:1.2,ease:'expo.out',scrollTrigger:{trigger:'.s5-form',start:'top 92%'}});
+
+  /* ---- magnetic CTAs (fine pointers only) ---- */
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    $$('[data-magnetic]').forEach(function(b){var xt=gsap.quickTo(b,'x',{duration:.6,ease:'power3.out'}),yt=gsap.quickTo(b,'y',{duration:.6,ease:'power3.out'});
+      b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();xt((e.clientX-r.left-r.width/2)*.3);yt((e.clientY-r.top-r.height/2)*.4)});
+      b.addEventListener('pointerleave',function(){xt(0);yt(0)});
+    });
+  }
+
+  addEventListener('load',function(){ScrollTrigger.refresh()});
+})();
+</script>
+</body>
+</html>
