@@ -70,6 +70,11 @@ board draws this).
   `pre-commit` and `pre-merge-commit` hooks enforce it on main.
 - **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
+- **Computer use goes through Codex.** Any task that needs a website or desktop app with no
+  API (GoHighLevel, Elfsight, vendor dashboards) runs as one plain instruction through
+  [`tools/codex-computer-use`](./process/tools/codex-computer-use/README.md). It is read-only unless
+  `--allow-writes`, and runs in a background tab of the user's own Chrome. Do not use Jev,
+  `orca computer`, Claude in Chrome or new CDP scripts for this.
 - **Asana and client-facing actions** (comments, status changes, emails, publishes to production) are
   confirmed with a person first.
 - **Runbook** after every run: the step's `output/RUNBOOK.md` and a row in the client `RUNBOOK.md`

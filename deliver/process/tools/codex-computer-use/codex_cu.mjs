@@ -1,0 +1,85 @@
+#!/usr/bin/env node
+// Codex computer use, driven from Claude Code (or any shell).
+//
+//   node codex_cu.mjs "<plain instruction with its stopping point>" [--allow-writes] [--out <dir>] [--timeout <min>]
+//
+// Runs one non-interactive Codex session that has the Codex desktop app's computer-use plugin
+// (screen + Chrome on this Windows workstation) and prints its final report. Read-only unless
+// --allow-writes. See README.md.
+
+import { spawnSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { homedir, tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+const args = process.argv.slice(2);
+const flag = (name) => {
+  const i = args.indexOf(name);
+  if (i === -1) return undefined;
+  const v = args[i + 1];
+  args.splice(i, 2);
+  return v;
+};
+const allowWrites = args.includes('--allow-writes');
+if (allowWrites) args.splice(args.indexOf('--allow-writes'), 1);
+const timeoutMin = Number(flag('--timeout') ?? 20);
+const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+const outDir = flag('--out') ?? join(tmpdir(), 'codex-cu', stamp);
+const instruction = args.join(' ').trim();
+if (!instruction) {
+  console.error('usage: node codex_cu.mjs "<instruction>" [--allow-writes] [--out <dir>] [--timeout <min>]');
+  process.exit(2);
+}
+
+// The npm `codex` lags the desktop app and rejects the app's default model, so use the app's own
+// CLI: config.toml names it (CODEX_CLI_PATH), else take the newest under the app's bin folder.
+function findCodex() {
+  const cfg = join(homedir(), '.codex', 'config.toml');
+  if (existsSync(cfg)) {
+    const m = readFileSync(cfg, 'utf8').match(/CODEX_CLI_PATH\s*=\s*'([^']+)'/);
+    if (m && existsSync(m[1])) return m[1];
+  }
+  const bin = join(process.env.LOCALAPPDATA ?? '', 'OpenAI', 'Codex', 'bin');
+  if (existsSync(bin)) {
+    const found = readdirSync(bin)
+      .map((d) => join(bin, d, 'codex.exe'))
+      .filter(existsSync)
+      .sort((a, b) => statSync(b).mtimeMs - statSync(a).mtimeMs);
+    if (found[0]) return found[0];
+  }
+  throw new Error('Codex desktop app CLI not found. Install/update the Codex app (codex app).');
+}
+
+const rules = [
+  'You are operating the user\'s real Windows desktop and their own signed-in Google Chrome.',
+  'Tooling: websites go through the ChatGPT app\'s Chrome plugin (chrome@openai-bundled, Browser Use with the `chrome` backend) in a background tab of the user\'s Chrome; keep it in the background, do not make the browser visible. Native Windows apps go through its Computer Use plugin (computer-use@openai-bundled, `@oai/sky` in node_repl).',
+  'Do NOT use the Orca `computer-use` skill, `orca computer`, PowerShell UI automation, or your own CDP scripts; they take over the user\'s foreground window. The user keeps working while you run, so never rely on focus.',
+  'Rules:',
+  '- Work in a NEW Chrome tab; never close, reload or navigate away from tabs the user already has open, and never close a window.',
+  allowWrites
+    ? '- You may make the changes the task asks for, and only those. Anything destructive, paid, or sent to other people (delete, regenerate, pay, send, invite, publish) needs the task to name it explicitly; otherwise stop and report.'
+    : '- READ-ONLY: do not create, save, submit, publish, delete, regenerate, send or change anything. Navigating, opening menus, scrolling and reading are fine. If the task needs a change, stop and report what you would change.',
+  '- If you hit a login, 2FA, captcha or a permission prompt, stop and report it; do not enter credentials.',
+  '- Never print secrets (API keys, tokens, passwords) in full in your report; show the first 6 characters only unless the task says otherwise.',
+  '- Finish with a short report: what you did, what you found (exact names/values/URLs), and anything that blocked you.',
+  '',
+  'Task:',
+  instruction,
+].join('\n');
+
+mkdirSync(outDir, { recursive: true });
+writeFileSync(join(outDir, 'prompt.txt'), rules);
+const lastMsg = join(outDir, 'report.md');
+const codex = findCodex();
+const res = spawnSync(
+  codex,
+  ['exec', '--skip-git-repo-check', '--ephemeral', '-s', 'danger-full-access', '-C', outDir, '-o', lastMsg, '-'],
+  { input: rules, encoding: 'utf8', timeout: timeoutMin * 60_000, maxBuffer: 64 * 1024 * 1024, windowsHide: true },
+);
+writeFileSync(join(outDir, 'session.log'), `${res.stdout ?? ''}\n${res.stderr ?? ''}`);
+
+if (res.error) console.error(`codex failed: ${res.error.message}`);
+const report = existsSync(lastMsg) ? readFileSync(lastMsg, 'utf8').trim() : '';
+console.log(report || '(no report; see session.log)');
+console.log(`\n[codex-cu] exit ${res.status ?? 'timeout'} · log ${join(outDir, 'session.log')}`);
+process.exit(res.status ?? 1);

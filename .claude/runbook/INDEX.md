@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-02 | 2026-10-02 — Codex computer use driven from Claude Code: `tools/codex-computer-use/codex_cu.mjs`, background Chrome tab, verified read-only on GoHighLevel — carries **gotchas** | [`2026-10-02-codex-computer-use-from-claude-code.md`](./2026-10-02-codex-computer-use-from-claude-code.md) |
 | 2026-10-01 | 2026-10-01 — Jev benchmark: `jev_deep` perception + steps + `--forbid` scores 24/24 on 8 offline dashboard-trap fixtures (vanilla 1/8); without forbid it publishes empty widgets and says DONE — carries **gotchas** | [`2026-10-01-jev-deep-perception-benchmark.md`](./2026-10-01-jev-deep-perception-benchmark.md) |
 | 2026-10-01 | 2026-10-01 — style selection is a concept deck; migrations run it too | [`2026-10-01-style-selection-is-a-concept-deck.md`](./2026-10-01-style-selection-is-a-concept-deck.md) |
 | 2026-09-30 | 2026-09-30 — Google Reviews widget for every client: 29 sites inventoried, 7 widgets created and render-verified, 20 already covered, Restore waits on a listing; registry + CDP tool in `tools/elfsight-reviews` — carries **gotchas** | [`2026-09-30-google-reviews-widget-for-every-client.md`](./2026-09-30-google-reviews-widget-for-every-client.md) |

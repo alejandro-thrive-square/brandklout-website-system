@@ -1,5 +1,9 @@
 # Jev browser agent
 
+> **Superseded on 2026-10-02.** Computer use now goes through
+> [codex-computer-use](../codex-computer-use/README.md). This folder is kept for history and the
+> `bench/` fixtures. Do not start new work with Jev.
+
 **Division of labour:** Jev handles the computer-use step, clicking through a vendor dashboard
 (for example, creating an Elfsight widget and reading its install code). Opus writes the steps,
 checks the outcome, and builds the result into the site. Jev is TypeSafe's "system one" model,
