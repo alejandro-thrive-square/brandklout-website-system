@@ -117,6 +117,10 @@
     },
     "stone-surgical-arts": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; SEO pair not recorded anywhere, status will say." },
     "stone-med-spa": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; SEO pair not recorded anywhere, status will say." },
-    "west-la-implants": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; review build, no domain." }
+    "west-la-implants": { "plugins": "defaults", "note": "embed-origins since 2026-09-12; review build, no domain." },
+    "hackensack-dental-implants": {
+      "plugins": ["brandklout.embed-origins", "brandklout.open-graph", "brandklout.aeo-schema"],
+      "note": "New instance 2026-09-30; the three defaults on staging and production. Recorded on bk-hackensack-dental-implants, brought to main 2026-10-03."
+    }
   }
 }
