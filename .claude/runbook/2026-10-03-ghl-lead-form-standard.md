@@ -23,5 +23,16 @@
   every form that uses it.
 - The gate reads the public `__NUXT_DATA__`; it needs no login and submits nothing.
 
+## Update (later 2026-10-03): model spec, snapshot route, sweep
+- README now has Grand Mission's form field by field (keys, placeholders, required flags), the
+  snapshot route for copying custom fields between sub-accounts, the open questions for the owner,
+  and a gate sweep of all 25 client contact forms (5 pass, 19 fail, Atwood's form id is gone).
+- Codex read-only probe: agency user; **Account Snapshots** with selective asset load is the copy
+  route; snapshot **GMD Copy** (Grand Mission, 124 assets) already exists and is linked to Mason Park.
+  Custom Fields page has no import/export; form *Actions* has *Share* (untested), no copy-to-sub-account;
+  Marketing > Ad Manager is ads only.
+- **Next:** owner settles the open questions against the reference video; then one end-to-end test
+  (snapshot load of the Consent fields + Treatment Type into Azusa or Elite, both 0/11) with approval.
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
