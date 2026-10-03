@@ -29,6 +29,11 @@
 - FigJam/Figma canvas edits are now an exception in the skill, DELIVER_SYSTEM_RULES §3 and the
   entry points: Claude in Chrome, not Codex.
 
+- **2026-10-03: parallel test.** Three read-only runs on different sites at once (GoHighLevel,
+  Elfsight, cua.ai): 2:12 for the batch, separate tabs, correct answers. Same-site runs still
+  wait: a `--lock` is the next step if wanted. Cua-Bench was tried and set aside as too heavy (a
+  Linux desktop in Docker per task); its sandbox `local:claude-browser` is suspended.
+
 ## Gotchas
 - The npm `codex` 0.155 rejects the app's model `gpt-6.1-sol`. Use the app's `codex.exe`
   (`CODEX_CLI_PATH` in `~/.codex/config.toml`).

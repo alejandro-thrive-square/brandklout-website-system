@@ -18,6 +18,27 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
 
+## Parallel runs
+
+**Runs on different sites can go in parallel.** On 2026-10-03, three read-only runs started
+together:
+
+| Run | Took | Result |
+| :--- | :--- | :--- |
+| GoHighLevel | 1:54 | DriveRank, 47 sub-accounts (correct) |
+| Elfsight | 2:12 | 32 of 50 widgets |
+| cua.ai leaderboard | 1:27 | top 3 (correct) |
+
+The batch took 2:12, where one after another would take about 4.5 minutes. Each run used its own
+tab, none got "already claimed" or fell back to `sky`, and each closed its tab.
+- Start them as separate background processes, each with its own `--out`.
+- **Don't run two on the same site or account at once.** The tab-reuse rule makes them compete for
+  one tab, and two runs can overwrite each other's edits (the GoHighLevel kids and adult forms
+  share a sub-account). Run those one after another until a `--lock` exists.
+- Native-app (`sky`) runs share the one real desktop: one at a time.
+- The ChatGPT app must be running (start it with
+  `Start-Process "shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App"`).
+
 ## When not to use it: canvas apps with a scripting API
 
 **Codex's browser scripts cannot see the page's own JavaScript.** `tab.playwright.evaluate`
