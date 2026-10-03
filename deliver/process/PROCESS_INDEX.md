@@ -3,8 +3,10 @@
 Start with the scenario that matches the job, open its README, then the step you are on. Each step
 is a folder: its directive, `tools.json` (the shared toolkits it uses), `output/`, and `scripts/` when
 the step has scripts of its own. A toolkit's `toolkit.json` names the toolkits its scripts need; `scenario.mjs`
-copies those too. For a client, start the scenario
-with `node scripts/scenario.mjs start <client> <scenario>` and work in the client's copy. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
+mirrors those too. This folder is the only tracked copy of the process. For a client, start the scenario
+with `node scripts/scenario.mjs start <client> <scenario>` and work in the client's step folder: its
+`output/` is tracked on the client branch, the directive and scripts beside it are an untracked mirror
+of main refreshed by `scenario.mjs sync`. Fix the process here, never in the mirror. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
 
 ## Scenarios
 

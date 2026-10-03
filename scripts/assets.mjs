@@ -159,6 +159,8 @@ function untracked (checkout, only) {
     if (only && client !== only) return []
     const rel = parts.slice(3).join('/')
     if (rel === 'assets.tsv') return []
+    // The process mirror (scenario.mjs) is untracked but is main's code, not client media.
+    if (/^(tools\/|\.process-mirror\.json$|scenario-[^/]+\/(?![^/]+\/output\/))/.test(rel)) return []
     return [{ client, rel, abs: path.join(checkout, p) }]
   })
 }

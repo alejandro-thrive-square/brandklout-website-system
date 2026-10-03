@@ -28,21 +28,26 @@ board draws this).
   - `scenario-N-name/NN-step/` is one folder per step: the directive `NN-step.md`, the step's own
     `scripts/`, `tools.json` (the shared toolkits it uses) and an empty `output/`.
   - `tools/<toolkit>/` holds the shared toolkits, one copy each. A toolkit whose scripts import or
-    run another toolkit lists it in its own `toolkit.json` (`"requires"`); `scenario.mjs` copies the
+    run another toolkit lists it in its own `toolkit.json` (`"requires"`); `scenario.mjs` mirrors the
     whole chain, so a step's `tools.json` names only what the step itself runs. Plus the rules, `scripts/`,
     `deliver/docs/` and `deliver/scripts/`.
 - **`deliver/brandklout/` holds client folders and nothing else.** Shared standards live in
   `deliver/docs/`, cross-client scripts (the Asana pulls) in `deliver/scripts/`. A standard or gate that
   belongs to one step lives in that step (the design standard and journey audit in Scenario 0 step 03).
-- **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, a
-  mirror of the process layout for the scenarios it runs:
-  - `README.md` (which scenarios, from which commit), `RUNBOOK.md` (standing state and a row per run),
-    `docs/` (`project-overview.md`, `facts.md`, `mcp-access.md`).
-  - `<scenario>/<step>/` — copies of the step's directive and scripts, and **`output/`**: everything
-    the step produces. `output/assets/` (media, gitignored, backed up to R2), `output/code/`
-    (builds, scripts written for this client) and `output/RUNBOOK.md` (that step's history).
-  - `tools/<toolkit>/` — copies of the toolkits the started steps use, so every relative path in a
-    directive or script works the same on main and in the client folder.
+- **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, laid
+  out like the process for the scenarios it runs. **The process is tracked on main only**; the
+  client branch tracks only what the client produced:
+  - Tracked: `README.md` (which scenarios, from which commit), `RUNBOOK.md` (standing state and a row
+    per run), `docs/` (`project-overview.md`, `facts.md`, `mcp-access.md`), and each step's
+    **`output/`**: everything the step produces. `output/assets/` (media, gitignored, backed up to
+    R2), `output/code/` (builds, scripts and config written for this client, e.g. `embeds.json`) and
+    `output/RUNBOOK.md` (that step's history).
+  - **Untracked mirror** (gitignored, rebuilt by `scenario.mjs sync` from the committed `main` ref):
+    each step's directive and scripts beside its `output/`, and `tools/<toolkit>/` for the toolkits the
+    started steps use, so every relative path in a directive or script works the same on main and in
+    the client folder. `.process-mirror.json` records the commit and each file's blob id. Until
+    2026-10-03 this was a tracked copy on the client branch, and every fix made in it stayed on that
+    branch; `scenario.mjs detach` untracks an old copy once.
 - **Media:** the client's Google Drive and the step's `output/assets/`, pulled with `scripts/drive.mjs`;
   R2 holds the backup. Never keep the only copy in a worktree. `node scripts/assets.mjs push` uploads
   every untracked file under each client folder in every worktree and writes the client's
@@ -55,15 +60,27 @@ board draws this).
 ## 3. Working rules
 
 - **Start a scenario for a client with `node scripts/scenario.mjs start <client> <scenario>`.** It
-  copies the scenario's step folders and toolkits into the client folder and records the commit.
+  scaffolds each step's `output/`, mirrors the step folders and toolkits from main, and records the
+  commit in the client README.
 - **Work in the step folder, write only to its `output/`.** Read the step directive first, then only
-  the tools it names. Scripts run from the step folder and write to `./output`.
-- **Client worktrees do not check out `deliver/process/`.** `scenario.mjs` reads it from the
-  checkout of `main`, so a finding is fixed there once and reaches every client through `update`.
-- **Fix the process on main, never in a client copy.** A directive, script or toolkit change is a
-  system commit on main; clients receive it with `node scripts/scenario.mjs update <client>`, which
-  refreshes directives and executables and never touches `output/`. `scenario.mjs status <client>`
-  shows what differs.
+  the tools it names. Scripts run from the step folder and write to `./output`. Anything else in a
+  step folder is the mirror: gitignored, and replaced on the next sync.
+- **The process has one source: `deliver/process/` on main.** Client worktrees do not check it out;
+  `scenario.mjs sync` mirrors it from the committed `main` ref (never from the main checkout's
+  working tree, so a half-made edit there never reaches a client). Sync runs by itself when a
+  worktree is set up (`npm install`) and at the start of every Claude Code session
+  (`.claude/settings.json`); run `node scripts/scenario.mjs sync` yourself after main changes, and
+  before reading a directive in any other runtime. `scenario.mjs status` says whether the mirror is
+  behind, edited, or still tracked.
+- **Fix the process on main, never in the mirror.** A directive, script or toolkit fix, or a
+  runbook Gotcha that would bite another site, is a system commit on main in the same session that
+  found it. From a client worktree: make the change in the main checkout (`git worktree list` names
+  it) and commit only the paths you touched (`git -C <main> add <paths>` then
+  `git -C <main> commit -- <paths>`), then sync. When another agent is working in the main checkout,
+  use a short branch instead (`git worktree add <dir> -b process-<topic> main`, commit there, then
+  `git merge process-<topic>` from the main checkout) so neither of you commits the other's edits.
+  If you edit a mirror file anyway, `sync` refuses to overwrite it and names it (exit 3) until it is
+  ported to main or discarded with `--force`: the edit exists nowhere else.
 - **A client branch changes only its own folder.** It merges into main when the site launches
   (`git merge --no-ff`), adding or updating that client's folder and nothing else. A system update
   changes everything except client folders. `node scripts/check-scope.mjs` checks both; the

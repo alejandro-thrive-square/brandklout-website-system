@@ -20,8 +20,8 @@ first and come back here at step 02.
 
 - **This scenario on main:** one folder per step (`NN-step/`: directive, `scripts/`, `tools.json`,
   `output/`). Shared toolkits in [`../tools/`](../tools/).
-- **For a client:** `node scripts/scenario.mjs start <client> 0` copies it to
-  `deliver/brandklout/<client>/scenario-0-new-site/` (plus the toolkits into `<client>/tools/`). Work in
+- **For a client:** `node scripts/scenario.mjs start <client> 0` mirrors it (untracked, from
+  main) to `deliver/brandklout/<client>/scenario-0-new-site/` (plus the toolkits into `<client>/tools/`). Work in
   the step folder there; everything the step produces goes in its `output/` (assets, code,
   `RUNBOOK.md`). The build lives in `03-design-build/output/code/site-src/`.
 - **Client docs:** `deliver/brandklout/<client>/docs/` (`project-overview.md`, `facts.md`,
