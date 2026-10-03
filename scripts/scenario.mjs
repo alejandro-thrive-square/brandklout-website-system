@@ -156,6 +156,19 @@ function everOnMain(rel, buf) {
   return ids.has(b.raw) || ids.has(b.norm)
 }
 
+/** The mirror's ignore rules in the repo's shared info/exclude, which every worktree reads whatever its
+ *  branch: client branches do not merge main, so the root .gitignore there predates the mirror. */
+const EXCLUDE_RULES = ['/deliver/brandklout/*/scenario-*/**', '!/deliver/brandklout/*/scenario-*/**/',
+  '!/deliver/brandklout/*/scenario-*/*/output/**', '/deliver/brandklout/*/tools/', `/deliver/brandklout/*/${MANIFEST}`, '.session-*']
+function ensureExclude() {
+  const file = path.resolve(ROOT, git(['rev-parse', '--git-common-dir']).trim(), 'info', 'exclude')
+  const begin = '# >>> scenario.mjs process mirror (managed; see scripts/scenario.mjs)', end = '# <<< scenario.mjs process mirror'
+  const block = [begin, ...EXCLUDE_RULES, end].join('\n')
+  const cur = fs.existsSync(file) ? fs.readFileSync(file, 'utf8') : ''
+  const next = cur.includes(begin) ? cur.replace(new RegExp(`${begin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}[\\s\\S]*?${end}`), block) : `${cur.replace(/\s*$/, cur ? '\n\n' : '')}${block}\n`
+  if (next !== cur && !DRY) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, next) }
+}
+
 const writeIfMissing = (p, text, written) => {
   if (fs.existsSync(p)) return
   written.push(path.relative(ROOT, p).replace(/\\/g, '/'))
@@ -180,6 +193,7 @@ function scaffoldOutputs(dir, scen, written) {
 
 /** Bring one client's mirror to REF. Returns { written, removed, edited, kept }. */
 function sync(client) {
+  ensureExclude()
   const dir = clientDir(client)
   const scens = started(dir)
   const res = { written: [], removed: [], edited: [], scaffolded: [] }
@@ -279,6 +293,7 @@ function status(client) {
 
 /** One-time migration: drop the tracked copy from this branch's index (files stay on disk). */
 function detach(client) {
+  ensureExclude()
   const dir = clientDir(client)
   const { mirror, strays } = trackedOutsideOutput(client)
   if (!mirror.length && !strays.length) { console.log(`${client}: nothing tracked outside output/ — already detached`); return }

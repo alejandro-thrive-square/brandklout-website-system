@@ -45,7 +45,9 @@ board draws this).
   - **Untracked mirror** (gitignored, rebuilt by `scenario.mjs sync` from the committed `main` ref):
     each step's directive and scripts beside its `output/`, and `tools/<toolkit>/` for the toolkits the
     started steps use, so every relative path in a directive or script works the same on main and in
-    the client folder. `.process-mirror.json` records the commit and each file's blob id. Until
+    the client folder. `.process-mirror.json` records the commit and each file's blob id. The ignore
+    rules are in the root `.gitignore` and, because client branches do not merge main, also in the
+    repo's shared `.git/info/exclude`, which `sync` keeps current for every worktree. Until
     2026-10-03 this was a tracked copy on the client branch, and every fix made in it stayed on that
     branch; `scenario.mjs detach` untracks an old copy once.
 - **Media:** the client's Google Drive and the step's `output/assets/`, pulled with `scripts/drive.mjs`;
