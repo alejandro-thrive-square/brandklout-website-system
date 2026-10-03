@@ -234,12 +234,15 @@ function report(client, r) {
   }
 }
 
-/** Mirror paths still in this branch's index (the pre-2026-10-03 tracked copy). */
-function trackedMirror(client) {
+/** Tracked files where the mirror goes (the pre-2026-10-03 copy): { mirror: main's files and toolkit
+ *  leftovers, safe to untrack; strays: client files outside output/, to move into it }. */
+function trackedOutsideOutput(client) {
   const rel = `deliver/brandklout/${client}`
-  return git(['ls-files', '-z', '--', rel]).split('\0').filter(Boolean)
+  const all = git(['ls-files', '-z', '--', rel]).split('\0').filter(Boolean)
     .map((p) => p.slice(rel.length + 1))
     .filter((p) => /^tools\//.test(p) || /^scenario-[^/]+\/(?![^/]+\/output\/)/.test(p))
+  const isMirror = (p) => /^tools\//.test(p) || TREE.has(p) || /(^|\/)\.process\.json$/.test(p)
+  return { mirror: all.filter(isMirror), strays: all.filter((p) => !isMirror(p)) }
 }
 
 function status(client) {
@@ -257,12 +260,13 @@ function status(client) {
     const stale = prev?.files?.[rel] ? matches(buf, prev.files[rel]) : everOnMain(rel, buf)
     ;(stale ? behind : edited).push(rel)
   }
-  const tracked = trackedMirror(client)
+  const { mirror: tracked, strays } = trackedOutsideOutput(client)
   console.log(`\n${client}  scenarios: ${scens.join(', ')}  mirror: ${prev ? `main ${prev.commit}, synced ${prev.synced}` : 'never synced'}  main now: ${SHORT}`)
   if (!missing.length && !behind.length && !edited.length) console.log('  mirror matches main')
   if (missing.length || behind.length) console.log(`  ${missing.length + behind.length} file(s) behind main — run: node scripts/scenario.mjs sync ${client}`)
   if (edited.length) { console.log(`  ${edited.length} file(s) EDITED here — port to deliver/process/ on main, then sync:`); for (const f of edited) console.log(`    ~ ${f}`) }
   if (tracked.length) console.log(`  ${tracked.length} mirror file(s) still TRACKED on this branch — run once: node scripts/scenario.mjs detach ${client}`)
+  if (strays.length) { console.log(`  ${strays.length} client file(s) outside output/ (gitignored once detached) — move into the step's output/:`); for (const f of strays) console.log(`    ? ${f}`) }
   for (const scen of scens) {
     const outs = steps(scen).map((st) => {
       const o = path.join(dir, scen, st, 'output')
@@ -276,11 +280,7 @@ function status(client) {
 /** One-time migration: drop the tracked copy from this branch's index (files stay on disk). */
 function detach(client) {
   const dir = clientDir(client)
-  const tracked = trackedMirror(client)
-  const scens = started(dir)
-  const { want } = scens.length ? desired(scens) : { want: new Map() }
-  const mirror = tracked.filter((p) => want.has(p) || /(^|\/)\.process\.json$/.test(p) || !TREE.has(p) && /^tools\//.test(p))
-  const strays = tracked.filter((p) => !mirror.includes(p))
+  const { mirror, strays } = trackedOutsideOutput(client)
   if (!mirror.length && !strays.length) { console.log(`${client}: nothing tracked outside output/ — already detached`); return }
   if (mirror.length) {
     console.log(`${client}: ${DRY ? 'would untrack' : 'untracking'} ${mirror.length} mirror file(s) (they stay on disk)`)
