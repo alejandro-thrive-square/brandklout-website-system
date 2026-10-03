@@ -83,10 +83,17 @@ board draws this).
   `git merge process-<topic>` from the main checkout) so neither of you commits the other's edits.
   If you edit a mirror file anyway, `sync` refuses to overwrite it and names it (exit 3) until it is
   ported to main or discarded with `--force`: the edit exists nowhere else.
-- **A client branch changes only its own folder.** It merges into main when the site launches
-  (`git merge --no-ff`), adding or updating that client's folder and nothing else. A system update
-  changes everything except client folders. `node scripts/check-scope.mjs` checks both; the
-  `pre-commit` and `pre-merge-commit` hooks enforce it on main.
+- **A client branch changes only its own folder, and merging is two-way and never destructive.**
+  The branch is the client's history: never rebase, squash or reset it. Because a client branch
+  touches only `deliver/brandklout/<client>/` and main touches everything else, the two never edit
+  the same file, so both merges are clean:
+  - **Main into the client** (`git merge main` in the client worktree) at the start of a session:
+    the rules, `scripts/` and hooks arrive. The process itself arrives through `sync`.
+  - **The client into main** (`git merge --no-ff bk-<client>` from the main checkout) at the end of
+    a task, not only at launch: its outputs, runbooks and full commit history land on main.
+  `node scripts/check-scope.mjs` checks both directions; the `pre-commit` and `pre-merge-commit`
+  hooks enforce it on main. Media never travels by merge: it is untracked and lives in R2
+  (`scripts/assets.mjs`).
 - **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
 - **Computer use goes through Codex.** Any task that needs a website or desktop app with no

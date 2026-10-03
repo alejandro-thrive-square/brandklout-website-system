@@ -346,7 +346,7 @@ required once per clone). Notes that matter:
 
 ### 4.3 Branching Strategy
 - **`main`**: the system — process, tools, rules, scripts, docs — plus the client folders merged at launch. System changes are committed on `main` directly; the `pre-commit` and `pre-merge-commit` hooks run `check-scope.mjs` so a commit is either a system change or one client's change, never both.
-- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` and merges into `main` (`git merge --no-ff`) when the site launches. It never tracks the process: it reads `deliver/process/` through an untracked mirror refreshed by `node scripts/scenario.mjs sync`, not by merging `main`.
+- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` merges `main` in at the start of a session and merges into `main` (`git merge --no-ff`) at the end of a task; both are clean because the two never touch the same files, and the branch history is never rewritten. It never tracks the process: it reads `deliver/process/` through an untracked mirror refreshed by `node scripts/scenario.mjs sync`.
 - **Backups**: `backup/*` branches and tags are recovery points; never delete or rewrite them.
 
 ### 4.4 Agent Responsibilities

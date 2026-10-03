@@ -52,8 +52,8 @@ scope decision — reports it back here rather than deciding alone.
 
 A client worktree does not check out `deliver/process/`; its folder holds an untracked mirror of each
 scenario it started, rebuilt from the committed `main` ref by `node scripts/scenario.mjs sync` (on
-`npm install` and at every Claude Code session start; never by merging `main` into the client
-branch). Before dispatch, commit the process change on `main`, run the sync in the worker's
+`npm install` and at every Claude Code session start). Rules and `scripts/` arrive by merging
+`main` into the client branch. Before dispatch, commit the process change on `main`, run the sync in the worker's
 worktree, and confirm the task's references exist there. The rules are in
 [DELIVER_SYSTEM_RULES.md §3](../DELIVER_SYSTEM_RULES.md).
 
