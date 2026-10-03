@@ -5,6 +5,15 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## GHL Contact form on the standard - 2026-10-03
+
+**The `/contacts` form `JuzM9SxuJMPDMwfO6cgj` now has a required Service dropdown, the optional
+two-box SMS consent (Mason Park Dental PLLC DBA Mason Park Dental of Katy) and real Privacy/Terms
+links** ([`runbook/2026-10-03-ghl-contact-form-standard.md`](./runbook/2026-10-03-ghl-contact-form-standard.md)).
+No language dropdown (user's choice). Gate: `check-ghl-form.mjs --standard --origin https://www.masonparkdental.com`
+(guide `deliver/process/tools/ghl-forms` on main). **Open:** `/terms-of-service` names the old domain
+`bestdentistinkatytx.com`; the ad-page forms are not on the standard yet.
+
 ## Sitemap on Cloudflare - 2026-10-02
 
 **`https://www.masonparkdental.com/sitemap.xml` is live: 241 URLs (80 pages, 161 articles), served by the
