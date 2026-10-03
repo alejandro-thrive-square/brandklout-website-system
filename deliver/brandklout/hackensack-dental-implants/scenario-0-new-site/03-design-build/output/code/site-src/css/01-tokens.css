@@ -1,0 +1,88 @@
+/* Identity layer: the style the client chose, concept 04 "Human Transformation"
+   (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation).
+   Every value here is read from that page's own stylesheet; px became rem (divide by 16) and its
+   clamp() font sizes became a rem value times a stepped multiplier, as the house fluid root needs. */
+
+@font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/newsreader-var.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/dm-sans-var.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --sans: 'DM Sans', Arial, sans-serif;
+  --display: 'Newsreader', Georgia, serif;
+
+  --ink: #292824;
+  --bg: #fbfaf7;
+  --panel: #ffffff;
+  --card: #ffffff;
+  --accent: #b29568;        /* rules, fills, the progress bar */
+  --accent-text: #7c6133;   /* the same gold deepened until 11px labels clear 4.5:1 on every ground */
+  --accent-num: #9c7f4f;    /* large numerals: 3:1 and over */
+  --muted: #706c64;
+  --muted-beige: #67635b;   /* the same grey on the beige sections, where #706c64 is 4.3:1 */
+  --muted-sage: #5f6259;    /* body copy on the sage ground */
+  --line: #ded9cf;
+  --line-strong: #bbb3a5;
+  --line-sage: #b8c0b5;
+  --top: #292824;
+  --footer: #24231f;
+  --footer-muted: #bbb5aa;
+  --footer-line: #3b3933;
+  --footer-dim: #a09a8e;
+  --shadow: 0 1.625rem 4.375rem rgba(51, 45, 36, 0.11);
+
+  /* the concept's grounds, section by section */
+  --g-hero: #f2eee6;
+  --g-intro: #fbfaf7;
+  --g-treatments: #eee8de;
+  --g-sage: #dfe5dc;
+  --g-white: #ffffff;
+  --g-results: #f4efe7;
+  --g-tech: #f0eee7;
+
+  /* multipliers. Headlines: the concept scales them with the viewport between 913 and 1440;
+     here they step. Text: held up below 479 where the root shrinks. */
+  --s-h: 1;
+  --s-tx: 1;
+  --s-sm: 1;
+  --s-xs: 1;
+  --s-md: 1;
+
+  --t-body: calc(1rem * var(--s-tx));
+  --t-lead: calc(1.0625rem * var(--s-tx));
+  --t-sm: calc(0.8125rem * var(--s-sm));     /* 13px: card copy */
+  --t-xs2: calc(0.75rem * var(--s-sm));      /* 12px: step copy, FAQ answers */
+  --t-xs: calc(0.6875rem * var(--s-xs));     /* labels, kickers, buttons: 8 to 10px in the concept, floored at 11 */
+
+  --wrap: 76.25rem;
+  --gutter: 1.5rem;
+  --pad: 7.375rem;
+  /* how far past .wrap a photograph reaches to touch the page edge */
+  --bleed: max(var(--gutter), (100vw - var(--wrap)) / 2);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media screen and (max-width: 1439px) { :root { --s-h: 0.92; } }
+@media screen and (max-width: 1279px) { :root { --s-h: 0.8; } }
+@media screen and (max-width: 1099px) { :root { --s-h: 0.72; } }
+@media screen and (max-width: 991px) { :root { --s-h: 0.66; } }
+@media screen and (max-width: 767px) { :root { --gutter: 1rem; --pad: 5.125rem; } }
+@media screen and (max-width: 479px) { :root { --s-h: 0.7; --s-tx: 1.08; --s-sm: 1.16; --s-xs: 1.16; --s-md: 1.06; } }
+@media screen and (max-width: 419px) { :root { --s-h: 0.76; --s-tx: 1.18; --s-sm: 1.28; --s-xs: 1.3; --s-md: 1.12; } }
+
+/* At-rules travel with the tokens: the registry only holds class and element rules. */
+@keyframes hero-wait { from { visibility: hidden; } to { visibility: visible; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
