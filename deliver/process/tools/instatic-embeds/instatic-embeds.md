@@ -31,8 +31,8 @@ setting changes that. The plugin closes both halves through the public plugin AP
 ## Running the scripts
 
 Run everything from this folder: `deliver/process/tools/instatic-embeds/` on main, or the same
-folder in the client's scenario copy (`node scripts/scenario.mjs start|update` copies it; fix the
-toolkit here on main, never in the client copy). The site and login come from the generated
+folder in the client's mirror (`node scripts/scenario.mjs start|sync` mirrors it, untracked; fix the
+toolkit here on main, never in the mirror). The site and login come from the generated
 worktree `.env` (`INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`), which
 `scripts/env-sync.mjs` writes from `~/.webzite/.env`; add a missing value to the master, never to
 the worktree file ([SYSTEM_RULES.md §4.2.2](../../../../SYSTEM_RULES.md)). The admin client is

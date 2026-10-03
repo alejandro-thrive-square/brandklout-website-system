@@ -14,9 +14,34 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
 
 - Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` (Codex's JSON event stream, which includes the code each tool call ran) land in `--out` (default
   `%TEMP%/codex-cu/<stamp>`).
+- **Model: `gpt-6-luna` by default** (OpenAI's fast, low-cost current model; the user's choice on
+  2026-10-03). `--model <slug>` overrides it for one run, for example `gpt-6.1-sol` for long or
+  write-heavy flows. The default is pinned in the wrapper, not in `~/.codex/config.toml`, so the
+  ChatGPT app keeps its own default. Every report ends with the model it used.
 - **Read-only by default.** `--allow-writes` permits only the changes the instruction names.
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
+
+## Parallel runs
+
+**Runs on different sites can go in parallel.** On 2026-10-03, three read-only runs started
+together:
+
+| Run | Took | Result |
+| :--- | :--- | :--- |
+| GoHighLevel | 1:54 | DriveRank, 47 sub-accounts (correct) |
+| Elfsight | 2:12 | 32 of 50 widgets |
+| cua.ai leaderboard | 1:27 | top 3 (correct) |
+
+The batch took 2:12, where one after another would take about 4.5 minutes. Each run used its own
+tab, none got "already claimed" or fell back to `sky`, and each closed its tab.
+- Start them as separate background processes, each with its own `--out`.
+- **Don't run two on the same site or account at once.** The tab-reuse rule makes them compete for
+  one tab, and two runs can overwrite each other's edits (the GoHighLevel kids and adult forms
+  share a sub-account). Run those one after another until a `--lock` exists.
+- Native-app (`sky`) runs share the one real desktop: one at a time.
+- The ChatGPT app must be running (start it with
+  `Start-Process "shell:AppsFolder\OpenAI.Codex_2p2nqsd0c76g0!App"`).
 
 ## When not to use it: canvas apps with a scripting API
 
@@ -51,6 +76,20 @@ dashboards and reading pages.
   `~/.codex/.tmp/bundled-marketplaces/openai-bundled/plugins/chrome/skills/control-chrome/SKILL.md`,
   not under `plugins/cache`. Without that block, `browser` is undefined and Codex falls back to
   `sky`. The wrapper passes the path in.
+- **Reuse open tabs; don't pile up new ones.** Until 2026-10-02 the prompt said "work in a NEW
+  Chrome tab", so six GoHighLevel runs on one form left six tabs (the user's catch). The prompt
+  now makes Codex list the open tabs first and claim one already on the right site or page,
+  opening a new tab only when none fits or the fitting one is mid-edit. The report says which tab
+  it used. It still never closes a tab.
+- **`markDeliverable()` locks a tab to its session.** Codex marked its tabs "for handoff", so each
+  stayed claimed after the run and the next run got "already claimed by another browser session"
+  and opened another. The prompt now bans `markDeliverable()`; claimed tabs that aren't marked
+  are released and left open for the next run.
+- **A tab Codex opens itself stays bound to that run.** Even unmarked, a `tabs.new()` tab could
+  not be claimed later, so the first reuse rule still left one new tab per run (the user's second
+  catch, same day). Runs now `close()` the tabs they opened before reporting; only tabs the user
+  had open are kept, and those are released. Tabs left by runs before `b1379d58` stay locked to
+  their old sessions: close them by hand once.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.

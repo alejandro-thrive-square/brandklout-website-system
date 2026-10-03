@@ -1,0 +1,28 @@
+PASS  #1  no cursor follower after the pointer moves  {"cursor":0,"view":false,"heroVisual":false}
+PASS  #4  no "View" label anywhere; the old hero photo is gone  {"cursor":0,"view":false,"heroVisual":false}
+PASS  #2  nav shows the stacked Drive logo, loaded  {"src":"9_RLfdUJaAGehoe8fbTaB-logo-stacked-w320.webp","w":218,"h":63,"text":""}
+PASS  #3  top bar text  Dedicated implant care in Bergen County, New Jersey
+PASS  #16  doctor card sits at the bottom of the video  {"gapToFoot":33,"inFrame":true}
+PASS  #24  rating updated to the office listing (5.0) in the hero card and the numbers  5.0 ★★★★★ Google rating | 5.0 / Five-star Google rating
+PASS  #12  each surgeon links to his profile  /dr-won-sang-lee-dds /dr-maurice-srour-dds /dr-dmitriy-klass-dds-msd  (profile pages not built on staging yet)
+PASS  #11  portrait fills its arch, anchored at the shoulders so the head is never cut (see crop)  {"fit":"cover","pos":"50% 100%","box":538}
+PASS  #18  patient quote scene plays in about half a screen of scroll (was 110%)  {"pin":true,"length":405,"vh":735}
+PASS  #5  "All-on-4®" is on its own line and not cut off  {"text":"All-on-4®","lines":1,"inside":true,"br":true}
+PASS  #19  full-arch heading lines have room above the capitals (the F)  {"masks":4,"paddingTopEm":0.16,"tightMasks":0}
+PASS  #20  full-arch photo framed lower, less headroom (see crop)  56% 85%
+PASS  #21  journey heading: room above the C  {"masks":4,"paddingTopEm":0.16,"tightMasks":0}
+PASS  #22  journey heading: room above the second line  {"masks":4,"paddingTopEm":0.16,"tightMasks":0}
+PASS  #23  no brown scan line on the CBCT photo  0 scan line(s)
+PASS  #8  gallery subtitle removed  {"gallery":0,"reviews":0}
+PASS  #9  reviews subtitle removed  {"gallery":0,"reviews":0}
+PASS  #13  closing section is not held; its heading is on screen as soon as the section arrives  {"pinned":false,"spacer":false,"headingTop":136,"vh":735}
+PASS  #25  no extra scrolling to start the closing animation  {"pinned":false,"spacer":false}
+PASS  #14  footer tagline removed  {"tagline":0,"bottom":["Copyright © 2026 Hackensack Center for Dental Implants"],"adc":false}
+PASS  #15  "By Aesthetic Dental Centers" removed from the footer  ["Copyright © 2026 Hackensack Center for Dental Implants"]
+PASS  #-  desktop: no page errors
+PASS  #17  phone: "Meskin" fits the screen and sits clear of the arch  {"left":16,"right":270,"vw":390,"text":"Meskin","coveredBy":23,"h":82}
+PASS  #-  phone: no page errors
+
+#10 not checked: the reviews widget account is waiting on a decision.
+
+all passed

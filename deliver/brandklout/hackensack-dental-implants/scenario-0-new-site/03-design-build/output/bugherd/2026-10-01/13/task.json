@@ -1,0 +1,83 @@
+{
+ "id": 31343712,
+ "project_id": 544349,
+ "project_name": "Hackensack Dental Implants",
+ "created_at": "2026-10-01T18:23:12.655Z",
+ "updated_at": "2026-10-01T18:23:13.181Z",
+ "local_task_id": 13,
+ "priority_id": 0,
+ "status_id": 2344253,
+ "title": null,
+ "description": "This is a long scroll with nothing happening before the rest of the content starts to scroll \n",
+ "description_html": null,
+ "tag_names": [],
+ "external_id": null,
+ "requester_email": "agency@brandklout.com",
+ "attachments": [
+  {
+   "id": 4290289,
+   "name": "image.png",
+   "url": "https://files.bugherd.com/z1poapope9nxfikvum9fbw/image.png"
+  }
+ ],
+ "screenshot_url": "https://files.bugherd.com/q2kr0iiphbz44axkamw5xa/screenshot.jpg",
+ "status": "todo",
+ "priority": "not set",
+ "closed_at": null,
+ "secret_link": "https://www.bugherd.com/t/XVk0JwXjhqxwNe623XIHRg",
+ "admin_link": "https://www.bugherd.com/projects/544349/tasks/13",
+ "deleted_at": null,
+ "site": "https://hackensack-dental-implants-staging.up.railway.app",
+ "url": "/",
+ "metadata": {},
+ "screenshot_data": {
+  "screenshot_width": 1588,
+  "screenshot_height": 1588,
+  "screenshot_pin_x": 1188,
+  "screenshot_pin_y": 374
+ },
+ "fullstory_session_url": null,
+ "logrocket_session_url": null,
+ "requester_os": "Mac OS 10.15.7",
+ "requester_browser": "Safari 26.6.2",
+ "requester_browser_size": "1588 x 870 px",
+ "requester_resolution": "1920 x 1080 px",
+ "selector_info": {
+  "path": "html>body>div#smooth-wrapper>div#smooth-content>main#main>section#invitation.ch.final>div.pin-spacer",
+  "html": "<div class=\"pin-spacer\" style=\"order: 0; place-self: auto; grid-row-start: auto; grid-column-start: auto; grid-row-end: auto; grid-column-end: auto; z-index: auto; float: none; flex-shrink: 1; display: grid; margin: 0px 152px 0px 151.984375px; inset: auto; position: relative; flex-basis: auto; overflow: visible; box-sizing: border-box; width: 1267px; height: 1381px; padding: 0px 0px 783px;\"><div class=\"wrap final-grid\" id=\"final-scene\" style=\"translate: none; rotate: none; scale: none; inset: 0p",
+  "version": 2,
+  "data": {
+   "bugOffsetX": 0.8176918902920284,
+   "bugOffsetY": 0.9782314747073578
+  }
+ },
+ "due_at": null,
+ "column_id": 2344253,
+ "logs": null,
+ "assignees": [
+  {
+   "id": 619229,
+   "email": "alejandro@thrivesquare.com",
+   "display_name": "Alejandro Milano",
+   "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+  }
+ ],
+ "assigned_to": {
+  "id": 619229,
+  "email": "alejandro@thrivesquare.com",
+  "display_name": "Alejandro Milano",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "requester": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "updater": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ }
+}

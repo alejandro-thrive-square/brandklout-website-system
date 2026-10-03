@@ -1,0 +1,88 @@
+/* Interaction layer. Everything styled here is created by js/00-runtime.js, and only when motion is
+   on (GSAP loaded, no reduced-motion request), so with no script or reduced motion none of it exists.
+   Colours are the concept's tokens: ink, ground, gold on rules only. */
+
+/* ---- arrival curtain ---- */
+.curtain { position: fixed; inset: 0; z-index: 1000; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; clip-path: inset(0 0 0 0); }
+.curtain__mark { width: auto; height: 4.5rem; }
+.curtain__bar { display: block; width: 7.5rem; height: 1px; background: var(--accent); transform-origin: left center; }
+
+/* ---- buttons: the label rolls, the button leans toward the pointer ---- */
+.btn .roll { display: inline-flex; flex-direction: column; height: 1.25em; line-height: 1.25; overflow: hidden; vertical-align: middle; }
+.btn .roll > span { display: block; transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1); }
+.btn:hover .roll > span, .btn:focus-visible .roll > span { transform: translateY(-100%); }
+.btn.is-magnetic { transition: filter 0.3s ease, background-color 0.3s ease; }
+
+/* ---- nav links: a gold rule sweeps in under the hovered link ---- */
+.navlinks > a:not(.btn) { position: relative; }
+.navlinks > a:not(.btn)::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.625rem; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: right center; transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1); }
+.navlinks > a:not(.btn):hover::after, .navlinks > a:not(.btn):focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+
+/* ---- treatment cards: a line drawing of each treatment, drawn by the scroll ---- */
+.motion .solution { transition: background-color 0.4s ease; }
+.drawing { grid-area: draw; width: 100%; max-width: 8.5rem; justify-self: center; }
+@media screen and (max-width: 767px) { .drawing { max-width: 6rem; justify-self: end; } }
+.drawing svg { display: block; width: 100%; height: auto; overflow: visible; }
+.drawing path { stroke: var(--ink); stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; }
+.drawing .gum { stroke: var(--accent); }
+.drawing .old { stroke: #b9b3a8; }
+.drawing .ti path { stroke: var(--accent-num); }
+
+/* ---- process: on desktop the steps are one row that scroll carries to the left ---- */
+@media screen and (min-width: 992px) {
+  /* the heading stays on top, on its own ground reaching to the page edge; the steps pass under it */
+  .motion .process-wrap { align-items: stretch; }
+  .motion .process-head { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; padding-right: 2.5rem; margin-right: -2.5rem; background: var(--g-white); }
+  .motion .process-head::before { content: ''; position: absolute; top: 0; bottom: 0; right: 100%; width: 50vw; background: var(--g-white); }
+  .motion .processgrid { display: flex; width: max-content; border-top: 1px solid var(--line); }
+  .motion .step { width: 21rem; min-height: 26rem; border-bottom: 0; border-right: 1px solid var(--line); }
+  .motion .step:nth-child(2n) { border-right: 1px solid var(--line); }
+  .motion .step .n { font-size: calc(8.5rem * var(--s-h)); line-height: 0.85; }
+}
+
+/* ---- doctor: his name, very large, behind the portrait ---- */
+.team-mark { position: absolute; left: -1rem; top: -4.25rem; z-index: 0; font-family: var(--display); font-size: calc(11.5rem * var(--s-h)); line-height: 1; letter-spacing: -0.04em; color: #f0ede6; white-space: nowrap; pointer-events: none; user-select: none; }
+@media screen and (max-width: 767px) { .team-mark { left: 0; font-size: 21vw; top: -4.25rem; } }
+
+/* ---- closing words step to the right, one per line ---- */
+@media screen and (min-width: 768px) {
+  .final h2 .wl:nth-child(2) { margin-left: 1.1em; }
+  .final h2 .wl:nth-child(3) { margin-left: 2.2em; }
+  .final h2 .wl:nth-child(4) { margin-left: 0.55em; }
+}
+
+/* ---- process: a gold rule runs the length of the four steps ---- */
+.processgrid { position: relative; }
+.process-rule { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left center; pointer-events: none; }
+
+
+/* ---- the gallery can be dragged with the pointer ---- */
+@media (hover: hover) and (pointer: fine) {
+  .motion .js-case { cursor: ew-resize; }
+}
+
+/* ---- hero film: the scroll opens it to the full window (desktop). The margins move into the
+   clip-path the runtime sets, so the cards keep to the page grid while the film widens. ---- */
+@media screen and (min-width: 992px) {
+  .motion .hero-film { margin: 0; }
+  .motion .hero-doctor { left: calc(var(--bleed) + 2rem); }
+  .motion .hero-play { right: calc(var(--bleed) + 5.5rem); }
+  .motion .film-toggle { right: calc(var(--bleed) + 2rem); }
+}
+
+/* ---- the film's pause control (WCAG 2.2.2: moving content longer than five seconds can be stopped).
+   Created by the interface layer whenever the film plays, motion layer or not. Beside the play
+   button, so both are in the first view on a 900px-tall window. ---- */
+.film-toggle { position: absolute; top: 3rem; right: 2rem; z-index: 3; display: flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; border: 0; border-radius: 50%; background: rgba(251, 250, 247, 0.92); color: var(--ink); cursor: pointer; }
+.film-toggle::before, .film-toggle::after { content: ''; display: block; width: 0.25rem; height: 0.875rem; margin: 0 0.125rem; background: currentColor; }
+.film-toggle.is-paused::before { width: 0; height: 0; margin-left: 0.25rem; background: none; border-style: solid; border-width: 0.4375rem 0 0.4375rem 0.6875rem; border-color: transparent transparent transparent currentColor; }
+.film-toggle.is-paused::after { display: none; }
+
+/* ---- the patient film with sound, in a light box the interface layer opens from the play button ---- */
+.film { position: fixed; inset: 0; z-index: 1001; display: flex; align-items: center; justify-content: center; padding: 4.5rem var(--gutter) 2rem; background: rgba(41, 40, 36, 0.92); }
+.film__box { position: relative; width: min(100%, 72rem); }
+.film video { display: block; width: 100%; height: auto; max-height: calc(100vh - 7rem); background: #000; border-radius: 0.75rem; }
+.film__close { position: absolute; right: 0; top: -3.5rem; display: flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 999px; background: transparent; color: #fff; font-family: var(--sans); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; }
+.film__close:hover, .film__close:focus-visible { background: #fff; color: var(--ink); }
+.film__title { position: absolute; left: 0; top: -3rem; color: #fff; font-family: var(--display); font-size: calc(1.5rem * var(--s-md)); line-height: 1.2; }
+@media screen and (max-width: 767px) { .film__title { display: none; } .film-toggle { top: 0.75rem; bottom: auto; right: 0.75rem; } }

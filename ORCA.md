@@ -130,7 +130,8 @@ for this repo is `npm install`, and root `package.json` has a `postinstall` that
 `scripts/sparsify-worktree.sh`, so a new worktree narrows itself to the shared context
 (`deliver/docs`, `deliver/scripts`, `scripts`, `mcp-servers`, `.claude`, plus the repo-root
 directives) and the one client its `bk-<slug>` branch names. `deliver/process/` is left out on
-purpose: the client folder carries its own copy of each scenario it started.
+purpose: it is tracked on main only, and the same `npm install` runs `scenario.mjs sync`, which mirrors
+each started scenario into the client folder (untracked) from the `main` ref.
 
 Orca names the branch `alejandro-thrive-square/bk-livewell`, so the client is derived from the
 worktree **directory** name first and the branch's last path segment second. If neither is a prefix
@@ -150,9 +151,9 @@ Use the root `main` worktree as the **system worktree**: the process, tools and 
 and nowhere else. Perform client delivery in one long-lived Orca worktree per client (`bk-<client>`),
 with the same client slug in the branch, worktree path, and Orca display name.
 
-Process changes reach a client through `node scripts/scenario.mjs update <client>`, not by merging
-`main` into the client branch; a client branch changes only its own folder and merges into `main`
-when the site launches. The rules, including how a client run promotes a finding back to the
+Process changes reach a client through `node scripts/scenario.mjs sync` (also run at every Claude Code
+session start); rules and `scripts/` by merging `main` into the client branch. A client branch
+changes only its own folder and merges into `main` at the end of a task. The rules, including how a client run promotes a finding back to the
 process, are in [deliver/DELIVER_SYSTEM_RULES.md §3](./deliver/DELIVER_SYSTEM_RULES.md). Before
 dispatching a client task, commit and push any process change on `main`, and make sure the client
 worktree is clean or checkpointed. Read the client's `RUNBOOK.md` first.
