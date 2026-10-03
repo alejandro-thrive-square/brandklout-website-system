@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Codex computer use, driven from Claude Code (or any shell).
 //
-//   node codex_cu.mjs "<plain instruction with its stopping point>" [--allow-writes] [--out <dir>] [--timeout <min>]
+//   node codex_cu.mjs "<plain instruction with its stopping point>" [--allow-writes] [--model <slug>] [--out <dir>] [--timeout <min>]
 //
 // Runs one non-interactive Codex session that has the Codex desktop app's computer-use plugin
 // (screen + Chrome on this Windows workstation) and prints its final report. Read-only unless
@@ -23,11 +23,13 @@ const flag = (name) => {
 const allowWrites = args.includes('--allow-writes');
 if (allowWrites) args.splice(args.indexOf('--allow-writes'), 1);
 const timeoutMin = Number(flag('--timeout') ?? 20);
+// Pinned here, not in ~/.codex/config.toml, so the ChatGPT app keeps its own default (user's choice, 2026-10-03).
+const model = flag('--model') ?? 'gpt-6-luna';
 const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
 const outDir = flag('--out') ?? join(tmpdir(), 'codex-cu', stamp);
 const instruction = args.join(' ').trim();
 if (!instruction) {
-  console.error('usage: node codex_cu.mjs "<instruction>" [--allow-writes] [--out <dir>] [--timeout <min>]');
+  console.error('usage: node codex_cu.mjs "<instruction>" [--allow-writes] [--model <slug>] [--out <dir>] [--timeout <min>]');
   process.exit(2);
 }
 
@@ -86,7 +88,7 @@ const codex = findCodex();
 const res = spawnSync(
   codex,
   // --json: the plain log hides the node_repl code, so only the event stream shows browser./sky. calls.
-  ['exec', '--json', '--skip-git-repo-check', '--ephemeral', '-s', 'danger-full-access', '-C', outDir, '-o', lastMsg, '-'],
+  ['exec', '--json', '-m', model, '--skip-git-repo-check', '--ephemeral', '-s', 'danger-full-access', '-C', outDir, '-o', lastMsg, '-'],
   { input: rules, encoding: 'utf8', timeout: timeoutMin * 60_000, maxBuffer: 64 * 1024 * 1024, windowsHide: true },
 );
 writeFileSync(join(outDir, 'session.log'), `${res.stdout ?? ''}\n${res.stderr ?? ''}`);
@@ -94,5 +96,5 @@ writeFileSync(join(outDir, 'session.log'), `${res.stdout ?? ''}\n${res.stderr ??
 if (res.error) console.error(`codex failed: ${res.error.message}`);
 const report = existsSync(lastMsg) ? readFileSync(lastMsg, 'utf8').trim() : '';
 console.log(report || '(no report; see session.log)');
-console.log(`\n[codex-cu] exit ${res.status ?? 'timeout'} · log ${join(outDir, 'session.log')}`);
+console.log(`\n[codex-cu] exit ${res.status ?? 'timeout'} · model ${model} · log ${join(outDir, 'session.log')}`);
 process.exit(res.status ?? 1);

@@ -14,6 +14,10 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
 
 - Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` (Codex's JSON event stream, which includes the code each tool call ran) land in `--out` (default
   `%TEMP%/codex-cu/<stamp>`).
+- **Model: `gpt-6-luna` by default** (OpenAI's fast, low-cost current model; the user's choice on
+  2026-10-03). `--model <slug>` overrides it for one run, for example `gpt-6.1-sol` for long or
+  write-heavy flows. The default is pinned in the wrapper, not in `~/.codex/config.toml`, so the
+  ChatGPT app keeps its own default. Every report ends with the model it used.
 - **Read-only by default.** `--allow-writes` permits only the changes the instruction names.
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
