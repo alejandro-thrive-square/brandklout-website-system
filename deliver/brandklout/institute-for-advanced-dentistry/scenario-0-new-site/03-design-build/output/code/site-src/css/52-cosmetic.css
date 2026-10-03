@@ -1,0 +1,64 @@
+/* 52-cosmetic — the cosmetic group's own additions (cosmetic dentistry, the ads page, veneers, crowns and
+   bridges, the smile gallery). Built on the frozen tokens and the 40-pages kit; every rule is scoped to a
+   cos- class (cos-ch on each of the group's sections) so nothing here reaches another page. */
+
+/* ---------- hero, split and flipped: the photograph leads, square, the fact card on its right edge ---------- */
+.hero--split.cos-flip .hero__wrap { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+.cos-flip .hero__fig { order: -1; }
+.cos-flip .hero__img { aspect-ratio: 1 / 1; margin-left: 0; margin-right: auto; }
+.cos-flip .hero__note { left: auto; right: -3rem; }
+
+/* ---------- small additions to kit blocks ---------- */
+.cos-note { grid-template-columns: minmax(0, 1fr); margin-top: 4.5rem; }
+.cos-note .note__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem 3rem; align-items: start; }
+.cos-note .note__body > :first-child { grid-column: 1 / -1; }
+.cos-ch .signs__copy .lede { margin-top: 1.5rem; max-width: 36rem; }
+.cos-ch .signs__note .btn { margin-top: .5rem; }
+.cos-ch .say--split .fold { margin-top: 2.5rem; max-width: 46rem; }
+.cos-ch .say--split .fold__body p { color: var(--fg-dim); }
+.cos-mosaic-head { margin-bottom: 4rem; }
+
+/* ---------- vs, with its photograph ---------- */
+.cos-vs { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; align-items: start; }
+.cos-vs__fig { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
+.cos-vs__fig img { width: 100%; height: 116%; object-fit: cover; }
+.cos-vs .vs tbody th { width: 26%; }
+
+/* ---------- reviews under the say on the ads page ---------- */
+.cos-rv .rv-embed { margin-top: 5rem; }
+
+/* ---------- gallery: case count beside the chips ---------- */
+.cos-gal-bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; margin-bottom: 3rem; }
+.cos-gal-bar .chipbar { margin-bottom: 0; }
+.cos-gal-count { font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; }
+.cos-gal-count b { font-weight: 500; color: var(--accent-text); }
+.cos-lb .lb__cap .spec { display: block; margin-top: .3rem; color: var(--accent-text); }
+.cos-lb .lb__nav button { display: inline-flex; align-items: center; min-height: 44px; padding: .6rem 1.1rem; border: 1px solid rgba(55, 52, 53, .3); border-radius: 2rem; font-size: calc(.9rem * var(--s-sp)); transition: background .35s var(--ease), border-color .35s; }
+.cos-lb .lb__nav button:hover, .cos-lb .lb__nav button:focus-visible { border-color: var(--ink); background: var(--white); }
+
+@media screen and (max-width: 1279px) {
+  .cos-flip .hero__note { right: -1.5rem; }
+  .cos-vs { gap: 3.5rem; }
+}
+
+@media screen and (max-width: 991px) {
+  .hero--split.cos-flip .hero__wrap { grid-template-columns: minmax(0, 1fr); }
+  .cos-flip .hero__fig { order: 0; }
+  .cos-flip .hero__img { aspect-ratio: 4 / 3; }
+  .cos-flip .hero__note { left: auto; right: -1rem; }
+  .cos-note .note__body { grid-template-columns: minmax(0, 1fr); }
+  .cos-vs { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .cos-vs__fig { max-width: 30rem; aspect-ratio: 4 / 3; }
+}
+
+@media screen and (max-width: 767px) {
+  .cos-flip .hero__note { right: auto; }
+  .cos-note { margin-top: 3rem; }
+  .cos-gal-bar { margin-bottom: 2rem; }
+  .cos-gal-bar .chipbar { gap: .4rem; }
+  .cos-gal-bar .chipbar button { padding-inline: .9rem; }
+  .cos-lb .lb__cap { flex-direction: column; align-items: flex-start; }
+}
+.cos-band { margin-top: 5rem; }
+@media screen and (max-width: 767px) { .cos-band { margin-top: 3.5rem; } }
+.cos-ch .pull__fig img { object-position: 50% 22%; }

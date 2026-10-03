@@ -13,7 +13,7 @@
  */
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import { api, requestForm, publish, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { api, requestForm, publish, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { assertStaging } from './staging-only.mjs'
 
 assertStaging(BASE)

@@ -4,7 +4,7 @@
  *
  * Usage: INSTATIC_BASE_URL=https://staging.ifadentistry.com node home/publish-home.mjs
  */
-import { publish, BASE } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { publish, BASE } from '../../../../../process/tools/instatic-api-sync/insta-api.mjs'
 import { assertStaging } from './staging-only.mjs'
 
 assertStaging(BASE)

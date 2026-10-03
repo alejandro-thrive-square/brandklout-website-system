@@ -1,0 +1,29 @@
+{
+ "hub-strip-1.jpg": {
+  "src": "shoot-interactions/091",
+  "w": 1400,
+  "note": "Dr. Bensoussan presenting a set of new teeth"
+ },
+ "hub-strip-2.jpg": {
+  "src": "shoot-technology/012",
+  "w": 1200,
+  "crop": [
+   0.2,
+   0,
+   0.8,
+   1
+  ],
+  "note": "patient in the 3D CBCT scanner"
+ },
+ "hub-strip-3.jpg": {
+  "src": "shoot-interactions/064",
+  "w": 1200,
+  "crop": [
+   0.15,
+   0,
+   0.85,
+   1
+  ],
+  "note": "Dr. Bensoussan taking a digital intraoral scan"
+ }
+}

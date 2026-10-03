@@ -1,4 +1,4 @@
-Effective date: September 18, 2026
+Effective date: September 28, 2026
 
 Institute for Advanced Dentistry PLLC, also referred to as Institute for Advanced Dentistry or IFA Dentistry, respects your privacy and is committed to protecting the personal information you share with us through [https://www.ifadentistry.com/](https://www.ifadentistry.com/) (the Site) and through our text messaging program. This Privacy Policy explains the information we collect, how we use and share it, and the choices available to you.
 
@@ -55,9 +55,9 @@ You may opt in by checking an SMS consent box on an IFA Dentistry website form, 
 
 ### Types of Messages
 
-- **Appointment messages** Confirmations, reminders, rescheduling notices, and follow-up care information
-- **Conversational messages** Two-way replies from our team about your inquiry, appointment, or visit
-- **Promotional messages** Special offers, service announcements, and practice updates when you have opted in to marketing messages
+- **Appointment messages (transactional)** Confirmations, reminders, rescheduling notices, and follow-up care information
+- **Conversational messages (customer care)** Two-way replies from our team about your inquiry, appointment, or visit
+- **Promotional messages (marketing)** Special offers, service announcements, and practice updates when you have opted in to marketing messages
 
 ### Program Details
 
@@ -130,18 +130,6 @@ The Site may link to websites that we do not control. We are not responsible for
 ## 12 Contact Us
 
 If you have questions about this Privacy Policy or the SMS program, or you wish to exercise an applicable privacy right, contact Institute for Advanced Dentistry PLLC:
-
-### Phoenix
-
-Institute for Advanced Dentistry PLLC
-3443 N. Central Avenue, Suite 700
-Phoenix, AZ 85012
-United States
-Phone  [(602) 242-2256](tel:+16022422256)
-Email  [info@ifadentistry.com](mailto:info@ifadentistry.com)
-Website  [https://www.ifadentistry.com/](https://www.ifadentistry.com/)
-
-### Peoria
 
 Institute for Advanced Dentistry PLLC
 13360 N. 94th Drive, Suite B

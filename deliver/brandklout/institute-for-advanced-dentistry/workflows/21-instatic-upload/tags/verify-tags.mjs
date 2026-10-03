@@ -27,6 +27,8 @@ const BASE = (process.argv[2] || 'https://www.ifadentistry.com').replace(/\/$/, 
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const ASSET = '000-brandklout-tags'
 const GTM_ID = 'GTM-5XR78DN7'
+// The guard version the source sets — a hardcoded one went stale at 1.1.0 and failed every run after.
+const WANT_VERSION = fs.readFileSync(path.join(HERE, 'site-tags.js'), 'utf8').match(/BrandkloutSiteTags = '([^']+)'/)[1]
 const POOL = 'backend.leadconnectorhq.com/appengine/loc/'
 const SESSION = 'backend.leadconnectorhq.com/appengine/js/user_session.js'
 
@@ -96,7 +98,7 @@ for (const slug of ['index', 'contact-us', 'privacy-policy']) {
   const filtered = !!gtmJs && gtmJs[2] > 0 && gtmJs[2] < 50000
 
   console.log(`\n--- ${slug} ---`)
-  say(state.version === '1.0.0', `tag asset ran (BrandkloutSiteTags ${state.version})`)
+  say(state.version === WANT_VERSION, `tag asset ran (BrandkloutSiteTags ${state.version})`)
   say(state.started, `dataLayer has the gtm.start event (${state.layer} entries)`)
   say(ok2xx(gtmJs), `gtm.js?id=${GTM_ID} -> ${gtmJs ? `${gtmJs[1]}, ${gtmJs[2]} bytes` : 'not requested'}`)
   if (filtered) {

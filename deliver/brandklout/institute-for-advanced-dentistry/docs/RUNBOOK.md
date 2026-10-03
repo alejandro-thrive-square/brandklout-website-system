@@ -4,6 +4,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Where things are
 
+- **THE WHOLE REDESIGNED SITE IS ON STAGING since 2026-10-01** (seq 12, published): 57 pages at their WordPress URLs, built from `scenario-0-new-site/03-design-build/output/code/site-src/` (read `KIT.md` there) and pushed with `.../output/code/push/` (README; staging-locked). Pages are stored with **flat slugs** and served nested by the zone-wide Cloudflare rewrites. The home source of truth moved from `workflows/04-design/.tmp/prototypes/home/` to `site-src/pages/index.html` + the css/js layers; the old `21-instatic-upload/home/` pipeline is retired (a push from it would replace the whole site with the home). Next: team review on BugHerd, WebKit pass, the open questions, then SEO and launch. Run: [runbook/2026-10-01-full-site-on-staging.md](runbook/2026-10-01-full-site-on-staging.md).
 - **LIGHT GROUNDS ONLY since 2026-09-21** (Brandklout: dark-theme sites do not convert). Graphite is
   the ink, gold is fills and rules, gold text is `#74560f`. Every new template uses the ground-aware
   tokens in `home.css`; the rule for all Brandklout sites is in `deliver/brandklout/docs/DESIGN-STANDARD.md`.
@@ -15,11 +16,21 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   Identity comes from the Drive's logo colour guide (gold `#C3972B` + greys, no navy). Its media is
   gitignored: `prototypes/build-media.py` rebuilds it from Drive. Run:
   [runbook/2026-09-21-home-redesign-canary.md](runbook/2026-09-21-home-redesign-canary.md).
-- **STAGING HOLDS ONLY THE REDESIGNED HOME PAGE since 2026-09-21.** The 58 other cloned pages were
+- ~~**STAGING HOLDS ONLY THE REDESIGNED HOME PAGE since 2026-09-21.**~~ Superseded 2026-10-01: staging holds the whole rebuilt site. The 58 other cloned pages were
   deleted on request; every old staging URL is a 404. Push pipeline: `workflows/21-instatic-upload/home/`
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
   [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
+- **Live Google reviews on staging since 2026-09-30**: the home page's `#proof` rotator is the
+  Elfsight Google Reviews widget (app `7febe92d-…`, the Peoria listing, 5.0 / 96) in an
+  `embed-origins` Embed, class `.rv-embed`, placed by `21-instatic-upload/home/add-elfsight-reviews.mjs`
+  (staging-locked, re-runnable). ~~**A `push-home.mjs` drops it**~~ Since 2026-10-01 the widget is in the site source (`data-embed`) and survives every push — re-run the script after every
+  push, before publishing. Production has no widget and gets it with the rebuilt site. Widget
+  registry and ownership: `deliver/process/tools/elfsight-reviews/review-widgets.json`. Run:
+  [runbook/2026-09-30-elfsight-google-reviews-on-staging.md](runbook/2026-09-30-elfsight-google-reviews-on-staging.md).
+- **Pipeline scripts import `insta-api.mjs` from `deliver/process/tools/instatic-api-sync/`**
+  since 2026-09-30 (the pre-v2 `process/22-instatic-api-sync/` is gone). This worktree needs
+  `deliver/process` in its sparse cone (`git sparse-checkout add deliver/process`).
 - **Share card on staging since 2026-09-23**: the `brandklout.open-graph` plugin (copied from
   Dr. Nahlah's into `workflows/16-instatic-plugins/open-graph/`) is installed on **staging only**;
   the home page's `og:image` is the colour logo on white (`home/og-card.mjs` makes it,
@@ -28,7 +39,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   [runbook/2026-09-23-og-logo-card.md](runbook/2026-09-23-og-logo-card.md).
 - **BugHerd is on staging since 2026-09-21**: project `542527`, sidebar loaded through the
   `brandklout.embed-origins` plugin settings (`workflows/21-instatic-upload/home/bugherd.mjs`).
-  Uninstall it before any promotion. **Round 1 (42 notes) was addressed and published on 2026-09-23 (seq 8)**.
+  Uninstall it before any promotion. **Round 1 (42 notes) was addressed and published on 2026-09-23 (seq 8)**. **Closed on the board 2026-10-01**: 40 done, #33 (Elfsight autoplay) and #38 (GHL procedure field) open with replies; [run](runbook/2026-10-01-bugherd-round-1-closed.md).
   The tasks are still `todo` on the board. The GoHighLevel form notes and four confirmations are open:
   [runbook/2026-09-23-bugherd-round-1.md](runbook/2026-09-23-bugherd-round-1.md).
 - **STAGING since 2026-09-18**: `https://staging.ifadentistry.com` — a **separate Instatic
@@ -50,15 +61,24 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   opt-in the policies describe; the wording itself has an A2P problem, see the 2026-09-18 run.
 - **Legal pages**: `/privacy-policy` and `/terms-of-service` carry the client's own A2P 10DLC
   documents since 2026-09-18, not the WordPress text, and every footer links Terms of Service.
+  **Peoria is the only office since 2026-09-28** (Phoenix closed; its address block is gone from both):
+  [runbook/2026-09-28-phoenix-closed-message-types.md](runbook/2026-09-28-phoenix-closed-message-types.md).
   Source `workflows/21-instatic-upload/legal/`; the originals the client sent are in
   `workflows/00-client-delivery-initialization/.tmp/`. See
   [runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md](runbook/2026-09-18-a2p-policies-gtm-ghl-pool.md).
+  **`/hipaa-disclosure` since 2026-10-01** (HHS model notice, Institute for Advanced Dentistry PLLC),
+  production only, in every footer legal row after Privacy Policy (`legal/push-hipaa.mjs`,
+  `legal/push-footer-hipaa.mjs`; the row wraps via `legal-footer-wrap.css`). Staging gets both from `site-src` with the
+  next full push. Run: `scenario-0-new-site/06-post-launch/output/RUNBOOK.md`.
 - **Site-wide tags**: Google Tag Manager `GTM-5XR78DN7` and the GoHighLevel number pool, in the
   code asset `src/scripts/000-brandklout-tags.js` (source `workflows/21-instatic-upload/tags/`),
   gated to `*.ifadentistry.com` **and excluded on `staging.*`** since 2026-09-18 — the staging
   clone is a subdomain of the production zone and would otherwise fire both. Gate
-  `tags/verify-tags.mjs`. Production's published copy is deliberately one line behind the source
-  (the line is a no-op there; a publish bakes all 59 pages, so it waits for the next real one).
+  `tags/verify-tags.mjs` (all passed 2026-09-28). **Production's only GTM container since
+  2026-09-28**: the outgoing agency's `GTM-K8N3JK3Q` is blanked in `site.js` and skipped by
+  `prepare-wp.mjs`. Asset `1.2.1` restores `ghl()`, which 1.2.0 deleted: **the number pool did not
+  run on production from 2026-09-22 to 2026-09-28.** See
+  [runbook/2026-09-28-old-gtm-removed-pool-restored.md](runbook/2026-09-28-old-gtm-removed-pool-restored.md).
 - **Accessibility widget**: since 2026-09-12 this is Sienna, injected on every page by `brandklout.embed-origins` `siteScripts`, the same as every other Instatic site. The WordPress site's UserWay is gone: its registry item in `site.js` is blanked and `prepare-wp.mjs` skips it. The statement no longer names UserWay. See [runbook/2026-09-12-userway-replaced-by-sienna.md](runbook/2026-09-12-userway-replaced-by-sienna.md).
 - **Scrape**: `workflows/01-content-intake/.tmp/current-site-scrape/current-site-inventory.md`, which is now the only copy of the WordPress site we control.
 - **Local only, not in git**: `site/` (a working `file://` mirror), `raw-html/`, `screenshots/desktop/`, `media-library/` (237 WP originals plus `vimeo/`, `vimeo-instatic/` re-encodes, `vimeo-posters/`), and `21-instatic-upload/.tmp/` except the media map. If they are missing, rebuild them; see the intake directive's Version Control section.
@@ -77,10 +97,11 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   chapter 03 before/after on a home page; a WebKit pass at 1512×735. The Asana Style Guide task is
   still open.
 - **Refer a Patient** (`patient-referrals`, Fluent #3) still posts to WordPress `admin-ajax.php`, which no longer exists at this domain. It needs its own GHL form, or a decision to drop it.
-- **Two GTM containers are on every page.** `GTM-K8N3JK3Q` and Site Kit's `GT-NBJ3HCBV` /
-  `G-STF00595` come from the WordPress clone; `GTM-5XR78DN7` is ours. Decide which owns
-  measurement before trusting either.
-- **The GHL form's SMS consent wording contradicts itself** ("non-marketing … special offers,
+- **Site Kit's Google tag `GT-NBJ3HCBV` still loads beside `GTM-5XR78DN7`** (replayed from the
+  WordPress clone by `site.js`, items `_xs27_EDLa` + three inline configs). The old container
+  `GTM-K8N3JK3Q` went 2026-09-28. If `GTM-5XR78DN7` fires the same GA4 property, pageviews are
+  counted twice; blank it the same way with `tags/remove-old-gtm.mjs` as the pattern.
+- **The GHL form's SMS consent wording contradicts itself** and fails GHL's "Message type disclosure" check (2026-09-28; replacement wording in that run) ("non-marketing … special offers,
   discounts"), which is what A2P vetting reads. It is fixed in GoHighLevel, not here.
 - **After WordPress is retired**: drop `a:bill.wordkeeper.net`, `mx` and `a` from SPF. Cancel the agency's hosting only once the client confirms nothing else lives there.
 - `verify-live-wp.mjs` compares against www.ifadentistry.com, which is Instatic now. Retarget it or retire it.

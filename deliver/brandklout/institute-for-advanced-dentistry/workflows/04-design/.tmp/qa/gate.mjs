@@ -119,14 +119,31 @@ const READ = {
   await panels[1].hover(); await wait(300)
   ok('Disciplines: hovering B opens B', await page.evaluate(() => [...document.querySelectorAll('[data-disc-panel]')].map(p => p.classList.contains('is-open')).join()) === 'false,true')
 
-  // reviews: write the click
-  await page.evaluate(() => document.querySelector('[data-voices]').scrollIntoView({ block: 'center' })); await wait(1200)
-  const before = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
-  await page.click('button[data-voice-next]'); await wait(1600)
-  const after = await page.evaluate(() => ({ who: document.querySelector('.voice.is-on cite').textContent, count: document.querySelector('[data-voice-count]').textContent, on: document.querySelectorAll('.voice.is-on').length }))
-  ok('Reviews: next arrow changes the review', after.who !== before && after.count === '02 / 03' && after.on === 1, { before, after })
-  await page.click('button[data-voice-prev]'); await wait(1600)
-  ok('Reviews: previous arrow goes back', await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent) === before)
+  // reviews. On staging (since 2026-09-30) the rotator is the live Elfsight Google Reviews widget,
+  // placed by 21-instatic-upload/home/add-elfsight-reviews.mjs; the local prototype still has the
+  // three-quote rotator. The widget draws its reviews inside shadow roots on its own descendants,
+  // so innerText on the host shows only the owner panel: the text is gathered shadow root by
+  // shadow root.
+  const hasWidget = await page.$('.rv-embed')
+  if (hasWidget) {
+    await page.evaluate(() => document.querySelector('.rv-embed').scrollIntoView({ block: 'center' })); await wait(6000)
+    const rv = await page.evaluate(() => {
+      const el = document.querySelector('.elfsight-app-7febe92d-b5da-447f-b53f-9593eec9da53')
+      const deepText = (root) => { let t = root.textContent || ''; for (const e of root.querySelectorAll('*')) if (e.shadowRoot) t += ' ' + deepText(e.shadowRoot); return t }
+      const t = el ? deepText(el).replace(/\s+/g, ' ') : ''
+      return { found: !!el, lazy: !!el?.hasAttribute('data-elfsight-app-lazy'), h: el ? Math.round(el.getBoundingClientRect().height) : 0, google: /Reviews\s*\d\.\d\s*\(\d+\)/.test(t), rotator: document.querySelectorAll('[data-voices], .voice').length, text: t.slice(0, 120) }
+    })
+    ok('Reviews: the Google reviews widget boots (>0px, no lazy attribute, header with a count, old rotator gone)', rv.found && !rv.lazy && rv.h > 300 && rv.google && rv.rotator === 0, rv)
+  } else {
+    // write the click
+    await page.evaluate(() => document.querySelector('[data-voices]').scrollIntoView({ block: 'center' })); await wait(1200)
+    const before = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
+    await page.click('button[data-voice-next]'); await wait(1600)
+    const after = await page.evaluate(() => ({ who: document.querySelector('.voice.is-on cite').textContent, count: document.querySelector('[data-voice-count]').textContent, on: document.querySelectorAll('.voice.is-on').length }))
+    ok('Reviews: next arrow changes the review', after.who !== before && after.count === '02 / 03' && after.on === 1, { before, after })
+    await page.click('button[data-voice-prev]'); await wait(1600)
+    ok('Reviews: previous arrow goes back', await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent) === before)
+  }
 
   // patient story opens, plays from a real source, closes
   await page.evaluate(() => document.querySelector('[data-deck]').scrollIntoView({ block: 'center' })); await wait(1200)
@@ -195,15 +212,18 @@ const READ = {
   await page.mouse.move(5, 5); await wait(1500)
   ok('BugHerd: marquee runs again after', Math.abs((await mq()) - h2) > 1)
 
-  // reviews turn on their own, and not under the pointer
-  await page.evaluate(() => document.querySelector('[data-voices]').scrollIntoView({ block: 'center' })); await page.mouse.move(5, 5); await wait(800)
-  const r0 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
-  await wait(8200)
-  const r1 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
-  ok('BugHerd: reviews rotate on their own', r1 !== r0, [r0, r1])
-  await page.hover('.voices__quotes'); await wait(8200)
-  ok('BugHerd: reviews hold while hovered', await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent) === r1)
-  await page.mouse.move(5, 5)
+  // reviews turn on their own, and not under the pointer (the local rotator only: on staging the
+  // Elfsight widget owns the reviews since 2026-09-30, see the check above)
+  if (await page.$('[data-voices]')) {
+    await page.evaluate(() => document.querySelector('[data-voices]').scrollIntoView({ block: 'center' })); await page.mouse.move(5, 5); await wait(800)
+    const r0 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
+    await wait(8200)
+    const r1 = await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent)
+    ok('BugHerd: reviews rotate on their own', r1 !== r0, [r0, r1])
+    await page.hover('.voices__quotes'); await wait(8200)
+    ok('BugHerd: reviews hold while hovered', await page.evaluate(() => document.querySelector('.voice.is-on cite').textContent) === r1)
+    await page.mouse.move(5, 5)
+  }
 
   // cards name the problem, then the procedure
   const meta = await page.evaluate(() => [...document.querySelectorAll('.card__meta')].map(m => [m.querySelector('b').textContent, (m.querySelector('.card__issue') || {}).textContent, m.querySelector('i').textContent]))

@@ -1,0 +1,58 @@
+<section class="ch ch-invitation" id="invitation" data-chapter="{{chapter|7}}" data-chapter-name="The Invitation" data-theme="light">
+  <div class="invitation__bg" aria-hidden="true"><img src="{{bg|/media/img/office-wall.jpg}}" alt="" width="1600" height="1066" loading="lazy" data-parallax="14"></div>
+  <div class="wrap invitation">
+    <div class="invitation__copy">
+      <p class="tag" data-tag><span>{{tag|The Invitation}}</span><em>{{tagline|Now accepting new patients}}</em></p>
+      <h2 class="d1 d1--sm" data-split="lines">{{h2|Start with a free, no-obligation <em>consultation</em>.}}</h2>
+      <p class="lede" data-rise>{{lede|Your first visit includes a complimentary comprehensive exam, cone beam CT scan, and smile design preview, along with dedicated time with Dr.&nbsp;Bensoussan to discuss all of your options. No pressure, no judgment, just personalized guidance and whenever possible, our goal is to preserve your natural teeth.}}</p>
+
+      <ul class="includes" data-rise>
+        <li>Cone beam CT scan and digital x-rays</li>
+        <li>Virtual smile design and simulation</li>
+        <li>Jaw joint evaluation and oral cancer screening</li>
+        <li>A written treatment plan, with every option reviewed</li>
+        <li>Sedation consultation available</li>
+      </ul>
+
+      <address class="where" data-rise>
+        <a class="where__tel" href="{{site.tel}}">{{site.phone}}</a>
+        <span>13360 N 94th Dr, Suite B · Peoria, AZ</span>
+        <span class="spec">Serving Peoria, Sun City, Glendale, Surprise &amp; the West Valley</span>
+      </address>
+
+      <div class="finance" data-rise>
+        <span class="spec">Payment options</span>
+        <div class="finance__logos">
+          <a class="finance__logo finance__logo--carecredit" href="/about-our-practice/payment-options/"><img src="/media/img/fin-carecredit.png" alt="CareCredit, payment options" width="356" height="49" loading="lazy"></a>
+          <a class="finance__logo finance__logo--proceed" href="/about-our-practice/payment-options/"><img src="/media/img/fin-proceed.png" alt="Proceed Finance, payment options" width="600" height="147" loading="lazy"></a>
+          <a class="finance__logo finance__logo--alphaeon" href="/about-our-practice/payment-options/"><img src="/media/img/fin-alphaeon.png" alt="Alphaeon Credit, payment options" width="600" height="291" loading="lazy"></a>
+        </div>
+        <a class="link link--gold" href="/about-our-practice/payment-options/">How payment works<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+
+    <!-- The live site places the practice's GoHighLevel form here. This is the design of the slot. -->
+    <form class="ask" data-ask data-ghl-slot novalidate>
+      <p class="ask__title">Request a consultation</p>
+      <p class="ask__sub">We reply within one business day.</p>
+      <div class="field"><input id="f-name" name="name" type="text" autocomplete="name" placeholder=" " required><label for="f-name">Full name</label></div>
+      <div class="field"><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder=" " required><label for="f-phone">Phone</label></div>
+      <div class="field"><input id="f-email" name="email" type="email" autocomplete="email" placeholder=" " required><label for="f-email">Email</label></div>
+      <fieldset class="chips">
+        <legend>I'm interested in</legend>
+        <label><input type="radio" name="interest" value="smile" checked><span>A smile makeover</span></label>
+        <label><input type="radio" name="interest" value="implants"><span>Dental implants</span></label>
+        <label><input type="radio" name="interest" value="full-arch"><span>Teeth in a Day</span></label>
+        <label><input type="radio" name="interest" value="second-opinion"><span>A second opinion</span></label>
+      </fieldset>
+      <div class="field field--area"><textarea id="f-msg" name="message" rows="3" placeholder=" "></textarea><label for="f-msg">Anything we should know? (optional)</label></div>
+      <button class="btn btn--gold btn--full" type="submit" data-magnetic><span>Send request</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="ask__note" data-ask-note role="status"></p>
+    </form>
+  </div>
+
+
+{{content}}
+
+<!--@footer-->
+</section>

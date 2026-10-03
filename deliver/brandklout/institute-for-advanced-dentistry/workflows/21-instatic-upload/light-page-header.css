@@ -1,0 +1,20 @@
+/* light-page-header: pages whose first section is white. The header is transparent with a white
+   logo and white links (built for the dark heroes on every other page), so on these it vanished.
+   Give it the bar it already gets on scroll. Added 2026-09-28. */
+body.wz-p-privacy-policy #brx-header > .brxe-section,
+body.wz-p-terms-of-service #brx-header > .brxe-section,
+body.wz-p-accessibility-statement #brx-header > .brxe-section,
+body.wz-p-dental-services #brx-header > .brxe-section,
+body.wz-p-privacy-policy #brx-header > .brxe-container,
+body.wz-p-terms-of-service #brx-header > .brxe-container,
+body.wz-p-accessibility-statement #brx-header > .brxe-container,
+body.wz-p-dental-services #brx-header > .brxe-container,
+body.wz-p-privacy-policy #brx-header > .brxe-block,
+body.wz-p-terms-of-service #brx-header > .brxe-block,
+body.wz-p-accessibility-statement #brx-header > .brxe-block,
+body.wz-p-dental-services #brx-header > .brxe-block,
+body.wz-p-privacy-policy #brx-header > .brxe-div,
+body.wz-p-terms-of-service #brx-header > .brxe-div,
+body.wz-p-accessibility-statement #brx-header > .brxe-div,
+body.wz-p-dental-services #brx-header > .brxe-div { background-color: var(--primary-d-4, #121823) }
+/* /light-page-header */
