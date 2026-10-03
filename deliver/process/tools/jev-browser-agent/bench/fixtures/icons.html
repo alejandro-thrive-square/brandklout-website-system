@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><title>My widgets</title>
+<script src="common.js"></script>
+<style>
+  body{margin:30px;font:15px system-ui}
+  table{border-collapse:collapse}td{padding:10px 16px;border-bottom:1px solid #eee}
+  button{background:none;border:1px solid #ccc;border-radius:6px;width:34px;height:34px;cursor:pointer}
+  svg{width:16px;height:16px}
+</style>
+<h2>My widgets</h2>
+<table><tbody></tbody></table>
+<p id="out"></p>
+<script>
+  // Icon-only buttons with no accessible name: snapshot.js labels every one of them "button".
+  const icon = d => `<svg viewBox="0 0 16 16"><path d="${d}" stroke="#333" fill="none"/></svg>`;
+  const ICONS = { edit: 'M2 14 L12 4 L14 6 L4 16 Z', copy: 'M4 4 h8 v10 h-8 Z M2 2 h8', delete: 'M3 4 h10 M5 4 v10 h6 v-10' };
+  for (const name of ['Marvel Reviews', 'Livewell Reviews', 'Oceanic Reviews']) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${name}</td><td>Google Reviews</td><td></td>`;
+    for (const op of ['edit', 'copy', 'delete']) {
+      const b = document.createElement('button');
+      b.className = 'btn-icon icon-' + op;
+      b.innerHTML = icon(ICONS[op]);
+      b.onclick = () => { report('icons', op, name); document.getElementById('out').textContent = op + ': ' + name; };
+      tr.lastElementChild.append(b);
+    }
+    document.querySelector('tbody').append(tr);
+  }
+</script>

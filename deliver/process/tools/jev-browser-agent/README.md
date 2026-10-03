@@ -1,17 +1,87 @@
 # Jev browser agent
 
+> **Superseded on 2026-10-02.** Computer use now goes through
+> [codex-computer-use](../codex-computer-use/README.md). This folder is kept for history and the
+> `bench/` fixtures. Do not start new work with Jev.
+
 **Division of labour:** Jev handles the computer-use step, clicking through a vendor dashboard
-(for example, creating an Elfsight widget and reading its install code). Opus builds the result
-into the site. Jev is TypeSafe's "system one" model driven by Browser Use's
-[jev-ultrafast](https://github.com/browser-use/jev-ultrafast). It chooses an operation and a
-target element from an indexed table, in about 0.2 s per step.
+(for example, creating an Elfsight widget and reading its install code). Opus writes the steps,
+checks the outcome, and builds the result into the site. Jev is TypeSafe's "system one" model,
+driven by Browser Use's [jev-ultrafast](https://github.com/browser-use/jev-ultrafast). It picks an
+operation and a target element from an indexed table, in about 0.2 s per step.
+
+## Use it: one instruction, any site
+
+```bash
+cd deliver/process/tools/jev-browser-agent
+uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env python jev_do.py \
+  --url <where to start> "<the task in one plain sentence, with its stopping point>" \
+  [--read-secret "api key" --secrets-out <file outside the repo>] [--allow publish] [--out <dir>]
+```
+
+**No per-site steps or lists.** On 2026-10-01 it scored **30/30** on the 10 fixtures, from each task's
+one-sentence instruction alone; median 3.4 s, longest 15.3 s. It also ran the plain sentence on
+the real Elfsight editor: 2 correct clicks, 10.3 s. What makes it generic:
+
+- **Perception (`jev_deep`):**
+  - iframes at any depth, shadow DOM, div cards, and icon buttons, named from their class
+  - controls below the fold of a scrollable panel (sidebars), and overlays read first
+  - the page's own "press Enter" cue
+- **Auto-safety (`auto_forbid`):** delete / regenerate / log out / pay / publish / save / close /
+  copy controls are hidden unless the instruction asks for them. Negated clauses ("do not click
+  Close", "change nothing") ask for nothing. `--allow WORD` lifts one; `--forbid REGEX` adds one.
+- **Facts from code, not the model:**
+  - Echo rows are dropped.
+  - Secrets are masked before any model sees the page, and read back by code (`--read-secret`).
+  - Before a click elsewhere, a field just typed into is blurred. If it drops the value (it saves
+    on Enter), code retypes the same text and presses Enter, then verifies it stuck.
+  - It ends on `done`, `blocked`, `loop` (4 identical actions), `stalled` (8 waits) or `error`.
+
+A DONE is still a claim; check the outcome. A new real-site failure becomes a fixture in `bench/`
+before it is fixed, and the fix has to stay site-agnostic.
 
 This folder holds **our extension, not the vendor code**:
 
 | File | Job |
 | :--- | :--- |
-| `jev_frames.py` | `FramedBrowser`: cross-origin iframe support plus hints for icon-only buttons. `jev_frames.install()` swaps it into `jev_ultrafast.Agent`; no vendor file is patched. |
-| `run_elfsight.py` | Runs one goal (or an ordered list of goals), logs every action, pulls any `elfsight-app-<id>` install code off the final page, and closes its tab. |
+| `jev_do.py` | **The generic entry point** (above). |
+| `ghl_keys.py` | GoHighLevel location API keys: navigation steps, `read_secret()` and `named_exact()`. The two readers are generic and used by `jev_do.py`. |
+| `jev_deep.py` + `deep_snapshot.js` | **Use this.** `DeepBrowser` reads out-of-process iframes at any depth, open shadow roots, same-origin iframes, role-less click targets (div cards), and icon-only buttons (hinted). It offers `PRESS_ENTER` while a text field has focus, hovers before clicking, and hides `forbid` matches from the model. `drive()` runs ordered steps on one tab with patience for loading screens. |
+| `jev_frames.py` | The 2026-09-29 one-level iframe reader. Superseded by `jev_deep`; kept for comparison (`--frames`). |
+| `run_elfsight.py` | Runs a task as ordered `--goal` steps with `--forbid` patterns, logs every action, pulls any `elfsight-app-<id>` install code, and closes its tab. |
+| `bench/` | An offline benchmark: 10 fixtures (8 Elfsight-style traps, 2 GoHighLevel sub-account key reads), a two-origin fixture server, and `bench.py`, which scores every run by what the page recorded. |
+
+## The recipe (benchmarked 2026-10-01)
+
+| Variant | What it is | Score |
+| :--- | :--- | :--- |
+| vanilla | Jev as shipped | 1/8 |
+| frames | plus `jev_frames` | 3/8 |
+| deep | `jev_deep`, one whole-task goal | 19/24 |
+| steps | deep, task split into steps | 5/8 (first pass) |
+| **guarded** | **deep + steps + `--forbid`** | **24/24** (×3), 8/8 first pass |
+
+Runs that failed for plumbing reasons (daemon timeouts) are excluded; the raw logs are in
+`bench/results/`. Guarded's median run is 3.7 s, and the full create flow takes 15 s over 7 steps.
+
+1. **Perception is the first wall.** Vendor Jev sees only the host page's "Close" in Elfsight's
+   editor (the 12× Create/Close loop), and no template cards (they are plain divs). It also sees
+   nothing inside nested frames or shadow roots, and has no way to press Enter.
+2. **Forbid is what makes it safe.** Every variant without `--forbid` fell for the search dropdown's
+   echo row (`Search for "…"`), which resets the search. Worse, `deep` then **published a widget
+   with no source and reported DONE**, 3 runs out of 3. Writing a "do not" in the goal is not
+   enough; hide the control. Typical patterns: `^close$`, `^upgrade$`, `^search for `, `delete|trash`.
+3. **Steps alone do not help.** They only pay off together with forbid. Each step names its own
+   stopping point ("… Stop when Connected shows it").
+4. **Patience:** Jev picks BLOCKED over WAIT on loading screens, so `drive()` retries BLOCKED twice
+   after 1.5 s. A malformed model or text-helper reply is retried once.
+5. **Guards in `drive()`:** 4 identical actions in a row return `loop`, and 8 WAITs in a row
+   return `stalled`. The text helper alone sees the whole task (`--task`) as its only source of
+   values, so it never types a page's placeholder example.
+6. **Overlays are read first.** Modals, dropdowns and popovers sit at the end of the DOM, and a
+   long preview would otherwise use up the 6000-character text budget (Elfsight's search results).
+7. **A DONE is a claim, not proof.** Check the outcome yourself (install code read back, then
+   `elfsight-reviews/elfsight_render.py`).
 
 ## Install (once per machine)
 
@@ -20,58 +90,81 @@ This folder holds **our extension, not the vendor code**:
 export PATH="$HOME/.local/bin:$PATH"
 git clone https://github.com/browser-use/jev-ultrafast ~/tools/jev-ultrafast   # tested at 1231850
 cd ~/tools/jev-ultrafast && uv sync
-cp "<repo>/deliver/process/tools/jev-browser-agent/"*.py .
 ```
 
 - **Keys:** put `TYPESAFE_API_KEY` and `TEXT_MODEL_API_KEY` (OpenRouter), plus `TYPESAFE_MODEL`,
   `TEXT_MODEL_BASE_URL`, `TEXT_MODEL` and `TEXT_MODEL_REASONING`, under `[shared]` in
   `~/.webzite/.env`. `env-sync` does not reach the clone. Copy those six lines into the clone's
   own `.env` (it is gitignored) without printing them.
-- **Chrome:** turn on `chrome://inspect/#remote-debugging`. `uv run browser-harness --doctor`
-  never starts the daemon, so it reports FAIL until a real command runs, for example
-  `echo 'print(page_info())' | uv run browser-harness`. That first command raises Chrome's
-  "Allow remote debugging?" prompt.
+- The scripts here run from the repository with `uv run --project ~/tools/jev-ultrafast`; nothing
+  needs to be copied into the clone any more.
+
+## Which Chrome
+
+- **Dedicated automation profile (preferred).** Launch a Chrome with
+  `--remote-debugging-port=9333 --user-data-dir=<dir>`, sign in to the vendor once, then set
+  `BU_NAME=auto BU_CDP_URL=http://127.0.0.1:9333`. There is no "Allow remote debugging?" prompt,
+  and the agent never touches the user's tabs (on 2026-09-30, automation in the user's own window closed Chrome twice).
+- **The user's own Chrome:** needs `chrome://inspect/#remote-debugging` on, and Chrome asks
+  "Allow remote debugging?" after every restart. `uv run browser-harness --doctor` never starts the
+  daemon; a real command does (`echo 'print(page_info())' | uv run browser-harness`).
 
 ## Run
 
 ```bash
-uv run --env-file .env python run_elfsight.py --frames \
-  --url https://dash.elfsight.com/apps/google-reviews \
-  --goal "Create a new Google Reviews widget ..." --goal "..." --out <scratch dir>
+cd deliver/process/tools/jev-browser-agent
+uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env python run_elfsight.py \
+  --url https://dash.elfsight.com/apps/google-reviews --out <scratch dir> \
+  --forbid '^close$' --forbid '^upgrade$' --forbid '^search for ' --forbid 'viewport selector' \
+  --task "Connect <Name, address> as the Google source, name it '<Client> - Google Reviews', publish" \
+  --goal "Click Create widget. Stop when the templates are shown." \
+  --goal "Choose the Carousel template. Stop when a source search field is visible." \
+  --goal "..."
 ```
 
-- **Always pass `--frames` for Elfsight.** Its widget editor is a cross-origin iframe. Without the
-  flag, Jev sees only the host page's "Close" button, and it looped Create / Close 12 times
-  (2026-09-29).
-- `--keep-open` leaves the tab open for inspection. `--record` saves a JPEG per step, but a
-  screenshot of a heavy background tab can hit browser-harness's 5 s timeout and abort the run.
-- Write goals the way the page words things, and name the stopping point ("then stop as DONE").
-  Name what must not happen ("do not click Publish / Close / Upgrade"). A DONE is a claim, not
-  proof: check the outcome yourself, the way `run_elfsight.py` reads the install code back.
+- Write steps the way the page words things, and give each one a stopping point.
+- `--keep-open` leaves the tab open. `--record` saves a JPEG per step, but a screenshot of a heavy
+  background tab can hit browser-harness's 5 s timeout.
+- **Every create run on Elfsight makes a real widget** on the shared account (Google Reviews plan:
+  50 widgets). Test with a read-only goal on an existing widget first. The deterministic
+  `elfsight-reviews/elfsight_widget.py` remains the proven creator.
 
-## How `jev_frames.py` works
+## Benchmark
 
-- **Finding frames.** An out-of-process iframe is *not* in `Page.getFrameTree` until something
-  attaches to it. `Target.getTargets` does list it, with `parentFrameId` naming the owner tab.
-  Its box comes from `DOM.getFrameOwner` plus `DOM.getBoxModel`.
-- **One table.** Each visible frame is read with Jev's own `snapshot.js`. Frame *k*'s node ids are
-  offset by *k* × 1,000,000, and its rects by the iframe's position on the page.
-- **Acting.** The node is resolved and hit-tested inside its own document. The click is a real
-  mouse event at page coordinates on the top-level session. Typing follows focus into the frame.
-- **Icon-only buttons** (named just "button") get a hint built from their class and icon names and
-  the nearest short text, for example `button [search]`. Words only, never selectors.
+```bash
+cd deliver/process/tools/jev-browser-agent/bench
+uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env python bench.py \
+  [--variants vanilla,frames,deep,steps,guarded] [--tasks iframe,flow] [--repeats 3]
+uv run --project ~/tools/jev-ultrafast python inspect_table.py --browser deep --wait 3 flow   # no model calls
+```
+
+- It starts its own headless Chrome (port 9333, throwaway profile, `BU_NAME=bench`) and the fixture
+  server (127.0.0.1:8801 and localhost:8802: two sites, so iframes run out of process). It costs
+  about one TypeSafe call per step.
+- Fixtures: `iframe` (cross-origin editor), `shadow`, `divcards`, `icons`, `enter` (commits on
+  Enter only), `echo` (echo row plus a hidden live region), `nested` (an OOPIF inside an OOPIF),
+  and `flow` (all of them in one create-widget run). When a new dashboard trap shows up, add a
+  fixture for it before changing `jev_deep`.
+
+## How `jev_deep` works
+
+- **Frames:** `Target.getTargets` lists each out-of-process iframe with its `parentFrameId`. The
+  owner box is looked up in the *parent's* session (`DOM.getFrameOwner` + `DOM.getBoxModel`), so
+  nesting works. Frame *k*'s node ids are offset by *k* × 1,000,000, and its rects by the frame's
+  page position, clipped to what its ancestors show.
+- **Inside a document**, `deep_snapshot.js` walks open shadow roots and same-origin iframes.
+  Hit-testing descends through both, so occlusion checks still hold.
+- **Text** puts the frames first (the editor is where the work is), and skips `aria-live` regions,
+  which only repeat the results.
 
 ## Limits
 
-- Frames nested inside other frames are not read (only frames owned by the tab's own frames).
-- Scrolling is a wheel event at a fixed point on the page, not aimed at a frame's own scroller.
-- Every create run on Elfsight makes a real widget on the shared agency account (Google Reviews
-  plan: 50 widgets). Test on an existing widget with a read-only goal first.
-- Jev's model can add an unasked-for click after reaching the goal. Verified 2026-09-29: it
-  cleared a search field it had just typed into.
+- Closed shadow roots, canvas, uploads, pop-up tabs, and frame-local scrolling are not handled.
+- The text helper (`inception/mercury-2.5`) sometimes returns no value; `drive()` retries once.
+- Benchmarked on fixtures. On real Elfsight, a read-only run is verified (2026-10-01: Theme, then Layout, in 2 actions and 11.5 s, preview text read); a create run is not yet. Before trusting it on a new vendor, run a read-only goal there first.
 
 ## Version Control
 
-Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md) §4. Only our two Python
-files are tracked here. The vendor clone lives outside the repository, in `~/tools/jev-ultrafast`,
-and its `.env` is never committed.
+Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md) §4. Our scripts, fixtures
+and benchmark logs are tracked here. The vendor clone lives outside the repository, in
+`~/tools/jev-ultrafast`, and its `.env` is never committed.

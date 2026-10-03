@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Webzite pre-merge-commit hook — a merge into main is ONE client's folder or system files, never both.
 #
-# A client worktree merges into main when its site launches; that merge may only add or change
+# A client branch merges into main at the end of a task; that merge may only add or change
 # deliver/brandklout/<client>/. System updates never land through a client merge.
 # See scripts/check-scope.mjs and deliver/DELIVER_SYSTEM_RULES.md §3.
 #

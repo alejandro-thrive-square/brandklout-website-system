@@ -78,4 +78,13 @@ if (envSync.error) {
   console.log(`postinstall: could not run env-sync.mjs (${envSync.error.message}) — skipped.`);
 }
 
+// Rebuild the client's process mirror from the `main` ref. deliver/process is tracked on main
+// only; a client worktree reads it through this untracked mirror. No-op on main.
+const mirror = spawnSync(process.execPath, [path.join(__dirname, "scenario.mjs"), "sync", "--quiet"], {
+  stdio: "inherit",
+});
+if (mirror.error) {
+  console.log(`postinstall: could not run scenario.mjs sync (${mirror.error.message}) — skipped.`);
+}
+
 process.exit(0);
