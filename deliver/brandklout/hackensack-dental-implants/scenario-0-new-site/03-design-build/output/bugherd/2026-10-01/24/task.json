@@ -1,0 +1,77 @@
+{
+ "id": 31348355,
+ "project_id": 544349,
+ "project_name": "Hackensack Dental Implants",
+ "created_at": "2026-10-01T22:41:08.790Z",
+ "updated_at": "2026-10-01T22:41:09.412Z",
+ "local_task_id": 24,
+ "priority_id": 0,
+ "status_id": 2344253,
+ "title": null,
+ "description": "Update based on office.",
+ "description_html": null,
+ "tag_names": [],
+ "external_id": null,
+ "requester_email": "agency@brandklout.com",
+ "attachments": [],
+ "screenshot_url": "https://files.bugherd.com/1ctgxi0u9x9rixy22xkn9a/screenshot.jpg",
+ "status": "todo",
+ "priority": "not set",
+ "closed_at": null,
+ "secret_link": "https://www.bugherd.com/t/wedZKg6zNwZRcPciHndf1g",
+ "admin_link": "https://www.bugherd.com/projects/544349/tasks/24",
+ "deleted_at": null,
+ "site": "https://hackensack-dental-implants-staging.up.railway.app",
+ "url": "/",
+ "metadata": {},
+ "screenshot_data": {
+  "screenshot_width": 1588,
+  "screenshot_height": 1588,
+  "screenshot_pin_x": 245,
+  "screenshot_pin_y": 394
+ },
+ "fullstory_session_url": null,
+ "logrocket_session_url": null,
+ "requester_os": "Mac OS 10.15.7",
+ "requester_browser": "Safari 26.6.2",
+ "requester_browser_size": "1588 x 870 px",
+ "requester_resolution": "1920 x 1080 px",
+ "selector_info": {
+  "path": "html>body>div#smooth-wrapper>div#smooth-content>main#main>section#doctor.ch.section.doctor>div.wrap>div.stats.js-stats>div.stat:nth-of-type(1)>strong",
+  "html": "<strong data-count=\"4.7\" data-decimals=\"1\">4.7</strong>",
+  "version": 2,
+  "data": {
+   "bugOffsetX": 0.3276820608796169,
+   "bugOffsetY": 0.370273687900641
+  }
+ },
+ "due_at": null,
+ "column_id": 2344253,
+ "logs": null,
+ "assignees": [
+  {
+   "id": 619229,
+   "email": "alejandro@thrivesquare.com",
+   "display_name": "Alejandro Milano",
+   "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+  }
+ ],
+ "assigned_to": {
+  "id": 619229,
+  "email": "alejandro@thrivesquare.com",
+  "display_name": "Alejandro Milano",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "requester": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "updater": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ }
+}

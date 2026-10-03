@@ -69,7 +69,7 @@ node push/build-import-input.mjs                           # output/import-input
 RAILWAY_LINK_DIR=<dir linked by project ID> bash push/ship.sh   # check-link, ship, bun import-run.ts, fetch result
 node push/push-site.mjs                                    # dry run
 node push/push-site.mjs --apply --force                    # REPLACE mode: a page missing from dist/ is deleted live
-node push/place-embeds.mjs --apply                         # embeds.json; the importer turns third-party iframes into empty divs
+node push/place-embeds.mjs --apply                         # output/code/embeds.json; the importer turns third-party iframes into empty divs
 node ops/apply-template-flags.mjs --page 404 --not-found   # + --page <tpl> --table <collection>; import wipes them
 node gates/template-guard.mjs
 node ../instatic-api-sync/insta-api.mjs publish

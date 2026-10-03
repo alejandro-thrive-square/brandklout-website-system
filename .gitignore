@@ -1,3 +1,14 @@
+# ===== Process mirror (client worktrees) =====
+# deliver/process/ is tracked on main only. scripts/scenario.mjs mirrors the started scenarios and
+# their toolkits into a client folder from the `main` ref, and the mirror is never tracked, so a fix
+# to the process can only land on main. A client tracks its README, RUNBOOK, docs/ and each step's
+# output/. FIRST in this file on purpose: the media and profile rules below still win inside output/.
+/deliver/brandklout/*/scenario-*/**
+!/deliver/brandklout/*/scenario-*/**/
+!/deliver/brandklout/*/scenario-*/*/output/**
+/deliver/brandklout/*/tools/
+/deliver/brandklout/*/.process-mirror.json
+
 # ===== Workflow Artifacts =====
 # .tmp folders are committed when they contain lightweight workflow artifacts.
 # Heavy binary/media files inside .tmp remain excluded by the asset rules below.
@@ -25,6 +36,8 @@
 !.env.example
 # Google OAuth client downloads — they belong in ~/.webzite/, never in a repo.
 client_secret_*.json
+# Instatic login cookies written by the API toolkits (.session-<host>).
+.session-*
 
 # ===== Binary / Media Assets =====
 # Heavy binary/media assets are backed up to Cloudflare R2 by scripts/assets.mjs (manifest: <client>/assets.tsv).
@@ -180,6 +193,8 @@ nul
 
 # Asana pulls are per-person task dumps, regenerated on demand
 deliver/scripts/output/
+# A tool run from its own folder writes output/ beside the scripts; run output is never system code.
+deliver/process/tools/*/output/
 
 # Run outputs recovered from the per-worktree deliver/process copies on 2026-09-27 (backups, bundles,
 # logs). Too large or too raw for git; scripts/assets.mjs keeps them in R2.

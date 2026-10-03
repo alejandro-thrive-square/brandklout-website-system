@@ -1,0 +1,77 @@
+{
+ "id": 31348328,
+ "project_id": 544349,
+ "project_name": "Hackensack Dental Implants",
+ "created_at": "2026-10-01T22:39:16.163Z",
+ "updated_at": "2026-10-01T22:39:16.832Z",
+ "local_task_id": 20,
+ "priority_id": 0,
+ "status_id": 2344253,
+ "title": null,
+ "description": "Bring her photo up, too much head room",
+ "description_html": null,
+ "tag_names": [],
+ "external_id": null,
+ "requester_email": "agency@brandklout.com",
+ "attachments": [],
+ "screenshot_url": "https://files.bugherd.com/i7znxeoa8mwxx6xazssv5g/screenshot.jpg",
+ "status": "todo",
+ "priority": "not set",
+ "closed_at": null,
+ "secret_link": "https://www.bugherd.com/t/MIbwJ5IlzMXjFc8zQSc2Dw",
+ "admin_link": "https://www.bugherd.com/projects/544349/tasks/20",
+ "deleted_at": null,
+ "site": "https://hackensack-dental-implants-staging.up.railway.app",
+ "url": "/",
+ "metadata": {},
+ "screenshot_data": {
+  "screenshot_width": 1588,
+  "screenshot_height": 1588,
+  "screenshot_pin_x": 391,
+  "screenshot_pin_y": 482
+ },
+ "fullstory_session_url": null,
+ "logrocket_session_url": null,
+ "requester_os": "Mac OS 10.15.7",
+ "requester_browser": "Safari 26.6.2",
+ "requester_browser_size": "1588 x 870 px",
+ "requester_resolution": "1920 x 1080 px",
+ "selector_info": {
+  "path": "html>body>div#smooth-wrapper>div#smooth-content>main#main>section#solutions.ch>div#feature.feature>div.wrap.feature-grid>div.feature-photo>div.photo.js-wipe.js-parallax>img",
+  "html": "<img src=\"/uploads/A6OrIzCEnOtoVuX7HIZjj-feature.webp\" alt=\"A patient smiling in the treatment chair with a hand mirror in her hand\" srcset=\"/uploads/A6OrIzCEnOtoVuX7HIZjj-feature-w64.webp 64w, /uploads/A6OrIzCEnOtoVuX7HIZjj-feature-w320.webp 320w, /uploads/A6OrIzCEnOtoVuX7HIZjj-feature-w640.webp 640w, /uploads/A6OrIzCEnOtoVuX7HIZjj-feature-w1024.webp 1024w, /uploads/A6OrIzCEnOtoVuX7HIZjj-feature-w1460.webp 1460w\" sizes=\"auto, 100vw\" width=\"1460\" height=\"1080\" loading=\"lazy\" decoding=\"async\" sty",
+  "version": 2,
+  "data": {
+   "bugOffsetX": 0.3844812625397486,
+   "bugOffsetY": 0.4711247278580693
+  }
+ },
+ "due_at": null,
+ "column_id": 2344253,
+ "logs": null,
+ "assignees": [
+  {
+   "id": 619229,
+   "email": "alejandro@thrivesquare.com",
+   "display_name": "Alejandro Milano",
+   "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+  }
+ ],
+ "assigned_to": {
+  "id": 619229,
+  "email": "alejandro@thrivesquare.com",
+  "display_name": "Alejandro Milano",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "requester": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "updater": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ }
+}
