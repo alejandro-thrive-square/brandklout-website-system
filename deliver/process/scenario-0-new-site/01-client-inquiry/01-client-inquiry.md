@@ -39,7 +39,7 @@ direction the client picked.
 2. **Worktree.** Create the Orca worktree, rename the branch to the bare `bk-<client>`, add the client
    folder to the sparse checkout (`git sparse-checkout add deliver/brandklout/<client>`), add a
    `[<client>]` section to `~/.webzite/.env` (even empty) and run `node scripts/env-sync.mjs`. Then
-   `node scripts/scenario.mjs start <client> 0` copies this scenario into the client folder with its
+   `node scripts/scenario.mjs start <client> 0` mirrors this scenario into the client folder with its
    `README.md`, `RUNBOOK.md`, `docs/` and an `output/` per step; work from there. See [SYSTEM_RULES.md §4.2](../../../../SYSTEM_RULES.md).
 3. **Production site.** Create a new Railway project from the Instatic image with
    [`tools/instatic-site/setup/provision-instance.mjs`](../../tools/instatic-site/setup/provision-instance.mjs):

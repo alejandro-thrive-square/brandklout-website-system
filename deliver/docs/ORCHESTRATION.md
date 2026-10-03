@@ -48,17 +48,18 @@ branch and can be reviewed and merged independently.
 A client worktree that needs something cross-cutting — a new shared archetype, a platform grant, a
 scope decision — reports it back here rather than deciding alone.
 
-### Propagation is versioned, not live
+### Propagation is from the committed main ref
 
-A client worktree does not check out `deliver/process/`; its folder carries a copy of each scenario
-it started, recorded against a commit. Process changes are fixed on `main` and reach the client with
-`node scripts/scenario.mjs update <client>` (never by merging `main` into the client branch).
-Before dispatch, commit the process change on `main`, run the update, and confirm the task's
-references exist inside that worktree. The rules are in
+A client worktree does not check out `deliver/process/`; its folder holds an untracked mirror of each
+scenario it started, rebuilt from the committed `main` ref by `node scripts/scenario.mjs sync` (on
+`npm install` and at every Claude Code session start). Rules and `scripts/` arrive by merging
+`main` into the client branch. Before dispatch, commit the process change on `main`, run the sync in the worker's
+worktree, and confirm the task's references exist there. The rules are in
 [DELIVER_SYSTEM_RULES.md §3](../DELIVER_SYSTEM_RULES.md).
 
 Reusable client learning is promoted to `deliver/process/` on `main` in a separate system commit.
-Client agents do not edit their copy of the process while also changing their client deliverable.
+Client agents never edit the mirror: it is untracked, and `sync` refuses to overwrite an edited file
+until it is ported to main.
 
 ## Claude accounts — which profile runs what
 
@@ -142,7 +143,7 @@ Every dispatched agent is expected to have read, in this order:
 
 1. `deliver/docs/ASANA-DISPATCH.md` — the batch-wide rules, especially how reference
    URLs may be used and where pages get built
-2. The step directive in the client's scenario copy (`deliver/brandklout/<client>/<scenario>/<step>/`), refreshed with `scenario.mjs update`
+2. The step directive in the client's scenario mirror (`deliver/brandklout/<client>/<scenario>/<step>/`), refreshed with `scenario.mjs sync`
 3. `deliver/brandklout/<client>/docs/project-overview.md` — the task manifest and deviations
 4. `deliver/brandklout/<client>/docs/mcp-access.md` — the exact target and what is not permitted
 

@@ -47,14 +47,14 @@ enforces the split (§4.3).
 | **The process** | `deliver/process/` | `scenario-N-name/NN-step/` step folders and the shared `tools/<toolkit>/`. Fixed on `main` only. |
 | **Shared standards** | `deliver/docs/` | Standards every client uses (fluid root, images, BugHerd, Client-First, Drive map, Asana, orchestration, partner MCP registry). |
 | **Cross-client scripts** | `deliver/scripts/` | Asana pulls and other scripts that serve every client. |
-| **Clients** | `deliver/brandklout/<client>/` | One folder per client and nothing else: `README.md`, `RUNBOOK.md`, `docs/`, `assets.tsv`, and a copy of each scenario it started. |
+| **Clients** | `deliver/brandklout/<client>/` | One folder per client and nothing else: `README.md`, `RUNBOOK.md`, `docs/`, `assets.tsv`, and each started scenario's step `output/` folders (the directives and scripts beside them are an untracked mirror of main). |
 | **System runbook** | `.claude/runbook/` | One file per system run, indexed in `INDEX.md`. |
 
 ### 2.1 Step Folder Structure
 Every scenario step, on `main` and in a client's copy, has the same shape:
 - `NN-step/NN-step.md`: **The Directive**. The step's logic, requirements and gates. The directive is the program; code exists only for real consequences and verifiers.
 - `scripts/` (optional): the step's own executables.
-- `tools.json`: the shared toolkits under `deliver/process/tools/` the step uses. `scenario.mjs` copies only these into a client, so a script that imports another toolkit must list it here.
+- `tools.json`: the shared toolkits under `deliver/process/tools/` the step uses. `scenario.mjs` mirrors only these into a client, so a script that imports another toolkit must list it here.
 - `output/`: **Artifact Storage**. Everything the step produces: `output/assets/` (media, gitignored, backed up to R2), `output/code/`, and the step's `output/RUNBOOK.md`. Lightweight text artifacts are committed; media never is. `output/` replaced `.tmp/` on 2026-09-23; client branches from before keep `workflows/<module>/.tmp/` until moved.
 
 ### 2.2 MCP Server Folder Structure
@@ -83,7 +83,7 @@ Folders that rely on MCPs must include an `mcp-access.md` file documenting allow
 ## 3. Global Operational Standards
 
 - **Context Filtering**: When working on a step, agents read that step's directive and only the tools it names, to save tokens and maintain focus.
-- **Directive Improvement Loop**: At the end of each task, agents must update the specific directive `.md` files they used to learn or execute that process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement. This applies even when no code changes were made. Process fixes are made on `main`, never in a client's copy, and reach clients through `node scripts/scenario.mjs update <client>`. Preserve the mirrored entry-point files when they are affected.
+- **Directive Improvement Loop**: At the end of each task, agents must update the specific directive `.md` files they used to learn or execute that process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement. This applies even when no code changes were made. Process fixes are made on `main`, never in a client's mirror (it is untracked, so a fix there is lost), and reach clients through `node scripts/scenario.mjs sync`. Preserve the mirrored entry-point files when they are affected.
 - **Copy Standards — no em dashes**: No em dash (`—`, `&mdash;`) may appear in any copy this system produces: client sites, proposals, emails, decks, any deliverable. Use a comma, colon, semicolon or full stop, chosen per instance — a blanket substitution leaves half of them ungrammatical. The rule covers every rendered string, including `alt`, `placeholder`, `title`, SEO and Open Graph descriptions, and JSON-LD. It does **not** cover code comments and developer notes, which are not copy. Verify on the **built** output with comments and `<script>`/`<style>` blocks stripped first, or the check reads its own notes back as failures.
 - **Environment Variables**: All API keys and secrets live in the single master file `~/.webzite/.env`; every worktree `.env` is generated from it (§4.2.2).
 - **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Asana) authenticate at runtime — no static tokens required. Usage is controlled by the folder-based procedure in [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md).
@@ -141,9 +141,9 @@ bash scripts/new-client-worktree.sh newclient --dry-run     # print the plan fir
 ```
 
 The cone is the client folder + `deliver/docs`, `deliver/scripts`, `scripts`, `mcp-servers`, `.claude`.
-**`deliver/process/` is left out on purpose (since 2026-09-27):** the client folder carries its own
-copy of each scenario it started, and `node scripts/scenario.mjs update <client>` refreshes it from
-the checkout of `main`, the only place the process is fixed. **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
+**`deliver/process/` is left out on purpose (since 2026-09-27):** it is tracked on `main` only. The
+client folder holds an untracked mirror of each scenario it started, rebuilt from the committed `main`
+ref by `node scripts/scenario.mjs sync` (on `npm install`, at Claude Code session start, or by hand). **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
 `AGENTS.md`, `SYSTEM_RULES.md` and `deliver/DELIVER_SYSTEM_RULES.md` arrive without being listed —
 agents still get their directives. An unknown slug is treated as a **new** client under
 `deliver/brandklout/`, since the folder does not exist until the agent creates it.
@@ -346,7 +346,7 @@ required once per clone). Notes that matter:
 
 ### 4.3 Branching Strategy
 - **`main`**: the system — process, tools, rules, scripts, docs — plus the client folders merged at launch. System changes are committed on `main` directly; the `pre-commit` and `pre-merge-commit` hooks run `check-scope.mjs` so a commit is either a system change or one client's change, never both.
-- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` and merges into `main` (`git merge --no-ff`) when the site launches. It receives process updates through `node scripts/scenario.mjs update <client>`, not by merging `main`.
+- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` merges `main` in at the start of a session and merges into `main` (`git merge --no-ff`) at the end of a task; both are clean because the two never touch the same files, and the branch history is never rewritten. It never tracks the process: it reads `deliver/process/` through an untracked mirror refreshed by `node scripts/scenario.mjs sync`.
 - **Backups**: `backup/*` branches and tags are recovery points; never delete or rewrite them.
 
 ### 4.4 Agent Responsibilities

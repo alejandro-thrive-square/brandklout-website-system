@@ -3,8 +3,10 @@
 Start with the scenario that matches the job, open its README, then the step you are on. Each step
 is a folder: its directive, `tools.json` (the shared toolkits it uses), `output/`, and `scripts/` when
 the step has scripts of its own. A toolkit's `toolkit.json` names the toolkits its scripts need; `scenario.mjs`
-copies those too. For a client, start the scenario
-with `node scripts/scenario.mjs start <client> <scenario>` and work in the client's copy. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
+mirrors those too. This folder is the only tracked copy of the process. For a client, start the scenario
+with `node scripts/scenario.mjs start <client> <scenario>` and work in the client's step folder: its
+`output/` is tracked on the client branch, the directive and scripts beside it are an untracked mirror
+of main refreshed by `scenario.mjs sync`. Fix the process here, never in the mirror. Rules: [../DELIVER_SYSTEM_RULES.md](../DELIVER_SYSTEM_RULES.md).
 
 ## Scenarios
 
@@ -79,7 +81,7 @@ Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 | 03 | [QA and Publish](./scenario-6-webflow-sites/03-qa-and-publish/03-qa-and-publish.md) |
 
 Scripts: [tools/webflow-build](./tools/webflow-build/webflow-build.md); `03-qa-and-publish/scripts/staging-verify.mjs`.
-The FigJam board *Deliver SOP's* has no Scenario 6 lane yet; this index and the scenario README are the source.
+The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, added 2026-10-02 from the scenario README).
 
 ## Tools
 
@@ -99,7 +101,9 @@ The FigJam board *Deliver SOP's* has no Scenario 6 lane yet; this index and the 
 | [webflow-build](./tools/webflow-build/webflow-build.md) | Webflow MCP client, publish guard, tree audit, script registration | 6 (01–03) |
 | [specialty-sitemaps](./tools/specialty-sitemaps/README.md) | Sitemap templates per specialty and their section flows | 0 (02), 3 (02) |
 | [client-first-style-guide](./tools/client-first-style-guide/README.md) | Client-First reference CSS and style guide page | 0 (03), 6 (02) |
-| [jev-browser-agent](./tools/jev-browser-agent/README.md) | Jev (TypeSafe) computer use in vendor dashboards, with cross-origin iframe support (Elfsight widget editor) | none yet (ad hoc; widget creation before an embed step) |
+| [codex-computer-use](./tools/codex-computer-use/README.md) | Codex (ChatGPT desktop app) computer use from Claude Code: one plain instruction, background tab of the user's Chrome, read-only unless `--allow-writes`. **The standard for all computer use** since 2026-10-02 | none yet (ad hoc; vendor dashboards such as GoHighLevel) |
+| [ghl-forms](./tools/ghl-forms/README.md) | **The guide for every GoHighLevel lead form**: the standard (service dropdown, optional SMS consent, real Privacy/Terms links), the Codex instruction template, and the `--standard` gate | none yet (ad hoc; any new or fixed GHL form) |
+| [jev-browser-agent](./tools/jev-browser-agent/README.md) | **Superseded by codex-computer-use (2026-10-02); do not use for new work.** Jev (TypeSafe) computer use in vendor dashboards: `jev_deep` perception (iframes at any depth, shadow DOM, div cards, Enter) + steps + `--forbid`, benchmarked 24/24 on offline fixtures in `bench/` | none yet (ad hoc; widget creation before an embed step) |
 | [elfsight-reviews](./tools/elfsight-reviews/README.md) | One Google Reviews widget per client: registry, inventory, create over CDP, render check | none yet (ad hoc; before an embed step) |
 
 The design bar and its motion gate live in Scenario 0 step 03:

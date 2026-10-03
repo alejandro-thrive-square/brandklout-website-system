@@ -1,0 +1,32 @@
+
+local  C:\Users\ACER\orca\workspaces\Brandklout Website System\bk-hackensack-dental-implants\deliver\brandklout\hackensack-dental-implants\scenario-0-new-site\03-design-build\output\code\site-src\dist
+live   https://hackensack-dental-implants-staging.up.railway.app
+
+
+=== index
+  [390] style: border-bottom-color
+        1 element(s)
+        article.step#3
+            local "rgb(41, 40, 36)"
+            live  "rgb(222, 217, 207)"
+  [390] style: position
+        1 element(s)
+        div.form_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: min-height
+        1 element(s)
+        div.form_embed.wz-embed#0
+            local "330.264px"
+            live  "0px"
+  [390] style: max-width
+        1 element(s)
+        div.form_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] text
+        diverges at char 5780 of 5835/5834
+        local " BY AESTHETIC DENTAL CENTERS CALL NOW BOOK CONSULTATION"
+        live  "BY AESTHETIC DENTAL CENTERS CALL NOW BOOK CONSULTATION"
+
+5 finding(s)

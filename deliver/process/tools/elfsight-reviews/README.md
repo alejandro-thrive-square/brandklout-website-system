@@ -12,7 +12,9 @@ and each widget uses one of the shared account's 50 Google Reviews slots.
 | `elfsight_widget.py` | Creates **one** widget (`--widget new`) or resumes one by id: Carousel template, source search, the result whose text contains `--expect`, the name, then Publish. It runs over CDP in its own background tab; no screenshots, no model. |
 | `elfsight_render.py` | Read-only. Renders widgets on a local test page, as a visitor sees them, and reports each one's rating, review count and first reviewer. This is the proof step. |
 
-The Python scripts run inside the Jev clone (`~/tools/jev-ultrafast`, see
+Dashboard work that these scripts don't cover (checking the dashboard list, editing a widget's
+settings) goes through [codex-computer-use](../codex-computer-use/README.md), the house standard
+since 2026-10-02. The Python scripts run inside the Jev clone (`~/tools/jev-ultrafast`, see
 [jev-browser-agent](../jev-browser-agent/README.md)), which provides `browser_harness`. Chrome
 needs remote debugging on and the account signed in; after a Chrome restart, Chrome asks
 "Allow remote debugging?" once, and the user approves it.

@@ -1,0 +1,77 @@
+{
+ "id": 31343664,
+ "project_id": 544349,
+ "project_name": "Hackensack Dental Implants",
+ "created_at": "2026-10-01T18:21:02.131Z",
+ "updated_at": "2026-10-01T18:21:02.766Z",
+ "local_task_id": 12,
+ "priority_id": 0,
+ "status_id": 2344253,
+ "title": null,
+ "description": "These should like to the team page with their profiles",
+ "description_html": null,
+ "tag_names": [],
+ "external_id": null,
+ "requester_email": "agency@brandklout.com",
+ "attachments": [],
+ "screenshot_url": "https://files.bugherd.com/lwzndmdgglcr0kxgok36ba/screenshot.jpg",
+ "status": "todo",
+ "priority": "not set",
+ "closed_at": null,
+ "secret_link": "https://www.bugherd.com/t/M2kdNF3VdMkW1DlGQNDVUg",
+ "admin_link": "https://www.bugherd.com/projects/544349/tasks/12",
+ "deleted_at": null,
+ "site": "https://hackensack-dental-implants-staging.up.railway.app",
+ "url": "/",
+ "metadata": {},
+ "screenshot_data": {
+  "screenshot_width": 1588,
+  "screenshot_height": 1588,
+  "screenshot_pin_x": 1210,
+  "screenshot_pin_y": 460
+ },
+ "fullstory_session_url": null,
+ "logrocket_session_url": null,
+ "requester_os": "Mac OS 10.15.7",
+ "requester_browser": "Safari 26.6.2",
+ "requester_browser_size": "1588 x 870 px",
+ "requester_resolution": "1920 x 1080 px",
+ "selector_info": {
+  "path": "html>body>div#smooth-wrapper>div#smooth-content>main#main>section#team.ch>div.section.team>div.wrap.team-grid>div>div.specialist-grid.js-stagger",
+  "html": "<div class=\"specialist-grid js-stagger\"><div style=\"translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);\"><b>Won-Sang Lee, DDS</b><span>Oral Surgeon</span></div><div style=\"translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: translate(0px, 0px);\"><b>Dmitriy Klass, DDS, MSD</b><span>Periodontist</span></div><div style=\"translate: none; rotate: none; scale: none; opacity: 1; visibility: inherit; transform: ",
+  "version": 2,
+  "data": {
+   "bugOffsetX": 0.6634966160968123,
+   "bugOffsetY": 0.300379154565989
+  }
+ },
+ "due_at": null,
+ "column_id": 2344253,
+ "logs": null,
+ "assignees": [
+  {
+   "id": 619229,
+   "email": "alejandro@thrivesquare.com",
+   "display_name": "Alejandro Milano",
+   "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+  }
+ ],
+ "assigned_to": {
+  "id": 619229,
+  "email": "alejandro@thrivesquare.com",
+  "display_name": "Alejandro Milano",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "requester": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ },
+ "updater": {
+  "id": 620745,
+  "email": "agency@brandklout.com",
+  "display_name": "BrandKlout Success",
+  "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+ }
+}

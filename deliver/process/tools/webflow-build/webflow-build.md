@@ -71,9 +71,9 @@ and the publish and register writes were not exercised.
   fails. Batch, and let `wf.mjs` back off.
 
 ## Using the scripts in a client worktree
-`node scripts/scenario.mjs start <client> 6` copies this toolkit into the client folder as
-`tools/webflow-build/`, and `scenario.mjs update <client>` refreshes it from main. Never edit that
-copy to fix a script: fix it here on main (hand-edited copies had already diverged: `wfmcp.mjs`,
+`node scripts/scenario.mjs start <client> 6` mirrors this toolkit into the client folder as
+`tools/webflow-build/` (untracked), and `scenario.mjs sync` refreshes it from main. Never edit that
+mirror to fix a script: fix it here on main (hand-edited copies had already diverged: `wfmcp.mjs`,
 `wf.mjs`, `lint-css.mjs`).
 Client-specific build scripts (content JSON, templates, one-off fixes) stay in
 `deliver/brandklout/<client>/scenario-6-webflow-sites/<step>/output/<date>-<slug>/` and import `wf.mjs`.

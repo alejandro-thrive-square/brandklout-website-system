@@ -78,8 +78,8 @@ BRANCH="${BRANCH:-bk-$CLIENT}"
 WT_PATH="${WT_PATH:-${ORCA_WORKSPACES:-$HOME/orca/workspaces}/$(basename "$MAIN")/$BRANCH}"
 
 # Shared surfaces every client build reads: deliver/docs and deliver/scripts, tooling and MCP
-# config. No deliver/process: the client folder holds its own copy of each started scenario, and
-# scripts/scenario.mjs refreshes it from the checkout of main (the process is fixed only there).
+# config. No deliver/process: it is tracked on main only, and scripts/scenario.mjs mirrors the
+# started scenarios into the client folder (untracked) from the `main` ref.
 CONE=(
   "deliver/docs"
   "deliver/scripts"
@@ -124,6 +124,10 @@ if [[ "$SEED" == true ]]; then
   bash "$MAIN/scripts/mirror-assets.sh" --to-worktree --scope "$CLIENT_DIR" || \
     echo "new-client-worktree: asset seeding failed — run mirror-assets.sh --to-worktree by hand."
 fi
+
+echo ""
+echo "--- Process mirror from main ---"
+node scripts/scenario.mjs sync || echo "new-client-worktree: run 'node scripts/scenario.mjs sync' by hand."
 
 echo ""
 echo "=== ready: $WT_PATH"
