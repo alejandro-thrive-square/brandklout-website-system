@@ -11,6 +11,21 @@
 > made here (folder conventions, MCP grant model, review/approval loop) become the
 > default pattern for every future Brandklout client.
 
+## Current scope (2026-10-01): redesign and migrate to Instatic
+
+The site is being **redesigned and migrated from Webflow to Instatic** (scenario 1 migration, then
+scenario 0). Everything below this section describes the earlier Webflow-improvements engagement
+under the pre-v2 `workflows/` layout, kept as history.
+
+- **Instatic production:** https://livewell-dental-production.up.railway.app (Railway project
+  `Livewell Dental`, `47337011-9328-4c36-b1ff-a09b2434262a`). Nothing published.
+- **Instatic staging:** https://livewell-dental-staging.up.railway.app. Holds the concept deck.
+- **Logins:** Alejandro (owner) and Sang (admin) on both, the shared Brandklout logins.
+- **Style selection:** five concepts at https://livewell-dental-staging.up.railway.app/concepts.
+  **Pick: not yet made.** Record it here with anything the client liked in the other four.
+- **Site language:** English. **Contact:** phone 703-690-0102 and the booking page (to confirm with
+  the client before the build: the live site has no form on the homepage).
+
 ## Project Type
 **Existing Webflow site - scoped improvements after audit**
 

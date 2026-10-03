@@ -1,0 +1,16 @@
+# Capture output that stays out of git (copied from scripts/capture.gitignore). Heavy files go to R2 (scripts/assets.mjs push).
+# Heavy or sensitive capture output stays local and goes to the client's shared drive instead.
+# Committed: pages/*.md, data/*.json, site-data.json, url inventories, manifests, reports.
+mirror/site/
+mirror/raw-html/
+mirror/media-library/
+assets/downloads/
+screenshots/
+wayback/html/
+wayback/shots/
+recovered/
+*.sql
+*.sql.gz
+content.xml
+scrape/html/
+node_modules/
