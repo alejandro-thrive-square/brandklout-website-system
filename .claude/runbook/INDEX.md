@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-03 | 2026-10-03 — GoHighLevel lead-form standard: guide + Codex template in `tools/ghl-forms`, `check-ghl-form.mjs --standard` gate; Mason Park's Contact form brought to it — carries **gotchas** | [`2026-10-03-ghl-lead-form-standard.md`](./2026-10-03-ghl-lead-form-standard.md) |
 | 2026-10-02 | 2026-10-02 — concept deck second run (Oceanic Dental): registries, extract_assets.py finds site-data.json, DNI phone note — carries **gotchas** | [`2026-10-02-oceanic-concept-deck-second-run.md`](./2026-10-02-oceanic-concept-deck-second-run.md) |
 | 2026-10-02 | 2026-10-02 — Codex computer use driven from Claude Code: `tools/codex-computer-use/codex_cu.mjs`, background Chrome tab, verified read-only on GoHighLevel — carries **gotchas** | [`2026-10-02-codex-computer-use-from-claude-code.md`](./2026-10-02-codex-computer-use-from-claude-code.md) |
 | 2026-10-01 | 2026-10-01 — Jev benchmark: `jev_deep` perception + steps + `--forbid` scores 24/24 on 8 offline dashboard-trap fixtures (vanilla 1/8); without forbid it publishes empty widgets and says DONE — carries **gotchas** | [`2026-10-01-jev-deep-perception-benchmark.md`](./2026-10-01-jev-deep-perception-benchmark.md) |
