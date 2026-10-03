@@ -5,8 +5,12 @@
 | **Client** | Oceanic Dental |
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Asana task** | _Not yet linked_ |
-| **Scope** | _To confirm_ |
-| **Platform** | Webflow, existing live site `66cd6c49cbb85d43d9e41a7c` on www.oceanicdental.com |
+| **Scope** | Redesign + migration Webflow → Instatic, started 2026-10-02 (scenarios 1 and 0, the Livewell model). Scope still to confirm with Brandklout |
+| **Platform** | Today: Webflow, live site `66cd6c49cbb85d43d9e41a7c` on www.oceanicdental.com. New: Instatic on Railway |
+| **Instatic production** | https://oceanic-dental-production.up.railway.app (empty; fallback admin address after launch) |
+| **Instatic staging** | https://oceanic-dental-staging.up.railway.app (holds the concept deck, `/concepts`) |
+| **Railway** | project `Oceanic Dental` `deb953e8-ca59-48c7-bac6-c2782ec06649` |
+| **Style pick** | _Not yet: deck sent for review_ |
 | **Worktree** | `bk-oceanic-dental` — its own, created 2026-09-22 |
 | **Branch base** | `main` at `78a57f13` (`process_baseline_commit`) |
 | **Started** | 2026-09-22 |
@@ -29,7 +33,6 @@ UUID `e3f87a5b-5c33-47f9-a205-01534abe1f86` (account oceanicdental@thrivesquare.
 
 - Asana task and project IDs.
 - Scope: new build, redesign or migration; page list.
-- Existing domain and current site, if any.
 - Brand assets: logo, palette, fonts, photography (check the client's shared drive first —
   [`GOOGLE_DRIVE.md`](../../docs/GOOGLE_DRIVE.md)).
 

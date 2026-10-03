@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oceanic Dental · Five directions</title>
+<meta name="description" content="Five homepage directions for the new Oceanic Dental website. Same content, five styles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=Italiana&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Sora:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--font-from:18;--font-to:20;--vw-from:calc(1920 / 100);--vw-to:calc(2400 / 100);--coefficient:calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));--base:calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)}
+html{font-size:calc(var(--base) * 1rem + var(--coefficient) * 1vw)}
+@media screen and (max-width:1920px){:root{--font-from:16;--font-to:18;--vw-from:calc(1440 / 100);--vw-to:calc(1920 / 100)}}
+@media screen and (max-width:1440px){:root{--font-from:16;--font-to:16;--vw-from:calc(479 / 100);--vw-to:calc(1440 / 100)}}
+@media screen and (max-width:479px){:root{--font-from:12;--font-to:16;--vw-from:calc(320 / 100);--vw-to:calc(479 / 100)}}
+
+@font-face{font-family:"Oceanic Font";src:url(https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/66cee5d757983fccf6ab4239_oceanic%20font.ttf) format("truetype");font-weight:400;font-display:swap}
+
+.ix{--ink:#1a3743;--teal:#1c6f70;--mist:#effafa;--line:rgba(26,55,67,.14);--paper:#fbfcfc;
+  margin:0;background:var(--paper);color:var(--ink);font-family:"Nunito Sans",system-ui,sans-serif;font-size:1rem;line-height:1.55;-webkit-font-smoothing:antialiased}
+.ix *{box-sizing:border-box}
+.ix img{display:block;max-width:100%}
+.ix a{color:inherit}
+.ix-wrap{width:min(100% - 3rem,80rem);margin-inline:auto}
+
+.ix-top{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.ix-top img{height:2.25rem;width:auto}
+.ix-top span{font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:700}
+
+.ix-hero{padding:6rem 0 4rem;display:grid;grid-template-columns:1.3fr 1fr;gap:4rem;align-items:end}
+.ix-hero h1{font-family:"Oceanic Font","Nunito Sans",sans-serif;font-weight:400;font-size:4.25rem;line-height:1.02;margin:0;letter-spacing:.01em}
+.ix-hero p{margin:0 0 1rem;font-size:1.125rem;color:#33525e}
+.ix-hero .ix-note{font-size:.9375rem;color:#4a6670}
+.ix-wave{display:block;width:100%;height:3rem;color:#64b5b6}
+
+.ix-list{display:grid;gap:2rem;padding:2rem 0 5rem}
+.ix-card{position:relative;display:grid;grid-template-columns:5rem 1fr 1.15fr;gap:2.5rem;align-items:stretch;padding:2.25rem;border:1px solid var(--line);border-radius:1.5rem;background:#fff;text-decoration:none;transition:border-color .3s,box-shadow .3s,transform .3s}
+.ix-card:hover,.ix-card:focus-visible{border-color:rgba(28,111,112,.5);box-shadow:0 1.5rem 3rem -1.5rem rgba(26,55,67,.25);transform:translateY(-.25rem)}
+.ix-card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.ix-num{font-family:"Oceanic Font",sans-serif;font-size:2.75rem;line-height:1;color:var(--teal)}
+.ix-meta h2{margin:.25rem 0 .5rem;font-size:1.75rem;line-height:1.15;font-weight:700}
+.ix-tag{display:inline-block;padding:.25rem .75rem;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--mist);color:var(--teal)}
+.ix-tag.is-rec{background:#1a3743;color:#fff}
+.ix-meta p{margin:0 0 1rem;color:#3d5a65}
+.ix-sw{display:flex;gap:.375rem;margin:0 0 1rem}
+.ix-sw i{width:1.75rem;height:1.75rem;border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+.ix-type{font-size:.875rem;color:#4a6670}
+.ix-type b{color:var(--ink)}
+.ix-go{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;font-weight:700;color:var(--teal)}
+.ix-go::after{content:"→";transition:transform .3s}
+.ix-card:hover .ix-go::after{transform:translateX(.35rem)}
+
+.ix-pv{border-radius:1rem;padding:2rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem;min-height:15rem;overflow:hidden;position:relative}
+.ix-pv small{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase}
+.ix-pv strong{display:block;font-weight:400}
+.ix-pv em{font-style:normal;display:inline-block;padding:.6rem 1.1rem;font-size:.8125rem;align-self:flex-start}
+
+.ix-pv.p1{background:linear-gradient(180deg,#effafa,#fff);color:#1a3743}
+.ix-pv.p1 small{color:#1c6f70;font-family:"Nunito Sans";font-weight:700}
+.ix-pv.p1 strong{font-family:"Oceanic Font";font-size:2.25rem;line-height:1.05}
+.ix-pv.p1 em{background:#29999a;color:#fff;border-radius:999px;font-family:"Nunito Sans";font-weight:700}
+.ix-pv.p1 svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:3rem;color:#64b5b6}
+
+.ix-pv.p2{background:#fff;color:#0f2a33;border:1px solid #d5e4e7;background-image:linear-gradient(#e4eff1 1px,transparent 1px),linear-gradient(90deg,#e4eff1 1px,transparent 1px);background-size:2rem 2rem}
+.ix-pv.p2 small{font-family:"DM Mono";color:#136a6e}
+.ix-pv.p2 small::before{content:"";display:inline-block;width:.5rem;height:.5rem;border-radius:50%;background:#e8735a;margin-right:.5rem;vertical-align:middle}
+.ix-pv.p2 strong{font-family:"Sora";font-weight:300;font-size:2.125rem;line-height:1.1;letter-spacing:-.02em}
+.ix-pv.p2 em{font-family:"DM Mono";border:1px solid #0f2a33;background:#fff}
+
+.ix-pv.p3{background:radial-gradient(circle at 78% 28%,#f6b49e 0 18%,transparent 19%),linear-gradient(180deg,#fdf0dc,#ffe9e2);color:#2c2a29}
+.ix-pv.p3 small{font-family:"Plus Jakarta Sans";font-weight:600;color:#a2452d}
+.ix-pv.p3 strong{font-family:"DM Serif Display";font-size:2.375rem;line-height:1.05}
+.ix-pv.p3 strong i{color:#a2452d}
+.ix-pv.p3 em{background:#2c2a29;color:#fffaf3;border-radius:999px;font-family:"Plus Jakarta Sans";font-weight:600}
+
+.ix-pv.p4{background:#fbfaf7;color:#111a1e;border:1px solid #e3ded3}
+.ix-pv.p4 small{font-family:"Inter Tight";font-weight:600;color:#1a3743;border-bottom:1px solid #111a1e;padding-bottom:.5rem;display:flex;justify-content:space-between}
+.ix-pv.p4 strong{font-family:"Instrument Serif";font-size:3rem;line-height:.95;letter-spacing:-.02em}
+.ix-pv.p4 strong i{font-style:italic;color:#1a3743}
+.ix-pv.p4 em{font-family:"Inter Tight";font-weight:600;background:#afe7e5;color:#111a1e}
+
+.ix-pv.p5{background:#f7f5f0;color:#263235;align-items:center;text-align:center}
+.ix-pv.p5 small{font-family:"Albert Sans";font-weight:500;letter-spacing:.3em;color:#3d6b65}
+.ix-pv.p5 strong{font-family:"Italiana";font-size:2.5rem;line-height:1.05}
+.ix-pv.p5 .ix-arch{width:5rem;height:6.5rem;border-radius:5rem 5rem 0 0;background:linear-gradient(180deg,#e8efec,#7fb7b0);margin:0 auto}
+.ix-pv.p5 em{align-self:center;font-family:"Albert Sans";letter-spacing:.2em;text-transform:uppercase;font-size:.6875rem;border:1px solid #c4ab83;border-radius:999px}
+
+.ix-sec{padding:5rem 0;border-top:1px solid var(--line)}
+.ix-sec h2{font-family:"Oceanic Font",sans-serif;font-weight:400;font-size:2.25rem;margin:0 0 2rem}
+.ix-table{width:100%;border-collapse:collapse;font-size:.9375rem}
+.ix-table th,.ix-table td{text-align:left;padding:1rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+.ix-table th{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#4a6670}
+.ix-table td:first-child{font-weight:700;white-space:nowrap}
+.ix-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:0;padding:0;list-style:none;counter-reset:s}
+.ix-steps li{counter-increment:s;padding:2rem;border-radius:1.25rem;background:var(--mist)}
+.ix-steps li::before{content:counter(s,decimal-leading-zero);display:block;font-family:"Oceanic Font";font-size:1.75rem;color:var(--teal);margin-bottom:.75rem}
+.ix-steps b{display:block;margin-bottom:.35rem;font-size:1.0625rem}
+.ix-foot{padding:3rem 0 4rem;font-size:.875rem;color:#4a6670;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--line)}
+
+html.js .ix-rev{opacity:0;transform:translateY(2rem)}
+
+@media (max-width:991px){
+  .ix-hero{grid-template-columns:1fr;gap:2rem;padding-top:4rem}
+  .ix-hero h1{font-size:3.25rem}
+  .ix-card{grid-template-columns:3.5rem 1fr;gap:1.5rem}
+  .ix-pv{grid-column:1 / -1}
+  .ix-steps{grid-template-columns:1fr}
+}
+@media (max-width:767px){
+  .ix-wrap{width:calc(100% - 2rem)}
+  .ix-hero h1{font-size:2.5rem}
+  .ix-card{grid-template-columns:1fr;padding:1.5rem}
+  .ix-num{font-size:2rem}
+  .ix-table thead{display:none}
+  .ix-table tr{display:block;padding:1rem 0;border-bottom:1px solid var(--line)}
+  .ix-table td{display:block;border:0;padding:.15rem 0}
+}
+@media (prefers-reduced-motion:reduce){html.js .ix-rev{opacity:1;transform:none}.ix-card{transition:none}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="ix">
+<div class="ix-wrap">
+  <header class="ix-top">
+    <img src="https://cdn.prod.website-files.com/66cd6c49cbb85d43d9e41a7c/6722a3d143778f507af0d612_OCEANIC-LOGO-WEB-p-500.png" alt="Oceanic Dental" width="500" height="80">
+    <span>Website style selection</span>
+  </header>
+
+  <section class="ix-hero">
+    <h1 class="ix-rev">Five directions for the new Oceanic Dental</h1>
+    <div class="ix-rev">
+      <p>Each link below is a full homepage. All five carry the same content, in the same order, taken from your current site, so you can compare style against style.</p>
+      <p class="ix-note">Scroll each one end to end: the motion is part of the design. They work on your phone too.</p>
+    </div>
+  </section>
+  <svg class="ix-wave" viewBox="0 0 1200 48" preserveAspectRatio="none" aria-hidden="true"><path d="M0 24 C150 4 300 44 450 24 S750 4 900 24 1050 44 1200 24" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+
+  <div class="ix-list">
+    <a class="ix-card ix-rev" href="concept-01-coastal-concierge.html">
+      <div class="ix-num">01</div>
+      <div class="ix-meta">
+        <span class="ix-tag is-rec">Recommended</span>
+        <h2>Coastal Concierge</h2>
+        <p>Your brand, done properly. Your own display type and the teal you know, with more air, real photography in every chapter, and one continuous wave that settles into a calm horizon as you scroll.</p>
+        <div class="ix-sw" aria-label="Palette"><i style="background:#1a3743"></i><i style="background:#29999a"></i><i style="background:#64b5b6"></i><i style="background:#effafa"></i><i style="background:#eee9e0"></i><i style="background:#ffd1ca"></i></div>
+        <div class="ix-type"><b>Oceanic Font</b> + <b>Nunito Sans</b> · feels established, familiar, one clear step up</div>
+        <span class="ix-go">View concept 01</span>
+      </div>
+      <div class="ix-pv p1" aria-hidden="true">
+        <small>Smile Bright, Feel Right</small>
+        <strong>Cosmetic, Implant &amp; Family Dental Care</strong>
+        <em>Book Online</em>
+        <svg viewBox="0 0 400 48" preserveAspectRatio="none"><path d="M0 30 C60 10 120 46 200 28 S330 12 400 26 V48 H0Z" fill="currentColor" opacity=".35"/></svg>
+      </div>
+    </a>
+
+    <a class="ix-card ix-rev" href="concept-02-clinical-clarity.html">
+      <div class="ix-num">02</div>
+      <div class="ix-meta">
+        <span class="ix-tag">Precision-led</span>
+        <h2>Clinical Clarity</h2>
+        <p>Dentistry as precision. A strict grid, fine lines and numbered labels; the AI diagnosis chapter becomes a scan that sweeps the X-ray, and your specialists read as one directory under one roof.</p>
+        <div class="ix-sw" aria-label="Palette"><i style="background:#0f2a33"></i><i style="background:#1f8f95"></i><i style="background:#e8735a"></i><i style="background:#e4eff1"></i><i style="background:#f2f7f8"></i><i style="background:#ffffff"></i></div>
+        <div class="ix-type"><b>Sora</b> + <b>DM Mono</b> · feels modern, exact, a practice that sees more</div>
+        <span class="ix-go">View concept 02</span>
+      </div>
+      <div class="ix-pv p2" aria-hidden="true">
+        <small>Scan 03 / AI diagnosis</small>
+        <strong>Cosmetic, Implant &amp; Family Dental Care</strong>
+        <em>Book Online →</em>
+      </div>
+    </a>
+
+    <a class="ix-card ix-rev" href="concept-03-golden-hour.html">
+      <div class="ix-num">03</div>
+      <div class="ix-meta">
+        <span class="ix-tag">Patient-led</span>
+        <h2>Golden Hour</h2>
+        <p>"Smile Bright, Feel Right" as Southern California light. Warm cream and peach, big smiling portraits, your patient films up front, and a sun that rises behind the headline as you scroll.</p>
+        <div class="ix-sw" aria-label="Palette"><i style="background:#2c2a29"></i><i style="background:#e9876f"></i><i style="background:#29999a"></i><i style="background:#fdf0dc"></i><i style="background:#ffe9e2"></i><i style="background:#fffaf3"></i></div>
+        <div class="ix-type"><b>DM Serif Display</b> + <b>Plus Jakarta Sans</b> · feels friendly, bright, about how you'll feel</div>
+        <span class="ix-go">View concept 03</span>
+      </div>
+      <div class="ix-pv p3" aria-hidden="true">
+        <small>Smile Bright, Feel Right</small>
+        <strong>Cosmetic, Implant <i>&amp;</i> Family Dental Care</strong>
+        <em>Book Online</em>
+      </div>
+    </a>
+
+    <a class="ix-card ix-rev" href="concept-04-tide-journal.html">
+      <div class="ix-num">04</div>
+      <div class="ix-meta">
+        <span class="ix-tag">Design-led</span>
+        <h2>The Tide Journal</h2>
+        <p>An editorial magazine for a coastal practice. Very large serif statements, asymmetric layouts and numbered features; images wash in like a wave and the headline settles into a masthead.</p>
+        <div class="ix-sw" aria-label="Palette"><i style="background:#111a1e"></i><i style="background:#1a3743"></i><i style="background:#afe7e5"></i><i style="background:#f1eee7"></i><i style="background:#fbfaf7"></i><i style="background:#ffffff"></i></div>
+        <div class="ix-type"><b>Instrument Serif</b> + <b>Inter Tight</b> · feels design-led, confident, memorable</div>
+        <span class="ix-go">View concept 04</span>
+      </div>
+      <div class="ix-pv p4" aria-hidden="true">
+        <small><span>Oceanic</span><span>No. 01</span></small>
+        <strong>Smile bright, <i>feel right.</i></strong>
+        <em>Book Online</em>
+      </div>
+    </a>
+
+    <a class="ix-card ix-rev" href="concept-05-shoreline-retreat.html">
+      <div class="ix-num">05</div>
+      <div class="ix-meta">
+        <span class="ix-tag">Hospitality-led</span>
+        <h2>Shoreline Retreat</h2>
+        <p>Concierge care as hospitality. Linen and seafoam, arched photographs, slow parallax and lots of air; your visit becomes a calm walk-through from the front desk to the result.</p>
+        <div class="ix-sw" aria-label="Palette"><i style="background:#263235"></i><i style="background:#7fb7b0"></i><i style="background:#c4ab83"></i><i style="background:#e8efec"></i><i style="background:#efe7dc"></i><i style="background:#f7f5f0"></i></div>
+        <div class="ix-type"><b>Italiana</b> + <b>Albert Sans</b> · feels serene, premium, an experience</div>
+        <span class="ix-go">View concept 05</span>
+      </div>
+      <div class="ix-pv p5" aria-hidden="true">
+        <small>Concierge dentistry</small>
+        <div class="ix-arch"></div>
+        <strong>Smile Bright, Feel Right</strong>
+        <em>Book a visit</em>
+      </div>
+    </a>
+  </div>
+
+  <section class="ix-sec ix-rev">
+    <h2>The type, side by side</h2>
+    <table class="ix-table">
+      <thead><tr><th>Concept</th><th>Headlines</th><th>Text</th><th>Character</th></tr></thead>
+      <tbody>
+        <tr><td>01 Coastal Concierge</td><td style="font-family:'Oceanic Font';font-size:1.25rem">Oceanic Font</td><td style="font-family:'Nunito Sans'">Nunito Sans</td><td>Your own wide caps, kept and given room</td></tr>
+        <tr><td>02 Clinical Clarity</td><td style="font-family:'Sora';font-size:1.25rem;font-weight:300">Sora</td><td style="font-family:'DM Mono'">DM Mono</td><td>Geometric and technical, labels like an instrument</td></tr>
+        <tr><td>03 Golden Hour</td><td style="font-family:'DM Serif Display';font-size:1.25rem">DM Serif Display</td><td style="font-family:'Plus Jakarta Sans'">Plus Jakarta Sans</td><td>Soft, warm serif with friendly italics</td></tr>
+        <tr><td>04 The Tide Journal</td><td style="font-family:'Instrument Serif';font-size:1.375rem">Instrument Serif</td><td style="font-family:'Inter Tight'">Inter Tight</td><td>Magazine contrast: huge serif, small grotesk</td></tr>
+        <tr><td>05 Shoreline Retreat</td><td style="font-family:'Italiana';font-size:1.375rem">Italiana</td><td style="font-family:'Albert Sans'">Albert Sans</td><td>Light, elegant display with tracked small caps</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ix-sec ix-rev">
+    <h2>How to choose</h2>
+    <ol class="ix-steps">
+      <li><b>Open each one on your phone and your computer.</b>Scroll to the bottom; most of the design is in how it moves.</li>
+      <li><b>Pick the one that feels most like Oceanic.</b>Not the one with the best photo: every concept uses the same photos and words.</li>
+      <li><b>Tell us what you liked in the others.</b>A colour, a section, a moment. We can bring it into the one you choose.</li>
+    </ol>
+  </section>
+
+  <footer class="ix-foot">
+    <span>Oceanic Dental · Huntington Beach &amp; Fountain Valley</span>
+    <span>Concept previews only. Links, forms and phone numbers point to your current site.</span>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!window.gsap || reduce) { document.documentElement.classList.remove('js'); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.ix-rev').forEach(function(el){
+    gsap.to(el, { opacity:1, y:0, duration:.9, ease:'power3.out', scrollTrigger:{ trigger:el, start:'top 88%' } });
+  });
+  gsap.fromTo('.ix-wave path', { attr:{ d:'M0 24 C150 24 300 24 450 24 S750 24 900 24 1050 24 1200 24' } }, { attr:{ d:'M0 24 C150 4 300 44 450 24 S750 4 900 24 1050 44 1200 24' }, duration:1.6, ease:'sine.inOut', repeat:-1, yoyo:true });
+  document.querySelectorAll('.ix-card').forEach(function(card){
+    var pv = card.querySelector('.ix-pv');
+    card.addEventListener('pointermove', function(e){
+      var r = card.getBoundingClientRect();
+      gsap.to(pv, { x:(e.clientX - r.left - r.width/2)/40, y:(e.clientY - r.top - r.height/2)/30, duration:.6, ease:'power2.out' });
+    });
+    card.addEventListener('pointerleave', function(){ gsap.to(pv, { x:0, y:0, duration:.6 }); });
+  });
+})();
+</script>
+</body>
+</html>
