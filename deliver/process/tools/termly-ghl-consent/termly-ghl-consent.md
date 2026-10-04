@@ -147,6 +147,7 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
 node gates/check-ghl-form.mjs <formId|url> [...]       > output/ghl-forms.log 2>&1  # save-and-exit off, 11 consent fields
 node gates/check-ghl-form.mjs --combo <combo.json>     > output/ghl-forms.log 2>&1  # + each form redirects to its thank-you page
 node gates/check-ghl-form.mjs --standard --origin https://www.client.com <formId>  > output/ghl-forms.log 2>&1  # + the lead-form standard (../ghl-forms)
+node gates/check-ghl-form.mjs --standard --landing --origin https://www.client.com --legal "X PLLC DBA Y" --location <id> <formId>  > output/ghl-forms.log 2>&1  # landing-page form: no dropdown, redirect must answer 200
 node gates/dni-proof.mjs --relay <url> [...]           > output/dni.log 2>&1        # the number pool really swaps (one visitor)
 node gates/dni-proof.mjs --relay --combo <combo.json>  > output/dni.log 2>&1
 ```

@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-03 | 2026-10-03 — `deliver/process` tracked on main only: clients get an untracked mirror (`scenario.mjs sync` from the `main` ref, refuses to overwrite local edits); two-way merges; Hackensack, IFA, Livewell, Oceanic migrated and merged into main — carries **gotchas** | [`2026-10-03-process-single-source-on-main.md`](./2026-10-03-process-single-source-on-main.md) |
 | 2026-10-03 | 2026-10-03 — GoHighLevel lead-form standard: guide + Codex template in `tools/ghl-forms`, `check-ghl-form.mjs --standard` gate; Mason Park's Contact form brought to it — carries **gotchas** | [`2026-10-03-ghl-lead-form-standard.md`](./2026-10-03-ghl-lead-form-standard.md) |
 | 2026-10-02 | 2026-10-02 — concept deck second run (Oceanic Dental): registries, extract_assets.py finds site-data.json, DNI phone note — carries **gotchas** | [`2026-10-02-oceanic-concept-deck-second-run.md`](./2026-10-02-oceanic-concept-deck-second-run.md) |
 | 2026-10-02 | 2026-10-02 — Codex computer use driven from Claude Code: `tools/codex-computer-use/codex_cu.mjs`, background Chrome tab, verified read-only on GoHighLevel — carries **gotchas** | [`2026-10-02-codex-computer-use-from-claude-code.md`](./2026-10-02-codex-computer-use-from-claude-code.md) |

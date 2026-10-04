@@ -30,9 +30,15 @@
  *      a service dropdown, the SMS consent element (Terms & Conditions, NOT required), and Privacy
  *      Policy + Terms of Service links that are not GoHighLevel's https://www.example.com
  *      placeholder. With --origin <https://www.client.com> both links must be on that origin.
+ *      The SMS element must carry both boxes (care + marketing); with --legal "<legal name>" both
+ *      must name it. With --location <id> the form must live in that sub-account (2026-10-03: two
+ *      Mason Park ad forms lived in Grand Mission's location and linked to its privacy page). A
+ *      redirect on submit must answer 200 (relative paths resolve against --origin).
+ *      --landing (and --combo) marks landing-page forms: the page is already one service, so they
+ *      need NO service dropdown, and they must redirect to a thank-you page instead.
  *
  *   node check-ghl-form.mjs <formId|url> [...]      > output/ghl-forms.log 2>&1
- *   node check-ghl-form.mjs --standard [--origin https://www.client.com] <formId|url> [...]
+ *   node check-ghl-form.mjs --standard [--landing] [--origin https://www.client.com] [--legal "X PLLC DBA Y"] [--location <id>] <formId|url> [...]
  *   node check-ghl-form.mjs --combo <combo.json>    > output/ghl-forms.log 2>&1   (needs tools/ads-combo)
  *
  * Redirect stdout to a file, never pipe it (Node 24 on Windows dies on a piped stdout).
@@ -56,6 +62,7 @@ async function readForm(idOrUrl) {
   const node = d.find((n) => isObj(n) && 'enableSaveExitConfirmation' in n)
   const fa = node && isObj(R(node.formAction)) ? R(node.formAction) : {}
   const meta = d.find((n) => isObj(n) && 'parentFolderName' in n && 'name' in n)
+  const loc = d.find((n) => isObj(n) && 'locationId' in n)
   const consent = new Set(html.match(/privacy_[a-z_]+|marketing_disclosure_version/g) || [])
   const deep = (v, depth = 0) => {
     const x = R(v)
@@ -72,25 +79,34 @@ async function readForm(idOrUrl) {
     actionType: R(fa.actionType) ?? null,
     redirectUrl: R(fa.redirectUrl) || '',
     consentFields: consent.size,
+    locationId: loc ? R(loc.locationId) : null,
     fields,
   }
 }
 
 /** The lead-form standard (tools/ghl-forms/README.md). Returns a list of problems. */
-function standardProblems(f, origin) {
+async function standardProblems(f, { origin, legal, location, landing }) {
   const p = []
   const text = (x) => String(x ?? '')
   const isConsent = (x) => /^privacy_|^marketing_disclosure_version$/.test(text(x.label)) || /^privacy_|marketing_disclosure/.test(text(x.name))
   const named = (x) => `${text(x.customFieldLabel)} ${text(x.name)} ${text(x.label)} ${text(x.placeholder)}`
   const dropdowns = f.fields.filter((x) => x.type === 'single_options' && !isConsent(x))
   const service = dropdowns.find((x) => /service|treatment|procedure|interest/i.test(named(x)))
-  if (!service) p.push('no service dropdown (a Single Dropdown named Service / Treatment Type)')
+  if (landing) {
+    if (service) p.push('landing-page form has a service dropdown: remove it, the page is already one service')
+    if (f.actionType !== '1') p.push('landing-page form shows an inline message: it must redirect to its thank-you page')
+  }
+  else if (!service) p.push('no service dropdown (a Single Dropdown named Service / Treatment Type)')
   else if (!Array.isArray(service.picklistOptions) || service.picklistOptions.length < 3) p.push(`service dropdown has ${service.picklistOptions?.length ?? 0} options`)
   const tc = f.fields.find((x) => x.type === 'terms_and_conditions')
   if (!tc) p.push('no SMS consent element (GoHighLevel Terms & Conditions)')
   else {
     if (tc.required === true) p.push('SMS consent checkbox is REQUIRED: A2P 10DLC needs it optional')
     if (/\[BUSINESS NAME\]|\[USE_CASE/i.test(text(tc.placeholder))) p.push('SMS consent still has the [BUSINESS NAME] template text')
+    const boxes = [tc.placeholder, tc.placeholder2].map((x) => text(x).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean)
+    if (boxes.length < 2) p.push(`SMS consent has ${boxes.length} checkbox(es), the standard is two (care + marketing)`)
+    const squash = (x) => x.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+    if (legal) for (const [i, b] of boxes.entries()) if (!squash(b).includes(squash(legal))) p.push(`SMS consent box ${i + 1} does not name "${legal}": "${b.slice(0, 90)}…"`)
   }
   const hrefs = f.fields.flatMap((x) => [x.label, x.placeholder].map(text)).join(' ').match(/<a\b[^>]*>[\s\S]*?<\/a>/gi) || []
   for (const want of ['Privacy Policy', 'Terms of Service']) {
@@ -99,6 +115,14 @@ function standardProblems(f, origin) {
     if (!href) p.push(`no "${want}" link`)
     else if (/example\.com/i.test(href)) p.push(`"${want}" still links to ${href}`)
     else if (origin && !href.toLowerCase().startsWith(origin.replace(/\/+$/, '').toLowerCase() + '/')) p.push(`"${want}" links to ${href}, expected ${origin}/…`)
+  }
+  if (location && f.locationId && f.locationId !== location) p.push(`form lives in sub-account ${f.locationId}, the site's is ${location}: its leads land in another practice's CRM`)
+  if (f.actionType === '1' && f.redirectUrl) {
+    let url = f.redirectUrl
+    try { url = new URL(f.redirectUrl, origin || undefined).href } catch {}
+    let code = 0
+    try { code = (await fetch(url, { headers: { 'user-agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(20000) })).status } catch {}
+    if (code !== 200) p.push(`on submit it redirects to ${f.redirectUrl}, which answers ${code || 'nothing'}`)
   }
   return p
 }
@@ -110,10 +134,14 @@ if (ci >= 0) {
   const { loadCombo, pathOf } = await import('../../ads-combo/lib/combo.mjs')
   const c = loadCombo(argv[ci + 1])
   for (const k of c.campaigns) jobs.push({ id: k.formId, campaign: k.name, expect: c.productionOrigin + pathOf(c, k.thankYou) })
-} else for (let i = 0; i < argv.length; i++) { if (argv[i] === '--origin') i++; else if (!argv[i].startsWith('--')) jobs.push({ id: argv[i] }) }
+} else for (let i = 0; i < argv.length; i++) { if (['--origin', '--legal', '--location'].includes(argv[i])) i++; else if (!argv[i].startsWith('--')) jobs.push({ id: argv[i] }) }
 const standard = argv.includes('--standard')
 const oi = argv.indexOf('--origin')
 const origin = oi >= 0 ? argv[oi + 1] : ''
+const opt = (k) => { const i = argv.indexOf(k); return i >= 0 ? argv[i + 1] : '' }
+const legal = opt('--legal')
+const location = opt('--location')
+const landing = argv.includes('--landing') || ci >= 0
 if (!jobs.length) { console.error('usage: check-ghl-form.mjs <formId|url> [...] | --combo <combo.json>'); process.exit(2) }
 
 const norm = (u) => { try { const x = new URL(u); return (x.origin + x.pathname).replace(/\/+$/, '').toLowerCase() } catch { return String(u) } }
@@ -128,10 +156,10 @@ for (const j of jobs) {
     if (f.actionType !== '1') problems.push(`on submit it shows an inline message (actionType ${f.actionType}), it must redirect to ${j.expect}`)
     else if (norm(f.redirectUrl) !== norm(j.expect)) problems.push(`redirects to ${f.redirectUrl || '(empty)'}, expected ${j.expect}`)
   }
-  if (standard) problems.push(...standardProblems(f, origin))
+  if (standard) problems.push(...(await standardProblems(f, { origin, legal, location, landing })))
   if (problems.length) bad++
   console.log(`${f.id}  ${problems.length ? 'FAIL' : 'ok  '}  "${f.name ?? '?'}"${j.campaign ? '  [' + j.campaign + ']' : ''}`)
-  console.log(`      save-exit ${f.saveExit ? 'ON' : 'off'} · action ${f.actionType === '1' ? 'redirect' : f.actionType === '2' ? 'message' : f.actionType} · redirect ${f.redirectUrl || '-'} · consent fields ${f.consentFields}/${CONSENT_FIELDS}`)
+  console.log(`      save-exit ${f.saveExit ? 'ON' : 'off'} · action ${f.actionType === '1' ? 'redirect' : f.actionType === '2' ? 'message' : f.actionType} · redirect ${f.redirectUrl || '-'} · consent fields ${f.consentFields}/${CONSENT_FIELDS} · location ${f.locationId ?? '?'}`)
   for (const p of problems) console.log('      PROBLEM ' + p)
 }
 console.log(`\n${bad} form(s) failing`)
