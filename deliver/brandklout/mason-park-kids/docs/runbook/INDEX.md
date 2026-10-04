@@ -1,11 +1,12 @@
 # Runbook index
 
-32 runs, newest first. Each line is one file in this folder.
+33 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-04 | 2026-10-04 — Google reviews widget d359c3c4 restyled to the in-section standard (no widget title, logo header with count, brown pill, cream cards); gate ok on / and /patient-reviews — carries **gotchas** | [`2026-10-04-google-reviews-widget-standard.md`](./2026-10-04-google-reviews-widget-standard.md) |
 | 2026-10-03 | 2026-10-03 - /terms-of-service (the adult practice's terms, verbatim but for practice swaps; SMS/A2P 10DLC kept; entity = practice name) injected on staging AND production as one new row; no footer link, not in sitemap.xml. Flagged: no Cookie Policy page exists. Gotchas: instatic-media-map.json loses images after an --only chain, staging emits no canonical | [`2026-10-03-terms-of-service-page.md`](./2026-10-03-terms-of-service-page.md) |
 | 2026-10-01 | 2026-10-01 - /patient-reviews rebuilt on the Marvel "Patient Stories" order (story carousel), GHL contact form on /contacts + /patient-reviews (#34; #198 open for a GHL service field), Canva team portraits (#502 #504 #506, Dr. Dave Cho), #82 play area; PROMOTED TO PRODUCTION with round seven in one --only chain. New: `to-instatic.mjs --only` for page-subset publishes. Drive + Canva folders in workflows/ | [`2026-10-01-reviews-page-ghl-form-canva-team.md`](./2026-10-01-reviews-page-ghl-form-canva-team.md) |
 | 2026-10-01 | 2026-10-01 - "HIPAA Disclosure" footer link after Privacy on all 216 pages, staging AND production (footer is inlined per page, no components) and in home/ source via stamp; 216/216 otherwise identical, link 216/216 per host. Gotcha: Cookie Preferences now sits after HIPAA Disclosure | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
