@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Webzite pre-commit hook — main is for the system: a commit on main never touches a client folder.
 #
-# Client work reaches main only by merging the client's branch (see pre-merge-commit). A process or
+# Client work never reaches main: it stays on the client's branch (see pre-merge-commit, scripts/client.mjs). A process or
 # tool fix is committed on main and reaches clients with `node scripts/scenario.mjs sync`.
 # See scripts/check-scope.mjs and deliver/DELIVER_SYSTEM_RULES.md §3.
 #

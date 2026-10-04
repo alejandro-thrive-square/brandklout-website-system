@@ -61,6 +61,26 @@ its registry rows never reached main), and merges had to pick between diverging 
   Kids: 18 `workflows/03-core-pages/.tmp/instatic/pages/*.json` rows are on no disk and not in R2.
   They are Instatic page exports, regenerable from the live site.
 
+## Addendum — clients never merge into main (same day, supersedes the two-way rule)
+
+- Decision: a client branch is the client's permanent history and **never merges into main**. A merge
+  carried only the git half of a client (outputs) and not its R2 media, so main looked broken and
+  gained nothing. Main still merges into clients (system files only, cannot conflict). The four
+  merges made earlier today (Hackensack, IFA, Livewell, Oceanic) stay in main's history as snapshots.
+- `scripts/client.mjs`: `list | log | runbook | ls | show | where` reads any client branch from main
+  without a checkout or merge. Branch → folder by name, with `ALIASES` for bk-ifa-dentistry and
+  bk-stone / bk-stone-dental; pre-v2 clients keep `docs/RUNBOOK.md`.
+- `pre-merge-commit` now runs `check-scope --merge --expect system` (refuses any merge bringing client
+  files); `bootstrap.sh` sets `branch.main.mergeoptions=--no-ff` (set on this machine) so a client
+  that just merged main cannot fast-forward main past the hook.
+- **Hooks are still not enabled here** (`core.hooksPath` unset): `post-commit` copies every worktree's
+  heavy media into main, an R2-era leftover. Decide on post-commit before running
+  `bash scripts/bootstrap.sh --hooks-only`.
+- Planned host: Paperclip (paperclip.ing) on AWS. Its isolated workspaces are git worktrees too, so
+  this layout carries over as is: the system repo's main is the process; one Paperclip project per
+  client on its permanent branch (or a separate client repo). Workstation-only pieces to replace:
+  Codex/Claude-in-Chrome computer use, `~/.webzite/.env`, Windows-specific scripts.
+
 ## Version Control
 
 Follows [SYSTEM_RULES.md §5](../../SYSTEM_RULES.md).
