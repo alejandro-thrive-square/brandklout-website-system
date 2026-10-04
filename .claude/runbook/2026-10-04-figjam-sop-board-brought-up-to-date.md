@@ -33,6 +33,14 @@ computer use were not on the board, and the Plugins card listed old versions.
     Codex; Brandklout no longer edits them. The user decided this on 2026-10-04.
   - `PROCESS_INDEX.md`: the migration route.
 
+- **QA follow-up, same day (owner's list of recurring failures).** `04-qa.md` has a new section,
+  *Recurring failures: check these first*. It covers four problems: photos that don't match their
+  section, each doctor's focus and reputation, repeated images, and too few assets (download licensed
+  photos and videos from Magnific). There are matching checklist items, a doctors check in step 6
+  and a Magnific conditional. `IMAGES.md` source 4 now says Magnific, photos and videos.
+  On the board's S0 QA lane: 5 cards added and the Design & Build image-order card edited, checked
+  from a fresh tab.
+
 ## Next
 - Board card 272:875 (S3 intake) still says "We usually can't log in to either" for Google Ads
   and GHL. With Codex working in the signed-in Chrome, GHL is reachable. Reword it if that turns out
