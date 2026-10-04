@@ -5,8 +5,8 @@ set -euo pipefail
 # Run from the repo root on the VPS after an agent produces new artifacts.
 # Usage: bash scripts/vps-commit-push.sh ["optional commit message"]
 #
-# Binary/media assets are gitignored and never pushed — sync those separately
-# on local with: bash scripts/sync-assets.sh --direction pull
+# Binary/media assets are gitignored and never pushed — they are backed up to R2
+# with: node scripts/assets.mjs push (see DELIVER_SYSTEM_RULES.md §2)
 
 MSG="${1:-"chore: vps agent output [$(date -u +%Y-%m-%dT%H:%M:%SZ)]"}"
 

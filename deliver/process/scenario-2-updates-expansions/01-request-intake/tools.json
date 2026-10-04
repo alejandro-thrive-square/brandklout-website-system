@@ -1,6 +1,7 @@
 {
   "step": "scenario-2-updates-expansions/01-request-intake",
   "toolkits": [
-    "webflow-build"
+    "instatic-api-sync",
+    "instatic-site"
   ]
 }

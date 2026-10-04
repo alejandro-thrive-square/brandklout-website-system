@@ -1,1 +1,5 @@
-playwright>=1.48
+# Python used by the system (most tooling is Node):
+#   Pillow     - tools/instatic-site/images/contact-sheet.py
+#   truststore - optional; scenario-1 scrapers use the OS certificate store when present
+Pillow>=10
+truststore>=0.9

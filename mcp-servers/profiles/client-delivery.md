@@ -1,18 +1,18 @@
 # MCP Profile: Client Delivery
 
-Use this profile for signed client projects under `deliver/[client-name]/`.
+Use this profile for Brandklout client projects under `deliver/brandklout/<client>/`.
 
 ## Allowed Use
 
 - Use only the MCP servers listed in the client's `docs/mcp-access.md`.
 - Work only on the target resources listed in that file or explicitly confirmed by the user.
 - Read, audit, build, stage, and update project resources within the approved client scope.
-- Store MCP outputs in the owning workflow's `.tmp/` folder unless the client workflow specifies another repo-safe path.
+- Store MCP outputs in the active step's `output/` folder (`<scenario>/<step>/output/`) unless the step specifies another repo-safe path.
 
 ## Required Checks
 
-- Read `deliver/[client-name]/docs/project-overview.md`.
-- Read `deliver/[client-name]/docs/mcp-access.md`.
+- Read `deliver/brandklout/<client>/docs/project-overview.md`.
+- Read `deliver/brandklout/<client>/docs/mcp-access.md`.
 - Confirm runtime authentication before using authenticated tools.
 - Confirm target site, workspace, project, base, repository, or deployment before changes.
 - Treat missing target IDs as a blocker for mutation; list available resources first, then confirm the target.

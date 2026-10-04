@@ -144,6 +144,10 @@ on Windows dies when stdout is a pipe.
 - Don't trust an HTTP sweep of a static mirror: without `404.html` every missing file answers 200.
 - Don't change DNS, nameservers or the old host in this step. Capture only.
 - Don't pipe Node output; redirect it to a file.
+- Don't take phone numbers from the screenshots or `screenshots/pages/*.md`: they are rendered after
+  the site's call tracking (DNI) has swapped them. The real office numbers are the ones in the raw
+  HTML (`scrape/`) and the client's records (Oceanic Dental, 2026-10-02: the rendered homepage showed
+  two pool numbers on both offices).
 
 ## Tools
 
