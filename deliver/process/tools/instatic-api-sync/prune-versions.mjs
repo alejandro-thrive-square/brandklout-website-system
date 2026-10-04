@@ -121,5 +121,5 @@ railway(["redeploy", "-y", ...TARGET], { stdio: "inherit" });
 
 console.log(`\nRestarted. Verify before you walk away:`);
 console.log(`  curl -s -o /dev/null -w '%{http_code}\n' https://encorercm.com/`);
-console.log(`  node compare-local.mjs index          # content parity against the local build`);
+console.log(`  node ../instatic-site/gates/compare-live.mjs index   # content parity against the local build`);
 console.log(`  node prune-versions.mjs               # confirm the reclaimed volume`);

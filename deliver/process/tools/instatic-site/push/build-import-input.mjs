@@ -27,12 +27,20 @@
  *    `doc.body`, so head content is dropped for free — which is what we want,
  *    since title/description travel as page cells instead.
  *
- * Usage: node build-import-input.mjs
+ * Usage: node build-import-input.mjs                 every page (first import, or a full re-push)
+ *        node build-import-input.mjs --only a,b      just these slugs (`index` for the home page)
+ *        node build-import-input.mjs --changed       only pages whose html differs from what was last
+ *                                                    pushed to INSTATIC_BASE_URL (output/push-state.<host>.json)
+ *
+ * A partial payload is for `push-site.mjs --update` ONLY. The CSS always travels whole, because
+ * the converter needs every class to link the markup to. Never feed a partial payload to a
+ * replace-mode push: every page it leaves out is deleted.
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import zlib from 'node:zlib'
-import { fileURLToPath } from 'node:url'
+import * as P from '../lib/paths.mjs'
+import { loadState, sha } from '../lib/push-state.mjs'
 
 const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 const SITE = P.SITE_SRC
@@ -148,7 +156,7 @@ function rewrite(html, file) {
   return out
 }
 
-const pages = PAGES.map((p) => {
+let pages = PAGES.map((p) => {
   const raw = fs.readFileSync(path.join(FINAL, p.file), 'utf8')
   const d = seo.pages[p.slug] ?? {}
   return {
@@ -246,7 +254,43 @@ if (problems.length) {
   process.exit(1)
 }
 
-const payload = JSON.stringify({ css, pages })
+/* --- a partial payload for an update ------------------------------------ */
+const argOf = (name) => {
+  const i = process.argv.indexOf(name)
+  return i >= 0 ? process.argv[i + 1] : undefined
+}
+const only = argOf('--only')
+const changed = process.argv.includes('--changed')
+let partial = false
+if (only) {
+  const want = only.split(',').map((s) => s.trim().replace(/^\/+|\/+$/g, '') || 'index')
+  const unknown = want.filter((s) => !pages.some((p) => p.slug === s))
+  if (unknown.length) {
+    console.error(`REFUSING: no page in dist/ for ${unknown.join(', ')}`)
+    process.exit(1)
+  }
+  pages = pages.filter((p) => want.includes(p.slug))
+  partial = true
+} else if (changed) {
+  // The html hash is only meaningful against the instance it was pushed to: media paths differ.
+  await import('../lib/env.mjs')
+  const state = loadState(TMP)
+  if (!state) {
+    console.error(
+      `REFUSING --changed: no push record for ${process.env.INSTATIC_BASE_URL} in ${TMP}.
+` +
+        `Run a full build + push once, or name the pages with --only.`,
+    )
+    process.exit(1)
+  }
+  pages = pages.filter((p) => state.pages?.[p.slug]?.htmlHash !== sha(p.html))
+  partial = true
+}
+if (partial) {
+  console.log(`partial payload: ${pages.length} page(s) — for push-site.mjs --update ONLY, never a replace push`)
+}
+
+const payload = JSON.stringify({ css, pages, partial })
 const gz = zlib.gzipSync(Buffer.from(payload, 'utf8'), { level: 9 })
 fs.writeFileSync(path.join(TMP, 'import-input.json.gz'), gz)
 fs.writeFileSync(path.join(TMP, 'import-input.b64'), gz.toString('base64'))

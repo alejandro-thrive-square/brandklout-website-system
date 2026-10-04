@@ -29,14 +29,14 @@
  *   base64 -d all.b64 > all.tgz && mkdir -p output/plugins && cd output/plugins && tar xzf ../../all.tgz
  *
  * This script writes each `plugin.json` from the live manifest, packs with
- * `16-instatic-plugins/pack-plugin.mjs`, installs, then copies settings.
+ * `../../instatic-plugins/pack-plugin.mjs`, installs, then copies settings.
  *
- * PERMISSIONS — why not `16-instatic-plugins/install-plugin.mjs`
+ * PERMISSIONS — why not `../../instatic-plugins/install-plugin.mjs`
  * -------------------------------------------------------------
- * That script hard-codes `GRANT = ['cms.hooks','modules.register','frontend.assets']`
- * — embed-origins' three — and REFUSES anything asking for more, which is
- * correct for installing a new plugin a human is approving. AEO Schema asks
- * for six, so it would be refused here. A clone is not a new approval: this
+ * That script grants exactly the registry's list (`plugins.json` `grants`) and
+ * REFUSES a package or an id it does not know, which is correct for installing a
+ * released plugin a human approved. A clone copies whatever the SOURCE runs,
+ * including plugins or versions the registry does not carry. A clone is not a new approval: this
  * grants exactly what the SOURCE had already granted, and nothing else. If the
  * source granted something you would not approve, fix it there first.
  */
@@ -52,9 +52,7 @@ const flag = (n, d) => { const i = argv.indexOf('--' + n); return i === -1 ? d :
 
 const FROM = flag('from'), TO = flag('to')
 const FILES = flag('files', join(HERE, 'output', 'plugins'))
-// Vendored beside this script (identical bytes to 16-instatic-plugins/pack-plugin.mjs,
-// which is client-scoped). A root process module cannot reach into one client's
-// workflow folder, so module 21 carries its own copy. `--packer` overrides it.
+// The shared deterministic packer in tools/instatic-plugins. `--packer` overrides it.
 const PACKER = flag('packer', join(HERE, '..', '..', 'instatic-plugins', 'pack-plugin.mjs'))
 if (!FROM || !TO) { console.error('usage: node clone-plugins.mjs --from <url> --to <url> [--files <dir>]'); process.exit(2) }
 if (!existsSync(FILES)) { console.error(`no plugin assets at ${FILES} — pull them off the source container first (see header)`); process.exit(2) }

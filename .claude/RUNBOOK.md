@@ -7,15 +7,14 @@ then only the runs you need. Do not read them all.
 
 ## Standing
 
-- **This folder is the `system-v2` rebuild worktree** (`Brandklout Website System v2`, branch
-  `system-v2`, pushed to origin). Restructure here; client site work stays in the base folder on
-  `main`. Do not merge to main until v2 works end to end. `npm install` sparsifies this folder:
-  follow it with `bash scripts/sparsify-worktree.sh --undo`. See
-  [the run](./runbook/2026-09-22-system-v2-worktree-created.md).
+- **`system-v2` is merged into `main` (2026-09-27).** This checkout is `main`: the system. Every
+  `bk-*` branch fast-forwarded to it; client worktrees do not check out `deliver/process/`. See
+  [the run](./runbook/2026-09-27-system-v2-merged-clients-consolidated-media-in-r2.md).
 
 - **`deliver/process/` is now scenarios plus tools** (2026-09-23): `scenario-0-new-site`, `scenario-1-migration`,
-  `scenario-2-updates-expansions`, `scenario-3-ads-landing-pages`, and unnumbered `tools/`. The old 00–23
-  modules and the client folders are gone from this worktree (still on `main` and `bk-*`). Open questions
+  `scenario-2-updates-expansions`, `scenario-3-ads-landing-pages`, `scenario-4-update-plugins`,
+  `scenario-5-instatic-release-update`, and unnumbered `tools/`. The old 00–23 modules were dropped
+  (recoverable from tag `backup/main-pre-v2-merge-2026-09-27`). Open questions
   and next steps: [the run](./runbook/2026-09-23-process-reshaped-into-scenarios.md).
 
 - **Figma is readable by API and editable through Chrome.** `FIGMASECRET` is a working PAT. The
@@ -23,12 +22,9 @@ then only the runs you need. Do not read them all.
   FigJam; Scenario 0 step 02 starts every sitemap from a specialty template. REST cannot
   write FigJam — see [the run](./runbook/2026-09-22-figma-sop-board-and-specialty-sitemaps.md).
 
-- **The new system diagram now has a concrete architecture proposal:**
-  [SYSTEM_ARCHITECTURE.md](../SYSTEM_ARCHITECTURE.md). It separates system and client project
-  version control, defines R2 recovery and transferable project requirements, and sequences a
-  pilot before rollout. Project repository topology, remote scheduler host, production bucket,
-  and pilot client remain open. This is a documentation pass; no infrastructure or client
-  migration has occurred. See [the run](./runbook/2026-09-19-system-architecture-proposal.md).
+- **`SYSTEM_ARCHITECTURE.md` was deleted on 2026-09-28** (a 2026-09-19 proposal overtaken by the
+  scenario layout and R2). Its reasoning and open decisions stay in
+  [the proposal run](./runbook/2026-09-19-system-architecture-proposal.md).
 
 - **Technology selection remains advice, not approval.** The follow-up recommendation is
   GitHub for code/history, R2 with rclone for versioned media recovery, and the existing VPS
@@ -46,20 +42,13 @@ then only the runs you need. Do not read them all.
   but this workstation, so the next box costs those hours again. See
   [2026-09-19](./runbook/2026-09-19-namespace-devbox-mirror.md).
 
-- **Client images are not in git and not on the VPS — they live only in each worktree folder.**
-  `.gitignore` excludes all media and `rclone` is not installed here, so removing a worktree
-  deletes that client's images. Five clients' images are still only in the old
-  `Webzite Agentic Workflow` folder; do not delete it. A full copy of every ignored file, a bundle,
-  `pre-cleanup-2026-09-18/*` tags and `backup/2026-09-18/*-wip` branches exist as of 2026-09-18.
-  An asset mirror and the directive cleanup are next, in that order. See
-  [2026-09-18](./runbook/2026-09-18-full-backup-before-system-cleanup.md).
-
-- **R2 passed a trial as that asset mirror, but nothing is built yet.** IFA's 1,582 files (1.6 GB)
-  were pushed, pulled and hash-verified against bucket `brandklout-assets-test` in Alejandro's
-  *personal* Cloudflare account (`CLOUDFLARETESTING` in the master `.env`, expires 2026-12-18).
-  There is no `scripts/assets.mjs`, no manifest and no schedule — the worktrees are still the only
-  working home of the media. Waiting on his go-ahead to build it. See
-  [2026-09-19](./runbook/2026-09-19-r2-asset-mirror-trial.md).
+- **Client media is backed up to R2 by `scripts/assets.mjs`** (push / pull / status, manifest
+  `deliver/brandklout/<client>/assets.tsv`): 60,728 files, 19.5 GB, 16 clients on 2026-09-27. The
+  bucket `brandklout-assets-test` and token `CLOUDFLARETESTING` (expires 2026-12-18) are in
+  Alejandro's *personal* Cloudflare account; move them to an agency account before relying on it.
+  The VPS/rclone asset flow is retired (`sync-assets.sh` deleted 2026-09-28). `recovered/` dumps and
+  session cookies are never uploaded. See
+  [2026-09-27](./runbook/2026-09-27-system-v2-merged-clients-consolidated-media-in-r2.md).
 
 - **The repo is an Obsidian vault.** `.obsidian/` at the root is tracked, so the graph and its
   colour groups are the same on every machine and every `bk-*` worktree. `.tmp/`,

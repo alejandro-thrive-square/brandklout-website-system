@@ -1,4 +1,0 @@
-{
-  "_note": "Site-wide settings read by build-site.mjs. whatsapp is the shop's number in international format, digits only (country code first, no +, spaces or dashes), e.g. 5215512345678. Every WhatsApp link and the cart checkout go to it. Empty = WhatsApp opens its contact picker instead, which is fine for a draft and wrong for launch; the build warns while it is empty.",
-  "whatsapp": ""
-}

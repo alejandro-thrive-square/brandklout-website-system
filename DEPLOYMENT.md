@@ -2,7 +2,10 @@
 
 This repository deploys to the Hostinger VPS through GitHub Actions. A successful push to `main` starts the `Deploy VPS` workflow, which connects to the VPS over SSH and runs a guarded fast-forward pull of `origin/main`.
 
-The deployment intentionally updates only repository-tracked files. Heavy binary/media assets remain outside Git and still require the documented `rclone sync` flow.
+The deployment intentionally updates only repository-tracked files. Media is not deployed: it is backed up to Cloudflare R2 with `scripts/assets.mjs` (see [SYSTEM_RULES.md §4.2](./SYSTEM_RULES.md)).
+
+> [!WARNING]
+> **Not live yet.** This repository does not hold the `VPS_*` secrets below, so every `Deploy VPS` run since the 2026-08-22 split has failed at "Configure SSH" and nothing reaches the VPS. Set the secrets (and clone the repo at `VPS_REPO_PATH`) or retire the workflow.
 
 The normal deployment path is GitHub Actions. Manual SSH deployment is an approved fallback when Actions is not configured yet, when an immediate server-side verification is needed, or when the current VPS state must be inspected directly.
 
@@ -27,8 +30,8 @@ Add these repository secrets in GitHub before enabling the workflow:
 2. Add the public key to the VPS deployment user's `~/.ssh/authorized_keys`.
 3. Add the private key to GitHub as `VPS_SSH_KEY`.
 4. Confirm the repository already exists on the VPS at `VPS_REPO_PATH`.
-6. Ensure the VPS repository can run `git pull origin main` non-interactively. For this private repository, prefer a read-only GitHub deploy key on the VPS or another non-interactive GitHub authentication method.
-7. Keep the VPS worktree clean. The workflow aborts if `git status --porcelain` returns any local changes.
+5. Ensure the VPS repository can run `git pull origin main` non-interactively. For this private repository, prefer a read-only GitHub deploy key on the VPS or another non-interactive GitHub authentication method.
+6. Keep the VPS worktree clean. The workflow aborts if `git status --porcelain` returns any local changes.
 
 ## Deployment Behavior
 
@@ -40,87 +43,21 @@ Add these repository secrets in GitHub before enabling the workflow:
   - The target directory must be a Git repository.
   - The VPS worktree must be clean before deployment.
   - Non-fast-forward history is rejected instead of merged automatically.
-  - Cleanup is limited to explicit retired paths listed in `scripts/deploy-cleanup.sh`; broad `git clean -fdx` cleanup is not used because valid ignored media also lives on the VPS.
+  - Cleanup is limited to explicit retired paths listed in `scripts/deploy-cleanup.sh`; broad `git clean -fdx` cleanup is not used because ignored files on the VPS may still be needed.
 - Not included:
-  - No automatic `rclone` sync for heavy assets.
+  - No media: it lives in R2, not on the VPS.
   - No automatic service restart because this repository currently has no documented long-running service process to restart.
 
 ## Asset Sync
 
-Git deployment only updates tracked files. Heavy binary/media assets (images, PDFs, videos, archives) must be synced separately via `rclone` — they are never committed to Git.
-
-### One command (local): `scripts/sync.sh`
-
-For the everyday "resume work from anywhere" flow, use the single safe command on your **local** machine — it brings both workspaces into sync in both directions (git pull → reconcile → push → `rclone bisync`):
+Git deployment only updates tracked files. Client media (images, PDFs, videos, archives) is never committed and never deployed; it is backed up to Cloudflare R2 and restored per client:
 
 ```bash
-bash scripts/sync.sh --dry-run   # preview git + asset changes, no mutation
-bash scripts/sync.sh             # commit + push (auto-deploys) + bisync assets
+node scripts/assets.mjs push              # every worktree -> R2, rewrites each client's assets.tsv
+node scripts/assets.mjs pull <client>     # R2 -> this checkout, sha256-verified
 ```
 
-It integrates remote work **before** pushing (never auto-clobbering), defaults to safe `rclone bisync`, and aborts on divergence with recovery instructions. The first-ever bisync needs `--resync` (the script detects a missing baseline and tells you). This is the recommended path; the directional commands below are the lower-level primitives. See [HERMES.md](./HERMES.md) for the two-workspace model and [SYSTEM_RULES.md §4.5](./SYSTEM_RULES.md) for the conflict policy.
-
-### Lower-level primitives: `scripts/sync-assets.sh`
-
-`scripts/sync-assets.sh` supports three directions:
-
-| Flag | Direction | Use case |
-| :--- | :--- | :--- |
-| `--direction push` (default) | local → VPS | After working locally; upload new assets to VPS. |
-| `--direction pull` | VPS → local | After VPS agent (e.g., Hermes) generates new assets; fetch them locally. |
-| `--direction bisync` | bidirectional | Both sides changed assets; merge without overwriting either. |
-
-Preview any direction without transferring files:
-
-```bash
-bash scripts/sync-assets.sh --direction pull --dry-run
-```
-
-### Working Locally → Updating VPS
-
-The standard deploy cycle when originating work on local:
-
-1. **Push** — `git push origin main` (triggers GitHub Actions → VPS `git pull`).
-2. **Sync assets** — upload local binary/media assets to VPS.
-
-```bash
-bash scripts/sync-assets.sh --direction push
-```
-
-### VPS Agent Generates Assets → Fetching Locally
-
-When Hermes (or another VPS agent) creates images or other binary assets:
-
-1. **VPS pushes git-tracked artifacts** (prompt logs, JSON metadata, `.md` notes) — run on the VPS (this pulls before pushing, so it never clobbers remote history):
-
-```bash
-bash scripts/vps-commit-push.sh "feat: generate ad batch for campaign X"
-```
-
-2. **Local receives everything in one command** (git-tracked changes + binary assets):
-
-```bash
-bash scripts/sync.sh
-```
-
-Or do the two halves manually — `git pull` for tracked files, then `bash scripts/sync-assets.sh --direction pull` for binary assets. The destructive `pull` mirror is the lower-level primitive; `sync.sh` uses safe bisync.
-
-### Both Sides Changed Assets
-
-When local and VPS both have new binary assets since the last sync, use bisync to merge without losing files on either side. The very first bisync run requires `--resync` to establish a baseline:
-
-```bash
-# First run only
-bash scripts/sync-assets.sh --direction bisync --resync
-
-# Subsequent runs
-bash scripts/sync-assets.sh --direction bisync
-```
-
-The script performs two operations matching the rules in [SYSTEM_RULES.md Section 4.2](./SYSTEM_RULES.md):
-
-- `manage/brand-assets/` — full directory sync of agency brand materials.
-- `.tmp/` folders — filtered sync of heavy binary/media files (`png`, `jpg`, `jpeg`, `gif`, `svg`, `webp`, `ico`, `pdf`, `mp4`, `mov`, `zip`, `7z`, `psd`, `ai`, `eps`, `fig`, `sketch`).
+For git, the everyday "resume work from anywhere" command on the local machine is `bash scripts/sync.sh` (fetch, reconcile, push; `--dry-run` to preview). See [HERMES.md](./HERMES.md) for the two-workspace model and [SYSTEM_RULES.md §4.5](./SYSTEM_RULES.md) for the conflict policy.
 
 ## Manual SSH Fallback
 
@@ -163,7 +100,7 @@ The manual SSH path was verified on May 18, 2026:
 
 - VPS host-key entry already existed locally for `177.7.59.218`.
 - SSH access succeeded with the existing local key as `root`.
-- Repository checkout was found at `/root/webzite-agentic-workflow`.
+- Repository checkout was found at `/root/webzite-agentic-workflow` (the pre-split repository; this one has no VPS checkout recorded yet).
 - The VPS worktree was clean on `main`.
 - `git pull --ff-only origin main` updated the VPS from commit `17c8896` to `62c0e46`.
 
@@ -171,19 +108,14 @@ The manual SSH path was verified on May 18, 2026:
 
 Git does not remove ignored or untracked directories during `git pull`. When the architecture retires an old VPS-side path, migrate any assets that still belong in the system, then add the retired path to [`scripts/deploy-cleanup.sh`](./scripts/deploy-cleanup.sh).
 
-Current retired paths:
-
-- `deliver/brandklout/dr-nahlah/assets`
-- `deliver/brandklout/dr-nahlah/workflows/03-graphic-resources`
-- `deliver/company-1`
-- `deliver/company-2`
+Current retired paths: none (the list in `scripts/deploy-cleanup.sh` has been empty since `22fbe7c7`).
 
 Rules:
 
 - Use explicit retired paths only.
 - Add a path only after its contents are migrated or intentionally discarded.
-- Keep long-lived heavy assets in their canonical VPS locations; do not rely on deployment cleanup for normal asset management.
-- Do not replace the allowlist with `git clean -fdx`, because that would delete valid ignored media stored on the VPS by design.
+- Do not rely on deployment cleanup for asset management; media lives in R2.
+- Do not replace the allowlist with `git clean -fdx`, because that would delete ignored files on the VPS that may still be needed.
 
 ## First Verification
 

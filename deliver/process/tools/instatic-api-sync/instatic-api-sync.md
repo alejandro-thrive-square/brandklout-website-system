@@ -1,14 +1,14 @@
-# Workflow: 15 - Instatic API Sync
+# Tool · Instatic API Sync
 
 ## Client-Facing Overview
 Changes to the Instatic site are made through a scripted, verified pipeline instead of hand edits, and the site's styling is held where the visual editor can reach it, so routine design tweaks stop needing a developer.
 
 > [!IMPORTANT]
-> **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be documented here immediately.
+> **Integrity Rule**: Any change to the scripts or technical logic of this tool must be documented here immediately.
 
 ## Operational Purpose
 
-Two problems, one workflow.
+Two problems, one tool.
 
 **1. Every `site_*` MCP tool needs a human with the Site editor open in a browser.** 29 of the connector's 52 tools declare it, the bridge drops without warning, and a pull cannot run unattended. That is a bridge limitation, not a platform one: underneath sits a plain cookie-authenticated REST API that needs no browser at all.
 
@@ -307,11 +307,10 @@ It happened on 2026-08-22. Publishing to verify a plugin baked all 35 pages, and
 **So: before publishing this site for any reason, and again afterwards**
 
 ```bash
-node scenario-0-new-site/04-qa/output/audit-site.mjs --base https://encorercm.com --only index   # Dr. Nahlah's audit script, on bk-dr-nahlah
-git diff scenario-0-new-site/04-qa/output/audit-out/          # the committed records are the baseline
+node ../instatic-site/ops/backup-site.mjs     # snapshot before, and again after; diff the two
 ```
 
-A whole-site run is ~20 minutes; a single page is under a minute and catches this class of thing on the page most likely to hold hand-built markup.
+Check `draftMatchesPublished` (`GET /admin/api/cms/publish/status`) first: a drifted draft ships with whatever you publish.
 
 **Class names are NOT in a page.** Nodes carry `classIds` and the names live in `shell.styleRules`, so grepping a page's JSON for `rv-card` finds nothing whether the cards are there or not — resolve ids through the shell first. And `changedPages` takes FLAT `Page` objects (`id`, `slug`, `title`, `nodes`, `rootNodeId` at the top level), never the `cells`-shaped rows `GET /admin/api/cms/pages` returns.
 
@@ -520,8 +519,7 @@ body with status 200, as on a static host. `../instatic-site/ops/apply-template-
 - `output/site.css.published` / `output/site.css.draft-before` — repair evidence
 - `prune-versions.mjs` + `prune-versions.container.ts` — volume reclamation (see above)
 - `repair-multilayer-backgrounds.mjs` — restores gradient layers the shorthand parser flattened
-- `restore-review-wall.mjs` — rebuilds the home page's six review cards from the local build (dry run by default; never publishes). Anchors on the `.pf-reviews` section (the `.rv-live` slot it used to find was replaced by an Embed block), moves the vendor embed last, backs the row up to `output/backups/`, writes through `toChangedPage`, and reads back before reporting success
-- Dr. Nahlah's client scripts behind the sections above (`restore-pages.mjs`, `push-post-layout.mjs`, `ads-to-nodes.py`, `push-ads-pages.mjs`, `push-page-seo.mjs`, `push-page-seo-cells.mjs`, `push-asset-alt-text.mjs`, `perf-unblock-head.mjs`, `perf-image-priority.mjs`, `perf-review-embed.mjs`, `push-404-page.mjs`) stay in `deliver/brandklout/dr-nahlah/workflows/22-instatic-api-sync/` on `bk-dr-nahlah`; they carry that site's ids and are worked examples, not shared tools
+- Dr. Nahlah's client scripts behind the sections above (`restore-review-wall.mjs`, `restore-pages.mjs`, `push-post-layout.mjs`, `ads-to-nodes.py`, `push-ads-pages.mjs`, `push-page-seo.mjs`, `push-page-seo-cells.mjs`, `push-asset-alt-text.mjs`, `perf-unblock-head.mjs`, `perf-image-priority.mjs`, `perf-review-embed.mjs`, `push-404-page.mjs`) stay in `deliver/brandklout/dr-nahlah/workflows/22-instatic-api-sync/` on `bk-dr-nahlah`; they carry that site's ids and are worked examples, not shared tools
 - `output/parity-pseudo-before-1440.json` / `output/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control

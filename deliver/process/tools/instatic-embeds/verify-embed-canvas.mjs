@@ -7,19 +7,16 @@
  *   node verify-embed-canvas.mjs --cleanup   delete the temp page (no publish)
  *
  * This is the live counterpart to the `preview()` half of `test-embed-module.mjs`,
- * and it exists because the other two gates each miss it:
+ * and it exists because `test-embed-module.mjs` misses it: that suite proves the
+ * STRING the module returns, with no host. It cannot prove the host calls
+ * `preview()` rather than `render()`, or that what lands in the canvas DOM is
+ * what the module returned.
  *
- *   - `test-embed-module.mjs` proves the STRING the module returns, with no host.
- *     It cannot prove the host calls `preview()` rather than `render()`, or that
- *     what lands in the canvas DOM is what the module returned;
- *   - `verify-embed-editor.mjs` proves a person is OFFERED the block, by driving
- *     the inserter. It places an UNCONFIGURED block on purpose, so it never
- *     renders a card at all — and its synthetic click on the picker is the
- *     flakiest step in the whole toolkit (see §Gotchas: the first click after a
- *     navigation frequently does not reach React's handler).
- *
- * So this gate skips the inserter entirely and writes CONFIGURED nodes straight
- * into the draft, the way `verify-embed-module.mjs` does for the publish path —
+ * Driving the block inserter is not the way to prove it: a synthetic click on the
+ * picker is flaky (the first click after a navigation frequently does not reach
+ * React's handler). So this gate skips the inserter entirely and writes
+ * CONFIGURED nodes straight into the draft, the way `verify-embed-scripts.mjs`
+ * does for the publish path —
  * except it never publishes, because the editor reads the draft. A publish on
  * Instatic bakes EVERY page, and nothing about canvas rendering needs one.
  *
@@ -29,18 +26,21 @@
  * host, which is the one thing a person needs off it.
  *
  * Requires the plugin installed and enabled, and a live session cached by
- * `lib/insta-api.mjs` (run any script that logs in first).
+ * `../instatic-api-sync/insta-api.mjs` (run any script that logs in first).
  */
 import { spawn } from 'node:child_process'
 import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import http from 'node:http'
-import { api, getSite, getPages, BASE, SESSION_FILE } from './lib/insta-api.mjs'
+import { api, getSite, getPages, BASE, SESSION_FILE } from '../instatic-api-sync/insta-api.mjs'
 
 const SLUG = 'plugin-embed-canvas-test'
-const MODULE_ID = 'webzite.embed-origins.embed'
-const PLUGIN_ID = 'webzite.embed-origins'
+const PLUGIN_ID = 'brandklout.embed-origins'
+const MODULE_ID = `${PLUGIN_ID}.embed`
+// The released version, from the registry: the module pack URL carries it.
+const RELEASED = JSON.parse(fs.readFileSync(
+  new URL('../instatic-plugins/plugins.json', import.meta.url), 'utf8')).plugins[PLUGIN_ID].version
 const EDITOR_URL = `${BASE}/admin/site?page=${SLUG}`
 
 const FRAME_HOST = 'reputationhub.site'
@@ -299,8 +299,8 @@ async function check() {
     ['the browser fetched the plugin module pack', packResponses.length > 0],
     ['every module-pack request returned 200',
       packResponses.length > 0 && packResponses.every((r) => r.status === 200)],
-    ['it fetched the version this toolkit just packed',
-      packResponses.some((r) => r.url.includes(`/${PLUGIN_ID}/1.4.0/`))],
+    [`it fetched the released version (${RELEASED})`,
+      packResponses.some((r) => r.url.includes(`/${PLUGIN_ID}/${RELEASED}/`))],
     ['every breakpoint canvas rendered', seen.canvases === 3],
     ['every configured block rendered a card', rendered],
     ['NO iframe was created anywhere in the canvas', proven(seen.iframes === 0)],
