@@ -1,9 +1,0 @@
-; hackensackdentalimplants.com: email and verification records only, read over DoH on 2026-09-30T12:13:03.949Z.
-; Import into the new Cloudflare zone BEFORE the nameserver switch. Set every imported record DNS-only.
-
-hackensackdentalimplants.com. 300 IN MX 1 smtp.google.com.
-hackensackdentalimplants.com. 300 IN TXT "v=spf1 ~all"
-hackensackdentalimplants.com. 300 IN TXT "google-site-verification=AamtN3zcVHGatYNMvR79EaSOkNSCdCpy0QsNysmfGPA"
-hackensackdentalimplants.com. 300 IN TXT "google-site-verification=dXrD8Ptwavf1VdoGpc0alvlTdQ7MuX-phkFUbgkti2U"
-_dmarc.hackensackdentalimplants.com. 300 IN TXT "v=DMARC1; p=none; rua=mailto:c6aac92d57714a56ae712040f3664786@dmarc-reports.cloudflare.net"
-google._domainkey.hackensackdentalimplants.com. 300 IN TXT "v=DKIM1;k=rsa;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv+nhTz8RJW5HPQ1qnXpIMgGC9k/dqBEe8eTaVKn4A8T8cutL8BE8z0/3cc0tIZubCIH2TI/dpVih6KKe+Dj3rBVFYzFiY85uk2CWMEegrmP/EvOfqXpqZ79JXlzhz/tqT16wRqVdKQt/1tPARetJdTbufk9uofCKSZZxPCjJw8SnxmWbW3M1JBfrTtk5IKLXwRN" "lzZjPnI1PHY09MxFAt1MGa1sMgvExgkeDlkAn/LSnueBhksEH09Ot4m45aqEM6alwZh04qTRlEa0yQLPCw3BFAwjIV9FnNkMsnECRcYUqevVEcYyU4wqZL+dFK+9rpejcDkQ6DA31lUXDKZ8jqwIDAQAB"

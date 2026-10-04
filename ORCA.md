@@ -153,7 +153,7 @@ with the same client slug in the branch, worktree path, and Orca display name.
 
 Process changes reach a client through `node scripts/scenario.mjs sync` (also run at every Claude Code
 session start); rules and `scripts/` by merging `main` into the client branch. A client branch
-changes only its own folder and merges into `main` at the end of a task. The rules, including how a client run promotes a finding back to the
+changes only its own folder and never merges into `main`; read it from main with `node scripts/client.mjs`. The rules, including how a client run promotes a finding back to the
 process, are in [deliver/DELIVER_SYSTEM_RULES.md §3](./deliver/DELIVER_SYSTEM_RULES.md). Before
 dispatching a client task, commit and push any process change on `main`, and make sure the client
 worktree is clean or checkpointed. Read the client's `RUNBOOK.md` first.

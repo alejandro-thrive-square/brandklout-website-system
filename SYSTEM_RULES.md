@@ -41,7 +41,7 @@ enforces the split (§4.3).
 | Component | Directory | Purpose |
 | :--- | :--- | :--- |
 | **Entry points & rules** | root `*.md` | `AGENTS.md`/`CLAUDE.md`/`GEMINI.md`, this file, install, deployment, Orca and Hermes docs. |
-| **Repo scripts** | `scripts/` | Worktrees (`new-client-worktree.sh`, `sparsify-worktree.sh`), scenarios (`scenario.mjs`), scope (`check-scope.mjs`), credentials (`env-sync.mjs`), media (`assets.mjs`, `mirror-assets.sh`, `drive.mjs`), git hooks, sync and deploy. |
+| **Repo scripts** | `scripts/` | Worktrees (`new-client-worktree.sh`, `sparsify-worktree.sh`), scenarios (`scenario.mjs`), scope (`check-scope.mjs`), reading a client branch from main (`client.mjs`), credentials (`env-sync.mjs`), media (`assets.mjs`, `mirror-assets.sh`, `drive.mjs`), git hooks, sync and deploy. |
 | **MCP Infrastructure** | `mcp-servers/` | Shared MCP server index, setup docs, access model and profiles. |
 | **Deliver rules** | `deliver/DELIVER_SYSTEM_RULES.md` | Scenarios, where things live, working rules, quality bar. |
 | **The process** | `deliver/process/` | `scenario-N-name/NN-step/` step folders and the shared `tools/<toolkit>/`. Fixed on `main` only. |
@@ -346,7 +346,7 @@ required once per clone). Notes that matter:
 
 ### 4.3 Branching Strategy
 - **`main`**: the system — process, tools, rules, scripts, docs — plus the client folders merged at launch. System changes are committed on `main` directly; the `pre-commit` and `pre-merge-commit` hooks run `check-scope.mjs` so a commit is either a system change or one client's change, never both.
-- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` merges `main` in at the start of a session and merges into `main` (`git merge --no-ff`) at the end of a task; both are clean because the two never touch the same files, and the branch history is never rewritten. It never tracks the process: it reads `deliver/process/` through an untracked mirror refreshed by `node scripts/scenario.mjs sync`.
+- **`bk-<client>`**: one branch and one Orca worktree per client. It changes only `deliver/brandklout/<client>/` and is the client's permanent history: it merges `main` in at the start of a session (clean, because the two never touch the same files), never merges into `main`, and is never rewritten. `node scripts/client.mjs` reads it from any checkout. It never tracks the process: it reads `deliver/process/` through an untracked mirror refreshed by `node scripts/scenario.mjs sync`.
 - **Backups**: `backup/*` branches and tags are recovery points; never delete or rewrite them.
 
 ### 4.4 Agent Responsibilities
