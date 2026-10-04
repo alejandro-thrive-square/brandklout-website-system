@@ -46,6 +46,21 @@ its registry rows never reached main), and merges had to pick between diverging 
   "edited".
 - `--force` only after confirming the edit is on main (`git show main:deliver/process/<path>`).
 
+## Addendum — "main is broken" check (same day)
+
+- Alki House `final-site/index.html` broke when opened from main because `assets/` and `productos/`
+  are build output its own `.gitignore` excludes (`node build-site.mjs` regenerates them). Git never
+  had them on any branch; all 1,434 are in R2. Not merge damage. Open a site from main only after
+  `node scripts/assets.mjs pull <client>`.
+- `dbe7b3ad` `assets.mjs` split manifests on `\n` only: a CRLF `assets.tsv` (any manifest that
+  arrives by merge, with autocrlf) reported 0 in R2 and would have broken `pull`. Hackensack, IFA,
+  Livewell and Oceanic were backed up all along.
+- Pushed from each client's own worktree (manifest committed on its branch, by path): Mason Park
+  Kids 24 files and Dr. Nahlah 2 were not in R2, now uploaded; Mason Park, Stone Med Spa, West LA
+  and IFA needed nothing (their gaps were stale manifest rows). All six now 100% except Mason Park
+  Kids: 18 `workflows/03-core-pages/.tmp/instatic/pages/*.json` rows are on no disk and not in R2.
+  They are Instatic page exports, regenerable from the live site.
+
 ## Version Control
 
 Follows [SYSTEM_RULES.md §5](../../SYSTEM_RULES.md).
