@@ -164,6 +164,14 @@ off and CSS on: 0/11 fields visible at first paint, prefill from the URL still f
 checkboxes and text fields, and the largest jump fell from ~1,150px to ≤36px (the headless-only
 challenge line).
 
+**GoHighLevel reformats the Custom CSS box** when it loses focus: it re-indents, strips the quotes
+from attribute selectors (`[data-q^=privacy_]`) and can drop the `#_builder-form` prefix from the
+existing rules. All of that is valid and expected. `no-shift.css` is written unquoted so it survives
+the reformat, and Codex must save anyway (the first Kids run stopped at the reformat and saved nothing).
+
+Live since 2026-10-04: Mason Park *Contact* and *Kids* (gate ok, style ok, the same height from the
+first paint to fully loaded at 1348px and 375px).
+
 Still open: on the site, GHL's embed carries `data-height` from the builder. Mason Park's form says
 `2442`, because the builder counts the hidden fields. Whether `form_embed.js` sizes the iframe to
 it before resizing is not yet measured.
@@ -276,8 +284,8 @@ For the owner to settle against the reference video, then fold into the standard
 | Client | Form | Notes |
 | :--- | :--- | :--- |
 | Grand Mission | `HHUjLT7QwNmfVq4yjxw5` *Contact Form Website* | The model. Has the optional language dropdown. |
-| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | **Site-form reference.** Standard 2026-10-03; styled + polished (Nunito Sans, 14px consent, grey underlined links, 16px gaps) the same night: gate ok, style ok. |
-| Mason Park Kids | `pyYcEmfIvtv5LwB1s4X6` *Contact form* (`masonparkpediatricdental.com/contacts`, location `ayfI5c9B3HDoNAubf1Sj`) | 2026-10-04: existing kids Service field kept (10 options), consent names **Mason Park Dental for Kids** (no legal entity, user's decision), captcha above Submit, kids-site links, Figtree + `#93644A` pill via Custom CSS. |
+| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | **Site-form reference.** Standard 2026-10-03; styled + polished (Nunito Sans, 14px consent, grey underlined links, 16px gaps) the same night: gate ok, style ok. **No-shift CSS 2026-10-04**, hide script deleted. |
+| Mason Park Kids | `pyYcEmfIvtv5LwB1s4X6` *Contact form* (`masonparkpediatricdental.com/contacts`, location `ayfI5c9B3HDoNAubf1Sj`) | 2026-10-04: existing kids Service field kept (10 options), consent names **Mason Park Dental for Kids** (no legal entity, user's decision), captcha above Submit, kids-site links, Figtree + `#93644A` pill via Custom CSS. **No-shift CSS 2026-10-04**, hide script deleted. |
 | Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
 | Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
 

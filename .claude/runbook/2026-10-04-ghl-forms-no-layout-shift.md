@@ -19,10 +19,17 @@
   `check-ghl-form.mjs --standard` fails a form with no `no-shift.css`, with a hide script still in
   it, or with a consent field above the links. Pointer added in `termly-ghl-consent.md`.
 
+## Applied (later 2026-10-04)
+- Codex (`gpt-6.1-sol`, one form per run) pasted the CSS and deleted the hide script on Mason Park
+  *Contact* `JuzM9SxuJMPDMwfO6cgj` and Mason Park Kids *Contact* `pyYcEmfIvtv5LwB1s4X6`. Both gate ok
+  and `site-style --compare` ok. Live: the same height from the first paint to fully loaded (1116px at
+  1348px wide, 1296px at 375px), 0/11 consent fields ever visible, prefill intact.
+- `no-shift.css` is now unquoted, and the gate accepts either form (GHL strips the quotes on save).
+
 ## Next
-- Roll out to every form: paste `no-shift.css`, delete the hide-script Custom HTML element, move the
-  consent fields below the links where needed, then gate. The three Mason Park forms fail the new
-  checks today (no CSS, script present).
+- The rest of the forms: Mason Park *Invisalign* `jRr3J74MVYjrYAsp4zZD` and *New Patient Special*
+  `jEXtvRc1ObkKd1QvmSGn`, then every other client. Paste `no-shift.css`, delete the hide-script
+  Custom HTML element, move the consent fields below the links where needed, then gate.
 - Measure the site side: the embed's `data-height` comes from the builder (Mason Park `2442`, because
   it counts the hidden fields). Check whether `form_embed.js` sizes the iframe to it before resizing.
 
@@ -31,5 +38,7 @@
   them only by position (after the links), so the field order is now part of the standard.
 - One Kids-site link ends in `/terms-of-service/` with a trailing slash, so the selector uses
   `href*=`, not `href$=`.
+- GHL's CSS box reformats on blur (strips quotes, re-indents, may drop `#_builder-form`). The first
+  Kids run read that as a failure and saved nothing; the brief must say to save anyway.
 - Headless Chrome gets an interactive Turnstile challenge plus an error line (136px); a real
   visitor's captcha is 100px. Never size the reserve from automation.

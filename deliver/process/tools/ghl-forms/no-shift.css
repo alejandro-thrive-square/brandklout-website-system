@@ -5,9 +5,10 @@
       match, so the second selector hides every element after the Privacy | Terms links, where the
       standard puts all 11 (never a button or the captcha). Replaces the old in-form hide script.
    2. The captcha slot. Cloudflare Turnstile loads after hydration and takes 100px (27px at first paint).
+   Selectors are unquoted on purpose: GHL's CSS box strips the quotes on save (valid CSS either way).
    Docs: deliver/process/tools/ghl-forms/README.md, "No layout shift". */
-#_builder-form .form-field-wrapper:has([data-q^="privacy_"], [data-q="marketing_disclosure_version"]),
-#_builder-form .form-field-wrapper:has(a[href*="terms-of-service"]) ~ .form-field-wrapper:not(:has(button, iframe)) {
+#_builder-form .form-field-wrapper:has([data-q^=privacy_], [data-q=marketing_disclosure_version]),
+#_builder-form .form-field-wrapper:has(a[href*=terms-of-service]) ~ .form-field-wrapper:not(:has(button, iframe)) {
   display: none !important;
 }
 #_builder-form .captcha-container {

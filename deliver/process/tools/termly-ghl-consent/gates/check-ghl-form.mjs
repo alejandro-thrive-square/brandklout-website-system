@@ -85,7 +85,7 @@ async function readForm(idOrUrl) {
     locationId: loc ? R(loc.locationId) : null,
     labelsVisible: node ? R(node.formLabelVisible) !== false : true,
     // tools/ghl-forms/no-shift.css, served in <head> with the form's Custom CSS.
-    noShiftCss: /:has\(a\[href\*="terms-of-service"\]\)\s*~\s*\.form-field-wrapper/.test(html) && /\.captcha-container\s*\{[^}]*min-height/.test(html),
+    noShiftCss: /:has\(a\[href\*="?terms-of-service"?\]\)\s*~\s*\.form-field-wrapper/.test(html) && /\.captcha-container\s*\{[^}]*min-height/.test(html),
     hideScript: /hiddenLabels|hideFields/.test(html),
     fields,
   }
