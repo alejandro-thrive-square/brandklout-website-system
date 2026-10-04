@@ -16,12 +16,13 @@ Top to bottom:
 | :- | :--- | :--- |
 | 1 | Name | First + Last Name, or Full Name. Keep whatever the form already has. |
 | 2 | Phone, Email | Keep. |
-| 3 | **Service** | Single Dropdown, contact custom field `Service` (reuse `Service` / `Treatment Type` if the sub-account has one). Placeholder *Select a service*, **required**. 8–12 options from the site's own services pages, in the practice's words, ending with *Other*. |
+| 3 | **Service** | **Site forms only (contact, appointment). Landing-page forms have none**: the patient already landed on one service, and those forms redirect to the campaign's thank-you page instead. Single Dropdown, contact custom field `Service` (reuse `Service` / `Treatment Type` if the sub-account has one). Placeholder *Select a service*, **required**. 8–12 options from the site's own services pages, in the practice's words, ending with *Other*. |
 | 4 | Message | Keep (Multi Line, optional). |
 | 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. |
 | 6 | Captcha, Submit | Keep; never change the Submit label unless the task says so. |
 | 7 | **Privacy Policy \| Terms of Service** | Text element, links to `<origin>/privacy-policy` and `<origin>/terms-of-service`, new tab. GHL's default is `https://www.example.com` — never ship it. |
 | — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). |
+| — | **Styling** | Matches the site, not GHL's defaults (Inter, grey `#D0D5DD` borders, blue `#155EEF` button). See [Styling](#styling). |
 | — | Save-and-exit | **Off** ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md), gotcha "Submission in progress"). |
 
 ### The model, field by field
@@ -67,31 +68,71 @@ that is a condition of submitting the form.
 
 ## Steps
 
-1. **Find the form.** The id is in the site's embed (`…/widget/form/<id>`); grep the live page:
-   `curl -sL -A Mozilla/5.0 <page> | grep -oE "widget/form/[A-Za-z0-9]+"`. The sub-account
-   (location) id is in the form's public payload (`locationId`) or the client's runbook.
-2. **Read where it stands** (no login, submits nothing):
+1. **Find every form on the site, not just the contact page.** Ad landing pages, `/appointment`
+   and campaign pages carry their own forms, and those are the ones reviewers keep flagging. Grep
+   each page (the sitemap leaves ad pages out, so add them by hand):
+   `curl -sL -A Mozilla/5.0 <page> | grep -oE "widget/form/[A-Za-z0-9]+"`.
+2. **Know the practice's sub-account.** The location id of the site's own contact form (gate output,
+   `location …`) or the client runbook. Every form on the site must live there.
+3. **Read where it stands** (no login, submits nothing):
    ```bash
    cd deliver/process/tools/termly-ghl-consent
-   node gates/check-ghl-form.mjs --standard --origin https://www.<client>.com <formId> > output/ghl-forms.log 2>&1
+   node gates/check-ghl-form.mjs --standard --origin https://www.<client>.com      --legal "<X PLLC DBA Y>" --location <locationId> <formId> [...] > output/ghl-forms.log 2>&1
    ```
-   Each `PROBLEM` line is one thing to fix.
-3. **Collect the inputs**, all from the live site — never invent them:
+   Each `PROBLEM` line is one thing to fix. Beyond the standard it fails on: a form in **another
+   practice's sub-account** (its leads land in that practice's CRM), a consent box that does **not
+   name the legal name**, a single consent box, and a submit **redirect that does not answer 200**.
+4. **Collect the inputs**, all from the live site — never invent them:
    - **Legal name**: the first line of the site's `/privacy-policy` ("X PLLC DBA Y").
    - **Origin**: the production origin (`https://www.…`). Both `/privacy-policy` and
      `/terms-of-service` must answer 200 there; build the missing page first.
    - **Services**: the site's `/services/*` pages grouped into 8–12 patient-facing choices, plus *Other*.
-4. **Run Codex.** Fill the placeholders in [`codex-instruction.txt`](./codex-instruction.txt) and run
-   it with writes allowed (the user asked for the change; the instruction names it):
+     If the sub-account already has a `Service` field, **reuse it as is** (its options are shared).
+   - **Campaign / landing-page forms**: no service dropdown; the thank-you URL (must answer 200)
+     and the Submit label the campaign asks for. Gate them with `--landing`.
+   - **Styling**: `node site-style.mjs <page>` ([Styling](#styling)).
+5. **Run Codex**, one form per run, one after another (same sub-account). Fill the placeholders in
+   [`codex-instruction.txt`](./codex-instruction.txt) and run it with writes allowed:
    ```bash
-   node deliver/process/tools/codex-computer-use/codex_cu.mjs "<filled instruction>" --allow-writes --timeout 40
+   node deliver/process/tools/codex-computer-use/codex_cu.mjs "<filled instruction>" --allow-writes --model gpt-6.1-sol --timeout 40
    ```
    For a **new** form, say so and have Codex create it from blank: it must never open an existing
    form, not even to copy its style (2026-10-02: an open builder on a live lead form looked like
-   an edit, and the user stopped it). Give the style from the site's tokens instead.
-5. **Gate again** (step 2). It must print `ok`. Then look at the form once on the live page in a
+   an edit, and the user stopped it). Give the style from the site's tokens instead. A form in the
+   wrong sub-account is not moved: build it new in the right one, swap the embed, retire the old one.
+6. **Gate again** (step 3). It must print `ok`. Then look at the form once on the live page in a
    normal browser: in automation the embed stays hidden behind Cloudflare Turnstile.
-6. **Record** it in the client runbook: form id, the service list, the legal name used.
+7. **Record** it in the client runbook: form id, the service list, the legal name used.
+
+## Styling
+
+Every form takes the site's look, read from the live page — never typed from memory and never
+GHL's defaults. `site-style.mjs` drives the installed Chrome headless, reads the page's computed
+styles (body font and colour, heading colour, the main call-to-action button, an input if the page
+has one) and prints the values to set in the form builder's **Styles** panel:
+
+```bash
+cd deliver/process/tools/ghl-forms
+node site-style.mjs <page with the form> > output/site-style.json                         # what to set
+node site-style.mjs --compare <formId> <page with the form> > output/site-style.log 2>&1  # what differs now
+```
+
+| Builder setting | From the site |
+| :--- | :--- |
+| Label + input + placeholder font | body font family and size |
+| Label colour, input text colour | heading colour, body colour |
+| Input background, border, corner radius | the site's input, else white, body colour at 20%, the button's radius |
+| Button background, text, radius | the main call-to-action button (colour, font, weight, case, radius), full width |
+| Consent and Privacy/Terms text | body font, 14px, body colour |
+| Form background | transparent, so the page's card shows through |
+
+Give Codex these exact values in the instruction (step 5) and run `--compare` again after it
+saves; it must print `style ok`. A font the builder does not list (a site's self-hosted variable
+font) gets the closest Google font of the same family, named in the client runbook.
+
+Read 2026-10-03: Mason Park's contact form is still on GHL's Inter (site: Nunito Sans, Karla
+uppercase button `#8C6349`, 2px radius); even the Grand Mission model uses Arial and GHL's blue
+button against a Montserrat site. Styling is new to the standard, so no form passes it yet.
 
 ## Copying the fields from another sub-account
 
@@ -132,6 +173,17 @@ For the owner to settle against the reference video, then fold into the standard
    before flipping them.
 
 ## Gotchas
+
+- **A form copied from another practice stays in that practice's sub-account.** Mason Park's two
+  *Google Ads* forms (`YbX91GhEDKkCN4GH4gka`, `AFu5BpJpMjgSnSf8yybc`) live in **Grand Mission's**
+  location `mZ2q3yXtue090i2YLcrj` and link to grandmissiondentistry.com's privacy pages: any lead
+  from them lands in Grand Mission's CRM. They are off the site since 2026-09-25 but still exist.
+  `--location` catches this; copy the *fields* by snapshot, then build the form in the right account.
+- **Landing-page forms are where the errors hide.** Contact pages get checked; campaign forms
+  don't. Mason Park's Invisalign and New Patient Special forms had no consent element, no links and
+  redirected to 404 thank-you routes while the contact form passed. Always gate every form on the site.
+- **A Codex run that loses the browser saves nothing.** "Debugger unattached" or a dropped
+  connection ends the run before *Save*; gate the form to confirm it is unchanged, then rerun.
 
 - **A dropdown's options live on the custom field, not the form.** Editing the options of a reused
   `Service` field changes every form in the sub-account that uses it. Read them before you change
