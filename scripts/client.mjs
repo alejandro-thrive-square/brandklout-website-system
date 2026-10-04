@@ -48,7 +48,18 @@ function resolve(arg) {
 }
 
 try {
-  if (cmd === 'list' || !cmd) {
+  if ((cmd === 'list' || !cmd) && process.argv.includes('--md')) {
+    // The table in deliver/docs/CLIENTS.md: `node scripts/client.mjs list --md` regenerates it.
+    const rows = clients().filter((c) => c.folder).map((c) => {
+      const dir = `deliver/brandklout/${c.folder}`
+      const top = git(['ls-tree', '-d', '--name-only', c.branch, `${dir}/`]).split('\n').map((p) => p.split('/').pop()).filter(Boolean)
+      const layout = top.filter((d) => /^scenario-\d+-/.test(d)).map((d) => d.replace(/^scenario-(\d+)-.*/, 'S$1')).join(', ') || (top.includes('workflows') ? 'pre-v2 (`workflows/`)' : '—')
+      const last = git(['log', '-1', '--no-merges', '--format=%cs', c.branch, '--', dir]).trim()
+      const wt = c.worktree ? `\`${c.worktree.replace(/^.*\/orca\/workspaces\//, '~/orca/workspaces/')}\`` : '— (no worktree)'
+      return `| \`${c.folder}\` | \`${c.branch}\` | ${wt} | ${layout} | ${last} |`
+    })
+    console.log('| Client folder | Branch | Worktree | Scenarios | Last client commit |\n| --- | --- | --- | --- | --- |\n' + rows.join('\n'))
+  } else if (cmd === 'list' || !cmd) {
     for (const c of clients()) {
       const last = git(['log', '-1', '--format=%cs %s', c.branch]).trim().slice(0, 70)
       console.log(`${c.branch.padEnd(32)} ${String(c.folder).padEnd(34)} ${last}${c.worktree ? '' : '   (no worktree)'}`)

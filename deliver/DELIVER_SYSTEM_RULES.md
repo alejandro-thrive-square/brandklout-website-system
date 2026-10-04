@@ -31,7 +31,8 @@ board draws this).
     run another toolkit lists it in its own `toolkit.json` (`"requires"`); `scenario.mjs` mirrors the
     whole chain, so a step's `tools.json` names only what the step itself runs. Plus the rules, `scripts/`,
     `deliver/docs/` and `deliver/scripts/`.
-- **`deliver/brandklout/` holds client folders and nothing else.** Shared standards live in
+- **`deliver/brandklout/` holds client folders and nothing else, and only on client branches** (main
+  tracks none; see [docs/CLIENTS.md](./docs/CLIENTS.md)). Shared standards live in
   `deliver/docs/`, cross-client scripts (the Asana pulls) in `deliver/scripts/`. A standard or gate that
   belongs to one step lives in that step (the design standard and journey audit in Scenario 0 step 03).
 - **A client (its branch `bk-<client>`, its own Orca worktree):** `deliver/brandklout/<client>/`, laid
@@ -99,8 +100,9 @@ board draws this).
   `node scripts/check-scope.mjs` keeps a commit to one kind; on main, `pre-commit` allows system
   files only and `pre-merge-commit` refuses any merge that brings client files
   (`branch.main.mergeoptions=--no-ff`, set by `scripts/bootstrap.sh`, stops a fast-forward from
-  skipping it). Client folders already on main are snapshots of the day they were merged; the
-  branch is always the current record.
+  skipping it). Main tracks no client folders at all (removed 2026-10-03; each client branch got a
+  merge that keeps its own folder, so merging main never deletes it). The active clients, branches
+  and worktrees are listed in [docs/CLIENTS.md](./docs/CLIENTS.md).
 - **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
 - **Computer use goes through Codex.** Any task that needs a website or desktop app with no
