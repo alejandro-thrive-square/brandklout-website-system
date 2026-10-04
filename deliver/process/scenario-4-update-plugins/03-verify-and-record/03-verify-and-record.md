@@ -36,7 +36,7 @@ record a later reader can trust without having been here.
    - `open-graph`, `aeo-schema` on production: `tools/instatic-site/gates/seo-head-check.mjs
      --public <host>` over the live sitemap.
    - `embed-origins` with site scripts: `tools/instatic-embeds/rollout-site-scripts.mjs verify
-     --url <script>`; for DNI, `tools/instatic-site/gates/dni-proof.mjs` once (each run burns a pool
+     --url <script>`; for DNI, `tools/termly-ghl-consent/gates/dni-proof.mjs` once (each run burns a pool
      number).
    - `embed-origins` block changes: `tools/instatic-embeds/verify-embed-canvas.mjs` (publishes
      nothing).
@@ -70,13 +70,14 @@ record a later reader can trust without having been here.
 
 - Do record hosts, versions and the commit SHA in the runbook, never a password.
 - Do check the head in a rendered page for WordPress clones (`seo-head-check.mjs --render`).
-- Don't call a plugin broken from a red `verify-embed-editor.mjs`; run the canvas gate first.
+- Don't call a plugin broken from one red gate; `verify-embed-canvas.mjs` (the editor canvas shows
+  the card, publishes nothing) and `verify-embed-scripts.mjs` (the published page) are the embed gates.
 - Don't mark the rollout done while `status` still shows PARITY for the plugin.
 
 ## Tools
 
 - `tools/instatic-plugins/plugins.mjs`: `verify`, `status`.
-- `tools/instatic-site/gates/seo-head-check.mjs`, `dni-proof.mjs`.
+- `tools/instatic-site/gates/seo-head-check.mjs`, `tools/termly-ghl-consent/gates/dni-proof.mjs`.
 - `tools/instatic-embeds/rollout-site-scripts.mjs verify`, `verify-embed-canvas.mjs`.
 
 ## Outputs

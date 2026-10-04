@@ -1,7 +1,7 @@
 # Scenario 0 · Website from Scratch (Instatic)
 
 A new site for a client with no website we need to keep. It is built on Instatic, hosted on Railway,
-served through Cloudflare. The FigJam board **Deliver SOP's → Secenario 0** is the same process as a
+served through Cloudflare. The FigJam board **Deliver SOP's → Scenario 0** is the same process as a
 picture; when the two disagree, fix both.
 
 If the client already has a website, run [Scenario 1 · Migration](../scenario-1-migration/README.md)
@@ -20,15 +20,15 @@ first and come back here at step 02.
 
 - **This scenario on main:** one folder per step (`NN-step/`: directive, `scripts/`, `tools.json`,
   `output/`). Shared toolkits in [`../tools/`](../tools/).
-- **For a client:** `node scripts/scenario.mjs start <client> 0` copies it to
-  `deliver/brandklout/<client>/scenario-0-new-site/` (plus the toolkits into `<client>/tools/`). Work in
+- **For a client:** `node scripts/scenario.mjs start <client> 0` mirrors it (untracked, from
+  main) to `deliver/brandklout/<client>/scenario-0-new-site/` (plus the toolkits into `<client>/tools/`). Work in
   the step folder there; everything the step produces goes in its `output/` (assets, code,
   `RUNBOOK.md`). The build lives in `03-design-build/output/code/site-src/`.
 - **Client docs:** `deliver/brandklout/<client>/docs/` (`project-overview.md`, `facts.md`,
   `mcp-access.md`) and the client `RUNBOOK.md`.
 - **Client media:** the client's Google Drive and the step's `output/assets/` (gitignored, backed up to
   R2). Pull with `node scripts/drive.mjs`.
-- **Standards:** [`deliver/docs/DESIGN-STANDARD.md`](../../docs/DESIGN-STANDARD.md),
+- **Standards:** [`03-design-build/DESIGN-STANDARD.md`](./03-design-build/DESIGN-STANDARD.md),
   [`FLUID-ROOT.md`](../../docs/FLUID-ROOT.md), [`CLIENT-FIRST.md`](../../docs/CLIENT-FIRST.md).
 
 ## Models

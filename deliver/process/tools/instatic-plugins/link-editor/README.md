@@ -141,18 +141,17 @@ stock UI.
 ## Install
 
 ```bash
-cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs link-editor output/link-editor.zip
-node install-plugin.mjs output/link-editor.zip            # dry run — shows the grants
-node install-plugin.mjs output/link-editor.zip --apply
+cd deliver/process/tools/instatic-plugins
+node install-plugin.mjs link-editor            # dry run: packs from source, shows the grants
+node install-plugin.mjs link-editor --apply    # one site; plugins.mjs rollout for several
 ```
 
 Then **reload the editor tab**: plugins activate at admin boot, and
 `useInstalledEditorPlugins` only re-runs on `CMS_PLUGINS_CHANGED_EVENT`.
 
-`install-plugin.mjs` holds a per-plugin grant table and refuses any id it has no
-entry for, so a package cannot widen what it receives by editing its own
-manifest.
+The installers grant exactly the `grants` list in `../plugins.json` and refuse a
+package asking for more, so a package cannot widen what it receives by editing its
+own manifest.
 
 ## Verify
 

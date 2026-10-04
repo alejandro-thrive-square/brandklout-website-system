@@ -1,14 +1,25 @@
 #!/usr/bin/env node
 /**
- * Does a pasted SCRIPT actually run on the published page? (v1.2.0)
+ * The publish-path gate for the Embed block: does a pasted FRAME load and a pasted
+ * SCRIPT actually run on the published page?
  *
  *   node verify-embed-scripts.mjs --place            # temp page + publish
  *   node verify-embed-scripts.mjs --check            # drive the published page
  *   node verify-embed-scripts.mjs --check --viewport=390,844
  *   node verify-embed-scripts.mjs --cleanup          # delete it + publish
  *
- * `verify-embed-module.mjs` proves an embedded FRAME loads. Scripts are the
- * harder half and the one the capability was asked for: on Webflow you paste a
+ * `test-embed-module.mjs` proves the render functions in isolation. It cannot
+ * prove what only exists on the platform: that the host REGISTERS the module (a
+ * rejected manifest parks the plugin in `error` and the block never appears), that
+ * `escapeProps()` lets a pasted snippet survive the publish boundary as markup
+ * rather than visible text, that the per-module runtime is served so `fit: auto`
+ * is a measured height, and that the CSP the filter writes lets the frame load.
+ * The URL-mode block below proves those (it absorbed the old verify-embed-module
+ * gate, 2026-09-28). A CSP-refused frame is still an <iframe> in the DOM and still
+ * fires `load`, so every assertion reads the RENDERED box and the page's own
+ * `securitypolicyviolation` events.
+ *
+ * Scripts are the harder half and the one the capability was asked for: on Webflow you paste a
  * vendor snippet and it works, and until v1.2.0 the honest answer here was that
  * an inline script was refused by CSP and an external one needed somebody to
  * type its origin into plugin settings first.
@@ -38,15 +49,19 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import http from 'node:http'
-import { api, getSite, getPages, publish, BASE } from './lib/insta-api.mjs'
+import { api, getSite, getPages, publish, BASE } from '../instatic-api-sync/insta-api.mjs'
 
 const SLUG = 'plugin-embed-scripts-test'
 const PAGE_URL = `${BASE}/${SLUG}`
-const MODULE_ID = 'webzite.embed-origins.embed'
+const MODULE_ID = 'brandklout.embed-origins.embed'
 const VENDOR_JS = 'https://reputationhub.site/reputation/assets/review-widget.js'
 const WIDGET =
   'https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7' +
   '?widgetId=6a7340db2bbe7819cc3536f4'
+
+/** Starting height for the URL-mode auto block. Deliberately small: the gate is
+ *  that the widget's own postMessage grew it, and a 600px default could hide that. */
+const START = 240
 
 const arg = (flag) => process.argv.includes(flag)
 
@@ -72,10 +87,22 @@ const node = (id, moduleId, props, children = [], parentId = null) => ({
 function buildBody() {
   const root = 'wzscripts-root'
   const block = 'wzscripts-block'
+  const auto = 'wzscripts-auto'
   return {
     rootNodeId: root,
     nodes: {
-      [root]: node(root, 'base.body', {}, [block]),
+      [root]: node(root, 'base.body', {}, [auto, block]),
+      [auto]: node(auto, MODULE_ID, {
+        source: 'url',
+        url: WIDGET,
+        title: 'Patient reviews (URL mode)',
+        fit: 'auto',
+        height: START,
+        ratio: '16 / 9',
+        lazy: false,
+        allowFullscreen: false,
+        allow: '',
+      }, [], root),
       [block]: node(block, MODULE_ID, {
         source: 'snippet',
         snippet: SNIPPET,
@@ -127,8 +154,8 @@ async function place() {
   console.log('publishing…')
   console.log(JSON.stringify(await publish()).slice(0, 200))
   console.log(`\n  ${PAGE_URL}`)
-  console.log('\n  A publish bakes EVERY page. Check the home page did not move:')
-  console.log('  node ../08-qa/output/audit-site.mjs --base https://encorercm.com --only index && git diff ../08-qa/output/audit-out/')
+  console.log('\n  A publish bakes EVERY page. Snapshot the site before --place and after --cleanup:')
+  console.log('  node ../instatic-site/ops/backup-site.mjs')
 }
 
 async function cleanup() {
@@ -193,10 +220,17 @@ async function check() {
     (await S('Runtime.evaluate', { expression: e, returnByValue: true, awaitPromise: true })).result.value
 
   await S('Page.navigate', { url: PAGE_URL })
+  await wait(4000)
+  await ev('(async()=>{const H=document.documentElement.scrollHeight;' +
+    'for(let y=0;y<H;y+=600){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,60))}' +
+    'window.scrollTo(0,0)})()')
   await wait(9000)
 
   const s = await ev(`(() => {
     const frame = document.querySelector('iframe.lc_reviews_widget');
+    const auto = document.querySelector('[data-wz-embed="auto"]');
+    const fixed = document.querySelector('[data-wz-embed="fixed"]');
+    const autoFrame = auto ? auto.querySelector('iframe') : null;
     const probe = document.getElementById('wz-inline-probe');
     const vendor = performance.getEntriesByType('resource')
       .find(r => r.name.indexOf('review-widget.js') !== -1);
@@ -211,6 +245,13 @@ async function check() {
       /* Set by the VENDOR script and by nothing else on this page. */
       heightAttr: frame ? frame.getAttribute('height') : null,
       transition: frame ? frame.style.transition : null,
+      blocks: document.querySelectorAll('[data-wz-embed]').length,
+      autoFrames: auto ? auto.querySelectorAll('iframe').length : 0,
+      autoHeight: autoFrame ? Math.round(autoFrame.getBoundingClientRect().height) : 0,
+      snippetFrames: fixed ? fixed.querySelectorAll('iframe').length : 0,
+      /* Had the snippet NOT survived escapeProps, the markup would render as text. */
+      snippetLeakedAsText: fixed ? /&lt;iframe|<iframe/.test(fixed.textContent) : false,
+      runtimeTag: !!document.querySelector('script[src*="module-js/${MODULE_ID}"]'),
       csp: window.__csp || [],
     };
   })()`)
@@ -227,6 +268,13 @@ async function check() {
   console.log(`frame-src : ${frameSrc}`)
 
   const checks = [
+    ['both blocks rendered', s.blocks === 2],
+    ['URL mode produced one iframe', s.autoFrames === 1],
+    ['the snippet survived the publish boundary as an element', s.snippetFrames === 1],
+    ['the snippet did not leak as visible text', s.snippetLeakedAsText === false],
+    ['the auto-height runtime was served', s.runtimeTag === true],
+    [`auto height grew past the ${START}px start`, s.autoHeight > START + 200],
+    ['no frame refused by CSP', (s.csp || []).every((v) => !/^(frame-src|child-src)/.test(v))],
     ['the pasted script tag survived to the published page', s.vendorTagPresent === true],
     ['the vendor origin was derived into script-src', /reputationhub\.site/.test(scriptSrc)],
     ['the frame origin was derived into frame-src', /reputationhub\.site/.test(frameSrc)],

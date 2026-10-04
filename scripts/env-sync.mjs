@@ -21,10 +21,10 @@
  * a rotated credential reaches every worktree by editing the master and nothing
  * else.
  *
- * WHY GENERATE A FILE instead of having scripts read the master directly: four
+ * WHY GENERATE A FILE instead of having scripts read the master directly: several
  * different loaders already walk up to a repo-root `.env`
- * (instatic-embeds/lib/insta-api.mjs, instatic-embeds.py,
- * instatic-api-sync/insta-api.mjs, mason-park's live-qa.mjs), and agents write
+ * (instatic-api-sync/insta-api.mjs, instatic-site/lib/env.mjs,
+ * mason-park's live-qa.mjs), and agents write
  * throwaway .mjs that does the same naive thing. Generating the file they
  * already expect means none of them change and none of them can forget.
  *

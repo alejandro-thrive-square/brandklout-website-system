@@ -14,7 +14,7 @@
  *   - optional: screenshots at six breakpoints (--shots) into
  *     <cwd>/output/screenshots/<slug>/<width>.png
  *
- * Usage: node check-local.mjs [slug ...] [--shots] [--widths=1440,390] [--base=https://host]
+ * Usage: node check-pages.mjs [slug ...] [--shots] [--widths=1440,390] [--base=https://host]
  *        --base drives the PUBLISHED site instead of the local dist (the live
  *        multi-page gate; verify-motion-live.mjs keeps the homepage's deeper asserts)
  */

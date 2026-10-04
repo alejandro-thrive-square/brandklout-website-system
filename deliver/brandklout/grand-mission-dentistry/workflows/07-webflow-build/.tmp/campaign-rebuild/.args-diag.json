@@ -1,8 +1,0 @@
-{"context":"Diagnose why several grid classes are not applying on the built implants page.","siteId":"698111847e9608eb30ee21c6","pageId":"6a8299c9e8c592d788e327ca","actions":[
-{"label":"q","query_styles":{"queries":[
-{"label":"hero","name_path":["campaign-hero_grid"],"include_properties":true,"limit":3},
-{"label":"proof","name_path":["campaign-proof_grid"],"include_properties":true,"limit":3},
-{"label":"result","name_path":["campaign-split","is-result"],"include_properties":true,"limit":3},
-{"label":"split","name_path":["campaign-split"],"include_properties":true,"limit":3}
-]}}
-]}

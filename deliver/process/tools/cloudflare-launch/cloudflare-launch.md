@@ -13,7 +13,7 @@ kept out of Google. Instatic serves no sitemap, no canonical and no redirects, s
   serves on `<business-name>.up.railway.app` until now.
 - The domain, and who holds the registrar login (nameserver changes happen there, not in Cloudflare).
 - The email DNS snapshot (`scenario-1-migration/01-old-site-capture/scripts/email-dns-audit.mjs`), taken before anything moves.
-- For a migration: the built redirect map (`scenario-1-migration/02-redirect-map.md`, Part B).
+- For a migration: the built redirect map (`scenario-1-migration/02-redirect-map/02-redirect-map.md`, Part B).
 - `deliver/process/tools/instatic-domain-origins/sites.json` and `check-origins.mjs`.
 
 ## Checklist
@@ -135,8 +135,8 @@ Every script is a dry run until `--apply`.
   a redirect list cannot appear in an expression (20127); Single Redirects run first (apex hits take
   two hops); quotas are per account and follow the highest plan on it (Free: 10,000 URLs, 5 lists,
   15 rules), so never one list per site: `source_url` holds the host, and one list per client batch
-  serves many sites. New sites use the Worker from scenario 1 instead; the Bulk scripts stay on
-  branch `bk-dr-nahlah` under `deliver/process/19-cloudflare-launch/`.
+  serves many sites. New sites use the Worker from scenario 1 instead; the Bulk scripts are in git at
+  commit `6dc7ac96` (`deliver/process/19-cloudflare-launch/`).
 
 ## Do / Don't
 
@@ -154,22 +154,41 @@ Every script is a dry run until `--apply`.
 
 ## Tools
 
-In `deliver/process/tools/cloudflare-launch/` (origins in [README.md](./README.md)):
+In `deliver/process/tools/cloudflare-launch/`. Scenario 1 uses `deploy-worker.mjs`,
+`copy-dns-records.mjs` and `mint-token.mjs` for its redirect map.
 
-- `cf-api.mjs`: shared REST client; `whoami` verifies a token the right way.
-- `mint-token.mjs`: zone-scoped temporary token (presets launch, redirects, pages); `--revoke`.
-- `doh.mjs`, `doh-lookup.cjs`: DNS over HTTPS lookups; Node preload for NXDOMAIN-cached names.
-- `copy-dns-records.mjs`: live DNS vs zone diff; adds missing records DNS-only.
-- `railway-domain.mjs`: Railway custom domain + CNAME/TXT + certificate wait + proxy; deletes staging service domains.
-- `canonical-host.mjs`: apex/www 301 with the ACME exemption.
-- `zone-hardening.mjs`: SSL strict, Always HTTPS, TLS 1.2, email obfuscation report.
-- `build-sitemap-worker.mjs`, `deploy-worker.mjs`: sitemap Worker; any Worker deploy (routes, preview, catch-all, rollback).
-- `staging-noindex.mjs`: X-Robots-Tag rule for staging, with proof.
-- `pages-mirror.mjs`: Cloudflare Pages stand-in for a dying old site.
-- `verify-launch.mjs`: outside-in proof of the whole launch.
+Node 20+; no npm dependencies (`pages-mirror.mjs` calls `npx wrangler@4`). Tokens: `CLOUDFLARE_API_TOKEN`
+in the shell (minted, scoped) or `CLOUDFLAREAPI` from the generated `.env`; Railway: the CLI's
+`~/.railway/config.json` `user.accessToken`. No script prints a token. Redirect output to a file.
+
+| Script | Purpose | Usage | Origin |
+| :--- | :--- | :--- | :--- |
+| `cf-api.mjs` | Shared REST client (retry on fresh-token 10000, exact zone match, ruleset helpers); `whoami` verifies via `/accounts/{id}/tokens/verify` | `node cf-api.mjs whoami` | bk-dr-nahlah `cloudflare-launch/cf-api.mjs`, generalized |
+| `mint-token.mjs` | Mint a zone-scoped temporary token from the account token; revoke it | `node mint-token.mjs --zone d.com --preset launch --hours 3 > <scratch>/t.json`; `--revoke <id>`; `--list-groups` | manual runs on IFA, Stone, Stone Med Spa, Mason Park, brandklout.ai |
+| `doh.mjs` | DNS-over-HTTPS lookup (module + CLI) | `node doh.mjs d.com MX` | DoH pattern from IFA and Mason Park runs |
+| `doh-lookup.cjs` | Node preload: resolve chosen zones over DoH (VPN NXDOMAIN cache) | `DOH_ZONES=d.com node -r ./doh-lookup.cjs x.mjs` | bk-stone-med-spa scratch preload (2026-09-15) |
+| `copy-dns-records.mjs` | Diff live DNS (DoH + email snapshot) against the zone; add missing records DNS-only | `node copy-dns-records.mjs --zone d.com --snapshot email-dns-d.com.json [--apply]` | manual zone-vs-live checks, Mason Park and IFA |
+| `railway-domain.mjs` | Railway custom domain, CNAME + `_railway-verify` TXT, wait for VALID, proxy; delete staging service domains | `node railway-domain.mjs --project … --environment … --service … --domain www.d.com --zone d.com --apply` | [`instatic-site/staging-clone`](../instatic-site/staging-clone/staging-clone.md) procedure + IFA / brandklout.ai runs |
+| `canonical-host.mjs` | apex/www 301, path + query kept, ACME exempt, refuses a dead target | `node canonical-host.mjs --zone d.com --to https://www.d.com --apply` | bk-dr-nahlah `deploy-canonical-host.mjs` + bk-ifa-dentistry `docs/dns/set-redirect-rules.mjs` |
+| `zone-hardening.mjs` | SSL Full (strict), Always HTTPS, TLS 1.2; email obfuscation report/off; reverts on breakage | `node zone-hardening.mjs --zone d.com --hosts d.com,www.d.com --apply` | manual settings on IFA, Mason Park Kids, brandklout.ai |
+| `build-sitemap-worker.mjs` | sitemap.xml from the Instatic pages API (+ crawl for collection entries), every URL 200, and its Worker | `node build-sitemap-worker.mjs --canonical https://www.d.com --out out --crawl` | bk-stone-med-spa `06-cloudflare-sitemap/build-sitemap.mjs` (from 19's `build_cloudflare.mjs`) |
+| `deploy-worker.mjs` | Upload any Worker; routes (`--routes` or `--routes-from`), no-Worker exclusions, DNS records, workers.dev preview, catch-all backup/removal, rollback | `node deploy-worker.mjs --zone d.com --script n --file w.js --routes "d.com/sitemap.xml*" --apply` | bk-stone-med-spa `deploy-sitemap.mjs` + bk-stone and bk-mason-park `deploy-redirects.mjs` |
+| `staging-noindex.mjs` | `X-Robots-Tag: noindex, nofollow` on staging.<domain>, proves production untouched | `node staging-noindex.mjs --zone d.com --apply` | manual rule on Stone, Stone Med Spa, IFA, brandklout.ai |
+| `pages-mirror.mjs` | Cloudflare Pages stand-in for a dying old site (API create, wrangler deploy, domains) | `node pages-mirror.mjs --project c-wp --dir mirror-clean --domains d.com,www.d.com --zone d.com --apply` | bk-mason-park-kids 2026-09-14 |
+| `verify-launch.mjs` | Outside-in proof: canonical 301, https, sitemap on both hosts, every loc 200, robots.txt, admin, staging noindex and leaks | `node verify-launch.mjs --canonical https://www.d.com --sitemap out/sitemap.xml` | bk-stone-med-spa `verify-sitemap.mjs` + bk-dr-nahlah `verify-live.mjs` |
+
+From other toolkits:
+
 - `../instatic-domain-origins/check-origins.mjs`: PUBLIC_ORIGIN gate.
 - `../instatic-domain-origins/check-dns.mjs`: each domain's CNAME still the target Railway minted for it.
 - `../../scenario-1-migration/02-redirect-map/scripts/verify-redirects.mjs`: redirect map proof.
+
+Not carried over: `build_cloudflare.mjs`, `verify_cloudflare.mjs`, `deploy-redirects.mjs`,
+`verify-live.mjs`, `lib/config.mjs` and `cloudflare-launch.config.example.json` drive Dr. Nahlah's Bulk
+Redirect list and read her inventory files. They are in git at commit `6dc7ac96`
+(`deliver/process/19-cloudflare-launch/`); the branch tip no longer has them. The old
+`deploy-canonical-host.mjs` referenced an undefined `CFG` (`canonical-host.mjs` replaces it), and the old
+`deploy-worker.mjs` bound `/sitemap.xml` without a trailing `*` (`deploy-worker.mjs` here warns on that).
 
 ## Outputs
 
