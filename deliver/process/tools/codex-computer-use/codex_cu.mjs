@@ -5,7 +5,8 @@
 //
 // Runs one non-interactive Codex session that has the Codex desktop app's computer-use plugin
 // (screen + Chrome on this Windows workstation) and prints its final report. Read-only unless
-// --allow-writes. See README.md.
+// --allow-writes. When a ChatGPT usage limit is hit it spends one reset credit and retries once
+// (codex-limits.mjs; --no-auto-reset to disable). See README.md.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
@@ -22,6 +23,8 @@ const flag = (name) => {
 };
 const allowWrites = args.includes('--allow-writes');
 if (allowWrites) args.splice(args.indexOf('--allow-writes'), 1);
+const autoReset = !args.includes('--no-auto-reset');
+if (!autoReset) args.splice(args.indexOf('--no-auto-reset'), 1);
 const timeoutMin = Number(flag('--timeout') ?? 20);
 // Pinned here, not in ~/.codex/config.toml, so the ChatGPT app keeps its own default (user's choice, 2026-10-03).
 const model = flag('--model') ?? 'gpt-6-luna';
@@ -85,12 +88,27 @@ mkdirSync(outDir, { recursive: true });
 writeFileSync(join(outDir, 'prompt.txt'), rules);
 const lastMsg = join(outDir, 'report.md');
 const codex = findCodex();
-const res = spawnSync(
+// Usage limits: spend a ChatGPT rate-limit reset credit automatically when a limit is reached
+// (before the run, or when a run dies on one, then retry once). --no-auto-reset turns it off.
+const limits = (cmd) => {
+  const r = spawnSync(process.execPath, [join(import.meta.dirname, 'codex-limits.mjs'), cmd], { encoding: 'utf8', timeout: 90_000, windowsHide: true });
+  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`.trim();
+  if (out) console.error(`[codex-cu] limits ${cmd}: ${out.replace(/\n\s*/g, ' | ')}`);
+  return out;
+};
+if (autoReset && /limit reached: true/.test(limits('status'))) limits('reset');
+const runOnce = () => spawnSync(
   codex,
   // --json: the plain log hides the node_repl code, so only the event stream shows browser./sky. calls.
   ['exec', '--json', '-m', model, '--skip-git-repo-check', '--ephemeral', '-s', 'danger-full-access', '-C', outDir, '-o', lastMsg, '-'],
   { input: rules, encoding: 'utf8', timeout: timeoutMin * 60_000, maxBuffer: 64 * 1024 * 1024, windowsHide: true },
 );
+let res = runOnce();
+const failure = `${res.stdout ?? ''}${res.stderr ?? ''}`.split('\n').filter((l) => /"type":"(error|turn\.failed)"/.test(l)).join('\n');
+if (autoReset && /usage limit|rate limit|limit reached|out of credits/i.test(failure) && /reset: reset/.test(limits('reset'))) {
+  writeFileSync(join(outDir, 'session.first-try.log'), `${res.stdout ?? ''}\n${res.stderr ?? ''}`);
+  res = runOnce();
+}
 writeFileSync(join(outDir, 'session.log'), `${res.stdout ?? ''}\n${res.stderr ?? ''}`);
 
 if (res.error) console.error(`codex failed: ${res.error.message}`);

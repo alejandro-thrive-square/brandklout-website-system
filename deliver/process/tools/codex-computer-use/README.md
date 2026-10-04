@@ -22,6 +22,22 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
 
+## Usage limits and reset credits
+
+Codex runs on the ChatGPT plan's usage windows (5-hour and weekly). `codex-limits.mjs` reads them,
+and spends the plan's **rate-limit reset credits**, through the app server's own JSON-RPC
+(`account/rateLimits/read`, `account/rateLimitResetCredit/consume`) with the app's signed-in account:
+
+```bash
+node deliver/process/tools/codex-computer-use/codex-limits.mjs status   # % used, reset credits left
+node deliver/process/tools/codex-computer-use/codex-limits.mjs reset    # spend one, only when a limit is reached
+```
+
+**`codex_cu.mjs` resets automatically** (user's instruction, 2026-10-03): before a run it spends a
+credit if a limit is already reached, and when a run dies on a usage limit it spends one and retries
+once. `--no-auto-reset` turns that off. Each spend is printed on stderr as `[codex-cu] limits reset: …`.
+To stretch the plan, keep the default `gpt-6-luna`; reach for `--model gpt-6.1-sol` only when luna fails a task.
+
 ## Parallel runs
 
 **Runs on different sites can go in parallel.** On 2026-10-03, three read-only runs started

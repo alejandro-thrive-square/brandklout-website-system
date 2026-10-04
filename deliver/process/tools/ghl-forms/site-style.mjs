@@ -33,7 +33,12 @@ const PROBE = `(() => {
   return JSON.stringify({ url: location.href, body: pick(body), heading: pick(cs(h)), button: btn ? { text: btn.textContent.trim().slice(0, 40), ...pick(cs(btn)) } : null, input: pick(cs(input)) })
 })()`
 
-async function probe(url) {
+/** Runs in the public form: the rendered font sizes of each SMS consent box's text. */
+const CONSENT_PROBE = `JSON.stringify([...document.querySelectorAll('*')]
+  .filter((e) => /^By checking this box/.test((e.textContent || '').trim()) && ![...e.children].some((c) => /^By checking this box/.test((c.textContent || '').trim())))
+  .map((e) => [...new Set([e, ...e.querySelectorAll('*')].filter((x) => x.textContent.trim()).map((x) => getComputedStyle(x).fontSize))]))`
+
+async function probe(url, expression = PROBE) {
   if (!CHROME) throw new Error('Chrome not found (set CHROME_PATH)')
   const dir = mkdtempSync(path.join(tmpdir(), 'site-style-'))
   const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run', '--window-size=1440,1000', `--user-agent=${UA}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] })
@@ -57,7 +62,7 @@ async function probe(url) {
     for (let i = 0; i < 60 && !events.includes('Page.loadEventFired'); i++) await new Promise((r) => setTimeout(r, 500))
     // Fonts and late CSS: document.fonts.ready resolves too early on some builds, so wait a beat too.
     await send('Runtime.evaluate', { expression: 'document.fonts.ready.then(() => new Promise((r) => setTimeout(r, 1500)))', awaitPromise: true })
-    const r = await send('Runtime.evaluate', { expression: PROBE, returnByValue: true })
+    const r = await send('Runtime.evaluate', { expression, returnByValue: true })
     ws.close()
     return JSON.parse(r.result.result.value)
   } finally {
@@ -132,6 +137,11 @@ const siteR = px(site.input?.borderRadius ?? site.button?.borderRadius)
 if (r !== undefined && Math.abs(r - siteR) > 2) problems.push(`input corner radius ${r}px, site ${siteR}px`)
 console.log(`${formId} vs ${site.url}`)
 for (const [k, v] of Object.entries(want)) console.log(`  ${k.padEnd(26)} ${v}`)
+// The two SMS consent boxes render at one size (GHL keeps an inline 16px on box 1).
+const boxes = await probe(`https://api.leadconnectorhq.com/widget/form/${formId}`, CONSENT_PROBE)
+const sizes = [...new Set(boxes.flat())]
+console.log(`  ${'Consent boxes rendered'.padEnd(26)} ${boxes.map((b) => b.join('/')).join(' | ') || '-'}`)
+if (boxes.length >= 2 && sizes.length > 1) problems.push(`the consent boxes render at different sizes (${sizes.join(', ')}): set both to 14px`)
 for (const p of problems) console.log('  PROBLEM ' + p)
 console.log(problems.length ? `\n${problems.length} style difference(s)` : '\nstyle ok')
 process.exitCode = problems.length ? 1 : 0

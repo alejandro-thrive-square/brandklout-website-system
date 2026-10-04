@@ -14,12 +14,13 @@ Top to bottom:
 
 | # | Element | Rule |
 | :- | :--- | :--- |
+| 0 | **Labels** | **Every visible field has a label above it** (Name, Phone, Email, Service, Message…), placeholders as hints, like Mason Park's `/contacts` form. Owner decision 2026-10-03; it differs from the Grand Mission model, which is placeholder-only. Never turn the form-wide *Show Label* switch off (see Gotchas). |
 | 1 | Name | First + Last Name, or Full Name. Keep whatever the form already has. |
 | 2 | Phone, Email | Keep. |
 | 3 | **Service** | **Site forms only (contact, appointment). Landing-page forms have none**: the patient already landed on one service, and those forms redirect to the campaign's thank-you page instead. Single Dropdown, contact custom field `Service` (reuse `Service` / `Treatment Type` if the sub-account has one). Placeholder *Select a service*, **required**. 8–12 options from the site's own services pages, in the practice's words, ending with *Other*. |
 | 4 | Message | Keep (Multi Line, optional). |
-| 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. |
-| 6 | Captcha, Submit | Keep; never change the Submit label unless the task says so. |
+| 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. **Both boxes the same font size (14px)**; GHL keeps an inline 16px on box 1, so `site-style.mjs --compare` measures the rendered sizes. |
+| 6 | Captcha, Submit | **Captcha above the Submit button.** Never change the Submit label unless the task says so. |
 | 7 | **Privacy Policy \| Terms of Service** | Text element, links to `<origin>/privacy-policy` and `<origin>/terms-of-service`, new tab. GHL's default is `https://www.example.com` — never ship it. |
 | — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). |
 | — | **Styling** | Matches the site, not GHL's defaults (Inter, grey `#D0D5DD` borders, blue `#155EEF` button). See [Styling](#styling). |

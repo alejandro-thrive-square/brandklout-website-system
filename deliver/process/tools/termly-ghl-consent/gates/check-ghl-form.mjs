@@ -99,6 +99,10 @@ async function standardProblems(f, { origin, legal, location, landing }) {
   }
   else if (!service) p.push('no service dropdown (a Single Dropdown named Service / Treatment Type)')
   else if (!Array.isArray(service.picklistOptions) || service.picklistOptions.length < 3) p.push(`service dropdown has ${service.picklistOptions?.length ?? 0} options`)
+  const inputs = f.fields.filter((x) => ['text', 'email', 'phone', 'large_text', 'single_options', 'multiple_options', 'date'].includes(x.type) && !isConsent(x))
+  for (const x of inputs) if (!text(x.label).replace(/<[^>]+>/g, '').trim()) p.push(`field "${text(x.placeholder) || x.fieldKey || x.tag}" has no visible label (labels are standard, 2026-10-03)`)
+  const order = f.fields.map((x) => x.type)
+  if (order.includes('captcha') && order.indexOf('captcha') > order.indexOf('submit')) p.push('captcha sits below the Submit button: move it above')
   const tc = f.fields.find((x) => x.type === 'terms_and_conditions')
   if (!tc) p.push('no SMS consent element (GoHighLevel Terms & Conditions)')
   else {
