@@ -10,7 +10,7 @@ the old site is, and map every URL it ever had. Then the build follows scenario 
 | :--- | :--- | :--- |
 | 01 | [01-old-site-capture.md](./01-old-site-capture/01-old-site-capture.md) | Pages as markdown, 1440 + 390 screenshots, all assets, a scanned mirror, the URL inventory (sitemap + crawl + Wayback), the email DNS snapshot, the tracking inventory, `posts.json` |
 | 02 | [02-redirect-map.md](./02-redirect-map/02-redirect-map.md) | Every old URL classified and mapped; at launch, the redirect Worker built, verified and deployed at cutover |
-| then | scenario 0 from `02-research-sitemap` | The new site. The sitemap gives every classified old URL a destination; step 02 Part B runs inside scenario 0's launch with [tools/cloudflare-launch](../tools/cloudflare-launch/cloudflare-launch.md) |
+| then | scenario 0 step 01 items 3-10 (Instatic production + staging, plugins, the **concept deck** built from the captured homepage), then scenario 0 from `02-research-sitemap` | The new site. The sitemap gives every classified old URL a destination; step 02 Part B runs inside scenario 0's launch with [tools/cloudflare-launch](../tools/cloudflare-launch/cloudflare-launch.md) |
 
 ## Rules that hold across both steps
 
@@ -51,7 +51,7 @@ the installed Chrome is used, `CHROME_PATH` overrides). Python scripts use the s
 | `capture.gitignore` | What of the capture stays out of git | copy to the client's `capture/.gitignore` | new |
 
 Deploying the Worker, DNS copy, tokens and the cutover itself live in
-[tools/cloudflare-launch](../tools/cloudflare-launch/README.md).
+[tools/cloudflare-launch](../tools/cloudflare-launch/cloudflare-launch.md).
 
 ### Listed, not promoted
 

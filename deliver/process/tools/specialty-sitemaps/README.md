@@ -1,6 +1,10 @@
 # Specialty sitemap templates
 
-Five starting sitemaps, one per practice type, built from what 14 Brandklout client sites actually publish. They are drawn on the FigJam board [Sitemap](https://www.figma.com/board/COB1NVbhZFDvCUgEB5izba/Sitemap), one section each, below the Relume ads-landing-page sitemap.
+Five starting sitemaps, one per practice type, built from what 14 Brandklout client sites actually publish.
+The source is [`specialty-sitemaps.txt`](./specialty-sitemaps.txt); the section order of each page type is
+[`section-flows.md`](./section-flows.md). The same templates are drawn on the FigJam board
+[Sitemap](https://www.figma.com/board/COB1NVbhZFDvCUgEB5izba/Sitemap), one section each; when the two
+disagree, the text files win.
 
 | Specialty | Sites it is based on |
 | --- | --- |
@@ -15,23 +19,25 @@ Five starting sitemaps, one per practice type, built from what 14 Brandklout cli
 - **Core**: the page type is on half or more of the group's sites.
 - **Optional**: on fewer than half. Drawn grey.
 - **Standard**: no site in the group had it, but every site needs it (Contact, legal, doctor, financing, reviews, locations). Kept and labelled.
-- **No count**: a sub-page placed by convention under a counted parent (the classifier counts "Restorative", not "Root Canal").
+- **No count**: a sub-page placed by convention under a counted parent (the count is on "Restorative", not "Root Canal").
 - Page types on none of the group's sites, and not standard, were dropped.
 
 Pediatric and Med Spa rest on one site each, so treat them as a first draft, not a pattern.
 
 ## Sections on every page
 
-Each page carries its section flow, drawn in the Relume format of the reference sitemap (a column per page, one card per section, name and what goes in it). The flows come from 191 real client pages: `outline-pages.py` fetched up to three pages per page type per specialty and recorded their headings and components in order (`outlines.txt`), and each flow in `section-flows.py` is the best combination of what those pages do. What the sampled pages share:
+[`section-flows.md`](./section-flows.md) holds the section order for every page type, taken from 191 real client pages
+(up to three per page type per specialty, sampled 2026-09-22). What the sampled pages share:
 
 - Treatment pages: hero, what it is, options, steps (4–6), before and after, testimonial (video beats written), FAQ, then the form.
 - Trust pages (about, doctor, team): bio or story, credentials timeline, affiliations, a human section, reviews.
 - Money pages (cost, financing, membership): price block first, then what changes the cost, partners, FAQ.
 - Location pages: local hero, services at that office, team, why locals choose it, local reviews, map and hours, local FAQ.
 
-Ads landing pages are drawn as the campaign combo, not as one page: `/ads-landing-pages/` is a noindex folder, and each campaign is **landing → consultation → thank you**, one Go High Level form per campaign redirecting to its own thank-you page, where the Google Ads conversion fires. The flows follow Livewell's live set (`livewelldentalva.com/ads-landing-pages/dental-implants`, `…/dental-implant-consultation`, `…/thank-you-implants`): lead form in the hero, then the before/after life journey, why here, proof, the dentist, options, steps, the space, FAQ and a final call with credentials and disclaimer; consultation is form first; thank you is phone first with no form.
-
-`python section-flows.py` rewrites `detailed-sitemaps.json` (flows plus every page's flow key and subject), the data the FigJam sections were drawn from.
+Ads landing pages are a campaign combo, not one page: `/ads-landing-pages/` is a noindex folder, and each campaign is
+**landing → consultation → thank you**, one Go High Level form per campaign redirecting to its own thank-you page, where
+the Google Ads conversion fires. Their section flow lives in
+[scenario 3, step 02](../../scenario-3-ads-landing-pages/02-build-the-combo/02-build-the-combo.md) only.
 
 ## Umbrella (multi-location) structure
 
@@ -39,16 +45,15 @@ Every template separates brand pages from location pages. Brand pages (About, Se
 
 ## Files
 
-- `specialty-sitemaps.txt`: the five templates as `depth|page|path|count` lines, the source the board was drawn from.
-- `page-type-coverage.json`: how many sites in each group have each page type.
-- `sources.json`: URLs collected per site and how.
-- `sitemaps.json`, `navcrawl.json`: the raw page lists (sitemap.xml where published, otherwise a same-host link crawl from the homepage).
-- `outline-pages.py`, `outlines.json`, `outlines.txt`: sampled pages and their section outlines.
-- `section-flows.py`, `detailed-sitemaps.json`: the section flows and the per-page mapping.
-- `fetch-sitemaps.py`, `crawl-nav.py`, `classify.py`: rerun in this folder to refresh (`python fetch-sitemaps.py <domain>…`, `python crawl-nav.py <domain>…`, `python classify.py`). The classifier is regex on the URL path, and a page may match several types.
+- `specialty-sitemaps.txt`: the five templates as `depth|page|path|count` lines.
+- `section-flows.md`: the section order per page type, and which template pages use each one.
+- `sources.json`: how many URLs were collected per site, and how.
 
-Gathered 2026-09-22. IFA, Mason Park, Mason Park Pediatric, Stone Surgical Arts and Westlake publish no sitemap.xml, so their lists come from a link crawl and may miss pages that no menu links to.
+Gathered 2026-09-22 from each site's sitemap.xml, or a same-host link crawl from the homepage where there was none (IFA,
+Mason Park, Mason Park Pediatric, Stone Surgical Arts and Westlake), which may miss pages no menu links to. The scrapers,
+raw page lists and section outlines were one-off analysis and were removed on 2026-09-28; they are in git history before
+that date.
 
 ## Version Control
 
-Lightweight analysis artifacts, committed per [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).
+Follows [SYSTEM_RULES.md §4](../../../../SYSTEM_RULES.md).

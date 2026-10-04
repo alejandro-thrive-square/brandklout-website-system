@@ -37,7 +37,7 @@ step and every gate reads.
      and keep it).
    For more than one office, put the office first: `<office>-<offer>`.
 3. **Get the forms.** Ask Brandklout (they own GHL) for one form per campaign. For each form id:
-   - run `node ../03-qa-and-launch/scripts/check-ghl-form.mjs <formId> > output/ghl-forms.log 2>&1` and read it;
+   - run `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <formId> > output/ghl-forms.log 2>&1` and read it;
    - save-and-exit must be **off**, or visitors see "Submission in progress" on an untouched form;
    - "on submit" must be **redirect**, to that campaign's thank-you URL on the production host;
    - it should carry the ten `privacy_*` fields the consent bridge writes into (see
@@ -93,7 +93,7 @@ step and every gate reads.
   (the agency Vimeo account is shared across clients).
 
 ## Tools
-- `../03-qa-and-launch/scripts/check-ghl-form.mjs <formId>...` or `--combo combo.json`: reads the public form, fails
+- `tools/termly-ghl-consent/gates/check-ghl-form.mjs <formId>...` or `--combo combo.json`: reads the public form, fails
   on save-and-exit on or a wrong redirect.
 - `scripts/grab-page-images.mjs --out <dir> <url>=<title> ...`: downloads a page set's images with
   a manifest per page.

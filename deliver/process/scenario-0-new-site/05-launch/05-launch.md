@@ -38,7 +38,7 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 4. **Embeds and scripts.** Reviews (Elfsight or GHL) and GHL forms as Embed blocks. GTM, Microsoft
    Clarity and the number pool script go in through the embed-origins plugin (`siteScripts`). Allow
    `services.leadconnectorhq.com` and `services.msgsndr.com` in `connect-src`, or the number swap fails
-   silently on pages without an embed. Prove the swap with `gates/dni-proof.mjs` as one visitor.
+   silently on pages without an embed. Prove the swap with `tools/termly-ghl-consent/gates/dni-proof.mjs` as one visitor.
 5. **Consent.** Termly above GTM, auto blocking off, trackers tagged by hand, number pools exempt
    (client decision 2026-09-22). Grant Termly's origins. Check both directions: nothing fires before a
    choice, everything releases after Accept (`tools/termly-ghl-consent/consent-kit.mjs check`).
@@ -93,7 +93,8 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 
 ## Tools
 
-- `tools/instatic-site/gates/seo-head-check.mjs`, `facts-sweep.mjs`, `dni-proof.mjs`
+- `tools/instatic-site/gates/seo-head-check.mjs`, `facts-sweep.mjs`
+- `tools/termly-ghl-consent/gates/dni-proof.mjs`
 - `tools/instatic-site/staging-clone/`, `ops/backup-site.mjs`
 - `tools/instatic-embeds/`, `tools/termly-ghl-consent/`
 - `tools/cloudflare-launch/` — tokens, DNS copy, railway domain, zone hardening, staging noindex,
