@@ -67,5 +67,16 @@
   (consent box sizes, stray `*`, link colour, spacing); add the run to Mason Park's runbook on
   `bk-mason-park` (client folders are not edited on main); close BugHerd #256.
 
+## Update (late night 2026-10-03): polish pass, all three Mason Park forms pass
+- Credits refilled. **Contact `JuzM9…`, Invisalign `jRr3…`, New Patient `jEXt…`** all pass the gate
+  (`--landing` for the two ad forms) and `site-style --compare`; consent text 14px on both boxes,
+  links `#545F62` underlined, 16px field spacing.
+- **Incident:** a labels-off run on Invisalign exposed the 11 hidden consent fields on the live form;
+  caught on a full-height render, reverted by the next run (~20 min live). Gate now fails labels-off.
+- One Codex run failed with "no callable node_repl js tool" (it skipped tool discovery); a rerun with
+  "load the Node REPL js tool via tool discovery" in the prompt worked.
+- **Open:** stray `*` above Invisalign's Name (Name is required; optional in the model and on New
+  Patient) — owner decision. On /contacts the captcha sits below the Submit button (GHL order).
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

@@ -80,6 +80,7 @@ async function readForm(idOrUrl) {
     redirectUrl: R(fa.redirectUrl) || '',
     consentFields: consent.size,
     locationId: loc ? R(loc.locationId) : null,
+    labelsVisible: node ? R(node.formLabelVisible) !== false : true,
     fields,
   }
 }
@@ -151,6 +152,7 @@ for (const j of jobs) {
   if (!f.ok) { bad++; console.log(`${f.id}  FAIL  no form payload (wrong id, or the form was deleted)`); continue }
   const problems = []
   if (f.saveExit) problems.push('save-and-exit is ON: turn it off in GoHighLevel (prefilled consent fields trigger "Submission in progress")')
+  if (!f.labelsVisible && f.consentFields) problems.push('form-wide Show Label is OFF: GoHighLevel then renders the hidden privacy_* fields as empty boxes on the public form; turn it back on')
   if (f.consentFields < CONSENT_FIELDS) problems.push(`consent fields ${f.consentFields}/${CONSENT_FIELDS}: create the missing ones in the GoHighLevel sub-account (Query Key = field key) and add them hidden to this form`)
   if (j.expect) {
     if (f.actionType !== '1') problems.push(`on submit it shows an inline message (actionType ${f.actionType}), it must redirect to ${j.expect}`)

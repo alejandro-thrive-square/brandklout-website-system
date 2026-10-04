@@ -195,6 +195,14 @@ For the owner to settle against the reference video, then fold into the standard
   `*` above it, field spacing is uneven, and the Privacy/Terms links stay GHL blue. Set the consent
   text size, the link colour (site link or body colour) and the field spacing explicitly in the
   styling step.
+- **Never turn the form-wide *Show Label* switch off.** The 11 consent fields are hidden only while
+  labels are on; with it off GHL renders them as empty dropdowns, true/false boxes and blank inputs
+  below the links (Invisalign form, 2026-10-03, reverted in minutes). The gate now fails
+  `formLabelVisible: false` on any form with consent fields. A stray `*` above a placeholder-only
+  field means the field is required with an empty label; it goes when the field is optional (the
+  Grand Mission model) — an owner decision, see open question 1.
+- **Check the whole public form, not a viewport.** Codex's verification screenshots stop at the
+  links. Render the full height: `chrome --headless=new --window-size=900,2600 --screenshot=… <form url>`.
 - **Codex runs on the workspace's credits.** "Your workspace is out of credits" ends a run mid-edit;
   whatever was saved stays saved. Gate and `--compare` the form to see what landed.
 - **Tabs left by a failed run stay claimed** ("already claimed by another browser session"). Tell
@@ -218,7 +226,7 @@ For the owner to settle against the reference video, then fold into the standard
 | Client | Form | Notes |
 | :--- | :--- | :--- |
 | Grand Mission | `HHUjLT7QwNmfVq4yjxw5` *Contact Form Website* | The model. Has the optional language dropdown. |
-| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | Brought to the standard 2026-10-03. |
+| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | **Site-form reference.** Standard 2026-10-03; styled + polished (Nunito Sans, 14px consent, grey underlined links, 16px gaps) the same night: gate ok, style ok. |
 | Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
 | Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
 
