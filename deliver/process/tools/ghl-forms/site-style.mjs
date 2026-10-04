@@ -36,8 +36,13 @@ const PROBE = `(() => {
 
 /** Runs in the public form: the rendered font sizes of each SMS consent box's text. */
 const CONSENT_PROBE = `JSON.stringify([...document.querySelectorAll('*')]
-  .filter((e) => /^By checking this box/.test((e.textContent || '').trim()) && ![...e.children].some((c) => /^By checking this box/.test((c.textContent || '').trim())))
+  .filter((e) => e.getClientRects().length && /^By checking this box/.test((e.textContent || '').trim()) && ![...e.children].some((c) => /^By checking this box/.test((c.textContent || '').trim())))
   .map((e) => [...new Set([e, ...e.querySelectorAll('*')].filter((x) => x.textContent.trim()).map((x) => getComputedStyle(x).fontSize))]))`
+
+/** Runs in the public form: the rendered "family size" of each SMS consent box's text leaves. */
+const CONSENT_FONTS = `JSON.stringify([...document.querySelectorAll('*')]
+  .filter((e) => e.getClientRects().length && /^By checking this box/.test((e.textContent || '').trim()) && ![...e.children].some((c) => /^By checking this box/.test((c.textContent || '').trim())))
+  .map((e) => [...new Set([e, ...e.querySelectorAll('*')].filter((x) => x.textContent.trim()).map((x) => { const s = getComputedStyle(x); return s.fontFamily.split(',')[0].replace(/["']/g, '').trim() + ' ' + s.fontSize }))]))`
 
 /** Runs in the public form: what a visitor actually sees. */
 const FORM_PROBE = `(() => {
@@ -53,10 +58,10 @@ const FORM_PROBE = `(() => {
   return JSON.stringify({ label: first(cs(label)?.fontFamily), input: first(cs(text || area)?.fontFamily), button: cs(btn)?.backgroundColor, radii, boxes: JSON.parse(${CONSENT_PROBE}) })
 })()`
 
-async function probe(url, expression = PROBE) {
+async function probe(url, expression = PROBE, width = 1440) {
   if (!CHROME) throw new Error('Chrome not found (set CHROME_PATH)')
   const dir = mkdtempSync(path.join(tmpdir(), 'site-style-'))
-  const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run', '--window-size=1440,1000', `--user-agent=${UA}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] })
+  const chrome = spawn(CHROME, ['--headless=new', '--remote-debugging-port=0', `--user-data-dir=${dir}`, '--no-first-run', `--window-size=${width},1000`, `--user-agent=${UA}`, 'about:blank'], { stdio: ['ignore', 'ignore', 'pipe'] })
   try {
     const wsUrl = await new Promise((ok, no) => {
       let buf = ''
@@ -73,6 +78,8 @@ async function probe(url, expression = PROBE) {
     ws.addEventListener('message', (e) => { const m = JSON.parse(e.data); if (m.id && waiting.has(m.id)) { waiting.get(m.id)(m); waiting.delete(m.id) } else if (m.method) events.push(m.method) })
     const send = (method, params = {}) => new Promise((ok) => { const id = ++n; waiting.set(id, ok); ws.send(JSON.stringify({ id, method, params })) })
     await send('Page.enable')
+    // A headless window does not shrink below ~500px; emulate a phone for narrow probes.
+    if (width < 1000) await send('Emulation.setDeviceMetricsOverride', { width, height: 1000, deviceScaleFactor: 1, mobile: true })
     await send('Page.navigate', { url })
     for (let i = 0; i < 60 && !events.includes('Page.loadEventFired'); i++) await new Promise((r) => setTimeout(r, 500))
     // Fonts and late CSS: document.fonts.ready resolves too early on some builds, so wait a beat too.
@@ -150,6 +157,13 @@ const boxes = form.boxes
 const sizes = [...new Set(boxes.flat())]
 console.log(`  ${'Consent boxes rendered'.padEnd(26)} ${boxes.map((x) => x.join('/')).join(' | ') || '-'}`)
 if (boxes.length >= 2 && sizes.length > 1) problems.push(`the consent boxes render at different sizes (${sizes.join(', ')}): set both to 14px`)
+// GHL renders a separate mobile copy of the consent text with the builder's inline fonts (Inter 16px /
+// Roboto 14px on Mason Park's landing forms, 2026-10-04): off-brand on phones, and it reflows the form
+// on load. Only a Custom CSS rule on .tnc / .terms-text-container reaches it.
+const mobile = await probe(`https://api.leadconnectorhq.com/widget/form/${formId}`, CONSENT_FONTS, 375)
+console.log(`  ${'Consent text at 375px'.padEnd(26)} ${mobile.map((x) => x.join('/')).join(' | ') || '-'}`)
+const offBrand = [...new Set(mobile.flat())].filter((x) => fam(x.replace(/ [\d.]+px$/, '')) !== fam(site.body.fontFamily) || !/ 14px$/.test(x))
+if (offBrand.length) problems.push(`on phones the consent text renders ${offBrand.join(', ')}: add a Custom CSS rule for .tnc / .terms-text-container (${site.body.fontFamily} 14px !important)`)
 for (const p of problems) console.log('  PROBLEM ' + p)
 console.log(problems.length ? `\n${problems.length} style difference(s)` : '\nstyle ok')
 process.exitCode = problems.length ? 1 : 0

@@ -128,7 +128,7 @@ node site-style.mjs --compare <formId> <page with the form> > output/site-style.
 | Label colour, input text colour | heading colour, body colour |
 | Input background, border, corner radius | the site's input, else white, body colour at 20%, the button's radius |
 | Button background, text, radius | the main call-to-action button (colour, font, weight, case, radius), full width |
-| Consent and Privacy/Terms text | body font, 14px, body colour |
+| Consent and Privacy/Terms text | body font, 14px, body colour, **as a Custom CSS rule** on `.tnc` / `.terms-text-container` (`!important`): the Styles panel and inline text styles do not reach GHL's mobile copy of the consent text |
 | Form background | transparent, so the page's card shows through |
 | Custom CSS | [`no-shift.css`](./no-shift.css) first, then the styling block |
 
@@ -169,7 +169,7 @@ from attribute selectors (`[data-q^=privacy_]`) and can drop the `#_builder-form
 existing rules. All of that is valid and expected. `no-shift.css` is written unquoted so it survives
 the reformat, and Codex must save anyway (the first Kids run stopped at the reformat and saved nothing).
 
-Live since 2026-10-04: Mason Park *Contact* and *Kids* (gate ok, style ok, the same height from the
+Live since 2026-10-04: Mason Park *Contact*, *Invisalign*, *New Patient Special* and *Kids* (gate ok, style ok, the same height from the
 first paint to fully loaded at 1348px and 375px).
 
 Still open: on the site, GHL's embed carries `data-height` from the builder. Mason Park's form says
@@ -257,6 +257,12 @@ For the owner to settle against the reference video, then fold into the standard
   Fonts `@import`, `#_builder-form` labels/inputs/button/`.terms-text-container`/links), pasted by
   `gpt-6.1-sol`, worked first time. Exception: **single-line field corner radius** comes from the
   Styles panel's field radius setting — GHL's own field CSS outranks custom CSS there.
+- **GHL renders the consent text twice: a desktop copy and a mobile copy.** The mobile copy
+  carries the builder's own inline fonts (Inter 16px for box 1, Roboto 14px for box 2 on Mason Park's
+  landing forms, 2026-10-04), so a form styled only through the builder looks right on desktop and
+  off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
+  `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
+  phone and fails off-brand consent text.
 - **`site-style.mjs --compare` measures the rendered public form** (fonts, button colour, field
   radii, consent sizes), so CSS-styled forms are judged as visitors see them.
 - **GoHighLevel signs out mid-session** (`app.gohighlevel.com/?logout=true`, "Sign into your
