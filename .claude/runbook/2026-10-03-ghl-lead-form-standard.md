@@ -56,5 +56,16 @@
   `codex-instruction.txt` with the values in the README's Styling section.
 - Owner: settle the open questions against gauge@'s video.
 
+## Update (night 2026-10-03): Mason Park write test done
+- After the outage the ChatGPT Chrome plugin failed on its Statsig load (~5 MB in a 10 s limit at
+  ~1 MB/s); it worked again once the line was back at ~4.4 MB/s.
+- **Invisalign `jRr3…` and New Patient Special `jEXt…` now pass** `check-ghl-form --standard --landing
+  --legal --location` and `site-style --compare` (Codex, fresh tabs, gpt-6.1-sol).
+- **Contact `JuzM9…` styling half done:** the run died on "workspace is out of credits"; labels are
+  Nunito Sans, inputs still Inter. Fields still pass the standard.
+- **Next:** refill Codex credits; rerun the contact styling-only instruction; polish pass on all three
+  (consent box sizes, stray `*`, link colour, spacing); add the run to Mason Park's runbook on
+  `bk-mason-park` (client folders are not edited on main); close BugHerd #256.
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

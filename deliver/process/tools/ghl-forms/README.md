@@ -190,6 +190,15 @@ For the owner to settle against the reference video, then fold into the standard
   (`ab.chatgpt.com`) failing in `browser-service.mjs`; on 2026-10-03 an app restart did not clear
   it, and the registry entry the plugin blames was present. Next: reinstall the Chrome plugin from
   the ChatGPT app, then restart Chrome.
+- **Polish the first pass misses** (seen on both Mason Park landing forms): GHL keeps the first
+  consent box at 16px and the second at 14px, a required field with an empty label shows a stray
+  `*` above it, field spacing is uneven, and the Privacy/Terms links stay GHL blue. Set the consent
+  text size, the link colour (site link or body colour) and the field spacing explicitly in the
+  styling step.
+- **Codex runs on the workspace's credits.** "Your workspace is out of credits" ends a run mid-edit;
+  whatever was saved stays saved. Gate and `--compare` the form to see what landed.
+- **Tabs left by a failed run stay claimed** ("already claimed by another browser session"). Tell
+  the next run to open its own tab and close it.
 - **A Codex run that loses the browser saves nothing.** "Debugger unattached" or a dropped
   connection ends the run before *Save*; gate the form to confirm it is unchanged, then rerun.
 
@@ -210,6 +219,8 @@ For the owner to settle against the reference video, then fold into the standard
 | :--- | :--- | :--- |
 | Grand Mission | `HHUjLT7QwNmfVq4yjxw5` *Contact Form Website* | The model. Has the optional language dropdown. |
 | Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | Brought to the standard 2026-10-03. |
+| Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
+| Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
 
 ### Every client, 2026-10-03
 
