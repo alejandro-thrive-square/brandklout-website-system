@@ -1,6 +1,0 @@
-# Build and push byproducts of this step (client-local; the root .gitignore is system scope).
-code/push/.tmp/
-code/site-src/*.log
-shots/
-images.state/
-*.log
