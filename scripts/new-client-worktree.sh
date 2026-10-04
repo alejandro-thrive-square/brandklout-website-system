@@ -52,8 +52,18 @@ done
 MAIN="$(git worktree list --porcelain | awk '/^worktree /{print substr($0,10); exit}')"
 cd "$MAIN"
 
-# Resolve the client folder. A prefix is enough (mason-park, grand-mission).
-mapfile -t MATCHES < <(ls -d deliver/*/"$CLIENT"*/ 2>/dev/null | sed 's|/$||')
+BRANCH="${BRANCH:-bk-$CLIENT}"
+
+# Resolve the client folder on the client's OWN branch: main tracks no client folders since
+# 2026-10-03 (a client lives on its branch for good). A prefix is enough (mason-park, grand-mission);
+# a branch that tracks exactly one folder needs no prefix at all (bk-ifa-dentistry).
+MATCHES=()
+if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+  mapfile -t ALL < <(git ls-tree -d --name-only "$BRANCH" deliver/brandklout/ 2>/dev/null)
+  mapfile -t MATCHES < <(printf '%s
+' "${ALL[@]}" | grep "^deliver/brandklout/$CLIENT" || true)
+  [[ ${#MATCHES[@]} -eq 0 && ${#ALL[@]} -eq 1 ]] && MATCHES=("${ALL[0]}")
+fi
 
 if [[ ${#MATCHES[@]} -eq 0 ]]; then
   # A brand-new client has no folder yet — that is legitimate, the agent creates
@@ -70,7 +80,6 @@ else
   PILLAR="$(dirname "$CLIENT_DIR")"
 fi
 
-BRANCH="${BRANCH:-bk-$CLIENT}"
 # Orca keeps every worktree under ~/orca/workspaces/<repo>/. Do not derive this from
 # $MAIN's parent: the main checkout sits at ~/Documents/Webzite Studio/<repo>, so
 # "$(dirname "$MAIN")/../orca" resolves to ~/Documents/orca and the worktree lands
