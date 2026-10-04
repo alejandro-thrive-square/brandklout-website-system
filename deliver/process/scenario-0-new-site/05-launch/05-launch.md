@@ -35,7 +35,11 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    page. Set the site URL or no canonical tag is printed. Check the rendered head with
    `gates/seo-head-check.mjs`, never the raw HTML.
 3. **404.** An Instatic `notFound` template target; reapply the flag after any page import.
-4. **Embeds and scripts.** Reviews (Elfsight or GHL) and GHL forms as Embed blocks. GTM, Microsoft
+4. **Embeds and scripts.** Reviews: the client's Google Reviews widget from the Elfsight registry
+   (`tools/elfsight-reviews/review-widgets.json`), set to the
+   [in-section standard](../../tools/elfsight-reviews/README.md) and gated with `check-widget.mjs`.
+   GHL forms on the [ghl-forms standard](../../tools/ghl-forms/README.md). Both as Embed blocks; any
+   change inside GHL or Elfsight goes through Codex computer use, one small saved step per run. GTM, Microsoft
    Clarity and the number pool script go in through the embed-origins plugin (`siteScripts`). Allow
    `services.leadconnectorhq.com` and `services.msgsndr.com` in `connect-src`, or the number swap fails
    silently on pages without an embed. Prove the swap with `tools/termly-ghl-consent/gates/dni-proof.mjs` as one visitor.

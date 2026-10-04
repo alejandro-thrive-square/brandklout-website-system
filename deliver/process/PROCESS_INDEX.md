@@ -27,7 +27,7 @@ of main refreshed by `scenario.mjs sync`. Fix the process here, never in the mir
 | --- | --- |
 | 01 | [Old Site Capture](./scenario-1-migration/01-old-site-capture/01-old-site-capture.md) |
 | 02 | [Redirect Map](./scenario-1-migration/02-redirect-map/02-redirect-map.md) |
-| then | Scenario 0 from step 02, with the redirects live at the domain switch |
+| then | Scenario 0 step 01 items 3-10 (setup and the concept deck), then Scenario 0 from step 02, with the redirects live at the domain switch |
 
 Scripts: in each step folder's `scripts/`.
 
@@ -81,7 +81,7 @@ Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 | 03 | [QA and Publish](./scenario-6-webflow-sites/03-qa-and-publish/03-qa-and-publish.md) |
 
 Scripts: [tools/webflow-build](./tools/webflow-build/webflow-build.md); `03-qa-and-publish/scripts/staging-verify.mjs`.
-The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, added 2026-10-02 from the scenario README).
+The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, added 2026-10-02 from the scenario README). All seven lanes were brought in line with the directives on 2026-10-04.
 
 ## Tools
 

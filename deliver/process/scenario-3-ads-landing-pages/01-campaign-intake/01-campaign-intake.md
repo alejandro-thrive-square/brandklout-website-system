@@ -36,13 +36,17 @@ step and every gate reads.
    - thank you: `/ads-landing-pages/thank-you-<offer>` or `<offer>-thank-you` (pick one per site
      and keep it).
    For more than one office, put the office first: `<office>-<offer>`.
-3. **Get the forms.** Ask Brandklout (they own GHL) for one form per campaign. For each form id:
-   - run `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <formId> > output/ghl-forms.log 2>&1` and read it;
+3. **Get the forms.** One GHL form per campaign, in the practice's own sub-account. We bring each
+   one to the [ghl-forms standard](../../tools/ghl-forms/README.md) ourselves, in GHL, through Codex
+   computer use (no service dropdown on a landing form, two consent boxes with the legal name, labels,
+   captcha above Submit, `no-shift.css`, styled like the site). For each form id:
+   - run `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --standard --landing --origin <prod origin> --legal "<legal name>" --location <locationId> <formId> > output/ghl-forms.log 2>&1` and read it;
    - save-and-exit must be **off**, or visitors see "Submission in progress" on an untouched form;
    - "on submit" must be **redirect**, to that campaign's thank-you URL on the production host;
-   - it should carry the ten `privacy_*` fields the consent bridge writes into (see
+   - it carries the 11 hidden consent fields the consent bridge writes into (see
      `tools/termly-ghl-consent`).
-   Settings are changed in GHL by Brandklout. Nothing on the site can fix them.
+   Settings live in GHL; nothing on the site can fix them. Change them with Codex, one small saved
+   step per run, then rerun the gate (changed 2026-10-04: Brandklout no longer edits these forms).
 4. **Pin the conversion.** For each campaign, record how the lead is counted: a page view of the
    thank-you URL, as a Google Ads conversion tag in GTM, or as a GA4 key event imported into Ads.
    Write the owner (Brandklout ads team or the client). We do not create conversions ourselves
@@ -94,7 +98,9 @@ step and every gate reads.
 
 ## Tools
 - `tools/termly-ghl-consent/gates/check-ghl-form.mjs <formId>...` or `--combo combo.json`: reads the public form, fails
-  on save-and-exit on or a wrong redirect.
+  on save-and-exit on or a wrong redirect; with `--standard --landing`, on anything off the
+  ghl-forms standard.
+- `tools/ghl-forms/README.md`: the form standard, the Codex brief and `site-style.mjs --compare`.
 - `scripts/grab-page-images.mjs --out <dir> <url>=<title> ...`: downloads a page set's images with
   a manifest per page.
 - `../../tools/ads-combo/combo.example.json`: the manifest template (Livewell's live values).

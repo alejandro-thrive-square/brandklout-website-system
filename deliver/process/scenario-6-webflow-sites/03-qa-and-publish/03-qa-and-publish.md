@@ -25,8 +25,12 @@ On Webflow every publish is whole-site, so this step decides between three resul
 1. **Pre-publish gates** (Designer draft):
    - `node wf-tree-audit.mjs --site <id> --pages <touched> --foreign "<other clients>" --phone <digits> > <workdir>/tree-audit.log 2>&1`.
      It must PASS. Read the warnings.
-   - Every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <ids>`. Save-and-exit must be
-     off, and the form needs all 11 consent fields. Both are fixed in GHL, not on the site.
+   - Every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --standard --origin <prod> --legal "<legal name>" --location <id> <ids>`
+     (`--landing` on ad pages) and `site-style.mjs --compare` ([ghl-forms](../../tools/ghl-forms/README.md)).
+     Save-and-exit off, all 11 consent fields, labels, captcha above Submit, `no-shift.css`. All of
+     it is fixed in GHL through Codex, not on the site.
+   - A reviews widget on the touched pages: `tools/elfsight-reviews/check-widget.mjs <widgetId> --render <page>`
+     on staging and again live.
    - A registered script's hosted copy must be identical (`wf-register-script.mjs` checks it).
 2. **Re-check what a publish would ship.**
    Run `node wf-publish.mjs state --site <id> > <workdir>/publish-state-after.txt 2>&1`.
