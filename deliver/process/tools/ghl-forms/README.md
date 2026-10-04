@@ -169,7 +169,10 @@ from attribute selectors (`[data-q^=privacy_]`) and can drop the `#_builder-form
 existing rules. All of that is valid and expected. `no-shift.css` is written unquoted so it survives
 the reformat, and Codex must save anyway (the first Kids run stopped at the reformat and saved nothing).
 
-Live since 2026-10-04: Mason Park *Contact*, *Invisalign*, *New Patient Special* and *Kids* (gate ok, style ok, the same height from the
+Live since 2026-10-04 on every GHL form embedded on an Instatic site: Mason Park *Contact*, *Invisalign*,
+*New Patient Special* and *Kids*; Dr. Nahlah *Alexandria* `g7FeioS7e7quSCxIQHRw` and *McLean*
+`axgcdqEPUFoHF8Dt5Nji`; IFA `cxtQ5q29TfUr3cYlMmDB`; Stone Surgical Arts `Nzf3xQVLhgMlABuVMxCN`; Stone Med
+Spa `Gqnb0W1NH95MjROPRaLe` (gate ok, style ok, the same height from the
 first paint to fully loaded at 1348px and 375px).
 
 Still open: on the site, GHL's embed carries `data-height` from the builder. Mason Park's form says

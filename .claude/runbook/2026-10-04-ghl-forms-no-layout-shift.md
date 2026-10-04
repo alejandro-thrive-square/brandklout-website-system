@@ -35,8 +35,22 @@
   window will not shrink that far) and fails consent text that is not the site font at 14px. Both
   consent probes count only visible elements, since the hidden desktop copy fooled them.
 
+- **Every other Instatic site** (crawled each production site for `widget/form` ids; up to 400 pages
+  each, sitemap plus links). Same two Codex steps on Dr. Nahlah *Alexandria* `g7FeioS7e7quSCxIQHRw`
+  (location `2TREkW8S3atQcs063Pqq`) and *McLean* `axgcdqEPUFoHF8Dt5Nji` (`xJDu1mFoW5jFYTNqmuk7`), IFA
+  `cxtQ5q29TfUr3cYlMmDB` (`dSz8gLnp5vds5AZOMmuq`), Stone Surgical Arts `Nzf3xQVLhgMlABuVMxCN`
+  (`AtD362nKfN6w4mwob4iV`) and Stone Med Spa `Gqnb0W1NH95MjROPRaLe` (`hNRZyhDNM7ZTpBZx63xO`). All five now
+  pass the no-shift checks. Live: 0/11 consent fields ever visible, prefill intact; the ~1,000px
+  collapse is gone.
+  Not in scope: Brandklout's own form (`coQOO0l1dANhwguaHade`, no consent fields); West LA (GHL forms
+  not delivered yet); Livewell, Oceanic and Hackensack (production 404, stagings embed no form).
+
 ## Next
-- Every other client's forms. Paste `no-shift.css`, delete the hide-script
+- These five forms are still on GHL's default look (Inter, blue `#155EEF` button) and fail the older
+  standard checks: one consent box, save-and-exit ON (Alexandria, Stone Surgical Arts, Stone Med Spa,
+  which causes "Submission in progress"), no Privacy link (McLean), no service dropdown (IFA, Med Spa).
+  Their consent text still reflows 20–40px on load (GHL's mobile copy re-renders it); the
+  `.tnc` / `.terms-text-container` rule fixes it, but that is the styling step, not done yet. Paste `no-shift.css`, delete the hide-script
   Custom HTML element, move the consent fields below the links where needed, then gate.
 - Measure the site side: the embed's `data-height` comes from the builder (Mason Park `2442`, because
   it counts the hidden fields). Check whether `form_embed.js` sizes the iframe to it before resizing.
@@ -50,5 +64,7 @@
   Kids run read that as a failure and saved nothing; the brief must say to save anyway.
 - The consent text exists twice (desktop and mobile copies). A probe that does not filter for
   visibility reads the hidden copy and reports the desktop style on a phone.
+- A Chrome tab on the McLean form builder (`1137294533`) was claimed by another browser session;
+  the run changed nothing until told to open its own tab. That instruction is now in the brief.
 - Headless Chrome gets an interactive Turnstile challenge plus an error line (136px); a real
   visitor's captcha is 100px. Never size the reserve from automation.
