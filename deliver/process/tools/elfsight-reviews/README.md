@@ -11,6 +11,8 @@ and each widget uses one of the shared account's 50 Google Reviews slots.
 | `boot-ids.mjs` | Read-only. Queries Elfsight's public boot API (`core.service.elfsight.com/p/boot/?w=<id>`, no login) for each id's app type, status and connected Google place. It also catches deleted apps (`WIDGET_NOT_FOUND`) that sites still embed. |
 | `elfsight_widget.py` | Creates **one** widget (`--widget new`) or resumes one by id: Carousel template, source search, the result whose text contains `--expect`, the name, then Publish. It runs over CDP in its own background tab; no screenshots, no model. |
 | `elfsight_render.py` | Read-only. Renders widgets on a local test page, as a visitor sees them, and reports each one's rating, review count and first reviewer. This is the proof step. |
+| `check-widget.mjs` | Read-only gate for the [in-section standard](#in-section-widget-standard-sop): reads the widget's settings from the boot API, compares them with the site (`--style`), and with `--render <page>` checks what a visitor sees. |
+| `codex-instruction.txt` | The Codex brief that applies the standard in the Elfsight editor. |
 
 Dashboard work that these scripts don't cover (checking the dashboard list, editing a widget's
 settings) goes through [codex-computer-use](../codex-computer-use/README.md), the house standard
@@ -38,6 +40,74 @@ needs remote debugging on and the account signed in; after a Chrome restart, Chr
 5. **Record.** Update the row in `review-widgets.json`, and add a runbook row. Placing the widget on a
    site is a separate step: for Instatic, see Mason Park Kids'
    `workflows/03-core-pages/.tmp/add-elfsight-reviews.mjs`, and **strip `data-elfsight-app-lazy`**.
+
+## In-section widget standard (SOP)
+
+How a Google Reviews widget looks when it sits **inside a site section that already has its own
+heading** (a *Reviews* / *What patients say* section). Owner decision 2026-10-04. The widget brings
+the proof (Google logo, rating, review count, cards, a button to Google), the site brings the
+heading and the look. Reference: Mason Park Kids' widget `d359c3c4…` already has the right header
+(read 2026-10-04) but still shows the widget title and Elfsight's blue and grey.
+
+| Part | Rule | Boot setting the gate reads |
+| :--- | :--- | :--- |
+| Layout | Carousel (never a badge in a section) | `layout: carousel` |
+| **Widget title** | **Off.** The section's own H2 is the heading; no "What Our Customers Say" | `widgetTitle: false` |
+| **Header** | **On, layout 1:** Google logo + *Reviews*, rating and **review count** left, button right | `headerLayout: header1`, `headerElements` ⊇ `title, rating, reviewsNumber`, `showOverallRating` |
+| Header logo | Google's own colours | `headerSourceImageColor.type: native` |
+| **Button** | *Write a review* on, **in the site's main CTA style**: background, text colour, weight, radius, and case via Custom CSS | `showWriteReviewButton`, `theme.themeSettings.writeReviewButton` |
+| **Cards** | Site font, body colour 16px text, card background set apart from the section (white on a tinted section, the site's light neutral on a white one), outline body colour at ~12%, the site's card radius (else 16px), *Read more* and verified badge in the button colour, gold stars, Google icon on | `reviewBackgroundColor`, `reviewOutlineColor`, `reviewTextColor`, `reviewCornerRadius`, `reviewReadMoreColor` |
+| Plate | Widget background and header background transparent, padding 0: the section is the plate | `widgetBackground`, `widget*Padding`, `headerBackgroundColor` |
+| Font | *Apply from Website* (inherits the page font, also into the shadow root) | `themeSettings.font.name` |
+| Off | AI summary (adds its own label and block), Elfsight logo | `AISummary: false`, `showElfsightLogo` |
+| Arrows, dots | Arrow background = button colour, icon = button text colour; dots = heading colour | `carouselArrow*`, `carouselPaginationColor` |
+
+Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark theme.
+
+### Steps
+
+1. **Widget.** Find the client's row in `review-widgets.json`. No widget yet: create one first
+   (rollout steps 2–3 above, one widget per listing).
+2. **Site style.** Read it from the live page that will hold the widget, with the GHL forms reader:
+   ```bash
+   cd deliver/process/tools/ghl-forms
+   node site-style.mjs <page url> > output/site-style.json
+   ```
+   Button = `button` (background, colour, radius, weight, case, letter spacing); text = `body`;
+   header text = `heading`. The card background and radius are read by eye from the site's own
+   cards (Inspect one); never Elfsight's defaults (`#f6f6f8`, `#006dff`).
+3. **Where it stands** (no login):
+   ```bash
+   cd deliver/process/tools/elfsight-reviews
+   node check-widget.mjs <widgetId> --style ../ghl-forms/output/site-style.json > output/elfsight-check.log 2>&1
+   ```
+   Each `PROBLEM` line is one thing to change.
+4. **Custom CSS.** Only what the Style panel cannot set. Fill and keep it this short:
+   ```css
+   .es-widget-title-container { display: none !important; } /* belt and braces: the section has the heading */
+   .es-header-write-review-button { text-transform: {{BUTTON CASE}}; letter-spacing: {{BUTTON TRACKING}}; font-weight: {{BUTTON WEIGHT}}; }
+   .es-header-rating-reviews-count { color: inherit; opacity: .7; }
+   ```
+   These `es-*` classes are Elfsight's stable names (read from the rendered widget on 2026-10-04,
+   next to hashed `sc-` classes that change per release; never target those).
+5. **Codex.** Fill [`codex-instruction.txt`](./codex-instruction.txt) and run it with writes allowed,
+   one widget per run:
+   ```bash
+   node deliver/process/tools/codex-computer-use/codex_cu.mjs "<filled instruction>" --allow-writes --timeout 30
+   ```
+   A whole-widget brief can stop halfway (see the GHL forms gotcha "one Codex run = one small,
+   saved step"): if it does, split it into (1)–(3) header/title, (4)–(5) style, (6) CSS.
+6. **Place** it in the section, under the section's heading, as `<div class="elfsight-app-<id>"></div>`
+   plus `https://elfsightcdn.com/platform.js` once per page. Instatic: strip `data-elfsight-app-lazy`
+   and let `embed-origins` open the Elfsight origins ([instatic-embeds](../instatic-embeds/instatic-embeds.md));
+   Webflow: an Embed element inside the section.
+7. **Gate** with the render (staging first):
+   ```bash
+   node check-widget.mjs <widgetId> --style ../ghl-forms/output/site-style.json --render <page url> > output/elfsight-check.log 2>&1
+   ```
+   It must print `ok`: no widget title on the page, Google logo, count, button and cards visible,
+   cards in the page's font, button not Elfsight blue. Then look once at 1440 and 390 px.
+8. **Record** the widget id and the colours used in the client runbook and the registry row.
 
 ## States
 

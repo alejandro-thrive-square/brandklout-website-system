@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-04 | 2026-10-04 — Elfsight in-section reviews standard: no widget title, header layout 1 (Google logo, rating, count, button), button and cards in the site's style; Codex brief + `check-widget.mjs` gate (boot API + render) in `tools/elfsight-reviews` — carries **gotchas** | [`2026-10-04-elfsight-in-section-standard.md`](./2026-10-04-elfsight-in-section-standard.md) |
 | 2026-10-03 | 2026-10-03 — `deliver/process` tracked on main only: clients get an untracked mirror (`scenario.mjs sync` from the `main` ref, refuses to overwrite local edits); two-way merges; Hackensack, IFA, Livewell, Oceanic migrated and merged into main — carries **gotchas** | [`2026-10-03-process-single-source-on-main.md`](./2026-10-03-process-single-source-on-main.md) |
 | 2026-10-03 | 2026-10-03 — GoHighLevel lead-form standard: guide + Codex template in `tools/ghl-forms`, `check-ghl-form.mjs --standard` gate; Mason Park's Contact form brought to it — carries **gotchas** | [`2026-10-03-ghl-lead-form-standard.md`](./2026-10-03-ghl-lead-form-standard.md) |
 | 2026-10-02 | 2026-10-02 — concept deck second run (Oceanic Dental): registries, extract_assets.py finds site-data.json, DNI phone note — carries **gotchas** | [`2026-10-02-oceanic-concept-deck-second-run.md`](./2026-10-02-oceanic-concept-deck-second-run.md) |
