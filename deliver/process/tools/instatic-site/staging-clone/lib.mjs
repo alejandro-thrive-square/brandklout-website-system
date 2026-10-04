@@ -2,7 +2,7 @@
  * Shared auth for the staging-clone scripts.
  *
  * Every script here talks to TWO Instatic instances in one process, so it
- * cannot use `tools/instatic-embeds/lib/insta-api.mjs` — that module fixes its
+ * cannot use `tools/instatic-api-sync/insta-api.mjs` — that module fixes its
  * BASE from `INSTATIC_BASE_URL` at import time, by design, so one client's
  * toolkit can never be pointed at another client's site by accident. Cloning
  * is the one workflow that legitimately needs both ends at once, so it carries

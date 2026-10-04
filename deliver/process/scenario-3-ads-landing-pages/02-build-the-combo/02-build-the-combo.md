@@ -13,8 +13,8 @@ never on the order.
   - `https://www.livewelldentalva.com/ads-landing-pages/dental-implants`
   - `https://www.livewelldentalva.com/ads-landing-pages/dental-implant-consultation`
   - `https://www.livewelldentalva.com/ads-landing-pages/thank-you-implants`
-- Section cards for the Sitemap FigJam: `tools/specialty-sitemaps/section-flows.py`
-  (`T['ads_landing']`, `T['ads_consult']`, `T['ads_thankyou']`), kept identical to the tables below.
+- The tables below are the single source of the combo's section flow; the other page types are in
+  `tools/specialty-sitemaps/section-flows.md`.
 
 ## The flow (named as the reference names its sections)
 
@@ -119,21 +119,9 @@ never on the order.
    on production.
 
 ### Webflow path (Livewell, Stone Dental, Arvada)
-1. Create the `/ads-landing-pages/` folder once. Three pages per campaign inside it.
-2. Build with `tools/webflow-build`: either the clipboard paste (`html_to_webflow.py` with a
-   page-unique `--page-prefix`, one root per paste, test on a throwaway page first) or section by
-   section with `data_whtml_builder` (one section per call, at most five actions).
-3. Never redefine an existing site class and never use inline `style=` in whtml: either mints a
-   collision class. A single bad CSS rule aborts the whole call.
-4. The GHL form, films, sliders and FAQ scripts go in HtmlEmbeds. Script embeds created through the
-   Data API do not run in preview: register the behaviour as a page script
-   (`register_inline_script` + `set_page_scripts`). Re-check embed `code` before publishing; it can
-   go empty after later edits.
-5. Page Settings: noindex, excluded from the sitemap, SEO title and description.
-6. The MCP token cannot publish on some plans; publish from the Designer. On Stone Dental's plan a
-   publish goes to every domain, so it is a production publish.
-7. Cloning another client's set (Stone Dental from Arvada): rebuild in a new class namespace, then
-   scan text AND element settings (alt text, embed code, links) for the source client's name.
+Built in [Scenario 6 · Webflow Sites, step 02, section K](../../scenario-6-webflow-sites/02-build/02-build.md)
+from this step's design and `combo.json`, natively through `data_whtml_builder`. The clipboard
+paste converter is retired. Then run step 03 here against the Webflow staging host.
 
 ## Conditionals
 - If the client has no before and afters, then replace `imp-gallery` with reviews and keep the
@@ -157,11 +145,10 @@ never on the order.
 - Don't pin or re-parent anything holding an iframe.
 
 ## Tools
-- `tools/webflow-build/webflow-build.md`: HTML to Webflow conversion, clipboard and whtml paths.
 - `tools/instatic-embeds/instatic-embeds.md`: the Embed block, siteScripts, frame and connect origins.
 - `tools/instatic-api-sync/instatic-api-sync.md` and `insta-api.mjs`: REST writes to Instatic.
 - `tools/termly-ghl-consent/termly-ghl-consent.md`: Termly head and the GHL consent bridge.
-- `tools/specialty-sitemaps/section-flows.py`: the same flows as FigJam section cards.
+- `tools/specialty-sitemaps/section-flows.md`: section flows for every other page type.
 - Builders not promoted (content is per client), read as examples:
   bk-mason-park `workflows/09-static-rebuild/output/build-ads-landing-pages.mjs` and
   `place-ad-embeds.mjs`; bk-dr-nahlah `workflows/04-design/output/site-src/build-site.mjs`,

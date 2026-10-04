@@ -1,7 +1,7 @@
-# Workflow: 20 - Instatic Domain & Admin Origins
+# Tool · Instatic Domain & Admin Origins
 
 ## Client-Facing Overview
-When a client's real domain goes live, their team should reach the site editor at their own address — `drnahlah.com/admin`, `masonparkdental.com/admin` — log in, edit and save. This module is the step that makes that true, and the check that proves it before anyone is given a link.
+When a client's real domain goes live, their team should reach the site editor at their own address — `drnahlah.com/admin`, `masonparkdental.com/admin` — log in, edit and save. This tool is what makes that true, and the check that proves it before anyone is given a link.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the origin model, the checker or `sites.json` must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../../PROCESS_INDEX.md). `sites.json` must be re-verified with **both** `node check-origins.mjs --all` and `node check-dns.mjs` in the same commit that changes it.
@@ -521,7 +521,7 @@ toolkit breaks.
 
 ## Technical Setup
 
-- **Executor status**: Working. Two executors: `check-origins.mjs` (the gate — who can log in) and `check-dns.mjs` (the pointer — whether anyone arrives). `instatic-domain-origins.py` is a thin orchestrator over `check-origins.mjs` (`check`, `cutover`); run `check-dns.mjs` directly.
+- **Executor status**: Working. Two executors: `check-origins.mjs` (the gate — who can log in) and `check-dns.mjs` (the pointer — whether anyone arrives). Run both directly; the cutover is the numbered checklist above.
 - **Credentials**: `check-origins.mjs` needs none, deliberately — the whole point is that anyone can run it. `check-dns.mjs` needs `railway login`, because a Cloudflare-proxied record hides its target from the world and Railway is the only source of truth for what it should be. To see what Cloudflare actually holds it reads, in order, `CLOUDFLARE_DNS_TOKEN`, `CLOUDFLARE_API_TOKEN` (a minted zone token from [cloudflare-launch](../cloudflare-launch/cloudflare-launch.md)), then `CLOUDFLAREDIAGNOSIS` and `CLOUDFLAREAPI` from the environment or the nearest generated `.env`; without a token that column degrades to `not read`, never to a pass. Public resolution falls back to DoH (`../cloudflare-launch/doh.mjs`) when system DNS fails, because port 53 times out on the agency workstation and a timeout would read as "no record".
 - **Endpoints**: `GET /admin/login` (is there an admin here), `POST /admin/api/cms/plugins/inspect-package` (which gate rejects first). If a future Instatic build removes the plugin routes, the probe returns `unknown` with the status rather than guessing, and `PROBE_PATH` needs pointing at another state-changing admin route.
 - **Where `PUBLIC_ORIGIN` lives**: the Instatic instance's own hosting environment (Railway today), **not** this repository. Nothing here can set it.
@@ -530,7 +530,6 @@ toolkit breaks.
 - `check-origins.mjs` — the origin gate checker. No credentials, changes nothing, exits non-zero on any problem (a `TRAP`, a `BLOCKED` row, or a canonical `adminUrl` that did not verify)
 - `check-dns.mjs` — the DNS pointer checker: recorded target vs. Railway vs. public DNS vs. Cloudflare. Read-only; needs `railway login`
 - `sites.json` — canonical admin URL per client (the single answer to "what link do I send?") and the expected CNAME target per host under `dns`
-- `instatic-domain-origins.py` — orchestrator (`check`, `cutover`)
 
 ## Version Control
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.
