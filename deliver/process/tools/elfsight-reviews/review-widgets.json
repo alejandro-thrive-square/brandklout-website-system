@@ -1,7 +1,7 @@
 {
  "generated": "2026-09-30",
  "account": "trong@driverank.com",
- "quota": "31/50 Google Reviews widgets after this rollout",
+ "quota": "32/50 Google Reviews widgets (2026-10-04)",
  "dashboard": {
   "b825b050-9f58-401f-a7b5-ebaa836a9661": "Livewell Dental - Google Reviews 2",
   "d359c3c4-40bc-4c66-87ae-714ed666eb01": "Mason Park Dental for Kids",
@@ -25,7 +25,8 @@
   "aae2cece-bb76-44df-b210-a7e9bafcfcbc": "Atwood Implant Dentistry Carousel",
   "6e983c99-8a3e-462a-a591-76516ba17221": "Grand Mission Dentistry",
   "91c823e3-6657-49f9-b47c-c783c5865a0a": "Haven Cosmetic Dentistry & Implant Center",
-  "ef203923-1351-44a5-a9b0-e0f603e178d6": "AVA Dental implants"
+  "ef203923-1351-44a5-a9b0-e0f603e178d6": "AVA Dental implants",
+  "e30c1531-deaf-4e44-b3de-61cf3426bce9": "Mason Park Dental - Google Reviews"
  },
  "widgets": [
   {
@@ -134,15 +135,17 @@
    "url": "https://www.masonparkdental.com",
    "platform": "instatic",
    "clientFolder": "mason-park",
-   "widget": "32926aff-7df5-4c6d-8f35-d4d3f5f46b4b",
-   "account": "other",
-   "listing": "Mason Park Dental of Katy, 21830 Kingsland Blvd #104A, Katy, TX 77450",
-   "verified": null,
-   "state": "other-account-all-in-one",
-   "onSite": [],
+   "widget": "e30c1531-deaf-4e44-b3de-61cf3426bce9",
+   "account": "trong@driverank.com",
+   "listing": "Mason Park Dental of Katy, 21830 Kingsland Blvd #104A, Katy, TX 77450, USA",
+   "verified": "4.9 (1,087)",
+   "state": "live-on-site",
+   "onSite": [
+    "e30c1531-deaf-4e44-b3de-61cf3426bce9"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "Has an All-in-One Reviews widget 32926aff in the OTHER Elfsight account on its #104A listing (old site). Not recreated."
+   "note": "2026-10-04: new Google Reviews widget on / and /patient-reviews (in-section standard, gate ok). Replaces the practice's All-in-One Reviews 32926aff in the OTHER account (no Google logo in its header); 32926aff still exists there, off the site."
   },
   {
    "key": "omnia",
@@ -213,14 +216,14 @@
    "widget": "d359c3c4-40bc-4c66-87ae-714ed666eb01",
    "account": "trong@driverank.com",
    "listing": "Mason Park Dental for Kids - Pediatric Dentist Katy TX, 21830 Kingsland Blvd #104B, Katy, TX 77450, USA",
-   "verified": null,
+   "verified": "4.9 (97)",
    "state": "live-on-site",
    "onSite": [
     "d359c3c4-40bc-4c66-87ae-714ed666eb01"
    ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: in-section standard, gate ok (reference widget)."
   },
   {
    "key": "south-bay",

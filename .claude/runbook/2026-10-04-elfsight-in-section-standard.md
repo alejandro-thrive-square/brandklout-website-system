@@ -26,3 +26,25 @@
   `es-header-rating-reviews-count`, `es-widget-title-container`, `es-review-container`); the
   `…__X-sc-hash` classes change per release.
 - Nothing was changed in Elfsight in this run; no widget edited.
+
+## Update (later 2026-10-04): tested on Mason Park General and Kids
+- **Kids `d359c3c4`**: restyled by Codex (4 small runs), gate **ok** on `/` and `/patient-reviews`
+  (from 17 problems). Reference widget for the standard.
+- **General**: the All-in-One `32926aff` (other account) has no Google logo in its header, so a
+  **new Google Reviews widget `e30c1531`** (#104A, 4.9 / 1,087, 32/50 slots) was created, styled and
+  swapped in on `/` and `/patient-reviews`, staging then production; gate **ok** on all four pages.
+  Client commits: `bk-mason-park` `d2a48432`, `bk-mason-park-kids` `ec839d27`.
+- Gate hardened by the test: waits for the header, reads the visible copy of each element, measures
+  the real inset, checks the section H2 colour and card vs section background, the rendered button
+  case/font against the site, `!important` on Custom CSS, review photos off, and card text lines.
+- Brief and SOP: editor URL `dash.elfsight.com/widget/<id>`, own-tab rule, `!important`, photos off,
+  one card colour apart from every section a shared widget sits in.
+
+## Gotchas (from the test)
+- **Custom CSS without `!important` does nothing**: Elfsight's generated class rules in the shadow
+  root have equal specificity and win.
+- **The Carousel template turns review photos on**, and a review with photos is never shortened.
+- `font: {}` is "Default (Apply from Website)"; the padding controls are hidden while the widget
+  background is transparent (the stored 40/40 does nothing).
+- site-style.mjs's `heading` is the hero H1 (often white): take the header text colour from the
+  reviews section's H2, which `--render` reads.

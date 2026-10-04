@@ -28,8 +28,9 @@ needs remote debugging on and the account signed in; after a Chrome restart, Chr
    dashboard list (`dash.elfsight.com/apps/google-reviews`, all pages).
 2. **No duplicates.** A client is covered when any widget, in **either** account, is on its
    listing. Match on the listing (address, suite), not the widget name. Stone Dental (#110A) and
-   Stone Surgical Arts (#110) share a building, and Mason Park's widget is an *All-in-One Reviews*
-   app in the other account. Where coverage is unsure, skip the client and list it for the user.
+   Stone Surgical Arts (#110) share a building, and Mason Park's old widget is an *All-in-One Reviews*
+   app in the other account (off the site since 2026-10-04: no Google logo, so a Google Reviews
+   widget replaced it under the in-section standard). Where coverage is unsure, skip the client and list it for the user.
 3. **Create.** Run
    `uv run python elfsight_widget.py --widget new --query "<Name>, <street>, <City ST>" --expect "<street or name>" --name "<Client> - Google Reviews"`.
    It prints `created <id>` first. On any failure, rerun with `--widget <id>` and **never** with
@@ -46,8 +47,8 @@ needs remote debugging on and the account signed in; after a Chrome restart, Chr
 How a Google Reviews widget looks when it sits **inside a site section that already has its own
 heading** (a *Reviews* / *What patients say* section). Owner decision 2026-10-04. The widget brings
 the proof (Google logo, rating, review count, cards, a button to Google), the site brings the
-heading and the look. Reference: Mason Park Kids' widget `d359c3c4…` already has the right header
-(read 2026-10-04) but still shows the widget title and Elfsight's blue and grey.
+heading and the look. Reference: **Mason Park Kids `d359c3c4…`**, brought to the standard 2026-10-04 (gate `ok`:
+logo, 4.9, (97), `#93644A` pill button, `#F6F3EE` cards at 14px on a white section).
 
 | Part | Rule | Boot setting the gate reads |
 | :--- | :--- | :--- |
@@ -56,9 +57,9 @@ heading and the look. Reference: Mason Park Kids' widget `d359c3c4…` already h
 | **Header** | **On, layout 1:** Google logo + *Reviews*, rating and **review count** left, button right | `headerLayout: header1`, `headerElements` ⊇ `title, rating, reviewsNumber`, `showOverallRating` |
 | Header logo | Google's own colours | `headerSourceImageColor.type: native` |
 | **Button** | *Write a review* on, **in the site's main CTA style**: background, text colour, weight, radius, and case via Custom CSS | `showWriteReviewButton`, `theme.themeSettings.writeReviewButton` |
-| **Cards** | Site font, body colour 16px text, card background set apart from the section (white on a tinted section, the site's light neutral on a white one), outline body colour at ~12%, the site's card radius (else 16px), *Read more* and verified badge in the button colour, gold stars, Google icon on | `reviewBackgroundColor`, `reviewOutlineColor`, `reviewTextColor`, `reviewCornerRadius`, `reviewReadMoreColor` |
-| Plate | Widget background and header background transparent, padding 0: the section is the plate | `widgetBackground`, `widget*Padding`, `headerBackgroundColor` |
-| Font | *Apply from Website* (inherits the page font, also into the shadow root) | `themeSettings.font.name` |
+| **Cards** | Site font, body colour 16px text, card background set apart from the section (white on a tinted section, the site's light neutral on a white one; **one widget in sections of different colours** gets a site token that differs from all of them, e.g. General's sand `#EDE2D5` on paper and white — page CSS cannot reach into the shadow root), outline body colour at ~12%, the site's card radius (else 16px), *Read more* and verified badge in the button colour, gold stars, Google icon on, **review photos off** (the Carousel template turns them on, and a review with photos is never shortened: 14-line cards beside 3-line ones) | `reviewBackgroundColor`, `reviewOutlineColor`, `reviewTextColor`, `reviewCornerRadius`, `reviewReadMoreColor`, `reviewDisplayImages: false` |
+| Plate | Widget background and header background transparent: the section is the plate. The editor hides the padding controls while the background is transparent (the stored 40/40 then does nothing); `--render` measures the real inset, which must be ≤12px | `widgetBackground`, `headerBackgroundColor`, render `inset` |
+| Font | *Default (Apply from Website)*: inherits the page font, also into the shadow root. Stored as an empty `font: {}` | `themeSettings.font`, render `cardFont` = `pageFont` |
 | Off | AI summary (adds its own label and block), Elfsight logo | `AISummary: false`, `showElfsightLogo` |
 | Arrows, dots | Arrow background = button colour, icon = button text colour; dots = heading colour | `carouselArrow*`, `carouselPaginationColor` |
 
@@ -85,10 +86,13 @@ Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark
 4. **Custom CSS.** Only what the Style panel cannot set. Fill and keep it this short:
    ```css
    .es-widget-title-container { display: none !important; } /* belt and braces: the section has the heading */
-   .es-header-write-review-button { text-transform: {{BUTTON CASE}}; letter-spacing: {{BUTTON TRACKING}}; font-weight: {{BUTTON WEIGHT}}; }
-   .es-header-rating-reviews-count { color: inherit; opacity: .7; }
+   .es-header-write-review-button { font-family: {{BUTTON FONT}}, sans-serif !important; text-transform: {{BUTTON CASE}} !important; letter-spacing: {{BUTTON TRACKING}} !important; font-weight: {{BUTTON WEIGHT}} !important; }
+   .es-header-rating-reviews-count { color: inherit !important; opacity: .7; }
    ```
-   These `es-*` classes are Elfsight's stable names (read from the rendered widget on 2026-10-04,
+   **Every declaration needs `!important`**: the widget renders in a shadow root where Elfsight's own
+   generated class rules have the same specificity and win (General's Karla/uppercase did nothing
+   without it, 2026-10-04; the gate fails a bare declaration). When the button
+   font is the body font, leave `font-family` out. These `es-*` classes are Elfsight's stable names (read from the rendered widget on 2026-10-04,
    next to hashed `sc-` classes that change per release; never target those).
 5. **Codex.** Fill [`codex-instruction.txt`](./codex-instruction.txt) and run it with writes allowed,
    one widget per run:
@@ -115,6 +119,15 @@ Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark
 `other-account-all-in-one`
 
 ## Gotchas
+
+- **Codex will not use a tab a finished run left behind** ("already claimed by another browser
+  session"). Every Elfsight brief says: open a new tab of your own, close it at the end.
+- **One Elfsight run at a time**, all on the same account; runs on different widgets still share it.
+- **The widget editor is `https://dash.elfsight.com/widget/<id>`**; give Codex the URL, not the list.
+- **The header can render after the cards.** A one-shot read finds the review count empty; the
+  gate waits for both.
+- **An All-in-One Reviews app has no Google logo in the header** ("Overall Rating" text instead).
+  It cannot meet the standard: give the client a Google Reviews widget (Mason Park, 2026-10-04).
 
 - **Elfsight ignores `element.click()`.** Every click has to be a real mouse event at the
   element's page position; iframe coordinates are offset by the owner iframe's box

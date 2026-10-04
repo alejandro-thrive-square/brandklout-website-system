@@ -33,7 +33,8 @@ if (!s) { console.log(`PROBLEM widget ${id} not found: ${JSON.stringify(boot).sl
 const t = s.theme?.themeSettings || {}
 console.log(`widget ${id} app ${w.data.app} layout ${s.layout} header ${s.headerLayout} ${JSON.stringify(s.headerElements)}`)
 
-if (w.data.app !== 'google-reviews') problem(`app is ${w.data.app}, not google-reviews`)
+// All-in-One Reviews (Mason Park's) has the same settings for one Google source.
+if (!['google-reviews', 'all-in-one-reviews'].includes(w.data.app)) problem(`app is ${w.data.app}, not google-reviews`)
 if (!['carousel', 'slider', 'grid', 'masonry', 'list'].includes(s.layout)) problem(`layout ${s.layout}: a badge is not an in-section widget (use carousel)`)
 if (s.widgetTitle !== false) problem(`widget title is on ("${s.widgetTitleTitle}"): the section has the heading, turn Widget Title off`)
 if (s.headerLayout !== 'header1') problem(`header layout ${s.headerLayout}, standard is header1 (logo + rating + count left, button right)`)
@@ -44,8 +45,11 @@ if (s.showOverallRating === false) problem('overall rating hidden in the header'
 if (s.showWriteReviewButton !== true) problem('write-a-review button off')
 if (s.AISummary !== false) problem('AI summary on: it adds its own label and block above the cards')
 if (s.showElfsightLogo === true) problem('Elfsight logo shown')
+// Reviews with photos skip the short-text cut: one card runs 14 lines next to 3-line ones.
+if (s.reviewDisplayImages === true) problem('review photos on: those cards are not shortened (Carousel template default)')
 if (s.reviewDisplaySource === false) problem('Google icon on the cards hidden')
-if (t.font?.name !== 'Apply from Website') problem(`font ${JSON.stringify(t.font || {})}, must be "Apply from Website"`)
+// An empty font object is the editor's "Default (Apply from Website)".
+if (t.font?.name && t.font.name !== 'Apply from Website') problem(`font ${t.font.name}, must be "Apply from Website" (Default)`)
 if (t.headerSourceImageColor?.type !== 'native') problem('header logo recoloured: keep Google\'s own colours (native)')
 
 const rgba = (c) => {
@@ -64,15 +68,17 @@ const BLUE = 'rgba(0, 109, 255, 1)' // Elfsight's default accent
 
 const bg = t.widgetBackground || {}
 if (bg.type === 'color' && !clear(bg.color)) problem(`widget background ${bg.color}: transparent, the section is the plate`)
-if ((t.widgetHorizontalPadding ?? 0) > 0 || (t.widgetVerticalPadding ?? 0) > 0) problem(`widget padding ${t.widgetHorizontalPadding}/${t.widgetVerticalPadding}px: 0, the section has the padding`)
+// The editor hides the padding controls while the background is transparent; --render measures the real inset.
+if (!clear(bg.color) && ((t.widgetHorizontalPadding ?? 0) > 0 || (t.widgetVerticalPadding ?? 0) > 0)) problem(`widget padding ${t.widgetHorizontalPadding}/${t.widgetVerticalPadding}px: 0, the section has the padding`)
 if (!clear(t.headerBackgroundColor)) problem(`header background ${t.headerBackgroundColor}: transparent`)
 const btn = t.writeReviewButton || {}
-for (const [k, v] of [['button', btn.color], ['read more', t.reviewReadMoreColor], ['verified badge', t.reviewVerifiedBadgeColor], ['accent', s.theme?.accentColor]]) {
+for (const [k, v] of [['button', btn.color], ['read more', t.reviewReadMoreColor], ['verified badge', t.reviewVerifiedBadgeColor]].concat(s.theme?.type === 'custom' ? [] : [['accent', s.theme?.accentColor]])) { // a Custom theme hides the accent
   if (same(v, BLUE)) problem(`${k} colour is Elfsight's default blue ${v}`)
 }
 
 if (stylePath) {
-  const site = JSON.parse(readFileSync(stylePath, 'utf8'))
+  const raw = JSON.parse(readFileSync(stylePath, 'utf8'))
+  const site = raw.site || raw // site-style.mjs nests it under site
   const b = site.button || {}
   const px = (v) => Math.round(parseFloat(v) || 0)
   const want = [
@@ -80,7 +86,6 @@ if (stylePath) {
     ['button text', btn.fontColor, b.color],
     ['read more', t.reviewReadMoreColor, b.backgroundColor],
     ['review text', t.reviewTextColor, site.body?.color],
-    ['header text', t.headerTextColor, site.heading?.color],
   ]
   for (const [k, have, need] of want) if (need && !same(have, need)) problem(`${k} ${have}, site ${need}`)
   const radius = Math.min(px(b.borderRadius), 999)
@@ -90,6 +95,13 @@ if (stylePath) {
   if (same(card, '#f6f6f8')) problem(`card background is Elfsight's default grey ${card}`)
   const wantCase = b.textTransform && b.textTransform !== 'none'
   if (wantCase && !new RegExp(`text-transform:\\s*${b.textTransform}`).test(s.customCSS || '')) problem(`button case: site is ${b.textTransform}, set it in Custom CSS`)
+}
+// Elfsight's own class rules outrank plain Custom CSS: every declaration needs !important.
+const bare = (s.customCSS || '').replace(/\/\*[\s\S]*?\*\//g, '').match(/[a-z-]+\s*:[^;{}]+(;|(?=\s*}))/g)?.filter((d) => !/!important/.test(d) && !/^opacity/.test(d))
+if (bare?.length) problem(`Custom CSS without !important (Elfsight's own rules win): ${bare.join(' ')}`)
+let siteButton = null
+if (stylePath) {
+  siteButton = (JSON.parse(readFileSync(stylePath, 'utf8')).site || JSON.parse(readFileSync(stylePath, 'utf8'))).button || null
 }
 
 // ---- render (what a visitor sees) ----
@@ -102,18 +114,28 @@ if (renderUrl) {
     if (!mount) return JSON.stringify({ mount: false })
     mount.scrollIntoView({ block: 'center' })
     const all = () => { const out = []; const walk = (r) => { for (const e of r.querySelectorAll('*')) { out.push(e); if (e.shadowRoot) walk(e.shadowRoot) } }; walk(mount); return out }
-    for (let i = 0; i < 40 && !all().some((e) => e.classList.contains('es-review-container')); i++) await new Promise((r) => setTimeout(r, 500))
+    // Cards can land before the header text: wait for both (or 30 s), then a beat for late re-renders.
+    const ready = () => { const a = all(); const on = (c) => a.some((e) => e.classList.contains(c) && e.getBoundingClientRect().width > 0 && e.textContent.trim()); return on('es-review-container') && on('es-header-rating-reviews-count') }
+    for (let i = 0; i < 60 && !ready(); i++) await new Promise((r) => setTimeout(r, 500))
+    await new Promise((r) => setTimeout(r, 1500))
     const els = all()
-    const one = (c) => els.find((e) => e.classList.contains(c))
     const shown = (e) => { if (!e) return false; const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden' }
+    // Elfsight renders hidden copies (mobile/desktop) too: take the first one that is on screen.
+    const one = (c) => els.find((e) => e.classList.contains(c) && shown(e)) || els.find((e) => e.classList.contains(c))
     const cs = (e) => e && getComputedStyle(e)
     const b = one('es-header-write-review-button')
     return JSON.stringify({ mount: true,
       title: shown(one('es-widget-title-container')) ? one('es-widget-title-container').textContent.trim() : null,
       logo: shown(one('es-header-heading-logo')), count: shown(one('es-header-rating-reviews-count')) ? one('es-header-rating-reviews-count').textContent.trim() : null,
-      rating: one('es-header-rating')?.textContent.trim().slice(0, 4) || null, button: shown(b) ? b.textContent.trim() : null,
+      rating: (one('es-header-container')?.textContent.match(/[0-9][.,][0-9]/) || [null])[0], button: shown(b) ? b.textContent.trim() : null,
       buttonStyle: b && { bg: cs(b).backgroundColor, color: cs(b).color, radius: cs(b).borderTopLeftRadius, font: cs(b).fontFamily.split(',')[0].replace(/["']/g, ''), transform: cs(b).textTransform },
+      inset: (() => { const h = one('es-header-container'); if (!h) return null; const a = mount.getBoundingClientRect(), c = h.getBoundingClientRect(); return { left: Math.round(c.left - a.left), top: Math.round(c.top - a.top) } })(),
+      textLines: Math.max(0, ...els.filter((e) => e.classList.contains('es-text-shortener') && shown(e)).map((e) => Math.round(e.getBoundingClientRect().height / (parseFloat(cs(e).lineHeight) || 23)))),
       cards: els.filter((e) => e.classList.contains('es-review-container')).length,
+      section: (() => { let e = mount; while (e && e !== document.body && !/^(SECTION|MAIN)$/.test(e.tagName)) e = e.parentElement
+        let b = mount; while (b && cs(b).backgroundColor.match(/rgba\\(.*, 0\\)|transparent/)) b = b.parentElement
+        const h = e && e.querySelector('h2'); return { heading: h ? h.textContent.trim().slice(0, 50) : null, headingColor: h && cs(h).color, bg: b ? cs(b).backgroundColor : 'rgb(255, 255, 255)' } })(),
+      cardBg: (() => { const c = one('es-review-background-container') || one('es-review-container'); return c && cs(c).backgroundColor })(),
       cardFont: cs(one('es-review-content'))?.fontFamily.split(',')[0].replace(/["']/g, ''), pageFont: cs(document.body).fontFamily.split(',')[0].replace(/["']/g, '') })
   })()`
   const dir = mkdtempSync(path.join(tmpdir(), 'elfsight-check-'))
@@ -137,9 +159,19 @@ if (renderUrl) {
       if (!r.logo) problem('Google logo not visible in the header')
       if (!r.count) problem('review count not visible in the header')
       if (!r.button) problem('write-a-review button not visible')
+      if (r.inset && (r.inset.left > 12 || r.inset.top > 12)) problem(`widget sits ${r.inset.left}px / ${r.inset.top}px inside its mount: padding should be 0`)
+      // The 'Read more' line counts too: preview lines + 1, plus one of slack.
+      if (r.textLines > (s.reviewPreviewLinesNumber ?? 3) + 2) problem(`a card shows ${r.textLines} lines of text, preview is ${s.reviewPreviewLinesNumber} (review photos on, or full text mode)`)
       if (!r.cards) problem('no review cards rendered (lazy attribute, CSP or widget off?)')
       if (r.cardFont && r.pageFont && r.cardFont !== r.pageFont) problem(`cards in ${r.cardFont}, page in ${r.pageFont}`)
       if (r.buttonStyle && same(r.buttonStyle.bg, BLUE)) problem('button renders in Elfsight blue')
+      if (r.buttonStyle && siteButton) {
+        if (siteButton.textTransform && siteButton.textTransform !== r.buttonStyle.transform) problem(`button renders ${r.buttonStyle.transform}, site ${siteButton.textTransform}`)
+        if (siteButton.fontFamily && siteButton.fontFamily !== r.buttonStyle.font) problem(`button renders in ${r.buttonStyle.font}, site ${siteButton.fontFamily}`)
+      }
+      if (!r.section.heading) problem('no H2 in the section around the widget: the section must carry the heading')
+      if (r.section.headingColor && !same(t.headerTextColor, r.section.headingColor)) problem(`header text ${t.headerTextColor}, section heading ${r.section.headingColor}`)
+      if (r.cardBg && same(r.cardBg, r.section.bg)) problem(`cards ${r.cardBg} on a ${r.section.bg} section: set them apart`)
     }
   } finally { chrome.kill() }
 }
