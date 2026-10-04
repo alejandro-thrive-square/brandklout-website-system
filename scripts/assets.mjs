@@ -159,6 +159,8 @@ function untracked (checkout, only) {
     if (only && client !== only) return []
     const rel = parts.slice(3).join('/')
     if (rel === 'assets.tsv') return []
+    // The process mirror (scenario.mjs) is untracked but is main's code, not client media.
+    if (/^(tools\/|\.process-mirror\.json$|scenario-[^/]+\/(?![^/]+\/output\/))/.test(rel)) return []
     return [{ client, rel, abs: path.join(checkout, p) }]
   })
 }
@@ -170,11 +172,26 @@ function hashFile (abs) {
   })
 }
 const manifestPath = (checkout, client) => path.join(checkout, CLIENTS_REL, client, 'assets.tsv')
+/** Client folders each checkout's branch tracks. Main tracks none since 2026-10-03: a client lives on
+ *  its own branch, so its manifest is read and written in the worktree that has that branch. */
+let homes
+function homeOf (client) {
+  homes ??= worktrees().map((wt) => {
+    let tracked = []
+    try { tracked = execFileSync('git', ['ls-tree', '-d', '--name-only', 'HEAD', `${CLIENTS_REL}/`], { cwd: wt, encoding: 'utf8' }).split('\n').map((p) => p.split('/')[2]).filter(Boolean) } catch {}
+    return { wt, tracked }
+  })
+  const here = homes.find((h) => path.resolve(h.wt) === path.resolve(ROOT) && h.tracked.includes(client))
+  return (here || homes.find((h) => h.tracked.includes(client)))?.wt || null
+}
+const trackedClients = () => { homeOf(''); return [...new Set(homes.flatMap((h) => h.tracked))].sort() }
 function readManifest (checkout, client) {
   const f = manifestPath(checkout, client)
   const m = new Map()
   if (!fs.existsSync(f)) return m
-  for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
+  // CRLF too: with core.autocrlf a manifest that arrives by merge or checkout is CRLF on disk, and a
+  // trailing \r on every path made status report 0 in R2 and pull write to the wrong names.
+  for (const line of fs.readFileSync(f, 'utf8').split(/\r?\n/)) {
     if (!line || line.startsWith('#')) continue
     const [sha256, size, ...rest] = line.split('\t')
     m.set(rest.join('\t'), { sha256, size: Number(size) })
@@ -224,7 +241,9 @@ async function push () {
   if (clashes.length) console.log(`  ${clashes.length} clash(es), newer kept:\n    ` + clashes.slice(0, 5).join('\n    ') + (clashes.length > 5 ? '\n    …' : ''))
   for (const [client, list] of Object.entries(byClient).sort()) {
     const remote = DRY ? new Map() : await listRemote(`clients/${client}/`)
-    const manifest = readManifest(ROOT, client)
+    const home = homeOf(client)
+    if (!home) { console.log(`${client}: no worktree has its branch checked out — uploads skipped (open one with scripts/new-client-worktree.sh)`); continue }
+    const manifest = readManifest(home, client)
     let up = 0, skip = 0, fail = 0, bytes = 0
     const t0 = Date.now()
     await pool(list, async (f) => {
@@ -245,7 +264,7 @@ async function push () {
         manifest.set(f.rel, { sha256, size: f.size })
       } catch (e) { fail++; console.log(`  FAILED ${client}/${f.rel}: ${e.message}`) }
     })
-    if (!DRY) writeManifest(ROOT, client, manifest)
+    if (!DRY) writeManifest(home, client, manifest)   // on the client's branch, never on main
     console.log(`${client}: ${up} uploaded (${mb(bytes)}), ${skip} already in R2, ${fail} failed, ${((Date.now() - t0) / 1000).toFixed(0)} s${DRY ? ' [dry]' : ''}`)
     if (fail) process.exitCode = 1
   }
@@ -254,8 +273,9 @@ async function push () {
 async function pull () {
   if (!clientArg) throw new Error('usage: pull <client> [--to <checkout>]')
   const to = path.resolve(opts('--to')[0] || ROOT)
-  const manifest = readManifest(ROOT, clientArg)
-  if (!manifest.size) throw new Error(`no manifest at ${path.relative(ROOT, manifestPath(ROOT, clientArg))}`)
+  const home = homeOf(clientArg) || to
+  const manifest = readManifest(home, clientArg)
+  if (!manifest.size) throw new Error(`no manifest at ${manifestPath(home, clientArg)} — run pull from the client's worktree, or pass --to it`)
   let got = 0, have = 0, fail = 0
   await pool([...manifest.entries()], async ([rel, e]) => {
     const abs = path.join(to, CLIENTS_REL, clientArg, rel)
@@ -276,15 +296,17 @@ async function pull () {
 }
 
 async function status () {
-  const dir = path.join(ROOT, CLIENTS_REL)
-  const clients = clientArg ? [clientArg] : fs.readdirSync(dir).filter((d) => fs.existsSync(manifestPath(ROOT, d)))
+  const clients = clientArg ? [clientArg] : trackedClients()
   for (const client of clients) {
-    const m = readManifest(ROOT, client)
+    const home = homeOf(client)
+    if (!home) { console.log(`${client}: no worktree has its branch checked out`); continue }
+    const dir = path.join(home, CLIENTS_REL)
+    const m = readManifest(home, client)
     const remote = await listRemote(`clients/${client}/`)
     const missingRemote = [...m.entries()].filter(([rel, e]) => remote.get(`clients/${client}/${rel}`)?.size !== e.size)
     const local = [...m.keys()].filter((rel) => fs.existsSync(path.join(dir, client, rel))).length
     const total = [...m.values()].reduce((s, e) => s + e.size, 0)
-    console.log(`${client}: ${m.size} in manifest (${mb(total)}), ${m.size - missingRemote.length} in R2, ${local} present here`)
+    console.log(`${client}: ${m.size} in manifest (${mb(total)}), ${m.size - missingRemote.length} in R2, ${local} on disk in ${path.basename(home)}`)
     for (const [rel] of missingRemote.slice(0, 10)) console.log(`  not in R2: ${rel}`)
     if (missingRemote.length) process.exitCode = 1
   }

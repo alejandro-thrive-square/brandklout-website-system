@@ -114,7 +114,7 @@ Work in this step's `output/` (`deliver/brandklout/<client>/scenario-1-migration
   slash slugs saved through the site-document API (they serve nested). If a path still will not
   serve, use Cloudflare URL rewrites with an `ne "/section/"` guard, as in bk-ifa-dentistry
   `docs/dns/set-url-rules.mjs` (a wildcard `*` also matches the empty string).
-- **If the new site is on Webflow** (scenario 2 clients), then do not use a Worker: import the map
+- **If the new site is on Webflow** (Scenario 6 clients), then do not use a Worker: import the map
   in Site settings > Publishing > 301 redirects. Webflow strips the trailing slash before matching
   and wildcard `(.*)` order is unpredictable, so point overlapping wildcards at one destination and
   test against the canonical host, not the apex.

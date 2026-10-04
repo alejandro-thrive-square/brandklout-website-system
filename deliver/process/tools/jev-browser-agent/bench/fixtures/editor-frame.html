@@ -1,0 +1,35 @@
+<!doctype html><meta charset="utf-8"><title>editor</title>
+<script>window.BENCH='http://127.0.0.1:8801';</script>
+<script src="http://127.0.0.1:8801/common.js"></script>
+<style>
+  body{margin:0;font:15px system-ui;display:flex}
+  nav{width:180px;border-right:1px solid #ddd;padding:16px;display:flex;flex-direction:column;gap:8px}
+  nav [role=tab]{padding:8px;border-radius:6px;cursor:pointer}
+  nav [aria-selected=true]{background:#eef}
+  main{padding:20px;flex:1}
+  .panel{display:none}.panel.on{display:block}
+</style>
+<nav role="tablist">
+  <div role="tab" aria-selected="true" data-p="source">Source</div>
+  <div role="tab" aria-selected="false" data-p="layout">Layout</div>
+  <div role="tab" aria-selected="false" data-p="theme">Theme</div>
+</nav>
+<main>
+  <div class="panel on" id="source"><h3>Source</h3><p>Connected: Bright Smiles Dental</p></div>
+  <div class="panel" id="layout"><h3>Layout</h3>
+    <label><input type="radio" name="layout" value="carousel" checked> Carousel</label>
+    <label><input type="radio" name="layout" value="grid"> Grid</label></div>
+  <div class="panel" id="theme"><h3>Theme</h3><p>Color scheme</p>
+    <label><input type="radio" name="scheme" value="light" checked> Light</label>
+    <label><input type="radio" name="scheme" value="dark"> Dark</label>
+    <label><input type="radio" name="scheme" value="auto"> Auto</label></div>
+</main>
+<script>
+  const task = new URLSearchParams(location.search).get('task');
+  for (const t of document.querySelectorAll('[role=tab]')) t.onclick = () => {
+    for (const o of document.querySelectorAll('[role=tab]')) o.setAttribute('aria-selected', o === t);
+    for (const p of document.querySelectorAll('.panel')) p.classList.toggle('on', p.id === t.dataset.p);
+    report(task, 'tab', t.dataset.p);
+  };
+  for (const r of document.querySelectorAll('input[type=radio]')) r.onchange = () => report(task, r.name, r.value);
+</script>
