@@ -78,5 +78,17 @@
 - **Open:** stray `*` above Invisalign's Name (Name is required; optional in the model and on New
   Patient) — owner decision. On /contacts the captcha sits below the Submit button (GHL order).
 
+## Update (2026-10-04, early): labels standard, captcha above Submit, cheapest model, auto resets
+- Owner: **visible labels on every form** (like /contacts) and **captcha above Submit**; both consent
+  boxes one size. Gate fails unlabeled fields and captcha-below-submit; `site-style --compare` measures
+  the two boxes' rendered sizes.
+- All three Mason Park forms pass gate + style (Invisalign/New Patient: Name, Phone, Email, Message
+  labels; /contacts: captcha moved). Done on `gpt-6-luna`, the cheap default; it handled builder edits.
+- **`codex-computer-use/codex-limits.mjs`** reads ChatGPT usage and spends reset credits via the app
+  server's JSON-RPC; `codex_cu.mjs` now resets automatically on a usage limit and retries once.
+  2 credits available, 5h window 78% used at the end.
+- Gotcha: the wrapper prints `limit reached: false` on stderr, so a shell grep for "limit reached"
+  in its output false-positives. Grep the session.log `error`/`turn.failed` lines instead.
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
