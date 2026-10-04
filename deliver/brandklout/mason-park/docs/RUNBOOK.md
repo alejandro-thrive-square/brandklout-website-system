@@ -5,6 +5,14 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Google reviews widget on the standard - 2026-10-04
+
+**`/` and `/patient-reviews` show the new Elfsight Google Reviews widget `e30c1531` (#104A, 4.9 / 1,087):
+no widget title, Google-logo header with the count, site-styled button, sand cards; gate ok on staging and www**
+([`runbook/2026-10-04-google-reviews-widget-standard.md`](./runbook/2026-10-04-google-reviews-widget-standard.md)).
+The old All-in-One `32926aff` (other account, no Google logo) is off the site. Gate:
+`deliver/process/tools/elfsight-reviews/check-widget.mjs e30c1531-deaf-4e44-b3de-61cf3426bce9 --render <page>`.
+
 ## GHL Contact form on the standard - 2026-10-03
 
 **The `/contacts` form `JuzM9SxuJMPDMwfO6cgj` now has a required Service dropdown, the optional

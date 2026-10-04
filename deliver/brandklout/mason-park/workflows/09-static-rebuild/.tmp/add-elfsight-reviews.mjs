@@ -73,7 +73,8 @@ const dropSubtree = (nodes, id) => {
   for (const c of nodes[id]?.children ?? []) dropSubtree(nodes, c);
   delete nodes[id];
 };
-const findEmbed = (nodes) => Object.values(nodes).find((n) => n.moduleId === MODULE_ID && (n.props?.snippet ?? "").includes(`elfsight-app-${WIDGET_ID}`));
+// Any Elfsight embed counts, so a widget swap (2026-10-04: All-in-One 32926aff -> Google Reviews) refreshes it in place.
+const findEmbed = (nodes) => Object.values(nodes).find((n) => n.moduleId === MODULE_ID && (n.props?.snippet ?? "").includes("elfsight-app-"));
 
 const { rows } = await getPages();
 const changed = [];
