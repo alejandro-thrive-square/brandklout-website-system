@@ -52,5 +52,5 @@ console.log(`published ${ok} of ${rows.length}`)
 for (const f of failed.slice(0, 10)) console.log('  FAIL', f)
 
 console.log(`\nNow publish the site itself, or the listing stays empty:
-  cd ../../instatic-embeds/lib && INSTATIC_BASE_URL=${SITE} node insta-api.mjs publish`)
+  cd ../../instatic-api-sync && INSTATIC_BASE_URL=${SITE} node insta-api.mjs publish`)
 if (failed.length) process.exit(1)

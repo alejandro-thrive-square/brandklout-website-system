@@ -3,9 +3,11 @@
  * check-scope.mjs — a change is either a CLIENT change or a SYSTEM change, never both.
  *
  *   Client change: touches exactly one client folder, deliver/brandklout/<client>/, and nothing else.
- *                  This is what a client worktree merges into main when its site launches.
+ *                  This is what a commit on a client branch is. Client branches never merge into main
+ *                  (since 2026-10-03): the branch is the client's history, read from main with scripts/client.mjs.
  *   System change: touches anything EXCEPT client folders (process, tools, docs, scripts, rules).
- *                  This is what main commits when the process or system is updated.
+ *                  This is what main commits, and the only thing that merges in either direction
+ *                  (main into a client branch brings the system; nothing merges into main but system work).
  *
  * deliver/docs/ and deliver/scripts/ are system files, not a client.
  *

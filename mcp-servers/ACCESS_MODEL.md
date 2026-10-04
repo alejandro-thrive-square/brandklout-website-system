@@ -1,33 +1,29 @@
 # MCP Access Model
 
-This document defines how agents use Model Context Protocol (MCP) servers across the Webzite Agentic Workflow. MCP server definitions stay centralized, while permission and target-resource decisions are controlled by the active folder.
+This document defines how agents use Model Context Protocol (MCP) servers across the Brandklout Website System. MCP server definitions stay centralized, while permission and target-resource decisions are controlled by the active folder.
 
 ## Access Levels
 
 | Level | Folder Scope | Purpose |
 | :--- | :--- | :--- |
-| `global` | Repository-wide | Utility MCPs that are safe across pillars, such as design, browser, search, or read-only analysis tools. |
-| `agency` | Webzite-owned folders and workflows | MCP access to Webzite-owned accounts, sites, projects, dashboards, and assets. |
-| `client` | `deliver/[client-name]/` | MCP access to signed client projects, client-owned platforms, or client-authorized workspaces. |
-| `prospect` | Sales and Growth lead workflows | Public or pre-contract analysis of prospect websites, listings, and reference material. |
-| `workflow` | A specific workflow folder | Narrow MCP access needed only for one workflow execution. |
+| `global` | Repository-wide | Utility MCPs that touch no client account, such as a component library, browser, search, or read-only analysis tools. |
+| `client` | `deliver/brandklout/<client>/` | MCP access to Brandklout client sites, the partner-owned workspace, or client-authorized platforms. |
+| `workflow` | A specific scenario step folder | Narrow MCP access needed only for one step. |
 
 ## Server Instances: One Per Principal
 
 For platform MCPs that authenticate via OAuth grants (Webflow, and any future platform where one grant covers a set of accounts/sites), we register **one named server instance per principal** instead of one shared server for the whole platform.
 
-A **principal** is the account boundary a grant should cover — and it is defined by **whoever owns the platform account**, not by whoever the invoice is addressed to. In practice that is one of three things: Webzite Studio itself, one direct client engagement, or one **white-label partner agency** whose clients all live inside a single account the partner owns.
+A **principal** is the account boundary a grant should cover — and it is defined by **whoever owns the platform account**, not by whoever the invoice is addressed to. In practice that is one direct client engagement or one **white-label partner agency** whose clients all live inside a single account the partner owns. In this repository that is Brandklout.
 
 **Why:** the MCP client stores the OAuth grant keyed by *server name*. A single shared server therefore forces a choice between one grant that spans every client's sites (over-broad access) or re-authenticating on every client switch (which silently wipes the previous client's grant). Named instances give each principal a persistent, least-privilege grant — and the tool prefix (`mcp__webflow-brandklout__...`) makes it self-evident which account an agent is acting on.
 
-**Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (or `webzite` for agency-owned properties). For a partner agency the slug is the **partner** folder (`brandklout`), not the client subfolder beneath it.
+**Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (`brandklout`) or the client folder under `deliver/brandklout/`. For a partner agency the slug is the **partner** folder (`brandklout`), not the client subfolder beneath it.
 
 | Instance pattern | Access level | Grant scope when authorizing |
 | :--- | :--- | :--- |
-| `<platform>-webzite` | `agency` | Webzite-owned sites/workspaces only |
 | `<platform>-<client-name>` | `client` | Only that client's site(s) — never select other clients' sites in the OAuth screen |
 | `<platform>-<partner-name>` | `client` | Every site in the partner's workspace that Webzite is engaged on. Per-client isolation is **not available** here — see below |
-| *(none — no authenticated instance)* | `prospect` | Prospect analysis uses public URLs only, never an authenticated grant |
 
 ### When the partner owns the workspace, one instance is correct
 
@@ -103,9 +99,9 @@ Before using any MCP tool, agents must:
 5. Verify runtime authentication through `/mcp`, `claude mcp list`, or the MCP client's equivalent status check.
 6. Confirm the target account, site, base, project, repository, or deployment before making changes.
 7. Ask explicit confirmation before publishing, deleting, overwriting, billing, emailing, deploying, changing production data, or using private session data.
-8. Store MCP outputs in the active workflow's `.tmp/` folder unless that workflow specifies a different repo-safe artifact path.
+8. Store MCP outputs in the active step's `output/` folder unless that step specifies a different repo-safe artifact path.
 
-If no `mcp-access.md` exists for the active folder and the task requires an MCP, create or request one before using the MCP. Read-only public prospect analysis may use the `prospect-audit` profile when the workflow directive already allows public web analysis.
+If no `mcp-access.md` exists for the active folder and the task requires an MCP, create or request one before using the MCP.
 
 > [!NOTE]
 > **VPS-resident agents (e.g., [Hermes](../HERMES.md))** that operate inside this repository's folders are bound by the same folder-based `mcp-access.md` rules as any other agent. Their own external projects live outside this repository and are out of scope here — do not add a Hermes-specific MCP profile, since that would imply Hermes' infrastructure lives in this repo.

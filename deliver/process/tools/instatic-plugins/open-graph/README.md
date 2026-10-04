@@ -68,9 +68,10 @@ until somebody shares two of them.
 The same function sets `merged.title = row.cells.title` immediately before
 rendering, so `<title>` *is* the article's own. The resolver matches slug first
 and falls back to a title lookup, preferring the title match when the slug's page
-disagrees with the document title. `verify-seo-plugins.mjs` asserts all 79
-published URLs have a **distinct** `og:url` and canonical, which is the check
-that would catch a regression here.
+disagrees with the document title. The live gate
+(`../../instatic-site/gates/seo-head-check.mjs`) checks every published URL has a
+**distinct** `og:url` and canonical, which is the check that would catch a
+regression here.
 
 ### 2. The filter has to be synchronous
 
@@ -188,13 +189,13 @@ never match because the platform owns them.
 
 ```bash
 node test-open-graph.mjs           # 64 assertions, off-platform
-node test-open-graph.mjs --live    # + the filter over the real published pages
-node verify-seo-plugins.mjs        # the LIVE gate: every published URL
+node test-open-graph.mjs --live    # + the filter over the real published pages (needs INSTATIC_BASE_URL)
+node ../../instatic-site/gates/seo-head-check.mjs   # the LIVE gate: every published URL
 ```
 
-`test-` proves the filter transforms HTML correctly. `verify-` proves the host
+`test-` proves the filter transforms HTML correctly. The live gate proves the host
 calls it, that both plugins are enabled and configured, and that every one of the
-79 published URLs carries a unique, absolute, matching `og:url` and canonical.
+published URLs carries a unique, absolute, matching `og:url` and canonical.
 
 ## What it deliberately does not do
 

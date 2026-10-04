@@ -38,8 +38,11 @@ reach, ahead of the cloud migration. He chose R2 for media and agreed to drop th
 
 ## Next
 
-1. **Push `main` and the `bk-*` branches to origin** — not done without Alejandro's go: a push to main
-   triggers the VPS deploy.
+1. **Pushed** `main`, `system-v2`, all 17 `bk-*` branches and the backup tag, all fast-forwards (no
+   force), on Alejandro's go. The `Deploy VPS` action failed at "Configure SSH": this repository has no
+   `VPS_SSH_KEY` / `VPS_HOST` secrets, and it has failed the same way on every push since the split
+   (e.g. 2026-09-19, 2026-09-20). Nothing reached the VPS. Set the secrets or retire the workflow as
+   part of the cloud migration.
 2. **Move R2 to an agency-owned Cloudflare account** before relying on it: the bucket
    `brandklout-assets-test` and token `CLOUDFLARETESTING` (expires 2026-12-18) are his personal account.
    Only `R2_TOKEN` / `R2_BUCKET` in `~/.webzite/.env [shared]` change; rerun `push`.

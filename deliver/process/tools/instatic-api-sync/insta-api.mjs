@@ -27,7 +27,7 @@
  *    through the one that came back from the read.
  *
  * Credentials come from the environment, never from source:
- *   INSTATIC_BASE_URL   (default https://encorercm.com)
+ *   INSTATIC_BASE_URL   (required; there is no default host)
  *   INSTATIC_EMAIL
  *   INSTATIC_PASSWORD
  *
@@ -76,12 +76,22 @@ loadEnv()
    verified working by hand seconds earlier, and again on 2026-08-31 as Railway's
    "Application not found" on the first run against a second client.
 
-   THE DEFAULT IS A LAST RESORT, NOT A CONFIGURATION POINT. This module is shared
-   across every Instatic client, so no client's host is the right default; a stale
-   one is indistinguishable from a broken login. Set INSTATIC_BASE_URL in the
-   client's [<client>] section of ~/.webzite/.env and run scripts/env-sync.mjs.
+   THERE IS NO DEFAULT HOST. This module is shared across every Instatic client, so no
+   client's host is the right default: it used to fall back to encorercm.com, which stopped
+   being an Instatic origin on 2026-08-31, and a stale default is indistinguishable from a
+   broken login. Set INSTATIC_BASE_URL in the client's [<client>] section of ~/.webzite/.env
+   and run scripts/env-sync.mjs; the generated worktree .env is what this reads.
    See deliver/process/tools/instatic-domain-origins/sites.json for canonical hosts. */
-export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
+export const BASE = (() => {
+  const raw = (process.env.INSTATIC_BASE_URL || '').trim()
+  if (!raw) {
+    throw new Error(
+      'INSTATIC_BASE_URL is not set. Add it to the client section of ~/.webzite/.env and run ' +
+      'scripts/env-sync.mjs — the shared toolkit refuses to guess which site it is talking to.',
+    )
+  }
+  return raw.replace(/\/+$/, '')
+})()
 
 // The session cache is PER HOST. One shared `output/.session` meant a cookie
 // minted for one client's instance was replayed against the next one's; the
@@ -116,7 +126,7 @@ export async function login() {
   const email = process.env.INSTATIC_EMAIL
   const password = process.env.INSTATIC_PASSWORD
   if (!email || !password) {
-    throw new Error('INSTATIC_EMAIL / INSTATIC_PASSWORD are not set (repo-root .env)')
+    throw new Error('INSTATIC_EMAIL / INSTATIC_PASSWORD are not set (generated worktree .env)')
   }
   const res = await fetch(`${BASE}/admin/api/cms/login`, {
     method: 'POST',
