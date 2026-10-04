@@ -123,7 +123,9 @@ every `…/widget/(form|survey|booking)/…` iframe URL and reloads those iframe
    - `privacy_sale_share_opt_out` and `privacy_gpc_detected`: checkbox with the options `true` / `false`.
    - The other five fields: single line.
 2. Add all eleven fields to every embedded form. Keep each **Query Key** equal to the field key, and hide
-   the fields inside the form. Hidden fields still prefill.
+   the fields inside the form. Hidden fields still prefill. Hide them with
+   [`ghl-forms/no-shift.css`](../ghl-forms/no-shift.css) in the form's Custom CSS, never a script, and
+   put all eleven after the Privacy | Terms links ([why](../ghl-forms/README.md#no-layout-shift)).
 
 ## The kit
 

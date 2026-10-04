@@ -1,0 +1,15 @@
+/* Brandklout GHL form: no layout shift. Paste at the top of the form's Custom CSS (Styles > Custom CSS).
+   GoHighLevel puts Custom CSS in the served <head>, so these rules hold from the first paint.
+   1. The 11 hidden consent fields. GHL renders them visible in its server HTML; this hides them before
+      anything is drawn. 7 carry data-q="privacy_..."; the 4 consent dropdowns carry nothing CSS can
+      match, so the second selector hides every element after the Privacy | Terms links, where the
+      standard puts all 11 (never a button or the captcha). Replaces the old in-form hide script.
+   2. The captcha slot. Cloudflare Turnstile loads after hydration and takes 100px (27px at first paint).
+   Docs: deliver/process/tools/ghl-forms/README.md, "No layout shift". */
+#_builder-form .form-field-wrapper:has([data-q^="privacy_"], [data-q="marketing_disclosure_version"]),
+#_builder-form .form-field-wrapper:has(a[href*="terms-of-service"]) ~ .form-field-wrapper:not(:has(button, iframe)) {
+  display: none !important;
+}
+#_builder-form .captcha-container {
+  min-height: 100px;
+}

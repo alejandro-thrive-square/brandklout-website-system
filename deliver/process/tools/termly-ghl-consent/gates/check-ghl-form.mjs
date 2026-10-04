@@ -36,6 +36,9 @@
  *      redirect on submit must answer 200 (relative paths resolve against --origin).
  *      --landing (and --combo) marks landing-page forms: the page is already one service, so they
  *      need NO service dropdown, and they must redirect to a thank-you page instead.
+ *      No layout shift (2026-10-04): the form's Custom CSS carries tools/ghl-forms/no-shift.css, no
+ *      Custom HTML script hides the privacy_* fields, and all 11 consent fields come after the
+ *      Privacy | Terms links (the CSS hides everything after them).
  *
  *   node check-ghl-form.mjs <formId|url> [...]      > output/ghl-forms.log 2>&1
  *   node check-ghl-form.mjs --standard [--landing] [--origin https://www.client.com] [--legal "X PLLC DBA Y"] [--location <id>] <formId|url> [...]
@@ -81,6 +84,9 @@ async function readForm(idOrUrl) {
     consentFields: consent.size,
     locationId: loc ? R(loc.locationId) : null,
     labelsVisible: node ? R(node.formLabelVisible) !== false : true,
+    // tools/ghl-forms/no-shift.css, served in <head> with the form's Custom CSS.
+    noShiftCss: /:has\(a\[href\*="terms-of-service"\]\)\s*~\s*\.form-field-wrapper/.test(html) && /\.captcha-container\s*\{[^}]*min-height/.test(html),
+    hideScript: /hiddenLabels|hideFields/.test(html),
     fields,
   }
 }
@@ -121,6 +127,11 @@ async function standardProblems(f, { origin, legal, location, landing }) {
     else if (/example\.com/i.test(href)) p.push(`"${want}" still links to ${href}`)
     else if (origin && !href.toLowerCase().startsWith(origin.replace(/\/+$/, '').toLowerCase() + '/')) p.push(`"${want}" links to ${href}, expected ${origin}/…`)
   }
+  if (!f.noShiftCss) p.push('Custom CSS lacks tools/ghl-forms/no-shift.css: the consent fields show for 2-3 s and the captcha grows, so the form jumps on load')
+  if (f.hideScript) p.push('a Custom HTML script hides the privacy_* fields: delete that element, no-shift.css hides them from the first paint')
+  const linksAt = f.fields.findIndex((x) => /terms-of-service/i.test(`${text(x.label)} ${text(x.placeholder)}`))
+  const early = f.fields.filter((x, i) => isConsent(x) && (linksAt < 0 || i < linksAt))
+  if (linksAt >= 0 && early.length) p.push(`${early.length} consent field(s) sit above the Privacy | Terms links: move all 11 below them (no-shift.css hides only what follows the links)`)
   if (location && f.locationId && f.locationId !== location) p.push(`form lives in sub-account ${f.locationId}, the site's is ${location}: its leads land in another practice's CRM`)
   if (f.actionType === '1' && f.redirectUrl) {
     let url = f.redirectUrl

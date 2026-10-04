@@ -22,7 +22,8 @@ Top to bottom:
 | 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. **Both boxes the same font size (14px)**; GHL keeps an inline 16px on box 1, so `site-style.mjs --compare` measures the rendered sizes. |
 | 6 | Captcha, Submit | **Captcha above the Submit button.** Never change the Submit label unless the task says so. |
 | 7 | **Privacy Policy \| Terms of Service** | Text element, links to `<origin>/privacy-policy` and `<origin>/terms-of-service`, new tab. GHL's default is `https://www.example.com` — never ship it. |
-| — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). |
+| — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). **All 11 sit after the Privacy \| Terms links**, and they are hidden by CSS, not a script (see [No layout shift](#no-layout-shift)). |
+| — | **No layout shift** | [`no-shift.css`](./no-shift.css) at the top of the form's **Custom CSS**, and **no hide script**: delete any Custom HTML element whose script hides the `privacy_*` fields. |
 | — | **Styling** | Matches the site, not GHL's defaults (Inter, grey `#D0D5DD` borders, blue `#155EEF` button). See [Styling](#styling). |
 | — | Save-and-exit | **Off** ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md), gotcha "Submission in progress"). |
 
@@ -45,6 +46,9 @@ Grand Mission's *Contact Form Website* (`HHUjLT7QwNmfVq4yjxw5`), read from its p
 | 10 | Text (heading) | `header` | `Privacy Policy` \| `Terms of Service`, links on `https://grandmissiondentistry.com/…`, new tab | |
 | 11–21 | 11 consent fields, hidden | `contact.privacy_*`, `contact.marketing_disclosure_version` | Query Key = the key without `contact.` | no |
 | 22 | Custom HTML | `html` | GHL's empty default ("The Custom HTML goes here") | |
+
+The Mason Park forms (2026-10) also had a Custom HTML element at the bottom holding a script that hid
+the 11 fields by their label text. It is replaced by [`no-shift.css`](./no-shift.css): delete it.
 
 Two things in the model differ from the table above: nothing is *required* (the `*` is only typed
 into the placeholders), and its dropdown is called *Treatment Type*. Both are open for the owner to
@@ -126,6 +130,7 @@ node site-style.mjs --compare <formId> <page with the form> > output/site-style.
 | Button background, text, radius | the main call-to-action button (colour, font, weight, case, radius), full width |
 | Consent and Privacy/Terms text | body font, 14px, body colour |
 | Form background | transparent, so the page's card shows through |
+| Custom CSS | [`no-shift.css`](./no-shift.css) first, then the styling block |
 
 Give Codex these exact values in the instruction (step 5) and run `--compare` again after it
 saves; it must print `style ok`. A font the builder does not list (a site's self-hosted variable
@@ -134,6 +139,34 @@ font) gets the closest Google font of the same family, named in the client runbo
 Read 2026-10-03: Mason Park's contact form is still on GHL's Inter (site: Nunito Sans, Karla
 uppercase button `#8C6349`, 2px radius); even the Grand Mission model uses Arial and GHL's blue
 button against a Montserrat site. Styling is new to the standard, so no form passes it yet.
+
+## No layout shift
+
+Every form must hold its height from the first paint. GoHighLevel serves the form as HTML that
+already includes the 11 hidden consent fields, **visible**, and its JavaScript only takes over
+2–3 s later. The old in-form hide script ran after that, so every form loaded about 2,250px tall and
+then collapsed to about 1,100px. Cloudflare Turnstile (the captcha) then grew from 27px to 100px.
+
+[`no-shift.css`](./no-shift.css) fixes both. The form's Custom CSS is served in the page `<head>`,
+so it applies before anything is drawn:
+
+- **Consent fields:** 7 of the 11 carry `data-q="privacy_…"` and are matched by it. The 4 consent
+  **dropdowns** (`analytics`, `advertising`, `ad_user_data`, `ad_personalization`) carry no
+  attribute CSS can match; only their label text names them. So the second selector hides every
+  element **after the Privacy | Terms links**, except one holding a button or an iframe. That is why
+  the 11 fields must be the last elements, after the links. The gate checks the order.
+- **Captcha:** `min-height: 100px` on `.captcha-container`, the height Turnstile settles at for a
+  real visitor (measured in a signed-in Chrome, 2026-10-04). Headless Chrome gets an interactive
+  challenge plus an error line (136px); that is automation only.
+
+Measured 2026-10-04 on Mason Park *Contact*, *Invisalign* and *Kids*, at 1348px and 375px, script
+off and CSS on: 0/11 fields visible at first paint, prefill from the URL still fills dropdowns,
+checkboxes and text fields, and the largest jump fell from ~1,150px to ≤36px (the headless-only
+challenge line).
+
+Still open: on the site, GHL's embed carries `data-height` from the builder. Mason Park's form says
+`2442`, because the builder counts the hidden fields. Whether `form_embed.js` sizes the iframe to
+it before resizing is not yet measured.
 
 ## Copying the fields from another sub-account
 
@@ -196,6 +229,9 @@ For the owner to settle against the reference video, then fold into the standard
   `*` above it, field spacing is uneven, and the Privacy/Terms links stay GHL blue. Set the consent
   text size, the link colour (site link or body colour) and the field spacing explicitly in the
   styling step.
+- **Hide the consent fields with CSS, never a script** ([No layout shift](#no-layout-shift)). A
+  script in a Custom HTML element runs only after GHL's JavaScript loads, so the 11 fields show for
+  2–3 s and the form then collapses by ~1,150px. The gate fails a form that still carries one.
 - **Never turn the form-wide *Show Label* switch off.** The 11 consent fields are hidden only while
   labels are on; with it off GHL renders them as empty dropdowns, true/false boxes and blank inputs
   below the links (Invisalign form, 2026-10-03, reverted in minutes). The gate now fails
