@@ -186,7 +186,10 @@ For the owner to settle against the reference video, then fold into the standard
   reach), elements are added only by drag-and-drop and a synthetic drag does not register; on a
   758px-high laptop screen the *Customized* tiles (T & C, Text, Html) are cut off too. Use Codex; if
   its Chrome plugin fails ("Unable to load browser request-header policy", often after a network
-  drop), restart the ChatGPT app and rerun.
+  drop), restart the ChatGPT app and rerun. That error is the plugin's Statsig feature-flag load
+  (`ab.chatgpt.com`) failing in `browser-service.mjs`; on 2026-10-03 an app restart did not clear
+  it, and the registry entry the plugin blames was present. Next: reinstall the Chrome plugin from
+  the ChatGPT app, then restart Chrome.
 - **A Codex run that loses the browser saves nothing.** "Debugger unattached" or a dropped
   connection ends the run before *Save*; gate the form to confirm it is unchanged, then rerun.
 
