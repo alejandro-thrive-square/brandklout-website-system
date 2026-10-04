@@ -10,7 +10,7 @@ It is a pure function with no DB or network dependency, but it needs a `CSSStyle
 # 1. Assemble the input in cascade order: runtime-states.css, then site.css.
 #    Take them from the LIVE published bundle, not a local copy — the draft
 #    copy of site.css is the truncated one.
-curl -s https://encorercm.com/_instatic/css/userStyles-<hash>.css > migrate-input.css
+curl -s https://<site>/_instatic/css/userStyles-<hash>.css > migrate-input.css
 
 # 2. Ship it (gzip + base64, in chunks — `railway ssh` takes the payload on the
 #    command line and fails silently past ~10 KB per invocation).

@@ -67,13 +67,15 @@ const MODULE_ID = 'brandklout.embed-origins.embed'
  * `site-src/pages/<page>.body.html` is the only copy and the published block
  * cannot drift from the local build. `height` is the editor card's height in
  * the admin; the live height is the vendor script's business. */
-/* Per-site config, no longer a constant: --config <file> (default <cwd>/embeds.json), shaped
+/* Per-site config, no longer a constant: --config <file> (default <cwd>/output/code/embeds.json, then the
+   legacy <cwd>/embeds.json: since 2026-10-03 only output/ is tracked in a client step folder), shaped
    { "<data-embed key>": { "where": "<page slug>", "props": { source, url, title, fit, height, ratio,
    lazy, allowFullscreen, allow } } }. Stone's GHL contact form was:
    {"ghl-contact-form":{"where":"book","props":{"source":"snippet","url":"","title":"Contact Form",
    "fit":"auto","height":565,"ratio":"16 / 9","lazy":true,"allowFullscreen":false,"allow":""}}} */
 const cfgIx = process.argv.indexOf('--config')
-const CONFIG = path.resolve(cfgIx >= 0 ? process.argv[cfgIx + 1] : path.join(P.WORK, 'embeds.json'))
+const CONFIG = path.resolve(cfgIx >= 0 ? process.argv[cfgIx + 1]
+  : [path.join(P.WORK, 'output', 'code', 'embeds.json'), path.join(P.WORK, 'embeds.json')].find((p) => fs.existsSync(p)) || path.join(P.WORK, 'output', 'code', 'embeds.json'))
 if (!fs.existsSync(CONFIG)) { console.error(`no embed config at ${CONFIG} — see the comment above EMBEDS`); process.exit(2) }
 const EMBEDS = JSON.parse(fs.readFileSync(CONFIG, 'utf8'))
 
@@ -85,12 +87,29 @@ function snippetFor(slug, key) {
   // Built by hand rather than with `new RegExp` and a template literal: `\s`
   // in a template literal is just "s", and the pattern silently matches
   // nothing. It cost a run here on 2026-09-17.
-  const re = new RegExp('<div[^>]*\\sdata-embed="' + key + '"[^>]*>([\\s\\S]*?)<\\/div>')
-  const m = html.match(re)
-  if (!m || !m[1].trim()) {
+  const open = new RegExp('<div[^>]*\\sdata-embed="' + key + '"[^>]*>').exec(html)
+  // The marker's contents end at the div that BALANCES the marker, not at the first `</div>`:
+  // most vendor snippets carry a div of their own (Elfsight's `<div class="elfsight-app-…"></div>`),
+  // and a non-greedy match cut the snippet at that inner close, publishing an unclosed div that
+  // swallowed the rest of the page (hackensack-dental-implants, 2026-09-30).
+  const inner = open ? balancedInner(html, open.index + open[0].length) : null
+  if (!inner || !inner.trim()) {
     throw new Error(`no marker "${key}" with contents in ${slug}.html — build the site first`)
   }
-  return m[1].trim()
+  return inner.trim()
+}
+
+/* The text between an opening <div …> that ends at `from` and the </div> that closes it. */
+function balancedInner(html, from) {
+  const tag = /<\/?div\b[^>]*>/g
+  tag.lastIndex = from
+  let depth = 1
+  let m
+  while ((m = tag.exec(html))) {
+    depth += m[0].startsWith('</') ? -1 : 1
+    if (depth === 0) return html.slice(from, m.index)
+  }
+  return null
 }
 
 /* The module publishes its own `class="wz-embed"`, and the publisher injects

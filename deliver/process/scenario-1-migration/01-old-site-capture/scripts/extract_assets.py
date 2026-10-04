@@ -257,6 +257,10 @@ def download(url: str) -> tuple[bool, int, str]:
 def page_sources(args) -> list[tuple[str, str]]:
     """Returns [(page_url, html)]. Prefers HTML already on disk from the content pass."""
     site_data = Path(args.site_data) if args.site_data else None
+    # scrape_site.py writes site-data.json next to html/; find it without the flag (a Webflow site
+    # has no sitemap_index.xml, so without it the run found 0 pages: Oceanic Dental, 2026-10-02)
+    if not site_data and args.html_dir:
+        site_data = Path(args.html_dir).parent / "site-data.json"
     urls: list[str] = []
     if site_data and site_data.exists():
         urls = [r["url"] for r in json.loads(site_data.read_text(encoding="utf-8")) if r.get("url")]
@@ -264,6 +268,8 @@ def page_sources(args) -> list[tuple[str, str]]:
         idx = fetch_text(f"{CFG['site']}/sitemap_index.xml")
         for cm in re.findall(r"<loc>\s*([^<]+?)\s*</loc>", idx):
             urls += re.findall(r"<loc>\s*([^<]+?)\s*</loc>", fetch_text(cm))
+    if not urls:  # a plain urlset (Webflow, Squarespace, most static hosts)
+        urls = re.findall(r"<loc>\s*([^<]+?)\s*</loc>", fetch_text(f"{CFG['site']}/sitemap.xml"))
     urls = list(dict.fromkeys(urls))
 
     html_dir = Path(args.html_dir) if args.html_dir else None

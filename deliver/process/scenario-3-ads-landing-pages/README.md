@@ -13,8 +13,10 @@ dental-implant-consultation, thank-you-implants}`). **Follow its flow beat for b
 and Mason Park's first cuts improvised the flow, and both were rejected. Spend the originality on
 the client's own design system, not on the order of the sections.
 
-Works on both platforms: Instatic (Dr. Nahlah, Mason Park) and Webflow (Livewell, Stone Dental,
-Arvada).
+Designed here for both platforms. Instatic sites (Dr. Nahlah, Mason Park) are built here too; Webflow
+sites (Livewell, Stone Dental, Arvada) are built in
+[Scenario 6 · Webflow Sites](../scenario-6-webflow-sites/02-build/02-build.md) (section K) and come
+back to step 03 here for the gates.
 
 ## Steps
 
@@ -44,11 +46,11 @@ to a file (`> x.log 2>&1`). Never pipe it: Node 24 on Windows dies when stdout i
 | Script | Purpose | Usage | Origin |
 | :-- | :-- | :-- | :-- |
 | `verify-combo-live.mjs` | Fetch-only gate for every page and form. Checks: 200 for a browser and for AdsBot with `?gclid`, noindex, not in the sitemap, the right form on landing and consultation, no form and a `tel:` link on thank-you, the landing page links to its consultation page, no `ad`-named classes, tags present, the phone in a DNI-swappable format, and each form's redirect. | `--combo c.json [--origin url]` | bk-dr-nahlah `workflows/22-instatic-api-sync/verify-ads-live.mjs`, generalized and extended |
-| `check-ghl-form.mjs` | Reads a GHL form's public settings. Fails if save-and-exit is on, or (with `--combo`) if the form does not redirect to its campaign's thank-you page. | `<formId>...` or `--combo c.json` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs`, plus the redirect check |
+| `tools/termly-ghl-consent/gates/check-ghl-form.mjs` | Reads a GHL form's public settings. Fails if save-and-exit is on, if it has fewer than 11 consent fields, or (with `--combo`) if the form does not redirect to its campaign's thank-you page. | `<formId>...` or `--combo c.json` | bk-ifa-dentistry `workflows/21-instatic-upload/check-ghl-form.mjs`, plus the redirect check; one gate since 2026-09-28 |
 | `verify-form.mjs` | Rendered form check. Exactly one iframe with the right id, form and loader requests return 200, no CSP blocks, width at least 90% of its card, not clipped by any ancestor. Thank-you pages must have no form. | `--combo c.json [--origin url] [--widths 1440,390] [--wait ms]` | bk-mason-park `workflows/10-lp-instatic/output/verify-form.mjs` merged with `09-static-rebuild/output/probe-ad-form-box.mjs` |
 | `probe-adblock.mjs` | Uses CDP to ask Chrome which foreign `!important` hiding rules hit an element (ad-blocker cosmetic lists). | `<url>...` or `--combo c.json` | bk-mason-park `workflows/09-static-rebuild/output/probe-adblock.mjs`, ported off playwright-core |
 | `check-conversion.mjs` | Lists the GTM, Google Ads and GA4 ids reaching each thank-you page, and whether the path is named in the GTM container. | `--combo c.json` | new, 2026-09-23 |
-| `dni-proof.mjs` | Proves the GHL number pool actually swaps the number, walking the pages as one visitor. `--relay` routes the pool's calls through Node, which works around NordVPN; `--accept` clicks through Termly. | `[--relay\|--accept] <url>...` or `--combo c.json` | bk-dr-nahlah `workflows/22-instatic-api-sync/dni-proof.mjs` |
+| `tools/termly-ghl-consent/gates/dni-proof.mjs` | Proves the GHL number pool actually swaps the number, walking the pages as one visitor. `--relay` routes the pool's calls through Node, which works around NordVPN; `--accept` clicks through Termly. | `[--relay\|--accept] <url>...` or `--combo c.json` | bk-dr-nahlah `workflows/22-instatic-api-sync/dni-proof.mjs` |
 | `check-pool-scope.mjs` | Checks every sitemap URL and every combo page: each carries exactly the pools the manifest globs give it, no pool is consent-held unexpectedly, and the CSP allows the pool's calls. | `--combo c.json [--origin url]` | bk-dr-nahlah `workflows/22-instatic-api-sync/check-pool-scope.mjs` |
 | `grab-page-images.mjs` | Downloads every image on a set of pages, one folder per page, with a manifest per page and a README for the set. | `--out dir [--title T] <url>[=Title]...` | bk-arvada `workflows/07-webflow-build/output/grab-page-images.mjs` |
 | `lib/combo.mjs` | Shared helpers: loads the manifest, lists the URLs, fetches with a browser UA, and reads GHL forms. | imported | new |
