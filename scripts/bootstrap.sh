@@ -62,6 +62,9 @@ if [[ -z "$DRY_RUN" ]]; then
   echo "--- Installing git hooks ---"
   git config core.hooksPath "$ROOT/scripts/hooks"
   echo "core.hooksPath -> $(git config --get core.hooksPath)"
+  # Every merge into main makes a merge commit, so pre-merge-commit sees it: a client branch that has
+  # just merged main would otherwise fast-forward main past the hook.
+  git config branch.main.mergeoptions --no-ff
 fi
 [[ "$HOOKS_ONLY" == true ]] && exit 0
 

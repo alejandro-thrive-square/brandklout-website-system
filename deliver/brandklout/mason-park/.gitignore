@@ -1,5 +1,0 @@
-# Raw rendered DOM dumps from capture.mjs — ~4MB of minified WordPress markup
-# across the captures, which is neither lightweight nor useful for review. The
-# extracted copy lives in rendered.txt and meta.json (both committed), and the
-# conclusions in content-intake-summary.md. Re-create with capture.mjs.
-workflows/01-content-intake/.tmp/**/rendered.html

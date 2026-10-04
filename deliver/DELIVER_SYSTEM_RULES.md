@@ -83,17 +83,24 @@ board draws this).
   `git merge process-<topic>` from the main checkout) so neither of you commits the other's edits.
   If you edit a mirror file anyway, `sync` refuses to overwrite it and names it (exit 3) until it is
   ported to main or discarded with `--force`: the edit exists nowhere else.
-- **A client branch changes only its own folder, and merging is two-way and never destructive.**
-  The branch is the client's history: never rebase, squash or reset it. Because a client branch
-  touches only `deliver/brandklout/<client>/` and main touches everything else, the two never edit
-  the same file, so both merges are clean:
+- **A client lives on its own branch for good; it never merges into main.** The branch
+  (`bk-<client>`) is the client's whole history: never rebase, squash or reset it, and never merge
+  it into main. Its outputs live in git on that branch and its media in R2; a merge into main
+  carried only the git half, so main looked broken and gained nothing (decided 2026-10-03).
   - **Main into the client** (`git merge main` in the client worktree) at the start of a session:
-    the rules, `scripts/` and hooks arrive. The process itself arrives through `sync`.
-  - **The client into main** (`git merge --no-ff bk-<client>` from the main checkout) at the end of
-    a task, not only at launch: its outputs, runbooks and full commit history land on main.
-  `node scripts/check-scope.mjs` checks both directions; the `pre-commit` and `pre-merge-commit`
-  hooks enforce it on main. Media never travels by merge: it is untracked and lives in R2
-  (`scripts/assets.mjs`).
+    the rules, `scripts/` and hooks arrive. It cannot conflict, because a client branch touches only
+    `deliver/brandklout/<client>/` and main touches everything else. The process itself arrives
+    through `sync`.
+  - **Reading a client from main:** `node scripts/client.mjs list | log | runbook | ls | show | where`
+    reads the branch directly, without a checkout or a merge. Media: open the client's worktree, or
+    `node scripts/assets.mjs pull <client>`.
+  - **What reaches main from a client run** is process: a directive, script or toolkit fix, or a
+    Gotcha that would bite another site, committed as system work (see the rule above).
+  `node scripts/check-scope.mjs` keeps a commit to one kind; on main, `pre-commit` allows system
+  files only and `pre-merge-commit` refuses any merge that brings client files
+  (`branch.main.mergeoptions=--no-ff`, set by `scripts/bootstrap.sh`, stops a fast-forward from
+  skipping it). Client folders already on main are snapshots of the day they were merged; the
+  branch is always the current record.
 - **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
 - **Computer use goes through Codex.** Any task that needs a website or desktop app with no

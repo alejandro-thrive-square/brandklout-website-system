@@ -53,7 +53,8 @@ for SEED in "$(basename "$HERE")" "${BRANCH##*/}"; do
   while [[ -n "$CANDIDATE" && ${#SCOPES[@]} -eq 0 ]]; do
     while IFS= read -r d; do
       SCOPES+=("${d%/}")
-    done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+    # The new HEAD's own tree: main tracks no client folders since 2026-10-03.
+    done < <(git ls-tree -d --name-only HEAD deliver/brandklout/ 2>/dev/null | grep "^deliver/brandklout/$CANDIDATE" | sed 's|$|/|')
     [[ ${#SCOPES[@]} -gt 0 ]] && break
     # Drop the last -segment; stop once nothing is left to trim.
     [[ "$CANDIDATE" == *-* ]] || break

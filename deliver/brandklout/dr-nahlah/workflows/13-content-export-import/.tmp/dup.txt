@@ -1,5 +1,0 @@
-Deep-clone an existing page (every node, prop, class assignment, breakpoint override) under a new title/slug. Node ids are regenerated; class assignments preserved. Success data includes the new id as `pageId`.
-
-Requires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.
-PROPS: {"pageId": {"minLength": 1, "type": "string"}, "title": {"minLength": 1, "type": "string"}, "slug": {"type": "string"}}
-REQ: ['pageId', 'title']

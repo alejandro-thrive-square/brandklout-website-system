@@ -36,13 +36,14 @@ The usual pattern here is several Orca tabs in a *single* worktree running diffe
 the same task. That is the right shape when agents are racing the *same* problem. This is the
 opposite shape: six independent clients, each editing its own folder, all at once. Separate
 worktrees mean agents cannot collide on each other's files, and each client's work lands on its own
-branch and can be reviewed and merged independently.
+branch, which stays its permanent history (it never merges into main; review it with
+`node scripts/client.mjs`).
 
 ### What belongs where
 
 | Layer | Does | Does not |
 | :--- | :--- | :--- |
-| **Main (orchestration)** | Asana pulls, dispatch decisions, cross-client archetypes, access files, merging client branches | Build pages, edit a single client's deliverables |
+| **Main (orchestration)** | Asana pulls, dispatch decisions, cross-client archetypes, access files, reviewing client branches (`scripts/client.mjs`) | Build pages, edit a single client's deliverables |
 | **Client worktree** | Everything for that one client: intake, captures, design, QA | Touch another client's folder, write to Asana, publish to Webflow |
 
 A client worktree that needs something cross-cutting — a new shared archetype, a platform grant, a
@@ -209,7 +210,7 @@ scores alone are not progress measures.
 
 ## Version Control
 
-One branch per client worktree, merged back to `main` after review. Documentation and lightweight
+One branch per client worktree, kept as the client's history and never merged into `main`. Documentation and lightweight
 `output/` artifacts only — never secrets or binary/media assets. Follows the root-level rules in
 [SYSTEM_RULES.md](../../SYSTEM_RULES.md).
 

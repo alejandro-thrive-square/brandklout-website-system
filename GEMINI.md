@@ -3,7 +3,7 @@
 Welcome, agent. You are operating within the **Brandklout Website System**. To perform your tasks effectively, you must adhere to the core architectural rules and the Deliver directives.
 
 > [!IMPORTANT]
-> **Main is for the system; client worktrees are for the sites.** A client branch changes only `deliver/brandklout/<client>/`, merges main in at the start of a session and merges into main (`--no-ff`) at the end of a task, so its outputs, runbooks and history reach main without conflicts; a system update changes everything except client folders and reaches clients through `scenario.mjs sync`. **`deliver/process/` is tracked on main only**: a client worktree reads it through an untracked mirror rebuilt from the `main` ref, so a process fix made anywhere else is lost — make it on main. `node scripts/check-scope.mjs` enforces this (and the `pre-commit` / `pre-merge-commit` hooks on main).
+> **Main is for the system; client worktrees are for the sites.** A client branch changes only `deliver/brandklout/<client>/` and is that client's permanent history: it merges main in at the start of a session (system files only, so it cannot conflict) and **never merges into main** — read it from main with `node scripts/client.mjs`; a system update changes everything except client folders and reaches clients through `scenario.mjs sync`. **`deliver/process/` is tracked on main only**: a client worktree reads it through an untracked mirror rebuilt from the `main` ref, so a process fix made anywhere else is lost — make it on main. `node scripts/check-scope.mjs` enforces this (and the `pre-commit` / `pre-merge-commit` hooks on main).
 
 > [!IMPORTANT]
 > **This repository is the Brandklout delivery system, and nothing else.** It carries the Deliver
@@ -24,7 +24,7 @@ Welcome, agent. You are operating within the **Brandklout Website System**. To p
 ## Quick Links
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
 - **Runbooks**: [SYSTEM_RULES.md §5](./SYSTEM_RULES.md) - per step in `<scenario>/<step>/output/RUNBOOK.md`, indexed in the client's `RUNBOOK.md`; read the index, not the history
-- **Client runbooks on `main` are as fresh as the client's last merge into main.** Each client's runbook is written on its own branch and reaches main when the branch is merged at the end of a task (since 2026-10-03; before that `main` held a 2026-09-09 snapshot). If a branch has unmerged commits, it is the newer one.
+- **Clients are read from their branches, not from `main`.** Client folders on `main` are old snapshots (from 2026-09-09, or the day a branch was last merged); the branch is the current record. `node scripts/client.mjs runbook <client>` (also `log`, `ls`, `show`, `where`, `list`) reads it without a checkout or merge.
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh` (git only)

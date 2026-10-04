@@ -1,7 +1,0 @@
-css      2788 rules, 1833 selectors (0 unreadable, kept as written)
-registry 2176 rules: {"verbatim":696,"type":304,"layout":765,"state":411}; 7 conditions; breakpoints 1279/991/767/479
-elements 7708 carry a new class; 304 type classes, 765 layout classes
-hooks    170 original classes kept for the scripts and kept selectors
-checks   2010 state declarations always outranked (dropped), 911 partly outranked, 210 breakpoint-before-condition, 0 condition-order conflicts
-max-width blocks by width: {"479":453,"767":371,"991":202,"1279":39}
-type     433 font-size cascades re-based to rem per breakpoint; 3 left as written: .reference-site .cs-home-trio .cs-written-label: set above a width only | .reference-site .cs-home-trio .cs-written-result strong: set above a width only, vw frozen at its widest width | .reference-site .cs-home-trio .cs-written-result span: set above a width only
