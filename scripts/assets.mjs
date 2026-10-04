@@ -176,7 +176,9 @@ function readManifest (checkout, client) {
   const f = manifestPath(checkout, client)
   const m = new Map()
   if (!fs.existsSync(f)) return m
-  for (const line of fs.readFileSync(f, 'utf8').split('\n')) {
+  // CRLF too: with core.autocrlf a manifest that arrives by merge or checkout is CRLF on disk, and a
+  // trailing \r on every path made status report 0 in R2 and pull write to the wrong names.
+  for (const line of fs.readFileSync(f, 'utf8').split(/\r?\n/)) {
     if (!line || line.startsWith('#')) continue
     const [sha256, size, ...rest] = line.split('\t')
     m.set(rest.join('\t'), { sha256, size: Number(size) })
