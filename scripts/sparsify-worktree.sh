@@ -105,7 +105,8 @@ for seed in "${SEEDS[@]}"; do
   while [[ -n "$CANDIDATE" ]]; do
     while IFS= read -r d; do
       MATCHES+=("${d%/}")
-    done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+    # This branch's own tree, not main's checkout: main tracks no client folders since 2026-10-03.
+    done < <(git ls-tree -d --name-only HEAD deliver/brandklout/ 2>/dev/null | grep "^deliver/brandklout/$CANDIDATE" | sed 's|$|/|')
     [[ ${#MATCHES[@]} -gt 0 ]] && break
     [[ "$CANDIDATE" == *-* ]] || break
     CANDIDATE="${CANDIDATE%-*}"
@@ -161,7 +162,7 @@ echo ""
 if [[ -z "$CLIENT_DIR" ]]; then
   echo "No client folder matched '$(basename "$HERE")' or '$BRANCH' — kept the shared context only."
   echo "Add the one you want (nothing was lost — the index still holds them all):"
-  (cd "$MAIN" && ls -d deliver/*/*/ 2>/dev/null | sed 's|/$||' | sed 's/^/  git sparse-checkout add /')
+  git ls-tree -d --name-only HEAD deliver/brandklout/ | sed 's/^/  git sparse-checkout add /'
 fi
 
 # Sparse-checkout only removes TRACKED files. Heavy assets seeded by

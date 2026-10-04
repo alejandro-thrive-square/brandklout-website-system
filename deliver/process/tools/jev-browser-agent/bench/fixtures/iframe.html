@@ -1,0 +1,11 @@
+<!doctype html><meta charset="utf-8"><title>Widget editor</title>
+<script src="common.js"></script>
+<style>
+  body{margin:0;font:15px system-ui}
+  header{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;border-bottom:1px solid #ddd}
+  iframe{border:0;width:100%;height:680px}
+</style>
+<header><strong>Google Reviews · Editor</strong>
+  <button onclick="report('iframe','close')">Close</button></header>
+<!-- localhost:8802 is a different site from 127.0.0.1:8801, so Chrome runs it out of process (OOPIF), like Elfsight. -->
+<iframe src="http://localhost:8802/editor-frame.html?task=iframe"></iframe>

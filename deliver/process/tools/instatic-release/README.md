@@ -31,7 +31,7 @@ the sectioned `~/.webzite/.env` like `instatic-embeds/rollout-site-scripts.mjs`)
 
 ## Conventions
 
-- Run from the scenario 5 step folder in main so outputs land in its `output/instatic-release/` (gitignored). The inventory
+- Run from the scenario 5 step folder in main so outputs land in its `output/instatic-release/` (gitignored). Inventory snapshots are not kept: run `node inventory.mjs` when you need the current state. The inventory
   can run anywhere.
 - Railway token: `~/.railway/config.json` `user.accessToken` only. `user.token` is null and the shared
   `RAILWAY_TOKEN` is rejected. Never printed.

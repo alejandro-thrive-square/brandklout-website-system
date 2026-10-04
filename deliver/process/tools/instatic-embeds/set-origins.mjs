@@ -15,7 +15,7 @@
  * so the `publish.html` filter sees the new values immediately. The pages
  * already published keep their old CSP until the site is republished.
  */
-import { api } from './lib/insta-api.mjs'
+import { api } from '../instatic-api-sync/insta-api.mjs'
 
 const ID = 'brandklout.embed-origins'
 const FLAGS = {
