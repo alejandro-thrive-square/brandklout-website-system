@@ -1,9 +1,5 @@
 {
   "mcpServers": {
-    "webflow": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
     "webflow-brandklout": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"

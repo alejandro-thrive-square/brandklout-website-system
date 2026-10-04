@@ -4,8 +4,8 @@
  * Read termly-ghl-consent.md first.
  *
  *   node consent-kit.mjs minify                                   # kit/ghl-consent-bridge.min.js (Webflow, <= 2000 chars)
- *   node consent-kit.mjs snippet [--disclosure YYYY-MM-DD]        # a paste-able footer block, to stdout
- *   node consent-kit.mjs merge-footer <current.html> <out.html>   # current footer code + the block, idempotent
+ *   node consent-kit.mjs snippet [--disclosure YYYY-MM-DD]        # a paste-able block for the site-wide HEADER
+ *                                                                 # of a platform with no API, to stdout
  *   node consent-kit.mjs instatic status  [--only a,b]            # read-only, every Instatic site
  *   node consent-kit.mjs instatic apply   [--only a,b] [--apply]  # write BOTH script assets (draft only)
  *   node consent-kit.mjs instatic termly  [--only a,b] [--apply]  # phase 2: Termly head script + origins
@@ -13,7 +13,7 @@
  *   node consent-kit.mjs check <url>[,<url>...] [--termly-proxy]  # headless: bridge live? forms carry values?
  *
  * Instatic sites are every section of ~/.webzite/.env with an INSTATIC_BASE_URL. Each runs in a child
- * process, because insta-api.mjs resolves its site once at import.
+ * process, because insta-api.mjs (tools/instatic-api-sync) resolves its site once at import.
  *
  * Run with output redirected to a file, not piped: Node on Windows can die on a libuv assertion when
  * stdout is a pipe.
@@ -30,7 +30,7 @@ const BRIDGE_FILE = join(HERE, 'kit', 'ghl-consent-bridge.js')
 const MIN_FILE = join(HERE, 'kit', 'ghl-consent-bridge.min.js')
 // Webflow's registered inline scripts are capped at 2000 characters.
 const WEBFLOW_LIMIT = 2000
-const INSTA_API = join(HERE, '..', 'instatic-embeds', 'lib', 'insta-api.mjs')
+const INSTA_API = join(HERE, '..', 'instatic-api-sync', 'insta-api.mjs')
 const ASSET_PATH = 'src/scripts/brandklout-consent-bridge.js'
 const PREFS_FILE = join(HERE, 'kit', 'consent-preferences.js')
 const PREFS_PATH = 'src/scripts/brandklout-consent-preferences.js'
@@ -49,8 +49,6 @@ const termlyFor = (clientFolder) =>
   JSON.parse(readFileSync(REGISTRY, 'utf8')).find((r) => r.clientFolder === clientFolder) ?? null
 const BEGIN = '<!-- BEGIN brandklout-consent-bridge -->'
 const END = '<!-- END brandklout-consent-bridge -->'
-// Footer blocks pasted before the markers existed (v1.x, v2.0.0): the header comment through its </script>.
-const LEGACY = /<!-- Brandklout: Termly -> GoHighLevel consent bridge \(v[\d.]+\)[\s\S]*?<\/script>\s*/
 
 const argv = process.argv.slice(2)
 const flag = (name) => argv.includes(name)
@@ -101,15 +99,6 @@ function snippet() {
     ? `<script>window.BrandkloutConsentConfig = { marketingDisclosureVersion: "${disclosure}" };</script>\n`
     : ''
   return `${BEGIN}\n${config}<script>\n${bridgeSource()}\n</script>\n${END}`
-}
-
-function mergeFooter(current) {
-  const block = snippet()
-  const a = current.indexOf(BEGIN)
-  const b = current.indexOf(END)
-  if (a !== -1 && b > a) return { how: 'replaced marked block', code: current.slice(0, a) + block + current.slice(b + END.length) }
-  if (LEGACY.test(current)) return { how: 'replaced legacy block', code: current.replace(LEGACY, block + '\n') }
-  return { how: 'appended', code: current.replace(/\s*$/, '') + '\n\n' + block + '\n' }
 }
 
 /* ── Instatic ─────────────────────────────────────────────────────────────── */
@@ -381,13 +370,7 @@ async function check() {
 const cmd = argv[0]
 if (cmd === 'minify') minify()
 else if (cmd === 'snippet') console.log(snippet())
-else if (cmd === 'merge-footer') {
-  const [, input, output] = argv
-  if (!input || !output) throw new Error('merge-footer <current.html> <out.html>')
-  const { how, code } = mergeFooter(readFileSync(input, 'utf8'))
-  writeFileSync(output, code)
-  console.log(`${how}; ${code.length} chars -> ${output}`)
-} else if (cmd === 'instatic' && flag('--worker')) {
+else if (cmd === 'instatic' && flag('--worker')) {
   if (['apply', 'termly'].includes(argv[1]) && flag('--apply')) {
     const { publishStatus } = await import(pathToFileURL(INSTA_API).href)
     // Remember whether the draft was clean before our first write, so `publish` never ships someone else's edits.

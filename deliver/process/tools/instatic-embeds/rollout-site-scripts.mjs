@@ -15,32 +15,29 @@
  * environment: `insta-api.mjs` resolves `BASE` once at import, so one process
  * can only ever talk to one site.
  *
- * `apply` upgrades the plugin where the installed version is older than the one in
- * `../instatic-plugins/embed-origins/plugin.json`, installs it where it is missing and refuses a
- * site that is newer, then merges
- * the URL into `siteScripts` without touching any other setting. It publishes
- * nothing. `publish` is separate because a publish bakes EVERY page, and
+ * `apply` merges the URL into `siteScripts` without touching any other setting. It
+ * installs NOTHING: a site whose embed-origins is missing or not the released version
+ * in `../instatic-plugins/plugins.json` is refused, and the plugin is brought there with
+ * `node ../instatic-plugins/plugins.mjs rollout --plugin embed-origins` (registry grants, staging
+ * first, backup).
+ * It publishes nothing. `publish` is separate because a publish bakes EVERY page, and
  * `status` shows the draft state first so unrelated drift is seen before it
  * ships.
  *
  * Run with output redirected to a file, not piped: Node on Windows can die on
  * a libuv assertion when stdout is a pipe.
  */
-import { readFileSync, existsSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
-import { basename, dirname, join } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readMaster } from '../instatic-plugins/lib/fleet.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const ID = 'brandklout.embed-origins'
-const GRANT = ['cms.hooks', 'modules.register', 'frontend.assets']
-// The plugin source and its packages live in ../instatic-plugins since 2026-09-23 (one home for
-// every plugin). For a plugin upgrade on its own, use ../instatic-plugins/plugins.mjs rollout.
-const PLUGINS = join(HERE, '..', 'instatic-plugins')
-const WANT_VERSION = JSON.parse(readFileSync(join(PLUGINS, 'embed-origins', 'plugin.json'), 'utf8')).version
-const ZIP = join(PLUGINS, 'output', 'packages', `${ID}-${WANT_VERSION}.zip`)
-const newer = (a, b) => { const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number); for (let i = 0; i < 3; i++) if ((x[i] || 0) !== (y[i] || 0)) return (x[i] || 0) > (y[i] || 0); return false }
+// The plugin is installed by ../instatic-plugins/plugins.mjs rollout, never here; this script
+// only refuses a site that is not on the released version.
+const WANT_VERSION = JSON.parse(readFileSync(join(HERE, '..', 'instatic-plugins', 'plugins.json'), 'utf8')).plugins[ID].version
 
 const cmd = process.argv[2]
 const APPLY = process.argv.includes('--apply')
@@ -58,9 +55,6 @@ async function parent() {
   const sites = readMaster().filter((s) => !only || only.includes(s.name))
   if (cmd === 'apply' && !argOf('--url')) throw new Error('apply needs --url <script>')
   if (cmd === 'verify' && !argOf('--url')) throw new Error('verify needs --url <script>')
-  if (cmd === 'apply' && !existsSync(ZIP)) {
-    throw new Error(`no package at ${ZIP} — run: node ../instatic-plugins/plugins.mjs pack --plugin embed-origins`)
-  }
   let failed = 0
   for (const site of sites) {
     console.log(`\n== ${site.name}  ${site.env.INSTATIC_BASE_URL}`)
@@ -77,7 +71,7 @@ async function parent() {
 /* ── worker: one site ────────────────────────────────────────────────────── */
 
 async function worker() {
-  const { api, requestForm, publish, publishStatus, getPages, BASE } = await import('./lib/insta-api.mjs')
+  const { api, publish, publishStatus, getPages, BASE } = await import('../instatic-api-sync/insta-api.mjs')
   const url = argOf('--url')
 
   const findPlugin = async () =>
@@ -94,40 +88,15 @@ async function worker() {
   }
 
   if (cmd === 'apply') {
-    let p = await findPlugin()
-    const before = p ? await readSettings() : {}
-    // Never downgrade: a site ahead of the source (Dr. Nahlah ran 1.8.0 while this folder said 1.7.0)
-    // would lose features live. Bring the newer source into ../instatic-plugins first.
-    if (p && newer(p.version, WANT_VERSION)) throw new Error(`refused: installed v${p.version} is newer than the source v${WANT_VERSION}`)
-    if (!p || p.version !== WANT_VERSION) {
-      console.log(`  plugin   ${p ? `v${p.version}` : 'missing'} -> v${WANT_VERSION}${APPLY ? '' : '  (dry run)'}`)
-      if (APPLY) {
-        const bytes = readFileSync(ZIP)
-        const form = () => {
-          const f = new FormData()
-          f.append('file', new Blob([bytes], { type: 'application/zip' }), basename(ZIP))
-          f.append('grantedPermissions', JSON.stringify(GRANT))
-          return f
-        }
-        const inspected = await requestForm('/admin/api/cms/plugins/inspect-package', form())
-        const m = inspected.manifest ?? inspected.plugin ?? inspected
-        const extra = (m.permissions ?? []).filter((x) => !GRANT.includes(x))
-        if (m.id !== ID || extra.length) throw new Error(`refused: ${m.id} asks for ${extra.join(', ')}`)
-        await requestForm('/admin/api/cms/plugins/package', form())
-        p = await findPlugin()
-        if (!p || p.version !== WANT_VERSION || p.lifecycleStatus !== 'active' || !p.enabled) {
-          throw new Error(`after install: ${JSON.stringify(p && { v: p.version, s: p.lifecycleStatus, e: p.enabled })}`)
-        }
-      }
-    } else {
-      console.log(`  plugin   v${p.version} already current`)
+    const p = await findPlugin()
+    if (!p || p.version !== WANT_VERSION || p.lifecycleStatus !== 'active' || !p.enabled) {
+      throw new Error(`refused: embed-origins is ${p ? `v${p.version} ${p.lifecycleStatus} enabled=${p.enabled}` : 'not installed'}, ` +
+        `the release is v${WANT_VERSION}. Run first: node ../instatic-plugins/plugins.mjs rollout --plugin embed-origins --sites <site> --env staging, then production`)
     }
+    console.log(`  plugin   v${p.version} (released)`)
     if (!APPLY) { console.log(`  would set siteScripts to include ${url}`); return }
 
     const now = await readSettings()
-    // An upgrade must not have reset what the site already had configured.
-    const lost = Object.keys(before).filter((k) => JSON.stringify(before[k]) !== JSON.stringify(now[k]))
-    if (lost.length) throw new Error(`upgrade changed settings: ${lost.join(', ')}`)
     const lines = String(now.siteScripts ?? '').split(/\s+/).filter(Boolean)
     if (!lines.includes(url)) lines.push(url)
     const next = { ...now, siteScripts: lines.join('\n') }
