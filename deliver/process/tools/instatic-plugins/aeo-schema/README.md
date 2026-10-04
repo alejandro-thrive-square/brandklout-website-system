@@ -54,8 +54,8 @@ shared because a plugin package is a unit of install.
 1. **`slug` does not identify an article.** For an entry page the pipeline
    passes the merged template's slug, so all 43 articles arrive as
    `slug: "post"`. The document title is the row's, so the resolver matches slug
-   first and falls back to title. `verify-seo-plugins.mjs` asserts the resulting
-   `@id`s are distinct across all 79 URLs.
+   first and falls back to title. The live head gate (`seo-head-check.mjs`) asserts the resulting
+   `@id`s are distinct across every published URL.
 2. **The filter must be synchronous.** It runs inside the QuickJS worker via an
    RPC round-trip; everything it needs is loaded into an in-memory mirror on
    `publish.before` (which the pipeline awaits) behind a 10-second floor.
@@ -144,21 +144,20 @@ that parses at write time cannot fail to parse at publish time.
 ## Install
 
 ```bash
-cd deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins
-node pack-plugin.mjs aeo-schema output/aeo-schema.zip
-node install-plugin.mjs output/aeo-schema.zip            # dry run — shows the grants
-node install-plugin.mjs output/aeo-schema.zip --apply
-node configure-seo-plugins.mjs --apply                 # the Dr Nahlah values
+cd deliver/process/tools/instatic-plugins
+node install-plugin.mjs aeo-schema            # dry run: packs from source, shows the grants
+node install-plugin.mjs aeo-schema --apply    # one site; plugins.mjs rollout for several
 ```
 
-Then publish.
+Then configure it (each client keeps its own idempotent configure script in its own folder;
+Dr. Nahlah's is `configure-seo-plugins.mjs`) and publish.
 
 ## Test and verify
 
 ```bash
-node test-aeo-schema.mjs           # 83 assertions, off-platform
-node test-aeo-schema.mjs --live    # + the filter over the real published pages
-node verify-seo-plugins.mjs        # the LIVE gate: every published URL
+node test-aeo-schema.mjs           # 92 assertions, off-platform
+node test-aeo-schema.mjs --live    # + the filter over the real published pages (needs INSTATIC_BASE_URL)
+node ../../instatic-site/gates/seo-head-check.mjs   # the LIVE gate: every published URL
 ```
 
 Every emitted graph in the tests is pulled back out of the script tag and

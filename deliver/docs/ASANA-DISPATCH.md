@@ -50,7 +50,8 @@ Brandklout before treating them as real work.
 ## Build platform
 
 New sites are built on **Instatic** (Scenario 0, `deliver/process/scenario-0-new-site/`). Sites that
-are already live on **Webflow** stay there and get updates through Scenario 2. GoHighLevel appears only
+are already live on **Webflow** stay there and get updates through Scenario 6
+(`deliver/process/scenario-6-webflow-sites/`); live Instatic sites through Scenario 2. GoHighLevel appears only
 as a *lead destination* (forms, tracking numbers), not as the page builder, so
 `sites.leadconnectorhq.com` references are structure references, not the platform.
 
@@ -60,9 +61,7 @@ shared Brandklout grant only against the exact site ID recorded in the client's 
 
 ## Commercial terms — no pricing on this batch
 
-Brandklout is a **partner engagement**, not a per-page client. PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository)
-does **not** apply to any client under `deliver/brandklout/`, and no agent should compute a price,
-a per-page rate, or a quote for this work.
+No prices, rates or quotes — the rule is in [DELIVER_SYSTEM_RULES.md §3](../DELIVER_SYSTEM_RULES.md).
 
 Scope and page count still matter — for **sequencing and capacity**, not cost. Twelve landing pages
 sharing one due date is a real scheduling problem worth surfacing to Brandklout; it is not a
@@ -77,13 +76,13 @@ Confirmed with the client 2026-08-05:
 > design.**
 
 So the reference is a **wireframe and a content brief**, not a visual target. The visual design is
-ours to author, and the bar is set by [DESIGN-STANDARD.md](./DESIGN-STANDARD.md): **awwwards-grade,
+ours to author, and the bar is set by [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md): **awwwards-grade,
 motion-led, high-interaction**, benchmarked against the Dr. Nahlah build. These are paid-traffic
 pages competing against the same handful of dental-PPC templates everyone else runs, so looking
 like the reference is a commercial failure, not a success.
 
 > [!IMPORTANT]
-> Read [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
+> Read [DESIGN-STANDARD.md](../process/scenario-0-new-site/03-design-build/DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
 > a plain templatised page on the first Grand Mission pass; the standard replaces the adjective
 > with a checklist.
 
@@ -116,8 +115,9 @@ built** when reporting back, so it can be opened and reviewed without hunting.
 
 Webflow build (`webflow-build`) comes after local approval. Brandklout uses one shared
 `webflow-brandklout` OAuth grant because the partner owns the workspace; isolation is enforced by
-the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The current build
-standard is pasteable section components, followed by surgical MCP edits and staging verification.
+the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The build follows
+[webflow-build.md](../process/tools/webflow-build/webflow-build.md) (the HTML paste converter was
+retired 2026-09-23), followed by surgical MCP edits and staging verification.
 
 ## Orchestration
 

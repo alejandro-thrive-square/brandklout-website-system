@@ -1,0 +1,40 @@
+<!doctype html><meta charset="utf-8"><title>Add source</title>
+<script src="common.js"></script>
+<style>
+  body{margin:30px;font:15px system-ui}input{width:380px;padding:8px}
+  .dd{width:396px;border:1px solid #ccc;border-top:0}
+  .row{padding:8px;cursor:pointer;border-bottom:1px solid #eee}
+  .echo{color:#555;font-style:italic}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+<h2>Add a Google Reviews source</h2>
+<input id="q" role="combobox" aria-controls="dd" placeholder="Business name or address">
+<div class="dd" id="dd" role="listbox"></div>
+<div class="sr" aria-live="polite" id="live"></div>
+<p id="out"></p>
+<script>
+  // Like Elfsight's source search: the first row echoes the query (clicking it resets the search),
+  // and a visually hidden live region repeats the results.
+  const PLACES = ['Livewell Dental, 900 Pine St, Denver, CO, USA', 'Livewell Dental, 12 Main St, Denver, CO, USA',
+    'Livewell Dental Lab, 12 Main St Suite B, Denver, CO, USA', 'Livewell Spa, 40 Main St, Boulder, CO, USA'];
+  const q = document.getElementById('q'), dd = document.getElementById('dd'), live = document.getElementById('live');
+  let timer;
+  q.oninput = () => { clearTimeout(timer); timer = setTimeout(render, 400); };
+  function render() {
+    dd.innerHTML = ''; live.textContent = '';
+    const v = q.value.trim(); if (v.length < 3) return;
+    const words = v.toLowerCase().split(/[\s,]+/).filter(Boolean);
+    const hits = PLACES.filter(p => words.some(w => p.toLowerCase().includes(w)));
+    const echo = document.createElement('div');
+    echo.className = 'row echo'; echo.setAttribute('role', 'option'); echo.textContent = 'Search for "' + v + '"';
+    echo.onclick = () => { report('echo', 'echo'); q.value = ''; dd.innerHTML = ''; };
+    dd.append(echo);
+    for (const p of hits) {
+      const r = document.createElement('div');
+      r.className = 'row'; r.setAttribute('role', 'option'); r.textContent = p;
+      r.onclick = () => { report('echo', 'connect', p); document.getElementById('out').textContent = 'Connected: ' + p; dd.innerHTML = ''; };
+      dd.append(r);
+    }
+    live.textContent = hits.length + ' results: ' + hits.join('; ');
+  }
+</script>
