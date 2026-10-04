@@ -90,5 +90,15 @@
 - Gotcha: the wrapper prints `limit reached: false` on stderr, so a shell grep for "limit reached"
   in its output false-positives. Grep the session.log `error`/`turn.failed` lines instead.
 
+## Update (2026-10-04): Mason Park Kids form on the standard
+- `pyYcEmfIvtv5LwB1s4X6` (location `ayfI5c9B3HDoNAubf1Sj`) now passes the gate (`--legal "Mason Park
+  Dental for Kids"`) and the rendered `site-style --compare`: existing kids Service field kept (user),
+  two consent boxes at 14px, captcha above Submit, kids-site links, Figtree + `#93644A` pill, 12px fields.
+- Luna stopped halfway on a whole-form brief; split into saved steps it worked except the Styles
+  panel. Styling = one Custom CSS block (sol); field radius = Styles-panel setting (sol).
+- GHL signed out twice mid-session; the user signed back in.
+- `site-style.mjs --compare` now renders the public form (Styles panel + custom CSS both count);
+  glass hero buttons and pill-button radius no longer leak into the suggested values.
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

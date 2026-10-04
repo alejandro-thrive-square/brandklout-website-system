@@ -204,6 +204,19 @@ For the owner to settle against the reference video, then fold into the standard
   Grand Mission model) — an owner decision, see open question 1.
 - **Check the whole public form, not a viewport.** Codex's verification screenshots stop at the
   links. Render the full height: `chrome --headless=new --window-size=900,2600 --screenshot=… <form url>`.
+- **One Codex run = one small, saved step.** `gpt-6-luna` (the cheap default) finishes a step of
+  one or two changes, but on a whole-form brief it stops halfway and saves nothing (kids form,
+  2026-10-04). Order: (1) fields/dropdown, (2) consent + captcha + links, (3) styling, each ending in
+  Save + a public-form check.
+- **Style with one pasted Custom CSS block, not the Styles-panel menus.** Luna's Styles-panel save did
+  not reach the public form and the panel's font menu lacked Figtree; one exact CSS block (Google
+  Fonts `@import`, `#_builder-form` labels/inputs/button/`.terms-text-container`/links), pasted by
+  `gpt-6.1-sol`, worked first time. Exception: **single-line field corner radius** comes from the
+  Styles panel's field radius setting — GHL's own field CSS outranks custom CSS there.
+- **`site-style.mjs --compare` measures the rendered public form** (fonts, button colour, field
+  radii, consent sizes), so CSS-styled forms are judged as visitors see them.
+- **GoHighLevel signs out mid-session** (`app.gohighlevel.com/?logout=true`, "Sign into your
+  account"). Codex never enters credentials: the user signs in, then the step reruns.
 - **Codex runs on the workspace's credits.** "Your workspace is out of credits" ends a run mid-edit;
   whatever was saved stays saved. Gate and `--compare` the form to see what landed.
 - **Tabs left by a failed run stay claimed** ("already claimed by another browser session"). Tell
@@ -228,6 +241,7 @@ For the owner to settle against the reference video, then fold into the standard
 | :--- | :--- | :--- |
 | Grand Mission | `HHUjLT7QwNmfVq4yjxw5` *Contact Form Website* | The model. Has the optional language dropdown. |
 | Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | **Site-form reference.** Standard 2026-10-03; styled + polished (Nunito Sans, 14px consent, grey underlined links, 16px gaps) the same night: gate ok, style ok. |
+| Mason Park Kids | `pyYcEmfIvtv5LwB1s4X6` *Contact form* (`masonparkpediatricdental.com/contacts`, location `ayfI5c9B3HDoNAubf1Sj`) | 2026-10-04: existing kids Service field kept (10 options), consent names **Mason Park Dental for Kids** (no legal entity, user's decision), captcha above Submit, kids-site links, Figtree + `#93644A` pill via Custom CSS. |
 | Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
 | Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
 
