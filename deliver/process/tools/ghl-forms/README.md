@@ -182,6 +182,11 @@ For the owner to settle against the reference video, then fold into the standard
 - **Landing-page forms are where the errors hide.** Contact pages get checked; campaign forms
   don't. Mason Park's Invisalign and New Patient Special forms had no consent element, no links and
   redirected to 404 thank-you routes while the contact form passed. Always gate every form on the site.
+- **Claude in Chrome cannot build GHL forms.** The builder is a cross-origin iframe (no `javascript_tool`
+  reach), elements are added only by drag-and-drop and a synthetic drag does not register; on a
+  758px-high laptop screen the *Customized* tiles (T & C, Text, Html) are cut off too. Use Codex; if
+  its Chrome plugin fails ("Unable to load browser request-header policy", often after a network
+  drop), restart the ChatGPT app and rerun.
 - **A Codex run that loses the browser saves nothing.** "Debugger unattached" or a dropped
   connection ends the run before *Save*; gate the form to confirm it is unchanged, then rerun.
 
