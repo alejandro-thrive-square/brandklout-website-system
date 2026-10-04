@@ -1,202 +1,0 @@
-
-=== shipping converter sources
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-763
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-8669
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-5864
-
-=== shipping import-input.json.gz (189012 b64 bytes)
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 1Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 2Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 3Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 4Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 5Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 6Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 7Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 8Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 9Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 10Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 11Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 12Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 13Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 14Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 15Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 16Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 17Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 18Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 19Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 20Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 21Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 22Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 23Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 24Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 25Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 26Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 27Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 28Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 29Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 30Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 31Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-  chunk 32
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-141759
-
-=== converting
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-{
- "normalisedPreludes": 64,
- "encodedDeclarations": 17,
- "cssRules": 1055,
- "registryRules": 1059,
- "byKind": {
-  "ambient": 408,
-  "class": 651
- },
- "withContexts": 203,
- "conditions": [
-  "media:screen and (max-width: 1920px)",
-  "media:screen and (max-width: 1440px)",
-  "media:screen and (max-width: 479px)",
-  "media:(max-width: 1279px)",
-  "media:(max-width: 991px)",
-  "media:(max-width: 767px)",
-  "media:(max-width: 478px)",
-  "media:(prefers-reduced-motion: reduce)",
-  "media:(min-width: 992px)",
-  "media:(max-width: 1199px)",
-  "media:(max-width: 991px), (prefers-reduced-motion: reduce)",
-  "media:(min-width: 1700px)",
-  "media:(max-width: 600px)",
-  "media:(min-width: 992px) and (max-height: 760px)",
-  "media:(min-width: 992px) and (max-width: 1279px)",
-  "media:(hover: none), (max-width: 767px)",
-  "media:(min-width: 2400px)"
- ],
- "cssWarnings": 81,
- "pages": [
-  {
-   "slug": "index",
-   "nodes": 784,
-   "roots": 2,
-   "autoCreatedClasses": 3,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "neck-lift",
-   "nodes": 494,
-   "roots": 2,
-   "autoCreatedClasses": 0,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "blepharoplasty",
-   "nodes": 478,
-   "roots": 2,
-   "autoCreatedClasses": 0,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "treatments",
-   "nodes": 710,
-   "roots": 2,
-   "autoCreatedClasses": 0,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "meet-the-doctor",
-   "nodes": 263,
-   "roots": 2,
-   "autoCreatedClasses": 2,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "about",
-   "nodes": 328,
-   "roots": 2,
-   "autoCreatedClasses": 1,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "team",
-   "nodes": 269,
-   "roots": 2,
-   "autoCreatedClasses": 1,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "memberships",
-   "nodes": 348,
-   "roots": 2,
-   "autoCreatedClasses": 1,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "results",
-   "nodes": 278,
-   "roots": 2,
-   "autoCreatedClasses": 1,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "book",
-   "nodes": 406,
-   "roots": 2,
-   "autoCreatedClasses": 1,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "myellevate-neck-lift",
-   "nodes": 505,
-   "roots": 2,
-   "autoCreatedClasses": 0,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  },
-  {
-   "slug": "face-and-neck-lift",
-   "nodes": 504,
-   "roots": 2,
-   "autoCreatedClasses": 0,
-   "strippedScripts": 2,
-   "strippedHandlers": 0,
-   "warnings": 0
-  }
- ]
-}
-
-=== retrieving import-out.json
-Using SSH key from file C:\Users\ACER\.ssh\id_ed25519.pub: pc@DESKTOP-SO4PMDQ
-1888976

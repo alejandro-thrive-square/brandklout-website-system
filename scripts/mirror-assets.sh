@@ -14,10 +14,10 @@ set -euo pipefail
 # The cost of that design is that `git merge bk-<client>` brings the markup into
 # main but not the images it references, so a design opened from main renders
 # with broken assets. All worktrees live on ONE machine and share one .git, so
-# closing that gap is a local file copy — no rclone, no VPS round trip.
+# closing that gap is a local file copy — no R2 round trip.
 #
-# This is deliberately NOT the rclone path. scripts/sync-assets.sh moves media
-# between local and the VPS; this moves media between worktrees on this machine.
+# This is deliberately NOT the backup path. scripts/assets.mjs backs client media
+# up to R2; this moves media between worktrees on this machine.
 #
 # Safety
 # ------

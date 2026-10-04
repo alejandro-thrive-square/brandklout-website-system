@@ -353,7 +353,7 @@ check('& in a URL is written as an entity',
   run({ siteScripts: 'https://x.com/a.js?a=1&b=2' }).includes('src="https://x.com/a.js?a=1&amp;b=2"'))
 
 // Consent tagging: a site script may be held by the cookie banner until the
-// visitor accepts its category (see 23-termly-ghl-consent).
+// visitor accepts its category (see tools/termly-ghl-consent).
 console.log('\nSite scripts: consent tagging\n')
 const GHL = 'https://backend.leadconnectorhq.com/appengine/js/user_session.js'
 const tagged = run({ siteScripts: GHL + '#consent=advertising' })

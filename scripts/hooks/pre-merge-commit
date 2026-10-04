@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# Webzite pre-merge-commit hook — a merge into main is ONE client's folder or system files, never both.
+# Webzite pre-merge-commit hook — a merge into main is system work only; client branches never merge in.
 #
-# A client worktree merges into main when its site launches; that merge may only add or change
-# deliver/brandklout/<client>/. System updates never land through a client merge.
+# Since 2026-10-03 a client's history stays on its own branch (bk-<client>) for good: merging it into
+# main split its outputs from its R2 media and gained nothing. Read a client from main with
+# `node scripts/client.mjs` instead. A short system branch (process-<topic>) still merges in.
 # See scripts/check-scope.mjs and deliver/DELIVER_SYSTEM_RULES.md §3.
 #
-# Fast-forward merges do not run this hook: merge client branches with `git merge --no-ff`.
+# A fast-forward would skip this hook, and right after main is merged into a client the client IS a
+# fast-forward of main. scripts/bootstrap.sh sets `branch.main.mergeoptions=--no-ff` so every merge into
+# main makes a merge commit and passes through here.
 # Bypass only with explicit approval: WEBZITE_SKIP_SCOPE=1 git merge ...
 
 set -uo pipefail
@@ -14,7 +17,7 @@ BRANCH="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
 [[ "$BRANCH" == "main" ]] || exit 0
 ROOT="$(git rev-parse --show-toplevel)"
 [[ -f "$ROOT/scripts/check-scope.mjs" ]] || exit 0
-node "$ROOT/scripts/check-scope.mjs" --merge || {
-  echo "pre-merge-commit: this merge mixes a client folder with system files (or several clients). Aborting." >&2
+node "$ROOT/scripts/check-scope.mjs" --merge --expect system || {
+  echo "pre-merge-commit: client branches do not merge into main; read them with scripts/client.mjs. Aborting." >&2
   exit 1
 }

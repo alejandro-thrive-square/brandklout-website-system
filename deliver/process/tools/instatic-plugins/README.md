@@ -64,7 +64,7 @@ All Node 18+, no install. Dry run unless `--apply`. On Windows redirect output t
 | `lib/fleet.mjs` | Registry loader and checks, master env reader, host resolver | imported | `readMaster()` moved from `rollout-site-scripts.mjs`, which imports it now |
 | `lib/install.mjs` | Inspect with no grants, check id, version, grants, downgrade and old id, install | imported | `bk-dr-nahlah` `16-instatic-plugins/install-plugin.mjs` |
 | `lib/pack.mjs` | `output/packages/<id>-<version>.zip` from source | imported | new |
-| `test-*.mjs`, `verify-link-editor.mjs` | Offline suites, no site | `node plugins.mjs test` | `bk-dr-nahlah` `16-instatic-plugins/` and `18-instatic-embeds/`. The aeo and og suites still matched the old `webzite.` markers after the 2026-09-10 rename; fixed here (the og one had been passing vacuously). |
+| `test-*.mjs`, `verify-link-editor.mjs` | Suites run by `plugins.mjs test` with no site. `test-open-graph` and `test-aeo-schema` also take `--live` (needs `INSTATIC_BASE_URL`); `verify-link-editor` needs the Instatic source checkout (`--host=<path>`) | `node plugins.mjs test` | `bk-dr-nahlah` `16-instatic-plugins/` and `18-instatic-embeds/`. The aeo and og suites still matched the old `webzite.` markers after the 2026-09-10 rename; fixed here (the og one had been passing vacuously). |
 
 ```bash
 cd deliver/process/tools/instatic-plugins
@@ -120,8 +120,14 @@ live `siteScripts` line carries a consent tag today.
 
 - **An old package installs the old id.** Anything packed before 2026-09-10 is `webzite.*`.
   `install-plugin.mjs` takes a plugin name, never a zip, and always rebuilds from source.
-- **The id is load-bearing; a rename is a migration** (settings, records with `on delete cascade`,
-  the module id in every page). `migrate-plugin-ids.mjs`, not an install.
+- **The id is load-bearing; a rename is a migration**, not an edit: the id keys the installed
+  record, `settings_json`, `plugin_records` (`on delete cascade`, so an uninstall takes the rows
+  with it) and the module id inside every page carrying an Embed block (the host forces
+  `<pluginId>.<name>`). The 2026-09-10 rename `webzite.*` -> `brandklout.*` used
+  [`../instatic-api-sync/migrate-plugin-ids.mjs`](../instatic-api-sync/migrate-plugin-ids.mjs):
+  `export` -> `swap --zips <dir> --apply` -> `publish --apply` -> `verify` -> `uninstall --apply`.
+  It exports first, imports into the new id, rewrites the embed nodes, then disables the old plugins
+  (rollback: they keep their rows until `uninstall`).
 - **Never install older than live.** Kids was briefly downgraded from open-graph 1.1.3 to 1.1.2 on
   2026-09-10, and Brandklout's embed-origins from 1.6.0 to 1.5.1 on 2026-09-15, because each ran the
   package from the worktree at hand. 1.7.0 over 1.8.0 would put both DNI pools on every Dr. Nahlah

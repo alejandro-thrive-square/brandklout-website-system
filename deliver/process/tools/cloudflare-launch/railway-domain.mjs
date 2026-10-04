@@ -5,7 +5,7 @@
  *
  * Origin: the sequence done by hand on bk-ifa-dentistry (2026-09-11 production, 2026-09-18 staging),
  * bk-stone and bk-stone-med-spa (2026-09-15 staging) and brandklout.ai (2026-09-22), recorded in
- * 21-instatic-staging-clone.md and the auto-memory notes. Written as a script 2026-09-23.
+ * tools/instatic-site/staging-clone/staging-clone.md and the auto-memory notes. Written as a script 2026-09-23.
  *
  *   node railway-domain.mjs --project <id> --environment <id> --service <id> --domain www.example.com --zone example.com
  *   ... --apply                          # create the Railway domain, the DNS records, wait, proxy

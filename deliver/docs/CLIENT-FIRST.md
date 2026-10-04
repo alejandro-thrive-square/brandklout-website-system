@@ -5200,7 +5200,7 @@ Before learning Client-First, it's essential to have a base understanding of the
 
 Dictionary
 
-The meaning of the terms used to explain the client-first.](/docs/dictionary)[Changelog
+The meaning of the terms used to explain the client-first.](https://finsweet.com/client-first/docs/dictionary)[Changelog
 
 New
 
