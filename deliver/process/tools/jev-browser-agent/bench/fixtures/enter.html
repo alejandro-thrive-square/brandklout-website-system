@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><title>Widget settings</title>
+<script src="common.js"></script>
+<style>body{margin:30px;font:15px system-ui}input{width:320px;padding:8px}</style>
+<h2>Widget settings</h2>
+<label>Widget name <input id="name" value="Untitled widget"></label>
+<p>Press Enter to save the name.</p>
+<p>Saved name: <strong id="saved">Untitled widget</strong></p>
+<script>
+  // Like Elfsight's rename field: only Enter commits; leaving the field throws the edit away.
+  const input = document.getElementById('name'), saved = document.getElementById('saved');
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') { saved.textContent = input.value; report('enter', 'saved', input.value); input.blur(); }
+  });
+  input.addEventListener('blur', () => { input.value = saved.textContent; });
+</script>

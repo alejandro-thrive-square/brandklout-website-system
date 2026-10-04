@@ -554,7 +554,8 @@ console.log('\nAEO Schema — graph construction\n')
 /* ── optional: the real published pages ───────────────────────────────── */
 
 if (process.argv.includes('--live')) {
-  const BASE = process.env.INSTATIC_BASE_URL || 'https://encorercm.com'
+  const BASE = (process.env.INSTATIC_BASE_URL || '').trim().replace(/\/+$/, '')
+  if (!BASE) { console.error('--live needs INSTATIC_BASE_URL (the site to read); there is no default host'); process.exit(2) }
   console.log(`\nthe filter over LIVE pages (${BASE})\n`)
   const h = await boot()
   for (const [path, slug] of [['/', 'index'], ['/about', 'about'], ['/posts/all-on-four-your-questions', 'post']]) {

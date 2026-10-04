@@ -35,15 +35,15 @@ that has library access.
 
 ## Access level
 
-Treat as a **global/agency** tool: it reads a third-party component library and touches no client
+Treat as a **global** tool: it reads a third-party component library and touches no client
 account, so it carries none of the per-principal isolation concerns that the Webflow instances do.
 It writes nothing anywhere.
 
 ## What it is for
 
 Pulling Relume library components/sections as a source of structure when building or converting
-pages. It complements, and does not replace, the local conversion pipeline
-(`webflow-clientfirst`).
+pages for the Webflow sites ([Scenario 6 · Webflow Sites](../../deliver/process/scenario-6-webflow-sites/README.md)). It complements, and does not replace,
+the `webflow-clientfirst` class-reuse server.
 
 > [!WARNING]
 > Relume output is a **starting structure**, not a deliverable. The house standard is the awwwards

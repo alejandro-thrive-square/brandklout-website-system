@@ -1,43 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One-command, both-ways sync between this local workspace and the VPS.
-# Run from the LOCAL machine (Git Bash on Windows) — only local has the rclone
-# "vps" remote, so asset sync is always local-initiated.
+# One-command, both-ways git sync between this local workspace and the VPS.
 #
-# Safe by design:
-#   - git: integrates remote work BEFORE pushing local work; never auto-clobbers.
-#   - assets: rclone bisync (merge both ways), never a destructive mirror.
+# Safe by design: integrates remote work BEFORE pushing local work; never auto-clobbers.
+# Media is not synced here — it is backed up to R2 with scripts/assets.mjs.
 #
 # Usage:
-#   bash scripts/sync.sh ["commit message"] [--dry-run] [--no-rclone] [--resync]
+#   bash scripts/sync.sh ["commit message"] [--dry-run]
 #                        [--on-divergence rebase|merge|abort] [--no-push]
 #
 #   "commit message"      Optional. Defaults to a timestamp message.
-#   --dry-run             Preview everything (git + asset bisync). No mutation.
-#   --no-rclone           Git half only; skip asset sync.
-#   --resync              First-ever bisync only — establish the baseline.
+#   --dry-run             Preview everything. No mutation.
 #   --on-divergence       What to do when both sides committed (default: abort).
 #                           abort  — stop and print recovery instructions.
 #                           rebase — replay local commits on top of remote.
 #                           merge  — create a merge commit preserving both.
-#   --no-push             Pull/reconcile + bisync, but do not push local commits.
+#   --no-push             Pull/reconcile, but do not push local commits.
 #
 # Companion: on the VPS, push git-tracked changes with scripts/vps-commit-push.sh.
 # See HERMES.md and SYSTEM_RULES.md §4.5 for the workspace authority/conflict policy.
 
 COMMIT_MSG=""
 DRY_RUN=""
-NO_RCLONE=false
-RESYNC=""
 ON_DIVERGENCE="abort"
 NO_PUSH=false
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --dry-run)       DRY_RUN="--dry-run"; shift ;;
-    --no-rclone)     NO_RCLONE=true; shift ;;
-    --resync)        RESYNC="--resync"; shift ;;
     --no-push)       NO_PUSH=true; shift ;;
     --on-divergence)
       ON_DIVERGENCE="${2:-}"; shift 2
@@ -48,7 +39,7 @@ while [[ $# -gt 0 ]]; do
       ;;
     --*)
       echo "Unknown flag: $1" >&2
-      echo "Usage: bash scripts/sync.sh [\"message\"] [--dry-run] [--no-rclone] [--resync] [--on-divergence rebase|merge|abort] [--no-push]" >&2
+      echo "Usage: bash scripts/sync.sh [\"message\"] [--dry-run] [--on-divergence rebase|merge|abort] [--no-push]" >&2
       exit 1
       ;;
     *)
@@ -68,19 +59,7 @@ if [[ -z "$BRANCH" ]]; then
   exit 1
 fi
 
-# Detect whether the local rclone "vps" remote is available.
-RCLONE_OK=true
-if ! command -v rclone >/dev/null 2>&1; then
-  RCLONE_OK=false
-elif ! rclone listremotes 2>/dev/null | grep -q '^vps:'; then
-  RCLONE_OK=false
-fi
-
-echo "=== Webzite sync — branch '$BRANCH' ${DRY_RUN:+(dry run)} ==="
-if [[ "$RCLONE_OK" == false && "$NO_RCLONE" == false ]]; then
-  echo "NOTE: rclone remote 'vps' not available here — running git half only."
-  echo "      (Assets are synced from local, where the 'vps' remote is configured.)"
-fi
+echo "=== Sync — branch '$BRANCH' ${DRY_RUN:+(dry run)} ==="
 
 # ── 1. Fetch + classify git state ─────────────────────────────────────────────
 echo ""
@@ -208,31 +187,13 @@ else
   fi
 fi
 
-# ── 4. Assets: bisync (safe merge, both ways) ──────────────────────────────────
+# ── 4. Assets ──────────────────────────────────────────────────────────────────
+# Media is not synced here. It is gitignored and backed up to Cloudflare R2:
+#   node scripts/assets.mjs push            (after a task that made media)
+#   node scripts/assets.mjs pull <client>   (restore a client on this machine)
 echo ""
-echo "--- [4/4] Asset sync (bisync) ---"
-if [[ "$NO_RCLONE" == true ]]; then
-  echo "Skipped (--no-rclone)."
-elif [[ "$RCLONE_OK" == false ]]; then
-  echo "Skipped — rclone remote 'vps' not configured on this machine."
-else
-  # First-ever bisync needs --resync to establish a baseline. Detect a missing
-  # bisync cache and refuse to auto-resync (resync silently picks a winner).
-  BISYNC_CACHE=""
-  if [[ -n "${LOCALAPPDATA:-}" && -d "$LOCALAPPDATA/rclone/bisync" ]]; then
-    BISYNC_CACHE="$LOCALAPPDATA/rclone/bisync"
-  elif [[ -d "$HOME/.cache/rclone/bisync" ]]; then
-    BISYNC_CACHE="$HOME/.cache/rclone/bisync"
-  fi
-  if [[ -z "$BISYNC_CACHE" && -z "$RESYNC" ]]; then
-    echo "First bisync detected (no baseline). NOT auto-resyncing to avoid picking a winner."
-    echo "Review both sides, then run:"
-    echo "  bash scripts/sync.sh --resync --dry-run   # preview"
-    echo "  bash scripts/sync.sh --resync             # establish baseline"
-  else
-    bash scripts/sync-assets.sh --direction bisync ${DRY_RUN:+--dry-run} ${RESYNC:+--resync}
-  fi
-fi
+echo "--- [4/4] Assets ---"
+echo "Not synced by this script. Back media up with: node scripts/assets.mjs push"
 
 # ── Summary ────────────────────────────────────────────────────────────────────
 echo ""

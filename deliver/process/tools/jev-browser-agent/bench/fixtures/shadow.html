@@ -1,0 +1,34 @@
+<!doctype html><meta charset="utf-8"><title>Connect a source</title>
+<script src="common.js"></script>
+<style>body{margin:30px;font:15px system-ui}</style>
+<h2>Connect your Google business</h2>
+<review-picker></review-picker>
+<p id="out"></p>
+<script>
+  // Everything interactive lives in an open shadow root, like Elfsight's widget preview.
+  const PLACES = [
+    'Bright Smiles Dental — 400 Oak Ave, Austin TX',
+    'Bright Smiles Orthodontics — 12 Elm St, Austin TX',
+    'Bright Smiles Dental — 77 Lake Rd, Dallas TX',
+  ];
+  customElements.define('review-picker', class extends HTMLElement {
+    connectedCallback() {
+      const root = this.attachShadow({ mode: 'open' });
+      root.innerHTML = `<style>input{width:360px;padding:8px}ul{list-style:none;padding:0}
+        li button{all:unset;display:block;padding:8px;cursor:pointer;border-bottom:1px solid #eee;width:360px}</style>
+        <input placeholder="Search business name or address"><ul></ul>`;
+      const input = root.querySelector('input'), ul = root.querySelector('ul');
+      input.oninput = () => {
+        const q = input.value.toLowerCase().trim();
+        ul.innerHTML = '';
+        if (q.length < 3) return;
+        for (const p of PLACES.filter(p => p.toLowerCase().includes(q))) {
+          const li = document.createElement('li'), b = document.createElement('button');
+          b.textContent = p;
+          b.onclick = () => { report('shadow', 'pick', p); document.getElementById('out').textContent = 'Connected: ' + p; ul.innerHTML = ''; };
+          li.append(b); ul.append(li);
+        }
+      };
+    }
+  });
+</script>
