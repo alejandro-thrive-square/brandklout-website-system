@@ -12,24 +12,25 @@ Regenerate this table after a client is added, renamed or retired:
 | --- | --- | --- | --- | --- |
 | `alki-house` | `bk-alki-house` | `~/orca/workspaces/Brandklout Website System/bk-alki-house` | pre-v2 (`workflows/`) | 2026-09-27 |
 | `arvada-dental-center` | `bk-arvada` | `~/orca/workspaces/Brandklout Website System/bk-arvada` | pre-v2 (`workflows/`) | 2026-09-30 |
-| `brandklout-website` | `bk-brandklout-website` | `~/orca/workspaces/Brandklout Website System/bk-brandklout-website` | pre-v2 (`workflows/`) | 2026-09-27 |
+| `brandklout-website` | `bk-brandklout-website` | `~/orca/workspaces/Brandklout Website System/bk-brandklout-website` | pre-v2 (`workflows/`) | 2026-10-05 |
 | `dentalpro-toolkit` | `bk-dentalpro-toolkit` | — (no worktree) | — | 2026-09-23 |
-| `dr-nahlah` | `bk-dr-nahlah` | `~/orca/workspaces/Brandklout Website System/bk-dr-nahlah` | pre-v2 (`workflows/`) | 2026-10-03 |
+| `dentiq` | `bk-dentiq` | `~/orca/workspaces/Brandklout Website System/bk-dentiq` | S6 | 2026-10-05 |
+| `dr-nahlah` | `bk-dr-nahlah` | `~/orca/workspaces/Brandklout Website System/bk-dr-nahlah` | pre-v2 (`workflows/`) | 2026-10-05 |
 | `grand-mission-dentistry` | `bk-grand-mission` | `~/orca/workspaces/Brandklout Website System/bk-grand-mission` | pre-v2 (`workflows/`) | 2026-09-27 |
 | `hackensack-dental-implants` | `bk-hackensack-dental-implants` | `~/orca/workspaces/Brandklout Website System/bk-hackensack-dental-implants` | S0, S1 | 2026-10-03 |
-| `institute-for-advanced-dentistry` | `bk-ifa-dentistry` | `~/orca/workspaces/Brandklout Website System/bk-ifa-dentistry` | S0 | 2026-10-03 |
+| `institute-for-advanced-dentistry` | `bk-ifa-dentistry` | `~/orca/workspaces/Brandklout Website System/bk-ifa-dentistry` | S0 | 2026-10-05 |
 | `legacy-dental-pasadena` | `bk-legacy-dental` | `~/orca/workspaces/Brandklout Website System/bk-legacy-dental` | pre-v2 (`workflows/`) | 2026-09-27 |
 | `livewell-dental` | `bk-livewell` | `~/orca/workspaces/Brandklout Website System/bk-livewell` | S0, S1 | 2026-10-03 |
 | `marvel-dental` | `bk-marvel-dental` | `~/orca/workspaces/Brandklout Website System/bk-marvel-dental` | pre-v2 (`workflows/`) | 2026-09-27 |
-| `mason-park` | `bk-mason-park` | `~/orca/workspaces/Brandklout Website System/bk-mason-park` | pre-v2 (`workflows/`) | 2026-10-03 |
-| `mason-park-kids` | `bk-mason-park-kids` | `~/orca/workspaces/Brandklout Website System/bk-mason-park-kids` | pre-v2 (`workflows/`) | 2026-10-03 |
+| `mason-park` | `bk-mason-park` | `~/orca/workspaces/Brandklout Website System/bk-mason-park` | pre-v2 (`workflows/`) | 2026-10-05 |
+| `mason-park-kids` | `bk-mason-park-kids` | `~/orca/workspaces/Brandklout Website System/bk-mason-park-kids` | pre-v2 (`workflows/`) | 2026-10-04 |
 | `oceanic-dental` | `bk-oceanic-dental` | `~/orca/workspaces/Brandklout Website System/bk-oceanic-dental` | S0, S1 | 2026-10-03 |
-| `stone-surgical-arts` | `bk-stone` | `~/orca/workspaces/Brandklout Website System/bk-stone` | pre-v2 (`workflows/`) | 2026-10-01 |
+| `stone-surgical-arts` | `bk-stone` | `~/orca/workspaces/Brandklout Website System/bk-stone` | pre-v2 (`workflows/`) | 2026-10-05 |
 | `stone-dental-implant-center` | `bk-stone-dental` | `~/orca/workspaces/Brandklout Website System/bk-stone-dental` | pre-v2 (`workflows/`) | 2026-09-27 |
-| `stone-med-spa` | `bk-stone-med-spa` | `~/orca/workspaces/Brandklout Website System/bk-stone-med-spa` | pre-v2 (`workflows/`) | 2026-10-03 |
-| `west-la-implants` | `bk-west-la-implants` | `~/orca/workspaces/Brandklout Website System/bk-west-la-implants` | S3 | 2026-10-03 |
+| `stone-med-spa` | `bk-stone-med-spa` | `~/orca/workspaces/Brandklout Website System/bk-stone-med-spa` | pre-v2 (`workflows/`) | 2026-10-05 |
+| `west-la-implants` | `bk-west-la-implants` | `~/orca/workspaces/Brandklout Website System/bk-west-la-implants` | S3 | 2026-10-05 |
 
-- **Scenarios**: S0 new site, S1 migration, S3 ads landing pages (an untracked mirror of main's
+- **Scenarios**: S0 new site, S1 migration, S3 ads landing pages, S6 Webflow sites (an untracked mirror of main's
   `deliver/process/`, refreshed by `node scripts/scenario.mjs sync`). **pre-v2** clients still use
   the older `workflows/` layout inside their folder.
 - **Last client commit**: the newest non-merge commit that touched the client folder.

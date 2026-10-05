@@ -38,6 +38,9 @@ be replayed. Batch reads, and expect 429s after about 30 fast calls. `wf.mjs` ba
      on the parent flattens them.
    - `set_text` on a `TextBlock` reports success and changes nothing. Use `set_settings` key `text`.
    - A loose string inside a ListItem cannot be edited by the client. Add a TextBlock child and fill it.
+   - Inside a component (the footer), pass `scope_component_id: <component id>` to `set_text`.
+     Without it the call reports success and changes nothing (Dentiq footer, 2026-10-05). Read it back
+     with `get_all_elements` and the same scope: `query_elements` on a page does not see into it.
 3. Read the node back.
 
 **B. Phone numbers and links.** A number lives in several places. Sweep every one of them:
@@ -51,6 +54,16 @@ be replayed. Batch reads, and expect 429s after about 30 fast calls. `wf.mjs` ba
 Type numbers with hyphens: an en dash stops the GHL pool from swapping the text. Relative URLs
 publish as `https://../`, so link pages with `linkType: "page"`. A DNI pool swaps whatever it matches,
 so confirm which number is the campaign line and which is the main practice line.
+
+Office hours and the address take the same sweep. On Dentiq (2026-10-05) the hours lived in the
+footer component, a contact-page table, two area pages' copy, and the per-page JSON-LD field (Page
+Settings > Schema markup) on 68 pages. That field prints in `<head>` right after the canonical, not in
+page custom code: read it with `data_pages_tool` `query_pages_schema_markup` (100 pages a call) and
+write it with `bulk_update_pages_schema_markup` (25 a call). Pages left out of the sitemap (`/lp/`)
+carry it too, so list them from `list_pages`, not the sitemap. A schedule schema.org cannot say
+(every other Monday) goes in the description text; drop that day from `openingHoursSpecification`
+rather than claim it weekly. Script: bk-dentiq
+`scenario-6-webflow-sites/02-build/output/2026-10-05-hours/apply-hours.mjs`.
 
 **C. Images.** Pick them by [`deliver/docs/IMAGES.md`](../../../docs/IMAGES.md): client sources
 before stock, every photo showing what its text says, none on more than two pages.
