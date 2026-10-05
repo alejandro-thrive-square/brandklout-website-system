@@ -17,6 +17,7 @@ is `scripts/journey-audit.mjs`.
 
 - [ ] Client-First framework set up on Instatic: tokens in the Framework panel (`framework.mjs apply`), manual-edit proof done (`INSTATIC-FRAMEWORK.md`)
 - [ ] Every style editable by hand: `editability.mjs --published` ends `EDITABLE` on staging
+- [ ] Every class inside Client-First + Relume ([`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)): `class-audit.mjs --local <site-src> --strict` before the first push, `class-audit.mjs --site <client>:staging --strict` after every publish, both `IN BOUNDS`
 - [ ] Facts sheet (`docs/facts.md`) complete
 - [ ] Images sourced client-first, every photo matching its text, none overused (`IMAGES.md`, ledger in `output/images.csv`)
 - [ ] Core pages built and tested
@@ -46,41 +47,47 @@ is `scripts/journey-audit.mjs`.
 3. **Fonts and styles.** Upload fonts to Instatic's font library on production and staging
    (`tools/instatic-api-sync/install-fonts.mjs`). Keep styles in the Styles panel registry so the
    client can edit them (`tools/instatic-api-sync/migrate-css-to-registry.mjs`).
-4. **Facts sheet.** Keep phones, hours, addresses, doctors and credentials in `docs/facts.md` and build
+4. **Classes.** Name every class by [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)
+   from the first line of HTML: Relume utilities first, custom classes `folder_element` in full words
+   (no `btn`, `rv-`, `-num`, `eyebrow`, `wrap`), combos `is-*`, scripts select by `data-` attributes, not
+   styling classes. `tools/instatic-api-sync/class-audit.mjs --local <site-src> --strict` must end
+   `IN BOUNDS` before the canary is shown. Fixing names after launch costs a fleet migration.
+5. **Facts sheet.** Keep phones, hours, addresses, doctors and credentials in `docs/facts.md` and build
    every page, footer and schema from it.
 
 ### Core pages
 
-5. Build a canary first: home, one service page and contact, on the VPS in
+6. Build a canary first: home, one service page and contact, on the VPS in
    `scenario-0-new-site/03-design-build/output/code/site-src/`, from the inquiry, research and style pick.
-6. **Images, by [`IMAGES.md`](../../../docs/IMAGES.md).** Source in order: the client's Google Drive,
+7. **Images, by [`IMAGES.md`](../../../docs/IMAGES.md).** Source in order: the client's Google Drive,
    albums and links in the brief, the old site's assets, then licensed stock (Freepik), AI last and
    with approval. Every photo shows what its heading says (fit score 3), appears once per page and on
    at most two pages, and each page's hero is its own. Keep the ledger in `output/images.csv`. Check
    every upscaled face with `tools/instatic-site/images/contact-sheet.py`.
-7. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
+8. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
    `click-controls.mjs`, `colour-leak.mjs`, `cross-client-grep.mjs`, `image-reuse.mjs`,
    `fluid-root.mjs --check`).
-8. Asana task *developer core pages review*: in progress + comment (confirm first).
-9. Push to staging (pipeline below) and send the client the links. Remind until approved.
-10. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
+9. Asana task *developer core pages review*: in progress + comment (confirm first).
+10. Push to staging (pipeline below) and send the client the links. Remind until approved.
+11. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
     system.
 
 ### Complete site
 
-11. Build every page in the sitemap. Blog: CMS collection and template page.
-12. Legal pages from the client's own privacy, terms and SMS text. Ask the practice; don't draft them.
-13. Ads combos if the client runs ads ([Scenario 3](../../scenario-3-ads-landing-pages/README.md)).
-14. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
+12. Build every page in the sitemap. Blog: CMS collection and template page.
+13. Legal pages from the client's own privacy, terms and SMS text. Ask the practice; don't draft them.
+14. Ads combos if the client runs ads ([Scenario 3](../../scenario-3-ads-landing-pages/README.md)).
+15. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
     (new filename for any re-cut image) → `set-alt` → `build-import-input` → `ship.sh` → `push-site` →
     `place-embeds` → `ops/apply-template-flags` (blog, 404) → `gates/template-guard` → publish. Then
     `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`,
     and `tools/instatic-api-sync/editability.mjs --published`, which must end `EDITABLE` (every style
     in the Framework or the Styles panel, none in a code asset:
-    [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)).
+    [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)), and
+    `class-audit.mjs --site <client>:staging --strict`, which must end `IN BOUNDS`.
     `image-reuse --base <staging>` must end `0 problem(s)` on the complete site.
     Details: [`tools/instatic-site/README.md`](../../tools/instatic-site/README.md).
-15. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on
+16. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on
     BugHerd; fix every comment, deciding its scope first ([`BUGHERD.md`](../../../docs/BUGHERD.md)):
     a comment about a shared style or component, or one that says "all pages", is fixed at the
     source and checked on every page.

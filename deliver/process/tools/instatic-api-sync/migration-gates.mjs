@@ -80,7 +80,16 @@ if (cmd === 'snapshot') {
     const f = (l) => join(PARITY, `runtime-${host}-${l}.json`)
     const merged = { ...JSON.parse(readFileSync(f(b), 'utf8')), ...JSON.parse(readFileSync(f(`${b}~r`), 'utf8')) }
     writeFileSync(f(`${b}~m`), JSON.stringify(merged))
-    ok = run(`runtime-diff-${a}-${b}-recheck`, ['runtime-parity.mjs', 'diff', a, `${b}~m`, '--site', site]) && ok
+    run(`runtime-diff-${a}-${b}-recheck`, ['runtime-parity.mjs', 'diff', a, `${b}~m`, '--site', site])
+    // A difference counts only if the SAME page and check fail against both captures of the new
+    // state (values may differ: "visible 735 -> 693" and "visible 735 -> 700" are one check).
+    const kinds = (name) => new Set([...readFileSync(join(LOG, `${name}.log`), 'utf8').matchAll(/^FAIL {2}(.+)$/gm)]
+      .map((m) => m[1].replace(/-?\d+(\.\d+)?/g, '#').replace(/ -> .*$/, '')))
+    const first = kinds(`runtime-diff-${a}-${b}`)
+    const persistent = [...kinds(`runtime-diff-${a}-${b}-recheck`)].filter((k) => first.has(k))
+    writeFileSync(join(LOG, `runtime-diff-${a}-${b}-persistent.log`), persistent.join('\n'))
+    console.log(`${persistent.length ? 'FAIL' : 'ok  '}  ${`runtime-persistent-${a}-${b}`.padEnd(34)} ${persistent.length ? `${persistent.length} difference(s) seen in both captures: ${persistent.slice(0, 3).join(' | ')}` : 'no difference survives a second capture'}`)
+    if (persistent.length) ok = false
   }
 } else if (cmd === 'final') {
   ok = run('final-editability', ['editability.mjs', '--site', site, '--published']) && ok

@@ -46,6 +46,9 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
    moves code-asset stylesheets into the Styles panel, `framework.mjs apply` moves the tokens, with
    `css-parity.mjs` before and after. Either upload path, whole site or per page, keeps the Framework;
    after every publish `editability.mjs --published` must end `EDITABLE`.
+   New classes follow [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md);
+   `class-audit.mjs --site <client>:staging --strict` after the publish must stay `IN BOUNDS`. A site
+   that is not yet migrated is migrated by §8 of that standard the first time it comes in for work.
 5. **Third-party embeds and site scripts.** Use the Embed block and the Embed Origins settings, not
    raw HTML: [`tools/instatic-embeds/instatic-embeds.md`](../../tools/instatic-embeds/instatic-embeds.md).
    Site-wide tags go in `siteScripts`; read-merge-write the plugin settings, never replace them.

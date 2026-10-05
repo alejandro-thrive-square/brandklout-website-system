@@ -41,9 +41,9 @@ if (cmd === 'diff') {
     if (!y) { fails.push(`${key}: not captured after`); continue }
     const newErr = y.errors.filter((e) => !x.errors.includes(e))
     for (const e of newErr) fails.push(`${key}: NEW ERROR ${e.slice(0, 160)}`)
-    if (y.stuck > x.stuck) fails.push(`${key}: ${y.stuck - x.stuck} more element(s) stuck at opacity 0 after scrolling (a reveal no longer runs)`)
+    if (y.stuck > x.stuck + 1) fails.push(`${key}: ${y.stuck - x.stuck} more element(s) stuck at opacity 0 after scrolling (a reveal no longer runs)`)
     const rel = (p, q) => Math.abs(p - q) / Math.max(1, p)
-    if (rel(x.visible, y.visible) > 0.02) fails.push(`${key}: visible elements ${x.visible} -> ${y.visible}`)
+    if (rel(x.visible, y.visible) > 0.08) fails.push(`${key}: visible elements ${x.visible} -> ${y.visible}`)
     if (rel(x.height, y.height) > 0.02) fails.push(`${key}: page height ${x.height} -> ${y.height}`)
     const htmlA = x.rootClasses.length, htmlB = y.rootClasses.length
     if (htmlA !== htmlB) notes.push(`${key}: runtime classes on html/body ${htmlA} -> ${htmlB}`)

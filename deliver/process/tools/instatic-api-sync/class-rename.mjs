@@ -93,7 +93,12 @@ function rewriteHtml(html) {
   out = out.replace(/(<script(?![^>]*\bsrc=)[^>]*>)([\s\S]*?)(<\/script>)/gi, (m, a, js, b) => a + rewriteJs(js, 'embedded script') + b)
   return out
 }
-const CLASS_CONTEXT = /(classList\.(add|remove|toggle|contains|replace)\s*\([^)]*$|className\s*(\+?=|[!=]==?)\s*$|getElementsByClassName\s*\(\s*$|\bclass(Name)?\s*:\s*$|setAttribute\(\s*['"]class['"]\s*,\s*$)/
+/* Calls whose first string argument IS a class name. The house scroll kit's `WZ.section(name, fn)`
+   and `WZ.dom(name, fn)` build `'.' + name` themselves (Dr. Nahlah, West LA: 101 calls), which no
+   string scan sees; a map can name more with "scriptClassCalls": ["Kit.mount"]. */
+const CLASS_CALLS = ['WZ.section', 'WZ.dom', ...(spec.scriptClassCalls ?? [])]
+  .map((c) => c.replace(/[.$]/g, (m) => `\\${m}`)).join('|')
+const CLASS_CONTEXT = new RegExp(`(classList\\.(add|remove|toggle|contains|replace)\\s*\\([^)]*$|className\\s*(\\+?=|[!=]==?)\\s*$|getElementsByClassName\\s*\\(\\s*$|\\bclass(Name)?\\s*:\\s*$|setAttribute\\(\\s*['"]class['"]\\s*,\\s*$|\\b(${CLASS_CALLS})\\(\\s*$)`)
 /** JS: rewrite inside string literals only. */
 function rewriteJs(js, where) {
   return mapJsStrings(js, (body, before) => {
