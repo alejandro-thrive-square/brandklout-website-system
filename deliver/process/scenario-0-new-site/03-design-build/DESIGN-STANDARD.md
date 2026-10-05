@@ -70,19 +70,25 @@ nothing was ever connected.
 The reference is composed the opposite way:
 
 ```html
-<section class="ch-arrival"        data-chapter="0" data-chapter-name="Arrival">
-<section class="ch-reality"        data-chapter="1" data-chapter-name="The Reality">
-<section class="ch-difference"     data-chapter="2" data-chapter-name="The Difference">
-<section class="ch-specialist"     data-chapter="3" data-chapter-name="The Specialist">
-<section class="ch-transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light">
-<section class="ch-path"           data-chapter="5" data-chapter-name="The Path">
-<section class="ch-standard"       data-chapter="6" data-chapter-name="The Standard">
-<section class="ch-proof"          data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
-<section class="ch-invitation"     data-chapter="8" data-chapter-name="Invitation" data-theme="dark">
+<section class="section_arrival"        data-chapter="0" data-chapter-name="Arrival">
+<section class="section_reality"        data-chapter="1" data-chapter-name="The Reality">
+<section class="section_difference"     data-chapter="2" data-chapter-name="The Difference">
+<section class="section_specialist"     data-chapter="3" data-chapter-name="The Specialist">
+<section class="section_transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light">
+<section class="section_path"           data-chapter="5" data-chapter-name="The Path">
+<section class="section_standard"       data-chapter="6" data-chapter-name="The Standard">
+<section class="section_proof"          data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
+<section class="section_invitation"     data-chapter="8" data-chapter-name="Invitation" data-theme="dark">
 ```
 
 Nine **named narrative beats**, in an order that cannot be shuffled. The name says what the beat
 *does to the reader*, never what widget sits inside it. Scroll is the medium the story is told in.
+
+> **Name them the Client-First way** ([CLASS-STANDARD.md](../../tools/client-first-style-guide/CLASS-STANDARD.md)):
+> the beat is the section identifier, `section_arrival`, and everything inside it lives in that
+> folder, `arrival_title`, `arrival_media`, `arrival_scroll-cue`. Never the `ch-arrival` /
+> `ch-` prefix this standard used before 2026-10-05: it is an abbreviation, and five sites had to be
+> migrated off it. Scripts find a chapter by `data-chapter`, never by its class.
 
 > **Smell test.** If your section classes are `band-*`, `section--light`, `section--paper`,
 > `section--tight` — you built bands. Rename them to the beat they perform. If you cannot name the
