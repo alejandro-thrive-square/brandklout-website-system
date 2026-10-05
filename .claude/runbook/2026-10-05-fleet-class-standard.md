@@ -34,8 +34,11 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
   real at 1440/390/1920, runtime parity OK.
 - **Mason Park complete (staging)** (`bk-mason-park` `aec30c70`): 1,898-rule stylesheet into the
   registry, 497 renames + 4 merges, Framework 33 variables; parity 0 real; EDITABLE, IN BOUNDS, CLEAN.
-- **Mason Park Kids in progress** (agent; 217 pages): baseline done, editability published, gates
-  running.
+- **Mason Park Kids complete (staging)** (`bk-mason-park-kids` `d961983c`): 2 stylesheets (1,226
+  rules) into the registry (3 `@font-face` stay), Framework 44 variables, 389 class rules renamed;
+  css 0 real at every width, runtime parity before→final OK on 434 captures; EDITABLE, IN BOUNDS,
+  CLEAN. One revived dead override (`.cf-shot`) fixed forward. **Its local `home/` source still has
+  the old names: a push from it would undo the migration** (client runbook, top).
 - Maps prepared and committed, not applied: Dr. Nahlah (`5f93a76c`, 377 renames; staging draft has
   an unreviewed 04:04Z edit, text-identical as far as checked), West LA (`9afba9e6`, 498; no staging
   instance), IFA rebuild local source (`01502dc3`, 371; another session is building it), Brandklout
