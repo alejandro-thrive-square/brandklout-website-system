@@ -77,20 +77,29 @@ shell.settings ??= {}
 shell.settings.framework = applySpec(fw, spec, (m) => console.log(`  ${m}`))
 
 for (const edit of spec.registry ?? []) {
-  const hits = Object.values(shell.styleRules ?? {}).filter((r) => r.selector === edit.selector && r.kind === 'ambient')
-  if (hits.length !== 1) throw new Error(`registry edit: ${hits.length} ambient rules with selector ${edit.selector}; expected exactly 1`)
-  const r = hits[0]
+  // A stylesheet moved in source order (css-to-registry without --in-place) leaves one `:root`
+  // rule per block (Mason Park: 14). A Framework-owned name leaves every one of them; a formula is
+  // set where its property already lives (the LAST such rule wins the cascade), else on the last rule.
+  const hits = Object.values(shell.styleRules ?? {})
+    .filter((r) => r.selector === edit.selector && r.kind === 'ambient')
+    .sort((x, y) => (x.order ?? 0) - (y.order ?? 0))
+  if (!hits.length) throw new Error(`registry edit: no ambient rule with selector ${edit.selector}`)
   for (const k of edit.remove ?? []) {
-    if (k in (r.styles ?? {})) {
-      console.log(`  registry ${edit.selector} - ${k}: ${r.styles[k]}`)
-      delete r.styles[k]
+    for (const r of hits) {
+      if (k in (r.styles ?? {})) {
+        console.log(`  registry ${edit.selector}#${r.order} - ${k}: ${r.styles[k]}`)
+        delete r.styles[k]
+        r.updatedAt = Date.now()
+      }
     }
   }
   for (const [k, v] of Object.entries(edit.set ?? {})) {
-    if (r.styles?.[k] !== v) console.log(`  registry ${edit.selector} ${k}: ${r.styles?.[k] ?? '(none)'} -> ${v}`)
-    r.styles[k] = v
+    const holders = hits.filter((r) => k in (r.styles ?? {}))
+    const r = holders.length ? holders[holders.length - 1] : hits[hits.length - 1]
+    if (r.styles?.[k] !== v) console.log(`  registry ${edit.selector}#${r.order} ${k}: ${r.styles?.[k] ?? '(none)'} -> ${v}`)
+    ;(r.styles ??= {})[k] = v
+    r.updatedAt = Date.now()
   }
-  r.updatedAt = Date.now()
 }
 
 /* Nothing loaded after framework.css may re-declare an owned name at :root. */

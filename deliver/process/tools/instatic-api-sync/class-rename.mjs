@@ -259,14 +259,33 @@ if (process.argv.includes('--verify')) {
   const cssLinks = new Set()
   const home = await fetch(`${base}/`).then((r) => r.text())
   for (const m of home.matchAll(/href="([^"]+\.css)"/g)) cssLinks.add(m[1])
+  // Assets are read the way the rewriter reads them: stylesheets by selector token, scripts by
+  // their string and regex literals (a property `x.wrap` or a variable is not a class). In a
+  // script, `.old` in a selector or a class context is LEFT (fails); a bare word equal to an old
+  // name elsewhere in a string is listed as "mention" for a human (it does not fail).
+  const { jsStringSpans } = await import('./js-lexer.mjs')
+  const mentions = new Map()
   for (const href of [...scripts, ...cssLinks]) {
     const text = await fetch(new URL(href, base)).then((r) => (r.ok ? r.text() : ''))
-    for (const t of text.matchAll(/['"`.\s]\.?(-?[_a-zA-Z][\w-]*)/g)) {
-      if (!has(t[1])) continue
-      if (href.endsWith('.css') && !text.includes(`.${t[1]}`)) continue
-      left.set(`${t[1]} in ${href.split('/').pop()}`, ['(asset)'])
+    const file = href.split('/').pop()
+    if (href.endsWith('.css')) {
+      for (const t of text.matchAll(/\.((?:\\.|[\w-])+)/g)) {
+        const name = t[1].replace(/\\(.)/g, '$1')
+        if (has(name)) left.set(`.${name} in ${file}`, ['(asset)'])
+      }
+      continue
+    }
+    for (const s of jsStringSpans(text)) {
+      const body = text.slice(s.start + 1, s.end - 1)
+      const before = text.slice(Math.max(0, s.start - 60), s.start)
+      for (const m of body.matchAll(SELECTOR_CHAIN)) for (const c of m[3].matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)) if (has(c[1])) left.set(`.${c[1]} in ${file}`, ['(asset)'])
+      const tokens = body.split(/[\s"'`=]+/).filter(has)
+      if (!tokens.length) continue
+      if (s.kind !== 'regex' && CLASS_CONTEXT.test(before)) for (const t of tokens) left.set(`"${t}" (class context) in ${file}`, ['(asset)'])
+      else for (const t of tokens) mentions.set(`"${t}" in ${file}`, (mentions.get(`"${t}" in ${file}`) ?? 0) + 1)
     }
   }
+  for (const [k, n] of mentions) console.log(`  mention  ${k} ×${n} (a string equal to an old name, outside a class context: check by hand)`)
   console.log(`${target.url}: ${slugs.length} published page(s), ${scripts.size} script(s), ${cssLinks.size} stylesheet(s) scanned for ${Object.keys(all).length} old name(s)`)
   for (const [k, v] of left) console.log(`  LEFT  ${k}  (${[...new Set(v)].slice(0, 4).join(', ')}${v.length > 4 ? ' …' : ''})`)
   console.log(left.size ? `\n${left.size} old name(s) still published` : '\nCLEAN — no old class name is published anywhere')
