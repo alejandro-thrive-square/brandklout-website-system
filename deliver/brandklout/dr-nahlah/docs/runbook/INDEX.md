@@ -1,11 +1,12 @@
 # Runbook index
 
-98 runs, newest first. Each line is one file in this folder.
+99 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05 — "Find Us Online" footer row (Asana): Facebook, Instagram, RealSelf, Vitals, Healthgrades, Google (McLean GBP) on the 40 site rows, **PRODUCTION ONLY** (staging draft busy), ads pages excluded; 83/83 verified — carries **gotchas** (base.link adds rel itself, staging pending, sameAs still the dead FB) | [`2026-10-05-footer-social-profiles.md`](./2026-10-05-footer-social-profiles.md) |
 | 2026-10-04 | 2026-10-04 — Everything editable on Instatic, **STAGING ONLY**: tokens into the Framework panel (4 colour aliases, 7 type sizes, gutter/section ends; root 16; 40 variables), `landing.css` (175 rules) into the registry and disabled; `editability.mjs` EDITABLE; parity exact bar the Framework's 2-dec rem (body 15.6→15.68px); a Framework panel edit survived page and shell uploads — carries **gotchas** | [`2026-10-04-everything-editable-staging.md`](./2026-10-04-everything-editable-staging.md) |
 | 2026-10-02 | 2026-10-02b — `/doctor-referral` rebuilt (Asana referral form): Stone's order, both PDFs via the drnahlah-files Worker + 302s, a native PDF-style form posting to GHL workflow "Website - Doctor Referral" (verified end to end), the review wall; six old sections removed. **STAGING ONLY, client reviewing** — carries **gotchas** (GHL mapping tokens, webhook sample, Codex tabs, no PDFs in Instatic) | [`2026-10-02b-doctor-referral-form.md`](./2026-10-02b-doctor-referral-form.md) |
 | 2026-10-02 | 2026-10-02 — QA report of 2026-09-28: every Web Dev item fixed on prod + staging + site-src (template headings/inert/directions, sitemap, iOS icon, CF beacon off, spelling/names/titles/descriptions in 7 stores, 95 post fixes, axe, /posts grid, hero 2.8 MB, -mclean URLs + 301s, 81 share images, open-graph 1.2.3); audit 81/81 clean — carries **gotchas** (CF RUM enabled:false, token 403 on routes, no redirect on rename, seo-head og:image) + the CS decisions still open | [`2026-10-02-qa-report-fixes.md`](./2026-10-02-qa-report-fixes.md) |
