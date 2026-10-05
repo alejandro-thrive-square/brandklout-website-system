@@ -65,7 +65,7 @@
    "otherVendors": [
     "reputationhub"
    ],
-   "note": "Site uses a reputationhub widget; the Elfsight widget is created but not placed. Nahlah has a second location (Alexandria) not included."
+   "note": "Site uses a reputationhub widget; the Elfsight widget is created but not placed. Nahlah has a second location (Alexandria) not included. 2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
   },
   {
    "key": "arvada",
@@ -281,7 +281,7 @@
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
   },
   {
    "key": "dentiq",
@@ -315,7 +315,7 @@
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "Its widget c92f78df exists but is not on dfwsurgicalarts.com; it is embedded on stonedentalimplantcenter.com instead."
+   "note": "Its widget c92f78df exists but is not on dfwsurgicalarts.com; it is embedded on stonedentalimplantcenter.com instead. 2026-10-04: NOT restyled - it is the badge in Stone Dental (Webflow) footer."
   },
   {
    "key": "stone-med",
@@ -326,12 +326,14 @@
    "widget": "73fff4ec-b68f-4c97-af8a-7b022584e166",
    "account": "trong@driverank.com",
    "listing": "Westlake Medical Aesthetics, 72 Andorra Dr #110b, Westlake, TX 76262",
-   "verified": "5.0 (15)",
-   "state": "created-not-placed",
-   "onSite": [],
+   "verified": "5.0 (16)",
+   "state": "live-on-site",
+   "onSite": [
+    "73fff4ec-b68f-4c97-af8a-7b022584e166"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: in-section standard (green pill, cream cards; white plate + 32px padding because the site wraps the embed in a padless white card on a dark section). Homepage. The widget title was the only heading; the section has the \"In their words\" eyebrow."
   },
   {
    "key": "hackensack",
@@ -497,7 +499,7 @@
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
   },
   {
    "key": "oceanic",

@@ -48,3 +48,20 @@
   background is transparent (the stored 40/40 does nothing).
 - site-style.mjs's `heading` is the hero H1 (often white): take the header text colour from the
   reviews section's H2, which `--render` reads.
+
+## Update (evening 2026-10-04): every Instatic site's widget restyled (widget only, no site edits)
+- User: change the widgets, not the Instatic sites. Done in the Elfsight editor by Codex, one run per widget:
+  **Stone Med Spa `73fff4ec`** (live on westlaketxmedspa.com home; gate ok rendered), **Nahlah `da62eaec`**,
+  **West LA `670ca31c`**, **IFA `7febe92d`** (not placed: settings gate ok, colours from the live
+  site, light section assumed). Mason Park General + Kids done earlier.
+- **Skipped: Stone Surgical `c92f78df`**: it is the floating badge in Stone Dental's (Webflow) footer;
+  restyling it would change that site.
+- Stone Med Spa needed a second pass: the white box around its embed is the **site's** padless card
+  on a dark section, so the widget takes white + 32px padding and dark header text. The gate now
+  checks header-text contrast against what is behind it and the gap to that box's edge.
+
+## Gotchas (evening)
+- A white panel around a widget in a screenshot may be the site's card, not Elfsight's: check
+  `widgetBackground` in the boot data before choosing header colours.
+- Stone Med Spa: with the widget title gone, its reviews have only the "In their words" eyebrow; a
+  section H2 there is a site change, left to the owner.

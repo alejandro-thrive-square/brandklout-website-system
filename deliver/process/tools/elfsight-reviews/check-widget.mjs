@@ -66,10 +66,13 @@ const same = (a, b) => { const x = rgba(a), y = rgba(b); return x && y && x.ever
 const clear = (c) => (rgba(c) || [0, 0, 0, 1])[3] === 0
 const BLUE = 'rgba(0, 109, 255, 1)' // Elfsight's default accent
 
+const lum = (c) => { const [r, g, b] = rgba(c).map((v) => v / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)); return 0.2126 * r + 0.7152 * g + 0.0722 * b }
+const contrast = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05) }
 const bg = t.widgetBackground || {}
-if (bg.type === 'color' && !clear(bg.color)) problem(`widget background ${bg.color}: transparent, the section is the plate`)
-// The editor hides the padding controls while the background is transparent; --render measures the real inset.
-if (!clear(bg.color) && ((t.widgetHorizontalPadding ?? 0) > 0 || (t.widgetVerticalPadding ?? 0) > 0)) problem(`widget padding ${t.widgetHorizontalPadding}/${t.widgetVerticalPadding}px: 0, the section has the padding`)
+// Transparent, so the section is the plate. Or the colour of a site card the embed sits in (Stone Med
+// Spa: a white padless card on a dark section), with padding: --render checks it matches.
+const plate = bg.type === 'color' && !clear(bg.color) ? bg.color : null
+if (plate && !renderUrl) problem(`widget background ${plate}: transparent, or the colour of the card it sits in (prove with --render)`)
 if (!clear(t.headerBackgroundColor)) problem(`header background ${t.headerBackgroundColor}: transparent`)
 const btn = t.writeReviewButton || {}
 for (const [k, v] of [['button', btn.color], ['read more', t.reviewReadMoreColor], ['verified badge', t.reviewVerifiedBadgeColor]].concat(s.theme?.type === 'custom' ? [] : [['accent', s.theme?.accentColor]])) { // a Custom theme hides the accent
@@ -134,7 +137,9 @@ if (renderUrl) {
       cards: els.filter((e) => e.classList.contains('es-review-container')).length,
       section: (() => { let e = mount; while (e && e !== document.body && !/^(SECTION|MAIN)$/.test(e.tagName)) e = e.parentElement
         let b = mount; while (b && cs(b).backgroundColor.match(/rgba\\(.*, 0\\)|transparent/)) b = b.parentElement
-        const h = e && e.querySelector('h2'); return { heading: h ? h.textContent.trim().slice(0, 50) : null, headingColor: h && cs(h).color, bg: b ? cs(b).backgroundColor : 'rgb(255, 255, 255)' } })(),
+        const h = e && e.querySelector('h2'); return { heading: h ? h.textContent.trim().slice(0, 50) : null, headingColor: h && cs(h).color, bg: b ? cs(b).backgroundColor : 'rgb(255, 255, 255)',
+          // Gap between the mount and the edge of the coloured box behind it (a site card or the section).
+          edge: b ? Math.round(Math.min(mount.getBoundingClientRect().left - b.getBoundingClientRect().left, b.getBoundingClientRect().right - mount.getBoundingClientRect().right)) : null } })(),
       cardBg: (() => { const c = one('es-review-background-container') || one('es-review-container'); return c && cs(c).backgroundColor })(),
       cardFont: cs(one('es-review-content'))?.fontFamily.split(',')[0].replace(/["']/g, ''), pageFont: cs(document.body).fontFamily.split(',')[0].replace(/["']/g, '') })
   })()`
@@ -159,7 +164,9 @@ if (renderUrl) {
       if (!r.logo) problem('Google logo not visible in the header')
       if (!r.count) problem('review count not visible in the header')
       if (!r.button) problem('write-a-review button not visible')
-      if (r.inset && (r.inset.left > 12 || r.inset.top > 12)) problem(`widget sits ${r.inset.left}px / ${r.inset.top}px inside its mount: padding should be 0`)
+      if (!plate && r.section.edge !== null && r.section.edge < 12) problem(`widget touches the edge of its ${r.section.bg} box (${r.section.edge}px): give the widget that background and padding`)
+      if (plate && !same(plate, r.section.bg)) problem(`widget background ${plate} on a ${r.section.bg} section: transparent or the same colour`)
+      if (!plate && r.inset && (r.inset.left > 12 || r.inset.top > 12)) problem(`widget sits ${r.inset.left}px / ${r.inset.top}px inside its mount: padding should be 0`)
       // The 'Read more' line counts too: preview lines + 1, plus one of slack.
       if (r.textLines > (s.reviewPreviewLinesNumber ?? 3) + 2) problem(`a card shows ${r.textLines} lines of text, preview is ${s.reviewPreviewLinesNumber} (review photos on, or full text mode)`)
       if (!r.cards) problem('no review cards rendered (lazy attribute, CSP or widget off?)')
@@ -170,7 +177,10 @@ if (renderUrl) {
         if (siteButton.fontFamily && siteButton.fontFamily !== r.buttonStyle.font) problem(`button renders in ${r.buttonStyle.font}, site ${siteButton.fontFamily}`)
       }
       if (!r.section.heading) problem('no H2 in the section around the widget: the section must carry the heading')
-      if (r.section.headingColor && !same(t.headerTextColor, r.section.headingColor)) problem(`header text ${t.headerTextColor}, section heading ${r.section.headingColor}`)
+      // Header text = the section's H2 colour, unless that H2 sits on another background (a hero
+      // above the card); either way it must read on what is behind the widget.
+      if (contrast(t.headerTextColor, r.section.bg) < 4.5) problem(`header text ${t.headerTextColor} on ${r.section.bg}: contrast ${contrast(t.headerTextColor, r.section.bg).toFixed(1)}:1, needs 4.5`)
+      else if (r.section.headingColor && contrast(r.section.headingColor, r.section.bg) >= 4.5 && !same(t.headerTextColor, r.section.headingColor)) problem(`header text ${t.headerTextColor}, section heading ${r.section.headingColor}`)
       if (r.cardBg && same(r.cardBg, r.section.bg)) problem(`cards ${r.cardBg} on a ${r.section.bg} section: set them apart`)
     }
   } finally { chrome.kill() }
