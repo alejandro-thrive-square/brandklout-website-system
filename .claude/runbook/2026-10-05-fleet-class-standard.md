@@ -29,10 +29,21 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
 | Livewell, Oceanic | n/a | none | single-body WordPress clones |
 
 ## Done
-- Stone Med Spa staging: complete (see the client run on `bk-stone-med-spa`, `2c535364`).
-- Stone Surgical Arts staging: editability done (EDITABLE, Framework 48 vars); classes in progress.
-- Maps prepared read-only for Dr. Nahlah (377 renames) and West LA (498), in their worktrees,
-  uncommitted (Nahlah worktree has someone else's uncommitted work).
+- **Batch 1 complete (staging)**: Stone Med Spa (`bk-stone-med-spa` `2c535364`, local source renamed
+  too) and Stone Surgical Arts (`bk-stone` `064ac08d`): EDITABLE, IN BOUNDS, CLEAN, css parity 0
+  real at 1440/390/1920, runtime parity OK.
+- Maps prepared and committed, not applied: Dr. Nahlah (`5f93a76c`, 377 renames; staging draft has
+  an unreviewed 04:04Z edit, text-identical as far as checked), West LA (`9afba9e6`, 498; no staging
+  instance), IFA rebuild local source (`01502dc3`, 371; another session is building it), Brandklout
+  website (worktree, untracked: 806 renames + 5 merges, dry run clean; another session re-seeds its
+  staging from production, and its page-scoped `site.css` needs a decision).
+- New-build kit: `client-first-starter.css` + `framework-spec.template.json`; S0 step 4 starts there;
+  DESIGN-STANDARD names chapters `section_<beat>`.
+- Engine fixes found by the pilots (all with tests): regex literals, selector chains/tag.class,
+  `WZ.section`/`WZ.dom` and `*Class` option keys, dotted names, merges into renamed targets, folders in
+  local mode, `--files` safety checks, vendor classes exempt, component-only classes counted,
+  in-place dead media overrides (+ `fix-dead-overrides.mjs`), css-parity load wait + frozen
+  animations, two-capture noise filter, persistent runtime differences, crash-proof runtime capture.
 
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
