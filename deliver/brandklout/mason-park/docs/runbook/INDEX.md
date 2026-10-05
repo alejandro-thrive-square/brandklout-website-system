@@ -1,11 +1,12 @@
 # Runbook index
 
-31 runs, newest first. Each line is one file in this folder.
+32 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging**: mason-park.css (1,898 rules) into the registry, 497 renames + 4 merges, Framework owns 33 variables; parity 0 real, runtime A/B checked, EDITABLE, IN BOUNDS, CLEAN. Production untouched (unrelated unpublished prod draft) — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
 | 2026-10-04 | 2026-10-04 — Google reviews: new Elfsight Google Reviews widget e30c1531 on / and /patient-reviews (in-section standard, gate ok); All-in-One 32926aff off the site — carries **gotchas** | [`2026-10-04-google-reviews-widget-standard.md`](./2026-10-04-google-reviews-widget-standard.md) |
 | 2026-10-03 | 2026-10-03 — GHL Contact form `JuzM9SxuJMPDMwfO6cgj` to the lead-form standard via Codex: Service dropdown (required, 11 options), optional two-box SMS consent with the legal name, real Privacy/Terms links; gate ok; ToS still names the old domain — carries **gotchas** | [`2026-10-03-ghl-contact-form-standard.md`](./2026-10-03-ghl-contact-form-standard.md) |
 | 2026-10-02 | 2026-10-02 — /sitemap.xml on www via the Cloudflare Worker masonparkdental-sitemap (241 URLs from production; ad/thank-you/forwarders excluded); verify FAIL none; submit in Search Console — carries **gotchas** | [`2026-10-02-cloudflare-sitemap.md`](./2026-10-02-cloudflare-sitemap.md) |

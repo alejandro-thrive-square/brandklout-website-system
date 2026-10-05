@@ -1,0 +1,230 @@
+{
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "brand",
+      "value": "#8c6349"
+    },
+    {
+      "slug": "brand-deep",
+      "value": "#6f4d38"
+    },
+    {
+      "slug": "copper",
+      "value": "#b78668"
+    },
+    {
+      "slug": "beige",
+      "value": "#e2d5c5"
+    },
+    {
+      "slug": "beige-mid",
+      "value": "#ccbca6"
+    },
+    {
+      "slug": "ink",
+      "value": "#2e3538"
+    },
+    {
+      "slug": "body",
+      "value": "#545f62"
+    },
+    {
+      "slug": "sage",
+      "value": "#5d7a6b"
+    },
+    {
+      "slug": "white",
+      "value": "#ffffff"
+    },
+    {
+      "slug": "warm",
+      "value": "#fdfcfb"
+    },
+    {
+      "slug": "sage-tint",
+      "value": "#f4f6f4"
+    },
+    {
+      "slug": "sand",
+      "value": "#ede2d5"
+    },
+    {
+      "slug": "muted",
+      "value": "#8b9497"
+    },
+    {
+      "slug": "ink-deep",
+      "value": "#1e2426"
+    },
+    {
+      "slug": "ink-mid",
+      "value": "#262d30"
+    },
+    {
+      "slug": "paper",
+      "value": "#f7f3ee"
+    },
+    {
+      "slug": "bg",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "bg-2",
+      "value": "var(--warm)"
+    },
+    {
+      "slug": "panel",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "fg",
+      "value": "var(--ink)"
+    },
+    {
+      "slug": "fg-body",
+      "value": "var(--body)"
+    },
+    {
+      "slug": "fg-soft",
+      "value": "var(--muted)"
+    },
+    {
+      "slug": "rule",
+      "value": "var(--beige)"
+    },
+    {
+      "slug": "rule-strong",
+      "value": "var(--beige-mid)"
+    },
+    {
+      "slug": "accent",
+      "value": "var(--brand)"
+    },
+    {
+      "slug": "accent-lg",
+      "value": "var(--copper)"
+    }
+  ],
+  "typography": [
+    {
+      "group": "Typography",
+      "sizes": [
+        {
+          "name": "f-d1-base",
+          "px": 106.56
+        },
+        {
+          "name": "f-d2-base",
+          "px": 74.88
+        },
+        {
+          "name": "f-d3-base",
+          "px": 51.84
+        },
+        {
+          "name": "f-h3-base",
+          "px": 27.36
+        },
+        {
+          "name": "f-h4-base",
+          "px": 20
+        },
+        {
+          "name": "f-label-base",
+          "px": 12
+        }
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "group": "Spacing",
+      "sizes": [
+        {
+          "name": "maxw",
+          "px": 1560
+        }
+      ]
+    }
+  ],
+  "stays": [
+    "--font-from: 18   (redefined at a breakpoint: stays in the registry :root)",
+    "--font-to: 20   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-from: calc(1920 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-to: calc(2400 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-ui: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-text: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-head: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-sub: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "scroll-behavior: smooth   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-disp: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-lg: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-mid: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-sm: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--ch-pad: 9rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--bleed: 4.5rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)))",
+    "--base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)",
+    "--font-display: \"Newsreader\", Georgia, \"Times New Roman\", serif",
+    "--font-body: \"Nunito Sans\", \"Segoe UI\", system-ui, sans-serif",
+    "--font-ui: \"Karla\", \"Segoe UI\", system-ui, sans-serif",
+    "--container-xlarge: 1600px   (a px layout limit: the Framework would emit it in rem, which the fluid root scales)",
+    "--container-large: 1360px   (a px layout limit: the Framework would emit it in rem, which the fluid root scales)",
+    "--container-medium: 1040px   (a px layout limit: the Framework would emit it in rem, which the fluid root scales)",
+    "--container-small: 760px   (a px layout limit: the Framework would emit it in rem, which the fluid root scales)",
+    "--gutter: clamp(1.25rem, 4.6vw, 5.5rem)",
+    "--radius: 2px   (the Framework writes 2-decimal rem; 0.13rem would shift it)",
+    "--radius-large: 3px   (the Framework writes 2-decimal rem; 0.19rem would shift it)",
+    "--hairline: 1px solid var(--beige)",
+    "--shadow: 0 24px 60px -40px rgba(46, 53, 56, .45)",
+    "--ease: cubic-bezier(.22, .61, .36, 1)",
+    "--f-lede: calc(1.125rem * var(--t-text))   (the Framework writes 2-decimal rem; 1.13rem would shift it)",
+    "--f-body: calc(.975rem * var(--t-text))   (the Framework writes 2-decimal rem; 0.97rem would shift it)"
+  ],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [
+        "--brand",
+        "--brand-deep",
+        "--copper",
+        "--beige",
+        "--beige-mid",
+        "--ink",
+        "--body",
+        "--sage",
+        "--white",
+        "--warm",
+        "--sage-tint",
+        "--sand",
+        "--muted",
+        "--ink-deep",
+        "--ink-mid",
+        "--paper",
+        "--bg",
+        "--bg-2",
+        "--panel",
+        "--fg",
+        "--fg-body",
+        "--fg-soft",
+        "--rule",
+        "--rule-strong",
+        "--accent",
+        "--accent-lg",
+        "--maxw"
+      ],
+      "set": {
+        "--f-d1": "calc(var(--f-d1-base) * var(--t-disp))",
+        "--f-d2": "calc(var(--f-d2-base) * var(--t-disp))",
+        "--f-d3": "calc(var(--f-d3-base) * var(--t-lg))",
+        "--f-h3": "calc(var(--f-h3-base) * var(--t-mid))",
+        "--f-h4": "calc(var(--f-h4-base) * var(--t-sm))",
+        "--f-label": "calc(var(--f-label-base) * var(--t-ui))"
+      }
+    }
+  ]
+}
