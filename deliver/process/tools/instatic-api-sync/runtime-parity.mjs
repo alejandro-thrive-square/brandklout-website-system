@@ -108,6 +108,9 @@ for (const slug of slugs) {
       continue
     }
     errors.length = 0
+    // One page's hiccup (a click that navigates while a script reads the page: "detached frame")
+    // must not cost the whole run: the page is recorded with the error and the run goes on.
+    try {
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
     await sleep(1500)
     // scroll through, so scroll-triggered reveals run, then back to the top
@@ -135,12 +138,20 @@ for (const slug of slugs) {
     })
     await page.evaluate(() => scrollTo(0, 0))
     await sleep(500)
-    const n = await page.evaluate((SEL) => {
+    // Tag the controls; again after any reload, or every later control would be skipped silently.
+    const tag = () => page.evaluate((SEL) => {
       const vis = (el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' }
       const els = [...document.querySelectorAll(SEL)].filter(vis)
       els.forEach((el, i) => el.setAttribute('data-rp-id', String(i)))
       return els.length
     }, SEL)
+    const reload = async () => {
+      await page.goto(url, { waitUntil: 'load', timeout: 120000 }).catch(() => {})
+      await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' }).catch(() => {})
+      await sleep(800)
+      await tag().catch(() => 0)
+    }
+    const n = await tag()
     const controls = []
     const seen = new Map()
     for (let i = 0; i < n; i++) {
@@ -153,29 +164,41 @@ for (const slug of slugs) {
         return JSON.stringify([scrollX, scrollY, location.hash, visible, scrolls, [...document.documentElement.classList, ...document.body.classList],
           targets.map((t) => [t.className && String(t.className), t.getAttribute('style'), t.getAttribute('aria-expanded'), t.getAttribute('aria-selected'), t.getAttribute('aria-hidden'), t.hasAttribute('open'), t.hidden])])
       }, i)
-      const label0 = await page.evaluate((i) => {
-        const el = document.querySelector(`[data-rp-id="${i}"]`)
-        if (!el) return '?'
-        const text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40)
-        return `${el.tagName.toLowerCase()}[${el.getAttribute('role') || el.getAttribute('href') || el.getAttribute('aria-controls') || ''}] "${text}"`
-      }, i)
-      const nth = (seen.get(label0) ?? 0) + 1
-      seen.set(label0, nth)
-      const label = `${label0} #${nth}`
-      if ((await snap()) === null) continue
-      await page.evaluate((i) => document.querySelector(`[data-rp-id="${i}"]`)?.scrollIntoView({ block: 'center' }), i)
-      await sleep(300)
-      const mid = await snap()
-      try { await page.click(`[data-rp-id="${i}"]`, { delay: 30 }) } catch { await page.evaluate((i) => document.querySelector(`[data-rp-id="${i}"]`)?.click(), i) }
-      await sleep(900)
-      const after = await snap()
-      controls.push({ label, changed: after !== mid })
-      await page.keyboard.press('Escape').catch(() => {})
-      if (page.url().split('#')[0] !== url.split('#')[0]) { await page.goto(url, { waitUntil: 'networkidle2' }).catch(() => {}); await sleep(800) }
+      let label = `control #${i}`
+      try {
+        const label0 = await page.evaluate((i) => {
+          const el = document.querySelector(`[data-rp-id="${i}"]`)
+          if (!el) return '?'
+          const text = (el.getAttribute('aria-label') || el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40)
+          return `${el.tagName.toLowerCase()}[${el.getAttribute('role') || el.getAttribute('href') || el.getAttribute('aria-controls') || ''}] "${text}"`
+        }, i)
+        const nth = (seen.get(label0) ?? 0) + 1
+        seen.set(label0, nth)
+        label = `${label0} #${nth}`
+        if ((await snap()) === null) continue
+        await page.evaluate((i) => document.querySelector(`[data-rp-id="${i}"]`)?.scrollIntoView({ block: 'center' }), i)
+        await sleep(300)
+        const mid = await snap()
+        try { await page.click(`[data-rp-id="${i}"]`, { delay: 30 }) } catch { await page.evaluate((i) => document.querySelector(`[data-rp-id="${i}"]`)?.click(), i) }
+        await sleep(900)
+        const after = await snap()
+        controls.push({ label, changed: after !== mid })
+        await page.keyboard.press('Escape').catch(() => {})
+        if (page.url().split('#')[0] !== url.split('#')[0]) await reload()
+      } catch (e) {
+        // the click navigated or reloaded the page under us: it did something, so it is not dead
+        controls.push({ label, changed: true, note: `navigated: ${String(e.message).slice(0, 80)}` })
+        await reload()
+      }
     }
     out[key] = { errors: [...new Set(errors)], ...state, controls }
     console.log(`${key.padEnd(48)} ${controls.length} controls (${controls.filter((c) => !c.changed).length} inert), ${state.stuck} stuck, ${errors.length} error(s)`)
-    await page.close()
+    } catch (e) {
+      out[key] = { errors: [`capture: ${String(e.message).split('\n')[0]}`], visible: 0, height: 0, stuck: 0, rootClasses: [], controls: [] }
+      console.log(`${key.padEnd(48)} CAPTURE ERROR ${String(e.message).split('\n')[0].slice(0, 100)}`)
+    }
+    await page.close().catch(() => {})
+    writeFileSync(file(a), JSON.stringify(out)) // progress survives a crash
   }
 }
 await browser.close()

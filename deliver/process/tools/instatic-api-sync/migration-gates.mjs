@@ -81,6 +81,12 @@ if (cmd === 'snapshot') {
       console.log(`      runtime baseline: ${a}~m (the re-checked capture of ${a})`)
       a = `${a}~m`
     }
+    for (const l of [a, b]) {
+      if (!existsSync(join(PARITY, `runtime-${host0}-${l}.json`))) {
+        console.log(`FAIL  runtime snapshot "${l}" is missing (the capture crashed or never ran): re-run \`runtime-parity.mjs snapshot ${l.replace(/~m$/, '')} --site ${site} --widths 1440,390\``)
+        process.exit(1)
+      }
+    }
   }
   if (!run(`runtime-diff-${a}-${b}`, ['runtime-parity.mjs', 'diff', a, b, '--site', site])) {
     const log = readFileSync(join(LOG, `runtime-diff-${a}-${b}.log`), 'utf8')
