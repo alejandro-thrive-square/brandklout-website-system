@@ -1,109 +1,155 @@
-# Client-First on the Instatic Framework
+# Everything editable on Instatic: the Framework and the Styles panel
 
 > [!IMPORTANT]
-> **Every Instatic site keeps its design tokens in the Instatic Framework** (left rail → *Framework*,
-> stored at `site.settings.framework`): the colour palette, the type scale, the spacing scale and the
-> radii. Anyone can then change a brand colour, a heading size or the section padding by hand in the
-> editor, and AI can still push pages and updates on top, by either upload path, without undoing that
-> edit. Standard since 2026-10-04.
+> **Every style on an Instatic site must be editable by hand in the editor**, and stay editable after
+> every AI upload, whole site or per page. Since 2026-10-04:
+> - **Design tokens** (colour palette, type sizes, spacing, radii from the Relume / Client-First style
+>   guide) live in the **Framework panel** (`site.settings.framework`).
+> - **Every other declaration** lives in the **style registry**, the Styles panel's class chips and
+>   selectors (`site.styleRules`).
+> - **No code-asset stylesheet carries rules.** The only thing left in one is `@font-face` (variable
+>   fonts the font library cannot install), which the registry cannot hold.
+>
+> Gate: `node tools/instatic-api-sync/editability.mjs --site <client>[:staging] --published` must end
+> `EDITABLE`.
 
 ## Why
 
-On earlier sites the tokens went up inside the `src/styles/tokens.css` code asset
-(`push/push-site.mjs`). That asset loads **last** (`reset → framework → style → userStyles`), so it
-beats anything set in the Framework or the Styles panel. A token changed by hand was silently
-overridden, and the only way to change a colour was a developer and a re-push.
+Code-asset stylesheets (`site.files`, type `style`) are served as `userStyles-*.css`, **last** in the
+cascade (`reset → framework → style → userStyles`), and the Styles panel cannot see them. Anything in
+one beats every panel and Framework edit at equal specificity. On earlier sites the push pipeline put
+the tokens and every declaration Instatic's converter loses (custom properties, `clamp()`, layered
+backgrounds, `!important`) in such a file (`tokens.css`), and older sites kept their whole design in
+one (`site.css`). Hand edits looked saved and never showed.
 
-The Framework is a separate store from the pages and the style registry. Pushes keep it
-(`push-site.mjs` spreads the live `site.settings`), so it is the one place where a manual edit and an
-AI upload never conflict, **provided nothing else re-declares the same variables.**
+The converter (happy-dom) is what drops those declarations, not the registry: the registry stores any
+of them verbatim, `!important` and `@keyframes` included. So the tools below write them there
+directly.
 
-## The four layers, and who owns what
+The Framework is a separate store from pages and registry. Both upload paths keep it
+(`push-site.mjs` spreads the live `site.settings`; page writes never touch it), so it is the one place
+a manual edit and an AI upload never collide, **provided nothing later in the cascade re-declares the
+same variable at `:root`**.
+
+## Who owns what
 
 | What | Lives in | Edited in |
 | --- | --- | --- |
-| Colours, type sizes, spacing, radii (the Relume/Client-First tokens) | **Framework** (`settings.framework`) → `framework.css` | Framework panel |
+| Colours, type sizes, spacing, radii | **Framework** → `framework.css` | Framework panel |
 | Fonts | Font library (`install-fonts.mjs`) → `--font-<slug>` in `framework.css` | Fonts panel |
-| Client-First classes (`heading-style-h2`, `padding-section-large`, `button`, components) | Style registry (`site.styleRules`), values are `var(--token)` | Styles panel |
-| Fluid root, `@font-face` fallbacks, math the converter cannot hold | `tokens.css` code asset | Code tab (developer only) |
+| Every rule: Client-First classes, components, `:root` formulas, `@media` overrides, `@keyframes` | Style registry → `style-*.css` | Styles panel |
+| Variable-font `@font-face` only | `tokens.css` code asset | Code tab (developer) |
 
-**Rule: the `tokens.css` asset declares no variable the Framework owns.** It loads last, so one
-duplicate is enough to freeze that token.
+**Rule:** no `:root` / `html` rule in the registry or a code asset declares a variable the Framework
+owns. It loads after `framework.css` and wins. Scoped redefinitions (`[data-theme="dark"] { --bg }`)
+are fine: they are meant to override inside their section.
 
-## Setting it up (Scenario 0 step 03, first push)
+## The tools (`tools/instatic-api-sync/`)
 
-1. **Preferences** (Framework → settings): root font size **16**, unit **rem**, tree-shake generated
-   utilities **on**. The default root is 10 (Core Framework's 62.5% convention); left at 10, every rem
-   the Framework writes is 1.6× too small on our 16px fluid root.
-2. **Colours.** One colour token per Relume primitive and per colour-scheme role, from the style
-   pick: `neutral-darkest` … `neutral-lightest`, `white`, the brand colours, then `scheme-1-text`,
-   `scheme-1-background`, `scheme-1-accent`, `scheme-1-border` (and scheme 2, 3 as the design uses
-   them). A role's value may be `var(--neutral-darkest)`, so changing a primitive moves every role
-   that uses it. Utilities, shades and tints off unless the build uses them. Light themes only
-   (Brandklout rule): dark mode off.
-3. **Typography.** One group, mode **Manual**, one size per Client-First type role: `heading-h1` …
-   `heading-h6`, `text-large`, `text-medium`, `text-regular`, `text-small`, `text-tiny`. **Min = max**
-   on every size: the step is then a fixed rem, and the house fluid root does the scaling
-   (`FLUID-ROOT.md`). Unequal min/max puts a `vw` slope on top of the fluid root and double-scales.
-   No class generators: the role classes already exist in the registry and set
-   `font-size: var(--heading-h2)`; a breakpoint override on a role class points at another variable.
-4. **Spacing.** One group, mode **Manual**, min = max, Client-First names: `space-tiny`, `space-xxsmall`
-   … `space-xxhuge`, `section-small`, `section-medium`, `section-large`, `global`. No class generators:
-   `padding-section-*`, `padding-global` and the `margin-*` / `spacer-*` utilities stay registry classes
-   that read these variables.
-5. **Radii and strokes.** A second spacing group named *UI*, Manual, min = max: `radius-small`,
-   `radius-medium`, `radius-large`, `border-width`, `divider-width`. No class generators.
-6. **site-src mirrors it.** `css/01-tokens.css` declares exactly the same names and values, so the VPS
-   build, the local gates and `visual-diff` see what Instatic serves. Every stylesheet in site-src
-   reads tokens through `var()`, never a raw hex or px value for something a token covers.
+All take `--site <client>[:staging|:production]` (credentials from the master env and `sites.json`
+through `target.mjs`), are dry runs unless `--apply`, save a shell backup to `output/` first, and never
+publish.
 
-### Naming
+| Script | Does |
+| --- | --- |
+| `framework.mjs show` | What the Framework owns and emits |
+| `framework.mjs extract <tokens.css>` | Drafts a spec from a stylesheet's `:root` (colours, aliases, fixed rem/px); lists what it left out |
+| `framework.mjs apply <spec.json> --apply` | Upserts preferences, colours and fixed sizes, and rewrites registry `:root` declarations **in the same save**; refuses if anything at `:root` would still shadow the Framework |
+| `framework.mjs pull --out <file>` | Writes the site-src mirror of the live Framework |
+| `css-to-registry.mjs --files <asset,...> --apply` | Moves a code-asset stylesheet into the registry (bare `.class` rules into their class chip, the rest as selector rules, in source order) and switches the asset off. No container needed |
+| `registry-repair.mjs` | Library used by `push-site.mjs`: puts every declaration the converter lost back into its own rule |
+| `editability.mjs [--published]` | **The gate** |
+| `css-parity.mjs snapshot/diff --site … --all-pages` | Computed-style parity, every page, before vs after |
 
-The Framework lower-cases a colour slug and collapses every run of other characters to one `-`.
-Relume's own names (`--_primitives---colors--neutral-darkest`, `--color-scheme-1--text`) therefore
-**cannot be kept**: they publish as `--primitives-colors-neutral-darkest` and every `var()` written
-against the original misses. Name tokens in the Framework form from the first line of CSS: lower
-case, single dashes, no leading underscore. Two slugs that normalise to the same name get `-2`.
+A spec (`framework-spec.json`, kept in the client's step `output/`):
+
+```json
+{
+  "preferences": { "rootFontSize": 16, "isRem": true },
+  "colors": [{ "slug": "accent", "value": "var(--gold-ink)" }],
+  "typography": [{ "group": "Type sizes", "sizes": [{ "name": "size-body", "px": 15.68 }] }],
+  "spacing": [{ "group": "Layout", "sizes": [{ "name": "gutter-min", "px": 20 }] }],
+  "registry": [{ "selector": ":root", "remove": ["--accent"],
+                 "set": { "--body": "calc(var(--size-body) * var(--t-text))" } }]
+}
+```
+
+## Setting it up (Scenario 0 step 03, before the first push)
+
+1. **Preferences:** root font size **16**, rem. The Framework defaults to 10 (Core Framework's 62.5%
+   convention); left at 10, every rem it writes is 1.6× too small on our 16px fluid root.
+2. **Colours:** one token per Relume primitive and colour-scheme role (`neutral-darkest` …, brand
+   colours, `scheme-1-text`, `scheme-1-background` …). A role may be `var(--neutral-darkest)`, so
+   changing a primitive moves every role using it. Utilities, shades and tints off unless used. Light
+   themes only: dark mode off.
+3. **Type sizes:** one Manual group, one size per Client-First type role (`heading-h1` … `text-tiny`),
+   **min = max**: a fixed rem the house fluid root scales (`FLUID-ROOT.md`). Unequal min/max adds a
+   `vw` slope on top of the fluid root and double-scales. No class generators: the role classes are
+   registry classes reading `var(--heading-h2)`.
+4. **Spacing:** one Manual group, min = max, Client-First names (`space-xxsmall` … `section-large`,
+   `global`); a second group *UI* for radii and stroke widths. No class generators.
+5. **Fluid values:** the Framework emits fixed sizes only. A fluid token keeps its formula in the
+   registry `:root` and takes its ends from the Framework, so the ends stay editable:
+   `--gutter: clamp(var(--gutter-min), 4vw, var(--gutter-max))`. Per-breakpoint multipliers work the
+   same way: `--h2: calc(var(--size-heading-2) * var(--t-lg))`.
+6. `node framework.mjs extract site-src/css/01-tokens.css > output/framework-spec.json`, review it,
+   `apply` it on staging and production, then build site-src against those names.
+
+### Naming and precision
+
+- The Framework lower-cases a colour slug and collapses other characters to one `-`. Relume's own names
+  (`--_primitives---colors--neutral-darkest`) **cannot be kept**: they publish renamed and every
+  `var()` written against them misses. Name tokens Framework-safe from the first line of CSS.
+- Sizes are written as **two-decimal rem** (`round(px / root, 2)`): `.975rem` becomes `.98rem`. Pick
+  sizes that are whole at two decimals.
+- A px layout limit (`--maxw: 1560px`) stays in the registry: the Framework would turn it into rem,
+  which the fluid root scales above 1440.
 
 ## Keeping it editable on every upload
 
-- **Whole site** (`push-site.mjs --apply --force`) and **per page / update** (`push-site.mjs --update`)
-  both keep `settings.framework`. Neither may carry a Framework-owned variable in the `tokens.css`
-  asset: before the push, strip those declarations from what `TOKEN_FILES` sends
-  (`TOKEN_FILES=00-fluid-root.css` once the tokens are in the Framework).
-- **The Framework is the source of truth after launch.** Before any build or push, read the live
-  `settings.framework` and bring `01-tokens.css` into line with it, so site-src never re-asserts an old
-  value through a hard-coded fallback. A token change the client asks for is made in the Framework
-  (by hand or by API), then mirrored into `01-tokens.css`, never the other way round.
-- **After every push**, check the published CSS: every Framework token appears in `framework.css`, and
-  none appears in `userStyles-*.css`. A token in both = the Framework edit is dead.
+- **`push-site.mjs`** (whole site and `--update`): the converter's losses go back into the registry
+  (`output/registry-repair.txt` lists them), Framework-owned tokens are skipped, and the `tokens.css`
+  asset carries only `@font-face`. It refuses when site-src declares a custom property that ends up in
+  neither the registry nor the Framework. `TOKEN_ASSET=legacy` restores the old asset for one run.
+- **The Framework is the source of truth after launch.** A token change is made in the Framework (panel
+  or `framework.mjs apply`), then mirrored into site-src (`framework.mjs pull`), never the other way.
+- **A registry edit in the browser** is protected by `push-site.mjs --update` (it refuses when the live
+  registry changed since the last push: pull the edit into site-src first).
+- **After every publish:** `editability.mjs --site <client>:staging --published`.
+- **Moving CSS between layers:** `css-parity.mjs snapshot before` → change → publish →
+  `snapshot after` → `diff`, at 1440, 390 and 1920, `--all-pages`.
+- **Manual-edit proof (once per site, on staging):** change a colour and a size in the Framework
+  panel, publish, confirm the page moved; run an upload; confirm the edit survived; put it back.
 
-```bash
-# names declared by each published stylesheet (link hrefs from the home page)
-curl -s https://<host>/ | grep -o 'href="[^"]*\(framework\|userStyles\)[^"]*\.css"'
-curl -s https://<host>/<framework.css> | grep -o -- '--[a-z0-9-]*:' | sort -u > fw.txt
-curl -s https://<host>/<userStyles.css> | grep -o -- '--[a-z0-9-]*:' | sort -u > us.txt
-comm -12 fw.txt us.txt     # must print nothing
-```
+### What the panel shows (tested 2026-10-04, Dr. Nahlah staging, Codex in Chrome)
 
-- **Manual-edit proof (once per site, on staging):** change one colour and one spacing step in the
-  Framework panel, publish, confirm the live page moved, run an `--update` push of one page, publish,
-  confirm the edit is still there. Then put the values back.
+- Type and spacing groups show each size in **px** (root 16), editable; an edit writes min and max.
+- A colour token whose value is `var(--other)` shows as **`#000000`** in the picker. The value is
+  intact (saving other tokens leaves it alone), but editing that token in the panel replaces the
+  reference with a fixed colour. To repoint an alias, use `framework.mjs apply`.
+- The root font size is not visible in the panel; `framework.mjs apply` sets it (`preferences`).
+- Edits save to the draft ("Draft synced"); they go live with the next publish.
 
 ## Existing sites
 
-Sites pushed before 2026-10-04 carry their tokens in the code asset. Move them when the site next
-comes in for work (Scenario 2): seed the Framework from `01-tokens.css`, rename Relume-style
-variables to Framework names across site-src, drop the moved tokens from `TOKEN_FILES`, push the
-shell (`--update --shell-only --apply`), then the check above. Dr. Nahlah already has 25 colour tokens
-in the Framework; confirm the code asset no longer re-declares them.
+Move a site the first time it comes in for work (Scenario 2):
 
-## Not automated yet
+1. `editability.mjs --site <client>:staging` names what is not editable.
+2. Code-asset stylesheets: `css-parity.mjs snapshot before`, then `css-to-registry.mjs --files <path>`
+   (dry run, review the selectors it lists, then `--apply`).
+3. Tokens: write the spec (`extract` on the site's tokens, or by hand), `framework.mjs apply`.
+4. Publish staging, `css-parity diff`, `editability.mjs --published`, the manual-edit proof. Then the
+   same on production.
 
-There is no script yet that writes `settings.framework` from `01-tokens.css`, pulls it back, or strips
-Framework-owned names from the token asset inside `push-site.mjs`; set the Framework in the panel (or
-through `PUT /site-document`, read-merge-write) and run the check above by hand. Instatic's model for
-it is in the source: `src/core/framework/` and `src/core/publisher/frameworkCss.ts`.
+**Dr. Nahlah, 2026-10-04 (staging):** the main stylesheets were already in the registry; the
+Framework got the 4 colour aliases, 7 type sizes and the gutter/section ends (40 variables), and
+`landing.css` (175 rules, 19 ads pages) moved into the registry. Spec:
+`bk-dr-nahlah` `workflows/22-instatic-api-sync/framework/framework-spec.json`.
+Proof: computed-style parity on all 59 pages was exact at 1440 and 390 and within capture noise at
+1920 (two snapshots of an unchanged site differ by ~50 auto-margin and late-font values there) with
+the three rounded sizes held at their old values; the only real change is that rounding (body text
+15.6 → 15.68px, labels 11.23 → 11.2px, large body 18 → 18.08px). A colour and a type size changed in
+the Framework panel went live and survived a per-page write and a whole-shell save, then were put back.
 
 ## Version Control
 

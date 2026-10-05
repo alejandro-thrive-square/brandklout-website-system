@@ -28,10 +28,15 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tmpdir } from 'node:os'
 import http from 'node:http'
+import { connect } from './target.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TMP = join(HERE, 'output')
-const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
+// --site <client>[:staging] resolves the host (and the admin login --all-pages needs) through target.mjs.
+const { api, target } = process.argv.includes('--site') || process.argv.includes('--all-pages')
+  ? await connect()
+  : { api: null, target: null }
+const BASE = (target?.url || process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
 /**
@@ -179,6 +184,12 @@ const CAPTURE = (props) => `(() => {
 })()`
 
 async function pageSlugs() {
+  // --all-pages: every page row, from the admin API. The homepage's links miss
+  // pages nothing links to (ads landing pages, thank-you pages).
+  if (process.argv.includes('--all-pages')) {
+    const { rows } = await api.getPages()
+    return rows.map((r) => String(r.cells?.slug ?? '')).map((s) => (s === 'index' || s === 'home' ? '' : s)).filter((s) => !s.includes('['))
+  }
   // Read the published sitemap-ish surface: every internal link from the
   // homepage, plus the homepage. Cheaper and more honest than a hard-coded
   // list, which is what went stale on this project before.
@@ -191,7 +202,7 @@ async function pageSlugs() {
   return [...slugs]
 }
 
-const [cmd, a, b] = process.argv.slice(2)
+const [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && all[i - 1] !== '--site')
 mkdirSync(TMP, { recursive: true })
 
 if (cmd === 'snapshot') {

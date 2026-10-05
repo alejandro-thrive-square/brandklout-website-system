@@ -94,7 +94,7 @@ The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, adde
 | [instatic-embeds](./tools/instatic-embeds/instatic-embeds.md) | Embed blocks, site scripts, CSP origins (the plugin itself is in instatic-plugins) | 0 (03, 05), 2 (02), 3 (02), 4 (01, 03) |
 | [instatic-release](./tools/instatic-release/README.md) | Inventory, backup, pinned image update, data verify, rollback across Railway instances | 5 (01–05) |
 | [instatic-domain-origins](./tools/instatic-domain-origins/instatic-domain-origins.md) | `PUBLIC_ORIGIN` and `check-origins` after any domain change | 0 (01, 05), 2 (02), 4 (02), 5 (03, 04) |
-| [instatic-api-sync](./tools/instatic-api-sync/instatic-api-sync.md) | The admin API client, fonts, CSS into the Styles registry, parity | 0 (03), 1 (01), 2 (01–03), 3 (02), 4 (01, 02), 5 (02, 03, 05) |
+| [instatic-api-sync](./tools/instatic-api-sync/instatic-api-sync.md) | The admin API client, fonts, CSS into the Styles registry, parity; the Framework (`framework.mjs`), code assets into the registry (`css-to-registry.mjs`) and the **editability gate** (`editability.mjs`) | 0 (03), 1 (01), 2 (01–03), 3 (02), 4 (01, 02), 5 (02, 03, 05) |
 | [termly-ghl-consent](./tools/termly-ghl-consent/termly-ghl-consent.md) | Termly banner, GHL consent bridge, the GHL form and DNI gates (Instatic and Webflow) | 0 (01, 04, 05), 2 (02, 03), 3 (01–03), 4 (03), 5 (04), 6 (02, 03) |
 | [cloudflare-launch](./tools/cloudflare-launch/cloudflare-launch.md) | Tokens, DNS copy, Railway domain, zone hardening, staging noindex, the sitemap Worker | 0 (05, 06), 1 (01, 02), 5 (04) |
 | [ads-combo](./tools/ads-combo/) | `combo.json` loader and the CDP helper the ads gates share | 3 (01, 03), 6 (03) |

@@ -42,7 +42,10 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
    may have edited it). A site whose tokens still sit in the `tokens.css` code asset is moved to the
    Framework the first time it comes in for work
    ([`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md) §Existing
-   sites). Either upload path, whole site or per page, keeps the Framework; run its check after.
+   sites): `editability.mjs --site <client>:staging` says what is not editable, `css-to-registry.mjs`
+   moves code-asset stylesheets into the Styles panel, `framework.mjs apply` moves the tokens, with
+   `css-parity.mjs` before and after. Either upload path, whole site or per page, keeps the Framework;
+   after every publish `editability.mjs --published` must end `EDITABLE`.
 5. **Third-party embeds and site scripts.** Use the Embed block and the Embed Origins settings, not
    raw HTML: [`tools/instatic-embeds/instatic-embeds.md`](../../tools/instatic-embeds/instatic-embeds.md).
    Site-wide tags go in `siteScripts`; read-merge-write the plugin settings, never replace them.

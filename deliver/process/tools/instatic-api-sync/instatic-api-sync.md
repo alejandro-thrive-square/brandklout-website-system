@@ -36,6 +36,27 @@ State editing is fully supported once a rule is in the registry: `cssStatePseudo
 
 So `.drawer.open` was purged because `open` existed as an unassigned class-kind rule — not because the class is added at runtime. **Demoting an unassigned class rule to `kind: 'ambient'` makes it and every selector mentioning it survive.** That is what `--cutover` does, and it is why the whole design system can live in the registry without needing the code-asset escape hatch.
 
+## Everything editable: Framework + registry, no code assets (2026-10-04)
+
+The standard is [`../client-first-style-guide/INSTATIC-FRAMEWORK.md`](../client-first-style-guide/INSTATIC-FRAMEWORK.md):
+tokens in the Framework panel, every other declaration in the registry, no rules in a code asset.
+These scripts implement it. All take `--site <client>[:staging|:production]` (`target.mjs` resolves
+the host and login through the plugin fleet: master env + `instatic-domain-origins/sites.json`), are
+dry runs unless `--apply`, write a shell backup to `output/` first, and do not publish.
+
+| Script | Purpose |
+|---|---|
+| `css-source.mjs` | Dependency-free CSS reader: rules with their `@media`/`@supports` context, declarations to registry keys (camelCase, `Webkit…`, `--custom` verbatim, `padding`/`margin` to sides), `!important` to priorities. Returns what the registry cannot hold (`@font-face`, `@import`, nested conditions, CSS nesting) separately |
+| `css-to-registry.mjs --files <asset,...>` | Moves a code-asset stylesheet into the registry and switches it off. Bare `.class` rules go into the node-bound class rule (the chip), later occurrences fold in unless a rule seated in between could match the same element with the same property; the rest are appended as selector rules in source order. New conditions inserted in breakpoint order. Demotes only the unassigned class rules its selectors mention. Refuses on residual blocks unless `--keep-residual`, and on a page-scoped asset with class-less selectors unless `--allow-broad` |
+| `framework-lib.mjs` | The Framework as data: owned variable names and emitted values (mirrors Instatic `src/core/framework/`), spec upsert, spec extraction |
+| `framework.mjs show / extract / apply / pull` | Read, draft, seed (with registry `:root` rewrites in the same save) and mirror the Framework. `apply` refuses while anything at `:root` would shadow an owned variable |
+| `registry-repair.mjs` | Used by `push-site.mjs`: every declaration the converter lost goes back into its own rule (same selector, same context); selector lists distribute to their split rules; shorthands the converter expanded are left alone unless the value was cut (layered backgrounds, math, custom properties) |
+| `editability.mjs [--published]` | **Gate.** Fails on an enabled code asset with rules, a `:root` shadow of a Framework variable, a root font size other than 16; with `--published`, reads every page's stylesheets |
+| `css-parity.mjs … --site <c>:staging --all-pages` | Now takes the target and every page row (ads pages included), not only pages the home page links |
+
+So trap 1 in *Also proven on a second client* below is a converter limit, not a registry one: custom
+properties written straight into `styles` publish fine. That is what retired the token code asset.
+
 ## Execution Steps
 
 ### A. Repair the draft (do this first)
@@ -119,7 +140,8 @@ until the 2026-09-04 renumber and is itself due for promotion into `deliver/proc
 Four things learned there belong here, because they are properties of the platform and not of that
 client:
 
-1. **Custom properties do not survive `cssToStyleRules`.** happy-dom does not enumerate `--*`
+1. *(Superseded 2026-10-04: the registry holds custom properties written directly; `registry-repair.mjs`
+   puts them back. The code-asset advice below is the old road.)* **Custom properties do not survive `cssToStyleRules`.** happy-dom does not enumerate `--*`
    declarations, so every `:root { --token: … }` block converts to an EMPTY rule with no warning,
    while the `var()` usages that consume them survive intact. On a token-driven design that is not
    a missing colour, it is the whole layout. Ship token primitives as a **code asset** (`type:

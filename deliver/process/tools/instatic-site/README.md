@@ -74,6 +74,7 @@ node ops/apply-template-flags.mjs --page 404 --not-found   # + --page <tpl> --ta
 node gates/template-guard.mjs
 node ../instatic-api-sync/insta-api.mjs publish
 node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, compare-live, visual-diff 1440 and 390, verify-motion-live
+node ../instatic-api-sync/editability.mjs --published      # must end "EDITABLE": no code-asset rules, no :root shadow of the Framework
 node push/push-site.mjs --record                           # baseline for the next update (after embeds/flags moved the seqs)
 ```
 (Paths above are relative to this folder; prefix them with the path from your client folder.)
@@ -81,11 +82,14 @@ node push/push-site.mjs --record                           # baseline for the ne
 This full run is for the **first import** or a deliberate rebuild. Every later change goes through
 the update path below.
 
-**Design tokens are not in this pipeline.** Colours, type sizes, spacing and radii live in the
-Instatic Framework (`settings.framework`), which both paths keep. The `tokens.css` asset this
-pipeline writes loads last and must not re-declare any of them, or a hand edit in the Framework is
-dead on publish (`TOKEN_FILES=00-fluid-root.css` once the tokens are moved). Standard and check:
-[`../client-first-style-guide/INSTATIC-FRAMEWORK.md`](../client-first-style-guide/INSTATIC-FRAMEWORK.md).
+**Everything the pipeline pushes is editable by hand** (since 2026-10-04). Design tokens live in the
+Instatic Framework (`settings.framework`), seeded with `../instatic-api-sync/framework.mjs apply`
+before the first push; both paths keep it. `push-site.mjs` puts every declaration the converter
+loses (custom properties, `clamp()`, layered backgrounds, `!important`) back into its registry rule
+(`output/registry-repair.txt`), skips Framework-owned tokens, and the `tokens.css` asset carries only
+the variable-font `@font-face` rules. `TOKEN_ASSET=legacy` restores the old token asset for one run.
+After the publish: `node ../instatic-api-sync/editability.mjs --published` must end `EDITABLE`.
+Standard: [`../client-first-style-guide/INSTATIC-FRAMEWORK.md`](../client-first-style-guide/INSTATIC-FRAMEWORK.md).
 
 ## The update path (changed pages only, 2026-09-28)
 
@@ -132,7 +136,7 @@ node push/push-site.mjs --record
 | `push/check-link.mjs` | Fail closed unless the Railway link dir serves `INSTATIC_BASE_URL` | `<RAILWAY_LINK_DIR>` (ship.sh runs it) | same |
 | `push/ship.sh` | Chunked `railway ssh` ship of converter + payload, run, fetch `import-out.json` | `RAILWAY_LINK_DIR=... bash ship.sh` | same |
 | `push/import-run.ts` | Runs on the container: `cssToStyleRules`, `importHtml`, class linking; optional prebuilt registry | shipped by ship.sh | bk-brandklout-website `21-instatic-upload/` |
-| `push/push-site.mjs` | One `PUT /site-document`: replace (first import) or `--update` incremental (changed pages, shell only if needed); pages, registry, token + script assets (GSAP first, UMD wrap), SEO cells; records `output/push-state.<host>.json` | `[--update [--pages a,b] [--with-shell\|--no-shell] \| --shell-only] [--apply] [--force]`, `--record`, `TOKEN_FILES=` | bk-west-la-implants |
+| `push/push-site.mjs` | One `PUT /site-document`: replace (first import) or `--update` incremental (changed pages, shell only if needed); pages, registry (with the converter's losses put back: `registry-repair.mjs`), `@font-face`-only token asset (`TOKEN_ASSET=legacy` for the old one), script assets (GSAP first, UMD wrap), SEO cells; records `output/push-state.<host>.json` | `[--update [--pages a,b] [--with-shell\|--no-shell] \| --shell-only] [--apply] [--force]`, `--record`, `TOKEN_FILES=` | bk-west-la-implants |
 | `lib/push-state.mjs` | The per-instance push record: html hashes, page seqs, registry + source hashes | imported | new 2026-09-28 |
 | `push/place-embeds.mjs` | Swap `data-embed` markers for Embed blocks (GHL forms, widgets) | `--config embeds.json [--apply] [--publish]` | bk-stone `21-instatic-upload/` |
 | `ops/apply-template-flags.mjs` | Re-set notFound / collection template flags after an import | `--page 404 --not-found` or `--page <tpl> --table <slug>` `[--check]` | bk-mason-park `apply-404-template` + `apply-blog-template` |
