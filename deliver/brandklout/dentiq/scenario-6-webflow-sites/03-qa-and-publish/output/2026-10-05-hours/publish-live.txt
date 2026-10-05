@@ -1,0 +1,13 @@
+site          Dentiq Dental (6a5f81effe0aee1d204818dd) short=dentiq-dental-houston
+lastPublished 2026-10-05T20:26:16.207Z
+lastUpdated   2026-10-05T20:26:29.762Z   (14s after publish)
+domains       dentiq.dental, www.dentiq.dental  + dentiq-dental-houston.webflow.io
+pages         89, changed since 2026-10-05T20:26:16.207Z: 0
+VERDICT       CLEAN: nothing pending, a publish ships only what you change next
+[wf] data_sites_tool transient failure, retry 1/5 in 5s
+[wf] data_sites_tool transient failure, retry 2/5 in 10s
+[wf] data_sites_tool transient failure, retry 3/5 in 20s
+[wf] data_sites_tool transient failure, retry 4/5 in 40s
+{"customDomains":[{"id":"6aaa149f9a0aa117d5b52886","url":"dentiq.dental"},{"id":"6aaa149e9a0aa117d5b52873","url":"www.dentiq.dental"}],"publishToWebflowSubdomain":true,"publishTaskId":"5e117773-9a89-4d43-9d95-233c30a174df","publishScope":"site"}
+
+re-fetch each changed URL with ?cb=1791233272530 and check cf-cache-status before believing it
