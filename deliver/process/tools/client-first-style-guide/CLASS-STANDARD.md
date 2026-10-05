@@ -16,6 +16,17 @@ Sources: Finsweet Client-First v2 ([`deliver/docs/CLIENT-FIRST.md`](../../../doc
 *Classes strategy 1 and 2*, *Core Structure*, *Typography*, *Utility class systems*) and the Relume
 style guide we build from ([`README.md`](./README.md), `assets/*.css`, 248 classes).
 
+## 0. Start every build from the starter
+
+- [`client-first-starter.css`](./client-first-starter.css) → `site-src/css/10-client-first.css`: the
+  complete utility vocabulary (structure, spacing, type roles, text styles, widths, layering,
+  visibility incl. `hide-visually`, backgrounds, icons, buttons + combos), every class in bounds,
+  reading the token names below. Change values, never names.
+- [`framework-spec.template.json`](./framework-spec.template.json): those tokens for the Framework
+  (`framework.mjs apply` after the first push; the `:root` part needs the registry `:root` the push
+  creates). Colours as roles over primitives; sizes whole at two rem decimals.
+- Custom classes start in `20-*.css` as `folder_element`; chapters are `section_<beat>`.
+
 ## 1. The three kinds of class, and how to tell them apart by name
 
 | Kind | Name shape | Example | Where its values live |

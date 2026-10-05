@@ -47,7 +47,11 @@ is `scripts/journey-audit.mjs`.
 3. **Fonts and styles.** Upload fonts to Instatic's font library on production and staging
    (`tools/instatic-api-sync/install-fonts.mjs`). Keep styles in the Styles panel registry so the
    client can edit them (`tools/instatic-api-sync/migrate-css-to-registry.mjs`).
-4. **Classes.** Name every class by [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)
+4. **Classes.** Start `site-src/css/10-client-first.css` as a copy of
+   [`client-first-starter.css`](../../tools/client-first-style-guide/client-first-starter.css) (the whole
+   Relume utility vocabulary on Framework tokens) and the Framework spec from
+   [`framework-spec.template.json`](../../tools/client-first-style-guide/framework-spec.template.json)
+   (fill values, keep names). Name every class by [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)
    from the first line of HTML: Relume utilities first, custom classes `folder_element` in full words
    (no `btn`, `rv-`, `-num`, `eyebrow`, `wrap`), combos `is-*`, scripts select by `data-` attributes, not
    styling classes. `tools/instatic-api-sync/class-audit.mjs --local <site-src> --strict` must end
