@@ -32,6 +32,10 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
 - **Batch 1 complete (staging)**: Stone Med Spa (`bk-stone-med-spa` `2c535364`, local source renamed
   too) and Stone Surgical Arts (`bk-stone` `064ac08d`): EDITABLE, IN BOUNDS, CLEAN, css parity 0
   real at 1440/390/1920, runtime parity OK.
+- **Mason Park complete (staging)** (`bk-mason-park` `aec30c70`): 1,898-rule stylesheet into the
+  registry, 497 renames + 4 merges, Framework 33 variables; parity 0 real; EDITABLE, IN BOUNDS, CLEAN.
+- **Mason Park Kids in progress** (agent; 217 pages): baseline done, editability published, gates
+  running.
 - Maps prepared and committed, not applied: Dr. Nahlah (`5f93a76c`, 377 renames; staging draft has
   an unreviewed 04:04Z edit, text-identical as far as checked), West LA (`9afba9e6`, 498; no staging
   instance), IFA rebuild local source (`01502dc3`, 371; another session is building it), Brandklout
