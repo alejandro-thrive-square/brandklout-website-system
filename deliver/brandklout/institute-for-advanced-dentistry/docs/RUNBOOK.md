@@ -21,6 +21,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
   (refuses any host but staging). **Do NOT promote staging to production as it stands** — it would
   replace production's `site.css`/`site.js` and unstyle its 58 other pages. Backups and the way back:
   [runbook/2026-09-21-home-redesign-on-staging.md](runbook/2026-09-21-home-redesign-on-staging.md).
+- **2026-10-04: the reviews widget `7febe92d` is on the in-section standard** (Elfsight editor only, live at once on staging): no widget title, Google-logo header with the count, gold `#C3972B` uppercase button, sand `#EBE5D8` cards, Read more in text gold `#74560F`. Gate `deliver/process/tools/elfsight-reviews/check-widget.mjs 7febe92d-b5da-447f-b53f-9593eec9da53 --render https://staging.ifadentistry.com/` ok.
 - **Live Google reviews on staging since 2026-09-30**: the home page's `#proof` rotator is the
   Elfsight Google Reviews widget (app `7febe92d-…`, the Peoria listing, 5.0 / 96) in an
   `embed-origins` Embed, class `.rv-embed`, placed by `21-instatic-upload/home/add-elfsight-reviews.mjs`
