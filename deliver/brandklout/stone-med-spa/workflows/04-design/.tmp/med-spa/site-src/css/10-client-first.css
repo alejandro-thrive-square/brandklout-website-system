@@ -366,7 +366,7 @@
 /* --- the eyebrow ---------------------------------------------------------
    The board opens every band with a small letter-spaced label. It is used often
    enough to earn a name in the shared layer rather than in each section. ---- */
-.eyebrow {
+.text-style-tagline {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -377,22 +377,22 @@
   letter-spacing: 0.22em;
   color: var(--accent);
 }
-.eyebrow::before {
+.text-style-tagline::before {
   content: "";
   width: 1.75rem;
   height: 1px;
   background-color: var(--accent-flat);
 }
-.eyebrow.is-center {
+.text-style-tagline.is-center {
   justify-content: center;
 }
-.eyebrow.is-center::after {
+.text-style-tagline.is-center::after {
   content: "";
   width: 1.75rem;
   height: 1px;
   background-color: var(--accent-flat);
 }
-.eyebrow.is-plain::before,
-.eyebrow.is-plain::after {
+.text-style-tagline.is-plain::before,
+.text-style-tagline.is-plain::after {
   display: none;
 }

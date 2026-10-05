@@ -158,7 +158,7 @@ function navTreatments() {
     const links = TREATMENTS.filter((t) => t.category === c.id && t.page)
       .map((t) => `              <a class="navbar_sub-link" href="${t.page}">${esc(t.name)}</a>`)
       .join("\n");
-    return `            <div class="navbar_sub-col">
+    return `            <div class="navbar_sub-column">
               <p class="navbar_sub-title">${esc(c.name)}</p>
 ${links}
             </div>`;
@@ -199,7 +199,7 @@ function ledgerRow(t, index) {
     ? `<a class="button is-link" href="${t.page}">Read the full page <span class="button_arrow">&rarr;</span></a>`
     : `<span class="row_nopage">Ask about this treatment at your consultation and we'll go through it with you.</span>`;
   const vital = (key, val) =>
-    `<span class="row_vital"><span class="row_vital-key">${key}</span><span class="row_vital-val">${esc(val)}</span></span>`;
+    `<span class="row_vital"><span class="row_vital-key">${key}</span><span class="row_vital-value">${esc(val)}</span></span>`;
   return `          <details class="row_component" id="${t.slug}" data-treatment data-concerns="${t.concerns.join(" ")}">
             <summary class="row_summary">
               <span class="row_index">${String(index).padStart(2, "0")}</span>
@@ -244,7 +244,7 @@ function categoryRows(id, next) {
     const g = t.group || null;
     if (g !== open) {
       if (open) out.push(`          </div>`);
-      if (g) out.push(`          <div class="menu_sub" data-sub>\n            <p class="eyebrow menu_subhead">${esc(g)}</p>`);
+      if (g) out.push(`          <div class="menu_sub" data-sub>\n            <p class="text-style-tagline menu_subhead">${esc(g)}</p>`);
       open = g;
     }
     out.push(ledgerRow(t, next()));
@@ -265,7 +265,7 @@ function ledger() {
               <span class="wipe_inner" data-parallax="8"><img src="assets/${c.image}" alt="" width="1600" height="900" loading="lazy"></span>
             </figure>
             <div class="menu_group-copy">
-              <span class="menu_group-num" aria-hidden="true">${roman[gi]}</span>
+              <span class="menu_group-number" aria-hidden="true">${roman[gi]}</span>
               <h2 class="heading-style-h2" data-split>${esc(c.name)}</h2>
               <p class="menu_group-blurb" data-reveal>${esc(c.blurb)}</p>
 ${c.cta ? `              <div class="button-group menu_group-cta" data-reveal><a class="button is-link" href="${c.cta.href}">${esc(c.cta.label)} <span class="button_arrow">&rarr;</span></a></div>
@@ -326,10 +326,10 @@ ${MONTHS.map((m) => `            <span class="cadence_month">${m}</span>`).join(
     const cells = MONTHS.map((m, i) => {
       const month = i + 1;
       const on = row.months.indexOf(month) !== -1;
-      if (!on) return `            <span class="cadence_cell is-m${month}"></span>`;
+      if (!on) return `            <span class="cadence_cell is-month-${month}"></span>`;
       const cls = month === first ? "cadence_dot is-start" : "cadence_dot";
       const what = month === first ? "First appointment" : "Appointment";
-      return `            <span class="cadence_cell is-m${month}"><span class="${cls}"><span class="u-sr-only">${what}: ${m}</span></span></span>`;
+      return `            <span class="cadence_cell is-month-${month}"><span class="${cls}"><span class="hide-visually">${what}: ${m}</span></span></span>`;
     }).join("\n");
     return `          <div class="cadence_row">
             <span class="cadence_label">
@@ -386,9 +386,9 @@ function vitals(slug) {
   ];
   return rows
     .map(
-      ([k, v]) => `            <div class="spec_vital">
-              <span class="spec_vital-key">${esc(k)}</span>
-              <span class="spec_vital-val">${esc(v)}</span>
+      ([k, v]) => `            <div class="at-a-glance_vital">
+              <span class="at-a-glance_vital-key">${esc(k)}</span>
+              <span class="at-a-glance_vital-value">${esc(v)}</span>
             </div>`
     )
     .join("\n");
@@ -442,17 +442,17 @@ function treatmentPage(slug) {
      ("${slug}"). Edit the record, not this output. CLINICAL REVIEW OUTSTANDING. -->
 <section class="section_cover cover_component">
   <figure class="cover_media" data-parallax="10">
-    <img src="assets/${p.cover.image}" alt="" width="1160" height="1450" fetchpriority="high"${p.cover.top ? ' class="u-cover-top"' : ""}>
+    <img src="assets/${p.cover.image}" alt="" width="1160" height="1450" fetchpriority="high"${p.cover.top ? ' class="object-position-top"' : ""}>
   </figure>
   <div class="cover_body">
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>${esc(CATEGORY_NAME(t.category))}</p>
+          <p class="text-style-tagline is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>${esc(CATEGORY_NAME(t.category))}</p>
           <h1 class="cover_title" data-split data-split-now>${p.cover.title}</h1>
           <p class="cover_lede">${esc(p.cover.lede)}</p>
           <div class="cover_facts">
-${p.cover.facts.map((f) => `            <p class="cover_fact"><span class="cover_fact-num">${esc(f.num)}</span><span>${esc(f.label)}</span></p>`).join("\n")}
+${p.cover.facts.map((f) => `            <p class="cover_fact"><span class="cover_fact-number">${esc(f.num)}</span><span>${esc(f.label)}</span></p>`).join("\n")}
           </div>
         </div>
       </div>
@@ -465,16 +465,16 @@ ${p.cover.facts.map((f) => `            <p class="cover_fact"><span class="cover
     <div class="container-large">
       <div class="padding-section-large">
         <div class="detail_layout">
-          <aside class="spec_rail" data-reveal>
-            <p class="spec_title">At a glance</p>
-            <div class="spec_vitals">
+          <aside class="at-a-glance_rail" data-reveal>
+            <p class="at-a-glance_title">At a glance</p>
+            <div class="at-a-glance_vitals">
 ${vitals(slug)}
             </div>
-            <div class="button-group spec_actions">
+            <div class="button-group at-a-glance_actions">
               <a class="button" href="book.html">Book a consultation</a>
               <a class="button is-secondary" href="tel:+18176742061">Call (817) 674-2061</a>
             </div>
-            <p class="spec_note">${esc(p.priceNote)}</p>
+            <p class="at-a-glance_note">${esc(p.priceNote)}</p>
           </aside>
           <div class="detail_prose">
             <div class="detail_block" data-reveal>
@@ -512,7 +512,7 @@ ${items(p.canDo.items)}
       <div class="padding-section-large">
         <div class="why_grid">
           <div class="why_copy">
-            <p class="eyebrow">${who.eyebrow}</p>
+            <p class="text-style-tagline">${who.eyebrow}</p>
             <h2 class="heading-style-h2" data-split>${p.who.heading}</h2>
             <p class="text-size-medium why_text" data-reveal>${esc(p.who.text)}</p>
             <div class="button-group" data-reveal>
@@ -538,12 +538,12 @@ ${items(p.canDo.items)}
     <div class="container-large">
       <div class="padding-section-large">
         <div class="care_head">
-          <p class="eyebrow">Before and after your appointment</p>
+          <p class="text-style-tagline">Before and after your appointment</p>
           <h2 class="heading-style-h2" data-split>A few simple <em class="text-style-display-accent">guidelines</em>.</h2>
         </div>
         <div class="care_grid">
-          <div class="care_col" data-reveal>
-            <p class="care_col-title">${esc(p.care.beforeTitle)}</p>
+          <div class="care_column" data-reveal>
+            <p class="care_column-title">${esc(p.care.beforeTitle)}</p>
             <ol class="care_list">
 ${items(p.care.before)}
             </ol>
@@ -551,8 +551,8 @@ ${items(p.care.before)}
           <figure class="care_figure" data-wipe>
             <span class="wipe_inner" data-parallax="8"><img src="assets/${p.care.image}" alt="" width="1600" height="900" loading="lazy"></span>
           </figure>
-          <div class="care_col" data-reveal>
-            <p class="care_col-title">${esc(p.care.afterTitle)}</p>
+          <div class="care_column" data-reveal>
+            <p class="care_column-title">${esc(p.care.afterTitle)}</p>
             <ol class="care_list" start="${p.care.before.length + 1}">
 ${items(p.care.after)}
             </ol>
@@ -571,7 +571,7 @@ ${items(p.care.after)}
       <div class="padding-section-large">
         <div class="detail_faq-grid">
           <div class="detail_faq-head">
-            <p class="eyebrow">Questions</p>
+            <p class="text-style-tagline">Questions</p>
             <h2 class="heading-style-h2" data-split>The ones we hear <em class="text-style-display-accent">most</em>.</h2>
           </div>
           <div class="faq_list" data-reveal>
@@ -594,7 +594,7 @@ ${p.faq
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-medium">
-        <p class="eyebrow">Often paired with</p>
+        <p class="text-style-tagline">Often paired with</p>
         <div class="related_grid" data-reveal="stagger">
 ${p.related.map(relatedCard).join("\n")}
         </div>
@@ -637,7 +637,7 @@ function siteFaq() {
       <div class="padding-section-large">
         <div class="detail_faq-grid">
           <div class="detail_faq-head">
-            <p class="eyebrow">Questions</p>
+            <p class="text-style-tagline">Questions</p>
             <h2 class="heading-style-h2" data-split>Frequently asked <em class="text-style-display-accent">questions</em>.</h2>
           </div>
           <div class="faq_list" data-reveal>
@@ -670,10 +670,10 @@ ${SITE_FAQ.map(
     that adding or renumbering a section cannot leave the rail pointing at an
     anchor that no longer exists. */
 function legalToc(body) {
-  const re = /<section class="legal_section" id="([a-z0-9-]+)">\s*<h2[^>]*><span class="legal_num">([^<]+)<\/span>([\s\S]*?)<\/h2>/g;
+  const re = /<section class="legal_section" id="([a-z0-9-]+)">\s*<h2[^>]*><span class="legal_number">([^<]+)<\/span>([\s\S]*?)<\/h2>/g;
   const items = [...body.matchAll(re)].map(
     ([, id, num, text]) =>
-      `                  <li><a class="legal_toc-link" href="#${id}"><span class="legal_toc-num">${num}</span><span>${text.trim()}</span></a></li>`
+      `                  <li><a class="legal_toc-link" href="#${id}"><span class="legal_toc-number">${num}</span><span>${text.trim()}</span></a></li>`
   );
   if (!items.length) throw new Error("{{LEGAL_TOC}} on a page with no legal_section");
   return `                <ol class="legal_toc-list">
@@ -843,7 +843,7 @@ for (const page of PAGES) {
 ${head.replace("{{SEO}}", seoBlock(page.slug))}
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link_component" href="#main">Skip to content</a>
 <div class="page-wrapper">
 ${nav}
 ${cur(drawer.replace("{{DRAWER_TREATMENTS}}", drawerTreatments))}

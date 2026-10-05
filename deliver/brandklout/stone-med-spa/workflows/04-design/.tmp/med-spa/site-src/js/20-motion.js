@@ -245,7 +245,7 @@
     var roots = $$("[data-hscroll]");
     if (!roots.length || !useGsap || !wide()) return;
     roots.forEach(function (root) {
-      var track = $(".hscroll_track", root);
+      var track = $(".horizontal-scroll_track", root);
       if (!track) return;
       var distance = function () {
         return track.scrollWidth - root.clientWidth;
@@ -268,7 +268,7 @@
           invalidateOnRefresh: true,
         },
       });
-      var bar = $(".hscroll_bar-fill", root);
+      var bar = $(".horizontal-scroll_bar-fill", root);
       if (bar) {
         gsap.fromTo(
           bar,

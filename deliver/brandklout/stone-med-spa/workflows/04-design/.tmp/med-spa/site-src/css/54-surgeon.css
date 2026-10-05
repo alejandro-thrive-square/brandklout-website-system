@@ -75,7 +75,7 @@
   line-height: 1.45;
   color: var(--fg-mute);
 }
-.surgeon_fact-num {
+.surgeon_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;

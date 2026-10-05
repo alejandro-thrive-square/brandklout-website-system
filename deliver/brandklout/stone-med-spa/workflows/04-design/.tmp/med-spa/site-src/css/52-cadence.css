@@ -39,7 +39,7 @@
   line-height: 1.45;
   color: var(--fg-body);
 }
-.cadence_stat-num {
+.cadence_stat-number {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 4vw, 3.6rem);
   line-height: 1;
@@ -114,15 +114,15 @@
   justify-content: center;
   border-left: 1px solid var(--line);
 }
-.cadence_cell.is-m1 { grid-column: 2; }
-.cadence_cell.is-m2 { grid-column: 3; }
-.cadence_cell.is-m3 { grid-column: 4; }
-.cadence_cell.is-m4 { grid-column: 5; }
-.cadence_cell.is-m5 { grid-column: 6; }
-.cadence_cell.is-m6 { grid-column: 7; }
-.cadence_cell.is-m7 { grid-column: 8; }
-.cadence_cell.is-m8 { grid-column: 9; }
-.cadence_cell.is-m9 { grid-column: 10; }
+.cadence_cell.is-month-1 { grid-column: 2; }
+.cadence_cell.is-month-2 { grid-column: 3; }
+.cadence_cell.is-month-3 { grid-column: 4; }
+.cadence_cell.is-month-4 { grid-column: 5; }
+.cadence_cell.is-month-5 { grid-column: 6; }
+.cadence_cell.is-month-6 { grid-column: 7; }
+.cadence_cell.is-month-7 { grid-column: 8; }
+.cadence_cell.is-month-8 { grid-column: 9; }
+.cadence_cell.is-month-9 { grid-column: 10; }
 .cadence_cell.is-m10 { grid-column: 11; }
 .cadence_cell.is-m11 { grid-column: 12; }
 .cadence_cell.is-m12 { grid-column: 13; }
@@ -164,15 +164,15 @@
 .js [data-in].is-in .cadence_run {
   animation: cadence-draw 1.4s var(--ease) 0.2s both;
 }
-.js [data-in].is-in .is-m1 .cadence_dot { animation-delay: 0.1s; }
-.js [data-in].is-in .is-m2 .cadence_dot { animation-delay: 0.18s; }
-.js [data-in].is-in .is-m3 .cadence_dot { animation-delay: 0.26s; }
-.js [data-in].is-in .is-m4 .cadence_dot { animation-delay: 0.34s; }
-.js [data-in].is-in .is-m5 .cadence_dot { animation-delay: 0.42s; }
-.js [data-in].is-in .is-m6 .cadence_dot { animation-delay: 0.5s; }
-.js [data-in].is-in .is-m7 .cadence_dot { animation-delay: 0.58s; }
-.js [data-in].is-in .is-m8 .cadence_dot { animation-delay: 0.66s; }
-.js [data-in].is-in .is-m9 .cadence_dot { animation-delay: 0.74s; }
+.js [data-in].is-in .is-month-1 .cadence_dot { animation-delay: 0.1s; }
+.js [data-in].is-in .is-month-2 .cadence_dot { animation-delay: 0.18s; }
+.js [data-in].is-in .is-month-3 .cadence_dot { animation-delay: 0.26s; }
+.js [data-in].is-in .is-month-4 .cadence_dot { animation-delay: 0.34s; }
+.js [data-in].is-in .is-month-5 .cadence_dot { animation-delay: 0.42s; }
+.js [data-in].is-in .is-month-6 .cadence_dot { animation-delay: 0.5s; }
+.js [data-in].is-in .is-month-7 .cadence_dot { animation-delay: 0.58s; }
+.js [data-in].is-in .is-month-8 .cadence_dot { animation-delay: 0.66s; }
+.js [data-in].is-in .is-month-9 .cadence_dot { animation-delay: 0.74s; }
 .js [data-in].is-in .is-m10 .cadence_dot { animation-delay: 0.82s; }
 .js [data-in].is-in .is-m11 .cadence_dot { animation-delay: 0.9s; }
 .js [data-in].is-in .is-m12 .cadence_dot { animation-delay: 0.98s; }

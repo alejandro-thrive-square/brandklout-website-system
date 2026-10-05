@@ -270,17 +270,17 @@
    Above 991 the section is pinned and the track is translated by the script.
    Below it, and without JS, the track is a plain horizontal scroller with
    snap points, which is the honest phone version of the same thing. */
-.hscroll_component {
+.horizontal-scroll_component {
   overflow: hidden;
 }
-.hscroll_track {
+.horizontal-scroll_track {
   display: flex;
   align-items: stretch;
   gap: var(--space-medium);
   width: max-content;
 }
 @media (max-width: 991px) {
-  .hscroll_track {
+  .horizontal-scroll_track {
     width: auto;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -288,10 +288,10 @@
     scrollbar-width: none;
     padding-bottom: 0.5rem;
   }
-  .hscroll_track::-webkit-scrollbar {
+  .horizontal-scroll_track::-webkit-scrollbar {
     display: none;
   }
-  .hscroll_track > * {
+  .horizontal-scroll_track > * {
     scroll-snap-align: start;
   }
 }

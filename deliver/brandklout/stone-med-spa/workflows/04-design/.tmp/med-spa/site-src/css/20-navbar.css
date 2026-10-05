@@ -235,7 +235,7 @@
   background-color: var(--ivory);
   box-shadow: var(--shadow-card-hover);
 }
-.navbar_sub-col {
+.navbar_sub-column {
   display: grid;
   align-content: start;
   gap: 0.55rem;

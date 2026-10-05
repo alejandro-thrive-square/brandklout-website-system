@@ -64,7 +64,7 @@
      low contrast (BugHerd #23, 2026-09-22). */
   color: var(--ivory);
 }
-.close_fact-val {
+.close_fact-value {
   font-size: var(--size-text-small);
   line-height: 1.55;
   color: var(--fg-body);

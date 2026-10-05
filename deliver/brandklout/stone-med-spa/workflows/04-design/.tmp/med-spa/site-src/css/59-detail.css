@@ -11,7 +11,7 @@
    The other six treatment pages take this stylesheet unchanged: a body file
    each and nothing else.
    =========================================================================== */
-.u-cover-top {
+.object-position-top {
   object-position: 50% 18% !important;
 }
 /* For a photograph whose subject's head touches its top edge. */
@@ -26,7 +26,7 @@
   gap: 3rem 6rem;
   align-items: start;
 }
-.spec_rail {
+.at-a-glance_rail {
   position: sticky;
   top: 7rem;
   padding: 1.75rem;
@@ -34,25 +34,25 @@
   border-radius: var(--radius-frame);
   background: var(--bg-card);
 }
-.spec_title {
+.at-a-glance_title {
   font-size: var(--size-text-tiny);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
 }
-.spec_vitals {
+.at-a-glance_vitals {
   display: grid;
   margin-top: 1rem;
 }
-.spec_vital {
+.at-a-glance_vital {
   display: grid;
   grid-template-columns: 7rem 1fr;
   gap: 1rem;
   padding: 0.85rem 0;
   border-top: 1px solid var(--line);
 }
-.spec_vital-key {
+.at-a-glance_vital-key {
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -60,19 +60,19 @@
   color: var(--fg-mute);
   padding-top: 0.3rem;
 }
-.spec_vital-val {
+.at-a-glance_vital-value {
   font-family: var(--font-display);
   font-size: var(--size-h5);
   line-height: 1.25;
   color: var(--fg);
 }
-.spec_actions {
+.at-a-glance_actions {
   margin-top: 1.5rem;
 }
-.spec_actions .button {
+.at-a-glance_actions .button {
   width: 100%;
 }
-.spec_note {
+.at-a-glance_note {
   margin-top: 1.25rem;
   font-size: var(--size-text-tiny);
   line-height: 1.5;
@@ -302,7 +302,7 @@
   gap: 3rem;
   align-items: start;
 }
-.care_col-title {
+.care_column-title {
   font-family: var(--font-display);
   font-size: var(--size-h4);
   color: var(--fg);
@@ -478,12 +478,12 @@
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .spec_rail,
+  .at-a-glance_rail,
   .products_intro,
   .detail_faq-head {
     position: static;
   }
-  .spec_actions .button {
+  .at-a-glance_actions .button {
     width: auto;
   }
   .products_figure {
@@ -526,7 +526,7 @@
     min-height: 0;
     padding: 1.5rem;
   }
-  .spec_vital {
+  .at-a-glance_vital {
     grid-template-columns: 6rem 1fr;
   }
   .why_media {

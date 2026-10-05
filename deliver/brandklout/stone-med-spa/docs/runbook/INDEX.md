@@ -1,11 +1,12 @@
 # Runbook index
 
-29 runs, newest first. Each line is one file in this folder.
+30 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging** (fleet pilot): tokens.css into its registry rules, Framework owns 46 variables, 51 classes renamed (eyebrow, u-sr-only, -num, is-m1…12 …), local source renamed; parity 0 real, runtime parity OK, EDITABLE, IN BOUNDS, verify CLEAN. Production untouched — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
 | 2026-10-01 | 2026-10-01, latest — "HIPAA Disclosure" footer link after Privacy Policy on all 27 pages, STAGING and PRODUCTION, by the new `add-hipaa-footer-link.mjs`; also in `site-src/partials/footer.html` — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01, latest — `/hipaa-disclosure` (HHS model Notice of Privacy Practices) injected on STAGING and PRODUCTION by the new `add-hipaa-page.mjs`, cloned from `/privacy-policy`; publish guarded to this page only; entity = practice name (none stated) — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-10-01 | 2026-10-01, later — Review panels padded (48px top/bottom); favicon (WA monogram) via `brandklout.open-graph` 1.2.3, newly installed, which also brings OG tags, canonical and per-page descriptions; new `set-favicon.mjs`; STAGING seq 24, PRODUCTION seq 28 — carries **gotchas** | [`2026-10-01-review-panel-padding-and-favicon.md`](./2026-10-01-review-panel-padding-and-favicon.md) |

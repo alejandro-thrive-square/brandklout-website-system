@@ -56,7 +56,7 @@
   gap: 1rem;
   padding: clamp(2rem, 5vw, 4.5rem);
 }
-.doctor_card-num {
+.doctor_card-number {
   font-family: var(--font-display);
   font-size: var(--size-h4);
   line-height: 1;
@@ -107,7 +107,7 @@
   font-size: var(--size-text-small);
   color: var(--fg-body);
 }
-.doctor_rule-fact-num {
+.doctor_rule-fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;
@@ -145,14 +145,14 @@
 .film_head .heading-style-h2 {
   margin-top: 1.25rem;
 }
-.hscroll_bar {
+.horizontal-scroll_bar {
   width: 12rem;
   height: 2px;
   background: var(--line-strong);
   flex: 0 0 auto;
   margin-bottom: 0.6rem;
 }
-.hscroll_bar-fill {
+.horizontal-scroll_bar-fill {
   display: block;
   height: 100%;
   background: var(--accent-flat);

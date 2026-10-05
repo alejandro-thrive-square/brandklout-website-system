@@ -365,7 +365,7 @@ textarea {
 }
 
 /* Skip link — the first thing in the DOM, visible only once focused. */
-.skip-link {
+.skip-link_component {
   position: absolute;
   left: -9999px;
   top: 0;
@@ -375,7 +375,7 @@ textarea {
   color: var(--white);
   font-size: var(--size-text-small);
 }
-.skip-link:focus {
+.skip-link_component:focus {
   left: 0;
 }
 
@@ -396,14 +396,14 @@ textarea {
    is why this is one utility on the image rather than a modifier on each of
    the two components, which would have been two numbers to keep in step.
 
-   It lives here, with `.u-sr-only`, because both `50-journey.css` and
+   It lives here, with `.hide-visually`, because both `50-journey.css` and
    `51-dossier.css` need it and neither owns it. Add a slot for this image and
    add the class; the focal point does not have to be worked out again. */
 .u-focus-figure img {
   object-position: 100% 0%;
 }
 
-.u-sr-only {
+.hide-visually {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -920,7 +920,7 @@ textarea {
 /* --- the eyebrow ---------------------------------------------------------
    The board opens every band with a small letter-spaced label. It is used often
    enough to earn a name in the shared layer rather than in each section. ---- */
-.eyebrow {
+.text-style-tagline {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -931,23 +931,23 @@ textarea {
   letter-spacing: 0.22em;
   color: var(--accent);
 }
-.eyebrow::before {
+.text-style-tagline::before {
   content: "";
   width: 1.75rem;
   height: 1px;
   background-color: var(--accent-flat);
 }
-.eyebrow.is-center {
+.text-style-tagline.is-center {
   justify-content: center;
 }
-.eyebrow.is-center::after {
+.text-style-tagline.is-center::after {
   content: "";
   width: 1.75rem;
   height: 1px;
   background-color: var(--accent-flat);
 }
-.eyebrow.is-plain::before,
-.eyebrow.is-plain::after {
+.text-style-tagline.is-plain::before,
+.text-style-tagline.is-plain::after {
   display: none;
 }
 
@@ -1190,7 +1190,7 @@ textarea {
   background-color: var(--ivory);
   box-shadow: var(--shadow-card-hover);
 }
-.navbar_sub-col {
+.navbar_sub-column {
   display: grid;
   align-content: start;
   gap: 0.55rem;
@@ -1397,13 +1397,13 @@ textarea {
   height: 1rem;
 }
 
-.footer_col {
+.footer_column {
   display: grid;
   gap: 0.85rem;
   font-size: var(--size-text-small);
   color: var(--fg-body);
 }
-.footer_col.is-right {
+.footer_column.is-right {
   justify-items: end;
   text-align: right;
 }
@@ -1476,7 +1476,7 @@ textarea {
     text-align: center;
     gap: 2.5rem;
   }
-  .footer_col.is-right {
+  .footer_column.is-right {
     justify-items: center;
     text-align: center;
   }
@@ -2119,17 +2119,17 @@ textarea {
    Above 991 the section is pinned and the track is translated by the script.
    Below it, and without JS, the track is a plain horizontal scroller with
    snap points, which is the honest phone version of the same thing. */
-.hscroll_component {
+.horizontal-scroll_component {
   overflow: hidden;
 }
-.hscroll_track {
+.horizontal-scroll_track {
   display: flex;
   align-items: stretch;
   gap: var(--space-medium);
   width: max-content;
 }
 @media (max-width: 991px) {
-  .hscroll_track {
+  .horizontal-scroll_track {
     width: auto;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -2137,10 +2137,10 @@ textarea {
     scrollbar-width: none;
     padding-bottom: 0.5rem;
   }
-  .hscroll_track::-webkit-scrollbar {
+  .horizontal-scroll_track::-webkit-scrollbar {
     display: none;
   }
-  .hscroll_track > * {
+  .horizontal-scroll_track > * {
     scroll-snap-align: start;
   }
 }
@@ -2400,7 +2400,7 @@ html:not(.js) .cover_media > img {
   line-height: 1.45;
   color: rgba(255, 255, 255, 0.78);
 }
-.cover_fact-num {
+.cover_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.2vw, 3rem);
   line-height: 1;
@@ -2522,7 +2522,7 @@ html:not(.js) .hero_media > img {
   max-width: 52rem;
   padding-bottom: 3rem;
 }
-.eyebrow.is-alternate {
+.text-style-tagline.is-alternate {
   color: var(--green);
 }
 .hero_title {
@@ -2726,18 +2726,18 @@ html:not(.js) .hero_media > img {
   height: 100%;
   object-fit: cover;
 }
-.mosaic_frame.is-a {
+.mosaic_frame.is-position-1 {
   grid-column: 1 / 6;
   grid-row: 1 / 4;
   aspect-ratio: 4 / 5;
 }
-.mosaic_frame.is-b {
+.mosaic_frame.is-position-2 {
   grid-column: 6 / 10;
   grid-row: 2 / 4;
   aspect-ratio: 4 / 3;
   margin-top: 3rem;
 }
-.mosaic_frame.is-c {
+.mosaic_frame.is-position-3 {
   grid-column: 9 / 13;
   grid-row: 1 / 3;
   aspect-ratio: 1;
@@ -2761,7 +2761,7 @@ html:not(.js) .hero_media > img {
   color: var(--fg-body);
   max-width: 26ch;
 }
-.mosaic_num {
+.mosaic_number {
   font-family: var(--font-display);
   font-size: var(--size-h4);
   line-height: 1;
@@ -2769,16 +2769,16 @@ html:not(.js) .hero_media > img {
 }
 
 @media (max-width: 991px) {
-  .mosaic_frame.is-a {
+  .mosaic_frame.is-position-1 {
     grid-column: 1 / 7;
     grid-row: 1 / 3;
   }
-  .mosaic_frame.is-b {
+  .mosaic_frame.is-position-2 {
     grid-column: 7 / 13;
     grid-row: 2 / 3;
     margin-top: 0;
   }
-  .mosaic_frame.is-c {
+  .mosaic_frame.is-position-3 {
     grid-column: 8 / 13;
     grid-row: 1 / 2;
     margin-left: 0;
@@ -2793,17 +2793,17 @@ html:not(.js) .hero_media > img {
   .mosaic_grid {
     gap: 0.75rem;
   }
-  .mosaic_frame.is-a {
+  .mosaic_frame.is-position-1 {
     grid-column: 1 / 8;
     grid-row: 1;
   }
-  .mosaic_frame.is-c {
+  .mosaic_frame.is-position-3 {
     grid-column: 8 / 13;
     grid-row: 1;
     aspect-ratio: 3 / 5;
     align-self: end;
   }
-  .mosaic_frame.is-b {
+  .mosaic_frame.is-position-2 {
     grid-column: 3 / 13;
     grid-row: 2;
   }
@@ -2860,7 +2860,7 @@ html:not(.js) .hero_media > img {
   line-height: 1.45;
   color: var(--fg-body);
 }
-.cadence_stat-num {
+.cadence_stat-number {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 4vw, 3.6rem);
   line-height: 1;
@@ -2935,15 +2935,15 @@ html:not(.js) .hero_media > img {
   justify-content: center;
   border-left: 1px solid var(--line);
 }
-.cadence_cell.is-m1 { grid-column: 2; }
-.cadence_cell.is-m2 { grid-column: 3; }
-.cadence_cell.is-m3 { grid-column: 4; }
-.cadence_cell.is-m4 { grid-column: 5; }
-.cadence_cell.is-m5 { grid-column: 6; }
-.cadence_cell.is-m6 { grid-column: 7; }
-.cadence_cell.is-m7 { grid-column: 8; }
-.cadence_cell.is-m8 { grid-column: 9; }
-.cadence_cell.is-m9 { grid-column: 10; }
+.cadence_cell.is-month-1 { grid-column: 2; }
+.cadence_cell.is-month-2 { grid-column: 3; }
+.cadence_cell.is-month-3 { grid-column: 4; }
+.cadence_cell.is-month-4 { grid-column: 5; }
+.cadence_cell.is-month-5 { grid-column: 6; }
+.cadence_cell.is-month-6 { grid-column: 7; }
+.cadence_cell.is-month-7 { grid-column: 8; }
+.cadence_cell.is-month-8 { grid-column: 9; }
+.cadence_cell.is-month-9 { grid-column: 10; }
 .cadence_cell.is-m10 { grid-column: 11; }
 .cadence_cell.is-m11 { grid-column: 12; }
 .cadence_cell.is-m12 { grid-column: 13; }
@@ -2985,15 +2985,15 @@ html:not(.js) .hero_media > img {
 .js [data-in].is-in .cadence_run {
   animation: cadence-draw 1.4s var(--ease) 0.2s both;
 }
-.js [data-in].is-in .is-m1 .cadence_dot { animation-delay: 0.1s; }
-.js [data-in].is-in .is-m2 .cadence_dot { animation-delay: 0.18s; }
-.js [data-in].is-in .is-m3 .cadence_dot { animation-delay: 0.26s; }
-.js [data-in].is-in .is-m4 .cadence_dot { animation-delay: 0.34s; }
-.js [data-in].is-in .is-m5 .cadence_dot { animation-delay: 0.42s; }
-.js [data-in].is-in .is-m6 .cadence_dot { animation-delay: 0.5s; }
-.js [data-in].is-in .is-m7 .cadence_dot { animation-delay: 0.58s; }
-.js [data-in].is-in .is-m8 .cadence_dot { animation-delay: 0.66s; }
-.js [data-in].is-in .is-m9 .cadence_dot { animation-delay: 0.74s; }
+.js [data-in].is-in .is-month-1 .cadence_dot { animation-delay: 0.1s; }
+.js [data-in].is-in .is-month-2 .cadence_dot { animation-delay: 0.18s; }
+.js [data-in].is-in .is-month-3 .cadence_dot { animation-delay: 0.26s; }
+.js [data-in].is-in .is-month-4 .cadence_dot { animation-delay: 0.34s; }
+.js [data-in].is-in .is-month-5 .cadence_dot { animation-delay: 0.42s; }
+.js [data-in].is-in .is-month-6 .cadence_dot { animation-delay: 0.5s; }
+.js [data-in].is-in .is-month-7 .cadence_dot { animation-delay: 0.58s; }
+.js [data-in].is-in .is-month-8 .cadence_dot { animation-delay: 0.66s; }
+.js [data-in].is-in .is-month-9 .cadence_dot { animation-delay: 0.74s; }
 .js [data-in].is-in .is-m10 .cadence_dot { animation-delay: 0.82s; }
 .js [data-in].is-in .is-m11 .cadence_dot { animation-delay: 0.9s; }
 .js [data-in].is-in .is-m12 .cadence_dot { animation-delay: 0.98s; }
@@ -3382,7 +3382,7 @@ html:not(.js) .hero_media > img {
   line-height: 1.45;
   color: var(--fg-mute);
 }
-.surgeon_fact-num {
+.surgeon_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;
@@ -3512,6 +3512,8 @@ html:not(.js) .hero_media > img {
 .words_reviews {
   margin-top: 2rem;
   min-height: 420px;
+  /* the widget runs edge to edge; without this its title sat on the panel's top edge */
+  padding-block: var(--space-large);
   border-radius: var(--radius-card);
   background: var(--white);
   color: var(--charcoal);
@@ -3528,6 +3530,7 @@ html:not(.js) .hero_media > img {
   }
   .words_reviews {
     margin-top: 1.5rem;
+    padding-block: var(--space-medium);
   }
 }
 
@@ -3724,7 +3727,7 @@ html:not(.js) .hero_media > img {
   height: 100%;
   object-fit: cover;
 }
-.menu_group-num {
+.menu_group-number {
   display: block;
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 5.5rem);
@@ -3830,7 +3833,7 @@ html:not(.js) .hero_media > img {
   text-transform: uppercase;
   color: var(--fg-mute);
 }
-.row_vital-val {
+.row_vital-value {
   font-size: var(--size-text-small);
   color: var(--fg);
 }
@@ -4278,7 +4281,7 @@ html:not(.js) .hero_media > img {
      low contrast (BugHerd #23, 2026-09-22). */
   color: var(--ivory);
 }
-.close_fact-val {
+.close_fact-value {
   font-size: var(--size-text-small);
   line-height: 1.55;
   color: var(--fg-body);
@@ -4312,7 +4315,7 @@ html:not(.js) .hero_media > img {
    The other six treatment pages take this stylesheet unchanged: a body file
    each and nothing else.
    =========================================================================== */
-.u-cover-top {
+.object-position-top {
   object-position: 50% 18% !important;
 }
 /* For a photograph whose subject's head touches its top edge. */
@@ -4327,7 +4330,7 @@ html:not(.js) .hero_media > img {
   gap: 3rem 6rem;
   align-items: start;
 }
-.spec_rail {
+.at-a-glance_rail {
   position: sticky;
   top: 7rem;
   padding: 1.75rem;
@@ -4335,25 +4338,25 @@ html:not(.js) .hero_media > img {
   border-radius: var(--radius-frame);
   background: var(--bg-card);
 }
-.spec_title {
+.at-a-glance_title {
   font-size: var(--size-text-tiny);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--accent);
 }
-.spec_vitals {
+.at-a-glance_vitals {
   display: grid;
   margin-top: 1rem;
 }
-.spec_vital {
+.at-a-glance_vital {
   display: grid;
   grid-template-columns: 7rem 1fr;
   gap: 1rem;
   padding: 0.85rem 0;
   border-top: 1px solid var(--line);
 }
-.spec_vital-key {
+.at-a-glance_vital-key {
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -4361,19 +4364,19 @@ html:not(.js) .hero_media > img {
   color: var(--fg-mute);
   padding-top: 0.3rem;
 }
-.spec_vital-val {
+.at-a-glance_vital-value {
   font-family: var(--font-display);
   font-size: var(--size-h5);
   line-height: 1.25;
   color: var(--fg);
 }
-.spec_actions {
+.at-a-glance_actions {
   margin-top: 1.5rem;
 }
-.spec_actions .button {
+.at-a-glance_actions .button {
   width: 100%;
 }
-.spec_note {
+.at-a-glance_note {
   margin-top: 1.25rem;
   font-size: var(--size-text-tiny);
   line-height: 1.5;
@@ -4603,7 +4606,7 @@ html:not(.js) .hero_media > img {
   gap: 3rem;
   align-items: start;
 }
-.care_col-title {
+.care_column-title {
   font-family: var(--font-display);
   font-size: var(--size-h4);
   color: var(--fg);
@@ -4779,12 +4782,12 @@ html:not(.js) .hero_media > img {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  .spec_rail,
+  .at-a-glance_rail,
   .products_intro,
   .detail_faq-head {
     position: static;
   }
-  .spec_actions .button {
+  .at-a-glance_actions .button {
     width: auto;
   }
   .products_figure {
@@ -4827,7 +4830,7 @@ html:not(.js) .hero_media > img {
     min-height: 0;
     padding: 1.5rem;
   }
-  .spec_vital {
+  .at-a-glance_vital {
     grid-template-columns: 6rem 1fr;
   }
   .why_media {
@@ -5076,7 +5079,7 @@ html:not(.js) .hero_media > img {
   gap: 0.35rem 1rem;
   padding-top: 1.4rem;
 }
-.rules_num {
+.rules_number {
   grid-row: 1 / 3;
   font-family: var(--font-display);
   font-size: var(--size-h4);
@@ -5392,7 +5395,7 @@ a.line_frame:focus-visible .line_caption {
   height: 2px;
   background: var(--line);
 }
-.hscroll_bar-fill {
+.horizontal-scroll_bar-fill {
   display: block;
   height: 100%;
   background: var(--fg);
@@ -5440,7 +5443,7 @@ a.line_frame:focus-visible .line_caption {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
-.lead_fact-num {
+.lead_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;
@@ -5628,7 +5631,7 @@ a.line_frame:focus-visible .line_caption {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
-.principle_fact-num {
+.principle_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.4vw, 3.2rem);
   line-height: 1;
@@ -6293,6 +6296,7 @@ a.line_frame:focus-visible .line_caption {
 .wall_reviews {
   margin-top: 3rem;
   min-height: 420px;
+  padding-block: var(--space-large);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   background: var(--white);
@@ -6301,6 +6305,7 @@ a.line_frame:focus-visible .line_caption {
 @media (max-width: 767px) {
   .wall_reviews {
     margin-top: 2rem;
+    padding-block: var(--space-medium);
   }
 }
 .wall_note {
@@ -6337,7 +6342,7 @@ a.line_frame:focus-visible .line_caption {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
-.plates_fact-num {
+.plates_fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;
@@ -6445,24 +6450,24 @@ a.line_frame:focus-visible .line_caption {
   height: 100%;
   object-fit: cover;
 }
-.room_frame.is-a {
+.room_frame.is-position-1 {
   grid-column: 1 / 8;
   grid-row: 1;
   aspect-ratio: 16 / 10;
 }
-.room_frame.is-b {
+.room_frame.is-position-2 {
   grid-column: 8 / 13;
   grid-row: 1 / 3;
   aspect-ratio: 4 / 5;
   margin-top: 4rem;
 }
-.room_frame.is-c {
+.room_frame.is-position-3 {
   grid-column: 3 / 8;
   grid-row: 2;
   aspect-ratio: 16 / 10;
 }
 /* Added on the client's word (BugHerd #57, 2026-09-28). */
-.room_frame.is-d {
+.room_frame.is-position-4 {
   grid-column: 1 / 7;
   grid-row: 3;
   aspect-ratio: 16 / 10;
@@ -6484,10 +6489,10 @@ a.line_frame:focus-visible .line_caption {
   .plates_object {
     max-width: 30rem;
   }
-  .room_frame.is-b {
+  .room_frame.is-position-2 {
     margin-top: 2rem;
   }
-  .room_frame.is-c {
+  .room_frame.is-position-3 {
     grid-column: 1 / 8;
   }
 }
@@ -6508,15 +6513,15 @@ a.line_frame:focus-visible .line_caption {
   .room_grid {
     gap: 0.75rem;
   }
-  .room_frame.is-a,
-  .room_frame.is-b,
-  .room_frame.is-c,
-  .room_frame.is-d {
+  .room_frame.is-position-1,
+  .room_frame.is-position-2,
+  .room_frame.is-position-3,
+  .room_frame.is-position-4 {
     grid-column: 1 / 13;
     grid-row: auto;
     margin-top: 0;
   }
-  .room_frame.is-b {
+  .room_frame.is-position-2 {
     aspect-ratio: 4 / 3;
   }
 }
@@ -6581,7 +6586,7 @@ a.line_frame:focus-visible .line_caption {
   gap: 1rem;
   padding: clamp(2rem, 5vw, 4.5rem);
 }
-.doctor_card-num {
+.doctor_card-number {
   font-family: var(--font-display);
   font-size: var(--size-h4);
   line-height: 1;
@@ -6632,7 +6637,7 @@ a.line_frame:focus-visible .line_caption {
   font-size: var(--size-text-small);
   color: var(--fg-body);
 }
-.doctor_rule-fact-num {
+.doctor_rule-fact-number {
   font-family: var(--font-display);
   font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   line-height: 1;
@@ -6670,14 +6675,14 @@ a.line_frame:focus-visible .line_caption {
 .film_head .heading-style-h2 {
   margin-top: 1.25rem;
 }
-.hscroll_bar {
+.horizontal-scroll_bar {
   width: 12rem;
   height: 2px;
   background: var(--line-strong);
   flex: 0 0 auto;
   margin-bottom: 0.6rem;
 }
-.hscroll_bar-fill {
+.horizontal-scroll_bar-fill {
   display: block;
   height: 100%;
   background: var(--accent-flat);
@@ -6855,7 +6860,7 @@ a.line_frame:focus-visible .line_caption {
   text-transform: uppercase;
   color: var(--fg-mute);
 }
-.legal_card-val {
+.legal_card-value {
   margin-top: 0.3rem;
   margin-bottom: 1.25rem;
   font-family: var(--font-display);
@@ -6863,11 +6868,11 @@ a.line_frame:focus-visible .line_caption {
   line-height: 1.25;
   color: var(--fg);
 }
-.legal_card-val a {
+.legal_card-value a {
   color: inherit;
   text-decoration: none;
 }
-.legal_card-val a:hover {
+.legal_card-value a:hover {
   color: var(--accent);
 }
 .legal_toc {
@@ -6891,7 +6896,7 @@ a.line_frame:focus-visible .line_caption {
   text-decoration: none;
   transition: color 0.2s var(--ease);
 }
-.legal_toc-num {
+.legal_toc-number {
   font-variant-numeric: tabular-nums;
   color: var(--fg-mute);
 }
@@ -6929,7 +6934,7 @@ a.line_frame:focus-visible .line_caption {
   gap: 1rem;
   margin-bottom: 1.1rem;
 }
-.legal_num {
+.legal_number {
   flex: none;
   font-family: var(--font-display);
   font-style: italic;

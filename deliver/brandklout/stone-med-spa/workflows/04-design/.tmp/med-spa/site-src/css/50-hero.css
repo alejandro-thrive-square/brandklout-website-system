@@ -89,7 +89,7 @@ html:not(.js) .hero_media > img {
   max-width: 52rem;
   padding-bottom: 3rem;
 }
-.eyebrow.is-alternate {
+.text-style-tagline.is-alternate {
   color: var(--green);
 }
 .hero_title {

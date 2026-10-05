@@ -100,7 +100,7 @@ textarea {
 }
 
 /* Skip link — the first thing in the DOM, visible only once focused. */
-.skip-link {
+.skip-link_component {
   position: absolute;
   left: -9999px;
   top: 0;
@@ -110,7 +110,7 @@ textarea {
   color: var(--white);
   font-size: var(--size-text-small);
 }
-.skip-link:focus {
+.skip-link_component:focus {
   left: 0;
 }
 
@@ -131,14 +131,14 @@ textarea {
    is why this is one utility on the image rather than a modifier on each of
    the two components, which would have been two numbers to keep in step.
 
-   It lives here, with `.u-sr-only`, because both `50-journey.css` and
+   It lives here, with `.hide-visually`, because both `50-journey.css` and
    `51-dossier.css` need it and neither owns it. Add a slot for this image and
    add the class; the focal point does not have to be worked out again. */
 .u-focus-figure img {
   object-position: 100% 0%;
 }
 
-.u-sr-only {
+.hide-visually {
   position: absolute;
   width: 1px;
   height: 1px;
