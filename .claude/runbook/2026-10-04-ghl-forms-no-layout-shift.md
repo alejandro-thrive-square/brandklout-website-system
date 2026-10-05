@@ -45,15 +45,29 @@
   Not in scope: Brandklout's own form (`coQOO0l1dANhwguaHade`, no consent fields); West LA (GHL forms
   not delivered yet); Livewell, Oceanic and Hackensack (production 404, stagings embed no form).
 
-## Next
-- These five forms are still on GHL's default look (Inter, blue `#155EEF` button) and fail the older
-  standard checks: one consent box, save-and-exit ON (Alexandria, Stone Surgical Arts, Stone Med Spa,
-  which causes "Submission in progress"), no Privacy link (McLean), no service dropdown (IFA, Med Spa).
-  Their consent text still reflows 20–40px on load (GHL's mobile copy re-renders it); the
-  `.tnc` / `.terms-text-container` rule fixes it, but that is the styling step, not done yet. Paste `no-shift.css`, delete the hide-script
-  Custom HTML element, move the consent fields below the links where needed, then gate.
-- Measure the site side: the embed's `data-height` comes from the builder (Mason Park `2442`, because
-  it counts the hidden fields). Check whether `form_embed.js` sizes the iframe to it before resizing.
+## Styling step on the five (later 2026-10-04)
+- One Codex run per form (`gpt-6.1-sol`): one Custom CSS block built from `site-style.mjs` values
+  (font, label/text colours, borders, button, `.tnc` / `.terms-text-container` consent text at
+  14px, grey underlined links), the Styles-panel field radius, and save-and-exit OFF where it was on
+  (Alexandria, Stone Surgical Arts, Stone Med Spa).
+  - Dr. Nahlah ×2: Raleway, gold gradient button `#8A7E4E → #AB9E6A → #D4CDB2`, square fields.
+  - IFA: Poppins 18px, yellow gradient button `#FFD23E → #F3AE55`, 4px fields.
+  - Stone Surgical Arts: Inter, green `#8FBC46` uppercase button, 2px fields.
+  - Stone Med Spa: Inter, green pill button, 12px fields.
+- All five are `site-style --compare` ok, including consent text at 375px. Live: Stone ×2 and IFA
+  hold their height exactly; Dr. Nahlah moves ≤5px (the rest is the headless-only captcha line).
+- Two runs needed a second go: Stone Med Spa lost the Chrome connection before Save (nothing saved),
+  and IFA's button was first set flat because the site's gradient had been missed.
+- `site-style.mjs`: skips cookie-banner buttons and reads gradient buttons, on both the site and
+  the form side.
+
+## Next (owner decisions; the gate still fails on these)
+- **Second (care) consent box with the legal name** on all five: needs each practice's legal name
+  from its `/privacy-policy`.
+- **Service dropdown**: IFA has none; Stone Med Spa's *Treatment Options* is a multi-select, not the
+  standard single dropdown.
+- **McLean has no Privacy Policy link** (Terms only).
+- Site side: the embed's `data-height` (Mason Park `2442`) is still not measured.
 
 ## Gotchas
 - The 4 consent **dropdowns** carry no `data-q`; only their label text names them. CSS can reach
@@ -66,5 +80,7 @@
   visibility reads the hidden copy and reports the desktop style on a phone.
 - A Chrome tab on the McLean form builder (`1137294533`) was claimed by another browser session;
   the run changed nothing until told to open its own tab. That instruction is now in the brief.
+- `site-style.mjs` regexes live inside a template literal: write `\(`, not `\(`, or the match
+  drops the closing parenthesis (`rgb(138, 126, 78` came back twice).
 - Headless Chrome gets an interactive Turnstile challenge plus an error line (136px); a real
   visitor's captcha is 100px. Never size the reserve from automation.

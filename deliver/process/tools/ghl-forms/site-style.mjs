@@ -24,14 +24,18 @@ const PROBE = `(() => {
   const first = (fam) => String(fam || '').split(',')[0].replace(/["']/g, '').trim()
   // A glass button on a hero photo (rgba white at 0.18) is not the brand colour: need alpha >= 0.5.
   const opaque = (c) => c && c !== 'transparent' && !(/rgba\\(/.test(c) && parseFloat(c.split(',')[3]) < 0.5)
-  const visible = (el) => { const r = el.getBoundingClientRect(); return r.width > 40 && r.height > 20 }
+  // Cookie banners (Termly's Accept/Decline) are not the site's call to action.
+  const visible = (el) => { const r = el.getBoundingClientRect(); return r.width > 40 && r.height > 20 && !el.closest('[id*=termly i], [class*=termly i], [id*=cookie i], [class*=cookie i], [class*=consent i]') }
+  // A gradient button (Dr. Nahlah's gold) has a transparent background-color: use the gradient's first stop.
+  const fill = (el) => { const s = cs(el); const g = /gradient/.test(s.backgroundImage) && s.backgroundImage.match(/rgba?\\([^)]+\\)/); return g ? g[0] : s.backgroundColor }
   const body = cs(document.body)
   const h = document.querySelector('h1, h2')
-  const btn = [...document.querySelectorAll('a, button')].filter(visible).find((el) => opaque(cs(el).backgroundColor) && /book|schedule|appointment|call|contact|request|claim|consult/i.test(el.textContent))
-    || [...document.querySelectorAll('a.button, .button, .btn, button')].filter(visible).find((el) => opaque(cs(el).backgroundColor))
+  const btn = [...document.querySelectorAll('a, button')].filter(visible).find((el) => opaque(fill(el)) && /book|schedule|appointment|call|contact|request|claim|consult/i.test(el.textContent))
+    || [...document.querySelectorAll('a.button, .button, .btn, button')].filter(visible).find((el) => opaque(fill(el)))
   const input = [...document.querySelectorAll('input[type=text], input[type=email], input:not([type]), textarea, select')].find(visible)
   const pick = (s) => s && ({ fontFamily: first(s.fontFamily), fontSize: s.fontSize, fontWeight: s.fontWeight, color: s.color, backgroundColor: s.backgroundColor, borderRadius: s.borderTopLeftRadius, border: s.borderTopWidth + ' ' + s.borderTopStyle + ' ' + s.borderTopColor, textTransform: s.textTransform, letterSpacing: s.letterSpacing, padding: s.paddingTop + ' ' + s.paddingRight })
-  return JSON.stringify({ url: location.href, body: pick(body), heading: pick(cs(h)), button: btn ? { text: btn.textContent.trim().slice(0, 40), ...pick(cs(btn)) } : null, input: pick(cs(input)) })
+  const gradient = btn && /gradient/.test(cs(btn).backgroundImage) ? cs(btn).backgroundImage : undefined
+  return JSON.stringify({ url: location.href, body: pick(body), heading: pick(cs(h)), button: btn ? { text: btn.textContent.trim().slice(0, 40), ...pick(cs(btn)), backgroundColor: fill(btn), gradient } : null, input: pick(cs(input)) })
 })()`
 
 /** Runs in the public form: the rendered font sizes of each SMS consent box's text. */
@@ -55,7 +59,7 @@ const FORM_PROBE = `(() => {
   const radii = {}
   if (text) radii['text input'] = cs(text).borderTopLeftRadius
   if (area) radii['message box'] = cs(area).borderTopLeftRadius
-  return JSON.stringify({ label: first(cs(label)?.fontFamily), input: first(cs(text || area)?.fontFamily), button: cs(btn)?.backgroundColor, radii, boxes: JSON.parse(${CONSENT_PROBE}) })
+  return JSON.stringify({ label: first(cs(label)?.fontFamily), input: first(cs(text || area)?.fontFamily), button: btn && (/gradient/.test(cs(btn).backgroundImage) ? (cs(btn).backgroundImage.match(/rgba?\\([^)]+\\)/) || [])[0] : cs(btn).backgroundColor), radii, boxes: JSON.parse(${CONSENT_PROBE}) })
 })()`
 
 async function probe(url, expression = PROBE, width = 1440) {

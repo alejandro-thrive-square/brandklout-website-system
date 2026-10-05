@@ -266,6 +266,10 @@ For the owner to settle against the reference video, then fold into the standard
   off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
   `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
   phone and fails off-brand consent text.
+- **`site-style.mjs` reads the site's real call-to-action** (2026-10-04): it skips cookie-banner
+  buttons (it had picked Termly's black *Decline* on Dr. Nahlah) and reads **gradient** buttons
+  (Dr. Nahlah's gold, IFA's yellow) by their first stop. A gradient site button gets the full
+  `linear-gradient(...)` as the form button's `background` in Custom CSS, not the flat base colour.
 - **`site-style.mjs --compare` measures the rendered public form** (fonts, button colour, field
   radii, consent sizes), so CSS-styled forms are judged as visitors see them.
 - **GoHighLevel signs out mid-session** (`app.gohighlevel.com/?logout=true`, "Sign into your
