@@ -10,7 +10,7 @@ const HERE = dirname(fileURLToPath(import.meta.url))
 const dir = mkdtempSync(join(tmpdir(), 'class-rename-'))
 mkdirSync(join(dir, 'src'))
 const map = {
-  rename: { 'rv-card': 'review_card', 'ch-arrival': 'section_arrival', 'legal_num': 'legal_number', 'result': 'bar-track_result', '.p1': 'text-size-large', 'btn': 'button', 'x-unused': 'y-unused' },
+  rename: { 'rv-card': 'review_card', 'ch-arrival': 'section_arrival', 'legal_num': 'legal_number', 'result': 'bar-track_result', '.p1': 'text-size-large', 'btn': 'button', 'ln': 'split_line', 'x-unused': 'unused_item' },
   merge: { 'heading-31': 'heading-43' },
 }
 // heading-43 is itself renamed in the same map: the merge must follow it to its new name
@@ -32,6 +32,7 @@ writeFileSync(join(dir, 'src', 'c.js', ), [
   `load('file.min.js'); obj.result = 1; x = "result"`,
   `el.className = 'rv-card is-open'`,
   `s = "hasn't .btn"`,
+  `split = new SplitText(el, { type: "lines", linesClass: "ln" })`,
 ].join('\n'))
 
 const r = spawnSync(process.execPath, [join(HERE, 'class-rename.mjs'), '--files', join(dir, 'src'), '--map', join(dir, 'map.json'), '--apply'], { encoding: 'utf8' })
@@ -60,4 +61,11 @@ assert.match(js, /obj\.result = 1/, 'property access untouched')
 assert.match(js, /x = "result"/, 'bare word outside a class context untouched (listed for review)')
 assert.match(js, /className = 'review_card is-open'/)
 assert.match(js, /"hasn't \.button"/)
+assert.match(js, /linesClass: "split_line"/, 'SplitText option key')
+
+// --files refuses what site mode refuses: renaming into a name the source already uses
+writeFileSync(join(dir, 'bad.json'), JSON.stringify({ rename: { 'review_card': 'button' }, merge: {} }))
+const bad = spawnSync(process.execPath, [join(HERE, 'class-rename.mjs'), '--files', join(dir, 'src'), '--map', join(dir, 'bad.json')], { encoding: 'utf8' })
+assert.equal(bad.status, 1, 'collision must be refused')
+assert.match(bad.stderr, /already used in this source/)
 console.log('class-rename: all cases pass')

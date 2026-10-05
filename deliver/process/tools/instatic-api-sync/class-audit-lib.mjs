@@ -56,7 +56,13 @@ const abbreviated = (name) => name.split(/[-_]/).some((seg) =>
 const CUSTOM_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*_[a-z0-9]+(?:-[a-z0-9]+)*$/
 export const COMBO_RE = /^is-[a-z0-9]+(?:-[a-z0-9]+)*$/
 const DASH_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+/* Classes we do not own: third-party widgets and runtimes put them on the page and select by them
+   (Elfsight `elfsight-app-<id>`, Sienna `asw-*`, Termly, GHL/LeadConnector, GSAP's `pin-spacer`,
+   Swiper/Splide, the house kit's runtime `wz-*`). Renaming them breaks the widget; they are
+   reported as `vendor`, never out of bounds. */
+export const VENDOR_RE = /^(elfsight-app-|eapps-|asw-|termly|t-consent|ghl-|hl_|hl-|lc-|calendly|swiper|splide|glide|pin-spacer|gsap-|wz-|instatic-|w-embed|cf-|__cf|grecaptcha|g-recaptcha|cf-turnstile|mapboxgl|leaflet-|vimeo|ytp-|plyr)/
 export function classify(name) {
+  if (VENDOR_RE.test(name)) return 'vendor'
   if (library.has(name)) return 'library'
   if (/__|--/.test(name)) return 'bem'
   if (/[A-Z]/.test(name)) return 'case'
