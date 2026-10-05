@@ -75,7 +75,8 @@ const ONLINE = {
 /* 2026-10-03: the GHL survey (HIPAA, Sung), replacing the native webhook form that
    partials/referral-form.html still holds. The header comment is not shipped. */
 const SNIPPET = readFileSync(join(SITE_SRC, 'partials/referral-survey.html'), 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '').trim()
-if (HERO_BTNS.length !== 2 || FORMS.btns.length !== 2) throw new Error('expected two buttons in #hero and in #referral-forms')
+/* #referral-forms carries one button since 2026-10-05 (client dropped "About Dr. Nahlah (PDF)"). */
+if (HERO_BTNS.length !== 2 || FORMS.btns.length !== 1) throw new Error('expected two buttons in #hero and one in #referral-forms')
 if (!/widget\/survey\/KXFNR4JPqxonXEFTtme0/.test(SNIPPET) || !/form_embed\.js/.test(SNIPPET)) throw new Error('survey snippet lacks its iframe or form_embed.js')
 
 // ── read ────────────────────────────────────────────────────────────────────

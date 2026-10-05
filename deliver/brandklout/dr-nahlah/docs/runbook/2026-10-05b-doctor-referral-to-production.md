@@ -56,3 +56,22 @@ but no longer used. That source work is committed with this run.
 ### Version Control
 
 Committed on `bk-dr-nahlah`.
+
+## Addendum, same day: "About Dr. Nahlah (PDF)" button removed; both Asana tasks closed
+
+- **Client instruction:** remove the "About Dr. Nahlah (PDF)" button from `#referral-forms`. The
+  sentence that pointed at it ("The second sheet introduces Dr. Nahlah, his training and his
+  qualifications.") went with it.
+- Production: `one-offs/drop-about-pdf-button.mjs`, run with plan, then `--apply`, then
+  `--publish`.
+  - The page went from 277 to 276 nodes, and the body is exactly as planned.
+  - No other rows moved, and the shell is untouched.
+  - The live outline differs from before by exactly that button and that sentence. The survey,
+    reviews and footer are unchanged, and there are no CSP errors.
+- Site source: `doctor-referral.body.html` was edited and `final-site/` rebuilt.
+  `push-referral-page.mjs` now expects ONE button in `#referral-forms`.
+- `/about-dr-nahlah.pdf` still 302s to the Worker. Nothing links to it now.
+- **Staging still shows the button** (and lacks the footer social row), because its draft is busy
+  with the class map. Once that draft clears, run the same one-off against staging.
+- Asana: commented on and completed `1219086723228800` (referral form) and `1219087019480243`
+  (social profiles).
