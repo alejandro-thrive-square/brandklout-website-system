@@ -19,6 +19,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   undecided (the client's domain is still WordPress). The asks are in
   [`ADS-LANDING-COMMENT.md`](./ADS-LANDING-COMMENT.md); the full list in scenario 3's
   [`INTAKE.md`](./scenario-3-ads-landing-pages/01-campaign-intake/output/INTAKE.md).
+- **2026-10-04: the reviews widget is on the in-section standard** (Elfsight editor only, live at once): no widget title, Google-logo header with the count, gold `#C4A36A` square uppercase button, dark `#161613` cards with cream text. Gate `check-widget.mjs 670ca31c-8602-42c1-a126-f46f653fe07f --render https://west-la-implants-production.up.railway.app/` ok.
 - **The Google reviews widget** (Elfsight `670ca31c-8602-42c1-a126-f46f653fe07f`, the practice's
   listing, 4.9 / 209) is live in the homepage proof chapter since 2026-09-30, published **seq
   25**, as an Embed block where the three static cards were. Run
