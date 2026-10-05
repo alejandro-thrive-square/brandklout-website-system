@@ -106,10 +106,14 @@ type sizes, spacing, radii. A class never carries a raw hex or a magic px value 
 
 ## 5. Reuse, and what not to do
 
-- **One look, one class.** Two custom classes with identical declarations are one class: keep the
-  better-named one (the audit lists *identical custom classes*).
-- **Don't reimplement a utility.** A custom class whose only job is `text-align: center` is
-  `text-align-center` (the audit lists *reimplements a library utility*).
+- **One look, one class.** Two custom classes with identical declarations in the SAME component are
+  one class: keep the better-named one. Identical classes in different components may stay (each
+  component owns its classes and may diverge); the audit lists *identical custom classes* as advice.
+- **Don't invent a utility the library has.** A utility-shaped name whose declarations equal a
+  library utility fails the audit (*reimplements a library utility*): use the library class. A custom
+  `folder_element` class that happens to hold one utility's declarations (`invitation_image
+  { margin: 0 }`) is fine: Client-First gives every element its own class. The audit lists those as
+  *reuse hints*, for new builds to prefer the utility.
 - **Don't deep stack.** More than 3 classes on one element means a custom class is missing.
 - **Don't style by context.** `.section_reviews p { … }` beats every edit made on the `p`'s own class
   in the Styles panel. Give the element a class. Allowed contexts: `text-rich-text` children (CMS

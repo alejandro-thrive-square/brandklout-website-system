@@ -127,7 +127,13 @@ for (const [name, c] of data.classes) {
   const sig = signature(styles)
   const entry = { name, kind, uses: c.uses, pages: c.pages.size, decls: Object.keys(styles).length, sample: Object.entries(styles).slice(0, 4).map(([k, v]) => `${k}: ${v}`).join('; ') }
   if (OUT_OF_BOUNDS.has(kind)) report.outOfBounds.push(entry)
-  if (kind !== 'library' && !/_component$|^section_/.test(name) && sig && librarySig.has(sig) && !Object.keys(c.contextStyles).length) report.reimplements.push({ ...entry, use: librarySig.get(sig).join(' / ') })
+  // An invented utility that equals a library one fails; a custom folder_element class that
+  // happens to hold one utility's declarations is fine (Client-First gives every element its own
+  // class) and is only listed as a reuse hint.
+  if (kind !== 'library' && !/_component$|^section_/.test(name) && sig && librarySig.has(sig) && !Object.keys(c.contextStyles).length) {
+    if (kind === 'custom' || kind === 'combo') (report.reuseHints ??= []).push({ ...entry, use: librarySig.get(sig).join(' / ') })
+    else report.reimplements.push({ ...entry, use: librarySig.get(sig).join(' / ') })
+  }
   if (kind !== 'library' && sig && !Object.keys(c.contextStyles).length) (sigOwners.get(sig) ?? sigOwners.set(sig, []).get(sig)).push(name)
   const setsSize = 'fontSize' in styles || Object.values(c.contextStyles).some((b) => 'fontSize' in b)
   if (setsSize && !TYPE_ROLE.test(name)) report.fontSizeOutsideRoles.push(entry)
@@ -154,6 +160,8 @@ if (oob) {
   console.log('\n  out of bounds, most used first:')
   for (const e of top(report.outOfBounds, Number(argOf('--top') ?? 30))) console.log(`    ${e.kind.padEnd(16)} .${e.name.padEnd(30)} ${String(e.uses).padStart(5)} uses / ${String(e.pages).padStart(3)} pages   ${e.sample.slice(0, 80)}`)
 }
+if (report.reuseHints?.length) console.log(`
+  reuse hints (custom classes equal to a utility; fine, listed only): ${report.reuseHints.map((e) => `.${e.name} = ${e.use}`).slice(0, 8).join(', ')}`)
 if (report.reimplements.length) {
   console.log('\n  reimplements a library utility:')
   for (const e of top(report.reimplements, 15)) console.log(`    .${e.name.padEnd(30)} -> ${e.use}`)
