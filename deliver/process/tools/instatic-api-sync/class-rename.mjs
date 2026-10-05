@@ -53,8 +53,31 @@ const expandedPath = mapPath.replace(/\.json$/i, '') + '.expanded.json'
 const folders = spec.folders ?? {}
 if (Object.keys(folders).length && (process.argv.includes('--verify') || argOf('--files'))) {
   const { existsSync } = await import('node:fs')
-  if (!existsSync(expandedPath)) throw new Error(`folders need ${expandedPath}: run the site-mode dry run first`)
-  Object.assign(rename, JSON.parse(readFileSync(expandedPath, 'utf8')).rename)
+  if (existsSync(expandedPath)) Object.assign(rename, JSON.parse(readFileSync(expandedPath, 'utf8')).rename)
+  else if (process.argv.includes('--verify')) throw new Error(`folders need ${expandedPath}: run the site-mode dry run first`)
+  else {
+    // A local source with no live site yet (a build before launch): the files are the name list.
+    const { readdirSync: rd, statSync: st } = await import('node:fs')
+    const names = new Set()
+    const scan = (d) => {
+      for (const n of rd(d)) {
+        if (['node_modules', '.git'].includes(n) || n.startsWith('.')) continue
+        const p = join(d, n)
+        if (st(p).isDirectory()) { scan(p); continue }
+        if (!/\.(html|css|js|mjs)$/i.test(n)) continue
+        const t = readFileSync(p, 'utf8')
+        for (const m of t.matchAll(/\sclass\s*=\s*["']([^"'$]*)["']/gi)) for (const tok of m[1].split(/\s+/)) if (tok) names.add(tok)
+        for (const m of t.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)) names.add(m[1])
+      }
+    }
+    scan(argOf('--files'))
+    for (const name of names) {
+      const i = name.indexOf('_')
+      if (i < 1 || Object.hasOwn(rename, name) || Object.hasOwn(merge, name)) continue
+      if (Object.hasOwn(folders, name.slice(0, i))) rename[name] = folders[name.slice(0, i)] + name.slice(i)
+    }
+    writeFileSync(expandedPath, JSON.stringify({ site: spec.site, rename, merge, expandedFrom: mapPath, from: 'files' }, null, 2))
+  }
 }
 // old -> new, one pass, so chains (a->b, b->c) cannot cascade. A null-prototype map with own-key
 // lookups: a plain object answers `'constructor' in all` with true.
