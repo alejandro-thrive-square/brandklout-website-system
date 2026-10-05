@@ -10,7 +10,12 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: LIVE ON brandklout.ai - v18 verbatim with Client-First type roles (seq 47)
+## Status: LIVE ON brandklout.ai - v18 verbatim with Client-First type roles (seq 50)
+
+- **2026-10-05 (seq 50): legal-page tables don't publish.** Instatic strips `<table>` from collection
+  bodies (the editor still shows them). Privacy §7/§8 are now headings + labelled bullets, and code blocks
+  wrap. **Sang: no tables in legal pages.**
+  [`runbook/2026-10-05-legal-tables-and-pre.md`](./runbook/2026-10-05-legal-tables-and-pre.md).
 
 - **2026-09-22: there is a STAGING instance.** `https://staging.brandklout.ai/admin`, same login
   as production, a full copy of the site, de-indexed at the Cloudflare edge and with its Railway

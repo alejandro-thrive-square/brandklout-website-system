@@ -1,11 +1,12 @@
 # Runbook index
 
-25 runs, newest first. Each line is one file in this folder.
+26 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | **Legal pages: privacy tables + SMS consent box (seq 50)**: Instatic's outlet sanitizer strips `<table>` (editor unaffected), so Privacy §7/§8 became headings + labelled bullets in the row; ``` blocks now wrap via two ambient `.legal-richtext pre` rules. Carries **gotchas** | [`2026-10-05-legal-tables-and-pre.md`](./2026-10-05-legal-tables-and-pre.md) |
 | 2026-09-22 | **staging.brandklout.ai + Cloudflare hardening + an SEO layer**: staging environment, volume, domain, noindex rule, seeded one-shot (34.6 MB), service domain deleted; SSL full-to-strict, Always Use HTTPS on, min TLS 1.2; Open Graph + AEO Schema installed on both (production configured, NOT published). All gates green. Carries **gotchas** | [`2026-09-22-staging-and-cloudflare.md`](./2026-09-22-staging-and-cloudflare.md) |
 | 2026-09-22 | **brandklout.ai cutover**: both new hosts were TRAPs (PUBLIC_ORIGIN was still the railway host alone, login POST 403). Now apex, www and railway host all OK; real login on the domain verified, both accounts active. `sites.json` + master `.env` updated. Carries **gotchas** | [`2026-09-22-domain-cutover-brandklout-ai.md`](./2026-09-22-domain-cutover-brandklout-ai.md) |
 | 2026-09-16 | **Footer component on every page (seq 47)**: new `Footer` component built from home's footer (the only one with the address), all 30 footers replaced in place; the unhidden NavBar Menu went out too. Carries **gotchas** | [`2026-09-16-footer-component-everywhere.md`](./2026-09-16-footer-component-everywhere.md) |

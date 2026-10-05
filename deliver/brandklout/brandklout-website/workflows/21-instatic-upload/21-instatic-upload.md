@@ -1497,6 +1497,22 @@ none: `userStyles-*.css` disappears from every page, with no warning in the edit
 publish set it on `src/styles/site.css` (fluid root, keyframes, Calendly shell). `verify-live`
 catches it ("no userStyles stylesheet").
 
+On 2026-10-05 the scope was `pages` with two ids, so `site.css` still reaches no `/legal/*` entry.
+A rule for the legal body goes in the registry as an **ambient** rule beside the other `.legal`
+rules (and in `agency/site.css`), not in the code asset.
+
+### A collection body loses its tables on publish; the editor still shows them (2026-10-05)
+
+A `richText`/`markdown` cell renders through `marked` (GFM, so tables become `<table>`), then
+`{{ body | html }}` passes it through `sanitizeRichtext` (`src/core/sanitize.ts`, Instatic 0.0.20).
+Its `RICHTEXT_CONFIG` allows `p br h1-h6 strong b em i u s del ins a ul ol li blockquote code pre
+span div` and nothing else, so `table/tr/td` are stripped and the cells publish as bare lines of
+text. The editor does not sanitize, so it looks right there. Nothing in a setting or CSS brings the
+table back. Write tabular legal content as `### <row>` + `- **<column>:** value` bullets (privacy
+policy §7 and §8 did this), and tell editors not to insert tables in collection bodies. Separately, a
+markdown ``` block publishes as `<pre><code>` and needs `.legal-richtext pre { white-space: pre-wrap }`
+or it runs off the right edge.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)

@@ -11,6 +11,10 @@
 .legal h3:first-child, .legal-richtext > :first-child { margin-top: 0; }
 /* The optional notice above the body: an empty cell must not leave an empty callout box. */
 .legal-note:empty { display: none; }
+/* A markdown ``` block in the body publishes as <pre><code>, which never wraps: the SMS consent
+   statement (Sang, 2026-10-05) ran off the right edge while the editor wrapped it. */
+.legal-richtext pre { margin-top: 13px; padding: 16px; border-radius: 8px; background-color: #f3f5f7; white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
+.legal-richtext pre code { font-size: 14px; line-height: 1.6; }
 
 /* Nothing else: since 2026-09-15 the site is Sang's package verbatim ("copy exactly that same
    version"); the home v12 slider/cards/stories rules and the ported admin edits are gone with
