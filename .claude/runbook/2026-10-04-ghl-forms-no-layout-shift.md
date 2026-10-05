@@ -80,7 +80,7 @@
   visibility reads the hidden copy and reports the desktop style on a phone.
 - A Chrome tab on the McLean form builder (`1137294533`) was claimed by another browser session;
   the run changed nothing until told to open its own tab. That instruction is now in the brief.
-- `site-style.mjs` regexes live inside a template literal: write `\(`, not `\(`, or the match
+- `site-style.mjs` regexes live inside a template literal: write `\\(` (two backslashes), not `\(`, or the match
   drops the closing parenthesis (`rgb(138, 126, 78` came back twice).
 - Headless Chrome gets an interactive Turnstile challenge plus an error line (136px); a real
   visitor's captcha is 100px. Never size the reserve from automation.
