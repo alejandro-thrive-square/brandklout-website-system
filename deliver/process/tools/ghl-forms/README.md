@@ -266,6 +266,17 @@ For the owner to settle against the reference video, then fold into the standard
   off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
   `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
   phone and fails off-brand consent text.
+- **A pasted Custom CSS block can vanish on Save** (West LA, 2026-10-05, twice): Codex pasted the
+  styling block, even read it back in the box, clicked Save, and the public form carried none of it.
+  What worked both times: after pasting, click the Custom CSS editor's own Save / Apply / Done button,
+  reopen it to confirm the block is there, then Save the form, then grep the public form for the
+  font name. Put those four steps in every styling brief.
+- **A new form from "Start from Scratch" already has a consent element and Privacy | Terms text.**
+  A brief that says "exactly these elements" makes Codex stop on them as a deletion it was not
+  allowed (West LA, 2026-10-05). Say "keep the consent element and the links GoHighLevel added and
+  set their text", and allow deleting only the template's default fields not in the list.
+- **GoHighLevel's public form endpoint goes down for minutes** (500 "Server Error" on every form,
+  2026-10-05). Retry for a minute before treating a form as broken by the last edit.
 - **Consent text is typed, not pasted** (IFA, 2026-10-04): Codex pasted box 1 with a chunk of the
   captcha's markup (`<div id="cf-turnstile-…">`), which rendered as ~130px of blank space between the
   boxes. The gate now fails a consent box carrying `div`/`iframe`/widget markup.
@@ -313,6 +324,7 @@ For the owner to settle against the reference video, then fold into the standard
 | Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
 | Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
 
+| West LA Implants | `XaCEV96A0QuF9ufEmkSc` All-on-6, `P15UYHonJj8oH5G8xwKX` 3-on-6 (location `0iwrVBEYONV6VlSHSGH6`) | 2026-10-05: new from scratch, landing standard, Manrope + gold `#C4A36A` square button for the dark ads pages. Contact `BAZZebJdjQAdGkda1fEE` brought to standard (new *Service* dropdown, 12), styled for the WordPress page (Prompt, `#E4E436`). All gate ok, style ok. |
 | Dr. Nahlah (Alexandria / McLean) | `g7FeioS7e7quSCxIQHRw` / `axgcdqEPUFoHF8Dt5Nji` | Standard 2026-10-04: two boxes per office entity, per-office legal pages, Raleway + gold gradient. Gate ok, style ok. |
 | IFA | `cxtQ5q29TfUr3cYlMmDB` | Standard 2026-10-04: new *Service* dropdown (12), captcha, Poppins + yellow gradient. Gate ok, style ok. |
 | Stone Surgical Arts | `Nzf3xQVLhgMlABuVMxCN` | Standard 2026-10-04: captcha, `www` links, Inter + green button. Gate ok, style ok. |
