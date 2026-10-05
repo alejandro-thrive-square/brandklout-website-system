@@ -105,9 +105,11 @@ if (cmd === 'staging') {
       'Leave the change applied-but-unpublished and tell the user, or re-run with --ship-pending after they agree.');
     process.exit(1);
   }
+  // publish_site takes custom domain IDs; a hostname 400s with "Please send a valid custom domain ID".
+  const ids = domains.map((d) => st.s.customDomains.find((c) => c.url === d).id);
   const r = await call('data_sites_tool', [{
     label: 'publish live',
-    publish_site: { publishToWebflowSubdomain: true, customDomains: domains },
+    publish_site: { publishToWebflowSubdomain: true, customDomains: ids },
   }], { site, context: `Live publish to ${domains.join(', ')} after explicit user go-ahead.` });
   console.log(JSON.stringify(result(r)).slice(0, 600));
   console.log(`\nre-fetch each changed URL with ?cb=${Date.now()} and check cf-cache-status before believing it`);

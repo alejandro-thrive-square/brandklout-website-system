@@ -10,12 +10,18 @@
   hours/address sweep includes the per-page JSON-LD field (`query_pages_schema_markup` /
   `bulk_update_pages_schema_markup`).
 
+- `tools/webflow-build/wf-publish.mjs live`: maps `--domains` hostnames to custom domain IDs; `publish_site`
+  400s on hostnames now.
+
 ## Next
-- Dentiq live publish awaits the user's go-ahead (pending edits on the site that are not ours).
+- None. Dentiq published live the same day on the user's go-ahead.
 
 ## Gotchas
 - Webflow's Page Settings schema field prints in `<head>` after the canonical; `get_page_freeform_code`
   returns empty for it. Read it with `query_pages_schema_markup`.
+
+- After a staging publish, `wf-publish.mjs state` says CLEAN even when the custom domains still serve
+  the old build: `lastPublished` covers the webflow.io publish too.
 
 ## Version Control
 Follows [SYSTEM_RULES.md §5](../../SYSTEM_RULES.md).
