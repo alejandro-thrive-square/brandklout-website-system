@@ -34,6 +34,26 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
 - Maps prepared read-only for Dr. Nahlah (377 renames) and West LA (498), in their worktrees,
   uncommitted (Nahlah worktree has someone else's uncommitted work).
 
+## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
+The staging maps and specs are the production inputs: same class names, same tokens. Production
+registries can differ from staging (unpublished staging work, later production edits), so every
+step dry-runs against production first and refuses on surprises.
+```bash
+S=<client>:production
+node output/status.mjs --site $S                      # draftMatchesPublished must be true
+node with-site.mjs $S --allow-production -- node ../instatic-site/ops/backup-site.mjs --out output/fleet/<c>/backup-pre-migration-prod
+node migration-gates.mjs snapshot before-prod --site $S
+node css-to-registry.mjs --site $S --files <asset> [--in-place]      # dry, then --apply (same mode as staging)
+node framework.mjs apply <framework-spec.json> --site $S              # dry, then --apply
+# publish production (insta-api publish with the production login), then:
+node migration-gates.mjs snapshot mid-prod --site $S && node migration-gates.mjs diff before-prod mid-prod --site $S
+node class-rename.mjs --site $S --map <class-map.json>                # dry: must match the staging dry run
+node class-rename.mjs --site $S --map <class-map.json> --apply        # then publish
+node migration-gates.mjs snapshot after-prod --site $S && node migration-gates.mjs diff mid-prod after-prod --site $S
+node migration-gates.mjs final --site $S --map <class-map.json>
+```
+`output/publish.mjs` refuses non-staging hosts on purpose; publish production deliberately.
+
 ## Gotchas
 - Two captures of an unchanged page differ (auto margins, looping animations, late fonts, iframes):
   every gate here counts only differences that survive a second capture.

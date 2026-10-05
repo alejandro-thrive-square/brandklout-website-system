@@ -22,7 +22,7 @@ import { argOf } from './target.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const site = argOf('--site')
-const [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && !['--site', '--map'].includes(all[i - 1]))
+let [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && !['--site', '--map'].includes(all[i - 1]))
 if (!site || !cmd) {
   console.error('usage: migration-gates.mjs snapshot <label> | diff <before> <after> | final --map <file>   --site <client>:staging')
   process.exit(2)
@@ -71,6 +71,17 @@ if (cmd === 'snapshot') {
   /* Behaviour: a page that differs is captured again (on its own, after the others) and only a
      difference that persists counts. A busy machine times a page out or catches a widget mid-load;
      a real regression is still there the second time. */
+  // A baseline that was itself re-captured in its own diff (`<a>~m`: the first capture merged with
+  // the re-capture of the pages that differed) is the better baseline: Stone Surgical Arts' raw `mid`
+  // caught a form iframe and an accordion mid-load, and every later diff against it failed on them.
+  {
+    const host0 = new URL((await import('./target.mjs').then((m) => m.connect())).target.url).hostname
+    const { existsSync } = await import('node:fs')
+    if (existsSync(join(PARITY, `runtime-${host0}-${a}~m.json`))) {
+      console.log(`      runtime baseline: ${a}~m (the re-checked capture of ${a})`)
+      a = `${a}~m`
+    }
+  }
   if (!run(`runtime-diff-${a}-${b}`, ['runtime-parity.mjs', 'diff', a, b, '--site', site])) {
     const log = readFileSync(join(LOG, `runtime-diff-${a}-${b}.log`), 'utf8')
     const slugs = [...new Set([...log.matchAll(/^FAIL {2}(.+?) @\d+:/gm)].map((m) => m[1]))]
