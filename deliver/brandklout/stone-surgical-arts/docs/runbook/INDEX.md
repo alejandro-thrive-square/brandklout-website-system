@@ -1,11 +1,12 @@
 # Runbook index
 
-27 runs, newest first. Each line is one file in this folder.
+28 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging**: tokens.css into its registry rules, Framework owns 48 variables, 107 classes renamed (13 abbreviated folders, eyebrow, u-fill, -num …); hero dead-override repaired; parity 0 real, runtime parity OK, EDITABLE, IN BOUNDS, CLEAN. Production untouched — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
 | 2026-10-01 | 2026-10-01, latest — BugHerd round two: 125 pins replied to and closed on the board; #7 (GHL setting) and #95 (no attachment) left open with replies — carries **gotchas** | [`2026-10-01-bugherd-round-two-pins-closed.md`](./2026-10-01-bugherd-round-two-pins-closed.md) |
 | 2026-10-01 | 2026-10-01, later — HIPAA Disclosure linked in the footer legal row on all 55 pages, staging and production; source footer too — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | 2026-10-01 — HIPAA Disclosure page (`/hipaa-disclosure`) injected on staging and production, 55 pages each, every other page unchanged — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
