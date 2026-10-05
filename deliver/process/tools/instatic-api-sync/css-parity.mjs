@@ -83,15 +83,21 @@ const getJson = (path, port) =>
   })
 
 async function browser() {
-  const port = 9700 + Math.floor(Math.random() * 200)
-  const profile = join(tmpdir(), `cdp-parity-${Date.now()}`)
+  // Port 0: Chrome picks a free port and writes it to <profile>/DevToolsActivePort. A random port in a
+  // fixed range let two parallel runs attach to the SAME browser (Mason Park Kids, 2026-10-05).
+  const profile = join(tmpdir(), `cdp-parity-${process.pid}-${Date.now()}`)
   const proc = spawn(CHROME, [
     '--headless=new', '--disable-gpu', '--hide-scrollbars',
-    `--remote-debugging-port=${port}`, '--remote-allow-origins=*',
+    '--remote-debugging-port=0', '--remote-allow-origins=*',
     '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check',
     `--user-data-dir=${profile}`, 'about:blank',
   ], { stdio: 'ignore' })
 
+  let port
+  for (let i = 0; i < 150 && !port; i++) {
+    try { port = Number(readFileSync(join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0]) || undefined } catch { await wait(200) }
+  }
+  if (!port) throw new Error('Chrome did not write DevToolsActivePort')
   let wsUrl
   for (let i = 0; i < 150 && !wsUrl; i++) {
     try {

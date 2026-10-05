@@ -74,7 +74,7 @@ if (argOf('--only')) slugs = slugs.filter((s) => argOf('--only').split(',').incl
 const WIDTHS = (argOf('--widths') ?? '1440,390').split(',').map(Number)
 const SEL = 'button:not([type=submit]),[role=button],[role=tab],summary,[aria-controls],[aria-expanded],[data-drag-next],[data-drag-prev],a[href^="#"]:not([href="#"])'
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 180000, args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
 const out = {}
 const base = target.url.replace(/\/$/, '')
 

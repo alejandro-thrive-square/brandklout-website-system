@@ -123,6 +123,22 @@ if (cmd === 'snapshot') {
       .map((m) => m[1].replace(/-?\d+(\.\d+)?/g, '#').replace(/ -> .*$/, '')))
     const first = kinds(`runtime-diff-${a}-${b}`)
     const persistent = [...kinds(`runtime-diff-${a}-${b}-recheck`)].filter((k) => first.has(k))
+    // A persistent difference against a MIDDLE capture may be that capture's own noise (it cannot be
+    // re-captured: the state is gone). If the original `before` baseline exists, the page is judged
+    // against it too: what matters is that the final state behaves like the site did originally
+    // (Mason Park Kids: 3 items off in `mid` only; before vs final was identical).
+    if (persistent.length && !/^before(~m)?$/.test(a)) {
+      const { existsSync } = await import('node:fs')
+      const host1 = new URL((await import('./target.mjs').then((m) => m.connect())).target.url).hostname
+      const orig = existsSync(join(PARITY, `runtime-${host1}-before~m.json`)) ? 'before~m' : 'before'
+      if (existsSync(join(PARITY, `runtime-${host1}-${orig}.json`))) {
+        run(`runtime-diff-${orig}-${b}~m`, ['runtime-parity.mjs', 'diff', orig, `${b}~m`, '--site', site])
+        const vsOrig = kinds(`runtime-diff-${orig}-${b}~m`)
+        const still = persistent.filter((k) => vsOrig.has(k))
+        console.log(`      against the original ${orig}: ${persistent.length - still.length} of ${persistent.length} were the middle capture's noise`)
+        persistent.splice(0, persistent.length, ...still)
+      }
+    }
     writeFileSync(join(LOG, `runtime-diff-${a}-${b}-persistent.log`), persistent.join('\n'))
     console.log(`${persistent.length ? 'FAIL' : 'ok  '}  ${`runtime-persistent-${a}-${b}`.padEnd(34)} ${persistent.length ? `${persistent.length} difference(s) seen in both captures: ${persistent.slice(0, 3).join(' | ')}` : 'no difference survives a second capture'}`)
     if (persistent.length) ok = false

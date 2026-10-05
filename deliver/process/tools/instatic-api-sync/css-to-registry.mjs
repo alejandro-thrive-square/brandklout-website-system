@@ -237,6 +237,24 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
   }
 
   if (target) {
+    // Same cascade rule as --in-place: a base declaration folded in AFTER a media override of the
+    // same property kills that override (Mason Park Kids `.cf-shot`: @1100 min-height 0, then a
+    // later base 18rem; folded, the override won and the home photo collapsed to 0).
+    if (!ctx) {
+      for (const [c, cbag] of Object.entries(target.contextStyles ?? {})) {
+        for (const k of Object.keys(styles)) {
+          if (!(k in cbag)) continue
+          const p = ctxSeen.get(`${target.id}|${c}|${k}`)
+          if (p === undefined || p < item.pos) {
+            delete cbag[k]
+            if (target.contextStylePriorities?.[c]) delete target.contextStylePriorities[c][k]
+            stats.deadOverrides++
+          }
+        }
+      }
+    } else {
+      for (const k of Object.keys(styles)) ctxSeen.set(`${target.id}|${ctx}|${k}`, item.pos)
+    }
     if (ctx) {
       target.contextStyles = { ...(target.contextStyles ?? {}) }
       target.contextStyles[ctx] = { ...(target.contextStyles[ctx] ?? {}), ...styles }
@@ -322,7 +340,7 @@ if (parsed.unsupported.length) {
 
 console.log(`\nrules read            ${parsed.rules.length} (+${parsed.keyframes.length} @keyframes)`)
 console.log(`merged into class rule ${stats.merged}, folded into it ${stats.folded}`)
-console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}, dead media overrides dropped ${stats.deadOverrides}` : ''}`)
+console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}` : ''}, dead media overrides dropped ${stats.deadOverrides}`)
 console.log(`fallback values dropped ${stats.droppedFallbacks} (same property twice in one block: the last wins)`)
 console.log(`conditions added      ${conditionsAdded} (now ${conditions.length})`)
 console.log(`context conflicts     ${ctxConflicts}`)
