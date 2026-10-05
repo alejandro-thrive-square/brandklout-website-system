@@ -69,7 +69,9 @@ Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark
 
 1. **Widget.** Find the client's row in `review-widgets.json`. No widget yet: create one first
    (rollout steps 2–3 above, one widget per listing).
-2. **Site style.** Read it from the live page that will hold the widget, with the GHL forms reader:
+2. **Site style.** Read it from **the page that holds the widget**, on the host that serves it: a
+   rebuild in progress lives on staging or its `.up.railway.app` host while the client's domain still
+   serves the old site (2026-10-04: West LA and IFA were styled from their old sites first). Read it, with the GHL forms reader:
    ```bash
    cd deliver/process/tools/ghl-forms
    node site-style.mjs <page url> > output/site-style.json
@@ -115,10 +117,14 @@ Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark
 
 ## States
 
-`live-on-site` · `created-not-placed` · `exists-placed-on-wrong-site` · `draft-needs-listing` ·
+`live-on-site` · `live-on-staging` (a rebuild not yet promoted) · `created-not-placed` · `exists-placed-on-wrong-site` · `draft-needs-listing` ·
 `other-account-all-in-one`
 
 ## Gotchas
+
+- **A brand accent that fills a button is often too light as text.** `Read more` and the card text
+  need 4.5:1 on the card (the gate checks): use the site's text-safe accent (IFA gold text
+  `#74560F`, not the `#C3972B` fill) or the heading ink.
 
 - **Codex will not use a tab a finished run left behind** ("already claimed by another browser
   session"). Every Elfsight brief says: open a new tab of your own, close it at the end.

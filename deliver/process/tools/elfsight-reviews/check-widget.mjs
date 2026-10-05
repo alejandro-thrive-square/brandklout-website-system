@@ -75,6 +75,12 @@ const plate = bg.type === 'color' && !clear(bg.color) ? bg.color : null
 if (plate && !renderUrl) problem(`widget background ${plate}: transparent, or the colour of the card it sits in (prove with --render)`)
 if (!clear(t.headerBackgroundColor)) problem(`header background ${t.headerBackgroundColor}: transparent`)
 const btn = t.writeReviewButton || {}
+// Text on the cards must read (ADA): a brand gold that fills a button is often too light as text.
+for (const [k, c] of [['review text', t.reviewTextColor], ['read more', t.reviewReadMoreColor]]) {
+  const card = t.reviewBackgroundColor
+  if (c && card && rgba(c) && rgba(card) && contrast(c, card) < 4.5) problem(`${k} ${c} on card ${card}: contrast ${contrast(c, card).toFixed(1)}:1, needs 4.5 (use the site's text-safe accent)`)
+}
+if (btn.color && btn.fontColor && contrast(btn.color, btn.fontColor) < 4.5) problem(`button text ${btn.fontColor} on ${btn.color}: contrast ${contrast(btn.color, btn.fontColor).toFixed(1)}:1`)
 for (const [k, v] of [['button', btn.color], ['read more', t.reviewReadMoreColor], ['verified badge', t.reviewVerifiedBadgeColor]].concat(s.theme?.type === 'custom' ? [] : [['accent', s.theme?.accentColor]])) { // a Custom theme hides the accent
   if (same(v, BLUE)) problem(`${k} colour is Elfsight's default blue ${v}`)
 }
@@ -87,7 +93,8 @@ if (stylePath) {
   const want = [
     ['button background', btn.color, b.backgroundColor],
     ['button text', btn.fontColor, b.color],
-    ['read more', t.reviewReadMoreColor, b.backgroundColor],
+    // Read more: the button colour when it reads on the card; otherwise any accent that does (checked above).
+    ...(contrast(b.backgroundColor || '#000', t.reviewBackgroundColor || '#fff') >= 4.5 ? [['read more', t.reviewReadMoreColor, b.backgroundColor]] : []),
     ['review text', t.reviewTextColor, site.body?.color],
   ]
   for (const [k, have, need] of want) if (need && !same(have, need)) problem(`${k} ${have}, site ${need}`)

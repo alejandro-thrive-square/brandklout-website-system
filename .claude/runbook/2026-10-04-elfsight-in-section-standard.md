@@ -65,3 +65,15 @@
   `widgetBackground` in the boot data before choosing header colours.
 - Stone Med Spa: with the widget title gone, its reviews have only the "In their words" eyebrow; a
   section H2 there is a site change, left to the owner.
+
+## Update (night 2026-10-04): West LA + IFA on their real sites; Read more legibility
+- User: place on IFA and West LA, leave Nahlah. Both were **already placed** (2026-09-30): West LA on
+  its Instatic site (`west-la-implants-production.up.railway.app`; the domain is still WordPress),
+  IFA on `staging.ifadentistry.com` (the redesign; production is the old clone, gets it at promotion).
+  No site edit was needed.
+- My first restyle had read their **old** sites (domain): wrong palettes. Restyled from the real pages:
+  West LA dark (`#161613` cards, cream text, gold `#C4A36A` square button), IFA sand `#EBE5D8` cards,
+  gold `#C3972B` button, Read more in the text-safe gold `#74560F`. Gate ok rendered on both.
+- New gate check: card text, Read more and button text need 4.5:1. It failed Mason General (4.1),
+  Stone Med Spa (2.0) and Nahlah (3.6); Mason and Stone Med now use the heading ink for Read more.
+  **Nahlah left as is (user), its Read more still fails 3.6:1** for when it is picked up.

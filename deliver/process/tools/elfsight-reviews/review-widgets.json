@@ -145,7 +145,7 @@
    ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "2026-10-04: new Google Reviews widget on / and /patient-reviews (in-section standard, gate ok). Replaces the practice's All-in-One Reviews 32926aff in the OTHER account (no Google logo in its header); 32926aff still exists there, off the site."
+   "note": "2026-10-04: new Google Reviews widget on / and /patient-reviews (in-section standard, gate ok). Replaces the practice's All-in-One Reviews 32926aff in the OTHER account (no Google logo in its header); 32926aff still exists there, off the site. Read more #2E3538 (brown failed 4.5:1 on sand)."
   },
   {
    "key": "omnia",
@@ -277,11 +277,13 @@
    "account": "trong@driverank.com",
    "listing": "West LA Implants, 12301 Wilshire Blvd #205, Los Angeles, CA 90025",
    "verified": "4.9 (209)",
-   "state": "created-not-placed",
-   "onSite": [],
+   "state": "live-on-site",
+   "onSite": [
+    "670ca31c-8602-42c1-a126-f46f653fe07f"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
+   "note": "Placed 2026-09-30 on the Instatic site (homepage proof chapter), served at west-la-implants-production.up.railway.app while westlaimplants.com is still WordPress. 2026-10-04: in-section standard from the Instatic site (dark: #161613 cards, cream text, gold #C4A36A square button); gate ok rendered."
   },
   {
    "key": "dentiq",
@@ -333,7 +335,7 @@
    ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "2026-10-04: in-section standard (green pill, cream cards; white plate + 32px padding because the site wraps the embed in a padless white card on a dark section). Homepage. The widget title was the only heading; the section has the \"In their words\" eyebrow."
+   "note": "2026-10-04: in-section standard (green pill, cream cards; white plate + 32px padding because the site wraps the embed in a padless white card on a dark section). Homepage. The widget title was the only heading; the section has the \"In their words\" eyebrow. Read more #272727 (green failed 4.5:1)."
   },
   {
    "key": "hackensack",
@@ -495,11 +497,11 @@
    "account": "trong@driverank.com",
    "listing": "Institute for Advanced Dentistry and Implants, 13360 N 94th Dr B, Peoria, AZ 85381",
    "verified": "5.0 (96)",
-   "state": "created-not-placed",
+   "state": "live-on-staging",
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
+   "note": "On staging.ifadentistry.com home (the redesign, placed 2026-09-30); production gets it with the rebuilt site. 2026-10-04: in-section standard from the staging site (#EBE5D8 cards, gold #C3972B button, text-safe gold #74560F for Read more); gate ok rendered."
   },
   {
    "key": "oceanic",
