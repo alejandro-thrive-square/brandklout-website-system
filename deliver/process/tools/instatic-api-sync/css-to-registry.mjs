@@ -144,7 +144,8 @@ if (parsed.unsupported.length) {
 /* ── place every rule ───────────────────────────────────────────────────── */
 let seat = Math.max(0, ...Object.values(rules).map((r) => r.order ?? 0)) + 1
 const placed = [] // { selector, keys: Set<family>, order }
-const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0, inPlace: 0 }
+const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0, inPlace: 0, deadOverrides: 0 }
+const ctxSeen = new Map() // ruleId|ctx|prop -> source position of the asset's override
 const inPlaceIndex = new Map()
 if (inPlace) {
   for (const r of Object.values(rules)) {
@@ -185,6 +186,27 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
     const key = normaliseSelector(item.selector)
     const t = inPlaceIndex.get(key)
     if (t) {
+      // CASCADE: the registry emits a rule's base, then its media overrides. A base declaration
+      // that came LATER than a media override of the same property (in this asset, or any
+      // override already in the registry: the asset loaded after the whole registry) used to win
+      // inside that media too; as an override it would now beat the base. Such an override is
+      // dead, so it goes. (Stone Surgical Arts `.arrival_component`: 84vh, @991 0, then 92vh from a
+      // later file: phones showed 92vh; keeping "@991 0" made the hero collapse to 0.)
+      if (!ctx) {
+        for (const [c, cbag] of Object.entries(t.contextStyles ?? {})) {
+          for (const k of Object.keys(styles)) {
+            if (!(k in cbag)) continue
+            const p = ctxSeen.get(`${t.id}|${c}|${k}`)
+            if (p === undefined || p < item.pos) {
+              delete cbag[k]
+              if (t.contextStylePriorities?.[c]) delete t.contextStylePriorities[c][k]
+              stats.deadOverrides++
+            }
+          }
+        }
+      } else {
+        for (const k of Object.keys(styles)) ctxSeen.set(`${t.id}|${ctx}|${k}`, item.pos)
+      }
       const bag = ctx ? (((t.contextStyles ??= {})[ctx]) ??= {}) : (t.styles ??= {})
       Object.assign(bag, styles)
       for (const [k, p] of Object.entries(priorities)) {
@@ -300,7 +322,7 @@ if (parsed.unsupported.length) {
 
 console.log(`\nrules read            ${parsed.rules.length} (+${parsed.keyframes.length} @keyframes)`)
 console.log(`merged into class rule ${stats.merged}, folded into it ${stats.folded}`)
-console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}` : ''}`)
+console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}, dead media overrides dropped ${stats.deadOverrides}` : ''}`)
 console.log(`fallback values dropped ${stats.droppedFallbacks} (same property twice in one block: the last wins)`)
 console.log(`conditions added      ${conditionsAdded} (now ${conditions.length})`)
 console.log(`context conflicts     ${ctxConflicts}`)

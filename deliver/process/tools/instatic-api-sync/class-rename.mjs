@@ -60,22 +60,36 @@ if (Object.keys(folders).length && (process.argv.includes('--verify') || argOf('
 // lookups: a plain object answers `'constructor' in all` with true.
 const all = Object.assign(Object.create(null), rename, merge)
 const has = (k) => Object.hasOwn(all, k)
+// A merge may target a class the same map renames ("merge": {"a": "x"}, "rename": {"x": "y"}):
+// a's elements end up on y. `mergeTarget` keeps the target's CURRENT name, to find its rule.
+const mergeTarget = Object.create(null)
+for (const [o, n] of Object.entries(merge)) {
+  mergeTarget[o] = n
+  if (Object.hasOwn(rename, n)) all[o] = rename[n]
+}
+// Old names may be odd (an importer once registered a class literally called `.p1`); new names
+// must be plain class names (and pass the classifier, checked in site mode).
+const OLD_RE = /^[.\w-]+$/
 const NAME_RE = /^-?[_a-zA-Z][\w-]*$/
 for (const [o, n] of Object.entries(all)) {
-  if (!NAME_RE.test(o) || !NAME_RE.test(n)) throw new Error(`bad class name in map: ${o} -> ${n}`)
+  if (!OLD_RE.test(o) || !NAME_RE.test(n)) throw new Error(`bad class name in map: ${o} -> ${n}`)
   if (o === n) throw new Error(`no-op entry: ${o}`)
 }
 if (Object.keys(rename).some((k) => Object.hasOwn(merge, k))) throw new Error('a class is both renamed and merged')
+/** A class name as it is written in a selector: `.p1` is written `\.p1`. */
+const cssEscape = (name) => name.replace(/[^\w-]/g, (c) => `\\${c}`)
 
 /* ── text rewriters ─────────────────────────────────────────────────────── */
 const log = { selectors: 0, classAttrs: 0, scriptSelectors: 0, scriptTokens: 0, review: [] }
 
 /** `.old` -> `.new` in a selector or a CSS text. */
 function rewriteSelectors(text) {
-  return text.replace(/\.(-?[_a-zA-Z][\w-]*)/g, (m, name) => {
+  // a class token is `.` followed by name characters or escapes (`.\.p1`, `.md\:flex`)
+  return text.replace(/\.((?:\\.|[\w-])+)/g, (m, raw) => {
+    const name = raw.replace(/\\(.)/g, '$1')
     if (!has(name)) return m
     log.selectors++
-    return `.${all[name]}`
+    return `.${cssEscape(all[name])}`
   })
 }
 /** tokens of a class attribute value */
@@ -99,16 +113,22 @@ function rewriteHtml(html) {
 const CLASS_CALLS = ['WZ.section', 'WZ.dom', ...(spec.scriptClassCalls ?? [])]
   .map((c) => c.replace(/[.$]/g, (m) => `\\${m}`)).join('|')
 const CLASS_CONTEXT = new RegExp(`(classList\\.(add|remove|toggle|contains|replace)\\s*\\([^)]*$|className\\s*(\\+?=|[!=]==?)\\s*$|getElementsByClassName\\s*\\(\\s*$|\\bclass(Name)?\\s*:\\s*$|setAttribute\\(\\s*['"]class['"]\\s*,\\s*$|\\b(${CLASS_CALLS})\\(\\s*$)`)
+const TAGS = 'a|abbr|article|aside|b|blockquote|body|button|canvas|caption|code|dd|details|dialog|div|dl|dt|em|fieldset|figcaption|figure|footer|form|h[1-6]|header|hr|html|i|iframe|img|input|label|legend|li|main|mark|nav|ol|option|p|picture|pre|q|s|section|select|small|source|span|strong|sub|summary|sup|svg|path|table|tbody|td|textarea|tfoot|th|thead|time|tr|u|ul|video'
+const SELECTOR_CHAIN = new RegExp(`(^|[\\s>+~,(:\\]\\[*])(${TAGS})?((?:\\.-?[_a-zA-Z][\\w-]*)+)(?![\\w(])`, 'g')
 /** JS: rewrite inside string literals only. */
 function rewriteJs(js, where) {
   return mapJsStrings(js, (body, before) => {
     let s = body
-    s = s.replace(/\.(-?[_a-zA-Z][\w-]*)/g, (mm, name, i) => {
-      if (!has(name)) return mm
-      // `.old` preceded by a word char is a property access or a file name, not a selector
-      if (i > 0 && /[\w$]/.test(s[i - 1])) return mm
-      log.scriptSelectors++
-      return `.${all[name]}`
+    // A selector chain: optional tag, then one or more `.class` (`.grow-bar.result`, `img.hero_image`),
+    // starting at the string start or after a selector boundary. Every class in the chain is mapped.
+    // `file.min.js` or `obj.prop` never match: the chain must not follow an ordinary word.
+    s = s.replace(SELECTOR_CHAIN, (mm, pre, tag, chain) => {
+      const next = chain.replace(/\.(-?[_a-zA-Z][\w-]*)/g, (m2, name) => {
+        if (!has(name)) return m2
+        log.scriptSelectors++
+        return `.${all[name]}`
+      })
+      return pre + (tag ?? '') + next
     })
     s = s.replace(/(class\s*=\s*\\?["'])([^"'\\]*)/gi, (mm, pre, v) => pre + rewriteTokens(v))
     if (CLASS_CONTEXT.test(before)) {
@@ -235,7 +255,8 @@ if (Object.keys(folders).length) {
 
 const rules = shell.styleRules ?? {}
 const classRules = (name) => Object.values(rules).filter((r) => r.kind === 'class' && r.name === name)
-const mentioned = (name) => Object.values(rules).some((r) => new RegExp(`\\.${name.replace(/[-]/g, '\\-')}(?![\\w-])`).test(r.selector ?? ''))
+const selectorTokens = (sel) => new Set([...(sel ?? '').matchAll(/\.((?:\\.|[\w-])+)/g)].map((m) => m[1].replace(/\\(.)/g, '$1')))
+const mentioned = (name) => Object.values(rules).some((r) => selectorTokens(r.selector).has(name))
 const problems = []
 const sig = (r) => JSON.stringify([r.styles ?? {}, r.contextStyles ?? {}, r.stylePriorities ?? {}, r.contextStylePriorities ?? {}], (k, v) => (v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.entries(v).sort(([a], [b]) => a.localeCompare(b))) : v))
 

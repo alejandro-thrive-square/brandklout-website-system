@@ -41,6 +41,16 @@ async function fromSite() {
     for (const id of vc.classIds ?? []) tally(id, `component:${vc.name ?? vc.id}`)
     for (const node of Object.values(vc.tree?.nodes ?? {})) for (const id of node.classIds ?? []) tally(id, `component:${vc.name ?? vc.id}`)
   }
+  // Visual components live in their own rows (`/components`), not in the shell: a class used only
+  // in the nav or footer component counted as "unused" and slipped past the gate (Brandklout website).
+  const comps = (await api.api('GET', '/admin/api/cms/components').catch(() => ({ rows: [] }))).rows ?? []
+  for (const row of comps) {
+    const cells = row.cells ?? {}
+    const body = typeof cells.body === 'string' ? JSON.parse(cells.body) : cells.body
+    const label = `component:${cells.name ?? row.id}`
+    for (const id of cells.classIds ?? []) tally(id, label)
+    for (const node of Object.values(body?.nodes ?? {})) for (const id of node.classIds ?? []) tally(id, label)
+  }
   const classes = new Map() // name -> { uses, pages:Set, styles, contextStyles }
   for (const r of Object.values(site.styleRules ?? {})) {
     if (r.kind !== 'class' || r.generated) continue

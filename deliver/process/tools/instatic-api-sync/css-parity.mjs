@@ -225,7 +225,16 @@ if (cmd === 'snapshot') {
   try {
     for (const slug of slugs) {
       await br.S('Page.navigate', { url: `${BASE}/${slug}` })
-      await wait(2500)
+      // Wait for the document AND its stylesheets (readyState 'complete'), then settle. A fixed
+      // 2.5 s used to be enough; on a busy machine it captured a page before its CSS arrived
+      // (Stone Surgical Arts hipaa-disclosure, 2026-10-05: 381 phantom differences).
+      await wait(800)
+      for (let t = 0; t < 120; t++) {
+        const ready = await br.evaluate(`document.readyState === 'complete' && [...document.styleSheets].length > 0`).catch(() => false)
+        if (ready) break
+        await wait(500)
+      }
+      await wait(1200)
       const data = await br.evaluate(CAPTURE(PROPS))
       snapshot[slug || '/'] = data
       console.log(`  ${(slug || '/').padEnd(34)} ${Object.keys(data ?? {}).length} elements`)
