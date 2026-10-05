@@ -198,7 +198,20 @@ trees from `pages.json` (`restore-pages.mjs`, Dr. Nahlah worktree).
   that mentions it change. The new name must not already exist.
 - `merge`: the old class's elements take the existing class instead and the old rule is deleted.
   Refused unless both have the same declarations (base and every breakpoint), so a merge can never
-  change how the page looks.
+  change how the page looks. The target may be a class the same map renames.
+- `folders`: `{"tl": "timeline"}` renames every `tl_*` class to `timeline_*`.
+- `prefixes`: `{"rv-": "review_"}` renames every class starting `rv-` (`rv-card-head` →
+  `review_card-head`): the shape most pre-standard sites used. Longest prefix wins.
+- `scriptClassCalls`: `["Kit.mount"]` — functions whose first string argument is a class name
+  (`WZ.section` and `WZ.dom` are built in).
+- Explicit `rename`/`merge` entries win over `folders` and `prefixes`. The site-mode dry run writes
+  `<map>.expanded.json` (every resulting rename); `--verify` and `--files` use it.
+
+What the engine rewrites in scripts: selectors in strings (chains and `tag.class` included), class
+attributes in HTML strings, `classList`/`className`/`getElementsByClassName`/`setAttribute('class')`
+arguments, `*Class:` option keys (SplitText `linesClass`), the calls above, and regex literals
+(`/class="x"/`, `\.x`). It cannot see a class name a script **computes** (`'is-m' + n`, `` `x-${i}` ``):
+`class-sync-check.mjs` and the runtime gate find those.
 
 ## Version Control
 
