@@ -150,7 +150,18 @@ async function browser() {
   }
 }
 
-const CAPTURE = (props) => `(() => {
+/* Animations and transitions are stopped before capture (PARITY_ANIMATIONS=1 keeps them): a looping
+   CSS animation is otherwise sampled at whatever frame the capture lands on, and two captures of
+   one unchanged page disagree (Stone Med Spa's hero cue, 2026-10-05). Stopped, every element reports
+   its resting style, which is what a stylesheet comparison is about. */
+const FREEZE = process.env.PARITY_ANIMATIONS === '1' ? '' : `
+  if (!document.getElementById('parity-freeze')) {
+    const st = document.createElement('style');
+    st.id = 'parity-freeze';
+    st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important}';
+    document.head.appendChild(st);
+  }`
+const CAPTURE = (props) => `(() => {${FREEZE}
   const props = ${JSON.stringify(props)};
   const path = (el) => {
     const parts = [];

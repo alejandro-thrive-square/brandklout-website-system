@@ -35,10 +35,11 @@ const OUT = join(HERE, 'output')
 const [cmd, file] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && !['--site', '--out'].includes(all[i - 1]))
 
 if (cmd === 'extract') {
-  const decls = parseCss(readFileSync(file, 'utf8')).rules
-    .filter((r) => !r.contexts.length && isRootSelector(r.selector))
-    .flatMap((r) => r.decls)
-  console.log(JSON.stringify(extractSpec(decls), null, 2))
+  const rules = parseCss(readFileSync(file, 'utf8')).rules.filter((r) => isRootSelector(r.selector))
+  const decls = rules.filter((r) => !r.contexts.length).flatMap((r) => r.decls)
+  // A token redefined inside @media is responsive; the Framework holds one value per token.
+  const responsive = new Set(rules.filter((r) => r.contexts.length).flatMap((r) => r.decls.map((d) => d.prop)))
+  console.log(JSON.stringify(extractSpec(decls, { responsive }), null, 2))
   process.exit(0)
 }
 

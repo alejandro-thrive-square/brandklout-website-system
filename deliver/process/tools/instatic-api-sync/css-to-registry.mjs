@@ -47,12 +47,13 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomBytes } from 'node:crypto'
 import { connect, argOf } from './target.mjs'
-import { parseCss, normaliseMedia, toBag, family, mightOverlap } from './css-source.mjs'
+import { parseCss, normaliseMedia, normaliseSelector, toBag, family, mightOverlap } from './css-source.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const OUT = join(HERE, 'output')
 const apply = process.argv.includes('--apply')
 const keepResidual = process.argv.includes('--keep-residual')
+const inPlace = process.argv.includes('--in-place')
 const files = (argOf('--files') ?? '').split(',').filter(Boolean)
 if (!files.length) {
   console.error('usage: css-to-registry.mjs [--site <client>[:staging]] --files <asset path,...> [--keep-residual] [--apply]')
@@ -143,7 +144,16 @@ if (parsed.unsupported.length) {
 /* ── place every rule ───────────────────────────────────────────────────── */
 let seat = Math.max(0, ...Object.values(rules).map((r) => r.order ?? 0)) + 1
 const placed = [] // { selector, keys: Set<family>, order }
-const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0 }
+const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0, inPlace: 0 }
+const inPlaceIndex = new Map()
+if (inPlace) {
+  for (const r of Object.values(rules)) {
+    if (r.rawCss) continue
+    const k = normaliseSelector(r.selector)
+    const prev = inPlaceIndex.get(k)
+    if (!prev || (r.order ?? 0) > (prev.order ?? 0)) inPlaceIndex.set(k, r)
+  }
+}
 const home = new Map() // class name -> { rule, order }
 const touched = new Set()
 const broadSelectors = new Set()
@@ -169,8 +179,27 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
   const keys = new Set(Object.keys(styles).map(family))
   if (scoped.length && !/\.[\w-]/.test(item.selector)) broadSelectors.add(item.selector)
 
+  if (inPlace) {
+    // The asset holds declarations the converter lost from rules the registry already has: they
+    // go back INTO those rules, at their own position (registry-repair's semantics).
+    const key = normaliseSelector(item.selector)
+    const t = inPlaceIndex.get(key)
+    if (t) {
+      const bag = ctx ? (((t.contextStyles ??= {})[ctx]) ??= {}) : (t.styles ??= {})
+      Object.assign(bag, styles)
+      for (const [k, p] of Object.entries(priorities)) {
+        if (ctx) (((t.contextStylePriorities ??= {})[ctx] ??= {})[k] = p)
+        else ((t.stylePriorities ??= {})[k] = p)
+      }
+      t.updatedAt = now
+      touched.add(t.id)
+      stats.inPlace++
+      continue
+    }
+  }
+
   const bare = item.selector.match(/^\.([\w-]+)$/)
-  const cls = bare && classRuleByName.get(bare[1])
+  const cls = !inPlace && bare && classRuleByName.get(bare[1])
   let target = null
   if (cls) {
     const h = home.get(bare[1])
@@ -215,6 +244,7 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
   }
   touched.add(id)
   stats.created++
+  if (inPlace) inPlaceIndex.set(normaliseSelector(item.selector), rules[id])
   placed.push({ selector: item.selector, keys, order })
 }
 
@@ -270,7 +300,7 @@ if (parsed.unsupported.length) {
 
 console.log(`\nrules read            ${parsed.rules.length} (+${parsed.keyframes.length} @keyframes)`)
 console.log(`merged into class rule ${stats.merged}, folded into it ${stats.folded}`)
-console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}`)
+console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}` : ''}`)
 console.log(`fallback values dropped ${stats.droppedFallbacks} (same property twice in one block: the last wins)`)
 console.log(`conditions added      ${conditionsAdded} (now ${conditions.length})`)
 console.log(`context conflicts     ${ctxConflicts}`)

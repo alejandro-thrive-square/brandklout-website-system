@@ -161,8 +161,11 @@ const LEN_RE = /^(-?\d*\.?\d+)(rem|px)$/i
  * proposed; anything else (formulas, clamp(), font stacks, numbers) is listed
  * under `stays` for a person to decide. Review before `apply`.
  */
-export function extractSpec(decls, { root = 16 } = {}) {
+export function extractSpec(allDecls, { root = 16, responsive = new Set() } = {}) {
+  const stayResponsive = allDecls.filter((d) => responsive.has(d.prop))
+  const decls = allDecls.filter((d) => !responsive.has(d.prop))
   const spec = { preferences: { rootFontSize: 16, isRem: true }, colors: [], typography: [], spacing: [], stays: [] }
+  for (const d of stayResponsive) spec.stays.push(`${d.prop}: ${d.value}   (redefined at a breakpoint: stays in the registry :root)`)
   const colorNames = new Set()
   const type = []
   const space = []
@@ -179,9 +182,28 @@ export function extractSpec(decls, { root = 16 } = {}) {
       }
       continue
     }
+    // `calc(4.75rem * var(--t-display))`: a size with a per-breakpoint multiplier. The base goes to
+    // the Framework, the formula stays in the registry and reads it.
+    const scaled = value.match(/^calc\(\s*(-?\d*\.?\d+)(rem|px)\s*\*\s*(var\(--[\w-]+\))\s*\)$/i)
+    if (scaled) {
+      const rem = Number(scaled[1]) * (scaled[2].toLowerCase() === 'rem' ? 1 : 1 / root)
+      if (Math.abs(round2(rem) - rem) > 1e-9) {
+        spec.stays.push(`${prop}: ${value}   (the Framework writes 2-decimal rem; ${round2(rem)}rem would shift it)`)
+        continue
+      }
+      const base = `${name}-base`
+      type.push({ name: base, px: round2(rem * root) })
+      ;(spec._set ??= {})[prop] = `calc(var(--${base}) * ${scaled[3]})`
+      continue
+    }
     const len = value.match(LEN_RE)
     if (len) {
       const px = len[2].toLowerCase() === 'rem' ? round2(Number(len[1]) * root) : Number(len[1])
+      const remValue = Number(len[1]) * (len[2].toLowerCase() === 'rem' ? 1 : 1 / root)
+      if (Math.abs(round2(remValue) - remValue) > 1e-9) {
+        spec.stays.push(`${prop}: ${value}   (the Framework writes 2-decimal rem; ${round2(remValue)}rem would shift it)`)
+        continue
+      }
       if (len[2].toLowerCase() === 'px' && px > 200) {
         spec.stays.push(`${prop}: ${value}   (a px layout limit: the Framework would emit it in rem, which the fluid root scales)`)
         continue
@@ -197,5 +219,10 @@ export function extractSpec(decls, { root = 16 } = {}) {
   if (type.length) spec.typography.push({ group: 'Typography', sizes: type })
   if (space.length) spec.spacing.push({ group: 'Spacing', sizes: space })
   if (ui.length) spec.spacing.push({ group: 'UI', sizes: ui })
+  // The registry :root loses everything the Framework now owns, and its scaled formulas read the
+  // Framework bases. Applied in the same save by `framework.mjs apply`.
+  const owned = [...spec.colors.map((c) => `--${c.slug}`), ...[...space, ...ui].map((s) => `--${s.name}`)]
+  spec.registry = [{ selector: ':root', remove: owned, set: spec._set ?? {} }]
+  delete spec._set
   return spec
 }
