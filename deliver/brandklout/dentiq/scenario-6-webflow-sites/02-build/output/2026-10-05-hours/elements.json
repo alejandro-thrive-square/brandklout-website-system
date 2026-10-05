@@ -1,0 +1,65 @@
+[
+ {
+  "page": "contact",
+  "id": {
+   "component": "6a7356fc9ce83a98a59752ce",
+   "element": "2d94f550-3343-8a50-a1ee-2c2e64a5eca5"
+  },
+  "type": "String",
+  "text": "Monday:"
+ },
+ {
+  "page": "contact",
+  "id": {
+   "component": "6a7356fc9ce83a98a59752ce",
+   "element": "ff87d806-49cd-19a4-7489-bb03f8fba47f"
+  },
+  "type": "String",
+  "text": "Tuesday - Friday:"
+ },
+ {
+  "page": "dentist-near-montrose",
+  "id": {
+   "component": "6a899820e1b5a04b8b19fe96",
+   "element": "1d664525-4968-2f39-db1f-a4279081efdd"
+  },
+  "type": "String",
+  "text": "We are at 1355 W Gray St, Houston, TX 77019, with ample parking on site. Our office is open Monday 8:00 am to 12:00 pm and Tuesday through Friday 7:00 am to 3:00 pm, so early appointments before work are usually available."
+ },
+ {
+  "page": "dentist-near-montrose",
+  "id": {
+   "component": "6a899820e1b5a04b8b19fe96",
+   "element": "39dcb8a2-154b-5d1d-bded-4b9a3a04805f"
+  },
+  "type": "String",
+  "text": "We open at 7:00 am Tuesday through Friday, which makes early morning visits practical if you work downtown or in the Medical Center. Call us and we will find a time that fits."
+ },
+ {
+  "page": "dentist-near-hyde-park",
+  "id": {
+   "component": "6a89984ab18c863ef24bcca6",
+   "element": "05ac6ada-a5e5-9179-9eca-51ba871c779c"
+  },
+  "type": "String",
+  "text": "We are at 1355 W Gray St, Houston, TX 77019, with ample parking on site. The office is open Monday 8:00 am to 12:00 pm and Tuesday through Friday 7:00 am to 3:00 pm."
+ },
+ {
+  "page": "component:Footer",
+  "id": {
+   "component": "df58aff5-693a-f787-2b20-1a56b3aad4eb",
+   "element": "d9d0c6b1-4e77-397c-0eaf-a5475ed3a085"
+  },
+  "type": "String",
+  "text": "Monday 8:00 am - 12:00 pm."
+ },
+ {
+  "page": "component:Footer",
+  "id": {
+   "component": "df58aff5-693a-f787-2b20-1a56b3aad4eb",
+   "element": "6ffb4fd0-226d-576b-85b5-7bd5b91f95b1"
+  },
+  "type": "String",
+  "text": "Tuesday to Friday 7:00 am - 3:00 pm."
+ }
+]
