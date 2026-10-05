@@ -1,0 +1,43 @@
+{
+  "preferences": { "rootFontSize": 16, "isRem": true },
+  "colors": [
+    { "slug": "accent", "value": "var(--gold-ink)" },
+    { "slug": "accent-lg", "value": "var(--gold-deep)" },
+    { "slug": "rule", "value": "var(--gold-deep)" },
+    { "slug": "focus", "value": "var(--gold-deep)" }
+  ],
+  "typography": [
+    { "group": "Type sizes", "sizes": [
+      { "name": "size-display-1", "px": 106.56 },
+      { "name": "size-display-2", "px": 74.88 },
+      { "name": "size-heading-2", "px": 51.84 },
+      { "name": "size-heading-3", "px": 27.36 },
+      { "name": "size-body-large", "px": 18 },
+      { "name": "size-body", "px": 15.68 },
+      { "name": "size-label", "px": 11.2 }
+    ] }
+  ],
+  "spacing": [
+    { "group": "Layout", "sizes": [
+      { "name": "gutter-min", "px": 20 },
+      { "name": "gutter-max", "px": 72 },
+      { "name": "section-min", "px": 72 },
+      { "name": "section-max", "px": 152 }
+    ] }
+  ],
+  "registry": [
+    { "selector": ":root",
+      "remove": ["--accent", "--accent-lg", "--rule", "--focus"],
+      "set": {
+        "--d1": "calc(var(--size-display-1) * var(--t-disp))",
+        "--d2": "calc(var(--size-display-2) * var(--t-disp))",
+        "--h2": "calc(var(--size-heading-2) * var(--t-lg))",
+        "--h3": "calc(var(--size-heading-3) * var(--t-mid))",
+        "--body-lg": "calc(var(--size-body-large) * var(--t-text))",
+        "--body": "calc(var(--size-body) * var(--t-text))",
+        "--label": "calc(var(--size-label) * var(--t-text))",
+        "--gutter": "clamp(var(--gutter-min), 4vw, var(--gutter-max))",
+        "--section": "clamp(var(--section-min), 9vw, var(--section-max))"
+      } }
+  ]
+}
