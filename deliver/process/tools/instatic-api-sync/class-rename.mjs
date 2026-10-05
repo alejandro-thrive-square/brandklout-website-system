@@ -51,7 +51,19 @@ const merge = spec.merge ?? {}
    file (after the rename the old names are gone from the registry). */
 const expandedPath = mapPath.replace(/\.json$/i, '') + '.expanded.json'
 const folders = spec.folders ?? {}
-if (Object.keys(folders).length && (process.argv.includes('--verify') || argOf('--files'))) {
+/* `prefixes` ("rv-": "review_") renames every class that STARTS with a dash prefix, the shape most
+   pre-standard sites used (`rv-card-head` -> `review_card-head`). Longest prefix wins; explicit
+   `rename` / `merge` entries win over both. */
+const prefixes = spec.prefixes ?? {}
+const prefixKeys = Object.keys(prefixes).sort((x, y) => y.length - x.length)
+function expandName(name) {
+  const i = name.indexOf('_')
+  if (i > 0 && Object.hasOwn(folders, name.slice(0, i))) return folders[name.slice(0, i)] + name.slice(i)
+  const p = prefixKeys.find((k) => name.startsWith(k) && name.length > k.length)
+  return p ? prefixes[p] + name.slice(p.length) : null
+}
+const expands = Object.keys(folders).length || prefixKeys.length
+if (expands && (process.argv.includes('--verify') || argOf('--files'))) {
   const { existsSync } = await import('node:fs')
   if (existsSync(expandedPath)) Object.assign(rename, JSON.parse(readFileSync(expandedPath, 'utf8')).rename)
   else if (process.argv.includes('--verify')) throw new Error(`folders need ${expandedPath}: run the site-mode dry run first`)
@@ -72,9 +84,9 @@ if (Object.keys(folders).length && (process.argv.includes('--verify') || argOf('
     }
     scan(argOf('--files'))
     for (const name of names) {
-      const i = name.indexOf('_')
-      if (i < 1 || Object.hasOwn(rename, name) || Object.hasOwn(merge, name)) continue
-      if (Object.hasOwn(folders, name.slice(0, i))) rename[name] = folders[name.slice(0, i)] + name.slice(i)
+      if (Object.hasOwn(rename, name) || Object.hasOwn(merge, name)) continue
+      const next = expandName(name)
+      if (next && next !== name) rename[name] = next
     }
     writeFileSync(expandedPath, JSON.stringify({ site: spec.site, rename, merge, expandedFrom: mapPath, from: 'files' }, null, 2))
   }
@@ -301,7 +313,7 @@ writeFileSync(join(OUT, `shell.before-class-rename.${host}.${seq}.json`), JSON.s
 writeFileSync(join(OUT, `pages.before-class-rename.${host}.${seq}.json`), JSON.stringify(rows))
 console.log(`target  ${target.url} (seq ${seq}), ${rows.length} pages, ${comps.length} component(s); map ${Object.keys(rename).length} rename + ${Object.keys(merge).length} merge`)
 
-if (Object.keys(folders).length) {
+if (expands) {
   const names = new Set()
   for (const r of Object.values(shell.styleRules ?? {})) {
     if (r.kind === 'class') names.add(r.name)
@@ -309,16 +321,15 @@ if (Object.keys(folders).length) {
   }
   let added = 0
   for (const name of names) {
-    const i = name.indexOf('_')
-    if (i < 1 || has(name)) continue
-    const folder = name.slice(0, i)
-    if (!Object.hasOwn(folders, folder)) continue
-    rename[name] = folders[folder] + name.slice(i)
-    all[name] = rename[name]
+    if (has(name)) continue
+    const next = expandName(name)
+    if (!next || next === name) continue
+    rename[name] = next
+    all[name] = next
     added++
   }
   writeFileSync(expandedPath, JSON.stringify({ site: spec.site, rename, merge, expandedFrom: mapPath }, null, 2))
-  console.log(`folders    ${added} class(es) from ${Object.keys(folders).length} folder rename(s), written to ${expandedPath}`)
+  console.log(`expanded   ${added} class(es) from ${Object.keys(folders).length} folder and ${prefixKeys.length} prefix rename(s), written to ${expandedPath}`)
 }
 
 const rules = shell.styleRules ?? {}

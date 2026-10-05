@@ -17,13 +17,14 @@ const map = {
 map.rename['heading-43'] = 'heading-style-display'
 // folders expand from the files when there is no live site (a build before launch)
 map.folders = { tl: 'timeline' }
+map.prefixes = { 'pa-': 'path_' }
 writeFileSync(join(dir, 'map.json'), JSON.stringify(map))
 
 writeFileSync(join(dir, 'src', 'a.html'),
   '<div class="rv-card btn"><p class=".p1 heading-31">x</p><a class="btn-ghost">y</a></div>\n' +
   '<style>.rv-card:hover .btn{color:red} .\\.p1{font-size:2rem}</style>\n' +
   '<script>document.querySelector(".rv-card").classList.add("btn")</script>\n')
-writeFileSync(join(dir, 'src', 'b.css'), '.rv-card, .ch-arrival > .btn::after {x:1}\n.btn-ghost{y:2}\n@media (max-width:767px){.legal_num{z:3}}\n.tl_stop .tl_spine-fill{w:1}\n')
+writeFileSync(join(dir, 'src', 'b.css'), '.rv-card, .ch-arrival > .btn::after {x:1}\n.btn-ghost{y:2}\n@media (max-width:767px){.legal_num{z:3}}\n.tl_stop .tl_spine-fill{w:1}\n.pa-card .pa-card-head{v:1}\n')
 writeFileSync(join(dir, 'src', 'c.js', ), [
   `WZ.section("ch-arrival", function(){})`,
   `WZ.dom('rv-card', '.rv-card', fn)`,
@@ -51,6 +52,7 @@ assert.match(css, /\.review_card, \.section_arrival > \.button::after/)
 assert.match(css, /\.btn-ghost\{/)
 assert.match(css, /\.legal_number\{z:3\}/)
 assert.match(css, /\.timeline_stop \.timeline_spine-fill\{w:1\}/, 'folder rename expanded from the files')
+assert.match(css, /\.path_card \.path_card-head\{v:1\}/, 'dash prefix rename')
 assert.match(js, /WZ\.section\("section_arrival"/, 'house kit first argument')
 assert.match(js, /WZ\.dom\('review_card', '\.review_card'/)
 assert.match(js, /'\.grow-bar\.bar-track_result'/, 'second class of a chain')
