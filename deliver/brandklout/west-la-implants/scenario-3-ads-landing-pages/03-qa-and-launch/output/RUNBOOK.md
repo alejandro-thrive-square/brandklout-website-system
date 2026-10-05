@@ -2,6 +2,48 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-05 · the GHL forms: two campaign forms built, the contact form brought to standard
+
+Built with Codex computer use (`codex_cu.mjs --allow-writes --model gpt-6.1-sol`) to the
+standard in `deliver/process/tools/ghl-forms/README.md`, all in West LA's sub-account
+`0iwrVBEYONV6VlSHSGH6`. Legal name in both consent boxes: **Tony Barriere Dental Corp DBA West LA
+Implants** (first line of westlaimplants.com/privacy-policy/). Privacy | Terms link to
+**westlaimplants.com** (`/privacy-policy/`, `/terms-of-service/`): the Railway instance has no
+terms page and its privacy page is a draft that defers to the WordPress one.
+
+| Form | Id | What it is | Gates |
+| :-- | :-- | :-- | :-- |
+| West LA Implants - All-on-6 (ChatGPT Ads) | `XaCEV96A0QuF9ufEmkSc` | new, from scratch. First / Last / Phone (required), Email, Message, 2 consent boxes, captcha, *Request Consultation*, links, 11 hidden consent fields last, no-shift CSS. Redirect `…/ads-landing-pages/thank-you-all-on-6` | `--standard --landing` ok, `--combo` ok, `site-style --compare` (all-on-6-consultation) **style ok** |
+| West LA Implants - 3-on-6 (Google Search) | `P15UYHonJj8oH5G8xwKX` | same, redirect `…/thank-you-3-on-6` | same, style ok |
+| Contact Form (live on westlaimplants.com/contact) | `BAZZebJdjQAdGkda1fEE` | existing, updated: new required **Service** dropdown (Dental Implants, All-on-4® Full-Arch Implants, Implant-Supported Dentures, Failing Dental Implants, Bone Grafting, Tooth Extractions, Porcelain Veneers, Invisalign, Teeth Whitening, General Dentistry, Periodontics, Other), save-and-exit off, 2 consent boxes, captcha, hide script deleted, no-shift CSS, on-submit message kept | `--standard` ok, `site-style --compare` (westlaimplants.com/contact/) **style ok**: Prompt, `#E4E436` button, transparent, 0px radii, both consent boxes 14px |
+
+Campaign forms are styled to the dark ads pages (Manrope, cream on transparent, `#C4A36A` square
+button): they look right only inside the page's dark card, not on the bare public form URL.
+`combo.json` carries both form ids.
+
+**Next**
+1. Embed each campaign form on its landing and consultation page in place of the `lp-proto`
+   prototype (Instatic Embed block, reserved height), push, publish; then `verify-form.mjs` at
+   1440 and 390 and `verify-combo-live.mjs`.
+2. A human look at each form on the live page (Turnstile hides it from automation) and one test lead
+   per campaign once the host is final.
+3. The redirects point at the Railway host. If the ads go to another host, change both redirects
+   (and `productionOrigin`) first.
+4. When the Instatic site replaces WordPress on westlaimplants.com, restyle the contact form to the
+   dark site (it is styled for the white WordPress page now) and embed it on `/contact`.
+
+**Gotchas**
+- A blank GHL form ("Start from Scratch") already carries a consent element and Privacy | Terms
+  text. A brief that says "build exactly these elements" stops on them as a deletion; say "keep and
+  set" them.
+- The first styling save on All-on-6 reported success but the CSS block never persisted (no
+  `Manrope` in the public payload). Have Codex read the CSS box back before Save and grep the
+  public form after. **The fix that worked twice** (All-on-6, contact): after pasting, click the
+  Custom CSS editor's own Save / Apply / Done button first, reopen it to confirm, then Save the form.
+  A read-back alone was not enough (the contact form's first styling run read it back and still lost it).
+- GoHighLevel's public form endpoint answered 500 "Server Error" for every form for about a minute
+  mid-session (Grand Mission's model form excepted). Retry before assuming a form was broken.
+
 ## 2026-09-30 · first QA pass on the published pages; launch is blocked on the forms
 
 **Done** (`b9b96a5c`), all against `https://west-la-implants-production.up.railway.app`

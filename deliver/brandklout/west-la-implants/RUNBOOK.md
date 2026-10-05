@@ -14,12 +14,17 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   `https://west-la-implants-production.up.railway.app/ads-landing-pages/` since 2026-09-30,
   published **seq 24**: `all-on-6`, `all-on-6-consultation`, `thank-you-all-on-6`, `3-on-6`,
   `3-on-6-consultation`, `thank-you-3-on-6`. Noindex, out of the menu.
-- **Not ready for traffic.** The form is a prototype: Brandklout has not sent the two GHL forms.
-  No conversion tag and no number pool is on the instance, and the host the ads will point at is
+- **Not ready for traffic.** The two campaign GHL forms exist since 2026-10-05 (All-on-6
+  `XaCEV96A0QuF9ufEmkSc`, 3-on-6 `P15UYHonJj8oH5G8xwKX`, gates and style ok, in `combo.json`) but
+  are **not embedded yet**: the pages still carry the prototype form. No conversion tag and no number pool is on the instance, and the host the ads will point at is
   undecided (the client's domain is still WordPress). The asks are in
   [`ADS-LANDING-COMMENT.md`](./ADS-LANDING-COMMENT.md); the full list in scenario 3's
   [`INTAKE.md`](./scenario-3-ads-landing-pages/01-campaign-intake/output/INTAKE.md).
 - **2026-10-04: the reviews widget is on the in-section standard** (Elfsight editor only, live at once): no widget title, Google-logo header with the count, gold `#C4A36A` square uppercase button, dark `#161613` cards with cream text. Gate `check-widget.mjs 670ca31c-8602-42c1-a126-f46f653fe07f --render https://west-la-implants-production.up.railway.app/` ok.
+- **The site contact form** `BAZZebJdjQAdGkda1fEE` (live on the WordPress `/contact`) is on the
+  GHL standard since 2026-10-05: Service dropdown (12), two consent boxes naming Tony Barriere
+  Dental Corp DBA West LA Implants, captcha, no-shift CSS, styled for the white WordPress page.
+  Restyle it for the dark site at the domain switch.
 - **The Google reviews widget** (Elfsight `670ca31c-8602-42c1-a126-f46f653fe07f`, the practice's
   listing, 4.9 / 209) is live in the homepage proof chapter since 2026-09-30, published **seq
   25**, as an Embed block where the three static cards were. Run
@@ -48,6 +53,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | `ba81ca90` |
 | 2026-10-01 | organic · 21 instatic upload | HIPAA Disclosure page injected page-only (cloned privacy chrome + prose notice), published seq 26; 86 other pages identical modulo per-publish asset ids | `6e31792a` |
 | 2026-10-01 | organic · 21 instatic upload | "HIPAA Disclosure" footer link after Privacy on all 87 pages (site + ads footers) and in the source footers, published seq 27; ads footer wraps at 390 (needs CSS go-ahead) | _this commit_ |
+| 2026-10-05 | 3 · 03 QA and launch | GHL forms via Codex: All-on-6 `XaCEV96A0QuF9ufEmkSc` and 3-on-6 `P15UYHonJj8oH5G8xwKX` built new (gate `--landing`/`--combo` ok, style ok), contact form `BAZZebJdjQAdGkda1fEE` brought to standard; ids in `combo.json`, not yet embedded | _this commit_ |
 
 ## Version Control
 

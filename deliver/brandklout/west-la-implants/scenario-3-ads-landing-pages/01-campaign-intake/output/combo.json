@@ -1,5 +1,5 @@
 {
-  "_comment": "Scenario 3 campaign manifest for West LA Implants. Every gate in 03-qa-and-launch reads it. Slugs must match workflows/04-design/.tmp/site-src/templates/ads-landing-pages.mjs. formId is the placeholder PENDING on both campaigns (the loader refuses an empty one): Brandklout has not sent the Go High Level forms yet (INTAKE.md, open question 1), so the form gates cannot pass until they do.",
+  "_comment": "Scenario 3 campaign manifest for West LA Implants. Every gate in 03-qa-and-launch reads it. Slugs must match workflows/04-design/.tmp/site-src/templates/ads-landing-pages.mjs. formId: both campaign forms built 2026-10-05 in the West LA GHL sub-account (0iwrVBEYONV6VlSHSGH6) to the tools/ghl-forms standard, each redirecting to its thank-you page on productionOrigin. They are not yet embedded on the pages (the prototype form is still there).",
   "client": "west-la-implants",
   "platform": "instatic",
   "origin": "https://west-la-implants-production.up.railway.app",
@@ -18,7 +18,7 @@
       "landing": "all-on-6",
       "consultation": "all-on-6-consultation",
       "thankYou": "thank-you-all-on-6",
-      "formId": "PENDING",
+      "formId": "XaCEV96A0QuF9ufEmkSc",
       "conversion": "NOT SET. No GTM, Google Ads or GA4 tag reaches this instance. ChatGPT Ads conversion method and owner to be confirmed by Brandklout (expected: page view of the thank-you URL)."
     },
     {
@@ -27,7 +27,7 @@
       "landing": "3-on-6",
       "consultation": "3-on-6-consultation",
       "thankYou": "thank-you-3-on-6",
-      "formId": "PENDING",
+      "formId": "P15UYHonJj8oH5G8xwKX",
       "conversion": "NOT SET. Expected: page view of the thank-you URL as a Google Ads conversion (tag in GTM) or a GA4 key event imported into Ads. Owner: Brandklout ads team, to confirm."
     }
   ],
