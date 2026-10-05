@@ -12,6 +12,8 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 
 ## Where the site is, as of 2026-09-09
 
+**2026-10-05: STAGING IS ON THE CLASS STANDARD, PRODUCTION IS NOT.** Staging: every style in the Framework (44 tokens) or the registry, only 3 `@font-face` left in a code asset (EDITABLE); 377 classes renamed to Client-First (IN BOUNDS, `--verify` CLEAN); parity exact. Map and spec: `workflows/class-standard/`. **Do not push from `home/` until it is renamed with the same map (step 5): it still carries the old class names and the two code-asset stylesheets.** See `runbook/2026-10-05-class-standard-staging.md`.
+
 **2026-10-04: Google reviews widget `d359c3c4` ON THE IN-SECTION STANDARD** (no widget title, Google-logo header with the count, `#93644A` pill, cream cards; Elfsight editor only, live at once). Gate `check-widget.mjs` ok on `/` and `/patient-reviews`. See `runbook/2026-10-04-google-reviews-widget-standard.md`.
 
 **2026-10-03: `/terms-of-service` IS LIVE on staging and production** (the adult practice's terms, entity = "Mason Park Dental for Kids", effective October 3, 2026; the GHL form links to it). No footer link, not in the edge Worker's sitemap.xml; the text names a Cookie Policy this site does not have (flagged). Source `home/terms-of-service/`. See `runbook/2026-10-03-terms-of-service-page.md`.

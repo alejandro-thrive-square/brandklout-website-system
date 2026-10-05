@@ -1,0 +1,284 @@
+{
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "slate",
+      "value": "#545f62"
+    },
+    {
+      "slug": "sage",
+      "value": "#a0b4aa"
+    },
+    {
+      "slug": "ink",
+      "value": "#333c3f"
+    },
+    {
+      "slug": "ink-deep",
+      "value": "#262d2f"
+    },
+    {
+      "slug": "ink-mid",
+      "value": "#30393b"
+    },
+    {
+      "slug": "body",
+      "value": "#545f62"
+    },
+    {
+      "slug": "muted",
+      "value": "#858e91"
+    },
+    {
+      "slug": "sage-deep",
+      "value": "#587a68"
+    },
+    {
+      "slug": "sage-tint",
+      "value": "#edf2ee"
+    },
+    {
+      "slug": "sage-line",
+      "value": "#d3ddd6"
+    },
+    {
+      "slug": "sun",
+      "value": "#b78668"
+    },
+    {
+      "slug": "sun-fill",
+      "value": "#93644a"
+    },
+    {
+      "slug": "on-sun",
+      "value": "#ffffff"
+    },
+    {
+      "slug": "sun-glow",
+      "value": "#d4aa8e"
+    },
+    {
+      "slug": "sun-deep",
+      "value": "#8a5a3e"
+    },
+    {
+      "slug": "sun-tint",
+      "value": "#f5efe8"
+    },
+    {
+      "slug": "sun-line",
+      "value": "#e2d5c5"
+    },
+    {
+      "slug": "sun-line-strong",
+      "value": "#ccbca6"
+    },
+    {
+      "slug": "sky",
+      "value": "#eae9e6"
+    },
+    {
+      "slug": "sky-deep",
+      "value": "#545f62"
+    },
+    {
+      "slug": "cream",
+      "value": "#f6f3ee"
+    },
+    {
+      "slug": "white",
+      "value": "#ffffff"
+    },
+    {
+      "slug": "bg",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "bg-2",
+      "value": "var(--cream)"
+    },
+    {
+      "slug": "panel",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "fg",
+      "value": "var(--ink)"
+    },
+    {
+      "slug": "fg-body",
+      "value": "var(--body)"
+    },
+    {
+      "slug": "fg-soft",
+      "value": "var(--muted)"
+    },
+    {
+      "slug": "rule",
+      "value": "var(--sage-line)"
+    },
+    {
+      "slug": "rule-strong",
+      "value": "var(--sage)"
+    },
+    {
+      "slug": "accent",
+      "value": "var(--sage-deep)"
+    },
+    {
+      "slug": "accent-lg",
+      "value": "var(--sage)"
+    },
+    {
+      "slug": "pop",
+      "value": "var(--sun)"
+    }
+  ],
+  "typography": [
+    {
+      "group": "Typography",
+      "sizes": [
+        {
+          "name": "f-d1-base",
+          "px": 99.2
+        },
+        {
+          "name": "f-d2-base",
+          "px": 68.8
+        },
+        {
+          "name": "f-d3-base",
+          "px": 48
+        },
+        {
+          "name": "f-h3-base",
+          "px": 27.2
+        },
+        {
+          "name": "f-h4-base",
+          "px": 20
+        },
+        {
+          "name": "f-lede-base",
+          "px": 18.4
+        },
+        {
+          "name": "f-body-base",
+          "px": 16
+        },
+        {
+          "name": "f-label-base",
+          "px": 12.48
+        }
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "group": "Spacing",
+      "sizes": [
+        {
+          "name": "maxw",
+          "px": 1560
+        }
+      ]
+    },
+    {
+      "group": "UI",
+      "sizes": [
+        {
+          "name": "radius",
+          "px": 24
+        },
+        {
+          "name": "radius-sm",
+          "px": 14.4
+        }
+      ]
+    }
+  ],
+  "stays": [
+    "--font-from: 18   (redefined at a breakpoint: stays in the registry :root)",
+    "--font-to: 20   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-from: calc(1920 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-to: calc(2400 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-ui: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-text: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-head: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-sub: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "scroll-behavior: smooth   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-disp: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-lg: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-mid: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--t-sm: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--ch-pad: 6rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--bleed: 4.5rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)))",
+    "--base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)",
+    "--font-display: \"Marcellus MP\", \"Marcellus\", Candara, Georgia, serif",
+    "--font-body: \"Figtree VF\", \"Avenir Next\", Verdana, \"Segoe UI\", system-ui, sans-serif",
+    "--font-ui: \"Figtree VF\", \"Avenir Next\", Verdana, \"Segoe UI\", system-ui, sans-serif",
+    "--pill: 999px   (the Framework writes 2-decimal rem; 62.44rem would shift it)",
+    "--shadow: 0 24px 60px -36px rgba(47, 57, 64, .45)",
+    "--shadow-sm: 0 10px 30px -18px rgba(47, 57, 64, .35)",
+    "--ease: cubic-bezier(.22, .61, .36, 1)",
+    "--ease-out: cubic-bezier(.16, 1, .3, 1)",
+    "--dots: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000'%3E%3Ccircle cx='14' cy='22' r='2.2'/%3E%3Ccircle cx='72' cy='10' r='1.6'/%3E%3Ccircle cx='104' cy='48' r='2.4'/%3E%3Ccircle cx='40' cy='70' r='1.4'/%3E%3Ccircle cx='86' cy='96' r='2'/%3E%3Ccircle cx='22' cy='108' r='1.8'/%3E%3C/g%3E%3C/svg%3E\")"
+  ],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [
+        "--slate",
+        "--sage",
+        "--ink",
+        "--ink-deep",
+        "--ink-mid",
+        "--body",
+        "--muted",
+        "--sage-deep",
+        "--sage-tint",
+        "--sage-line",
+        "--sun",
+        "--sun-fill",
+        "--on-sun",
+        "--sun-glow",
+        "--sun-deep",
+        "--sun-tint",
+        "--sun-line",
+        "--sun-line-strong",
+        "--sky",
+        "--sky-deep",
+        "--cream",
+        "--white",
+        "--bg",
+        "--bg-2",
+        "--panel",
+        "--fg",
+        "--fg-body",
+        "--fg-soft",
+        "--rule",
+        "--rule-strong",
+        "--accent",
+        "--accent-lg",
+        "--pop",
+        "--maxw",
+        "--radius",
+        "--radius-sm"
+      ],
+      "set": {
+        "--f-d1": "calc(var(--f-d1-base) * var(--t-disp))",
+        "--f-d2": "calc(var(--f-d2-base) * var(--t-disp))",
+        "--f-d3": "calc(var(--f-d3-base) * var(--t-lg))",
+        "--f-h3": "calc(var(--f-h3-base) * var(--t-mid))",
+        "--f-h4": "calc(var(--f-h4-base) * var(--t-sm))",
+        "--f-lede": "calc(var(--f-lede-base) * var(--t-text))",
+        "--f-body": "calc(var(--f-body-base) * var(--t-text))",
+        "--f-label": "calc(var(--f-label-base) * var(--t-ui))"
+      }
+    }
+  ]
+}
