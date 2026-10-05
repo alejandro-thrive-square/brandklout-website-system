@@ -266,6 +266,17 @@ For the owner to settle against the reference video, then fold into the standard
   off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
   `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
   phone and fails off-brand consent text.
+- **Consent text is typed, not pasted** (IFA, 2026-10-04): Codex pasted box 1 with a chunk of the
+  captcha's markup (`<div id="cf-turnstile-…">`), which rendered as ~130px of blank space between the
+  boxes. The gate now fails a consent box carrying `div`/`iframe`/widget markup.
+- **The captcha has no label.** GHL labels a new Captcha element *Bot protection*; the standard
+  (Mason Park) leaves it empty. The gate fails a labelled captcha, and a missing one.
+- **GHL stores the consent text as HTML**, so `&` arrives as `&amp;` (sometimes `&amp;amp;`); the gate
+  decodes entities before matching `--legal` (Dr. Nahlah's "Implants & Prosthodontics").
+- **Close what you open.** Each Codex brief says: reuse an open tab already on the form, else open one
+  and close it before reporting. Builder tabs left by earlier runs stay claimed by their old session
+  and only the user can close them (two were left on 2026-10-04: McLean and Stone Med Spa, the second
+  holding a failed run's unsaved edits — close those without saving).
 - **`site-style.mjs` reads the site's real call-to-action** (2026-10-04): it skips cookie-banner
   buttons (it had picked Termly's black *Decline* on Dr. Nahlah) and reads **gradient** buttons
   (Dr. Nahlah's gold, IFA's yellow) by their first stop. A gradient site button gets the full
@@ -301,6 +312,11 @@ For the owner to settle against the reference video, then fold into the standard
 | Mason Park Kids | `pyYcEmfIvtv5LwB1s4X6` *Contact form* (`masonparkpediatricdental.com/contacts`, location `ayfI5c9B3HDoNAubf1Sj`) | 2026-10-04: existing kids Service field kept (10 options), consent names **Mason Park Dental for Kids** (no legal entity, user's decision), captcha above Submit, kids-site links, Figtree + `#93644A` pill via Custom CSS. **No-shift CSS 2026-10-04**, hide script deleted. |
 | Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
 | Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
+
+| Dr. Nahlah (Alexandria / McLean) | `g7FeioS7e7quSCxIQHRw` / `axgcdqEPUFoHF8Dt5Nji` | Standard 2026-10-04: two boxes per office entity, per-office legal pages, Raleway + gold gradient. Gate ok, style ok. |
+| IFA | `cxtQ5q29TfUr3cYlMmDB` | Standard 2026-10-04: new *Service* dropdown (12), captcha, Poppins + yellow gradient. Gate ok, style ok. |
+| Stone Surgical Arts | `Nzf3xQVLhgMlABuVMxCN` | Standard 2026-10-04: captcha, `www` links, Inter + green button. Gate ok, style ok. |
+| Stone Med Spa | `Gqnb0W1NH95MjROPRaLe` | Standard 2026-10-04: consent names **Westlake Medical Aesthetics** (its own policy), single *Service* dropdown replaced the multi-select. Gate ok, style ok. |
 
 ### Every client, 2026-10-03
 

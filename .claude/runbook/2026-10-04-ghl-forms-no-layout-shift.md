@@ -61,13 +61,32 @@
 - `site-style.mjs`: skips cookie-banner buttons and reads gradient buttons, on both the site and
   the form side.
 
-## Next (owner decisions; the gate still fails on these)
-- **Second (care) consent box with the legal name** on all five: needs each practice's legal name
-  from its `/privacy-policy`.
-- **Service dropdown**: IFA has none; Stone Med Spa's *Treatment Options* is a multi-select, not the
-  standard single dropdown.
-- **McLean has no Privacy Policy link** (Terms only).
+## Full standard on the five (later 2026-10-04)
+- Legal names from each site's privacy policy:
+  - Alexandria: *Implants And Prosthodontics Specialists, PLLC DBA Dr. Nahlah Implants & Prosthodontics
+    Specialists*. McLean: *Esam Abou Nahlah, DDS, MS, PLLC DBA …* (separate entities, per-office policies
+    `-alexandria` / `-maclean`).
+  - IFA: *Institute for Advanced Dentistry PLLC*. Stone Surgical Arts: *Stone Surgical Arts PLLC*.
+  - Stone Med Spa: **Westlake Medical Aesthetics**. Its policy calls Stone Surgical Arts "a separate
+    practice", so the form's old *STONE SURGICAL ARTS PLLC* consent was wrong. No entity suffix is
+    published (the Mason Park Kids precedent).
+- Codex, one small saved step per run:
+  - Every form: two consent boxes (care + marketing) naming the legal name.
+  - Captcha above Submit (IFA, both Stone forms), with its label cleared.
+  - Links on the production origin (Stone Surgical Arts moved to `www`).
+  - IFA: a new required *Service* dropdown, 12 options from its service pages.
+  - Stone Med Spa: its multi-select *Treatment Options* replaced on the form by a single *Service*
+    dropdown (12 options from its treatment pages; the old custom field is kept in the sub-account).
+- Fixes after review: IFA's box 1 had Turnstile markup pasted into it (blank gap), and three captchas
+  carried GHL's *Bot protection* label. The gate now catches both, plus a missing captcha, and decodes
+  `&amp;` before matching `--legal`.
+- Result: all five `check-ghl-form.mjs --standard --origin --legal --location` **ok** and
+  `site-style --compare` ok. The four Mason Park forms re-gate ok under the stricter checks. Live: 0/11
+  consent fields ever visible; IFA and both Stone forms hold their height within 1px on phones.
+
+## Next
 - Site side: the embed's `data-height` (Mason Park `2442`) is still not measured.
+- The user closes the two stale builder tabs (McLean `…533`, Stone Med Spa `…545`) without saving.
 
 ## Gotchas
 - The 4 consent **dropdowns** carry no `data-q`; only their label text names them. CSS can reach
