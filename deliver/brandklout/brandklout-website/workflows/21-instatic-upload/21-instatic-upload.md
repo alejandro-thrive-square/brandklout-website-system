@@ -1507,9 +1507,11 @@ A `richText`/`markdown` cell renders through `marked` (GFM, so tables become `<t
 `{{ body | html }}` passes it through `sanitizeRichtext` (`src/core/sanitize.ts`, Instatic 0.0.20).
 Its `RICHTEXT_CONFIG` allows `p br h1-h6 strong b em i u s del ins a ul ol li blockquote code pre
 span div` and nothing else, so `table/tr/td` are stripped and the cells publish as bare lines of
-text. The editor does not sanitize, so it looks right there. Nothing in a setting or CSS brings the
-table back. Write tabular legal content as `### <row>` + `- **<column>:** value` bullets (privacy
-policy §7 and §8 did this), and tell editors not to insert tables in collection bodies. Separately, a
+text. The editor does not sanitize, so it looks right there. The header row's text is lost too, so the
+leftover text cannot be rebuilt. The fix in use: write the table in markdown syntax INSIDE a code
+block; `agency/legal-tables.js` (appended to site.js by push-site.mjs) turns every such `<pre>` into a
+real `<table>` at runtime and leaves other code blocks alone. The editor round-trips code blocks
+verbatim, so editors keep editing it. Tell editors not to use the editor's table tool. Separately, a
 markdown ``` block publishes as `<pre><code>` and needs `.legal-richtext pre { white-space: pre-wrap }`
 or it runs off the right edge.
 

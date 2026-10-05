@@ -91,7 +91,9 @@ const siteJs =
   '/* ---- vendor.js, concatenated by push-site.mjs: Instatic has one script asset. ---- */\n' +
   vendorJs +
   '\n/* ---- site.js ---- */\n' +
-  fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8')
+  fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8') +
+  // Markdown tables written inside code blocks become real tables (see the file's header).
+  '\n' + fs.readFileSync(path.join(HERE, 'agency', 'legal-tables.js'), 'utf8')
 
 /* --- the token layer -----------------------------------------------------
    CUSTOM PROPERTIES DO NOT SURVIVE THE REGISTRY CONVERSION.
