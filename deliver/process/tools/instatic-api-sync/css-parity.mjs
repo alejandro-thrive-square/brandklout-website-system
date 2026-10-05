@@ -234,6 +234,14 @@ if (cmd === 'snapshot') {
         if (ready) break
         await wait(500)
       }
+      // and for web fonts: a fallback face wraps text differently (Stone Surgical Arts hipaa, +2px
+      // paragraphs under load). `document.fonts.ready` can resolve before the CSS declaring the faces
+      // is parsed, so wait until no face is still loading.
+      for (let t = 0; t < 40; t++) {
+        const fontsDone = await br.evaluate(`document.fonts.status === 'loaded' && ![...document.fonts].some((f) => f.status === 'loading')`).catch(() => true)
+        if (fontsDone) break
+        await wait(250)
+      }
       await wait(1200)
       const data = await br.evaluate(CAPTURE(PROPS))
       snapshot[slug || '/'] = data

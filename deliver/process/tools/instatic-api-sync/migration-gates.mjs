@@ -62,11 +62,30 @@ if (cmd === 'snapshot') {
   for (const w of [1440, 390, 1920]) {
     const real = diffLines(a, b, w)
     if (real === null) { ok = false; console.log(`FAIL  css-diff-${w}: snapshot missing`); continue }
-    const noise = new Set([...(diffLines(a, `${a}~n`, w) ?? []), ...(diffLines(b, `${b}~n`, w) ?? [])].map(keyOf))
-    const counted = real.filter((l) => !noise.has(keyOf(l)))
-    writeFileSync(join(LOG, `css-diff-${a}-${b}-${w}.log`), [`${real.length} raw, ${real.length - counted.length} noise (differ between two captures of one state), ${counted.length} real`, ...counted, '', 'noise:', ...real.filter((l) => noise.has(keyOf(l)))].join('\n'))
-    console.log(`${counted.length ? 'FAIL' : 'ok  '}  ${`css-diff-${a}-${b}-${w}`.padEnd(34)} ${counted.length} real difference(s), ${real.length - counted.length} noise`)
-    if (counted.length) ok = false
+    /* A real difference shows up in BOTH independent comparisons (first captures, and second
+       captures). A flip that only one comparison sees is noise; a capture that broke on one side
+       (a page captured before its CSS arrived: Mason Park privacy-policy, 5,829 values) cannot
+       hide a real difference, because the other comparison still sees it. Small flips that
+       differ between two captures of ONE state are also dropped. */
+    const second = diffLines(`${a}~n`, `${b}~n`, w)
+    const secondKeys = second === null ? null : new Set(second.map(keyOf))
+    const flipLines = [...(diffLines(a, `${a}~n`, w) ?? []), ...(diffLines(b, `${b}~n`, w) ?? [])]
+    const pageOf = (l) => l.split(/\s{2,}/)[0]
+    const perPage = new Map()
+    for (const l of flipLines) perPage.set(pageOf(l), (perPage.get(pageOf(l)) ?? 0) + 1)
+    const brokenPages = new Set([...perPage].filter(([, n]) => n > 200).map(([p]) => p))
+    const broken = [...brokenPages].map((p) => `${p} (${perPage.get(p)})`)
+    // proven flippers: differ between two captures of one state, on a page whose captures are sound
+    const flips = new Set(flipLines.filter((l) => !brokenPages.has(pageOf(l))).map(keyOf))
+    const finalReal = real
+      .filter((l) => (secondKeys ? secondKeys.has(keyOf(l)) : true))
+      .filter((l) => !flips.has(keyOf(l)))
+    writeFileSync(join(LOG, `css-diff-${a}-${b}-${w}.log`), [
+      `${real.length} raw; ${finalReal.length} real (seen in both comparisons${secondKeys ? '' : ': no second captures, noise-subtracted instead'})`,
+      broken.length ? `pages with a capture that disagrees wholesale (one capture broke; covered by the other comparison): ${broken.join(', ')}` : '',
+      ...finalReal, '', 'not counted:', ...real.filter((l) => !finalReal.includes(l))].join('\n'))
+    console.log(`${finalReal.length ? 'FAIL' : 'ok  '}  ${`css-diff-${a}-${b}-${w}`.padEnd(34)} ${finalReal.length} real difference(s) of ${real.length} raw${broken.length ? `; unreliable capture on ${broken.length} page(s), see log` : ''}`)
+    if (finalReal.length) ok = false
   }
   /* Behaviour: a page that differs is captured again (on its own, after the others) and only a
      difference that persists counts. A busy machine times a page out or catches a widget mid-load;
