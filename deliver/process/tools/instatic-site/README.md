@@ -81,6 +81,12 @@ node push/push-site.mjs --record                           # baseline for the ne
 This full run is for the **first import** or a deliberate rebuild. Every later change goes through
 the update path below.
 
+**Design tokens are not in this pipeline.** Colours, type sizes, spacing and radii live in the
+Instatic Framework (`settings.framework`), which both paths keep. The `tokens.css` asset this
+pipeline writes loads last and must not re-declare any of them, or a hand edit in the Framework is
+dead on publish (`TOKEN_FILES=00-fluid-root.css` once the tokens are moved). Standard and check:
+[`../client-first-style-guide/INSTATIC-FRAMEWORK.md`](../client-first-style-guide/INSTATIC-FRAMEWORK.md).
+
 ## The update path (changed pages only, 2026-09-28)
 
 ```

@@ -15,7 +15,7 @@ is `scripts/journey-audit.mjs`.
 
 ## Checklist
 
-- [ ] Client-First framework set up on Instatic
+- [ ] Client-First framework set up on Instatic: tokens in the Framework panel, none in the `tokens.css` asset, manual-edit proof done (`INSTATIC-FRAMEWORK.md`)
 - [ ] Facts sheet (`docs/facts.md`) complete
 - [ ] Images sourced client-first, every photo matching its text, none overused (`IMAGES.md`, ledger in `output/images.csv`)
 - [ ] Core pages built and tested
@@ -31,8 +31,12 @@ is `scripts/journey-audit.mjs`.
 
 1. **Framework.** Create the Client-First style guide page with the base components on Instatic
    ([`tools/client-first-style-guide/`](../../tools/client-first-style-guide/),
-   [`CLIENT-FIRST.md`](../../../docs/CLIENT-FIRST.md)). Set the variables, brand colours and
-   fonts from the style pick.
+   [`CLIENT-FIRST.md`](../../../docs/CLIENT-FIRST.md)). Put the Relume style guide's tokens, brand
+   colours from the style pick, type sizes, spacing and radii **in the Instatic Framework panel**, by
+   [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md): root 16 and
+   rem, Framework-safe names, min = max on every size. The `tokens.css` code asset must not re-declare
+   any of them, or a hand edit in the Framework is silently overridden. `css/01-tokens.css` in
+   site-src mirrors the Framework.
 2. **Breakpoints and type.** Add the `desktop` base breakpoint plus 1279, 991, 767 and 479 on Instatic.
    One fluid `html { font-size }` ([`FLUID-ROOT.md`](../../../docs/FLUID-ROOT.md),
    `node scripts/fluid-root.mjs`); type, spacing and radii in `rem`, never `px` and never `clamp()` for
@@ -68,7 +72,9 @@ is `scripts/journey-audit.mjs`.
 14. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
     (new filename for any re-cut image) → `set-alt` → `build-import-input` → `ship.sh` → `push-site` →
     `place-embeds` → `ops/apply-template-flags` (blog, 404) → `gates/template-guard` → publish. Then
-    `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`.
+    `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`,
+    and the Framework check (no token in both `framework.css` and `userStyles`,
+    [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)).
     `image-reuse --base <staging>` must end `0 problem(s)` on the complete site.
     Details: [`tools/instatic-site/README.md`](../../tools/instatic-site/README.md).
 15. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on

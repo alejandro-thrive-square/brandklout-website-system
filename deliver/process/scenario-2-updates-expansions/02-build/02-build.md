@@ -36,7 +36,13 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
      site-document afterwards (`tools/instatic-site/ops/restore-page-seo-cells.mjs`).
 4. **Styles.** Font sizes go on the Client-First type-role classes with their responsive values on
    the same class. Contextual CSS (`.section p`) beats a bare class edit, so resolve the cascade
-   before changing a class.
+   before changing a class. A colour, type size, spacing or radius change is a **token** change: make
+   it in the Instatic Framework panel, then mirror it into site-src `01-tokens.css`; never hard-code
+   it in a class. Before any build, bring `01-tokens.css` in line with the live Framework (the client
+   may have edited it). A site whose tokens still sit in the `tokens.css` code asset is moved to the
+   Framework the first time it comes in for work
+   ([`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md) §Existing
+   sites). Either upload path, whole site or per page, keeps the Framework; run its check after.
 5. **Third-party embeds and site scripts.** Use the Embed block and the Embed Origins settings, not
    raw HTML: [`tools/instatic-embeds/instatic-embeds.md`](../../tools/instatic-embeds/instatic-embeds.md).
    Site-wide tags go in `siteScripts`; read-merge-write the plugin settings, never replace them.

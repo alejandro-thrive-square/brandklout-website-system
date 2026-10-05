@@ -1,6 +1,7 @@
 {
   "step": "scenario-2-updates-expansions/02-build",
   "toolkits": [
+    "client-first-style-guide",
     "instatic-api-sync",
     "instatic-domain-origins",
     "instatic-embeds",

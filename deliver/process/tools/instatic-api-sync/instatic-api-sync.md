@@ -19,6 +19,7 @@ Two problems, one tool.
 | Layer | Stored on | Served as | Editable in the Styles panel |
 |---|---|---|---|
 | Style registry | `site.styleRules` | `style-<hash>.css` | Yes — chips, pills, controls |
+| Framework | `site.settings.framework` | `framework.css` | Framework panel: colours, type and spacing scales. **Home of every design token** ([INSTATIC-FRAMEWORK.md](../client-first-style-guide/INSTATIC-FRAMEWORK.md)) |
 | Code assets | `site.files` where `type: 'style'` | `userStyles-<hash>.css` | No — raw text in the Code tab only |
 
 Cascade order is `reset -> framework -> style -> userStyles` (`src/core/publisher/siteCssBundle.ts`), so a code asset beats the registry at equal specificity. Within `userStyles`, files are ordered by `priority` then path.
