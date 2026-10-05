@@ -9,7 +9,7 @@ user's choice on 2026-10-02.
 
 ```bash
 node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction with its stopping point>" \
-  [--allow-writes] [--out <dir>] [--timeout <minutes, default 20>]
+  [--allow-writes] [--model <slug>] [--effort <low|medium|high>] [--out <dir>] [--timeout <minutes, default 20>]
 ```
 
 - Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` (Codex's JSON event stream, which includes the code each tool call ran) land in `--out` (default
@@ -21,6 +21,21 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
 - **Read-only by default.** `--allow-writes` permits only the changes the instruction names.
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
+
+## Speed
+
+Measured 2026-10-04 on the same read-only task (top 3 stories on lobste.rs, `gpt-6-luna`, medium
+effort): the old wrapper took **58s and 5 tool calls**, and the current one takes **38s and 2**.
+- **Browser setup comes ready to run.** The prompt carries the Chrome plugin's Bootstrap code (setup,
+  select Chrome, read its docs, list open tabs) as one `js` call. Codex used to spend 2–3 turns
+  reading `SKILL.md`, connecting and then listing tabs. If that call fails, it falls back to the skill.
+- **A speed rule in the prompt:** batch reads and actions into one `js` call, read pages through
+  the DOM or accessibility tree rather than screenshots, and go straight to a URL the task gives.
+- **`--effort low|medium|high`** (default `medium`, which the wrapper now passes explicitly). `low` is
+  about 25% faster but skips rules: twice it stopped at a tab locked by another session instead of
+  opening its own. Use it only for simple reads on a site with no open tab.
+- **What you control:** put every question for one site in one instruction (each run pays the
+  ~20s setup again), give the deep URL, and run *different* sites in parallel (see below).
 
 ## Usage limits and reset credits
 
