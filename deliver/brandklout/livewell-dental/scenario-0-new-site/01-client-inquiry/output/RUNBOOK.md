@@ -2,6 +2,31 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-05 · Concept pages carry no working links
+
+Asked for: remove the links to the old site from the concept pages; each concept is a homepage to
+pick a style from, and a click that lands on livewelldentalva.com confuses the client.
+
+### Done
+
+- `output/code/strip-links.mjs` removed every outbound link from the five concept pages (310 in all:
+  old-site pages, `tel:`, Google Maps, Instagram, Facebook, YouTube, Yelp). The anchors stay as
+  `<a>` without `href`, so buttons and nav look the same but do nothing.
+- Kept: the "All 5 concepts" back link (deck navigation), concept 02's `#d2-main` skip link, the
+  SVG `#q5-circle` reference and the Google Fonts `<link>`s. `index.html` untouched (its links only
+  open the concepts).
+- Republished with `publish-deck.mjs` (7 pages); live check: 0 old-site URLs, 0 `tel:`, only
+  `/concepts` (and `#d2-main`) left as hrefs.
+
+### Next
+
+Unchanged: send https://livewell-dental-staging.up.railway.app/concepts to the client via Brandklout.
+
+### Gotchas
+
+- Any new concept or edit must stay link-free: run `node code/strip-links.mjs` from `output/` before
+  `publish-deck.mjs`. It is idempotent.
+
 ## 2026-10-01 · Instatic instance, staging, logins, plugins, and the concept deck
 
 Asked for: redesign the Webflow site for Instatic; build style options for the client on the

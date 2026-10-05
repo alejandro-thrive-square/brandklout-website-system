@@ -14,7 +14,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 - **Instatic:** production https://livewell-dental-production.up.railway.app (empty), staging
   https://livewell-dental-staging.up.railway.app. Alejandro and Sang on both; three plugins on both.
 - **Concept deck live:** https://livewell-dental-staging.up.railway.app/concepts, five homepages.
-  **The client has not picked yet.** Source: `scenario-0-new-site/01-client-inquiry/output/concepts/`.
+  No working links on the concept pages (2026-10-05). **The client has not picked yet.** Source: `scenario-0-new-site/01-client-inquiry/output/concepts/`.
 - Old site: scraped in full, homepage screenshotted; the rest of the capture is open.
 - `INSTATIC_BASE_URL` is PRODUCTION; prefix the staging URL explicitly for any staging write.
 
@@ -22,6 +22,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
+| 2026-10-05 | scenario-0 / 01-client-inquiry | Concept pages: all outbound links (old site, tel, maps, socials) removed, deck republished | (this commit) |
 | 2026-10-01 | scenario-0 / 01-client-inquiry | Railway instance + staging, logins, plugins; five-concept deck built and published to staging | `a2eb90c5` |
 | 2026-10-01 | scenario-1 / 01-old-site-capture | 60-page scrape, homepage screenshots, partial summary | `a2eb90c5` |
 
