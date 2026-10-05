@@ -72,9 +72,11 @@ const ONLINE = {
   h2: strip(online.match(/<h2[^>]*>([\s\S]*?)<\/h2>/)[1]),
   p: strip(online.match(/<div class="pk-head">[\s\S]*?<p>([\s\S]*?)<\/p>/)[1]),
 }
-const SNIPPET = readFileSync(join(SITE_SRC, 'partials/referral-form.html'), 'utf8').replace(/\r\n/g, '\n').trim()
+/* 2026-10-03: the GHL survey (HIPAA, Sung), replacing the native webhook form that
+   partials/referral-form.html still holds. The header comment is not shipped. */
+const SNIPPET = readFileSync(join(SITE_SRC, 'partials/referral-survey.html'), 'utf8').replace(/\r\n/g, '\n').replace(/<!--[\s\S]*?-->/g, '').trim()
 if (HERO_BTNS.length !== 2 || FORMS.btns.length !== 2) throw new Error('expected two buttons in #hero and in #referral-forms')
-if (!/webhook-trigger\/[\w-]+/.test(SNIPPET) || !/<script>/.test(SNIPPET)) throw new Error('form snippet lacks its webhook or script')
+if (!/widget\/survey\/KXFNR4JPqxonXEFTtme0/.test(SNIPPET) || !/form_embed\.js/.test(SNIPPET)) throw new Error('survey snippet lacks its iframe or form_embed.js')
 
 // ── read ────────────────────────────────────────────────────────────────────
 console.log(HOST, APPLY ? '(apply)' : PUBLISH ? '(publish)' : '(plan)')
@@ -193,7 +195,7 @@ const cNodes = contact.cells.body.nodes
 const cEmbed = Object.values(cNodes).find((n) => /embed-origins\.embed$/.test(n.moduleId))
 const slot = clone(cNodes, cEmbed.parentId, wrap.id); wrap.children.push(slot.id)
 const embed = under(nodes, slot).find((n) => /embed-origins\.embed$/.test(n.moduleId))
-embed.props = { ...embed.props, source: 'snippet', snippet: SNIPPET, title: 'Patient referral form', fit: 'auto', height: 1500, lazy: false }
+embed.props = { ...embed.props, source: 'snippet', snippet: SNIPPET, title: 'Patient referral survey', fit: 'auto', height: 1500, lazy: false }
 
 // 5. #patient-reviews from the home page's #reviews
 const hNodes = home.cells.body.nodes

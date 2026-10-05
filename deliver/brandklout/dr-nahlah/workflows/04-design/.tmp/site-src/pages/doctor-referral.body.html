@@ -68,9 +68,10 @@
 </section>
 
 <!-- ---------- refer online ----------
-     The printed form as a native form that posts to GoHighLevel. The whole
-     form is ONE embed snippet, partials/referral-form.html, inlined below by
-     build-site.mjs (the include marker). -->
+     The printed form's fields as a GoHighLevel SURVEY (HIPAA: the data stays in
+     GHL). The embed is partials/referral-survey.html, inlined by build-site.mjs
+     (the include marker). The native webhook form it replaced is
+     partials/referral-form.html, kept in git, not used. -->
 <section class="pk pk-light" id="referral-form">
   <div class="wrap section">
     <div class="pk-head">
@@ -78,7 +79,7 @@
       <h2 data-split>Send a referral.</h2>
       <p>The same form as the printed one. It goes straight to the Tysons Corner &middot; McLean office.</p>
     </div>
-    <div class="wz-embed" data-wz-embed="auto"><!--#include partials/referral-form.html--></div>
+    <div class="wz-embed" data-wz-embed="auto"><!--#include partials/referral-survey.html--></div>
   </div>
 </section>
 
