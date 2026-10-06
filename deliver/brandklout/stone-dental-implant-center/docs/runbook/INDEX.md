@@ -1,11 +1,12 @@
 # Runbook index
 
-12 runs, newest first. Each line is one file in this folder.
+13 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-06 | ChatGPT ad page: OpenAI ad-policy copy fixes LIVE (claims, gallery, distress copy, price, title) — carries **gotchas** | [`2026-10-06-chatgpt-ad-page-policy-copy.md`](./2026-10-06-chatgpt-ad-page-policy-copy.md) |
 | 2026-09-24 | 2026-09-24 — DNI pool was held by Termly (`text/plain` advertising) in the footer; untagged, published, swap proven with no consent — carries **gotchas** | [`2026-09-24-dni-pool-held-by-termly.md`](./2026-09-24-dni-pool-held-by-termly.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
 | 2026-09-17 | Consent kit promoted to process module 23; GHL bridge v2.2 on all Webflow + Instatic sites | [`2026-09-17-consent-module-23-rollout.md`](./2026-09-17-consent-module-23-rollout.md) |
