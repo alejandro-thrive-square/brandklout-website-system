@@ -29,6 +29,8 @@ const read = async () => ({
   aeo: (await api('GET', `${AEO}/runtime/entries`)).entries.filter((e) => e.block).map((e) => ({ key: e.block.key, json: e.block.json, note: e.block.note, enabled: e.block.enabled !== false })),
   site: (await api('GET', `${AEO}/runtime/entries`)).entries.find((e) => e.key === '*')?.block ?? null,
   organizationJson: (await api('GET', `${AEO}/settings`)).settings.organizationJson,
+  // the emit* switches travel too (SEO v3: emitBreadcrumbs off, the pages carry their own trail)
+  emit: Object.fromEntries(Object.entries((await api('GET', `${AEO}/settings`)).settings).filter(([k]) => k.startsWith('emit'))),
 })
 
 if (MODE === 'export') {
@@ -51,7 +53,7 @@ const aeoBy = Object.fromEntries(cur.aeo.map((b) => [b.key, b.json]))
 const site = src.site ? [{ key: '*', json: src.site.json, note: src.site.note, enabled: src.site.enabled !== false }] : []
 const ogTodo = src.og.filter((o) => ogBy[o.key] !== JSON.stringify(o))
 const aeoTodo = [...src.aeo, ...site].filter((b, i, a) => a.findIndex((x) => x.key === b.key) === i).filter((b) => aeoBy[b.key] !== b.json)
-const orgTodo = cur.organizationJson !== src.organizationJson
+const orgTodo = cur.organizationJson !== src.organizationJson || JSON.stringify(cur.emit) !== JSON.stringify(src.emit || cur.emit)
 console.log(`${BASE} vs ${src.host}: og ${ogTodo.length} differ, aeo ${aeoTodo.length} differ, organizationJson ${orgTodo ? 'differs' : 'same'}`)
 if (MODE === 'diff') process.exit(ogTodo.length || aeoTodo.length || orgTodo ? 1 : 0)
 if (MODE !== 'import') { console.error('mode: export | import | diff'); process.exit(2) }
@@ -65,7 +67,7 @@ for (const o of ogTodo) { const r = await api('POST', `${OG}/runtime/override`, 
 for (const b of aeoTodo) { const r = await api('POST', `${AEO}/runtime/entry`, b); if (r.error || r.ok === false) { fail++; console.log('  !! aeo', b.key) } }
 if (orgTodo) {
   const s = (await api('GET', `${AEO}/settings`)).settings
-  await api('PUT', `${AEO}/settings`, { settings: { ...s, organizationJson: src.organizationJson } })
+  await api('PUT', `${AEO}/settings`, { settings: { ...s, organizationJson: src.organizationJson, ...(src.emit || {}) } })
 }
 console.log(`written: og ${ogTodo.length}, aeo ${aeoTodo.length}, org ${orgTodo}; failures ${fail}; backup ${BK}`)
 process.exit(fail ? 1 : 0)

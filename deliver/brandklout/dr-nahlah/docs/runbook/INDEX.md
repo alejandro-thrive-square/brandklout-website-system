@@ -1,11 +1,12 @@
 # Runbook index
 
-104 runs, newest first. Each line is one file in this folder.
+105 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05g — **SEO v3 on PRODUCTION**: structured data built from each page's content (scan → facts → build): Service/procedure from the page copy, HowTo x7, ItemList x33, VideoObject x23, lenders, warranty, team, credentials, Wikidata sameAs, FAQ from accordions + 5 question-led posts, breadcrumbs = the visible trail (emitBreadcrumbs off); verify-seo-v3 CLEAN on 81 URLs, staging draft synced — carries **gotchas** (shell escapes, platform video text) + client flags (7,000 vs 18,000) | [`2026-10-05g-seo-v3-content-schema-production.md`](./2026-10-05g-seo-v3-content-schema-production.md) |
 | 2026-10-05 | 2026-10-05f — **GSC "Couldn't fetch" on the sitemap**: Cloudflare served Google fine (Googlebot 200); old WordPress sitemaps 404'd → 11 Bulk Redirect rows 301 them to /sitemap.xml; worker embeds the CF robots policy + Sitemap line; robots.txt* / sitemap.xml* routes bound via Codex in the dashboard, verified live — carries **gotchas** (token capabilities) | [`2026-10-05f-gsc-sitemap-couldnt-fetch.md`](./2026-10-05f-gsc-sitemap-couldnt-fetch.md) |
 | 2026-10-05 | 2026-10-05e — **SEO / AEO audit** of production after SEO v2 (81 URLs, nothing changed): the schema is entity boilerplate, not page content — Service/procedure nodes carry only the meta description; 17 findings + a proposed seo-v3 order | [`2026-10-05e-seo-aeo-audit.md`](./2026-10-05e-seo-aeo-audit.md) |
 | 2026-10-05 | 2026-10-05d — **SEO v2 on PRODUCTION** after the GSC drop (reference: Hackensack): 30 titles/descriptions in every store, full AEO schema (org + offices + Person + Service/FAQ + 43 BlogPostings with original dates), aeo-schema 1.3.0 (posts had no Article), legacy runtime JSON-LD + seo-head.js overrides retired (duplicate FAQPage), 43 image alts, sitemap lastmod; 84 URLs verified — carries **gotchas** (never regenerate seo-head.js) | [`2026-10-05d-seo-v2-metadata-schema-production.md`](./2026-10-05d-seo-v2-metadata-schema-production.md) |
