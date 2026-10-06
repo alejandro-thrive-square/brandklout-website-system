@@ -245,6 +245,17 @@ console.log('\nAEO Schema — graph construction\n')
   check('an interior page has no WebSite node', nodesOfType(doc, 'WebSite').length === 0)
 }
 
+// 4b ── 1.3.0: the template renders the entry's SEO title as <title> ──────
+{
+  const h = await boot()
+  const g = graphOf(h.filters['publish.html'](
+    page({ title: 'Are Dental Implants Worth The Cost? | Dr. Nahlah DDS. MS.', body: BODY }), { slug: 'post' }))
+  const art = nodesOfType(g, 'Article')
+  check('an article whose <title> is its seoTitle still resolves to the entry',
+    art.length === 1 && art[0]['@id'] === 'https://www.drnahlah.com/posts/are-dental-implants-worth-the-cost#article',
+    JSON.stringify(art.map(n => n['@id'])))
+}
+
 // 4 ── THE trap: 43 articles share one template slug ────────────────────
 {
   const h = await boot()

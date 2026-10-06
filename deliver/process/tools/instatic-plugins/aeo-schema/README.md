@@ -1,4 +1,4 @@
-# AEO Schema — `brandklout.aeo-schema` v1.2.0
+# AEO Schema — `brandklout.aeo-schema` v1.3.0
 
 One JSON-LD `@graph` on every published page, managed from the admin and
 changeable across the whole site in one API call.
