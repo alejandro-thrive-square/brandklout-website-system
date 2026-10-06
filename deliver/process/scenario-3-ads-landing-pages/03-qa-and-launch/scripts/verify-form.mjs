@@ -43,6 +43,9 @@ const MEASURE = `(() => {
   let clipped = 0, clipper = null
   for (let el = p; el && el !== document.body; el = el.parentElement) {
     const cs = getComputedStyle(el)
+    // A position:fixed overflow:hidden ancestor is a scroll viewport (GSAP ScrollSmoother's
+    // #smooth-wrapper), not a clip: the page scrolls inside it. West LA, 2026-10-05.
+    if (cs.position === 'fixed') continue
     if (/hidden|clip/.test(cs.overflow + cs.overflowY) || cs.aspectRatio !== 'auto') {
       const a = el.getBoundingClientRect()
       const px = Math.max(0, r.bottom - a.bottom) + Math.max(0, a.top - r.top) + Math.max(0, r.right - a.right)
