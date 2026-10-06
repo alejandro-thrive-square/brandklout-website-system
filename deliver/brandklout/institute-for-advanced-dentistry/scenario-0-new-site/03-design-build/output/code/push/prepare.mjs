@@ -92,15 +92,15 @@ function transform({ html }) {
     return h
   }
 
-  /* the form slot -> title, line, Embed placeholder. It keeps .ask and [data-ask]: the core measures that
+  /* the form slot -> title, line, Embed placeholder. It keeps .form_component and [data-ask]: the core measures that
      box for the call bar. */
   for (const form of Array.from(body.querySelectorAll('[data-ghl-slot]'))) {
     const slot = doc.createElement('div')
-    slot.className = 'ask ask--live'
+    slot.className = 'form_component is-embedded'
     slot.setAttribute('data-ask', '')
     slot.setAttribute('id', 'request')
-    for (const sel of ['.ask__title', '.ask__sub']) { const t = form.querySelector(sel); if (t) slot.appendChild(t) }
-    slot.appendChild(holder('ghl-form', 'ask__embed'))
+    for (const sel of ['.form_title', '.form_subtitle']) { const t = form.querySelector(sel); if (t) slot.appendChild(t) }
+    slot.appendChild(holder('ghl-form', 'form_embed'))
     form.replaceWith(slot)
   }
   /* widgets: the wrapper stays (it carries the layout class), its preview children become the placeholder */

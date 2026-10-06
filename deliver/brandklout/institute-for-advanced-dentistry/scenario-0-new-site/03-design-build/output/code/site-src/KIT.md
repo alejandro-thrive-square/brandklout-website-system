@@ -8,13 +8,13 @@ layout, never in system. The complete exemplar is
 ## Rules that are not negotiable
 
 - **Light grounds only.** Graphite ink, gold as fills and rules, gold *text* only via `--accent-text`
-  (`#74560f`). Grounds: `g-bone`, `g-paper`, `g-sand`, `g-white`, `g-mist`. No two neighbouring
+  (`#74560f`). Grounds: `background-color-bone`, `background-color-paper`, `background-color-sand`, `background-color-white`, `background-color-mist`. No two neighbouring
   sections share a ground.
 - **Elevated, not static** (Brandklout rejects calm text-led pages): every page opens on a photograph
   (legal and articles on type), **a photograph in every chapter**, a sentence per idea, and **at least
   three scroll-driven moves** (pin, scrub, count, draw, parallax) per page.
 - **No wall of text.** At most ~110 words of consecutive paragraphs; fold the rest into
-  `<details class="fold">`. Never rewrite clinical meaning; trim and split only.
+  `<details class="disclosure_component">`. Never rewrite clinical meaning; trim and split only.
 - **Copy comes from the client**, never invented: the scrape
   (`workflows/01-content-intake/.tmp/current-site-scrape/pages/<slug>.md`), the approved home, and
   [`docs/facts.md`](../../../../../docs/facts.md). Figures exactly as facts.md. No "100% satisfaction",
@@ -32,8 +32,8 @@ layout, never in system. The complete exemplar is
 
 ```html
 <!--@page {"title": "...", "description": "...", "label": "Short name"}-->
-<section class="ch hero hero--split" data-chapter="0" data-chapter-name="..." data-theme="light" data-intro> ... </section>
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="..." data-theme="light"> ... </section>
+<section class="section_chapter section_hero is-split" data-chapter="0" data-chapter-name="..." data-theme="light" data-intro> ... </section>
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="..." data-theme="light"> ... </section>
 ...
 <!--@invite {"chapter": "9", "tagline": "...", "h2": "... <em>...</em>.", "lede": "..."}-->
   <!--@faq {"tagline": "...", "h2": "..."}-->
@@ -43,7 +43,7 @@ layout, never in system. The complete exemplar is
 ```
 
 - File path = URL: `pages/dental-services/tmj-treatment.html` serves `/dental-services/tmj-treatment/`.
-- Every section is `class="ch ..."` with `data-chapter` (any number) `data-chapter-name` and
+- Every section is `class="section_chapter ..."` with `data-chapter` (any number) `data-chapter-name` and
   `data-theme="light"`. The hero has `data-intro` (its own entrance on load).
 - Every page ends with `<!--@invite ...-->` (the consultation chapter with the form, the address, the
   payment logos and the footer). Its FAQ is optional but wanted on service pages (3-5 items, answers
@@ -60,40 +60,60 @@ Copy the markup from the exemplar; the class lists below are what each one needs
 
 | Section | Markup root | Motion | Use for |
 | --- | --- | --- | --- |
-| Hero, split | `section.hero.hero--split[data-intro] > .hero__wrap > .hero__copy + figure.hero__fig > .hero__img img` (+ `.hero__note`, `ul.hero__facts`) | entrance; photo drifts, copy lifts | service pages |
-| Hero, wide | `section.hero.hero--wide[data-intro] > .hero__wrap > .hero__copy (crumbs, tag, h1) + div (p.hero__lede, .hero__cta)`, then `.hero__window > img` as the section's second child | entrance; window opens to full width | pages led by one big photograph |
-| Hero, index | `section.hero.hero--index[data-intro] > .hero__wrap > .hero__copy` + `.hero__strip` (3 `figure`) + `.hero__foot` | three photographs at three speeds | hubs (services, about, gallery, articles) |
-| Hero, plain | `section.hero.hero--plain[data-intro] > .hero__wrap` + `.hero__meta` | entrance | legal, articles, thank you, 404 |
-| Crumbs | `ol.crumbs` in every hero except the home | | |
-| Say | `.wrap.say > p.tag + p.say__text[data-say]` (`strong` = gold); `.say--split` adds `figure.say__fig` | words lit by the scroll | one key idea |
-| Rows | `.rows > .row(.row--flip) > figure.row__fig[data-wipe] img[data-parallax] + .row__body` | wipe, parallax, text follows | the substance of a page |
-| Stack | `section.pg-stack > .stack[data-stack] > header.stack__head + .stack__deck > article.stack__card[data-stack-card]` | **pinned**, cards dealt | 3-5 options |
-| Case | `.case(.case--flip) > .case__copy + figure.case__fig > .ba[data-ba]` | divider swept by the scroll, draggable | a real before/after |
-| Line | `.line > .line__head + .line__track > span.line__bar + ol.line__list[data-line-list] > li.line__item > span.line__dot` | rule draws, steps light | visits, process |
-| Figs | `dl.figs(.figs--3) > div > dt[data-count]+dd` | counted | numbers from facts.md only |
-| Signs | `.signs(.signs--flip) > figure.signs__fig[data-wipe] + div > ul.signs__list > li > svg path + span` | marks drawn | candidacy, symptoms, comfort |
-| Pull | `.pull(.pull--flip) > figure.pull__fig[data-wipe] (+ button.pull__play[data-story]) + blockquote.pull__q` | lines rise | a patient's words |
-| More | `.more > ul.more__list[data-more] > li > a.more__link > .more__thumb img + .more__t + .more__d + svg`, then `div.more__float[data-more-float] > img` | photo follows the cursor | related pages |
-| Prose | `.prose-wrap > aside.prose__side + .prose` with `details.fold > summary (+ i) + .fold__body` | | long clinical copy, legal |
-| Vs | `.vs-wrap > table.vs` (`tr.is-pick` = the usual recommendation; `td[data-th]` for phones) | | comparing options |
-| Mosaic | `.mosaic > .mosaic__col x3 > figure img` | three speeds | the office, the team |
-| Band | `a.band[data-band][href="#invitation"] > span.band__track` | slides with the scroll | a way in, between chapters |
-| Film | `button.film[data-story="/media/video/x.mp4"][data-story-name] > img + span.film__meta > (span > b + span.film__sub) + span.film__play > svg` | frame opens | a patient film |
-| Tiles | `.tiles(.tiles--2/--4) > a.tile > .tile__img img + .spec + .tile__t + .tile__d` | dealt in rows | hubs, articles |
-| Chipbar | `.chipbar > button[data-filter][aria-pressed]` | | gallery and article filters |
-| Gallery | `.gal[data-gal] > .gal__item[data-gal-item][data-tags] > button.gal__btn[data-gal-btn][data-before][data-after][data-title][data-sub]` + `.lb[data-lb]` lightbox | | the smile gallery |
-| Visit | `.visit > div + .visit__map > div[data-embed="google-map"]` | | contact |
-| Post | `.post > aside.post__aside + article > .post__lead img + .prose` | | an article |
-| Note | `.note > .note__seal? + div` | | warranty, disclaimers |
+| Hero, split | `section.section_hero.is-split[data-intro] > .hero_layout > .hero_copy + figure.hero_figure > .hero_image img` (+ `.hero_note`, `ul.hero_facts`) | entrance; photo drifts, copy lifts | service pages |
+| Hero, wide | `section.section_hero.is-wide[data-intro] > .hero_layout > .hero_copy (breadcrumb, tag, h1) + div (p.hero_intro, .hero_buttons)`, then `.hero_window > img` as the section's second child | entrance; window opens to full width | pages led by one big photograph |
+| Hero, index | `section.section_hero.is-index[data-intro] > .hero_layout > .hero_copy` + `.hero_photo-strip` (3 `figure`) + `.hero_footer` | three photographs at three speeds | hubs (services, about, gallery, articles) |
+| Hero, plain | `section.section_hero.is-plain[data-intro] > .hero_layout` + `.hero_details` | entrance | legal, articles, thank you, 404 |
+| Breadcrumb | `ol.breadcrumb_component` in every hero except the home | | |
+| Say | `.container-large.idea_component > p.tag + p.idea_text[data-say]` (`strong` = gold); `.is-with-photo` adds `figure.idea_figure` | words lit by the scroll | one key idea |
+| Rows | `.row_list > .row_item(.is-text-first) > figure.row_figure[data-wipe] img[data-parallax] + .row_body` | wipe, parallax, text follows | the substance of a page |
+| Stack | `section.section_stack > .stack_component[data-stack] > header.stack_header + .stack_deck > article.stack_card[data-stack-card]` | **pinned**, cards dealt | 3-5 options |
+| Case | `.case_component(.is-photo-first) > .case_copy + figure.case_figure > .before-after_component[data-ba]` | divider swept by the scroll, draggable | a real before/after |
+| Line | `.timeline_component > .timeline_header + .timeline_track > span.timeline_bar + ol.timeline_list[data-line-list] > li.timeline_item > span.timeline_dot` | rule draws, steps light | visits, process |
+| Figs | `dl.stats_component(.is-three-columns) > div > dt[data-count]+dd` | counted | numbers from facts.md only |
+| Signs | `.checklist_component(.is-list-first) > figure.checklist_figure[data-wipe] + div > ul.checklist_list > li > svg path + span` | marks drawn | candidacy, symptoms, comfort |
+| Pull | `.quote_component(.is-quote-first) > figure.quote_figure[data-wipe] (+ button.quote_play-button[data-story]) + blockquote.quote_text` | lines rise | a patient's words |
+| More | `.related_component > ul.related_list[data-more] > li > a.related_link > .related_thumbnail img + .related_title + .related_description + svg`, then `div.related_floating-image[data-more-float] > img` | photo follows the cursor | related pages |
+| Prose | `.prose_layout > aside.prose_aside + .text-rich-text` with `details.disclosure_component > summary (+ i) + .disclosure_body` | | long clinical copy, legal |
+| Vs | `.comparison_table-wrapper > table.comparison_table` (`tr.is-pick` = the usual recommendation; `td[data-th]` for phones) | | comparing options |
+| Mosaic | `.mosaic_component > .mosaic_column x3 > figure img` | three speeds | the office, the team |
+| Band | `a.band_component[data-band][href="#invitation"] > span.band_track` | slides with the scroll | a way in, between chapters |
+| Film | `button.film_component[data-story="/media/video/x.mp4"][data-story-name] > img + span.film_caption > (span > b + span.film_subtitle) + span.film_play-button > svg` | frame opens | a patient film |
+| Tiles | `.tile_grid(.is-two-columns / .is-four-columns) > a.tile_card > .tile_image img + .text-style-label + .tile_title + .tile_description` | dealt in rows | hubs, articles |
+| Chipbar | `.filter_bar > button[data-filter][aria-pressed]` | | gallery and article filters |
+| Gallery | `.gallery_grid[data-gal] > .gallery_item[data-gal-item][data-tags] > button.gallery_button[data-gal-btn][data-before][data-after][data-title][data-sub]` + `.lightbox_component[data-lb]` lightbox | | the smile gallery |
+| Visit | `.visit_layout > div + .visit_map > div[data-embed="google-map"]` | | contact |
+| Post | `.post_layout > aside.post_aside + article > .post_lead-image img + .text-rich-text` | | an article |
+| Note | `.notice_component > .notice_seal? + div` | | warranty, disclaimers |
 
 Shared reveals from the core work anywhere: `[data-tag]`, `[data-split="lines"]` on headings,
 `[data-rise]`, `[data-wipe]` on a figure, `[data-parallax="8"]` on its image, `[data-count]`,
 `[data-magnetic]` on buttons, `[data-tilt]` on cards.
 
 A page needs a section the kit does not have? Write it in **your own** files: `css/5N-<group>.css`
-and `js/5N-<group>.js` (register with `IFA.module({ init, motion })`, guard on your own elements,
-class prefix of your group). Never edit `css/0*-4*`, `js/0*-3*`, `js/90-boot.js`, `partials/`,
-`build.mjs`, `serve.mjs`, `tools/`.
+and `js/5N-<group>.js` (register with `IFA.module({ init, motion })`, guard on your own elements).
+Never edit `css/0*-4*`, `js/0*-3*`, `js/90-boot.js`, `partials/`, `build.mjs`, `serve.mjs`, `tools/`.
+
+## Class names (Client-First, since 2026-10-05)
+
+Every class follows [CLASS-STANDARD.md](../../../../../../../process/tools/client-first-style-guide/CLASS-STANDARD.md):
+
+- **Custom** `folder_element`, one underscore, whole words: `hero_copy`, `timeline_dot`, `tile_card`.
+  A component's root is `<folder>_component` (or `_layout`, `_grid`, `_list`); a chapter is
+  `section_<beat>`; every chapter also carries `section_chapter`.
+- **Combo** `is-<variant>`, only on a base class: `section_hero is-split`, `row_item is-text-first`.
+  The CSS writes combos bare (`.is-text-first { … }`), so **each combo name is unique site-wide**:
+  never reuse one for a second component. **A new combo that sets a property its base class also sets is
+  written compound** (`.path_step.is-closing { width: … }`): two bare classes on one element are decided by
+  source order, which the move into Instatic's registry does not keep (`push/cascade-check.mjs` is the gate).
+- **Utility** (dashes only) from the library: `container-large`, `padding-section-large`, `button`
+  (`is-primary` gold, `is-secondary` outline, `is-alternate` ink), `heading-style-h1`…`h4`,
+  `tag` (the chapter tag), `text-style-lede`, `text-style-label` (the mono small caps), `text-rich-text`,
+  `background-color-{bone,paper,sand,white,mist}` (the grounds), `text-color-muted`, `hide`, `hide-visually`.
+- No abbreviations, no BEM (`a__b`, `a--b`), no bare dash names for custom classes.
+- Gate before every push: `node class-audit.mjs --local <site-src> --strict` (in
+  `deliver/process/tools/instatic-api-sync/`) must end `IN BOUNDS`. The old names and what each
+  became: `../../class-standard/class-map.json`.
 
 ## Photographs
 
@@ -103,12 +123,12 @@ class prefix of your group). Never edit `css/0*-4*`, `js/0*-3*`, `js/90-boot.js`
    some stock, some diagrams, some real).
 2. Prefer a frame the home does not use (media.py knows the home's) and one no other page uses.
    Case photos: mouth framing on service pages; full-face portraits only in the gallery. Before and
-   after must share framing for a `.ba` slider.
+   after must share framing for a `.before-after_component` slider.
 3. Write your spec `data/media/<group>.json`: `{"<prefix>-<what>.jpg": {"src": "<library id>",
    "w": 1400, "crop": [x0,y0,x1,y1], "note": "what it shows"}}` (hero 1400-1600, rows 1400, thumbs 700).
 4. `python tools/media.py data/media/<group>.json` cuts them into `media/img/`. It refuses a source used
    by more than two outputs. A re-cut needs a new file name.
-5. Alt text says what the photo shows, specifically. Decorative thumbs in `.more` take `alt=""`.
+5. Alt text says what the photo shows, specifically. Decorative thumbs in `.related_component` take `alt=""`.
 
 ## Build, look, fix
 
@@ -129,8 +149,8 @@ never pipe a Node script's output (redirect to a file).
 
 ## Lessons from the first full build (2026-10-01)
 
-- `.tile__img` is a `div` (a `span` ignores the aspect ratio unless forced; the kit now forces `display:block`).
-- A lightbox (`.lb[data-lb]`) must not stay inside `#smooth-content`: ScrollSmoother transforms it and a
+- `.tile_image` is a `div` (a `span` ignores the aspect ratio unless forced; the kit now forces `display:block`).
+- A lightbox (`.lightbox_component[data-lb]`) must not stay inside `#smooth-content`: ScrollSmoother transforms it and a
   `position:fixed` child opens far down the page. Move it to `<body>` on init (see `js/52-cosmetic.js`).
 - Hidden placeholders (`[data-more-float] img`, the lightbox images) start without a `src`; the script fills
   them. Otherwise every page "repeats" a photo in the reuse gate.

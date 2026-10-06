@@ -8,7 +8,7 @@
     late: function () {
       /* velocity-reactive memberships marquee (any number per page) */
       $$('[data-marquee]').forEach(function (mq) {
-        var track = $('[data-marquee-track]', mq), set = $('.marquee__set', track);
+        var track = $('[data-marquee-track]', mq), set = $('.marquee_set', track);
         for (var c = 0; c < 3; c++) { var clone = set.cloneNode(true); clone.setAttribute('aria-hidden', 'true'); track.appendChild(clone); }
         var loop = gsap.to(track, { x: function () { return -set.offsetWidth; }, duration: 28, ease: 'none', repeat: -1 });
         loop.totalTime(28 * 40);
@@ -32,7 +32,7 @@
          depend on an animation to be visible. It only rises a little. */
       var ask = $('[data-ask]');
       if (ask) gsap.from(ask, { y: 40, duration: 1.2, scrollTrigger: { trigger: ask, start: 'top 92%', once: true } });
-      $$('.includes').forEach(function (list) {
+      $$('.invitation_includes').forEach(function (list) {
         gsap.from($$('li', list), { x: -24, autoAlpha: 0, stagger: .07, duration: .9, scrollTrigger: { trigger: list, start: 'top 86%', once: true } });
       });
     }

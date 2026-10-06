@@ -9,14 +9,14 @@
 
   IFA.module({
     init: function () {
-      var post = $('.jr-post');
+      var post = $('.is-article');
       if (!post) return;
-      var links = $$('.jr-toc a', post);
+      var links = $$('.post_contents a', post);
       var heads = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
 
       /* contents links: land the heading below the bar (capture phase, ahead of the core's in-page links) */
       document.addEventListener('click', function (e) {
-        var a = e.target.closest ? e.target.closest('.jr-toc a') : null;
+        var a = e.target.closest ? e.target.closest('.post_contents a') : null;
         if (!a) return;
         var t = document.getElementById(a.getAttribute('href').slice(1));
         if (!t) return;
@@ -47,9 +47,9 @@
     },
 
     motion: function (ctx) {
-      var post = $('.jr-post');
+      var post = $('.is-article');
       if (!post) return;
-      var aside = $('.post__aside', post), article = $('article', post), bar = $('.jr-progress i', post);
+      var aside = $('.post_aside', post), article = $('article', post), bar = $('.post_progress i', post);
 
       /* the gold rule fills as the article is read */
       if (bar && article) {

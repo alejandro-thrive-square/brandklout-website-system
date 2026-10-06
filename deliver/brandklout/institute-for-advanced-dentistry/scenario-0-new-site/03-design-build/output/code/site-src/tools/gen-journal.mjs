@@ -405,20 +405,20 @@ function head(title, description, label) {
   if (/—/.test(t + description)) problems.push(`dash in head: ${t}`)
   return `<!--@page ${JSON.stringify({ title: t, description, label })}-->\n`
 }
-const crumbs = (items) => `<ol class="crumbs" aria-label="Breadcrumb">\n${items.map(([t, href]) => href ? `        <li><a href="${href}">${t}</a></li>` : `        <li><span aria-current="page">${t}</span></li>`).join('\n')}\n      </ol>`
+const crumbs = (items) => `<ol class="breadcrumb_component" aria-label="Breadcrumb">\n${items.map(([t, href]) => href ? `        <li><a href="${href}">${t}</a></li>` : `        <li><span aria-current="page">${t}</span></li>`).join('\n')}\n      </ol>`
 const dek = (p) => { const m = p.description.match(/^.*?[.?!](?=\s|$)/); return m && m[0].length >= 40 ? m[0] : p.description }
 function tile(p, h = 'h3') {
-  return `      <a class="tile" href="/${p.slug}/">
-        <div class="tile__img">${img(p.img, '', ' loading="lazy"')}</div>
-        <p class="spec">${esc(CATS[p.cat].short)} · ${p.minutes} min read</p>
-        <${h} class="tile__t">${esc(p.label.charAt(0).toUpperCase() + p.label.slice(1))}</${h}>
-        <span class="tile__d">${esc(dek(p))}</span>
+  return `      <a class="tile_card" href="/${p.slug}/">
+        <div class="tile_image">${img(p.img, '', ' loading="lazy"')}</div>
+        <p class="text-style-label">${esc(CATS[p.cat].short)} · ${p.minutes} min read</p>
+        <${h} class="tile_title">${esc(p.label.charAt(0).toUpperCase() + p.label.slice(1))}</${h}>
+        <span class="tile_description">${esc(dek(p))}</span>
       </a>`
 }
 function chipbar(active) {
   const cats = CAT_ORDER.filter((c) => posts.some((p) => p.cat === c) || c === active)
   const a = (href, label, on) => `<a href="${href}"${on ? ' aria-current="page"' : ''}>${esc(label)}</a>`
-  return `<nav class="chipbar" aria-label="Article categories">
+  return `<nav class="filter_bar" aria-label="Article categories">
       ${a('/about-our-practice/articles/', 'All articles', !active)}
       ${cats.map((c) => a(`/category/${c}/`, CATS[c].name, c === active)).join('\n      ')}
     </nav>`
@@ -426,13 +426,13 @@ function chipbar(active) {
 const invite = (chapter, tagline, extra = {}) => `<!--@invite ${jsonc({ chapter: String(chapter), tagline, ...extra })}-->\n`
 
 function postAside(toc, label) {
-  return `<aside class="post__aside" aria-label="${esc(label)}">
-      <p class="spec">${esc(label)}</p>
-      <div class="jr-progress" aria-hidden="true"><i></i></div>
-      <ol class="jr-toc">
+  return `<aside class="post_aside" aria-label="${esc(label)}">
+      <p class="text-style-label">${esc(label)}</p>
+      <div class="post_progress" aria-hidden="true"><i></i></div>
+      <ol class="post_contents">
 ${toc.map((t) => `        <li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('\n')}
       </ol>
-      <a class="btn btn--gold" href="#invitation" data-magnetic><span>Book a consultation</span>${ARROW}</a>
+      <a class="button is-primary" href="#invitation" data-magnetic><span>Book a consultation</span>${ARROW}</a>
     </aside>`
 }
 
@@ -447,24 +447,24 @@ for (const p of posts) {
   const related = [...same, ...posts.filter((q) => q.cat !== p.cat && q.slug !== p.slug)].slice(0, 3)
   const page = head(p.title, p.description, p.label) + `
 <!-- ARRIVAL -->
-<section class="ch hero hero--plain" id="top" data-chapter="0" data-chapter-name="The Article" data-theme="light" data-intro>
-  <div class="hero__wrap">
-    <div class="hero__copy">
+<section class="section_chapter section_hero is-plain" id="top" data-chapter="0" data-chapter-name="The Article" data-theme="light" data-intro>
+  <div class="hero_layout">
+    <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Articles', '/about-our-practice/articles/'], [esc(p.label.charAt(0).toUpperCase() + p.label.slice(1))]])}
       <p class="tag"><span>${esc(c.name)}</span><em>An article by Dr.&nbsp;Bensoussan</em></p>
-      <h1 class="d1">${esc(p.h1)}</h1>
-      <p class="hero__meta jr-meta" data-rise><span>Filed under <a href="/category/${p.cat}/"><b>${esc(c.name)}</b></a></span><span>${p.minutes} min read</span><span><time datetime="${p.iso}">${p.date}</time></span><span>By ${esc(p.author)}</span></p>
+      <h1 class="heading-style-h1">${esc(p.h1)}</h1>
+      <p class="hero_details is-article-details" data-rise><span>Filed under <a href="/category/${p.cat}/"><b>${esc(c.name)}</b></a></span><span>${p.minutes} min read</span><span><time datetime="${p.iso}">${p.date}</time></span><span>By ${esc(p.author)}</span></p>
     </div>
   </div>
 </section>
 
 <!-- THE ARTICLE -->
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="The Article" data-theme="light">
-  <div class="wrap post jr-post">
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="The Article" data-theme="light">
+  <div class="container-large post_layout is-article">
     ${postAside(p.toc, 'In this article')}
     <article>
-      <div class="post__lead">${img(p.img, p.alt)}</div>
-      <div class="prose">
+      <div class="post_lead-image">${img(p.img, p.alt)}</div>
+      <div class="text-rich-text">
 ${p.html.split('\n').map((b) => '        ' + b).join('\n')}
       </div>
     </article>
@@ -472,16 +472,16 @@ ${p.html.split('\n').map((b) => '        ' + b).join('\n')}
 </section>
 
 <!-- KEEP READING -->
-<section class="ch g-sand pad" data-chapter="2" data-chapter-name="Keep Reading" data-theme="light">
-  <div class="wrap">
-    <header class="ch__row">
-      <div class="ch__intro">
+<section class="section_chapter background-color-sand padding-section-large" data-chapter="2" data-chapter-name="Keep Reading" data-theme="light">
+  <div class="container-large">
+    <header class="chapter_header">
+      <div class="chapter_intro">
         <p class="tag" data-tag><span>Keep Reading</span><em>${esc(c.name)}</em></p>
-        <h2 class="d2" data-split="lines">More from the <em>journal</em>.</h2>
+        <h2 class="heading-style-h2" data-split="lines">More from the <em>journal</em>.</h2>
       </div>
-      <a class="link" href="/about-our-practice/articles/">All articles${ARROW}</a>
+      <a class="arrow-link_component" href="/about-our-practice/articles/">All articles${ARROW}</a>
     </header>
-    <div class="tiles">
+    <div class="tile_grid">
 ${related.map((q) => tile(q)).join('\n')}
     </div>
   </div>
@@ -497,45 +497,45 @@ ${invite(3, p.tagline)}`
   const [lead] = posts
   const page = head('Dental Articles & Guides', 'Articles by Dr. Jonathan Bensoussan on dental implants, prosthodontics, cosmetic dentistry and oral health, from the practice in Peoria, Arizona.', 'Articles') + `
 <!-- ARRIVAL -->
-<section class="ch hero hero--index" id="top" data-chapter="0" data-chapter-name="Articles" data-theme="light" data-intro>
-  <div class="hero__wrap">
-    <div class="hero__copy">
+<section class="section_chapter section_hero is-index" id="top" data-chapter="0" data-chapter-name="Articles" data-theme="light" data-intro>
+  <div class="hero_layout">
+    <div class="hero_copy">
       ${crumbs([['Home', '/'], ['About', '/about-our-practice/'], ['Articles']])}
       <p class="tag"><span>Articles</span><em>Written by Dr.&nbsp;Jonathan Bensoussan</em></p>
-      <h1 class="d1">Articles on implants, prosthodontics and <em>your smile</em>.</h1>
+      <h1 class="heading-style-h1">Articles on implants, prosthodontics and <em>your smile</em>.</h1>
     </div>
-    <div class="hero__strip">
+    <div class="hero_photo-strip">
       <figure>${img('jr-index-1.jpg', 'Dr. Bensoussan and a patient in front of her new smile on the screen')}</figure>
       <figure>${img('jr-index-2.jpg', 'A patient looking at her smile in a hand mirror beside Dr. Bensoussan')}</figure>
       <figure>${img('jr-index-3.jpg', 'Dr. Bensoussan walking a patient through her 3D scans')}</figure>
     </div>
-    <div class="hero__foot">
-      <p class="lede hero__lede" data-rise>Explore our collection of insightful dental articles, providing expert knowledge on advanced prosthodontics, comprehensive treatments, and maintaining your oral health. Stay informed and empowered on your journey to a healthy, confident smile.</p>
-      <div class="hero__cta" data-rise>
-        <a class="btn btn--gold" href="#invitation" data-magnetic><span>Book a consultation</span>${ARROW}</a>
-        <a class="btn btn--line" href="#all-articles" data-magnetic><span>See articles</span></a>
+    <div class="hero_footer">
+      <p class="text-style-lede hero_intro" data-rise>Explore our collection of insightful dental articles, providing expert knowledge on advanced prosthodontics, comprehensive treatments, and maintaining your oral health. Stay informed and empowered on your journey to a healthy, confident smile.</p>
+      <div class="hero_buttons" data-rise>
+        <a class="button is-primary" href="#invitation" data-magnetic><span>Book a consultation</span>${ARROW}</a>
+        <a class="button is-secondary" href="#all-articles" data-magnetic><span>See articles</span></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- THE LATEST -->
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="The Latest" data-theme="light">
-  <div class="wrap">
-    <header class="ch__row">
-      <div class="ch__intro">
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="The Latest" data-theme="light">
+  <div class="container-large">
+    <header class="chapter_header">
+      <div class="chapter_intro">
         <p class="tag" data-tag><span>The Latest</span><em><time datetime="${lead.iso}">${lead.date}</time></em></p>
-        <h2 class="d2" data-split="lines">New in the <em>journal</em>.</h2>
+        <h2 class="heading-style-h2" data-split="lines">New in the <em>journal</em>.</h2>
       </div>
     </header>
-    <div class="rows jr-latest">
-      <div class="row">
-        <figure class="row__fig" data-wipe>${img(lead.img, lead.alt, ' loading="lazy" data-parallax="8"')}</figure>
-        <div class="row__body">
-          <p class="spec">${esc(CATS[lead.cat].name)} · ${lead.minutes} min read</p>
-          <h3 class="d3"><a href="/${lead.slug}/">${esc(lead.h1)}</a></h3>
+    <div class="row_list is-latest">
+      <div class="row_item">
+        <figure class="row_figure" data-wipe>${img(lead.img, lead.alt, ' loading="lazy" data-parallax="8"')}</figure>
+        <div class="row_body">
+          <p class="text-style-label">${esc(CATS[lead.cat].name)} · ${lead.minutes} min read</p>
+          <h3 class="heading-style-h3"><a href="/${lead.slug}/">${esc(lead.h1)}</a></h3>
           <p>${esc(lead.description)}</p>
-          <a class="link" href="/${lead.slug}/">Read the article${ARROW}</a>
+          <a class="arrow-link_component" href="/${lead.slug}/">Read the article${ARROW}</a>
         </div>
       </div>
     </div>
@@ -543,16 +543,16 @@ ${invite(3, p.tagline)}`
 </section>
 
 <!-- ALL ARTICLES -->
-<section class="ch g-sand pad" id="all-articles" data-chapter="2" data-chapter-name="All Articles" data-theme="light">
-  <div class="wrap">
-    <header class="ch__row">
-      <div class="ch__intro">
+<section class="section_chapter background-color-sand padding-section-large" id="all-articles" data-chapter="2" data-chapter-name="All Articles" data-theme="light">
+  <div class="container-large">
+    <header class="chapter_header">
+      <div class="chapter_intro">
         <p class="tag" data-tag><span>All Articles</span><em>${posts.length} articles</em></p>
-        <h2 class="d2" data-split="lines">Read by <em>topic</em>.</h2>
+        <h2 class="heading-style-h2" data-split="lines">Read by <em>topic</em>.</h2>
       </div>
     </header>
     ${chipbar(null)}
-    <div class="tiles tiles--4">
+    <div class="tile_grid is-four-columns">
 ${posts.map((q) => tile(q)).join('\n')}
     </div>
   </div>
@@ -569,36 +569,36 @@ for (const c of CAT_ORDER) {
   const list = posts.filter((p) => p.cat === c)
   const body = list.length
     ? `${chipbar(c)}
-    <div class="tiles">
+    <div class="tile_grid">
 ${list.map((q) => tile(q, 'h2')).join('\n')}
     </div>`
     : `${chipbar(c)}
-    <div class="note">
+    <div class="notice_component">
       <div>
-        <p class="spec">${esc(cat.name)}</p>
-        <p class="d4">No articles are filed under ${esc(cat.name.toLowerCase())} yet.</p>
+        <p class="text-style-label">${esc(cat.name)}</p>
+        <p class="heading-style-h4">No articles are filed under ${esc(cat.name.toLowerCase())} yet.</p>
         <p>These articles cover the same ground.</p>
       </div>
     </div>
-    <div class="tiles jr-after-note">
+    <div class="tile_grid is-after-notice">
 ${cat.empty.map((s) => tile(bySlug[s], 'h2')).join('\n')}
     </div>`
   const page = head(cat.title, cat.description, cat.name) + `
 <!-- ARRIVAL -->
-<section class="ch hero hero--plain" id="top" data-chapter="0" data-chapter-name="${esc(cat.name)}" data-theme="light" data-intro>
-  <div class="hero__wrap">
-    <div class="hero__copy">
+<section class="section_chapter section_hero is-plain" id="top" data-chapter="0" data-chapter-name="${esc(cat.name)}" data-theme="light" data-intro>
+  <div class="hero_layout">
+    <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Articles', '/about-our-practice/articles/'], [esc(cat.name)]])}
       <p class="tag"><span>Articles</span><em>Category</em></p>
-      <h1 class="d1">${cat.h1}</h1>
-      <p class="hero__meta jr-meta" data-rise><span><b>${list.length}</b> ${list.length === 1 ? 'article' : 'articles'}</span><span>By Dr. Jonathan Bensoussan</span></p>
+      <h1 class="heading-style-h1">${cat.h1}</h1>
+      <p class="hero_details is-article-details" data-rise><span><b>${list.length}</b> ${list.length === 1 ? 'article' : 'articles'}</span><span>By Dr. Jonathan Bensoussan</span></p>
     </div>
   </div>
 </section>
 
 <!-- THE ARTICLES -->
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="The Articles" data-theme="light">
-  <div class="wrap">
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="The Articles" data-theme="light">
+  <div class="container-large">
     ${body}
   </div>
 </section>
@@ -683,23 +683,23 @@ for (const L of LEGAL_PAGES) {
   const { html, toc, effective } = legalMd(L.md())
   const page = head(L.title, L.description, L.label) + `
 <!-- ARRIVAL -->
-<section class="ch hero hero--plain" id="top" data-chapter="0" data-chapter-name="${esc(L.label)}" data-theme="light" data-intro>
-  <div class="hero__wrap">
-    <div class="hero__copy">
+<section class="section_chapter section_hero is-plain" id="top" data-chapter="0" data-chapter-name="${esc(L.label)}" data-theme="light" data-intro>
+  <div class="hero_layout">
+    <div class="hero_copy">
       ${crumbs([['Home', '/'], [L.crumb]])}
       <p class="tag"><span>Legal</span><em>Institute for Advanced Dentistry PLLC</em></p>
-      <h1 class="d1">${L.h1}</h1>
-      ${effective ? `<p class="hero__meta jr-meta" data-rise><span>Effective date <b>${esc(effective)}</b></span><span>Peoria, Arizona</span></p>` : `<p class="hero__meta jr-meta" data-rise><span>Institute for Advanced Dentistry</span><span>Peoria, Arizona</span></p>`}
+      <h1 class="heading-style-h1">${L.h1}</h1>
+      ${effective ? `<p class="hero_details is-article-details" data-rise><span>Effective date <b>${esc(effective)}</b></span><span>Peoria, Arizona</span></p>` : `<p class="hero_details is-article-details" data-rise><span>Institute for Advanced Dentistry</span><span>Peoria, Arizona</span></p>`}
     </div>
   </div>
 </section>
 
 <!-- THE TEXT -->
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="${esc(L.label)}" data-theme="light">
-  <div class="wrap post jr-post jr-legal">
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="${esc(L.label)}" data-theme="light">
+  <div class="container-large post_layout is-article is-legal">
     ${postAside(toc, 'On this page')}
     <article>
-      <div class="prose">
+      <div class="text-rich-text">
 ${html.split('\n').map((b) => '        ' + b).join('\n')}
       </div>
     </article>
@@ -724,28 +724,28 @@ ${invite(2, L.tagline)}`
   ]
   const page = head('Page Not Found (404)', 'The page you asked for is not at this address. Find dental implants, services, the smile gallery and articles from Institute for Advanced Dentistry in Peoria.', 'Page not found') + `
 <!-- ARRIVAL -->
-<section class="ch hero hero--plain" id="top" data-chapter="0" data-chapter-name="Page Not Found" data-theme="light" data-intro>
-  <div class="hero__wrap">
-    <div class="hero__copy">
+<section class="section_chapter section_hero is-plain" id="top" data-chapter="0" data-chapter-name="Page Not Found" data-theme="light" data-intro>
+  <div class="hero_layout">
+    <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Page not found']])}
       <p class="tag"><span>Error 404</span><em>Page not found</em></p>
-      <h1 class="d1">This page is not <em>here</em>.</h1>
-      <p class="lede hero__lede" data-rise>The address may have changed when the site was rebuilt. Every page below is a good place to pick up from, or call us at <a class="jr-tel" href="{{site.tel}}">{{site.phone}}</a>.</p>
+      <h1 class="heading-style-h1">This page is not <em>here</em>.</h1>
+      <p class="text-style-lede hero_intro" data-rise>The address may have changed when the site was rebuilt. Every page below is a good place to pick up from, or call us at <a class="not-found_phone-link" href="{{site.tel}}">{{site.phone}}</a>.</p>
     </div>
   </div>
 </section>
 
 <!-- WAYS IN -->
-<section class="ch g-white pad" data-chapter="1" data-chapter-name="Ways In" data-theme="light">
-  <div class="wrap">
-    <header class="ch__row">
-      <div class="ch__intro">
+<section class="section_chapter background-color-white padding-section-large" data-chapter="1" data-chapter-name="Ways In" data-theme="light">
+  <div class="container-large">
+    <header class="chapter_header">
+      <div class="chapter_intro">
         <p class="tag" data-tag><span>Ways In</span><em>The main sections</em></p>
-        <h2 class="d2" data-split="lines">Where would you like <em>to go</em>?</h2>
+        <h2 class="heading-style-h2" data-split="lines">Where would you like <em>to go</em>?</h2>
       </div>
     </header>
-    <ul class="jr-links">
-${links.map(([t, href, d]) => `      <li><a href="${href}"><span class="jr-links__t">${t}</span><span class="jr-links__d">${d}</span>${ARROW}</a></li>`).join('\n')}
+    <ul class="not-found_links">
+${links.map(([t, href, d]) => `      <li><a href="${href}"><span class="not-found_link-title">${t}</span><span class="not-found_link-description">${d}</span>${ARROW}</a></li>`).join('\n')}
     </ul>
   </div>
 </section>

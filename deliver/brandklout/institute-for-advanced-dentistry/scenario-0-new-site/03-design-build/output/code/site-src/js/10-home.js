@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var IFA = window.IFA, $ = IFA.$, $$ = IFA.$$;
-  if (!$('.ch-arrival')) return;
+  if (!$('.section_arrival')) return;
   var reduce = IFA.reduce;
 
   /* -------------------------------------------------------------- hero video */
@@ -110,16 +110,16 @@
          than the window it pins from its bottom edge, so everything has been read before it opens. */
       var stage = $('[data-arrival-stage]'), fig = $('[data-arrival-fig]'), media = $('[data-arrival-media]');
       var copy = $('[data-arrival-copy]'), facts = $('[data-arrival-facts]'), second = $('[data-arrival-second]');
-      var shade = $('.arrival__shade'), h1 = $('.ch-arrival .d1');
+      var shade = $('.arrival_shade'), h1 = $('.section_arrival .heading-style-h1');
 
-      var heroSplit = SplitText.create(h1, { type: 'lines', linesClass: 'ln', mask: 'lines' });
+      var heroSplit = SplitText.create(h1, { type: 'lines', linesClass: 'split_line', mask: 'lines' });
       var intro = gsap.timeline({ delay: .15 });
       intro
         .fromTo(media, { clipPath: 'inset(50% 0% 50% 0% round 16px)' }, { clipPath: 'inset(0% 0% 0% 0% round 16px)', duration: 1.6, ease: 'expo.inOut', clearProps: 'clipPath' }, 0)
         .fromTo(heroVideo, { scale: 1.25 }, { scale: 1, duration: 2.1, clearProps: 'transform' }, 0)
-        .from($('.ch-arrival .tag').children, { x: -28, autoAlpha: 0, stagger: .08, duration: .9 }, .35)
+        .from($('.section_arrival .tag').children, { x: -28, autoAlpha: 0, stagger: .08, duration: .9 }, .35)
         .from(heroSplit.lines, { yPercent: 112, stagger: .1, duration: 1.3 }, .45)
-        .from($$('.ch-arrival [data-rise]'), { y: 30, autoAlpha: 0, stagger: .12, duration: 1 }, .9)
+        .from($$('.section_arrival [data-rise]'), { y: 30, autoAlpha: 0, stagger: .12, duration: 1 }, .9)
         .from($$('li', facts), { y: 24, autoAlpha: 0, stagger: .08, duration: .9 }, 1.1)
         .call(heroPlay, null, 1.7);
       IFA.unveil();
@@ -161,8 +161,8 @@
       var qStage = $('[data-question-stage]');
       var s1 = $('[data-statement]'), s2 = $('[data-statement-answer]');
       qStage.classList.add('is-live');
-      var w1 = SplitText.create(s1, { type: 'words', wordsClass: 'w' }).words;
-      var w2 = SplitText.create(s2, { type: 'words', wordsClass: 'w' }).words;
+      var w1 = SplitText.create(s1, { type: 'words', wordsClass: 'split_word' }).words;
+      var w2 = SplitText.create(s2, { type: 'words', wordsClass: 'split_word' }).words;
       var lit = function (i, el) { return el.closest('strong') ? GOLD : LIT; };
       gsap.set(s2, { autoAlpha: 0, y: 50 });
       gsap.timeline({ scrollTrigger: { trigger: qStage, pin: true, start: 'top top', end: '+=100%', scrub: true, anticipatePin: 1 } })
@@ -172,22 +172,22 @@
         .to(w2, { color: lit, stagger: .06, duration: .3, ease: 'none' }, '>-.2')
         .to({}, { duration: .5 });
       gsap.fromTo('[data-question-meter]', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top top', end: '+=100%', scrub: true } });
-      var qImg = $('.question__img img');
+      var qImg = $('.question_image img');
       gsap.fromTo(qImg, { scale: 1.3 }, { scale: 1.001, ease: 'none', scrollTrigger: { trigger: qStage, start: 'top bottom', end: '+=200%', scrub: true } });
-      gsap.from($('.question__img'), { clipPath: 'inset(0% 0% 100% 0% round 10px)', duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: qStage, start: 'top 60%', once: true } });
+      gsap.from($('.question_image'), { clipPath: 'inset(0% 0% 100% 0% round 10px)', duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: qStage, start: 'top 60%', once: true } });
 
       /* ---- 02 · disciplines ---- */
       var disc = $('[data-disc]');
       gsap.from(panels, { y: 90, clipPath: 'inset(100% 0% 0% 0% round 13px)', stagger: .16, duration: 1.4, ease: 'expo.inOut', scrollTrigger: { trigger: disc, start: 'top 82%', once: true } });
       $$('[data-count]', disc).forEach(function (el) { IFA.countTo(el, disc, 'top 78%', 'top 22%'); });
-      gsap.to($('.ch-disciplines .ch__head'), { y: -50, ease: 'none', scrollTrigger: { trigger: disc, start: 'top 60%', end: 'top top', scrub: true } });
+      gsap.to($('.section_disciplines .chapter_heading'), { y: -50, ease: 'none', scrollTrigger: { trigger: disc, start: 'top 60%', end: 'top top', scrub: true } });
 
       /* ---- 03 · the design: one pin, scroll is the slider ---- */
       var dStage = $('[data-design-stage]'), notes = $$('[data-note]'), hint = $('[data-design-hint]');
       dStage.classList.add('is-live');
       var drawn = [], faded = [];
       $$('[data-line]').forEach(function (l) {
-        if (l.classList.contains('g--soft')) { faded.push(l); return; }
+        if (l.classList.contains('is-soft')) { faded.push(l); return; }
         var len = l.getTotalLength();
         l.style.strokeDasharray = len;
         l.style.strokeDashoffset = len;
@@ -209,15 +209,15 @@
       gsap.from(compare, { clipPath: 'inset(0% 0% 100% 0% round 11px)', scale: 1.06, duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: dStage, start: 'top 65%', once: true } });
 
       /* ---- 04 · the specialist ---- */
-      var spec = $('.specialist');
+      var spec = $('.specialist_layout');
       $$('[data-count]', spec).forEach(function (el) { IFA.countTo(el, $('[data-creds]'), 'top 92%', 'top 45%'); });
       gsap.from($$('[data-creds] li'), { y: 30, autoAlpha: 0, stagger: .1, duration: 1, scrollTrigger: { trigger: '[data-creds]', start: 'top 88%', once: true } });
       gsap.fromTo('[data-spin]', { rotation: -35 }, { rotation: 55, ease: 'none', scrollTrigger: { trigger: spec, start: 'top bottom', end: 'bottom top', scrub: true } });
-      gsap.to('.specialist__inset', { y: -70, ease: 'none', scrollTrigger: { trigger: spec, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.to('.specialist_inset', { y: -70, ease: 'none', scrollTrigger: { trigger: spec, start: 'top bottom', end: 'bottom top', scrub: true } });
 
       /* ---- 05 · the path: the treatment travels sideways ---- */
       var pStage = $('[data-path-stage]'), pRail = $('[data-path-rail]'), pBar = $('[data-path-bar]'), pNow = $('[data-path-now]');
-      var pSteps = $$('.step', pRail);
+      var pSteps = $$('.path_step', pRail);
       var travel = function () { return Math.max(0, pRail.scrollWidth - window.innerWidth); };
       var ride = gsap.to(pRail, { x: function () { return -travel(); }, ease: 'none', scrollTrigger: { trigger: pStage, pin: true, start: 'top top', end: function () { return '+=' + travel(); }, scrub: true, invalidateOnRefresh: true, anticipatePin: 1,
         onUpdate: function (self) {
@@ -226,7 +226,7 @@
           for (var i = 0; i < 6; i++) { var r = pSteps[i].getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid); if (d < bestD) { bestD = d; best = i; } }
           pNow.textContent = '0' + (best + 1);
         } } });
-      $$('.step__img img', pRail).forEach(function (img) {
+      $$('.path_step-image img', pRail).forEach(function (img) {
         gsap.fromTo(img, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: img.parentNode, containerAnimation: ride, start: 'left right', end: 'right left', scrub: true } });
       });
       gsap.from(pSteps, { y: 70, autoAlpha: 0, stagger: .1, duration: 1.2, scrollTrigger: { trigger: pStage, start: 'top 70%', once: true } });
@@ -241,12 +241,12 @@
       gsap.fromTo(cards,
         { x: deckFrom('x'), y: deckFrom('y'), rotation: function (i) { return (i - 1.5) * 7; }, scale: .86 },
         { x: 0, y: 0, rotation: 0, scale: 1, ease: 'power2.out', stagger: .06, immediateRender: false, scrollTrigger: { trigger: deck, start: 'top 92%', end: 'top 30%', scrub: true, invalidateOnRefresh: true } });
-      if ($('[data-voices]')) gsap.from('.voices > *', { y: 40, autoAlpha: 0, stagger: .12, scrollTrigger: { trigger: '[data-voices]', start: 'top 85%', once: true } });
+      if ($('[data-voices]')) gsap.from('.voices_component > *', { y: 40, autoAlpha: 0, stagger: .12, scrollTrigger: { trigger: '[data-voices]', start: 'top 85%', once: true } });
     },
 
     /* ---- departures: leaving a chapter is animated too (after the invitation, as on the approved page) ---- */
     late: function () {
-      [['.ch-disciplines', '.disc'], ['.ch-specialist', '.specialist'], ['.ch-proof', '.ch-proof > .wrap']].forEach(function (pair) {
+      [['.section_disciplines', '.disciplines_panels'], ['.section_specialist', '.specialist_layout'], ['.section_proof', '.section_proof > .container-large']].forEach(function (pair) {
         gsap.to(pair[1], { y: -70, scale: .985, transformOrigin: '50% 100%', ease: 'none', scrollTrigger: { trigger: pair[0], start: 'bottom 70%', end: 'bottom top', scrub: true } });
       });
     }

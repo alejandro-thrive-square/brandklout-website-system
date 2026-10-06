@@ -42,7 +42,7 @@
         });
         el.addEventListener('pointerleave', function () { mx(0); my(0); });
       });
-      $$('.card__btn, [data-tilt]').forEach(function (el) {
+      $$('.proof_card-button, [data-tilt]').forEach(function (el) {
         var rx = gsap.quickTo(el, 'rotationX', { duration: .6, ease: 'power3' }), ry = gsap.quickTo(el, 'rotationY', { duration: .6, ease: 'power3' });
         el.addEventListener('pointermove', function (e) {
           var r = el.getBoundingClientRect();

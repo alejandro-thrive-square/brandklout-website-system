@@ -1,8 +1,15 @@
-# IFA class standard: rename map for the local build
+# IFA class standard: the rename map and the Framework spec
 
-`class-map.json` moves every class in the IFA house build (`../code/site-src`) onto the Client-First +
+`class-map.json` moved every class in the IFA house build (`../code/site-src`) onto the Client-First +
 Relume standard ([CLASS-STANDARD.md](../../../../../../process/tools/client-first-style-guide/CLASS-STANDARD.md)),
-before launch. **Prepared on 2026-10-05 as a dry run only. Nothing in site-src has been changed.**
+before launch. `framework-spec.json` holds the 22 colour tokens the Framework panel owns
+([INSTATIC-FRAMEWORK.md](../../../../../../process/tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)).
+
+**Applied on 2026-10-06, source and staging** (run: `docs/runbook/2026-10-06-class-standard-on-staging.md`):
+site-src and `push/` renamed with this map, rebuilt, pushed to `staging.ifadentistry.com`, the stylesheet
+moved into the style registry and the colours into the Framework. Staging reads EDITABLE, IN BOUNDS, CLEAN.
+Production is the old WordPress clone and is not touched by any of this. The map is now history: it says
+what each old name became. New classes follow `../code/site-src/KIT.md` (*Class names*).
 
 - **371 renames**, every one written out (no `folders`: `--files` mode only reads `rename`). They cover the
   audit's 351 out-of-bounds classes, plus 20 that only appear in CSS or are added by scripts
@@ -26,14 +33,15 @@ first instead: `is-text-first` (row), `is-quote-first` (pull), `is-list-first` (
 (case), `is-hero-photo-first` (the cosmetic hero). Sharing one combo name is possible later, once the
 selectors are compounded by hand (`.row_item.is-flip`).
 
-## Dry run (what the tool printed)
+## What the tool printed (dry run 2026-10-05, the same numbers on the apply of 2026-10-06)
 
 ```
 node class-rename.mjs --files <site-src> --map class-map.json
-  83 file(s) would change: selectors 1370, class attributes 4671, script selectors 73, script tokens 5
+  83 file(s) would change: selectors 1370, class attributes 4671, script selectors 73, script tokens 11
 ```
 
-Its 22 REVIEW lines are all harmless except the SplitText options below: copy that happens to contain a
+Its REVIEW lines are all harmless (script tokens rose from 5 to 11 because the engine now rewrites the
+SplitText `linesClass` / `wordsClass` options itself): copy that happens to contain a
 mapped word (`compare`, `specialist`, `where`, `more`, `say`, `case`, `ask`, `voice`, `statement`, `link`),
 the tag selector `'nav a'` in `js/00-core.js`, and in `tools/gen-journal.mjs` a tag list (`'nav'`, line 292)
 and a regex flag (`'g'`, line 385).
@@ -46,16 +54,12 @@ the home pipeline that `push/README.md` says is replaced; leave it.
 2 reimplement a utility (`nav__logo--dark` = `hide`, `care-fig--product` = `aspect-ratio-widescreen`; both
 are mapped to those library names).
 
-## Hand edits after `--apply` (the engine does not touch these)
+## Hand edits after `--apply` (2026-10-06)
 
-| File:line | Now | Change to | Why |
-| --- | --- | --- | --- |
-| `site-src/js/00-core.js:249` | `linesClass: 'ln'` | `'split_line'` | SplitText option, not a class context. Its mask class is `<linesClass>-mask`, and the CSS rule `.ln-mask` (`css/02-base.css:78`) is renamed to `.split_line-mask`: skip this and the line masks lose their descender room |
-| `site-src/js/10-home.js:115` | `linesClass: 'ln'` | `'split_line'` | same |
-| `site-src/js/10-home.js:164`, `:165` | `wordsClass: 'w'` | `'split_word'` | `.question__stage.is-live .statement .w` (`css/30-home.css:67`) becomes `.split_word` |
-| `site-src/js/30-pages.js:104` | `linesClass: 'ln'` | `'split_line'` | same as 00-core |
-| `site-src/js/30-pages.js:138` | `wordsClass: 'w'` | `'split_word'` | same |
-| `push/prepare.mjs:103` | `holder('ghl-form', 'ask__embed')` | `'form_embed'` | a bare argument; lines 99 (`'ask ask--live'`) and 102 (`'.ask__title'`, `'.ask__sub'`) are rewritten if `--files ../code/push` is run with the same map, otherwise edit them too (`form_component is-embedded`, `.form_title`, `.form_subtitle`) |
+Only one was left: `push/prepare.mjs:103`, `holder('ghl-form', 'ask__embed')` became `'form_embed'` (a bare
+argument the engine lists as REVIEW). The six SplitText options (`linesClass: 'ln'` -> `'split_line'`,
+`wordsClass: 'w'` -> `'split_word'` in `js/00-core.js`, `js/10-home.js`, `js/30-pages.js`) and
+`push/prepare.mjs` lines 99 and 102 were rewritten by the engine. `KIT.md` was rewritten with the new names.
 
 **`build.mjs` needs nothing.** It builds no class names and its regexes read `data-embed`, `aria-current`,
 `<h1`, `src`/`srcset` and `{{key}}`, never a class. No page passes a class through a partial argument
@@ -63,40 +67,32 @@ are mapped to those library names).
 writes class markup, `tools/gen-journal.mjs`, is inside site-src and is rewritten by the engine (its regexes at
 lines 349-350 read the old WordPress markup, `item` / `brxe-*`, which are not in the map).
 
-`site-src/KIT.md` describes the kit by its old class names (the section table, the page anatomy, the
-lessons): rewrite it with the new names in the same change (Documentation Integrity Rule).
+`workflows/21-instatic-upload/home/` (the retired home pipeline) still carries the old names and was left
+alone: it must not be run (`push/README.md`).
 
-## How to apply (the session that owns site-src)
+## Proof (2026-10-06)
 
-```bash
-# from deliver/process/tools/instatic-api-sync/ ; SS = .../03-design-build/output
-tar --force-local --exclude=site-src/dist --exclude=site-src/media -czf "$LOCALAPPDATA/Temp/ifa-site-src-pre-rename.tgz" -C "$SS/code" site-src push
-node class-rename.mjs --files "$SS/code/site-src" --map "$SS/class-standard/class-map.json"          # dry run: expect the numbers above
-node class-rename.mjs --files "$SS/code/site-src" --map "$SS/class-standard/class-map.json" --apply
-node class-rename.mjs --files "$SS/code/push"     --map "$SS/class-standard/class-map.json" --apply
-# the hand edits in the table above, then a FULL build (the audit reads dist/):
-cd "$SS/code/site-src" && node build.mjs > build.log 2>&1
-node class-audit.mjs --local "$SS/code/site-src" --strict
-# then tools/sweep.mjs and walk.mjs at 1440 and 390 on a few pages per group (home, a split hero, gallery,
-# an article, 404): the rename must not change a pixel
-```
+- **Local:** the rebuilt `dist/` is the pre-rename build with the map applied, byte for byte, on all 58 pages
+  and `site.css`; `class-audit.mjs --local site-src --strict` reads IN BOUNDS (356 classes, 0 out of bounds,
+  0 reimplemented utilities; warnings carried over: 13 identical groups, 37 font sizes outside a role, 285
+  contextual rules, 61 script references to styling classes); `tools/sweep.mjs` 58 pages clean.
+- **Staging:** see the run file for the gate table (css parity, runtime parity, published HTML and head
+  comparison, EDITABLE, IN BOUNDS, CLEAN).
+- A backup of the pre-rename source is in git (`01502dc3` and before).
 
-Note: `class-rename.mjs --files` does **not** check collisions or classify new names (only `--site` does);
-that check was done when the map was written (see above). If the map is edited, re-check it.
+## Framework spec
 
-**Expected audit result:** every class in bounds and 0 reimplemented utilities, **except
-`elfsight-app-7febe92d-b5da-447f-b53f-9593eec9da53`**, which `build.mjs` copies into `dist/` from
-`data/embeds.json` for the local preview. `--strict` will exit 1 on that one name until it is resolved
-(open question 1). A rename does not change declarations or selectors' shape, so what today's audit
-reports as warnings should carry over under the new names: identical classes (13 groups), `font-size`
-outside a role (43, e.g. `invitation_title`, `faq_question`), contextual rules (312) and styling classes
-read by scripts (66 references in 7 files): the follow-ups below. (Expected, not run: no `--apply` was made.)
+`framework-spec.json` was drafted with `framework.mjs extract` from the built stylesheet and applied as
+drafted: 22 colours (`ink` ... `on-light-dim`; `accent-text` is `var(--gold-deep)`), root font size 16. Its
+`stays` list is what remains in the registry `:root` on purpose: the fluid-root numbers, the per-breakpoint
+scale multipliers (`--s-d1` ...), `--gutter` and `--nav-h` (redefined per breakpoint), the font stacks and the
+easing. Type sizes are not tokens on this site: each role class carries `calc(<rem> * var(--s-...))`.
+`push/editable.mjs` reads this file after every push.
 
-## Open questions
+## Open questions (follow-ups; none blocks the standard)
 
-1. **The Elfsight class.** Either `class-audit.mjs` exempts third-party widget classes (`elfsight-app-*`,
-   a tool change on main), or the local audit runs on a build without embed previews. Until then the
-   local gate cannot read IN BOUNDS with `--strict`.
+1. ~~The Elfsight class.~~ Settled: `class-audit.mjs` now counts `elfsight-app-*` as a vendor class; the
+   local gate reads IN BOUNDS with `--strict`.
 2. **`ch` -> `section_chapter`.** Every chapter carries it (300 uses); the home chapters also get
    `section_<beat>`. The kit pages have no beat class (their beat is only `data-chapter-name`). Adding
    `section_<beat>` per kit page is a markup change, not a rename: wanted?

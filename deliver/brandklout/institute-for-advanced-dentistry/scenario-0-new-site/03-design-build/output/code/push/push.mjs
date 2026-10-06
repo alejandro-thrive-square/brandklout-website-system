@@ -6,7 +6,9 @@
  * The shell: site.css and site.js are REPLACED by the build's. The tag asset (000-brandklout-tags.js) and
  * the consent bridge are kept: both are host-conditional and inert on staging. Plugins (embed-origins with
  * BugHerd, open-graph) live outside the site document and are untouched. The class registry becomes the
- * importer's bare classes for these pages.
+ * importer's bare classes for these pages, so the site is NOT editable in the Styles panel until
+ * push/editable.mjs has moved site.css into the registry again (every push, before the publish). The
+ * Framework (`site.settings.framework`) is kept: `settings` is spread from the live shell.
  *
  * Nested slugs (dental-services/x, about-our-practice/x, category/x, contact-us/thank-you) serve nested
  * only when site-document is the LAST write a row gets: nothing here patches /data/rows afterwards.
@@ -142,4 +144,4 @@ const after = (await getPages()).rows ?? []
 const missing = want.filter((s) => !after.some((r) => r.slug === s))
 console.log(`stored now ${after.length} page(s)`)
 if (missing.length || after.length !== want.length) { console.error(`UNEXPECTED: missing ${missing.join(', ') || '-'}; stored ${after.length}, built ${want.length}`); process.exitCode = 1 }
-console.log('\nNEXT: the 404 template flag (README), then node push/publish.mjs, then the live gates')
+console.log('\nNEXT: the 404 template flag (README), then node push/editable.mjs --apply (this push replaced the registry), then node push/publish.mjs, then the gates')

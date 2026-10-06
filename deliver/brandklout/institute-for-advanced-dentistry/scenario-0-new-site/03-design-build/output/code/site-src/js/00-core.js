@@ -25,12 +25,12 @@
     module: function (m) { IFA.mods.push(m); }
   };
 
-  if (!motion) html.classList.add('no-motion');
+  if (!motion) html.classList.add('is-reduced-motion');
 
   IFA.unveil = function () { html.classList.add('is-ready'); };
   /* Elements inside a page's own entrance (the home arrival, any [data-intro] hero) are animated by that
      entrance, not by the shared scroll reveals. */
-  IFA.inIntro = function (el) { return !!el.closest('.ch-arrival, [data-intro]'); };
+  IFA.inIntro = function (el) { return !!el.closest('.section_arrival, [data-intro]'); };
 
   /* ------------------------------------------------------------------ chrome */
   var nav = $('[data-nav]'), progress = $('[data-progress]');
@@ -109,7 +109,7 @@
     var p = modalVideo.play(); if (p && p.catch) p.catch(function () {});
     lockScroll(true);
     if (motion) gsap.fromTo(modal, { autoAlpha: 0 }, { autoAlpha: 1, duration: .4 });
-    if (motion) gsap.fromTo($('.modal__box', modal), { scale: .92, y: 30 }, { scale: 1, y: 0, duration: .7, ease: 'expo.out' });
+    if (motion) gsap.fromTo($('.modal_box', modal), { scale: .92, y: 30 }, { scale: 1, y: 0, duration: .7, ease: 'expo.out' });
     $('[data-modal-close]').focus();
   }
   function closeModal() {
@@ -246,7 +246,7 @@
       });
       $$('[data-split="lines"]').forEach(function (el) {
         if (IFA.inIntro(el)) return;
-        SplitText.create(el, { type: 'lines', linesClass: 'ln', mask: 'lines', autoSplit: true, onSplit: function (self) {
+        SplitText.create(el, { type: 'lines', linesClass: 'split_line', mask: 'lines', autoSplit: true, onSplit: function (self) {
           return gsap.from(self.lines, { yPercent: 112, stagger: .09, duration: 1.2, scrollTrigger: { trigger: el, start: 'top 86%', once: true } });
         } });
       });

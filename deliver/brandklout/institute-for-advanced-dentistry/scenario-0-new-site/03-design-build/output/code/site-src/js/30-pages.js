@@ -9,7 +9,7 @@
   /* One slider per [data-ba]. Drag, click, or arrow keys. A scroll sweep runs until the visitor takes hold. */
   function makeBA(el) {
     if (el._ba) return el._ba;
-    var handle = $('.ba__handle', el), state = { pos: parseFloat(el.getAttribute('data-start') || '50'), held: false };
+    var handle = $('.before-after_handle', el), state = { pos: parseFloat(el.getAttribute('data-start') || '50'), held: false };
     var paint = function () {
       var v = Math.max(0, Math.min(100, state.pos));
       el.style.setProperty('--pos', v.toFixed(2) + '%');
@@ -37,7 +37,7 @@
       $$('[data-ba]').forEach(makeBA);
 
       /* folds: a page grows when one opens; the triggers below it must move with it */
-      $$('details.fold').forEach(function (d) { d.addEventListener('toggle', function () { if (IFA.refreshSoon) IFA.refreshSoon(); }); });
+      $$('details.disclosure_component').forEach(function (d) { d.addEventListener('toggle', function () { if (IFA.refreshSoon) IFA.refreshSoon(); }); });
 
       /* ---------------------------------------------------------- gallery */
       var gal = $('[data-gal]');
@@ -70,7 +70,7 @@
             last = document.activeElement;
             show(it);
             lb.hidden = false; IFA.lockScroll(true);
-            if (IFA.motion) gsap.fromTo($('.lb__box', lb), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'expo.out' });
+            if (IFA.motion) gsap.fromTo($('.lightbox_box', lb), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'expo.out' });
             $('[data-lb-close]', lb).focus();
           };
           var close = function () { if (lb.hidden) return; lb.hidden = true; IFA.lockScroll(false); if (last) last.focus(); };
@@ -92,7 +92,7 @@
       /* ---------------------------------------------------- related list */
       var floatBox = $('[data-more-float]');
       if (floatBox && IFA.fine && window.innerWidth > 991) {
-        $$('[data-more]').forEach(function (list) { list.closest('.more').classList.add('is-live'); });
+        $$('[data-more]').forEach(function (list) { list.closest('.related_component').classList.add('is-live'); });
       }
     },
 
@@ -101,32 +101,32 @@
 
       /* ---- hero entrances (on load, not on scroll) ---- */
       $$('[data-intro]').forEach(function (hero) {
-        var h1 = $('h1', hero), split = h1 ? SplitText.create(h1, { type: 'lines', linesClass: 'ln', mask: 'lines' }) : null;
-        var media = $('.hero__img, .hero__window', hero), img = media ? $('img, video', media) : null;
+        var h1 = $('h1', hero), split = h1 ? SplitText.create(h1, { type: 'lines', linesClass: 'split_line', mask: 'lines' }) : null;
+        var media = $('.hero_image, .hero_window', hero), img = media ? $('img, video', media) : null;
         var tl = gsap.timeline({ delay: .1 });
         if (media) tl.fromTo(media, { clipPath: 'inset(100% 0% 0% 0% round 16px)' }, { clipPath: 'inset(0% 0% 0% 0% round 16px)', duration: 1.5, ease: 'expo.inOut', clearProps: 'clipPath' }, 0);
         if (img) tl.fromTo(img, { scale: 1.3 }, { scale: 1, duration: 2, clearProps: 'scale' }, 0);
-        tl.from($$('.crumbs li', hero), { y: 14, autoAlpha: 0, stagger: .06, duration: .7 }, .25);
+        tl.from($$('.breadcrumb_component li', hero), { y: 14, autoAlpha: 0, stagger: .06, duration: .7 }, .25);
         var tag = $('.tag', hero); if (tag) tl.from(tag.children, { x: -28, autoAlpha: 0, stagger: .08, duration: .9 }, .3);
         if (split) tl.from(split.lines, { yPercent: 112, stagger: .1, duration: 1.3 }, .4);
         tl.from($$('[data-rise]', hero), { y: 30, autoAlpha: 0, stagger: .12, duration: 1 }, .85);
-        tl.from($$('.hero__note', hero), { y: 40, autoAlpha: 0, duration: 1.1 }, 1.1);
-        tl.from($$('.hero__facts li, .hero__strip figure', hero), { y: 40, autoAlpha: 0, stagger: .08, duration: 1 }, .9);
+        tl.from($$('.hero_note', hero), { y: 40, autoAlpha: 0, duration: 1.1 }, 1.1);
+        tl.from($$('.hero_facts li, .hero_photo-strip figure', hero), { y: 40, autoAlpha: 0, stagger: .08, duration: 1 }, .9);
 
         /* and on the scroll */
-        if (hero.classList.contains('hero--split') && img) {
+        if (hero.classList.contains('is-split') && img) {
           gsap.to(img, { yPercent: 8, scale: 1.08, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
-          gsap.to($('.hero__copy', hero), { y: -60, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+          gsap.to($('.hero_copy', hero), { y: -60, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
         }
-        if (hero.classList.contains('hero--wide') && media) {
+        if (hero.classList.contains('is-wide') && media) {
           mm.add('(min-width: 768px)', function () {
             gsap.fromTo(media, { marginLeft: function () { return getComputedStyle(media).marginLeft; }, marginRight: function () { return getComputedStyle(media).marginRight; }, borderRadius: 16 },
               { marginLeft: 0, marginRight: 0, borderRadius: 0, ease: 'none', scrollTrigger: { trigger: media, start: 'top 75%', end: 'top 10%', scrub: true, invalidateOnRefresh: true } });
             gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: media, start: 'top bottom', end: 'bottom top', scrub: true } });
           });
         }
-        if (hero.classList.contains('hero--index')) {
-          $$('.hero__strip figure', hero).forEach(function (f, i) {
+        if (hero.classList.contains('is-index')) {
+          $$('.hero_photo-strip figure', hero).forEach(function (f, i) {
             gsap.to(f, { y: [-40, -130, -80][i % 3], ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
             gsap.fromTo($('img', f), { yPercent: -8 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
           });
@@ -135,11 +135,11 @@
 
       /* ---- say: the scroll writes the statement in ink ---- */
       $$('[data-say]').forEach(function (el) {
-        var words = SplitText.create(el, { type: 'words', wordsClass: 'w' }).words;
+        var words = SplitText.create(el, { type: 'words', wordsClass: 'split_word' }).words;
         gsap.set(words, { color: getComputedStyle(document.documentElement).getPropertyValue('--fg-unlit').trim() || '#67625d' });
         gsap.to(words, { color: function (i, w) { return w.closest('strong') ? GOLD : LIT; }, stagger: .05, ease: 'none', scrollTrigger: { trigger: el, start: 'top 78%', end: 'bottom 42%', scrub: true } });
       });
-      $$('.say__fig img').forEach(function (img) {
+      $$('.idea_figure img').forEach(function (img) {
         gsap.fromTo(img, { yPercent: -10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
       });
 
@@ -170,26 +170,26 @@
 
       /* ---- line: the rule draws and each visit lights as it passes ---- */
       $$('[data-line-list]').forEach(function (list) {
-        var bar = $('.line__bar', list.parentNode), items = $$('.line__item', list);
-        list.closest('.line').classList.add('is-live');
+        var bar = $('.timeline_bar', list.parentNode), items = $$('.timeline_item', list);
+        list.closest('.timeline_component').classList.add('is-live');
         gsap.fromTo(bar, { scaleY: 0 }, { scaleY: 1, ease: 'none', scrollTrigger: { trigger: list, start: 'top 70%', end: 'bottom 55%', scrub: true,
           onUpdate: function () {
             var b = bar.getBoundingClientRect().bottom;
-            items.forEach(function (it) { it.classList.toggle('is-on', $('.line__dot', it).getBoundingClientRect().top < b); });
+            items.forEach(function (it) { it.classList.toggle('is-on', $('.timeline_dot', it).getBoundingClientRect().top < b); });
           } } });
       });
-      $$('.line__fig img').forEach(function (img) {
+      $$('.timeline_figure img').forEach(function (img) {
         gsap.fromTo(img, { yPercent: -12 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
       });
 
       /* ---- figs: counted on the scroll ---- */
-      $$('.figs').forEach(function (f) {
+      $$('.stats_component').forEach(function (f) {
         $$('[data-count]', f).forEach(function (el) { IFA.countTo(el, f, 'top 88%', 'top 40%'); });
-        gsap.from($$('.figs > div', f.parentNode), { y: 40, autoAlpha: 0, stagger: .1, duration: 1, scrollTrigger: { trigger: f, start: 'top 88%', once: true } });
+        gsap.from($$('.stats_component > div', f.parentNode), { y: 40, autoAlpha: 0, stagger: .1, duration: 1, scrollTrigger: { trigger: f, start: 'top 88%', once: true } });
       });
 
       /* ---- signs: each mark is drawn as the list scrolls through ---- */
-      $$('.signs__list').forEach(function (list) {
+      $$('.checklist_list').forEach(function (list) {
         var paths = $$('path', list);
         paths.forEach(function (p) { var l = p.getTotalLength(); p.style.strokeDasharray = l; p.style.strokeDashoffset = l; });
         gsap.to(paths, { strokeDashoffset: 0, stagger: .25, ease: 'none', scrollTrigger: { trigger: list, start: 'top 80%', end: 'bottom 55%', scrub: true } });
@@ -197,37 +197,37 @@
       });
 
       /* ---- mosaic: three columns, three speeds ---- */
-      $$('.mosaic').forEach(function (m) {
-        $$('.mosaic__col', m).forEach(function (col, i) {
+      $$('.mosaic_component').forEach(function (m) {
+        $$('.mosaic_column', m).forEach(function (col, i) {
           gsap.fromTo(col, { y: [0, -60, 40][i % 3] }, { y: [-260, 160, -380][i % 3], ease: 'none', scrollTrigger: { trigger: m, start: 'top bottom', end: 'bottom top', scrub: true } });
         });
       });
 
       /* ---- band: the line of type slides with the scroll ---- */
       $$('[data-band]').forEach(function (band) {
-        var track = $('.band__track', band);
+        var track = $('.band_track', band);
         gsap.fromTo(track, { x: function () { return window.innerWidth * .15; } }, { x: function () { return -(track.scrollWidth - window.innerWidth * .85); }, ease: 'none', scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true } });
       });
 
       /* ---- film: the frame opens as it arrives ---- */
-      $$('.film').forEach(function (f) {
+      $$('.film_component').forEach(function (f) {
         gsap.fromTo(f, { scale: .86, borderRadius: 28 }, { scale: 1, borderRadius: 16, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'top 25%', scrub: true } });
       });
 
       /* ---- rows: the text follows its photograph a little late ---- */
-      $$('.row__body').forEach(function (b) {
+      $$('.row_body').forEach(function (b) {
         gsap.from(b.children, { y: 36, autoAlpha: 0, stagger: .08, duration: 1, scrollTrigger: { trigger: b, start: 'top 82%', once: true } });
       });
 
       /* ---- tiles and gallery: dealt in rows ---- */
-      $$('.tiles, .gal').forEach(function (grid) {
-        ScrollTrigger.batch($$('.tile, .gal__item', grid), { start: 'top 90%', once: true, onEnter: function (els) {
+      $$('.tile_grid, .gallery_grid').forEach(function (grid) {
+        ScrollTrigger.batch($$('.tile_card, .gallery_item', grid), { start: 'top 90%', once: true, onEnter: function (els) {
           gsap.from(els, { y: 60, autoAlpha: 0, stagger: .1, duration: 1.1, overwrite: true });
         } });
       });
 
       /* ---- article lead photograph ---- */
-      $$('.post__lead img').forEach(function (img) {
+      $$('.post_lead-image img').forEach(function (img) {
         gsap.fromTo(img, { yPercent: -10 }, { yPercent: 0, ease: 'none', scrollTrigger: { trigger: img.parentNode, start: 'top bottom', end: 'bottom top', scrub: true } });
       });
     },
@@ -238,8 +238,8 @@
       if (!floatBox || !IFA.fine || window.innerWidth <= 991) return;
       var fImg = $('img', floatBox);
       var fx = gsap.quickTo(floatBox, 'x', { duration: .55, ease: 'power3' }), fy = gsap.quickTo(floatBox, 'y', { duration: .55, ease: 'power3' });
-      $$('[data-more] .more__link').forEach(function (a) {
-        var src = $('.more__thumb img', a);
+      $$('[data-more] .related_link').forEach(function (a) {
+        var src = $('.related_thumbnail img', a);
         a.addEventListener('pointerenter', function () { if (src) fImg.src = src.currentSrc || src.src; gsap.to(floatBox, { autoAlpha: 1, scale: 1, duration: .4 }); });
         a.addEventListener('pointerleave', function () { gsap.to(floatBox, { autoAlpha: 0, scale: .9, duration: .35 }); });
         a.addEventListener('pointermove', function (e) { fx(e.clientX + 24); fy(e.clientY - floatBox.offsetHeight / 2); });

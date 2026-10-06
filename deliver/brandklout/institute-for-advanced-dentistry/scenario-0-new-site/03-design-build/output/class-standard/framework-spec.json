@@ -1,0 +1,148 @@
+{
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "ink",
+      "value": "#121112"
+    },
+    {
+      "slug": "ink-2",
+      "value": "#1b1a1b"
+    },
+    {
+      "slug": "ink-3",
+      "value": "#272526"
+    },
+    {
+      "slug": "graphite",
+      "value": "#373435"
+    },
+    {
+      "slug": "steel",
+      "value": "#727376"
+    },
+    {
+      "slug": "silver",
+      "value": "#bdbfc1"
+    },
+    {
+      "slug": "gold",
+      "value": "#c3972b"
+    },
+    {
+      "slug": "gold-hi",
+      "value": "#e2bd58"
+    },
+    {
+      "slug": "gold-deep",
+      "value": "#74560f"
+    },
+    {
+      "slug": "paper",
+      "value": "#f5f1e8"
+    },
+    {
+      "slug": "paper-2",
+      "value": "#ebe5d8"
+    },
+    {
+      "slug": "bone",
+      "value": "#fbf9f4"
+    },
+    {
+      "slug": "mist",
+      "value": "#eef0f1"
+    },
+    {
+      "slug": "white",
+      "value": "#ffffff"
+    },
+    {
+      "slug": "fg",
+      "value": "#1d1b1c"
+    },
+    {
+      "slug": "fg-dim",
+      "value": "#5a5654"
+    },
+    {
+      "slug": "fg-unlit",
+      "value": "#67625d"
+    },
+    {
+      "slug": "accent-text",
+      "value": "var(--gold-deep)"
+    },
+    {
+      "slug": "rule",
+      "value": "rgba(55, 52, 53, .17)"
+    },
+    {
+      "slug": "on-ink",
+      "value": "#edeae3"
+    },
+    {
+      "slug": "on-light",
+      "value": "#1d1b1c"
+    },
+    {
+      "slug": "on-light-dim",
+      "value": "#5a5654"
+    }
+  ],
+  "typography": [],
+  "spacing": [],
+  "stays": [
+    "--font-from: 18   (redefined at a breakpoint: stays in the registry :root)",
+    "--font-to: 20   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-from: calc(1920 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--vw-to: calc(2400 / 100)   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-d1: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-d2: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-d3: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-st: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-tx: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--s-sp: 1   (redefined at a breakpoint: stays in the registry :root)",
+    "--gutter: 4rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--nav-h: 5rem   (redefined at a breakpoint: stays in the registry :root)",
+    "--coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)))",
+    "--base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)",
+    "--f-sans: 'Jost', 'Century Gothic', 'Avenir Next', system-ui, sans-serif",
+    "--f-serif: 'Instrument Serif', 'Times New Roman', serif",
+    "--f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace",
+    "--ease: cubic-bezier(.22, .8, .2, 1)"
+  ],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [
+        "--ink",
+        "--ink-2",
+        "--ink-3",
+        "--graphite",
+        "--steel",
+        "--silver",
+        "--gold",
+        "--gold-hi",
+        "--gold-deep",
+        "--paper",
+        "--paper-2",
+        "--bone",
+        "--mist",
+        "--white",
+        "--fg",
+        "--fg-dim",
+        "--fg-unlit",
+        "--accent-text",
+        "--rule",
+        "--on-ink",
+        "--on-light",
+        "--on-light-dim"
+      ],
+      "set": {}
+    }
+  ]
+}

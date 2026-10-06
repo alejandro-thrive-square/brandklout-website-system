@@ -1,114 +1,114 @@
 /* 54-about — the "about" group (about our practice, the doctor, prosthodontics, payment, referrals, testimonials,
    contact, thank you). Only what the kit (40-pages.css) does not have; class prefix ab-. Frozen tokens only. */
 
-.ab-gap { margin-top: 7rem; }
-.ab-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.about_spacer-top { margin-top: 7rem; }
+.hide-visually { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* the kit tweens the dealt card's filter from 'none', which GSAP reads as brightness(0): give it a start value */
-.ab-stack .stack__card { filter: brightness(1); }
+.is-about-stack .stack_card { filter: brightness(1); }
 
 /* ---------- films: the four patient films as a 2 x 2 grid ---------- */
-.ab-films { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-.ab-films .film__meta b { font-size: calc(1.9rem * var(--s-d3)); }
-.ab-films .film__sub { max-width: 22rem; }
+.film_grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.film_grid .film_caption b { font-size: calc(1.9rem * var(--s-d3)); }
+.film_grid .film_subtitle { max-width: 22rem; }
 
 /* ---------- voices: written testimonials, a photograph, a line, and the rest folded ---------- */
-.ab-voices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4rem 1.75rem; align-items: start; }
-.ab-voice__fig { position: relative; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; background: var(--paper-2); }
-.ab-voice__fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transition: transform 1.1s var(--ease); }
-.ab-voice:hover .ab-voice__fig img { transform: scale(1.04); }
-.ab-voice--text { position: relative; padding: 6.5rem 2.25rem 1.5rem; background: var(--paper-2); border-radius: .7rem; }
-.ab-voice--text::before { content: '“'; position: absolute; left: 2rem; top: 1.25rem; font-family: var(--f-serif); font-style: italic; font-size: 6rem; line-height: 1; color: var(--gold); }
-.ab-voice--text .ab-voice__q { margin-top: 0; font-size: calc(2rem * var(--s-d3)); }
-.ab-top { object-position: 50% 12%; }
-.ab-focus-r { object-position: 72% 30%; }
-.ab-voice__q { margin-top: 1.5rem; font-family: var(--f-serif); font-style: italic; font-size: calc(1.6rem * var(--s-d3)); line-height: 1.22; letter-spacing: -.005em; color: var(--fg); }
-.ab-voice cite { display: block; margin-top: 1rem; font-style: normal; font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); }
-.ab-voice cite b { color: var(--accent-text); font-weight: 500; }
-.ab-voice .fold { margin-top: 1.25rem; }
-.ab-voice .fold__body p { color: var(--fg-dim); }
+.testimonial_grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4rem 1.75rem; align-items: start; }
+.testimonial_figure { position: relative; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; background: var(--paper-2); }
+.testimonial_figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transition: transform 1.1s var(--ease); }
+.testimonial_card:hover .testimonial_figure img { transform: scale(1.04); }
+.is-text-only { position: relative; padding: 6.5rem 2.25rem 1.5rem; background: var(--paper-2); border-radius: .7rem; }
+.is-text-only::before { content: '“'; position: absolute; left: 2rem; top: 1.25rem; font-family: var(--f-serif); font-style: italic; font-size: 6rem; line-height: 1; color: var(--gold); }
+.is-text-only .testimonial_quote { margin-top: 0; font-size: calc(2rem * var(--s-d3)); }
+.testimonial_image-focus-top { object-position: 50% 12%; }
+.prosthodontist_image-focus-right { object-position: 72% 30%; }
+.testimonial_quote { margin-top: 1.5rem; font-family: var(--f-serif); font-style: italic; font-size: calc(1.6rem * var(--s-d3)); line-height: 1.22; letter-spacing: -.005em; color: var(--fg); }
+.testimonial_card cite { display: block; margin-top: 1rem; font-style: normal; font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); }
+.testimonial_card cite b { color: var(--accent-text); font-weight: 500; }
+.testimonial_card .disclosure_component { margin-top: 1.25rem; }
+.testimonial_card .disclosure_body p { color: var(--fg-dim); }
 
 /* ---------- the doctor's own words: a long quote, set smaller than a patient's pull ---------- */
-.ab-pull-copy .pull__q p { font-size: calc(2.15rem * var(--s-d2)); line-height: 1.22; }
-.pull__q .fold { margin-top: 2rem; }
-.pull__q .fold__body p { font-family: var(--f-sans); font-style: normal; font-size: calc(1.05rem * var(--s-tx)); line-height: 1.6; letter-spacing: 0; color: var(--fg-dim); }
-.ab-pull-note { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--fg-dim); max-width: 38rem; }
+.quote_long-copy .quote_text p { font-size: calc(2.15rem * var(--s-d2)); line-height: 1.22; }
+.quote_text .disclosure_component { margin-top: 2rem; }
+.quote_text .disclosure_body p { font-family: var(--f-sans); font-style: normal; font-size: calc(1.05rem * var(--s-tx)); line-height: 1.6; letter-spacing: 0; color: var(--fg-dim); }
+.quote_note { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--fg-dim); max-width: 38rem; }
 
 /* ---------- recognition: a row whose photograph carries the Phoenix Magazine seal ---------- */
-.ab-rec__media { position: relative; }
-.ab-seal { position: absolute; right: -2rem; top: -2.75rem; z-index: 2; width: 8.5rem; height: auto; filter: drop-shadow(0 1rem 1.5rem rgba(55, 52, 53, .25)); }
-.ab-marquee-label { margin-top: 7rem; text-align: center; }
-.ab-marquee-label + .marquee { margin-top: 1.5rem; }
+.recognition_media { position: relative; }
+.recognition_seal { position: absolute; right: -2rem; top: -2.75rem; z-index: 2; width: 8.5rem; height: auto; filter: drop-shadow(0 1rem 1.5rem rgba(55, 52, 53, .25)); }
+.marquee_label { margin-top: 7rem; text-align: center; }
+.marquee_label + .marquee_component { margin-top: 1.5rem; }
 
 /* ---------- vs: a photograph beside the comparison table ---------- */
-.ab-vs { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; align-items: start; }
-.ab-vs__fig { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
-.ab-vs__fig img { width: 100%; height: 116%; object-fit: cover; }
-.ab-vs .vs thead th:first-child { width: 22%; }
+.comparison_layout { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; align-items: start; }
+.comparison_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
+.comparison_figure img { width: 100%; height: 116%; object-fit: cover; }
+.comparison_layout .comparison_table thead th:first-child { width: 22%; }
 
 /* ---------- pay: the ways to pay and the three lenders ---------- */
-.ab-pay { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6rem; align-items: center; }
-.ab-pay__fig { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
-.ab-pay__fig img { width: 100%; height: 116%; object-fit: cover; }
-.ab-ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2.5rem; border-top: 1px solid var(--rule); }
-.ab-ways li { padding: 1.5rem 1.25rem 0 0; }
-.ab-ways li + li { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
-.ab-ways b { display: block; font-size: calc(1.6rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; line-height: 1.15; color: var(--fg); }
-.ab-ways span { display: block; margin-top: .5rem; color: var(--fg-dim); font-size: calc(.95rem * var(--s-sp)); }
-.ab-pay__sub { margin-top: 3.5rem; color: var(--accent-text); }
-.ab-fin { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
-.ab-fin li { display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; min-height: 9.5rem; padding: 1.5rem 1.4rem; background: var(--white); border: 1px solid var(--rule); border-radius: .6rem; }
-.ab-fin img { display: block; width: auto; height: auto; max-width: 100%; max-height: 2.75rem; }
-.ab-fin span { font-size: calc(.95rem * var(--s-sp)); color: var(--fg); }
-.ab-pay__note { margin-top: 1.25rem; color: var(--fg-dim); }
+.payment_layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6rem; align-items: center; }
+.payment_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
+.payment_figure img { width: 100%; height: 116%; object-fit: cover; }
+.payment_ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2.5rem; border-top: 1px solid var(--rule); }
+.payment_ways li { padding: 1.5rem 1.25rem 0 0; }
+.payment_ways li + li { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
+.payment_ways b { display: block; font-size: calc(1.6rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; line-height: 1.15; color: var(--fg); }
+.payment_ways span { display: block; margin-top: .5rem; color: var(--fg-dim); font-size: calc(.95rem * var(--s-sp)); }
+.payment_subtitle { margin-top: 3.5rem; color: var(--accent-text); }
+.payment_lenders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+.payment_lenders li { display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; min-height: 9.5rem; padding: 1.5rem 1.4rem; background: var(--white); border: 1px solid var(--rule); border-radius: .6rem; }
+.payment_lenders img { display: block; width: auto; height: auto; max-width: 100%; max-height: 2.75rem; }
+.payment_lenders span { font-size: calc(.95rem * var(--s-sp)); color: var(--fg); }
+.payment_note { margin-top: 1.25rem; color: var(--fg-dim); }
 
 /* ---------- reviews: the live Google widget, introduced by a patient ---------- */
-.ab-rv { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 5rem; align-items: end; }
-.ab-rv__fig { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; max-height: 34rem; }
-.ab-rv__fig img { width: 100%; height: 116%; object-fit: cover; }
-.ab-rv .lede { margin-top: 1.5rem; }
-.ab-rv .link { margin-top: 1.75rem; color: var(--accent-text); }
+.reviews_layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 5rem; align-items: end; }
+.reviews_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; max-height: 34rem; }
+.reviews_figure img { width: 100%; height: 116%; object-fit: cover; }
+.reviews_layout .text-style-lede { margin-top: 1.5rem; }
+.reviews_layout .arrow-link_component { margin-top: 1.75rem; color: var(--accent-text); }
 
 /* ---------- visit: the entrance under the address ---------- */
-.ab-visit-fig { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 3 / 2; }
-.ab-visit-fig img { width: 100%; height: 116%; object-fit: cover; }
-.visit .d2 { margin-bottom: .5rem; }
+.visit_figure { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 3 / 2; }
+.visit_figure img { width: 100%; height: 116%; object-fit: cover; }
+.visit_layout .heading-style-h2 { margin-bottom: .5rem; }
 
 /* ---------- prose side photograph ---------- */
-.ab-side-fig { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; max-width: 26rem; }
-.ab-side-fig img { width: 100%; height: 116%; object-fit: cover; }
-.prose .ab-pubs { display: grid; gap: 0; border-bottom: 1px solid var(--rule); }
-.ab-pubs li { padding: 1.25rem 0 1.25rem 2.5rem; border-top: 1px solid var(--rule); color: var(--fg); }
-.prose .ab-pubs li::before { top: 1.5rem; }
+.doctor_side-figure { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; max-width: 26rem; }
+.doctor_side-figure img { width: 100%; height: 116%; object-fit: cover; }
+.text-rich-text .doctor_publications { display: grid; gap: 0; border-bottom: 1px solid var(--rule); }
+.doctor_publications li { padding: 1.25rem 0 1.25rem 2.5rem; border-top: 1px solid var(--rule); color: var(--fg); }
+.text-rich-text .doctor_publications li::before { top: 1.5rem; }
 
 @media screen and (max-width: 1279px) {
-  .ab-vs, .ab-pay, .ab-rv { gap: 4rem; }
-  .ab-seal { right: -1rem; }
+  .comparison_layout, .payment_layout, .reviews_layout { gap: 4rem; }
+  .recognition_seal { right: -1rem; }
 }
 
 @media screen and (max-width: 991px) {
-  .ab-gap { margin-top: 5rem; }
-  .ab-voices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem 1.25rem; }
-  .ab-vs, .ab-pay, .ab-rv { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
-  .ab-vs__fig, .ab-pay__fig { max-width: 34rem; aspect-ratio: 4 / 3; }
-  .ab-rv__fig { max-width: 26rem; aspect-ratio: 4 / 3; order: -1; }
-  .ab-side-fig { aspect-ratio: 4 / 3; max-width: 34rem; }
-  .ab-marquee-label { margin-top: 4.5rem; }
+  .about_spacer-top { margin-top: 5rem; }
+  .testimonial_grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem 1.25rem; }
+  .comparison_layout, .payment_layout, .reviews_layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .comparison_figure, .payment_figure { max-width: 34rem; aspect-ratio: 4 / 3; }
+  .reviews_figure { max-width: 26rem; aspect-ratio: 4 / 3; order: -1; }
+  .doctor_side-figure { aspect-ratio: 4 / 3; max-width: 34rem; }
+  .marquee_label { margin-top: 4.5rem; }
 }
 
 @media screen and (max-width: 767px) {
-  .ab-films { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-  .ab-films .film { aspect-ratio: 4 / 3; }
-  .ab-films .film__meta b { font-size: calc(1.6rem * var(--s-d3)); }
-  .ab-voices { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; }
-  .ab-voice__fig { aspect-ratio: 4 / 3; }
-  .ab-voice--text { padding: 5rem 1.5rem 1.25rem; }
-  .ab-ways { grid-template-columns: minmax(0, 1fr); }
-  .ab-ways li, .ab-ways li + li { padding: 1.1rem 0; border-left: 0; }
-  .ab-ways li + li { border-top: 1px solid var(--rule); }
-  .ab-fin { grid-template-columns: minmax(0, 1fr); }
-  .ab-fin li { min-height: 0; flex-direction: row; align-items: center; }
-  .ab-fin img { max-width: 55%; max-height: 2.4rem; }
-  .ab-seal { right: .5rem; top: -2rem; width: 6rem; }
-  .ab-pull-copy .pull__q p { font-size: 1.5rem; line-height: 1.25; }
+  .film_grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .film_grid .film_component { aspect-ratio: 4 / 3; }
+  .film_grid .film_caption b { font-size: calc(1.6rem * var(--s-d3)); }
+  .testimonial_grid { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; }
+  .testimonial_figure { aspect-ratio: 4 / 3; }
+  .is-text-only { padding: 5rem 1.5rem 1.25rem; }
+  .payment_ways { grid-template-columns: minmax(0, 1fr); }
+  .payment_ways li, .payment_ways li + li { padding: 1.1rem 0; border-left: 0; }
+  .payment_ways li + li { border-top: 1px solid var(--rule); }
+  .payment_lenders { grid-template-columns: minmax(0, 1fr); }
+  .payment_lenders li { min-height: 0; flex-direction: row; align-items: center; }
+  .payment_lenders img { max-width: 55%; max-height: 2.4rem; }
+  .recognition_seal { right: .5rem; top: -2rem; width: 6rem; }
+  .quote_long-copy .quote_text p { font-size: 1.5rem; line-height: 1.25; }
 }
