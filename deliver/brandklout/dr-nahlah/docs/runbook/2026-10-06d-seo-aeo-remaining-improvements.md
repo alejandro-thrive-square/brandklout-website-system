@@ -90,7 +90,7 @@ copy depth → **skip**.
 
 ## Then: 18,000 and the breadcrumb link (same day)
 User: "lets go with 18000. Resolve the links discrepancy".
-- **/about + /doctor-referral**: "7,000+ Full-mouth implants placed" → "18,000+ Implants placed" (the meet-dr-nahlah label: a total, not full-mouth cases; counter  18000, renders 18,000+), "Over 7,000 dental implants placed" → 18,000. 9 nodes, , staging then production, published. Settles the 2026-08-19 open question in .
-- **/veneers breadcrumb** "Cosmetic" →  (crowns and whitening already linked the hub). The header nav's "Cosmetic" stays  on every page (site-wide nav choice, not changed).
-- Schema: the 18,000 line now in /about's distinctions and Dr. Nahlah's Person description (home page's own sentence); veneers BreadcrumbList item = the hub.  now also checks each crumb's link target against the visible href (it compared names only, which is how this slipped).
+- **/about + /doctor-referral**: "7,000+ Full-mouth implants placed" → "18,000+ Implants placed" (the meet-dr-nahlah label: a total, not full-mouth cases; counter `data-count` 18000, renders 18,000+), "Over 7,000 dental implants placed" → 18,000. 9 nodes, `seo-v3/push-copy-fixes-v3.mjs`, staging then production, published. Settles the 2026-08-19 open question in `about.body.html`.
+- **/veneers breadcrumb** "Cosmetic" → `/cosmetic-dentistry` (crowns and whitening already linked the hub). The header nav's "Cosmetic" stays `/smile-makeover` on every page (site-wide nav choice, not changed).
+- Schema: the 18,000 line now in /about's distinctions and Dr. Nahlah's Person description (home page's own sentence); veneers BreadcrumbList item = the hub. `verify-seo-v3.mjs` now also checks each crumb's link target against the visible href (it compared names only, which is how this slipped).
 - All gates clean on both hosts; parity holds. Local source + seo.json ogDesc mirrored, build 56/56.
