@@ -22,12 +22,16 @@ const HERE = dirname(fileURLToPath(import.meta.url))
 const ZONE = 'drnahlah.com'
 const SCRIPT_NAME = 'drnahlah-seo'
 const ROUTES = [
-  'www.drnahlah.com/sitemap.xml',
-  'drnahlah.com/sitemap.xml',
-  // NOT /robots.txt: Cloudflare generates the content-signals robots.txt at the
-  // edge, and a Worker on that path replaced it (14-migration-seo-redirects.md,
-  // gotcha 1). The routes were removed by hand; this list must not re-add them.
+  // Trailing `*` so `/sitemap.xml?anything` reaches the Worker too, not the
+  // origin's 404. The apex needs no route: the apex -> www redirect runs first.
+  'www.drnahlah.com/sitemap.xml*',
+  // Since 2026-10-05 the Worker carries Cloudflare's content-signals policy
+  // verbatim plus the Sitemap: line, so routing robots.txt no longer drops it
+  // (14-migration-seo-redirects.md, gotcha 1).
+  'www.drnahlah.com/robots.txt*',
 ]
+/* Patterns this list replaced; --apply deletes them if they are still bound. */
+const RETIRED = ['www.drnahlah.com/sitemap.xml', 'drnahlah.com/sitemap.xml']
 const APPLY = process.argv.includes('--apply')
 
 const source = readFileSync(join(HERE, '.tmp', 'out', 'sitemap-worker.js'), 'utf8')
@@ -55,9 +59,9 @@ form.append('worker.js', new Blob([source], { type: 'application/javascript+modu
 const uploaded = await cf('PUT', `/accounts/${acct}/workers/scripts/${SCRIPT_NAME}`, form)
 console.log(`\nuploaded: ${uploaded.id} (modified ${uploaded.modified_on})`)
 
-/* --script-only: replace the code behind routes that are already bound. Since
-   2026-10-02 the token answers 403 on zone Workers Routes, so binding is a
-   dashboard job; uploading the script still works. */
+/* --script-only: replace the code behind routes that are already bound. The
+   [shared] CLOUDFLAREAPI token answers 403 on zone Workers Routes; run with
+   CLOUDFLARE_API_TOKEN set from CLOUDFLAREDIAGNOSIS (master .env), which can bind. */
 if (process.argv.includes('--script-only')) process.exit(0)
 
 // ── bind the routes ────────────────────────────────────────────────────────
@@ -73,6 +77,10 @@ for (const pattern of ROUTES) {
   }
   const made = await cf('POST', `/zones/${zone.id}/workers/routes`, { pattern, script: SCRIPT_NAME })
   console.log(`route created ${pattern} -> ${made.id}`)
+}
+for (const r of existing.filter((r) => RETIRED.includes(r.pattern) && r.script === SCRIPT_NAME)) {
+  await cf('DELETE', `/zones/${zone.id}/workers/routes/${r.id}`)
+  console.log(`route removed ${r.pattern} (superseded)`)
 }
 
 console.log('\ndeployed. Verify with: node verify-live.mjs')

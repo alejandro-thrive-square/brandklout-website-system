@@ -160,6 +160,12 @@ and `verify-live.mjs`, which replays **all 190** rows against production
    origin fetch 404s (Instatic serves no robots route), and the fallback
    **replaces** the policy. Observed live: 1248 B → 70 B. Routes removed;
    robots.txt has no `Sitemap:` line as a result, which is an acceptable trade.
+   **2026-10-05:** the Worker now embeds the policy verbatim (`CF_POLICY`) and
+   appends only the `Sitemap:` line, so the `www.drnahlah.com/robots.txt*` route
+   is safe to bind. The code is deployed, but the route is **not bound yet**:
+   no token we hold may write zone Workers Routes or rulesets
+   (`CLOUDFLAREDIAGNOSIS` reads everything but writes nothing). Bind it in the
+   dashboard. If Cloudflare changes its policy text, re-copy it.
 2. **`http_request_dynamic_redirect` runs BEFORE `http_request_redirect`.**
    The opposite of what the phase names suggest. So a Single Redirect fires
    ahead of Bulk Redirects, and an old URL arriving on the apex takes two hops.
@@ -185,6 +191,13 @@ and `verify-live.mjs`, which replays **all 190** rows against production
 7. **The token sees every zone on the account** (7 Brandklout clients). Every
    script here hard-codes `drnahlah.com` and `deploy-redirects.mjs` refuses any
    row whose source or target is not that domain.
+
+8. **Old WordPress sitemap URLs go in the Bulk Redirect list** (`redirect-legacy-sitemaps.mjs`).
+   Search Console keeps a migrated site's old `sitemap_index.xml` / `*-sitemap.xml`
+   entries and reports "Couldn't fetch" while they 404. A 301 to `/sitemap.xml`
+   clears it without touching Search Console. Before blaming Cloudflare, check
+   GraphQL `httpRequestsAdaptive` for Googlebot (`clientAsn` 15169) on `%sitemap%`:
+   on 2026-10-05 the live sitemap was a 200 to Google and only the legacy URLs 404'd.
 
 ### Still open
 
