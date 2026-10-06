@@ -3,13 +3,13 @@
    Registered against .ch-transformation; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-transformation", function (W) {
+WZ.section("section_transformation", function (W) {
   var root  = document.getElementById('transformation'),
       pin   = document.getElementById('tPin'),
       cmp   = document.getElementById('cmp'),
       cap   = document.getElementById('tCaption'),
       dots  = document.getElementById('tDots').children,
-      slides= cmp.querySelectorAll('.tf-slide'),
+      slides= cmp.querySelectorAll('.transformation_slide'),
       handle= document.getElementById('tHandle');
 
   var CAPTIONS = [
@@ -71,6 +71,6 @@ WZ.section("ch-transformation", function (W) {
     if(state.idx !== seg){ state.idx = seg; show(seg); }
   });
 
-  gsap.from(root.querySelectorAll('.tf-head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
+  gsap.from(root.querySelectorAll('.transformation_head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
     ease:'power3.out',scrollTrigger:{trigger:root,start:'top 70%'}});
 });

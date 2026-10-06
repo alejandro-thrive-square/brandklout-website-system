@@ -3,11 +3,11 @@
    Registered against .ch-path; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-path", function (W) {
+WZ.section("section_path", function (W) {
   var pin   = document.getElementById('pathPin'),
       track = document.getElementById('pathTrack'),
       bar   = document.getElementById('pathBar'),
-      sec   = document.querySelector('.ch-path');
+      sec   = document.querySelector('.section_path');
 
   if(W.reduced){
     /* Fall back to a normal horizontal scroll region. */
@@ -35,7 +35,7 @@ WZ.section("ch-path", function (W) {
     sec.classList.add('is-static');
     gsap.set(track,{x:0});
     gsap.set(bar,{scaleX:0});
-    gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card,i){
+    gsap.utils.toArray('#pathTrack .path_card').forEach(function(card,i){
       gsap.from(card,{opacity:0,y:30,duration:.9,ease:'power3.out',delay:i*.07,
         scrollTrigger:{trigger:pin,start:'top 72%'}});
     });
@@ -70,9 +70,9 @@ WZ.section("ch-path", function (W) {
      there is nothing to tween. */
   /* Runs on touch too now — see the note in css/35-ch-path.css. */
   var grey = function(card, on){
-    gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale('+(on?1:0)+')',duration:.6});
+    gsap.to(card.querySelector('.path_image-wrapper img'),{filter:'grayscale('+(on?1:0)+')',duration:.6});
   };
-  gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card){
+  gsap.utils.toArray('#pathTrack .path_card').forEach(function(card){
     ScrollTrigger.create({
       trigger: card,
       containerAnimation: tween,
@@ -83,7 +83,7 @@ WZ.section("ch-path", function (W) {
       onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); },
       onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); grey(card,true); }
     });
-    gsap.fromTo(card.querySelector('.pa-no'),{opacity:.35},{opacity:1,duration:.4,
+    gsap.fromTo(card.querySelector('.path_number'),{opacity:.35},{opacity:1,duration:.4,
       scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
     });
   }
@@ -138,7 +138,7 @@ WZ.section("ch-path", function (W) {
        No fallback needed: IntersectionObserver predates every browser that can
        run ScrollSmoother, but guard anyway so an exotic engine degrades to
        "all cards lit" rather than none. */
-    var cards = track.querySelectorAll('.pa-card');
+    var cards = track.querySelectorAll('.path_card');
     if (!('IntersectionObserver' in window)) {
       for (var i = 0; i < cards.length; i++) cards[i].classList.add('is-live');
       return;

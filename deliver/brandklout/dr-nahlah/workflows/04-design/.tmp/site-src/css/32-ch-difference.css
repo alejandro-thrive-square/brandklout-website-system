@@ -1,29 +1,29 @@
-.ch-difference{background:var(--bg-2);border-block:1px solid var(--line-2);position:relative}
-.ch-difference .df-head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
-.ch-difference .df-head h2{font-size:var(--h2)}
-.ch-difference .df-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
-.ch-difference .df-stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
+.section_difference{background:var(--bg-2);border-block:1px solid var(--line-2);position:relative}
+.section_difference .difference_head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
+.section_difference .difference_head h2{font-size:var(--h2)}
+.section_difference .difference_stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
+.section_difference .difference_stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
   color:var(--accent-lg);line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
-.ch-difference .df-stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
+.section_difference .difference_stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--fg-soft)}
-.ch-difference .df-stat{position:relative;padding-top:1.25rem}
-.ch-difference .df-stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+.section_difference .difference_stat{position:relative;padding-top:1.25rem}
+.section_difference .difference_stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
   background:var(--line);transform:scaleX(0);transform-origin:left}
-.df-marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
+.difference_marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
   padding-block:clamp(.85rem,1.6vw,1.3rem)}
-.df-marquee .df-row{display:flex;width:max-content;will-change:transform}
-.df-marquee .df-row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
+.difference_marquee .difference_marquee-row{display:flex;width:max-content;will-change:transform}
+.difference_marquee .difference_marquee-row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
   color:var(--fg-body);white-space:nowrap;padding-inline:clamp(.9rem,2vw,1.7rem)}
-.df-marquee .df-row b{color:var(--accent);font-size:.65rem;align-self:center}
+.difference_marquee .difference_marquee-row b{color:var(--accent);font-size:.65rem;align-self:center}
 
 /* --- us vs. them --- */
-.df-versus{padding-block:clamp(3.5rem,7vw,6.5rem)}
-.vs-head{margin-bottom:clamp(1.75rem,3.5vw,2.75rem);max-width:40ch}
-.vs-head h3{font-size:var(--h2)}
-.vs-head p{margin-top:.9rem;color:var(--fg-body);font-weight:400}
-.vs-table{display:grid;gap:1px;background:var(--line)}
-.vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:1px;background:var(--line)}
-.vs-row>span{padding:clamp(1rem,2vw,1.5rem) clamp(1rem,2vw,1.75rem);background:var(--bg-2);
+.difference_versus{padding-block:clamp(3.5rem,7vw,6.5rem)}
+.versus_head{margin-bottom:clamp(1.75rem,3.5vw,2.75rem);max-width:40ch}
+.versus_head h3{font-size:var(--h2)}
+.versus_head p{margin-top:.9rem;color:var(--fg-body);font-weight:400}
+.versus_table{display:grid;gap:1px;background:var(--line)}
+.versus_row{display:grid;grid-template-columns:1fr auto 1fr;gap:1px;background:var(--line)}
+.versus_row>span{padding:clamp(1rem,2vw,1.5rem) clamp(1rem,2vw,1.75rem);background:var(--bg-2);
   font-size:.95rem;font-weight:400;color:var(--fg-body);display:flex;align-items:center}
 /* Was a left-to-right gold gradient, which read as a muddy olive wash that
    stopped dead at the "vs" column. A flat tint plus a gold rule says
@@ -31,28 +31,28 @@
 /* The tint has to be layered OVER the opaque cell, not instead of it — a
    bare rgba() here replaced --ink-900 and let the table's hairline grey
    show through, which is the washed-out olive the first review caught. */
-.vs-row .vs-us{background:linear-gradient(rgba(171,158,106,.15),rgba(171,158,106,.15)) var(--bg-2);
+.versus_row .versus_us{background:linear-gradient(rgba(171,158,106,.15),rgba(171,158,106,.15)) var(--bg-2);
   box-shadow:inset 2px 0 0 var(--gold-deep);color:var(--fg);font-weight:500}
-.vs-row .vs-mid{background:var(--bg);width:clamp(46px,6vw,86px);justify-content:center;padding-inline:0}
-.vs-mid i{display:block;width:7px;height:7px;border-radius:50%;background:var(--rule);opacity:.6}
-.vs-head-row>span{font-family:var(--f-display);font-size:calc(1.4rem * var(--t-sm));
+.versus_row .versus_middle{background:var(--bg);width:clamp(46px,6vw,86px);justify-content:center;padding-inline:0}
+.versus_middle i{display:block;width:7px;height:7px;border-radius:50%;background:var(--rule);opacity:.6}
+.is-header-row>span{font-family:var(--f-display);font-size:calc(1.4rem * var(--t-sm));
   letter-spacing:.01em;text-transform:none;padding-block:clamp(1rem,2vw,1.4rem)}
-.vs-head-row .vs-us{color:var(--black);
+.is-header-row .versus_us{color:var(--black);
   background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light));font-weight:500}
-.vs-head-row .vs-them{color:var(--fg)}
-.vs-head-row .vs-mid{font-family:var(--f-body);font-size:.7rem;letter-spacing:.2em;
+.is-header-row .versus_them{color:var(--fg)}
+.is-header-row .versus_middle{font-family:var(--f-body);font-size:.7rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--fg-soft)}
 @media(max-width:719px){
-  .vs-row{grid-template-columns:1fr}
-  .vs-row .vs-mid{display:none}
-  .vs-row>span{font-size:.9rem;display:block}
-  .vs-row .vs-them{color:var(--fg-soft)}
-  .vs-head-row .vs-them{padding-top:1rem}
+  .versus_row{grid-template-columns:1fr}
+  .versus_row .versus_middle{display:none}
+  .versus_row>span{font-size:.9rem;display:block}
+  .versus_row .versus_them{color:var(--fg-soft)}
+  .is-header-row .versus_them{padding-top:1rem}
   /* Stacked, the two halves lose the "vs" column that told you which side
      you were reading. Label them instead of relying on position. */
-  .vs-row:not(.vs-head-row)>span::before{display:block;margin-bottom:.4rem;
+  .versus_row:not(.is-header-row)>span::before{display:block;margin-bottom:.4rem;
     font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
-  .vs-row:not(.vs-head-row) .vs-us::before{content:"Here";color:var(--accent)}
-  .vs-row:not(.vs-head-row) .vs-them::before{content:"Elsewhere";color:var(--fg-soft)}
+  .versus_row:not(.is-header-row) .versus_us::before{content:"Here";color:var(--accent)}
+  .versus_row:not(.is-header-row) .versus_them::before{content:"Elsewhere";color:var(--fg-soft)}
 }
-@media(min-width:720px){ .ch-difference .df-stats{grid-template-columns:repeat(4,1fr)} }
+@media(min-width:720px){ .section_difference .difference_stats{grid-template-columns:repeat(4,1fr)} }

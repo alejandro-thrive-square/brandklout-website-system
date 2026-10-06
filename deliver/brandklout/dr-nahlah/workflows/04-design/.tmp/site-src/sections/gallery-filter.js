@@ -18,7 +18,7 @@ WZ.dom('gallery-filter', '#gaGrid', function () {
     bar.querySelectorAll('button').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b === btn));
     });
-    grid.querySelectorAll('.ga-item').forEach(function (item) {
+    grid.querySelectorAll('.gallery_item').forEach(function (item) {
       item.hidden = !(cat === 'all' || item.getAttribute('data-cat') === cat);
     });
     /* Pinned/scrubbed triggers elsewhere on the page measured the old height. */

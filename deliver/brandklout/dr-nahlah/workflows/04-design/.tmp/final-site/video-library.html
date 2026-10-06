@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Video Library | Implants &amp; Prosthodontics | Dr. Nahlah</title>
-<meta name="description" content="Short films from the practice: implant planning, guided placement, the in-house lab, bone grafting, veneers and full arches, explained by Dr. Nahlah.">
+<title>Dental Implant Videos | Dr. Nahlah | McLean &amp; Alexandria, VA</title>
+<meta name="description" content="Short videos from Dr. Nahlah's practice in McLean and Alexandria, VA: implant planning, guided placement, the in-house lab, veneers and full arches.">
 <meta property="og:title" content="Video Library | Dr. Nahlah Prosthodontics">
 <meta property="og:description" content="The procedures, explained by the specialist who performs them.">
 <meta property="og:type" content="website">
@@ -111,20 +111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -134,10 +134,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -146,9 +146,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -158,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -200,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -250,32 +250,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      Instatic serve it at all: that platform lifts CSP frame-src only for a page
      that renders a real YouTube node. See gen-videos.mjs.
      ========================================================================== -->
-<section class="pg-hero" id="hero" style="min-height:clamp(420px,54svh,580px)">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero" style="min-height:clamp(420px,54svh,580px)">
+  <div class="page-hero_background">
     <img src="assets/tech-hero.jpg" alt="The scanning suite at the practice" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Video Library</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Video Library</span></div>
     <h1 data-split>The procedures, <em>explained</em>.</h1>
-    <p class="ph-lead" data-rv>Fourteen short films from the practice's own channel: what each
+    <p class="page-hero_lead" data-rv>Fourteen short films from the practice's own channel: what each
       treatment involves, why it is planned the way it is, and what the technology actually
       changes.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="patient-stories.html"><span>Hear from patients</span></a>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="button is-secondary is-magnetic" href="patient-stories.html"><span>Hear from patients</span></a>
     </div>
   </div>
 </section>
 
-<section class="pk" id="library">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Filmed at the practice</span></div>
+<section class="section_content" id="library">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Filmed at the practice</span></div>
       <h2 data-split>A Customized Dental Implant Treatment Plan Specific To You</h2>
     </div>
 
-    <figure class="vl-lead" data-rv>
-      <div class="vl-frame">
+    <figure class="video_lead-film" data-rv>
+      <div class="video_frame">
         <iframe src="https://www.youtube.com/embed/x6Dr-YPCUaI" loading="lazy"
                 title="A Customized Dental Implant Treatment Plan Specific To You"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -286,137 +286,137 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section class="pk pk-alt" id="films">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The library</span></div>
+<section class="section_content is-background-alternate" id="films">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The library</span></div>
       <h2 data-split>Thirteen more, by subject.</h2>
       <p data-rv>Each one opens where it sits. Nothing autoplays, and nothing loads until you
         ask for it.</p>
     </div>
 
-    <div class="vl-grid" data-rv="stagger">
-        <div class="vl-card" role="button" tabindex="0" data-yt="8DH9ZdyBcp4"
+    <div class="video_grid" data-rv="stagger">
+        <div class="video_card" role="button" tabindex="0" data-yt="8DH9ZdyBcp4"
                 aria-label="Play: Eliminate The Risk Of Human Error With 3D Guided Dental Implant Placement">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/8DH9ZdyBcp4/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Eliminate The Risk Of Human Error With 3D Guided Dental Implant Placement</span>
+          <span class="video_title">Eliminate The Risk Of Human Error With 3D Guided Dental Implant Placement</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="fiWLQROMvcg"
+        <div class="video_card" role="button" tabindex="0" data-yt="fiWLQROMvcg"
                 aria-label="Play: Why Dental Implant Treatment Experience Matters">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/fiWLQROMvcg/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Why Dental Implant Treatment Experience Matters</span>
+          <span class="video_title">Why Dental Implant Treatment Experience Matters</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="glyfx-NFHHM"
+        <div class="video_card" role="button" tabindex="0" data-yt="glyfx-NFHHM"
                 aria-label="Play: Restore Your Bad or Missing Teeth in A One Day">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/glyfx-NFHHM/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Restore Your Bad or Missing Teeth in A One Day</span>
+          <span class="video_title">Restore Your Bad or Missing Teeth in A One Day</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="lU62bTDjV64"
+        <div class="video_card" role="button" tabindex="0" data-yt="lU62bTDjV64"
                 aria-label="Play: Why Is An In-House Dental Lab So Important?">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/lU62bTDjV64/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Why Is An In-House Dental Lab So Important?</span>
+          <span class="video_title">Why Is An In-House Dental Lab So Important?</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="BnB_W6F_P1g"
+        <div class="video_card" role="button" tabindex="0" data-yt="BnB_W6F_P1g"
                 aria-label="Play: Benefits Of A Prosthodontist That Uses Advanced Technology">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/BnB_W6F_P1g/maxresdefault.jpg" alt="" loading="lazy" width="480" height="360">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Benefits Of A Prosthodontist That Uses Advanced Technology</span>
+          <span class="video_title">Benefits Of A Prosthodontist That Uses Advanced Technology</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="A9wuNvIfFEw"
+        <div class="video_card" role="button" tabindex="0" data-yt="A9wuNvIfFEw"
                 aria-label="Play: Bone Grafting">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/A9wuNvIfFEw/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Bone Grafting</span>
+          <span class="video_title">Bone Grafting</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="yo1gLUGnRbM"
+        <div class="video_card" role="button" tabindex="0" data-yt="yo1gLUGnRbM"
                 aria-label="Play: Fixing Grey Lines">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/yo1gLUGnRbM/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Fixing Grey Lines</span>
+          <span class="video_title">Fixing Grey Lines</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="938agcztJjs"
+        <div class="video_card" role="button" tabindex="0" data-yt="938agcztJjs"
                 aria-label="Play: Options for Failing Teeth">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/938agcztJjs/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Options for Failing Teeth</span>
+          <span class="video_title">Options for Failing Teeth</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="fx6eztXBVqQ"
+        <div class="video_card" role="button" tabindex="0" data-yt="fx6eztXBVqQ"
                 aria-label="Play: Replacing Front Teeth">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/fx6eztXBVqQ/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Replacing Front Teeth</span>
+          <span class="video_title">Replacing Front Teeth</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="zjvRSifApBs"
+        <div class="video_card" role="button" tabindex="0" data-yt="zjvRSifApBs"
                 aria-label="Play: Sedation Dentistry">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/zjvRSifApBs/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Sedation Dentistry</span>
+          <span class="video_title">Sedation Dentistry</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="btCwe4wry5o"
+        <div class="video_card" role="button" tabindex="0" data-yt="btCwe4wry5o"
                 aria-label="Play: Seven Steps of Veneers">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/btCwe4wry5o/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Seven Steps of Veneers</span>
+          <span class="video_title">Seven Steps of Veneers</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="um69fjRjTHs"
+        <div class="video_card" role="button" tabindex="0" data-yt="um69fjRjTHs"
                 aria-label="Play: Single Tooth Implants">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/um69fjRjTHs/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Single Tooth Implants</span>
+          <span class="video_title">Single Tooth Implants</span>
         </div>
-        <div class="vl-card" role="button" tabindex="0" data-yt="xgOBrrKQjeU"
+        <div class="video_card" role="button" tabindex="0" data-yt="xgOBrrKQjeU"
                 aria-label="Play: Smile Makeovers">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="https://img.youtube.com/vi/xgOBrrKQjeU/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" style="--vl-zoom:1.9">
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">Smile Makeovers</span>
+          <span class="video_title">Smile Makeovers</span>
         </div>
     </div>
 
-    <p class="vl-note" data-rv>Prefer to talk it through in person? A consultation includes the 3D
+    <p class="video_note" data-rv>Prefer to talk it through in person? A consultation includes the 3D
       scan and a straight answer about what your case needs.
-      <a class="pk-more" href="contact.html#book">Book a consultation</a></p>
+      <a class="more-link_component" href="contact.html#book">Book a consultation</a></p>
   </div>
 </section>
 
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -453,18 +453,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

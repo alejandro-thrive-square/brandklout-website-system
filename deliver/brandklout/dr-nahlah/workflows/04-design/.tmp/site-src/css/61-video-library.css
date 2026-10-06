@@ -3,18 +3,18 @@
    is a <button>, not a link with a fake role: it does something on this page
    rather than going anywhere, so the element and the behaviour agree and
    keyboard support comes free. */
-.vl-lead{margin:0}
-.vl-frame{position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg-3);
+.video_lead-film{margin:0}
+.video_frame{position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg-3);
   border:1px solid var(--line)}
-.vl-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.vl-lead figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+.video_frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video_lead-film figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 
-.vl-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
-.vl-card{display:grid;gap:.9rem;padding:0;border:0;background:none;text-align:left;
+.video_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
+.video_card{display:grid;gap:.9rem;padding:0;border:0;background:none;text-align:left;
   cursor:pointer;color:inherit;font:inherit;align-content:start}
-.vl-card:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
-.vl-shot{position:relative;display:block;overflow:hidden;aspect-ratio:16/9;
+.video_card:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
+.video_thumbnail{position:relative;display:block;overflow:hidden;aspect-ratio:16/9;
   background:var(--bg-3);border:1px solid var(--line)}
 /* hqdefault is 480x360 (4:3) with the 16:9 frame letterboxed inside it, so the
    bars are exactly 45px top and bottom. `object-fit:cover` into a 16:9 box
@@ -26,20 +26,20 @@
    the frame keeps the speaker's face in the cell, which is the entire point of
    a thumbnail. Only the zoomed cards carry --vl-zoom, so the 16:9 ones are
    untouched by this. */
-.vl-shot img{width:100%;height:100%;object-fit:cover;transform:scale(var(--vl-zoom,1));
+.video_thumbnail img{width:100%;height:100%;object-fit:cover;transform:scale(var(--vl-zoom,1));
   transform-origin:center 26%;
   transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.vl-card:hover .vl-shot img{transform:scale(calc(var(--vl-zoom,1) * 1.04))}
-.vl-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:56px;height:56px;
+.video_card:hover .video_thumbnail img{transform:scale(calc(var(--vl-zoom,1) * 1.04))}
+.video_play-icon{position:absolute;left:50%;top:50%;translate:-50% -50%;width:56px;height:56px;
   border-radius:50%;display:grid;place-items:center;background:rgba(11,11,12,.62);
   backdrop-filter:blur(2px);transition:background .35s,scale .35s}
-.vl-play::after{content:"";border-left:14px solid #fff;border-block:9px solid transparent;
+.video_play-icon::after{content:"";border-left:14px solid #fff;border-block:9px solid transparent;
   margin-left:4px}
-.vl-card:hover .vl-play{background:var(--gold-deep);scale:1.06}
-.vl-card:focus-visible .vl-play{background:var(--gold-deep);scale:1.06}
-.vl-title{font-family:var(--f-display);font-size:calc(1.16rem * var(--t-sm));font-weight:500;
+.video_card:hover .video_play-icon{background:var(--gold-deep);scale:1.06}
+.video_card:focus-visible .video_play-icon{background:var(--gold-deep);scale:1.06}
+.video_title{font-family:var(--f-display);font-size:calc(1.16rem * var(--t-sm));font-weight:500;
   line-height:1.3;color:var(--fg)}
-.vl-note{margin-top:clamp(2rem,4vw,3rem);max-width:62ch;color:var(--fg-body);font-weight:300}
+.video_note{margin-top:clamp(2rem,4vw,3rem);max-width:62ch;color:var(--fg-body);font-weight:300}
 
-@media(min-width:700px){ .vl-grid{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:1080px){ .vl-grid{grid-template-columns:repeat(3,1fr)} }
+@media(min-width:700px){ .video_grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1080px){ .video_grid{grid-template-columns:repeat(3,1fr)} }

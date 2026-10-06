@@ -3,7 +3,7 @@
    Registered against .ch-reality; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-reality", function (W) {
+WZ.section("section_reality", function (W) {
   var root = document.getElementById('reality');
   var big  = document.getElementById('realityBig');
 

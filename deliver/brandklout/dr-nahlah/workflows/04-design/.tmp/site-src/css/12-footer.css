@@ -1,23 +1,23 @@
-/* Every selector here is anchored to `footer.foot`, not the bare class.
-   A chapter on the home page also carries a `.foot` caption row, and the
-   unanchored `.foot{background:var(--black)}` rule was painting a black
+/* Every selector here is anchored to `footer.footer_component`, not the bare class.
+   A chapter on the home page also carries a `.footer_component` caption row, and the
+   unanchored `.footer_component{background:var(--black)}` rule was painting a black
    plate behind it — inside a cream-coloured section, under dark text. */
-footer.foot{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
+footer.footer_component{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
   padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
-footer.foot .foot-grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
-footer.foot img{width:190px;margin-bottom:1.25rem}
-footer.foot h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+footer.footer_component .footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+footer.footer_component img{width:190px;margin-bottom:1.25rem}
+footer.footer_component h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
   font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
-footer.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
-footer.foot a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
-footer.foot a:hover{color:var(--gold)}
-footer.foot .foot-blurb{color:rgba(255,255,255,.62);font-weight:300;max-width:34ch;font-size:.92rem}
+footer.footer_component ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+footer.footer_component a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
+footer.footer_component a:hover{color:var(--gold)}
+footer.footer_component .footer_blurb{color:rgba(255,255,255,.62);font-weight:300;max-width:34ch;font-size:.92rem}
 /* Hours are facts, not navigation — they were anchor links before, which
    gave keyboard users four tab stops that went nowhere useful. */
-footer.foot .foot-facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
+footer.footer_component .footer_facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
   color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300}
-footer.foot .foot-facts b{color:rgba(255,255,255,.9);font-weight:500}
-footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
+footer.footer_component .footer_facts b{color:rgba(255,255,255,.9);font-weight:500}
+footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
   border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:1rem;
   justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55)}
-@media(min-width:720px){ footer.foot .foot-grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }
+@media(min-width:720px){ footer.footer_component .footer_grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }

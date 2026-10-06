@@ -34,12 +34,12 @@
    keep its contents list even if the animation runtime failed to load. The
    rails are a separate module below, because they do depend on it.
    ============================================================================= */
-WZ.dom('blog-post', '.bl-post', function () {
-  var post = document.querySelector('.bl-post');
-  var body = post && post.querySelector('.bl-body');
+WZ.dom('blog-post', '.article_component', function () {
+  var post = document.querySelector('.article_component');
+  var body = post && post.querySelector('.article_body');
   if (!body) return;
 
-  var hero = document.querySelector('.pg-hero.bl-ph');
+  var hero = document.querySelector('.section_page-hero.is-article-hero');
   /* The region the outlet renders into. Everything the entry brought with it is
      inside this one element, not spread across .bl-body. */
   var region = body.firstElementChild && body.firstElementChild.children.length
@@ -51,7 +51,7 @@ WZ.dom('blog-post', '.bl-post', function () {
      hero this leaves the article exactly as it was rather than beheading it. */
   if (hero) {
     var when = region.querySelector('.bl-when');
-    var slot = hero.querySelector('.bl-ph-when');
+    var slot = hero.querySelector('.article_hero-date');
     if (when && slot) slot.textContent = (when.textContent || '').trim();
     if (when) when.remove();
     var h1 = region.querySelector('h1');
@@ -76,7 +76,7 @@ WZ.dom('blog-post', '.bl-post', function () {
 
   if (heads.length >= 3) {
     nav = document.createElement('nav');
-    nav.className = 'bl-toc';
+    nav.className = 'article_contents';
     nav.setAttribute('aria-labelledby', 'blTocTitle');
 
     var h = document.createElement('b');
@@ -121,7 +121,7 @@ WZ.dom('blog-post', '.bl-post', function () {
        In the rail the list is a column of its own; in the flow it is a bordered
        block after the lede. Same node either way — a copy in each would drift
        the moment one of them gained a state. */
-    var railL = document.querySelector('.bl-rail-l');
+    var railL = document.querySelector('.is-left-rail');
     var wide = window.matchMedia('(min-width: 1280px)');
     var place = function () {
       if (!railL) return;
@@ -159,13 +159,13 @@ WZ.dom('blog-post', '.bl-post', function () {
   var questions = heads.filter(function (h) { return /\?\s*$/.test((h.textContent || '').trim()); });
   if (questions.length >= 3) {
     var faq = document.createElement('section');
-    faq.className = 'bl-faq';
+    faq.className = 'article_faq';
     var faqTitle = document.createElement('b');
     faqTitle.textContent = 'Common questions';
     faq.appendChild(faqTitle);
 
     var acc = document.createElement('div');
-    acc.className = 'pk-faq';
+    acc.className = 'faq_list';
     faq.appendChild(acc);
 
     var schema = [];
@@ -185,13 +185,13 @@ WZ.dom('blog-post', '.bl-post', function () {
       d.appendChild(s);
 
       var fb = document.createElement('div');
-      fb.className = 'fa-body';
+      fb.className = 'faq_answer';
       var p = document.createElement('p');
       p.textContent = (paras[0].textContent || '').trim();
       fb.appendChild(p);
 
       var more = document.createElement('a');
-      more.className = 'pk-more';
+      more.className = 'more-link_component';
       more.href = '#' + head.id;
       more.textContent = paras.length > 1 ? 'Read the full answer' : 'Read it in context';
       fb.appendChild(more);
@@ -209,9 +209,9 @@ WZ.dom('blog-post', '.bl-post', function () {
     });
 
     if (acc.children.length >= 3) {
-      var cta = post.querySelector('.bl-cta');
+      var cta = post.querySelector('.article_cta');
       if (cta && cta.parentNode) cta.parentNode.insertBefore(faq, cta);
-      else (document.querySelector('.bl-main') || post).appendChild(faq);
+      else (document.querySelector('.article_main') || post).appendChild(faq);
 
       /* The anchors have to travel through the smoother like every other one. */
       acc.addEventListener('click', function (e) {
@@ -237,17 +237,17 @@ WZ.dom('blog-post', '.bl-post', function () {
   }
 
   /* ---- related ----------------------------------------------------------- */
-  var strip = document.querySelector('.bl-related');
+  var strip = document.querySelector('.article_related');
   if (!strip) return;
   var here = location.pathname.replace(/\/$/, '');
-  var cards = [].slice.call(strip.querySelectorAll('.bl-rel-card'));
+  var cards = [].slice.call(strip.querySelectorAll('.article_related-card'));
   var shown = 0;
   cards.forEach(function (card) {
     var link = card.querySelector('a[href]');
     var href = link ? link.getAttribute('href').replace(/\/$/, '') : '';
     if (href === here || shown >= 3) { card.remove(); return; }
     /* A row with no featured image would otherwise show an empty grey plate. */
-    var fig = card.querySelector('.bl-rel-fig');
+    var fig = card.querySelector('.blog_card-image');
     var img = fig && fig.querySelector('img');
     if (fig && (!img || !img.getAttribute('src'))) fig.remove();
     shown++;
@@ -272,9 +272,9 @@ WZ.dom('blog-post', '.bl-post', function () {
    Registered with WZ.section rather than WZ.dom so it runs AFTER the smoother
    exists and measures the settled layout.
    ============================================================================= */
-WZ.section('blog-rails', '.bl-post', function (W) {
+WZ.section('blog-rails', '.article_component', function (W) {
   if (W.reduced || !window.ScrollTrigger || !window.gsap) return;
-  var main = document.querySelector('.bl-main');
+  var main = document.querySelector('.article_main');
   if (!main) return;
 
   var TOP = 120;          /* clear of the nav, which is 96px plus its progress bar */
@@ -287,7 +287,7 @@ WZ.section('blog-rails', '.bl-post', function (W) {
      with the same stack; the consult block at the end of the article is what
      carries the CTA the rest of the way down. */
   mm.add('(min-width: 1280px)', function () {
-    var rail = document.querySelector('.bl-rail-l');
+    var rail = document.querySelector('.is-left-rail');
     if (!rail || !rail.firstElementChild) return;
     /* Still guarded: a 20-heading contents list on a short window would hide
        its own tail. Then it simply scrolls, and the layout is unchanged. */

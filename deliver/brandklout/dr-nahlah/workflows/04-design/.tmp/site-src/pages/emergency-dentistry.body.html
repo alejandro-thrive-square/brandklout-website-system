@@ -15,23 +15,23 @@
      This is also the only page whose source has THREE <h1>s (see the inventory
      defect list, finding 2). The rebuild has one.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/pt-hero-4.jpg" alt="A patient being seen at the practice" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Emergency Dentistry</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Emergency Dentistry</span></div>
     <h1 data-split>High-quality dentistry when you need it <em>most</em>.</h1>
-    <p class="ph-lead" data-rv>Not usually the emergency room. Wherever possible, space is made to see you the same day.</p>
-    <div class="ph-actions" data-rv>
+    <p class="page-hero_lead" data-rv>Not usually the emergency room. Wherever possible, space is made to see you the same day.</p>
+    <div class="page-hero_actions" data-rv>
       <!-- New-patient number, not the current-patient one. The McLean
            current-patient number is still disputed (448-3312 vs 493-1358, see
            SITE.md "Still open"), and the emergency page is the last place to
            publish a number nobody has confirmed. -->
-      <a class="btn btn-primary magnetic" href="tel:+17034483312"><span>Call (703) 448-3312</span></a>
-      <a class="btn btn-ghost magnetic" href="#symptoms"><span>What to do right now</span></a>
+      <a class="button is-primary is-magnetic" href="tel:+17034483312"><span>Call (703) 448-3312</span></a>
+      <a class="button is-secondary is-magnetic" href="#symptoms"><span>What to do right now</span></a>
     </div>
-    <div class="ph-meta" data-rv="stagger">
+    <div class="page-hero_meta" data-rv="stagger">
       <div><b>Same day</b><span>Wherever possible</span></div>
       <div><b>2 offices</b><span>McLean and Alexandria</span></div>
       <div><b>Sedation</b><span>Available if you need it</span></div>
@@ -40,9 +40,9 @@
 </section>
 
 <!-- ---------- 911 notice ---------- -->
-<section class="pk pk-alt" id="medical">
-  <div class="wrap section">
-    <div class="em-notice" data-rv>
+<section class="section_content is-background-alternate" id="medical">
+  <div class="container-large padding-section-large">
+    <div class="emergency_notice" data-rv>
       <b>Dental emergency, or medical emergency?</b>
       <p>If you have <strong>neck or head pain</strong>, are <strong>bleeding
         uncontrollably</strong>, <strong>feel dizzy</strong>, or have suffered
@@ -53,38 +53,38 @@
         the practice.</p>
     </div>
 
-    <div class="mz mz-4" data-rv="stagger">
-      <figure class="mz-fig">
+    <div class="mosaic_component is-four-tiles" data-rv="stagger">
+      <figure class="mosaic_item">
         <img src="assets/dental-emergency-sign.jpg" alt="Emergency dental care signage" loading="lazy">
-        <figcaption class="mz-cap">Seen the same day</figcaption>
+        <figcaption class="mosaic_caption">Seen the same day</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/tech-advanced.jpg" alt="Diagnostic imaging at the practice" loading="lazy">
-        <figcaption class="mz-cap">Diagnosed fast</figcaption>
+        <figcaption class="mosaic_caption">Diagnosed fast</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/sedation-patient.jpg" alt="A patient sedated for emergency treatment" loading="lazy">
-        <figcaption class="mz-cap">Sedation available</figcaption>
+        <figcaption class="mosaic_caption">Sedation available</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/office-room.jpg" alt="A treatment suite at the practice" loading="lazy">
-        <figcaption class="mz-cap">Two offices</figcaption>
+        <figcaption class="mosaic_caption">Two offices</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ---------- conditions ---------- -->
-<section class="pk" id="conditions">
-  <div class="wrap section pk-split">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content" id="conditions">
+  <div class="container-large padding-section-large split_component">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/emergency-patient.jpg" alt="A patient being treated at the practice" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">What Counts</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">What Counts</span></div>
       <h2 data-split>Eight reasons to call the same day.</h2>
       <p data-rv>The first question is usually whether it is one at all. If any of these are true, it is.</p>
-      <ul class="sp-list" data-rv="stagger">
+      <ul class="bullet-list_component" data-rv="stagger">
         <li><i></i>Sudden or severe toothache</li>
         <li><i></i>An infected or abscessed tooth</li>
         <li><i></i>A loose tooth or filling</li>
@@ -101,42 +101,42 @@
 </section>
 
 <!-- ---------- symptoms ---------- -->
-<section class="pk pk-light" id="symptoms">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Right Now</span></div>
+<section class="section_content is-background-light" id="symptoms">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Right Now</span></div>
       <h2 data-split>Five situations, and what to do before you arrive.</h2>
       <p>The first twenty minutes matter more in some of these than in others.</p>
     </div>
-    <div class="pk-faq" data-rv="stagger">
+    <div class="faq_list" data-rv="stagger">
       <details>
         <summary>A knocked-out tooth</summary>
-        <div class="fa-body"><strong>Act now. This one is time-critical.</strong> Put the tooth
+        <div class="faq_answer"><strong>Act now. This one is time-critical.</strong> Put the tooth
           back in its socket and hold it there. If you cannot, place it in a small container of
           <strong>milk</strong>. Do not scrub it clean. Replaced in time and splinted, it may be
           saveable. The same applies to a partially dislodged tooth.</div>
       </details>
       <details>
         <summary>A toothache that will not go away</summary>
-        <div class="fa-body">Persistent pain generally means infection, often inside the tooth.
+        <div class="faq_answer">Persistent pain generally means infection, often inside the tooth.
           Sometimes a filling is the whole answer. Sharp pain on biting points to the root, and those
           cases usually need root canal therapy.</div>
       </details>
       <details>
         <summary>A broken tooth</summary>
-        <div class="fa-body">Minor chips can wait for a normal appointment. A tooth fractured after
+        <div class="faq_answer">Minor chips can wait for a normal appointment. A tooth fractured after
           trauma cannot, because the damage may run past the surface. A filling, a crown or a root
           canal, depending on the break; the most severe need an emergency extraction.</div>
       </details>
       <details>
         <summary>An abscess</summary>
-        <div class="fa-body">An infection from an injury, a cavity or previous dental work can form
+        <div class="faq_answer">An infection from an injury, a cavity or previous dental work can form
           an abscess at the base of the tooth root. Treatment frequently means an emergency root
           canal to clear the damaged pulp out of the root.</div>
       </details>
       <details>
         <summary>Dry socket, after an extraction</summary>
-        <div class="fa-body">If the pain after an extraction has become intense, the clot in the
+        <div class="faq_answer">If the pain after an extraction has become intense, the clot in the
           socket may have been dislodged, exposing bone and nerve. Treat it immediately: the socket
           is cleaned and packed with gauze.</div>
       </details>
@@ -145,75 +145,75 @@
 </section>
 
 <!-- ---------- what to expect ---------- -->
-<section class="pk pk-alt" id="expect">
-  <div class="wrap section pk-split pk-split-rev">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content is-background-alternate" id="expect">
+  <div class="container-large padding-section-large split_component is-image-right">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/tech-advanced.jpg" alt="Diagnostic technology at the practice" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">On Arrival</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">On Arrival</span></div>
       <h2 data-split>Diagnosed quickly, then made comfortable.</h2>
       <p data-rv>Working out what is wrong fast is most of the job in an emergency; a wrong
         diagnosis costs more time than the treatment does.</p>
       <p data-rv>Sterilization protocols are strict, and you get a <strong>custom level of sedation</strong>,
         which matters here more than anywhere: people arriving in pain are rarely calm.</p>
-      <p data-rv><a class="pk-more" href="sedation-dentistry.html">Sedation options</a></p>
+      <p data-rv><a class="more-link_component" href="sedation-dentistry.html">Sedation options</a></p>
     </div>
   </div>
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk" id="next">
-  <div class="wrap section">
-    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
-    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="dental-conditions.html"><span class="nx-k">Not urgent</span>
-        <span class="nx-t">Conditions We Treat</span>
-        <span class="nx-d">Ten everyday problems, and what each one usually turns out to be.</span></a>
-      <a href="oral-surgery.html"><span class="nx-k">If it has to come out</span>
-        <span class="nx-t">Oral Surgery</span>
-        <span class="nx-d">Extractions planned around what will replace the tooth.</span></a>
-      <a href="contact.html"><span class="nx-k">Where</span>
-        <span class="nx-t">Contact &amp; Locations</span>
-        <span class="nx-d">Both offices, hours and directions.</span></a>
+<section class="section_content" id="next">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component"><h2 data-split>Where to go next.</h2></div>
+    <nav class="related-pages_component" data-rv="stagger" aria-label="Related pages">
+      <a href="dental-conditions.html"><span class="related-pages_tagline">Not urgent</span>
+        <span class="related-pages_title">Conditions We Treat</span>
+        <span class="related-pages_description">Ten everyday problems, and what each one usually turns out to be.</span></a>
+      <a href="oral-surgery.html"><span class="related-pages_tagline">If it has to come out</span>
+        <span class="related-pages_title">Oral Surgery</span>
+        <span class="related-pages_description">Extractions planned around what will replace the tooth.</span></a>
+      <a href="contact.html"><span class="related-pages_tagline">Where</span>
+        <span class="related-pages_title">Contact &amp; Locations</span>
+        <span class="related-pages_description">Both offices, hours and directions.</span></a>
     </nav>
   </div>
 </section>
 
 <!-- ---------- cta ---------- -->
-<section class="pk pk-cta" id="book">
-  <div class="wrap section cta-in">
+<section class="section_content cta-band_component" id="book">
+  <div class="container-large padding-section-large cta-band_content">
     <h2 data-split>Resolve your toothache today.</h2>
     <p data-rv>Stay calm and call without delay.</p>
     <!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
          books every reader into one office; see add-cta-offices.mjs. -->
-    <div class="cta-offices" data-rv="stagger">
-      <article class="ct-office">
+    <div class="cta-band_offices" data-rv="stagger">
+      <article class="office-card_component">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+        <a class="button is-primary is-magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
-      <article class="ct-office">
+      <article class="office-card_component">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+15716177245">(571) 617-7245</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+        <a class="button is-primary is-magnetic" href="https://flexbook.me/drnahlah"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
     </div>

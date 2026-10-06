@@ -1,4 +1,4 @@
-.ga-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
+.gallery_filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 /* LIGHT-THEME FILTERS. These were dark-theme whites until 2026-08-11, when
    regenerating the gallery reverted the light inversion (SITE.md bug 21)
    and dropped every inactive filter button to 1.04:1. The generator is the
@@ -6,15 +6,15 @@
    survives exactly until the next run — fix it HERE.
    White on --gold-deep is 4.06:1, under AA, so the active chip takes
    --gold-ink. */
-.ga-filters button{border:1px solid var(--line-strong);padding:.6rem 1.15rem;
+.gallery_filters button{border:1px solid var(--line-strong);padding:.6rem 1.15rem;
   font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
   color:var(--fg-soft);transition:background .35s,color .35s,border-color .35s}
-.ga-filters button:hover{border-color:var(--rule);color:var(--fg)}
-.ga-filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
+.gallery_filters button:hover{border-color:var(--rule);color:var(--fg)}
+.gallery_filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
   color:#fff}
-.ga-filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
-.ga-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
-@media(min-width:700px){ .ga-grid{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:1100px){ .ga-grid{grid-template-columns:repeat(3,1fr)} }
-.ga-item[hidden]{display:none}
+.gallery_filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
+.gallery_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+@media(min-width:700px){ .gallery_grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1100px){ .gallery_grid{grid-template-columns:repeat(3,1fr)} }
+.gallery_item[hidden]{display:none}
 .ga-empty{color:var(--fg-soft);font-weight:400}

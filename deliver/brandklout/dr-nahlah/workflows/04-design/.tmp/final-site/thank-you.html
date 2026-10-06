@@ -94,20 +94,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -117,10 +117,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -129,9 +129,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -141,7 +141,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -150,7 +150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -161,7 +161,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -172,7 +172,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -183,7 +183,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -231,17 +231,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      Three different Flexbook URLs are in use on the old site and which survives
      is unresolved — see SITE.md, "Still open".
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/interior.jpg" alt="The practice interior in McLean, Virginia" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Thank you</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Thank you</span></div>
     <h1 data-split>That is <em>received</em>.</h1>
-    <p class="ph-lead" data-rv>Your consultation request has reached the practice. A member of the
+    <p class="page-hero_lead" data-rv>Your consultation request has reached the practice. A member of the
       team will call you to arrange a time, and to answer anything you would rather ask before you
       come in.</p>
-    <div class="ph-meta" data-rv>
+    <div class="page-hero_meta" data-rv>
       <div><b>1 business day</b><span>Typical time to hear back</span></div>
       <div><b>Mon&ndash;Thu 8&ndash;5</b><span>Fri until 2</span></div>
       <div><b>No cost</b><span>The consultation itself</span></div>
@@ -250,35 +250,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- what happens next ---------- -->
-<section class="pk pk-alt" id="next-steps">
-  <div class="wrap section">
-    <div class="pk-head" data-rv>
-      <span class="label">What happens now</span>
+<section class="section_content is-background-alternate" id="next-steps">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component" data-rv>
+      <span class="text-style-tagline">What happens now</span>
       <h2>Three things, in this order.</h2>
       <p>Nothing here needs anything from you until the call.</p>
     </div>
-    <div class="pk-cards pk-cards-3" data-rv="stagger">
-      <article class="pk-card">
-        <span class="pk-card-n">01</span>
+    <div class="card_grid is-three-column" data-rv="stagger">
+      <article class="card_component">
+        <span class="card_number">01</span>
         <h3>We call you</h3>
         <p>Usually within one business day. If you sent this over a weekend, expect Monday. We will
           ask what is bothering you and roughly what you are hoping for, so the appointment is
           spent on you rather than on paperwork.</p>
       </article>
-      <article class="pk-card">
-        <span class="pk-card-n">02</span>
+      <article class="card_component">
+        <span class="card_number">02</span>
         <h3>You come in for the consultation</h3>
         <p>Around an hour. A 3D scan where it is useful, a look at what is actually going on, and a
           straight answer about what can be done, including when the answer is that you do
           not need what you thought you needed.</p>
-        <a class="pk-readon" href="patient-center.html">What to bring</a>
+        <a class="read-on_link" href="patient-center.html">What to bring</a>
       </article>
-      <article class="pk-card">
-        <span class="pk-card-n">03</span>
+      <article class="card_component">
+        <span class="card_number">03</span>
         <h3>You get the plan in writing</h3>
         <p>The options, what each involves, how long each takes and what each costs, before anything
           is booked. Financing is arranged at this stage if you want it.</p>
-        <a class="pk-readon" href="financing.html">Insurance and financing</a>
+        <a class="read-on_link" href="financing.html">Insurance and financing</a>
       </article>
     </div>
   </div>
@@ -287,38 +287,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ---------- what to expect, shown ----------
      Added 2026-08-19. The page had two images and three short prose blocks; the
      mosaic carries the same four promises the copy makes. -->
-<section class="pk pk-alt" id="expect-shots">
-  <div class="wrap section">
-    <div class="mz mz-4" data-rv="stagger">
-      <figure class="mz-fig">
+<section class="section_content is-background-alternate" id="expect-shots">
+  <div class="container-large padding-section-large">
+    <div class="mosaic_component is-four-tiles" data-rv="stagger">
+      <figure class="mosaic_item">
         <img src="assets/pt-interaction.jpg" alt="The front office at the practice" loading="lazy">
-        <figcaption class="mz-cap">A person, not a queue</figcaption>
+        <figcaption class="mosaic_caption">A person, not a queue</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/tech-hero.jpg" alt="The cone-beam scanner at the practice" loading="lazy">
-        <figcaption class="mz-cap">The 3D scan</figcaption>
+        <figcaption class="mosaic_caption">The 3D scan</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/consult-discussion.jpg" alt="A consultation at the practice" loading="lazy">
-        <figcaption class="mz-cap">Time with the specialist</figcaption>
+        <figcaption class="mosaic_caption">Time with the specialist</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/practice-space-1.avif" alt="The waiting area at the practice" loading="lazy">
-        <figcaption class="mz-cap">Two offices</figcaption>
+        <figcaption class="mosaic_caption">Two offices</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ---------- if it is urgent ---------- -->
-<section class="pk" id="urgent">
-  <div class="wrap section pk-split">
-    <div class="sp-copy" data-rv>
-      <span class="label">If you cannot wait</span>
+<section class="section_content" id="urgent">
+  <div class="container-large padding-section-large split_component">
+    <div class="split_content" data-rv>
+      <span class="text-style-tagline">If you cannot wait</span>
       <h2>Call the office directly.</h2>
       <p>If you are in pain, have broken a tooth, or have a denture or a temporary that has come
         loose, do not wait for the callback. Phone whichever office is closer and say it is urgent.</p>
-      <div class="pk-phones">
+      <div class="phone-list_component">
         <div>
           <span>Tysons Corner &middot; McLean</span>
           <a href="tel:+17034483312">(703) 448-3312</a>
@@ -328,41 +328,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="tel:+15716177245">(571) 617-7245</a>
         </div>
       </div>
-      <a class="pk-readon pk-readon-block" href="emergency-dentistry.html">Emergency care &rarr;</a>
+      <a class="read-on_link is-block" href="emergency-dentistry.html">Emergency care &rarr;</a>
     </div>
     <!-- data-drift belongs on the IMG, not on the figure. The drift scales its
          target 1.12; on the img, which is absolutely positioned inside this
          overflow:hidden figure, that is clipped. On the FIGURE it scales the
          clipping container itself, and at 390px the 21px of extra width either
          side beat the 17px gutter and put 4px of horizontal scroll on the page. -->
-    <figure class="sp-fig">
+    <figure class="split_image-wrapper">
       <img src="assets/office-hero.jpg" alt="The reception and waiting area" data-drift loading="lazy">
     </figure>
   </div>
 </section>
 
 <!-- ---------- onward ---------- -->
-<section class="pk pk-light" id="meanwhile">
-  <div class="wrap section">
-    <div class="pk-head" data-rv>
-      <span class="label">While you wait</span>
+<section class="section_content is-background-light" id="meanwhile">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component" data-rv>
+      <span class="text-style-tagline">While you wait</span>
       <h2>Worth a look before you come in.</h2>
     </div>
-    <div class="pk-next" data-rv="stagger">
+    <div class="related-pages_component" data-rv="stagger">
       <a href="smile-gallery.html">
-        <span class="nx-k">Gallery</span>
-        <span class="nx-t">Before and after</span>
-        <span class="nx-d">The practice's own cases, filterable by treatment.</span>
+        <span class="related-pages_tagline">Gallery</span>
+        <span class="related-pages_title">Before and after</span>
+        <span class="related-pages_description">The practice's own cases, filterable by treatment.</span>
       </a>
       <a href="patient-stories.html">
-        <span class="nx-k">Stories</span>
-        <span class="nx-t">Patients on film</span>
-        <span class="nx-d">Six people who went through it, in their own words.</span>
+        <span class="related-pages_tagline">Stories</span>
+        <span class="related-pages_title">Patients on film</span>
+        <span class="related-pages_description">Six people who went through it, in their own words.</span>
       </a>
       <a href="meet-dr-nahlah.html">
-        <span class="nx-k">Doctor</span>
-        <span class="nx-t">Meet Dr. Nahlah</span>
-        <span class="nx-d">Fourteen board credentials, and what a prosthodontist actually is.</span>
+        <span class="related-pages_tagline">Doctor</span>
+        <span class="related-pages_title">Meet Dr. Nahlah</span>
+        <span class="related-pages_description">Fourteen board credentials, and what a prosthodontist actually is.</span>
       </a>
     </div>
   </div>
@@ -371,12 +371,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -413,18 +413,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

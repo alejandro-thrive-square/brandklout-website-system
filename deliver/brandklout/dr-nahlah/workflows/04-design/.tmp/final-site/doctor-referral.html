@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>For Referring Doctors | Implant Referrals | McLean, VA</title>
-<meta name="description" content="Refer a patient for prosthodontic, implant or full-arch treatment: CBCT planning, guided surgery and an in-house digital lab in one Tysons Corner facility.">
+<title>Refer a Patient to a Prosthodontist | McLean, VA</title>
+<meta name="description" content="Referring doctors: send implant, full-arch and prosthodontic cases to Dr. Esam Nahlah in McLean, VA. CBCT planning, guided surgery and an in-house lab.">
 <meta property="og:title" content="For Referring Doctors | Dr. Nahlah, McLean &amp; Alexandria">
 <meta property="og:description" content="Diagnosis, surgery and prosthetics in one building, so a complex case does not fragment across three practices.">
 <meta property="og:type" content="website">
@@ -111,20 +111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -134,10 +134,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -146,9 +146,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -158,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -200,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -249,19 +249,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         on the source page. Whether it still runs, and where it is hosted, is
         unconfirmed — so it is described, not wired.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/dr-with-patient.jpg" alt="Dr. Nahlah treating a patient" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>For Referring Doctors</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>For Referring Doctors</span></div>
     <h1 data-split>You will love how we treat your <em>referred</em> patients.</h1>
-    <p class="ph-lead" data-rv>A prosthodontic and implant referral practice in Tysons Corner. Thank you for partnering with us.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="#referral-form"><span>Refer a patient</span></a>
-      <a class="btn btn-ghost magnetic" href="/patient-referral-form.pdf" target="_blank" rel="noopener"><span>Download the referral form</span></a>
+    <p class="page-hero_lead" data-rv>A prosthodontic and implant referral practice in Tysons Corner. Thank you for partnering with us.</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="#referral-form"><span>Refer a patient</span></a>
+      <a class="button is-secondary is-magnetic" href="/patient-referral-form.pdf" target="_blank" rel="noopener"><span>Download the referral form</span></a>
     </div>
-    <div class="ph-meta" data-rv="stagger">
+    <div class="page-hero_meta" data-rv="stagger">
       <div><b>Prosthodontics</b><span>Board certified</span></div>
       <div><b>7,000+</b><span>Full-mouth implants placed</span></div>
       <div><b>In-house lab</b><span>In both practices</span></div>
@@ -276,18 +276,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      split, not Stone's dark card. The preview is page 1 of the practice's own
      Front.pdf. Both PDFs are hosted in GHL media (Instatic refuses PDFs) and
      reached through drnahlah_301 rows, so the links stay on this domain. -->
-<section class="pk" id="referral-forms">
-  <div class="wrap section pk-split">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content" id="referral-forms">
+  <div class="container-large padding-section-large split_component">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/referral-form-card.jpg" alt="The practice's printed patient referral form" loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Referral Forms</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Referral Forms</span></div>
       <h2 data-split>For referring doctors.</h2>
       <p data-rv>Refer online with the form below, or download the printed referral form, fill it
         in and fax it to (703) 448-3938 or send it with the patient.</p>
-      <div class="ph-actions" data-rv>
-        <a class="btn btn-primary magnetic" href="/patient-referral-form.pdf" target="_blank" rel="noopener"><span>Download referral form</span></a>
+      <div class="page-hero_actions" data-rv>
+        <a class="button is-primary is-magnetic" href="/patient-referral-form.pdf" target="_blank" rel="noopener"><span>Download referral form</span></a>
       </div>
     </div>
   </div>
@@ -298,10 +298,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      GHL). The embed is partials/referral-survey.html, inlined by build-site.mjs
      (the include marker). The native webhook form it replaced is
      partials/referral-form.html, kept in git, not used. -->
-<section class="pk pk-light" id="referral-form">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Refer Online</span></div>
+<section class="section_content is-background-light" id="referral-form">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Refer Online</span></div>
       <h2 data-split>Send a referral.</h2>
       <p>The same form as the printed one. It goes straight to the Tysons Corner &middot; McLean office.</p>
     </div>
@@ -325,24 +325,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      them. This is the home page's #reviews block (37-ch-proof.css styles it
      globally) with the same live ReputationHub feed; on the platform the feed
      is the same brandklout Embed block the home page carries. -->
-<section class="pk pk-alt" id="patient-reviews">
-  <div class="wrap section">
-    <div class="pf-reviews" id="reviews">
-      <div class="rv-head">
+<section class="section_content is-background-alternate" id="patient-reviews">
+  <div class="container-large padding-section-large">
+    <div class="proof_reviews" id="reviews">
+      <div class="reviews_head">
         <div>
           <h3>What patients say afterwards.</h3>
-          <p class="rv-sub">Recent Google reviews from both practices. Their words, not ours.</p>
+          <p class="reviews_subtitle">Recent Google reviews from both practices. Their words, not ours.</p>
         </div>
-        <div class="rv-score">
+        <div class="reviews_score">
           <img src="assets/google.svg" alt="Google" width="48" height="48" loading="lazy">
           <div>
-            <b><span id="rvScore">4.9</span> <i class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i></b>
+            <b><span id="rvScore">4.9</span> <i class="reviews_stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i></b>
             <span>Google reviews &middot; both offices</span>
           </div>
         </div>
       </div>
-      <div class="rv-live" data-widget="https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7?widgetId=6a7340db2bbe7819cc3536f4" data-probing></div>
-      <a class="rv-more" href="patient-stories.html">Read the patient stories <i></i></a>
+      <div class="reviews_live-widget" data-widget="https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7?widgetId=6a7340db2bbe7819cc3536f4" data-probing></div>
+      <a class="reviews_more-link" href="patient-stories.html">Read the patient stories <i></i></a>
     </div>
   </div>
 </section>
@@ -350,12 +350,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -392,18 +392,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

@@ -13,7 +13,7 @@
    Guarded on `#svcGrid` rather than `.ch-services` so the module travels with
    the grid and costs nothing on the 25 pages that do not carry it.
    ============================================================================= */
-WZ.section('ch-services', '#svcGrid', function (W) {
+WZ.section('section_services', '#svcGrid', function (W) {
   /* Reduced motion keeps the image, and drops the chase. Returning here means
      `.wz-svfollow` is never set, so the card's own image stays laid out — the
      same fallback a coarse pointer gets. That is deliberately NOT the magnetic
@@ -29,13 +29,13 @@ WZ.section('ch-services', '#svcGrid', function (W) {
   if (!document.documentElement.classList.contains('wz-fine')) return;
 
   var grid  = document.getElementById('svcGrid');
-  var cards = [].slice.call(grid.querySelectorAll('.sv-card'));
-  var shots = cards.map(function (c) { return c.querySelector('.sv-shot img'); });
+  var cards = [].slice.call(grid.querySelectorAll('.services_card'));
+  var shots = cards.map(function (c) { return c.querySelector('.services_image-wrapper img'); });
   if (!shots.some(Boolean)) return;   /* markup without images: leave the cards alone */
 
   /* --- the element ------------------------------------------------------- */
   var el = document.createElement('div');
-  el.className = 'sv-follow';
+  el.className = 'services_cursor-image';
   el.setAttribute('aria-hidden', 'true');
   var img = document.createElement('img');
   img.alt = '';

@@ -111,20 +111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -134,10 +134,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -146,9 +146,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -158,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -200,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -239,24 +239,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      ours. The Webflow source marks headings as bold paragraphs, so they are
      promoted to <h2> here, which is a semantics fix and not a copy change.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/office-hero.jpg" alt="The reception and waiting area" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Privacy Policy, Alexandria</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Privacy Policy, Alexandria</span></div>
     <h1 data-split>Privacy <em>statement</em>.</h1>
-    <p class="ph-lead" data-rv>Implants And Prosthodontics Specialists, PLLC DBA Dr. Nahlah Implants &amp; Prosthodontics Specialists (“we,” “us,” or “our”) respects your privacy and is committed to protecting the personal information you share with us through our website, https://www.drnahlah.com/ (the “Site”), and through our text messaging program. This Privacy Policy explains what information we collect, how we use it, with whom we share it, and the choices you have.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-ghost magnetic" href="#document"><span>Read the privacy policy</span></a>
+    <p class="page-hero_lead" data-rv>Implants And Prosthodontics Specialists, PLLC DBA Dr. Nahlah Implants &amp; Prosthodontics Specialists (“we,” “us,” or “our”) respects your privacy and is committed to protecting the personal information you share with us through our website, https://www.drnahlah.com/ (the “Site”), and through our text messaging program. This Privacy Policy explains what information we collect, how we use it, with whom we share it, and the choices you have.</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-secondary is-magnetic" href="#document"><span>Read the privacy policy</span></a>
     </div>
   </div>
 </section>
 
-<section class="pk pk-alt" id="document">
-  <div class="wrap section">
-    <div class="lg-body">
-      <p class="lg-intro" data-rv>Effective Date: August 18, 2026. This document governs the
+<section class="section_content is-background-alternate" id="document">
+  <div class="container-large padding-section-large">
+    <div class="legal_body">
+      <p class="legal_intro" data-rv>Effective Date: August 18, 2026. This document governs the
         Alexandria office. The McLean office is operated by a separate entity and has
         <a href="privacy-policy-mclean.html">its own privacy policy</a>.</p>
 
@@ -435,12 +435,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -477,18 +477,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

@@ -115,24 +115,24 @@ for (const [slug, cfg] of Object.entries(PAGES)) {
      ours. The Webflow source marks headings as bold paragraphs, so they are
      promoted to <h2> here, which is a semantics fix and not a copy change.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/${cfg.hero}" alt="${cfg.heroAlt}" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>${cfg.crumb}</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>${cfg.crumb}</span></div>
     <h1 data-split>${cfg.h1}</h1>
-    <p class="ph-lead" data-rv>${esc(nodash(intro[0] ? intro[0].text : ""))}</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-ghost magnetic" href="#document"><span>Read the ${cfg.kind.toLowerCase()}</span></a>
+    <p class="page-hero_lead" data-rv>${esc(nodash(intro[0] ? intro[0].text : ""))}</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-secondary is-magnetic" href="#document"><span>Read the ${cfg.kind.toLowerCase()}</span></a>
     </div>
   </div>
 </section>
 
-<section class="pk pk-alt" id="document">
-  <div class="wrap section">
-    <div class="lg-body">
-      <p class="lg-intro" data-rv>${esc(effective)}. This document governs the
+<section class="section_content is-background-alternate" id="document">
+  <div class="container-large padding-section-large">
+    <div class="legal_body">
+      <p class="legal_intro" data-rv>${esc(effective)}. This document governs the
         ${cfg.office} office. The ${cfg.otherOffice} office is operated by a separate entity and has
         <a href="${cfg.other}.html">its own ${cfg.kind.toLowerCase()}</a>.</p>
 
@@ -180,32 +180,32 @@ for (const [slug, cfg] of Object.entries(HUBS)) {
      question on its own. It keeps the address alive for inbound links and sends
      the reader to the document that actually governs their office.
      ========================================================================== -->
-<section class="pg-hero" id="hero" style="min-height:clamp(360px,44svh,480px)">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero" style="min-height:clamp(360px,44svh,480px)">
+  <div class="page-hero_background">
     <img src="assets/${cfg.hero}" alt="${cfg.heroAlt}" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>${cfg.kind}</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>${cfg.kind}</span></div>
     <h1 data-split>${cfg.h1}</h1>
-    <p class="ph-lead" data-rv>The two practices are operated by separate entities, so each has its
+    <p class="page-hero_lead" data-rv>The two practices are operated by separate entities, so each has its
       own ${cfg.kind.toLowerCase()}. Take the one for the office you are treated at.</p>
   </div>
 </section>
 
-<section class="pk pk-alt" id="choose">
-  <div class="wrap section">
-    <div class="lg-choose" data-rv="stagger">
-      <a class="lg-pick" href="${cfg.a}.html">
-        <span class="lg-pick-office">Tysons Corner, McLean</span>
-        <span class="lg-pick-entity">Esam Abou Nahlah, DDS, MS, PLLC</span>
-        <span class="lg-pick-addr">7901 Jones Branch Dr., Suite 220, McLean, VA 22102</span>
-        <span class="lg-more">Read the ${cfg.kind.toLowerCase()}</span>
+<section class="section_content is-background-alternate" id="choose">
+  <div class="container-large padding-section-large">
+    <div class="legal_office-choice" data-rv="stagger">
+      <a class="legal_office-link" href="${cfg.a}.html">
+        <span class="legal_office-name">Tysons Corner, McLean</span>
+        <span class="legal_office-entity">Esam Abou Nahlah, DDS, MS, PLLC</span>
+        <span class="legal_office-address">7901 Jones Branch Dr., Suite 220, McLean, VA 22102</span>
+        <span class="legal_office-more">Read the ${cfg.kind.toLowerCase()}</span>
       </a>
-      <a class="lg-pick" href="${cfg.b}.html">
-        <span class="lg-pick-office">Alexandria</span>
-        <span class="lg-pick-entity">Implants And Prosthodontics Specialists, PLLC</span>
-        <span class="lg-pick-addr">2855 Duke St, Alexandria, VA 22314</span>
-        <span class="lg-more">Read the ${cfg.kind.toLowerCase()}</span>
+      <a class="legal_office-link" href="${cfg.b}.html">
+        <span class="legal_office-name">Alexandria</span>
+        <span class="legal_office-entity">Implants And Prosthodontics Specialists, PLLC</span>
+        <span class="legal_office-address">2855 Duke St, Alexandria, VA 22314</span>
+        <span class="legal_office-more">Read the ${cfg.kind.toLowerCase()}</span>
       </a>
     </div>
   </div>

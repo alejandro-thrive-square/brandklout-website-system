@@ -137,8 +137,8 @@ const block = `      <!-- The practice's LIVE review feed, and on this page the 
            accepted cost of the client's 2026-09-22 call for embed-only.
            Cards are still generated for the veneers landing pages by
            gen-reviews-topic.mjs; do not re-add a wall here. -->
-      <div class="rv-live" data-widget="${WIDGET}" data-probing></div>
-      <a class="rv-more" href="patient-stories.html">Read the patient stories <i></i></a>`;
+      <div class="reviews_live-widget" data-widget="${WIDGET}" data-probing></div>
+      <a class="reviews_more-link" href="patient-stories.html">Read the patient stories <i></i></a>`;
 
 let page = fs.readFileSync(PAGE, "utf8");
 const BEGIN = "<!-- REVIEWS:BEGIN -->", END = "<!-- REVIEWS:END -->";
@@ -150,7 +150,7 @@ page = `${before}\n${block}\n      ${after}`;
 // The standfirst described the six FILMED stories these cards replaced, so it
 // would now be describing something that is not on the page. No count: see above.
 page = page.replace(
-  /(<p class="rv-sub">)[^<]*(<\/p>)/,
+  /(<p class="reviews_subtitle">)[^<]*(<\/p>)/,
   `$1Recent Google reviews from both practices. Their words, not ours.$2`);
 
 fs.writeFileSync(PAGE, page);

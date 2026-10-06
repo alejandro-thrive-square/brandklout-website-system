@@ -138,7 +138,7 @@
 
   /* --- magnetic buttons, pointer-fine only --- */
   if(!W.reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    document.querySelectorAll('.magnetic').forEach(function(el){
+    document.querySelectorAll('.is-magnetic').forEach(function(el){
       var xTo = gsap.quickTo(el,'x',{duration:.5,ease:'power3'}),
           yTo = gsap.quickTo(el,'y',{duration:.5,ease:'power3'});
       el.addEventListener('pointermove',function(e){
@@ -158,12 +158,12 @@
      the hover fill). Both are structure the CSS needs and neither survives a
      round trip, so they are rebuilt here rather than hand-patched per platform.
      A no-op wherever the markup arrived intact. */
-  document.querySelectorAll('.burger').forEach(function(b){
+  document.querySelectorAll('.nav_menu-button').forEach(function(b){
     if(b.querySelector('span')) return;
     b.appendChild(document.createElement('span'));
     b.appendChild(document.createElement('span'));
   });
-  document.querySelectorAll('.btn').forEach(function(b){
+  document.querySelectorAll('.button').forEach(function(b){
     if(b.querySelector('span') || !b.firstChild) return;
     var t = b.textContent.trim();
     if(!t) return;
@@ -173,7 +173,7 @@
   /* The filter chips read "All cases 54"; the count is a <b> so it can sit back
      at 78% opacity. Buttons are flattened to plain text on import, so the
      trailing digits are split back out here. */
-  document.querySelectorAll('.ga-filters button').forEach(function(btn){
+  document.querySelectorAll('.gallery_filters button').forEach(function(btn){
     if(btn.querySelector('b')) return;
     var m = /^(.*?)(\d+)$/.exec(btn.textContent.trim());
     if(!m) return;

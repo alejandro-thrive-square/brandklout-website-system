@@ -17,10 +17,10 @@
    does not animate. That matters more here than anywhere else on the site,
    because this is the section that explains what happens after they book.
    ============================================================================= */
-WZ.section("lp-steps", function (W) {
-  gsap.utils.toArray(".lp-steps").forEach(function (rail) {
-    var line = rail.querySelector(".lp-steps-line");
-    var steps = gsap.utils.toArray(rail.querySelectorAll(".lp-step"));
+WZ.section("landing-steps_component", function (W) {
+  gsap.utils.toArray(".landing-steps_component").forEach(function (rail) {
+    var line = rail.querySelector(".landing-steps_line");
+    var steps = gsap.utils.toArray(rail.querySelectorAll(".landing-steps_step"));
     if (!steps.length) return;
 
     /* Reduced motion gets the finished state, not the animation: the line full

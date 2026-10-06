@@ -65,18 +65,18 @@ const OFFICES = [
 
 const card = (o, indent) => {
   const i = ' '.repeat(indent)
-  return `${i}<article class="ct-office">
+  return `${i}<article class="office-card_component">
 ${i}  <h3>${o.name}</h3>
 ${i}  <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
 ${i}    ${o.lines[0]}<br>
 ${i}    ${o.lines[1]}</address>
-${i}  <div class="ct-office-line"><span>New patients</span>
+${i}  <div class="office-card_line"><span>New patients</span>
 ${i}    <a href="tel:${o.newTel[0]}">${o.newTel[1]}</a></div>
-${i}  <div class="ct-office-line"><span>Current patients</span>
+${i}  <div class="office-card_line"><span>Current patients</span>
 ${i}    <a href="tel:${o.curTel[0]}">${o.curTel[1]}</a></div>
-${i}  <a class="pk-more ct-office-dirs" href="${o.maps}"
+${i}  <a class="more-link_component office-card_directions" href="${o.maps}"
 ${i}     target="_blank" rel="noopener">Directions</a>
-${i}  <a class="btn btn-primary magnetic" href="${o.book}"
+${i}  <a class="button is-primary is-magnetic" href="${o.book}"
 ${i}     target="_blank" rel="noopener"><span>Book now</span></a>
 ${i}</article>`
 }
@@ -85,13 +85,13 @@ const block = (indent, id = '') => {
   const i = ' '.repeat(indent)
   return `${i}<!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
 ${i}     books every reader into one office; see add-cta-offices.mjs. -->
-${i}<div class="cta-offices"${id ? ` id="${id}"` : ''} data-rv="stagger">
+${i}<div class="cta-band_offices"${id ? ` id="${id}"` : ''} data-rv="stagger">
 ${OFFICES.map((o) => card(o, indent + 2)).join('\n')}
 ${i}</div>`
 }
 
 /* The lone button plus the phone row that followed it, on a .pk-cta band. */
-const PK_CTA = /([ \t]*)<a class="btn btn-dark magnetic"[^>]*>[\s\S]*?<\/a>\s*\n[ \t]*<div class="cta-phones"[^>]*>[\s\S]*?<\/div>/
+const PK_CTA = /([ \t]*)<a class="button is-dark is-magnetic"[^>]*>[\s\S]*?<\/a>\s*\n[ \t]*<div class="cta-band_phones"[^>]*>[\s\S]*?<\/div>/
 
 /**
  * Remove one whole element, opening tag to MATCHING close, by walking tag depth.
@@ -135,17 +135,17 @@ for (const file of fs.readdirSync(PAGES).filter((f) => f.endsWith('.body.html'))
   let s = crlf ? raw.replace(/\r\n/g, '\n') : raw
   const before = s
 
-  if (s.includes('class="cta-offices"')) { changed.push([file, 'already done']); continue }
+  if (s.includes('class="cta-band_offices"')) { changed.push([file, 'already done']); continue }
 
   if (file === 'home.body.html') {
     // 1. the standalone locations strip goes; the CTA band carries the offices.
-    const cut = cutElement(s, /<div class="iv-locs" id="locs">/)
-    if (!cut) { changed.push([file, 'NO CHANGE — .iv-locs not found']); continue }
+    const cut = cutElement(s, /<div class="invitation_locations" id="locs">/)
+    if (!cut) { changed.push([file, 'NO CHANGE — .invitation_locations not found']); continue }
     s = cut
     // 2. the lone button in the gold band becomes the two cards. Matched on the
     //    button itself, not on any comment above it, so this survives editing.
-    const IV_CTA = /([ \t]*)<a class="btn btn-dark magnetic"[^>]*>[\s\S]*?<\/a>/
-    if (!IV_CTA.test(s)) { changed.push([file, 'NO CHANGE — no .btn-dark in .iv-cta']); continue }
+    const IV_CTA = /([ \t]*)<a class="button is-dark is-magnetic"[^>]*>[\s\S]*?<\/a>/
+    if (!IV_CTA.test(s)) { changed.push([file, 'NO CHANGE — no .is-dark in .invitation_cta']); continue }
     s = s.replace(IV_CTA, (_m, indent) => block(indent.length, 'locs'))
   } else if (PK_CTA.test(s)) {
     s = s.replace(PK_CTA, (_m, indent) => block(indent.length))

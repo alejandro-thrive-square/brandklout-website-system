@@ -22,11 +22,11 @@
    The swap is one-way and the node is replaced, so a second click cannot stack
    two players, and there is nothing to tear down on the way out.
    ============================================================================= */
-WZ.dom("vl-card", function () {
-  if (!document.querySelector('.vl-card[data-yt]')) return;
+WZ.dom("video_card", function () {
+  if (!document.querySelector('.video_card[data-yt]')) return;
 
   function cardOf(target) {
-    var card = target && target.closest ? target.closest('.vl-card') : null;
+    var card = target && target.closest ? target.closest('.video_card') : null;
     return card && card.getAttribute('data-yt') ? card : null;
   }
 
@@ -47,13 +47,13 @@ WZ.dom("vl-card", function () {
     if (!card) return;
     var id = card.getAttribute('data-yt');
 
-    var shot = card.querySelector('.vl-shot');
+    var shot = card.querySelector('.video_thumbnail');
     var frame = document.createElement('div');
-    frame.className = 'vl-frame';
+    frame.className = 'video_frame';
     var f = document.createElement('iframe');
     /* autoplay only because this IS the click that asked for it. */
     f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-    var title = card.querySelector('.vl-title');
+    var title = card.querySelector('.video_title');
     f.title = title ? title.textContent.trim() : 'Video';
     f.setAttribute('allow',
       'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
@@ -65,7 +65,7 @@ WZ.dom("vl-card", function () {
        role, the tab stop and the label all come off. Leaving them strands a
        screen reader on something that announces as a button and does nothing. */
     var open = document.createElement('div');
-    open.className = 'vl-card';
+    open.className = 'video_card';
     open.appendChild(frame);
     if (title) open.appendChild(title);
     card.replaceWith(open);

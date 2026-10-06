@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Cosmetic Dentistry | Veneers &amp; Whitening | McLean, VA</title>
-<meta name="description" content="Five cosmetic treatments and the sequence they belong in, with a free Digital Smile Design preview before anything is prepared. McLean and Alexandria, Virginia.">
+<title>Cosmetic Dentist in McLean &amp; Alexandria, VA | Dr. Nahlah</title>
+<meta name="description" content="Cosmetic dentistry in McLean and Alexandria, VA: veneers, whitening, crowns and smile makeovers, with a free Digital Smile Design preview first.">
 <meta property="og:title" content="Cosmetic Dentistry | Dr. Nahlah, McLean &amp; Alexandria">
 <meta property="og:description" content="Veneers, crowns, bridges, whitening and inlays. Which one you need is what the evaluation answers.">
 <meta property="og:type" content="website">
@@ -121,20 +121,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html" aria-current="page">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -144,10 +144,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -156,9 +156,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -168,7 +168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -177,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -188,7 +188,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -199,7 +199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -210,7 +210,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -254,19 +254,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      It is named for a different practice and its provenance and licensing are
      unknown (see project-overview.md, open question 9).
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/cosmetic-transformation.jpg" alt="A cosmetic dentistry patient after treatment" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Cosmetic Dentistry</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Cosmetic Dentistry</span></div>
     <h1 data-split>Troubled smiles are <em>transformed</em> here.</h1>
-    <p class="ph-lead" data-rv>Five treatments, one plan. Which of them you need is what the evaluation answers.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a smile evaluation</span></a>
-      <a class="btn btn-ghost magnetic" href="#treatments"><span>See the treatments</span></a>
+    <p class="page-hero_lead" data-rv>Five treatments, one plan. Which of them you need is what the evaluation answers.</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="contact.html#book"><span>Book a smile evaluation</span></a>
+      <a class="button is-secondary is-magnetic" href="#treatments"><span>See the treatments</span></a>
     </div>
-    <div class="ph-meta" data-rv="stagger">
+    <div class="page-hero_meta" data-rv="stagger">
       <div><b>Free preview</b><span>Digital Smile Design</span></div>
       <div><b>5 tools</b><span>Chosen, not bundled</span></div>
       <div><b>5 yr</b><span>Cosmetic warranty</span></div>
@@ -275,16 +275,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- what it corrects ---------- -->
-<section class="pk pk-alt" id="corrects">
-  <div class="wrap section pk-split">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content is-background-alternate" id="corrects">
+  <div class="container-large padding-section-large split_component">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/smile-makeover-patient.png" alt="A completed cosmetic case" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The Problem</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The Problem</span></div>
       <h2 data-split>Six things, and the order they get fixed in.</h2>
       <p data-rv>Almost nobody arrives with only one, which is why the sequence matters more than the list.</p>
-      <ul class="sp-list" data-rv="stagger">
+      <ul class="bullet-list_component" data-rv="stagger">
         <li><i></i>Discolored teeth</li>
         <li><i></i>Chipped teeth</li>
         <li><i></i>Gapped teeth</li>
@@ -295,67 +295,67 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p data-rv style="margin-top:.6rem">Whitening before veneers, because porcelain is matched to
         the shade your natural teeth end at. Gumline before either, because the frame decides how
         long a tooth looks. Get that order wrong and the work has to be redone.</p>
-      <p data-rv><a class="pk-more" href="smile-makeover.html">How a full makeover is sequenced</a></p>
+      <p data-rv><a class="more-link_component" href="smile-makeover.html">How a full makeover is sequenced</a></p>
     </div>
   </div>
 </section>
 
 <!-- ---------- treatments ---------- -->
-<section class="pk pk-light" id="treatments">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The Treatments</span></div>
+<section class="section_content is-background-light" id="treatments">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The Treatments</span></div>
       <h2 data-split>Five tools. You will not be sold all of them.</h2>
       <p>Knowing which one the case needs, including when it is the cheapest on the list.</p>
     </div>
-    <div class="pk-cards pk-cards-3" data-rv="stagger">
-      <article class="pk-card">
-        <div class="pk-card-fig">
+    <div class="card_grid is-three-column" data-rv="stagger">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/case-veneers-1-after.jpg" alt="A completed porcelain veneer case" loading="lazy">
-          <span class="pk-card-figcap">01</span>
+          <span class="card_caption">01</span>
         </div>
         <h3>Porcelain veneers</h3>
         <p>Thin shells over the front of the teeth that show when you smile. A small amount of enamel is removed so they sit flush.</p>
-        <a class="pk-readon" href="veneers.html">Veneers in full</a>
+        <a class="read-on_link" href="veneers.html">Veneers in full</a>
       </article>
-      <article class="pk-card">
-        <div class="pk-card-fig">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/crown-model.jpg" alt="A porcelain crown" loading="lazy">
-          <span class="pk-card-figcap">02</span>
+          <span class="card_caption">02</span>
         </div>
         <h3>Dental crowns</h3>
         <p>Caps that conceal cosmetic and functional damage. Crack-resistant, so right for molars and for broken front teeth. Fifteen years or more.</p>
-        <a class="pk-readon" href="crowns-and-bridges.html">Crowns &amp; bridges</a>
+        <a class="read-on_link" href="crowns-and-bridges.html">Crowns &amp; bridges</a>
       </article>
-      <article class="pk-card">
-        <div class="pk-card-fig">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/bridge-model.jpg" alt="A fixed dental bridge" loading="lazy">
-          <span class="pk-card-figcap">03</span>
+          <span class="card_caption">03</span>
         </div>
         <h3>Dental bridges</h3>
         <p>Two or more custom crowns fused together to replace missing teeth, and to stop the remaining ones drifting out of place.</p>
       </article>
-      <article class="pk-card">
-        <div class="pk-card-fig">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/case-whitening-2-after.jpg" alt="A completed whitening case" loading="lazy">
-          <span class="pk-card-figcap">04</span>
+          <span class="card_caption">04</span>
         </div>
         <h3>Teeth whitening</h3>
         <p>A one-hour in-office session or take-home trays. Monitored, so the result reads as natural rather than as bleach.</p>
-        <a class="pk-readon" href="teeth-whitening.html">Whitening in full</a>
+        <a class="read-on_link" href="teeth-whitening.html">Whitening in full</a>
       </article>
-      <article class="pk-card">
-        <div class="pk-card-fig">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/dental-crowns-model-2.jpg" alt="An inlay restoration on a molar" loading="lazy">
-          <span class="pk-card-figcap">05</span>
+          <span class="card_caption">05</span>
         </div>
         <h3>Inlays &amp; onlays</h3>
         <p>Sometimes a tooth needs a small adjustment rather than a full crown. An inlay replaces an inside portion; an onlay restores a cusp.</p>
       </article>
-      <article class="pk-card">
-        <div class="pk-card-fig">
+      <article class="card_component">
+        <div class="card_image-wrapper">
           <img src="assets/consult-discussion.jpg" alt="A candidacy discussion at the practice" loading="lazy">
-          <span class="pk-card-figcap">06</span>
+          <span class="card_caption">06</span>
         </div>
         <h3>And knowing when to stop</h3>
         <p>A bad bite is functional, not cosmetic. If that is what is wrong, you will be told at the evaluation instead of having porcelain fitted over it.</p>
@@ -365,50 +365,50 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- cases ---------- -->
-<section class="pk" id="cases">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Real Cases</span></div>
+<section class="section_content" id="cases">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Real Cases</span></div>
       <h2 data-split>Two from this practice.</h2>
     </div>
-    <div class="pk-ba-grid" data-rv="stagger">
+    <div class="before-after_grid" data-rv="stagger">
       <figure style="margin:0">
-        <div class="pk-ba">
+        <div class="before-after_component">
           <img src="assets/case-porcelain-1-before.jpg" alt="Before: worn and discolored front teeth" loading="lazy">
-          <img class="ba-img-after" src="assets/case-porcelain-1-after.jpg" alt="After: porcelain restoration" loading="lazy">
-          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
-          <div class="ba-line"></div>
+          <img class="before-after_image-after" src="assets/case-porcelain-1-after.jpg" alt="After: porcelain restoration" loading="lazy">
+          <span class="before-after_tag is-before">Before</span><span class="before-after_tag is-after">After</span>
+          <div class="before-after_divider"></div>
           <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
         </div>
-        <figcaption class="pk-ba-cap">Porcelain restoration</figcaption>
+        <figcaption class="before-after_caption">Porcelain restoration</figcaption>
       </figure>
       <figure style="margin:0">
-        <div class="pk-ba">
+        <div class="before-after_component">
           <img src="assets/case-makeover-1-before.jpg" alt="Before: an uneven and gapped smile" loading="lazy">
-          <img class="ba-img-after" src="assets/case-makeover-1-after.jpg" alt="After: a completed smile makeover" loading="lazy">
-          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
-          <div class="ba-line"></div>
+          <img class="before-after_image-after" src="assets/case-makeover-1-after.jpg" alt="After: a completed smile makeover" loading="lazy">
+          <span class="before-after_tag is-before">Before</span><span class="before-after_tag is-after">After</span>
+          <div class="before-after_divider"></div>
           <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
         </div>
-        <figcaption class="pk-ba-cap">Full smile makeover</figcaption>
+        <figcaption class="before-after_caption">Full smile makeover</figcaption>
       </figure>
     </div>
     <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
-      <a class="pk-more" href="smile-gallery.html">All twenty-eight cases</a></p>
+      <a class="more-link_component" href="smile-gallery.html">All twenty-eight cases</a></p>
   </div>
 </section>
 
 <!-- ---------- the evaluation ---------- -->
-<section class="pk pk-alt" id="evaluation">
-  <div class="wrap section pk-split pk-split-rev">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content is-background-alternate" id="evaluation">
+  <div class="container-large padding-section-large split_component is-image-right">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/consult-discussion.jpg" alt="Discussing a treatment plan at the practice" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The Evaluation</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The Evaluation</span></div>
       <h2 data-split>Four things, before you commit to anything.</h2>
       <p data-rv>The smile evaluation is the whole of the sales process here.</p>
-      <ul class="sp-list" data-rv="stagger">
+      <ul class="bullet-list_component" data-rv="stagger">
         <li><i></i>Whether you are a good candidate, plainly</li>
         <li><i></i>A free Digital Smile Design showing what you would look like afterwards</li>
         <li><i></i>Pricing and the options at each price</li>
@@ -421,57 +421,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk" id="next">
-  <div class="wrap section">
-    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
-    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="smile-makeover.html"><span class="nx-k">The whole plan</span>
-        <span class="nx-t">Smile Makeover</span>
-        <span class="nx-d">Where these five tools get sequenced into one result.</span></a>
-      <a href="veneers.html"><span class="nx-k">Most asked about</span>
-        <span class="nx-t">Porcelain Veneers</span>
-        <span class="nx-d">Candidacy, two appointments, and whether they ruin your teeth.</span></a>
-      <a href="smile-gallery.html"><span class="nx-k">Evidence</span>
-        <span class="nx-t">Smile Gallery</span>
-        <span class="nx-d">Twenty-eight cases from this practice, before and after.</span></a>
+<section class="section_content" id="next">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component"><h2 data-split>Where to go next.</h2></div>
+    <nav class="related-pages_component" data-rv="stagger" aria-label="Related pages">
+      <a href="smile-makeover.html"><span class="related-pages_tagline">The whole plan</span>
+        <span class="related-pages_title">Smile Makeover</span>
+        <span class="related-pages_description">Where these five tools get sequenced into one result.</span></a>
+      <a href="veneers.html"><span class="related-pages_tagline">Most asked about</span>
+        <span class="related-pages_title">Porcelain Veneers</span>
+        <span class="related-pages_description">Candidacy, two appointments, and whether they ruin your teeth.</span></a>
+      <a href="smile-gallery.html"><span class="related-pages_tagline">Evidence</span>
+        <span class="related-pages_title">Smile Gallery</span>
+        <span class="related-pages_description">Twenty-eight cases from this practice, before and after.</span></a>
     </nav>
   </div>
 </section>
 
 <!-- ---------- cta ---------- -->
-<section class="pk pk-cta" id="book">
-  <div class="wrap section cta-in">
+<section class="section_content cta-band_component" id="book">
+  <div class="container-large padding-section-large cta-band_content">
     <h2 data-split>It is time to upgrade your smile.</h2>
     <p data-rv>See the result before you agree to it. The Digital Smile Design preview is free.</p>
     <!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
          books every reader into one office; see add-cta-offices.mjs. -->
-    <div class="cta-offices" data-rv="stagger">
-      <article class="ct-office">
+    <div class="cta-band_offices" data-rv="stagger">
+      <article class="office-card_component">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+        <a class="button is-primary is-magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
-      <article class="ct-office">
+      <article class="office-card_component">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+15716177245">(571) 617-7245</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+        <a class="button is-primary is-magnetic" href="https://flexbook.me/drnahlah"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
     </div>
@@ -481,12 +481,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -523,18 +523,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

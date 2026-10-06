@@ -182,7 +182,7 @@ const siteJs = runtimeJs.slice(0, boot) + sectionJs + "\n" + runtimeJs.slice(boo
 fs.writeFileSync(path.join(ASSETS, "site.css"), siteCss);
 fs.writeFileSync(path.join(ASSETS, "site.js"), siteJs);
 
-const CHAPTER_READOUT = `<div class="nav-chapter" aria-hidden="true">
+const CHAPTER_READOUT = `<div class="nav_chapter" aria-hidden="true">
         <span>Chapter</span><b id="navCh">00</b><i id="navBar"></i><span id="navName">Arrival</span>
       </div>`;
 

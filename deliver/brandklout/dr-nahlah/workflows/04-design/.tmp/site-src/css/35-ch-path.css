@@ -1,31 +1,31 @@
-.ch-path{background:var(--bg);position:relative;overflow:hidden;
+.section_path{background:var(--bg);position:relative;overflow:hidden;
   /* The content edge of this chapter, shared by the heading, the track and the
      progress bar. Below --maxw it is just the gutter; above it, it follows the
      centred column so the three do not drift apart.
-     They used to: .pa-head is `max-width:var(--maxw);margin-inline:auto` while
+     They used to: .path_head is `max-width:var(--maxw);margin-inline:auto` while
      the track and the bar were only gutter-indented, so on a 3840px monitor the
      heading sat at 1140, the cards started at 117 and the rule ran the full
      3723 -- three different left edges in one section. Inside `calc`, 100%
-     resolves against .pa-pin, which is the containing block for all three. */
+     resolves against .path_pin, which is the containing block for all three. */
   --pa-inset:calc(max(0px, (100% - var(--maxw)) / 2) + var(--gutter) + var(--rail));
   --pa-inset-end:calc(max(0px, (100% - var(--maxw)) / 2) + var(--gutter))}
-.ch-path .pa-pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
-.ch-path .pa-head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+.section_path .path_pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+.section_path .path_head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
   max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
-.ch-path h2{font-size:var(--h2);max-width:16ch}
-.ch-path .pa-track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+.section_path h2{font-size:var(--h2);max-width:16ch}
+.section_path .path_track{display:flex;gap:clamp(1rem,2.4vw,2rem);
   padding-right:var(--pa-inset-end);padding-left:var(--pa-inset);
   width:max-content;align-items:stretch}
-.ch-path .pa-card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
+.section_path .path_card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
   padding:clamp(1.4rem,2.4vw,2.25rem);display:flex;flex-direction:column;gap:.9rem;
   background:var(--card);position:relative;overflow:hidden}
-.ch-path .pa-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+.section_path .path_card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
   background:var(--rule);transform:scaleX(0);transform-origin:left}
-.ch-path .pa-card .pa-no{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
+.section_path .path_card .path_number{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
   color:var(--accent-lg);line-height:.9}
-.ch-path .pa-card h3{font-size:var(--h3)}
-.ch-path .pa-card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
-.ch-path .pa-card .pa-shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
+.section_path .path_card h3{font-size:var(--h3)}
+.section_path .path_card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
+.section_path .path_card .path_image-wrapper{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
 /* The grayscale->colour reveal is a POINTER affordance, and it was costing a
    phone the whole chapter. A CSS filter on an element inside a transformed
    ancestor cannot be composited while that ancestor moves: the browser has to
@@ -34,7 +34,7 @@
    (p50 33.3ms, 67% of frames over 32ms). Behind (hover:hover) it costs touch
    devices nothing and desktop keeps the effect unchanged. Measured either side
    with 08-qa/.tmp/mobile-pin-diagnose.mjs. */
-.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover}
+.section_path .path_card .path_image-wrapper img{width:100%;height:100%;object-fit:cover}
 /* `.wz-fine` is set on <html> by js/90-boot.js when the device has a real
    hovering pointer. A CLASS rather than `@media(hover:hover)` on purpose:
    Instatic's style registry stores non-viewport media queries as custom
@@ -48,15 +48,15 @@
    every frame; pinning is native `position:fixed` now, so there is no moving
    transform to composite against. The HOVER lift below stays behind `.wz-fine`
    — that one genuinely needs a pointer. */
-.ch-path .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s,transform .8s}
-.wz-fine .ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
-.ch-path .pa-bar{position:absolute;left:var(--pa-inset);right:var(--pa-inset-end);
+.section_path .path_card .path_image-wrapper img{filter:grayscale(1);transition:filter .6s,transform .8s}
+.wz-fine .section_path .path_card:hover .path_image-wrapper img{filter:grayscale(0);transform:scale(1.05)}
+.section_path .path_progress-bar{position:absolute;left:var(--pa-inset);right:var(--pa-inset-end);
   bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
 /* Nothing to scroll means nothing to report: the JS adds this when the whole
    track already fits on screen, which is what happens on a very wide monitor. */
-.ch-path.is-static .pa-bar{display:none}
-.ch-path .pa-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
-@media(max-width:719px){ .ch-path .pa-card{width:78vw} }
+.section_path.is-static .path_progress-bar{display:none}
+.section_path .path_progress-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
+@media(max-width:719px){ .section_path .path_card{width:78vw} }
 
 /* THE SWIPE PATH (touch). Added by sections/ch-path.js -- see the note there
    for the measurements that made it necessary.
@@ -69,17 +69,17 @@
 /* Top padding clears the fixed nav: the pinned build centred its content in a
    100svh box so there was always headroom, and a natural-height block has
    none. `scroll-margin-top` does the same for an anchor jump to #path. */
-.ch-path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
-.ch-path.is-swipe .pa-pin{height:auto;
+.section_path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
+.section_path.is-swipe .path_pin{height:auto;
   padding-top:calc(var(--nav-h,78px) + clamp(2rem,6vw,3.5rem));
   padding-bottom:clamp(3rem,9vw,5rem)}
-.ch-path.is-swipe .pa-track{
+.section_path.is-swipe .path_track{
   overflow-x:auto;overflow-y:hidden;width:auto;
   scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;padding-bottom:.5rem}
-.ch-path.is-swipe .pa-track::-webkit-scrollbar{display:none}
-.ch-path.is-swipe .pa-card{scroll-snap-align:center;
+.section_path.is-swipe .path_track::-webkit-scrollbar{display:none}
+.section_path.is-swipe .path_card{scroll-snap-align:center;
   border-color:var(--line);transition:border-color .5s}
 
 /* THE REVEAL ON TOUCH. `.is-live` is toggled by an IntersectionObserver in
@@ -96,24 +96,24 @@
    filtered image inside a moving transform — the scrub. There is no scrub in
    this build, so the filter animates once per crossing, which is a bounded
    cost, and it is the most visible half of the effect. */
-.ch-path.is-swipe .pa-card .pa-no{opacity:.35;transition:opacity .45s}
-.ch-path.is-swipe .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s}
-.ch-path.is-swipe .pa-card.is-live{border-color:rgba(138,126,78,.55)}
-.ch-path.is-swipe .pa-card.is-live .pa-no{opacity:1}
-.ch-path.is-swipe .pa-card.is-live .pa-shot img{filter:grayscale(0)}
+.section_path.is-swipe .path_card .path_number{opacity:.35;transition:opacity .45s}
+.section_path.is-swipe .path_card .path_image-wrapper img{filter:grayscale(1);transition:filter .6s}
+.section_path.is-swipe .path_card.is-live{border-color:rgba(138,126,78,.55)}
+.section_path.is-swipe .path_card.is-live .path_number{opacity:1}
+.section_path.is-swipe .path_card.is-live .path_image-wrapper img{filter:grayscale(0)}
 
 @media(prefers-reduced-motion:reduce){
   /* Reveal without the travel: every card lit, nothing transitioning. */
-  .ch-path.is-swipe .pa-card .pa-no{opacity:1}
-  .ch-path.is-swipe .pa-card .pa-shot img{filter:none}
+  .section_path.is-swipe .path_card .path_number{opacity:1}
+  .section_path.is-swipe .path_card .path_image-wrapper img{filter:none}
 }
-/* RELATIVE, never static. `.pa-bar i` is the progress fill and is
-   `position:absolute;inset:0` — it needs .pa-bar to be its containing block. Set
+/* RELATIVE, never static. `.path_progress-bar i` is the progress fill and is
+   `position:absolute;inset:0` — it needs .path_progress-bar to be its containing block. Set
    static here and the fill escapes to `#pathPin` and paints a FULL-HEIGHT gold
    rectangle over a third of the chapter (measured: 126x677 instead of 356x1).
    It is invisible at rest because the fill starts at scaleX(0), so it only
    appears once the reader actually swipes — which is exactly how it reached
    production unnoticed. The bar only needs to leave the absolute flow of the
    pinned build; relative does that and keeps the fill anchored. */
-.ch-path.is-swipe .pa-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
+.section_path.is-swipe .path_progress-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
   margin-inline:var(--pa-inset) var(--pa-inset-end)}

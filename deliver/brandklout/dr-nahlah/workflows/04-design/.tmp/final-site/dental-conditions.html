@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Conditions We Treat | Gum Disease to Toothache | McLean, VA</title>
-<meta name="description" content="Ten everyday dental complaints, what each usually turns out to be and what is done about it: loose dentures, bleeding gums, cracked teeth, toothache and more.">
+<title>Dental Conditions We Treat | McLean &amp; Alexandria, VA</title>
+<meta name="description" content="Loose dentures, bleeding gums, cracked teeth, toothache and more: what each usually means and how Dr. Nahlah treats it in McLean and Alexandria, VA.">
 <meta property="og:title" content="Conditions We Treat | Dr. Nahlah, McLean &amp; Alexandria">
 <meta property="og:description" content="Bring the small thing in before it becomes the large one. Second opinions are free.">
 <meta property="og:type" content="website">
@@ -111,20 +111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html" aria-current="page">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -134,10 +134,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -146,9 +146,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -158,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -200,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -250,19 +250,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      into treatments that now have their own pages; those become links rather
      than repeated prose.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/conditions-patient.jpg" alt="A patient at the practice" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Conditions We Treat</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Conditions We Treat</span></div>
     <h1 data-split>Even the <em>small</em> things matter.</h1>
-    <p class="ph-lead" data-rv>Ten everyday complaints, and what is actually done about each one.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="#conditions"><span>Find your symptom</span></a>
+    <p class="page-hero_lead" data-rv>Ten everyday complaints, and what is actually done about each one.</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="button is-secondary is-magnetic" href="#conditions"><span>Find your symptom</span></a>
     </div>
-    <div class="ph-meta" data-rv="stagger">
+    <div class="page-hero_meta" data-rv="stagger">
       <div><b>10</b><span>Conditions treated</span></div>
       <div><b>Free</b><span>Second opinions</span></div>
       <div><b>Same day</b><span>For emergencies</span></div>
@@ -271,194 +271,194 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- lede: one line, then the pictures ---------- -->
-<section class="pk pk-alt" id="why">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Your Oral Health</span></div>
+<section class="section_content is-background-alternate" id="why">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Your Oral Health</span></div>
       <h2 data-split>Do you cover your mouth when you smile?</h2>
       <p>Most of this is straightforward to treat. Some of it is not cosmetic at all:
         bleeding gums and constant bad breath are early gum disease.</p>
     </div>
-    <div class="mz mz-4" data-rv="stagger">
-      <figure class="mz-fig">
+    <div class="mosaic_component is-four-tiles" data-rv="stagger">
+      <figure class="mosaic_item">
         <img src="assets/tech-advanced.jpg" alt="Digital scanning at the practice" loading="lazy">
-        <figcaption class="mz-cap">Seen, not guessed</figcaption>
+        <figcaption class="mosaic_caption">Seen, not guessed</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/consult-discussion.jpg" alt="A treatment discussion at the practice" loading="lazy">
-        <figcaption class="mz-cap">Free second opinion</figcaption>
+        <figcaption class="mosaic_caption">Free second opinion</figcaption>
       </figure>
-      <figure class="mz-fig mz-plain">
+      <figure class="mosaic_item is-contained-tile">
         <img src="assets/tooth-model.png" alt="A tooth model used to explain treatment" loading="lazy">
-        <figcaption class="mz-cap">Explained on the model</figcaption>
+        <figcaption class="mosaic_caption">Explained on the model</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/dr-with-patient.jpg" alt="Dr. Nahlah with a patient" loading="lazy">
-        <figcaption class="mz-cap">Time with the specialist</figcaption>
+        <figcaption class="mosaic_caption">Time with the specialist</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ---------- the ten ---------- -->
-<section class="pk pk-light" id="conditions">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Conditions</span></div>
+<section class="section_content is-background-light" id="conditions">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Conditions</span></div>
       <h2 data-split>Ten things people come in with.</h2>
       <p>Open the one that sounds like yours.</p>
     </div>
-    <div class="pk-faq" data-rv="stagger">
+    <div class="faq_list" data-rv="stagger">
       <details>
         <summary>Loose Dentures</summary>
-        <div class="fa-body">Jawbone recession lets a denture come loose, and a loose denture rubs.
+        <div class="faq_answer">Jawbone recession lets a denture come loose, and a loose denture rubs.
           The fix is anchorage: implant-supported dentures or full-arch implants, fixed into the jaw
           and strong enough to eat normally with.
-          <a class="pk-more pk-readon-block" href="implant-supported-dentures.html">Fixed vs. removable</a></div>
+          <a class="more-link_component is-block" href="implant-supported-dentures.html">Fixed vs. removable</a></div>
       </details>
       <details>
         <summary>Bad Breath</summary>
-        <div class="fa-body">Occasional is normal. <strong>Constant</strong> bad breath, alongside gums
+        <div class="faq_answer">Occasional is normal. <strong>Constant</strong> bad breath, alongside gums
           that bleed and teeth that loosen, is gum disease, and untreated it aggravates diabetes, high
           blood pressure and cardiovascular disease. Treated with customized gum disease therapy.</div>
       </details>
       <details>
         <summary>Bleeding Gums</summary>
-        <div class="fa-body">The earliest sign of gum disease. Tartar releases bacteria, the gums redden,
+        <div class="faq_answer">The earliest sign of gum disease. Tartar releases bacteria, the gums redden,
           swell and recede, and advanced gum disease eventually stops being curable. Surgical and
           non-surgical treatments both exist; an evaluation settles which.</div>
       </details>
       <details>
         <summary>Cracked Teeth</summary>
-        <div class="fa-body">Once a tooth is broken open, bacteria get inside and the infection can end
+        <div class="faq_answer">Once a tooth is broken open, bacteria get inside and the infection can end
           in root canal therapy. Treated with a filling, bonding, an inlay, an onlay or a crown,
           depending on how much tooth is left.
-          <a class="pk-more pk-readon-block" href="crowns-and-bridges.html">Crowns &amp; bridges</a></div>
+          <a class="more-link_component is-block" href="crowns-and-bridges.html">Crowns &amp; bridges</a></div>
       </details>
       <details>
         <summary>Crooked Teeth</summary>
-        <div class="fa-body">Not only cosmetic. Misaligned teeth hold plaque where a brush cannot reach,
+        <div class="faq_answer">Not only cosmetic. Misaligned teeth hold plaque where a brush cannot reach,
           and they skew the bite, which shows up as jaw discomfort rather than as an aesthetic
           complaint.</div>
       </details>
       <details>
         <summary>Gum Disease</summary>
-        <div class="fa-body">Red, receding or tender gums, and pockets forming between gum and tooth.
+        <div class="faq_answer">Red, receding or tender gums, and pockets forming between gum and tooth.
           Untreated it leads to tooth loss and jawbone recession, and is linked to respiratory disease,
           diabetes, pregnancy complications, heart disease, stroke and cancer.</div>
       </details>
       <details>
         <summary>A Gummy Smile</summary>
-        <div class="fa-body">Gums frame the teeth, and the proportion between the two is most of what
+        <div class="faq_answer">Gums frame the teeth, and the proportion between the two is most of what
           makes a smile look right. Precise recontouring rebalances the gumline, usually in a single
           visit.</div>
       </details>
       <details>
         <summary>Missing or Failing Teeth</summary>
-        <div class="fa-body">Without a root stimulating it, the bone under the empty socket
+        <div class="faq_answer">Without a root stimulating it, the bone under the empty socket
           deteriorates, and it spreads, which is how one lost tooth becomes the neighboring ones.
           Bridges and implants both restore the smile; only implants protect the jaw.
-          <a class="pk-more pk-readon-block" href="dental-implants.html">Dental implants</a></div>
+          <a class="more-link_component is-block" href="dental-implants.html">Dental implants</a></div>
       </details>
       <details>
         <summary>Toothache</summary>
-        <div class="fa-body">The tooth is X-rayed, so what is happening inside the enamel is visible
+        <div class="faq_answer">The tooth is X-rayed, so what is happening inside the enamel is visible
           rather than guessed at, and the aim is always to keep the natural tooth. Wisdom teeth aside,
           an extracted tooth should be replaced.
-          <a class="pk-more pk-readon-block" href="emergency-dentistry.html">If it is urgent</a></div>
+          <a class="more-link_component is-block" href="emergency-dentistry.html">If it is urgent</a></div>
       </details>
       <details>
         <summary>Yellow or Discolored Teeth</summary>
-        <div class="fa-body">A full set of healthy teeth can still be a smile someone hides.
+        <div class="faq_answer">A full set of healthy teeth can still be a smile someone hides.
           Professional whitening handles it, and the shade is chosen with you rather than set once.
-          <a class="pk-more pk-readon-block" href="teeth-whitening.html">Teeth whitening</a></div>
+          <a class="more-link_component is-block" href="teeth-whitening.html">Teeth whitening</a></div>
       </details>
     </div>
   </div>
 </section>
 
 <!-- ---------- band ---------- -->
-<section class="mband" id="band">
-  <figure class="mband-fig">
+<section class="media-band_component" id="band">
+  <figure class="media-band_image-wrapper">
     <img src="assets/pt-interaction.jpg" alt="A consultation at the practice" data-drift loading="lazy">
   </figure>
-  <div class="mband-in" data-rv>
-    <span class="mband-kicker">Bring it in</span>
-    <p class="mband-line">It is very often smaller than you have been assuming.</p>
+  <div class="media-band_content" data-rv>
+    <span class="media-band_tagline">Bring it in</span>
+    <p class="media-band_statement">It is very often smaller than you have been assuming.</p>
   </div>
 </section>
 
 <!-- ---------- the specialist angle ---------- -->
-<section class="pk" id="specialist">
-  <div class="wrap section pk-split pk-split-rev">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content" id="specialist">
+  <div class="container-large padding-section-large split_component is-image-right">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/pt-yolanda.jpg" alt="Yolanda, a full-arch patient of the practice" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Why It Matters Here</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Why It Matters Here</span></div>
       <h2 data-split>Several of these are the same problem.</h2>
       <p data-rv>Bad breath, bleeding gums and gum disease are one condition at three stages. Missing
         teeth, loose dentures and most of the toothache list are one consequence of another.</p>
       <p data-rv>A prosthodontist is trained to see the whole mouth as one system, so the useful
         question is not <em>what do I do about this tooth</em> but <em>what is actually going on
         here</em>. Second opinions are free.</p>
-      <p data-rv><a class="pk-more" href="about.html">Why this practice</a></p>
+      <p data-rv><a class="more-link_component" href="about.html">Why this practice</a></p>
     </div>
   </div>
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk pk-alt" id="next">
-  <div class="wrap section">
-    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
-    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="emergency-dentistry.html"><span class="nx-k">If it is urgent</span>
-        <span class="nx-t">Emergency Dentistry</span>
-        <span class="nx-d">Eight reasons to call today.</span></a>
-      <a href="cosmetic-dentistry.html"><span class="nx-k">If it is cosmetic</span>
-        <span class="nx-t">Cosmetic Dentistry</span>
-        <span class="nx-d">Five tools, and the order they belong in.</span></a>
-      <a href="dental-implants.html"><span class="nx-k">If teeth are missing</span>
-        <span class="nx-t">Dental Implants</span>
-        <span class="nx-d">The only replacement that protects the jaw.</span></a>
+<section class="section_content is-background-alternate" id="next">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component"><h2 data-split>Where to go next.</h2></div>
+    <nav class="related-pages_component" data-rv="stagger" aria-label="Related pages">
+      <a href="emergency-dentistry.html"><span class="related-pages_tagline">If it is urgent</span>
+        <span class="related-pages_title">Emergency Dentistry</span>
+        <span class="related-pages_description">Eight reasons to call today.</span></a>
+      <a href="cosmetic-dentistry.html"><span class="related-pages_tagline">If it is cosmetic</span>
+        <span class="related-pages_title">Cosmetic Dentistry</span>
+        <span class="related-pages_description">Five tools, and the order they belong in.</span></a>
+      <a href="dental-implants.html"><span class="related-pages_tagline">If teeth are missing</span>
+        <span class="related-pages_title">Dental Implants</span>
+        <span class="related-pages_description">The only replacement that protects the jaw.</span></a>
     </nav>
   </div>
 </section>
 
 <!-- ---------- cta ---------- -->
-<section class="pk pk-cta" id="book">
-  <div class="wrap section cta-in">
+<section class="section_content cta-band_component" id="book">
+  <div class="container-large padding-section-large cta-band_content">
     <h2 data-split>Unhappy with your smile?</h2>
     <p data-rv>Bring in whatever you have been putting up with.</p>
     <!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
          books every reader into one office; see add-cta-offices.mjs. -->
-    <div class="cta-offices" data-rv="stagger">
-      <article class="ct-office">
+    <div class="cta-band_offices" data-rv="stagger">
+      <article class="office-card_component">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+        <a class="button is-primary is-magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
-      <article class="ct-office">
+      <article class="office-card_component">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+15716177245">(571) 617-7245</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+        <a class="button is-primary is-magnetic" href="https://flexbook.me/drnahlah"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
     </div>
@@ -468,12 +468,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -510,18 +510,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

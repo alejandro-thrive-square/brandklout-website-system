@@ -3,7 +3,7 @@
    Registered against .ch-invitation; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-invitation", function (W) {
+WZ.section("section_invitation", function (W) {
   if(W.reduced) return;
   /* The bespoke `#locs .iv-loc` stagger that used to sit here is gone with the
      markup it animated. On 2026-08-24 the standalone locations strip was folded

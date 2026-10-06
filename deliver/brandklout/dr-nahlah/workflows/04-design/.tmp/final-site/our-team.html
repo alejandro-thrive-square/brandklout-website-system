@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Meet the Team | Dr. Nahlah Prosthodontics | McLean, VA</title>
-<meta name="description" content="The five people behind the treatment: office manager, digital lab designer, treatment coordinator, dental assistant and hygienist, across both Virginia offices.">
+<title>Our Dental Team | Dr. Nahlah | McLean &amp; Alexandria, VA</title>
+<meta name="description" content="Meet the team behind Dr. Nahlah's care in McLean and Alexandria, VA: office manager, lab designer, treatment coordinator, assistant and hygienist.">
 <meta property="og:title" content="Meet the Team | Dr. Nahlah, McLean &amp; Alexandria">
 <meta property="og:description" content="One coordinator holds your case end to end, and the lab designer works down the hall.">
 <meta property="og:type" content="website">
@@ -111,20 +111,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -134,10 +134,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -146,9 +146,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -158,7 +158,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -167,7 +167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -178,7 +178,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -189,7 +189,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -200,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -241,20 +241,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      under Basma's card. It is not rendered here rather than guessed at. Ask
      the client whether that is a sixth team member or a second hat Basma wears.
      ========================================================================== -->
-<section class="pg-hero" id="hero">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero">
+  <div class="page-hero_background">
     <img src="assets/team-group.jpg" alt="The Dr. Nahlah team" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i>
       <a href="about.html">Why Choose Us</a><i></i><span>Meet the Team</span></div>
     <h1 data-split>The five people you will <em>actually</em> deal with.</h1>
-    <p class="ph-lead" data-rv>Dr. Nahlah does the surgery. Everything around it belongs to the people on this page.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="#team"><span>Meet the team</span></a>
+    <p class="page-hero_lead" data-rv>Dr. Nahlah does the surgery. Everything around it belongs to the people on this page.</p>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="button is-secondary is-magnetic" href="#team"><span>Meet the team</span></a>
     </div>
-    <div class="ph-meta" data-rv="stagger">
+    <div class="page-hero_meta" data-rv="stagger">
       <div><b>In-house lab</b><span>A designer on staff</span></div>
       <div><b>One coordinator</b><span>Not a call center</span></div>
       <div><b>2 offices</b><span>McLean and Alexandria</span></div>
@@ -267,78 +267,78 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      rooms carrying the "small team, one building" point. Both facts the section
      exists for (one coordinator end to end, one office manager across both
      offices, a lab designer on staff) are still stated. -->
-<section class="pk pk-alt" id="why">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Why It Matters</span></div>
+<section class="section_content is-background-alternate" id="why">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Why It Matters</span></div>
       <h2 data-split>A small team is the point, not a limitation.</h2>
       <p>Full-mouth work runs for months, and you will speak to the practice far more often than you
         sit in the chair. <strong>One treatment coordinator</strong> holds your case from the first
         estimate to the last visit; <strong>one office manager</strong> runs both offices.</p>
     </div>
-    <div class="mz mz-3" data-rv="stagger">
-      <figure class="mz-fig">
+    <div class="mosaic_component is-three-tiles" data-rv="stagger">
+      <figure class="mosaic_item">
         <img src="assets/practice-space-3.avif" alt="The front office at the practice" loading="lazy">
-        <figcaption class="mz-cap">The same voice on the phone</figcaption>
+        <figcaption class="mosaic_caption">The same voice on the phone</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/lab.jpg" alt="The in-house digital laboratory" loading="lazy">
-        <figcaption class="mz-cap">A desk down the hall</figcaption>
+        <figcaption class="mosaic_caption">A desk down the hall</figcaption>
       </figure>
-      <figure class="mz-fig">
+      <figure class="mosaic_item">
         <img src="assets/dr-team.jpg" alt="Dr. Nahlah with the team" loading="lazy">
-        <figcaption class="mz-cap">Both offices, one team</figcaption>
+        <figcaption class="mosaic_caption">Both offices, one team</figcaption>
       </figure>
     </div>
   </div>
 </section>
 
 <!-- ---------- the team ---------- -->
-<section class="pk" id="team">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The Team</span></div>
+<section class="section_content" id="team">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The Team</span></div>
       <h2 data-split>Meet the team.</h2>
       <p>Names and roles as the practice publishes them.</p>
     </div>
-    <div class="tm-grid" data-rv="stagger">
-      <figure class="tm-card">
-        <div class="tm-shot"><img src="assets/team-venita.jpg" alt="Venita, office manager" loading="lazy"></div>
-        <figcaption class="tm-body">
-          <span class="tm-name">Venita</span>
-          <span class="tm-role">Office Manager</span>
+    <div class="team_grid" data-rv="stagger">
+      <figure class="team_card">
+        <div class="team_image-wrapper"><img src="assets/team-venita.jpg" alt="Venita, office manager" loading="lazy"></div>
+        <figcaption class="team_content">
+          <span class="team_name">Venita</span>
+          <span class="team_role">Office Manager</span>
           <p>Runs both offices: scheduling, records, and getting two locations to behave like one. Who you reach when something needs to move.</p>
         </figcaption>
       </figure>
-      <figure class="tm-card">
-        <div class="tm-shot"><img src="assets/team-junko.jpg" alt="Junko, digital lab designer" loading="lazy"></div>
-        <figcaption class="tm-body">
-          <span class="tm-name">Junko</span>
-          <span class="tm-role">Digital Lab Designer</span>
+      <figure class="team_card">
+        <div class="team_image-wrapper"><img src="assets/team-junko.jpg" alt="Junko, digital lab designer" loading="lazy"></div>
+        <figcaption class="team_content">
+          <span class="team_name">Junko</span>
+          <span class="team_role">Digital Lab Designer</span>
           <p>Designs the prosthesis in the in-house lab, from the scan to the milled result. Most practices post this work out.</p>
         </figcaption>
       </figure>
-      <figure class="tm-card">
-        <div class="tm-shot"><img src="assets/team-helia.jpg" alt="Helia, treatment coordinator" loading="lazy"></div>
-        <figcaption class="tm-body">
-          <span class="tm-name">Helia</span>
-          <span class="tm-role">Treatment Coordinator</span>
+      <figure class="team_card">
+        <div class="team_image-wrapper"><img src="assets/team-helia.jpg" alt="Helia, treatment coordinator" loading="lazy"></div>
+        <figcaption class="team_content">
+          <span class="team_name">Helia</span>
+          <span class="team_role">Treatment Coordinator</span>
           <p>Holds your case end to end: estimate, pre-authorization, financing, and the order the appointments happen in.</p>
         </figcaption>
       </figure>
-      <figure class="tm-card">
-        <div class="tm-shot"><img src="assets/team-hana.png" alt="Hana, dental assistant" loading="lazy"></div>
-        <figcaption class="tm-body">
-          <span class="tm-name">Hana</span>
-          <span class="tm-role">Dental Assistant</span>
+      <figure class="team_card">
+        <div class="team_image-wrapper"><img src="assets/team-hana.png" alt="Hana, dental assistant" loading="lazy"></div>
+        <figcaption class="team_content">
+          <span class="team_name">Hana</span>
+          <span class="team_role">Dental Assistant</span>
           <p>Beside Dr. Nahlah for surgery, and the person who prepares the room, the scanner and you.</p>
         </figcaption>
       </figure>
-      <figure class="tm-card">
-        <div class="tm-shot"><img src="assets/team-basma.jpg" alt="Basma, dental hygienist" loading="lazy"></div>
-        <figcaption class="tm-body">
-          <span class="tm-name">Basma</span>
-          <span class="tm-role">Dental Hygienist</span>
+      <figure class="team_card">
+        <div class="team_image-wrapper"><img src="assets/team-basma.jpg" alt="Basma, dental hygienist" loading="lazy"></div>
+        <figcaption class="team_content">
+          <span class="team_name">Basma</span>
+          <span class="team_role">Dental Hygienist</span>
           <p>Cleanings, and the six-month maintenance that decides how long implant work lasts.</p>
         </figcaption>
       </figure>
@@ -347,80 +347,80 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- the lab ---------- -->
-<section class="pk pk-light" id="lab">
-  <div class="wrap section pk-split pk-split-rev">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content is-background-light" id="lab">
+  <div class="container-large padding-section-large split_component is-image-right">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/tech-advanced.jpg" alt="The practice's in-house digital laboratory" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">In-House</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">In-House</span></div>
       <h2 data-split>The lab is a room here, not a shipping address.</h2>
       <p data-rv>A dental laboratory is normally a separate business in a separate city: impressions
         go out, weeks pass, a box comes back, and a bad fit restarts the cycle. This practice keeps
         the lab in the building, with a designer on staff. That changes three things:</p>
-      <ul class="sp-list" data-rv="stagger">
+      <ul class="bullet-list_component" data-rv="stagger">
         <li><i></i>Fewer appointments, because adjustments happen while you are still in the chair</li>
         <li><i></i>Shorter waits, because nothing is in transit</li>
         <li><i></i>A shade and shape agreed with the person who will cut them, not described on a form</li>
       </ul>
       <p data-rv style="margin-top:.6rem">
-        <a class="pk-more" href="our-facility.html">Inside the facility</a></p>
+        <a class="more-link_component" href="our-facility.html">Inside the facility</a></p>
     </div>
   </div>
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk" id="next">
-  <div class="wrap section">
-    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
-    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="meet-dr-nahlah.html"><span class="nx-k">The specialist</span>
-        <span class="nx-t">Dr. Esam Nahlah</span>
-        <span class="nx-d">Board certification, fellowship and fourteen credentials.</span></a>
-      <a href="our-facility.html"><span class="nx-k">The building</span>
-        <span class="nx-t">Our Facility</span>
-        <span class="nx-d">Six surgical suites, the digital lab and the scanners.</span></a>
-      <a href="about.html"><span class="nx-k">The practice</span>
-        <span class="nx-t">Why Choose Us</span>
-        <span class="nx-d">Free second opinions, same-day emergencies, a five-year warranty.</span></a>
+<section class="section_content" id="next">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component"><h2 data-split>Where to go next.</h2></div>
+    <nav class="related-pages_component" data-rv="stagger" aria-label="Related pages">
+      <a href="meet-dr-nahlah.html"><span class="related-pages_tagline">The specialist</span>
+        <span class="related-pages_title">Dr. Esam Nahlah</span>
+        <span class="related-pages_description">Board certification, fellowship and fourteen credentials.</span></a>
+      <a href="our-facility.html"><span class="related-pages_tagline">The building</span>
+        <span class="related-pages_title">Our Facility</span>
+        <span class="related-pages_description">Six surgical suites, the digital lab and the scanners.</span></a>
+      <a href="about.html"><span class="related-pages_tagline">The practice</span>
+        <span class="related-pages_title">Why Choose Us</span>
+        <span class="related-pages_description">Free second opinions, same-day emergencies, a five-year warranty.</span></a>
     </nav>
   </div>
 </section>
 
 <!-- ---------- cta ---------- -->
-<section class="pk pk-cta" id="book">
-  <div class="wrap section cta-in">
+<section class="section_content cta-band_component" id="book">
+  <div class="container-large padding-section-large cta-band_content">
     <h2 data-split>Get on the path to better dental health.</h2>
     <p data-rv>You get a time with Dr. Nahlah, not a sales appointment with a coordinator.</p>
     <!-- BOTH offices, each with its OWN Flexbook calendar. One shared button here
          books every reader into one office; see add-cta-offices.mjs. -->
-    <div class="cta-offices" data-rv="stagger">
-      <article class="ct-office">
+    <div class="cta-band_offices" data-rv="stagger">
+      <article class="office-card_component">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+        <a class="button is-primary is-magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
-      <article class="ct-office">
+      <article class="office-card_component">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+15716177245">(571) 617-7245</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
+        <a class="more-link_component office-card_directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+        <a class="button is-primary is-magnetic" href="https://flexbook.me/drnahlah"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
     </div>
@@ -430,12 +430,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -472,18 +472,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

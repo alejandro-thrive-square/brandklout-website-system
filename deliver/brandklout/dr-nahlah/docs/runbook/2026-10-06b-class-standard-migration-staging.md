@@ -30,11 +30,13 @@ in the main checkout (gitignored); `STATUS.md` there is the coordinator's copy o
 6. The user's hand edit travelled with its rule: it is now `.section_services .services_grid`
    with the same declaration. `flex-test` is still in the registry, empty and unused (the strict
    audit does not count unused rules, so it was not deleted).
-7. **Local source** `workflows/04-design/.tmp/site-src` (untracked): backup
-   `04-design/.tmp/site-src.before-class-rename.2026-10-06.tgz`, then `class-rename.mjs --files`
+7. **Local source** `workflows/04-design/.tmp/site-src` (tracked on this branch, so the pre-rename
+   copy is commit `6f31c689`; an untracked tgz of it also sits at
+   `04-design/.tmp/site-src.before-class-rename.2026-10-06.tgz`): `class-rename.mjs --files`
    → 110 files rewritten (1,405 selectors, 5,827 class attributes, 82 script selectors, 20 script
-   tokens), `node build-site.mjs` → 56/56 pages, `class-sync-check.mjs` on 37 pages: **no old name on
-   either side**.
+   tokens), `node build-site.mjs` → 56/56 pages into `final-site/`, `class-sync-check.mjs` on 37
+   pages: **no old name on either side**. 168 text files, 12,880 lines replaced one for one,
+   committed with this run.
 
 ## Gates
 | Gate | Result |
@@ -84,4 +86,5 @@ in the main checkout (gitignored); `STATUS.md` there is the coordinator's copy o
 
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Committed on
-`bk-dr-nahlah` only. `site-src` and its backup are under `.tmp/` and are not tracked.
+`bk-dr-nahlah` only: the run and map status in `6f31c689`, the renamed `site-src` + rebuilt
+`final-site` in the commit after it. The tgz backup is not committed.

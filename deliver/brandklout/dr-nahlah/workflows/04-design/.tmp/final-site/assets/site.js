@@ -106,7 +106,7 @@ WZ.add(function (W) {
   if (!W.reduced) kit.classList.add('wz-kit');
 
   /* Before/after sliders work with or without GSAP — they are content, not motion. */
-  document.querySelectorAll('.pk-ba').forEach(function (ba) {
+  document.querySelectorAll('.before-after_component').forEach(function (ba) {
     var range = ba.querySelector('input[type=range]');
     /* Instatic maps every <input> onto its own form-control module, which only
        knows type="text": the three comparison sliders arrive as text boxes
@@ -165,7 +165,7 @@ WZ.add(function (W) {
   });
 
   /* Counters. Reduced motion prints the final value immediately (above). */
-  gsap.utils.toArray('.pk-stats [data-count]').forEach(function (el) {
+  gsap.utils.toArray('.stats_component [data-count]').forEach(function (el) {
     var target = parseFloat(el.getAttribute('data-count')),
         dec = parseInt(el.getAttribute('data-decimals') || '0', 10),
         suffix = el.getAttribute('data-suffix') || '',
@@ -183,7 +183,7 @@ WZ.add(function (W) {
 /* Reduced motion never runs the counter tween, so paint the finals up front. */
 (function () {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.pk-stats [data-count]').forEach(function (el) {
+  document.querySelectorAll('.stats_component [data-count]').forEach(function (el) {
     var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
     el.textContent = parseFloat(el.getAttribute('data-count'))
       .toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
@@ -216,7 +216,7 @@ WZ.add(function (W) {
    ============================================================================= */
 WZ.dom('blog-filter', '#blFilter', function () {
   var bar = document.getElementById('blFilter'),
-      grid = document.querySelector('#articles .bl-grid'),
+      grid = document.querySelector('#articles .blog_grid'),
       input = document.getElementById('blSearch'),
       select = document.getElementById('blTopic'),
       count = document.getElementById('blCount'),
@@ -245,10 +245,10 @@ WZ.dom('blog-filter', '#blFilter', function () {
   /* 43 cards x (title + excerpt) is a few kilobytes of string. Building it per
      keystroke would still be fast, but building it once means a keystroke is a
      substring test and nothing else. */
-  var cards = [].slice.call(grid.querySelectorAll('.bl-card')).map(function (el) {
+  var cards = [].slice.call(grid.querySelectorAll('.blog_card')).map(function (el) {
     var h = el.querySelector('h2'),
         p = el.querySelector('p'),
-        t = el.querySelector('.bl-topic');
+        t = el.querySelector('.blog_topic');
     return {
       el: el,
       topic: t ? slugify(t.textContent) : '',
@@ -436,12 +436,12 @@ WZ.dom('blog-filter', '#blFilter', function () {
    keep its contents list even if the animation runtime failed to load. The
    rails are a separate module below, because they do depend on it.
    ============================================================================= */
-WZ.dom('blog-post', '.bl-post', function () {
-  var post = document.querySelector('.bl-post');
-  var body = post && post.querySelector('.bl-body');
+WZ.dom('blog-post', '.article_component', function () {
+  var post = document.querySelector('.article_component');
+  var body = post && post.querySelector('.article_body');
   if (!body) return;
 
-  var hero = document.querySelector('.pg-hero.bl-ph');
+  var hero = document.querySelector('.section_page-hero.is-article-hero');
   /* The region the outlet renders into. Everything the entry brought with it is
      inside this one element, not spread across .bl-body. */
   var region = body.firstElementChild && body.firstElementChild.children.length
@@ -453,7 +453,7 @@ WZ.dom('blog-post', '.bl-post', function () {
      hero this leaves the article exactly as it was rather than beheading it. */
   if (hero) {
     var when = region.querySelector('.bl-when');
-    var slot = hero.querySelector('.bl-ph-when');
+    var slot = hero.querySelector('.article_hero-date');
     if (when && slot) slot.textContent = (when.textContent || '').trim();
     if (when) when.remove();
     var h1 = region.querySelector('h1');
@@ -478,7 +478,7 @@ WZ.dom('blog-post', '.bl-post', function () {
 
   if (heads.length >= 3) {
     nav = document.createElement('nav');
-    nav.className = 'bl-toc';
+    nav.className = 'article_contents';
     nav.setAttribute('aria-labelledby', 'blTocTitle');
 
     var h = document.createElement('b');
@@ -523,7 +523,7 @@ WZ.dom('blog-post', '.bl-post', function () {
        In the rail the list is a column of its own; in the flow it is a bordered
        block after the lede. Same node either way — a copy in each would drift
        the moment one of them gained a state. */
-    var railL = document.querySelector('.bl-rail-l');
+    var railL = document.querySelector('.is-left-rail');
     var wide = window.matchMedia('(min-width: 1280px)');
     var place = function () {
       if (!railL) return;
@@ -561,13 +561,13 @@ WZ.dom('blog-post', '.bl-post', function () {
   var questions = heads.filter(function (h) { return /\?\s*$/.test((h.textContent || '').trim()); });
   if (questions.length >= 3) {
     var faq = document.createElement('section');
-    faq.className = 'bl-faq';
+    faq.className = 'article_faq';
     var faqTitle = document.createElement('b');
     faqTitle.textContent = 'Common questions';
     faq.appendChild(faqTitle);
 
     var acc = document.createElement('div');
-    acc.className = 'pk-faq';
+    acc.className = 'faq_list';
     faq.appendChild(acc);
 
     var schema = [];
@@ -587,13 +587,13 @@ WZ.dom('blog-post', '.bl-post', function () {
       d.appendChild(s);
 
       var fb = document.createElement('div');
-      fb.className = 'fa-body';
+      fb.className = 'faq_answer';
       var p = document.createElement('p');
       p.textContent = (paras[0].textContent || '').trim();
       fb.appendChild(p);
 
       var more = document.createElement('a');
-      more.className = 'pk-more';
+      more.className = 'more-link_component';
       more.href = '#' + head.id;
       more.textContent = paras.length > 1 ? 'Read the full answer' : 'Read it in context';
       fb.appendChild(more);
@@ -611,9 +611,9 @@ WZ.dom('blog-post', '.bl-post', function () {
     });
 
     if (acc.children.length >= 3) {
-      var cta = post.querySelector('.bl-cta');
+      var cta = post.querySelector('.article_cta');
       if (cta && cta.parentNode) cta.parentNode.insertBefore(faq, cta);
-      else (document.querySelector('.bl-main') || post).appendChild(faq);
+      else (document.querySelector('.article_main') || post).appendChild(faq);
 
       /* The anchors have to travel through the smoother like every other one. */
       acc.addEventListener('click', function (e) {
@@ -639,17 +639,17 @@ WZ.dom('blog-post', '.bl-post', function () {
   }
 
   /* ---- related ----------------------------------------------------------- */
-  var strip = document.querySelector('.bl-related');
+  var strip = document.querySelector('.article_related');
   if (!strip) return;
   var here = location.pathname.replace(/\/$/, '');
-  var cards = [].slice.call(strip.querySelectorAll('.bl-rel-card'));
+  var cards = [].slice.call(strip.querySelectorAll('.article_related-card'));
   var shown = 0;
   cards.forEach(function (card) {
     var link = card.querySelector('a[href]');
     var href = link ? link.getAttribute('href').replace(/\/$/, '') : '';
     if (href === here || shown >= 3) { card.remove(); return; }
     /* A row with no featured image would otherwise show an empty grey plate. */
-    var fig = card.querySelector('.bl-rel-fig');
+    var fig = card.querySelector('.blog_card-image');
     var img = fig && fig.querySelector('img');
     if (fig && (!img || !img.getAttribute('src'))) fig.remove();
     shown++;
@@ -674,9 +674,9 @@ WZ.dom('blog-post', '.bl-post', function () {
    Registered with WZ.section rather than WZ.dom so it runs AFTER the smoother
    exists and measures the settled layout.
    ============================================================================= */
-WZ.section('blog-rails', '.bl-post', function (W) {
+WZ.section('blog-rails', '.article_component', function (W) {
   if (W.reduced || !window.ScrollTrigger || !window.gsap) return;
-  var main = document.querySelector('.bl-main');
+  var main = document.querySelector('.article_main');
   if (!main) return;
 
   var TOP = 120;          /* clear of the nav, which is 96px plus its progress bar */
@@ -689,7 +689,7 @@ WZ.section('blog-rails', '.bl-post', function (W) {
      with the same stack; the consult block at the end of the article is what
      carries the CTA the rest of the way down. */
   mm.add('(min-width: 1280px)', function () {
-    var rail = document.querySelector('.bl-rail-l');
+    var rail = document.querySelector('.is-left-rail');
     if (!rail || !rail.firstElementChild) return;
     /* Still guarded: a 20-heading contents list on a short window would hide
        its own tail. Then it simply scrolls, and the layout is unchanged. */
@@ -717,7 +717,7 @@ WZ.section('blog-rails', '.bl-post', function (W) {
    Registered against .ch-arrival; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-arrival", function (W) {
+WZ.section("section_arrival", function (W) {
   var root = document.getElementById('arrival');
   var reveal = root.querySelectorAll('[data-anim="hide"]');
   /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
@@ -726,7 +726,7 @@ WZ.section("ch-arrival", function (W) {
      came through fine but `getElementById` returned null and the first
      onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
      A class is data the importer keeps, so this survives the trip. */
-  var film = root.querySelector('.ar-film') || document.getElementById('heroFilm');
+  var film = root.querySelector('.arrival_film') || document.getElementById('heroFilm');
   gsap.set(reveal,{visibility:'visible'});
 
   /* Reduced motion keeps the poster frame — a looping background film is
@@ -752,21 +752,21 @@ WZ.section("ch-arrival", function (W) {
   }else{
     tl.from('#heroTitle',{opacity:0,y:40,duration:1,ease:'power3.out'},0);
   }
-  tl.from(root.querySelector('.chapter-tag'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},.05)
+  tl.from(root.querySelector('.tagline_component'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},.05)
     .from('#heroLead',       {opacity:0,y:26,duration:.9,ease:'power3.out'},.55)
-    .from(root.querySelector('.ar-actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
-    .from(root.querySelectorAll('.ar-meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
-    .from(root.querySelector('.ar-cue'),{opacity:0,duration:.8},.9)
+    .from(root.querySelector('.arrival_actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
+    .from(root.querySelectorAll('.arrival_meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
+    .from(root.querySelector('.arrival_scroll-cue'),{opacity:0,duration:.8},.9)
     .from(film||'#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
 
   /* Departure — the chapter recedes as you leave it. */
   gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
-    .to(root.querySelector('.ar-in'),{yPercent:-16,opacity:.15,ease:'none'},0)
+    .to(root.querySelector('.arrival_content'),{yPercent:-16,opacity:.15,ease:'none'},0)
     .to(film||'#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
     .to('#heroVeil',{opacity:.55,ease:'none'},0);
 
   /* Scroll cue nudges until the visitor moves. */
-  gsap.to(root.querySelector('.ar-cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
+  gsap.to(root.querySelector('.arrival_scroll-cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
     repeat:-1,yoyo:true,ease:'power1.inOut'});
 });
 
@@ -776,7 +776,7 @@ WZ.section("ch-arrival", function (W) {
    Registered against .ch-difference; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-difference", function (W) {
+WZ.section("section_difference", function (W) {
   var root = document.getElementById('difference');
 
   /* Counters */
@@ -795,7 +795,7 @@ WZ.section("ch-difference", function (W) {
 
   if(W.reduced) return;
 
-  gsap.fromTo(root.querySelectorAll('.df-stat'),
+  gsap.fromTo(root.querySelectorAll('.difference_stat'),
     {opacity:0,y:26},
     {opacity:1,y:0,duration:.9,stagger:.1,ease:'power3.out',
      scrollTrigger:{trigger:'#diffStats',start:'top 85%'}});
@@ -819,10 +819,10 @@ WZ.section("ch-difference", function (W) {
   ScrollTrigger.addEventListener('scrollEnd', function(){ vt(1); });
 
   /* Comparison table: header first, then rows deal in from the left. */
-  gsap.from('#versus .vs-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+  gsap.from('#versus .versus_head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#versus',start:'top 78%'}});
-  gsap.from('#versus .vs-row',{opacity:0,x:-34,duration:.85,stagger:.1,ease:'power3.out',
-    scrollTrigger:{trigger:'#versus .vs-table',start:'top 82%'}});
+  gsap.from('#versus .versus_row',{opacity:0,x:-34,duration:.85,stagger:.1,ease:'power3.out',
+    scrollTrigger:{trigger:'#versus .versus_table',start:'top 82%'}});
 });
 
 /* ===== sections/ch-invitation.js ===== */
@@ -831,7 +831,7 @@ WZ.section("ch-difference", function (W) {
    Registered against .ch-invitation; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-invitation", function (W) {
+WZ.section("section_invitation", function (W) {
   if(W.reduced) return;
   /* The bespoke `#locs .iv-loc` stagger that used to sit here is gone with the
      markup it animated. On 2026-08-24 the standalone locations strip was folded
@@ -851,11 +851,11 @@ WZ.section("ch-invitation", function (W) {
    Registered against .ch-path; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-path", function (W) {
+WZ.section("section_path", function (W) {
   var pin   = document.getElementById('pathPin'),
       track = document.getElementById('pathTrack'),
       bar   = document.getElementById('pathBar'),
-      sec   = document.querySelector('.ch-path');
+      sec   = document.querySelector('.section_path');
 
   if(W.reduced){
     /* Fall back to a normal horizontal scroll region. */
@@ -883,7 +883,7 @@ WZ.section("ch-path", function (W) {
     sec.classList.add('is-static');
     gsap.set(track,{x:0});
     gsap.set(bar,{scaleX:0});
-    gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card,i){
+    gsap.utils.toArray('#pathTrack .path_card').forEach(function(card,i){
       gsap.from(card,{opacity:0,y:30,duration:.9,ease:'power3.out',delay:i*.07,
         scrollTrigger:{trigger:pin,start:'top 72%'}});
     });
@@ -918,9 +918,9 @@ WZ.section("ch-path", function (W) {
      there is nothing to tween. */
   /* Runs on touch too now — see the note in css/35-ch-path.css. */
   var grey = function(card, on){
-    gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale('+(on?1:0)+')',duration:.6});
+    gsap.to(card.querySelector('.path_image-wrapper img'),{filter:'grayscale('+(on?1:0)+')',duration:.6});
   };
-  gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card){
+  gsap.utils.toArray('#pathTrack .path_card').forEach(function(card){
     ScrollTrigger.create({
       trigger: card,
       containerAnimation: tween,
@@ -931,7 +931,7 @@ WZ.section("ch-path", function (W) {
       onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); },
       onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); grey(card,true); }
     });
-    gsap.fromTo(card.querySelector('.pa-no'),{opacity:.35},{opacity:1,duration:.4,
+    gsap.fromTo(card.querySelector('.path_number'),{opacity:.35},{opacity:1,duration:.4,
       scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
     });
   }
@@ -986,7 +986,7 @@ WZ.section("ch-path", function (W) {
        No fallback needed: IntersectionObserver predates every browser that can
        run ScrollSmoother, but guard anyway so an exotic engine degrades to
        "all cards lit" rather than none. */
-    var cards = track.querySelectorAll('.pa-card');
+    var cards = track.querySelectorAll('.path_card');
     if (!('IntersectionObserver' in window)) {
       for (var i = 0; i < cards.length; i++) cards[i].classList.add('is-live');
       return;
@@ -1033,14 +1033,14 @@ WZ.section("ch-path", function (W) {
    Registered against .ch-proof; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-proof", function (W) {
+WZ.section("section_proof", function (W) {
   /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
      HTML importer maps <video> onto its own Video module, which has no
      htmlAttributes escape hatch, so the `id` is dropped on import: the film
      came through fine but `getElementById` returned null and the first
      onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
      A class is data the importer keeps, so this survives the trip. */
-  var film = document.querySelector('.pf-film video') || document.getElementById('film');
+  var film = document.querySelector('.proof_film video') || document.getElementById('film');
 
   /* Play only while on screen — saves battery and avoids background decode. */
   ScrollTrigger.create({
@@ -1075,7 +1075,7 @@ WZ.section("ch-proof", function (W) {
      page has been embed-only since 2026-09-22 (see gen-reviews.mjs) — so the
      [data-rv="stagger"] note that used to be here went with it. The veneers
      landing pages still carry .rv-wall and still get the kit's stagger there. */
-  gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+  gsap.from('#reviews .reviews_head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
 
   /* --- build the LIVE feed, where the host permits it ---
@@ -1103,8 +1103,8 @@ WZ.section("ch-proof", function (W) {
      alone, and the script origin is never granted. Do not "fix" this by
      re-adding the script tag. */
   (function () {
-    var slot = document.querySelector('.rv-live');
-    var wall = document.querySelector('.rv-wall');
+    var slot = document.querySelector('.reviews_live-widget');
+    var wall = document.querySelector('.reviews_wall');
     if (!slot || !slot.dataset.widget) return;
 
     var widgetId = (slot.dataset.widget.match(/[?&]widgetId=([^&]+)/) || [])[1];
@@ -1177,7 +1177,7 @@ WZ.section("ch-proof", function (W) {
    Registered against .ch-reality; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-reality", function (W) {
+WZ.section("section_reality", function (W) {
   var root = document.getElementById('reality');
   var big  = document.getElementById('realityBig');
 
@@ -1225,7 +1225,7 @@ WZ.section("ch-reality", function (W) {
    Guarded on `#svcGrid` rather than `.ch-services` so the module travels with
    the grid and costs nothing on the 25 pages that do not carry it.
    ============================================================================= */
-WZ.section('ch-services', '#svcGrid', function (W) {
+WZ.section('section_services', '#svcGrid', function (W) {
   /* Reduced motion keeps the image, and drops the chase. Returning here means
      `.wz-svfollow` is never set, so the card's own image stays laid out — the
      same fallback a coarse pointer gets. That is deliberately NOT the magnetic
@@ -1241,13 +1241,13 @@ WZ.section('ch-services', '#svcGrid', function (W) {
   if (!document.documentElement.classList.contains('wz-fine')) return;
 
   var grid  = document.getElementById('svcGrid');
-  var cards = [].slice.call(grid.querySelectorAll('.sv-card'));
-  var shots = cards.map(function (c) { return c.querySelector('.sv-shot img'); });
+  var cards = [].slice.call(grid.querySelectorAll('.services_card'));
+  var shots = cards.map(function (c) { return c.querySelector('.services_image-wrapper img'); });
   if (!shots.some(Boolean)) return;   /* markup without images: leave the cards alone */
 
   /* --- the element ------------------------------------------------------- */
   var el = document.createElement('div');
-  el.className = 'sv-follow';
+  el.className = 'services_cursor-image';
   el.setAttribute('aria-hidden', 'true');
   var img = document.createElement('img');
   img.alt = '';
@@ -1384,7 +1384,7 @@ WZ.section('ch-services', '#svcGrid', function (W) {
    Registered against .ch-specialist; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-specialist", function (W) {
+WZ.section("section_specialist", function (W) {
   if(W.reduced) return;
 
   W.splitLines(document.getElementById('specTitle'), function(self){
@@ -1432,14 +1432,14 @@ WZ.section("ch-specialist", function (W) {
    Registered against .ch-standard; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-standard", function (W) {
+WZ.section("section_standard", function (W) {
   if(W.reduced) return;
 
-  gsap.from('#standard .std-head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
-    scrollTrigger:{trigger:'#standard .std-head',start:'top 82%'}});
+  gsap.from('#standard .standard_head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+    scrollTrigger:{trigger:'#standard .standard_head',start:'top 82%'}});
 
   /* Panels rise and un-mask; each image also drifts against the scroll. */
-  gsap.utils.toArray('#stdGrid .std-card').forEach(function(card,i){
+  gsap.utils.toArray('#stdGrid .standard_card').forEach(function(card,i){
     gsap.fromTo(card,
       {opacity:0,y:44,clipPath:'inset(12% 0 0 0)'},
       {opacity:1,y:0,clipPath:'inset(0% 0 0 0)',duration:1.05,ease:'power3.out',delay:i*.07,
@@ -1455,13 +1455,13 @@ WZ.section("ch-standard", function (W) {
    Registered against .ch-transformation; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-transformation", function (W) {
+WZ.section("section_transformation", function (W) {
   var root  = document.getElementById('transformation'),
       pin   = document.getElementById('tPin'),
       cmp   = document.getElementById('cmp'),
       cap   = document.getElementById('tCaption'),
       dots  = document.getElementById('tDots').children,
-      slides= cmp.querySelectorAll('.tf-slide'),
+      slides= cmp.querySelectorAll('.transformation_slide'),
       handle= document.getElementById('tHandle');
 
   var CAPTIONS = [
@@ -1523,7 +1523,7 @@ WZ.section("ch-transformation", function (W) {
     if(state.idx !== seg){ state.idx = seg; show(seg); }
   });
 
-  gsap.from(root.querySelectorAll('.tf-head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
+  gsap.from(root.querySelectorAll('.transformation_head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
     ease:'power3.out',scrollTrigger:{trigger:root,start:'top 70%'}});
 });
 
@@ -1548,7 +1548,7 @@ WZ.dom('gallery-filter', '#gaGrid', function () {
     bar.querySelectorAll('button').forEach(function (b) {
       b.setAttribute('aria-pressed', String(b === btn));
     });
-    grid.querySelectorAll('.ga-item').forEach(function (item) {
+    grid.querySelectorAll('.gallery_item').forEach(function (item) {
       item.hidden = !(cat === 'all' || item.getAttribute('data-cat') === cat);
     });
     /* Pinned/scrubbed triggers elsewhere on the page measured the old height. */
@@ -1576,10 +1576,10 @@ WZ.dom('gallery-filter', '#gaGrid', function () {
    does not animate. That matters more here than anywhere else on the site,
    because this is the section that explains what happens after they book.
    ============================================================================= */
-WZ.section("lp-steps", function (W) {
-  gsap.utils.toArray(".lp-steps").forEach(function (rail) {
-    var line = rail.querySelector(".lp-steps-line");
-    var steps = gsap.utils.toArray(rail.querySelectorAll(".lp-step"));
+WZ.section("landing-steps_component", function (W) {
+  gsap.utils.toArray(".landing-steps_component").forEach(function (rail) {
+    var line = rail.querySelector(".landing-steps_line");
+    var steps = gsap.utils.toArray(rail.querySelectorAll(".landing-steps_step"));
     if (!steps.length) return;
 
     /* Reduced motion gets the finished state, not the animation: the line full
@@ -1638,11 +1638,11 @@ WZ.section("lp-steps", function (W) {
    The swap is one-way and the node is replaced, so a second click cannot stack
    two players, and there is nothing to tear down on the way out.
    ============================================================================= */
-WZ.dom("vl-card", function () {
-  if (!document.querySelector('.vl-card[data-yt]')) return;
+WZ.dom("video_card", function () {
+  if (!document.querySelector('.video_card[data-yt]')) return;
 
   function cardOf(target) {
-    var card = target && target.closest ? target.closest('.vl-card') : null;
+    var card = target && target.closest ? target.closest('.video_card') : null;
     return card && card.getAttribute('data-yt') ? card : null;
   }
 
@@ -1663,13 +1663,13 @@ WZ.dom("vl-card", function () {
     if (!card) return;
     var id = card.getAttribute('data-yt');
 
-    var shot = card.querySelector('.vl-shot');
+    var shot = card.querySelector('.video_thumbnail');
     var frame = document.createElement('div');
-    frame.className = 'vl-frame';
+    frame.className = 'video_frame';
     var f = document.createElement('iframe');
     /* autoplay only because this IS the click that asked for it. */
     f.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1';
-    var title = card.querySelector('.vl-title');
+    var title = card.querySelector('.video_title');
     f.title = title ? title.textContent.trim() : 'Video';
     f.setAttribute('allow',
       'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
@@ -1681,7 +1681,7 @@ WZ.dom("vl-card", function () {
        role, the tab stop and the label all come off. Leaving them strands a
        screen reader on something that announces as a button and does nothing. */
     var open = document.createElement('div');
-    open.className = 'vl-card';
+    open.className = 'video_card';
     open.appendChild(frame);
     if (title) open.appendChild(title);
     card.replaceWith(open);
@@ -1830,7 +1830,7 @@ WZ.dom("vl-card", function () {
 
   /* --- magnetic buttons, pointer-fine only --- */
   if(!W.reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
-    document.querySelectorAll('.magnetic').forEach(function(el){
+    document.querySelectorAll('.is-magnetic').forEach(function(el){
       var xTo = gsap.quickTo(el,'x',{duration:.5,ease:'power3'}),
           yTo = gsap.quickTo(el,'y',{duration:.5,ease:'power3'});
       el.addEventListener('pointermove',function(e){
@@ -1850,12 +1850,12 @@ WZ.dom("vl-card", function () {
      the hover fill). Both are structure the CSS needs and neither survives a
      round trip, so they are rebuilt here rather than hand-patched per platform.
      A no-op wherever the markup arrived intact. */
-  document.querySelectorAll('.burger').forEach(function(b){
+  document.querySelectorAll('.nav_menu-button').forEach(function(b){
     if(b.querySelector('span')) return;
     b.appendChild(document.createElement('span'));
     b.appendChild(document.createElement('span'));
   });
-  document.querySelectorAll('.btn').forEach(function(b){
+  document.querySelectorAll('.button').forEach(function(b){
     if(b.querySelector('span') || !b.firstChild) return;
     var t = b.textContent.trim();
     if(!t) return;
@@ -1865,7 +1865,7 @@ WZ.dom("vl-card", function () {
   /* The filter chips read "All cases 54"; the count is a <b> so it can sit back
      at 78% opacity. Buttons are flattened to plain text on import, so the
      trailing digits are split back out here. */
-  document.querySelectorAll('.ga-filters button').forEach(function(btn){
+  document.querySelectorAll('.gallery_filters button').forEach(function(btn){
     if(btn.querySelector('b')) return;
     var m = /^(.*?)(\d+)$/.exec(btn.textContent.trim());
     if(!m) return;

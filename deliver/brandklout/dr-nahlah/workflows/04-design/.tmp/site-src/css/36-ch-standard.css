@@ -1,24 +1,24 @@
-.ch-standard{background:var(--bg-2);position:relative}
-.ch-standard .std-head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
-.ch-standard .std-head h2{font-size:var(--h2)}
-.ch-standard .std-head p{color:var(--fg-body);font-weight:400}
-.std-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
-.std-card{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
+.section_standard{background:var(--bg-2);position:relative}
+.section_standard .standard_head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
+.section_standard .standard_head h2{font-size:var(--h2)}
+.section_standard .standard_head p{color:var(--fg-body);font-weight:400}
+.standard_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.standard_card{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
   align-items:flex-end;padding:clamp(1.4rem,2.4vw,2.25rem);isolation:isolate}
-.std-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+.standard_card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
   transform:scale(1.08);transition:transform 1s cubic-bezier(.22,1,.36,1)}
 /* The top of this gradient used to be almost clear, which put a gold label
    straight onto whatever the photo happened to be — unreadable over the
    bright practice interior. Both ends now carry a real scrim. */
-.std-card::before{content:"";position:absolute;inset:0;z-index:-1;
+.standard_card::before{content:"";position:absolute;inset:0;z-index:-1;
   background:linear-gradient(180deg,rgba(11,11,12,.72) 0%,rgba(11,11,12,.34) 30%,
              rgba(11,11,12,.52) 58%,rgba(11,11,12,.94) 100%)}
-.std-card:hover img{transform:scale(1)}
-.std-card .std-cap{display:grid;gap:.5rem}
-.std-card .std-cap b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
-.std-card .std-cap span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
-.std-card .std-tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
+.standard_card:hover img{transform:scale(1)}
+.standard_card .standard_caption{display:grid;gap:.5rem}
+.standard_card .standard_caption b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
+.standard_card .standard_caption span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
+.standard_card .standard_tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
   font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
   color:var(--gold-light);text-shadow:0 1px 10px rgba(11,11,12,.85)}
-.std-card.std-wide{grid-column:1 / -1;min-height:clamp(300px,36vw,480px)}
-@media(min-width:820px){ .std-grid{grid-template-columns:repeat(3,1fr)} }
+.standard_card.is-wide-card{grid-column:1 / -1;min-height:clamp(300px,36vw,480px)}
+@media(min-width:820px){ .standard_grid{grid-template-columns:repeat(3,1fr)} }

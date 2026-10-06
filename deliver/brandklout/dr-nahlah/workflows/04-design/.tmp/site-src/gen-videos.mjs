@@ -33,13 +33,13 @@ const [lead, ...rest] = videos;
    title element gone. A container keeps its children. Keyboard support is
    restored explicitly in sections/video-library.js, so this is the same control
    to a screen reader and to the keyboard, just one the importer will not eat. */
-const facade = (v) => `        <div class="vl-card" role="button" tabindex="0" data-yt="${v.id}"
+const facade = (v) => `        <div class="video_card" role="button" tabindex="0" data-yt="${v.id}"
                 aria-label="Play: ${esc(v.title)}">
-          <span class="vl-shot">
+          <span class="video_thumbnail">
             <img src="${v.thumb}" alt="" loading="lazy" width="480" height="360"${v.zoom !== 1 ? ` style="--vl-zoom:${v.zoom}"` : ""}>
-            <span class="vl-play" aria-hidden="true"></span>
+            <span class="video_play-icon" aria-hidden="true"></span>
           </span>
-          <span class="vl-title">${esc(v.title)}</span>
+          <span class="video_title">${esc(v.title)}</span>
         </div>`;
 
 const page = `<!-- ==========================================================================
@@ -66,32 +66,32 @@ const page = `<!-- =============================================================
      Instatic serve it at all: that platform lifts CSP frame-src only for a page
      that renders a real YouTube node. See gen-videos.mjs.
      ========================================================================== -->
-<section class="pg-hero" id="hero" style="min-height:clamp(420px,54svh,580px)">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero" style="min-height:clamp(420px,54svh,580px)">
+  <div class="page-hero_background">
     <img src="assets/tech-hero.jpg" alt="The scanning suite at the practice" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Video Library</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><span>Video Library</span></div>
     <h1 data-split>The procedures, <em>explained</em>.</h1>
-    <p class="ph-lead" data-rv>Fourteen short films from the practice's own channel: what each
+    <p class="page-hero_lead" data-rv>Fourteen short films from the practice's own channel: what each
       treatment involves, why it is planned the way it is, and what the technology actually
       changes.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="patient-stories.html"><span>Hear from patients</span></a>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="button is-secondary is-magnetic" href="patient-stories.html"><span>Hear from patients</span></a>
     </div>
   </div>
 </section>
 
-<section class="pk" id="library">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Filmed at the practice</span></div>
+<section class="section_content" id="library">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Filmed at the practice</span></div>
       <h2 data-split>${esc(lead.title)}</h2>
     </div>
 
-    <figure class="vl-lead" data-rv>
-      <div class="vl-frame">
+    <figure class="video_lead-film" data-rv>
+      <div class="video_frame">
         <iframe src="https://www.youtube.com/embed/${lead.id}" loading="lazy"
                 title="${esc(lead.title)}"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -102,22 +102,22 @@ const page = `<!-- =============================================================
   </div>
 </section>
 
-<section class="pk pk-alt" id="films">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">The library</span></div>
+<section class="section_content is-background-alternate" id="films">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">The library</span></div>
       <h2 data-split>Thirteen more, by subject.</h2>
       <p data-rv>Each one opens where it sits. Nothing autoplays, and nothing loads until you
         ask for it.</p>
     </div>
 
-    <div class="vl-grid" data-rv="stagger">
+    <div class="video_grid" data-rv="stagger">
 ${rest.map(facade).join("\n")}
     </div>
 
-    <p class="vl-note" data-rv>Prefer to talk it through in person? A consultation includes the 3D
+    <p class="video_note" data-rv>Prefer to talk it through in person? A consultation includes the 3D
       scan and a straight answer about what your case needs.
-      <a class="pk-more" href="contact.html#book">Book a consultation</a></p>
+      <a class="more-link_component" href="contact.html#book">Book a consultation</a></p>
   </div>
 </section>
 `;

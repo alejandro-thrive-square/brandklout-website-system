@@ -22,7 +22,7 @@
    ============================================================================= */
 WZ.dom('blog-filter', '#blFilter', function () {
   var bar = document.getElementById('blFilter'),
-      grid = document.querySelector('#articles .bl-grid'),
+      grid = document.querySelector('#articles .blog_grid'),
       input = document.getElementById('blSearch'),
       select = document.getElementById('blTopic'),
       count = document.getElementById('blCount'),
@@ -51,10 +51,10 @@ WZ.dom('blog-filter', '#blFilter', function () {
   /* 43 cards x (title + excerpt) is a few kilobytes of string. Building it per
      keystroke would still be fast, but building it once means a keystroke is a
      substring test and nothing else. */
-  var cards = [].slice.call(grid.querySelectorAll('.bl-card')).map(function (el) {
+  var cards = [].slice.call(grid.querySelectorAll('.blog_card')).map(function (el) {
     var h = el.querySelector('h2'),
         p = el.querySelector('p'),
-        t = el.querySelector('.bl-topic');
+        t = el.querySelector('.blog_topic');
     return {
       el: el,
       topic: t ? slugify(t.textContent) : '',

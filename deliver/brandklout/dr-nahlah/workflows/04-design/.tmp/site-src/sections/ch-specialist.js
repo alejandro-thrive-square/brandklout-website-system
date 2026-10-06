@@ -3,7 +3,7 @@
    Registered against .ch-specialist; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-specialist", function (W) {
+WZ.section("section_specialist", function (W) {
   if(W.reduced) return;
 
   W.splitLines(document.getElementById('specTitle'), function(self){

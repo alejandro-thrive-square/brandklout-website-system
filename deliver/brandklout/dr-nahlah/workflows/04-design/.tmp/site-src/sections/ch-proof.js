@@ -3,14 +3,14 @@
    Registered against .ch-proof; runs only when that is on the page, so
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
-WZ.section("ch-proof", function (W) {
+WZ.section("section_proof", function (W) {
   /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
      HTML importer maps <video> onto its own Video module, which has no
      htmlAttributes escape hatch, so the `id` is dropped on import: the film
      came through fine but `getElementById` returned null and the first
      onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
      A class is data the importer keeps, so this survives the trip. */
-  var film = document.querySelector('.pf-film video') || document.getElementById('film');
+  var film = document.querySelector('.proof_film video') || document.getElementById('film');
 
   /* Play only while on screen — saves battery and avoids background decode. */
   ScrollTrigger.create({
@@ -45,7 +45,7 @@ WZ.section("ch-proof", function (W) {
      page has been embed-only since 2026-09-22 (see gen-reviews.mjs) — so the
      [data-rv="stagger"] note that used to be here went with it. The veneers
      landing pages still carry .rv-wall and still get the kit's stagger there. */
-  gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+  gsap.from('#reviews .reviews_head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
 
   /* --- build the LIVE feed, where the host permits it ---
@@ -73,8 +73,8 @@ WZ.section("ch-proof", function (W) {
      alone, and the script origin is never granted. Do not "fix" this by
      re-adding the script tag. */
   (function () {
-    var slot = document.querySelector('.rv-live');
-    var wall = document.querySelector('.rv-wall');
+    var slot = document.querySelector('.reviews_live-widget');
+    var wall = document.querySelector('.reviews_wall');
     if (!slot || !slot.dataset.widget) return;
 
     var widgetId = (slot.dataset.widget.match(/[?&]widgetId=([^&]+)/) || [])[1];

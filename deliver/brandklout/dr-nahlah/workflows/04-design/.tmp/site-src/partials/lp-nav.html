@@ -21,28 +21,28 @@
      partials/site-scripts.html, which swaps the number in the page per
      visitor; nothing here changes for it.
      ========================================================================== -->
-<header class="nav lp-nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+<header class="nav_component is-landing-header" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
 
-  <div class="lp-bar">
-    <div class="wrap no-rail lp-bar-in">
-      <span class="lp-bar-item">
-        <i class="lp-bar-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i>
+  <div class="landing-header_bar">
+    <div class="container-large is-no-rail landing-header_bar-content">
+      <span class="landing-header_bar-item">
+        <i class="landing-header_stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</i>
         <b>4.9</b> Google rating</span>
-      <span class="lp-bar-item is-wide">Board-certified prosthodontist &middot;
+      <span class="landing-header_bar-item is-wide">Board-certified prosthodontist &middot;
         <b>18,000+</b> implants placed</span>
-      <span class="lp-bar-item is-wide">{{LOC_BAR}}</span>
+      <span class="landing-header_bar-item is-wide">{{LOC_BAR}}</span>
     </div>
   </div>
 
-  <div class="wrap no-rail lp-nav-in">
-    <span class="nav-logo">
+  <div class="container-large is-no-rail landing-header_container">
+    <span class="nav_logo">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </span>
-    <div class="lp-nav-side">
-      <a class="lp-nav-phone" href="tel:{{LOC_TEL}}">
+    <div class="landing-header_actions">
+      <a class="landing-header_phone" href="tel:{{LOC_TEL}}">
         <i aria-hidden="true">&#9742;</i><span>{{LOC_PHONE}}</span></a>
-      <a class="lp-nav-cta" href="{{LP_BOOK_HREF}}">{{LP_BOOK_LABEL}}</a>
+      <a class="landing-header_button" href="{{LP_BOOK_HREF}}">{{LP_BOOK_LABEL}}</a>
     </div>
   </div>
 </header>

@@ -6,8 +6,8 @@
 <!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
      by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
      Designer carries. Do not hand-edit the output; edit seo.json. -->
-<title>Contact the Tysons Corner Office | Dr. Nahlah, McLean VA</title>
-<meta name="description" content="Request a consultation at the Tysons Corner office, 7901 Jones Branch Drive, McLean. Call (703) 448-3312.">
+<title>Dentist in McLean, VA (Tysons Corner) | Contact Dr. Nahlah</title>
+<meta name="description" content="Request a consultation at Dr. Nahlah's Tysons Corner office, 7901 Jones Branch Drive, Suite 220, McLean, VA 22102. Call (703) 448-3312.">
 <meta property="og:title" content="Contact Dr. Nahlah | Tysons Corner, McLean">
 <meta property="og:description" content="Request a consultation at the McLean office with a board-certified prosthodontist.">
 <meta property="og:type" content="website">
@@ -159,20 +159,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ==========================================================================
      FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
      ========================================================================== -->
-<header class="nav" id="nav" data-journey="0">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap no-rail nav-in">
-    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+<header class="nav_component" id="nav" data-journey="0">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-large is-no-rail nav_container">
+    <a class="nav_logo" href="index.html" aria-label="Dr. Nahlah home">
       <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
-    <nav class="nav-slot" aria-label="Primary">
+    <nav class="nav_menu-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
            the Navbar is ONE shared component, so it cannot be: the conversion
            turns these five placeholders into a pathname -> href map in the
            footer custom code. When a slug changes, that map has to change with
            it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
            there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
-      <div class="nav-links">
+      <div class="nav_links">
         <a href="dental-implants.html">Implants</a>
         <a href="smile-makeover.html">Cosmetic</a>
         <a href="smile-gallery.html">Smile Gallery</a>
@@ -182,10 +182,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       
     </nav>
-    <div class="nav-right">
-      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
-      <span class="nav-close" aria-hidden="true">Close</span>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <div class="nav_actions">
+      <a class="nav_button" href="contact.html#book">Book a Consult</a>
+      <span class="nav_close-label" aria-hidden="true">Close</span>
+      <button class="nav_menu-button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
         <span></span><span></span>
       </button>
     </div>
@@ -194,9 +194,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
-<div class="drawer" id="drawer" aria-hidden="true" inert data-theme="dark">
-  <div class="dr-grid">
-    <div class="dr-col">
+<div class="menu-drawer_component" id="drawer" aria-hidden="true" inert data-theme="dark">
+  <div class="menu-drawer_grid">
+    <div class="menu-drawer_column">
       <p>Implant Dentistry</p>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
@@ -206,7 +206,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Treatments</p>
       <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
@@ -215,7 +215,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Aesthetics</p>
       <ul>
         <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
@@ -226,7 +226,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>Who We Are</p>
       <ul>
         <li><a href="about.html">Why Choose Us</a></li>
@@ -237,7 +237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="posts.html">Journal</a></li>
       </ul>
     </div>
-    <div class="dr-col">
+    <div class="menu-drawer_column">
       <p>What To Expect</p>
       <ul>
         <li><a href="patient-center.html">Your First Visit</a></li>
@@ -248,7 +248,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </ul>
     </div>
   </div>
-  <div class="dr-foot">
+  <div class="menu-drawer_footer">
     <div><b>Tysons Corner &middot; McLean</b>
       New patients <a href="tel:+17034483312">(703) 448-3312</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
@@ -298,63 +298,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      script are refused and the form renders as nothing. Do not rename it, and
      do not "tidy" the vendor snippet inside it.
      ========================================================================== -->
-<section class="pg-hero" id="hero" style="min-height:clamp(440px,56svh,600px)">
-  <div class="ph-bg">
+<section class="section_page-hero" id="hero" style="min-height:clamp(440px,56svh,600px)">
+  <div class="page-hero_background">
     <img src="assets/office-hero.jpg" alt="The practice reception in Northern Virginia" data-drift>
   </div>
-  <div class="wrap ph-in">
-    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><a href="contact.html">Contact</a><i></i><span>Tysons Corner &middot; McLean</span></div>
+  <div class="container-large page-hero_content">
+    <div class="breadcrumb_component" data-rv><a href="index.html">Home</a><i></i><a href="contact.html">Contact</a><i></i><span>Tysons Corner &middot; McLean</span></div>
     <h1 data-split>Two offices. <em>One</em> specialist.</h1>
-    <p class="ph-lead" data-rv>Tysons Corner in McLean and Old Town Alexandria. Both run the same
+    <p class="page-hero_lead" data-rv>Tysons Corner in McLean and Old Town Alexandria. Both run the same
       way, by the same team, with the laboratory in the building.</p>
-    <div class="ph-actions" data-rv>
-      <a class="btn btn-primary magnetic" href="#book"><span>Request a consultation</span></a>
-      <a class="btn btn-ghost magnetic" href="#offices"><span>Find an office</span></a>
+    <div class="page-hero_actions" data-rv>
+      <a class="button is-primary is-magnetic" href="#book"><span>Request a consultation</span></a>
+      <a class="button is-secondary is-magnetic" href="#offices"><span>Find an office</span></a>
     </div>
   </div>
 </section>
 
 <!-- ---------- offices ---------- -->
-<section class="pk pk-alt" id="offices">
-  <div class="wrap section">
-    <div class="pk-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Locations</span></div>
+<section class="section_content is-background-alternate" id="offices">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Locations</span></div>
       <h2 data-split>Where to go.</h2>
     </div>
-    <div class="ct-office-grid" data-rv="stagger">
-      <article class="ct-office">
+    <div class="office-card_grid" data-rv="stagger">
+      <article class="office-card_component">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
-        <a class="pk-more ct-office-dirs"
+        <a class="more-link_component office-card_directions"
            href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+        <a class="button is-primary is-magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
-      <article class="ct-office">
+      <article class="office-card_component">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="ct-office-line"><span>New patients</span>
+        <div class="office-card_line"><span>New patients</span>
           <a href="tel:+15716177245">(571) 617-7245</a></div>
-        <div class="ct-office-line"><span>Current patients</span>
+        <div class="office-card_line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more ct-office-dirs"
+        <a class="more-link_component office-card_directions"
            href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
-        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+        <a class="button is-primary is-magnetic" href="https://flexbook.me/drnahlah"
            target="_blank" rel="noopener"><span>Book now</span></a>
       </article>
     </div>
 
-    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
+    <div class="stats_component" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
       <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>
       <div><b>Friday</b><span>8:00am &ndash; 2:00pm</span></div>
       <div><b>Saturday</b><span>Closed</span></div>
@@ -364,10 +364,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- request form ---------- -->
-<section class="pk" id="book">
-  <div class="wrap section pk-lede">
-    <div class="lc-head">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Request A Consultation</span></div>
+<section class="section_content" id="book">
+  <div class="container-large padding-section-large intro_component">
+    <div class="intro_head">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Request A Consultation</span></div>
       <h2 data-split>Tell us what you are dealing with.</h2>
       <p data-rv style="color:var(--fg-body);font-weight:400;margin-top:1rem;max-width:52ch">
         A consultation includes the 3D scan and a straight answer about what your case actually
@@ -405,40 +405,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ---------- before you come ---------- -->
-<section class="pk pk-light" id="visiting">
-  <div class="wrap section pk-split">
-    <figure class="sp-fig" style="margin:0">
+<section class="section_content is-background-light" id="visiting">
+  <div class="container-large padding-section-large split_component">
+    <figure class="split_image-wrapper" style="margin:0">
       <img src="assets/office-outside.jpg" alt="The practice building exterior" data-drift loading="lazy">
     </figure>
-    <div class="sp-copy">
-      <div class="chapter-tag" data-rv><i></i><span class="label">Before You Come</span></div>
+    <div class="split_content">
+      <div class="tagline_component" data-rv><i></i><span class="text-style-tagline">Before You Come</span></div>
       <h2 data-split>What to bring, and what to expect.</h2>
-      <ul class="sp-list" data-rv="stagger">
+      <ul class="bullet-list_component" data-rv="stagger">
         <li><i></i>Any existing treatment plan or quote. Second opinions on implant surgery are free</li>
         <li><i></i>Recent imaging, if another practice has already scanned you</li>
         <li><i></i>Your insurance details; most dental PPO plans are accepted and claims are filed for you</li>
         <li><i></i>A list of medications, particularly if sedation is likely</li>
         <li><i></i>Time. A first consultation includes an examination and a cone-beam scan</li>
       </ul>
-      <p data-rv><a class="pk-more" href="implant-cost.html">Cost and financing before you come</a></p>
+      <p data-rv><a class="more-link_component" href="implant-cost.html">Cost and financing before you come</a></p>
     </div>
   </div>
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk pk-alt" id="next">
-  <div class="wrap section">
-    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
-    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
-      <a href="dental-implants.html"><span class="nx-k">Treatment</span>
-        <span class="nx-t">Dental Implants</span>
-        <span class="nx-d">Start here if teeth are missing rather than damaged.</span></a>
-      <a href="smile-makeover.html"><span class="nx-k">Cosmetic</span>
-        <span class="nx-t">Smile Makeover</span>
-        <span class="nx-d">Start here if the teeth are there but you dislike them.</span></a>
-      <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>
-        <span class="nx-t">Sedation</span>
-        <span class="nx-d">Start here if the chair itself is the problem.</span></a>
+<section class="section_content is-background-alternate" id="next">
+  <div class="container-large padding-section-large">
+    <div class="section-heading_component"><h2 data-split>Where to go next.</h2></div>
+    <nav class="related-pages_component" data-rv="stagger" aria-label="Related pages">
+      <a href="dental-implants.html"><span class="related-pages_tagline">Treatment</span>
+        <span class="related-pages_title">Dental Implants</span>
+        <span class="related-pages_description">Start here if teeth are missing rather than damaged.</span></a>
+      <a href="smile-makeover.html"><span class="related-pages_tagline">Cosmetic</span>
+        <span class="related-pages_title">Smile Makeover</span>
+        <span class="related-pages_description">Start here if the teeth are there but you dislike them.</span></a>
+      <a href="sedation-dentistry.html"><span class="related-pages_tagline">Comfort</span>
+        <span class="related-pages_title">Sedation</span>
+        <span class="related-pages_description">Start here if the chair itself is the problem.</span></a>
     </nav>
   </div>
 </section>
@@ -446,12 +446,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </main>
 
-<footer class="foot" data-theme="dark">
-  <div class="wrap">
-    <div class="foot-grid">
+<footer class="footer_component" data-theme="dark">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
         <img src="assets/logo.png" alt="Dr. Nahlah">
-        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+        <p class="footer_blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
           smiles that other practices call too complex.</p>
         <!-- Social and review profiles (Asana 1219087019480243, 2026-10-05). Not on
              lp-foot.html: an ads page's footer leads nowhere but the legal pages. -->
@@ -488,18 +488,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
       <div>
         <h2>Hours</h2>
-        <ul class="foot-facts">
+        <ul class="footer_facts">
           <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
           <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
-        <ul class="foot-facts" style="margin-top:1.1rem;row-gap:1rem">
+        <ul class="footer_facts" style="margin-top:1.1rem;row-gap:1rem">
           <li><b>McLean</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102" target="_blank" rel="noopener noreferrer" aria-label="Directions to the McLean office"><div>7901 Jones Branch Drive, Suite 220</div><div>McLean, VA 22102</div></a><a href="tel:+17034483312">(703) 448-3312</a></li>
           <li><b>Alexandria</b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=2855+Duke+Street+Alexandria+VA+22314" target="_blank" rel="noopener noreferrer" aria-label="Directions to the Alexandria office"><div>2855 Duke Street</div><div>Alexandria, VA 22314</div></a><a href="tel:+15716177245">(571) 617-7245</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-base">
+    <div class="footer_bottom">
       <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
       <span>McLean &middot; Alexandria, Virginia</span>
       <!-- The legal links belong in the base row, not in the drawer's site map:

@@ -3,7 +3,7 @@ WZ.add(function (W) {
   if (!W.reduced) kit.classList.add('wz-kit');
 
   /* Before/after sliders work with or without GSAP — they are content, not motion. */
-  document.querySelectorAll('.pk-ba').forEach(function (ba) {
+  document.querySelectorAll('.before-after_component').forEach(function (ba) {
     var range = ba.querySelector('input[type=range]');
     /* Instatic maps every <input> onto its own form-control module, which only
        knows type="text": the three comparison sliders arrive as text boxes
@@ -62,7 +62,7 @@ WZ.add(function (W) {
   });
 
   /* Counters. Reduced motion prints the final value immediately (above). */
-  gsap.utils.toArray('.pk-stats [data-count]').forEach(function (el) {
+  gsap.utils.toArray('.stats_component [data-count]').forEach(function (el) {
     var target = parseFloat(el.getAttribute('data-count')),
         dec = parseInt(el.getAttribute('data-decimals') || '0', 10),
         suffix = el.getAttribute('data-suffix') || '',
@@ -80,7 +80,7 @@ WZ.add(function (W) {
 /* Reduced motion never runs the counter tween, so paint the finals up front. */
 (function () {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.pk-stats [data-count]').forEach(function (el) {
+  document.querySelectorAll('.stats_component [data-count]').forEach(function (el) {
     var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
     el.textContent = parseFloat(el.getAttribute('data-count'))
       .toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
