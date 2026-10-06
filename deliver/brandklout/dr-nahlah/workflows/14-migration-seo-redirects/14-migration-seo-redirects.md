@@ -162,10 +162,10 @@ and `verify-live.mjs`, which replays **all 190** rows against production
    robots.txt has no `Sitemap:` line as a result, which is an acceptable trade.
    **2026-10-05:** the Worker now embeds the policy verbatim (`CF_POLICY`) and
    appends only the `Sitemap:` line, so the `www.drnahlah.com/robots.txt*` route
-   is safe to bind. The code is deployed, but the route is **not bound yet**:
-   no token we hold may write zone Workers Routes or rulesets
-   (`CLOUDFLAREDIAGNOSIS` reads everything but writes nothing). Bind it in the
-   dashboard. If Cloudflare changes its policy text, re-copy it.
+   is safe to bind. It was bound, along with `sitemap.xml*`, on 2026-10-05. No
+   token we hold may write zone Workers Routes or rulesets
+   (`CLOUDFLAREDIAGNOSIS` reads everything but writes nothing), so route changes
+   are made in the dashboard (Codex computer use). If Cloudflare changes its policy text, re-copy it.
 2. **`http_request_dynamic_redirect` runs BEFORE `http_request_redirect`.**
    The opposite of what the phase names suggest. So a Single Redirect fires
    ahead of Bulk Redirects, and an old URL arriving on the apex takes two hops.

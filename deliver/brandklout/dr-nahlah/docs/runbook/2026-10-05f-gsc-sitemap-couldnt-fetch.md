@@ -23,13 +23,15 @@ The user reported that Search Console (domain property `sc-domain:drnahlah.com`)
 - `deploy-worker.mjs`: routes are now `www.drnahlah.com/sitemap.xml*` and `www.drnahlah.com/robots.txt*`,
   and `--apply` deletes the retired exact patterns. Directive: gotcha 1 is amended and gotcha 8 is added.
 
+## Routes bound (same day, via Codex computer use in the signed-in dashboard)
+- Workers Routes are now exactly `www.drnahlah.com/robots.txt*` and `www.drnahlah.com/sitemap.xml*`
+  → `drnahlah-seo`. The exact `www.drnahlah.com/sitemap.xml` and `drnahlah.com/sitemap.xml` routes are gone.
+- Verified live: robots.txt is 1295 B (the full content-signals policy + `Sitemap:` line),
+  `/sitemap.xml` and `/sitemap.xml?v=1` return 200 XML, apex 301s to www, and the home page returns 200.
+
 ## Next
-- **Bind two routes in the Cloudflare dashboard** (Workers Routes, zone drnahlah.com, worker
-  `drnahlah-seo`): `www.drnahlah.com/robots.txt*` and `www.drnahlah.com/sitemap.xml*`. Then delete
-  the exact `www.drnahlah.com/sitemap.xml` and `drnahlah.com/sitemap.xml` routes. Until then:
-  - robots.txt still has no `Sitemap:` line;
-  - `/sitemap.xml?x` still 404s. This doesn't matter for Search Console.
-- Search Console re-reads the legacy rows on its own schedule. They should clear without action.
+- Nothing on Cloudflare. Search Console re-reads the legacy sitemap rows on its own schedule, and they
+  should clear without anyone acting.
 
 ## Gotchas
 - **`CLOUDFLAREDIAGNOSIS` is read-only.** It reads routes, settings, bot management and GraphQL
