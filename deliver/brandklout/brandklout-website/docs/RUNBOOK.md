@@ -12,6 +12,14 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
 
 ## Status: LIVE ON brandklout.ai - v18 verbatim with Client-First type roles (seq 51)
 
+- **2026-10-06: STAGING carries the Client-First class standard; production does not yet.** On
+  `staging.brandklout.ai` every class is renamed (806 renames + 5 merges, `workflows/class-standard/class-map.json`)
+  and 20 tokens live in the Framework; all gates clean except editability, which reports the
+  page-scoped `src/styles/site.css` (left scoped on purpose). **Before touching either instance:**
+  staging and production now use DIFFERENT class names; never run `push-site.mjs` (it regenerates
+  the old names); a page write drops SEO cells, and the 15 nested-slug pages on staging take their
+  description from Open Graph overrides. Production rollout waits for review.
+  [`runbook/2026-10-06-class-standard-staging.md`](./runbook/2026-10-06-class-standard-staging.md).
 - **2026-10-05 (seq 51): tables in legal pages go in a CODE BLOCK.** Instatic strips `<table>` from
   collection bodies (the editor still shows them); `agency/legal-tables.js` (in site.js) turns a
   markdown table typed inside a code block into a real table. Privacy §7/§8 use it.

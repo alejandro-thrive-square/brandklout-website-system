@@ -1,11 +1,12 @@
 # Runbook index
 
-26 runs, newest first. Each line is one file in this folder.
+27 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need.** Opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-06 | **Client-First class standard + Framework tokens on STAGING** (fleet migration; production untouched): 20 tokens into the Framework, 806 renames + 5 merges; css parity 0 real at 1440/390/1920, legal pages 0, head 0 of 34, IN BOUNDS, CLEAN; editability fails only for the page-scoped `site.css` (left scoped by decision). Carries **gotchas** (a page write drops SEO cells; nested-slug pages now take their description from Open Graph overrides; do not run `push-site.mjs`) | [`2026-10-06-class-standard-staging.md`](./2026-10-06-class-standard-staging.md) |
 | 2026-10-05 | **Legal pages get real tables + staging re-seeded (prod seq 51)**: Instatic strips `<table>` from collection bodies, so tables are now written inside a code block and `agency/legal-tables.js` (in site.js) turns them into real tables; code blocks wrap. Tested on staging, then production; staging then replaced with a fresh production clone (plugins kept, all gates green). Carries **gotchas** | [`2026-10-05-legal-tables-and-pre.md`](./2026-10-05-legal-tables-and-pre.md) |
 | 2026-09-22 | **staging.brandklout.ai + Cloudflare hardening + an SEO layer**: staging environment, volume, domain, noindex rule, seeded one-shot (34.6 MB), service domain deleted; SSL full-to-strict, Always Use HTTPS on, min TLS 1.2; Open Graph + AEO Schema installed on both (production configured, NOT published). All gates green. Carries **gotchas** | [`2026-09-22-staging-and-cloudflare.md`](./2026-09-22-staging-and-cloudflare.md) |
 | 2026-09-22 | **brandklout.ai cutover**: both new hosts were TRAPs (PUBLIC_ORIGIN was still the railway host alone, login POST 403). Now apex, www and railway host all OK; real login on the domain verified, both accounts active. `sites.json` + master `.env` updated. Carries **gotchas** | [`2026-09-22-domain-cutover-brandklout-ai.md`](./2026-09-22-domain-cutover-brandklout-ai.md) |

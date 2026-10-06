@@ -1,0 +1,133 @@
+{
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "bg",
+      "value": "#fff"
+    },
+    {
+      "slug": "bg2",
+      "value": "#f7f9fc"
+    },
+    {
+      "slug": "panel",
+      "value": "#fff"
+    },
+    {
+      "slug": "panel2",
+      "value": "#edf4fa"
+    },
+    {
+      "slug": "ink",
+      "value": "#071019"
+    },
+    {
+      "slug": "muted",
+      "value": "#687789"
+    },
+    {
+      "slug": "line",
+      "value": "#dfe7ee"
+    },
+    {
+      "slug": "accent",
+      "value": "#4ee1d2"
+    },
+    {
+      "slug": "accent2",
+      "value": "#b6f36a"
+    },
+    {
+      "slug": "dark",
+      "value": "#071019"
+    },
+    {
+      "slug": "warn",
+      "value": "#ffd580"
+    },
+    {
+      "slug": "mint",
+      "value": "#4ee1d2"
+    },
+    {
+      "slug": "lime",
+      "value": "#b6f36a"
+    },
+    {
+      "slug": "paper",
+      "value": "#f7f9fc"
+    },
+    {
+      "slug": "forest",
+      "value": "#071019"
+    },
+    {
+      "slug": "teal",
+      "value": "#2787a6"
+    },
+    {
+      "slug": "blue",
+      "value": "#4b7dff"
+    },
+    {
+      "slug": "cyan",
+      "value": "#4ee1d2"
+    }
+  ],
+  "typography": [],
+  "spacing": [
+    {
+      "group": "Spacing",
+      "sizes": [
+        {
+          "name": "max",
+          "px": 1180
+        }
+      ]
+    },
+    {
+      "group": "UI",
+      "sizes": [
+        {
+          "name": "radius",
+          "px": 24
+        }
+      ]
+    }
+  ],
+  "stays": [
+    "--ease: cubic-bezier(.22,1,.36,1)",
+    "--shadow: 0 1.25rem 5rem rgba(10,24,40,.10)"
+  ],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [
+        "--bg",
+        "--bg2",
+        "--panel",
+        "--panel2",
+        "--ink",
+        "--muted",
+        "--line",
+        "--accent",
+        "--accent2",
+        "--dark",
+        "--warn",
+        "--mint",
+        "--lime",
+        "--paper",
+        "--forest",
+        "--teal",
+        "--blue",
+        "--cyan",
+        "--max",
+        "--radius"
+      ],
+      "set": {}
+    }
+  ]
+}
