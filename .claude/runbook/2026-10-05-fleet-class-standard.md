@@ -56,6 +56,34 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
   in-place dead media overrides (+ `fix-dead-overrides.mjs`), css-parity load wait + frozen
   animations, two-capture noise filter, persistent runtime differences, crash-proof runtime capture.
 
+## Second night (2026-10-05 23:40 → 2026-10-06), parallel sessions coordinated from main
+One Claude session per worktree (Orca), briefed from `output/fleet/BRIEF-*.md` (gitignored), each
+reporting `output/fleet/<client>/STATUS.md` and `TOOL-BUG.md`; main fixed every tool bug once, on
+main, and told the sessions. State table: `output/fleet/COORDINATOR.md`.
+- **Brandklout website DONE on staging** (`bk-brandklout-website` `0a60709f`): Framework 28 vars,
+  806 renames + 5 merges; css 0 real at every width, legal + head gates 0. `site.css` stays a scoped
+  code asset (it carries the fluid root for 2 pages; site-wide would resize every other page) — a
+  design decision, the one editability FAIL. 15 nested-slug pages' descriptions now live in Open Graph
+  overrides (tell Sang: edit them in the OG panel; production run must write the same 15).
+- **Dr. Nahlah DONE on staging** (`bk-dr-nahlah` `248b174b`): staging draft published first with the
+  user's own invisible Styles-panel test (coordinator decision); 374 rules renamed, 0 page rows
+  written; css 0 real 1440/390, 1920 noise proven; head 0 on 100 URLs; local `site-src` renamed + rebuilt.
+- **IFA**: see its STATUS (rebuild source renamed, pushed through the pipeline, CSS into the registry).
+- **Mason Park Kids** local `home/` renamed (`b7e6c64d`). **Mason Park**'s 161 articles were never in
+  any gate: verified after the fact against production (`055a074c`), clean.
+- **West LA: not started.** Its worktree session waits on the user (Codex lost its Chrome plugin);
+  its brief (`BRIEF-west-la-implants.md`) creates the staging clone first.
+- **Tool bugs found by the sessions, all fixed on main with tests where possible:**
+  `c0397383` gates never loaded collection entries (`pageSlugs()`); `65a30646` orphaned Chrome on
+  Windows + launch retries; `9aaea03b` **site-document page saves dropped `seoTitle`/`seoDescription`**
+  (now restored by insta-api; nested slugs refused); `6789a211` append-mode fold could flip a base
+  class and its combo (`order-pairs.mjs` / `pair-cooccur.mjs` promoted `9e168a72`; Kids 0 risky
+  pairs, Mason Park 17 flags never co-occur); `049da0b5` CSS comments read as classes, vendor-iframe
+  console counted as errors.
+- **Production rollout additions:** compare the published head (title, meta, og, canonical, JSON-LD)
+  before/after on every URL (`output/fleet/brandklout-website/head-parity.mjs`; promote it), and run
+  `order-pairs.mjs` after any append-mode CSS move.
+
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
 registries can differ from staging (unpublished staging work, later production edits), so every
