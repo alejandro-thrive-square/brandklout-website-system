@@ -41,6 +41,30 @@ All edits were made through Codex computer use with `--allow-writes`, in two run
   the builder's element thumbnail, not rendered to visitors. Check `placeholder` / `placeholder2`
   (the two boxes) and the rendered `<label>`s, not a raw grep of the page.
 
+## Addendum, same day: hero line names both offices
+
+Brandklout's review (Jessica): the `/doctor-referral` hero lead said only "Tysons Corner". It now
+reads **"A prosthodontic and implant referral practice in Tysons Corner and Alexandria. Thank you
+for partnering with us."**
+
+- `one-offs/referral-hero-both-offices.mjs` matches the line by its text, not by class, so the
+  same script ran on production (old class names) and staging (Client-First). Each host was run
+  with plan, then `--apply`, then `--publish`:
+  - **production:** published 23:41Z, 285 nodes;
+  - **staging:** published 23:42Z, 286 nodes, because staging still has the About PDF button.
+- On each host:
+  - exactly one `base.text` changed;
+  - the read-back equals the plan;
+  - no other rows moved, and the shell is untouched;
+  - `insta-api` restored the SEO cells the save dropped.
+- Both live pages show the new line. The title, meta description, the one JSON-LD block, the
+  one H1, the survey iframe and the ReputationHub wall are unchanged.
+- The line feeds no schema and is not in `/llms.txt` (`seo-v3/out`), so no SEO v3 rebuild was
+  needed. The survey section's "goes straight to the Tysons Corner · McLean office" stays, because
+  the survey lives in the McLean sub-account.
+- Site source: `pages/doctor-referral.body.html` edited and rebuilt. Only
+  `final-site/doctor-referral.html` changed.
+
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
