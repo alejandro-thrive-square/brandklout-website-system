@@ -44,10 +44,31 @@
 
     if (!frame) return fallback();
     frame.addEventListener("error", fallback);
-    // A frame that has not started loading after 12s is not going to.
+    // Judge the frame by whether the visitor can SEE it. form_embed.js hides
+    // it (opacity 0, visibility hidden, left -9999px) until the form inside
+    // reports its height, so a frame that never loads keeps its 565px and
+    // only looks absent — the old height check never fired. A reveal takes
+    // 5-15s (up to ~25s on a slow phone); still hidden at 25s means it
+    // failed. If it reveals after that, the message goes away again.
+    function hidden() {
+      var f = slot.querySelector("iframe");
+      if (!f) return true;
+      var cs = window.getComputedStyle(f);
+      return f.clientHeight < 40 || cs.visibility === "hidden" || cs.opacity === "0" || f.style.left === "-9999px";
+    }
     window.setTimeout(function () {
-      if (!frame.isConnected || frame.clientHeight < 40) fallback();
-    }, 12000);
+      if (hidden()) fallback();
+    }, 25000);
+    var watch = window.setInterval(function () {
+      if (slot.getAttribute("data-embed-state") !== "fallback" || hidden()) return;
+      var p = slot.querySelector(".form_fallback");
+      if (p) p.parentNode.removeChild(p);
+      slot.removeAttribute("data-embed-state");
+      window.clearInterval(watch);
+    }, 1000);
+    window.setTimeout(function () {
+      window.clearInterval(watch);
+    }, 120000);
   }
 
   if (document.readyState === "loading") {

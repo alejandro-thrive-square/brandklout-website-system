@@ -8,14 +8,20 @@
                       non-YouTube <iframe> as an empty div (workflow 18, and the
                       memory note "Instatic iframe is a forbidden custom tag").
 
-   THE PASTE IS THE CLIENT'S, VERBATIM, with two deliberate edits:
+   THE PASTE IS THE CLIENT'S, VERBATIM, with one deliberate edit:
 
      1. `height:100%` -> `height:565px`. The vendor writes 100%, which resolves
         against a wrapper that has no height of its own (the Embed block's
         `.wz-embed` is auto-height in snippet mode), so the form collapses to
         nothing. 565px is the vendor's own `data-height`, and `form_embed.js`
         overwrites it with the real height as soon as the form reports one.
-     2. `loading="lazy"` added. The form sits below the fold on /book.
+
+   NEVER ADD loading="lazy" TO THIS IFRAME (it was added 2026-09-17 and removed
+   2026-10-06). form_embed.js hides the frame at left:-9999px until the form
+   inside reports its height; a lazy frame parked there never comes near the
+   viewport, so it never loads and never reveals. Firefox showed a blank slot,
+   permanently, at 390, 768 and 1366 wide; Chrome and Safari happened to start
+   the load before the hide. The client saw "no form" while we saw it fine.
 
    `data-cookie-consent="true"` is the vendor's; it is also what the site's
    consent bridge (`001-brandklout-consent-bridge.js`, a site script installed on
@@ -50,6 +56,5 @@ export const SNIPPET = `<iframe
     data-cookie-consent="true"
     data-cookie-consent-provider="auto"
     title="${FORM_NAME}"
-    loading="lazy"
 ></iframe>
 <script src="https://link.msgsndr.com/js/form_embed.js"></script>`
