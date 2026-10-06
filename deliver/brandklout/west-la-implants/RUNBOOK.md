@@ -16,7 +16,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   `3-on-6-consultation`, `thank-you-3-on-6`. Noindex, out of the menu.
 - **Not ready for traffic.** The two campaign GHL forms exist since 2026-10-05 (All-on-6
   `XaCEV96A0QuF9ufEmkSc`, 3-on-6 `P15UYHonJj8oH5G8xwKX`, gates and style ok, in `combo.json`) but
-  are **not embedded yet**: the pages still carry the prototype form. No conversion tag and no number pool is on the instance, and the host the ads will point at is
+  are **live on the four form pages since 2026-10-05, published seq 28** (`workflows/21-instatic-upload/add-ghl-forms.mjs`;
+  re-run it after any `push-site.mjs`). `verify-form.mjs` 1440 + 390 clean. No conversion tag and no number pool is on the instance, and the host the ads will point at is
   undecided (the client's domain is still WordPress). The asks are in
   [`ADS-LANDING-COMMENT.md`](./ADS-LANDING-COMMENT.md); the full list in scenario 3's
   [`INTAKE.md`](./scenario-3-ads-landing-pages/01-campaign-intake/output/INTAKE.md).
@@ -53,7 +54,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-09-30 | organic · 21 instatic upload | Elfsight Google Reviews Embed block in the homepage `#proof` (three static cards out), `.pf-embed` rule + site.js guard, published seq 25, verified in real Chrome (718 px, 4.9 / 209, console clean) | `ba81ca90` |
 | 2026-10-01 | organic · 21 instatic upload | HIPAA Disclosure page injected page-only (cloned privacy chrome + prose notice), published seq 26; 86 other pages identical modulo per-publish asset ids | `6e31792a` |
 | 2026-10-01 | organic · 21 instatic upload | "HIPAA Disclosure" footer link after Privacy on all 87 pages (site + ads footers) and in the source footers, published seq 27; ads footer wraps at 390 (needs CSS go-ahead) | _this commit_ |
-| 2026-10-05 | 3 · 03 QA and launch | GHL forms via Codex: All-on-6 `XaCEV96A0QuF9ufEmkSc` and 3-on-6 `P15UYHonJj8oH5G8xwKX` built new (gate `--landing`/`--combo` ok, style ok), contact form `BAZZebJdjQAdGkda1fEE` brought to standard; ids in `combo.json`, not yet embedded | _this commit_ |
+| 2026-10-05 | 3 · 03 QA and launch | GHL forms via Codex: All-on-6 `XaCEV96A0QuF9ufEmkSc` and 3-on-6 `P15UYHonJj8oH5G8xwKX` built new (gate `--landing`/`--combo` ok, style ok), contact form `BAZZebJdjQAdGkda1fEE` brought to standard; ids in `combo.json` | `44ce721a` |
+| 2026-10-05 | 3 · 03 QA and launch | Both campaign forms placed on landing + consultation pages by `add-ghl-forms.mjs` (page-only Embed blocks), published seq 28; `verify-form` 1440/390 clean, `verify-combo-live` forms + redirects ok | _this commit_ |
 
 ## Version Control
 

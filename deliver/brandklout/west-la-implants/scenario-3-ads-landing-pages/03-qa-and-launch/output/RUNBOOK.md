@@ -2,6 +2,28 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-05 · the campaign forms placed on the pages
+
+**Done**: `workflows/21-instatic-upload/add-ghl-forms.mjs --apply --publish` swapped the `.lp-slot`
+prototype on `all-on-6`, `all-on-6-consultation`, `3-on-6`, `3-on-6-consultation` for one Embed
+block each (GHL vendor snippet, `.lp-slot .lp-form`, min-height 50rem), shell seq 25 → 28,
+published 87 pages. Backup first: `21-instatic-upload/.tmp/backup-2026-10-05-pre-ghl-forms/`.
+
+| Gate | Result |
+| :-- | :-- |
+| `scripts/verify-form.mjs --widths 1440,390` | **clean**: right form id on each of the four pages, full width (491/554px at 1440, 312px at 390), nothing clipped, thank-you pages have no form |
+| `scripts/verify-combo-live.mjs` | forms and redirects ok; the 6 known "not noindex" lines only (runtime meta, see 2026-09-30 gotchas) |
+| `check-ghl-form.mjs --combo` | ok, both |
+| homepage reviews widget, `/hipaa-disclosure` | still there, 200 |
+
+**Next**: a human look at each form inside its card on the live page, and one test lead per
+campaign once the host is final; conversion tags; the ads host.
+
+**Gotchas**
+- `verify-form.mjs` reported 500–1,400px "clipped by div" on every page: the ancestor was GSAP
+  ScrollSmoother's `#smooth-wrapper` (`position:fixed`, viewport-high, `overflow:hidden`), which the
+  page scrolls inside. Fixed on main (`f5214c3f`): fixed ancestors are skipped.
+
 ## 2026-10-05 · the GHL forms: two campaign forms built, the contact form brought to standard
 
 Built with Codex computer use (`codex_cu.mjs --allow-writes --model gpt-6.1-sol`) to the

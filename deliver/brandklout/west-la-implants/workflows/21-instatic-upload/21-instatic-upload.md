@@ -47,12 +47,14 @@ is walked, so nothing here lists them. What they changed:
 | `site-src/js/80-seo.js` | writes `seo.robots` when the page sets one (`noindex, follow` on the ads set) instead of the fixed `noindex, nofollow` |
 | `08-qa/.tmp/check-local.mjs` | consultation and thank-you ad pages are short by design and sit on the `LIGHT` list |
 
-The form on the four form-bearing pages is still the prototype (`.lp-proto`): Brandklout has not
-sent the Go High Level forms. With a snippet in `formSnippet` the slot becomes
-`<div class="lp-slot wz-embed" data-wz-embed="auto" data-embed="form-<key>">`, and **this toolkit
-has no `place-embeds.mjs` yet**: copy it from `deliver/process/tools/instatic-site/push/` on main,
-with an `embeds.json`, and make `build-import-input.mjs` empty the marker first (the promoted copy
-lost that step). Read `tools/instatic-embeds/instatic-embeds.md` before touching it.
+**The forms are live since 2026-10-05 (published seq 28).** The two campaign GHL forms (All-on-6
+`XaCEV96A0QuF9ufEmkSc`, 3-on-6 `P15UYHonJj8oH5G8xwKX`, ids in scenario 3's `combo.json`) replace the
+prototype on the four form-bearing pages through [`add-ghl-forms.mjs`](./add-ghl-forms.mjs), the
+same page-only pattern as the reviews widget: each `.lp-slot` becomes ONE brandklout Embed block
+(`.lp-slot .lp-form`, the GHL vendor snippet, `.lp-form` = `min-height:50rem`). `formSnippet` in
+`site-src/templates/ads-landing-pages.mjs` is still empty, so `dist/` keeps the prototype: **after
+any push, run `add-ghl-forms.mjs --apply --publish`** (step 12 below). Backup before it:
+`.tmp/backup-2026-10-05-pre-ghl-forms/` (seq 25).
 
 ## The Google reviews widget (2026-09-30)
 
@@ -208,6 +210,9 @@ node add-elfsight-reviews.mjs --apply --publish
                                # 11. ALWAYS, after any push: the import left a plain .pf-embed
                                #     slot in the homepage #proof; this puts the Google reviews
                                #     Embed block back and republishes (trap 44)
+node add-ghl-forms.mjs --apply --publish
+                               # 12. ALWAYS, after any push: the four ad form pages come back
+                               #     with the prototype form; this puts the campaign GHL forms back
 ```
 
 `verify-motion-live.mjs` is not optional and is not a nicety. The other four capture with
