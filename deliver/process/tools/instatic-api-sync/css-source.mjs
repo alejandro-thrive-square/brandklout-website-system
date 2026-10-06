@@ -219,8 +219,14 @@ export function family(key) {
  * Could two selectors style the same element? Conservative: compare the
  * subject compound (after the last combinator). Shared class token -> yes;
  * same tag or a missing tag on either side with no classes -> yes.
+ * Two DIFFERENT classes sit on one element all the time (a base class and its
+ * `is-*` combo): `canJoin(classA, classB)` says whether they can (the page
+ * trees know). Without it, any two classes are assumed able to: answering "no"
+ * wrongly let css-to-registry fold `.is-closing` @767 into its class rule while
+ * `.path_step` @767 kept a later seat, so on `<li class="path_step is-closing">`
+ * the order flipped and the phone width went 84vw -> 76vw (IFA, 2026-10-06).
  */
-export function mightOverlap(a, b) {
+export function mightOverlap(a, b, canJoin = () => true) {
   const subject = (sel) =>
     splitTop(sel, ',').map((s) => {
       const last = s.split(/\s*[>+~]\s*|\s+/).filter(Boolean).pop() ?? ''
@@ -235,9 +241,9 @@ export function mightOverlap(a, b) {
     for (const y of subject(b)) {
       if (x.pseudo !== y.pseudo) continue
       if (x.classes.some((c) => y.classes.includes(c))) return true
-      if (x.classes.length === 0 || y.classes.length === 0) {
-        if (!x.tag || !y.tag || x.tag === y.tag) return true
-      }
+      if (x.tag && y.tag && x.tag !== y.tag) continue
+      if (x.classes.length === 0 || y.classes.length === 0) return true
+      if (x.classes.some((c) => y.classes.some((d) => canJoin(c, d)))) return true
     }
   }
   return false

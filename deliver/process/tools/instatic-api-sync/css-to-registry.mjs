@@ -76,14 +76,28 @@ const runtimeStyles = (shell.runtime ??= {}).styles ??= {}
 /* ── class ids on the page trees and visual components ───────────────────── */
 const { rows } = await api.getPages()
 const assigned = new Set()
+/* Which class NAMES share an element (from the trees), for mightOverlap: a base class and its combo
+   must count as overlapping, or an @media override folds past its partner and the cascade flips. */
+const nameOf = new Map(Object.values(rules).map((r) => [r.id, r.name]))
+const together = new Map()
+const onNodes = new Set()
+const noteNode = (ids) => {
+  const names = ids.map((id) => nameOf.get(id)).filter(Boolean)
+  for (const a of names) {
+    onNodes.add(a)
+    for (const b of names) if (a !== b) (together.get(a) ?? together.set(a, new Set()).get(a)).add(b)
+  }
+}
 for (const row of rows ?? []) {
   const body = typeof row.cells?.body === 'string' ? JSON.parse(row.cells.body) : row.cells?.body
-  for (const node of Object.values(body?.nodes ?? {})) for (const id of node.classIds ?? []) assigned.add(id)
+  for (const node of Object.values(body?.nodes ?? {})) { for (const id of node.classIds ?? []) assigned.add(id); noteNode(node.classIds ?? []) }
 }
 for (const vc of shell.visualComponents ?? []) {
   for (const id of vc.classIds ?? []) assigned.add(id)
-  for (const node of Object.values(vc.tree?.nodes ?? {})) for (const id of node.classIds ?? []) assigned.add(id)
+  for (const node of Object.values(vc.tree?.nodes ?? {})) { for (const id of node.classIds ?? []) assigned.add(id); noteNode(node.classIds ?? []) }
 }
+// A class on no node is added at runtime by a script (is-open, is-active...): it can join anything.
+const canJoin = (a, b) => !onNodes.has(a) || !onNodes.has(b) || together.get(a)?.has(b) === true
 if (assigned.size === 0) throw new Error('no class ids found on any page: a traversal bug, refusing')
 console.log(`class ids on nodes  ${assigned.size}`)
 
@@ -160,7 +174,7 @@ const touched = new Set()
 const broadSelectors = new Set()
 
 const conflictsBetween = (lo, selector, keys) =>
-  placed.some((p) => p.order > lo && [...keys].some((k) => p.keys.has(k)) && mightOverlap(p.selector, selector))
+  placed.some((p) => p.order > lo && [...keys].some((k) => p.keys.has(k)) && mightOverlap(p.selector, selector, canJoin))
 
 for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos - b.pos)) {
   const order = seat++
