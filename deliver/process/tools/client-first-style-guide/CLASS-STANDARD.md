@@ -164,6 +164,13 @@ cause.
 3. **Classes**: `class-audit.mjs --site $S --json …`, write `class-map.json` (§9) in the client's
    step folder, `class-rename.mjs --site $S --map …` (dry run: read the REVIEW lines), `--apply`,
    publish, `migration-gates.mjs snapshot after`, `diff mid after`.
+   **SEO cells:** a site-document page write keeps only title/slug/body/template, so `--apply` used
+   to blank every rewritten page's `seoTitle`/`seoDescription` (the publish then served the home
+   description; no style or behaviour gate sees it). Since 2026-10-06 `insta-api.mjs` puts those cells
+   back after every page save, and refuses a save that would drop them on a nested slug (`a/b`: a
+   PATCH flattens its URL). Still compare the published head (title, meta description, og:*,
+   canonical, JSON-LD) on every page before vs after: `ops/restore-page-seo-cells.mjs` repairs from
+   the step-0 backup.
 4. **Prove**: `migration-gates.mjs final --site $S --map class-map.json`: editability EDITABLE,
    class-audit `--strict` IN BOUNDS, `class-rename --verify` CLEAN (no old name published anywhere).
    Diffs: css 0 at 1440/390 (1920 within its own noise: two snapshots of an unchanged site), runtime
