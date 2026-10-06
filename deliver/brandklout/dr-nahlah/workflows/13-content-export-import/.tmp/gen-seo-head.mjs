@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+/* RETIRED 2026-10-05 (SEO v2): do NOT regenerate or push seo-head.js from this. Titles, descriptions,
+   og:*, canonical and JSON-LD are server-side (open-graph + aeo-schema plugins); the live seo-head.js
+   keeps only noindex + apple-touch-icon. A regenerated file would put the JS title/description
+   overrides back. See 22-instatic-api-sync/seo-v2/ and the 2026-10-05d run. */
 /**
  * gen-seo-head.mjs — build `src/scripts/seo-head.js`, one all-pages head script
  * that gives every URL its own title, description, canonical and Open Graph.

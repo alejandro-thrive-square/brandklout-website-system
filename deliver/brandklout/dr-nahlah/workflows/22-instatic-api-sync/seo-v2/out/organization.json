@@ -1,0 +1,208 @@
+{
+  "@type": "Dentist",
+  "@id": "https://www.drnahlah.com/#organization",
+  "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
+  "alternateName": [
+    "Dr. Nahlah Implants & Prosthodontics",
+    "Dr. Esam Nahlah, DDS, MS"
+  ],
+  "description": "Implant dentistry and prosthodontics in McLean (Tysons Corner) and Alexandria, Virginia, led by board-certified prosthodontist Dr. Esam Nahlah: dental implants, All-on-4 full arches, full-mouth reconstruction and cosmetic dentistry, with an in-house digital laboratory.",
+  "url": "https://www.drnahlah.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.drnahlah.com/uploads/PhKVdS1R0_xk-mtalvGAw-cropped-nahlah-favicon.png"
+  },
+  "image": "https://www.drnahlah.com/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+  "telephone": "+1-703-448-3312",
+  "priceRange": "$$$",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Check, Credit Card, Dental PPO insurance, Financing",
+  "medicalSpecialty": "https://schema.org/Dentistry",
+  "isAcceptingNewPatients": true,
+  "knowsAbout": [
+    "Prosthodontics",
+    "Dental implants",
+    "All-on-4 dental implants",
+    "Full-mouth reconstruction",
+    "Implant-supported dentures",
+    "Porcelain veneers",
+    "Dental crowns and bridges",
+    "Bone grafting",
+    "Sedation dentistry",
+    "Digital Smile Design"
+  ],
+  "founder": {
+    "@id": "https://www.drnahlah.com/meet-dr-nahlah#person"
+  },
+  "employee": {
+    "@id": "https://www.drnahlah.com/meet-dr-nahlah#person"
+  },
+  "sameAs": [
+    "https://www.facebook.com/drnahlahprosthodontist/",
+    "https://www.instagram.com/drnahlah/",
+    "https://maps.google.com/?cid=16584195885077624360"
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "McLean"
+    },
+    {
+      "@type": "Place",
+      "name": "Tysons Corner"
+    },
+    {
+      "@type": "City",
+      "name": "Alexandria"
+    },
+    {
+      "@type": "City",
+      "name": "Arlington"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fairfax County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Northern Virginia"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@id": "https://www.drnahlah.com/#services"
+  },
+  "department": [
+    {
+      "@type": "Dentist",
+      "@id": "https://www.drnahlah.com/contact-mclean#office",
+      "name": "Dr. Nahlah Implants and Prosthodontics Specialists, Tysons Corner, McLean",
+      "legalName": "Esam Abou Nahlah, DDS, MS, PLLC",
+      "url": "https://www.drnahlah.com/contact-mclean",
+      "image": "https://www.drnahlah.com/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+      "telephone": "+1-703-448-3312",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "new patients",
+          "telephone": "+1-703-448-3312",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "existing patients",
+          "telephone": "+1-703-448-3312",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7901 Jones Branch Drive, Suite 220",
+        "addressLocality": "McLean",
+        "postalCode": "22102",
+        "addressRegion": "VA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.9260584,
+        "longitude": -77.2189653
+      },
+      "hasMap": "https://maps.google.com/?cid=16584195885077624360",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "priceRange": "$$$",
+      "isAcceptingNewPatients": true,
+      "medicalSpecialty": "https://schema.org/Dentistry",
+      "parentOrganization": {
+        "@id": "https://www.drnahlah.com/#organization"
+      }
+    },
+    {
+      "@type": "Dentist",
+      "@id": "https://www.drnahlah.com/contact-alexandria#office",
+      "name": "Dr. Nahlah Implants and Prosthodontics Specialists, Alexandria",
+      "legalName": "Implants And Prosthodontics Specialists, PLLC",
+      "url": "https://www.drnahlah.com/contact-alexandria",
+      "image": "https://www.drnahlah.com/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+      "telephone": "+1-571-617-7245",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "new patients",
+          "telephone": "+1-571-617-7245",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "existing patients",
+          "telephone": "+1-703-940-5410",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2855 Duke Street",
+        "addressLocality": "Alexandria",
+        "postalCode": "22314",
+        "addressRegion": "VA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.8073027,
+        "longitude": -77.0787121
+      },
+      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=2855+Duke+Street+Alexandria+VA+22314",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "priceRange": "$$$",
+      "isAcceptingNewPatients": true,
+      "medicalSpecialty": "https://schema.org/Dentistry",
+      "parentOrganization": {
+        "@id": "https://www.drnahlah.com/#organization"
+      }
+    }
+  ]
+}

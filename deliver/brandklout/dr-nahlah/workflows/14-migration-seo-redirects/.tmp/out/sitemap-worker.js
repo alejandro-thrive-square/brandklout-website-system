@@ -13,327 +13,327 @@ const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.drnahlah.com/</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/about</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/all-on-4</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/contact</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/contact-alexandria</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/contact-mclean</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/cosmetic-dentistry</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/crowns-and-bridges</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/dental-conditions</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/dental-implant-faq</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/dental-implants</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/doctor-referral</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/emergency-dentistry</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/financing</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/five-year-warranty</loc>
-    <lastmod>2026-09-21</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/hipaa-disclosure</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/implant-cost</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/implant-supported-dentures</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/meet-dr-nahlah</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/oral-surgery</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/our-facility</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/our-team</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/patient-center</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/patient-stories</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/privacy-policy</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/privacy-policy-alexandria</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/privacy-policy-mclean</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/sedation-dentistry</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/smile-gallery</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/smile-makeover</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/teeth-whitening</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/terms-conditions</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/terms-of-service-alexandria</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/terms-of-service-mclean</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/thank-you</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/veneers</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/video-library</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/after-my-dental-implants-are-placed-how-will-i-know-if-i-have-peri-implantitis</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/all-on-four-your-questions</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/are-dental-implants-worth-the-cost</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/are-there-advantages-to-replacing-my-missing-teeth-with-dental-implants-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/are-there-side-effects-to-dental-implant-procedures</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/can-i-have-a-customized-new-smile-with-full-mouth-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/can-i-upgrade-my-smile-from-traditional-dentures-to-implant-supported-dentures</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/complete-teeth-replacement-the-perks-of-dental-implants-explained</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/considering-getting-treated-with-all-on-4-dental-implants-in-mclean-va-this-is-why-you-should</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/deciphering-dental-implants-your-guide-to-implant-dentistry-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/dental-implants-everything-you-need-to-know</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/discover-the-promising-world-of-teeth-implants-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/discovering-the-benefits-and-process-of-snap-on-dentures-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/do-i-need-a-full-mouth-dental-implant-consultation</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/exploring-the-world-of-dental-implants-placements-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/have-multiple-missing-teeth-you-should-get-treated-with-multiple-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/how-exactly-do-implant-supported-dentures-in-mclean-va-benefit-my-smile</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/how-many-missing-teeth-can-dental-implants-replace</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/implant-vs-implant-clearing-the-confusion-on-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/integrating-treatment-dental-practices-into-your-dental-implant-procedure</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/longevity-of-dental-implants-causes-and-fixes-for-damages</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/navigating-the-world-of-dental-implants-an-experts-guide</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/porcelain-veneers-the-answers-to-your-questions</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/ready-to-learn-how-full-mouth-dental-implants-are-cost-effective</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/ready-to-learn-what-a-typical-full-mouth-dental-implant-procedure-looks-like</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/revamp-your-smile-understanding-the-basics-of-tooth-implants-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/revolutionize-your-smile-with-dental-implants-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/revolutionizing-dental-restoration-the-top-implant-techniques</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/should-i-upgrade-my-smile-from-traditional-dentures-to-all-on-4-dental-implants-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/should-sedation-dentistry-be-used-for-full-mouth-dental-implant-procedures</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/uncover-the-lifespan-how-long-can-a-dental-implant-last</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/uncovering-the-mystery-the-in-depth-guide-to-dental-implants</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/unlock-the-benefits-of-dental-implants-your-best-teeth-replacement-option</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/unraveling-the-complexities-complications-in-implant-dentistry</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/unveiling-the-mystery-of-implant-dentistry-in-mclean-va</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/want-to-learn-how-to-take-care-of-your-dental-implants-here-is-how</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
   <url>
     <loc>https://www.drnahlah.com/posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-10-05</lastmod>
   </url>
 </urlset>
 `

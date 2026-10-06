@@ -1,11 +1,12 @@
 # Runbook index
 
-101 runs, newest first. Each line is one file in this folder.
+102 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-05 | 2026-10-05d — **SEO v2 on PRODUCTION** after the GSC drop (reference: Hackensack): 30 titles/descriptions in every store, full AEO schema (org + offices + Person + Service/FAQ + 43 BlogPostings with original dates), aeo-schema 1.3.0 (posts had no Article), legacy runtime JSON-LD + seo-head.js overrides retired (duplicate FAQPage), 43 image alts, sitemap lastmod; 84 URLs verified — carries **gotchas** (never regenerate seo-head.js) | [`2026-10-05d-seo-v2-metadata-schema-production.md`](./2026-10-05d-seo-v2-metadata-schema-production.md) |
 | 2026-10-05 | 2026-10-05c — SEO meta on **PRODUCTION** after a reported ranking drop: audit (meta/canonicals/190 redirects all fine; all-on-4, meet-dr-nahlah and 19 ads pages used the home description; SEO cells empty on 55/59 rows), cells filled on 38 flat rows, 21 descriptions fixed via open-graph overrides, published, 100/100 verified — carries **gotchas** (OG reads the cells; nested slugs cannot keep cells) + the likely ranking causes still to decide | [`2026-10-05c-seo-meta-filled-production.md`](./2026-10-05c-seo-meta-filled-production.md) |
 | 2026-10-05 | 2026-10-05b — `/doctor-referral` promoted staging → **production** (client approved): 4 sections + the GHL survey `KXFNR4JPqxonXEFTtme0` (HIPAA, replaced the webhook form 2026-10-03); built from prod's own row, footer subtree byte-identical, outline identical to staging, survey/reviews render, no CSP errors | [`2026-10-05b-doctor-referral-to-production.md`](./2026-10-05b-doctor-referral-to-production.md) |
 | 2026-10-05 | 2026-10-05 — "Find Us Online" footer row (Asana): Facebook, Instagram, RealSelf, Vitals, Healthgrades, Google (McLean GBP) on the 40 site rows, **PRODUCTION ONLY** (staging draft busy), ads pages excluded; 83/83 verified — carries **gotchas** (base.link adds rel itself, staging pending, sameAs still the dead FB) | [`2026-10-05-footer-social-profiles.md`](./2026-10-05-footer-social-profiles.md) |
