@@ -211,7 +211,8 @@ if (argOf('--files')) {
     for (const f of walk(root)) {
       const t = readFileSync(f, 'utf8')
       for (const m of t.matchAll(/\sclass\s*=\s*["']([^"'$]*)["']/gi)) for (const tok of m[1].split(/\s+/)) if (tok) present.add(tok)
-      if (/\.css$/i.test(f)) for (const m of t.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)) present.add(m[1])
+      // Comments out: a comment that MENTIONS `.button` is not a class (Dr. Nahlah, 2026-10-06).
+      if (/\.css$/i.test(f)) for (const m of t.replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)) present.add(m[1])
     }
     const problems = []
     for (const [o, n] of Object.entries(all)) {

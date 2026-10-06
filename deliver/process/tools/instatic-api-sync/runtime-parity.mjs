@@ -93,7 +93,16 @@ for (const slug of slugs) {
     const page = await browser.newPage()
     const errors = []
     page.on('pageerror', (e) => errors.push(`pageerror: ${String(e.message ?? e).split('\n')[0]}`))
-    page.on('console', (m) => { if (m.type() === 'error' && !/Failed to load resource|favicon|net::ERR|Content Security Policy|third-party cookie/i.test(m.text())) errors.push(`console: ${m.text().split('\n')[0]}`) })
+    page.on('console', (m) => {
+      if (m.type() !== 'error' || /Failed to load resource|favicon|net::ERR|Content Security Policy|third-party cookie/i.test(m.text())) return
+      // A message logged inside a cross-origin iframe is the vendor's: Cloudflare Turnstile inside the
+      // Vimeo, GHL and review frames logs `%c%d ... NaN` on and off, on untouched production too
+      // (Dr. Nahlah, 2026-10-06). Our change cannot cause it, and it drifts between captures.
+      const origin = (u) => { try { return new URL(u).origin } catch { return '' } }
+      const src = origin(m.location()?.url ?? '')
+      if (src && src !== origin(base) && page.frames().slice(1).some((f) => origin(f.url()) === src)) return
+      errors.push(`console: ${m.text().split('\n')[0]}`)
+    })
     await page.setViewport({ width, height: width < 700 ? 844 : 900 })
     await page.setRequestInterception(true)
     page.on('request', (r) => (/sienna-accessibility|googletagmanager|google-analytics|facebook|doubleclick|clarity\.ms|hotjar/.test(r.url()) ? r.abort() : r.continue()))
