@@ -204,8 +204,10 @@ async function pageSlugs() {
   // --all-pages: every page row, from the admin API. The homepage's links miss
   // pages nothing links to (ads landing pages, thank-you pages).
   if (process.argv.includes('--all-pages')) {
-    const { rows } = await api.getPages()
-    return rows.map((r) => String(r.cells?.slug ?? '')).map((s) => (s === 'index' || s === 'home' ? '' : s)).filter((s) => !s.includes('['))
+    // --prefix blog/ keeps the URLs under one path (a collection's entries).
+    const prefix = process.argv[process.argv.indexOf('--prefix') + 1]
+    const all = await api.pageSlugs() // page rows + every collection entry (templates excluded)
+    return process.argv.includes('--prefix') ? all.filter((s) => s.startsWith(prefix)) : all
   }
   // Read the published sitemap-ish surface: every internal link from the
   // homepage, plus the homepage. Cheaper and more honest than a hard-coded
@@ -219,7 +221,7 @@ async function pageSlugs() {
   return [...slugs]
 }
 
-const [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && all[i - 1] !== '--site')
+const [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && all[i - 1] !== '--site' && all[i - 1] !== '--prefix')
 mkdirSync(TMP, { recursive: true })
 
 if (cmd === 'snapshot') {

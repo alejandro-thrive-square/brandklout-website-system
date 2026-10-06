@@ -251,8 +251,7 @@ const { api, target } = await connect()
 if (process.argv.includes('--verify')) {
   // Catch-all: what the PUBLISHED site still says. Any old name here was missed by a store.
   const base = target.url.replace(/\/$/, '')
-  const { rows } = await api.getPages()
-  const slugs = rows.map((r) => String(r.cells?.slug ?? '')).filter((s) => s && !s.includes('[') && s !== '404').map((s) => (s === 'index' ? '' : s))
+  const slugs = await api.pageSlugs() // page rows + every collection entry
   try {
     const sm = await fetch(`${base}/sitemap.xml`).then((r) => (r.ok ? r.text() : ''))
     for (const m of sm.matchAll(/<loc>([^<]+)<\/loc>/g)) {

@@ -148,7 +148,11 @@ cause.
    ships the whole draft; never ship someone's unpublished work). Then **back up**:
    `node with-site.mjs $S -- node ../instatic-site/ops/backup-site.mjs --out output/fleet/<c>/backup-pre-migration`.
 1. **Baseline**: `node migration-gates.mjs snapshot before --site $S` (css-parity at 1440/390/1920,
-   runtime-parity at 1440/390, every page; needs `PUPPETEER_DIR`).
+   runtime-parity at 1440/390, every page; needs `PUPPETEER_DIR`). "Every page" is
+   `insta-api.mjs pageSlugs()`: the page rows minus templates, plus every published collection entry
+   (`<routeBase>/<slug>`). Before 2026-10-06 the gates read only the page rows, so a collection's
+   entries (blog articles, legal pages) were never captured: a `before` taken then must be re-taken.
+   `css-parity --all-pages --prefix blog/` captures one collection on its own.
 2. **Editability** ([INSTATIC-FRAMEWORK.md](./INSTATIC-FRAMEWORK.md)):
    - a code asset holding declarations the converter lost (`tokens.css`):
      `css-to-registry.mjs --site $S --files <path> --in-place` (into the rule they came from);

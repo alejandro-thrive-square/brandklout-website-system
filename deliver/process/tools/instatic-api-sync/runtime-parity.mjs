@@ -68,8 +68,7 @@ if (cmd !== 'snapshot' || !a) {
 }
 
 const { default: puppeteer, CHROME } = await import('../instatic-site/lib/browser.mjs')
-const { rows } = await api.getPages()
-let slugs = rows.map((r) => String(r.cells?.slug ?? '')).filter((s) => s && !s.includes('[') && s !== '404')
+let slugs = (await api.pageSlugs()).map((s) => s || 'index') // page rows + every collection entry; 'index' = home
 if (argOf('--only')) slugs = slugs.filter((s) => argOf('--only').split(',').includes(s))
 const WIDTHS = (argOf('--widths') ?? '1440,390').split(',').map(Number)
 const SEL = 'button:not([type=submit]),[role=button],[role=tab],summary,[aria-controls],[aria-expanded],[data-drag-next],[data-drag-prev],a[href^="#"]:not([href="#"])'

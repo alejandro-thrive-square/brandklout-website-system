@@ -311,6 +311,33 @@ export async function getPages() {
 }
 
 /**
+ * Every URL a visitor can open, as slugs without the leading slash ('' is the home page): the page
+ * rows that are not templates, plus every published entry of each collection (`postType` table
+ * with a `routeBase`) at `<routeBase>/<slug>`. Gates that took only the page rows captured the
+ * template row (a 404 at its own slug) and none of the entries it renders, so a broken article
+ * passed every gate (bk-brandklout-website legal pages, Mason Park's 161 articles, 2026-10-05).
+ */
+export async function pageSlugs() {
+  const { rows } = await getPages()
+  const out = rows
+    .filter((r) => r.cells?.templateEnabled !== true)
+    .map((r) => String(r.cells?.slug ?? r.slug ?? ''))
+    .map((s) => (s === 'index' || s === 'home' ? '' : s))
+    .filter((s) => !s.includes('['))
+  const res = await request('GET', '/admin/api/cms/data/tables')
+  for (const t of res.tables ?? res ?? []) {
+    if (t.kind !== 'postType' || !t.routeBase) continue
+    const base = t.routeBase.replace(/^\/+|\/+$/g, '')
+    const entries = (await request('GET', `/admin/api/cms/data/tables/${t.id}/rows`)).rows ?? []
+    for (const e of entries) {
+      const slug = e.slug ?? e.cells?.slug
+      if (e.status === 'published' && slug) out.push(base ? `${base}/${slug}` : String(slug))
+    }
+  }
+  return [...new Set(out)]
+}
+
+/**
  * Shell-only save. `styleRules` and `files` both live on the shell, so every
  * CSS operation in this workflow is one of these.
  *
