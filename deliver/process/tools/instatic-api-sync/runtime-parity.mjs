@@ -73,7 +73,17 @@ if (argOf('--only')) slugs = slugs.filter((s) => argOf('--only').split(',').incl
 const WIDTHS = (argOf('--widths') ?? '1440,390').split(',').map(Number)
 const SEL = 'button:not([type=submit]),[role=button],[role=tab],summary,[aria-controls],[aria-expanded],[data-drag-next],[data-drag-prev],a[href^="#"]:not([href="#"])'
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 180000, args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
+// A loaded machine can time a launch out ("waiting for the WS endpoint URL"): retry, it is not a result.
+let browser
+for (let attempt = 1; !browser; attempt++) {
+  try {
+    browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 180000, args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
+  } catch (e) {
+    if (attempt >= 3) throw e
+    console.error(`launch attempt ${attempt} failed (${String(e.message ?? e).split('\n')[0]}), retrying`)
+    await new Promise((r) => setTimeout(r, 15000 * attempt))
+  }
+}
 const out = {}
 const base = target.url.replace(/\/$/, '')
 

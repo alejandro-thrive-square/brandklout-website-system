@@ -30,9 +30,18 @@ if (!site || !cmd) {
 const client = site.split(':')[0]
 const LOG = join(HERE, 'output', 'fleet', client)
 mkdirSync(LOG, { recursive: true })
+/* A pass that dies launching Chrome (a loaded machine) produced no result: run it again, up to
+   three times, instead of reporting a FAIL that is not about the site. */
+const LAUNCH_ERROR = /DevToolsActivePort|did not expose a debugger socket|waiting for the WS endpoint|Failed to launch the browser/
 const run = (name, args, env = {}) => {
-  const r = spawnSync(process.execPath, args, { cwd: HERE, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 1 << 28 })
-  const out = (r.stdout ?? '') + (r.stderr ?? '')
+  let r, out
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    r = spawnSync(process.execPath, args, { cwd: HERE, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 1 << 28 })
+    out = (r.stdout ?? '') + (r.stderr ?? '')
+    if (r.status === 0 || !LAUNCH_ERROR.test(out) || attempt === 3) break
+    console.log(`retry ${name.padEnd(34)} Chrome launch failed (attempt ${attempt}), retrying`)
+    spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 20000)'])
+  }
   writeFileSync(join(LOG, `${name}.log`), out)
   const last = out.trim().split('\n').slice(-1)[0]
   console.log(`${r.status === 0 ? 'ok  ' : 'FAIL'}  ${name.padEnd(34)} ${last.slice(0, 120)}`)

@@ -22,8 +22,8 @@
  * rather than an index, so a diff points at a node rather than at an offset.
  */
 
-import { spawn } from 'node:child_process'
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs'
+import { spawn, spawnSync } from 'node:child_process'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tmpdir } from 'node:os'
@@ -90,21 +90,44 @@ async function browser() {
     '--headless=new', '--disable-gpu', '--hide-scrollbars',
     '--remote-debugging-port=0', '--remote-allow-origins=*',
     '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check',
+    '--disable-crash-reporter', '--disable-breakpad',
     `--user-data-dir=${profile}`, 'about:blank',
   ], { stdio: 'ignore' })
+  // On Windows proc.kill() ends the browser root only: its crashpad, renderer, GPU and utility
+  // children are orphaned and pile up (583 chrome.exe, 432 orphaned, with three fleet sessions
+  // capturing at once on 2026-10-06), until new launches fail. So: Browser.close over CDP, wait
+  // for the exit, then kill the whole tree, then delete the profile.
+  const exited = new Promise((r) => proc.once('exit', r))
+  const killTree = async () => {
+    await Promise.race([exited, wait(5000)])
+    if (proc.exitCode === null && proc.signalCode === null) {
+      if (process.platform === 'win32') spawnSync('taskkill', ['/PID', String(proc.pid), '/T', '/F'], { stdio: 'ignore' })
+      else proc.kill('SIGKILL')
+      await Promise.race([exited, wait(3000)])
+    }
+    for (let i = 0; i < 20; i++) {
+      try { rmSync(profile, { recursive: true, force: true }); break } catch { await wait(500) }
+    }
+  }
+  const fail = async (message) => {
+    if (process.platform === 'win32') spawnSync('taskkill', ['/PID', String(proc.pid), '/T', '/F'], { stdio: 'ignore' })
+    else proc.kill('SIGKILL')
+    await killTree()
+    throw new Error(message)
+  }
 
   let port
   for (let i = 0; i < 150 && !port; i++) {
     try { port = Number(readFileSync(join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0]) || undefined } catch { await wait(200) }
   }
-  if (!port) throw new Error('Chrome did not write DevToolsActivePort')
+  if (!port) await fail('Chrome did not write DevToolsActivePort')
   let wsUrl
   for (let i = 0; i < 150 && !wsUrl; i++) {
     try {
       wsUrl = (await getJson('/json/version', port)).webSocketDebuggerUrl
     } catch { await wait(200) }
   }
-  if (!wsUrl) throw new Error('Chrome did not expose a debugger socket')
+  if (!wsUrl) await fail('Chrome did not expose a debugger socket')
 
   const sock = new WebSocket(wsUrl)
   const pending = new Map()
@@ -152,7 +175,11 @@ async function browser() {
     S,
     evaluate: async (expression) =>
       (await S('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result.value,
-    close: () => { try { sock.close() } catch {} proc.kill() },
+    close: async () => {
+      try { sock.send(JSON.stringify({ id: ++nextId, method: 'Browser.close' })) } catch {}
+      await killTree()
+      try { sock.close() } catch {}
+    },
   }
 }
 
@@ -256,7 +283,7 @@ if (cmd === 'snapshot') {
       console.log(`  ${(slug || '/').padEnd(34)} ${Object.keys(data ?? {}).length} elements`)
     }
   } finally {
-    br.close()
+    await br.close()
   }
   const file = join(TMP, `parity-${a}-${VIEWPORT.width}.json`)
   writeFileSync(file, JSON.stringify(snapshot), 'utf8')
