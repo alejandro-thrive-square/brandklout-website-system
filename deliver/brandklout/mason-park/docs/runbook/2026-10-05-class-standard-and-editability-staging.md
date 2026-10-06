@@ -26,6 +26,18 @@ unpublished edit from 2026-10-04 17:51Z, `.pr-badges-in`: resolve before any pro
 - **Final**: editability EDITABLE, class-audit IN BOUNDS (7 custom classes equal to a utility are
   reuse hints), class-rename --verify CLEAN.
 
+## Added 2026-10-06: the 161 articles, which the gates above never loaded
+The parity gates read only page rows, so the `/blog/<slug>` entries (Articles collection, template
+`blog-article`) were outside every capture (fixed on main, `c0397383`). Checked afterwards, read-only:
+- `class-rename --verify` with the fixed page list (articles included): **CLEAN**.
+- css-parity, production (still on the old names) vs staging, `--all-pages --prefix blog/`, 161
+  articles: 1440 → 814 differences of 3,576,141 values, 390 → 805 of 3,603,662. **Every one is the
+  height of the related-articles block** (`section_treatment > blog_related`) and its ancestors, plus
+  one production capture that loaded unstyled. Styles otherwise identical: the articles came through.
+- That block: on **production the related-posts loop renders empty** (label only, 20px); on staging it
+  renders three cards (388px). A data/loop difference, not CSS. Check before promoting: either staging
+  carries a loop fix production lacks, or production's loop is broken today.
+
 ## Next
 - Production after review: same steps (system run `2026-10-05-fleet-class-standard.md`), after the
   unrelated production draft is published or discarded.
