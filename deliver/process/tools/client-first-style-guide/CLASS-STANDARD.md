@@ -160,9 +160,9 @@ cause.
      Append mode folds an `@media` override into its class rule only when nothing later could
      style the same element; a base class and its combo (`.path_step` + `.is-closing`) count as the
      same element since 2026-10-06 (before, the fold could flip their order at widths no gate samples).
-     After the move, `output/fleet/ifa-dentistry/order-pairs.mjs` lists every pair whose relative
+     After the move, `order-pairs.mjs --site $S --css <original.css> --published <published style css>` lists every pair whose relative
      order changed and could meet on one element; a pair whose classes never share a published
-     element (`output/fleet/pair-cooccur.mjs`) is harmless;
+     element (`pair-cooccur.mjs --site $S <order-pairs output .txt>`) is harmless;
    - tokens: `framework.mjs extract <tokens css> > framework-spec.json`, review, `framework.mjs apply`.
      Sizes the Framework cannot write exactly (more than 2 rem decimals) stay in the registry `:root`:
      no visual change. Moving them is a separate, listed sub-pixel decision.
