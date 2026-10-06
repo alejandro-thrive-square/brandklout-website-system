@@ -33,7 +33,10 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    `appleTouchIcon`) in the `open-graph` plugin, 1.2.0 or later.
 2. **SEO.** Schema and Open Graph come from the `aeo-schema` and `open-graph` plugins; SEO fields per
    page. Set the site URL or no canonical tag is printed. Check the rendered head with
-   `gates/seo-head-check.mjs`, never the raw HTML.
+   `gates/seo-head-check.mjs`, never the raw HTML. Build each page's schema from its
+   visible sections, not its meta description, and repeat the visible breadcrumb
+   ([aeo-schema README](../../tools/instatic-plugins/aeo-schema/README.md), "Blocks built from
+   the page's content"). Serve `/llms.txt` and 301 each page's trailing-slash twin.
 3. **404.** An Instatic `notFound` template target; reapply the flag after any page import.
 4. **Embeds and scripts.** Reviews: the client's Google Reviews widget from the Elfsight registry
    (`tools/elfsight-reviews/review-widgets.json`), set to the

@@ -164,14 +164,49 @@ Every emitted graph in the tests is pulled back out of the script tag and
 `JSON.parse`d. A structured-data plugin whose output does not parse is worse than
 one that emits nothing, and "it looked right in the page source" is not a check.
 
+## Blocks built from the page's content, not its meta (the standard)
+
+A block that describes a treatment with its meta description gives an answer
+engine nothing it could not read from the `<head>`. Dr. Nahlah's SEO v3
+(2026-10-05, client `22-instatic-api-sync/seo-v3/`) is the reference build:
+
+1. **Scan the live pages** into sections (h2, lead lines, h3 items, `<details>`
+   Q/A with trailing nav links cut, images with alts, Vimeo/YouTube ids, tables,
+   the visible breadcrumb) — `scan-sections.mjs`.
+2. **Map each section to the property it is**: the options a page lists →
+   `Service.hasOfferCatalog`; its timeline → `HowTo` and the procedure's
+   `preparation` / `howPerformed` / `followup`; benefit, indication and cost
+   lists → `ItemList`; before/after photos → `ImageObject`s; accordions →
+   `FAQPage`; embedded films → `VideoObject` (Vimeo descriptions are transcripts);
+   lender terms → `LoanOrCredit`; a warranty → `WarrantyPromise`. A heading
+   rename must fail the build, never ship a stale value.
+3. **Name the concepts**: Wikipedia + Wikidata `sameAs` on the procedure and the
+   WebPage's `about` Things (Wikipedia REST `page/summary` returns both; Wikidata
+   search rate-limits). Not on `Service`: the practice's service is not the
+   encyclopedia concept.
+4. **Gate on the vocabulary and on the page**: `vocab-check.mjs` (every type,
+   property domain, range and enum against schema.org's own file; validator.schema.org
+   throttles) and `verify-seo-v3.mjs` (breadcrumb = the visible trail, FAQ = the
+   accordions word for word, one VideoObject per embedded film, no dangling `@id`).
+
+**Breadcrumbs:** the generated `BreadcrumbList` names the last crumb with the
+full SEO title ("Dental Implants in McLean & Alexandria, VA | Dr. Nahlah"). Where
+the page shows a breadcrumb, turn `emitBreadcrumbs` off and store a
+`BreadcrumbList` per page that repeats the visible trail; copy the `emit*`
+switches with the stores when cloning to staging.
+
+**Text from platforms is not the site's copy.** YouTube/Vimeo descriptions can
+carry claims the site's rules forbid; filter them sentence by sentence.
+
 ## Still worth doing by hand
 
-- **`sameAs`** is empty. Google Business Profile, Facebook and Yelp URLs are how
-  an answer engine ties this entity to the one it already knows; nothing was
-  invented for it.
-- **`aggregateRating`** — the site claims 4.9 out of 5 in copy. A rating in
-  schema must be backed by reviews the site actually displays and by a real
-  count; it belongs in the site-wide block once someone has the numbers.
+- **`sameAs`**: take each office's profiles from what the practice supplies
+  (Google Business Profile as `maps.google.com/?cid=…` — a `g.page/r/…/review`
+  link redirects to the place id; Facebook without `/reviews`; Yelp). They are
+  also each office's `hasMap`.
+- **`aggregateRating`** — do not build it from on-site testimonials: Google
+  ignores self-serving reviews on a LocalBusiness and treats them as a policy
+  risk. Only with a real, displayed review count from a third-party source.
 - **Run the pages through Google's Rich Results Test** once. The graph is
   asserted to parse and to carry the right nodes; only Google can say whether it
   earns a rich result.
