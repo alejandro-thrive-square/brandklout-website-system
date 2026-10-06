@@ -266,6 +266,20 @@ For the owner to settle against the reference video, then fold into the standard
   off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
   `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
   phone and fails off-brand consent text.
+- **On a dark site, `site-style --compare` said "style ok" while the form was white** (West LA,
+  2026-10-05; the client saw it). Three things the compare does not measure:
+  1. GHL styles single-line inputs with `#_builder-form .form-builder--item input[type="text"][class="form-control"]`
+     (also tel/email, and hover/focus in blue) **with `!important`**. A plain `#_builder-form input`
+     loses, so First/Last/Phone/Email stay white while the textarea obeys. Out-rank it:
+     `#_builder-form .form-builder--item input.form-control[type][class]`.
+  2. The Styles panel writes `border:1px solid #FFF; border-radius:8px; box-shadow; padding` **inline**
+     on `#_builder-form`: a white frame on a dark card. Clear it with `!important` in Custom CSS.
+  3. The Submit label is a `<p>` inside the button, so a blanket `#_builder-form p` colour repaints it.
+     Colour `button[type=submit] *` explicitly.
+  Before pasting, **preview the CSS**: load the public form in headless Chrome, set the page background
+  to the site's, inject the block in a `<style>`, screenshot full height (West LA's probe:
+  `scenario-3-ads-landing-pages/03-qa-and-launch/output/code/ghl-form-dark.css` on bk-west-la-implants is
+  the dark-site block that passed). Look at the screenshot; the compare is not enough.
 - **A pasted Custom CSS block can vanish on Save** (West LA, 2026-10-05, twice): Codex pasted the
   styling block, even read it back in the box, clicked Save, and the public form carried none of it.
   What worked both times: after pasting, click the Custom CSS editor's own Save / Apply / Done button,
