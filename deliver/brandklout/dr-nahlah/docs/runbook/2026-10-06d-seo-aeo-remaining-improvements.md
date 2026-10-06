@@ -56,3 +56,34 @@ robots 200, sitemap 81 × 2026-10-06, `/dental-implants/?utm_source=t` → 301 w
 - "Dental Group of Tysons" still in 14 post bodies (CS item since 2026-10-02).
 - 7,000 (/about) vs 18,000+ (home, /meet-dr-nahlah) implants placed; identical hours for both offices.
 - Submit the sitemap (and `/llms.txt` needs nothing) in Search Console; watch Enhancements.
+
+## Then: the user's three decisions (same day)
+Asked: keyword H1s → **"Keyword H1, headline kept"**; "Dental Group of Tysons" in posts → **replace**;
+copy depth → **skip**.
+
+- **Keyword H1 on the 11 treatment pages, production + staging, published.** The hero now reads
+  breadcrumb › `<h1 class="label">Dental Implants in McLean & Alexandria, VA</h1>` (the site's gold
+  eyebrow style; `text-style-tagline` on staging) › the designed headline as `<p data-split>`. Text =
+  the SEO title without the brand, with a no-break space in "Alexandria, VA" (it orphaned at 390px).
+  Three registry ambient rules keep the look, no inline font sizes: `<hero> p[data-split]` (the old
+  `h1, h2, h3, h4` + `<hero> h1` styles), `… p[data-split] em`, `<hero> h1.<label>` (label size).
+  `seo-v3/push-keyword-h1.mjs` (plan → `--apply` → `--publish`, refuses unless the draft holds only
+  these edits; `--adopt` records state when a write landed but its read-back tripped on something
+  harmless). Staging first. **Proof:** `seo-v3/hero-look.mjs` snapshot before / compare after = HEADLINES
+  IDENTICAL (font, size, weight, line-height, spacing, colour, max-width, box, `<em>`) at 1440 and 390 on
+  all 11, ONE H1 EACH; screenshots reviewed. The WebPage carries the headline as `alternativeHeadline`.
+- **"Dental Group of Tysons" → the practice**: 23 places in 13 post bodies, ordered rules so sentences
+  read ("How Dr. Nahlah’s Practice Can Help…", "at our Tysons Corner office", else the full name).
+  `seo-v3/push-old-name.mjs`, row-published, both hosts. Live sweep of all 81 sitemap pages: 0.
+- Schema rebuilt from a rescan and shipped to both hosts; every gate clean again on both; parity holds.
+- Local source: 11 page bodies + 3 CSS rules (`seo-v3/local-keyword-h1.mjs`), `posts.json` from the
+  live rows (`seo-v3/sync-local-posts.mjs`), blog pages regenerated (`gen-blog.mjs` imported the
+  pre-v2 `15-instatic-api-sync/` path; fixed to `22-`), `build-site.mjs` 56/56.
+
+### Gotchas (added)
+- **A page write drops an empty `inlineStyles: {}`** from a new node, so a deep-equal read-back fails
+  although nothing is wrong. Build new nodes without the key.
+- A row's `updatedAt` equals its `publishedAt` right after a publish; compare those two per row, not
+  against the site's `lastPublishedAt` (hipaa-disclosure looked "changed" by one second).
+- `scan-sections.mjs` sets the hero's `<p data-split>` aside as `headline`; without that the designed
+  headline became every treatment Service's description.

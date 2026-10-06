@@ -49,7 +49,7 @@ const POSTS = path.resolve(HERE, '../../../13-content-export-import/.tmp/posts.j
    `slugify(label) === id` holds by construction and `?topic=implants` needs no
    lookup table in the browser. push-posts-filter.mjs asserts that for all twelve
    and refuses to run if it ever stops holding. */
-import { TOPICS, topicFor } from '../../../15-instatic-api-sync/post-image-pool.mjs';
+import { TOPICS, topicFor } from '../../../22-instatic-api-sync/post-image-pool.mjs';
 const topicLabel = (id) => id.charAt(0).toUpperCase() + id.slice(1);
 
 const raw = JSON.parse(fs.readFileSync(POSTS, 'utf8'));

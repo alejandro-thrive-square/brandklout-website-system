@@ -138,6 +138,9 @@ for (const [slug, keys] of Object.entries(TREAT_WIKI)) {
   const proc = node(slug, 'procedure')
   if (proc) Object.assign(proc, { description: intro(slug), ...sameAs(...keys) })
   node(slug, 'webpage').breadcrumb = ref(`${url(slug)}#breadcrumb`)
+  // the designed hero line, now a <p> under the keyword H1 (2026-10-06)
+  const headline = pages[slug].sections[0].headline
+  if (headline) node(slug, 'webpage').alternativeHeadline = headline
   const f = slug === 'teeth-whitening' ? null : faqOf(slug)   // v2 rule: whitening's only '?' heading is a CTA
   blocks[slug] = blocks[slug].filter((n) => !String(n['@id']).endsWith('#faq'))
   if (f) blocks[slug].push(f)

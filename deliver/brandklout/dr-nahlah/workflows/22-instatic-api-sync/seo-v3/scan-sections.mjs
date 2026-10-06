@@ -61,7 +61,11 @@ function qaOf (html) {
 function sectionsOf (body) {
   const main = body.replace(/<header\b[\s\S]*?<\/header>/, '').replace(/<footer\b[\s\S]*?<\/footer>/g, '').replace(/<nav\b[\s\S]*?<\/nav>/g, '')
   const chunks = main.split(/<section\b/).slice(1).map((c) => '<section' + c)
-  return chunks.map((c) => {
+  return chunks.map((c0) => {
+    // since 2026-10-06 the treatment heroes carry a keyword <h1> and the designed headline as
+    // <p data-split>: keep the headline apart so it is not read as the hero's lead line
+    const headline = txt((c0.match(/<p\b[^>]*data-split[^>]*>([\s\S]*?)<\/p>/) || [])[1] || '')
+    const c = c0.replace(/<p\b[^>]*data-split[^>]*>[\s\S]*?<\/p>/, '')
     const h1 = txt((c.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || '')
     const h2 = txt((c.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/) || [])[1] || '')
     const qa = qaOf(c)
@@ -75,7 +79,7 @@ function sectionsOf (body) {
     const videos = [...new Set([...c.matchAll(/vimeo\.com\/video\/(\d+)|data-vimeo[-\w]*="(\d+)"|vimeo\.com\/(\d{6,})|data-yt="([\w-]{11})"|youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/g)].map((m) => m[1] || m[2] || m[3] || (m[4] || m[5]) && 'yt:' + (m[4] || m[5])))]
     const table = [...c.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((r) => [...r[1].matchAll(/<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/g)].map((x) => txt(x[1])))
     const quotes = [...c.matchAll(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>([\s\S]{0,400})/g)].map((m) => ({ text: txt(m[1]), by: txt((m[2].match(/class="[^"]*(?:quote-by|quote_author)[^"]*"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '') }))
-    return { ...(h1 ? { h1 } : {}), h2, lead, items, qa, images, videos, ...(quotes.length ? { quotes } : {}), ...(table.length ? { table } : {}) }
+    return { ...(h1 ? { h1 } : {}), ...(headline ? { headline } : {}), h2, lead, items, qa, images, videos, ...(quotes.length ? { quotes } : {}), ...(table.length ? { table } : {}) }
   }).filter((s) => s.h1 || s.h2 || s.lead.length || s.items.length || s.qa.length)
 }
 

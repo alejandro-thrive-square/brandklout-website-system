@@ -36,6 +36,11 @@
 .section_page-hero .page-hero_content{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
 .section_page-hero h1{font-size:var(--d2);max-width:17ch}
 .section_page-hero h1 em{font-style:italic;color:var(--accent-lg)}
+/* Treatment heroes (SEO 2026-10-06): a keyword <h1> in the eyebrow style, the designed headline as
+   <p data-split> with exactly the look the hero h1 gave it. Mirrors the Instatic registry rules. */
+.section_page-hero p[data-split]{font-family:var(--f-display);font-weight:500;line-height:1.02;letter-spacing:-.02em;color:var(--fg);font-size:var(--d2);max-width:17ch}
+.section_page-hero p[data-split] em{font-style:italic;color:var(--accent-lg)}
+.section_page-hero h1.text-style-tagline{font-size:var(--label);max-width:none;line-height:1.5;margin-bottom:1rem}
 .section_page-hero .page-hero_lead{max-width:52ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
 .section_page-hero .page-hero_actions{display:flex;flex-wrap:wrap;gap:.85rem}
 .section_page-hero .page-hero_meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
