@@ -215,24 +215,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
      The body below is a real article (revamp-your-smile-understanding-the-basics-of-tooth-implants-in-mclean-va), present so the
      article's typography is measured by the gates rather than assumed. On
-     Instatic build-post-template.mjs replaces the contents of .bl-body with
+     Instatic build-post-template.mjs replaces the contents of .article_body with
      <instatic-outlet data-tag="div">, and every entry renders through this same
      shell.
 
      THE SHAPE, and where each piece comes from on the platform:
 
-       .pg-hero.bl-ph   full bleed, outside .wrap. The photograph is the entry's
+       .section_page-hero.is-article-hero   full bleed, outside .container-large. The photograph is the entry's
                         featuredMedia; the title is {currentEntry.title}; the
                         date is MOVED here from the body by sections/blog-post.js
                         because there is no date field to bind.
-       .bl-rail-l       empty in the markup. The contents list is built at
+       .is-left-rail       empty in the markup. The contents list is built at
                         runtime and moved in above 1280px.
-       .bl-main         the outlet, the FAQ (runtime) and the consult block.
-       .bl-rail-r       three fixed cards. Pinned by ScrollTrigger, not by
+       .article_main         the outlet, the FAQ (runtime) and the consult block.
+       .is-right-rail       three fixed cards. Pinned by ScrollTrigger, not by
                         position:sticky, which cannot work under ScrollSmoother.
-       .bl-related      a base.loop on Instatic; three stand-ins here.
+       .article_related      a base.loop on Instatic; three stand-ins here.
      ========================================================================== -->
-<div class="section_content">
+<main class="section_content" id="top">
 
   <section class="section_page-hero is-article-hero" id="hero">
     <div class="page-hero_background">
@@ -248,12 +248,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container-large padding-section-large">
     <article class="article_component">
 
-      <div class="article_rail is-left-rail"></div>
+      <aside class="article_rail is-left-rail"></aside>
 
       <div class="article_main">
         <div class="article_body" data-rv>
           <div>
-            <h1>Revamp Your Smile: Understanding the Basics of Tooth Implants in McLean, VA</h1>
             <p class="bl-when">4 July 2024</p>
             <h2>Understanding Tooth Implants: What Are They?</h2>
             <p>Tooth implants, or dental implants, are a revolutionary solution for replacing missing teeth. These implants consist of titanium posts surgically inserted into the jawbone, acting as artificial tooth roots. Once the implants are securely in place, they provide a stable foundation for attaching prosthetic teeth, such as crowns, bridges, or dentures. This procedure not only restores the functionality of natural teeth but also enhances the appearance of your smile. Dental implants are designed to mimic the look and feel of natural teeth, providing a long-term solution that can last a lifetime with proper care.</p>
@@ -267,16 +266,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p>The importance of oral health cannot be overstated. Missing teeth affect your eating and speaking ability and can lead to further dental complications if left untreated. Tooth implants provide a solution that enhances both functionality and aesthetics, contributing to overall well-being. Maintaining good oral hygiene and promptly addressing dental issues are essential to preventing further complications. Tooth implants offer a way to restore your smile and improve your quality of life, making it easier to maintain a healthy and active lifestyle.</p>
             <h2>Taking the First Step: Choosing a Prosthodontist</h2>
             <p>Choosing the right prosthodontist is a critical step in getting tooth implants. When selecting a specialist, consider their experience, qualifications, and the range of services they offer. Finding a prosthodontist who is well-versed in the latest implant technologies and techniques is essential. Look for a patient-centered practitioner who provides personalized care tailored to your needs. A good prosthodontist will take the time to explain the procedure, answer your questions, and ensure you feel comfortable and informed throughout the process.</p>
-            <p>In McLean, VA, Dr. Nahlah is a leading tooth implant expert known for his extensive experience and dedication to patient care. Dr. Nahlah’s qualifications and commitment to staying at the forefront of dental advancements make him a trusted choice for those considering dental implants. His approach combines technical expertise with a compassionate and personalized touch, ensuring that each patient receives the highest standard of care. At Dental Group of Tysons, Dr. Nahlah and his team use state-of-the-art equipment and techniques to provide the best possible outcomes for their patients.</p>
+            <p>In McLean, VA, Dr. Nahlah is a leading tooth implant expert known for his extensive experience and dedication to patient care. Dr. Nahlah’s qualifications and commitment to staying at the forefront of dental advancements make him a trusted choice for those considering dental implants. His approach combines technical expertise with a compassionate and personalized touch, ensuring that each patient receives the highest standard of care. At Dr. Nahlah Implants and Prosthodontics Specialists, Dr. Nahlah and his team use state-of-the-art equipment and techniques to provide the best possible outcomes for their patients.</p>
             <h2>The Dental Implant Procedure: What to Expect?</h2>
             <p>Understanding what to expect during the dental implant procedure can help alleviate concerns and ensure you are well-prepared. The process begins with a comprehensive consultation. Dr. Nahlah will assess your oral health and determine whether you are suitable for implants. This evaluation typically includes X-rays and 3D imaging to plan the precise placement of the implants. On the day of the surgery, the titanium posts are surgically inserted into the jawbone under local anesthesia. After the surgery, a healing period of several months is required to allow the implants to integrate with the bone.</p>
             <p>Common myths and misconceptions about dental implants often cause unnecessary anxiety. It’s important to know that the procedure is highly successful and generally well-tolerated by patients. Modern techniques and sedation options ensure that discomfort is minimal. During the healing period, temporary crowns or bridges can be used to maintain aesthetics and function. Once the implants have fully integrated, the final prosthetic teeth are attached, providing a natural and durable solution. Regular follow-up visits are essential to monitor the progress and ensure the long-term success of the implants.</p>
             <h2>Why Choose Dr. Nahlah for Tooth Implants in McLean, VA?</h2>
-            <p>Dr. Nahlah’s expertise and qualifications make him an exceptional choice for tooth implants in McLean, VA. With extensive training in prosthodontics and a focus on implant dentistry, Dr. Nahlah has successfully helped numerous patients achieve optimal dental health and aesthetics. His commitment to patient care is evident in his personalized approach, ensuring that each treatment plan is tailored to meet his patients’ unique needs and goals. Dr. Nahlah’s use of state-of-the-art equipment and techniques further enhances the quality and success of the implant procedures performed at the Dental Group of Tysons.</p>
+            <p>Dr. Nahlah’s expertise and qualifications make him an exceptional choice for tooth implants in McLean, VA. With extensive training in prosthodontics and a focus on implant dentistry, Dr. Nahlah has successfully helped numerous patients achieve optimal dental health and aesthetics. His commitment to patient care is evident in his personalized approach, ensuring that each treatment plan is tailored to meet his patients’ unique needs and goals. Dr. Nahlah’s use of state-of-the-art equipment and techniques further enhances the quality and success of the implant procedures performed at Dr. Nahlah Implants and Prosthodontics Specialists.</p>
             <p>Choosing Dr. Nahlah for your tooth implants means opting for a practitioner who prioritizes your comfort and satisfaction. His practice is equipped with the latest technology, allowing for precise and efficient implant placement. Dr. Nahlah’s dedication to continuing education ensures that he remains updated on the latest advancements in implant dentistry, providing his patients with the best possible care. The combination of expertise, advanced technology, and a patient-centered approach makes Dr. Nahlah a top choice for those seeking tooth implants in McLean, VA.</p>
             <h2>Don’t Delay Your Dental Health: Get in Touch Today</h2>
-            <p>Timely intervention in dental issues is crucial for maintaining optimal oral health. If you are considering tooth implants, reaching out to Dr. Nahlah at Dental Group of Tysons is essential to restoring your smile and improving your quality of life. The more prolonged dental problems are left untreated, the more complex and costly they can become. By addressing these issues promptly, you can prevent further complications and enjoy the benefits of a healthy, functional, and aesthetically pleasing smile.</p>
-            <p>Dr. Nahlah and his team are committed to providing exceptional care and ensuring that each patient feels supported throughout their treatment journey. Don’t let dental concerns prevent you from achieving the smile you deserve. Contact Dental Group of Tysons today to schedule a consultation with Dr. Nahlah and take the first step towards a brighter, healthier smile. Your oral health is vital to your overall well-being; timely intervention can make all the difference.</p>
+            <p>Timely intervention in dental issues is crucial for maintaining optimal oral health. If you are considering tooth implants, reaching out to Dr. Nahlah at Dr. Nahlah Implants and Prosthodontics Specialists is essential to restoring your smile and improving your quality of life. The more prolonged dental problems are left untreated, the more complex and costly they can become. By addressing these issues promptly, you can prevent further complications and enjoy the benefits of a healthy, functional, and aesthetically pleasing smile.</p>
+            <p>Dr. Nahlah and his team are committed to providing exceptional care and ensuring that each patient feels supported throughout their treatment journey. Don’t let dental concerns prevent you from achieving the smile you deserve. Contact Dr. Nahlah Implants and Prosthodontics Specialists today to schedule a consultation with Dr. Nahlah and take the first step towards a brighter, healthier smile. Your oral health is vital to your overall well-being; timely intervention can make all the difference.</p>
           </div>
         </div>
         <div class="article_cta" data-rv>
@@ -288,12 +287,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
-      <div class="article_rail is-right-rail">
+      <aside class="article_rail is-right-rail">
         <div class="article_rail-card">
           <div class="article_rail-card-image"><img src="assets/dr-nahlah.png" alt="Dr. Esam Nahlah, Prosthodontist" loading="lazy"></div>
           <span class="text-style-tagline">The specialist</span>
           <strong>Dr. Esam Nahlah</strong>
-          <p>D.D.S., M.S. — Diplomate of the American Board of Prosthodontics, practicing in Northern Virginia since 2013.</p>
+          <p>D.D.S., M.S. — Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.</p>
           <a class="more-link_component" href="meet-dr-nahlah.html">Meet the specialist</a>
         </div>
         <div class="article_rail-card">
@@ -309,7 +308,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="article_rail-card-office"><span>Tysons Corner · McLean</span><a href="https://www.flexbook.me/DrNahlahTy/1" target="_blank" rel="noopener">Book</a></div>
           <div class="article_rail-card-office"><span>Alexandria</span><a href="https://flexbook.me/drnahlah" target="_blank" rel="noopener">Book</a></div>
         </div>
-      </div>
+      </aside>
 
       <div class="article_related" data-rv>
         <strong>More from the Journal</strong>
@@ -320,7 +319,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </article>
           <article class="article_related-card">
             <a class="blog_card-image" href="posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution.html" tabindex="-1" aria-hidden="true"><img src="assets/advanced_tech.jpg" alt="" loading="lazy"></a>
-            <h3><a href="posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution.html">Your Comprehensive Guide on Dental Implants: The Best Replacement of Tooth Solution</a></h3>
+            <h3><a href="posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution.html">Your Comprehensive Guide to Dental Implants: The Best Tooth Replacement Solution</a></h3>
           </article>
           <article class="article_related-card">
             <a class="blog_card-image" href="posts/uncovering-the-mystery-the-in-depth-guide-to-dental-implants.html" tabindex="-1" aria-hidden="true"><img src="assets/office-room.jpg" alt="" loading="lazy"></a>
@@ -335,7 +334,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </article>
   </div>
-</div>
+</main>
 
 
 </main>
