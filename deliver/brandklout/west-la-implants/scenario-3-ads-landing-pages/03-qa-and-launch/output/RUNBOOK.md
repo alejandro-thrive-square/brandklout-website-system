@@ -2,6 +2,24 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-05 · the campaign forms restyled for the dark site (client: "they are white")
+
+**Done**: on the live pages the first styling showed white single-line inputs (cream text on
+white), a white 8px frame with a shadow, light text on the gold button, invisible asterisks, Inter
+links. Causes: GHL's `!important` input rule out-ranks `#_builder-form input`; the Styles panel's
+inline border/shadow on `#_builder-form`; a blanket `p` colour reaching the button's `<p>`. New block
+[`code/ghl-form-dark.css`](./code/ghl-form-dark.css) (matches the site's `.in-fields`: 11px uppercase
+`#B5AFA4` labels, transparent inputs with a hairline border, gold focus, gold asterisks and
+checkboxes, 13px muted consent, near-black uppercase button), previewed by injecting it into the
+public form on `#0B0B0A` at 554 and 312px, then pasted by Codex in place of the old block on both
+forms. Checked in the live cards: `3-on-6` at 1440 and `all-on-6-consultation` at 390. Gate
+`--standard --landing` ok on both. The contact form's WordPress block is
+[`code/ghl-form-contact-wordpress.css`](./code/ghl-form-contact-wordpress.css). Redirects left on the
+Railway host (client, 2026-10-05: early in the build).
+
+**Gotcha**: `site-style --compare` printed "style ok" while the form was white on the page. Look at a
+screenshot of the form in its card; the process note is in the ghl-forms README on main (`75391062`).
+
 ## 2026-10-05 · the campaign forms placed on the pages
 
 **Done**: `workflows/21-instatic-upload/add-ghl-forms.mjs --apply --publish` swapped the `.lp-slot`

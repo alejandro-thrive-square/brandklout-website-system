@@ -56,6 +56,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-01 | organic · 21 instatic upload | "HIPAA Disclosure" footer link after Privacy on all 87 pages (site + ads footers) and in the source footers, published seq 27; ads footer wraps at 390 (needs CSS go-ahead) | _this commit_ |
 | 2026-10-05 | 3 · 03 QA and launch | GHL forms via Codex: All-on-6 `XaCEV96A0QuF9ufEmkSc` and 3-on-6 `P15UYHonJj8oH5G8xwKX` built new (gate `--landing`/`--combo` ok, style ok), contact form `BAZZebJdjQAdGkda1fEE` brought to standard; ids in `combo.json` | `44ce721a` |
 | 2026-10-05 | 3 · 03 QA and launch | Both campaign forms placed on landing + consultation pages by `add-ghl-forms.mjs` (page-only Embed blocks), published seq 28; `verify-form` 1440/390 clean, `verify-combo-live` forms + redirects ok | _this commit_ |
+| 2026-10-05 | 3 · 03 QA and launch | Campaign forms restyled for the dark site (white inputs/frame fixed: GHL input specificity, inline frame, button `<p>`), previewed then pasted by Codex; checked in the live cards at 1440 and 390 | _this commit_ |
 
 ## Version Control
 
