@@ -37,7 +37,7 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    redirect to the production thank-you URL, save-and-exit off.
 2. **Forms.** `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --combo <combo.json> > output/ghl-forms.log 2>&1`. A failure
    here is fixed in GHL by Brandklout, not on the site. Send them the exact form id and the URL it
-   must redirect to.
+   must redirect to. Then the embeds on every combo page: `tools/ghl-forms/check-embed.mjs <origin> --page <each combo path>` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06).
 3. **Form in the hero, rendered.**
    `node verify-form.mjs --combo <combo.json> --origin https://staging.<domain> --widths 1440,390 > output/verify-form.log 2>&1`
    It waits 14 s per page for the frame to grow. It asserts structure, size and clipping, not

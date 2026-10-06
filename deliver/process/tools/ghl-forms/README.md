@@ -26,6 +26,7 @@ Top to bottom:
 | — | **No layout shift** | [`no-shift.css`](./no-shift.css) at the top of the form's **Custom CSS**, and **no hide script**: delete any Custom HTML element whose script hides the `privacy_*` fields. |
 | — | **Styling** | Matches the site, not GHL's defaults (Inter, grey `#D0D5DD` borders, blue `#155EEF` button). See [Styling](#styling). |
 | — | Save-and-exit | **Off** ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md), gotcha "Submission in progress"). |
+| — | **The embed on the site** | GHL's paste **as GHL gives it**. **Never `loading="lazy"`** on the iframe, and an Embed block in URL mode must have *Lazy load* **off** — a lazy GHL frame never appears in Firefox. See [Embedding the form](#embedding-the-form). Gate: [`check-embed.mjs`](./check-embed.mjs). |
 
 ### The model, field by field
 
@@ -105,9 +106,52 @@ that is a condition of submitting the form.
    form, not even to copy its style (2026-10-02: an open builder on a live lead form looked like
    an edit, and the user stopped it). Give the style from the site's tokens instead. A form in the
    wrong sub-account is not moved: build it new in the right one, swap the embed, retire the old one.
-6. **Gate again** (step 3). It must print `ok`. Then look at the form once on the live page in a
-   normal browser: in automation the embed stays hidden behind Cloudflare Turnstile.
+6. **Gate again** (step 3). It must print `ok`. Then gate the embed on every page of the site:
+   `node deliver/process/tools/ghl-forms/check-embed.mjs https://www.<client>.com [--page /ads-…] > output/ghl-embed.log 2>&1`
+   ([Embedding the form](#embedding-the-form)); it must print `ok`. Then look at the form once on
+   the live page in a normal browser **and in Firefox at phone width**: in automation the embed
+   stays hidden behind Cloudflare Turnstile, and Chrome hides embed bugs Firefox shows.
 7. **Record** it in the client runbook: form id, the service list, the legal name used.
+
+## Embedding the form
+
+Paste GHL's embed code **as GHL gives it**: the `<iframe … data-form-id …>` plus
+`<script src="https://link.msgsndr.com/js/form_embed.js">`. On Instatic it goes in an Embed block in
+**snippet** mode (the importer turns a bare third-party `<iframe>` into an empty div); on Webflow,
+in the page's native embed route. The one edit allowed is a fixed `height:<data-height>px` in place
+of GHL's `height:100%`, which collapses inside an auto-height wrapper.
+
+**Never add `loading="lazy"` to the iframe.** `form_embed.js` hides every GHL frame on the page as
+soon as the page loads (`opacity:0; visibility:hidden; position:absolute; left:-9999px`) and only
+reveals it when the form inside reports its height. A lazy frame below the fold waits until it
+nears the viewport, and parked at `-9999px` it never does: it never loads, never reveals, and the
+slot stays blank **forever**. Chrome and Safari usually start the load before the hide, so the form
+looks fine to us; Firefox does not.
+
+Found 2026-10-06 on Stone Med Spa `/book` (form `Gqnb0W1NH95MjROPRaLe`): the client said the form
+"is not showing at all" while it worked in our Chrome. Firefox at 390, 768 and 1366 wide never even
+requested the frame; Chrome revealed it in 5–13 s, WebKit in 8–14 s, Firefox at 1440 in 7 s (there
+the form sat inside the lazy margin). The same page without `lazy` revealed in Firefox at every
+size. The `lazy` had been our own "below the fold" edit of the paste.
+
+The same trap, other doors:
+
+- **The Embed block's URL mode** (`brandklout.embed-origins`) writes `loading="lazy"` on its iframe
+  by default (*Lazy load* on). On a page that also loads `form_embed.js`, a GHL frame placed by URL
+  is hidden the same way. Use snippet mode for GHL, or turn *Lazy load* off.
+- **A "form failed" fallback must test visibility, not height.** The hidden frame keeps its full
+  height (565px on `/book`), so `clientHeight < 40` never fires. Test `visibility`/`opacity`/
+  `left:-9999px`, give it ~25 s (a reveal takes up to ~25 s on a slow phone), and remove the message
+  if the form reveals later. Reference: Stone Med Spa `site-src/js/11-form.js` (bk-stone-med-spa).
+- **"Not showing for the client, fine for me"** is an engine difference until proven otherwise.
+  Probe Firefox and WebKit at phone width (Playwright `firefox` / `webkit`, `playwright-core@1.49.1`
+  on this workstation) on the live URL, fresh profile, and log when the frame is *requested*, not
+  only whether it ends up visible.
+
+**Gate:** [`check-embed.mjs`](./check-embed.mjs) reads every page in the sitemap (plus `--page` for
+ad pages the sitemap leaves out) and fails on any GHL iframe with `loading="lazy"`. It also lists
+each page's GHL frames and whether `form_embed.js` loads, so a form that disappeared from the markup
+shows up too. It reads the served HTML only: a frame injected later by a script is not seen.
 
 ## Styling
 
@@ -219,6 +263,8 @@ For the owner to settle against the reference video, then fold into the standard
 
 ## Gotchas
 
+- **`loading="lazy"` on a GHL iframe = no form in Firefox, ever.** See
+  [Embedding the form](#embedding-the-form); `check-embed.mjs` fails on it.
 - **A form copied from another practice stays in that practice's sub-account.** Mason Park's two
   *Google Ads* forms (`YbX91GhEDKkCN4GH4gka`, `AFu5BpJpMjgSnSf8yybc`) live in **Grand Mission's**
   location `mZ2q3yXtue090i2YLcrj` and link to grandmissiondentistry.com's privacy pages: any lead

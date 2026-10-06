@@ -26,7 +26,8 @@ On Webflow every publish is whole-site, so this step decides between three resul
    - `node wf-tree-audit.mjs --site <id> --pages <touched> --foreign "<other clients>" --phone <digits> > <workdir>/tree-audit.log 2>&1`.
      It must PASS. Read the warnings.
    - Every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --standard --origin <prod> --legal "<legal name>" --location <id> <ids>`
-     (`--landing` on ad pages) and `site-style.mjs --compare` ([ghl-forms](../../tools/ghl-forms/README.md)).
+     (`--landing` on ad pages) and `site-style.mjs --compare` ([ghl-forms](../../tools/ghl-forms/README.md)),
+     and `tools/ghl-forms/check-embed.mjs <origin> [--page /ads-…]` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06).
      Save-and-exit off, all 11 consent fields, labels, captcha above Submit, `no-shift.css`. All of
      it is fixed in GHL through Codex, not on the site.
    - A reviews widget on the touched pages: `tools/elfsight-reviews/check-widget.mjs <widgetId> --render <page>`

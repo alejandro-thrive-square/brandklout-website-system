@@ -30,6 +30,7 @@ anything else. A publish ships the whole draft, so this step decides between:
      `click-controls.mjs --base`, `facts-sweep.mjs`, `cross-client-grep.mjs --base`;
    - every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <ids>`.
      Save-and-exit must be off, and the form needs all 11 consent fields. Both are fixed in GHL;
+   - every page with a GHL embed: `tools/ghl-forms/check-embed.mjs <origin> [--page /ads-…]` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06);
    - consent: `node tools/termly-ghl-consent/consent-kit.mjs check <urls> --termly-proxy > <workdir>/consent.txt 2>&1`.
      Before a choice nothing tagged fires. After Accept no `script[type="text/plain"][data-categories]`
      is left;
