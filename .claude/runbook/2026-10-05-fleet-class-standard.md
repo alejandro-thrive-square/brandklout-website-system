@@ -37,8 +37,12 @@ staging first, test end to end, and leave a detailed SOP so new builds never nee
 - **Mason Park Kids complete (staging)** (`bk-mason-park-kids` `d961983c`): 2 stylesheets (1,226
   rules) into the registry (3 `@font-face` stay), Framework 44 variables, 389 class rules renamed;
   css 0 real at every width, runtime parity before→final OK on 434 captures; EDITABLE, IN BOUNDS,
-  CLEAN. One revived dead override (`.cf-shot`) fixed forward. **Its local `home/` source still has
-  the old names: a push from it would undo the migration** (client runbook, top).
+  CLEAN. One revived dead override (`.cf-shot`) fixed forward. Its local `home/` source was renamed
+  with the same map later (`bk-mason-park-kids` `b7e6c64d`; `class-sync-check` matches staging on 217
+  pages); it still ships `site.css` as a code asset (client runbook, top).
+- Held, re-checked read-only in a new session (2026-10-05 evening): Dr. Nahlah staging still
+  `draftMatchesPublished: false` and two `bk-dr-nahlah` sessions are active on it; West LA still has
+  no staging instance; Brandklout staging unchanged since its 13:51Z publish. Nothing applied.
 - Maps prepared and committed, not applied: Dr. Nahlah (`5f93a76c`, 377 renames; staging draft has
   an unreviewed 04:04Z edit, text-identical as far as checked), West LA (`9afba9e6`, 498; no staging
   instance), IFA rebuild local source (`01502dc3`, 371; another session is building it), Brandklout
