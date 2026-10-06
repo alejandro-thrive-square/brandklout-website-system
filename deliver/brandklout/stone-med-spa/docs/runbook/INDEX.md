@@ -1,11 +1,12 @@
 # Runbook index
 
-31 runs, newest first. Each line is one file in this folder.
+32 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-06 | 2026-10-06, latest — Hours Mon–Fri 9–5 (footer ×27, facts on /, /about, /book) and "Prefer to pick a time yourself? Book online." (Modento, Stone Surgical Arts' account) above the GHL form on /book; new `set-hours-modento.mjs`; PRODUCTION published, STAGING draft only — carries **gotchas** | [`2026-10-06-hours-mon-fri-and-modento.md`](./2026-10-06-hours-mon-fri-and-modento.md) |
 | 2026-10-06 | 2026-10-06 — Client saw no GHL form on /book: our `loading="lazy"` on the iframe + GHL hiding it at left:-9999px = never loads (Firefox 390/768/1366 blank). Lazy removed and fallback fixed by the new `fix-ghl-form.mjs`; PRODUCTION published and verified in Firefox/WebKit/Chrome; STAGING draft only (its draft already had pending edits) — carries **gotchas** | [`2026-10-06-ghl-form-lazy-never-loaded.md`](./2026-10-06-ghl-form-lazy-never-loaded.md) |
 | 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging** (fleet pilot): tokens.css into its registry rules, Framework owns 46 variables, 51 classes renamed (eyebrow, u-sr-only, -num, is-m1…12 …), local source renamed; parity 0 real, runtime parity OK, EDITABLE, IN BOUNDS, verify CLEAN. Production untouched — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
 | 2026-10-01 | 2026-10-01, latest — "HIPAA Disclosure" footer link after Privacy Policy on all 27 pages, STAGING and PRODUCTION, by the new `add-hipaa-footer-link.mjs`; also in `site-src/partials/footer.html` — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
