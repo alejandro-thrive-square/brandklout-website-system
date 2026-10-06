@@ -65,6 +65,20 @@ posts = BlogPosting (+FAQ), home = Dentist + FAQ + ImageGallery. Its H1s are als
 - `/our-facility`'s `2058719.jpg` looks AI-generated, not the real suite; `/all-on-4`'s quote photo
   is stock, not the named patient. Flag to the client.
 
+## Staging synced to production (2026-10-05, late)
+Asked: "if we promote staging, does it wipe the metadata?" Yes, it would have: promotions carry
+staging's rows (the <title> is the row's title cell) and, via clone-site, the shell (old
+seo-head.js + jsonld scripts). Synced staging's DRAFT (not published; its class-map draft is
+untouched): `seo-v2/plugin-stores.mjs` (101 og overrides, 83 aeo blocks incl. the site-wide
+Person, organizationJson), `push-seo-v2.mjs` (30 rows, seo-head.js trimmed),
+`retire-runtime-jsonld.mjs`, `media-alt-parity.mjs`. Media library: production's 100 rendered
+images whose alt lived only in the og override or custom HTML now carry it as altText too
+(`fill-library-alts.mjs`); every image any live page or stylesheet references has library alt;
+the 155 still blank are unreferenced migration uploads. Ads-page backdrop photos are
+`aria-hidden` with `alt=""` on purpose; Vimeo thumbnails sit inside labelled play buttons.
+**`seo-v2/parity-check.mjs` → STAGING MATCHES PRODUCTION.** Run it before every promotion
+(now in main's staging-clone.md, Promote).
+
 ## Next
 - **Search Console access** (none in the master .env): submit the sitemap, request indexing of the
   top service pages, check Enhancements (FAQ / Breadcrumb), date the drop.
