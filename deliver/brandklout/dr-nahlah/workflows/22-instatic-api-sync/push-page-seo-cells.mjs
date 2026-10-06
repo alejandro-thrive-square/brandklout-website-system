@@ -2,6 +2,10 @@
 /**
  * Fill the Pages table's `seoTitle` / `seoDescription` cells from `seo.json`.
  *
+ * 2026-10-05: on Dr. Nahlah production the brandklout.open-graph plugin DOES read these
+ * cells (deriveFromPage + syncMetaDescription). Never run this on nested-slug rows:
+ * the PATCH flattens the route (see the 2026-10-05c run).
+ *
  * ── READ THIS BEFORE ASSUMING THESE FIELDS DO ANYTHING ────────────────────
  * On 0.0.16 these two fields are **inert at publish time.** They are `builtIn`
  * fields on the system `pages` table, they render in the Data grid and in the
