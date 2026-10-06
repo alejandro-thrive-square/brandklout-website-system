@@ -54,8 +54,8 @@
      --------------------------------------------------------------------- */
   (function chrome() {
     var nav = $(".masthead_component");
-    var hero = $(".ch-arrival");
-    if (!nav || !hero || !document.body.classList.contains("has-journey")) return;
+    var hero = $(".section_arrival");
+    if (!nav || !hero || !document.body.classList.contains("journey_body")) return;
 
     var navH = 0;
     function measure() {
@@ -168,7 +168,7 @@
      a scrub bound to its own exit).
      --------------------------------------------------------------------- */
   if (!reduced) {
-    $$(".chapter-tag").forEach(function (tag) {
+    $$(".chapter_tagline").forEach(function (tag) {
       var dot = $("i", tag);
       var tl = gsap.timeline({ scrollTrigger: { trigger: tag, start: "top 88%" } });
       if (dot) tl.from(dot, { scale: 0, duration: .7, ease: "back.out(2.5)" }, 0);
@@ -202,8 +202,8 @@
     /* Departures: the head, not the chapter, recedes as it passes the top
        edge. A sticky head departs by itself and is left alone. */
     $$("section[data-chapter]").forEach(function (sec) {
-      if (sec.classList.contains("ch-arrival")) return;
-      var head = [sec.querySelector(".chapter-tag"), sec.querySelector("h2")].filter(Boolean);
+      if (sec.classList.contains("section_arrival")) return;
+      var head = [sec.querySelector(".chapter_tagline"), sec.querySelector("h2")].filter(Boolean);
       if (!head.length) return;
       var holder = head[head.length - 1].parentElement;
       if (holder && getComputedStyle(holder).position === "sticky") return;
@@ -218,14 +218,14 @@
      ARRIVAL
      --------------------------------------------------------------------- */
   (function arrival() {
-    var sec = $(".ch-arrival");
+    var sec = $(".section_arrival");
     if (!sec || reduced) return;
 
     /* The headline is the one element on the site whose line breaks are a
        design decision, so it waits for the face it was designed in. */
     whenDisplayFace(function () {
     var tl = gsap.timeline({ delay: .15 });
-    var title = $(".ar-title", sec);
+    var title = $(".arrival_title", sec);
     var sp = splitLines(title);
     if (sp && sp.lines) {
       gsap.set(title, { visibility: "visible" });
@@ -233,13 +233,13 @@
     } else if (title) {
       gsap.set(title, { visibility: "visible" });
     }
-    var rest = $$(".ar-lede, .ar-offer, .ar-actions, .ar-meta > div", sec);
+    var rest = $$(".arrival_lead, .arrival_offer, .arrival_actions, .arrival_meta > div", sec);
     gsap.set(rest, { opacity: 0, y: 26 });
     tl.to(rest, { visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .1, ease: EASE }, .45);
     });
 
     /* The chapter departs: the copy lifts away as the photograph sinks. */
-    gsap.to($(".ar-in", sec), {
+    gsap.to($(".arrival_content", sec), {
       yPercent: -14, opacity: .15, ease: "none",
       scrollTrigger: { trigger: sec, start: "top top", end: "bottom top", scrub: .5 }
     });
@@ -249,14 +249,14 @@
      THE PATH — pinned horizontal travel  (scrub: the track follows progress)
      --------------------------------------------------------------------- */
   (function path() {
-    var sec = $(".ch-path");
+    var sec = $(".section_path");
     if (!sec) return;
     var pin = $("#pathPin", sec), track = $("#pathTrack", sec), bar = $("#pathBar", sec);
     if (!pin || !track) return;
 
     var TOUCH = window.matchMedia("(hover:none) and (pointer:coarse)").matches;
     if (reduced || TOUCH) {
-      $$(".pa-card", sec).forEach(function (c) { c.classList.add("is-on"); });
+      $$(".path_card", sec).forEach(function (c) { c.classList.add("is-on"); });
       if (window.innerWidth >= 900) sec.classList.add("is-static");
       return;
     }
@@ -268,7 +268,7 @@
     function buildStatic() {
       sec.classList.add("is-static");
       gsap.set(track, { x: 0 });
-      $$(".pa-card", sec).forEach(function (card, i) {
+      $$(".path_card", sec).forEach(function (card, i) {
         card.classList.add("is-on");
         gsap.from(card, {
           opacity: 0, y: 30, duration: .9, ease: EASE, delay: i * .07,
@@ -297,7 +297,7 @@
           onUpdate: function (self) { if (bar) gsap.set(bar, { scaleX: self.progress }); }
         }
       });
-      $$(".pa-card", sec).forEach(function (card) {
+      $$(".path_card", sec).forEach(function (card) {
         ScrollTrigger.create({
           trigger: card,
           containerAnimation: tween,
@@ -313,7 +313,7 @@
     function buildFlow() {
       sec.classList.remove("is-static");
       gsap.set(track, { clearProps: "transform" });
-      $$(".pa-card", sec).forEach(function (card) { card.classList.add("is-on"); });
+      $$(".path_card", sec).forEach(function (card) { card.classList.add("is-on"); });
     }
 
     function decide() {
@@ -326,7 +326,7 @@
       if (wants === built) return;
       built = wants;
       ScrollTrigger.getAll().forEach(function (st) {
-        if (st.trigger === pin || (st.trigger && st.trigger.classList && st.trigger.classList.contains("pa-card"))) st.kill();
+        if (st.trigger === pin || (st.trigger && st.trigger.classList && st.trigger.classList.contains("path_card"))) st.kill();
       });
       if (wants === "pinned") buildPinned();
       else if (wants === "static") buildStatic();
@@ -347,11 +347,11 @@
      --------------------------------------------------------------------- */
   (function grow() {
     $$("[data-grow]").forEach(function (sec) {
-      var fill = $(".gr-ruler i", sec);
-      var age = $(".gr-age", sec);
-      var stages = $$(".gr-stage", sec);
+      var fill = $(".growth_ruler i", sec);
+      var age = $(".growth_age", sec);
+      var stages = $$(".growth_stage", sec);
       if (!stages.length) return;
-      var ageText = age ? $(".gr-age_value", age) : null;
+      var ageText = age ? $(".growth_age-value", age) : null;
       var ageNote = age ? $("small", age) : null;
 
       if (reduced) {
@@ -419,7 +419,7 @@
       /* A unit set smaller beside the number (BugHerd #88/#123: "6 months",
          the word whole) lives in its own element; the count writes only the
          number, into .fig-n, so the unit survives the animation. */
-      var out = b.querySelector(".fig-n") || b;
+      var out = b.querySelector(".figures_number") || b;
       var o = { v: 0 };
       gsap.to(o, {
         v: to, duration: 1.8, ease: "power2.out",

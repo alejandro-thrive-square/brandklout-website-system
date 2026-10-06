@@ -72,7 +72,7 @@
   // normally, so only intercept below the breakpoint.
   var narrow = window.matchMedia("(max-width: 1150px)");
   if (nav) {
-    var parents = nav.querySelectorAll(".has-sub > .masthead_link, .has-dropdown > .navbar_link");
+    var parents = nav.querySelectorAll(".is-dropdown > .masthead_link, .has-dropdown > .navbar_link");
     Array.prototype.forEach.call(parents, function (a) {
       a.addEventListener("click", function (e) {
         if (!narrow.matches) return;
@@ -148,13 +148,13 @@
   // adds the previous/next buttons (they wrap at the ends), the "01 / 05"
   // counter, the progress bar and `is-on` on the card in front. Everything is
   // found by class: Instatic drops data-* and aria-* from <button>.
-  Array.prototype.forEach.call(document.querySelectorAll(".st-carousel"), function (box) {
-    var track = box.querySelector(".st-track");
+  Array.prototype.forEach.call(document.querySelectorAll(".stories_carousel"), function (box) {
+    var track = box.querySelector(".stories_track");
     if (!track) return;
     var cards = Array.prototype.slice.call(track.children);
     if (cards.length < 2) return;
-    var count = box.querySelector(".st-count b");
-    var bar = box.querySelector(".st-bar i");
+    var count = box.querySelector(".stories_count b");
+    var bar = box.querySelector(".stories_bar i");
     var current = -1;
     var pos = function (i) { return cards[i].offsetLeft - cards[0].offsetLeft; };
     var nearest = function () {
@@ -180,8 +180,8 @@
       var smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       track.scrollTo({ left: pos(i), behavior: smooth ? "smooth" : "auto" });
     };
-    var prev = box.querySelector(".st-prev");
-    var next = box.querySelector(".st-next");
+    var prev = box.querySelector(".stories_previous");
+    var next = box.querySelector(".stories_next");
     if (prev) prev.addEventListener("click", function () { go(current - 1); });
     if (next) next.addEventListener("click", function () { go(current + 1); });
     var queued = false;

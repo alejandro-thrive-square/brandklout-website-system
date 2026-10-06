@@ -12,7 +12,7 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 
 ## Where the site is, as of 2026-09-09
 
-**2026-10-05: STAGING IS ON THE CLASS STANDARD, PRODUCTION IS NOT.** Staging: every style in the Framework (44 tokens) or the registry, only 3 `@font-face` left in a code asset (EDITABLE); 377 classes renamed to Client-First (IN BOUNDS, `--verify` CLEAN); parity exact. Map and spec: `workflows/class-standard/`. **Do not push from `home/` until it is renamed with the same map (step 5): it still carries the old class names and the two code-asset stylesheets.** See `runbook/2026-10-05-class-standard-staging.md`.
+**2026-10-05: STAGING IS ON THE CLASS STANDARD, PRODUCTION IS NOT.** Staging: every style in the Framework (44 tokens) or the registry, only 3 `@font-face` left in a code asset (EDITABLE); 377 classes renamed to Client-First (IN BOUNDS, `--verify` CLEAN); parity exact. Map and spec: `workflows/class-standard/`. **`home/` was renamed with the same map later on 2026-10-05 (step 5, `class-sync-check` matches staging on 217 pages).** It still ships `assets/site.css` as a code-asset stylesheet and the pre-Elfsight review rail/wall markup (`pr-*`, `rv-*`): a push from it must not re-add the stylesheet, and needs `add-elfsight-reviews.mjs` re-run afterwards. See `runbook/2026-10-05-class-standard-staging.md`.
 
 **2026-10-04: Google reviews widget `d359c3c4` ON THE IN-SECTION STANDARD** (no widget title, Google-logo header with the count, `#93644A` pill, cream cards; Elfsight editor only, live at once). Gate `check-widget.mjs` ok on `/` and `/patient-reviews`. See `runbook/2026-10-04-google-reviews-widget-standard.md`.
 

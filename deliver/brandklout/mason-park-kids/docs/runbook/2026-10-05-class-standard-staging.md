@@ -31,11 +31,21 @@ Production untouched. Artifacts in `workflows/class-standard/`: `framework-spec.
   **RUNTIME PARITY OK**.
 - `migration-gates final --map class-map.json`: **EDITABLE**, **IN BOUNDS**, **CLEAN**.
 
+## Done (later, 2026-10-05): step 5, local source
+- `class-rename.mjs --files workflows/03-core-pages/home --map workflows/class-standard/class-map.json
+  --apply`: 220 files, 964 selectors, 19,086 class attributes, 27 script selectors, 3 classList
+  tokens (the script counts equal the staging run). `node --check` passes on `site.js` and `journey.js`.
+- `class-sync-check.mjs --site mason-park-kids:staging --build home`: 217 pages compared. Left in the
+  build only: `pr-rail`/`pr-rail-in`/`pr-chip` (home `#proof`) and `rv-wall`/`rv-item`/`is-short`/
+  `is-long`/`is-lead` (`/patient-reviews`), the pre-Elfsight markup staging replaced on 2026-09-29;
+  and five unstyled modifiers on `terms-of-service` (`ch-key`, `ch-messages`, `ch-tools`,
+  `ch-liability`, `ch-law`) that Instatic had already dropped. Those five are removed from the source.
+  Only on the site: `__cf_email__`, the Elfsight embed classes. Staging was only read.
+
 ## Next
-- **Step 5, before any push from `home/`:** `class-rename.mjs --files <home/ source> --map
-  workflows/class-standard/class-map.json`, and the site-src must stop shipping the two code-asset
-  stylesheets (they are now in the registry/Framework). A push from the old source would bring back
-  every old class name and the userStyles cascade.
+- **Before any push from `home/`:** it still ships `assets/site.css` as a code asset (staging has it
+  in the registry/Framework) and the old `pr-*`/`rv-*` review markup. A push must not re-enable the
+  stylesheet, and `add-elfsight-reviews.mjs` has to be re-run after it.
 - Production: the same steps after review.
 - 9 identical custom-class groups and 52 font sizes outside a role are listed by the audit (warnings,
   not gates).
