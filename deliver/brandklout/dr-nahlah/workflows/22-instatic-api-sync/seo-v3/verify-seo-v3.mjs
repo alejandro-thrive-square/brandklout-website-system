@@ -21,9 +21,14 @@ const arr = (x) => (x === undefined ? [] : [].concat(x))
 const problems = []
 const P = (u, m) => problems.push(`${u}: ${m}`)
 const totals = {}
-const sm = (await get(`${S}/sitemap.xml`)).h
-for (const u of [...sm.matchAll(/<loc>([^<]+)/g)].map((m) => m[1])) {
-  const path = new URL(u).pathname
+// the URL list: the host's sitemap, or production's paths on this host (staging serves no sitemap
+// of its own). A gate that checked nothing must not say CLEAN.
+let locs = [...(await get(`${S}/sitemap.xml`)).h.matchAll(/<loc>([^<]+)/g)].map((m) => m[1])
+if (!locs.length) locs = [...(await get('https://www.drnahlah.com/sitemap.xml')).h.matchAll(/<loc>([^<]+)/g)].map((m) => S + new URL(m[1]).pathname)
+if (locs.length < 50) { console.log(`only ${locs.length} URLs to check — refusing to call that clean`); process.exit(1) }
+for (const u0 of locs) {
+  const u = u0
+  const path = new URL(u0).pathname
   const { s, h } = await get(u)
   if (s !== 200) { P(path, 'status ' + s); continue }
   const ld = [...h.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1])
@@ -39,12 +44,13 @@ for (const u of [...sm.matchAll(/<loc>([^<]+)/g)].map((m) => m[1])) {
   const crumbs = byType('BreadcrumbList')
   if (path === '/') { if (crumbs.length) P(path, 'home carries a breadcrumb') } else if (crumbs.length !== 1) P(path, `${crumbs.length} BreadcrumbList`)
   else {
-    const shown = [...((body.match(/<div class="pk-crumb"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '').matchAll(/<(a|span)\b[^>]*>([\s\S]*?)<\/\1>/g)].map((m) => txt(m[2]))
+    const shown = [...((body.match(/<div class="(?:pk-crumb|breadcrumb_component)"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '').matchAll(/<(a|span)\b[^>]*>([\s\S]*?)<\/\1>/g)].map((m) => txt(m[2]))
     if (path.startsWith('/posts/')) shown.push(txt((body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || ''))
     if (path === '/contact' && !shown.length) shown.push('Home', 'Contact')
     const named = crumbs[0].itemListElement.map((x) => x.name)
     if (named.join(' › ') !== shown.join(' › ')) P(path, `breadcrumb "${named.join(' › ')}" ≠ shown "${shown.join(' › ')}"`)
-    if (crumbs[0].itemListElement.at(-1).item !== u) P(path, 'last crumb is not this URL')
+    // the graph always names production URLs (siteUrl), so compare paths: the gate also runs on staging
+    if (new URL(crumbs[0].itemListElement.at(-1).item).pathname !== path) P(path, 'last crumb is not this URL')
   }
 
   // FAQ = the accordions

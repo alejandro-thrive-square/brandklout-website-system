@@ -29,6 +29,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { join, dirname } from 'node:path'
 import { api } from '../../../../../process/22-instatic-api-sync/insta-api.mjs'
+import { OFFICES, OTHERS } from '../footer-reviews-links.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const OUT = join(HERE, 'out')
@@ -42,6 +43,7 @@ const ALEX = { '@id': `${S}/contact-alexandria#office` }
 const pages = JSON.parse(readFileSync(join(OUT, 'sections.json'), 'utf8'))
 const { videos: VID, wiki: W } = JSON.parse(readFileSync(join(OUT, 'facts.json'), 'utf8'))
 const meta = JSON.parse(readFileSync(join(V2, 'meta.json'), 'utf8'))
+const POST_DESC = JSON.parse(readFileSync(join(HERE, 'post-descriptions.json'), 'utf8'))
 const organization = JSON.parse(readFileSync(join(V2, 'out', 'organization.json'), 'utf8'))
 const v2 = JSON.parse(readFileSync(join(V2, 'out', 'blocks.json'), 'utf8'))
 const live = (await api('GET', '/admin/api/cms/plugins/brandklout.aeo-schema/runtime/entries')).entries
@@ -522,6 +524,7 @@ for (const [key, nodes] of Object.entries(posts)) {
   const [, svc, section] = TOPIC.find(([re]) => re.test(slug + ' ' + p.h1))
   Object.assign(a, {
     headline: p.h1.slice(0, 110), wordCount: p.words, articleSection: section,
+    ...(POST_DESC[slug.slice(6)] ? { description: POST_DESC[slug.slice(6)] } : {}),   // = the meta description push-posts-v3 writes
     ...(p.intro[0] ? { abstract: p.intro[0] } : {}),
     about: ref(`${S}/${svc}#service`),
     mentions: MENTION.filter(([, re]) => re.test(text)).map(([k]) => thing(k)),
@@ -540,12 +543,30 @@ for (const [key, nodes] of Object.entries(posts)) {
 // ── the organisation: entities it knows, the McLean office's equipment, the team ──
 const org = clone(organization)
 org.knowsAbout = ['prosthodontics', 'dentalImplant', 'allOn4', 'dentures', 'veneer', 'crown', 'bridge', 'whitening', 'boneGraft', 'extraction', 'sedation', 'cosmetic', 'emergency', 'cbct'].map((k) => thing(k))
-org.paymentAccepted = join_([sec('financing', /^Five accepted forms/).lead.slice(0, 5).join(', ')])
+// "Credit card: most major cards accepted" → "Credit card (most major cards accepted)"; "the three
+// partners below" is page-relative, so it becomes the partners' names
+const LENDERS = sec('financing', /^Three partners/).items.map((it) => it.h3).join(', ')
+org.paymentAccepted = sec('financing', /^Five accepted forms/).lead.slice(0, 5)
+  .map((l) => l.replace(/^([^:]+): (.+)$/, (m, a, b) => `${a} (${/partners below/.test(b) ? LENDERS : b})`)).join(', ')
 org.employee = [PERSON, ...TEAM.map((p) => ref(p['@id']))]
 const mclean = org.department.find((d) => d['@id'] === MCLEAN['@id'])
 mclean.amenityFeature = facility.items.map((it) => ({ '@type': 'LocationFeatureSpecification', name: it.h3, value: true, description: join_(it.text) }))
 const reception = pages['our-facility'].sections.flatMap((s) => s.images).find((im) => /^The reception desk/.test(im.alt))
 if (reception) mclean.image = abs(reception.src)
+// each office's own profiles = the footer's "Find Us Online" links (footer-reviews-links.mjs, supplied
+// by the practice). Profiles, not their review forms: /reviews dropped, a g.page link resolved to the
+// Maps place id it redirects to (CID), which is also the office's map.
+const CID = { McLean: '16584195885077624360', Alexandria: '15116285013112467378' }
+const profile = (name, u) => name === 'Google' ? `https://maps.google.com/?cid=${CID[u.office]}` : u.href.replace(/\/reviews\/?$/, '/')
+for (const [office, links] of OFFICES) {
+  const d = org.department.find((x) => x['@id'] === (office === 'McLean' ? MCLEAN : ALEX)['@id'])
+  d.sameAs = links.map(([name, href]) => profile(name, { office, href }))
+  d.hasMap = `https://maps.google.com/?cid=${CID[office]}`
+}
+// + the practice's own YouTube channel ("Dr. Esam Nahlah", from the WordPress-era seo.json; the
+// library's films sit on a third-party channel, The Wellness Hour)
+org.sameAs = [...new Set([...org.department.flatMap((d) => d.sameAs.filter((u) => /facebook|instagram/.test(u))), ...OTHERS.filter(([n]) => n === 'Instagram').map(([, u]) => u),
+  'https://www.youtube.com/channel/UCKAbJ7TTUB-rFOTQ57DEq9g'])]
 
 for (const [k, v] of Object.entries(blocks)) if (v) blocks[k] = v.filter(Boolean)
 writeFileSync(join(OUT, 'organization.json'), JSON.stringify(org, null, 2))

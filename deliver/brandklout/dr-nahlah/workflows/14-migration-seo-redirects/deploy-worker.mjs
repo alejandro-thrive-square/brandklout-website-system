@@ -29,6 +29,8 @@ const ROUTES = [
   // verbatim plus the Sitemap: line, so routing robots.txt no longer drops it
   // (14-migration-seo-redirects.md, gotcha 1).
   'www.drnahlah.com/robots.txt*',
+  // /llms.txt (llmstxt.org) since 2026-10-06, built by 22-instatic-api-sync/seo-v3/build-llms-txt.mjs
+  'www.drnahlah.com/llms.txt*',
 ]
 /* Patterns this list replaced; --apply deletes them if they are still bound. */
 const RETIRED = ['www.drnahlah.com/sitemap.xml', 'drnahlah.com/sitemap.xml']

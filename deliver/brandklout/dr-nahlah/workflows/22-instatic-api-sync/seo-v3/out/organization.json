@@ -16,7 +16,7 @@
   "telephone": "+1-703-448-3312",
   "priceRange": "$$$",
   "currenciesAccepted": "USD",
-  "paymentAccepted": "Cash, Check, Credit card: most major cards accepted, Dental insurance: most PPO plans, Third-party financing: the three partners below",
+  "paymentAccepted": "Cash, Check, Credit card (most major cards accepted), Dental insurance (most PPO plans), Third-party financing (CareCredit, Proceed Finance, LendingClub)",
   "medicalSpecialty": "https://schema.org/Dentistry",
   "isAcceptingNewPatients": true,
   "knowsAbout": [
@@ -158,8 +158,9 @@
   ],
   "sameAs": [
     "https://www.facebook.com/drnahlahprosthodontist/",
+    "https://www.facebook.com/DrNahlahAlexandria/",
     "https://www.instagram.com/drnahlah/",
-    "https://maps.google.com/?cid=16584195885077624360"
+    "https://www.youtube.com/channel/UCKAbJ7TTUB-rFOTQ57DEq9g"
   ],
   "areaServed": [
     {
@@ -293,6 +294,11 @@
           "value": true,
           "description": "Final fabrication and firing happen in the building, so a remake is days rather than the better part of a month."
         }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/drnahlahprosthodontist/",
+        "https://maps.google.com/?cid=16584195885077624360",
+        "https://www.yelp.com/biz/nahlah-implants-and-prosthodontics-specialists-mclean-3"
       ]
     },
     {
@@ -332,7 +338,7 @@
         "latitude": 38.8073027,
         "longitude": -77.0787121
       },
-      "hasMap": "https://www.google.com/maps/dir/?api=1&destination=2855+Duke+Street+Alexandria+VA+22314",
+      "hasMap": "https://maps.google.com/?cid=15116285013112467378",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -359,7 +365,12 @@
       "medicalSpecialty": "https://schema.org/Dentistry",
       "parentOrganization": {
         "@id": "https://www.drnahlah.com/#organization"
-      }
+      },
+      "sameAs": [
+        "https://www.facebook.com/DrNahlahAlexandria/",
+        "https://maps.google.com/?cid=15116285013112467378",
+        "https://www.yelp.com/biz/dr-nahlah-alexandria-2"
+      ]
     }
   ]
 }

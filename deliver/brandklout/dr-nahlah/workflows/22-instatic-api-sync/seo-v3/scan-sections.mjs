@@ -74,7 +74,7 @@ function sectionsOf (body) {
     const images = [...c.matchAll(/<img\b[^>]*>/g)].map((m) => ({ src: (m[0].match(/\bsrc="([^"]*)"/) || [])[1], alt: dec((m[0].match(/\balt="([^"]*)"/) || [])[1] || '') })).filter((x) => x.src && !x.src.startsWith('data:'))
     const videos = [...new Set([...c.matchAll(/vimeo\.com\/video\/(\d+)|data-vimeo[-\w]*="(\d+)"|vimeo\.com\/(\d{6,})|data-yt="([\w-]{11})"|youtube(?:-nocookie)?\.com\/embed\/([\w-]{11})/g)].map((m) => m[1] || m[2] || m[3] || (m[4] || m[5]) && 'yt:' + (m[4] || m[5])))]
     const table = [...c.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((r) => [...r[1].matchAll(/<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/g)].map((x) => txt(x[1])))
-    const quotes = [...c.matchAll(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>([\s\S]{0,400})/g)].map((m) => ({ text: txt(m[1]), by: txt((m[2].match(/class="[^"]*quote-by[^"]*"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '') }))
+    const quotes = [...c.matchAll(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>([\s\S]{0,400})/g)].map((m) => ({ text: txt(m[1]), by: txt((m[2].match(/class="[^"]*(?:quote-by|quote_author)[^"]*"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '') }))
     return { ...(h1 ? { h1 } : {}), h2, lead, items, qa, images, videos, ...(quotes.length ? { quotes } : {}), ...(table.length ? { table } : {}) }
   }).filter((s) => s.h1 || s.h2 || s.lead.length || s.items.length || s.qa.length)
 }
@@ -91,17 +91,19 @@ for (const u of urls) {
   const sections = sectionsOf(body)
   const words = txt(body.replace(/<header\b[\s\S]*?<\/header>/, '').replace(/<footer\b[\s\S]*?<\/footer>/g, '').replace(/<nav\b[\s\S]*?<\/nav>/g, '')).split(' ').length
   // the breadcrumb the page shows (Home › … › this page): the BreadcrumbList repeats exactly this
-  const crumbHtml = (body.match(/<div class="pk-crumb"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || ''
+  // class names: production still has the old ones, staging the Client-First ones (class-standard/class-map.json)
+  const crumbHtml = (body.match(/<div class="(?:pk-crumb|breadcrumb_component)"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || ''
   const crumb = [...crumbHtml.matchAll(/<(a|span)\b([^>]*)>([\s\S]*?)<\/\1>/g)].map((m) => ({ name: txt(m[3]), href: (m[2].match(/href="([^"]*)"/) || [])[1] || null }))
   pages[slug] = { url: S + path, words, crumb, sections }
   // articles: the collection body, split at its h2s (the question-led posts become FAQPage)
-  const region = ((body.match(/<div data-instatic-content-region>([\s\S]*?)<\/article>/) || [])[1] || '').split(/<div class="bl-rc\b|<div class="bl-related\b/)[0] || null
+  const region = ((body.match(/<div data-instatic-content-region>([\s\S]*?)<\/article>/) || [])[1] || '').split(/<div class="(?:bl-rc|article_rail-card|bl-related|article_related)\b/)[0] || null
   if (slug.startsWith('posts/') && region) {
     const parts = region.split(/(<h2\b[^>]*>[\s\S]*?<\/h2>)/)
     const intro = blocksOf(parts[0].replace(/<h1\b[\s\S]*?<\/h1>/g, '')).map((x) => x.t).filter((t) => !/^\d{1,2} \w+ \d{4}$/.test(t))
     const sects = []
     for (let i = 1; i < parts.length; i += 2) sects.push({ h2: txt(parts[i]), text: blocksOf(parts[i + 1] || '').map((x) => x.t) })
-    pages[slug].post = { h1: txt((region.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || ''), intro, parts: sects, words: txt(region).split(' ').length,
+    // the article's title is the page's H1 (the hero); the body's own <h1> was removed in SEO v3
+    pages[slug].post = { h1: txt((body.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/) || [])[1] || ''), intro, parts: sects, words: txt(region).split(' ').length,
       images: [...region.matchAll(/<img\b[^>]*>/g)].map((m) => ({ src: (m[0].match(/\bsrc="([^"]*)"/) || [])[1], alt: dec((m[0].match(/\balt="([^"]*)"/) || [])[1] || '') })).filter((x) => x.src) }
   }
 }
