@@ -1,11 +1,12 @@
 # Runbook index
 
-106 runs, newest first. Each line is one file in this folder.
+107 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-06 | 2026-10-06b — **Client-First class standard applied on STAGING**: pending draft published first (coordinator-approved: the user's own panel test + the SEO sync), then 377 renames (374 class rules, 0 page rows written), published 06:04Z. Gates: css parity 0 at 1440/390, 1920 = one proven auto-margin flipper, head parity 0 on 100 URLs, EDITABLE / IN BOUNDS / CLEAN; the behaviour gate's only difference is a Cloudflare Turnstile console line that production logs too. Local `site-src` renamed and rebuilt. Carries **gotchas** + what the old class names still break (client push scripts, seo-v3 crumb regex) | [`2026-10-06b-class-standard-migration-staging.md`](./2026-10-06b-class-standard-migration-staging.md) |
 | 2026-10-06 | **Class-standard migration on staging: BLOCKED at step 0.** Draft compared with the published snapshot in the staging DB (read-only): 0 of 59 page bodies differ; pending = the documented SEO v2/v3 sync + two undocumented Styles-panel edits from 2026-10-05 03:57–04:00Z (`.ch-services .sv-grid` grid-template-rows, empty class `flex-test`; no visible change measured). Map still complete (377 renames), staging still EDITABLE, dry run clean. Carries **gotchas** on reading the published snapshot and `railway ssh` | [`2026-10-06-class-standard-migration-blocked-staging-draft.md`](./2026-10-06-class-standard-migration-blocked-staging-draft.md) |
 | 2026-10-05 | 2026-10-05g — **SEO v3 on PRODUCTION**: structured data built from each page's content (scan → facts → build): Service/procedure from the page copy, HowTo x7, ItemList x33, VideoObject x23, lenders, warranty, team, credentials, Wikidata sameAs, FAQ from accordions + 5 question-led posts, breadcrumbs = the visible trail (emitBreadcrumbs off); verify-seo-v3 CLEAN on 81 URLs, staging draft synced — carries **gotchas** (shell escapes, platform video text) + client flags (7,000 vs 18,000) | [`2026-10-05g-seo-v3-content-schema-production.md`](./2026-10-05g-seo-v3-content-schema-production.md) |
 | 2026-10-05 | 2026-10-05f — **GSC "Couldn't fetch" on the sitemap**: Cloudflare served Google fine (Googlebot 200); old WordPress sitemaps 404'd → 11 Bulk Redirect rows 301 them to /sitemap.xml; worker embeds the CF robots policy + Sitemap line; robots.txt* / sitemap.xml* routes bound via Codex in the dashboard, verified live — carries **gotchas** (token capabilities) | [`2026-10-05f-gsc-sitemap-couldnt-fetch.md`](./2026-10-05f-gsc-sitemap-couldnt-fetch.md) |
