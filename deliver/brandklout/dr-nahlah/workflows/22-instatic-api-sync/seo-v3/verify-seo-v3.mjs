@@ -49,6 +49,9 @@ for (const u0 of locs) {
     if (path === '/contact' && !shown.length) shown.push('Home', 'Contact')
     const named = crumbs[0].itemListElement.map((x) => x.name)
     if (named.join(' › ') !== shown.join(' › ')) P(path, `breadcrumb "${named.join(' › ')}" ≠ shown "${shown.join(' › ')}"`)
+    // every linked crumb's target = the visible link's href (paths: the graph names production URLs)
+    const shownHrefs = [...((body.match(/<div class="(?:pk-crumb|breadcrumb_component)"[^>]*>([\s\S]*?)<\/div>/) || [])[1] || '').matchAll(/<a\b[^>]*href="([^"]*)"/g)].map((m) => new URL(m[1], S).pathname)
+    if (path.startsWith('/posts/') || path === '/contact') {} else if (crumbs[0].itemListElement.slice(0, -1).map((x) => new URL(x.item).pathname).join(' ') !== shownHrefs.join(' ')) P(path, `breadcrumb links ${crumbs[0].itemListElement.slice(0, -1).map((x) => new URL(x.item).pathname).join(' ')} ≠ shown ${shownHrefs.join(' ')}`)
     // the graph always names production URLs (siteUrl), so compare paths: the gate also runs on staging
     if (new URL(crumbs[0].itemListElement.at(-1).item).pathname !== path) P(path, 'last crumb is not this URL')
   }

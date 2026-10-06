@@ -1952,7 +1952,7 @@
       "@type": "ListItem",
       "position": 2,
       "name": "Cosmetic",
-      "item": "https://www.drnahlah.com/smile-makeover"
+      "item": "https://www.drnahlah.com/cosmetic-dentistry"
      },
      {
       "@type": "ListItem",
@@ -4162,7 +4162,7 @@
      "https://www.vitals.com/doctors/esam-abou-nahlah-gokheu",
      "https://www.realself.com/dr/esam-abou-nahlah-mclean-va"
     ],
-    "description": "Board-certified prosthodontist. Diplomate of the American Board of Prosthodontics and Fellow of the American College of Prosthodontists. Practicing since 2003, in Northern Virginia since 2013. Prosthodontics is the specialty concerned with replacing and restoring teeth: implants, crowns, bridges, veneers, dentures and full-mouth rehabilitation. Three years of training beyond dental school. Dr. Nahlah is adjunct faculty at Virginia Commonwealth University, teaching the residents in its Prosthodontics Postgraduate Program: the dentists who are themselves training to become prosthodontists. He was a clinical instructor at UCSF School of Dentistry before relocating, and still runs hands-on courses for other dentists.",
+    "description": "Board-certified prosthodontist. Diplomate of the American Board of Prosthodontics and Fellow of the American College of Prosthodontists. Practicing since 2003, in Northern Virginia since 2013. Prosthodontics is the specialty concerned with replacing and restoring teeth: implants, crowns, bridges, veneers, dentures and full-mouth rehabilitation. Three years of training beyond dental school. Across that career, over 18,000 implants placed and over 15,000 arches restored. Dr. Nahlah is adjunct faculty at Virginia Commonwealth University, teaching the residents in its Prosthodontics Postgraduate Program: the dentists who are themselves training to become prosthodontists. He was a clinical instructor at UCSF School of Dentistry before relocating, and still runs hands-on courses for other dentists.",
     "hasOccupation": {
      "@type": "Occupation",
      "name": "Prosthodontist",
@@ -4465,31 +4465,36 @@
     "@type": "ItemList",
     "@id": "https://www.drnahlah.com/about#distinctions",
     "name": "Skill, experience, artistry.",
-    "numberOfItems": 5,
+    "numberOfItems": 6,
     "itemListElement": [
      {
       "@type": "ListItem",
       "position": 1,
-      "name": "Serving Virginia and Washington, D.C. for more than twenty years"
+      "name": "Over 18,000 dental implants placed"
      },
      {
       "@type": "ListItem",
       "position": 2,
-      "name": "Six state-of-the-art surgical suites"
+      "name": "Serving Virginia and Washington, D.C. for more than twenty years"
      },
      {
       "@type": "ListItem",
       "position": 3,
-      "name": "An in-house digital lab in each of the two practices"
+      "name": "Six state-of-the-art surgical suites"
      },
      {
       "@type": "ListItem",
       "position": 4,
-      "name": "Minimally invasive, computer-guided surgery"
+      "name": "An in-house digital lab in each of the two practices"
      },
      {
       "@type": "ListItem",
       "position": 5,
+      "name": "Minimally invasive, computer-guided surgery"
+     },
+     {
+      "@type": "ListItem",
+      "position": 6,
       "name": "Founder of the Tysons Study Club, a continuing-education platform for dentists"
      }
     ],
@@ -6132,6 +6137,9 @@
      "@id": "https://www.drnahlah.com/dental-implant-faq#breadcrumb"
     },
     "hasPart": [
+     {
+      "@id": "https://www.drnahlah.com/dental-implant-faq#anatomy"
+     },
      {
       "@id": "https://www.drnahlah.com/dental-implant-faq#anatomy"
      },

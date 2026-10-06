@@ -18,7 +18,8 @@
  * Client rules: never IV sedation or an anaesthesiologist (the credential list's "IV Sedation
  * Certificate" is left out of the graph); no AggregateRating/Review from on-site quotes
  * (self-serving reviews are ignored by Google and a policy risk); no numbers the site states
- * two different ways (implants placed: 18,000+ on /meet-dr-nahlah, 7,000+ on /about).
+ * two different ways. (Implants placed: /about said 7,000+ until 2026-10-06, when the user settled
+ * it at 18,000+ site-wide; the figure is in the graph since then.)
  *
  * Base: seo-v2/out (organization.json, blocks.json) + the live aeo entries for pages v2 did not
  * build. Output: seo-v3/out/{organization.json,blocks.json} in the v2 shape.
@@ -409,7 +410,10 @@ function lenders (slug) {
     { '@type': 'Organization', name: 'Academy of Osseointegration' },
   ]
   person.affiliation = { '@type': 'CollegeOrUniversity', name: 'Virginia Commonwealth University', url: 'https://www.vcu.edu/', ...sameAs('vcu') }
-  person.description = join_([pages[slug].sections[0].lead[0], three.lead[0], teach.lead[0], teach.lead[1]])
+  // + the career figures as the home page states them ("over 18,000 implants placed and over 15,000 arches restored")
+  const career = sec('index', /^The credentials behind the work/).lead.find((l) => /18,000/.test(l))
+  if (!career) throw new Error('the 18,000 line moved on the home page')
+  person.description = join_([pages[slug].sections[0].lead[0], three.lead[0], career, teach.lead[0], teach.lead[1]])
   person.knowsAbout = [thing('prosthodontics'), thing('dentalImplant'), thing('allOn4'), ...tech.items.map((it) => ({ '@type': 'Thing', name: it.h3, description: join_(it.text) })), thing('cbct')]
   person.subjectOf = ref(`${S}/#video-${teach.videos[0]}`)
   add(slug,
@@ -423,7 +427,7 @@ function lenders (slug) {
   const four = sec(slug, /^Four things you will not be asked/), skill = sec(slug, /^Skill, experience/)
   add(slug,
     list(slug, 'commitments', four.h2, four.items.map((it) => ({ name: it.h3, description: join_(it.text) })), { description: four.lead[0] }),
-    list(slug, 'distinctions', skill.h2, skill.lead.slice(1).filter((l) => !/7,000/.test(l)), { description: skill.lead[0] }))
+    list(slug, 'distinctions', skill.h2, skill.lead.slice(1), { description: skill.lead[0] }))
 }
 
 // /our-team: the five people, as the practice publishes them
