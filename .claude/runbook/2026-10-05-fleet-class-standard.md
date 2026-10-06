@@ -68,7 +68,7 @@ main, and told the sessions. State table: `output/fleet/COORDINATOR.md`.
 - **Dr. Nahlah DONE on staging** (`bk-dr-nahlah` `248b174b`): staging draft published first with the
   user's own invisible Styles-panel test (coordinator decision); 374 rules renamed, 0 page rows
   written; css 0 real 1440/390, 1920 noise proven; head 0 on 100 URLs; local `site-src` renamed + rebuilt.
-- **IFA**: see its STATUS (rebuild source renamed, pushed through the pipeline, CSS into the registry).
+- **IFA DONE on staging** (`bk-ifa-dentistry` `59f7e191`): source renamed (371), pushed by its own pipeline (now `push/editable.mjs` + `push/cascade-check.mjs`), Framework 22 vars, 1,055 registry rules, only 8 `@font-face` in a code asset; css 0 real mid→after at every width, all-breakpoint sweep 0 (58 pages × 12 viewports), head 57/57 identical. The push also shipped the queued HIPAA footer link. 13 `vh` fallbacks before `svh` dropped (one value per property). The 404 template page is outside the gates since `pageSlugs()`: checked by hand.
 - **Mason Park Kids** local `home/` renamed (`b7e6c64d`). **Mason Park**'s 161 articles were never in
   any gate: verified after the fact against production (`055a074c`), clean.
 - **West LA: not started.** Its worktree session waits on the user (Codex lost its Chrome plugin);
