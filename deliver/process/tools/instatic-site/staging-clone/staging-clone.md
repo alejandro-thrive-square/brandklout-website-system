@@ -285,6 +285,16 @@ node publish-rows.mjs --site <prod> --table posts   # only if collection rows mo
 node diff-sites.mjs --a <staging> --b <prod>
 ```
 
+**Before promoting, prove staging holds production's SEO.** A promotion carries staging's page
+rows (the published `<title>` is the row's `title` cell; `seoTitle` / `seoDescription` sit beside
+it) and, with `clone-site.mjs`, the shell (`src/scripts/*`). It does NOT carry plugin data
+(open-graph overrides, aeo-schema blocks / organizationJson) or media alt text. So any SEO work
+done on production since staging was seeded is reverted by the promotion unless staging was
+synced first. Dr. Nahlah's pattern (2026-10-05, `22-instatic-api-sync/seo-v2/`): sync with
+`plugin-stores.mjs`, `push-seo-v2.mjs`, `retire-runtime-jsonld.mjs` and `media-alt-parity.mjs`
+against the staging host, then `parity-check.mjs` must print `STAGING MATCHES PRODUCTION`
+before `clone-site.mjs` runs. Re-run the site's live SEO gate after publishing.
+
 `merge-overwrite` + `--rows` moves only what you changed and leaves the client's other edits
 alone. `replace` derives deletions server-side (stored - shipped) and is a whole-site
 cutover - highest blast radius, use deliberately. **Never `--media` in this direction.**
