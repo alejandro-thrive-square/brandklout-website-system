@@ -81,7 +81,7 @@ main, and told the sessions. State table: `output/fleet/COORDINATOR.md`.
   pairs, Mason Park 17 flags never co-occur); `049da0b5` CSS comments read as classes, vendor-iframe
   console counted as errors.
 - **Production rollout additions:** compare the published head (title, meta, og, canonical, JSON-LD)
-  before/after on every URL (`output/fleet/brandklout-website/head-parity.mjs`; promote it), and run
+  before/after on every URL (`head-parity.mjs save <client>-before` / `diff`), and run
   `order-pairs.mjs` after any append-mode CSS move.
 
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)

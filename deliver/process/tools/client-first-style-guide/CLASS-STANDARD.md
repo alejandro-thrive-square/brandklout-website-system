@@ -175,7 +175,8 @@ cause.
    description; no style or behaviour gate sees it). Since 2026-10-06 `insta-api.mjs` puts those cells
    back after every page save, and refuses a save that would drop them on a nested slug (`a/b`: a
    PATCH flattens its URL). Still compare the published head (title, meta description, og:*,
-   canonical, JSON-LD) on every page before vs after: `ops/restore-page-seo-cells.mjs` repairs from
+   canonical, JSON-LD) on every page before vs after with `head-parity.mjs save <c>-before` / `diff`:
+   `ops/restore-page-seo-cells.mjs` repairs from
    the step-0 backup.
 4. **Prove**: `migration-gates.mjs final --site $S --map class-map.json`: editability EDITABLE,
    class-audit `--strict` IN BOUNDS, `class-rename --verify` CLEAN (no old name published anywhere).
