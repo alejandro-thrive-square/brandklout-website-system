@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-07 | 2026-10-07 — **Microsoft Clarity removed** (fleet-wide, HIPAA: no BAA) from this site's GTM container — carries **gotchas** | [`2026-10-07-microsoft-clarity-removed.md`](./2026-10-07-microsoft-clarity-removed.md) |
 | 2026-09-30 | 2026-09-30 — new All-on-X "quiz" combo (landing, consult, thank-you) built locally from the design on Asana `1218962992162869`; rebranded to the live site's measured colours and fonts; on Webflow as NATIVE pages (the first Embed push was rejected as not Designer-editable), webflow.io staging only; webhook, price and claims open — carries **gotchas** | [`2026-09-30-aox-quiz-combo-local.md`](./2026-09-30-aox-quiz-combo-local.md) |
 | 2026-09-23 | 2026-09-23 — consent now holds the GHL pools and Practice By Numbers on both sites; Termly added to arvadadentalimplants.com; Implants display number (720) 719-9579 site-wide; the domains moved between Webflow sites — carries **gotchas** | [`2026-09-23-dni-behind-consent-and-seo-numbers.md`](./2026-09-23-dni-behind-consent-and-seo-numbers.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
