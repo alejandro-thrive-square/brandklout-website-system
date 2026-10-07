@@ -26,8 +26,8 @@
 1. ~~FigJam lane~~ **Done 2026-10-07:** section `388:1840` on *Deliver SOP's*, 105 cards cloned from the Scenario 6 lane (title, description, five steps × Checklist / Context Actions / Conditionals / AI Models / Do / Don't), card heights from measured word wrap (Inter Medium 16 wraps past ~690 px in a 696 card), confirmed on the server through REST `/nodes`.
 2. Run Scenario 7 on Dr. Nahlah first (its plan doc is the step 01 output), then the other multi-office
    clients.
-3. Promote Nahlah's content-built schema chain (`bk-dr-nahlah` `workflows/22-instatic-api-sync/seo-v3/`)
-   and `push-keyword-h1.mjs` + `hero-look.mjs` into the toolkits when the second site needs them.
+3. ~~Promote Nahlah's schema chain and keyword H1~~ **Done 2026-10-07** (`a4caccbd`): `tools/instatic-site/seo/`,
+   driven by a per-client `seo-config.json`; tested read-only on drnahlah.com (run `2026-10-07-instatic-seo-promotion`).
 4. A volume source: Keyword Planner access per client, DriveRank, or a paid Ahrefs plan.
 
 ## Gotchas
