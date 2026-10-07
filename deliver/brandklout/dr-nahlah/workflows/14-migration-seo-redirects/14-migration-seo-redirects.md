@@ -200,10 +200,15 @@ and `verify-live.mjs`, which replays **all 190** rows against production
    on 2026-10-05 the live sitemap was a 200 to Google and only the legacy URLs 404'd.
 9. **Read the GSC "Not found (404)" report before acting on it** (2026-10-07b).
    - A path under `/_instatic/runtime/cache/<hash>/<pkg>/` is the **import map's prefix entry**
-     (`"gsap/": "…/gsap/"` in every page head). Googlebot crawls it as a link, and a folder
-     correctly answers 404. Leave it alone. A robots.txt block only moves it to another report.
+     (`"gsap/": "…/gsap/"` in every page head). Googlebot crawls it as a link, and the folder
+     answers 404. That does no SEO harm, but **Validate fix fails while any listed URL still
+     404s**. So it gets a 301 to the package's entry module (`…/gsap/index.js`). Browsers never
+     request the folder itself. Do not block it in robots.txt: that only moves it to another
+     report, and a loose rule blocks the module Google needs to render.
    - A path that never existed (`/home`), which no page links to (scan every sitemap page),
-     gets a 301 row in the Bulk Redirect list (`add-home-redirect.mjs`).
+     gets a 301 row to the closest live page.
+   - `add-gsc-404-redirects.mjs` writes both kinds. It reads the prefix entries from the live
+     import map, so re-run it whenever the Instatic runtime hash changes.
    - Allow about a minute for a new list row to reach every edge before re-testing.
 
 ### Still open
