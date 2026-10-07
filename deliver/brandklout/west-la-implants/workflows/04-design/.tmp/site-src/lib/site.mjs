@@ -19,12 +19,12 @@ export const SITE = {
   address1: '12301 Wilshire Blvd, Suite 205',
   address2: 'Los Angeles, CA 90025',
   mapHref: 'https://www.google.com/maps?q=12301+Wilshire+Blvd+Suite+205+Los+Angeles+CA+90025',
-  zocdoc: 'https://www.zocdoc.com/booking-link/practice/west-la-implants-65990',
+  zocdoc: 'https://www.zocdoc.com/practice/west-la-implants-65990', // the booking-link opened blank (BugHerd #37)
   hours: 'Monday to Friday, 9am to 5pm',
   social: {
     instagram: 'https://www.instagram.com/west_la_implants/',
     facebook: 'https://www.facebook.com/WestLAImplants1/',
-    youtube: 'https://www.youtube.com/@westlaimplants892',
+    youtube: 'https://www.youtube.com/@westlaimplants', // @westlaimplants892 is a 404 (BugHerd #27, #36)
     yelp: 'https://www.yelp.com/biz/west-la-implants-los-angeles-3',
     google: 'https://www.google.com/maps?q=west+la+implants',
   },

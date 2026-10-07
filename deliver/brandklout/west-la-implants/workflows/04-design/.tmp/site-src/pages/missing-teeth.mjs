@@ -24,7 +24,7 @@ export default {
     },
     {
       type: 'compare', name: 'The Options', tag: 'The Options', title: 'Every way to replace a <em>tooth.</em>',
-      intro: 'Four choices. Only two put a root back in the bone.',
+      intro: 'Three choices. Only one puts a root back in the bone.',
       columns: [
         { title: 'Bridge', sub: 'Fixed on neighbouring teeth', rows: ['Crowns fused together spanning the gap', 'Requires grinding the abutment teeth', 'Does not prevent jawbone loss', 'Lasts five years or more'] },
         { title: 'Denture or partial', sub: 'Removable', rows: ['Rests on the gums, held by suction or adhesive', 'Economical, time-tested', 'Limited food choices', 'Allows the bone to recede'], href: '/implant-supported-dentures.html', cta: 'Stabilise it on implants' },

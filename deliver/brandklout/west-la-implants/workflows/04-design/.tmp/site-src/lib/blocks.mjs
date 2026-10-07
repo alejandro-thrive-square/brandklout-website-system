@@ -49,7 +49,7 @@ export function cover(b) {
   return `<section class="b-cover b-cover--split" id="${b.id || 'arrival'}">
   <div class="wrap--wide cv-in">
     ${copy}
-    <figure class="frame cv-media" data-wipe>${img(b.image, 'par' + (b.image.pos ? ' cv-pos' : ''))}${b.image.caption ? `<figcaption>${b.image.caption}</figcaption>` : ''}</figure>
+    <figure class="frame cv-media" data-wipe>${img(b.image, [b.image.still ? '' : 'par', b.image.pos ? 'cv-pos' : ''].filter(Boolean).join(' '))}${b.image.caption ? `<figcaption>${b.image.caption}</figcaption>` : ''}</figure>
     ${meta}
   </div>
 </section>`
@@ -57,12 +57,17 @@ export function cover(b) {
 
 /* ---------- statement: pinned, the words are written by scroll ---------- */
 export function statement(b) {
-  return `<section class="b-statement${b.theme ? ' st-' + b.theme : ''}" id="${b.id || 'statement'}">
+  /* services beside the statement (BugHerd #38, /dental-implants): [href, label] pairs, the current page marked */
+  const services = b.services
+    ? `<nav class="st-services" aria-label="${b.services.label}"><span class="st-services-k">${b.services.label}</span>${b.services.links.map(([href, label]) => `<a href="${href}.html"${href === b.services.current ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>`
+    : ''
+  return `<section class="b-statement${b.theme ? ' st-' + b.theme : ''}" id="${b.id || 'statement'}"${b.services ? ' data-st-services' : ''}>
   ${b.image ? `<div class="st-bg" aria-hidden="true">${img({ src: b.image.src, alt: '' }, 'st-img')}</div>` : ''}
   <div class="wrap st-stage">
     ${tag(b.tag)}
     <p class="st-big serif">${b.text.replace(/ (\S+)$/, '&nbsp;$1')}</p>
     <div class="st-after">${paras(b.after)}${b.figure ? `<div class="st-figure"><b data-count="${b.figure.value}"${b.figure.suffix ? ` data-suffix="${b.figure.suffix}"` : ''}>0</b><span>${b.figure.label}</span></div>` : ''}</div>
+    ${services}
   </div>
 </section>`
 }

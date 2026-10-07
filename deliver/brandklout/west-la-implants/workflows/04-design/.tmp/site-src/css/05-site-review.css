@@ -1,0 +1,37 @@
+/* ==========================================================================
+   SITE REVIEW — Brandklout BugHerd, 2026-10-07. Shipped verbatim (token files /
+   wla-site-review.css): @font-face and attribute selectors do not survive the
+   registry import.
+
+   #24 "Change the font for Playfair Display · SemiBold. Do this with all the main
+   titles in all pages": every page's H1 (.display) sets in Playfair Display 600.
+   The variable files (wght 400-900, Latin) upload as media like the other faces,
+   under their own family name so no static install can shadow them. Section
+   titles (.h2) keep Bodoni Moda.
+   ========================================================================== */
+@font-face{font-family:'Playfair Display WLA';font-style:normal;font-weight:400 900;font-display:swap;
+  src:url('../fonts/playfair-display-normal-var.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Playfair Display WLA';font-style:italic;font-weight:400 900;font-display:swap;
+  src:url('../fonts/playfair-display-italic-var.woff2') format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+.display,.display em{font-family:'Playfair Display WLA',var(--serif);font-weight:600;font-variation-settings:normal}
+.display{letter-spacing:-.015em;line-height:1.08}
+
+/* #38 /dental-implants "The Reality": the statement smaller and to the left, the
+   dental implant services as links on the right (section[data-st-services]). */
+.b-statement[data-st-services] .st-big{font-size:clamp(1.9rem,2.7vw,3rem);max-width:24ch}
+.b-statement[data-st-services] .st-after{margin-top:1.75rem}
+.st-services{display:flex;flex-direction:column;gap:.15rem;border-top:1px solid var(--line);padding-top:1.25rem;margin-top:2.5rem}
+.st-services-k{font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
+.st-services a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line-soft);font-size:var(--t-lead);color:var(--ink);transition:color .3s,padding .3s}
+.st-services a::after{content:"\2192";color:var(--gold);transition:transform .3s}
+.st-services a:hover,.st-services a:focus-visible{color:var(--gold);padding-left:.4rem;outline:none}
+.st-services a:hover::after{transform:translateX(.3rem)}
+.st-services a[aria-current="page"]{color:var(--ink-muted)}
+.st-services a[aria-current="page"]::after{content:"\2022"}
+@media (min-width:1024px){
+  .b-statement[data-st-services] .st-stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:clamp(3rem,6vw,7rem);align-content:center}
+  .b-statement[data-st-services] .st-stage>*{grid-column:1}
+  .b-statement[data-st-services] .st-stage>.st-services{grid-column:2;grid-row:1/span 3;align-self:center;margin-top:0}
+}

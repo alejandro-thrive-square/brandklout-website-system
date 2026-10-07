@@ -8,8 +8,8 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Questions · Los Angeles',
       title: 'Know what to <em>expect.</em>',
       lead: 'Implants are the most involved treatment in dentistry and the one with the most questions attached. These are the ones the practice hears most, answered plainly.',
-      image: { src: '/media/img/emily-practice.jpg', pos: '90% 50%', alt: 'Emily in consultation at West LA Implants' },
-      actions: [{ href: '#invitation', label: 'Ask Your Own' }, { href: '/implant-cost.html', label: 'The cost question, in full', kind: 'text' }],
+      image: { src: '/media/img/emily-practice.jpg', pos: '90% 50%', still: true, alt: 'Emily in consultation at West LA Implants' },
+      actions: [{ href: '#invitation', label: 'Request a Call' }, { href: '/implant-cost.html', label: 'The cost question, in full', kind: 'text' }],
       meta: [
         { b: '12', span: 'Questions answered' },
         { b: 'Over 95%', span: 'Implant success rate' },
@@ -65,7 +65,7 @@ export default {
       text: 'Leslie, Emily and Michael tell their stories on the practice’s channel.',
     },
     {
-      type: 'invite', name: 'Invitation', title: 'Have another <em>question?</em>', lead: 'Ask it here, or at a consultation with the implant team.',
+      type: 'invite', name: 'Invitation', title: 'Have another <em>question?</em>', lead: 'Request a call from our team.',
       interests: ['Dental implants', 'All-on-4 / full arch', 'A second opinion', 'Cost or financing', 'Not sure yet'],
       next: [
         { href: '/implant-cost.html', label: 'Implant cost', text: 'The six factors, the financing, the warranty.' },

@@ -41,7 +41,7 @@ export const IMAGE_MAP = [
   ['dr-tony-barriere', 'strip', 'still-doctor-masked.jpg', 'barriere_dentalpatient_welcoming_westlaimplants3.jpg', '70% 50%', 'Dr. Barriere welcoming a patient'],
   ['failing-dental-implants', 'strip', 'still-emily-consult.jpg', 'stock-failing-floss.jpg', '50% 45%', 'Flossing every day, the first defence for an implant'],
   ['failing-dental-implants', 'strip', 'three-single-implants.jpg', 'stock-failing-clean.jpg', '55% 45%', 'Cleaning along the gumline with a water flosser'],
-  ['faq', 'arrival', 'emily-practice.jpg', 'still-emily-consult.jpg', '50% 50%'],
+  ['faq', 'arrival', 'emily-practice.jpg', 'still-emily-consult.jpg', '60% 20%'], // both faces in frame (BugHerd #22; the cover image is .still, no parallax)
   ['financing', 'arrival', 'patient-paying.jpg', 'front-desk-emily.jpg', '75% 50%'],
   ['financing', 'strip', 'doctor-patient-2.jpg', 'doctor-patient-2.jpg', '30% 40%'],
   ['general-dentistry', 'arrival', 'patient-smiling.jpg', 'hygienist-procedure.jpg', '70% 50%', 'A hygiene visit at West LA Implants'],

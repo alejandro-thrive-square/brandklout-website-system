@@ -24,6 +24,12 @@ export default {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/missing-teeth-model.jpg' },
       text: 'A missing tooth is never only a gap. The bone beneath it starts to recede within months, the neighbours drift, and the bite changes.',
       after: ['An implant is the only replacement that puts a root back in the bone and keeps it alive. That is why it is the standard of care, and why the planning matters more than the drill.'],
+      /* BugHerd #38: the dental implant services beside the statement */
+      services: { label: 'Dental implant services', current: '/dental-implants', links: [
+        ['/dental-implants', 'Dental implants'], ['/all-on-4', 'All-on-4® full arch'], ['/implant-supported-dentures', 'Implant-supported dentures'],
+        ['/hybrid-dentures', 'Hybrid fixed dentures'], ['/zirconia-fixed-bridge', 'Zirconia fixed bridge'], ['/failing-dental-implants', 'Failing implants'],
+        ['/implant-cost', 'Implant cost'], ['/financing', 'Insurance &amp; financing'],
+      ] },
     },
     {
       type: 'steps', name: 'The Method', tag: 'The Method', title: 'Four visits, one <em>plan.</em>',

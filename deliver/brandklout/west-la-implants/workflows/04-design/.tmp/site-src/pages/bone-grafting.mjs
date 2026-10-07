@@ -24,7 +24,7 @@ export default {
       after: ['Many patients arrive having been told they no longer qualify for implants. Bone loss is reversible. It is a matter of rebuilding it, and of a surgeon who does that routinely.'],
     },
     {
-      type: 'compare', name: 'The Procedures', tag: 'The Procedures', title: 'Four ways to put bone <em>back.</em>',
+      type: 'compare', name: 'The Procedures', tag: 'The Procedures', title: 'Three ways to rebuild bone <em>support.</em>',
       intro: 'Chosen from the scan. Some patients need one, some none, some a combination.',
       columns: [
         { title: 'Socket preservation', sub: 'At the time of extraction', rows: ['Graft material packed into the empty socket', 'Slows resorption where the tooth was', 'Keeps the site ready for an implant', 'Done in the same visit as the extraction'] },

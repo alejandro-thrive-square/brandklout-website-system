@@ -105,6 +105,8 @@ const log = []
 const note = (s) => { log.push(s); console.log(s) }
 
 // ── shell: the two code assets ────────────────────────────────────────
+// the server stores node keys in its own order: compare canonically, never by raw JSON
+const canon = (v) => JSON.stringify(v, (k, x) => (x && typeof x === 'object' && !Array.isArray(x) ? Object.fromEntries(Object.entries(x).sort(([a], [b]) => a.localeCompare(b))) : x))
 const ALPHABET = 'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
 const nanoid = (n = 21) => [...randomBytes(n)].map((b) => ALPHABET[b & 63]).join('')
 shell.files = shell.files ?? []
@@ -249,7 +251,7 @@ if (changed.length || shellChanged) {
   const back = (await getPages()).rows
   for (const r of changed) {
     const b = back.find((x) => x.id === r.id)
-    const want = JSON.stringify(r.cells.body.nodes), got = JSON.stringify(b.cells.body.nodes)
+    const want = canon(r.cells.body.nodes), got = canon(b.cells.body.nodes)
     console.log(`check   /${b.slug}: ${want === got ? 'nodes as written' : 'NODES DIFFER from what was written'}`)
   }
   const after = await getSite()

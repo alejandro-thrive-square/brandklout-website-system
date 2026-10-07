@@ -21,6 +21,13 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   undecided (the client's domain is still WordPress). The asks are in
   [`ADS-LANDING-COMMENT.md`](./ADS-LANDING-COMMENT.md); the full list in scenario 3's
   [`INTAKE.md`](./scenario-3-ads-landing-pages/01-campaign-intake/output/INTAKE.md).
+- **2026-10-07 (night): the main site's forms are real GHL embeds (seq 36)**: GHL Contact (new site)
+  `DCNQTSgl14CNZ93H7Fi3` in every Invitation chapter (80 pages), Referral (new site)
+  `dnR28L5agKj0fQiuZcuH` on /referring-doctors, both emailing the practice. Until then the prototype form
+  answered "Thank you" and sent nothing. **After ANY full push run `apply-ghl-site-forms.mjs --apply
+  --publish`** (`site-src` still renders the prototype). The same round (BugHerd #19-#38, seq 35-38)
+  covered the Playfair Display H1s, dead YouTube/Zocdoc links, copy, the /dental-implants services list
+  and the FAQ photo. #25 waits on the reviewer's image. Run: `docs/runbook/2026-10-07-bugherd-main-site-round.md`.
 - **2026-10-07: Brandklout review round 1 is live on the ad pages, published seq 29**, as a
   surgical edit of the live draft (`workflows/21-instatic-upload/apply-lp-review.mjs`), not a push:
   readability, sharp crops, campaign thank-you copy, accessibility button above the call bar,
@@ -79,7 +86,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07 | 3 · 03 QA and launch | DNI live (seq 30): embed-origins 1.8.0, pool scoped to the ad pages, ads show 481-0111; form email notifications on; 3-on-6 consent sentence | `feec3b96` |
 | 2026-10-07 | 3 · 03 QA and launch | Patient films on the agency Vimeo (folder West LA Implants) and played in a lightbox on the four film pages, published seq 31 | `1374252a` |
 | 2026-10-07 | organic + 3 | Six more practice films to Vimeo; 38 film links on 20 pages to Vimeo, lightbox site-wide (frameOrigins), published seq 32 | `d97b017f` |
-| 2026-10-07 | 3 · 03 QA and launch | BugHerd #29-#34: hero copy top-aligned, pinned chapters fit (or flow) on every desktop size, ScrollTrigger re-measures after the GHL form grows; thank-you copy without "new-patient line" (seq 33-34) | _this commit_ |
+| 2026-10-07 | 3 · 03 QA and launch | BugHerd #29-#34: hero copy top-aligned, pinned chapters fit (or flow) on every desktop size, ScrollTrigger re-measures after the GHL form grows; thank-you copy without "new-patient line" (seq 33-34) | `2a576bbb` |
+| 2026-10-07 | organic · 21 instatic upload | Brandklout BugHerd round (#19-#38): GHL contact + referral forms embedded on 80 pages, Playfair Display H1s, dead YouTube/Zocdoc links fixed site-wide, copy, /dental-implants services, FAQ photo; 14 closed, #25 waiting (seq 35-38) | _this commit_ |
 
 ## Version Control
 

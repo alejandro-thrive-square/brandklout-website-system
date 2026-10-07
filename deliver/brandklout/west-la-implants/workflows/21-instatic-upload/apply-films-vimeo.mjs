@@ -51,7 +51,9 @@ let shellChanged = false
 const have = (shell.files ?? []).find((f) => f.path === ASSET.path)
 if (!have) {
   const now = new Date().toISOString()
-  const ALPHABET = 'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
+  // the server stores node keys in its own order: compare canonically, never by raw JSON
+const canon = (v) => JSON.stringify(v, (k, x) => (x && typeof x === 'object' && !Array.isArray(x) ? Object.fromEntries(Object.entries(x).sort(([a], [b]) => a.localeCompare(b))) : x))
+const ALPHABET = 'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
   shell.files.push({ id: [...randomBytes(21)].map((b) => ALPHABET[b & 63]).join(''), ...ASSET, createdAt: now, updatedAt: now })
   shellChanged = true
   console.log(`shell   + ${ASSET.path}`)
@@ -118,7 +120,7 @@ if (changed.length || shellChanged) {
   console.log(`saved   ${JSON.stringify(res).slice(0, 160)}`)
   const back = (await getPages()).rows
   let diff = 0
-  for (const r of changed) if (JSON.stringify(back.find((x) => x.id === r.id).cells.body.nodes) !== JSON.stringify(r.cells.body.nodes)) { diff++; console.log(`check   /${r.slug}: NODES DIFFER`) }
+  for (const r of changed) if (canon(back.find((x) => x.id === r.id).cells.body.nodes) !== canon(r.cells.body.nodes)) { diff++; console.log(`check   /${r.slug}: NODES DIFFER`) }
   console.log(`check   ${changed.length - diff}/${changed.length} pages as written`)
   const after = await getSite()
   console.log(`check   ${ASSET.path}: ${after.site.files.find((f) => f.path === ASSET.path)?.content === ASSET.content ? 'exact' : 'DIFFERS'}`)
