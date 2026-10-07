@@ -121,6 +121,15 @@ dashboards and reading pages.
   catch, same day). Runs now `close()` the tabs they opened before reporting; only tabs the user
   had open are kept, and those are released. Tabs left by runs before `b1379d58` stay locked to
   their old sessions: close them by hand once.
+- **Leave no idle tab behind (the user's rule, 2026-10-07).** "Close the tabs that you are not
+  working on … we shouldn't have tabs that we're not going to use open." Releasing a reused tab
+  still left it open, and a run whose browser disconnected mid-task (West LA GoHighLevel,
+  2026-10-07) left its new tab behind. The prompt now has Codex close every tab it worked in,
+  both the ones it opened and the ones it claimed, and any extra idle agent tabs on the same site.
+  It leaves open only a tab the user is clearly mid-edit in. A tab it could not close is listed in
+  the report under "Tabs left open". The caller then closes it with a short follow-up run, or tells
+  the user. The same rule applies to Claude in Chrome: `tabs_close_mcp` every tab you created
+  before you finish.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.

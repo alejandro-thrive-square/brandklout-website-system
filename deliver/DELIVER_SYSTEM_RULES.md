@@ -116,6 +116,8 @@ board draws this).
     `window.figma`, and it damaged a lane when it tried. Experiment on a duplicated board first.
   - A fallback when a Codex run fails, stalls, or the ChatGPT app is unavailable.
   It works in the foreground tab, so the user should not be using Chrome meanwhile.
+  **Either way, leave no idle tabs** (user's rule, 2026-10-07): close every tab the run opened or
+  worked in before reporting, and close any tab a failed run left behind.
 - **Asana and client-facing actions** (comments, status changes, emails, publishes to production) are
   confirmed with a person first.
 - **Runbook** after every run: the step's `output/RUNBOOK.md` and a row in the client `RUNBOOK.md`
