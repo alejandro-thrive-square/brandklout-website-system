@@ -12,6 +12,10 @@ export const SITE = {
   phoneNewHref: 'tel:+13106929316',
   phoneCurrent: '(310) 481-0111',
   phoneCurrentHref: 'tel:+13104810111',
+  /* the ad pages show the MAIN line: the GHL pool 'West LA Implants Tracking Pool' swaps it, and no
+     pool swaps the new-patient line (user's choice 2026-10-07, scenario 3 DNI) */
+  phoneAds: '(310) 481-0111',
+  phoneAdsHref: 'tel:+13104810111',
   address1: '12301 Wilshire Blvd, Suite 205',
   address2: 'Los Angeles, CA 90025',
   mapHref: 'https://www.google.com/maps?q=12301+Wilshire+Blvd+Suite+205+Los+Angeles+CA+90025',

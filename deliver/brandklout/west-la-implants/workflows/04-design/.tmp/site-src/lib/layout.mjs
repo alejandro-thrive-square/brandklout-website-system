@@ -111,7 +111,7 @@ export function lpNav(chrome) {
       <img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
     </a>
     <div class="nav-right">
-      <a class="nav-phone" href="${SITE.phoneNewHref}">${SITE.phoneNew}</a>${book}
+      <a class="nav-phone" href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a>${book}
     </div>
   </div>
 </header>`
@@ -120,7 +120,7 @@ export function lpNav(chrome) {
 export function lpMobileBar(chrome) {
   if (chrome.role !== 'landing') return ''
   return `<div class="mobile-bar">
-  <a class="btn btn-ghost" href="${SITE.phoneNewHref}"><span>Call Now</span></a>
+  <a class="btn btn-ghost" href="${SITE.phoneAdsHref}"><span>Call Now</span></a>
   <a class="btn btn-gold" href="${chrome.book}"><span>Book a Consultation</span></a>
 </div>`
 }

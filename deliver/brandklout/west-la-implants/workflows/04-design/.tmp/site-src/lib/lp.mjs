@@ -64,7 +64,7 @@ function formCard(c, o = {}) {
   return `<div class="lp-card" id="book">
       <div class="lp-card-head"><span class="lp-card-k">${o.kicker || c.offer}</span><h2 class="h3">${o.title || 'Request your consultation'}</h2><p class="small">${o.text || 'A 3D scan, an honest read on candidacy, and a written plan.'}</p></div>
       ${slot}
-      <p class="small lp-card-note">We reply within one business day. Prefer to talk? <a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a></p>
+      <p class="small lp-card-note">We reply within one business day. Prefer to talk? <a href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a></p>
     </div>`
 }
 
@@ -83,7 +83,7 @@ function hero(c) {
       <h1 class="display lp-title" data-anim="hide">${h.title}</h1>
       <p class="lead lp-lead" data-anim="hide">${h.lead}</p>
       <ul class="lp-checks" data-anim="hide">${h.checks.map((k) => `<li>${k}</li>`).join('')}</ul>
-      <div class="lp-actions" data-anim="hide"><a class="btn btn-gold magnetic" href="${url(c.consultation)}"><span>Book a Consultation</span></a><a class="btn btn-ghost magnetic" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a></div>
+      <div class="lp-actions" data-anim="hide"><a class="btn btn-gold magnetic" href="${url(c.consultation)}"><span>Book a Consultation</span></a><a class="btn btn-ghost magnetic" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
       <div class="lp-hero-proof" data-anim="hide">${review(h.review)}<p class="small lp-area">${AREA}</p></div>
     </div>
     <div class="lp-hero-form" data-anim="hide">${formCard(c)}</div>
@@ -147,9 +147,9 @@ function final(c, o = {}) {
     ${tag(f.tag || 'The invitation')}
     <h2 class="h2">${f.title}</h2>
     <p class="lead">${f.lead}</p>
-    <div class="lp-actions">${book}<a class="btn ${o.noBook ? 'btn-gold' : 'btn-ghost'} magnetic" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a></div>
+    <div class="lp-actions">${book}<a class="btn ${o.noBook ? 'btn-gold' : 'btn-ghost'} magnetic" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
     <ul class="lp-final-facts">
-      <li><b>Prefer to talk?</b><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a></li>
+      <li><b>Prefer to talk?</b><a href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a></li>
       <li><b>Visit</b><a href="${SITE.mapHref}" target="_blank" rel="noopener">${SITE.address1}, ${SITE.address2}</a></li>
       <li><b>Hours</b><span>${SITE.hours}</span></li>
     </ul>
@@ -163,7 +163,7 @@ export function foot(c) {
   return `<footer class="lp-foot">
   <div class="wrap lp-foot-in">
     <div class="lp-foot-brand"><div class="nav-logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span></div><p>${SITE.doctor}</p></div>
-    <p class="lp-foot-where">${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a><br>${SITE.hours}</p>
+    <p class="lp-foot-where">${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a><br>${SITE.hours}</p>
     <p class="lp-foot-legal">${c.disclaimer}</p>
   </div>
   <div class="wrap lp-foot-bottom"><span>&copy; West LA Implants &middot; Tony Barriere, DDS</span><div class="lp-foot-links"><a href="/privacy-policy.html">Privacy</a><a href="/hipaa-disclosure.html">HIPAA Disclosure</a><a href="/accessibility.html">Accessibility</a></div></div>
@@ -213,7 +213,7 @@ function tyHero(c) {
       <div class="chapter-tag" data-anim="hide"><i></i><span>${t.kicker || 'Request received'}</span></div>
       <h1 class="display lp-title lp-title--cz" data-anim="hide">${t.title}</h1>
       <p class="lead lp-lead" data-anim="hide">${t.lead}</p>
-      <div class="lp-actions" data-anim="hide"><a class="btn btn-gold magnetic" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a></div>
+      <div class="lp-actions" data-anim="hide"><a class="btn btn-gold magnetic" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
       <p class="small lp-ty-note" data-anim="hide">${t.note}</p>
       <div class="lp-hero-proof" data-anim="hide">${review(t.review)}</div>
     </div>

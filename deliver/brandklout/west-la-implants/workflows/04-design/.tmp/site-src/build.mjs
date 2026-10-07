@@ -61,7 +61,8 @@ const DENTIST = {
 };
 function seoFor(p, chapters) {
   const canonical = p.slug === 'index' ? ORIGIN + '/' : `${ORIGIN}/${p.slug}`;
-  const jsonld = [{ ...DENTIST, '@context': 'https://schema.org' }];
+  // the ad pages carry the main line (SITE.phoneAds), the number their call-tracking pool swaps
+  const jsonld = [{ ...DENTIST, ...(p.chrome?.type === 'lp' ? { telephone: '+1-310-481-0111' } : {}), '@context': 'https://schema.org' }];
   const faq = chapters ? faqJsonLd(chapters) : null;
   if (faq) jsonld.push({ '@context': 'https://schema.org', ...faq });
   if (p.jsonld) jsonld.push(...p.jsonld.map(j => ({ '@context': 'https://schema.org', ...j })));

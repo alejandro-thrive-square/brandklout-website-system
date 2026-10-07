@@ -1,16 +1,17 @@
 {
-  "_comment": "Scenario 3 campaign manifest for West LA Implants. Every gate in 03-qa-and-launch reads it. Slugs must match workflows/04-design/.tmp/site-src/templates/ads-landing-pages.mjs. formId: both campaign forms built 2026-10-05 in the West LA GHL sub-account (0iwrVBEYONV6VlSHSGH6) to the tools/ghl-forms standard, each redirecting to its thank-you page on productionOrigin. They are not yet embedded on the pages (the prototype form is still there).",
+  "_comment": "Scenario 3 campaign manifest for West LA Implants. Every gate in 03-qa-and-launch reads it. Slugs must match workflows/04-design/.tmp/site-src/templates/ads-landing-pages.mjs. formId: both campaign forms built 2026-10-05 in the West LA GHL sub-account (0iwrVBEYONV6VlSHSGH6) to the tools/ghl-forms standard, each redirecting to its thank-you page on productionOrigin. Both are embedded (GHL's own snippet, Embed blocks) on the landing and consultation pages since 2026-10-05, email notifications on since 2026-10-07.",
   "client": "west-la-implants",
   "platform": "instatic",
   "origin": "https://west-la-implants-production.up.railway.app",
   "productionOrigin": "https://west-la-implants-production.up.railway.app",
   "_origin_note": "The client's domain (westlaimplants.com) is still the WordPress site. The Instatic instance on its Railway host is the only place these pages exist. When the domain (or a subdomain for ads) moves to Instatic, change productionOrigin and every form's thank-you redirect with it.",
   "prefix": "ads-landing-pages/",
-  "phone": "(310) 692-9316",
+  "phone": "(310) 481-0111",
   "tags": [
-    "app.termly.io/resource-blocker"
+    "app.termly.io/resource-blocker",
+    "number_pool.js"
   ],
-  "_tags_note": "Termly is the only site tag on this instance today. GTM and a GHL number pool are not installed; add 'googletagmanager.com' and 'number_pool.js' here the day they are.",
+  "_tags_note": "Termly and the GHL number pool (embed-origins siteScripts, scoped #pages=ads-landing-pages/*, since 2026-10-07). GTM is not installed; add 'googletagmanager.com' the day it is.",
   "campaigns": [
     {
       "name": "All-on-6 (ChatGPT Ads)",
@@ -31,5 +32,16 @@
       "conversion": "NOT SET. Expected: page view of the thank-you URL as a Google Ads conversion (tag in GTM) or a GA4 key event imported into Ads. Owner: Brandklout ads team, to confirm."
     }
   ],
-  "pools": []
+  "pools": [
+    {
+      "src": "https://backend.leadconnectorhq.com/appengine/loc/0iwrVBEYONV6VlSHSGH6/pool/AOlbqr2yJc0FxkJ9yUFR/number_pool.js",
+      "pages": [
+        "ads-landing-pages/*"
+      ],
+      "except": [],
+      "swaps": "(310) 481-0111",
+      "name": "West LA Implants Tracking Pool"
+    }
+  ],
+  "_phone_note": "The ads show the practice's main line since 2026-10-07 (user's choice): the GHL pool 'West LA Implants Tracking Pool' swaps (310) 481-0111. The new-patient line (310) 692-9316 is on no pool, so the ad pages no longer show it."
 }

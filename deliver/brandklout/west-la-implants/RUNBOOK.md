@@ -27,8 +27,13 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   `og:image` 200. Two new shell code assets carry it: `src/styles/wla-lp-review.css` and
   `src/scripts/wla-sharp-crops.js`. **From now on change this site by patching the live draft**
   (user, 2026-10-07: never override other sessions' work); see 21-instatic-upload trap 46.
-  Open from the review: videos to Vimeo (Vimeo needs a human verification in Chrome first), DNI,
-  form notifications. Details in the step 03 runbook.
+  Later the same day (seq 30): **DNI live** on the six ad pages. The ads now show the main line
+  (310) 481-0111, which the GHL pool swaps (user's choice), using embed-origins 1.8.0
+  `siteScripts #pages=ads-landing-pages/*`. `dni-proof` swapped on all four pages walked.
+  **Campaign form email notifications are on** (same recipients as the WordPress contact form).
+  Both forms carry "Consent is not a condition of purchase."
+  Open: videos to Vimeo (needs a human verification in Chrome first), conversion tags, one test
+  lead per campaign. Details in the step 03 runbook.
 - **2026-10-04: the reviews widget is on the in-section standard** (Elfsight editor only, live at once): no widget title, Google-logo header with the count, gold `#C4A36A` square uppercase button, dark `#161613` cards with cream text. Gate `check-widget.mjs 670ca31c-8602-42c1-a126-f46f653fe07f --render https://west-la-implants-production.up.railway.app/` ok.
 - **The site contact form** `BAZZebJdjQAdGkda1fEE` (live on the WordPress `/contact`) is on the
   GHL standard since 2026-10-05: Service dropdown (12), two consent boxes naming Tony Barriere
@@ -65,7 +70,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-05 | 3 · 03 QA and launch | GHL forms via Codex: All-on-6 `XaCEV96A0QuF9ufEmkSc` and 3-on-6 `P15UYHonJj8oH5G8xwKX` built new (gate `--landing`/`--combo` ok, style ok), contact form `BAZZebJdjQAdGkda1fEE` brought to standard; ids in `combo.json` | `44ce721a` |
 | 2026-10-05 | 3 · 03 QA and launch | Both campaign forms placed on landing + consultation pages by `add-ghl-forms.mjs` (page-only Embed blocks), published seq 28; `verify-form` 1440/390 clean, `verify-combo-live` forms + redirects ok | _this commit_ |
 | 2026-10-05 | 3 · 03 QA and launch | Campaign forms restyled for the dark site (white inputs/frame fixed: GHL input specificity, inline frame, button `<p>`), previewed then pasted by Codex; checked in the live cards at 1440 and 390 | _this commit_ |
-| 2026-10-07 | 3 · 03 QA and launch | Review round 1 live (seq 29) by surgical draft patch: readability CSS, sharp-crop script, `_large` case photos, campaign thank-you copy, Sienna above the call bar, og:image fix; All-on-6 marketing consent sentence via Codex | _this commit_ |
+| 2026-10-07 | 3 · 03 QA and launch | Review round 1 live (seq 29) by surgical draft patch: readability CSS, sharp-crop script, `_large` case photos, campaign thank-you copy, Sienna above the call bar, og:image fix; All-on-6 marketing consent sentence via Codex | `9234859f` |
+| 2026-10-07 | 3 · 03 QA and launch | DNI live (seq 30): embed-origins 1.8.0, pool scoped to the ad pages, ads show 481-0111; form email notifications on; 3-on-6 consent sentence | _this commit_ |
 
 ## Version Control
 

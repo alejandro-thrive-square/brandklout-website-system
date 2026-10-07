@@ -2,6 +2,46 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 (later) · DNI live, form notifications on, 3-on-6 consent; published seq 30
+
+**Done**
+- **GHL (Codex):** the 3-on-6 form's marketing consent ends with "Consent is not a condition of
+  purchase." too (both forms now). **Email notification turned on** for both campaign forms. It was
+  off, so campaign leads reached no one. The recipients copy the WordPress Contact Form
+  (`BAZZebJdjQAdGkda1fEE`): noreply@westlaimplants.com, westlaimplants@gmail.com,
+  jessica@thrivesquare.com. Subject is "Website Form Submission". Redirects unchanged.
+- **DNI.** The sub-account has one pool, *West LA Implants Tracking Pool* (`AOlbqr2yJc0FxkJ9yUFR`,
+  4 numbers, active). It swaps the MAIN line (310) 481-0111. The ads showed the new-patient line
+  (310) 692-9316, which no pool swaps. **User's choice: the ads show 481-0111.**
+  1. embed-origins 1.6.0 → 1.8.0 (`tools/instatic-plugins/plugins.mjs rollout … --no-staging-ok
+     --apply --publish`, all six settings kept). The republish left all 87 pages byte-identical.
+  2. `workflows/21-instatic-upload/apply-lp-dni.mjs --apply --publish` patched the six ad pages:
+     every `(310) 692-9316`, `tel:+13106929316` and the JSON-LD telephone now carry 481-0111. It
+     added two `siteScripts` lines, the pool and `user_session.js`, both
+     `#pages=ads-landing-pages/*`. It added `services.leadconnectorhq.com` and
+     `services.msgsndr.com` to `connectOrigins`. Source in step: `SITE.phoneAds`, `build.mjs`.
+- `combo.json`: phone, tags and `pools` filled in.
+
+| Gate | Result |
+| :-- | :-- |
+| `scripts/check-pool-scope.mjs --combo` | 7 URLs, 0 failing |
+| all 87 pages, raw HTML | pool tag on exactly the six ad pages; the 81 others differ only in CSP `connect-src` (+2 GHL hosts) |
+| `dni-proof.mjs --relay` (all-on-6 → consultation → thank-you → 3-on-6, one visitor) | **swapping**: every `(310) 481-0111` and `tel:+13104810111` → `(424) 766-4171`, sticky across pages, thank-you page (strict CSP) included |
+
+**Next**
+1. Vimeo: the three films are downloaded; Vimeo asked for a human verification, so the upload
+   (into a "West LA Implants" folder in the agency team account) and the in-page player
+   (`js/75-films.js`, IDs still placeholders) wait on it.
+2. One real test lead per campaign to confirm the notification email arrives.
+3. Conversion tags (no GTM on the instance).
+
+**Gotchas**
+- Three GHL tabs from earlier Codex runs stay locked to their dead sessions and no later run can
+  close them (form builder 3-on-6, workflows "3. Appt No Show" and "6. Stale Leads"). Close them
+  by hand. The wrapper on main now also closes tabs that a click opened (`8fd80d12`).
+- The "West LA Implants - Contact (new site)" form (`DCNQTSgl14CNZ93H7Fi3`, another session's) has
+  email notification **off** too.
+
 ## 2026-10-07 · Brandklout review round 1 (Gauge, 2026-10-06): fixes live, published seq 29
 
 Review notes: Asana `1219174341490192` (3-on-6) and `1219174341490190` / parent `1218513737115127`
