@@ -2,6 +2,29 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07b — search volumes from Ahrefs
+
+**Done**
+- The user signed in to Ahrefs in Chrome; three Codex runs read Keywords Explorer (US):
+  `ahrefs-2026-10-07.tsv`, 129 keywords. Run 2 was interrupted and its KD column may be shifted, so
+  those KD values are marked "(unverified)"; run 3 re-read the 16 it missed column by column.
+- Finding: city-named searches are 10–800 a month each ("dentist alexandria va" 800 is the largest);
+  the demand is in generic treatment searches that Google answers locally ("dental implants" 252K,
+  "dentures" 93K, "full mouth dental implants" 64K, "dental implants cost" 41K, "all on 4 dental
+  implants" 40K, its cost 2.7K, "snap in dentures" 6.3K, "same day dental implants" 4.4K).
+- `keyword-map.csv`: the 15 hubs moved to their generic term (the region stays in H1 and title), the
+  office versions keep the city terms; `volume` filled on 40 rows (the rest are navigational pages or
+  posts). This also settles last run's open question: the hubs' live H1s ("Dental Implants in McLean &
+  Alexandria, VA") already contain the generic term. Baseline gate now **42 FAIL** (was 63).
+- `gap-report.md` re-ranked by demand: dentures, cost pages and same-day (if offered) rise to High;
+  nearby towns to Medium (Arlington: 200–450 a month per term).
+
+**Next**: gate 1 (the team agrees the map) stays open; volumes no longer block it.
+
+**Gotchas**
+- Codex reading a long Ahrefs table can stop midway and mis-order columns: tell it to read by header
+  names (now in `tools/seo-aeo/ahrefs-instruction.txt`) and re-run the gaps with `--model gpt-6.1-sol`.
+
 ## 2026-10-07 — first run, from the SEO & AEO plan
 
 **Done**

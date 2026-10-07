@@ -9,46 +9,17 @@ FAIL  h1    /contact-mclean  "Two offices. One specialist." lacks dentist, tyson
 WARN  desc  /contact-mclean  lacks "dentist tysons corner"
 FAIL  h1    /contact-alexandria  "Two offices. One specialist." lacks dentist, alexandria, virginia (keyword "dentist alexandria va")
 WARN  desc  /contact-alexandria  lacks "dentist alexandria va"
-FAIL  h1    /dental-implants  "Dental Implants in McLean & Alexandria, VA" lacks northern (keyword "dental implants northern virginia")
-FAIL  title /dental-implants  "Dental Implants in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /dental-implants  lacks "dental implants northern virginia"
-FAIL  h1    /all-on-4  "All-on-4 Dental Implants in McLean & Alexandria, VA" lacks northern (keyword "all on 4 dental implants northern virginia")
-FAIL  title /all-on-4  "All-on-4 Dental Implants in McLean & Alexandria, VA" lacks northern
-WARN  desc  /all-on-4  lacks "all on 4 dental implants northern virginia"
-FAIL  h1    /implant-supported-dentures  "Implant-Supported Dentures in McLean & Alexandria, VA" lacks northern (keyword "implant supported dentures northern virginia")
-FAIL  title /implant-supported-dentures  "Implant-Supported Dentures in McLean & Alexandria, VA" lacks northern
-WARN  desc  /implant-supported-dentures  lacks "implant supported dentures northern virginia"
-FAIL  h1    /veneers  "Porcelain Veneers in McLean & Alexandria, VA" lacks northern (keyword "porcelain veneers northern virginia")
-FAIL  title /veneers  "Porcelain Veneers in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /veneers  lacks "porcelain veneers northern virginia"
-FAIL  h1    /implant-cost  "Why two quotes for the same mouth differ by thousands." lacks dental, implant, cost, northern, virginia (keyword "dental implant cost northern virginia")
-FAIL  title /implant-cost  "Dental Implant Cost in McLean & Alexandria, VA" lacks northern
-WARN  desc  /implant-cost  lacks "dental implant cost northern virginia"
+WARN  desc  /all-on-4  lacks "all on 4 dental implants"
+FAIL  h1    /implant-cost  "Why two quotes for the same mouth differ by thousands." lacks dental, implant, cost (keyword "dental implants cost")
 FAIL  h1    /financing  "Cost should never be why you did not get treated." lacks dental, implant, financing (keyword "dental implant financing")
 FAIL  title /financing  "Dental Insurance & Financing | Dr. Nahlah | McLean, VA" lacks implant
 WARN  desc  /financing  lacks "dental implant financing"
-FAIL  h1    /cosmetic-dentistry  "Cosmetic Dentist in McLean & Alexandria, VA" lacks northern (keyword "cosmetic dentist northern virginia")
-FAIL  title /cosmetic-dentistry  "Cosmetic Dentist in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /cosmetic-dentistry  lacks "cosmetic dentist northern virginia"
-FAIL  h1    /sedation-dentistry  "Sedation Dentistry in McLean & Alexandria, VA" lacks northern (keyword "sedation dentistry northern virginia")
-FAIL  title /sedation-dentistry  "Sedation Dentistry in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /sedation-dentistry  lacks "sedation dentistry northern virginia"
+WARN  desc  /cosmetic-dentistry  lacks "cosmetic dentist"
 FAIL  h1    /patient-stories  "Six people sat down on camera ." lacks dental, implant, review (keyword "dental implant reviews")
 FAIL  title /patient-stories  "Patient Reviews & Stories | Dr. Nahlah | McLean, VA" lacks dental, implant
-FAIL  h1    /smile-gallery  "54 cases. No stock photography." lacks dental, implant, before, after (keyword "dental implant before and after")
+FAIL  h1    /smile-gallery  "54 cases. No stock photography." lacks dental, implant, before, after (keyword "dental implants before and after")
 FAIL  title /smile-gallery  "Before & After Smile Gallery | Dr. Nahlah | McLean, VA" lacks dental, implant
-FAIL  h1    /crowns-and-bridges  "Dental Crowns & Bridges in McLean & Alexandria, VA" lacks northern (keyword "dental crowns and bridges northern virginia")
-FAIL  title /crowns-and-bridges  "Dental Crowns & Bridges in McLean & Alexandria, VA" lacks northern
-WARN  desc  /crowns-and-bridges  lacks "dental crowns and bridges northern virginia"
-FAIL  h1    /smile-makeover  "Smile Makeover in McLean & Alexandria, VA" lacks northern (keyword "smile makeover northern virginia")
-FAIL  title /smile-makeover  "Smile Makeover in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /smile-makeover  lacks "smile makeover northern virginia"
-FAIL  h1    /teeth-whitening  "Teeth Whitening in McLean & Alexandria, VA" lacks northern (keyword "teeth whitening northern virginia")
-FAIL  title /teeth-whitening  "Teeth Whitening in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /teeth-whitening  lacks "teeth whitening northern virginia"
-FAIL  h1    /oral-surgery  "Oral Surgery in McLean & Alexandria, VA" lacks northern (keyword "oral surgery northern virginia")
-FAIL  title /oral-surgery  "Oral Surgery in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
-WARN  desc  /oral-surgery  lacks "oral surgery northern virginia"
+WARN  desc  /crowns-and-bridges  lacks "dental crowns"
 FAIL  h1    /about  "Built on relationships . Driven by results." lacks prosthodontic, practice, northern, virginia (keyword "prosthodontics practice northern virginia")
 FAIL  title /about  "Why Choose Dr. Nahlah | Prosthodontist in McLean, VA" lacks prosthodontic, practice, northern
 WARN  desc  /about  lacks "prosthodontics practice northern virginia"
@@ -84,8 +55,8 @@ todo  /alexandria/veneers  planned: "veneers alexandria va"
 todo  /mclean/full-mouth-reconstruction  planned: "full mouth reconstruction mclean va"
 todo  /alexandria/full-mouth-reconstruction  planned: "full mouth reconstruction alexandria va"
 todo  /full-mouth-dental-implants  planned: "full mouth dental implants"
-todo  /full-mouth-reconstruction  planned: "full mouth reconstruction northern virginia"
-todo  /dentures  planned: "dentures northern virginia"
+todo  /full-mouth-reconstruction  planned: "full mouth reconstruction"
+todo  /dentures  planned: "dentures"
 todo  /all-on-4-cost  planned: "all on 4 dental implants cost"
 todo  /full-mouth-dental-implants-cost  planned: "full mouth dental implants cost"
 todo  /veneers-cost  planned: "cost of veneers in virginia"
@@ -135,4 +106,4 @@ WARN  desc  /posts/unraveling-the-complexities-complications-in-implant-dentistr
 FAIL  h1    /posts/unveiling-the-mystery-of-implant-dentistry-in-mclean-va  "Unveiling the Mystery of Implant Dentistry in McLean, VA" lacks explained (keyword "implant dentistry in mclean, va, explained")
 WARN  desc  /posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution  lacks "dental implants: the best tooth replacement"
 
-FAIL  1108 passed, 63 failed, 50 warnings  (keyword-map.csv)
+FAIL  1129 passed, 42 failed, 42 warnings  (keyword-map.csv)
