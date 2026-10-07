@@ -1,0 +1,138 @@
+
+73 target pages on https://www.drnahlah.com
+
+FAIL  h1    /  "A smile rebuilt by a specialist" lacks prosthodontist, mclean, virginia (keyword "prosthodontist mclean va")
+FAIL  h1    /meet-dr-nahlah  "Dr. Esam Nahlah, D.D.S., M.S." lacks prosthodontist, northern, virginia (keyword "prosthodontist northern virginia")
+FAIL  title /meet-dr-nahlah  "Prosthodontist in McLean, VA | Dr. Esam Nahlah, DDS, MS" lacks northern
+WARN  desc  /meet-dr-nahlah  lacks "prosthodontist northern virginia"
+FAIL  h1    /contact-mclean  "Two offices. One specialist." lacks dentist, tyson, corner (keyword "dentist tysons corner")
+WARN  desc  /contact-mclean  lacks "dentist tysons corner"
+FAIL  h1    /contact-alexandria  "Two offices. One specialist." lacks dentist, alexandria, virginia (keyword "dentist alexandria va")
+WARN  desc  /contact-alexandria  lacks "dentist alexandria va"
+FAIL  h1    /dental-implants  "Dental Implants in McLean & Alexandria, VA" lacks northern (keyword "dental implants northern virginia")
+FAIL  title /dental-implants  "Dental Implants in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /dental-implants  lacks "dental implants northern virginia"
+FAIL  h1    /all-on-4  "All-on-4 Dental Implants in McLean & Alexandria, VA" lacks northern (keyword "all on 4 dental implants northern virginia")
+FAIL  title /all-on-4  "All-on-4 Dental Implants in McLean & Alexandria, VA" lacks northern
+WARN  desc  /all-on-4  lacks "all on 4 dental implants northern virginia"
+FAIL  h1    /implant-supported-dentures  "Implant-Supported Dentures in McLean & Alexandria, VA" lacks northern (keyword "implant supported dentures northern virginia")
+FAIL  title /implant-supported-dentures  "Implant-Supported Dentures in McLean & Alexandria, VA" lacks northern
+WARN  desc  /implant-supported-dentures  lacks "implant supported dentures northern virginia"
+FAIL  h1    /veneers  "Porcelain Veneers in McLean & Alexandria, VA" lacks northern (keyword "porcelain veneers northern virginia")
+FAIL  title /veneers  "Porcelain Veneers in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /veneers  lacks "porcelain veneers northern virginia"
+FAIL  h1    /implant-cost  "Why two quotes for the same mouth differ by thousands." lacks dental, implant, cost, northern, virginia (keyword "dental implant cost northern virginia")
+FAIL  title /implant-cost  "Dental Implant Cost in McLean & Alexandria, VA" lacks northern
+WARN  desc  /implant-cost  lacks "dental implant cost northern virginia"
+FAIL  h1    /financing  "Cost should never be why you did not get treated." lacks dental, implant, financing (keyword "dental implant financing")
+FAIL  title /financing  "Dental Insurance & Financing | Dr. Nahlah | McLean, VA" lacks implant
+WARN  desc  /financing  lacks "dental implant financing"
+FAIL  h1    /cosmetic-dentistry  "Cosmetic Dentist in McLean & Alexandria, VA" lacks northern (keyword "cosmetic dentist northern virginia")
+FAIL  title /cosmetic-dentistry  "Cosmetic Dentist in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /cosmetic-dentistry  lacks "cosmetic dentist northern virginia"
+FAIL  h1    /sedation-dentistry  "Sedation Dentistry in McLean & Alexandria, VA" lacks northern (keyword "sedation dentistry northern virginia")
+FAIL  title /sedation-dentistry  "Sedation Dentistry in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /sedation-dentistry  lacks "sedation dentistry northern virginia"
+FAIL  h1    /patient-stories  "Six people sat down on camera ." lacks dental, implant, review (keyword "dental implant reviews")
+FAIL  title /patient-stories  "Patient Reviews & Stories | Dr. Nahlah | McLean, VA" lacks dental, implant
+FAIL  h1    /smile-gallery  "54 cases. No stock photography." lacks dental, implant, before, after (keyword "dental implant before and after")
+FAIL  title /smile-gallery  "Before & After Smile Gallery | Dr. Nahlah | McLean, VA" lacks dental, implant
+FAIL  h1    /crowns-and-bridges  "Dental Crowns & Bridges in McLean & Alexandria, VA" lacks northern (keyword "dental crowns and bridges northern virginia")
+FAIL  title /crowns-and-bridges  "Dental Crowns & Bridges in McLean & Alexandria, VA" lacks northern
+WARN  desc  /crowns-and-bridges  lacks "dental crowns and bridges northern virginia"
+FAIL  h1    /smile-makeover  "Smile Makeover in McLean & Alexandria, VA" lacks northern (keyword "smile makeover northern virginia")
+FAIL  title /smile-makeover  "Smile Makeover in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /smile-makeover  lacks "smile makeover northern virginia"
+FAIL  h1    /teeth-whitening  "Teeth Whitening in McLean & Alexandria, VA" lacks northern (keyword "teeth whitening northern virginia")
+FAIL  title /teeth-whitening  "Teeth Whitening in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /teeth-whitening  lacks "teeth whitening northern virginia"
+FAIL  h1    /oral-surgery  "Oral Surgery in McLean & Alexandria, VA" lacks northern (keyword "oral surgery northern virginia")
+FAIL  title /oral-surgery  "Oral Surgery in McLean & Alexandria, VA | Dr. Nahlah" lacks northern
+WARN  desc  /oral-surgery  lacks "oral surgery northern virginia"
+FAIL  h1    /about  "Built on relationships . Driven by results." lacks prosthodontic, practice, northern, virginia (keyword "prosthodontics practice northern virginia")
+FAIL  title /about  "Why Choose Dr. Nahlah | Prosthodontist in McLean, VA" lacks prosthodontic, practice, northern
+WARN  desc  /about  lacks "prosthodontics practice northern virginia"
+FAIL  h1    /contact  "Where to go." lacks dental, office, mclean, alexandria, virginia (keyword "dental offices mclean and alexandria va")
+FAIL  title /contact  "Contact Dr. Nahlah | Dentist in McLean & Alexandria, VA" lacks dental, office
+WARN  desc  /contact  lacks "dental offices mclean and alexandria va"
+FAIL  h1    /our-facility  "Six surgical suites and a lab down the hall." lacks dental, office, mclean, virginia (keyword "dental office mclean va")
+FAIL  h1    /our-team  "The five people you will actually deal with." lacks dental, team, mclean, alexandria, virginia (keyword "dental team mclean and alexandria va")
+WARN  desc  /our-team  lacks "dental team mclean and alexandria va"
+FAIL  h1    /patient-center  "You will love how we treat you here ." lacks new, patient, first, dental, visit (keyword "new patient first dental visit")
+FAIL  title /patient-center  "Your First Dental Visit | What to Expect | McLean, VA" lacks new, patient
+WARN  desc  /patient-center  lacks "new patient first dental visit"
+FAIL  h1    /dental-implant-faq  "Twelve questions, answered before you book." lacks dental, implant, faq (keyword "dental implant faq")
+WARN  desc  /dental-implant-faq  lacks "dental implant faq"
+FAIL  h1    /dental-conditions  "Even the small things matter." lacks dental, condition, we, treat (keyword "dental conditions we treat")
+WARN  desc  /dental-conditions  lacks "dental conditions we treat"
+FAIL  h1    /five-year-warranty  "What the five-year warranty actually covers." lacks dental, implant (keyword "dental implant warranty")
+WARN  desc  /five-year-warranty  lacks "dental implant warranty"
+FAIL  h1    /video-library  "The procedures, explained ." lacks dental, implant, video (keyword "dental implant videos")
+WARN  desc  /video-library  lacks "dental implant videos"
+FAIL  h1    /doctor-referral  "You will love how we treat your referred patients." lacks refer, prosthodontist (keyword "refer a patient to a prosthodontist")
+WARN  desc  /doctor-referral  lacks "refer a patient to a prosthodontist"
+FAIL  h1    /posts  "Written by the specialist ." lacks dental, implant, blog (keyword "dental implant blog")
+WARN  desc  /posts  lacks "dental implant blog"
+todo  /mclean/dental-implants  planned: "dental implants mclean va"
+todo  /alexandria/dental-implants  planned: "dental implants alexandria va"
+todo  /mclean/all-on-4  planned: "all on 4 mclean va"
+todo  /alexandria/all-on-4  planned: "all on 4 dental implants alexandria va"
+todo  /mclean/implant-dentures  planned: "implant dentures mclean va"
+todo  /alexandria/implant-dentures  planned: "implant dentures alexandria va"
+todo  /mclean/veneers  planned: "veneers mclean va"
+todo  /alexandria/veneers  planned: "veneers alexandria va"
+todo  /mclean/full-mouth-reconstruction  planned: "full mouth reconstruction mclean va"
+todo  /alexandria/full-mouth-reconstruction  planned: "full mouth reconstruction alexandria va"
+todo  /full-mouth-dental-implants  planned: "full mouth dental implants"
+todo  /full-mouth-reconstruction  planned: "full mouth reconstruction northern virginia"
+todo  /dentures  planned: "dentures northern virginia"
+todo  /all-on-4-cost  planned: "all on 4 dental implants cost"
+todo  /full-mouth-dental-implants-cost  planned: "full mouth dental implants cost"
+todo  /veneers-cost  planned: "cost of veneers in virginia"
+todo  /dentures-cost  planned: "snap in dentures cost"
+todo  /teeth-in-a-day  planned: "same day dental implants"
+todo  /prosthodontist-vs-periodontist  planned: "prosthodontist vs periodontist"
+todo  /implant-center-vs-prosthodontist  planned: "implant center vs prosthodontist"
+FAIL  h1    /posts/after-my-dental-implants-are-placed-how-will-i-know-if-i-have-peri-implantitis  "After My Dental Implants Are Placed, How Will I Know If I Have Peri-Implantitis?" lacks sign (keyword "signs of peri-implantitis after implants")
+FAIL  h1    /posts/are-there-advantages-to-replacing-my-missing-teeth-with-dental-implants-in-mclean-va  "Are There Advantages To Replacing My Missing Teeth With Dental Implants In McLean, VA?" lacks why, replace (keyword "why replace missing teeth with implants")
+FAIL  h1    /posts/are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with  "Are There Factors That Determine Which Type Of Dental Implant Procedure I Can Get Treated With?" lacks is, right, you (keyword "which dental implant procedure is right for you")
+WARN  desc  /posts/are-there-factors-that-determine-which-type-of-dental-implant-procedure-i-can-get-treated-with  lacks "which dental implant procedure is right for you"
+WARN  desc  /posts/are-there-side-effects-to-dental-implant-procedures  lacks "side effects of dental implant procedures"
+FAIL  h1    /posts/can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants  "Can Anything Be Done If I Am Not An Immediate Candidate For Dental Implants?" lacks yet, your, option (keyword "not an implant candidate yet? your options")
+WARN  desc  /posts/can-anything-be-done-if-i-am-not-an-immediate-candidate-for-dental-implants  lacks "not an implant candidate yet? your options"
+FAIL  h1    /posts/can-i-have-a-customized-new-smile-with-full-mouth-dental-implants  "Can I Have A Customized New Smile With Full Mouth Dental Implants?" lacks custom (keyword "a custom smile with full mouth implants")
+WARN  desc  /posts/can-i-have-a-customized-new-smile-with-full-mouth-dental-implants  lacks "a custom smile with full mouth implants"
+WARN  desc  /posts/can-i-upgrade-my-smile-from-traditional-dentures-to-implant-supported-dentures  lacks "from dentures to implant-supported dentures"
+WARN  desc  /posts/complete-teeth-replacement-the-perks-of-dental-implants-explained  lacks "the perks of dental implants, explained"
+FAIL  h1    /posts/considering-getting-treated-with-all-on-4-dental-implants-in-mclean-va-this-is-why-you-should  "Considering Getting Treated With All-on-4 Dental Implants In McLean, VA? This Is Why You Should" lacks choose (keyword "why choose all-on-4 dental implants in mclean, va")
+WARN  desc  /posts/dental-implants-everything-you-need-to-know  lacks "dental implants: everything you need to know"
+FAIL  h1    /posts/discover-the-promising-world-of-teeth-implants-in-mclean-va  "Discover the Promising World of Teeth Implants in McLean, VA" lacks promise (keyword "the promise of teeth implants in mclean, va")
+WARN  desc  /posts/discover-the-promising-world-of-teeth-implants-in-mclean-va  lacks "the promise of teeth implants in mclean, va"
+WARN  desc  /posts/do-i-need-a-full-mouth-dental-implant-consultation  lacks "do i need a full mouth implant consultation"
+FAIL  h1    /posts/exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants  "Exploring Your Options for Replacing a Missing Tooth: The Advantage of Dental Implants" lacks why, win (keyword "replacing a missing tooth: why implants win")
+WARN  desc  /posts/exploring-your-options-for-replacing-a-missing-tooth-the-advantage-of-dental-implants  lacks "replacing a missing tooth: why implants win"
+FAIL  h1    /posts/have-multiple-missing-teeth-you-should-get-treated-with-multiple-dental-implants  "Have Multiple Missing Teeth? You Should Get Treated With Multiple Dental Implants" lacks several (keyword "missing several teeth? multiple implants")
+FAIL  h1    /posts/how-exactly-do-implant-supported-dentures-in-mclean-va-benefit-my-smile  "How Exactly Do Implant Supported Dentures In McLean, VA Benefit My Smile?" lacks your (keyword "how implant-supported dentures benefit your smile")
+WARN  desc  /posts/how-many-missing-teeth-can-dental-implants-replace  lacks "how many teeth can dental implants replace"
+WARN  desc  /posts/implant-vs-implant-clearing-the-confusion-on-dental-implants  lacks "implant vs inplant: clearing the confusion"
+FAIL  h1    /posts/integrating-treatment-dental-practices-into-your-dental-implant-procedure  "Integrating Dental Treatment Practices into Your Dental Implant Procedure" lacks before (keyword "dental treatment before your implants")
+WARN  desc  /posts/integrating-treatment-dental-practices-into-your-dental-implant-procedure  lacks "dental treatment before your implants"
+WARN  desc  /posts/longevity-of-dental-implants-causes-and-fixes-for-damages  lacks "dental implant damage: causes and fixes"
+FAIL  h1    /posts/navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth  "Navigating the Path to Smile Restoration: Unveiling the Secrets of Implants of Teeth" lacks restoring, your, dental (keyword "restoring your smile with dental implants")
+WARN  desc  /posts/navigating-the-path-to-smile-restoration-unveiling-the-secrets-of-implants-of-teeth  lacks "restoring your smile with dental implants"
+FAIL  h1    /posts/porcelain-veneers-the-answers-to-your-questions  "Porcelain Veneers, The Answers to Your Questions" lacks answered (keyword "porcelain veneers: your questions answered")
+WARN  desc  /posts/porcelain-veneers-the-answers-to-your-questions  lacks "porcelain veneers: your questions answered"
+WARN  desc  /posts/ready-to-learn-how-full-mouth-dental-implants-are-cost-effective  lacks "are full mouth dental implants cost-effective"
+WARN  desc  /posts/ready-to-learn-what-a-typical-full-mouth-dental-implant-procedure-looks-like  lacks "what a full mouth implant procedure looks like"
+FAIL  h1    /posts/revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants  "Revolutionize Your Smile: A Journey Through a Whole Set of Teeth Implants" lacks full, explained (keyword "a full set of teeth on implants, explained")
+WARN  desc  /posts/revolutionize-your-smile-a-journey-through-whole-set-of-teeth-implants  lacks "a full set of teeth on implants, explained"
+FAIL  h1    /posts/revolutionize-your-smile-with-dental-implants-in-mclean-va  "Revolutionize Your Smile with Dental Implants in McLean, VA" lacks new (keyword "dental implants in mclean, va: a new smile")
+WARN  desc  /posts/revolutionize-your-smile-with-dental-implants-in-mclean-va  lacks "dental implants in mclean, va: a new smile"
+WARN  desc  /posts/revolutionizing-dental-restoration-the-top-implant-techniques  lacks "top implant techniques in dental restoration"
+WARN  desc  /posts/should-i-upgrade-my-smile-from-traditional-dentures-to-all-on-4-dental-implants-in-mclean-va  lacks "from dentures to all-on-4 dental implants"
+WARN  desc  /posts/unlock-the-benefits-of-dental-implants-your-best-teeth-replacement-option  lacks "the benefits of dental implants"
+WARN  desc  /posts/unraveling-the-complexities-complications-in-implant-dentistry  lacks "complications in implant dentistry"
+FAIL  h1    /posts/unveiling-the-mystery-of-implant-dentistry-in-mclean-va  "Unveiling the Mystery of Implant Dentistry in McLean, VA" lacks explained (keyword "implant dentistry in mclean, va, explained")
+WARN  desc  /posts/your-comprehensive-guide-on-dental-implants-the-best-replacement-of-tooth-solution  lacks "dental implants: the best tooth replacement"
+
+FAIL  1108 passed, 63 failed, 50 warnings  (keyword-map.csv)

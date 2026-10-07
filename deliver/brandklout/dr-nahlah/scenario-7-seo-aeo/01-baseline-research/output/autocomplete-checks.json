@@ -1,0 +1,839 @@
+[
+ {
+  "g": "Implants",
+  "k": "dental implants mclean va",
+  "intent": "local-transactional",
+  "owner": "/dental-implants",
+  "exact": false,
+  "ext": 0,
+  "fromPrefix": false
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants mclean",
+  "intent": "local-transactional",
+  "owner": "/dental-implants",
+  "exact": false,
+  "ext": 0,
+  "fromPrefix": false
+ },
+ {
+  "g": "Implants",
+  "k": "full mouth dental implants mclean va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants tysons corner va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants alexandria va",
+  "intent": "local-transactional",
+  "owner": "/dental-implants (shared)",
+  "exact": false,
+  "ext": 0,
+  "fromPrefix": false
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants vienna va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants falls church va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants arlington va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "best dental implants arlington va",
+  "intent": "local-commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants fairfax va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants great falls va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants reston va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants northern virginia",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "best dental implants in northern virginia",
+  "intent": "local-commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants near me",
+  "intent": "local-transactional",
+  "owner": "/dental-implants",
+  "exact": true,
+  "ext": 7,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "implant dentist near me",
+  "intent": "local-transactional",
+  "owner": "/dental-implants",
+  "exact": true,
+  "ext": 1,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "top rated dental implant dentist near me",
+  "intent": "local-commercial",
+  "owner": "/dental-implants",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants cost",
+  "intent": "informational-commercial",
+  "owner": "/implant-cost",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants cost per tooth",
+  "intent": "informational-commercial",
+  "owner": "/implant-cost",
+  "exact": true,
+  "ext": 8,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants cost virginia",
+  "intent": "commercial",
+  "owner": "/implant-cost",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants near me with in house financing",
+  "intent": "transactional",
+  "owner": "/financing",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "dental implants payment plans",
+  "intent": "transactional",
+  "owner": "/financing",
+  "exact": true,
+  "ext": 1,
+  "fromPrefix": false
+ },
+ {
+  "g": "Implants",
+  "k": "dental implant financing",
+  "intent": "transactional",
+  "owner": "/financing",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "clear choice dental implants alexandria va",
+  "intent": "navigational-competitor",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "clearchoice tysons corner",
+  "intent": "navigational-competitor",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "g4 dental implants tysons corner va",
+  "intent": "navigational-competitor",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Implants",
+  "k": "nuvia dental implant center alexandria va",
+  "intent": "navigational-competitor",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "all on 4 mclean va",
+  "intent": "local-transactional",
+  "owner": "/all-on-4",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "all on 4 dental implants virginia",
+  "intent": "local-transactional",
+  "owner": "/all-on-4",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "all on 4 dental implants arlington",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "all on 4 dental implants cost",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "all on 4 dental implants cost near me",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "full mouth dental implants",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "full mouth dental implants cost",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "full mouth dental implants arlington va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "full arch dental implants",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "full arch dental implants cost",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 8,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "teeth in a day",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "same day dental implants",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Full arch",
+  "k": "is all on 6 better than all on 4",
+  "intent": "informational",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "implant supported dentures cost",
+  "intent": "commercial",
+  "owner": "/implant-supported-dentures",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "snap in dentures",
+  "intent": "commercial",
+  "owner": "/posts/discovering-the-benefits-and-process-of-snap-on-dentures-in-mclean-va",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "snap in dentures cost",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "snap in dentures vs all on 4",
+  "intent": "informational",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 2,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "dentures alexandria va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "affordable dentures alexandria va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "dentures arlington va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "prosthodontist near me for dentures",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Dentures",
+  "k": "best prosthodontist for dentures near me",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist mclean va",
+  "intent": "local-transactional",
+  "owner": "/ (home)",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist alexandria va",
+  "intent": "local-transactional",
+  "owner": "/ (home)",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist northern virginia",
+  "intent": "local-transactional",
+  "owner": "/meet-dr-nahlah",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "best prosthodontist in northern virginia",
+  "intent": "local-commercial",
+  "owner": "/meet-dr-nahlah",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist tysons corner",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist arlington va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist fairfax va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist vienna va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist washington dc",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist near me",
+  "intent": "local-transactional",
+  "owner": "/ (home)",
+  "exact": true,
+  "ext": 7,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "board certified prosthodontist near me",
+  "intent": "local-transactional",
+  "owner": "/meet-dr-nahlah",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist vs periodontist",
+  "intent": "informational",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 2,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "prosthodontist vs dentist",
+  "intent": "informational",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 3,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "how much does a prosthodontist charge",
+  "intent": "informational-commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Prosthodontist",
+  "k": "what services does a prosthodontist provide",
+  "intent": "informational",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "veneers mclean va",
+  "intent": "local-transactional",
+  "owner": "/veneers",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "veneers alexandria va",
+  "intent": "local-transactional",
+  "owner": "/veneers",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "veneers northern virginia",
+  "intent": "local-transactional",
+  "owner": "/veneers",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "best veneers in northern virginia",
+  "intent": "local-commercial",
+  "owner": "/veneers",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "cost of veneers in virginia",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "veneers arlington va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "veneers vienna va",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "cosmetic dentist mclean va",
+  "intent": "local-transactional",
+  "owner": "/cosmetic-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "cosmetic dentist alexandria va",
+  "intent": "local-transactional",
+  "owner": "/cosmetic-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "best cosmetic dentist in alexandria va",
+  "intent": "local-commercial",
+  "owner": "/cosmetic-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "cosmetic dentist northern virginia",
+  "intent": "local-transactional",
+  "owner": "/cosmetic-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "best cosmetic dentist northern virginia",
+  "intent": "local-commercial",
+  "owner": "/cosmetic-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "cosmetic dentistry tysons corner",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Cosmetic",
+  "k": "teeth whitening mclean va",
+  "intent": "local-transactional",
+  "owner": "/teeth-whitening",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Reconstruction",
+  "k": "full mouth reconstruction",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Reconstruction",
+  "k": "full mouth reconstruction cost",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "Reconstruction",
+  "k": "full mouth reconstruction near me",
+  "intent": "local-transactional",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Reconstruction",
+  "k": "full mouth reconstruction before and after",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "Reconstruction",
+  "k": "full mouth rehabilitation",
+  "intent": "commercial",
+  "owner": "GAP",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist mclean va",
+  "intent": "local-transactional",
+  "owner": "/contact-mclean",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "best dentist mclean va",
+  "intent": "local-commercial",
+  "owner": "/contact-mclean",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist tysons corner va",
+  "intent": "local-transactional",
+  "owner": "/contact-mclean",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist near tysons corner va",
+  "intent": "local-transactional",
+  "owner": "/contact-mclean",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist alexandria va",
+  "intent": "local-transactional",
+  "owner": "/contact-alexandria",
+  "exact": true,
+  "ext": 9,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist alexandria va duke street",
+  "intent": "local-transactional",
+  "owner": "/contact-alexandria",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "dentist alexandria va 22314",
+  "intent": "local-transactional",
+  "owner": "/contact-alexandria",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "emergency dentist mclean va",
+  "intent": "local-transactional",
+  "owner": "/emergency-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "emergency dentist alexandria va",
+  "intent": "local-transactional",
+  "owner": "/emergency-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ },
+ {
+  "g": "General local",
+  "k": "sedation dentistry northern virginia",
+  "intent": "local-transactional",
+  "owner": "/sedation-dentistry",
+  "exact": true,
+  "ext": 0,
+  "fromPrefix": true
+ }
+]
