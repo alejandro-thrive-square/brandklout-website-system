@@ -27,7 +27,7 @@
 2. Run Scenario 7 on Dr. Nahlah first (its plan doc is the step 01 output), then the other multi-office
    clients.
 3. ~~Promote Nahlah's schema chain and keyword H1~~ **Done 2026-10-07** (`a4caccbd`): `tools/instatic-site/seo/`,
-   driven by a per-client `seo-config.json`; tested read-only on drnahlah.com (run `2026-10-07-instatic-seo-promotion`).
+   driven by a per-client `seo-config.json`; tested read-only on drnahlah.com (run `2026-10-07-seo-schema-chain-promoted`).
 4. A volume source: Keyword Planner access per client, DriveRank, or a paid Ahrefs plan.
 
 ## Gotchas
