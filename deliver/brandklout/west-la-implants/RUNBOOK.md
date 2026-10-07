@@ -78,7 +78,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07 | 3 · 03 QA and launch | Review round 1 live (seq 29) by surgical draft patch: readability CSS, sharp-crop script, `_large` case photos, campaign thank-you copy, Sienna above the call bar, og:image fix; All-on-6 marketing consent sentence via Codex | `9234859f` |
 | 2026-10-07 | 3 · 03 QA and launch | DNI live (seq 30): embed-origins 1.8.0, pool scoped to the ad pages, ads show 481-0111; form email notifications on; 3-on-6 consent sentence | `feec3b96` |
 | 2026-10-07 | 3 · 03 QA and launch | Patient films on the agency Vimeo (folder West LA Implants) and played in a lightbox on the four film pages, published seq 31 | `1374252a` |
-| 2026-10-07 | organic + 3 | Six more practice films to Vimeo; 38 film links on 20 pages to Vimeo, lightbox site-wide (frameOrigins), published seq 32 | _this commit_ |
+| 2026-10-07 | organic + 3 | Six more practice films to Vimeo; 38 film links on 20 pages to Vimeo, lightbox site-wide (frameOrigins), published seq 32 | `d97b017f` |
+| 2026-10-07 | 3 · 03 QA and launch | BugHerd #29-#34: hero copy top-aligned, pinned chapters fit (or flow) on every desktop size, ScrollTrigger re-measures after the GHL form grows; thank-you copy without "new-patient line" (seq 33-34) | _this commit_ |
 
 ## Version Control
 

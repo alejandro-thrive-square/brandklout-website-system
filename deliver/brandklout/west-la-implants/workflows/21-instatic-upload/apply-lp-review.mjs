@@ -52,6 +52,8 @@ if (at < 0) throw new Error('css/60-lp.css has no readability block')
 const ASSETS = [
   { type: 'style', path: 'src/styles/wla-lp-review.css', content: fs.readFileSync(path.join(SRC, 'css/03-runtime.css'), 'utf8').trimEnd() + '\n\n' + readability.slice(at).trimEnd() + '\n' },
   { type: 'script', path: 'src/scripts/wla-sharp-crops.js', content: fs.readFileSync(path.join(SRC, 'js/70-sizes.js'), 'utf8') },
+  // BugHerd #29/#31/#32 (2026-10-07): re-measure pins when the GHL form grows; un-pin a chapter that cannot fit
+  { type: 'script', path: 'src/scripts/wla-lp-pins.js', content: fs.readFileSync(path.join(SRC, 'js/72-lp-pins.js'), 'utf8') },
 ]
 // The patient films on Vimeo (review: "play on the same tab, better in Vimeo"). js/75-films.js holds
 // the YouTube -> Vimeo map; it ships only once every id is real, and the film links on the six pages
@@ -69,6 +71,12 @@ const THANKS = {
   [`${P}thank-you-all-on-6`]: { kicker: 'All-on-6 consultation · request received', h1: 'Your All-on-6 consultation request is ', em: 'in.', lead: 'Thank you. Your request for an All-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.' },
   [`${P}thank-you-3-on-6`]: { kicker: '3-on-6 consultation · request received', h1: 'Your 3-on-6 consultation request is ', em: 'in.', lead: 'Thank you. Your request for a 3-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.' },
 }
+// Since the ads show the main line (DNI, 2026-10-07) the thank-you copy no longer names "the new-patient line".
+const COPY_FIX = [
+  ['The new-patient line is answered Monday to Friday, 9am to 5pm.', 'Our phones are answered Monday to Friday, 9am to 5pm.'],
+  ['Call the new-patient line, or come and see us on Wilshire.', 'Call us, or come and see us on Wilshire.'],
+  ['The front desk replies within one business day, or call the new-patient line now.', 'The front desk replies within one business day, or call us now.'],
+]
 const OLD = { kicker: 'Request received', h1: 'Thank you. Let’s talk about your new ', em: 'smile.', lead: 'Your request is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.' }
 // thank-you-3-on-6 photos: [old file, new file, focal class to drop, focal class to add]
 const TY3_PHOTOS = [
@@ -144,6 +152,17 @@ for (const slug of SLUGS) {
       x.props = { ...x.props, htmlAttributes: { ...x.props.htmlAttributes, 'data-seo': Buffer.from(fixed, 'utf8').toString('base64') } }
       say(`data-seo  ${(json.match(/\/media\/[^"?#]+/g) ?? []).map((m) => m.split('/').pop()).join(', ')} -> /uploads/`)
     }
+  }
+
+  // copy that named the new-patient line
+  for (const x of all.filter((x) => x.moduleId === 'base.text' && typeof x.props?.text === 'string')) {
+    const fix = COPY_FIX.find(([a]) => x.props.text === a)
+    if (fix) { x.props = { ...x.props, text: fix[1] }; say(`text  "${fix[0].slice(0, 40)}…" -> "${fix[1].slice(0, 40)}…"`) }
+  }
+  for (const x of all.filter((x) => x.props?.htmlAttributes?.['data-seo'])) {
+    const json = Buffer.from(x.props.htmlAttributes['data-seo'], 'base64').toString('utf8')
+    const fixed = COPY_FIX.reduce((t, [a, b]) => t.split(a).join(b), json)
+    if (fixed !== json) { x.props = { ...x.props, htmlAttributes: { ...x.props.htmlAttributes, 'data-seo': Buffer.from(fixed, 'utf8').toString('base64') } }; say('data-seo  description no longer names the new-patient line') }
   }
 
   // film links: YouTube -> Vimeo

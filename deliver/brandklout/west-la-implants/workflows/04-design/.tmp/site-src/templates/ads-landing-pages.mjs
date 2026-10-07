@@ -106,7 +106,7 @@ const allOn6 = {
   seo: {
     landing: { title: 'All-on-6 Full Arch Dental Implants in Los Angeles | West LA Implants', description: 'All-on-6 at West LA Implants: a fixed full arch on six implants, planned from a 3D scan and placed with Yomi® robotic guidance by Dr. Tony Barriere on Wilshire Blvd.' },
     consultation: { title: 'Book an All-on-6 Consultation in Los Angeles | West LA Implants', description: 'Request an All-on-6 consultation with Dr. Tony Barriere: a 3D scan, an honest read on candidacy, and a written plan with insurance and financing worked out.' },
-    thankYou: { title: 'Thank You: All-on-6 Consultation Request | West LA Implants', description: 'Your All-on-6 consultation request has reached West LA Implants. The front desk replies within one business day, or call the new-patient line now.' },
+    thankYou: { title: 'Thank You: All-on-6 Consultation Request | West LA Implants', description: 'Your All-on-6 consultation request has reached West LA Implants. The front desk replies within one business day, or call us now.' },
   },
   hero: {
     kicker: 'All-on-6 full arch implants · Los Angeles',
@@ -199,13 +199,13 @@ const allOn6 = {
     kicker: 'All-on-6 consultation · request received',
     title: 'Your All-on-6 consultation request is <em>in.</em>',
     lead: 'Thank you. Your request for an All-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
-    note: 'The new-patient line is answered Monday to Friday, 9am to 5pm.',
+    note: 'Our phones are answered Monday to Friday, 9am to 5pm.',
     review: REVIEWS.joshua,
     image: I('still-front-desk-handshake.jpg', A, '20% 50%'),
     expect: TY_EXPECT,
     why: TY_WHY([['tonybarrerie_headshot_dentist_westlaimplants_frontfacing.jpg'], ['doctor-handshake.jpg'], ['patient-paying.jpg', 'A patient paying for treatment by card']]),
     questions: { title: 'Before you <em>call.</em>', items: [Q.pain, { q: 'Four implants or six?', a: 'Six gives a full-arch bridge more support and needs bone in more places. Dr. Barriere decides the number from your scan.' }, Q.cost, Q.finance] },
-    cta: { tag: 'Ready when you are', title: 'Ready to take the next <em>step?</em>', lead: 'Call the new-patient line, or come and see us on Wilshire.', image: '/media/img/waiting-room.jpg' },
+    cta: { tag: 'Ready when you are', title: 'Ready to take the next <em>step?</em>', lead: 'Call us, or come and see us on Wilshire.', image: '/media/img/waiting-room.jpg' },
   },
 }
 
@@ -221,7 +221,7 @@ const threeOn6 = {
   seo: {
     landing: { title: '3-on-6 Dental Implants in Los Angeles | West LA Implants', description: '3-on-6 at West LA Implants: three bridges on six implants, with no denture plate. Planned from a 3D scan and placed with Yomi® robotic guidance by Dr. Tony Barriere.' },
     consultation: { title: 'Book a 3-on-6 Consultation in Los Angeles | West LA Implants', description: 'Request a 3-on-6 consultation with Dr. Tony Barriere: a 3D scan, an honest read on candidacy, and a written plan with insurance and financing worked out.' },
-    thankYou: { title: 'Thank You: 3-on-6 Consultation Request | West LA Implants', description: 'Your 3-on-6 consultation request has reached West LA Implants. The front desk replies within one business day, or call the new-patient line now.' },
+    thankYou: { title: 'Thank You: 3-on-6 Consultation Request | West LA Implants', description: 'Your 3-on-6 consultation request has reached West LA Implants. The front desk replies within one business day, or call us now.' },
   },
   hero: {
     kicker: '3-on-6 dental implants · Los Angeles',
@@ -315,13 +315,13 @@ const threeOn6 = {
     kicker: '3-on-6 consultation · request received',
     title: 'Your 3-on-6 consultation request is <em>in.</em>',
     lead: 'Thank you. Your request for a 3-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
-    note: 'The new-patient line is answered Monday to Friday, 9am to 5pm.',
+    note: 'Our phones are answered Monday to Friday, 9am to 5pm.',
     review: REVIEWS.annie,
     image: I('front-desk-emily.jpg', A, '30% 50%'), /* 2000px; the 800px receptionist read soft (review 2026-10-06) */
     expect: TY_EXPECT,
     why: TY_WHY([['tonybarrerie_headshot_dentist_westlaimplants1.jpg', 'Dr. Tony Barriere, DDS', '60% 30%'], ['still-doctor-patient-hug.jpg'], ['patient-paying.jpg', 'A patient paying for treatment by card']]),
     questions: { title: 'Before you <em>call.</em>', items: [{ q: 'What is a 3-on-6?', a: 'Three separate bridges carried by six implants, replacing a full arch of teeth with no denture plate.' }, Q.pain, Q.cost, Q.finance] },
-    cta: { tag: 'Ready when you are', title: 'Ready to take the next <em>step?</em>', lead: 'Call the new-patient line, or come and see us on Wilshire.', image: '/media/img/still-reception-neon.jpg' },
+    cta: { tag: 'Ready when you are', title: 'Ready to take the next <em>step?</em>', lead: 'Call us, or come and see us on Wilshire.', image: '/media/img/still-reception-neon.jpg' },
   },
 }
 

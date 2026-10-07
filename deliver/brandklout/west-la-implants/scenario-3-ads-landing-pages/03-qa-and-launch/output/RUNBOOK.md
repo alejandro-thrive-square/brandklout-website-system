@@ -2,6 +2,41 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 (late) · BugHerd #29-#34 (Alejandro's QA): hero top-aligned, pins that fit; published seq 33-34
+
+Tasks (project 541030, all on /ads-landing-pages/3-on-6, "apply to the rest of the landing pages"):
+- #33 (hero text centred, below the fold);
+- #29, #31, #32 (options / method / rooms: "the sticky animation cuts the actual content");
+- #34 (scope note).
+
+**Causes**
+- Hero: `.lp-hero-in` centred the copy against the ~1,000px form column, so the kicker started at
+  336-396px and the buttons sat below the fold at every desktop size.
+- Pins (two stacked causes):
+  1. the GHL iframe grows ~100px after ScrollTrigger measures the page, so every pin started late
+     and sat ~100px down the screen (`ScrollTrigger.refresh()` moved the pin from 111px to 9px);
+  2. the three panels were taller than the screen anyway: Options 250-480px over from 1366 to
+     1920 wide, because the fluid root grows type above 1440.
+
+**Done**
+- `css/60-lp.css` "review round 2", ad pages only, desktop:
+  - the landing and thank-you heroes hang from the top;
+  - pinned panels are tighter (padding, h2 capped at 6.2svh, card spacing, method photo height);
+  - rail cards are sized from the viewport height;
+  - `.is-flow` rules for a chapter shown un-pinned.
+- `js/72-lp-pins.js` (live as `src/scripts/wla-lp-pins.js`), `.is-lp` only: refreshes
+  ScrollTrigger when the page height changes; a pinned panel whose content still exceeds the
+  viewport is un-pinned (trigger killed, end state set, `.is-flow`).
+- The thank-you copy no longer says "new-patient line" (the ads show the main line since DNI):
+  note, closing CTA and SEO description, both thank-you pages (seq 34).
+
+**Proof** (live, both landing pages, `pin-fit` at 1920x934, 1920x1080, 1680x945, 1536x864,
+1440x900, 1366x768, 2560x1305):
+- hero kicker at 127-163px, buttons above the fold at every size;
+- every pinned chapter pins at the top and its content ends inside the screen;
+- 1366x768 shows Options and/or Space un-pinned, complete.
+- Every page diffed: seq 33 added one script tag; seq 34 changed only the two thank-you pages.
+
 ## 2026-10-07 (night) · every practice film on Vimeo, site-wide; published seq 32
 
 **Done**

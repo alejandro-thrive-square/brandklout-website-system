@@ -249,3 +249,32 @@
 .is-lp .cp-col li{font-size:var(--t-body);line-height:1.5;color:var(--ink)}
 .is-lp .lp-cardx p,.is-lp .lp-reason p{color:var(--ink)}
 .is-lp .lp-cards--light .lp-cardx p{color:var(--paper-ink)}
+
+/* ---------- review round 2 (BugHerd #29-#34, 2026-10-07): the hero and the pinned chapters ----------
+   The hero copy was centred against the tall form column, so on load the lead, checks and buttons
+   sat below the fold: copy and form now hang from the top (thank-you hero the same, for one rule
+   across the ad pages; the consultation hero already did). The three pinned chapters (options,
+   method, rooms) were taller than the screen while pinned, so their foot was cut: on desktop they
+   are tighter, and js/72-lp-pins.js lets a chapter that still does not fit scroll un-pinned
+   (.is-flow) instead of clipping it. */
+@media (min-width:1024px){
+  .is-lp .lp-hero-in,.is-lp .lp-ty-in{align-items:start;padding-top:calc(var(--nav-h) + 2rem)}
+  .is-lp .cp-pin,.is-lp .sp-pin,.is-lp .rl-pin{padding-top:calc(var(--nav-h) + .75rem);padding-bottom:1.25rem}
+  .is-lp .cp-pin .h2,.is-lp .sp-pin .h2,.is-lp .rl-pin .h2{font-size:min(var(--t-h2),6.2svh)}
+  .is-lp .cp-head{margin-bottom:1rem}
+  .is-lp .cp-track{margin-bottom:1rem}
+  .is-lp .cp-col{padding:1.2rem 1.4rem;gap:.7rem}
+  .is-lp .cp-col li{padding:.45rem 0;font-size:1rem;line-height:1.42}
+  .is-lp .cp-note{margin-top:.75rem}
+  .is-lp .sp-head .lead{margin-bottom:1.25rem}
+  .is-lp .sp-num{font-size:min(6rem,10svh)}
+  .is-lp .sp-shot{aspect-ratio:auto;height:min(26rem,34svh);margin-top:1.5rem}
+  .is-lp .rl-pin{gap:1.5rem}
+  .is-lp .rl-card{width:min(19rem,72vw,calc((100svh - var(--nav-h) - 25rem) * .8))}
+}
+/* un-pinned: everything shows, nothing is held off-screen */
+.is-lp .is-flow .cp-pin,.is-lp .is-flow .sp-pin,.is-lp .is-flow .rl-pin{min-height:0}
+.is-lp .is-flow .sp-list{min-height:0 !important;display:flex;flex-direction:column;gap:1.75rem}
+.is-lp .is-flow .sp-step{position:relative;inset:auto;opacity:1;display:block;transform:none;border-top:1px solid var(--line);padding-top:1.2rem}
+.is-lp .is-flow .sp-dots,.is-lp .is-flow .sp-counter{display:none}
+.is-lp .is-flow .rl-track{overflow-x:auto;overscroll-behavior-x:contain;padding-right:var(--gutter);padding-bottom:.75rem;scrollbar-width:thin;scrollbar-color:var(--gold-deep) transparent}
