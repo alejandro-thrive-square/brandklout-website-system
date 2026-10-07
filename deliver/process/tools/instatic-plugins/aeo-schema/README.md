@@ -168,11 +168,14 @@ one that emits nothing, and "it looked right in the page source" is not a check.
 
 A block that describes a treatment with its meta description gives an answer
 engine nothing it could not read from the `<head>`. Dr. Nahlah's SEO v3
-(2026-10-05, client `22-instatic-api-sync/seo-v3/`) is the reference build:
+(2026-10-05) is the reference build; since 2026-10-07 it is the shared chain in
+[`../../instatic-site/seo/`](../../instatic-site/seo/README.md), driven by a
+per-client `seo-config.json`:
 
 1. **Scan the live pages** into sections (h2, lead lines, h3 items, `<details>`
    Q/A with trailing nav links cut, images with alts, Vimeo/YouTube ids, tables,
-   the visible breadcrumb) — `scan-sections.mjs`.
+   the visible breadcrumb) — `scan-sections.mjs`, then `fetch-facts.mjs` and
+   `build-schema.mjs`, shipped by `push-schema.mjs`.
 2. **Map each section to the property it is**: the options a page lists →
    `Service.hasOfferCatalog`; its timeline → `HowTo` and the procedure's
    `preparation` / `howPerformed` / `followup`; benefit, indication and cost
@@ -186,7 +189,7 @@ engine nothing it could not read from the `<head>`. Dr. Nahlah's SEO v3
    encyclopedia concept.
 4. **Gate on the vocabulary and on the page**: `vocab-check.mjs` (every type,
    property domain, range and enum against schema.org's own file; validator.schema.org
-   throttles) and `verify-seo-v3.mjs` (breadcrumb = the visible trail, FAQ = the
+   throttles) and `verify-schema.mjs` (breadcrumb = the visible trail, FAQ = the
    accordions word for word, one VideoObject per embedded film, no dangling `@id`).
 
 **Breadcrumbs:** the generated `BreadcrumbList` names the last crumb with the
@@ -197,6 +200,14 @@ switches with the stores when cloning to staging.
 
 **Text from platforms is not the site's copy.** YouTube/Vimeo descriptions can
 carry claims the site's rules forbid; filter them sentence by sentence.
+
+**A value derived from copy must stop the build when the copy changes, not
+fall back.** Nahlah's v3 took each lender's website from a `[a-z]+.com` match in
+the financing copy; once the copy stopped naming the domains, three
+`LoanOrCredit` providers published `"url": "https://www.undefined"` on two pages
+and every gate stayed green (found 2026-10-07). The shared build keeps such facts
+as stated literals guarded by `pageSays`, and every lookup that must exist
+(`[?regex]`, a section alias) throws.
 
 ## Still worth doing by hand
 

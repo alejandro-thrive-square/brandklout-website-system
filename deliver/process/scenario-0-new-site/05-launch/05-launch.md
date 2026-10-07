@@ -37,7 +37,9 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    `gates/seo-head-check.mjs`, never the raw HTML. Build each page's schema from its
    visible sections, not its meta description, and repeat the visible breadcrumb
    ([aeo-schema README](../../tools/instatic-plugins/aeo-schema/README.md), "Blocks built from
-   the page's content"). Serve `/llms.txt` and 301 each page's trailing-slash twin.
+   the page's content"; the scripts and the per-client config:
+   [`tools/instatic-site/seo/`](../../tools/instatic-site/seo/README.md), gate `verify-schema.mjs`
+   SCHEMA CLEAN). Serve `/llms.txt` and 301 each page's trailing-slash twin.
    The home page and each office page carry a visible local FAQ (what the specialty is, cost in the
    city, where the office is), each answer naming the office, city and phone, mirrored by a FAQPage;
    `areaServed` lists the keyword map's towns. Then

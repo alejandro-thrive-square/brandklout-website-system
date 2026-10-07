@@ -15,6 +15,7 @@ Sibling toolkits this one relies on and does not copy:
 | [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, DNI pool, accessibility widget as site scripts; never Microsoft Clarity), the canvas and published-page gates |
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
+| [`../seo-aeo/`](../seo-aeo/README.md) | The SEO & AEO standard, the keyword map format and `lib.mjs` (`seo/push-keyword-h1.mjs` and `seo/hero-look.mjs` import it: a `requires` in `toolkit.json`) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |
 | `scenario-0-new-site/03-design-build/scripts/journey-audit.mjs` | GSAP journey standard (max eight chapters, `pin:true`); on a root-relative multi-page build use `gates/check-pages.mjs` instead |
 
@@ -33,7 +34,8 @@ Sibling toolkits this one relies on and does not copy:
 | | `gates/verify-live.mjs`, `css-declared-parity.mjs`, `compare-live.mjs`, `visual-diff.mjs`, `verify-motion-live.mjs` | After every staging publish |
 | | `ops/render-draft-page.mjs` | Look at an unpublished page without publishing |
 | 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
-| 05-launch | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
+| 05-launch | `seo/*` ([README](./seo/README.md)): scan → facts → build → push → `verify-schema.mjs`, and `push-keyword-h1.mjs` + `hero-look.mjs` | The schema from each page's visible content; a keyword H1 where the map needs one (also Scenario 7 step 02) |
+| | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
 | | `staging-clone/clone-site.mjs` / `diff-sites.mjs` / `clone-plugins.mjs` / `publish-rows.mjs` | Promote staging to production and prove parity |
 | | `../instatic-domain-origins/check-origins.mjs` | After connecting the domain and `staging.<domain>`; `PUBLIC_ORIGIN` on BOTH environments |
 | | `../cloudflare-launch/canonical-host.mjs` | One address per page (apex to www or back) |
@@ -159,6 +161,7 @@ node push/push-site.mjs --record
 | `gates/template-guard.mjs` | Lists templated rows; proves a page write keeps `template` (writes nothing) | | bk-dr-nahlah `verify-template-guard.mjs` |
 | `gates/audit-double-aspect.mjs` | CSS reserving an aspect box twice around an embed | | bk-dr-nahlah |
 | `../termly-ghl-consent/gates/check-ghl-form.mjs`, `dni-proof.mjs` | GHL form readiness and the number-pool swap. Platform-neutral, so they live with the GHL toolkit since 2026-09-28 | see [`termly-ghl-consent.md`](../termly-ghl-consent/termly-ghl-consent.md) | was `gates/` here |
+| `seo/*` | The content-built aeo-schema chain (`scan-sections`, `fetch-facts`, `build-schema`, `vocab-check`, `push-schema`, `verify-schema`, `plugin-stores`) and the keyword H1 (`push-keyword-h1`, `hero-look`, `hero-shot`); per-client `seo-config.json` + base layer in the step output. Schema, mapping language, limitations: [`seo/README.md`](./seo/README.md) | plan by default; `--apply` / `--publish` with `STAGING_HOST` or `--allow-production` | bk-dr-nahlah `22-instatic-api-sync/seo-v3/` (+ `seo-v2/plugin-stores.mjs`), 2026-10-07 |
 | `images/upscale-images.mjs` | Magnific upscale (creativity 1, resemblance 3, sharpy) from a jobs file | `--jobs jobs.json [--only] [--list]`, `MAGNIFIC` | bk-mason-park-kids |
 | `images/contact-sheet.py` | Original vs upscale sheets to check every face | `--jobs jobs.json --up dir` | bk-mason-park-kids |
 

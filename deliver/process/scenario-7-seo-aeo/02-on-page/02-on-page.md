@@ -7,8 +7,12 @@ text) and give the home page the local questions AI answers draw on, without cha
 
 ## Inputs
 
-- The agreed `keyword-map.csv` and `keyword-gate-baseline.log` (step 01).
+- The agreed `keyword-map.csv` and `keyword-gate-baseline.log` (step 01). For every target page whose
+  H1 lacks its keyword, the map's `h1` column holds the heading as it should read.
 - Write access: Instatic admin (Scenario 2) or the Webflow MCP (Scenario 6).
+- Instatic: `output/seo-config.json` and its base layer `output/schema-base.json`, from the
+  [templates](../../tools/instatic-site/seo/README.md#the-two-client-files) (the practice's stated facts
+  from `docs/facts.md`; the section mapping written against the site's own headings).
 
 ## Checklist
 
@@ -17,6 +21,7 @@ text) and give the home page the local questions AI answers draw on, without cha
 - [ ] Alt text on the money pages and galleries
 - [ ] Home-page local FAQ, visible and in schema
 - [ ] `areaServed` widened to the map's towns
+- [ ] Schema rebuilt from the pages: `vocab-check.mjs` VOCAB CLEAN, `verify-schema.mjs` SCHEMA CLEAN
 - [ ] Gate CLEAN on staging, then production
 
 ## Steps
@@ -29,7 +34,12 @@ text) and give the home page the local questions AI answers draw on, without cha
    designed headline, in the site's tagline style (`text-style-tagline`, never a class named
    `eyebrow`), and turn the old H1 into a paragraph with the same classes so it looks the same.
    Exactly one H1 per page. Compare the hero at 1440 and 390 before and after: the tagline is the
-   only visible change.
+   only visible change. **On Instatic** this is
+   [`push-keyword-h1.mjs`](../../tools/instatic-site/seo/README.md#the-keyword-h1): `hero-look.mjs
+   snapshot` first, then the plan (it lists every target page: `ok`, the H1 it would write, or why it
+   cannot: no `h1` text in the map, a drafted H1 that lacks its keyword, a hero built another way),
+   `--apply` and `--publish` on staging, `hero-look.mjs compare` = HEADLINES IDENTICAL, ONE H1 EACH, then
+   production. Pages it lists as built another way (often the home and contact pages) are edited by hand.
 3. **Title and description** by rules 3–4 of the [standard](../../tools/seo-aeo/README.md#the-standard).
    Instatic keeps them in the page's SEO cells, and in the Open Graph override for a nested slug that
    cannot keep cells; a site-document write drops the cells, so restore them
@@ -43,7 +53,11 @@ text) and give the home page the local questions AI answers draw on, without cha
 6. **`areaServed`** (the aeo-schema organisation, or each office department) lists the towns in the
    keyword map. Credentials, awards and memberships only when the practice documents them.
 7. **Rebuild the schema after any copy change**: the schema is built from page content, so a renamed
-   heading or a new FAQ must reach it before publishing.
+   heading or a new FAQ must reach it before publishing. On Instatic:
+   [`tools/instatic-site/seo/`](../../tools/instatic-site/seo/README.md#the-chain) `scan-sections.mjs` →
+   `fetch-facts.mjs` → `build-schema.mjs` (it stops on a renamed heading: fix `seo-config.json`) →
+   `vocab-check.mjs` → `push-schema.mjs` (plan, then `--apply` and `--publish` on staging) →
+   `verify-schema.mjs <staging>`; then production, and `plugin-stores.mjs` to keep staging level.
 8. **Gates on staging:** `node ../../tools/seo-aeo/keyword-gate.mjs <staging origin> --map ../01-baseline-research/output/keyword-map.csv --no-coverage > output/keyword-gate-staging.log`
    (staging's noindex is a response header the gate does not read; coverage is checked on production),
    `tools/instatic-site/gates/seo-head-check.mjs`, and Scenario 2's QA. Publish production, then the
@@ -65,6 +79,8 @@ text) and give the home page the local questions AI answers draw on, without cha
 ## Tools
 
 - [`tools/seo-aeo/keyword-gate.mjs`](../../tools/seo-aeo/README.md)
+- [`tools/instatic-site/seo/`](../../tools/instatic-site/seo/README.md): the schema chain,
+  `push-keyword-h1.mjs`, `hero-look.mjs`, `hero-shot.mjs`
 - `tools/instatic-site/gates/seo-head-check.mjs`, `ops/restore-page-seo-cells.mjs`
 - [`tools/instatic-plugins/aeo-schema`](../../tools/instatic-plugins/aeo-schema/README.md)
 
@@ -72,12 +88,15 @@ text) and give the home page the local questions AI answers draw on, without cha
 
 - `output/keyword-gate-staging.log`, `output/keyword-gate-production.log`, before/after hero
   screenshots in `output/assets/`, the run in `output/RUNBOOK.md`
+- Instatic: `output/seo-config.json`, `output/schema-base.json`, `output/schema/` (scan, facts, the built
+  blocks, `sections-used.txt`, backups, `hero-look-<host>.json`), the plan/apply/verify logs
 
 ## Evidence
 
-bk-dr-nahlah 2026-10-06/07: keyword H1s on 11 treatment pages as a tagline over the designed headline
-(`seo-v3/push-keyword-h1.mjs`, gate `hero-look.mjs`, client-side); 19 pages still on brand-line H1s
-and no home-page FAQ when Trong reviewed the site.
+bk-dr-nahlah 2026-10-06/07: keyword H1s on 11 treatment pages as a tagline over the designed headline;
+19 pages still on brand-line H1s and no home-page FAQ when Trong reviewed the site. The scripts were
+promoted from that client on 2026-10-07 and reproduce its live graph from a config (the toolkit
+README's Evidence).
 
 ## Version Control
 

@@ -16,11 +16,11 @@ keyword targeting, office-city pages and content depth, not schema length.
 | # | Rule | Gate |
 | :- | :--- | :--- |
 | 1 | **Keyword map before copy.** Every indexable page has one row: one primary keyword, no two pages sharing one, legal and utility pages listed as `exempt`. Pages to build are `planned`. The team agrees the map before any copy changes. | `keyword-gate.mjs` (map, cover) |
-| 2 | **One H1, with the keyword.** Exactly one H1 per page, containing the primary keyword, plus the city when the search is local. The designed headline stays: the H1 is set small as an eyebrow above it, and the headline becomes a styled paragraph. | `keyword-gate.mjs` (h1) |
+| 2 | **One H1, with the keyword.** Exactly one H1 per page, containing the primary keyword, plus the city when the search is local. The designed headline stays: the H1 is set small as an eyebrow above it, and the headline becomes a styled paragraph. | `keyword-gate.mjs` (h1); on Instatic written by [`instatic-site/seo/push-keyword-h1.mjs`](../instatic-site/seo/README.md#the-keyword-h1), proven by `hero-look.mjs` |
 | 3 | **Title:** keyword first, then the place, brand last, 60 characters or fewer. | `keyword-gate.mjs` (title) |
 | 4 | **Meta description:** 140–155 characters (the gate allows 120–160) with the keyword, one proof point, the city and a call to action. | `keyword-gate.mjs` (desc) |
 | 5 | **Alt text:** what the photo truly shows first, then the treatment and place where true; 125 characters or fewer; `alt=""` on decoration; never a keyword list. File names carry the keyword too (Instatic skips an upload whose name it has, so a renamed image is a new upload). | `keyword-gate.mjs` (alt: presence only) |
-| 6 | **Schema for AI answers.** Built from each page's visible content (the `aeo-schema` plugin, [its README](../instatic-plugins/aeo-schema/README.md)). On top: a **visible local FAQ** on the home page and every office page (what the specialty is, cost in the city, where the office is, sedation, first visit), each answer naming the office, city and phone, mirrored by a FAQPage; `areaServed` lists the nearby towns from the keyword map; each office is a department whose `url` is its office page; credentials, awards and memberships only when the practice documents them; no self-published review stars (Google ignores them for local businesses). | `keyword-gate.mjs` (faq), `instatic-site/gates/seo-head-check.mjs` |
+| 6 | **Schema for AI answers.** Built from each page's visible content (the `aeo-schema` plugin, [its README](../instatic-plugins/aeo-schema/README.md)). On top: a **visible local FAQ** on the home page and every office page (what the specialty is, cost in the city, where the office is, sedation, first visit), each answer naming the office, city and phone, mirrored by a FAQPage; `areaServed` lists the nearby towns from the keyword map; each office is a department whose `url` is its office page; credentials, awards and memberships only when the practice documents them; no self-published review stars (Google ignores them for local businesses). On Instatic the blocks are built and shipped by [`instatic-site/seo/`](../instatic-site/seo/README.md) (scan → facts → build → push → verify). | `keyword-gate.mjs` (faq), `instatic-site/gates/seo-head-check.mjs`, `instatic-site/seo/verify-schema.mjs` + `vocab-check.mjs` |
 | 7 | **One domain; a page per office.** Never a second website per office: Google indexes one copy and the backlinks split. Each office gets a full office page (below) and, for the money services, its own version of the service page, **written separately**. Towns without an office are named on the nearest office page, not given pages of their own. | `page-overlap.mjs` (≤25% shared) |
 | 8 | **Depth where it pays.** Fill the gaps competitors rank with (missing services, cost pages, comparisons, explainers) and deepen the money pages toward what wins (2,100–3,500 words on Nahlah's searches). Every claim, price and credential confirmed by the practice ([Scenario 0 step 02](../../scenario-0-new-site/02-research-sitemap/02-research-sitemap.md)). | the practice's sign-off |
 | 9 | **Measure.** A baseline before anything changes, then monthly: the same rank-check file, Search Console clicks, tracked calls per office. | the monthly snapshot exists |
@@ -47,7 +47,8 @@ die on a pipe on Windows.
 | [`page-overlap.mjs`](./page-overlap.mjs) | Shared body text between page pairs (5-word shingles). Office twins must stay ≤25%. | 1 on FAIL |
 | [`autocomplete.mjs`](./autocomplete.mjs) | Google Autocomplete for every service × place: `AC` (Google suggests it) and `+N` (N longer variations). The keyless demand signal. | 0 |
 | [`serp-instruction.mjs`](./serp-instruction.mjs) | The Codex instruction for a location-set Google rank check (map pack, organic order, advertisers), for [`codex_cu.mjs`](../codex-computer-use/README.md). ≤15 searches a run. | 0 |
-| [`keyword-map.template.csv`](./keyword-map.template.csv) | The map's columns: `path, primary_keyword, secondary_keywords, group, intent, office, status, volume, volume_source, priority, notes`. `status` = target \| planned \| exempt; `secondary_keywords` separated by `\|`. | |
+| [`keyword-map.template.csv`](./keyword-map.template.csv) | The map's columns: `path, primary_keyword, secondary_keywords, group, intent, office, status, volume, volume_source, priority, notes, h1`. `status` = target \| planned \| exempt; `secondary_keywords` separated by `\|`; `h1` (optional) = the keyword H1 as it should read, containing the primary keyword (what `push-keyword-h1.mjs` writes; a search phrase is not a heading, so nothing derives it). | |
+| [`../instatic-site/seo/`](../instatic-site/seo/README.md) | The Instatic writers of rules 2 and 6: the content-built schema chain (`scan-sections`, `fetch-facts`, `build-schema`, `vocab-check`, `push-schema`, `verify-schema`, `plugin-stores`) and the keyword H1 (`push-keyword-h1`, gate `hero-look`, `hero-shot`), per-client config in the step output. They live with the Instatic toolkit because they write its plugin store and page nodes. | 1 on FAIL (gates) |
 
 ```bash
 T=deliver/process/tools/seo-aeo        # or tools/seo-aeo in a client folder
@@ -105,8 +106,12 @@ Competitor figures come from the 2026-10-07 research script (the same 5-word shi
 `bk-dr-nahlah`, 2026-10-07: the plan doc *Dr. Nahlah — SEO & AEO Plan*, the client runbook
 `docs/runbook/2026-10-07-seo-aeo-plan-doc.md`, and the evidence in
 `workflows/06-content-seo/.tmp/2026-10-07-seo-aeo-research/` on that branch (`node scripts/client.mjs`
-reads it from main). The content-built schema chain (scan → facts → build → push) is still
-client-side in `bk-dr-nahlah` (`workflows/22-instatic-api-sync/seo-v3/`) and not yet promoted here.
+reads it from main). The content-built schema chain (scan → facts → build → push → verify) and the
+keyword H1 (`push-keyword-h1.mjs`, gate `hero-look.mjs`) from `bk-dr-nahlah`
+`workflows/22-instatic-api-sync/seo-v3/` were promoted the same day, generalised (every Nahlah
+constant moved into a per-client `seo-config.json`; the H1 text into this map's `h1` column), to
+[`../instatic-site/seo/`](../instatic-site/seo/README.md); what stayed client-side and why is listed
+there.
 
 ## Version Control
 

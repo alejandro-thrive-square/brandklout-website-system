@@ -6,7 +6,8 @@ steps again when the measurements say so. Works on Instatic and Webflow sites: t
 **what** changes; the edits themselves go through [Scenario 2](../scenario-2-updates-expansions/README.md)
 (Instatic) or [Scenario 6](../scenario-6-webflow-sites/README.md) (Webflow), staging first.
 
-The standard and the scripts are in [`tools/seo-aeo/`](../tools/seo-aeo/README.md). Built 2026-10-07
+The standard and the scripts are in [`tools/seo-aeo/`](../tools/seo-aeo/README.md); the Instatic writers
+(content-built schema, keyword H1) in [`tools/instatic-site/seo/`](../tools/instatic-site/seo/README.md). Built 2026-10-07
 from the Dr. Nahlah analysis and Trong Huynh's (DriveRank) review. A new site gets the same rules
 inside [Scenario 0](../scenario-0-new-site/README.md) (steps 02, 03, 05, 06); run this scenario on it
 after launch.

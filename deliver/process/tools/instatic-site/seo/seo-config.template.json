@@ -1,0 +1,91 @@
+{
+  "//": "Copy to scenario-7-seo-aeo/02-on-page/output/seo-config.json and fill in. Keys starting with // are comments. Schema: README.md, section seo-config.json. Paths under files are relative to THIS file.",
+  "site": {
+    "origin": "https://www.example-dental.com",
+    "name": "Example Dental Implant Center",
+    "language": "en-US"
+  },
+  "ids": {
+    "//": "aliases usable as \"@org\", \"@person\" … wherever an id or a {\"ref\"} is expected. org is required.",
+    "org": "/#organization",
+    "person": "/meet-dr-example#person",
+    "office": "/contact#office"
+  },
+  "files": {
+    "base": "schema-base.json",
+    "keywordMap": "../../01-baseline-research/output/keyword-map.csv"
+  },
+  "markup": {
+    "//": "Client-First names are the defaults; a site still on older names lists both",
+    "breadcrumbClass": ["breadcrumb_component"],
+    "headlineAttr": "data-split",
+    "quoteByClass": ["pull-quote_author"],
+    "articleRegionAttr": "data-instatic-content-region",
+    "articleEndClass": ["article_related"]
+  },
+  "wiki": {
+    "//": "key: English Wikipedia article title. fetch-facts.mjs resolves each to its Wikipedia URL + Wikidata item",
+    "dentalImplant": "Dental_implant",
+    "allOn4": "All-on-4",
+    "dentures": "Dentures",
+    "prosthodontics": "Prosthodontics"
+  },
+  "rules": {
+    "//": "platformTextDrop: sentences of video-platform descriptions to leave out (client rules go here). graphForbidden: what the live gate fails on",
+    "platformTextDrop": "/https?:\\/\\/|\\d[\\d,]* implants/i",
+    "platformTextStrip": null,
+    "graphForbidden": null,
+    "graphForbiddenExcept": null
+  },
+  "videos": {
+    "publisher": { "vimeo": true, "youtube": false },
+    "about": { "123456789": "/dental-implants#service", "yt:AbCdEfGhIjK": "/all-on-4#service" }
+  },
+  "treatmentDefaults": { "category": "Implant dentistry" },
+  "faq": { "skip": [] },
+  "breadcrumbs": { "skip": ["index"], "fallback": {} },
+  "articles": {
+    "prefix": "posts/", "keyPrefix": "posts:", "blogPage": "posts",
+    "crumb": [{ "name": "Home", "href": "/" }, { "name": "Blog", "href": "/posts" }],
+    "headlineMax": 110,
+    "topics": [
+      { "match": "/all-on-4|full[- ]arch/i", "about": "/all-on-4#service", "section": "All-on-4 and full-arch implants" },
+      { "match": "/./", "about": "/dental-implants#service", "section": "Dental implants" }
+    ],
+    "mentions": [["dentures", "/denture/i"], ["allOn4", "/all-on-(4|four)/i"]],
+    "faqMinQuestions": 3
+  },
+  "define": {
+    "//": "named values reused with {\"use\": \"name\"}"
+  },
+  "organization": [
+    { "set": "org", "props": { "knowsAbout": { "thing": ["prosthodontics", "dentalImplant", "allOn4", "dentures"] } } }
+  ],
+  "pages": {
+    "dental-implants": {
+      "treatment": { "wiki": ["dentalImplant"] },
+      "sections": { "options": "^Your options", "steps": "^How it works", "gallery": "^Before and after" },
+      "ops": [
+        { "set": "#service", "props": { "hasOfferCatalog": { "kind": "catalog", "name": "$options.h2", "entries": "$options.items" } } },
+        { "set": "#procedure", "props": { "preparation": "$steps.items[0]", "howPerformed": "$steps.items[1:-1]", "followup": "$steps.items[-1]" } },
+        { "add": [
+          { "kind": "howTo", "section": "$steps", "about": { "ref": "#procedure" } },
+          { "kind": "cases", "section": "$gallery", "about": { "ref": "#service" } }
+        ] }
+      ]
+    },
+    "index": {
+      "ops": [{ "add": { "kind": "videos", "about": { "ref": "@org" } } }]
+    }
+  },
+  "keywordH1": {
+    "heroClass": ["section_page-hero"],
+    "heroSelector": null,
+    "taglineClass": ["text-style-tagline"],
+    "headlineAttr": "data-split",
+    "h1Attributes": {},
+    "nbsp": [", VA"],
+    "widths": [1440, 390]
+  },
+  "verify": { "minUrls": 20 }
+}

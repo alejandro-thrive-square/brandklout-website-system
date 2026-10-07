@@ -291,9 +291,11 @@ it) and, with `clone-site.mjs`, the shell (`src/scripts/*`). It does NOT carry p
 (open-graph overrides, aeo-schema blocks / organizationJson) or media alt text. So any SEO work
 done on production since staging was seeded is reverted by the promotion unless staging was
 synced first. Dr. Nahlah's pattern (2026-10-05, `22-instatic-api-sync/seo-v2/`): sync with
-`plugin-stores.mjs`, `push-seo-v2.mjs`, `retire-runtime-jsonld.mjs` and `media-alt-parity.mjs`
-against the staging host, then `parity-check.mjs` must print `STAGING MATCHES PRODUCTION`
-before `clone-site.mjs` runs. Re-run the site's live SEO gate after publishing.
+`plugin-stores.mjs` (now shared: [`../seo/plugin-stores.mjs`](../seo/README.md) `export` on
+production, `diff` / `import --apply` on staging), `push-seo-v2.mjs`, `retire-runtime-jsonld.mjs` and
+`media-alt-parity.mjs` against the staging host, then `parity-check.mjs` must print `STAGING MATCHES
+PRODUCTION` before `clone-site.mjs` runs. Re-run the site's live SEO gate (`../seo/verify-schema.mjs`)
+after publishing.
 
 `merge-overwrite` + `--rows` moves only what you changed and leaves the client's other edits
 alone. `replace` derives deletions server-side (stored - shipped) and is a whole-site
