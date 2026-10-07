@@ -46,9 +46,14 @@ the searches that bring patients and who wins them, and a keyword map the team a
 5. **Keyword map.** `output/keyword-map.csv` from
    [`keyword-map.template.csv`](../../tools/seo-aeo/keyword-map.template.csv). Every sitemap page gets a
    row (`target` or `exempt`), every gap becomes a `planned` row with its future path. One primary
-   keyword per page, the city in it when the intent is local, never the same keyword on two pages.
-   Volumes from Keyword Planner in the client's Ads account when we have it, otherwise leave the column
-   empty and say so in `volume_source`; never estimate.
+   keyword per page, never the same keyword on two pages. A service hub takes the **generic** term
+   ("full mouth dental implants"), with the region in its H1 and title: Google answers generic service
+   searches with local results, and they carry the volume. An office page takes its **city** terms.
+   **Volumes:** the user signs in to Ahrefs in Chrome, then
+   [`ahrefs-instruction.txt`](../../tools/seo-aeo/ahrefs-instruction.txt) with the map's keywords runs
+   through `codex_cu.mjs`; save the table as `output/ahrefs-<date>.tsv` and fill `volume` and
+   `volume_source` ("Ahrefs US, <date>"). Keyword Planner in the client's Ads account is the fallback.
+   Never estimate.
 6. **Gap report.** `output/gap-report.md`: each gap with its evidence URL, a priority (High = a money
    service in an office city where we are not shown; Medium = cost and commercial pages; Low =
    explainers, towns, galleries) and the work it takes (new page, rewrite, off-site). Include each
@@ -79,8 +84,10 @@ the searches that bring patients and who wins them, and a keyword map the team a
 ## Tools
 
 - [`tools/seo-aeo/`](../../tools/seo-aeo/README.md): `site-audit.mjs`, `autocomplete.mjs`,
-  `serp-instruction.mjs`, `page-overlap.mjs`, `keyword-gate.mjs`, `keyword-map.template.csv`
-- [`tools/codex-computer-use/`](../../tools/codex-computer-use/README.md) for the Google rank check
+  `serp-instruction.mjs`, `ahrefs-instruction.txt`, `page-overlap.mjs`, `keyword-gate.mjs`,
+  `keyword-map.template.csv`
+- [`tools/codex-computer-use/`](../../tools/codex-computer-use/README.md) for the Google rank check and
+  the Ahrefs volumes
 
 ## Outputs
 

@@ -1,0 +1,6 @@
+Read-only research task in Chrome, in Ahrefs (app.ahrefs.com, already signed in). TABS: reuse an open Ahrefs tab not claimed by another session, otherwise open ONE new tab, and close every tab you opened before you report.
+Open Keywords Explorer (https://app.ahrefs.com/keywords-explorer). Set the country/location to United States. Paste the keyword list below (one keyword per line) into the keyword box and run the search. Ahrefs then shows the entered keywords as a list. For EVERY keyword in the list, record: Volume (monthly, US), KD (keyword difficulty), CPC (USD), Traffic potential (TP), and Parent topic if shown. If the list is paged, go through every page. Keywords Ahrefs has no data for: list them as "no data".
+Do not export or download anything, do not buy, upgrade, start a trial or change any setting, do not save the list to a folder. If Ahrefs shows a sign-in page, a paywall, a credit limit or an upgrade prompt instead of data, stop and report exactly what it says; never enter credentials.
+Stopping point: report one line per keyword, tab-separated, in this exact order: keyword, volume, KD, CPC, traffic potential, parent topic, inside one ```text block.
+
+{{KEYWORDS, one per line: the map's primary and secondary keywords, at most ~100 per run}}

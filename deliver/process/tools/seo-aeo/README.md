@@ -47,6 +47,7 @@ die on a pipe on Windows.
 | [`page-overlap.mjs`](./page-overlap.mjs) | Shared body text between page pairs (5-word shingles). Office twins must stay ≤25%. | 1 on FAIL |
 | [`autocomplete.mjs`](./autocomplete.mjs) | Google Autocomplete for every service × place: `AC` (Google suggests it) and `+N` (N longer variations). The keyless demand signal. | 0 |
 | [`serp-instruction.mjs`](./serp-instruction.mjs) | The Codex instruction for a location-set Google rank check (map pack, organic order, advertisers), for [`codex_cu.mjs`](../codex-computer-use/README.md). ≤15 searches a run. | 0 |
+| [`ahrefs-instruction.txt`](./ahrefs-instruction.txt) | The Codex instruction that reads US volume, KD, CPC and traffic potential for a keyword list from the signed-in Ahrefs web app. Read-only. | |
 | [`keyword-map.template.csv`](./keyword-map.template.csv) | The map's columns: `path, primary_keyword, secondary_keywords, group, intent, office, status, volume, volume_source, priority, notes, h1`. `status` = target \| planned \| exempt; `secondary_keywords` separated by `\|`; `h1` (optional) = the keyword H1 as it should read, containing the primary keyword (what `push-keyword-h1.mjs` writes; a search phrase is not a heading, so nothing derives it). | |
 | [`../instatic-site/seo/`](../instatic-site/seo/README.md) | The Instatic writers of rules 2 and 6: the content-built schema chain (`scan-sections`, `fetch-facts`, `build-schema`, `vocab-check`, `push-schema`, `verify-schema`, `plugin-stores`) and the keyword H1 (`push-keyword-h1`, gate `hero-look`, `hero-shot`), per-client config in the step output. They live with the Instatic toolkit because they write its plugin store and page nodes. | 1 on FAIL (gates) |
 
@@ -66,10 +67,18 @@ va" and "dental implants alexandria va".
 
 ## Where the numbers come from
 
-- **Search volume:** none of our keys gives it today. The shared `AHREFS_API_KEY` is an Ahrefs trial
-  with 0 units: every v3 data endpoint answers 403 "Insufficient plan". Use, in order of preference,
-  Keyword Planner in the client's Google Ads account (most clients already bid on these terms), DriveRank's
-  tools through Trong, or a paid Ahrefs plan. Record the source in the map's `volume_source`.
+- **Search volume: the Ahrefs web app, read by Codex.** Sign in at app.ahrefs.com in Chrome (the user
+  does it; we never type credentials), fill [`ahrefs-instruction.txt`](./ahrefs-instruction.txt) with the
+  map's keywords and run it with `codex_cu.mjs`. On 2026-10-07 it returned US volume, KD, CPC and
+  traffic potential for 81 of 87 keywords in one run. The shared `AHREFS_API_KEY` is only a 0-unit
+  trial: every v3 data endpoint answers 403 "Insufficient plan", so the API is not the route. Fallbacks:
+  Keyword Planner in the client's Google Ads account, DriveRank through Trong. Record the source and date
+  in the map's `volume_source`.
+- **Read the volumes right.** Ahrefs gives US figures. "Service + city" searches are small (10–800 a
+  month on Nahlah's map), while the generic treatment searches carry the demand ("full mouth dental
+  implants" 64K, "dental implants cost" 41K, "snap in dentures" 6.3K) and Google answers them with
+  local results. So a hub page targets the generic term with the region in its H1 and title, and an
+  office page targets its city terms, which the map pack and the office's Business Profile carry.
 - **Rankings:** Google with the searcher's location set (`serp-instruction.mjs` → Codex). Bing,
   DuckDuckGo and headless Google return bot pages or nothing useful.
 - **Demand without volumes:** `autocomplete.mjs`.
