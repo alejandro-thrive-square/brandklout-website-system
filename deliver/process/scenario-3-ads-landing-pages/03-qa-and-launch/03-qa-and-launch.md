@@ -54,7 +54,14 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    GA4 key event imported into Google Ads (Livewell today). Confirm with the Ads owner and write
    the answer into `combo.json` `conversion`.
 6. **DNI.** Production only. Staging must never run the pools or real GTM (a staging clone burns
-   pool numbers and pollutes data): guard those tags by host. Walk as one visitor:
+   pool numbers and pollutes data): guard those tags by host. **First read the pool in GoHighLevel**
+   (Settings › Phone Numbers › Number Pools, through Codex): which number it swaps. The ad pages
+   must SHOW that number in a format the pool matches. West LA's pool swapped the main line while
+   the ads showed the new-patient line, so the installed pool would have swapped nothing
+   (2026-10-07; the client chose to show the main line). On Instatic the pool goes in as an
+   embed-origins `siteScripts` line scoped `#pages=<prefix>*` (1.8.0+; upgrade with
+   `plugins.mjs rollout` first), with `services.leadconnectorhq.com` and `services.msgsndr.com` in
+   `connectOrigins`. Walk as one visitor:
    `node tools/termly-ghl-consent/gates/dni-proof.mjs --relay --combo <combo.json> > output/dni.log 2>&1`. Use `--accept` if the
    client consent-holds the pools. Same number across pages is correct sticky DNI. Never clear
    cookies between pages. Then `node check-pool-scope.mjs --combo <combo.json> > output/pool-scope.log 2>&1`
