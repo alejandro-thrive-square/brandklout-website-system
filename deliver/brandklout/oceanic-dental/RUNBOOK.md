@@ -22,6 +22,7 @@ Start at [`docs/project-overview.md`](./docs/project-overview.md).
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
+| 2026-10-07 | old Webflow site (no step) | Microsoft Clarity removed: GTM-TRLRFSTH tag deleted + published (v5), Webflow Clarity app uninstalled, Webflow site republished (also shipped an unseen 2026-10-06 Designer edit). [`docs/runbook/2026-10-07-microsoft-clarity-removed.md`](./docs/runbook/2026-10-07-microsoft-clarity-removed.md) | (this commit) |
 | 2026-10-02 | scenario-0 / 01-client-inquiry | Railway instance + staging, logins, plugins; five-concept deck built and published to staging | `933f8103` |
 | 2026-10-02 | scenario-1 / 01-old-site-capture | 106-page scrape, 782 assets, homepage screenshots | `933f8103` |
 
