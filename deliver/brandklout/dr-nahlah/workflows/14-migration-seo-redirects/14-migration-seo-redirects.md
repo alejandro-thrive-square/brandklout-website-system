@@ -198,6 +198,13 @@ and `verify-live.mjs`, which replays **all 190** rows against production
    clears it without touching Search Console. Before blaming Cloudflare, check
    GraphQL `httpRequestsAdaptive` for Googlebot (`clientAsn` 15169) on `%sitemap%`:
    on 2026-10-05 the live sitemap was a 200 to Google and only the legacy URLs 404'd.
+9. **Read the GSC "Not found (404)" report before acting on it** (2026-10-07b).
+   - A path under `/_instatic/runtime/cache/<hash>/<pkg>/` is the **import map's prefix entry**
+     (`"gsap/": "…/gsap/"` in every page head). Googlebot crawls it as a link, and a folder
+     correctly answers 404. Leave it alone. A robots.txt block only moves it to another report.
+   - A path that never existed (`/home`), which no page links to (scan every sitemap page),
+     gets a 301 row in the Bulk Redirect list (`add-home-redirect.mjs`).
+   - Allow about a minute for a new list row to reach every edge before re-testing.
 
 ### Still open
 

@@ -1,11 +1,12 @@
 # Runbook index
 
-111 runs, newest first. Each line is one file in this folder.
+112 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-07 | 2026-10-07b — **GSC "Not found (404)", two URLs**: `drnahlah.com/home` (never a page; nothing on the site links it; Wayback has no capture of it) → `/home` + `/home/` 301 to `/` (`add-home-redirect.mjs`, `drnahlah_301` 289 → 291), verified live. The `_instatic/runtime/cache/…/gsap/` URL is the import map's prefix entry, a correct 404, left alone. Carries **gotchas** (import-map prefixes in GSC, about a minute of edge propagation) | [`2026-10-07b-gsc-404-home-redirect.md`](./2026-10-07b-gsc-404-home-redirect.md) |
 | 2026-10-07 | 2026-10-07 — **SEO & AEO plan doc** from Trong's review (Claude Docs, nothing changed on the site): live audit of 81 URLs, Trong's schema (lakenonadentist.com) diffed against ours, 16 location-set Google searches + Autocomplete + 20 competitor crawls — #1 for "prosthodontist" in both cities, absent for every treatment search; office pages + per-office money pages recommended over a second site — carries **gotchas** ("Chang" = Trong, Teams `%22` breaks JSON, Codex can't read Teams web, Ahrefs 0-unit trial) | [`2026-10-07-seo-aeo-plan-doc.md`](./2026-10-07-seo-aeo-plan-doc.md) |
 | 2026-10-06 | 2026-10-06e — **Referral survey SMS consent fixed** (GHL `KXFNR4JPqxonXEFTtme0`, both hosts embed it): the `[BUSINESS NAME]` / `[USE_CASE…]` template text replaced with the contact form's wording, which names the legal name; consent made **optional** (was required; A2P). Verified keyless; no submission. **Addendum:** the hero lead names both offices ("Tysons Corner and Alexandria", Brandklout review), published on prod + staging. Carries **gotchas** (the form gate can't read surveys; `preview` keeps the template text) | [`2026-10-06e-referral-survey-sms-consent.md`](./2026-10-06e-referral-survey-sms-consent.md) |
 | 2026-10-06 | 2026-10-06d — **SEO/AEO: the rest of the audit**, prod + staging: one H1 on all 43 posts, 43 post descriptions written from the articles (claims checked against the text), per-office Facebook/GBP/Yelp sameAs + Alexandria map, /llms.txt (Worker + route via Codex), sitemap lastmod, 80 trailing-slash 301s; every gate clean on both hosts — carries **gotchas** (class names on two hosts, the 0-URL gate) + open client items (H1s, copy depth) | [`2026-10-06d-seo-aeo-remaining-improvements.md`](./2026-10-06d-seo-aeo-remaining-improvements.md) |
