@@ -20,7 +20,7 @@ after launch.
 | 04 | [Content Depth & Gaps](./04-content-depth/04-content-depth.md) | The practice approved the copy; gap pages live; gate CLEAN |
 | 05 | [Measure](./05-measure/05-measure.md) (monthly) | Snapshot saved and compared with the baseline; next actions written |
 
-The FigJam board *Deliver SOP's* should gain a Scenario 7 lane drawn from this table.
+The FigJam board *Deliver SOP's* draws this scenario as its Scenario 7 lane (section `388:1840`, 2026-10-07); when the two disagree, fix both.
 
 ## Roles
 

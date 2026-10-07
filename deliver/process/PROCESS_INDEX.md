@@ -94,7 +94,7 @@ The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, adde
 | 05 | [Measure](./scenario-7-seo-aeo/05-measure/05-measure.md) (monthly) |
 
 Scripts: [tools/seo-aeo](./tools/seo-aeo/README.md); on Instatic the schema and keyword-H1 writers in [tools/instatic-site/seo](./tools/instatic-site/seo/README.md). Edits go through Scenario 2 (Instatic) or 6 (Webflow).
-Added 2026-10-07 from the Dr. Nahlah analysis and Trong Huynh's review; the FigJam board has no Scenario 7 lane yet.
+Added 2026-10-07 from the Dr. Nahlah analysis and Trong Huynh's review; the FigJam board has a Scenario 7 lane (section `388:1840`, 105 cards, drawn from this scenario on 2026-10-07).
 
 ## Tools
 

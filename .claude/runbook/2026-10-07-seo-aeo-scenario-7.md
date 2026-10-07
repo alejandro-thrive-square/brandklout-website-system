@@ -23,7 +23,7 @@
 
 ## Next
 
-1. **FigJam *Deliver SOP's*: add a Scenario 7 lane** from `scenario-7-seo-aeo/README.md` (not done).
+1. ~~FigJam lane~~ **Done 2026-10-07:** section `388:1840` on *Deliver SOP's*, 105 cards cloned from the Scenario 6 lane (title, description, five steps × Checklist / Context Actions / Conditionals / AI Models / Do / Don't), card heights from measured word wrap (Inter Medium 16 wraps past ~690 px in a 696 card), confirmed on the server through REST `/nodes`.
 2. Run Scenario 7 on Dr. Nahlah first (its plan doc is the step 01 output), then the other multi-office
    clients.
 3. Promote Nahlah's content-built schema chain (`bk-dr-nahlah` `workflows/22-instatic-api-sync/seo-v3/`)
