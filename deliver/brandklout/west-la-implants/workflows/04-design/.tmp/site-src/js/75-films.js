@@ -12,11 +12,12 @@
    `frame-src 'none'` and the link simply opens Vimeo in a new tab instead.
    ========================================================================== */
 (function(){
-  /* YouTube id -> Vimeo id (+ the private hash when a clip is unlisted) */
+  /* YouTube id -> Vimeo id (+ the private hash when a clip is unlisted). Agency team account,
+     folder "West LA Implants" (vimeo.com/user/248712727/folder/30817251), public, uploaded 2026-10-07. */
   var FILMS = {
-    'nH1ST1jo8WQ': { v: '__LESLIE__', h: '' },
-    '4skcfz94ZS4': { v: '__EMILY__', h: '' },
-    'SDVe8k_zQUE': { v: '__MICHAEL__', h: '' }
+    'nH1ST1jo8WQ': { v: '1233866645', h: '' },
+    '4skcfz94ZS4': { v: '1233866646', h: '' },
+    'SDVe8k_zQUE': { v: '1233866644', h: '' }
   };
   var byVimeo = {};
   Object.keys(FILMS).forEach(function(k){ byVimeo[FILMS[k].v] = FILMS[k]; });

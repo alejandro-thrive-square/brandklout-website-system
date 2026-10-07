@@ -14,7 +14,7 @@
      attribute in data-src, hydrated by 90-boot.js
    - no inline `style` on anything that must survive; JS sets what it needs
    ========================================================================== */
-import { SITE, PATIENTS } from './site.mjs'
+import { SITE, PATIENTS, filmHref } from './site.mjs'
 
 const tag = (t) => (t ? `<div class="chapter-tag"><i></i><span>${t}</span></div>` : '')
 /* m.pos = the photo's focal point as 'x% y%' — a class, not an inline style (css/45-focal.css, 08-qa image review) */
@@ -163,7 +163,7 @@ export function proof(b) {
   const quote = b.quote || (p && p.quote)
   const who = b.who || (p && p.name)
   const treat = b.treatment || (p && p.treatment)
-  const film = b.film || (p && p.film ? { href: `https://www.youtube.com/watch?v=${p.film.id}`, label: `Watch ${p.name}’s story` } : null)
+  const film = b.film || (p && p.film ? { href: filmHref(p.film), label: `Watch ${p.name}’s story` } : null)
   return `<section class="b-proof" id="${b.id || 'proof'}" data-theme="light">
   <div class="ba-pin">
     <div class="wrap ba-grid">
@@ -243,7 +243,7 @@ export function stories(b) {
     const media = p.clip
       ? `<video class="sy-clip" poster="${p.poster}" muted loop playsinline preload="none" data-src-hover="${p.clip}" aria-label="${p.name}, in her own words"></video>`
       : `<img src="${p.poster}" alt="${p.name} after treatment" loading="lazy">`
-    return `<article class="sy-card"><a class="frame frame--tall sy-media" href="https://www.youtube.com/watch?v=${p.film.id}" target="_blank" rel="noopener" aria-label="Watch ${p.name}’s story on YouTube">${media}<span class="sy-play" aria-hidden="true"></span></a><blockquote class="serif">&ldquo;${p.quote}&rdquo;</blockquote><div class="sy-who"><b>${p.name}</b><span>${p.treatment}</span></div>${b.ba === false ? '' : `<div class="sy-ba"><img src="${p.before}" alt="${p.name} before" loading="lazy"><img src="${p.after}" alt="${p.name} after" loading="lazy"></div>`}</article>`
+    return `<article class="sy-card"><a class="frame frame--tall sy-media" href="${filmHref(p.film)}" target="_blank" rel="noopener" aria-label="Watch ${p.name}’s story${p.film.vimeo ? '' : ' on YouTube'}">${media}<span class="sy-play" aria-hidden="true"></span></a><blockquote class="serif">&ldquo;${p.quote}&rdquo;</blockquote><div class="sy-who"><b>${p.name}</b><span>${p.treatment}</span></div>${b.ba === false ? '' : `<div class="sy-ba"><img src="${p.before}" alt="${p.name} before" loading="lazy"><img src="${p.after}" alt="${p.name} after" loading="lazy"></div>`}</article>`
   }).join('\n')
   return `<section class="b-stories" id="${b.id || 'stories'}">
   <div class="wrap sy-head">${tag(b.tag || 'The Stories')}<h2 class="h2">${b.title}</h2>${b.lead ? `<p class="lead">${b.lead}</p>` : ''}</div>

@@ -53,6 +53,14 @@ const ASSETS = [
   { type: 'style', path: 'src/styles/wla-lp-review.css', content: fs.readFileSync(path.join(SRC, 'css/03-runtime.css'), 'utf8').trimEnd() + '\n\n' + readability.slice(at).trimEnd() + '\n' },
   { type: 'script', path: 'src/scripts/wla-sharp-crops.js', content: fs.readFileSync(path.join(SRC, 'js/70-sizes.js'), 'utf8') },
 ]
+// The patient films on Vimeo (review: "play on the same tab, better in Vimeo"). js/75-films.js holds
+// the YouTube -> Vimeo map; it ships only once every id is real, and the film links on the six pages
+// are pointed at Vimeo so a visitor without the player (or a crawler) lands there too.
+const FILMS_JS = fs.readFileSync(path.join(SRC, 'js/75-films.js'), 'utf8')
+const VIMEO = Object.fromEntries([...FILMS_JS.matchAll(/'([\w-]{11})':\s*\{\s*v:\s*'(\d+)',\s*h:\s*'([0-9a-f]*)'/g)].map((m) => [m[1], { v: m[2], h: m[3] }]))
+if (Object.keys(VIMEO).length === 3) ASSETS.push({ type: 'script', path: 'src/scripts/wla-films.js', content: FILMS_JS })
+else console.log(`films   js/75-films.js has ${Object.keys(VIMEO).length}/3 Vimeo ids: the player is not shipped this run`)
+const vimeoPage = (f) => `https://vimeo.com/${f.v}${f.h ? '/' + f.h : ''}`
 const LARGE = ['case10_before_westlaimplants_leslie_barriere', 'case10_after_westlaimplants_leslie_barriere', 'case11_before_westlaimplants_emily_barriere', 'case11_after_westlaimplants_emily_barriere', 'case12_before_westlaimplants_michael_barriere', 'case12_after_westlaimplants_michael_barriere']
 const SWAP_LARGE = Object.fromEntries(LARGE.map((n) => [`${n}.jpg`, `${n}_large.jpg`]))
 const THANKS = {
@@ -136,6 +144,17 @@ for (const slug of SLUGS) {
     }
   }
 
+  // film links: YouTube -> Vimeo
+  for (const x of all.filter((x) => x.moduleId === 'base.link' && typeof x.props?.href === 'string')) {
+    const id = (x.props.href.match(/youtube\.com\/watch\?v=([\w-]{11})/) ?? [])[1]
+    const f = id && VIMEO[id]
+    if (!f) continue
+    const attrs = { ...(x.props.htmlAttributes ?? {}) }
+    if (attrs['aria-label']) attrs['aria-label'] = attrs['aria-label'].replace(/ on YouTube$/, '')
+    x.props = { ...x.props, href: vimeoPage(f), htmlAttributes: attrs }
+    say(`link  ${x.id} youtube ${id} -> ${vimeoPage(f)}`)
+  }
+
   // before/after originals (landing pages)
   for (const x of all.filter((x) => x.moduleId === 'base.image')) {
     const to = SWAP_LARGE[baseName(x.props?.src)]
@@ -187,7 +206,8 @@ if (!APPLY) { console.log('DRY RUN: nothing written. Re-run with --apply.'); pro
 
 // ── backup, write, read back ──────────────────────────────────────────
 if (changed.length || shellChanged) {
-  const dir = path.join(HERE, '.tmp', `backup-${new Date().toISOString().slice(0, 10)}-pre-lp-review`)
+  // timestamped: a second run the same day must not overwrite the first run's backup
+  const dir = path.join(HERE, '.tmp', `backup-${new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-')}-pre-lp-review`)
   fs.mkdirSync(dir, { recursive: true })
   const pristine = await getSite()
   fs.writeFileSync(path.join(dir, 'shell.json'), JSON.stringify(pristine, null, 1))

@@ -2,6 +2,43 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 (evening) · the patient films on Vimeo, played on the page; published seq 31
+
+**Done**
+- The three films (Leslie `nH1ST1jo8WQ`, Emily `4skcfz94ZS4`, Michael `SDVe8k_zQUE`) were
+  downloaded from the practice's YouTube channel at 1080p (`yt-dlp`). They were uploaded into the
+  agency team account (owner `user248712727`), new folder **West LA Implants**
+  (`vimeo.com/user/248712727/folder/30817251`). Leslie is `1233866645`, Emily `1233866646`,
+  Michael `1233866644`.
+- Titles and descriptions were set by API, each description linking to https://westlaimplants.com/.
+  Privacy copies Livewell: public, embed anywhere, no download.
+- `js/75-films.js` (live as `src/scripts/wla-films.js`) opens any film link in a lightbox with the
+  Vimeo player. It works on pages whose CSP frames Vimeo (the four with an Embed block); elsewhere
+  the link opens Vimeo in a new tab. Its CSS is in `css/03-runtime.css` (refreshed into
+  `wla-lp-review.css`).
+- `apply-lp-review.mjs` pointed the 14 film links on the four film pages at Vimeo. The 81 other
+  pages changed only by the new script tag.
+- Source: `FILMS.<key>.vimeo` + `filmHref()` in `lib/site.mjs`, used by `stories()` and the journey
+  link.
+- Live test (puppeteer, 1440): click a film card → same URL, lightbox open, iframe 1120×630, no CSP
+  refusal; Esc closes and removes the iframe. Vimeo API: Emily and Michael `available`,
+  `is_playable`; Leslie was still `transcoding` at publish time.
+
+**Gotchas**
+- **The Vimeo API token cannot upload into the team account** ("This app can only upload to the
+  app owner's account"), even with an Admin role. It CAN edit team videos (PATCH name,
+  description, privacy). Upload goes through the browser.
+- **Codex needs "Allow access to file URLs"** on the ChatGPT extension (`chrome://extensions`) to
+  hand a local file to an upload input. Claude in Chrome's `file_upload` is capped at 10 MB and only
+  takes files shared with the session.
+- **The upload route has several stops:**
+  - the Vimeo role had to be Admin (Contributor cannot make a top-level folder);
+  - Vimeo must be signed in in Chrome;
+  - an open extension popup on the page makes Chrome refuse automation;
+  - Vimeo may show a human verification.
+- The organic pages' other nine films (library, page links) are still on YouTube. The site-wide
+  script retargets only the three it knows.
+
 ## 2026-10-07 (later) · DNI live, form notifications on, 3-on-6 consent; published seq 30
 
 **Done**
@@ -29,9 +66,7 @@ Newest run first. Each run: date, what was done (with the commit), what is next,
 | `dni-proof.mjs --relay` (all-on-6 → consultation → thank-you → 3-on-6, one visitor) | **swapping**: every `(310) 481-0111` and `tel:+13104810111` → `(424) 766-4171`, sticky across pages, thank-you page (strict CSP) included |
 
 **Next**
-1. Vimeo: the three films are downloaded; Vimeo asked for a human verification, so the upload
-   (into a "West LA Implants" folder in the agency team account) and the in-page player
-   (`js/75-films.js`, IDs still placeholders) wait on it.
+1. ~~Vimeo~~: done the same evening (seq 31, entry above).
 2. One real test lead per campaign to confirm the notification email arrives.
 3. Conversion tags (no GTM on the instance).
 

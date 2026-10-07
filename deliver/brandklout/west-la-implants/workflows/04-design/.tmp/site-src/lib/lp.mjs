@@ -21,7 +21,7 @@
    the flow can be reviewed. With a snippet the slot becomes the Embed marker
    place-embeds.mjs swaps for the brandklout Embed block.
    ========================================================================== */
-import { SITE, PATIENTS } from './site.mjs'
+import { SITE, PATIENTS, filmHref } from './site.mjs'
 import { compare, steps, gallery, stories, rail, faq, strip } from './blocks.mjs'
 
 export const PREFIX = 'ads-landing-pages'
@@ -103,7 +103,7 @@ function journey(c) {
       ${tag('One patient’s real journey')}
       <h2 class="h2">${j.title}</h2>
       <p class="lead">${j.lead}</p>
-      <div class="lp-jr-who"><figure class="lp-jr-face">${img(j.portrait)}</figure><div><b>${p.name}</b><span>${j.treatment}</span><a class="textlink" href="https://www.youtube.com/watch?v=${p.film.id}" target="_blank" rel="noopener">Watch ${p.name}’s film <span class="arrow">&rarr;</span></a></div></div>
+      <div class="lp-jr-who"><figure class="lp-jr-face">${img(j.portrait)}</figure><div><b>${p.name}</b><span>${j.treatment}</span><a class="textlink" href="${filmHref(p.film)}" target="_blank" rel="noopener">Watch ${p.name}’s film <span class="arrow">&rarr;</span></a></div></div>
     </div>
     <figure class="lp-ba" aria-label="${p.name}, before and after">
       <div class="lp-ba-stage"><img class="lp-ba-before" src="${ba.before}" alt="${p.name} before treatment" loading="lazy"><div class="lp-ba-after"><img src="${ba.after}" alt="${p.name} after treatment" loading="lazy"></div><div class="lp-ba-handle" aria-hidden="true"></div><span class="lp-ba-label">Before</span><span class="lp-ba-label lp-ba-label--after">After</span></div>

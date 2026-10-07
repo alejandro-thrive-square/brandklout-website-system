@@ -33,10 +33,15 @@ export const SITE = {
 /* The twelve films on the practice's channel, titles as YouTube reports them
    (oEmbed, 2026-09-22). Thumbnails are downloaded into media/img/yt-<id>.jpg
    by build.mjs so the published page never hot-links i.ytimg.com. */
+/* A film's link: its Vimeo page once it is on the agency's Vimeo (Brandklout's rule: every video
+   on Vimeo, its description linking back to the site), else YouTube. js/75-films.js plays the
+   Vimeo ones in a lightbox on pages whose CSP allows it. */
+export const filmHref = (f) => (f.vimeo ? `https://vimeo.com/${f.vimeo}` : `https://www.youtube.com/watch?v=${f.id}`)
+
 export const FILMS = {
-  leslie: { id: 'nH1ST1jo8WQ', title: 'Full Arch All-On-4 Gave Me My Confidence Back!' },
-  emily: { id: '4skcfz94ZS4', title: 'I Felt Like The Old Me Because Of My Crowns & Dental Implants' },
-  michael: { id: 'SDVe8k_zQUE', title: 'I Have Teeth Again Thanks To My Full Mouth Reconstruction!' },
+  leslie: { id: 'nH1ST1jo8WQ', vimeo: '1233866645', title: 'Full Arch All-On-4 Gave Me My Confidence Back!' },
+  emily: { id: '4skcfz94ZS4', vimeo: '1233866646', title: 'I Felt Like The Old Me Because Of My Crowns & Dental Implants' },
+  michael: { id: 'SDVe8k_zQUE', vimeo: '1233866644', title: 'I Have Teeth Again Thanks To My Full Mouth Reconstruction!' },
   welcome: { id: 'KyCD8IhBba4', title: "West LA Implants: Transforming People's Lives" },
   experience: { id: 'LElCA_akdM8', title: 'Why Does Dental Implant Treatment Experience Matter?' },
   guided: { id: 'S3Y6cgN4jUg', title: 'Eliminate The Risk Of Human Error With 3D Guided Dental Implant Surgery' },
