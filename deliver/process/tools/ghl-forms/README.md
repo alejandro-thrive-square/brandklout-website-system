@@ -67,10 +67,14 @@ Consent texts (`{LEGAL}` = the legal name, e.g. *Mason Park Dental PLLC DBA Maso
 
 > By checking this box, I consent to receive occasional marketing messages from {LEGAL}, such as
 > special offers, discounts, newsletters, and updates about services. Message frequency may vary.
-> Message and data rates may apply. Reply HELP for assistance or STOP to opt out.
+> Message and data rates may apply. Reply HELP for assistance or STOP to opt out. Consent is not a
+> condition of purchase.
 
 The checkbox stays optional because A2P 10DLC (the carriers' SMS registration) rejects consent
-that is a condition of submitting the form.
+that is a condition of submitting the form. The marketing box says so in words: "Consent is not a
+condition of purchase." was added to the standard on 2026-10-07 after Brandklout's review of the
+West LA Implants ad pages flagged its absence (TCPA wording for marketing texts). Forms built
+before that date lack it; add it when a form is next touched.
 
 ## Steps
 
