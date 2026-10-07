@@ -7,12 +7,14 @@ every site and the rule: `.claude/runbook/2026-10-07-microsoft-clarity-removed.m
 ## Done
 
 - GTM container **GTM-KXWLKSK2**: tag `Microsoft Clarity - Official` (project `y8fksihyz0`) deleted and **published as version 3**. It never ran: the site does not load this container.
-- Still open: grandmissiondentistry.com carries only a `<noscript>` iframe, and it names **Livewell's** container GTM-KL36RQV2. The `<script>` half of its own container is not installed, so GA4 (`GA4 - Global Tag`) does not run either.
+- Found: grandmissiondentistry.com carried only a `<noscript>` iframe, and it named **Livewell's** container GTM-KL36RQV2. The `<script>` half of its own container was never installed, so GA4 (`GA4 - Global Tag`, `G-VP1WFFBLYF`) did not run.
+- **Fixed the same day and published (user approved), 21:10 UTC:** site head custom code now has GTM-KXWLKSK2's script right below the Termly block (Marvel's layout); the footer `<noscript>` names GTM-KXWLKSK2. Verified on the live home and /about-us. GA4 now runs under Termly's Consent Mode: before a choice it sends cookieless pings (`gcs=G100`, no `_ga` cookie). GA4 follows the hardened rules in `termly-ghl-consent.md` on main.
+- **The publish also shipped an unpublished Designer edit from 07:38 UTC** that nobody here saw. The home page diff shows only the GTM lines, so it is on another page.
 
 ## Next
 
-- Deleting the Clarity project(s) (which deletes the recordings, as the Additional Terms require) is
-  the user's call and was not done.
+- The user deletes the Clarity project `y8fksihyz0` (Settings > "Eliminar este proyecto"); the
+  permission checks stopped an agent from doing it.
 - Never add Clarity back, in GTM, as a site script or as the Webflow app. `consent-kit.mjs check`
   fails on any `clarity.ms` request.
 
