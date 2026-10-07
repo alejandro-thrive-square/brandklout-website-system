@@ -83,6 +83,16 @@ on dr-nahlah, grand-mission, arvada, livewell and IFA.
 Analytics and ad pixels (ahrefs, Meta, the OpenAI pixel) **do** stay tagged. Termly still governs
 those and whatever is tagged inside GTM — just not call tracking.
 
+### Microsoft Clarity is banned, consent or not (2026-10-07)
+Microsoft signs no BAA for Clarity, its terms forbid "health care" content, and the Additional Terms
+accepted for a Health & Wellness project warrant that no PHI or state-law health data is processed.
+A Termly consent tag holds it back but makes none of that allowed (HHS: a cookie banner is not a
+HIPAA authorization). It goes on **no** client site: not in GTM, not as a site script, not as the
+Webflow Clarity app. `consent-kit.mjs check` prints `FAIL banned tracker` and exits 1 on any
+`clarity.ms` request. Removal: delete the tag in each GTM container and publish (deleting the
+Clarity project does not take the tag off a site); a Webflow app copy needs the app uninstalled and a
+site publish.
+
 **A pool that has to reach a second host needs `connectOrigins`.** The pool loads from
 `backend.leadconnectorhq.com` but asks for its number at `services.leadconnectorhq.com`, and the
 session helper reports to `services.msgsndr.com`. On Instatic, a page with **no Embed block** keeps

@@ -341,7 +341,12 @@ async function check() {
     }
     const page = await ctx.newPage()
     const tracking = new Set()
-    page.on('request', (r) => { const m = r.url().match(/number_pool\.js|user_session\.js/); if (m) tracking.add(m[0]) })
+    // Microsoft Clarity is banned on client sites (2026-10-07): no BAA, and its terms forbid health data.
+    const banned = new Set()
+    page.on('request', (r) => {
+      const m = r.url().match(/number_pool\.js|user_session\.js/); if (m) tracking.add(m[0])
+      if (/^https?:\/\/([^/]*\.)?clarity\.ms\//.test(r.url())) banned.add('Microsoft Clarity')
+    })
     await page.goto(url, { waitUntil: 'load', timeout: 60000 })
     await page.waitForTimeout(7000)
     const r = await page.evaluate(() => {
@@ -359,7 +364,11 @@ async function check() {
         }),
       }
     })
-    console.log(`${url}\n  ${JSON.stringify({ ...r, trackingBeforeConsent: [...tracking] })}`)
+    console.log(`${url}\n  ${JSON.stringify({ ...r, trackingBeforeConsent: [...tracking], banned: [...banned] })}`)
+    if (banned.size) {
+      console.log(`  FAIL banned tracker: ${[...banned].join(', ')}. Remove it from GTM, siteScripts or the Webflow app; consent does not make it allowed.`)
+      process.exitCode = 1
+    }
     await ctx.close()
   }
   await browser.close()

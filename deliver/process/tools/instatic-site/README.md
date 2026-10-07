@@ -12,7 +12,7 @@ Sibling toolkits this one relies on and does not copy:
 |---|---|
 | [`../instatic-api-sync/`](../instatic-api-sync/instatic-api-sync.md) | `insta-api.mjs` (the admin client every script here uses via `lib/site.mjs`), `conv-encode.ts` / `conv-preload.ts` (shipped by `push/ship.sh`), `install-fonts.mjs`, CSS repair tools, `prune-versions` |
 | [`../instatic-plugins/`](../instatic-plugins/README.md) | every `brandklout.*` plugin source, `plugins.json` (registry), `install-plugin.mjs`, `plugins.mjs` (status, rollout, verify across sites) |
-| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts), the canvas and published-page gates |
+| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, DNI pool, accessibility widget as site scripts; never Microsoft Clarity), the canvas and published-page gates |
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |

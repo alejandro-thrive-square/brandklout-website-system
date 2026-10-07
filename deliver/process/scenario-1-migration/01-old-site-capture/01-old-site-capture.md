@@ -78,6 +78,8 @@ on Windows dies when stdout is a pipe.
     `node $S/tracking-inventory.mjs --urls scrape/site-data.json --out tracking --limit 15 > tracking.log`
     Include the home page, a contact or booking page and a blog post in the sample. Decide per
     tag: keep, replace or drop. Record who owns each account (GA4, Ads, GTM, GHL, CallRail).
+    Microsoft Clarity is always **drop**, and is removed from the old site's GTM too (banned
+    2026-10-07, [termly-ghl-consent](../../tools/termly-ghl-consent/termly-ghl-consent.md)).
 11. **Export the blog.** Best source first:
     `node $S/export-posts.mjs --wxr recovered/content.xml --prefix /blog --out posts > posts.log`
     or `--rest https://<old>` (live WordPress) or `--scrape scrape/site-data.json` (last resort).

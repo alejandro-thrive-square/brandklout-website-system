@@ -8,7 +8,7 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 ## Inputs
 
 - QA passed (step 04), no open critical or high issue.
-- Domain registrar and DNS access, GHL forms and number pools, GTM and Clarity ids, Termly website ID.
+- Domain registrar and DNS access, GHL forms and number pools, GTM id, Termly website ID.
 - For a migration: the redirect Worker from Scenario 1.
 
 ## Checklist
@@ -48,8 +48,11 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    (`tools/elfsight-reviews/review-widgets.json`), set to the
    [in-section standard](../../tools/elfsight-reviews/README.md) and gated with `check-widget.mjs`.
    GHL forms on the [ghl-forms standard](../../tools/ghl-forms/README.md). Both as Embed blocks; any
-   change inside GHL or Elfsight goes through Codex computer use, one small saved step per run. GTM, Microsoft
-   Clarity and the number pool script go in through the embed-origins plugin (`siteScripts`). Allow
+   change inside GHL or Elfsight goes through Codex computer use, one small saved step per run. GTM and
+   the number pool script go in through the embed-origins plugin (`siteScripts`). **Never Microsoft
+   Clarity** (2026-10-07): Microsoft signs no BAA for it and its terms forbid health data, so it goes on
+   no client site, in no GTM container and not as the Webflow app, consent or not; `consent-kit.mjs
+   check` fails on any `clarity.ms` request. Ask before any other session-replay or heatmap tool. Allow
    `services.leadconnectorhq.com` and `services.msgsndr.com` in `connect-src`, or the number swap fails
    silently on pages without an embed. Prove the swap with `tools/termly-ghl-consent/gates/dni-proof.mjs` as one visitor.
 5. **Consent.** Termly above GTM, auto blocking off, trackers tagged by hand, number pools exempt
