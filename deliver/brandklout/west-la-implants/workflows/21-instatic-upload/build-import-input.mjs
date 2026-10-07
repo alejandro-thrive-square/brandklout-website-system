@@ -114,6 +114,23 @@ function rewrite(html, file) {
     return `${attr}="${hit.url}"`
   })
 
+  // 1a. The SEO payload. `<main data-seo>` is base64 JSON (js/80-seo.js writes
+  //     og:image, twitter:image and the JSON-LD from it), so step 1 never sees
+  //     the `/media/…` paths inside it. Every published page pointed its social
+  //     preview at `<origin>/media/img/x.jpg`, a 404 (review 2026-10-06).
+  out = out.replace(/data-seo="([A-Za-z0-9+/=]+)"/g, (whole, b64) => {
+    const json = Buffer.from(b64, 'base64').toString('utf8')
+    const fixed = json.replace(/(https?:\/\/[^"/]+)?\/(media\/[^"?#]+)/g, (ref, origin, name) => {
+      const hit = mediaMap[name]
+      if (!hit) {
+        problems.push(`${file}: data-seo: no media-map entry for ${name}`)
+        return ref
+      }
+      return `${origin ?? ''}${hit.url}`
+    })
+    return `data-seo="${Buffer.from(fixed, 'utf8').toString('base64')}"`
+  })
+
   // 1b. Internal links: `treatments.html#face` -> `/treatments#face`.
   //
   //     The static build links page-to-page by filename because it is opened

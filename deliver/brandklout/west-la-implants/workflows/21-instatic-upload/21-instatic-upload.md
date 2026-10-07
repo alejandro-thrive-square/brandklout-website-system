@@ -1156,6 +1156,32 @@ the Execution Steps for that reason; it also re-syncs the site bundle and the `.
 Keep `.pf-grid` (the ScrollTrigger anchor) and the marquee (`.pf-row`) when touching the chapter:
 `sections/chapters.js` queries both without a guard.
 
+### 45. Every social preview pointed at a 404: the media rewrite never saw the SEO payload
+
+Found 2026-10-06 by the ad-page review ("broken social-preview image, returns 404"). Each page's
+SEO lives in `<main data-seo>` as **base64 JSON**, and `js/80-seo.js` writes `og:image`,
+`twitter:image` and the JSON-LD images from it at runtime. Step 1 of `build-import-input.mjs`
+rewrites `/media/…` to `/uploads/…` in attributes it can read, and a base64 string is not one, so
+all 87 pages published `og:image = <origin>/media/img/x.jpg`, which 404s. `build-import-input.mjs`
+step 1a now decodes, rewrites and re-encodes it. The six ad pages were patched live by
+`apply-lp-review.mjs`; the other 81 pick it up on their next push.
+Note that scrapers (Facebook, LinkedIn, Slack) do not run JavaScript, so a runtime `og:image` is
+only half a fix: real previews need the open-graph plugin on the instance (not installed here).
+
+### 46. Change a live site by patching the live draft, not by pushing the build
+
+Since 2026-10-07 (user: "don't override the changes that we have done on other sessions"), a
+change to a published site is a **surgical edit of the live draft**: read the rows and the shell,
+change only the named nodes, write with `baseSeqs` and `shellBaseSeq`, read back, and publish only
+if no other row moved during the run. `apply-lp-review.mjs` is the worked example (two new code
+assets, six pages). It also refuses to start if the draft already differs from the published site,
+because a publish would ship someone else's unfinished work. A full `push-site.mjs --apply
+--force` re-imports every page from `dist/` and drops every Embed block, plugin edit and admin
+edit made since; keep it for first imports.
+Proving it afterwards: snapshot every page's raw HTML before and after (mask
+`/_instatic/assets/<id>/`, `?v=` and the bundle hashes). On 2026-10-07 the 81 untouched pages
+differed by exactly one line, the new `wla-sharp-crops.js` script tag.
+
 ### The check: `css-parity.mjs`
 
 ```bash

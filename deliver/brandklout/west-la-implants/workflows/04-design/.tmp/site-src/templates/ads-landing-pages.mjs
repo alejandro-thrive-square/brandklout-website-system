@@ -38,9 +38,9 @@ const LONG_REVIEWS = [
 ]
 
 const CASES = {
-  leslie: { before: '/media/img/case10_before_westlaimplants_leslie_barriere.jpg', after: '/media/img/case10_after_westlaimplants_leslie_barriere.jpg', label: 'All-on-4® full arch', sub: 'Leslie' },
-  michael: { before: '/media/img/case12_before_westlaimplants_michael_barriere.jpg', after: '/media/img/case12_after_westlaimplants_michael_barriere.jpg', label: 'Full mouth reconstruction', sub: 'Michael' },
-  emily: { before: '/media/img/case11_before_westlaimplants_emily_barriere.jpg', after: '/media/img/case11_after_westlaimplants_emily_barriere.jpg', label: 'Implants & crowns', sub: 'Emily' },
+  leslie: { before: '/media/img/case10_before_westlaimplants_leslie_barriere_large.jpg', after: '/media/img/case10_after_westlaimplants_leslie_barriere_large.jpg', label: 'All-on-4® full arch', sub: 'Leslie' },
+  michael: { before: '/media/img/case12_before_westlaimplants_michael_barriere_large.jpg', after: '/media/img/case12_after_westlaimplants_michael_barriere_large.jpg', label: 'Full mouth reconstruction', sub: 'Michael' },
+  emily: { before: '/media/img/case11_before_westlaimplants_emily_barriere_large.jpg', after: '/media/img/case11_after_westlaimplants_emily_barriere_large.jpg', label: 'Implants & crowns', sub: 'Emily' },
   c2: { before: '/media/img/case2_before_westlaimplants_barriere_large.jpg', after: '/media/img/case2_after_westlaimplants_barriere_large.jpg', label: 'Dental implant & crowns' },
   c3: { before: '/media/img/case3_before_westlaimplants_barriere_large.jpg', after: '/media/img/case3_after_westlaimplants_barriere_large.jpg', label: 'Dental implants' },
   c4: { before: '/media/img/ba-case4-before.jpg', after: '/media/img/ba-case4-after.jpg', label: 'Dental implants' },
@@ -116,7 +116,7 @@ const allOn6 = {
     review: REVIEWS.peter,
   },
   journey: {
-    patient: 'leslie', treatment: 'Full arch All-on-4®, top and bottom',
+    patient: 'leslie', ba: CASES.leslie, treatment: 'Full arch All-on-4®, top and bottom',
     title: 'Leslie wanted her <em>smile</em> back.',
     lead: 'Years of gum problems, and years spent trying to save her teeth. This is her story, in her words and her surgeon’s. Her arches are carried on four implants each; whether yours needs four or six is read from your scan.',
     portrait: I('still-leslie-smile-tablet.jpg'),
@@ -196,8 +196,9 @@ const allOn6 = {
     reviews: LONG_REVIEWS,
   },
   thanks: {
-    title: 'Thank you. Let’s talk about your new <em>smile.</em>',
-    lead: 'Your request is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
+    kicker: 'All-on-6 consultation · request received',
+    title: 'Your All-on-6 consultation request is <em>in.</em>',
+    lead: 'Thank you. Your request for an All-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
     note: 'The new-patient line is answered Monday to Friday, 9am to 5pm.',
     review: REVIEWS.joshua,
     image: I('still-front-desk-handshake.jpg', A, '20% 50%'),
@@ -230,7 +231,7 @@ const threeOn6 = {
     review: REVIEWS.mike,
   },
   journey: {
-    patient: 'michael', treatment: 'Full mouth reconstruction on implants, top and bottom',
+    patient: 'michael', ba: CASES.michael, treatment: 'Full mouth reconstruction on implants, top and bottom',
     title: 'Michael heard five plans. One made <em>sense.</em>',
     lead: 'He had lost many teeth and his bite had collapsed. This is his story, in his words. His was a full mouth reconstruction on implants; the plan for yours is read from your scan.',
     portrait: I('michael-before-after.jpg'),
@@ -311,13 +312,14 @@ const threeOn6 = {
     reviews: LONG_REVIEWS,
   },
   thanks: {
-    title: 'Thank you. Let’s talk about your new <em>smile.</em>',
-    lead: 'Your request is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
+    kicker: '3-on-6 consultation · request received',
+    title: 'Your 3-on-6 consultation request is <em>in.</em>',
+    lead: 'Thank you. Your request for a 3-on-6 consultation with Dr. Barriere is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.',
     note: 'The new-patient line is answered Monday to Friday, 9am to 5pm.',
     review: REVIEWS.annie,
-    image: I('front-desk-receptionist.jpg', A, '40% 40%'),
+    image: I('front-desk-emily.jpg', A, '30% 50%'), /* 2000px; the 800px receptionist read soft (review 2026-10-06) */
     expect: TY_EXPECT,
-    why: TY_WHY([['barriere_dentalpractice_dentalimplant_westla3.jpg', 'Dr. Tony Barriere, DDS'], ['still-doctor-patient-hug.jpg'], ['front-desk-emily.jpg']]),
+    why: TY_WHY([['tonybarrerie_headshot_dentist_westlaimplants1.jpg', 'Dr. Tony Barriere, DDS', '60% 30%'], ['still-doctor-patient-hug.jpg'], ['patient-paying.jpg', 'A patient paying for treatment by card']]),
     questions: { title: 'Before you <em>call.</em>', items: [{ q: 'What is a 3-on-6?', a: 'Three separate bridges carried by six implants, replacing a full arch of teeth with no denture plate.' }, Q.pain, Q.cost, Q.finance] },
     cta: { tag: 'Ready when you are', title: 'Ready to take the next <em>step?</em>', lead: 'Call the new-patient line, or come and see us on Wilshire.', image: '/media/img/still-reception-neon.jpg' },
   },

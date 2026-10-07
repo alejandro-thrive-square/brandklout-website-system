@@ -234,3 +234,18 @@
   .lp-nav .wordmark{font-size:1.05rem}
   .lp-nav .nav-logo img{height:2rem}
 }
+
+/* ---------- readability (review 2026-10-06: "super hard to read") ----------
+   Bodoni Moda at display optical size has hairlines too thin to read below
+   ~2rem, worst on the cream journey beats and the dark option cards. On the
+   ad pages every small serif takes the text cut (opsz 11) one weight up, and
+   the option rows read in full ink at body size instead of muted at small. */
+.is-lp .lp-beat blockquote,.is-lp .lp-review blockquote,.is-lp .lp-quote p,.is-lp .sy-card blockquote{font-weight:600;font-variation-settings:'opsz' 11;letter-spacing:0;line-height:1.32}
+.is-lp .lp-beat blockquote{font-size:1.45rem}
+.is-lp .lp-beat-who{color:var(--paper-ink)}
+.is-lp .lp-creds b,.is-lp .lp-jr-who b{font-weight:600;font-variation-settings:'opsz' 11;letter-spacing:-.005em}
+.is-lp .h3{font-weight:600;font-variation-settings:'opsz' 18;letter-spacing:-.005em}
+.is-lp .cp-col-head .small{font-size:var(--t-body);color:var(--ink)}
+.is-lp .cp-col li{font-size:var(--t-body);line-height:1.5;color:var(--ink)}
+.is-lp .lp-cardx p,.is-lp .lp-reason p{color:var(--ink)}
+.is-lp .lp-cards--light .lp-cardx p{color:var(--paper-ink)}

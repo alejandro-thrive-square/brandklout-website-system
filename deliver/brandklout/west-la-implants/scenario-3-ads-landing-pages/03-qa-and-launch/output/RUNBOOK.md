@@ -2,6 +2,39 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 · Brandklout review round 1 (Gauge, 2026-10-06): fixes live, published seq 29
+
+Review notes: Asana `1219174341490192` (3-on-6) and `1219174341490190` / parent `1218513737115127`
+(All-on-6). Screenshots were pulled with `deliver/scripts/asana-context.mjs --task <gid>`.
+
+**Done, live** (`workflows/21-instatic-upload/apply-lp-review.mjs --apply --publish`, a surgical
+edit of the live draft: two new shell code assets + six ad pages, written against each row's seq;
+backup `21-instatic-upload/.tmp/backup-2026-10-07-pre-lp-review/`):
+
+| Note | Cause | Fix |
+| :-- | :-- | :-- |
+| "Super hard to read" (journey beats, option cards) | Bodoni Moda at opsz 28 below 2rem: hairlines; option rows 14px muted | `.is-lp` small serifs take opsz 11 / 600; option rows body size, full ink (`css/60-lp.css` readability block, shipped as `src/styles/wla-lp-review.css`) |
+| Blurry images | Instatic's `sizes="auto, 100vw"` asks for a variant as wide as the BOX; landscape photos cropped into portrait boxes were upscaled 2–2.6x. The case photos were 300px files | `js/70-sizes.js` (shipped as `src/scripts/wla-sharp-crops.js`) sets `sizes` to the width the cover crop needs; Leslie / Emily / Michael before-after now the WordPress `_large` 600px originals; thank-you 3-on-6 hero 800px → 2000px `front-desk-emily.jpg` |
+| Accessibility widget covers the mobile call bar | Sienna's button sits at bottom 20px | `css/03-runtime.css`: above the bar wherever `.mobile-bar` shows (button 733–775px, bar from 783px at 390) |
+| Social-preview image 404 | `data-seo` is base64, never rewritten `/media/` → `/uploads/` | `build-import-input.mjs` step 1a; the six ad pages patched live; `og:image` now 200 |
+| Thank-you page must confirm an All-on-6 request | generic "Let's talk about your new smile" | kicker, h1 and lead name the campaign (3-on-6 too) |
+| "Consent is not a condition of purchase" | not in the standard | added to the All-on-6 form's marketing box (Codex, verified in the public payload) and to the standard on main (`0aae2c3d`) |
+
+Proof: all 87 pages snapshotted before and after (masked asset ids): the 81 untouched pages differ by
+exactly one line, the new `wla-sharp-crops.js` tag. Live probe (real-pixel check, 1440 + 390@3x): no
+soft image at 1440 on any of the six pages.
+
+**Gotchas**
+- `upload-media.mjs` has no dry run: any argument (even `--help`) uploads whatever is missing. Here
+  it was harmless (six new photos), but never "check its flags" by running it.
+- There is no `GET /admin/api/cms/media/:id` (405). Read an asset's alt from the media list (newest
+  100 only) or from the published HTML.
+- The thank-you pages carry the strict CSP (no Embed block): an inline test script is refused there,
+  so a puppeteer probe that injects code needs `page.setBypassCSP(true)`. The shipped site.js loads
+  from `'self'` and is unaffected.
+- `naturalWidth` lies under `srcset` + `sizes` (density-corrected). Decode `currentSrc` in a fresh
+  `Image()` to measure real pixels.
+
 ## 2026-10-05 · the campaign forms restyled for the dark site (client: "they are white")
 
 **Done**: on the live pages the first styling showed white single-line inputs (cream text on

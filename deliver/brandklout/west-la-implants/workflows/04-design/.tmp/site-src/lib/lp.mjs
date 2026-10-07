@@ -96,6 +96,7 @@ function hero(c) {
 function journey(c) {
   const j = c.journey
   const p = PATIENTS[j.patient]
+  const ba = j.ba || p /* the sharper WordPress _large pair where the template names one */
   return `<section class="lp-journey" id="journey" data-theme="light">
   <div class="wrap lp-jr-top">
     <div class="lp-jr-head">
@@ -105,7 +106,7 @@ function journey(c) {
       <div class="lp-jr-who"><figure class="lp-jr-face">${img(j.portrait)}</figure><div><b>${p.name}</b><span>${j.treatment}</span><a class="textlink" href="https://www.youtube.com/watch?v=${p.film.id}" target="_blank" rel="noopener">Watch ${p.name}’s film <span class="arrow">&rarr;</span></a></div></div>
     </div>
     <figure class="lp-ba" aria-label="${p.name}, before and after">
-      <div class="lp-ba-stage"><img class="lp-ba-before" src="${p.before}" alt="${p.name} before treatment" loading="lazy"><div class="lp-ba-after"><img src="${p.after}" alt="${p.name} after treatment" loading="lazy"></div><div class="lp-ba-handle" aria-hidden="true"></div><span class="lp-ba-label">Before</span><span class="lp-ba-label lp-ba-label--after">After</span></div>
+      <div class="lp-ba-stage"><img class="lp-ba-before" src="${ba.before}" alt="${p.name} before treatment" loading="lazy"><div class="lp-ba-after"><img src="${ba.after}" alt="${p.name} after treatment" loading="lazy"></div><div class="lp-ba-handle" aria-hidden="true"></div><span class="lp-ba-label">Before</span><span class="lp-ba-label lp-ba-label--after">After</span></div>
       <figcaption>Drag to compare. ${p.name} is a patient of this practice; results vary.</figcaption>
     </figure>
   </div>
@@ -209,7 +210,7 @@ function tyHero(c) {
   return `<section class="lp-ty" id="top">
   <div class="wrap--wide lp-ty-in">
     <div class="lp-ty-copy">
-      <div class="chapter-tag" data-anim="hide"><i></i><span>Request received</span></div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span>${t.kicker || 'Request received'}</span></div>
       <h1 class="display lp-title lp-title--cz" data-anim="hide">${t.title}</h1>
       <p class="lead lp-lead" data-anim="hide">${t.lead}</p>
       <div class="lp-actions" data-anim="hide"><a class="btn btn-gold magnetic" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a></div>

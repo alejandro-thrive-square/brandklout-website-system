@@ -217,7 +217,7 @@ const siteJs =
    harmless.
 
    Source files, verbatim and in order — keep them in step with site-src/css/. */
-const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
+const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css', '03-runtime.css']
 const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/site-src/css')
 
 /* --- AND EVERY OTHER :root BLOCK, harvested ------------------------------
