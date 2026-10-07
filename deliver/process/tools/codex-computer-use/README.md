@@ -130,6 +130,10 @@ dashboards and reading pages.
   the report under "Tabs left open". The caller then closes it with a short follow-up run, or tells
   the user. The same rule applies to Claude in Chrome: `tabs_close_mcp` every tab you created
   before you finish.
+  Two leaks seen the same day: a link that opens in a new tab (GoHighLevel's workflow list) makes
+  a tab the run never tracked, so Codex now re-lists the tabs before reporting and closes the new
+  ones; and a tab held by a run that died stays locked to that session, so no later run can close
+  it. Those are closed by hand.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.
