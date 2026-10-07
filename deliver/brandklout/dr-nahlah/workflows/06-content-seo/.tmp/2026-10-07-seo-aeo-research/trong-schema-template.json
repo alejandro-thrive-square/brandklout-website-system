@@ -1,0 +1,367 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.lakenonadentist.com/#website",
+      "url": "https://www.lakenonadentist.com/",
+      "name": "Makris Dental Prosthodontics",
+      "publisher": {
+        "@id": "https://www.lakenonadentist.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.lakenonadentist.com/#webpage",
+      "url": "https://www.lakenonadentist.com/",
+      "name": "Lake Nona Dental Implants & All-on-X | Makris Dental Prosthodontics",
+      "description": "Dr. Elizabeta Cokovska, board-certified prosthodontist in Lake Nona, Orlando. 15,000+ implants placed. Same Day Smile, All-on-X, full mouth reconstruction.",
+      "isPartOf": {
+        "@id": "https://www.lakenonadentist.com/#website"
+      },
+      "about": {
+        "@id": "https://www.lakenonadentist.com/#organization"
+      },
+      "primaryImageOfPage": "https://cdn.prod.website-files.com/68f2bda6ec46cd2e92dbe3c5/697bef26b2bf27b5cfb1a92e_Dr%20Cokovska_Photo_212.webp",
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": [
+        "Dentist",
+        "MedicalBusiness",
+        "LocalBusiness"
+      ],
+      "@id": "https://www.lakenonadentist.com/#organization",
+      "name": "Makris Dental Prosthodontics",
+      "alternateName": [
+        "Lake Nona Dentist",
+        "Makris Dental"
+      ],
+      "description": "Board-certified prosthodontist Dr. Elizabeta Cokovska offers same-day dental implants, All-on-X, full-mouth reconstruction, cosmetic dentistry, and more in Lake Nona, Orlando, FL. 30+ years of experience. 15,000+ implants placed.",
+      "url": "https://www.lakenonadentist.com/",
+      "image": "https://cdn.prod.website-files.com/68f2bda6ec46cd2e92dbe3c5/697bef26b2bf27b5cfb1a92e_Dr%20Cokovska_Photo_212.webp",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://cdn.prod.website-files.com/68f2bda6ec46cd2e92dbe3c5/6951cee2fdb7821bd14b72f1_makris%20dental%20prosthodontics%20logo.gif",
+        "width": 300,
+        "height": 300
+      },
+      "telephone": "+1-407-753-4743",
+      "email": "info@lakenonadentist.com",
+      "founder": {
+        "@id": "https://www.lakenonadentist.com/meet-dr-elizabeta-cokovska#person"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "13250 Narcoossee Rd #103",
+        "addressLocality": "Orlando",
+        "addressRegion": "FL",
+        "postalCode": "32832",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 28.3743251,
+        "longitude": -81.2452614
+      },
+      "hasMap": "https://www.google.com/maps/place/?q=place_id:ChIJwaxbHJGL3YgRyF0CY2y1cPE",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "08:00",
+          "closes": "15:00"
+        }
+      ],
+      "priceRange": "$$",
+      "paymentAccepted": [
+        "Cash",
+        "Credit Card",
+        "Financing"
+      ],
+      "currenciesAccepted": "USD",
+      "medicalSpecialty": "Dentistry",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Lake Nona"
+        },
+        {
+          "@type": "City",
+          "name": "Orlando"
+        },
+        {
+          "@type": "City",
+          "name": "Belle Isle"
+        },
+        {
+          "@type": "City",
+          "name": "Doctor Phillips"
+        },
+        {
+          "@type": "City",
+          "name": "Baldwin Park"
+        },
+        {
+          "@type": "City",
+          "name": "Winter Park"
+        },
+        {
+          "@type": "City",
+          "name": "Oviedo"
+        },
+        {
+          "@type": "City",
+          "name": "St. Cloud"
+        },
+        {
+          "@type": "City",
+          "name": "Kissimmee"
+        },
+        {
+          "@type": "City",
+          "name": "Ocoee"
+        },
+        {
+          "@type": "City",
+          "name": "Casselberry"
+        },
+        {
+          "@type": "City",
+          "name": "Altamonte Springs"
+        },
+        {
+          "@type": "City",
+          "name": "The Villages"
+        },
+        {
+          "@type": "Place",
+          "name": "Medical City Orlando"
+        }
+      ],
+      "knowsAbout": [
+        "Prosthodontics",
+        "Dental Implants",
+        "All-on-4",
+        "All-on-X",
+        "Full Mouth Reconstruction",
+        "Same Day Dental Implants",
+        "Cosmetic Dentistry",
+        "Porcelain Veneers",
+        "Porcelain Crowns",
+        "Dentures",
+        "TMJ Treatment",
+        "Sedation Dentistry",
+        "Teeth Whitening",
+        "Invisalign"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Dental Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Same Day Smile (Full Arch in 24 Hours)",
+              "url": "https://www.lakenonadentist.com/smile-in-a-day",
+              "description": "Walk in with missing teeth and leave the next day with a full arch of permanent, natural-looking teeth in as little as 24 hours."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "All-on-X Dental Implants",
+              "url": "https://www.lakenonadentist.com/all-on-4",
+              "description": "Full arch tooth replacement using 4 to 6 strategically placed implants to support a complete bridge."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "One-Day Dental Implants (Single Tooth)",
+              "url": "https://www.lakenonadentist.com/one-day-dental-implants-single-tooth-in-1-visit",
+              "description": "Replace a single missing tooth with a dental implant and crown placed in a single appointment."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Full Mouth Reconstruction",
+              "url": "https://www.lakenonadentist.com/full-mouth-rehabilitation",
+              "description": "Comprehensive restorative treatment to rebuild oral health, function, and aesthetics for patients with extensive dental damage."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Porcelain Veneers",
+              "url": "https://www.lakenonadentist.com/porcelain-veneers",
+              "description": "Ultra-thin custom porcelain shells bonded to the front of teeth to correct imperfections and create a flawless smile."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "TMJ & Bite Therapy",
+              "url": "https://www.lakenonadentist.com/tmj-tmd",
+              "description": "Diagnosis and treatment of temporomandibular joint disorders, bruxism, and bite alignment issues."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "MedicalProcedure",
+              "name": "Sedation Dentistry",
+              "url": "https://www.lakenonadentist.com/sedation-dentistry",
+              "description": "Oral sedation and nitrous oxide options to help anxious patients receive comfortable, stress-free dental care."
+            }
+          }
+        ]
+      },
+      "employee": {
+        "@type": "Person",
+        "@id": "https://www.lakenonadentist.com/meet-dr-elizabeta-cokovska#person",
+        "name": "Dr. Elizabeta Cokovska",
+        "honorificPrefix": "Dr.",
+        "honorificSuffix": "DMD, MSC",
+        "jobTitle": "Board-Certified Prosthodontist",
+        "description": "Board-certified specialist prosthodontist with 30+ years of clinical experience. Founder of Makris Dental Prosthodontics. Recipient of the Nation's Top 10% Lifetime Achievement Award in Prosthodontics (2021-2025) and recognized as Orlando's Dentist of the Year. Trained across two continents with two Master's degrees and post-doctoral education at Boston University.",
+        "image": "https://cdn.prod.website-files.com/68f2bda6ec46cd2e92dbe3c5/6902b0af4c7353d5c9972680_dr-1-vert%20(1).webp",
+        "url": "https://www.lakenonadentist.com/meet-dr-elizabeta-cokovska",
+        "worksFor": {
+          "@id": "https://www.lakenonadentist.com/#organization"
+        },
+        "knowsAbout": [
+          "Prosthodontics",
+          "Dental Implants",
+          "Cosmetic Dentistry",
+          "Full Mouth Reconstruction",
+          "TMJ Disorders",
+          "Oral Rehabilitation"
+        ],
+        "award": [
+          "Nation's Top 10% Lifetime Achievement Award in Prosthodontics (2021-2025)",
+          "Orlando's Dentist of the Year"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Boston University"
+        },
+        "memberOf": [
+          {
+            "@type": "Organization",
+            "name": "American College of Prosthodontists",
+            "url": "https://www.prosthodontics.org/"
+          },
+          {
+            "@type": "Organization",
+            "name": "American Academy of Cosmetic Dentistry",
+            "url": "https://aacd.com/"
+          },
+          {
+            "@type": "Organization",
+            "name": "American Dental Association",
+            "url": "https://www.ada.org/"
+          },
+          {
+            "@type": "Organization",
+            "name": "Florida Dental Association",
+            "url": "https://www.floridadental.org/"
+          }
+        ],
+        "sameAs": [
+          "https://www.healthgrades.com/physician/dr-elizabeta-cokovska-xymts4k"
+        ]
+      },
+      "sameAs": [
+        "https://www.instagram.com/makrisdentalprosthodontics/",
+        "https://www.facebook.com/p/Makris-Dental-Prosthodontics-61579597835777/",
+        "https://www.google.com/maps/place/?q=place_id:ChIJwaxbHJGL3YgRyF0CY2y1cPE"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.lakenonadentist.com/#faq",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://www.lakenonadentist.com/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a prosthodontist and how is it different from a regular dentist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A prosthodontist is a dental specialist with an additional 3 years of post-doctoral training beyond dental school, focused on restoring and replacing teeth. At Makris Dental Prosthodontics in Lake Nona, Dr. Elizabeta Cokovska is a board-certified prosthodontist specializing in dental implants, full-mouth reconstruction, cosmetic dentistry, and complex restorative cases that general dentists typically refer out."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a dental implant in one day in Orlando?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Makris Dental Prosthodontics in Lake Nona, Orlando offers one-day dental implants for single tooth replacement and Same Day Smile treatment for full arch restoration in as little as 24 hours. Using 3D guided implant technology, Dr. Cokovska can often extract a failing tooth and place the implant in the same appointment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is All-on-X or All-on-4 dental implants?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All-on-X (also called All-on-4) is a full arch dental implant procedure where 4 to 6 implants are placed in the jaw to support a complete fixed bridge of teeth. It is a permanent, stable alternative to traditional dentures. Makris Dental Prosthodontics in Orlando offers All-on-X with same-day teeth in select cases."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Makris Dental offer sedation dentistry for anxious patients?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Makris Dental Prosthodontics offers oral sedation and nitrous oxide (laughing gas) for patients with dental anxiety. Our team in Lake Nona, Orlando is experienced in making dental visits comfortable and stress-free, even for complex procedures like implants or full mouth reconstruction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do dental implants cost in Lake Nona, Orlando?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cost of dental implants at Makris Dental Prosthodontics varies depending on the number of implants, the type of restoration, and your individual treatment plan. We offer financing options to make treatment accessible. Contact our Lake Nona office at (407) 753-4743 or request a consultation online to receive a personalized quote."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes Dr. Elizabeta Cokovska a top prosthodontist in Orlando?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dr. Cokovska is a board-certified specialist prosthodontist with 30+ years of experience, 15,000+ implants placed, and 23,000+ smiles restored. She is a five-time recipient of the Nation's Top 10% Lifetime Achievement Award in Prosthodontics and recognized as Orlando's Dentist of the Year. She trained at Boston University and holds two Master's degrees in Prosthodontics."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Makris Dental Prosthodontics located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Makris Dental Prosthodontics is located at 13250 Narcoossee Rd #103, Orlando, FL 32832, in the heart of Lake Nona Medical City. We serve patients from Lake Nona, Orlando, St. Cloud, Kissimmee, and surrounding communities. You can reach us at (407) 753-4743."
+          }
+        }
+      ]
+    }
+  ]
+}

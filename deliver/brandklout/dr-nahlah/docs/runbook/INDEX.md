@@ -1,11 +1,12 @@
 # Runbook index
 
-110 runs, newest first. Each line is one file in this folder.
+111 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-07 | 2026-10-07 — **SEO & AEO plan doc** from Trong's review (Claude Docs, nothing changed on the site): live audit of 81 URLs, Trong's schema (lakenonadentist.com) diffed against ours, 16 location-set Google searches + Autocomplete + 20 competitor crawls — #1 for "prosthodontist" in both cities, absent for every treatment search; office pages + per-office money pages recommended over a second site — carries **gotchas** ("Chang" = Trong, Teams `%22` breaks JSON, Codex can't read Teams web, Ahrefs 0-unit trial) | [`2026-10-07-seo-aeo-plan-doc.md`](./2026-10-07-seo-aeo-plan-doc.md) |
 | 2026-10-06 | 2026-10-06e — **Referral survey SMS consent fixed** (GHL `KXFNR4JPqxonXEFTtme0`, both hosts embed it): the `[BUSINESS NAME]` / `[USE_CASE…]` template text replaced with the contact form's wording, which names the legal name; consent made **optional** (was required; A2P). Verified keyless; no submission. **Addendum:** the hero lead names both offices ("Tysons Corner and Alexandria", Brandklout review), published on prod + staging. Carries **gotchas** (the form gate can't read surveys; `preview` keeps the template text) | [`2026-10-06e-referral-survey-sms-consent.md`](./2026-10-06e-referral-survey-sms-consent.md) |
 | 2026-10-06 | 2026-10-06d — **SEO/AEO: the rest of the audit**, prod + staging: one H1 on all 43 posts, 43 post descriptions written from the articles (claims checked against the text), per-office Facebook/GBP/Yelp sameAs + Alexandria map, /llms.txt (Worker + route via Codex), sitemap lastmod, 80 trailing-slash 301s; every gate clean on both hosts — carries **gotchas** (class names on two hosts, the 0-URL gate) + open client items (H1s, copy depth) | [`2026-10-06d-seo-aeo-remaining-improvements.md`](./2026-10-06d-seo-aeo-remaining-improvements.md) |
 | 2026-10-06 | 2026-10-06c — **Footer "Find Us Online": per-office Facebook / Google / Yelp** as the practice supplied them (Asana 1219087019480243), replacing the two guessed links; Instagram, RealSelf, Vitals, Healthgrades kept. **Published on production and staging**, 40 rows each; 100/100 URLs verified, head parity 0, SEO v2/v3 and pool-scope gates clean. Carries **gotchas** (footer column is ~190px at 720–760: flex + wrap, never a max-content grid; importing a push script runs it) | [`2026-10-06c-footer-office-review-links.md`](./2026-10-06c-footer-office-review-links.md) |
