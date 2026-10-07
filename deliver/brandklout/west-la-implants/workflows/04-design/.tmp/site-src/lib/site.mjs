@@ -42,12 +42,12 @@ export const FILMS = {
   leslie: { id: 'nH1ST1jo8WQ', vimeo: '1233866645', title: 'Full Arch All-On-4 Gave Me My Confidence Back!' },
   emily: { id: '4skcfz94ZS4', vimeo: '1233866646', title: 'I Felt Like The Old Me Because Of My Crowns & Dental Implants' },
   michael: { id: 'SDVe8k_zQUE', vimeo: '1233866644', title: 'I Have Teeth Again Thanks To My Full Mouth Reconstruction!' },
-  welcome: { id: 'KyCD8IhBba4', title: "West LA Implants: Transforming People's Lives" },
-  experience: { id: 'LElCA_akdM8', title: 'Why Does Dental Implant Treatment Experience Matter?' },
-  guided: { id: 'S3Y6cgN4jUg', title: 'Eliminate The Risk Of Human Error With 3D Guided Dental Implant Surgery' },
-  technology: { id: 'toBPnmeEEq4', title: 'State-Of-The-Art Dental Technologies For Precise Results' },
-  cosmetic: { id: 'Z2EydN7-rMU', title: 'Top 3 Transformative Cosmetic Dental Procedures' },
-  wisdom: { id: 'VHwvRlKIdIg', title: 'What Are The Consequences Of Not Getting Wisdom Teeth Removed?' },
+  welcome: { id: 'KyCD8IhBba4', vimeo: '1233869447', title: "West LA Implants: Transforming People's Lives" },
+  experience: { id: 'LElCA_akdM8', vimeo: '1233869449', title: 'Why Does Dental Implant Treatment Experience Matter?' },
+  guided: { id: 'S3Y6cgN4jUg', vimeo: '1233869448', title: 'Eliminate The Risk Of Human Error With 3D Guided Dental Implant Surgery' },
+  technology: { id: 'toBPnmeEEq4', vimeo: '1233869451', title: 'State-Of-The-Art Dental Technologies For Precise Results' },
+  cosmetic: { id: 'Z2EydN7-rMU', vimeo: '1233869511', title: 'Top 3 Transformative Cosmetic Dental Procedures' },
+  wisdom: { id: 'VHwvRlKIdIg', vimeo: '1233869516', title: 'What Are The Consequences Of Not Getting Wisdom Teeth Removed?' },
   invisalign: { id: 'DKuc8WTQ3yM', title: 'Straight Talk About Crooked Teeth' },
 }
 export const yt = (id) => `https://www.youtube.com/watch?v=${id}`

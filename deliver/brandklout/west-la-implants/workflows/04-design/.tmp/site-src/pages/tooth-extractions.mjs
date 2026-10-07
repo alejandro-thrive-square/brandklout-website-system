@@ -1,4 +1,4 @@
-import { FILMS } from '../lib/site.mjs'
+import { FILMS, filmHref } from '../lib/site.mjs'
 
 export default {
   slug: 'tooth-extractions',
@@ -11,7 +11,7 @@ export default {
       title: 'Removal can be <em>restorative.</em>',
       lead: 'The goal is always to save the tooth. When infection, trauma or an impacted wisdom tooth make that impossible, a gentle extraction ends the pain and protects everything around it.',
       image: { src: '/media/img/wisdom-tooth-extraction.jpg', pos: '90% 50%', alt: 'Dr. Barriere reviewing X-rays before an extraction' },
-      actions: [{ href: '#invitation', label: 'Request an Appointment' }, { href: `https://www.youtube.com/watch?v=${FILMS.wisdom.id}`, label: 'Watch: why wisdom teeth come out', kind: 'text', ext: true }],
+      actions: [{ href: '#invitation', label: 'Request an Appointment' }, { href: filmHref(FILMS.wisdom), label: 'Watch: why wisdom teeth come out', kind: 'text', ext: true }],
       meta: [
         { b: 'Same day', span: 'Emergency visits' },
         { b: 'Sedation', span: 'Nitrous, oral or IV' },

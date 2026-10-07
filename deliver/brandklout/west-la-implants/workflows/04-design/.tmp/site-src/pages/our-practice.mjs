@@ -1,4 +1,4 @@
-import { FILMS } from '../lib/site.mjs'
+import { FILMS, filmHref } from '../lib/site.mjs'
 
 export default {
   slug: 'our-practice',
@@ -11,7 +11,7 @@ export default {
       title: 'Advanced dentistry, without forgetting the <em>person</em> in the chair.',
       lead: 'An implant and cosmetic dentistry centre on Wilshire, built so a nervous patient feels calm from the front door to the last appointment.',
       video: { src: '/media/video/hero-practice-1920.mp4', srcMobile: '/media/video/hero-practice-960.mp4', poster: '/media/img/still-reception-neon.jpg', label: 'Inside West LA Implants: the reception, the 3D imaging suite and the Yomi surgical robot' },
-      actions: [{ href: '#invitation', label: 'Book a Visit' }, { href: `https://www.youtube.com/watch?v=${FILMS.welcome.id}`, label: 'Watch: welcome to West LA Implants', kind: 'text', ext: true }],
+      actions: [{ href: '#invitation', label: 'Book a Visit' }, { href: filmHref(FILMS.welcome), label: 'Watch: welcome to West LA Implants', kind: 'text', ext: true }],
       meta: [
         { b: 'Wilshire', span: 'Suite 205, free of clutter' },
         { b: 'One roof', span: 'Scan, surgery, lab, teeth' },

@@ -1,4 +1,4 @@
-import { FILMS } from '../lib/site.mjs'
+import { FILMS, filmHref } from '../lib/site.mjs'
 
 export default {
   slug: 'technology',
@@ -11,7 +11,7 @@ export default {
       title: 'The first robot built for implant surgery is in <em>this</em> room.',
       lead: 'Yomi® reads your 3D scan and guides the drill to the position, angle and depth in the plan. Dr. Barriere holds the handpiece. The robot keeps it honest.',
       video: { src: '/media/video/dr-barriere-yomi-1920.mp4', poster: '/media/img/still-yomi-robot-team.jpg', label: 'Dr. Barriere and his assistant operating the Yomi surgical robot' },
-      actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: `https://www.youtube.com/watch?v=${FILMS.guided.id}`, label: 'Watch: 3D guided surgery', kind: 'text', ext: true }],
+      actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: filmHref(FILMS.guided), label: 'Watch: 3D guided surgery', kind: 'text', ext: true }],
       meta: [
         { b: 'Yomi®', span: 'Robotic guidance' },
         { b: 'CBCT', span: '3D cone-beam imaging' },
@@ -66,7 +66,7 @@ export default {
         { b: 'Shorter surgery', span: 'Less time in the chair, faster recovery' },
         { b: 'Surgeon in control', span: 'The robot assists, it does not operate' },
       ],
-      actions: [{ href: `https://www.youtube.com/watch?v=${FILMS.technology.id}`, label: 'Watch: state-of-the-art technology', kind: 'text', ext: true }],
+      actions: [{ href: filmHref(FILMS.technology), label: 'Watch: state-of-the-art technology', kind: 'text', ext: true }],
       photos: [
         { src: '/media/img/yomi-robot-surgical.jpg', alt: 'The Yomi surgical robot in the operatory' },
         { src: '/media/img/still-yomi-closeup.jpg', pos: '30% 50%', alt: 'The Yomi guidance arm, close up' },

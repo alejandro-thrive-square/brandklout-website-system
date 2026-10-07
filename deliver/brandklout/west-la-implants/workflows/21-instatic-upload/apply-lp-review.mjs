@@ -58,8 +58,10 @@ const ASSETS = [
 // are pointed at Vimeo so a visitor without the player (or a crawler) lands there too.
 const FILMS_JS = fs.readFileSync(path.join(SRC, 'js/75-films.js'), 'utf8')
 const VIMEO = Object.fromEntries([...FILMS_JS.matchAll(/'([\w-]{11})':\s*\{\s*v:\s*'(\d+)',\s*h:\s*'([0-9a-f]*)'/g)].map((m) => [m[1], { v: m[2], h: m[3] }]))
-if (Object.keys(VIMEO).length === 3) ASSETS.push({ type: 'script', path: 'src/scripts/wla-films.js', content: FILMS_JS })
-else console.log(`films   js/75-films.js has ${Object.keys(VIMEO).length}/3 Vimeo ids: the player is not shipped this run`)
+// ship only when every entry carries a real id (a placeholder never matches the \d+ above)
+const entries = (FILMS_JS.match(/'[\w-]{11}':\s*\{\s*v:/g) ?? []).length
+if (entries && Object.keys(VIMEO).length === entries) ASSETS.push({ type: 'script', path: 'src/scripts/wla-films.js', content: FILMS_JS })
+else console.log(`films   js/75-films.js has ${Object.keys(VIMEO).length}/${entries} Vimeo ids: the player is not shipped this run`)
 const vimeoPage = (f) => `https://vimeo.com/${f.v}${f.h ? '/' + f.h : ''}`
 const LARGE = ['case10_before_westlaimplants_leslie_barriere', 'case10_after_westlaimplants_leslie_barriere', 'case11_before_westlaimplants_emily_barriere', 'case11_after_westlaimplants_emily_barriere', 'case12_before_westlaimplants_michael_barriere', 'case12_after_westlaimplants_michael_barriere']
 const SWAP_LARGE = Object.fromEntries(LARGE.map((n) => [`${n}.jpg`, `${n}_large.jpg`]))

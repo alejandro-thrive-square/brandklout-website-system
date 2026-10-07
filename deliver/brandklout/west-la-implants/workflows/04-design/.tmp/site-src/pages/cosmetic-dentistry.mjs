@@ -1,4 +1,4 @@
-import { FILMS } from '../lib/site.mjs'
+import { FILMS, filmHref } from '../lib/site.mjs'
 
 export default {
   slug: 'cosmetic-dentistry',
@@ -11,7 +11,7 @@ export default {
       title: 'The smile you stopped <em>hiding.</em>',
       lead: 'Veneers, whitening, Invisalign®, crowns and complete makeovers, designed to your face and shown to you on screen before anything begins.',
       image: { src: '/media/img/veneer-patient.jpg', pos: '60% 40%', alt: 'A cosmetic dentistry patient smiling' },
-      actions: [{ href: '#invitation', label: 'Request a Smile Evaluation' }, { href: `https://www.youtube.com/watch?v=${FILMS.cosmetic.id}`, label: 'Watch: three transformative procedures', kind: 'text', ext: true }],
+      actions: [{ href: '#invitation', label: 'Request a Smile Evaluation' }, { href: filmHref(FILMS.cosmetic), label: 'Watch: three transformative procedures', kind: 'text', ext: true }],
       meta: [
         { b: 'Two visits', span: 'For veneers or Lumineers®' },
         { b: 'One hour', span: 'Zoom whitening' },

@@ -256,7 +256,7 @@ export function stories(b) {
 /* ---------- videos: the film library ---------- */
 export function videos(b) {
   const items = b.items
-    .map((f) => `<a class="vd-card" href="https://www.youtube.com/watch?v=${f.id}" target="_blank" rel="noopener"><figure class="frame frame--wide"><img src="/media/img/yt-${f.id}.jpg" alt="" loading="lazy"><span class="sy-play" aria-hidden="true"></span></figure><span class="vd-title">${f.title}</span></a>`)
+    .map((f) => `<a class="vd-card" href="${filmHref(f)}" target="_blank" rel="noopener"><figure class="frame frame--wide"><img src="/media/img/yt-${f.id}.jpg" alt="" loading="lazy"><span class="sy-play" aria-hidden="true"></span></figure><span class="vd-title">${f.title}</span></a>`)
     .join('\n')
   return `<section class="b-videos" id="${b.id || 'films'}">
   <div class="wrap vd-head">${tag(b.tag || 'The Library')}<h2 class="h2">${b.title}</h2>${b.lead ? `<p class="lead">${b.lead}</p>` : ''}</div>

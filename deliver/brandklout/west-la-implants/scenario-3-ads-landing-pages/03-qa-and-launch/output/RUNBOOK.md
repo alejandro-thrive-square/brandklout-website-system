@@ -2,6 +2,38 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 (night) · every practice film on Vimeo, site-wide; published seq 32
+
+**Done**
+- Six more films were uploaded into the West LA Implants Vimeo folder through Codex. Titles,
+  descriptions with the westlaimplants.com link, and privacy were set by API:
+  - welcome `1233869447`
+  - experience `1233869449`
+  - guided `1233869448`
+  - technology `1233869451`
+  - cosmetic `1233869511`
+  - wisdom `1233869516`
+- The folder now holds nine films.
+- **Not re-hosted:** `DKuc8WTQ3yM` "Straight Talk About Crooked Teeth" belongs to **Invisalign's**
+  channel, not the practice's. It keeps its YouTube link on /results.
+- `workflows/21-instatic-upload/apply-films-vimeo.mjs --apply --publish` made three changes:
+  - 38 film links on 20 pages now point at Vimeo, written per node against each row's seq;
+  - `wla-films.js` refreshed with the nine-film map;
+  - embed-origins `frameOrigins += https://player.vimeo.com`, so the lightbox also works on pages
+    without an Embed block.
+- `insta-api` restored the `seoTitle`/`seoDescription` cells the save dropped on 19 pages. Compared
+  with the backup, all 20 pages' non-body cells are identical.
+- Source: `FILMS.*.vimeo` for all nine, `filmHref()` in `videos()` and the page actions, and the
+  three hard-coded homepage links in `index.html`. The build now carries one YouTube watch link
+  (Invisalign).
+- Proof: all 87 pages diffed before/after. The only changes are film links and the CSP
+  `frame-src`. The live lightbox opens on /our-practice (strict CSP) and /results with no CSP
+  refusal; Esc closes it.
+
+**Decided (user, 2026-10-07):** the GHL form redirects and conversion URLs stay on the Railway
+host for now. Once the site is published to production and approved, change each campaign form's
+redirect (and `combo.json` `productionOrigin`).
+
 ## 2026-10-07 (evening) · the patient films on Vimeo, played on the page; published seq 31
 
 **Done**

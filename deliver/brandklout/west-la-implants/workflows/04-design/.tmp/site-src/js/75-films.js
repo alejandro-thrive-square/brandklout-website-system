@@ -17,7 +17,15 @@
   var FILMS = {
     'nH1ST1jo8WQ': { v: '1233866645', h: '' },
     '4skcfz94ZS4': { v: '1233866646', h: '' },
-    'SDVe8k_zQUE': { v: '1233866644', h: '' }
+    'SDVe8k_zQUE': { v: '1233866644', h: '' },
+    'KyCD8IhBba4': { v: '1233869447', h: '' },
+    'LElCA_akdM8': { v: '1233869449', h: '' },
+    'S3Y6cgN4jUg': { v: '1233869448', h: '' },
+    'toBPnmeEEq4': { v: '1233869451', h: '' },
+    'Z2EydN7-rMU': { v: '1233869511', h: '' },
+    'VHwvRlKIdIg': { v: '1233869516', h: '' }
+    /* not here: DKuc8WTQ3yM 'Straight Talk About Crooked Teeth' is Invisalign's own video (their
+       channel), so it is not re-hosted and keeps its YouTube link */
   };
   var byVimeo = {};
   Object.keys(FILMS).forEach(function(k){ byVimeo[FILMS[k].v] = FILMS[k]; });

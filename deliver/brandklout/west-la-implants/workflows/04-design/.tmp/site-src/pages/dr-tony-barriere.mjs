@@ -1,4 +1,4 @@
-import { FILMS } from '../lib/site.mjs'
+import { FILMS, filmHref } from '../lib/site.mjs'
 
 export default {
   slug: 'dr-tony-barriere',
@@ -12,7 +12,7 @@ export default {
       title: 'Complex dentistry deserves <em>focused</em> experience.',
       lead: 'Dr. Barriere plans, places and restores every implant himself. He trained as a surgeon, keeps training, and built the practice around the tools that make the work predictable.',
       image: { src: '/media/img/tonybarrerie_headshot_dentist_westlaimplants_frontfacing.jpg', alt: 'Dr. Tony Barriere, DDS', caption: 'Tony Barriere, DDS' },
-      actions: [{ href: '#invitation', label: 'Meet With Dr. Barriere' }, { href: `https://www.youtube.com/watch?v=${FILMS.experience.id}`, label: 'Watch: why experience matters', kind: 'text', ext: true }],
+      actions: [{ href: '#invitation', label: 'Meet With Dr. Barriere' }, { href: filmHref(FILMS.experience), label: 'Watch: why experience matters', kind: 'text', ext: true }],
       meta: [
         { b: 'Ohio State', span: 'College of Dentistry' },
         { b: 'NYU Langone', span: 'Yearlong surgical residency' },

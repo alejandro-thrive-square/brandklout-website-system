@@ -35,8 +35,10 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   **The patient films are on Vimeo and play on the page (seq 31).** They're in the agency team
   account, folder "West LA Implants" (`30817251`), with descriptions linking westlaimplants.com,
   and open in a lightbox (`src/scripts/wla-films.js`).
-  Open: conversion tags, one test lead per campaign, the organic site's other nine films still on
-  YouTube. Details in the step 03 runbook.
+  **Seq 32: every practice film on the site is on Vimeo and plays on the page**: nine films in the
+  folder; Invisalign's own video stays on YouTube.
+  Open: conversion tags, one test lead per campaign. **Form redirects stay on the Railway host
+  until production is published and approved** (user, 2026-10-07). Details in the step 03 runbook.
 - **2026-10-04: the reviews widget is on the in-section standard** (Elfsight editor only, live at once): no widget title, Google-logo header with the count, gold `#C4A36A` square uppercase button, dark `#161613` cards with cream text. Gate `check-widget.mjs 670ca31c-8602-42c1-a126-f46f653fe07f --render https://west-la-implants-production.up.railway.app/` ok.
 - **The site contact form** `BAZZebJdjQAdGkda1fEE` (live on the WordPress `/contact`) is on the
   GHL standard since 2026-10-05: Service dropdown (12), two consent boxes naming Tony Barriere
@@ -75,7 +77,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-05 | 3 · 03 QA and launch | Campaign forms restyled for the dark site (white inputs/frame fixed: GHL input specificity, inline frame, button `<p>`), previewed then pasted by Codex; checked in the live cards at 1440 and 390 | _this commit_ |
 | 2026-10-07 | 3 · 03 QA and launch | Review round 1 live (seq 29) by surgical draft patch: readability CSS, sharp-crop script, `_large` case photos, campaign thank-you copy, Sienna above the call bar, og:image fix; All-on-6 marketing consent sentence via Codex | `9234859f` |
 | 2026-10-07 | 3 · 03 QA and launch | DNI live (seq 30): embed-origins 1.8.0, pool scoped to the ad pages, ads show 481-0111; form email notifications on; 3-on-6 consent sentence | `feec3b96` |
-| 2026-10-07 | 3 · 03 QA and launch | Patient films on the agency Vimeo (folder West LA Implants) and played in a lightbox on the four film pages, published seq 31 | _this commit_ |
+| 2026-10-07 | 3 · 03 QA and launch | Patient films on the agency Vimeo (folder West LA Implants) and played in a lightbox on the four film pages, published seq 31 | `1374252a` |
+| 2026-10-07 | organic + 3 | Six more practice films to Vimeo; 38 film links on 20 pages to Vimeo, lightbox site-wide (frameOrigins), published seq 32 | _this commit_ |
 
 ## Version Control
 
