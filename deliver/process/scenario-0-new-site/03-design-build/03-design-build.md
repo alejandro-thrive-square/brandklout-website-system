@@ -58,6 +58,11 @@ is `scripts/journey-audit.mjs`.
    `IN BOUNDS` before the canary is shown. Fixing names after launch costs a fleet migration.
 5. **Facts sheet.** Keep phones, hours, addresses, doctors and credentials in `docs/facts.md` and build
    every page, footer and schema from it.
+   **Headings and SEO fields come from the keyword map** (step 02): one H1 per page carrying the page's
+   primary keyword, with the city when the search is local. Where the design wants a brand headline,
+   the keyword H1 sits above it in the tagline style (`text-style-tagline`) and the headline is a
+   paragraph. Titles, descriptions and alt text follow rules 2–5 of the
+   [SEO & AEO standard](../../tools/seo-aeo/README.md#the-standard).
 
 ### Core pages
 

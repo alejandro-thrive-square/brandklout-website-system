@@ -15,6 +15,7 @@ the same scenarios; when the board and these files disagree, fix both.
 | 4 | Update Plugins Across Sites | [process/scenario-4-update-plugins](./process/scenario-4-update-plugins/README.md) | every Instatic site, staging then production |
 | 5 | Instatic Release Update | [process/scenario-5-instatic-release-update](./process/scenario-5-instatic-release-update/README.md) | every Railway instance, staging then production, no data loss |
 | 6 | Webflow Sites | [process/scenario-6-webflow-sites](./process/scenario-6-webflow-sites/README.md) | Webflow (seven live clients), native builds over the MCP |
+| 7 | SEO & AEO | [process/scenario-7-seo-aeo](./process/scenario-7-seo-aeo/README.md) | any live site; edits through Scenario 2 or 6; monthly measure |
 
 The numbers follow the board. Full index:
 [process/PROCESS_INDEX.md](./process/PROCESS_INDEX.md).

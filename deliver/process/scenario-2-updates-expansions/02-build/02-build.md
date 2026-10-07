@@ -72,6 +72,10 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
 - If the client wants call tracking gated behind consent, then ask first. The standing instruction
   is un-gated.
 - If the site is on Webflow, then use `scenario-6-webflow-sites`.
+- If the site has a keyword map ([Scenario 7](../../scenario-7-seo-aeo/README.md)) and the change
+  touches a heading, title, description, image or page, then re-run
+  `tools/seo-aeo/keyword-gate.mjs` against it: a reworded H1 or title can drop the page's keyword.
+  A new page gets its own row in the map first.
 
 ## Do / Don't
 - Do keep house copy rules:

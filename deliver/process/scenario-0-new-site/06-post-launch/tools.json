@@ -2,6 +2,7 @@
   "step": "scenario-0-new-site/06-post-launch",
   "toolkits": [
     "cloudflare-launch",
-    "instatic-site"
+    "instatic-site",
+    "seo-aeo"
   ]
 }

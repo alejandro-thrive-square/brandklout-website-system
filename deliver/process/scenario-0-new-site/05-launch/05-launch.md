@@ -15,6 +15,7 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 
 - [ ] Favicon
 - [ ] AEO schema, SEO meta, Open Graph on every page
+- [ ] Home and office pages carry a visible local FAQ; keyword gate CLEAN
 - [ ] 404 page
 - [ ] Reviews, GHL forms, number pool (DNI), analytics, Termly, accessibility widget
 - [ ] Images optimized
@@ -37,6 +38,11 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    visible sections, not its meta description, and repeat the visible breadcrumb
    ([aeo-schema README](../../tools/instatic-plugins/aeo-schema/README.md), "Blocks built from
    the page's content"). Serve `/llms.txt` and 301 each page's trailing-slash twin.
+   The home page and each office page carry a visible local FAQ (what the specialty is, cost in the
+   city, where the office is), each answer naming the office, city and phone, mirrored by a FAQPage;
+   `areaServed` lists the keyword map's towns. Then
+   `tools/seo-aeo/keyword-gate.mjs <origin> --map ../02-research-sitemap/output/keyword-map.csv`: CLEAN
+   ([SEO & AEO standard](../../tools/seo-aeo/README.md#the-standard), rules 1–6).
 3. **404.** An Instatic `notFound` template target; reapply the flag after any page import.
 4. **Embeds and scripts.** Reviews: the client's Google Reviews widget from the Elfsight registry
    (`tools/elfsight-reviews/review-widgets.json`), set to the

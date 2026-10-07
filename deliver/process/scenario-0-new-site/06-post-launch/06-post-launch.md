@@ -35,6 +35,10 @@ finish the team review.
    comment is fixed at the source and checked on every page, not only the pinned one.
 6. **Live sweep** after the first week: `seo-head-check`, `facts-sweep`. If a later page write
    dropped SEO fields, restore them with `ops/restore-page-seo-cells.mjs`.
+7. **SEO & AEO baseline.** Once Google has indexed the sitemap, save the baseline and the first rank
+   check ([Scenario 7 step 01](../../scenario-7-seo-aeo/01-baseline-research/01-baseline-research.md),
+   steps 1 and 3), then run [Scenario 7](../../scenario-7-seo-aeo/README.md): its monthly measure is
+   how the client sees the site working.
 
 ## Conditionals
 

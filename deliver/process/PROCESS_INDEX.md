@@ -83,14 +83,27 @@ Scripts: [tools/instatic-release](./tools/instatic-release/README.md).
 Scripts: [tools/webflow-build](./tools/webflow-build/webflow-build.md); `03-qa-and-publish/scripts/staging-verify.mjs`.
 The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, added 2026-10-02 from the scenario README). All seven lanes were brought in line with the directives on 2026-10-04.
 
+### 7 · SEO & AEO (live sites) — [scenario-7-seo-aeo](./scenario-7-seo-aeo/README.md)
+
+| Step | Directive |
+| --- | --- |
+| 01 | [Baseline & Research](./scenario-7-seo-aeo/01-baseline-research/01-baseline-research.md) (gate: the team agrees the keyword map) |
+| 02 | [On-Page Pass](./scenario-7-seo-aeo/02-on-page/02-on-page.md) (keyword H1, title, description, alt, home-page local FAQ) |
+| 03 | [Office Pages](./scenario-7-seo-aeo/03-office-pages/03-office-pages.md) (a page per office, each office's money pages, ≤25% shared) |
+| 04 | [Content Depth & Gaps](./scenario-7-seo-aeo/04-content-depth/04-content-depth.md) (gap pages, depth, the practice's sign-off) |
+| 05 | [Measure](./scenario-7-seo-aeo/05-measure/05-measure.md) (monthly) |
+
+Scripts: [tools/seo-aeo](./tools/seo-aeo/README.md). Edits go through Scenario 2 (Instatic) or 6 (Webflow).
+Added 2026-10-07 from the Dr. Nahlah analysis and Trong Huynh's review; the FigJam board has no Scenario 7 lane yet.
+
 ## Tools
 
 "Used by" is derived from the steps' `tools.json` files: scenario (steps).
 
 | Toolkit | What it is for | Used by |
 | --- | --- | --- |
-| [instatic-site](./tools/instatic-site/README.md) | Provision, staging clone, push pipeline, ops, gates, images | 0 (01, 03–06), 2 (01–03), 4 (02, 03), 5 (02–04) |
-| [instatic-plugins](./tools/instatic-plugins/README.md) | Every `brandklout.*` plugin source, the registry, install, status, rollout and verify across sites | 0 (01, 05), 2 (02), 4 (01–03), 5 (01, 03) |
+| [instatic-site](./tools/instatic-site/README.md) | Provision, staging clone, push pipeline, ops, gates, images | 0 (01, 03–06), 2 (01–03), 4 (02, 03), 5 (02–04), 7 (02, 03) |
+| [instatic-plugins](./tools/instatic-plugins/README.md) | Every `brandklout.*` plugin source, the registry, install, status, rollout and verify across sites | 0 (01, 05), 2 (02), 4 (01–03), 5 (01, 03), 7 (02) |
 | [instatic-embeds](./tools/instatic-embeds/instatic-embeds.md) | Embed blocks, site scripts, CSP origins (the plugin itself is in instatic-plugins) | 0 (03, 05), 2 (02), 3 (02), 4 (01, 03) |
 | [instatic-release](./tools/instatic-release/README.md) | Inventory, backup, pinned image update, data verify, rollback across Railway instances | 5 (01–05) |
 | [instatic-domain-origins](./tools/instatic-domain-origins/instatic-domain-origins.md) | `PUBLIC_ORIGIN` and `check-origins` after any domain change | 0 (01, 05), 2 (02), 4 (02), 5 (03, 04) |
@@ -101,7 +114,8 @@ The FigJam board *Deliver SOP's* has a Scenario 6 lane (section `374:1330`, adde
 | [webflow-build](./tools/webflow-build/webflow-build.md) | Webflow MCP client, publish guard, tree audit, script registration | 6 (01–03) |
 | [specialty-sitemaps](./tools/specialty-sitemaps/README.md) | Sitemap templates per specialty and their section flows | 0 (02), 3 (02) |
 | [client-first-style-guide](./tools/client-first-style-guide/README.md) | Client-First reference CSS and style guide page; [INSTATIC-FRAMEWORK.md](./tools/client-first-style-guide/INSTATIC-FRAMEWORK.md): every token in the Instatic Framework panel so sites stay hand-editable; [CLASS-STANDARD.md](./tools/client-first-style-guide/CLASS-STANDARD.md): class naming, vocabulary and the fleet migration steps | 0 (03), 2 (02), 6 (02) |
-| [codex-computer-use](./tools/codex-computer-use/README.md) | Codex (ChatGPT desktop app) computer use from Claude Code: one plain instruction, background tab of the user's Chrome, read-only unless `--allow-writes`. **The standard for all computer use** since 2026-10-02 | none yet (ad hoc; vendor dashboards such as GoHighLevel) |
+| [codex-computer-use](./tools/codex-computer-use/README.md) | Codex (ChatGPT desktop app) computer use from Claude Code: one plain instruction, background tab of the user's Chrome, read-only unless `--allow-writes`. **The standard for all computer use** since 2026-10-02 | 0 (02), 7 (01, 05); ad hoc for vendor dashboards such as GoHighLevel |
+| [seo-aeo](./tools/seo-aeo/README.md) | **The SEO & AEO standard** (keyword map, keyword H1, title/description/alt, local FAQ schema, a page per office, depth, monthly measure) and its scripts: `site-audit.mjs`, the `keyword-gate.mjs`, the twin `page-overlap.mjs` gate, `autocomplete.mjs`, `serp-instruction.mjs` (location-set Google rank check through Codex) | 0 (02, 05, 06), 2 (02), 7 (01–05) |
 | [ghl-forms](./tools/ghl-forms/README.md) | **The guide for every GoHighLevel lead form**: the standard (service dropdown, optional SMS consent, real Privacy/Terms links), the Codex instruction template, the `--standard` gate, and `check-embed.mjs` (no `loading="lazy"` on a GHL iframe, every sitemap page) | none yet (ad hoc; any new or fixed GHL form) |
 | [jev-browser-agent](./tools/jev-browser-agent/README.md) | **Superseded by codex-computer-use (2026-10-02); do not use for new work.** Jev (TypeSafe) computer use in vendor dashboards: `jev_deep` perception (iframes at any depth, shadow DOM, div cards, Enter) + steps + `--forbid`, benchmarked 24/24 on offline fixtures in `bench/` | none yet (ad hoc; widget creation before an embed step) |
 | [elfsight-reviews](./tools/elfsight-reviews/README.md) | One Google Reviews widget per client: registry, inventory, create over CDP, render check; **the in-section widget standard** (no widget title, Google-logo header with the review count, button and cards in the site's style) with its Codex brief and `check-widget.mjs` gate | none yet (ad hoc; before an embed step) |
