@@ -343,9 +343,12 @@ async function check() {
     const tracking = new Set()
     // Microsoft Clarity is banned on client sites (2026-10-07): no BAA, and its terms forbid health data.
     const banned = new Set()
+    // GA4 is allowed, hardened (2026-10-07); report what it sends before a choice (gcs=G100 = denied, cookieless).
+    const ga4 = new Set()
     page.on('request', (r) => {
       const m = r.url().match(/number_pool\.js|user_session\.js/); if (m) tracking.add(m[0])
       if (/^https?:\/\/([^/]*\.)?clarity\.ms\//.test(r.url())) banned.add('Microsoft Clarity')
+      if (/\/g\/collect\?/.test(r.url())) { const q = new URL(r.url()).searchParams; ga4.add(`${q.get('tid')} ${q.get('en')} gcs=${q.get('gcs') || '-'}`) }
     })
     await page.goto(url, { waitUntil: 'load', timeout: 60000 })
     await page.waitForTimeout(7000)
@@ -364,7 +367,7 @@ async function check() {
         }),
       }
     })
-    console.log(`${url}\n  ${JSON.stringify({ ...r, trackingBeforeConsent: [...tracking], banned: [...banned] })}`)
+    console.log(`${url}\n  ${JSON.stringify({ ...r, trackingBeforeConsent: [...tracking], ga4BeforeConsent: [...ga4], banned: [...banned] })}`)
     if (banned.size) {
       console.log(`  FAIL banned tracker: ${[...banned].join(', ')}. Remove it from GTM, siteScripts or the Webflow app; consent does not make it allowed.`)
       process.exitCode = 1

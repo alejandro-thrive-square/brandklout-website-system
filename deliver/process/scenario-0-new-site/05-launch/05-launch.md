@@ -60,7 +60,9 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 5. **Consent.** Termly above GTM, auto blocking off, trackers tagged by hand, number pools exempt
    (client decision 2026-09-22). Grant Termly's origins. Check both directions: nothing fires before a
    choice, everything releases after Accept (`tools/termly-ghl-consent/consent-kit.mjs check`).
-   Each site's Termly account and resource-blocker script is listed in
+   GA4 on the [hardened rules](../../tools/termly-ghl-consent/termly-ghl-consent.md#ga4-stays-hardened-2026-10-07):
+   Google signals, granular location/device data and user-provided data collection off in the
+   property; no visitor-typed text in any event. Each site's Termly account and resource-blocker script is listed in
    [`termly-setup.html`](./termly-setup.html); add the new site there.
 6. **Images.** Compress every image; test the result of every step before moving on.
 7. **Promote.** Back up production (`ops/backup-site.mjs`), make sure nobody has pending drafts (a

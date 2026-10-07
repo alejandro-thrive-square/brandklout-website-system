@@ -93,6 +93,23 @@ Webflow Clarity app. `consent-kit.mjs check` prints `FAIL banned tracker` and ex
 Clarity project does not take the tag off a site); a Webflow app copy needs the app uninstalled and a
 site publish.
 
+### GA4 stays, hardened (2026-10-07)
+Google signs no BAA for Analytics either and says regulated customers must keep PHI out of it. The
+difference from Clarity: since *AHA v. Becerra* (N.D. Tex., June 2024; HHS dropped its appeal that
+August), an IP address plus a visit to a public, logged-out page is not PHI under HHS's guidance.
+Pages behind a login are still covered. GA4 records page views and named events; it has no session
+replay. The user decided on 2026-10-07 to keep GA4 on these rules; the practice's privacy officer or
+counsel has the final word on PHI exposure:
+1. Never on a page behind a login. No visitor-typed text in any event, URL or parameter: no form
+   contents, names, emails or phone numbers (GHL forms are iframes, so their data never reaches GA4).
+2. Every property: **Google signals off, granular location and device data off, user-provided data
+   collection off** (Admin > Data collection and modification > Data collection).
+3. GTM goes below Termly. On Instatic, GTM is a consent-tagged site script, so nothing runs before
+   Accept. On Webflow, GTM loads and Google Consent Mode sends **cookieless pings before a choice**
+   (`gcs=G100`, no `_ga` cookie). `consent-kit.mjs check` prints them as `ga4BeforeConsent`. To hold
+   GA4 back completely on Webflow, set "Require additional consent: `analytics_storage`" on the GA4
+   tags (it costs Google Ads modelled conversions).
+
 **A pool that has to reach a second host needs `connectOrigins`.** The pool loads from
 `backend.leadconnectorhq.com` but asks for its number at `services.leadconnectorhq.com`, and the
 session helper reports to `services.msgsndr.com`. On Instatic, a page with **no Embed block** keeps

@@ -53,13 +53,52 @@ to uninstall and republish anyway.
 - Client runbooks: a run file + index row on bk-marvel-dental, bk-arvada, bk-grand-mission,
   bk-mason-park, bk-legacy-dental, bk-oceanic-dental, bk-livewell, bk-ifa-dentistry.
 
+## Follow-up, same day ("resolve what is still open")
+
+- **FigJam *Deliver SOP's***: card `266:854` (Scenario 0 launch) no longer lists Clarity: "GTM and the
+  number pool script go in through the embed-origins plugin; never Clarity (no BAA). Allow
+  services.leadconnectorhq.com or the swap fails silently." Same two-line height; read back from a
+  fresh tab.
+- **Grand Mission's tracking code fixed and published** (user approved the publish, 21:10 UTC):
+  GTM-KXWLKSK2's head script added right below Termly (Marvel's layout), the `<noscript>` now names
+  GTM-KXWLKSK2 instead of Livewell's GTM-KL36RQV2. The publish also shipped an unpublished edit from
+  07:38 UTC that nobody here saw; the home page diff shows only the GTM lines, so it is elsewhere.
+  GA4 `G-VP1WFFBLYF` now sends denied-state pings before consent, like the other Webflow sites.
+- **GA4 decision (user): keep it, hardened.** Rules in `termly-ghl-consent.md` "GA4 stays, hardened";
+  Scenario 0 `05-launch.md` step 5 and Scenario 6 `02-build.md` H.6 point to them;
+  `consent-kit.mjs check` now prints `ga4BeforeConsent`. Measured before any choice: Webflow sites
+  send cookieless GA4 pings (`gcs=G100`, no `_ga` cookie); Dr. Nahlah (Instatic, GTM consent-tagged)
+  sends nothing. **21 of 26 GA4 properties hardened** (Codex, account success@driverank.com):
+  Google signals and granular location/device data now OFF on Arvada Implants, Arvada Center, Azusa,
+  Dentiq Dentistry, Dr. Nahlah (property still named "[DGT] Dental Group of Tysons"; signals were ON),
+  Elite (`G-KFT8YHZ30Q`), Grand Mission, Hackensack, Legacy, Livewell, Makris, Markham, Marvel,
+  Oceanic, Omnia, Organ Mountain, Ortega Cottage, Restore, South Bay, Stone Dental, IFA's old
+  `G-GRZFYCQ8XK` (signals were ON). User-provided data collection is "unavailable" for the health
+  industry category, so nothing to switch. **Not accessible from this Google account:**
+  `G-T74GRNXQ0L` (IFA's live property), `G-GTJMWK1E98` (Elite's other container), `G-TR581MJF97`
+  (IFA old), `G-HHE84XXE6B` and `G-PMNK1S812J` (West LA's old WordPress sites).
+- **Clarity projects NOT deleted.** Codex's browser policy wants a confirmation right before a
+  permanent delete, and the Claude Code permission check blocked the same click in Claude in Chrome.
+  The user deletes them. In this Clarity account: Legacy `wr2l9djfgj`, Livewell `y8ffrssqd2`, Marvel
+  `y804rgzb7s`, Oceanic `ytk9gemvci`, Ortega Cottage `y8fmwn3wq5`, Grand Mission `y8fksihyz0`,
+  Mason Park `yto9x2cvdi` (Settings > Información general > "Eliminar este proyecto"). Not in it:
+  `r28in9vt9l` (Oceanic's Webflow app), `y8fi4guaj6` (Arvada Implants), `y8fluiu9sd` (Omnia),
+  `xarlv0sa1e` (IFA's old container): they belong to another Microsoft account.
+- Found on the way: Marvel's `appointment_request` GA4 event (trigger: click on `#header-book-btn`)
+  fired on page load with no click in a headless run. If it is imported into Google Ads, Marvel's
+  conversions are inflated. Not investigated.
+
 ## Next
 
-- **Delete the Clarity projects** (it deletes the recordings, which the Additional Terms require for
-  any health data already collected). Irreversible; the user's call, not done.
-- Grand Mission's site has only a `<noscript>` GTM tag, and it names Livewell's container
-  (GTM-KL36RQV2); its own container's `<script>` is not installed, so its GA4 does not run.
-- GA4 has the same BAA question as Clarity (Google signs none for Analytics). Not decided.
+- **The user deletes the Clarity projects** listed above (the recordings go with them, which the
+  Additional Terms require), and finds the four in the other Microsoft account.
+- Harden the five GA4 properties this Google account cannot see (IFA's live `G-T74GRNXQ0L` first);
+  someone with access to those accounts.
+- Asana: the template task "Connect to MS Clarity" (project "BK Activation - GP Template") would
+  put Clarity back on every new client; remove it from the template (needs the user's go-ahead).
+- Optional: hold GA4 back completely on the Webflow sites ("Require additional consent:
+  `analytics_storage`" on each GA4 tag). Costs Google Ads modelled conversions; ask first.
+- Check Marvel's `appointment_request` misfire before trusting its conversion numbers.
 
 ## Gotchas
 

@@ -137,6 +137,10 @@ on Arvada v2, Grand Mission, Legacy, Marvel and Stone.
    Never tag a GHL number pool.
 5. Webflow's own Google Analytics integration prints above all custom code, so it cannot be tagged.
    Moving it is a Designer-side task (J).
+6. Never Microsoft Clarity, in GTM or as the Webflow Clarity app. GA4 only on the
+   [hardened rules](../../tools/termly-ghl-consent/termly-ghl-consent.md#ga4-stays-hardened-2026-10-07).
+   The GTM `<noscript>` must name the same container as the head script (Grand Mission's named
+   Livewell's until 2026-10-07).
 
 **I. Component edit.**
 - A component change hits every instance: 75 pages for Livewell's footer.
