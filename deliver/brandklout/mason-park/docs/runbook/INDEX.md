@@ -6,6 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-07 | 2026-10-07 — **Microsoft Clarity removed** (fleet-wide, HIPAA: no BAA) from this site's GTM container — carries **gotchas** | [`2026-10-07-microsoft-clarity-removed.md`](./2026-10-07-microsoft-clarity-removed.md) |
 | 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging**: mason-park.css (1,898 rules) into the registry, 497 renames + 4 merges, Framework owns 33 variables; parity 0 real, runtime A/B checked, EDITABLE, IN BOUNDS, CLEAN. Production untouched (unrelated unpublished prod draft) — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
 | 2026-10-04 | 2026-10-04 — Google reviews: new Elfsight Google Reviews widget e30c1531 on / and /patient-reviews (in-section standard, gate ok); All-in-One 32926aff off the site — carries **gotchas** | [`2026-10-04-google-reviews-widget-standard.md`](./2026-10-04-google-reviews-widget-standard.md) |
 | 2026-10-03 | 2026-10-03 — GHL Contact form `JuzM9SxuJMPDMwfO6cgj` to the lead-form standard via Codex: Service dropdown (required, 11 options), optional two-box SMS consent with the legal name, real Privacy/Terms links; gate ok; ToS still names the old domain — carries **gotchas** | [`2026-10-03-ghl-contact-form-standard.md`](./2026-10-03-ghl-contact-form-standard.md) |
