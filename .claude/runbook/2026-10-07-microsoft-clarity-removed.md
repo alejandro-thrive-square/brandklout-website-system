@@ -51,7 +51,7 @@ to uninstall and republish anyway.
 - Scenario 1 `01-old-site-capture.md` step 10 and `tracking-inventory.mjs`: Clarity is always "drop".
 - `tools/instatic-site/README.md`: site scripts never include Clarity.
 - Client runbooks: a run file + index row on bk-marvel-dental, bk-arvada, bk-grand-mission,
-  bk-mason-park, bk-legacy-dental, bk-oceanic-dental, bk-livewell.
+  bk-mason-park, bk-legacy-dental, bk-oceanic-dental, bk-livewell, bk-ifa-dentistry.
 
 ## Next
 
