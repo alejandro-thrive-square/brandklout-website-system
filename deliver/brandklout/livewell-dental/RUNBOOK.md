@@ -22,6 +22,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
+| 2026-10-07 | old Webflow site (no step) | Microsoft Clarity removed from GTM-KL36RQV2 (v5, by the Mason Park session; verified). [`docs/runbook/2026-10-07-microsoft-clarity-removed.md`](./docs/runbook/2026-10-07-microsoft-clarity-removed.md) | (this commit) |
 | 2026-10-05 | scenario-0 / 01-client-inquiry | Concept pages: all outbound links (old site, tel, maps, socials) removed, deck republished | (this commit) |
 | 2026-10-01 | scenario-0 / 01-client-inquiry | Railway instance + staging, logins, plugins; five-concept deck built and published to staging | `a2eb90c5` |
 | 2026-10-01 | scenario-1 / 01-old-site-capture | 60-page scrape, homepage screenshots, partial summary | `a2eb90c5` |

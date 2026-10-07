@@ -4,6 +4,7 @@ One row per run, newest first. Read only the runs you need.
 
 | Date | Run | Summary |
 | :--- | :--- | :--- |
+| 2026-10-07 | [`2026-10-07-microsoft-clarity-removed.md`](./2026-10-07-microsoft-clarity-removed.md) | 2026-10-07 — **Microsoft Clarity removed** (fleet-wide, HIPAA: no BAA) from this site's GTM container — carries **gotchas** |
 | 2026-09-22 | [`2026-09-22b-cookie-banner-oversized-by-a-global-img-rule.md`](./2026-09-22b-cookie-banner-oversized-by-a-global-img-rule.md) | The site's global `img { width/height: 100% }` rule inflated Termly's logo and made the banner a 511px slab; fixed by preferences control 1.3.0 — carries **gotchas** |
 | 2026-09-22 | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** |
 | 2026-09-17 | [silktide-consent-test](./2026-09-17-silktide-consent-test.md) | Silktide banner and bridge 2.3.0 on Webflow; staging only, `live: false` |
