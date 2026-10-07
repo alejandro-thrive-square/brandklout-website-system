@@ -6,4 +6,5 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-07 | 2026-10-07 — **Microsoft Clarity removed** (fleet-wide, HIPAA: no BAA) from this site's GTM container — carries **gotchas** | [`2026-10-07-microsoft-clarity-removed.md`](./2026-10-07-microsoft-clarity-removed.md) |
 | 2026-09-22 | 2026-09-22 — Termly cookie banner, preferences control and tracker tagging on this site; where TERMLY_API_KEY comes from — carries **gotchas** | [`2026-09-22-termly-cookie-consent.md`](./2026-09-22-termly-cookie-consent.md) |
