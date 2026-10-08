@@ -18,6 +18,8 @@ is `scripts/journey-audit.mjs`.
 - [ ] Client-First framework set up on Instatic: tokens in the Framework panel (`framework.mjs apply`), manual-edit proof done (`INSTATIC-FRAMEWORK.md`)
 - [ ] Every style editable by hand: `editability.mjs --published` ends `EDITABLE` on staging
 - [ ] Every class inside Client-First + Relume ([`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)): `class-audit.mjs --local <site-src> --strict` before the first push, `class-audit.mjs --site <client>:staging --strict` after every publish, both `IN BOUNDS`
+- [ ] CSS shaped Client-First, not only named: `structure-audit.mjs --local <site-src> --strict` before the first push and `--site <client>:staging --strict` after every publish end `CLIENT-FIRST SHAPED` (house spacing scale + type bases in the Framework, at least 80% of rem spacing on tokens, no contextual override of a role/utility class: CLASS-STANDARD §10)
+- [ ] The Instatic editor shows the page: `editor-canvas.mjs --site <client>:staging` ends `ok` (no closed overlay over the page)
 - [ ] Facts sheet (`docs/facts.md`) complete
 - [ ] Images sourced client-first, every photo matching its text, none overused (`IMAGES.md`, ledger in `output/images.csv`)
 - [ ] Core pages built and tested

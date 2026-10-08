@@ -160,5 +160,7 @@ if (cmd === 'snapshot') {
   // The editor is a different renderer (React drops hidden="", no site scripts): a site can pass
   // every published-page gate and still show a closed modal over every page in the editor (IFA, 2026-10-07).
   ok = run('final-editor-canvas', ['editor-canvas.mjs', '--site', site]) && ok
+  // Report only for migrated sites (the spacing snap is phase 2 C); new builds run it --strict.
+  run('final-structure', ['structure-audit.mjs', '--site', site])
 }
 process.exit(ok ? 0 : 1)

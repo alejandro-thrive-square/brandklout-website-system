@@ -233,6 +233,36 @@ arguments, `*Class:` option keys (SplitText `linesClass`), the calls above, and 
 (`/class="x"/`, `\.x`). It cannot see a class name a script **computes** (`'is-m' + n`, `` `x-${i}` ``):
 `class-sync-check.mjs` and the runtime gate find those.
 
+## 10. Structure: tokens and combo classes (phase 2, 2026-10-08)
+
+Names alone do not make a site edit like Client-First. Two more things do, and `structure-audit.mjs`
+checks them (`--strict` for new builds; a report in `migration-gates final` for migrated sites):
+
+- **Spacing and type come from the Framework.** The house spacing scale (`space-xxsmall` 4px …
+  `space-xxhuge` 192px, `framework-spec.template.json`) and the type bases (`size-h1-base` …) live in
+  the Framework; rules read `var(--space-*)` / `var(--size-*)`, so one edit moves every use. A new build
+  needs at least 80% of its rem spacing on tokens (the starter is at 85%).
+- **No contextual override of a utility or role class.** `.section_arrival .heading-style-h1 { font-size }`
+  means an edit to `heading-style-h1` does nothing on that heading, and moving the heading restyles it.
+  Vary it with a combo class on the element: `heading-style-h1 is-arrival`, rule
+  `.heading-style-h1.is-arrival`. Themes and states stay contextual (`[data-theme="dark"] .x`,
+  `.panel:not(.is-open) .x`).
+
+**Bringing an existing site there** (per site, staging, in its own worktree session; same gates as §8):
+- **A.** `scale-tokens.mjs --site $S` (dry, then `--apply`) adds the missing house steps to the Framework
+  and points every rem spacing value that EQUALS a step at it (also inside calc()/clamp()); px, negative
+  and off-scale values stay literal. `--type <map>` moves role-class sizes into the Framework the same way.
+  No visual change by construction. A site pushed from a local source also runs `--files <site-src>`,
+  then `framework.mjs pull` for the source mirror.
+- **B.** `context-combo.mjs --site $S` writes `combo-map.proposed.json`; a person reviews the names, then
+  `--map <file>` (dry, `--apply`). The combo goes on exactly the nodes the old selector matched, and the
+  rule keeps its specificity and its place. Components, runtime classes, tags, specificity changes and
+  names already in use are refused and listed for a person.
+- **C.** (visible: the user decides per site after a before/after) snap off-scale spacing to the nearest
+  step. On 2026-10-08 only 22–35% of the fleet's spacing equalled a house step.
+- Prove: `snapshot before`, A, publish, `snapshot mid` + diff, B, publish, `snapshot after` + diff,
+  `head-parity`, `migration-gates final` (with `editor-canvas` and the structure report).
+
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
