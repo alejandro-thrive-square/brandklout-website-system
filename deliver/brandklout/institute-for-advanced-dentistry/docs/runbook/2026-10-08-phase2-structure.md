@@ -65,7 +65,21 @@ IFA is pushed from a local source, so every change was made in `site-src` and pu
 | css parity `p2-mid → p2-after` (B) | **0 real of 0 raw** at 1440 / 390 / 1920 |
 | runtime parity `p2-mid → p2-after` | **OK**: 12 first-pass items (skip-link timing, GoHighLevel iframe page heights, a slider and an FAQ button), none survives a second capture |
 | css parity `p2-pre-fold → p2-post-fold` (D) at 1100 / 850 / 600 / 420 | **PARITY OK, 0 differences** at each width (one width inside every breakpoint band) |
-| css + runtime parity `p2-after → p2-folded` (D, the three standard widths) | pending |
+| css parity `p2-after → p2-folded` (D) | **0 real of 0 raw** at 1440 / 390 / 1920 (noise between the two folded captures: 0 at each) |
+| runtime parity `p2-after → p2-folded` | 23 first-pass items on 18 pages, 22 gone on re-capture; **one left**: `patient-referrals` page height. Investigated (below): the GoHighLevel form iframe's resize state, not the fold |
+
+**The one persistent runtime item.** `patient-referrals` read 7771 px at 1440 in five captures before the
+fold and 7771 / 7476 / 7476 in the three after it; at 390 it read 9157 / 9217 / 9217 / 9217 / 9217 before
+and 8355 / 9157 / 9157 after. The differences are 295 px at 1440 and 862 px at 390, which are the two
+magnitudes the runtime diffs produced all day on other pages in both directions (`+295` on
+`full-mouth-rehabilitation` between `p2-before` and `p2-mid`, before any fold; 16 page-height items of 862
+or 863 px at 390 across the day's diffs, all cleared by a re-capture). The page's CSS is identical with
+scripts off (css parity 0 at seven widths, this page included). Direct loads of the published page
+(`output/fleet/institute-for-advanced-dentistry/probe-height.mjs` on main's checkout, scripts on, 6 s
+settle): at 1440 four loads give 7731 px with the GoHighLevel iframe at 1118 px; at 390 three loads of the
+same page give 8250 / 8250 / 9053 px with the iframe at 1297 / 495 / 1298 px and the embed wrapper at
+624 / 624 / 1427 px. The form iframe sizes itself asynchronously and the wrapper follows late, so the page
+height at measurement time depends on timing, not on the stylesheet. Cause established; nothing to fix.
 | `head-parity diff p2-before → p2-final` | **0 of 57** URLs differ |
 | `migration-gates.mjs final --map class-map.json` (after D) | **EDITABLE · IN BOUNDS · CLEAN · editor canvas ok** (3 frames, 0 overlays); structure report as the table above |
 | `fold-split.mjs --site` dry run after D | nothing left to fold; the 34 refused listed |
@@ -95,10 +109,14 @@ IFA is pushed from a local source, so every change was made in `site-src` and pu
   the moved tokens as MISSING.
 - **The combo tool's counts on staging are the spec for the source**: `combo-classes.mjs --check dist` must
   print the same node counts, or the source misses nodes the generator or a partial produces.
-- **Capture passes go through `migration-gates.mjs slot`** (machine-wide slots, 3 since `ee92f546`); a pass
-  queued by an older gate process only sees the first two slots. Claude Code's background shells were killed
-  for low memory twice during this run: long captures ran detached (`output/fleet/<client>/run-passes.sh`,
-  `run-diff.sh`, `run-bands.sh` on main's checkout) and were polled with bounded foreground waits.
+- **Capture passes go through `migration-gates.mjs slot`** (two machine-wide slots, since the afternoon a
+  first-come ticket queue; a pass started by an older gate process has no ticket and must be restarted).
+  Claude Code's background shells were killed for low memory twice during this run: long captures ran
+  detached (`output/fleet/<client>/run-passes.sh`, `run-diff.sh`, `run-bands.sh` on main's checkout) and
+  were polled with bounded foreground waits. With four sites capturing, one snapshot label took 2 to 4 hours.
+- **A persistent runtime page-height item is the GoHighLevel iframe until proven otherwise**: 295 px at
+  1440, 862 px at 390. Prove it with a few direct loads of the identical page (`probe-height.mjs` next to
+  the logs): the iframe and its wrapper read different heights from one load to the next.
 - `runtime-parity` prints nothing until a pass ends; a 57-page runtime pass took 37 minutes on the shared machine.
 
 ## Version Control
