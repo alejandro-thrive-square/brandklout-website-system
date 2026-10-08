@@ -84,6 +84,18 @@ main, and told the sessions. State table: `output/fleet/COORDINATOR.md`.
   before/after on every URL (`head-parity.mjs save <client>-before` / `diff`), and run
   `order-pairs.mjs` after any append-mode CSS move.
 
+## 2026-10-07: the editor canvas, which no gate opened
+The user opened IFA staging in the Instatic editor and saw every page covered ("completely broken").
+Cause: the canvas renders nodes with React, which drops `hidden=""`, and runs no site scripts, so IFA's
+story modal (92% dark, fixed) and menu drawer, closed only by the `hidden` attribute, showed over every
+breakpoint frame. The published site keeps the attribute, so every gate was green. Not caused by the
+migration. New gate `editor-canvas.mjs` (in `migration-gates final`, `3abbc787`). Fleet: IFA fails; Stone
+Med Spa, Surgical Arts, Mason Park, Kids, Brandklout website, Dr. Nahlah pass and were checked by eye
+(only cosmetic: icon-only menu buttons show Instatic's placeholder label in the editor). The IFA fix
+runs in a `bk-ifa-dentistry` session (brief `output/fleet/BRIEF-ifa-canvas.md`, result
+`output/fleet/ifa-dentistry/STATUS-canvas.md`). From now on, site work runs in that site's worktree
+session; main keeps the shared tools and fleet checks (user, 2026-10-07).
+
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
 registries can differ from staging (unpublished staging work, later production edits), so every
