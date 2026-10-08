@@ -95,6 +95,11 @@ Med Spa, Surgical Arts, Mason Park, Kids, Brandklout website, Dr. Nahlah pass an
 runs in a `bk-ifa-dentistry` session (brief `output/fleet/BRIEF-ifa-canvas.md`, result
 `output/fleet/ifa-dentistry/STATUS-canvas.md`). From now on, site work runs in that site's worktree
 session; main keeps the shared tools and fleet checks (user, 2026-10-07).
+**Fixed 2026-10-08** (`bk-ifa-dentistry` `21bfef6a`): drawer, modal and lightbox are `display:none` by
+default, `.is-open` opens them, `IFA.setOpen()` toggles both the class and `hidden`; pushed through IFA's
+pipeline. editor-canvas ok (checked independently), css 0 real 1440/390 (1920 noise), runtime OK, head
+0/57, EDITABLE · IN BOUNDS · CLEAN. Open on IFA: `openModal` focuses the close button while GSAP holds the
+modal at visibility:hidden (pre-existing).
 
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
