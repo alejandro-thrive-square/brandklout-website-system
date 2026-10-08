@@ -1,0 +1,2811 @@
+{
+ "id": "2cfKiXEDBeITx33aZidbp",
+ "tableId": "pages",
+ "cells": {
+  "title": "Book an All-on-6 Consultation in Los Angeles | West LA Implants",
+  "slug": "ads-landing-pages/all-on-6-consultation",
+  "body": {
+   "nodes": {
+    "YnkPI2uqLO09V6GEu26XV": {
+     "id": "YnkPI2uqLO09V6GEu26XV",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "id": "cursor",
+       "aria-hidden": "true"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "O027bDy8Tr9G2vdgWxYNG"
+     ],
+     "parentId": "ltwJv49VW-iKWqua46_nl"
+    },
+    "-i71bixF8nqz2b1S1_71k": {
+     "id": "-i71bixF8nqz2b1S1_71k",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "i",
+      "htmlAttributes": {
+       "id": "navProgress"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "_1waIZLysJ1gf5-O6fOfd"
+    },
+    "_1waIZLysJ1gf5-O6fOfd": {
+     "id": "_1waIZLysJ1gf5-O6fOfd",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "aria-hidden": "true"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "-i71bixF8nqz2b1S1_71k"
+     ],
+     "classIds": [
+      "zgEqeW4_1Q6xVVdgIb3AZ"
+     ],
+     "parentId": "ZgmVG4FDEg0e6mKXgCirz"
+    },
+    "EktHExgcoGbTMnTdotnmC": {
+     "id": "EktHExgcoGbTMnTdotnmC",
+     "moduleId": "base.image",
+     "props": {
+      "src": "/uploads/jhkO6B41wDOuept0gBsm8-logo-icon-white.png",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "decoding": "async",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "cj03vWFp7gfusUpbPbXkW"
+    },
+    "J4pLrUliBdWMRankuGWax": {
+     "id": "J4pLrUliBdWMRankuGWax",
+     "moduleId": "base.text",
+     "props": {
+      "text": "West LA ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "NpLJImqYF6Vbz5wHufhW7"
+    },
+    "7s8uvpmfT4hN1gk4Jverx": {
+     "id": "7s8uvpmfT4hN1gk4Jverx",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Implants",
+      "tag": "em",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "NpLJImqYF6Vbz5wHufhW7"
+    },
+    "NpLJImqYF6Vbz5wHufhW7": {
+     "id": "NpLJImqYF6Vbz5wHufhW7",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "J4pLrUliBdWMRankuGWax",
+      "7s8uvpmfT4hN1gk4Jverx"
+     ],
+     "classIds": [
+      "BKDlkEwVDAHZjYK7rsUWB"
+     ],
+     "parentId": "cj03vWFp7gfusUpbPbXkW"
+    },
+    "cj03vWFp7gfusUpbPbXkW": {
+     "id": "cj03vWFp7gfusUpbPbXkW",
+     "moduleId": "base.link",
+     "props": {
+      "href": "/ads-landing-pages/all-on-6",
+      "target": "_self",
+      "htmlAttributes": {
+       "aria-label": "West LA Implants"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "EktHExgcoGbTMnTdotnmC",
+      "NpLJImqYF6Vbz5wHufhW7"
+     ],
+     "classIds": [
+      "9GB9u35mBOeLTqlJ64aBJ"
+     ],
+     "parentId": "i7CD8HOMLLwW-HGwjjNrb"
+    },
+    "FIDuNCUT8yHyxOUlljQwi": {
+     "id": "FIDuNCUT8yHyxOUlljQwi",
+     "moduleId": "base.link",
+     "props": {
+      "href": "tel:+13104810111",
+      "text": "(310) 481-0111",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "GjjPJz-FwLKjbIVg_e6Op"
+     ],
+     "parentId": "MsQ_e_6Dq46f04F7RMEHr"
+    },
+    "MsQ_e_6Dq46f04F7RMEHr": {
+     "id": "MsQ_e_6Dq46f04F7RMEHr",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "FIDuNCUT8yHyxOUlljQwi"
+     ],
+     "classIds": [
+      "4PXSGFw3RKN6jjyWpn5Sa"
+     ],
+     "parentId": "i7CD8HOMLLwW-HGwjjNrb"
+    },
+    "i7CD8HOMLLwW-HGwjjNrb": {
+     "id": "i7CD8HOMLLwW-HGwjjNrb",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "cj03vWFp7gfusUpbPbXkW",
+      "MsQ_e_6Dq46f04F7RMEHr"
+     ],
+     "classIds": [
+      "jKPbMafVtkSdPjJDTDJFf",
+      "-iHwrpSa_F62o8Y17Axxd"
+     ],
+     "parentId": "ZgmVG4FDEg0e6mKXgCirz"
+    },
+    "ZgmVG4FDEg0e6mKXgCirz": {
+     "id": "ZgmVG4FDEg0e6mKXgCirz",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "header",
+      "customTag": "",
+      "htmlAttributes": {
+       "id": "nav"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "_1waIZLysJ1gf5-O6fOfd",
+      "i7CD8HOMLLwW-HGwjjNrb"
+     ],
+     "classIds": [
+      "yjKyyq1r1OmlzZ27fk1xr",
+      "hQ8Y35R53esS9sW0pIgQA"
+     ],
+     "parentId": "ltwJv49VW-iKWqua46_nl"
+    },
+    "M_3eicNf35HYB7jZZ1cRE": {
+     "id": "M_3eicNf35HYB7jZZ1cRE",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "i",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Ap01s09u5jS2UfYFGsaux"
+    },
+    "wLIbAs4g1_12q3ZMJ-mn8": {
+     "id": "wLIbAs4g1_12q3ZMJ-mn8",
+     "moduleId": "base.text",
+     "props": {
+      "text": "All-on-6 consultation · West LA Implants",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Ap01s09u5jS2UfYFGsaux"
+    },
+    "Ap01s09u5jS2UfYFGsaux": {
+     "id": "Ap01s09u5jS2UfYFGsaux",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "M_3eicNf35HYB7jZZ1cRE",
+      "wLIbAs4g1_12q3ZMJ-mn8"
+     ],
+     "classIds": [
+      "c85fcLmy7zdFB4JsC0QhO"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "u81Ekw3lM1iA2yh5ZVpLu": {
+     "id": "u81Ekw3lM1iA2yh5ZVpLu",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Book your ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "nTfUsJzBtsFq4Z_VkWodu"
+    },
+    "iC2nXxo_RNt-s6N9ko9XD": {
+     "id": "iC2nXxo_RNt-s6N9ko9XD",
+     "moduleId": "base.text",
+     "props": {
+      "text": "consultation.",
+      "tag": "em",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "nTfUsJzBtsFq4Z_VkWodu"
+    },
+    "nTfUsJzBtsFq4Z_VkWodu": {
+     "id": "nTfUsJzBtsFq4Z_VkWodu",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "h1",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "u81Ekw3lM1iA2yh5ZVpLu",
+      "iC2nXxo_RNt-s6N9ko9XD"
+     ],
+     "classIds": [
+      "tIUW25Kp6hCv__3SGnMJn",
+      "sliL_GCYz37iQ8iaY0Ydu",
+      "Wn1mnfGRQpM-grDxxJc7Z"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "SFSn-bELS40SqgBaJeR7m": {
+     "id": "SFSn-bELS40SqgBaJeR7m",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Leave your details and the front desk calls to find a time. At the visit Dr. Barriere scans, reads the scan with you, and tells you plainly what he would do.",
+      "tag": "p",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "qnOLXGDBjRJtBGILdPkKa",
+      "LwPh6R01lY66u6CGTFdLm"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "w4VfSs1uyGc1jk-xF0sk3": {
+     "id": "w4VfSs1uyGc1jk-xF0sk3",
+     "moduleId": "base.image",
+     "props": {
+      "src": "/uploads/E6NaI2j4GKfuPXIEpPZgD-doctor-headshot-square.png",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "decoding": "async",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Uf7rEZGqJj-edHG0ZGEyi"
+    },
+    "Uf7rEZGqJj-edHG0ZGEyi": {
+     "id": "Uf7rEZGqJj-edHG0ZGEyi",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "figure",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "w4VfSs1uyGc1jk-xF0sk3"
+     ],
+     "classIds": [
+      "l2DtRrP7fG3rVTPZQ83iw"
+     ],
+     "parentId": "bvTwIln-9j1WjLUerRsL0"
+    },
+    "rUt3vneYLn-R4B1Zn37vx": {
+     "id": "rUt3vneYLn-R4B1Zn37vx",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Reviewed by Dr. Tony Barriere, DDS",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "_OE5kNWexqTD8APwIBteV"
+    },
+    "_OE5kNWexqTD8APwIBteV": {
+     "id": "_OE5kNWexqTD8APwIBteV",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "rUt3vneYLn-R4B1Zn37vx"
+     ],
+     "classIds": [],
+     "parentId": "QDMBdF7JYdFX8GPOOZhXq"
+    },
+    "bUmd0HJG9YipE6aFQz0Li": {
+     "id": "bUmd0HJG9YipE6aFQz0Li",
+     "moduleId": "base.text",
+     "props": {
+      "text": "He plans, places and restores every implant himself.",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "QDMBdF7JYdFX8GPOOZhXq"
+    },
+    "QDMBdF7JYdFX8GPOOZhXq": {
+     "id": "QDMBdF7JYdFX8GPOOZhXq",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "_OE5kNWexqTD8APwIBteV",
+      "bUmd0HJG9YipE6aFQz0Li"
+     ],
+     "classIds": [],
+     "parentId": "bvTwIln-9j1WjLUerRsL0"
+    },
+    "bvTwIln-9j1WjLUerRsL0": {
+     "id": "bvTwIln-9j1WjLUerRsL0",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Uf7rEZGqJj-edHG0ZGEyi",
+      "QDMBdF7JYdFX8GPOOZhXq"
+     ],
+     "classIds": [
+      "ItSWcevKNEJwjiSavOkS1"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "VHgMktzviVNpWMFTWNLMf": {
+     "id": "VHgMktzviVNpWMFTWNLMf",
+     "moduleId": "base.text",
+     "props": {
+      "text": "A cone-beam CT scan of your mouth and jaw",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "UQzMFgHn3iQaeTwDdSiPR"
+    },
+    "UQzMFgHn3iQaeTwDdSiPR": {
+     "id": "UQzMFgHn3iQaeTwDdSiPR",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "VHgMktzviVNpWMFTWNLMf"
+     ],
+     "classIds": [],
+     "parentId": "EXZl4h4nhTLw4RTXAQbsn"
+    },
+    "gYcZ-195xi2SrGQqEadcP": {
+     "id": "gYcZ-195xi2SrGQqEadcP",
+     "moduleId": "base.text",
+     "props": {
+      "text": "An honest read on candidacy: four implants or six",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "psALR5G-6F8wQkx8i2DkT"
+    },
+    "psALR5G-6F8wQkx8i2DkT": {
+     "id": "psALR5G-6F8wQkx8i2DkT",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "gYcZ-195xi2SrGQqEadcP"
+     ],
+     "classIds": [],
+     "parentId": "EXZl4h4nhTLw4RTXAQbsn"
+    },
+    "mmpzzZ_BWYOaEipkQO1RY": {
+     "id": "mmpzzZ_BWYOaEipkQO1RY",
+     "moduleId": "base.text",
+     "props": {
+      "text": "A written plan, with insurance and financing worked out",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "iudl_HA8b9o0Je7TGfiC3"
+    },
+    "iudl_HA8b9o0Je7TGfiC3": {
+     "id": "iudl_HA8b9o0Je7TGfiC3",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "mmpzzZ_BWYOaEipkQO1RY"
+     ],
+     "classIds": [],
+     "parentId": "EXZl4h4nhTLw4RTXAQbsn"
+    },
+    "EXZl4h4nhTLw4RTXAQbsn": {
+     "id": "EXZl4h4nhTLw4RTXAQbsn",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "ul",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "UQzMFgHn3iQaeTwDdSiPR",
+      "psALR5G-6F8wQkx8i2DkT",
+      "iudl_HA8b9o0Je7TGfiC3"
+     ],
+     "classIds": [
+      "g5FnZ3laN7H6rcfOrJXAd"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "KAR0MNwQzg4dgC_wvxt-K": {
+     "id": "KAR0MNwQzg4dgC_wvxt-K",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“I actually look forward to going to the dentist.”",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "VI_7S8SziQYKUkbMhVCwu"
+    },
+    "VI_7S8SziQYKUkbMhVCwu": {
+     "id": "VI_7S8SziQYKUkbMhVCwu",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "KAR0MNwQzg4dgC_wvxt-K"
+     ],
+     "classIds": [],
+     "parentId": "ydW0AMn1pITlrbKS3ZB9B"
+    },
+    "64H55qgtM3iFGTX6UeXY_": {
+     "id": "64H55qgtM3iFGTX6UeXY_",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Annie G.",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "qCmEQT9Onkdw4D2Sfw35F"
+    },
+    "qCmEQT9Onkdw4D2Sfw35F": {
+     "id": "qCmEQT9Onkdw4D2Sfw35F",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "64H55qgtM3iFGTX6UeXY_"
+     ],
+     "classIds": [],
+     "parentId": "ZYCw2uGzeuJ6-KmKzLtb2"
+    },
+    "0ivctArRmfCt_6_ducuO4": {
+     "id": "0ivctArRmfCt_6_ducuO4",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Google review",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "ZYCw2uGzeuJ6-KmKzLtb2"
+    },
+    "ZYCw2uGzeuJ6-KmKzLtb2": {
+     "id": "ZYCw2uGzeuJ6-KmKzLtb2",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "figcaption",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "qCmEQT9Onkdw4D2Sfw35F",
+      "0ivctArRmfCt_6_ducuO4"
+     ],
+     "classIds": [],
+     "parentId": "ydW0AMn1pITlrbKS3ZB9B"
+    },
+    "ydW0AMn1pITlrbKS3ZB9B": {
+     "id": "ydW0AMn1pITlrbKS3ZB9B",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "figure",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "VI_7S8SziQYKUkbMhVCwu",
+      "ZYCw2uGzeuJ6-KmKzLtb2"
+     ],
+     "classIds": [
+      "Es7yCiRmsWqeWg-EIgdvq"
+     ],
+     "parentId": "m5f-j99-zUabGQsnICiQx"
+    },
+    "m5f-j99-zUabGQsnICiQx": {
+     "id": "m5f-j99-zUabGQsnICiQx",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "ydW0AMn1pITlrbKS3ZB9B"
+     ],
+     "classIds": [
+      "PA5QSqEt9Dsra7a1P0_IF"
+     ],
+     "parentId": "RRX1d51N3xF1ssYIBUcbW"
+    },
+    "RRX1d51N3xF1ssYIBUcbW": {
+     "id": "RRX1d51N3xF1ssYIBUcbW",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Ap01s09u5jS2UfYFGsaux",
+      "nTfUsJzBtsFq4Z_VkWodu",
+      "SFSn-bELS40SqgBaJeR7m",
+      "bvTwIln-9j1WjLUerRsL0",
+      "EXZl4h4nhTLw4RTXAQbsn",
+      "m5f-j99-zUabGQsnICiQx"
+     ],
+     "classIds": [
+      "oHv5CLUezKx2P9BT46OQ3"
+     ],
+     "parentId": "hSCnrCF8Tl1zyoUh9ojxN"
+    },
+    "2Q03Uz7Ttm52bZSqdsWzz": {
+     "id": "2Q03Uz7Ttm52bZSqdsWzz",
+     "moduleId": "base.text",
+     "props": {
+      "text": "All-on-6 full arch",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "N87j1n-sC9bs5BdiTT7ss"
+     ],
+     "parentId": "m62ngDI0625OdQ-OyGgPk"
+    },
+    "AGRumJPZLy48OdFGsdBOu": {
+     "id": "AGRumJPZLy48OdFGsdBOu",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Tell us where to reach you",
+      "tag": "h2",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "maUCOg8nTn2uWCyYqGtQR"
+     ],
+     "parentId": "m62ngDI0625OdQ-OyGgPk"
+    },
+    "-hbMJPdiv9PhJmu8_yanT": {
+     "id": "-hbMJPdiv9PhJmu8_yanT",
+     "moduleId": "base.text",
+     "props": {
+      "text": "The front desk calls to find a time and checks your benefits before you come in.",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "Q1xQv0Vz59_30qRKhlBSR"
+     ],
+     "parentId": "m62ngDI0625OdQ-OyGgPk"
+    },
+    "m62ngDI0625OdQ-OyGgPk": {
+     "id": "m62ngDI0625OdQ-OyGgPk",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "2Q03Uz7Ttm52bZSqdsWzz",
+      "AGRumJPZLy48OdFGsdBOu",
+      "-hbMJPdiv9PhJmu8_yanT"
+     ],
+     "classIds": [
+      "zPJjlWOrFTBGSZdaPLMU2"
+     ],
+     "parentId": "VuIvwI_Pi9523NW5kK7Q4"
+    },
+    "xbeXZP5MkRby90AQeqW06": {
+     "id": "xbeXZP5MkRby90AQeqW06",
+     "moduleId": "base.text",
+     "props": {
+      "text": "We reply within one business day. Prefer to talk? ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "B4K4fHwHVN0aStBUySZ_g"
+    },
+    "kdVaX_yrpMgvEyIQ_Z-Hp": {
+     "id": "kdVaX_yrpMgvEyIQ_Z-Hp",
+     "moduleId": "base.link",
+     "props": {
+      "href": "tel:+13104810111",
+      "text": "(310) 481-0111",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "B4K4fHwHVN0aStBUySZ_g"
+    },
+    "B4K4fHwHVN0aStBUySZ_g": {
+     "id": "B4K4fHwHVN0aStBUySZ_g",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "xbeXZP5MkRby90AQeqW06",
+      "kdVaX_yrpMgvEyIQ_Z-Hp"
+     ],
+     "classIds": [
+      "Q1xQv0Vz59_30qRKhlBSR",
+      "OEZdAww9zSuEqsR0AL6Rz"
+     ],
+     "parentId": "VuIvwI_Pi9523NW5kK7Q4"
+    },
+    "VuIvwI_Pi9523NW5kK7Q4": {
+     "id": "VuIvwI_Pi9523NW5kK7Q4",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "id": "book"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "m62ngDI0625OdQ-OyGgPk",
+      "PSxi3zkJ-rm7QqyXI5FQe",
+      "B4K4fHwHVN0aStBUySZ_g"
+     ],
+     "classIds": [
+      "Q47xeEGePdRX8R9EBGjFK"
+     ],
+     "parentId": "7zp2vkrfw3ADAvI6o5UTU"
+    },
+    "7zp2vkrfw3ADAvI6o5UTU": {
+     "id": "7zp2vkrfw3ADAvI6o5UTU",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-anim": "hide"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "VuIvwI_Pi9523NW5kK7Q4"
+     ],
+     "classIds": [
+      "iwhmvwDCwgU5AVacZ0AVl"
+     ],
+     "parentId": "hSCnrCF8Tl1zyoUh9ojxN"
+    },
+    "hSCnrCF8Tl1zyoUh9ojxN": {
+     "id": "hSCnrCF8Tl1zyoUh9ojxN",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "RRX1d51N3xF1ssYIBUcbW",
+      "7zp2vkrfw3ADAvI6o5UTU"
+     ],
+     "classIds": [
+      "jKPbMafVtkSdPjJDTDJFf",
+      "uwWDWfJXABCHk3OgaGKL2"
+     ],
+     "parentId": "RfPPfbHqJmspgzIFk2KTL"
+    },
+    "RfPPfbHqJmspgzIFk2KTL": {
+     "id": "RfPPfbHqJmspgzIFk2KTL",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "section",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-chapter": "0",
+       "data-chapter-name": "Arrival",
+       "id": "top"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "hSCnrCF8Tl1zyoUh9ojxN"
+     ],
+     "classIds": [
+      "lFIcqiy8Snry8eZcttsfM"
+     ],
+     "parentId": "Ri_MB-1720Km73PaHfzfM"
+    },
+    "hEqfhRwu3FKmEwWjfNfd_": {
+     "id": "hEqfhRwu3FKmEwWjfNfd_",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "i",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "auR3IvIwMn2mFPEx_EqD5"
+    },
+    "AVYDeKzgRnvK8vAnWoMUw": {
+     "id": "AVYDeKzgRnvK8vAnWoMUw",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Hear from our patients",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "auR3IvIwMn2mFPEx_EqD5"
+    },
+    "auR3IvIwMn2mFPEx_EqD5": {
+     "id": "auR3IvIwMn2mFPEx_EqD5",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "hEqfhRwu3FKmEwWjfNfd_",
+      "AVYDeKzgRnvK8vAnWoMUw"
+     ],
+     "classIds": [
+      "c85fcLmy7zdFB4JsC0QhO"
+     ],
+     "parentId": "qpmHK1HWb6-SKtDbzIBjY"
+    },
+    "9XQbQTTfhl5yx8IS1vRQY": {
+     "id": "9XQbQTTfhl5yx8IS1vRQY",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Three patients, in their own ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "VJCaByRNCbPYlhaGV2VtX"
+    },
+    "uLJdTWiTs4nf5rk5uvwS8": {
+     "id": "uLJdTWiTs4nf5rk5uvwS8",
+     "moduleId": "base.text",
+     "props": {
+      "text": "words.",
+      "tag": "em",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "VJCaByRNCbPYlhaGV2VtX"
+    },
+    "VJCaByRNCbPYlhaGV2VtX": {
+     "id": "VJCaByRNCbPYlhaGV2VtX",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "h2",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "9XQbQTTfhl5yx8IS1vRQY",
+      "uLJdTWiTs4nf5rk5uvwS8"
+     ],
+     "classIds": [
+      "bbC9-1tZQrCniisTdPpWe"
+     ],
+     "parentId": "qpmHK1HWb6-SKtDbzIBjY"
+    },
+    "30dsyUp68-pKtLdypE-Eh": {
+     "id": "30dsyUp68-pKtLdypE-Eh",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Leslie, Emily and Michael each agreed to be filmed. Hover to see them; click to watch the full story.",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "qnOLXGDBjRJtBGILdPkKa"
+     ],
+     "parentId": "qpmHK1HWb6-SKtDbzIBjY"
+    },
+    "qpmHK1HWb6-SKtDbzIBjY": {
+     "id": "qpmHK1HWb6-SKtDbzIBjY",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "auR3IvIwMn2mFPEx_EqD5",
+      "VJCaByRNCbPYlhaGV2VtX",
+      "30dsyUp68-pKtLdypE-Eh"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq",
+      "zOR3tIAYuHv7sH_mFyfXS"
+     ],
+     "parentId": "BQd8qTiKPgW9ZDSHPaC7J"
+    },
+    "_bNuXXc3pbEzD07dkGByZ": {
+     "id": "_bNuXXc3pbEzD07dkGByZ",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "video",
+      "htmlAttributes": {
+       "poster": "/uploads/eWqyMKrNMcglWnVCcVWRG-still-leslie-smile-tablet.jpg",
+       "muted": "",
+       "loop": "",
+       "playsinline": "",
+       "preload": "none",
+       "data-src-hover": "/uploads/VSC213W8xR4BokRTqOBT8-leslie-story-1280.mp4",
+       "aria-label": "Leslie, in her own words"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "hTNzLWxKyp7J5PSO0eWsK"
+     ],
+     "parentId": "s5zGQeV3aVfbJyCS74upi"
+    },
+    "PbGe187GmTZXzhPT4mwRZ": {
+     "id": "PbGe187GmTZXzhPT4mwRZ",
+     "moduleId": "base.text",
+     "props": {
+      "text": "",
+      "tag": "span",
+      "htmlAttributes": {
+       "aria-hidden": "true"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "pzXMQmHrB8C7_voNXCcQk"
+     ],
+     "parentId": "s5zGQeV3aVfbJyCS74upi"
+    },
+    "s5zGQeV3aVfbJyCS74upi": {
+     "id": "s5zGQeV3aVfbJyCS74upi",
+     "moduleId": "base.link",
+     "props": {
+      "href": "https://www.youtube.com/watch?v=nH1ST1jo8WQ",
+      "target": "_blank",
+      "htmlAttributes": {
+       "aria-label": "Watch Leslie’s story on YouTube"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "_bNuXXc3pbEzD07dkGByZ",
+      "PbGe187GmTZXzhPT4mwRZ"
+     ],
+     "classIds": [
+      "o7zN3qb4JYl7AJXmRmoTI",
+      "Ei00pSkAOVk6L4FmyIZcv",
+      "nz-ouPXKSf3-R_Cv56vEa"
+     ],
+     "parentId": "dnz2SK_MXlNVIJazLtJSi"
+    },
+    "WKFyvBRp3xF-4-DZWmTQ6": {
+     "id": "WKFyvBRp3xF-4-DZWmTQ6",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“Full Arch All-On-4 gave me my confidence back.”",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "qS5fL0x8kUGhF4hBHQZgP"
+    },
+    "qS5fL0x8kUGhF4hBHQZgP": {
+     "id": "qS5fL0x8kUGhF4hBHQZgP",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "WKFyvBRp3xF-4-DZWmTQ6"
+     ],
+     "classIds": [
+      "AoLfARM-dpD6NYvptDNC1"
+     ],
+     "parentId": "dnz2SK_MXlNVIJazLtJSi"
+    },
+    "ffGJ30ITXJP3ovd6OzUvy": {
+     "id": "ffGJ30ITXJP3ovd6OzUvy",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Leslie",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "1y_FF6DXrJpg4Spwe4jxP"
+    },
+    "1y_FF6DXrJpg4Spwe4jxP": {
+     "id": "1y_FF6DXrJpg4Spwe4jxP",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "ffGJ30ITXJP3ovd6OzUvy"
+     ],
+     "classIds": [],
+     "parentId": "mx9PZdXI3SelGxCt6UdAh"
+    },
+    "pJCP1nekZeq-sf0bZMllJ": {
+     "id": "pJCP1nekZeq-sf0bZMllJ",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Full arch All-on-4®",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "mx9PZdXI3SelGxCt6UdAh"
+    },
+    "mx9PZdXI3SelGxCt6UdAh": {
+     "id": "mx9PZdXI3SelGxCt6UdAh",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "1y_FF6DXrJpg4Spwe4jxP",
+      "pJCP1nekZeq-sf0bZMllJ"
+     ],
+     "classIds": [
+      "iUr-umMAUgrmFu3irXugO"
+     ],
+     "parentId": "dnz2SK_MXlNVIJazLtJSi"
+    },
+    "dnz2SK_MXlNVIJazLtJSi": {
+     "id": "dnz2SK_MXlNVIJazLtJSi",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "article",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "s5zGQeV3aVfbJyCS74upi",
+      "qS5fL0x8kUGhF4hBHQZgP",
+      "mx9PZdXI3SelGxCt6UdAh"
+     ],
+     "classIds": [
+      "SttBcQ57vC_ZaHPq8WTVA"
+     ],
+     "parentId": "wqSdM2I0Uth9ijrD8UdlU"
+    },
+    "15uUcr7x3mQaLj-6VuNkU": {
+     "id": "15uUcr7x3mQaLj-6VuNkU",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "video",
+      "htmlAttributes": {
+       "poster": "/uploads/UNfjiQGQjJyf4MagKnf-X-emily_dentalimplant_westlaimplant_barriere2.jpg",
+       "muted": "",
+       "loop": "",
+       "playsinline": "",
+       "preload": "none",
+       "data-src-hover": "/uploads/fubrqXLAeTDvpaq-vFasP-emily-story-1280.mp4",
+       "aria-label": "Emily, in her own words"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "hTNzLWxKyp7J5PSO0eWsK"
+     ],
+     "parentId": "jF_jobL4Y-5acQNa3q3p1"
+    },
+    "kNyQu3nv56wTXJzuE2dbL": {
+     "id": "kNyQu3nv56wTXJzuE2dbL",
+     "moduleId": "base.text",
+     "props": {
+      "text": "",
+      "tag": "span",
+      "htmlAttributes": {
+       "aria-hidden": "true"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "pzXMQmHrB8C7_voNXCcQk"
+     ],
+     "parentId": "jF_jobL4Y-5acQNa3q3p1"
+    },
+    "jF_jobL4Y-5acQNa3q3p1": {
+     "id": "jF_jobL4Y-5acQNa3q3p1",
+     "moduleId": "base.link",
+     "props": {
+      "href": "https://www.youtube.com/watch?v=4skcfz94ZS4",
+      "target": "_blank",
+      "htmlAttributes": {
+       "aria-label": "Watch Emily’s story on YouTube"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "15uUcr7x3mQaLj-6VuNkU",
+      "kNyQu3nv56wTXJzuE2dbL"
+     ],
+     "classIds": [
+      "o7zN3qb4JYl7AJXmRmoTI",
+      "Ei00pSkAOVk6L4FmyIZcv",
+      "nz-ouPXKSf3-R_Cv56vEa"
+     ],
+     "parentId": "U2hnxzS2EuPxxxV63ZEFO"
+    },
+    "foSsPuhAf8m16BOkuCO-5": {
+     "id": "foSsPuhAf8m16BOkuCO-5",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“I felt like the old me because of my crowns and dental implants.”",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Dc2-s_eDCg9YcN_WDmUpf"
+    },
+    "Dc2-s_eDCg9YcN_WDmUpf": {
+     "id": "Dc2-s_eDCg9YcN_WDmUpf",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "foSsPuhAf8m16BOkuCO-5"
+     ],
+     "classIds": [
+      "AoLfARM-dpD6NYvptDNC1"
+     ],
+     "parentId": "U2hnxzS2EuPxxxV63ZEFO"
+    },
+    "7XHL_nJeiu4t8CKxbInu1": {
+     "id": "7XHL_nJeiu4t8CKxbInu1",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Emily",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "I_36GlRpcd3u7775VShc1"
+    },
+    "I_36GlRpcd3u7775VShc1": {
+     "id": "I_36GlRpcd3u7775VShc1",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "7XHL_nJeiu4t8CKxbInu1"
+     ],
+     "classIds": [],
+     "parentId": "p3gIZ6ouNYIRppA6PmBTE"
+    },
+    "zlkG8d8-Ghyvfhx3t7TOc": {
+     "id": "zlkG8d8-Ghyvfhx3t7TOc",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Crowns & dental implants",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "p3gIZ6ouNYIRppA6PmBTE"
+    },
+    "p3gIZ6ouNYIRppA6PmBTE": {
+     "id": "p3gIZ6ouNYIRppA6PmBTE",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "I_36GlRpcd3u7775VShc1",
+      "zlkG8d8-Ghyvfhx3t7TOc"
+     ],
+     "classIds": [
+      "iUr-umMAUgrmFu3irXugO"
+     ],
+     "parentId": "U2hnxzS2EuPxxxV63ZEFO"
+    },
+    "U2hnxzS2EuPxxxV63ZEFO": {
+     "id": "U2hnxzS2EuPxxxV63ZEFO",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "article",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "jF_jobL4Y-5acQNa3q3p1",
+      "Dc2-s_eDCg9YcN_WDmUpf",
+      "p3gIZ6ouNYIRppA6PmBTE"
+     ],
+     "classIds": [
+      "SttBcQ57vC_ZaHPq8WTVA"
+     ],
+     "parentId": "wqSdM2I0Uth9ijrD8UdlU"
+    },
+    "gH70aqVWTRe_9A1yyoqiq": {
+     "id": "gH70aqVWTRe_9A1yyoqiq",
+     "moduleId": "base.image",
+     "props": {
+      "src": "/uploads/Wla3VP79TCPXXrhyHdMCx-michael-full-mouth.jpg",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "decoding": "async",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "_YTI8DVncKSrxb7GdMpLk"
+    },
+    "nxndPIlY19jaSQYkxaH67": {
+     "id": "nxndPIlY19jaSQYkxaH67",
+     "moduleId": "base.text",
+     "props": {
+      "text": "",
+      "tag": "span",
+      "htmlAttributes": {
+       "aria-hidden": "true"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "pzXMQmHrB8C7_voNXCcQk"
+     ],
+     "parentId": "_YTI8DVncKSrxb7GdMpLk"
+    },
+    "_YTI8DVncKSrxb7GdMpLk": {
+     "id": "_YTI8DVncKSrxb7GdMpLk",
+     "moduleId": "base.link",
+     "props": {
+      "href": "https://www.youtube.com/watch?v=SDVe8k_zQUE",
+      "target": "_blank",
+      "htmlAttributes": {
+       "aria-label": "Watch Michael’s story on YouTube"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "gH70aqVWTRe_9A1yyoqiq",
+      "nxndPIlY19jaSQYkxaH67"
+     ],
+     "classIds": [
+      "o7zN3qb4JYl7AJXmRmoTI",
+      "Ei00pSkAOVk6L4FmyIZcv",
+      "nz-ouPXKSf3-R_Cv56vEa"
+     ],
+     "parentId": "hIAqDLoLOwmZWuIBST5AM"
+    },
+    "SC2UXsylNSs4NS1BsdRr2": {
+     "id": "SC2UXsylNSs4NS1BsdRr2",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“I have teeth again thanks to my full mouth reconstruction.”",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "PB1ThD6xXlyBh6XzGrZLp"
+    },
+    "PB1ThD6xXlyBh6XzGrZLp": {
+     "id": "PB1ThD6xXlyBh6XzGrZLp",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "SC2UXsylNSs4NS1BsdRr2"
+     ],
+     "classIds": [
+      "AoLfARM-dpD6NYvptDNC1"
+     ],
+     "parentId": "hIAqDLoLOwmZWuIBST5AM"
+    },
+    "RmP08HCUrlt1qz5oheDTE": {
+     "id": "RmP08HCUrlt1qz5oheDTE",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Michael",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "D0yIxfgB1YvP9b0cEYAgo"
+    },
+    "D0yIxfgB1YvP9b0cEYAgo": {
+     "id": "D0yIxfgB1YvP9b0cEYAgo",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "RmP08HCUrlt1qz5oheDTE"
+     ],
+     "classIds": [],
+     "parentId": "VYj8vIdknWVlrBrIKbrWK"
+    },
+    "ho5m2klkvWGv2G-MmaZbQ": {
+     "id": "ho5m2klkvWGv2G-MmaZbQ",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Full mouth reconstruction",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "VYj8vIdknWVlrBrIKbrWK"
+    },
+    "VYj8vIdknWVlrBrIKbrWK": {
+     "id": "VYj8vIdknWVlrBrIKbrWK",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "D0yIxfgB1YvP9b0cEYAgo",
+      "ho5m2klkvWGv2G-MmaZbQ"
+     ],
+     "classIds": [
+      "iUr-umMAUgrmFu3irXugO"
+     ],
+     "parentId": "hIAqDLoLOwmZWuIBST5AM"
+    },
+    "hIAqDLoLOwmZWuIBST5AM": {
+     "id": "hIAqDLoLOwmZWuIBST5AM",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "article",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "_YTI8DVncKSrxb7GdMpLk",
+      "PB1ThD6xXlyBh6XzGrZLp",
+      "VYj8vIdknWVlrBrIKbrWK"
+     ],
+     "classIds": [
+      "SttBcQ57vC_ZaHPq8WTVA"
+     ],
+     "parentId": "wqSdM2I0Uth9ijrD8UdlU"
+    },
+    "wqSdM2I0Uth9ijrD8UdlU": {
+     "id": "wqSdM2I0Uth9ijrD8UdlU",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "dnz2SK_MXlNVIJazLtJSi",
+      "U2hnxzS2EuPxxxV63ZEFO",
+      "hIAqDLoLOwmZWuIBST5AM"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq",
+      "xXBbNggTobx8wjI9vJFU9"
+     ],
+     "parentId": "BQd8qTiKPgW9ZDSHPaC7J"
+    },
+    "BQd8qTiKPgW9ZDSHPaC7J": {
+     "id": "BQd8qTiKPgW9ZDSHPaC7J",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "section",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-chapter": "1",
+       "data-chapter-name": "The Stories",
+       "id": "films"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "qpmHK1HWb6-SKtDbzIBjY",
+      "wqSdM2I0Uth9ijrD8UdlU"
+     ],
+     "classIds": [
+      "rDo4C75iCqtRRCYWq2_NX"
+     ],
+     "parentId": "Ri_MB-1720Km73PaHfzfM"
+    },
+    "Ob4iZBV8J8tWxlj2d3J7p": {
+     "id": "Ob4iZBV8J8tWxlj2d3J7p",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "i",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "abhojx6DDvquu6rLrl68g"
+    },
+    "8zHkQ7HovC0v0JMXuO3dW": {
+     "id": "8zHkQ7HovC0v0JMXuO3dW",
+     "moduleId": "base.text",
+     "props": {
+      "text": "One dentist, start to finish",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "abhojx6DDvquu6rLrl68g"
+    },
+    "abhojx6DDvquu6rLrl68g": {
+     "id": "abhojx6DDvquu6rLrl68g",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Ob4iZBV8J8tWxlj2d3J7p",
+      "8zHkQ7HovC0v0JMXuO3dW"
+     ],
+     "classIds": [
+      "c85fcLmy7zdFB4JsC0QhO"
+     ],
+     "parentId": "uM0_Mc3Zr1gQ2_rBhUWR0"
+    },
+    "NNR7GWn07cI28Dbt4XFlH": {
+     "id": "NNR7GWn07cI28Dbt4XFlH",
+     "moduleId": "base.text",
+     "props": {
+      "text": "One dentist, ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "neNNmbaYEBihuTE4D12Gr"
+    },
+    "oGBZeCoh5u8uaTZ-FgcaX": {
+     "id": "oGBZeCoh5u8uaTZ-FgcaX",
+     "moduleId": "base.text",
+     "props": {
+      "text": "start",
+      "tag": "em",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "neNNmbaYEBihuTE4D12Gr"
+    },
+    "6Bv8_8fNNsf_cErat5KWI": {
+     "id": "6Bv8_8fNNsf_cErat5KWI",
+     "moduleId": "base.text",
+     "props": {
+      "text": " to finish.",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "neNNmbaYEBihuTE4D12Gr"
+    },
+    "neNNmbaYEBihuTE4D12Gr": {
+     "id": "neNNmbaYEBihuTE4D12Gr",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "h2",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "NNR7GWn07cI28Dbt4XFlH",
+      "oGBZeCoh5u8uaTZ-FgcaX",
+      "6Bv8_8fNNsf_cErat5KWI"
+     ],
+     "classIds": [
+      "bbC9-1tZQrCniisTdPpWe"
+     ],
+     "parentId": "uM0_Mc3Zr1gQ2_rBhUWR0"
+    },
+    "MP9qCBquyLI4Kez_18vHv": {
+     "id": "MP9qCBquyLI4Kez_18vHv",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Dr. Barriere plans, places and restores every implant himself, in one office on Wilshire.",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "qnOLXGDBjRJtBGILdPkKa"
+     ],
+     "parentId": "uM0_Mc3Zr1gQ2_rBhUWR0"
+    },
+    "kPSKMywknHLymgCy6shM1": {
+     "id": "kPSKMywknHLymgCy6shM1",
+     "moduleId": "base.image",
+     "props": {
+      "src": "/uploads/bAfa94FqSA_9HnicPomO9-still-doctor-xray-screen.jpg",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "decoding": "async",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "GraHy-mCmHJvlPHTt-J2C"
+     ],
+     "parentId": "lCMSbXZgo2rMctQ4yJ9Rd"
+    },
+    "lCMSbXZgo2rMctQ4yJ9Rd": {
+     "id": "lCMSbXZgo2rMctQ4yJ9Rd",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "figure",
+      "htmlAttributes": {
+       "data-wipe": ""
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "kPSKMywknHLymgCy6shM1"
+     ],
+     "classIds": [
+      "o7zN3qb4JYl7AJXmRmoTI",
+      "z1VTLp87DYMwSXDpvgWPz"
+     ],
+     "parentId": "uM0_Mc3Zr1gQ2_rBhUWR0"
+    },
+    "uM0_Mc3Zr1gQ2_rBhUWR0": {
+     "id": "uM0_Mc3Zr1gQ2_rBhUWR0",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "abhojx6DDvquu6rLrl68g",
+      "neNNmbaYEBihuTE4D12Gr",
+      "MP9qCBquyLI4Kez_18vHv",
+      "lCMSbXZgo2rMctQ4yJ9Rd"
+     ],
+     "classIds": [
+      "Ys0UN5QkL-Z5B0s7UgG4b"
+     ],
+     "parentId": "zaoFctR43bIHx6LxJ_vlC"
+    },
+    "yKRx8-14gFHg7jEcSPeu6": {
+     "id": "yKRx8-14gFHg7jEcSPeu6",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“Dr. Barriere is a dentist who sees a long-term vision for my dental health. He’s on my team, advising me on my behalf, instead of just someone I visit for procedures.”",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "wQ5X93JGCrT2Vfa59F2Ml"
+    },
+    "ZbKL3xFKz53mE7-OI6k3E": {
+     "id": "ZbKL3xFKz53mE7-OI6k3E",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Peter Chang",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "nCPKiGqQpUJQdxF60ixwt"
+    },
+    "nCPKiGqQpUJQdxF60ixwt": {
+     "id": "nCPKiGqQpUJQdxF60ixwt",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "ZbKL3xFKz53mE7-OI6k3E"
+     ],
+     "classIds": [],
+     "parentId": "tDHQai8lORA64KyBx3OdQ"
+    },
+    "4yXZU-amyDfKn_DdzMEHl": {
+     "id": "4yXZU-amyDfKn_DdzMEHl",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Google review",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "tDHQai8lORA64KyBx3OdQ"
+    },
+    "tDHQai8lORA64KyBx3OdQ": {
+     "id": "tDHQai8lORA64KyBx3OdQ",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "footer",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "nCPKiGqQpUJQdxF60ixwt",
+      "4yXZU-amyDfKn_DdzMEHl"
+     ],
+     "classIds": [],
+     "parentId": "wQ5X93JGCrT2Vfa59F2Ml"
+    },
+    "wQ5X93JGCrT2Vfa59F2Ml": {
+     "id": "wQ5X93JGCrT2Vfa59F2Ml",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "yKRx8-14gFHg7jEcSPeu6",
+      "tDHQai8lORA64KyBx3OdQ"
+     ],
+     "classIds": [
+      "j6PDpJeGB8mtX7OPXBmH8"
+     ],
+     "parentId": "BIQxXSlpN_2kIZIo5QPg3"
+    },
+    "YuygNu-50xUN_WvKppvSc": {
+     "id": "YuygNu-50xUN_WvKppvSc",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“He is very careful with his implant technique. He makes sure the implant has plenty of time to heal into the jawbone. I am confident he will do a good job with the implant crown.”",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "cQvNV2tSWm8QRu1a6Pw4u"
+    },
+    "wOjAHoVijg932zUHtD5vK": {
+     "id": "wOjAHoVijg932zUHtD5vK",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Mike Hascats",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Efw0cMmlOF2gENMX8Akwx"
+    },
+    "Efw0cMmlOF2gENMX8Akwx": {
+     "id": "Efw0cMmlOF2gENMX8Akwx",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "wOjAHoVijg932zUHtD5vK"
+     ],
+     "classIds": [],
+     "parentId": "FPErDR4M3OB4NYu-UZbOt"
+    },
+    "23mLPKQwxEb_oOLQHh1Kv": {
+     "id": "23mLPKQwxEb_oOLQHh1Kv",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Google review",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "FPErDR4M3OB4NYu-UZbOt"
+    },
+    "FPErDR4M3OB4NYu-UZbOt": {
+     "id": "FPErDR4M3OB4NYu-UZbOt",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "footer",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Efw0cMmlOF2gENMX8Akwx",
+      "23mLPKQwxEb_oOLQHh1Kv"
+     ],
+     "classIds": [],
+     "parentId": "cQvNV2tSWm8QRu1a6Pw4u"
+    },
+    "cQvNV2tSWm8QRu1a6Pw4u": {
+     "id": "cQvNV2tSWm8QRu1a6Pw4u",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "YuygNu-50xUN_WvKppvSc",
+      "FPErDR4M3OB4NYu-UZbOt"
+     ],
+     "classIds": [
+      "j6PDpJeGB8mtX7OPXBmH8"
+     ],
+     "parentId": "BIQxXSlpN_2kIZIo5QPg3"
+    },
+    "bxuzn2DWpyq31eQf0p-V0": {
+     "id": "bxuzn2DWpyq31eQf0p-V0",
+     "moduleId": "base.text",
+     "props": {
+      "text": "“Dr. B was the first person to say, ‘I’m going to do everything. We’re going to do it all in this chair.’”",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "FSpbXoUkOm_7ADxjfdli-"
+    },
+    "IRsDoolBhAlZdKIxoTeKs": {
+     "id": "IRsDoolBhAlZdKIxoTeKs",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Michael",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "WzHL9rgBZem5YBkyYcXNW"
+    },
+    "WzHL9rgBZem5YBkyYcXNW": {
+     "id": "WzHL9rgBZem5YBkyYcXNW",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "IRsDoolBhAlZdKIxoTeKs"
+     ],
+     "classIds": [],
+     "parentId": "Wc5a1uhcGmuSeE2LrXbdx"
+    },
+    "rTeJ7_PB0vdiTGPxxKi6F": {
+     "id": "rTeJ7_PB0vdiTGPxxKi6F",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Patient, on film",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Wc5a1uhcGmuSeE2LrXbdx"
+    },
+    "Wc5a1uhcGmuSeE2LrXbdx": {
+     "id": "Wc5a1uhcGmuSeE2LrXbdx",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "footer",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "WzHL9rgBZem5YBkyYcXNW",
+      "rTeJ7_PB0vdiTGPxxKi6F"
+     ],
+     "classIds": [],
+     "parentId": "FSpbXoUkOm_7ADxjfdli-"
+    },
+    "FSpbXoUkOm_7ADxjfdli-": {
+     "id": "FSpbXoUkOm_7ADxjfdli-",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "blockquote",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "bxuzn2DWpyq31eQf0p-V0",
+      "Wc5a1uhcGmuSeE2LrXbdx"
+     ],
+     "classIds": [
+      "j6PDpJeGB8mtX7OPXBmH8"
+     ],
+     "parentId": "BIQxXSlpN_2kIZIo5QPg3"
+    },
+    "BIQxXSlpN_2kIZIo5QPg3": {
+     "id": "BIQxXSlpN_2kIZIo5QPg3",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "wQ5X93JGCrT2Vfa59F2Ml",
+      "cQvNV2tSWm8QRu1a6Pw4u",
+      "FSpbXoUkOm_7ADxjfdli-"
+     ],
+     "classIds": [
+      "5AkM_3s60LzLuwVis6XHZ"
+     ],
+     "parentId": "zaoFctR43bIHx6LxJ_vlC"
+    },
+    "zaoFctR43bIHx6LxJ_vlC": {
+     "id": "zaoFctR43bIHx6LxJ_vlC",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "uM0_Mc3Zr1gQ2_rBhUWR0",
+      "BIQxXSlpN_2kIZIo5QPg3"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq",
+      "zjTOzzk45wkibSCY1lb5Q"
+     ],
+     "parentId": "v634FvoRly6JzL5G5nLSu"
+    },
+    "MZjPmKfzu_0HpinZinzWl": {
+     "id": "MZjPmKfzu_0HpinZinzWl",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Ohio State",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "T4EL6-rC5f4MN_pmw-hHV"
+    },
+    "T4EL6-rC5f4MN_pmw-hHV": {
+     "id": "T4EL6-rC5f4MN_pmw-hHV",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "MZjPmKfzu_0HpinZinzWl"
+     ],
+     "classIds": [],
+     "parentId": "xP3iufJk11r-5e0GhQzJm"
+    },
+    "TTE0gh-p6zeCa0-KETGim": {
+     "id": "TTE0gh-p6zeCa0-KETGim",
+     "moduleId": "base.text",
+     "props": {
+      "text": "College of Dentistry",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "xP3iufJk11r-5e0GhQzJm"
+    },
+    "xP3iufJk11r-5e0GhQzJm": {
+     "id": "xP3iufJk11r-5e0GhQzJm",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "T4EL6-rC5f4MN_pmw-hHV",
+      "TTE0gh-p6zeCa0-KETGim"
+     ],
+     "classIds": [],
+     "parentId": "o-gkIvHljkHsZ4LuJXSap"
+    },
+    "WprASE3zhtIUrovYwYTMy": {
+     "id": "WprASE3zhtIUrovYwYTMy",
+     "moduleId": "base.text",
+     "props": {
+      "text": "NYU Langone",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "R4CFvTUpMdS0RIZ5vrfg9"
+    },
+    "R4CFvTUpMdS0RIZ5vrfg9": {
+     "id": "R4CFvTUpMdS0RIZ5vrfg9",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "WprASE3zhtIUrovYwYTMy"
+     ],
+     "classIds": [],
+     "parentId": "vPkLf2DThHyOWUektzNW0"
+    },
+    "nyOwjPH5QVSA6hFS4nw9S": {
+     "id": "nyOwjPH5QVSA6hFS4nw9S",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Yearlong surgical residency",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "vPkLf2DThHyOWUektzNW0"
+    },
+    "vPkLf2DThHyOWUektzNW0": {
+     "id": "vPkLf2DThHyOWUektzNW0",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "R4CFvTUpMdS0RIZ5vrfg9",
+      "nyOwjPH5QVSA6hFS4nw9S"
+     ],
+     "classIds": [],
+     "parentId": "o-gkIvHljkHsZ4LuJXSap"
+    },
+    "PZhX2phSUUQk0tgZzkuO9": {
+     "id": "PZhX2phSUUQk0tgZzkuO9",
+     "moduleId": "base.text",
+     "props": {
+      "text": "1,000+ hours",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "ZNtfetXFq9NkP7l5JC1oc"
+    },
+    "ZNtfetXFq9NkP7l5JC1oc": {
+     "id": "ZNtfetXFq9NkP7l5JC1oc",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "PZhX2phSUUQk0tgZzkuO9"
+     ],
+     "classIds": [],
+     "parentId": "inidS997h02bxxD3MtDYB"
+    },
+    "zYIoNO_Re-dwJ14JpN5iE": {
+     "id": "zYIoNO_Re-dwJ14JpN5iE",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Continuing education",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "inidS997h02bxxD3MtDYB"
+    },
+    "inidS997h02bxxD3MtDYB": {
+     "id": "inidS997h02bxxD3MtDYB",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "ZNtfetXFq9NkP7l5JC1oc",
+      "zYIoNO_Re-dwJ14JpN5iE"
+     ],
+     "classIds": [],
+     "parentId": "o-gkIvHljkHsZ4LuJXSap"
+    },
+    "heNnTAEJGDn3fY4GQeTet": {
+     "id": "heNnTAEJGDn3fY4GQeTet",
+     "moduleId": "base.text",
+     "props": {
+      "text": "AACD · AAID · ADA",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "H0G_YI6b2_aZftw7NB7De"
+    },
+    "H0G_YI6b2_aZftw7NB7De": {
+     "id": "H0G_YI6b2_aZftw7NB7De",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "b",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "heNnTAEJGDn3fY4GQeTet"
+     ],
+     "classIds": [],
+     "parentId": "CUZp4NGkP2s3oyWbuo2P7"
+    },
+    "5GQMu4omoeCl5RLTeH9PI": {
+     "id": "5GQMu4omoeCl5RLTeH9PI",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Memberships",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "CUZp4NGkP2s3oyWbuo2P7"
+    },
+    "CUZp4NGkP2s3oyWbuo2P7": {
+     "id": "CUZp4NGkP2s3oyWbuo2P7",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "li",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "H0G_YI6b2_aZftw7NB7De",
+      "5GQMu4omoeCl5RLTeH9PI"
+     ],
+     "classIds": [],
+     "parentId": "o-gkIvHljkHsZ4LuJXSap"
+    },
+    "o-gkIvHljkHsZ4LuJXSap": {
+     "id": "o-gkIvHljkHsZ4LuJXSap",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "ul",
+      "customTag": "",
+      "htmlAttributes": {
+       "aria-label": "Dr. Barriere’s training"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "xP3iufJk11r-5e0GhQzJm",
+      "vPkLf2DThHyOWUektzNW0",
+      "inidS997h02bxxD3MtDYB",
+      "CUZp4NGkP2s3oyWbuo2P7"
+     ],
+     "classIds": [
+      "h3_AIvWBQUSgkAFo0lowt",
+      "siAtJHohBFmN2TtyJysVI"
+     ],
+     "parentId": "hgsXqjdB9uZ-IlEowhKRj"
+    },
+    "hgsXqjdB9uZ-IlEowhKRj": {
+     "id": "hgsXqjdB9uZ-IlEowhKRj",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "o-gkIvHljkHsZ4LuJXSap"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq"
+     ],
+     "parentId": "v634FvoRly6JzL5G5nLSu"
+    },
+    "v634FvoRly6JzL5G5nLSu": {
+     "id": "v634FvoRly6JzL5G5nLSu",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "section",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-chapter": "2",
+       "data-chapter-name": "The Proof",
+       "id": "proof"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "zaoFctR43bIHx6LxJ_vlC",
+      "hgsXqjdB9uZ-IlEowhKRj"
+     ],
+     "classIds": [
+      "0aCGgPvRbWLPld6DmIjWo"
+     ],
+     "parentId": "Ri_MB-1720Km73PaHfzfM"
+    },
+    "Ri_MB-1720Km73PaHfzfM": {
+     "id": "Ri_MB-1720Km73PaHfzfM",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "main",
+      "customTag": "",
+      "htmlAttributes": {
+       "data-seo": "eyJjYW5vbmljYWwiOiJodHRwczovL3dlc3QtbGEtaW1wbGFudHMtcHJvZHVjdGlvbi51cC5yYWlsd2F5LmFwcC9hZHMtbGFuZGluZy1wYWdlcy9hbGwtb24tNi1jb25zdWx0YXRpb24iLCJ0aXRsZSI6IkJvb2sgYW4gQWxsLW9uLTYgQ29uc3VsdGF0aW9uIGluIExvcyBBbmdlbGVzIHwgV2VzdCBMQSBJbXBsYW50cyIsImRlc2NyaXB0aW9uIjoiUmVxdWVzdCBhbiBBbGwtb24tNiBjb25zdWx0YXRpb24gd2l0aCBEci4gVG9ueSBCYXJyaWVyZTogYSAzRCBzY2FuLCBhbiBob25lc3QgcmVhZCBvbiBjYW5kaWRhY3ksIGFuZCBhIHdyaXR0ZW4gcGxhbiB3aXRoIGluc3VyYW5jZSBhbmQgZmluYW5jaW5nIHdvcmtlZCBvdXQuIiwiaW1hZ2UiOiJodHRwczovL3dlc3QtbGEtaW1wbGFudHMtcHJvZHVjdGlvbi51cC5yYWlsd2F5LmFwcC91cGxvYWRzL2VXcXlNS3JOTWNnbFduVkNjVldSRy1zdGlsbC1sZXNsaWUtc21pbGUtdGFibGV0LmpwZyIsInR5cGUiOiJ3ZWJzaXRlIiwibm9pbmRleCI6dHJ1ZSwicm9ib3RzIjoibm9pbmRleCwgZm9sbG93IiwianNvbmxkIjpbeyJAdHlwZSI6IkRlbnRpc3QiLCJAaWQiOiJodHRwczovL3dlc3QtbGEtaW1wbGFudHMtcHJvZHVjdGlvbi51cC5yYWlsd2F5LmFwcC8jcHJhY3RpY2UiLCJuYW1lIjoiV2VzdCBMQSBJbXBsYW50cyIsInVybCI6Imh0dHBzOi8vd2VzdC1sYS1pbXBsYW50cy1wcm9kdWN0aW9uLnVwLnJhaWx3YXkuYXBwLyIsInRlbGVwaG9uZSI6IisxLTMxMC00ODEtMDExMSIsImltYWdlIjoiaHR0cHM6Ly93ZXN0LWxhLWltcGxhbnRzLXByb2R1Y3Rpb24udXAucmFpbHdheS5hcHAvdXBsb2Fkcy9lVzN6dkkxX1QzXzRScVVMNEpDcTktdG9ueWJhcnJlcmllX2hlYWRzaG90X2RlbnRpc3Rfd2VzdGxhaW1wbGFudHNfZnJvbnRmYWNpbmcuanBnIiwiYWRkcmVzcyI6eyJAdHlwZSI6IlBvc3RhbEFkZHJlc3MiLCJzdHJlZXRBZGRyZXNzIjoiMTIzMDEgV2lsc2hpcmUgQmx2ZCwgU3VpdGUgMjA1IiwiYWRkcmVzc0xvY2FsaXR5IjoiTG9zIEFuZ2VsZXMiLCJhZGRyZXNzUmVnaW9uIjoiQ0EiLCJwb3N0YWxDb2RlIjoiOTAwMjUiLCJhZGRyZXNzQ291bnRyeSI6IlVTIn0sIm9wZW5pbmdIb3Vyc1NwZWNpZmljYXRpb24iOlt7IkB0eXBlIjoiT3BlbmluZ0hvdXJzU3BlY2lmaWNhdGlvbiIsImRheU9mV2VlayI6WyJNb25kYXkiLCJUdWVzZGF5IiwiV2VkbmVzZGF5IiwiVGh1cnNkYXkiLCJGcmlkYXkiXSwib3BlbnMiOiIwOTowMCIsImNsb3NlcyI6IjE3OjAwIn1dLCJmb3VuZGVyIjp7IkB0eXBlIjoiUGVyc29uIiwibmFtZSI6IlRvbnkgQmFycmllcmUiLCJob25vcmlmaWNTdWZmaXgiOiJERFMiLCJqb2JUaXRsZSI6IkltcGxhbnQgYW5kIGNvc21ldGljIGRlbnRpc3QifSwic2FtZUFzIjpbImh0dHBzOi8vd3d3Lmluc3RhZ3JhbS5jb20vd2VzdF9sYV9pbXBsYW50cy8iLCJodHRwczovL3d3dy5mYWNlYm9vay5jb20vV2VzdExBSW1wbGFudHMxLyIsImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL0B3ZXN0bGFpbXBsYW50czg5MiIsImh0dHBzOi8vd3d3LnllbHAuY29tL2Jpei93ZXN0LWxhLWltcGxhbnRzLWxvcy1hbmdlbGVzLTMiXSwiQGNvbnRleHQiOiJodHRwczovL3NjaGVtYS5vcmcifV19"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "RfPPfbHqJmspgzIFk2KTL",
+      "BQd8qTiKPgW9ZDSHPaC7J",
+      "v634FvoRly6JzL5G5nLSu"
+     ],
+     "classIds": [],
+     "parentId": "c0c8ptfVcmsw7J6zOOgp9"
+    },
+    "59dZQ4HXLFeDSHdg_jWLU": {
+     "id": "59dZQ4HXLFeDSHdg_jWLU",
+     "moduleId": "base.image",
+     "props": {
+      "src": "/uploads/jhkO6B41wDOuept0gBsm8-logo-icon-white.png",
+      "loading": "lazy",
+      "fetchPriority": "auto",
+      "decoding": "async",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Mw02XeHAg7wLEybaj6A8t"
+    },
+    "YiO0kVjENNqbk-80puOJi": {
+     "id": "YiO0kVjENNqbk-80puOJi",
+     "moduleId": "base.text",
+     "props": {
+      "text": "West LA ",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "xUvEGSbl0WZ2cF6aMuAO1"
+    },
+    "WrM7ItwEDn-OOh3jtj5c3": {
+     "id": "WrM7ItwEDn-OOh3jtj5c3",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Implants",
+      "tag": "em",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "xUvEGSbl0WZ2cF6aMuAO1"
+    },
+    "xUvEGSbl0WZ2cF6aMuAO1": {
+     "id": "xUvEGSbl0WZ2cF6aMuAO1",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "YiO0kVjENNqbk-80puOJi",
+      "WrM7ItwEDn-OOh3jtj5c3"
+     ],
+     "classIds": [
+      "BKDlkEwVDAHZjYK7rsUWB"
+     ],
+     "parentId": "Mw02XeHAg7wLEybaj6A8t"
+    },
+    "Mw02XeHAg7wLEybaj6A8t": {
+     "id": "Mw02XeHAg7wLEybaj6A8t",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "59dZQ4HXLFeDSHdg_jWLU",
+      "xUvEGSbl0WZ2cF6aMuAO1"
+     ],
+     "classIds": [
+      "9GB9u35mBOeLTqlJ64aBJ"
+     ],
+     "parentId": "Xo6RfwffQmFQukI79WZ76"
+    },
+    "A_fIW4_SMPnzjQNBcYdHB": {
+     "id": "A_fIW4_SMPnzjQNBcYdHB",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Dr. Tony Barriere, DDS",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "Xo6RfwffQmFQukI79WZ76"
+    },
+    "Xo6RfwffQmFQukI79WZ76": {
+     "id": "Xo6RfwffQmFQukI79WZ76",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Mw02XeHAg7wLEybaj6A8t",
+      "A_fIW4_SMPnzjQNBcYdHB"
+     ],
+     "classIds": [
+      "sEYXyGVTaRVLYhhmKFuEt"
+     ],
+     "parentId": "4m53wSpu3PHU76Uf1olVM"
+    },
+    "-V2RdBwyYFbShe4q8jvpw": {
+     "id": "-V2RdBwyYFbShe4q8jvpw",
+     "moduleId": "base.text",
+     "props": {
+      "text": "12301 Wilshire Blvd, Suite 205",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "fyROHiB8TtsZeM6c6NmOD": {
+     "id": "fyROHiB8TtsZeM6c6NmOD",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "br",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "s2TDBt4bmx1UQ2YHfiUB1": {
+     "id": "s2TDBt4bmx1UQ2YHfiUB1",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Los Angeles, CA 90025",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "u_Wt2XCmNxOHN5A3gROP8": {
+     "id": "u_Wt2XCmNxOHN5A3gROP8",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "br",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "1u5Ya2q_UKyvjD0zQyHJY": {
+     "id": "1u5Ya2q_UKyvjD0zQyHJY",
+     "moduleId": "base.link",
+     "props": {
+      "href": "tel:+13104810111",
+      "text": "(310) 481-0111",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "jcbnjmcmpG-kz4KmNgN_o": {
+     "id": "jcbnjmcmpG-kz4KmNgN_o",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "br",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "tlx6-eU8JB8L-yPba2M-Y": {
+     "id": "tlx6-eU8JB8L-yPba2M-Y",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Monday to Friday, 9am to 5pm",
+      "tag": "none",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "F-Iw7ROAdhGtCGPqHrcAH"
+    },
+    "F-Iw7ROAdhGtCGPqHrcAH": {
+     "id": "F-Iw7ROAdhGtCGPqHrcAH",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "custom",
+      "customTag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "-V2RdBwyYFbShe4q8jvpw",
+      "fyROHiB8TtsZeM6c6NmOD",
+      "s2TDBt4bmx1UQ2YHfiUB1",
+      "u_Wt2XCmNxOHN5A3gROP8",
+      "1u5Ya2q_UKyvjD0zQyHJY",
+      "jcbnjmcmpG-kz4KmNgN_o",
+      "tlx6-eU8JB8L-yPba2M-Y"
+     ],
+     "classIds": [
+      "sz1F6_BOMOcZw8lS10du_"
+     ],
+     "parentId": "4m53wSpu3PHU76Uf1olVM"
+    },
+    "gJSU77NWLQd1baQ0FLlQr": {
+     "id": "gJSU77NWLQd1baQ0FLlQr",
+     "moduleId": "base.text",
+     "props": {
+      "text": "Individual results vary. Photographs and films show patients of West LA Implants. Treatment, candidacy and fees are determined after an examination and a 3D scan; nothing on this page is a quote or a guarantee of a result. All-on-4® is a registered trademark of Nobel Biocare.",
+      "tag": "p",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "0VY10V92n5GwgZ3QA4IyM"
+     ],
+     "parentId": "4m53wSpu3PHU76Uf1olVM"
+    },
+    "4m53wSpu3PHU76Uf1olVM": {
+     "id": "4m53wSpu3PHU76Uf1olVM",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Xo6RfwffQmFQukI79WZ76",
+      "F-Iw7ROAdhGtCGPqHrcAH",
+      "gJSU77NWLQd1baQ0FLlQr"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq",
+      "sIltp0Wbv1dy_5vRhr0FX"
+     ],
+     "parentId": "PaXLwYr9z38VS7SyuTMdO"
+    },
+    "82yEnCndntSicwoaoYTvY": {
+     "id": "82yEnCndntSicwoaoYTvY",
+     "moduleId": "base.text",
+     "props": {
+      "text": "© West LA Implants · Tony Barriere, DDS",
+      "tag": "span",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "wC5j9AXS1b2jFrxsGiSjp"
+    },
+    "Y4cCMVRyqaudagWkQvI61": {
+     "id": "Y4cCMVRyqaudagWkQvI61",
+     "moduleId": "base.link",
+     "props": {
+      "href": "/privacy-policy",
+      "text": "Privacy",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "7LD_WLRsCKV4fsshI3AwY"
+    },
+    "cEBemEXiYCMj2H702O8Xu": {
+     "id": "cEBemEXiYCMj2H702O8Xu",
+     "moduleId": "base.link",
+     "props": {
+      "href": "/accessibility",
+      "text": "Accessibility",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "7LD_WLRsCKV4fsshI3AwY"
+    },
+    "7LD_WLRsCKV4fsshI3AwY": {
+     "id": "7LD_WLRsCKV4fsshI3AwY",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Y4cCMVRyqaudagWkQvI61",
+      "ztXNZ4E5ie23RRM_fnb47",
+      "cEBemEXiYCMj2H702O8Xu"
+     ],
+     "classIds": [
+      "vjcPmSsSq9BDZEaltFv6b"
+     ],
+     "parentId": "wC5j9AXS1b2jFrxsGiSjp"
+    },
+    "wC5j9AXS1b2jFrxsGiSjp": {
+     "id": "wC5j9AXS1b2jFrxsGiSjp",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "82yEnCndntSicwoaoYTvY",
+      "7LD_WLRsCKV4fsshI3AwY"
+     ],
+     "classIds": [
+      "D9rA5rE-Talt2OCNn4-Bq",
+      "16njTJSwQHEohJqjvli0b"
+     ],
+     "parentId": "PaXLwYr9z38VS7SyuTMdO"
+    },
+    "PaXLwYr9z38VS7SyuTMdO": {
+     "id": "PaXLwYr9z38VS7SyuTMdO",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "footer",
+      "customTag": "",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "4m53wSpu3PHU76Uf1olVM",
+      "wC5j9AXS1b2jFrxsGiSjp"
+     ],
+     "classIds": [
+      "kzPwZ2hme_rkT1z-oDrg-"
+     ],
+     "parentId": "c0c8ptfVcmsw7J6zOOgp9"
+    },
+    "c0c8ptfVcmsw7J6zOOgp9": {
+     "id": "c0c8ptfVcmsw7J6zOOgp9",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "id": "smooth-content"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "Ri_MB-1720Km73PaHfzfM",
+      "PaXLwYr9z38VS7SyuTMdO"
+     ],
+     "classIds": [],
+     "parentId": "3e_C9mKgrqgXpH8VpT2Yf"
+    },
+    "3e_C9mKgrqgXpH8VpT2Yf": {
+     "id": "3e_C9mKgrqgXpH8VpT2Yf",
+     "moduleId": "base.container",
+     "props": {
+      "tag": "div",
+      "customTag": "",
+      "htmlAttributes": {
+       "id": "smooth-wrapper"
+      }
+     },
+     "breakpointOverrides": {},
+     "children": [
+      "c0c8ptfVcmsw7J6zOOgp9"
+     ],
+     "classIds": [],
+     "parentId": "ltwJv49VW-iKWqua46_nl"
+    },
+    "ltwJv49VW-iKWqua46_nl": {
+     "id": "ltwJv49VW-iKWqua46_nl",
+     "moduleId": "base.body",
+     "props": {},
+     "breakpointOverrides": {},
+     "children": [
+      "YnkPI2uqLO09V6GEu26XV",
+      "ZgmVG4FDEg0e6mKXgCirz",
+      "3e_C9mKgrqgXpH8VpT2Yf"
+     ],
+     "classIds": [
+      "Txj8CAd4hZC3GRnH-CiNF"
+     ],
+     "parentId": null
+    },
+    "ztXNZ4E5ie23RRM_fnb47": {
+     "id": "ztXNZ4E5ie23RRM_fnb47",
+     "moduleId": "base.link",
+     "props": {
+      "href": "/hipaa-disclosure",
+      "text": "HIPAA Disclosure",
+      "target": "_self",
+      "htmlAttributes": {}
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [],
+     "parentId": "7LD_WLRsCKV4fsshI3AwY"
+    },
+    "PSxi3zkJ-rm7QqyXI5FQe": {
+     "id": "PSxi3zkJ-rm7QqyXI5FQe",
+     "moduleId": "brandklout.embed-origins.embed",
+     "props": {
+      "source": "snippet",
+      "snippet": "<iframe src=\"https://api.leadconnectorhq.com/widget/form/XaCEV96A0QuF9ufEmkSc\" style=\"width:100%;height:100%;border:none;border-radius:3px\" id=\"inline-XaCEV96A0QuF9ufEmkSc\" data-layout=\"{'id':'INLINE'}\" data-trigger-type=\"alwaysShow\" data-trigger-value=\"\" data-activation-type=\"alwaysActivated\" data-activation-value=\"\" data-deactivation-type=\"neverDeactivate\" data-deactivation-value=\"\" data-form-name=\"West LA Implants - All-on-6 (ChatGPT Ads)\" data-height=\"1100\" data-layout-iframe-id=\"inline-XaCEV96A0QuF9ufEmkSc\" data-form-id=\"XaCEV96A0QuF9ufEmkSc\" title=\"West LA Implants - All-on-6 (ChatGPT Ads)\"></iframe>\n<script src=\"https://link.msgsndr.com/js/form_embed.js\"></script>",
+      "url": "",
+      "title": "Request a consultation (XaCEV96A0QuF9ufEmkSc)",
+      "fit": "auto",
+      "height": 800,
+      "ratio": "16 / 9",
+      "lazy": false,
+      "allowFullscreen": false,
+      "allow": ""
+     },
+     "breakpointOverrides": {},
+     "children": [],
+     "classIds": [
+      "VU83Wrfv-MJNSd4_jhkg1",
+      "uiff1C8i-oyUS3pu1cs_5"
+     ],
+     "parentId": "VuIvwI_Pi9523NW5kK7Q4"
+    }
+   },
+   "rootNodeId": "ltwJv49VW-iKWqua46_nl"
+  }
+ },
+ "slug": "ads-landing-pages/all-on-6-consultation",
+ "status": "published",
+ "seq": 30,
+ "authorUserId": "w-xNsWq6JE8agjBZidDcx",
+ "createdByUserId": "w-xNsWq6JE8agjBZidDcx",
+ "updatedByUserId": "w-xNsWq6JE8agjBZidDcx",
+ "publishedByUserId": "w-xNsWq6JE8agjBZidDcx",
+ "author": {
+  "id": "w-xNsWq6JE8agjBZidDcx",
+  "email": "alejandro@thrivesquare.com",
+  "displayName": "Alejandro Milano",
+  "roleSlug": "owner",
+  "roleName": "Owner"
+ },
+ "createdBy": {
+  "id": "w-xNsWq6JE8agjBZidDcx",
+  "email": "alejandro@thrivesquare.com",
+  "displayName": "Alejandro Milano",
+  "roleSlug": "owner",
+  "roleName": "Owner"
+ },
+ "updatedBy": {
+  "id": "w-xNsWq6JE8agjBZidDcx",
+  "email": "alejandro@thrivesquare.com",
+  "displayName": "Alejandro Milano",
+  "roleSlug": "owner",
+  "roleName": "Owner"
+ },
+ "publishedBy": {
+  "id": "w-xNsWq6JE8agjBZidDcx",
+  "email": "alejandro@thrivesquare.com",
+  "displayName": "Alejandro Milano",
+  "roleSlug": "owner",
+  "roleName": "Owner"
+ },
+ "createdAt": "2026-09-30T16:29:08.301Z",
+ "updatedAt": "2026-10-07T20:16:28.000Z",
+ "publishedAt": "2026-10-07T20:16:28.000Z",
+ "scheduledPublishAt": null,
+ "deletedAt": null
+}

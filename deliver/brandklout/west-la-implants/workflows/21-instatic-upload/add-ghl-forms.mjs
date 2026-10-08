@@ -38,9 +38,10 @@ const CLASS = 'lp-form'
 // Same as css/60-lp.css `.lp-slot.wz-embed`, in the registry's camelCase.
 const FORM_STYLES = { display: 'block', width: '100%', minHeight: '50rem' }
 
-// GHL's inline embed, as the builder's "Embed" tab gives it.
+// GHL's inline embed, as the builder gives it (with the cookie-consent attributes the client's own
+// snippet carries, 2026-10-05).
 const snippet = (id, name) => [
-  `<iframe src="https://api.leadconnectorhq.com/widget/form/${id}" style="width:100%;height:100%;border:none;border-radius:3px" id="inline-${id}" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="${name}" data-height="1100" data-layout-iframe-id="inline-${id}" data-form-id="${id}" title="${name}"></iframe>`,
+  `<iframe src="https://api.leadconnectorhq.com/widget/form/${id}" style="width:100%;height:100%;border:none;border-radius:3px" id="inline-${id}" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="${name}" data-height="1100" data-layout-iframe-id="inline-${id}" data-form-id="${id}" data-cookie-consent="true" data-cookie-consent-provider="auto" title="${name}"></iframe>`,
   '<script src="https://link.msgsndr.com/js/form_embed.js"></script>',
 ].join('\n')
 

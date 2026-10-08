@@ -1,0 +1,19 @@
+shell   src/styles/wla-lp-review.css exact
+shell   src/scripts/wla-sharp-crops.js exact
+shell   src/scripts/wla-lp-pins.js exact
+shell   src/scripts/wla-films.js exact
+shell   body class .is-lp in the registry
+/ads-landing-pages/thank-you-all-on-6  text  "The new-patient line is answered Monday …" -> "Our phones are answered Monday to Friday…"
+/ads-landing-pages/thank-you-all-on-6  text  "Call the new-patient line, or come and s…" -> "Call us, or come and see us on Wilshire.…"
+/ads-landing-pages/thank-you-all-on-6  data-seo  description no longer names the new-patient line
+/ads-landing-pages/thank-you-all-on-6  text kicker already new
+/ads-landing-pages/thank-you-all-on-6  text h1 already new
+/ads-landing-pages/thank-you-all-on-6  text lead already new
+/ads-landing-pages/thank-you-3-on-6  text  "The new-patient line is answered Monday …" -> "Our phones are answered Monday to Friday…"
+/ads-landing-pages/thank-you-3-on-6  text  "Call the new-patient line, or come and s…" -> "Call us, or come and see us on Wilshire.…"
+/ads-landing-pages/thank-you-3-on-6  data-seo  description no longer names the new-patient line
+/ads-landing-pages/thank-you-3-on-6  text kicker already new
+/ads-landing-pages/thank-you-3-on-6  text h1 already new
+/ads-landing-pages/thank-you-3-on-6  text lead already new
+/ads-landing-pages/thank-you-3-on-6  front-desk-receptionist.jpg not on the page (already swapped?)
+/ads-landing-pages/thank-you-3-on-6  barriere_dentalpractice_dentalimplant_westla3.jpg not on the page (already swapped?)
