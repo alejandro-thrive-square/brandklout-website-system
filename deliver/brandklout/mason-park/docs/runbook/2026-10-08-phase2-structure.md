@@ -17,7 +17,7 @@ slots (`827f797e`, at most 2 browser passes): the resume below runs through them
 | 0 backup | `output/fleet/mason-park/backup-pre-phase2/` (site.json, 65 rows, 63 HTML; seq 162) |
 | 0 structure before | `structure-p2-before.txt`: space scale **FAIL** (10 house steps missing), type tokens **FAIL** (3: `heading-style-h5` 1.1rem, `text-size-regular` 1rem, `text-size-medium` 1.06rem), **41 overrides**, **218 split classes**, spacing on tokens **10%** (100 var / 898 literal) |
 | 1 head-parity | `head-mason-park-p2-before/` saved, 224 URLs, 0 not 200 |
-| 1 snapshot p2-before | **not captured** (killed) |
+| 1 snapshot p2-before | second attempt (through the slots): css-parity **done** at 1440/390/1920 (+`~n`); runtime-parity **crashed** at ~159 of 224 pages (Chrome connection closed, `runtime-p2-before.log`); its slot rerun was killed by Claude Code for memory while still waiting for a slot. Resume with the runtime pass only: `node migration-gates.mjs slot --site $S -- runtime-parity.mjs snapshot p2-before --site $S --widths 1440,390` |
 | 2 A dry | `st-p2-dry-type.txt`: + 10 house steps, 255 rules rewritten, 382 of 1,377 rem spacing literals (28%) point at a step, 995 off-scale stay; type map accepted: 3 role classes → `var(--size-*)`, 3 Typography bases, 3 `:root#1372` formulas |
 | 3 B propose | 9 candidates (all `.button` contexts), 20 stay (5 selector lists, 8 runtime classes, 4 tag/`:not`, 1 specificity, 2 `is-ghost` dead) |
 | 3 B dry | `cc-p2-dry.txt`: map accepted, 9 rules rewritten, 65 pages gain combos |
@@ -57,7 +57,7 @@ cd "C:/Users/ACER/Documents/Webzite Studio/Brandklout Website System/deliver/pro
 S=mason-park:staging; C="C:/Users/ACER/orca/workspaces/Brandklout Website System/bk-mason-park/deliver/brandklout/mason-park/workflows/class-standard"
 export PUPPETEER_DIR="C:/Users/ACER/orca/workspaces/Brandklout Website System/bk-brandklout-website/node_modules/"
 node output/status.mjs --site $S                                   # must still be true, seq 162
-node migration-gates.mjs snapshot p2-before --site $S
+node migration-gates.mjs slot --site $S -- runtime-parity.mjs snapshot p2-before --site $S --widths 1440,390   # css p2-before is already captured
 node scale-tokens.mjs --site $S --type "$C/type-map.json" --apply && node output/publish.mjs --site $S
 node migration-gates.mjs snapshot p2-mid --site $S && node migration-gates.mjs diff p2-before p2-mid --site $S
 node context-combo.mjs --site $S --map "$C/combo-map.json" --apply && node output/publish.mjs --site $S
