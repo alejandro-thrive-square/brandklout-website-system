@@ -10,6 +10,7 @@
  * plus, for collection entries (articles.prefix), the body split at its h2s.
  *
  *   node scan-sections.mjs [--config output/seo-config.json] [--host https://staging.example.com] [--out output/schema]
+ *                          [--also /new-page,/other-page]   pages the sitemap does not list yet (staging builds)
  *     → <out>/sections.json
  *
  * Read-only: plain GETs of the public pages, no login. Markup assumptions: lib/sections.mjs.
@@ -29,6 +30,12 @@ const R = makeReader(C.markup)
 const prefix = C.articles?.prefix ?? null
 
 const urls = await sitemapLocs(HOST, C.site.origin)
+// --also /a,/b: pages a sitemap does not list yet. A staging host serves no sitemap and is read at
+// production's paths, so pages built on staging first are invisible to the schema without this.
+for (const p of arg('--also', '').split(',').map((x) => x.trim()).filter(Boolean)) {
+  const u = HOST + (p.startsWith('/') ? p : '/' + p)
+  if (!urls.includes(u)) urls.push(u)
+}
 if (!urls.length) { console.error(`no sitemap URLs on ${HOST} (or ${C.site.origin}) — nothing scanned`); process.exit(1) }
 const pages = {}
 let fails = 0
