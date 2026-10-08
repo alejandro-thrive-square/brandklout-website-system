@@ -6,12 +6,14 @@ then only the runs you need. Do not read them all.
 
 ## Where it stands
 
-**Phase 2 structure (spacing tokens + combo classes) on STAGING is prepared but NOT applied, since
-2026-10-08:** backup, structure audit before (9 contextual overrides, 65% of rem spacing on tokens),
-scale-tokens dry run and a reviewed `21-instatic-upload/class-standard/combo-map.json` (8 rules) are
-done; the p2-before runtime capture was killed for low memory before step A, so staging is unchanged
-(seq 15). Resume from `instatic-api-sync/output/fleet/stone-surgical-arts/STATUS-phase2.md` —
-[run](./runbook/2026-10-08-phase2-structure.md).
+**Phase 2 structure is on STAGING since 2026-10-08 (seq 18), production untouched:** 86 rem spacing
+values read `var(--space-*)` (75% of spacing on tokens; the 210 off-scale values wait for step C, a
+visible snap the user decides), and 8 contextual overrides of role classes became combo classes per
+`21-instatic-upload/class-standard/combo-map.json` (`is-navbar`, `is-on-band`, `is-why`, `is-place`,
+`is-consent`, `is-consent-button`, `is-cta`); one dead override rule remains. Gates: css parity 0 real,
+runtime parity OK against p2-before, head parity 0/55, EDITABLE · IN BOUNDS · CLEAN · canvas ok. Home
+tabs at 1440 flicker in runtime-parity (active tab reads dead) — a gotcha, not a regression.
+Production: replay A + B after review — [run](./runbook/2026-10-08-phase2-structure.md).
 
 Fifty-four routes are built and published to Instatic, served from Railway at
 **`https://www.dfwsurgicalarts.com`** (apex also serves) since 2026-09-10. The old
