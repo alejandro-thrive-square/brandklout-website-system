@@ -16,7 +16,7 @@
  * Logs go to output/fleet/<client>/.
  */
 import { spawnSync } from 'node:child_process'
-import { mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { mkdirSync, writeFileSync, readFileSync, rmSync, readdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { argOf } from './target.mjs'
@@ -59,23 +59,40 @@ const waitForMemory = (name) => {
 const SLOTS = Number(process.env.CAPTURE_SLOTS ?? 2)
 const SLOT_DIR = join(HERE, 'output', 'fleet', '.capture-slots')
 const alive = (pid) => { try { process.kill(pid, 0); return true } catch { return false } }
+/* First come, first served: a waiting pass holds a ticket (`queue/<time>-<pid>`), and only the OLDEST live
+   ticket may take a free slot. Without it a session that chains passes re-took its own slot before a
+   poller woke, and IFA's pass waited 43 minutes behind pass after pass (2026-10-08). */
+const QUEUE_DIR = join(SLOT_DIR, 'queue')
 const takeSlot = (name) => {
-  mkdirSync(SLOT_DIR, { recursive: true })
+  mkdirSync(QUEUE_DIR, { recursive: true })
+  const ticket = join(QUEUE_DIR, `${String(Date.now()).padStart(15, '0')}-${process.pid}`)
+  writeFileSync(ticket, `${process.pid} ${client} ${name}`)
+  const dropTicket = () => { try { rmSync(ticket, { force: true }) } catch {} }
+  process.once('exit', dropTicket)
   for (let i = 0; ; i++) {
-    for (let s = 0; s < SLOTS; s++) {
-      const dir = join(SLOT_DIR, `slot-${s}`)
-      try {
-        mkdirSync(dir)
-        writeFileSync(join(dir, 'owner'), `${process.pid} ${client} ${name} ${new Date().toISOString()}`)
-        return dir
-      } catch {
-        let pid = 0
-        try { pid = Number(readFileSync(join(dir, 'owner'), 'utf8').split(' ')[0]) } catch {}
-        if (pid && !alive(pid)) { try { rmSync(dir, { recursive: true, force: true }) } catch {} }
+    // dead waiters leave the queue; then wait for my turn
+    const live = readdirSync(QUEUE_DIR).sort().filter((t) => {
+      const pid = Number(t.split('-')[1])
+      if (pid && !alive(pid)) { try { rmSync(join(QUEUE_DIR, t), { force: true }) } catch {} return false }
+      return true
+    })
+    if (live[0] === ticket.split(/[\\/]/).pop()) {
+      for (let s = 0; s < SLOTS; s++) {
+        const dir = join(SLOT_DIR, `slot-${s}`)
+        try {
+          mkdirSync(dir)
+          writeFileSync(join(dir, 'owner'), `${process.pid} ${client} ${name} ${new Date().toISOString()}`)
+          dropTicket()
+          return dir
+        } catch {
+          let pid = 0
+          try { pid = Number(readFileSync(join(dir, 'owner'), 'utf8').split(' ')[0]) } catch {}
+          if (pid && !alive(pid)) { try { rmSync(dir, { recursive: true, force: true }) } catch {} }
+        }
       }
     }
-    if (i % 10 === 0) console.log(`wait  ${name.padEnd(34)} all ${SLOTS} capture slots busy`)
-    spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 30000)'])
+    if (i % 60 === 0) console.log(`wait  ${name.padEnd(34)} capture slots busy; place ${Math.max(1, live.indexOf(ticket.split(/[\\/]/).pop()) + 1)} of ${live.length} in the queue`)
+    spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 5000)'])
   }
 }
 const run = (name, args, env = {}) => {
