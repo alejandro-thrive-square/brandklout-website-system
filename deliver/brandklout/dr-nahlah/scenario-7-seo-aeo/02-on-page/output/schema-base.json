@@ -157,7 +157,33 @@
         "medicalSpecialty": "https://schema.org/Dentistry",
         "parentOrganization": {
           "@id": "https://www.drnahlah.com/#organization"
-        }
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Vienna"
+          },
+          {
+            "@type": "City",
+            "name": "Great Falls"
+          },
+          {
+            "@type": "City",
+            "name": "Falls Church"
+          },
+          {
+            "@type": "City",
+            "name": "Reston"
+          }
+        ]
       },
       {
         "@type": "Dentist",
@@ -223,7 +249,13 @@
         "medicalSpecialty": "https://schema.org/Dentistry",
         "parentOrganization": {
           "@id": "https://www.drnahlah.com/#organization"
-        }
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          }
+        ]
       }
     ]
   },

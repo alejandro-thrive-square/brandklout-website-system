@@ -277,6 +277,32 @@
       "parentOrganization": {
         "@id": "https://www.drnahlah.com/#organization"
       },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "McLean"
+        },
+        {
+          "@type": "Place",
+          "name": "Tysons Corner"
+        },
+        {
+          "@type": "City",
+          "name": "Vienna"
+        },
+        {
+          "@type": "City",
+          "name": "Great Falls"
+        },
+        {
+          "@type": "City",
+          "name": "Falls Church"
+        },
+        {
+          "@type": "City",
+          "name": "Reston"
+        }
+      ],
       "amenityFeature": [
         {
           "@type": "LocationFeatureSpecification",
@@ -386,6 +412,12 @@
       "parentOrganization": {
         "@id": "https://www.drnahlah.com/#organization"
       },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Alexandria"
+        }
+      ],
       "sameAs": [
         "https://www.facebook.com/DrNahlahAlexandria/",
         "https://maps.google.com/?cid=15116285013112467378",

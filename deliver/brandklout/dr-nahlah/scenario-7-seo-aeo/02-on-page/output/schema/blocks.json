@@ -4775,6 +4775,55 @@
     }
    },
    {
+    "@type": "FAQPage",
+    "@id": "https://www.drnahlah.com/contact-mclean#faq",
+    "isPartOf": {
+     "@id": "https://www.drnahlah.com/contact-mclean#webpage"
+    },
+    "mainEntity": [
+     {
+      "@type": "Question",
+      "name": "Where is the Tysons Corner office?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "7901 Jones Branch Drive, Suite 220, McLean, VA 22102, in Tysons. The office's Google listing gives a route from wherever you are."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "What hours does the Tysons Corner office keep?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "It opens at 8 am every weekday and closes at 5 pm Monday through Thursday, 2 pm on Friday. There are no weekend hours."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "What is the phone number?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "(703) 448-3312, for new patients and current patients alike."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Is Tysons Corner the nearer office for me?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Usually, if you live in McLean, Tysons, Vienna, Great Falls, Falls Church or Reston. From Alexandria, the Duke Street office is usually closer."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Will I see the same specialist here as in Alexandria?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Yes. One team and one set of standards run both offices, and the board-certified prosthodontist Dr. Esam Nahlah sees patients in each."
+      }
+     }
+    ]
+   },
+   {
     "@type": "ItemList",
     "@id": "https://www.drnahlah.com/contact-mclean#what-to-bring",
     "name": "What to bring, and what to expect.",
@@ -4862,35 +4911,84 @@
     }
    },
    {
+    "@type": "FAQPage",
+    "@id": "https://www.drnahlah.com/contact-alexandria#faq",
+    "isPartOf": {
+     "@id": "https://www.drnahlah.com/contact-alexandria#webpage"
+    },
+    "mainEntity": [
+     {
+      "@type": "Question",
+      "name": "Where is the Alexandria office?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "2855 Duke Street, Alexandria, VA 22314. The link below opens the office in Google Maps for directions."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "What are the Alexandria office hours?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Monday to Thursday, 8 am to 5 pm, and Friday, 8 am to 2 pm. Closed on Saturday and Sunday."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Which number should I call?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "New patients: (571) 617-7245. Current patients: (703) 940-5410."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Is the Alexandria office the closer one for me?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "For most patients in Alexandria, yes. Patients in McLean, Tysons, Vienna and Great Falls are usually closer to the Tysons Corner office on Jones Branch Drive."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Is the care the same at both offices?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Yes. Both offices run the same way, by the same team, and Dr. Esam Nahlah, a board-certified prosthodontist, treats patients at each."
+      }
+     }
+    ]
+   },
+   {
     "@type": "ItemList",
     "@id": "https://www.drnahlah.com/contact-alexandria#what-to-bring",
-    "name": "What to bring, and what to expect.",
+    "name": "Before your first visit in Alexandria.",
     "numberOfItems": 5,
     "itemListElement": [
      {
       "@type": "ListItem",
       "position": 1,
-      "name": "Any existing treatment plan or quote. Second opinions on implant surgery are free"
+      "name": "A quote or treatment plan from another practice, if you have one: a second opinion on implant surgery is free"
      },
      {
       "@type": "ListItem",
       "position": 2,
-      "name": "Recent imaging, if another practice has already scanned you"
+      "name": "Scans or X-rays another office has already taken"
      },
      {
       "@type": "ListItem",
       "position": 3,
-      "name": "Your insurance details; most dental PPO plans are accepted and claims are filed for you"
+      "name": "Your dental insurance card: most PPO plans are accepted, and the office files the claim"
      },
      {
       "@type": "ListItem",
       "position": 4,
-      "name": "A list of medications, particularly if sedation is likely"
+      "name": "The medicines you take, above all if you may have sedation"
      },
      {
       "@type": "ListItem",
       "position": 5,
-      "name": "Time. A first consultation includes an examination and a cone-beam scan"
+      "name": "Enough time for an exam and a cone-beam scan, both part of the first consultation"
      }
     ]
    },

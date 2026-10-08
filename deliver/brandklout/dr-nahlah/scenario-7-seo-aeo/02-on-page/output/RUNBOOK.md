@@ -2,6 +2,45 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07/08 — the on-page pass on STAGING (production untouched)
+
+The user's brief: run the plan doc all the way on staging; no sitemap change (no new pages, no URL
+moves) until the teammates review the proposal. Everything below is on staging.drnahlah.com only.
+
+**Done** (checkpoint `8d8c645b`, the rest in this run's commit)
+- **Backups first:** status of both hosts (59 pages, draft = published); full staging exports in
+  `2026-10-07-staging/backup-staging/` and `backup-staging-2/` (14 MB each, untracked: R2 only).
+- **Schema:** `areaServed` + Vienna, Falls Church, Great Falls, Reston, Fairfax; the lender
+  `https://www.undefined` URLs gone (`/financing`, `/implant-cost`); each office department lists the
+  towns its page names (McLean: McLean, Tysons Corner, Vienna, Great Falls, Falls Church, Reston;
+  Alexandria: Alexandria). FAQPage now on home and both office pages. VOCAB CLEAN, SCHEMA CLEAN.
+- **Keyword H1s:** `push-keyword-h1` on 16 pages (`--only`, `/our-facility` held), hero-look
+  "HEADLINES IDENTICAL, ONE H1 EACH". Home by hand (`output/code/push-home-faq.mjs`: the tagline is
+  the H1 "Prosthodontist & Dental Implants in McLean & Alexandria, VA"); `/contact` by hand
+  (`output/code/push-contact-h1.mjs`: "Contact Our McLean & Alexandria Dental Offices", "Where to go."
+  a `<p id="contactTitle">`), `output/code/text-style.mjs` compare STYLE IDENTICAL at 1440 and 390.
+- **Titles/descriptions:** 19 pages from `2026-10-07-staging/page-seo.json` via `ops/set-page-seo.mjs`.
+- **Alt text:** 114 images (106 gallery cases, 8 service pairs) via `ops/set-media-alt.mjs`.
+- **Home local FAQ:** `#local-faq`, 7 questions from stated facts, before `#invitation`.
+- **Keyword gate on staging:** 1016 passed, 1 failed (`/our-facility`, held), 22 warnings
+  (`2026-10-07-staging/gate-after-offices.log`, gitignored). Baseline was 42 FAIL.
+
+**Next**
+1. The team reviews the plan doc and the staging pages; nothing ships to production before that.
+2. `/our-facility`: its H1 is McLean's but its photos are of the Alexandria office (the 2025-09-24
+   shoot). Decide: retitle it for both offices, or swap in McLean photos (none exist yet).
+3. Production, after the yes: the same scripts with `--allow-production`, in this order: schema,
+   keyword H1s, `/contact`, home, page SEO, alts; then `plugin-stores.mjs` to keep staging level.
+
+**Gotchas**
+- A renamed section heading stops `build-schema` (`BUILD STOPPED: … no section heading matches`):
+  `seo-config.json` keys sections by heading regex. The Alexandria "What to bring" rename needed
+  `"bring": "^Before your first visit"`.
+- `text-style.mjs` finds elements by text: a split headline wraps its words in divs, a tagline sits in
+  a wrapper div; it takes the first non-div element with the exact text.
+- Every page save drops `seoTitle`/`seoDescription`; `insta-api` restores them ("restored page cells
+  the save dropped") and the scripts check them on read-back.
+
 ## 2026-10-07 — config for the promoted Instatic SEO tools (no writes)
 
 **Done**
