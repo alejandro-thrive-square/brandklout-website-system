@@ -36,8 +36,8 @@ mkdirSync(LOG, { recursive: true })
 const LAUNCH_ERROR = /DevToolsActivePort|did not expose a debugger socket|waiting for the WS endpoint|Failed to launch the browser/
 /* Several site sessions capture on one workstation, beside the user's own Chrome (10 GB on 2026-10-08):
    three parallel captures ran it out of memory and Claude Code killed one. Every browser pass waits
-   until MIN_FREE_GB (default 5) is free, checking each minute, for at most two hours. */
-const MIN_FREE_GB = Number(process.env.MIN_FREE_GB ?? 5)
+   until MIN_FREE_GB (default 6; one capture of a heavy site holds ~2 GB) is free, checking each minute, for at most two hours. */
+const MIN_FREE_GB = Number(process.env.MIN_FREE_GB ?? 6)
 const freeGb = () => {
   if (process.platform !== 'win32') return Infinity
   const r = spawnSync('powershell', ['-NoProfile', '-Command', '(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory'], { encoding: 'utf8' })
