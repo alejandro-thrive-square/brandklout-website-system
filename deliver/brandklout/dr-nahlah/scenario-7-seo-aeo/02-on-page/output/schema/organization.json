@@ -1,0 +1,396 @@
+{
+  "@type": "Dentist",
+  "@id": "https://www.drnahlah.com/#organization",
+  "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
+  "alternateName": [
+    "Dr. Nahlah Implants & Prosthodontics",
+    "Dr. Esam Nahlah, DDS, MS"
+  ],
+  "description": "Implant dentistry and prosthodontics in McLean (Tysons Corner) and Alexandria, Virginia, led by board-certified prosthodontist Dr. Esam Nahlah: dental implants, All-on-4 full arches, full-mouth reconstruction and cosmetic dentistry, with an in-house digital laboratory.",
+  "url": "https://www.drnahlah.com/",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://www.drnahlah.com/uploads/PhKVdS1R0_xk-mtalvGAw-cropped-nahlah-favicon.png"
+  },
+  "image": "https://www.drnahlah.com/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+  "telephone": "+1-703-448-3312",
+  "priceRange": "$$$",
+  "currenciesAccepted": "USD",
+  "paymentAccepted": "Cash, Check, Credit card (most major cards accepted), Dental insurance (most PPO plans), Third-party financing (CareCredit, Proceed Finance, LendingClub)",
+  "medicalSpecialty": "https://schema.org/Dentistry",
+  "isAcceptingNewPatients": true,
+  "knowsAbout": [
+    {
+      "@type": "Thing",
+      "name": "Prosthodontics",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Prosthodontics",
+        "https://www.wikidata.org/wiki/Q1349700"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Dental implant",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Dental_implant",
+        "https://www.wikidata.org/wiki/Q143680"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "All-on-4",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/All-on-4",
+        "https://www.wikidata.org/wiki/Q4728369"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Dentures",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Dentures",
+        "https://www.wikidata.org/wiki/Q143567"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Veneer (dentistry)",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Veneer_(dentistry)",
+        "https://www.wikidata.org/wiki/Q1686140"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Crown (dental restoration)",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Crown_(dental_restoration)",
+        "https://www.wikidata.org/wiki/Q143720"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Bridge (dentistry)",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Bridge_(dentistry)",
+        "https://www.wikidata.org/wiki/Q996044"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Tooth whitening",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Tooth_whitening",
+        "https://www.wikidata.org/wiki/Q143458"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Bone grafting",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Bone_grafting",
+        "https://www.wikidata.org/wiki/Q3814234"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Dental extraction",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Dental_extraction",
+        "https://www.wikidata.org/wiki/Q849893"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Sedation dentistry",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Sedation_dentistry",
+        "https://www.wikidata.org/wiki/Q7445147"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Cosmetic dentistry",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Cosmetic_dentistry",
+        "https://www.wikidata.org/wiki/Q2341717"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Dental emergency",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Dental_emergency",
+        "https://www.wikidata.org/wiki/Q5259417"
+      ]
+    },
+    {
+      "@type": "Thing",
+      "name": "Cone beam computed tomography",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Cone_beam_computed_tomography",
+        "https://www.wikidata.org/wiki/Q1224951"
+      ]
+    }
+  ],
+  "founder": {
+    "@id": "https://www.drnahlah.com/meet-dr-nahlah#person"
+  },
+  "employee": [
+    {
+      "@id": "https://www.drnahlah.com/meet-dr-nahlah#person"
+    },
+    {
+      "@id": "https://www.drnahlah.com/our-team#venita"
+    },
+    {
+      "@id": "https://www.drnahlah.com/our-team#junko"
+    },
+    {
+      "@id": "https://www.drnahlah.com/our-team#helia"
+    },
+    {
+      "@id": "https://www.drnahlah.com/our-team#hana"
+    },
+    {
+      "@id": "https://www.drnahlah.com/our-team#basma"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/drnahlahprosthodontist/",
+    "https://www.facebook.com/DrNahlahAlexandria/",
+    "https://www.instagram.com/drnahlah/",
+    "https://www.youtube.com/channel/UCKAbJ7TTUB-rFOTQ57DEq9g"
+  ],
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "McLean"
+    },
+    {
+      "@type": "Place",
+      "name": "Tysons Corner"
+    },
+    {
+      "@type": "City",
+      "name": "Alexandria"
+    },
+    {
+      "@type": "City",
+      "name": "Arlington"
+    },
+    {
+      "@type": "City",
+      "name": "Vienna"
+    },
+    {
+      "@type": "City",
+      "name": "Falls Church"
+    },
+    {
+      "@type": "City",
+      "name": "Great Falls"
+    },
+    {
+      "@type": "City",
+      "name": "Reston"
+    },
+    {
+      "@type": "City",
+      "name": "Fairfax"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Fairfax County"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Northern Virginia"
+    }
+  ],
+  "hasOfferCatalog": {
+    "@id": "https://www.drnahlah.com/#services"
+  },
+  "department": [
+    {
+      "@type": "Dentist",
+      "@id": "https://www.drnahlah.com/contact-mclean#office",
+      "name": "Dr. Nahlah Implants and Prosthodontics Specialists, Tysons Corner, McLean",
+      "legalName": "Esam Abou Nahlah, DDS, MS, PLLC",
+      "url": "https://www.drnahlah.com/contact-mclean",
+      "image": "https://www.drnahlah.com/uploads/wLx5986aU4QIdny8mqxu4-practice-space-1.jpg",
+      "telephone": "+1-703-448-3312",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "new patients",
+          "telephone": "+1-703-448-3312",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "existing patients",
+          "telephone": "+1-703-448-3312",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "7901 Jones Branch Drive, Suite 220",
+        "addressLocality": "McLean",
+        "postalCode": "22102",
+        "addressRegion": "VA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.9260584,
+        "longitude": -77.2189653
+      },
+      "hasMap": "https://maps.google.com/?cid=16584195885077624360",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "priceRange": "$$$",
+      "isAcceptingNewPatients": true,
+      "medicalSpecialty": "https://schema.org/Dentistry",
+      "parentOrganization": {
+        "@id": "https://www.drnahlah.com/#organization"
+      },
+      "amenityFeature": [
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "CBCT scanner",
+          "value": true,
+          "description": "Images the jaw in three dimensions, so bone volume and nerve position are measured before surgery rather than found during it."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Intraoral scanner",
+          "value": true,
+          "description": "Digital impressions. No tray, no putty, no gagging, and an accuracy a physical impression cannot reach."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Guided implant surgery",
+          "value": true,
+          "description": "Every implant is planned on the scan and placed through a printed guide, at the planned angle and depth. Smaller incisions, shorter recovery."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "In-house digital lab",
+          "value": true,
+          "description": "Both practices have one. A shade or a shape can be argued about in person instead of described on a form."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Milling machine",
+          "value": true,
+          "description": "The design is cut here. Nothing is posted to another state and waited on, which is what removes weeks from a full-arch case."
+        },
+        {
+          "@type": "LocationFeatureSpecification",
+          "name": "Zirconia & porcelain oven",
+          "value": true,
+          "description": "Final fabrication and firing happen in the building, so a remake is days rather than the better part of a month."
+        }
+      ],
+      "sameAs": [
+        "https://www.facebook.com/drnahlahprosthodontist/",
+        "https://maps.google.com/?cid=16584195885077624360",
+        "https://www.yelp.com/biz/nahlah-implants-and-prosthodontics-specialists-mclean-3"
+      ]
+    },
+    {
+      "@type": "Dentist",
+      "@id": "https://www.drnahlah.com/contact-alexandria#office",
+      "name": "Dr. Nahlah Implants and Prosthodontics Specialists, Alexandria",
+      "legalName": "Implants And Prosthodontics Specialists, PLLC",
+      "url": "https://www.drnahlah.com/contact-alexandria",
+      "image": "https://www.drnahlah.com/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+      "telephone": "+1-571-617-7245",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "new patients",
+          "telephone": "+1-571-617-7245",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "existing patients",
+          "telephone": "+1-703-940-5410",
+          "areaServed": "US",
+          "availableLanguage": "English"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "2855 Duke Street",
+        "addressLocality": "Alexandria",
+        "postalCode": "22314",
+        "addressRegion": "VA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 38.8073027,
+        "longitude": -77.0787121
+      },
+      "hasMap": "https://maps.google.com/?cid=15116285013112467378",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday"
+          ],
+          "opens": "08:00",
+          "closes": "17:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Friday"
+          ],
+          "opens": "08:00",
+          "closes": "14:00"
+        }
+      ],
+      "priceRange": "$$$",
+      "isAcceptingNewPatients": true,
+      "medicalSpecialty": "https://schema.org/Dentistry",
+      "parentOrganization": {
+        "@id": "https://www.drnahlah.com/#organization"
+      },
+      "sameAs": [
+        "https://www.facebook.com/DrNahlahAlexandria/",
+        "https://maps.google.com/?cid=15116285013112467378",
+        "https://www.yelp.com/biz/dr-nahlah-alexandria-2"
+      ]
+    }
+  ]
+}
