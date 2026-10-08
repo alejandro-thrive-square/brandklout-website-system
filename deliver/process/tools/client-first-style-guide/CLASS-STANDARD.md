@@ -258,6 +258,12 @@ checks them (`--strict` for new builds; a report in `migration-gates final` for 
   `--map <file>` (dry, `--apply`). The combo goes on exactly the nodes the old selector matched, and the
   rule keeps its specificity and its place. Components, runtime classes, tags, specificity changes and
   names already in use are refused and listed for a person.
+- **D.** `fold-split.mjs --site $S` (dry, `--apply`): a class an append-mode move split over its chip and
+  later ambient `.name` rules goes back into ONE rule, the chip, at the latest seat; dead declarations
+  are dropped (never revived), and a class is refused when a context order could flip, a shorthand
+  meets a longhand, or a declaration would move past an equal-specificity rival. Prove it at the
+  three standard widths AND one width inside every breakpoint band (1100, 850, 600, 420): a fold's
+  risk sits at media boundaries. A new migration runs it right after `css-to-registry`.
 - **C.** (visible: the user decides per site after a before/after) snap off-scale spacing to the nearest
   step. On 2026-10-08 only 22–35% of the fleet's spacing equalled a house step.
 - Prove: `snapshot before`, A, publish, `snapshot mid` + diff, B, publish, `snapshot after` + diff,

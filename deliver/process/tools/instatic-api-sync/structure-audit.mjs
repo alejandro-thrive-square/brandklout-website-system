@@ -12,6 +12,9 @@
  *                    class sets (`.section_arrival .heading-style-h1 {font-size}`): vary with a combo
  *                    class on the element instead. Themes and states (`[data-theme]`, `:not(.is-open)`,
  *                    `:hover` of a context) are allowed.
+ *   5. ONE RULE PER CLASS  a class whose `.name` selector is held by 2+ rules (an append-mode move left
+ *                    the chip, where elements point, plus later ambient rules: a panel edit on the chip
+ *                    loses). --strict fails. Fix: fold-split.mjs.                              [site mode]
  *   4. SPACING ON TOKENS  share of rem spacing values (padding / margin / gap) that read a var();
  *                    --strict needs >= 80%. Existing sites report it until their scale snap (phase 2 C).
  * New builds (Scenario 0 step 03) run --strict; migrated sites run it in `migration-gates final` as a
@@ -36,6 +39,7 @@ const fam = (k) => k.replace(/^(Webkit|Moz)/, '').replace(/^(padding|margin|bord
 /* Normalised rules: { selector, decls: [[prop, value]] } (every breakpoint folded in) */
 let rules = []
 let frameworkSteps = null
+let splitClasses = null
 let label
 if (argOf('--local')) {
   const { parseCss } = await import('./css-source.mjs')
@@ -51,6 +55,9 @@ if (argOf('--local')) {
     const decls = [r.styles ?? {}, ...Object.values(r.contextStyles ?? {})].flatMap((b) => Object.entries(b ?? {}))
     for (const sel of String(r.selector ?? '').split(',')) rules.push({ selector: sel.trim(), decls })
   }
+  const bySel = new Map()
+  for (const r of Object.values(site.styleRules ?? {})) { const m = String(r.selector ?? '').match(/^\.([\w-]+)$/); if (m && !r.rawCss) bySel.set(m[1], (bySel.get(m[1]) ?? 0) + 1) }
+  splitClasses = [...bySel].filter(([, n]) => n > 1).map(([c]) => c)
   frameworkSteps = new Set((site.settings?.framework?.spacing?.groups ?? []).flatMap((g) => (g.manualSizes ?? []).map((s) => s.name)))
   label = target.url
 }
@@ -91,6 +98,11 @@ for (const r of rules) {
 const uniq = [...new Set(overrides)]
 lines.push(`${uniq.length ? 'FAIL' : 'ok  '}  no overrides     ${uniq.length ? `${uniq.length} static contextual override(s) of utility/role classes, e.g. ${uniq.slice(0, 4).join(' | ')}` : 'none'}`)
 if (uniq.length) fails.push('overrides')
+// 5
+if (splitClasses) {
+  lines.push(`${splitClasses.length ? 'FAIL' : 'ok  '}  one rule/class   ${splitClasses.length ? `${splitClasses.length} class(es) split over 2+ rules (panel edits on the chip can lose), e.g. ${splitClasses.slice(0, 6).join(', ')}` : 'every class lives in one rule'}`)
+  if (splitClasses.length) fails.push('split classes')
+}
 // 4
 let tok = 0, lit = 0
 for (const r of rules) for (const [k, v] of r.decls) {
