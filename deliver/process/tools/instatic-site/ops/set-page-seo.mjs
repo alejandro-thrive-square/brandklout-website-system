@@ -90,3 +90,6 @@ for (const [key, v] of Object.entries(want)) {
 }
 
 
+
+console.log(`\n${fail ? 'FAIL' : 'CLEAN'}  ${APPLY ? 'written and read back (draft only: publish next)' : 'plan only: pass --apply'}`)
+process.exit(fail ? 1 : 0)
