@@ -22,7 +22,9 @@ for (const s of shots) {
   const [p] = pagePaths(p0) // undoes Git Bash's rewrite of a leading "/"
   const page = await browser.newPage()
   await page.setViewport({ width: +w, height: +w > 600 ? 900 : 844 })
-  await page.goto(`${S}${p}?shot=${Date.now()}`, { waitUntil: 'networkidle2', timeout: 60000 })
+  // see hero-look.mjs: embeds can keep the network busy forever; the hero is ready once the page loaded
+  await page.goto(`${S}${p}?shot=${Date.now()}`, { waitUntil: 'networkidle2', timeout: 20000 }).catch((e) => { if (e.name !== 'TimeoutError') throw e })
+  await page.evaluate(() => document.fonts.ready)
   await new Promise((r) => setTimeout(r, 3000))
   await page.screenshot({ path: `${OUT}/${(p === '/' ? 'index' : p.slice(1)).replace(/\//g, '_')}@${w}.png` })
   await page.close()

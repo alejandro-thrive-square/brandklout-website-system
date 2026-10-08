@@ -50,7 +50,10 @@ for (const width of K.widths) {
   const page = await browser.newPage()
   await page.setViewport({ width, height: 900 })
   for (const p of paths) {
-    await page.goto(`${S}${p === '/' ? '/' : p}?look=${Date.now()}`, { waitUntil: 'networkidle2', timeout: 60000 })
+    // networkidle2 never settles on a page whose embeds keep a connection open (reviews, GHL, video): read
+    // the hero once the page has loaded instead of failing the whole run (Dr. Nahlah staging, 2026-10-07)
+    await page.goto(`${S}${p === '/' ? '/' : p}?look=${Date.now()}`, { waitUntil: 'networkidle2', timeout: 20000 }).catch((e) => { if (e.name !== 'TimeoutError') throw e })
+    await page.evaluate(() => document.fonts.ready)
     await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
     await new Promise((r) => setTimeout(r, 2500)) // let the split / reveal animation settle
     out[`${p}@${width}`] = await page.evaluate((heroSel, attr, leadSel) => {
