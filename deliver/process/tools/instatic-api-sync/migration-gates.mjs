@@ -54,9 +54,9 @@ const waitForMemory = (name) => {
 }
 /* The memory check stops a pass from STARTING on a full machine, but passes that start together still
    grow together (Kids' 3-hour runtime capture was killed with four sessions running, 2026-10-08). So a
-   machine-wide limit too: at most CAPTURE_SLOTS (default 2) browser passes at once, across every
+   machine-wide limit too: at most CAPTURE_SLOTS (default 3; 2 before runtime-parity recycled its browser) browser passes at once, across every
    session, held as a directory lock with the owner's pid (a dead owner's slot is reclaimed). */
-const SLOTS = Number(process.env.CAPTURE_SLOTS ?? 2)
+const SLOTS = Number(process.env.CAPTURE_SLOTS ?? 3)
 const SLOT_DIR = join(HERE, 'output', 'fleet', '.capture-slots')
 const alive = (pid) => { try { process.kill(pid, 0); return true } catch { return false } }
 const takeSlot = (name) => {
