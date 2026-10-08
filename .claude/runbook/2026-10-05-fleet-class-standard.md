@@ -112,7 +112,7 @@ token that computes the same); behaviour is compared once, p2-before → p2-afte
 | Site | Result |
 | --- | --- |
 | stone-surgical-arts | **DONE** (seq 15→18): rem spacing on tokens 65→75%, overrides 9→1 (a dead rule matching 0 nodes), D skipped (0 split classes); css 0 real ×3 widths both steps, runtime noise proven (home tab "active = DEAD" flips per capture), head 0/55, EDITABLE · IN BOUNDS · CLEAN · canvas ok. Combo map in the client's `class-standard/combo-map.json` |
-| institute-for-advanced-dentistry | A, B, D pushed through IFA's pipeline (`a40493f5`, seq 31); final runtime recheck of `p2-folded` running |
+| institute-for-advanced-dentistry | **DONE** (seq 31, source-first through IFA's pipeline; `bk-ifa-dentistry` `a40493f5`, `9e7b0b24`): Framework gained the 10 `space-*` steps (space scale FAIL→ok), spacing on tokens 5→39%, overrides 19→2 (three-class selectors, refused), split classes 87→34 (each refused for a cascade reason); css 0 real at every step and at 4 band widths across the fold, runtime survivors all GHL-iframe resize timing, head 0/57, EDITABLE · IN BOUNDS · CLEAN · canvas ok. `push/editable.mjs` now runs fold-split on every push. 435 off-scale literals wait for C |
 | mason-park | A (seq 163) proven, B published (seq 164, 9 rules, 65 pages); p2-after + D (182/218 foldable) to go |
 | mason-park-kids | A + B published (seq 35), A proven; p2-after capture, then D |
 | dr-nahlah | A + B published, style-proven; runtime diff p2-before → p2-after running, then D |
