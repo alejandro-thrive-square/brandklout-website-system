@@ -41,10 +41,8 @@ Clarity card and the Scenario 7 lane.
     as in Scenario 7, not SpyFu or Keyword Planner.
 
 ## Next
-- *Finish SOP's* in Asana: the user decides whether this closes it. One idea from the 2026-08-30
-  rewrite was a five-field step template (Preconditions, Gate, Done, Owner, Failure modes). No step
-  directive and no board lane carries it; the board uses the owner's own layout (Checklist, Context
-  Actions, Conditionals, AI Models, Do, Don't).
+- *Finish SOP's* in Asana: the user decides whether this closes it. (A five-field step template
+  from an old Claude memory was never a user decision. The SOPs keep the owner's layout.)
 - The INDEX row for 2026-10-07 Scenario 7 said "FigJam lane not yet drawn". The lane was drawn the
   same day (`f2e5e131`), and the row is corrected.
 
