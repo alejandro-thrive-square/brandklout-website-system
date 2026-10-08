@@ -5,6 +5,16 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Phase 2 structure, prepared and blocked - 2026-10-08
+
+**Staging is unchanged (seq 162, draft == published).** Phase 2 of the class standard (spacing/type
+tokens, combo classes, folding the 218 split classes) is prepared and dry-run clean, but its
+`p2-before` capture was killed for machine memory and is **not restarted unaided**
+([`runbook/2026-10-08-phase2-structure.md`](./runbook/2026-10-08-phase2-structure.md), with the
+resume sequence). Maps: `workflows/class-standard/type-map.json`, `combo-map.json`. **The local
+source `09-static-rebuild/home/` is still pre-phase-1** (old class names): never full-push it over
+staging without replaying the class map, the tokens and the combo map first.
+
 ## Mobile menu submenus - 2026-10-08
 
 **The phone drawer's submenus open inside the drawer again on both instances** (Services, About and

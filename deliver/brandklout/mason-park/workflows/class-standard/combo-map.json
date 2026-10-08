@@ -1,0 +1,11 @@
+{
+  ".navbar_actions .button": "is-navbar",
+  ".chapter_component .button::after": "is-chapter",
+  ".chapter_component .button:hover": "is-chapter",
+  ".chapter_component .button.is-large": "is-chapter-large",
+  ".chapter_component .button.is-ghost-light": "is-chapter-ghost-light",
+  ".chapter_component .button.is-ghost-light::after": "is-chapter-ghost-light",
+  ".chapter_component .button.is-ghost-light:hover": "is-chapter-ghost-light",
+  ".arrival_actions .button": "is-arrival",
+  ".landing-rail_component .button": "is-landing-rail"
+}

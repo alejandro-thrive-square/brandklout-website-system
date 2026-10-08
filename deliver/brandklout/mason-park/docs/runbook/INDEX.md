@@ -1,11 +1,12 @@
 # Runbook index
 
-33 runs, newest first. Each line is one file in this folder.
+34 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-08 | 2026-10-08 — **Phase 2 structure prepared, BLOCKED before any write** (staging): backup, before report (10 house steps missing, 3 literal role sizes, 41 overrides, 218 split classes, 10% spacing on tokens), type map + combo map reviewed and accepted by dry runs, fold dry run (182 fold / 36 stay); the p2-before capture was killed for memory and is not restarted unaided; local source left pre-phase-1 on purpose; full resume sequence — carries **gotchas** | [`2026-10-08-phase2-structure.md`](./2026-10-08-phase2-structure.md) |
 | 2026-10-08 | 2026-10-08 — **Mobile menu fixed**: tapping Services/About/Patients slid the submenu half its width off the drawer (desktop `:focus-within` `translateX(-50%)` outranked the drawer reset), live on both instances since launch; fixed in site.css, staging registry and production asset, both published; new gate `nav-menus.mjs` on main (104 problems before, none after) — carries **gotchas** | [`2026-10-08-mobile-menu-submenus.md`](./2026-10-08-mobile-menu-submenus.md) |
 | 2026-10-07 | 2026-10-07 — **Microsoft Clarity removed** (fleet-wide, HIPAA: no BAA) from this site's GTM container — carries **gotchas** | [`2026-10-07-microsoft-clarity-removed.md`](./2026-10-07-microsoft-clarity-removed.md) |
 | 2026-10-05 | 2026-10-05 — Client-First class standard + everything editable on **staging**: mason-park.css (1,898 rules) into the registry, 497 renames + 4 merges, Framework owns 33 variables; parity 0 real, runtime A/B checked, EDITABLE, IN BOUNDS, CLEAN. Production untouched (unrelated unpublished prod draft) — carries **gotchas** | [`2026-10-05-class-standard-and-editability-staging.md`](./2026-10-05-class-standard-and-editability-staging.md) |
