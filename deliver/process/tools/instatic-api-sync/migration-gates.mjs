@@ -34,8 +34,27 @@ mkdirSync(LOG, { recursive: true })
 /* A pass that dies launching Chrome (a loaded machine) produced no result: run it again, up to
    three times, instead of reporting a FAIL that is not about the site. */
 const LAUNCH_ERROR = /DevToolsActivePort|did not expose a debugger socket|waiting for the WS endpoint|Failed to launch the browser/
+/* Several site sessions capture on one workstation, beside the user's own Chrome (10 GB on 2026-10-08):
+   three parallel captures ran it out of memory and Claude Code killed one. Every browser pass waits
+   until MIN_FREE_GB (default 5) is free, checking each minute, for at most two hours. */
+const MIN_FREE_GB = Number(process.env.MIN_FREE_GB ?? 5)
+const freeGb = () => {
+  if (process.platform !== 'win32') return Infinity
+  const r = spawnSync('powershell', ['-NoProfile', '-Command', '(Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory'], { encoding: 'utf8' })
+  const kb = Number(String(r.stdout ?? '').trim())
+  return Number.isFinite(kb) && kb > 0 ? kb / 1048576 : Infinity
+}
+const waitForMemory = (name) => {
+  for (let i = 0; i < 120; i++) {
+    const free = freeGb()
+    if (free >= MIN_FREE_GB) return
+    if (i % 10 === 0) console.log(`wait  ${name.padEnd(34)} ${free.toFixed(1)} GB free, waiting for ${MIN_FREE_GB} GB`)
+    spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 60000)'])
+  }
+}
 const run = (name, args, env = {}) => {
   let r, out
+  if (/parity\.mjs$/.test(args[0]) && args[1] === 'snapshot') waitForMemory(name)
   for (let attempt = 1; attempt <= 3; attempt++) {
     r = spawnSync(process.execPath, args, { cwd: HERE, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 1 << 28 })
     out = (r.stdout ?? '') + (r.stderr ?? '')
