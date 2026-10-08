@@ -142,10 +142,10 @@ async function browser() {
   })
   await new Promise((r) => sock.addEventListener('open', r, { once: true }))
 
-  const send = (method, params = {}, sessionId) =>
+  const send = (method, params = {}, sessionId, timeoutMs = 60000) =>
     new Promise((res, rej) => {
       const id = ++nextId
-      const timer = setTimeout(() => rej(new Error(`timeout ${method}`)), 60000)
+      const timer = setTimeout(() => rej(new Error(`timeout ${method}`)), timeoutMs)
       pending.set(id, (m) => {
         clearTimeout(timer)
         m.error ? rej(new Error(m.error.message)) : res(m.result)
@@ -155,7 +155,7 @@ async function browser() {
 
   const target = (await getJson('/json/list', port)).find((t) => t.type === 'page')
   const { sessionId } = await send('Target.attachToTarget', { targetId: target.id, flatten: true })
-  const S = (m, p = {}) => send(m, p, sessionId)
+  const S = (m, p = {}, timeoutMs) => send(m, p, sessionId, timeoutMs)
   await S('Page.enable')
   await S('Runtime.enable')
   // CSS-only capture: no GSAP writing inline transforms mid-scroll.
@@ -173,8 +173,8 @@ async function browser() {
 
   return {
     S,
-    evaluate: async (expression) =>
-      (await S('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result.value,
+    evaluate: async (expression, timeoutMs) =>
+      (await S('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }, timeoutMs)).result.value,
     close: async () => {
       try { sock.send(JSON.stringify({ id: ++nextId, method: 'Browser.close' })) } catch {}
       await killTree()
@@ -255,32 +255,46 @@ if (cmd === 'snapshot') {
   if (!a) throw new Error('usage: css-parity.mjs snapshot <label>')
   const slugs = await pageSlugs()
   console.log(`capturing ${slugs.length} pages from ${BASE} at ${VIEWPORT.width}x${VIEWPORT.height} (scripts disabled)`)
-  const br = await browser()
+  let br = await browser()
   const snapshot = {}
   try {
     for (const slug of slugs) {
-      await br.S('Page.navigate', { url: `${BASE}/${slug}` })
+      // A page gets PAGE_BUDGET ms. A hung renderer used to stall a pass for 80+ minutes (each readiness
+      // poll waited out its 60 s CDP timeout, 120 times: Dr. Nahlah /all-on-4-alexandria-va at 1920,
+      // 2026-10-08). Over budget, the page is recorded empty (a broken capture, which the gates treat as
+      // unreliable and the second `~n` capture covers) and the browser is restarted.
+      const started = Date.now()
+      const PAGE_BUDGET = Number(process.env.PARITY_PAGE_BUDGET ?? 90000)
+      const over = () => Date.now() - started > PAGE_BUDGET
+      try {
+      await br.S('Page.navigate', { url: `${BASE}/${slug}` }, 30000)
       // Wait for the document AND its stylesheets (readyState 'complete'), then settle. A fixed
       // 2.5 s used to be enough; on a busy machine it captured a page before its CSS arrived
       // (Stone Surgical Arts hipaa-disclosure, 2026-10-05: 381 phantom differences).
       await wait(800)
       for (let t = 0; t < 120; t++) {
-        const ready = await br.evaluate(`document.readyState === 'complete' && [...document.styleSheets].length > 0`).catch(() => false)
-        if (ready) break
+        const ready = await br.evaluate(`document.readyState === 'complete' && [...document.styleSheets].length > 0`, 5000).catch(() => false)
+        if (ready || over()) break
         await wait(500)
       }
       // and for web fonts: a fallback face wraps text differently (Stone Surgical Arts hipaa, +2px
       // paragraphs under load). `document.fonts.ready` can resolve before the CSS declaring the faces
       // is parsed, so wait until no face is still loading.
       for (let t = 0; t < 40; t++) {
-        const fontsDone = await br.evaluate(`document.fonts.status === 'loaded' && ![...document.fonts].some((f) => f.status === 'loading')`).catch(() => true)
-        if (fontsDone) break
+        const fontsDone = await br.evaluate(`document.fonts.status === 'loaded' && ![...document.fonts].some((f) => f.status === 'loading')`, 5000).catch(() => true)
+        if (fontsDone || over()) break
         await wait(250)
       }
       await wait(1200)
-      const data = await br.evaluate(CAPTURE(PROPS))
+      const data = await br.evaluate(CAPTURE(PROPS), Math.max(20000, PAGE_BUDGET - (Date.now() - started)))
       snapshot[slug || '/'] = data
       console.log(`  ${(slug || '/').padEnd(34)} ${Object.keys(data ?? {}).length} elements`)
+      } catch (e) {
+        snapshot[slug || '/'] = {}
+        console.log(`  ${(slug || '/').padEnd(34)} CAPTURE FAILED (${String(e.message ?? e).slice(0, 60)}): recorded empty, browser restarted`)
+        await br.close().catch(() => {})
+        br = await browser()
+      }
     }
   } finally {
     await br.close()
