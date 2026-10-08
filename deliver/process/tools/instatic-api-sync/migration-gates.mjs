@@ -16,7 +16,7 @@
  * Logs go to output/fleet/<client>/.
  */
 import { spawnSync } from 'node:child_process'
-import { mkdirSync, writeFileSync, readFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { argOf } from './target.mjs'
@@ -52,9 +52,36 @@ const waitForMemory = (name) => {
     spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 60000)'])
   }
 }
+/* The memory check stops a pass from STARTING on a full machine, but passes that start together still
+   grow together (Kids' 3-hour runtime capture was killed with four sessions running, 2026-10-08). So a
+   machine-wide limit too: at most CAPTURE_SLOTS (default 2) browser passes at once, across every
+   session, held as a directory lock with the owner's pid (a dead owner's slot is reclaimed). */
+const SLOTS = Number(process.env.CAPTURE_SLOTS ?? 2)
+const SLOT_DIR = join(HERE, 'output', 'fleet', '.capture-slots')
+const alive = (pid) => { try { process.kill(pid, 0); return true } catch { return false } }
+const takeSlot = (name) => {
+  mkdirSync(SLOT_DIR, { recursive: true })
+  for (let i = 0; ; i++) {
+    for (let s = 0; s < SLOTS; s++) {
+      const dir = join(SLOT_DIR, `slot-${s}`)
+      try {
+        mkdirSync(dir)
+        writeFileSync(join(dir, 'owner'), `${process.pid} ${client} ${name} ${new Date().toISOString()}`)
+        return dir
+      } catch {
+        let pid = 0
+        try { pid = Number(readFileSync(join(dir, 'owner'), 'utf8').split(' ')[0]) } catch {}
+        if (pid && !alive(pid)) { try { rmSync(dir, { recursive: true, force: true }) } catch {} }
+      }
+    }
+    if (i % 10 === 0) console.log(`wait  ${name.padEnd(34)} all ${SLOTS} capture slots busy`)
+    spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 30000)'])
+  }
+}
 const run = (name, args, env = {}) => {
-  let r, out
-  if (/parity\.mjs$/.test(args[0]) && args[1] === 'snapshot') waitForMemory(name)
+  let r, out, slot = null
+  if (/parity\.mjs$/.test(args[0]) && args[1] === 'snapshot') { slot = takeSlot(name); waitForMemory(name) }
+  try {
   for (let attempt = 1; attempt <= 3; attempt++) {
     r = spawnSync(process.execPath, args, { cwd: HERE, env: { ...process.env, ...env }, encoding: 'utf8', maxBuffer: 1 << 28 })
     out = (r.stdout ?? '') + (r.stderr ?? '')
@@ -62,10 +89,20 @@ const run = (name, args, env = {}) => {
     console.log(`retry ${name.padEnd(34)} Chrome launch failed (attempt ${attempt}), retrying`)
     spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 20000)'])
   }
+  } finally {
+    if (slot) try { rmSync(slot, { recursive: true, force: true }) } catch {}
+  }
   writeFileSync(join(LOG, `${name}.log`), out)
   const last = out.trim().split('\n').slice(-1)[0]
   console.log(`${r.status === 0 ? 'ok  ' : 'FAIL'}  ${name.padEnd(34)} ${last.slice(0, 120)}`)
   return r.status === 0
+}
+// A capture you run by hand takes a slot the same way:
+//   node migration-gates.mjs slot --site <c>:staging -- css-parity.mjs snapshot <label> --site <c>:staging --all-pages
+if (process.argv[2] === 'slot') {
+  const i = process.argv.indexOf('--')
+  const ok = run(`manual-${Date.now()}`, process.argv.slice(i + 1))
+  process.exit(ok ? 0 : 1)
 }
 /* NOISE. Two captures of an unchanged site differ: auto margins that settle either way, a looping
    CSS animation caught mid-frame, a late web font (Stone Med Spa: the same 5 values flip between
