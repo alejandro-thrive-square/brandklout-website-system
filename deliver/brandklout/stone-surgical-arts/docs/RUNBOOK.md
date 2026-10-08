@@ -6,6 +6,13 @@ then only the runs you need. Do not read them all.
 
 ## Where it stands
 
+**Phase 2 structure (spacing tokens + combo classes) on STAGING is prepared but NOT applied, since
+2026-10-08:** backup, structure audit before (9 contextual overrides, 65% of rem spacing on tokens),
+scale-tokens dry run and a reviewed `21-instatic-upload/class-standard/combo-map.json` (8 rules) are
+done; the p2-before runtime capture was killed for low memory before step A, so staging is unchanged
+(seq 15). Resume from `instatic-api-sync/output/fleet/stone-surgical-arts/STATUS-phase2.md` —
+[run](./runbook/2026-10-08-phase2-structure.md).
+
 Fifty-four routes are built and published to Instatic, served from Railway at
 **`https://www.dfwsurgicalarts.com`** (apex also serves) since 2026-09-10. The old
 `stone-surgical-arts-production.up.railway.app` host was **detached** by that cutover and 404s —

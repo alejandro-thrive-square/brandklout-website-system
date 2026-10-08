@@ -1,0 +1,10 @@
+{
+  ".navbar_actions .button": "is-navbar",
+  ".section-style-band .heading-style-display-large": "is-on-band",
+  ".why_inner .heading-style-display-large": "is-why",
+  ".place_inner .heading-style-display-xlarge": "is-place",
+  ".consent_inner .heading-style-display-large": "is-consent",
+  ".consent_component .button.is-secondary": "is-consent-button",
+  ".consent_component .button.is-secondary:hover": "is-consent-button",
+  ".cta_component .padding-section-large.padding-section-large": "is-cta"
+}
