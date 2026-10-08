@@ -517,11 +517,13 @@
   /* --- the shelf -----------------------------------------------------------------
      The seven treatments as expanding panels. Hover opens on a fine pointer
      (CSS); a click or a keyboard focus opens everywhere, and a second click on
-     the open panel follows its link. */
+     the open panel follows its link. Below 767 every panel is already open
+     (53-shelf.css), so the first tap follows the link. */
   function shelf() {
     var root = $(".shelf_component");
     if (!root) return;
     var items = $$(".shelf_item", root);
+    var stacked = window.matchMedia("(max-width: 767px)");
     var open = function (item) {
       items.forEach(function (it) {
         it.classList.toggle("is-open", it === item);
@@ -531,7 +533,7 @@
       var link = $(".shelf_link", item);
       if (!link) return;
       link.addEventListener("click", function (e) {
-        if (fine) return; // a pointer user hovered first; let the click go through
+        if (fine || stacked.matches) return; // hovered first, or already open; let the click go through
         if (!item.classList.contains("is-open")) {
           e.preventDefault();
           open(item);

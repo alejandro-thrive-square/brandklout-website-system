@@ -1130,6 +1130,17 @@ read-back, publish), so a JS fix never needs the replace-mode `push-site.mjs`. G
 size. **The same race exists on every Instatic site that carries Sienna**; the root fix (load it
 `defer`, or after `load`) belongs in `brandklout.embed-origins` on main, not in a client.
 
+### 43. `String.replace(from, to)` rewrites `$$` in `to` — a string-level bundle patch broke production
+
+Found 2026-10-08 (`fix-shelf-mobile.mjs`). A string replacement treats `$$`, `$&`, `` $` ``, `$'`
+in the *replacement* as patterns, so `js.replace(anchor, 'var items = $$(".shelf_item", root);…')`
+wrote `$(...)`: one element instead of a list, `items.forEach` threw inside `boot()`, and every
+motion function after `shelf()` stopped on production for ~5 minutes. The read-back passed, because
+it compared against the same wrong string. This site's bundle uses `$`/`$$` everywhere, so **every
+string-level patch of `site.js` uses `s.split(from).join(to)`** (or a replacer function), and after
+the publish load the page and check for page errors, not only the text. Also: the shell's
+`src/scripts/site.js` is **CRLF**; an anchor written with `\n` matches nothing.
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions. **It holds
