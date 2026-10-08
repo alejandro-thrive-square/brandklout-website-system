@@ -156,7 +156,7 @@ const entries = posts.map((p, i) => ({
     },
     {
       type: 'prose', name: 'The Entry', html: p.body.join('\n'),
-      aside: `<div class="kicker">More entries</div>${[posts[(i + 1) % posts.length], posts[(i + 2) % posts.length], posts[(i + 3) % posts.length]].map((q) => `<a href="/blog/${q.slug}.html">${esc(q.title)}</a>`).join('')}`,
+      aside: `<div class="text-style-label">More entries</div>${[posts[(i + 1) % posts.length], posts[(i + 2) % posts.length], posts[(i + 3) % posts.length]].map((q) => `<a href="/blog/${q.slug}.html">${esc(q.title)}</a>`).join('')}`,
     },
     { type: 'invite', name: 'Invitation', title: 'Ask it in <em>person.</em>', lead: 'A consultation answers the question for your own mouth: a scan, an honest read, and a plan.', next: nextFor(p) },
   ],

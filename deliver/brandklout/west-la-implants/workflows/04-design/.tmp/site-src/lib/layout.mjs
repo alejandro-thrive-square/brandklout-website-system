@@ -21,20 +21,20 @@ const NAV_LINKS = [
 
 export function nav(current) {
   const links = NAV_LINKS.map(([h, l]) => `<a href="${h}"${h === current ? ' aria-current="page"' : ''}>${l}</a>`).join('\n      ')
-  return `<header class="nav" id="nav">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap--wide nav-in">
-    <a class="nav-logo" href="/index.html" aria-label="West LA Implants home">
-      <img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
+  return `<header class="nav_component" id="nav">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-xlarge nav_container">
+    <a class="nav_logo" href="/index.html" aria-label="West LA Implants home">
+      <img src="/media/img/logo-icon-white.png" alt=""><span class="brand_wordmark">West LA <em>Implants</em></span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav_links" aria-label="Primary">
       ${links}
-      <div class="nav-readout" aria-hidden="true"><b id="navCh">00</b><span id="navName">Arrival</span><span class="bar" id="navBar"></span></div>
+      <div class="nav_readout" aria-hidden="true"><b id="navCh">00</b><span id="navName">Arrival</span><span class="nav_readout-bar" id="navBar"></span></div>
     </nav>
-    <div class="nav-right">
-      <a class="nav-phone" href="${SITE.phoneNewHref}">${SITE.phoneNew}</a>
-      <a class="btn btn-gold nav-cta magnetic" href="#invitation"><span>Request Consultation</span></a>
-      <button class="burger" id="burger" aria-label="Open the site index" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+    <div class="nav_actions">
+      <a class="nav_phone" href="${SITE.phoneNewHref}">${SITE.phoneNew}</a>
+      <a class="button is-primary nav_button is-magnetic" href="#invitation"><span>Request Consultation</span></a>
+      <button class="nav_menu-button" id="burger" aria-label="Open the site index" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
     </div>
   </div>
 </header>`
@@ -42,14 +42,14 @@ export function nav(current) {
 
 export function drawer() {
   const cols = INDEX.map(
-    (g) => `<div class="dx-col"><div class="dx-title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
+    (g) => `<div class="menu-drawer_column"><div class="menu-drawer_title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
   ).join('\n    ')
-  return `<div class="drawer" id="drawer" aria-hidden="true">
-  <div class="wrap--wide dx-in">
-    <div class="dx-grid">
+  return `<div class="menu-drawer_component" id="drawer" aria-hidden="true">
+  <div class="container-xlarge menu-drawer_content">
+    <div class="menu-drawer_grid">
     ${cols}
     </div>
-    <div class="drawer-meta">
+    <div class="menu-drawer_meta">
       <a href="${SITE.phoneNewHref}">New patients ${SITE.phoneNew}</a>
       <a href="${SITE.zocdoc}" target="_blank" rel="noopener">Book online on Zocdoc</a>
       <span>${SITE.address1} · ${SITE.address2}</span>
@@ -60,24 +60,24 @@ export function drawer() {
 
 export function footer() {
   const cols = INDEX.slice(0, 3).map(
-    (g) => `<div><div class="footer-title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
+    (g) => `<div><div class="footer_title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
   ).join('\n      ')
-  return `<footer class="footer">
-  <div class="wrap">
-    <div class="footer-grid">
+  return `<footer class="footer_component">
+  <div class="container-large">
+    <div class="footer_grid">
       <div>
-        <div class="footer-logo nav-logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span></div>
-        <p class="footer-about">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd. Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
-        <div class="footer-title">Los Angeles office</div>
+        <div class="footer_logo nav_logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="brand_wordmark">West LA <em>Implants</em></span></div>
+        <p class="footer_about">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd. Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
+        <div class="footer_title">Los Angeles office</div>
         <p>${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a> new patients<br><a href="${SITE.phoneCurrentHref}">${SITE.phoneCurrent}</a> current patients</p>
-        <div class="footer-title">Hours</div>
+        <div class="footer_title">Hours</div>
         <p>Monday to Friday<br>9:00am to 5:00pm<br>Saturday &amp; Sunday closed</p>
       </div>
       ${cols}
     </div>
-    <div class="footer-bottom">
+    <div class="footer_bottom">
       <span>&copy; West LA Implants &middot; Tony Barriere, DDS</span>
-      <div class="footer-links">
+      <div class="footer_links">
         <a href="${SITE.social.instagram}" target="_blank" rel="noopener">Instagram</a>
         <a href="${SITE.social.facebook}" target="_blank" rel="noopener">Facebook</a>
         <a href="${SITE.social.youtube}" target="_blank" rel="noopener">YouTube</a>
@@ -93,9 +93,9 @@ export function footer() {
 }
 
 export function mobileBar() {
-  return `<div class="mobile-bar">
-  <a class="btn btn-ghost" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a>
-  <a class="btn btn-gold" href="#invitation"><span>Request Consultation</span></a>
+  return `<div class="mobile-bar_component">
+  <a class="button is-secondary" href="${SITE.phoneNewHref}"><span>Call ${SITE.phoneNew}</span></a>
+  <a class="button is-primary" href="#invitation"><span>Request Consultation</span></a>
 </div>`
 }
 
@@ -103,15 +103,15 @@ export function mobileBar() {
    `id="nav"` and `#navProgress` stay: js/90-boot.js drives both on every page. */
 export function lpNav(chrome) {
   const book = chrome.role === 'landing' ? `
-      <a class="btn btn-gold nav-cta magnetic" href="${chrome.book}"><span>Book a Consultation</span></a>` : ''
-  return `<header class="nav lp-nav" id="nav">
-  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
-  <div class="wrap--wide nav-in">
-    <a class="nav-logo" href="${chrome.role === 'landing' ? '#top' : chrome.home}" aria-label="West LA Implants">
-      <img src="/media/img/logo-icon-white.png" alt=""><span class="wordmark">West LA <em>Implants</em></span>
+      <a class="button is-primary nav_button is-magnetic" href="${chrome.book}"><span>Book a Consultation</span></a>` : ''
+  return `<header class="nav_component is-landing-header" id="nav">
+  <div class="nav_progress-bar" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="container-xlarge nav_container">
+    <a class="nav_logo" href="${chrome.role === 'landing' ? '#top' : chrome.home}" aria-label="West LA Implants">
+      <img src="/media/img/logo-icon-white.png" alt=""><span class="brand_wordmark">West LA <em>Implants</em></span>
     </a>
-    <div class="nav-right">
-      <a class="nav-phone" href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a>${book}
+    <div class="nav_actions">
+      <a class="nav_phone" href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a>${book}
     </div>
   </div>
 </header>`
@@ -119,9 +119,9 @@ export function lpNav(chrome) {
 
 export function lpMobileBar(chrome) {
   if (chrome.role !== 'landing') return ''
-  return `<div class="mobile-bar">
-  <a class="btn btn-ghost" href="${SITE.phoneAdsHref}"><span>Call Now</span></a>
-  <a class="btn btn-gold" href="${chrome.book}"><span>Book a Consultation</span></a>
+  return `<div class="mobile-bar_component">
+  <a class="button is-secondary" href="${SITE.phoneAdsHref}"><span>Call Now</span></a>
+  <a class="button is-primary" href="${chrome.book}"><span>Book a Consultation</span></a>
 </div>`
 }
 
@@ -147,9 +147,9 @@ export function page({ slug, title, description, body, seo, bodyClass = '', chro
      The runtime registers plugins at the END of <body>, never here. -->
 ${GSAP.map((f) => `<script src="/assets/gsap/${f}.min.js"></script>`).join('\n')}
 </head>
-<body${bodyClass || lp ? ` class="${[bodyClass, lp ? 'is-lp' : ''].filter(Boolean).join(' ')}"` : ''}>
+<body${bodyClass || lp ? ` class="${[bodyClass, lp ? 'is-landing-page' : ''].filter(Boolean).join(' ')}"` : ''}>
 
-<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor_component" id="cursor" aria-hidden="true"></div>
 
 ${lp ? lpNav(chrome) : nav(current)}
 

@@ -126,36 +126,36 @@ for (const row of rows) {
       say('text  " in the chair." removed from the experience heading')
     }
     // #26: answer card 1
-    const img = all.find((x) => x.moduleId === 'base.image' && baseName(x.props?.src) === 'still-doctor-xray-screen.jpg' && nodes[nodes[x.parentId]?.parentId] && (nodes[nodes[x.parentId].parentId].classIds ?? []).some((id) => nameOf(id) === 'an-card'))
+    const img = all.find((x) => x.moduleId === 'base.image' && baseName(x.props?.src) === 'still-doctor-xray-screen.jpg' && nodes[nodes[x.parentId]?.parentId] && (nodes[nodes[x.parentId].parentId].classIds ?? []).some((id) => nameOf(id) === 'answer_card'))
     if (img) {
       img.props = { ...img.props, src: media('media/img/dental-implant-crown-placement.png') }
-      img.classIds = (img.classIds ?? []).filter((id) => !/^fp-/.test(nameOf(id) ?? '')).concat(needRule('fp-50-50').id)
+      img.classIds = (img.classIds ?? []).filter((id) => !/^object-position-/.test(nameOf(id) ?? '')).concat(needRule('object-position-50-50').id)
       say('image answer card 1 still-doctor-xray-screen.jpg -> dental-implant-crown-placement.png [fp-50-50]')
     }
   }
   // #22: the faq cover focal point
   if (row.slug === 'faq') {
-    const img = all.find((x) => x.moduleId === 'base.image' && (x.classIds ?? []).some((id) => nameOf(id) === 'cv-pos'))
+    const img = all.find((x) => x.moduleId === 'base.image' && (x.classIds ?? []).some((id) => nameOf(id) === 'cover_image'))
     /* the photo was a parallax frame (.par: 124% tall, shifted by scroll), which always hid the top of
        the photo and the doctor's face with it; it now fills its frame, focal point 60% 20% */
-    const want = Object.values(rules).find((r) => r.name === 'fp-60-20')
-    if (!want) throw new Error('registry has no .fp-60-20')
-    const par = Object.values(rules).find((r) => r.name === 'par')
+    const want = Object.values(rules).find((r) => r.name === 'object-position-60-20')
+    if (!want) throw new Error('registry has no .object-position-60-20')
+    const par = Object.values(rules).find((r) => r.name === 'parallax_image')
     if (img && (!(img.classIds ?? []).includes(want.id) || (par && img.classIds.includes(par.id)))) {
-      img.classIds = (img.classIds ?? []).filter((id) => !/^fp-/.test(nameOf(id) ?? '') && id !== par?.id).concat(want.id)
+      img.classIds = (img.classIds ?? []).filter((id) => !/^object-position-/.test(nameOf(id) ?? '') && id !== par?.id).concat(want.id)
       say(`image cover focal -> .${want.name}`)
     }
   }
   // #38: services beside the statement
   if (row.slug === 'dental-implants') {
-    const sec = all.find((x) => (x.classIds ?? []).some((id) => nameOf(id) === 'b-statement'))
-    const stage = sec && sec.children.map((c) => nodes[c]).find((c) => (c.classIds ?? []).some((id) => nameOf(id) === 'st-stage'))
-    if (!stage) throw new Error('/dental-implants: no .b-statement > .st-stage')
+    const sec = all.find((x) => (x.classIds ?? []).some((id) => nameOf(id) === 'section_statement'))
+    const stage = sec && sec.children.map((c) => nodes[c]).find((c) => (c.classIds ?? []).some((id) => nameOf(id) === 'statement_stage'))
+    if (!stage) throw new Error('/dental-implants: no .section_statement > .statement_stage')
     if (!('data-st-services' in (sec.props?.htmlAttributes ?? {}))) {
       sec.props = { ...sec.props, htmlAttributes: { ...(sec.props.htmlAttributes ?? {}), 'data-st-services': '' } }
       say('section #statement + data-st-services')
     }
-    const listRule = classRule('st-services'), kRule = classRule('st-services-k')
+    const listRule = classRule('statement_services'), kRule = classRule('statement_services-label')
     if (!stage.children.some((c) => (nodes[c]?.classIds ?? []).includes(listRule.id))) {
       const nav = { id: nanoid(), moduleId: 'base.container', parentId: stage.id, classIds: [listRule.id], children: [], breakpointOverrides: {}, props: { tag: 'custom', customTag: 'nav', htmlAttributes: { 'aria-label': 'Dental implant services' } } }
       const k = { id: nanoid(), moduleId: 'base.text', parentId: nav.id, classIds: [kRule.id], children: [], breakpointOverrides: {}, props: { text: 'Dental implant services', tag: 'span', htmlAttributes: {} } }
@@ -165,7 +165,7 @@ for (const row of rows) {
         nodes[a.id] = a; nav.children.push(a.id)
       }
       stage.children.push(nav.id)
-      say(`nav.st-services with ${SERVICES.length} links appended to the statement`)
+      say(`nav.statement_services with ${SERVICES.length} links appended to the statement`)
     }
   }
   if (n) changed.push(row)

@@ -80,8 +80,8 @@ const COPY_FIX = [
 const OLD = { kicker: 'Request received', h1: 'Thank you. Let’s talk about your new ', em: 'smile.', lead: 'Your request is with the front desk, and we reply within one business day. If you would rather not wait, call now and we will find a time together.' }
 // thank-you-3-on-6 photos: [old file, new file, focal class to drop, focal class to add]
 const TY3_PHOTOS = [
-  ['front-desk-receptionist.jpg', 'front-desk-emily.jpg', 'fp-40-40', 'fp-30-50'],
-  ['barriere_dentalpractice_dentalimplant_westla3.jpg', 'tonybarrerie_headshot_dentist_westlaimplants1.jpg', null, 'fp-60-30'],
+  ['front-desk-receptionist.jpg', 'front-desk-emily.jpg', 'object-position-40-40', 'object-position-30-50'],
+  ['barriere_dentalpractice_dentalimplant_westla3.jpg', 'tonybarrerie_headshot_dentist_westlaimplants1.jpg', null, 'object-position-60-30'],
 ]
 // front-desk-emily.jpg in the "Clear costs" card -> patient-paying.jpg. Matched by its card, because
 // the hero above now carries the same file.
@@ -125,8 +125,8 @@ for (const a of ASSETS) {
     note(`shell   ~ ${a.path} refreshed`)
   } else note(`shell   ${a.path} exact`)
 }
-const bodyClass = ruleByName('is-lp')
-note(`shell   body class .is-lp ${bodyClass ? 'in the registry' : 'MISSING (readability rules would not apply)'}`)
+const bodyClass = ruleByName('is-landing-page')
+note(`shell   body class .is-landing-page ${bodyClass ? 'in the registry' : 'MISSING (readability rules would not apply)'}`)
 
 // ── pages ─────────────────────────────────────────────────────────────
 const changed = []
@@ -140,7 +140,7 @@ for (const slug of SLUGS) {
 
   // the body carries .is-lp
   const body = all.find((x) => x.moduleId === 'base.body')
-  if (bodyClass && !(body.classIds ?? []).includes(bodyClass.id)) note(`/${slug}  WARNING: body has no .is-lp (${(body.classIds ?? []).map(nameOf).join('.')})`)
+  if (bodyClass && !(body.classIds ?? []).includes(bodyClass.id)) note(`/${slug}  WARNING: body has no .is-landing-page (${(body.classIds ?? []).map(nameOf).join('.')})`)
 
   // data-seo: /media/… -> /uploads/…
   for (const x of all.filter((x) => x.props?.htmlAttributes?.['data-seo'])) {

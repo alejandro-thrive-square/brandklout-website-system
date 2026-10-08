@@ -99,32 +99,32 @@ main.props.htmlAttributes = { ...main.props.htmlAttributes, 'data-seo': SEO_ATTR
 
 // cover: kicker, h1, lead
 const cover = nodes[main.children[0]]
-if (!hasClass(cover, 'b-cover')) throw new Error('first chapter is not the cover')
+if (!hasClass(cover, 'section_cover')) throw new Error('first chapter is not the cover')
 const desc = (id, out = []) => { out.push(nodes[id]); for (const c of nodes[id].children) desc(c, out); return out }
 const coverNodes = desc(cover.id)
-const kicker = coverNodes.find((n) => hasClass(n, 'chapter-tag'))
+const kicker = coverNodes.find((n) => hasClass(n, 'text-style-tagline'))
 nodes[kicker.children.find((c) => nodes[c].moduleId === 'base.text')].props.text = 'Notice of Privacy Practices'
 const h1 = coverNodes.find((n) => n.props?.customTag === 'h1')
 for (const c of [...h1.children]) dropSubtree(c)
 h1.children = []
 text(h1.id, 'HIPAA ')
 text(h1.id, 'Disclosure', 'em')
-const lead = coverNodes.find((n) => hasClass(n, 'cv-lead'))
+const lead = coverNodes.find((n) => hasClass(n, 'cover_lead'))
 lead.props.text = 'How medical information about you may be used and disclosed, and how you can get access to it. Effective October 1, 2026.'
 
 // the two detail chapters out, the prose chapter in
-const details = main.children.filter((c) => hasClass(nodes[c], 'b-detail'))
+const details = main.children.filter((c) => hasClass(nodes[c], 'section_detail'))
 if (details.length !== 2) throw new Error(`expected 2 detail chapters on the privacy page, found ${details.length}`)
 for (const d of details) dropSubtree(d)
 main.children = main.children.filter((c) => !details.includes(c))
 
-const section = box(main.id, 'section', [ruleId('b-prose')], { 'data-chapter': '1', 'data-chapter-name': 'The Notice', id: 'notice' })
+const section = box(main.id, 'section', [ruleId('section_prose')], { 'data-chapter': '1', 'data-chapter-name': 'The Notice', id: 'notice' })
 // box() appended it; move it to sit right after the cover
 main.children = [main.children[0], section.id, ...main.children.slice(1).filter((c) => c !== section.id)]
-const wrap = box(section.id, 'div', [ruleId('wrap'), ruleId('pr2-in')])
-const article = box(wrap.id, 'article', [ruleId('pr2-body')])
-const aside = box(wrap.id, 'aside', [ruleId('pr2-aside')])
-text(box(aside.id, 'div', [ruleId('kicker')]).id, ASIDE.kicker)
+const wrap = box(section.id, 'div', [ruleId('container-large'), ruleId('prose_grid')])
+const article = box(wrap.id, 'article', [ruleId('prose_body')])
+const aside = box(wrap.id, 'aside', [ruleId('prose_aside')])
+text(box(aside.id, 'div', [ruleId('text-style-label')]).id, ASIDE.kicker)
 for (const [href, label] of ASIDE.links) mk(aside.id, 'base.link', { href, text: label, target: '_self' })
 
 const runs = (parentId, list) => {
@@ -136,7 +136,7 @@ const runs = (parentId, list) => {
     else mk(parentId, 'base.link', { href: r.href, text: r.a, target: '_self' })
   }
 }
-const H3 = ruleId('h3'), COL = ruleId('dt-col')
+const H3 = ruleId('heading-style-h3'), COL = ruleId('detail_column')
 const put = (parentId, it) => {
   if (it.h2) text(parentId, it.h2, 'h2')
   else if (it.p) {
@@ -155,7 +155,7 @@ for (const it of NOTICE) put(article.id, it)
 
 // invitation: renumber the chapter
 const invite = nodes[main.children[2]]
-if (!hasClass(invite, 'ch-invitation')) throw new Error('third chapter is not the invitation')
+if (!hasClass(invite, 'section_invitation')) throw new Error('third chapter is not the invitation')
 invite.props.htmlAttributes = { ...invite.props.htmlAttributes, 'data-chapter': '2' }
 
 // sanity: every child resolves, every parent agrees

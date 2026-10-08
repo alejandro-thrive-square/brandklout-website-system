@@ -8,7 +8,7 @@
    Where the bar shows, the button rides above it.
    ========================================================================== */
 @media (max-width:1023px){
-  body:has(.mobile-bar) .asw-menu-btn{bottom:calc(5rem + env(safe-area-inset-bottom)) !important;top:auto !important}
+  body:has(.mobile-bar_component) .asw-menu-btn{bottom:calc(5rem + env(safe-area-inset-bottom)) !important;top:auto !important}
 }
 
 /* The film lightbox (js/75-films.js). Above everything, the Sienna button included. */

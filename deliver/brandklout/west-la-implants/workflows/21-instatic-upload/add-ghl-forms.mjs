@@ -34,7 +34,7 @@ const COMBO = path.resolve(HERE, '../../scenario-3-ads-landing-pages/01-campaign
 const APPLY = process.argv.includes('--apply')
 const PUBLISH = process.argv.includes('--publish')
 const MODULE = 'brandklout.embed-origins.embed'
-const CLASS = 'lp-form'
+const CLASS = 'landing_form-embed'
 // Same as css/60-lp.css `.lp-slot.wz-embed`, in the registry's camelCase.
 const FORM_STYLES = { display: 'block', width: '100%', minHeight: '50rem' }
 
@@ -80,8 +80,8 @@ if (!formRule) {
   shellChanged = true
   console.log(`rule    ~ .${CLASS} styles refreshed`)
 } else console.log(`rule    .${CLASS} already on the shell`)
-const slotRule = ruleByName('lp-slot')
-if (!slotRule) throw new Error('shell has no .lp-slot rule')
+const slotRule = ruleByName('landing_form-slot')
+if (!slotRule) throw new Error('shell has no .landing_form-slot rule')
 
 // ── each form page: .lp-slot -> embed ────────────────────────────────
 const embedNode = (parentId, snip, title) => ({
@@ -108,17 +108,17 @@ for (const t of TARGETS) {
     if (touched) changed.push(row)
     continue
   }
-  const slots = Object.values(nodes).filter((n) => hasClass(n, 'lp-slot'))
-  if (!slots.length) throw new Error(`/${t.slug} has no .lp-slot`)
+  const slots = Object.values(nodes).filter((n) => hasClass(n, 'landing_form-slot'))
+  if (!slots.length) throw new Error(`/${t.slug} has no .landing_form-slot`)
   for (const slot of slots) {
     const parent = nodes[slot.parentId]
-    if (!parent) throw new Error(`/${t.slug} .lp-slot ${slot.id} has no parent`)
+    if (!parent) throw new Error(`/${t.slug} .landing_form-slot ${slot.id} has no parent`)
     const made = embedNode(parent.id, t.snippet, `Request a consultation (${t.formId})`)
     const at = parent.children.indexOf(slot.id)
     dropSubtree(nodes, slot.id)
     nodes[made.id] = made
     parent.children.splice(at, 1, made.id)
-    console.log(`/${t.slug}  .lp-slot ${slot.id} (in .${(parent.classIds ?? []).map(nameOf).join('.')}) -> embed ${made.id} form ${t.formId}`)
+    console.log(`/${t.slug}  .landing_form-slot ${slot.id} (in .${(parent.classIds ?? []).map(nameOf).join('.')}) -> embed ${made.id} form ${t.formId}`)
   }
   changed.push(row)
 }

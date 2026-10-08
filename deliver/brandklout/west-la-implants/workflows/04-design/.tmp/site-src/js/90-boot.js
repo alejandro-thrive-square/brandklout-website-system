@@ -16,16 +16,16 @@
      toggle's <i> glyph do not survive a round trip. Rebuilt here; a no-op
      wherever the markup arrived intact. Runs before the GSAP gate so the
      page is right even if the motion layer is absent. */
-  document.querySelectorAll('.btn').forEach(function(b){
+  document.querySelectorAll('.button').forEach(function(b){
     if(b.querySelector('span') || !b.firstChild) return;
     var t = b.textContent.trim(); if(!t) return;
     var sp = document.createElement('span'); sp.textContent = t; b.textContent = ''; b.appendChild(sp);
   });
-  document.querySelectorAll('.burger').forEach(function(b){
+  document.querySelectorAll('.nav_menu-button').forEach(function(b){
     if(b.querySelector('span')) return;
     b.appendChild(document.createElement('span')); b.appendChild(document.createElement('span'));
   });
-  document.querySelectorAll('.faq-q').forEach(function(q){
+  document.querySelectorAll('.faq_question').forEach(function(q){
     if(!q.querySelector('span')){ var t = q.textContent.trim(); q.textContent=''; var s=document.createElement('span'); s.textContent=t; q.appendChild(s); }
     if(!q.querySelector('i')) q.appendChild(document.createElement('i'));
     if(!q.hasAttribute('aria-expanded')) q.setAttribute('aria-expanded','false');
@@ -39,7 +39,7 @@
 
   if(!W || !W.ok){
     document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
-    document.querySelectorAll('[data-wipe],.tr-shot,.pr-film').forEach(function(el){ el.style.clipPath='none'; });
+    document.querySelectorAll('[data-wipe],.transformation_photo,.precision_film').forEach(function(el){ el.style.clipPath='none'; });
     return;
   }
 
@@ -94,7 +94,7 @@
 
   /* magnetic buttons + cursor, fine pointers only */
   if(!W.reduced && FINE){
-    document.querySelectorAll('.magnetic').forEach(function(el){
+    document.querySelectorAll('.is-magnetic').forEach(function(el){
       var xTo = gsap.quickTo(el,'x',{duration:.5,ease:'power3'}), yTo = gsap.quickTo(el,'y',{duration:.5,ease:'power3'});
       el.addEventListener('pointermove',function(e){
         var r = el.getBoundingClientRect();
@@ -106,7 +106,7 @@
     if(cur){
       var cx = gsap.quickTo(cur,'x',{duration:.25,ease:'power3'}), cy = gsap.quickTo(cur,'y',{duration:.25,ease:'power3'});
       window.addEventListener('pointermove',function(e){ cx(e.clientX); cy(e.clientY); }, {passive:true});
-      document.querySelectorAll('a,button,label,.an-card,.pf-quote').forEach(function(el){
+      document.querySelectorAll('a,button,label,.answer_card,.proof_quote').forEach(function(el){
         el.addEventListener('pointerenter',function(){ cur.classList.add('is-link'); });
         el.addEventListener('pointerleave',function(){ cur.classList.remove('is-link'); });
       });

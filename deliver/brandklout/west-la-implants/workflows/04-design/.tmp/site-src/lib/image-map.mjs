@@ -95,7 +95,7 @@ export function applyImageMap(pages, exists) {
     seg = seg.replace(re, (_, a, b) => {
       let attrs = (a + b).replace(/\s*alt="[^"]*"/, '')
       const cls = ((attrs.match(/class="([^"]*)"/) || [])[1] || '').split(/\s+/).filter((c) => c && !/^fp-\d+-\d+$/.test(c))
-      if (pos) cls.push('fp-' + pos.split(/\s+/).map((v) => Math.round(parseFloat(v) / 10) * 10).join('-'))
+      if (pos) cls.push('object-position-' + pos.split(/\s+/).map((v) => Math.round(parseFloat(v) / 10) * 10).join('-'))
       attrs = attrs.replace(/\s*class="[^"]*"/, '')
       const a2 = alt ?? '__ALT__' // filled from the finished pages by build.mjs, so a swapped-out caption can never win
       return `<img${cls.length ? ` class="${cls.join(' ')}"` : ''} src="/media/img/${to}" alt="${esc(a2)}"${attrs.replace(/^\s*/, ' ').replace(/\s+$/, '')}>`

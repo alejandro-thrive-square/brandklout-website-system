@@ -29,7 +29,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url))
 const APPLY = process.argv.includes('--apply')
 const PUBLISH = process.argv.includes('--publish')
 const MODULE = 'brandklout.embed-origins.embed'
-const CLASS = 'in-ghl'
+const CLASS = 'invitation_form-embed'
 const STYLES = { display: 'block', width: '100%', minHeight: '62rem' }
 const FORMS = {
   contact: { id: 'DCNQTSgl14CNZ93H7Fi3', name: 'West LA Implants - Contact (new site)', height: 1545, title: 'Request a consultation' },
@@ -69,7 +69,7 @@ let placed = 0, refreshed = 0, exact = 0
 for (const row of rows) {
   const nodes = row.cells?.body?.nodes
   if (!nodes) continue
-  const cards = Object.values(nodes).filter((n) => hasClass(n, 'in-form'))
+  const cards = Object.values(nodes).filter((n) => hasClass(n, 'invitation_form'))
   if (!cards.length) continue
   const f = formFor(row.slug), snip = snippet(f)
   let touched = false
@@ -80,9 +80,9 @@ for (const row of rows) {
       if (existing.props?.snippet !== snip) { existing.props = { ...existing.props, snippet: snip, title: f.title }; touched = true; refreshed++ } else exact++
       continue
     }
-    const fields = kids.find((k) => hasClass(k, 'in-fields'))
+    const fields = kids.find((k) => hasClass(k, 'invitation_fields'))
     const submit = kids.find((k) => k?.moduleId === 'base.submit')
-    if (card.moduleId !== 'base.form' || !fields || !submit) throw new Error(`/${row.slug}: .in-form has an unexpected shape (${card.moduleId}: ${kids.map((k) => k?.moduleId).join(', ')})`)
+    if (card.moduleId !== 'base.form' || !fields || !submit) throw new Error(`/${row.slug}: .invitation_form has an unexpected shape (${card.moduleId}: ${kids.map((k) => k?.moduleId).join(', ')})`)
     const made = {
       id: nanoid(), moduleId: MODULE, parentId: card.id, classIds: [rule.id], children: [], breakpointOverrides: {},
       props: { source: 'snippet', snippet: snip, url: '', title: f.title, fit: 'auto', height: 1000, ratio: '16 / 9', lazy: false, allowFullscreen: false, allow: '' },
@@ -121,7 +121,7 @@ let ok = 0
 for (const r of changed) {
   const ns = Object.values(back.find((x) => x.id === r.id).cells.body.nodes)
   const embeds = ns.filter((x) => x.moduleId === MODULE && hasClass(x, CLASS))
-  if (embeds.length && embeds.every((x) => x.props?.snippet === snippet(formFor(r.slug))) && !ns.some((x) => hasClass(x, 'in-fields'))) ok++
+  if (embeds.length && embeds.every((x) => x.props?.snippet === snippet(formFor(r.slug))) && !ns.some((x) => hasClass(x, 'invitation_fields'))) ok++
   else console.log(`check   /${r.slug}: MISMATCH (${embeds.length} embed(s))`)
 }
 console.log(`check   ${ok}/${changed.length} pages: form embedded, prototype gone`)

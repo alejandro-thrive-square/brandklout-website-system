@@ -9,18 +9,18 @@
 var WZ_TOUCH = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
 
 /* ---------- cover ---------- */
-WZ.section('b-cover', function (W) {
-  document.querySelectorAll('.b-cover').forEach(function (sec) {
-    var film = sec.querySelector('.cv-film');
-    var video = sec.querySelector('video.cv-film');
+WZ.section('section_cover', function (W) {
+  document.querySelectorAll('.section_cover').forEach(function (sec) {
+    var film = sec.querySelector('.cover_film');
+    var video = sec.querySelector('video.cover_film');
     if (video) { video.load && video.load(); video.play && video.play().catch(function () {}); }
     var hides = sec.querySelectorAll('[data-anim="hide"]');
-    var title = sec.querySelector('.cv-title');
+    var title = sec.querySelector('.cover_title');
     if (W.reduced) { hides.forEach(function (el) { el.style.visibility = 'visible'; }); return; }
 
     var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
     if (film) tl.fromTo(film, { scale: 1.22 }, { scale: 1.06, duration: 2.6, ease: 'power2.out' }, 0);
-    var tag = sec.querySelector('.chapter-tag');
+    var tag = sec.querySelector('.text-style-tagline');
     if (tag) {
       tl.add(function () { tag.style.visibility = 'visible'; }, .3)
         .from(tag, { x: -24, opacity: 0, duration: .9 }, .3)
@@ -31,33 +31,33 @@ WZ.section('b-cover', function (W) {
       return gsap.from(self.lines, { yPercent: 115, duration: 1.3, ease: 'power4.out', stagger: .11, delay: .5 });
     });
     if (!split) title.style.visibility = 'visible';
-    var lead = sec.querySelector('.cv-lead');
+    var lead = sec.querySelector('.cover_lead');
     if (lead) tl.add(function () { lead.style.visibility = 'visible'; }, .95).from(lead, { y: 24, opacity: 0, duration: 1 }, .95);
-    var actions = sec.querySelector('.cv-actions');
+    var actions = sec.querySelector('.cover_actions');
     if (actions) tl.add(function () { actions.style.visibility = 'visible'; }, 1.15).from(actions.children, { y: 18, opacity: 0, duration: .9, stagger: .1 }, 1.15);
-    var meta = sec.querySelectorAll('.cv-meta li');
+    var meta = sec.querySelectorAll('.cover_meta li');
     if (meta.length) tl.add(function () { meta.forEach(function (el) { el.style.visibility = 'visible'; }); }, 1.3).from(meta, { y: 26, opacity: 0, duration: 1, stagger: .09 }, 1.3);
-    var cue = sec.querySelector('.cv-cue');
+    var cue = sec.querySelector('.cover_scroll-cue');
     if (cue) tl.add(function () { cue.style.visibility = 'visible'; }, 2).from(cue, { opacity: 0, duration: 1 }, 2);
 
     /* the split cover's photograph wipes open on load, then drifts */
-    var media = sec.querySelector('.cv-media');
+    var media = sec.querySelector('.cover_image-wrapper');
     if (media) {
       gsap.to(media, { clipPath: 'inset(0 0 0% 0)', duration: 1.5, ease: 'power4.inOut', delay: .35 });
-      var im = media.querySelector('.par');
+      var im = media.querySelector('.parallax_image');
       if (im) gsap.fromTo(im, { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom top', scrub: true } });
     }
     /* departure */
     if (film) gsap.to(film, { scale: 1.18, yPercent: 10, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.to(sec.querySelector('.cv-copy'), { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: { trigger: sec, start: '35% top', end: 'bottom top', scrub: .3 } });
+    gsap.to(sec.querySelector('.cover_content'), { yPercent: -18, opacity: 0, ease: 'none', scrollTrigger: { trigger: sec, start: '35% top', end: 'bottom top', scrub: .3 } });
     if (cue) gsap.to(cue, { opacity: 0, ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: '20% top', scrub: true } });
   });
 });
 
 /* ---------- statement: pinned, written by scroll ---------- */
-WZ.section('b-statement', function (W) {
-  document.querySelectorAll('.b-statement').forEach(function (sec) {
-    var big = sec.querySelector('.st-big'), after = sec.querySelector('.st-after'), img = sec.querySelector('.st-img'), bg = sec.querySelector('.st-bg');
+WZ.section('section_statement', function (W) {
+  document.querySelectorAll('.section_statement').forEach(function (sec) {
+    var big = sec.querySelector('.statement_text'), after = sec.querySelector('.statement_after'), img = sec.querySelector('.statement_image'), bg = sec.querySelector('.statement_background');
     wzTagIn(sec);
     if (W.reduced) { wzCount(sec, 1); return; }
     var split = W.splitWords(big);
@@ -82,21 +82,21 @@ function wzCount(scope, p) {
 }
 
 /* ---------- steps: pinned vertical stepper ---------- */
-WZ.section('b-steps', function (W) {
-  document.querySelectorAll('.b-steps').forEach(function (sec) {
-    var pin = sec.querySelector('.sp-pin'), stepsEl = sec.querySelectorAll('.sp-step'), dots = sec.querySelectorAll('.sp-dots i'),
-        num = sec.querySelector('.sp-num'), line = sec.querySelector('.sp-line b');
+WZ.section('section_steps', function (W) {
+  document.querySelectorAll('.section_steps').forEach(function (sec) {
+    var pin = sec.querySelector('.steps_pin'), stepsEl = sec.querySelectorAll('.steps_step'), dots = sec.querySelectorAll('.steps_dots i'),
+        num = sec.querySelector('.steps_counter-number'), line = sec.querySelector('.steps_counter-line b');
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     wzWipes(sec);
     var MOBILE = WZ_TOUCH || window.innerWidth < 768;
     if (W.reduced || MOBILE) {
-      if (!W.reduced) gsap.from(stepsEl, { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.sp-list'), start: 'top 85%', once: true } });
+      if (!W.reduced) gsap.from(stepsEl, { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.steps_list'), start: 'top 85%', once: true } });
       return;
     }
     var n = stepsEl.length;
     /* the stage takes the tallest step's height so nothing jumps between them */
-    var list = sec.querySelector('.sp-list');
+    var list = sec.querySelector('.steps_list');
     function size() {
       var max = 0;
       stepsEl.forEach(function (s) {
@@ -130,11 +130,11 @@ WZ.section('b-steps', function (W) {
 });
 
 /* ---------- compare: pinned, the columns light one at a time ---------- */
-WZ.section('b-compare', function (W) {
-  document.querySelectorAll('.b-compare').forEach(function (sec) {
-    var pin = sec.querySelector('.cp-pin'), cols = sec.querySelectorAll('.cp-col'), track = sec.querySelector('.cp-track i');
+WZ.section('section_compare', function (W) {
+  document.querySelectorAll('.section_compare').forEach(function (sec) {
+    var pin = sec.querySelector('.compare_pin'), cols = sec.querySelectorAll('.compare_column'), track = sec.querySelector('.compare_track i');
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) { cols.forEach(function (c) { c.classList.add('is-lit'); }); return; }
     var NARROW = window.innerWidth < 1024;
     if (NARROW) {
@@ -154,32 +154,32 @@ WZ.section('b-compare', function (W) {
       tl.to(c, { opacity: 1, y: 0, duration: .5, ease: 'power2.out' }, i * .7 + .2)
         .from(c.querySelectorAll('li'), { opacity: 0, x: -10, duration: .3, stagger: .06, ease: 'power2.out' }, i * .7 + .3);
     });
-    var hot = sec.querySelector('.cp-col.is-hot');
+    var hot = sec.querySelector('.compare_column.is-hot');
     if (hot) tl.to(hot, { scale: 1.03, duration: .5, ease: 'power2.out' }, '>+.2');
     tl.to({}, { duration: .5 });
   });
 });
 
 /* ---------- strip: copy + photographs ---------- */
-WZ.section('b-strip', function (W) {
-  document.querySelectorAll('.b-strip').forEach(function (sec) {
+WZ.section('section_photo-strip', function (W) {
+  document.querySelectorAll('.section_photo-strip').forEach(function (sec) {
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     wzWipes(sec);
     if (W.reduced) return;
-    gsap.from(sec.querySelector('.ph-copy .lead') || sec.querySelector('.ph-body'), { y: 20, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sec, start: 'top 70%', once: true } });
-    var li = sec.querySelectorAll('.ph-list li');
-    if (li.length) gsap.from(li, { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .09, scrollTrigger: { trigger: sec.querySelector('.ph-list'), start: 'top 85%', once: true } });
-    wzDepart(sec, sec.querySelector('.ph-grid'));
+    gsap.from(sec.querySelector('.photo-strip_content .text-style-lead') || sec.querySelector('.photo-strip_body'), { y: 20, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: sec, start: 'top 70%', once: true } });
+    var li = sec.querySelectorAll('.photo-strip_list li');
+    if (li.length) gsap.from(li, { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .09, scrollTrigger: { trigger: sec.querySelector('.photo-strip_list'), start: 'top 85%', once: true } });
+    wzDepart(sec, sec.querySelector('.photo-strip_grid'));
   });
 });
 
 /* ---------- ledger: pinned, the figure counts and the list draws ---------- */
-WZ.section('b-ledger', function (W) {
-  document.querySelectorAll('.b-ledger').forEach(function (sec) {
-    var pin = sec.querySelector('.lg-pin'), items = sec.querySelectorAll('.lg-list li'), list = sec.querySelector('.lg-list');
+WZ.section('section_ledger', function (W) {
+  document.querySelectorAll('.section_ledger').forEach(function (sec) {
+    var pin = sec.querySelector('.ledger_pin'), items = sec.querySelectorAll('.ledger_list li'), list = sec.querySelector('.ledger_list');
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) { items.forEach(function (i) { i.classList.add('is-on'); }); list.classList.add('is-drawn'); wzCount(sec, 1); return; }
     var NARROW = window.innerWidth < 1024;
     if (NARROW) {
@@ -199,13 +199,13 @@ WZ.section('b-ledger', function (W) {
 });
 
 /* ---------- proof: the before/after slider IS the scroll ---------- */
-WZ.section('b-proof', function (W) {
-  document.querySelectorAll('.b-proof').forEach(function (sec) {
-    var pin = sec.querySelector('.ba-pin'), after = sec.querySelector('.ba-after'), handle = sec.querySelector('.ba-handle');
+WZ.section('section_before-after', function (W) {
+  document.querySelectorAll('.section_before-after').forEach(function (sec) {
+    var pin = sec.querySelector('.before-after_pin'), after = sec.querySelector('.before-after_after'), handle = sec.querySelector('.before-after_handle');
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.ba-quote, .ba-who, .ba-copy .lead, .ba-actions'), { y: 20, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: sec, start: 'top 70%', once: true } });
+    gsap.from(sec.querySelectorAll('.before-after_quote, .before-after_patient, .before-after_content .text-style-lead, .before-after_actions'), { y: 20, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: sec, start: 'top 70%', once: true } });
     var tl = gsap.timeline({ scrollTrigger: { trigger: pin, start: 'top top', end: '+=140%', pin: true, scrub: .35, anticipatePin: 1 } });
     tl.to({}, { duration: .2 })
       .fromTo(after, { clipPath: 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0%)', duration: 1, ease: 'none' })
@@ -215,12 +215,12 @@ WZ.section('b-proof', function (W) {
 });
 
 /* ---------- rail: pinned horizontal journey ---------- */
-WZ.section('b-rail', function (W) {
-  document.querySelectorAll('.b-rail').forEach(function (sec) {
-    var pin = sec.querySelector('.rl-pin'), track = sec.querySelector('.rl-track'), bar = sec.querySelector('.rl-progress b'),
-        count = sec.querySelector('.rl-count'), cards = track.querySelectorAll('.rl-card');
+WZ.section('section_card-rail', function (W) {
+  document.querySelectorAll('.section_card-rail').forEach(function (sec) {
+    var pin = sec.querySelector('.card-rail_pin'), track = sec.querySelector('.card-rail_track'), bar = sec.querySelector('.card-rail_progress b'),
+        count = sec.querySelector('.card-rail_count'), cards = track.querySelectorAll('.card-rail_card');
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
     var TOUCH = WZ_TOUCH || window.innerWidth < 768;
     if (W.reduced) return;
     var label = function (idx) { count.textContent = String(idx).padStart(2, '0') + ' / ' + String(cards.length).padStart(2, '0'); };
@@ -246,13 +246,13 @@ WZ.section('b-rail', function (W) {
 });
 
 /* ---------- gallery: pointer compares, scroll sweeps ---------- */
-WZ.section('b-gallery', function (W) {
-  document.querySelectorAll('.b-gallery').forEach(function (sec) {
+WZ.section('section_gallery', function (W) {
+  document.querySelectorAll('.section_gallery').forEach(function (sec) {
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
-    var cards = sec.querySelectorAll('.ga-card');
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
+    var cards = sec.querySelectorAll('.gallery_card');
     cards.forEach(function (card) {
-      var stage = card.querySelector('.ga-stage'), after = card.querySelector('.ga-after'), handle = card.querySelector('.ga-handle');
+      var stage = card.querySelector('.gallery_stage'), after = card.querySelector('.gallery_after'), handle = card.querySelector('.gallery_handle');
       var set = function (pct) {
         pct = Math.max(2, Math.min(98, pct));
         after.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
@@ -279,11 +279,11 @@ WZ.section('b-gallery', function (W) {
 });
 
 /* ---------- stories: the film cards play on hover ---------- */
-WZ.section('b-stories', function (W) {
-  document.querySelectorAll('.b-stories').forEach(function (sec) {
+WZ.section('section_stories', function (W) {
+  document.querySelectorAll('.section_stories').forEach(function (sec) {
     wzTagIn(sec);
-    wzLinesIn(sec.querySelector('.h2'));
-    sec.querySelectorAll('.sy-card').forEach(function (card) {
+    wzLinesIn(sec.querySelector('.heading-style-h2'));
+    sec.querySelectorAll('.stories_card').forEach(function (card) {
       var v = card.querySelector('video[data-src-hover]');
       if (!v) return;
       card.addEventListener('pointerenter', function () {
@@ -293,72 +293,72 @@ WZ.section('b-stories', function (W) {
       card.addEventListener('pointerleave', function () { v.pause && v.pause(); });
     });
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.sy-card'), { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: sec.querySelector('.sy-grid'), start: 'top 85%', once: true } });
+    gsap.from(sec.querySelectorAll('.stories_card'), { y: 40, opacity: 0, duration: 1, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: sec.querySelector('.stories_grid'), start: 'top 85%', once: true } });
   });
 });
 
 /* ---------- videos, team, detail, post index, place: arrive and depart ---------- */
-WZ.section('b-videos', function (W) {
-  document.querySelectorAll('.b-videos').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2'));
+WZ.section('section_videos', function (W) {
+  document.querySelectorAll('.section_videos').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.vd-card'), { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .07, scrollTrigger: { trigger: sec.querySelector('.vd-grid'), start: 'top 85%', once: true } });
+    gsap.from(sec.querySelectorAll('.videos_card'), { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .07, scrollTrigger: { trigger: sec.querySelector('.videos_grid'), start: 'top 85%', once: true } });
   });
 });
-WZ.section('b-team', function (W) {
-  document.querySelectorAll('.b-team').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2'));
+WZ.section('section_team', function (W) {
+  document.querySelectorAll('.section_team').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.tm-card'), { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.tm-grid'), start: 'top 85%', once: true } });
-    gsap.from(sec.querySelectorAll('.tm-photo'), { clipPath: 'circle(0% at 50% 50%)', duration: 1.2, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.tm-grid'), start: 'top 85%', once: true } });
+    gsap.from(sec.querySelectorAll('.team_card'), { y: 30, opacity: 0, duration: .9, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.team_grid'), start: 'top 85%', once: true } });
+    gsap.from(sec.querySelectorAll('.team_photo'), { clipPath: 'circle(0% at 50% 50%)', duration: 1.2, ease: 'power3.out', stagger: .1, scrollTrigger: { trigger: sec.querySelector('.team_grid'), start: 'top 85%', once: true } });
   });
 });
-WZ.section('b-detail', function (W) {
-  document.querySelectorAll('.b-detail').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2'));
+WZ.section('section_detail', function (W) {
+  document.querySelectorAll('.section_detail').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    var t = sec.querySelectorAll('.dt-body p, .dt-col, .dt-list li, .dt-actions');
+    var t = sec.querySelectorAll('.detail_body p, .detail_column, .detail_list li, .detail_actions');
     if (t.length) gsap.from(t, { y: 22, opacity: 0, duration: .9, ease: 'power3.out', stagger: .06, scrollTrigger: { trigger: sec, start: 'top 72%', once: true } });
-    wzDepart(sec, sec.querySelector('.dt-in'));
+    wzDepart(sec, sec.querySelector('.detail_content'));
   });
 });
-WZ.section('b-postindex', function (W) {
-  document.querySelectorAll('.b-postindex').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2'));
+WZ.section('section_post-index', function (W) {
+  document.querySelectorAll('.section_post-index').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    sec.querySelectorAll('.px-card').forEach(function (c) {
+    sec.querySelectorAll('.post-index_card').forEach(function (c) {
       gsap.from(c, { y: 30, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 92%', once: true } });
     });
   });
 });
-WZ.section('b-place', function (W) {
-  document.querySelectorAll('.b-place').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2')); wzWipes(sec);
+WZ.section('section_location', function (W) {
+  document.querySelectorAll('.section_location').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2')); wzWipes(sec);
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.pl-list li'), { y: 20, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: sec.querySelector('.pl-list'), start: 'top 85%', once: true } });
+    gsap.from(sec.querySelectorAll('.location_list li'), { y: 20, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: sec.querySelector('.location_list'), start: 'top 85%', once: true } });
   });
 });
-WZ.section('b-prose', function (W) {
-  document.querySelectorAll('.b-prose').forEach(function (sec) {
+WZ.section('section_prose', function (W) {
+  document.querySelectorAll('.section_prose').forEach(function (sec) {
     if (W.reduced) return;
-    sec.querySelectorAll('.pr2-body > *').forEach(function (el) {
+    sec.querySelectorAll('.prose_body > *').forEach(function (el) {
       gsap.from(el, { y: 16, opacity: 0, duration: .8, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 94%', once: true } });
     });
   });
 });
 
 /* ---------- faq: one accordion for every .faq on the site ---------- */
-WZ.dom('faq', '.faq', function (W) {
-  document.querySelectorAll('.faq').forEach(function (faq) {
-    var items = faq.querySelectorAll('.faq-item');
+WZ.dom('faq_list', '.faq_list', function (W) {
+  document.querySelectorAll('.faq_list').forEach(function (faq) {
+    var items = faq.querySelectorAll('.faq_item');
     items.forEach(function (item) {
-      var q = item.querySelector('.faq-q'), a = item.querySelector('.faq-a');
+      var q = item.querySelector('.faq_question'), a = item.querySelector('.faq_answer');
       if (!q || !a || q.getAttribute('data-bound')) return;
       q.setAttribute('data-bound', '1');
       q.addEventListener('click', function () {
         var open = q.getAttribute('aria-expanded') === 'true';
         items.forEach(function (o) {
-          var oq = o.querySelector('.faq-q'), oa = o.querySelector('.faq-a');
+          var oq = o.querySelector('.faq_question'), oa = o.querySelector('.faq_answer');
           if (oq.getAttribute('aria-expanded') === 'true' && o !== item) {
             oq.setAttribute('aria-expanded', 'false');
             if (window.gsap) gsap.to(oa, { height: 0, duration: W.reduced ? 0 : .5, ease: 'power3.inOut' }); else oa.style.height = '0px';
@@ -371,18 +371,18 @@ WZ.dom('faq', '.faq', function (W) {
     });
   });
 });
-WZ.section('b-faq', function (W) {
-  document.querySelectorAll('.b-faq').forEach(function (sec) {
-    wzTagIn(sec); wzLinesIn(sec.querySelector('.h2'));
+WZ.section('section_faq', function (W) {
+  document.querySelectorAll('.section_faq').forEach(function (sec) {
+    wzTagIn(sec); wzLinesIn(sec.querySelector('.heading-style-h2'));
     if (W.reduced) return;
-    gsap.from(sec.querySelectorAll('.faq-item'), { y: 16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .06, scrollTrigger: { trigger: sec.querySelector('.faq'), start: 'top 88%', once: true } });
+    gsap.from(sec.querySelectorAll('.faq_item'), { y: 16, opacity: 0, duration: .8, ease: 'power3.out', stagger: .06, scrollTrigger: { trigger: sec.querySelector('.faq_list'), start: 'top 88%', once: true } });
   });
 });
 
 /* ---------- tabs: text-only buttons switch panels ---------- */
-WZ.dom('tabs', '.b-tabs', function () {
-  document.querySelectorAll('.b-tabs').forEach(function (sec) {
-    var btns = sec.querySelectorAll('.tb-btn'), panels = sec.querySelectorAll('.tb-panel');
+WZ.dom('tabs', '.section_tabs', function () {
+  document.querySelectorAll('.section_tabs').forEach(function (sec) {
+    var btns = sec.querySelectorAll('.tabs_button'), panels = sec.querySelectorAll('.tabs_panel');
     btns.forEach(function (b, i) {
       b.addEventListener('click', function () {
         btns.forEach(function (x, j) { x.classList.toggle('is-on', j === i); });

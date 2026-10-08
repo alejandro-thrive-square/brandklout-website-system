@@ -201,7 +201,7 @@ for (const width of RUN) {
     return {
       loaded: [...loaded],
       declared: document.fonts.size,
-      displayFamily: getComputedStyle(document.querySelector('.display')).fontFamily,
+      displayFamily: getComputedStyle(document.querySelector('.heading-style-display')).fontFamily,
     }
   })
   console.log(`    fonts loaded: ${fonts.loaded.join(', ') || '(none)'}  (${fonts.declared} declared)`)
@@ -263,9 +263,9 @@ for (const width of RUN) {
         realityWords: words.length,
         answerX: m ? Math.round(m.m41) : null,
         precisionClip: q('#precisionFilm') ? getComputedStyle(q('#precisionFilm')).clipPath : null,
-        prWords: [...document.querySelectorAll('.pr-word')].map((w) => +parseFloat(getComputedStyle(w).opacity).toFixed(2)),
-        stories: [...document.querySelectorAll('.tr-story')].map((s) => +parseFloat(getComputedStyle(s).opacity).toFixed(2)),
-        shots: [...document.querySelectorAll('.tr-shot')].map((s) => getComputedStyle(s).clipPath),
+        prWords: [...document.querySelectorAll('.precision_word')].map((w) => +parseFloat(getComputedStyle(w).opacity).toFixed(2)),
+        stories: [...document.querySelectorAll('.transformation_story')].map((s) => +parseFloat(getComputedStyle(s).opacity).toFixed(2)),
+        shots: [...document.querySelectorAll('.transformation_photo')].map((s) => getComputedStyle(s).clipPath),
       }
     })
 

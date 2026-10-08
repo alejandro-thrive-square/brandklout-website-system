@@ -42,7 +42,7 @@ const DIST = path.resolve(HERE, '../04-design/.tmp/site-src/dist')
 const APPLY = process.argv.includes('--apply')
 const PUBLISH = process.argv.includes('--publish')
 const MODULE = 'brandklout.embed-origins.embed'
-const CLASS = 'pf-embed'
+const CLASS = 'proof_embed'
 const APP = '670ca31c-8602-42c1-a126-f46f653fe07f'
 const SNIPPET = [
   '<!-- Elfsight Google Reviews | West LA Implants -->',
@@ -120,8 +120,8 @@ const changed = []
   const nodes = row.cells.body.nodes
   const proof = Object.values(nodes).find((n) => n.props?.htmlAttributes?.id === 'proof')
   if (!proof) throw new Error('/ has no #proof')
-  const gridId = (proof.children ?? []).find((c) => hasClass(nodes[c], 'pf-grid'))
-  if (!gridId) throw new Error('/ #proof has no .pf-grid')
+  const gridId = (proof.children ?? []).find((c) => hasClass(nodes[c], 'proof_grid'))
+  if (!gridId) throw new Error('/ #proof has no .proof_grid')
   const grid = nodes[gridId]
   const existing = (grid.children ?? []).map((c) => nodes[c]).find((n) => n?.moduleId === MODULE)
   if (existing) {
@@ -139,7 +139,7 @@ const changed = []
     for (const c of old) dropSubtree(nodes, c)
     nodes[made.id] = made
     grid.children = [made.id]
-    console.log(`/       .pf-grid [${kinds.join(', ')}] -> embed ${made.id}`)
+    console.log(`/       .proof_grid [${kinds.join(', ')}] -> embed ${made.id}`)
     changed.push(row)
   }
 }

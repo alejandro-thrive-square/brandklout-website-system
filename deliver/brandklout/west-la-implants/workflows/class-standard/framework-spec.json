@@ -1,0 +1,104 @@
+{
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "ground",
+      "value": "#11110F"
+    },
+    {
+      "slug": "ground-2",
+      "value": "#191815"
+    },
+    {
+      "slug": "ground-3",
+      "value": "#1F1D19"
+    },
+    {
+      "slug": "ground-deep",
+      "value": "#090909"
+    },
+    {
+      "slug": "ground-ink",
+      "value": "#080808"
+    },
+    {
+      "slug": "ink",
+      "value": "#F4EFE5"
+    },
+    {
+      "slug": "ink-muted",
+      "value": "#B5AFA4"
+    },
+    {
+      "slug": "ink-dim",
+      "value": "rgba(244,239,229,.55)"
+    },
+    {
+      "slug": "gold",
+      "value": "#C4A36A"
+    },
+    {
+      "slug": "gold-deep",
+      "value": "#8F7442"
+    },
+    {
+      "slug": "gold-soft",
+      "value": "rgba(196,163,106,.18)"
+    },
+    {
+      "slug": "line",
+      "value": "rgba(244,239,229,.14)"
+    },
+    {
+      "slug": "line-soft",
+      "value": "rgba(244,239,229,.08)"
+    },
+    {
+      "slug": "paper",
+      "value": "#F4EFE5"
+    },
+    {
+      "slug": "paper-2",
+      "value": "#EAE3D6"
+    },
+    {
+      "slug": "paper-ink",
+      "value": "#11110F"
+    },
+    {
+      "slug": "paper-muted",
+      "value": "#5E574C"
+    }
+  ],
+  "typography": [],
+  "spacing": [],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [
+        "--ground",
+        "--ground-2",
+        "--ground-3",
+        "--ground-deep",
+        "--ground-ink",
+        "--ink",
+        "--ink-muted",
+        "--ink-dim",
+        "--gold",
+        "--gold-deep",
+        "--gold-soft",
+        "--line",
+        "--line-soft",
+        "--paper",
+        "--paper-2",
+        "--paper-ink",
+        "--paper-muted"
+      ],
+      "set": {}
+    }
+  ],
+  "_review": "2026-10-08 bk-west-la-implants: drafted by framework.mjs extract from the live src/styles/tokens.css (seq 1 staging clone). Kept: root 16/rem, the 17 palette colours. Dropped: --wrap (1312px layout limit; a px limit stays in the registry :root, INSTATIC-FRAMEWORK.md Naming and precision). Not moved (stay in the registry :root, formulas or breakpoint-redefined): the fluid root (--font-from/--font-to/--vw-*, --coefficient, --base), every --t-* type size, --nav-h, --gutter, fonts, easings."
+}

@@ -17,8 +17,8 @@ ul,ol{margin:0;padding:0;list-style:none}
 .wz-smooth #smooth-wrapper{overflow:hidden;position:fixed;inset:0}
 #smooth-content{will-change:transform}
 
-.wrap{width:min(var(--wrap),calc(100% - var(--gutter)*2));margin-inline:auto}
-.wrap--wide{width:min(96rem,calc(100% - var(--gutter)*2));margin-inline:auto}
+.container-large{width:min(var(--wrap),calc(100% - var(--gutter)*2));margin-inline:auto}
+.container-xlarge{width:min(96rem,calc(100% - var(--gutter)*2));margin-inline:auto}
 
 /* type */
 /* Bodoni Moda's optical-size axis is the readability dial: at opsz 96 the
@@ -26,48 +26,48 @@ ul,ol{margin:0;padding:0;list-style:none}
    read (BugHerd #1, #6). Weight 500 and a lower opsz keep the editorial look
    with strokes that survive antialiasing. Line-heights carry the descenders —
    the SplitText line masks clip anything below the box (BugHerd #5, #11). */
-.serif{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;line-height:1.1;font-variation-settings:'opsz' 36}
-.display{font-family:var(--serif);font-weight:500;font-size:var(--t-display);line-height:1.04;letter-spacing:-.025em;font-variation-settings:'opsz' 48}
-.h2{font-family:var(--serif);font-weight:500;font-size:var(--t-h2);line-height:1.12;letter-spacing:-.02em;font-variation-settings:'opsz' 42}
-.h3{font-family:var(--serif);font-weight:500;font-size:var(--t-h3);line-height:1.14;letter-spacing:-.015em;font-variation-settings:'opsz' 36}
-.h2 em,.display em,.h3 em{font-style:italic;font-weight:500;color:var(--gold)}
-.lead{font-size:var(--t-lead);line-height:1.55;color:var(--ink-muted);max-width:36rem}
-.small{font-size:var(--t-small)}
+.text-style-serif{font-family:var(--serif);font-weight:500;letter-spacing:-.015em;line-height:1.1;font-variation-settings:'opsz' 36}
+.heading-style-display{font-family:var(--serif);font-weight:500;font-size:var(--t-display);line-height:1.04;letter-spacing:-.025em;font-variation-settings:'opsz' 48}
+.heading-style-h2{font-family:var(--serif);font-weight:500;font-size:var(--t-h2);line-height:1.12;letter-spacing:-.02em;font-variation-settings:'opsz' 42}
+.heading-style-h3{font-family:var(--serif);font-weight:500;font-size:var(--t-h3);line-height:1.14;letter-spacing:-.015em;font-variation-settings:'opsz' 36}
+.heading-style-h2 em,.heading-style-display em,.heading-style-h3 em{font-style:italic;font-weight:500;color:var(--gold)}
+.text-style-lead{font-size:var(--t-lead);line-height:1.55;color:var(--ink-muted);max-width:36rem}
+.text-size-small{font-size:var(--t-small)}
 /* copy fit — no one-word last lines on display type (08-qa qa-fit.mjs "runt").
    balance evens a heading's lines; pretty only lifts the orphan off a paragraph.
    Unsupported browsers ignore both and wrap as before. */
-h1,h2,h3,h4,.display,.chapter-tag,figcaption,blockquote,.btn{text-wrap:balance}
-p,li,.lead,.st-big{text-wrap:pretty} /* balance gives up past 6 lines; the statements run to 7 */
-.kicker{display:inline-flex;align-items:center;gap:.7rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.kicker::before{content:"";width:1.6rem;height:1px;background:var(--gold);transform-origin:left;transform:scaleX(1)}
+h1,h2,h3,h4,.heading-style-display,.text-style-tagline,figcaption,blockquote,.button{text-wrap:balance}
+p,li,.text-style-lead,.statement_text{text-wrap:pretty} /* balance gives up past 6 lines; the statements run to 7 */
+.text-style-label{display:inline-flex;align-items:center;gap:.7rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.text-style-label::before{content:"";width:1.6rem;height:1px;background:var(--gold);transform-origin:left;transform:scaleX(1)}
 
 /* chapter tag — the journey numbering */
-.chapter-tag{display:inline-flex;align-items:center;gap:.75rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem}
-.chapter-tag i{display:block;width:2.4rem;height:1px;background:var(--gold);transform-origin:left center}
-[data-theme="light"] .chapter-tag{color:var(--gold-deep)}
-[data-theme="light"] .chapter-tag i{background:var(--gold-deep)}
+.text-style-tagline{display:inline-flex;align-items:center;gap:.75rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.75rem}
+.text-style-tagline i{display:block;width:2.4rem;height:1px;background:var(--gold);transform-origin:left center}
+[data-theme="light"] .text-style-tagline{color:var(--gold-deep)}
+[data-theme="light"] .text-style-tagline i{background:var(--gold-deep)}
 
 /* buttons */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3.25rem;padding:0 1.6rem;
+.button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3.25rem;padding:0 1.6rem;
   border:1px solid var(--ink);color:var(--ground);background:var(--ink);font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   overflow:hidden;isolation:isolate;transition:color .35s var(--ease-out),border-color .35s var(--ease-out),transform .35s var(--ease-out)}
-.btn span{position:relative;z-index:1}
-.btn::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .45s var(--ease-out);z-index:0}
-.btn:hover::before,.btn:focus-visible::before{transform:translateY(0)}
-.btn:hover{border-color:var(--gold);color:var(--ground)}
-.btn-ghost{background:transparent;color:var(--ink);border-color:rgba(244,239,229,.35)}
-.btn-ghost:hover{color:var(--ground)}
-.btn-gold{background:var(--gold);border-color:var(--gold);color:var(--ground)}
-.btn-gold::before{background:var(--ink)}
+.button span{position:relative;z-index:1}
+.button::before{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(101%);transition:transform .45s var(--ease-out);z-index:0}
+.button:hover::before,.button:focus-visible::before{transform:translateY(0)}
+.button:hover{border-color:var(--gold);color:var(--ground)}
+.is-secondary{background:transparent;color:var(--ink);border-color:rgba(244,239,229,.35)}
+.is-secondary:hover{color:var(--ground)}
+.is-primary{background:var(--gold);border-color:var(--gold);color:var(--ground)}
+.is-primary::before{background:var(--ink)}
 /* The underline is a background gradient on the element itself, not a
    positioned pseudo-element: BugHerd's capturer drew the ::after of the
    stacked, hidden story links as a strike through the visible one (#8, #9). */
-.textlink{display:inline-flex;align-items:center;gap:.6rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding-bottom:.35rem;
+.arrow-link_component{display:inline-flex;align-items:center;gap:.6rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);padding-bottom:.35rem;
   background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position-x:left;background-position-y:bottom;background-size:100% 1px;transition:background-size .5s var(--ease-out)}
-.textlink:hover{background-size:0% 1px;background-position-x:right;background-position-y:bottom;animation:tl-return .5s var(--ease-out) .5s forwards}
+.arrow-link_component:hover{background-size:0% 1px;background-position-x:right;background-position-y:bottom;animation:tl-return .5s var(--ease-out) .5s forwards}
 @keyframes tl-return{from{background-size:0% 1px;background-position-x:left;background-position-y:bottom}to{background-size:100% 1px;background-position-x:left;background-position-y:bottom}}
-.textlink .arrow{display:inline-block;transition:transform .4s var(--ease-out)}
-.textlink:hover .arrow{transform:translateX(.35rem)}
+.arrow-link_component .arrow_icon{display:inline-block;transition:transform .4s var(--ease-out)}
+.arrow-link_component:hover .arrow_icon{transform:translateX(.35rem)}
 
 /* media frames */
 /* min-width:0 so a photograph cannot set the floor of the grid track it sits
@@ -75,18 +75,18 @@ p,li,.lead,.st-big{text-wrap:pretty} /* balance gives up past 6 lines; the state
    publishes every <img> with `width`/`height` attributes, a responsive
    `srcset` and `sizes="auto"` — so on a published `fr` grid the tracks can be
    floored at the loaded variants' intrinsic widths rather than at the space
-   available. `.su-strip` is `1.2fr 1fr .8fr` and its three variants plus gaps
+   available. `.surgeon_strip` is `1.2fr 1fr .8fr` and its three variants plus gaps
    land within a pixel of the wrap they sit in. Nothing visible has been traced
    to it (the residual compare-live margin finding turned out to be a
    getComputedStyle artifact, not a layout difference — see the directive), and
    it changes nothing locally; it is here because trap 24 is real and this is
    the cheap side of it. */
-.frame{position:relative;overflow:hidden;background:var(--ground-3);min-width:0}
-.frame img,.frame video{width:100%;height:100%;object-fit:cover}
-.frame--tall{aspect-ratio:4/5}
-.frame--wide{aspect-ratio:16/9}
+.media-frame_component{position:relative;overflow:hidden;background:var(--ground-3);min-width:0}
+.media-frame_component img,.media-frame_component video{width:100%;height:100%;object-fit:cover}
+.is-tall{aspect-ratio:4/5}
+.is-wide{aspect-ratio:16/9}
 .frame--sq{aspect-ratio:1}
-.frame .par{position:absolute;inset:-12% 0;height:124%;will-change:transform}
+.media-frame_component .parallax_image{position:absolute;inset:-12% 0;height:124%;will-change:transform}
 
 /* animation hooks */
 [data-anim="hide"]{visibility:hidden}
@@ -113,7 +113,7 @@ html.wz-ready .reveal-mask{overflow:hidden;display:block}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
 /* custom cursor dot — fine pointers only */
-.cursor{position:fixed;left:0;top:0;width:.7rem;height:.7rem;border-radius:50%;background:var(--gold);pointer-events:none;z-index:1000;
+.cursor_component{position:fixed;left:0;top:0;width:.7rem;height:.7rem;border-radius:50%;background:var(--gold);pointer-events:none;z-index:1000;
   transform:translate(-50%,-50%);mix-blend-mode:difference;opacity:0;transition:width .35s var(--ease-out),height .35s var(--ease-out),opacity .3s}
-html.wz-fine .cursor{opacity:.9}
-html.wz-fine .cursor.is-link{width:3.2rem;height:3.2rem;opacity:.35}
+html.wz-fine .cursor_component{opacity:.9}
+html.wz-fine .cursor_component.is-link{width:3.2rem;height:3.2rem;opacity:.35}

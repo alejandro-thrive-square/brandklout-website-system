@@ -1,6 +1,6 @@
 {
   "site": "west-la-implants",
-  "status": "ready: dry run clean on the 2026-10-05 engine (WZ.section/WZ.dom first arguments are rewritten since then); apply needs a staging instance (West LA has none) or a reviewed staging draft (Nahlah)",
+  "status": "2026-10-08: re-audited on the new staging clone (west-la-implants-staging.up.railway.app): 402 of 405 used classes out of bounds; 4 classes added since 2026-10-05 (lp-form, in-ghl, st-services, st-services-k); nothing dropped (pf-quote, in-fields, full, lp-proto are unused rules and stay renamed). Applied on staging 2026-10-08.",
   "folders": {},
   "rename": {
     "wrap": "container-large",
@@ -500,7 +500,11 @@
     "fp-100-70": "object-position-100-70",
     "fp-100-80": "object-position-100-80",
     "fp-100-90": "object-position-100-90",
-    "fp-100-100": "object-position-100-100"
+    "fp-100-100": "object-position-100-100",
+    "lp-form": "landing_form-embed",
+    "in-ghl": "invitation_form-embed",
+    "st-services": "statement_services",
+    "st-services-k": "statement_services-label"
   },
   "merge": {},
   "notes": {
@@ -526,6 +530,14 @@
     "dt-light / lp-cards--light / ph-light": "paper (light) colour scheme on a dark site. dt-light is a standalone section style → section-style-light; lp-cards--light is a combo → is-light. ph-light only appears in selectors (no element carries it): left out.",
     "--modifiers": "every BEM modifier (x--y) becomes an is- combo: --split, --bleed, --small, --tall, --wide, --after, --text, --mirror, --doctor, --emily, --michael (per-photo focal tweaks), --band, --hero, --cz (consultation/thank-you title size).",
     "LEFT OUT": "wz-* and reveal-mask (runtime classes added by the Webzite kit / SplitText), elfsight-app-… (third-party widget class), and selectors that match nothing on the site (frame--sq, ph-light, sy-ba, rule: delete-candidates).",
-    "MERGE CANDIDATES (audit, identical declarations; not merged here)": "ga-head = sy-head = vd-head = tm-head = px-head = lp-cards-head; ar-bg = ex-bg = cv-bg = lp-hero-bg; b-cover = lp-hero = lp-cz = lp-ty; ch-answer = b-steps = b-rail; ba-before = ga-before = lp-ba-before; pl-photo = lp-why-shot = lp-proof-shot; frame--wide = pr-shot; ar-film = cv-film; ar-veil = cv-veil; ar-lead = cv-lead; ar-actions = cv-actions; ch-reality = b-statement. Also the three before/after sliders (ba-, ga-, lp-ba-) are one component in three copies."
-  }
+    "MERGE CANDIDATES (audit, identical declarations; not merged here)": "ga-head = sy-head = vd-head = tm-head = px-head = lp-cards-head; ar-bg = ex-bg = cv-bg = lp-hero-bg; b-cover = lp-hero = lp-cz = lp-ty; ch-answer = b-steps = b-rail; ba-before = ga-before = lp-ba-before; pl-photo = lp-why-shot = lp-proof-shot; frame--wide = pr-shot; ar-film = cv-film; ar-veil = cv-veil; ar-lead = cv-lead; ar-actions = cv-actions; ch-reality = b-statement. Also the three before/after sliders (ba-, ga-, lp-ba-) are one component in three copies.",
+    "lp-form": "2026-10-08: the GHL campaign-form Embed block inside the landing form slot (.lp-slot .lp-form), added 2026-10-05 by add-ghl-forms.mjs.",
+    "in-ghl": "2026-10-08: the GHL contact/referral Embed block in every Invitation chapter card (apply-ghl-site-forms.mjs, seq 36).",
+    "st-services": "2026-10-08: nav.st-services, the Dental Implants services list beside the statement on /dental-implants (BugHerd #38); its label is st-services-k.",
+    "scriptClassCalls": "2026-10-08: the draft-patch scripts in workflows/21-instatic-upload select nodes with hasClass(node, <class>) and rules with ruleByName(<class>); renamed with the same map in --files mode."
+  },
+  "scriptClassCalls": [
+    "hasClass",
+    "ruleByName"
+  ]
 }

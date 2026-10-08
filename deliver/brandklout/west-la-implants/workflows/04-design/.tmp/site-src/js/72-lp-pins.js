@@ -12,8 +12,8 @@
       normally with everything visible. Nothing is ever held off-screen.
    ========================================================================== */
 (function(){
-  if (!document.body || !document.body.classList.contains('is-lp')) return;
-  var PANELS = ['.cp-pin', '.sp-pin', '.rl-pin'];
+  if (!document.body || !document.body.classList.contains('is-landing-page')) return;
+  var PANELS = ['.compare_pin', '.steps_pin', '.card-rail_pin'];
   var lastH = 0, busy = false, t;
 
   function ready(){ return window.ScrollTrigger && window.gsap && ScrollTrigger.getAll().some(function(s){ return s.pin; }); }
@@ -30,19 +30,19 @@
       if (anim) anim.kill();
     });
     sec.classList.add('is-flow');
-    if (sec.classList.contains('b-compare')) {
-      var cols = sec.querySelectorAll('.cp-col');
+    if (sec.classList.contains('section_compare')) {
+      var cols = sec.querySelectorAll('.compare_column');
       gsap.set(cols, { clearProps: 'opacity,transform,scale' });
-      gsap.set(sec.querySelectorAll('.cp-col li'), { clearProps: 'opacity,transform' });
+      gsap.set(sec.querySelectorAll('.compare_column li'), { clearProps: 'opacity,transform' });
       cols.forEach(function(c){ c.classList.add('is-lit'); });
-      var tr = sec.querySelector('.cp-track i'); if (tr) tr.style.transform = 'scaleX(1)';
+      var tr = sec.querySelector('.compare_track i'); if (tr) tr.style.transform = 'scaleX(1)';
     }
-    if (sec.classList.contains('b-steps')) {
-      gsap.set(sec.querySelectorAll('.sp-step'), { clearProps: 'all' });
-      var list = sec.querySelector('.sp-list'); if (list) list.style.minHeight = '';
+    if (sec.classList.contains('section_steps')) {
+      gsap.set(sec.querySelectorAll('.steps_step'), { clearProps: 'all' });
+      var list = sec.querySelector('.steps_list'); if (list) list.style.minHeight = '';
     }
-    if (sec.classList.contains('b-rail')) {
-      var track = sec.querySelector('.rl-track'), bar = sec.querySelector('.rl-progress b'), count = sec.querySelector('.rl-count'), n = sec.querySelectorAll('.rl-card').length;
+    if (sec.classList.contains('section_card-rail')) {
+      var track = sec.querySelector('.card-rail_track'), bar = sec.querySelector('.card-rail_progress b'), count = sec.querySelector('.card-rail_count'), n = sec.querySelectorAll('.card-rail_card').length;
       gsap.set(track, { clearProps: 'transform' });
       track.addEventListener('scroll', function(){
         var p = track.scrollLeft / (track.scrollWidth - track.clientWidth || 1);

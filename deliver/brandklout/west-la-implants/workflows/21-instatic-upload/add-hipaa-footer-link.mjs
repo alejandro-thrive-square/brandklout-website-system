@@ -28,7 +28,7 @@ const APPLY = process.argv.includes('--apply')
 const PUBLISH = process.argv.includes('--publish')
 const HREF = '/hipaa-disclosure'
 const LABEL = 'HIPAA Disclosure'
-const ROWS = ['footer-links', 'lp-foot-links']
+const ROWS = ['footer_links', 'landing-footer_links']
 
 const ALPHABET = 'useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'
 const nanoid = (n = 21) => [...randomBytes(n)].map((b) => ALPHABET[b & 63]).join('')
