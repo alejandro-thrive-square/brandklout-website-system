@@ -1,10 +1,10 @@
 /* 10-chrome — nav, drawer, call bar, footer, modal. Split from the approved home.css (2026-10-01); the system is frozen: later pages vary content and layout, not these. */
-.skip-link_component { position: fixed; left: 1rem; top: -4rem; z-index: 200; background: var(--gold); color: var(--ink); padding: .75rem 1rem; font-weight: 500; }
+.skip-link_component { position: fixed; left: 1rem; top: -4rem; z-index: 200; background: var(--gold); color: var(--ink); padding: .75rem var(--space-small); font-weight: 500; }
 
 .skip-link_component:focus { top: 1rem; }
 
 /* ---------- nav ---------- */
-.nav_component { position: fixed; inset: 0 0 auto 0; z-index: 90; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding-inline: var(--gutter); color: var(--fg); transition: background .5s var(--ease), color .5s var(--ease), transform .6s var(--ease); }
+.nav_component { position: fixed; inset: 0 0 auto 0; z-index: 90; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: var(--space-medium); padding-inline: var(--gutter); color: var(--fg); transition: background .5s var(--ease), color .5s var(--ease), transform .6s var(--ease); }
 
 .nav_component.is-solid { background: rgba(251, 249, 244, .86); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
 
@@ -53,23 +53,23 @@
 /* Overlays are CLOSED by default in CSS and opened by the `is-open` combo the scripts add (they also toggle
    `hidden` for assistive tech). The Instatic editor canvas drops the `hidden` attribute (React, 2026-10-07), so a
    closed state must never depend on it. */
-.menu-drawer_component { position: fixed; inset: 0; z-index: 85; background: var(--bone); color: var(--fg); padding: calc(var(--nav-h) + 2rem) var(--gutter) 6rem; display: none; flex-direction: column; justify-content: space-between; overflow-y: auto; }
+.menu-drawer_component { position: fixed; inset: 0; z-index: 85; background: var(--bone); color: var(--fg); padding: calc(var(--nav-h) + var(--space-medium)) var(--gutter) var(--space-huge); display: none; flex-direction: column; justify-content: space-between; overflow-y: auto; }
 
 .menu-drawer_component.is-open { display: flex; }
 
 .menu-drawer_component nav { display: grid; }
 
-.menu-drawer_component nav a { display: flex; align-items: baseline; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--rule); font-size: calc(1.9rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; }
+.menu-drawer_component nav a { display: flex; align-items: baseline; gap: var(--space-small); padding: .8rem 0; border-bottom: 1px solid var(--rule); font-size: calc(1.9rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; }
 
 .menu-drawer_component nav small { font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); color: var(--accent-text); letter-spacing: .1em; }
 
-.menu-drawer_footer { margin-top: 2rem; color: var(--fg-dim); }
+.menu-drawer_footer { margin-top: var(--space-medium); color: var(--fg-dim); }
 
 .menu-drawer_footer a { color: var(--accent-text); font-family: var(--f-mono); }
 
 .call-bar_component { display: none; }
 
-.footer_component { position: relative; margin-top: 8rem; padding-block: 3.5rem 2.5rem; border-top: 1px solid var(--rule); display: grid; grid-template-columns: auto 1fr; gap: 2.5rem 5rem; align-items: start; }
+.footer_component { position: relative; margin-top: var(--space-xhuge); padding-block: 3.5rem 2.5rem; border-top: 1px solid var(--rule); display: grid; grid-template-columns: auto 1fr; gap: 2.5rem var(--space-xxlarge); align-items: start; }
 
 .footer_brand { display: grid; gap: 1.5rem; justify-items: start; }
 
@@ -83,9 +83,9 @@
 
 .footer_social svg { width: 1.2rem; height: 1.2rem; fill: currentColor; }
 
-.footer_info { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; font-size: calc(.98rem * var(--s-sp)); line-height: 1.5; }
+.footer_info { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-medium); font-size: calc(.98rem * var(--s-sp)); line-height: 1.5; }
 
-.footer_column .text-style-label { margin-bottom: .6rem; color: var(--accent-text); }
+.text-style-label.is-footer-column { margin-bottom: .6rem; color: var(--accent-text); }
 
 .footer_link { display: inline-block; margin-top: .35rem; padding-block: .45rem; color: var(--accent-text); font-weight: 500; text-decoration: underline; text-underline-offset: .22em; }
 
@@ -95,7 +95,7 @@
 
 .footer_muted-text { margin-top: .3rem; color: var(--fg-dim); }
 
-.footer_links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .25rem 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); font-size: calc(.92rem * var(--s-sp)); }
+.footer_links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: var(--space-xxsmall) var(--space-medium); padding-top: 1.5rem; border-top: 1px solid var(--rule); font-size: calc(.92rem * var(--s-sp)); }
 
 .footer_links a { padding-block: .7rem; color: var(--fg-dim); transition: color .35s; }
 
@@ -142,10 +142,10 @@
   .call-bar_component.is-away { transform: translateY(101%); }
   /* The site-wide Sienna accessibility button is fixed bottom-left, exactly where "Call" is. Lift it above the bar. */
   .asw-menu-btn { bottom: 72px !important; }
-  .call-bar_component a { display: flex; align-items: center; justify-content: center; gap: .5rem; min-height: 56px; font-size: calc(.85rem * var(--s-sp)); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--fg); }
+  .call-bar_component a { display: flex; align-items: center; justify-content: center; gap: var(--space-xsmall); min-height: 56px; font-size: calc(.85rem * var(--s-sp)); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--fg); }
   .call-bar_component a.is-gold { background: var(--gold); color: var(--ink); }
   .call-bar_component svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
-  .footer_component { margin-top: 5rem; padding-bottom: calc(2.5rem + 56px); }
+  .footer_component { margin-top: var(--space-xxlarge); padding-bottom: calc(2.5rem + 56px); }
 }
 
 @media screen and (max-width: 479px) {

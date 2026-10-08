@@ -10,25 +10,25 @@
 
 /* ---------- small additions to kit blocks ---------- */
 .is-notice-columns { grid-template-columns: minmax(0, 1fr); margin-top: 4.5rem; }
-.is-notice-columns .notice_body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .5rem 3rem; align-items: start; }
+.is-notice-columns .notice_body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-xsmall) var(--space-large); align-items: start; }
 .is-notice-columns .notice_body > :first-child { grid-column: 1 / -1; }
 .is-cosmetic .checklist_copy .text-style-lede { margin-top: 1.5rem; max-width: 36rem; }
-.is-cosmetic .checklist_note .button { margin-top: .5rem; }
+.is-cosmetic .checklist_note .button { margin-top: var(--space-xsmall); }
 .is-cosmetic .is-with-photo .disclosure_component { margin-top: 2.5rem; max-width: 46rem; }
 .is-cosmetic .is-with-photo .disclosure_body p { color: var(--fg-dim); }
-.is-mosaic-header { margin-bottom: 4rem; }
+.is-mosaic-header { margin-bottom: var(--space-xlarge); }
 
 /* ---------- vs, with its photograph ---------- */
-.comparison_layout-cosmetic { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; align-items: start; }
+.comparison_layout-cosmetic { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-xxlarge); align-items: start; }
 .comparison_figure-cosmetic { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
 .comparison_figure-cosmetic img { width: 100%; height: 116%; object-fit: cover; }
 .comparison_layout-cosmetic .comparison_table tbody th { width: 26%; }
 
 /* ---------- reviews under the say on the ads page ---------- */
-.reviews_cosmetic-wrapper .reviews_embed { margin-top: 5rem; }
+.reviews_cosmetic-wrapper .reviews_embed { margin-top: var(--space-xxlarge); }
 
 /* ---------- gallery: case count beside the chips ---------- */
-.gallery_toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; margin-bottom: 3rem; }
+.gallery_toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-small) var(--space-medium); margin-bottom: var(--space-large); }
 .gallery_toolbar .filter_bar { margin-bottom: 0; }
 .gallery_count { font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); white-space: nowrap; }
 .gallery_count b { font-weight: 500; color: var(--accent-text); }
@@ -47,18 +47,18 @@
   .is-hero-photo-first .hero_image { aspect-ratio: 4 / 3; }
   .is-hero-photo-first .hero_note { left: auto; right: -1rem; }
   .is-notice-columns .notice_body { grid-template-columns: minmax(0, 1fr); }
-  .comparison_layout-cosmetic { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .comparison_layout-cosmetic { grid-template-columns: minmax(0, 1fr); gap: var(--space-large); }
   .comparison_figure-cosmetic { max-width: 30rem; aspect-ratio: 4 / 3; }
 }
 
 @media screen and (max-width: 767px) {
   .is-hero-photo-first .hero_note { right: auto; }
-  .is-notice-columns { margin-top: 3rem; }
-  .gallery_toolbar { margin-bottom: 2rem; }
+  .is-notice-columns { margin-top: var(--space-large); }
+  .gallery_toolbar { margin-bottom: var(--space-medium); }
   .gallery_toolbar .filter_bar { gap: .4rem; }
   .gallery_toolbar .filter_bar button { padding-inline: .9rem; }
   .is-gallery-lightbox .lightbox_caption { flex-direction: column; align-items: flex-start; }
 }
-.is-margin-top { margin-top: 5rem; }
+.is-margin-top { margin-top: var(--space-xxlarge); }
 @media screen and (max-width: 767px) { .is-margin-top { margin-top: 3.5rem; } }
 .is-cosmetic .quote_figure img { object-position: 50% 22%; }

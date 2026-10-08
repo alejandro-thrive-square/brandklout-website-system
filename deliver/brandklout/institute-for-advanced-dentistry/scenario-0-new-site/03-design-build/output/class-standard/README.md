@@ -2,8 +2,19 @@
 
 `class-map.json` moved every class in the IFA house build (`../code/site-src`) onto the Client-First +
 Relume standard ([CLASS-STANDARD.md](../../../../../../process/tools/client-first-style-guide/CLASS-STANDARD.md)),
-before launch. `framework-spec.json` holds the 22 colour tokens the Framework panel owns
+before launch. `framework-spec.json` holds the tokens the Framework panel owns: the 22 colours, and since
+phase 2 (2026-10-08) the 10 house spacing steps and the 6 role-class type bases
 ([INSTATIC-FRAMEWORK.md](../../../../../../process/tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)).
+
+**Phase 2, structure (2026-10-08; run: `docs/runbook/2026-10-08-phase2-structure.md`, CLASS-STANDARD.md §10):**
+`type-map.json` names which role class reads which Framework base (`heading-style-h1` → `size-h1` …; the map
+`scale-tokens.mjs --type` takes); `combo-map.json` is the reviewed map of the 17 contextual overrides that
+became combo classes (`.footer_column .text-style-label` → `text-style-label is-footer-column`, applied to the
+source by `../code/site-src/tools/combo-classes.mjs`, which also proves a build with `--check dist`);
+`framework.pulled.css` is `framework.mjs pull` of the live staging Framework (38 variables), the record the
+`:root` block of `../code/site-src/css/01-tokens.css` must match. Two overrides stay by hand (three-class
+selectors the tool refuses): `.is-cosmetic .checklist_copy .text-style-lede` and
+`.is-gallery-lightbox .lightbox_caption .text-style-label`.
 
 **Applied on 2026-10-06, source and staging** (run: `docs/runbook/2026-10-06-class-standard-on-staging.md`):
 site-src and `push/` renamed with this map, rebuilt, pushed to `staging.ifadentistry.com`, the stylesheet
@@ -86,8 +97,11 @@ alone: it must not be run (`push/README.md`).
 drafted: 22 colours (`ink` ... `on-light-dim`; `accent-text` is `var(--gold-deep)`), root font size 16. Its
 `stays` list is what remains in the registry `:root` on purpose: the fluid-root numbers, the per-breakpoint
 scale multipliers (`--s-d1` ...), `--gutter` and `--nav-h` (redefined per breakpoint), the font stacks and the
-easing. Type sizes are not tokens on this site: each role class carries `calc(<rem> * var(--s-...))`.
-`push/editable.mjs` reads this file after every push.
+easing. Since 2026-10-08 the spec also holds `typography` (`size-h1-base` 96px … `size-text-label-base`
+12.48px) and `spacing` (`space-xxsmall` 4px … `space-xxhuge` 192px); the role classes read `var(--size-h1)` …,
+formulas kept in the registry `:root` (`--size-h1: calc(var(--size-h1-base) * var(--s-d1))`), and every rem
+spacing value that equals a house step reads `var(--space-*)`. `push/editable.mjs` reads this file after every
+push and adds only what the Framework lacks (a panel edit is never overwritten).
 
 ## Open questions (follow-ups; none blocks the standard)
 

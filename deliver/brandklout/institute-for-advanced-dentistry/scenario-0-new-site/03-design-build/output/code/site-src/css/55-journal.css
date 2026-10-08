@@ -29,13 +29,13 @@
 
 /* ---------- 404: the ways in ---------- */
 .not-found_phone-link { color: var(--accent-text); white-space: nowrap; text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
-.not-found_links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; border-bottom: 1px solid var(--rule); }
+.not-found_links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-large); border-bottom: 1px solid var(--rule); }
 .not-found_links li { border-top: 1px solid var(--rule); }
-.not-found_links a { display: grid; grid-template-columns: minmax(0, 1fr) 2rem; grid-template-rows: auto auto; gap: .3rem 1rem; align-items: center; padding: 1.5rem 0; transition: padding-left .45s var(--ease); }
+.not-found_links a { display: grid; grid-template-columns: minmax(0, 1fr) 2rem; grid-template-rows: auto auto; gap: .3rem var(--space-small); align-items: center; padding: 1.5rem 0; transition: padding-left .45s var(--ease); }
 .not-found_link-title { font-size: calc(1.6rem * var(--s-d3)); font-weight: 300; letter-spacing: -.015em; line-height: 1.15; transition: color .35s; }
 .not-found_link-description { grid-row: 2; color: var(--fg-dim); font-size: calc(.95rem * var(--s-sp)); }
 .not-found_links svg { grid-row: 1 / span 2; grid-column: 2; width: 1.4rem; height: 1.4rem; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform .45s var(--ease); }
-.not-found_links a:hover, .not-found_links a:focus-visible { padding-left: .5rem; }
+.not-found_links a:hover, .not-found_links a:focus-visible { padding-left: var(--space-xsmall); }
 .not-found_links a:hover .not-found_link-title, .not-found_links a:focus-visible .not-found_link-title { color: var(--accent-text); }
 .not-found_links a:hover svg { transform: translateX(.35rem); }
 

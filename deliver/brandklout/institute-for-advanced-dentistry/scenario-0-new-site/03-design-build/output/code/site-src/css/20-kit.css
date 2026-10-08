@@ -6,15 +6,15 @@
    light tones: bone, sand, white, mist, bone, ivory, white, sand. */
 .section_chapter { color: var(--fg); }
 
-.chapter_heading { padding-top: 9rem; padding-bottom: 4rem; max-width: 62rem; }
+.chapter_heading { padding-top: 9rem; padding-bottom: var(--space-xlarge); max-width: 62rem; }
 
-.is-split-heading { max-width: none; display: grid; grid-template-columns: 1.35fr 1fr; gap: 4rem; align-items: end; }
+.is-split-heading { max-width: none; display: grid; grid-template-columns: 1.35fr 1fr; gap: var(--space-xlarge); align-items: end; }
 
 .marquee_component { margin-top: 7rem; padding-block: 2.5rem; border-block: 1px solid var(--rule); overflow: hidden; }
 
 .marquee_track { display: flex; width: max-content; will-change: transform; }
 
-.marquee_set { display: flex; align-items: center; gap: 6rem; padding-right: 6rem; flex: none; }
+.marquee_set { display: flex; align-items: center; gap: var(--space-huge); padding-right: var(--space-huge); flex: none; }
 
 .marquee_set img { height: 3.1rem; width: auto; max-width: none; }
 
@@ -44,11 +44,11 @@
 
 .proof_card-details i { display: block; font-style: normal; font-family: var(--f-mono); font-size: calc(.72rem * var(--s-sp)); letter-spacing: .1em; text-transform: uppercase; color: var(--fg-dim); margin-top: .3rem; }
 
-.voices_component { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 7fr) auto; gap: 4rem; align-items: center; margin-top: 6rem; padding-top: 3.5rem; border-top: 1px solid var(--rule); }
+.voices_component { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 7fr) auto; gap: var(--space-xlarge); align-items: center; margin-top: var(--space-huge); padding-top: 3.5rem; border-top: 1px solid var(--rule); }
 
 .voices_stars svg { width: 8rem; height: auto; fill: var(--gold); }
 
-.voices_figure { margin-top: 1rem; font-size: calc(1.35rem * var(--s-d3)); font-weight: 300; letter-spacing: -.01em; }
+.voices_figure { margin-top: var(--space-small); font-size: calc(1.35rem * var(--s-d3)); font-weight: 300; letter-spacing: -.01em; }
 
 .voices_figure b { font-size: calc(3.75rem * var(--s-d2)); font-weight: 300; letter-spacing: -.04em; line-height: 1; margin-right: .4rem; color: var(--gold-deep); }
 
@@ -66,7 +66,7 @@
 
 .voices_component.is-live .voices_quote.is-on { visibility: visible; }
 
-.voices_nav { display: flex; align-items: center; gap: 1rem; }
+.voices_nav { display: flex; align-items: center; gap: var(--space-small); }
 
 .voices_component:not(.is-live) .voices_nav { display: none; }
 
@@ -79,9 +79,9 @@
 
 .invitation_background::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, var(--paper-2) 0%, rgba(235, 229, 216, .9) 24%, rgba(235, 229, 216, .93) 70%, var(--paper-2) 100%); }
 
-.invitation_layout { position: relative; display: grid; grid-template-columns: minmax(0, 6.5fr) minmax(0, 5fr); gap: 5rem; align-items: start; }
+.invitation_layout { position: relative; display: grid; grid-template-columns: minmax(0, 6.5fr) minmax(0, 5fr); gap: var(--space-xxlarge); align-items: start; }
 
-.invitation_copy .text-style-lede { margin-top: 2rem; max-width: 38rem; color: var(--fg-dim); }
+.text-style-lede.is-invitation-copy { margin-top: var(--space-medium); max-width: 38rem; color: var(--fg-dim); }
 
 .invitation_includes { margin-top: 2.25rem; max-width: 38rem; }
 
@@ -97,9 +97,9 @@
 
 .finance_component { margin-top: 2.75rem; padding-top: 1.75rem; border-top: 1px solid var(--rule); max-width: 38rem; }
 
-.finance_logos { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 1rem 0 .75rem; }
+.finance_logos { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-small); margin: var(--space-small) 0 .75rem; }
 
-.finance_logo { display: grid; place-items: center; width: 11rem; height: 4.25rem; padding: .6rem 1rem; background: var(--white); border: 1px solid var(--rule); border-radius: .3rem; transition: border-color .35s, box-shadow .35s; }
+.finance_logo { display: grid; place-items: center; width: 11rem; height: 4.25rem; padding: .6rem var(--space-small); background: var(--white); border: 1px solid var(--rule); border-radius: .3rem; transition: border-color .35s, box-shadow .35s; }
 
 .finance_logo:hover, .finance_logo:focus-visible { border-color: var(--gold-deep); box-shadow: 0 .75rem 1.5rem -1rem rgba(55, 52, 53, .45); }
 
@@ -123,9 +123,9 @@
 
 .form_subtitle { margin-top: .4rem; color: var(--on-light-dim); margin-bottom: 1.5rem; }
 
-.form_field { position: relative; margin-top: 1rem; }
+.form_field { position: relative; margin-top: var(--space-small); }
 
-.form_field input, .form_field textarea { display: block; width: 100%; padding: 1.55rem 1rem .6rem; min-height: 3.6rem; background: #fff; border: 1px solid rgba(55, 52, 53, .28); border-radius: .3rem; font-size: calc(1.0625rem * var(--s-tx)); transition: border-color .35s, box-shadow .35s; resize: vertical; }
+.form_field input, .form_field textarea { display: block; width: 100%; padding: 1.55rem var(--space-small) .6rem; min-height: 3.6rem; background: #fff; border: 1px solid rgba(55, 52, 53, .28); border-radius: .3rem; font-size: calc(1.0625rem * var(--s-tx)); transition: border-color .35s, box-shadow .35s; resize: vertical; }
 
 .form_field label { position: absolute; left: 1rem; top: 1.1rem; color: var(--on-light-dim); pointer-events: none; transform-origin: left top; transition: transform .35s var(--ease); }
 
@@ -135,7 +135,7 @@
 
 .form_field.is-bad input { border-color: #a3261b; }
 
-.form_chips { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.form_chips { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: var(--space-xsmall); }
 
 .form_chips legend { float: left; width: 100%; margin-bottom: .7rem; color: var(--on-light-dim); font-size: calc(.9rem * var(--s-sp)); }
 
@@ -143,7 +143,7 @@
 
 .form_chips input { position: absolute; opacity: 0; inset: 0; }
 
-.form_chips span { display: block; padding: .7rem 1rem; min-height: 44px; border: 1px solid rgba(55, 52, 53, .3); border-radius: 2rem; font-size: calc(.92rem * var(--s-sp)); transition: background .35s var(--ease), color .35s, border-color .35s; }
+.form_chips span { display: block; padding: .7rem var(--space-small); min-height: 44px; border: 1px solid rgba(55, 52, 53, .3); border-radius: 2rem; font-size: calc(.92rem * var(--s-sp)); transition: background .35s var(--ease), color .35s, border-color .35s; }
 
 .form_chips label:hover span { border-color: var(--on-light); }
 
@@ -157,10 +157,10 @@
 
 .form_component .is-primary:hover, .form_component .is-primary:focus-visible { color: var(--on-ink); }
 
-.form_note { margin-top: 1rem; font-size: calc(.9rem * var(--s-sp)); color: var(--on-light-dim); min-height: 1.4em; }
+.form_note { margin-top: var(--space-small); font-size: calc(.9rem * var(--s-sp)); color: var(--on-light-dim); min-height: 1.4em; }
 
 /* FAQ: inside chapter 07, before the footer (the journey holds eight chapters) */
-.faq_component { position: relative; margin-top: 9rem; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 4rem; align-items: start; }
+.faq_component { position: relative; margin-top: 9rem; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-xlarge); align-items: start; }
 
 .faq_header .heading-style-h2 { max-width: 26rem; }
 
@@ -193,20 +193,20 @@
 }
 
 @media screen and (max-width: 991px) {
-  .chapter_heading { padding-top: 7rem; padding-bottom: 3rem; }
+  .chapter_heading { padding-top: 7rem; padding-bottom: var(--space-large); }
   .is-split-heading { grid-template-columns: 1fr; gap: 1.5rem; }
   .proof_deck { grid-template-columns: repeat(2, 1fr); }
-  .voices_component { grid-template-columns: 1fr; gap: 2rem; }
+  .voices_component { grid-template-columns: 1fr; gap: var(--space-medium); }
   .invitation_layout { grid-template-columns: 1fr; gap: 3.5rem; }
   .form_component { position: static; }
-  .faq_component { grid-template-columns: 1fr; gap: 2rem; margin-top: 6rem; }
+  .faq_component { grid-template-columns: 1fr; gap: var(--space-medium); margin-top: var(--space-huge); }
 }
 
 @media screen and (max-width: 767px) {
   .marquee_component { margin-top: 4.5rem; }
   .marquee_set { gap: 3.5rem; padding-right: 3.5rem; }
   .marquee_set img { height: 2.5rem; }
-  .voices_component { margin-top: 4rem; padding-top: 2.5rem; }
+  .voices_component { margin-top: var(--space-xlarge); padding-top: 2.5rem; }
   .section_invitation { padding-top: 7rem; }
   .form_component { padding: 1.75rem 1.4rem; }
   .faq_component { margin-top: 4.5rem; }
@@ -215,12 +215,12 @@
 
 @media screen and (max-width: 479px) {
   .proof_deck { gap: .8rem; }
-  .proof_card-details { padding: .9rem .9rem 1rem; }
+  .proof_card-details { padding: .9rem .9rem var(--space-small); }
   .proof_card-play { width: 2.5rem; height: 2.5rem; right: .7rem; top: .7rem; }
   .finance_logos { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
-  .finance_logo { width: auto; height: 3.75rem; padding: .5rem; }
+  .finance_logo { width: auto; height: 3.75rem; padding: var(--space-xsmall); }
 }
 
 /* The live Google reviews (Elfsight) in an Embed block. A floor so the chapter does not collapse while platform.js boots. */
-.reviews_embed { display: block; width: 100%; min-height: 26rem; margin-top: 6rem; padding-top: 3.5rem; border-top: 1px solid var(--rule); }
-@media screen and (max-width: 767px) { .reviews_embed { margin-top: 4rem; padding-top: 2.5rem; } }
+.reviews_embed { display: block; width: 100%; min-height: 26rem; margin-top: var(--space-huge); padding-top: 3.5rem; border-top: 1px solid var(--rule); }
+@media screen and (max-width: 767px) { .reviews_embed { margin-top: var(--space-xlarge); padding-top: 2.5rem; } }

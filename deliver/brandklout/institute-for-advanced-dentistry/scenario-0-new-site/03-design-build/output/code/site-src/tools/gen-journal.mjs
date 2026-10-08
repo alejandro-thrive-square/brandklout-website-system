@@ -410,7 +410,7 @@ const dek = (p) => { const m = p.description.match(/^.*?[.?!](?=\s|$)/); return 
 function tile(p, h = 'h3') {
   return `      <a class="tile_card" href="/${p.slug}/">
         <div class="tile_image">${img(p.img, '', ' loading="lazy"')}</div>
-        <p class="text-style-label">${esc(CATS[p.cat].short)} · ${p.minutes} min read</p>
+        <p class="text-style-label is-tile-card">${esc(CATS[p.cat].short)} · ${p.minutes} min read</p>
         <${h} class="tile_title">${esc(p.label.charAt(0).toUpperCase() + p.label.slice(1))}</${h}>
         <span class="tile_description">${esc(dek(p))}</span>
       </a>`
@@ -427,7 +427,7 @@ const invite = (chapter, tagline, extra = {}) => `<!--@invite ${jsonc({ chapter:
 
 function postAside(toc, label) {
   return `<aside class="post_aside" aria-label="${esc(label)}">
-      <p class="text-style-label">${esc(label)}</p>
+      <p class="text-style-label is-post-aside">${esc(label)}</p>
       <div class="post_progress" aria-hidden="true"><i></i></div>
       <ol class="post_contents">
 ${toc.map((t) => `        <li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('\n')}
@@ -452,7 +452,7 @@ for (const p of posts) {
     <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Articles', '/about-our-practice/articles/'], [esc(p.label.charAt(0).toUpperCase() + p.label.slice(1))]])}
       <p class="tag"><span>${esc(c.name)}</span><em>An article by Dr.&nbsp;Bensoussan</em></p>
-      <h1 class="heading-style-h1">${esc(p.h1)}</h1>
+      <h1 class="heading-style-h1 is-hero is-plain-hero">${esc(p.h1)}</h1>
       <p class="hero_details is-article-details" data-rise><span>Filed under <a href="/category/${p.cat}/"><b>${esc(c.name)}</b></a></span><span>${p.minutes} min read</span><span><time datetime="${p.iso}">${p.date}</time></span><span>By ${esc(p.author)}</span></p>
     </div>
   </div>
@@ -502,7 +502,7 @@ ${invite(3, p.tagline)}`
     <div class="hero_copy">
       ${crumbs([['Home', '/'], ['About', '/about-our-practice/'], ['Articles']])}
       <p class="tag"><span>Articles</span><em>Written by Dr.&nbsp;Jonathan Bensoussan</em></p>
-      <h1 class="heading-style-h1">Articles on implants, prosthodontics and <em>your smile</em>.</h1>
+      <h1 class="heading-style-h1 is-hero">Articles on implants, prosthodontics and <em>your smile</em>.</h1>
     </div>
     <div class="hero_photo-strip">
       <figure>${img('jr-index-1.jpg', 'Dr. Bensoussan and a patient in front of her new smile on the screen')}</figure>
@@ -532,7 +532,7 @@ ${invite(3, p.tagline)}`
       <div class="row_item">
         <figure class="row_figure" data-wipe>${img(lead.img, lead.alt, ' loading="lazy" data-parallax="8"')}</figure>
         <div class="row_body">
-          <p class="text-style-label">${esc(CATS[lead.cat].name)} · ${lead.minutes} min read</p>
+          <p class="text-style-label is-row-body">${esc(CATS[lead.cat].name)} · ${lead.minutes} min read</p>
           <h3 class="heading-style-h3"><a href="/${lead.slug}/">${esc(lead.h1)}</a></h3>
           <p>${esc(lead.description)}</p>
           <a class="arrow-link_component" href="/${lead.slug}/">Read the article${ARROW}</a>
@@ -575,7 +575,7 @@ ${list.map((q) => tile(q, 'h2')).join('\n')}
     : `${chipbar(c)}
     <div class="notice_component">
       <div>
-        <p class="text-style-label">${esc(cat.name)}</p>
+        <p class="text-style-label is-notice">${esc(cat.name)}</p>
         <p class="heading-style-h4">No articles are filed under ${esc(cat.name.toLowerCase())} yet.</p>
         <p>These articles cover the same ground.</p>
       </div>
@@ -590,7 +590,7 @@ ${cat.empty.map((s) => tile(bySlug[s], 'h2')).join('\n')}
     <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Articles', '/about-our-practice/articles/'], [esc(cat.name)]])}
       <p class="tag"><span>Articles</span><em>Category</em></p>
-      <h1 class="heading-style-h1">${cat.h1}</h1>
+      <h1 class="heading-style-h1 is-hero is-plain-hero">${cat.h1}</h1>
       <p class="hero_details is-article-details" data-rise><span><b>${list.length}</b> ${list.length === 1 ? 'article' : 'articles'}</span><span>By Dr. Jonathan Bensoussan</span></p>
     </div>
   </div>
@@ -688,7 +688,7 @@ for (const L of LEGAL_PAGES) {
     <div class="hero_copy">
       ${crumbs([['Home', '/'], [L.crumb]])}
       <p class="tag"><span>Legal</span><em>Institute for Advanced Dentistry PLLC</em></p>
-      <h1 class="heading-style-h1">${L.h1}</h1>
+      <h1 class="heading-style-h1 is-hero is-plain-hero">${L.h1}</h1>
       ${effective ? `<p class="hero_details is-article-details" data-rise><span>Effective date <b>${esc(effective)}</b></span><span>Peoria, Arizona</span></p>` : `<p class="hero_details is-article-details" data-rise><span>Institute for Advanced Dentistry</span><span>Peoria, Arizona</span></p>`}
     </div>
   </div>
@@ -729,7 +729,7 @@ ${invite(2, L.tagline)}`
     <div class="hero_copy">
       ${crumbs([['Home', '/'], ['Page not found']])}
       <p class="tag"><span>Error 404</span><em>Page not found</em></p>
-      <h1 class="heading-style-h1">This page is not <em>here</em>.</h1>
+      <h1 class="heading-style-h1 is-hero is-plain-hero">This page is not <em>here</em>.</h1>
       <p class="text-style-lede hero_intro" data-rise>The address may have changed when the site was rebuilt. Every page below is a good place to pick up from, or call us at <a class="not-found_phone-link" href="{{site.tel}}">{{site.phone}}</a>.</p>
     </div>
   </div>

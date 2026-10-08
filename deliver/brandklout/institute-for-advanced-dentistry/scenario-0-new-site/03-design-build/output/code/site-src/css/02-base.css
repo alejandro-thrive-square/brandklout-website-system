@@ -40,29 +40,29 @@ body {
 /* ---------- type ---------- */
 .heading-style-h1, .heading-style-h2, .heading-style-h3, .heading-style-h4 { font-weight: 300; letter-spacing: -.028em; text-wrap: balance; }
 
-.heading-style-h1 { font-size: calc(6rem * var(--s-d1)); line-height: .98; }
+.heading-style-h1 { font-size: var(--size-h1); line-height: .98; }
 
 .invitation_title { font-size: calc(5rem * var(--s-d1)); }
 
-.heading-style-h2 { font-size: calc(4rem * var(--s-d2)); line-height: 1.02; }
+.heading-style-h2 { font-size: var(--size-h2); line-height: 1.02; }
 
-.heading-style-h3 { font-size: calc(2.25rem * var(--s-d3)); line-height: 1.08; letter-spacing: -.02em; }
+.heading-style-h3 { font-size: var(--size-h3); line-height: 1.08; letter-spacing: -.02em; }
 
-.heading-style-h4 { font-size: calc(1.5rem * var(--s-d3)); line-height: 1.15; letter-spacing: -.015em; font-weight: 400; }
+.heading-style-h4 { font-size: var(--size-h4); line-height: 1.15; letter-spacing: -.015em; font-weight: 400; }
 
 .heading-style-h1 em, .heading-style-h2 em, .heading-style-h3 em, .path_closing-text em, .arrival_second-line em { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: var(--accent-text); }
 
 [data-theme="light"] .heading-style-h2 em, [data-theme="light"] .heading-style-h3 em { color: var(--gold-deep); }
 
-.text-style-lede { font-size: calc(1.25rem * var(--s-tx)); line-height: 1.55; color: var(--fg-dim); max-width: 34rem; }
+.text-style-lede { font-size: var(--size-text-lede); line-height: 1.55; color: var(--fg-dim); max-width: 34rem; }
 
 .text-color-muted { color: var(--on-light-dim); }
 
-.text-style-label { font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; color: var(--fg-dim); }
+.text-style-label { font-family: var(--f-mono); font-size: var(--size-text-label); letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; color: var(--fg-dim); }
 
 [data-theme="light"] .text-style-label { color: var(--on-light-dim); }
 
-.tag { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; margin-bottom: 1.75rem; color: var(--fg); }
+.tag { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xsmall) .9rem; font-family: var(--f-mono); font-size: calc(.78rem * var(--s-sp)); letter-spacing: .14em; text-transform: uppercase; line-height: 1.4; margin-bottom: 1.75rem; color: var(--fg); }
 
 .tag span { font-weight: 500; color: var(--accent-text); }
 

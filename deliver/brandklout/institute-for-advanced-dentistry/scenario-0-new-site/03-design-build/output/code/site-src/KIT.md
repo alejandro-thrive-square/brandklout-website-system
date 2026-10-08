@@ -114,6 +114,20 @@ Every class follows [CLASS-STANDARD.md](../../../../../../../process/tools/clien
 - Gate before every push: `node class-audit.mjs --local <site-src> --strict` (in
   `deliver/process/tools/instatic-api-sync/`) must end `IN BOUNDS`. The old names and what each
   became: `../../class-standard/class-map.json`.
+- **Spacing and type read the Framework** (CLASS-STANDARD.md §10, since 2026-10-08). A padding, margin or gap
+  that equals a house step is written `var(--space-small)` (1rem) … `var(--space-xxhuge)` (12rem); the role
+  classes read `var(--size-h1)` … `var(--size-text-label)`, formulas in `01-tokens.css` over the `--size-*-base`
+  tokens. Both token sets live in the Instatic Framework panel on the site and in `01-tokens.css` for the
+  preview (`push/editable.mjs` moves the `:root` copies, like the colours). Off-scale values (`.9rem`, `1.25rem`)
+  stay literal until the snap is decided (phase 2 C). `node ../../../../../../process/tools/instatic-api-sync/scale-tokens.mjs --files css`
+  rewrites new literals that equal a step.
+- **Never restyle a utility or role class from a context** (`.footer_column .text-style-label { color }`): an edit
+  to `text-style-label` in the Styles panel would do nothing there. Put a combo on the element
+  (`text-style-label is-footer-column`) and write the rule compound (`.text-style-label.is-footer-column`). The
+  17 overrides of the first build became combos this way on 2026-10-08 (`../../class-standard/combo-map.json`;
+  `node tools/combo-classes.mjs --check dist` proves the build carries them). Themes and states
+  (`[data-theme="light"] .x`, `.panel:not(.is-open) .x`) are legitimate context and stay.
+  Gate: `structure-audit.mjs --local <site-src>` (same folder as class-audit) reports the overrides.
 
 ## Photographs
 

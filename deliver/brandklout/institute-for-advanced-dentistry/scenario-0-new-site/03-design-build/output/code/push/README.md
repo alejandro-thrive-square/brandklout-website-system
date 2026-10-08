@@ -11,8 +11,10 @@ containers and are named back, and `site.css` / `site.js` are pushed verbatim as
 
 **Then the stylesheet moves into the registry (since 2026-10-06).** A code-asset stylesheet cannot be edited
 in the Styles panel and beats every panel edit, so after every push `push/editable.mjs` moves `site.css` into
-the style registry with `css-to-registry.mjs` (which writes every declaration verbatim, no converter) and keeps
-the colour tokens in the Framework panel. Only the eight `@font-face` blocks stay in the asset. Standards:
+the style registry with `css-to-registry.mjs` (which writes every declaration verbatim, no converter), folds every
+class the move left split over its chip and later rules back into one rule (`fold-split.mjs`, since 2026-10-08, so a
+Styles-panel edit on the chip wins; the classes it refuses stay split and are listed in its log), and keeps the
+colour, spacing and type tokens in the Framework panel. Only the eight `@font-face` blocks stay in the asset. Standards:
 [INSTATIC-FRAMEWORK.md](../../../../../../../process/tools/client-first-style-guide/INSTATIC-FRAMEWORK.md) and
 [CLASS-STANDARD.md](../../../../../../../process/tools/client-first-style-guide/CLASS-STANDARD.md)
 (class names: `../site-src/KIT.md`, the old-to-new map in `../../class-standard/`).
@@ -37,8 +39,8 @@ WZ_TMP="$PWD/push/.tmp" RAILWAY_LINK_DIR="$LOCALAPPDATA/Temp/rw-ifa-staging" INS
 $WS node push/push.mjs > push/.tmp/push-dry.log 2>&1               # dry run: pages written/deleted, same row ids
 $WS node push/push.mjs --apply --force > push/.tmp/push.log 2>&1   # REPLACE: the payload is the site (and the registry)
 $WS node $TOOLS/../instatic-site/ops/apply-template-flags.mjs --page 404 --not-found
-node push/editable.mjs                                             # dry run: site.css -> registry, tokens -> Framework
-node push/editable.mjs --apply                                     # EVERY push: the push just replaced the registry
+node push/editable.mjs                                             # dry run: site.css -> registry, split classes folded, tokens -> Framework
+node push/editable.mjs --apply                                     # EVERY push: the push just replaced the registry (read its fold-split "left" list)
 $WS node push/publish.mjs
 node $TOOLS/editability.mjs --site $S --published                  # GATE: EDITABLE
 node $TOOLS/class-audit.mjs --site $S --strict                     # GATE: IN BOUNDS
@@ -65,10 +67,12 @@ not move anything visible (a refactor), take `migration-gates.mjs snapshot befor
 - **Embeds** (`data-embed` keys and the GHL form slot) become `brandklout.embed-origins.embed` nodes with
   the snippet from `site-src/data/embeds.json`; the plugin must be installed and enabled.
 - **Media names**: `ifa-<file>` (the home's are `home-<file>`). A re-cut image needs a new file name.
-- **Colours are edited in the Framework panel**, not in `site-src/css/01-tokens.css`: `editable.mjs` removes the
-  `:root` copy of the 22 colour tokens on every push and never overwrites a Framework value. After a panel edit,
-  put the same value in `01-tokens.css` and `../../class-standard/framework-spec.json`, or the local preview
-  shows the old colour. Everything else (type sizes, spacing, per-class rules) is edited in the Styles panel
+- **Colours, the spacing scale and the type bases are edited in the Framework panel**, not in
+  `site-src/css/01-tokens.css`: `editable.mjs` removes the `:root` copy of the 22 colour tokens, the 10
+  `--space-*` steps and the 6 `--size-*-base` tokens on every push and never overwrites a Framework value
+  (since 2026-10-08, CLASS-STANDARD.md §10; before that, colours only). After a panel edit, put the same value
+  in `01-tokens.css` and `../../class-standard/framework-spec.json`, or the local preview shows the old value.
+  Everything else (off-scale spacing, per-class rules, the `--size-*` formulas) is edited in the Styles panel
   and **a replace push overwrites it with site-src**: a hand edit in the Styles panel must be copied into
   `site-src/css/` before the next push (compare the registry first; nothing here detects it).
 - **Write a combo compound when it sets a property its base class also sets** (`.path_step.is-closing`, never a

@@ -13,7 +13,7 @@
 .film_grid .film_subtitle { max-width: 22rem; }
 
 /* ---------- voices: written testimonials, a photograph, a line, and the rest folded ---------- */
-.testimonial_grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4rem 1.75rem; align-items: start; }
+.testimonial_grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xlarge) 1.75rem; align-items: start; }
 .testimonial_figure { position: relative; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; background: var(--paper-2); }
 .testimonial_figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transition: transform 1.1s var(--ease); }
 .testimonial_card:hover .testimonial_figure img { transform: scale(1.04); }
@@ -23,16 +23,16 @@
 .testimonial_image-focus-top { object-position: 50% 12%; }
 .prosthodontist_image-focus-right { object-position: 72% 30%; }
 .testimonial_quote { margin-top: 1.5rem; font-family: var(--f-serif); font-style: italic; font-size: calc(1.6rem * var(--s-d3)); line-height: 1.22; letter-spacing: -.005em; color: var(--fg); }
-.testimonial_card cite { display: block; margin-top: 1rem; font-style: normal; font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); }
+.testimonial_card cite { display: block; margin-top: var(--space-small); font-style: normal; font-family: var(--f-mono); font-size: calc(.75rem * var(--s-sp)); letter-spacing: .12em; text-transform: uppercase; color: var(--fg-dim); }
 .testimonial_card cite b { color: var(--accent-text); font-weight: 500; }
 .testimonial_card .disclosure_component { margin-top: 1.25rem; }
 .testimonial_card .disclosure_body p { color: var(--fg-dim); }
 
 /* ---------- the doctor's own words: a long quote, set smaller than a patient's pull ---------- */
 .quote_long-copy .quote_text p { font-size: calc(2.15rem * var(--s-d2)); line-height: 1.22; }
-.quote_text .disclosure_component { margin-top: 2rem; }
+.quote_text .disclosure_component { margin-top: var(--space-medium); }
 .quote_text .disclosure_body p { font-family: var(--f-sans); font-style: normal; font-size: calc(1.05rem * var(--s-tx)); line-height: 1.6; letter-spacing: 0; color: var(--fg-dim); }
-.quote_note { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--fg-dim); max-width: 38rem; }
+.quote_note { margin-top: var(--space-medium); padding-top: 1.5rem; border-top: 1px solid var(--rule); color: var(--fg-dim); max-width: 38rem; }
 
 /* ---------- recognition: a row whose photograph carries the Phoenix Magazine seal ---------- */
 .recognition_media { position: relative; }
@@ -41,29 +41,29 @@
 .marquee_label + .marquee_component { margin-top: 1.5rem; }
 
 /* ---------- vs: a photograph beside the comparison table ---------- */
-.comparison_layout { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 5rem; align-items: start; }
+.comparison_layout { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--space-xxlarge); align-items: start; }
 .comparison_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
 .comparison_figure img { width: 100%; height: 116%; object-fit: cover; }
 .comparison_layout .comparison_table thead th:first-child { width: 22%; }
 
 /* ---------- pay: the ways to pay and the three lenders ---------- */
-.payment_layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6rem; align-items: center; }
+.payment_layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-huge); align-items: center; }
 .payment_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; }
 .payment_figure img { width: 100%; height: 116%; object-fit: cover; }
 .payment_ways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2.5rem; border-top: 1px solid var(--rule); }
 .payment_ways li { padding: 1.5rem 1.25rem 0 0; }
 .payment_ways li + li { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
 .payment_ways b { display: block; font-size: calc(1.6rem * var(--s-d3)); font-weight: 300; letter-spacing: -.02em; line-height: 1.15; color: var(--fg); }
-.payment_ways span { display: block; margin-top: .5rem; color: var(--fg-dim); font-size: calc(.95rem * var(--s-sp)); }
+.payment_ways span { display: block; margin-top: var(--space-xsmall); color: var(--fg-dim); font-size: calc(.95rem * var(--s-sp)); }
 .payment_subtitle { margin-top: 3.5rem; color: var(--accent-text); }
-.payment_lenders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
+.payment_lenders { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-small); margin-top: 1.25rem; }
 .payment_lenders li { display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; min-height: 9.5rem; padding: 1.5rem 1.4rem; background: var(--white); border: 1px solid var(--rule); border-radius: .6rem; }
 .payment_lenders img { display: block; width: auto; height: auto; max-width: 100%; max-height: 2.75rem; }
 .payment_lenders span { font-size: calc(.95rem * var(--s-sp)); color: var(--fg); }
 .payment_note { margin-top: 1.25rem; color: var(--fg-dim); }
 
 /* ---------- reviews: the live Google widget, introduced by a patient ---------- */
-.reviews_layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 5rem; align-items: end; }
+.reviews_layout { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: var(--space-xxlarge); align-items: end; }
 .reviews_figure { overflow: hidden; border-radius: .8rem; aspect-ratio: 4 / 5; max-height: 34rem; }
 .reviews_figure img { width: 100%; height: 116%; object-fit: cover; }
 .reviews_layout .text-style-lede { margin-top: 1.5rem; }
@@ -72,7 +72,7 @@
 /* ---------- visit: the entrance under the address ---------- */
 .visit_figure { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 3 / 2; }
 .visit_figure img { width: 100%; height: 116%; object-fit: cover; }
-.visit_layout .heading-style-h2 { margin-bottom: .5rem; }
+.visit_layout .heading-style-h2 { margin-bottom: var(--space-xsmall); }
 
 /* ---------- prose side photograph ---------- */
 .doctor_side-figure { margin-top: 2.5rem; overflow: hidden; border-radius: .7rem; aspect-ratio: 4 / 5; max-width: 26rem; }
@@ -82,14 +82,14 @@
 .text-rich-text .doctor_publications li::before { top: 1.5rem; }
 
 @media screen and (max-width: 1279px) {
-  .comparison_layout, .payment_layout, .reviews_layout { gap: 4rem; }
+  .comparison_layout, .payment_layout, .reviews_layout { gap: var(--space-xlarge); }
   .recognition_seal { right: -1rem; }
 }
 
 @media screen and (max-width: 991px) {
-  .about_spacer-top { margin-top: 5rem; }
+  .about_spacer-top { margin-top: var(--space-xxlarge); }
   .testimonial_grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.5rem 1.25rem; }
-  .comparison_layout, .payment_layout, .reviews_layout { grid-template-columns: minmax(0, 1fr); gap: 3rem; }
+  .comparison_layout, .payment_layout, .reviews_layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-large); }
   .comparison_figure, .payment_figure { max-width: 34rem; aspect-ratio: 4 / 3; }
   .reviews_figure { max-width: 26rem; aspect-ratio: 4 / 3; order: -1; }
   .doctor_side-figure { aspect-ratio: 4 / 3; max-width: 34rem; }
@@ -102,7 +102,7 @@
   .film_grid .film_caption b { font-size: calc(1.6rem * var(--s-d3)); }
   .testimonial_grid { grid-template-columns: minmax(0, 1fr); gap: 3.5rem; }
   .testimonial_figure { aspect-ratio: 4 / 3; }
-  .is-text-only { padding: 5rem 1.5rem 1.25rem; }
+  .is-text-only { padding: var(--space-xxlarge) 1.5rem 1.25rem; }
   .payment_ways { grid-template-columns: minmax(0, 1fr); }
   .payment_ways li, .payment_ways li + li { padding: 1.1rem 0; border-left: 0; }
   .payment_ways li + li { border-top: 1px solid var(--rule); }

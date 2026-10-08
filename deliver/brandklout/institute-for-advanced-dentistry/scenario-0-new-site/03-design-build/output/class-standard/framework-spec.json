@@ -93,8 +93,36 @@
       "value": "#5a5654"
     }
   ],
-  "typography": [],
-  "spacing": [],
+  "typography": [
+    {
+      "group": "Typography",
+      "sizes": [
+        { "name": "size-h1-base", "px": 96 },
+        { "name": "size-h2-base", "px": 64 },
+        { "name": "size-h3-base", "px": 36 },
+        { "name": "size-h4-base", "px": 24 },
+        { "name": "size-text-lede-base", "px": 20 },
+        { "name": "size-text-label-base", "px": 12.48 }
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "group": "Spacing",
+      "sizes": [
+        { "name": "space-xxsmall", "px": 4 },
+        { "name": "space-xsmall", "px": 8 },
+        { "name": "space-small", "px": 16 },
+        { "name": "space-medium", "px": 32 },
+        { "name": "space-large", "px": 48 },
+        { "name": "space-xlarge", "px": 64 },
+        { "name": "space-xxlarge", "px": 80 },
+        { "name": "space-huge", "px": 96 },
+        { "name": "space-xhuge", "px": 128 },
+        { "name": "space-xxhuge", "px": 192 }
+      ]
+    }
+  ],
   "stays": [
     "--font-from: 18   (redefined at a breakpoint: stays in the registry :root)",
     "--font-to: 20   (redefined at a breakpoint: stays in the registry :root)",
@@ -140,7 +168,23 @@
         "--rule",
         "--on-ink",
         "--on-light",
-        "--on-light-dim"
+        "--on-light-dim",
+        "--space-xxsmall",
+        "--space-xsmall",
+        "--space-small",
+        "--space-medium",
+        "--space-large",
+        "--space-xlarge",
+        "--space-xxlarge",
+        "--space-huge",
+        "--space-xhuge",
+        "--space-xxhuge",
+        "--size-h1-base",
+        "--size-h2-base",
+        "--size-h3-base",
+        "--size-h4-base",
+        "--size-text-lede-base",
+        "--size-text-label-base"
       ],
       "set": {}
     }

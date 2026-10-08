@@ -51,6 +51,23 @@
   --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
 
   --s-d1: 1; --s-d2: 1; --s-d3: 1; --s-st: 1; --s-tx: 1; --s-sp: 1;
+
+  /* FRAMEWORK TOKENS (Client-First phase 2, 2026-10-08). The house spacing scale and the role-class type
+     bases live in the Instatic Framework panel on the site (push/editable.mjs moves these :root copies there,
+     like the colours above, and never overwrites a panel value). This block is the local preview's copy:
+     mirror a panel edit here and in ../../class-standard/framework-spec.json. Spacing values that equal a
+     step read var(--space-*); off-scale values stay literal until phase 2 C. */
+  --space-xxsmall: .25rem; --space-xsmall: .5rem; --space-small: 1rem; --space-medium: 2rem; --space-large: 3rem;
+  --space-xlarge: 4rem; --space-xxlarge: 5rem; --space-huge: 6rem; --space-xhuge: 8rem; --space-xxhuge: 12rem;
+  --size-h1-base: 6rem; --size-h2-base: 4rem; --size-h3-base: 2.25rem; --size-h4-base: 1.5rem;
+  --size-text-lede-base: 1.25rem; --size-text-label-base: .78rem;
+  /* The responsive formulas stay in the stylesheet (registry :root): the multipliers above step them. */
+  --size-h1: calc(var(--size-h1-base) * var(--s-d1));
+  --size-h2: calc(var(--size-h2-base) * var(--s-d2));
+  --size-h3: calc(var(--size-h3-base) * var(--s-d3));
+  --size-h4: calc(var(--size-h4-base) * var(--s-d3));
+  --size-text-lede: calc(var(--size-text-lede-base) * var(--s-tx));
+  --size-text-label: calc(var(--size-text-label-base) * var(--s-sp));
   --gutter: 4rem;
   --nav-h: 5rem;
   --ease: cubic-bezier(.22, .8, .2, 1);

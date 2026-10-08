@@ -10,8 +10,8 @@
  * gates sample 1440 / 390 / 1920 and can miss a swap that only shows between those widths.
  *
  * WHAT IT CHECKS. (1) every declaration of the original stylesheet is published under the same selector, media
- * and property (the Framework's colour tokens are the only ones allowed to be missing: they moved to
- * framework.css); (2) no two declarations changed their relative order when they have the same property
+ * and property (the Framework's tokens, colours, spacing steps and type bases, are the only ones allowed to be
+ * missing: they moved to framework.css); (2) no two declarations changed their relative order when they have the same property
  * family, the same specificity, media that can hold together, and subjects that sit on one element (classes
  * that share a page node; a class on no node is listed as RUNTIME for a human, never failed).
  *
@@ -30,7 +30,12 @@ process.argv.push('--site', 'institute-for-advanced-dentistry:staging')
 const { connect } = await import(pathToFileURL(path.join(TOOLS, 'target.mjs')).href)
 const { parseCss, normaliseMedia, normaliseSelector, registryKey, family, splitTop } = await import(pathToFileURL(path.join(TOOLS, 'css-source.mjs')).href)
 const SPEC = JSON.parse(fs.readFileSync(path.resolve(HERE, '../../class-standard/framework-spec.json'), 'utf8'))
-const frameworkOwned = new Set((SPEC.colors ?? []).map((c) => `--${c.slug}`))
+// Framework-owned names may be missing from the published stylesheet (they load from framework.css): the colours,
+// and since 2026-10-08 the spacing steps and the type bases (CLASS-STANDARD.md §10; editable.mjs moves them).
+const frameworkOwned = new Set([
+  ...(SPEC.colors ?? []).map((c) => `--${c.slug}`),
+  ...['typography', 'spacing'].flatMap((f) => (SPEC[f] ?? []).flatMap((g) => g.sizes.map((s) => `--${s.name}`))),
+])
 
 const { api, target } = await connect()
 const { site } = await api.getSite()
