@@ -5,6 +5,15 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Mobile menu submenus - 2026-10-08
+
+**The phone drawer's submenus open inside the drawer again on both instances** (Services, About and
+Patients had slid half their width off its left edge since launch)
+([`runbook/2026-10-08-mobile-menu-submenus.md`](./runbook/2026-10-08-mobile-menu-submenus.md)).
+Production's draft matches published again (the 2026-10-04 `.pr-badges-in` edit shipped as a no-op).
+Gate after any header, menu or stylesheet change:
+`deliver/process/tools/instatic-site/gates/nav-menus.mjs --base <host> --widths 360,390,768,1024,1440`.
+
 ## Google reviews widget on the standard - 2026-10-04
 
 **`/` and `/patient-reviews` show the new Elfsight Google Reviews widget `e30c1531` (#104A, 4.9 / 1,087):

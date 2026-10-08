@@ -946,6 +946,19 @@ button { font: inherit; }
   .navbar_item.has-dropdown.is-open:hover > .navbar_dropdown-list { display: block; }
   .navbar_dropdown-list .navbar_item { border-bottom: 0; }
   .navbar_dropdown-list .navbar_link { padding: .5rem 0; }
+  /* THE SUBMENU THAT SLID OFF THE DRAWER (2026-10-08).
+     The `transform: none` above is one class; the desktop rules that centre a
+     hover menu with `translateX(-50%)` on `:hover` and `:focus-within` are four
+     and five, so they win at every width. A tap focuses the parent link, so the
+     open Services list moved half its width left, past the drawer's edge, and
+     read as a column of clipped words. Each selector here is its desktop twin
+     plus `.navbar_menu`, one class more. */
+  .navbar_menu .navbar_dropdown-list,
+  .navbar_menu .navbar_item.has-dropdown:hover > .navbar_dropdown-list,
+  .navbar_menu .navbar_item.has-dropdown:focus-within > .navbar_dropdown-list,
+  .navbar_menu .navbar_item.has-dropdown:hover > .navbar_dropdown-list .navbar_dropdown-list,
+  .navbar_menu .navbar_dropdown-list .navbar_item.has-dropdown:hover > .navbar_dropdown-list,
+  .navbar_menu .navbar_dropdown-list .navbar_item.has-dropdown:focus-within > .navbar_dropdown-list { transform: none; }
   /* THE HEADER TRAPPING ITS OWN CLOSE BUTTON.
      The drawer is `position: fixed; z-index: 85` and the toggle was static, and
      a positioned element paints above a non-positioned one whatever the DOM
