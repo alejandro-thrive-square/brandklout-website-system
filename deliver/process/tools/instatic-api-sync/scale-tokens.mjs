@@ -125,10 +125,15 @@ if (argOf('--type')) {
   const map = JSON.parse(readFileSync(argOf('--type'), 'utf8'))
   const owned = ownedNames(fw)
   for (const [cls, token] of Object.entries(map)) {
-    const rule = Object.values(shell.styleRules ?? {}).find((r) => r.kind === 'class' && r.name === cls)
-    if (!rule) { problems.push(`type: no class rule .${cls}`); continue }
+    // By selector, not kind: an append-mode CSS move leaves a class split over its chip and one or more
+    // ambient `.cls` rules (Mason Park Kids: the size sits in the ambient rule, the chip is empty).
+    const same = Object.values(shell.styleRules ?? {}).filter((r) => r.selector === `.${cls}`)
+    const sized = same.filter((r) => r.styles?.fontSize !== undefined)
+    if (!same.length) { problems.push(`type: no rule .${cls}`); continue }
+    if (sized.length > 1) { problems.push(`type: .${cls} sets font-size in ${sized.length} rules (fold them first: fold-split.mjs)`); continue }
+    const rule = sized[0] ?? same[0]
     const v = rule.styles?.fontSize
-    const redefined = Object.values(rule.contextStyles ?? {}).some((b) => b?.fontSize !== undefined)
+    const redefined = same.some((r) => Object.values(r.contextStyles ?? {}).some((b) => b?.fontSize !== undefined))
     if (!v) { problems.push(`type: .${cls} has no base font-size`); continue }
     if (redefined) { problems.push(`type: .${cls} redefines font-size at a breakpoint (${v}): tokenise by hand`); continue }
     const m = v.match(/^(\d*\.?\d+)rem$/) ?? v.match(/^calc\(\s*(\d*\.?\d+)rem\s*\*\s*(var\(--[\w-]+\))\s*\)$/)

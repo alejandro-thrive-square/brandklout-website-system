@@ -46,6 +46,16 @@ const classRules = new Map(rules.filter((r) => r.kind === 'class').map((r) => [r
 const UTIL = /^(heading-style|text-size|text-style|text-weight|text-color|text-align|font-|padding-|margin-|spacer-|max-width|container-|button|icon-|background-color|align-|hide|layer|z-index|overflow|pointer|aspect|is-)/
 const fam = (k) => k.replace(/^(Webkit|Moz)/, '').replace(/^(padding|margin|border|inset|gap|grid|flex|font|text|background|transition|animation)[A-Z].*$/, '$1')
 const props = (r) => new Set([r.styles ?? {}, ...Object.values(r.contextStyles ?? {})].flatMap((b) => Object.keys(b ?? {}).map(fam)))
+// A class's own properties, from EVERY rule whose selector is exactly `.name`: an append-mode CSS move
+// splits a class over its chip and ambient `.name` rules (Mason Park Kids, 2026-10-08).
+const ownProps = new Map()
+for (const r of rules) {
+  const m = String(r.selector ?? '').match(/^\.([\w-]+)$/)
+  if (!m) continue
+  const set = ownProps.get(m[1]) ?? new Set()
+  for (const p of props(r)) set.add(p)
+  ownProps.set(m[1], set)
+}
 
 /* ── trees ──────────────────────────────────────────────────────────────── */
 const parseBody = (b) => (typeof b === 'string' ? JSON.parse(b) : b)
@@ -120,10 +130,18 @@ const refused = []
 for (const r of rules) {
   if (r.kind === 'class' || r.rawCss) continue
   const sel = r.selector ?? ''
-  if (!/[\s>]/.test(sel.trim()) || sel.includes(',')) continue
+  if (!/[\s>]/.test(sel.trim())) continue
+  if (sel.includes(',')) {
+    const hit = sel.split(',').some((part) => {
+      const sub = part.trim().split(/\s*[>+~]\s*|\s+/).filter(Boolean)
+      return sub.length > 1 && (sub.at(-1).match(/\.[\w-]+/g) ?? []).some((x) => UTIL.test(x.slice(1)) && ownProps.has(x.slice(1)))
+    })
+    if (hit) refused.push(`${sel.slice(0, 140)}  — selector list (split it by hand first)`)
+    continue
+  }
   const steps = parse(sel)
   const subjectClasses = sel.trim().split(/\s*[>+~]\s*|\s+/).filter(Boolean).at(-1).match(/\.[\w-]+/g)?.map((x) => x.slice(1)) ?? []
-  const overridden = subjectClasses.filter((c) => UTIL.test(c) && !c.startsWith('is-') && classRules.has(c) && [...props(r)].some((p) => props(classRules.get(c)).has(p)))
+  const overridden = subjectClasses.filter((c) => UTIL.test(c) && !c.startsWith('is-') && ownProps.has(c) && [...props(r)].some((p) => ownProps.get(c).has(p)))
   if (!overridden.length) continue
   const why = []
   if (!steps) why.push('attribute / pseudo-class / sibling / tag part (theme or state: stays)')
