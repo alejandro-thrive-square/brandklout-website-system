@@ -74,22 +74,38 @@ const WIDTHS = (argOf('--widths') ?? '1440,390').split(',').map(Number)
 const SEL = 'button:not([type=submit]),[role=button],[role=tab],summary,[aria-controls],[aria-expanded],[data-drag-next],[data-drag-prev],a[href^="#"]:not([href="#"])'
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 // A loaded machine can time a launch out ("waiting for the WS endpoint URL"): retry, it is not a result.
-let browser
-for (let attempt = 1; !browser; attempt++) {
-  try {
-    browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 180000, args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
-  } catch (e) {
-    if (attempt >= 3) throw e
-    console.error(`launch attempt ${attempt} failed (${String(e.message ?? e).split('\n')[0]}), retrying`)
-    await new Promise((r) => setTimeout(r, 15000 * attempt))
+const launch = async () => {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await puppeteer.launch({ executablePath: CHROME, headless: 'new', protocolTimeout: 180000, args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required', '--disable-crash-reporter'] })
+    } catch (e) {
+      if (attempt >= 3) throw e
+      console.error(`launch attempt ${attempt} failed (${String(e.message ?? e).split('\n')[0]}), retrying`)
+      await new Promise((r) => setTimeout(r, 15000 * attempt))
+    }
   }
 }
+let browser = await launch()
+// One browser for a 434-capture run (Mason Park Kids, ~3 h) grows until the workstation runs out of
+// memory and the capture is killed (twice on 2026-10-08): a fresh browser every RECYCLE captures.
+const RECYCLE = Number(process.env.RUNTIME_RECYCLE ?? 30)
+let sinceLaunch = 0
+// --resume: a killed run keeps its progress (the file is written after every capture); skip what it
+// already captured cleanly and capture the rest.
 const out = {}
+if (process.argv.includes('--resume') && existsSync(file(a))) {
+  const prev = JSON.parse(readFileSync(file(a), 'utf8'))
+  for (const [k, v] of Object.entries(prev)) if (!(v.errors ?? []).some((e) => /^(load|capture):/.test(e))) out[k] = v
+  console.log(`resume: ${Object.keys(out).length} capture(s) kept from the interrupted run`)
+}
 const base = target.url.replace(/\/$/, '')
 
 for (const slug of slugs) {
   for (const width of WIDTHS) {
     const key = `${slug} @${width}`
+    if (out[key]) continue
+    if (sinceLaunch >= RECYCLE) { await browser.close().catch(() => {}); browser = await launch(); sinceLaunch = 0 }
+    sinceLaunch++
     const page = await browser.newPage()
     const errors = []
     page.on('pageerror', (e) => errors.push(`pageerror: ${String(e.message ?? e).split('\n')[0]}`))
