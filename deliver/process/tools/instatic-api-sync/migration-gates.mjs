@@ -23,7 +23,7 @@ import { argOf } from './target.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const site = argOf('--site')
-let [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && !['--site', '--map'].includes(all[i - 1]))
+let [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && !['--site', '--map', '--orig'].includes(all[i - 1]))
 if (!site || !cmd) {
   console.error('usage: migration-gates.mjs snapshot <label> | diff <before> <after> | final --map <file>   --site <client>:staging')
   process.exit(2)
@@ -180,6 +180,13 @@ if (cmd === 'snapshot') {
     run(`runtime-${b}~r`, ['runtime-parity.mjs', 'snapshot', `${b}~r`, '--site', site, '--widths', '1440,390', '--only', slugs.join(',')])
     const host = new URL((await import('./target.mjs').then((m) => m.connect())).target.url).hostname
     const f = (l) => join(PARITY, `runtime-${host}-${l}.json`)
+    const { existsSync: exists } = await import('node:fs')
+    if (!exists(f(`${b}~r`))) {
+      // The re-capture itself failed (no browser, a crash): report it, do not die on a missing file.
+      console.log(`FAIL  ${`runtime-recheck-${b}`.padEnd(34)} the re-capture produced no file (see runtime-${b}~r.log): the differences above stand`)
+      ok = false
+      writeFileSync(join(LOG, `runtime-diff-${a}-${b}-persistent.log`), 'recheck capture failed')
+    } else {
     const merged = { ...JSON.parse(readFileSync(f(b), 'utf8')), ...JSON.parse(readFileSync(f(`${b}~r`), 'utf8')) }
     writeFileSync(f(`${b}~m`), JSON.stringify(merged))
     run(`runtime-diff-${a}-${b}-recheck`, ['runtime-parity.mjs', 'diff', a, `${b}~m`, '--site', site])
@@ -196,7 +203,11 @@ if (cmd === 'snapshot') {
     if (persistent.length && !/^before(~m)?$/.test(a)) {
       const { existsSync } = await import('node:fs')
       const host1 = new URL((await import('./target.mjs').then((m) => m.connect())).target.url).hostname
-      const orig = existsSync(join(PARITY, `runtime-${host1}-before~m.json`)) ? 'before~m' : 'before'
+      // The run's OWN baseline: --orig <label>, else <prefix>-before for a labelled run (p2-mid -> p2-before),
+      // else `before`. A hardcoded `before` judged phase 2 against the phase-1 baseline (Surgical Arts).
+      const prefix = (a.match(/^(.*)-[a-z0-9]+(~m)?$/) ?? [])[1]
+      const base = argOf('--orig') ?? (prefix && existsSync(join(PARITY, `runtime-${host1}-${prefix}-before.json`)) ? `${prefix}-before` : 'before')
+      const orig = existsSync(join(PARITY, `runtime-${host1}-${base}~m.json`)) ? `${base}~m` : base
       if (existsSync(join(PARITY, `runtime-${host1}-${orig}.json`))) {
         run(`runtime-diff-${orig}-${b}~m`, ['runtime-parity.mjs', 'diff', orig, `${b}~m`, '--site', site])
         const vsOrig = kinds(`runtime-diff-${orig}-${b}~m`)
@@ -208,6 +219,7 @@ if (cmd === 'snapshot') {
     writeFileSync(join(LOG, `runtime-diff-${a}-${b}-persistent.log`), persistent.join('\n'))
     console.log(`${persistent.length ? 'FAIL' : 'ok  '}  ${`runtime-persistent-${a}-${b}`.padEnd(34)} ${persistent.length ? `${persistent.length} difference(s) seen in both captures: ${persistent.slice(0, 3).join(' | ')}` : 'no difference survives a second capture'}`)
     if (persistent.length) ok = false
+    }
   }
 } else if (cmd === 'final') {
   ok = run('final-editability', ['editability.mjs', '--site', site, '--published']) && ok
