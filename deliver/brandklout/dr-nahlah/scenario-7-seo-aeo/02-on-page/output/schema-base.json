@@ -182,6 +182,10 @@
           {
             "@type": "City",
             "name": "Reston"
+          },
+          {
+            "@type": "City",
+            "name": "Fairfax"
           }
         ]
       },
@@ -254,6 +258,10 @@
           {
             "@type": "City",
             "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
           }
         ]
       }
@@ -2291,6 +2299,686 @@
             "copyrightNotice": "Dr. Nahlah Implants and Prosthodontics Specialists"
           }
         ]
+      }
+    ],
+    "all-on-4-alexandria-va": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#webpage",
+        "url": "https://www.drnahlah.com/all-on-4-alexandria-va",
+        "name": "All-on-4 Dental Implants in Alexandria, VA",
+        "description": "All-on-4 at 2855 Duke Street, Alexandria: a fixed arch on four implants, angled to use the bone you have, by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#service",
+        "name": "All-on-4 at the Alexandria office",
+        "serviceType": "All-on-4 at the Alexandria office",
+        "description": "All-on-4 at 2855 Duke Street, Alexandria: a fixed arch on four implants, angled to use the bone you have, by board-certified prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/all-on-4-alexandria-va",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/all-on-4-alexandria-va#procedure",
+        "name": "All-on-4 full-arch implant surgery",
+        "url": "https://www.drnahlah.com/all-on-4-alexandria-va",
+        "description": "All-on-4 at 2855 Duke Street, Alexandria: a fixed arch on four implants, angled to use the bone you have, by board-certified prosthodontist Dr. Esam Nahlah."
+      }
+    ],
+    "all-on-4-mclean-va": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/all-on-4-mclean-va#webpage",
+        "url": "https://www.drnahlah.com/all-on-4-mclean-va",
+        "name": "All-on-4 Dental Implants in McLean, VA",
+        "description": "All-on-4 at Dr. Nahlah's Tysons Corner office in McLean: four implants, one fixed arch, and provisional teeth the same day in most cases.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/all-on-4-mclean-va#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/all-on-4-mclean-va#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/all-on-4-mclean-va#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/all-on-4-mclean-va#service",
+        "name": "All-on-4 at the Tysons Corner office",
+        "serviceType": "All-on-4 at the Tysons Corner office",
+        "description": "All-on-4 at Dr. Nahlah's Tysons Corner office in McLean: four implants, one fixed arch, and provisional teeth the same day in most cases.",
+        "url": "https://www.drnahlah.com/all-on-4-mclean-va",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Vienna"
+          },
+          {
+            "@type": "City",
+            "name": "Great Falls"
+          },
+          {
+            "@type": "City",
+            "name": "Falls Church"
+          },
+          {
+            "@type": "City",
+            "name": "Reston"
+          },
+          {
+            "@type": "City",
+            "name": "Fairfax"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/all-on-4-mclean-va#procedure",
+        "name": "All-on-4 full-arch implant surgery",
+        "url": "https://www.drnahlah.com/all-on-4-mclean-va",
+        "description": "All-on-4 at Dr. Nahlah's Tysons Corner office in McLean: four implants, one fixed arch, and provisional teeth the same day in most cases."
+      }
+    ],
+    "dental-implants-alexandria-va": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#webpage",
+        "url": "https://www.drnahlah.com/dental-implants-alexandria-va",
+        "name": "Dental Implants in Alexandria, VA",
+        "description": "Dental implants at 2855 Duke Street, Alexandria: single teeth, bridges and full arches, planned on a 3D scan by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#service",
+        "name": "Dental implants at the Alexandria office",
+        "serviceType": "Dental implants at the Alexandria office",
+        "description": "Dental implants at 2855 Duke Street, Alexandria: single teeth, bridges and full arches, planned on a 3D scan by board-certified prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/dental-implants-alexandria-va",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/dental-implants-alexandria-va#procedure",
+        "name": "Dental implant surgery",
+        "url": "https://www.drnahlah.com/dental-implants-alexandria-va",
+        "description": "Dental implants at 2855 Duke Street, Alexandria: single teeth, bridges and full arches, planned on a 3D scan by board-certified prosthodontist Dr. Esam Nahlah."
+      }
+    ],
+    "dental-implants-mclean-va": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/dental-implants-mclean-va#webpage",
+        "url": "https://www.drnahlah.com/dental-implants-mclean-va",
+        "name": "Dental Implants in McLean, VA, near Tysons Corner",
+        "description": "Dental implants at Dr. Nahlah's Tysons Corner office, 7901 Jones Branch Drive, McLean, planned, placed and restored by prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/dental-implants-mclean-va#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/dental-implants-mclean-va#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/dental-implants-mclean-va#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/dental-implants-mclean-va#service",
+        "name": "Dental implants at the Tysons Corner office",
+        "serviceType": "Dental implants at the Tysons Corner office",
+        "description": "Dental implants at Dr. Nahlah's Tysons Corner office, 7901 Jones Branch Drive, McLean, planned, placed and restored by prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/dental-implants-mclean-va",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Vienna"
+          },
+          {
+            "@type": "City",
+            "name": "Great Falls"
+          },
+          {
+            "@type": "City",
+            "name": "Falls Church"
+          },
+          {
+            "@type": "City",
+            "name": "Reston"
+          },
+          {
+            "@type": "City",
+            "name": "Fairfax"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/dental-implants-mclean-va#procedure",
+        "name": "Dental implant surgery",
+        "url": "https://www.drnahlah.com/dental-implants-mclean-va",
+        "description": "Dental implants at Dr. Nahlah's Tysons Corner office, 7901 Jones Branch Drive, McLean, planned, placed and restored by prosthodontist Dr. Esam Nahlah."
+      }
+    ],
+    "dentures": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/dentures#webpage",
+        "url": "https://www.drnahlah.com/dentures",
+        "name": "Dentures in McLean & Alexandria, VA",
+        "description": "Dentures in McLean and Alexandria, VA: traditional, snap-in on implants, or fixed teeth, compared by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/dentures#service"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/dentures#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/dentures#service",
+        "name": "Dentures: traditional, implant-supported and fixed",
+        "serviceType": "Dentures: traditional, implant-supported and fixed",
+        "description": "Dentures in McLean and Alexandria, VA: traditional, snap-in on implants, or fixed teeth, compared by board-certified prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/dentures",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Fairfax County"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Northern Virginia"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          },
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      }
+    ],
+    "full-mouth-dental-implants": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/full-mouth-dental-implants#webpage",
+        "url": "https://www.drnahlah.com/full-mouth-dental-implants",
+        "name": "Full-Mouth Dental Implants in McLean & Alexandria, VA",
+        "description": "Full-mouth dental implants in McLean and Alexandria, VA: both arches rebuilt on implants by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/full-mouth-dental-implants#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/full-mouth-dental-implants#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/full-mouth-dental-implants#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/full-mouth-dental-implants#service",
+        "name": "Full-mouth dental implants",
+        "serviceType": "Full-mouth dental implants",
+        "description": "Full-mouth dental implants in McLean and Alexandria, VA: both arches rebuilt on implants by board-certified prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/full-mouth-dental-implants",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Fairfax County"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Northern Virginia"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          },
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/full-mouth-dental-implants#procedure",
+        "name": "Full-mouth dental implant surgery",
+        "url": "https://www.drnahlah.com/full-mouth-dental-implants",
+        "description": "Full-mouth dental implants in McLean and Alexandria, VA: both arches rebuilt on implants by board-certified prosthodontist Dr. Esam Nahlah."
+      }
+    ],
+    "full-mouth-reconstruction": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/full-mouth-reconstruction#webpage",
+        "url": "https://www.drnahlah.com/full-mouth-reconstruction",
+        "name": "Full-Mouth Reconstruction in McLean & Alexandria, VA",
+        "description": "Full-mouth reconstruction in McLean and Alexandria, VA: worn, broken or missing teeth rebuilt to one plan by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/full-mouth-reconstruction#service"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/full-mouth-reconstruction#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/full-mouth-reconstruction#service",
+        "name": "Full-mouth reconstruction",
+        "serviceType": "Full-mouth reconstruction",
+        "description": "Full-mouth reconstruction in McLean and Alexandria, VA: worn, broken or missing teeth rebuilt to one plan by board-certified prosthodontist Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/full-mouth-reconstruction",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Fairfax County"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Northern Virginia"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          },
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      }
+    ],
+    "same-day-dental-implants": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/same-day-dental-implants#webpage",
+        "url": "https://www.drnahlah.com/same-day-dental-implants",
+        "name": "Same-Day Dental Implants in McLean & Alexandria, VA",
+        "description": "Same-day dental implants in McLean and Alexandria, VA: with All-on-4, most patients leave surgery with fixed provisional teeth. Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": [
+          {
+            "@id": "https://www.drnahlah.com/same-day-dental-implants#service"
+          },
+          {
+            "@id": "https://www.drnahlah.com/same-day-dental-implants#procedure"
+          }
+        ],
+        "mainEntity": {
+          "@id": "https://www.drnahlah.com/same-day-dental-implants#service"
+        }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://www.drnahlah.com/same-day-dental-implants#service",
+        "name": "Same-day dental implants (immediate load)",
+        "serviceType": "Same-day dental implants (immediate load)",
+        "description": "Same-day dental implants in McLean and Alexandria, VA: with All-on-4, most patients leave surgery with fixed provisional teeth. Dr. Esam Nahlah.",
+        "url": "https://www.drnahlah.com/same-day-dental-implants",
+        "provider": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "areaServed": [
+          {
+            "@type": "City",
+            "name": "McLean"
+          },
+          {
+            "@type": "Place",
+            "name": "Tysons Corner"
+          },
+          {
+            "@type": "City",
+            "name": "Alexandria"
+          },
+          {
+            "@type": "City",
+            "name": "Arlington"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Fairfax County"
+          },
+          {
+            "@type": "AdministrativeArea",
+            "name": "Northern Virginia"
+          }
+        ],
+        "availableChannel": [
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-mclean#office"
+            }
+          },
+          {
+            "@type": "ServiceChannel",
+            "serviceLocation": {
+              "@id": "https://www.drnahlah.com/contact-alexandria#office"
+            }
+          }
+        ]
+      },
+      {
+        "@type": "SurgicalProcedure",
+        "@id": "https://www.drnahlah.com/same-day-dental-implants#procedure",
+        "name": "Same-day implant placement with a provisional arch",
+        "url": "https://www.drnahlah.com/same-day-dental-implants",
+        "description": "Same-day dental implants in McLean and Alexandria, VA: with All-on-4, most patients leave surgery with fixed provisional teeth. Dr. Esam Nahlah."
+      }
+    ],
+    "what-is-a-prosthodontist": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": "https://www.drnahlah.com/what-is-a-prosthodontist#webpage",
+        "url": "https://www.drnahlah.com/what-is-a-prosthodontist",
+        "name": "Prosthodontist vs Periodontist vs General Dentist",
+        "description": "What a prosthodontist is, and how one differs from a general dentist and a periodontist, explained by board-certified prosthodontist Dr. Esam Nahlah.",
+        "isPartOf": {
+          "@id": "https://www.drnahlah.com/#website"
+        },
+        "publisher": {
+          "@id": "https://www.drnahlah.com/#organization"
+        },
+        "inLanguage": "en-US",
+        "specialty": "https://schema.org/Dentistry",
+        "audience": {
+          "@type": "MedicalAudience",
+          "audienceType": "Patient"
+        },
+        "about": {
+          "@type": "Thing",
+          "name": "Prosthodontics",
+          "sameAs": [
+            "https://en.wikipedia.org/wiki/Prosthodontics"
+          ]
+        }
       }
     ]
   },

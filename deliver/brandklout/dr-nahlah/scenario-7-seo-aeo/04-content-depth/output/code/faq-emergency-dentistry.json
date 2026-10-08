@@ -1,0 +1,37 @@
+{
+  "slug": "emergency-dentistry",
+  "id": "faq",
+  "after": "expect",
+  "tagline": "Questions",
+  "heading": "Dental emergencies in McLean and Alexandria: questions.",
+  "items": [
+    [
+      "Can I be seen the same day?",
+      "Wherever possible, yes: space is made in the schedule the same day.",
+      null
+    ],
+    [
+      "Which number should I call in an emergency?",
+      "In McLean, (703) 448-3312. In Alexandria, (571) 617-7245 for new patients and (703) 940-5410 if you are already a patient.",
+      null
+    ],
+    [
+      "When should I go to the emergency room instead?",
+      "If you have neck or head pain, are bleeding uncontrollably, feel dizzy or have suffered severe trauma: call 911 or go to the nearest medical facility.",
+      null
+    ],
+    [
+      "What should I do with a knocked-out tooth?",
+      "Act now: put it back in its socket and hold it there, or keep it in a small container of milk. Do not scrub it clean.",
+      null
+    ],
+    [
+      "Is sedation available for emergency treatment?",
+      "Yes, nitrous oxide or oral sedation, set to you: people arriving in pain are rarely calm.",
+      [
+        "Sedation options →",
+        "/sedation-dentistry"
+      ]
+    ]
+  ]
+}

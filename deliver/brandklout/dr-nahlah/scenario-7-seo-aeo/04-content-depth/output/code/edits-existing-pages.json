@@ -1,0 +1,50 @@
+{
+  "our-facility": {
+    "text": [
+      ["Second floor, parking under", "A treatment room, Alexandria"],
+      ["Reception", "Reception, Alexandria"],
+      ["The building is arranged on the assumption", "The building is arranged on the assumption that you might be one of the many adults who put dental treatment off out of anxiety, and will not say so at the desk. The photos in this section are of the Alexandria office."]
+    ],
+    "images": [["5Vy4G-BEvIXtwOhWb6j3W-2058719.jpg", "media:dr-nahlah-alexandria-office-reception.jpg"]]
+  },
+  "contact-alexandria": {
+    "text": [["For most patients in Alexandria, yes.", "For most patients in Alexandria and Arlington, yes. Patients in McLean, Tysons, Vienna and Great Falls are usually closer to the Tysons Corner office on Jones Branch Drive."]]
+  },
+  "contact-mclean": {
+    "text": [["Usually, if you live in McLean", "Usually, if you live in McLean, Tysons, Vienna, Great Falls, Falls Church, Reston or Fairfax. From Alexandria and Arlington, the Duke Street office is usually closer."]]
+  },
+  "index": {
+    "text": [["Two offices in Northern Virginia.", "Two offices in Northern Virginia. Tysons Corner: 7901 Jones Branch Drive, Suite 220, McLean, VA 22102, (703) 448-3312, the closer office for McLean, Vienna, Great Falls, Falls Church, Reston and Fairfax. Alexandria: 2855 Duke Street, Alexandria, VA 22314, new patients (571) 617-7245, the closer office for Alexandria and Arlington. Both are open Monday to Thursday, 8 am to 5 pm, and Friday, 8 am to 2 pm."]]
+  },
+  "dental-implants": {
+    "faqAppend": { "section": "faq", "items": [
+      ["Where can I get dental implants in McLean?", "At the Tysons Corner office: Suite 220, 7901 Jones Branch Drive, McLean, (703) 448-3312.", ["Dental implants in McLean →", "/dental-implants-mclean-va"]],
+      ["Where can I get dental implants in Alexandria?", "At 2855 Duke Street, Alexandria; new patients call (571) 617-7245.", ["Dental implants in Alexandria →", "/dental-implants-alexandria-va"]],
+      ["Can every tooth be replaced with implants?", "Yes. Both arches can be rebuilt on implants, as fixed zirconia bridges or as dentures that clip onto them.", ["Full-mouth dental implants →", "/full-mouth-dental-implants"]]
+    ] }
+  },
+  "all-on-4": {
+    "faqAppend": { "section": "faq", "items": [
+      ["Is All-on-6 better than All-on-4?", "Not by default. A fixed arch can be carried on four to eight implants, and the number is chosen from your cone-beam scan rather than from a package name. With four, the rear implants are angled into denser bone, which often avoids grafting.", ["Full-mouth dental implants →", "/full-mouth-dental-implants"]],
+      ["What are same-day teeth?", "The fixed provisional arch fitted on implant day, which carries you until the zirconia final three to four months later.", ["Same-day implants →", "/same-day-dental-implants"]],
+      ["Where can I get All-on-4 in McLean?", "At the Tysons Corner office: Suite 220, 7901 Jones Branch Drive.", ["All-on-4 in McLean →", "/all-on-4-mclean-va"]],
+      ["Where can I get All-on-4 in Alexandria?", "At 2855 Duke Street, Alexandria.", ["All-on-4 in Alexandria →", "/all-on-4-alexandria-va"]]
+    ] }
+  },
+  "implant-supported-dentures": {
+    "faqAppend": { "section": "faq", "items": [
+      ["What about traditional dentures?", "They cost the least at the start, but they rest on the gums, move, and do nothing to stop bone loss. The dentures page sets every option side by side.", ["Dentures compared →", "/dentures"]]
+    ] }
+  },
+  "implant-cost": {
+    "faqAppend": { "section": "faq", "items": [
+      ["How much do dental implants cost in McLean and Alexandria?", "The same factors set the price at the Tysons Corner office and on Duke Street: how many implants, whether bone or teeth need treatment first, and what goes on top. Your figure comes from your own scan at the consultation, and second opinions are free.", ["Book a consultation →", "/contact#book"]],
+      ["What does a full mouth of implants cost?", "It depends on the implants per arch, any grafting, and whether the teeth are removable or fixed zirconia. It is priced at the consultation, once the scan has been read.", ["Full-mouth dental implants →", "/full-mouth-dental-implants"]]
+    ] }
+  },
+  "sedation-dentistry": {
+    "faqAppend": { "section": "faq", "items": [
+      ["How do I arrange sedation in McLean or Alexandria?", "Say so when you book with either office: Tysons Corner in McLean on (703) 448-3312, or Duke Street in Alexandria on (571) 617-7245. It changes how the appointment is planned, and oral sedation needs a ride arranged both ways.", null]
+    ] }
+  }
+}

@@ -27,8 +27,9 @@ moves) until the teammates review the proposal. Everything below is on staging.d
 
 **Next**
 1. The team reviews the plan doc and the staging pages; nothing ships to production before that.
-2. `/our-facility`: its H1 is McLean's but its photos are of the Alexandria office (the 2025-09-24
-   shoot). Decide: retitle it for both offices, or swap in McLean photos (none exist yet).
+2. ~~`/our-facility`~~ decided and done later the same day (step 04 run): practice-wide facility page,
+   keyword "in-house dental lab", H1 by `push-keyword-h1 --only /our-facility` (hero-look identical),
+   Alexandria photos labelled, the stock "Reception" photo replaced.
 3. Production, after the yes: the same scripts with `--allow-production`, in this order: schema,
    keyword H1s, `/contact`, home, page SEO, alts; then `plugin-stores.mjs` to keep staging level.
 
