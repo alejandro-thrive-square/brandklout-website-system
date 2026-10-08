@@ -149,7 +149,7 @@ const CLASS_CALLS = ['WZ.section', 'WZ.dom', ...(spec.scriptClassCalls ?? [])]
   .map((c) => c.replace(/[.$]/g, (m) => `\\${m}`)).join('|')
 // `...Class:` / `...ClassName:` option keys name classes too (SplitText `linesClass: 'ln'`,
 // `wordsClass`, `charsClass`; Swiper `slideClass`; IFA rebuild, 2026-10-05).
-const CLASS_CONTEXT = new RegExp(`(classList\\.(add|remove|toggle|contains|replace)\\s*\\([^)]*$|className\\s*(\\+?=|[!=]==?)\\s*$|getElementsByClassName\\s*\\(\\s*$|\\bclass(Name)?\\s*:\\s*$|\\b[a-z]\\w*Class(Name)?\\s*[:=]\\s*$|setAttribute\\(\\s*['"]class['"]\\s*,\\s*$|\\b(${CLASS_CALLS})\\(\\s*$)`)
+const CLASS_CONTEXT = new RegExp(`(classList\\.(add|remove|toggle|contains|replace)\\s*\\([^)]*$|className\\s*(\\+?=|[!=]==?)\\s*$|getElementsByClassName\\s*\\(\\s*$|\\bclass(Name)?\\s*:\\s*$|\\b[a-z]\\w*Class(Name)?\\s*[:=]\\s*$|setAttribute\\(\\s*['"]class['"]\\s*,\\s*$|\\b(${CLASS_CALLS})\\(\\s*$|\\b(has|add|remove|toggle)Class\\([^()'"\`]*,\\s*$)`)
 const TAGS = 'a|abbr|article|aside|b|blockquote|body|button|canvas|caption|code|dd|details|dialog|div|dl|dt|em|fieldset|figcaption|figure|footer|form|h[1-6]|header|hr|html|i|iframe|img|input|label|legend|li|main|mark|nav|ol|option|p|picture|pre|q|s|section|select|small|source|span|strong|sub|summary|sup|svg|path|table|tbody|td|textarea|tfoot|th|thead|time|tr|u|ul|video'
 const SELECTOR_CHAIN = new RegExp(`(^|[\\s>+~,(:\\]\\[*])(${TAGS})?((?:\\.-?[_a-zA-Z][\\w-]*)+)(?![\\w(])`, 'g')
 /** JS: rewrite inside string literals only. */

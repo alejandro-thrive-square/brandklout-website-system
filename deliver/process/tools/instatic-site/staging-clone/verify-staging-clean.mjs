@@ -42,7 +42,9 @@
  * Exit 0 clean, 1 dirty. Run it after the seed, after any Cloudflare change, and before anyone is
  * given the staging link.
  */
-import puppeteer from 'puppeteer-core'
+// Through the shared loader (PUPPETEER_DIR / the worktree / this repo): a bare import failed from the main
+// checkout, which has no node_modules (West LA, 2026-10-08).
+const { default: puppeteer } = await import('../lib/browser.mjs')
 
 const argv = process.argv.slice(2)
 const flag = (n, d) => { const i = argv.indexOf('--' + n); return i === -1 ? d : argv[i + 1] }

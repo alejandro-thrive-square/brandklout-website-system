@@ -23,7 +23,10 @@ import { connect, argOf } from './target.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const { api, target } = await connect()
-if (!/staging\./.test(target.url) && !process.argv.includes('--allow-production')) throw new Error('refusing: staging only (--allow-production to read a production editor)')
+// Staging is the resolved target's environment: a Railway-only staging is <name>-staging.up.railway.app
+// (West LA, Livewell, Oceanic), which a `staging.` host test refused.
+const isStaging = target.env === 'staging' || /(^|[.-])staging[.-]/.test(new URL(target.url).hostname)
+if (!isStaging && !process.argv.includes('--allow-production')) throw new Error('refusing: staging only (--allow-production to read a production editor)')
 await api.getSite() // leaves a fresh session cookie on disk
 const [name, ...rest] = readFileSync(api.SESSION_FILE, 'utf8').trim().split('=')
 const { default: puppeteer, CHROME } = await import('../instatic-site/lib/browser.mjs')
