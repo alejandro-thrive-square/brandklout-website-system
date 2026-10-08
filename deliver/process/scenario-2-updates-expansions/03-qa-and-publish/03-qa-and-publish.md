@@ -27,7 +27,8 @@ anything else. A publish ships the whole draft, so this step decides between:
 3. **Gate staging.** From the client's scenario copy, with `--base` on the staging host where the
    gate takes one:
    - `tools/instatic-site/gates/verify-live.mjs` (must end `FAIL  none`), `check-pages.mjs --base`,
-     `click-controls.mjs --base`, `facts-sweep.mjs`, `cross-client-grep.mjs --base`;
+     `click-controls.mjs --base`, `nav-menus.mjs --base` (any change to the header, the menu or
+     the stylesheet), `facts-sweep.mjs`, `cross-client-grep.mjs --base`;
    - every GHL form id on the touched pages: `node tools/termly-ghl-consent/gates/check-ghl-form.mjs <ids>`.
      Save-and-exit must be off, and the form needs all 11 consent fields. Both are fixed in GHL;
    - every page with a GHL embed: `tools/ghl-forms/check-embed.mjs <origin> [--page /ads-…]` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06);
@@ -77,7 +78,7 @@ anything else. A publish ships the whole draft, so this step decides between:
 
 ## Tools
 - `tools/instatic-api-sync/insta-api.mjs publish`, `publish/status`.
-- `tools/instatic-site/gates/`: `verify-live`, `check-pages`, `click-controls`, `facts-sweep`, `cross-client-grep`.
+- `tools/instatic-site/gates/`: `verify-live`, `check-pages`, `click-controls`, `nav-menus`, `facts-sweep`, `cross-client-grep`.
 - `tools/termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/dni-proof.mjs`, `consent-kit.mjs check`.
 
 ## Outputs

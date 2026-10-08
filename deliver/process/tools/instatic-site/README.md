@@ -27,13 +27,13 @@ Sibling toolkits this one relies on and does not copy:
 | | `../instatic-plugins/install-plugin.mjs` (or `plugins.mjs rollout`), `../instatic-domain-origins/check-origins.mjs` | Install every plugin on production and staging; prove the admin login origin |
 | | `staging-clone/staging-clone.md` §A, `staging-clone/*` | Stand up the staging environment (volume, `PUBLIC_ORIGIN`, claim setup, delete the minted service domain) |
 | 02-research-sitemap | (none here) | Sitemap tooling is `../specialty-sitemaps/` |
-| 03-design-build | `scripts/fluid-root.mjs --check`, `gates/check-pages.mjs` (local), `gates/click-controls.mjs` (local), `gates/colour-leak.mjs`, `gates/cross-client-grep.mjs`, `gates/image-reuse.mjs` | Every build, before any push |
+| 03-design-build | `scripts/fluid-root.mjs --check`, `gates/check-pages.mjs` (local), `gates/click-controls.mjs` (local), `gates/nav-menus.mjs` (local), `gates/colour-leak.mjs`, `gates/cross-client-grep.mjs`, `gates/image-reuse.mjs` | Every build, before any push |
 | | `images/upscale-images.mjs` + `images/contact-sheet.py` | When client photos are soft; look at every face |
 | | `ops/backup-site.mjs` (+ `--db-command`) | Before any `--force` push once the site has admin edits |
 | | `push/*` in order (below), `ops/apply-template-flags.mjs`, `gates/template-guard.mjs` | Every push to staging |
 | | `gates/verify-live.mjs`, `css-declared-parity.mjs`, `compare-live.mjs`, `visual-diff.mjs`, `verify-motion-live.mjs` | After every staging publish |
 | | `ops/render-draft-page.mjs` | Look at an unpublished page without publishing |
-| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
+| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/nav-menus.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
 | 05-launch | `seo/*` ([README](./seo/README.md)): scan → facts → build → push → `verify-schema.mjs`, and `push-keyword-h1.mjs` + `hero-look.mjs` | The schema from each page's visible content; a keyword H1 where the map needs one (also Scenario 7 step 02) |
 | | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
 | | `staging-clone/clone-site.mjs` / `diff-sites.mjs` / `clone-plugins.mjs` / `publish-rows.mjs` | Promote staging to production and prove parity |
@@ -147,6 +147,7 @@ node push/push-site.mjs --record
 | `ops/restore-page-seo-cells.mjs` | Put back SEO cells a page write dropped, from a backup | `--from pages.json [--only slug] [--apply]` | same |
 | `gates/check-pages.mjs` | Per-page runtime gate: console/4xx, runtime armed, pins scrub, one h1, overflow at 390, optional screenshots | `[slug...] [--widths=1440,390] [--shots] [--base=https://host]`, `LIGHT_PAGES=` | bk-west-la-implants `08-qa/output/check-local.mjs` |
 | `gates/click-controls.mjs` | Clicks every control; reports those whose click changes nothing | `[slug...] [--base url] [--widths 1440,390]` | new, from bk-stone-med-spa `drag-test.mjs` |
+| `gates/nav-menus.mjs` | Taps the drawer and every submenu open (hovers on desktop); fails on a link off screen, clipped by the drawer, invisible or covered, or a parent tap that navigates | `[slug...] [--base url] [--widths 390,768,1440] [--toggle sel] [--menu sel]` | new, from bk-mason-park (Services list off the drawer, 2026-10-08) |
 | `gates/colour-leak.mjs` | Contextual CSS stealing a class's ink; contrast by hit-testing | `[--all] [--site dir]` | bk-mason-park-kids `output/colour-leak.mjs` |
 | `gates/verify-live.mjs` | Every built route live: links, assets, titles | `FAIL  none` to pass | bk-west-la-implants |
 | `gates/css-declared-parity.mjs` | Every declared property reached the live CSS (not the same tool as instatic-api-sync's `css-parity.mjs`) | | same (`css-parity.mjs`) |

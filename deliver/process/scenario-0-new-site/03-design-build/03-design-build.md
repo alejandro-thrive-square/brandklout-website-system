@@ -74,8 +74,9 @@ is `scripts/journey-audit.mjs`.
    at most two pages, and each page's hero is its own. Keep the ledger in `output/images.csv`. Check
    every upscaled face with `tools/instatic-site/images/contact-sheet.py`.
 8. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
-   `click-controls.mjs`, `colour-leak.mjs`, `cross-client-grep.mjs`, `image-reuse.mjs`,
-   `fluid-root.mjs --check`).
+   `click-controls.mjs`, `nav-menus.mjs --widths 360,390,768,1024,1440`, `colour-leak.mjs`,
+   `cross-client-grep.mjs`, `image-reuse.mjs`, `fluid-root.mjs --check`). Write desktop-only menu
+   states inside a `min-width` query ([DESIGN-STANDARD.md](./DESIGN-STANDARD.md), "CSS traps").
 9. Asana task *developer core pages review*: in progress + comment (confirm first).
 10. Push to staging (pipeline below) and send the client the links. Remind until approved.
 11. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
