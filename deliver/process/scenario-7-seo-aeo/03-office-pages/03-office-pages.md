@@ -37,7 +37,9 @@ a full page per office, and each office's own version of the money service pages
 3. **The office's money pages**, one per money service (the map's `office` column). Write each one for
    that office: its own introduction, who does the treatment there, the logistics of that office, a
    patient story or review from it, a local FAQ, and a link up to the service hub. Never copy the other
-   office's version and swap the town.
+   office's version and swap the town. Its booking block carries only its own office (a block listing
+   every office puts the same text on every page), and twins are built from different sections of
+   the site, not one template filled twice.
 4. **Overlap gate.** Every twin pair, and each office version against its hub:
    `node ../../tools/seo-aeo/page-overlap.mjs --pairs output/twins.txt > output/overlap.log`: CLEAN at 25%.
    The gate strips only `header`, `nav` and `footer`: site chrome built from plain divs (a menu drawer
@@ -58,6 +60,11 @@ a full page per office, and each office's own version of the money service pages
 - **One office:** one office page; skip the twins.
 - **Towns with no office:** named on the nearest office page and in its schema, never given pages.
 - **No photo of an office yet:** ask the practice; never show the other office's building.
+- **Few facts differ between the offices** (same doctor, same hours, same services): build the
+  office versions of the top two money services first and read eight weeks of Search Console before
+  the rest; a set of near-identical pages per office is what Google treats as doorway pages.
+- **Gate pairs beyond the twins** (a new page against its nearest sibling) are informational: two
+  pages that both carry the all-office booking block can sit above 25% on that floor alone.
 
 ## Do / Don't
 
@@ -81,6 +88,8 @@ dentalcareofalexandriaandmclean.com (same two cities, every service written per 
 ranked in both; town-swapped pages (95% shared) showed only on long-tail searches.
 bk-dr-nahlah 2026-10-08 (staging): the rebuilt office pages first shared 58.2%, 107 shingles of it the
 site-wide menu drawer; per-office booking and "before you come" blocks brought them to 23.0%.
+The same day, four office versions (implants and All-on-4 per office) built from different section mixes,
+each with only its own booking card, shared 19–22% with their twin and with their hub.
 
 ## Version Control
 

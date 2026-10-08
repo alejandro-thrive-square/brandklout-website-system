@@ -37,7 +37,15 @@ answer what patients search for, with every claim confirmed by the practice.
 7. **Sign-off.** The practice approves the copy (medical claims, prices, credentials) before it is
    published. **Gate.**
 8. **Publish** through Scenario 2 or 6, rebuild the schema from the new content, set the rows to
-   `target`, and run the keyword gate on staging and production.
+   `target`, and run the keyword gate on staging and production. **On Instatic**, a new page is
+   composed from the site's own sections (fresh-id clones, so it matches the design) with every
+   visible word rewritten from a spec; list each section's text slots first, then fill them. Name
+   images by their file name, matched exactly, since upload paths differ between staging and
+   production. A page built on staging is in no sitemap yet: scan it with
+   `scan-sections.mjs --also <slugs>`, and give it a schema base entry, without `reviewedBy` or
+   `lastReviewed` until the practice has signed the copy off. Add it to the site menu on every page
+   that carries one. (bk-dr-nahlah `scenario-7-seo-aeo/04-content-depth/output/code/`:
+   `compose-page.mjs`, `push-text-edits.mjs`, `push-page-faq.mjs`, `nav-add.mjs`.)
 
 ## Conditionals
 
@@ -45,6 +53,11 @@ answer what patients search for, with every claim confirmed by the practice.
   if a patient might expect it.
 - **A comparison naming another practice or chain:** only with the practice's approval and strictly
   factual wording.
+- **No price ranges confirmed:** no cost page. Answer "what does it cost" in FAQs (what drives the
+  price, financing terms the site states) until the practice gives ranges.
+- **An explainer about the specialty itself** (prosthodontist vs periodontist): definitions from the
+  ADA's recognized specialties and the specialty college, cited in the brief; nothing about other
+  practices.
 
 ## Do / Don't
 
@@ -65,6 +78,8 @@ answer what patients search for, with every claim confirmed by the practice.
 bk-dr-nahlah 2026-10-07: no full-mouth implants, full-mouth reconstruction or dentures page while
 competitors ranked with them; one cost page against G4's fifteen; service pages of 500–1,100 words
 against 2,100–3,500 on the pages that won.
+bk-dr-nahlah 2026-10-08 (staging): nine pages composed from the site's own sections with every claim
+traced to a sentence the site already states; keyword gate 1107/0, overlap gate 6/6.
 
 ## Version Control
 
