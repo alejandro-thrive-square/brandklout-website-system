@@ -1132,6 +1132,71 @@
     "bodyLocation": "Jawbone"
    },
    {
+    "@type": "FAQPage",
+    "@id": "https://www.drnahlah.com/implant-supported-dentures#faq",
+    "isPartOf": {
+     "@id": "https://www.drnahlah.com/implant-supported-dentures#webpage"
+    },
+    "mainEntity": [
+     {
+      "@type": "Question",
+      "name": "What are snap-in dentures?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Snap-in dentures, also called snap-on or implant-retained dentures, are implant-supported dentures: a removable denture that clips onto two or more implants instead of resting on the gums. It will not slip, loosen or fall out, and it still comes out for cleaning."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Snap-in dentures or All-on-4: which should I choose?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "It comes down to whether you want teeth that come out. Implant-supported dentures are removable, give back around 60% of natural function and cost a moderate amount. A fixed full arch such as All-on-4 stays in, is fixed to four to eight implants, gives back over 98% and costs the most. Your consultation and 3D scan show which your bone and budget allow."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "How many implants hold an implant-supported denture?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Two or more. A fixed full arch takes four to eight."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Do implant-supported dentures stop bone loss?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "They help. The implants load the jawbone, which keeps it healthier; a traditional denture rests on the gums and does nothing to halt jawbone loss."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Will I be without teeth during treatment?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "No. Treatment runs in four stages (consultation, any preparation such as extractions or bone grafting, surgery, then the final teeth), and most patients leave surgery with temporary teeth, so you can function while you heal."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "How much do implant-supported dentures cost?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Their cost sits between traditional dentures and a fixed full arch. Your figure is set at the consultation, once the number of implants and any preparation are known. Financing is available: a financial coordinator helps you apply, and many patients are approved instantly."
+      }
+     },
+     {
+      "@type": "Question",
+      "name": "Do implant-supported dentures need maintenance?",
+      "acceptedAnswer": {
+       "@type": "Answer",
+       "text": "Some. They may still need relines or repairs over the years, and you take them out to clean them. A fixed full arch needs no additional maintenance beyond the care you give natural teeth."
+      }
+     }
+    ]
+   },
+   {
     "@type": "ItemList",
     "@id": "https://www.drnahlah.com/implant-supported-dentures#comparison",
     "name": "Three tiers, listed honestly.",

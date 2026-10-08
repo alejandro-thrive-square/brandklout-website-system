@@ -28,7 +28,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07 | 7 · 01 (volumes) | Ahrefs US volumes for 129 keywords; hubs moved to generic terms; gap report re-ranked by demand; baseline gate 42 FAIL | this commit |
 | 2026-10-07 | 7 · 02 On-Page Pass (prep) | `seo-config.json` + `schema-base.json` for `tools/instatic-site/seo/`, transcribed from seo-v3 and proven read-only against the live graph (identical bar the lender fix) | this commit |
 | 2026-10-07/08 | 7 · 02 On-Page Pass (staging) | Schema fixes + towns, keyword H1s on 16 pages + home + `/contact`, 19 titles, 114 alts, home local FAQ; gate 1016/1 | `8d8c645b` + this commit |
-| 2026-10-08 | 7 · 03 Office Pages (staging) | Both office pages rebuilt on their URLs: own heroes, details, FAQ, treatments; Alexandria photos + gallery; twins 98% → 23% shared | this commit |
+| 2026-10-08 | 7 · 03 Office Pages (staging) | Both office pages rebuilt on their URLs: own heroes, details, FAQ, treatments; Alexandria photos + gallery; twins 98% → 23% shared | `c29e34e7` |
+| 2026-10-08 | 7 · 04 Content Depth (staging) | Dentures hub: brief + 7-question snap-in dentures FAQ (FAQPage); gap pages held for the sitemap review, deeper medical sections for the practice's facts | this commit |
 
 ## Version Control
 
