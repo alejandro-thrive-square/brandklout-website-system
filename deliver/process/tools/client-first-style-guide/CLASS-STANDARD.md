@@ -266,7 +266,9 @@ checks them (`--strict` for new builds; a report in `migration-gates final` for 
   risk sits at media boundaries. A new migration runs it right after `css-to-registry`.
 - **C.** (visible: the user decides per site after a before/after) snap off-scale spacing to the nearest
   step. On 2026-10-08 only 22–35% of the fleet's spacing equalled a house step.
-- Prove: `snapshot before`, A, publish, `snapshot mid` + diff, B, publish, `snapshot after` + diff,
+- Prove: `snapshot before`, A, publish, style captures `mid` + css diff (A changes values only, to tokens
+  that compute the same: the behaviour capture cannot see it, so it is skipped there), B, publish,
+  `snapshot after` + css diff mid→after + runtime diff before→after (covers A and B together),
   `head-parity`, `migration-gates final` (with `editor-canvas` and the structure report).
 
 ## Version Control
