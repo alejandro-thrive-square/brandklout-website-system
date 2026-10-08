@@ -36,8 +36,8 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    no `ad`-named class or id; every manifest tag present; phone in a swappable format. Per form:
    redirect to the production thank-you URL, save-and-exit off.
 2. **Forms.** `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --combo <combo.json> > output/ghl-forms.log 2>&1`. A failure
-   here is fixed in GHL by Brandklout, not on the site. Send them the exact form id and the URL it
-   must redirect to. Then the embeds on every combo page: `tools/ghl-forms/check-embed.mjs <origin> --page <each combo path>` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06).
+   here is fixed in GHL, not on the site: we change the form through Codex, one small saved step per
+   run, then rerun the gate (step 3 of `01-campaign-intake.md`; since 2026-10-04). Then the embeds on every combo page: `tools/ghl-forms/check-embed.mjs <origin> --page <each combo path>` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06).
 3. **Form in the hero, rendered.**
    `node verify-form.mjs --combo <combo.json> --origin https://staging.<domain> --widths 1440,390 > output/verify-form.log 2>&1`
    It waits 14 s per page for the frame to grow. It asserts structure, size and clipping, not

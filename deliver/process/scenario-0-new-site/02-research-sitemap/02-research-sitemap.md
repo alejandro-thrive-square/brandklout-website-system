@@ -28,8 +28,8 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
 2. **Capture them** with Scrapling: desktop screenshots and HTML converted to markdown per page.
 3. **Analyse** their content structure and pages, then find content gaps and keyword opportunities
    with [`tools/seo-aeo/`](../../tools/seo-aeo/README.md): `autocomplete.mjs` for demand in the
-   client's cities, `serp-instruction.mjs` (through Codex) for who ranks there today, and a volume tool
-   when we have one (SpyFu, Keyword Planner). Keep the keyword map in that toolkit's format
+   client's cities, `serp-instruction.mjs` (through Codex) for who ranks there today, and volumes from
+   the signed-in Ahrefs web app through Codex (`ahrefs-instruction.txt`; the user signs in). Keep the keyword map in that toolkit's format
    (`keyword-map.template.csv`): one primary keyword per page, the city in it when the intent is
    local, no two pages sharing one, every page listed. It drives the H1s, titles and schema in step 03.
 4. **Start the sitemap from the specialty template** on the FigJam Sitemap board (General, Implant,
@@ -65,7 +65,7 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
 
 - `tools/specialty-sitemaps/` — templates, section flows, and the scripts that built them.
 - Scrapling (Python) for capture; [`tools/seo-aeo/`](../../tools/seo-aeo/README.md) for demand,
-  rankings and the keyword map; SpyFu or Keyword Planner for volumes when we have access.
+  rankings, the keyword map and the Ahrefs volume instruction.
 
 ## Outputs
 

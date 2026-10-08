@@ -88,7 +88,8 @@ step and every gate reads.
 ## Do / Don't
 - Do keep one form per campaign and one thank-you page per campaign.
 - Do write the phone in a DNI-swappable format everywhere, including the footer.
-- Do record who owns Google Ads and GHL. We usually cannot log in to either.
+- Do record who owns Google Ads and GHL. We reach GHL through Codex in the signed-in Chrome (the
+  agency account sees the practices' sub-accounts); Google Ads we usually cannot log in to.
 - Don't compute or record prices, rates or quotes for the engagement anywhere under
   `deliver/brandklout/` (the offer's own price on the page, confirmed by the client, is fine).
 - Don't use "no cost, no obligation" or urgency lines unless Brandklout approves them
