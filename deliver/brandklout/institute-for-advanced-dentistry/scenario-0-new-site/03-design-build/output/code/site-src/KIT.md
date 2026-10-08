@@ -152,6 +152,13 @@ never pipe a Node script's output (redirect to a file).
 - `.tile_image` is a `div` (a `span` ignores the aspect ratio unless forced; the kit now forces `display:block`).
 - A lightbox (`.lightbox_component[data-lb]`) must not stay inside `#smooth-content`: ScrollSmoother transforms it and a
   `position:fixed` child opens far down the page. Move it to `<body>` on init (see `js/52-cosmetic.js`).
+- **Overlays are closed by default in CSS** (`.menu-drawer_component`, `.modal_component`, `.lightbox_component`:
+  `display: none` in the base class) and opened by the `is-open` combo the scripts add (`IFA.setOpen(el, open)`,
+  which also toggles `hidden` for assistive tech). Never close one with the `hidden` attribute alone: the Instatic
+  editor canvas renders through React, which drops `hidden=""`, and site scripts do not run there, so a
+  `[hidden]`-only overlay covers every page in the editor (2026-10-07). In-flow `hidden` toggles that scripts set at
+  runtime (FAQ answers, filtered gallery items) are fine: the canvas shows them all open, which helps editing.
+  Gate: `tools/instatic-api-sync/editor-canvas.mjs --site institute-for-advanced-dentistry:staging` (in `migration-gates.mjs final`).
 - Hidden placeholders (`[data-more-float] img`, the lightbox images) start without a `src`; the script fills
   them. Otherwise every page "repeats" a photo in the reuse gate.
 - Whole-site checks: `node tools/sweep.mjs [--base=...]` (console, failed requests, overflow, h1, links) and

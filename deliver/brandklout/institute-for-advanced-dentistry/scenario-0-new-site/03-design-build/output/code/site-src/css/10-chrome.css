@@ -50,9 +50,12 @@
 
 .nav_progress span { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left; }
 
-.menu-drawer_component { position: fixed; inset: 0; z-index: 85; background: var(--bone); color: var(--fg); padding: calc(var(--nav-h) + 2rem) var(--gutter) 6rem; display: flex; flex-direction: column; justify-content: space-between; overflow-y: auto; }
+/* Overlays are CLOSED by default in CSS and opened by the `is-open` combo the scripts add (they also toggle
+   `hidden` for assistive tech). The Instatic editor canvas drops the `hidden` attribute (React, 2026-10-07), so a
+   closed state must never depend on it. */
+.menu-drawer_component { position: fixed; inset: 0; z-index: 85; background: var(--bone); color: var(--fg); padding: calc(var(--nav-h) + 2rem) var(--gutter) 6rem; display: none; flex-direction: column; justify-content: space-between; overflow-y: auto; }
 
-.menu-drawer_component[hidden] { display: none; }
+.menu-drawer_component.is-open { display: flex; }
 
 .menu-drawer_component nav { display: grid; }
 
@@ -103,9 +106,9 @@
 .footer_legal a { text-decoration: underline; text-underline-offset: .2em; padding-block: .6rem; display: inline-block; }
 
 /* modal */
-.modal_component { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 1.5rem; background: rgba(18, 17, 18, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.modal_component { position: fixed; inset: 0; z-index: 150; display: none; place-items: center; padding: 1.5rem; background: rgba(18, 17, 18, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 
-.modal_component[hidden] { display: none; }
+.modal_component.is-open { display: grid; }
 
 .modal_box { width: min(100%, 68rem); border-radius: .6rem; overflow: hidden; background: #000; }
 

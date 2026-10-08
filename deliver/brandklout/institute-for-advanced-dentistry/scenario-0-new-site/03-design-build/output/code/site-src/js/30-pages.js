@@ -69,11 +69,11 @@
           var open = function (it) {
             last = document.activeElement;
             show(it);
-            lb.hidden = false; IFA.lockScroll(true);
+            IFA.setOpen(lb, true); IFA.lockScroll(true);
             if (IFA.motion) gsap.fromTo($('.lightbox_box', lb), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .7, ease: 'expo.out' });
             $('[data-lb-close]', lb).focus();
           };
-          var close = function () { if (lb.hidden) return; lb.hidden = true; IFA.lockScroll(false); if (last) last.focus(); };
+          var close = function () { if (lb.hidden) return; IFA.setOpen(lb, false); IFA.lockScroll(false); if (last) last.focus(); };
           var step = function (d) { var v = visible(); if (!v.length) return; show(v[(cur + d + v.length) % v.length]); };
           items.forEach(function (it) { $('[data-gal-btn]', it).addEventListener('click', function () { open(it); }); });
           $('[data-lb-close]', lb).addEventListener('click', close);

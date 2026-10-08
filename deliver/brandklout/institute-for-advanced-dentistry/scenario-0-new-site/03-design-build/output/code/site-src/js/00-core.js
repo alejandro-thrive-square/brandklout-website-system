@@ -79,8 +79,12 @@
     document.body.style.overflow = lock ? 'hidden' : '';
   }
   IFA.lockScroll = lockScroll;
+  /* An overlay (drawer, story modal, lightbox) is closed by default in CSS and open with the `is-open` combo;
+     `hidden` goes with it for assistive tech. The editor canvas drops `hidden`, so CSS never relies on it. */
+  function setOpen(el, open) { el.hidden = !open; el.classList.toggle('is-open', open); }
+  IFA.setOpen = setOpen;
   function openDrawer() {
-    drawer.hidden = false;
+    setOpen(drawer, true);
     burger.setAttribute('aria-expanded', 'true');
     burger.setAttribute('aria-label', 'Close menu');
     lockScroll(true);
@@ -94,8 +98,8 @@
     burger.setAttribute('aria-expanded', 'false');
     burger.setAttribute('aria-label', 'Open menu');
     lockScroll(false);
-    if (motion) gsap.to(drawer, { clipPath: 'circle(0% at 100% 0%)', duration: .6, ease: 'expo.inOut', onComplete: function () { drawer.hidden = true; } });
-    else drawer.hidden = true;
+    if (motion) gsap.to(drawer, { clipPath: 'circle(0% at 100% 0%)', duration: .6, ease: 'expo.inOut', onComplete: function () { setOpen(drawer, false); } });
+    else setOpen(drawer, false);
   }
   IFA.closeDrawer = closeDrawer;
 
@@ -103,7 +107,7 @@
   var modal = $('[data-modal]'), modalVideo = $('[data-modal-video]'), lastFocus = null;
   function openModal(src, name) {
     lastFocus = document.activeElement;
-    modal.hidden = false;
+    setOpen(modal, true);
     modal.setAttribute('aria-label', name + ' tells the story');
     modalVideo.src = src;
     var p = modalVideo.play(); if (p && p.catch) p.catch(function () {});
@@ -117,7 +121,7 @@
     modalVideo.pause();
     modalVideo.removeAttribute('src');
     modalVideo.load();
-    modal.hidden = true;
+    setOpen(modal, false);
     lockScroll(false);
     if (lastFocus) lastFocus.focus();
   }

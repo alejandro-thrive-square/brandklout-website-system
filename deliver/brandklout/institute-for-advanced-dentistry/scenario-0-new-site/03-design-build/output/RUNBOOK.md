@@ -2,6 +2,12 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-07 — Editor canvas: overlays closed in CSS, not by `hidden`
+
+- Done: the menu drawer, story modal and gallery lightbox covered every page in the Instatic editor (React drops `hidden=""`, no site scripts run there). `site-src` now closes them in CSS by default and opens them with `.is-open` (`IFA.setOpen` toggles `hidden` too, for assistive tech). Rebuilt, pushed through `push/` (seq 21), editable, published on staging. Gates: `migration-gates.mjs final` EDITABLE · IN BOUNDS · CLEAN · editor canvas ok; cascade-check OK; head parity 0/57; css + runtime parity in the run file. Run: `docs/runbook/2026-10-07-editor-canvas-overlays.md`.
+- Next: nothing; production gets it with the launch push.
+- Gotchas: never close an overlay with `hidden` alone (`KIT.md` *Lessons*); gate it with `tools/instatic-api-sync/editor-canvas.mjs --site $S` and look at the screenshot.
+
 ## 2026-10-06 — Client-First class names; everything editable on staging
 
 - Done: `code/site-src` and `code/push` renamed with `class-standard/class-map.json` (371), `KIT.md` rewritten; pushed (58 pages, HIPAA page and footer link included), `site.css` moved into the style registry and 22 colours into the Framework; new pipeline steps `code/push/editable.mjs` (after every push) and `code/push/cascade-check.mjs` (gate); staging seq 18 published. Gates: EDITABLE, IN BOUNDS, CLEAN, published HTML and heads identical on 57 pages, css and runtime parity read to a cause. Commit `59f7e191`.

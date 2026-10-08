@@ -355,8 +355,8 @@
 .gallery_button .text-style-label { display: block; margin-top: 1rem; color: var(--accent-text); }
 .gallery_title { display: block; margin-top: .35rem; font-size: calc(1.3rem * var(--s-d3)); font-weight: 400; letter-spacing: -.01em; }
 
-.lightbox_component { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 1.5rem; background: rgba(245, 241, 232, .97); }
-.lightbox_component[hidden] { display: none; }
+.lightbox_component { position: fixed; inset: 0; z-index: 150; display: none; place-items: center; padding: 1.5rem; background: rgba(245, 241, 232, .97); }
+.lightbox_component.is-open { display: grid; }
 .lightbox_box { width: min(100%, 72rem); }
 .lightbox_box .before-after_component { aspect-ratio: 3 / 2; max-height: 76vh; max-height: 76svh; margin-inline: auto; }
 .lightbox_caption { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.1rem; }

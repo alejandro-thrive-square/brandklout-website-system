@@ -75,6 +75,10 @@ not move anything visible (a refactor), take `migration-gates.mjs snapshot befor
   bare `.is-closing`). Two bare classes on one element are decided by source order, and the move into the
   registry reorders them: on 2026-10-06 the home's closing path step came out 76vw instead of 84vw at <=767.
   `push/cascade-check.mjs` fails on any such swap (`SWAP` lines); the css gates sample three widths and can miss one.
+- **The editor canvas is a different renderer.** React drops `hidden=""` and no site script runs, so an overlay closed
+  only by `hidden` shows over every page in `/admin/site` while every published-page gate is green (2026-10-07). Overlays are
+  closed in CSS by default and opened with `.is-open` (`site-src/KIT.md`, *Lessons*). Gate after every publish:
+  `node $TOOLS/editor-canvas.mjs --site $S` (part of `migration-gates.mjs final`); look at its screenshot.
 - **The registry holds one value per property per rule.** The move drops the 13 `vh` fallbacks that sit before
   an `svh` value (`min-height: 100vh; min-height: 100svh`): browsers from before 2022 lose those heights.
 - **`<title>`** comes from the page row's `title` (the SEO title); per-page meta descriptions are not rendered

@@ -16,6 +16,7 @@ The live standing state of this client is in [docs/RUNBOOK.md](docs/RUNBOOK.md) 
 
 | Date | Scenario / step | What happened | Commit |
 | --- | --- | --- | --- |
+| 2026-10-07 | scenario-0 / 03-design-build | Instatic editor canvas on staging: drawer, modal and lightbox closed in CSS by default + `.is-open` (React drops `hidden`); pushed, editable, published seq 21; final gates incl. the new editor-canvas gate pass ([run](docs/runbook/2026-10-07-editor-canvas-overlays.md)) | (this commit) |
 | 2026-10-07 | GTM (no step) | Microsoft Clarity removed from the unused old container GTM-KBG9XX2 (v6); never live on IFA ([run](docs/runbook/2026-10-07-microsoft-clarity-removed.md)) | (this commit) |
 | 2026-10-06 | scenario-0 / 03-design-build | Class standard + editability on staging: source renamed (371), pushed, stylesheet into the registry, colours into the Framework; EDITABLE / IN BOUNDS / CLEAN; HIPAA page + footer link shipped to staging with it ([run](docs/runbook/2026-10-06-class-standard-on-staging.md)) | `59f7e191` |
 | 2026-10-01 | scenario-0 / 03-design-build | BugHerd round 1 re-verified and closed on the board: 40 done, #33 and #38 open ([run](docs/runbook/2026-10-01-bugherd-round-1-closed.md)) | 49d856fc |
