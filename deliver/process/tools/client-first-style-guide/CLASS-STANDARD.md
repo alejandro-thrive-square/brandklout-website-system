@@ -179,7 +179,9 @@ cause.
    `ops/restore-page-seo-cells.mjs` repairs from
    the step-0 backup.
 4. **Prove**: `migration-gates.mjs final --site $S --map class-map.json`: editability EDITABLE,
-   class-audit `--strict` IN BOUNDS, `class-rename --verify` CLEAN (no old name published anywhere).
+   class-audit `--strict` IN BOUNDS, editor-canvas ok (the Instatic editor opens with no closed
+   modal/drawer over the page: `editor-canvas.mjs`, look at its screenshot), `class-rename --verify`
+   CLEAN (no old name published anywhere).
    Diffs: css 0 at 1440/390 (1920 within its own noise: two snapshots of an unchanged site), runtime
    parity OK.
 5. **Local source**, where one is maintained: back it up first (`tar --force-local -czf …`: Git

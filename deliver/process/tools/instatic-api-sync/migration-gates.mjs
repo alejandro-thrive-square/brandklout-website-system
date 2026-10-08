@@ -10,7 +10,8 @@
  *           every control clicked, scroll-through) at 1440, 390.
  * diff:     both diffs; exit 1 if either fails. Read the 1920 css diff against its noise
  *           (CLASS-STANDARD.md §8): `css-parity diff <before> <before2>` if in doubt.
- * final:    editability --published, class-audit --strict, class-rename --verify (no old name
+ * final:    editability --published, class-audit --strict, editor-canvas (the Instatic editor shows no
+ *           closed overlay), class-rename --verify (no old name
  *           published anywhere). Exit 1 if any fails.
  * Logs go to output/fleet/<client>/.
  */
@@ -156,5 +157,8 @@ if (cmd === 'snapshot') {
   ok = run('final-editability', ['editability.mjs', '--site', site, '--published']) && ok
   ok = run('final-class-audit', ['class-audit.mjs', '--site', site, '--strict', '--json', join(LOG, 'class-audit.json')]) && ok
   if (argOf('--map')) ok = run('final-rename-verify', ['class-rename.mjs', '--site', site, '--map', argOf('--map'), '--verify']) && ok
+  // The editor is a different renderer (React drops hidden="", no site scripts): a site can pass
+  // every published-page gate and still show a closed modal over every page in the editor (IFA, 2026-10-07).
+  ok = run('final-editor-canvas', ['editor-canvas.mjs', '--site', site]) && ok
 }
 process.exit(ok ? 0 : 1)

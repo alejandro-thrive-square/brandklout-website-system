@@ -11,7 +11,10 @@
 >   fonts the font library cannot install), which the registry cannot hold.
 >
 > Gate: `node tools/instatic-api-sync/editability.mjs --site <client>[:staging] --published` must end
-> `EDITABLE`.
+> `EDITABLE`, and `editor-canvas.mjs --site <client>:staging` must end `ok`: the editor has to SHOW the
+> page. It renders with React and no site scripts, so an overlay closed only by the `hidden` attribute
+> (React drops `hidden=""`) covers every page there while the live site is fine (IFA, 2026-10-07).
+> Close overlays in CSS by default; open them with a runtime class or a `data-` attribute.
 
 ## Why
 
@@ -59,6 +62,7 @@ publish.
 | `css-to-registry.mjs --files <asset,...> --apply` | Moves a code-asset stylesheet into the registry (bare `.class` rules into their class chip, the rest as selector rules, in source order) and switches the asset off. No container needed |
 | `registry-repair.mjs` | Library used by `push-site.mjs`: puts every declaration the converter lost back into its own rule |
 | `editability.mjs [--published]` | **The gate** |
+| `editor-canvas.mjs` | The editor gate: opens /admin/site headlessly, fails on a closed overlay showing in any frame, screenshots it |
 | `css-parity.mjs snapshot/diff --site … --all-pages` | Computed-style parity, every page, before vs after |
 
 A spec (`framework-spec.json`, kept in the client's step `output/`):
