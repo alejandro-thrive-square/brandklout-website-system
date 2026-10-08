@@ -39,7 +39,11 @@ text) and give the home page the local questions AI answers draw on, without cha
    snapshot` first, then the plan (it lists every target page: `ok`, the H1 it would write, or why it
    cannot: no `h1` text in the map, a drafted H1 that lacks its keyword, a hero built another way),
    `--apply` and `--publish` on staging, `hero-look.mjs compare` = HEADLINES IDENTICAL, ONE H1 EACH, then
-   production. Pages it lists as built another way (often the home and contact pages) are edited by hand.
+   production. Pages it lists as built another way (often the home and contact pages) are edited by hand
+   the same way: the tagline becomes the keyword H1, the designed headline a `<p>` with an id, and
+   registry rules carry the old look (a `<p>` can fall under a body-text rule such as
+   `.section-heading_component p`, so restate the whole heading style). Prove it with a computed-style
+   snapshot before and compare after, at 1440 and 390 (bk-dr-nahlah: `02-on-page/output/code/text-style.mjs`).
 3. **Title and description** by rules 3–4 of the [standard](../../tools/seo-aeo/README.md#the-standard).
    Instatic keeps them in the page's SEO cells, and in the Open Graph override for a nested slug that
    cannot keep cells; a site-document write drops the cells, so restore them

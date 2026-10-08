@@ -30,13 +30,20 @@ a full page per office, and each office's own version of the money service pages
    [standard's list](../../tools/seo-aeo/README.md#an-office-page-holds): name, address, phone, hours,
    map, parking, directions from local landmarks, that office's photos, who the patient sees there,
    the services offered with links, that office's Google reviews, financing in brief, the towns served,
-   and a local FAQ with its FAQPage.
+   and a local FAQ with its FAQPage. **Which office a photo shows** is checked, not assumed: match it to
+   that office's Business Profile photos (cover, interior) before it goes on a page; shared folders are
+   rarely labelled, and existing pages may already carry the other office's photos. **Landmarks and
+   directions** come from the practice, its site or its Business Profiles, never from general knowledge.
 3. **The office's money pages**, one per money service (the map's `office` column). Write each one for
    that office: its own introduction, who does the treatment there, the logistics of that office, a
    patient story or review from it, a local FAQ, and a link up to the service hub. Never copy the other
    office's version and swap the town.
 4. **Overlap gate.** Every twin pair, and each office version against its hub:
    `node ../../tools/seo-aeo/page-overlap.mjs --pairs output/twins.txt > output/overlap.log`: CLEAN at 25%.
+   The gate strips only `header`, `nav` and `footer`: site chrome built from plain divs (a menu drawer
+   listing every page, both offices' phones and hours) counts on every pair. Measure that floor first;
+   it can be a fifth of the page. Then the blocks a page template repeats (a booking block listing
+   every office, a "before you come" list) are what is left to write per office.
 5. **Schema.** Each office department's `url` is its office page; office pages carry their FAQPage;
    the department lists the towns it serves.
 6. **Links.** Hub ↔ office versions, office page ↔ its services, the footer's office blocks link to
@@ -72,6 +79,8 @@ a full page per office, and each office's own version of the money service pages
 bk-dr-nahlah 2026-10-07: the two contact pages shared 98% of their text and ranked for neither city;
 dentalcareofalexandriaandmclean.com (same two cities, every service written per office, 5.5% shared)
 ranked in both; town-swapped pages (95% shared) showed only on long-tail searches.
+bk-dr-nahlah 2026-10-08 (staging): the rebuilt office pages first shared 58.2%, 107 shingles of it the
+site-wide menu drawer; per-office booking and "before you come" blocks brought them to 23.0%.
 
 ## Version Control
 
