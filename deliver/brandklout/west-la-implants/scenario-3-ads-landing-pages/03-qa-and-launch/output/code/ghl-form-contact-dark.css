@@ -1,0 +1,38 @@
+@import url(https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap);
+#_builder-form { background: transparent !important; border: 0 !important; box-shadow: none !important; border-radius: 0 !important; padding: 0 !important; max-width: none !important; font-family: Manrope, sans-serif !important; }
+#_builder-form .form-builder--item { margin-bottom: 4px !important; }
+#_builder-form label.field-label, #_builder-form label.label-alignment:not([for^=terms_and_conditions]) { font-family: Manrope, sans-serif !important; font-size: 11px !important; font-weight: 700 !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; color: #B5AFA4 !important; margin-bottom: 6px !important; }
+#_builder-form label.field-label span { color: #C4A36A !important; }
+#_builder-form .form-builder--item input.form-control[type][class], #_builder-form .form-builder--item textarea.form-control[class] { background: transparent !important; color: #F4EFE5 !important; border: 1px solid rgba(244,239,229,0.18) !important; border-radius: 0 !important; box-shadow: none !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; min-height: 46px !important; padding: 12px 14px !important; }
+#_builder-form .form-builder--item .email-input input.form-control[type][class] { padding-left: 40px !important; }
+#_builder-form .form-builder--item input.form-control[type][class]:hover, #_builder-form .form-builder--item textarea.form-control[class]:hover { border-color: rgba(244,239,229,0.34) !important; }
+#_builder-form .form-builder--item input.form-control[type][class]:focus, #_builder-form .form-builder--item textarea.form-control[class]:focus { border-color: #C4A36A !important; outline: none !important; box-shadow: none !important; }
+#_builder-form .form-builder--item input.form-control[type][class]::placeholder, #_builder-form .form-builder--item textarea.form-control[class]::placeholder { color: rgba(244,239,229,0.42) !important; }
+#_builder-form .form-builder--item input.form-control[type][class]:-webkit-autofill { -webkit-text-fill-color: #F4EFE5 !important; box-shadow: 0 0 0 1000px #121210 inset !important; }
+#_builder-form .email-input .input-icon { color: #B5AFA4 !important; }
+#_builder-form .form-builder--item .multiselect .multiselect__tags, #_builder-form .form-builder--item select.form-control[class] { background: transparent !important; color: #F4EFE5 !important; border: 1px solid rgba(244,239,229,0.18) !important; border-radius: 0 !important; box-shadow: none !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; min-height: 46px !important; padding: 12px 40px 12px 14px !important; }
+#_builder-form .form-builder--item .multiselect.multi_select_form, #_builder-form .multiselect .multiselect__input, #_builder-form .multiselect .multiselect__placeholder, #_builder-form .multiselect .multiselect__spinner, #_builder-form .multiselect .multiselect__tags-wrap { background: transparent !important; background-color: transparent !important; }
+#_builder-form .form-builder--item .multiselect input.multiselect__input[class] { background: transparent !important; background-color: transparent !important; }
+#_builder-form .form-builder--item .multiselect.multi_select_form { color: #F4EFE5 !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; min-height: 46px !important; }
+#_builder-form .multiselect .multiselect__single, #_builder-form .multiselect .multiselect__input { background: transparent !important; color: #F4EFE5 !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; margin: 0 !important; padding: 0 !important; line-height: 22px !important; }
+#_builder-form .multiselect .multiselect__placeholder { color: rgba(244,239,229,0.42) !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; margin: 0 !important; padding: 0 !important; line-height: 22px !important; }
+#_builder-form .multiselect .multiselect__select:before { border-color: #C4A36A transparent transparent !important; }
+#_builder-form .form-builder--item .multiselect:hover .multiselect__tags { border-color: rgba(244,239,229,0.34) !important; }
+#_builder-form .form-builder--item .multiselect--active .multiselect__tags { border-color: #C4A36A !important; }
+#_builder-form .multiselect .multiselect__content-wrapper { background: #121210 !important; border: 1px solid rgba(244,239,229,0.18) !important; border-radius: 0 !important; }
+#_builder-form .multiselect .multiselect__option { color: #F4EFE5 !important; font-family: Manrope, sans-serif !important; font-size: 15px !important; }
+#_builder-form .multiselect .multiselect__option--highlight { background: #C4A36A !important; color: #11110F !important; }
+#_builder-form .multiselect .multiselect__option--selected { background: rgba(196,163,106,0.18) !important; color: #F4EFE5 !important; }
+#_builder-form .multiselect .multiselect__option--selected.multiselect__option--highlight { background: #C4A36A !important; color: #11110F !important; }
+#_builder-form input[type=checkbox][class], #_builder-form input[type=checkbox] { accent-color: #C4A36A !important; border-color: rgba(244,239,229,0.34) !important; border-radius: 0 !important; background-color: transparent !important; }
+#_builder-form .terms-text-container, #_builder-form .terms-text-container p, #_builder-form .tnc, #_builder-form .tnc p, #_builder-form label[for^=terms_and_conditions] { font-family: Manrope, sans-serif !important; font-size: 13px !important; font-weight: 400 !important; line-height: 1.55 !important; color: #B5AFA4 !important; }
+#_builder-form .captcha-container { margin-top: 4px !important; }
+#_builder-form .captcha-container > label { display: none !important; }
+#_builder-form button[type=submit][class], #_builder-form button.button-element[class] { width: 100% !important; min-height: 52px !important; background: #C4A36A !important; border: 1px solid #C4A36A !important; border-radius: 0 !important; box-shadow: none !important; padding: 0 24px !important; transition: background-color .3s, border-color .3s !important; }
+#_builder-form button[type=submit][class]:hover { background: #F4EFE5 !important; border-color: #F4EFE5 !important; }
+#_builder-form button[type=submit] *, #_builder-form button[type=submit] p, #_builder-form button[type=submit] div { color: #11110F !important; font-family: Manrope, sans-serif !important; font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.14em !important; text-transform: uppercase !important; }
+#_builder-form .text-element p, #_builder-form .text-element a { font-family: Manrope, sans-serif !important; font-size: 12px !important; color: #B5AFA4 !important; }
+#_builder-form .text-element a { text-decoration: underline !important; text-underline-offset: 3px !important; }
+#_builder-form .text-element a:hover { color: #C4A36A !important; }
+#_builder-form .form-builder--item .multiselect .multiselect__placeholder[class] { background: transparent !important; background-color: transparent !important; color: rgba(244,239,229,0.42) !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; padding: 0 !important; margin: 0 !important; line-height: 22px !important; }
+#_builder-form .form-builder--item .multiselect .multiselect__single[class], #_builder-form .form-builder--item .multiselect input.multiselect__input[class] { background: transparent !important; background-color: transparent !important; color: #F4EFE5 !important; font-family: Manrope, sans-serif !important; font-size: 16px !important; }

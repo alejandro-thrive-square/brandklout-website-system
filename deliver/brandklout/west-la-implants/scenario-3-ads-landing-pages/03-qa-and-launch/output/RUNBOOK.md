@@ -2,6 +2,34 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-08 · the site contact form (new site) restyled for the dark site
+
+**Done**: GHL **Contact (new site)** `DCNQTSgl14CNZ93H7Fi3` (in every Invitation chapter since seq 36) carried
+only the no-shift block and GoHighLevel's default white styling. Its Custom CSS now holds the no-shift block
+followed by [`code/ghl-form-contact-dark.css`](./code/ghl-form-contact-dark.css): the campaign block plus
+rules for the Service dropdown (vue-multiselect: `.multi_select_form`, `__tags`, `__placeholder[class]`,
+`__input`, the options list) and a higher-specificity placeholder rule. Previewed first by injecting the block
+into the public form on `#0C0C0B` at 554 and 312 (headless Chrome), then pasted and saved.
+
+| Gate | Result |
+| :-- | :-- |
+| `check-ghl-form.mjs --standard --origin --legal --location` | ok: save-exit off, redirect /thank-you, consent 11/11, location ok |
+| public form rendered on the dark ground, 554 + 312 | inputs transparent / cream / Manrope 16px, labels 11px uppercase #B5AFA4, dropdown transparent, consent 13px, button text #11110F |
+| embed on the live `/contact` at 1440 and 390 | one frame, 100% of its card (521/521, 310/310), no clipping ancestor, height 1106→1115 and 1267→1276 (≤9px settle) |
+
+**Gotchas**
+- **Codex lost the builder twice** ("Chrome's background connection disconnecting", then "repeated browser
+  timeouts"): the GoHighLevel form builder is a cross-origin iframe whose renderer stalls under keystroke bursts.
+  Done with Claude in Chrome (the house fallback) instead: a 7 KB `type` into the CSS editor froze the frame for
+  good (every later click timed out, a fresh tab too until the page reloaded). **What works: put the block on the
+  clipboard (`Set-Clipboard`) and paste it with ctrl+v as one edit**, then the form's own Save. GHL re-indents
+  the paste; that is fine.
+- **The Custom CSS is served BEFORE GHL's runtime styles**, so an injected-style preview (which lands last) can
+  pass where the saved block loses: GHL's `#_builder-form .form-builder--item .multiselect .multiselect__placeholder
+  { background-color:#fff }` out-ranked the dark placeholder rule and the "Select a service" text sat on a white
+  box. Match GHL's specificity plus `[class]` for anything GHL styles with four compound parts.
+- Turnstile shows "Please complete the challenge" on the bare public form in headless Chrome (automation only).
+
 ## 2026-10-07 (late) · BugHerd #29-#34 (Alejandro's QA): hero top-aligned, pins that fit; published seq 33-34
 
 Tasks (project 541030, all on /ads-landing-pages/3-on-6, "apply to the rest of the landing pages"):

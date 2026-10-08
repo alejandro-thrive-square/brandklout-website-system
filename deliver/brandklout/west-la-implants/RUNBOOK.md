@@ -44,6 +44,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
   and open in a lightbox (`src/scripts/wla-films.js`).
   **Seq 32: every practice film on the site is on Vimeo and plays on the page**: nine films in the
   folder; Invisalign's own video stays on YouTube.
+  **2026-10-08: the Contact (new site) form is styled for the dark site** (Custom CSS: no-shift block + `scenario-3-ads-landing-pages/03-qa-and-launch/output/code/ghl-form-contact-dark.css`, incl. the Service dropdown; gate ok, embed full width at 1440/390). The Referral (new site) form `dnR28L5agKj0fQiuZcuH` is still on GHL's white default.
   Open: conversion tags, one test lead per campaign. **Form redirects stay on the Railway host
   until production is published and approved** (user, 2026-10-07). Details in the step 03 runbook.
 - **2026-10-04: the reviews widget is on the in-section standard** (Elfsight editor only, live at once): no widget title, Google-logo header with the count, gold `#C4A36A` square uppercase button, dark `#161613` cards with cream text. Gate `check-widget.mjs 670ca31c-8602-42c1-a126-f46f653fe07f --render https://west-la-implants-production.up.railway.app/` ok.
@@ -88,6 +89,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07 | organic + 3 | Six more practice films to Vimeo; 38 film links on 20 pages to Vimeo, lightbox site-wide (frameOrigins), published seq 32 | `d97b017f` |
 | 2026-10-07 | 3 · 03 QA and launch | BugHerd #29-#34: hero copy top-aligned, pinned chapters fit (or flow) on every desktop size, ScrollTrigger re-measures after the GHL form grows; thank-you copy without "new-patient line" (seq 33-34) | `2a576bbb` |
 | 2026-10-07 | organic · 21 instatic upload | Brandklout BugHerd round (#19-#38): GHL contact + referral forms embedded on 80 pages, Playfair Display H1s, dead YouTube/Zocdoc links fixed site-wide, copy, /dental-implants services, FAQ photo; 14 closed, #25 waiting (seq 35-38) | _this commit_ |
+| 2026-10-08 | 3 · 03 QA and launch | Contact (new site) form `DCNQTSgl14CNZ93H7Fi3` restyled for the dark site (dark block + dropdown rules pasted via Claude in Chrome after two Codex browser drops); `--standard` ok, embed 100% width at 1440/390 | _this commit_ |
 
 ## Version Control
 
