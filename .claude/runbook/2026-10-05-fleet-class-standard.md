@@ -101,6 +101,26 @@ pipeline. editor-canvas ok (checked independently), css 0 real 1440/390 (1920 no
 0/57, EDITABLE · IN BOUNDS · CLEAN. Open on IFA: `openModal` focuses the close button while GSAP holds the
 modal at visibility:hidden (pre-existing).
 
+## 2026-10-08: phase 2 (structure), staging, one worktree session per site
+User's call: A (point spacing literals at the scale tokens) + B (contextual overrides of role classes become
+combos) + D (fold split class rules into one) + the new-site gate; **C (snap off-scale spacing) waits for the
+user, per site, with before/after screenshots**. Brandklout website excluded (Sang's package; its staging is
+re-seeded from production). Tools on main: `scale-tokens.mjs`, `context-combo.mjs`, `structure-audit.mjs`,
+`fold-split.mjs` (`a43e7b86`, `e1ff1d2a`), CLASS-STANDARD §10. Briefs (gitignored) in `output/fleet/BRIEF-phase2.md`,
+results in `output/fleet/<site>/STATUS-phase2.md`. A is proven by style captures only (it swaps a value for a
+token that computes the same); behaviour is compared once, p2-before → p2-after (`a17ab9c8`).
+| Site | Result |
+| --- | --- |
+| stone-surgical-arts | **DONE** (seq 15→18): rem spacing on tokens 65→75%, overrides 9→1 (a dead rule matching 0 nodes), D skipped (0 split classes); css 0 real ×3 widths both steps, runtime noise proven (home tab "active = DEAD" flips per capture), head 0/55, EDITABLE · IN BOUNDS · CLEAN · canvas ok. Combo map in the client's `class-standard/combo-map.json` |
+| institute-for-advanced-dentistry | A, B, D pushed through IFA's pipeline (`a40493f5`, seq 31); final runtime recheck of `p2-folded` running |
+| mason-park | A (seq 163) proven, B published (seq 164, 9 rules, 65 pages); p2-after + D (182/218 foldable) to go |
+| mason-park-kids | A + B published (seq 35), A proven; p2-after capture, then D |
+| dr-nahlah | A + B published, style-proven; runtime diff p2-before → p2-after running, then D |
+| stone-med-spa | staging published 17:42Z at the user's request (their publish had not landed); A proven at 1440, other widths queued |
+| west-la-implants | new staging `west-la-implants-staging.up.railway.app` (no zone: runtime noindex meta); phase 1 rename published (seq 5), mid capture queued; then phase 2 |
+Capture load: two slots, a pass starts only with 6 GB free, first come first served (`827f797e`, `d9f09d0a`,
+`b98b74f4`). Three slots ran the machine out of memory (`7247e414`). The user's Chrome holds ~5–8 GB.
+
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
 registries can differ from staging (unpublished staging work, later production edits), so every
