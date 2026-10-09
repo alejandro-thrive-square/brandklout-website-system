@@ -1,4 +1,18 @@
-restored (45)
+restored (63)
+00-breakpoints.css: :root @ media:screen and (max-width: 1920px) --font-from: 16
+00-breakpoints.css: :root @ media:screen and (max-width: 1920px) --font-to: 18
+00-breakpoints.css: :root @ media:screen and (max-width: 1920px) --vw-from: calc(1440 / 100)
+00-breakpoints.css: :root @ media:screen and (max-width: 1920px) --vw-to: calc(1920 / 100)
+00-breakpoints.css: :root @ media:screen and (max-width: 1440px) --font-from: 16
+00-breakpoints.css: :root @ media:screen and (max-width: 1440px) --font-to: 16
+00-breakpoints.css: :root @ media:screen and (max-width: 1440px) --vw-from: calc(479 / 100)
+00-breakpoints.css: :root @ media:screen and (max-width: 1440px) --vw-to: calc(1440 / 100)
+00-fluid-root.css: :root --font-from: 18
+00-fluid-root.css: :root --font-to: 20
+00-fluid-root.css: :root --vw-from: calc(1920 / 100)
+00-fluid-root.css: :root --vw-to: calc(2400 / 100)
+00-fluid-root.css: :root --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)))
+00-fluid-root.css: :root --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)
 00-fluid-root.css: :root --font-display: 'Newsreader', Georgia, serif
 00-fluid-root.css: :root --font-body: 'DM Sans', Arial, sans-serif
 00-fluid-root.css: :root --t-display: 1
@@ -27,22 +41,26 @@ restored (45)
 00-fluid-root.css: :root --radius: 999px
 00-fluid-root.css: :root --shadow: 0 1.625rem 4.375rem rgba(51, 45, 36, 0.11)
 00-fluid-root.css: :root --ease: cubic-bezier(0.2, 0.7, 0.2, 1)
-01-tokens.css: :root @ media:screen and (max-width: 1439px) --t-display: 0.92
-01-tokens.css: :root @ media:screen and (max-width: 1279px) --t-display: 0.8
-01-tokens.css: :root @ media:screen and (max-width: 1099px) --t-display: 0.72
-01-tokens.css: :root @ media:screen and (max-width: 991px) --t-display: 0.66
-01-tokens.css: :root @ media:screen and (max-width: 767px) --gutter: var(--global-mobile)
-01-tokens.css: :root @ media:screen and (max-width: 767px) --padding-section: var(--section-medium)
-00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-display: 0.7
-00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-text: 1.08
-00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-small: 1.16
-00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-label: 1.16
-00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-sub: 1.06
-01-tokens.css: :root @ media:screen and (max-width: 419px) --t-display: 0.76
-01-tokens.css: :root @ media:screen and (max-width: 419px) --t-text: 1.18
-01-tokens.css: :root @ media:screen and (max-width: 419px) --t-small: 1.28
-01-tokens.css: :root @ media:screen and (max-width: 419px) --t-label: 1.3
-01-tokens.css: :root @ media:screen and (max-width: 419px) --t-sub: 1.12
+00-breakpoints.css: :root @ media:screen and (max-width: 1439px) --t-display: 0.92
+00-breakpoints.css: :root @ media:screen and (max-width: 1279px) --t-display: 0.8
+00-breakpoints.css: :root @ media:screen and (max-width: 1099px) --t-display: 0.72
+00-breakpoints.css: :root @ media:screen and (max-width: 991px) --t-display: 0.66
+00-breakpoints.css: :root @ media:screen and (max-width: 767px) --gutter: var(--global-mobile)
+00-breakpoints.css: :root @ media:screen and (max-width: 767px) --padding-section: var(--section-medium)
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --font-from: 12
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --font-to: 16
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --vw-from: calc(320 / 100)
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --vw-to: calc(479 / 100)
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --t-display: 0.7
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --t-text: 1.08
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --t-small: 1.16
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --t-label: 1.16
+00-breakpoints.css: :root @ media:screen and (max-width: 479px) --t-sub: 1.06
+00-breakpoints.css: :root @ media:screen and (max-width: 419px) --t-display: 0.76
+00-breakpoints.css: :root @ media:screen and (max-width: 419px) --t-text: 1.18
+00-breakpoints.css: :root @ media:screen and (max-width: 419px) --t-small: 1.28
+00-breakpoints.css: :root @ media:screen and (max-width: 419px) --t-label: 1.3
+00-breakpoints.css: :root @ media:screen and (max-width: 419px) --t-sub: 1.12
 02-base.css: *,*::before,*::after boxSizing: border-box
 
 rules the converter dropped whole (0)

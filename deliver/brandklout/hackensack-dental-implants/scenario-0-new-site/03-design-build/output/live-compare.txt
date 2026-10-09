@@ -1,0 +1,919 @@
+
+local  C:\Users\ACER\orca\workspaces\Brandklout Website System\bk-hackensack-dental-implants\deliver\brandklout\hackensack-dental-implants\scenario-0-new-site\03-design-build\output\code\site-src\dist
+live   https://hackensack-dental-implants-staging.up.railway.app
+
+
+=== index
+  [1440] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== 404
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== about
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== blog
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== contact
+  [1440] style: position
+        2 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.map_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        2 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.map_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [390] style: position
+        2 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.map_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        2 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.map_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== cookie-policy
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== cost-of-dental-implants
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== dental-implant-faqs
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== dr-alan-meskin
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== dr-dmitriy-klass-dds-msd
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== dr-maurice-srour-dds
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== dr-won-sang-lee-dds
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== first-visit-expectations
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== gallery
+  [1440] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#3
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#3
+            local "86px"
+            live  "0px"
+  [390] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== hipaa-disclosure
+  [390] style: height
+        9 element(s)
+        div.page-wrapper#0
+            local "13047.1px"
+            live  "13100.7px"
+        main.main-wrapper#0
+            local "11308.9px"
+            live  "11362.5px"
+        section.background-color-sand.section_prose#0
+            local "11045.9px"
+            live  "11099.5px"
+        div.padding-global#3
+            local "11045.9px"
+            live  "11099.5px"
+        div.container-large#3
+            local "11045.9px"
+            live  "11099.5px"
+        div.padding-section-large#0
+            local "11045.9px"
+            live  "11099.5px"
+        div.prose_grid#0
+            local "10904.7px"
+            live  "10958.3px"
+        div.prose_main#0
+            local "10904.7px"
+            live  "10958.3px"
+        div.prose_body.text-rich-text#0
+            local "10836.9px"
+            live  "10890.5px"
+  [390] style: grid-template-rows
+        1 element(s)
+        div.prose_grid#0
+            local "10904.7px"
+            live  "10958.3px"
+  [390] geometry
+        9 element(s)
+        div.page-wrapper#0 local 390x13047@0 live 390x13101@0
+        main.main-wrapper#0 local 390x11309@0 live 390x11362@0
+        section.background-color-sand.section_prose#0 local 390x11046@0 live 390x11099@0
+        div.padding-global#3 local 390x11046@0 live 390x11099@0
+        div.container-large#3 local 363x11046@14 live 363x11099@14
+        div.padding-section-large#0 local 363x11046@14 live 363x11099@14
+        div.prose_grid#0 local 363x10905@14 live 363x10958@14
+        div.prose_main#0 local 363x10905@14 live 363x10958@14
+        div.prose_body.text-rich-text#0 local 363x10837@14 live 363x10890@14
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== insurance-financing
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== office-gallery
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== patient-testimonials
+  [1440] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "static"
+            live  "relative"
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        2 element(s)
+        div.reviews_embed.wz-embed#0
+            local "none"
+            live  "100%"
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== pre-post-op-instructions
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== privacy-policy
+  [390] style: height
+        9 element(s)
+        div.page-wrapper#0
+            local "17411.4px"
+            live  "17491.7px"
+        main.main-wrapper#0
+            local "15673.2px"
+            live  "15753.5px"
+        section.background-color-sand.section_prose#0
+            local "15410.2px"
+            live  "15490.5px"
+        div.padding-global#3
+            local "15410.2px"
+            live  "15490.5px"
+        div.container-large#3
+            local "15410.2px"
+            live  "15490.5px"
+        div.padding-section-large#0
+            local "15410.2px"
+            live  "15490.5px"
+        div.prose_grid#0
+            local "15269px"
+            live  "15349.3px"
+        div.prose_main#0
+            local "15269px"
+            live  "15349.3px"
+        div.prose_body.text-rich-text#0
+            local "15201.2px"
+            live  "15281.5px"
+  [390] style: grid-template-rows
+        1 element(s)
+        div.prose_grid#0
+            local "15269px"
+            live  "15349.3px"
+  [390] geometry
+        9 element(s)
+        div.page-wrapper#0 local 390x17411@0 live 390x17492@0
+        main.main-wrapper#0 local 390x15673@0 live 390x15754@0
+        section.background-color-sand.section_prose#0 local 390x15410@0 live 390x15491@0
+        div.padding-global#3 local 390x15410@0 live 390x15491@0
+        div.container-large#3 local 363x15410@14 live 363x15491@14
+        div.padding-section-large#0 local 363x15410@14 live 363x15491@14
+        div.prose_grid#0 local 363x15269@14 live 363x15349@14
+        div.prose_main#0 local 363x15269@14 live 363x15349@14
+        div.prose_body.text-rich-text#0 local 363x15201@14 live 363x15282@14
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== referring-doctors
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== services
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== technology
+  [1440] style: margin-left
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: margin-right
+        1 element(s)
+        div.container-large#2
+            local "86px"
+            live  "0px"
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== terms-conditions
+  [390] style: height
+        9 element(s)
+        div.page-wrapper#0
+            local "18407.3px"
+            live  "18487.6px"
+        main.main-wrapper#0
+            local "16669.1px"
+            live  "16749.4px"
+        section.background-color-sand.section_prose#0
+            local "16354.8px"
+            live  "16435.2px"
+        div.padding-global#3
+            local "16354.8px"
+            live  "16435.2px"
+        div.container-large#3
+            local "16354.8px"
+            live  "16435.2px"
+        div.padding-section-large#0
+            local "16354.8px"
+            live  "16435.2px"
+        div.prose_grid#0
+            local "16213.6px"
+            live  "16294px"
+        div.prose_main#0
+            local "16213.6px"
+            live  "16294px"
+        div.prose_body.text-rich-text#0
+            local "16145.8px"
+            live  "16226.2px"
+  [390] style: grid-template-rows
+        1 element(s)
+        div.prose_grid#0
+            local "16213.6px"
+            live  "16294px"
+  [390] geometry
+        9 element(s)
+        div.page-wrapper#0 local 390x18407@0 live 390x18488@0
+        main.main-wrapper#0 local 390x16669@0 live 390x16749@0
+        section.background-color-sand.section_prose#0 local 390x16355@0 live 390x16435@0
+        div.padding-global#3 local 390x16355@0 live 390x16435@0
+        div.container-large#3 local 363x16355@14 live 363x16435@14
+        div.padding-section-large#0 local 363x16355@14 live 363x16435@14
+        div.prose_grid#0 local 363x16214@14 live 363x16294@14
+        div.prose_main#0 local 363x16214@14 live 363x16294@14
+        div.prose_body.text-rich-text#0 local 363x16146@14 live 363x16226@14
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+=== blog/all-on-x-recovery-day-after-same-day-teeth-surgery
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+220 finding(s)

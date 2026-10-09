@@ -70,6 +70,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
   files use short flat names; do not nest deeper under `output/`.
 - The toolkit copy in `tools/instatic-site` needs workarounds to push (missing `paths` import, embed markers, embeds on nested pages, Framework re-apply after a full replace). They are scripted in `output/code/push-staging.sh`; the fixes belong on `main`.
 - **Local browser gates need `LOCAL_GATES=1 node build.mjs`** (vendor widgets keep `check-pages` from settling). Never push that build; `push-staging.sh` builds without it.
+- **Keep `css/00-breakpoints.css` first.** Instatic publishes media conditions in first-seen order site-wide; without it the fluid root's 479 comes before 991/767 and phone overrides lose on staging only.
 - **Every designed page needs three held scenes at 1440** (`check-pages`). A block holds only when it fits the window, so long copy can push a page under; `pages/README.md` lists which components hold.
 - The design authority is concept 04 on `hackensack-dental-implants.webflow.io`, a different Webflow site from the live one.
 - The step's `mirror-site.mjs`, `export-posts.mjs --scrape` and plain `extract_assets.py` do not

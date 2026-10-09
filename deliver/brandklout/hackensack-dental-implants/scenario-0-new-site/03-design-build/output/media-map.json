@@ -1,810 +1,854 @@
 {
   "base": "https://hackensack-dental-implants-staging.up.railway.app",
-  "uploadedAt": "2026-10-09T20:11:10.913Z",
+  "uploadedAt": "2026-10-09T20:38:37.517Z",
   "map": {
     "fonts/dm-sans-var.woff2": {
       "id": "TmNE8JOuXjjN65P78GIH7",
       "url": "/uploads/5I03fygML4Kp3pmB0XfuI-dm-sans-var.woff2",
-      "uploadedAs": "dm-sans-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "dm-sans-var.woff2"
     },
     "dm-sans-var.woff2": {
       "id": "TmNE8JOuXjjN65P78GIH7",
       "url": "/uploads/5I03fygML4Kp3pmB0XfuI-dm-sans-var.woff2",
-      "uploadedAs": "dm-sans-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "dm-sans-var.woff2"
     },
     "fonts/newsreader-var.woff2": {
       "id": "QjO59WtDtH3ZoS00Gp9R_",
       "url": "/uploads/fO08BinwyBdKHGjEBNjJG-newsreader-var.woff2",
-      "uploadedAs": "newsreader-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "newsreader-var.woff2"
     },
     "newsreader-var.woff2": {
       "id": "QjO59WtDtH3ZoS00Gp9R_",
       "url": "/uploads/fO08BinwyBdKHGjEBNjJG-newsreader-var.woff2",
-      "uploadedAs": "newsreader-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "newsreader-var.woff2"
     },
     "media/img/about-features.webp": {
       "id": "8wvg2CcPWuL1PLFc_HEBa",
       "url": "/uploads/RpP3pZlf95Ca1aBQG_YiC-about-features.webp",
-      "uploadedAs": "about-features.webp",
-      "width": 1920,
-      "height": 800,
-      "variants": 6
+      "reused": true,
+      "uploadedAs": "about-features.webp"
     },
     "about-features.webp": {
       "id": "8wvg2CcPWuL1PLFc_HEBa",
       "url": "/uploads/RpP3pZlf95Ca1aBQG_YiC-about-features.webp",
-      "uploadedAs": "about-features.webp",
-      "width": 1920,
-      "height": 800,
-      "variants": 6
+      "reused": true,
+      "uploadedAs": "about-features.webp"
     },
     "media/img/about-hero.webp": {
       "id": "UEBxKJS6DTjWyH0HqIeiK",
       "url": "/uploads/-5u6WhwRyBEN5YavfUMVQ-about-hero.webp",
-      "uploadedAs": "about-hero.webp",
-      "width": 2400,
-      "height": 1100,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "about-hero.webp"
     },
     "about-hero.webp": {
       "id": "UEBxKJS6DTjWyH0HqIeiK",
       "url": "/uploads/-5u6WhwRyBEN5YavfUMVQ-about-hero.webp",
-      "uploadedAs": "about-hero.webp",
-      "width": 2400,
-      "height": 1100,
-      "variants": 7
+      "reused": true,
+      "uploadedAs": "about-hero.webp"
     },
     "media/img/about-letter.webp": {
       "id": "QkZ_k90uInjyrcoqtm9zx",
       "url": "/uploads/ldILLP4tBUYLqe6s3Mg5S-about-letter.webp",
-      "uploadedAs": "about-letter.webp",
-      "width": 1000,
-      "height": 900,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "about-letter.webp"
     },
     "about-letter.webp": {
       "id": "QkZ_k90uInjyrcoqtm9zx",
       "url": "/uploads/ldILLP4tBUYLqe6s3Mg5S-about-letter.webp",
-      "uploadedAs": "about-letter.webp",
-      "width": 1000,
-      "height": 900,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "about-letter.webp"
     },
     "media/img/allonx-fix.webp": {
       "id": "fA1MJ4slXsxbh2SdyV5oA",
       "url": "/uploads/gv-ZN1CyfbAcheujt3b-n-allonx-fix.webp",
-      "uploadedAs": "allonx-fix.webp",
-      "width": 1100,
-      "height": 900,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "allonx-fix.webp"
     },
     "allonx-fix.webp": {
       "id": "fA1MJ4slXsxbh2SdyV5oA",
       "url": "/uploads/gv-ZN1CyfbAcheujt3b-n-allonx-fix.webp",
-      "uploadedAs": "allonx-fix.webp",
-      "width": 1100,
-      "height": 900,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "allonx-fix.webp"
     },
     "media/img/allonx-hero.webp": {
       "id": "5FqHmHJeLb6PfoOKoXQ3t",
       "url": "/uploads/9NAAl6P6nT0wv9keQFI2Z-allonx-hero.webp",
-      "uploadedAs": "allonx-hero.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "allonx-hero.webp"
     },
     "allonx-hero.webp": {
       "id": "5FqHmHJeLb6PfoOKoXQ3t",
       "url": "/uploads/9NAAl6P6nT0wv9keQFI2Z-allonx-hero.webp",
-      "uploadedAs": "allonx-hero.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "allonx-hero.webp"
     },
     "media/img/blog-cost.webp": {
       "id": "QUrZQJLhwq3jN252p9U3L",
       "url": "/uploads/zEGaZALYwJG0cYtWORkGv-blog-cost.webp",
-      "uploadedAs": "blog-cost.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-cost.webp"
     },
     "blog-cost.webp": {
       "id": "QUrZQJLhwq3jN252p9U3L",
       "url": "/uploads/zEGaZALYwJG0cYtWORkGv-blog-cost.webp",
-      "uploadedAs": "blog-cost.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-cost.webp"
     },
     "media/img/blog-dentures.webp": {
       "id": "e881890OIztRlb-yHlJaW",
       "url": "/uploads/UolQE6-mPLltZoRppaLwG-blog-dentures.webp",
-      "uploadedAs": "blog-dentures.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-dentures.webp"
     },
     "blog-dentures.webp": {
       "id": "e881890OIztRlb-yHlJaW",
       "url": "/uploads/UolQE6-mPLltZoRppaLwG-blog-dentures.webp",
-      "uploadedAs": "blog-dentures.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-dentures.webp"
     },
     "media/img/blog-foods.webp": {
       "id": "LYDA2TGcOcUtkyluAgYBS",
       "url": "/uploads/zvCSsDy_CDUZ_Wqy7g1if-blog-foods.webp",
-      "uploadedAs": "blog-foods.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-foods.webp"
     },
     "blog-foods.webp": {
       "id": "LYDA2TGcOcUtkyluAgYBS",
       "url": "/uploads/zvCSsDy_CDUZ_Wqy7g1if-blog-foods.webp",
-      "uploadedAs": "blog-foods.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-foods.webp"
     },
     "media/img/blog-hero.webp": {
       "id": "Kgx6FKsJ685Q4GNQSj96u",
       "url": "/uploads/_mXCHcb4zZHh9FlIDS7fB-blog-hero.webp",
-      "uploadedAs": "blog-hero.webp",
-      "width": 1080,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-hero.webp"
     },
     "blog-hero.webp": {
       "id": "Kgx6FKsJ685Q4GNQSj96u",
       "url": "/uploads/_mXCHcb4zZHh9FlIDS7fB-blog-hero.webp",
-      "uploadedAs": "blog-hero.webp",
-      "width": 1080,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-hero.webp"
     },
     "media/img/blog-recovery-day-after.webp": {
       "id": "J9QpFE9yrW5-YR1rMq_Az",
       "url": "/uploads/6BS3fRFDEI9F9fHbcz0Eq-blog-recovery-day-after.webp",
-      "uploadedAs": "blog-recovery-day-after.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-recovery-day-after.webp"
     },
     "blog-recovery-day-after.webp": {
       "id": "J9QpFE9yrW5-YR1rMq_Az",
       "url": "/uploads/6BS3fRFDEI9F9fHbcz0Eq-blog-recovery-day-after.webp",
-      "uploadedAs": "blog-recovery-day-after.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-recovery-day-after.webp"
     },
     "media/img/blog-recovery-weeks.webp": {
       "id": "4G61yzE9OXw7EPnl5Si7d",
       "url": "/uploads/COvLJEYMI5S_6yNcwgEdn-blog-recovery-weeks.webp",
-      "uploadedAs": "blog-recovery-weeks.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-recovery-weeks.webp"
     },
     "blog-recovery-weeks.webp": {
       "id": "4G61yzE9OXw7EPnl5Si7d",
       "url": "/uploads/COvLJEYMI5S_6yNcwgEdn-blog-recovery-weeks.webp",
-      "uploadedAs": "blog-recovery-weeks.webp",
-      "width": 1200,
-      "height": 1200,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-recovery-weeks.webp"
     },
     "media/img/blog-zygomatic.webp": {
       "id": "oZig1GEXJSlEMCDDqOy4n",
       "url": "/uploads/TwbqRRip8qwBxldOTuduu-blog-zygomatic.webp",
-      "uploadedAs": "blog-zygomatic.webp",
-      "width": 1080,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-zygomatic.webp"
     },
     "blog-zygomatic.webp": {
       "id": "oZig1GEXJSlEMCDDqOy4n",
       "url": "/uploads/TwbqRRip8qwBxldOTuduu-blog-zygomatic.webp",
-      "uploadedAs": "blog-zygomatic.webp",
-      "width": 1080,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "blog-zygomatic.webp"
     },
     "media/img/case-1-after.webp": {
       "id": "JGbMI1GnvSli3WobEeRR4",
       "url": "/uploads/paYggfX2F8B5fTH6ii-Qj-case-1-after.webp",
-      "uploadedAs": "case-1-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-1-after.webp"
     },
     "case-1-after.webp": {
       "id": "JGbMI1GnvSli3WobEeRR4",
       "url": "/uploads/paYggfX2F8B5fTH6ii-Qj-case-1-after.webp",
-      "uploadedAs": "case-1-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-1-after.webp"
     },
     "media/img/case-1-before.webp": {
       "id": "i_46Q_XO5nGw9FEf-6nsZ",
       "url": "/uploads/ta-IYcBVEHcNwXCdufdB2-case-1-before.webp",
-      "uploadedAs": "case-1-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-1-before.webp"
     },
     "case-1-before.webp": {
       "id": "i_46Q_XO5nGw9FEf-6nsZ",
       "url": "/uploads/ta-IYcBVEHcNwXCdufdB2-case-1-before.webp",
-      "uploadedAs": "case-1-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-1-before.webp"
     },
     "media/img/case-2-after.webp": {
       "id": "ajZGXDu7T-k8dAttF64IW",
       "url": "/uploads/aWK6-58YtRejlYZ9VW5Tg-case-2-after.webp",
-      "uploadedAs": "case-2-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-2-after.webp"
     },
     "case-2-after.webp": {
       "id": "ajZGXDu7T-k8dAttF64IW",
       "url": "/uploads/aWK6-58YtRejlYZ9VW5Tg-case-2-after.webp",
-      "uploadedAs": "case-2-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-2-after.webp"
     },
     "media/img/case-2-before.webp": {
       "id": "CE4KVQGGLoCDTaYlFbW1T",
       "url": "/uploads/iY1NzBP1l3uSl6d1KKhMy-case-2-before.webp",
-      "uploadedAs": "case-2-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-2-before.webp"
     },
     "case-2-before.webp": {
       "id": "CE4KVQGGLoCDTaYlFbW1T",
       "url": "/uploads/iY1NzBP1l3uSl6d1KKhMy-case-2-before.webp",
-      "uploadedAs": "case-2-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-2-before.webp"
     },
     "media/img/case-3-after.webp": {
       "id": "yiNpVidO8RjMYocue-ncN",
       "url": "/uploads/htUIVYWwGYb0OSYlUCUQI-case-3-after.webp",
-      "uploadedAs": "case-3-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-3-after.webp"
     },
     "case-3-after.webp": {
       "id": "yiNpVidO8RjMYocue-ncN",
       "url": "/uploads/htUIVYWwGYb0OSYlUCUQI-case-3-after.webp",
-      "uploadedAs": "case-3-after.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-3-after.webp"
     },
     "media/img/case-3-before.webp": {
       "id": "G0YtlDw89AAK5vHbODt6i",
       "url": "/uploads/ttjYZURQaxRGURAX4ZRUm-case-3-before.webp",
-      "uploadedAs": "case-3-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-3-before.webp"
     },
     "case-3-before.webp": {
       "id": "G0YtlDw89AAK5vHbODt6i",
       "url": "/uploads/ttjYZURQaxRGURAX4ZRUm-case-3-before.webp",
-      "uploadedAs": "case-3-before.webp",
-      "width": 1112,
-      "height": 1500,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "case-3-before.webp"
     },
     "media/img/contact-hero.webp": {
       "id": "3cgsXeYDw1Voxn20HjDn1",
       "url": "/uploads/WW9of5J3XGthKXEzt7g2q-contact-hero.webp",
-      "uploadedAs": "contact-hero.webp",
-      "width": 1080,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "contact-hero.webp"
     },
     "contact-hero.webp": {
       "id": "3cgsXeYDw1Voxn20HjDn1",
       "url": "/uploads/WW9of5J3XGthKXEzt7g2q-contact-hero.webp",
-      "uploadedAs": "contact-hero.webp",
+      "reused": true,
+      "uploadedAs": "contact-hero.webp"
+    },
+    "media/img/cost-of-dental-implants-hero.webp": {
+      "id": "xxdzZ0bGoVjhPP3gOwQht",
+      "url": "/uploads/1IFxllYWhE4WOCABIILmT-cost-of-dental-implants-hero.webp",
+      "uploadedAs": "cost-of-dental-implants-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "cost-of-dental-implants-hero.webp": {
+      "id": "xxdzZ0bGoVjhPP3gOwQht",
+      "url": "/uploads/1IFxllYWhE4WOCABIILmT-cost-of-dental-implants-hero.webp",
+      "uploadedAs": "cost-of-dental-implants-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/dental-implant-faqs-hero.webp": {
+      "id": "imKJ5q23UQbcVuRru_O_b",
+      "url": "/uploads/8pq3kJ7k_K6dN77xpplLQ-dental-implant-faqs-hero.webp",
+      "uploadedAs": "dental-implant-faqs-hero.webp",
       "width": 1080,
       "height": 1080,
       "variants": 5
     },
-    "media/img/cost-of-dental-implants-hero.webp": {
-      "id": "VNm5eCEhEbJfuYUh37zDr",
-      "url": "/uploads/bwhKzESEqzjwDmBO1b4gR-cost-of-dental-implants-hero.webp",
-      "reused": true,
-      "uploadedAs": "cost-of-dental-implants-hero.webp"
-    },
-    "cost-of-dental-implants-hero.webp": {
-      "id": "VNm5eCEhEbJfuYUh37zDr",
-      "url": "/uploads/bwhKzESEqzjwDmBO1b4gR-cost-of-dental-implants-hero.webp",
-      "reused": true,
-      "uploadedAs": "cost-of-dental-implants-hero.webp"
-    },
-    "media/img/dental-implant-faqs-hero.webp": {
-      "id": "2DqVoWCz7fP3yKYYDiE72",
-      "url": "/uploads/7Ie_T20sT2iSx5Wm7EVvW-dental-implant-faqs-hero.webp",
-      "reused": true,
-      "uploadedAs": "dental-implant-faqs-hero.webp"
-    },
     "dental-implant-faqs-hero.webp": {
-      "id": "2DqVoWCz7fP3yKYYDiE72",
-      "url": "/uploads/7Ie_T20sT2iSx5Wm7EVvW-dental-implant-faqs-hero.webp",
-      "reused": true,
-      "uploadedAs": "dental-implant-faqs-hero.webp"
+      "id": "imKJ5q23UQbcVuRru_O_b",
+      "url": "/uploads/8pq3kJ7k_K6dN77xpplLQ-dental-implant-faqs-hero.webp",
+      "uploadedAs": "dental-implant-faqs-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "media/img/dental-implants-hero.webp": {
-      "id": "9Kk38hgkBuJHBao7PXBfP",
-      "url": "/uploads/TcM6l5YKqEZ6RkcJ8WszA-dental-implants-hero.webp",
-      "reused": true,
-      "uploadedAs": "dental-implants-hero.webp"
+      "id": "Ptt9ud3054EFVQ214mqwa",
+      "url": "/uploads/vL1yY9jmwCocBrrrk13YD-dental-implants-hero.webp",
+      "uploadedAs": "dental-implants-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "dental-implants-hero.webp": {
-      "id": "9Kk38hgkBuJHBao7PXBfP",
-      "url": "/uploads/TcM6l5YKqEZ6RkcJ8WszA-dental-implants-hero.webp",
-      "reused": true,
-      "uploadedAs": "dental-implants-hero.webp"
+      "id": "Ptt9ud3054EFVQ214mqwa",
+      "url": "/uploads/vL1yY9jmwCocBrrrk13YD-dental-implants-hero.webp",
+      "uploadedAs": "dental-implants-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "media/img/dental-implants-split1.webp": {
-      "id": "-GHMVdHGqdLy_eXjgPYjM",
-      "url": "/uploads/s6t7vh7sA1XZYyjeeYYdy-dental-implants-split1.webp",
-      "reused": true,
-      "uploadedAs": "dental-implants-split1.webp"
+      "id": "bOGBPSmv3uqWFDz4ebHd2",
+      "url": "/uploads/f1thXjylHqbMYaw05uw5P-dental-implants-split1.webp",
+      "uploadedAs": "dental-implants-split1.webp",
+      "width": 900,
+      "height": 1080,
+      "variants": 4
     },
     "dental-implants-split1.webp": {
-      "id": "-GHMVdHGqdLy_eXjgPYjM",
-      "url": "/uploads/s6t7vh7sA1XZYyjeeYYdy-dental-implants-split1.webp",
-      "reused": true,
-      "uploadedAs": "dental-implants-split1.webp"
+      "id": "bOGBPSmv3uqWFDz4ebHd2",
+      "url": "/uploads/f1thXjylHqbMYaw05uw5P-dental-implants-split1.webp",
+      "uploadedAs": "dental-implants-split1.webp",
+      "width": 900,
+      "height": 1080,
+      "variants": 4
     },
     "media/img/doctor-face.webp": {
       "id": "NUbyHczEr5PZm88sYD4TJ",
       "url": "/uploads/-PKdTvpO0MNOBv16SVfDh-doctor-face.webp",
-      "uploadedAs": "doctor-face.webp",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "doctor-face.webp"
     },
     "doctor-face.webp": {
       "id": "NUbyHczEr5PZm88sYD4TJ",
       "url": "/uploads/-PKdTvpO0MNOBv16SVfDh-doctor-face.webp",
-      "uploadedAs": "doctor-face.webp",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "doctor-face.webp"
     },
     "media/img/doctor.png": {
       "id": "yusZQo-LbgZd3sIiF5sB8",
       "url": "/uploads/6APc1r_rSY4XyWutqzZWM-doctor.png",
-      "uploadedAs": "doctor.png",
-      "width": 500,
-      "height": 500,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "doctor.png"
     },
     "doctor.png": {
       "id": "yusZQo-LbgZd3sIiF5sB8",
       "url": "/uploads/6APc1r_rSY4XyWutqzZWM-doctor.png",
-      "uploadedAs": "doctor.png",
-      "width": 500,
-      "height": 500,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "doctor.png"
     },
     "media/img/dr-klass-hero.webp": {
-      "id": "99tQr6ZQ9PJR4fo1d-YCq",
-      "url": "/uploads/QilujhjpC12yMOIztP-BX-dr-klass-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-klass-hero.webp"
+      "id": "JSArWzjlsytGN3VtIKmFq",
+      "url": "/uploads/PLKGYAj5JcsNqJ_-mi__y-dr-klass-hero.webp",
+      "uploadedAs": "dr-klass-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
     },
     "dr-klass-hero.webp": {
-      "id": "99tQr6ZQ9PJR4fo1d-YCq",
-      "url": "/uploads/QilujhjpC12yMOIztP-BX-dr-klass-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-klass-hero.webp"
+      "id": "JSArWzjlsytGN3VtIKmFq",
+      "url": "/uploads/PLKGYAj5JcsNqJ_-mi__y-dr-klass-hero.webp",
+      "uploadedAs": "dr-klass-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
     },
     "media/img/dr-lee-hero.webp": {
-      "id": "IVB7N3mc70fY07rnoiR7n",
-      "url": "/uploads/qI5Xf_WP5HAq1QoXj-T9d-dr-lee-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-lee-hero.webp"
+      "id": "yBPXggXfevy37Yd2sBnzv",
+      "url": "/uploads/YijlGT2yCzDVAxMCIAXR--dr-lee-hero.webp",
+      "uploadedAs": "dr-lee-hero.webp",
+      "width": 905,
+      "height": 905,
+      "variants": 4
     },
     "dr-lee-hero.webp": {
-      "id": "IVB7N3mc70fY07rnoiR7n",
-      "url": "/uploads/qI5Xf_WP5HAq1QoXj-T9d-dr-lee-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-lee-hero.webp"
+      "id": "yBPXggXfevy37Yd2sBnzv",
+      "url": "/uploads/YijlGT2yCzDVAxMCIAXR--dr-lee-hero.webp",
+      "uploadedAs": "dr-lee-hero.webp",
+      "width": 905,
+      "height": 905,
+      "variants": 4
     },
     "media/img/dr-meskin-hero.webp": {
-      "id": "C3W7OUEHKtsArWDjny72J",
-      "url": "/uploads/TqSffjMOguLVr__31y44P-dr-meskin-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-meskin-hero.webp"
+      "id": "ZvsmLq8csutzuXKrfA6D2",
+      "url": "/uploads/GVeUruBVTX5ajaPXih6Sj-dr-meskin-hero.webp",
+      "uploadedAs": "dr-meskin-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
     },
     "dr-meskin-hero.webp": {
-      "id": "C3W7OUEHKtsArWDjny72J",
-      "url": "/uploads/TqSffjMOguLVr__31y44P-dr-meskin-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-meskin-hero.webp"
+      "id": "ZvsmLq8csutzuXKrfA6D2",
+      "url": "/uploads/GVeUruBVTX5ajaPXih6Sj-dr-meskin-hero.webp",
+      "uploadedAs": "dr-meskin-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
     },
     "media/img/dr-meskin-training.webp": {
-      "id": "MtGe3XCeWH39TlHLjgvwi",
-      "url": "/uploads/WI5TazsEeX66NlfSgc_XO-dr-meskin-training.webp",
-      "reused": true,
-      "uploadedAs": "dr-meskin-training.webp"
+      "id": "ybpf6HXLafT1bb_WMLgsm",
+      "url": "/uploads/vsIkudnQbW4A-zKIxms8E-dr-meskin-training.webp",
+      "uploadedAs": "dr-meskin-training.webp",
+      "width": 900,
+      "height": 1100,
+      "variants": 4
     },
     "dr-meskin-training.webp": {
-      "id": "MtGe3XCeWH39TlHLjgvwi",
-      "url": "/uploads/WI5TazsEeX66NlfSgc_XO-dr-meskin-training.webp",
-      "reused": true,
-      "uploadedAs": "dr-meskin-training.webp"
+      "id": "ybpf6HXLafT1bb_WMLgsm",
+      "url": "/uploads/vsIkudnQbW4A-zKIxms8E-dr-meskin-training.webp",
+      "uploadedAs": "dr-meskin-training.webp",
+      "width": 900,
+      "height": 1100,
+      "variants": 4
     },
     "media/img/dr-srour-hero.webp": {
-      "id": "0zYvg_yHS7RXMYeYjmsxR",
-      "url": "/uploads/CzEFCrUGl7EdMbCNz1U1a-dr-srour-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-srour-hero.webp"
+      "id": "jHPw8sMrfVnonbplZoueb",
+      "url": "/uploads/uZX9I6VP7KmwQFsu2CT6l-dr-srour-hero.webp",
+      "uploadedAs": "dr-srour-hero.webp",
+      "width": 833,
+      "height": 833,
+      "variants": 4
     },
     "dr-srour-hero.webp": {
-      "id": "0zYvg_yHS7RXMYeYjmsxR",
-      "url": "/uploads/CzEFCrUGl7EdMbCNz1U1a-dr-srour-hero.webp",
-      "reused": true,
-      "uploadedAs": "dr-srour-hero.webp"
+      "id": "jHPw8sMrfVnonbplZoueb",
+      "url": "/uploads/uZX9I6VP7KmwQFsu2CT6l-dr-srour-hero.webp",
+      "uploadedAs": "dr-srour-hero.webp",
+      "width": 833,
+      "height": 833,
+      "variants": 4
     },
     "media/img/emergency-dental-care-hero.webp": {
-      "id": "uLJxMexZEYe--O82Mn0DR",
-      "url": "/uploads/lg2l6ymQ1_s2IRuoasRnU-emergency-dental-care-hero.webp",
-      "reused": true,
-      "uploadedAs": "emergency-dental-care-hero.webp"
+      "id": "MBG2hk_k05Yx0qrD8drZf",
+      "url": "/uploads/Nry9QUrBxa7h7_ZsymK7B-emergency-dental-care-hero.webp",
+      "uploadedAs": "emergency-dental-care-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "emergency-dental-care-hero.webp": {
-      "id": "uLJxMexZEYe--O82Mn0DR",
-      "url": "/uploads/lg2l6ymQ1_s2IRuoasRnU-emergency-dental-care-hero.webp",
-      "reused": true,
-      "uploadedAs": "emergency-dental-care-hero.webp"
+      "id": "MBG2hk_k05Yx0qrD8drZf",
+      "url": "/uploads/Nry9QUrBxa7h7_ZsymK7B-emergency-dental-care-hero.webp",
+      "uploadedAs": "emergency-dental-care-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "media/img/feature.webp": {
       "id": "5xL9d2o5yxhCKA_cphMU2",
       "url": "/uploads/R3uJJOSbhr6TdMfv8_gXV-feature.webp",
-      "uploadedAs": "feature.webp",
-      "width": 1460,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "feature.webp"
     },
     "feature.webp": {
       "id": "5xL9d2o5yxhCKA_cphMU2",
       "url": "/uploads/R3uJJOSbhr6TdMfv8_gXV-feature.webp",
-      "uploadedAs": "feature.webp",
-      "width": 1460,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "feature.webp"
     },
     "media/img/film-daniel-1.webp": {
-      "id": "Xs7VSIMv6BDoXteOEvKkc",
-      "url": "/uploads/1s9I8KENxmJ-LId4Ydsk3-film-daniel-1.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-1.webp"
+      "id": "OF9cvqf3OB4-dG5WYQXs8",
+      "url": "/uploads/HFF6NQ_B7fm-Hc6u0ESGr-film-daniel-1.webp",
+      "uploadedAs": "film-daniel-1.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-1.webp": {
-      "id": "Xs7VSIMv6BDoXteOEvKkc",
-      "url": "/uploads/1s9I8KENxmJ-LId4Ydsk3-film-daniel-1.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-1.webp"
+      "id": "OF9cvqf3OB4-dG5WYQXs8",
+      "url": "/uploads/HFF6NQ_B7fm-Hc6u0ESGr-film-daniel-1.webp",
+      "uploadedAs": "film-daniel-1.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-10.webp": {
-      "id": "KdELTZov9nr4AbgnhCbDx",
-      "url": "/uploads/e7NJxbiSR3bTzH3NkiW6m-film-daniel-10.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-10.webp"
+      "id": "4o-ClXrE84QEgNgOdEJCW",
+      "url": "/uploads/8HFFjhUU8pXKOzW8h-Ta5-film-daniel-10.webp",
+      "uploadedAs": "film-daniel-10.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-10.webp": {
-      "id": "KdELTZov9nr4AbgnhCbDx",
-      "url": "/uploads/e7NJxbiSR3bTzH3NkiW6m-film-daniel-10.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-10.webp"
+      "id": "4o-ClXrE84QEgNgOdEJCW",
+      "url": "/uploads/8HFFjhUU8pXKOzW8h-Ta5-film-daniel-10.webp",
+      "uploadedAs": "film-daniel-10.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-11.webp": {
-      "id": "8e1MqfJq8nHy9Ahia03iO",
-      "url": "/uploads/4M71PBovMfeNiF_Ko4VTC-film-daniel-11.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-11.webp"
+      "id": "Za_5NmezSBXDJQdRPieNe",
+      "url": "/uploads/o7MD-q0RTsE3LmGCXLP4d-film-daniel-11.webp",
+      "uploadedAs": "film-daniel-11.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-11.webp": {
-      "id": "8e1MqfJq8nHy9Ahia03iO",
-      "url": "/uploads/4M71PBovMfeNiF_Ko4VTC-film-daniel-11.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-11.webp"
+      "id": "Za_5NmezSBXDJQdRPieNe",
+      "url": "/uploads/o7MD-q0RTsE3LmGCXLP4d-film-daniel-11.webp",
+      "uploadedAs": "film-daniel-11.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-12.webp": {
-      "id": "9iXrWV7tLiQxu9Pb4b2sR",
-      "url": "/uploads/LI_SjxU44QQukbBTiueUI-film-daniel-12.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-12.webp"
+      "id": "_PCOxYsbhELLckvqF27iQ",
+      "url": "/uploads/HI6QXm88Rfe5KJr-WvC7V-film-daniel-12.webp",
+      "uploadedAs": "film-daniel-12.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-12.webp": {
-      "id": "9iXrWV7tLiQxu9Pb4b2sR",
-      "url": "/uploads/LI_SjxU44QQukbBTiueUI-film-daniel-12.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-12.webp"
+      "id": "_PCOxYsbhELLckvqF27iQ",
+      "url": "/uploads/HI6QXm88Rfe5KJr-WvC7V-film-daniel-12.webp",
+      "uploadedAs": "film-daniel-12.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-13.webp": {
-      "id": "VHkt80oGpcsnfZS7a4LYb",
-      "url": "/uploads/TB11u3JF2VqjwSbSFzKe0-film-daniel-13.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-13.webp"
+      "id": "-_ew2hZudnFAspjj8gISU",
+      "url": "/uploads/3bqF9SX1kxwAEqK1SRhxx-film-daniel-13.webp",
+      "uploadedAs": "film-daniel-13.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-13.webp": {
-      "id": "VHkt80oGpcsnfZS7a4LYb",
-      "url": "/uploads/TB11u3JF2VqjwSbSFzKe0-film-daniel-13.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-13.webp"
+      "id": "-_ew2hZudnFAspjj8gISU",
+      "url": "/uploads/3bqF9SX1kxwAEqK1SRhxx-film-daniel-13.webp",
+      "uploadedAs": "film-daniel-13.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-2.webp": {
-      "id": "1jmQ26cvw8Fvc8gc2xMmY",
-      "url": "/uploads/r0iA6tXzUD_vzLjqzTT3d-film-daniel-2.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-2.webp"
+      "id": "fcuOM1x05HYjagMCURCNw",
+      "url": "/uploads/I5ktvY8ljGk84LtkPiAqB-film-daniel-2.webp",
+      "uploadedAs": "film-daniel-2.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-2.webp": {
-      "id": "1jmQ26cvw8Fvc8gc2xMmY",
-      "url": "/uploads/r0iA6tXzUD_vzLjqzTT3d-film-daniel-2.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-2.webp"
+      "id": "fcuOM1x05HYjagMCURCNw",
+      "url": "/uploads/I5ktvY8ljGk84LtkPiAqB-film-daniel-2.webp",
+      "uploadedAs": "film-daniel-2.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-3.webp": {
-      "id": "wtaM8fMYy8XPBlnvIYb-Z",
-      "url": "/uploads/6nGmHjIITQTuFoCAnvsga-film-daniel-3.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-3.webp"
+      "id": "SbeHdki9ZdJ-7fxk3YBNz",
+      "url": "/uploads/h4wZY2R38WSB8MlLX45_7-film-daniel-3.webp",
+      "uploadedAs": "film-daniel-3.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-3.webp": {
-      "id": "wtaM8fMYy8XPBlnvIYb-Z",
-      "url": "/uploads/6nGmHjIITQTuFoCAnvsga-film-daniel-3.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-3.webp"
+      "id": "SbeHdki9ZdJ-7fxk3YBNz",
+      "url": "/uploads/h4wZY2R38WSB8MlLX45_7-film-daniel-3.webp",
+      "uploadedAs": "film-daniel-3.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-4.webp": {
-      "id": "qc029xApa2rRDphIzN8QI",
-      "url": "/uploads/_ZC0ILfDonXQFHzJNwS8M-film-daniel-4.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-4.webp"
+      "id": "TCFu-Uv01JqCK-YMfj6nY",
+      "url": "/uploads/j3egk3ZXn2NLFDZSlQE3S-film-daniel-4.webp",
+      "uploadedAs": "film-daniel-4.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-4.webp": {
-      "id": "qc029xApa2rRDphIzN8QI",
-      "url": "/uploads/_ZC0ILfDonXQFHzJNwS8M-film-daniel-4.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-4.webp"
+      "id": "TCFu-Uv01JqCK-YMfj6nY",
+      "url": "/uploads/j3egk3ZXn2NLFDZSlQE3S-film-daniel-4.webp",
+      "uploadedAs": "film-daniel-4.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-5.webp": {
-      "id": "K9kS8qFwQ6fIhP2v7Ex2M",
-      "url": "/uploads/Z_s3pX4wN_O4cqbd23B2i-film-daniel-5.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-5.webp"
+      "id": "0goR-ND5OySxBbunC445O",
+      "url": "/uploads/3aPRXeRnA8vgpkw1mri2g-film-daniel-5.webp",
+      "uploadedAs": "film-daniel-5.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-5.webp": {
-      "id": "K9kS8qFwQ6fIhP2v7Ex2M",
-      "url": "/uploads/Z_s3pX4wN_O4cqbd23B2i-film-daniel-5.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-5.webp"
+      "id": "0goR-ND5OySxBbunC445O",
+      "url": "/uploads/3aPRXeRnA8vgpkw1mri2g-film-daniel-5.webp",
+      "uploadedAs": "film-daniel-5.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-6.webp": {
-      "id": "pKYFW82p25iTalM5IK27e",
-      "url": "/uploads/h3Nms5nkZHx7qj__WrgU9-film-daniel-6.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-6.webp"
+      "id": "iyOqroIhQ7kL6nOHChFQK",
+      "url": "/uploads/POn96Y72rGlYLMJtjUcYc-film-daniel-6.webp",
+      "uploadedAs": "film-daniel-6.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-6.webp": {
-      "id": "pKYFW82p25iTalM5IK27e",
-      "url": "/uploads/h3Nms5nkZHx7qj__WrgU9-film-daniel-6.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-6.webp"
+      "id": "iyOqroIhQ7kL6nOHChFQK",
+      "url": "/uploads/POn96Y72rGlYLMJtjUcYc-film-daniel-6.webp",
+      "uploadedAs": "film-daniel-6.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-7.webp": {
-      "id": "U3eEx45mD5f0if--AVTH6",
-      "url": "/uploads/UW5oPi_Uz2TtH_4GVlKNH-film-daniel-7.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-7.webp"
+      "id": "iJDvWNTFdq9nRUVBVSxXl",
+      "url": "/uploads/_UnP5nuLUa080XGZknfZw-film-daniel-7.webp",
+      "uploadedAs": "film-daniel-7.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-7.webp": {
-      "id": "U3eEx45mD5f0if--AVTH6",
-      "url": "/uploads/UW5oPi_Uz2TtH_4GVlKNH-film-daniel-7.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-7.webp"
+      "id": "iJDvWNTFdq9nRUVBVSxXl",
+      "url": "/uploads/_UnP5nuLUa080XGZknfZw-film-daniel-7.webp",
+      "uploadedAs": "film-daniel-7.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-8.webp": {
-      "id": "FMTN2UhZuINzzEzQHTWv_",
-      "url": "/uploads/ceDyYpT77eO3GwEQE-wDZ-film-daniel-8.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-8.webp"
+      "id": "s4FpFc9m2ofPFo6yFr3e2",
+      "url": "/uploads/M8nYE5faM5Al40TuknIvV-film-daniel-8.webp",
+      "uploadedAs": "film-daniel-8.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-8.webp": {
-      "id": "FMTN2UhZuINzzEzQHTWv_",
-      "url": "/uploads/ceDyYpT77eO3GwEQE-wDZ-film-daniel-8.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-8.webp"
+      "id": "s4FpFc9m2ofPFo6yFr3e2",
+      "url": "/uploads/M8nYE5faM5Al40TuknIvV-film-daniel-8.webp",
+      "uploadedAs": "film-daniel-8.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-daniel-9.webp": {
-      "id": "gam7C_1oVwHI8wT5tYA68",
-      "url": "/uploads/EG-uUkxB5sQv9CB8C80-q-film-daniel-9.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-9.webp"
+      "id": "L0Uo8XxrgY-O49M15hv-A",
+      "url": "/uploads/aGK9JGzxFzJlZcYwqlS-2-film-daniel-9.webp",
+      "uploadedAs": "film-daniel-9.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-daniel-9.webp": {
-      "id": "gam7C_1oVwHI8wT5tYA68",
-      "url": "/uploads/EG-uUkxB5sQv9CB8C80-q-film-daniel-9.webp",
-      "reused": true,
-      "uploadedAs": "film-daniel-9.webp"
+      "id": "L0Uo8XxrgY-O49M15hv-A",
+      "url": "/uploads/aGK9JGzxFzJlZcYwqlS-2-film-daniel-9.webp",
+      "uploadedAs": "film-daniel-9.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-1.webp": {
-      "id": "X--2AyIljinKfJMsqv1jy",
-      "url": "/uploads/Y6CbI13snI5Or4KkhrkQb-film-isaac-1.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-1.webp"
+      "id": "Y7TToqXLH0NIBIAbGmgXd",
+      "url": "/uploads/gJ9ngHiA9hgHeRsvwgw9C-film-isaac-1.webp",
+      "uploadedAs": "film-isaac-1.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-1.webp": {
-      "id": "X--2AyIljinKfJMsqv1jy",
-      "url": "/uploads/Y6CbI13snI5Or4KkhrkQb-film-isaac-1.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-1.webp"
+      "id": "Y7TToqXLH0NIBIAbGmgXd",
+      "url": "/uploads/gJ9ngHiA9hgHeRsvwgw9C-film-isaac-1.webp",
+      "uploadedAs": "film-isaac-1.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-10.webp": {
-      "id": "zYjGYN5maUpFYXR_krKHL",
-      "url": "/uploads/Wtc5Tbnelu_OSialfmSVp-film-isaac-10.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-10.webp"
+      "id": "ltBLOb3x3tiyN8DkAX4-K",
+      "url": "/uploads/7v4mJzYRJlr3ED88RySyG-film-isaac-10.webp",
+      "uploadedAs": "film-isaac-10.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-10.webp": {
-      "id": "zYjGYN5maUpFYXR_krKHL",
-      "url": "/uploads/Wtc5Tbnelu_OSialfmSVp-film-isaac-10.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-10.webp"
+      "id": "ltBLOb3x3tiyN8DkAX4-K",
+      "url": "/uploads/7v4mJzYRJlr3ED88RySyG-film-isaac-10.webp",
+      "uploadedAs": "film-isaac-10.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-11.webp": {
-      "id": "ROE9j09dhLgGWjncPhrYC",
-      "url": "/uploads/ZLfcZuYozL91eI4NO4Bo9-film-isaac-11.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-11.webp"
+      "id": "hgaPNDgylUPVNHsrLkRSn",
+      "url": "/uploads/3BX932FcJbMlVoLE4vfkS-film-isaac-11.webp",
+      "uploadedAs": "film-isaac-11.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-11.webp": {
-      "id": "ROE9j09dhLgGWjncPhrYC",
-      "url": "/uploads/ZLfcZuYozL91eI4NO4Bo9-film-isaac-11.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-11.webp"
+      "id": "hgaPNDgylUPVNHsrLkRSn",
+      "url": "/uploads/3BX932FcJbMlVoLE4vfkS-film-isaac-11.webp",
+      "uploadedAs": "film-isaac-11.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-12.webp": {
-      "id": "zdht8DrnCSGtnYqoHzpN4",
-      "url": "/uploads/qVGfLAb7rxaZNbXZXYclO-film-isaac-12.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-12.webp"
+      "id": "nYG7GcbxDPG1btWLAKmEe",
+      "url": "/uploads/YD7R507d5625ZodIZJXKT-film-isaac-12.webp",
+      "uploadedAs": "film-isaac-12.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-12.webp": {
-      "id": "zdht8DrnCSGtnYqoHzpN4",
-      "url": "/uploads/qVGfLAb7rxaZNbXZXYclO-film-isaac-12.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-12.webp"
+      "id": "nYG7GcbxDPG1btWLAKmEe",
+      "url": "/uploads/YD7R507d5625ZodIZJXKT-film-isaac-12.webp",
+      "uploadedAs": "film-isaac-12.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-13.webp": {
-      "id": "o2b7kqV8e7QHfvVgZ9ZKH",
-      "url": "/uploads/bUDJ-K9oANSuogIerbwb0-film-isaac-13.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-13.webp"
+      "id": "VZpYBtr3qTi4CrvHRkwP8",
+      "url": "/uploads/jNKoG_IpqW8SaV_YctXhg-film-isaac-13.webp",
+      "uploadedAs": "film-isaac-13.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-13.webp": {
-      "id": "o2b7kqV8e7QHfvVgZ9ZKH",
-      "url": "/uploads/bUDJ-K9oANSuogIerbwb0-film-isaac-13.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-13.webp"
+      "id": "VZpYBtr3qTi4CrvHRkwP8",
+      "url": "/uploads/jNKoG_IpqW8SaV_YctXhg-film-isaac-13.webp",
+      "uploadedAs": "film-isaac-13.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-2.webp": {
-      "id": "a4smEaa8tVZpBp0etky7T",
-      "url": "/uploads/QJeVuGLYHhfApds4fq1i7-film-isaac-2.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-2.webp"
+      "id": "PM6SWvj8AiY0e0GtTrB0I",
+      "url": "/uploads/ewgo2DgROssGLkENum8Aq-film-isaac-2.webp",
+      "uploadedAs": "film-isaac-2.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-2.webp": {
-      "id": "a4smEaa8tVZpBp0etky7T",
-      "url": "/uploads/QJeVuGLYHhfApds4fq1i7-film-isaac-2.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-2.webp"
+      "id": "PM6SWvj8AiY0e0GtTrB0I",
+      "url": "/uploads/ewgo2DgROssGLkENum8Aq-film-isaac-2.webp",
+      "uploadedAs": "film-isaac-2.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-3.webp": {
-      "id": "kGa2kyyerW20H9llE2j-r",
-      "url": "/uploads/gn2ahFixQs07l_S358SvL-film-isaac-3.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-3.webp"
+      "id": "M42RaRNfw2r2y8GXslwB7",
+      "url": "/uploads/fIzH-LqwVjTOwmk9rgQVi-film-isaac-3.webp",
+      "uploadedAs": "film-isaac-3.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-3.webp": {
-      "id": "kGa2kyyerW20H9llE2j-r",
-      "url": "/uploads/gn2ahFixQs07l_S358SvL-film-isaac-3.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-3.webp"
+      "id": "M42RaRNfw2r2y8GXslwB7",
+      "url": "/uploads/fIzH-LqwVjTOwmk9rgQVi-film-isaac-3.webp",
+      "uploadedAs": "film-isaac-3.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-4.webp": {
-      "id": "QlxblRYc-lXksg1bl2ZoP",
-      "url": "/uploads/LXnE1JO8rcBXgR_6iUbPS-film-isaac-4.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-4.webp"
+      "id": "Tj5MWgMvw5LAxP7R4SeBW",
+      "url": "/uploads/_MDGxZCKS8yDx1nFVSqjO-film-isaac-4.webp",
+      "uploadedAs": "film-isaac-4.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-4.webp": {
-      "id": "QlxblRYc-lXksg1bl2ZoP",
-      "url": "/uploads/LXnE1JO8rcBXgR_6iUbPS-film-isaac-4.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-4.webp"
+      "id": "Tj5MWgMvw5LAxP7R4SeBW",
+      "url": "/uploads/_MDGxZCKS8yDx1nFVSqjO-film-isaac-4.webp",
+      "uploadedAs": "film-isaac-4.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-5.webp": {
-      "id": "x2A3eYjayk_jrBsjDeGVp",
-      "url": "/uploads/WehDo1XiNws33EM1PBj1f-film-isaac-5.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-5.webp"
+      "id": "5jEpklXR71ETkfeFxf9K9",
+      "url": "/uploads/MXcX9BiMS6moc1lGTWbt6-film-isaac-5.webp",
+      "uploadedAs": "film-isaac-5.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-5.webp": {
-      "id": "x2A3eYjayk_jrBsjDeGVp",
-      "url": "/uploads/WehDo1XiNws33EM1PBj1f-film-isaac-5.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-5.webp"
+      "id": "5jEpklXR71ETkfeFxf9K9",
+      "url": "/uploads/MXcX9BiMS6moc1lGTWbt6-film-isaac-5.webp",
+      "uploadedAs": "film-isaac-5.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-6.webp": {
-      "id": "5R9qgmjp8yvsfmAigDYp-",
-      "url": "/uploads/GxD0P7YC3lKtOxl6t4OOl-film-isaac-6.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-6.webp"
+      "id": "FrkGduNNAmmabRPeuAQuD",
+      "url": "/uploads/pCT120BrDK3zCyHMHYGs6-film-isaac-6.webp",
+      "uploadedAs": "film-isaac-6.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-6.webp": {
-      "id": "5R9qgmjp8yvsfmAigDYp-",
-      "url": "/uploads/GxD0P7YC3lKtOxl6t4OOl-film-isaac-6.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-6.webp"
+      "id": "FrkGduNNAmmabRPeuAQuD",
+      "url": "/uploads/pCT120BrDK3zCyHMHYGs6-film-isaac-6.webp",
+      "uploadedAs": "film-isaac-6.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-7.webp": {
-      "id": "6YarOQRQIH0vE_iUQ1yRh",
-      "url": "/uploads/tcCOeGWlDgrtpB6qQgQLm-film-isaac-7.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-7.webp"
+      "id": "EIgmAt5wOj5nlBkM8E077",
+      "url": "/uploads/fIWoQB3dLS3Jyk-zTDNl_-film-isaac-7.webp",
+      "uploadedAs": "film-isaac-7.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-7.webp": {
-      "id": "6YarOQRQIH0vE_iUQ1yRh",
-      "url": "/uploads/tcCOeGWlDgrtpB6qQgQLm-film-isaac-7.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-7.webp"
+      "id": "EIgmAt5wOj5nlBkM8E077",
+      "url": "/uploads/fIWoQB3dLS3Jyk-zTDNl_-film-isaac-7.webp",
+      "uploadedAs": "film-isaac-7.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-8.webp": {
-      "id": "i_fmZ60DI2-TTtgVyVcnt",
-      "url": "/uploads/ENK-UiP2It1z56bord9Cm-film-isaac-8.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-8.webp"
+      "id": "wZt8YKhXUjKiPRqc6F8OJ",
+      "url": "/uploads/4Z_OtgoId7C8sEVsYfMkr-film-isaac-8.webp",
+      "uploadedAs": "film-isaac-8.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "film-isaac-8.webp": {
-      "id": "i_fmZ60DI2-TTtgVyVcnt",
-      "url": "/uploads/ENK-UiP2It1z56bord9Cm-film-isaac-8.webp",
-      "reused": true,
-      "uploadedAs": "film-isaac-8.webp"
+      "id": "wZt8YKhXUjKiPRqc6F8OJ",
+      "url": "/uploads/4Z_OtgoId7C8sEVsYfMkr-film-isaac-8.webp",
+      "uploadedAs": "film-isaac-8.webp",
+      "width": 1280,
+      "height": 720,
+      "variants": 5
     },
     "media/img/film-isaac-9.webp": {
       "id": "IVaJZeZD53MywWqmnG6gp",
@@ -821,18 +865,14 @@
     "media/img/final.webp": {
       "id": "hWWI8K8JBD1IDXKY99zBG",
       "url": "/uploads/zYTlqDgU0umcd0yn75eT6-final.webp",
-      "uploadedAs": "final.webp",
-      "width": 1075,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "final.webp"
     },
     "final.webp": {
       "id": "hWWI8K8JBD1IDXKY99zBG",
       "url": "/uploads/zYTlqDgU0umcd0yn75eT6-final.webp",
-      "uploadedAs": "final.webp",
-      "width": 1075,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "final.webp"
     },
     "media/img/first-visit-expectations-hero.webp": {
       "id": "7Gm5OXixc4yjptSojGHgs",
@@ -1053,34 +1093,26 @@
     "media/img/hero-poster.webp": {
       "id": "lI0YYjWIKYITX4swWM8cH",
       "url": "/uploads/iMFpYbYp3xz8ay9LUSgjr-hero-poster.webp",
-      "uploadedAs": "hero-poster.webp",
-      "width": 1920,
-      "height": 1080,
-      "variants": 6
+      "reused": true,
+      "uploadedAs": "hero-poster.webp"
     },
     "hero-poster.webp": {
       "id": "lI0YYjWIKYITX4swWM8cH",
       "url": "/uploads/iMFpYbYp3xz8ay9LUSgjr-hero-poster.webp",
-      "uploadedAs": "hero-poster.webp",
-      "width": 1920,
-      "height": 1080,
-      "variants": 6
+      "reused": true,
+      "uploadedAs": "hero-poster.webp"
     },
     "media/img/hero.webp": {
       "id": "tFimYsUyMuYkjB_TWEw5v",
       "url": "/uploads/7X8oK08nQfBO5xIOj5s45-hero.webp",
-      "uploadedAs": "hero.webp",
-      "width": 906,
-      "height": 1080,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "hero.webp"
     },
     "hero.webp": {
       "id": "tFimYsUyMuYkjB_TWEw5v",
       "url": "/uploads/7X8oK08nQfBO5xIOj5s45-hero.webp",
-      "uploadedAs": "hero.webp",
-      "width": 906,
-      "height": 1080,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "hero.webp"
     },
     "media/img/implant-bridges-benefits.webp": {
       "id": "F_NzHoSnR5jdurWplYM8O",
@@ -1193,18 +1225,14 @@
     "media/img/logo-icon-dark.png": {
       "id": "XQsHGB-bjewZOMecYZjaD",
       "url": "/uploads/VAa8itF8xpAkJDp0kdoRy-logo-icon-dark.png",
-      "uploadedAs": "logo-icon-dark.png",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "logo-icon-dark.png"
     },
     "logo-icon-dark.png": {
       "id": "XQsHGB-bjewZOMecYZjaD",
       "url": "/uploads/VAa8itF8xpAkJDp0kdoRy-logo-icon-dark.png",
-      "uploadedAs": "logo-icon-dark.png",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "logo-icon-dark.png"
     },
     "media/img/logo-proceed.webp": {
       "id": "9BHxoodJH4Kp0eyQQtrAY",
@@ -1221,34 +1249,26 @@
     "media/img/logo-round.png": {
       "id": "mR1PVv1EWnIacuWxDzbKP",
       "url": "/uploads/WMbrO4NaOmXWv3FG5Q_tj-logo-round.png",
-      "uploadedAs": "logo-round.png",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "logo-round.png"
     },
     "logo-round.png": {
       "id": "mR1PVv1EWnIacuWxDzbKP",
       "url": "/uploads/WMbrO4NaOmXWv3FG5Q_tj-logo-round.png",
-      "uploadedAs": "logo-round.png",
-      "width": 192,
-      "height": 192,
-      "variants": 2
+      "reused": true,
+      "uploadedAs": "logo-round.png"
     },
     "media/img/logo-stacked.webp": {
       "id": "Jet1VCunpIGvYjHcduk8B",
       "url": "/uploads/vrcT63A1A1mrJgg6xnwr8-logo-stacked.webp",
-      "uploadedAs": "logo-stacked.webp",
-      "width": 620,
-      "height": 180,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "logo-stacked.webp"
     },
     "logo-stacked.webp": {
       "id": "Jet1VCunpIGvYjHcduk8B",
       "url": "/uploads/vrcT63A1A1mrJgg6xnwr8-logo-stacked.webp",
-      "uploadedAs": "logo-stacked.webp",
-      "width": 620,
-      "height": 180,
-      "variants": 3
+      "reused": true,
+      "uploadedAs": "logo-stacked.webp"
     },
     "media/img/office-exterior.webp": {
       "id": "OCFZz0A239oL2hQldZigO",
@@ -1541,18 +1561,14 @@
     "media/img/story.webp": {
       "id": "BK6aUEuHchHAqiwjzX-T4",
       "url": "/uploads/dzQ2jPuuSqb8tqcfeGsQn-story.webp",
-      "uploadedAs": "story.webp",
-      "width": 950,
-      "height": 1080,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "story.webp"
     },
     "story.webp": {
       "id": "BK6aUEuHchHAqiwjzX-T4",
       "url": "/uploads/dzQ2jPuuSqb8tqcfeGsQn-story.webp",
-      "uploadedAs": "story.webp",
-      "width": 950,
-      "height": 1080,
-      "variants": 4
+      "reused": true,
+      "uploadedAs": "story.webp"
     },
     "media/img/team-klass.webp": {
       "id": "tCOdJrXTwb_2Bm_VvEjem",
@@ -1605,18 +1621,14 @@
     "media/img/tech.webp": {
       "id": "aS8eG0OmL4gcc_s06COE4",
       "url": "/uploads/_P9rdqkzeZKIBoFBsjZBI-tech.webp",
-      "uploadedAs": "tech.webp",
-      "width": 1574,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "tech.webp"
     },
     "tech.webp": {
       "id": "aS8eG0OmL4gcc_s06COE4",
       "url": "/uploads/_P9rdqkzeZKIBoFBsjZBI-tech.webp",
-      "uploadedAs": "tech.webp",
-      "width": 1574,
-      "height": 1080,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "tech.webp"
     },
     "media/img/technology-3d-printers.webp": {
       "id": "5J8Cf_W3hNMoN1G3z98y3",
@@ -1717,50 +1729,38 @@
     "media/video/hero-loop-m.mp4": {
       "id": "om5MmWbM4DtOw2vg4JdLU",
       "url": "/uploads/awTUVxHV9LEsKJTBHCYKv-hero-loop-m.mp4",
-      "uploadedAs": "hero-loop-m.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "hero-loop-m.mp4"
     },
     "hero-loop-m.mp4": {
       "id": "om5MmWbM4DtOw2vg4JdLU",
       "url": "/uploads/awTUVxHV9LEsKJTBHCYKv-hero-loop-m.mp4",
-      "uploadedAs": "hero-loop-m.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "hero-loop-m.mp4"
     },
     "media/video/hero-loop.mp4": {
       "id": "k934Mm4FEhzdGAVumd8u8",
       "url": "/uploads/0j-djM86hf6vRfRViCFNn-hero-loop.mp4",
-      "uploadedAs": "hero-loop.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "hero-loop.mp4"
     },
     "hero-loop.mp4": {
       "id": "k934Mm4FEhzdGAVumd8u8",
       "url": "/uploads/0j-djM86hf6vRfRViCFNn-hero-loop.mp4",
-      "uploadedAs": "hero-loop.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "hero-loop.mp4"
     },
     "media/video/isaac-story.mp4": {
       "id": "-aLUzuDbZUrU32kQsCp9E",
       "url": "/uploads/Rzxh-RKYgbFvR0zN_L56O-isaac-story.mp4",
-      "uploadedAs": "isaac-story.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "isaac-story.mp4"
     },
     "isaac-story.mp4": {
       "id": "-aLUzuDbZUrU32kQsCp9E",
       "url": "/uploads/Rzxh-RKYgbFvR0zN_L56O-isaac-story.mp4",
-      "uploadedAs": "isaac-story.mp4",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "isaac-story.mp4"
     }
   }
 }

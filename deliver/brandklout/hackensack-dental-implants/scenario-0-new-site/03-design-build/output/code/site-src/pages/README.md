@@ -70,6 +70,14 @@ photo actually placed. Sizes: hero `1200 x 1200` (`variant: 'wide'`: `2400 x 110
 `800 x 600`, links `900 x 700`, team `900 x 1100`, quote and cta `900 x 1100`, articles `1200 x 800`.
 Never a stock face beside a treatment; doctors, team, patients and the office are client photos only.
 
+## Breakpoints
+
+Use the house breakpoints (1279 / 991 / 767 / 479) and the other conditions already listed in
+`css/00-breakpoints.css` (the fluid root's 1920 and 1440, the tokens' 1439 / 1099 / 419). A new condition goes into that file first,
+in cascade order: Instatic publishes every rule's media styles in the order the conditions first
+appear in the stylesheet, so a condition first met out of order breaks the published site (and only
+the published site).
+
 ## Check
 
 `node -e "import('./pages/<path>.mjs').then(m => console.log(m.default.seo.title))"` from `site-src/`

@@ -36,8 +36,9 @@ Asked for: "We need to finish the entire site please. The homepage was approved.
   `assets/stock/stock-ledger.json`, nine photos). 121 images on the site, ledger `images.csv`.
 - New embeds: GHL booking form (contact), GHL referral form (referring doctors), Google map;
   `code/embed-nodes.mjs` puts every Embed block into the converted payload (31 on 27 pages).
-- **Staging** (two full pushes, `push.log`; backups `backups/pre-site-stg`): 39 pages published,
-  Framework applied (81 variables, seq 16), 404 template set, breakpoints unchanged.
+- **Staging** (three full pushes, `push.log`; backups `backups/pre-site-stg`): 39 pages published,
+  Framework applied (81 variables), 404 template set, breakpoints unchanged, media conditions in
+  cascade order (`css/00-breakpoints.css`).
 - **BugHerd #12 done** (`bugherd/2026-10-09/mark-done.txt`): the surgeons link to their profiles,
   all four profiles serve 200. 23 of 23 done.
 - Gates, local (`LOCAL_GATES=1` build): check-pages FAIL none (39 pages × 1440/390), click-controls
@@ -48,7 +49,10 @@ Asked for: "We need to finish the entire site please. The homepage was approved.
   (81%), editor-canvas ok, image-reuse `--base` 0 problems, css-declared-parity none,
   check-staging all passed, check-pages `--base` (9 designed pages) pins 3 to 7 and smoother on;
   every vendor embed renders (booking form, referral form, map, survey, Elfsight). verify-live: 39
-  routes 200, links and images resolve; its other FAILs are listed under Gotchas.
+  routes 200, links and images resolve; its other FAILs are listed under Gotchas. compare-live
+  (all top-level pages + two nested, `live-compare*.txt`): after the breakpoint fix, no real
+  difference but the HIPAA notice and privacy policy at 390, where two paragraphs holding long
+  hhs.gov links wrap one line more (0.5% taller, no overflow).
 
 ### Next
 
@@ -94,6 +98,15 @@ Asked for: "We need to finish the entire site please. The homepage was approved.
 - **Live structure-audit counts differently** from `--local` (registry rules, not files): 81% local
   became 78% live until thirteen exact-value literals moved to `--space-tiny` / `--grid-gap` /
   `--global` (same pixels).
+- **Instatic orders media conditions site-wide by first appearance**, and the house fluid root
+  (`00-fluid-root.css`, first file) declares 479 before the tokens declare 1279/991/767: on staging
+  every phone override came before its tablet one and lost (About's H1 52px at 390, local 45).
+  `css/00-breakpoints.css` now comes first and names every condition once in cascade order; the
+  third push publishes them in that order and the H1 matches. Local gates cannot see this; compare
+  a phone override on staging (`compare-live`).
+- **compare-live false findings**: the Embed module adds `position: relative; max-width: 100%` to
+  its wrapper, the Framework stores colours as HSLA (`#7c6133` = `hsla(37.81, 41.71%, 34.31%)`),
+  and a container caught mid-pin reads 0px margins.
 - **check-staging asserted the H1's font**: the H1 is now the DM Sans keyword label, so the check
   reads the display headline (`.arrival_heading`).
 - **An RGBA cut-out converted straight to RGB goes black** (the doctors' portraits): composite on

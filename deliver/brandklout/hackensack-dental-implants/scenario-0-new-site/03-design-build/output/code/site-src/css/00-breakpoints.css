@@ -1,0 +1,21 @@
+/* The order of the breakpoints, for Instatic. Its importer registers each media condition once, in
+   first-seen order, and publishes every rule's conditional styles in that order, site-wide. The fluid
+   root (next file) meets 479px before the tokens meet 1279/991/767, so on the published site a
+   rule's phone value came before its tablet value and lost to it (About's H1 at 390: 52px, not 45).
+   This file is first in the build and names every condition once in cascade order: max-width widest
+   first, then min-width narrowest first, then the preference queries. --breakpoint is not read by
+   anything; it only gives each condition a declaration to register. */
+@media screen and (max-width: 1920px) { :root { --breakpoint: 1920; } }
+@media screen and (max-width: 1440px) { :root { --breakpoint: 1440; } }
+@media screen and (max-width: 1439px) { :root { --breakpoint: 1439; } }
+@media screen and (max-width: 1279px) { :root { --breakpoint: 1279; } }
+@media screen and (max-width: 1099px) { :root { --breakpoint: 1099; } }
+@media screen and (max-width: 991px) { :root { --breakpoint: 991; } }
+@media screen and (max-width: 767px) { :root { --breakpoint: 767; } }
+@media screen and (max-width: 479px) { :root { --breakpoint: 479; } }
+@media screen and (max-width: 419px) { :root { --breakpoint: 419; } }
+@media screen and (min-width: 992px) { :root { --breakpoint-up: 992; } }
+@media screen and (min-width: 1280px) { :root { --breakpoint-up: 1280; } }
+@media (prefers-reduced-motion: no-preference) { :root { --motion: 1; } }
+@media (prefers-reduced-motion: reduce) { :root { --motion: 0; } }
+@media (hover: hover) and (pointer: fine) { :root { --hover: 1; } }

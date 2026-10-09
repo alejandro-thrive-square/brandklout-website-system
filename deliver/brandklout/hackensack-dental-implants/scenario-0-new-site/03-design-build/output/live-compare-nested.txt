@@ -1,0 +1,56 @@
+
+local  C:\Users\ACER\orca\workspaces\Brandklout Website System\bk-hackensack-dental-implants\deliver\brandklout\hackensack-dental-implants\scenario-0-new-site\03-design-build\output\code\site-src\dist
+live   https://hackensack-dental-implants-staging.up.railway.app
+
+
+=== services/all-on-x
+  [1440] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [1440] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [390] style: position
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "static"
+            live  "relative"
+  [390] style: max-width
+        1 element(s)
+        div.consultation_embed.wz-embed#0
+            local "none"
+            live  "100%"
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+9 finding(s)
+
+local  C:\Users\ACER\orca\workspaces\Brandklout Website System\bk-hackensack-dental-implants\deliver\brandklout\hackensack-dental-implants\scenario-0-new-site\03-design-build\output\code\site-src\dist
+live   https://hackensack-dental-implants-staging.up.railway.app
+
+
+=== blog/foods-to-eat-and-avoid-after-dental-implant-surgery
+  [runtime] token: --gutter
+        local "1.5rem", live "clamp(1.5rem, calc(0vw + 1.5rem), 1.5rem)"
+  [runtime] token: --size-display
+        local "calc(6.2rem * 1)", live "calc(clamp(6.2rem, calc(0vw + 6.2rem), 6.2rem) * 1)"
+  [runtime] token: --ivory
+        local "#fbfaf7", live "hsla(45, 33.33%, 97.65%, 1)"
+  [runtime] token: --fg
+        local "#292824", live "hsla(48, 6.49%, 15.1%, 1)"
+  [runtime] token: --accent
+        local "#7c6133", live "hsla(37.81, 41.71%, 34.31%, 1)"
+
+5 finding(s)
