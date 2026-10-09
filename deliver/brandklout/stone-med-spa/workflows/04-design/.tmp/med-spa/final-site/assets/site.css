@@ -990,7 +990,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
   min-height: 5.5rem;
 }
 
@@ -1058,13 +1058,13 @@ textarea {
 .navbar_actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-small);
   flex: 0 0 auto;
 }
 .navbar_phone {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-xsmall);
   font-size: var(--size-text-small);
   font-weight: 500;
   color: var(--fg);
@@ -1143,7 +1143,7 @@ textarea {
   }
 }
 @media (max-width: 767px) {
-  .navbar_actions .button {
+  .button.is-navbar {
     display: none;
   }
 }
@@ -1184,7 +1184,7 @@ textarea {
   display: grid;
   grid-template-columns: repeat(4, max-content);
   gap: 1.5rem 2.5rem;
-  padding: 1.75rem 2rem;
+  padding: 1.75rem var(--space-medium);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   background-color: var(--ivory);
@@ -1214,7 +1214,7 @@ textarea {
 }
 .navbar_sub-all {
   grid-column: 1 / -1;
-  padding-top: 1rem;
+  padding-top: var(--space-small);
   border-top: 1px solid var(--line);
   font-size: var(--size-text-tiny);
   font-weight: 500;
@@ -1268,7 +1268,7 @@ textarea {
   width: min(24rem, 88vw);
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1.75rem 2rem;
+  padding: 1.5rem 1.75rem var(--space-medium);
   background-color: var(--bg);
   border-left: 1px solid var(--line);
   overflow-y: auto;
@@ -1316,7 +1316,7 @@ textarea {
 
 .drawer_foot {
   margin-top: auto;
-  padding-top: 2rem;
+  padding-top: var(--space-medium);
   display: grid;
   gap: 0.9rem;
 }
@@ -1329,8 +1329,8 @@ textarea {
 .drawer_sub {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.2rem 1rem;
-  padding: 0.75rem 0 1rem;
+  gap: 0.2rem var(--space-small);
+  padding: 0.75rem 0 var(--space-small);
   border-bottom: 1px solid var(--line);
 }
 .drawer_sub-link {
@@ -1356,7 +1356,7 @@ textarea {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: start;
-  gap: 3rem;
+  gap: var(--space-large);
 }
 .footer_brand {
   display: flex;
@@ -1425,7 +1425,7 @@ textarea {
 .footer_hours-row {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
   min-width: 12rem;
 }
 .footer_hours-row dt {
@@ -1437,8 +1437,8 @@ textarea {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem 1.5rem;
-  padding-top: 2rem;
+  gap: var(--space-xsmall) 1.5rem;
+  padding-top: var(--space-medium);
   margin-top: 2.5rem;
   border-top: 1px solid var(--line);
   font-size: var(--size-text-tiny);
@@ -1453,7 +1453,7 @@ textarea {
 .footer_signature {
   display: grid;
   justify-items: center;
-  gap: 1rem;
+  gap: var(--space-small);
   padding-top: 2.5rem;
 }
 .footer_signature-mark {
@@ -1492,7 +1492,7 @@ textarea {
 .footer_nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 2rem;
+  gap: 0.75rem var(--space-medium);
   padding-bottom: var(--space-large);
   margin-bottom: var(--space-large);
   border-bottom: 1px solid var(--line);
@@ -1671,7 +1671,7 @@ textarea {
    host. It becomes the real domain when one is chosen. */
 .footer_switch {
   display: inline-grid;
-  gap: 0.25rem;
+  gap: var(--space-xxsmall);
   margin-top: 1.6rem;
   padding: 0.9rem 1.2rem;
   border: 1px solid var(--line);
@@ -2135,7 +2135,7 @@ textarea {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 0.5rem;
+    padding-bottom: var(--space-xsmall);
   }
   .horizontal-scroll_track::-webkit-scrollbar {
     display: none;
@@ -2262,7 +2262,7 @@ html:not(.js) .words_item:not(:first-child) {
    one. */
 .tiers_flag.is-lead-in {
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 
 
@@ -2342,7 +2342,7 @@ html:not(.js) .cover_media > img {
   align-items: end;
 }
 .cover_inner {
-  padding-top: 8rem;
+  padding-top: var(--space-xhuge);
   padding-bottom: 3.5rem;
   max-width: 56rem;
 }
@@ -2356,7 +2356,7 @@ html:not(.js) .cover_media > img {
   color: var(--white);
   max-width: 14ch;
 }
-.cover_title .text-style-display-accent {
+.text-style-display-accent.is-cover {
   color: var(--green);
 }
 .cover_lede {
@@ -2367,7 +2367,7 @@ html:not(.js) .cover_media > img {
   color: rgba(255, 255, 255, 0.84);
 }
 .cover_actions {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
 }
 .cover_crumb {
   color: rgba(255, 255, 255, 0.72);
@@ -2520,7 +2520,7 @@ html:not(.js) .hero_media > img {
 .hero_copy {
   align-self: end;
   max-width: 52rem;
-  padding-bottom: 3rem;
+  padding-bottom: var(--space-large);
 }
 .text-style-tagline.is-alternate {
   color: var(--green);
@@ -2551,7 +2551,7 @@ html:not(.js) .hero_media > img {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
 }
@@ -2618,7 +2618,7 @@ html:not(.js) .hero_media > img {
 .marquee_item {
   display: inline-flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: var(--space-small);
   padding-inline: 1.6rem;
   color: var(--fg);
   white-space: nowrap;
@@ -2676,7 +2676,7 @@ html:not(.js) .hero_media > img {
     display: none;
   }
   .hero_copy {
-    padding-bottom: 2rem;
+    padding-bottom: var(--space-medium);
   }
   .marquee_name {
     font-size: 1.35rem;
@@ -2735,7 +2735,7 @@ html:not(.js) .hero_media > img {
   grid-column: 6 / 10;
   grid-row: 2 / 4;
   aspect-ratio: 4 / 3;
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .mosaic_frame.is-position-3 {
   grid-column: 9 / 13;
@@ -2748,9 +2748,9 @@ html:not(.js) .hero_media > img {
   grid-row: 4;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: var(--space-medium);
   margin-top: 2.5rem;
-  padding-top: 2rem;
+  padding-top: var(--space-medium);
   border-top: 1px solid var(--line);
 }
 .mosaic_point {
@@ -2842,7 +2842,7 @@ html:not(.js) .hero_media > img {
 .cadence_head {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: end;
   margin-bottom: 3.5rem;
 }
@@ -2867,7 +2867,7 @@ html:not(.js) .hero_media > img {
   color: var(--fg);
 }
 .cadence_foot {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
@@ -3018,7 +3018,7 @@ html:not(.js) .hero_media > img {
   display: flex;
   flex-wrap: wrap;
   gap: 1.1rem 2.4rem;
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
@@ -3086,7 +3086,7 @@ html:not(.js) .hero_media > img {
 @media (max-width: 991px) {
   .cadence_head {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--space-medium);
   }
   .cadence_grid {
     --cad-label: 9rem;
@@ -3107,12 +3107,12 @@ html:not(.js) .hero_media > img {
   }
   .cadence_stats {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .cadence_stat {
     grid-template-columns: 6rem 1fr;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-small);
   }
 }
 
@@ -3135,7 +3135,7 @@ html:not(.js) .hero_media > img {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
   margin-bottom: 2.5rem;
 }
 .shelf_head .heading-style-h2 {
@@ -3242,7 +3242,7 @@ html:not(.js) .hero_media > img {
 .shelf_meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.6rem;
+  gap: var(--space-xsmall) 1.6rem;
   font-size: var(--size-text-tiny);
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -3278,7 +3278,7 @@ html:not(.js) .hero_media > img {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
     height: auto;
-    gap: 0.5rem;
+    gap: var(--space-xsmall);
   }
   .shelf_item {
     aspect-ratio: 4 / 3;
@@ -3312,13 +3312,13 @@ html:not(.js) .hero_media > img {
 .surgeon_grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: center;
 }
 .surgeon_media {
   position: relative;
-  padding-bottom: 3rem;
-  padding-right: 3rem;
+  padding-bottom: var(--space-large);
+  padding-right: var(--space-large);
 }
 .surgeon_frame {
   margin: 0;
@@ -3388,7 +3388,7 @@ html:not(.js) .hero_media > img {
 @media (max-width: 991px) {
   .surgeon_grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-large);
   }
   .surgeon_media {
     max-width: 34rem;
@@ -3397,16 +3397,16 @@ html:not(.js) .hero_media > img {
 @media (max-width: 767px) {
   .surgeon_facts {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .surgeon_fact {
     grid-template-columns: 5.5rem 1fr;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .surgeon_media {
     padding-right: 1.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: var(--space-medium);
   }
 }
 
@@ -3459,7 +3459,7 @@ html:not(.js) .hero_media > img {
 .words_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
-  gap: 3rem;
+  gap: var(--space-large);
   align-items: center;
 }
 .words_photo {
@@ -3477,7 +3477,7 @@ html:not(.js) .hero_media > img {
 @media (max-width: 767px) {
   .words_head {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--space-medium);
   }
   .words_photo {
     max-width: 18rem;
@@ -3490,8 +3490,8 @@ html:not(.js) .hero_media > img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: var(--space-medium);
+  margin-top: var(--space-xlarge);
 }
 /* THE LIVE REVIEWS (Elfsight Google Reviews, 2026-09-30). The rail of
    `.quote_card`s this replaces, and its arrows, are in git before that date.
@@ -3506,7 +3506,7 @@ html:not(.js) .hero_media > img {
    On Instatic the widget is one level deeper — the Embed block wraps it in
    `.wz-embed` — which is a block and needs nothing from us. */
 .words_reviews {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   min-height: 420px;
   /* the widget runs edge to edge; without this its title sat on the panel's top edge */
   padding-block: var(--space-large);
@@ -3543,7 +3543,7 @@ html:not(.js) .hero_media > img {
 .place_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .place_copy .heading-style-h2 {
@@ -3556,7 +3556,7 @@ html:not(.js) .hero_media > img {
 }
 .place_facts {
   display: grid;
-  gap: 1rem;
+  gap: var(--space-small);
   margin-top: 2.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
@@ -3564,7 +3564,7 @@ html:not(.js) .hero_media > img {
 .place_facts > div {
   display: grid;
   grid-template-columns: 5rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   font-size: var(--size-text-small);
   line-height: 1.55;
 }
@@ -3581,8 +3581,8 @@ html:not(.js) .hero_media > img {
 }
 .place_media {
   position: relative;
-  padding-left: 3rem;
-  padding-bottom: 3rem;
+  padding-left: var(--space-large);
+  padding-bottom: var(--space-large);
 }
 .place_frame {
   margin: 0;
@@ -3616,7 +3616,7 @@ html:not(.js) .hero_media > img {
 @media (max-width: 991px) {
   .place_grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-large);
   }
   .place_media {
     order: -1;
@@ -3625,11 +3625,11 @@ html:not(.js) .hero_media > img {
 @media (max-width: 767px) {
   .place_media {
     padding-left: 1.25rem;
-    padding-bottom: 2rem;
+    padding-bottom: var(--space-medium);
   }
   .place_facts > div {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+    gap: var(--space-xxsmall);
   }
 }
 
@@ -3708,7 +3708,7 @@ html:not(.js) .hero_media > img {
 .menu_group-head {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 2.5rem 5rem;
+  gap: 2.5rem var(--space-xxlarge);
   align-items: end;
   margin-bottom: 2.5rem;
 }
@@ -3815,11 +3815,11 @@ html:not(.js) .hero_media > img {
 .row_vitals {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--space-small);
 }
 .row_vital {
   display: grid;
-  gap: 0.25rem;
+  gap: var(--space-xxsmall);
   min-width: 0;
 }
 .row_vital-key {
@@ -3871,8 +3871,8 @@ html:not(.js) .hero_media > img {
 .row_detail {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 2rem 4rem;
-  padding: 0.5rem 0 2.75rem 5.5rem;
+  gap: var(--space-medium) var(--space-xlarge);
+  padding: var(--space-xsmall) 0 2.75rem 5.5rem;
   align-items: start;
 }
 .row_figure {
@@ -3943,7 +3943,7 @@ html:not(.js) .hero_media > img {
   color: var(--fg-mute);
 }
 .menu_empty {
-  padding: 3rem 0;
+  padding: var(--space-large) 0;
   font-family: var(--font-display);
   font-size: var(--size-h4);
   color: var(--fg);
@@ -4047,7 +4047,7 @@ html:not(.js) .hero_media > img {
   transform: translateY(0.5rem);
   transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
 }
-.doors_body .button {
+.button.is-doors {
   opacity: 0;
   transform: translateY(0.5rem);
   transition: opacity 0.4s var(--ease) 0.1s, transform 0.5s var(--ease) 0.1s;
@@ -4083,7 +4083,7 @@ html:not(.js) .hero_media > img {
     grid-template-areas:
       "index thumb name toggle"
       "index thumb vitals vitals";
-    row-gap: 1rem;
+    row-gap: var(--space-small);
   }
   .row_thumb {
     grid-area: thumb;
@@ -4130,7 +4130,7 @@ html:not(.js) .hero_media > img {
   }
   .row_vitals {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1rem;
+    gap: 0.75rem var(--space-small);
   }
   .row_detail {
     padding-left: 0;
@@ -4150,7 +4150,7 @@ html:not(.js) .hero_media > img {
     min-height: 17rem;
   }
   .doors_text,
-  .doors_body .button,
+  .button.is-doors,
   .doors_component:hover .doors_door.is-open:not(:hover) .doors_text,
   .doors_component:hover .doors_door.is-open:not(:hover) .doors_body .button {
     opacity: 1;
@@ -4243,7 +4243,7 @@ html:not(.js) .hero_media > img {
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: end;
 }
 .close_title {
@@ -4266,7 +4266,7 @@ html:not(.js) .hero_media > img {
 .close_fact {
   display: grid;
   grid-template-columns: 8rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   align-items: baseline;
 }
 .close_fact-key {
@@ -4323,7 +4323,7 @@ html:not(.js) .hero_media > img {
 .detail_layout {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 .at-a-glance_rail {
@@ -4343,12 +4343,12 @@ html:not(.js) .hero_media > img {
 }
 .at-a-glance_vitals {
   display: grid;
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .at-a-glance_vital {
   display: grid;
   grid-template-columns: 7rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 0.85rem 0;
   border-top: 1px solid var(--line);
 }
@@ -4395,7 +4395,7 @@ html:not(.js) .hero_media > img {
   max-width: 62ch;
 }
 .detail_block p + p {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .detail_figure {
   margin: 0;
@@ -4447,7 +4447,7 @@ html:not(.js) .hero_media > img {
 .products_layout {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 .products_intro {
@@ -4478,7 +4478,7 @@ html:not(.js) .hero_media > img {
 }
 .products_card {
   min-height: 21rem;
-  padding: 2rem;
+  padding: var(--space-medium);
   border: 1px solid var(--line);
   border-radius: var(--radius-frame);
   background: var(--bg-card);
@@ -4536,7 +4536,7 @@ html:not(.js) .hero_media > img {
 .why_grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 3rem 4rem;
+  gap: var(--space-large) var(--space-xlarge);
   align-items: center;
 }
 .why_copy .heading-style-h2 {
@@ -4544,7 +4544,7 @@ html:not(.js) .hero_media > img {
   max-width: 16ch;
 }
 .why_text {
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem 0 var(--space-medium);
   max-width: 46ch;
 }
 .why_media {
@@ -4552,8 +4552,8 @@ html:not(.js) .hero_media > img {
   width: 100%;
   max-width: 32rem;
   justify-self: center;
-  padding-left: 3rem;
-  padding-bottom: 3rem;
+  padding-left: var(--space-large);
+  padding-bottom: var(--space-large);
 }
 .why_frame {
   margin: 0;
@@ -4599,7 +4599,7 @@ html:not(.js) .hero_media > img {
 .care_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr);
-  gap: 3rem;
+  gap: var(--space-large);
   align-items: start;
 }
 .care_column-title {
@@ -4620,7 +4620,7 @@ html:not(.js) .hero_media > img {
   display: grid;
   grid-template-columns: 2.4rem 1fr;
   gap: 0.75rem;
-  padding: 1rem 0;
+  padding: var(--space-small) 0;
   border-bottom: 1px solid var(--line);
   font-size: var(--size-text-small);
   line-height: 1.55;
@@ -4652,13 +4652,13 @@ html:not(.js) .hero_media > img {
 .gallery_grid {
   display: grid;
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .gallery_plates {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
 }
 .gallery_plate {
   position: relative;
@@ -4694,7 +4694,7 @@ html:not(.js) .hero_media > img {
   max-width: 16ch;
 }
 .gallery_text {
-  margin: 1.5rem 0 2rem;
+  margin: 1.5rem 0 var(--space-medium);
   max-width: 46ch;
 }
 
@@ -4702,7 +4702,7 @@ html:not(.js) .hero_media > img {
 .detail_faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 2.5rem 5rem;
+  gap: 2.5rem var(--space-xxlarge);
   align-items: start;
 }
 .detail_faq-head {
@@ -4831,7 +4831,7 @@ html:not(.js) .hero_media > img {
   }
   .why_media {
     padding-left: 1.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: var(--space-medium);
   }
 }
 
@@ -4896,7 +4896,7 @@ html:not(.js) .hero_media > img {
 /* --- the names -------------------------------------------------------------- */
 .names_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .names_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -4948,7 +4948,7 @@ html:not(.js) .hero_media > img {
 .names_body {
   display: grid;
   align-content: end;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 2.5rem;
 }
 .names_index {
@@ -4986,7 +4986,7 @@ html:not(.js) .hero_media > img {
 .line_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 3fr);
-  gap: 2rem;
+  gap: var(--space-medium);
   align-items: center;
 }
 .line_frame {
@@ -4997,11 +4997,11 @@ html:not(.js) .hero_media > img {
 }
 .line_frame.is-left {
   aspect-ratio: 4 / 5;
-  margin-top: 5rem;
+  margin-top: var(--space-xxlarge);
 }
 .line_frame.is-right {
   aspect-ratio: 3 / 4;
-  margin-bottom: 5rem;
+  margin-bottom: var(--space-xxlarge);
 }
 .line_frame img {
   width: 100%;
@@ -5013,7 +5013,7 @@ html:not(.js) .hero_media > img {
   left: 1rem;
   bottom: 1rem;
   z-index: 3;
-  padding: 0.5rem 0.9rem;
+  padding: var(--space-xsmall) 0.9rem;
   border-radius: var(--radius);
   background: rgba(39, 39, 39, 0.72);
   color: var(--white);
@@ -5022,7 +5022,7 @@ html:not(.js) .hero_media > img {
   text-transform: uppercase;
 }
 .line_copy {
-  padding-inline: 1rem;
+  padding-inline: var(--space-small);
 }
 .line_copy .heading-style-h2 {
   margin-top: 1.25rem;
@@ -5036,7 +5036,7 @@ html:not(.js) .hero_media > img {
 /* --- the rules --------------------------------------------------------------- */
 .rules_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .rules_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -5048,10 +5048,10 @@ html:not(.js) .hero_media > img {
   align-items: start;
 }
 .rules_tile:nth-child(2) {
-  margin-top: 4rem;
+  margin-top: var(--space-xlarge);
 }
 .rules_tile:nth-child(3) {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
 }
 .rules_media {
   margin: 0;
@@ -5072,7 +5072,7 @@ html:not(.js) .hero_media > img {
 .rules_body {
   display: grid;
   grid-template-columns: 2.5rem 1fr;
-  gap: 0.35rem 1rem;
+  gap: 0.35rem var(--space-small);
   padding-top: 1.4rem;
 }
 .rules_number {
@@ -5097,7 +5097,7 @@ html:not(.js) .hero_media > img {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
 }
 .room_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -5113,7 +5113,7 @@ html:not(.js) .hero_media > img {
 }
 .room_rail {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-small);
   align-items: stretch;
   height: clamp(18rem, 42vh, 30rem);
   padding-right: 5%;
@@ -5139,8 +5139,8 @@ html:not(.js) .hero_media > img {
 .room_facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: var(--space-medium);
+  margin-top: var(--space-large);
   padding-top: 1.5rem;
   padding-bottom: var(--space-xhuge);
   border-top: 1px solid var(--line);
@@ -5173,7 +5173,7 @@ html:not(.js) .hero_media > img {
     grid-column: 1 / -1;
     order: -1;
     padding-inline: 0;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-small);
   }
   .line_frame.is-left,
   .line_frame.is-right {
@@ -5239,9 +5239,9 @@ a.line_frame:focus-visible .line_caption {
 .people_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 2rem 5rem;
+  gap: var(--space-medium) var(--space-xxlarge);
   align-items: end;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .people_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -5261,7 +5261,7 @@ a.line_frame:focus-visible .line_caption {
   gap: 2.5rem 1.5rem;
 }
 .people_card:nth-child(4n + 2) {
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .people_card:nth-child(4n + 4) {
   margin-top: 1.5rem;
@@ -5272,7 +5272,7 @@ a.line_frame:focus-visible .line_caption {
    by the same stagger the four-up grid used. */
 .people_grid.is-pair {
   grid-template-columns: repeat(2, minmax(0, 24rem));
-  gap: 2.5rem 3rem;
+  gap: 2.5rem var(--space-large);
 }
 .people_grid.is-pair .people_name {
   font-size: var(--size-h4);
@@ -5311,12 +5311,12 @@ a.line_frame:focus-visible .line_caption {
   color: var(--line-strong);
 }
 .people_name {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
   font-size: var(--size-h5);
   line-height: 1.2;
 }
 .people_role {
-  margin-top: 0.25rem;
+  margin-top: var(--space-xxsmall);
   font-size: var(--size-text-tiny);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -5387,7 +5387,7 @@ a.line_frame:focus-visible .line_caption {
   text-transform: uppercase;
 }
 .strip_bar {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   height: 2px;
   background: var(--line);
 }
@@ -5403,7 +5403,7 @@ a.line_frame:focus-visible .line_caption {
 .lead_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .lead_frame {
@@ -5429,7 +5429,7 @@ a.line_frame:focus-visible .line_caption {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 12rem));
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: var(--space-medium) 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
@@ -5479,7 +5479,7 @@ a.line_frame:focus-visible .line_caption {
 }
 @media (max-width: 767px) {
   .people_grid {
-    gap: 2rem 1rem;
+    gap: var(--space-medium) var(--space-small);
   }
   .strip_track {
     height: 16rem;
@@ -5508,7 +5508,7 @@ a.line_frame:focus-visible .line_caption {
 /* --- financing: the stack ------------------------------------------------------ */
 .pay_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .pay_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -5535,8 +5535,8 @@ a.line_frame:focus-visible .line_caption {
 .pay_card-copy {
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: 3rem;
+  gap: var(--space-small);
+  padding: var(--space-large);
 }
 .pay_card-index {
   font-family: var(--font-display);
@@ -5545,14 +5545,14 @@ a.line_frame:focus-visible .line_caption {
   line-height: 1;
 }
 .pay_card-title {
-  margin-top: 0.25rem;
+  margin-top: var(--space-xxsmall);
 }
 .pay_card-text {
   max-width: 34ch;
   color: var(--fg-body);
 }
 .pay_card-meta {
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
   font-size: var(--size-text-tiny);
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -5638,7 +5638,7 @@ a.line_frame:focus-visible .line_caption {
 .plan_faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: start;
 }
 .plan_faq-media {
@@ -5656,14 +5656,14 @@ a.line_frame:focus-visible .line_caption {
 }
 .plan_faq-title {
   margin-top: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-medium);
 }
 
 /* --- membership: the question ---------------------------------------------------- */
 .question_grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .question_title {
@@ -5698,16 +5698,16 @@ a.line_frame:focus-visible .line_caption {
 .tiers_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-  gap: 2rem 4rem;
+  gap: var(--space-medium) var(--space-xlarge);
   align-items: end;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .tiers_head .heading-style-h2 {
   margin-top: 1.25rem;
 }
 .tiers_flag {
   color: var(--fg-mute);
-  padding: 1rem 1.25rem;
+  padding: var(--space-small) 1.25rem;
   border-left: 2px solid var(--charcoal);
 }
 .tiers_split {
@@ -5719,7 +5719,7 @@ a.line_frame:focus-visible .line_caption {
 .tier_card {
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 2.5rem;
   border-radius: var(--radius-frame);
   background: var(--bg-card);
@@ -5747,14 +5747,14 @@ a.line_frame:focus-visible .line_caption {
 }
 .tier_lines {
   list-style: none;
-  margin: 1rem 0 1.5rem;
+  margin: var(--space-small) 0 1.5rem;
   padding: 0;
   border-top: 1px solid var(--line);
 }
 .tier_lines li {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--line);
   font-size: var(--size-text-small);
@@ -5793,7 +5793,7 @@ a.line_frame:focus-visible .line_caption {
 /* The lender cards carry their application link (financing, 2026-09-15). */
 .pay_card-button {
   justify-self: start;
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
 }
 .tiers_media img {
   width: 100%;
@@ -5822,7 +5822,7 @@ a.line_frame:focus-visible .line_caption {
 }
 .faces_frame.is-tall {
   aspect-ratio: 3 / 4;
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .faces_frame img {
   width: 100%;
@@ -5846,7 +5846,7 @@ a.line_frame:focus-visible .line_caption {
     min-height: 0;
   }
   .pay_card-copy {
-    padding: 2rem;
+    padding: var(--space-medium);
   }
   .pay_card-media {
     min-height: 14rem;
@@ -5880,12 +5880,12 @@ a.line_frame:focus-visible .line_caption {
 @media (max-width: 767px) {
   .principle_facts {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .principle_fact {
     grid-template-columns: 5rem 1fr;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .tiers_split {
     grid-template-columns: 1fr;
@@ -5923,7 +5923,7 @@ a.line_frame:focus-visible .line_caption {
 .book_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 .book_side {
@@ -5948,14 +5948,14 @@ a.line_frame:focus-visible .line_caption {
 .book_facts {
   display: grid;
   gap: 0.9rem;
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
 .book_facts > div {
   display: grid;
   grid-template-columns: 5rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   font-size: var(--size-text-small);
   line-height: 1.55;
 }
@@ -5988,8 +5988,8 @@ a.line_frame:focus-visible .line_caption {
 .path_card {
   display: grid;
   align-content: start;
-  gap: 1rem;
-  padding: 2rem;
+  gap: var(--space-small);
+  padding: var(--space-medium);
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
@@ -6017,13 +6017,13 @@ a.line_frame:focus-visible .line_caption {
 }
 .path_card .button {
   justify-self: start;
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
 }
 
 /* --- the form --------------------------------------------------------------- */
 .form_component {
-  margin-top: 4rem;
-  padding-top: 3rem;
+  margin-top: var(--space-xlarge);
+  padding-top: var(--space-large);
   border-top: 1px solid var(--line);
 }
 .form_title {
@@ -6071,7 +6071,7 @@ a.line_frame:focus-visible .line_caption {
   max-width: 46ch;
 }
 .form_privacy {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
   font-size: var(--size-text-tiny);
   color: var(--fg-mute);
   max-width: 52ch;
@@ -6099,7 +6099,7 @@ a.line_frame:focus-visible .line_caption {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .book_call-number {
@@ -6192,14 +6192,14 @@ a.line_frame:focus-visible .line_caption {
 .thanks_next {
   display: grid;
   gap: 0.9rem;
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
 }
 .thanks_next > div {
   display: grid;
   grid-template-columns: 11rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   font-size: var(--size-text-small);
   line-height: 1.55;
 }
@@ -6224,7 +6224,7 @@ a.line_frame:focus-visible .line_caption {
 @media (max-width: 991px) {
   .book_grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-large);
   }
   .book_side {
     position: static;
@@ -6251,7 +6251,7 @@ a.line_frame:focus-visible .line_caption {
   .book_facts > div,
   .thanks_next > div {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+    gap: var(--space-xxsmall);
   }
   .book_call-number {
     font-size: clamp(2.2rem, 11vw, 3.4rem);
@@ -6280,7 +6280,7 @@ a.line_frame:focus-visible .line_caption {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
 }
 .wall_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -6290,7 +6290,7 @@ a.line_frame:focus-visible .line_caption {
    On this ivory page the widget's grey cards would sink into the ground, so
    the slot is the white, hairlined panel the old quote cards were. */
 .wall_reviews {
-  margin-top: 3rem;
+  margin-top: var(--space-large);
   min-height: 420px;
   padding-block: var(--space-large);
   border: 1px solid var(--line);
@@ -6300,7 +6300,7 @@ a.line_frame:focus-visible .line_caption {
 }
 @media (max-width: 767px) {
   .wall_reviews {
-    margin-top: 2rem;
+    margin-top: var(--space-medium);
     padding-block: var(--space-medium);
   }
 }
@@ -6313,7 +6313,7 @@ a.line_frame:focus-visible .line_caption {
 .plates_grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .plates_copy .heading-style-h2 {
@@ -6348,8 +6348,8 @@ a.line_frame:focus-visible .line_caption {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  padding-bottom: 3rem;
+  gap: var(--space-small);
+  padding-bottom: var(--space-large);
 }
 .plates_plate {
   position: relative;
@@ -6362,7 +6362,7 @@ a.line_frame:focus-visible .line_caption {
   overflow: hidden;
 }
 .plates_plate.is-after {
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .plates_label {
   position: absolute;
@@ -6434,7 +6434,7 @@ a.line_frame:focus-visible .line_caption {
   grid-auto-rows: auto;
   align-items: start;
   gap: 1.25rem;
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .room_frame {
   margin: 0;
@@ -6455,7 +6455,7 @@ a.line_frame:focus-visible .line_caption {
   grid-column: 8 / 13;
   grid-row: 1 / 3;
   aspect-ratio: 4 / 5;
-  margin-top: 4rem;
+  margin-top: var(--space-xlarge);
 }
 .room_frame.is-position-3 {
   grid-column: 3 / 8;
@@ -6475,7 +6475,7 @@ a.line_frame:focus-visible .line_caption {
 }
 .proof_faq .heading-style-h2 {
   margin-top: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-medium);
 }
 
 @media (max-width: 991px) {
@@ -6486,7 +6486,7 @@ a.line_frame:focus-visible .line_caption {
     max-width: 30rem;
   }
   .room_frame.is-position-2 {
-    margin-top: 2rem;
+    margin-top: var(--space-medium);
   }
   .room_frame.is-position-3 {
     grid-column: 1 / 8;
@@ -6499,7 +6499,7 @@ a.line_frame:focus-visible .line_caption {
     gap: 1.25rem;
   }
   .plates_plate.is-after {
-    margin-top: 2rem;
+    margin-top: var(--space-medium);
   }
   .plates_status {
     white-space: normal;
@@ -6542,7 +6542,7 @@ a.line_frame:focus-visible .line_caption {
 }
 .doctor_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .doctor_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -6579,8 +6579,8 @@ a.line_frame:focus-visible .line_caption {
 .doctor_card-body {
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: clamp(2rem, 5vw, 4.5rem);
+  gap: var(--space-small);
+  padding: clamp(var(--space-medium), 5vw, 4.5rem);
 }
 .doctor_card-number {
   font-family: var(--font-display);
@@ -6604,7 +6604,7 @@ a.line_frame:focus-visible .line_caption {
 .doctor_rule-grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .doctor_rule-title {
@@ -6665,8 +6665,8 @@ a.line_frame:focus-visible .line_caption {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: var(--space-medium);
+  margin-bottom: var(--space-large);
 }
 .film_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -6740,7 +6740,7 @@ a.line_frame:focus-visible .line_caption {
   display: grid;
   align-content: space-between;
   height: 100%;
-  padding: 2rem;
+  padding: var(--space-medium);
   color: var(--fg);
 }
 .film_link-text {
@@ -6771,7 +6771,7 @@ a.line_frame:focus-visible .line_caption {
     padding-bottom: var(--space-huge);
   }
   .film_track {
-    padding-bottom: 1rem;
+    padding-bottom: var(--space-small);
   }
   .film_item {
     width: 24rem;
@@ -6790,7 +6790,7 @@ a.line_frame:focus-visible .line_caption {
   }
   .doctor_rule-facts {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .film_head {
     flex-direction: column;
@@ -6834,7 +6834,7 @@ a.line_frame:focus-visible .line_caption {
 .legal_layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 
@@ -6914,7 +6914,7 @@ a.line_frame:focus-visible .line_caption {
   color: var(--fg-body);
 }
 .legal_intro p + p {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .legal_section {
   padding-top: var(--space-large);
@@ -6927,7 +6927,7 @@ a.line_frame:focus-visible .line_caption {
 .legal_heading {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: var(--space-small);
   margin-bottom: 1.1rem;
 }
 .legal_number {
@@ -6945,7 +6945,7 @@ a.line_frame:focus-visible .line_caption {
 }
 .legal_section p + p,
 .legal_section .detail_list + p {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .legal_section .detail_list {
   margin-bottom: 0;

@@ -1,11 +1,12 @@
 # Runbook index
 
-33 runs, newest first. Each line is one file in this folder.
+34 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-08 | 2026-10-08/09 — Phase 2 Client-First STRUCTURE on **staging**: spacing literals → Framework tokens (10% → 41% on tokens, 223 values), 3 contextual overrides → combo classes (`is-navbar`, `is-cover`, `is-doors`; overrides 5 → 2 refused), local source + build carry the same; css parity 0 real ×3 widths ×2 steps, runtime OK, head 0/27; production untouched — carries **gotchas** | [`2026-10-08-phase2-structure.md`](./2026-10-08-phase2-structure.md) |
 | 2026-10-08 | 2026-10-08 — Home shelf on phones: every card open, 4:3, grid (1 column, 2 from ~600px), darker mobile scrim (name ≥4.3:1, meta ≥5.9:1), first tap follows; new `fix-shelf-mobile.mjs` + gate `shelf-test.mjs`; PRODUCTION published, STAGING draft only; first publish broke motion ~5 min (`$$` in String.replace) — carries **gotchas** | [`2026-10-08-shelf-cards-open-on-mobile.md`](./2026-10-08-shelf-cards-open-on-mobile.md) |
 | 2026-10-06 | 2026-10-06, latest — Hours Mon–Fri 9–5 (footer ×27, facts on /, /about, /book) and "Prefer to pick a time yourself? Book online." (Modento, Stone Surgical Arts' account) above the GHL form on /book; new `set-hours-modento.mjs`; PRODUCTION published, STAGING draft only — carries **gotchas** | [`2026-10-06-hours-mon-fri-and-modento.md`](./2026-10-06-hours-mon-fri-and-modento.md) |
 | 2026-10-06 | 2026-10-06 — Client saw no GHL form on /book: our `loading="lazy"` on the iframe + GHL hiding it at left:-9999px = never loads (Firefox 390/768/1366 blank). Lazy removed and fallback fixed by the new `fix-ghl-form.mjs`; PRODUCTION published and verified in Firefox/WebKit/Chrome; STAGING draft only (its draft already had pending edits) — carries **gotchas** | [`2026-10-06-ghl-form-lazy-never-loaded.md`](./2026-10-06-ghl-form-lazy-never-loaded.md) |

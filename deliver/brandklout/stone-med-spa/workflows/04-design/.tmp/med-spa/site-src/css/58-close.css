@@ -30,7 +30,7 @@
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: end;
 }
 .close_title {
@@ -53,7 +53,7 @@
 .close_fact {
   display: grid;
   grid-template-columns: 8rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   align-items: baseline;
 }
 .close_fact-key {

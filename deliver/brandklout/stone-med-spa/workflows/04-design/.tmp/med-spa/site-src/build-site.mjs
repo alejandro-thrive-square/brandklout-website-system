@@ -449,7 +449,7 @@ function treatmentPage(slug) {
       <div class="container-large">
         <div class="cover_inner">
           <p class="text-style-tagline is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>${esc(CATEGORY_NAME(t.category))}</p>
-          <h1 class="cover_title" data-split data-split-now>${p.cover.title}</h1>
+          <h1 class="cover_title" data-split data-split-now>${p.cover.title.split('class="text-style-display-accent"').join('class="text-style-display-accent is-cover"')}</h1>
           <p class="cover_lede">${esc(p.cover.lede)}</p>
           <div class="cover_facts">
 ${p.cover.facts.map((f) => `            <p class="cover_fact"><span class="cover_fact-number">${esc(f.num)}</span><span>${esc(f.label)}</span></p>`).join("\n")}

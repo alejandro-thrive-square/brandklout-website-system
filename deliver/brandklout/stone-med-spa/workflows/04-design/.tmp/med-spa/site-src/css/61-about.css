@@ -14,7 +14,7 @@
 /* --- the names -------------------------------------------------------------- */
 .names_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .names_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -66,7 +66,7 @@
 .names_body {
   display: grid;
   align-content: end;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 2.5rem;
 }
 .names_index {
@@ -104,7 +104,7 @@
 .line_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 3fr);
-  gap: 2rem;
+  gap: var(--space-medium);
   align-items: center;
 }
 .line_frame {
@@ -115,11 +115,11 @@
 }
 .line_frame.is-left {
   aspect-ratio: 4 / 5;
-  margin-top: 5rem;
+  margin-top: var(--space-xxlarge);
 }
 .line_frame.is-right {
   aspect-ratio: 3 / 4;
-  margin-bottom: 5rem;
+  margin-bottom: var(--space-xxlarge);
 }
 .line_frame img {
   width: 100%;
@@ -131,7 +131,7 @@
   left: 1rem;
   bottom: 1rem;
   z-index: 3;
-  padding: 0.5rem 0.9rem;
+  padding: var(--space-xsmall) 0.9rem;
   border-radius: var(--radius);
   background: rgba(39, 39, 39, 0.72);
   color: var(--white);
@@ -140,7 +140,7 @@
   text-transform: uppercase;
 }
 .line_copy {
-  padding-inline: 1rem;
+  padding-inline: var(--space-small);
 }
 .line_copy .heading-style-h2 {
   margin-top: 1.25rem;
@@ -154,7 +154,7 @@
 /* --- the rules --------------------------------------------------------------- */
 .rules_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .rules_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -166,10 +166,10 @@
   align-items: start;
 }
 .rules_tile:nth-child(2) {
-  margin-top: 4rem;
+  margin-top: var(--space-xlarge);
 }
 .rules_tile:nth-child(3) {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
 }
 .rules_media {
   margin: 0;
@@ -190,7 +190,7 @@
 .rules_body {
   display: grid;
   grid-template-columns: 2.5rem 1fr;
-  gap: 0.35rem 1rem;
+  gap: 0.35rem var(--space-small);
   padding-top: 1.4rem;
 }
 .rules_number {
@@ -215,7 +215,7 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
 }
 .room_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -231,7 +231,7 @@
 }
 .room_rail {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-small);
   align-items: stretch;
   height: clamp(18rem, 42vh, 30rem);
   padding-right: 5%;
@@ -257,8 +257,8 @@
 .room_facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: var(--space-medium);
+  margin-top: var(--space-large);
   padding-top: 1.5rem;
   padding-bottom: var(--space-xhuge);
   border-top: 1px solid var(--line);
@@ -291,7 +291,7 @@
     grid-column: 1 / -1;
     order: -1;
     padding-inline: 0;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-small);
   }
   .line_frame.is-left,
   .line_frame.is-right {

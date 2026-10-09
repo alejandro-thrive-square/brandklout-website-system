@@ -12,9 +12,9 @@
 .people_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 2rem 5rem;
+  gap: var(--space-medium) var(--space-xxlarge);
   align-items: end;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .people_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -34,7 +34,7 @@
   gap: 2.5rem 1.5rem;
 }
 .people_card:nth-child(4n + 2) {
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .people_card:nth-child(4n + 4) {
   margin-top: 1.5rem;
@@ -45,7 +45,7 @@
    by the same stagger the four-up grid used. */
 .people_grid.is-pair {
   grid-template-columns: repeat(2, minmax(0, 24rem));
-  gap: 2.5rem 3rem;
+  gap: 2.5rem var(--space-large);
 }
 .people_grid.is-pair .people_name {
   font-size: var(--size-h4);
@@ -84,12 +84,12 @@
   color: var(--line-strong);
 }
 .people_name {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
   font-size: var(--size-h5);
   line-height: 1.2;
 }
 .people_role {
-  margin-top: 0.25rem;
+  margin-top: var(--space-xxsmall);
   font-size: var(--size-text-tiny);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -160,7 +160,7 @@
   text-transform: uppercase;
 }
 .strip_bar {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   height: 2px;
   background: var(--line);
 }
@@ -176,7 +176,7 @@
 .lead_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .lead_frame {
@@ -202,7 +202,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 12rem));
   gap: 1.5rem;
-  margin: 2rem 0;
+  margin: var(--space-medium) 0;
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
@@ -252,7 +252,7 @@
 }
 @media (max-width: 767px) {
   .people_grid {
-    gap: 2rem 1rem;
+    gap: var(--space-medium) var(--space-small);
   }
   .strip_track {
     height: 16rem;

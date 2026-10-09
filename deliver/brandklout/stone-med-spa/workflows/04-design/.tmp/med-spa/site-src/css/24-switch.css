@@ -15,7 +15,7 @@
    host. It becomes the real domain when one is chosen. */
 .footer_switch {
   display: inline-grid;
-  gap: 0.25rem;
+  gap: var(--space-xxsmall);
   margin-top: 1.6rem;
   padding: 0.9rem 1.2rem;
   border: 1px solid var(--line);

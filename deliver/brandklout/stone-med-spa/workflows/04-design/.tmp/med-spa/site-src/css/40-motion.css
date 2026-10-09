@@ -286,7 +286,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 0.5rem;
+    padding-bottom: var(--space-xsmall);
   }
   .horizontal-scroll_track::-webkit-scrollbar {
     display: none;

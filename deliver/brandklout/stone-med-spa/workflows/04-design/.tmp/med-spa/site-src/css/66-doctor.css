@@ -16,7 +16,7 @@
 }
 .doctor_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .doctor_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -53,8 +53,8 @@
 .doctor_card-body {
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: clamp(2rem, 5vw, 4.5rem);
+  gap: var(--space-small);
+  padding: clamp(var(--space-medium), 5vw, 4.5rem);
 }
 .doctor_card-number {
   font-family: var(--font-display);
@@ -78,7 +78,7 @@
 .doctor_rule-grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .doctor_rule-title {
@@ -139,8 +139,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 3rem;
+  gap: var(--space-medium);
+  margin-bottom: var(--space-large);
 }
 .film_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -214,7 +214,7 @@
   display: grid;
   align-content: space-between;
   height: 100%;
-  padding: 2rem;
+  padding: var(--space-medium);
   color: var(--fg);
 }
 .film_link-text {
@@ -245,7 +245,7 @@
     padding-bottom: var(--space-huge);
   }
   .film_track {
-    padding-bottom: 1rem;
+    padding-bottom: var(--space-small);
   }
   .film_item {
     width: 24rem;
@@ -264,7 +264,7 @@
   }
   .doctor_rule-facts {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .film_head {
     flex-direction: column;

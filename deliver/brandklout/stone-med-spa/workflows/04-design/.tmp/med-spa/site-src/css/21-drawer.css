@@ -33,7 +33,7 @@
   width: min(24rem, 88vw);
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1.75rem 2rem;
+  padding: 1.5rem 1.75rem var(--space-medium);
   background-color: var(--bg);
   border-left: 1px solid var(--line);
   overflow-y: auto;
@@ -81,7 +81,7 @@
 
 .drawer_foot {
   margin-top: auto;
-  padding-top: 2rem;
+  padding-top: var(--space-medium);
   display: grid;
   gap: 0.9rem;
 }
@@ -94,8 +94,8 @@
 .drawer_sub {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.2rem 1rem;
-  padding: 0.75rem 0 1rem;
+  gap: 0.2rem var(--space-small);
+  padding: 0.75rem 0 var(--space-small);
   border-bottom: 1px solid var(--line);
 }
 .drawer_sub-link {

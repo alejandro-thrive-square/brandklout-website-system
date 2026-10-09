@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: var(--space-medium);
   min-height: 5.5rem;
 }
 
@@ -103,13 +103,13 @@
 .navbar_actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--space-small);
   flex: 0 0 auto;
 }
 .navbar_phone {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-xsmall);
   font-size: var(--size-text-small);
   font-weight: 500;
   color: var(--fg);
@@ -188,7 +188,7 @@
   }
 }
 @media (max-width: 767px) {
-  .navbar_actions .button {
+  .button.is-navbar {
     display: none;
   }
 }
@@ -229,7 +229,7 @@
   display: grid;
   grid-template-columns: repeat(4, max-content);
   gap: 1.5rem 2.5rem;
-  padding: 1.75rem 2rem;
+  padding: 1.75rem var(--space-medium);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
   background-color: var(--ivory);
@@ -259,7 +259,7 @@
 }
 .navbar_sub-all {
   grid-column: 1 / -1;
-  padding-top: 1rem;
+  padding-top: var(--space-small);
   border-top: 1px solid var(--line);
   font-size: var(--size-text-tiny);
   font-weight: 500;

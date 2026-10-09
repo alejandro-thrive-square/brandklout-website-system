@@ -15,7 +15,7 @@
 /* --- financing: the stack ------------------------------------------------------ */
 .pay_head {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .pay_head .heading-style-h2 {
   margin-top: 1.25rem;
@@ -42,8 +42,8 @@
 .pay_card-copy {
   display: grid;
   align-content: center;
-  gap: 1rem;
-  padding: 3rem;
+  gap: var(--space-small);
+  padding: var(--space-large);
 }
 .pay_card-index {
   font-family: var(--font-display);
@@ -52,14 +52,14 @@
   line-height: 1;
 }
 .pay_card-title {
-  margin-top: 0.25rem;
+  margin-top: var(--space-xxsmall);
 }
 .pay_card-text {
   max-width: 34ch;
   color: var(--fg-body);
 }
 .pay_card-meta {
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
   font-size: var(--size-text-tiny);
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -145,7 +145,7 @@
 .plan_faq-grid {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: start;
 }
 .plan_faq-media {
@@ -163,14 +163,14 @@
 }
 .plan_faq-title {
   margin-top: 1.25rem;
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-medium);
 }
 
 /* --- membership: the question ---------------------------------------------------- */
 .question_grid {
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .question_title {
@@ -205,16 +205,16 @@
 .tiers_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-  gap: 2rem 4rem;
+  gap: var(--space-medium) var(--space-xlarge);
   align-items: end;
-  margin-bottom: 3rem;
+  margin-bottom: var(--space-large);
 }
 .tiers_head .heading-style-h2 {
   margin-top: 1.25rem;
 }
 .tiers_flag {
   color: var(--fg-mute);
-  padding: 1rem 1.25rem;
+  padding: var(--space-small) 1.25rem;
   border-left: 2px solid var(--charcoal);
 }
 .tiers_split {
@@ -226,7 +226,7 @@
 .tier_card {
   display: grid;
   align-content: start;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 2.5rem;
   border-radius: var(--radius-frame);
   background: var(--bg-card);
@@ -254,14 +254,14 @@
 }
 .tier_lines {
   list-style: none;
-  margin: 1rem 0 1.5rem;
+  margin: var(--space-small) 0 1.5rem;
   padding: 0;
   border-top: 1px solid var(--line);
 }
 .tier_lines li {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--space-small);
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--line);
   font-size: var(--size-text-small);
@@ -300,7 +300,7 @@
 /* The lender cards carry their application link (financing, 2026-09-15). */
 .pay_card-button {
   justify-self: start;
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
 }
 .tiers_media img {
   width: 100%;
@@ -329,7 +329,7 @@
 }
 .faces_frame.is-tall {
   aspect-ratio: 3 / 4;
-  margin-top: 3rem;
+  margin-top: var(--space-large);
 }
 .faces_frame img {
   width: 100%;
@@ -353,7 +353,7 @@
     min-height: 0;
   }
   .pay_card-copy {
-    padding: 2rem;
+    padding: var(--space-medium);
   }
   .pay_card-media {
     min-height: 14rem;
@@ -387,12 +387,12 @@
 @media (max-width: 767px) {
   .principle_facts {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .principle_fact {
     grid-template-columns: 5rem 1fr;
     align-items: baseline;
-    gap: 1rem;
+    gap: var(--space-small);
   }
   .tiers_split {
     grid-template-columns: 1fr;

@@ -45,7 +45,7 @@
 .words_head {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
-  gap: 3rem;
+  gap: var(--space-large);
   align-items: center;
 }
 .words_photo {
@@ -63,7 +63,7 @@
 @media (max-width: 767px) {
   .words_head {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--space-medium);
   }
   .words_photo {
     max-width: 18rem;
@@ -76,8 +76,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
-  margin-top: 4rem;
+  gap: var(--space-medium);
+  margin-top: var(--space-xlarge);
 }
 /* THE LIVE REVIEWS (Elfsight Google Reviews, 2026-09-30). The rail of
    `.quote_card`s this replaces, and its arrows, are in git before that date.
@@ -92,7 +92,7 @@
    On Instatic the widget is one level deeper — the Embed block wraps it in
    `.wz-embed` — which is a block and needs nothing from us. */
 .words_reviews {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   min-height: 420px;
   /* the widget runs edge to edge; without this its title sat on the panel's top edge */
   padding-block: var(--space-large);

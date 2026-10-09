@@ -73,7 +73,7 @@ html:not(.js) .cover_media > img {
   align-items: end;
 }
 .cover_inner {
-  padding-top: 8rem;
+  padding-top: var(--space-xhuge);
   padding-bottom: 3.5rem;
   max-width: 56rem;
 }
@@ -87,7 +87,7 @@ html:not(.js) .cover_media > img {
   color: var(--white);
   max-width: 14ch;
 }
-.cover_title .text-style-display-accent {
+.text-style-display-accent.is-cover {
   color: var(--green);
 }
 .cover_lede {
@@ -98,7 +98,7 @@ html:not(.js) .cover_media > img {
   color: rgba(255, 255, 255, 0.84);
 }
 .cover_actions {
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
 }
 .cover_crumb {
   color: rgba(255, 255, 255, 0.72);

@@ -14,7 +14,7 @@
 .book_grid {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 .book_side {
@@ -39,14 +39,14 @@
 .book_facts {
   display: grid;
   gap: 0.9rem;
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
 .book_facts > div {
   display: grid;
   grid-template-columns: 5rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   font-size: var(--size-text-small);
   line-height: 1.55;
 }
@@ -79,8 +79,8 @@
 .path_card {
   display: grid;
   align-content: start;
-  gap: 1rem;
-  padding: 2rem;
+  gap: var(--space-small);
+  padding: var(--space-medium);
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-card);
@@ -108,13 +108,13 @@
 }
 .path_card .button {
   justify-self: start;
-  margin-top: 0.5rem;
+  margin-top: var(--space-xsmall);
 }
 
 /* --- the form --------------------------------------------------------------- */
 .form_component {
-  margin-top: 4rem;
-  padding-top: 3rem;
+  margin-top: var(--space-xlarge);
+  padding-top: var(--space-large);
   border-top: 1px solid var(--line);
 }
 .form_title {
@@ -162,7 +162,7 @@
   max-width: 46ch;
 }
 .form_privacy {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
   font-size: var(--size-text-tiny);
   color: var(--fg-mute);
   max-width: 52ch;
@@ -190,7 +190,7 @@
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
-  gap: 3rem 5rem;
+  gap: var(--space-large) var(--space-xxlarge);
   align-items: center;
 }
 .book_call-number {
@@ -283,14 +283,14 @@
 .thanks_next {
   display: grid;
   gap: 0.9rem;
-  margin-top: 2rem;
+  margin-top: var(--space-medium);
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
 }
 .thanks_next > div {
   display: grid;
   grid-template-columns: 11rem 1fr;
-  gap: 1rem;
+  gap: var(--space-small);
   font-size: var(--size-text-small);
   line-height: 1.55;
 }
@@ -315,7 +315,7 @@
 @media (max-width: 991px) {
   .book_grid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--space-large);
   }
   .book_side {
     position: static;
@@ -342,7 +342,7 @@
   .book_facts > div,
   .thanks_next > div {
     grid-template-columns: 1fr;
-    gap: 0.25rem;
+    gap: var(--space-xxsmall);
   }
   .book_call-number {
     font-size: clamp(2.2rem, 11vw, 3.4rem);

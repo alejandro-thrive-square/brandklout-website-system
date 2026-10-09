@@ -71,7 +71,7 @@
 .menu_group-head {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 2.5rem 5rem;
+  gap: 2.5rem var(--space-xxlarge);
   align-items: end;
   margin-bottom: 2.5rem;
 }
@@ -178,11 +178,11 @@
 .row_vitals {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: var(--space-small);
 }
 .row_vital {
   display: grid;
-  gap: 0.25rem;
+  gap: var(--space-xxsmall);
   min-width: 0;
 }
 .row_vital-key {
@@ -234,8 +234,8 @@
 .row_detail {
   display: grid;
   grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
-  gap: 2rem 4rem;
-  padding: 0.5rem 0 2.75rem 5.5rem;
+  gap: var(--space-medium) var(--space-xlarge);
+  padding: var(--space-xsmall) 0 2.75rem 5.5rem;
   align-items: start;
 }
 .row_figure {
@@ -306,7 +306,7 @@
   color: var(--fg-mute);
 }
 .menu_empty {
-  padding: 3rem 0;
+  padding: var(--space-large) 0;
   font-family: var(--font-display);
   font-size: var(--size-h4);
   color: var(--fg);
@@ -410,7 +410,7 @@
   transform: translateY(0.5rem);
   transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
 }
-.doors_body .button {
+.button.is-doors {
   opacity: 0;
   transform: translateY(0.5rem);
   transition: opacity 0.4s var(--ease) 0.1s, transform 0.5s var(--ease) 0.1s;
@@ -446,7 +446,7 @@
     grid-template-areas:
       "index thumb name toggle"
       "index thumb vitals vitals";
-    row-gap: 1rem;
+    row-gap: var(--space-small);
   }
   .row_thumb {
     grid-area: thumb;
@@ -493,7 +493,7 @@
   }
   .row_vitals {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem 1rem;
+    gap: 0.75rem var(--space-small);
   }
   .row_detail {
     padding-left: 0;
@@ -513,7 +513,7 @@
     min-height: 17rem;
   }
   .doors_text,
-  .doors_body .button,
+  .button.is-doors,
   .doors_component:hover .doors_door.is-open:not(:hover) .doors_text,
   .doors_component:hover .doors_door.is-open:not(:hover) .doors_body .button {
     opacity: 1;

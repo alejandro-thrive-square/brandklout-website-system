@@ -17,7 +17,7 @@
 .legal_layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(0, 8fr);
-  gap: 3rem 6rem;
+  gap: var(--space-large) var(--space-huge);
   align-items: start;
 }
 
@@ -97,7 +97,7 @@
   color: var(--fg-body);
 }
 .legal_intro p + p {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .legal_section {
   padding-top: var(--space-large);
@@ -110,7 +110,7 @@
 .legal_heading {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
+  gap: var(--space-small);
   margin-bottom: 1.1rem;
 }
 .legal_number {
@@ -128,7 +128,7 @@
 }
 .legal_section p + p,
 .legal_section .detail_list + p {
-  margin-top: 1rem;
+  margin-top: var(--space-small);
 }
 .legal_section .detail_list {
   margin-bottom: 0;
