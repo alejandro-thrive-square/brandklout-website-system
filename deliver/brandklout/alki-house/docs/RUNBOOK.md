@@ -24,6 +24,7 @@ in [`cms-schema.md`](./cms-schema.md).
 | Ordering | Cart in `localStorage` (`sections/cart.js`) → `pedido.html` → `wa.me/<number>?text=<order>` (`sections/pedido.js`). **The number is not set** — `site-src/data/site.json` |
 | Assets | `03-graphic-resources/.tmp/scenes/` (AI, video, stock) and `product-images/<id>/` (harvested), prepared into `site-src/assets/` by `prepare-assets.py`; all gitignored, all reproducible |
 | Gates | Journey audit, fluid root, scrub proof, console and an end-to-end cart test on the last run — see the newest runbook entry |
+| Current inventory | **The WhatsApp Business catalogue**, extracted 2026-10-09: 73 products, prices in Bs, 143 of the client's own photos — `workflows/01-content-intake/.tmp/whatsapp-catalog/` (`catalog.json`, method in its README). Newer than the ledger the site's 235 products came from; not yet wired into the site. |
 | `.env` | Generated: `[shared]` + `[alki-house]`. The client section is empty. |
 | Hosting | None. No Instatic instance, no Railway service, no domain recorded. |
 
@@ -40,6 +41,8 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
 
 ## Next
 
+0. Decide whether the **WhatsApp catalogue replaces the ledger** as the CMS source (73 vs 235
+   products, Bs vs $, the client's photos vs harvested ones) — see the 2026-10-09 run.
 1. The shop's **WhatsApp number** into `site-src/data/site.json`, rebuild.
 2. The client's other answers under Open questions in `project-overview.md` (country and city,
    payment wording, domain, photos, draft specs).
@@ -60,6 +63,9 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
   the fluid-root gate rejects px font-sizes even on inputs. Details in the 2026-09-13 build run.
 - Headless clicks right after a scroll miss while ScrollSmoother eases; wait ~2.5 s first.
 - Node fetch scripts must not write to a pipe on this machine — redirect to a log.
+- **WhatsApp Web's catalogue panel stops at 10 products**; page `WAWebCollections.Catalog` instead
+  (`whatsapp-catalog/extract.js`). `assets.mjs push` uploads every untracked file, so commit text
+  outputs before pushing media.
 
 ## Version Control
 

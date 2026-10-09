@@ -1,11 +1,12 @@
 # Runbook index
 
-4 runs, newest first. Each line is one file in this folder.
+5 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-09 | DONE 2026-10-09 - WHATSAPP CATALOGUE EXTRACTED. 73 products + 143 client photos from the shop's WhatsApp Business catalogue (WhatsApp Web, Claude in Chrome on WhatsApp's own models) into `01-content-intake/.tmp/whatsapp-catalog/`; prices in Bs; ~12 not in the ledger. Site untouched. **Open: does it replace the ledger as the CMS source? Gotchas: the panel stops paging at 10; tool output redacts signed URLs; Chrome downloads land in its last-used folder; commit text before `assets.mjs push`.** | [`2026-10-09-whatsapp-catalogue-extracted.md`](./2026-10-09-whatsapp-catalogue-extracted.md) |
 | 2026-09-13 | DONE 2026-09-13 (later, `3e38116c`) - SPANISH SITE + WHATSAPP CART. Every page, name and URL in Spanish; cart saved in the browser; `pedido.html` sends the whole order to WhatsApp; gates and an end-to-end cart test passed. **WhatsApp number still missing (`data/site.json`). Gotchas: key on `id`, never `slug`; the cart is a snapshot; clicks during ScrollSmoother easing miss.** | [`2026-09-13-spanish-site-whatsapp-cart.md`](./2026-09-13-spanish-site-whatsapp-cart.md) |
 | 2026-09-13 | DONE 2026-09-13 (`6591b8f7`) - LOCAL BUILD: home, catalogue, product template; 235-product CMS from the ledger; scenes, video and product cut-outs; gates passed. **Gotchas: audit wants literal `pin:true`; Draggable scrollLeft breaks flex rails; NaN in a trigger end = zero-length pin.** | [`2026-09-13-local-build-home-catalogue-product.md`](./2026-09-13-local-build-home-catalogue-product.md) |
 | 2026-09-12 | DONE 2026-09-12 (later) - WORKFLOW MODULES COPIED. Development-from-Scratch route, `00` + `01`-`06` + `08`-`10`; `07-webflow-build` skipped for Instatic. Reference drop folders created. **Gotchas: pasted images are gitignored.** | [`2026-09-12-workflow-modules-copied.md`](./2026-09-12-workflow-modules-copied.md) |
