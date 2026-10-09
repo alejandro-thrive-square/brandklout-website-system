@@ -183,6 +183,17 @@
       "note": "Provisioned 2026-09-10 name-first via tools/instatic-site/setup/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet — westlaimplants.com is still the WordPress site. Homepage-only review build."
     },
     {
+      "client": "west-la-implants-staging",
+      "adminUrl": "https://west-la-implants-staging.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "a55b5cac-b92d-4653-a9ff-6da522a5c89c",
+        "service": "West LA Implants",
+        "environment": "staging"
+      },
+      "note": "Created 2026-10-08 (process 21 staging clone) for the Client-First migration: Railway environment `staging` (900c770b), own volume, PUBLIC_ORIGIN = this host only, same login as production. The client zone is on GoDaddy, not our Cloudflare, so there is no staging.<domain> and no edge X-Robots-Tag: site.js writes meta robots noindex and the staging og:url host-conditionally (marker WZ_STAGING_NOINDEX), and the GHL number-pool siteScripts lines are off here. check-noindex (raw HTML) and the header line of verify-staging-clean fail by construction on this host; every rendered check passes. Form submissions reach the real inbox. Replace with staging.<domain> once the zone moves to Cloudflare."
+    },
+    {
       "client": "dr-nahlah-staging",
       "adminUrl": "https://staging.drnahlah.com",
       "alternates": [],
