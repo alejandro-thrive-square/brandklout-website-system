@@ -2,7 +2,7 @@
 
 Brief (Alejandro, 2026-10-09): "yes, replace the ledger with the WhatsApp catalogue."
 
-## Done (commit `<sha>`)
+## Done (commit `9a63f58a`)
 
 The site's products now come from the shop's WhatsApp Business catalogue (73 products, prices in
 Bs, the client's own photos) instead of the purchase ledger (235 products, $, harvested photos).

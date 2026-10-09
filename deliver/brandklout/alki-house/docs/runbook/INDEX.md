@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-10-09 | DONE 2026-10-09 (later, `<sha>`) - WHATSAPP CATALOGUE REPLACES THE LEDGER. 73 products, Bs prices, statuses disponible / en camino / agotado, the client's photos (ribbon shots kept whole, wordmarks dropped); stage, kits, hero repointed; cart v2. Gates: journey PASS, fluid root 77/77, console/overflow clean, cart e2e 38/38. **Client: 14 blank prices, a `15# Runbook index
+| 2026-10-09 | DONE 2026-10-09 (later, `9a63f58a`) - WHATSAPP CATALOGUE REPLACES THE LEDGER. 73 products, Bs prices, statuses disponible / en camino / agotado, the client's photos (ribbon shots kept whole, wordmarks dropped); stage, kits, hero repointed; cart v2. Gates: journey PASS, fluid root 77/77, console/overflow clean, cart e2e 38/38. **Client: 14 blank prices, a `15# Runbook index
 
 6 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
