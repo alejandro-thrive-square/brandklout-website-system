@@ -2087,6 +2087,10 @@ button { font: inherit; }
    nothing, which is what the previous build shipped. */
 .pr-badges img { height: 2.6rem; width: auto; object-fit: contain; opacity: .9; }
 @media (max-width: 767px) { .pr-badges img { height: 2rem; } }
+/* A dark strip that closes its chapter closes it flush (2026-10-09, client): the chapter's
+   bottom padding left a cream band between the strip and the dark chapter after it. Not in
+   the Invitation, where the strip is transparent on the dark ground. */
+.ch:not(.ch-invitation):has(> .pr-badges:last-child) { padding-bottom: 0; }
 
 /* ===========================================================================
    CHAPTER 07 — THE INVITATION

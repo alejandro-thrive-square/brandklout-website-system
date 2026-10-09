@@ -1,11 +1,12 @@
 # Runbook index
 
-35 runs, newest first. Each line is one file in this folder.
+36 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-09 | 2026-10-09 — **Home feedback (production)**: no cream gap under the dark badge strip (`.ch:has(> .pr-badges:last-child)` padding-bottom 0, site.css = prod asset), wall tile and "At the desk" photos swapped for non-repeated ones; staging still without the rule | [`2026-10-09-home-feedback-badges-photos.md`](./2026-10-09-home-feedback-badges-photos.md) |
 | 2026-10-09 | 2026-10-09 — **Yelp separation on PRODUCTION (temporary)**: Dr. Nguyen 0 mentions on 95 pages + 161 articles; Team/Nguyen/pediatric pages forward; nav, badges, kid photos (incl. 253-photo visual sweep), shared photos, building sign, heroes, share images, 14 descriptions, 194 page edits, 47 articles (4 slugs renamed, 301); sitemap 238; staging + source untouched, never push them over it — carries **gotchas** | [`2026-10-09-yelp-separation-production.md`](./2026-10-09-yelp-separation-production.md) |
 | 2026-10-08 | 2026-10-08/09 — **Phase 2 structure on staging** (seq 162 → 165): house spacing scale + 3 type tokens in the Framework (382 rem values on tokens, 10% → 42%), 9 contextual button overrides → combo classes on 65 pages, 182 split classes folded into their chip (218 → 36); css parity 0 real at 1440/390/1920 after each step and at 1100/850/600/420 around the fold, runtime before→after traced, head 0/224, EDITABLE · IN BOUNDS · CLEAN · canvas ok; 31 overrides + 36 split classes left for a person; local source left pre-phase-1 on purpose — carries **gotchas** | [`2026-10-08-phase2-structure.md`](./2026-10-08-phase2-structure.md) |
 | 2026-10-08 | 2026-10-08 — **Mobile menu fixed**: tapping Services/About/Patients slid the submenu half its width off the drawer (desktop `:focus-within` `translateX(-50%)` outranked the drawer reset), live on both instances since launch; fixed in site.css, staging registry and production asset, both published; new gate `nav-menus.mjs` on main (104 problems before, none after) — carries **gotchas** | [`2026-10-08-mobile-menu-submenus.md`](./2026-10-08-mobile-menu-submenus.md) |
