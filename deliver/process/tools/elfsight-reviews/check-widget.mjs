@@ -45,6 +45,7 @@ if (s.showOverallRating === false) problem('overall rating hidden in the header'
 if (s.showWriteReviewButton !== true) problem('write-a-review button off')
 if (s.AISummary !== false) problem('AI summary on: it adds its own label and block above the cards')
 if (s.showElfsightLogo === true) problem('Elfsight logo shown')
+if (s.widgetWidth && s.widgetWidth.auto !== true) problem(`widget width fixed at ${s.widgetWidth.customValue}px: set Width to Full Width (auto) so the widget fills its section (Mason Park, 2026-10-09: 1280px left a gap each side of a 1525px section)`)
 // Reviews with photos skip the short-text cut: one card runs 14 lines next to 3-line ones.
 if (s.reviewDisplayImages === true) problem('review photos on: those cards are not shortened (Carousel template default)')
 if (s.reviewDisplaySource === false) problem('Google icon on the cards hidden')

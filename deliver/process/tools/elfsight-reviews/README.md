@@ -61,6 +61,7 @@ logo, 4.9, (97), `#93644A` pill button, `#F6F3EE` cards at 14px on a white secti
 | Plate | Widget and header background transparent: the section is the plate. **Exception: the embed sits in a site card with no padding** (Stone Med Spa: a white card on a dark section): give the widget that card's colour and 32px padding, header text dark. Look before choosing: a white box behind the widget may be the site's, not Elfsight's. The editor hides padding while the background is transparent; `--render` measures the gap to the box behind and the header-text contrast | `widgetBackground`, `headerBackgroundColor`, render `inset`, `edge` |
 | Font | *Default (Apply from Website)*: inherits the page font, also into the shadow root. Stored as an empty `font: {}` | `themeSettings.font`, render `cardFont` = `pageFont` |
 | Off | AI summary (adds its own label and block), Elfsight logo | `AISummary: false`, `showElfsightLogo` |
+| **Width** | **Full Width** (the editor's name for auto): the widget fills its section. The default custom 1280px leaves a gap each side of a wider section (Mason Park, 2026-10-09) | `widgetWidth.auto` |
 | Arrows, dots | Arrow background = button colour, icon = button text colour; dots = heading colour | `carouselArrow*`, `carouselPaginationColor` |
 
 Light themes only (Brandklout: dark sites do not convert): never Elfsight's dark theme.
