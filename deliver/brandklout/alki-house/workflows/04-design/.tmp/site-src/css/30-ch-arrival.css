@@ -14,27 +14,41 @@
 .ar-copy .lead{margin-bottom:2rem}
 .ar-actions{display:flex;gap:.9rem;flex-wrap:wrap}
 
-.ar-stage{position:relative;margin:0;aspect-ratio:1/1;max-height:70svh;display:grid;place-items:center;align-self:center}
-.ar-plate{position:absolute;inset:8% 6% 4%;border-radius:50%;
-  background:radial-gradient(60% 60% at 50% 40%,rgba(255,235,183,.16) 0%,rgba(166,94,42,.12) 45%,rgba(30,16,10,0) 72%)}
-.ar-plate span{position:absolute;left:12%;right:12%;bottom:6%;height:10%;border-radius:50%;background:rgba(30,16,10,.75);filter:blur(14px)}
-.ar-product{position:relative;width:78%;display:block;will-change:transform;filter:drop-shadow(0 40px 60px rgba(0,0,0,.55))}
-.ar-product img{width:100%;height:auto;aspect-ratio:1/1;object-fit:contain}
-.ar-cap{position:absolute;right:0;bottom:6%;display:flex;flex-direction:column;gap:.2rem;text-align:right;font-size:var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--apricot-deep)}
-.ar-cap b{font-weight:500;color:var(--apricot-soft)}
+/* The product is in the film (right of the headline); the right column only carries what is on
+   screen: the aisle's name, a link to it, and one pill per aisle that fills while it plays. */
+.ar-scene{position:relative;margin:0;align-self:end;justify-self:end;display:flex;flex-direction:column;align-items:flex-end;gap:1.1rem;padding-bottom:3.4rem;text-align:right}
+.ar-cap{display:flex;flex-direction:column;align-items:flex-end;gap:.35rem}
+.ar-cap-k{font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;color:var(--apricot-deep)}
+.ar-cap-name{display:block;overflow:hidden;padding-block:.1em}
+.ar-cap-in{display:flex;flex-direction:column;align-items:flex-end;gap:.25rem}
+.ar-cap-name b{font-family:var(--f-display);font-weight:600;font-size:calc(1.35rem * var(--t-lg));letter-spacing:-.02em;line-height:1.05;color:var(--apricot-soft)}
+.ar-cap-name .mono{font-size:var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft);transition:color .3s var(--ease)}
+.ar-cap-name:hover .mono,.ar-cap-name:focus-visible .mono{color:var(--apricot)}
+.ar-dots{display:flex;gap:.45rem}
+.ar-dot{position:relative;width:2.4rem;height:1.6rem;padding:0;background:none;border:0;cursor:pointer}
+.ar-dot::before,.ar-dot i{content:"";position:absolute;left:0;right:0;top:50%;height:.14rem;margin-top:-.07rem;border-radius:1rem;background:rgba(255,235,183,.22)}
+.ar-dot i{right:auto;width:calc(var(--p,0) * 100%);background:var(--apricot)}
+.ar-dot.is-on::before{background:rgba(255,235,183,.38)}
+.ar-dot:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:.2rem}
 
 .ar-ticker{position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:1rem;background:rgba(30,16,10,.35);backdrop-filter:blur(6px)}
 .ar-track span{font-size:calc(1.6rem * var(--t-lg));font-weight:600;color:var(--apricot-soft)}
 .ar-cue{position:absolute;left:var(--gutter);bottom:5.4rem;z-index:2;display:flex;align-items:center;gap:.7rem;color:var(--apricot-deep);font-size:var(--label);letter-spacing:.14em;text-transform:uppercase}
 .ar-cue i{width:1px;height:3rem;background:var(--apricot-deep);transform-origin:top}
 
+/* Tablets and phones: behind a full-width headline the product sat under the words. The film
+   becomes a panel under the nav, cropped to its product (62.5 % across the 16:9 frame); then what
+   is on screen ("En escena" + pills), then the headline on solid ground. */
 @media(max-width:991px){
-  .ar-in{grid-template-columns:1fr;padding-top:6rem;gap:1.5rem}
-  .ar-stage{max-height:40svh;width:min(62vw,22rem);margin-inline:auto;align-self:start;aspect-ratio:auto;display:flex;flex-direction:column;align-items:center;gap:.6rem}
-  .ar-plate{inset:0 0 14%}
-  .ar-product{width:100%}
-  .ar-cap{position:static;text-align:center;align-items:center}
-  .ar-copy{padding-bottom:1rem;order:2}
+  .ch-arrival{min-height:0;justify-content:flex-start}
+  .ar-film{order:1;position:relative;inset:auto;width:100%;aspect-ratio:1/1;max-height:54svh;margin-top:4.5rem}
+  .ar-film video,.ar-film img{object-position:67% 50%}
+  .ar-veil{background:linear-gradient(180deg,var(--coffee-950) 0%,rgba(30,16,10,0) 18%,rgba(30,16,10,0) 70%,var(--coffee-950) 100%)}
+  .ar-in{order:2;grid-template-columns:1fr;padding-top:0;gap:1.6rem;flex:none}
+  .ar-scene{order:1;justify-self:start;align-items:flex-start;text-align:left;padding-bottom:0;gap:.7rem;margin-top:-2.6rem}
+  .ar-copy{order:2;padding-bottom:1.6rem}
+  .ar-cap,.ar-cap-in{align-items:flex-start}
+  .ar-ticker{order:3}
   .ar-cue{display:none}
 }
-@media(max-width:767px){ .ar-copy h1{max-width:8em} .ar-stage{margin-top:1rem} }
+@media(max-width:767px){ .ar-copy h1{max-width:8em} }

@@ -24,7 +24,7 @@ in [`cms-schema.md`](./cms-schema.md).
 | Language | Spanish, Latin-American usage. Product names are the client's own, from WhatsApp |
 | CMS | `site-src/data/products.json`, 73 products from the WhatsApp catalogue (`workflows/01-content-intake/.tmp/whatsapp-catalog/catalog.json`) via `build-catalogue.mjs` + `catalogue-overrides.json`; `id`/`slug` fixed per WhatsApp product in `data/catalogue-keys.json`; prices in **Bs**; status `disponible` / `en-camino` / `agotado`. No sync yet: re-extract by hand (steps in `cms-schema.md`) |
 | Ordering | Cart in `localStorage` (`sections/cart.js`) → `pedido.html` → `wa.me/<number>?text=<order>` (`sections/pedido.js`). **The number is not set** — `site-src/data/site.json` |
-| Assets | `03-graphic-resources/.tmp/scenes/` (AI, video, stock) and the client's WhatsApp photos (`whatsapp-catalog/images/`), prepared into `site-src/assets/` by `prepare-assets.py`; all gitignored and in R2. The harvested `product-images/` are no longer used |
+| Assets | Hero film from `03-graphic-resources/.tmp/hero-film/make-hero-film.mjs` (Seedance 2.0 via Magnific → `scenes/video/hero-film.mp4`); `03-graphic-resources/.tmp/scenes/` (AI, video, stock) and the client's WhatsApp photos (`whatsapp-catalog/images/`), prepared into `site-src/assets/` by `prepare-assets.py`; all gitignored and in R2. The harvested `product-images/` are no longer used |
 | Gates | Journey audit, fluid root, scrub proof, console and an end-to-end cart test on the last run — see the newest runbook entry |
 | `.env` | Generated: `[shared]` + `[alki-house]`. The client section is empty. |
 | Hosting | None. No Instatic instance, no Railway service, no domain recorded. |
@@ -42,7 +42,8 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
 
 ## Next
 
-1. The shop's **WhatsApp number** into `site-src/data/site.json`, rebuild.
+1. **Top up Magnific credits** and finish the hero film's audio + monitor shots (steps in the 2026-10-09 hero-film run).
+1a. The shop's **WhatsApp number** into `site-src/data/site.json`, rebuild.
 1b. Client questions from the 2026-10-09 run: 14 blank prices, the `15# RUNBOOK - `bk-alki-house`
 
 The **standing** state of this project: what is true now, what is next, and the traps.

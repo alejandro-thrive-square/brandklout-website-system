@@ -1,11 +1,40 @@
-/* 00 ARRIVAL — film loop, split headline, the product floats on its stage and
-   leans toward the cursor; the whole chapter recedes as you leave it. */
+/* 00 ARRIVAL — the film walks the aisles in one dark studio; the caption on the
+   right names the aisle on screen and links to it, one pill per aisle fills as it
+   plays and jumps the film there; split headline; the chapter recedes as you leave. */
 WZ.section('ch-arrival', function(W){
   var root = document.getElementById('arrival');
   var hide = root.querySelectorAll('[data-anim="hide"]');
   var video = root.querySelector('.ar-video'), poster = root.querySelector('.ar-poster');
-  var product = root.querySelector('.ar-product'), stage = root.querySelector('.ar-stage');
+  var scene = root.querySelector('.ar-scene');
   gsap.set(hide,{visibility:'visible'});
+
+  /* ---- what is on screen ---- */
+  var scenes = [], cur = 0;
+  try{ scenes = JSON.parse(scene.getAttribute('data-scenes') || '[]'); }catch(e){}
+  var link = scene.querySelector('.ar-cap-name'), inner = scene.querySelector('.ar-cap-in'),
+      dots = scene.querySelectorAll('.ar-dot');
+  function fill(s){
+    link.href = s.href;
+    inner.querySelector('b').textContent = s.label;
+    inner.querySelector('.mono').textContent = s.n + ' →';
+  }
+  function show(i){
+    if(i === cur || !scenes[i]) return;
+    cur = i;
+    dots.forEach(function(d, k){ d.classList.toggle('is-on', k === i); if(k === i) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+    if(W.reduced){ fill(scenes[i]); return; }
+    gsap.timeline({overwrite:true})
+      .to(inner,{yPercent:-60,opacity:0,duration:.32,ease:'power2.in'})
+      .add(function(){ fill(scenes[i]); })
+      .fromTo(inner,{yPercent:60,opacity:0},{yPercent:0,opacity:1,duration:.6,ease:'power3.out'});
+  }
+  function at(t){ var i = 0; for(var k = 0; k < scenes.length; k++) if(t >= scenes[k].t) i = k; return i; }
+  function progress(t){
+    dots.forEach(function(d, k){
+      var a = scenes[k].t, b = k + 1 < scenes.length ? scenes[k + 1].t : (video && video.duration) || a + 5;
+      d.style.setProperty('--p', t < a ? 0 : t >= b ? (k === cur ? 1 : 0) : ((t - a) / (b - a)).toFixed(3));
+    });
+  }
 
   /* The film only loads and plays while the chapter is on screen, and never
      under reduced motion: the poster frame is the still version. */
@@ -18,7 +47,17 @@ WZ.section('ch-arrival', function(W){
     }
     ScrollTrigger.create({trigger:root,start:'top bottom',end:'bottom top',
       onEnter:play,onEnterBack:play,onLeave:function(){ video.pause(); },onLeaveBack:function(){ video.pause(); }});
+    video.addEventListener('timeupdate', function(){ var t = video.currentTime; show(at(t)); progress(t); });
   }
+
+  /* A pill jumps the film to its aisle; with no film (reduced motion) it just names it. */
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      var i = parseInt(d.getAttribute('data-i'), 10);
+      if(video && video.classList.contains('is-live') && scenes[i]){ video.currentTime = scenes[i].t + .9; var p = video.play(); if(p && p.catch) p.catch(function(){}); }
+      show(i);
+    });
+  });
 
   if(W.reduced){ gsap.set(hide,{opacity:1,y:0}); return; }
 
@@ -33,31 +72,11 @@ WZ.section('ch-arrival', function(W){
   }
   tl.from(root.querySelector('.chapter-tag'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},0)
     .from(root.querySelectorAll('[data-arrive]'),{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out'},.6)
-    .from(root.querySelector('.ar-plate'),{opacity:0,scale:.6,duration:1.4,ease:'power3.out'},.3)
-    .from(product,{opacity:0,y:80,rotate:-6,scale:.86,duration:1.5,ease:'power4.out'},.45)
-    .from(root.querySelector('.ar-cap'),{opacity:0,x:20,duration:.8},1.1)
+    .from(root.querySelector('.ar-cap'),{opacity:0,x:24,duration:.9,ease:'power3.out'},1.0)
+    .from(dots,{opacity:0,scaleX:0,transformOrigin:'right',duration:.6,stagger:.06,ease:'power3.out'},1.15)
     .from(root.querySelector('.ar-ticker'),{opacity:0,y:20,duration:.9},1.0)
     .from(root.querySelector('.ar-cue'),{opacity:0,duration:.8},1.2)
     .from(root.querySelector('.ar-film'),{opacity:0,scale:1.08,duration:1.8,ease:'power3.out'},0);
-
-  /* The product leans toward the cursor. */
-  if(W.fine && product){
-    var rx = gsap.quickTo(product,'rotationY',{duration:.9,ease:'power3'}),
-        ry = gsap.quickTo(product,'rotationX',{duration:.9,ease:'power3'}),
-        px = gsap.quickTo(product,'x',{duration:.9,ease:'power3'}),
-        py = gsap.quickTo(product,'y',{duration:.9,ease:'power3'});
-    gsap.set(stage,{perspective:1200});
-    root.addEventListener('pointermove',function(e){
-      var r = stage.getBoundingClientRect();
-      var nx = (e.clientX - r.left - r.width/2)/r.width, ny = (e.clientY - r.top - r.height/2)/r.height;
-      rx(nx*16); ry(-ny*12); px(nx*22); py(ny*16);
-    });
-    root.addEventListener('pointerleave',function(){ rx(0); ry(0); px(0); py(0); });
-  }
-
-  /* Idle float, so the stage never looks like a still. */
-  gsap.to(product,{y:'-=10',duration:2.6,repeat:-1,yoyo:true,ease:'sine.inOut'});
-  gsap.to(root.querySelector('.ar-plate'),{scale:1.04,opacity:.85,duration:2.6,repeat:-1,yoyo:true,ease:'sine.inOut'});
 
   /* Ticker drifts on its own. */
   var track = root.querySelector('.ar-track');
@@ -69,7 +88,7 @@ WZ.section('ch-arrival', function(W){
   /* Departure — the chapter recedes; the film sinks, the copy lifts away. */
   gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.5}})
     .to(root.querySelector('.ar-copy'),{yPercent:-18,opacity:.1,ease:'none'},0)
-    .to(stage,{yPercent:-8,scale:.92,opacity:.25,ease:'none'},0)
+    .to(scene,{yPercent:-14,opacity:.15,ease:'none'},0)
     .to(root.querySelector('.ar-film'),{yPercent:10,scale:1.08,ease:'none'},0)
     .to(root.querySelector('.ar-veil'),{opacity:.5,ease:'none'},0);
 

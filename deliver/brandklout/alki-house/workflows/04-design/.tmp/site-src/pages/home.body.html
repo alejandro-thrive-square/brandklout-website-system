@@ -22,12 +22,13 @@
         <a class="btn btn-ghost magnetic" href="productos.html?stock=1"><span>{{STAT_INSTOCK}} líneas en stock</span></a>
       </div>
     </div>
-    <figure class="ar-stage" data-anim="hide">
-      <div class="ar-plate" aria-hidden="true"><span></span></div>
-      <a class="ar-product" href="productos/{{HERO_PRODUCT_SLUG}}.html" aria-label="{{HERO_PRODUCT_NAME}}">
-        <img src="{{HERO_PRODUCT}}" alt="{{HERO_PRODUCT_NAME}}" width="1200" height="1200">
-      </a>
-      <figcaption class="ar-cap mono"><span>En escena</span><b>{{HERO_PRODUCT_NAME}}</b></figcaption>
+    <!-- The film walks the aisles; the caption follows it, and each pill jumps the film to its aisle. -->
+    <figure class="ar-scene" data-anim="hide" data-scenes="{{HERO_SCENES}}">
+      <figcaption class="ar-cap">
+        <span class="mono ar-cap-k">En escena</span>
+        <a class="ar-cap-name" href="{{HERO_SCENE_HREF}}"><span class="ar-cap-in"><b>{{HERO_SCENE_LABEL}}</b><span class="mono">{{HERO_SCENE_COUNT}}</span></span></a>
+      </figcaption>
+      <div class="ar-dots" role="group" aria-label="Lo que hay en la vitrina">{{HERO_SCENE_DOTS}}</div>
     </figure>
   </div>
   <div class="ar-ticker" aria-hidden="true">

@@ -140,12 +140,23 @@ function card(p, root) {
 const featured = products.filter((p) => p.featured);
 const STAGE = ['zhiyun-weebill-3e', 'luz-colbor-cl60', 'dji-mic-mini-2-combo', 'monitor-viltrox-dc-550', 'feiyutech-scorp-c2'].map(byId).filter(Boolean);
 
-// The piece on the hero stage: the first featured product that has a cut-out.
-const HERO = STAGE.find((p) => p.images[0] && p.images[0].cutout) || featured.find((p) => p.images[0] && p.images[0].cutout) || STAGE[0];
 const SCENES = { gimbals: 'hero-gimbal', iluminacion: 'studio-lighting', modificadores: 'softbox-glow', audio: 'audio-desk', monitores: 'monitor-glow',
   rigs: 'rig-build', adaptadores: 'adapter-macro', energia: 'product-stage', cuidado: 'creator-room', camaras: 'rig-build', accesorios: 'product-stage' };
 const sceneExists = (n) => fs.existsSync(path.join(SRC, 'assets', 'scenes', n + '.webp'));
 const scene = (n) => (sceneExists(n) ? `assets/scenes/${n}.webp` : '');
+
+/* ---- the hero film: six aisles in one dark studio (03-graphic-resources/.tmp/hero-film/).
+   segments.json says when each aisle is on screen; the caption and pills follow the film. ---- */
+const FILM_SEGMENTS = path.resolve(SRC, '../../../03-graphic-resources/.tmp/hero-film/segments.json');
+const filmFile = fs.existsSync(path.join(SRC, 'assets/scenes/hero-film.mp4')) ? 'assets/scenes/hero-film.mp4' : '';
+const plural = (n) => `${n} ${n === 1 ? 'producto' : 'productos'}`;
+const heroScenes = (filmFile && fs.existsSync(FILM_SEGMENTS) ? JSON.parse(fs.readFileSync(FILM_SEGMENTS, 'utf8')).segments : [])
+  .filter((s) => catLabel[s.cat])
+  .map((s) => ({ t: s.t, label: catLabel[s.cat], n: plural(products.filter((p) => p.category === s.cat).length), href: `productos.html?cat=${s.cat}` }));
+if (!heroScenes.length) heroScenes.push({ t: 0, label: 'Todo el catálogo', n: plural(products.length), href: 'productos.html' });
+const heroDots = heroScenes.length > 1
+  ? heroScenes.map((s, i) => `<button class="ar-dot${i ? '' : ' is-on'}" type="button" data-i="${i}" aria-label="${esc(s.label)}"${i ? '' : ' aria-current="true"'}><i></i></button>`).join('')
+  : '';
 
 function railPanels(root) {
   return categories.map((c, i) => {
@@ -300,8 +311,12 @@ page({ file: 'index.html', body: read('pages/home.body.html'), root: '', page: '
     // The aisle count, written out: only the aisles that have products are on the rail.
     RAIL_WORD: ['Cero', 'Un', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][categories.length] || String(categories.length),
     STAGE_SLIDES: stageSlides(''), STAGE_COUNT: String(STAGE.length), KIT_CARDS: kitCards(''), FLOOR_CARDS: floorCards(''),
-    HERO_VIDEO: fs.existsSync(path.join(SRC, 'assets/scenes/hero-gimbal.mp4')) ? 'assets/scenes/hero-gimbal.mp4' : '', HERO_POSTER: scene('hero-gimbal'), HERO_POSTER_PORTRAIT: scene('hero-gimbal-portrait'),
-    HERO_PRODUCT: HERO && HERO.images[0] ? HERO.images[0].src : '', HERO_PRODUCT_NAME: HERO ? esc(HERO.name) : '', HERO_PRODUCT_SLUG: HERO ? HERO.slug : '',
+    HERO_VIDEO: filmFile || (fs.existsSync(path.join(SRC, 'assets/scenes/hero-gimbal.mp4')) ? 'assets/scenes/hero-gimbal.mp4' : ''),
+    HERO_POSTER: filmFile ? scene('hero-film-poster') : scene('hero-gimbal'),
+    // The film's poster serves phones too: the CSS crops it to the product.
+    HERO_POSTER_PORTRAIT: filmFile ? scene('hero-film-poster') : scene('hero-gimbal-portrait'),
+    HERO_SCENES: esc(JSON.stringify(heroScenes)), HERO_SCENE_LABEL: esc(heroScenes[0].label), HERO_SCENE_COUNT: `${esc(heroScenes[0].n)} →`,
+    HERO_SCENE_HREF: heroScenes[0].href, HERO_SCENE_DOTS: heroDots,
     PROMISE_SCENE: scene('studio-lighting'), STAGE_PLATE: scene('product-stage'), WAY_SCENE: scene('softbox-glow') } });
 
 page({ file: 'productos.html', body: read('pages/productos.body.html'), root: '', page: 'products', navKey: 'PRODUCTS',
