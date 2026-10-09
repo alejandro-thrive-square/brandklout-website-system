@@ -1,7 +1,7 @@
 {
   "id": "brandklout.aeo-schema",
   "name": "AEO Schema",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "apiVersion": 1,
   "description": "Structured data for answer engines: one JSON-LD @graph on every published page — Organization, WebSite, WebPage, BreadcrumbList and Article — plus hand-written blocks per page. Managed from the admin, and changeable across the whole site in one API call.",
   "permissions": [

@@ -12,9 +12,10 @@ Sibling toolkits this one relies on and does not copy:
 |---|---|
 | [`../instatic-api-sync/`](../instatic-api-sync/instatic-api-sync.md) | `insta-api.mjs` (the admin client every script here uses via `lib/site.mjs`), `conv-encode.ts` / `conv-preload.ts` (shipped by `push/ship.sh`), `install-fonts.mjs`, CSS repair tools, `prune-versions` |
 | [`../instatic-plugins/`](../instatic-plugins/README.md) | every `brandklout.*` plugin source, `plugins.json` (registry), `install-plugin.mjs`, `plugins.mjs` (status, rollout, verify across sites) |
-| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, Clarity, DNI pool, accessibility widget as site scripts), the canvas and published-page gates |
+| [`../instatic-embeds/`](../instatic-embeds/instatic-embeds.md) | the Embed block tooling: `set-origins.mjs`, `rollout-site-scripts.mjs` (GTM, DNI pool, accessibility widget as site scripts; never Microsoft Clarity), the canvas and published-page gates |
 | [`../instatic-domain-origins/`](../instatic-domain-origins/instatic-domain-origins.md) | `check-origins.mjs --all` after any domain or `PUBLIC_ORIGIN` change |
 | [`../termly-ghl-consent/`](../termly-ghl-consent/termly-ghl-consent.md) | `consent-kit.mjs` (Termly above GTM, autoBlock off, GHL bridge; `check <url>` is the consent gate) |
+| [`../seo-aeo/`](../seo-aeo/README.md) | The SEO & AEO standard, the keyword map format and `lib.mjs` (`seo/push-keyword-h1.mjs` and `seo/hero-look.mjs` import it: a `requires` in `toolkit.json`) |
 | `scripts/fluid-root.mjs` (repo root) | `--check <package>`: the house fluid root, before any push |
 | `scenario-0-new-site/03-design-build/scripts/journey-audit.mjs` | GSAP journey standard (max eight chapters, `pin:true`); on a root-relative multi-page build use `gates/check-pages.mjs` instead |
 
@@ -26,14 +27,15 @@ Sibling toolkits this one relies on and does not copy:
 | | `../instatic-plugins/install-plugin.mjs` (or `plugins.mjs rollout`), `../instatic-domain-origins/check-origins.mjs` | Install every plugin on production and staging; prove the admin login origin |
 | | `staging-clone/staging-clone.md` §A, `staging-clone/*` | Stand up the staging environment (volume, `PUBLIC_ORIGIN`, claim setup, delete the minted service domain) |
 | 02-research-sitemap | (none here) | Sitemap tooling is `../specialty-sitemaps/` |
-| 03-design-build | `scripts/fluid-root.mjs --check`, `gates/check-pages.mjs` (local), `gates/click-controls.mjs` (local), `gates/colour-leak.mjs`, `gates/cross-client-grep.mjs`, `gates/image-reuse.mjs` | Every build, before any push |
+| 03-design-build | `scripts/fluid-root.mjs --check`, `gates/check-pages.mjs` (local), `gates/click-controls.mjs` (local), `gates/nav-menus.mjs` (local), `gates/colour-leak.mjs`, `gates/cross-client-grep.mjs`, `gates/image-reuse.mjs` | Every build, before any push |
 | | `images/upscale-images.mjs` + `images/contact-sheet.py` | When client photos are soft; look at every face |
 | | `ops/backup-site.mjs` (+ `--db-command`) | Before any `--force` push once the site has admin edits |
 | | `push/*` in order (below), `ops/apply-template-flags.mjs`, `gates/template-guard.mjs` | Every push to staging |
 | | `gates/verify-live.mjs`, `css-declared-parity.mjs`, `compare-live.mjs`, `visual-diff.mjs`, `verify-motion-live.mjs` | After every staging publish |
 | | `ops/render-draft-page.mjs` | Look at an unpublished page without publishing |
-| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
-| 05-launch | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
+| 04-qa | `gates/check-pages.mjs --base`, `gates/click-controls.mjs --base`, `gates/nav-menus.mjs --base`, `gates/perf-budget.mjs`, `../termly-ghl-consent/gates/check-ghl-form.mjs`, `gates/facts-sweep.mjs`, `gates/cross-client-grep.mjs --base`, `gates/image-reuse.mjs --base`, `gates/audit-double-aspect.mjs` | On staging, all breakpoints, before sign-off |
+| 05-launch | `seo/*` ([README](./seo/README.md)): scan → facts → build → push → `verify-schema.mjs`, and `push-keyword-h1.mjs` + `hero-look.mjs` | The schema from each page's visible content; a keyword H1 where the map needs one (also Scenario 7 step 02) |
+| | `gates/seo-head-check.mjs`, `gates/facts-sweep.mjs`, `../termly-ghl-consent/gates/dni-proof.mjs`, `../termly-ghl-consent/consent-kit.mjs check` | After SEO, schema, OG, DNI, analytics and Termly are in |
 | | `staging-clone/clone-site.mjs` / `diff-sites.mjs` / `clone-plugins.mjs` / `publish-rows.mjs` | Promote staging to production and prove parity |
 | | `../instatic-domain-origins/check-origins.mjs` | After connecting the domain and `staging.<domain>`; `PUBLIC_ORIGIN` on BOTH environments |
 | | `../cloudflare-launch/canonical-host.mjs` | One address per page (apex to www or back) |
@@ -74,12 +76,22 @@ node ops/apply-template-flags.mjs --page 404 --not-found   # + --page <tpl> --ta
 node gates/template-guard.mjs
 node ../instatic-api-sync/insta-api.mjs publish
 node gates/verify-live.mjs   # must end "FAIL  none"; then css-declared-parity, compare-live, visual-diff 1440 and 390, verify-motion-live
+node ../instatic-api-sync/editability.mjs --published      # must end "EDITABLE": no code-asset rules, no :root shadow of the Framework
 node push/push-site.mjs --record                           # baseline for the next update (after embeds/flags moved the seqs)
 ```
 (Paths above are relative to this folder; prefix them with the path from your client folder.)
 
 This full run is for the **first import** or a deliberate rebuild. Every later change goes through
 the update path below.
+
+**Everything the pipeline pushes is editable by hand** (since 2026-10-04). Design tokens live in the
+Instatic Framework (`settings.framework`), seeded with `../instatic-api-sync/framework.mjs apply`
+before the first push; both paths keep it. `push-site.mjs` puts every declaration the converter
+loses (custom properties, `clamp()`, layered backgrounds, `!important`) back into its registry rule
+(`output/registry-repair.txt`), skips Framework-owned tokens, and the `tokens.css` asset carries only
+the variable-font `@font-face` rules. `TOKEN_ASSET=legacy` restores the old token asset for one run.
+After the publish: `node ../instatic-api-sync/editability.mjs --published` must end `EDITABLE`.
+Standard: [`../client-first-style-guide/INSTATIC-FRAMEWORK.md`](../client-first-style-guide/INSTATIC-FRAMEWORK.md).
 
 ## The update path (changed pages only, 2026-09-28)
 
@@ -126,7 +138,7 @@ node push/push-site.mjs --record
 | `push/check-link.mjs` | Fail closed unless the Railway link dir serves `INSTATIC_BASE_URL` | `<RAILWAY_LINK_DIR>` (ship.sh runs it) | same |
 | `push/ship.sh` | Chunked `railway ssh` ship of converter + payload, run, fetch `import-out.json` | `RAILWAY_LINK_DIR=... bash ship.sh` | same |
 | `push/import-run.ts` | Runs on the container: `cssToStyleRules`, `importHtml`, class linking; optional prebuilt registry | shipped by ship.sh | bk-brandklout-website `21-instatic-upload/` |
-| `push/push-site.mjs` | One `PUT /site-document`: replace (first import) or `--update` incremental (changed pages, shell only if needed); pages, registry, token + script assets (GSAP first, UMD wrap), SEO cells; records `output/push-state.<host>.json` | `[--update [--pages a,b] [--with-shell\|--no-shell] \| --shell-only] [--apply] [--force]`, `--record`, `TOKEN_FILES=` | bk-west-la-implants |
+| `push/push-site.mjs` | One `PUT /site-document`: replace (first import) or `--update` incremental (changed pages, shell only if needed); pages, registry (with the converter's losses put back: `registry-repair.mjs`), `@font-face`-only token asset (`TOKEN_ASSET=legacy` for the old one), script assets (GSAP first, UMD wrap), SEO cells; records `output/push-state.<host>.json` | `[--update [--pages a,b] [--with-shell\|--no-shell] \| --shell-only] [--apply] [--force]`, `--record`, `TOKEN_FILES=` | bk-west-la-implants |
 | `lib/push-state.mjs` | The per-instance push record: html hashes, page seqs, registry + source hashes | imported | new 2026-09-28 |
 | `push/place-embeds.mjs` | Swap `data-embed` markers for Embed blocks (GHL forms, widgets) | `--config embeds.json [--apply] [--publish]` | bk-stone `21-instatic-upload/` |
 | `ops/apply-template-flags.mjs` | Re-set notFound / collection template flags after an import | `--page 404 --not-found` or `--page <tpl> --table <slug>` `[--check]` | bk-mason-park `apply-404-template` + `apply-blog-template` |
@@ -135,6 +147,7 @@ node push/push-site.mjs --record
 | `ops/restore-page-seo-cells.mjs` | Put back SEO cells a page write dropped, from a backup | `--from pages.json [--only slug] [--apply]` | same |
 | `gates/check-pages.mjs` | Per-page runtime gate: console/4xx, runtime armed, pins scrub, one h1, overflow at 390, optional screenshots | `[slug...] [--widths=1440,390] [--shots] [--base=https://host]`, `LIGHT_PAGES=` | bk-west-la-implants `08-qa/output/check-local.mjs` |
 | `gates/click-controls.mjs` | Clicks every control; reports those whose click changes nothing | `[slug...] [--base url] [--widths 1440,390]` | new, from bk-stone-med-spa `drag-test.mjs` |
+| `gates/nav-menus.mjs` | Taps the drawer and every submenu open (hovers on desktop); fails on a link off screen, clipped by the drawer, invisible or covered, or a parent tap that navigates | `[slug...] [--base url] [--widths 390,768,1440] [--toggle sel] [--menu sel]` | new, from bk-mason-park (Services list off the drawer, 2026-10-08) |
 | `gates/colour-leak.mjs` | Contextual CSS stealing a class's ink; contrast by hit-testing | `[--all] [--site dir]` | bk-mason-park-kids `output/colour-leak.mjs` |
 | `gates/verify-live.mjs` | Every built route live: links, assets, titles | `FAIL  none` to pass | bk-west-la-implants |
 | `gates/css-declared-parity.mjs` | Every declared property reached the live CSS (not the same tool as instatic-api-sync's `css-parity.mjs`) | | same (`css-parity.mjs`) |
@@ -149,6 +162,7 @@ node push/push-site.mjs --record
 | `gates/template-guard.mjs` | Lists templated rows; proves a page write keeps `template` (writes nothing) | | bk-dr-nahlah `verify-template-guard.mjs` |
 | `gates/audit-double-aspect.mjs` | CSS reserving an aspect box twice around an embed | | bk-dr-nahlah |
 | `../termly-ghl-consent/gates/check-ghl-form.mjs`, `dni-proof.mjs` | GHL form readiness and the number-pool swap. Platform-neutral, so they live with the GHL toolkit since 2026-09-28 | see [`termly-ghl-consent.md`](../termly-ghl-consent/termly-ghl-consent.md) | was `gates/` here |
+| `seo/*` | The content-built aeo-schema chain (`scan-sections`, `fetch-facts`, `build-schema`, `vocab-check`, `push-schema`, `verify-schema`, `plugin-stores`) and the keyword H1 (`push-keyword-h1`, `hero-look`, `hero-shot`); per-client `seo-config.json` + base layer in the step output. Schema, mapping language, limitations: [`seo/README.md`](./seo/README.md) | plan by default; `--apply` / `--publish` with `STAGING_HOST` or `--allow-production` | bk-dr-nahlah `22-instatic-api-sync/seo-v3/` (+ `seo-v2/plugin-stores.mjs`), 2026-10-07 |
 | `images/upscale-images.mjs` | Magnific upscale (creativity 1, resemblance 3, sharpy) from a jobs file | `--jobs jobs.json [--only] [--list]`, `MAGNIFIC` | bk-mason-park-kids |
 | `images/contact-sheet.py` | Original vs upscale sheets to check every face | `--jobs jobs.json --up dir` | bk-mason-park-kids |
 

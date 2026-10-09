@@ -36,7 +36,19 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
      site-document afterwards (`tools/instatic-site/ops/restore-page-seo-cells.mjs`).
 4. **Styles.** Font sizes go on the Client-First type-role classes with their responsive values on
    the same class. Contextual CSS (`.section p`) beats a bare class edit, so resolve the cascade
-   before changing a class.
+   before changing a class. A colour, type size, spacing or radius change is a **token** change: make
+   it in the Instatic Framework panel, then mirror it into site-src `01-tokens.css`; never hard-code
+   it in a class. Before any build, bring `01-tokens.css` in line with the live Framework (the client
+   may have edited it). A site whose tokens still sit in the `tokens.css` code asset is moved to the
+   Framework the first time it comes in for work
+   ([`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md) §Existing
+   sites): `editability.mjs --site <client>:staging` says what is not editable, `css-to-registry.mjs`
+   moves code-asset stylesheets into the Styles panel, `framework.mjs apply` moves the tokens, with
+   `css-parity.mjs` before and after. Either upload path, whole site or per page, keeps the Framework;
+   after every publish `editability.mjs --published` must end `EDITABLE`.
+   New classes follow [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md);
+   `class-audit.mjs --site <client>:staging --strict` after the publish must stay `IN BOUNDS`. A site
+   that is not yet migrated is migrated by §8 of that standard the first time it comes in for work.
 5. **Third-party embeds and site scripts.** Use the Embed block and the Embed Origins settings, not
    raw HTML: [`tools/instatic-embeds/instatic-embeds.md`](../../tools/instatic-embeds/instatic-embeds.md).
    Site-wide tags go in `siteScripts`; read-merge-write the plugin settings, never replace them.
@@ -60,6 +72,10 @@ rows also want `STAGING_HOST=<exact hostname>`, or `--allow-production` on purpo
 - If the client wants call tracking gated behind consent, then ask first. The standing instruction
   is un-gated.
 - If the site is on Webflow, then use `scenario-6-webflow-sites`.
+- If the site has a keyword map ([Scenario 7](../../scenario-7-seo-aeo/README.md)) and the change
+  touches a heading, title, description, image or page, then re-run
+  `tools/seo-aeo/keyword-gate.mjs` against it: a reworded H1 or title can drop the page's keyword.
+  A new page gets its own row in the map first.
 
 ## Do / Don't
 - Do keep house copy rules:

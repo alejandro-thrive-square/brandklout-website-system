@@ -1,0 +1,35 @@
+{
+  "//": "The base layer: the practice's STATED facts, written once (from docs/facts.md and what the practice confirms), never built from page text. build-schema.mjs extends it from the pages. Copy to the file seo-config.json names in files.base. This top-level // key is ignored. Every @id here is a full URL: the base is copied as-is, without the #fragment / /path shorthand of the config.",
+  "organization": {
+    "@type": "Dentist",
+    "@id": "https://www.example-dental.com/#organization",
+    "name": "Example Dental Implant Center",
+    "url": "https://www.example-dental.com/",
+    "telephone": "+1-555-555-0100",
+    "address": { "@type": "PostalAddress", "streetAddress": "1 Main Street", "addressLocality": "Springfield", "addressRegion": "VA", "postalCode": "22150", "addressCountry": "US" },
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "08:00", "closes": "17:00" }],
+    "areaServed": [{ "@type": "City", "name": "Springfield" }],
+    "hasOfferCatalog": { "@id": "https://www.example-dental.com/#services" },
+    "department": []
+  },
+  "sitewide": [
+    { "@type": "Person", "@id": "https://www.example-dental.com/meet-dr-example#person", "name": "Dr. Example", "jobTitle": "Prosthodontist", "worksFor": { "@id": "https://www.example-dental.com/#organization" } }
+  ],
+  "pages": {
+    "dental-implants": [
+      { "@type": "MedicalWebPage", "@id": "https://www.example-dental.com/dental-implants#webpage", "about": [{ "@id": "https://www.example-dental.com/dental-implants#service" }, { "@id": "https://www.example-dental.com/dental-implants#procedure" }], "mainEntity": { "@id": "https://www.example-dental.com/dental-implants#service" } },
+      { "@type": "Service", "@id": "https://www.example-dental.com/dental-implants#service", "name": "Dental implants", "serviceType": "Dental implants", "provider": { "@id": "https://www.example-dental.com/#organization" } },
+      { "@type": "SurgicalProcedure", "@id": "https://www.example-dental.com/dental-implants#procedure", "name": "Dental implant placement" }
+    ],
+    "index": [
+      { "@type": "WebPage", "@id": "https://www.example-dental.com/#webpage", "about": { "@id": "https://www.example-dental.com/#organization" } },
+      { "@type": "OfferCatalog", "@id": "https://www.example-dental.com/#services", "name": "Treatments", "itemListElement": [{ "@type": "Offer", "itemOffered": { "@type": "Service", "@id": "https://www.example-dental.com/dental-implants#service", "name": "Dental implants", "url": "https://www.example-dental.com/dental-implants" } }] }
+    ]
+  },
+  "posts": {
+    "posts:first-article-slug": [
+      { "@type": "BlogPosting", "@id": "https://www.example-dental.com/posts/first-article-slug#article", "datePublished": "2024-05-01", "author": { "@id": "https://www.example-dental.com/meet-dr-example#person" } },
+      { "@type": "WebPage", "@id": "https://www.example-dental.com/posts/first-article-slug#webpage" }
+    ]
+  }
+}

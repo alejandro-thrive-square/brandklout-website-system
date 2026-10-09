@@ -193,8 +193,16 @@ async function loadMirror (api) {
           updatedAt: row.updatedAt || null,
         }
         if (isPages) bySlug[row.slug] = record
-        var key = titleKey(record.title)
-        if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+        /* 1.3.0: an entry is indexed by its SEO title too (as open-graph 1.2.2
+           does). A template whose <title> is the entry's seoTitle otherwise
+           matched nothing, and every article published the template page's
+           graph (WebPage /post#webpage, no Article, no stored block). */
+        var keys = [titleKey(record.title)]
+        if (!isPages && record.seoTitle) keys.push(titleKey(record.seoTitle))
+        for (var kk = 0; kk < keys.length; kk++) {
+          var key = keys[kk]
+          if (key && (!byTitle[key] || byTitle[key].kind === 'page')) byTitle[key] = record
+        }
       }
     }
   } catch (e) {

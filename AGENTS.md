@@ -24,7 +24,7 @@ Welcome, agent. You are operating within the **Brandklout Website System**. To p
 ## Quick Links
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
 - **Runbooks**: [SYSTEM_RULES.md §5](./SYSTEM_RULES.md) - per step in `<scenario>/<step>/output/RUNBOOK.md`, indexed in the client's `RUNBOOK.md`; read the index, not the history
-- **Clients are read from their branches, not from `main`.** Client folders on `main` are old snapshots (from 2026-09-09, or the day a branch was last merged); the branch is the current record. `node scripts/client.mjs runbook <client>` (also `log`, `ls`, `show`, `where`, `list`) reads it without a checkout or merge.
+- **Active clients and their worktrees**: [deliver/docs/CLIENTS.md](./deliver/docs/CLIENTS.md) - every `bk-<client>` branch, its folder, worktree and scenarios. `main` tracks **no** client folders (since 2026-10-03); a client exists only on its branch. Read one from anywhere with `node scripts/client.mjs runbook <client>` (also `log`, `ls`, `show`, `where`, `list`).
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh` (git only)

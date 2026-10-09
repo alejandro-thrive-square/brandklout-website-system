@@ -15,7 +15,11 @@ is `scripts/journey-audit.mjs`.
 
 ## Checklist
 
-- [ ] Client-First framework set up on Instatic
+- [ ] Client-First framework set up on Instatic: tokens in the Framework panel (`framework.mjs apply`), manual-edit proof done (`INSTATIC-FRAMEWORK.md`)
+- [ ] Every style editable by hand: `editability.mjs --published` ends `EDITABLE` on staging
+- [ ] Every class inside Client-First + Relume ([`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)): `class-audit.mjs --local <site-src> --strict` before the first push, `class-audit.mjs --site <client>:staging --strict` after every publish, both `IN BOUNDS`
+- [ ] CSS shaped Client-First, not only named: `structure-audit.mjs --local <site-src> --strict` before the first push and `--site <client>:staging --strict` after every publish end `CLIENT-FIRST SHAPED` (house spacing scale + type bases in the Framework, at least 80% of rem spacing on tokens, no contextual override of a role/utility class: CLASS-STANDARD §10)
+- [ ] The Instatic editor shows the page: `editor-canvas.mjs --site <client>:staging` ends `ok` (no closed overlay over the page)
 - [ ] Facts sheet (`docs/facts.md`) complete
 - [ ] Images sourced client-first, every photo matching its text, none overused (`IMAGES.md`, ledger in `output/images.csv`)
 - [ ] Core pages built and tested
@@ -31,8 +35,13 @@ is `scripts/journey-audit.mjs`.
 
 1. **Framework.** Create the Client-First style guide page with the base components on Instatic
    ([`tools/client-first-style-guide/`](../../tools/client-first-style-guide/),
-   [`CLIENT-FIRST.md`](../../../docs/CLIENT-FIRST.md)). Set the variables, brand colours and
-   fonts from the style pick.
+   [`CLIENT-FIRST.md`](../../../docs/CLIENT-FIRST.md)). Put the Relume style guide's tokens, brand
+   colours from the style pick, type sizes, spacing and radii **in the Instatic Framework panel**, by
+   [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md): root 16 and
+   rem, Framework-safe names, min = max on every size. The `tokens.css` code asset must not re-declare
+   any of them, or a hand edit in the Framework is silently overridden. Draft the spec with
+   `tools/instatic-api-sync/framework.mjs extract css/01-tokens.css`, review it, `apply` it on staging
+   and production; `css/01-tokens.css` in site-src mirrors the Framework (`framework.mjs pull`).
 2. **Breakpoints and type.** Add the `desktop` base breakpoint plus 1279, 991, 767 and 479 on Instatic.
    One fluid `html { font-size }` ([`FLUID-ROOT.md`](../../../docs/FLUID-ROOT.md),
    `node scripts/fluid-root.mjs`); type, spacing and radii in `rem`, never `px` and never `clamp()` for
@@ -40,38 +49,57 @@ is `scripts/journey-audit.mjs`.
 3. **Fonts and styles.** Upload fonts to Instatic's font library on production and staging
    (`tools/instatic-api-sync/install-fonts.mjs`). Keep styles in the Styles panel registry so the
    client can edit them (`tools/instatic-api-sync/migrate-css-to-registry.mjs`).
-4. **Facts sheet.** Keep phones, hours, addresses, doctors and credentials in `docs/facts.md` and build
+4. **Classes.** Start `site-src/css/10-client-first.css` as a copy of
+   [`client-first-starter.css`](../../tools/client-first-style-guide/client-first-starter.css) (the whole
+   Relume utility vocabulary on Framework tokens) and the Framework spec from
+   [`framework-spec.template.json`](../../tools/client-first-style-guide/framework-spec.template.json)
+   (fill values, keep names). Name every class by [`CLASS-STANDARD.md`](../../tools/client-first-style-guide/CLASS-STANDARD.md)
+   from the first line of HTML: Relume utilities first, custom classes `folder_element` in full words
+   (no `btn`, `rv-`, `-num`, `eyebrow`, `wrap`), combos `is-*`, scripts select by `data-` attributes, not
+   styling classes. `tools/instatic-api-sync/class-audit.mjs --local <site-src> --strict` must end
+   `IN BOUNDS` before the canary is shown. Fixing names after launch costs a fleet migration.
+5. **Facts sheet.** Keep phones, hours, addresses, doctors and credentials in `docs/facts.md` and build
    every page, footer and schema from it.
+   **Headings and SEO fields come from the keyword map** (step 02): one H1 per page carrying the page's
+   primary keyword, with the city when the search is local. Where the design wants a brand headline,
+   the keyword H1 sits above it in the tagline style (`text-style-tagline`) and the headline is a
+   paragraph. Titles, descriptions and alt text follow rules 2–5 of the
+   [SEO & AEO standard](../../tools/seo-aeo/README.md#the-standard).
 
 ### Core pages
 
-5. Build a canary first: home, one service page and contact, on the VPS in
+6. Build a canary first: home, one service page and contact, on the VPS in
    `scenario-0-new-site/03-design-build/output/code/site-src/`, from the inquiry, research and style pick.
-6. **Images, by [`IMAGES.md`](../../../docs/IMAGES.md).** Source in order: the client's Google Drive,
+7. **Images, by [`IMAGES.md`](../../../docs/IMAGES.md).** Source in order: the client's Google Drive,
    albums and links in the brief, the old site's assets, then licensed stock (Freepik), AI last and
    with approval. Every photo shows what its heading says (fit score 3), appears once per page and on
    at most two pages, and each page's hero is its own. Keep the ledger in `output/images.csv`. Check
    every upscaled face with `tools/instatic-site/images/contact-sheet.py`.
-7. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
-   `click-controls.mjs`, `colour-leak.mjs`, `cross-client-grep.mjs`, `image-reuse.mjs`,
-   `fluid-root.mjs --check`).
-8. Asana task *developer core pages review*: in progress + comment (confirm first).
-9. Push to staging (pipeline below) and send the client the links. Remind until approved.
-10. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
+8. Test at every breakpoint with Playwright and run the local gates (`gates/check-pages.mjs`,
+   `click-controls.mjs`, `nav-menus.mjs --widths 360,390,768,1024,1440`, `colour-leak.mjs`,
+   `cross-client-grep.mjs`, `image-reuse.mjs`, `fluid-root.mjs --check`). Write desktop-only menu
+   states inside a `min-width` query ([DESIGN-STANDARD.md](./DESIGN-STANDARD.md), "CSS traps").
+9. Asana task *developer core pages review*: in progress + comment (confirm first).
+10. Push to staging (pipeline below) and send the client the links. Remind until approved.
+11. Freeze the approved tokens, shell and components. Later pages vary in content and layout, not in
     system.
 
 ### Complete site
 
-11. Build every page in the sitemap. Blog: CMS collection and template page.
-12. Legal pages from the client's own privacy, terms and SMS text. Ask the practice; don't draft them.
-13. Ads combos if the client runs ads ([Scenario 3](../../scenario-3-ads-landing-pages/README.md)).
-14. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
+12. Build every page in the sitemap. Blog: CMS collection and template page.
+13. Legal pages from the client's own privacy, terms and SMS text. Ask the practice; don't draft them.
+14. Ads combos if the client runs ads ([Scenario 3](../../scenario-3-ads-landing-pages/README.md)).
+15. **Push pipeline, every time, to staging only:** back up (`ops/backup-site.mjs`) → `push/upload-media`
     (new filename for any re-cut image) → `set-alt` → `build-import-input` → `ship.sh` → `push-site` →
     `place-embeds` → `ops/apply-template-flags` (blog, 404) → `gates/template-guard` → publish. Then
-    `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`.
+    `gates/verify-live`, `css-declared-parity`, `compare-live`, `visual-diff`, `verify-motion-live`,
+    and `tools/instatic-api-sync/editability.mjs --published`, which must end `EDITABLE` (every style
+    in the Framework or the Styles panel, none in a code asset:
+    [`INSTATIC-FRAMEWORK.md`](../../tools/client-first-style-guide/INSTATIC-FRAMEWORK.md)), and
+    `class-audit.mjs --site <client>:staging --strict`, which must end `IN BOUNDS`.
     `image-reuse --base <staging>` must end `0 problem(s)` on the complete site.
     Details: [`tools/instatic-site/README.md`](../../tools/instatic-site/README.md).
-15. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on
+16. Asana task *team complete site review*: in progress + comment (confirm first). The team reviews on
     BugHerd; fix every comment, deciding its scope first ([`BUGHERD.md`](../../../docs/BUGHERD.md)):
     a comment about a shared style or component, or one that says "all pages", is fixed at the
     source and checked on every page.

@@ -47,7 +47,7 @@ enforces the split (§4.3).
 | **The process** | `deliver/process/` | `scenario-N-name/NN-step/` step folders and the shared `tools/<toolkit>/`. Fixed on `main` only. |
 | **Shared standards** | `deliver/docs/` | Standards every client uses (fluid root, images, BugHerd, Client-First, Drive map, Asana, orchestration, partner MCP registry). |
 | **Cross-client scripts** | `deliver/scripts/` | Asana pulls and other scripts that serve every client. |
-| **Clients** | `deliver/brandklout/<client>/` | One folder per client and nothing else: `README.md`, `RUNBOOK.md`, `docs/`, `assets.tsv`, and each started scenario's step `output/` folders (the directives and scripts beside them are an untracked mirror of main). |
+| **Clients** | `deliver/brandklout/<client>/` on the client's `bk-<client>` branch only (main tracks none; list in [deliver/docs/CLIENTS.md](./deliver/docs/CLIENTS.md)) | One folder per client and nothing else: `README.md`, `RUNBOOK.md`, `docs/`, `assets.tsv`, and each started scenario's step `output/` folders (the directives and scripts beside them are an untracked mirror of main). |
 | **System runbook** | `.claude/runbook/` | One file per system run, indexed in `INDEX.md`. |
 
 ### 2.1 Step Folder Structure

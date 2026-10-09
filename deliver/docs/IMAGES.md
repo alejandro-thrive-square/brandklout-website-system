@@ -17,7 +17,9 @@ Look in this order, and move on only when the one before has nothing that fits t
    (`extract_assets.py` and `catalogue_assets.py` in
    [Scenario 1 step 01](../process/scenario-1-migration/01-old-site-capture/01-old-site-capture.md)). Old-site photos of the real
    office, team and doctors beat any stock photo.
-4. **Licensed stock.** Freepik through the Magnific key; Unsplash only for named places. Keep the
+4. **Licensed stock.** Photos and videos from Magnific (the Freepik API behind the `MAGNIFIC` key);
+   Unsplash only for named places. When the library is too thin, download from Magnific rather than
+   repeat an image or force one that doesn't match its text. Keep the
    stock id and licence of every stock image in the image ledger (section 4).
 5. **AI-generated images**, only with the client's approval and never of a real person.
 

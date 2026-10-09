@@ -8,13 +8,14 @@ staging its own subdomain. The admin must work on every host before anyone gets 
 ## Inputs
 
 - QA passed (step 04), no open critical or high issue.
-- Domain registrar and DNS access, GHL forms and number pools, GTM and Clarity ids, Termly website ID.
+- Domain registrar and DNS access, GHL forms and number pools, GTM id, Termly website ID.
 - For a migration: the redirect Worker from Scenario 1.
 
 ## Checklist
 
 - [ ] Favicon
 - [ ] AEO schema, SEO meta, Open Graph on every page
+- [ ] Home and office pages carry a visible local FAQ; keyword gate CLEAN
 - [ ] 404 page
 - [ ] Reviews, GHL forms, number pool (DNI), analytics, Termly, accessibility widget
 - [ ] Images optimized
@@ -33,16 +34,35 @@ staging its own subdomain. The admin must work on every host before anyone gets 
    `appleTouchIcon`) in the `open-graph` plugin, 1.2.0 or later.
 2. **SEO.** Schema and Open Graph come from the `aeo-schema` and `open-graph` plugins; SEO fields per
    page. Set the site URL or no canonical tag is printed. Check the rendered head with
-   `gates/seo-head-check.mjs`, never the raw HTML.
+   `gates/seo-head-check.mjs`, never the raw HTML. Build each page's schema from its
+   visible sections, not its meta description, and repeat the visible breadcrumb
+   ([aeo-schema README](../../tools/instatic-plugins/aeo-schema/README.md), "Blocks built from
+   the page's content"; the scripts and the per-client config:
+   [`tools/instatic-site/seo/`](../../tools/instatic-site/seo/README.md), gate `verify-schema.mjs`
+   SCHEMA CLEAN). Serve `/llms.txt` and 301 each page's trailing-slash twin.
+   The home page and each office page carry a visible local FAQ (what the specialty is, cost in the
+   city, where the office is), each answer naming the office, city and phone, mirrored by a FAQPage;
+   `areaServed` lists the keyword map's towns. Then
+   `tools/seo-aeo/keyword-gate.mjs <origin> --map ../02-research-sitemap/output/keyword-map.csv`: CLEAN
+   ([SEO & AEO standard](../../tools/seo-aeo/README.md#the-standard), rules 1–6).
 3. **404.** An Instatic `notFound` template target; reapply the flag after any page import.
-4. **Embeds and scripts.** Reviews (Elfsight or GHL) and GHL forms as Embed blocks. GTM, Microsoft
-   Clarity and the number pool script go in through the embed-origins plugin (`siteScripts`). Allow
+4. **Embeds and scripts.** Reviews: the client's Google Reviews widget from the Elfsight registry
+   (`tools/elfsight-reviews/review-widgets.json`), set to the
+   [in-section standard](../../tools/elfsight-reviews/README.md) and gated with `check-widget.mjs`.
+   GHL forms on the [ghl-forms standard](../../tools/ghl-forms/README.md). Both as Embed blocks; any
+   change inside GHL or Elfsight goes through Codex computer use, one small saved step per run. GTM and
+   the number pool script go in through the embed-origins plugin (`siteScripts`). **Never Microsoft
+   Clarity** (2026-10-07): Microsoft signs no BAA for it and its terms forbid health data, so it goes on
+   no client site, in no GTM container and not as the Webflow app, consent or not; `consent-kit.mjs
+   check` fails on any `clarity.ms` request. Ask before any other session-replay or heatmap tool. Allow
    `services.leadconnectorhq.com` and `services.msgsndr.com` in `connect-src`, or the number swap fails
    silently on pages without an embed. Prove the swap with `tools/termly-ghl-consent/gates/dni-proof.mjs` as one visitor.
 5. **Consent.** Termly above GTM, auto blocking off, trackers tagged by hand, number pools exempt
    (client decision 2026-09-22). Grant Termly's origins. Check both directions: nothing fires before a
    choice, everything releases after Accept (`tools/termly-ghl-consent/consent-kit.mjs check`).
-   Each site's Termly account and resource-blocker script is listed in
+   GA4 on the [hardened rules](../../tools/termly-ghl-consent/termly-ghl-consent.md#ga4-stays-hardened-2026-10-07):
+   Google signals, granular location/device data and user-provided data collection off in the
+   property; no visitor-typed text in any event. Each site's Termly account and resource-blocker script is listed in
    [`termly-setup.html`](./termly-setup.html); add the new site there.
 6. **Images.** Compress every image; test the result of every step before moving on.
 7. **Promote.** Back up production (`ops/backup-site.mjs`), make sure nobody has pending drafts (a

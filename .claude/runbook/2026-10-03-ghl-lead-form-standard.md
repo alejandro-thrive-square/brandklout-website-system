@@ -56,5 +56,49 @@
   `codex-instruction.txt` with the values in the README's Styling section.
 - Owner: settle the open questions against gauge@'s video.
 
+## Update (night 2026-10-03): Mason Park write test done
+- After the outage the ChatGPT Chrome plugin failed on its Statsig load (~5 MB in a 10 s limit at
+  ~1 MB/s); it worked again once the line was back at ~4.4 MB/s.
+- **Invisalign `jRr3…` and New Patient Special `jEXt…` now pass** `check-ghl-form --standard --landing
+  --legal --location` and `site-style --compare` (Codex, fresh tabs, gpt-6.1-sol).
+- **Contact `JuzM9…` styling half done:** the run died on "workspace is out of credits"; labels are
+  Nunito Sans, inputs still Inter. Fields still pass the standard.
+- **Next:** refill Codex credits; rerun the contact styling-only instruction; polish pass on all three
+  (consent box sizes, stray `*`, link colour, spacing); add the run to Mason Park's runbook on
+  `bk-mason-park` (client folders are not edited on main); close BugHerd #256.
+
+## Update (late night 2026-10-03): polish pass, all three Mason Park forms pass
+- Credits refilled. **Contact `JuzM9…`, Invisalign `jRr3…`, New Patient `jEXt…`** all pass the gate
+  (`--landing` for the two ad forms) and `site-style --compare`; consent text 14px on both boxes,
+  links `#545F62` underlined, 16px field spacing.
+- **Incident:** a labels-off run on Invisalign exposed the 11 hidden consent fields on the live form;
+  caught on a full-height render, reverted by the next run (~20 min live). Gate now fails labels-off.
+- One Codex run failed with "no callable node_repl js tool" (it skipped tool discovery); a rerun with
+  "load the Node REPL js tool via tool discovery" in the prompt worked.
+- **Open:** stray `*` above Invisalign's Name (Name is required; optional in the model and on New
+  Patient) — owner decision. On /contacts the captcha sits below the Submit button (GHL order).
+
+## Update (2026-10-04, early): labels standard, captcha above Submit, cheapest model, auto resets
+- Owner: **visible labels on every form** (like /contacts) and **captcha above Submit**; both consent
+  boxes one size. Gate fails unlabeled fields and captcha-below-submit; `site-style --compare` measures
+  the two boxes' rendered sizes.
+- All three Mason Park forms pass gate + style (Invisalign/New Patient: Name, Phone, Email, Message
+  labels; /contacts: captcha moved). Done on `gpt-6-luna`, the cheap default; it handled builder edits.
+- **`codex-computer-use/codex-limits.mjs`** reads ChatGPT usage and spends reset credits via the app
+  server's JSON-RPC; `codex_cu.mjs` now resets automatically on a usage limit and retries once.
+  2 credits available, 5h window 78% used at the end.
+- Gotcha: the wrapper prints `limit reached: false` on stderr, so a shell grep for "limit reached"
+  in its output false-positives. Grep the session.log `error`/`turn.failed` lines instead.
+
+## Update (2026-10-04): Mason Park Kids form on the standard
+- `pyYcEmfIvtv5LwB1s4X6` (location `ayfI5c9B3HDoNAubf1Sj`) now passes the gate (`--legal "Mason Park
+  Dental for Kids"`) and the rendered `site-style --compare`: existing kids Service field kept (user),
+  two consent boxes at 14px, captcha above Submit, kids-site links, Figtree + `#93644A` pill, 12px fields.
+- Luna stopped halfway on a whole-form brief; split into saved steps it worked except the Styles
+  panel. Styling = one Custom CSS block (sol); field radius = Styles-panel setting (sol).
+- GHL signed out twice mid-session; the user signed back in.
+- `site-style.mjs --compare` now renders the public form (Styles panel + custom CSS both count);
+  glass hero buttons and pill-button radius no longer leak into the suggested values.
+
 ## Version Control
 Follows the root rules in [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

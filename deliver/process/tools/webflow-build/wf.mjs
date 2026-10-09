@@ -99,6 +99,9 @@ export async function call(tool, actions, opts = {}) {
   if (DATA_API.has(tool)) {
     for (const a of list) {
       for (const [k, body] of Object.entries(a)) {
+        // Page-scoped actions (get_page_content, get_page_freeform_code, *_page_scripts...) take
+        // page_id only and reject an extra site_id with an empty error; create_branch takes both.
+        if (body?.page_id !== undefined && k !== 'create_branch') continue;
         if (k !== 'label' && body && typeof body === 'object' && body.site_id === undefined) body.site_id = site;
       }
     }

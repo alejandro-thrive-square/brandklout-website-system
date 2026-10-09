@@ -43,6 +43,9 @@ const MEASURE = `(() => {
   let clipped = 0, clipper = null
   for (let el = p; el && el !== document.body; el = el.parentElement) {
     const cs = getComputedStyle(el)
+    // A position:fixed overflow:hidden ancestor is a scroll viewport (GSAP ScrollSmoother's
+    // #smooth-wrapper), not a clip: the page scrolls inside it. West LA, 2026-10-05.
+    if (cs.position === 'fixed') continue
     if (/hidden|clip/.test(cs.overflow + cs.overflowY) || cs.aspectRatio !== 'auto') {
       const a = el.getBoundingClientRect()
       const px = Math.max(0, r.bottom - a.bottom) + Math.max(0, a.top - r.top) + Math.max(0, r.right - a.right)
@@ -55,7 +58,8 @@ const MEASURE = `(() => {
     chain.push(el.tagName.toLowerCase() + '.' + String(el.className || '').slice(0, 40) + ' ' + Math.round(b.width) + 'x' + Math.round(b.height) + ' ' + cs.display)
   }
   return { count: fs.length, src: f.getAttribute('src') || f.getAttribute('data-src'), w: Math.round(r.width), h: Math.round(r.height),
-    pInner: Math.round(pInner), clipped, clipper, chain, loader: !!document.querySelector('script[src*="form_embed.js"]') }
+    pInner: Math.round(pInner), clipped, clipper, chain, loader: !!document.querySelector('script[src*="form_embed.js"]'),
+    lazy: (f.getAttribute('loading') || '').toLowerCase() === 'lazy' }
 })()`
 
 const problems = []
@@ -84,6 +88,8 @@ for (const width of widths) {
     if (gotId !== u.campaign.formId) problems.push(`${tag}: form id ${gotId}, expected ${u.campaign.formId} (${u.campaign.name})`)
     if (!formReq || formReq[0] !== 200) problems.push(`${tag}: the form request returned ${formReq ? formReq[0] : 'nothing'}`)
     if (!d.loader || (loaderReq && loaderReq[0] !== 200)) problems.push(`${tag}: form_embed.js missing or ${loaderReq ? loaderReq[0] : 'not requested'}`)
+    // form_embed.js parks the frame at left:-9999px until it loads; a lazy frame there never loads (Firefox: no form, 2026-10-06)
+    if (d.lazy) problems.push(`${tag}: the form iframe has loading="lazy" — it never appears in Firefox (tools/ghl-forms/README.md, Embedding the form)`)
     if (!d.w || !d.h) problems.push(`${tag}: the form iframe has no size`)
     if (d.w && d.pInner > 400 && (d.w <= 310 || d.w < 0.9 * d.pInner)) problems.push(`${tag}: iframe ${d.w}px wide in a ${d.pInner}px box (placeholder CSS on the .wz-embed slot?) chain: ${d.chain.join(' < ')}`)
     if (d.clipped > 0) problems.push(`${tag}: ${d.clipped}px of the form clipped by ${d.clipper}`)

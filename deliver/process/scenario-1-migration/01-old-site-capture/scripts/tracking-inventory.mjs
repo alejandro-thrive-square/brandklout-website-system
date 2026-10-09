@@ -39,7 +39,7 @@ const TAGS = [
   ['Universal Analytics (dead)', /\b(UA-\d{4,10}-\d{1,3})\b/g],
   ['Google Ads', /\b(AW-\d{8,12})\b/g],
   ['Meta Pixel', /fbq\(\s*['"]init['"]\s*,\s*['"](\d{10,20})['"]|facebook\.com\/tr\?id=(\d{10,20})/g],
-  ['Microsoft Clarity', /clarity\.ms\/tag\/([a-z0-9]{8,12})/g],
+  ['Microsoft Clarity (banned: drop and remove)', /clarity\.ms\/tag\/([a-z0-9]{8,12})/g],
   ['Hotjar', /hotjar[^\n]{0,80}?hjid[:=]\s*(\d{5,9})|static\.hotjar\.com\/c\/hotjar-(\d{5,9})/g],
   ['Bing UET', /bat\.bing\.com\/(?:bat\.js|action\/0\?ti=(\d{5,12}))/g],
   ['TikTok Pixel', /analytics\.tiktok\.com[^\s"']*?sdkid=([A-Z0-9]{10,30})|ttq\.load\(['"]([A-Z0-9]{10,30})/g],

@@ -285,6 +285,18 @@ node publish-rows.mjs --site <prod> --table posts   # only if collection rows mo
 node diff-sites.mjs --a <staging> --b <prod>
 ```
 
+**Before promoting, prove staging holds production's SEO.** A promotion carries staging's page
+rows (the published `<title>` is the row's `title` cell; `seoTitle` / `seoDescription` sit beside
+it) and, with `clone-site.mjs`, the shell (`src/scripts/*`). It does NOT carry plugin data
+(open-graph overrides, aeo-schema blocks / organizationJson) or media alt text. So any SEO work
+done on production since staging was seeded is reverted by the promotion unless staging was
+synced first. Dr. Nahlah's pattern (2026-10-05, `22-instatic-api-sync/seo-v2/`): sync with
+`plugin-stores.mjs` (now shared: [`../seo/plugin-stores.mjs`](../seo/README.md) `export` on
+production, `diff` / `import --apply` on staging), `push-seo-v2.mjs`, `retire-runtime-jsonld.mjs` and
+`media-alt-parity.mjs` against the staging host, then `parity-check.mjs` must print `STAGING MATCHES
+PRODUCTION` before `clone-site.mjs` runs. Re-run the site's live SEO gate (`../seo/verify-schema.mjs`)
+after publishing.
+
 `merge-overwrite` + `--rows` moves only what you changed and leaves the client's other edits
 alone. `replace` derives deletions server-side (stored - shipped) and is a whole-site
 cutover - highest blast radius, use deliberately. **Never `--media` in this direction.**
@@ -330,6 +342,13 @@ de-indexing has an order dependency that will bite you if you improvise it.
 2. **Cloudflare Response Header Transform Rule**, scoped to the staging hostname:
    `http.host eq "staging.<client>.com"` -> set `X-Robots-Tag: noindex, nofollow`. Native,
    no Worker, covers every path including images and PDFs.
+   **No Cloudflare zone (Railway host only, `<name>-staging.up.railway.app`: the client's DNS is
+   elsewhere, West LA 2026-10-08)**: there is no edge to set the header. The runtime writes
+   `<meta name="robots" content="noindex, nofollow">` when `location.hostname` is the staging host
+   (site.js patch, marker `WZ_STAGING_NOINDEX`). `check-noindex.mjs` (raw HTML) and the header line of
+   `verify-staging-clean.mjs` then fail by construction; the rendered-DOM checks are the gate there.
+   Tools that must refuse production decide staging from the resolved target's environment, so such a
+   host is accepted (`editor-canvas.mjs`, `output/publish.mjs`).
 3. **Disable `emitCanonical` AND point `siteUrl` at the staging host** on staging's Open Graph
    plugin, then republish. Both, not just the first — see the box below.
 4. **Leave `robots.txt` allowing the crawl.** Counterintuitive but essential: Google has to

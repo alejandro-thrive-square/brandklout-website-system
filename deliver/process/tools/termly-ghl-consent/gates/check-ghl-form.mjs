@@ -36,6 +36,9 @@
  *      redirect on submit must answer 200 (relative paths resolve against --origin).
  *      --landing (and --combo) marks landing-page forms: the page is already one service, so they
  *      need NO service dropdown, and they must redirect to a thank-you page instead.
+ *      No layout shift (2026-10-04): the form's Custom CSS carries tools/ghl-forms/no-shift.css, no
+ *      Custom HTML script hides the privacy_* fields, and all 11 consent fields come after the
+ *      Privacy | Terms links (the CSS hides everything after them).
  *
  *   node check-ghl-form.mjs <formId|url> [...]      > output/ghl-forms.log 2>&1
  *   node check-ghl-form.mjs --standard [--landing] [--origin https://www.client.com] [--legal "X PLLC DBA Y"] [--location <id>] <formId|url> [...]
@@ -80,6 +83,10 @@ async function readForm(idOrUrl) {
     redirectUrl: R(fa.redirectUrl) || '',
     consentFields: consent.size,
     locationId: loc ? R(loc.locationId) : null,
+    labelsVisible: node ? R(node.formLabelVisible) !== false : true,
+    // tools/ghl-forms/no-shift.css, served in <head> with the form's Custom CSS.
+    noShiftCss: /:has\(a\[href\*="?terms-of-service"?\]\)\s*~\s*\.form-field-wrapper/.test(html) && /\.captcha-container\s*\{[^}]*min-height/.test(html),
+    hideScript: /hiddenLabels|hideFields/.test(html),
     fields,
   }
 }
@@ -98,14 +105,25 @@ async function standardProblems(f, { origin, legal, location, landing }) {
   }
   else if (!service) p.push('no service dropdown (a Single Dropdown named Service / Treatment Type)')
   else if (!Array.isArray(service.picklistOptions) || service.picklistOptions.length < 3) p.push(`service dropdown has ${service.picklistOptions?.length ?? 0} options`)
+  const inputs = f.fields.filter((x) => ['text', 'email', 'phone', 'large_text', 'single_options', 'multiple_options', 'date'].includes(x.type) && !isConsent(x))
+  for (const x of inputs) if (!text(x.label).replace(/<[^>]+>/g, '').trim()) p.push(`field "${text(x.placeholder) || x.fieldKey || x.tag}" has no visible label (labels are standard, 2026-10-03)`)
+  const order = f.fields.map((x) => x.type)
+  if (order.includes('captcha') && order.indexOf('captcha') > order.indexOf('submit')) p.push('captcha sits below the Submit button: move it above')
+  if (!order.includes('captcha')) p.push('no Captcha element: add it directly above the Submit button')
+  const cap = f.fields.find((x) => x.type === 'captcha')
+  if (cap && text(cap.label).replace(/<[^>]+>/g, '').trim()) p.push(`captcha shows a label ("${text(cap.label).trim()}"): clear it, the standard captcha has none`)
   const tc = f.fields.find((x) => x.type === 'terms_and_conditions')
   if (!tc) p.push('no SMS consent element (GoHighLevel Terms & Conditions)')
   else {
     if (tc.required === true) p.push('SMS consent checkbox is REQUIRED: A2P 10DLC needs it optional')
     if (/\[BUSINESS NAME\]|\[USE_CASE/i.test(text(tc.placeholder))) p.push('SMS consent still has the [BUSINESS NAME] template text')
+    // A box is text only: a pasted widget (Codex once pasted Turnstile's <div id="cf-turnstile-…">) renders as blank space.
+    for (const [i, b] of [tc.placeholder, tc.placeholder2].entries()) if (/<(div|iframe|input|script)|cf-turnstile/i.test(text(b))) p.push(`SMS consent box ${i + 1} carries pasted markup (div/iframe/widget), not just its text: retype the text`)
     const boxes = [tc.placeholder, tc.placeholder2].map((x) => text(x).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()).filter(Boolean)
     if (boxes.length < 2) p.push(`SMS consent has ${boxes.length} checkbox(es), the standard is two (care + marketing)`)
-    const squash = (x) => x.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+    // GHL stores the box text as HTML, so "&" arrives as &amp; (sometimes &amp;amp;): decode before comparing.
+    const decode = (x) => { let y = x; for (let i = 0; i < 3; i++) y = y.replace(/&amp;/g, '&'); return y.replace(/&nbsp;/g, ' ').replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"') }
+    const squash = (x) => decode(x).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
     if (legal) for (const [i, b] of boxes.entries()) if (!squash(b).includes(squash(legal))) p.push(`SMS consent box ${i + 1} does not name "${legal}": "${b.slice(0, 90)}…"`)
   }
   const hrefs = f.fields.flatMap((x) => [x.label, x.placeholder].map(text)).join(' ').match(/<a\b[^>]*>[\s\S]*?<\/a>/gi) || []
@@ -116,6 +134,11 @@ async function standardProblems(f, { origin, legal, location, landing }) {
     else if (/example\.com/i.test(href)) p.push(`"${want}" still links to ${href}`)
     else if (origin && !href.toLowerCase().startsWith(origin.replace(/\/+$/, '').toLowerCase() + '/')) p.push(`"${want}" links to ${href}, expected ${origin}/…`)
   }
+  if (!f.noShiftCss) p.push('Custom CSS lacks tools/ghl-forms/no-shift.css: the consent fields show for 2-3 s and the captcha grows, so the form jumps on load')
+  if (f.hideScript) p.push('a Custom HTML script hides the privacy_* fields: delete that element, no-shift.css hides them from the first paint')
+  const linksAt = f.fields.findIndex((x) => /terms-of-service/i.test(`${text(x.label)} ${text(x.placeholder)}`))
+  const early = f.fields.filter((x, i) => isConsent(x) && (linksAt < 0 || i < linksAt))
+  if (linksAt >= 0 && early.length) p.push(`${early.length} consent field(s) sit above the Privacy | Terms links: move all 11 below them (no-shift.css hides only what follows the links)`)
   if (location && f.locationId && f.locationId !== location) p.push(`form lives in sub-account ${f.locationId}, the site's is ${location}: its leads land in another practice's CRM`)
   if (f.actionType === '1' && f.redirectUrl) {
     let url = f.redirectUrl
@@ -151,6 +174,7 @@ for (const j of jobs) {
   if (!f.ok) { bad++; console.log(`${f.id}  FAIL  no form payload (wrong id, or the form was deleted)`); continue }
   const problems = []
   if (f.saveExit) problems.push('save-and-exit is ON: turn it off in GoHighLevel (prefilled consent fields trigger "Submission in progress")')
+  if (!f.labelsVisible && f.consentFields) problems.push('form-wide Show Label is OFF: GoHighLevel then renders the hidden privacy_* fields as empty boxes on the public form; turn it back on')
   if (f.consentFields < CONSENT_FIELDS) problems.push(`consent fields ${f.consentFields}/${CONSENT_FIELDS}: create the missing ones in the GoHighLevel sub-account (Query Key = field key) and add them hidden to this form`)
   if (j.expect) {
     if (f.actionType !== '1') problems.push(`on submit it shows an inline message (actionType ${f.actionType}), it must redirect to ${j.expect}`)

@@ -26,8 +26,12 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
    data point), and a machine-readable sitemap. Name the runner-up and why it lost. Never state a
    rejection reason you did not check on the live site.
 2. **Capture them** with Scrapling: desktop screenshots and HTML converted to markdown per page.
-3. **Analyse** their content structure and pages, then find content gaps and keyword opportunities on
-   SpyFu. Keep a keyword map: page, primary keyword, secondary terms, intent, CTA.
+3. **Analyse** their content structure and pages, then find content gaps and keyword opportunities
+   with [`tools/seo-aeo/`](../../tools/seo-aeo/README.md): `autocomplete.mjs` for demand in the
+   client's cities, `serp-instruction.mjs` (through Codex) for who ranks there today, and volumes from
+   the signed-in Ahrefs web app through Codex (`ahrefs-instruction.txt`; the user signs in). Keep the keyword map in that toolkit's format
+   (`keyword-map.template.csv`): one primary keyword per page, the city in it when the intent is
+   local, no two pages sharing one, every page listed. It drives the H1s, titles and schema in step 03.
 4. **Start the sitemap from the specialty template** on the FigJam Sitemap board (General, Implant,
    Oral Surgery, Pediatric, Med Spa); data and section flows in
    [`tools/specialty-sitemaps/`](../../tools/specialty-sitemaps/README.md). Adjust it with the research.
@@ -39,7 +43,11 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
 ## Conditionals
 
 - **If the practice has more than one office:** brand pages at the root, one `/locations/<city>/` branch
-  per office. Each office has its own phone, number pool, GHL form, hours and map.
+  per office. Each office has its own phone, number pool, GHL form, hours and map, a full office page,
+  and its own version of the money service pages written separately (at most 25% shared text,
+  `tools/seo-aeo/page-overlap.mjs`). Towns without an office are named on the nearest office page,
+  never given pages of their own. Never a second website per office
+  ([SEO & AEO standard](../../tools/seo-aeo/README.md#the-standard), rule 7).
 - **If the client runs ads:** plan the three-page combo per campaign under `/ads-landing-pages/`
   ([Scenario 3](../../scenario-3-ads-landing-pages/README.md)).
 - **If the client has blog posts:** a CMS collection with a template page, not static pages.
@@ -56,7 +64,8 @@ approved sitemap with a strategy the client can read. Also lock the facts the co
 ## Tools
 
 - `tools/specialty-sitemaps/` — templates, section flows, and the scripts that built them.
-- Scrapling (Python) for capture; SpyFu for keywords.
+- Scrapling (Python) for capture; [`tools/seo-aeo/`](../../tools/seo-aeo/README.md) for demand,
+  rankings, the keyword map and the Ahrefs volume instruction.
 
 ## Outputs
 

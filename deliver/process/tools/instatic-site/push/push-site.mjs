@@ -47,6 +47,8 @@ import * as P from '../lib/paths.mjs'
 import { getSite, getPages, api, toChangedPage } from '../lib/site.mjs'
 import { assertStaging } from '../lib/staging-guard.mjs'
 import { loadState, saveState, sha, styleRulesHash } from '../lib/push-state.mjs'
+import { repairRegistry } from '../../instatic-api-sync/registry-repair.mjs'
+import { ownedNames } from '../../instatic-api-sync/framework-lib.mjs'
 
 const HERE = P.WORK // was this file's folder; outputs now go to <cwd>/output
 const TMP = path.join(HERE, 'output')
@@ -696,7 +698,22 @@ const fontFaces = (() => {
   return out.join('\n')
 })()
 
-const tokensCss =
+/* EVERYTHING EDITABLE (2026-10-04). Everything below this point until
+   `fontFaces` describes the OLD road: custom properties and the declarations
+   the converter loses, shipped in the `tokens.css` code asset. That asset loads
+   last and is invisible to the Styles panel, so those values could not be
+   edited by hand and beat every panel edit they touched.
+
+   The registry can hold all of them (it is happy-dom, not the registry, that
+   drops them), so now they go back into the rule they were written in —
+   `registryRepair` below, after the live site is read — and the asset carries
+   only the @font-face rules. Framework-owned tokens are left to the Framework.
+   `TOKEN_ASSET=legacy` restores the old asset for one run, if a site needs it.
+   Standard: ../../client-first-style-guide/INSTATIC-FRAMEWORK.md */
+const LEGACY_TOKEN_ASSET = process.env.TOKEN_ASSET === 'legacy'
+const DECLARED_TOKENS = [] // every custom property site-src/css/ declares; filled below
+
+const legacyTokensCss =
   `/* Token primitives, pushed as a code asset by push-site.mjs.\n` +
   `   These CANNOT live in the style registry: happy-dom drops --custom-property\n` +
   `   declarations during conversion, silently. Edit site-src/css/ and re-push. */\n\n` +
@@ -760,17 +777,27 @@ const tokensCss =
         ),
     ),
   ]
-  const missing = MUST.filter((t) => !tokensCss.includes(t + ':'))
-  if (missing.length) {
-    console.error(`REFUSING: the token asset is missing ${missing.join(', ')}. Every var() using them would resolve to nothing on the published site.`)
-    process.exit(1)
+  DECLARED_TOKENS.push(...MUST)
+  if (LEGACY_TOKEN_ASSET) {
+    const missing = MUST.filter((t) => !legacyTokensCss.includes(t + ':'))
+    if (missing.length) {
+      console.error(`REFUSING: the token asset is missing ${missing.join(', ')}. Every var() using them would resolve to nothing on the published site.`)
+      process.exit(1)
+    }
+    console.log(
+      `tokens     ${TOKEN_FILES.join(' + ')} + ${harvested.reduce((n, h) => n + h.blocks.length, 0)} harvested :root block(s) from ` +
+        `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
+    )
+    console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of the pairs the conversion is lossy on (math values, multi-layer backgrounds, properties it drops outright), from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
   }
-  console.log(
-    `tokens     ${TOKEN_FILES.join(' + ')} + ${harvested.reduce((n, h) => n + h.blocks.length, 0)} harvested :root block(s) from ` +
-      `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
-  )
-  console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of the pairs the conversion is lossy on (math values, multi-layer backgrounds, properties it drops outright), from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
 }
+
+const tokensCss = LEGACY_TOKEN_ASSET
+  ? legacyTokensCss
+  : `/* @font-face only, pushed as a code asset by push-site.mjs: the one thing the\n` +
+    `   style registry cannot hold. Every other declaration is in the registry\n` +
+    `   (Styles panel) or the Framework panel. Edit there, or site-src/css/ and re-push. */\n\n` +
+    fontFaces + '\n'
 
 /* The token asset is the one payload here nobody can read back without
    publishing, and three of this workflow's worst defects were in it. Write it
@@ -781,6 +808,39 @@ fs.writeFileSync(path.join(TMP, 'tokens.css'), tokensCss)
 /* --- read current state --------------------------------------------------- */
 const { site, seq } = await getSite()
 const existingPages = (await getPages()).rows ?? []
+
+/* --- EVERYTHING EDITABLE: the converter's losses go back into the registry --
+   See registry-repair.mjs. Runs before the id remap below, so a restored
+   declaration travels with its rule wherever the remap seats it. */
+if (!LEGACY_TOKEN_ASSET) {
+  const owned = ownedNames(site.settings?.framework)
+  const sources = fs.readdirSync(CSS_SRC).filter((n) => n.endsWith('.css')).sort()
+    .map((file) => ({ file, css: fs.readFileSync(path.join(CSS_SRC, file), 'utf8') }))
+  converted.conditions ??= []
+  const rep = repairRegistry({ styleRules: converted.styleRules, conditions: converted.conditions }, sources, { owned, newId: nid })
+  fs.writeFileSync(path.join(TMP, 'registry-repair.txt'), [
+    `restored (${rep.restored.length})`, ...rep.restored, '',
+    `rules the converter dropped whole (${rep.created.length})`, ...rep.created, '',
+    `@keyframes (${rep.keyframes.length})`, ...rep.keyframes, '',
+    `left to the Framework (${rep.owned.length})`, ...rep.owned, '',
+    `residual (${rep.residual.length})`, ...rep.residual.map((r) => `[${r.why}] ${r.file}: ${r.text.slice(0, 200)}`),
+  ].join('\n'))
+  console.log(`registry   ${rep.restored.length} declaration(s) the converter lost put back into their rules, ${rep.created.length} rule(s) recreated, ${rep.keyframes.length} @keyframes, ${rep.owned.length} left to the Framework (owns ${owned.size}) — output/registry-repair.txt`)
+  const notFont = rep.residual.filter((r) => r.why !== '@font-face')
+  if (notFont.length) {
+    console.error(`REFUSING: ${notFont.length} block(s) neither the registry nor the font asset can hold (${[...new Set(notFont.map((r) => r.why))].join(', ')}). Flatten them in site-src/css/ — see output/registry-repair.txt.`)
+    process.exit(1)
+  }
+  const inRegistry = new Set()
+  for (const r of Object.values(converted.styleRules)) {
+    for (const bag of [r.styles ?? {}, ...Object.values(r.contextStyles ?? {})]) for (const k of Object.keys(bag)) if (k.startsWith('--')) inRegistry.add(k)
+  }
+  const missing = [...new Set(DECLARED_TOKENS)].filter((t) => !inRegistry.has(t) && !owned.has(t))
+  if (missing.length) {
+    console.error(`REFUSING: ${missing.join(', ')} declared in site-src/css/ but in neither the registry nor the Framework. Every var() using them would resolve to nothing.`)
+    process.exit(1)
+  }
+}
 
 /* --- THE UPDATE PATH: which pages, and whose ids -----------------------------
    The converter mints a RANDOM id for every style rule on every run, and a

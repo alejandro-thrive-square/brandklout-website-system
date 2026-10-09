@@ -22,16 +22,21 @@
  * rather than an index, so a diff points at a node rather than at an offset.
  */
 
-import { spawn } from 'node:child_process'
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs'
+import { spawn, spawnSync } from 'node:child_process'
+import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { tmpdir } from 'node:os'
 import http from 'node:http'
+import { connect } from './target.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TMP = join(HERE, 'output')
-const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
+// --site <client>[:staging] resolves the host (and the admin login --all-pages needs) through target.mjs.
+const { api, target } = process.argv.includes('--site') || process.argv.includes('--all-pages')
+  ? await connect()
+  : { api: null, target: null }
+const BASE = (target?.url || process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
 /**
@@ -78,22 +83,51 @@ const getJson = (path, port) =>
   })
 
 async function browser() {
-  const port = 9700 + Math.floor(Math.random() * 200)
-  const profile = join(tmpdir(), `cdp-parity-${Date.now()}`)
+  // Port 0: Chrome picks a free port and writes it to <profile>/DevToolsActivePort. A random port in a
+  // fixed range let two parallel runs attach to the SAME browser (Mason Park Kids, 2026-10-05).
+  const profile = join(tmpdir(), `cdp-parity-${process.pid}-${Date.now()}`)
   const proc = spawn(CHROME, [
     '--headless=new', '--disable-gpu', '--hide-scrollbars',
-    `--remote-debugging-port=${port}`, '--remote-allow-origins=*',
+    '--remote-debugging-port=0', '--remote-allow-origins=*',
     '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check',
+    '--disable-crash-reporter', '--disable-breakpad',
     `--user-data-dir=${profile}`, 'about:blank',
   ], { stdio: 'ignore' })
+  // On Windows proc.kill() ends the browser root only: its crashpad, renderer, GPU and utility
+  // children are orphaned and pile up (583 chrome.exe, 432 orphaned, with three fleet sessions
+  // capturing at once on 2026-10-06), until new launches fail. So: Browser.close over CDP, wait
+  // for the exit, then kill the whole tree, then delete the profile.
+  const exited = new Promise((r) => proc.once('exit', r))
+  const killTree = async () => {
+    await Promise.race([exited, wait(5000)])
+    if (proc.exitCode === null && proc.signalCode === null) {
+      if (process.platform === 'win32') spawnSync('taskkill', ['/PID', String(proc.pid), '/T', '/F'], { stdio: 'ignore' })
+      else proc.kill('SIGKILL')
+      await Promise.race([exited, wait(3000)])
+    }
+    for (let i = 0; i < 20; i++) {
+      try { rmSync(profile, { recursive: true, force: true }); break } catch { await wait(500) }
+    }
+  }
+  const fail = async (message) => {
+    if (process.platform === 'win32') spawnSync('taskkill', ['/PID', String(proc.pid), '/T', '/F'], { stdio: 'ignore' })
+    else proc.kill('SIGKILL')
+    await killTree()
+    throw new Error(message)
+  }
 
+  let port
+  for (let i = 0; i < 150 && !port; i++) {
+    try { port = Number(readFileSync(join(profile, 'DevToolsActivePort'), 'utf8').split('\n')[0]) || undefined } catch { await wait(200) }
+  }
+  if (!port) await fail('Chrome did not write DevToolsActivePort')
   let wsUrl
   for (let i = 0; i < 150 && !wsUrl; i++) {
     try {
       wsUrl = (await getJson('/json/version', port)).webSocketDebuggerUrl
     } catch { await wait(200) }
   }
-  if (!wsUrl) throw new Error('Chrome did not expose a debugger socket')
+  if (!wsUrl) await fail('Chrome did not expose a debugger socket')
 
   const sock = new WebSocket(wsUrl)
   const pending = new Map()
@@ -108,10 +142,10 @@ async function browser() {
   })
   await new Promise((r) => sock.addEventListener('open', r, { once: true }))
 
-  const send = (method, params = {}, sessionId) =>
+  const send = (method, params = {}, sessionId, timeoutMs = 60000) =>
     new Promise((res, rej) => {
       const id = ++nextId
-      const timer = setTimeout(() => rej(new Error(`timeout ${method}`)), 60000)
+      const timer = setTimeout(() => rej(new Error(`timeout ${method}`)), timeoutMs)
       pending.set(id, (m) => {
         clearTimeout(timer)
         m.error ? rej(new Error(m.error.message)) : res(m.result)
@@ -121,7 +155,7 @@ async function browser() {
 
   const target = (await getJson('/json/list', port)).find((t) => t.type === 'page')
   const { sessionId } = await send('Target.attachToTarget', { targetId: target.id, flatten: true })
-  const S = (m, p = {}) => send(m, p, sessionId)
+  const S = (m, p = {}, timeoutMs) => send(m, p, sessionId, timeoutMs)
   await S('Page.enable')
   await S('Runtime.enable')
   // CSS-only capture: no GSAP writing inline transforms mid-scroll.
@@ -139,13 +173,28 @@ async function browser() {
 
   return {
     S,
-    evaluate: async (expression) =>
-      (await S('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true })).result.value,
-    close: () => { try { sock.close() } catch {} proc.kill() },
+    evaluate: async (expression, timeoutMs) =>
+      (await S('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }, timeoutMs)).result.value,
+    close: async () => {
+      try { sock.send(JSON.stringify({ id: ++nextId, method: 'Browser.close' })) } catch {}
+      await killTree()
+      try { sock.close() } catch {}
+    },
   }
 }
 
-const CAPTURE = (props) => `(() => {
+/* Animations and transitions are stopped before capture (PARITY_ANIMATIONS=1 keeps them): a looping
+   CSS animation is otherwise sampled at whatever frame the capture lands on, and two captures of
+   one unchanged page disagree (Stone Med Spa's hero cue, 2026-10-05). Stopped, every element reports
+   its resting style, which is what a stylesheet comparison is about. */
+const FREEZE = process.env.PARITY_ANIMATIONS === '1' ? '' : `
+  if (!document.getElementById('parity-freeze')) {
+    const st = document.createElement('style');
+    st.id = 'parity-freeze';
+    st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important}';
+    document.head.appendChild(st);
+  }`
+const CAPTURE = (props) => `(() => {${FREEZE}
   const props = ${JSON.stringify(props)};
   const path = (el) => {
     const parts = [];
@@ -179,6 +228,14 @@ const CAPTURE = (props) => `(() => {
 })()`
 
 async function pageSlugs() {
+  // --all-pages: every page row, from the admin API. The homepage's links miss
+  // pages nothing links to (ads landing pages, thank-you pages).
+  if (process.argv.includes('--all-pages')) {
+    // --prefix blog/ keeps the URLs under one path (a collection's entries).
+    const prefix = process.argv[process.argv.indexOf('--prefix') + 1]
+    const all = await api.pageSlugs() // page rows + every collection entry (templates excluded)
+    return process.argv.includes('--prefix') ? all.filter((s) => s.startsWith(prefix)) : all
+  }
   // Read the published sitemap-ish surface: every internal link from the
   // homepage, plus the homepage. Cheaper and more honest than a hard-coded
   // list, which is what went stale on this project before.
@@ -191,25 +248,56 @@ async function pageSlugs() {
   return [...slugs]
 }
 
-const [cmd, a, b] = process.argv.slice(2)
+const [cmd, a, b] = process.argv.slice(2).filter((x, i, all) => !x.startsWith('--') && all[i - 1] !== '--site' && all[i - 1] !== '--prefix')
 mkdirSync(TMP, { recursive: true })
 
 if (cmd === 'snapshot') {
   if (!a) throw new Error('usage: css-parity.mjs snapshot <label>')
   const slugs = await pageSlugs()
   console.log(`capturing ${slugs.length} pages from ${BASE} at ${VIEWPORT.width}x${VIEWPORT.height} (scripts disabled)`)
-  const br = await browser()
+  let br = await browser()
   const snapshot = {}
   try {
     for (const slug of slugs) {
-      await br.S('Page.navigate', { url: `${BASE}/${slug}` })
-      await wait(2500)
-      const data = await br.evaluate(CAPTURE(PROPS))
+      // A page gets PAGE_BUDGET ms. A hung renderer used to stall a pass for 80+ minutes (each readiness
+      // poll waited out its 60 s CDP timeout, 120 times: Dr. Nahlah /all-on-4-alexandria-va at 1920,
+      // 2026-10-08). Over budget, the page is recorded empty (a broken capture, which the gates treat as
+      // unreliable and the second `~n` capture covers) and the browser is restarted.
+      const started = Date.now()
+      const PAGE_BUDGET = Number(process.env.PARITY_PAGE_BUDGET ?? 90000)
+      const over = () => Date.now() - started > PAGE_BUDGET
+      try {
+      await br.S('Page.navigate', { url: `${BASE}/${slug}` }, 30000)
+      // Wait for the document AND its stylesheets (readyState 'complete'), then settle. A fixed
+      // 2.5 s used to be enough; on a busy machine it captured a page before its CSS arrived
+      // (Stone Surgical Arts hipaa-disclosure, 2026-10-05: 381 phantom differences).
+      await wait(800)
+      for (let t = 0; t < 120; t++) {
+        const ready = await br.evaluate(`document.readyState === 'complete' && [...document.styleSheets].length > 0`, 5000).catch(() => false)
+        if (ready || over()) break
+        await wait(500)
+      }
+      // and for web fonts: a fallback face wraps text differently (Stone Surgical Arts hipaa, +2px
+      // paragraphs under load). `document.fonts.ready` can resolve before the CSS declaring the faces
+      // is parsed, so wait until no face is still loading.
+      for (let t = 0; t < 40; t++) {
+        const fontsDone = await br.evaluate(`document.fonts.status === 'loaded' && ![...document.fonts].some((f) => f.status === 'loading')`, 5000).catch(() => true)
+        if (fontsDone || over()) break
+        await wait(250)
+      }
+      await wait(1200)
+      const data = await br.evaluate(CAPTURE(PROPS), Math.max(20000, PAGE_BUDGET - (Date.now() - started)))
       snapshot[slug || '/'] = data
       console.log(`  ${(slug || '/').padEnd(34)} ${Object.keys(data ?? {}).length} elements`)
+      } catch (e) {
+        snapshot[slug || '/'] = {}
+        console.log(`  ${(slug || '/').padEnd(34)} CAPTURE FAILED (${String(e.message ?? e).slice(0, 60)}): recorded empty, browser restarted`)
+        await br.close().catch(() => {})
+        br = await browser()
+      }
     }
   } finally {
-    br.close()
+    await br.close()
   }
   const file = join(TMP, `parity-${a}-${VIEWPORT.width}.json`)
   writeFileSync(file, JSON.stringify(snapshot), 'utf8')

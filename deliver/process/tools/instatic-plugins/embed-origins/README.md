@@ -26,6 +26,13 @@ description of the block — mode, destination host(s), height rule — sized to
 occupy. It loads no vendor, runs no vendor markup and leaks no vendor stylesheet into the editor.
 The embed itself appears when the page is published; `render()` is unchanged.
 
+**URL mode writes `loading="lazy"` by default** (the *Lazy load* toggle, `lazy: true`). Never use
+it for a GoHighLevel form, survey or booking frame: GHL's `form_embed.js` parks those frames at
+`left:-9999px` until they load, and a lazy frame parked there never loads — no form in Firefox
+(Stone Med Spa, 2026-10-06). Use **snippet** mode with GHL's paste as given, or turn *Lazy load*
+off. Gate: `deliver/process/tools/ghl-forms/check-embed.mjs` (tools/ghl-forms/README.md,
+"Embedding the form").
+
 See `deliver/process/tools/instatic-embeds/instatic-embeds.md` for how to use
 the block, and `deliver/process/tools/instatic-plugins/README.md` (Scenario 4) for how to build,
 test, install and update it across sites.

@@ -70,19 +70,25 @@ nothing was ever connected.
 The reference is composed the opposite way:
 
 ```html
-<section class="ch-arrival"        data-chapter="0" data-chapter-name="Arrival">
-<section class="ch-reality"        data-chapter="1" data-chapter-name="The Reality">
-<section class="ch-difference"     data-chapter="2" data-chapter-name="The Difference">
-<section class="ch-specialist"     data-chapter="3" data-chapter-name="The Specialist">
-<section class="ch-transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light">
-<section class="ch-path"           data-chapter="5" data-chapter-name="The Path">
-<section class="ch-standard"       data-chapter="6" data-chapter-name="The Standard">
-<section class="ch-proof"          data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
-<section class="ch-invitation"     data-chapter="8" data-chapter-name="Invitation" data-theme="dark">
+<section class="section_arrival"        data-chapter="0" data-chapter-name="Arrival">
+<section class="section_reality"        data-chapter="1" data-chapter-name="The Reality">
+<section class="section_difference"     data-chapter="2" data-chapter-name="The Difference">
+<section class="section_specialist"     data-chapter="3" data-chapter-name="The Specialist">
+<section class="section_transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light">
+<section class="section_path"           data-chapter="5" data-chapter-name="The Path">
+<section class="section_standard"       data-chapter="6" data-chapter-name="The Standard">
+<section class="section_proof"          data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
+<section class="section_invitation"     data-chapter="8" data-chapter-name="Invitation" data-theme="dark">
 ```
 
 Nine **named narrative beats**, in an order that cannot be shuffled. The name says what the beat
 *does to the reader*, never what widget sits inside it. Scroll is the medium the story is told in.
+
+> **Name them the Client-First way** ([CLASS-STANDARD.md](../../tools/client-first-style-guide/CLASS-STANDARD.md)):
+> the beat is the section identifier, `section_arrival`, and everything inside it lives in that
+> folder, `arrival_title`, `arrival_media`, `arrival_scroll-cue`. Never the `ch-arrival` /
+> `ch-` prefix this standard used before 2026-10-05: it is an abbreviation, and five sites had to be
+> migrated off it. Scripts find a chapter by `data-chapter`, never by its class.
 
 > **Smell test.** If your section classes are `band-*`, `section--light`, `section--paper`,
 > `section--tight` — you built bands. Rename them to the beat they perform. If you cannot name the
@@ -528,7 +534,8 @@ Check for, and fix:
   top of the form submit
 - Images distorted, stretched, or overflowing their container
 - Hero text unreadable over its media at narrow widths
-- Nav/drawer opening, closing, and trapping focus correctly
+- Nav/drawer opening, closing, and trapping focus correctly, and **every submenu tapped open inside
+  the drawer**: each link on screen, inside the drawer, readable (`gates/nav-menus.mjs`)
 - Motion that works at 1440 but breaks or janks at 390
 
 Paid dental traffic is mostly mobile, so 360 and 390 matter more than 1920.
@@ -546,6 +553,15 @@ Paid dental traffic is mostly mobile, so 360 and 390 matter more than 1920.
 - **Height problems need height queries**; a `max-width` query cannot see "too tall for the screen".
 - **Check the widest screen against the narrowest asset.** A full-bleed section is the one place an
   image can exceed its source: at 2560 the Stone hero column was 1254px against a 1200px file.
+- **Desktop menu states reach the phone drawer.** A hover dropdown centred with
+  `transform: translateX(-50%)` on `.item.has-dropdown:hover > .list` and `:focus-within` (four
+  classes) beats the drawer's `.list { transform: none }` (one) at every width, and a tap FOCUSES
+  the parent link. On Mason Park the open Services list slid half its width past the drawer's left
+  edge, on production and staging, while every gate passed. **Write desktop-only menu states (hover
+  and focus opening, centring transforms, flyout `left: 100%`) inside
+  `@media (min-width: <drawer breakpoint + 1px>)`**, so none of them exists in the drawer. Retrofitting
+  an existing site, repeat each desktop selector in the drawer block with the menu class in front.
+  `gates/nav-menus.mjs` taps every submenu open and fails on it.
 
 ### Capture gotchas
 
@@ -573,6 +589,9 @@ A page is not done when the sections exist. It is done when **all** of these hol
 9. Zero horizontal overflow at 360 and 390, and no control clipped past the right edge
 10. Offer, phone and form reachable at every scroll depth on mobile
 11. **Fluid root installed and clean** — `node scripts/fluid-root.mjs --check <package>` exits 0
+12. **Every menu opens readable** — `gates/nav-menus.mjs --widths 360,390,768,1024,1440` ends
+    `PROBLEMS  none`: each submenu tapped open in the phone drawer and hovered open on desktop, every
+    link inside the screen and the drawer
 
 The one-sentence test: **would a visitor describe this as a place they went, or a page they read?**
 If it reads as a stack of cards with animation on it, it fails — rebuild the architecture, keep the

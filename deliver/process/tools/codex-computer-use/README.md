@@ -9,7 +9,7 @@ user's choice on 2026-10-02.
 
 ```bash
 node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction with its stopping point>" \
-  [--allow-writes] [--out <dir>] [--timeout <minutes, default 20>]
+  [--allow-writes] [--model <slug>] [--effort <low|medium|high>] [--out <dir>] [--timeout <minutes, default 20>]
 ```
 
 - Prints Codex's final report. `prompt.txt`, `report.md` and `session.log` (Codex's JSON event stream, which includes the code each tool call ran) land in `--out` (default
@@ -21,6 +21,37 @@ node deliver/process/tools/codex-computer-use/codex_cu.mjs "<plain instruction w
 - **Read-only by default.** `--allow-writes` permits only the changes the instruction names.
   Delete, regenerate, pay, send, invite and publish still have to be named explicitly.
 - Write one plain instruction. No per-site steps (see the `computer-use-must-be-generic` feedback).
+
+## Speed
+
+Measured 2026-10-04 on the same read-only task (top 3 stories on lobste.rs, `gpt-6-luna`, medium
+effort): the old wrapper took **58s and 5 tool calls**, and the current one takes **38s and 2**.
+- **Browser setup comes ready to run.** The prompt carries the Chrome plugin's Bootstrap code (setup,
+  select Chrome, read its docs, list open tabs) as one `js` call. Codex used to spend 2–3 turns
+  reading `SKILL.md`, connecting and then listing tabs. If that call fails, it falls back to the skill.
+- **A speed rule in the prompt:** batch reads and actions into one `js` call, read pages through
+  the DOM or accessibility tree rather than screenshots, and go straight to a URL the task gives.
+- **`--effort low|medium|high`** (default `medium`, which the wrapper now passes explicitly). `low` is
+  about 25% faster but skips rules: twice it stopped at a tab locked by another session instead of
+  opening its own. Use it only for simple reads on a site with no open tab.
+- **What you control:** put every question for one site in one instruction (each run pays the
+  ~20s setup again), give the deep URL, and run *different* sites in parallel (see below).
+
+## Usage limits and reset credits
+
+Codex runs on the ChatGPT plan's usage windows (5-hour and weekly). `codex-limits.mjs` reads them,
+and spends the plan's **rate-limit reset credits**, through the app server's own JSON-RPC
+(`account/rateLimits/read`, `account/rateLimitResetCredit/consume`) with the app's signed-in account:
+
+```bash
+node deliver/process/tools/codex-computer-use/codex-limits.mjs status   # % used, reset credits left
+node deliver/process/tools/codex-computer-use/codex-limits.mjs reset    # spend one, only when a limit is reached
+```
+
+**`codex_cu.mjs` resets automatically** (user's instruction, 2026-10-03): before a run it spends a
+credit if a limit is already reached, and when a run dies on a usage limit it spends one and retries
+once. `--no-auto-reset` turns that off. Each spend is printed on stderr as `[codex-cu] limits reset: …`.
+To stretch the plan, keep the default `gpt-6-luna`; reach for `--model gpt-6.1-sol` only when luna fails a task.
 
 ## Parallel runs
 
@@ -90,6 +121,19 @@ dashboards and reading pages.
   catch, same day). Runs now `close()` the tabs they opened before reporting; only tabs the user
   had open are kept, and those are released. Tabs left by runs before `b1379d58` stay locked to
   their old sessions: close them by hand once.
+- **Leave no idle tab behind (the user's rule, 2026-10-07).** "Close the tabs that you are not
+  working on … we shouldn't have tabs that we're not going to use open." Releasing a reused tab
+  still left it open, and a run whose browser disconnected mid-task (West LA GoHighLevel,
+  2026-10-07) left its new tab behind. The prompt now has Codex close every tab it worked in,
+  both the ones it opened and the ones it claimed, and any extra idle agent tabs on the same site.
+  It leaves open only a tab the user is clearly mid-edit in. A tab it could not close is listed in
+  the report under "Tabs left open". The caller then closes it with a short follow-up run, or tells
+  the user. The same rule applies to Claude in Chrome: `tabs_close_mcp` every tab you created
+  before you finish.
+  Two leaks seen the same day: a link that opens in a new tab (GoHighLevel's workflow list) makes
+  a tab the run never tracked, so Codex now re-lists the tabs before reporting and closes the new
+  ones; and a tab held by a run that died stays locked to that session, so no later run can close
+  it. Those are closed by hand.
 - **A tab a session keeps open stays claimed by that session.** Excalidraw, 2026-10-02: the drawing
   run marked its tab as a deliverable, and a later read-only run couldn't claim it ("already claimed
   by another browser session"). Do any checks inside the run that made the tab, or have the user look.

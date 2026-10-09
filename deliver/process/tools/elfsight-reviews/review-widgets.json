@@ -1,7 +1,7 @@
 {
  "generated": "2026-09-30",
  "account": "trong@driverank.com",
- "quota": "31/50 Google Reviews widgets after this rollout",
+ "quota": "32/50 Google Reviews widgets (2026-10-04)",
  "dashboard": {
   "b825b050-9f58-401f-a7b5-ebaa836a9661": "Livewell Dental - Google Reviews 2",
   "d359c3c4-40bc-4c66-87ae-714ed666eb01": "Mason Park Dental for Kids",
@@ -25,7 +25,8 @@
   "aae2cece-bb76-44df-b210-a7e9bafcfcbc": "Atwood Implant Dentistry Carousel",
   "6e983c99-8a3e-462a-a591-76516ba17221": "Grand Mission Dentistry",
   "91c823e3-6657-49f9-b47c-c783c5865a0a": "Haven Cosmetic Dentistry & Implant Center",
-  "ef203923-1351-44a5-a9b0-e0f603e178d6": "AVA Dental implants"
+  "ef203923-1351-44a5-a9b0-e0f603e178d6": "AVA Dental implants",
+  "e30c1531-deaf-4e44-b3de-61cf3426bce9": "Mason Park Dental - Google Reviews"
  },
  "widgets": [
   {
@@ -64,7 +65,7 @@
    "otherVendors": [
     "reputationhub"
    ],
-   "note": "Site uses a reputationhub widget; the Elfsight widget is created but not placed. Nahlah has a second location (Alexandria) not included."
+   "note": "Site uses a reputationhub widget; the Elfsight widget is created but not placed. Nahlah has a second location (Alexandria) not included. 2026-10-04: restyled to the in-section standard from the live site (assumes a light section); not placed, render-check when it is."
   },
   {
    "key": "arvada",
@@ -134,15 +135,17 @@
    "url": "https://www.masonparkdental.com",
    "platform": "instatic",
    "clientFolder": "mason-park",
-   "widget": "32926aff-7df5-4c6d-8f35-d4d3f5f46b4b",
-   "account": "other",
-   "listing": "Mason Park Dental of Katy, 21830 Kingsland Blvd #104A, Katy, TX 77450",
-   "verified": null,
-   "state": "other-account-all-in-one",
-   "onSite": [],
+   "widget": "e30c1531-deaf-4e44-b3de-61cf3426bce9",
+   "account": "trong@driverank.com",
+   "listing": "Mason Park Dental of Katy, 21830 Kingsland Blvd #104A, Katy, TX 77450, USA",
+   "verified": "4.9 (1,087)",
+   "state": "live-on-site",
+   "onSite": [
+    "e30c1531-deaf-4e44-b3de-61cf3426bce9"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "Has an All-in-One Reviews widget 32926aff in the OTHER Elfsight account on its #104A listing (old site). Not recreated."
+   "note": "2026-10-04: new Google Reviews widget on / and /patient-reviews (in-section standard, gate ok). Replaces the practice's All-in-One Reviews 32926aff in the OTHER account (no Google logo in its header); 32926aff still exists there, off the site. Read more #2E3538 (brown failed 4.5:1 on sand)."
   },
   {
    "key": "omnia",
@@ -213,14 +216,14 @@
    "widget": "d359c3c4-40bc-4c66-87ae-714ed666eb01",
    "account": "trong@driverank.com",
    "listing": "Mason Park Dental for Kids - Pediatric Dentist Katy TX, 21830 Kingsland Blvd #104B, Katy, TX 77450, USA",
-   "verified": null,
+   "verified": "4.9 (97)",
    "state": "live-on-site",
    "onSite": [
     "d359c3c4-40bc-4c66-87ae-714ed666eb01"
    ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: in-section standard, gate ok (reference widget)."
   },
   {
    "key": "south-bay",
@@ -274,18 +277,20 @@
    "account": "trong@driverank.com",
    "listing": "West LA Implants, 12301 Wilshire Blvd #205, Los Angeles, CA 90025",
    "verified": "4.9 (209)",
-   "state": "created-not-placed",
-   "onSite": [],
+   "state": "live-on-site",
+   "onSite": [
+    "670ca31c-8602-42c1-a126-f46f653fe07f"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "Placed 2026-09-30 on the Instatic site (homepage proof chapter), served at west-la-implants-production.up.railway.app while westlaimplants.com is still WordPress. 2026-10-04: in-section standard from the Instatic site (dark: #161613 cards, cream text, gold #C4A36A square button); gate ok rendered."
   },
   {
    "key": "dentiq",
    "label": "Dentiq",
    "url": "https://www.dentiq.dental",
    "platform": "webflow",
-   "clientFolder": null,
+   "clientFolder": "dentiq",
    "widget": "f81ba9fa-74c2-41af-974e-744a1e19256d",
    "account": "trong@driverank.com",
    "listing": "Dentiq Dentistry Houston, 1355 W Gray St, Houston, TX 77019",
@@ -312,7 +317,7 @@
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": "Its widget c92f78df exists but is not on dfwsurgicalarts.com; it is embedded on stonedentalimplantcenter.com instead."
+   "note": "Its widget c92f78df exists but is not on dfwsurgicalarts.com; it is embedded on stonedentalimplantcenter.com instead. 2026-10-04: NOT restyled - it is the badge in Stone Dental (Webflow) footer."
   },
   {
    "key": "stone-med",
@@ -323,12 +328,14 @@
    "widget": "73fff4ec-b68f-4c97-af8a-7b022584e166",
    "account": "trong@driverank.com",
    "listing": "Westlake Medical Aesthetics, 72 Andorra Dr #110b, Westlake, TX 76262",
-   "verified": "5.0 (15)",
-   "state": "created-not-placed",
-   "onSite": [],
+   "verified": "5.0 (16)",
+   "state": "live-on-site",
+   "onSite": [
+    "73fff4ec-b68f-4c97-af8a-7b022584e166"
+   ],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "2026-10-04: in-section standard (green pill, cream cards; white plate + 32px padding because the site wraps the embed in a padless white card on a dark section). Homepage. The widget title was the only heading; the section has the \"In their words\" eyebrow. Read more #272727 (green failed 4.5:1)."
   },
   {
    "key": "hackensack",
@@ -490,11 +497,11 @@
    "account": "trong@driverank.com",
    "listing": "Institute for Advanced Dentistry and Implants, 13360 N 94th Dr B, Peoria, AZ 85381",
    "verified": "5.0 (96)",
-   "state": "created-not-placed",
+   "state": "live-on-staging",
    "onSite": [],
    "deadOnSite": [],
    "otherVendors": [],
-   "note": null
+   "note": "On staging.ifadentistry.com home (the redesign, placed 2026-09-30); production gets it with the rebuilt site. 2026-10-04: in-section standard from the staging site (#EBE5D8 cards, gold #C3972B button, text-safe gold #74560F for Read more); gate ok rendered."
   },
   {
    "key": "oceanic",

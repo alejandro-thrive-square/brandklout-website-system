@@ -1,0 +1,226 @@
+{
+  "_comment": "Framework spec for a NEW build (framework.mjs apply). Fill the values from the style pick; keep the names: client-first-starter.css reads them. Sizes are px at root 16 and must be whole at two rem decimals (16, 18, 20, 24, 28, 32 …). Per-breakpoint type scaling stays in the registry :root as formulas (--size-h1: calc(var(--size-h1-base) * var(--t-display))). See INSTATIC-FRAMEWORK.md.",
+  "preferences": {
+    "rootFontSize": 16,
+    "isRem": true
+  },
+  "colors": [
+    {
+      "slug": "neutral-darkest",
+      "value": "#1a1a1a"
+    },
+    {
+      "slug": "neutral-dark",
+      "value": "#4a4a4a"
+    },
+    {
+      "slug": "neutral",
+      "value": "#6a6a6a"
+    },
+    {
+      "slug": "neutral-light",
+      "value": "#d8d3ca"
+    },
+    {
+      "slug": "neutral-lightest",
+      "value": "#f6f4ef"
+    },
+    {
+      "slug": "white",
+      "value": "#ffffff"
+    },
+    {
+      "slug": "brand",
+      "value": "#0a5c4a"
+    },
+    {
+      "slug": "brand-dark",
+      "value": "#06402f"
+    },
+    {
+      "slug": "bg",
+      "value": "var(--neutral-lightest)"
+    },
+    {
+      "slug": "bg-alt",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "bg-deep",
+      "value": "var(--neutral-darkest)"
+    },
+    {
+      "slug": "fg",
+      "value": "var(--neutral-darkest)"
+    },
+    {
+      "slug": "fg-body",
+      "value": "var(--neutral-dark)"
+    },
+    {
+      "slug": "fg-mute",
+      "value": "var(--neutral)"
+    },
+    {
+      "slug": "accent",
+      "value": "var(--brand)"
+    },
+    {
+      "slug": "accent-flat",
+      "value": "var(--brand)"
+    },
+    {
+      "slug": "accent-hover",
+      "value": "var(--brand-dark)"
+    },
+    {
+      "slug": "btn-ink",
+      "value": "var(--white)"
+    },
+    {
+      "slug": "line",
+      "value": "var(--neutral-light)"
+    },
+    {
+      "slug": "line-strong",
+      "value": "var(--neutral)"
+    },
+    {
+      "slug": "focus",
+      "value": "var(--brand)"
+    }
+  ],
+  "typography": [
+    {
+      "group": "Typography",
+      "sizes": [
+        {
+          "name": "size-h1-base",
+          "px": 76
+        },
+        {
+          "name": "size-h2-base",
+          "px": 52
+        },
+        {
+          "name": "size-h3-base",
+          "px": 36
+        },
+        {
+          "name": "size-h4-base",
+          "px": 28
+        },
+        {
+          "name": "size-h5-base",
+          "px": 20
+        },
+        {
+          "name": "size-h6-base",
+          "px": 18
+        },
+        {
+          "name": "size-text-large-base",
+          "px": 20
+        },
+        {
+          "name": "size-text-medium-base",
+          "px": 18
+        },
+        {
+          "name": "size-text-regular-base",
+          "px": 16
+        },
+        {
+          "name": "size-text-small-base",
+          "px": 14
+        },
+        {
+          "name": "size-text-tiny-base",
+          "px": 12
+        }
+      ]
+    }
+  ],
+  "spacing": [
+    {
+      "group": "Spacing",
+      "sizes": [
+        {
+          "name": "space-0",
+          "px": 0
+        },
+        {
+          "name": "space-xxsmall",
+          "px": 4
+        },
+        {
+          "name": "space-xsmall",
+          "px": 8
+        },
+        {
+          "name": "space-small",
+          "px": 16
+        },
+        {
+          "name": "space-medium",
+          "px": 32
+        },
+        {
+          "name": "space-large",
+          "px": 48
+        },
+        {
+          "name": "space-xlarge",
+          "px": 64
+        },
+        {
+          "name": "space-xxlarge",
+          "px": 80
+        },
+        {
+          "name": "space-huge",
+          "px": 96
+        },
+        {
+          "name": "space-xhuge",
+          "px": 128
+        },
+        {
+          "name": "space-xxhuge",
+          "px": 192
+        }
+      ]
+    },
+    {
+      "group": "UI",
+      "sizes": [
+        {
+          "name": "radius-card",
+          "px": 20
+        }
+      ]
+    }
+  ],
+  "registry": [
+    {
+      "selector": ":root",
+      "remove": [],
+      "set": {
+        "--size-h1": "calc(var(--size-h1-base) * var(--t-display))",
+        "--size-h2": "calc(var(--size-h2-base) * var(--t-heading))",
+        "--size-h3": "calc(var(--size-h3-base) * var(--t-heading))",
+        "--size-h4": "calc(var(--size-h4-base) * var(--t-sub))",
+        "--size-h5": "calc(var(--size-h5-base) * var(--t-sub))",
+        "--size-h6": "calc(var(--size-h6-base) * var(--t-sub))",
+        "--size-text-large": "calc(var(--size-text-large-base) * var(--t-text))",
+        "--size-text-medium": "calc(var(--size-text-medium-base) * var(--t-text))",
+        "--size-text-regular": "calc(var(--size-text-regular-base) * var(--t-text))",
+        "--size-text-small": "calc(var(--size-text-small-base) * var(--t-text))",
+        "--size-text-tiny": "calc(var(--size-text-tiny-base) * var(--t-text))",
+        "--radius": "999px",
+        "--ease": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "--space-tiny": "0.125rem"
+      }
+    }
+  ]
+}

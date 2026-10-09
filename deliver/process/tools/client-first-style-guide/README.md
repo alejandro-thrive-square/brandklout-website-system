@@ -14,6 +14,10 @@ Published source of the Webzite Relume style guide page, captured for reference 
 
 The CSS file is the primary artifact: it contains every class definition and CSS variable the style guide exposes. Re-extract after any style-guide publish; the hashed filenames change on each Webflow publish.
 
+## On Instatic
+
+The tokens of this style guide go into the Instatic Framework panel, renamed to Framework-safe names, so colours, type and spacing stay editable by hand after every AI upload: [INSTATIC-FRAMEWORK.md](./INSTATIC-FRAMEWORK.md).
+
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). Text artifacts here are lightweight and committable; re-extraction should replace files in place in one atomic commit.

@@ -14,16 +14,19 @@ Top to bottom:
 
 | # | Element | Rule |
 | :- | :--- | :--- |
+| 0 | **Labels** | **Every visible field has a label above it** (Name, Phone, Email, Service, Message…), placeholders as hints, like Mason Park's `/contacts` form. Owner decision 2026-10-03; it differs from the Grand Mission model, which is placeholder-only. Never turn the form-wide *Show Label* switch off (see Gotchas). |
 | 1 | Name | First + Last Name, or Full Name. Keep whatever the form already has. |
 | 2 | Phone, Email | Keep. |
 | 3 | **Service** | **Site forms only (contact, appointment). Landing-page forms have none**: the patient already landed on one service, and those forms redirect to the campaign's thank-you page instead. Single Dropdown, contact custom field `Service` (reuse `Service` / `Treatment Type` if the sub-account has one). Placeholder *Select a service*, **required**. 8–12 options from the site's own services pages, in the practice's words, ending with *Other*. |
 | 4 | Message | Keep (Multi Line, optional). |
-| 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. |
-| 6 | Captcha, Submit | Keep; never change the Submit label unless the task says so. |
+| 5 | **SMS consent** | GHL's standard **Terms & Conditions** element. **Not required, unchecked.** Checkbox 1 = care messages, checkbox 2 = marketing (texts below), with the practice's **legal name**. **Both boxes the same font size (14px)**; GHL keeps an inline 16px on box 1, so `site-style.mjs --compare` measures the rendered sizes. |
+| 6 | Captcha, Submit | **Captcha above the Submit button.** Never change the Submit label unless the task says so. |
 | 7 | **Privacy Policy \| Terms of Service** | Text element, links to `<origin>/privacy-policy` and `<origin>/terms-of-service`, new tab. GHL's default is `https://www.example.com` — never ship it. |
-| — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). |
+| — | 11 hidden consent fields | `privacy_*` + `marketing_disclosure_version`, hidden, Query Key = field key ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md)). **All 11 sit after the Privacy \| Terms links**, and they are hidden by CSS, not a script (see [No layout shift](#no-layout-shift)). |
+| — | **No layout shift** | [`no-shift.css`](./no-shift.css) at the top of the form's **Custom CSS**, and **no hide script**: delete any Custom HTML element whose script hides the `privacy_*` fields. |
 | — | **Styling** | Matches the site, not GHL's defaults (Inter, grey `#D0D5DD` borders, blue `#155EEF` button). See [Styling](#styling). |
 | — | Save-and-exit | **Off** ([termly-ghl-consent](../termly-ghl-consent/termly-ghl-consent.md), gotcha "Submission in progress"). |
+| — | **The embed on the site** | GHL's paste **as GHL gives it**. **Never `loading="lazy"`** on the iframe, and an Embed block in URL mode must have *Lazy load* **off** — a lazy GHL frame never appears in Firefox. See [Embedding the form](#embedding-the-form). Gate: [`check-embed.mjs`](./check-embed.mjs). |
 
 ### The model, field by field
 
@@ -45,6 +48,9 @@ Grand Mission's *Contact Form Website* (`HHUjLT7QwNmfVq4yjxw5`), read from its p
 | 11–21 | 11 consent fields, hidden | `contact.privacy_*`, `contact.marketing_disclosure_version` | Query Key = the key without `contact.` | no |
 | 22 | Custom HTML | `html` | GHL's empty default ("The Custom HTML goes here") | |
 
+The Mason Park forms (2026-10) also had a Custom HTML element at the bottom holding a script that hid
+the 11 fields by their label text. It is replaced by [`no-shift.css`](./no-shift.css): delete it.
+
 Two things in the model differ from the table above: nothing is *required* (the `*` is only typed
 into the placeholders), and its dropdown is called *Treatment Type*. Both are open for the owner to
 settle against the reference video (see [Open questions](#open-questions)).
@@ -61,10 +67,14 @@ Consent texts (`{LEGAL}` = the legal name, e.g. *Mason Park Dental PLLC DBA Maso
 
 > By checking this box, I consent to receive occasional marketing messages from {LEGAL}, such as
 > special offers, discounts, newsletters, and updates about services. Message frequency may vary.
-> Message and data rates may apply. Reply HELP for assistance or STOP to opt out.
+> Message and data rates may apply. Reply HELP for assistance or STOP to opt out. Consent is not a
+> condition of purchase.
 
 The checkbox stays optional because A2P 10DLC (the carriers' SMS registration) rejects consent
-that is a condition of submitting the form.
+that is a condition of submitting the form. The marketing box says so in words: "Consent is not a
+condition of purchase." was added to the standard on 2026-10-07 after Brandklout's review of the
+West LA Implants ad pages flagged its absence (TCPA wording for marketing texts). Forms built
+before that date lack it; add it when a form is next touched.
 
 ## Steps
 
@@ -100,9 +110,52 @@ that is a condition of submitting the form.
    form, not even to copy its style (2026-10-02: an open builder on a live lead form looked like
    an edit, and the user stopped it). Give the style from the site's tokens instead. A form in the
    wrong sub-account is not moved: build it new in the right one, swap the embed, retire the old one.
-6. **Gate again** (step 3). It must print `ok`. Then look at the form once on the live page in a
-   normal browser: in automation the embed stays hidden behind Cloudflare Turnstile.
+6. **Gate again** (step 3). It must print `ok`. Then gate the embed on every page of the site:
+   `node deliver/process/tools/ghl-forms/check-embed.mjs https://www.<client>.com [--page /ads-…] > output/ghl-embed.log 2>&1`
+   ([Embedding the form](#embedding-the-form)); it must print `ok`. Then look at the form once on
+   the live page in a normal browser **and in Firefox at phone width**: in automation the embed
+   stays hidden behind Cloudflare Turnstile, and Chrome hides embed bugs Firefox shows.
 7. **Record** it in the client runbook: form id, the service list, the legal name used.
+
+## Embedding the form
+
+Paste GHL's embed code **as GHL gives it**: the `<iframe … data-form-id …>` plus
+`<script src="https://link.msgsndr.com/js/form_embed.js">`. On Instatic it goes in an Embed block in
+**snippet** mode (the importer turns a bare third-party `<iframe>` into an empty div); on Webflow,
+in the page's native embed route. The one edit allowed is a fixed `height:<data-height>px` in place
+of GHL's `height:100%`, which collapses inside an auto-height wrapper.
+
+**Never add `loading="lazy"` to the iframe.** `form_embed.js` hides every GHL frame on the page as
+soon as the page loads (`opacity:0; visibility:hidden; position:absolute; left:-9999px`) and only
+reveals it when the form inside reports its height. A lazy frame below the fold waits until it
+nears the viewport, and parked at `-9999px` it never does: it never loads, never reveals, and the
+slot stays blank **forever**. Chrome and Safari usually start the load before the hide, so the form
+looks fine to us; Firefox does not.
+
+Found 2026-10-06 on Stone Med Spa `/book` (form `Gqnb0W1NH95MjROPRaLe`): the client said the form
+"is not showing at all" while it worked in our Chrome. Firefox at 390, 768 and 1366 wide never even
+requested the frame; Chrome revealed it in 5–13 s, WebKit in 8–14 s, Firefox at 1440 in 7 s (there
+the form sat inside the lazy margin). The same page without `lazy` revealed in Firefox at every
+size. The `lazy` had been our own "below the fold" edit of the paste.
+
+The same trap, other doors:
+
+- **The Embed block's URL mode** (`brandklout.embed-origins`) writes `loading="lazy"` on its iframe
+  by default (*Lazy load* on). On a page that also loads `form_embed.js`, a GHL frame placed by URL
+  is hidden the same way. Use snippet mode for GHL, or turn *Lazy load* off.
+- **A "form failed" fallback must test visibility, not height.** The hidden frame keeps its full
+  height (565px on `/book`), so `clientHeight < 40` never fires. Test `visibility`/`opacity`/
+  `left:-9999px`, give it ~25 s (a reveal takes up to ~25 s on a slow phone), and remove the message
+  if the form reveals later. Reference: Stone Med Spa `site-src/js/11-form.js` (bk-stone-med-spa).
+- **"Not showing for the client, fine for me"** is an engine difference until proven otherwise.
+  Probe Firefox and WebKit at phone width (Playwright `firefox` / `webkit`, `playwright-core@1.49.1`
+  on this workstation) on the live URL, fresh profile, and log when the frame is *requested*, not
+  only whether it ends up visible.
+
+**Gate:** [`check-embed.mjs`](./check-embed.mjs) reads every page in the sitemap (plus `--page` for
+ad pages the sitemap leaves out) and fails on any GHL iframe with `loading="lazy"`. It also lists
+each page's GHL frames and whether `form_embed.js` loads, so a form that disappeared from the markup
+shows up too. It reads the served HTML only: a frame injected later by a script is not seen.
 
 ## Styling
 
@@ -123,8 +176,9 @@ node site-style.mjs --compare <formId> <page with the form> > output/site-style.
 | Label colour, input text colour | heading colour, body colour |
 | Input background, border, corner radius | the site's input, else white, body colour at 20%, the button's radius |
 | Button background, text, radius | the main call-to-action button (colour, font, weight, case, radius), full width |
-| Consent and Privacy/Terms text | body font, 14px, body colour |
+| Consent and Privacy/Terms text | body font, 14px, body colour, **as a Custom CSS rule** on `.tnc` / `.terms-text-container` (`!important`): the Styles panel and inline text styles do not reach GHL's mobile copy of the consent text |
 | Form background | transparent, so the page's card shows through |
+| Custom CSS | [`no-shift.css`](./no-shift.css) first, then the styling block |
 
 Give Codex these exact values in the instruction (step 5) and run `--compare` again after it
 saves; it must print `style ok`. A font the builder does not list (a site's self-hosted variable
@@ -133,6 +187,45 @@ font) gets the closest Google font of the same family, named in the client runbo
 Read 2026-10-03: Mason Park's contact form is still on GHL's Inter (site: Nunito Sans, Karla
 uppercase button `#8C6349`, 2px radius); even the Grand Mission model uses Arial and GHL's blue
 button against a Montserrat site. Styling is new to the standard, so no form passes it yet.
+
+## No layout shift
+
+Every form must hold its height from the first paint. GoHighLevel serves the form as HTML that
+already includes the 11 hidden consent fields, **visible**, and its JavaScript only takes over
+2–3 s later. The old in-form hide script ran after that, so every form loaded about 2,250px tall and
+then collapsed to about 1,100px. Cloudflare Turnstile (the captcha) then grew from 27px to 100px.
+
+[`no-shift.css`](./no-shift.css) fixes both. The form's Custom CSS is served in the page `<head>`,
+so it applies before anything is drawn:
+
+- **Consent fields:** 7 of the 11 carry `data-q="privacy_…"` and are matched by it. The 4 consent
+  **dropdowns** (`analytics`, `advertising`, `ad_user_data`, `ad_personalization`) carry no
+  attribute CSS can match; only their label text names them. So the second selector hides every
+  element **after the Privacy | Terms links**, except one holding a button or an iframe. That is why
+  the 11 fields must be the last elements, after the links. The gate checks the order.
+- **Captcha:** `min-height: 100px` on `.captcha-container`, the height Turnstile settles at for a
+  real visitor (measured in a signed-in Chrome, 2026-10-04). Headless Chrome gets an interactive
+  challenge plus an error line (136px); that is automation only.
+
+Measured 2026-10-04 on Mason Park *Contact*, *Invisalign* and *Kids*, at 1348px and 375px, script
+off and CSS on: 0/11 fields visible at first paint, prefill from the URL still fills dropdowns,
+checkboxes and text fields, and the largest jump fell from ~1,150px to ≤36px (the headless-only
+challenge line).
+
+**GoHighLevel reformats the Custom CSS box** when it loses focus: it re-indents, strips the quotes
+from attribute selectors (`[data-q^=privacy_]`) and can drop the `#_builder-form` prefix from the
+existing rules. All of that is valid and expected. `no-shift.css` is written unquoted so it survives
+the reformat, and Codex must save anyway (the first Kids run stopped at the reformat and saved nothing).
+
+Live since 2026-10-04 on every GHL form embedded on an Instatic site: Mason Park *Contact*, *Invisalign*,
+*New Patient Special* and *Kids*; Dr. Nahlah *Alexandria* `g7FeioS7e7quSCxIQHRw` and *McLean*
+`axgcdqEPUFoHF8Dt5Nji`; IFA `cxtQ5q29TfUr3cYlMmDB`; Stone Surgical Arts `Nzf3xQVLhgMlABuVMxCN`; Stone Med
+Spa `Gqnb0W1NH95MjROPRaLe` (gate ok, style ok, the same height from the
+first paint to fully loaded at 1348px and 375px).
+
+Still open: on the site, GHL's embed carries `data-height` from the builder. Mason Park's form says
+`2442`, because the builder counts the hidden fields. Whether `form_embed.js` sizes the iframe to
+it before resizing is not yet measured.
 
 ## Copying the fields from another sub-account
 
@@ -174,6 +267,8 @@ For the owner to settle against the reference video, then fold into the standard
 
 ## Gotchas
 
+- **`loading="lazy"` on a GHL iframe = no form in Firefox, ever.** See
+  [Embedding the form](#embedding-the-form); `check-embed.mjs` fails on it.
 - **A form copied from another practice stays in that practice's sub-account.** Mason Park's two
   *Google Ads* forms (`YbX91GhEDKkCN4GH4gka`, `AFu5BpJpMjgSnSf8yybc`) live in **Grand Mission's**
   location `mZ2q3yXtue090i2YLcrj` and link to grandmissiondentistry.com's privacy pages: any lead
@@ -190,6 +285,85 @@ For the owner to settle against the reference video, then fold into the standard
   (`ab.chatgpt.com`) failing in `browser-service.mjs`; on 2026-10-03 an app restart did not clear
   it, and the registry entry the plugin blames was present. Next: reinstall the Chrome plugin from
   the ChatGPT app, then restart Chrome.
+- **Polish the first pass misses** (seen on both Mason Park landing forms): GHL keeps the first
+  consent box at 16px and the second at 14px, a required field with an empty label shows a stray
+  `*` above it, field spacing is uneven, and the Privacy/Terms links stay GHL blue. Set the consent
+  text size, the link colour (site link or body colour) and the field spacing explicitly in the
+  styling step.
+- **Hide the consent fields with CSS, never a script** ([No layout shift](#no-layout-shift)). A
+  script in a Custom HTML element runs only after GHL's JavaScript loads, so the 11 fields show for
+  2–3 s and the form then collapses by ~1,150px. The gate fails a form that still carries one.
+- **Never turn the form-wide *Show Label* switch off.** The 11 consent fields are hidden only while
+  labels are on; with it off GHL renders them as empty dropdowns, true/false boxes and blank inputs
+  below the links (Invisalign form, 2026-10-03, reverted in minutes). The gate now fails
+  `formLabelVisible: false` on any form with consent fields. A stray `*` above a placeholder-only
+  field means the field is required with an empty label; it goes when the field is optional (the
+  Grand Mission model) — an owner decision, see open question 1.
+- **Check the whole public form, not a viewport.** Codex's verification screenshots stop at the
+  links. Render the full height: `chrome --headless=new --window-size=900,2600 --screenshot=… <form url>`.
+- **One Codex run = one small, saved step.** `gpt-6-luna` (the cheap default) finishes a step of
+  one or two changes, but on a whole-form brief it stops halfway and saves nothing (kids form,
+  2026-10-04). Order: (1) fields/dropdown, (2) consent + captcha + links, (3) styling, each ending in
+  Save + a public-form check.
+- **Style with one pasted Custom CSS block, not the Styles-panel menus.** Luna's Styles-panel save did
+  not reach the public form and the panel's font menu lacked Figtree; one exact CSS block (Google
+  Fonts `@import`, `#_builder-form` labels/inputs/button/`.terms-text-container`/links), pasted by
+  `gpt-6.1-sol`, worked first time. Exception: **single-line field corner radius** comes from the
+  Styles panel's field radius setting — GHL's own field CSS outranks custom CSS there.
+- **GHL renders the consent text twice: a desktop copy and a mobile copy.** The mobile copy
+  carries the builder's own inline fonts (Inter 16px for box 1, Roboto 14px for box 2 on Mason Park's
+  landing forms, 2026-10-04), so a form styled only through the builder looks right on desktop and
+  off-brand on phones. It also reflows the form ~44px once GHL's JavaScript runs. Fix it with the
+  `.tnc` / `.terms-text-container` Custom CSS rule. `--compare` now also renders the form as a 375px
+  phone and fails off-brand consent text.
+- **On a dark site, `site-style --compare` said "style ok" while the form was white** (West LA,
+  2026-10-05; the client saw it). Three things the compare does not measure:
+  1. GHL styles single-line inputs with `#_builder-form .form-builder--item input[type="text"][class="form-control"]`
+     (also tel/email, and hover/focus in blue) **with `!important`**. A plain `#_builder-form input`
+     loses, so First/Last/Phone/Email stay white while the textarea obeys. Out-rank it:
+     `#_builder-form .form-builder--item input.form-control[type][class]`.
+  2. The Styles panel writes `border:1px solid #FFF; border-radius:8px; box-shadow; padding` **inline**
+     on `#_builder-form`: a white frame on a dark card. Clear it with `!important` in Custom CSS.
+  3. The Submit label is a `<p>` inside the button, so a blanket `#_builder-form p` colour repaints it.
+     Colour `button[type=submit] *` explicitly.
+  Before pasting, **preview the CSS**: load the public form in headless Chrome, set the page background
+  to the site's, inject the block in a `<style>`, screenshot full height (West LA's probe:
+  `scenario-3-ads-landing-pages/03-qa-and-launch/output/code/ghl-form-dark.css` on bk-west-la-implants is
+  the dark-site block that passed). Look at the screenshot; the compare is not enough.
+- **A pasted Custom CSS block can vanish on Save** (West LA, 2026-10-05, twice): Codex pasted the
+  styling block, even read it back in the box, clicked Save, and the public form carried none of it.
+  What worked both times: after pasting, click the Custom CSS editor's own Save / Apply / Done button,
+  reopen it to confirm the block is there, then Save the form, then grep the public form for the
+  font name. Put those four steps in every styling brief.
+- **A new form from "Start from Scratch" already has a consent element and Privacy | Terms text.**
+  A brief that says "exactly these elements" makes Codex stop on them as a deletion it was not
+  allowed (West LA, 2026-10-05). Say "keep the consent element and the links GoHighLevel added and
+  set their text", and allow deleting only the template's default fields not in the list.
+- **GoHighLevel's public form endpoint goes down for minutes** (500 "Server Error" on every form,
+  2026-10-05). Retry for a minute before treating a form as broken by the last edit.
+- **Consent text is typed, not pasted** (IFA, 2026-10-04): Codex pasted box 1 with a chunk of the
+  captcha's markup (`<div id="cf-turnstile-…">`), which rendered as ~130px of blank space between the
+  boxes. The gate now fails a consent box carrying `div`/`iframe`/widget markup.
+- **The captcha has no label.** GHL labels a new Captcha element *Bot protection*; the standard
+  (Mason Park) leaves it empty. The gate fails a labelled captcha, and a missing one.
+- **GHL stores the consent text as HTML**, so `&` arrives as `&amp;` (sometimes `&amp;amp;`); the gate
+  decodes entities before matching `--legal` (Dr. Nahlah's "Implants & Prosthodontics").
+- **Close what you open.** Each Codex brief says: reuse an open tab already on the form, else open one
+  and close it before reporting. Builder tabs left by earlier runs stay claimed by their old session
+  and only the user can close them (two were left on 2026-10-04: McLean and Stone Med Spa, the second
+  holding a failed run's unsaved edits — close those without saving).
+- **`site-style.mjs` reads the site's real call-to-action** (2026-10-04): it skips cookie-banner
+  buttons (it had picked Termly's black *Decline* on Dr. Nahlah) and reads **gradient** buttons
+  (Dr. Nahlah's gold, IFA's yellow) by their first stop. A gradient site button gets the full
+  `linear-gradient(...)` as the form button's `background` in Custom CSS, not the flat base colour.
+- **`site-style.mjs --compare` measures the rendered public form** (fonts, button colour, field
+  radii, consent sizes), so CSS-styled forms are judged as visitors see them.
+- **GoHighLevel signs out mid-session** (`app.gohighlevel.com/?logout=true`, "Sign into your
+  account"). Codex never enters credentials: the user signs in, then the step reruns.
+- **Codex runs on the workspace's credits.** "Your workspace is out of credits" ends a run mid-edit;
+  whatever was saved stays saved. Gate and `--compare` the form to see what landed.
+- **Tabs left by a failed run stay claimed** ("already claimed by another browser session"). Tell
+  the next run to open its own tab and close it.
 - **A Codex run that loses the browser saves nothing.** "Debugger unattached" or a dropped
   connection ends the run before *Save*; gate the form to confirm it is unchanged, then rerun.
 
@@ -209,7 +383,16 @@ For the owner to settle against the reference video, then fold into the standard
 | Client | Form | Notes |
 | :--- | :--- | :--- |
 | Grand Mission | `HHUjLT7QwNmfVq4yjxw5` *Contact Form Website* | The model. Has the optional language dropdown. |
-| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | Brought to the standard 2026-10-03. |
+| Mason Park | `JuzM9SxuJMPDMwfO6cgj` *Contact form* (`/contacts`) | **Site-form reference.** Standard 2026-10-03; styled + polished (Nunito Sans, 14px consent, grey underlined links, 16px gaps) the same night: gate ok, style ok. **No-shift CSS 2026-10-04**, hide script deleted. |
+| Mason Park Kids | `pyYcEmfIvtv5LwB1s4X6` *Contact form* (`masonparkpediatricdental.com/contacts`, location `ayfI5c9B3HDoNAubf1Sj`) | 2026-10-04: existing kids Service field kept (10 options), consent names **Mason Park Dental for Kids** (no legal entity, user's decision), captcha above Submit, kids-site links, Figtree + `#93644A` pill via Custom CSS. **No-shift CSS 2026-10-04**, hide script deleted. |
+| Mason Park | `jRr3J74MVYjrYAsp4zZD` *Contact Form Invisalign* (`/ads-landing-pages/invisalign*`) | **Landing reference.** 2026-10-03: no dropdown, two consent boxes, links, *Book My Free Consultation*, redirect `/ads-landing-pages/invisalign-thank-you`, site styling. Gate `--landing` ok, `site-style --compare` ok. |
+| Mason Park | `jEXtvRc1ObkKd1QvmSGn` *Contact Form New Patient Special* | Same, *Claim My $189 Visit*, redirect `/ads-landing-pages/new-patient-thank-you`. ok / style ok. |
+
+| West LA Implants | `XaCEV96A0QuF9ufEmkSc` All-on-6, `P15UYHonJj8oH5G8xwKX` 3-on-6 (location `0iwrVBEYONV6VlSHSGH6`) | 2026-10-05: new from scratch, landing standard, Manrope + gold `#C4A36A` square button for the dark ads pages. Contact `BAZZebJdjQAdGkda1fEE` brought to standard (new *Service* dropdown, 12), styled for the WordPress page (Prompt, `#E4E436`). All gate ok, style ok. |
+| Dr. Nahlah (Alexandria / McLean) | `g7FeioS7e7quSCxIQHRw` / `axgcdqEPUFoHF8Dt5Nji` | Standard 2026-10-04: two boxes per office entity, per-office legal pages, Raleway + gold gradient. Gate ok, style ok. |
+| IFA | `cxtQ5q29TfUr3cYlMmDB` | Standard 2026-10-04: new *Service* dropdown (12), captcha, Poppins + yellow gradient. Gate ok, style ok. |
+| Stone Surgical Arts | `Nzf3xQVLhgMlABuVMxCN` | Standard 2026-10-04: captcha, `www` links, Inter + green button. Gate ok, style ok. |
+| Stone Med Spa | `Gqnb0W1NH95MjROPRaLe` | Standard 2026-10-04: consent names **Westlake Medical Aesthetics** (its own policy), single *Service* dropdown replaced the multi-select. Gate ok, style ok. |
 
 ### Every client, 2026-10-03
 
