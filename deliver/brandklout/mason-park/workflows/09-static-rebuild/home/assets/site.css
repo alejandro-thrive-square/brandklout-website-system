@@ -1837,6 +1837,9 @@ button { font: inherit; }
 
 /* The band closes the chapter, so the chapter has no padding left under it. */
 .ch-people { padding-bottom: 0; }
+/* Without the band (it is off the live site from 2026-10-09) the cards close the chapter and
+   need the chapter's own bottom padding back. */
+.ch-people:not(:has(> .pe-band)) { padding-bottom: var(--ch-pad); }
 .pe-band { position: relative; margin-top: 5rem; }
 .pe-band img { width: 100%; height: clamp(20rem, 42vh, 30rem); object-fit: cover; object-position: 50% 30%; }
 .pe-band-in {

@@ -18,6 +18,19 @@ Client design feedback on `/`:
   - Neither was already on the page. Neither shows Dr. Nguyen (see the Yelp run).
 - Script: `.tmp/yelp/home-feedback.mjs` (one atomic save of shell + home row, then publish).
 
+## Second round (published 14:42Z)
+- **"The People" bottom padding:** `.ch-people { padding-bottom: 0 }` assumed the team band closes the
+  chapter. With the band removed for the Yelp separation, the doctor cards touched the next chapter.
+  `.ch-people:not(:has(> .pe-band)) { padding-bottom: var(--ch-pad); }` is in site.css, which equals
+  the production asset again (`push-site-css.mjs`: it refuses unless the live asset equals the
+  committed site.css). Measured: 155px at 1736, 62px at 390. When the band comes back, the old rule
+  applies again by itself.
+- **Reviews box wider:** Elfsight `e30c1531` had Width = custom 1280px, so it sat centred in a
+  1525px section. Width is now Full Width (auto), set in the Elfsight editor through Codex computer use. It
+  applies on `/` and `/patient-reviews`. Measured: the widget is 1525px with five cards across; `check-widget.mjs --render` prints ok.
+- **Main:** the in-section widget standard (`tools/elfsight-reviews`) now requires Width = Full Width (main `f031327a`). That
+  covers the README table, the Codex brief, and a `check-widget.mjs` PROBLEM line.
+
 ## Next
 - **Staging** does not have the badge rule. Its CSS is in the registry under the Client-First names,
   so the rule there is `chapter_component` / `section_said` / `proof_badges`. Add it when staging is
