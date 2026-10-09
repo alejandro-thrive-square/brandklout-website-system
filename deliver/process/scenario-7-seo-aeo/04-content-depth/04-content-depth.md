@@ -45,7 +45,10 @@ answer what patients search for, with every claim confirmed by the practice.
    `scan-sections.mjs --also <slugs>`, and give it a schema base entry, without `reviewedBy` or
    `lastReviewed` until the practice has signed the copy off. Add it to the site menu on every page
    that carries one. (bk-dr-nahlah `scenario-7-seo-aeo/04-content-depth/output/code/`:
-   `compose-page.mjs`, `push-text-edits.mjs`, `push-page-faq.mjs`, `nav-add.mjs`.)
+   `compose-page.mjs`, `push-text-edits.mjs`, `push-page-faq.mjs`, `nav-add.mjs`.) Deeper sections on an existing
+   page go in the same way (`insert-sections.mjs`): set each section's background tone so the page
+   keeps alternating, and check every cloned image against its new copy, since a section's photo
+   travels with it.
 
 ## Conditionals
 
