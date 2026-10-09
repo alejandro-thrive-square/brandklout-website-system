@@ -281,6 +281,45 @@ checks them (`--strict` for new builds; a report in `migration-gates final` for 
   `snapshot after` + css diff mid→after + runtime diff before→after (covers A and B together),
   `head-parity`, `migration-gates final` (with `editor-canvas` and the structure report).
 
+## 11. One place per element: the Webflow model in Instatic (2026-10-09)
+
+**The test is the user's, in the editor**: select an element; the Styles panel shows its class chips and
+nothing else that styles it; an edit there changes the element. Instatic's panel lists EVERY registry rule
+that matches the element (chips with ×, plus every ambient selector), so a site can pass §8–§10 and still
+fail this: on IFA staging one heading was styled by five rules. `class-model-lint.mjs --site $S` is the gate
+(read-only, exit 1 while anything is left to convert).
+
+**What the registry may hold** (Instatic mechanics, verified in the registry and the editor bundle):
+- **chips**: one base class per element, plus utility classes (§2) and **combo chips**: a class rule with a
+  compound selector, `{ name: "is-secondary", selector: ".button.is-secondary" }` — native, Webflow's combo.
+- **breakpoints** inside the chip (`contextStyles`).
+- **states** only as `<chip or combo>:state` rules (`:hover :focus :focus-visible :active :visited
+  :focus-within :checked :disabled`, and `[aria-current] [aria-expanded] [open]`, Webflow's "Current"/open):
+  Instatic has no state slot in a chip; the panel ties these rules to the element.
+- **globals** only: the tag reset, `:root`, theme token blocks (`[data-theme="dark"] { --… }`), Framework,
+  `@keyframes`.
+- **exceptions** (user, 2026-10-09): rich-text children (`.text-rich-text p`, content has no classes);
+  pseudo-elements on a chip (`.button::before`); classes a script adds, as combos (`.navbar_component.is-solid`);
+  classes only on elements a script creates (`.split_line`).
+
+**How each kind of rule is converted** (no visual change; proven like §8–§10):
+- contextual `.a .b` → a combo chip on exactly the nodes it matches (`padding-global is-hero`);
+- selector lists → one rule per chip or state; split bare-class rules → folded into the chip (`fold-split`);
+  loose combos (`.a.b` ambient) → combo chips;
+- parent state, script context, theme context (`.card:hover .card_title`, `.navbar_component:not(.is-solid)
+  .navbar_link`, `[data-theme] .x`) → **the parent sets a variable, the child's own chip reads it**:
+  `.button.is-link:hover { --arrow-x: 4px }` and `.button_arrow { transform: translateX(var(--arrow-x, 0)) }`;
+- dark sections: the section's colour class sets the text colour and headings inherit it; heading/text
+  classes do not set colour;
+- tags inside a class (`.navbar_burger span`) → the inner element gets its own class when it is a node;
+  markup inside an embed stays;
+- the scroll-reveal / split-text / wipe motion CSS (`.js [data-reveal]…`) → one code stylesheet next to the
+  motion script, out of the registry: engine code, not design;
+- unused class rules (no node, no script, no embed HTML) → deleted after a backup.
+
+**Order**: one pilot (Stone Med Spa) end to end, the user signs it off in the editor, then the same tools
+run on every site. Step C and the production rollout wait for that sign-off.
+
 ## Version Control
 
 Follows the root rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md).
