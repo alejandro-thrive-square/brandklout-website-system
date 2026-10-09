@@ -269,7 +269,13 @@ checks them (`--strict` for new builds; a report in `migration-gates final` for 
   three standard widths AND one width inside every breakpoint band (1100, 850, 600, 420): a fold's
   risk sits at media boundaries. A new migration runs it right after `css-to-registry`.
 - **C.** (visible: the user decides per site after a before/after) snap off-scale spacing to the nearest
-  step. On 2026-10-08 only 22–35% of the fleet's spacing equalled a house step.
+  step. On 2026-10-08 only 22–35% of the fleet's spacing equalled a house step. The before/after comes
+  from `snap-preview.mjs --site $S` (read-only: the published registry stylesheet snapped in memory and
+  served in its place to a headless browser; screenshots + `summary.json` in `output/fleet/<c>/snap-preview/`).
+  The rule it previews is the rule an apply must use (`snapValue`, exported): rem literals in padding /
+  margin / gap only, 4–192px only, nearest step BY RATIO (24px → 32, 20px → 16; linear nearest ties on
+  the fleet's most common values), fluid values (`clamp`/`min`/`max`) left whole (snapping both ends
+  collapses them to a fixed value).
 - Prove: `snapshot before`, A, publish, style captures `mid` + css diff (A changes values only, to tokens
   that compute the same: the behaviour capture cannot see it, so it is skipped there), B, publish,
   `snapshot after` + css diff mid→after + runtime diff before→after (covers A and B together),
