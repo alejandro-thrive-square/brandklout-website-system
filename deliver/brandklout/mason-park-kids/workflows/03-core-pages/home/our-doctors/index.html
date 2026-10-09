@@ -19,6 +19,7 @@
      the top of site.css. Preloaded so the first paint is not the fallback. -->
 <link rel="preload" href="../assets/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/figtree-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/framework.css">
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -116,7 +117,7 @@
     </nav>
     <div class="masthead_actions">
       <a class="masthead_phone" href="tel:+12815787100">(281) 578-7100</a>
-      <a class="button" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book</a>
+      <a class="button is-masthead" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book</a>
     </div>
     <!-- The three bars are drawn in CSS, not as an inline svg child: Instatic's
          base.button takes no child nodes and drops them at import. -->
@@ -134,8 +135,8 @@
     <p class="chapter_tagline"><i></i><b>Meet the doctors</b></p>
     <h1 class="arrival_title" data-split>One specialist. One <em>generalist.</em></h1>
     <p class="arrival_lead" data-anim="hide">Meet Dr. Tam Nguyen, our pediatric dentist, and Dr. Dave Cho, our family dentist. After meeting at dental school in Boston, they now practice together in Katy, providing complete family care under one roof.</p>
-    <div class="arrival_actions" data-anim="hide"><a class="button is-sun is-large" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book with Dr. Nguyen</a>
-      <a class="button is-ghost-light is-large" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book with Dr. Cho</a></div>
+    <div class="arrival_actions" data-anim="hide"><a class="button is-sun is-large is-arrival" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book with Dr. Nguyen</a>
+      <a class="button is-ghost-light is-large is-arrival" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book with Dr. Cho</a></div>
   </div>
 </section>
 
@@ -258,12 +259,12 @@
   <div class="chapter_container">
     <div class="doctor_voices" data-stagger>
       <figure class="doctor_voice">
-        <span class="text-style-tagline">About Dr. Nguyen</span>
+        <span class="text-style-tagline is-doctor-voice">About Dr. Nguyen</span>
         <blockquote>My 3 year old daughter recently saw Dr. Nguyen and I was so concerned my daughter would not do well. I was wrong!! Dr. Nguyen was so kind, calm, and patient that my daughter was put at ease. Dr. Nguyen explained what she would be doing beforehand and my daughter enjoyed her appointment so much that has been asking to go to the dentist. Thank you Dr. Nguyen!</blockquote>
         <figcaption>M L <span>Patient review</span></figcaption>
       </figure>
       <figure class="doctor_voice">
-        <span class="text-style-tagline">About Dr. Cho</span>
+        <span class="text-style-tagline is-doctor-voice">About Dr. Cho</span>
         <blockquote>Tiffany was a dream with my 5 year old son! She was a natural with my son and he was so good with her. She has a great personality and makes the experience more of a fun time rather than am actual appointment! Dr Cho the main Dr was soooo good with my son engaged and made him feel safe as they both did I wouldn&rsquo;t take my son anywhere else. Thank you for amazing customer service and bed side mannor.. you help make a scary experience really fun for kids thanks for that!!</blockquote>
         <figcaption>Crystal Hope <span>Google review</span></figcaption>
       </figure>

@@ -19,6 +19,7 @@
      the top of site.css. Preloaded so the first paint is not the fallback. -->
 <link rel="preload" href="assets/fonts/marcellus.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/figtree-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/framework.css">
 <link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dentist","name":"Mason Park Dental for Kids","url":"https://pediatricdentistkatytx.com/","telephone":"(281) 578-7100","email":"office@masonparkdental.com","address":{"@type":"PostalAddress","streetAddress":"21830 Kingsland Blvd #104B","addressLocality":"Katy","addressRegion":"TX","postalCode":"77450","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"09:00","closes":"18:00"}],"medicalSpecialty":"Pediatric dentistry","parentOrganization":{"@type":"Dentist","name":"Mason Park Dental of Katy","url":"https://www.masonparkdental.com/"}}</script>
 </head>
@@ -116,7 +117,7 @@
     </nav>
     <div class="masthead_actions">
       <a class="masthead_phone" href="tel:+12815787100">(281) 578-7100</a>
-      <a class="button" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book</a>
+      <a class="button is-masthead" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book</a>
     </div>
     <!-- The three bars are drawn in CSS, not as an inline svg child: Instatic's
          base.button takes no child nodes and drops them at import. -->
@@ -142,8 +143,8 @@
     <h1 class="arrival_title" data-split>The dentist your child <em>asks</em> to go back to.</h1>
     <p class="arrival_lead" data-anim="hide">Dr. Tam Nguyen is a board certified pediatric dentist, committed to providing you with excellent dentistry in a comfortable environment. From the first tooth to the last day of high school.</p>
     <p class="arrival_offer" data-anim="hide"><a href="/special-offers/"><b>New patient special</b> $129 exam, X-rays and cleaning, ages 12 and under <span aria-hidden="true">&rarr;</span></a></p>
-    <div class="arrival_actions" data-anim="hide"><a class="button is-sun is-large" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book a first visit</a>
-      <a class="button is-ghost-light is-large" href="#first">Start at the first tooth</a></div>
+    <div class="arrival_actions" data-anim="hide"><a class="button is-sun is-large is-arrival" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book a first visit</a>
+      <a class="button is-ghost-light is-large is-arrival" href="#first">Start at the first tooth</a></div>
     <div class="arrival_meta">
       <div data-anim="hide"><b>Board certified</b><span>Pediatric dentist</span></div>
       <div data-anim="hide"><b>From 6 months</b><span>Knee-to-knee exams</span></div>

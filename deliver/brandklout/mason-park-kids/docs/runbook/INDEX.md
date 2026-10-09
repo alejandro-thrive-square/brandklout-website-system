@@ -1,11 +1,12 @@
 # Runbook index
 
-34 runs, newest first. Each line is one file in this folder.
+35 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-08 | 2026-10-08/09 — Phase 2 structure on STAGING: house spacing scale + 7 type bases in the Framework (251 rem values → tokens, 4% → 36%), 3 contextual overrides → combo classes (`is-masthead`, `is-arrival`, `is-doctor-voice`), 93 split classes folded; css parity 0 real at 1440/390/1920 and the four band widths, head 0/217, runtime judged by A/B; `home/` mirrors A + B (framework.css link). Production untouched — carries **gotchas** (reaped shells keep running) | [`2026-10-08-phase2-structure.md`](./2026-10-08-phase2-structure.md) |
 | 2026-10-05 | 2026-10-05 — STAGING on the class standard: both code assets in the registry, tokens in the Framework (EDITABLE), 377 out-of-bounds classes renamed (IN BOUNDS, verify CLEAN); one css-to-registry revival fixed forward (.cf-shot); css 0 real at 1440/390/1920, runtime parity OK. Production untouched; `home/` source renamed too (step 5, sync check matches staging) — carries **gotchas** | [`2026-10-05-class-standard-staging.md`](./2026-10-05-class-standard-staging.md) |
 | 2026-10-04 | 2026-10-04 — Google reviews widget d359c3c4 restyled to the in-section standard (no widget title, logo header with count, brown pill, cream cards); gate ok on / and /patient-reviews — carries **gotchas** | [`2026-10-04-google-reviews-widget-standard.md`](./2026-10-04-google-reviews-widget-standard.md) |
 | 2026-10-03 | 2026-10-03 - /terms-of-service (the adult practice's terms, verbatim but for practice swaps; SMS/A2P 10DLC kept; entity = practice name) injected on staging AND production as one new row; no footer link, not in sitemap.xml. Flagged: no Cookie Policy page exists. Gotchas: instatic-media-map.json loses images after an --only chain, staging emits no canonical | [`2026-10-03-terms-of-service-page.md`](./2026-10-03-terms-of-service-page.md) |
