@@ -2,6 +2,31 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-09 — content depth on the money pages, STAGING (the user: "go with the copy change on staging")
+
+**Done** (this run's commit)
+- `output/code/insert-sections.mjs`: new sections in an existing page, fresh-id clones of the site's
+  own sections with every word from a spec, placed after a named section; `"bg"` sets the background
+  tone so the page keeps alternating. Re-running rebuilds a section in place.
+- `/dental-implants` 974 → 1,445 words (candidacy, recovery, risks, implant/bridge/denture);
+  `/all-on-4` 1,094 → 1,299 (candidacy, recovery); `/veneers` 517 → 678 (compared, cost);
+  `/implant-cost` 882 → 962 (the consultation). Brief with sources and the three statements the
+  practice must confirm: `output/briefs/money-pages-depth.md`.
+- Gates: overlap 6/6 CLEAN (highest `/all-on-4-mclean-va` vs hub 24.2%), keyword gate 1107/0, schema
+  unchanged and CLEAN. Screenshots `output/assets/review/depth-*.png`.
+
+**Next**
+- Practice sign-off, including the three flagged statements; then production with the rest
+  (`insert-sections.mjs output/code/depth/<page>.json --apply --allow-production`).
+- `/all-on-4-mclean-va` sits at 24.2% against the deeper hub: any further All-on-4 hub copy must not
+  reuse its wording.
+
+**Gotchas**
+- A cloned section brings its source page's background tone: set `"bg"` or two alternate-toned
+  sections end up side by side.
+- The same stock photo travels with every clone of a section; check each insert's image against its
+  copy (three were swapped after the first screenshots).
+
 ## 2026-10-08 (later) — the gap pages and office versions, built on STAGING
 
 The user: "give me recommendations yourself and let's go all the way through on staging". So the open

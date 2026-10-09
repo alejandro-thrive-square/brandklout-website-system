@@ -1,0 +1,47 @@
+{
+  "slug": "all-on-4",
+  "sections": [
+    {
+      "from": "oral-surgery#comfort",
+      "id": "candidate",
+      "after": "why",
+      "text": [
+        "Candidacy",
+        "Who All-on-4 is for.",
+        "All-on-4 replaces a whole arch, so it suits people losing most or all of the teeth in one jaw, or living with a denture they want gone. Bone loss is often the reason it is chosen rather than a reason against it.",
+        "Most teeth in one jaw missing, failing or loose",
+        "A denture that slips, rubs or needs adhesive",
+        "Bone loss at the back of the jaw, which the angled implants avoid",
+        "Teeth that cannot be saved: where the case allows, they come out the day the implants go in",
+        {
+          "text": "Both arches: full-mouth implants",
+          "href": "/full-mouth-dental-implants"
+        }
+      ],
+      "images": [
+        "media:arch_implants.jpg"
+      ],
+      "bg": "none"
+    },
+    {
+      "from": "crowns-and-bridges#crowns",
+      "id": "recovery",
+      "after": "steps",
+      "text": [
+        "Recovery",
+        "Living with the provisional arch.",
+        "For three to four months you wear a fixed provisional arch in PMMA while the implants fuse. It looks and works like teeth, but it is a stage, not the result.",
+        "Soft foods while the implants integrate",
+        "Reviews along the way to check integration",
+        "Adjustments to the provisional as the gum settles",
+        "Back to normal activity within about a week",
+        "Minor discomfort, handled with over-the-counter medication",
+        "Then the zirconia arch is fitted, and two to four more months finish the healing around it. From that point it is brushed and flossed like natural teeth, with a cleaning every six months."
+      ],
+      "images": [
+        "media:21115.jpg"
+      ],
+      "bg": "alternate"
+    }
+  ]
+}

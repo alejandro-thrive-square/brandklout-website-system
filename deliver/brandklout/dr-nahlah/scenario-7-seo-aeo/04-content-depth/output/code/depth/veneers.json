@@ -1,0 +1,41 @@
+{
+  "slug": "veneers",
+  "sections": [
+    {
+      "from": "implant-cost#compare",
+      "id": "compare",
+      "after": "candidacy",
+      "text": [
+        "Compared",
+        "Veneers, crowns or whitening?",
+        "Whitening",
+        " is the place to start when the teeth are sound and only the color bothers you: about an hour in the office, with the shade chosen with you.",
+        "Porcelain veneers",
+        " cover the front of the teeth that show, for chips, gaps, crowding and stains whitening will not shift. Less than a millimeter of enamel is removed, and the design is previewed first.",
+        "Crowns",
+        " cover the whole tooth, for teeth too damaged for a veneer to sit on, and they are strong enough for back teeth.",
+        {
+          "text": "Teeth whitening",
+          "href": "/teeth-whitening"
+        }
+      ],
+      "bg": "none"
+    },
+    {
+      "from": "implant-supported-dentures#cost",
+      "id": "cost",
+      "after": "process",
+      "text": [
+        "Cost",
+        "What veneers cost, and what moves the price.",
+        "The price turns on how many teeth are treated and the material, and it is set at the smile evaluation, together with a free Digital Smile Design of the result. Nothing is prepared until you have seen it.",
+        "Most PPO dental plans are accepted and claims are filed for you, and financing can spread the cost monthly.",
+        {
+          "text": "Financing options",
+          "href": "/financing"
+        }
+      ],
+      "bg": "alternate"
+    }
+  ]
+}

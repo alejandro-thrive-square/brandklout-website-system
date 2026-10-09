@@ -32,7 +32,8 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07/08 | 7 · 02 On-Page Pass (staging) | Schema fixes + towns, keyword H1s on 16 pages + home + `/contact`, 19 titles, 114 alts, home local FAQ; gate 1016/1 | `8d8c645b` + this commit |
 | 2026-10-08 | 7 · 03 Office Pages (staging) | Both office pages rebuilt on their URLs: own heroes, details, FAQ, treatments; Alexandria photos + gallery; twins 98% → 23% shared | `c29e34e7` |
 | 2026-10-08 | 7 · 04 Content Depth (staging) | Dentures hub: brief + 7-question snap-in dentures FAQ (FAQPage); gap pages held for the sitemap review, deeper medical sections for the practice's facts | `14516eb3` |
-| 2026-10-08 | 7 · 04 Content Depth (staging, all the way) | Decisions taken on request; 9 new pages composed from the site's sections, 7 city FAQs, hub links, menu drawer on 49 pages, `/our-facility` fixed and retargeted, schema for the new pages; gates CLEAN | this commit |
+| 2026-10-08 | 7 · 04 Content Depth (staging, all the way) | Decisions taken on request; 9 new pages composed from the site's sections, 7 city FAQs, hub links, menu drawer on 49 pages, `/our-facility` fixed and retargeted, schema for the new pages; gates CLEAN | `e480fe1c` |
+| 2026-10-09 | 7 · 04 Content Depth (money pages, staging) | Copy change approved for staging: candidacy, recovery, risks and comparisons on `/dental-implants` (+471 words), `/all-on-4`, `/veneers`, `/implant-cost`; 3 statements flagged for the practice; gates CLEAN | this commit |
 | 2026-10-08 | Class standard · phase 2 structure (staging) | House spacing scale in the Framework + 260 literals on tokens, combo `is-landing-contact` (24 nodes), 19 split classes folded (5 left for a person), same in `site-src` + `css/01a-framework.css` mirror; css parity 0 real at 7 widths, head 0/109, EDITABLE · IN BOUNDS · CLEAN. Run `docs/runbook/2026-10-08-phase2-structure.md` | this commit |
 
 ## Version Control

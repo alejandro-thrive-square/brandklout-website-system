@@ -1,0 +1,90 @@
+{
+  "slug": "dental-implants",
+  "sections": [
+    {
+      "from": "crowns-and-bridges#crowns",
+      "id": "candidate",
+      "after": "options",
+      "text": [
+        "Candidacy",
+        "Who dental implants suit, and what comes first.",
+        "Most adults missing one or more teeth can have implants. Candidacy is settled at a consultation with a cone-beam scan, which shows the bone you actually have; nobody can promise it from a web page.",
+        "One missing tooth with healthy teeth either side",
+        "Several missing or failing teeth in a row",
+        "A loose denture you would rather anchor or replace",
+        "Bone loss: many patients qualify after grafting",
+        "Gum disease treated first, so the implant has healthy gum around it",
+        "Tell the team about smoking, diabetes and the medicines you take: they affect how bone heals around an implant, and the plan takes them into account."
+      ],
+      "images": [
+        "media:xray-consult.jpg"
+      ],
+      "bg": "alternate"
+    },
+    {
+      "from": "teeth-whitening#keeping",
+      "id": "recovery",
+      "after": "process",
+      "text": [
+        "Recovery",
+        "What the weeks after implant surgery are like.",
+        "Most people rest for a few days and are back to normal activity within a week. The longer part is the diet: soft foods for several months while bone grows onto the post.",
+        "Day of surgery: sedation, so arrange a ride after oral sedation",
+        "First few days: minor discomfort that over-the-counter medication handles",
+        "First week: back to work and normal activity for most people",
+        "Months one to four: soft foods, and a temporary tooth worn throughout",
+        "Reviews along the way to check the implant is integrating",
+        "One rule people underestimate: ",
+        "the soft-food diet is not optional",
+        ". It protects the bone while it grows onto the post.",
+        {
+          "text": "Implant questions answered",
+          "href": "/dental-implant-faq"
+        }
+      ],
+      "images": [
+        "media:sedation-patient.jpg"
+      ],
+      "bg": "none"
+    },
+    {
+      "from": "cosmetic-dentistry#evaluation",
+      "id": "risks",
+      "after": "recovery",
+      "text": [
+        "Risks",
+        "What can go wrong, and how it is kept unlikely.",
+        "Implants have held a published success rate above 95% since they were introduced. Most of what goes wrong starts in the planning or the upkeep, which is where the precautions here sit.",
+        "Nerves: their position is measured on the 3D scan before surgery, not discovered during it",
+        "Placement: each implant goes in through a printed guide, at the planned angle and depth",
+        "Gum infection around an implant (peri-implantitis): prevented by brushing, flossing and six-month cleanings",
+        "A part that fails inside five years is remade free under the warranty, with the cleanings kept",
+        "Your medical history and medications are gone through at the consultation, and the plan takes them into account."
+      ],
+      "bg": "light",
+      "images": [
+        "media:22237.jpg"
+      ]
+    },
+    {
+      "from": "implant-cost#compare",
+      "id": "compare",
+      "after": "vs-dentures",
+      "text": [
+        "Compared",
+        "An implant, a bridge or a denture?",
+        "A dental implant",
+        " replaces the root as well as the tooth, so the bone keeps a load and the teeth either side are left alone. It costs more at the start and is designed to last decades.",
+        "A bridge",
+        " spans the gap with crowns anchored to the neighboring teeth, which usually means reshaping two healthy teeth to carry it. It is the next best option if you are not ready for an implant, and a bridge can also sit on implants.",
+        "A denture",
+        " costs the least on day one, but it rests on the gums, moves, needs relines, and does nothing to stop the bone receding.",
+        {
+          "text": "Crowns and bridges",
+          "href": "/crowns-and-bridges"
+        }
+      ],
+      "bg": "light"
+    }
+  ]
+}
