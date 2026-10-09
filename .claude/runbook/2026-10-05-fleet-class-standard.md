@@ -125,7 +125,9 @@ asset's seat; West LA's `display` chip jumped past `.display,.display em` (every
 54→102px; the session fixed staging forward at seq 6). Now that move is refused when an earlier asset rule
 for the same element sets one of the chip's own properties (the chip keeps its seat, or the rule stays apart).
 Replayed offline against all 11 saved pre-move shells: every run proven on staging is identical. West LA's
-production rollout will keep `.display` apart instead of merged at 16 (same cascade).
+staging ended (seq 7) in the shape the fixed tool computes: chip at 16 with its own values, a separate
+`.display {letter-spacing; line-height}` at 954 (the chip back at 16 alone lost to the blog H1 combo's
+line-height), so its production rollout replays the same.
 
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
