@@ -120,6 +120,12 @@ token that computes the same); behaviour is compared once, p2-before → p2-afte
 | west-la-implants | new staging `west-la-implants-staging.up.railway.app` (no zone: runtime noindex meta); phase 1 rename published (seq 5), mid capture queued; then phase 2 |
 Capture load: two slots, a pass starts only with 6 GB free, first come first served (`827f797e`, `d9f09d0a`,
 `b98b74f4`). Three slots ran the machine out of memory (`7247e414`). The user's Chrome holds ~5–8 GB.
+**css-to-registry fix (`e16cbf91`)**: append mode moved a class chip that already held declarations to the
+asset's seat; West LA's `display` chip jumped past `.display,.display em` (every H1 lost Playfair, blog H1s
+54→102px; the session fixed staging forward at seq 6). Now that move is refused when an earlier asset rule
+for the same element sets one of the chip's own properties (the chip keeps its seat, or the rule stays apart).
+Replayed offline against all 11 saved pre-move shells: every run proven on staging is identical. West LA's
+production rollout will keep `.display` apart instead of merged at 16 (same cascade).
 
 ## Production rollout (after the user's review; per site, in `deliver/process/tools/instatic-api-sync/`)
 The staging maps and specs are the production inputs: same class names, same tokens. Production
