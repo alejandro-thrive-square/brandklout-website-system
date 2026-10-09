@@ -1,0 +1,15 @@
+{
+  "_note": "Per-shot cut-out method for prepare-assets.py, keyed \"<product id>/<shot number>\" (1 = the client's first photo). flood = corner flood fill (keeps white products whole), ai = rembg matte even when the border test says photo, photo = never cut out, skip = left off the site (the FX3/FX30 cage shots print $80 / $100 against Bs prices). Unlisted shots: ribbon or graphic border -> photo, else ai. Re-run with --force after an edit. Chosen by looking at every shot on the card ground (2026-10-09).",
+  "softbox-godox-s65t-de-65cm/2": "flood",
+  "monitor-viltrox-dc-550/2": "flood",
+  "softbox-triopo-k3-65cm-grid/2": "ai",
+  "snoot-bowens-para-luz-de-video-35-inserts/1": "flood",
+  "barra-led-rgb-30cm/1": "flood",
+  "adaptador-viltrox-canon-ef-a-canon-m/2": "flood",
+  "zhiyun-weebill-3e/2": "photo",
+  "top-handle-smallrig-2/2": "photo",
+  "jaula-para-sony-zve10-marca-smallrig/2": "photo",
+  "jaula-para-sony-fx3-fx30/2": "skip",
+  "jaula-para-sony-fx3-fx30/3": "skip",
+  "super-clamp-marca-ulanzi/3": "photo"
+}

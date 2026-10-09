@@ -64,6 +64,31 @@ Overrides (`data/catalogue-overrides.json`, keyed by `id`) carry what WhatsApp c
 Prices in bolívares go stale as the exchange rate moves; the site is only as current as the last
 re-sync.
 
+## Connecting the WhatsApp catalogue (researched 2026-10-09)
+
+Meta documents **no API that reads a catalogue built inside the WhatsApp Business app**, and the
+WhatsApp Cloud API's coexistence mode lists catalogues as unsupported. The official link runs the
+other way: a Commerce Manager catalogue *connected to* the app (Herramientas → Catálogo → ⋮ →
+Conectar catálogo; the app catalogue is archived, edits move to Commerce Manager, changes reach
+WhatsApp within ~24 h, Meta reviews items). Options, best first:
+
+1. **One source → Commerce Manager → WhatsApp, and the site reads the same source.** The source
+   is a Google Sheet or a feed the site itself publishes (CSV/XML), fetched by Commerce Manager on
+   a schedule; the site reads the sheet, or `GET /{catalog_id}/products` with a catalogue token.
+   Official and free; photos need public URLs (R2). Check first: the menu exists on the shop's
+   phone, and Commerce Manager accepts Bs (unverified; else price stays in the description).
+2. **The same, with the site's CMS (Instatic) as the source** publishing the feed: one admin, no sheet.
+3. **Keep the app catalogue; read it daily with Baileys** (`getCatalog`, `getCollections`) from a
+   *separate* WhatsApp account — a catalogue is visible to any customer, so the shop's number is never
+   used. Unofficial: WhatsApp's terms forbid it and can ban the reading account. A small server + SIM.
+4. **Automate today's WhatsApp Web extraction** (persistent browser profile). Same terms risk, more
+   fragile (WhatsApp Web internals change, the session drops).
+5. **Paid unofficial APIs** (Green-API `getProducts`, Z-API): option 3 with a fee and a third party.
+
+Sources: faq.whatsapp.com/1057141349534704 (connect a catalogue), the coexistence feature table at
+developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users/,
+Baileys `src/Socket/business.ts`. Venezuela is not on Meta's ineligible list for the Platform.
+
 ## The cart and the WhatsApp order
 
 Every add button carries a snapshot of its row: `{id, slug, name, price, stock, img}`. The cart

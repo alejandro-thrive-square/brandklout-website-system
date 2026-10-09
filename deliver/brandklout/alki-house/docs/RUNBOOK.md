@@ -89,7 +89,7 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
 
  tripod, two listings named
    *Top Handle Smallrig*, a cleaner CL60 photo. Decide how the catalogue stays current (re-extract
-   from WhatsApp on a cadence, or a sheet).
+   from WhatsApp on a cadence, or a sheet) — the options are listed in `cms-schema.md`.
 2. The client's other answers under Open questions in `project-overview.md` (country and city,
    payment wording, domain, photos, draft specs).
 3. Provision Instatic on Railway and upload, cart included; then the catalogue sync, keyed on `id`.
@@ -110,6 +110,8 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
   the fluid-root gate rejects px font-sizes even on inputs. Details in the 2026-09-13 build run.
 - Headless clicks right after a scroll miss while ScrollSmoother eases; wait ~2.5 s first.
 - Node fetch scripts must not write to a pipe on this machine — redirect to a log.
+- **Product cut-outs need rembg** (AI matte) installed once per machine in `%LOCALAPPDATA%/webzite/pydeps-rembg`
+  (command in `prepare-assets.py`'s docstring); per-shot exceptions in `site-src/data/photo-overrides.json`.
 - **WhatsApp Web's catalogue panel stops at 10 products**; page `WAWebCollections.Catalog` instead
   (`whatsapp-catalog/extract.js`). `assets.mjs push` uploads every untracked file and never drops a
   manifest line, so commit text outputs before pushing media.

@@ -1,11 +1,12 @@
 # Runbook index
 
-6 runs, newest first. Each line is one file in this folder.
+7 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-09 | DONE 2026-10-09 (evening, `<sha>`) - CARD HOVER + CUT-OUTS + SYNC OPTIONS. Hover shot carries the card ground and prefers the next cut-out; cut-outs now an AI matte (rembg) with per-shot `photo-overrides.json` (flood / photo / ai / skip); FX3 cage shots printing $ skipped; WhatsApp↔site options in `cms-schema.md`. Gates green, cart e2e 38/38. **Gotchas: rembg lives in %LOCALAPPDATA%/webzite; the matte hollows white products → flood override; --force after editing overrides.** | [`2026-10-09-card-hover-and-cutouts.md`](./2026-10-09-card-hover-and-cutouts.md) |
 | 2026-10-09 | DONE 2026-10-09 (later, `9a63f58a`) - WHATSAPP CATALOGUE REPLACES THE LEDGER. 73 products, Bs prices, statuses disponible / en camino / agotado, the client's photos (ribbon shots kept whole, wordmarks dropped); stage, kits, hero repointed; cart v2. Gates: journey PASS, fluid root 77/77, console/overflow clean, cart e2e 38/38. **Client: 14 blank prices, a `15# Runbook index
 
 6 runs, newest first. Each line is one file in this folder.

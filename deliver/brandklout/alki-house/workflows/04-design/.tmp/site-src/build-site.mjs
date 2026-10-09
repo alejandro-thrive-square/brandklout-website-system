@@ -120,9 +120,12 @@ const addBtn = (p, cls, label = 'Añadir al carrito') =>
   `<button class="btn ${cls}" type="button" data-item="${item(p)}"><span>${label}</span>${PLUS}</button>`;
 
 function card(p, root) {
+  // The hover angle: the next cut-out if there is one (the client's later shots are often
+  // packing lists and lifestyle photos), else the next shot as it is.
+  const alt = p.images.slice(1).find((im) => im.cutout) || p.images[1];
   const img = p.images[0]
     ? `<img class="pcard-main${p.images[0].cutout ? '' : ' is-photo'}" src="${root}${p.images[0].src}" alt="${esc(p.name)}" loading="lazy" width="800" height="800">` +
-      (p.images[1] ? `<img class="pcard-alt${p.images[1].cutout ? '' : ' is-photo'}" src="${root}${p.images[1].src}" alt="" loading="lazy" width="800" height="800">` : '')
+      (alt ? `<img class="pcard-alt${alt.cutout ? '' : ' is-photo'}" src="${root}${alt.src}" alt="" loading="lazy" width="800" height="800">` : '')
     : `<div class="pcard-glyph" aria-hidden="true">${glyph(p.category)}</div>`;
   // The name is the link and stretches over the whole card; the + button sits above it.
   return `<article class="pcard${p.status === 'agotado' ? ' is-out' : ''}" data-slug="${p.slug}" data-cat="${p.category}" data-brand="${esc(p.brand)}" data-status="${p.status}" data-price="${p.price ?? ''}">
