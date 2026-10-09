@@ -33,6 +33,9 @@ const EXCLUDE = new Set([
   'invisalign', 'invisalign-consultation', 'invisalign-thank-you',
   'new-patient-special', 'new-patient-special-consultation', 'new-patient-thank-you',
   'thank-you', // form confirmation
+  // Yelp separation (2026-10-09, temporary): forwarders while Dr. Nguyen, the team and the
+  // children's practice are off the site. Drop these three when the pages come back.
+  'our-team', 'team/tam-nguyen', 'services/pediatric-dental-care',
 ])
 /* The /ads-landing-pages/ set is paid-traffic only: offer pages that duplicate the service
    pages, plus their consultation and thank-you steps. */

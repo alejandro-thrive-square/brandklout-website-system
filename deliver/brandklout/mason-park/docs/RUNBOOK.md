@@ -5,6 +5,18 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
+## Yelp separation on PRODUCTION (temporary) - 2026-10-09
+
+**www.masonparkdental.com no longer shows Dr. Tam Nguyen, the staff (Dr. Dave Cho and Dr. William
+Sung stay), the children's practice, or any photo shared with the kids site**. This is temporary, for
+a Yelp review; production only, seq 88
+([`runbook/2026-10-09-yelp-separation-production.md`](./runbook/2026-10-09-yelp-separation-production.md)).
+`/our-team` and `/team/tam-nguyen` forward to `/our-doctors`, and `/services/pediatric-dental-care` to
+`/our-services`. Four article slugs were renamed (the old ones 301). **Staging and `home/` still have
+everything: do not push them to production until the client lifts this.** The restore path and
+backups are in the run file. **Open:** the Elfsight reviews show live Google reviews that name Dr.
+Nguyen or kids.
+
 ## Phase 2 structure on staging - 2026-10-09
 
 **Staging (seq 165, draft == published) now has the CSS in the Client-First shape, not only its names:**
