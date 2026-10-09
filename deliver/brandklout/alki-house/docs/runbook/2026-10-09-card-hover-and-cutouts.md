@@ -4,7 +4,7 @@ Brief (Alejandro, 2026-10-09): the hover image on product cards needs a backgrou
 images overlapped); a few products did not lose their background; list the ways to connect the
 WhatsApp catalogue to the site.
 
-## Done (commit `<sha>`)
+## Done (commit `d7db6d45`)
 
 - **Hover:** `.pcard-alt` now carries the card's own ground (`--card-ground` on `.pcard-media`,
   light theme too), so the second shot covers the first instead of two transparent cut-outs
