@@ -116,7 +116,7 @@ token that computes the same); behaviour is compared once, p2-before → p2-afte
 | mason-park | A (seq 163) proven, B published (seq 164, 9 rules, 65 pages); p2-after + D (182/218 foldable) to go |
 | mason-park-kids | A + B published (seq 35), A proven; p2-after capture, then D |
 | dr-nahlah | A + B published, style-proven; runtime diff p2-before → p2-after running, then D |
-| stone-med-spa | staging published 17:42Z at the user's request (their publish had not landed); A proven at 1440, other widths queued |
+| stone-med-spa | **DONE** (seq 37→39; `bk-stone-med-spa` `a98390a7`; staging first published 2026-10-08 17:42Z at the user's request): rem spacing on tokens 10→41%, overrides 5→2 (`.names_card.is-here .button.is-link` + hover, refused: a combo would drop specificity), D skipped (0 split); css 0 real ×3 widths both steps (1440 auto-margin flips proven on one state), runtime PARITY OK p2-before→p2-after (54 captures), head 0/27, EDITABLE · IN BOUNDS · CLEAN · canvas ok. Local site-src rebuilt. 416 off-scale literals wait for C |
 | west-la-implants | new staging `west-la-implants-staging.up.railway.app` (no zone: runtime noindex meta); phase 1 rename published (seq 5), mid capture queued; then phase 2 |
 Capture load: two slots, a pass starts only with 6 GB free, first come first served (`827f797e`, `d9f09d0a`,
 `b98b74f4`). Three slots ran the machine out of memory (`7247e414`). The user's Chrome holds ~5–8 GB.
