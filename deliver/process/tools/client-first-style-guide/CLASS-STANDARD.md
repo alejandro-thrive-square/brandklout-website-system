@@ -160,7 +160,11 @@ cause.
      Append mode folds an `@media` override into its class rule only when nothing later could
      style the same element; a base class and its combo (`.path_step` + `.is-closing`) count as the
      same element since 2026-10-06 (before, the fold could flip their order at widths no gate samples).
-     After the move, `order-pairs.mjs --site $S --css <original.css> --published <published style css>` lists every pair whose relative
+     A class chip that already holds declarations moves to the asset's seat only when no earlier asset
+     rule targeting the same element sets one of its properties; else it keeps its seat or the bare rule
+     stays apart (`kept apart` lines: a split class, step D folds it later). Since 2026-10-09; before, West
+     LA's `display` chip jumped past `.display,.display em` and every H1 lost its font.
+     After the move, `order-pairs.mjs --site $S --css <published style css before the move>,<original.css> --published <published style css>` lists every pair whose relative
      order changed and could meet on one element; a pair whose classes never share a published
      element (`pair-cooccur.mjs --site $S <order-pairs output .txt>`) is harmless;
    - tokens: `framework.mjs extract <tokens css> > framework-spec.json`, review, `framework.mjs apply`.

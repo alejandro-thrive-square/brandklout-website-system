@@ -5,7 +5,11 @@
 // compounds that could sit on one element. Classes on page nodes are known (co-occurrence from the page trees);
 // a class no node carries is a RUNTIME class (scripts add it: is-open, is-on, split_line ...) and is treated as
 // able to join any element, which the browser sweep and the css gates cannot see.
-//   node order-pairs.mjs --site <client>:staging --css <original.css> --published <style.css>
+//   node order-pairs.mjs --site <client>:staging --css <original.css>[,<more.css>...] --published <style.css>
+// `--css` takes a list, read in order as one stylesheet. After an append-mode css-to-registry move, pass the
+// PUBLISHED stylesheet from before the move first, then the asset: declarations already in the registry (a
+// class chip's own) are then in the scan too. With the asset alone, West LA's `display` chip moving past
+// `.display,.display em` (2026-10-08) read 0 risky pairs.
 import { readFileSync } from 'node:fs'
 import { connect, argOf } from './target.mjs'
 import { parseCss, normaliseMedia, normaliseSelector, registryKey, family, splitTop } from './css-source.mjs'
@@ -60,7 +64,7 @@ const canHoldTogether = (c1, c2) => {
 const load = (file) => {
   const out = new Map() // key -> { pos, sel, ctx, prop, value, important }
   let n = 0
-  for (const r of parseCss(readFileSync(file, 'utf8')).rules) {
+  for (const r of parseCss(file.split(',').map((f) => readFileSync(f, 'utf8')).join('\n')).rules) {
     const ctx = r.contexts.map((c) => normaliseMedia(c)).join(' && ')
     for (const one of splitTop(r.selector, ',')) {
       const sel = normaliseSelector(one)

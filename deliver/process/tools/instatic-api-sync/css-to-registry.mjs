@@ -20,7 +20,15 @@
  *
  * - A bare `.class` rule whose class is already a class-kind rule on the page
  *   tree is merged INTO that rule, so the class chip shows its declarations.
- *   The rule moves to the seat of its first occurrence here.
+ *   An empty chip moves to the seat of its first occurrence here. A chip that
+ *   already holds declarations moves only when no rule seated in between could
+ *   style the same element with one of ITS properties (they travel with it);
+ *   else it keeps its own seat, when no rule in between sets one of the NEW
+ *   properties; else the bare rule stays a separate ambient rule at its own seat
+ *   (a split class: fold-split decides later). West LA, 2026-10-08: the
+ *   `display` chip (Bodoni 500, font-size) moved past `.display,.display em
+ *   {font-family: Playfair}`, every H1 fell back to Bodoni and 46 blog H1s went
+ *   54px -> 102px; order-pairs saw nothing, it only scans the asset.
  * - A later occurrence of the same `.class` (an @media override, a second
  *   block) folds into that rule too, unless a rule seated in between could
  *   style the same element with the same property. Then it keeps its own seat
@@ -47,7 +55,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomBytes } from 'node:crypto'
 import { connect, argOf } from './target.mjs'
-import { parseCss, normaliseMedia, normaliseSelector, toBag, family, mightOverlap } from './css-source.mjs'
+import { parseCss, normaliseMedia, normaliseSelector, toBag, family, mightOverlap, splitTop } from './css-source.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const OUT = join(HERE, 'output')
@@ -158,7 +166,7 @@ if (parsed.unsupported.length) {
 /* ── place every rule ───────────────────────────────────────────────────── */
 let seat = Math.max(0, ...Object.values(rules).map((r) => r.order ?? 0)) + 1
 const placed = [] // { selector, keys: Set<family>, order }
-const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0, inPlace: 0, deadOverrides: 0 }
+const stats = { merged: 0, folded: 0, created: 0, keyframes: 0, droppedFallbacks: 0, inPlace: 0, deadOverrides: 0, keptSeat: 0, keptApart: 0 }
 const ctxSeen = new Map() // ruleId|ctx|prop -> source position of the asset's override
 const inPlaceIndex = new Map()
 if (inPlace) {
@@ -173,8 +181,54 @@ const home = new Map() // class name -> { rule, order }
 const touched = new Set()
 const broadSelectors = new Set()
 
-const conflictsBetween = (lo, selector, keys) =>
+/* The rules already in the registry, for a chip that keeps (or leaves) a seat among them. A raw-CSS
+   rule's properties are unknown, so it conflicts with any (keyframes style nothing). */
+const propsOf = (r) => new Set([...Object.keys(r.styles ?? {}), ...Object.values(r.contextStyles ?? {}).flatMap((b) => Object.keys(b ?? {}))])
+const existing = Object.values(rules)
+  .filter((r) => !/^@keyframes\b/.test(r.selector ?? ''))
+  .map((r) => ({ id: r.id, selector: r.selector || `.${r.name}`, order: r.order ?? 0, keys: r.rawCss ? null : new Set([...propsOf(r)].map(family)), props: r.rawCss ? null : propsOf(r) }))
+// Same property, or a shorthand and its longhand (`font` / `fontSize`, `borderTop` / `borderTopWidth`).
+const clash = (p, q) => {
+  if (p === q) return true
+  const [a, b] = p.length < q.length ? [p, q] : [q, p]
+  return b.startsWith(a) && /[A-Z]/.test(b[a.length])
+}
+const clashes = (A, B) => B === null || [...A].some((p) => [...B].some((q) => clash(p, q)))
+
+/* Order only decides between equal specificities: `h1 {font-size}` seated after a chip never beat it.
+   Unknown (:is/:where/:not/:has, raw CSS) counts as equal. */
+const specs = (sel) => /:(is|where|not|has)\(/i.test(sel) ? null : splitTop(sel, ',').map((s) => {
+  s = s.replace(/::[\w-]+/g, ' ')
+  const a = (s.match(/#[\w-]+/g) ?? []).length
+  const b = (s.match(/\.[\w-]+|\[[^\]]*\]|:[\w-]+(\([^)]*\))?/g) ?? []).length
+  const c = (s.replace(/#[\w-]+|\.[\w-]+|\[[^\]]*\]|:[\w-]+(\([^)]*\))?/g, ' ').match(/(^|[\s>+~])[a-zA-Z][\w-]*/g) ?? []).length
+  return `${a},${b},${c}`
+})
+const sameSpec = (x, y) => { const p = specs(x), q = specs(y); return !p || !q || p.some((s) => q.includes(s)) }
+const conflictsBetween = (lo, selector, keys, skip = null) =>
+  existing.some((e) => e.id !== skip && e.order > lo && (e.keys === null || [...keys].some((k) => e.keys.has(k))) && mightOverlap(e.selector, selector, canJoin) && (e.keys === null || sameSpec(e.selector, selector))) ||
   placed.some((p) => p.order > lo && [...keys].some((k) => p.keys.has(k)) && mightOverlap(p.selector, selector, canJoin))
+
+/* Where a chip that already holds declarations sits (see the header): can a rule's selector meet the
+   chip's element at the chip's specificity? Yes when its subject carries the chip's own class (West LA
+   `.display, .display em`), classes the page trees put on one node with it, or a class on no node that
+   a script adds (`is-open`). Not for a class-less subject (`[data-theme]`, `:root`) or a class on no
+   node and in no script (dead): moves past those passed every gate on seven sites (2026-10-09 replay
+   of every saved pre-move shell: only West LA's `.display` is a same-class pass). */
+const scriptText = [
+  ...(shell.files ?? []).filter((f) => f.type === 'script').map((f) => f.content ?? ''),
+  ...(rows ?? []).flatMap((row) => (JSON.stringify(row.cells?.body ?? '').match(/<script[\s\S]*?<\\?\/script>/gi) ?? [])),
+].join('\n')
+const addedByScript = (c) => new RegExp(`(^|[^\\w-])${c.replace(/-/g, '\\-')}([^\\w-]|$)`).test(scriptText)
+const couldMeet = (selector, cls) => splitTop(selector, ',').some((part) => {
+  if (!sameSpec(part, `.${cls}`) || !mightOverlap(part, `.${cls}`, canJoin)) return false
+  const last = (part.split(/\s*[>+~]\s*|\s+/).filter(Boolean).pop() ?? '').replace(/::?[a-z-]+(\([^)]*\))?/gi, '')
+  const cs = [...last.matchAll(/\.([\w-]+)/g)].map((m) => m[1])
+  if (cs.includes(cls)) return true
+  return cs.length > 0 && cs.every((c) => (onNodes.has(c) ? canJoin(c, cls) : addedByScript(c)))
+})
+const seatBlocked = (list, lo, cls, props) =>
+  list.some((r) => r.order > lo && r.id !== cls.id && clashes(props, r.props) && couldMeet(r.selector, cls.name))
 
 for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos - b.pos)) {
   const order = seat++
@@ -240,10 +294,33 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
   if (cls) {
     const h = home.get(bare[1])
     if (!h) {
-      cls.order = order
-      home.set(bare[1], { rule: cls, order })
-      target = cls
-      stats.merged++
+      // The chip's own declarations, less those this rule overwrites (they take the asset's value,
+      // which belongs at the asset's seat anyway: West LA `.ba-quote` re-set its own opsz).
+      const prior = new Set([
+        ...Object.keys(cls.styles ?? {}).filter((k) => ctx || !(k in styles)),
+        ...Object.entries(cls.contextStyles ?? {}).flatMap(([c, b]) => Object.keys(b ?? {}).filter((k) => c !== ctx || !(k in styles))),
+      ])
+      const was = cls.order ?? 0
+      // Its own declarations travel past every rule seated after `was`: the registry's (moving past
+      // those has passed every gate) and the asset's earlier ones (the West LA failure).
+      if (!prior.size || !seatBlocked(placed, -Infinity, cls, prior)) {
+        // Move: nothing seated between its old seat and here sees its own declarations change place.
+        cls.order = order
+        const e = existing.find((x) => x.id === cls.id)
+        if (e) e.order = order
+        home.set(bare[1], { rule: cls, order })
+        target = cls
+        stats.merged++
+      } else if (!seatBlocked(existing, was, cls, new Set(Object.keys(styles))) && !seatBlocked(placed, was, cls, new Set(Object.keys(styles)))) {
+        home.set(bare[1], { rule: cls, order: was })
+        target = cls
+        stats.merged++
+        stats.keptSeat++
+        console.log(`  keeps seat  .${bare[1]} (order ${was}): its own declarations would move past a rule that can style the same element`)
+      } else {
+        stats.keptApart++
+        console.log(`  kept apart  .${bare[1]}: the chip can neither move here nor take these declarations at its seat (order ${was}); a separate rule at seat ${order}`)
+      }
     } else if (!conflictsBetween(h.order, item.selector, keys)) {
       target = h.rule
       stats.folded++
@@ -282,7 +359,7 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
     }
     target.updatedAt = now
     touched.add(target.id)
-    placed.push({ selector: item.selector, keys, order: home.get(bare[1]).order })
+    placed.push({ selector: item.selector, keys, props: new Set(Object.keys(styles)), order: home.get(bare[1]).order })
     continue
   }
 
@@ -299,7 +376,7 @@ for (const item of [...parsed.rules, ...parsed.keyframes].sort((a, b) => a.pos -
   touched.add(id)
   stats.created++
   if (inPlace) inPlaceIndex.set(normaliseSelector(item.selector), rules[id])
-  placed.push({ selector: item.selector, keys, order })
+  placed.push({ selector: item.selector, keys, props: new Set(Object.keys(styles)), order })
 }
 
 /* Context order inside a merged rule follows the global conditions array. Say
@@ -353,7 +430,7 @@ if (parsed.unsupported.length) {
 }
 
 console.log(`\nrules read            ${parsed.rules.length} (+${parsed.keyframes.length} @keyframes)`)
-console.log(`merged into class rule ${stats.merged}, folded into it ${stats.folded}`)
+console.log(`merged into class rule ${stats.merged} (${stats.keptSeat} at the chip's own seat), folded into it ${stats.folded}, kept apart ${stats.keptApart}`)
 console.log(`new ambient rules     ${stats.created}, keyframes ${stats.keyframes}${inPlace ? `, merged in place into existing rules ${stats.inPlace}` : ''}, dead media overrides dropped ${stats.deadOverrides}`)
 console.log(`fallback values dropped ${stats.droppedFallbacks} (same property twice in one block: the last wins)`)
 console.log(`conditions added      ${conditionsAdded} (now ${conditions.length})`)
