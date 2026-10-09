@@ -131,7 +131,9 @@ function classify(part, rule) {
     if (runtime.length) {
       if (runtime.every((c) => byScript(c))) return [hasEl ? 'pseudo-element' : 'script state', true]
       if (runtime.every((c) => byScript(c) || inEmbed(c))) return ['embed html', true]
-      return ['unused (cleanup)', true]
+      // a compound with a class nobody uses never matches; `class-model.mjs tidy` deletes a rule only
+      // when EVERY class in it is unused, so these stay as their own (harmless) category
+      return [subj.classes.every((c) => runtime.includes(c)) ? 'unused (cleanup)' : 'never matches (cleanup)', true]
     }
     if (hasEl) return ['pseudo-element', true]
     if (hasState) return ['chip state', true]
@@ -172,7 +174,9 @@ for (const r of rules) {
     const cls = parts.map((p) => classify(p, r))
     if (cls.every(([c]) => c === 'global')) { note('global', true, r); continue }
     // a list of states/pseudo-elements of ONE compound is a state group of that chip
-    const bases = new Set(parts.map((p) => compounds(p).join(' ').replace(/::?[\w-]+(\([^)]*\))?/g, '')))
+    // same compound once its states are stripped, attribute states included (`.x:hover, .x[aria-current]`),
+    // exactly as `class-model.mjs tidy` decides which lists stay whole
+    const bases = new Set(parts.map((p) => compounds(p).join(' ').replace(/::?[\w-]+(\([^)]*\))?/g, '').replace(/\[[^\]]*\]/g, '').trim()))
     if (bases.size === 1 && cls.every(([, ok]) => ok)) { note(cls[0][0], true, r); continue }
     note('selector list', false, r); continue
   }
