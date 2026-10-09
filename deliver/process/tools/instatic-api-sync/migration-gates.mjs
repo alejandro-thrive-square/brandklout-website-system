@@ -16,7 +16,7 @@
  * Logs go to output/fleet/<client>/.
  */
 import { spawnSync } from 'node:child_process'
-import { mkdirSync, writeFileSync, readFileSync, rmSync, readdirSync } from 'node:fs'
+import { mkdirSync, writeFileSync, readFileSync, rmSync, readdirSync, renameSync, statSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { argOf } from './target.mjs'
@@ -63,6 +63,15 @@ const alive = (pid) => { try { process.kill(pid, 0); return true } catch { retur
    ticket may take a free slot. Without it a session that chains passes re-took its own slot before a
    poller woke, and IFA's pass waited 43 minutes behind pass after pass (2026-10-08). */
 const QUEUE_DIR = join(SLOT_DIR, 'queue')
+/* A slot's owner, or 0. The owner file is written to a temp name and renamed into place, and only a
+   COMPLETE line is trusted: a reader that caught a half-written "191444 …" as "1914" saw a dead pid and
+   deleted a live slot (Dr. Nahlah's pass lost its slot to Mason Park mid-capture, 2026-10-08). */
+const ownerOf = (dir) => {
+  try {
+    const m = readFileSync(join(dir, 'owner'), 'utf8').match(/^(\d+) \S+ \S+ \d{4}-\d\d-\d\dT/)
+    return m ? Number(m[1]) : 0
+  } catch { return 0 }
+}
 const takeSlot = (name) => {
   mkdirSync(QUEUE_DIR, { recursive: true })
   const ticket = join(QUEUE_DIR, `${String(Date.now()).padStart(15, '0')}-${process.pid}`)
@@ -81,13 +90,16 @@ const takeSlot = (name) => {
         const dir = join(SLOT_DIR, `slot-${s}`)
         try {
           mkdirSync(dir)
-          writeFileSync(join(dir, 'owner'), `${process.pid} ${client} ${name} ${new Date().toISOString()}`)
+          writeFileSync(join(dir, 'owner.tmp'), `${process.pid} ${client} ${name} ${new Date().toISOString()}`)
+          renameSync(join(dir, 'owner.tmp'), join(dir, 'owner'))
           dropTicket()
           return dir
         } catch {
-          let pid = 0
-          try { pid = Number(readFileSync(join(dir, 'owner'), 'utf8').split(' ')[0]) } catch {}
-          if (pid && !alive(pid)) { try { rmSync(dir, { recursive: true, force: true }) } catch {} }
+          const pid = ownerOf(dir)
+          // A dir with no complete owner for 2 minutes lost its owner between mkdir and rename.
+          let orphan = false
+          if (!pid) { try { orphan = Date.now() - statSync(dir).mtimeMs > 120000 } catch {} }
+          if ((pid && !alive(pid)) || orphan) { try { rmSync(dir, { recursive: true, force: true }) } catch {} }
         }
       }
     }
@@ -107,7 +119,8 @@ const run = (name, args, env = {}) => {
     spawnSync(process.execPath, ['-e', 'setTimeout(()=>{}, 20000)'])
   }
   } finally {
-    if (slot) try { rmSync(slot, { recursive: true, force: true }) } catch {}
+    // Release only my own slot: if it was ever taken over, removing it would free someone else's.
+    if (slot && ownerOf(slot) === process.pid) try { rmSync(slot, { recursive: true, force: true }) } catch {}
   }
   writeFileSync(join(LOG, `${name}.log`), out)
   const last = out.trim().split('\n').slice(-1)[0]
