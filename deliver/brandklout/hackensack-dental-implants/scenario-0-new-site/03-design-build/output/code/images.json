@@ -1,0 +1,1823 @@
+[
+ {
+  "out": "logo-stacked.webp",
+  "from": "asset/legacy/logo-stacked.webp",
+  "size": [
+   620,
+   180
+  ],
+  "asis": true,
+  "shows": "The practice logo, stacked, black on transparent (BugHerd #2)",
+  "pages": "every page (navbar)",
+  "source": "drive",
+  "fit": 3
+ },
+ {
+  "out": "doctor-face.webp",
+  "from": "asset/legacy/doctor-face.webp",
+  "size": [
+   192,
+   192
+  ],
+  "asis": true,
+  "shows": "Dr. Alan Meskin, a 192px crop of doctor.png for the hero cards",
+  "pages": "index, every treatment page header card",
+  "source": "old-site",
+  "fit": 3
+ },
+ {
+  "out": "hero-poster.webp",
+  "from": "asset/legacy/hero-poster.webp",
+  "size": [
+   1920,
+   1080
+  ],
+  "asis": true,
+  "shows": "Daniel at the reception desk, the first frame of the hero film",
+  "pages": "index",
+  "source": "vimeo",
+  "fit": 3
+ },
+ {
+  "out": "allonx-hero.webp",
+  "from": "old/f419ff_AdobeStock_1248814635.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "focus": [
+   0.5,
+   0.55
+  ],
+  "shows": "An upper and a lower full-arch restoration, each fixed on implants (model)",
+  "pages": "services/all-on-x",
+  "source": "old-site",
+  "licence": "Adobe Stock 1248814635, licensed for the live site",
+  "fit": 3
+ },
+ {
+  "out": "allonx-fix.webp",
+  "from": "drive/ba/WhatsApp Image 2026-09-20 at 11.23.59.jpeg",
+  "size": [
+   1100,
+   900
+  ],
+  "focus": [
+   0.5,
+   0.5
+  ],
+  "shows": "A patient's new smile after implant treatment at the practice, close up",
+  "pages": "services/all-on-x",
+  "source": "drive",
+  "fit": 3
+ },
+ {
+  "out": "logo-cherry.webp",
+  "from": "old/982522_CherryLogo-MidnightBlue-1024x2.webp",
+  "size": [
+   480,
+   133
+  ],
+  "asis": true,
+  "shows": "Cherry logo",
+  "pages": "financing",
+  "source": "old-site",
+  "licence": "partner logo",
+  "fit": 3
+ },
+ {
+  "out": "logo-hfd.svg",
+  "from": "old/b8c199_imgi_1_hfd-logo-4.svg",
+  "size": [
+   0,
+   0
+  ],
+  "shows": "Healthcare Finance Direct logo",
+  "pages": "financing",
+  "source": "old-site",
+  "licence": "partner logo",
+  "fit": 3
+ },
+ {
+  "out": "logo-proceed.webp",
+  "from": "old/a7c097_Proceed-Finance-Logo-2-1024x23.webp",
+  "size": [
+   480,
+   112
+  ],
+  "asis": true,
+  "shows": "Proceed Finance logo",
+  "pages": "financing",
+  "source": "old-site",
+  "licence": "partner logo",
+  "fit": 3
+ },
+ {
+  "out": "logo-carecredit.webp",
+  "from": "old/0032d8_Care-Credit-1024x133.webp",
+  "size": [
+   480,
+   62
+  ],
+  "asis": true,
+  "shows": "CareCredit logo",
+  "pages": "financing",
+  "source": "old-site",
+  "licence": "partner logo",
+  "fit": 3
+ },
+ {
+  "out": "gallery-hero.webp",
+  "from": "drive/office/Hackensack Action Shots_2.17.1.png",
+  "size": [
+   1920,
+   860
+  ],
+  "shows": "A patient sees her new smile in a hand mirror in the treatment chair",
+  "pages": "gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.7,
+   0.45
+  ]
+ },
+ {
+  "out": "gallery-case-1-before.webp",
+  "from": "old/e9054d_before 1.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 1 before treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-1-after.webp",
+  "from": "old/343c65_after 1.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 1 after treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-2-before.webp",
+  "from": "old/a2981a_before 2.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 2 before treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-2-after.webp",
+  "from": "old/03c010_after 2.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 2 after treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-3-before.webp",
+  "from": "old/608bd8_before 3.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 3 before treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-3-after.webp",
+  "from": "old/343c19_after 3.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 3 after treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-4-before.webp",
+  "from": "old/266e92_before 4.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 4 before treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-4-after.webp",
+  "from": "old/b2d5e5_after 4.webp",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 4 after treatment (consented, live site gallery)",
+  "pages": "gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "box": [
+   0,
+   0.04,
+   1,
+   0.94
+  ]
+ },
+ {
+  "out": "gallery-case-5-before.webp",
+  "from": "drive/ba/WhatsApp Image 2026-09-20 at 11.23.48 (1).jpeg",
+  "size": [
+   852,
+   1150
+  ],
+  "shows": "Patient 5 before treatment (drive, Before and Afters, Alan Meskin DDS watermark)",
+  "pages": "gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "gallery-case-5-after.webp",
+  "from": "drive/ba/WhatsApp Image 2026-09-20 at 11.23.48.jpeg",
+  "size": [
+   852,
+   1150
+  ],
+  "shows": "Patient 5 after treatment",
+  "pages": "gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "gallery-case-6-before.webp",
+  "from": "drive/ba/WhatsApp Image 2026-09-20 at 11.24.00.jpeg",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 6 before treatment, close up",
+  "pages": "gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "gallery-case-6-after.webp",
+  "from": "drive/ba/WhatsApp Image 2026-09-20 at 11.23.59.jpeg",
+  "size": [
+   1112,
+   1500
+  ],
+  "shows": "Patient 6 after treatment, close up",
+  "pages": "gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "office-hero.webp",
+  "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.18 (1).jpeg",
+  "size": [
+   2400,
+   1100
+  ],
+  "shows": "The waiting-room lounge: grey sofas, flowers, blue abstract paintings",
+  "pages": "office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "office-reception.webp",
+  "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.33.jpeg",
+  "size": [
+   1600,
+   1100
+  ],
+  "shows": "The curved reception desk under a round ceiling light",
+  "pages": "office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "office-waiting.webp",
+  "from": "drive/office/Hackensack Office Shot 2.png",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "The reception and the waiting chairs by the front windows",
+  "pages": "office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.45,
+   0.5
+  ]
+ },
+ {
+  "out": "office-operatory.webp",
+  "from": "drive/office/Hackensack Action Shots_2.12.1.png",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A treatment room with an orange dental chair",
+  "pages": "office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.45,
+   0.5
+  ]
+ },
+ {
+  "out": "office-surgery.webp",
+  "from": "old/6aac42_Hackensack opperation room.webp",
+  "size": [
+   1600,
+   1080
+  ],
+  "shows": "A treatment room set up for implant surgery",
+  "pages": "office-gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "office-scanner.webp",
+  "from": "film/1198870167@66",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "Isaac positioned in the 3D cone beam CT scanner",
+  "pages": "office-gallery",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.62,
+   0.5
+  ]
+ },
+ {
+  "out": "office-lab.webp",
+  "from": "old/5b05b4_Dental-Lab.webp",
+  "size": [
+   675,
+   675
+  ],
+  "shows": "The on-site dental lab: a design screen and an articulator with a model",
+  "pages": "office-gallery, technology",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.45,
+   0.5
+  ]
+ },
+ {
+  "out": "office-exterior.webp",
+  "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.21.jpeg",
+  "size": [
+   1600,
+   1100
+  ],
+  "shows": "The building on Main Street in Hackensack",
+  "pages": "office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "office-room.webp",
+  "from": "film/1198870167@85",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A treatment room with two orange chairs and a screen on the wall",
+  "pages": "office-gallery",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "contact-hero.webp",
+  "from": "drive/office/Hackensack office Shot 1.png",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "The front of the building on Main Street that houses the practice",
+  "pages": "contact",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "dental-implants-hero.webp",
+  "from": "film/1198870167@37",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A patient and a dentist looking at his 3D scan on a monitor in a treatment room",
+  "pages": "services/dental-implants",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "dental-implants-split1.webp",
+  "from": "old/6aac42_Hackensack opperation room.webp",
+  "size": [
+   900,
+   1080
+  ],
+  "shows": "A treatment room at the practice, the chair reclined under the light",
+  "pages": "services/dental-implants, office-gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "emergency-dental-care-hero.webp",
+  "from": "drive/office/Hackensack Action Shots_2.12.1.png",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A treatment room with an orange dental chair, ready for a patient",
+  "pages": "services/emergency-dental-care, office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.42,
+   0.5
+  ]
+ },
+ {
+  "out": "first-visit-expectations-hero.webp",
+  "from": "film/1198870167@62",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A new patient filling in his forms in the waiting room",
+  "pages": "first-visit-expectations",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.62,
+   0.5
+  ]
+ },
+ {
+  "out": "first-visit-expectations-statement.webp",
+  "from": "old/265605_Hackensack-Reception-Desk.jpeg",
+  "size": [
+   1000,
+   900
+  ],
+  "shows": "The curved reception desk of the practice",
+  "pages": "first-visit-expectations",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.55
+  ]
+ },
+ {
+  "out": "first-visit-expectations-quote.webp",
+  "from": "old/1ea713_Hackensack-Reception.jpeg",
+  "size": [
+   900,
+   1100
+  ],
+  "shows": "The waiting-room lounge: grey sofas, abstract paintings and flowers",
+  "pages": "first-visit-expectations",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.55
+  ]
+ },
+ {
+  "out": "full-mouth-rehabilitation-hero.webp",
+  "from": "old/ed8ff5_AdobeStock_339260113.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A complete upper and lower set of new teeth (model)",
+  "pages": "services/full-mouth-rehabilitation",
+  "source": "old-site",
+  "licence": "Adobe Stock 339260113, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "full-mouth-rehabilitation-statement.webp",
+  "from": "old/ae25c9_dental-technician-removing-jaw.webp",
+  "size": [
+   853,
+   768
+  ],
+  "shows": "A technician lifting a printed jaw model out of a 3D printer",
+  "pages": "services/full-mouth-rehabilitation",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "implant-bridges-hero.webp",
+  "from": "old/ff70b5_AdobeStock_358642032.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "An implant bridge: joined crowns over two implants (model)",
+  "pages": "services/implant-bridges",
+  "source": "old-site",
+  "licence": "Adobe Stock 358642032, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "implant-bridges-benefits.webp",
+  "from": "old/70ee13_Implant Bridges.webp",
+  "size": [
+   1100,
+   900
+  ],
+  "shows": "A bridge of three teeth held by two implants in the jaw (model)",
+  "pages": "services/implant-bridges",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "implant-revision-hero.webp",
+  "from": "old/f722a1_AdobeStock_372286534.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A dental scan on a screen, a gloved hand pointing to it",
+  "pages": "services/implant-revision",
+  "source": "old-site",
+  "licence": "Adobe Stock 372286534, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "implant-revision-opinion.webp",
+  "from": "stock/revision/342134266.jpg",
+  "size": [
+   1100,
+   900
+  ],
+  "shows": "Implant parts, screws and crowns laid out in a steel tray",
+  "pages": "services/implant-revision",
+  "source": "freepik",
+  "licence": "Freepik 342134266 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "sedation-hero.webp",
+  "from": "film/1198870167@86",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A treatment room with two orange dental chairs and a screen on the wall",
+  "pages": "services/sedation, office-gallery",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "sedation-statement.webp",
+  "from": "stock/monitor/405116995.jpg",
+  "size": [
+   1000,
+   900
+  ],
+  "shows": "A vital-signs monitor beside the chair in a treatment room",
+  "pages": "services/sedation",
+  "source": "freepik",
+  "licence": "Freepik 405116995 (premium)",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.45
+  ]
+ },
+ {
+  "out": "sedation-benefit.webp",
+  "from": "film/1198867061@72",
+  "size": [
+   1100,
+   900
+  ],
+  "shows": "A patient reclined in a treatment chair, talking with a dentist",
+  "pages": "services/sedation",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "single-implant-hero.webp",
+  "from": "old/1c8b1f_AdobeStock_406946058.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A dental implant, its abutment and its crown (model)",
+  "pages": "services/single-implant",
+  "source": "old-site",
+  "licence": "Adobe Stock 406946058, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "single-implant-fix.webp",
+  "from": "old/490692_Single Tooth Implant (2).webp",
+  "size": [
+   1100,
+   900
+  ],
+  "shows": "A single implant and its crown between two natural teeth (model)",
+  "pages": "services/single-implant",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "smile-makeovers-hero.webp",
+  "from": "stock/veneers/429226758.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Porcelain veneer shades in a guide, one lifted out",
+  "pages": "services/smile-makeovers",
+  "source": "freepik",
+  "licence": "Freepik 429226758 (premium)",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.5
+  ]
+ },
+ {
+  "out": "smile-makeovers-preview.webp",
+  "from": "old/edc6fd_AdobeStock_1129462305.webp",
+  "size": [
+   2400,
+   1000
+  ],
+  "shows": "A smile design traced over a row of teeth",
+  "pages": "services/smile-makeovers",
+  "source": "old-site",
+  "licence": "Adobe Stock 1129462305, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "insurance-financing-hero.webp",
+  "from": "film/1198870167@28",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A patient shaking hands with the front-desk team at reception",
+  "pages": "insurance-financing",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.5
+  ]
+ },
+ {
+  "out": "insurance-financing-statement.webp",
+  "from": "old/4bcbbb_AdobeStock_94425459.webp",
+  "size": [
+   1000,
+   900
+  ],
+  "shows": "A dental insurance claim form, a pen and glasses",
+  "pages": "insurance-financing",
+  "source": "old-site",
+  "licence": "Adobe Stock 94425459, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "patient-testimonials-hero.webp",
+  "from": "film/1198870167@74",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "Isaac, a patient of the practice, smiling outdoors",
+  "pages": "patient-testimonials",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.5
+  ]
+ },
+ {
+  "out": "pre-post-op-instructions-hero.webp",
+  "from": "film/1198867061@68",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "A patient handed his paperwork at the front desk",
+  "pages": "pre-post-op-instructions",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.62,
+   0.5
+  ]
+ },
+ {
+  "out": "pre-post-op-card-1.webp",
+  "from": "stock/icepack/6575759.jpg",
+  "size": [
+   900,
+   700
+  ],
+  "shows": "A tray of soft foods and drinks: a banana, a smoothie and milk",
+  "pages": "pre-post-op-instructions",
+  "source": "freepik",
+  "licence": "Freepik 6575759 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "pre-post-op-card-2.webp",
+  "from": "old/e4b503_implant-process-video_poster.0.jpg",
+  "size": [
+   900,
+   700
+  ],
+  "shows": "A full arch of teeth on implants (3D illustration)",
+  "pages": "pre-post-op-instructions",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "pre-post-op-card-3.webp",
+  "from": "stock/aftercare/12598694.jpg",
+  "size": [
+   900,
+   700
+  ],
+  "shows": "An electric toothbrush, cotton pads and swabs",
+  "pages": "pre-post-op-instructions",
+  "source": "freepik",
+  "licence": "Freepik 12598694 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-recovery-day-after.webp",
+  "from": "stock/icepack/38338567.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Smoothies and a bowl of soft cereal on a tray beside the sofa",
+  "pages": "blog, the post",
+  "source": "freepik",
+  "licence": "Freepik 38338567 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-dentures.webp",
+  "from": "old/2b1532_AdobeStock_533427763.webp",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A full-arch denture design open on a screen",
+  "pages": "blog, the post",
+  "source": "old-site",
+  "licence": "Adobe Stock 533427763, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-cost.webp",
+  "from": "stock/estimate/178095506.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A tooth model, a calculator, a notebook and dental instruments",
+  "pages": "blog, the post",
+  "source": "freepik",
+  "licence": "Freepik 178095506 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-recovery-weeks.webp",
+  "from": "stock/aftercare/28829527.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Mouthwash, a towel, a bamboo toothbrush and floss",
+  "pages": "blog, the post",
+  "source": "freepik",
+  "licence": "Freepik 28829527 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-zygomatic.webp",
+  "from": "asset/legacy/zygomatic-render.png",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "Zygomatic implants anchored in the cheekbone, holding a full upper arch (3D illustration)",
+  "pages": "blog, the post",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-foods.webp",
+  "from": "stock/softfood/24758411.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Bowls of yogurt, oats and soft fruit on a white table",
+  "pages": "blog, the post",
+  "source": "freepik",
+  "licence": "Freepik 24758411 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "film-isaac-1.webp",
+  "from": "film/1198870167@12.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (12.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-1.webp",
+  "from": "film/1198867061@89",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (89s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-2.webp",
+  "from": "film/1198870167@4.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (4.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-2.webp",
+  "from": "film/1198867061@84",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (84s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-3.webp",
+  "from": "film/1198870167@14.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (14.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-3.webp",
+  "from": "film/1198867061@80",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (80s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-4.webp",
+  "from": "film/1198870167@40.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (40.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-4.webp",
+  "from": "film/1198867061@10.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (10.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-5.webp",
+  "from": "film/1198870167@44.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (44.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-5.webp",
+  "from": "film/1198867061@14.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (14.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-6.webp",
+  "from": "film/1198870167@46.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (46.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-6.webp",
+  "from": "film/1198867061@18.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (18.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-7.webp",
+  "from": "film/1198870167@52.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (52.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-7.webp",
+  "from": "film/1198867061@28.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (28.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-8.webp",
+  "from": "film/1198870167@68.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (68.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-8.webp",
+  "from": "film/1198867061@36.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (36.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-9.webp",
+  "from": "film/1198870167@70.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (70.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-9.webp",
+  "from": "film/1198867061@46.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (46.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-10.webp",
+  "from": "film/1198870167@76.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (76.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-10.webp",
+  "from": "film/1198867061@52.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (52.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-11.webp",
+  "from": "film/1198870167@80.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (80.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-11.webp",
+  "from": "film/1198867061@62.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (62.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-12.webp",
+  "from": "film/1198870167@88.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (88.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-12.webp",
+  "from": "film/1198867061@86.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (86.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-isaac-13.webp",
+  "from": "film/1198870167@72.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Isaac, a patient, in his story film (72.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "film-daniel-13.webp",
+  "from": "film/1198867061@48.5",
+  "size": [
+   1280,
+   720
+  ],
+  "shows": "Daniel, a patient, in his story film (48.5s)",
+  "pages": "one page's films chapter",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3
+ },
+ {
+  "out": "about-hero.webp",
+  "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.33.jpeg",
+  "size": [
+   2400,
+   1100
+  ],
+  "shows": "The curved reception desk of the practice under a round ceiling light",
+  "pages": "about, office-gallery",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.55
+  ]
+ },
+ {
+  "out": "about-letter.webp",
+  "from": "old/739db4_Screenshot 2026-07-07 at 11.35.png",
+  "size": [
+   1000,
+   900
+  ],
+  "shows": "The waiting-room lounge: dark tufted seating and flowers on the table",
+  "pages": "about",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.55
+  ]
+ },
+ {
+  "out": "about-features.webp",
+  "from": "drive/office/Hackensack Action Shots_2.17.1.png",
+  "size": [
+   1920,
+   800
+  ],
+  "shows": "A patient sees her new smile in a hand mirror in the treatment chair",
+  "pages": "about, gallery (same photo)",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.62,
+   0.45
+  ]
+ },
+ {
+  "out": "cost-of-dental-implants-hero.webp",
+  "from": "stock/estimate/72957301.jpg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "A calculator beside a model of a full set of teeth",
+  "pages": "cost-of-dental-implants",
+  "source": "freepik",
+  "licence": "Freepik 72957301 (premium)",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "dental-implant-faqs-hero.webp",
+  "from": "film/1198870167@9",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "Isaac, a patient of the practice, talking about his treatment",
+  "pages": "dental-implant-faqs",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "dr-meskin-hero.webp",
+  "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.18.jpeg",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Dr. Alan Meskin in navy scrubs at the practice",
+  "pages": "dr-alan-meskin",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.35
+  ],
+  "box": [
+   0,
+   0.24,
+   1,
+   1
+  ]
+ },
+ {
+  "out": "dr-meskin-training.webp",
+  "from": "old/5ddd20_Dr.Alan-Meskin 2.webp",
+  "size": [
+   900,
+   1100
+  ],
+  "shows": "Dr. Alan Meskin with a colleague outside the practice",
+  "pages": "dr-alan-meskin",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.45
+  ],
+  "box": [
+   0,
+   0.22,
+   1,
+   1
+  ]
+ },
+ {
+  "out": "team-meskin.webp",
+  "from": "drive/office/Dr.Alan-Meskin.png",
+  "size": [
+   900,
+   1100
+  ],
+  "shows": "Dr. Alan Meskin, prosthodontist",
+  "pages": "about and the doctors' pages (headshot exception)",
+  "source": "drive",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "team-lee.webp",
+  "from": "old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp",
+  "size": [
+   837,
+   1024
+  ],
+  "shows": "Dr. Won-Sang Lee, oral surgeon",
+  "pages": "about and the doctors' pages (headshot exception)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "team-srour.webp",
+  "from": "old/5595ac_Dr.-Srour-Cutout-1024x833.webp",
+  "size": [
+   681,
+   833
+  ],
+  "shows": "Dr. Maurice Srour, oral surgeon",
+  "pages": "about and the doctors' pages (headshot exception)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "team-klass.webp",
+  "from": "old/5a7b8b_Hackensack Center.png",
+  "size": [
+   900,
+   1100
+  ],
+  "shows": "Dr. Dmitriy Klass, periodontist",
+  "pages": "about and the doctors' pages (headshot exception)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.45
+  ]
+ },
+ {
+  "out": "dr-lee-hero.webp",
+  "from": "old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp",
+  "size": [
+   905,
+   905
+  ],
+  "shows": "Dr. Won-Sang Lee, oral surgeon",
+  "pages": "dr-won-sang-lee-dds (and his team card)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.4
+  ]
+ },
+ {
+  "out": "dr-srour-hero.webp",
+  "from": "old/5595ac_Dr.-Srour-Cutout-1024x833.webp",
+  "size": [
+   833,
+   833
+  ],
+  "shows": "Dr. Maurice Srour, oral surgeon",
+  "pages": "dr-maurice-srour-dds (and his team card)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "dr-klass-hero.webp",
+  "from": "old/5a7b8b_Hackensack Center.png",
+  "size": [
+   1200,
+   1200
+  ],
+  "shows": "Dr. Dmitriy Klass, periodontist",
+  "pages": "dr-dmitriy-klass-dds-msd (and his team card)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.45
+  ]
+ },
+ {
+  "out": "referring-doctors-hero.webp",
+  "from": "old/2aef52_Dr.Alan-Meskin cropped2.webp",
+  "size": [
+   632,
+   632
+  ],
+  "shows": "Dr. Alan Meskin and a colleague at the practice",
+  "pages": "referring-doctors",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.45
+  ]
+ },
+ {
+  "out": "services-hero.webp",
+  "from": "film/1198870167@26.5",
+  "size": [
+   1920,
+   880
+  ],
+  "shows": "A patient walking into the reception of the practice",
+  "pages": "services",
+  "source": "vimeo",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "services-card-emergency.webp",
+  "from": "old/0dc0c5_AdobeStock_484728172.webp",
+  "size": [
+   900,
+   700
+  ],
+  "shows": "A gloved hand holding a dental handpiece",
+  "pages": "services",
+  "source": "old-site",
+  "licence": "Adobe Stock 484728172, licensed for the live site",
+  "fit": 2,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-hero.webp",
+  "from": "old/27ee86_CAD-CAM.webp",
+  "size": [
+   768,
+   768
+  ],
+  "shows": "The CAD/CAM milling unit beside its design screen",
+  "pages": "technology",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-lab.webp",
+  "from": "old/5b05b4_Dental-Lab.webp",
+  "size": [
+   571,
+   675
+  ],
+  "shows": "The on-site dental lab: a design screen and an articulator holding a model",
+  "pages": "technology, office-gallery",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.45,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-3d-printers.webp",
+  "from": "old/ae25c9_dental-technician-removing-jaw.webp",
+  "size": [
+   939,
+   768
+  ],
+  "shows": "A technician lifting a printed jaw model out of a 3D printer",
+  "pages": "technology, full-mouth-rehabilitation",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-cone-beam.webp",
+  "from": "old/3ad33e_Hackensack technology.webp",
+  "size": [
+   1000,
+   900
+  ],
+  "shows": "A patient positioned in the cone beam CT scanner",
+  "pages": "technology (the home page shows another still of it)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-photogrammetry.webp",
+  "from": "old/fc5a1d_ICam-4D-3-1024x768.webp",
+  "size": [
+   650,
+   768
+  ],
+  "shows": "The iCam4D photogrammetry camera",
+  "pages": "technology",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-intraoral-scanner.webp",
+  "from": "old/2cbc18_Intra-oral-scanner.webp",
+  "size": [
+   707,
+   578
+  ],
+  "shows": "An intra-oral scanner and its 3D scan on screen",
+  "pages": "technology",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.5,
+   0.5
+  ]
+ },
+ {
+  "out": "technology-digital-x-ray.webp",
+  "from": "old/f722a1_AdobeStock_372286534.webp",
+  "size": [
+   1100,
+   1300
+  ],
+  "shows": "A digital scan of the teeth and jaw on a screen",
+  "pages": "technology, implant-revision",
+  "source": "old-site",
+  "licence": "Adobe Stock 372286534, licensed for the live site",
+  "fit": 3,
+  "focus": [
+   0.55,
+   0.5
+  ]
+ },
+ {
+  "out": "blog-hero.webp",
+  "from": "old/8bac90_Hackensack Office Shot 2.webp",
+  "size": [
+   1080,
+   1080
+  ],
+  "shows": "The reception and the waiting area by the front windows",
+  "pages": "blog, office-gallery (same photo)",
+  "source": "old-site",
+  "licence": "client's own",
+  "fit": 3,
+  "focus": [
+   0.45,
+   0.5
+  ]
+ }
+]

@@ -1,21 +1,200 @@
 {
   "origin": "https://www.hackensackdentalimplants.com",
-  "facts": {
-    "name": "Hackensack Center for Dental Implants",
-    "phone": "(551) 368-2476",
-    "phoneE164": "+15513682476",
-    "street": "163 Main Street, Suite A1",
-    "city": "Hackensack",
-    "region": "NJ",
-    "zip": "07601",
-    "languages": ["English", "Spanish", "Russian", "Portuguese", "Korean"],
-    "map": "https://maps.app.goo.gl/2tAH78yFoiGHmE5F6",
-    "sameAs": ["https://www.instagram.com/adcsmiles_", "https://www.healthgrades.com/dentist/dr-alan-meskin-1n6gtpui20"]
-  },
+  "note": "Written by build.mjs from the pages. Do not edit by hand.",
   "pages": {
+    "404": {
+      "title": "Page Not Found | Hackensack Center for Dental Implants",
+      "description": "The page could not be found. Return to Hackensack Center for Dental Implants to explore treatment options, doctors, and patient resources.",
+      "image": "hero.webp"
+    },
     "index": {
       "title": "Dental Implants in Hackensack, NJ | Hackensack Center",
       "description": "Rebuild your smile at Hackensack Center for Dental Implants. Dr. Alan Meskin offers All-on-X, single implants & full mouth restoration.",
+      "image": "hero.webp"
+    },
+    "about": {
+      "title": "About Our Implant Practice | Hackensack Center, NJ",
+      "description": "Learn about Hackensack Center for Dental Implants in Hackensack, NJ, led by prosthodontist Dr. Alan Meskin.",
+      "image": "about-hero.webp"
+    },
+    "blog/all-on-x-recovery-day-after-same-day-teeth-surgery": {
+      "title": "All-On-X Recovery: First 24-48 Hours Guide | Hackensack Center",
+      "description": "Step-by-step All-On-X recovery guide for the day after same-day teeth surgery in Hackensack, NJ, including diet, pain management, and hygiene.",
+      "image": "blog-recovery-day-after.webp"
+    },
+    "blog/all-on-x-vs-traditional-dentures-comparison-2026": {
+      "title": "All-On-X vs Dentures: Which Is Better in 2026? | Hackensack, NJ",
+      "description": "Compare All-On-X implants and traditional dentures in Hackensack, NJ, including cost, comfort, eating, speaking, bone preservation, and longevity.",
+      "image": "blog-dentures.webp"
+    },
+    "blog/dental-implant-cost-hackensack-nj-2026-pricing-guide": {
+      "title": "Dental Implant Cost in Hackensack, NJ: 2026 Pricing Guide",
+      "description": "Learn what affects dental implant costs in Hackensack, NJ, including single implants, full-arch treatment, insurance, financing, and treatment planning.",
+      "image": "blog-cost.webp"
+    },
+    "blog/dental-implant-recovery-week-by-week-aftercare-guide": {
+      "title": "Dental Implant Recovery: Week-By-Week Guide | Hackensack Center",
+      "description": "Dental implant recovery guide for Hackensack, NJ patients, with day-by-day and week-by-week aftercare, diet, hygiene, and healing milestones.",
+      "image": "blog-recovery-weeks.webp"
+    },
+    "blog/dental-implants-no-bone-zygomatic-implants-explained": {
+      "title": "Dental Implants With No Bone: Zygomatic Implants | Hackensack, NJ",
+      "description": "Learn how zygomatic implants may help patients with severe upper-jaw bone loss avoid grafting and review candidacy, treatment, and recovery in Hackensack, NJ.",
+      "image": "blog-zygomatic.webp"
+    },
+    "blog/foods-to-eat-and-avoid-after-dental-implant-surgery": {
+      "title": "Foods After Dental Implant Surgery: Eat & Avoid List | Hackensack, NJ",
+      "description": "Complete guide to foods after dental implant surgery in Hackensack, NJ, including what to eat, what to avoid, and week-by-week diet progression.",
+      "image": "blog-foods.webp"
+    },
+    "blog": {
+      "title": "Dental Implant Blog in Hackensack, NJ | Hackensack Center",
+      "description": "Dental implant guides from Hackensack Center for Dental Implants in Hackensack, NJ. Costs, procedures and recovery explained.",
+      "image": "hero.webp"
+    },
+    "contact": {
+      "title": "Contact Hackensack Center for Dental Implants | Hackensack, NJ",
+      "description": "Contact Hackensack Center for Dental Implants in Hackensack, NJ to schedule a consultation, ask about treatment, financing, or directions to our office.",
+      "image": "contact-hero.webp"
+    },
+    "cookie-policy": {
+      "title": "Cookie Policy | Hackensack Center for Dental Implants",
+      "description": "Cookie policy for the Hackensack Center for Dental Implants website, including information about cookies, tracking technologies, and website preferences.",
+      "image": "hero.webp"
+    },
+    "cost-of-dental-implants": {
+      "title": "Dental Implant Cost in Hackensack, NJ | Hackensack Center",
+      "description": "Dental implant cost in Hackensack, NJ explained by prosthodontist Dr. Alan Meskin. Pricing ranges and payment options.",
+      "image": "cost-of-dental-implants-hero.webp"
+    },
+    "dental-implant-faqs": {
+      "title": "Dental Implant FAQs | Hackensack Center for Dental Implants",
+      "description": "Answers to common questions about dental implants in Hackensack, NJ. Cost, pain, recovery, candidacy, and financing at Hackensack Center for Dental Implants.",
+      "image": "dental-implant-faqs-hero.webp"
+    },
+    "dr-alan-meskin": {
+      "title": "Prosthodontist in Hackensack, NJ | Dr. Alan Meskin",
+      "description": "Dr. Alan Meskin is an NYU-trained prosthodontist in Hackensack, NJ leading Hackensack Center for Dental Implants.",
+      "image": "dr-meskin-hero.webp"
+    },
+    "dr-dmitriy-klass-dds-msd": {
+      "title": "Dr. Dmitriy Klass, DDS, MSD | Hackensack Center for Dental Implants",
+      "description": "Dr. Dmitriy Klass is an NYU and Boston University-trained periodontist and implant surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.",
+      "image": "dr-klass-hero.webp"
+    },
+    "dr-maurice-srour-dds": {
+      "title": "Dr. Maurice Srour, DDS | Hackensack Center for Dental Implants",
+      "description": "Dr. Maurice Srour is an NYU-trained oral and maxillofacial surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.",
+      "image": "dr-srour-hero.webp"
+    },
+    "dr-won-sang-lee-dds": {
+      "title": "Dr. Won-Sang Lee, DDS | Hackensack Center for Dental Implants",
+      "description": "Dr. Won-Sang Lee is a Columbia-trained oral and maxillofacial surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.",
+      "image": "dr-lee-hero.webp"
+    },
+    "first-visit-expectations": {
+      "title": "Your First Visit in Hackensack, NJ | Hackensack Center",
+      "description": "What to expect at your first visit to Hackensack Center for Dental Implants in Hackensack, NJ. Meet Dr. Alan Meskin.",
+      "image": "first-visit-expectations-hero.webp"
+    },
+    "gallery": {
+      "title": "Dental Implant Before & After Gallery | Hackensack, NJ",
+      "description": "View before-and-after dental implant and smile restoration results from Hackensack Center for Dental Implants in Hackensack, NJ.",
+      "image": "gallery-hero.webp"
+    },
+    "hipaa-disclosure": {
+      "title": "HIPAA Disclosure | Hackensack Center for Dental Implants",
+      "description": "HIPAA Notice of Privacy Practices for Hackensack Center for Dental Implants in Hackensack, NJ, describing how your health information may be used and shared and your rights.",
+      "image": "hero.webp"
+    },
+    "insurance-financing": {
+      "title": "Insurance & Financing in Hackensack, NJ | Hackensack Center",
+      "description": "Insurance and financing for dental implants in Hackensack, NJ. Hackensack Center for Dental Implants helps you plan payment.",
+      "image": "insurance-financing-hero.webp"
+    },
+    "office-gallery": {
+      "title": "Office Gallery in Hackensack, NJ | Hackensack Center for Dental Implants",
+      "description": "Take a look inside Hackensack Center for Dental Implants in Hackensack, NJ, from our reception and treatment rooms to our on-site dental lab.",
+      "image": "office-hero.webp"
+    },
+    "patient-testimonials": {
+      "title": "Patient Testimonials in Hackensack, NJ | Hackensack Center",
+      "description": "Read patient reviews of Hackensack Center for Dental Implants in Hackensack, NJ and the implant care from Dr. Alan Meskin.",
+      "image": "patient-testimonials-hero.webp"
+    },
+    "pre-post-op-instructions": {
+      "title": "Implant Post-Op Care in Hackensack, NJ | Hackensack Center",
+      "description": "Dental implant pre-op and post-op instructions from Hackensack Center for Dental Implants in Hackensack, NJ. Recovery guidance.",
+      "image": "pre-post-op-instructions-hero.webp"
+    },
+    "privacy-policy": {
+      "title": "Privacy Policy | Hackensack Center for Dental Implants",
+      "description": "Privacy policy for Hackensack Center for Dental Implants in Hackensack, NJ, covering how patient and website information is collected and used.",
+      "image": "hero.webp"
+    },
+    "referring-doctors": {
+      "title": "Refer a Patient in Hackensack, NJ | Hackensack Center for Dental Implants",
+      "description": "Refer your patients to Hackensack Center for Dental Implants in Hackensack, NJ. Dr. Alan Meskin handles complex implant and full-mouth cases and returns patients to your care.",
+      "image": "referring-doctors-hero.webp"
+    },
+    "services/all-on-x": {
+      "title": "All-on-X Implants in Hackensack, NJ | Hackensack Center",
+      "description": "All-on-X dental implants in Hackensack, NJ. Dr. Alan Meskin replaces a full arch on four to six implants.",
+      "image": "allonx-hero.webp"
+    },
+    "services/dental-implants": {
+      "title": "Dental Implants in Hackensack, NJ | Hackensack Center",
+      "description": "Dental implants in Hackensack, NJ from prosthodontist Dr. Alan Meskin. Replace one tooth or a full arch, planned in 3D and built in our on-site lab.",
+      "image": "dental-implants-hero.webp"
+    },
+    "services/emergency-dental-care": {
+      "title": "Emergency Dental Care in Hackensack, NJ | Hackensack Center",
+      "description": "Emergency dental care in Hackensack, NJ. Hackensack Center for Dental Implants treats urgent tooth pain, broken teeth and failed implants.",
+      "image": "emergency-dental-care-hero.webp"
+    },
+    "services/full-mouth-rehabilitation": {
+      "title": "Full-Mouth Restoration in Hackensack, NJ | Hackensack Center",
+      "description": "Full-mouth restoration in Hackensack, NJ at Hackensack Center for Dental Implants. Rebuild every tooth with Dr. Alan Meskin.",
+      "image": "full-mouth-rehabilitation-hero.webp"
+    },
+    "services/implant-bridges": {
+      "title": "Implant Bridges in Hackensack, NJ | Hackensack Center",
+      "description": "Implant bridges in Hackensack, NJ replace several missing teeth without a denture. Planned by Dr. Alan Meskin.",
+      "image": "implant-bridges-hero.webp"
+    },
+    "services/implant-revision": {
+      "title": "Implant Revision in Hackensack, NJ | Hackensack Center",
+      "description": "Implant revision in Hackensack, NJ for failing or painful dental implants. Dr. Alan Meskin diagnoses and rebuilds the result.",
+      "image": "implant-revision-hero.webp"
+    },
+    "services/sedation": {
+      "title": "Sedation Dentistry in Hackensack, NJ | Hackensack Center",
+      "description": "Sedation dentistry in Hackensack, NJ at Hackensack Center for Dental Implants. Comfortable implant treatment with Dr. Alan Meskin.",
+      "image": "sedation-hero.webp"
+    },
+    "services/single-implant": {
+      "title": "Single Tooth Implant in Hackensack, NJ | Hackensack Center",
+      "description": "Single tooth implant in Hackensack, NJ from prosthodontist Dr. Alan Meskin. Replace one missing tooth, root and crown.",
+      "image": "single-implant-hero.webp"
+    },
+    "services/smile-makeovers": {
+      "title": "Smile Makeovers in Hackensack, NJ | Hackensack Center",
+      "description": "Smile makeovers in Hackensack, NJ with prosthodontist Dr. Alan Meskin. Implants, crowns and veneers planned as one result.",
+      "image": "smile-makeovers-hero.webp"
+    },
+    "services": {
+      "title": "Dental Implant & Restorative Services in Hackensack, NJ | Hackensack Center",
+      "description": "Explore dental implants, All-on-X, single implants, implant bridges, implant revision, full-mouth rehabilitation, smile makeovers, sedation, and emergency dental care in Hackensack, NJ.",
+      "image": "services-hero.webp"
+    },
+    "technology": {
+      "title": "Our Dental Technology in Hackensack, NJ | Hackensack Center",
+      "description": "The dental technology behind precise implant care in Hackensack, NJ: on-site lab, 3D cone beam imaging, CAD/CAM, and same-day restorations at Hackensack Center.",
+      "image": "technology-hero.webp"
+    },
+    "terms-conditions": {
+      "title": "Terms & Conditions | Hackensack Center for Dental Implants",
+      "description": "Terms and conditions for using the Hackensack Center for Dental Implants website in Hackensack, NJ, including use of site content and services.",
       "image": "hero.webp"
     }
   }

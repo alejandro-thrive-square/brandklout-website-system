@@ -1,37 +1,45 @@
 #!/usr/bin/env bash
-# Client script, 2026-09-30. The whole push to STAGING, in the order tools/instatic-site/README.md
-# gives, with the two workarounds this toolkit copy needs (see preload-paths.mjs and
-# empty-embed-markers.mjs). Full replace: right while the site is one page and nobody edits it in
-# the browser. Once someone does, switch to `push-site.mjs --update`.
+# Client script, 2026-09-30, rewritten 2026-10-09 for the complete site. The whole push to STAGING, in
+# the order tools/instatic-site/README.md gives, with this toolkit copy's workarounds (each one is a
+# fix that belongs on main; see the step runbook):
+#   preload-paths.mjs        upload-media / set-alt use P without importing lib/paths.mjs
+#   empty-embed-markers.mjs  build-import-input does not empty data-embed markers
+#   embed-nodes.mjs          place-embeds.mjs skips nested slugs and takes one page per key; this puts
+#                            the Embed blocks into the converted payload, so push-site writes them
+# Full replace: staging carries only what site-src builds, and nobody edits it in the browser yet
+# (check publishStatus first: draftMatchesPublished must be true). Once someone does, switch to
+# `push-site.mjs --update`.
 #
 # Usage (from the step folder, scenario-0-new-site/03-design-build):
 #   RAILWAY_LINK_DIR=<dir linked to the project's STAGING environment> bash output/code/push-staging.sh > output/push.log 2>&1
-# One chain at a time: they share /app on the container.
+# One chain at a time: they share /app on the container. No pipes: Node 24 on Windows dies with a
+# libuv assertion when its output is piped, so every step writes straight to the log.
 set -euo pipefail
 
 export INSTATIC_BASE_URL="https://hackensack-dental-implants-staging.up.railway.app"
 export STAGING_HOST="hackensack-dental-implants-staging.up.railway.app"
 export EXPECT_FONT_FACES=2
-# 25-interaction.css styles elements the runtime creates (curtain, cursor, drawings, scan line).
-# They are not in the imported markup, so the registry would drop their rules; ship the file verbatim
-# in the token asset instead.
-export TOKEN_FILES="00-fluid-root.css,01-tokens.css,25-interaction.css"
 : "${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the staging environment}"
 T=../../tools/instatic-site
+A=../../tools/instatic-api-sync
 PRE="--import ./output/code/preload-paths.mjs"
+FILMS="${FILMS:-}"
 
 say() { printf '\n##### %s\n' "$1"; }
 
+say "backup";           node $T/ops/backup-site.mjs --out output/backups/pre-site-stg
 say "build";            ( cd output/code/site-src && node build.mjs )
-say "upload media";     node $PRE $T/push/upload-media.mjs | tail -2
-say "alt text";         node $PRE $T/push/set-alt.mjs --apply | tail -1
-say "import payload";   node $T/push/build-import-input.mjs | tail -3
+say "upload media";     node $PRE $T/push/upload-media.mjs
+say "alt text";         node $PRE $T/push/set-alt.mjs --apply
+say "import payload";   node $T/push/build-import-input.mjs
 say "empty markers";    node output/code/empty-embed-markers.mjs
-say "ship and convert"; bash $T/push/ship.sh | grep -v 'chunk' | tail -12
-say "write the site";   node $T/push/push-site.mjs --apply --force | tail -8
-say "breakpoints";      node output/code/set-breakpoints.mjs --apply | tail -1
-say "place embeds";     node $T/push/place-embeds.mjs --apply | tail -3
-say "seo settings";     node output/code/configure-seo.mjs --apply | tail -2
-say "publish";          node ../../tools/instatic-api-sync/insta-api.mjs publish | tail -3
-say "record";           node $T/push/push-site.mjs --record | tail -1
+say "ship and convert"; bash $T/push/ship.sh
+say "embed blocks";     node output/code/embed-nodes.mjs
+say "write the site";   node $T/push/push-site.mjs --apply --force
+say "breakpoints";      node output/code/set-breakpoints.mjs --apply
+say "404 template";     node $T/ops/apply-template-flags.mjs --page 404 --not-found
+say "template guard";   node $T/gates/template-guard.mjs
+say "seo settings";     node output/code/configure-seo.mjs --apply
+say "publish";          node $A/insta-api.mjs publish
+say "record";           node $T/push/push-site.mjs --record
 say "done: $INSTATIC_BASE_URL/"

@@ -1,0 +1,11 @@
+/                                     360  drawer (Open the menu), 4 submenus
+/                                     390  drawer (Open the menu), 4 submenus
+/                                     768  drawer (Open the menu), 4 submenus
+/                                    1024  drawer (Open the menu), 4 submenus
+/                                    1440  bar, 4 submenus
+
+145 links checked
+PROBLEMS (2):
+  / @1440  invisible menu > "(551) 368-2476"  opacity 1.00
+  / @1440  invisible menu > "Schedule ConsultationSchedule Consultati"  opacity 1.00
+exit 1

@@ -1,357 +1,342 @@
-<!-- Home, to the style the client chose: concept 04 "Human Transformation".
-     Structure, copy and measurements follow that page section for section. What differs is listed
-     in output/canary-review.md: the client's own photographs where the concept holds stock, the
-     real consultation form where it holds a demo, and the practice's facts. -->
-<div class="topbar">
-  <div class="wrap">
-    <span>Dedicated implant care in Bergen County, New Jersey</span>
-    <span>Questions? <a href="tel:+15513682476">(551) 368-2476</a></span>
+<!-- Home, to the style the client chose (concept 04 "Human Transformation"), approved October 2026.
+     Copy, order and composition are the approved page's; on 2026-10-09 the markup moved to the
+     Client-First class standard (one class per styled element, scripts on data- attributes) and the
+     keyword H1 took the place of the gold label above the headline. Differences from the concept are
+     listed in output/canary-review.md. -->
+
+<!-- ============ ARRIVAL ============ -->
+<!-- 2026-10-01 (Jess): a hero with video, and the doctor seen sooner. The film is the practice's own:
+     b-roll from the Isaac and Daniel patient films (agency Vimeo, folder "Hackensack Center"), muted
+     and looping; the full film with sound opens from the play button. The runtime sets the video's
+     src from data-src (data-src-mobile under 768px): the importer keeps attributes, not <source>. -->
+<section class="section_arrival" id="top" data-chapter="0" data-chapter-name="Arrival" data-hero>
+  <div class="arrival_container">
+    <div class="arrival_grid">
+      <div class="arrival_meta" data-reveal="rise" data-hero-hold>
+        <h1 class="text-style-tagline">Dental Implants in Hackensack, NJ</h1>
+        <span class="arrival_place">Permanent Teeth · Renewed Confidence</span>
+      </div>
+      <p class="heading-style-display arrival_heading" data-split="hero">Eat. Smile. Live confidently again.</p>
+      <div class="arrival_copy" data-hero-hold data-hero-copy>
+        <p class="arrival_text" data-reveal="rise">Dental implants can give you more than new teeth. They can help you return to the meals, photos, conversations and everyday moments you have been missing.</p>
+        <div class="button-group arrival_actions" data-reveal="rise">
+          <a class="button" data-button href="#consult">Explore Your Options</a>
+          <a class="button is-link" href="#doctor">Meet Dr. Meskin →</a>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<nav class="nav" aria-label="Primary">
-  <div class="wrap navin">
-    <a class="brand" href="/" aria-label="Hackensack Center for Dental Implants, home">
-      <img src="/media/img/logo-stacked.webp" width="620" height="180" alt="Hackensack Center for Dental Implants">
-    </a>
-    <div class="navlinks">
-      <a href="#solutions">Implant Solutions</a>
-      <a href="#results">Smile Gallery</a>
-      <a href="#doctor">Your Doctor</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn" href="#consult">Schedule Consultation</a>
+  <div class="arrival_film" data-hero-film>
+    <div class="arrival_frame" data-hero-frame>
+      <video class="arrival_video" data-hero-video data-src="/media/video/hero-loop.mp4" data-src-mobile="/media/video/hero-loop-m.mp4" poster="/media/img/hero-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+      <a class="arrival_play" href="/media/video/isaac-story.mp4" aria-label="Watch Isaac's story, a patient film of 1 minute 42 seconds, with sound" data-film="Isaac’s story" data-hero-hold>
+        <span class="arrival_play-ring" aria-hidden="true"><span class="arrival_play-icon"></span></span>
+        <span class="arrival_play-text"><span class="arrival_play-title">Watch Isaac's story</span><span class="arrival_play-meta">A patient film · 1:42</span></span>
+      </a>
+    </div>
+    <div class="arrival_doctor" data-hero-hold>
+      <img class="arrival_doctor-image" src="/media/img/doctor-face.webp" width="192" height="192" alt="Portrait of Dr. Alan Meskin">
+      <div class="arrival_doctor-who">
+        <span class="arrival_doctor-name">Dr. Alan Meskin</span>
+        <span class="arrival_doctor-role">NYU-trained prosthodontist</span>
+      </div>
+      <div class="arrival_rating">
+        <strong class="arrival_rating-value">5.0</strong>
+        <span class="arrival_rating-stars" aria-hidden="true">★★★★★</span>
+        <span>Google rating</span>
+      </div>
     </div>
   </div>
-</nav>
+</section>
 
-<main id="main">
-
-  <!-- ============ 0 · ARRIVAL ============ -->
-  <!-- 2026-10-01 (Jess, on a call with Alejandro): a new hero with video, and the doctor seen sooner.
-       The film is the practice's own: b-roll from the Isaac and Daniel patient films (agency Vimeo,
-       folder "Hackensack Center"), muted and looping; the full film with sound opens from the play
-       button. The runtime sets the video's src from data-src (data-src-mobile under 768px): the
-       importer keeps attributes, not <source> children. -->
-  <section class="ch" id="top" data-chapter="0" data-chapter-name="Arrival">
-    <div class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-meta js-rise">
-          <span class="kicker">Permanent Teeth · Renewed Confidence</span>
-          <span class="hero-where">Hackensack, New Jersey</span>
-        </div>
-        <h1 class="display js-split js-split-hero">Eat. Smile. Live confidently again.</h1>
-        <div class="hero-copy">
-          <p class="js-rise">Dental implants can give you more than new teeth. They can help you return to the meals, photos, conversations and everyday moments you have been missing.</p>
-          <div class="hero-actions js-rise">
-            <a class="btn" href="#consult">Explore Your Options</a>
-            <a class="textlink" href="#doctor">Meet Dr. Meskin →</a>
-          </div>
-        </div>
+<!-- ============ YOUR DOCTOR ============ -->
+<!-- Moved up on 2026-10-01 (Jess): his credentials and the practice's reputation in numbers. Sources
+     for every figure are in output/canary-review.md; the two team totals are the practice's own
+     claims and wait for the client's confirmation. -->
+<section class="section_doctor" id="doctor" data-chapter="1" data-chapter-name="Your Doctor">
+  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+    <div class="doctor_grid" data-name-mark="Meskin">
+      <div class="doctor_portrait" data-reveal="wipe">
+        <img class="doctor_portrait-image" src="/media/img/doctor.png" width="500" height="500" loading="lazy" alt="Dr. Alan Meskin, prosthodontist and implant specialist">
+        <span class="tag is-bottom-left">Prosthodontist · Implant Specialist</span>
       </div>
-      <div class="hero-film">
-        <div class="hero-frame js-hero-frame">
-          <video class="hero-video js-hero-video" data-src="/media/video/hero-loop.mp4" data-src-mobile="/media/video/hero-loop-m.mp4" poster="/media/img/hero-poster.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
-          <a class="hero-play js-film" href="/media/video/isaac-story.mp4" aria-label="Watch Isaac's story, a patient film of 1 minute 42 seconds, with sound">
-            <span class="hero-play__ring" aria-hidden="true"><span class="hero-play__icon"></span></span>
-            <span class="hero-play__text"><b>Watch Isaac's story</b><span>A patient film · 1:42</span></span>
-          </a>
-        </div>
-        <div class="hero-doctor">
-          <img src="/media/img/doctor-face.webp" width="192" height="192" alt="Portrait of Dr. Alan Meskin">
-          <div class="hero-doctor__who">
-            <b>Dr. Alan Meskin</b>
-            <span>NYU-trained prosthodontist</span>
-          </div>
-          <div class="hero-doctor__rating">
-            <strong>5.0</strong>
-            <span class="stars" aria-hidden="true">★★★★★</span>
-            <span>Google rating</span>
-          </div>
+      <div class="doctor_content">
+        <div class="text-style-tagline" data-type>Meet Your Implant Doctor</div>
+        <h2 class="doctor_heading" data-split>Your new teeth, planned by a specialist in replacing them.</h2>
+        <p class="doctor_text" data-reveal="rise">Dr. Meskin is an NYU-trained prosthodontist: a dentist who completed three more years of specialty training in replacing and restoring teeth. He focuses on dental implants, full-mouth reconstruction and cosmetic smile design, with a patient-first, detail-driven approach and digital planning behind every case.</p>
+        <dl class="credentials_list" data-reveal="stagger">
+          <div class="credentials_item"><dt class="credentials_term">Doctor of Dental Surgery</dt><dd class="credentials_value">NYU College of Dentistry, 2019</dd></div>
+          <div class="credentials_item"><dt class="credentials_term">Certificate in Prosthodontics</dt><dd class="credentials_value">NYU, three-year specialty residency, 2022</dd></div>
+          <div class="credentials_item"><dt class="credentials_term">Memberships</dt><dd class="credentials_value">American College of Prosthodontists · American Academy of Implant Dentistry · American Dental Association</dd></div>
+          <div class="credentials_item"><dt class="credentials_term">Speaks</dt><dd class="credentials_value">English, Spanish and Russian</dd></div>
+        </dl>
+        <a class="button is-link" href="/dr-alan-meskin" data-reveal="rise">Read Dr. Meskin's story →</a>
+      </div>
+    </div>
+    <div class="stats_component" aria-label="The practice in numbers" data-stats>
+      <div class="stats_item" data-stat><strong class="stats_number" data-count="5" data-decimals="1">5.0</strong><span class="stats_label">Five-star Google rating</span></div>
+      <div class="stats_item" data-stat><strong class="stats_number" data-count="50000" data-suffix="+">50,000+</strong><span class="stats_label">Implants placed by our surgeons</span></div>
+      <div class="stats_item" data-stat><strong class="stats_number" data-count="30" data-suffix="+">30+</strong><span class="stats_label">Years of combined implant experience</span></div>
+      <div class="stats_item" data-stat><strong class="stats_number" data-count="4">4</strong><span class="stats_label">Implant specialists under one roof</span></div>
+    </div>
+    <div class="specialists_component">
+      <p class="specialists_lead" data-reveal="rise">Dr. Meskin works with a surgical team, so every stage of treatment stays in one place.</p>
+      <div class="specialists_list" data-reveal="stagger">
+        <a class="specialists_item" href="/dr-won-sang-lee-dds"><span class="specialists_name">Won-Sang Lee, DDS</span><span class="specialists_role">Oral Surgeon · Columbia University</span></a>
+        <a class="specialists_item" href="/dr-maurice-srour-dds"><span class="specialists_name">Maurice Srour, DDS</span><span class="specialists_role">Oral Surgeon, Full Arch · NYU / Bellevue</span></a>
+        <a class="specialists_item" href="/dr-dmitriy-klass-dds-msd"><span class="specialists_name">Dmitriy Klass, DDS, MSD</span><span class="specialists_role">Periodontist · Boston University</span></a>
+      </div>
+    </div>
+  </div></div></div>
+</section>
+
+<!-- ============ REAL LIFE ============ -->
+<section class="section_story" id="story" data-chapter="2" data-chapter-name="Real Life">
+  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+    <div class="story_grid" id="story-scene" data-scene="story">
+      <div class="story_photo" data-reveal="wipe" data-parallax>
+        <img class="story_photo-image" src="/media/img/story.webp" width="950" height="1080" loading="lazy" alt="Isaac, a patient of the practice, smiling">
+        <span class="tag is-bottom-right">Real Life / Real Confidence</span>
+      </div>
+      <div class="story_content">
+        <div class="text-style-tagline" data-type>More Than A Dental Procedure</div>
+        <h2 class="story_heading" data-split>The best result is getting your normal life back.</h2>
+        <p class="story_text" data-reveal="rise">Missing teeth and unstable dentures can change how you eat, speak and socialize. Implant treatment is designed to create a stable foundation for a smile that feels more natural.</p>
+        <blockquote class="story_quote" data-words>“I want to order what I want, smile in every photo and stop worrying about my teeth.”</blockquote>
+        <div class="story_benefits">
+          <div class="story_benefit" data-lit><span class="story_benefit-title">Eat</span><span class="story_benefit-text">Enjoy more of the foods you love.</span></div>
+          <div class="story_benefit" data-lit><span class="story_benefit-title">Smile</span><span class="story_benefit-text">Feel comfortable in photos again.</span></div>
+          <div class="story_benefit" data-lit><span class="story_benefit-title">Live</span><span class="story_benefit-text">Stop planning around your teeth.</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div></div></div>
+</section>
 
-  <!-- ============ 1 · YOUR DOCTOR ============ -->
-  <!-- Moved up on 2026-10-01 (Jess): the doctor is the second thing a visitor sees, with his
-       credentials and the practice's reputation in numbers. Sources for every figure are in
-       output/canary-review.md → Doctor and reputation; the two team totals are the practice's own
-       claims and wait for the client's confirmation. -->
-  <section class="ch section doctor" id="doctor" data-chapter="1" data-chapter-name="Your Doctor">
-    <div class="wrap">
-      <div class="doc-grid">
-        <div class="doc-portrait js-wipe">
-          <img src="/media/img/doctor.png" width="500" height="500" loading="lazy" alt="Dr. Alan Meskin, prosthodontist and implant specialist">
-          <span class="doc-portrait__tag">Prosthodontist · Implant Specialist</span>
-        </div>
-        <div class="doc-copy">
-          <div class="kicker js-rise">Meet Your Implant Doctor</div>
-          <h2 class="display js-split">Your new teeth, planned by a specialist in replacing them.</h2>
-          <p class="js-rise">Dr. Meskin is an NYU-trained prosthodontist: a dentist who completed three more years of specialty training in replacing and restoring teeth. He focuses on dental implants, full-mouth reconstruction and cosmetic smile design, with a patient-first, detail-driven approach and digital planning behind every case.</p>
-          <dl class="creds js-stagger">
-            <div><dt>Doctor of Dental Surgery</dt><dd>NYU College of Dentistry, 2019</dd></div>
-            <div><dt>Certificate in Prosthodontics</dt><dd>NYU, three-year specialty residency, 2022</dd></div>
-            <div><dt>Memberships</dt><dd>American College of Prosthodontists · American Academy of Implant Dentistry · American Dental Association</dd></div>
-            <div><dt>Speaks</dt><dd>English, Spanish and Russian</dd></div>
-          </dl>
-          <a class="textlink js-rise" href="/dr-alan-meskin">Read Dr. Meskin's story →</a>
-        </div>
+<!-- ============ IMPLANT SOLUTIONS ============ -->
+<section class="section_solutions background-color-sand" id="solutions" data-chapter="3" data-chapter-name="Implant Solutions">
+  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+    <div class="solutions_head">
+      <div class="solutions_title">
+        <div class="text-style-tagline" data-type>Implant Solutions</div>
+        <h2 class="solutions_heading" data-split>One goal. A treatment plan built for you.</h2>
       </div>
-      <div class="stats js-stats" aria-label="The practice in numbers">
-        <div class="stat"><strong data-count="5" data-decimals="1">5.0</strong><span>Five-star Google rating</span></div>
-        <div class="stat"><strong data-count="50000" data-suffix="+">50,000+</strong><span>Implants placed by our surgeons</span></div>
-        <div class="stat"><strong data-count="30" data-suffix="+">30+</strong><span>Years of combined implant experience</span></div>
-        <div class="stat"><strong data-count="4">4</strong><span>Implant specialists under one roof</span></div>
-      </div>
-      <div class="specialists">
-        <p class="specialists__lead js-rise">Dr. Meskin works with a surgical team, so every stage of treatment stays in one place.</p>
-        <div class="specialist-grid js-stagger">
-          <a href="/dr-won-sang-lee-dds"><b>Won-Sang Lee, DDS</b><span>Oral Surgeon · Columbia University</span></a>
-          <a href="/dr-maurice-srour-dds"><b>Maurice Srour, DDS</b><span>Oral Surgeon, Full Arch · NYU / Bellevue</span></a>
-          <a href="/dr-dmitriy-klass-dds-msd"><b>Dmitriy Klass, DDS, MSD</b><span>Periodontist · Boston University</span></a>
-        </div>
-      </div>
+      <p class="solutions_intro" data-reveal="rise">The right solution depends on the number of missing teeth, the health of your remaining teeth, your bone structure and what you want from your new smile.</p>
     </div>
-  </section>
-
-  <!-- ============ 2 · REAL LIFE ============ -->
-  <section class="ch section intro" id="story" data-chapter="2" data-chapter-name="Real Life">
-    <div class="wrap intro-grid" id="story-scene">
-      <div class="story-photo photo js-wipe js-parallax">
-        <img src="/media/img/story.webp" width="950" height="1080" loading="lazy" alt="Isaac, a patient of the practice, smiling">
-        <span>REAL LIFE / REAL CONFIDENCE</span>
-      </div>
-      <div>
-        <div class="kicker js-rise">More Than A Dental Procedure</div>
-        <h2 class="display js-split">The best result is getting your normal life back.</h2>
-        <p class="js-rise">Missing teeth and unstable dentures can change how you eat, speak and socialize. Implant treatment is designed to create a stable foundation for a smile that feels more natural.</p>
-        <blockquote class="js-words">“I want to order what I want, smile in every photo and stop worrying about my teeth.”</blockquote>
-        <div class="human-benefits js-lit">
-          <div><b>Eat</b><span>Enjoy more of the foods you love.</span></div>
-          <div><b>Smile</b><span>Feel comfortable in photos again.</span></div>
-          <div><b>Live</b><span>Stop planning around your teeth.</span></div>
-        </div>
-      </div>
+    <div class="solutions_list">
+      <article class="solutions_item" data-solution data-drawing="single">
+        <span class="solutions_number" data-solution-number>01</span>
+        <h3 class="solutions_name" data-solution-part>Single Dental Implant</h3>
+        <p class="solutions_text" data-solution-part>Replace one missing tooth with an implant-supported restoration designed to look and function naturally.</p>
+        <a class="button is-link solutions_link" href="/services/single-implant" data-solution-part>Discuss your options →</a>
+      </article>
+      <article class="solutions_item" data-solution data-drawing="bridge">
+        <span class="solutions_number" data-solution-number>02</span>
+        <h3 class="solutions_name" data-solution-part>Multiple Dental Implants</h3>
+        <p class="solutions_text" data-solution-part>Restore several missing teeth with a stable solution designed around function, comfort and appearance.</p>
+        <a class="button is-link solutions_link" href="/services/implant-bridges" data-solution-part>Discuss your options →</a>
+      </article>
+      <article class="solutions_item" data-solution data-drawing="arch">
+        <span class="solutions_number" data-solution-number>03</span>
+        <h3 class="solutions_name" data-solution-part>Full-Arch /<br><span class="text-style-nowrap">All-on-4®</span></h3>
+        <p class="solutions_text" data-solution-part>A fixed full-arch option for patients with extensive tooth loss, failing teeth or uncomfortable dentures.</p>
+        <a class="button is-link solutions_link" href="/services/all-on-x" data-solution-part>Explore full-arch care →</a>
+      </article>
     </div>
-  </section>
-
-  <!-- ============ 3 · IMPLANT SOLUTIONS ============ -->
-  <section class="ch" id="solutions" data-chapter="3" data-chapter-name="Implant Solutions">
-    <div class="section treatments">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <div class="kicker js-rise">Implant Solutions</div>
-            <h2 class="display js-split">One goal. A treatment plan built for you.</h2>
+  </div></div></div>
+  <div class="feature_component background-color-sage" id="feature">
+    <div class="padding-global"><div class="container-large">
+      <div class="feature_grid">
+        <div class="feature_media">
+          <div class="feature_photo" data-circle data-parallax>
+            <img class="feature_photo-image" src="/media/img/feature.webp" width="1460" height="1080" loading="lazy" alt="A patient smiling in the treatment chair with a hand mirror in her hand">
           </div>
-          <p class="js-rise">The right solution depends on the number of missing teeth, the health of your remaining teeth, your bone structure and what you want from your new smile.</p>
+          <div class="feature_caption" data-reveal="rise">A new smile should fit into your life, not the other way around.</div>
         </div>
-        <div class="solutions js-stagger">
-          <article class="solution">
-            <span class="num">01</span>
-            <div>
-              <h3>Single Dental Implant</h3>
-              <p>Replace one missing tooth with an implant-supported restoration designed to look and function naturally.</p>
-            </div>
-            <a class="go" href="/services/single-implant">Discuss your options →</a>
-          </article>
-          <article class="solution">
-            <span class="num">02</span>
-            <div>
-              <h3>Multiple Dental Implants</h3>
-              <p>Restore several missing teeth with a stable solution designed around function, comfort and appearance.</p>
-            </div>
-            <a class="go" href="/services/implant-bridges">Discuss your options →</a>
-          </article>
-          <article class="solution">
-            <span class="num">03</span>
-            <div>
-              <h3>Full-Arch /<br><span class="nowrap">All-on-4®</span></h3>
-              <p>A fixed full-arch option for patients with extensive tooth loss, failing teeth or uncomfortable dentures.</p>
-            </div>
-            <a class="go" href="#feature">Explore full-arch care →</a>
-          </article>
-        </div>
-      </div>
-    </div>
-    <div class="feature" id="feature">
-      <div class="wrap feature-grid">
-        <div class="feature-photo">
-          <div class="photo js-wipe js-parallax">
-            <img src="/media/img/feature.webp" width="1460" height="1080" loading="lazy" alt="A patient smiling in the treatment chair with a hand mirror in her hand">
-          </div>
-          <div class="feature-caption js-rise">A new smile should fit into your life, not the other way around.</div>
-        </div>
-        <div class="feature-copy">
-          <div class="kicker js-rise">Full-Arch Implant Solutions</div>
-          <h2 class="display js-split">When you are ready to leave failing teeth behind.</h2>
-          <p class="js-rise">For qualifying patients, full-arch implant treatment can replace an entire row of missing or failing teeth with a fixed implant-supported restoration.</p>
-          <ul class="checklist js-stagger">
+        <div class="feature_content">
+          <div class="text-style-tagline" data-type>Full-Arch Implant Solutions</div>
+          <h2 class="feature_heading" data-split>When you are ready to leave failing teeth behind.</h2>
+          <p class="feature_text" data-reveal="rise">For qualifying patients, full-arch implant treatment can replace an entire row of missing or failing teeth with a fixed implant-supported restoration.</p>
+          <ul class="feature_list" data-reveal="stagger">
             <li>✓ Designed for extensive tooth loss</li>
             <li>✓ Stable alternative to removable dentures for qualifying patients</li>
             <li>✓ Digitally planned around your anatomy and smile</li>
             <li>✓ Customized final restoration after healing</li>
           </ul>
-          <a class="btn" href="#consult">Talk About Full-Arch Options</a>
+          <a class="button" data-button href="#consult">Talk About Full-Arch Options</a>
         </div>
       </div>
-    </div>
-  </section>
+    </div></div>
+  </div>
+</section>
 
-  <!-- ============ 4 · YOUR JOURNEY ============ -->
-  <section class="ch" id="journey" data-chapter="4" data-chapter-name="Your Journey">
-    <div class="section process">
-      <div class="wrap process-wrap" id="process-scene">
-        <div class="process-head">
-          <div class="kicker js-rise">Your Treatment Journey</div>
-          <h2 class="display js-split">Clear answers before treatment begins.</h2>
-          <p class="js-rise">A structured process helps you understand your options, your treatment plan and what to expect from one stage to the next.</p>
-        </div>
-        <div class="processgrid">
-          <article class="step"><div class="n">01</div><h3>Consultation + 3D Imaging</h3><p>We evaluate your oral health, goals, bone structure and existing teeth.</p></article>
-          <article class="step"><div class="n">02</div><h3>Personalized Planning</h3><p>Your team maps the surgical and restorative needs before treatment begins.</p></article>
-          <article class="step"><div class="n">03</div><h3>Implant Placement</h3><p>Implants are positioned according to your plan, with provisional teeth when appropriate.</p></article>
-          <article class="step"><div class="n">04</div><h3>Final Smile</h3><p>After healing, your restoration is created for function, comfort and aesthetics.</p></article>
-        </div>
+<!-- ============ YOUR JOURNEY ============ -->
+<section class="section_journey" id="journey" data-chapter="4" data-chapter-name="Your Journey">
+  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+    <div class="journey_grid" id="process-scene" data-scene="journey">
+      <div class="journey_head" data-journey-head>
+        <div class="text-style-tagline" data-type>Your Treatment Journey</div>
+        <h2 class="journey_heading" data-split>Clear answers before treatment begins.</h2>
+        <p class="journey_text" data-reveal="rise">A structured process helps you understand your options, your treatment plan and what to expect from one stage to the next.</p>
+      </div>
+      <div class="journey_steps" data-steps>
+        <article class="journey_step" data-step><div class="journey_step-number" data-step-number>01</div><h3 class="journey_step-title" data-step-part>Consultation + 3D Imaging</h3><p class="journey_step-text" data-step-part>We evaluate your oral health, goals, bone structure and existing teeth.</p></article>
+        <article class="journey_step is-even" data-step><div class="journey_step-number" data-step-number>02</div><h3 class="journey_step-title" data-step-part>Personalized Planning</h3><p class="journey_step-text" data-step-part>Your team maps the surgical and restorative needs before treatment begins.</p></article>
+        <article class="journey_step" data-step><div class="journey_step-number" data-step-number>03</div><h3 class="journey_step-title" data-step-part>Implant Placement</h3><p class="journey_step-text" data-step-part>Implants are positioned according to your plan, with provisional teeth when appropriate.</p></article>
+        <article class="journey_step is-even" data-step><div class="journey_step-number" data-step-number>04</div><h3 class="journey_step-title" data-step-part>Final Smile</h3><p class="journey_step-text" data-step-part>After healing, your restoration is created for function, comfort and aesthetics.</p></article>
       </div>
     </div>
-    <div class="section technology" id="technology">
-      <div class="wrap tech-grid">
-        <div>
-          <div class="kicker js-rise">Confidence Comes From A Plan</div>
-          <h2 class="display js-split">Technology helps make the unknown feel clearer.</h2>
-          <p class="js-rise">3D imaging and digital planning help the team evaluate anatomy, explain treatment options and coordinate the path to your final restoration.</p>
-          <div class="tech-points js-stagger">
-            <div><b>See more</b><span>Three-dimensional diagnostics reveal details traditional images cannot.</span></div>
-            <div><b>Plan ahead</b><span>Implant position can be considered alongside the final smile.</span></div>
-            <div><b>Understand your case</b><span>Visual information can make treatment easier to discuss.</span></div>
-            <div><b>Coordinate care</b><span>Surgical and restorative needs stay connected.</span></div>
+  </div></div></div>
+  <div class="technology_component" id="technology">
+    <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+      <div class="technology_grid">
+        <div class="technology_content">
+          <div class="text-style-tagline" data-type>Confidence Comes From A Plan</div>
+          <h2 class="technology_heading" data-split>Technology helps make the unknown feel clearer.</h2>
+          <p class="technology_text" data-reveal="rise">3D imaging and digital planning help the team evaluate anatomy, explain treatment options and coordinate the path to your final restoration.</p>
+          <div class="technology_points" data-reveal="stagger">
+            <div class="technology_point"><span class="technology_point-title">See more</span><span class="technology_point-text">Three-dimensional diagnostics reveal details traditional images cannot.</span></div>
+            <div class="technology_point"><span class="technology_point-title">Plan ahead</span><span class="technology_point-text">Implant position can be considered alongside the final smile.</span></div>
+            <div class="technology_point"><span class="technology_point-title">Understand your case</span><span class="technology_point-text">Visual information can make treatment easier to discuss.</span></div>
+            <div class="technology_point"><span class="technology_point-title">Coordinate care</span><span class="technology_point-text">Surgical and restorative needs stay connected.</span></div>
           </div>
+          <a class="button is-link technology_link" href="/technology" data-reveal="rise">See our technology →</a>
         </div>
-        <div class="tech-image photo js-wipe js-parallax">
-          <img src="/media/img/tech.webp" width="1574" height="1080" loading="lazy" alt="A patient positioned in the 3D CBCT scanner">
+        <div class="technology_photo" data-reveal="wipe" data-parallax>
+          <img class="technology_photo-image" src="/media/img/tech.webp" width="1574" height="1080" loading="lazy" alt="A patient positioned in the 3D CBCT scanner">
         </div>
       </div>
-    </div>
-  </section>
+    </div></div></div>
+  </div>
+</section>
 
-  <!-- ============ 5 · SMILE GALLERY ============ -->
-  <section class="ch section results" id="results" data-chapter="5" data-chapter-name="Smile Gallery">
-    <div class="wrap">
-      <div class="results-top">
-        <div>
-          <div class="kicker js-rise">Smile Gallery</div>
-          <h2 class="display js-split">Real work should speak for itself.</h2>
-        </div>
-      </div>
-      <div id="results-scene">
-        <div class="gallery">
-          <div class="result js-case">
-            <img src="/media/img/case-1-before.webp" width="1112" height="1500" loading="lazy" alt="Patient one before dental implant treatment">
-            <div class="result__after"><img src="/media/img/case-1-after.webp" width="1112" height="1500" loading="lazy" alt="Patient one after dental implant treatment"></div>
-            <span class="result__line" aria-hidden="true"></span>
-            <span class="tag">Before / After</span>
-          </div>
-          <div class="result js-case">
-            <img src="/media/img/case-2-before.webp" width="1112" height="1500" loading="lazy" alt="Patient two before dental implant treatment">
-            <div class="result__after"><img src="/media/img/case-2-after.webp" width="1112" height="1500" loading="lazy" alt="Patient two after dental implant treatment"></div>
-            <span class="result__line" aria-hidden="true"></span>
-            <span class="tag">Smile Transformation</span>
-          </div>
-          <div class="result js-case">
-            <img src="/media/img/case-3-before.webp" width="1112" height="1500" loading="lazy" alt="Patient three before dental implant treatment">
-            <div class="result__after"><img src="/media/img/case-3-after.webp" width="1112" height="1500" loading="lazy" alt="Patient three after dental implant treatment"></div>
-            <span class="result__line" aria-hidden="true"></span>
-            <span class="tag">Patient Result</span>
-          </div>
-        </div>
-        <div class="note">Every case is different; individual results vary.</div>
-      </div>
-      <!-- Live Google reviews of the office's own listing, "Hackensack Center for Dental Implants" (Elfsight 948f2cd1,
-           given by Alejandro 2026-10-02 for BugHerd #10; the old site's cf96ca10 shows Aesthetic Dental Center).
-           An embed marker: the push chain empties it on import and place-embeds.mjs swaps the node for a
-           brandklout.embed-origins Embed carrying this snippet (embeds.json: google-reviews). Elfsight's
-           lazy attribute is left out on purpose: with it the widget never boots on Instatic (0px, no error). -->
-      <div class="reviews" id="reviews">
-        <div class="results-top">
-          <div>
-            <div class="kicker js-rise">Patient Reviews</div>
-            <h2 class="display js-split">In their own words.</h2>
-          </div>
-        </div>
-        <div class="wz-embed reviews-embed" data-wz-embed="auto" data-embed="google-reviews"><!-- Elfsight Google Reviews | Hackensack Center for Dental Implants --><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-948f2cd1-3863-46db-a63b-689bfc31ace0"></div></div>
+<!-- ============ SMILE GALLERY ============ -->
+<section class="section_gallery" id="results" data-chapter="5" data-chapter-name="Smile Gallery">
+  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+    <div class="gallery_head">
+      <div class="gallery_title">
+        <div class="text-style-tagline" data-type>Smile Gallery</div>
+        <h2 class="gallery_heading" data-split>Real work should speak for itself.</h2>
       </div>
     </div>
-  </section>
+    <div id="results-scene" data-scene="gallery">
+      <div class="gallery_cases">
+        <div class="gallery_case is-large">
+          <div class="case_component is-draggable" data-case>
+            <img class="case_image" src="/media/img/case-1-before.webp" width="1112" height="1500" loading="lazy" alt="Patient one before dental implant treatment">
+            <div class="case_after" data-case-after><img class="case_image" src="/media/img/case-1-after.webp" width="1112" height="1500" loading="lazy" alt="Patient one after dental implant treatment"></div>
+            <span class="case_line" aria-hidden="true" data-case-line></span>
+            <span class="tag is-bottom-left">Before / After</span>
+          </div>
+        </div>
+        <div class="gallery_case is-small">
+          <div class="case_component is-draggable" data-case>
+            <img class="case_image" src="/media/img/case-2-before.webp" width="1112" height="1500" loading="lazy" alt="Patient two before dental implant treatment">
+            <div class="case_after" data-case-after><img class="case_image" src="/media/img/case-2-after.webp" width="1112" height="1500" loading="lazy" alt="Patient two after dental implant treatment"></div>
+            <span class="case_line" aria-hidden="true" data-case-line></span>
+            <span class="tag is-bottom-left">Smile Transformation</span>
+          </div>
+        </div>
+        <div class="gallery_case is-medium">
+          <div class="case_component is-draggable" data-case>
+            <img class="case_image" src="/media/img/case-3-before.webp" width="1112" height="1500" loading="lazy" alt="Patient three before dental implant treatment">
+            <div class="case_after" data-case-after><img class="case_image" src="/media/img/case-3-after.webp" width="1112" height="1500" loading="lazy" alt="Patient three after dental implant treatment"></div>
+            <span class="case_line" aria-hidden="true" data-case-line></span>
+            <span class="tag is-bottom-left">Patient Result</span>
+          </div>
+        </div>
+      </div>
+      <p class="gallery_note">Every case is different; individual results vary.</p>
+      <a class="button is-link" href="/gallery">See the full Smile Gallery →</a>
+    </div>
+    <!-- Live Google reviews of the office's own listing, "Hackensack Center for Dental Implants" (Elfsight
+         948f2cd1, given by Alejandro 2026-10-02 for BugHerd #10). An embed marker: the push chain empties it
+         on import and place-embeds.mjs swaps the node for a brandklout.embed-origins Embed carrying this
+         snippet (embeds.json: google-reviews). Elfsight's lazy attribute is left out on purpose: with it
+         the widget never boots on Instatic (0px, no error). -->
+    <div class="gallery_reviews" id="reviews">
+      <div class="gallery_reviews-head">
+        <div class="text-style-tagline" data-type>Patient Reviews</div>
+        <h2 class="gallery_heading" data-split>In their own words.</h2>
+      </div>
+      <div class="wz-embed reviews_embed" data-wz-embed="auto" data-embed="google-reviews"><!-- Elfsight Google Reviews | Hackensack Center for Dental Implants --><script src="https://elfsightcdn.com/platform.js" async></script><div class="elfsight-app-948f2cd1-3863-46db-a63b-689bfc31ace0"></div></div>
+    </div>
+  </div></div></div>
+</section>
 
-  <!-- ============ 6 · THE CONVERSATION ============ -->
-  <section class="ch" id="consult" data-chapter="6" data-chapter-name="The Conversation">
-    <div class="section consult">
-      <div class="wrap consult-grid">
-        <div>
-          <div class="kicker js-rise">It Starts With A Conversation</div>
-          <h2 class="display js-light">You do not have to know which implant treatment you need.</h2>
-          <p class="js-rise">Tell us what is bothering you. The consultation is where the team can help you understand the options.</p>
-          <div class="reassurance js-stagger">
-            <div><b>No pressure.</b><span>Start by getting answers.</span></div>
-            <div><b>No guessing.</b><span>Your treatment is based on your actual needs.</span></div>
-            <div><b>No one-size-fits-all.</b><span>The plan is personalized to you.</span></div>
+<!-- ============ THE CONVERSATION ============ -->
+<section class="section_conversation" id="consult" data-chapter="6" data-chapter-name="The Conversation">
+  <div class="consultation_component background-color-sage">
+    <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+      <div class="consultation_grid">
+        <div class="consultation_content">
+          <div class="text-style-tagline" data-type>It Starts With A Conversation</div>
+          <h2 class="consultation_heading" data-light>You do not have to know which implant treatment you need.</h2>
+          <p class="consultation_text" data-reveal="rise">Tell us what is bothering you. The consultation is where the team can help you understand the options.</p>
+          <div class="consultation_reasons" data-reveal="stagger">
+            <div class="consultation_reason"><span class="consultation_reason-title">No pressure.</span><span class="consultation_reason-text">Start by getting answers.</span></div>
+            <div class="consultation_reason"><span class="consultation_reason-title">No guessing.</span><span class="consultation_reason-text">Your treatment is based on your actual needs.</span></div>
+            <div class="consultation_reason"><span class="consultation_reason-title">No one-size-fits-all.</span><span class="consultation_reason-text">The plan is personalized to you.</span></div>
           </div>
         </div>
         <!-- A lead form is never pinned, never faded in and never moved. -->
-        <div class="form-card" id="consultation">
-          <h3>Tell us what you want to change</h3>
+        <div class="consultation_card" id="consultation" data-form>
+          <h3 class="consultation_card-title">Tell us what you want to change</h3>
           <!-- The vendor snippet, verbatim from the current site. place-embeds.mjs swaps this marker for the Embed block on Instatic. -->
-          <div class="wz-embed form_embed" data-wz-embed="auto" data-embed="ghl-survey"><iframe src="https://api.leadconnectorhq.com/widget/survey/6CLNUlXI06FDHLD9XKBJ" style="border:none;width:100%;" scrolling="no" id="6CLNUlXI06FDHLD9XKBJ" title="survey"></iframe> <script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+          <div class="wz-embed consultation_embed" data-wz-embed="auto" data-embed="ghl-survey"><iframe src="https://api.leadconnectorhq.com/widget/survey/6CLNUlXI06FDHLD9XKBJ" style="border:none;width:100%;" scrolling="no" id="6CLNUlXI06FDHLD9XKBJ" title="survey"></iframe> <script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
         </div>
       </div>
-    </div>
-    <div class="section faq" id="faq">
-      <div class="wrap faqgrid">
-        <div class="faq-side">
-          <div class="kicker js-rise">Common Questions</div>
-          <h2 class="display js-split">Know what to expect.</h2>
-          <p class="muted js-rise">Your consultation is where the team can determine what applies to your specific situation.</p>
-          <a class="textlink" href="#consult">Ask us your questions →</a>
+    </div></div></div>
+  </div>
+  <div class="faq_component" id="faq">
+    <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+      <div class="faq_grid">
+        <div class="faq_side">
+          <div class="text-style-tagline" data-type>Common Questions</div>
+          <h2 class="faq_heading" data-split>Know what to expect.</h2>
+          <p class="faq_text" data-reveal="rise">Your consultation is where the team can determine what applies to your specific situation.</p>
+          <a class="button is-link faq_link" href="#consult">Ask us your questions →</a>
         </div>
-        <div class="js-faq">
-          <details open>
-            <summary>How do I know if I am a candidate for dental implants?</summary>
-            <p>Candidacy depends on your oral health, overall health, bone structure and treatment goals. A clinical exam and 3D imaging help the team determine your options.</p>
+        <div class="faq_list" data-faq>
+          <details class="faq_item" open>
+            <summary class="faq_question">How do I know if I am a candidate for dental implants?</summary>
+            <p class="faq_answer">Candidacy depends on your oral health, overall health, bone structure and treatment goals. A clinical exam and 3D imaging help the team determine your options.</p>
           </details>
-          <details>
-            <summary>Can implants replace an entire arch of teeth?</summary>
-            <p>Yes. Full-arch implant treatment can support a fixed restoration for qualifying patients who are missing most or all teeth in an arch.</p>
+          <details class="faq_item">
+            <summary class="faq_question">Can implants replace an entire arch of teeth?</summary>
+            <p class="faq_answer">Yes. Full-arch implant treatment can support a fixed restoration for qualifying patients who are missing most or all teeth in an arch.</p>
           </details>
-          <details>
-            <summary>What if I have been told I do not have enough bone?</summary>
-            <p>Some patients may benefit from grafting or other surgical approaches. The appropriate option can only be determined after diagnostic imaging and evaluation.</p>
+          <details class="faq_item">
+            <summary class="faq_question">What if I have been told I do not have enough bone?</summary>
+            <p class="faq_answer">Some patients may benefit from grafting or other surgical approaches. The appropriate option can only be determined after diagnostic imaging and evaluation.</p>
           </details>
-          <details>
-            <summary>How long does implant treatment take?</summary>
-            <p>Timing varies by case. Healing, bone quality, extractions, grafting and the type of restoration can all affect the treatment timeline.</p>
+          <details class="faq_item">
+            <summary class="faq_question">How long does implant treatment take?</summary>
+            <p class="faq_answer">Timing varies by case. Healing, bone quality, extractions, grafting and the type of restoration can all affect the treatment timeline.</p>
           </details>
-          <details>
-            <summary>Do you offer financing?</summary>
-            <p>Financing and payment options can be discussed with the treatment team after your personalized plan is established.</p>
+          <details class="faq_item is-last">
+            <summary class="faq_question">Do you offer financing?</summary>
+            <p class="faq_answer">Financing and payment options can be discussed with the treatment team after your personalized plan is established.</p>
           </details>
         </div>
       </div>
-    </div>
-  </section>
+    </div></div></div>
+  </div>
+</section>
 
-  <!-- ============ 7 · THE INVITATION ============ -->
-  <section class="ch final" id="invitation" data-chapter="7" data-chapter-name="The Invitation">
-    <div class="wrap final-grid" id="final-scene">
-      <div class="final-photo photo js-wipe js-parallax">
-        <img src="/media/img/final.webp" width="1075" height="1080" loading="lazy" alt="Daniel, a patient of the practice, holding a photograph of his teeth before treatment">
+<!-- ============ THE INVITATION ============ -->
+<section class="section_invitation background-color-sand" id="invitation" data-chapter="7" data-chapter-name="The Invitation">
+  <div class="padding-global"><div class="container-large"><div class="invitation_inner">
+    <div class="invitation_grid" id="final-scene" data-scene="invitation">
+      <div class="invitation_photo" data-reveal="wipe" data-parallax>
+        <img class="invitation_photo-image" src="/media/img/final.webp" width="1075" height="1080" loading="lazy" alt="Daniel, a patient of the practice, holding a photograph of his teeth before treatment">
       </div>
-      <div class="final-copy">
-        <div class="kicker js-rise">Imagine The Everyday Things</div>
-        <h2 class="display js-light">Dinner. Photos. Laughter. Confidence.</h2>
-        <p class="js-rise">Your implant consultation is the first step toward finding out what is possible for your smile.</p>
-        <a class="btn" href="#consult">Schedule Your Consultation</a>
+      <div class="invitation_content">
+        <div class="text-style-tagline" data-type>Imagine The Everyday Things</div>
+        <h2 class="heading-style-display invitation_heading"><span class="invitation_word" data-light-word>Dinner.</span> <span class="invitation_word is-second" data-light-word>Photos.</span> <span class="invitation_word is-third" data-light-word>Laughter.</span> <span class="invitation_word is-fourth" data-light-word>Confidence.</span></h2>
+        <p class="invitation_text" data-reveal="rise">Your implant consultation is the first step toward finding out what is possible for your smile.</p>
+        <a class="button" data-button href="#consult">Schedule Your Consultation</a>
       </div>
     </div>
-  </section>
-
-</main>
+  </div></div></div>
+</section>

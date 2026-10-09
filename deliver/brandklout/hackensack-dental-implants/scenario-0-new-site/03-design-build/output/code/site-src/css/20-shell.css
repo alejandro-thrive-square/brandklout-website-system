@@ -1,0 +1,125 @@
+/* The shell, on every page: skip link, reading progress, the dark top strip, the navbar with its
+   menus, the footer and the two-button call bar on phones. As the concept draws them.
+
+   Menus. The parent items are buttons that open a list; the runtime toggles `is-open` on the
+   list and the button (Webflow's dropdown model). From 1280px the lists are pop-overs under the
+   bar; below 1280 the whole menu is a drawer the burger opens, and each list is an accordion
+   inside it. Desktop-only states sit inside the min-width query, so none of them reaches the
+   drawer (DESIGN-STANDARD, CSS traps). The drawer is closed by CSS, not by the hidden attribute,
+   so the Instatic editor never shows it open over the page. */
+
+.skip-link_component { position: fixed; left: var(--space-small); top: -6rem; z-index: 1100; padding: var(--space-small) var(--space-small); background-color: var(--fg); color: var(--white); font-size: var(--size-text-small); }
+.skip-link_component:focus { top: var(--space-small); }
+
+.progress_component { position: fixed; left: 0; top: 0; z-index: 90; width: 100%; height: 3px; background-color: rgba(128, 128, 128, 0.14); pointer-events: none; }
+.progress_fill { display: block; width: 100%; height: 100%; background-color: var(--gold-bar); transform: scaleX(0); transform-origin: left center; }
+
+/* ---- top strip ---- */
+.topbar_component { background-color: var(--ink); color: var(--white); }
+.topbar_inner { display: flex; justify-content: space-between; align-items: center; gap: var(--space-medium); min-height: 2.375rem; }
+.topbar_text { font-size: var(--size-text-label); letter-spacing: 0.09em; text-transform: uppercase; }
+.topbar_link { display: inline-flex; align-items: center; min-height: 2.375rem; color: var(--gold-light); font-weight: 700; }
+@media screen and (max-width: 767px) {
+  .topbar_inner { justify-content: center; text-align: center; }
+  .topbar_text.is-phone { display: none; }
+}
+
+/* ---- navbar ---- */
+.navbar_component { position: relative; z-index: 60; background-color: rgba(251, 250, 247, 0.97); border-bottom: 1px solid var(--line); }
+.navbar_container { display: flex; align-items: center; justify-content: space-between; gap: var(--space-medium); height: 5.5rem; }
+.navbar_logo-link { display: flex; align-items: center; flex: none; min-height: 44px; }
+.navbar_logo { width: auto; height: 3.875rem; }
+.navbar_menu { display: flex; align-items: center; margin-left: auto; }
+.navbar_list { display: flex; align-items: center; gap: var(--space-medium); }
+.navbar_item { position: relative; }
+.navbar_link { position: relative; display: inline-flex; align-items: center; min-height: 44px; font-size: var(--size-text-label); font-weight: 700; white-space: nowrap; transition: color 0.3s ease; }
+.navbar_link:hover { color: var(--accent); }
+.navbar_link.is-current { color: var(--accent); }
+.navbar_dropdown-toggle { position: relative; display: inline-flex; align-items: center; gap: var(--space-xsmall); min-height: 44px; font-size: var(--size-text-label); font-weight: 700; white-space: nowrap; transition: color 0.3s ease; }
+.navbar_dropdown-toggle:hover { color: var(--accent); }
+.navbar_dropdown-toggle.is-current { color: var(--accent); }
+.navbar_dropdown-icon { display: block; width: 0.4375rem; height: 0.4375rem; margin-top: -0.25rem; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); transition: transform 0.35s var(--ease); }
+.navbar_dropdown-icon.is-open { transform: translateY(0.25rem) rotate(225deg); }
+.navbar_dropdown-list { display: grid; }
+.navbar_dropdown-link { display: flex; align-items: center; min-height: 44px; font-size: var(--size-text-small); line-height: 1.3; transition: color 0.3s ease; }
+.navbar_dropdown-link:hover { color: var(--accent); }
+.navbar_dropdown-link.is-current { color: var(--accent); font-weight: 700; }
+.navbar_dropdown-link.is-lead { font-weight: 700; }
+.navbar_drawer-foot { display: none; }
+.navbar_actions { display: flex; align-items: center; gap: var(--space-small); }
+@media screen and (max-width: 1279px) { .navbar_actions { margin-left: auto; } }
+.navbar_menu-button { display: none; }
+
+@media screen and (min-width: 1280px) {
+  /* a gold rule sweeps in under the hovered item */
+  .navbar_link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0.625rem; height: 1px; background-color: var(--accent-flat); transform: scaleX(0); transform-origin: right center; transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1); }
+  .navbar_link:hover::after { transform: scaleX(1); transform-origin: left center; }
+  .navbar_link:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+  .navbar_dropdown-list { position: absolute; left: -1.5rem; top: 100%; z-index: 70; min-width: 15.5rem; padding: var(--space-small) var(--space-medium); border: 1px solid var(--line); border-radius: var(--radius-small); background-color: var(--white); box-shadow: var(--shadow); visibility: hidden; opacity: 0; transform: translateY(0.5rem); transition: opacity 0.3s ease, transform 0.35s var(--ease), visibility 0s linear 0.35s; }
+  .navbar_dropdown-list.is-open { visibility: visible; opacity: 1; transform: translateY(0); transition: opacity 0.3s ease, transform 0.35s var(--ease), visibility 0s linear 0s; }
+  .navbar_dropdown-list.is-wide { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-medium); min-width: 30rem; }
+}
+
+/* below 1280: the burger and the drawer */
+@media screen and (max-width: 1279px) {
+  .navbar_menu-button { position: relative; z-index: 80; display: flex; flex-direction: column; justify-content: center; gap: var(--space-xsmall); width: 44px; height: 44px; padding: 0 var(--space-xsmall); border: 1px solid var(--line-strong); border-radius: 50%; }
+  .navbar_menu-line { display: block; width: 100%; height: 1.5px; background-color: var(--fg); transition: transform 0.35s var(--ease); }
+  .navbar_menu-line.is-top { transform: translateY(4.25px) rotate(45deg); }
+  .navbar_menu-line.is-bottom { transform: translateY(-4.25px) rotate(-45deg); }
+  .navbar_menu { position: fixed; inset: 0; z-index: 75; display: block; padding: var(--space-xhuge) var(--gutter) var(--space-large); overflow-y: auto; background-color: var(--bg); visibility: hidden; opacity: 0; transform: translateY(-1.5rem); transition: opacity 0.35s ease, transform 0.45s var(--ease), visibility 0s linear 0.45s; }
+  .navbar_menu.is-open { visibility: visible; opacity: 1; transform: translateY(0); transition: opacity 0.35s ease, transform 0.45s var(--ease), visibility 0s linear 0s; }
+  .navbar_list { display: block; max-width: 34rem; margin-left: auto; margin-right: auto; border-top: 1px solid var(--line); }
+  .navbar_item { border-bottom: 1px solid var(--line); }
+  .navbar_link { display: flex; width: 100%; min-height: 3.75rem; font-family: var(--font-display); font-size: var(--size-h5); font-weight: 400; letter-spacing: -0.01em; }
+  .navbar_dropdown-toggle { display: flex; justify-content: space-between; width: 100%; min-height: 3.75rem; font-family: var(--font-display); font-size: var(--size-h5); font-weight: 400; letter-spacing: -0.01em; text-align: left; }
+  .navbar_dropdown-icon { width: 0.625rem; height: 0.625rem; }
+  .navbar_dropdown-list { display: none; padding: 0 0 var(--space-small); }
+  .navbar_dropdown-list.is-open { display: grid; }
+  .navbar_dropdown-link { min-height: 44px; padding-left: var(--space-small); border-left: 1px solid var(--line); font-size: var(--size-text-regular); }
+  .navbar_drawer-foot { display: grid; gap: var(--space-small); max-width: 34rem; margin: var(--space-medium) auto 0; }
+  .navbar_drawer-phone { display: flex; align-items: center; min-height: 44px; font-family: var(--font-display); font-size: var(--size-h5); }
+}
+@media screen and (max-width: 767px) {
+  .navbar_container { height: 4.6875rem; }
+  .navbar_logo { height: 2.875rem; }
+  .navbar_button { display: none; }
+  .navbar_menu { padding-top: var(--space-huge); }
+}
+
+/* ---- footer ---- */
+.footer_component { background-color: var(--ink-deep); color: var(--white); }
+.footer_inner { padding-top: var(--space-xlarge); padding-bottom: var(--space-medium); }
+.footer_top { display: grid; grid-template-columns: minmax(0, 1.35fr) repeat(4, minmax(0, 0.8fr)); gap: var(--space-large); }
+.footer_brand { display: block; max-width: 23.125rem; margin-bottom: var(--space-small); font-family: var(--font-display); font-size: var(--size-h5); line-height: 1.08; }
+.footer_title { margin-bottom: var(--space-small); color: var(--gold-light); font-size: var(--size-text-label); letter-spacing: 0.14em; text-transform: uppercase; }
+.footer_text { color: var(--footer-text); font-size: var(--size-text-tiny); }
+.footer_list { display: grid; }
+.footer_link { display: inline-flex; align-items: center; min-height: 1.75rem; color: var(--footer-text); font-size: var(--size-text-tiny); transition: color 0.3s ease; }
+.footer_link:hover { color: var(--white); }
+.footer_link:focus-visible { color: var(--white); }
+.footer_bottom { display: flex; justify-content: space-between; gap: var(--space-small); margin-top: var(--space-large); padding-top: var(--space-small); border-top: 1px solid var(--footer-line); }
+.footer_copyright { color: var(--footer-dim); font-size: var(--size-text-label); letter-spacing: 0.08em; text-transform: uppercase; }
+.footer_legal { display: flex; flex-wrap: wrap; gap: 0 var(--space-small); }
+.footer_legal-link { display: inline-flex; align-items: center; min-height: 1.75rem; color: var(--footer-dim); font-size: var(--size-text-label); letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.3s ease; }
+.footer_legal-link:hover { color: var(--white); }
+@media screen and (max-width: 991px) {
+  .footer_top { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer_brand-column { grid-column: 1 / -1; }
+}
+@media screen and (max-width: 767px) {
+  .footer_top { grid-template-columns: minmax(0, 1fr); gap: var(--space-medium); }
+  .footer_bottom { display: block; }
+  .footer_link { min-height: 44px; }
+  .footer_legal-link { min-height: 44px; }
+}
+
+/* ---- the call bar: phones only ---- */
+.callbar_component { display: none; }
+@media screen and (max-width: 767px) {
+  body { padding-bottom: 65px; }
+  .callbar_component { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: flex; height: 65px; background-color: var(--white); box-shadow: 0 -8px 28px rgba(0, 0, 0, 0.14); transition: transform 0.45s var(--ease); }
+  .callbar_component.is-away { transform: translateY(100%); }
+  .callbar_link { flex: 1; display: grid; place-items: center; font-size: var(--size-text-label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .callbar_link.is-call { background-color: var(--fg); color: var(--white); }
+  .callbar_link.is-book { background-color: var(--accent-flat); color: #111111; }
+}

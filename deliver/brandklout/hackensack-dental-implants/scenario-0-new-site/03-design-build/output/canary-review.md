@@ -1,5 +1,9 @@
 # hackensack-dental-implants · home page canary
 
+> **Approved, early October 2026.** The complete site built on it (2026-10-09) is reviewed in
+> [`site-review.md`](./site-review.md); since then the home page's markup uses the Client-First class
+> standard, its menu is the site menu and its H1 is the keyword label (see that file).
+
 Rebuilt 2026-09-30 to **the style the client chose**: concept 04, "Human Transformation",
 https://hackensack-dental-implants.webflow.io/concept-04-human-transformation. The first canary of
 the same day (commit `1ef53236`) was designed before that choice was known and is replaced.
@@ -173,8 +177,8 @@ moves, and the form is never pinned or faded.
    Dr. Srour is now "Oral Surgeon, Full Arch", as the live site has him.
 4. **The phone number**, as above.
 5. **"By Aesthetic Dental Centers"** in the navbar and footer, as the concept has it.
-6. **Four links lead nowhere yet** on staging (`/services/single-implant`, `/services/implant-bridges`,
-   `/dr-alan-meskin`, `/about`): only the home page is built.
+6. ~~Four links lead nowhere yet~~ settled 2026-10-09: the complete site is built
+   ([`site-review.md`](./site-review.md)), and every link on the home page leads to its page.
 7. **The two team numbers**: "50,000+ implants placed by our surgeons" and "30+ years of combined
    implant experience" (sources in the table above). Swap or drop them if the client prefers.
 8. ~~The 4.7 rating~~ settled by BugHerd #10 and #24: the office's own listing, 5.0. The reviews

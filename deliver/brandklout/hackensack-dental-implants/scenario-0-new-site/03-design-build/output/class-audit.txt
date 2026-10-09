@@ -1,0 +1,24 @@
+scenario-0-new-site/03-design-build/output/code/site-src: 516 classes in use
+  by kind: custom 462 (90%), combo 30 (6%), library 18 (3%), utility-system 5 (1%), vendor 1 (0%)
+  OUT OF BOUNDS 0 (0%) · reimplements a utility 0 · identical groups 38 · font size outside a role 123 (warning) · contextual rules 0 · styling classes used by scripts 7
+
+  reuse hints (custom classes equal to a utility; fine, listed only): .journey_head = z-index-2
+
+  identical custom classes (keep one):
+    .links_head  .team_head  .features_head  .films_head  .cards_head  .financing_head  .cases_head  .timeline_head  .compare_head
+    .statement_image  .features_image  .specialist_image  .quote_image  .photos_image  .checks_image  .split_image
+    .doctor_text  .story_text  .journey_text  .technology_text  .faq_text
+    .team_image  .films_image  .articles_image  .links_image
+    .films_link  .cards_action  .financing_action  .compare_action
+    .header_card-name  .arrival_play-title  .arrival_doctor-name
+    .statement_grid  .prose_grid  .path_grid
+    .index_list  .visit_list  .solutions_list
+    .index_after  .timeline_after  .checks_after
+    .features_text  .cards_text  .credentials_value
+    .faq_link  .cards_link  .technology_link
+    .financing_text  .timeline_text  .cards_note-text
+
+  scripts selecting by styling class (rename them with class-rename.mjs, or move to data- attributes):
+    js\00-scenes.js: films_play team_frame credentials_item specialist_note specialist_name specialist_role specialist_lead
+
+IN BOUNDS — every class follows Client-First + Relume

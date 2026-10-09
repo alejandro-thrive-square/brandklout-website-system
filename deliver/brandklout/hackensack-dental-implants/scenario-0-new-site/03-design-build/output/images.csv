@@ -13,6 +13,118 @@ case-3-before.webp,old-site,old-site capture / 608bd8_before 3.webp,client's own
 case-3-after.webp,old-site,old-site capture / 343c19_after 3.webp,client's own,index,3,1112x1500,51,Patient three after implant treatment
 logo-round.png,drive,drive 0ADqUKcTkH0SxUk9PVA / logos/Hackensack Center Logo Circle-2.png,client's own,index,3,192x192,19,"Logo, white on black, round"
 logo-icon-dark.png,old-site,old-site capture / 4d4cc3_ hackensack logo.png,client's own,index,3,192x192,21,"Site icon, as on the current site. The name is the one push-site.mjs looks for"
-hero-poster.webp,vimeo,"vimeo 1198867061 (Daniel film), first frame of the hero loop",client's own,index,3,1920x1080,74,"Daniel at the reception desk, the first frame of the hero film"
-doctor-face.webp,old site,doctor.png (Dr. Meskin portrait) cropped to the face,client's own,index,3,192x192,7,Dr. Alan Meskin
-logo-stacked.webp,drive,drive 0ADqUKcTkH0SxUk9PVA / logos/Hackensack Center Logo Stacked-3.png,client's own,index,3,620x180,9,"The practice logo, stacked, black on transparent (BugHerd #2)"
+logo-stacked.webp,drive,asset/legacy/logo-stacked.webp,client's own,every page (navbar),3,620x180,9,"The practice logo, stacked, black on transparent (BugHerd #2)"
+doctor-face.webp,old-site,asset/legacy/doctor-face.webp,client's own,"index, every treatment page header card",3,192x192,6,"Dr. Alan Meskin, a 192px crop of doctor.png for the hero cards"
+hero-poster.webp,vimeo,asset/legacy/hero-poster.webp,client's own,index,3,1920x1080,84,"Daniel at the reception desk, the first frame of the hero film"
+allonx-hero.webp,old-site,old/f419ff_AdobeStock_1248814635.webp,"Adobe Stock 1248814635, licensed for the live site",services/all-on-x,3,1200x1200,24,"An upper and a lower full-arch restoration, each fixed on implants (model)"
+allonx-fix.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.23.59.jpeg,client's own,services/all-on-x,3,1100x900,100,"A patient's new smile after implant treatment at the practice, close up"
+logo-cherry.webp,old-site,old/982522_CherryLogo-MidnightBlue-1024x2.webp,partner logo,financing,3,480x133,11,Cherry logo
+logo-hfd.svg,old-site,old/b8c199_imgi_1_hfd-logo-4.svg,partner logo,financing,3,vector,15,Healthcare Finance Direct logo
+logo-proceed.webp,old-site,old/a7c097_Proceed-Finance-Logo-2-1024x23.webp,partner logo,financing,3,480x112,23,Proceed Finance logo
+logo-carecredit.webp,old-site,old/0032d8_Care-Credit-1024x133.webp,partner logo,financing,3,477x62,14,CareCredit logo
+gallery-hero.webp,drive,drive/office/Hackensack Action Shots_2.17.1.png,client's own,gallery,3,1920x860,41,A patient sees her new smile in a hand mirror in the treatment chair
+gallery-case-1-before.webp,old-site,old/e9054d_before 1.webp,client's own,gallery,3,1112x1500,216,"Patient 1 before treatment (consented, live site gallery)"
+gallery-case-1-after.webp,old-site,old/343c65_after 1.webp,client's own,gallery,3,1112x1500,234,"Patient 1 after treatment (consented, live site gallery)"
+gallery-case-2-before.webp,old-site,old/a2981a_before 2.webp,client's own,gallery,3,1112x1500,110,"Patient 2 before treatment (consented, live site gallery)"
+gallery-case-2-after.webp,old-site,old/03c010_after 2.webp,client's own,gallery,3,1112x1500,143,"Patient 2 after treatment (consented, live site gallery)"
+gallery-case-3-before.webp,old-site,old/608bd8_before 3.webp,client's own,gallery,3,1112x1500,129,"Patient 3 before treatment (consented, live site gallery)"
+gallery-case-3-after.webp,old-site,old/343c19_after 3.webp,client's own,gallery,3,1112x1500,56,"Patient 3 after treatment (consented, live site gallery)"
+gallery-case-4-before.webp,old-site,old/266e92_before 4.webp,client's own,gallery,3,1112x1500,134,"Patient 4 before treatment (consented, live site gallery)"
+gallery-case-4-after.webp,old-site,old/b2d5e5_after 4.webp,client's own,gallery,3,1112x1500,84,"Patient 4 after treatment (consented, live site gallery)"
+gallery-case-5-before.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.23.48 (1).jpeg,client's own,gallery,3,852x1150,92,"Patient 5 before treatment (drive, Before and Afters, Alan Meskin DDS watermark)"
+gallery-case-5-after.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.23.48.jpeg,client's own,gallery,3,852x1150,92,Patient 5 after treatment
+gallery-case-6-before.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.24.00.jpeg,client's own,gallery,3,1112x1500,404,"Patient 6 before treatment, close up"
+gallery-case-6-after.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.23.59.jpeg,client's own,gallery,3,1112x1500,85,"Patient 6 after treatment, close up"
+office-hero.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.18 (1).jpeg,client's own,office-gallery,3,2400x1100,230,"The waiting-room lounge: grey sofas, flowers, blue abstract paintings"
+office-reception.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.33.jpeg,client's own,office-gallery,3,1600x1100,218,The curved reception desk under a round ceiling light
+office-waiting.webp,drive,drive/office/Hackensack Office Shot 2.png,client's own,office-gallery,3,1080x1080,73,The reception and the waiting chairs by the front windows
+office-operatory.webp,drive,drive/office/Hackensack Action Shots_2.12.1.png,client's own,office-gallery,3,1080x1080,55,A treatment room with an orange dental chair
+office-surgery.webp,old-site,old/6aac42_Hackensack opperation room.webp,client's own,office-gallery,3,1600x1080,71,A treatment room set up for implant surgery
+office-scanner.webp,vimeo,film/1198870167@66,client's own,office-gallery,3,1080x1080,46,Isaac positioned in the 3D cone beam CT scanner
+office-lab.webp,old-site,old/5b05b4_Dental-Lab.webp,client's own,"office-gallery, technology",3,675x675,30,The on-site dental lab: a design screen and an articulator with a model
+office-exterior.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.21.jpeg,client's own,office-gallery,3,1600x1100,192,The building on Main Street in Hackensack
+office-room.webp,vimeo,film/1198870167@85,client's own,office-gallery,3,1080x1080,53,A treatment room with two orange chairs and a screen on the wall
+contact-hero.webp,drive,drive/office/Hackensack office Shot 1.png,client's own,contact,3,1080x1080,86,The front of the building on Main Street that houses the practice
+dental-implants-hero.webp,vimeo,film/1198870167@37,client's own,services/dental-implants,3,1080x1080,60,A patient and a dentist looking at his 3D scan on a monitor in a treatment room
+dental-implants-split1.webp,old-site,old/6aac42_Hackensack opperation room.webp,client's own,"services/dental-implants, office-gallery",3,900x1080,39,"A treatment room at the practice, the chair reclined under the light"
+emergency-dental-care-hero.webp,drive,drive/office/Hackensack Action Shots_2.12.1.png,client's own,"services/emergency-dental-care, office-gallery",3,1080x1080,53,"A treatment room with an orange dental chair, ready for a patient"
+first-visit-expectations-hero.webp,vimeo,film/1198870167@62,client's own,first-visit-expectations,3,1080x1080,54,A new patient filling in his forms in the waiting room
+first-visit-expectations-statement.webp,old-site,old/265605_Hackensack-Reception-Desk.jpeg,client's own,first-visit-expectations,3,1000x900,106,The curved reception desk of the practice
+first-visit-expectations-quote.webp,old-site,old/1ea713_Hackensack-Reception.jpeg,client's own,first-visit-expectations,3,900x1100,165,"The waiting-room lounge: grey sofas, abstract paintings and flowers"
+full-mouth-rehabilitation-hero.webp,old-site,old/ed8ff5_AdobeStock_339260113.webp,"Adobe Stock 339260113, licensed for the live site",services/full-mouth-rehabilitation,3,1200x1200,30,A complete upper and lower set of new teeth (model)
+full-mouth-rehabilitation-statement.webp,old-site,old/ae25c9_dental-technician-removing-jaw.webp,client's own,services/full-mouth-rehabilitation,3,853x768,31,A technician lifting a printed jaw model out of a 3D printer
+implant-bridges-hero.webp,old-site,old/ff70b5_AdobeStock_358642032.webp,"Adobe Stock 358642032, licensed for the live site",services/implant-bridges,3,1200x1200,28,An implant bridge: joined crowns over two implants (model)
+implant-bridges-benefits.webp,old-site,old/70ee13_Implant Bridges.webp,client's own,services/implant-bridges,3,1100x900,61,A bridge of three teeth held by two implants in the jaw (model)
+implant-revision-hero.webp,old-site,old/f722a1_AdobeStock_372286534.webp,"Adobe Stock 372286534, licensed for the live site",services/implant-revision,3,1200x1200,75,"A dental scan on a screen, a gloved hand pointing to it"
+implant-revision-opinion.webp,freepik,stock/revision/342134266.jpg,Freepik 342134266 (premium),services/implant-revision,3,1100x900,58,"Implant parts, screws and crowns laid out in a steel tray"
+sedation-hero.webp,vimeo,film/1198870167@86,client's own,"services/sedation, office-gallery",3,1080x1080,53,A treatment room with two orange dental chairs and a screen on the wall
+sedation-statement.webp,freepik,stock/monitor/405116995.jpg,Freepik 405116995 (premium),services/sedation,3,1000x900,36,A vital-signs monitor beside the chair in a treatment room
+sedation-benefit.webp,vimeo,film/1198867061@72,client's own,services/sedation,3,1100x900,48,"A patient reclined in a treatment chair, talking with a dentist"
+single-implant-hero.webp,old-site,old/1c8b1f_AdobeStock_406946058.webp,"Adobe Stock 406946058, licensed for the live site",services/single-implant,3,1200x1200,36,"A dental implant, its abutment and its crown (model)"
+single-implant-fix.webp,old-site,old/490692_Single Tooth Implant (2).webp,client's own,services/single-implant,3,1100x900,74,A single implant and its crown between two natural teeth (model)
+smile-makeovers-hero.webp,freepik,stock/veneers/429226758.jpg,Freepik 429226758 (premium),services/smile-makeovers,3,1200x1200,87,"Porcelain veneer shades in a guide, one lifted out"
+smile-makeovers-preview.webp,old-site,old/edc6fd_AdobeStock_1129462305.webp,"Adobe Stock 1129462305, licensed for the live site",services/smile-makeovers,3,2400x1000,417,A smile design traced over a row of teeth
+insurance-financing-hero.webp,vimeo,film/1198870167@28,client's own,insurance-financing,3,1080x1080,54,A patient shaking hands with the front-desk team at reception
+insurance-financing-statement.webp,old-site,old/4bcbbb_AdobeStock_94425459.webp,"Adobe Stock 94425459, licensed for the live site",insurance-financing,3,1000x900,90,"A dental insurance claim form, a pen and glasses"
+patient-testimonials-hero.webp,vimeo,film/1198870167@74,client's own,patient-testimonials,3,1080x1080,50,"Isaac, a patient of the practice, smiling outdoors"
+pre-post-op-instructions-hero.webp,vimeo,film/1198867061@68,client's own,pre-post-op-instructions,3,1080x1080,64,A patient handed his paperwork at the front desk
+pre-post-op-card-1.webp,freepik,stock/icepack/6575759.jpg,Freepik 6575759 (premium),pre-post-op-instructions,3,900x700,91,"A tray of soft foods and drinks: a banana, a smoothie and milk"
+pre-post-op-card-2.webp,old-site,old/e4b503_implant-process-video_poster.0.jpg,client's own,pre-post-op-instructions,3,900x700,23,A full arch of teeth on implants (3D illustration)
+pre-post-op-card-3.webp,freepik,stock/aftercare/12598694.jpg,Freepik 12598694 (premium),pre-post-op-instructions,3,900x700,12,"An electric toothbrush, cotton pads and swabs"
+blog-recovery-day-after.webp,freepik,stock/icepack/38338567.jpg,Freepik 38338567 (premium),"blog, the post",3,1200x1200,69,Smoothies and a bowl of soft cereal on a tray beside the sofa
+blog-dentures.webp,old-site,old/2b1532_AdobeStock_533427763.webp,"Adobe Stock 533427763, licensed for the live site","blog, the post",3,1200x1200,39,A full-arch denture design open on a screen
+blog-cost.webp,freepik,stock/estimate/178095506.jpg,Freepik 178095506 (premium),"blog, the post",3,1200x1200,292,"A tooth model, a calculator, a notebook and dental instruments"
+blog-recovery-weeks.webp,freepik,stock/aftercare/28829527.jpg,Freepik 28829527 (premium),"blog, the post",3,1200x1200,63,"Mouthwash, a towel, a bamboo toothbrush and floss"
+blog-zygomatic.webp,old-site,asset/legacy/zygomatic-render.png,client's own,"blog, the post",3,1080x1080,64,"Zygomatic implants anchored in the cheekbone, holding a full upper arch (3D illustration)"
+blog-foods.webp,freepik,stock/softfood/24758411.jpg,Freepik 24758411 (premium),"blog, the post",3,1200x1200,168,"Bowls of yogurt, oats and soft fruit on a white table"
+film-isaac-1.webp,vimeo,film/1198870167@12.5,client's own,one page's films chapter,3,1280x720,34,"Isaac, a patient, in his story film (12.5s)"
+film-daniel-1.webp,vimeo,film/1198867061@89,client's own,one page's films chapter,3,1280x720,40,"Daniel, a patient, in his story film (89s)"
+film-isaac-2.webp,vimeo,film/1198870167@4.5,client's own,one page's films chapter,3,1280x720,33,"Isaac, a patient, in his story film (4.5s)"
+film-daniel-2.webp,vimeo,film/1198867061@84,client's own,one page's films chapter,3,1280x720,41,"Daniel, a patient, in his story film (84s)"
+film-isaac-3.webp,vimeo,film/1198870167@14.5,client's own,one page's films chapter,3,1280x720,26,"Isaac, a patient, in his story film (14.5s)"
+film-daniel-3.webp,vimeo,film/1198867061@80,client's own,one page's films chapter,3,1280x720,39,"Daniel, a patient, in his story film (80s)"
+film-isaac-4.webp,vimeo,film/1198870167@40.5,client's own,one page's films chapter,3,1280x720,33,"Isaac, a patient, in his story film (40.5s)"
+film-daniel-4.webp,vimeo,film/1198867061@10.5,client's own,one page's films chapter,3,1280x720,44,"Daniel, a patient, in his story film (10.5s)"
+film-isaac-5.webp,vimeo,film/1198870167@44.5,client's own,one page's films chapter,3,1280x720,31,"Isaac, a patient, in his story film (44.5s)"
+film-daniel-5.webp,vimeo,film/1198867061@14.5,client's own,one page's films chapter,3,1280x720,33,"Daniel, a patient, in his story film (14.5s)"
+film-isaac-6.webp,vimeo,film/1198870167@46.5,client's own,one page's films chapter,3,1280x720,31,"Isaac, a patient, in his story film (46.5s)"
+film-daniel-6.webp,vimeo,film/1198867061@18.5,client's own,one page's films chapter,3,1280x720,45,"Daniel, a patient, in his story film (18.5s)"
+film-isaac-7.webp,vimeo,film/1198870167@52.5,client's own,one page's films chapter,3,1280x720,29,"Isaac, a patient, in his story film (52.5s)"
+film-daniel-7.webp,vimeo,film/1198867061@28.5,client's own,one page's films chapter,3,1280x720,41,"Daniel, a patient, in his story film (28.5s)"
+film-isaac-8.webp,vimeo,film/1198870167@68.5,client's own,one page's films chapter,3,1280x720,32,"Isaac, a patient, in his story film (68.5s)"
+film-daniel-8.webp,vimeo,film/1198867061@36.5,client's own,one page's films chapter,3,1280x720,46,"Daniel, a patient, in his story film (36.5s)"
+film-isaac-9.webp,vimeo,film/1198870167@70.5,client's own,one page's films chapter,3,1280x720,31,"Isaac, a patient, in his story film (70.5s)"
+film-daniel-9.webp,vimeo,film/1198867061@46.5,client's own,one page's films chapter,3,1280x720,46,"Daniel, a patient, in his story film (46.5s)"
+film-isaac-10.webp,vimeo,film/1198870167@76.5,client's own,one page's films chapter,3,1280x720,30,"Isaac, a patient, in his story film (76.5s)"
+film-daniel-10.webp,vimeo,film/1198867061@52.5,client's own,one page's films chapter,3,1280x720,45,"Daniel, a patient, in his story film (52.5s)"
+film-isaac-11.webp,vimeo,film/1198870167@80.5,client's own,one page's films chapter,3,1280x720,26,"Isaac, a patient, in his story film (80.5s)"
+film-daniel-11.webp,vimeo,film/1198867061@62.5,client's own,one page's films chapter,3,1280x720,44,"Daniel, a patient, in his story film (62.5s)"
+film-isaac-12.webp,vimeo,film/1198870167@88.5,client's own,one page's films chapter,3,1280x720,29,"Isaac, a patient, in his story film (88.5s)"
+film-daniel-12.webp,vimeo,film/1198867061@86.5,client's own,one page's films chapter,3,1280x720,48,"Daniel, a patient, in his story film (86.5s)"
+film-isaac-13.webp,vimeo,film/1198870167@72.5,client's own,one page's films chapter,3,1280x720,72,"Isaac, a patient, in his story film (72.5s)"
+film-daniel-13.webp,vimeo,film/1198867061@48.5,client's own,one page's films chapter,3,1280x720,34,"Daniel, a patient, in his story film (48.5s)"
+about-hero.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.33.jpeg,client's own,"about, office-gallery",3,2400x1100,345,The curved reception desk of the practice under a round ceiling light
+about-letter.webp,old-site,old/739db4_Screenshot 2026-07-07 at 11.35.png,client's own,about,3,1000x900,139,The waiting-room lounge: dark tufted seating and flowers on the table
+about-features.webp,drive,drive/office/Hackensack Action Shots_2.17.1.png,client's own,"about, gallery (same photo)",3,1920x800,38,A patient sees her new smile in a hand mirror in the treatment chair
+cost-of-dental-implants-hero.webp,freepik,stock/estimate/72957301.jpg,Freepik 72957301 (premium),cost-of-dental-implants,3,1200x1200,50,A calculator beside a model of a full set of teeth
+dental-implant-faqs-hero.webp,vimeo,film/1198870167@9,client's own,dental-implant-faqs,3,1080x1080,41,"Isaac, a patient of the practice, talking about his treatment"
+dr-meskin-hero.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.18.jpeg,client's own,dr-alan-meskin,3,1200x1200,304,Dr. Alan Meskin in navy scrubs at the practice
+dr-meskin-training.webp,old-site,old/5ddd20_Dr.Alan-Meskin 2.webp,client's own,dr-alan-meskin,3,900x1100,73,Dr. Alan Meskin with a colleague outside the practice
+team-meskin.webp,drive,drive/office/Dr.Alan-Meskin.png,client's own,about and the doctors' pages (headshot exception),3,900x1100,100,"Dr. Alan Meskin, prosthodontist"
+team-lee.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,about and the doctors' pages (headshot exception),3,837x1024,25,"Dr. Won-Sang Lee, oral surgeon"
+team-srour.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,about and the doctors' pages (headshot exception),3,681x833,24,"Dr. Maurice Srour, oral surgeon"
+team-klass.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,about and the doctors' pages (headshot exception),3,900x1100,22,"Dr. Dmitriy Klass, periodontist"
+dr-lee-hero.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,dr-won-sang-lee-dds (and his team card),3,905x905,25,"Dr. Won-Sang Lee, oral surgeon"
+dr-srour-hero.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,dr-maurice-srour-dds (and his team card),3,833x833,26,"Dr. Maurice Srour, oral surgeon"
+dr-klass-hero.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,dr-dmitriy-klass-dds-msd (and his team card),3,1200x1200,26,"Dr. Dmitriy Klass, periodontist"
+referring-doctors-hero.webp,old-site,old/2aef52_Dr.Alan-Meskin cropped2.webp,client's own,referring-doctors,3,632x632,34,Dr. Alan Meskin and a colleague at the practice
+services-hero.webp,vimeo,film/1198870167@26.5,client's own,services,3,1920x880,69,A patient walking into the reception of the practice
+services-card-emergency.webp,old-site,old/0dc0c5_AdobeStock_484728172.webp,"Adobe Stock 484728172, licensed for the live site",services,2,900x700,20,A gloved hand holding a dental handpiece
+technology-hero.webp,old-site,old/27ee86_CAD-CAM.webp,client's own,technology,3,768x768,29,The CAD/CAM milling unit beside its design screen
+technology-lab.webp,old-site,old/5b05b4_Dental-Lab.webp,client's own,"technology, office-gallery",3,571x675,27,The on-site dental lab: a design screen and an articulator holding a model
+technology-3d-printers.webp,old-site,old/ae25c9_dental-technician-removing-jaw.webp,client's own,"technology, full-mouth-rehabilitation",3,939x768,34,A technician lifting a printed jaw model out of a 3D printer
+technology-cone-beam.webp,old-site,old/3ad33e_Hackensack technology.webp,client's own,technology (the home page shows another still of it),3,1000x900,37,A patient positioned in the cone beam CT scanner
+technology-photogrammetry.webp,old-site,old/fc5a1d_ICam-4D-3-1024x768.webp,client's own,technology,3,650x768,13,The iCam4D photogrammetry camera
+technology-intraoral-scanner.webp,old-site,old/2cbc18_Intra-oral-scanner.webp,client's own,technology,3,707x578,12,An intra-oral scanner and its 3D scan on screen
+technology-digital-x-ray.webp,old-site,old/f722a1_AdobeStock_372286534.webp,"Adobe Stock 372286534, licensed for the live site","technology, implant-revision",3,1100x1300,76,A digital scan of the teeth and jaw on a screen
+blog-hero.webp,old-site,old/8bac90_Hackensack Office Shot 2.webp,client's own,"blog, office-gallery (same photo)",3,1080x1080,65,The reception and the waiting area by the front windows

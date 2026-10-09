@@ -33,7 +33,7 @@ const d = await pg.evaluate(async () => {
   probe.style.fontVariationSettings = '"opsz" 6'; const a = probe.getBoundingClientRect().width;
   probe.style.fontVariationSettings = '"opsz" 72'; const b = probe.getBoundingClientRect().width;
   probe.remove();
-  const frame = document.querySelector('.form-card iframe');
+  const frame = document.querySelector('.consultation_card iframe');
   return {
     title: document.title,
     robots: [...document.querySelectorAll('meta[name="robots"]')].map((m) => m.content),
@@ -45,9 +45,9 @@ const d = await pg.evaluate(async () => {
     fonts: [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '')),
     h1Font: getComputedStyle(document.querySelector('h1')).fontFamily,
     opszWidths: [Math.round(a), Math.round(b)],
-    boxSizing: getComputedStyle(document.querySelector('.solution')).boxSizing,
-    textlink: (() => { const t = document.querySelector('.textlink'); const cs = getComputedStyle(t); return { bg: cs.backgroundImage, border: cs.borderBottomWidth }; })(),
-    embed: { block: !!document.querySelector('.form-card .wz-embed'), frame: frame ? frame.src : null, frameHeight: frame ? Math.round(frame.getBoundingClientRect().height) : 0 },
+    boxSizing: getComputedStyle(document.querySelector('.solutions_item')).boxSizing,
+    textlink: (() => { const t = document.querySelector('.button.is-link'); const cs = getComputedStyle(t); return { bg: cs.backgroundImage, border: cs.borderBottomWidth }; })(),
+    embed: { block: !!document.querySelector('.consultation_card .wz-embed'), frame: frame ? frame.src : null, frameHeight: frame ? Math.round(frame.getBoundingClientRect().height) : 0 },
     chapters: document.querySelectorAll('section[data-chapter]').length,
     wz: window.WZ ? { ok: WZ.ok, smoother: !!WZ.smoother, active: WZ.active } : null,
     pins: window.ScrollTrigger ? ScrollTrigger.getAll().filter((t) => t.pin).map((t) => t.trigger.id) : [],
@@ -55,11 +55,11 @@ const d = await pg.evaluate(async () => {
     alts: [...document.querySelectorAll('main img')].filter((i) => !i.alt).length,
     h1: document.querySelectorAll('h1').length,
     interaction: {
-      drawings: document.querySelectorAll('.solution .drawing svg').length,
-      drawingPos: document.querySelector('.drawing') ? getComputedStyle(document.querySelector('.drawing')).position : null,
+      drawings: document.querySelectorAll('.solutions_item .solutions_drawing svg').length,
+      drawingPos: document.querySelector('.solutions_drawing') ? getComputedStyle(document.querySelector('.solutions_drawing')).position : null,
       cursor: !!document.querySelector('.cursor'),
-      rule: !!document.querySelector('.processgrid .process-rule'),
-      film: (() => { const v = document.querySelector('.js-hero-video'); const t = document.querySelector('.hero-frame .film-toggle'); return !!(v && v.currentSrc && v.readyState >= 2 && t && getComputedStyle(t).position === 'absolute'); })(),
+      rule: !!document.querySelector('.journey_steps .journey_rule'),
+      film: (() => { const v = document.querySelector('[data-hero-video]'); const t = document.querySelector('.arrival_frame .arrival_film-toggle'); return !!(v && v.currentSrc && v.readyState >= 2 && t && getComputedStyle(t).position === 'absolute'); })(),
     },
   };
 });

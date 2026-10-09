@@ -50,7 +50,7 @@ const go = async (pg, y) => {
 
 /* ---------- desktop, motion on ---------- */
 let pg = await open(1440, 900);
-await pg.click('.hero-actions .btn');
+await pg.click('.arrival_actions .button');
 await sleep(3000);
 const y1 = await pg.evaluate(() => ({ y: window.scrollY, top: Math.round(document.getElementById('consult').getBoundingClientRect().top) }));
 say(y1.y > 1000 && Math.abs(y1.top - 12) < 120, 'hero button travels to the consultation', `scrollY ${Math.round(y1.y)}, section top at ${y1.top}px`);
@@ -80,10 +80,10 @@ await sleep(600);
 const prog = await pg.evaluate(() => new DOMMatrix(getComputedStyle(document.getElementById('navProgress')).transform).a);
 say(Math.abs(prog - 0.5) < 0.04, 'reading progress tracks the document', `scaleX ${prog.toFixed(3)} at 50%`);
 
-await pg.evaluate(() => { const d = document.querySelectorAll('.js-faq details')[2]; const st = WZ.smoother.scrollTop(); WZ.smoother.scrollTo(d.getBoundingClientRect().top + st - 400, false); });
+await pg.evaluate(() => { const d = document.querySelectorAll('[data-faq] details')[2]; const st = WZ.smoother.scrollTop(); WZ.smoother.scrollTo(d.getBoundingClientRect().top + st - 400, false); });
 await sleep(900);
-await pg.click('.js-faq details:nth-child(3) summary'); await sleep(500);
-const faq = await pg.evaluate(() => [...document.querySelectorAll('.js-faq details')].map((d) => d.open));
+await pg.click('[data-faq] details:nth-child(3) summary'); await sleep(500);
+const faq = await pg.evaluate(() => [...document.querySelectorAll('[data-faq] details')].map((d) => d.open));
 say(faq[2] && !faq[0] && faq.filter(Boolean).length === 1, 'FAQ opens one answer at a time', JSON.stringify(faq));
 say(pg.errors.length === 0, 'no page errors on desktop', pg.errors.join(' | '));
 await pg.close();
@@ -120,7 +120,7 @@ const low = await pg.evaluate(() => {
     seen.add(el);
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
-    if (el.closest('[aria-hidden="true"], .sr-only, script, style, details:not([open]) p, .skip, .mobile-cta')) continue;
+    if (el.closest('[aria-hidden="true"], .hide-visually, script, style, details:not([open]) p, .skip-link_component, .callbar_component')) continue;
     const fg = parse(cs.color);
     if (fg.a < 0.99) continue;
     const bg = bgOf(el);
@@ -156,9 +156,9 @@ for (const w of [1920, 1366, 1280, 1100, 1024, 992, 991, 768, 767]) {
   pg = await open(w, 800, { reduce: true });
   const c = await pg.evaluate(() => ({
     overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-    clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && (r.right > innerWidth + 1 || r.left < -1) && !el.closest('.skip'); }).map((el) => el.textContent.trim().slice(0, 28)),
+    clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && (r.right > innerWidth + 1 || r.left < -1) && !el.closest('.skip-link_component'); }).map((el) => el.textContent.trim().slice(0, 28)),
     // the headline sits above the film: any intersection of the two boxes fails
-    overlap: (() => { const h = document.querySelector('.hero h1').getBoundingClientRect(); const v = document.querySelector('.hero-frame').getBoundingClientRect(); const x = Math.min(h.right, v.right) - Math.max(h.left, v.left); const y = Math.min(h.bottom, v.bottom) - Math.max(h.top, v.top); return x > 1 && y > 1 ? Math.round(y) : 0; })(),
+    overlap: (() => { const h = document.querySelector('.arrival_heading').getBoundingClientRect(); const v = document.querySelector('.arrival_frame').getBoundingClientRect(); const x = Math.min(h.right, v.right) - Math.max(h.left, v.left); const y = Math.min(h.bottom, v.bottom) - Math.max(h.top, v.top); return x > 1 && y > 1 ? Math.round(y) : 0; })(),
   }));
   say(c.overflow <= 0 && c.clipped.length === 0 && c.overlap === 0, `${w}: no overflow, no control cut off, headline clear of the film`, c.clipped.join(' | ') + (c.overflow > 0 ? ` overflow ${c.overflow}px` : '') + (c.overlap ? ` headline over the film by ${c.overlap}px` : ''));
   await pg.close();
@@ -170,21 +170,21 @@ const m = await pg.evaluate(() => ({
   overflow: document.documentElement.scrollWidth - 390,
   pins: ScrollTrigger.getAll().filter((t) => t.pin).length,
   smoother: !!WZ.smoother,
-  clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.right > 391 && !el.closest('.skip'); }).map((el) => el.textContent.trim().slice(0, 30)),
-  small: [...document.querySelectorAll('main a, main summary, .mobile-cta a, nav a, footer a, .topbar a')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.height < 43.5; }).map((el) => `${el.textContent.trim().slice(0, 24)} ${Math.round(el.getBoundingClientRect().height)}px`).slice(0, 12),
-  body: parseFloat(getComputedStyle(document.querySelector('.hero-copy > p')).fontSize),
+  clipped: [...document.querySelectorAll('a, button, summary')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.right > 391 && !el.closest('.skip-link_component'); }).map((el) => el.textContent.trim().slice(0, 30)),
+  small: [...document.querySelectorAll('main a, main summary, .callbar_component a, nav a, footer a, .topbar_component a')].filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 0 && cs.visibility !== 'hidden' && cs.display !== 'none' && r.height < 43.5; }).map((el) => `${el.textContent.trim().slice(0, 24)} ${Math.round(el.getBoundingClientRect().height)}px`).slice(0, 12),
+  body: parseFloat(getComputedStyle(document.querySelector('.arrival_text')).fontSize),
   smallest: (() => { let min = 99, who = ''; document.querySelectorAll('body *').forEach((el) => { if (![...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return; const cs = getComputedStyle(el); if (cs.display === 'none' || cs.visibility === 'hidden') return; const px = parseFloat(cs.fontSize); if (px < min) { min = px; who = el.tagName + '.' + String(el.className).slice(0, 20); } }); return `${min.toFixed(1)}px ${who}`; })(),
-  callbar: getComputedStyle(document.querySelector('.mobile-cta')).display,
+  callbar: getComputedStyle(document.querySelector('.callbar_component')).display,
 }));
 say(m.overflow <= 0, 'phone: no horizontal overflow against the device width', `${m.overflow}px`);
 say(m.clipped.length === 0, 'phone: no control past the right edge', m.clipped.join(' | '));
 say(m.small.length === 0, 'phone: tap targets at least 44px tall', m.small.join(' | '));
 say(m.body >= 16 && parseFloat(m.smallest) >= 11.5, 'phone: body copy at 16px or over, nothing under 12px', `body ${m.body.toFixed(1)}px, smallest ${m.smallest}`);
 say(!m.smoother && m.callbar !== 'none' && m.pins === 0, 'phone: no pins, no smoother, call bar present', `${m.pins} pins`);
-const before = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
-await pg.evaluate(() => { const c = document.querySelector('.js-case'); window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 60); });
+const before = await pg.evaluate(() => getComputedStyle(document.querySelector('[data-case-after]')).clipPath);
+await pg.evaluate(() => { const c = document.querySelector('[data-case]'); window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 60); });
 await sleep(1200);
-const after = await pg.evaluate(() => getComputedStyle(document.querySelector('.result__after')).clipPath);
+const after = await pg.evaluate(() => getComputedStyle(document.querySelector('[data-case-after]')).clipPath);
 say(before !== after && /inset\(0(px)? 0(%|px)?/.test(after.replace('0px 0%', '0 0%')), 'phone: scroll wipes the first case from before to after', `${before} -> ${after}`);
 say(pg.errors.length === 0, 'no page errors on the phone', pg.errors.join(' | '));
 await pg.close();

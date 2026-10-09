@@ -13,6 +13,9 @@ Read off the live site in the 2026-09-30 capture
 | **Phone** | (551) 368-2476 on every page. (201) 488-8866 appears in the SMS help text of the legal pages and in three blog posts, and it is the number printed on the Aesthetic Dental Center awning (the practice is inside that center, Suite A1): _which number the new site should show, to confirm_ |
 | **Hours** | Monday to Friday 10:00 AM to 6:00 PM; Saturday and Sunday closed (contact page) |
 | **Email** | None published on the site. Mail is Google Workspace |
+| **Legal entity** | "Aesthetic Dental Center of Hackensack, LLC DBA Hackensack Center for Dental Implants" (the live privacy policy, 2026-09-21) |
+| **Languages** | Footer: English, Español, Русский, Portuguese, Korean. The About page says "Care in Three Languages" (English, Spanish, Russian); the sedation page says "English, and Spanish": _to confirm_ |
+| **Booking forms** | GoHighLevel survey `6CLNUlXI06FDHLD9XKBJ` (consultation, on every treatment page), form `PJjhjcpMEQU8MMCTRpLV` "Booking Form" (contact), form `SHs2QaddefZy9lixAea9` "Form 2" (referrals) |
 
 ## Doctors
 
@@ -38,7 +41,7 @@ Researched 2026-10-01 for the home page's doctor section; full table with source
 | Dr. Meskin | DDS NYU 2019; Certificate in Prosthodontics NYU 2022; NPI 1629605597; NJ licence 22DI02791000; English, Spanish, Russian | Verified |
 | Dr. Meskin memberships | ACP, AAID, ADA | Practice's own claim |
 | Dr. Lee | DDS Columbia; oral surgery NewYork-Presbyterian/Columbia; NPI 2010; "15+ years, 30,000+ implants" | Training verified; numbers the practice's own |
-| Dr. Srour | DDS NYU; oral surgery NYU/Bellevue; NPI 2015; "10+ years, 20,000+ implants, 5,000+ full arch" | Training verified; numbers the practice's own |
+| Dr. Srour | DDS NYU; oral surgery NYU/Bellevue; NPI 2015; "10+ years, 20,000+ implants, 5,000+ full arch"; "board certified"; "advanced training in remote-anchorage implant techniques, including pterygoid, zygomatic, and transnasal" | Training verified; numbers and board status the practice's own |
 | Dr. Klass | DDS NYU; MSD and periodontics Boston University; NPI 2019 | Verified |
 | Shown on the home page | 50,000+ implants by our surgeons; 30+ years combined | **To confirm with the client** |
 

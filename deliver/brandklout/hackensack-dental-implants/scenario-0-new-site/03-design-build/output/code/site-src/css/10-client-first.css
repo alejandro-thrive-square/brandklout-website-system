@@ -1,0 +1,195 @@
+/* ===========================================================================
+   CLIENT-FIRST: the house utility layer (tools/client-first-style-guide/client-first-starter.css),
+   values set to concept 04. Names are the library's; only values change. Custom classes are in
+   20-*.css onward as folder_element.
+
+   page-wrapper > main-wrapper > section_<beat> > padding-global > container-large
+     > padding-section-large > content
+   =========================================================================== */
+
+/* --- structure ----------------------------------------------------------- */
+.page-wrapper { position: relative; overflow-x: clip; }
+.main-wrapper { display: block; }
+.padding-global { padding-left: var(--gutter); padding-right: var(--gutter); }
+.container-large { width: 100%; max-width: var(--container-large); margin-left: auto; margin-right: auto; }
+.container-medium { width: 100%; max-width: var(--container-medium); margin-left: auto; margin-right: auto; }
+.container-small { width: 100%; max-width: var(--container-small); margin-left: auto; margin-right: auto; }
+.padding-section-small { padding-top: var(--space-xlarge); padding-bottom: var(--space-xlarge); }
+.padding-section-medium { padding-top: var(--space-huge); padding-bottom: var(--space-huge); }
+.padding-section-large { padding-top: var(--padding-section); padding-bottom: var(--padding-section); }
+@media screen and (max-width: 767px) {
+  .padding-section-small { padding-top: var(--space-large); padding-bottom: var(--space-large); }
+  .padding-section-medium { padding-top: var(--space-xlarge); padding-bottom: var(--space-xlarge); }
+}
+
+/* --- spacing: a size class plus a direction class (Client-First) ---------- */
+.padding-0 { padding: var(--space-0); }
+.padding-tiny { padding: var(--space-tiny); }
+.padding-xxsmall { padding: var(--space-xxsmall); }
+.padding-xsmall { padding: var(--space-xsmall); }
+.padding-small { padding: var(--space-small); }
+.padding-medium { padding: var(--space-medium); }
+.padding-large { padding: var(--space-large); }
+.padding-xlarge { padding: var(--space-xlarge); }
+.padding-xxlarge { padding: var(--space-xxlarge); }
+.padding-huge { padding: var(--space-huge); }
+.padding-xhuge { padding: var(--space-xhuge); }
+.padding-xxhuge { padding: var(--space-xxhuge); }
+.padding-vertical { padding-left: 0; padding-right: 0; }
+.padding-horizontal { padding-top: 0; padding-bottom: 0; }
+.padding-top { padding-bottom: 0; padding-left: 0; padding-right: 0; }
+.padding-bottom { padding-top: 0; padding-left: 0; padding-right: 0; }
+.padding-left { padding-top: 0; padding-bottom: 0; padding-right: 0; }
+.padding-right { padding-top: 0; padding-bottom: 0; padding-left: 0; }
+.margin-0 { margin: var(--space-0); }
+.margin-tiny { margin: var(--space-tiny); }
+.margin-xxsmall { margin: var(--space-xxsmall); }
+.margin-xsmall { margin: var(--space-xsmall); }
+.margin-small { margin: var(--space-small); }
+.margin-medium { margin: var(--space-medium); }
+.margin-large { margin: var(--space-large); }
+.margin-xlarge { margin: var(--space-xlarge); }
+.margin-xxlarge { margin: var(--space-xxlarge); }
+.margin-huge { margin: var(--space-huge); }
+.margin-xhuge { margin: var(--space-xhuge); }
+.margin-xxhuge { margin: var(--space-xxhuge); }
+.margin-vertical { margin-left: 0; margin-right: 0; }
+.margin-horizontal { margin-top: 0; margin-bottom: 0; }
+.margin-top { margin-bottom: 0; margin-left: 0; margin-right: 0; }
+.margin-bottom { margin-top: 0; margin-left: 0; margin-right: 0; }
+.margin-left { margin-top: 0; margin-bottom: 0; margin-right: 0; }
+.margin-right { margin-top: 0; margin-bottom: 0; margin-left: 0; }
+.spacer-tiny { width: 100%; padding-top: var(--space-tiny); }
+.spacer-xxsmall { width: 100%; padding-top: var(--space-xxsmall); }
+.spacer-xsmall { width: 100%; padding-top: var(--space-xsmall); }
+.spacer-small { width: 100%; padding-top: var(--space-small); }
+.spacer-medium { width: 100%; padding-top: var(--space-medium); }
+.spacer-large { width: 100%; padding-top: var(--space-large); }
+.spacer-xlarge { width: 100%; padding-top: var(--space-xlarge); }
+.spacer-xxlarge { width: 100%; padding-top: var(--space-xxlarge); }
+.spacer-huge { width: 100%; padding-top: var(--space-huge); }
+
+/* --- typography: font sizes live here, on the roles ---------------------- */
+/* the concept's display face: Newsreader 400, tight leading and tracking */
+.heading-style-display { font-family: var(--font-display); font-size: var(--size-display); font-weight: 400; line-height: 0.98; letter-spacing: -0.045em; color: var(--fg); }
+.heading-style-h1 { font-family: var(--font-display); font-size: var(--size-h1); font-weight: 400; line-height: 0.98; letter-spacing: -0.045em; color: var(--fg); }
+.heading-style-h2 { font-family: var(--font-display); font-size: var(--size-h2); font-weight: 400; line-height: 0.98; letter-spacing: -0.045em; color: var(--fg); }
+.heading-style-h3 { font-family: var(--font-display); font-size: var(--size-h3); font-weight: 400; line-height: 1.02; letter-spacing: -0.02em; color: var(--fg); }
+.heading-style-h4 { font-family: var(--font-display); font-size: var(--size-h4); font-weight: 400; line-height: 1.1; color: var(--fg); }
+.heading-style-h5 { font-family: var(--font-display); font-size: var(--size-h5); font-weight: 400; line-height: 1.12; color: var(--fg); }
+.heading-style-h6 { font-family: var(--font-display); font-size: var(--size-h6); font-weight: 400; line-height: 1.15; color: var(--fg); }
+.text-size-large { font-size: var(--size-text-large); line-height: 1.55; }
+.text-size-medium { font-size: var(--size-text-medium); line-height: 1.65; }
+.text-size-regular { font-size: var(--size-text-regular); line-height: 1.65; }
+.text-size-small { font-size: var(--size-text-small); line-height: 1.6; }
+.text-size-tiny { font-size: var(--size-text-tiny); line-height: 1.6; }
+.text-weight-light { font-weight: 300; }
+.text-weight-normal { font-weight: 400; }
+.text-weight-medium { font-weight: 500; }
+.text-weight-semibold { font-weight: 600; }
+.text-weight-bold { font-weight: 700; }
+.text-weight-xbold { font-weight: 800; }
+.text-style-allcaps { text-transform: uppercase; letter-spacing: 0.12em; }
+.text-style-italic { font-style: italic; }
+.text-style-nowrap { white-space: nowrap; }
+.text-style-strikethrough { text-decoration: line-through; }
+.text-style-muted { color: var(--fg-mute); }
+.text-style-quote { font-family: var(--font-display); font-size: var(--size-h4); line-height: 1.22; }
+.text-style-link { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; text-decoration-color: var(--line-strong); }
+.text-style-link:hover { text-decoration-color: currentColor; }
+.text-style-2lines { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.text-style-3lines { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.text-align-center { text-align: center; }
+.text-align-left { text-align: left; }
+.text-align-right { text-align: right; }
+.text-color-primary { color: var(--fg); }
+.text-color-secondary { color: var(--fg-body); }
+.text-color-muted { color: var(--fg-mute); }
+.text-color-accent { color: var(--accent); }
+.text-color-alternate { color: var(--white); }
+/* the small letter-spaced gold label above a heading (the concept's kicker) */
+.text-style-tagline { display: block; margin-bottom: var(--space-small); font-family: var(--font-body); font-size: var(--size-text-label); font-weight: 700; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.17em; color: var(--accent); }
+/* CMS and legal bodies: the one place children are styled by context (CLASS-STANDARD §5) */
+.text-rich-text { color: var(--fg-body); }
+.text-rich-text > * + * { margin-top: 1.1em; }
+.text-rich-text h2 { margin-top: 2.2em; font-family: var(--font-display); font-size: var(--size-h4); font-weight: 400; line-height: 1.12; color: var(--fg); }
+.text-rich-text h3 { margin-top: 1.8em; font-family: var(--font-display); font-size: var(--size-h5); font-weight: 400; line-height: 1.15; color: var(--fg); }
+.text-rich-text h4 { margin-top: 1.6em; font-size: var(--size-text-medium); font-weight: 700; color: var(--fg); }
+.text-rich-text ul { padding-left: 1.25em; list-style: disc; }
+.text-rich-text ol { padding-left: 1.4em; list-style: decimal; }
+.text-rich-text li + li { margin-top: 0.45em; }
+.text-rich-text a { color: var(--fg); text-decoration: underline; text-underline-offset: 0.2em; text-decoration-color: var(--accent-flat); }
+.text-rich-text strong { color: var(--fg); }
+.text-rich-text blockquote { padding-left: var(--space-small); border-left: 2px solid var(--accent-flat); font-family: var(--font-display); font-size: var(--size-h6); line-height: 1.3; color: var(--fg); }
+
+/* --- widths, alignment, layering ---------------------------------------- */
+.max-width-xxsmall { width: 100%; max-width: 16rem; }
+.max-width-xsmall { width: 100%; max-width: 20rem; }
+.max-width-small { width: 100%; max-width: 26rem; }
+.max-width-medium { width: 100%; max-width: 34rem; }
+.max-width-large { width: 100%; max-width: 48rem; }
+.max-width-xlarge { width: 100%; max-width: 64rem; }
+.max-width-xxlarge { width: 100%; max-width: 80rem; }
+.max-width-full { width: 100%; max-width: none; }
+@media screen and (max-width: 991px) { .max-width-full-tablet { width: 100%; max-width: none; } }
+@media screen and (max-width: 767px) { .max-width-full-mobile-landscape { width: 100%; max-width: none; } }
+@media screen and (max-width: 479px) { .max-width-full-mobile-portrait { width: 100%; max-width: none; } }
+.align-center { margin-left: auto; margin-right: auto; }
+.layer { position: absolute; inset: 0; }
+.z-index-1 { position: relative; z-index: 1; }
+.z-index-2 { position: relative; z-index: 2; }
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-scroll { overflow: scroll; }
+.pointer-events-none { pointer-events: none; }
+.pointer-events-auto { pointer-events: auto; }
+.aspect-ratio-square { aspect-ratio: 1 / 1; }
+.aspect-ratio-portrait { aspect-ratio: 2 / 3; }
+.aspect-ratio-landscape { aspect-ratio: 3 / 2; }
+.aspect-ratio-widescreen { aspect-ratio: 16 / 9; }
+
+/* --- visibility ---------------------------------------------------------- */
+.hide { display: none; }
+@media screen and (max-width: 991px) { .hide-tablet { display: none; } }
+@media screen and (max-width: 767px) { .hide-mobile-landscape { display: none; } }
+@media screen and (max-width: 479px) { .hide-mobile-portrait { display: none; } }
+.hide-visually { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* --- backgrounds: the concept's light grounds, one per chapter ------------ */
+.background-color-primary { background-color: var(--bg); }
+.background-color-secondary { background-color: var(--bg-alt); }
+.background-color-alternate { background-color: var(--sand-light); }
+.background-color-white { background-color: var(--white); }
+.background-color-sand { background-color: var(--sand); }
+.background-color-sage { background-color: var(--sage); }
+.background-color-linen { background-color: var(--linen); }
+.background-color-stone { background-color: var(--stone-light-ground); }
+
+/* --- icons --------------------------------------------------------------- */
+.icon-1x1-xxsmall { width: 1rem; height: 1rem; }
+.icon-1x1-xsmall { width: 1.5rem; height: 1.5rem; }
+.icon-1x1-small { width: 2rem; height: 2rem; }
+.icon-1x1-medium { width: 3rem; height: 3rem; }
+.icon-1x1-large { width: 4rem; height: 4rem; }
+.icon-1x1-xlarge { width: 5rem; height: 5rem; }
+
+/* --- buttons: one `.button`, variants as is-* combos --------------------- */
+/* the concept's pill: ink ground, white small caps */
+.button { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-xsmall); min-height: 52px; padding: 0 var(--space-medium); border: 1px solid var(--fg); border-radius: var(--radius); background-color: var(--fg); color: var(--btn-ink); font-family: var(--font-body); font-size: var(--size-text-label); font-weight: 700; line-height: 1.2; text-align: center; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: transform 0.25s ease, filter 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+.button:hover { transform: translateY(-2px); filter: brightness(1.35); }
+.button:focus-visible { transform: translateY(-2px); filter: brightness(1.35); }
+.button.is-secondary { background-color: transparent; color: var(--fg); }
+.button.is-secondary:hover { background-color: var(--fg); color: var(--btn-ink); filter: none; }
+.button.is-alternate { background-color: var(--white); border-color: var(--white); color: var(--fg); }
+.button.is-alternate:hover { filter: none; background-color: var(--sand-light); }
+.button.is-small { min-height: 44px; padding: 0 var(--space-small); }
+/* the concept's text link: small caps over a hairline (a border: a background-image underline
+   publishes as a solid block on Instatic) */
+.button.is-link { align-items: flex-end; justify-content: flex-start; min-height: 44px; padding: var(--space-small) 0 var(--space-xxsmall); border-width: 0 0 1px; border-color: currentColor; border-radius: 0; background-color: transparent; color: var(--fg); transition: color 0.3s ease; }
+.button.is-link:hover { transform: none; filter: none; color: var(--accent); }
+.button.is-link:focus-visible { transform: none; filter: none; color: var(--accent); }
+.button.is-icon { width: 52px; height: 52px; padding: 0; background-color: transparent; border-color: var(--line-strong); color: var(--fg); }
+.button.is-icon:hover { filter: none; background-color: var(--fg); border-color: var(--fg); color: var(--btn-ink); }
+.button-group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-small); }
+.button-group.is-center { justify-content: center; }
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }

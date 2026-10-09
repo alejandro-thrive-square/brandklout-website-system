@@ -1,4 +1,7 @@
 {
-  "ghl-survey": { "where": "index", "props": { "source": "snippet", "url": "", "title": "Schedule your consultation", "fit": "auto", "height": 620, "ratio": "16 / 9", "lazy": true, "allowFullscreen": false, "allow": "" } },
-  "google-reviews": { "where": "index", "props": { "source": "snippet", "url": "", "title": "Google reviews", "fit": "auto", "height": 420, "ratio": "16 / 9", "lazy": true, "allowFullscreen": false, "allow": "" } }
+  "ghl-survey": { "where": "index", "props": { "source": "snippet", "url": "", "title": "Schedule your consultation", "fit": "auto", "height": 620, "ratio": "16 / 9", "lazy": false, "allowFullscreen": false, "allow": "" } },
+  "google-reviews": { "where": "index", "props": { "source": "snippet", "url": "", "title": "Google reviews", "fit": "auto", "height": 420, "ratio": "16 / 9", "lazy": true, "allowFullscreen": false, "allow": "" } },
+  "ghl-booking": { "where": "contact", "props": { "source": "snippet", "url": "", "title": "Booking Form", "fit": "auto", "height": 1145, "ratio": "16 / 9", "lazy": false, "allowFullscreen": false, "allow": "" } },
+  "ghl-referral": { "where": "referring-doctors", "props": { "source": "snippet", "url": "", "title": "Referral Form", "fit": "auto", "height": 757, "ratio": "16 / 9", "lazy": false, "allowFullscreen": false, "allow": "" } },
+  "google-map": { "where": "contact", "props": { "source": "snippet", "url": "", "title": "Map", "fit": "auto", "height": 512, "ratio": "16 / 9", "lazy": true, "allowFullscreen": true, "allow": "" } }
 }
