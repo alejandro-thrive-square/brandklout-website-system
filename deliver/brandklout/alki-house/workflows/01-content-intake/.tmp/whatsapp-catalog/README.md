@@ -41,7 +41,8 @@ that `site-src/data/products.json` was built from.
    `same-origin-allow-popups`, so the opener link survives; its CSP blocks a direct `fetch` to
    localhost.
 4. `node unpack.mjs <scratch>/catalog.json`, then `node scripts/assets.mjs push --client alki-house`
-   **after** committing the text files (push uploads every untracked file).
+   **after** committing the text files (push uploads every untracked file and never removes a
+   manifest line).
 
 Why not a download: a Chrome download of the payload works but lands in Chrome's *last-used*
 folder (on 2026-10-09 that was `workflows/03-graphic-resources/`, not `~/Downloads`), and the tool

@@ -64,8 +64,8 @@ node shoot.mjs index.html 1440,390 --motion                  # gates: console, o
 - Headless clicks right after a scroll miss while ScrollSmoother eases; wait ~2.5 s first.
 - Node fetch scripts must not write to a pipe on this machine — redirect to a log.
 - **WhatsApp Web's catalogue panel stops at 10 products**; page `WAWebCollections.Catalog` instead
-  (`whatsapp-catalog/extract.js`). `assets.mjs push` uploads every untracked file, so commit text
-  outputs before pushing media.
+  (`whatsapp-catalog/extract.js`). `assets.mjs push` uploads every untracked file and never drops a
+  manifest line, so commit text outputs before pushing media.
 
 ## Version Control
 

@@ -3,7 +3,7 @@
 Brief (Alejandro, 2026-10-09): the shop's WhatsApp catalogue is the most current inventory; extract
 it from WhatsApp Web with browser automation.
 
-## Done (commit `<sha>`)
+## Done (commit `0afa0766`)
 
 - **73 products and 143 photos** read from the catalogue of the contact *Anferny* (Alki House) in
   the user's WhatsApp Web, through Claude in Chrome's `javascript_tool` on WhatsApp's own models
@@ -38,6 +38,7 @@ it from WhatsApp Web with browser automation.
   *last-used* folder (`workflows/03-graphic-resources/`), not `~/Downloads` — removed after checking
   it was byte-identical. The reliable path is `recv.mjs` + a `window.open` fired from a real click
   (scripted, it is popup-blocked).
-- **`assets.mjs push` uploads every untracked file** — commit the text files first, or the JSON and
-  scripts land in `assets.tsv` too.
+- **`assets.mjs push` uploads every untracked file and only ever adds to `assets.tsv`** — commit
+  the text files first. Pushed before the commit, the JSON and scripts went in, and a second push
+  after the commit did not take them out; the five lines were deleted from `assets.tsv` by hand.
 - WhatsApp's `availability` is `in stock` on every product; status lives only in the *Estado* text.
