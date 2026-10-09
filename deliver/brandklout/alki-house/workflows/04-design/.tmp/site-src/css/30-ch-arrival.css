@@ -1,11 +1,19 @@
 /* 00 ARRIVAL — full-viewport film, headline left, the product on its stage right. */
 .ch-arrival{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:var(--coffee-950)}
 .ar-film{position:absolute;inset:0;z-index:0}
-.ar-film video,.ar-film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 50%}
-.ar-video{opacity:0}
+/* y 30 %: on a wide, short window the cover crop is vertical; it eats the floor, not the top of
+   the product (the rig's handle went under the nav at 50 %). */
+.ar-film video,.ar-film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 30%}
+/* Stacking: poster, then the film fading in over it, then the veil. Without z-index the poster
+   (a later sibling) painted over the playing film and the hero looked frozen. */
+.ar-poster img{z-index:0}
+.ar-video{opacity:0;z-index:1}
 .ar-video.is-live{opacity:1;transition:opacity 1.2s var(--ease)}
+.ar-veil{z-index:2}
+/* The film's push-in brings each product toward the headline by the end of its shot; the left
+   third stays near-black so the words never sit on a lit product. */
 .ar-veil{position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(30,16,10,.92) 0%,rgba(30,16,10,.6) 45%,rgba(30,16,10,.15) 100%),
+  linear-gradient(90deg,rgba(30,16,10,.95) 0%,rgba(30,16,10,.86) 30%,rgba(30,16,10,.45) 50%,rgba(30,16,10,.08) 72%,rgba(30,16,10,.05) 100%),
   linear-gradient(0deg,var(--coffee-950) 0%,rgba(30,16,10,0) 45%)}
 .ar-in{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:end;padding-top:8rem;padding-bottom:1rem;flex:1}
 .ar-copy{padding-bottom:3rem}

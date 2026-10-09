@@ -148,7 +148,10 @@ const scene = (n) => (sceneExists(n) ? `assets/scenes/${n}.webp` : '');
 /* ---- the hero film: six aisles in one dark studio (03-graphic-resources/.tmp/hero-film/).
    segments.json says when each aisle is on screen; the caption and pills follow the film. ---- */
 const FILM_SEGMENTS = path.resolve(SRC, '../../../03-graphic-resources/.tmp/hero-film/segments.json');
-const filmFile = fs.existsSync(path.join(SRC, 'assets/scenes/hero-film.mp4')) ? 'assets/scenes/hero-film.mp4' : '';
+// ?v= from the file's size and time: a re-cut film must not play from the browser cache against
+// the new segments (the caption then names the wrong aisle).
+const stamp = (rel) => { const st = fs.statSync(path.join(SRC, rel)); return `${rel}?v=${(st.size + st.mtimeMs).toString(36).replace('.', '')}`; };
+const filmFile = fs.existsSync(path.join(SRC, 'assets/scenes/hero-film.mp4')) ? stamp('assets/scenes/hero-film.mp4') : '';
 const plural = (n) => `${n} ${n === 1 ? 'producto' : 'productos'}`;
 const heroScenes = (filmFile && fs.existsSync(FILM_SEGMENTS) ? JSON.parse(fs.readFileSync(FILM_SEGMENTS, 'utf8')).segments : [])
   .filter((s) => catLabel[s.cat])
@@ -312,9 +315,9 @@ page({ file: 'index.html', body: read('pages/home.body.html'), root: '', page: '
     RAIL_WORD: ['Cero', 'Un', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][categories.length] || String(categories.length),
     STAGE_SLIDES: stageSlides(''), STAGE_COUNT: String(STAGE.length), KIT_CARDS: kitCards(''), FLOOR_CARDS: floorCards(''),
     HERO_VIDEO: filmFile || (fs.existsSync(path.join(SRC, 'assets/scenes/hero-gimbal.mp4')) ? 'assets/scenes/hero-gimbal.mp4' : ''),
-    HERO_POSTER: filmFile ? scene('hero-film-poster') : scene('hero-gimbal'),
+    HERO_POSTER: filmFile && sceneExists('hero-film-poster') ? stamp(scene('hero-film-poster')) : scene('hero-gimbal'),
     // The film's poster serves phones too: the CSS crops it to the product.
-    HERO_POSTER_PORTRAIT: filmFile ? scene('hero-film-poster') : scene('hero-gimbal-portrait'),
+    HERO_POSTER_PORTRAIT: filmFile && sceneExists('hero-film-poster') ? stamp(scene('hero-film-poster')) : scene('hero-gimbal-portrait'),
     HERO_SCENES: esc(JSON.stringify(heroScenes)), HERO_SCENE_LABEL: esc(heroScenes[0].label), HERO_SCENE_COUNT: `${esc(heroScenes[0].n)} →`,
     HERO_SCENE_HREF: heroScenes[0].href, HERO_SCENE_DOTS: heroDots,
     PROMISE_SCENE: scene('studio-lighting'), STAGE_PLATE: scene('product-stage'), WAY_SCENE: scene('softbox-glow') } });

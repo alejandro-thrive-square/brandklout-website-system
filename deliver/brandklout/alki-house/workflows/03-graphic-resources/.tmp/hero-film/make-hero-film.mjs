@@ -183,7 +183,10 @@ async function pool(items, n, fn) {
 // ---------- edit ----------
 // Clips joined by dissolves; the last shot dissolves back into the first and the cut sits inside the
 // first shot, so the file loops without a seam. segments.json says which aisle is on screen when.
-const L = 5.4, D = 1.0; // seconds used per clip, dissolve length
+// Seconds used per clip (from 0.25 s), dissolve length. 4.4 not 5.4: Seedance's push-in ends so
+// tight that on a wide, short desktop the rig's top handle left the frame and the products reached
+// behind the headline.
+const L = 4.4, D = 1.0;
 function edit() {
   // Cuts whatever shots have clips, in SHOTS order; a missing one is skipped with a warning (on
   // 2026-10-09 audio and monitor hit 402 Insufficient credits) and joins on the next edit.
