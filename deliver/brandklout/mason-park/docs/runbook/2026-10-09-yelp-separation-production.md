@@ -48,6 +48,20 @@ pediatric mentions. Temporary, production only. The user chose:
 - **Sitemap:** `13-cloudflare-sitemap/build-sitemap.mjs` excludes the three forwarders, and the Worker
   was redeployed with 238 URLs.
 
+## Client feedback, same day (published 14:23 and 14:24Z, seq 90)
+- **The home hero is the family photo again**, as the client asked. It was re-uploaded as
+  `mp-family-portrait-2400x1714.jpg` so the image address does not carry her name. The alt is now
+  "Dr. William Sung with his family"; the old asset said "Dr. Tam Nguyen and Dr. William Sung with
+  their two children".
+- **Every group photo with Dr. Nguyen in it is off the site** (`swap-nguyen-group.mjs`): 47 swaps on
+  36 pages. The client flagged `team-front-desk` and `team-reception`. The same seated woman with
+  glasses is also in `team-huddle-smile`, `team-desk-morning`, `team-corridor`,
+  `n121-front-desk-corridor`, `team-reading-chart`, `team-plaques` and `team-plaques-2`. The pair
+  photos (cartoon-cap hygienist with the dentist in the blue shirt) do not include her and stay.
+- Six pages shared one of those photos; they now share the `n131-dentist-assistant-laugh` card.
+- Live check of 254 URLs: none of the nine photos, and no "Nguyen" except the forwarding page's own
+  address (`/team/tam-nguyen`).
+
 ## Verified
 - Every live page and all 161 articles, raw HTML including head and JSON-LD: **0 mentions of
   Nguyen**. No pediatric badge, no `/our-team` nav link, no swapped photo left.
