@@ -1,11 +1,12 @@
 # Runbook index
 
-10 runs, newest first. Each line is one file in this folder.
+11 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-09 | **BugHerd round 3 + the two hub pages** (Asana 1219333478027729): 73 of 75 pins closed on production AND staging by one class-name-translating patch (`apply-bugherd-round3.mjs`): `/surgery-and-care`, `/the-practice` in the nav, static statements/compare/ledger, hover before/after, Scroll cue, new fonts, footer, 15 reorders, 42 image slots; #25 #69 wait for images — carries **gotchas** (ambient focal rules render no class) | [`2026-10-09-bugherd-round-3-and-hub-pages.md`](./2026-10-09-bugherd-round-3-and-hub-pages.md) |
 | 2026-10-08/09 | Staging stood up (Railway host, de-indexed by the runtime) and the Client-First migration on it: phase 1 names + editability (502 renames, Framework 17 colours), phase 2 tokens + combos (10 spacing steps, 6 combos); EDITABLE · IN BOUNDS · CLEAN, css 0 real at 1440/390/1920, runtime OK, head 0/87; local source + draft-patch scripts renamed. Staging only. | [2026-10-08-staging-clone-and-class-standard.md](./2026-10-08-staging-clone-and-class-standard.md) |
 | 2026-10-01 | "HIPAA Disclosure" footer link on all 87 pages, published seq 27; ads footer wraps at 390 — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | HIPAA Disclosure page injected page-only, published seq 26; entity unconfirmed — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |

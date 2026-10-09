@@ -10,7 +10,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Tooth extractions · wisdom teeth · Los Angeles',
       title: 'Removal can be <em>restorative.</em>',
       lead: 'The goal is always to save the tooth. When infection, trauma or an impacted wisdom tooth make that impossible, a gentle extraction ends the pain and protects everything around it.',
-      image: { src: '/media/img/wisdom-tooth-extraction.jpg', pos: '90% 50%', alt: 'Dr. Barriere reviewing X-rays before an extraction' },
+      image: { src: '/media/img/patient-smile-portrait-5.jpg', pos: '50% 40%', alt: 'A West LA Implants patient smiling after his treatment' }, // BugHerd #86
       actions: [{ href: '#invitation', label: 'Request an Appointment' }, { href: filmHref(FILMS.wisdom), label: 'Watch: why wisdom teeth come out', kind: 'text', ext: true }],
       meta: [
         { b: 'Same day', span: 'Emergency visits' },
@@ -20,17 +20,17 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/tooth-extraction-model.jpg' },
-      text: 'An abscessed tooth does not stay a tooth problem. It reaches the neighbours, the bone, and in some cases the body.',
-      after: ['When root canals, gum treatment and restorations cannot save it, extraction is the conservative choice. Most take minutes, and most patients report pressure, not pain.'],
-    },
-    {
-      type: 'compare', name: 'The Two Kinds', tag: 'The Two Kinds', title: 'Simple, or <em>wisdom.</em>',
+      type: 'compare', name: 'The Two Kinds', tag: 'The Two Kinds', title: 'Simple, or <em>wisdom.</em>', // BugHerd #88: moved up to sit right after the cover
       columns: [
         { title: 'Simple extraction', sub: 'A damaged or infected tooth', hot: true, rows: ['Local anaesthetic, sedation if you want it', 'The tooth is loosened and lifted with forceps', 'Neighbouring teeth, bone and gum protected', 'Healing over a few days with over-the-counter relief'] },
         { title: 'Wisdom tooth extraction', sub: 'Impacted or crowding', rows: ['Sedation as needed, local anaesthetic at the site', 'Bone and gum preserved as the tooth is removed', 'Detailed aftercare to protect the clot', 'Dr. Barriere has more than a decade of wisdom tooth experience'] },
         { title: 'Then what', sub: 'Every extraction except wisdom teeth', rows: ['A socket graft keeps the bone', 'An implant is the permanent replacement', 'A bridge or partial is the alternative', 'The plan is made before the tooth comes out'], href: '/dental-implants.html', cta: 'Dental implants' },
       ],
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/tooth-extraction-model.jpg' },
+      text: 'An abscessed tooth does not stay a tooth problem. It reaches the neighbours, the bone, and in some cases the body.',
+      after: ['When root canals, gum treatment and restorations cannot save it, extraction is the conservative choice. Most take minutes, and most patients report pressure, not pain.'],
     },
     {
       type: 'steps', name: 'The Aftercare', tag: 'The Aftercare', title: 'The first <em>48 hours.</em>',
@@ -60,7 +60,7 @@ export default {
       photos: [
         { src: '/media/img/implant-crown-model.jpg', alt: 'Two implants supporting a three-tooth bridge' },
         { src: '/media/img/bone-graft-model.jpg', pos: '70% 50%', alt: 'An implant and crown replacing an extracted tooth' },
-        { src: '/media/img/still-emily-consult.jpg', alt: 'A consultation at West LA Implants' },
+        { src: '/media/img/dental-implant-crown-placement.png', pos: '50% 50%', alt: 'A dental implant with its crown being placed' }, // BugHerd #87
       ],
       flip: true,
     },

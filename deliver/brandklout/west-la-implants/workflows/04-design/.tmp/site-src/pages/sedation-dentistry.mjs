@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/patient-under-sedation.jpg' },
-      text: 'Fear keeps people out of the chair for years. Decay becomes gum disease, gum disease becomes tooth loss, and the bacteria do not stay in the mouth.',
-      after: ['Sedation is the way back in. Most patients who have IV sedation remember little or nothing of the appointment, and wake up with the work done.'],
-    },
-    {
-      type: 'ledger', name: 'The Reasons', tag: 'The Reasons', title: 'Five reasons people <em>choose</em> it.',
+      type: 'ledger', name: 'The Reasons', tag: 'The Reasons', title: 'Five reasons people <em>choose</em> it.', // BugHerd #80: moved up to sit right after the cover
       figure: { value: 5, label: 'common reasons' },
       items: [
         { b: 'Fear of the dentist', span: 'From mild dread to years of avoidance.' },
@@ -32,6 +27,11 @@ export default {
         { b: 'A low pain threshold', span: 'Comfort through the whole appointment.' },
         { b: 'Several complex treatments', span: 'Combined into one efficient visit instead of many.' },
       ],
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/patient-under-sedation.jpg' },
+      text: 'Fear keeps people out of the chair for years. Decay becomes gum disease, gum disease becomes tooth loss, and the bacteria do not stay in the mouth.',
+      after: ['Sedation is the way back in. Most patients who have IV sedation remember little or nothing of the appointment, and wake up with the work done.'],
     },
     {
       type: 'compare', name: 'The Options', tag: 'The Options', title: 'Three levels of <em>calm.</em>',
@@ -43,7 +43,7 @@ export default {
       ],
     },
     {
-      type: 'strip', name: 'The Experience', tag: 'The Experience', title: 'Calm is designed <em>in</em>, not added on.',
+      type: 'strip', name: 'The Experience', tag: 'The Experience', title: 'Calm is designed <em>in,</em> not added on.',
       lead: 'Blankets and pillows, noise-cancelling headphones, a television with Netflix, a team that speaks English and Spanish, and a doctor who does complex cases every day.',
       body: [
         'Sedation is also how the practice combines an extraction, a graft and an implant into one appointment instead of three, which for an anxious patient is the whole point.',
@@ -58,7 +58,7 @@ export default {
       photos: [
         { src: '/media/img/still-reception-neon.jpg', alt: 'The reception at West LA Implants' },
         { src: '/media/img/waiting-room.jpg', alt: 'The waiting room' },
-        { src: '/media/img/still-doctor-patient-hug.jpg', alt: 'Dr. Barriere greeting a patient' },
+        { src: '/media/img/patient-under-sedation.jpg', pos: '30% 40%', alt: 'A patient resting comfortably under sedation' }, // BugHerd #81
       ],
     },
     {

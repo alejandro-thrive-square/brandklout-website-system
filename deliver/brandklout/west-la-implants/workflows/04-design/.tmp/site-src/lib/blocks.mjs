@@ -21,6 +21,8 @@ const tag = (t) => (t ? `<div class="text-style-tagline"><i></i><span>${t}</span
 const fp = (m) => (m && m.pos ? 'object-position-' + m.pos.split(/\s+/).map((v) => Math.round(parseFloat(v) / 10) * 10).join('-') : '')
 const img = (m, cls = '', extra = '') => (m ? `<img${cls || fp(m) ? ` class="${[cls, fp(m)].filter(Boolean).join(' ')}"` : ''} src="${m.src}" alt="${(m.alt || '').replace(/"/g, '&quot;')}" loading="lazy"${extra}>` : '')
 const paras = (arr, cls = '') => (arr || []).map((p) => `<p${cls ? ` class="${cls}"` : ''}>${p}</p>`).join('\n')
+/* one accordion row: the faq chapter, the invitation's faq, the statement's services list (BugHerd #94) */
+const faqItem = (q, a) => `<div class="faq_item"><button class="faq_question" type="button" aria-expanded="false"><span>${q}</span><i></i></button><div class="faq_answer"><p>${a}</p></div></div>`
 const action = (a) =>
   a.kind === 'text'
     ? `<a class="arrow-link_component" href="${a.href}"${a.ext ? ' target="_blank" rel="noopener"' : ''}>${a.label} <span class="arrow_icon">&rarr;</span></a>`
@@ -57,10 +59,13 @@ export function cover(b) {
 
 /* ---------- statement: pinned, the words are written by scroll ---------- */
 export function statement(b) {
-  /* services beside the statement (BugHerd #38, /dental-implants): [href, label] pairs, the current page marked */
-  const services = b.services
-    ? `<nav class="statement_services" aria-label="${b.services.label}"><span class="statement_services-label">${b.services.label}</span>${b.services.links.map(([href, label]) => `<a href="${href}.html"${href === b.services.current ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>`
-    : ''
+  /* services beside the statement (BugHerd #38, /dental-implants): [href, label] pairs, the current page marked;
+     or (BugHerd #94, /general-dentistry) `items`: [{ title, text }] as an accordion list */
+  const services = !b.services
+    ? ''
+    : b.services.items
+      ? `<div class="statement_services"><span class="statement_services-label">${b.services.label}</span><div class="faq_list">${b.services.items.map((it) => faqItem(it.title, it.text)).join('')}</div></div>`
+      : `<nav class="statement_services" aria-label="${b.services.label}"><span class="statement_services-label">${b.services.label}</span>${b.services.links.map(([href, label]) => `<a href="${href}.html"${href === b.services.current ? ' aria-current="page"' : ''}>${label}</a>`).join('')}</nav>`
   return `<section class="section_statement${b.theme ? ' st-' + b.theme : ''}" id="${b.id || 'statement'}"${b.services ? ' data-st-services' : ''}>
   ${b.image ? `<div class="statement_background" aria-hidden="true">${img({ src: b.image.src, alt: '' }, 'statement_image')}</div>` : ''}
   <div class="container-large statement_stage">
@@ -123,7 +128,8 @@ export function compare(b) {
 
 /* ---------- strip: copy beside a strip of photographs ---------- */
 export function strip(b) {
-  const photos = (b.photos || []).map((p, i) => `<figure class="media-frame_component photo-strip_photo is-photo-${i + 1}" data-wipe>${img(p, 'parallax_image')}${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}</figure>`).join('\n')
+  /* p.still: no parallax overscan on this photo (BugHerd #95) */
+  const photos = (b.photos || []).map((p, i) => `<figure class="media-frame_component photo-strip_photo is-photo-${i + 1}" data-wipe>${img(p, p.still ? '' : 'parallax_image')}${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}</figure>`).join('\n')
   const list = b.list ? `<ul class="photo-strip_list">${b.list.map((l) => `<li><b>${l.b}</b><span>${l.span}</span></li>`).join('')}</ul>` : ''
   return `<section class="section_photo-strip${b.flip ? ' is-flipped' : ''}${b.theme ? ' ph-' + b.theme : ''}" id="${b.id || 'strip'}">
   <div class="container-large photo-strip_grid">
@@ -192,7 +198,7 @@ export function proof(b) {
 
 /* ---------- faq ---------- */
 export function faq(b) {
-  const items = b.items.map((it) => `<div class="faq_item"><button class="faq_question" type="button" aria-expanded="false"><span>${it.q}</span><i></i></button><div class="faq_answer"><p>${it.a}</p></div></div>`).join('\n')
+  const items = b.items.map((it) => faqItem(it.q, it.a)).join('\n')
   return `<section class="section_faq" id="${b.id || 'questions'}">
   <div class="container-large faq-section_grid">
     <div class="faq-section_head">${tag(b.tag || 'The Questions')}<h2 class="heading-style-h2">${b.title}</h2>${b.lead ? `<p class="text-style-lead">${b.lead}</p>` : ''}</div>
@@ -349,12 +355,16 @@ export function prose(b) {
 </section>`
 }
 
-/* ---------- post index ---------- */
+/* ---------- post index ----------
+   b.hub (BugHerd #59 #60, /surgery-and-care, /the-practice): the same grid as photo cards of the pages
+   a hub links to: `cards` [{ href, title, text, image, pos }], numbered 01.., marked data-hub */
 export function postindex(b) {
-  const cards = b.posts
-    .map((p) => `<a class="post-index_card" href="/blog/${p.slug}.html"><figure class="media-frame_component is-wide">${img({ src: p.image, alt: '', pos: p.imagePos })}</figure><span class="post-index_date">${p.dateLabel}</span><h3 class="heading-style-h3 is-post-card">${p.title}</h3><p class="text-size-small">${p.excerpt}</p></a>`)
-    .join('\n')
-  return `<section class="section_post-index" id="${b.id || 'entries'}">
+  const cards = b.hub
+    ? b.cards.map((c, i) => `<a class="post-index_card" href="${c.href}"><figure class="media-frame_component is-wide">${img({ src: c.image, alt: '', pos: c.pos })}</figure><span class="post-index_date">${String(i + 1).padStart(2, '0')}</span><h3 class="heading-style-h3">${c.title}</h3><p class="text-size-small">${c.text}</p></a>`).join('\n')
+    : b.posts
+      .map((p) => `<a class="post-index_card" href="/blog/${p.slug}.html"><figure class="media-frame_component is-wide">${img({ src: p.image, alt: '', pos: p.imagePos })}</figure><span class="post-index_date">${p.dateLabel}</span><h3 class="heading-style-h3 is-post-card">${p.title}</h3><p class="text-size-small">${p.excerpt}</p></a>`)
+      .join('\n')
+  return `<section class="section_post-index" id="${b.id || 'entries'}"${b.hub ? ' data-hub' : ''}>
   <div class="container-large post-index_head">${tag(b.tag || 'The Journal')}<h2 class="heading-style-h2">${b.title}</h2>${b.lead ? `<p class="text-style-lead">${b.lead}</p>` : ''}</div>
   <div class="container-large post-index_grid">
     ${cards}
@@ -371,7 +381,7 @@ export function invite(b = {}) {
   const faqPart = b.faq
     ? `<div class="container-large invitation_faq" id="inviteFaq">
     <div class="invitation_faq-head"><div class="text-style-label">Before you call</div><h3 class="heading-style-h3">${b.faq.title || 'Confidence starts with good information.'}</h3></div>
-    <div class="faq_list">${b.faq.items.map((it) => `<div class="faq_item"><button class="faq_question" type="button" aria-expanded="false"><span>${it.q}</span><i></i></button><div class="faq_answer"><p>${it.a}</p></div></div>`).join('')}</div>
+    <div class="faq_list">${b.faq.items.map((it) => faqItem(it.q, it.a)).join('')}</div>
   </div>`
     : ''
   return `<section class="section_invitation" id="invitation">

@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Hybrid fixed detachable dentures · Los Angeles',
       title: 'Fixed for you. <em>Detachable</em> for us.',
       lead: 'A hybrid denture is screwed onto four or more implants. You never take it out. Dr. Barriere does, twice a year, for a professional clean, then screws it back.',
-      image: { src: '/media/img/hybrid-denture-model.jpg', alt: 'A hybrid fixed denture on its implant framework' },
+      image: { src: '/media/img/hybrid-denture-model.jpg', pos: '90% 50%', alt: 'A hybrid fixed denture on its implant framework' }, // BugHerd #68
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/zirconia-fixed-bridge.html', label: 'Compare with zirconia', kind: 'text' }],
       meta: [
         { b: '4+', span: 'Implants per arch' },

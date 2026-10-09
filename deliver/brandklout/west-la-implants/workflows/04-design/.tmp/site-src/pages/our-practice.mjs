@@ -37,6 +37,17 @@ export default {
       ],
     },
     {
+      type: 'team', name: 'The Team', title: 'The people who run the <em>day.</em>', // BugHerd #98: the team before the rooms
+      lead: 'Dr. Barriere places the implants. These are the people who make the rest of the visit work.',
+      people: [
+        { name: 'Dr. Tony Barriere', role: 'Implant & cosmetic dentist', image: '/media/img/doctor-headshot-square.png', bio: 'Ohio State College of Dentistry, a yearlong surgical residency at NYU Langone, more than a thousand hours of continuing education. Plans, places and restores every implant himself.' },
+        { name: 'Veronica V.', role: 'Office manager', image: '/media/img/team-veronica.png', bio: 'Nineteen years as a surgical coordinator and operatory materials manager at an outpatient surgical centre before dentistry. Her job is that every patient leaves in the best possible condition, whatever the treatment.' },
+        { name: 'Delia E.', role: 'Registered dental assistant & back office manager', image: '/media/img/team-delia.png', bio: 'In dentistry since 2011; braces as a child are what drew her in. Treats every patient like family, because most arrive with some fear and kindness is the cure for it. A lifelong Angeleno.' },
+        { name: 'Tielar A.', role: 'Dental assistant', image: '/media/img/team-tielar.png', bio: 'A dental assistant since 2019, energised by how fast the technology moves and by knowing she made a difference in someone’s smile. Born and raised in Los Angeles.' },
+        { name: 'Jacob R.', role: 'Hygienist', image: '/media/img/team-jacob.png', bio: 'The most gentle and proficient hygienist on the west side, according to one Google review. Runs the cleanings and the periodontal maintenance visits.' },
+      ],
+    },
+    {
       type: 'strip', name: 'The Rooms', tag: 'The Rooms', title: 'A surgical suite that happens to be a <em>dental</em> office.',
       lead: 'Diagnostics, planning, surgery and the lab share one floor, so nothing about your case leaves the building.',
       body: [
@@ -51,20 +62,9 @@ export default {
       ],
       actions: [{ href: '/technology.html', label: 'The technology', kind: 'text' }],
       photos: [
-        { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT imaging suite' },
+        { src: '/media/img/hygienist-procedure.jpg', pos: '80% 40%', alt: 'A hygiene visit at West LA Implants' }, // BugHerd #100
         { src: '/media/img/yomi-technology.jpg', alt: 'The Yomi robot in the surgical suite' },
-        { src: '/media/img/still-reception-neon.jpg', alt: 'The reception at West LA Implants' },
-      ],
-    },
-    {
-      type: 'team', name: 'The Team', title: 'The people who run the <em>day.</em>',
-      lead: 'Dr. Barriere places the implants. These are the people who make the rest of the visit work.',
-      people: [
-        { name: 'Dr. Tony Barriere', role: 'Implant & cosmetic dentist', image: '/media/img/doctor-headshot-square.png', bio: 'Ohio State College of Dentistry, a yearlong surgical residency at NYU Langone, more than a thousand hours of continuing education. Plans, places and restores every implant himself.' },
-        { name: 'Veronica V.', role: 'Office manager', image: '/media/img/team-veronica.png', bio: 'Nineteen years as a surgical coordinator and operatory materials manager at an outpatient surgical centre before dentistry. Her job is that every patient leaves in the best possible condition, whatever the treatment.' },
-        { name: 'Delia E.', role: 'Registered dental assistant & back office manager', image: '/media/img/team-delia.png', bio: 'In dentistry since 2011; braces as a child are what drew her in. Treats every patient like family, because most arrive with some fear and kindness is the cure for it. A lifelong Angeleno.' },
-        { name: 'Tielar A.', role: 'Dental assistant', image: '/media/img/team-tielar.png', bio: 'A dental assistant since 2019, energised by how fast the technology moves and by knowing she made a difference in someone’s smile. Born and raised in Los Angeles.' },
-        { name: 'Jacob R.', role: 'Hygienist', image: '/media/img/team-jacob.png', bio: 'The most gentle and proficient hygienist on the west side, according to one Google review. Runs the cleanings and the periodontal maintenance visits.' },
+        { src: '/media/img/cbct-emily.jpg', pos: '90% 40%', alt: 'A patient positioned for a 3D cone-beam scan' }, // BugHerd #99
       ],
     },
     {

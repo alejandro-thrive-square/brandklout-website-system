@@ -5,6 +5,19 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 
 ## Standing
 
+- **2026-10-09: BugHerd round 3 is live on PRODUCTION and STAGING (73 of 75 pins closed), with two new
+  pages, `/surgery-and-care` and `/the-practice`, in the primary nav** (Asana `1219333478027729`).
+  One surgical patch, `workflows/21-instatic-upload/apply-bugherd-round3.mjs`, written in Client-First
+  names and translated per instance (production still has the old names), re-runnable and idempotent
+  (`--hubs` rebuilds the two pages). Two new code assets on both: `src/styles/wla-review-3.css`
+  (source `site-src/css/06-review-3.css`) and `src/scripts/wla-review-3.js` (source
+  `site-src/js/95-review-3.js`), which releases the statement/reality/compare/ledger/before-after pins.
+  **The reviewer now wants less scroll-pinning**; the steps still pin, with a "Scroll" cue. The nav
+  has no phone number or chapter readout any more (seven links); ≤1279 the links fold into the menu.
+  **Open:** #25 and #69 wait for the reviewer's image. Run:
+  [`docs/runbook/2026-10-09-bugherd-round-3-and-hub-pages.md`](./docs/runbook/2026-10-09-bugherd-round-3-and-hub-pages.md).
+  The production class-standard rollout must keep this round: it is in both instances' drafts.
+
 - **2026-10-09: STAGING EXISTS and carries the Client-First migration (staging only; production untouched).**
   `https://west-la-implants-staging.up.railway.app` (Railway env `staging`, same login as production, Railway host
   only: the client's zone is on GoDaddy, so no `staging.<domain>` and no edge noindex header; the runtime writes
@@ -108,6 +121,7 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-08 | staging (new) | Railway env + volume + host, seeded (87 pages, 455 media rows, 3,702 files), embed-origins cloned, runtime noindex guard, DNI lines off; diff-sites 87/87, rendered leak gate clean except the header line (Railway host) | `b3e69195` |
 | 2026-10-08/09 | class-standard · phase 1 (staging) | tokens/review css into the registry (seat flip on `.display` fixed forward), Framework 17 vars, 502 renames; css 0 real at 3 widths, runtime OK, head 0/87, EDITABLE · IN BOUNDS · CLEAN; local source + patch scripts renamed | _this commit_ |
 | 2026-10-09 | class-standard · phase 2 (staging) | 10 spacing steps + 245 values on tokens (5% → 40%), 6 combos (overrides 11 → 5), fold-split 0 (1 left for a person); css 0 real at 3 widths, runtime p2-before→p2-after OK, head 0/87; local source the same | _this commit_ |
+| 2026-10-09 | organic · 21 instatic upload | BugHerd round 3 (73 pins) + `/surgery-and-care` and `/the-practice`: one class-translating patch on production (seq 39-44) and staging (seq 11-15), both published; snapshot diff and headless render checks clean; #25 #69 wait for images | _this commit_ |
 
 ## Version Control
 

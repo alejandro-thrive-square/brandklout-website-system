@@ -11,7 +11,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Dental implants · Wilshire Blvd, Los Angeles',
       title: 'A tooth that is <em>yours</em> again.',
       lead: 'A dental implant is a titanium root, a connector and a crown. Placed well, it looks, feels and works like the tooth it replaces, for decades.',
-      image: { src: '/media/img/still-doctor-xray-screen.jpg', pos: '70% 40%', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
+      image: { src: '/media/img/stock-index-cosmetic.jpg', pos: '40% 40%', alt: 'A veneer shade guide held against a smile' }, // BugHerd #40
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/technology.html', label: 'See how it is placed', kind: 'text' }],
       meta: [
         { b: 'One roof', span: 'Scan, surgery, teeth' },
@@ -40,7 +40,7 @@ export default {
         { title: 'Placement', text: 'Under IV or oral sedation, the implant is placed with Yomi® robotic guidance to the position, angle and depth in the plan. A temporary tooth often goes on the same day.' },
         { title: 'The final tooth', text: 'After three or more months of healing, a custom zirconia or porcelain crown is fitted. From then on you brush it, floss it and forget it.' },
       ],
-      image: { src: '/media/img/still-yomi-closeup.jpg', alt: 'The Yomi robotic guidance arm in the surgical suite' },
+      image: { src: '/media/img/front-desk-emily.jpg', pos: '60% 40%', alt: 'The front desk at West LA Implants' }, // BugHerd #47
     },
     {
       type: 'compare', name: 'The Options', tag: 'The Options', title: 'How many teeth, how <em>much</em> support.',
@@ -67,7 +67,7 @@ export default {
       ],
       actions: [{ href: '/dr-tony-barriere.html', label: 'Meet Dr. Barriere', kind: 'text' }],
       photos: [
-        { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT imaging suite at West LA Implants' },
+        { src: '/media/img/still-doctor-xray-screen.jpg', pos: '70% 40%', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' }, // BugHerd #48
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
         { src: '/media/img/implant-crown-model.jpg', alt: 'Two implants supporting a three-tooth bridge' },
       ],

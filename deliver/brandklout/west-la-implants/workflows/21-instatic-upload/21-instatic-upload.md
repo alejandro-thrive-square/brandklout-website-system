@@ -1180,7 +1180,40 @@ because a publish would ship someone else's unfinished work. A full `push-site.m
 edit made since; keep it for first imports.
 Proving it afterwards: snapshot every page's raw HTML before and after (mask
 `/_instatic/assets/<id>/`, `?v=` and the bundle hashes). On 2026-10-07 the 81 untouched pages
-differed by exactly one line, the new `wla-sharp-crops.js` script tag.
+differed by exactly one line, the new `wla-sharp-crops.js` script tag. `snap-pages.mjs snap|diff`
+does both (two captures of an unchanged site diff to zero lines, so every line is the patch).
+
+### 47. A node pointing at an AMBIENT rule renders no class: focal points must be `kind: "class"`
+
+Of the 121 `fp-X-Y` focal rules only the 25 the build used are `kind: "class"`; the rest were
+imported as `ambient` (same selector `.fp-X-Y.fp-X-Y`, same `objectPosition`). Put an ambient
+rule's id in a node's `classIds` and the published `<img>` carries no class for it at all: the
+2026-10-07 `/faq` cover fix (#22, `fp-60-20`) shipped as `class="cv-pos"` and never applied. The
+fix is to promote the rule in place (`kind: "class"`, nothing else changes); on the staging clone
+the class-standard rename rewrote ambient selectors but left their `name` on the old `fp-X-Y`, and a
+class rule renders its `name`, so match by selector and set the name too.
+`apply-bugherd-round3.mjs` (`focalId`) does both. Check any focal change in the published HTML.
+
+### 48. One patch, both instances: write it in Client-First names and translate
+
+Until the class standard reaches production, production has the old names and staging the
+Client-First ones. `apply-bugherd-round3.mjs` reads which set the shell carries and translates
+through `workflows/class-standard/class-map.json`, so the same run (and the same CSS/JS assets,
+written in the source's Client-First names) lands on both:
+`INSTATIC_BASE_URL=<staging> node apply-bugherd-round3.mjs --media-map .tmp/media-map.staging.json`.
+New classes get Client-First names on both, and the script refuses one that collides with the map
+(`is-after` is the new name of `ba-label--after`; the swap state became `is-swapped`). New media go
+to staging with `upload-files-to.mjs` (staging shares production's `/uploads` paths, so the map is
+derived), never `upload-media.mjs` (trap 43: on a host with no prior map it re-uploads everything).
+
+### 49. Releasing a GSAP pin from a separate asset
+
+Script assets load as modules in path order after `site.js` (`site`, then `wla-*`), so a new
+`wla-*.js` runs once every pin exists. `ScrollTrigger.kill(true)` reverts the pin spacer AND the
+scrubbed animation's inline styles (GSAP 3.15 `kill(revert)` calls `animation.revert()`), so the
+section falls back to its CSS: give the end state in the stylesheet (`!important` only where
+GSAP writes inline). Keep the once-only reveals: kill only triggers with `pin` or `vars.scrub`.
+Worked example: `site-src/js/95-review-3.js` (shipped as `wla-review-3.js`).
 
 ### The check: `css-parity.mjs`
 

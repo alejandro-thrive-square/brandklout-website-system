@@ -9,7 +9,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'All-on-4® full arch · Los Angeles',
       title: 'A whole arch of teeth, <em>fixed</em> in place.',
       lead: 'When most or all of the teeth in a jaw are failing, four or more implants can carry a complete, fixed set. You leave surgery with temporary teeth and come back for the final zirconia arch.',
-      image: { src: '/media/img/still-leslie-smile-tablet.jpg', alt: 'Leslie holding up a photo of her new full-arch smile' },
+      image: { src: '/media/img/patient-smile-portrait-1.jpg', pos: '40% 40%', alt: 'A West LA Implants patient smiling after his treatment' }, // BugHerd #61
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/implant-cost.html', label: 'What it costs', kind: 'text' }],
       meta: [
         { b: '4+', span: 'Implants per arch' },
@@ -17,6 +17,17 @@ export default {
         { b: 'Zirconia', span: 'Final fixed bridge' },
         { b: 'IV sedation', span: 'For the surgery' },
       ],
+    },
+    {
+      type: 'steps', name: 'The Method', tag: 'The Method', title: 'The West LA Implants <em>process.</em>', // BugHerd #63: moved up to sit right after the cover
+      intro: 'Planned from a 3D scan, placed along the plan, restored in the same suite.',
+      steps: [
+        { title: 'Your first visit', text: 'A cone-beam CT scan of your mouth and jaw shows where the bone is strongest and what needs treating first. From the scan the plan is built and, where a guide is used, a 3D-printed chrome guide is made to fit only you.' },
+        { title: 'The day of surgery', text: 'Under IV, oral or nitrous sedation, any remaining teeth are removed and four or more titanium or zirconia implants are placed into the chosen sites, with Yomi® robotic guidance. TeethToday® means you leave with temporary nanoceramic teeth.' },
+        { title: 'Healing', text: 'Over three to four months the implants fuse with the bone. You eat soft foods, then everything else. The temporary teeth stay in the whole time.' },
+        { title: 'The final teeth', text: 'A fixed zirconia bridge, milled from a single block, is fitted and checked for bite and comfort. It will not stain, chip or come out at night.' },
+      ],
+      image: { src: '/media/img/still-doctor-xray-screen.jpg', pos: '70% 40%', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' }, // BugHerd #62
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/painful-dentures.jpg' },
@@ -31,17 +42,6 @@ export default {
         { title: 'Implant-supported dentures', sub: 'Removable or fixed', rows: ['Secured by two or more implants', 'Last ten years or more', 'Limit bone recession', 'Expand food choices', 'Lower cost than a fixed arch'], href: '/implant-supported-dentures.html', cta: 'Implant-supported dentures' },
         { title: 'All-on-4® full arch', sub: 'Fixed', hot: true, rows: ['Secured by four or more implants', 'Last decades to a lifetime', 'Prevent bone recession', 'No dietary limits', 'Nearly all bite force restored'] },
       ],
-    },
-    {
-      type: 'steps', name: 'The Method', tag: 'The Method', title: 'The West LA Implants <em>process.</em>',
-      intro: 'Planned from a 3D scan, placed along the plan, restored in the same suite.',
-      steps: [
-        { title: 'Your first visit', text: 'A cone-beam CT scan of your mouth and jaw shows where the bone is strongest and what needs treating first. From the scan the plan is built and, where a guide is used, a 3D-printed chrome guide is made to fit only you.' },
-        { title: 'The day of surgery', text: 'Under IV, oral or nitrous sedation, any remaining teeth are removed and four or more titanium or zirconia implants are placed into the chosen sites, with Yomi® robotic guidance. TeethToday® means you leave with temporary nanoceramic teeth.' },
-        { title: 'Healing', text: 'Over three to four months the implants fuse with the bone. You eat soft foods, then everything else. The temporary teeth stay in the whole time.' },
-        { title: 'The final teeth', text: 'A fixed zirconia bridge, milled from a single block, is fitted and checked for bite and comfort. It will not stain, chip or come out at night.' },
-      ],
-      image: { src: '/media/img/still-yomi-robot-team.jpg', alt: 'Dr. Barriere and his assistant with the Yomi surgical robot' },
     },
     {
       type: 'strip', name: 'The Standard', tag: 'The Standard', title: 'Difficult cases are the <em>usual</em> ones here.',

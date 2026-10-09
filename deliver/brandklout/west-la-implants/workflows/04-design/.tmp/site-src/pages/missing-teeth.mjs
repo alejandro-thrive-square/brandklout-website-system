@@ -6,7 +6,7 @@ export default {
   chapters: [
     {
       type: 'cover', name: 'Arrival', kicker: 'Missing teeth · loose dentures · bone loss',
-      title: 'Losing your smile? <em>Get it back</em>, and more.',
+      title: 'Losing your smile? <em>Get it back,</em> and more.',
       lead: 'A limited diet, unclear speech, a hand over the mouth, a face that starts to look sunken. Tooth loss takes small freedoms one at a time. Every one of them can be returned.',
       image: { src: '/media/img/patient-covering-mouth.jpg', pos: '80% 50%', alt: 'A patient covering her mouth, self-conscious about missing teeth' },
       actions: [{ href: '#invitation', label: 'Request a Consultation' }, { href: '/dental-implants.html', label: 'Dental implants', kind: 'text' }],
@@ -16,6 +16,17 @@ export default {
         { b: 'Bone loss', span: 'Reversible with grafting' },
         { b: 'Free', span: 'Second opinions' },
       ],
+    },
+    {
+      type: 'steps', name: 'Bone Loss', tag: 'Bone Loss', title: 'Severe bone loss is <em>reversible.</em>', // BugHerd #92: moved up to sit right after the cover
+      intro: 'Many patients arrive having been told they no longer qualify for implants. The bone can be rebuilt.',
+      steps: [
+        { title: 'Why it happens', text: 'Roots stimulate the jaw when you chew. Lose the root and the jaw loses its function and deteriorates. Dentures do not replace roots, so they do not protect the bone. Advanced gum disease eats bone directly.' },
+        { title: 'Grafting', text: 'Bone material from you or a donor source is placed where the ridge has receded and fuses with the existing bone to restore height and width.' },
+        { title: 'Ridge splitting', text: 'When the ridge is too narrow, it is divided and graft material placed in the middle, so it heals wider and deeper and can hold an implant securely.' },
+        { title: 'The implant', text: 'Once the bone is solid, implants restore function, protect the jaw from further recession, and let you eat, speak and smile comfortably again.' },
+      ],
+      image: { src: '/media/img/ridge-augmentation-model.jpg', alt: 'A model of a ridge augmentation' },
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/jaw-bone-loss.jpg' },
@@ -49,19 +60,8 @@ export default {
       photos: [
         { src: '/media/img/older-couple-smiling.jpg', alt: 'A couple smiling together' },
         { src: '/media/img/dentures-patient-eating.jpg', pos: '90% 40%', alt: 'A denture patient eating comfortably' },
-        { src: '/media/img/hybrid-denture-model.jpg', alt: 'An implant-retained denture' },
+        { src: '/media/img/hybrid-denture-model.jpg', pos: '90% 50%', alt: 'An implant-retained denture' }, // BugHerd #91
       ],
-    },
-    {
-      type: 'steps', name: 'Bone Loss', tag: 'Bone Loss', title: 'Severe bone loss is <em>reversible.</em>',
-      intro: 'Many patients arrive having been told they no longer qualify for implants. The bone can be rebuilt.',
-      steps: [
-        { title: 'Why it happens', text: 'Roots stimulate the jaw when you chew. Lose the root and the jaw loses its function and deteriorates. Dentures do not replace roots, so they do not protect the bone. Advanced gum disease eats bone directly.' },
-        { title: 'Grafting', text: 'Bone material from you or a donor source is placed where the ridge has receded and fuses with the existing bone to restore height and width.' },
-        { title: 'Ridge splitting', text: 'When the ridge is too narrow, it is divided and graft material placed in the middle, so it heals wider and deeper and can hold an implant securely.' },
-        { title: 'The implant', text: 'Once the bone is solid, implants restore function, protect the jaw from further recession, and let you eat, speak and smile comfortably again.' },
-      ],
-      image: { src: '/media/img/ridge-augmentation-model.jpg', alt: 'A model of a ridge augmentation' },
     },
     {
       type: 'proof', name: 'The Proof', patient: 'michael', title: 'A whole mouth, <em>rebuilt.</em>',

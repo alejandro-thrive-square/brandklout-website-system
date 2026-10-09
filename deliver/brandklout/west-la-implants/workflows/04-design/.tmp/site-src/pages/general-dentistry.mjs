@@ -21,18 +21,16 @@ export default {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/hygienist-procedure.jpg' },
       text: 'Most serious dental problems began as small ones that nobody looked at. Two cleanings a year is the cheapest dentistry there is.',
       after: ['Each visit is tailored to you, with intraoral cameras and digital X-rays that catch decay, gum disease and even oral cancer early.'],
-    },
-    {
-      type: 'rail', name: 'The Services', tag: 'The Services', title: 'Six things done <em>here.</em>',
-      cards: [
+      /* BugHerd #94: the six services beside the statement as an accordion list; the horizontal rail
+         ("The Services") that carried them is gone */
+      services: { label: 'General dentistry services', items: [
         { title: 'Preventive dentistry', text: 'Cleanings, digital X-rays, oral cancer screenings and fluoride. Twice a year, tailored to you, with the best technology in the room.' },
         { title: 'Emergency dentistry', text: 'Cracked or broken teeth, broken restorations, knocked-out teeth, toothaches and bleeding gums, with same-day and next-day appointments.' },
         { title: 'Crowns and bridges', text: 'Custom crowns restore damaged or root-canal-treated teeth; bridges replace missing ones. Same-day crowns mean you leave restored.' },
         { title: 'Fillings and sealants', text: 'Tooth-coloured composite fillings as the first answer to a cavity, with sealants to make them last.' },
         { title: 'Root canals', text: 'For deeper decay, root canal therapy that saves the tooth, made pain-free with local anaesthetic and sedation where wanted.' },
         { title: 'Pediatric dentistry', text: 'Children of any age, with the aim of teaching them to make good decisions about their own smiles as they grow.' },
-      ],
-      end: { title: 'Something else?', label: 'Ask the team', href: '#invitation' },
+      ] },
     },
     {
       type: 'steps', name: 'The First Visit', tag: 'The First Visit', title: 'Your first hour <em>here.</em>',
@@ -59,7 +57,7 @@ export default {
       ],
       actions: [{ href: '/what-to-expect.html', label: 'What to expect at your first visit', kind: 'text' }],
       photos: [
-        { src: '/media/img/staff.jpg', alt: 'The West LA Implants team' },
+        { src: '/media/img/staff.jpg', pos: '100% 50%', still: true, alt: 'The West LA Implants team' }, // BugHerd #95: centred, no parallax
         { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
         { src: '/media/img/still-reception-neon.jpg', alt: 'The reception' },
       ],

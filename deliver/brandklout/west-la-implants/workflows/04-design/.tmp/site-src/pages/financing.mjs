@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Insurance & financing · Los Angeles',
       title: 'Cost should not decide your <em>health.</em>',
       lead: 'Cash, card or check. Most PPO plans. Six financing partners. A savings plan for patients without insurance. There is almost always a way.',
-      image: { src: '/media/img/patient-paying.jpg', alt: 'A patient paying for treatment by card' },
+      image: { src: '/media/img/doctor-handshake.jpg', pos: '40% 40%', alt: 'Dr. Barriere greeting a patient' }, // BugHerd #77
       actions: [{ href: '#invitation', label: 'Ask About Financing' }, { href: '/implant-cost.html', label: 'What decides the cost', kind: 'text' }],
       meta: [
         { b: 'PPO', span: 'Most carriers, in network' },
@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/front-desk-emily.jpg' },
-      text: 'Better oral health improves medical health, mental health and the plain quality of a day. Finances should not stand between you and that.',
-      after: ['The front desk checks your benefits before the consultation, files your claim afterwards, and walks you through the financing that fits.'],
-    },
-    {
-      type: 'ledger', name: 'The Partners', tag: 'The Partners', title: 'Six lenders, one <em>application</em> each.',
+      type: 'ledger', name: 'The Partners', tag: 'The Partners', title: 'Six lenders, one <em>application</em> each.', // BugHerd #78: moved up to sit right after the cover
       lead: 'Each applies in minutes, most from your phone. Ask the front desk which suits your situation.',
       figure: { value: 6, label: 'financing partners' },
       items: [
@@ -36,6 +31,11 @@ export default {
       ],
     },
     {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/front-desk-emily.jpg' },
+      text: 'Better oral health improves medical health, mental health and the plain quality of a day. Finances should not stand between you and that.',
+      after: ['The front desk checks your benefits before the consultation, files your claim afterwards, and walks you through the financing that fits.'],
+    },
+    {
       type: 'compare', name: 'The Savings Plan', tag: 'The Savings Plan', title: 'No insurance? The <em>in-house</em> plan.',
       intro: 'The West LA Implants Dental Savings Plan, for adults 18 and over. No waiting periods, no deductibles, no maximums.',
       columns: [
@@ -46,7 +46,7 @@ export default {
       note: 'Plan terms: cannot be combined with insurance or outside financing; the fee is a discount on the listed services, not insurance; unused services do not roll over or transfer; the plan runs one year from purchase and is non-refundable.',
     },
     {
-      type: 'strip', name: 'The Promise', tag: 'The Promise', title: 'Care you can <em>afford</em>, and a warranty behind it.',
+      type: 'strip', name: 'The Promise', tag: 'The Promise', title: 'Care you can <em>afford,</em> and a warranty behind it.',
       lead: 'Every implant the practice places carries a one-year warranty on the materials, covered in full.',
       body: [
         'Ask the front desk to run your benefits before your visit. If a treatment plan needs financing, they will help you apply on the spot.',
@@ -59,7 +59,7 @@ export default {
       ],
       actions: [{ href: '/implant-cost.html', label: 'What decides the cost', kind: 'text' }],
       photos: [
-        { src: '/media/img/still-front-desk-handshake.jpg', pos: '10% 50%', alt: 'Our front desk welcoming a patient' },
+        { src: '/media/img/front-desk-leslie.jpg', pos: '50% 40%', alt: 'Leslie welcomed at the front desk' }, // BugHerd #79
         { src: '/media/img/front-desk-receptionist.jpg', alt: 'The front desk at West LA Implants' },
         { src: '/media/img/doctor-patient-2.jpg', pos: '60% 40%', alt: 'Dr. Barriere with a patient' },
       ],

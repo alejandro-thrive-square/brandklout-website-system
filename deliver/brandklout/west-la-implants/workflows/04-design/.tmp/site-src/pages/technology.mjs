@@ -20,12 +20,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/dental-xray.png' },
-      text: 'An implant is a millimetre from a nerve, a sinus, a neighbouring root. Free-hand, it is placed by feel. Guided, it is placed by the plan.',
-      after: ['The robot does not replace the surgeon. It removes the guessing from the surgeon’s hands, and lets him focus on you.'],
-    },
-    {
-      type: 'steps', name: 'The Workflow', tag: 'The Workflow', title: 'Scan. Plan. Guide. <em>Restore.</em>',
+      type: 'steps', name: 'The Workflow', tag: 'The Workflow', title: 'Scan. Plan. Guide. <em>Restore.</em>', // BugHerd #44: moved up to sit right after the cover
       intro: 'Diagnostics, planning, surgery and the final teeth all happen under one roof, on one digital model of your mouth.',
       steps: [
         { title: 'Scan', text: 'A cone-beam CT captures your jaw in seconds, at a minimal radiation dose, with no bite plates or film. An intraoral scanner maps your teeth without impression trays.' },
@@ -34,6 +29,11 @@ export default {
         { title: 'Restore', text: 'Temporary nanoceramic teeth are ready the same day. The final crowns, bridges and arches are designed on the same model and milled or printed in house.' },
       ],
       image: { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT imaging suite at West LA Implants' },
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/dental-xray.png' },
+      text: 'An implant is a millimetre from a nerve, a sinus, a neighbouring root. Free-hand, it is placed by feel. Guided, it is placed by the plan.',
+      after: ['The robot does not replace the surgeon. It removes the guessing from the surgeon’s hands, and lets him focus on you.'],
     },
     {
       type: 'ledger', name: 'The Suite', tag: 'The Suite', title: 'Eleven tools, one <em>reason.</em>',
@@ -79,7 +79,7 @@ export default {
       text: 'Leslie’s full arch was planned on her scan and placed to the plan. Her film is on the practice’s channel.',
     },
     {
-      type: 'faq', name: 'The Questions', title: 'Technology <em>questions.</em>',
+      type: 'faq', name: 'The Questions', tag: 'Frequently asked questions', title: 'Your questions about our technology, <em>answered.</em>', // BugHerd #52 #53
       items: [
         { q: 'Does a robot do the surgery?', a: 'No. Dr. Barriere does. Yomi® holds the handpiece to the planned position, angle and depth so the surgeon can focus on the patient rather than on measuring. He can override it at any moment.' },
         { q: 'Is robotic guidance safer?', a: 'It removes the free-hand variation in where an implant ends up, which is what protects nerves and sinuses and gives the final tooth a predictable foundation. Precision also means smaller incisions and faster healing.' },

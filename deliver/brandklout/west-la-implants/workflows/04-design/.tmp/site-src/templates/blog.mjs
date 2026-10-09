@@ -71,6 +71,13 @@ const HERO = {
   'why-would-i-get-dental-implants-after-a-tooth-extraction': ['stock-j-after-extraction.jpg', '50% 50%'],
 }
 const POS = {}
+/* BugHerd #105-#107: three index CARDS took another photo; their entries keep the hero above. Slug -> [image, focal point] */
+const CARD = {
+  'are-full-mouth-dental-implants-able-to-restore-the-l-168a3e3': ['patients-eating.jpg', '50% 50%'],
+  'is-it-possible-for-me-to-get-customized-dental-impla-739e461': ['emily-makeover-after.jpg', '100% 50%'],
+  'do-i-have-to-extract-all-my-teeth-to-get-dental-implants': ['patient-smile-portrait-4.jpg', '50% 50%'],
+}
+const card = (p) => (CARD[p.slug] ? { ...p, image: '/media/img/' + CARD[p.slug][0], imagePos: CARD[p.slug][1] } : p)
 
 function heroFor(d) {
   if (HERO[d.slug]) return '/media/img/' + HERO[d.slug][0]
@@ -172,10 +179,10 @@ const index = {
       type: 'cover', name: 'Arrival', kicker: 'The journal',
       title: 'Questions, <em>answered.</em>',
       lead: 'Short entries from the practice on the things patients ask most, from what a dental implant is made of to what to eat after surgery.',
-      image: { src: '/media/img/doctor-explaining.jpg', pos: '90% 40%', alt: 'Dr. Barriere explaining a case' },
+      image: { src: '/media/img/front-desk-emily.jpg', pos: '80% 40%', alt: 'The front desk at West LA Implants' }, // BugHerd #104 (the og image stays doctor-explaining)
       actions: [{ href: '#entries', label: 'Read the Entries' }, { href: '/faq.html', label: 'The short answers', kind: 'text' }],
     },
-    { type: 'postindex', name: 'The Entries', title: `${posts.length} <em>entries.</em>`, lead: 'Newest first.', posts },
+    { type: 'postindex', name: 'The Entries', title: `${posts.length} <em>entries.</em>`, lead: 'Newest first.', posts: posts.map(card) },
     { type: 'invite', name: 'Invitation', title: 'Ask it in <em>person.</em>', lead: 'A consultation answers the question for your own mouth.', next: ALWAYS },
   ],
 }

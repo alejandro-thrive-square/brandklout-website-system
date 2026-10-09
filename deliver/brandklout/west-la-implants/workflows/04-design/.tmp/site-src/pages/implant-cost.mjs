@@ -8,7 +8,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Dental implant cost · Los Angeles',
       title: 'An honest answer about <em>cost.</em>',
       lead: 'The price of an implant depends on your mouth, not on a menu. Here is what moves it, how the practice quotes, and how most patients pay.',
-      image: { src: '/media/img/patient-calculator.jpg', pos: '80% 50%', alt: 'A patient working through the cost of treatment' },
+      image: { src: '/media/img/front-desk-receptionist.jpg', pos: '20% 40%', alt: 'The front desk at West LA Implants' }, // BugHerd #75
       actions: [{ href: '#invitation', label: 'Request a Quote After a Scan' }, { href: '/financing.html', label: 'Financing options', kind: 'text' }],
       meta: [
         { b: 'After a scan', span: 'Never before' },
@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/using-laptop.jpg' },
-      text: 'Implants cost more up front than a bridge or a denture. They are also the only replacement that does not have to be redone, relined or replaced every few years.',
-      after: ['The practice will file your insurance claim, connect you with financing that breaks the fee into monthly payments, and tell you the number after a scan, not a guess before one.'],
-    },
-    {
-      type: 'ledger', name: 'The Factors', tag: 'The Factors', title: 'Six things that move the <em>number.</em>',
+      type: 'ledger', name: 'The Factors', tag: 'The Factors', title: 'Six things that move the <em>number.</em>', // BugHerd #76: moved up to sit right after the cover
       lead: 'Every quote is built from these. Ask about each one at your consultation.',
       figure: { value: 6, label: 'factors in every quote' },
       items: [
@@ -34,6 +29,11 @@ export default {
         { b: 'Materials', span: 'Titanium or zirconia implants; porcelain, acrylic or zirconia teeth.' },
         { b: 'Sedation', span: 'Nitrous, oral or IV, chosen with you.' },
       ],
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/using-laptop.jpg' },
+      text: 'Implants cost more up front than a bridge or a denture. They are also the only replacement that does not have to be redone, relined or replaced every few years.',
+      after: ['The practice will file your insurance claim, connect you with financing that breaks the fee into monthly payments, and tell you the number after a scan, not a guess before one.'],
     },
     {
       type: 'compare', name: 'The Comparison', tag: 'The Comparison', title: 'Initial cost against <em>lifetime</em> cost.',

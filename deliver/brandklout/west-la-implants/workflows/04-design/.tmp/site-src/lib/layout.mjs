@@ -11,11 +11,14 @@
    ========================================================================== */
 import { SITE, INDEX } from './site.mjs'
 
+/* the two hubs joined the bar in BugHerd round 3 (#59 #60) */
 const NAV_LINKS = [
   ['/dental-implants.html', 'Implants'],
+  ['/surgery-and-care.html', 'Surgery &amp; Care'],
   ['/technology.html', 'Technology'],
   ['/dr-tony-barriere.html', 'Dr. Barriere'],
   ['/results.html', 'Results'],
+  ['/the-practice.html', 'The Practice'],
   ['/contact.html', 'Contact'],
 ]
 
@@ -58,18 +61,23 @@ export function drawer() {
 </div>`
 }
 
+/* BugHerd #65: the name and the line centred above, then five columns (office, hours, the three link groups) */
 export function footer() {
   const cols = INDEX.slice(0, 3).map(
     (g) => `<div><div class="footer_title">${g.group}</div><ul>${g.links.map(([h, l]) => `<li><a href="${h}">${l}</a></li>`).join('')}</ul></div>`,
   ).join('\n      ')
   return `<footer class="footer_component">
   <div class="container-large">
+    <div class="footer_brand">
+      <div class="footer_logo nav_logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="brand_wordmark">West LA <em>Implants</em></span></div>
+      <p class="footer_about">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd.<br>Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
+    </div>
     <div class="footer_grid">
       <div>
-        <div class="footer_logo nav_logo"><img src="/media/img/logo-icon-white.png" alt=""><span class="brand_wordmark">West LA <em>Implants</em></span></div>
-        <p class="footer_about">Dental implants, cosmetic dentistry and oral surgery on Wilshire Blvd. Minutes from Brentwood, Santa Monica, Westwood, Century City and Culver City.</p>
         <div class="footer_title">Los Angeles office</div>
         <p>${SITE.address1}<br>${SITE.address2}<br><a href="${SITE.phoneNewHref}">${SITE.phoneNew}</a> new patients<br><a href="${SITE.phoneCurrentHref}">${SITE.phoneCurrent}</a> current patients</p>
+      </div>
+      <div>
         <div class="footer_title">Hours</div>
         <p>Monday to Friday<br>9:00am to 5:00pm<br>Saturday &amp; Sunday closed</p>
       </div>

@@ -16,7 +16,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { page as shell } from './lib/layout.mjs';
 import { renderChapters, faqJsonLd } from './lib/blocks.mjs';
-import { applyImageMap } from './lib/image-map.mjs';
+import { applyImageMap, ASSET_ALT } from './lib/image-map.mjs';
 import { SITE } from './lib/site.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -113,7 +113,8 @@ for (const p of [...(await load('pages')), ...(await load('templates'))]) {
 {
   const misses = applyImageMap(pages, (f) => fs.existsSync(path.join(here, 'media', 'img', f)));
   // second pass: rows without an alt take the one this photo carries on the finished site
-  const alts = {};
+  // (seeded with the alts production keeps on assets whose captioned placements are gone, lib/image-map.mjs)
+  const alts = { ...ASSET_ALT };
   for (const p of pages) for (const m of p.body.matchAll(/<img[^>]*src="\/media\/img\/([^"]+)"[^>]*alt="([^"]*)"/g)) {
     if (m[2] !== '__ALT__' && m[2].length > (alts[m[1]] || '').length) alts[m[1]] = m[2];
   }

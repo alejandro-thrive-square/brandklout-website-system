@@ -11,7 +11,7 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Tony Barriere, DDS · implant & cosmetic dentist',
       title: 'Complex dentistry deserves <em>focused</em> experience.',
       lead: 'Dr. Barriere plans, places and restores every implant himself. He trained as a surgeon, keeps training, and built the practice around the tools that make the work predictable.',
-      image: { src: '/media/img/tonybarrerie_headshot_dentist_westlaimplants_frontfacing.jpg', alt: 'Dr. Tony Barriere, DDS', caption: 'Tony Barriere, DDS' },
+      image: { src: '/media/img/tonybarrerie_headshot_dentist_westlaimplants_frontfacing.jpg', pos: '50% 50%', still: true, alt: 'Dr. Tony Barriere, DDS', caption: 'Tony Barriere, DDS' }, // BugHerd #54: centred, no parallax
       actions: [{ href: '#invitation', label: 'Meet With Dr. Barriere' }, { href: filmHref(FILMS.experience), label: 'Watch: why experience matters', kind: 'text', ext: true }],
       meta: [
         { b: 'Ohio State', span: 'College of Dentistry' },
@@ -21,13 +21,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Philosophy', tag: 'The Philosophy', image: { src: '/media/img/doctor-explaining.jpg' },
-      text: 'No matter how much experience he gains, he has committed to never stop learning. In one recent year that meant more than three hundred hours of it.',
-      after: ['Most recently that training was on the Yomi® robot, which now assists in his implant surgeries. Continuing education is not a line on a page here. It is the practice’s operating principle.'],
-      figure: { value: 1000, suffix: '+', label: 'hours of continuing education' },
-    },
-    {
-      type: 'steps', name: 'The Training', tag: 'The Training', title: 'How a dentist becomes a <em>surgeon.</em>',
+      type: 'steps', name: 'The Training', tag: 'The Training', title: 'How a dentist becomes a <em>surgeon.</em>', // BugHerd #56: moved up to sit right after the cover
       steps: [
         { title: 'Dental school', text: 'Dr. Barriere completed his dental training at The Ohio State University College of Dentistry.' },
         { title: 'Surgical residency', text: 'He then chose an optional yearlong surgical residency through NYU Langone Hospital, the training that underpins the grafting, extraction and implant work the practice is known for.' },
@@ -35,6 +29,12 @@ export default {
         { title: 'The memberships', text: 'The American Academy of Cosmetic Dentistry, the American Academy of Implant Dentistry and the American Dental Association.' },
       ],
       image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
+    },
+    {
+      type: 'statement', name: 'The Philosophy', tag: 'The Philosophy', image: { src: '/media/img/doctor-explaining.jpg' },
+      text: 'No matter how much experience he gains, he has committed to never stop learning. In one recent year that meant more than three hundred hours of it.',
+      after: ['Most recently that training was on the Yomi® robot, which now assists in his implant surgeries. Continuing education is not a line on a page here. It is the practice’s operating principle.'],
+      figure: { value: 1000, suffix: '+', label: 'hours of continuing education' },
     },
     {
       type: 'ledger', name: 'The Standard', tag: 'The Standard', title: 'What he insists <em>on.</em>',

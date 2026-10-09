@@ -109,7 +109,7 @@ export default HOODS.map((h) => ({
         { title: 'Placement', text: 'Under IV or oral sedation, the implant is placed with Yomi® robotic guidance to the position, angle and depth in the plan. Temporary teeth often go on the same day.' },
         { title: 'The final tooth', text: 'After three or more months of healing, the custom crown, bridge or zirconia arch is fitted. Every implant carries a one-year warranty on the materials.' },
       ],
-      image: { src: '/media/img/still-yomi-closeup.jpg', alt: 'The Yomi robotic guidance arm' },
+      image: { src: '/media/img/front-desk-emily.jpg', pos: '60% 40%', alt: 'The front desk at West LA Implants' }, // BugHerd #47
     },
     {
       type: 'compare', name: 'The Options', tag: 'The Options', title: 'One tooth, several, or an <em>arch.</em>',

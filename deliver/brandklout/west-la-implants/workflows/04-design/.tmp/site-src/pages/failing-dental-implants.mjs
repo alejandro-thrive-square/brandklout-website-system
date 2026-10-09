@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/dental-xray.png' },
-      text: 'Peri-implantitis is gum disease around an implant. Left alone, it takes the gum, the bone, then the implant.',
-      after: ['Poor grafting, a bad extraction, bad bridgework or an implant placed at the wrong angle can all start it. Whatever started it, the treatment begins by removing every trace of infection.'],
-    },
-    {
-      type: 'ledger', name: 'The Signs', tag: 'The Signs', title: 'Seven things to <em>notice.</em>',
+      type: 'ledger', name: 'The Signs', tag: 'The Signs', title: 'Seven things to <em>notice.</em>', // BugHerd #74: moved up to sit right after the cover
       lead: 'Any one of these is a reason to be seen this week, not next year.',
       figure: { value: 7, label: 'warning signs' },
       items: [
@@ -35,6 +30,11 @@ export default {
         { b: 'Receding gums', span: 'The crown looking longer than it did.' },
         { b: 'Receding bone', span: 'Seen on an X-ray, felt as looseness.' },
       ],
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/dental-xray.png' },
+      text: 'Peri-implantitis is gum disease around an implant. Left alone, it takes the gum, the bone, then the implant.',
+      after: ['Poor grafting, a bad extraction, bad bridgework or an implant placed at the wrong angle can all start it. Whatever started it, the treatment begins by removing every trace of infection.'],
     },
     {
       type: 'steps', name: 'The Rescue', tag: 'The Rescue', title: 'How a failing implant is <em>treated.</em>',
@@ -61,7 +61,7 @@ export default {
       ],
       photos: [
         { src: '/media/img/hygienist-procedure.jpg', alt: 'A hygiene visit at West LA Implants' },
-        { src: '/media/img/still-emily-consult.jpg', alt: 'Emily in consultation' },
+        { src: '/media/img/patient-smile-portrait-3.jpg', pos: '50% 40%', alt: 'A West LA Implants patient smiling after his implant treatment' }, // BugHerd #73
         { src: '/media/img/three-single-implants.jpg', alt: 'Three single dental implants' },
       ],
       flip: true,

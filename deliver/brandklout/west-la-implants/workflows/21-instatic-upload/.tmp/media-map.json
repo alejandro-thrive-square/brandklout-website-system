@@ -1,6 +1,6 @@
 {
   "base": "https://west-la-implants-production.up.railway.app",
-  "uploadedAt": "2026-10-07T22:19:30.993Z",
+  "uploadedAt": "2026-10-09T18:19:14.455Z",
   "map": {
     "fonts/bodoni-moda-italic-var.woff2": {
       "id": "EZp7hY7sptJTtLKrXeltP",
@@ -26,6 +26,70 @@
       "reused": true,
       "uploadedAs": "bodoni-moda-var.woff2"
     },
+    "fonts/cormorant-garamond-italic-var.woff2": {
+      "id": "uJypzIKPabjERTn8JkwMO",
+      "url": "/uploads/hS_cbEkI3Uf5m7sVrIJES-cormorant-garamond-italic-var.woff2",
+      "uploadedAs": "cormorant-garamond-italic-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "cormorant-garamond-italic-var.woff2": {
+      "id": "uJypzIKPabjERTn8JkwMO",
+      "url": "/uploads/hS_cbEkI3Uf5m7sVrIJES-cormorant-garamond-italic-var.woff2",
+      "uploadedAs": "cormorant-garamond-italic-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "fonts/cormorant-garamond-normal-var.woff2": {
+      "id": "2FfQxUH7HMpIe6a3vslys",
+      "url": "/uploads/ZqqKje0fwb-GiHNkLySZO-cormorant-garamond-normal-var.woff2",
+      "uploadedAs": "cormorant-garamond-normal-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "cormorant-garamond-normal-var.woff2": {
+      "id": "2FfQxUH7HMpIe6a3vslys",
+      "url": "/uploads/ZqqKje0fwb-GiHNkLySZO-cormorant-garamond-normal-var.woff2",
+      "uploadedAs": "cormorant-garamond-normal-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "fonts/lora-italic-var.woff2": {
+      "id": "Xu3vcUOFGIfYhoDgHQdT-",
+      "url": "/uploads/5rWZd0Z7diWMPISb96ZVK-lora-italic-var.woff2",
+      "uploadedAs": "lora-italic-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "lora-italic-var.woff2": {
+      "id": "Xu3vcUOFGIfYhoDgHQdT-",
+      "url": "/uploads/5rWZd0Z7diWMPISb96ZVK-lora-italic-var.woff2",
+      "uploadedAs": "lora-italic-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "fonts/lora-normal-var.woff2": {
+      "id": "GcKndxe5ydxhgfybzfXhR",
+      "url": "/uploads/f2AoBazEaNBY4vb_DUiTS-lora-normal-var.woff2",
+      "uploadedAs": "lora-normal-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "lora-normal-var.woff2": {
+      "id": "GcKndxe5ydxhgfybzfXhR",
+      "url": "/uploads/f2AoBazEaNBY4vb_DUiTS-lora-normal-var.woff2",
+      "uploadedAs": "lora-normal-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
     "fonts/manrope-var.woff2": {
       "id": "FELgEkgYMbX1fxZ3GQ-NG",
       "url": "/uploads/6gNIDElj53x4YcodnajZT-manrope-var.woff2",
@@ -41,34 +105,26 @@
     "fonts/playfair-display-italic-var.woff2": {
       "id": "JMtw845-tSkevz5hxN5eP",
       "url": "/uploads/Hql79riIRYO_zQ4cgFUzu-playfair-display-italic-var.woff2",
-      "uploadedAs": "playfair-display-italic-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "playfair-display-italic-var.woff2"
     },
     "playfair-display-italic-var.woff2": {
       "id": "JMtw845-tSkevz5hxN5eP",
       "url": "/uploads/Hql79riIRYO_zQ4cgFUzu-playfair-display-italic-var.woff2",
-      "uploadedAs": "playfair-display-italic-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "playfair-display-italic-var.woff2"
     },
     "fonts/playfair-display-normal-var.woff2": {
       "id": "1t61ETHg2rQ1LAo1Lb8Wg",
       "url": "/uploads/hg5ePe3ERpiBqHI5yPIll-playfair-display-normal-var.woff2",
-      "uploadedAs": "playfair-display-normal-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "playfair-display-normal-var.woff2"
     },
     "playfair-display-normal-var.woff2": {
       "id": "1t61ETHg2rQ1LAo1Lb8Wg",
       "url": "/uploads/hg5ePe3ERpiBqHI5yPIll-playfair-display-normal-var.woff2",
-      "uploadedAs": "playfair-display-normal-var.woff2",
-      "width": null,
-      "height": null,
-      "variants": 0
+      "reused": true,
+      "uploadedAs": "playfair-display-normal-var.woff2"
     },
     "media/img/Implants3.jpeg": {
       "id": "xsadj8o7qffhIeVTY7a2w",
@@ -1117,18 +1173,14 @@
     "media/img/dental-implant-crown-placement.png": {
       "id": "FR4l-auorUgPGC0hEmm7G",
       "url": "/uploads/e_JQDr1TjGaCGk4WXbPjr-dental-implant-crown-placement.png",
-      "uploadedAs": "dental-implant-crown-placement.png",
-      "width": 1402,
-      "height": 1122,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "dental-implant-crown-placement.png"
     },
     "dental-implant-crown-placement.png": {
       "id": "FR4l-auorUgPGC0hEmm7G",
       "url": "/uploads/e_JQDr1TjGaCGk4WXbPjr-dental-implant-crown-placement.png",
-      "uploadedAs": "dental-implant-crown-placement.png",
-      "width": 1402,
-      "height": 1122,
-      "variants": 5
+      "reused": true,
+      "uploadedAs": "dental-implant-crown-placement.png"
     },
     "media/img/dental-xray-consult.jpg": {
       "id": "_W6Lp_FhuGRQGs6dV1cW1",
@@ -1825,6 +1877,86 @@
       "url": "/uploads/98DwmRGO7j5lNh-cMyXYD-patient-paying.jpg",
       "reused": true,
       "uploadedAs": "patient-paying.jpg"
+    },
+    "media/img/patient-smile-portrait-1.jpg": {
+      "id": "9JJBg9IOrvqLTJzhi53s5",
+      "url": "/uploads/nTYvzsaIqpYEAwIj35QeQ-patient-smile-portrait-1.jpg",
+      "uploadedAs": "patient-smile-portrait-1.jpg",
+      "width": 1694,
+      "height": 1479,
+      "variants": 6
+    },
+    "patient-smile-portrait-1.jpg": {
+      "id": "9JJBg9IOrvqLTJzhi53s5",
+      "url": "/uploads/nTYvzsaIqpYEAwIj35QeQ-patient-smile-portrait-1.jpg",
+      "uploadedAs": "patient-smile-portrait-1.jpg",
+      "width": 1694,
+      "height": 1479,
+      "variants": 6
+    },
+    "media/img/patient-smile-portrait-2.jpg": {
+      "id": "x44ux_Lt9MP-hGaiG03OS",
+      "url": "/uploads/qNWEebYKGXnpKs5fHb7ux-patient-smile-portrait-2.jpg",
+      "uploadedAs": "patient-smile-portrait-2.jpg",
+      "width": 1609,
+      "height": 1676,
+      "variants": 6
+    },
+    "patient-smile-portrait-2.jpg": {
+      "id": "x44ux_Lt9MP-hGaiG03OS",
+      "url": "/uploads/qNWEebYKGXnpKs5fHb7ux-patient-smile-portrait-2.jpg",
+      "uploadedAs": "patient-smile-portrait-2.jpg",
+      "width": 1609,
+      "height": 1676,
+      "variants": 6
+    },
+    "media/img/patient-smile-portrait-3.jpg": {
+      "id": "BgugG3F5Xbvi9KH0uyyhb",
+      "url": "/uploads/MFimnUUOIKxY7APGTdfnG-patient-smile-portrait-3.jpg",
+      "uploadedAs": "patient-smile-portrait-3.jpg",
+      "width": 1960,
+      "height": 1670,
+      "variants": 6
+    },
+    "patient-smile-portrait-3.jpg": {
+      "id": "BgugG3F5Xbvi9KH0uyyhb",
+      "url": "/uploads/MFimnUUOIKxY7APGTdfnG-patient-smile-portrait-3.jpg",
+      "uploadedAs": "patient-smile-portrait-3.jpg",
+      "width": 1960,
+      "height": 1670,
+      "variants": 6
+    },
+    "media/img/patient-smile-portrait-4.jpg": {
+      "id": "dapEsnEdUg-vJXovuPVyz",
+      "url": "/uploads/zjJ5dVth5XTKBXuoRSFLe-patient-smile-portrait-4.jpg",
+      "uploadedAs": "patient-smile-portrait-4.jpg",
+      "width": 1313,
+      "height": 1654,
+      "variants": 5
+    },
+    "patient-smile-portrait-4.jpg": {
+      "id": "dapEsnEdUg-vJXovuPVyz",
+      "url": "/uploads/zjJ5dVth5XTKBXuoRSFLe-patient-smile-portrait-4.jpg",
+      "uploadedAs": "patient-smile-portrait-4.jpg",
+      "width": 1313,
+      "height": 1654,
+      "variants": 5
+    },
+    "media/img/patient-smile-portrait-5.jpg": {
+      "id": "HDuwMmylFUGba_FME8_Yv",
+      "url": "/uploads/e0TJSbF19Cs9ejwP2phyS-patient-smile-portrait-5.jpg",
+      "uploadedAs": "patient-smile-portrait-5.jpg",
+      "width": 2400,
+      "height": 1600,
+      "variants": 7
+    },
+    "patient-smile-portrait-5.jpg": {
+      "id": "HDuwMmylFUGba_FME8_Yv",
+      "url": "/uploads/e0TJSbF19Cs9ejwP2phyS-patient-smile-portrait-5.jpg",
+      "uploadedAs": "patient-smile-portrait-5.jpg",
+      "width": 2400,
+      "height": 1600,
+      "variants": 7
     },
     "media/img/patient-smiling-2.jpg": {
       "id": "yOpveLgimyex1QR44uiK1",

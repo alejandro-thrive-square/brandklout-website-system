@@ -45,7 +45,7 @@ export default {
         { title: 'The work', text: 'Veneers in two visits: minimal enamel preparation and a digital scan, then bonding. Whitening in one visit. Invisalign® over months. A makeover in the order that gets you there fastest.' },
         { title: 'The reveal', text: 'Brush and floss as usual, keep your hygiene visits, and expect the result to last for years. Porcelain resists staining; enamel-coloured composite can be refreshed.' },
       ],
-      image: { src: '/media/img/still-emily-mirror.jpg', alt: 'Emily seeing her finished smile' },
+      image: { src: '/media/img/patient-smile-portrait-2.jpg', pos: '50% 50%', alt: 'A West LA Implants patient smiling after her treatment' }, // BugHerd #93
     },
     {
       type: 'proof', name: 'The Proof', title: 'Veneers, before and <em>after.</em>',

@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/still-doctor-xray-screen.jpg' },
-      text: 'Traditional dentures and some hybrids set porcelain teeth into an acrylic base. Two materials, one weak seam, and a plastic that stains and wears.',
-      after: ['A zirconia arch has no seam and no base. It is one piece, with the physical strength of titanium and the look of enamel.'],
-    },
-    {
-      type: 'ledger', name: 'The Material', tag: 'The Material', title: 'Why zirconia, in <em>five</em> facts.',
+      type: 'ledger', name: 'The Material', tag: 'The Material', title: 'Why zirconia, in <em>five</em> facts.', // BugHerd #72: moved up to sit right after the cover
       lead: 'Leaders in implant dentistry consider this the superior full-arch restoration. Here is what the material actually does.',
       figure: { value: 5, label: 'reasons the practice chose it' },
       items: [
@@ -35,7 +30,12 @@ export default {
       ],
     },
     {
-      type: 'strip', name: 'The Craft', tag: 'The Craft', title: 'Designed to your <em>face</em>, not to a chart.',
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/still-doctor-xray-screen.jpg' },
+      text: 'Traditional dentures and some hybrids set porcelain teeth into an acrylic base. Two materials, one weak seam, and a plastic that stains and wears.',
+      after: ['A zirconia arch has no seam and no base. It is one piece, with the physical strength of titanium and the look of enamel.'],
+    },
+    {
+      type: 'strip', name: 'The Craft', tag: 'The Craft', title: 'Designed to your <em>face,</em> not to a chart.',
       lead: 'The bridge is shaped to your smile line, your lips and your gum line, then coloured to match your gums and shaded to the brightness you choose.',
       body: [
         'Secured to implants, the arch keeps the jawbone stimulated and healthy. It feels smooth against the gums and needs no adhesive, no soaking and no relines.',
@@ -49,8 +49,8 @@ export default {
       ],
       photos: [
         { src: '/media/img/michael_dentalpatient_reconstruction_barriere.jpg', pos: '30% 40%', alt: 'Michael after his full mouth reconstruction' },
-        { src: '/media/img/full-arch-model.jpg', alt: 'A full-arch bridge on four implants' },
-        { src: '/media/img/blog-prosthedontist-milling-implant-model.jpg', pos: '40% 50%', alt: 'A prosthesis being hand-finished in the lab' },
+        { src: '/media/img/patient-smile-portrait-2.jpg', pos: '60% 40%', alt: 'A West LA Implants patient smiling after her treatment' }, // BugHerd #70
+        { src: '/media/img/patient-smile-portrait-1.jpg', pos: '40% 40%', alt: 'A West LA Implants patient smiling after his treatment' }, // BugHerd #71
       ],
       flip: true,
     },

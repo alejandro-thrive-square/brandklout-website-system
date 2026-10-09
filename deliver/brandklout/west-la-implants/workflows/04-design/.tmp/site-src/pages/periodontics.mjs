@@ -18,12 +18,7 @@ export default {
       ],
     },
     {
-      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/hygienist-procedure.jpg' },
-      text: 'Gingivitis becomes periodontitis, then bone loss, then tooth loss. The same bacteria are linked to diabetes, blood pressure and heart disease.',
-      after: ['Even with implants, the gums around them can get the same disease. Keeping them healthy is what keeps the implant.'],
-    },
-    {
-      type: 'ledger', name: 'The Procedures', tag: 'The Procedures', title: 'Six treatments, most of them <em>laser.</em>',
+      type: 'ledger', name: 'The Procedures', tag: 'The Procedures', title: 'Six treatments, most of them <em>laser.</em>', // BugHerd #89: moved up to sit right after the cover
       figure: { value: 6, label: 'periodontal procedures' },
       items: [
         { b: 'Scaling and root planing', span: 'Laser removal of plaque and tartar above and below the gum line, with less scraping and discomfort than the traditional method.' },
@@ -33,6 +28,11 @@ export default {
         { b: 'Gingival grafts', span: 'Gum tissue grafted onto areas of recession to cover roots and save natural teeth.' },
         { b: 'Frenectomy', span: 'Release of a tight lip or tongue tie to restore full range of motion in the mouth.' },
       ],
+    },
+    {
+      type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/hygienist-procedure.jpg' },
+      text: 'Gingivitis becomes periodontitis, then bone loss, then tooth loss. The same bacteria are linked to diabetes, blood pressure and heart disease.',
+      after: ['Even with implants, the gums around them can get the same disease. Keeping them healthy is what keeps the implant.'],
     },
     {
       type: 'steps', name: 'The Visit', tag: 'The Visit', title: 'What a periodontal visit looks <em>like.</em>',

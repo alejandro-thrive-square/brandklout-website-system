@@ -6,9 +6,9 @@ export default {
   chapters: [
     {
       type: 'cover', name: 'Arrival', kicker: 'Referring doctors · Los Angeles',
-      title: 'Your patient, our <em>surgery</em>, back to you.',
+      title: 'Your patient, our <em>surgery,</em> back to you.',
       lead: 'Dr. Barriere accepts referrals for implant placement, full-arch treatment, grafting and sinus lifts, extractions and sedation cases. The restorative work stays with you if you want it to.',
-      image: { src: '/media/img/doctor-explaining.jpg', pos: '90% 40%', alt: 'Dr. Barriere explaining a case' },
+      image: { src: '/media/img/barriere_dentalpatient_welcoming_westlaimplants3.jpg', pos: '90% 40%', alt: 'Dr. Barriere with a patient in the treatment room' }, // BugHerd #108
       actions: [{ href: '#invitation', label: 'Refer a Patient' }, { href: '/technology.html', label: 'The surgical suite', kind: 'text' }],
       meta: [
         { b: 'Yomi®', span: 'Robot-guided placement' },
@@ -16,6 +16,16 @@ export default {
         { b: 'IV sedation', span: 'For your anxious patients' },
         { b: 'Same week', span: 'Urgent cases seen' },
       ],
+    },
+    {
+      type: 'steps', name: 'The Process', tag: 'The Process', title: 'How a referral <em>runs.</em>', // BugHerd #111: moved up to sit right after the cover
+      steps: [
+        { title: 'You refer', text: 'Call the office and ask for the back office manager, or send the form below with the patient’s details and the reason. Urgent cases are seen the same week.' },
+        { title: 'We consult', text: 'A CBCT scan, a plan, and a written report back to you with the proposed implant positions and timing.' },
+        { title: 'We place', text: 'Surgery under the sedation the patient needs, with Yomi® guidance. Post-operative instructions and after-hours access are ours to handle.' },
+        { title: 'You restore', text: 'Once integrated, the patient returns to you with the implant positions and components documented, or we restore in house if you prefer.' },
+      ],
+      image: { src: '/media/img/front-desk-receptionist.jpg', pos: '50% 30%', alt: 'The front desk at West LA Implants' }, // BugHerd #110
     },
     {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/still-doctor-xray-screen.jpg' },
@@ -35,16 +45,6 @@ export default {
       ],
     },
     {
-      type: 'steps', name: 'The Process', tag: 'The Process', title: 'How a referral <em>runs.</em>',
-      steps: [
-        { title: 'You refer', text: 'Call the office and ask for the back office manager, or send the form below with the patient’s details and the reason. Urgent cases are seen the same week.' },
-        { title: 'We consult', text: 'A CBCT scan, a plan, and a written report back to you with the proposed implant positions and timing.' },
-        { title: 'We place', text: 'Surgery under the sedation the patient needs, with Yomi® guidance. Post-operative instructions and after-hours access are ours to handle.' },
-        { title: 'You restore', text: 'Once integrated, the patient returns to you with the implant positions and components documented, or we restore in house if you prefer.' },
-      ],
-      image: { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT suite' },
-    },
-    {
       type: 'strip', name: 'The Standard', tag: 'The Standard', title: 'The same surgeon, the same <em>suite.</em>',
       lead: 'Dr. Barriere trained at Ohio State and completed a yearlong surgical residency at NYU Langone. Every referred case is planned on CBCT and placed with guidance.',
       body: ['Communication is the whole relationship. You receive a report after the consultation, after surgery and at integration, and a call whenever something changes.'],
@@ -56,7 +56,7 @@ export default {
       ],
       actions: [{ href: '/dr-tony-barriere.html', label: 'About Dr. Barriere', kind: 'text' }],
       photos: [
-        { src: '/media/img/yomi-robot-surgical.jpg', alt: 'The Yomi robot' },
+        { src: '/media/img/hygienist-procedure.jpg', pos: '80% 40%', alt: 'A hygiene visit at West LA Implants' }, // BugHerd #112
         { src: '/media/img/surgical-kit.jpg', alt: 'The implant surgical motor used at West LA Implants' },
         { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
       ],

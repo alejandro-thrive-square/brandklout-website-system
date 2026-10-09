@@ -8,13 +8,25 @@ export default {
       type: 'cover', name: 'Arrival', kicker: 'Your first visit · Los Angeles',
       title: 'Know what happens <em>before</em> it happens.',
       lead: 'The first visit, the implant process, and the instructions you will be handed after surgery, all written down here so nothing is a surprise.',
-      image: { src: '/media/img/front-desk-leslie.jpg', pos: '90% 50%', alt: 'Leslie welcomed at the front desk' },
+      image: { src: '/media/img/doctor-patient-2.jpg', pos: '70% 40%', alt: 'Dr. Barriere showing Michael a model of his new teeth' }, // BugHerd #101
       actions: [{ href: '#invitation', label: 'Book a First Visit' }, { href: '#instructions', label: 'Post-operative guidelines', kind: 'text' }],
       meta: [
         { b: '1 hour', span: 'Your first exam' },
         { b: 'Forms', span: 'At the desk, or sent ahead' },
         { b: '24 hours', span: 'Notice if you must cancel' },
         { b: 'After hours', span: 'Surgical patients called back' },
+      ],
+    },
+    {
+      type: 'ledger', name: 'The Implant Path', tag: 'The Implant Path', title: 'The implant process, in <em>five</em> steps.', // BugHerd #103: moved up to sit right after the cover
+      lead: 'Even if other dentists have said you do not qualify, Dr. Barriere may be able to help. The second opinion is free.',
+      figure: { value: 5, label: 'steps from scan to smile' },
+      items: [
+        { b: 'Meet the team', span: 'A team that places hundreds of implants a year and treats you like family from the first visit.' },
+        { b: 'Plan your smile', span: 'Intraoral scans and a CBCT build a precise roadmap; smile simulation shares it with you, and you can change it.' },
+        { b: 'A custom treatment plan', span: 'No cookie-cutter treatment. You take an active role and choose what works for you.' },
+        { b: 'Cost and payment', span: 'In-house savings plan, third-party financing and most PPO plans, so cost is not the barrier.' },
+        { b: 'Receiving your implants', span: 'Yomi® robotic guidance, IV, oral or nitrous sedation, and temporary teeth the same day where the case allows.' },
       ],
     },
     {
@@ -30,19 +42,7 @@ export default {
         { title: 'The cleaning and the read', text: 'The hygienist cleans your teeth, then Dr. Barriere completes the exam and gives his recommendations. Smile simulation shows your after for implants, veneers or Invisalign®.' },
         { title: 'The plan', text: 'A written treatment plan, a quote, and the financing worked out with the front desk. Same-day crowns and emergency visits mean many things are handled on the spot.' },
       ],
-      image: { src: '/media/img/cbct-emily.jpg', alt: 'Emily at the CBCT scanner' },
-    },
-    {
-      type: 'ledger', name: 'The Implant Path', tag: 'The Implant Path', title: 'The implant process, in <em>five</em> steps.',
-      lead: 'Even if other dentists have said you do not qualify, Dr. Barriere may be able to help. The second opinion is free.',
-      figure: { value: 5, label: 'steps from scan to smile' },
-      items: [
-        { b: 'Meet the team', span: 'A team that places hundreds of implants a year and treats you like family from the first visit.' },
-        { b: 'Plan your smile', span: 'Intraoral scans and a CBCT build a precise roadmap; smile simulation shares it with you, and you can change it.' },
-        { b: 'A custom treatment plan', span: 'No cookie-cutter treatment. You take an active role and choose what works for you.' },
-        { b: 'Cost and payment', span: 'In-house savings plan, third-party financing and most PPO plans, so cost is not the barrier.' },
-        { b: 'Receiving your implants', span: 'Yomi® robotic guidance, IV, oral or nitrous sedation, and temporary teeth the same day where the case allows.' },
-      ],
+      image: { src: '/media/img/front-desk-receptionist.jpg', pos: '50% 30%', alt: 'The front desk at West LA Implants' }, // BugHerd #102
     },
     {
       type: 'tabs', name: 'The Instructions', tag: 'The Instructions', id: 'instructions', title: 'After <em>surgery.</em>',

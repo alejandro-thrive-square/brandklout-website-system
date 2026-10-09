@@ -39,7 +39,7 @@ export default {
         { title: 'Healing', text: 'Three or more months while the implants integrate. A temporary denture, or your adapted one, is worn throughout.' },
         { title: 'The attachment', text: 'Ball or bar attachments are fitted and the final denture clicks on. It can be made removable for cleaning or permanently attached.' },
       ],
-      image: { src: '/media/img/still-doctor-xray-screen.jpg', alt: 'Dr. Barriere reviewing X-rays on the operatory screen' },
+      image: { src: '/media/img/dental-implant-crown-placement.png', pos: '50% 50%', alt: 'A dental implant with its crown being placed' }, // BugHerd #67
     },
     {
       type: 'strip', name: 'The Benefit', tag: 'The Benefit', title: 'Bite, chew, laugh, <em>forget</em> about it.',

@@ -11,7 +11,11 @@
    - alt omitted = the alt this file carries elsewhere on the FINISHED site (filled after every swap;
      Instatic keeps one alt per asset and the longest wins, so build.mjs also reports any photo that
      still carries two different alts)
-   Journal heroes live in templates/blog.mjs (HERO) because the index card and the entry share them. */
+   Journal heroes live in templates/blog.mjs (HERO) because the index card and the entry share them.
+   BugHerd round 3 (workflows/21-instatic-upload/apply-bugherd-round3.mjs, 2026-10-08) re-pointed its
+   slots in the page modules themselves; the eight rows those slots superseded are gone (all-on-4 steps,
+   bone-grafting / failing-dental-implants / our-practice / tooth-extractions strip, financing /
+   implant-cost / tooth-extractions arrival). */
 /* neighbourhood strips: a verified photo of the place where one exists (Freepik titles name it);
    Brentwood, Century City and Culver City had none, so they show the practice's own front desk */
 const HOOD_PHOTO = { 'beverly-hills': 'stock-hood-beverly-hills.jpg', 'santa-monica': 'stock-hood-santa-monica.jpg', westwood: 'stock-hood-westwood.jpg' }
@@ -20,11 +24,9 @@ const HOOD_POS = {"beverly-hills": "50% 45%", "santa-monica": "45% 30%", "westwo
 
 export const IMAGE_MAP = [
   ['accessibility', 'arrival', 'still-front-desk-handshake.jpg', 'using-laptop.jpg', '50% 50%', 'Using the website on a laptop'],
-  ['all-on-4', 'steps', 'still-yomi-robot-team.jpg', 'still-cbct-suite.jpg'],
   ['all-on-4', 'strip', 'full-arch-model.jpg', 'jaw-bone-loss.jpg', '70% 50%', 'Illustration of bone loss in the jaw where teeth are missing'],
   ['all-on-4', 'strip', 'zirconia-model.jpg', 'periimplantitis-model.jpg', '50% 50%'],
   ['bone-grafting', 'arrival', 'bone-graft-model.jpg', 'stock-graft-hero.jpg', '45% 50%', 'Bone graft granules being packed into a tooth socket'],
-  ['bone-grafting', 'strip', 'still-cbct-suite.jpg', 'still-yomi-closeup.jpg', '30% 50%'],
   ['cosmetic-dentistry', 'arrival', 'veneer-patient.jpg', 'emily-makeover-after.jpg', '90% 50%', 'A patient smiling after her smile makeover'],
   ['cosmetic-dentistry', 'rail', 'whitening-patient.jpg', 'stock-cosmetic-whitening.jpg', '55% 55%', 'Professional teeth whitening in the chair'],
   ['cosmetic-dentistry', 'rail', 'implant-crown-model.jpg', 'stock-cosmetic-crown.jpg', '48% 50%', 'A porcelain crown being fitted'],
@@ -39,17 +41,14 @@ export const IMAGE_MAP = [
   ['dental-implants-santa-monica', 'arrival', 'still-front-desk-handshake.jpg', 'yomi-robot-surgical.jpg', '70% 50%'],
   ['dental-implants-westwood', 'arrival', 'waiting-room.jpg', 'yomi-robot-surgical.jpg', '50% 45%'],
   ['dr-tony-barriere', 'strip', 'still-doctor-masked.jpg', 'barriere_dentalpatient_welcoming_westlaimplants3.jpg', '70% 50%', 'Dr. Barriere welcoming a patient'],
-  ['failing-dental-implants', 'strip', 'still-emily-consult.jpg', 'stock-failing-floss.jpg', '50% 45%', 'Flossing every day, the first defence for an implant'],
   ['failing-dental-implants', 'strip', 'three-single-implants.jpg', 'stock-failing-clean.jpg', '55% 45%', 'Cleaning along the gumline with a water flosser'],
   ['faq', 'arrival', 'emily-practice.jpg', 'still-emily-consult.jpg', '60% 20%'], // both faces in frame (BugHerd #22; the cover image is .still, no parallax)
-  ['financing', 'arrival', 'patient-paying.jpg', 'front-desk-emily.jpg', '75% 50%'],
   ['financing', 'strip', 'doctor-patient-2.jpg', 'doctor-patient-2.jpg', '30% 40%'],
   ['general-dentistry', 'arrival', 'patient-smiling.jpg', 'hygienist-procedure.jpg', '70% 50%', 'A hygiene visit at West LA Implants'],
   ['general-dentistry', 'strip', 'still-reception-neon.jpg', 'doctor-handshake.jpg', '70% 30%'],
   ['hybrid-dentures', 'steps', 'surgical-kit.jpg', 'still-cbct-suite.jpg'],
   ['hybrid-dentures', 'strip', 'implant-post-model.jpg', 'full-arch-model.jpg'],
   ['hybrid-dentures', 'strip', 'still-emily-consult.jpg', 'hygienist-procedure.jpg', '70% 50%', 'A hygiene visit at West LA Implants'],
-  ['implant-cost', 'arrival', 'patient-calculator.jpg', 'doctor-explaining.jpg', '90% 40%'],
   ['implant-cost', 'strip', 'patient-paying.jpg', 'still-emily-consult.jpg', '50% 50%'],
   ['implant-cost', 'strip', 'front-desk-emily.jpg', 'stock-cost-warranty.jpg', '55% 50%', 'Signing the written treatment plan'],
   ['implant-cost', 'strip', 'doctor-handshake.jpg', 'doctor-patient-2.jpg', '30% 40%'],
@@ -60,7 +59,6 @@ export const IMAGE_MAP = [
   ['index', 'precision', 'still-cbct-suite.jpg', 'still-yomi-robot-team.jpg'],
   ['index', 'precision', 'barriere_dentalpractice_dentalimplant_westla2.jpg', 'yomi-technology.jpg'],
   ['missing-teeth', 'strip', 'older-couple-smiling.jpg', 'painful-dentures.jpg', '70% 50%', 'A denture wearer holding her jaw where a loose denture rubs'],
-  ['our-practice', 'strip', 'still-reception-neon.jpg', 'doctor-cosmetic.jpg', '42% 60%', 'Dr. Barriere with a patient beside the in-house 3D printers'],
   ['periodontics', 'steps', 'practice-patient-3.jpg', 'barriere_dentalpractice_dentalimplant_westla2.jpg', '60% 50%', 'Dr. Barriere reviewing a scan on screen'], // the step: X-rays and images on screen
   ['periodontics', 'strip', 'still-doctor-xray-screen.jpg', 'stock-perio-laser.jpg', '52% 45%', 'Laser treatment along the gum line'],
   ['periodontics', 'strip', 'three-single-implants.jpg', 'bone-graft-model.jpg', '70% 50%'],
@@ -68,14 +66,29 @@ export const IMAGE_MAP = [
   ['sedation-dentistry', 'arrival', 'sedation-patient-smiling.jpg', 'stock-sedation-hero.jpg', '40% 40%', 'A relaxed patient under light sedation in the dental chair'],
   ['sedation-dentistry', 'strip', 'waiting-room.jpg', 'stock-sedation-comfort.jpg', '25% 45%', 'A patient resting in a reclined dental chair'],
   ['thank-you', 'arrival', 'still-doctor-patient-hug.jpg', 'front-desk-emily.jpg', '25% 50%'],
-  ['tooth-extractions', 'arrival', 'wisdom-tooth-extraction.jpg', 'wisdom-tooth-extraction.jpg', '58% 35%'],
   ['tooth-extractions', 'steps', 'woman-tea.jpg', 'stock-extraction-aftercare.jpg', '66% 38%', 'Resting at home with a cold pack after an extraction'],
   ['financing', 'statement', 'front-desk-emily.jpg', 'using-laptop.jpg', null, ''],
   ['general-dentistry', 'statement', 'hygienist-procedure.jpg', 'dental-xray.png', null, ''],
   ['implant-supported-dentures', 'statement', 'dentures-patient-eating.jpg', 'painful-dentures.jpg', null, ''],
   ['cosmetic-dentistry', 'rail', 'emily-makeover.jpg', 'emily-makeover.jpg', '66% 45%'],
-  ['tooth-extractions', 'strip', 'still-emily-consult.jpg', 'emily-implants.jpg', '50% 50%', 'Emily, who had crowns and implants at West LA Implants'],
 ]
+
+/* The alt a photo carries as an Instatic ASSET, where the page that captioned it no longer shows it:
+   BugHerd round 3 replaced those placements, production kept the asset's alt, so every '__ALT__' (the ad
+   pages, the rows above without an alt) must still resolve to it. build.mjs seeds its alt pass with these;
+   the five new photographs carry the alts round 3 wrote onto their assets. */
+export const ASSET_ALT = {
+  'doctor-cosmetic.jpg': 'Dr. Barriere with a patient beside the in-house 3D printers',
+  'doctor-explaining.jpg': 'Dr. Barriere explaining a case',
+  'full-arch-model.jpg': 'A full-arch bridge on four implants',
+  'michael-before-after.jpg': 'Michael smiling after his full mouth reconstruction',
+  'still-leslie-smile-tablet.jpg': 'Leslie holding up a photo of her new full-arch smile',
+  'patient-smile-portrait-1.jpg': 'A West LA Implants patient smiling after his treatment',
+  'patient-smile-portrait-2.jpg': 'A West LA Implants patient smiling after her treatment',
+  'patient-smile-portrait-3.jpg': 'A West LA Implants patient smiling after his implant treatment',
+  'patient-smile-portrait-4.jpg': 'A West LA Implants patient smiling after her treatment',
+  'patient-smile-portrait-5.jpg': 'A West LA Implants patient smiling after his treatment',
+}
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 
@@ -94,7 +107,8 @@ export function applyImageMap(pages, exists) {
     if (!re.test(seg)) { misses.push(`${slug}/${section}: ${from} not found`); continue }
     seg = seg.replace(re, (_, a, b) => {
       let attrs = (a + b).replace(/\s*alt="[^"]*"/, '')
-      const cls = ((attrs.match(/class="([^"]*)"/) || [])[1] || '').split(/\s+/).filter((c) => c && !/^fp-\d+-\d+$/.test(c))
+      // the row's focal point replaces the page's (fp- is the pre-Client-First name of object-position-)
+      const cls = ((attrs.match(/class="([^"]*)"/) || [])[1] || '').split(/\s+/).filter((c) => c && !/^(fp|object-position)-\d+-\d+$/.test(c))
       if (pos) cls.push('object-position-' + pos.split(/\s+/).map((v) => Math.round(parseFloat(v) / 10) * 10).join('-'))
       attrs = attrs.replace(/\s*class="[^"]*"/, '')
       const a2 = alt ?? '__ALT__' // filled from the finished pages by build.mjs, so a swapped-out caption can never win

@@ -19,6 +19,16 @@ export default {
       ],
     },
     {
+      type: 'steps', name: 'The Method', tag: 'The Method', title: 'From scan to solid <em>bone.</em>', // BugHerd #82: moved up to sit right after the cover
+      steps: [
+        { title: 'The scan', text: 'A cone-beam CT measures bone height, width and density and shows where the sinuses and nerves sit. That decides whether grafting is needed at all, and which kind.' },
+        { title: 'The graft', text: 'Under local anaesthetic or sedation, the gum is lifted, graft material is placed where bone has receded, and the site is closed. A membrane often protects it while it heals.' },
+        { title: 'Healing', text: 'The graft fuses with your own bone over a few months. Instructions cover cold foods and fluids on the first day, no spitting or straws, no strenuous exercise for 48 hours, and no dentures on the site for two weeks.' },
+        { title: 'The implant', text: 'Once the scan shows solid bone, the implant is placed with Yomi® guidance, by the same surgeon, in the same suite.' },
+      ],
+      image: { src: '/media/img/ridge-augmentation-model.jpg', alt: 'A 3D model of a ridge augmentation' },
+    },
+    {
       type: 'statement', name: 'The Reality', tag: 'The Reality', image: { src: '/media/img/jaw-bone-loss.jpg' },
       text: 'Roots keep the jaw alive. Without them the bone resorbs, the ridge thins, the lips lose their support and the face ages ahead of its time.',
       after: ['Many patients arrive having been told they no longer qualify for implants. Bone loss is reversible. It is a matter of rebuilding it, and of a surgeon who does that routinely.'],
@@ -32,16 +42,6 @@ export default {
         { title: 'Sinus lift', sub: 'Upper back jaw', rows: ['The sinus floor migrates down after upper molars are lost', 'The membrane is gently elevated and graft placed beneath it', 'A minimally invasive technique', 'Implants placed at the same time or later'] },
       ],
       note: 'Graft material comes from you, from a donor bank, or is synthetic. Dr. Barriere explains which at the consultation.',
-    },
-    {
-      type: 'steps', name: 'The Method', tag: 'The Method', title: 'From scan to solid <em>bone.</em>',
-      steps: [
-        { title: 'The scan', text: 'A cone-beam CT measures bone height, width and density and shows where the sinuses and nerves sit. That decides whether grafting is needed at all, and which kind.' },
-        { title: 'The graft', text: 'Under local anaesthetic or sedation, the gum is lifted, graft material is placed where bone has receded, and the site is closed. A membrane often protects it while it heals.' },
-        { title: 'Healing', text: 'The graft fuses with your own bone over a few months. Instructions cover cold foods and fluids on the first day, no spitting or straws, no strenuous exercise for 48 hours, and no dentures on the site for two weeks.' },
-        { title: 'The implant', text: 'Once the scan shows solid bone, the implant is placed with Yomi® guidance, by the same surgeon, in the same suite.' },
-      ],
-      image: { src: '/media/img/ridge-augmentation-model.jpg', alt: 'A 3D model of a ridge augmentation' },
     },
     {
       type: 'strip', name: 'The Standard', tag: 'The Standard', title: 'One surgeon for the graft <em>and</em> the implant.',
@@ -58,9 +58,9 @@ export default {
       ],
       actions: [{ href: '/what-to-expect.html#instructions', label: 'Post-operative guidelines', kind: 'text' }],
       photos: [
-        { src: '/media/img/sinus-lift-graphic.jpg', pos: '100% 30%', alt: 'A diagram of a sinus lift' },
-        { src: '/media/img/still-doctor-masked.jpg', alt: 'Dr. Barriere in surgery' },
-        { src: '/media/img/still-cbct-suite.jpg', alt: 'The CBCT suite' },
+        { src: '/media/img/hygienist-procedure.jpg', pos: '80% 40%', alt: 'A hygiene visit at West LA Implants' }, // BugHerd #83
+        { src: '/media/img/cbct-emily.jpg', pos: '90% 40%', alt: 'A patient positioned for a 3D cone-beam scan' }, // BugHerd #84
+        { src: '/media/img/sinus-lift-graphic.jpg', pos: '80% 50%', alt: 'Illustration of a sinus lift adding bone beneath the sinus' }, // BugHerd #85
       ],
       flip: true,
     },
