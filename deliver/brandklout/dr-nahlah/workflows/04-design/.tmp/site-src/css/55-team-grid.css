@@ -1,7 +1,7 @@
 /* Portrait cards. Kept in this page rather than the page kit because the
    team grid is the only place on the site that shows people at this size —
    adding it to the shared kit would put dead CSS on ten other pages. */
-.team_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
+.team_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,var(--space-medium))}
 @media(min-width:600px){ .team_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1000px){ .team_grid{grid-template-columns:repeat(3,1fr)} }
 .team_card{margin:0;display:grid;gap:0;align-content:start}
@@ -12,7 +12,7 @@
 .team_card:hover .team_image-wrapper img{transform:scale(1.045);filter:grayscale(0) contrast(1.04)}
 /* A hairline floor under the portrait so the card reads as one object on
    the white band, where the photo would otherwise float unattached. */
-.team_content{border-top:1px solid var(--line-strong);padding-top:1rem;display:grid;gap:.5rem}
+.team_content{border-top:1px solid var(--line-strong);padding-top:var(--space-small);display:grid;gap:var(--space-xsmall)}
 .team_name{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
   line-height:1.15;color:var(--fg)}
 .team_role{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;

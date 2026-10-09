@@ -35,8 +35,8 @@
 .section_arrival h1 em{font-style:italic;color:var(--accent-lg)}
 .section_arrival .arrival_lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
 .section_arrival .arrival_actions{display:flex;flex-wrap:wrap;gap:.85rem}
-.section_arrival .arrival_meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
-  padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
+.section_arrival .arrival_meta{display:flex;flex-wrap:wrap;gap:clamp(var(--space-small),3vw,2.75rem);
+  padding-top:clamp(var(--space-small),2.5vw,1.75rem);border-top:1px solid var(--line)}
 .section_arrival .arrival_meta div{display:grid;gap:.15rem}
 .section_arrival .arrival_meta b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
 .section_arrival .arrival_meta span{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}

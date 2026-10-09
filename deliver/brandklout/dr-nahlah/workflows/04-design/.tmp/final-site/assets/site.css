@@ -157,6 +157,62 @@ html {
   background:var(--bg);color:var(--fg-body);
 }
 
+/* ===== css/01a-framework.css ===== */
+/* Mirror of the Instatic Framework on https://staging.drnahlah.com, pulled 2026-10-08.
+   The Framework is the source of truth: edit there, then pull. framework.mjs pull --out <this file> */
+:root {
+  --gold: #AB9E6A;
+  --gold-light: #D4CDB2;
+  --gold-deep: #8A7E4E;
+  --gold-wash: #F5F2E9;
+  --gold-ink: #665C33;
+  --black: #0B0B0C;
+  --ink-900: #141416;
+  --ink-800: #1C1C1F;
+  --ink-700: #2A2A2E;
+  --ink-500: #6B6B72;
+  --white: #fff;
+  --warm: #FAF8F3;
+  --mist: #F0EDE6;
+  --bg: #FAF8F3;
+  --bg-2: #FFFFFF;
+  --bg-3: #F5F2E9;
+  --card: #FFFFFF;
+  --fg: #141416;
+  --fg-body: #3A3A40;
+  --fg-soft: #55555C;
+  --fg-faint: #6E6E76;
+  --line: rgba(20,20,22,.13);
+  --line-2: rgba(20,20,22,.07);
+  --line-strong: rgba(20,20,22,.3);
+  --scrim: rgba(11,11,12,.62);
+  --accent: var(--gold-ink);
+  --accent-lg: var(--gold-deep);
+  --rule: var(--gold-deep);
+  --focus: var(--gold-deep);
+  --size-display-1: 6.66rem;
+  --size-display-2: 4.68rem;
+  --size-heading-2: 3.24rem;
+  --size-heading-3: 1.71rem;
+  --size-body-large: 1.13rem;
+  --size-body: 0.98rem;
+  --size-label: 0.7rem;
+  --gutter-min: 1.25rem;
+  --gutter-max: 4.5rem;
+  --section-min: 4.5rem;
+  --section-max: 9.5rem;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-huge: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+}
+
 /* ===== css/02-base.css ===== */
 /* Reset and the shared primitives every component is allowed to use. */
 *,*::before,*::after{box-sizing:border-box}
@@ -186,7 +242,7 @@ p{margin:0}
 .tagline_component{display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
 .tagline_component i{width:clamp(24px,3.5vw,48px);height:1px;background:var(--rule);flex:none}
 
-.button{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:1.05rem 2rem;
+.button{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:1.05rem var(--space-medium);
   font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
   position:relative;overflow:hidden;transition:color .45s cubic-bezier(.22,1,.36,1);will-change:transform}
 .button>span{position:relative;z-index:1}
@@ -289,7 +345,7 @@ p{margin:0}
 .nav_component[data-journey="1"].is-solid .nav_links{opacity:0;pointer-events:none}
 .nav_component[data-journey="1"].is-solid .nav_chapter{opacity:1}
 
-.nav_actions{display:flex;align-items:center;gap:clamp(.5rem,1.4vw,1.1rem)}
+.nav_actions{display:flex;align-items:center;gap:clamp(var(--space-xsmall),1.4vw,1.1rem)}
 .nav_button{border:1px solid var(--rule);color:var(--fg);padding:.7rem 1.4rem;font-size:var(--label);
   letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;
   transition:background .4s,color .4s}
@@ -330,11 +386,11 @@ p{margin:0}
      browser that does not know the keyword drops the declaration and starts
      from the top too, which is the same correct behaviour. */
   display:flex;flex-direction:column;justify-content:safe center;overflow-y:auto;
-  padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
+  padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(var(--space-medium),5vw,var(--space-large))}
 .menu-drawer_component.is-open{clip-path:circle(150% at calc(100% - 42px) 42px)}
 .menu-drawer_grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
 .menu-drawer_column > p{line-height:1.02;font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);font-weight:600;margin:0 0 1rem}
+  color:var(--gold);font-weight:600;margin:0 0 var(--space-small)}
 .menu-drawer_component ul{list-style:none;margin:0;padding:0}
 .menu-drawer_column li{overflow:hidden}
 /* The index grew from 11 pages to a four-column site map during the
@@ -352,7 +408,7 @@ p{margin:0}
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(3) li a{transition-delay:.22s}
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(4) li a{transition-delay:.28s}
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(5) li a{transition-delay:.34s}
-.menu-drawer_footer{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
+.menu-drawer_footer{width:100%;max-width:var(--maxw);margin:clamp(var(--space-medium),5vw,3.25rem) auto 0;
   padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
   display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
 .menu-drawer_footer b{display:block;font-family:var(--f-body);font-size:var(--label);letter-spacing:.18em;
@@ -371,11 +427,11 @@ p{margin:0}
    unanchored `.footer_component{background:var(--black)}` rule was painting a black
    plate behind it — inside a cream-coloured section, under dark text. */
 footer.footer_component{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
-  padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
-footer.footer_component .footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+  padding-block:clamp(var(--space-large),6vw,var(--space-xxlarge)) clamp(1.5rem,3vw,2.5rem)}
+footer.footer_component .footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-medium),4vw,var(--space-large))}
 footer.footer_component img{width:190px;margin-bottom:1.25rem}
 footer.footer_component h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
-  font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
+  font-family:var(--f-body);font-weight:600;margin-bottom:var(--space-small)}
 footer.footer_component ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 footer.footer_component a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
 footer.footer_component a:hover{color:var(--gold)}
@@ -385,15 +441,15 @@ footer.footer_component .footer_blurb{color:rgba(255,255,255,.62);font-weight:30
 footer.footer_component .footer_facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
   color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300}
 footer.footer_component .footer_facts b{color:rgba(255,255,255,.9);font-weight:500}
-footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
-  border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:1rem;
+footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,var(--space-xlarge));padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:var(--space-small);
   justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55)}
 @media(min-width:720px){ footer.footer_component .footer_grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }
 
 /* ===== css/20-pagekit.css ===== */
 /* ---------- hero ---------- */
 .section_page-hero{position:relative;min-height:clamp(560px,78svh,860px);display:flex;align-items:flex-end;
-  overflow:hidden;padding-top:clamp(8rem,15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
+  overflow:hidden;padding-top:clamp(var(--space-xhuge),15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
   background:var(--bg)}
 /* THE HERO SEAM. The photo carries a filter and the [data-drift] parallax, so
    it lives on its own compositor layer. Under ScrollSmoother the page sits at a
@@ -426,18 +482,18 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
     radial-gradient(90% 70% at 80% 38%,rgba(171,158,106,.20),transparent 62%),
     linear-gradient(100deg,rgba(250,248,243,.98) 0%,rgba(250,248,243,.94) 44%,rgba(250,248,243,.34) 80%),
     linear-gradient(180deg,rgba(250,248,243,.86) 0%,rgba(250,248,243,.22) 34%,rgba(250,248,243,.96) 100%)}
-.section_page-hero .page-hero_content{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
+.section_page-hero .page-hero_content{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,var(--space-medium))}
 .section_page-hero h1{font-size:var(--d2);max-width:17ch}
 .section_page-hero h1 em{font-style:italic;color:var(--accent-lg)}
 /* Treatment heroes (SEO 2026-10-06): a keyword <h1> in the eyebrow style, the designed headline as
    <p data-split> with exactly the look the hero h1 gave it. Mirrors the Instatic registry rules. */
 .section_page-hero p[data-split]{font-family:var(--f-display);font-weight:500;line-height:1.02;letter-spacing:-.02em;color:var(--fg);font-size:var(--d2);max-width:17ch}
 .section_page-hero p[data-split] em{font-style:italic;color:var(--accent-lg)}
-.section_page-hero h1.text-style-tagline{font-size:var(--label);max-width:none;line-height:1.5;margin-bottom:1rem}
+.section_page-hero h1.text-style-tagline{font-size:var(--label);max-width:none;line-height:1.5;margin-bottom:var(--space-small)}
 .section_page-hero .page-hero_lead{max-width:52ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
 .section_page-hero .page-hero_actions{display:flex;flex-wrap:wrap;gap:.85rem}
-.section_page-hero .page-hero_meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
-  padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
+.section_page-hero .page-hero_meta{display:flex;flex-wrap:wrap;gap:clamp(var(--space-small),3vw,2.75rem);margin-top:var(--space-xsmall);
+  padding-top:clamp(var(--space-small),2.4vw,1.6rem);border-top:1px solid var(--line)}
 .section_page-hero .page-hero_meta div{display:grid;gap:.15rem}
 .section_page-hero .page-hero_meta b{display:block;font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
 .section_page-hero .page-hero_meta span{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
@@ -460,11 +516,11 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_content.is-background-light{background:var(--bg-3)}
 .section_content h1,.section_content h2{font-size:var(--h2);max-width:18ch}
 .section_content h3{font-size:var(--h3)}
-.section-heading_component{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
+.section-heading_component{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(var(--space-medium),4.5vw,3.5rem)}
 .section-heading_component p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}
 
 /* ---------- lede: sticky heading + prose ---------- */
-.intro_component{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
+.intro_component{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:start}
 .intro_component .intro_head{position:relative}
 /* links inside the intro copy need more than colour to stand out (axe link-in-text-block) */
 .intro_head p a{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
@@ -477,7 +533,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 }
 
 /* ---------- numbered / icon cards ---------- */
-.card_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.card_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),1.8vw,1.5rem)}
 .card_component{background:var(--card);border:1px solid var(--line);
   padding:clamp(1.4rem,2.4vw,2.1rem);display:grid;gap:.75rem;align-content:start;
   transition:border-color .45s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
@@ -545,7 +601,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   .card_grid.is-four-column{grid-template-columns:repeat(4,1fr)} }
 
 /* ---------- split: image + copy ---------- */
-.split_component{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center}
+.split_component{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:center}
 .split_component .split_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
 .split_component .split_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
@@ -588,7 +644,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 @media(min-width:820px){ .stats_component{grid-template-columns:repeat(4,1fr)} }
 
 /* ---------- before / after pair ---------- */
-.before-after_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+.before-after_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),2vw,1.75rem)}
 @media(min-width:700px){ .before-after_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .before-after_grid.is-three-column-cases{grid-template-columns:repeat(3,1fr)} }
 .before-after_component{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);
@@ -623,8 +679,8 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .faq_list{display:grid;gap:0;max-width:80ch}
 .faq_list details{border-top:1px solid var(--line)}
 .faq_list details:last-of-type{border-bottom:1px solid var(--line)}
-.faq_list summary{list-style:none;cursor:pointer;padding-block:clamp(1rem,2vw,1.4rem);
-  display:flex;align-items:flex-start;gap:1rem;font-family:var(--f-display);
+.faq_list summary{list-style:none;cursor:pointer;padding-block:clamp(var(--space-small),2vw,1.4rem);
+  display:flex;align-items:flex-start;gap:var(--space-small);font-family:var(--f-display);
   font-size:calc(1.35rem * var(--t-sm));font-weight:500;transition:color .3s}
 .faq_list summary::-webkit-details-marker{display:none}
 .faq_list summary{color:var(--fg)}
@@ -638,7 +694,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 /* ---------- next-steps cross links ---------- */
 .related-pages_component{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
-.related-pages_component a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:.5rem;
+.related-pages_component a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:var(--space-xsmall);
   transition:background .4s ease}
 .section_content.is-background-alternate .related-pages_component a{background:var(--bg-2)}
 .related-pages_component a:hover{background:var(--bg-3)}
@@ -680,8 +736,8 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    after that there is nothing left for the browser to re-balance. */
 .cta-band_component h2{font-size:var(--d2);max-width:15ch;text-wrap:balance}
 .cta-band_component p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
-.cta-band_component .cta-band_phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
-  margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
+.cta-band_component .cta-band_phones{display:flex;flex-wrap:wrap;gap:.6rem var(--space-medium);justify-content:center;
+  margin-top:var(--space-xsmall);font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
 .cta-band_component .cta-band_phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
   border-bottom:1px solid rgba(11,11,12,.3)}
 
@@ -761,8 +817,8 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_arrival h1 em{font-style:italic;color:var(--accent-lg)}
 .section_arrival .arrival_lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
 .section_arrival .arrival_actions{display:flex;flex-wrap:wrap;gap:.85rem}
-.section_arrival .arrival_meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
-  padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
+.section_arrival .arrival_meta{display:flex;flex-wrap:wrap;gap:clamp(var(--space-small),3vw,2.75rem);
+  padding-top:clamp(var(--space-small),2.5vw,1.75rem);border-top:1px solid var(--line)}
 .section_arrival .arrival_meta div{display:grid;gap:.15rem}
 .section_arrival .arrival_meta b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
 .section_arrival .arrival_meta span{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
@@ -786,14 +842,14 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* ===== css/31-ch-reality.css ===== */
 .section_reality{position:relative;background:var(--bg)}
 .section_reality .reality_stage{min-height:100svh;display:grid;align-content:center;
-  padding-block:clamp(4rem,10vw,8rem);position:relative;z-index:2}
+  padding-block:clamp(var(--space-xlarge),10vw,var(--space-xhuge));position:relative;z-index:2}
 .section_reality .reality_statement{font-family:var(--f-display);font-size:var(--d2);line-height:1.14;
   letter-spacing:-.02em;max-width:22ch}
 .section_reality .reality_statement{color:var(--fg)}
 /* The unread state has to be faint enough to read as "not yet" and dark
    enough to still be legible copy on cream. */
 .section_reality .reality_statement .wz-word{color:rgba(20,20,22,.66)} /* >= 4.5:1 before it is written (Brandklout rule; QA 2026-09-28) */
-.section_reality .reality_after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
+.section_reality .reality_after{margin-top:clamp(var(--space-medium),4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
 .section_reality .reality_after p{color:var(--fg-body);font-weight:400;line-height:1.8}
 .section_reality .reality_image-wrapper{position:absolute;right:0;top:50%;transform:translateY(-50%);
   width:min(38vw,520px);aspect-ratio:4/5;overflow:hidden;z-index:1;opacity:.5}
@@ -805,9 +861,9 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 /* ===== css/32-ch-difference.css ===== */
 .section_difference{background:var(--bg-2);border-block:1px solid var(--line-2);position:relative}
-.section_difference .difference_head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
+.section_difference .difference_head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,var(--space-xlarge));max-width:34ch}
 .section_difference .difference_head h2{font-size:var(--h2)}
-.section_difference .difference_stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
+.section_difference .difference_stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,var(--space-large))}
 .section_difference .difference_stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
   color:var(--accent-lg);line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
 .section_difference .difference_stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
@@ -815,7 +871,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_difference .difference_stat{position:relative;padding-top:1.25rem}
 .section_difference .difference_stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
   background:var(--line);transform:scaleX(0);transform-origin:left}
-.difference_marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
+.difference_marquee{margin-top:clamp(var(--space-large),6vw,var(--space-xxlarge));overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
   padding-block:clamp(.85rem,1.6vw,1.3rem)}
 .difference_marquee .difference_marquee-row{display:flex;width:max-content;will-change:transform}
 .difference_marquee .difference_marquee-row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
@@ -829,7 +885,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .versus_head p{margin-top:.9rem;color:var(--fg-body);font-weight:400}
 .versus_table{display:grid;gap:1px;background:var(--line)}
 .versus_row{display:grid;grid-template-columns:1fr auto 1fr;gap:1px;background:var(--line)}
-.versus_row>span{padding:clamp(1rem,2vw,1.5rem) clamp(1rem,2vw,1.75rem);background:var(--bg-2);
+.versus_row>span{padding:clamp(var(--space-small),2vw,1.5rem) clamp(var(--space-small),2vw,1.75rem);background:var(--bg-2);
   font-size:.95rem;font-weight:400;color:var(--fg-body);display:flex;align-items:center}
 /* Was a left-to-right gold gradient, which read as a muddy olive wash that
    stopped dead at the "vs" column. A flat tint plus a gold rule says
@@ -842,7 +898,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .versus_row .versus_middle{background:var(--bg);width:clamp(46px,6vw,86px);justify-content:center;padding-inline:0}
 .versus_middle i{display:block;width:7px;height:7px;border-radius:50%;background:var(--rule);opacity:.6}
 .is-header-row>span{font-family:var(--f-display);font-size:calc(1.4rem * var(--t-sm));
-  letter-spacing:.01em;text-transform:none;padding-block:clamp(1rem,2vw,1.4rem)}
+  letter-spacing:.01em;text-transform:none;padding-block:clamp(var(--space-small),2vw,1.4rem)}
 .is-header-row .versus_us{color:var(--black);
   background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light));font-weight:500}
 .is-header-row .versus_them{color:var(--fg)}
@@ -853,7 +909,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   .versus_row .versus_middle{display:none}
   .versus_row>span{font-size:.9rem;display:block}
   .versus_row .versus_them{color:var(--fg-soft)}
-  .is-header-row .versus_them{padding-top:1rem}
+  .is-header-row .versus_them{padding-top:var(--space-small)}
   /* Stacked, the two halves lose the "vs" column that told you which side
      you were reading. Label them instead of relying on position. */
   .versus_row:not(.is-header-row)>span::before{display:block;margin-bottom:.4rem;
@@ -865,7 +921,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 /* ===== css/33-ch-specialist.css ===== */
 .section_specialist{background:var(--bg-3);position:relative;overflow:hidden}
-.section_specialist .specialist_grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.section_specialist .specialist_grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,var(--space-xxlarge));align-items:start}
 .section_specialist .specialist_portrait{position:relative}
 .section_specialist .specialist_portrait .specialist_plate{position:relative;overflow:hidden;aspect-ratio:4/5;
   background:linear-gradient(160deg,#fff,var(--mist))}
@@ -875,7 +931,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   height:104%;width:auto;max-width:none;object-fit:contain;
   filter:contrast(1.02) brightness(1.02) saturate(.98);z-index:1}
 .section_specialist .specialist_signature{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
-  background:var(--bg-3);padding:1rem 1.6rem 1rem 0;border-top:1px solid rgba(138,126,78,.45)}
+  background:var(--bg-3);padding:var(--space-small) 1.6rem var(--space-small) 0;border-top:1px solid rgba(138,126,78,.45)}
 .section_specialist .specialist_signature b{display:block;font-family:var(--f-display);font-size:calc(1.6rem * var(--t-mid));
   font-weight:500}
 .section_specialist .specialist_signature span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
@@ -883,7 +939,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_specialist .specialist_bio{display:grid;gap:1.15rem;max-width:56ch}
 .section_specialist .specialist_bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .section_specialist .specialist_bio strong{color:var(--fg);font-weight:600}
-.specialist_credentials-list{margin-top:clamp(2rem,4vw,3rem)}
+.specialist_credentials-list{margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 .specialist_credentials-list h3{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
   font-family:var(--f-body);font-weight:600;margin-bottom:1.1rem}
 .specialist_credentials-list ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
@@ -905,7 +961,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* ===== css/34-ch-transformation.css ===== */
 .section_transformation{background:var(--bg-2);color:var(--fg-body)}
 .section_transformation .transformation_pin{min-height:100svh;display:grid;align-content:center;
-  padding-block:clamp(3rem,7vw,5rem);overflow:hidden}
+  padding-block:clamp(var(--space-large),7vw,var(--space-xxlarge));overflow:hidden}
 .section_transformation .transformation_head{display:grid;gap:.9rem;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
 
 .section_transformation h2{font-size:var(--h2);max-width:16ch}
@@ -924,7 +980,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   text-transform:uppercase;font-weight:700;z-index:4}
 .transformation_compare .transformation_tag.is-before-tag{left:1rem;background:rgba(11,11,12,.72);color:#fff}
 .transformation_compare .transformation_tag.is-after-tag{right:1rem;background:var(--gold-ink);color:#fff}
-.section_transformation .transformation_footer{margin-top:1rem;display:flex;align-items:center;justify-content:space-between;
+.section_transformation .transformation_footer{margin-top:var(--space-small);display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:.6rem 1.5rem;font-size:.82rem;color:var(--fg-body)}
 .transformation_more-link{margin-right:auto;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
   font-weight:600;color:var(--accent);border-bottom:1px solid rgba(102,92,51,.55);
@@ -954,7 +1010,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_path .path_head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
   max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
 .section_path h2{font-size:var(--h2);max-width:16ch}
-.section_path .path_track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+.section_path .path_track{display:flex;gap:clamp(var(--space-small),2.4vw,var(--space-medium));
   padding-right:var(--pa-inset-end);padding-left:var(--pa-inset);
   width:max-content;align-items:stretch}
 .section_path .path_card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
@@ -1012,13 +1068,13 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    none. `scroll-margin-top` does the same for an anchor jump to #path. */
 .section_path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
 .section_path.is-swipe .path_pin{height:auto;
-  padding-top:calc(var(--nav-h,78px) + clamp(2rem,6vw,3.5rem));
-  padding-bottom:clamp(3rem,9vw,5rem)}
+  padding-top:calc(var(--nav-h,78px) + clamp(var(--space-medium),6vw,3.5rem));
+  padding-bottom:clamp(var(--space-large),9vw,var(--space-xxlarge))}
 .section_path.is-swipe .path_track{
   overflow-x:auto;overflow-y:hidden;width:auto;
   scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
   -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;padding-bottom:.5rem}
+  scrollbar-width:none;padding-bottom:var(--space-xsmall)}
 .section_path.is-swipe .path_track::-webkit-scrollbar{display:none}
 .section_path.is-swipe .path_card{scroll-snap-align:center;
   border-color:var(--line);transition:border-color .5s}
@@ -1056,15 +1112,15 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    appears once the reader actually swipes — which is exactly how it reached
    production unnoticed. The bar only needs to leave the absolute flow of the
    pinned build; relative does that and keeps the fill anchored. */
-.section_path.is-swipe .path_progress-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
+.section_path.is-swipe .path_progress-bar{position:relative;margin-top:clamp(1.25rem,4vw,var(--space-medium));
   margin-inline:var(--pa-inset) var(--pa-inset-end)}
 
 /* ===== css/36-ch-standard.css ===== */
 .section_standard{background:var(--bg-2);position:relative}
-.section_standard .standard_head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
+.section_standard .standard_head{display:grid;gap:var(--space-small);max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
 .section_standard .standard_head h2{font-size:var(--h2)}
 .section_standard .standard_head p{color:var(--fg-body);font-weight:400}
-.standard_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.standard_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),1.8vw,1.5rem)}
 .standard_card{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
   align-items:flex-end;padding:clamp(1.4rem,2.4vw,2.25rem);isolation:isolate}
 .standard_card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
@@ -1076,7 +1132,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   background:linear-gradient(180deg,rgba(11,11,12,.72) 0%,rgba(11,11,12,.34) 30%,
              rgba(11,11,12,.52) 58%,rgba(11,11,12,.94) 100%)}
 .standard_card:hover img{transform:scale(1)}
-.standard_card .standard_caption{display:grid;gap:.5rem}
+.standard_card .standard_caption{display:grid;gap:var(--space-xsmall)}
 .standard_card .standard_caption b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
 .standard_card .standard_caption span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
 .standard_card .standard_tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
@@ -1105,7 +1161,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_proof .proof_film h2{font-size:var(--d2);max-width:16ch;margin-inline:auto}
 .section_proof .proof_film p{margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:44ch;
   margin-inline:auto;font-weight:300}
-.section_proof .proof_story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.section_proof .proof_story{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-medium),5vw,4.5rem);align-items:center}
 .section_proof .proof_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
 .section_proof .proof_image-wrapper img{width:100%;height:100%;object-fit:cover;will-change:transform}
 .section_proof blockquote{margin:0;font-family:var(--f-display);font-size:calc(2.61rem * var(--t-lg));
@@ -1113,20 +1169,20 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .section_proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
   letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 .section_proof .proof_quote-mark{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--accent-lg);
-  line-height:.6;display:block;margin-bottom:.5rem}
+  line-height:.6;display:block;margin-bottom:var(--space-xsmall)}
 @media(min-width:1024px){ .section_proof .proof_story{grid-template-columns:.95fr 1.05fr} }
 
 /* --- google reviews --- */
-.proof_reviews{margin-top:clamp(3.5rem,7vw,6rem)}
+.proof_reviews{margin-top:clamp(3.5rem,7vw,var(--space-huge))}
 .reviews_head{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;
   align-items:flex-end;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 .reviews_head h3{font-size:var(--h2);max-width:16ch}
 .reviews_subtitle{margin-top:.7rem;color:var(--fg-soft);font-weight:300;font-size:.94rem}
-.reviews_score{display:flex;align-items:center;gap:clamp(1rem,1.6vw,1.4rem)}
+.reviews_score{display:flex;align-items:center;gap:clamp(var(--space-small),1.6vw,1.4rem)}
 /* Vector mark — the old raster lockup went soft and unreadable at this size. */
 .reviews_score img{width:clamp(48px,5.6vw,72px);height:auto;flex:none}
 .reviews_score b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));
-  font-weight:500;display:flex;align-items:center;gap:.5rem}
+  font-weight:500;display:flex;align-items:center;gap:var(--space-xsmall)}
 .reviews_score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-soft)}
 .reviews_stars{color:var(--accent);letter-spacing:.12em;font-style:normal;font-size:.9em}
@@ -1149,7 +1205,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   margin-top:clamp(1.5rem,3vw,2.25rem)}
 .reviews_card{background:var(--card);padding:clamp(1.35rem,2.2vw,1.9rem);
   display:grid;gap:.9rem;align-content:start}
-.reviews_meta{display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.reviews_meta{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-small)}
 .reviews_date{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint)}
 .reviews_card p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.75;margin:0}
 .reviews_card footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:var(--fg);
@@ -1182,7 +1238,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* Chapter 08 reads on the light ground (client direction, 2026-08-19). The
    gold CTA band at the foot is unchanged and still closes the page. */
 .section_invitation{background:var(--bg)}
-.section_invitation h2{font-size:var(--h2);max-width:16ch;margin-top:1rem}
+.section_invitation h2{font-size:var(--h2);max-width:16ch;margin-top:var(--space-small)}
 /* `.invitation_locations` / `.invitation_location` / `.invitation_row` were removed on 2026-08-24. That block was
    a standalone locations strip sitting directly above the gold band, and the
    band below it closed the page with ONE booking button — so the page showed
@@ -1191,18 +1247,18 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    what the Webflow build does, and showing them twice in a row was the reason
    not to simply add the cards and leave the strip. */
 .invitation_cta{background:linear-gradient(120deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
-  color:var(--black);text-align:center;margin-top:clamp(3rem,7vw,6rem)}
+  color:var(--black);text-align:center;margin-top:clamp(var(--space-large),7vw,var(--space-huge))}
 .invitation_cta h2{font-size:var(--d2);max-width:18ch;margin-inline:auto;color:var(--black)}
 .invitation_cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
-.invitation_cta .cta-band_offices{margin-top:2rem}
+.invitation_cta .cta-band_offices{margin-top:var(--space-medium)}
 
 /* --- the practice, photographed (added 2026-08-18 from the client's Webflow build) ---
    One wide cell then a row of four. The wide cell is what stops five landscape
    frames reading as a contact sheet; it gives the eye somewhere to land first.
    Sits on the light ground of this chapter, so the frames carry a hairline rather
    than a shadow. */
-.section_invitation .invitation_gallery{display:grid;grid-template-columns:1fr;gap:clamp(.5rem,1vw,.75rem);
-  margin-top:clamp(2rem,4vw,3rem)}
+.section_invitation .invitation_gallery{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-xsmall),1vw,.75rem);
+  margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 .section_invitation .invitation_image{display:block;width:100%;height:100%;object-fit:cover;
   aspect-ratio:4/3;border:1px solid var(--line)}
 @media(min-width:720px){
@@ -1241,9 +1297,9 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 .section_services{background:var(--bg);position:relative}
 
-.section_services .services_head{max-width:62ch;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section_services .services_head{max-width:62ch;margin-bottom:clamp(2.5rem,5vw,var(--space-xlarge))}
 .section_services .services_head h2{font-size:var(--h2);margin-top:.75rem}
-.section_services .services_head p{color:var(--fg-body);font-weight:400;margin-top:1rem}
+.section_services .services_head p{color:var(--fg-body);font-weight:400;margin-top:var(--space-small)}
 
 /* One column on a phone, two from 620px, three from 1040px. The card is tall
    enough that four across would strand the last row on most laptops. */
@@ -1300,7 +1356,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 .section_services .services_more{margin-top:auto;font-family:var(--f-body);font-size:.7rem;
   letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--accent)}
-.section_services .services_more::after{content:"→";display:inline-block;margin-left:.5rem;
+.section_services .services_more::after{content:"→";display:inline-block;margin-left:var(--space-xsmall);
   transition:transform .4s}
 .wz-fine .section_services .services_card:hover .services_more::after{transform:translateX(5px)}
 
@@ -1391,11 +1447,11 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    that job. Kept as a modifier rather than a descendant of .section_standard so
    that no class is defined in two stylesheets. */
 .is-inset{border-top:1px solid var(--line)}
-.arch-types_component .arch-types_head{display:grid;gap:1rem;max-width:52ch;margin-bottom:clamp(2rem,4vw,3rem)}
+.arch-types_component .arch-types_head{display:grid;gap:var(--space-small);max-width:52ch;margin-bottom:clamp(var(--space-medium),4vw,var(--space-large))}
 .arch-types_component .arch-types_title{font-size:var(--h2);font-family:var(--f-display);font-weight:500}
 .arch-types_component .arch-types_head p{color:var(--fg-body);font-weight:400}
 
-.arch-types_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.arch-types_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),1.8vw,1.5rem)}
 @media(min-width:820px){ .arch-types_grid{grid-template-columns:repeat(3,1fr)} }
 
 .arch-types_card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--line-strong);
@@ -1421,10 +1477,10 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* The client's own diagram. Boxed rather than bled, because it arrives with its
    own blue/orange/red key that is not the brand palette and should read as a
    quoted reference figure rather than as site furniture. */
-.arch-types_figure{margin:clamp(1.75rem,3.5vw,2.75rem) 0 0;padding:clamp(1rem,2vw,1.75rem);
+.arch-types_figure{margin:clamp(1.75rem,3.5vw,2.75rem) 0 0;padding:clamp(var(--space-small),2vw,1.75rem);
   background:var(--bg);border:1px solid var(--line)}
 .arch-types_figure img{display:block;width:100%;height:auto}
-.arch-types_figure figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+.arch-types_figure figcaption{margin-top:var(--space-small);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 
 .arch-types_note{margin-top:clamp(1.5rem,3vw,2.25rem);max-width:62ch;color:var(--fg-body);font-weight:300}
@@ -1435,7 +1491,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   align-content:start}
 .office-card_component h2,.office-card_component h3{font-size:calc(2rem * var(--t-mid))}
 .office-card_component address{font-style:normal;color:var(--fg-body);font-weight:400;line-height:1.8}
-.office-card_component .office-card_line{display:grid;gap:.25rem;padding-top:1rem;border-top:1px solid var(--line)}
+.office-card_component .office-card_line{display:grid;gap:var(--space-xxsmall);padding-top:var(--space-small);border-top:1px solid var(--line)}
 .office-card_component .office-card_line span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--fg-soft)}
 .office-card_component .office-card_line a{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));
@@ -1500,14 +1556,14 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 /* ===== css/53-credentials.css ===== */
 .credentials_list{list-style:none;margin:0;padding:0;display:grid;gap:0}
-.credentials_list li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:baseline;
+.credentials_list li{display:grid;grid-template-columns:auto 1fr;gap:var(--space-small);align-items:baseline;
   padding-block:.85rem;border-top:1px solid var(--line);
   font-size:1rem;font-weight:400;color:var(--fg-body)}
 .credentials_list li:last-child{border-bottom:1px solid var(--line)}
 .credentials_list .credentials_number{font-family:var(--f-display);font-size:.95rem;color:var(--accent);
   font-variant-numeric:tabular-nums;min-width:2ch}
 @media(min-width:900px){ .credentials_columns{display:grid;grid-template-columns:repeat(2,1fr);
-  column-gap:clamp(2rem,4vw,4rem)} }
+  column-gap:clamp(var(--space-medium),4vw,var(--space-xlarge))} }
 
 /* ===== css/54-facility-tour.css ===== */
 /* An asymmetric four-photograph tour. The grid is deliberately uneven — a
@@ -1535,7 +1591,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* Portrait cards. Kept in this page rather than the page kit because the
    team grid is the only place on the site that shows people at this size —
    adding it to the shared kit would put dead CSS on ten other pages. */
-.team_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
+.team_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,var(--space-medium))}
 @media(min-width:600px){ .team_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1000px){ .team_grid{grid-template-columns:repeat(3,1fr)} }
 .team_card{margin:0;display:grid;gap:0;align-content:start}
@@ -1546,7 +1602,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .team_card:hover .team_image-wrapper img{transform:scale(1.045);filter:grayscale(0) contrast(1.04)}
 /* A hairline floor under the portrait so the card reads as one object on
    the white band, where the photo would otherwise float unattached. */
-.team_content{border-top:1px solid var(--line-strong);padding-top:1rem;display:grid;gap:.5rem}
+.team_content{border-top:1px solid var(--line-strong);padding-top:var(--space-small);display:grid;gap:var(--space-xsmall)}
 .team_name{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
   line-height:1.15;color:var(--fg)}
 .team_role{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
@@ -1555,14 +1611,14 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   margin-top:.15rem}
 
 /* ===== css/56-story-rows.css ===== */
-.story_row{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center;
+.story_row{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:center;
   padding-block:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--line)}
 .story_row:first-of-type{border-top:0;padding-top:0}
 .story_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);margin:0}
 .story_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* Sits on the photograph, so it keeps its dark plate on every theme. */
 .story_image-wrapper figcaption{position:absolute;left:0;bottom:0;z-index:2;background:var(--black);
-  border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem 1rem;
+  border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem var(--space-small);
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
 /* Stands in for a portrait we do not have, without pretending to be one. */
 .st-plate{display:grid;align-content:center;justify-items:start;gap:.6rem;
@@ -1573,7 +1629,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   line-height:.7;color:var(--accent-lg)}
 .st-plate .pl-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
   font-weight:600;color:var(--fg-soft)}
-.story_content{display:grid;gap:1rem}
+.story_content{display:grid;gap:var(--space-small)}
 .story_name{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .story_quote{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-lg));line-height:1.14;
   letter-spacing:-.02em;margin:0;max-width:22ch}
@@ -1605,7 +1661,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .legal_body h2{font-size:calc(1.6rem * var(--t-sm));max-width:none}
 .legal_body p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .legal_body a{color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5)}
-.legal_intro{border-left:3px solid var(--rule);padding-left:clamp(1rem,2.4vw,1.6rem)}
+.legal_intro{border-left:3px solid var(--rule);padding-left:clamp(var(--space-small),2.4vw,1.6rem)}
 
 /* --- the chooser on /privacy-policy and /terms-conditions ---
    Those two URLs predate the split into per-entity documents. They stay alive
@@ -1613,7 +1669,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    text, so they name both entities and let the reader pick. */
 .legal_office-choice{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
   margin-top:clamp(1.5rem,3vw,2.5rem)}
-.legal_office-link{background:var(--card);padding:clamp(1.75rem,3vw,2.6rem);display:grid;gap:.5rem;
+.legal_office-link{background:var(--card);padding:clamp(1.75rem,3vw,2.6rem);display:grid;gap:var(--space-xsmall);
   align-content:start;transition:background .4s cubic-bezier(.22,1,.36,1)}
 .legal_office-link:hover{background:var(--bg-3)}
 .legal_office-name{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));font-weight:500;
@@ -1631,7 +1687,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 @media(min-width:820px){ .legal_office-choice{grid-template-columns:repeat(2,1fr)} }
 
 /* ===== css/58-gallery.css ===== */
-.gallery_filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
+.gallery_filters{display:flex;flex-wrap:wrap;gap:var(--space-xsmall);margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 /* LIGHT-THEME FILTERS. These were dark-theme whites until 2026-08-11, when
    regenerating the gallery reverted the light inversion (SITE.md bug 21)
    and dropped every inactive filter button to 1.04:1. The generator is the
@@ -1646,7 +1702,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .gallery_filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
   color:#fff}
 .gallery_filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
-.gallery_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+.gallery_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),2vw,1.75rem)}
 @media(min-width:700px){ .gallery_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .gallery_grid{grid-template-columns:repeat(3,1fr)} }
 .gallery_item[hidden]{display:none}
@@ -1698,7 +1754,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    ========================================================================== */
 
 /* ---------- mosaic ---------- */
-.mosaic_component{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(.5rem,1.2vw,1rem)}
+.mosaic_component{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(var(--space-xsmall),1.2vw,var(--space-small))}
 .mosaic_component .mosaic_item{position:relative;overflow:hidden;margin:0;aspect-ratio:4/3;background:var(--mist)}
 .mosaic_component .mosaic_item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   transition:transform .9s cubic-bezier(.22,1,.36,1)}
@@ -1762,7 +1818,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .media-band_component .media-band_image-wrapper.is-band-focus-top img{object-position:50% 0}
 .media-band_component .media-band_image-wrapper::after{content:"";position:absolute;inset:0;
   background:linear-gradient(transparent 30%,var(--scrim))}
-.media-band_component .media-band_content{position:relative;z-index:1;padding:0 var(--gutter) clamp(1.8rem,4vw,3rem);
+.media-band_component .media-band_content{position:relative;z-index:1;padding:0 var(--gutter) clamp(1.8rem,4vw,var(--space-large));
   max-width:var(--maxw);margin-inline:auto;width:100%}
 .media-band_component .media-band_statement{color:#fff;font-family:var(--f-display);font-weight:400;
   font-size:calc(2.1rem * var(--t-mid));line-height:1.15;max-width:22ch;margin:0}
@@ -1780,10 +1836,10 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .video_frame{position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg-3);
   border:1px solid var(--line)}
 .video_frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.video_lead-film figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+.video_lead-film figcaption{margin-top:var(--space-small);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 
-.video_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
+.video_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,var(--space-medium))}
 .video_card{display:grid;gap:.9rem;padding:0;border:0;background:none;text-align:left;
   cursor:pointer;color:inherit;font:inherit;align-content:start}
 .video_card:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
@@ -1812,7 +1868,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .video_card:focus-visible .video_play-icon{background:var(--gold-deep);scale:1.06}
 .video_title{font-family:var(--f-display);font-size:calc(1.16rem * var(--t-sm));font-weight:500;
   line-height:1.3;color:var(--fg)}
-.video_note{margin-top:clamp(2rem,4vw,3rem);max-width:62ch;color:var(--fg-body);font-weight:300}
+.video_note{margin-top:clamp(var(--space-medium),4vw,var(--space-large));max-width:62ch;color:var(--fg-body);font-weight:300}
 
 @media(min-width:700px){ .video_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .video_grid{grid-template-columns:repeat(3,1fr)} }
@@ -1831,7 +1887,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    every iteration inside ONE cell, which renders as a single narrow column with
    the rest of the row empty. */
 .blog_grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
-  margin-top:clamp(2rem,4vw,3rem)}
+  margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 .blog_card{background:var(--card);padding:clamp(1.5rem,2.6vw,2.25rem);display:grid;gap:.85rem;
   align-content:start;transition:background .4s cubic-bezier(.22,1,.36,1)}
 .blog_card:hover{background:var(--bg-3)}
@@ -1886,7 +1942,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .blog_filter{display:grid;gap:clamp(.9rem,2vw,1.4rem);grid-template-columns:1fr;
   align-items:end;padding-bottom:clamp(1.25rem,2.5vw,1.75rem);
   border-bottom:1px solid var(--line)}
-.blog_filter-field{display:grid;gap:.5rem;min-width:0}
+.blog_filter-field{display:grid;gap:var(--space-xsmall);min-width:0}
 .blog_filter-label{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
   text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
 /* `max(1rem,16px)`, not `1rem`. This site's root font-size is FLUID
@@ -1898,7 +1954,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    contact form's to fix, but there is no reason to copy it here.) */
 .blog_filter-input,.blog_filter-select{font:inherit;font-size:max(1rem,16px);font-weight:400;color:var(--fg);
   background:var(--card);border:1px solid var(--line-strong);border-radius:0;
-  padding:.85rem 1rem;width:100%;transition:border-color .35s}
+  padding:.85rem var(--space-small);width:100%;transition:border-color .35s}
 .blog_filter-input:focus,.blog_filter-select:focus{border-color:var(--rule);outline:none}
 .blog_filter-input:focus-visible,.blog_filter-select:focus-visible{outline:2px solid var(--focus);
   outline-offset:2px}
@@ -1944,7 +2000,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 #articles .container-large.padding-section-large{min-height:clamp(26rem,58svh,40rem)}
 
 .blog_empty{display:grid;gap:.9rem;justify-items:start;max-width:54ch;
-  padding:clamp(2rem,5vw,3.5rem) 0}
+  padding:clamp(var(--space-medium),5vw,3.5rem) 0}
 .blog_empty[hidden]{display:none}
 .blog_empty h3{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));
   font-weight:500;line-height:1.28;margin:0}
@@ -2024,7 +2080,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    --d2 because an article title is a sentence and runs 12-16 words where a
    landing headline runs four. */
 .section_page-hero.is-article-hero{min-height:clamp(380px,52svh,560px);
-  padding-top:clamp(7rem,13vw,9.5rem);padding-bottom:clamp(2rem,4.5vw,3.25rem)}
+  padding-top:clamp(7rem,13vw,9.5rem);padding-bottom:clamp(var(--space-medium),4.5vw,3.25rem)}
 .section_page-hero.is-article-hero h1{font-size:var(--h2);max-width:22ch}
 .section_page-hero.is-article-hero .page-hero_content{gap:clamp(.9rem,2vw,1.4rem)}
 /* Filled by sections/blog-post.js from the date inside the entry body -- there
@@ -2071,7 +2127,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .article_rail:empty{display:none}
 @media(min-width:1280px){
   .article_component{grid-template-columns:13rem minmax(0,66ch) 17rem;
-    column-gap:clamp(2rem,3.4vw,4rem);row-gap:clamp(2.5rem,5vw,4rem);
+    column-gap:clamp(var(--space-medium),3.4vw,var(--space-xlarge));row-gap:clamp(2.5rem,5vw,var(--space-xlarge));
     justify-content:center;align-items:start}
   .is-left-rail{grid-column:1;grid-row:1}
   /* ScrollTrigger wraps a pinned element in a `.pin-spacer` of its own, and
@@ -2101,7 +2157,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    was wrapping at 18 characters inside a 66ch column. A section heading in a
    piece of prose is a sentence, not a display line. */
 .article_body h2{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
-  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem);max-width:none}
+  color:var(--fg);line-height:1.3;margin-top:clamp(var(--space-medium),3.6vw,2.75rem);max-width:none}
 /* An article that opens straight into a heading — several of the 43 do — should
    not start with that heading's section gap above it. */
 .article_body h2:first-child{margin-top:0}
@@ -2112,7 +2168,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .article_body li{line-height:1.75}
 .article_body a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em}
 .article_footer{padding-top:clamp(1.5rem,3vw,2.25rem);
-  border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;
+  border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:var(--space-small);
   justify-content:space-between;align-items:center}
 
 /* --- contents ---
@@ -2121,7 +2177,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    the first paragraph; above it, the script moves the same node into the left
    rail. One list, two homes -- never a copy in each. */
 .article_contents{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  padding-block:clamp(1rem,2.2vw,1.4rem);margin-block:clamp(1.5rem,3vw,2rem)}
+  padding-block:clamp(var(--space-small),2.2vw,1.4rem);margin-block:clamp(1.5rem,3vw,var(--space-medium))}
 .article_contents b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
   text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:.7rem}
 .article_contents ol{display:grid;gap:.42rem;margin:0;padding:0;list-style:none;counter-reset:toc}
@@ -2190,7 +2246,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .article_faq{margin-top:clamp(2.5rem,5vw,3.5rem);padding-top:clamp(1.5rem,3vw,2.25rem);
   border-top:1px solid var(--line)}
 .article_faq > b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
-  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1rem}
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:var(--space-small)}
 .article_faq .faq_list summary{font-size:calc(1.12rem * var(--t-sm))}
 .article_faq .faq_answer p{margin:0 0 .6rem}
 
@@ -2302,8 +2358,8 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* The trust strip is a row of the fixed header rather than a band above it, so
    the hero has one fixed element to clear instead of two. */
 .landing-header_bar{border-bottom:1px solid var(--line-2);background:var(--bg-3)}
-.landing-header_bar-content{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem clamp(1rem,2.4vw,2.25rem);
-  padding-block:.5rem;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+.landing-header_bar-content{display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-xsmall) clamp(var(--space-small),2.4vw,2.25rem);
+  padding-block:var(--space-xsmall);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
   font-weight:600;color:var(--fg-soft)}
 .landing-header_bar-item{display:flex;align-items:center;gap:.45rem;white-space:nowrap}
 .landing-header_bar-item b{color:var(--fg);font-weight:700}
@@ -2311,7 +2367,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 @media(max-width:767px){ .landing-header_bar-item.is-wide{display:none} }
 
 .landing-header_actions{display:flex;align-items:center;gap:clamp(.4rem,1.4vw,1.1rem)}
-.landing-header_phone{display:inline-flex;align-items:center;gap:.5rem;font-size:var(--label);
+.landing-header_phone{display:inline-flex;align-items:center;gap:var(--space-xsmall);font-size:var(--label);
   letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--fg);
   white-space:nowrap;padding:.7rem .3rem}
 .landing-header_phone:hover{color:var(--accent)}
@@ -2338,18 +2394,18 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    blocks are placed explicitly, so a desktop reads headline, buttons, film,
    with the form beside them. */
 .is-form-hero{align-items:center;
-  padding-block:clamp(10.5rem,18vw,13.5rem) clamp(3rem,6vw,5rem)}
-.landing-hero_grid{display:grid;gap:clamp(1.5rem,3vw,2.5rem) clamp(2rem,4vw,3.5rem);
+  padding-block:clamp(10.5rem,18vw,13.5rem) clamp(var(--space-large),6vw,var(--space-xxlarge))}
+.landing-hero_grid{display:grid;gap:clamp(1.5rem,3vw,2.5rem) clamp(var(--space-medium),4vw,3.5rem);
   align-content:center;width:100%}
-.landing-hero_content{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+.landing-hero_content{display:grid;gap:clamp(var(--space-small),2.2vw,1.5rem);align-content:start}
 .is-form-hero h1{font-size:var(--h2);max-width:18ch}
-.landing-hero_below{display:grid;gap:clamp(1rem,2.2vw,1.5rem);align-content:start}
+.landing-hero_below{display:grid;gap:clamp(var(--space-small),2.2vw,1.5rem);align-content:start}
 /* The doctor on film, under the copy. `.film-card_component` gives it the 16/9 box
    and the absolute iframe; this only trims the margin the story rows carry
    and puts a hairline round it on the photograph. */
 .landing-hero_film{margin:0;border:1px solid var(--line);background:var(--black)}
 .landing-hero_facts{display:grid;grid-template-columns:1fr 1fr;
-  gap:.9rem clamp(1rem,2vw,1.75rem);
+  gap:.9rem clamp(var(--space-small),2vw,1.75rem);
   padding-top:clamp(.9rem,1.8vw,1.3rem);border-top:1px solid var(--line)}
 .landing-hero_facts div{display:grid;gap:.1rem}
 .landing-hero_facts b{font-family:var(--f-display);font-size:calc(1.45rem * var(--t-mid));
@@ -2376,7 +2432,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   color:var(--fg);font-weight:500;line-height:1.55}
 .landing_assurances i{font-style:normal;color:var(--accent);line-height:1.5}
 /* Who is going to read the form. */
-.landing_signoff{display:flex;align-items:center;gap:1rem;padding-top:clamp(1rem,2vw,1.4rem);
+.landing_signoff{display:flex;align-items:center;gap:var(--space-small);padding-top:clamp(var(--space-small),2vw,1.4rem);
   border-top:1px solid var(--line)}
 .landing_signoff img{width:clamp(56px,6vw,74px);height:clamp(56px,6vw,74px);border-radius:50%;
   object-fit:cover;object-position:50% 18%;flex:none;background:var(--mist)}
@@ -2399,10 +2455,10 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    is 4/3; a single case across the content width wants 16/9, and the rule
    targets the tag under the landing wrapper so `.before-after_component` is never redeclared
    here. Specificity 0,1,1 beats the kit's 0,1,0. */
-.landing-journey_component{display:grid;gap:clamp(1.75rem,3.5vw,3rem)}
+.landing-journey_component{display:grid;gap:clamp(1.75rem,3.5vw,var(--space-large))}
 .landing-journey_before-after > div{aspect-ratio:16/9}
 .landing-journey_labels{display:grid;grid-template-columns:1fr;gap:.9rem clamp(1.5rem,3vw,2.5rem);
-  margin-top:1rem}
+  margin-top:var(--space-small)}
 .landing-journey_labels span{display:block;font-size:.92rem;color:var(--fg-body);font-weight:400;
   line-height:1.6}
 .landing-journey_labels b{display:block;font-family:var(--f-display);font-weight:500;
@@ -2415,14 +2471,14 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* ---------- a CTA row at the foot of a section ----------
    The reference repeats one button after the journey, the differentiators,
    the process and the gallery. One row, one button, one line of context. */
-.landing_section-actions{display:flex;flex-wrap:wrap;gap:.85rem clamp(1rem,2vw,1.5rem);align-items:center;
-  margin-top:clamp(2rem,4vw,3rem)}
+.landing_section-actions{display:flex;flex-wrap:wrap;gap:.85rem clamp(var(--space-small),2vw,1.5rem);align-items:center;
+  margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 .landing_section-note{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   color:var(--fg-soft)}
 @media(max-width:559px){ .landing_section-actions .button{flex:1 1 auto} }
 /* The same row on the closer, where the line beside the button carries the
    telephone. */
-.landing_cta-actions{display:flex;flex-wrap:wrap;gap:.85rem clamp(1rem,2vw,1.5rem);align-items:center}
+.landing_cta-actions{display:flex;flex-wrap:wrap;gap:.85rem clamp(var(--space-small),2vw,1.5rem);align-items:center}
 .landing_cta-note{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   color:var(--fg-soft)}
 .landing_cta-note a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
@@ -2432,18 +2488,18 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    The practice's own filmed patients as click-to-play facades (`.video_card`,
    from video-library), which sections/video-library.js now binds anywhere on
    the page. This only spaces the block from the cards above it. */
-.landing_films{margin-top:clamp(2rem,4vw,3rem)}
+.landing_films{margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 /* One film on its own, outside a grid: the closer's and the specialist's. The
    card is a grid of shot + title already; this just stops it stretching. */
 .landing-final_film{display:block;align-self:center}
 
 /* ---------- the doctor's pull-quote ---------- */
-.landing_quote{margin:.4rem 0 0;padding-left:clamp(1rem,2vw,1.4rem);border-left:2px solid var(--rule);
+.landing_quote{margin:.4rem 0 0;padding-left:clamp(var(--space-small),2vw,1.4rem);border-left:2px solid var(--rule);
   font-family:var(--f-display);font-style:italic;font-weight:400;
   font-size:calc(1.35rem * var(--t-mid));line-height:1.35;color:var(--fg)}
 /* The four photographs under the doctor, closer to the split than a section
    gap would put them. */
-.is-tight-spacing{margin-top:clamp(1.5rem,3vw,2.5rem);padding-bottom:clamp(3rem,6vw,5rem)}
+.is-tight-spacing{margin-top:clamp(1.5rem,3vw,2.5rem);padding-bottom:clamp(var(--space-large),6vw,var(--space-xxlarge))}
 
 /* ---------- the process rail ----------
    A line that fills with the scroll and lights each step as it passes. `--p`
@@ -2453,7 +2509,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .landing-steps_line{position:relative;height:1px;background:var(--line);display:none}
 .landing-steps_line i{position:absolute;inset:0;transform:scaleX(var(--p,0));transform-origin:left;
   background:linear-gradient(90deg,var(--gold-deep),var(--gold) 60%,var(--gold-light))}
-.landing-steps_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem);
+.landing-steps_grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,var(--space-medium));
   position:relative}
 .landing-steps_grid::before{content:"";position:absolute;left:.95rem;top:.6rem;bottom:.6rem;width:1px;
   background:var(--line)}
@@ -2467,7 +2523,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   transition:border-color .5s ease,color .5s ease,background .5s ease}
 .landing-steps_step.is-lit .landing-steps_number{border-color:var(--rule);color:var(--black);
   background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
-.landing-steps_image-wrapper{position:relative;overflow:hidden;margin:0 0 .5rem;aspect-ratio:4/3;
+.landing-steps_image-wrapper{position:relative;overflow:hidden;margin:0 0 var(--space-xsmall);aspect-ratio:4/3;
   background:var(--mist)}
 .landing-steps_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   transition:transform .8s cubic-bezier(.22,1,.36,1)}
@@ -2478,7 +2534,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   .landing-steps_grid.is-four{grid-template-columns:repeat(4,1fr)}
   .landing-steps_grid::before{display:none}
   .landing-steps_step{padding-left:0;padding-top:.4rem}
-  .landing-steps_step .landing-steps_number{position:static;margin-bottom:.5rem}
+  .landing-steps_step .landing-steps_number{position:static;margin-bottom:var(--space-xsmall)}
 }
 
 /* ---------- the options ----------
@@ -2487,15 +2543,15 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    publishes none, and the note under the cards says so in the page. */
 .landing-tiers_component{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
   border:1px solid var(--line)}
-.landing-tiers_tier{background:var(--card);padding:clamp(1.5rem,2.6vw,2.2rem);display:grid;gap:1rem;
+.landing-tiers_tier{background:var(--card);padding:clamp(1.5rem,2.6vw,2.2rem);display:grid;gap:var(--space-small);
   align-content:start}
 .landing-tiers_tier h3{font-size:calc(1.62rem * var(--t-mid))}
 .landing-tiers_tier p{color:var(--fg-body);font-weight:400}
-.landing-tiers_image-wrapper{position:relative;overflow:hidden;margin:0 0 .25rem;aspect-ratio:16/10;
+.landing-tiers_image-wrapper{position:relative;overflow:hidden;margin:0 0 var(--space-xxsmall);aspect-ratio:16/10;
   background:var(--mist)}
 .landing-tiers_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.landing-tiers_spec{display:grid;gap:.6rem;margin:0;padding-top:1rem;border-top:1px solid var(--line)}
-.landing-tiers_spec div{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.landing-tiers_spec{display:grid;gap:.6rem;margin:0;padding-top:var(--space-small);border-top:1px solid var(--line)}
+.landing-tiers_spec div{display:flex;justify-content:space-between;gap:var(--space-small);align-items:baseline}
 .landing-tiers_spec dt{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--fg-soft);font-weight:600}
 .landing-tiers_spec dd{margin:0;color:var(--fg);font-weight:600;text-align:right}
@@ -2506,11 +2562,11 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 /* ---------- the FAQ beside a photograph ----------
    Not sticky: ScrollSmoother transforms #smooth-content, and position:sticky
    inside a transformed ancestor sticks to the ancestor, not the viewport. */
-.landing-faq_grid{display:grid;gap:clamp(1.75rem,3.5vw,3rem);align-items:start}
+.landing-faq_grid{display:grid;gap:clamp(1.75rem,3.5vw,var(--space-large));align-items:start}
 .landing-faq_image-wrapper{position:relative;overflow:hidden;margin:0;aspect-ratio:16/9;background:var(--mist)}
 .landing-faq_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .landing-faq_image-wrapper figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.2rem;
-  padding:1rem 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
+  padding:var(--space-small) 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
 .landing-faq_image-wrapper figcaption b{font-family:var(--f-display);font-weight:500;
   font-size:calc(1.25rem * var(--t-sm));line-height:1.2}
 .landing-faq_image-wrapper figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
@@ -2532,8 +2588,8 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .landing-final_background::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(11,11,12,.72),rgba(11,11,12,.93) 70%)}
 .landing-final_component>.container-large{position:relative;z-index:1}
-.landing-final_grid{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center}
-.landing-final_content{display:grid;gap:clamp(1rem,2.2vw,1.5rem);justify-items:start}
+.landing-final_grid{display:grid;gap:clamp(var(--space-medium),4vw,3.5rem);align-items:center}
+.landing-final_content{display:grid;gap:clamp(var(--space-small),2.2vw,1.5rem);justify-items:start}
 .landing-final_content h2{max-width:16ch}
 .landing-final_content p{max-width:52ch}
 .landing-final_component .landing_cta-note{color:rgba(255,255,255,.72)}
@@ -2550,11 +2606,11 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    logo files for its credentials and a strip of typeset ones is the honest
    substitute: the name, then each credential as a chip. */
 .landing_credentials{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .8rem;
-  margin-top:clamp(2rem,4vw,3rem);padding-top:clamp(1.25rem,2.4vw,1.8rem);
+  margin-top:clamp(var(--space-medium),4vw,var(--space-large));padding-top:clamp(1.25rem,2.4vw,1.8rem);
   border-top:1px solid rgba(255,255,255,.14)}
 .landing_credentials b{font-family:var(--f-display);font-weight:500;font-size:calc(1.18rem * var(--t-sm));
   color:var(--white);margin-right:.4rem}
-.landing_credentials span{display:inline-block;border:1px solid rgba(255,255,255,.28);padding:.5rem .85rem;
+.landing_credentials span{display:inline-block;border:1px solid rgba(255,255,255,.28);padding:var(--space-xsmall) .85rem;
   font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
   color:rgba(255,255,255,.85);line-height:1.3}
 /* The same strip on a light ground, on the consultation page. Sits inside the
@@ -2568,13 +2624,13 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 
 /* ---------- the thank-you page ----------
    Call-first, as on the reference: the ask, the rating, the doctor. */
-.is-thank-you-hero{align-items:center;padding-bottom:clamp(3rem,6vw,5rem)}
-.thank-you-hero_grid{display:grid;gap:clamp(1.75rem,3.5vw,3rem);align-items:center;width:100%}
+.is-thank-you-hero{align-items:center;padding-bottom:clamp(var(--space-large),6vw,var(--space-xxlarge))}
+.thank-you-hero_grid{display:grid;gap:clamp(1.75rem,3.5vw,var(--space-large));align-items:center;width:100%}
 .thank-you-hero_image-wrapper{position:relative;overflow:hidden;margin:0;aspect-ratio:4/5;max-width:420px;
   background:var(--mist);border:1px solid var(--line)}
 .thank-you-hero_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
 .thank-you-hero_image-wrapper figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:.2rem;
-  padding:1rem 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
+  padding:var(--space-small) 1.2rem;color:#fff;background:linear-gradient(transparent,rgba(11,11,12,.86))}
 .thank-you-hero_image-wrapper figcaption b{font-family:var(--f-display);font-weight:500;
   font-size:calc(1.25rem * var(--t-sm));line-height:1.2}
 .thank-you-hero_image-wrapper figcaption span{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
@@ -2591,10 +2647,10 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
    content is a ::before. */
 /* The heading above the list, which used to take its spacing from the
    .split_component .split_content grid it sat in. */
-.next-steps_heading{margin-bottom:clamp(1.25rem,2.4vw,2rem)}
-.next-steps_list{display:grid;gap:clamp(1rem,2vw,1.6rem);margin:0;padding:0;max-width:62ch}
-.next-steps_list div{display:grid;grid-template-columns:auto 1fr;gap:.2rem clamp(1rem,2vw,1.5rem);
-  align-items:start;padding-bottom:clamp(1rem,2vw,1.6rem);border-bottom:1px solid var(--line)}
+.next-steps_heading{margin-bottom:clamp(1.25rem,2.4vw,var(--space-medium))}
+.next-steps_list{display:grid;gap:clamp(var(--space-small),2vw,1.6rem);margin:0;padding:0;max-width:62ch}
+.next-steps_list div{display:grid;grid-template-columns:auto 1fr;gap:.2rem clamp(var(--space-small),2vw,1.5rem);
+  align-items:start;padding-bottom:clamp(var(--space-small),2vw,1.6rem);border-bottom:1px solid var(--line)}
 .next-steps_list div:last-child{border-bottom:0;padding-bottom:0}
 .next-steps_list dt{grid-row:span 2;font-family:var(--f-display);
   font-size:calc(2.34rem * var(--t-mid));line-height:1;color:var(--accent-lg)}
@@ -2608,12 +2664,12 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
   .next-steps_list{grid-template-columns:repeat(3,1fr);max-width:none;
     gap:clamp(1.5rem,3vw,2.75rem)}
   .next-steps_list div{padding-bottom:0;border-bottom:0;
-    padding-left:clamp(1.25rem,2.4vw,2rem);border-left:1px solid var(--line)}
+    padding-left:clamp(1.25rem,2.4vw,var(--space-medium));border-left:1px solid var(--line)}
   .next-steps_list div:first-child{padding-left:0;border-left:0}
 }
 /* Why waiting is not free. Not a countdown, not a discount. */
 .lp-warn{border:1px solid var(--line);border-left:3px solid var(--rule);background:var(--bg-3);
-  padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:1rem;align-content:start}
+  padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:var(--space-small);align-content:start}
 .lp-warn h3{font-size:calc(1.62rem * var(--t-mid))}
 .lp-warn ul{display:grid;gap:.75rem;margin:0;padding:0;list-style:none}
 .lp-warn li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:start;
@@ -2621,24 +2677,24 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .lp-warn li i{font-style:normal;color:var(--accent);line-height:1.6}
 .lp-warn p{font-size:.84rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
 /* Call, visit, hours: the office details beside the closing ask. */
-.landing_contact-details{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.4rem)}
+.landing_contact-details{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),2vw,1.4rem)}
 .landing_contact-details div{display:grid;gap:.3rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.18)}
 .landing_contact-details b{font-family:var(--f-display);font-weight:500;font-size:calc(1.25rem * var(--t-sm));
   color:var(--white);line-height:1.25}
 .landing_contact-details b a{color:var(--white)}
 .landing_contact-details b a:hover{color:var(--gold-light)}
 .landing_contact-details span{font-size:.84rem;color:rgba(255,255,255,.72);font-weight:400;line-height:1.5}
-.landing_contact-details .text-style-tagline{color:var(--gold-light);font-size:.64rem}
+.text-style-tagline.is-landing-contact{color:var(--gold-light);font-size:.64rem}
 @media(min-width:600px){ .landing_contact-details{grid-template-columns:1fr 1fr} }
 
 /* ---------- the footer ----------
    `footer.footer_component` with the site map taken out: two offices, the hours, the legal
    pair and the medical disclaimer a paid dental page has to carry. */
-.landing-footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+.landing-footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-medium),4vw,var(--space-large))}
 .landing-footer_disclaimer{margin-top:clamp(1.75rem,3.5vw,2.75rem);padding-top:clamp(1.25rem,2.4vw,1.8rem);
   border-top:1px solid rgba(255,255,255,.1);font-size:.78rem;line-height:1.7;
   color:rgba(255,255,255,.6);max-width:100ch;font-weight:400}
-.landing-footer_office{display:grid;gap:.5rem;font-size:.92rem;font-weight:300;
+.landing-footer_office{display:grid;gap:var(--space-xsmall);font-size:.92rem;font-weight:300;
   color:rgba(255,255,255,.72);line-height:1.7}
 .landing-footer_office address{font-style:normal}
 @media(min-width:860px){ .landing-footer_grid{grid-template-columns:1.4fr 1fr 1fr} }
@@ -2652,7 +2708,7 @@ footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding
 .mobile-bar_component{position:fixed;left:0;right:0;bottom:0;z-index:125;display:none;
   gap:1px;background:rgba(138,126,78,.4);padding-bottom:env(safe-area-inset-bottom,0px);
   box-shadow:0 -10px 30px rgba(20,20,22,.16)}
-.mobile-bar_component a{display:flex;align-items:center;justify-content:center;gap:.5rem;
+.mobile-bar_component a{display:flex;align-items:center;justify-content:center;gap:var(--space-xsmall);
   padding:1.1rem .7rem;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
   font-weight:700;text-align:center}
 .mobile-bar_component .mobile-bar_call{background:var(--ink-900);color:var(--white)}

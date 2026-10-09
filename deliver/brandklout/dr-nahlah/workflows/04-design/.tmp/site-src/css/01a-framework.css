@@ -1,0 +1,54 @@
+/* Mirror of the Instatic Framework on https://staging.drnahlah.com, pulled 2026-10-08.
+   The Framework is the source of truth: edit there, then pull. framework.mjs pull --out <this file> */
+:root {
+  --gold: #AB9E6A;
+  --gold-light: #D4CDB2;
+  --gold-deep: #8A7E4E;
+  --gold-wash: #F5F2E9;
+  --gold-ink: #665C33;
+  --black: #0B0B0C;
+  --ink-900: #141416;
+  --ink-800: #1C1C1F;
+  --ink-700: #2A2A2E;
+  --ink-500: #6B6B72;
+  --white: #fff;
+  --warm: #FAF8F3;
+  --mist: #F0EDE6;
+  --bg: #FAF8F3;
+  --bg-2: #FFFFFF;
+  --bg-3: #F5F2E9;
+  --card: #FFFFFF;
+  --fg: #141416;
+  --fg-body: #3A3A40;
+  --fg-soft: #55555C;
+  --fg-faint: #6E6E76;
+  --line: rgba(20,20,22,.13);
+  --line-2: rgba(20,20,22,.07);
+  --line-strong: rgba(20,20,22,.3);
+  --scrim: rgba(11,11,12,.62);
+  --accent: var(--gold-ink);
+  --accent-lg: var(--gold-deep);
+  --rule: var(--gold-deep);
+  --focus: var(--gold-deep);
+  --size-display-1: 6.66rem;
+  --size-display-2: 4.68rem;
+  --size-heading-2: 3.24rem;
+  --size-heading-3: 1.71rem;
+  --size-body-large: 1.13rem;
+  --size-body: 0.98rem;
+  --size-label: 0.7rem;
+  --gutter-min: 1.25rem;
+  --gutter-max: 4.5rem;
+  --section-min: 4.5rem;
+  --section-max: 9.5rem;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-huge: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+}

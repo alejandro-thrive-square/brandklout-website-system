@@ -17,7 +17,7 @@
 .section_proof .proof_film h2{font-size:var(--d2);max-width:16ch;margin-inline:auto}
 .section_proof .proof_film p{margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:44ch;
   margin-inline:auto;font-weight:300}
-.section_proof .proof_story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.section_proof .proof_story{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-medium),5vw,4.5rem);align-items:center}
 .section_proof .proof_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
 .section_proof .proof_image-wrapper img{width:100%;height:100%;object-fit:cover;will-change:transform}
 .section_proof blockquote{margin:0;font-family:var(--f-display);font-size:calc(2.61rem * var(--t-lg));
@@ -25,20 +25,20 @@
 .section_proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
   letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
 .section_proof .proof_quote-mark{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--accent-lg);
-  line-height:.6;display:block;margin-bottom:.5rem}
+  line-height:.6;display:block;margin-bottom:var(--space-xsmall)}
 @media(min-width:1024px){ .section_proof .proof_story{grid-template-columns:.95fr 1.05fr} }
 
 /* --- google reviews --- */
-.proof_reviews{margin-top:clamp(3.5rem,7vw,6rem)}
+.proof_reviews{margin-top:clamp(3.5rem,7vw,var(--space-huge))}
 .reviews_head{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;
   align-items:flex-end;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 .reviews_head h3{font-size:var(--h2);max-width:16ch}
 .reviews_subtitle{margin-top:.7rem;color:var(--fg-soft);font-weight:300;font-size:.94rem}
-.reviews_score{display:flex;align-items:center;gap:clamp(1rem,1.6vw,1.4rem)}
+.reviews_score{display:flex;align-items:center;gap:clamp(var(--space-small),1.6vw,1.4rem)}
 /* Vector mark — the old raster lockup went soft and unreadable at this size. */
 .reviews_score img{width:clamp(48px,5.6vw,72px);height:auto;flex:none}
 .reviews_score b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));
-  font-weight:500;display:flex;align-items:center;gap:.5rem}
+  font-weight:500;display:flex;align-items:center;gap:var(--space-xsmall)}
 .reviews_score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-soft)}
 .reviews_stars{color:var(--accent);letter-spacing:.12em;font-style:normal;font-size:.9em}
@@ -61,7 +61,7 @@
   margin-top:clamp(1.5rem,3vw,2.25rem)}
 .reviews_card{background:var(--card);padding:clamp(1.35rem,2.2vw,1.9rem);
   display:grid;gap:.9rem;align-content:start}
-.reviews_meta{display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.reviews_meta{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-small)}
 .reviews_date{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint)}
 .reviews_card p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.75;margin:0}
 .reviews_card footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:var(--fg);

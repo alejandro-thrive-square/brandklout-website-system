@@ -20,9 +20,9 @@
 
 .section_services{background:var(--bg);position:relative}
 
-.section_services .services_head{max-width:62ch;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.section_services .services_head{max-width:62ch;margin-bottom:clamp(2.5rem,5vw,var(--space-xlarge))}
 .section_services .services_head h2{font-size:var(--h2);margin-top:.75rem}
-.section_services .services_head p{color:var(--fg-body);font-weight:400;margin-top:1rem}
+.section_services .services_head p{color:var(--fg-body);font-weight:400;margin-top:var(--space-small)}
 
 /* One column on a phone, two from 620px, three from 1040px. The card is tall
    enough that four across would strand the last row on most laptops. */
@@ -79,7 +79,7 @@
 
 .section_services .services_more{margin-top:auto;font-family:var(--f-body);font-size:.7rem;
   letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--accent)}
-.section_services .services_more::after{content:"→";display:inline-block;margin-left:.5rem;
+.section_services .services_more::after{content:"→";display:inline-block;margin-left:var(--space-xsmall);
   transition:transform .4s}
 .wz-fine .section_services .services_card:hover .services_more::after{transform:translateX(5px)}
 

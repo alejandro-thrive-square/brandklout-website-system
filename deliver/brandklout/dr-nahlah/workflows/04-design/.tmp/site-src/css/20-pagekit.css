@@ -1,6 +1,6 @@
 /* ---------- hero ---------- */
 .section_page-hero{position:relative;min-height:clamp(560px,78svh,860px);display:flex;align-items:flex-end;
-  overflow:hidden;padding-top:clamp(8rem,15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
+  overflow:hidden;padding-top:clamp(var(--space-xhuge),15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
   background:var(--bg)}
 /* THE HERO SEAM. The photo carries a filter and the [data-drift] parallax, so
    it lives on its own compositor layer. Under ScrollSmoother the page sits at a
@@ -33,18 +33,18 @@
     radial-gradient(90% 70% at 80% 38%,rgba(171,158,106,.20),transparent 62%),
     linear-gradient(100deg,rgba(250,248,243,.98) 0%,rgba(250,248,243,.94) 44%,rgba(250,248,243,.34) 80%),
     linear-gradient(180deg,rgba(250,248,243,.86) 0%,rgba(250,248,243,.22) 34%,rgba(250,248,243,.96) 100%)}
-.section_page-hero .page-hero_content{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
+.section_page-hero .page-hero_content{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,var(--space-medium))}
 .section_page-hero h1{font-size:var(--d2);max-width:17ch}
 .section_page-hero h1 em{font-style:italic;color:var(--accent-lg)}
 /* Treatment heroes (SEO 2026-10-06): a keyword <h1> in the eyebrow style, the designed headline as
    <p data-split> with exactly the look the hero h1 gave it. Mirrors the Instatic registry rules. */
 .section_page-hero p[data-split]{font-family:var(--f-display);font-weight:500;line-height:1.02;letter-spacing:-.02em;color:var(--fg);font-size:var(--d2);max-width:17ch}
 .section_page-hero p[data-split] em{font-style:italic;color:var(--accent-lg)}
-.section_page-hero h1.text-style-tagline{font-size:var(--label);max-width:none;line-height:1.5;margin-bottom:1rem}
+.section_page-hero h1.text-style-tagline{font-size:var(--label);max-width:none;line-height:1.5;margin-bottom:var(--space-small)}
 .section_page-hero .page-hero_lead{max-width:52ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
 .section_page-hero .page-hero_actions{display:flex;flex-wrap:wrap;gap:.85rem}
-.section_page-hero .page-hero_meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
-  padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
+.section_page-hero .page-hero_meta{display:flex;flex-wrap:wrap;gap:clamp(var(--space-small),3vw,2.75rem);margin-top:var(--space-xsmall);
+  padding-top:clamp(var(--space-small),2.4vw,1.6rem);border-top:1px solid var(--line)}
 .section_page-hero .page-hero_meta div{display:grid;gap:.15rem}
 .section_page-hero .page-hero_meta b{display:block;font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
 .section_page-hero .page-hero_meta span{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
@@ -67,11 +67,11 @@
 .section_content.is-background-light{background:var(--bg-3)}
 .section_content h1,.section_content h2{font-size:var(--h2);max-width:18ch}
 .section_content h3{font-size:var(--h3)}
-.section-heading_component{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
+.section-heading_component{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(var(--space-medium),4.5vw,3.5rem)}
 .section-heading_component p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}
 
 /* ---------- lede: sticky heading + prose ---------- */
-.intro_component{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
+.intro_component{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:start}
 .intro_component .intro_head{position:relative}
 /* links inside the intro copy need more than colour to stand out (axe link-in-text-block) */
 .intro_head p a{text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1px}
@@ -84,7 +84,7 @@
 }
 
 /* ---------- numbered / icon cards ---------- */
-.card_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.card_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),1.8vw,1.5rem)}
 .card_component{background:var(--card);border:1px solid var(--line);
   padding:clamp(1.4rem,2.4vw,2.1rem);display:grid;gap:.75rem;align-content:start;
   transition:border-color .45s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
@@ -152,7 +152,7 @@
   .card_grid.is-four-column{grid-template-columns:repeat(4,1fr)} }
 
 /* ---------- split: image + copy ---------- */
-.split_component{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center}
+.split_component{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:center}
 .split_component .split_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
 .split_component .split_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
@@ -195,7 +195,7 @@
 @media(min-width:820px){ .stats_component{grid-template-columns:repeat(4,1fr)} }
 
 /* ---------- before / after pair ---------- */
-.before-after_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+.before-after_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),2vw,1.75rem)}
 @media(min-width:700px){ .before-after_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .before-after_grid.is-three-column-cases{grid-template-columns:repeat(3,1fr)} }
 .before-after_component{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);
@@ -230,8 +230,8 @@
 .faq_list{display:grid;gap:0;max-width:80ch}
 .faq_list details{border-top:1px solid var(--line)}
 .faq_list details:last-of-type{border-bottom:1px solid var(--line)}
-.faq_list summary{list-style:none;cursor:pointer;padding-block:clamp(1rem,2vw,1.4rem);
-  display:flex;align-items:flex-start;gap:1rem;font-family:var(--f-display);
+.faq_list summary{list-style:none;cursor:pointer;padding-block:clamp(var(--space-small),2vw,1.4rem);
+  display:flex;align-items:flex-start;gap:var(--space-small);font-family:var(--f-display);
   font-size:calc(1.35rem * var(--t-sm));font-weight:500;transition:color .3s}
 .faq_list summary::-webkit-details-marker{display:none}
 .faq_list summary{color:var(--fg)}
@@ -245,7 +245,7 @@
 
 /* ---------- next-steps cross links ---------- */
 .related-pages_component{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
-.related-pages_component a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:.5rem;
+.related-pages_component a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:var(--space-xsmall);
   transition:background .4s ease}
 .section_content.is-background-alternate .related-pages_component a{background:var(--bg-2)}
 .related-pages_component a:hover{background:var(--bg-3)}
@@ -287,8 +287,8 @@
    after that there is nothing left for the browser to re-balance. */
 .cta-band_component h2{font-size:var(--d2);max-width:15ch;text-wrap:balance}
 .cta-band_component p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
-.cta-band_component .cta-band_phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
-  margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
+.cta-band_component .cta-band_phones{display:flex;flex-wrap:wrap;gap:.6rem var(--space-medium);justify-content:center;
+  margin-top:var(--space-xsmall);font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
 .cta-band_component .cta-band_phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
   border-bottom:1px solid rgba(11,11,12,.3)}
 

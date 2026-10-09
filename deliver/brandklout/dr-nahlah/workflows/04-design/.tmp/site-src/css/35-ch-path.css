@@ -13,7 +13,7 @@
 .section_path .path_head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
   max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
 .section_path h2{font-size:var(--h2);max-width:16ch}
-.section_path .path_track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+.section_path .path_track{display:flex;gap:clamp(var(--space-small),2.4vw,var(--space-medium));
   padding-right:var(--pa-inset-end);padding-left:var(--pa-inset);
   width:max-content;align-items:stretch}
 .section_path .path_card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
@@ -71,13 +71,13 @@
    none. `scroll-margin-top` does the same for an anchor jump to #path. */
 .section_path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
 .section_path.is-swipe .path_pin{height:auto;
-  padding-top:calc(var(--nav-h,78px) + clamp(2rem,6vw,3.5rem));
-  padding-bottom:clamp(3rem,9vw,5rem)}
+  padding-top:calc(var(--nav-h,78px) + clamp(var(--space-medium),6vw,3.5rem));
+  padding-bottom:clamp(var(--space-large),9vw,var(--space-xxlarge))}
 .section_path.is-swipe .path_track{
   overflow-x:auto;overflow-y:hidden;width:auto;
   scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
   -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;padding-bottom:.5rem}
+  scrollbar-width:none;padding-bottom:var(--space-xsmall)}
 .section_path.is-swipe .path_track::-webkit-scrollbar{display:none}
 .section_path.is-swipe .path_card{scroll-snap-align:center;
   border-color:var(--line);transition:border-color .5s}
@@ -115,5 +115,5 @@
    appears once the reader actually swipes — which is exactly how it reached
    production unnoticed. The bar only needs to leave the absolute flow of the
    pinned build; relative does that and keeps the fill anchored. */
-.section_path.is-swipe .path_progress-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
+.section_path.is-swipe .path_progress-bar{position:relative;margin-top:clamp(1.25rem,4vw,var(--space-medium));
   margin-inline:var(--pa-inset) var(--pa-inset-end)}

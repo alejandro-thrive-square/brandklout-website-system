@@ -1,13 +1,13 @@
 .section_reality{position:relative;background:var(--bg)}
 .section_reality .reality_stage{min-height:100svh;display:grid;align-content:center;
-  padding-block:clamp(4rem,10vw,8rem);position:relative;z-index:2}
+  padding-block:clamp(var(--space-xlarge),10vw,var(--space-xhuge));position:relative;z-index:2}
 .section_reality .reality_statement{font-family:var(--f-display);font-size:var(--d2);line-height:1.14;
   letter-spacing:-.02em;max-width:22ch}
 .section_reality .reality_statement{color:var(--fg)}
 /* The unread state has to be faint enough to read as "not yet" and dark
    enough to still be legible copy on cream. */
 .section_reality .reality_statement .wz-word{color:rgba(20,20,22,.66)} /* >= 4.5:1 before it is written (Brandklout rule; QA 2026-09-28) */
-.section_reality .reality_after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
+.section_reality .reality_after{margin-top:clamp(var(--space-medium),4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
 .section_reality .reality_after p{color:var(--fg-body);font-weight:400;line-height:1.8}
 .section_reality .reality_image-wrapper{position:absolute;right:0;top:50%;transform:translateY(-50%);
   width:min(38vw,520px);aspect-ratio:4/5;overflow:hidden;z-index:1;opacity:.5}

@@ -63,7 +63,7 @@
 .nav_component[data-journey="1"].is-solid .nav_links{opacity:0;pointer-events:none}
 .nav_component[data-journey="1"].is-solid .nav_chapter{opacity:1}
 
-.nav_actions{display:flex;align-items:center;gap:clamp(.5rem,1.4vw,1.1rem)}
+.nav_actions{display:flex;align-items:center;gap:clamp(var(--space-xsmall),1.4vw,1.1rem)}
 .nav_button{border:1px solid var(--rule);color:var(--fg);padding:.7rem 1.4rem;font-size:var(--label);
   letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;
   transition:background .4s,color .4s}

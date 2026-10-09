@@ -1,5 +1,5 @@
 .section_specialist{background:var(--bg-3);position:relative;overflow:hidden}
-.section_specialist .specialist_grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.section_specialist .specialist_grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,var(--space-xxlarge));align-items:start}
 .section_specialist .specialist_portrait{position:relative}
 .section_specialist .specialist_portrait .specialist_plate{position:relative;overflow:hidden;aspect-ratio:4/5;
   background:linear-gradient(160deg,#fff,var(--mist))}
@@ -9,7 +9,7 @@
   height:104%;width:auto;max-width:none;object-fit:contain;
   filter:contrast(1.02) brightness(1.02) saturate(.98);z-index:1}
 .section_specialist .specialist_signature{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
-  background:var(--bg-3);padding:1rem 1.6rem 1rem 0;border-top:1px solid rgba(138,126,78,.45)}
+  background:var(--bg-3);padding:var(--space-small) 1.6rem var(--space-small) 0;border-top:1px solid rgba(138,126,78,.45)}
 .section_specialist .specialist_signature b{display:block;font-family:var(--f-display);font-size:calc(1.6rem * var(--t-mid));
   font-weight:500}
 .section_specialist .specialist_signature span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
@@ -17,7 +17,7 @@
 .section_specialist .specialist_bio{display:grid;gap:1.15rem;max-width:56ch}
 .section_specialist .specialist_bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .section_specialist .specialist_bio strong{color:var(--fg);font-weight:600}
-.specialist_credentials-list{margin-top:clamp(2rem,4vw,3rem)}
+.specialist_credentials-list{margin-top:clamp(var(--space-medium),4vw,var(--space-large))}
 .specialist_credentials-list h3{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
   font-family:var(--f-body);font-weight:600;margin-bottom:1.1rem}
 .specialist_credentials-list ul{list-style:none;margin:0;padding:0;display:grid;gap:0}

@@ -1,4 +1,4 @@
-.gallery_filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
+.gallery_filters{display:flex;flex-wrap:wrap;gap:var(--space-xsmall);margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 /* LIGHT-THEME FILTERS. These were dark-theme whites until 2026-08-11, when
    regenerating the gallery reverted the light inversion (SITE.md bug 21)
    and dropped every inactive filter button to 1.04:1. The generator is the
@@ -13,7 +13,7 @@
 .gallery_filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
   color:#fff}
 .gallery_filters button b{font-weight:600;opacity:.9;margin-left:.45rem}
-.gallery_grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+.gallery_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-small),2vw,1.75rem)}
 @media(min-width:700px){ .gallery_grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1100px){ .gallery_grid{grid-template-columns:repeat(3,1fr)} }
 .gallery_item[hidden]{display:none}

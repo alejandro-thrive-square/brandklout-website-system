@@ -8,11 +8,11 @@
      browser that does not know the keyword drops the declaration and starts
      from the top too, which is the same correct behaviour. */
   display:flex;flex-direction:column;justify-content:safe center;overflow-y:auto;
-  padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
+  padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(var(--space-medium),5vw,var(--space-large))}
 .menu-drawer_component.is-open{clip-path:circle(150% at calc(100% - 42px) 42px)}
 .menu-drawer_grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
 .menu-drawer_column > p{line-height:1.02;font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gold);font-weight:600;margin:0 0 1rem}
+  color:var(--gold);font-weight:600;margin:0 0 var(--space-small)}
 .menu-drawer_component ul{list-style:none;margin:0;padding:0}
 .menu-drawer_column li{overflow:hidden}
 /* The index grew from 11 pages to a four-column site map during the
@@ -30,7 +30,7 @@
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(3) li a{transition-delay:.22s}
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(4) li a{transition-delay:.28s}
 .menu-drawer_component.is-open .menu-drawer_column:nth-child(5) li a{transition-delay:.34s}
-.menu-drawer_footer{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
+.menu-drawer_footer{width:100%;max-width:var(--maxw);margin:clamp(var(--space-medium),5vw,3.25rem) auto 0;
   padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
   display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
 .menu-drawer_footer b{display:block;font-family:var(--f-body);font-size:var(--label);letter-spacing:.18em;

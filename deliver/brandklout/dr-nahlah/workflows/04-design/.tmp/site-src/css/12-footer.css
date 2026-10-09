@@ -3,11 +3,11 @@
    unanchored `.footer_component{background:var(--black)}` rule was painting a black
    plate behind it — inside a cream-coloured section, under dark text. */
 footer.footer_component{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
-  padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
-footer.footer_component .footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+  padding-block:clamp(var(--space-large),6vw,var(--space-xxlarge)) clamp(1.5rem,3vw,2.5rem)}
+footer.footer_component .footer_grid{display:grid;grid-template-columns:1fr;gap:clamp(var(--space-medium),4vw,var(--space-large))}
 footer.footer_component img{width:190px;margin-bottom:1.25rem}
 footer.footer_component h2{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
-  font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
+  font-family:var(--f-body);font-weight:600;margin-bottom:var(--space-small)}
 footer.footer_component ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 footer.footer_component a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
 footer.footer_component a:hover{color:var(--gold)}
@@ -17,7 +17,7 @@ footer.footer_component .footer_blurb{color:rgba(255,255,255,.62);font-weight:30
 footer.footer_component .footer_facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
   color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300}
 footer.footer_component .footer_facts b{color:rgba(255,255,255,.9);font-weight:500}
-footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
-  border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:1rem;
+footer.footer_component .footer_bottom{margin-top:clamp(2.5rem,5vw,var(--space-xlarge));padding-top:1.5rem;
+  border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:var(--space-small);
   justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55)}
 @media(min-width:720px){ footer.footer_component .footer_grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }

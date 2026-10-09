@@ -1,11 +1,11 @@
-.story_row{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center;
+.story_row{display:grid;gap:clamp(1.75rem,4vw,var(--space-xlarge));align-items:center;
   padding-block:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--line)}
 .story_row:first-of-type{border-top:0;padding-top:0}
 .story_image-wrapper{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);margin:0}
 .story_image-wrapper img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* Sits on the photograph, so it keeps its dark plate on every theme. */
 .story_image-wrapper figcaption{position:absolute;left:0;bottom:0;z-index:2;background:var(--black);
-  border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem 1rem;
+  border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem var(--space-small);
   font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
 /* Stands in for a portrait we do not have, without pretending to be one. */
 .st-plate{display:grid;align-content:center;justify-items:start;gap:.6rem;
@@ -16,7 +16,7 @@
   line-height:.7;color:var(--accent-lg)}
 .st-plate .pl-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
   font-weight:600;color:var(--fg-soft)}
-.story_content{display:grid;gap:1rem}
+.story_content{display:grid;gap:var(--space-small)}
 .story_name{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
 .story_quote{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-lg));line-height:1.14;
   letter-spacing:-.02em;margin:0;max-width:22ch}
