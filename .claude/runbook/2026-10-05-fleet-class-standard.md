@@ -123,6 +123,14 @@ Production untouched everywhere. Open for the user: step C per site (below), the
 (below; West LA's `site-src` must not reach production before it). Also open: Mason Park production's
 related-articles loop renders empty; Sang to hear that 15 Brandklout nested-page descriptions are OG
 overrides; IFA `openModal` focus while GSAP hides the modal; IFA lost 13 vh fallbacks.
+**2026-10-09: PAUSED — step C and the production rollout**, by the user, until the Webflow-style model is
+signed off on a pilot. The user tested the Styles panel on IFA staging: Instatic lists EVERY matching rule
+(chips plus every ambient selector), so phase 2's "EDITABLE" (styles reachable in the registry) is not "one
+place per element". Fleet survey: 250–817 contextual `.a .b` rules per site. User's decisions: pilot = Stone
+Med Spa; target = base chip + utility chips + combo chips (`.base.is-x`, native in Instatic), breakpoints in the
+chip, states only as `<chip>:state`, globals only reset/`:root`/Framework; dark sections set text colour on the
+section and headings inherit; allowed exceptions: rich-text children, pseudo-elements on a chip, script-state
+classes as combos. A lint gate defines "done" (Instatic analogue of webflow-build/lint-css.mjs).
 **Step C before/after (2026-10-09, read-only)**: `snap-preview.mjs` (`514132c9`) on all seven staging sites;
 review page https://claude.ai/artifact/LqdhpyVbkqLxoJZPPdqLVq (private). Values that would snap / moving
 more than 8px: Surgical Arts 150/1, Med Spa 319/1, Mason Park 508/0, Kids 335/0, Dr. Nahlah 223/0, IFA 353/14,
