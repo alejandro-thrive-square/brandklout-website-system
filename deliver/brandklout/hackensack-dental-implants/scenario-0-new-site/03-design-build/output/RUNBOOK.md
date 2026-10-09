@@ -2,6 +2,105 @@
 
 Newest run first. Each run: date, what was done (with the commit), what is next, and the gotchas.
 
+## 2026-10-09 · the complete site: 39 pages, Client-First, on staging
+
+Asked for: "We need to finish the entire site please. The homepage was approved."
+
+### Done (commits `9319e015` and the one after it)
+
+- Read first: [`site-review.md`](./site-review.md): the pages, what changed on the approved home,
+  how the inner pages are built, eleven content questions to confirm, what was checked.
+- **Sitemap = the live site's 38 URLs + 404**, no renames, so no redirect map is needed.
+- **site-src rebuilt to the class standard** (CLASS-STANDARD.md, from the first line): tokens in
+  `css/01-tokens.css` (block 1 mirrors the Framework: colours, type bases, spacing, radii; block 2
+  the registry `:root` formulas and per-breakpoint multipliers), `10-client-first.css` (the
+  starter, values set), `20-shell.css` (top strip, navbar with dropdowns from 1280, drawer below,
+  footer, call bar), `30-home.css`, `40-components.css` (shared), `50-pages.css` (inner pages).
+  Every element styled by its own class; no contextual rules except text-rich-text and states.
+  Scripts find everything by `data-` attributes (`js/10-runtime.js`, `js/00-scenes.js`).
+- **Home page ported** to the new classes with its approved look: before/after strips in `look/ab/`
+  (`code/ab.py`). Changes: site menu and footer, keyword H1 "Dental Implants in Hackensack, NJ" in
+  the gold label, links to the new pages (the surgeons now open their profiles).
+- **Pages are modules** (`pages/<path>.mjs`) over the component library `lib/ui.mjs` (28
+  components, each a Client-First folder with its scroll scene). `page()` folds blocks into eight
+  chapters at most. Authoring rules for the next person: `pages/README.md`. Copy placed verbatim
+  from the old-site capture by six parallel agents; every change to old copy is in each module's
+  header comment.
+- **Scenes** (`js/00-scenes.js`): statement, checks, index, timeline, cards, quote, team,
+  specialist, films and financing hold (pin) while they play when they fit the window; each held
+  element gets the id `<scene>-<n>`. Every designed page has three to seven at 1440. Moving text
+  never drops below 0.7 opacity.
+- **Images**: `code/images.json` (manifest) → `code/cut-images.py` (crops by focus, film frames via
+  ffmpeg, cut-outs composited on the portrait ground), `code/image-assign.json` + `assign-images.py`
+  (slot → photo, rewrites alt in the modules), `code/stock.mjs` (Freepik search/download, ledger
+  `assets/stock/stock-ledger.json`, nine photos). 121 images on the site, ledger `images.csv`.
+- New embeds: GHL booking form (contact), GHL referral form (referring doctors), Google map;
+  `code/embed-nodes.mjs` puts every Embed block into the converted payload (31 on 27 pages).
+- **Staging** (two full pushes, `push.log`; backups `backups/pre-site-stg`): 39 pages published,
+  Framework applied (81 variables, seq 16), 404 template set, breakpoints unchanged.
+- **BugHerd #12 done** (`bugherd/2026-10-09/mark-done.txt`): the surgeons link to their profiles,
+  all four profiles serve 200. 23 of 23 done.
+- Gates, local (`LOCAL_GATES=1` build): check-pages FAIL none (39 pages × 1440/390), click-controls
+  DEAD none (113 clicks, 8 pages), word-fit every word fits (360/390), home probe 28/28,
+  class-audit IN BOUNDS, structure-audit CLIENT-FIRST SHAPED, image-reuse 0, fluid-root none,
+  cross-client-grep 0 hits.
+- Gates, staging: editability EDITABLE, class-audit IN BOUNDS, structure-audit CLIENT-FIRST SHAPED
+  (81%), editor-canvas ok, image-reuse `--base` 0 problems, css-declared-parity none,
+  check-staging all passed, check-pages `--base` (9 designed pages) pins 3 to 7 and smoother on;
+  every vendor embed renders (booking form, referral form, map, survey, Elfsight). verify-live: 39
+  routes 200, links and images resolve; its other FAILs are listed under Gotchas.
+
+### Next
+
+1. Team review on BugHerd (Asana *team complete site review*: in progress + comment, confirm with
+   the user first). Fix at the source: `lib/ui.mjs` for a component, the page module for copy.
+2. Rulings on `site-review.md` "To confirm" (eleven items).
+3. Step 05: per-page schema through the `aeo-schema` plugin (the build's own JSON-LD, FAQPage and
+   BreadcrumbList, does not survive the import; staging serves the plugin's skeleton).
+4. On `main` (process fixes, made there, not here):
+   - `push/place-embeds.mjs` skips nested slugs and takes one page per key: adopt
+     `code/embed-nodes.mjs` (Embed nodes into `import-out.json` before `push-site`).
+   - The push chain needs `framework.mjs apply` after every full replace (the import re-adds the
+     `:root` tokens); `framework.mjs extract` files `heading-gap` under typography and leaves the
+     type bases out of `registry.remove`.
+   - `check-pages.mjs` looks a pin up by its first class when it has no id (`.padding-section-large`
+     found the wrong element); scenes now set ids, the gate should key on the trigger itself.
+   - `check-pages` needs a switch to empty vendor embeds for local runs (Hackensack's `LOCAL_GATES`).
+   - `compare-live` / `visual-diff` see only top-level pages; `verify-live` / `verify-motion-live`
+     assert West LA names; `--site` needs `INSTATIC_PASSWORD` in the master section.
+   - Directive 03 item 12 asks for the blog as a CMS collection; the collection tooling is not in
+     the toolkit (listed, not copied, from bk-brandklout-website).
+
+### Gotchas
+
+- **Windows MAX_PATH**: a media file named after a blog slug pushed Python past 260 characters;
+  blog images have short names (`blog-cost.webp`).
+- **A Node build cannot delete `dist/` while a shell's cwd is inside it** (EPERM).
+- **`check-pages.mjs` never settles locally with the vendor widgets in** (Elfsight keeps the network
+  busy, GHL's Turnstile answers 401): `LOCAL_GATES=1 node build.mjs` empties the embed markers for
+  local browser gates. Never push that build; `push-staging.sh` builds without it.
+- **Pins need to fit the window.** A scene holds only when its element is shorter than the window
+  (900px in the gate); long copy pushed four pages under three pins until the films, financing,
+  team, specialist and quote scenes held too, and the index holds its own list when the chapter
+  is too tall.
+- **No pipes in the push chain**: Node 24 on Windows dies with a libuv assertion when piped;
+  `push-staging.sh` writes straight to `push.log`. Start it detached (`Start-Process` a `.cmd`) so a
+  background-shell reap cannot cut a full replace in half.
+- **`framework.mjs apply` refuses** while any registry `:root` rule still declares a Framework name;
+  the spec's `registry.remove` now lists all 81.
+- **verify-live false FAILs**: West LA runtime classes (`.is-solid`, `.wz-smooth` … not used here),
+  "tokens missing from userStyles" (they are in the Framework), `wz-ready`. Real ones: the
+  duplicate title (to confirm) and the HIPAA notice's two hhs.gov `.html` links (external, fine).
+- **Live structure-audit counts differently** from `--local` (registry rules, not files): 81% local
+  became 78% live until thirteen exact-value literals moved to `--space-tiny` / `--grid-gap` /
+  `--global` (same pixels).
+- **check-staging asserted the H1's font**: the H1 is now the DM Sans keyword label, so the check
+  reads the display headline (`.arrival_heading`).
+- **An RGBA cut-out converted straight to RGB goes black** (the doctors' portraits): composite on
+  the portrait ground first.
+- The full-page capture repeats from the top past 16,384px (Chrome's texture limit): long phone
+  pages look doubled in `look/pages`; it is the capture, not the page.
+
 ## 2026-10-02 (evening) · the right Google reviews widget, BugHerd #10 done
 
 Alejandro supplied the right Elfsight widget: `948f2cd1-3863-46db-a63b-689bfc31ace0`, connected to

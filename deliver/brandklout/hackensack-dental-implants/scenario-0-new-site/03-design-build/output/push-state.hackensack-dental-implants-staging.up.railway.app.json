@@ -1,17 +1,245 @@
 {
  "shell": {
-  "sourceHash": "ba0e127b86b23736",
-  "styleRulesHash": "4c440a5158b7faca",
-  "seq": 12
+  "sourceHash": "a85dac4ec756c76d",
+  "styleRulesHash": "55fd0bd022bd4919",
+  "seq": 16
  },
  "pages": {
+  "404": {
+   "id": "KTgCrr6-2l9Tz_gUCNEeA",
+   "seq": 15,
+   "htmlHash": "76bdb0b635302dd7",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "terms-conditions": {
+   "id": "pgQ8LbzU3EPX-w9qYUJoh",
+   "seq": 15,
+   "htmlHash": "62ce77558a3fd9bf",
+   "pushedAt": "2026-10-09T20:15:25.390Z"
+  },
+  "technology": {
+   "id": "aexJc_ROzeNuok3o_m7Xx",
+   "seq": 15,
+   "htmlHash": "eb3118f254d05619",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/smile-makeovers": {
+   "id": "Zhc55RiOJCTAC7Nnq3jui",
+   "seq": 15,
+   "htmlHash": "a769a95e62e59641",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/single-implant": {
+   "id": "ucneSvqIQ7sMW9dgj_C8w",
+   "seq": 15,
+   "htmlHash": "a3e702ccba415afa",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/sedation": {
+   "id": "SGreVR08SYAEYes4gPCI6",
+   "seq": 15,
+   "htmlHash": "c212637bc8439c6a",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/implant-revision": {
+   "id": "O4XD-jZ78x5iu0uTqebe3",
+   "seq": 15,
+   "htmlHash": "92f1d00c5b1dd3af",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/implant-bridges": {
+   "id": "eOPJDy9p_FDVYYOPW8-RP",
+   "seq": 15,
+   "htmlHash": "06463dc9b37c89b5",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/full-mouth-rehabilitation": {
+   "id": "tc2CFlAKRbnypnyyRIdrR",
+   "seq": 15,
+   "htmlHash": "4c30f5b3eab68400",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/emergency-dental-care": {
+   "id": "6NoKr5MyEGTzoF2PN7H05",
+   "seq": 15,
+   "htmlHash": "8b6966363836a926",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/dental-implants": {
+   "id": "y3KLO7W9s9MPBheDRYKTR",
+   "seq": 15,
+   "htmlHash": "39cfec720c032d97",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services/all-on-x": {
+   "id": "liGj3yXlP4zsZ8I0LCofP",
+   "seq": 15,
+   "htmlHash": "a29c20ab52fe2120",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "services": {
+   "id": "icgtzYVoQvALF0_euyc1y",
+   "seq": 15,
+   "htmlHash": "ddf37e37303fc67f",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "referring-doctors": {
+   "id": "FThKCjMfRXZjgprmNNpbw",
+   "seq": 15,
+   "htmlHash": "1442679e7813098f",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "privacy-policy": {
+   "id": "P0bk368qPwvE7F5d5wYSG",
+   "seq": 15,
+   "htmlHash": "c5c0a2ab0b56cf0d",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "patient-testimonials": {
+   "id": "jlJksaRoWjMEBHLPKK1Ib",
+   "seq": 15,
+   "htmlHash": "4248d5d37637cd68",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "pre-post-op-instructions": {
+   "id": "i7ZC9-GVeH5m0wQHeLjj5",
+   "seq": 15,
+   "htmlHash": "63b08ce707933182",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "office-gallery": {
+   "id": "zkdbibMIUNS3m1d6A8Zq-",
+   "seq": 15,
+   "htmlHash": "694d3b4b44992e24",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "insurance-financing": {
+   "id": "UD7bTXpoFpPAigowA1UzC",
+   "seq": 15,
+   "htmlHash": "6d85dfcb074ec4b1",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "hipaa-disclosure": {
+   "id": "x00vrdmqVogLzBRd0omAK",
+   "seq": 15,
+   "htmlHash": "4ee4648e8589c514",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "gallery": {
+   "id": "HTgao5SrzwgJB7rUnzW5I",
+   "seq": 15,
+   "htmlHash": "5501598bfa8ae8f2",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "first-visit-expectations": {
+   "id": "7GLn7VFSt2E0EH4jQgYFA",
+   "seq": 15,
+   "htmlHash": "798d6d8b08f3bbb4",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "dr-won-sang-lee-dds": {
+   "id": "ZZ6TH0jXywvlRqgPKCrXV",
+   "seq": 15,
+   "htmlHash": "95157ead19adf604",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "dr-maurice-srour-dds": {
+   "id": "SF0BWhohLQ8tk5dgAQcPy",
+   "seq": 15,
+   "htmlHash": "dd739724519d0ccc",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "dr-dmitriy-klass-dds-msd": {
+   "id": "jTbEaMYrBSwk5u5GBCf66",
+   "seq": 15,
+   "htmlHash": "6de4f02889e57212",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "dr-alan-meskin": {
+   "id": "WNr1qHDjQBNPwyrfDASus",
+   "seq": 15,
+   "htmlHash": "5670ab26717306a6",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "dental-implant-faqs": {
+   "id": "WSprM7TzrJI0DSyfx3ilw",
+   "seq": 15,
+   "htmlHash": "32345946f4e746f5",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "cost-of-dental-implants": {
+   "id": "Jyvc5lUs6TJ9K480I4rXk",
+   "seq": 15,
+   "htmlHash": "57da861757421183",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "cookie-policy": {
+   "id": "LLVKJHhHC8BigXqsd4vPI",
+   "seq": 15,
+   "htmlHash": "61029e7253e1cb9d",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "contact": {
+   "id": "3Bhsy8RApqdk-3i0f-HTk",
+   "seq": 15,
+   "htmlHash": "911ccb9566d748e7",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/foods-to-eat-and-avoid-after-dental-implant-surgery": {
+   "id": "9zf07F4wY_5DnT01kbOMJ",
+   "seq": 15,
+   "htmlHash": "fc398b28db86762e",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/dental-implants-no-bone-zygomatic-implants-explained": {
+   "id": "bflxu7T8sCZstLLgTikOQ",
+   "seq": 15,
+   "htmlHash": "65b11b41b5ed0da4",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/dental-implant-recovery-week-by-week-aftercare-guide": {
+   "id": "sDmCKctqwzt4BTM9rbX1X",
+   "seq": 15,
+   "htmlHash": "ae6192dac3ca6779",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/dental-implant-cost-hackensack-nj-2026-pricing-guide": {
+   "id": "y0MxjK6WYmLTP0olZg_sZ",
+   "seq": 15,
+   "htmlHash": "300be7b48be64bea",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/all-on-x-vs-traditional-dentures-comparison-2026": {
+   "id": "YOmqgXPH3BX8Pi7O2EVc4",
+   "seq": 15,
+   "htmlHash": "0d47f16d62e20add",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog/all-on-x-recovery-day-after-same-day-teeth-surgery": {
+   "id": "lXpyoUQm-kcdF13lrltPr",
+   "seq": 15,
+   "htmlHash": "d38d5ffd09e34d9c",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "blog": {
+   "id": "yriJ3qJK9WI1I4s7Uc4wk",
+   "seq": 15,
+   "htmlHash": "df83782495579b45",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
+  "about": {
+   "id": "zwMEwZbFoZKvCx-xBTiSh",
+   "seq": 15,
+   "htmlHash": "78e506e2a6fd6c9b",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
+  },
   "index": {
    "id": "p3U8L4we7hCRpHe4KyIKy",
-   "seq": 12,
-   "htmlHash": "3390f7991d71bd22",
-   "pushedAt": "2026-10-02T23:47:10.650Z"
+   "seq": 15,
+   "htmlHash": "1c1b050bdb5cfbef",
+   "pushedAt": "2026-10-09T20:15:25.392Z"
   }
  },
- "recordedAt": "2026-10-02T23:47:16.614Z",
+ "recordedAt": "2026-10-09T20:15:38.101Z",
  "base": "https://hackensack-dental-implants-staging.up.railway.app"
 }

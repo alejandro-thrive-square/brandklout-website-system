@@ -418,7 +418,22 @@
         "--radius-small",
         "--radius-medium",
         "--radius-large",
-        "--radius-xlarge"
+        "--radius-xlarge",
+        "--size-display-base",
+        "--size-h1-base",
+        "--size-h2-base",
+        "--size-h3-base",
+        "--size-h4-base",
+        "--size-h5-base",
+        "--size-h6-base",
+        "--size-text-large-base",
+        "--size-text-medium-base",
+        "--size-text-regular-base",
+        "--size-text-small-base",
+        "--size-text-tiny-base",
+        "--size-text-label-base",
+        "--size-number-base",
+        "--heading-gap"
       ],
       "set": {}
     }

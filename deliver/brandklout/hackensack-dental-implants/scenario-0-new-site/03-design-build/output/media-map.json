@@ -1,270 +1,1766 @@
 {
   "base": "https://hackensack-dental-implants-staging.up.railway.app",
-  "uploadedAt": "2026-10-02T23:45:59.425Z",
+  "uploadedAt": "2026-10-09T20:11:10.913Z",
   "map": {
     "fonts/dm-sans-var.woff2": {
-      "id": "SItPFwPH7DgZrhDlAbpRQ",
-      "url": "/uploads/Tpdd-XESBgzgefOaeugSt-dm-sans-var.woff2",
-      "reused": true,
-      "uploadedAs": "dm-sans-var.woff2"
+      "id": "TmNE8JOuXjjN65P78GIH7",
+      "url": "/uploads/5I03fygML4Kp3pmB0XfuI-dm-sans-var.woff2",
+      "uploadedAs": "dm-sans-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "dm-sans-var.woff2": {
-      "id": "SItPFwPH7DgZrhDlAbpRQ",
-      "url": "/uploads/Tpdd-XESBgzgefOaeugSt-dm-sans-var.woff2",
-      "reused": true,
-      "uploadedAs": "dm-sans-var.woff2"
+      "id": "TmNE8JOuXjjN65P78GIH7",
+      "url": "/uploads/5I03fygML4Kp3pmB0XfuI-dm-sans-var.woff2",
+      "uploadedAs": "dm-sans-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "fonts/newsreader-var.woff2": {
-      "id": "ivEcuqTaukxYA36xQ7Rlk",
-      "url": "/uploads/AHL4nxeXyFMBuuQO5VIP5-newsreader-var.woff2",
-      "reused": true,
-      "uploadedAs": "newsreader-var.woff2"
+      "id": "QjO59WtDtH3ZoS00Gp9R_",
+      "url": "/uploads/fO08BinwyBdKHGjEBNjJG-newsreader-var.woff2",
+      "uploadedAs": "newsreader-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "newsreader-var.woff2": {
-      "id": "ivEcuqTaukxYA36xQ7Rlk",
-      "url": "/uploads/AHL4nxeXyFMBuuQO5VIP5-newsreader-var.woff2",
-      "reused": true,
-      "uploadedAs": "newsreader-var.woff2"
+      "id": "QjO59WtDtH3ZoS00Gp9R_",
+      "url": "/uploads/fO08BinwyBdKHGjEBNjJG-newsreader-var.woff2",
+      "uploadedAs": "newsreader-var.woff2",
+      "width": null,
+      "height": null,
+      "variants": 0
+    },
+    "media/img/about-features.webp": {
+      "id": "8wvg2CcPWuL1PLFc_HEBa",
+      "url": "/uploads/RpP3pZlf95Ca1aBQG_YiC-about-features.webp",
+      "uploadedAs": "about-features.webp",
+      "width": 1920,
+      "height": 800,
+      "variants": 6
+    },
+    "about-features.webp": {
+      "id": "8wvg2CcPWuL1PLFc_HEBa",
+      "url": "/uploads/RpP3pZlf95Ca1aBQG_YiC-about-features.webp",
+      "uploadedAs": "about-features.webp",
+      "width": 1920,
+      "height": 800,
+      "variants": 6
+    },
+    "media/img/about-hero.webp": {
+      "id": "UEBxKJS6DTjWyH0HqIeiK",
+      "url": "/uploads/-5u6WhwRyBEN5YavfUMVQ-about-hero.webp",
+      "uploadedAs": "about-hero.webp",
+      "width": 2400,
+      "height": 1100,
+      "variants": 7
+    },
+    "about-hero.webp": {
+      "id": "UEBxKJS6DTjWyH0HqIeiK",
+      "url": "/uploads/-5u6WhwRyBEN5YavfUMVQ-about-hero.webp",
+      "uploadedAs": "about-hero.webp",
+      "width": 2400,
+      "height": 1100,
+      "variants": 7
+    },
+    "media/img/about-letter.webp": {
+      "id": "QkZ_k90uInjyrcoqtm9zx",
+      "url": "/uploads/ldILLP4tBUYLqe6s3Mg5S-about-letter.webp",
+      "uploadedAs": "about-letter.webp",
+      "width": 1000,
+      "height": 900,
+      "variants": 4
+    },
+    "about-letter.webp": {
+      "id": "QkZ_k90uInjyrcoqtm9zx",
+      "url": "/uploads/ldILLP4tBUYLqe6s3Mg5S-about-letter.webp",
+      "uploadedAs": "about-letter.webp",
+      "width": 1000,
+      "height": 900,
+      "variants": 4
+    },
+    "media/img/allonx-fix.webp": {
+      "id": "fA1MJ4slXsxbh2SdyV5oA",
+      "url": "/uploads/gv-ZN1CyfbAcheujt3b-n-allonx-fix.webp",
+      "uploadedAs": "allonx-fix.webp",
+      "width": 1100,
+      "height": 900,
+      "variants": 5
+    },
+    "allonx-fix.webp": {
+      "id": "fA1MJ4slXsxbh2SdyV5oA",
+      "url": "/uploads/gv-ZN1CyfbAcheujt3b-n-allonx-fix.webp",
+      "uploadedAs": "allonx-fix.webp",
+      "width": 1100,
+      "height": 900,
+      "variants": 5
+    },
+    "media/img/allonx-hero.webp": {
+      "id": "5FqHmHJeLb6PfoOKoXQ3t",
+      "url": "/uploads/9NAAl6P6nT0wv9keQFI2Z-allonx-hero.webp",
+      "uploadedAs": "allonx-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "allonx-hero.webp": {
+      "id": "5FqHmHJeLb6PfoOKoXQ3t",
+      "url": "/uploads/9NAAl6P6nT0wv9keQFI2Z-allonx-hero.webp",
+      "uploadedAs": "allonx-hero.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-cost.webp": {
+      "id": "QUrZQJLhwq3jN252p9U3L",
+      "url": "/uploads/zEGaZALYwJG0cYtWORkGv-blog-cost.webp",
+      "uploadedAs": "blog-cost.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "blog-cost.webp": {
+      "id": "QUrZQJLhwq3jN252p9U3L",
+      "url": "/uploads/zEGaZALYwJG0cYtWORkGv-blog-cost.webp",
+      "uploadedAs": "blog-cost.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-dentures.webp": {
+      "id": "e881890OIztRlb-yHlJaW",
+      "url": "/uploads/UolQE6-mPLltZoRppaLwG-blog-dentures.webp",
+      "uploadedAs": "blog-dentures.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "blog-dentures.webp": {
+      "id": "e881890OIztRlb-yHlJaW",
+      "url": "/uploads/UolQE6-mPLltZoRppaLwG-blog-dentures.webp",
+      "uploadedAs": "blog-dentures.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-foods.webp": {
+      "id": "LYDA2TGcOcUtkyluAgYBS",
+      "url": "/uploads/zvCSsDy_CDUZ_Wqy7g1if-blog-foods.webp",
+      "uploadedAs": "blog-foods.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "blog-foods.webp": {
+      "id": "LYDA2TGcOcUtkyluAgYBS",
+      "url": "/uploads/zvCSsDy_CDUZ_Wqy7g1if-blog-foods.webp",
+      "uploadedAs": "blog-foods.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-hero.webp": {
+      "id": "Kgx6FKsJ685Q4GNQSj96u",
+      "url": "/uploads/_mXCHcb4zZHh9FlIDS7fB-blog-hero.webp",
+      "uploadedAs": "blog-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
+    },
+    "blog-hero.webp": {
+      "id": "Kgx6FKsJ685Q4GNQSj96u",
+      "url": "/uploads/_mXCHcb4zZHh9FlIDS7fB-blog-hero.webp",
+      "uploadedAs": "blog-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
+    },
+    "media/img/blog-recovery-day-after.webp": {
+      "id": "J9QpFE9yrW5-YR1rMq_Az",
+      "url": "/uploads/6BS3fRFDEI9F9fHbcz0Eq-blog-recovery-day-after.webp",
+      "uploadedAs": "blog-recovery-day-after.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "blog-recovery-day-after.webp": {
+      "id": "J9QpFE9yrW5-YR1rMq_Az",
+      "url": "/uploads/6BS3fRFDEI9F9fHbcz0Eq-blog-recovery-day-after.webp",
+      "uploadedAs": "blog-recovery-day-after.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-recovery-weeks.webp": {
+      "id": "4G61yzE9OXw7EPnl5Si7d",
+      "url": "/uploads/COvLJEYMI5S_6yNcwgEdn-blog-recovery-weeks.webp",
+      "uploadedAs": "blog-recovery-weeks.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "blog-recovery-weeks.webp": {
+      "id": "4G61yzE9OXw7EPnl5Si7d",
+      "url": "/uploads/COvLJEYMI5S_6yNcwgEdn-blog-recovery-weeks.webp",
+      "uploadedAs": "blog-recovery-weeks.webp",
+      "width": 1200,
+      "height": 1200,
+      "variants": 5
+    },
+    "media/img/blog-zygomatic.webp": {
+      "id": "oZig1GEXJSlEMCDDqOy4n",
+      "url": "/uploads/TwbqRRip8qwBxldOTuduu-blog-zygomatic.webp",
+      "uploadedAs": "blog-zygomatic.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
+    },
+    "blog-zygomatic.webp": {
+      "id": "oZig1GEXJSlEMCDDqOy4n",
+      "url": "/uploads/TwbqRRip8qwBxldOTuduu-blog-zygomatic.webp",
+      "uploadedAs": "blog-zygomatic.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
     },
     "media/img/case-1-after.webp": {
-      "id": "GcDWnzhq_F4T3MdxjhOyu",
-      "url": "/uploads/THJf35aSfXpevWCEdFMeE-case-1-after.webp",
-      "reused": true,
-      "uploadedAs": "case-1-after.webp"
+      "id": "JGbMI1GnvSli3WobEeRR4",
+      "url": "/uploads/paYggfX2F8B5fTH6ii-Qj-case-1-after.webp",
+      "uploadedAs": "case-1-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-1-after.webp": {
-      "id": "GcDWnzhq_F4T3MdxjhOyu",
-      "url": "/uploads/THJf35aSfXpevWCEdFMeE-case-1-after.webp",
-      "reused": true,
-      "uploadedAs": "case-1-after.webp"
+      "id": "JGbMI1GnvSli3WobEeRR4",
+      "url": "/uploads/paYggfX2F8B5fTH6ii-Qj-case-1-after.webp",
+      "uploadedAs": "case-1-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "media/img/case-1-before.webp": {
-      "id": "wwgIkqV45kAlyMOEiaXl8",
-      "url": "/uploads/2dDgT6_bJT3ORY69i4lF4-case-1-before.webp",
-      "reused": true,
-      "uploadedAs": "case-1-before.webp"
+      "id": "i_46Q_XO5nGw9FEf-6nsZ",
+      "url": "/uploads/ta-IYcBVEHcNwXCdufdB2-case-1-before.webp",
+      "uploadedAs": "case-1-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-1-before.webp": {
-      "id": "wwgIkqV45kAlyMOEiaXl8",
-      "url": "/uploads/2dDgT6_bJT3ORY69i4lF4-case-1-before.webp",
-      "reused": true,
-      "uploadedAs": "case-1-before.webp"
+      "id": "i_46Q_XO5nGw9FEf-6nsZ",
+      "url": "/uploads/ta-IYcBVEHcNwXCdufdB2-case-1-before.webp",
+      "uploadedAs": "case-1-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "media/img/case-2-after.webp": {
-      "id": "TNrL2aJXXBlijdYwq6hHb",
-      "url": "/uploads/QvEWxl8wr8i-yJxIO_fJV-case-2-after.webp",
-      "reused": true,
-      "uploadedAs": "case-2-after.webp"
+      "id": "ajZGXDu7T-k8dAttF64IW",
+      "url": "/uploads/aWK6-58YtRejlYZ9VW5Tg-case-2-after.webp",
+      "uploadedAs": "case-2-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-2-after.webp": {
-      "id": "TNrL2aJXXBlijdYwq6hHb",
-      "url": "/uploads/QvEWxl8wr8i-yJxIO_fJV-case-2-after.webp",
-      "reused": true,
-      "uploadedAs": "case-2-after.webp"
+      "id": "ajZGXDu7T-k8dAttF64IW",
+      "url": "/uploads/aWK6-58YtRejlYZ9VW5Tg-case-2-after.webp",
+      "uploadedAs": "case-2-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "media/img/case-2-before.webp": {
-      "id": "EQwIp1eA1zxxXR72Re0yc",
-      "url": "/uploads/mPreHQuA9nibzWLCk9Ss9-case-2-before.webp",
-      "reused": true,
-      "uploadedAs": "case-2-before.webp"
+      "id": "CE4KVQGGLoCDTaYlFbW1T",
+      "url": "/uploads/iY1NzBP1l3uSl6d1KKhMy-case-2-before.webp",
+      "uploadedAs": "case-2-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-2-before.webp": {
-      "id": "EQwIp1eA1zxxXR72Re0yc",
-      "url": "/uploads/mPreHQuA9nibzWLCk9Ss9-case-2-before.webp",
-      "reused": true,
-      "uploadedAs": "case-2-before.webp"
+      "id": "CE4KVQGGLoCDTaYlFbW1T",
+      "url": "/uploads/iY1NzBP1l3uSl6d1KKhMy-case-2-before.webp",
+      "uploadedAs": "case-2-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "media/img/case-3-after.webp": {
-      "id": "01nMFIQ4AbZ5eH9cCCM--",
-      "url": "/uploads/qeN8fuAbJQ-aP4U1mfbUa-case-3-after.webp",
-      "reused": true,
-      "uploadedAs": "case-3-after.webp"
+      "id": "yiNpVidO8RjMYocue-ncN",
+      "url": "/uploads/htUIVYWwGYb0OSYlUCUQI-case-3-after.webp",
+      "uploadedAs": "case-3-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-3-after.webp": {
-      "id": "01nMFIQ4AbZ5eH9cCCM--",
-      "url": "/uploads/qeN8fuAbJQ-aP4U1mfbUa-case-3-after.webp",
-      "reused": true,
-      "uploadedAs": "case-3-after.webp"
+      "id": "yiNpVidO8RjMYocue-ncN",
+      "url": "/uploads/htUIVYWwGYb0OSYlUCUQI-case-3-after.webp",
+      "uploadedAs": "case-3-after.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "media/img/case-3-before.webp": {
-      "id": "iyCOkMZK-eOUB59cJOCpH",
-      "url": "/uploads/NBLDmuuAk7UBpZrEx2X7i-case-3-before.webp",
-      "reused": true,
-      "uploadedAs": "case-3-before.webp"
+      "id": "G0YtlDw89AAK5vHbODt6i",
+      "url": "/uploads/ttjYZURQaxRGURAX4ZRUm-case-3-before.webp",
+      "uploadedAs": "case-3-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
     },
     "case-3-before.webp": {
-      "id": "iyCOkMZK-eOUB59cJOCpH",
-      "url": "/uploads/NBLDmuuAk7UBpZrEx2X7i-case-3-before.webp",
+      "id": "G0YtlDw89AAK5vHbODt6i",
+      "url": "/uploads/ttjYZURQaxRGURAX4ZRUm-case-3-before.webp",
+      "uploadedAs": "case-3-before.webp",
+      "width": 1112,
+      "height": 1500,
+      "variants": 5
+    },
+    "media/img/contact-hero.webp": {
+      "id": "3cgsXeYDw1Voxn20HjDn1",
+      "url": "/uploads/WW9of5J3XGthKXEzt7g2q-contact-hero.webp",
+      "uploadedAs": "contact-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
+    },
+    "contact-hero.webp": {
+      "id": "3cgsXeYDw1Voxn20HjDn1",
+      "url": "/uploads/WW9of5J3XGthKXEzt7g2q-contact-hero.webp",
+      "uploadedAs": "contact-hero.webp",
+      "width": 1080,
+      "height": 1080,
+      "variants": 5
+    },
+    "media/img/cost-of-dental-implants-hero.webp": {
+      "id": "VNm5eCEhEbJfuYUh37zDr",
+      "url": "/uploads/bwhKzESEqzjwDmBO1b4gR-cost-of-dental-implants-hero.webp",
       "reused": true,
-      "uploadedAs": "case-3-before.webp"
+      "uploadedAs": "cost-of-dental-implants-hero.webp"
+    },
+    "cost-of-dental-implants-hero.webp": {
+      "id": "VNm5eCEhEbJfuYUh37zDr",
+      "url": "/uploads/bwhKzESEqzjwDmBO1b4gR-cost-of-dental-implants-hero.webp",
+      "reused": true,
+      "uploadedAs": "cost-of-dental-implants-hero.webp"
+    },
+    "media/img/dental-implant-faqs-hero.webp": {
+      "id": "2DqVoWCz7fP3yKYYDiE72",
+      "url": "/uploads/7Ie_T20sT2iSx5Wm7EVvW-dental-implant-faqs-hero.webp",
+      "reused": true,
+      "uploadedAs": "dental-implant-faqs-hero.webp"
+    },
+    "dental-implant-faqs-hero.webp": {
+      "id": "2DqVoWCz7fP3yKYYDiE72",
+      "url": "/uploads/7Ie_T20sT2iSx5Wm7EVvW-dental-implant-faqs-hero.webp",
+      "reused": true,
+      "uploadedAs": "dental-implant-faqs-hero.webp"
+    },
+    "media/img/dental-implants-hero.webp": {
+      "id": "9Kk38hgkBuJHBao7PXBfP",
+      "url": "/uploads/TcM6l5YKqEZ6RkcJ8WszA-dental-implants-hero.webp",
+      "reused": true,
+      "uploadedAs": "dental-implants-hero.webp"
+    },
+    "dental-implants-hero.webp": {
+      "id": "9Kk38hgkBuJHBao7PXBfP",
+      "url": "/uploads/TcM6l5YKqEZ6RkcJ8WszA-dental-implants-hero.webp",
+      "reused": true,
+      "uploadedAs": "dental-implants-hero.webp"
+    },
+    "media/img/dental-implants-split1.webp": {
+      "id": "-GHMVdHGqdLy_eXjgPYjM",
+      "url": "/uploads/s6t7vh7sA1XZYyjeeYYdy-dental-implants-split1.webp",
+      "reused": true,
+      "uploadedAs": "dental-implants-split1.webp"
+    },
+    "dental-implants-split1.webp": {
+      "id": "-GHMVdHGqdLy_eXjgPYjM",
+      "url": "/uploads/s6t7vh7sA1XZYyjeeYYdy-dental-implants-split1.webp",
+      "reused": true,
+      "uploadedAs": "dental-implants-split1.webp"
     },
     "media/img/doctor-face.webp": {
-      "id": "YztPt04ADTtPebXEa0e1y",
-      "url": "/uploads/gUkF9gj3Vbi2SVFs6nR61-doctor-face.webp",
-      "reused": true,
-      "uploadedAs": "doctor-face.webp"
+      "id": "NUbyHczEr5PZm88sYD4TJ",
+      "url": "/uploads/-PKdTvpO0MNOBv16SVfDh-doctor-face.webp",
+      "uploadedAs": "doctor-face.webp",
+      "width": 192,
+      "height": 192,
+      "variants": 2
     },
     "doctor-face.webp": {
-      "id": "YztPt04ADTtPebXEa0e1y",
-      "url": "/uploads/gUkF9gj3Vbi2SVFs6nR61-doctor-face.webp",
-      "reused": true,
-      "uploadedAs": "doctor-face.webp"
+      "id": "NUbyHczEr5PZm88sYD4TJ",
+      "url": "/uploads/-PKdTvpO0MNOBv16SVfDh-doctor-face.webp",
+      "uploadedAs": "doctor-face.webp",
+      "width": 192,
+      "height": 192,
+      "variants": 2
     },
     "media/img/doctor.png": {
-      "id": "RFXopFvrxAHZzexNX9xx1",
-      "url": "/uploads/a84XaBugXj4q-VPJooB3p-doctor.png",
-      "reused": true,
-      "uploadedAs": "doctor.png"
+      "id": "yusZQo-LbgZd3sIiF5sB8",
+      "url": "/uploads/6APc1r_rSY4XyWutqzZWM-doctor.png",
+      "uploadedAs": "doctor.png",
+      "width": 500,
+      "height": 500,
+      "variants": 3
     },
     "doctor.png": {
-      "id": "RFXopFvrxAHZzexNX9xx1",
-      "url": "/uploads/a84XaBugXj4q-VPJooB3p-doctor.png",
+      "id": "yusZQo-LbgZd3sIiF5sB8",
+      "url": "/uploads/6APc1r_rSY4XyWutqzZWM-doctor.png",
+      "uploadedAs": "doctor.png",
+      "width": 500,
+      "height": 500,
+      "variants": 3
+    },
+    "media/img/dr-klass-hero.webp": {
+      "id": "99tQr6ZQ9PJR4fo1d-YCq",
+      "url": "/uploads/QilujhjpC12yMOIztP-BX-dr-klass-hero.webp",
       "reused": true,
-      "uploadedAs": "doctor.png"
+      "uploadedAs": "dr-klass-hero.webp"
+    },
+    "dr-klass-hero.webp": {
+      "id": "99tQr6ZQ9PJR4fo1d-YCq",
+      "url": "/uploads/QilujhjpC12yMOIztP-BX-dr-klass-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-klass-hero.webp"
+    },
+    "media/img/dr-lee-hero.webp": {
+      "id": "IVB7N3mc70fY07rnoiR7n",
+      "url": "/uploads/qI5Xf_WP5HAq1QoXj-T9d-dr-lee-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-lee-hero.webp"
+    },
+    "dr-lee-hero.webp": {
+      "id": "IVB7N3mc70fY07rnoiR7n",
+      "url": "/uploads/qI5Xf_WP5HAq1QoXj-T9d-dr-lee-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-lee-hero.webp"
+    },
+    "media/img/dr-meskin-hero.webp": {
+      "id": "C3W7OUEHKtsArWDjny72J",
+      "url": "/uploads/TqSffjMOguLVr__31y44P-dr-meskin-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-meskin-hero.webp"
+    },
+    "dr-meskin-hero.webp": {
+      "id": "C3W7OUEHKtsArWDjny72J",
+      "url": "/uploads/TqSffjMOguLVr__31y44P-dr-meskin-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-meskin-hero.webp"
+    },
+    "media/img/dr-meskin-training.webp": {
+      "id": "MtGe3XCeWH39TlHLjgvwi",
+      "url": "/uploads/WI5TazsEeX66NlfSgc_XO-dr-meskin-training.webp",
+      "reused": true,
+      "uploadedAs": "dr-meskin-training.webp"
+    },
+    "dr-meskin-training.webp": {
+      "id": "MtGe3XCeWH39TlHLjgvwi",
+      "url": "/uploads/WI5TazsEeX66NlfSgc_XO-dr-meskin-training.webp",
+      "reused": true,
+      "uploadedAs": "dr-meskin-training.webp"
+    },
+    "media/img/dr-srour-hero.webp": {
+      "id": "0zYvg_yHS7RXMYeYjmsxR",
+      "url": "/uploads/CzEFCrUGl7EdMbCNz1U1a-dr-srour-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-srour-hero.webp"
+    },
+    "dr-srour-hero.webp": {
+      "id": "0zYvg_yHS7RXMYeYjmsxR",
+      "url": "/uploads/CzEFCrUGl7EdMbCNz1U1a-dr-srour-hero.webp",
+      "reused": true,
+      "uploadedAs": "dr-srour-hero.webp"
+    },
+    "media/img/emergency-dental-care-hero.webp": {
+      "id": "uLJxMexZEYe--O82Mn0DR",
+      "url": "/uploads/lg2l6ymQ1_s2IRuoasRnU-emergency-dental-care-hero.webp",
+      "reused": true,
+      "uploadedAs": "emergency-dental-care-hero.webp"
+    },
+    "emergency-dental-care-hero.webp": {
+      "id": "uLJxMexZEYe--O82Mn0DR",
+      "url": "/uploads/lg2l6ymQ1_s2IRuoasRnU-emergency-dental-care-hero.webp",
+      "reused": true,
+      "uploadedAs": "emergency-dental-care-hero.webp"
     },
     "media/img/feature.webp": {
-      "id": "yTShM1-uKUJzAN1_TWyqz",
-      "url": "/uploads/A6OrIzCEnOtoVuX7HIZjj-feature.webp",
-      "reused": true,
-      "uploadedAs": "feature.webp"
+      "id": "5xL9d2o5yxhCKA_cphMU2",
+      "url": "/uploads/R3uJJOSbhr6TdMfv8_gXV-feature.webp",
+      "uploadedAs": "feature.webp",
+      "width": 1460,
+      "height": 1080,
+      "variants": 5
     },
     "feature.webp": {
-      "id": "yTShM1-uKUJzAN1_TWyqz",
-      "url": "/uploads/A6OrIzCEnOtoVuX7HIZjj-feature.webp",
+      "id": "5xL9d2o5yxhCKA_cphMU2",
+      "url": "/uploads/R3uJJOSbhr6TdMfv8_gXV-feature.webp",
+      "uploadedAs": "feature.webp",
+      "width": 1460,
+      "height": 1080,
+      "variants": 5
+    },
+    "media/img/film-daniel-1.webp": {
+      "id": "Xs7VSIMv6BDoXteOEvKkc",
+      "url": "/uploads/1s9I8KENxmJ-LId4Ydsk3-film-daniel-1.webp",
       "reused": true,
-      "uploadedAs": "feature.webp"
+      "uploadedAs": "film-daniel-1.webp"
+    },
+    "film-daniel-1.webp": {
+      "id": "Xs7VSIMv6BDoXteOEvKkc",
+      "url": "/uploads/1s9I8KENxmJ-LId4Ydsk3-film-daniel-1.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-1.webp"
+    },
+    "media/img/film-daniel-10.webp": {
+      "id": "KdELTZov9nr4AbgnhCbDx",
+      "url": "/uploads/e7NJxbiSR3bTzH3NkiW6m-film-daniel-10.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-10.webp"
+    },
+    "film-daniel-10.webp": {
+      "id": "KdELTZov9nr4AbgnhCbDx",
+      "url": "/uploads/e7NJxbiSR3bTzH3NkiW6m-film-daniel-10.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-10.webp"
+    },
+    "media/img/film-daniel-11.webp": {
+      "id": "8e1MqfJq8nHy9Ahia03iO",
+      "url": "/uploads/4M71PBovMfeNiF_Ko4VTC-film-daniel-11.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-11.webp"
+    },
+    "film-daniel-11.webp": {
+      "id": "8e1MqfJq8nHy9Ahia03iO",
+      "url": "/uploads/4M71PBovMfeNiF_Ko4VTC-film-daniel-11.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-11.webp"
+    },
+    "media/img/film-daniel-12.webp": {
+      "id": "9iXrWV7tLiQxu9Pb4b2sR",
+      "url": "/uploads/LI_SjxU44QQukbBTiueUI-film-daniel-12.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-12.webp"
+    },
+    "film-daniel-12.webp": {
+      "id": "9iXrWV7tLiQxu9Pb4b2sR",
+      "url": "/uploads/LI_SjxU44QQukbBTiueUI-film-daniel-12.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-12.webp"
+    },
+    "media/img/film-daniel-13.webp": {
+      "id": "VHkt80oGpcsnfZS7a4LYb",
+      "url": "/uploads/TB11u3JF2VqjwSbSFzKe0-film-daniel-13.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-13.webp"
+    },
+    "film-daniel-13.webp": {
+      "id": "VHkt80oGpcsnfZS7a4LYb",
+      "url": "/uploads/TB11u3JF2VqjwSbSFzKe0-film-daniel-13.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-13.webp"
+    },
+    "media/img/film-daniel-2.webp": {
+      "id": "1jmQ26cvw8Fvc8gc2xMmY",
+      "url": "/uploads/r0iA6tXzUD_vzLjqzTT3d-film-daniel-2.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-2.webp"
+    },
+    "film-daniel-2.webp": {
+      "id": "1jmQ26cvw8Fvc8gc2xMmY",
+      "url": "/uploads/r0iA6tXzUD_vzLjqzTT3d-film-daniel-2.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-2.webp"
+    },
+    "media/img/film-daniel-3.webp": {
+      "id": "wtaM8fMYy8XPBlnvIYb-Z",
+      "url": "/uploads/6nGmHjIITQTuFoCAnvsga-film-daniel-3.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-3.webp"
+    },
+    "film-daniel-3.webp": {
+      "id": "wtaM8fMYy8XPBlnvIYb-Z",
+      "url": "/uploads/6nGmHjIITQTuFoCAnvsga-film-daniel-3.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-3.webp"
+    },
+    "media/img/film-daniel-4.webp": {
+      "id": "qc029xApa2rRDphIzN8QI",
+      "url": "/uploads/_ZC0ILfDonXQFHzJNwS8M-film-daniel-4.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-4.webp"
+    },
+    "film-daniel-4.webp": {
+      "id": "qc029xApa2rRDphIzN8QI",
+      "url": "/uploads/_ZC0ILfDonXQFHzJNwS8M-film-daniel-4.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-4.webp"
+    },
+    "media/img/film-daniel-5.webp": {
+      "id": "K9kS8qFwQ6fIhP2v7Ex2M",
+      "url": "/uploads/Z_s3pX4wN_O4cqbd23B2i-film-daniel-5.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-5.webp"
+    },
+    "film-daniel-5.webp": {
+      "id": "K9kS8qFwQ6fIhP2v7Ex2M",
+      "url": "/uploads/Z_s3pX4wN_O4cqbd23B2i-film-daniel-5.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-5.webp"
+    },
+    "media/img/film-daniel-6.webp": {
+      "id": "pKYFW82p25iTalM5IK27e",
+      "url": "/uploads/h3Nms5nkZHx7qj__WrgU9-film-daniel-6.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-6.webp"
+    },
+    "film-daniel-6.webp": {
+      "id": "pKYFW82p25iTalM5IK27e",
+      "url": "/uploads/h3Nms5nkZHx7qj__WrgU9-film-daniel-6.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-6.webp"
+    },
+    "media/img/film-daniel-7.webp": {
+      "id": "U3eEx45mD5f0if--AVTH6",
+      "url": "/uploads/UW5oPi_Uz2TtH_4GVlKNH-film-daniel-7.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-7.webp"
+    },
+    "film-daniel-7.webp": {
+      "id": "U3eEx45mD5f0if--AVTH6",
+      "url": "/uploads/UW5oPi_Uz2TtH_4GVlKNH-film-daniel-7.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-7.webp"
+    },
+    "media/img/film-daniel-8.webp": {
+      "id": "FMTN2UhZuINzzEzQHTWv_",
+      "url": "/uploads/ceDyYpT77eO3GwEQE-wDZ-film-daniel-8.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-8.webp"
+    },
+    "film-daniel-8.webp": {
+      "id": "FMTN2UhZuINzzEzQHTWv_",
+      "url": "/uploads/ceDyYpT77eO3GwEQE-wDZ-film-daniel-8.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-8.webp"
+    },
+    "media/img/film-daniel-9.webp": {
+      "id": "gam7C_1oVwHI8wT5tYA68",
+      "url": "/uploads/EG-uUkxB5sQv9CB8C80-q-film-daniel-9.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-9.webp"
+    },
+    "film-daniel-9.webp": {
+      "id": "gam7C_1oVwHI8wT5tYA68",
+      "url": "/uploads/EG-uUkxB5sQv9CB8C80-q-film-daniel-9.webp",
+      "reused": true,
+      "uploadedAs": "film-daniel-9.webp"
+    },
+    "media/img/film-isaac-1.webp": {
+      "id": "X--2AyIljinKfJMsqv1jy",
+      "url": "/uploads/Y6CbI13snI5Or4KkhrkQb-film-isaac-1.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-1.webp"
+    },
+    "film-isaac-1.webp": {
+      "id": "X--2AyIljinKfJMsqv1jy",
+      "url": "/uploads/Y6CbI13snI5Or4KkhrkQb-film-isaac-1.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-1.webp"
+    },
+    "media/img/film-isaac-10.webp": {
+      "id": "zYjGYN5maUpFYXR_krKHL",
+      "url": "/uploads/Wtc5Tbnelu_OSialfmSVp-film-isaac-10.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-10.webp"
+    },
+    "film-isaac-10.webp": {
+      "id": "zYjGYN5maUpFYXR_krKHL",
+      "url": "/uploads/Wtc5Tbnelu_OSialfmSVp-film-isaac-10.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-10.webp"
+    },
+    "media/img/film-isaac-11.webp": {
+      "id": "ROE9j09dhLgGWjncPhrYC",
+      "url": "/uploads/ZLfcZuYozL91eI4NO4Bo9-film-isaac-11.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-11.webp"
+    },
+    "film-isaac-11.webp": {
+      "id": "ROE9j09dhLgGWjncPhrYC",
+      "url": "/uploads/ZLfcZuYozL91eI4NO4Bo9-film-isaac-11.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-11.webp"
+    },
+    "media/img/film-isaac-12.webp": {
+      "id": "zdht8DrnCSGtnYqoHzpN4",
+      "url": "/uploads/qVGfLAb7rxaZNbXZXYclO-film-isaac-12.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-12.webp"
+    },
+    "film-isaac-12.webp": {
+      "id": "zdht8DrnCSGtnYqoHzpN4",
+      "url": "/uploads/qVGfLAb7rxaZNbXZXYclO-film-isaac-12.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-12.webp"
+    },
+    "media/img/film-isaac-13.webp": {
+      "id": "o2b7kqV8e7QHfvVgZ9ZKH",
+      "url": "/uploads/bUDJ-K9oANSuogIerbwb0-film-isaac-13.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-13.webp"
+    },
+    "film-isaac-13.webp": {
+      "id": "o2b7kqV8e7QHfvVgZ9ZKH",
+      "url": "/uploads/bUDJ-K9oANSuogIerbwb0-film-isaac-13.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-13.webp"
+    },
+    "media/img/film-isaac-2.webp": {
+      "id": "a4smEaa8tVZpBp0etky7T",
+      "url": "/uploads/QJeVuGLYHhfApds4fq1i7-film-isaac-2.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-2.webp"
+    },
+    "film-isaac-2.webp": {
+      "id": "a4smEaa8tVZpBp0etky7T",
+      "url": "/uploads/QJeVuGLYHhfApds4fq1i7-film-isaac-2.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-2.webp"
+    },
+    "media/img/film-isaac-3.webp": {
+      "id": "kGa2kyyerW20H9llE2j-r",
+      "url": "/uploads/gn2ahFixQs07l_S358SvL-film-isaac-3.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-3.webp"
+    },
+    "film-isaac-3.webp": {
+      "id": "kGa2kyyerW20H9llE2j-r",
+      "url": "/uploads/gn2ahFixQs07l_S358SvL-film-isaac-3.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-3.webp"
+    },
+    "media/img/film-isaac-4.webp": {
+      "id": "QlxblRYc-lXksg1bl2ZoP",
+      "url": "/uploads/LXnE1JO8rcBXgR_6iUbPS-film-isaac-4.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-4.webp"
+    },
+    "film-isaac-4.webp": {
+      "id": "QlxblRYc-lXksg1bl2ZoP",
+      "url": "/uploads/LXnE1JO8rcBXgR_6iUbPS-film-isaac-4.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-4.webp"
+    },
+    "media/img/film-isaac-5.webp": {
+      "id": "x2A3eYjayk_jrBsjDeGVp",
+      "url": "/uploads/WehDo1XiNws33EM1PBj1f-film-isaac-5.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-5.webp"
+    },
+    "film-isaac-5.webp": {
+      "id": "x2A3eYjayk_jrBsjDeGVp",
+      "url": "/uploads/WehDo1XiNws33EM1PBj1f-film-isaac-5.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-5.webp"
+    },
+    "media/img/film-isaac-6.webp": {
+      "id": "5R9qgmjp8yvsfmAigDYp-",
+      "url": "/uploads/GxD0P7YC3lKtOxl6t4OOl-film-isaac-6.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-6.webp"
+    },
+    "film-isaac-6.webp": {
+      "id": "5R9qgmjp8yvsfmAigDYp-",
+      "url": "/uploads/GxD0P7YC3lKtOxl6t4OOl-film-isaac-6.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-6.webp"
+    },
+    "media/img/film-isaac-7.webp": {
+      "id": "6YarOQRQIH0vE_iUQ1yRh",
+      "url": "/uploads/tcCOeGWlDgrtpB6qQgQLm-film-isaac-7.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-7.webp"
+    },
+    "film-isaac-7.webp": {
+      "id": "6YarOQRQIH0vE_iUQ1yRh",
+      "url": "/uploads/tcCOeGWlDgrtpB6qQgQLm-film-isaac-7.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-7.webp"
+    },
+    "media/img/film-isaac-8.webp": {
+      "id": "i_fmZ60DI2-TTtgVyVcnt",
+      "url": "/uploads/ENK-UiP2It1z56bord9Cm-film-isaac-8.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-8.webp"
+    },
+    "film-isaac-8.webp": {
+      "id": "i_fmZ60DI2-TTtgVyVcnt",
+      "url": "/uploads/ENK-UiP2It1z56bord9Cm-film-isaac-8.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-8.webp"
+    },
+    "media/img/film-isaac-9.webp": {
+      "id": "IVaJZeZD53MywWqmnG6gp",
+      "url": "/uploads/npjjj6T5Mpyqjuev6WVvf-film-isaac-9.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-9.webp"
+    },
+    "film-isaac-9.webp": {
+      "id": "IVaJZeZD53MywWqmnG6gp",
+      "url": "/uploads/npjjj6T5Mpyqjuev6WVvf-film-isaac-9.webp",
+      "reused": true,
+      "uploadedAs": "film-isaac-9.webp"
     },
     "media/img/final.webp": {
-      "id": "2r031a4vNsd0g6NEmKefq",
-      "url": "/uploads/KzIHN2Z8bxXdp6sYQ-J9Z-final.webp",
-      "reused": true,
-      "uploadedAs": "final.webp"
+      "id": "hWWI8K8JBD1IDXKY99zBG",
+      "url": "/uploads/zYTlqDgU0umcd0yn75eT6-final.webp",
+      "uploadedAs": "final.webp",
+      "width": 1075,
+      "height": 1080,
+      "variants": 5
     },
     "final.webp": {
-      "id": "2r031a4vNsd0g6NEmKefq",
-      "url": "/uploads/KzIHN2Z8bxXdp6sYQ-J9Z-final.webp",
+      "id": "hWWI8K8JBD1IDXKY99zBG",
+      "url": "/uploads/zYTlqDgU0umcd0yn75eT6-final.webp",
+      "uploadedAs": "final.webp",
+      "width": 1075,
+      "height": 1080,
+      "variants": 5
+    },
+    "media/img/first-visit-expectations-hero.webp": {
+      "id": "7Gm5OXixc4yjptSojGHgs",
+      "url": "/uploads/ZgsnBo1gMycl01dns8o4Y-first-visit-expectations-hero.webp",
       "reused": true,
-      "uploadedAs": "final.webp"
+      "uploadedAs": "first-visit-expectations-hero.webp"
+    },
+    "first-visit-expectations-hero.webp": {
+      "id": "7Gm5OXixc4yjptSojGHgs",
+      "url": "/uploads/ZgsnBo1gMycl01dns8o4Y-first-visit-expectations-hero.webp",
+      "reused": true,
+      "uploadedAs": "first-visit-expectations-hero.webp"
+    },
+    "media/img/first-visit-expectations-quote.webp": {
+      "id": "jEp0NATQNmBLEmxXrU-6Z",
+      "url": "/uploads/_9MwXWHJ_dLRq9zr9Q7Cc-first-visit-expectations-quote.webp",
+      "reused": true,
+      "uploadedAs": "first-visit-expectations-quote.webp"
+    },
+    "first-visit-expectations-quote.webp": {
+      "id": "jEp0NATQNmBLEmxXrU-6Z",
+      "url": "/uploads/_9MwXWHJ_dLRq9zr9Q7Cc-first-visit-expectations-quote.webp",
+      "reused": true,
+      "uploadedAs": "first-visit-expectations-quote.webp"
+    },
+    "media/img/first-visit-expectations-statement.webp": {
+      "id": "lXOZ5LoaTEfh_GVdROdTK",
+      "url": "/uploads/_dGSrE7tg5NmSTlfQBqOd-first-visit-expectations-statement.webp",
+      "reused": true,
+      "uploadedAs": "first-visit-expectations-statement.webp"
+    },
+    "first-visit-expectations-statement.webp": {
+      "id": "lXOZ5LoaTEfh_GVdROdTK",
+      "url": "/uploads/_dGSrE7tg5NmSTlfQBqOd-first-visit-expectations-statement.webp",
+      "reused": true,
+      "uploadedAs": "first-visit-expectations-statement.webp"
+    },
+    "media/img/full-mouth-rehabilitation-hero.webp": {
+      "id": "1Oe29oCl4aRKtIOPmdnh3",
+      "url": "/uploads/gEmGJdEDZYTDfHSl7pgkp-full-mouth-rehabilitation-hero.webp",
+      "reused": true,
+      "uploadedAs": "full-mouth-rehabilitation-hero.webp"
+    },
+    "full-mouth-rehabilitation-hero.webp": {
+      "id": "1Oe29oCl4aRKtIOPmdnh3",
+      "url": "/uploads/gEmGJdEDZYTDfHSl7pgkp-full-mouth-rehabilitation-hero.webp",
+      "reused": true,
+      "uploadedAs": "full-mouth-rehabilitation-hero.webp"
+    },
+    "media/img/full-mouth-rehabilitation-statement.webp": {
+      "id": "40-LW5K0_4jnk8NXqdElF",
+      "url": "/uploads/AX2ay6yBMo2wRoEyama9E-full-mouth-rehabilitation-statement.webp",
+      "reused": true,
+      "uploadedAs": "full-mouth-rehabilitation-statement.webp"
+    },
+    "full-mouth-rehabilitation-statement.webp": {
+      "id": "40-LW5K0_4jnk8NXqdElF",
+      "url": "/uploads/AX2ay6yBMo2wRoEyama9E-full-mouth-rehabilitation-statement.webp",
+      "reused": true,
+      "uploadedAs": "full-mouth-rehabilitation-statement.webp"
+    },
+    "media/img/gallery-case-1-after.webp": {
+      "id": "JBh4D0d8zm6UMLsiwJSeq",
+      "url": "/uploads/TyKEF2uNO-jmudQDDmeGU-gallery-case-1-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-1-after.webp"
+    },
+    "gallery-case-1-after.webp": {
+      "id": "JBh4D0d8zm6UMLsiwJSeq",
+      "url": "/uploads/TyKEF2uNO-jmudQDDmeGU-gallery-case-1-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-1-after.webp"
+    },
+    "media/img/gallery-case-1-before.webp": {
+      "id": "HqjKrAg9c1DIsP31cPLBs",
+      "url": "/uploads/S9uz7EcfCCQW_j1jOQOKM-gallery-case-1-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-1-before.webp"
+    },
+    "gallery-case-1-before.webp": {
+      "id": "HqjKrAg9c1DIsP31cPLBs",
+      "url": "/uploads/S9uz7EcfCCQW_j1jOQOKM-gallery-case-1-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-1-before.webp"
+    },
+    "media/img/gallery-case-2-after.webp": {
+      "id": "aOUn7bCYTq6u7tTh1oyg7",
+      "url": "/uploads/Q619gEJWHyYdb5pX-jMS_-gallery-case-2-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-2-after.webp"
+    },
+    "gallery-case-2-after.webp": {
+      "id": "aOUn7bCYTq6u7tTh1oyg7",
+      "url": "/uploads/Q619gEJWHyYdb5pX-jMS_-gallery-case-2-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-2-after.webp"
+    },
+    "media/img/gallery-case-2-before.webp": {
+      "id": "KipPCp_3TSxqVCt_dYe7k",
+      "url": "/uploads/_-PsbBO8tNWsdj-aj4a0x-gallery-case-2-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-2-before.webp"
+    },
+    "gallery-case-2-before.webp": {
+      "id": "KipPCp_3TSxqVCt_dYe7k",
+      "url": "/uploads/_-PsbBO8tNWsdj-aj4a0x-gallery-case-2-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-2-before.webp"
+    },
+    "media/img/gallery-case-3-after.webp": {
+      "id": "MIsVALvDoqo0bG772Kq9Z",
+      "url": "/uploads/17NLJaLag9kxuIj2orCji-gallery-case-3-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-3-after.webp"
+    },
+    "gallery-case-3-after.webp": {
+      "id": "MIsVALvDoqo0bG772Kq9Z",
+      "url": "/uploads/17NLJaLag9kxuIj2orCji-gallery-case-3-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-3-after.webp"
+    },
+    "media/img/gallery-case-3-before.webp": {
+      "id": "t_zv8yLJZWNpH4kR-bIuc",
+      "url": "/uploads/Iipwyce8ImE1q-DbfUdVU-gallery-case-3-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-3-before.webp"
+    },
+    "gallery-case-3-before.webp": {
+      "id": "t_zv8yLJZWNpH4kR-bIuc",
+      "url": "/uploads/Iipwyce8ImE1q-DbfUdVU-gallery-case-3-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-3-before.webp"
+    },
+    "media/img/gallery-case-4-after.webp": {
+      "id": "o8T61EE-sIdqQgcE6OmMf",
+      "url": "/uploads/y6j-H5U6TFLHQxoscQB3h-gallery-case-4-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-4-after.webp"
+    },
+    "gallery-case-4-after.webp": {
+      "id": "o8T61EE-sIdqQgcE6OmMf",
+      "url": "/uploads/y6j-H5U6TFLHQxoscQB3h-gallery-case-4-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-4-after.webp"
+    },
+    "media/img/gallery-case-4-before.webp": {
+      "id": "XTztEBCEAVgXOuwmFpUB4",
+      "url": "/uploads/K-WGnNlVjofQkrS3SNFUf-gallery-case-4-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-4-before.webp"
+    },
+    "gallery-case-4-before.webp": {
+      "id": "XTztEBCEAVgXOuwmFpUB4",
+      "url": "/uploads/K-WGnNlVjofQkrS3SNFUf-gallery-case-4-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-4-before.webp"
+    },
+    "media/img/gallery-case-5-after.webp": {
+      "id": "nLR_qo9KmibTTPrpwy7af",
+      "url": "/uploads/yfDkrQ_6Ndyb7AnIZAvR7-gallery-case-5-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-5-after.webp"
+    },
+    "gallery-case-5-after.webp": {
+      "id": "nLR_qo9KmibTTPrpwy7af",
+      "url": "/uploads/yfDkrQ_6Ndyb7AnIZAvR7-gallery-case-5-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-5-after.webp"
+    },
+    "media/img/gallery-case-5-before.webp": {
+      "id": "KWON9LufhfI2m4kAtm7b6",
+      "url": "/uploads/o7qfcp41SzRQg0GeKEov4-gallery-case-5-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-5-before.webp"
+    },
+    "gallery-case-5-before.webp": {
+      "id": "KWON9LufhfI2m4kAtm7b6",
+      "url": "/uploads/o7qfcp41SzRQg0GeKEov4-gallery-case-5-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-5-before.webp"
+    },
+    "media/img/gallery-case-6-after.webp": {
+      "id": "sooxsrqg48d-_0eshKFDz",
+      "url": "/uploads/P5NBUWiOOtMAZdfd0VSrS-gallery-case-6-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-6-after.webp"
+    },
+    "gallery-case-6-after.webp": {
+      "id": "sooxsrqg48d-_0eshKFDz",
+      "url": "/uploads/P5NBUWiOOtMAZdfd0VSrS-gallery-case-6-after.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-6-after.webp"
+    },
+    "media/img/gallery-case-6-before.webp": {
+      "id": "-00XMwJaABZvfe-9SoufW",
+      "url": "/uploads/y4N_yIVZqTphdSbKKfArp-gallery-case-6-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-6-before.webp"
+    },
+    "gallery-case-6-before.webp": {
+      "id": "-00XMwJaABZvfe-9SoufW",
+      "url": "/uploads/y4N_yIVZqTphdSbKKfArp-gallery-case-6-before.webp",
+      "reused": true,
+      "uploadedAs": "gallery-case-6-before.webp"
+    },
+    "media/img/gallery-hero.webp": {
+      "id": "S723WPdHBp1K6JJ5feqqU",
+      "url": "/uploads/ocT2JC_vrI8pEYhlTPixo-gallery-hero.webp",
+      "reused": true,
+      "uploadedAs": "gallery-hero.webp"
+    },
+    "gallery-hero.webp": {
+      "id": "S723WPdHBp1K6JJ5feqqU",
+      "url": "/uploads/ocT2JC_vrI8pEYhlTPixo-gallery-hero.webp",
+      "reused": true,
+      "uploadedAs": "gallery-hero.webp"
     },
     "media/img/hero-poster.webp": {
-      "id": "MO6C9L7Nzh6I4V_H0uKdC",
-      "url": "/uploads/XPXXxKfrCVpgljvwJDwwF-hero-poster.webp",
-      "reused": true,
-      "uploadedAs": "hero-poster.webp"
+      "id": "lI0YYjWIKYITX4swWM8cH",
+      "url": "/uploads/iMFpYbYp3xz8ay9LUSgjr-hero-poster.webp",
+      "uploadedAs": "hero-poster.webp",
+      "width": 1920,
+      "height": 1080,
+      "variants": 6
     },
     "hero-poster.webp": {
-      "id": "MO6C9L7Nzh6I4V_H0uKdC",
-      "url": "/uploads/XPXXxKfrCVpgljvwJDwwF-hero-poster.webp",
-      "reused": true,
-      "uploadedAs": "hero-poster.webp"
+      "id": "lI0YYjWIKYITX4swWM8cH",
+      "url": "/uploads/iMFpYbYp3xz8ay9LUSgjr-hero-poster.webp",
+      "uploadedAs": "hero-poster.webp",
+      "width": 1920,
+      "height": 1080,
+      "variants": 6
     },
     "media/img/hero.webp": {
-      "id": "g5zkCEHod9-EVz_zaVBGC",
-      "url": "/uploads/RYYuJAv5Hnb3zamRakZkS-hero.webp",
-      "reused": true,
-      "uploadedAs": "hero.webp"
+      "id": "tFimYsUyMuYkjB_TWEw5v",
+      "url": "/uploads/7X8oK08nQfBO5xIOj5s45-hero.webp",
+      "uploadedAs": "hero.webp",
+      "width": 906,
+      "height": 1080,
+      "variants": 4
     },
     "hero.webp": {
-      "id": "g5zkCEHod9-EVz_zaVBGC",
-      "url": "/uploads/RYYuJAv5Hnb3zamRakZkS-hero.webp",
+      "id": "tFimYsUyMuYkjB_TWEw5v",
+      "url": "/uploads/7X8oK08nQfBO5xIOj5s45-hero.webp",
+      "uploadedAs": "hero.webp",
+      "width": 906,
+      "height": 1080,
+      "variants": 4
+    },
+    "media/img/implant-bridges-benefits.webp": {
+      "id": "F_NzHoSnR5jdurWplYM8O",
+      "url": "/uploads/CudAxbnZhHE1vZj8P-OW1-implant-bridges-benefits.webp",
       "reused": true,
-      "uploadedAs": "hero.webp"
+      "uploadedAs": "implant-bridges-benefits.webp"
+    },
+    "implant-bridges-benefits.webp": {
+      "id": "F_NzHoSnR5jdurWplYM8O",
+      "url": "/uploads/CudAxbnZhHE1vZj8P-OW1-implant-bridges-benefits.webp",
+      "reused": true,
+      "uploadedAs": "implant-bridges-benefits.webp"
+    },
+    "media/img/implant-bridges-hero.webp": {
+      "id": "rDEdb3G-L7eWJ3CnmtOt3",
+      "url": "/uploads/UHm9g4Qo-Av0Nqeaug4q4-implant-bridges-hero.webp",
+      "reused": true,
+      "uploadedAs": "implant-bridges-hero.webp"
+    },
+    "implant-bridges-hero.webp": {
+      "id": "rDEdb3G-L7eWJ3CnmtOt3",
+      "url": "/uploads/UHm9g4Qo-Av0Nqeaug4q4-implant-bridges-hero.webp",
+      "reused": true,
+      "uploadedAs": "implant-bridges-hero.webp"
+    },
+    "media/img/implant-revision-hero.webp": {
+      "id": "89_l7vuZSdp6WG4J1yAW1",
+      "url": "/uploads/pC-lcJ2O-eQx2LwV4qXgc-implant-revision-hero.webp",
+      "reused": true,
+      "uploadedAs": "implant-revision-hero.webp"
+    },
+    "implant-revision-hero.webp": {
+      "id": "89_l7vuZSdp6WG4J1yAW1",
+      "url": "/uploads/pC-lcJ2O-eQx2LwV4qXgc-implant-revision-hero.webp",
+      "reused": true,
+      "uploadedAs": "implant-revision-hero.webp"
+    },
+    "media/img/implant-revision-opinion.webp": {
+      "id": "xZYGzJRPtBxky-JoeXpxw",
+      "url": "/uploads/D6MvQdj36cSRH7CWbx2_3-implant-revision-opinion.webp",
+      "reused": true,
+      "uploadedAs": "implant-revision-opinion.webp"
+    },
+    "implant-revision-opinion.webp": {
+      "id": "xZYGzJRPtBxky-JoeXpxw",
+      "url": "/uploads/D6MvQdj36cSRH7CWbx2_3-implant-revision-opinion.webp",
+      "reused": true,
+      "uploadedAs": "implant-revision-opinion.webp"
+    },
+    "media/img/insurance-financing-hero.webp": {
+      "id": "vNFt-6hDaC1MS1npD0TSS",
+      "url": "/uploads/fIfwTgmm3WuT7xzRHBuFg-insurance-financing-hero.webp",
+      "reused": true,
+      "uploadedAs": "insurance-financing-hero.webp"
+    },
+    "insurance-financing-hero.webp": {
+      "id": "vNFt-6hDaC1MS1npD0TSS",
+      "url": "/uploads/fIfwTgmm3WuT7xzRHBuFg-insurance-financing-hero.webp",
+      "reused": true,
+      "uploadedAs": "insurance-financing-hero.webp"
+    },
+    "media/img/insurance-financing-statement.webp": {
+      "id": "UFld2G9ACXZB-Fpf8xiTt",
+      "url": "/uploads/TtTkLTpVZJOthE9x4nRTh-insurance-financing-statement.webp",
+      "reused": true,
+      "uploadedAs": "insurance-financing-statement.webp"
+    },
+    "insurance-financing-statement.webp": {
+      "id": "UFld2G9ACXZB-Fpf8xiTt",
+      "url": "/uploads/TtTkLTpVZJOthE9x4nRTh-insurance-financing-statement.webp",
+      "reused": true,
+      "uploadedAs": "insurance-financing-statement.webp"
+    },
+    "media/img/logo-carecredit.webp": {
+      "id": "5wDlhrqIFpeivcXzFfEAt",
+      "url": "/uploads/aQLG3P3xSCdqCtBw_KDHy-logo-carecredit.webp",
+      "reused": true,
+      "uploadedAs": "logo-carecredit.webp"
+    },
+    "logo-carecredit.webp": {
+      "id": "5wDlhrqIFpeivcXzFfEAt",
+      "url": "/uploads/aQLG3P3xSCdqCtBw_KDHy-logo-carecredit.webp",
+      "reused": true,
+      "uploadedAs": "logo-carecredit.webp"
+    },
+    "media/img/logo-cherry.webp": {
+      "id": "W1M7P7pLERd3cRWv0LByO",
+      "url": "/uploads/D1QCe11YldPFAT5dpd-rQ-logo-cherry.webp",
+      "reused": true,
+      "uploadedAs": "logo-cherry.webp"
+    },
+    "logo-cherry.webp": {
+      "id": "W1M7P7pLERd3cRWv0LByO",
+      "url": "/uploads/D1QCe11YldPFAT5dpd-rQ-logo-cherry.webp",
+      "reused": true,
+      "uploadedAs": "logo-cherry.webp"
+    },
+    "media/img/logo-hfd.svg": {
+      "id": "HwUkf13xDcZaTH89U8MLc",
+      "url": "/uploads/-tplhxBg1BBgzPSNS387u-logo-hfd.svg",
+      "reused": true,
+      "uploadedAs": "logo-hfd.svg"
+    },
+    "logo-hfd.svg": {
+      "id": "HwUkf13xDcZaTH89U8MLc",
+      "url": "/uploads/-tplhxBg1BBgzPSNS387u-logo-hfd.svg",
+      "reused": true,
+      "uploadedAs": "logo-hfd.svg"
     },
     "media/img/logo-icon-dark.png": {
-      "id": "qIBIBLtJydf03BQTaz619",
-      "url": "/uploads/wKB36tU-rqXR-7J1-S7x_-logo-icon-dark.png",
-      "reused": true,
-      "uploadedAs": "logo-icon-dark.png"
+      "id": "XQsHGB-bjewZOMecYZjaD",
+      "url": "/uploads/VAa8itF8xpAkJDp0kdoRy-logo-icon-dark.png",
+      "uploadedAs": "logo-icon-dark.png",
+      "width": 192,
+      "height": 192,
+      "variants": 2
     },
     "logo-icon-dark.png": {
-      "id": "qIBIBLtJydf03BQTaz619",
-      "url": "/uploads/wKB36tU-rqXR-7J1-S7x_-logo-icon-dark.png",
+      "id": "XQsHGB-bjewZOMecYZjaD",
+      "url": "/uploads/VAa8itF8xpAkJDp0kdoRy-logo-icon-dark.png",
+      "uploadedAs": "logo-icon-dark.png",
+      "width": 192,
+      "height": 192,
+      "variants": 2
+    },
+    "media/img/logo-proceed.webp": {
+      "id": "9BHxoodJH4Kp0eyQQtrAY",
+      "url": "/uploads/rlM3u8bFeJ1LW1kxE1YDg-logo-proceed.webp",
       "reused": true,
-      "uploadedAs": "logo-icon-dark.png"
+      "uploadedAs": "logo-proceed.webp"
+    },
+    "logo-proceed.webp": {
+      "id": "9BHxoodJH4Kp0eyQQtrAY",
+      "url": "/uploads/rlM3u8bFeJ1LW1kxE1YDg-logo-proceed.webp",
+      "reused": true,
+      "uploadedAs": "logo-proceed.webp"
     },
     "media/img/logo-round.png": {
-      "id": "rhwWBHCoQ075h2OiO9u2P",
-      "url": "/uploads/7EvUIcl0vAEdpvOwspJEg-logo-round.png",
-      "reused": true,
-      "uploadedAs": "logo-round.png"
+      "id": "mR1PVv1EWnIacuWxDzbKP",
+      "url": "/uploads/WMbrO4NaOmXWv3FG5Q_tj-logo-round.png",
+      "uploadedAs": "logo-round.png",
+      "width": 192,
+      "height": 192,
+      "variants": 2
     },
     "logo-round.png": {
-      "id": "rhwWBHCoQ075h2OiO9u2P",
-      "url": "/uploads/7EvUIcl0vAEdpvOwspJEg-logo-round.png",
-      "reused": true,
-      "uploadedAs": "logo-round.png"
+      "id": "mR1PVv1EWnIacuWxDzbKP",
+      "url": "/uploads/WMbrO4NaOmXWv3FG5Q_tj-logo-round.png",
+      "uploadedAs": "logo-round.png",
+      "width": 192,
+      "height": 192,
+      "variants": 2
     },
     "media/img/logo-stacked.webp": {
-      "id": "7ZlgY1xQyOINBeo35U8oA",
-      "url": "/uploads/9_RLfdUJaAGehoe8fbTaB-logo-stacked.webp",
-      "reused": true,
-      "uploadedAs": "logo-stacked.webp"
+      "id": "Jet1VCunpIGvYjHcduk8B",
+      "url": "/uploads/vrcT63A1A1mrJgg6xnwr8-logo-stacked.webp",
+      "uploadedAs": "logo-stacked.webp",
+      "width": 620,
+      "height": 180,
+      "variants": 3
     },
     "logo-stacked.webp": {
-      "id": "7ZlgY1xQyOINBeo35U8oA",
-      "url": "/uploads/9_RLfdUJaAGehoe8fbTaB-logo-stacked.webp",
+      "id": "Jet1VCunpIGvYjHcduk8B",
+      "url": "/uploads/vrcT63A1A1mrJgg6xnwr8-logo-stacked.webp",
+      "uploadedAs": "logo-stacked.webp",
+      "width": 620,
+      "height": 180,
+      "variants": 3
+    },
+    "media/img/office-exterior.webp": {
+      "id": "OCFZz0A239oL2hQldZigO",
+      "url": "/uploads/GHzTTyCCRt3jyVIaqs0YB-office-exterior.webp",
       "reused": true,
-      "uploadedAs": "logo-stacked.webp"
+      "uploadedAs": "office-exterior.webp"
+    },
+    "office-exterior.webp": {
+      "id": "OCFZz0A239oL2hQldZigO",
+      "url": "/uploads/GHzTTyCCRt3jyVIaqs0YB-office-exterior.webp",
+      "reused": true,
+      "uploadedAs": "office-exterior.webp"
+    },
+    "media/img/office-hero.webp": {
+      "id": "cbvIRkiZikLiOkqUSzpiD",
+      "url": "/uploads/2SR3XiVPgXAmTq06_8Ury-office-hero.webp",
+      "reused": true,
+      "uploadedAs": "office-hero.webp"
+    },
+    "office-hero.webp": {
+      "id": "cbvIRkiZikLiOkqUSzpiD",
+      "url": "/uploads/2SR3XiVPgXAmTq06_8Ury-office-hero.webp",
+      "reused": true,
+      "uploadedAs": "office-hero.webp"
+    },
+    "media/img/office-lab.webp": {
+      "id": "ctRkD9-V_ygEto8jEDPeL",
+      "url": "/uploads/JQL-AQhRKA-Qi4BsZLGna-office-lab.webp",
+      "reused": true,
+      "uploadedAs": "office-lab.webp"
+    },
+    "office-lab.webp": {
+      "id": "ctRkD9-V_ygEto8jEDPeL",
+      "url": "/uploads/JQL-AQhRKA-Qi4BsZLGna-office-lab.webp",
+      "reused": true,
+      "uploadedAs": "office-lab.webp"
+    },
+    "media/img/office-operatory.webp": {
+      "id": "7W8k4274FUX4uI75uIhro",
+      "url": "/uploads/QV_Pou1BHl74pEq913QZn-office-operatory.webp",
+      "reused": true,
+      "uploadedAs": "office-operatory.webp"
+    },
+    "office-operatory.webp": {
+      "id": "7W8k4274FUX4uI75uIhro",
+      "url": "/uploads/QV_Pou1BHl74pEq913QZn-office-operatory.webp",
+      "reused": true,
+      "uploadedAs": "office-operatory.webp"
+    },
+    "media/img/office-reception.webp": {
+      "id": "taDo2VBE5HCXIZGv5IVy_",
+      "url": "/uploads/0K_Q07mA34pbt9d6PrSpZ-office-reception.webp",
+      "reused": true,
+      "uploadedAs": "office-reception.webp"
+    },
+    "office-reception.webp": {
+      "id": "taDo2VBE5HCXIZGv5IVy_",
+      "url": "/uploads/0K_Q07mA34pbt9d6PrSpZ-office-reception.webp",
+      "reused": true,
+      "uploadedAs": "office-reception.webp"
+    },
+    "media/img/office-room.webp": {
+      "id": "_cGAkdzQ8Pcsy6yrR_AXA",
+      "url": "/uploads/5dIhRSAyBvax-ldXtBSnX-office-room.webp",
+      "reused": true,
+      "uploadedAs": "office-room.webp"
+    },
+    "office-room.webp": {
+      "id": "_cGAkdzQ8Pcsy6yrR_AXA",
+      "url": "/uploads/5dIhRSAyBvax-ldXtBSnX-office-room.webp",
+      "reused": true,
+      "uploadedAs": "office-room.webp"
+    },
+    "media/img/office-scanner.webp": {
+      "id": "B6dsKBPY_1NIQ8EQr61jy",
+      "url": "/uploads/Hnd7KBwScplmFqfJ3BHm2-office-scanner.webp",
+      "reused": true,
+      "uploadedAs": "office-scanner.webp"
+    },
+    "office-scanner.webp": {
+      "id": "B6dsKBPY_1NIQ8EQr61jy",
+      "url": "/uploads/Hnd7KBwScplmFqfJ3BHm2-office-scanner.webp",
+      "reused": true,
+      "uploadedAs": "office-scanner.webp"
+    },
+    "media/img/office-surgery.webp": {
+      "id": "H_F2WmxhGj1bPcdQ0550u",
+      "url": "/uploads/KZQruDgKQgJtFsSgDp8PS-office-surgery.webp",
+      "reused": true,
+      "uploadedAs": "office-surgery.webp"
+    },
+    "office-surgery.webp": {
+      "id": "H_F2WmxhGj1bPcdQ0550u",
+      "url": "/uploads/KZQruDgKQgJtFsSgDp8PS-office-surgery.webp",
+      "reused": true,
+      "uploadedAs": "office-surgery.webp"
+    },
+    "media/img/office-waiting.webp": {
+      "id": "dUojlRWp-Bo8H1ElOQeK1",
+      "url": "/uploads/DyN8ht0RPSVQM6zn05aeY-office-waiting.webp",
+      "reused": true,
+      "uploadedAs": "office-waiting.webp"
+    },
+    "office-waiting.webp": {
+      "id": "dUojlRWp-Bo8H1ElOQeK1",
+      "url": "/uploads/DyN8ht0RPSVQM6zn05aeY-office-waiting.webp",
+      "reused": true,
+      "uploadedAs": "office-waiting.webp"
+    },
+    "media/img/patient-testimonials-hero.webp": {
+      "id": "nnUhcxhZUOYLgQBRmBLwP",
+      "url": "/uploads/G4KEogs18yyPjTd-HDP1n-patient-testimonials-hero.webp",
+      "reused": true,
+      "uploadedAs": "patient-testimonials-hero.webp"
+    },
+    "patient-testimonials-hero.webp": {
+      "id": "nnUhcxhZUOYLgQBRmBLwP",
+      "url": "/uploads/G4KEogs18yyPjTd-HDP1n-patient-testimonials-hero.webp",
+      "reused": true,
+      "uploadedAs": "patient-testimonials-hero.webp"
+    },
+    "media/img/pre-post-op-card-1.webp": {
+      "id": "KFIFCnzdU-r4USpyL2pd3",
+      "url": "/uploads/V9C2MU44vW1P73VhNBXzQ-pre-post-op-card-1.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-1.webp"
+    },
+    "pre-post-op-card-1.webp": {
+      "id": "KFIFCnzdU-r4USpyL2pd3",
+      "url": "/uploads/V9C2MU44vW1P73VhNBXzQ-pre-post-op-card-1.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-1.webp"
+    },
+    "media/img/pre-post-op-card-2.webp": {
+      "id": "GLRpiQrfKjasN5l9kZ5Dm",
+      "url": "/uploads/VpuF7LAXVxezc0BKqM8am-pre-post-op-card-2.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-2.webp"
+    },
+    "pre-post-op-card-2.webp": {
+      "id": "GLRpiQrfKjasN5l9kZ5Dm",
+      "url": "/uploads/VpuF7LAXVxezc0BKqM8am-pre-post-op-card-2.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-2.webp"
+    },
+    "media/img/pre-post-op-card-3.webp": {
+      "id": "rxv_9rp_n2e7LWtCyezOA",
+      "url": "/uploads/iQnlndkeFMgqaFFs2Mcij-pre-post-op-card-3.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-3.webp"
+    },
+    "pre-post-op-card-3.webp": {
+      "id": "rxv_9rp_n2e7LWtCyezOA",
+      "url": "/uploads/iQnlndkeFMgqaFFs2Mcij-pre-post-op-card-3.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-card-3.webp"
+    },
+    "media/img/pre-post-op-instructions-hero.webp": {
+      "id": "82rVLxGp6INxNALoJ4GL3",
+      "url": "/uploads/C1tTWqG6ZiqGjrTBE5rzg-pre-post-op-instructions-hero.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-instructions-hero.webp"
+    },
+    "pre-post-op-instructions-hero.webp": {
+      "id": "82rVLxGp6INxNALoJ4GL3",
+      "url": "/uploads/C1tTWqG6ZiqGjrTBE5rzg-pre-post-op-instructions-hero.webp",
+      "reused": true,
+      "uploadedAs": "pre-post-op-instructions-hero.webp"
+    },
+    "media/img/referring-doctors-hero.webp": {
+      "id": "k6BYk52eJHy-4bArCr7cz",
+      "url": "/uploads/uVYLyaKnitkFZpRVa7p1O-referring-doctors-hero.webp",
+      "reused": true,
+      "uploadedAs": "referring-doctors-hero.webp"
+    },
+    "referring-doctors-hero.webp": {
+      "id": "k6BYk52eJHy-4bArCr7cz",
+      "url": "/uploads/uVYLyaKnitkFZpRVa7p1O-referring-doctors-hero.webp",
+      "reused": true,
+      "uploadedAs": "referring-doctors-hero.webp"
+    },
+    "media/img/sedation-benefit.webp": {
+      "id": "qzIg4qDQ7hBAuQ1kflD9W",
+      "url": "/uploads/mo2pjFQah5bVSz_05mVJJ-sedation-benefit.webp",
+      "reused": true,
+      "uploadedAs": "sedation-benefit.webp"
+    },
+    "sedation-benefit.webp": {
+      "id": "qzIg4qDQ7hBAuQ1kflD9W",
+      "url": "/uploads/mo2pjFQah5bVSz_05mVJJ-sedation-benefit.webp",
+      "reused": true,
+      "uploadedAs": "sedation-benefit.webp"
+    },
+    "media/img/sedation-hero.webp": {
+      "id": "7xISeLAWvmLsOVqoiiVIm",
+      "url": "/uploads/8YkWjzYGzt760xqhmVVFC-sedation-hero.webp",
+      "reused": true,
+      "uploadedAs": "sedation-hero.webp"
+    },
+    "sedation-hero.webp": {
+      "id": "7xISeLAWvmLsOVqoiiVIm",
+      "url": "/uploads/8YkWjzYGzt760xqhmVVFC-sedation-hero.webp",
+      "reused": true,
+      "uploadedAs": "sedation-hero.webp"
+    },
+    "media/img/sedation-statement.webp": {
+      "id": "ZQv7by0YK55JiOUYqoXFH",
+      "url": "/uploads/na8eBRO1WjqNSMLuZuk4v-sedation-statement.webp",
+      "reused": true,
+      "uploadedAs": "sedation-statement.webp"
+    },
+    "sedation-statement.webp": {
+      "id": "ZQv7by0YK55JiOUYqoXFH",
+      "url": "/uploads/na8eBRO1WjqNSMLuZuk4v-sedation-statement.webp",
+      "reused": true,
+      "uploadedAs": "sedation-statement.webp"
+    },
+    "media/img/services-card-emergency.webp": {
+      "id": "ayZZ90R7L4Bt5FsT3gMMy",
+      "url": "/uploads/WeP5tJkcEC0_E9KwfCZ3G-services-card-emergency.webp",
+      "reused": true,
+      "uploadedAs": "services-card-emergency.webp"
+    },
+    "services-card-emergency.webp": {
+      "id": "ayZZ90R7L4Bt5FsT3gMMy",
+      "url": "/uploads/WeP5tJkcEC0_E9KwfCZ3G-services-card-emergency.webp",
+      "reused": true,
+      "uploadedAs": "services-card-emergency.webp"
+    },
+    "media/img/services-hero.webp": {
+      "id": "ohr1yziZ-8P-WS6MNSd4J",
+      "url": "/uploads/89j3grEWRq41K8uM8_pJ0-services-hero.webp",
+      "reused": true,
+      "uploadedAs": "services-hero.webp"
+    },
+    "services-hero.webp": {
+      "id": "ohr1yziZ-8P-WS6MNSd4J",
+      "url": "/uploads/89j3grEWRq41K8uM8_pJ0-services-hero.webp",
+      "reused": true,
+      "uploadedAs": "services-hero.webp"
+    },
+    "media/img/single-implant-fix.webp": {
+      "id": "-zuJmtWRcQB9wr9Z-P64f",
+      "url": "/uploads/DHQ14nb8GN-NO4Xp1WBQa-single-implant-fix.webp",
+      "reused": true,
+      "uploadedAs": "single-implant-fix.webp"
+    },
+    "single-implant-fix.webp": {
+      "id": "-zuJmtWRcQB9wr9Z-P64f",
+      "url": "/uploads/DHQ14nb8GN-NO4Xp1WBQa-single-implant-fix.webp",
+      "reused": true,
+      "uploadedAs": "single-implant-fix.webp"
+    },
+    "media/img/single-implant-hero.webp": {
+      "id": "6RwdIfpIpm6M5-XsL3IPC",
+      "url": "/uploads/GJ9xrfHXywksJkeiUWiHJ-single-implant-hero.webp",
+      "reused": true,
+      "uploadedAs": "single-implant-hero.webp"
+    },
+    "single-implant-hero.webp": {
+      "id": "6RwdIfpIpm6M5-XsL3IPC",
+      "url": "/uploads/GJ9xrfHXywksJkeiUWiHJ-single-implant-hero.webp",
+      "reused": true,
+      "uploadedAs": "single-implant-hero.webp"
+    },
+    "media/img/smile-makeovers-hero.webp": {
+      "id": "sk6vQw_Ui_nu44bUaEhSU",
+      "url": "/uploads/oy0YqxMorvmXDpAwD4E4f-smile-makeovers-hero.webp",
+      "reused": true,
+      "uploadedAs": "smile-makeovers-hero.webp"
+    },
+    "smile-makeovers-hero.webp": {
+      "id": "sk6vQw_Ui_nu44bUaEhSU",
+      "url": "/uploads/oy0YqxMorvmXDpAwD4E4f-smile-makeovers-hero.webp",
+      "reused": true,
+      "uploadedAs": "smile-makeovers-hero.webp"
+    },
+    "media/img/smile-makeovers-preview.webp": {
+      "id": "na9H9F2NQ8JVRn3yfC-zp",
+      "url": "/uploads/68rXz_R5Nvc7E6lpQR81Q-smile-makeovers-preview.webp",
+      "reused": true,
+      "uploadedAs": "smile-makeovers-preview.webp"
+    },
+    "smile-makeovers-preview.webp": {
+      "id": "na9H9F2NQ8JVRn3yfC-zp",
+      "url": "/uploads/68rXz_R5Nvc7E6lpQR81Q-smile-makeovers-preview.webp",
+      "reused": true,
+      "uploadedAs": "smile-makeovers-preview.webp"
     },
     "media/img/story.webp": {
-      "id": "Fqkqukk__6axztMAbdLle",
-      "url": "/uploads/2dC2QQo_LVHu8DEKLcKlr-story.webp",
-      "reused": true,
-      "uploadedAs": "story.webp"
+      "id": "BK6aUEuHchHAqiwjzX-T4",
+      "url": "/uploads/dzQ2jPuuSqb8tqcfeGsQn-story.webp",
+      "uploadedAs": "story.webp",
+      "width": 950,
+      "height": 1080,
+      "variants": 4
     },
     "story.webp": {
-      "id": "Fqkqukk__6axztMAbdLle",
-      "url": "/uploads/2dC2QQo_LVHu8DEKLcKlr-story.webp",
+      "id": "BK6aUEuHchHAqiwjzX-T4",
+      "url": "/uploads/dzQ2jPuuSqb8tqcfeGsQn-story.webp",
+      "uploadedAs": "story.webp",
+      "width": 950,
+      "height": 1080,
+      "variants": 4
+    },
+    "media/img/team-klass.webp": {
+      "id": "tCOdJrXTwb_2Bm_VvEjem",
+      "url": "/uploads/9RWygTv4AnwRdUs00YW-b-team-klass.webp",
       "reused": true,
-      "uploadedAs": "story.webp"
+      "uploadedAs": "team-klass.webp"
+    },
+    "team-klass.webp": {
+      "id": "tCOdJrXTwb_2Bm_VvEjem",
+      "url": "/uploads/9RWygTv4AnwRdUs00YW-b-team-klass.webp",
+      "reused": true,
+      "uploadedAs": "team-klass.webp"
+    },
+    "media/img/team-lee.webp": {
+      "id": "UrRgu3x4-8az1xZQ3YDrc",
+      "url": "/uploads/6ydvDWcY6X8LJxgIpp1dy-team-lee.webp",
+      "reused": true,
+      "uploadedAs": "team-lee.webp"
+    },
+    "team-lee.webp": {
+      "id": "UrRgu3x4-8az1xZQ3YDrc",
+      "url": "/uploads/6ydvDWcY6X8LJxgIpp1dy-team-lee.webp",
+      "reused": true,
+      "uploadedAs": "team-lee.webp"
+    },
+    "media/img/team-meskin.webp": {
+      "id": "R-I5XwYYvCwoMjPV47XfB",
+      "url": "/uploads/pDDsARJgN_whxEfKOyg_h-team-meskin.webp",
+      "reused": true,
+      "uploadedAs": "team-meskin.webp"
+    },
+    "team-meskin.webp": {
+      "id": "R-I5XwYYvCwoMjPV47XfB",
+      "url": "/uploads/pDDsARJgN_whxEfKOyg_h-team-meskin.webp",
+      "reused": true,
+      "uploadedAs": "team-meskin.webp"
+    },
+    "media/img/team-srour.webp": {
+      "id": "B3E25LbIpyLXc0D8g6vSB",
+      "url": "/uploads/SfAlW_yevj-S_XTHK6DrB-team-srour.webp",
+      "reused": true,
+      "uploadedAs": "team-srour.webp"
+    },
+    "team-srour.webp": {
+      "id": "B3E25LbIpyLXc0D8g6vSB",
+      "url": "/uploads/SfAlW_yevj-S_XTHK6DrB-team-srour.webp",
+      "reused": true,
+      "uploadedAs": "team-srour.webp"
     },
     "media/img/tech.webp": {
-      "id": "QkPuYViuOjPsgLIDi29l_",
-      "url": "/uploads/R9j6EhCOzq2uj8zR39Nri-tech.webp",
-      "reused": true,
-      "uploadedAs": "tech.webp"
+      "id": "aS8eG0OmL4gcc_s06COE4",
+      "url": "/uploads/_P9rdqkzeZKIBoFBsjZBI-tech.webp",
+      "uploadedAs": "tech.webp",
+      "width": 1574,
+      "height": 1080,
+      "variants": 5
     },
     "tech.webp": {
-      "id": "QkPuYViuOjPsgLIDi29l_",
-      "url": "/uploads/R9j6EhCOzq2uj8zR39Nri-tech.webp",
+      "id": "aS8eG0OmL4gcc_s06COE4",
+      "url": "/uploads/_P9rdqkzeZKIBoFBsjZBI-tech.webp",
+      "uploadedAs": "tech.webp",
+      "width": 1574,
+      "height": 1080,
+      "variants": 5
+    },
+    "media/img/technology-3d-printers.webp": {
+      "id": "5J8Cf_W3hNMoN1G3z98y3",
+      "url": "/uploads/XV7hjflbG9Twm1hH-CvTv-technology-3d-printers.webp",
       "reused": true,
-      "uploadedAs": "tech.webp"
+      "uploadedAs": "technology-3d-printers.webp"
+    },
+    "technology-3d-printers.webp": {
+      "id": "5J8Cf_W3hNMoN1G3z98y3",
+      "url": "/uploads/XV7hjflbG9Twm1hH-CvTv-technology-3d-printers.webp",
+      "reused": true,
+      "uploadedAs": "technology-3d-printers.webp"
+    },
+    "media/img/technology-cone-beam.webp": {
+      "id": "NN2_e1FGgoxg1I0wM5fvQ",
+      "url": "/uploads/O8AXh7zj8dBXnm9Mngw_z-technology-cone-beam.webp",
+      "reused": true,
+      "uploadedAs": "technology-cone-beam.webp"
+    },
+    "technology-cone-beam.webp": {
+      "id": "NN2_e1FGgoxg1I0wM5fvQ",
+      "url": "/uploads/O8AXh7zj8dBXnm9Mngw_z-technology-cone-beam.webp",
+      "reused": true,
+      "uploadedAs": "technology-cone-beam.webp"
+    },
+    "media/img/technology-digital-x-ray.webp": {
+      "id": "2jZR0mgK79FlCiu1J1yoh",
+      "url": "/uploads/NkSfboYrGrbloaV__iP3--technology-digital-x-ray.webp",
+      "reused": true,
+      "uploadedAs": "technology-digital-x-ray.webp"
+    },
+    "technology-digital-x-ray.webp": {
+      "id": "2jZR0mgK79FlCiu1J1yoh",
+      "url": "/uploads/NkSfboYrGrbloaV__iP3--technology-digital-x-ray.webp",
+      "reused": true,
+      "uploadedAs": "technology-digital-x-ray.webp"
+    },
+    "media/img/technology-hero.webp": {
+      "id": "izH_1pMtILTLjfC_5AQ1S",
+      "url": "/uploads/WmImbYZYKKD17h3iYwXW_-technology-hero.webp",
+      "reused": true,
+      "uploadedAs": "technology-hero.webp"
+    },
+    "technology-hero.webp": {
+      "id": "izH_1pMtILTLjfC_5AQ1S",
+      "url": "/uploads/WmImbYZYKKD17h3iYwXW_-technology-hero.webp",
+      "reused": true,
+      "uploadedAs": "technology-hero.webp"
+    },
+    "media/img/technology-intraoral-scanner.webp": {
+      "id": "XzTc20yDn81LXzDdvLYuC",
+      "url": "/uploads/GoXK_nLEhLwiYMlF71am1-technology-intraoral-scanner.webp",
+      "reused": true,
+      "uploadedAs": "technology-intraoral-scanner.webp"
+    },
+    "technology-intraoral-scanner.webp": {
+      "id": "XzTc20yDn81LXzDdvLYuC",
+      "url": "/uploads/GoXK_nLEhLwiYMlF71am1-technology-intraoral-scanner.webp",
+      "reused": true,
+      "uploadedAs": "technology-intraoral-scanner.webp"
+    },
+    "media/img/technology-lab.webp": {
+      "id": "VaytcJSECNne2tfzLBfEF",
+      "url": "/uploads/lXf4kwknkIAa_VJFXYc1H-technology-lab.webp",
+      "reused": true,
+      "uploadedAs": "technology-lab.webp"
+    },
+    "technology-lab.webp": {
+      "id": "VaytcJSECNne2tfzLBfEF",
+      "url": "/uploads/lXf4kwknkIAa_VJFXYc1H-technology-lab.webp",
+      "reused": true,
+      "uploadedAs": "technology-lab.webp"
+    },
+    "media/img/technology-photogrammetry.webp": {
+      "id": "tU6Tz7mYLnnXHqBDyZ14m",
+      "url": "/uploads/ddlbcMNrz9wfYsGR_cERz-technology-photogrammetry.webp",
+      "reused": true,
+      "uploadedAs": "technology-photogrammetry.webp"
+    },
+    "technology-photogrammetry.webp": {
+      "id": "tU6Tz7mYLnnXHqBDyZ14m",
+      "url": "/uploads/ddlbcMNrz9wfYsGR_cERz-technology-photogrammetry.webp",
+      "reused": true,
+      "uploadedAs": "technology-photogrammetry.webp"
+    },
+    "media/video/daniel-story.mp4": {
+      "id": "pqZ2lbp-Raio-yVNLnCFN",
+      "url": "/uploads/90F3MIl7aGBu8xONy7j6y-daniel-story.mp4",
+      "reused": true,
+      "uploadedAs": "daniel-story.mp4"
+    },
+    "daniel-story.mp4": {
+      "id": "pqZ2lbp-Raio-yVNLnCFN",
+      "url": "/uploads/90F3MIl7aGBu8xONy7j6y-daniel-story.mp4",
+      "reused": true,
+      "uploadedAs": "daniel-story.mp4"
     },
     "media/video/hero-loop-m.mp4": {
-      "id": "GVRa0eO2IhlpZBNnSZSOW",
-      "url": "/uploads/eMu-0vNR9p7g3MybO6hym-hero-loop-m.mp4",
-      "reused": true,
-      "uploadedAs": "hero-loop-m.mp4"
+      "id": "om5MmWbM4DtOw2vg4JdLU",
+      "url": "/uploads/awTUVxHV9LEsKJTBHCYKv-hero-loop-m.mp4",
+      "uploadedAs": "hero-loop-m.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "hero-loop-m.mp4": {
-      "id": "GVRa0eO2IhlpZBNnSZSOW",
-      "url": "/uploads/eMu-0vNR9p7g3MybO6hym-hero-loop-m.mp4",
-      "reused": true,
-      "uploadedAs": "hero-loop-m.mp4"
+      "id": "om5MmWbM4DtOw2vg4JdLU",
+      "url": "/uploads/awTUVxHV9LEsKJTBHCYKv-hero-loop-m.mp4",
+      "uploadedAs": "hero-loop-m.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "media/video/hero-loop.mp4": {
-      "id": "fYbcFtgPRT260yORK0zIW",
-      "url": "/uploads/LT9lGW4kKuDiqQHd2wfSt-hero-loop.mp4",
-      "reused": true,
-      "uploadedAs": "hero-loop.mp4"
+      "id": "k934Mm4FEhzdGAVumd8u8",
+      "url": "/uploads/0j-djM86hf6vRfRViCFNn-hero-loop.mp4",
+      "uploadedAs": "hero-loop.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "hero-loop.mp4": {
-      "id": "fYbcFtgPRT260yORK0zIW",
-      "url": "/uploads/LT9lGW4kKuDiqQHd2wfSt-hero-loop.mp4",
-      "reused": true,
-      "uploadedAs": "hero-loop.mp4"
+      "id": "k934Mm4FEhzdGAVumd8u8",
+      "url": "/uploads/0j-djM86hf6vRfRViCFNn-hero-loop.mp4",
+      "uploadedAs": "hero-loop.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "media/video/isaac-story.mp4": {
-      "id": "IThHKlF5KY4FMtN3zuA3p",
-      "url": "/uploads/UW36TMHi1G8v1BkEs8Kvb-isaac-story.mp4",
-      "reused": true,
-      "uploadedAs": "isaac-story.mp4"
+      "id": "-aLUzuDbZUrU32kQsCp9E",
+      "url": "/uploads/Rzxh-RKYgbFvR0zN_L56O-isaac-story.mp4",
+      "uploadedAs": "isaac-story.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     },
     "isaac-story.mp4": {
-      "id": "IThHKlF5KY4FMtN3zuA3p",
-      "url": "/uploads/UW36TMHi1G8v1BkEs8Kvb-isaac-story.mp4",
-      "reused": true,
-      "uploadedAs": "isaac-story.mp4"
+      "id": "-aLUzuDbZUrU32kQsCp9E",
+      "url": "/uploads/Rzxh-RKYgbFvR0zN_L56O-isaac-story.mp4",
+      "uploadedAs": "isaac-story.mp4",
+      "width": null,
+      "height": null,
+      "variants": 0
     }
   }
 }

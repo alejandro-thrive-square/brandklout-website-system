@@ -1,0 +1,149 @@
+restored (45)
+00-fluid-root.css: :root --font-display: 'Newsreader', Georgia, serif
+00-fluid-root.css: :root --font-body: 'DM Sans', Arial, sans-serif
+00-fluid-root.css: :root --t-display: 1
+00-fluid-root.css: :root --t-sub: 1
+00-fluid-root.css: :root --t-text: 1
+00-fluid-root.css: :root --t-small: 1
+00-fluid-root.css: :root --t-label: 1
+00-fluid-root.css: :root --size-display: calc(var(--size-display-base) * var(--t-display))
+00-fluid-root.css: :root --size-h1: calc(var(--size-h1-base) * var(--t-display))
+00-fluid-root.css: :root --size-h2: calc(var(--size-h2-base) * var(--t-display))
+00-fluid-root.css: :root --size-h3: calc(var(--size-h3-base) * var(--t-sub))
+00-fluid-root.css: :root --size-h4: calc(var(--size-h4-base) * var(--t-sub))
+00-fluid-root.css: :root --size-h5: calc(var(--size-h5-base) * var(--t-sub))
+00-fluid-root.css: :root --size-h6: calc(var(--size-h6-base) * var(--t-sub))
+00-fluid-root.css: :root --size-text-large: calc(var(--size-text-large-base) * var(--t-text))
+00-fluid-root.css: :root --size-text-medium: calc(var(--size-text-medium-base) * var(--t-text))
+00-fluid-root.css: :root --size-text-regular: calc(var(--size-text-regular-base) * var(--t-text))
+00-fluid-root.css: :root --size-text-small: calc(var(--size-text-small-base) * var(--t-small))
+00-fluid-root.css: :root --size-text-tiny: calc(var(--size-text-tiny-base) * var(--t-small))
+00-fluid-root.css: :root --size-text-label: calc(var(--size-text-label-base) * var(--t-label))
+00-fluid-root.css: :root --size-number: calc(var(--size-number-base) * var(--t-display))
+00-fluid-root.css: :root --gutter: var(--global)
+00-fluid-root.css: :root --padding-section: var(--section-large)
+00-fluid-root.css: :root --bleed: max(var(--gutter), (100vw - var(--container-large)) / 2)
+00-fluid-root.css: :root --space-tiny: 0.125rem
+00-fluid-root.css: :root --radius: 999px
+00-fluid-root.css: :root --shadow: 0 1.625rem 4.375rem rgba(51, 45, 36, 0.11)
+00-fluid-root.css: :root --ease: cubic-bezier(0.2, 0.7, 0.2, 1)
+01-tokens.css: :root @ media:screen and (max-width: 1439px) --t-display: 0.92
+01-tokens.css: :root @ media:screen and (max-width: 1279px) --t-display: 0.8
+01-tokens.css: :root @ media:screen and (max-width: 1099px) --t-display: 0.72
+01-tokens.css: :root @ media:screen and (max-width: 991px) --t-display: 0.66
+01-tokens.css: :root @ media:screen and (max-width: 767px) --gutter: var(--global-mobile)
+01-tokens.css: :root @ media:screen and (max-width: 767px) --padding-section: var(--section-medium)
+00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-display: 0.7
+00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-text: 1.08
+00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-small: 1.16
+00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-label: 1.16
+00-fluid-root.css: :root @ media:screen and (max-width: 479px) --t-sub: 1.06
+01-tokens.css: :root @ media:screen and (max-width: 419px) --t-display: 0.76
+01-tokens.css: :root @ media:screen and (max-width: 419px) --t-text: 1.18
+01-tokens.css: :root @ media:screen and (max-width: 419px) --t-small: 1.28
+01-tokens.css: :root @ media:screen and (max-width: 419px) --t-label: 1.3
+01-tokens.css: :root @ media:screen and (max-width: 419px) --t-sub: 1.12
+02-base.css: *,*::before,*::after boxSizing: border-box
+
+rules the converter dropped whole (0)
+
+@keyframes (0)
+
+left to the Framework (81)
+01-tokens.css: :root --ink
+01-tokens.css: :root --ink-soft
+01-tokens.css: :root --ink-deep
+01-tokens.css: :root --stone-dark
+01-tokens.css: :root --stone
+01-tokens.css: :root --stone-sage
+01-tokens.css: :root --stone-light
+01-tokens.css: :root --line-light
+01-tokens.css: :root --line-mid
+01-tokens.css: :root --line-sage
+01-tokens.css: :root --ivory
+01-tokens.css: :root --white
+01-tokens.css: :root --sand-light
+01-tokens.css: :root --sand
+01-tokens.css: :root --sage
+01-tokens.css: :root --linen
+01-tokens.css: :root --stone-light-ground
+01-tokens.css: :root --gold
+01-tokens.css: :root --gold-deep
+01-tokens.css: :root --gold-mid
+01-tokens.css: :root --gold-light
+01-tokens.css: :root --gold-bar
+01-tokens.css: :root --footer-text
+01-tokens.css: :root --footer-line
+01-tokens.css: :root --footer-dim
+01-tokens.css: :root --photo-ground
+01-tokens.css: :root --portrait-ground
+01-tokens.css: :root --case-ground
+01-tokens.css: :root --bg
+01-tokens.css: :root --bg-alt
+01-tokens.css: :root --bg-deep
+01-tokens.css: :root --fg
+01-tokens.css: :root --fg-body
+01-tokens.css: :root --fg-mute
+01-tokens.css: :root --accent
+01-tokens.css: :root --accent-flat
+01-tokens.css: :root --accent-hover
+01-tokens.css: :root --accent-number
+01-tokens.css: :root --btn-ink
+01-tokens.css: :root --line
+01-tokens.css: :root --line-strong
+01-tokens.css: :root --focus
+01-tokens.css: :root --size-display-base
+01-tokens.css: :root --size-h1-base
+01-tokens.css: :root --size-h2-base
+01-tokens.css: :root --size-h3-base
+01-tokens.css: :root --size-h4-base
+01-tokens.css: :root --size-h5-base
+01-tokens.css: :root --size-h6-base
+01-tokens.css: :root --size-text-large-base
+01-tokens.css: :root --size-text-medium-base
+01-tokens.css: :root --size-text-regular-base
+01-tokens.css: :root --size-text-small-base
+01-tokens.css: :root --size-text-tiny-base
+01-tokens.css: :root --size-text-label-base
+01-tokens.css: :root --size-number-base
+01-tokens.css: :root --space-0
+01-tokens.css: :root --space-xxsmall
+01-tokens.css: :root --space-xsmall
+01-tokens.css: :root --space-small
+01-tokens.css: :root --space-medium
+01-tokens.css: :root --space-large
+01-tokens.css: :root --space-xlarge
+01-tokens.css: :root --space-xxlarge
+01-tokens.css: :root --space-huge
+01-tokens.css: :root --space-xhuge
+01-tokens.css: :root --space-xxhuge
+01-tokens.css: :root --container-large
+01-tokens.css: :root --container-medium
+01-tokens.css: :root --container-small
+01-tokens.css: :root --global
+01-tokens.css: :root --global-mobile
+01-tokens.css: :root --grid-gap
+01-tokens.css: :root --heading-gap
+01-tokens.css: :root --stack-gap
+01-tokens.css: :root --section-large
+01-tokens.css: :root --section-medium
+01-tokens.css: :root --radius-small
+01-tokens.css: :root --radius-medium
+01-tokens.css: :root --radius-large
+01-tokens.css: :root --radius-xlarge
+
+residual (2)
+[@font-face] 01-tokens.css: @font-face {
+  font-family: 'Newsreader';
+  src: url('../fonts/newsreader-var.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+[@font-face] 01-tokens.css: @font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/dm-sans-var.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}

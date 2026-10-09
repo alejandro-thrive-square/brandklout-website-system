@@ -40,7 +40,7 @@
 .specialists_role { display: block; margin-top: var(--space-xxsmall); font-size: var(--size-text-label); color: var(--fg-mute); }
 @media screen and (max-width: 991px) {
   .specialists_lead { grid-column: 1 / -1; }
-  .specialists_list { grid-column: 1 / -1; margin-top: 1.5rem; }
+  .specialists_list { grid-column: 1 / -1; margin-top: var(--grid-gap); }
 }
 @media screen and (max-width: 767px) {
   .specialists_list { grid-template-columns: minmax(0, 1fr); }

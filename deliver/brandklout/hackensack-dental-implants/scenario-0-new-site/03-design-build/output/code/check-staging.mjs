@@ -43,7 +43,8 @@ const d = await pg.evaluate(async () => {
     description: meta('meta[name="description"]'),
     icon: meta('link[rel="icon"]'),
     fonts: [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '')),
-    h1Font: getComputedStyle(document.querySelector('h1')).fontFamily,
+    /* the H1 is the keyword label (DM Sans) since 2026-10-09; the display headline carries Newsreader */
+    h1Font: getComputedStyle(document.querySelector('.arrival_heading') || document.querySelector('h1')).fontFamily,
     opszWidths: [Math.round(a), Math.round(b)],
     boxSizing: getComputedStyle(document.querySelector('.solutions_item')).boxSizing,
     textlink: (() => { const t = document.querySelector('.button.is-link'); const cs = getComputedStyle(t); return { bg: cs.backgroundImage, border: cs.borderBottomWidth }; })(),
@@ -69,7 +70,7 @@ const PINS = ['story-scene', 'process-scene', 'results-scene'];
 say(d.wz && d.wz.ok && d.wz.smoother && PINS.every((p) => d.pins.includes(p)), 'runtime armed on the published page, three pinned scenes', `pins ${d.pins.join(', ')}; ${d.wz ? d.wz.active.join(' ') : 'no WZ'}`);
 say(d.interaction.drawings === 3 && d.interaction.rule && d.interaction.drawingPos === 'static' && d.interaction.film && !d.interaction.cursor, 'interaction layer created and styled (the verbatim stylesheet reached the page)', JSON.stringify(d.interaction));
 say(d.chapters === 8 && d.h1 === 1, 'eight chapters, one h1');
-say(d.fonts.includes('Newsreader') && d.fonts.includes('DM Sans') && /Newsreader/.test(d.h1Font), 'both typefaces loaded from the media library', d.fonts.join(', '));
+say(d.fonts.includes('Newsreader') && d.fonts.includes('DM Sans') && /Newsreader/.test(d.h1Font), 'both typefaces loaded from the media library, the headline in Newsreader', d.fonts.join(', '));
 say(d.opszWidths[0] !== d.opszWidths[1], 'Newsreader is the variable file (optical size changes the width)', `${d.opszWidths[0]}px at opsz 6, ${d.opszWidths[1]}px at opsz 72`);
 say(d.textlink.bg === 'none' && d.textlink.border === '1px', 'text links are underlined, not blocks', JSON.stringify(d.textlink));
 say(d.boxSizing === 'border-box', 'border-box sizing reached the page');

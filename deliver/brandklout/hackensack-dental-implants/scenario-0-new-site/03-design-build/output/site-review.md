@@ -94,10 +94,33 @@ The content questions the old copy raises. Nothing below was changed on the page
    "These" points at cases the page never lists.
 9. Still open from the home page review: the patient quote beside Isaac, "All-on-4®" (Nobel Biocare's
    trademark), the dentists in the films who are not Dr. Meskin, captions for the films.
+10. **Two pages share one title tag** on the live site, and so here: the home page and
+    `/services/dental-implants` are both "Dental Implants in Hackensack, NJ | Hackensack Center".
+    Titles are kept verbatim; the service page needs its own (an SEO decision, not ours to write).
+11. **The blog is six pages, not a CMS collection.** The step's standard is a collection with a
+    template page; the collection tooling is not in this site's toolkit yet. Each article is its own
+    page today, editable in Instatic like any other; moving them into a collection is a follow-up.
 
 ## What was checked
 
-Filled in by the run that pushed this; the step runbook has the commands.
+2026-10-09; the commands are in the step runbook, the outputs beside this file.
+
+- **Every page, locally** (`check-pages.txt`, `click-controls.txt`, `word-fit.txt`): one H1 per
+  page, the motion runtime armed, no horizontal overflow at 1440 and 390; every designed page holds
+  at least three scroll scenes at 1440 and each one moves as it is scrolled; 113 clicks on eight
+  pages, none dead (menus, drawer, FAQ, films, buttons); every heading fits at 360 and 390.
+- **The home page** (`probe.txt`): 28 of 28 checks, as approved.
+- **The code** (`class-audit.txt`, `structure-audit.txt`): every class inside Client-First, the CSS
+  shaped Client-First (spacing on tokens, no overrides); the same two audits pass on staging.
+- **On staging** (`live-*.txt`): every style editable by hand in Instatic (Framework or Styles
+  panel), the editor shows the page, every declared property reached the published CSS, all 39
+  routes answer, every internal link and image resolves, no image used on more than two pages,
+  staging says noindex. The forms render on every page that has one (consultation survey, booking
+  form on Contact, referral form on Referring Doctors), with the map and the Google reviews.
+- **Facts** (`cross-client.txt`): no other practice's name, phone or address on any page; the legal
+  pages keep the second phone number verbatim (item 1 above).
+- **Not yet checked**: a person scrolling every page in Safari and on a phone (the team review on
+  BugHerd), and the per-page schema, which is set at launch.
 
 ## Version Control
 

@@ -1,0 +1,17 @@
+checked 39 routes, 213 unique URLs, 574 asset references
+distinct titles: 38/39
+
+FAIL
+  runtime class .is-solid was tree-shaken out of the published registry
+  runtime class .is-locked was tree-shaken out of the published registry
+  runtime class .wz-smooth was tree-shaken out of the published registry
+  runtime class .wz-line was tree-shaken out of the published registry
+  runtime class .reveal-mask was tree-shaken out of the published registry
+  runtime class .is-lit was tree-shaken out of the published registry
+  runtime class .is-on was tree-shaken out of the published registry
+  runtime class .is-drawn was tree-shaken out of the published registry
+  115 token(s) missing from userStyles: --font-from, --font-to, --vw-from, --vw-to, --coefficient, --base, --ink, --ink-soft, --ink-deep, --stone-dark, --stone, --stone-sage, --stone-light, --line-light, --line-mid, --line-sage, --ivory, --white, --sand-light, --sand, --sage, --linen, --stone-light-ground, --gold, --gold-deep, --gold-mid, --gold-light, --gold-bar, --footer-text, --footer-line, --footer-dim, --photo-ground, --portrait-ground, --case-ground, --bg, --bg-alt, --bg-deep, --fg, --fg-body, --fg-mute, --accent, --accent-flat, --accent-hover, --accent-number, --btn-ink, --line, --line-strong, --focus, --size-display-base, --size-h1-base, --size-h2-base, --size-h3-base, --size-h4-base, --size-h5-base, --size-h6-base, --size-text-large-base, --size-text-medium-base, --size-text-regular-base, --size-text-small-base, --size-text-tiny-base, --size-text-label-base, --size-number-base, --space-0, --space-xxsmall, --space-xsmall, --space-small, --space-medium, --space-large, --space-xlarge, --space-xxlarge, --space-huge, --space-xhuge, --space-xxhuge, --container-large, --container-medium, --container-small, --global, --global-mobile, --grid-gap, --heading-gap, --stack-gap, --section-large, --section-medium, --radius-small, --radius-medium, --radius-large, --radius-xlarge, --font-display, --font-body, --t-display, --t-sub, --t-text, --t-small, --t-label, --size-display, --size-h1, --size-h2, --size-h3, --size-h4, --size-h5, --size-h6, --size-text-large, --size-text-medium, --size-text-regular, --size-text-small, --size-text-tiny, --size-text-label, --size-number, --gutter, --padding-section, --bleed, --space-tiny, --radius, --shadow, --ease
+  site.js is missing the wz-ready bootstrap — reveal masks will not open
+  /hipaa-disclosure -> link to a .html file: https://www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/index.html
+  /hipaa-disclosure -> link to a .html file: https://www.hhs.gov/ocr/privacy/hipaa/understanding/consumers/noticepp.html
+  /services/dental-implants -> duplicate <title> "Dental Implants in Hackensack, NJ | Hackensack Center"

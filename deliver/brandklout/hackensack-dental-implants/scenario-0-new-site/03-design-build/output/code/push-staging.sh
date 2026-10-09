@@ -6,6 +6,7 @@
 #   empty-embed-markers.mjs  build-import-input does not empty data-embed markers
 #   embed-nodes.mjs          place-embeds.mjs skips nested slugs and takes one page per key; this puts
 #                            the Embed blocks into the converted payload, so push-site writes them
+#   framework.mjs apply      the Framework owns the tokens; re-applied after every full replace
 # Full replace: staging carries only what site-src builds, and nobody edits it in the browser yet
 # (check publishStatus first: draftMatchesPublished must be true). Once someone does, switch to
 # `push-site.mjs --update`.
@@ -40,6 +41,9 @@ say "breakpoints";      node output/code/set-breakpoints.mjs --apply
 say "404 template";     node $T/ops/apply-template-flags.mjs --page 404 --not-found
 say "template guard";   node $T/gates/template-guard.mjs
 say "seo settings";     node output/code/configure-seo.mjs --apply
+# the import re-adds the :root tokens to the registry, where they shadow the Framework; the spec's
+# registry.remove list takes them out again (refuses to save while any is left)
+say "framework";        node $A/framework.mjs apply output/framework-spec.json --apply
 say "publish";          node $A/insta-api.mjs publish
 say "record";           node $T/push/push-site.mjs --record
 say "done: $INSTATIC_BASE_URL/"

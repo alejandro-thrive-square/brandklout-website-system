@@ -11,16 +11,19 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 - **The current site is captured in full** (2026-09-30): 38 pages, 1440 + 390 screenshots, 675 assets,
   a scanned mirror that renders offline, 6 blog posts from the Webflow CMS, URL inventory, email DNS,
   tracking. Read [`docs/migration/old-site-capture.md`](./docs/migration/old-site-capture.md) first.
-- **The home page is on Instatic staging:** https://hackensack-dental-implants-staging.up.railway.app/
-  (not indexed). Built to the concept the client chose, concept 04
-  (https://hackensack-dental-implants.webflow.io/concept-04-human-transformation), with editorial
-  motion, pointer interaction and editorial layouts in nine of twelve blocks (2026-09-30). Read
-  [`scenario-0-new-site/03-design-build/output/canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md).
+- **The complete site is on Instatic staging** (2026-10-09): https://hackensack-dental-implants-staging.up.railway.app/
+  (not indexed), 39 pages at the live site's own URLs (no redirects needed), after the home page was
+  approved. Read [`scenario-0-new-site/03-design-build/output/site-review.md`](./scenario-0-new-site/03-design-build/output/site-review.md)
+  first: the pages, what changed on the home page, eleven content questions to confirm. Source:
+  `03-design-build/output/code/site-src/` (Client-First classes, tokens in the Instatic Framework,
+  pages as modules over `lib/ui.mjs`; authoring rules in `pages/README.md`). Push with
+  `output/code/push-staging.sh` (full replace; it re-applies the Framework before publishing).
+- The home page's own review (concept 04, approved): [`canary-review.md`](./scenario-0-new-site/03-design-build/output/canary-review.md).
 - **Film hero and the doctor moved up** (2026-10-01, Jess): the hero is now a muted loop cut from the
   Isaac and Daniel patient films (agency Vimeo, folder "Hackensack Center") with Dr. Meskin's card
   and the 4.7 Google rating in the first view, and "Watch Isaac's story" opening the full film with
-  sound. Chapter 1 is now the doctor: credentials, then four numbers (4.7, 50,000+, 30+, 4) and the
-  three surgeons. **Two numbers are the practice's own claims, to confirm** (canary-review items 7
+  sound. Chapter 1 is now the doctor: credentials, then four numbers (5.0, 50,000+, 30+, 4) and the
+  three surgeons, each linked to his profile page. **Two numbers are the practice's own claims, to confirm** (canary-review items 7
   to 10).
 - **Google reviews on staging** (2026-09-30, widget swapped 2026-10-02): Elfsight `948f2cd1-…`, the office's own
   listing "Hackensack Center for Dental Implants" (the old site's `cf96ca10` shows the host, Aesthetic Dental Center) is an Embed block under the Smile Gallery (`#reviews`), placed by the push chain from a
@@ -34,8 +37,9 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
   `staging` environment with its own volume. Alejandro and Sang can log in on both; three plugins on both.
   Details: [`scenario-0-new-site/01-client-inquiry/output/RUNBOOK.md`](./scenario-0-new-site/01-client-inquiry/output/RUNBOOK.md).
 - `scenario-0-new-site` is started (from `dd0359ee`); steps 01 and 02 have not been run.
-- `scenario-1-migration` is started (from `dd0359ee`) because the capture step lives there. **The
-  scope is still not recorded**: migration to Instatic, or work on the Webflow site, is not decided.
+- `scenario-1-migration` is started (from `dd0359ee`) because the capture step lives there. Scope:
+  a new site on Instatic ([`docs/project-overview.md`](./docs/project-overview.md)); launching it in
+  place of the Webflow site is the client's call.
 - The current site is Webflow site `6a1f4de5739bab24f074660f`, in the `webflow-brandklout` grant.
   Read-only: [`docs/mcp-access.md`](./docs/mcp-access.md).
 - Shared drive `0ADqUKcTkH0SxUk9PVA` is readable and holds logos, before and afters, clinical and
@@ -46,14 +50,14 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 ## Next
 
-1. BugHerd: 22 of 23 done (2026-10-02). Open: #12 (done when the doctor profile pages exist).
-   Reviews widget is now `948f2cd1`; update its row in `review-widgets.json` on `main`: `scenario-0-new-site/03-design-build/output/bugherd/2026-10-01/change-list.md`.
-1. Get rulings on the ten items in `canary-review.md` (7 to 10 are new: team numbers, rating
-   listing, other dentists in the film, captions), and decide where the menu, financing, hours
-   and office photographs go (the concept has no place for them); then the inner pages.
-1. Record the scope and the Asana task in `docs/project-overview.md`, and get a ruling on the
-   content findings (blog posts that still name Arvada Dental Center, four dead links, the second
-   phone number).
+1. **Team review of the complete site** on BugHerd (project 544349, 23 of 23 earlier tasks done).
+   Asana task *team complete site review*: in progress + comment, after confirming with the user
+   (step 03 directive, item 16). Fix every comment at its source (`lib/ui.mjs` or the page module).
+1. Get rulings on the eleven items in `site-review.md` "To confirm" (phone number on the legal
+   pages, the blog's cost figures and zygomatic implants, the cost page prices, numbers and claims,
+   the referral PDF, two pages sharing one title tag, the blog as a CMS collection).
+1. On `main`: update the reviews widget row in `review-widgets.json` (`948f2cd1`), and the toolkit
+   fixes listed in the step runbook (2026-10-09).
 2. Upload the capture to the shared drive (manual) and re-run the Wayback sweep once; both are in the
    step runbook.
 3. Migration: step 02, redirect map. Staying on Webflow: start `scenario-6-webflow-sites` instead.
@@ -64,7 +68,9 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 
 - **Paths.** The step output folder is ~180 characters deep and Windows stops Python at 260. Capture
   files use short flat names; do not nest deeper under `output/`.
-- The toolkit copy in `tools/instatic-site` needs three workarounds to push (missing `paths` import, embed markers, favicon name). They are scripted in `output/code/push-staging.sh`; the fixes belong on `main`.
+- The toolkit copy in `tools/instatic-site` needs workarounds to push (missing `paths` import, embed markers, embeds on nested pages, Framework re-apply after a full replace). They are scripted in `output/code/push-staging.sh`; the fixes belong on `main`.
+- **Local browser gates need `LOCAL_GATES=1 node build.mjs`** (vendor widgets keep `check-pages` from settling). Never push that build; `push-staging.sh` builds without it.
+- **Every designed page needs three held scenes at 1440** (`check-pages`). A block holds only when it fits the window, so long copy can push a page under; `pages/README.md` lists which components hold.
 - The design authority is concept 04 on `hackensack-dental-implants.webflow.io`, a different Webflow site from the live one.
 - The step's `mirror-site.mjs`, `export-posts.mjs --scrape` and plain `extract_assets.py` do not
   work on a Webflow site. Use the four scripts in the step's `output/code/`.
@@ -94,6 +100,7 @@ owns this folder and nothing else. Start at [`docs/project-overview.md`](./docs/
 | 2026-10-02 | scenario-0-new-site / 03-design-build | Every fixed BugHerd pin re-checked on live staging by the new `bugherd-verify.mjs`: 24/24, shots looked at; no new BugHerd activity; #10 and the replies wait on Alejandro | `8f7a9ba1` |
 | 2026-10-02 | scenario-0-new-site / 03-design-build | 21 BugHerd tasks marked done after a fresh live check (24/24); #10 (widget account) and #12 (profile pages not built) left open | see the commit after `5078725f` |
 | 2026-10-02 | scenario-0-new-site / 03-design-build | Reviews widget swapped to Elfsight `948f2cd1` (the office's own listing, 5.0 from 21), verified live; BugHerd #10 done; 22 of 23 done, #12 waits on the profile pages | see the commit after `2024e3f8` |
+| 2026-10-09 | scenario-0-new-site / 03-design-build | The complete site: 39 pages built in the approved design (Client-First, Framework tokens, one component library), pushed to staging; every local and live gate passes; BugHerd #12 done (23 of 23); eleven content questions in `site-review.md` | `9319e015` + the commit after it |
 
 ## Version Control
 

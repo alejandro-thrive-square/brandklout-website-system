@@ -1,0 +1,170 @@
+target  https://hackensack-dental-implants-staging.up.railway.app (seq 13)
+  preferences {} -> {"rootFontSize":16,"minScreenWidth":320,"maxScreenWidth":1400,"isRem":true,"treeShakeGeneratedFrameworkUtilities":true}
+  colour  + ink: #292824
+  colour  + ink-soft: #38352f
+  colour  + ink-deep: #24231f
+  colour  + stone-dark: #67635b
+  colour  + stone: #706c64
+  colour  + stone-sage: #5f6259
+  colour  + stone-light: #77736b
+  colour  + line-light: #ded9cf
+  colour  + line-mid: #bbb3a5
+  colour  + line-sage: #b8c0b5
+  colour  + ivory: #fbfaf7
+  colour  + white: #ffffff
+  colour  + sand-light: #f2eee6
+  colour  + sand: #eee8de
+  colour  + sage: #dfe5dc
+  colour  + linen: #f4efe7
+  colour  + stone-light-ground: #f0eee7
+  colour  + gold: #b29568
+  colour  + gold-deep: #7c6133
+  colour  + gold-mid: #9c7f4f
+  colour  + gold-light: #d9bd8d
+  colour  + gold-bar: #b7955a
+  colour  + footer-text: #bbb5aa
+  colour  + footer-line: #3b3933
+  colour  + footer-dim: #a09a8e
+  colour  + photo-ground: #d9d2c4
+  colour  + portrait-ground: #e7e8df
+  colour  + case-ground: #0b0b0c
+  colour  + bg: var(--ivory)
+  colour  + bg-alt: var(--white)
+  colour  + bg-deep: var(--ink-deep)
+  colour  + fg: var(--ink)
+  colour  + fg-body: var(--stone)
+  colour  + fg-mute: var(--stone)
+  colour  + accent: var(--gold-deep)
+  colour  + accent-flat: var(--gold)
+  colour  + accent-hover: var(--gold-deep)
+  colour  + accent-number: var(--gold-mid)
+  colour  + btn-ink: var(--white)
+  colour  + line: var(--line-light)
+  colour  + line-strong: var(--line-mid)
+  colour  + focus: var(--ink)
+  typography + group Typography
+  typography Typography + size-display-base: 99.2px
+  typography Typography + size-h1-base: 80px
+  typography Typography + size-h2-base: 69.12px
+  typography Typography + size-h3-base: 40px
+  typography Typography + size-h4-base: 32px
+  typography Typography + size-h5-base: 28px
+  typography Typography + size-h6-base: 22.08px
+  typography Typography + size-text-large-base: 20px
+  typography Typography + size-text-medium-base: 16.96px
+  typography Typography + size-text-regular-base: 16px
+  typography Typography + size-text-small-base: 12.96px
+  typography Typography + size-text-tiny-base: 12px
+  typography Typography + size-text-label-base: 11.04px
+  typography Typography + size-number-base: 80px
+  spacing + group Spacing
+  spacing Spacing + space-0: 0px
+  spacing Spacing + space-xxsmall: 4px
+  spacing Spacing + space-xsmall: 8px
+  spacing Spacing + space-small: 16px
+  spacing Spacing + space-medium: 32px
+  spacing Spacing + space-large: 48px
+  spacing Spacing + space-xlarge: 64px
+  spacing Spacing + space-xxlarge: 80px
+  spacing Spacing + space-huge: 96px
+  spacing Spacing + space-xhuge: 128px
+  spacing Spacing + space-xxhuge: 192px
+  spacing Spacing + container-large: 1220px
+  spacing Spacing + container-medium: 960px
+  spacing Spacing + container-small: 720px
+  spacing Spacing + global: 24px
+  spacing Spacing + global-mobile: 16px
+  spacing Spacing + grid-gap: 24px
+  spacing Spacing + heading-gap: 22.08px
+  spacing Spacing + stack-gap: 44.96px
+  spacing Spacing + section-large: 118.08px
+  spacing Spacing + section-medium: 82.08px
+  spacing + group UI
+  spacing UI + radius-small: 16px
+  spacing UI + radius-medium: 20px
+  spacing UI + radius-large: 28px
+  spacing UI + radius-xlarge: 80px
+  registry :root#0 - --ink: #292824
+  registry :root#0 - --ink-soft: #38352f
+  registry :root#0 - --ink-deep: #24231f
+  registry :root#0 - --stone-dark: #67635b
+  registry :root#0 - --stone: #706c64
+  registry :root#0 - --stone-sage: #5f6259
+  registry :root#0 - --stone-light: #77736b
+  registry :root#0 - --line-light: #ded9cf
+  registry :root#0 - --line-mid: #bbb3a5
+  registry :root#0 - --line-sage: #b8c0b5
+  registry :root#0 - --ivory: #fbfaf7
+  registry :root#0 - --white: #ffffff
+  registry :root#0 - --sand-light: #f2eee6
+  registry :root#0 - --sand: #eee8de
+  registry :root#0 - --sage: #dfe5dc
+  registry :root#0 - --linen: #f4efe7
+  registry :root#0 - --stone-light-ground: #f0eee7
+  registry :root#0 - --gold: #b29568
+  registry :root#0 - --gold-deep: #7c6133
+  registry :root#0 - --gold-mid: #9c7f4f
+  registry :root#0 - --gold-light: #d9bd8d
+  registry :root#0 - --gold-bar: #b7955a
+  registry :root#0 - --footer-text: #bbb5aa
+  registry :root#0 - --footer-line: #3b3933
+  registry :root#0 - --footer-dim: #a09a8e
+  registry :root#0 - --photo-ground: #d9d2c4
+  registry :root#0 - --portrait-ground: #e7e8df
+  registry :root#0 - --case-ground: #0b0b0c
+  registry :root#0 - --bg: var(--ivory)
+  registry :root#0 - --bg-alt: var(--white)
+  registry :root#0 - --bg-deep: var(--ink-deep)
+  registry :root#0 - --fg: var(--ink)
+  registry :root#0 - --fg-body: var(--stone)
+  registry :root#0 - --fg-mute: var(--stone)
+  registry :root#0 - --accent: var(--gold-deep)
+  registry :root#0 - --accent-flat: var(--gold)
+  registry :root#0 - --accent-hover: var(--gold-deep)
+  registry :root#0 - --accent-number: var(--gold-mid)
+  registry :root#0 - --btn-ink: var(--white)
+  registry :root#0 - --line: var(--line-light)
+  registry :root#0 - --line-strong: var(--line-mid)
+  registry :root#0 - --focus: var(--ink)
+  registry :root#0 - --space-0: 0rem
+  registry :root#0 - --space-xxsmall: 0.25rem
+  registry :root#0 - --space-xsmall: 0.5rem
+  registry :root#0 - --space-small: 1rem
+  registry :root#0 - --space-medium: 2rem
+  registry :root#0 - --space-large: 3rem
+  registry :root#0 - --space-xlarge: 4rem
+  registry :root#0 - --space-xxlarge: 5rem
+  registry :root#0 - --space-huge: 6rem
+  registry :root#0 - --space-xhuge: 8rem
+  registry :root#0 - --space-xxhuge: 12rem
+  registry :root#0 - --container-large: 76.25rem
+  registry :root#0 - --container-medium: 60rem
+  registry :root#0 - --container-small: 45rem
+  registry :root#0 - --global: 1.5rem
+  registry :root#0 - --global-mobile: 1rem
+  registry :root#0 - --grid-gap: 1.5rem
+  registry :root#0 - --stack-gap: 2.81rem
+  registry :root#0 - --section-large: 7.38rem
+  registry :root#0 - --section-medium: 5.13rem
+  registry :root#0 - --radius-small: 1rem
+  registry :root#0 - --radius-medium: 1.25rem
+  registry :root#0 - --radius-large: 1.75rem
+  registry :root#0 - --radius-xlarge: 5rem
+  registry :root#0 - --size-display-base: 6.2rem
+  registry :root#0 - --size-h1-base: 5rem
+  registry :root#0 - --size-h2-base: 4.32rem
+  registry :root#0 - --size-h3-base: 2.5rem
+  registry :root#0 - --size-h4-base: 2rem
+  registry :root#0 - --size-h5-base: 1.75rem
+  registry :root#0 - --size-h6-base: 1.38rem
+  registry :root#0 - --size-text-large-base: 1.25rem
+  registry :root#0 - --size-text-medium-base: 1.06rem
+  registry :root#0 - --size-text-regular-base: 1rem
+  registry :root#0 - --size-text-small-base: 0.81rem
+  registry :root#0 - --size-text-tiny-base: 0.75rem
+  registry :root#0 - --size-text-label-base: 0.69rem
+  registry :root#0 - --size-number-base: 5rem
+  registry :root#0 - --heading-gap: 1.38rem
+
+Framework now owns 81 variables; nothing at :root re-declares them.
+saved — seq 13 -> 14. Not published.
