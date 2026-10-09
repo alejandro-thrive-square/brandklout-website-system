@@ -1,0 +1,31 @@
+/* Mirror of the Instatic Framework on https://west-la-implants-staging.up.railway.app, pulled 2026-10-09.
+   The Framework is the source of truth: edit there, then pull. framework.mjs pull --out <this file> */
+:root {
+  --ground: #11110F;
+  --ground-2: #191815;
+  --ground-3: #1F1D19;
+  --ground-deep: #090909;
+  --ground-ink: #080808;
+  --ink: #F4EFE5;
+  --ink-muted: #B5AFA4;
+  --ink-dim: rgba(244,239,229,.55);
+  --gold: #C4A36A;
+  --gold-deep: #8F7442;
+  --gold-soft: rgba(196,163,106,.18);
+  --line: rgba(244,239,229,.14);
+  --line-soft: rgba(244,239,229,.08);
+  --paper: #F4EFE5;
+  --paper-2: #EAE3D6;
+  --paper-ink: #11110F;
+  --paper-muted: #5E574C;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-huge: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+}

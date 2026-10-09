@@ -286,7 +286,7 @@ export function team(b) {
 
 /* ---------- detail: editorial columns ---------- */
 export function detail(b) {
-  const cols = (b.columns || []).map((c) => `<div class="detail_column"><h3 class="heading-style-h3">${c.h}</h3>${paras(c.text)}</div>`).join('\n')
+  const cols = (b.columns || []).map((c) => `<div class="detail_column"><h3 class="heading-style-h3 is-detail">${c.h}</h3>${paras(c.text)}</div>`).join('\n')
   const list = b.list ? `<ul class="detail_list">${b.list.map((l) => `<li><b>${l.b}</b><span>${l.span}</span></li>`).join('')}</ul>` : ''
   return `<section class="section_detail${b.theme ? ' section-style-' + b.theme : ''}" id="${b.id || 'detail'}">
   <div class="container-large detail_content">
@@ -352,7 +352,7 @@ export function prose(b) {
 /* ---------- post index ---------- */
 export function postindex(b) {
   const cards = b.posts
-    .map((p) => `<a class="post-index_card" href="/blog/${p.slug}.html"><figure class="media-frame_component is-wide">${img({ src: p.image, alt: '', pos: p.imagePos })}</figure><span class="post-index_date">${p.dateLabel}</span><h3 class="heading-style-h3">${p.title}</h3><p class="text-size-small">${p.excerpt}</p></a>`)
+    .map((p) => `<a class="post-index_card" href="/blog/${p.slug}.html"><figure class="media-frame_component is-wide">${img({ src: p.image, alt: '', pos: p.imagePos })}</figure><span class="post-index_date">${p.dateLabel}</span><h3 class="heading-style-h3 is-post-card">${p.title}</h3><p class="text-size-small">${p.excerpt}</p></a>`)
     .join('\n')
   return `<section class="section_post-index" id="${b.id || 'entries'}">
   <div class="container-large post-index_head">${tag(b.tag || 'The Journal')}<h2 class="heading-style-h2">${b.title}</h2>${b.lead ? `<p class="text-style-lead">${b.lead}</p>` : ''}</div>

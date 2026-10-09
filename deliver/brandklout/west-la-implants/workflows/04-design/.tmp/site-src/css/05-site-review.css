@@ -24,14 +24,14 @@
 .section_statement[data-st-services] .statement_after{margin-top:1.75rem}
 .statement_services{display:flex;flex-direction:column;gap:.15rem;border-top:1px solid var(--line);padding-top:1.25rem;margin-top:2.5rem}
 .statement_services-label{font-size:var(--t-micro);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.75rem}
-.statement_services a{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line-soft);font-size:var(--t-lead);color:var(--ink);transition:color .3s,padding .3s}
+.statement_services a{display:flex;align-items:center;justify-content:space-between;gap:var(--space-small);padding:.7rem 0;border-bottom:1px solid var(--line-soft);font-size:var(--t-lead);color:var(--ink);transition:color .3s,padding .3s}
 .statement_services a::after{content:"\2192";color:var(--gold);transition:transform .3s}
 .statement_services a:hover,.statement_services a:focus-visible{color:var(--gold);padding-left:.4rem;outline:none}
 .statement_services a:hover::after{transform:translateX(.3rem)}
 .statement_services a[aria-current="page"]{color:var(--ink-muted)}
 .statement_services a[aria-current="page"]::after{content:"\2022"}
 @media (min-width:1024px){
-  .section_statement[data-st-services] .statement_stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:clamp(3rem,6vw,7rem);align-content:center}
+  .section_statement[data-st-services] .statement_stage{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);column-gap:clamp(var(--space-large),6vw,7rem);align-content:center}
   .section_statement[data-st-services] .statement_stage>*{grid-column:1}
   .section_statement[data-st-services] .statement_stage>.statement_services{grid-column:2;grid-row:1/span 3;align-self:center;margin-top:0}
 }

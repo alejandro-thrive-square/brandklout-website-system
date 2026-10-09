@@ -1,11 +1,12 @@
 # Runbook index
 
-9 runs, newest first. Each line is one file in this folder.
+10 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-08/09 | Staging stood up (Railway host, de-indexed by the runtime) and the Client-First migration on it: phase 1 names + editability (502 renames, Framework 17 colours), phase 2 tokens + combos (10 spacing steps, 6 combos); EDITABLE · IN BOUNDS · CLEAN, css 0 real at 1440/390/1920, runtime OK, head 0/87; local source + draft-patch scripts renamed. Staging only. | [2026-10-08-staging-clone-and-class-standard.md](./2026-10-08-staging-clone-and-class-standard.md) |
 | 2026-10-01 | "HIPAA Disclosure" footer link on all 87 pages, published seq 27; ads footer wraps at 390 — carries **gotchas** | [`2026-10-01-hipaa-footer-link.md`](./2026-10-01-hipaa-footer-link.md) |
 | 2026-10-01 | HIPAA Disclosure page injected page-only, published seq 26; entity unconfirmed — carries **gotchas** | [`2026-10-01-hipaa-disclosure-page.md`](./2026-10-01-hipaa-disclosure-page.md) |
 | 2026-09-30 | **Elfsight Google Reviews on the homepage**: the three static cards became the live widget (Embed block in `#proof`), site.js guard, published seq 25, verified in real Chrome — carries **gotchas** (a re-import drops it; the Chrome extension freezes on this page) | [`2026-09-30-elfsight-google-reviews-on-homepage.md`](./2026-09-30-elfsight-google-reviews-on-homepage.md) |

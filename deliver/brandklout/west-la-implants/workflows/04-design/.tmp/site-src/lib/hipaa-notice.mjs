@@ -142,7 +142,7 @@ const item = (it) =>
   it.p ? `<p>${inline(it.p)}</p>`
     : it.h2 ? `<h2>${esc(it.h2)}</h2>`
       : it.ul ? `<ul>${it.ul.map((li) => `<li>${inline(li)}</li>`).join('')}</ul>`
-        : `<div class="detail_column"><h3 class="heading-style-h3">${esc(it.sub)}</h3>${it.items.map(item).join('')}</div>`
+        : `<div class="detail_column"><h3 class="heading-style-h3 is-detail">${esc(it.sub)}</h3>${it.items.map(item).join('')}</div>`
 
 export const toHtml = () => NOTICE.map(item).join('\n')
 export const asideHtml = () => `<div class="text-style-label">${ASIDE.kicker}</div>${ASIDE.links.map(([h, l]) => `<a href="${h}">${l}</a>`).join('')}`

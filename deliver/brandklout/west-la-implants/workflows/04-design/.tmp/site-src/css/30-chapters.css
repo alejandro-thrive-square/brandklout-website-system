@@ -7,7 +7,7 @@
 .arrival_background{position:absolute;inset:0;z-index:0}
 .arrival_film{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transform-origin:center;filter:saturate(.8) contrast(1.05)}
 .arrival_veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.35) 0%,rgba(8,8,8,.15) 35%,rgba(8,8,8,.78) 72%,#080808 100%)}
-.arrival_grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:3rem;align-items:end;padding:calc(var(--nav-h) + 4rem) 0 4.5rem}
+.arrival_grid{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:var(--space-large);align-items:end;padding:calc(var(--nav-h) + var(--space-xlarge)) 0 4.5rem}
 .arrival_content .heading-style-display{max-width:12ch;margin-bottom:1.6rem}
 .arrival_lead{margin-bottom:2.2rem}
 .arrival_actions{display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap}
@@ -15,11 +15,11 @@
 .arrival_meta li{padding:1.1rem 1.2rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(8,8,8,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .arrival_meta b{display:block;font-family:var(--serif);font-weight:400;font-size:1.6rem;line-height:1.05;letter-spacing:-.02em}
 .arrival_meta span{display:block;margin-top:.35rem;font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
-.arrival_scroll-cue{position:absolute;left:50%;bottom:1.5rem;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+.arrival_scroll-cue{position:absolute;left:50%;bottom:1.5rem;transform:translateX(-50%);z-index:1;display:flex;flex-direction:column;align-items:center;gap:var(--space-xsmall);font-size:var(--t-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
 .arrival_scroll-cue i{width:1px;height:2.6rem;background:linear-gradient(180deg,var(--gold),transparent);animation:cue 2.2s var(--ease-in-out) infinite;transform-origin:top}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media (max-width:1023px){
-  .arrival_grid{grid-template-columns:1fr;gap:2.4rem;padding-bottom:5rem}
+  .arrival_grid{grid-template-columns:1fr;gap:2.4rem;padding-bottom:var(--space-xxlarge)}
   .arrival_meta{grid-template-columns:repeat(4,1fr)}
   .arrival_scroll-cue{display:none}
 }
@@ -34,7 +34,7 @@
 .reality_background{position:absolute;inset:0;z-index:0;opacity:.28}
 .reality_background img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);filter:grayscale(1) contrast(1.15)}
 .reality_background::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 50%,rgba(17,17,15,.15),rgba(17,17,15,.92))}
-.reality_stage{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:8rem 0}
+.reality_stage{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:var(--space-xhuge) 0}
 .reality_statement{font-size:var(--t-h2);line-height:1.14;letter-spacing:-.02em;max-width:22ch}
 .reality_statement .wz-word{display:inline-block;opacity:.32;will-change:opacity}
 .reality_after{max-width:34rem;margin-top:2.5rem;color:var(--ink-muted);font-size:var(--t-lead);line-height:1.55;opacity:0;transform:translateY(1.2rem)}
@@ -43,7 +43,7 @@
 /* ---------- 02 THE ANSWER (horizontal) ---------- */
 .section_answer{background:var(--ground-2);color:var(--ink);overflow:hidden;border-top:1px solid var(--line-soft)}
 .answer_pin{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--nav-h) + 1.5rem) 0 2.5rem;gap:2.5rem}
-.answer_head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem}
+.answer_head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-medium)}
 .answer_head .heading-style-h2{max-width:14ch}
 .answer_progress{display:flex;flex-direction:column;align-items:flex-end;gap:.6rem;font-size:var(--t-micro);letter-spacing:.2em;color:var(--ink-muted);flex:0 0 auto}
 .answer_progress i{display:block;width:12rem;height:1px;background:var(--line);position:relative;overflow:hidden}
@@ -58,10 +58,10 @@
 .answer_card:hover .media-frame_component img{transform:scale(1.01)}
 /* Emily and the mirror sit right of centre in a 16:9 frame (BugHerd #17) */
 .answer_card .media-frame_component.is-mirrored img{object-position:63% 50%}
-.answer_card-content{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;align-items:baseline}
+.answer_card-content{display:grid;grid-template-columns:auto 1fr;gap:.2rem var(--space-small);align-items:baseline}
 .answer_card-content .text-style-number{color:var(--gold);font-size:var(--t-micro);font-weight:700;letter-spacing:.14em}
 .answer_card-content p{grid-column:2;color:var(--ink-muted);font-size:var(--t-small);max-width:24rem}
-.answer_end{flex:0 0 auto;width:min(22rem,72vw);display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding:2rem;border:1px solid var(--line);margin-right:var(--gutter)}
+.answer_end{flex:0 0 auto;width:min(22rem,72vw);display:flex;flex-direction:column;justify-content:center;gap:1.4rem;padding:var(--space-medium);border:1px solid var(--line);margin-right:var(--gutter)}
 @media (hover:none) and (pointer:coarse), (max-width:767px){
   /* touch: no horizontal pin — a swipeable rail instead, same content */
   .answer_pin{min-height:0}
@@ -82,11 +82,11 @@
 .precision_words{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.2em;text-align:center;padding:0 var(--gutter);pointer-events:none}
 .precision_word{display:block;font-size:var(--t-display);line-height:1;letter-spacing:-.03em;opacity:0;transform:translateY(1.4rem);text-shadow:0 10px 40px rgba(0,0,0,.5)}
 .precision_tagline{position:absolute;left:var(--gutter);bottom:2rem}
-.precision_body{padding:7rem 0 8rem}
-.precision_grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:start}
+.precision_body{padding:7rem 0 var(--space-xhuge)}
+.precision_grid{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-xxlarge);align-items:start}
 .precision_grid .heading-style-h2{margin:1.2rem 0 1.4rem;max-width:16ch}
 .precision_list{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
-.precision_list li{padding:1.3rem 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:.25rem}
+.precision_list li{padding:1.3rem 0;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:var(--space-xxsmall)}
 .precision_list li:nth-child(odd){padding-right:1.5rem}
 .precision_list li:nth-child(even){padding-left:1.5rem;border-left:1px solid var(--line)}
 .precision_list b{font-family:var(--serif);font-weight:400;font-size:1.5rem;letter-spacing:-.02em}
@@ -96,12 +96,12 @@
 .precision_strip .precision_photo:last-child{aspect-ratio:auto}
 [data-wipe]{clip-path:inset(0 0 100% 0)}
 @media (prefers-reduced-motion:reduce){[data-wipe]{clip-path:none}.precision_film{clip-path:none}.precision_word{opacity:1;transform:none}}
-@media (max-width:1023px){.precision_grid{grid-template-columns:1fr;gap:3rem}.precision_strip{grid-template-columns:1fr}.precision_strip .precision_photo:last-child{aspect-ratio:16/9}}
+@media (max-width:1023px){.precision_grid{grid-template-columns:1fr;gap:var(--space-large)}.precision_strip{grid-template-columns:1fr}.precision_strip .precision_photo:last-child{aspect-ratio:16/9}}
 @media (max-width:767px){.precision_list{grid-template-columns:1fr}.precision_list li:nth-child(even){padding-left:0;border-left:0}.precision_list li:nth-child(odd){padding-right:0}.precision_ring{width:9rem;height:9rem}}
 
 /* ---------- 04 THE SURGEON ---------- */
-.section_surgeon{background:var(--ground-2);color:var(--ink);padding:8rem 0 6rem;border-top:1px solid var(--line-soft)}
-.surgeon_grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:5rem;align-items:center}
+.section_surgeon{background:var(--ground-2);color:var(--ink);padding:var(--space-xhuge) 0 var(--space-huge);border-top:1px solid var(--line-soft)}
+.surgeon_grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--space-xxlarge);align-items:center}
 .surgeon_portrait{aspect-ratio:4/5;border:1px solid var(--line-soft)}
 /* the portrait keeps the head: no parallax overscan, anchored to the top (BugHerd #3) */
 .surgeon_portrait img{position:static;height:100%;object-position:center 8%}
@@ -109,18 +109,18 @@
 .surgeon_portrait figcaption b{display:block;font-family:var(--serif);font-weight:400;font-size:1.3rem;letter-spacing:-.01em}
 .surgeon_portrait figcaption span{display:block;font-size:var(--t-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted);margin-top:.2rem}
 .surgeon_content .heading-style-h2{margin-bottom:1.4rem;max-width:15ch}
-.surgeon_content .text-style-lead{margin-bottom:2rem}
-.surgeon_credentials{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 2rem;margin-bottom:2.2rem}
+.surgeon_content .text-style-lead{margin-bottom:var(--space-medium)}
+.surgeon_credentials{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem var(--space-medium);margin-bottom:2.2rem}
 .surgeon_credentials li{border-top:1px solid var(--line);padding-top:.9rem}
 .surgeon_credentials b{display:block;font-family:var(--serif);font-weight:400;font-size:1.4rem;letter-spacing:-.02em}
 .surgeon_credentials span{display:block;font-size:var(--t-small);color:var(--ink-muted);margin-top:.2rem}
 /* three frames, one shared height, so the strip reads as one flush band (BugHerd #4) */
-.surgeon_strip{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:1.25rem;margin-top:5rem}
+.surgeon_strip{display:grid;grid-template-columns:1.2fr 1fr .8fr;gap:1.25rem;margin-top:var(--space-xxlarge)}
 .surgeon_photo{aspect-ratio:auto;height:24rem}
 /* the doctor stands in the right third of a 2:1 frame; a centre crop cut his face (BugHerd #16).
    No .parallax_image on this one: the parallax overscan cropped the top of his head, as it did the portrait (#3) */
 .surgeon_photo.is-doctor img{object-position:100% 50%;transform:scale(1.3);transform-origin:100% 0}
-@media (max-width:1023px){.surgeon_grid{grid-template-columns:1fr;gap:3rem}.surgeon_strip{grid-template-columns:1fr 1fr}.surgeon_photo{height:18rem}.surgeon_strip .surgeon_photo:last-child{grid-column:1/-1}}
+@media (max-width:1023px){.surgeon_grid{grid-template-columns:1fr;gap:var(--space-large)}.surgeon_strip{grid-template-columns:1fr 1fr}.surgeon_photo{height:18rem}.surgeon_strip .surgeon_photo:last-child{grid-column:1/-1}}
 @media (max-width:600px){.surgeon_strip{grid-template-columns:1fr}.surgeon_credentials{grid-template-columns:1fr}}
 
 /* ---------- 05 THE TRANSFORMATION (light) ---------- */
@@ -128,7 +128,7 @@
 .section_transformation .text-style-lead{color:var(--paper-muted)}
 .section_transformation .heading-style-h2 em{color:var(--gold-deep)}
 .section_transformation .arrow-link_component{color:var(--paper-ink)}
-.transformation_pin{min-height:100svh;display:flex;align-items:center;padding:calc(var(--nav-h) + 1.5rem) 0 3rem}
+.transformation_pin{min-height:100svh;display:flex;align-items:center;padding:calc(var(--nav-h) + 1.5rem) 0 var(--space-large)}
 .transformation_grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:4.5rem;align-items:center;width:min(var(--wrap),calc(100% - var(--gutter)*2))}
 .transformation_media{position:relative;aspect-ratio:4/5;max-height:76svh;overflow:hidden;background:var(--paper-2)}
 .transformation_photo{position:absolute;inset:0;clip-path:inset(0 0 100% 0)}
@@ -137,7 +137,7 @@
 .transformation_photo.is-michael img{object-position:28% 45%}
 /* Emily stands right of centre in a 2:1 portrait (BugHerd #17) */
 .transformation_photo.is-emily img{object-position:90% 40%}
-.transformation_content .heading-style-h2{margin-bottom:2rem;max-width:14ch}
+.transformation_content .heading-style-h2{margin-bottom:var(--space-medium);max-width:14ch}
 .transformation_stories{position:relative;min-height:19rem}
 /* inactive stories are display:none, not merely transparent — a transparent
    stacked story still hands its underline to screenshot tools (BugHerd #8, #9) */
@@ -147,17 +147,17 @@
 .transformation_patient{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.2rem}
 .transformation_patient b{font-weight:700;letter-spacing:.02em}
 .transformation_patient span{font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--paper-muted)}
-.transformation_before-after{display:flex;gap:.5rem;margin-bottom:1.4rem}
+.transformation_before-after{display:flex;gap:var(--space-xsmall);margin-bottom:1.4rem}
 .transformation_before-after img{width:8.5rem;aspect-ratio:4/3;object-fit:cover;border:1px solid rgba(17,17,15,.12)}
-.transformation_dots{display:flex;gap:.5rem;margin-top:2rem}
+.transformation_dots{display:flex;gap:var(--space-xsmall);margin-top:var(--space-medium)}
 .transformation_dots i{width:2.4rem;height:2px;background:rgba(17,17,15,.15);transition:background .4s}
 .transformation_dots i.is-on{background:var(--gold-deep)}
 @media (prefers-reduced-motion:reduce){
-  .transformation_photo{position:relative;clip-path:none;margin-bottom:1rem}.transformation_media{aspect-ratio:auto;max-height:none}
+  .transformation_photo{position:relative;clip-path:none;margin-bottom:var(--space-small)}.transformation_media{aspect-ratio:auto;max-height:none}
   .transformation_story{position:relative;opacity:1;display:block;transform:none;margin-bottom:2.5rem}
 }
 @media (max-width:1023px){
-  .transformation_grid{grid-template-columns:1fr;gap:2rem}
+  .transformation_grid{grid-template-columns:1fr;gap:var(--space-medium)}
   /* .transformation_media TWICE, on purpose. The reduced-motion block above sets
      aspect-ratio:auto on the same single class, so locally this wins only
      because it is written later — and SOURCE ORDER IS NOT A CONTRACT ACROSS
@@ -167,7 +167,7 @@
      transformation pin 149px taller than the build. (0,2,0) settles it in any
      order. See trap 20. */
   .transformation_media.transformation_media{aspect-ratio:16/10;max-height:44svh}
-  .transformation_pin{padding-top:calc(var(--nav-h) + 1rem)}
+  .transformation_pin{padding-top:calc(var(--nav-h) + var(--space-small))}
 }
 @media (max-width:767px){.transformation_stories{min-height:22rem}.transformation_before-after img{width:6.5rem}}
 
@@ -177,7 +177,7 @@
 .experience_background{position:absolute;inset:0;z-index:0}
 .experience_background img{width:100%;height:124%;object-fit:cover;filter:saturate(.7) brightness(.55)}
 .experience_background::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(17,17,15,.92) 0%,rgba(17,17,15,.75) 45%,rgba(17,17,15,.35) 100%)}
-.experience_grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;min-height:100svh;padding:7rem 0}
+.experience_grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xlarge);align-items:center;min-height:100svh;padding:7rem 0}
 .experience_content .heading-style-h2{margin-bottom:1.4rem;max-width:16ch}
 .experience_list{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .experience_list li{border:1px solid var(--line);padding:1.2rem 1.1rem;font-size:var(--t-micro);font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(8,8,8,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .4s,background .4s}
@@ -189,18 +189,18 @@
 .proof_component{background:var(--ground-ink);color:var(--ink);padding:7rem 0 7rem;border-top:1px solid var(--line-soft);overflow:hidden}
 .proof_head .text-style-label{margin-bottom:1.4rem}
 .proof_head .heading-style-h2{max-width:14ch}
-.proof_marquee{margin:3.5rem 0 4rem;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:1.4rem 0;overflow:hidden}
+.proof_marquee{margin:3.5rem 0 var(--space-xlarge);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:1.4rem 0;overflow:hidden}
 .proof_marquee-row{display:flex;width:max-content;will-change:transform}
 .proof_marquee-set{display:flex;flex:0 0 auto}
 .proof_marquee-set span{display:inline-flex;align-items:baseline;gap:.9rem;padding:0 2.5rem;font-family:var(--serif);font-size:1.7rem;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
 .proof_marquee-set span b{font-family:var(--sans);font-size:var(--t-micro);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .proof_grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.proof_quote{border:1px solid var(--line);padding:2rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.6rem;transition:border-color .4s,transform .5s var(--ease-out)}
+.proof_quote{border:1px solid var(--line);padding:var(--space-medium);display:flex;flex-direction:column;justify-content:space-between;gap:1.6rem;transition:border-color .4s,transform .5s var(--ease-out)}
 .proof_quote:hover{border-color:var(--gold);transform:translateY(-.3rem)}
 /* Manrope, the brand text face: Bodoni at body size lost its hairlines on the dark ground (BugHerd #18) */
 .proof_quote p{font-family:var(--sans);font-weight:400;font-size:1.12rem;line-height:1.6;letter-spacing:0;color:var(--ink)}
 .proof_quote footer{font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted)}
-.proof_links{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:3rem}
+.proof_links{display:flex;gap:2.5rem;flex-wrap:wrap;margin-top:var(--space-large)}
 /* the Elfsight Google reviews embed spans the whole grid; min-height keeps the chapter from collapsing while platform.js boots */
 .proof_embed{grid-column:1/-1;display:block;width:100%;min-height:420px}
 @media (max-width:1023px){.proof_grid{grid-template-columns:1fr}}
@@ -210,9 +210,9 @@
 .invitation_background{position:absolute;inset:0;z-index:0;opacity:.22}
 .invitation_background img{width:100%;height:124%;object-fit:cover;filter:grayscale(1)}
 .invitation_background::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ground-2) 0%,rgba(25,24,21,.8) 50%,rgba(25,24,21,.5) 100%)}
-.invitation_grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr .95fr;gap:5rem;align-items:center;padding:8rem 0}
+.invitation_grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr .95fr;gap:var(--space-xxlarge);align-items:center;padding:var(--space-xhuge) 0}
 .invitation_content .heading-style-h2{margin-bottom:1.4rem;max-width:14ch}
-.invitation_contact{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2rem;margin-top:2.5rem}
+.invitation_contact{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem var(--space-medium);margin-top:2.5rem}
 .invitation_contact div{border-top:1px solid var(--line);padding-top:.9rem;display:flex;flex-direction:column;gap:.3rem}
 .invitation_contact b{font-size:var(--t-micro);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .invitation_contact a,.invitation_contact span{font-size:var(--t-small);line-height:1.6;color:var(--ink)}
@@ -227,10 +227,10 @@
 .invitation_fields select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 1.1rem) 50%,calc(100% - .75rem) 50%;background-size:.35rem .35rem;background-repeat:no-repeat}
 .invitation_fields select option{background:var(--ground-ink)}
 .invitation_fields input:focus,.invitation_fields select:focus{outline:none;border-color:var(--gold)}
-.invitation_form .button{width:100%;margin-top:1rem}
-.invitation_note{margin-top:1rem;color:var(--ink-dim)}
-.invitation_faq{position:relative;z-index:1;display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;padding:0 0 7rem}
-.invitation_faq-head .text-style-label{margin-bottom:1rem}
+.invitation_form .button{width:100%;margin-top:var(--space-small)}
+.invitation_note{margin-top:var(--space-small);color:var(--ink-dim)}
+.invitation_faq{position:relative;z-index:1;display:grid;grid-template-columns:.7fr 1.3fr;gap:var(--space-xlarge);padding:0 0 7rem}
+.invitation_faq-head .text-style-label{margin-bottom:var(--space-small)}
 .faq_item{border-top:1px solid var(--line)}
 .faq_item:last-child{border-bottom:1px solid var(--line)}
 .faq_question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.25rem 0;text-align:left;font-size:var(--t-body);font-weight:600;letter-spacing:.01em;min-height:44px;transition:color .3s}
@@ -241,5 +241,5 @@
 .faq_question[aria-expanded="true"] i::after{transform:rotate(0)}
 .faq_answer{height:0;overflow:hidden}
 .faq_answer p{padding:0 0 1.4rem;color:var(--ink-muted);max-width:40rem;font-size:var(--t-body);line-height:1.7} /* an answer is body copy: body size keeps it ~70 characters a line */
-@media (max-width:1023px){.invitation_grid{grid-template-columns:1fr;gap:3rem;padding:5rem 0 4rem}.invitation_faq{grid-template-columns:1fr;gap:1.5rem;padding-bottom:5rem}}
+@media (max-width:1023px){.invitation_grid{grid-template-columns:1fr;gap:var(--space-large);padding:var(--space-xxlarge) 0 var(--space-xlarge)}.invitation_faq{grid-template-columns:1fr;gap:1.5rem;padding-bottom:var(--space-xxlarge)}}
 @media (max-width:600px){.invitation_fields{grid-template-columns:1fr}.invitation_contact{grid-template-columns:1fr}.invitation_form{padding:1.6rem}}

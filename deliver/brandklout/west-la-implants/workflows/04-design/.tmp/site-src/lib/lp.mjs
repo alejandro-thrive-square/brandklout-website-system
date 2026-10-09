@@ -62,7 +62,7 @@ function formCard(c, o = {}) {
         </form>
       </div>`
   return `<div class="landing_form-card" id="book">
-      <div class="landing_form-card-head"><span class="landing_form-card-tagline">${o.kicker || c.offer}</span><h2 class="heading-style-h3">${o.title || 'Request your consultation'}</h2><p class="text-size-small">${o.text || 'A 3D scan, an honest read on candidacy, and a written plan.'}</p></div>
+      <div class="landing_form-card-head"><span class="landing_form-card-tagline">${o.kicker || c.offer}</span><h2 class="heading-style-h3 is-landing-heading">${o.title || 'Request your consultation'}</h2><p class="text-size-small">${o.text || 'A 3D scan, an honest read on candidacy, and a written plan.'}</p></div>
       ${slot}
       <p class="text-size-small landing_form-card-note">We reply within one business day. Prefer to talk? <a href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a></p>
     </div>`
@@ -111,8 +111,8 @@ function journey(c) {
     </figure>
   </div>
   <div class="container-large journey_lists">
-    <div class="journey_list"><h3 class="heading-style-h3">Life <em>before</em></h3><ul>${j.before.map((t) => `<li>${t}</li>`).join('')}</ul></div>
-    <div class="journey_list is-after-list"><h3 class="heading-style-h3">Life <em>after</em></h3><ul>${j.after.map((t) => `<li>${t}</li>`).join('')}</ul></div>
+    <div class="journey_list"><h3 class="heading-style-h3 is-landing-heading">Life <em>before</em></h3><ul>${j.before.map((t) => `<li>${t}</li>`).join('')}</ul></div>
+    <div class="journey_list is-after-list"><h3 class="heading-style-h3 is-landing-heading">Life <em>after</em></h3><ul>${j.after.map((t) => `<li>${t}</li>`).join('')}</ul></div>
   </div>
   <div class="container-large journey_beats">
     <div class="journey_beats-line" aria-hidden="true"><i></i></div>
@@ -129,10 +129,10 @@ function why(c) {
     <div class="why_head">
       ${tag('The difference')}
       <h2 class="heading-style-h2">${w.title}</h2>
-      <p class="text-style-lead">${w.lead}</p>
+      <p class="text-style-lead is-why">${w.lead}</p>
       <figure class="media-frame_component why_image-wrapper" data-wipe>${img(w.image, 'parallax_image')}</figure>
     </div>
-    <ol class="why_reasons">${w.reasons.map((r, i) => `<li class="why_reason"><span class="text-style-number">${String(i + 1).padStart(2, '0')}</span><h3 class="heading-style-h3">${r.title}</h3><p>${r.text}</p></li>`).join('')}</ol>
+    <ol class="why_reasons">${w.reasons.map((r, i) => `<li class="why_reason"><span class="text-style-number">${String(i + 1).padStart(2, '0')}</span><h3 class="heading-style-h3 is-landing-heading">${r.title}</h3><p>${r.text}</p></li>`).join('')}</ol>
   </div>
 </section>`
 }
@@ -146,7 +146,7 @@ function final(c, o = {}) {
   <div class="container-large landing-final_content">
     ${tag(f.tag || 'The invitation')}
     <h2 class="heading-style-h2">${f.title}</h2>
-    <p class="text-style-lead">${f.lead}</p>
+    <p class="text-style-lead is-landing-final">${f.lead}</p>
     <div class="landing_actions">${book}<a class="button ${o.noBook ? 'is-primary' : 'is-secondary'} is-magnetic" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
     <ul class="landing-final_facts">
       <li><b>Prefer to talk?</b><a href="${SITE.phoneAdsHref}">${SITE.phoneAds}</a></li>
@@ -213,7 +213,7 @@ function tyHero(c) {
       <div class="text-style-tagline" data-anim="hide"><i></i><span>${t.kicker || 'Request received'}</span></div>
       <h1 class="heading-style-display landing_title is-form-page-title" data-anim="hide">${t.title}</h1>
       <p class="text-style-lead landing_lead" data-anim="hide">${t.lead}</p>
-      <div class="landing_actions" data-anim="hide"><a class="button is-primary is-magnetic" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
+      <div class="landing_actions" data-anim="hide"><a class="button is-primary is-magnetic is-thank-you" href="${SITE.phoneAdsHref}"><span>Call ${SITE.phoneAds}</span></a></div>
       <p class="text-size-small thank-you_note" data-anim="hide">${t.note}</p>
       <div class="landing_proof" data-anim="hide">${review(t.review)}</div>
     </div>
@@ -226,7 +226,7 @@ function tyHero(c) {
 function cards(b) {
   return `<section class="section_landing-cards${b.theme === 'light' ? ' is-light' : ''}" id="${b.id}"${b.theme === 'light' ? ' data-theme="light"' : ''}>
   <div class="container-large landing-cards_head">${tag(b.tag)}<h2 class="heading-style-h2">${b.title}</h2>${b.lead ? `<p class="text-style-lead">${b.lead}</p>` : ''}</div>
-  <div class="container-large landing-cards_grid">${b.items.map((it, i) => `<article class="landing-cards_card">${it.image ? `<figure class="media-frame_component landing-cards_image-wrapper">${img(it.image)}</figure>` : ''}<span class="text-style-number">${String(i + 1).padStart(2, '0')}</span><h3 class="heading-style-h3">${it.title}</h3><p>${it.text}</p></article>`).join('')}</div>
+  <div class="container-large landing-cards_grid">${b.items.map((it, i) => `<article class="landing-cards_card">${it.image ? `<figure class="media-frame_component landing-cards_image-wrapper">${img(it.image)}</figure>` : ''}<span class="text-style-number">${String(i + 1).padStart(2, '0')}</span><h3 class="heading-style-h3 is-landing-heading">${it.title}</h3><p>${it.text}</p></article>`).join('')}</div>
 </section>`
 }
 

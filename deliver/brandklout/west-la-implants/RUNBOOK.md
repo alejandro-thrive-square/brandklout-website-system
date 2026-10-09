@@ -5,6 +5,21 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 
 ## Standing
 
+- **2026-10-09: STAGING EXISTS and carries the Client-First migration (staging only; production untouched).**
+  `https://west-la-implants-staging.up.railway.app` (Railway env `staging`, same login as production, Railway host
+  only: the client's zone is on GoDaddy, so no `staging.<domain>` and no edge noindex header; the runtime writes
+  `meta robots noindex` + staging `og:url` host-conditionally, marker `WZ_STAGING_NOINDEX` in `src/scripts/site.js`;
+  the GHL number-pool `siteScripts` lines are off on staging). `--site west-la-implants:staging` resolves.
+  On it (seq 10): stylesheets in the registry, Framework 17 colours + the 10 house spacing steps, **502 class renames**
+  (`workflows/class-standard/class-map.json`), 6 combo classes (`combo-map.json`); gates EDITABLE · IN BOUNDS ·
+  CLEAN · editor canvas ok, css 0 real at 1440/390/1920, runtime OK, head 0/87. The local source and the
+  `21-instatic-upload` draft-patch scripts carry the same names and tokens (`css/00-framework-tokens.css` is the
+  Framework mirror). **Production still has the old class names**: the production rollout is a separate, reviewed
+  step (fleet runbook on main); until then `site-src` must NOT be pushed to production (its classes no longer match).
+  Open for a person: `heading-style-display` stays split (chip + a late ambient rule; the blog H1 small combo sits
+  between), 5 contextual overrides the tool refuses. Run:
+  [`docs/runbook/2026-10-08-staging-clone-and-class-standard.md`](./docs/runbook/2026-10-08-staging-clone-and-class-standard.md).
+
 - **The organic site** (80 pages, Dark Surgical Luxury, on the client's Instatic instance): its
   standing state and eight earlier runs are in [`docs/RUNBOOK.md`](./docs/RUNBOOK.md) and
   [`docs/runbook/INDEX.md`](./docs/runbook/INDEX.md). The folder still uses the old
@@ -90,6 +105,9 @@ Standing state: what is true now, what is next, the traps. Each step's own histo
 | 2026-10-07 | 3 · 03 QA and launch | BugHerd #29-#34: hero copy top-aligned, pinned chapters fit (or flow) on every desktop size, ScrollTrigger re-measures after the GHL form grows; thank-you copy without "new-patient line" (seq 33-34) | `2a576bbb` |
 | 2026-10-07 | organic · 21 instatic upload | Brandklout BugHerd round (#19-#38): GHL contact + referral forms embedded on 80 pages, Playfair Display H1s, dead YouTube/Zocdoc links fixed site-wide, copy, /dental-implants services, FAQ photo; 14 closed, #25 waiting (seq 35-38) | _this commit_ |
 | 2026-10-08 | 3 · 03 QA and launch | Contact (new site) form `DCNQTSgl14CNZ93H7Fi3` restyled for the dark site (dark block + dropdown rules pasted via Claude in Chrome after two Codex browser drops); `--standard` ok, embed 100% width at 1440/390 | _this commit_ |
+| 2026-10-08 | staging (new) | Railway env + volume + host, seeded (87 pages, 455 media rows, 3,702 files), embed-origins cloned, runtime noindex guard, DNI lines off; diff-sites 87/87, rendered leak gate clean except the header line (Railway host) | `b3e69195` |
+| 2026-10-08/09 | class-standard · phase 1 (staging) | tokens/review css into the registry (seat flip on `.display` fixed forward), Framework 17 vars, 502 renames; css 0 real at 3 widths, runtime OK, head 0/87, EDITABLE · IN BOUNDS · CLEAN; local source + patch scripts renamed | _this commit_ |
+| 2026-10-09 | class-standard · phase 2 (staging) | 10 spacing steps + 245 values on tokens (5% → 40%), 6 combos (overrides 11 → 5), fold-split 0 (1 left for a person); css 0 real at 3 widths, runtime p2-before→p2-after OK, head 0/87; local source the same | _this commit_ |
 
 ## Version Control
 

@@ -12,7 +12,7 @@
 }
 
 /* The film lightbox (js/75-films.js). Above everything, the Sienna button included. */
-.wz-film{position:fixed;inset:0;z-index:600000;display:none;align-items:center;justify-content:center;padding:clamp(1rem,4vw,4rem)}
+.wz-film{position:fixed;inset:0;z-index:600000;display:none;align-items:center;justify-content:center;padding:clamp(var(--space-small),4vw,var(--space-xlarge))}
 .wz-film.is-open{display:flex}
 .wz-film-veil{position:absolute;inset:0;background:rgba(8,8,8,.92)}
 .wz-film-stage{position:relative;width:min(100%,calc((100svh - 8rem) * 16 / 9),70rem)}
