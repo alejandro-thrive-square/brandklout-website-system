@@ -55,15 +55,15 @@ WZ.dom('ct-filter', '#ctFilters', function(W){
     if(state.cat) u.set('cat',state.cat); if(state.brand) u.set('brand',state.brand); if(state.stock) u.set('stock','1'); if(state.q) u.set('q',state.q); if(state.sort!=='featured') u.set('sort',state.sort);
     var qs = u.toString(); history.replaceState(null,'',location.pathname + (qs?'?'+qs:''));
   }
-  /* p.q holds the Spanish and English names, brand and tags without accents,
-     so "bateria", "batería" and "battery" all find the same pieces. */
+  /* p.q holds the name, brand, aisle and tags without accents, so "bateria"
+     and "batería" find the same pieces. */
   function norm(s){ return s.normalize ? s.normalize('NFD').replace(/\p{M}/gu,'').toLowerCase() : s.toLowerCase(); }
   function apply(animate){
     var q = norm(state.q.trim());
     var list = data.filter(function(p){
       if(state.cat && p.category!==state.cat) return false;
       if(state.brand && p.brand!==state.brand) return false;
-      if(state.stock && !(p.stock>0)) return false;
+      if(state.stock && !p.avail) return false;
       if(q && q.split(/\s+/).some(function(w){ return (p.q||'').indexOf(w)===-1; })) return false;
       return true;
     });
@@ -71,7 +71,7 @@ WZ.dom('ct-filter', '#ctFilters', function(W){
       if(state.sort==='price-asc') return (a.price==null)-(b.price==null) || (a.price||0)-(b.price||0);
       if(state.sort==='price-desc') return (a.price==null)-(b.price==null) || (b.price||0)-(a.price||0);
       if(state.sort==='name') return a.name.localeCompare(b.name,'es');
-      return (b.featured-a.featured) || ((b.stock>0)-(a.stock>0)) || 0;
+      return (b.featured-a.featured) || (a.rank-b.rank) || 0;
     });
     var shown = {};
     list.forEach(function(p,i){ var c = cards[p.slug]; if(!c) return; shown[p.slug]=1; c.classList.remove('is-hidden'); grid.appendChild(c); });

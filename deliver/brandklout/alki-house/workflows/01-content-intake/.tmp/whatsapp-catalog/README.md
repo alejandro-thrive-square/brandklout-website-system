@@ -2,8 +2,10 @@
 
 The client's **current** inventory, as published in the WhatsApp Business catalogue of the shop's
 number (contact "Anferny" — *Alki House, Tienda de fotografía*). Extracted 2026-10-09 from
-web.whatsapp.com. It is newer than the purchase ledger (`00-…/client-handoff/Stock/products.csv`)
-that `site-src/data/products.json` was built from.
+web.whatsapp.com. **It is the site's product source** (2026-10-09, replacing the purchase ledger
+`00-…/client-handoff/Stock/products.csv`): `04-design/.tmp/site-src/data/build-catalogue.mjs` reads
+`catalog.json`, and `prepare-assets.py` reads `images/`. Columns and re-sync steps:
+`docs/cms-schema.md`.
 
 | File | Tracked | What |
 | :--- | :--- | :--- |

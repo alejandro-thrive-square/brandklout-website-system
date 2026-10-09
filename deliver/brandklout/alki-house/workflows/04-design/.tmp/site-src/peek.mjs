@@ -6,7 +6,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-const require = createRequire('C:/Users/ACER/AppData/Local/Temp/claude/C--Users-ACER-orca-workspaces-Brandklout-Website-System-bk-alki-house/17dcc9c4-2dad-4c0f-98df-3515add81e40/scratchpad/package.json');
+// playwright-core is not a dependency: `npm i --no-save playwright-core` at the worktree root (or PLAYWRIGHT_DIR).
+// It used to resolve from a session scratchpad, which Windows temp cleanup half-deletes.
+const require = createRequire(process.env.PLAYWRIGHT_DIR ? path.join(process.env.PLAYWRIGHT_DIR, 'x.js') : import.meta.url);
 const { chromium } = require('playwright-core');
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.resolve(HERE, '..', 'final-site');

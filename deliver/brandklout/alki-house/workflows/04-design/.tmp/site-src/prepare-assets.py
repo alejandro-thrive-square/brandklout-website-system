@@ -3,16 +3,23 @@
   03-graphic-resources/.tmp/scenes/ai/*.jpg      -> assets/scenes/<name>.webp   (max 2400 wide)
   03-graphic-resources/.tmp/scenes/stock/*.jpg   -> assets/scenes/stock-<slug>.webp
   03-graphic-resources/.tmp/scenes/video/*.mp4   -> assets/scenes/<name>.mp4    (copied)
-  03-graphic-resources/.tmp/product-images/<slug>/NN.* -> assets/products/<slug>/N.webp
+  each product's `photos` in data/products.json  -> assets/products/<id>/N.webp
 
-Product photos: a shot on a white or near-white ground is knocked out (flood fill
-from the corners, feathered) and set on a square transparent canvas, so it floats
-on the site's coffee ground instead of sitting in a white box. A shot with a real
+Product photos are the client's own, from the WhatsApp catalogue (since
+2026-10-09; the harvested shots in 03-graphic-resources/.tmp/product-images/ are
+no longer read). products.json lists them relative to its `photoRoot`.
+
+A shot on a white or near-white ground is knocked out (flood fill from the
+corners, feathered) and set on a square transparent canvas, so it floats on the
+site's coffee ground instead of sitting in a white box. A shot with a real
 background is kept as a photo and recorded as such in assets/products/index.json
-so the card can show it edge to edge.
+so the card can show it edge to edge. So is a shot carrying the client's own
+"EN CAMINO" / "AGOTADO" corner ribbon: cut out, the ribbon would float beside the
+product like a sticker.
 
-Idempotent: skips outputs newer than their source. `--force` redoes everything.
-Usage: python prepare-assets.py [--force] [--only <slug>]
+Idempotent: skips a product whose outputs are newer than its photos. `--force`
+redoes everything. index.json is rewritten for the current products only.
+Usage: python prepare-assets.py [--force] [--only <id>]
 """
 import json, os, shutil, sys
 from pathlib import Path
@@ -21,14 +28,11 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageOps
 HERE = Path(__file__).resolve().parent
 GR = HERE.parents[2] / '03-graphic-resources' / '.tmp'
 SCENES = GR / 'scenes'
-PRODUCTS = GR / 'product-images'
+CMS = HERE / 'data' / 'products.json'
 OUT_SCENES = HERE / 'assets' / 'scenes'
 OUT_PRODUCTS = HERE / 'assets' / 'products'
 FORCE = '--force' in sys.argv
 ONLY = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else None
-# --shard i/n processes every n-th product folder and writes index.<i>.json; --merge folds the shards.
-SHARD = tuple(int(x) for x in sys.argv[sys.argv.index('--shard') + 1].split('/')) if '--shard' in sys.argv else None
-MERGE = '--merge' in sys.argv
 Image.MAX_IMAGE_PIXELS = None
 
 
@@ -128,11 +132,34 @@ def knockout(im: Image.Image, tol=30):
         if ImageChops.difference(new, ground_mask).getbbox() is None:
             break
         ground_mask = new
-    mask = ImageChops.invert(ground_mask)
+    mask = drop_top_band(ImageChops.invert(ground_mask))
     mask = mask.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(1.2))
     out = rgb.convert('RGBA')
     out.putalpha(mask)
     return out
+
+
+def drop_top_band(mask: Image.Image, band=0.14):
+    """Erase subject pieces that lie entirely in the top band of the shot.
+
+    The client's photos are marketing images with the maker's wordmark ("SmallRig", "K&F CONCEPT",
+    "CINEPEER CX100") in the top corner. Cut out, the letters float above the product and their
+    white counters show as specks; and they stretch the crop box away from the product. A piece of
+    the product itself always reaches below the band."""
+    w, h = mask.size
+    limit = int(h * band)
+    work = mask.point(lambda v: 255 if v > 127 else 0)
+    px = work.load()
+    for y in range(limit):
+        for x in range(w):
+            if px[x, y] != 255:
+                continue
+            ImageDraw.floodfill(work, (x, y), 100)
+            region = work.point(lambda v: 255 if v == 100 else 0)
+            bottom = region.getbbox()[3]
+            work.paste(0 if bottom <= limit else 200, (0, 0), region)
+            px = work.load()
+    return work.point(lambda v: 255 if v else 0)
 
 
 def square(im: Image.Image, size=1400, pad=0.07):
@@ -148,33 +175,38 @@ def square(im: Image.Image, size=1400, pad=0.07):
     return canvas
 
 
+def ribbon(im: Image.Image, status: str) -> bool:
+    """The client marks an en-camino or agotado listing with a band across the bottom-right corner.
+    The band leaves the corner tip white, so walk the diagonal through it instead."""
+    if status == 'disponible':
+        return False
+    rgb = im.convert('RGB')
+    w, h = rgb.size
+    return any(not near_white(rgb.getpixel((int(w * t), int(h * t)))) for t in [0.80 + i * 0.01 for i in range(18)])
+
+
 def products():
-    if not PRODUCTS.exists():
-        print('products: no harvest yet')
-        return
-    index_path = OUT_PRODUCTS / (f'index.{SHARD[0]}.json' if SHARD else 'index.json')
+    cms = json.loads(CMS.read_text(encoding='utf8'))
+    root = (HERE / cms['photoRoot']).resolve()
     main_index = OUT_PRODUCTS / 'index.json'
-    index = json.loads(main_index.read_text(encoding='utf8')) if main_index.exists() else {}
-    if SHARD and index_path.exists():
-        index.update(json.loads(index_path.read_text(encoding='utf8')))
-    n = 0
-    folders = sorted(p for p in PRODUCTS.iterdir() if p.is_dir())
-    for k, folder in enumerate(folders):
-        slug = folder.name
-        if ONLY and slug != ONLY:
+    old = json.loads(main_index.read_text(encoding='utf8')) if main_index.exists() else {}
+    index, n = {}, 0
+    for p in cms['products']:
+        pid, srcs = p['id'], [root / f for f in p.get('photos', [])]
+        srcs = [s for s in srcs if s.exists()]
+        if not srcs:
             continue
-        if SHARD and k % SHARD[1] != SHARD[0]:
+        out = OUT_PRODUCTS / pid
+        done = old.get(pid)
+        if (ONLY and pid != ONLY) or (done and len(done) == len(srcs) and all(fresh(s, out / f'{i}.webp') for i, s in enumerate(srcs, 1))):
+            if done:
+                index[pid] = done
             continue
-        shots = sorted(f for f in folder.iterdir() if f.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'))
-        if not shots:
-            continue
+        # A folder may hold an older product's shots under the same id: start it clean.
+        shutil.rmtree(out, ignore_errors=True)
         entries = []
-        for i, src in enumerate(shots, 1):
-            dst = OUT_PRODUCTS / slug / f'{i}.webp'
-            prev = next((e for e in index.get(slug, []) if e['file'] == dst.name), None)
-            if fresh(src, dst) and prev:
-                entries.append(prev)
-                continue
+        for i, src in enumerate(srcs, 1):
+            dst = out / f'{i}.webp'
             try:
                 im = ImageOps.exif_transpose(Image.open(src))
                 # Flood-filling a 7000 px image takes a minute; nothing above 1600 px survives anyway.
@@ -183,7 +215,7 @@ def products():
             except Exception as e:  # noqa
                 print(f'  skip {src}: {e}')
                 continue
-            cut = knockout(im)
+            cut = None if ribbon(im, p['status']) else knockout(im)
             if cut is not None:
                 save_webp(square(cut), dst, 84)
                 entries.append({'file': dst.name, 'cutout': True})
@@ -194,31 +226,14 @@ def products():
                 save_webp(im, dst, 80)
                 entries.append({'file': dst.name, 'cutout': False})
             n += 1
-        # cut-outs first: the card wants the cleanest shot on top
-        entries.sort(key=lambda e: (not e['cutout'], e['file']))
-        index[slug] = entries
+        # The client's first photo leads (it is the one they chose for the listing).
+        index[pid] = entries
     OUT_PRODUCTS.mkdir(parents=True, exist_ok=True)
-    index_path.write_text(json.dumps(index, indent=1), encoding='utf8')
-    print(f'products: {n} written, {len(index)} slugs indexed -> {index_path.name}')
-
-
-def merge():
-    main = OUT_PRODUCTS / 'index.json'
-    index = json.loads(main.read_text(encoding='utf8')) if main.exists() else {}
-    for f in sorted(OUT_PRODUCTS.glob('index.*.json')):
-        index.update(json.loads(f.read_text(encoding='utf8')))
-        f.unlink()
-    # Keep only slugs whose folder still exists.
-    index = {k: v for k, v in index.items() if (OUT_PRODUCTS / k).is_dir()}
-    main.write_text(json.dumps(dict(sorted(index.items())), indent=1), encoding='utf8')
-    print(f'merged: {len(index)} slugs')
+    main_index.write_text(json.dumps(index, indent=1), encoding='utf8')
+    cut = sum(e['cutout'] for v in index.values() for e in v)
+    print(f'products: {n} written, {len(index)} indexed, {cut} of {sum(len(v) for v in index.values())} shots cut out')
 
 
 if __name__ == '__main__':
-    if MERGE:
-        merge()
-    elif SHARD:
-        products()
-    else:
-        scenes()
-        products()
+    scenes()
+    products()

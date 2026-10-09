@@ -1,11 +1,19 @@
 # Runbook index
 
-5 runs, newest first. Each line is one file in this folder.
+6 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-10-09 | DONE 2026-10-09 (later, `<sha>`) - WHATSAPP CATALOGUE REPLACES THE LEDGER. 73 products, Bs prices, statuses disponible / en camino / agotado, the client's photos (ribbon shots kept whole, wordmarks dropped); stage, kits, hero repointed; cart v2. Gates: journey PASS, fluid root 77/77, console/overflow clean, cart e2e 38/38. **Client: 14 blank prices, a `15# Runbook index
+
+6 runs, newest first. Each line is one file in this folder.
+**Read this index first and open only what you need** — opening every entry is how a runbook
+eats a context window.
+
+| Date | Run | File |
+ price, two "Top Handle Smallrig". Gotchas: never delete `catalogue-keys.json`; shoot.mjs needs playwright-core at the worktree root.** | [`2026-10-09-whatsapp-catalogue-replaces-ledger.md`](./2026-10-09-whatsapp-catalogue-replaces-ledger.md) |
 | 2026-10-09 | DONE 2026-10-09 (`0afa0766`) - WHATSAPP CATALOGUE EXTRACTED. 73 products + 143 client photos from the shop's WhatsApp Business catalogue (WhatsApp Web, Claude in Chrome on WhatsApp's own models) into `01-content-intake/.tmp/whatsapp-catalog/`; prices in Bs; ~12 not in the ledger. Site untouched. **Open: does it replace the ledger as the CMS source? Gotchas: the panel stops paging at 10; tool output redacts signed URLs; Chrome downloads land in its last-used folder; commit text before `assets.mjs push`.** | [`2026-10-09-whatsapp-catalogue-extracted.md`](./2026-10-09-whatsapp-catalogue-extracted.md) |
 | 2026-09-13 | DONE 2026-09-13 (later, `3e38116c`) - SPANISH SITE + WHATSAPP CART. Every page, name and URL in Spanish; cart saved in the browser; `pedido.html` sends the whole order to WhatsApp; gates and an end-to-end cart test passed. **WhatsApp number still missing (`data/site.json`). Gotchas: key on `id`, never `slug`; the cart is a snapshot; clicks during ScrollSmoother easing miss.** | [`2026-09-13-spanish-site-whatsapp-cart.md`](./2026-09-13-spanish-site-whatsapp-cart.md) |
 | 2026-09-13 | DONE 2026-09-13 (`6591b8f7`) - LOCAL BUILD: home, catalogue, product template; 235-product CMS from the ledger; scenes, video and product cut-outs; gates passed. **Gotchas: audit wants literal `pin:true`; Draggable scrollLeft breaks flex rails; NaN in a trigger end = zero-length pin.** | [`2026-09-13-local-build-home-catalogue-product.md`](./2026-09-13-local-build-home-catalogue-product.md) |

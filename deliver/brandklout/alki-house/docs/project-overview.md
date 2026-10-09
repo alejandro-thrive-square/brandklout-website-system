@@ -12,7 +12,7 @@
 | **Language** | **Spanish, the entire site** (Alejandro, 2026-09-13). Latin-American usage: *celular*, *audífonos*, *tú*. Product names are Spanish, head noun first; URLs are Spanish (`productos/<slug>.html`). |
 | **Ordering** | **A cart saved in the browser, checked out to WhatsApp** (Alejandro, 2026-09-13). No payment on the site: `pedido.html` sends the whole order as one WhatsApp message; the shop confirms stock, condition and the final total in the chat. Number: `site-src/data/site.json` — **not yet supplied**. |
 | **Sells** | Camera gimbals, studio lighting, softboxes, wireless audio, monitors, cages and rigs, lens adapters, batteries, camera care — new and pre-owned |
-| **CMS** | A Google Sheet the client maintains; columns in [`cms-schema.md`](./cms-schema.md). Local stand-in: `workflows/04-design/.tmp/site-src/data/products.json` |
+| **CMS** | **The shop's WhatsApp Business catalogue** (Alejandro, 2026-10-09: it replaces the purchase ledger), extracted into `workflows/01-content-intake/.tmp/whatsapp-catalog/` and built into `workflows/04-design/.tmp/site-src/data/products.json`; columns in [`cms-schema.md`](./cms-schema.md). Prices in **bolívares**. Whether a Google Sheet still comes later, or a sync reads WhatsApp, is open. |
 | **Worktree** | `bk-alki-house` at `~/orca/workspaces/Brandklout Website System/bk-alki-house` (sparse) |
 | **process_baseline_commit** | `da1612b1` (local `main` when the worktree was cut) |
 

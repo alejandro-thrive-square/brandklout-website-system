@@ -43,8 +43,8 @@
   <div class="rail-pin">
     <div class="wrap rail-head">
       <p class="chapter-tag"><b>01</b><i></i>Los Pasillos</p>
-      <h2 data-split>Once pasillos. <em>Recórrelos.</em></h2>
-      <div class="rail-progress" aria-hidden="true"><i id="railBar"></i><span class="mono" id="railCount">01 / 11</span></div>
+      <h2 data-split>{{RAIL_WORD}} pasillos. <em>Recórrelos.</em></h2>
+      <div class="rail-progress" aria-hidden="true"><i id="railBar"></i><span class="mono" id="railCount">01 / {{RAIL_TOTAL}}</span></div>
     </div>
     <div class="rail-track" id="railTrack">
       {{RAIL_PANELS}}
@@ -82,7 +82,7 @@
       <p class="lead" data-arrive>Cada gimbal se balancea y se prueba en todos sus modos. Cada luz se mide. Cada par de micrófonos se empareja. Si sale de la casa, alguien aquí ya lo usó.</p>
       <div class="pr-stats" data-arrive>
         <div class="pr-stat"><b data-count="{{STAT_PRODUCTS}}">0</b><span>productos en catálogo</span></div>
-        <div class="pr-stat"><b data-count="{{STAT_SOLD}}">0</b><span>unidades vendidas a creadores</span></div>
+        <div class="pr-stat"><b data-count="{{STAT_INSTOCK}}">0</b><span>listos para enviar hoy</span></div>
         <div class="pr-stat"><b data-count="{{STAT_BRANDS}}">0</b><span>marcas en los estantes</span></div>
       </div>
     </div>
@@ -90,7 +90,7 @@
       <figure class="pr-fig"><img src="{{PROMISE_SCENE}}" alt="Una luz de estudio y un softbox sobre tripiés en un estudio oscuro" loading="lazy"></figure>
       <ul class="pr-list">
         <li data-arrive><b>01</b><div><h4>Nuevo y seminuevo, bien distinguidos.</h4><p>Lo sellado se marca como nuevo. Todo lo demás se califica y se fotografía tal como la unidad que recibes.</p></div></li>
-        <li data-arrive><b>02</b><div><h4>Precios desde la hoja.</h4><p>Lo que ves es el inventario en vivo. Sin productos fantasma, sin «pregunta si hay».</p></div></li>
+        <li data-arrive><b>02</b><div><h4>Precios del inventario.</h4><p>Lo que ves es el inventario al día. Sin productos fantasma, sin «pregunta si hay».</p></div></li>
         <li data-arrive><b>03</b><div><h4>Asesoría de gente que graba.</h4><p>Dinos tu cámara y el trabajo. Te decimos cuál de los tres gimbals de verdad te sirve.</p></div></li>
       </ul>
     </div>
@@ -115,7 +115,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div><p class="chapter-tag"><b>05</b><i></i>La Vitrina</p><h2 data-split>En la vitrina ahora mismo.</h2></div>
-      <p class="mono fl-stamp" data-arrive><i></i>En vivo desde la hoja de inventario · {{STAT_DATE}}</p>
+      <p class="mono fl-stamp" data-arrive><i></i>Inventario actualizado · {{STAT_DATE}}</p>
     </div>
     <div class="pgrid fl-grid" id="floorGrid">
       {{FLOOR_CARDS}}
@@ -134,7 +134,7 @@
       </div>
       <div class="way-steps" id="waySteps">
         <svg class="way-line" viewBox="0 0 2 600" preserveAspectRatio="none" aria-hidden="true"><path id="wayPath" d="M1 0V600"/></svg>
-        <div class="way-step" data-i="0"><b class="mono">01</b><div><h4>Arma tu carrito.</h4><p>El catálogo es la hoja: si dice en stock, está en el estante detrás de nosotros. Tu carrito se guarda en este navegador mientras decides.</p></div></div>
+        <div class="way-step" data-i="0"><b class="mono">01</b><div><h4>Arma tu carrito.</h4><p>El catálogo es nuestro inventario: si dice en stock, está en el estante detrás de nosotros. Tu carrito se guarda en este navegador mientras decides.</p></div></div>
         <div class="way-step" data-i="1"><b class="mono">02</b><div><h4>Envíalo por WhatsApp.</h4><p>Un botón manda la lista completa a nuestro WhatsApp. Te respondemos con el estado de cada unidad, qué incluye y el total final.</p></div></div>
         <div class="way-step" data-i="2"><b class="mono">03</b><div><h4>Recoge o te lo enviamos.</h4><p>Pasa por él a la casa, o lo empacamos y te lo enviamos la misma semana.</p></div></div>
       </div>

@@ -20,7 +20,8 @@ WZ.section('ch-rail', function(W){
       scrub:.35, invalidateOnRefresh:true, anticipatePin:1,
       onUpdate:function(self){
         if(bar) bar.style.setProperty('--p', self.progress.toFixed(3));
-        if(count) count.textContent = String(Math.min(n, 1 + Math.floor(self.progress * n))).padStart(2,'0') + ' / ' + String(n - 1).padStart(2,'0');
+        /* n - 1: the last panel is the "whole catalogue" card, not an aisle. */
+        if(count) count.textContent = String(Math.min(n - 1, 1 + Math.floor(self.progress * n))).padStart(2,'0') + ' / ' + String(n - 1).padStart(2,'0');
       }
     }});
 

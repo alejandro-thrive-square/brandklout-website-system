@@ -26,7 +26,7 @@
 .pcard-body{display:flex;flex-direction:column;gap:.35rem;padding-inline:.2rem}
 .pcard-cat{font-family:var(--f-mono);font-size:var(--label);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-faint)}
 .pcard h4{font-size:var(--h4);line-height:1.15;letter-spacing:-.015em;font-weight:600}
-.pcard-row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;margin-top:.2rem}
+.pcard-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.2rem .8rem;margin-top:.2rem}
 .pcard .price{font-size:1.2rem}
 /* Add to cart, on the photo's bottom-right corner. The photo is square and as
    wide as the card, so 100cqw is its height. */

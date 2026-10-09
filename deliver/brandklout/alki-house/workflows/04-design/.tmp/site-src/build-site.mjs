@@ -4,9 +4,9 @@
 //   pages/*.body.html   markup only, with {{TOKENS}} the renderers below fill
 //   css/*.css        one file per component, concatenated in filename order
 //   js/ + sections/  the runtime, one module per chapter, the boot sequence
-//   data/products.json  THE CMS. Today it is generated from the client's stock
-//                    ledger by data/build-catalogue.mjs; in production the
-//                    Google-Sheet sync plugin writes the same shape into Instatic.
+//   data/products.json  THE CMS. Today it is generated from the shop's WhatsApp
+//                    Business catalogue by data/build-catalogue.mjs; in production
+//                    the Google-Sheet sync plugin writes the same shape into Instatic.
 //   data/site.json   site settings: the shop's WhatsApp number.
 //   assets/          logo, scenes, product photography (prepare-assets.py)
 //
@@ -15,8 +15,13 @@
 // live) · pedido.html (the cart's checkout, which hands the order to WhatsApp)
 // · producto.html (the canary product page, for the design gate).
 //
-// A product has two keys: `id` (the English slug; images live under
-// assets/products/<id>/ and it never changes) and `slug` (Spanish, the URL).
+// A product has two keys: `id` (images live under assets/products/<id>/ and it
+// never changes) and `slug` (the URL). Both are fixed per WhatsApp product in
+// data/catalogue-keys.json.
+//
+// Status, from the client's "Estado": disponible (can go in the cart), en-camino
+// (ordered, not here yet: reserve by WhatsApp), agotado (ask for the next one).
+// `stock` is a count when the sheet has one; the WhatsApp catalogue has none.
 //
 // Usage: node build-site.mjs
 import fs from 'node:fs';
@@ -48,13 +53,12 @@ for (const p of cms.products) {
   p.images = (imgIndex[p.id] || []).map((e) => ({ src: `assets/products/${p.id}/${e.file}`, cutout: !!e.cutout }));
 }
 const products = cms.products;
-const byId = (id) => products.find((p) => p.id === id);
-const inStock = products.filter((p) => p.stock > 0);
+const byId = (id) => products.find((p) => p.id === id) || console.warn(`  no product "${id}" in the CMS: dropped from the page`);
+const avail = (p) => p.status === 'disponible' && (p.stock == null || p.stock > 0);
+const inStock = products.filter(avail);
 const stats = {
   products: products.length, inStock: inStock.length,
   brands: new Set(products.map((p) => p.brand).filter(Boolean)).size,
-  sold: products.reduce((a, p) => a + (p.sold || 0), 0),
-  units: products.reduce((a, p) => a + (p.stock || 0), 0),
   date: cms.generated, year: new Date().getFullYear(),
 };
 
@@ -78,14 +82,17 @@ const boot = runtime.indexOf('/* ===== js/90-boot.js ===== */');
 if (boot === -1) throw new Error('js/90-boot.js missing');
 fs.writeFileSync(path.join(OUT, 'assets', 'site.js'), runtime.slice(0, boot) + bundle(['sections'], '.js') + '\n' + runtime.slice(boot));
 fs.cpSync(path.join(SRC, 'vendor', 'gsap'), path.join(OUT, 'assets', 'gsap'), { recursive: true });
-fs.cpSync(path.join(SRC, 'assets'), path.join(OUT, 'assets'), { recursive: true });
+// Product folders of products no longer in the CMS stay out of the site.
+fs.cpSync(path.join(SRC, 'assets'), path.join(OUT, 'assets'), { recursive: true,
+  filter: (src) => { const top = path.relative(path.join(SRC, 'assets', 'products'), src).split(path.sep)[0]; return top === '..' || top === '' || top === 'index.json' || !!imgIndex[top]; } });
 
 /* ---- shared renderers ---- */
-// Prices are the ledger's dollars, written the way the ledger writes them: $1,299.
-const fmt = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+// Prices are bolívares, written the way the shop writes them: 48.850 Bs.
+const fmt = (n) => { const [i, d] = String(Math.round(n * 100) / 100).split('.'); return i.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (d ? ',' + d.padEnd(2, '0') : '') + ' Bs'; };
 const money = (p) => (p.price == null ? '<span class="price">Precio<small>a consultar</small></span>' : `<span class="price">${fmt(p.price)}</span>`);
-const isNew = (p) => /^nuevo/i.test(p.condition || '');
-const badge = (p) => (p.stock > 0 ? '<span class="badge badge-stock">En stock</span>' : '<span class="badge badge-out">Agotado</span>') + (isNew(p) ? '<span class="badge badge-new">Nuevo</span>' : '');
+const STATUS = { disponible: ['badge-stock', 'En stock'], 'en-camino': ['badge-soon', 'En camino'], agotado: ['badge-out', 'Agotado'] };
+// "Nuevo" is the condition of nearly every listing, so the badge is the client's 🆕 (justIn) instead.
+const badge = (p) => { const [cls, label] = avail(p) ? STATUS.disponible : STATUS[p.status] || STATUS.agotado; return `<span class="badge ${cls}">${label}</span>` + (p.justIn ? '<span class="badge badge-new">Recién llegado</span>' : ''); };
 const PLUS = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>';
 const CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.6z"/><path d="M9 10.5h6M9 13.5h3.5"/></svg>';
 const GLYPH = {
@@ -118,17 +125,17 @@ function card(p, root) {
       (p.images[1] ? `<img class="pcard-alt${p.images[1].cutout ? '' : ' is-photo'}" src="${root}${p.images[1].src}" alt="" loading="lazy" width="800" height="800">` : '')
     : `<div class="pcard-glyph" aria-hidden="true">${glyph(p.category)}</div>`;
   // The name is the link and stretches over the whole card; the + button sits above it.
-  return `<article class="pcard${p.stock > 0 ? '' : ' is-out'}" data-slug="${p.slug}" data-cat="${p.category}" data-brand="${esc(p.brand)}" data-stock="${p.stock}" data-price="${p.price ?? ''}">
+  return `<article class="pcard${p.status === 'agotado' ? ' is-out' : ''}" data-slug="${p.slug}" data-cat="${p.category}" data-brand="${esc(p.brand)}" data-status="${p.status}" data-price="${p.price ?? ''}">
   <div class="pcard-media"><div class="pcard-badges">${badge(p)}</div>${img}</div>
   <div class="pcard-body"><p class="pcard-cat">${esc(p.brand || catLabel[p.category])}</p><h4><a class="pcard-link" href="${root}productos/${p.slug}.html">${esc(p.name)}</a></h4>
     <div class="pcard-row">${money(p)}<span class="pcard-cat">${esc(catLabel[p.category])}</span></div></div>
-  ${p.stock > 0 ? `<button class="pcard-add" type="button" data-item="${item(p)}" aria-label="Añadir ${esc(p.name)} al carrito">${PLUS}</button>` : ''}
+  ${avail(p) ? `<button class="pcard-add" type="button" data-item="${item(p)}" aria-label="Añadir ${esc(p.name)} al carrito">${PLUS}</button>` : ''}
 </article>`;
 }
 
 /* ---- page-specific renderers ---- */
 const featured = products.filter((p) => p.featured);
-const STAGE = ['zhiyun-weebill-3', 'colbor-cl60-cob-light', 'hollyland-lark-m2-combo', 'viltrox-dc-550-monitor', 'feiyutech-scorp-c2'].map(byId).filter(Boolean);
+const STAGE = ['zhiyun-weebill-3e', 'luz-colbor-cl60', 'dji-mic-mini-2-combo', 'monitor-viltrox-dc-550', 'feiyutech-scorp-c2'].map(byId).filter(Boolean);
 
 // The piece on the hero stage: the first featured product that has a cut-out.
 const HERO = STAGE.find((p) => p.images[0] && p.images[0].cutout) || featured.find((p) => p.images[0] && p.images[0].cutout) || STAGE[0];
@@ -140,7 +147,7 @@ const scene = (n) => (sceneExists(n) ? `assets/scenes/${n}.webp` : '');
 function railPanels(root) {
   return categories.map((c, i) => {
     const items = products.filter((p) => p.category === c.id);
-    const stock = items.filter((p) => p.stock > 0).length;
+    const stock = items.filter(avail).length;
     const prices = items.map((p) => p.price).filter((x) => x != null);
     const from = prices.length ? Math.min(...prices) : null;
     const s = scene(SCENES[c.id]);
@@ -161,21 +168,21 @@ function stageSlides(root) {
     <p class="stage-tag">${esc(p.tagline)}</p>
     <dl class="stage-specs">${(p.specs || []).slice(0, 3).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
     <div class="stage-row">${money(p)}${badge(p)}</div>
-    <div class="stage-row">${p.stock > 0 ? addBtn(p, 'btn-primary btn-sm magnetic') : ''}<a class="btn btn-ghost btn-sm magnetic" href="${root}productos/${p.slug}.html"><span>Ver la pieza</span></a></div>
+    <div class="stage-row">${avail(p) ? addBtn(p, 'btn-primary btn-sm magnetic') : ''}<a class="btn btn-ghost btn-sm magnetic" href="${root}productos/${p.slug}.html"><span>Ver la pieza</span></a></div>
   </div>
   <figure class="stage-fig">${p.images[0] ? `<img src="${root}${p.images[0].src}" alt="${esc(p.name)}" width="1200" height="1200">` : `<div class="stage-glyph">${glyph(p.category)}</div>`}</figure>
 </article>`).join('\n');
 }
 
 const KITS = [
-  { id: 'creator', name: 'El kit creador', line: 'Primero el celular. Estable, iluminado y bien escuchado.', scene: 'creator-room', ids: ['zhiyun-smooth-5', 'rgb-led-tube-light-30cm', 'dji-mic-mini-2-combo', 'phone-led-clip-light'] },
-  { id: 'interview', name: 'El kit entrevista', line: 'Dos sillas, una luz principal, audio limpio.', scene: 'audio-desk', ids: ['colbor-cl60-cob-light', 'godox-s65t-softbox', 'hollyland-lark-m2-combo', '2m-light-stand'] },
-  { id: 'studio', name: 'El kit estudio', line: 'Un rig mirrorless con el que grabas todo el día.', scene: 'rig-build', ids: ['zhiyun-weebill-3', 'viltrox-dc-550-monitor', 'magic-arm-super-clamp-kit', 'kastar-np-f550-battery-pair-charger'] },
+  { id: 'creator', name: 'El kit creador', line: 'Primero el celular. Estable, iluminado y bien escuchado.', scene: 'creator-room', ids: ['zhiyun-smooth-5', 'barra-led-rgb-30cm', 'dji-mic-mini-2-tx-1-rx'] },
+  { id: 'interview', name: 'El kit entrevista', line: 'Dos sillas, una luz principal, audio limpio.', scene: 'audio-desk', ids: ['luz-colbor-cl60', 'softbox-triopo-k3-65cm-grid', 'hollyland-lark-a1-duo-case'] },
+  { id: 'studio', name: 'El kit estudio', line: 'Un rig mirrorless con el que grabas todo el día.', scene: 'rig-build', ids: ['zhiyun-weebill-3e', 'monitor-viltrox-dc-550', 'smallrig-magic-arm-clamp', 'bateria-kastar-np-f780-con-usb-c'] },
 ];
 function kitCards(root) {
   return KITS.map((k, i) => {
     const items = k.ids.map(byId).filter(Boolean);
-    const ready = items.filter((p) => p.stock > 0);
+    const ready = items.filter(avail);
     const total = ready.reduce((a, p) => a + (p.price || 0), 0);
     const ask = ready.some((p) => p.price == null);
     const s = scene(k.scene);
@@ -185,7 +192,7 @@ function kitCards(root) {
     <p class="label">Kit ${String(i + 1).padStart(2, '0')}</p>
     <h3>${esc(k.name)}</h3>
     <p class="lead">${esc(k.line)}</p>
-    <ul class="set-list">${items.map((p) => `<li><a href="${root}productos/${p.slug}.html"><span>${esc(p.name)}</span><b>${p.stock > 0 ? (p.price != null ? fmt(p.price) : 'Consultar') : 'Agotado'}</b></a></li>`).join('')}</ul>
+    <ul class="set-list">${items.map((p) => `<li><a href="${root}productos/${p.slug}.html"><span>${esc(p.name)}</span><b>${avail(p) ? (p.price != null ? fmt(p.price) : 'Consultar') : (STATUS[p.status] || STATUS.agotado)[1]}</b></a></li>`).join('')}</ul>
     ${ready.length ? `<div class="set-foot"><p class="set-total"><span class="label">Total del kit</span><b>${fmt(total)}${ask ? ' + consultar' : ''}</b></p>
       <button class="btn btn-primary btn-sm magnetic" type="button" data-kit="${esc(JSON.stringify(ready.map(itemOf)))}"><span>Añadir el kit al carrito</span>${PLUS}</button></div>` : ''}
   </div>
@@ -209,40 +216,54 @@ function brandOptions() {
   const brands = [...new Set(products.map((p) => p.brand).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
   return `<option value="">Todas las marcas</option>` + brands.map((b) => `<option value="${esc(b)}">${esc(b)}</option>`).join('');
 }
-// q: what the search box matches — Spanish and English names, brand and tags, without accents.
-const catalogueJson = JSON.stringify(products.map((p) => ({ slug: p.slug, name: p.name, brand: p.brand, category: p.category, price: p.price, stock: p.stock, featured: p.featured,
-  q: norm([p.name, p.nameEn, p.brand, ...(p.tags || [])].join(' ')) }))).replace(/</g, '\\u003c');
+// q: what the search box matches — name, brand, category and tags, without accents.
+// avail: what "Solo en stock" keeps; rank: the default order (available, en camino, agotado).
+const RANK = { disponible: 0, 'en-camino': 1, agotado: 2 };
+const catalogueJson = JSON.stringify(products.map((p) => ({ slug: p.slug, name: p.name, brand: p.brand, category: p.category, price: p.price, avail: avail(p), rank: avail(p) ? 0 : RANK[p.status] ?? 2, featured: p.featured,
+  q: norm([p.name, p.brand, catLabel[p.category], ...(p.tags || [])].join(' ')) }))).replace(/</g, '\\u003c');
 
 /* ---- product page ---- */
 function productTokens(p, root) {
-  const related = products.filter((x) => x.category === p.category && x.id !== p.id).sort((a, b) => (b.stock > 0) - (a.stock > 0) || b.lots - a.lots).slice(0, 8);
+  const related = products.filter((x) => x.category === p.category && x.id !== p.id).sort((a, b) => avail(b) - avail(a) || a.order - b.order).slice(0, 8);
   const gallery = p.images.length
     ? p.images.map((im, i) => `<figure class="pd-shot${i === 0 ? ' is-on' : ''}${im.cutout ? '' : ' is-photo'}" data-i="${i}"><img src="${root}${im.src}" alt="${esc(p.name)}${i ? ', vista ' + (i + 1) : ''}" width="1400" height="1400"${i ? ' loading="lazy"' : ''}></figure>`).join('')
     : `<figure class="pd-shot is-on" data-i="0"><div class="pd-glyph">${glyph(p.category)}</div></figure>`;
   const thumbs = p.images.length > 1 ? p.images.map((im, i) => `<button class="pd-thumb${i === 0 ? ' is-on' : ''}" data-i="${i}" aria-label="Vista ${i + 1}"><img src="${root}${im.src}" alt="" loading="lazy"></button>`).join('') : '';
   const specs = (p.specs && p.specs.length) ? p.specs.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')
-    : `<div><dt>Marca</dt><dd>${esc(p.brand || 'Ver ficha')}</dd></div><div><dt>Categoría</dt><dd>${esc(catLabel[p.category])}</dd></div><div><dt>Estado</dt><dd>${esc(p.condition || 'Seminuevo probado o nuevo: pregúntanos')}</dd></div><div><dt>Unidades disponibles</dt><dd>${p.stock}</dd></div>`;
+    : `<div><dt>Marca</dt><dd>${esc(p.brand || 'Ver ficha')}</dd></div><div><dt>Categoría</dt><dd>${esc(catLabel[p.category])}</dd></div><div><dt>Estado</dt><dd>${esc(p.condition || 'Pregúntanos por esta unidad')}</dd></div><div><dt>Disponibilidad</dt><dd>${stockLine(p)}</dd></div>`;
   const desc = p.description || `${p.name}, de la vitrina de Alki House. Cada pieza se revisa, se limpia y se le actualiza el firmware antes de publicarse. Pregúntanos por los detalles y el estado actual de esta unidad.`;
-  const ask = wa(`¡Hola, Alki House! Me interesa ${p.name}${p.price != null ? ` (${fmt(p.price)})` : ''}. ¿Me cuentan el estado de la unidad y qué incluye?`);
-  const next = wa(`¡Hola, Alki House! Busco ${p.name}, que aparece agotado. ¿Me avisan cuando llegue la siguiente?`);
-  const askBtn = (cls, label) => `<a class="btn ${cls}" href="${p.stock > 0 ? ask : next}" target="_blank" rel="noopener">${CHAT}<span>${label}</span></a>`;
+  const btn = (cls, label, href) => `<a class="btn ${cls}" href="${href}" target="_blank" rel="noopener">${CHAT}<span>${label}</span></a>`;
+  const ask = (cls, label) => btn(cls, label, askUrl(p));
+  const v = avail(p) ? 'disponible' : p.status === 'en-camino' ? 'en-camino' : 'agotado';
+  const COPY = {
+    disponible: { head: '¿Lo quieres?', lead: 'Añádelo al carrito y envía tu pedido por WhatsApp, o pregúntanos primero: te lo apartamos, te decimos exactamente qué incluye y con qué lo combinaríamos para tu cámara.' },
+    'en-camino': { head: '¿Lo esperas?', lead: 'Ya viene en camino. Escríbenos y te apartamos una unidad, con el precio y la fecha en que llega.' },
+    agotado: { head: '¿Lo buscas?', lead: 'Este se vendió. Escríbenos y te avisamos cuando llegue la siguiente unidad, o te sugerimos lo más parecido que hay hoy en la vitrina.' },
+  }[v];
   return {
     P_NAME: esc(p.name), P_BRAND: esc(p.brand || catLabel[p.category]), P_CAT: esc(catLabel[p.category]), P_CATID: p.category,
     P_TAGLINE: esc(p.tagline || `${catLabel[p.category]} · ${p.brand || 'Alki House'}`), P_DESC: esc(desc), P_PRICE: money(p), P_BADGES: badge(p),
-    P_STOCK: p.stock > 0 ? `${p.stock} ${p.stock === 1 ? 'disponible' : 'disponibles'}` : 'Agotado — pregunta por la siguiente', P_GALLERY: gallery, P_THUMBS: thumbs, P_SPECS: specs,
-    P_RELATED: related.map((x) => card(x, root)).join('\n'), P_SLUG: p.slug, P_CONDITION: esc(p.condition || 'Revisado y probado'),
+    P_STOCK: stockLine(p), P_GALLERY: gallery, P_THUMBS: thumbs, P_SPECS: specs,
+    P_RELATED: related.map((x) => card(x, root)).join('\n'), P_SLUG: p.slug, P_CONDITION: esc(p.condition || (v === 'disponible' ? 'Revisado y probado' : catLabel[p.category])),
     P_SHOTCOUNT: String(Math.max(1, p.images.length)),
-    P_ACTIONS: p.stock > 0
-      ? addBtn(p, 'btn-primary magnetic pd-add') + askBtn('btn-ghost magnetic', 'Preguntar por WhatsApp')
-      : askBtn('btn-primary magnetic', 'Avisarme cuando llegue') + '<a class="btn btn-ghost magnetic" href="#pdDetail"><span>El detalle</span></a>',
-    P_INVITE_ACTIONS: p.stock > 0
-      ? addBtn(p, 'btn-primary magnetic') + askBtn('btn-ghost magnetic', 'Preguntar primero')
-      : askBtn('btn-primary magnetic', 'Avisarme cuando llegue') + `<a class="btn btn-ghost magnetic" href="${root}productos.html"><span>Volver al catálogo</span></a>`,
-    P_INVITE_LEAD: p.stock > 0
-      ? 'Añádelo al carrito y envía tu pedido por WhatsApp, o pregúntanos primero: te lo apartamos, te decimos exactamente qué incluye y con qué lo combinaríamos para tu cámara.'
-      : 'Este se vendió. Escríbenos y te avisamos cuando llegue la siguiente unidad, o te sugerimos lo más parecido que hay hoy en la vitrina.',
-    P_INVITE_HEAD: p.stock > 0 ? '¿Lo quieres?' : '¿Lo buscas?',
+    P_ACTIONS: v === 'disponible'
+      ? addBtn(p, 'btn-primary magnetic pd-add') + ask('btn-ghost magnetic', 'Preguntar por WhatsApp')
+      : ask('btn-primary magnetic', v === 'en-camino' ? 'Apartar por WhatsApp' : 'Avisarme cuando llegue') + '<a class="btn btn-ghost magnetic" href="#pdDetail"><span>El detalle</span></a>',
+    P_INVITE_ACTIONS: v === 'disponible'
+      ? addBtn(p, 'btn-primary magnetic') + ask('btn-ghost magnetic', 'Preguntar primero')
+      : ask('btn-primary magnetic', v === 'en-camino' ? 'Apartar por WhatsApp' : 'Avisarme cuando llegue') + `<a class="btn btn-ghost magnetic" href="${root}productos.html"><span>Volver al catálogo</span></a>`,
+    P_INVITE_LEAD: COPY.lead, P_INVITE_HEAD: COPY.head,
   };
+}
+function stockLine(p) {
+  if (avail(p)) return p.stock != null ? `${p.stock} ${p.stock === 1 ? 'disponible' : 'disponibles'}` : 'Disponible';
+  return p.status === 'en-camino' ? 'En camino — apártalo por WhatsApp' : 'Agotado — pregunta por la siguiente';
+}
+// The WhatsApp message each product's ask button opens, worded for its status.
+function askUrl(p) {
+  if (avail(p)) return wa(`¡Hola, Alki House! Me interesa ${p.name}${p.price != null ? ` (${fmt(p.price)})` : ''}. ¿Me cuentan el estado de la unidad y qué incluye?`);
+  if (p.status === 'en-camino') return wa(`¡Hola, Alki House! Vi que ${p.name} viene en camino. ¿Me apartan una unidad y me dicen el precio?`);
+  return wa(`¡Hola, Alki House! Busco ${p.name}, que aparece agotado. ¿Me avisan cuando llegue la siguiente?`);
 }
 
 /* ---- assemble ---- */
@@ -259,8 +280,8 @@ function page({ file, body, root, seo, tokens, page: pageName, navKey }) {
   const base = {
     ROOT: root, PAGE: pageName, HEAD_SEO: seoHead(seo), CUR_PRODUCTS: navKey === 'PRODUCTS' ? ' aria-current="page"' : '',
     WA_NUMBER: WA, WA_ASK: esc(WA_ASK),
-    STAT_PRODUCTS: String(stats.products), STAT_INSTOCK: String(stats.inStock), STAT_BRANDS: String(stats.brands), STAT_SOLD: String(stats.sold),
-    STAT_UNITS: String(stats.units), STAT_DATE: stats.date, YEAR: String(stats.year), ...tokens,
+    STAT_PRODUCTS: String(stats.products), STAT_INSTOCK: String(stats.inStock), STAT_BRANDS: String(stats.brands),
+    STAT_DATE: stats.date, YEAR: String(stats.year), ...tokens,
   };
   const html = fill(head + nav + drawer + cart + '<div id="smooth-wrapper"><div id="smooth-content">\n' + body + '\n' + footer + '</div></div>\n' +
     (tokens.MOB_BAR || '') + `<script src="${root}assets/site.js"></script>\n</body>\n</html>\n`, base);
@@ -272,7 +293,10 @@ function page({ file, body, root, seo, tokens, page: pageName, navKey }) {
 
 page({ file: 'index.html', body: read('pages/home.body.html'), root: '', page: 'home', navKey: null,
   seo: { title: 'Alki House — Gimbals, iluminación de estudio y audio para creadores', description: `Gimbals, luz de estudio, audio inalámbrico, monitores y rigging para creadores. Nuevo y seminuevo, probado antes de enviarse. ${stats.products} productos, inventario en vivo.` },
-  tokens: { RAIL_PANELS: railPanels(''), STAGE_SLIDES: stageSlides(''), STAGE_COUNT: String(STAGE.length), KIT_CARDS: kitCards(''), FLOOR_CARDS: floorCards(''),
+  tokens: { RAIL_PANELS: railPanels(''), RAIL_TOTAL: String(categories.length).padStart(2, '0'),
+    // The aisle count, written out: only the aisles that have products are on the rail.
+    RAIL_WORD: ['Cero', 'Un', 'Dos', 'Tres', 'Cuatro', 'Cinco', 'Seis', 'Siete', 'Ocho', 'Nueve', 'Diez', 'Once', 'Doce'][categories.length] || String(categories.length),
+    STAGE_SLIDES: stageSlides(''), STAGE_COUNT: String(STAGE.length), KIT_CARDS: kitCards(''), FLOOR_CARDS: floorCards(''),
     HERO_VIDEO: fs.existsSync(path.join(SRC, 'assets/scenes/hero-gimbal.mp4')) ? 'assets/scenes/hero-gimbal.mp4' : '', HERO_POSTER: scene('hero-gimbal'), HERO_POSTER_PORTRAIT: scene('hero-gimbal-portrait'),
     HERO_PRODUCT: HERO && HERO.images[0] ? HERO.images[0].src : '', HERO_PRODUCT_NAME: HERO ? esc(HERO.name) : '', HERO_PRODUCT_SLUG: HERO ? HERO.slug : '',
     PROMISE_SCENE: scene('studio-lighting'), STAGE_PLATE: scene('product-stage'), WAY_SCENE: scene('softbox-glow') } });
@@ -287,10 +311,10 @@ page({ file: 'pedido.html', body: read('pages/pedido.body.html'), root: '', page
   tokens: { ORDER_SCENE: scene('product-stage') } });
 
 const tpl = read('pages/producto.body.html');
-const mobBar = (p, root) => `<div class="mob-bar" aria-hidden="false">${p.stock > 0
+const mobBar = (p, root) => `<div class="mob-bar" aria-hidden="false">${avail(p)
   ? addBtn(p, 'btn-primary', 'Añadir') + '<button class="btn btn-ghost" type="button" data-cart-open><span>Carrito</span><b class="mob-n" data-cart-count>0</b></button>'
-  : `<a class="btn btn-primary" href="${wa(`¡Hola, Alki House! Busco ${p.name}, que aparece agotado. ¿Me avisan cuando llegue la siguiente?`)}" target="_blank" rel="noopener"><span>Avisarme</span></a><a class="btn btn-ghost" href="${root}productos.html"><span>Catálogo</span></a>`}</div>`;
-const productSeo = (p) => ({ title: `${p.name} — Alki House`, description: p.tagline || `${p.name}. ${catLabel[p.category]} en Alki House, ${p.stock > 0 ? 'en stock' : 'agotado — pregunta por la siguiente'}.` });
+  : `<a class="btn btn-primary" href="${askUrl(p)}" target="_blank" rel="noopener"><span>${p.status === 'en-camino' ? 'Apartar' : 'Avisarme'}</span></a><a class="btn btn-ghost" href="${root}productos.html"><span>Catálogo</span></a>`}</div>`;
+const productSeo = (p) => ({ title: `${p.name} — Alki House`, description: p.tagline || `${p.name}. ${catLabel[p.category]} en Alki House, ${avail(p) ? 'en stock' : p.status === 'en-camino' ? 'en camino — apártalo por WhatsApp' : 'agotado — pregunta por la siguiente'}.` });
 for (const p of products) {
   page({ file: `productos/${p.slug}.html`, body: tpl, root: '../', page: 'product', navKey: 'PRODUCTS', seo: productSeo(p),
     tokens: { ...productTokens(p, '../'), MOB_BAR: mobBar(p, '../') } });

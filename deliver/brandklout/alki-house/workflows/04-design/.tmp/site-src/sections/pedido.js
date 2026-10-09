@@ -30,7 +30,7 @@ WZ.dom('pedido', '#coForm', function(W){
     list.innerHTML = items.map(C.lineHtml).join('');
     emptyEl.hidden = items.length > 0; full.hidden = !items.length;
     countEl.textContent = t.count;
-    totalEl.textContent = t.sum ? C.money(t.sum) : (t.ask ? 'A consultar' : '$0');
+    totalEl.textContent = t.sum ? C.money(t.sum) : (t.ask ? 'A consultar' : C.money(0));
     askEl.hidden = !t.ask;
     if(t.ask) askEl.textContent = t.ask + (t.ask === 1 ? ' artículo' : ' artículos') + ' con precio a consultar; te lo confirmamos en el chat.';
     if(window.ScrollTrigger) ScrollTrigger.refresh();

@@ -9,7 +9,8 @@
    closest('[data-item]'), so it may sit on a wrapper rather than the button —
    Instatic strips data-* from form controls. */
 WZ.dom('cart', '#cart', function(W){
-  var KEY = 'alki-carrito-v1';
+  /* v2: the WhatsApp catalogue (2026-10-09) changed every id and priced in Bs. */
+  var KEY = 'alki-carrito-v2';
   var body = document.body, ROOT = body.getAttribute('data-root') || '', WA = body.getAttribute('data-wa') || '';
   var el = document.getElementById('cart'), panel = el.querySelector('.cart-panel'),
       lines = document.getElementById('cartLines'), empty = document.getElementById('cartEmpty'),
@@ -50,7 +51,11 @@ WZ.dom('cart', '#cart', function(W){
   }
 
   /* ---- text ---- */
-  function money(n){ return '$' + n.toLocaleString('en-US', {minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2}); }
+  /* Bolívares, the way the shop writes them: 48.850 Bs (build-site.mjs fmt). */
+  function money(n){
+    var p = String(Math.round(n * 100) / 100).split('.');
+    return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + (p[1] ? ',' + (p[1] + '0').slice(0, 2) : '') + ' Bs';
+  }
   function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function plural(n, one, many){ return n + ' ' + (n === 1 ? one : many); }
   function parse(s){ try{ return JSON.parse(s); }catch(e){ return null; } }
@@ -92,7 +97,7 @@ WZ.dom('cart', '#cart', function(W){
     var t = totals();
     lines.innerHTML = items.map(lineHtml).join('');
     empty.hidden = items.length > 0; foot.hidden = !items.length;
-    totalEl.textContent = t.sum ? money(t.sum) : (t.ask ? 'A consultar' : '$0');
+    totalEl.textContent = t.sum ? money(t.sum) : (t.ask ? 'A consultar' : money(0));
     note.hidden = !t.ask;
     if(t.ask) note.textContent = plural(t.ask, 'artículo', 'artículos') + ' con precio a consultar: te lo confirmamos por WhatsApp.';
     document.querySelectorAll('[data-cart-count]').forEach(function(n){ n.textContent = t.count; });

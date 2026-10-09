@@ -65,12 +65,16 @@ ul{margin:0;padding:0;list-style-type:none}
 .badge::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:currentColor}
 .badge-stock{background:rgba(255,235,183,.1);color:var(--apricot)}
 .badge-out{background:rgba(255,235,183,.06);color:var(--fg-faint)}
+.badge-soon{background:transparent;color:var(--apricot);box-shadow:inset 0 0 0 1px rgba(255,235,183,.32)}
+.badge-soon::before{background:transparent;box-shadow:inset 0 0 0 1.5px currentColor}
 .badge-new{background:var(--ember);color:var(--apricot-soft)}
 [data-theme="light"] .badge-stock{background:rgba(67,40,24,.08);color:var(--ember-ink)}
+[data-theme="light"] .badge-soon{color:var(--ember-ink);box-shadow:inset 0 0 0 1px rgba(67,40,24,.3)}
 [data-theme="light"] .badge-out{background:rgba(67,40,24,.05);color:var(--fg-faint)}
 
 /* Price. The sheet leaves some prices blank; those read "Ask". */
-.price{font-family:var(--f-display);font-weight:600;letter-spacing:-.02em;color:var(--fg)}
+/* nowrap: a bolívar price ("196.000 Bs") broke after the number beside a long aisle label. */
+.price{font-family:var(--f-display);font-weight:600;letter-spacing:-.02em;color:var(--fg);white-space:nowrap}
 .price small{font-family:var(--f-mono);font-size:.6em;font-weight:500;letter-spacing:.06em;color:var(--fg-soft);margin-left:.35em}
 
 /* ScrollSmoother scaffolding. Fixed UI lives OUTSIDE #smooth-wrapper. */
