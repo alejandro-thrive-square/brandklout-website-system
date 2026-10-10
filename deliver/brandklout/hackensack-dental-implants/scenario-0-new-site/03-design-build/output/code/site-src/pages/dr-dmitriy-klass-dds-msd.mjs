@@ -22,7 +22,7 @@ export default page({
   seo: {
     title: 'Dr. Dmitriy Klass, DDS, MSD | Hackensack Center for Dental Implants',
     description: 'Dr. Dmitriy Klass is an NYU and Boston University-trained periodontist and implant surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.',
-    image: 'dr-klass-hero.webp',
+    image: 'dr-klass-hero-v2.webp',
   },
   chapters: [
     hero({
@@ -31,7 +31,7 @@ export default page({
       title: 'Dr. Dmitriy Klass, DDS, MSD',
       lead: 'NYU-trained periodontist and implant surgeon with a Master of Science in Dentistry from Boston University. He specializes in advanced implant procedures, bone and gum grafting, and minimally invasive periodontal care.',
       note: 'NYU and Boston University Trained · Periodontist and Implant Surgeon · Philadelphia Top Doctor 2025',
-      image: { src: 'dr-klass-hero.webp', w: 1200, h: 1200, alt: 'Dr. Dmitriy Klass, periodontist' },
+      image: { src: 'dr-klass-hero-v2.webp', w: 1200, h: 1200, alt: 'Dr. Dmitriy Klass, periodontist' },
       card: false,
     }),
     statement({

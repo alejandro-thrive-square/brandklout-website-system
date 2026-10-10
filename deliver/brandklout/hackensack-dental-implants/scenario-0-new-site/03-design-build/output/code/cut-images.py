@@ -9,6 +9,10 @@
 #             home page's three hand-cut files of 2026-10-01: logo-stacked, doctor-face, hero-poster)
 #   "size":   [w, h] shipped; the source is cropped to that aspect around "focus" [x, y] (0..1) after
 #             an optional "box" [l, t, r, b] (fractions) narrows it first
+#   "head":   a portrait cut-out (RGBA): ignore "focus"; find the hair line and the head's centre in the
+#             transparency and cut so the head is centred left to right with "headroom" (default 0.14
+#             of the height) above the hair, extending the plain ground upwards where the source has
+#             no room. The face gate (code/face-gate.mjs) then proves no frame or motion cuts it.
 #   "shows", "pages", "source", "licence", "fit": the ledger columns (IMAGES.md section 4)
 # Film frames come from the 1080p Vimeo downloads (code/vimeo-folder.mjs --download <dir>); pass that
 # dir as FILMS=<dir> or the first argument.
@@ -58,6 +62,30 @@ def source(spec: str) -> Image.Image:
     raise SystemExit(f"unknown source kind: {spec}")
 
 
+def head_cut(im: Image.Image, size, headroom: float, bg: str) -> Image.Image:
+    """A cut-out portrait, the head centred left to right and `headroom` of the height above the hair."""
+    im = im.convert("RGBA")
+    alpha = im.split()[-1].point(lambda a: 255 if a > 96 else 0)
+    l, top, r, b = alpha.getbbox()
+    # the head's centre: the opaque span of the rows just under the hair line
+    band = alpha.crop((0, top, im.width, min(im.height, top + max(8, round(im.height * 0.08)))))
+    hl, _, hr, _ = band.getbbox()
+    cx = (hl + hr) / 2
+    tw, th = size
+    want = tw / th
+    # the tallest window that keeps the hair at `headroom` and ends at the bottom of the source
+    ch = min(im.width / want, (im.height - top) / (1 - headroom))
+    cw = ch * want
+    y = top - headroom * ch
+    x = min(max(0, cx - cw / 2), im.width - cw)
+    pad = max(0, round(-y))
+    canvas = Image.new("RGBA", (im.width, im.height + pad), bg)
+    canvas.alpha_composite(im, (0, pad))
+    y += pad
+    out = canvas.crop((round(x), round(y), round(x + cw), round(y + ch))).convert("RGB")
+    return out.resize((tw, th), Image.LANCZOS) if out.width > tw else out
+
+
 def cut(im: Image.Image, size, focus, box, bg="#e7e8df") -> Image.Image:
     im = ImageOps.exif_transpose(im)
     if im.mode in ("RGBA", "LA", "P"):
@@ -104,6 +132,10 @@ def main() -> None:
             im = ImageOps.exif_transpose(source(spec))
             im.thumbnail(tuple(r["size"]), Image.LANCZOS)
             im.save(target, quality=r.get("q", 86)) if target.suffix != ".png" else im.save(target)
+            px = f"{im.width}x{im.height}"
+        elif r.get("head"):
+            im = head_cut(ImageOps.exif_transpose(source(spec)), r["size"], r.get("headroom", 0.14), r.get("bg", "#e7e8df"))
+            im.save(target, quality=r.get("q", 84), method=6)
             px = f"{im.width}x{im.height}"
         else:
             im = cut(source(spec), r["size"], r.get("focus"), r.get("box"), r.get("bg", "#e7e8df"))

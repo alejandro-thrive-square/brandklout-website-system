@@ -21,7 +21,7 @@ export default page({
   seo: {
     title: 'Dr. Won-Sang Lee, DDS | Hackensack Center for Dental Implants',
     description: 'Dr. Won-Sang Lee is a Columbia-trained oral and maxillofacial surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.',
-    image: 'dr-lee-hero.webp',
+    image: 'dr-lee-hero-v2.webp',
   },
   chapters: [
     hero({
@@ -30,7 +30,7 @@ export default page({
       title: 'Dr. Won-Sang Lee, DDS',
       lead: 'Columbia-trained oral and maxillofacial surgeon with expertise in extractions, corrective jaw surgery, and dental implant placement. He brings hospital-level surgical precision to every case.',
       note: 'Columbia-Trained Oral Surgeon · Implant Placement and Jaw Surgery · Academic Teaching Attending',
-      image: { src: 'dr-lee-hero.webp', w: 905, h: 905, alt: 'Dr. Won-Sang Lee, oral surgeon' },
+      image: { src: 'dr-lee-hero-v2.webp', w: 905, h: 905, alt: 'Dr. Won-Sang Lee, oral surgeon' },
       card: false,
     }),
     statement({

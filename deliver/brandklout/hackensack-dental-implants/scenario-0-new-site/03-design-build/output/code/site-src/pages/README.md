@@ -70,6 +70,14 @@ photo actually placed. Sizes: hero `1200 x 1200` (`variant: 'wide'`: `2400 x 110
 `800 x 600`, links `900 x 700`, team `900 x 1100`, quote and cta `900 x 1100`, articles `1200 x 800`.
 Never a stock face beside a treatment; doctors, team, patients and the office are client photos only.
 
+**No head is ever cut, at rest or in motion.** A portrait cut-out is cut with `"head": true` in
+`code/images.json` (the head centred, 14% of the height above the hair, the plain ground extended
+where the source has no room). After every cut, run `python code/faces.py` (from `output/`): it
+finds the faces and writes `js/01-faces.js`, and the runtime then keeps every motion off those heads
+(a face photo rises in whole instead of being wiped, zooms around the face, drifts less, and an
+iris opens from a circle that already holds the head). Then `node code/face-gate.mjs` must end
+`none cut`: it follows each head through every frame, clip and transform while the pages scroll.
+
 ## Breakpoints
 
 Use the house breakpoints (1279 / 991 / 767 / 479) and the other conditions already listed in

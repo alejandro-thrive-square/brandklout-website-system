@@ -13,17 +13,18 @@
   "fit": 3
  },
  {
-  "out": "doctor-face.webp",
-  "from": "asset/legacy/doctor-face.webp",
+  "out": "doctor-face-v2.webp",
+  "from": "copy/doctor.png",
   "size": [
    192,
    192
   ],
-  "asis": true,
-  "shows": "Dr. Alan Meskin, a 192px crop of doctor.png for the hero cards",
+  "shows": "Dr. Alan Meskin, his whole head, cut from doctor.png for the hero cards",
   "pages": "index, every treatment page header card",
   "source": "old-site",
-  "fit": 3
+  "fit": 3,
+  "head": true,
+  "headroom": 0.1
  },
  {
   "out": "hero-poster.webp",
@@ -1469,24 +1470,24 @@
   ]
  },
  {
-  "out": "dr-meskin-hero.webp",
+  "out": "dr-meskin-hero-v2.webp",
   "from": "drive/root/WhatsApp Image 2026-09-14 at 14.27.18.jpeg",
   "size": [
    1200,
    1200
   ],
-  "shows": "Dr. Alan Meskin in navy scrubs at the practice",
+  "shows": "Dr. Alan Meskin in navy scrubs at the practice, the #ADCsmiles wall behind him",
   "pages": "dr-alan-meskin",
   "source": "drive",
   "licence": "client's own",
   "fit": 3,
   "focus": [
    0.5,
-   0.35
+   0.0
   ],
   "box": [
    0,
-   0.24,
+   0.035,
    1,
    1
   ]
@@ -1532,7 +1533,7 @@
   ]
  },
  {
-  "out": "team-lee.webp",
+  "out": "team-lee-v2.webp",
   "from": "old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp",
   "size": [
    837,
@@ -1543,13 +1544,11 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.5
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
-  "out": "team-srour.webp",
+  "out": "team-srour-v2.webp",
   "from": "old/5595ac_Dr.-Srour-Cutout-1024x833.webp",
   "size": [
    681,
@@ -1560,13 +1559,11 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.5
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
-  "out": "team-klass.webp",
+  "out": "team-klass-v2.webp",
   "from": "old/5a7b8b_Hackensack Center.png",
   "size": [
    900,
@@ -1577,13 +1574,11 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.45
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
-  "out": "dr-lee-hero.webp",
+  "out": "dr-lee-hero-v2.webp",
   "from": "old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp",
   "size": [
    905,
@@ -1594,13 +1589,11 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.4
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
-  "out": "dr-srour-hero.webp",
+  "out": "dr-srour-hero-v2.webp",
   "from": "old/5595ac_Dr.-Srour-Cutout-1024x833.webp",
   "size": [
    833,
@@ -1611,13 +1604,11 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.5
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
-  "out": "dr-klass-hero.webp",
+  "out": "dr-klass-hero-v2.webp",
   "from": "old/5a7b8b_Hackensack Center.png",
   "size": [
    1200,
@@ -1628,10 +1619,8 @@
   "source": "old-site",
   "licence": "client's own",
   "fit": 3,
-  "focus": [
-   0.5,
-   0.45
-  ]
+  "head": true,
+  "headroom": 0.14
  },
  {
   "out": "referring-doctors-hero.webp",

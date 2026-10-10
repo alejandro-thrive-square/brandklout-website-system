@@ -15,9 +15,13 @@ window.WZScenes.push(function (k) {
   var photo = frame ? $('img', frame) : null;
   var holds = $$('[data-hero-hold]', hero);
   gsap.from(holds, { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.1, ease: k.EASE, delay: 0.45 });
-  if (frame) gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut', delay: 0.15, clearProps: 'clipPath' });
+  /* a portrait rises in whole and settles around the face; any other photograph is wiped in */
+  var face = photo && k.headsOf(photo);
+  if (frame && face) gsap.from(frame, { y: 48, autoAlpha: 0, duration: 1.2, ease: k.EASE, delay: 0.15 });
+  else if (frame) gsap.fromTo(frame, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut', delay: 0.15, clearProps: 'clipPath' });
   if (photo) {
-    gsap.fromTo(photo, { scale: 1.22 }, { scale: 1.06, duration: 2.2, ease: k.EASE, delay: 0.15 });
+    if (face) k.anchorZoom(photo);
+    gsap.fromTo(photo, { scale: face ? 1.1 : 1.22 }, { scale: face ? 1.02 : 1.06, duration: 2.2, ease: k.EASE, delay: 0.15 });
     gsap.to(photo, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
   }
   k.mm.add('(min-width: 992px)', function () {
@@ -220,7 +224,7 @@ window.WZScenes.push(function (k) {
   k.mark('financing');
 });
 
-/* ---- the doctors: held while the portraits open from the bottom and the cards rise into line ---- */
+/* ---- the doctors: held while the cards rise into line (nothing is ever clipped off a portrait) ---- */
 window.WZScenes.push(function (k) {
   var gsap = k.gsap;
   k.$$('[data-scene="team"]').forEach(function (list, n) {
@@ -228,11 +232,7 @@ window.WZScenes.push(function (k) {
     k.mm.add('(min-width: 992px)', function () {
       var box = list.parentNode.offsetHeight <= window.innerHeight - 24 ? list.parentNode : list;
       var tl = gsap.timeline({ scrollTrigger: k.scene(box, '60%', 0.5, 'team-' + n) });
-      cards.forEach(function (c, i) {
-        tl.fromTo(c, { y: 40 + i * 35 }, { y: 0, ease: 'none', duration: 1 }, 0);
-        var frame = k.$('.team_frame', c);
-        if (frame) tl.fromTo(frame, { clipPath: 'inset(35% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', duration: 0.8 }, i * 0.1);
-      });
+      cards.forEach(function (c, i) { tl.fromTo(c, { y: 40 + i * 35 }, { y: 0, ease: 'none', duration: 1 }, 0); });
       tl.to({}, { duration: 0.3 });
     });
     k.mm.add('(max-width: 991px)', function () {

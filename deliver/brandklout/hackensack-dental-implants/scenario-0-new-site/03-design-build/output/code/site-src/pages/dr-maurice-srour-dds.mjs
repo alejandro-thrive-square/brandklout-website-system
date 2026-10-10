@@ -24,7 +24,7 @@ export default page({
   seo: {
     title: 'Dr. Maurice Srour, DDS | Hackensack Center for Dental Implants',
     description: 'Dr. Maurice Srour is an NYU-trained oral and maxillofacial surgeon at Hackensack Center for Dental Implants in Hackensack, NJ.',
-    image: 'dr-srour-hero.webp',
+    image: 'dr-srour-hero-v2.webp',
   },
   chapters: [
     hero({
@@ -33,7 +33,7 @@ export default page({
       title: 'Dr. Maurice Srour, DDS',
       lead: 'Board-certified oral and maxillofacial surgeon specializing in surgical implant placement, bone grafting, and complex extractions. NYU-trained, with hospital-based experience in trauma and reconstruction.',
       note: 'NYU-Trained Oral Surgeon · Hospital Surgical Residency · Complex Extractions and Bone Grafting',
-      image: { src: 'dr-srour-hero.webp', w: 833, h: 833, alt: 'Dr. Maurice Srour, oral surgeon' },
+      image: { src: 'dr-srour-hero-v2.webp', w: 833, h: 833, alt: 'Dr. Maurice Srour, oral surgeon' },
       card: false,
     }),
     statement({

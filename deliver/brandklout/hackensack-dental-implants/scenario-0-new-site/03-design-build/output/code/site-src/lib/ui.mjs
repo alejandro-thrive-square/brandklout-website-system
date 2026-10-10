@@ -115,7 +115,7 @@ ${inner}
 export function hero({ crumbs = [], tagline: tg, title, lead, image, actions: acts = [BOOK, CALL], variant = 'photo', card = true, name = 'Arrival', note }) {
   const crumb = crumbs.length ? `<nav class="header_breadcrumb" aria-label="Breadcrumb"><a class="header_breadcrumb-link" href="/">Home</a>${crumbs.map(([h, t], i) => `<span class="header_breadcrumb-divider" aria-hidden="true">/</span>${i === crumbs.length - 1 ? `<span class="header_breadcrumb-current" aria-current="page">${esc(t)}</span>` : `<a class="header_breadcrumb-link" href="${h}">${esc(t)}</a>`}`).join('')}</nav>` : '';
   const doctor = card ? `<div class="header_card" data-hero-hold>
-          <img class="header_card-image" src="/media/img/doctor-face.webp" width="192" height="192" alt="Portrait of Dr. Alan Meskin">
+          <img class="header_card-image" src="/media/img/doctor-face-v2.webp" width="192" height="192" alt="Portrait of Dr. Alan Meskin">
           <div class="header_card-who"><span class="header_card-name">Dr. Alan Meskin</span><span class="header_card-role">NYU-trained prosthodontist</span></div>
           <div class="header_card-rating"><strong class="header_card-value">${FACTS.rating}</strong><span class="header_card-stars" aria-hidden="true">★★★★★</span><span>Google rating</span></div>
         </div>` : '';
@@ -447,9 +447,9 @@ export function prose({ name = 'The Text', tagline: tg, title, body, aside, id, 
 /* ---------- the doctors ---------- */
 export const DOCTORS = {
   meskin: { name: 'Dr. Alan Meskin', role: 'Prosthodontist and Implant Specialist', school: 'NYU College of Dentistry', href: '/dr-alan-meskin', image: { src: 'team-meskin.webp', w: 900, h: 1100, alt: 'Dr. Alan Meskin, prosthodontist' } },
-  lee: { name: 'Dr. Won-Sang Lee, DDS', role: 'Oral Surgeon', school: 'Columbia University', href: '/dr-won-sang-lee-dds', image: { src: 'team-lee.webp', w: 900, h: 1100, alt: 'Dr. Won-Sang Lee, oral surgeon' } },
-  srour: { name: 'Dr. Maurice Srour, DDS', role: 'Oral Surgeon, Full Arch', school: 'NYU / Bellevue', href: '/dr-maurice-srour-dds', image: { src: 'team-srour.webp', w: 900, h: 1100, alt: 'Dr. Maurice Srour, oral surgeon' } },
-  klass: { name: 'Dr. Dmitriy Klass, DDS, MSD', role: 'Periodontist', school: 'Boston University', href: '/dr-dmitriy-klass-dds-msd', image: { src: 'team-klass.webp', w: 900, h: 1100, alt: 'Dr. Dmitriy Klass, periodontist' } },
+  lee: { name: 'Dr. Won-Sang Lee, DDS', role: 'Oral Surgeon', school: 'Columbia University', href: '/dr-won-sang-lee-dds', image: { src: 'team-lee-v2.webp', w: 900, h: 1100, alt: 'Dr. Won-Sang Lee, oral surgeon' } },
+  srour: { name: 'Dr. Maurice Srour, DDS', role: 'Oral Surgeon, Full Arch', school: 'NYU / Bellevue', href: '/dr-maurice-srour-dds', image: { src: 'team-srour-v2.webp', w: 900, h: 1100, alt: 'Dr. Maurice Srour, oral surgeon' } },
+  klass: { name: 'Dr. Dmitriy Klass, DDS, MSD', role: 'Periodontist', school: 'Boston University', href: '/dr-dmitriy-klass-dds-msd', image: { src: 'team-klass-v2.webp', w: 900, h: 1100, alt: 'Dr. Dmitriy Klass, periodontist' } },
 };
 export function team({ name = 'The People', tagline: tg, title, intro, list = ['meskin', 'lee', 'srour', 'klass'], id, photos = true }) {
   return { cls: 'section_team', name, id, html: wrap(`    <div class="team_head">

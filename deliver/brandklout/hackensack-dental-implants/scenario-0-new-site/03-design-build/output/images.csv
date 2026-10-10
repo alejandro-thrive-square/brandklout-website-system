@@ -14,7 +14,7 @@ case-3-after.webp,old-site,old-site capture / 343c19_after 3.webp,client's own,i
 logo-round.png,drive,drive 0ADqUKcTkH0SxUk9PVA / logos/Hackensack Center Logo Circle-2.png,client's own,index,3,192x192,19,"Logo, white on black, round"
 logo-icon-dark.png,old-site,old-site capture / 4d4cc3_ hackensack logo.png,client's own,index,3,192x192,21,"Site icon, as on the current site. The name is the one push-site.mjs looks for"
 logo-stacked.webp,drive,asset/legacy/logo-stacked.webp,client's own,every page (navbar),3,620x180,9,"The practice logo, stacked, black on transparent (BugHerd #2)"
-doctor-face.webp,old-site,asset/legacy/doctor-face.webp,client's own,"index, every treatment page header card",3,192x192,6,"Dr. Alan Meskin, a 192px crop of doctor.png for the hero cards"
+doctor-face-v2.webp,old-site,copy/doctor.png,client's own,"index, every treatment page header card",3,192x192,3,"Dr. Alan Meskin, his whole head, cut from doctor.png for the hero cards"
 hero-poster.webp,vimeo,asset/legacy/hero-poster.webp,client's own,index,3,1920x1080,84,"Daniel at the reception desk, the first frame of the hero film"
 allonx-hero.webp,old-site,old/f419ff_AdobeStock_1248814635.webp,"Adobe Stock 1248814635, licensed for the live site",services/all-on-x,3,1200x1200,24,"An upper and a lower full-arch restoration, each fixed on implants (model)"
 allonx-fix.webp,drive,drive/ba/WhatsApp Image 2026-09-20 at 11.23.59.jpeg,client's own,services/all-on-x,3,1100x900,100,"A patient's new smile after implant treatment at the practice, close up"
@@ -108,15 +108,15 @@ about-letter.webp,old-site,old/739db4_Screenshot 2026-07-07 at 11.35.png,client'
 about-features.webp,drive,drive/office/Hackensack Action Shots_2.17.1.png,client's own,"about, gallery (same photo)",3,1920x800,38,A patient sees her new smile in a hand mirror in the treatment chair
 cost-of-dental-implants-hero.webp,freepik,stock/estimate/72957301.jpg,Freepik 72957301 (premium),cost-of-dental-implants,3,1200x1200,50,A calculator beside a model of a full set of teeth
 dental-implant-faqs-hero.webp,vimeo,film/1198870167@9,client's own,dental-implant-faqs,3,1080x1080,41,"Isaac, a patient of the practice, talking about his treatment"
-dr-meskin-hero.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.18.jpeg,client's own,dr-alan-meskin,3,1200x1200,304,Dr. Alan Meskin in navy scrubs at the practice
+dr-meskin-hero-v2.webp,drive,drive/root/WhatsApp Image 2026-09-14 at 14.27.18.jpeg,client's own,dr-alan-meskin,3,1200x1200,365,"Dr. Alan Meskin in navy scrubs at the practice, the #ADCsmiles wall behind him"
 dr-meskin-training.webp,old-site,old/5ddd20_Dr.Alan-Meskin 2.webp,client's own,dr-alan-meskin,3,900x1100,73,Dr. Alan Meskin with a colleague outside the practice
 team-meskin.webp,drive,drive/office/Dr.Alan-Meskin.png,client's own,about and the doctors' pages (headshot exception),3,900x1100,100,"Dr. Alan Meskin, prosthodontist"
-team-lee.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,about and the doctors' pages (headshot exception),3,837x1024,25,"Dr. Won-Sang Lee, oral surgeon"
-team-srour.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,about and the doctors' pages (headshot exception),3,681x833,24,"Dr. Maurice Srour, oral surgeon"
-team-klass.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,about and the doctors' pages (headshot exception),3,900x1100,22,"Dr. Dmitriy Klass, periodontist"
-dr-lee-hero.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,dr-won-sang-lee-dds (and his team card),3,905x905,25,"Dr. Won-Sang Lee, oral surgeon"
-dr-srour-hero.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,dr-maurice-srour-dds (and his team card),3,833x833,26,"Dr. Maurice Srour, oral surgeon"
-dr-klass-hero.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,dr-dmitriy-klass-dds-msd (and his team card),3,1200x1200,26,"Dr. Dmitriy Klass, periodontist"
+team-lee-v2.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,about and the doctors' pages (headshot exception),3,837x1024,22,"Dr. Won-Sang Lee, oral surgeon"
+team-srour-v2.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,about and the doctors' pages (headshot exception),3,681x833,19,"Dr. Maurice Srour, oral surgeon"
+team-klass-v2.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,about and the doctors' pages (headshot exception),3,900x1100,19,"Dr. Dmitriy Klass, periodontist"
+dr-lee-hero-v2.webp,old-site,old/e157a3_Dr.-Lee-cutout-faded-905x1024.webp,client's own,dr-won-sang-lee-dds (and his team card),3,905x905,22,"Dr. Won-Sang Lee, oral surgeon"
+dr-srour-hero-v2.webp,old-site,old/5595ac_Dr.-Srour-Cutout-1024x833.webp,client's own,dr-maurice-srour-dds (and his team card),3,833x833,19,"Dr. Maurice Srour, oral surgeon"
+dr-klass-hero-v2.webp,old-site,old/5a7b8b_Hackensack Center.png,client's own,dr-dmitriy-klass-dds-msd (and his team card),3,1200x1200,22,"Dr. Dmitriy Klass, periodontist"
 referring-doctors-hero.webp,old-site,old/2aef52_Dr.Alan-Meskin cropped2.webp,client's own,referring-doctors,3,632x632,34,Dr. Alan Meskin and a colleague at the practice
 services-hero.webp,vimeo,film/1198870167@26.5,client's own,services,3,1920x880,69,A patient walking into the reception of the practice
 services-card-emergency.webp,old-site,old/0dc0c5_AdobeStock_484728172.webp,"Adobe Stock 484728172, licensed for the live site",services,2,900x700,20,A gloved hand holding a dental handpiece

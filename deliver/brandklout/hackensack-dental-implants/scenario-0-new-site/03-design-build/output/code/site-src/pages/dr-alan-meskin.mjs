@@ -23,7 +23,7 @@ export default page({
   seo: {
     title: 'Prosthodontist in Hackensack, NJ | Dr. Alan Meskin',
     description: 'Dr. Alan Meskin is an NYU-trained prosthodontist in Hackensack, NJ leading Hackensack Center for Dental Implants.',
-    image: 'dr-meskin-hero.webp',
+    image: 'dr-meskin-hero-v2.webp',
   },
   chapters: [
     hero({
@@ -31,7 +31,7 @@ export default page({
       tagline: 'Prosthodontist',
       title: 'Dr. Alan Meskin, Prosthodontist and Implant Specialist',
       lead: 'NYU-trained and focused entirely on replacing and restoring teeth, Dr. Alan Meskin specializes in dental implants, full-mouth reconstruction, and cosmetic smile design, including the complex cases other offices refer out.',
-      image: { src: 'dr-meskin-hero.webp', w: 1200, h: 1200, alt: 'Dr. Alan Meskin in navy scrubs at the practice' },
+      image: { src: 'dr-meskin-hero-v2.webp', w: 1200, h: 1200, alt: 'Dr. Alan Meskin in navy scrubs at the practice' },
     }),
     statement({
       name: 'Meet Dr. Meskin',

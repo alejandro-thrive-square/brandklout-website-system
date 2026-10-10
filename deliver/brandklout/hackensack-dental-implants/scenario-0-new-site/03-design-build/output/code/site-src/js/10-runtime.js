@@ -20,6 +20,40 @@
   var WZ = (window.WZ = { ok: false, smoother: null, active: [], build: 'hackensack-site-2026-10' });
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ---- heads: a photograph with a face (js/01-faces.js) keeps every wipe, zoom and drift off the head.
+     Instatic serves /uploads/<21-character id>-<name>[-w<width>].webp; the name without them is the key. ---- */
+  var FACES = window.WZFaces || {};
+  var photoName = function (img) {
+    var src = (img.currentSrc || img.getAttribute('src') || '').split('?')[0];
+    var name = src.slice(src.lastIndexOf('/') + 1).replace(/\.[a-z0-9]+$/i, '');
+    if (src.indexOf('/uploads/') !== -1) name = name.slice(22).replace(/-w\d+$/, '');
+    return name;
+  };
+  var headsOf = function (node) {
+    var img = !node ? null : node.tagName === 'IMG' ? node : $('img', node);
+    return img && FACES[photoName(img)] ? { img: img, heads: FACES[photoName(img)] } : null;
+  };
+  /* where the heads sit in the <img> box (object-fit and object-position applied), in % of the box:
+     a zoom anchored there grows around the face instead of pushing it out of the frame */
+  var headOrigin = function (img) {
+    var h = headsOf(img);
+    if (!h || !img.naturalWidth || !img.offsetWidth) return '50% 50%';
+    var l = 1, t = 1, r = 0, b = 0;
+    h.heads.forEach(function (q) { l = Math.min(l, q[0]); t = Math.min(t, q[1]); r = Math.max(r, q[0] + q[2]); b = Math.max(b, q[1] + q[3]); });
+    var cs = getComputedStyle(img), ow = img.offsetWidth, oh = img.offsetHeight, nw = img.naturalWidth, nh = img.naturalHeight;
+    var s = cs.objectFit === 'cover' ? Math.max(ow / nw, oh / nh) : 1, dw = cs.objectFit === 'cover' ? nw * s : ow, dh = cs.objectFit === 'cover' ? nh * s : oh;
+    var pos = cs.objectPosition.split(' ').map(function (v) { return parseFloat(v) / 100; });
+    var x = (ow - dw) * (isNaN(pos[0]) ? 0.5 : pos[0]) + ((l + r) / 2) * dw;
+    var y = (oh - dh) * (isNaN(pos[1]) ? 0.5 : pos[1]) + ((t + b) / 2) * dh;
+    return (100 * x / ow).toFixed(1) + '% ' + (100 * y / oh).toFixed(1) + '%';
+  };
+  var anchorZoom = function (img) {
+    if (!headsOf(img)) return;
+    var set = function () { gsap.set(img, { transformOrigin: headOrigin(img) }); };
+    if (img.complete && img.naturalWidth) set(); else img.addEventListener('load', set, { once: true });
+    window.addEventListener('resize', set);
+  };
   var mark = function (name) { if (WZ.active.indexOf(name) < 0) WZ.active.push(name); };
   var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   /* Decided here, not in <head>: Instatic serves one script asset, as a deferred module. */
@@ -429,14 +463,17 @@
   });
   $$('[data-reveal="wipe"]').forEach(function (n) {
     if (n.closest('[data-page-hero]')) return;
+    if (headsOf(n)) { gsap.from(n, { y: 40, autoAlpha: 0, duration: 1.1, ease: EASE, scrollTrigger: { trigger: n, start: 'top 86%', once: true } }); return; }
     gsap.fromTo(n, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.4, ease: 'power4.inOut', scrollTrigger: { trigger: n, start: 'top 86%', once: true } });
   });
   $$('[data-parallax]').forEach(function (n) {
     var img = $('img', n);
     if (!img) return;
     img.style.willChange = 'transform';
-    gsap.set(img, { scale: 1.12 });
-    gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: n, start: 'top bottom', end: 'bottom top', scrub: true } });
+    var face = !!headsOf(img);
+    anchorZoom(img);
+    gsap.set(img, { scale: face ? 1.08 : 1.12 });
+    gsap.fromTo(img, { yPercent: face ? -3 : -5 }, { yPercent: face ? 3 : 5, ease: 'none', scrollTrigger: { trigger: n, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
   mark('reveals');
 
@@ -446,6 +483,7 @@
   var words = quote ? SplitText.create(quote, { type: 'words', wordsClass: 'split_word' }).words : [];
   var benefits = story ? $$('[data-lit]', story) : [];
   var storyImg = story ? $('[data-parallax] img', story) : null;
+  if (storyImg) anchorZoom(storyImg);
   if (words.length) gsap.set(words, { color: DIM });
   var writeStory = function (tl) {
     tl.fromTo(words, { y: 6 }, { y: 0, color: INK, duration: 0.2, stagger: 0.2, ease: 'none' })
@@ -502,7 +540,18 @@
 
   /* ---- a circle opens onto the photograph ---- */
   $$('[data-circle]').forEach(function (n) {
-    gsap.fromTo(n, { clipPath: 'circle(20% at 50% 55%)' }, { clipPath: 'circle(75% at 50% 55%)', ease: 'none', scrollTrigger: { trigger: n, start: 'top 95%', end: 'center 50%', scrub: 0.6 } });
+    var h = headsOf(n);
+    if (!h) { gsap.fromTo(n, { clipPath: 'circle(20% at 50% 55%)' }, { clipPath: 'circle(75% at 50% 55%)', ease: 'none', scrollTrigger: { trigger: n, start: 'top 95%', end: 'center 50%', scrub: 0.6 } }); return; }
+    var iris = function (open) {
+      var img = h.img, r = n.getBoundingClientRect(), ir = img.getBoundingClientRect();
+      var o = headOrigin(img).split(' ').map(parseFloat);
+      var cx = ir.left - r.left + ir.width * o[0] / 100, cy = ir.top - r.top + ir.height * o[1] / 100;
+      var span = 0;
+      h.heads.forEach(function (q) { span = Math.max(span, q[2] * ir.width, q[3] * ir.height); });
+      var rad = open ? Math.hypot(r.width, r.height) : span * 0.8;
+      return 'circle(' + rad.toFixed(0) + 'px at ' + cx.toFixed(0) + 'px ' + cy.toFixed(0) + 'px)';
+    };
+    gsap.fromTo(n, { clipPath: function () { return iris(false); } }, { clipPath: function () { return iris(true); }, ease: 'none', scrollTrigger: { trigger: n, start: 'top 95%', end: 'center 50%', scrub: 0.6, invalidateOnRefresh: true } });
   });
 
   /* ---- scene: the four steps light up in order, a gold rule runs along them ---- */
@@ -544,6 +593,7 @@
   var fin = $('[data-scene="invitation"]');
   var finWords = fin ? $$('[data-light-word]', fin) : [];
   var finImg = fin ? $('[data-parallax] img', fin) : null;
+  if (finImg) anchorZoom(finImg);
   var closeScene = function (tl) {
     tl.fromTo(finWords, { color: DIM, y: 10 }, { color: INK, y: 0, stagger: 0.35, duration: 0.35, ease: 'none' }, 0);
     if (finImg) tl.fromTo(finImg, { scale: 1.26 }, { scale: 1.12, ease: 'none', duration: tl.duration() }, 0);
@@ -617,7 +667,7 @@
   if (fb) SplitText.create(fb, { type: 'lines', mask: 'lines', linesClass: 'split_line', autoSplit: true, onSplit: function (self) { return gsap.from(self.lines, { yPercent: 110, duration: 1, stagger: 0.1, ease: 'power4.out', scrollTrigger: { trigger: fb, start: 'top 95%', once: true } }); } });
 
   /* inner-page scenes, registered by js/00-scenes.js (loaded first) */
-  (window.WZScenes || []).forEach(function (fn) { try { fn({ gsap: gsap, ScrollTrigger: ScrollTrigger, SplitText: SplitText, mm: mm, $: $, $$: $$, el: el, EASE: EASE, INK: INK, DIM: DIM, scene: scene, mark: mark, refreshSoon: refreshSoon, drawIn: drawIn }); } catch (err) { if (window.console) console.warn('scene', err); } });
+  (window.WZScenes || []).forEach(function (fn) { try { fn({ gsap: gsap, ScrollTrigger: ScrollTrigger, SplitText: SplitText, mm: mm, $: $, $$: $$, el: el, EASE: EASE, INK: INK, DIM: DIM, scene: scene, mark: mark, refreshSoon: refreshSoon, drawIn: drawIn, headsOf: headsOf, anchorZoom: anchorZoom }); } catch (err) { if (window.console) console.warn('scene', err); } });
 
   /* ================= pointer ================= */
   if (FINE) {
