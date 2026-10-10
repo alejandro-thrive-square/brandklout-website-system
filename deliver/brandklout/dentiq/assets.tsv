@@ -1,0 +1,6 @@
+# dentiq media in R2 at clients/dentiq/<path>. Restore: node scripts/assets.mjs pull dentiq
+# sha256	size	path
+c71868a8085216eff4d4a8c9c2fad37edf0162ebec932c7af19fc7f01110e6f4	712	scenario-6-webflow-sites/01-request-intake/output/2026-10-05-hours/c.log
+05a725187f4a93e7fd9130199280834720ad83576bcc54bde094d34fd2665bda	947	scenario-6-webflow-sites/02-build/output/2026-10-05-hours/apply.log
+fe1321e34341c3b7d1e8c1ed57b9dad879b4aaea01680da869ccb343a66620fc	586	scenario-6-webflow-sites/02-build/output/2026-10-05-hours/dry.log
+1ca943b11b71a16520f0c5444ba0cd38b76e56e503d33259e4494b520eefcf48	63	scenario-6-webflow-sites/02-build/output/2026-10-05-hours/read.log
