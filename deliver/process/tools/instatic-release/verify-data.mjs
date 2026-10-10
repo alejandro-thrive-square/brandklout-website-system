@@ -44,7 +44,7 @@ const h = await health(base)
 add(h === 200 ? 'OK' : 'FAIL', '/health', String(h))
 
 /* after snapshot */
-if (!creds.email || !creds.password) die('no credentials for this site in ~/.webzite/.env')
+if (!creds.email || !creds.password) die('no credentials for this site in ~/.brandklout/.env')
 const env = { ...process.env, INSTATIC_BASE_URL: base, INSTATIC_EMAIL: creds.email, INSTATIC_PASSWORD: creds.password }
 const r = spawnSync(process.execPath, [join(TOOLS, 'instatic-site', 'ops', 'backup-site.mjs'), '--out', join(dir, 'api')], { cwd: dir, env, encoding: 'utf8' })
 if (r.status !== 0) die(`backup-site.mjs failed:\n${r.stderr || r.stdout}`, 1)

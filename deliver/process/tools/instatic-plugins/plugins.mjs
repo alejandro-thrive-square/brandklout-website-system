@@ -13,7 +13,7 @@
  * Everything is a DRY RUN unless --apply is given. Nothing here deletes or uninstalls a plugin.
  *
  * Hosts: ../instatic-domain-origins/sites.json (`<client>` = production, `<client>-staging` =
- * staging). Credentials: the `[<client>]` section of ~/.webzite/.env (staging uses the same
+ * staging). Credentials: the `[<client>]` section of ~/.brandklout/.env (staging uses the same
  * login). Each host runs in its own CHILD process with that host's credentials in its
  * environment, because the admin client fixes its host at import. No host is ever guessed.
  *

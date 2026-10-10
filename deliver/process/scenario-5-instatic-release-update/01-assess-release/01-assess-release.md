@@ -9,7 +9,7 @@ The output is a short go / wait decision the owner agrees to, and the list of si
 
 - The target release (a version tag such as `0.0.21`), or "the newest".
 - Railway CLI logged in (`railway whoami`); the tools read `~/.railway/config.json` `user.accessToken`.
-- `~/.webzite/.env` with a section per site (credentials for the API snapshot later).
+- `~/.brandklout/.env` with a section per site (credentials for the API snapshot later).
 
 ## Checklist
 

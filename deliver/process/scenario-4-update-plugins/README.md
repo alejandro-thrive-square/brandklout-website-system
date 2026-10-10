@@ -31,7 +31,7 @@ one site (an origin, a site script) is [Scenario 2](../scenario-2-updates-expans
   (`plugins.json`, `plugins.mjs`, `install-plugin.mjs`, one folder per plugin, offline suites).
 - **Hosts:** [`tools/instatic-domain-origins/sites.json`](../tools/instatic-domain-origins/sites.json)
   (`<client>` = production, `<client>-staging` = staging).
-- **Credentials:** `~/.webzite/.env`, one `[<client>]` section per site; staging uses the same
+- **Credentials:** `~/.brandklout/.env`, one `[<client>]` section per site; staging uses the same
   login. Never in a doc, a commit or chat.
 - **Outputs:** `tools/instatic-plugins/output/` (status reports, rollout snapshots; not committed) and
   the repo runbook `.claude/runbook/` (committed).

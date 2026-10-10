@@ -2,7 +2,7 @@
 /**
  * Resolve the ONE master credential file into this worktree's .env.
  *
- * The master lives OUTSIDE every repo and worktree — `~/.webzite/.env` by
+ * The master lives OUTSIDE every repo and worktree — `~/.brandklout/.env` by
  * default, `WEBZITE_ENV_MASTER` to override. It is the only file anyone edits.
  * It is sectioned:
  *
@@ -74,7 +74,7 @@ const say = (msg) => {
 
 function masterPath() {
   if (process.env.WEBZITE_ENV_MASTER) return process.env.WEBZITE_ENV_MASTER;
-  return path.join(os.homedir(), ".webzite", ".env");
+  return path.join(os.homedir(), ".brandklout", ".env");
 }
 
 /** Parse the sectioned master. Returns { sections: Map<name, Map<key,value>>, order: [] }. */

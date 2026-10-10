@@ -16,7 +16,7 @@
  *   ssh()             `railway ssh -p <project> -s <service> -e <env> <cmd>`, banner stripped.
  *   bunScript()       ship a bun script over ssh as base64 so no `$` or quote meets a shell.
  *   pickTarget()      resolve --project/--site + --env to exactly one target, or exit.
- *   siteCreds()       INSTATIC_EMAIL / INSTATIC_PASSWORD for a target from ~/.webzite/.env.
+ *   siteCreds()       INSTATIC_EMAIL / INSTATIC_PASSWORD for a target from ~/.brandklout/.env.
  *
  * Never prints a token, a password or any variable other than PUBLIC_ORIGIN.
  */
@@ -204,9 +204,9 @@ try {
 console.log(JSON.stringify(out))
 `
 
-/* ── master env (~/.webzite/.env), same format env-sync.mjs reads ─────────── */
+/* ── master env (~/.brandklout/.env), same format env-sync.mjs reads ─────────── */
 export function readMaster() {
-  const file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.webzite', '.env')
+  const file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.brandklout', '.env')
   if (!existsSync(file)) return new Map()
   const sections = new Map([['shared', new Map()]])
   let cur = 'shared'
@@ -289,7 +289,7 @@ export async function pickTarget(targets) {
   const site = opt('site')
   if (!project && site) {
     const s = readMaster().get(site.toLowerCase())
-    if (!s) die(`no [${site}] section in ~/.webzite/.env`)
+    if (!s) die(`no [${site}] section in ~/.brandklout/.env`)
     project = s.projectId ?? null
     if (!project) {
       const hit = targets.find((t) => sectionFor(t)?.name === s.name)

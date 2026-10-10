@@ -23,7 +23,7 @@
  * neither is anything SENSITIVE matches: session cookies, keys, env files and recovered/ DB dumps
  * stay on the machine that made them.
  *
- * Credentials (process.env, then ~/.webzite/.env [shared], then the nearest .env):
+ * Credentials (process.env, then ~/.brandklout/.env [shared], then the nearest .env):
  *   R2_TOKEN   a Cloudflare API token with R2 read/write (falls back to CLOUDFLARETESTING)
  *   R2_BUCKET  bucket name (default brandklout-assets-test)
  *   R2_ACCOUNT account id (optional; the token's first account otherwise)
@@ -39,7 +39,7 @@ import path from 'node:path'
 
 const ROOT = execFileSync('git', ['rev-parse', '--show-toplevel'], { encoding: 'utf8' }).trim()
 const CLIENTS_REL = 'deliver/brandklout'
-const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.webzite', '.env')
+const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.brandklout', '.env')
 const SKIP_DIRS = /(^|\/)(node_modules|\.git|__pycache__|\.venv|\.pytest_cache)(\/|$)/
 // Never leaves this machine: login cookies (.session-<host>, a scrape's cookies.json with a live
 // PHPSESSID), keys, env files, and recovered/ (DB dumps with credentials and patient-adjacent PII).
@@ -73,7 +73,7 @@ function creds () {
   const env = { ...parseEnv(fs.existsSync(local) ? local : null), ...parseEnv(MASTER, 'shared') }
   for (const k of ['R2_TOKEN', 'R2_BUCKET', 'R2_ACCOUNT', 'CLOUDFLARETESTING']) if (process.env[k]) env[k] = process.env[k]
   const token = env.R2_TOKEN || env.CLOUDFLARETESTING
-  if (!token) throw new Error('no R2_TOKEN (or CLOUDFLARETESTING) in the environment or ~/.webzite/.env [shared]')
+  if (!token) throw new Error('no R2_TOKEN (or CLOUDFLARETESTING) in the environment or ~/.brandklout/.env [shared]')
   return { token, bucket: env.R2_BUCKET || 'brandklout-assets-test', account: env.R2_ACCOUNT }
 }
 

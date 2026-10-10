@@ -8,7 +8,7 @@
  * wrong site writes one practice's content over another's.
  *
  * Env: INSTATIC_BASE_URL (required), INSTATIC_EMAIL, INSTATIC_PASSWORD. Never hand-edit a
- * worktree .env; it is generated from ~/.webzite/.env by scripts/env-sync.mjs.
+ * worktree .env; it is generated from ~/.brandklout/.env by scripts/env-sync.mjs.
  */
 import { readFileSync, existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'

@@ -85,7 +85,7 @@ Folders that rely on MCPs must include an `mcp-access.md` file documenting allow
 - **Context Filtering**: When working on a step, agents read that step's directive and only the tools it names, to save tokens and maintain focus.
 - **Directive Improvement Loop**: At the end of each task, agents must update the specific directive `.md` files they used to learn or execute that process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement. This applies even when no code changes were made. Process fixes are made on `main`, never in a client's mirror (it is untracked, so a fix there is lost), and reach clients through `node scripts/scenario.mjs sync`. Preserve the mirrored entry-point files when they are affected.
 - **Copy Standards — no em dashes**: No em dash (`—`, `&mdash;`) may appear in any copy this system produces: client sites, proposals, emails, decks, any deliverable. Use a comma, colon, semicolon or full stop, chosen per instance — a blanket substitution leaves half of them ungrammatical. The rule covers every rendered string, including `alt`, `placeholder`, `title`, SEO and Open Graph descriptions, and JSON-LD. It does **not** cover code comments and developer notes, which are not copy. Verify on the **built** output with comments and `<script>`/`<style>` blocks stripped first, or the check reads its own notes back as failures.
-- **Environment Variables**: All API keys and secrets live in the single master file `~/.webzite/.env`; every worktree `.env` is generated from it (§4.2.2).
+- **Environment Variables**: All API keys and secrets live in the single master file `~/.brandklout/.env`; every worktree `.env` is generated from it (§4.2.2).
 - **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Asana) authenticate at runtime — no static tokens required. Usage is controlled by the folder-based procedure in [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md).
 - **Safety**: No destructive actions (deleting client data, unapproved publishing) should be taken without explicit confirmation in the directive.
 
@@ -202,7 +202,7 @@ and prints the `rm -rf`, but never deletes on its own.
 
 #### 4.2.2 Credentials: one master file, generated per worktree
 
-**`~/.webzite/.env` is the only credential file anyone edits.** Every worktree's `.env` — this
+**`~/.brandklout/.env` is the only credential file anyone edits.** Every worktree's `.env` — this
 repo's main checkout included — is a **generated artifact**, rewritten by `scripts/env-sync.mjs` on
 every `npm install`, which is Orca's per-worktree setup hook. Hand-edit a worktree `.env` and the
 next sync discards it. Rotate a credential in the master, run `npm install` where you need it, done.
@@ -216,6 +216,14 @@ node scripts/env-sync.mjs --force      # overwrite a .env that was not generated
 The master lives **outside every repo** on purpose: no clone, no `git clean -x`, and no worktree
 deletion can take it, and it cannot be committed by accident. `WEBZITE_ENV_MASTER` overrides the
 path. `.env.example` is the template.
+
+**The folder is `~/.brandklout/` (renamed from `~/.webzite/` on 2026-10-10)**, so it cannot be
+mistaken for Webzite Studio's: the Webzite Website System is a separate copy of this system with its
+own master at `~/.webzite-studio/.env`, `ws-<client>` worktrees and its own R2 bucket. Never point
+one system at the other's master. `~/.webzite` is left as a junction to `~/.brandklout`, so a client
+branch that has not merged main since the rename still finds its credentials; remove it
+(`cmd /c rmdir %USERPROFILE%\.webzite`, which deletes the link, not the target) once every `bk-*`
+branch has merged main.
 
 It is sectioned, and the sections are load-bearing:
 
@@ -274,7 +282,7 @@ node scripts/drive.mjs pull <folder id|url> <dir>
 The consent screen is in **Testing** (it cannot be published until Branding is complete, and it
 cannot be made Internal because the project has no organization). Google expires a Testing refresh
 token after **7 days**, so `invalid_grant` means run `auth` again. The downloaded client JSON is
-kept at `~/.webzite/google-drive-oauth-client.json`; a `client_secret_*.json` inside a repo is
+kept at `~/.brandklout/google-drive-oauth-client.json`; a `client_secret_*.json` inside a repo is
 git-ignored. Which drive belongs to which client, and the shortcuts whose targets are not shared, is
 mapped in [deliver/docs/GOOGLE_DRIVE.md](./deliver/docs/GOOGLE_DRIVE.md).
 

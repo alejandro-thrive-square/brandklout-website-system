@@ -4,7 +4,7 @@
  *
  * Written 2026-09-23 for Scenario 5 (Instatic Release Update). Enumerates the Brandklout Railway
  * workspace (the source of truth: sites.json listed 2 of 14 service instances on the day this was
- * written), joins it with tools/instatic-domain-origins/sites.json and ~/.webzite/.env, and maps each
+ * written), joins it with tools/instatic-domain-origins/sites.json and ~/.brandklout/.env, and maps each
  * running digest to its ghcr.io version tag.
  *
  * Usage (from anywhere):
@@ -20,7 +20,7 @@
  *   DRIFT          the image ref's tag no longer points at the digest this service runs.
  *   VOLUME>80%     near 90% writes fail silently (Dr. Nahlah, 2026-08-18).
  *   NOT-REGISTERED no sites.json entry for any of its hosts.
- *   NO-CREDS       no ~/.webzite/.env section matches it: backup and verify cannot log in.
+ *   NO-CREDS       no ~/.brandklout/.env section matches it: backup and verify cannot log in.
  * Never prints a token or a variable other than PUBLIC_ORIGIN.
  */
 import { mkdirSync } from 'node:fs'

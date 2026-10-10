@@ -9,7 +9,7 @@
  *   node rollout-site-scripts.mjs verify  --url <script>
  *   ...add --only <section>[,<section>] to any of them
  *
- * The instances are every section of `~/.webzite/.env` carrying an
+ * The instances are every section of `~/.brandklout/.env` carrying an
  * `INSTATIC_BASE_URL`, so a new client is picked up without editing this file.
  * Each site runs in a CHILD process with that section's credentials in its
  * environment: `insta-api.mjs` resolves `BASE` once at import, so one process

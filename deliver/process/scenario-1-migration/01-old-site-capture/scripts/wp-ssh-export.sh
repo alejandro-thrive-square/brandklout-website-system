@@ -15,7 +15,7 @@
 #   - Every wp-cli call uses --skip-plugins --skip-themes: a planted plugin or mu-plugin backdoor
 #     never loads while we read rows out of the database.
 #   - Read-only on the site. Nothing outside ~/recovery-tmp is written. Never download PHP.
-#   - Put the credentials in the client's section of ~/.webzite/.env, never on a command line in a
+#   - Put the credentials in the client's section of ~/.brandklout/.env, never on a command line in a
 #     transcript. Generate a passphrase-less recovery key, add it in the host panel, revoke it after.
 #   - db.sql.gz and content.xml carry credentials and PII: keep them out of git (the recovered/
 #     folder is gitignored) and run scan-mirror.mjs on anything you render from them.

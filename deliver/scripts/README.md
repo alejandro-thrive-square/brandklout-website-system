@@ -103,7 +103,7 @@ Client→task mapping lives in `CLIENT_TASKS` at the top of the script. Add new 
 > placeholders, and the financing partner names were assumed. Attachments are third-party input —
 > mine them for real facts, but do not inherit invented content as though it were verified.
 
-Credentials live in `~/.webzite/asana-brandklout.json`, **outside this repository**. That file holds
+Credentials live in `~/.brandklout/asana-brandklout.json`, **outside this repository**. That file holds
 a refresh token and the client secret — never commit it, never paste its contents anywhere.
 
 ## Setup (one time)
@@ -142,5 +142,5 @@ Outputs `output/asana/my-tasks.json` and `output/asana/my-tasks.md`.
 ## Version Control
 
 Commit the scripts and lightweight `output/` artifacts. Never commit
-`~/.webzite/asana-brandklout.json`, tokens, or the client secret. Follows the root-level rules in
+`~/.brandklout/asana-brandklout.json`, tokens, or the client secret. Follows the root-level rules in
 [SYSTEM_RULES.md](../../SYSTEM_RULES.md).

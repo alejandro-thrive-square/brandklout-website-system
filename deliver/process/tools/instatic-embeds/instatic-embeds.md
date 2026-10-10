@@ -34,7 +34,7 @@ Run everything from this folder: `deliver/process/tools/instatic-embeds/` on mai
 folder in the client's mirror (`node scripts/scenario.mjs start|sync` mirrors it, untracked; fix the
 toolkit here on main, never in the mirror). The site and login come from the generated
 worktree `.env` (`INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`), which
-`scripts/env-sync.mjs` writes from `~/.webzite/.env`; add a missing value to the master, never to
+`scripts/env-sync.mjs` writes from `~/.brandklout/.env`; add a missing value to the master, never to
 the worktree file ([SYSTEM_RULES.md §4.2.2](../../../../SYSTEM_RULES.md)). The admin client is
 [`../instatic-api-sync/insta-api.mjs`](../instatic-api-sync/insta-api.mjs); it has no default site
 and refuses to run without one.
@@ -117,7 +117,7 @@ node rollout-site-scripts.mjs verify --url <script>         # every published pa
 # --only <section>[,<section>] narrows any of them
 ```
 
-The sites are every `~/.webzite/.env` section with an `INSTATIC_BASE_URL`, each in its own child
+The sites are every `~/.brandklout/.env` section with an `INSTATIC_BASE_URL`, each in its own child
 process (`insta-api.mjs` fixes `BASE` at import). `apply` refuses a site that is not on the released
 embed-origins in `../instatic-plugins/plugins.json`: bring it there with
 `node ../instatic-plugins/plugins.mjs rollout --plugin embed-origins` first. `set-origins.mjs
@@ -167,7 +167,7 @@ while the block itself was fine. Check the inserter by hand with a real click.
 | | What it is | Where it is set | What it gates |
 |---|---|---|---|
 | `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin**: CSRF on every state-changing request. [`instatic-domain-origins`](../instatic-domain-origins/instatic-domain-origins.md) |
-| `INSTATIC_BASE_URL` | which site these scripts talk to | the `[<client>]` section of `~/.webzite/.env`, generated into the worktree `.env` | which admin **our scripts** hit |
+| `INSTATIC_BASE_URL` | which site these scripts talk to | the `[<client>]` section of `~/.brandklout/.env`, generated into the worktree `.env` | which admin **our scripts** hit |
 | frame / script / connect origins | vendor hosts an embed may load | **the plugin's** settings, in the admin UI | the **published page's** CSP |
 
 Changing one never affects the others. `INSTATIC_BASE_URL` must pass the `PUBLIC_ORIGIN` gate, or

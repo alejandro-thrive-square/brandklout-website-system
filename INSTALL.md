@@ -12,7 +12,7 @@ The system is recoverable from three sources:
 | :--- | :--- | :--- |
 | GitHub repository | Code, step directives, scripts, runbooks, lightweight `output/` artifacts, media manifests (`assets.tsv`), project-scoped MCP config | Secrets, media, local credentials |
 | Cloudflare R2 | Client media (images, video, PDFs, fonts, zips), hash-verified against `assets.tsv` | Anything never pushed with `scripts/assets.mjs`; session cookies, keys and `recovered/` dumps, which are never uploaded |
-| Private credential store | `~/.webzite/.env`, API keys, SSH keys, GitHub access, MCP/OAuth credentials, external service logins | Repository files |
+| Private credential store | `~/.brandklout/.env`, API keys, SSH keys, GitHub access, MCP/OAuth credentials, external service logins | Repository files |
 
 Do not treat a fresh Git clone as complete until secrets, MCP auth, and the media restore are verified.
 
@@ -92,7 +92,7 @@ Then activate the venv again.
 
 ## Step 4: Restore Secrets
 
-Create the **master** credential file at `~/.webzite/.env` from the private credential source, using
+Create the **master** credential file at `~/.brandklout/.env` from the private credential source, using
 [.env.example](./.env.example) as the template. This is the only credential file you create by hand.
 
 Every worktree's `.env`, including this repo's own, is then generated from it:
@@ -226,7 +226,7 @@ Before declaring the new computer ready, confirm:
 
 - Repository cloned and clean, on `main`.
 - Python venv created and dependencies installed.
-- Master `~/.webzite/.env` restored; `npm install` run; the generated root `.env` ignored.
+- Master `~/.brandklout/.env` restored; `npm install` run; the generated root `.env` ignored.
 - GitHub authentication works.
 - Git hooks installed (`git config --get core.hooksPath` points at `<checkout>/scripts/hooks`).
 - Media restored from R2 for the clients you will work on.

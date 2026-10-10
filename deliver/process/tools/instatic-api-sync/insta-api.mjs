@@ -79,14 +79,14 @@ loadEnv()
    THERE IS NO DEFAULT HOST. This module is shared across every Instatic client, so no
    client's host is the right default: it used to fall back to encorercm.com, which stopped
    being an Instatic origin on 2026-08-31, and a stale default is indistinguishable from a
-   broken login. Set INSTATIC_BASE_URL in the client's [<client>] section of ~/.webzite/.env
+   broken login. Set INSTATIC_BASE_URL in the client's [<client>] section of ~/.brandklout/.env
    and run scripts/env-sync.mjs; the generated worktree .env is what this reads.
    See deliver/process/tools/instatic-domain-origins/sites.json for canonical hosts. */
 export const BASE = (() => {
   const raw = (process.env.INSTATIC_BASE_URL || '').trim()
   if (!raw) {
     throw new Error(
-      'INSTATIC_BASE_URL is not set. Add it to the client section of ~/.webzite/.env and run ' +
+      'INSTATIC_BASE_URL is not set. Add it to the client section of ~/.brandklout/.env and run ' +
       'scripts/env-sync.mjs — the shared toolkit refuses to guess which site it is talking to.',
     )
   }

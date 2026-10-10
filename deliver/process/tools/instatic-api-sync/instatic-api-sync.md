@@ -129,7 +129,7 @@ section below, and `prune-versions.mjs`, which deletes it).
 ## Technical Setup
 
 - **Executor status**: Working. `insta-api.mjs` (client), `repair-site-css.mjs`, `migrate-css-to-registry.mjs`, `css-parity.mjs`.
-- **Credentials**: set the client's `[<client>]` section in `~/.webzite/.env` (`INSTATIC_EMAIL`,
+- **Credentials**: set the client's `[<client>]` section in `~/.brandklout/.env` (`INSTATIC_EMAIL`,
   `INSTATIC_PASSWORD`, and `INSTATIC_BASE_URL`; `insta-api.mjs` still falls back to Dr. Nahlah's
   old host, so **always set it**), then run `node scripts/env-sync.mjs` in the worktree. A worktree
   `.env` is generated; hand edits are discarded on the next sync. See

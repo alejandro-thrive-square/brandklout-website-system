@@ -6,7 +6,7 @@
  *                                         and which sites must carry which
  *   ../instatic-domain-origins/sites.json every Instatic host: `<client>` is production,
  *                                         `<client>-staging` is that client's staging instance
- *   ~/.webzite/.env                       credentials, one `[<client>]` section per site
+ *   ~/.brandklout/.env                       credentials, one `[<client>]` section per site
  *                                         (same sectioned format scripts/env-sync.mjs reads)
  *
  * `readMaster()` moved here from ../instatic-embeds/rollout-site-scripts.mjs (2026-09-23), which now
@@ -28,7 +28,7 @@ export const SITES_JSON = join(TOOLS, 'instatic-domain-origins', 'sites.json')
 
 /* ── master env ─────────────────────────────────────────────────────────── */
 
-export function readMasterSections(file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.webzite', '.env')) {
+export function readMasterSections(file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.brandklout', '.env')) {
   const sections = new Map([['shared', new Map()]])
   let current = 'shared'
   for (const raw of readFileSync(file, 'utf8').split(/\r?\n/)) {

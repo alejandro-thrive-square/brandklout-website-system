@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Bootstrap a freshly cloned repo on a new computer: install the git hooks and
 # restore client media from Cloudflare R2. Run AFTER cloning. It does NOT install
-# Python/Node, restore ~/.webzite/.env, or set up MCP auth — see INSTALL.md.
+# Python/Node, restore ~/.brandklout/.env, or set up MCP auth — see INSTALL.md.
 #
 # Media restore uses `node scripts/assets.mjs pull <client>`, which downloads the
 # files listed in deliver/brandklout/<client>/assets.tsv and verifies each sha256.
@@ -19,7 +19,7 @@ set -euo pipefail
 #   --hooks-only     Install the git hooks and stop.
 #   (no client flag) Hooks only, then print the restore commands.
 #
-# Prerequisites: Node 18+, and R2_TOKEN (or CLOUDFLARETESTING) in ~/.webzite/.env [shared].
+# Prerequisites: Node 18+, and R2_TOKEN (or CLOUDFLARETESTING) in ~/.brandklout/.env [shared].
 
 DRY_RUN=""
 CLIENTS=()
@@ -91,4 +91,4 @@ done
 
 echo ""
 echo "=== Bootstrap complete ${DRY_RUN:+(dry run — nothing transferred)} ==="
-echo "Next steps: INSTALL.md (credentials in ~/.webzite/.env, then npm install; MCP auth)."
+echo "Next steps: INSTALL.md (credentials in ~/.brandklout/.env, then npm install; MCP auth)."

@@ -12,7 +12,7 @@
  *   node consent-kit.mjs instatic publish  --only a,b  [--apply]  # publish sites whose only draft change is ours
  *   node consent-kit.mjs check <url>[,<url>...] [--termly-proxy]  # headless: bridge live? forms carry values?
  *
- * Instatic sites are every section of ~/.webzite/.env with an INSTATIC_BASE_URL. Each runs in a child
+ * Instatic sites are every section of ~/.brandklout/.env with an INSTATIC_BASE_URL. Each runs in a child
  * process, because insta-api.mjs (tools/instatic-api-sync) resolves its site once at import.
  *
  * Run with output redirected to a file, not piped: Node on Windows can die on a libuv assertion when
@@ -104,7 +104,7 @@ function snippet() {
 /* ── Instatic ─────────────────────────────────────────────────────────────── */
 
 function instaticSites() {
-  const file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.webzite', '.env')
+  const file = process.env.WEBZITE_ENV_MASTER || join(homedir(), '.brandklout', '.env')
   const sections = { shared: {} }
   let current = 'shared'
   for (const raw of readFileSync(file, 'utf8').split(/\r?\n/)) {

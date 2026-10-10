@@ -94,7 +94,7 @@ cd ~/tools/jev-ultrafast && uv sync
 
 - **Keys:** put `TYPESAFE_API_KEY` and `TEXT_MODEL_API_KEY` (OpenRouter), plus `TYPESAFE_MODEL`,
   `TEXT_MODEL_BASE_URL`, `TEXT_MODEL` and `TEXT_MODEL_REASONING`, under `[shared]` in
-  `~/.webzite/.env`. `env-sync` does not reach the clone. Copy those six lines into the clone's
+  `~/.brandklout/.env`. `env-sync` does not reach the clone. Copy those six lines into the clone's
   own `.env` (it is gitignored) without printing them.
 - The scripts here run from the repository with `uv run --project ~/tools/jev-ultrafast`; nothing
   needs to be copied into the clone any more.

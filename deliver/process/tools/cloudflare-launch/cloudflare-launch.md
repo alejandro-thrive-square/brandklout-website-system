@@ -30,7 +30,7 @@ kept out of Google. Instatic serves no sitemap, no canonical and no redirects, s
 - [ ] sitemap.xml Worker live on both hosts; robots.txt is the edge's own file
 - [ ] staging.<domain>: own Railway domain, service domain deleted, noindex header, staging siteUrl
 - [ ] `verify-launch.mjs` ends `FAIL  none`; sitemap submitted to Search Console and Bing
-- [ ] sites.json, `INSTATIC_BASE_URL` in `~/.webzite/.env`, env-sync, runbook updated
+- [ ] sites.json, `INSTATIC_BASE_URL` in `~/.brandklout/.env`, env-sync, runbook updated
 
 ## Steps
 
@@ -67,7 +67,7 @@ Every script is a dry run until `--apply`.
    NEW deployment row, then `node ../instatic-domain-origins/check-origins.mjs --all` and exactly
    one real login (five failures lock the account). Update `sites.json` (with each domain's own
    Railway target under `dns`: `node ../instatic-domain-origins/check-dns.mjs --record`, then
-   `check-dns.mjs` must show zero `CHANGED`), `INSTATIC_BASE_URL` in `~/.webzite/.env`, then
+   `check-dns.mjs` must show zero `CHANGED`), `INSTATIC_BASE_URL` in `~/.brandklout/.env`, then
    `node scripts/env-sync.mjs`.
 7. **Canonical host.** `www` is the main address (owner decision 2026-09-23). On a migration keep the
    host the old site used only if the owner agrees, since Google's index has it; otherwise `www`. `node $C/canonical-host.mjs --zone <domain> --to https://www.<domain> --apply`

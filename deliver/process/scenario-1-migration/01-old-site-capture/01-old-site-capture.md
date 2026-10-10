@@ -38,7 +38,7 @@ on Windows dies when stdout is a pipe.
 
 1. **Set up.** Copy `$S/capture.gitignore` to `capture/.gitignore`. New client folder: add it to
    the sparse cone (`git sparse-checkout add ...`) and add an empty `[<client>]` section to
-   `~/.webzite/.env` before `node scripts/env-sync.mjs`.
+   `~/.brandklout/.env` before `node scripts/env-sync.mjs`.
 2. **Probe the old site.** `curl -sI https://<old>/` and `curl -sI https://www.<old>/`. Note the
    platform (look for `wp-content`, `x-powered-by`, Webflow, Squarespace), the host, redirects,
    `x-suspended-vhost`, a captcha page (`sgcaptcha`), and whether `/wp-json/` answers.

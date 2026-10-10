@@ -21,7 +21,7 @@
  * THE INVARIANT. The linked project+environment must actually serve the host
  * the rest of the pipeline talks to. `INSTATIC_BASE_URL` is that host —
  * `insta-api.mjs` resolves `BASE` from it, and so every request `push-site.mjs`
- * makes — and it is per-worktree, generated from `~/.webzite/.env`. Checking
+ * makes — and it is per-worktree, generated from `~/.brandklout/.env`. Checking
  * against it therefore needs no per-client table here and stays correct when
  * this file is copied to the next client, which is the failure mode.
  *
@@ -84,7 +84,7 @@ if (!base) {
   die(
     'INSTATIC_BASE_URL is not set and no .env below this file supplies it.',
     envFile ? `nearest .env: ${envFile}` : 'no .env found walking up from ' + HERE,
-    'It is generated from ~/.webzite/.env — add the client section there and re-sync.',
+    'It is generated from ~/.brandklout/.env — add the client section there and re-sync.',
   )
 }
 
@@ -105,7 +105,7 @@ try {
  *   RAILWAY_TOKEN overrides the CLI's own stored auth in ~/.railway/config.json.
  *   The master copy is stale, so every `railway` call from a script that loaded
  *   a worktree .env dies with "Invalid RAILWAY_TOKEN" — from a CLI that works
- *   perfectly by hand. `~/.webzite/.env` already says the CLI "works without
+ *   perfectly by hand. `~/.brandklout/.env` already says the CLI "works without
  *   this" and that the variable is for scripts that cannot shell out.
  *
  *   RAILWAY_PROJECT_ID outranks the linked directory ENTIRELY. Standing in a

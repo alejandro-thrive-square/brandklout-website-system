@@ -38,7 +38,7 @@ direction the client picked.
    account it goes to). Record both in `docs/project-overview.md` before any design.
 2. **Worktree.** Create the Orca worktree, rename the branch to the bare `bk-<client>`, add the client
    folder to the sparse checkout (`git sparse-checkout add deliver/brandklout/<client>`), add a
-   `[<client>]` section to `~/.webzite/.env` (even empty) and run `node scripts/env-sync.mjs`. Then
+   `[<client>]` section to `~/.brandklout/.env` (even empty) and run `node scripts/env-sync.mjs`. Then
    `node scripts/scenario.mjs start <client> 0` mirrors this scenario into the client folder with its
    `README.md`, `RUNBOOK.md`, `docs/` and an `output/` per step; work from there. See [SYSTEM_RULES.md §4.2](../../../../SYSTEM_RULES.md).
 3. **Production site.** Create a new Railway project from the Instatic image with
@@ -46,7 +46,7 @@ direction the client picked.
    service, volume at `/app/storage`, `PUBLIC_ORIGIN`, and the public domain `business-name.up.railway.app`
    named after the business. It deploys as **production**. Pin the image by digest, not `latest`.
 4. **Admin logins.** Claim the admin at once with `--setup` (until the first login, anyone can claim it),
-   then add Sang and Alejandro with the default passwords. Passwords live only in `~/.webzite/.env`.
+   then add Sang and Alejandro with the default passwords. Passwords live only in `~/.brandklout/.env`.
    Register the site in [`tools/instatic-domain-origins/sites.json`](../../tools/instatic-domain-origins/sites.json)
    and run `check-origins.mjs` against it.
 5. **Staging mirror.** Duplicate the Railway environment as `staging` following

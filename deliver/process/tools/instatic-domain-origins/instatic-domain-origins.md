@@ -173,7 +173,7 @@ The check has three independent sources and is honest about which ones answered:
 > *apex's* target is indistinguishable from `www` pointing at the right one. Only the
 > Cloudflare API closes that gap.
 >
-> **Closed 2026-08-30.** `CLOUDFLAREDIAGNOSIS` (the `[mason-park]` section of `~/.webzite/.env`, so only Mason Park worktrees get it) is a read-scoped token
+> **Closed 2026-08-30.** `CLOUDFLAREDIAGNOSIS` (the `[mason-park]` section of `~/.brandklout/.env`, so only Mason Park worktrees get it) is a read-scoped token
 > that can read `dns_records`, and `check-dns.mjs` prefers it. It immediately caught what
 > nothing else could see: `www.masonparkdental.com` pointing at the **apex's** target.
 > The older `CLOUDFLAREAPI` still returns `Authentication error` on `dns_records`, so it is
@@ -214,7 +214,7 @@ Run this whenever a domain is pointed at an Instatic site — a launch, a re-poi
    variable in Railway" — Mason Park's variable read correctly for a day while the running container
    ignored it. A `BLOCKED` row is not a pass either: it means a CDN answered instead of the origin
    and that host was never actually tested.
-8. **Update the client's `[<client>]` section in `~/.webzite/.env`**, then re-run `node scripts/env-sync.mjs` in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `instatic-embeds` toolkit starts failing with 403s that look like permissions. Editing the worktree `.env` directly does not survive the next sync.
+8. **Update the client's `[<client>]` section in `~/.brandklout/.env`**, then re-run `node scripts/env-sync.mjs` in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `instatic-embeds` toolkit starts failing with 403s that look like permissions. Editing the worktree `.env` directly does not survive the next sync.
 9. **Only now** send the link, and send the one the checker printed.
 
 ## The Cloudflare geo-block, and the two things it silently breaks
@@ -532,4 +532,4 @@ toolkit breaks.
 - `sites.json` — canonical admin URL per client (the single answer to "what link do I send?") and the expected CNAME target per host under `dns`
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.brandklout/.env` and reach a worktree only through the generated `.env`.

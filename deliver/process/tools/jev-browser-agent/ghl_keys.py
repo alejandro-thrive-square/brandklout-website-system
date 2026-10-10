@@ -7,7 +7,7 @@ uv run --project ~/tools/jev-ultrafast --env-file ~/tools/jev-ultrafast/.env pyt
 * jev_deep masks anything key-shaped before page text goes to TypeSafe or the text helper.
 * read_secret() reads the value from the DOM in code. Only a fingerprint (first 6 characters,
   length, sha256 prefix) is printed or written to the run log; values go to --secrets-out, a JSON
-  file you move into ~/.webzite/.env (never commit it, never paste it).
+  file you move into ~/.brandklout/.env (never commit it, never paste it).
 * Regenerate, delete, save and similar controls are hidden from the model.
 """
 

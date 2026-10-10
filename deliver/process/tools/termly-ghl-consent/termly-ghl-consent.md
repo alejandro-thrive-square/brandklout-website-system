@@ -168,7 +168,7 @@ node consent-kit.mjs snippet [--disclosure DATE]  # paste-able HEADER block for 
 ```
 
 Run it with output redirected to a file, never piped (Node on Windows dies on a libuv assertion when
-stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `INSTATIC_BASE_URL`.
+stdout is a pipe). Instatic sites are every `~/.brandklout/.env` section with an `INSTATIC_BASE_URL`.
 
 ### Gates (`gates/`, platform-neutral: Instatic and Webflow)
 
@@ -209,7 +209,7 @@ script is served same-origin, so `script-src 'self'` is enough.
 `instatic termly` reads the site's Termly website UUID from
 [`kit/termly-websites.json`](./kit/termly-websites.json) — the tracked registry of all 29 accounts:
 client, account email, **public** website UUID, live domain, platform, Webflow site id. The UUID is
-not a secret (it is in every page's source). The per-website API keys are in `~/.webzite/.env`
+not a secret (it is in every page's source). The per-website API keys are in `~/.brandklout/.env`
 `[vars]` as `TERMLY_<CLIENT>`, referenced as `TERMLY_API_KEY` from each client section.
 
 ### Phase 2 — once the Termly script arrives (per site)

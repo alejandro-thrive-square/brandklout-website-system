@@ -21,7 +21,7 @@
  *   node backup.mjs --site dr-nahlah --env staging --apply [--label pre-0.0.20] [--railway-backup] [--download]
  *   --project <id|name> instead of --site; --service <name> if a project has two; --base <url> to override.
  * --apply writes ONLY backup files (on the volume and locally). It changes no page, setting or variable.
- * Env: credentials from ~/.webzite/.env (the site's section) or INSTATIC_EMAIL / INSTATIC_PASSWORD.
+ * Env: credentials from ~/.brandklout/.env (the site's section) or INSTATIC_EMAIL / INSTATIC_PASSWORD.
  */
 import { spawnSync } from 'node:child_process'
 import { join } from 'node:path'
@@ -80,7 +80,7 @@ if (APPLY) {
 }
 
 /* 2 API snapshot: backup-site.mjs, then what it does not cover */
-if (!creds.email || !creds.password) die('no INSTATIC_EMAIL / INSTATIC_PASSWORD for this site (add a section to ~/.webzite/.env)')
+if (!creds.email || !creds.password) die('no INSTATIC_EMAIL / INSTATIC_PASSWORD for this site (add a section to ~/.brandklout/.env)')
 const env = { ...process.env, INSTATIC_BASE_URL: base, INSTATIC_EMAIL: creds.email, INSTATIC_PASSWORD: creds.password }
 const r = spawnSync(process.execPath, [join(TOOLS, 'instatic-site', 'ops', 'backup-site.mjs'), '--out', join(dir, 'api')], { cwd: dir, env, encoding: 'utf8' })
 if (r.status !== 0) die(`backup-site.mjs failed:\n${r.stderr || r.stdout}`, 1)

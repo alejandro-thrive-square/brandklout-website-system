@@ -5,7 +5,7 @@
     "`version` must equal the folder's plugin.json version; every command in plugins.mjs refuses to run",
     "when they disagree, so a bump is always two edits in the same commit (step 01 of scenario 4).",
     "Hosts are NOT here: production and staging come from ../instatic-domain-origins/sites.json",
-    "(`<client>` and `<client>-staging`), credentials from the matching ~/.webzite/.env section.",
+    "(`<client>` and `<client>-staging`), credentials from the matching ~/.brandklout/.env section.",
     "`grants` is the security review, written down. install-plugin.mjs grants exactly this list and",
     "refuses a package that asks for anything else. Widen it only on purpose, with the reason in `why`.",
     "No secrets here."

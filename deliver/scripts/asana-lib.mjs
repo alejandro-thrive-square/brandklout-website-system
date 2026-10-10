@@ -27,7 +27,7 @@ export const AUTH_URL = 'https://app.asana.com/-/oauth_authorize'
 export const MCP_URL = 'https://mcp.asana.com/v2/mcp'
 
 /** Deliberately outside the repo — holds a refresh token and the client secret. */
-export const TOKEN_DIR = join(homedir(), '.webzite')
+export const TOKEN_DIR = join(homedir(), '.brandklout')
 export const TOKEN_PATH = join(TOKEN_DIR, 'asana-brandklout.json')
 
 export async function loadTokens() {

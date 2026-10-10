@@ -6,7 +6,7 @@ and roll it back. Written 2026-09-23.
 
 **Why a separate toolkit and not `instatic-site/release/`:** these scripts work on Railway service
 instances across every client at once (the inventory reads the whole workspace, credentials come from
-the sectioned `~/.webzite/.env` like `instatic-embeds/rollout-site-scripts.mjs`), while
+the sectioned `~/.brandklout/.env` like `instatic-embeds/rollout-site-scripts.mjs`), while
 `instatic-site` scripts target one site through the worktree `.env` and refuse to run without
 `INSTATIC_BASE_URL`. They reuse `instatic-site` rather than copy it.
 

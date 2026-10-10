@@ -104,7 +104,7 @@ board draws this).
   skipping it). Main tracks no client folders at all (removed 2026-10-03; each client branch got a
   merge that keeps its own folder, so merging main never deletes it). The active clients, branches
   and worktrees are listed in [docs/CLIENTS.md](./docs/CLIENTS.md).
-- **Credentials** only in `~/.webzite/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
+- **Credentials** only in `~/.brandklout/.env` ([SYSTEM_RULES.md §4.2.2](../SYSTEM_RULES.md)); never in
   docs, boards, Asana, commits or chat.
 - **Computer use goes through Codex.** Any task that needs a website or desktop app with no
   API (GoHighLevel, Elfsight, vendor dashboards) runs as one plain instruction through

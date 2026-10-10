@@ -143,7 +143,7 @@ function parseDomainStatus(text) {
  * Read from CLOUDFLARE_DNS_TOKEN, else CLOUDFLARE_API_TOKEN (a zone token minted
  * with ../cloudflare-launch/mint-token.mjs), else CLOUDFLAREDIAGNOSIS, else
  * CLOUDFLAREAPI - each from the environment or the nearest generated .env
- * (never hand-edited; it comes from ~/.webzite/.env). Order matters: CLOUDFLAREAPI is the older token and can
+ * (never hand-edited; it comes from ~/.brandklout/.env). Order matters: CLOUDFLAREAPI is the older token and can
  * read /zones but returns "Authentication error" on /zones/<id>/dns_records, so
  * it must never shadow the working one. CLOUDFLAREDIAGNOSIS was minted
  * 2026-08-30 with read access and is what makes this column real; note it also

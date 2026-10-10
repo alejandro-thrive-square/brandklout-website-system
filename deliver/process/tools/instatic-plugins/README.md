@@ -46,7 +46,7 @@ through Scenario 4.
 - `sites.<client>`: overrides (`link-editor` on Dr. Nahlah and Mason Park) and notes.
 - Hosts are not here. `../instatic-domain-origins/sites.json` owns them: `<client>` is production,
   `<client>-staging` is staging. Credentials come from the `[<client>]` section of
-  `~/.webzite/.env`; staging uses the same login.
+  `~/.brandklout/.env`; staging uses the same login.
 
 Every command refuses to run if `plugins.json` and a `plugin.json` disagree on id or version, if a
 version has no changelog line, or if a manifest asks for a permission the registry does not grant.

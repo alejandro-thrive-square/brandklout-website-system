@@ -2,7 +2,7 @@
  * One-time OAuth bootstrap for the Brandklout Asana integration.
  *
  * Runs the authorization-code + PKCE flow against the pre-registered Webzite
- * app, then writes access/refresh tokens to ~/.webzite/asana-brandklout.json
+ * app, then writes access/refresh tokens to ~/.brandklout/asana-brandklout.json
  * (outside this repository). Re-run only if the grant is revoked.
  *
  * Usage (PowerShell, from the repo root):

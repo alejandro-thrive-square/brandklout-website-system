@@ -34,7 +34,7 @@
 .env
 .env.*
 !.env.example
-# Google OAuth client downloads — they belong in ~/.webzite/, never in a repo.
+# Google OAuth client downloads — they belong in ~/.brandklout/, never in a repo.
 client_secret_*.json
 # Instatic login cookies written by the API toolkits (.session-<host>).
 .session-*

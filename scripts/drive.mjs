@@ -19,7 +19,7 @@
  *   node scripts/drive.mjs thumbs <folder id|url> <dir> [--size 1600]
  *                                                  web-size JPEG of every image in one folder
  *
- * Credentials (process.env, then ~/.webzite/.env [shared], then the nearest .env):
+ * Credentials (process.env, then ~/.brandklout/.env [shared], then the nearest .env):
  *   GOOGLEDRIVEOAUTHID   client ID
  *   GOOGLEDRIVEOAUTH     client secret
  *   GOOGLEDRIVEREFRESH   written by `auth`
@@ -42,7 +42,7 @@ import { execFile } from 'node:child_process'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 
-const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.webzite', '.env')
+const MASTER = process.env.WEBZITE_ENV_MASTER || path.join(os.homedir(), '.brandklout', '.env')
 const SCOPE = 'https://www.googleapis.com/auth/drive.readonly'
 const API = 'https://www.googleapis.com/drive/v3'
 const FOLDER = 'application/vnd.google-apps.folder'

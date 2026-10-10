@@ -10,7 +10,7 @@ install, and a full stop at the first failure.
 
 - Step 01 done: the release committed, `plugins.mjs test` green.
 - The site list: `--sites expected` (every site the registry names) or an explicit `--sites a,b`.
-- `~/.webzite/.env` sections for those sites, and their hosts in `sites.json`.
+- `~/.brandklout/.env` sections for those sites, and their hosts in `sites.json`.
 - A go-ahead from Alejandro or Sang for any production publish that would ship other drafts.
 
 ## Checklist

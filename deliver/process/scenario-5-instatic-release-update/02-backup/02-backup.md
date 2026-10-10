@@ -9,7 +9,7 @@ git tag covers our source and nothing else.
 ## Inputs
 
 - The round plan from step 01.
-- Credentials for each site in `~/.webzite/.env`; `railway` CLI logged in.
+- Credentials for each site in `~/.brandklout/.env`; `railway` CLI logged in.
 - Nobody editing in the admin on that site (ask the team; a deploy drops unsaved editor state).
 
 ## Checklist
