@@ -83,6 +83,33 @@ on dr-nahlah, grand-mission, arvada, livewell and IFA.
 Analytics and ad pixels (ahrefs, Meta, the OpenAI pixel) **do** stay tagged. Termly still governs
 those and whatever is tagged inside GTM — just not call tracking.
 
+### Microsoft Clarity is banned, consent or not (2026-10-07)
+Microsoft signs no BAA for Clarity, its terms forbid "health care" content, and the Additional Terms
+accepted for a Health & Wellness project warrant that no PHI or state-law health data is processed.
+A Termly consent tag holds it back but makes none of that allowed (HHS: a cookie banner is not a
+HIPAA authorization). It goes on **no** client site: not in GTM, not as a site script, not as the
+Webflow Clarity app. `consent-kit.mjs check` prints `FAIL banned tracker` and exits 1 on any
+`clarity.ms` request. Removal: delete the tag in each GTM container and publish (deleting the
+Clarity project does not take the tag off a site); a Webflow app copy needs the app uninstalled and a
+site publish.
+
+### GA4 stays, hardened (2026-10-07)
+Google signs no BAA for Analytics either and says regulated customers must keep PHI out of it. The
+difference from Clarity: since *AHA v. Becerra* (N.D. Tex., June 2024; HHS dropped its appeal that
+August), an IP address plus a visit to a public, logged-out page is not PHI under HHS's guidance.
+Pages behind a login are still covered. GA4 records page views and named events; it has no session
+replay. The user decided on 2026-10-07 to keep GA4 on these rules; the practice's privacy officer or
+counsel has the final word on PHI exposure:
+1. Never on a page behind a login. No visitor-typed text in any event, URL or parameter: no form
+   contents, names, emails or phone numbers (GHL forms are iframes, so their data never reaches GA4).
+2. Every property: **Google signals off, granular location and device data off, user-provided data
+   collection off** (Admin > Data collection and modification > Data collection).
+3. GTM goes below Termly. On Instatic, GTM is a consent-tagged site script, so nothing runs before
+   Accept. On Webflow, GTM loads and Google Consent Mode sends **cookieless pings before a choice**
+   (`gcs=G100`, no `_ga` cookie). `consent-kit.mjs check` prints them as `ga4BeforeConsent`. To hold
+   GA4 back completely on Webflow, set "Require additional consent: `analytics_storage`" on the GA4
+   tags (it costs Google Ads modelled conversions).
+
 **A pool that has to reach a second host needs `connectOrigins`.** The pool loads from
 `backend.leadconnectorhq.com` but asks for its number at `services.leadconnectorhq.com`, and the
 session helper reports to `services.msgsndr.com`. On Instatic, a page with **no Embed block** keeps
@@ -123,7 +150,9 @@ every `…/widget/(form|survey|booking)/…` iframe URL and reloads those iframe
    - `privacy_sale_share_opt_out` and `privacy_gpc_detected`: checkbox with the options `true` / `false`.
    - The other five fields: single line.
 2. Add all eleven fields to every embedded form. Keep each **Query Key** equal to the field key, and hide
-   the fields inside the form. Hidden fields still prefill.
+   the fields inside the form. Hidden fields still prefill. Hide them with
+   [`ghl-forms/no-shift.css`](../ghl-forms/no-shift.css) in the form's Custom CSS, never a script, and
+   put all eleven after the Privacy | Terms links ([why](../ghl-forms/README.md#no-layout-shift)).
 
 ## The kit
 
@@ -146,6 +175,8 @@ stdout is a pipe). Instatic sites are every `~/.webzite/.env` section with an `I
 ```bash
 node gates/check-ghl-form.mjs <formId|url> [...]       > output/ghl-forms.log 2>&1  # save-and-exit off, 11 consent fields
 node gates/check-ghl-form.mjs --combo <combo.json>     > output/ghl-forms.log 2>&1  # + each form redirects to its thank-you page
+node gates/check-ghl-form.mjs --standard --origin https://www.client.com <formId>  > output/ghl-forms.log 2>&1  # + the lead-form standard (../ghl-forms)
+node gates/check-ghl-form.mjs --standard --landing --origin https://www.client.com --legal "X PLLC DBA Y" --location <id> <formId>  > output/ghl-forms.log 2>&1  # landing-page form: no dropdown, redirect must answer 200
 node gates/dni-proof.mjs --relay <url> [...]           > output/dni.log 2>&1        # the number pool really swaps (one visitor)
 node gates/dni-proof.mjs --relay --combo <combo.json>  > output/dni.log 2>&1
 ```

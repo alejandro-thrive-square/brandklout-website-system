@@ -263,8 +263,56 @@ async function backfillTemplates(changedPages) {
 export async function api(method, path, body) {
   if (method === 'PUT' && path.includes('/site-document') && Array.isArray(body?.changedPages) && body.changedPages.length) {
     body = { ...body, changedPages: await backfillTemplates(body.changedPages) }
+    const kept = await rememberExtraCells(body.changedPages)
+    const res = await request(method, path, body)
+    await restoreExtraCells(kept)
+    return res
   }
   return request(method, path, body)
+}
+
+/* The cells a site-document page write keeps (`pageToCells`). Every other cell on a page row —
+   `seoTitle`, `seoDescription`, anything a plugin or a later Instatic adds — is REPLACED away by the
+   save, and no gate sees it: class-rename --apply blanked the SEO cells of 28 Brandklout pages and
+   the publish gave every one the home description (2026-10-06). So every save through `api()` reads
+   those cells first and puts them back afterwards with a merging PATCH (current cells spread under).
+   A PATCH on a NESTED routing slug (`a/b`) flattens it to `a-b` (Instatic re-derives the slug), and
+   re-saving to restore the route drops the cells again: such a page is refused BEFORE the save
+   unless INSTATIC_ALLOW_CELL_DROP=1 (then carry its description in an Open Graph override). */
+const PAGE_CELL_KEYS = new Set(['title', 'slug', 'body', 'templateEnabled', 'templateTarget', 'templatePriority'])
+async function rememberExtraCells(changedPages) {
+  const kept = []
+  const refused = []
+  for (const entry of changedPages) {
+    if (!entry.id) continue
+    let row
+    try { row = (await request('GET', `/admin/api/cms/data/rows/${entry.id}`)).row } catch { continue } // a new page has no row yet
+    const extras = Object.fromEntries(Object.entries(row?.cells ?? {}).filter(([k, v]) => !PAGE_CELL_KEYS.has(k) && v !== undefined && v !== null && v !== ''))
+    if (!Object.keys(extras).length) continue
+    if (String(row.slug ?? '').includes('/')) refused.push(`${row.slug} (${Object.keys(extras).join(', ')})`)
+    else kept.push({ id: entry.id, rowSlug: row.slug, extras })
+  }
+  if (refused.length && process.env.INSTATIC_ALLOW_CELL_DROP !== '1') {
+    throw new Error(`[insta-api] refusing the save: it would drop cells on ${refused.length} nested-slug page(s) that a PATCH cannot restore without flattening their URL: ${refused.join('; ')}. Set INSTATIC_ALLOW_CELL_DROP=1 only with a plan for them (Open Graph description override).`)
+  }
+  return kept
+}
+async function restoreExtraCells(kept) {
+  const failed = []
+  for (const { id, rowSlug, extras } of kept) {
+    const before = (await request('GET', `/admin/api/cms/data/rows/${id}`)).row
+    const cells = before?.cells ?? {}
+    const missing = Object.fromEntries(Object.entries(extras).filter(([k]) => cells[k] === undefined || cells[k] === null || cells[k] === ''))
+    if (!Object.keys(missing).length) continue
+    await request('PATCH', `/admin/api/cms/data/rows/${id}`, { cells: { ...cells, ...missing } })
+    const after = (await request('GET', `/admin/api/cms/data/rows/${id}`)).row
+    const ok = after?.slug === rowSlug && after?.cells?.slug === cells.slug
+      && JSON.stringify(after?.cells?.body) === JSON.stringify(cells.body)
+      && Object.entries(missing).every(([k, v]) => JSON.stringify(after?.cells?.[k]) === JSON.stringify(v))
+    if (!ok) failed.push(rowSlug)
+  }
+  if (kept.length) console.warn(`[insta-api] restored page cells the save dropped (seoTitle/seoDescription…) on ${kept.length} page(s)${failed.length ? `; FAILED on ${failed.join(', ')}` : ''}`)
+  if (failed.length) throw new Error(`[insta-api] cell restore failed on ${failed.join(', ')}: do not publish; restore from the backup (restore-page-seo-cells.mjs)`)
 }
 
 /**
@@ -308,6 +356,33 @@ export async function getSite() {
 
 export async function getPages() {
   return request('GET', '/admin/api/cms/pages')
+}
+
+/**
+ * Every URL a visitor can open, as slugs without the leading slash ('' is the home page): the page
+ * rows that are not templates, plus every published entry of each collection (`postType` table
+ * with a `routeBase`) at `<routeBase>/<slug>`. Gates that took only the page rows captured the
+ * template row (a 404 at its own slug) and none of the entries it renders, so a broken article
+ * passed every gate (bk-brandklout-website legal pages, Mason Park's 161 articles, 2026-10-05).
+ */
+export async function pageSlugs() {
+  const { rows } = await getPages()
+  const out = rows
+    .filter((r) => r.cells?.templateEnabled !== true)
+    .map((r) => String(r.cells?.slug ?? r.slug ?? ''))
+    .map((s) => (s === 'index' || s === 'home' ? '' : s))
+    .filter((s) => !s.includes('['))
+  const res = await request('GET', '/admin/api/cms/data/tables')
+  for (const t of res.tables ?? res ?? []) {
+    if (t.kind !== 'postType' || !t.routeBase) continue
+    const base = t.routeBase.replace(/^\/+|\/+$/g, '')
+    const entries = (await request('GET', `/admin/api/cms/data/tables/${t.id}/rows`)).rows ?? []
+    for (const e of entries) {
+      const slug = e.slug ?? e.cells?.slug
+      if (e.status === 'published' && slug) out.push(base ? `${base}/${slug}` : String(slug))
+    }
+  }
+  return [...new Set(out)]
 }
 
 /**

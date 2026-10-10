@@ -36,8 +36,8 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    no `ad`-named class or id; every manifest tag present; phone in a swappable format. Per form:
    redirect to the production thank-you URL, save-and-exit off.
 2. **Forms.** `node tools/termly-ghl-consent/gates/check-ghl-form.mjs --combo <combo.json> > output/ghl-forms.log 2>&1`. A failure
-   here is fixed in GHL by Brandklout, not on the site. Send them the exact form id and the URL it
-   must redirect to.
+   here is fixed in GHL, not on the site: we change the form through Codex, one small saved step per
+   run, then rerun the gate (step 3 of `01-campaign-intake.md`; since 2026-10-04). Then the embeds on every combo page: `tools/ghl-forms/check-embed.mjs <origin> --page <each combo path>` must print `ok` (no `loading="lazy"` on a GHL iframe: the form never appears in Firefox, 2026-10-06).
 3. **Form in the hero, rendered.**
    `node verify-form.mjs --combo <combo.json> --origin https://staging.<domain> --widths 1440,390 > output/verify-form.log 2>&1`
    It waits 14 s per page for the frame to grow. It asserts structure, size and clipping, not
@@ -54,7 +54,14 @@ prefixed). Redirect output to a file; never pipe a Node fetch script on Windows.
    GA4 key event imported into Google Ads (Livewell today). Confirm with the Ads owner and write
    the answer into `combo.json` `conversion`.
 6. **DNI.** Production only. Staging must never run the pools or real GTM (a staging clone burns
-   pool numbers and pollutes data): guard those tags by host. Walk as one visitor:
+   pool numbers and pollutes data): guard those tags by host. **First read the pool in GoHighLevel**
+   (Settings › Phone Numbers › Number Pools, through Codex): which number it swaps. The ad pages
+   must SHOW that number in a format the pool matches. West LA's pool swapped the main line while
+   the ads showed the new-patient line, so the installed pool would have swapped nothing
+   (2026-10-07; the client chose to show the main line). On Instatic the pool goes in as an
+   embed-origins `siteScripts` line scoped `#pages=<prefix>*` (1.8.0+; upgrade with
+   `plugins.mjs rollout` first), with `services.leadconnectorhq.com` and `services.msgsndr.com` in
+   `connectOrigins`. Walk as one visitor:
    `node tools/termly-ghl-consent/gates/dni-proof.mjs --relay --combo <combo.json> > output/dni.log 2>&1`. Use `--accept` if the
    client consent-holds the pools. Same number across pages is correct sticky DNI. Never clear
    cookies between pages. Then `node check-pool-scope.mjs --combo <combo.json> > output/pool-scope.log 2>&1`
